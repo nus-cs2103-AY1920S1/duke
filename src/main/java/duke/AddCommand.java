@@ -20,6 +20,7 @@ class AddCommand implements Command {
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
+        assert this.task != null;
         taskList.addTask(this.task);
         uiManager.printAddTask(task, taskList.listSize());
         storeManager.store(taskList);

@@ -20,7 +20,12 @@ class Deadline extends Task {
      */
     public Deadline(String task, String dateTime) throws DukeException {
         super(task);
+        assert !task.equals("") : "Empty String is inserted";
+        assert !dateTime.equals("") : "Empty dateTime is inserted";
+
         String[] dateTimeArr = dateTime.split(" ", 2);
+        assert dateTimeArr.length != 1 || dateTimeArr.length != 2 : "dateTimeArr is wrong length.";
+
         if (dateTimeArr.length == 1) {
             try {
                 this.date = LocalDate.parse(dateTimeArr[0], DATE_FORMATTER);
@@ -56,6 +61,7 @@ class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert this.date != null || this.time != null : "Both date and time are invalid";
         if (this.date == null) {
             return "[D]" + super.toString() + " (by: " + this.time.format(TIME_FORMATTER) + ")";
         } else if (this.time == null) {

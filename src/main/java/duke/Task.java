@@ -35,6 +35,7 @@ class Task implements Serializable {
     }
 
     public String getTaskString() {
+        assert this.task != null :"task is invalid";
         return this.task;
     }
 

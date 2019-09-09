@@ -20,6 +20,7 @@ class Parser {
     public Command parseToCommand(String input) throws DukeException {
         String[] inputArr = input.split(" ", 2);
         Action action = getAction(inputArr[0]);
+        assert inputArr.length != 1 || inputArr.length != 2 : "inputArr length is wrong length"; 
 
         if (inputArr.length == 1) {
             switch (action) {
@@ -64,7 +65,7 @@ class Parser {
      * @throws DukeException When the single word String is not of the stipulated cases
      */
     private Action getAction(String action) throws DukeException {
-        // Fallthrough are made for the Capitalized versions of the String
+        assert !action.equals("") : "Empty String was obtained";
         switch (action.toLowerCase()) {
         case "list" :
             return Action.LIST;

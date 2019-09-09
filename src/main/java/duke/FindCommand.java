@@ -24,6 +24,7 @@ class FindCommand implements Command {
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
+        assert this.findString != null : "findString is invalid";
         int index = 1;
         uiManager.printFinding(this.findString);
         for (int i = 0; i < taskList.listSize(); i++) {
@@ -48,6 +49,7 @@ class FindCommand implements Command {
      * @return a boolean whether the task contains the String.
      */
     private boolean checkContainsInsensitive(Task task, String findString) {
+        assert task.getTaskString() != null : "Task is invalid";
         return task.getTaskString().toLowerCase().contains(findString.toLowerCase());
     }
 }

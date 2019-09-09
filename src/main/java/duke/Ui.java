@@ -61,16 +61,11 @@ class Ui {
      * 
      * @see DukeManager#initializeDuke()
      */
-    public void printWelcome() {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-
-        this.output.append("Hello from\n" + logo + "\n");
-        this.output.append("If you need help, type \'help\' anytime\n");
-        this.output.append("What can I do for you?\n");
+    public String printWelcome() {
+        String welcome = ("Hello, I am Duke.\n" 
+                + "If you need help, type \'help\' anytime.\n"
+                + "What can I do for you?\n");
+        return welcome;
     }
 
     /**
@@ -180,6 +175,7 @@ class Ui {
      * Appends a user guide in case they do not know what to do.
      */
     public void printHelp() {
+        assert isEmpty() : "About to print items before help page.";
         this.output.append("Hello this is Duke's help page.\n");
         this.output.append("There are 8 main features excluding help\n");
         
@@ -206,5 +202,13 @@ class Ui {
         this.output.append("7. \'find myWord\' Finds myWord in all of the Tasks\n");
         
         this.output.append("8. \'bye\' to exit. What else?\n");
+    }
+
+    /**
+     * Returns a boolean to check if it is empty - Mainly for assertion.
+     * @return a boolean to check if it is empty.
+     */
+    private boolean isEmpty() {
+        return this.output.toString().equals("");
     }
 }

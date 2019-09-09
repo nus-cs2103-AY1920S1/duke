@@ -25,6 +25,8 @@ class DeleteCommand implements Command {
      */
     @Override
     public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
+        assert this.taskNumber != null : "taskNumber not found";
+        
         Task task = taskList.deleteTask(this.taskNumber - 1);
         storeManager.store(taskList);
         uiManager.printDelete(task, taskList.listSize());

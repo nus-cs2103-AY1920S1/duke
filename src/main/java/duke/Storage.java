@@ -31,8 +31,9 @@ class Storage {
      * @throws DukeException When there is an error serializing the file.
      */
     public void store(TaskList taskList) throws DukeException {
+        assert this.tasks != null : "tasks file is invalid";
         try {
-            FileOutputStream fileOut = new FileOutputStream(tasks.getPath());
+            FileOutputStream fileOut = new FileOutputStream(this.tasks.getPath());
             ObjectOutputStream out =  new ObjectOutputStream(fileOut);
             out.writeObject(taskList);
             out.close();
@@ -51,6 +52,7 @@ class Storage {
      * @throws DukeException When the file is corrupted
      */
     public TaskList retrieve() throws DukeException {
+        assert this.tasks != null : "tasks file is invalid";
         if (!this.tasks.exists()) {
             // If the Tasks file does not exist
             try {

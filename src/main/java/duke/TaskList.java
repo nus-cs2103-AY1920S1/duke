@@ -27,6 +27,7 @@ class TaskList implements Serializable {
      * @see Task#Task(String)
      */
     public void addTask(Task task) {
+        assert this.taskList != null : "taskList is invalid";
         this.taskList.add(task);
     }
 

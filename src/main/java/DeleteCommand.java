@@ -3,9 +3,9 @@
  */
 public class DeleteCommand extends Command {
 
-    int indexToRemove = -1;
+    private int indexToRemove;
 
-    public void setIndexToRemove(int indexToRemove) {
+    public DeleteCommand(int indexToRemove) {
         this.indexToRemove = indexToRemove;
     }
 

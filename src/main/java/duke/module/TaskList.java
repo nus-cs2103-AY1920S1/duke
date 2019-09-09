@@ -7,6 +7,7 @@ import duke.module.AutoResponse;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Keeps track of the all the user tasks.
@@ -70,9 +71,7 @@ public class TaskList {
      * Marks all tasks as done.
      */
     public void markAsDoneAllTasks() {
-        for (int i = 1; i <= this.taskList.size(); i++) {
-            this.taskList.get(i - 1).markAsDone();
-        }
+        this.taskList.forEach(Task::markAsDone);
     }
 
     /**
@@ -138,13 +137,10 @@ public class TaskList {
      * @return List of Task objects containing the keyword.
      */
     public List<Task> findAllTasksContaining(String keyword) {
-        List<Task> foundTasks = new ArrayList<>();
-        for (Task task : this.taskList) {
-            if (task.getDescription().contains(keyword)) {
-                foundTasks.add(task);
-            }
-        }
-        return foundTasks;
+        return this.taskList.stream()
+                            .filter(task -> task.getDescription().contains(keyword))
+                            .collect(Collectors.toList());
+
     }
 
     /**

@@ -55,13 +55,6 @@ public class Ui {
        return result;
     }
 
-    /**
-     * Prints border line.
-     */
-    public String showLine() {
-        return ("____________________________________________________________");
-    }
-
 
     /**
      * Prints loading error message.
@@ -70,24 +63,7 @@ public class Ui {
         System.out.println("Unable to load");
     }
 
-    /**
-     * Closes Ui and stops interaction with user.
-     */
-    public void closeUi() {
-        this.isExit = true;
-        this.scanner.close();
-    }
 
-
-
-    /**
-     * Prints error message.
-     *
-     * @param message Message to print.
-     */
-    public void showError(String message) {
-        System.out.println(message);
-    }
 }
 
 

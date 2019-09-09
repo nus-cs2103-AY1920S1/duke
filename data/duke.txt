@@ -1,8 +1,9 @@
-T | 1 | that
 T | 1 | blah
-T | 1 | book
 T | 1 | fake
-T | 1 | g
+T | 0 | g
 T | 1 | this
 T | 1 | that
 D | 1 | fakish  | Mon Aug 02 00:00:00 SGT 1999
+T | 1 | this
+T | 1 | test
+T | 1 | that

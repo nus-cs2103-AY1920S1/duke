@@ -40,6 +40,7 @@ public class DeleteCommand extends Command {
         storage.deleteText(taskNum);
 
         Task removedTask = taskList.deleteTask(taskNum);
+
         return ("Noted. I've removed this task:\n" + removedTask
                 + "Now you have " + taskList.size()
                 + " tasks in the list.");

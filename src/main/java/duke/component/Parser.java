@@ -21,20 +21,13 @@ public class Parser {
 
 
     /**
-     * Initialises a new Parser object.
-     */
-    public Parser() {
-    }
-
-
-    /**
      * Parses out user inputs.
      *
      * @param input User input.
      * @return Command Type of command that user input in.
      * @throws DukeException If there is IOException when reading or writing from text file.
      */
-    public static Command parse(String input) throws DukeException {
+    public Command parse(String input) throws DukeException {
         switch (input) {
 
         case "bye":
@@ -59,15 +52,19 @@ public class Parser {
      * @return Command Type o comand summoned by user.
      * @throws DukeException If there is IOException when reading or writing from text file.
      */
-    public static Command determineInputType(String input) throws DukeException {
+    private Command determineInputType(String input) throws DukeException {
         if (input.contains("done")) {
 
-
             try {
-                int taskNum = -1;
 
-                taskNum = Integer.parseInt(input.substring(5));
-                return new DoneCommand(taskNum);
+                int taskNum = Integer.parseInt(input.substring(5));
+                DoneCommand resultCommand = new DoneCommand(taskNum);
+
+                //Assert that result is an instance of DoneCommand
+                assert resultCommand instanceof DoneCommand : "Result is not an instance of DoneCommand";
+
+                return resultCommand;
+
             } catch (StringIndexOutOfBoundsException e1) {
                 throw new EmptyDescException("done");
             }
@@ -75,9 +72,14 @@ public class Parser {
 
         } else if (input.contains("todo")) {
 
-
             try {
-                return new AddCommand("T", false, input.substring(5), null);
+                AddCommand resultCommand =  new AddCommand("T", false, input.substring(5), null);
+
+                //Assert that result is an instance of DoneCommand
+                assert resultCommand instanceof AddCommand : "Result is not an instance of AddCommand";
+
+                return resultCommand;
+
             } catch (StringIndexOutOfBoundsException e) {
                 throw new EmptyDescException("todo");
             }
@@ -89,9 +91,15 @@ public class Parser {
 
                 String[] parts = input.split("/by");
 
-                return new AddCommand("D", false, parts[0].substring(9), parts[1]);
+                AddCommand resultCommand = new AddCommand("D", false, parts[0].substring(9), parts[1]);
+
+                //Assert that result is an instance of DoneCommand
+                assert resultCommand instanceof AddCommand : "Result is not an instance of AddCommand";
+
+                return resultCommand;
             } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                 throw new EmptyDescException("deadline");
+
             }
 
         } else if (input.contains("event")) {
@@ -99,7 +107,11 @@ public class Parser {
 
                 String[] parts = input.split("/at");
 
-                return new AddCommand("E", false, parts[0].substring(5), parts[1]);
+                AddCommand resultCommand = new AddCommand("E", false, parts[0].substring(5), parts[1]);
+                //Assert that result is an instance of DoneCommand
+                assert resultCommand instanceof AddCommand : "Result is not an instance of AddCommand";
+
+                return resultCommand;
             } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                 throw new EmptyDescException("event");
             }
@@ -108,7 +120,12 @@ public class Parser {
             int taskNum;
             try {
                 taskNum = Integer.parseInt(input.substring(7));
-                return new DeleteCommand(taskNum);
+                DeleteCommand resultCommand =  new DeleteCommand(taskNum);
+
+                //Assert that result is an instance of DoneCommand
+                assert resultCommand instanceof DeleteCommand : "Result is not an instance of AddCommand";
+
+                return resultCommand;
 
             } catch (StringIndexOutOfBoundsException e) {
                 throw new EmptyDescException("delete");

@@ -38,6 +38,9 @@ public abstract class Task {
      */
     public Task(String isDone, String description) {
         int a = Integer.parseInt(isDone.trim());
+        //Assert that a is either 1 or 0
+        assert a == 1 || a == 0 : "Integer value of whether task is done is not parsed out properly";
+
         this.isDone = a == 0 ? true : false;
         this.description = description;
     }

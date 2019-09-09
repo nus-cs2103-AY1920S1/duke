@@ -37,7 +37,7 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             StringDateConverter converter = new StringDateConverter();
-            Date at = converter.convertStringToDate(details[1]);
+            Date at = converter.convertStringToDate(details[1].trim());
             tasks.getTasks().add(new Event(details[0].trim(), at));
             ui.showEventCommand(tasks);
         } catch (ParseException e) {

@@ -38,10 +38,10 @@ public class StringDateConverter {
         if (dateTime[1].length() != 4) {
             return false;
         }
-        String[] ddMMyyyy = dateTime[0].split("/");
-        String dd = ddMMyyyy[0];
-        String mm = ddMMyyyy[1];
-        String yyyy = ddMMyyyy[2];
+        String[] dateDetails = dateTime[0].split("/");
+        String dd = dateDetails[0];
+        String mm = dateDetails[1];
+        String yyyy = dateDetails[2];
         return (dd.length() == 2 && mm.length() == 2 && yyyy.length() == 4);
     }
 

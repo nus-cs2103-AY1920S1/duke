@@ -93,13 +93,16 @@ public class Parser {
         String toAdd = "";
         String dateString = "";
         String timeString = "";
-        if (toParse.split("/by")[1].trim().split(" ").length != 2) {
-            throw new DukeException("☹ OOPS!!! duke.datetime.Date and "
-                    + "duke.datetime.Timing not specified correctly!");
-        }
 
         if (tokens.length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+        }
+
+        assert toParse.split("/by").length > 1: "Deadline command did not use /by delimiter";
+
+        if (toParse.split("/by")[1].trim().split(" ").length != 2) {
+            throw new DukeException("☹ OOPS!!! Date and "
+                    + "Timing not specified correctly!");
         }
 
         for (int m = 1; m < tokens.length; m++) {
@@ -125,14 +128,18 @@ public class Parser {
         String toAdd = "";
         String dateString = "";
         String timeString = "";
+        boolean timeFlag = false;
+
         if (tokens.length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         }
-        boolean timeFlag = false;
+
+        assert toParse.split("/at").length > 1: "Event command did not use /at delimiter";
+
         //Check if both date and time are specified
         if (toParse.split("/at")[1].trim().split(" ").length != 2) {
-            throw new DukeException("☹ OOPS!!! duke.datetime.Date and"
-                    + " duke.datetime.Timing not specified correctly!");
+            throw new DukeException("☹ OOPS!!! Date and"
+                    + " Timing not specified correctly!");
         }
         for (int z = 1; z < tokens.length; z++) {
             if (tokens[z].equals("/at")) {

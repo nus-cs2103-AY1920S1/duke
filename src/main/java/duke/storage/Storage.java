@@ -102,6 +102,8 @@ public class Storage {
      */
     public void writeToDisk(TaskList tasklist) throws DukeException {
         try {
+            assert this.isUpdated() : "Writing to file when Storage was not updated";
+
             FileWriter fw = new FileWriter(filePath);
             String lineToWrite;
             for (int k = 0; k < tasklist.size(); k++) {

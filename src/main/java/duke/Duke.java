@@ -53,12 +53,19 @@ public class Duke {
 
     private Response process(String input) {
         Response response;
+
+        assert this.taskList != null : "TaskList not initialized";
+        assert this.ui != null : "Ui not initialized";
+        assert this.storage != null : "Storage not initialized";
+
         try {
             Command c = Parser.parse(input);
             response = c.execute(taskList, ui, storage);
         } catch (DukeException de) {
             response = ui.getErrorResponse(de.getMessage());
         }
+
+        assert response != null : "No Response returned by Command";
 
         return response;
     }

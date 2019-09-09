@@ -101,6 +101,7 @@ public class AddCommand extends Command {
         default:
             task = new Todo(description);
         }
+        assert task != null : "A new task must exist to be added to the TaskList.";
         tasks.add(task);
         ui.append(String.format(MESSAGE_ADD,  task.toString(), tasks.size(),
                 tasks.size() != 1 ? "tasks" : "task"));

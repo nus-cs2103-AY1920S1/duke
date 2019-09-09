@@ -41,6 +41,7 @@ public class DoneCommand extends Command {
         for (int taskId : taskIds) {
             Task task = tasks.get(taskId - 1);
             task.markAsDone();
+            assert task.isDone() : "Task should be marked done.";
             ui.append(task.toString());
         }
     }

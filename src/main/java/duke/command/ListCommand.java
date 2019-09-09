@@ -24,6 +24,10 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printTaskList(tasks.getAllTasks());
+        try {
+            ui.printTaskList(tasks.getAllTasks());
+        } catch (AssertionError e) {
+            ui.printError(e.getMessage());
+        }
     }
 }

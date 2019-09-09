@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -41,7 +42,13 @@ public class FindTaskCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Task> matchingTasks = tasks.findTaskWithWord(this.keywords);
-        ui.printTaskList(matchingTasks);
+        try {
+            ArrayList<Task> matchingTasks = tasks.findTaskWithWord(this.keywords);
+            ui.printTaskList(matchingTasks);
+        } catch (AssertionError e) {
+            ui.printError(e.getMessage());
+        } catch (DukeException e) {
+            ui.printError(e.getMessage());
+        }
     }
 }

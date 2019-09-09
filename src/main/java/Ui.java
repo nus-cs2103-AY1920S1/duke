@@ -43,14 +43,9 @@ public class Ui {
     /**
      * Display the list of tasks to the User.
      * @param taskList The tasks list.
+     * @return the tasks list.
      */
     protected String showList(ArrayList<Task> taskList) {
-        /*System.out.println("____________________________________________________________");
-        for (int x = 0; x < taskList.size(); x++) {
-            System.out.println(x + 1 + ". " + taskList.get(x));
-        }
-        System.out.println("____________________________________________________________");*/
-
         String showList = "";
         for (int x = 0; x < taskList.size(); x++) {
             showList = showList + (x + 1) + ". " + taskList.get(x) + "\n";
@@ -60,7 +55,7 @@ public class Ui {
 
     /**
      * Display the error when there is an empty .txt file.
-     * @param e
+     * @param e Loading error when no task is found.
      */
     protected String showLoadingError(DukeException e) {
         return e.toString();
@@ -69,6 +64,7 @@ public class Ui {
     /**
      * Display message when a task is added.
      * @param taskList The tasks list.
+     * @return the UI message shown to the User.
      */
     protected String getAddedMessage(ArrayList<Task> taskList) {
         String addedMessage = " Got it. I've added this task:\n"
@@ -82,6 +78,7 @@ public class Ui {
      * Display message when a task is deleted.
      * @param taskList The tasks list.
      * @param deleted The task deleted.
+     * @return the UI message shown to the User.
      */
     protected String getDeletedMessage(ArrayList<Task> taskList, String deleted) {
         String deletedMessage = " Got it. I've added this task:\n"
@@ -104,13 +101,10 @@ public class Ui {
     }
 
     /**
-     * Display the error message to User when User inputs an invalid command.
-     * @param errorMsg
+     * Find the task that the User inputs.
+     * @param foundTasklist
+     * @return List of tasks found.
      */
-    protected String getIllegalCommandError(IllegalCommandException errorMsg) {
-        return errorMsg.toString();
-    }
-
     protected String showFoundMessage(ArrayList<Task> foundTasklist) {
         String foundMessage = "";
         for (int x = 0; x < foundTasklist.size(); x++) {

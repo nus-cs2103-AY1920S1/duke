@@ -150,8 +150,7 @@ public class Parser {
                         Task todo = new Todo(command.substring(5));
                         return new AddCommand(todo);
                     } catch (DukeException e) {
-                        System.err.println("Something went wrong: " + e.getMessage());
-                        break;
+                        throw new DukeException(e.getMessage());
                     }
                 }
                 case "deadline": {
@@ -161,8 +160,7 @@ public class Parser {
                                 dateFormatter(command.substring(command.indexOf("/by") + 4)));
                         return new AddCommand(deadline);
                     } catch (DukeException e) {
-                        System.err.println("Something went wrong: " + e.getMessage());
-                        break;
+                        throw new DukeException(e.getMessage());
                     }
                 }
                 case "event": {
@@ -172,8 +170,7 @@ public class Parser {
                                 dateFormatter(command.substring(command.indexOf("/at") + 4)));
                         return new AddCommand(event);
                     } catch (DukeException e) {
-                        System.err.println("Something went wrong: " + e.getMessage());
-                        break;
+                        throw new DukeException(e.getMessage());
                     }
                 }
                 case "find": {
@@ -181,8 +178,7 @@ public class Parser {
                         findCheck(task);
                         return new FindTaskCommand(command.substring(5).trim());
                     } catch (DukeException e) {
-                        System.err.println("Something went wrong: " + e.getMessage());
-                        break;
+                        throw new DukeException(e.getMessage());
                     }
                 }
                 default: {
@@ -190,7 +186,6 @@ public class Parser {
                 }
                 }
             }
-            return null;
         }
     }
 

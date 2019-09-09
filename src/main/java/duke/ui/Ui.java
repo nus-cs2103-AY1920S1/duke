@@ -44,7 +44,7 @@ public class Ui {
     /**
      * Adds the message on to the output string object.
      */
-    public void append(String message) {
+    private void append(String message) {
         output.append(message);
         output.append("\n");
     }
@@ -69,6 +69,7 @@ public class Ui {
      * @param tasks The task list.
      */
     public void printTaskList(ArrayList<Task> tasks) {
+        assert (tasks != null && tasks.size() != 0) : "You have no tasks to show: add a todo/deadline/event now !";
         int counter = 0;
         append("Here are the tasks in your list:");
         for (Task task : tasks) {

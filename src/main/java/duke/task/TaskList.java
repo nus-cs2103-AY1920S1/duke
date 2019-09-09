@@ -79,7 +79,9 @@ public class TaskList {
      * @param word Keyword to search.
      * @return ArrayList of tasks.
      */
-    public ArrayList<Task> findTaskWithWord(String word) {
+    public ArrayList<Task> findTaskWithWord(String word) throws DukeException {
+        assert (tasks != null && tasks.size() != 0) :
+                "You have no tasks in your tasks list, HOW AM I GOING TO FIND THIS?!?!";
         ArrayList<Task> tasksWithWord = new ArrayList<>();
         int numberOfTask = this.tasks.size();
         for (int i = 0; i < numberOfTask; i++) {
@@ -88,6 +90,10 @@ public class TaskList {
                 tasksWithWord.add(task);
             }
         }
-        return tasksWithWord;
+        if (tasksWithWord.size() == 0) {
+            throw new DukeException("No events with '" + word + "' found in your tasklist!");
+        } else {
+            return tasksWithWord;
+        }
     }
 }

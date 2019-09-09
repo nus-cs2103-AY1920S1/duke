@@ -24,22 +24,22 @@ public class AddCommand extends Command {
     /**
      * Whether the deadline task is done.
      */
-    boolean isDone;
+    private boolean isDone;
 
     /**
      * Description of deadline task.
      */
-    String description;
+    private String description;
 
     /**
      * Date in which the deadline task is due.
      */
-    Date deadline;
+    private Date deadline;
 
     /**
      * Type of task to be added.
      */
-    String type;
+    private String type;
 
     /**
      * Initializes a new instance of DeadlineCommand.
@@ -93,18 +93,25 @@ public class AddCommand extends Command {
             newTask = new Event(this.description, this.deadline);
             break;
 
-        default:
+        case("T"):
             newTask = new Todo(this.description);
             break;
 
+        default:
+            throw new AssertionError("Invalid task type");
+
 
         }
+
+        int oldSize = taskList.size();
 
 
         taskList.addTask(newTask);
 
         int numTask = taskList.size();
 
+        //Assert that size of taskList increased by 1
+        assert numTask == oldSize + 1 : "Task is not added to task list";
 
         return("Got it. I've added this task: \n" + "  "
                 + newTask + "Now you have "

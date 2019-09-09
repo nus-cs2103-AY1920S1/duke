@@ -46,6 +46,9 @@ public class TaskList {
      */
     public void addTask(Task newTask) {
         todoList.add(newTask);
+
+        //Assert that the last element added is newTask
+        assert todoList.get(todoList.size() - 1).equals(newTask) : "new task is not added to task list";
     }
 
     /**
@@ -68,6 +71,7 @@ public class TaskList {
      */
     public Task getTask(int taskNum) {
         return this.todoList.get(taskNum - 1);
+
     }
 
     /**
@@ -87,6 +91,9 @@ public class TaskList {
     public void markTaskDone(int taskNum) {
         Task updatedTask = this.getTask(taskNum);
         updatedTask.markAsDone();
+
+        //Assert that the correct task is marked as done
+        assert this.getTask(taskNum).getStatusIcon().equals("v") : "The task is not marked as done or the wrong task is marked as done";
     }
 
     /**
@@ -97,13 +104,16 @@ public class TaskList {
      */
     public List<String> findTask(String keyword) {
 
-        return this.todoList
-                .stream()
-                .map(x -> x.toString())
-                .filter(y -> y.contains(keyword))
-                .collect(Collectors.toList());
+        List<String> result = this.todoList
+                                  .stream()
+                                  .map(x -> x.toString())
+                                  .filter(y -> y.contains(keyword))
+                                  .collect(Collectors.toList());
 
+         //Assert that all tasks in the result contains keyword
+        assert result.stream().allMatch(x -> x.contains(keyword)) : "Some results of 'find' does not contain keyword";
 
+        return result;
     }
 }
 

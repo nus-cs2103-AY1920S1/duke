@@ -43,6 +43,7 @@ public class FindCommand extends Command {
         List<String> foundTasks = taskList.findTask(this.keyword);
 
         String result = "Here are the matching tasks in your list:\n";
+
         int index = 1;
         for (int i = 0; i < foundTasks.size(); i++) {
             result += "\n" + index + ". " + foundTasks.get(i);

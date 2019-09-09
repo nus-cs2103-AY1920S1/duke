@@ -100,6 +100,7 @@ public class Storage {
             return new Deadline(lineArray[1], lineArray[2], lineArray[3]);
 
         default:
+            assert false : "text line from text file is not a valid task";
             return null;
         }
     }

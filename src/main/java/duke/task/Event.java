@@ -40,6 +40,7 @@ public class Event extends Task {
      */
     public Event(String isDone, String description, String time) {
         super(isDone, description);
+
         try {
             this.time = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy").parse(time.trim());
 

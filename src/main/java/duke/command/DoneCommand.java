@@ -40,9 +40,15 @@ public class DoneCommand extends Command {
 
         taskList.markTaskDone(taskNum);
         Task updatedTask = taskList.getTask(taskNum);
+
+        //Assert post condition
+        assert updatedTask.getStatusIcon().equals("v") : "Task is not marked as done";
+
         storage.updateText(taskNum);
         storage.updateText(taskNum);
         return("Nice! I've marked this task as done: \n" + updatedTask);
+
+
 
 
     }

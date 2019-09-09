@@ -38,7 +38,7 @@ class EventCommand extends AddTaskCommand {
     @Override
     void validate(TaskList tasks, MainWindow ui, Storage storage) throws DukeInvalidArgumentException {
         int atIndex = DukeUtil.getIndexOfPattern(commandArgs, "/at");
-        if (atIndex == -1) {
+        if (atIndex == DukeUtil.FAIL_INDEX) {
             throw new DukeInvalidArgumentException(
                     "Missing /at delimiter for event command",
                     " =X  OOPS!!! I dont know what is your event timing!\n"

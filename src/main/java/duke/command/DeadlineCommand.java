@@ -38,7 +38,7 @@ class DeadlineCommand extends AddTaskCommand {
     @Override
     void validate(TaskList tasks, MainWindow ui, Storage storage) throws DukeInvalidArgumentException {
         int byIndex = DukeUtil.getIndexOfPattern(commandArgs, "/by");
-        if (byIndex == -1) {
+        if (byIndex == DukeUtil.FAIL_INDEX) {
             throw new DukeInvalidArgumentException(
                     "Missing /by delimiter for deadline command",
                     " =X  OOPS!!! I dont know what is your deadline!\n"

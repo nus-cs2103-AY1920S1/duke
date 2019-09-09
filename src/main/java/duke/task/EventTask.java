@@ -71,6 +71,32 @@ public class EventTask extends Task {
         }
 
         String[] splitTimings = timing.split(" to ");
+
+        // Set start and end date times of this event task.
+        setDates(splitTimings);
+
+        if (this.endDate.isBefore(this.startDate)) {
+            throw new DukeInvalidArgumentException(
+                    "Invalid date format inputted by user",
+                    " =X  OOPS!!! The second timing is not after the first one!");
+        }
+
+        assert startDate != null && endDate != null : "Event task constructed with no date.";
+    }
+
+    /**
+     * Private function for setting the instance's dates.
+     * Takes a string array of size 2, the front element being the starting date,
+     * and the second being the end date.
+     * Calls TaskUtil's parsing functions to parse the arguments.
+     * Tries to first use the TaskUtil time parser for the end date, failing which it
+     * tries the dateTime parser.
+     *
+     * @param splitTimings The string array of date arguments to parse.
+     * @throws DukeInvalidArgumentException If provided input strings are not of the correct format,
+     *     or the string array of arguments is not of length 2.
+     */
+    private void setDates(String[] splitTimings) throws DukeInvalidArgumentException {
         if (splitTimings.length != 2) {
             throw new DukeInvalidArgumentException(
                     "Missing to delimiter in event task arguments",
@@ -87,15 +113,7 @@ public class EventTask extends Task {
                     .plusHours(endTime.getHour() - this.startDate.getHour())
                     .plusMinutes(endTime.getMinute() - this.startDate.getMinute());
         } catch (DukeInvalidArgumentException ex) {
-            //not a timing, but a date time.
             this.endDate = TaskUtil.getDateFromString(splitTimings[1]);
         }
-
-        if (this.endDate.isBefore(this.startDate)) {
-            throw new DukeInvalidArgumentException(
-                    "Invalid date format inputted by user",
-                    " =X  OOPS!!! The second timing is not after the first one!");
-        }
-        assert startDate != null && endDate != null : "Event task constructed with no date.";
     }
 }

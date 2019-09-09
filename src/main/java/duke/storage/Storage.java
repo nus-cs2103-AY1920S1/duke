@@ -64,63 +64,97 @@ public class Storage {
      * @param taskList The TaskList object to load the tasks into.
      */
     public void loadTasksToList(TaskList taskList) {
-        Scanner dataScanner;
-
-        try {
-            dataScanner = new Scanner(new File(filePath));
-        } catch (FileNotFoundException ex) {
-            ui.showMessage(" I did not find any previous data in your data directory\n"
-                    + " I'll try to create one when you save something!");
+        Scanner dataScanner = getScanner();
+        if (dataScanner == null) {
             return;
         }
 
-        String input;
         Map<StorageKey, String> inputs;
-
-        TaskType taskType;
-        boolean isTaskDone;
-        String taskDescription = "";
-        String taskTiming = "";
         int lineNumber = 0;
 
         while (dataScanner.hasNextLine()) {
-            input = dataScanner.nextLine();
             lineNumber++;
+            parseAndStoreTask(taskList, dataScanner.nextLine(), lineNumber);
+        }
+    }
 
-            try {
-                inputs = StorageParser.parseJsonLine(input);
+    /**
+     * Private method to parse an input string of task data and store it into the task list.
+     * Also requires an input linenumber integer to print a more informative
+     * storage file error message with a line number indication.
+     *
+     * @param taskList The task list to store the parsed task in.
+     * @param input The input string of task data to parse.
+     * @param lineNumber The integer line number for error indication.
+     */
+    private void parseAndStoreTask(TaskList taskList, String input, int lineNumber) {
+        try {
+            Map<StorageKey, String> inputs = StorageParser.parseJsonLine(input);
 
-                taskType = getTaskType(inputs.get(StorageKey.TYPE));
-                isTaskDone = getDoneStatus(inputs.get(StorageKey.DONE));
-                taskDescription = getDescription(inputs.get(StorageKey.DESCRIPTION));
-                taskTiming = inputs.get(StorageKey.TIME);
+            TaskType taskType = getTaskType(inputs.get(StorageKey.TYPE));
+            boolean isTaskDone = getDoneStatus(inputs.get(StorageKey.DONE));
+            String taskDescription = getDescription(inputs.get(StorageKey.DESCRIPTION));
+            String taskTiming = inputs.get(StorageKey.TIME);
 
-                Task taskToAdd;
+            // Create appropriate task from parsed taskType
+            Task taskToAdd = createTask(taskType, taskDescription, taskTiming, isTaskDone);
+            assert taskToAdd != null : "Tried to load invalid task to task list when parsing storage.";
 
-                switch (taskType) {
-                case TODO:
-                    taskToAdd = new TodoTask(taskDescription);
-                    break;
-                case DEADLINE:
-                    taskToAdd = new DeadlineTask(taskDescription, taskTiming);
-                    break;
-                case EVENT:
-                    taskToAdd = new EventTask(taskDescription, taskTiming);
-                    break;
-                default:
-                    throw new DukeTaskFileParseException(
-                            "Unhandled taskType encountered",
-                            " =X  Oops! I am not trained to handle this type of Tasks...\n");
-                }
+            taskList.addTask(taskToAdd);
+        } catch (DukeTaskFileParseException | DukeInvalidArgumentException ex) {
+            ui.showMessage(ex.getDisplayMsg()
+                    + String.format("\n   Error in storage file line number: %d", lineNumber));
+        }
+    }
 
-                assert taskToAdd != null : "Tried to load invalid task to task list when parsing storage.";
-                
-                taskToAdd.setDone(isTaskDone);
-                taskList.addTask(taskToAdd);
-            } catch (DukeTaskFileParseException | DukeInvalidArgumentException ex) {
-                ui.showMessage(ex.getDisplayMsg()
-                        + String.format("\n   Error in storage file line number: %d", lineNumber));
-            }
+    /**
+     * Private method to create the appropriate task type from given TaskType.
+     * Also sets the done status of the task accordingly.
+     * Used in parseAndStoreTask method.
+     *
+     * @param taskType TaskType enum of the task type to create.
+     * @param taskDescription String task description to create the task.
+     * @param taskTiming String task timing to create the task.
+     * @return Appropriate created task corresponding to the given TaskType enum.
+     * @throws DukeInvalidArgumentException If validation of task information provided fails.
+     * @throws DukeTaskFileParseException If TaskType enum provided is invalid.
+     */
+    private Task createTask(TaskType taskType, String taskDescription, String taskTiming, boolean isTaskDone)
+            throws DukeInvalidArgumentException, DukeTaskFileParseException {
+        Task taskToAdd;
+        switch (taskType) {
+        case TODO:
+            taskToAdd = new TodoTask(taskDescription);
+            break;
+        case DEADLINE:
+            taskToAdd = new DeadlineTask(taskDescription, taskTiming);
+            break;
+        case EVENT:
+            taskToAdd = new EventTask(taskDescription, taskTiming);
+            break;
+        default:
+            throw new DukeTaskFileParseException(
+                    "Unhandled taskType encountered",
+                    " =X  Oops! I am not trained to handle this type of Tasks...\n");
+        }
+        taskToAdd.setDone(isTaskDone);
+
+        return taskToAdd;
+    }
+
+    /**
+     * Private method to get a scanner from the file path of this storage instance.
+     * If the file does not exist, a ui notification is shown to the user.
+     *
+     * @return The scanner object, or null if the file does not exist.
+     */
+    private Scanner getScanner() {
+        try {
+            return new Scanner(new File(filePath));
+        } catch (FileNotFoundException ex) {
+            ui.showMessage(" I did not find any previous data in your data directory\n"
+                    + " I'll try to create one when you save something!");
+            return null;
         }
     }
 
@@ -237,7 +271,6 @@ public class Storage {
     private void setFilePath() {
         String workingDir = System.getProperty("user.dir");
         Path currentDir = Paths.get(workingDir);
-
         int recursiveSearchCount = 1;
 
         while (!Files.isDirectory(Paths.get(currentDir.toString(), dirName))
@@ -257,7 +290,6 @@ public class Storage {
             } catch (IOException ex) {
                 printNoStorageMsg();
             }
-
             this.filePath = Paths.get(fallbackDirPath.toString(), DATA_FILE_NAME).toString();
         } else {
             this.filePath = Paths.get(currentDir.toString(), dirName, DATA_FILE_NAME).toString();

@@ -18,17 +18,14 @@ public abstract class CommandParser {
             throws DukeInvalidCommandException {
 
         String[] inputs = commandString.split("\\s+");
-        Commands commandType;
-        Command command;
 
-        try {
-            commandType = Commands.valueOf(inputs[0].toUpperCase());
-            inputs = Arrays.copyOfRange(inputs, 1, inputs.length);
-        } catch (IllegalArgumentException | IndexOutOfBoundsException ex) {
-            throw new DukeInvalidCommandException(
-                    " =X  OOPS!!! I'm sorry, but I don't know what that means =(");
-        }
         assert inputs != null : "Attempted command construction with null arguments.";
+        Commands commandType = getCommandType(inputs);
+
+        assert inputs.length > 0 : "Invalid number of input tokens after getting command type.";
+        inputs = Arrays.copyOfRange(inputs, 1, inputs.length);
+
+        Command command;
 
         switch (commandType) {
         case BYE:
@@ -65,5 +62,24 @@ public abstract class CommandParser {
         }
 
         return command;
+    }
+
+    /**
+     * Private utility method to get command type of input string array.
+     *
+     * @param inputs Input string array to parse.
+     * @return Commands enum command type.
+     * @throws DukeInvalidCommandException If input string array does not represent a valid
+     *     valid command type or array length is 0.
+     */
+    private static Commands getCommandType(String[] inputs) throws DukeInvalidCommandException {
+        Commands commandType;
+        try {
+            commandType = Commands.valueOf(inputs[0].toUpperCase());
+        } catch (IllegalArgumentException | IndexOutOfBoundsException ex) {
+            throw new DukeInvalidCommandException(
+                    " =X  OOPS!!! I'm sorry, but I don't know what that means =(");
+        }
+        return commandType;
     }
 }

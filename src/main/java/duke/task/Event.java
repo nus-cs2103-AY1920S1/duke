@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 /**
  * Represents an event that occurs at the user specified time and date.
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Event> {
 
     /**
      * Represents the date and time at which the event occurs.
@@ -25,10 +25,19 @@ public class Event extends Task {
         this.at = at;
     }
 
+    private Date getAt() {
+        return this.at;
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat properFormat = new SimpleDateFormat("dd 'of' MMMM yyyy, hh:mm a");
         return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (at: " + properFormat.format(this.at)
                 + ")";
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return (this.at).compareTo(o.getAt());
     }
 }

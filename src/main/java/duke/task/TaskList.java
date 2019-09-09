@@ -3,8 +3,7 @@ package duke.task;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Collections;
 
 /**
  * Represents the list of completed and uncompleted tasks.
@@ -98,5 +97,62 @@ public class TaskList {
             return tasksWithWord;
         }
     }
+
+    /**
+     * This method when called will sort either the deadlines or the
+     * events in chronological order.
+     *
+     * @param word Task type deadline/event to sort
+     * @return The list of sorted task
+     * @throws DukeException If there are no deadlines or events to be sorted.
+     */
+
+    public ArrayList<? extends Task> findTaskOfType(String word) throws DukeException {
+        assert (tasks != null && tasks.size() != 0) :
+                "You have no tasks in your tasks list, HOW AM I GOING TO FIND THIS?!?!";
+        ArrayList<Deadline> deadlines = new ArrayList<>();
+        ArrayList<Event> events = new ArrayList<>();
+        int numberOfTask = this.tasks.size();
+        switch (word) {
+        case "deadline": {
+            for (int i = 0; i < numberOfTask; i++) {
+                Task task = this.tasks.get(i);
+                if (task instanceof Deadline) {
+                    deadlines.add((Deadline) task);
+                    this.tasks.remove(task);
+                    numberOfTask--;
+                    i--;
+                }
+            }
+            break;
+        }
+        case "event": {
+            for (int i = 0; i < numberOfTask; i++) {
+                Task task = this.tasks.get(i);
+                if (task instanceof Event) {
+                    events.add((Event) task);
+                    this.tasks.remove(task);
+                    numberOfTask--;
+                    i--;
+                }
+            }
+            break;
+        }
+        default: {
+            throw new DukeException(
+                    "Invalid tasks to be sorted. You can only sort deadlines and events");
+        }
+        }
+        if (deadlines.size() == 0 && events.size() == 0) {
+            throw new DukeException("No task of type '" + word + "' found in your tasklist!");
+        } else if (deadlines.size() == 0) {
+            Collections.sort(events);
+            return events;
+        } else {
+            Collections.sort(deadlines);
+            return deadlines;
+        }
+    }
+
 
 }

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 /**
  * Represents a task with a deadline to be met.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
     /**
      * Represents the date by which the tasks is to be completed by.
      */
@@ -23,10 +23,19 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    private Date getBy() {
+        return this.by;
+    }
+
     @Override
     public String toString() {
         SimpleDateFormat properFormat = new SimpleDateFormat("dd 'of' MMMM yyyy, hh:mm a");
         return "[D]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (by: " + properFormat.format(this.by)
                 + ")";
+    }
+
+    @Override
+    public int compareTo(Deadline o) {
+        return (this.by).compareTo(o.getBy());
     }
 }

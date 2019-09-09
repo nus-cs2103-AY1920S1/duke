@@ -68,12 +68,12 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("I'm so sorry! I had trouble sync-ing the task list"
                     + "to the disk!\n"
-                    + "Any changes might not be saved ):");
+                    + "Any changes might not be saved ):", e);
         } catch (ClassNotFoundException e) {
             throw new DukeException("I'm sorry, I couldn't decipher the saved list at:\n"
                     + this.file.getPath() + "\n"
                     + "It seems to be missing or corrupted...\n"
-                    + "I will have to start a new list!");
+                    + "I will have to start a new list!", e);
         }
         return list;
     }
@@ -99,7 +99,7 @@ public class Storage {
             throw new DukeException("I'm so sorry! I had trouble saving the task list"
                     + "to the following path:\n"
                     + this.file.getPath() + "\n"
-                    + "Any changes might not be saved ):");
+                    + "Any changes might not be saved ):", e);
         }
     }
 
@@ -120,7 +120,7 @@ public class Storage {
             writer.close();
         } catch (IOException e) {
             throw new DukeException("I couldn't change my config file in '/config/config.txt'!\n"
-                    + "Did you restrict the write permissions to my own file?!");
+                    + "Did you restrict the write permissions to my own file?!", e);
         }
     }
 

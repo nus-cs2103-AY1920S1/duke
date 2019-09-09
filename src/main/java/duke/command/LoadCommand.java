@@ -50,7 +50,7 @@ public class LoadCommand extends Command {
                     // remind users that save location was also changed
                     + "\nNOTE: I will also update the save path to the same location\n"
                     + "If you want to save to a different location, use the 'save' command!";
-        } catch (DukeException e) {
+        } catch (DukeException e) { // upon failure, revert back to old path
             this.storage.changeSavePath(previousPath);
             throw e;
         }

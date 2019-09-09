@@ -38,7 +38,6 @@ public class SaveCommand extends Command {
         try {
             previousPath = this.storage.changeSavePath(filePath);
             this.storage.saveToDisk(this.taskList); // attempt to save to new location
-
             return "Got it. I've saved and changed the current save file path from\n'"
                     + previousPath
                     + "'\nto\n'"

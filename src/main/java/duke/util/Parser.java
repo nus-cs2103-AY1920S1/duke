@@ -68,11 +68,11 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I'm not psychic! You need"
                     + " to tell me the ID of the task\n"
-                    + "you're done with!");
+                    + "you're done with!", e);
         } catch (NumberFormatException e) {
             throw new DukeException("You need to provide me "
                     + "with a valid task index!\n"
-                    + "(That means integer numbers only!)");
+                    + "(That means integer numbers only!)", e);
         }
     }
 
@@ -84,11 +84,11 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("I'm not psychic! You need"
                     + " to tell me the ID of the task\n"
-                    + "you want to delete!");
+                    + "you want to delete!", e);
         } catch (NumberFormatException e) {
             throw new DukeException("You need to provide me "
                     + "with a valid task index!\n"
-                    + "(That means integer numbers only!)");
+                    + "(That means integer numbers only!)", e);
         }
     }
 
@@ -98,7 +98,7 @@ public class Parser {
             return new TodoCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The description of a todo task"
-                    + " cannot be empty.");
+                    + " cannot be empty.", e);
         }
     }
 
@@ -110,7 +110,7 @@ public class Parser {
             return new EventCommand(deadlineParams[0], at);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
-                    + " to create an event task.");
+                    + " to create an event task.", e);
         }
     }
 
@@ -122,7 +122,7 @@ public class Parser {
             return new DeadlineCommand(deadlineParams[0], by);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
-                    + " to create a deadline task.");
+                    + " to create a deadline task.", e);
         }
     }
 
@@ -131,7 +131,7 @@ public class Parser {
         try {
             return new FindCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Hey! You need to give me a search word to look for!");
+            throw new DukeException("Hey! You need to give me a search word to look for!", e);
         }
     }
 
@@ -140,7 +140,7 @@ public class Parser {
         try {
             return new LoadCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Hey! You need to give me a file path to work with!");
+            throw new DukeException("Hey! You need to give me a file path to work with!", e);
         }
     }
 
@@ -149,7 +149,7 @@ public class Parser {
         try {
             return new SaveCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Hey! You need to give me a file path to work with!");
+            throw new DukeException("Hey! You need to give me a file path to work with!", e);
         }
     }
 }

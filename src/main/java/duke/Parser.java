@@ -7,6 +7,7 @@ import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.InvalidCommand;
+import duke.commands.DuplicateCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
 import duke.commands.ByeCommand;
@@ -87,7 +88,7 @@ public class Parser {
      * @return a Command Object according to the user input
      * @throws DukeException for invalid input
      */
-    public static Command getCommand(String inputInstruction) throws DukeException {
+    public static Command getCommand(String inputInstruction, TaskList currentTaskList, Ui ui) throws DukeException {
         String inputCommand = inputInstruction.split(" ")[0];
         switch (inputCommand) {
         case "list" :
@@ -95,11 +96,23 @@ public class Parser {
         case "done" :
             return new DoneCommand(Parser.getTaskNum(inputInstruction));
         case "todo" :
-            return new TodoCommand(inputInstruction);
+            if (currentTaskList.isDuplicatedTask(inputInstruction, "todo", ui)) {
+                return new DuplicateCommand(inputInstruction);
+            } else {
+                return new TodoCommand(inputInstruction);
+            }
         case "deadline" :
-            return new DeadlineCommand(inputInstruction);
+            if (currentTaskList.isDuplicatedTask(inputInstruction, "deadline", ui)) {
+                return new DuplicateCommand(inputInstruction);
+            } else {
+                return new DeadlineCommand(inputInstruction);
+            }
         case "event" :
-            return new EventCommand(inputInstruction);
+            if (currentTaskList.isDuplicatedTask(inputInstruction, "event", ui)) {
+                return new DuplicateCommand(inputInstruction);
+            } else {
+                return new EventCommand(inputInstruction);
+            }
         case "delete" :
             return new DeleteCommand(inputInstruction);
         case "find" :

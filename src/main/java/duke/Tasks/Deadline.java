@@ -18,6 +18,10 @@ public class Deadline extends Task {
         this.by = LocalDateTime.parse(by, format1);
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(format1) + ")";

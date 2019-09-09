@@ -36,6 +36,41 @@ public class TaskList {
         }
     }
 
+    public boolean isDuplicatedTask(String inputInstruction, String type, Ui ui) {
+        String inputDescription;
+        try {
+            if (type.equals("todo")) {
+                if (inputInstruction.length() == 4 || inputInstruction.length() == 5) {
+                    throw new DukeException("todo");
+                }
+                inputDescription = inputInstruction.substring(5);
+            } else if (type.equals("deadline")) {
+                if (!inputInstruction.contains("/by") || inputInstruction.length() == 8
+                        || inputInstruction.length() == 9) {
+                    throw new DukeException("deadline");
+                }
+                inputDescription = inputInstruction.substring(9, inputInstruction.lastIndexOf("/by") - 1);
+            } else if (type.equals("event")) {
+                if (!inputInstruction.contains("/at") || inputInstruction.length() == 5
+                        || inputInstruction.length() == 6) {
+                    throw new DukeException("event");
+                }
+                inputDescription = inputInstruction.substring(6, inputInstruction.lastIndexOf("/at"));
+            } else {
+                inputDescription = "";
+            }
+            for (int i = 0; i < listOfTask.size(); i++) {
+                Task currentTask = listOfTask.get(i);
+                if (currentTask.getDescription().equals(inputDescription)) {
+                    return true;
+                }
+            }
+        } catch (DukeException e) {
+            ui.printException(e);
+        }
+        return false;
+    }
+
     public Task getTask(int index) {
         return listOfTask.get(index);
     }

@@ -32,6 +32,8 @@ public class DukeException extends Exception {
             return "Unable to do so, the list does have contain such an index";
         } else if (exceptionType.equals("file")) {
             return "Unable to do so, File issue!";
+        } else if (exceptionType.equals("duplicate")) {
+            return "Duplicated Event Description, please change your event Description to a unique one";
         } else {
             return "Invalid Format! Please Follow the Standard Command lines in the Guide.";
         }

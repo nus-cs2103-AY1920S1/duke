@@ -46,7 +46,7 @@ public class Duke {
      */
     public String getResponse(String inputInstruction) throws DukeException {
         assert inputInstruction != null;
-        Command currentCommand = Parser.getCommand(inputInstruction);
+        Command currentCommand = Parser.getCommand(inputInstruction, tasks, ui);
         String outputContent = currentCommand.execute(tasks, ui, storage);
         return outputContent;
     }

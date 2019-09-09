@@ -46,12 +46,15 @@ public class Storage {
             String[] task = input.split(" \\| ");
             switch (task[0]) {
             case "T":
+                assert task.length == 3 : "ToDo should have 3 components";
                 tasks.add(new ToDo(task[2]));
                 break;
             case "D":
+                assert task.length == 4 : "Deadline should have 4 components";
                 tasks.add(new Deadline(task[2], task[3]));
                 break;
             case "E":
+                assert task.length == 4 : "Event should have 4 components";
                 tasks.add(new Event(task[2], task[3]));
                 break;
             }

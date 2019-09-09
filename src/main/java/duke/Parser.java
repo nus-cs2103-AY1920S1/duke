@@ -33,8 +33,8 @@ public class Parser {
         String[] wordArray = str.split(" ");
         String taskWithoutType = str.replace(wordArray[0], "").trim();
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
+        SimpleDateFormat dateTimeInputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
 
         if (taskWithoutType.isEmpty()) {
             throw new DukeException();
@@ -46,13 +46,13 @@ public class Parser {
             break;
         case "event":
             String[] arrOfWordsEvent = taskWithoutType.split(" /at ");
-            Date parsedEventTime = format.parse(arrOfWordsEvent[1]);
-            parsedTask = new Event(arrOfWordsEvent[0], formatter.format(parsedEventTime));
+            Date parsedEventTime = dateTimeInputFormat.parse(arrOfWordsEvent[1]);
+            parsedTask = new Event(arrOfWordsEvent[0], dateTimeFormat.format(parsedEventTime));
             break;
         case "deadline":
             String[] arrOfWordsDeadline = taskWithoutType.split(" /by ");
-            Date parsedDeadline = format.parse(arrOfWordsDeadline[1]);
-            parsedTask = new Deadline(arrOfWordsDeadline[0], formatter.format(parsedDeadline));
+            Date parsedDeadline = dateTimeInputFormat.parse(arrOfWordsDeadline[1]);
+            parsedTask = new Deadline(arrOfWordsDeadline[0], dateTimeFormat.format(parsedDeadline));
             break;
         }
         return parsedTask;

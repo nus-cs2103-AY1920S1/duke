@@ -29,6 +29,7 @@ public class Ui {
      * @return output The response to the given inout.
      */
     public String respond(String input) {
+        assert input.strip().length() != 0 : "Input cannot be empty";
         String output = "";
         String[] task = input.split(" ");
         try {

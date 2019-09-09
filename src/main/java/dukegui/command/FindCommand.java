@@ -35,13 +35,9 @@ public class FindCommand extends Command {
         if (keyword.isEmpty()) {
             throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_KEYWORD);
         }
-        String[] lines = this.listTasks(taskList.findAllTasksContaining(this.keyword));
-        StringBuilder sb = new StringBuilder();
-        for (String line : lines) {
-            sb.append(line);
-            sb.append("\n");
-        }
-        return sb.toString();
+
+        return String.join("\n",
+                this.listTasks(taskList.findAllTasksContaining(this.keyword)));
     }
 
     /**

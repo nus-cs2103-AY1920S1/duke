@@ -36,13 +36,10 @@ public class DeleteCommand extends Command {
         try {
             int index = Integer.parseInt(this.detail);
             Task task = taskList.deleteTaskAt(index);
-            response = new StringBuilder(AutoResponse.DUKE_DELETE_TASK)
-                    .append("\n")
-                    .append("  ")
-                    .append(task.getStatus())
-                    .append("\n")
-                    .append(String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()))
-                    .toString();
+            response = String.join("\n",
+                                   AutoResponse.DUKE_DELETE_TASK,
+                                   "  " + task.getStatus(),
+                                   String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()));
         } catch (NumberFormatException e) {
             if (this.detail.isEmpty()) {
                 throw new DukeIllegalIndexException(AutoResponse.ERROR_MISSING_INDEX);

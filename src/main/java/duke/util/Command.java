@@ -43,28 +43,31 @@ public class Command {
      * @throws DukeException if there is an invalid command/action by user
      */
     public String execute(Storage storage, Ui ui, TaskList tasks) throws IOException, DukeException {
-        if (command == BYE) {
+        String result = "";
+        switch (command) {
+        case BYE:
             storage.saveHistory(tasks.getTaskList());
             return ui.byeMessage();
-        } else if (command == LIST){
+        case LIST:
             return tasks.getListAsString();
-        } else if (command == DONE){
-            String result = tasks.markItemComplete(Integer.parseInt(inputParts[1]));
+        case DONE:
+            result = tasks.markItemComplete(Integer.parseInt(inputParts[1]));
             storage.saveHistory(tasks.getTaskList());
             return result;
-        } else if (command == DELETE){
-            String result = tasks.deleteItem(Integer.parseInt(inputParts[1]));
+        case DELETE:
+            result = tasks.deleteItem(Integer.parseInt(inputParts[1]));
             storage.saveHistory(tasks.getTaskList());
             return result;
-        } else if (command == FIND){
+        case FIND:
             return tasks.findItem(inputParts[1]);
-        } else if (command == TASK){
-            String result = tasks.registerNewTask(inputParts);
+        case TASK:
+            result = tasks.registerNewTask(inputParts);
             storage.saveHistory(tasks.getTaskList());
             return result;
-        } else if (command == COMMANDS){
+        case COMMANDS:
             return list;
         }
-        return "";
+        assert false : "Invalid Command";
+        return result;
     }
 }

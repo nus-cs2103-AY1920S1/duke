@@ -11,7 +11,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private Parser parser;
     private final String path = "./saved/taskList_history.txt";
 
     /**
@@ -20,7 +19,6 @@ public class Duke {
     public Duke() {
         storage = new Storage(path);
         ui = new Ui();
-        parser = new Parser();
         try {
             if (!storage.historyExists()) {
                 storage.createFile();

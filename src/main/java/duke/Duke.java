@@ -58,6 +58,11 @@ public class Duke {
         storage.writeTasks(taskList);
     }
 
+    /**
+     * Provides duke function upon input.
+     * @param input user command
+     * @return duke response
+     */
     public String getResponse(String input) {
         ui.clear();
         try {

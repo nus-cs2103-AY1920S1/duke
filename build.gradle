@@ -1,7 +1,8 @@
 plugins {
     id 'java'
     id 'application'
-    //id 'checkstyle'
+    id 'checkstyle'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
@@ -10,9 +11,16 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-//checkstyle {
-//    toolVersion = '8.23'
-//}
+checkstyle {
+    toolVersion = '8.23'
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.5.1"
+    archiveClassifier = null
+    archiveAppendix = null
+}
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
@@ -23,7 +31,7 @@ test {
 }
 
 group 'duke'
-version '0.3.4'
+version '0.5.1'
 
 repositories {
     mavenCentral()

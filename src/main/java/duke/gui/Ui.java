@@ -3,6 +3,7 @@ package duke.gui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.TaskType;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,7 @@ public class Ui {
             + " /_ /      \\_\\\\___ / |_|  \\_|   |_|   /_ / \\ _\\\n";
     private static final String ADD_MESSAGE = "Got it. I've added this task:";
     private static final String SEARCH_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String REMIND_MESSAGE = "Here are your upcoming tasks. Don't forget them!";
     private static final String DELETE_MESSAGE = "Noted. I've removed this task:";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
@@ -107,6 +109,14 @@ public class Ui {
      */
     public String showSearchList(TaskList searchList) {
         return showToUser(SEARCH_MESSAGE, showTaskList(searchList));
+    }
+
+    public String showRemindList(TaskList remindList, TaskType type) {
+        return showToUser(REMIND_MESSAGE,
+                "",
+                "TASK TYPE: " + type.toString(),
+                "",
+                showTaskList(remindList));
     }
 
     /**

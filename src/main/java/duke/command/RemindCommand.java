@@ -3,20 +3,18 @@ package duke.command;
 import duke.gui.Ui;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.task.TaskType;
 
-/**
- * Represents an instruction to find all tasks with specified keyword.
- */
-public class FindCommand extends Command {
-    private String keyword;
+public class RemindCommand extends Command {
+    private TaskType type;
 
-    public FindCommand(String keyword, boolean isExit) {
+    public RemindCommand(TaskType type, boolean isExit) {
         super(isExit);
-        this.keyword = keyword;
+        this.type = type;
     }
 
     /**
-     * Finds all tasks containing the keyword and lists them.
+     * Shows a reminder of tasks to do in order.
      *
      * @param taskList the TaskList instance Duke is referencing.
      * @param ui the Ui instance handling user-facing interaction.
@@ -25,10 +23,9 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
-        // create a new task list with results containing the keyword.
-        TaskList searchList = taskList.find(keyword);
-        // inform the user of matching queries (if any)
-        String response = ui.showSearchList(searchList);
+        // create a new task list filtered to a specific task.
+        TaskList remindList = taskList.filter(type);
+        String response = ui.showRemindList(remindList, type);
         return new CommandResponse(response, super.isExit());
     }
 }

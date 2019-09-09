@@ -1,8 +1,16 @@
 package duke.task;
 
+import duke.Parser;
 import duke.exception.DukeIndexOutOfBoundsException;
 
+import java.lang.reflect.Array;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
+import static duke.task.TaskType.*;
 
 /**
  * Represents a list of tasks in Duke.
@@ -70,6 +78,102 @@ public class TaskList {
             }
         }
         return newList;
+    }
+
+    /**
+     * Gets an ordered task list filtered to specific task type.
+     *
+     * @param type the task type to filter by.
+     * @return the filtered, ordered tasklist.
+     */
+    public TaskList filter(TaskType type) {
+        TaskList newList = new TaskList();
+        for (Task task: this.getTaskList()) {
+            if (task == null
+                || type == DEADLINE && !(task instanceof Deadline)
+                || type == EVENT && !(task instanceof Event)
+                || type == TODO && !(task instanceof Todo)) {
+                continue;
+            }
+            newList.add(task);
+        }
+        // have the null value stay at 0-index to maintain 1-indexing
+        newList.tasks = sortByType(newList.getTaskList(), type);
+        return newList;
+    }
+
+    private ArrayList<Task> sortByType(ArrayList<Task> list, TaskType type) {
+        switch (type) {
+        case EVENT:
+            return sortEvents(list);
+        case DEADLINE:
+            return sortDeadlines(list);
+        case ALL:
+            // sort by deadlines first, then
+            ArrayList<Task> deadlineList = new ArrayList<>();
+            ArrayList<Task> eventList = new ArrayList<>();
+            ArrayList<Task> todoList = new ArrayList<>();
+            for (Task t: list) {
+                // account for 1-indexing where null is at 0th index
+                if (t != null) {
+                    if (t instanceof Deadline) {
+                        deadlineList.add(t);
+                    } else if (t instanceof Event) {
+                        eventList.add(t);
+                    } else if (t instanceof Todo) {
+                        todoList.add(t);
+                    }
+                }
+            }
+            // we don't sort to-dos at all
+            ArrayList<Task> sortedDeadlineList = sortDeadlines(deadlineList);
+            ArrayList<Task> sortedEventList = sortEvents(eventList);
+            // add deadlines first, then events, then todos
+            ArrayList<Task> newList = new ArrayList<>();
+            newList.add(null);
+            newList.addAll(sortedDeadlineList);
+            newList.addAll(sortedEventList);
+            newList.addAll(todoList);
+            return newList; // have list point at the updated list
+        case TODO:
+            break;
+        }
+        return list;
+    }
+
+    private ArrayList<Task> sortDeadlines(ArrayList<Task> list) {
+        list.sort((d1, d2) -> {
+            if (d1 == null && d2 == null) {
+                return 0;
+            }
+            if (d1 == null) {
+                return -1;
+            }
+            if (d2 == null) {
+                return 1;
+            }
+            ZonedDateTime date1 = Parser.parseDateTime(((Deadline) d1).getDeadline(), DEADLINE);
+            ZonedDateTime date2 = Parser.parseDateTime(((Deadline) d2).getDeadline(), DEADLINE);
+            return date1.compareTo(date2);
+        });
+        return list;
+    }
+
+    private ArrayList<Task> sortEvents(ArrayList<Task> list) {
+        // account for task lists being 1-indexed, with null in index 0
+        list.sort((e1, e2) -> {
+            if (e1 == null && e2 == null) {
+                return 0;
+            }
+            if (e1 == null) {
+                return -1;
+            }
+            if (e2 == null) {
+                return 1;
+            }
+            return ((Event) e1).getPeriod().compareTo(((Event) e2).getPeriod());
+        });
+        return list;
     }
 
     /**

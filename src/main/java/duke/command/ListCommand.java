@@ -18,6 +18,7 @@ public class ListCommand extends Command {
      * @param taskList the TaskList instance Duke is referencing.
      * @param ui the Ui instance handling user-facing interaction.
      * @param storage the Storage instance dealing with hard disk reading/writing.
+     * @return the response containing the response and boolean flag to exit the program.
      */
     @Override
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {

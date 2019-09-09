@@ -37,6 +37,7 @@ public class TaskList {
      * @return Task object which is located at index i.
      */
     public Task getTask(int i) {
+        assert i >= 0 : "Task index should be >= 0";
         return getArrayList().get(i);
     }
 
@@ -55,6 +56,7 @@ public class TaskList {
      * @param i Integer index of where the Task object (to be deleted) is in.
      */
     public void deleteTask(int i) {
+        assert i >= 0 : "Task index should be >= 0";
         getArrayList().remove(i);
     }
 

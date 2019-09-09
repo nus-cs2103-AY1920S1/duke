@@ -41,6 +41,7 @@ public class Task {
      * @return String containing the task description.
      */
     public String getTaskName() {
+        assert this.description.isEmpty() : "Empty description should be handled by Duke Exception during input";
         return this.description;
     }
 

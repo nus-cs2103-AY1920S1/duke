@@ -46,9 +46,7 @@ public class DoneCommand extends Command {
 
         storage.updateText(taskNum);
         storage.updateText(taskNum);
-        return("Nice! I've marked this task as done: \n" + updatedTask);
-
-
+        return ("Nice! I've marked this task as done: \n" + updatedTask);
 
 
     }

@@ -77,46 +77,35 @@ public class AddCommand extends Command {
      * @throws DukeException IOException if there is an error writing or reading file.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-
         storage.appendToFile(this.type, this.deadline, this.description);
-
         Task newTask = null;
 
         switch (this.type) {
         case ("D"):
-
             newTask = new Deadline(this.description, this.deadline);
             break;
-
         case ("E"):
 
             newTask = new Event(this.description, this.deadline);
             break;
-
-        case("T"):
+        case ("T"):
             newTask = new Todo(this.description);
             break;
-
         default:
             throw new AssertionError("Invalid task type");
-
-
         }
 
         int oldSize = taskList.size();
 
-
         taskList.addTask(newTask);
-
         int numTask = taskList.size();
 
         //Assert that size of taskList increased by 1
         assert numTask == oldSize + 1 : "Task is not added to task list";
 
-        return("Got it. I've added this task: \n" + "  "
+        return ("Got it. I've added this task: \n" + "  "
                 + newTask + "Now you have "
                 + numTask + " tasks in the list.");
-
     }
 
 

@@ -45,10 +45,30 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+
+        //Gaurd clause
+        if (response.contains("Bye")) {
+            System.exit(0);
+        }
+
+        //Create and add 2 dialog box (one belonging to user, one belonging to duke) to dialogContainer(VBox)
+        addDialogBoxes(input, response);
+
+        //Set preferred height of dialogContainer(VBox)
+        setVBoxHeight();
+
+
+    }
+
+    private void addDialogBoxes(String input, String response) {
+
         DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
         DialogBox dukeDialog = DialogBox.getDukeDialog(response, dukeImage);
         dialogContainer.getChildren().addAll(userDialog, dukeDialog);
 
+    }
+
+    private void setVBoxHeight() {
         double height = 0.0;
 
         //Change the total height of the VBox according to the individual height of elements
@@ -63,14 +83,10 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.setPrefHeight(height);
         userInput.clear();
-
-        if (response.contains("Bye")) {
-            System.exit(0);
-        }
     }
 
 
-    public void setFirstDialog(Duke duke){
+    public void setFirstDialog(Duke duke) {
         this.setDuke(duke);
         Ui ui = new Ui();
         DialogBox welcomeDialog = DialogBox.createDialog(ui.showWelcome(), dukeImage);

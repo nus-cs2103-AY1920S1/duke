@@ -38,6 +38,14 @@ public class Storage {
      */
     private File textFile;
 
+    private static final int COMMAND_IND = 0;
+    private static final int DONE_STATUS_IND = 1;
+    private static final int DESCRIPTION_IND = 1;
+    private static final int TIME_IND = 1;
+
+    private static final int STATUS_DONE = 1;
+    private static final int STATUS_NOT_DONE = 1;
+
     /**
      * Initialises a new Storage object.
      *
@@ -63,16 +71,20 @@ public class Storage {
             List<String> lines = Files.readAllLines(path);
             ArrayList<Task> tasks = new ArrayList<>();
 
+            initialiseTasks(tasks, lines);
 
-            for (String line : lines) {
-                tasks.add(this.lineToTask(line));
-
-
-            }
 
             return tasks;
         } catch (IOException e) {
             throw new DukeException();
+        }
+    }
+
+    private void initialiseTasks(ArrayList<Task> tasks, List<String> lines) {
+        for (String line : lines) {
+            tasks.add(this.lineToTask(line));
+
+
         }
     }
 
@@ -86,22 +98,23 @@ public class Storage {
     public Task lineToTask(String line) {
         String[] lineArray = line.split("\\|");
 
-        switch (lineArray[0].trim()) {
+        switch (lineArray[COMMAND_IND].trim()) {
         case "T":
             //return a new toDo task with "whether it is done" and description
-            return new Todo(lineArray[1], lineArray[2].trim());
+            return new Todo(lineArray[DONE_STATUS_IND], lineArray[DESCRIPTION_IND].trim());
 
         case "E":
             //return a new toDo task with "whether it is done" and description and event time
-            return new Event(lineArray[1], lineArray[2], lineArray[3]);
+            return new Event(lineArray[DONE_STATUS_IND], lineArray[DESCRIPTION_IND], lineArray[TIME_IND]);
 
         case "D":
             //return a new deadline task with "whether it is done" and description and deadline
-            return new Deadline(lineArray[1], lineArray[2], lineArray[3]);
+            return new Deadline(lineArray[DONE_STATUS_IND], lineArray[DESCRIPTION_IND], lineArray[TIME_IND]);
 
         default:
             assert false : "text line from text file is not a valid task";
             return null;
+
         }
     }
 
@@ -134,9 +147,9 @@ public class Storage {
     public void appendToFile(String type, Date date, String desc) throws DukeException {
 
         if (date == null) {
-            writeToFile(type + " | 1 | " + desc + "\n");
+            writeToFile(type + " | " + STATUS_NOT_DONE + " | " + desc + "\n");
         } else {
-            writeToFile(type + " | 1 | " + desc + " | " + date + "\n");
+            writeToFile(type + " | " + STATUS_DONE + " | " + desc + " | " + date + "\n");
         }
     }
 
@@ -151,10 +164,13 @@ public class Storage {
         try {
             int lineNumber = taskNum - 1;
             Path path = Paths.get(filePath);
+
             //read all the line in the files
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             String oldText = lines.get(lineNumber);
-            lines.set(lineNumber, oldText.substring(0, 3) + " 0 " + oldText.substring(6, oldText.length()));
+
+            lines.set(lineNumber, oldText.substring(0, 3) + " " + STATUS_DONE + " " + oldText.substring(6, oldText.length()));
+
             Files.write(path, lines, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new DukeException();
@@ -171,10 +187,13 @@ public class Storage {
         try {
             int lineNumber = taskNum - 1;
             Path path = Paths.get(filePath);
+
             //read all the line in the files
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
             lines.remove(lineNumber);
             Files.write(path, lines, StandardCharsets.UTF_8);
+
         } catch (IOException e) {
             throw new DukeException();
         }

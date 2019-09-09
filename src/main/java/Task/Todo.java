@@ -1,5 +1,7 @@
 package Task;
 
+import Exceptions.MissingInputException;
+
 public class Todo extends Task {
 
     /**
@@ -9,7 +11,7 @@ public class Todo extends Task {
      * @param type String indicates task type, in this case "T".
      * @param done boolean indicates whether the task is done.
      */
-    public Todo(int num, String task, String type, boolean done) {
+    public Todo(int num, String task, String type, boolean done) throws MissingInputException {
         super(num, task, type, done);
     }
 
@@ -20,7 +22,7 @@ public class Todo extends Task {
      * @param type String indicates task type, in this case "T".
 
      */
-    public Todo(int num, String task, String type) {
+    public Todo(int num, String task, String type) throws MissingInputException {
         super(num, task, type);
     }
 
@@ -30,7 +32,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", done ? "✓" : "✗",task);
+        return String.format("[T][%s] %s", done ? "DONE" : "NOT DONE",task);
     }
 
     /**

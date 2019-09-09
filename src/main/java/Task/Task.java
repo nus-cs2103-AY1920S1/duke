@@ -1,5 +1,7 @@
 package Task;
 
+import Exceptions.MissingInputException;
+
 public abstract class Task {
 
     boolean done;
@@ -14,11 +16,14 @@ public abstract class Task {
      * @param type Task type (can be Todo, Event or Deadline).
      * @param done Indicates whether task is done.
      */
-    Task(int num, String task, String type, boolean done) {
+    Task(int num, String task, String type, boolean done) throws MissingInputException {
         this.no = num;
         this.done = done;
         this.task = task;
         this.type = type;
+        if (task.length() < 1) {
+            throw new MissingInputException(type);
+        }
     }
 
     /**
@@ -28,11 +33,14 @@ public abstract class Task {
      * @param task Task description
      * @param type Task type (can be Todo, Event or Deadline).
      */
-    Task(int num, String task, String type) {
+    Task(int num, String task, String type) throws MissingInputException {
         this.no = num;
         this.done = false;
         this.task = task;
         this.type = type;
+        if (task.length() < 1) {
+            throw new MissingInputException(type);
+        }
     }
 
     /**

@@ -2,7 +2,7 @@ package Exceptions;
 
 public class MissingInputException extends DukeException {
 
-    private String message = "☹ OOPS!!! ";
+    private String message = "OOPS!!! ";
 
     /**
      * Creates MissingInputException when input is not complete for program to process.
@@ -17,7 +17,7 @@ public class MissingInputException extends DukeException {
      * @return error message.
      */
     @Override
-    public String errorMessage() {
+    public String getErrorMessage() {
         message += String.format("The description of a %s cannot be empty.", taskType);
         return message;
     }

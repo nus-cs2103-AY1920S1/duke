@@ -14,6 +14,10 @@ public class MessageGenerator {
      */
     public MessageGenerator() {}
 
+    private String line() {
+        return "_______________________________________________________\n";
+    }
+
     /**
      * @return String for header of task list.
      */
@@ -83,52 +87,76 @@ public class MessageGenerator {
     }
 
     /**
-     * Prints the program response when a task is removed.
+     * Returns the program response when a task is removed.
+     *
      * @param task Task that is to be removed.
      * @param n Number tagged to task.
      */
-    public void printRemove(Task task, int n) {
-        formatter.printFormat(removeTask(), formatTask(task), numTask(n));
+    public String getRemoveMessage(Task task, int n) {
+        String s = "";
+        s += line();
+        s += formatter.appendStrings(removeTask(), formatTask(task), numTask(n));
+        s += line();
+        return s;
     }
 
     /**
-     * Prints the program when tasks are added.
      * @param task Task that is to be added.
      * @param n Number tagged to task.
+     * @return String that contains the task added.
      */
-    public void printAdd(Task task, int n) {
-        formatter.printFormat(addTask(), formatTask(task), numTask(n));
+    public String getAddMessage(Task task, int n) {
+        String s = "";
+        s += line();
+        s += formatter.appendStrings(addTask(), formatTask(task), numTask(n));
+        s += line();
+        return s;
     }
 
     /**
-     * Prints the program response when a task is set as done.
+     * Returns the program response when a task is set as done.
+     *
      * @param task Task that is set as done.
      */
-    public void printDone(Task task) {
-        formatter.printFormat(markDone(), formatTask(task));
+    public String getDoneMessage(Task task) {
+        String s = "";
+        s += line();
+        s += formatter.appendStrings(markDone(), formatTask(task));
+        s += line();
+        return s;
     }
 
     /**
      * Prints the program response when user asks for list of tasks.
      * @param list List of tasks in their string form.
      */
-    public void printList(List<String> list) {
-        formatter.printFormat(listTasks(), list);
+    public String getList(List<String> list) {
+        String s = line();
+        s += formatter.appendStrings(formatter.format(listTasks()), list);
+        s += line();
+        return s;
     }
 
     /**
      * Prints matching tasks in a task list.
      * @param list list of tasks in their string form.
      */
-    public void printMatchingList(List<String> list) {
-        formatter.printFormat(matchingTasks(), list);
+    public String getMatchingList(List<String> list) {
+        String s = "";
+        s += line();
+        s += formatter.appendStrings(formatter.format(matchingTasks()), list);
+        s += line();
+        return s;
     }
 
     /**
      * Prints welcome message when program begins.
      */
-    public void greet() {
-        formatter.printFormat(greeting());
+    public String greet() {
+        String s = line();
+        s += formatter.format(greeting());
+        s += line();
+        return s;
     }
 
     /**

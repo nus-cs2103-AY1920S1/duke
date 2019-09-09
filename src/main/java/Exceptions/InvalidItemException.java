@@ -2,7 +2,7 @@ package Exceptions;
 
 public class InvalidItemException extends DukeException {
 
-    private String message = "☹ OOPS!!! ";
+    private String message = "OOPS!!! ";
 
     /**
      * Creates InvalidItemException when an invalid list item is given.
@@ -14,7 +14,7 @@ public class InvalidItemException extends DukeException {
      * @return error message.
      */
     @Override
-    public String errorMessage() {
+    public String getErrorMessage() {
         message += "This item does not exist on the list";
         return message;
     }

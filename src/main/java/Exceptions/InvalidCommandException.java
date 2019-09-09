@@ -2,7 +2,7 @@ package Exceptions;
 
 public class InvalidCommandException extends DukeException {
 
-    private String message = "☹ OOPS!!! ";
+    private String message = "OOPS!!! ";
 
     /**
      * Creates InvalidCommandException when commands that are not understood by program are given.
@@ -14,7 +14,13 @@ public class InvalidCommandException extends DukeException {
      * @return error message.
      */
     @Override
-    String errorMessage() {
+    public String getErrorMessage() {
+        this.message += "I'm sorry, but I don't know what that means :-(";
+        return this.message;
+    }
+
+    @Override
+    public String toString() {
         this.message += "I'm sorry, but I don't know what that means :-(";
         return this.message;
     }

@@ -16,7 +16,6 @@ public class TaskList {
      * Creates task list and adds a placeholder value for easier tracking.
      */
     public TaskList() {
-        //placeholder value in task
         taskList.add(null);
     }
 
@@ -32,9 +31,9 @@ public class TaskList {
      * Prints message when task is added via user input.
      * @param task task to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         taskList.add(task);
-        msgGenerator.printAdd(task, noTasks());
+        return msgGenerator.getAddMessage(task, noTasks());
     }
 
     /**
@@ -50,9 +49,10 @@ public class TaskList {
      * Prints message when task is removed.
      * @param taskNo identification number of task in list.
      */
-    private void removeTask(int taskNo) {
-        msgGenerator.printRemove(taskList.get(taskNo), noTasks()-1);
+    private String removeTask(int taskNo) {
+        Task deleted = taskList.get(taskNo);
         taskList.remove(taskNo);
+        return msgGenerator.getRemoveMessage(deleted, noTasks());
     }
 
     /**
@@ -79,8 +79,8 @@ public class TaskList {
     /**
      * Prints list of tasks using the message generator.
      */
-    public void printList() {
-        msgGenerator.printList(listify(this.taskList));
+    public String getList() {
+        return msgGenerator.getList(listify(this.taskList));
     }
 
     /**
@@ -93,33 +93,38 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done.
+     * Marks a task as done and returns the done message.
+     *
      * @param taskNo identification number for task.
+     * @return done message.
      */
-    public void setDone(int taskNo) {
+    public String setDone(int taskNo) {
         try {
             if (invalidTaskNo(taskNo)) {
                 throw new InvalidItemException();
             }
             taskList.get(taskNo).setDone();
-            msgGenerator.printDone(taskList.get(taskNo));
+            return msgGenerator.getDoneMessage(taskList.get(taskNo));
         } catch (DukeException e) {
-            e.printError();
+            return e.getErrorMessage();
         }
     }
 
     /**
      * Deletes task with given identification number.
+     *
      * @param taskNo identification number for task.
+     * @return String with delete message.
      */
-    public void deleteTask(int taskNo) {
+    public String deleteTask(int taskNo) {
         try {
             if (invalidTaskNo(taskNo)) {
                 throw new InvalidItemException();
             }
-            removeTask(taskNo);
+            assert taskList.contains(taskList.get(taskNo));
+            return removeTask(taskNo);
         } catch (DukeException e) {
-            e.printError();
+            return e.getErrorMessage();
         }
     }
 
@@ -127,14 +132,14 @@ public class TaskList {
      * Searches and prints matching tasks in task list.
      * @param keyword word that task must contain to be printed.
      */
-    public void findMatchingTasks(String keyword) {
+    public String findMatchingTasks(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task: taskList) {
             if (task != null && task.getTaskInfo().contains(keyword)) {
                 matchingTasks.add(task);
             }
         }
-        msgGenerator.printMatchingList(listify(matchingTasks));
+        return msgGenerator.getMatchingList(listify(matchingTasks));
     }
 
 }

@@ -25,6 +25,7 @@ public class Duke {
      * @return String of message.
      */
     public String getResponse(String input) {
+        System.out.println("inside get response");
         return run(input);
     }
 
@@ -66,5 +67,13 @@ public class Duke {
             tasks = new TaskList();
             expenses = new ExpenseList();
         }
+    }
+
+    public void loadEmptyLists() {
+        ui = new Ui();
+        storage = new Storage("data/dukeTutorial.txt");
+        expenseStorage = new Storage("data/expensesTutorial.txt");
+        tasks = new TaskList();
+        expenses = new ExpenseList();
     }
 }

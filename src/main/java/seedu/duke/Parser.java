@@ -271,9 +271,15 @@ public class Parser {
             return new ExpenseCommand(command);
         } else if (Parser.isEListCommand(command)) {
             return new EListCommand(command);
+        } else if (Parser.isTutorialCommand(command)) {
+            return new TutorialCommand();
         }  else {
             throw new DukeException(ui.noSuchCommand());
         }
+    }
+
+    public static boolean isTutorialCommand(String command) {
+        return command.equals("tutorial");
     }
 
     /**

@@ -19,6 +19,7 @@ import java.util.Scanner;
  * A class dealing with storage.
  */
 public class Storage {
+    private static final String doneString = "1";
     private String filePath;
 
     /**
@@ -56,7 +57,7 @@ public class Storage {
                 default:
                     continue;
                 }
-                if (str[1].equals("1")) {
+                if (str[1].equals(doneString)) {
                     task.setDone();
                 }
                 list.add(task);

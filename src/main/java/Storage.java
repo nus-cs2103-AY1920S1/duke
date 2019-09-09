@@ -33,6 +33,7 @@ public class Storage {
      * @param dir Directory of the save file.
      */
     public Storage(String dir) {
+        assert dir == null;
         directory = dir;
     }
 

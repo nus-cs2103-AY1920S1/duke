@@ -1,6 +1,7 @@
 package UI;
 
 import Data.Command;
+import Data.CommandType;
 import Data.Parser;
 import Data.Storage;
 import Exceptions.InvalidCommandException;
@@ -45,7 +46,7 @@ public class UI {
     /**
      * Processes file in storage and adds tasks to program.
      */
-    public void processFile() {
+    public void processFile() throws MissingInputException {
         for (Task task: storage.loadTasks().getTaskList()) {
             tasks.loadTask(task);
         }
@@ -55,7 +56,7 @@ public class UI {
      * Processes input from the Command Line made by user.
      * This makes changes to the program's task list and file.
      */
-    public void processInput() throws InvalidCommandException, InvalidInputException {
+    public void processInput() {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             processCommand(parser.process(line));
@@ -63,42 +64,42 @@ public class UI {
     }
 
     /**
+     *
+     */
+    public String processInput(String input) throws IOException {
+        String output = processCommand(parser.process(input));
+        storage.updateTaskList(tasks);
+        return output;
+    }
+
+
+    /**
      * Intermediate method to process command.
      * This updates and writes the file.
      * @param command command created from parser.
      */
-    private void processCommand(Command command) throws InvalidInputException{
-            try {
+    private String processCommand(Command command) {
+           try {
                 switch (command.type) {
                 case EXIT:
                     exit();
-                    break;
+                    return "Bye!";
                 case PRINTLIST:
-                    tasks.printList();
-                    break;
+                    return tasks.getList();
                 case ADD:
-                    tasks.addTask(parser.createTask(command));
-                    break;
+                    return tasks.addTask(parser.createTask(command));
                 case DELETE:
-                    tasks.deleteTask(parser.getTaskNo(command));
-                    break;
+                    return tasks.deleteTask(parser.getTaskNo(command));
                 case DONE:
-                    tasks.setDone(parser.getTaskNo(command));
-                    break;
+                    return tasks.setDone(parser.getTaskNo(command));
                 case FIND:
-                    tasks.findMatchingTasks(parser.getKeyword(command));
-                    break;
+                    return tasks.findMatchingTasks(parser.getKeyword(command));
                 default:
+                    assert command.type.equals(CommandType.INVALID); //cases should always fall up to Invalid case.
                     throw new InvalidCommandException();
                 }
-            } catch (InvalidCommandException| MissingInputException e) {
-                e.printError();
+            } catch (InvalidCommandException | InvalidInputException | MissingInputException e) {
+                return e.getErrorMessage();
             }
-            try {
-                storage.updateTaskList(tasks);
-            } catch (IOException e) {
-                System.out.println("Something went wrong!");
-            }
-
         }
     }

@@ -1,21 +1,19 @@
 package Data;
 
 import Exceptions.InvalidInputException;
+import Exceptions.MissingInputException;
 import Task.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
 
     private Scanner sc;
     private String filePath;
-    List<String> inputs = new ArrayList<>();
     private TaskList tasks = new TaskList();
     private File f;
 
@@ -39,7 +37,7 @@ public class Storage {
      * Loads tasks from file into the program.
      * @return TaskList that will be used in the program for further modifications by user.
      */
-    public TaskList loadTasks() {
+    public TaskList loadTasks() throws MissingInputException {
         int counter = 0;
         try {
             sc = new Scanner(f);
@@ -47,10 +45,10 @@ public class Storage {
                 String task = sc.nextLine();
                 String[] details = task.split(" \\| ");
                 int num = Integer.parseInt(details[1]);
-                boolean done = false;
+                boolean done;
                 done = (num == 1);
-                Date date = null;
-                Time time = null;
+                Date date;
+                Time time;
                 counter++;
                 try {
                     switch (details[0]) {
@@ -82,6 +80,7 @@ public class Storage {
 
     /**
      * Writes formatted task list into file.
+     *
      * @param tasks Task list that has been processed and updated.
      * @throws IOException when there are input problems.
      */

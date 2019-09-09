@@ -4,7 +4,6 @@ import Data.Formatter;
 
 public abstract class DukeException extends Exception {
     Formatter formatter = new Formatter();
-    String message = "☹ OOPS!!! ";
     String taskType;
 
     /**
@@ -24,12 +23,12 @@ public abstract class DukeException extends Exception {
      * Creates String for error message.
      * @return error message.
      */
-    abstract String errorMessage();
+    public abstract String getErrorMessage();
 
     /**
      * Prints formatted error message.
      */
     public void printError() {
-        formatter.printFormat(errorMessage());
+        formatter.printFormat(getErrorMessage());
     }
 }

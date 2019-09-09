@@ -14,7 +14,7 @@ public class Formatter {
      * @param s String to be printed.
      * @return String that has additional indentation.
      */
-    private String format(String s) {
+    public String format(String s) {
         return "     " + s;
     }
 
@@ -24,6 +24,35 @@ public class Formatter {
     private void printLine() {
         System.out.println("    ____________________________________________________________");
     }
+
+
+    /**
+     * @return Appended string with new line for each element (varargs version).
+     */
+    public String appendStrings(String... strings) {
+        String s = "";
+        for (String string: strings) {
+            if (!string.equals("")) {
+                s += format(string) + "\n";
+            }
+        }
+        return s;
+    }
+
+    /**
+     * @return Appended string with new line for each element.
+     */
+    public String appendStrings(String s, List<String> list) {
+        String newString = "";
+        newString += s + "\n";
+        int count = 1;
+        for (String string: list) {
+            newString += format(String.format("%d. %s", count, string)) + "\n";
+            count++;
+        }
+       return newString;
+    }
+
 
     /**
      * Prints strings in their respective lines with format.
@@ -38,40 +67,5 @@ public class Formatter {
         printLine();
     }
 
-    /**
-     * Prints strings in their respective lines with format.
-     * @param strings variable number of strings to be printed line by line.
-     */
-    public void printFormat(String... strings) {
-        printLine();
-        for (String string: strings) {
-            System.out.println(format(string));
-        }
-        printLine();
-    }
 
-    /**
-     * Prints strings in list form for the list command.
-     * @param strings list of Strings to be printed in the stipulated list format.
-     */
-    private void printFormat(List<String> strings) {
-        int count = 1;
-        for (String string: strings) {
-            if (string != null) {
-                System.out.println(format(String.format("%d. %s", count, string)));
-                count++;
-            }
-        }
-    }
-
-    /**
-     * Prints strings in their respective lines with format.
-     * @param list list of Strings to be printed line by line.
-     */
-    public void printFormat(String s, List<String> list) {
-        printLine();
-        System.out.println(format(s));
-        printFormat(list);
-        printLine();
-    }
 }

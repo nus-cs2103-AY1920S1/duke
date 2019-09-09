@@ -1,5 +1,7 @@
 package Task;
 
+import Exceptions.MissingInputException;
+
 public class Deadline extends Task {
 
     private Date date;
@@ -14,10 +16,13 @@ public class Deadline extends Task {
      * @param type String indicates task type, in this case "D".
      * @param done boolean indicates whether the task is done.
      */
-    public Deadline(int num, String task, Date date, Time time, String type, boolean done) {
+    public Deadline(int num, String task, Date date, Time time, String type, boolean done) throws MissingInputException {
         super(num, task, type, done);
         this.date = date;
         this.time = time;
+        if (date==null || time == null) {
+            throw new MissingInputException(type);
+        }
     }
     /**
      * Creates Deadline (also a Task).
@@ -28,10 +33,13 @@ public class Deadline extends Task {
      * @param time Time at which deadline occurs.
      * @param type String indicates task type, in this case "D".
      */
-    public Deadline(int num, String task, Date date, Time time, String type) {
+    public Deadline(int num, String task, Date date, Time time, String type) throws MissingInputException {
         super(num, task, type);
         this.date = date;
         this.time = time;
+        if (date==null || time == null) {
+            throw new MissingInputException(type);
+        }
     }
 
     /**
@@ -40,7 +48,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s %s)", done ? "✓" : "✗",task, date, time);
+        return String.format("[D][%s] %s (by: %s %s)", done ? "DONE" : "NOT DONE",task, date, time);
     }
 
     /**

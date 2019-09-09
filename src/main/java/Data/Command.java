@@ -6,12 +6,8 @@ public class Command {
     public CommandType type;
 
     /**
-     * Constructs a Command.
-     */
-    Command() {};
-
-    /**
      * Constructor a Command.
+     *
      * @param type type of command.
      */
     Command(CommandType type) {
@@ -20,6 +16,7 @@ public class Command {
 
     /**
      * Constructor a Command.
+     *
      * @param type type of command.
      * @param description description for task related to given command.
      */
@@ -30,6 +27,7 @@ public class Command {
 
     /**
      * Retrieves description of task given in command.
+     *
      * @return String with task description.
      */
     String getDescription() {

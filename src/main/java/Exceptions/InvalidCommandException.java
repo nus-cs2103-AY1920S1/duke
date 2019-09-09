@@ -1,5 +1,7 @@
 package Exceptions;
 
+import UI.MessageGenerator;
+
 public class InvalidCommandException extends DukeException {
 
     private String message = "OOPS!!! ";
@@ -16,7 +18,7 @@ public class InvalidCommandException extends DukeException {
     @Override
     public String getErrorMessage() {
         this.message += "I'm sorry, but I don't know what that means :-(";
-        return this.message;
+        return msg.getLinedMessage(this.message);
     }
 
     @Override

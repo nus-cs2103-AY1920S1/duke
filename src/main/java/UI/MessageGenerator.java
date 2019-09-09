@@ -64,7 +64,9 @@ public class MessageGenerator {
      * @return String to greet user.
      */
     private String greeting() {
-        return "Hello I'm Duke\n" + "What can I do for you?";
+        String s = formatter.format("Hello I'm Pan Pan!\n");
+        s += formatter.format("What can I do for you?\n");
+        return s;
     }
 
     /**
@@ -76,6 +78,7 @@ public class MessageGenerator {
 
     /**
      * Formats task with proper indentations.
+     *
      * @return String for formatted task.
      */
     private String formatTask(Task task) {
@@ -84,6 +87,20 @@ public class MessageGenerator {
         } else {
             return "  " + task.toString();
         }
+    }
+
+    /**
+     * Returns a message with lined formatting.
+     *
+     * @param message that should be formatted.
+     * @return formatted string for printing/output.
+     */
+    public String getLinedMessage(String message) {
+        String s = "";
+        s += line();
+        s += formatter.format(message) + "\n";
+        s += line();
+        return s;
     }
 
     /**
@@ -117,10 +134,10 @@ public class MessageGenerator {
      * Returns the program response when a task is set as done.
      *
      * @param task Task that is set as done.
+     * @return String to indicate task is marked as done.
      */
     public String getDoneMessage(Task task) {
-        String s = "";
-        s += line();
+        String s = line();
         s += formatter.appendStrings(markDone(), formatTask(task));
         s += line();
         return s;
@@ -128,7 +145,9 @@ public class MessageGenerator {
 
     /**
      * Prints the program response when user asks for list of tasks.
+     *
      * @param list List of tasks in their string form.
+     * @return String in lined
      */
     public String getList(List<String> list) {
         String s = line();
@@ -139,6 +158,7 @@ public class MessageGenerator {
 
     /**
      * Prints matching tasks in a task list.
+     *
      * @param list list of tasks in their string form.
      */
     public String getMatchingList(List<String> list) {

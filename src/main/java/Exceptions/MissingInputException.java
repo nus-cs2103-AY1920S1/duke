@@ -19,7 +19,7 @@ public class MissingInputException extends DukeException {
     @Override
     public String getErrorMessage() {
         message += String.format("The description of a %s cannot be empty.", taskType);
-        return message;
+        return msg.getLinedMessage(message);
     }
 
 }

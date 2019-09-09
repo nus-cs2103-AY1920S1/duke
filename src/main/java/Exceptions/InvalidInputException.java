@@ -11,6 +11,6 @@ public class InvalidInputException extends DukeException {
     @Override
     public String getErrorMessage() {
         message += "Date and time should be written in DD/MM/YYYY HH:MM format!";
-        return message;
+        return msg.getLinedMessage(message);
     }
 }

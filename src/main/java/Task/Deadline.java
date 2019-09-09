@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Creates Deadline (also a Task).
+     *
      * @param num Number in the list.
      * @param task String indicates description of task.
      * @param date Date at which deadline occurs.
@@ -27,6 +28,7 @@ public class Deadline extends Task {
     /**
      * Creates Deadline (also a Task).
      * Done status is set as not done by default.
+     *
      * @param num Number in the list.
      * @param task String indicates description of task.
      * @param date Date at which deadline occurs.
@@ -44,6 +46,7 @@ public class Deadline extends Task {
 
     /**
      * Formats the deadline for printing.
+     *
      * @return String in the form for printing
      */
     @Override
@@ -53,6 +56,7 @@ public class Deadline extends Task {
 
     /**
      * Formats the deadline for writing in the text file.
+     *
      * @return String in the form writing in text file.
      */
     @Override

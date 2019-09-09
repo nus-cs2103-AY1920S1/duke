@@ -1,2 +1,0 @@
-T | 0 | get waffles from yih
-D | 0 | go to jason's classroom | 09/09/2019 1600

@@ -11,6 +11,7 @@ public abstract class Task {
 
     /**
      * Creates Task with an item number, task description, task type and done status.
+     *
      * @param num Task number in the list.
      * @param task Task description
      * @param type Task type (can be Todo, Event or Deadline).
@@ -28,6 +29,7 @@ public abstract class Task {
 
     /**
      * Creates Task with an item number, task description, task type and done status.
+     *
      * Done status is set as not done by default.
      * @param num Task number in the list.
      * @param task Task description
@@ -59,6 +61,7 @@ public abstract class Task {
 
     /**
      * Formats task to be written in given file.
+     *
      * @return formatted string for writing in file.
      */
     public abstract String fileFormat();

@@ -11,6 +11,7 @@ public class Formatter {
 
     /**
      * Adds 4 spaces for indentation for printing.
+     *
      * @param s String to be printed.
      * @return String that has additional indentation.
      */

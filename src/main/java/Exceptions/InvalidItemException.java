@@ -16,7 +16,7 @@ public class InvalidItemException extends DukeException {
     @Override
     public String getErrorMessage() {
         message += "This item does not exist on the list";
-        return message;
+        return msg.getLinedMessage(message);
     }
 
 }

@@ -9,6 +9,8 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class TaskList {
     private ArrayList<Task> taskList;
@@ -39,11 +41,9 @@ public class TaskList {
             return "You have no tasks in your list!";
         }
         String result = "Here are the tasks in your list:\n";
-        for (Task t : taskList) {
-            String current = t.getIndex() + "." + t + "\n";
-            result += current;
-        }
-        return result;
+        return taskList.stream()
+                       .map(task -> task.getIndex() + "." + task + "\n")
+                       .reduce(result, (a, b) -> a + b);
     }
 
     /**
@@ -80,6 +80,7 @@ public class TaskList {
         index--;
         Task t = taskList.get(index);
         taskList.remove(index);
+        reIndex();
         String result = "Noted. I've removed this task:\n";
         result += t + "\n";
         count -= 1;
@@ -89,6 +90,14 @@ public class TaskList {
             result += "Now you have " + count + " tasks in the list";
         }
         return result;
+    }
+
+    public void reIndex() {
+        int count = 1;
+        for (Task t : taskList) {
+            t.setIndex(count);
+            count++;
+        }
     }
 
     /**
@@ -175,11 +184,9 @@ public class TaskList {
                 parts[i] = createTime(parts[i]);
             }
         }
-        String result = "";
-        for (String part : parts) {
-            result += " " + part;
-        }
-        return result.substring(1);
+        return Arrays.stream(parts)
+                     .reduce("", (a, b) -> a + " " + b)
+                     .substring(1);
     }
 
     /**
@@ -228,20 +235,23 @@ public class TaskList {
             "Nov",
             "Dec"
         };
-        boolean validDate = true;
+        final boolean[] validDate = {true};
         if (parts.length == 3) {
-            for (int i = 0; i < 3; i++) {
-                if (!isInteger(parts[i])) {
-                    validDate = false;
-                } else if (i == 1
-                        && (Integer.parseInt(parts[i]) < 1 || Integer.parseInt(parts[i]) > 12)) {
-                    validDate = false;
-                }
-            }
+            IntStream.rangeClosed(0, 2)
+                     .forEach(i -> {
+                         if (!isInteger(parts[i])) {
+                             validDate[0] = false;
+                         } else if (i == 1 &&
+                                 (Integer.parseInt(parts[i]) < 1 ||
+                                         Integer.parseInt(parts[i]) > 12)) {
+                             validDate[0] = false;
+                         }
+
+                     });
         } else {
-            validDate = false;
+            validDate[0] = false;
         }
-        if (validDate) {
+        if (validDate[0]) {
             if (parts[2].length() == 4) {
                 return parts[0] + " " + month[Integer.parseInt(parts[1])] + " " + parts[2];
             } else {
@@ -287,17 +297,10 @@ public class TaskList {
      * @return String of all tasks containing the search query
      */
     public String findItem(String name) {
-        ArrayList<Task> results = new ArrayList<>();
-        for (Task t : taskList) {
-            if (t.getName().contains(name)) {
-                results.add(t);
-            }
-        }
-        String result = "Here are the matching tasks in your list:\n";
-        for (Task t : results) {
-            String current = t.getIndex() + "." + t + "\n";
-            result += current;
-        }
-        return result;
+        String initial = "Here are the matching tasks in your list:\n";
+        return taskList.stream()
+                .filter(task -> task.getName().contains(name))
+                .map(task -> task.getIndex() + "." + task + "\n")
+                .reduce(initial, (a, b) -> a + b);
     }
 }

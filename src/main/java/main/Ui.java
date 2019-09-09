@@ -95,7 +95,8 @@ public class Ui {
         }
         StringBuilder sb = new StringBuilder();
         for (String msg : messages) {
-            sb.append(BLANKSPACE + msg + "\n");
+            //sb.append(BLANKSPACE + msg + "\n");
+            sb.append(msg + "\n");
         }
         return sb.toString();
     }

@@ -1,6 +1,7 @@
 package command;
 
 import core.Storage;
+import exception.DukeIllegalArgumentException;
 import ui.Ui;
 import task.TaskList;
 
@@ -14,7 +15,7 @@ import task.TaskList;
 public class ListTasksCommand extends Command {
 
     public ListTasksCommand(String commandString) {
-        super(commandString);
+        super(CommandType.LIST_TASKS, commandString);
     }
 
     @Override

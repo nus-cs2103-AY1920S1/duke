@@ -1,6 +1,7 @@
 package command;
 
 import core.Storage;
+import exception.DukeIllegalArgumentException;
 import ui.Ui;
 import exception.DukeIoException;
 import exception.InvalidIndexException;
@@ -18,7 +19,7 @@ public class DoneTaskCommand extends Command {
     private int taskIndex;
 
     public DoneTaskCommand(String commandString, int taskIndex) {
-        super(commandString);
+        super(CommandType.DONE_TASK, commandString);
         this.taskIndex = taskIndex;
     }
 

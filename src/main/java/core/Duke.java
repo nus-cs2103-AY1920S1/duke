@@ -1,7 +1,9 @@
 package core;
 
 import command.Command;
+import command.CommandType;
 import exception.DukeException;
+import exception.DukeIllegalArgumentException;
 import task.TaskList;
 import ui.Cli;
 import ui.Ui;
@@ -29,6 +31,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            loadAliases();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -45,10 +48,25 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            loadAliases();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    private void loadAliases() throws DukeIllegalArgumentException {
+        Command.addAlias(CommandType.ADD_ALIAS, "add-alias", "alias");
+        Command.addAlias(CommandType.ADD_DEADLINE, "deadline", "dead");
+        Command.addAlias(CommandType.ADD_EVENT, "event", "ev");
+        Command.addAlias(CommandType.ADD_TODO, "todo", "td");
+        Command.addAlias(CommandType.DELETE_ALIAS, "delete-alias", "del-alias");
+        Command.addAlias(CommandType.DELETE_TASK, "delete", "del");
+        Command.addAlias(CommandType.DONE_TASK, "done");
+        Command.addAlias(CommandType.EXIT, "bye", "exit", "logout");
+        Command.addAlias(CommandType.FIND_TASK, "find", "search");
+        Command.addAlias(CommandType.LIST_ALIASES, "list-alias", "list-aliases");
+        Command.addAlias(CommandType.LIST_TASKS, "list", "tasks");
     }
 
     /**

@@ -1,24 +1,22 @@
 package command;
 
 import core.Storage;
-import ui.Ui;
+import exception.DukeIllegalArgumentException;
 import exception.DukeIoException;
 import task.Task;
 import task.TaskList;
+import ui.Ui;
 
 /**
- * AddTaskCommand class.
+ * AddEventCommand class.
  *
- * <p>Abstract Command for adding a Task.
+ * <p>Command to add an Event.
  *
  * @author Marcus Ong
  */
-public abstract class AddTaskCommand extends Command {
-    protected Task task;
-
-    public AddTaskCommand(CommandType type, String commandString, Task task) {
-        super(type, commandString);
-        this.task = task;
+public class AddEventCommand extends AddTaskCommand {
+    public AddEventCommand(String commandString, Task task) {
+        super(CommandType.ADD_EVENT, commandString, task);
     }
 
     @Override

@@ -71,6 +71,7 @@ public class Duke {
                 canEnd = command.canEnd();
             } catch (DukeException e) {
                 ui.showLoadingError(e.getMessage());
+                ui.printNonGuiDisplayMsg();
             }
         }
     }

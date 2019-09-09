@@ -43,12 +43,12 @@ public class TaskList {
      * @param keyword the search term
      * @return a task list of all matching tasks
      */
-    public TaskList search(String keyword) {
-        TaskList res = new TaskList();
+    public ArrayList<TaskWithOrder> search(String keyword) {
+        ArrayList<TaskWithOrder> res = new ArrayList<>();
         String queryStr = ".*" + keyword + ".*";
-        for (Task t : list) {
-            if (t.content.matches(queryStr)) {
-                res.add(t);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).content.matches(queryStr)) {
+                res.add(new TaskWithOrder(i, list.get(i)));
             }
         }
         return res;

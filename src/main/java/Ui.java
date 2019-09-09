@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * prints all the messages to console
@@ -68,11 +69,15 @@ public class Ui {
      * 
      * @param matchingTasks
      */
-    public String found(TaskList matchingTasks) {
-        if (matchingTasks.list.size() == 0) {
+    public String found(ArrayList<TaskWithOrder> matchingTasks) {
+        if (matchingTasks.size() == 0) {
             return "oh, fiddlesticks! there are no tasks matching your search!";
         } else {
-            return "Here are the matching tasks in your list:\n" + matchingTasks;
+            String res = "Here are the matching tasks in your list:\n";
+            for (TaskWithOrder t : matchingTasks){
+                res+= t + "\n";
+            }
+            return res;
         }
     }
 }

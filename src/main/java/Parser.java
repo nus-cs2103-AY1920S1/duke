@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Parser {
     public Ui ui = new Ui();
@@ -32,7 +33,7 @@ public class Parser {
             list.get(Integer.parseInt(command.split(" ")[1]) - 1).setAsDone();
             message = ui.done(list, Integer.parseInt(command.split(" ")[1]));
         } else if (command.startsWith("find")) {
-            TaskList matchingTasks = list.search(command.split(" ")[1]);
+            ArrayList<TaskWithOrder> matchingTasks = list.search(command.split(" ")[1]);
             message = ui.found(matchingTasks);
         } else if (command.startsWith("delete")) {
             Task t = list.remove(Integer.parseInt(command.split(" ")[1]));

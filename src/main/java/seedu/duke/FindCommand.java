@@ -17,6 +17,7 @@ public class FindCommand extends Command {
                 list.add(task);
             }
         }
+        assert list.size() <= t.list.size(): "List of found items should be less than or equal to the total list";
         return ui.listMatching(list);
     }
 }

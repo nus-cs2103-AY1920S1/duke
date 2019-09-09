@@ -38,15 +38,4 @@ public class Duke {
         }
     }
 
-    /**
-     * Begins a session of Duke by initialising a Duke object with the filepath to load and store the task list.
-     *
-     * @param args Unused.
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-     */
-
-
-
 }

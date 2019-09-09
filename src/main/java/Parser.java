@@ -8,7 +8,7 @@ public class Parser {
     private String[] inputArr;
 
     /**
-     * Restrict all valid command options
+     * Restrict all valid command options.
      */
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";

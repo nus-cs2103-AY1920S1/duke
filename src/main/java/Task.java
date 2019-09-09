@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Task {
     /**
-     * Enumerate task type options
+     * Enumerate task type options.
      */
     private static final String ADD_TYPE_TODO = "todo";
     private static final String ADD_TYPE_DEADLINE = "deadline";

@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
     /**
-     * Enumerate relevant task type options
+     * Enumerate relevant task type options.
      */
     private static final String ADD_TYPE_DEADLINE = "deadline";
     private static final String ADD_TYPE_EVENT = "event";

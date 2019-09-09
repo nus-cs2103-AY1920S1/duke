@@ -3,7 +3,7 @@
  */
 public class AddCommand extends Command {
     /**
-     * Enumerate task type options
+     * Enumerate task type options.
      */
     private static final String ADD_TYPE_TODO = "todo";
     private static final String ADD_TYPE_DEADLINE = "deadline";
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             if (!(commandDetails.equals(" ") || commandDetails.equals(""))) {
                 if (command.equals(ADD_TYPE_TODO)) {
                     tasks.addTask(new Task(commandDetails, ADD_TYPE_TODO, false));
-                    assert tasks.getList().get(tasks.getList().size() -1).getTaskType().equals("[T]")
+                    assert tasks.getList().get(tasks.getList().size() - 1).getTaskType().equals("[T]")
                             : "To-do task not added";
                     response = ui.printResponse(befTaskAddMessage
                             + tasks.getList().get(tasks.getList().size() - 1) + "\n " + indent
@@ -44,7 +44,7 @@ public class AddCommand extends Command {
                     try {
                         tasks.addDateTask(commandDetails.split(" /by ")[0],
                                 commandDetails.split(" /by ")[1], ADD_TYPE_DEADLINE);
-                        assert tasks.getList().get(tasks.getList().size() -1).getTaskType().equals("[D]")
+                        assert tasks.getList().get(tasks.getList().size() - 1).getTaskType().equals("[D]")
                                 : "Deadline task not added";
                         response = ui.printResponse(befTaskAddMessage
                                 + tasks.getList().get(tasks.getList().size() - 1) + "\n " + indent

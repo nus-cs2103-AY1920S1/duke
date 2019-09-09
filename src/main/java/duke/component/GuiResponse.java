@@ -58,5 +58,4 @@ public class GuiResponse {
     public static String getFoundTaskListInString(TaskList taskList) {
         return "\nHere are the matching tasks in your list:" + "\n" + taskList.toString();
     }
-
 }

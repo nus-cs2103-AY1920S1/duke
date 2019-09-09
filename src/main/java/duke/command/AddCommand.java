@@ -8,6 +8,7 @@ import duke.component.GuiResponse;
 import duke.task.Task;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Command Class for adding tasks.

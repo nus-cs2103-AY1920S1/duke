@@ -6,6 +6,8 @@ import duke.component.TaskList;
 import duke.component.Ui;
 import duke.task.Task;
 
+import java.util.List;
+
 /**
  * Command Class for looking for match cases in the task list.
  */

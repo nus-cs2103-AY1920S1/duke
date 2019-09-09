@@ -1,14 +1,16 @@
 package duke.command;
 
 import duke.component.Storage;
-import duke.component.DukeException;
+import duke.exception.DukeException;
 import duke.component.TaskList;
 import duke.component.Ui;
 import duke.component.GuiResponse;
 
+import duke.exception.InvalidIndexException;
 import duke.task.Task;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Command Class for delete tasks.
@@ -36,6 +38,10 @@ public class DeleteCommand extends Command {
     @Override
     public String executeCommand(TaskList taskList, Storage storage, Ui ui)
             throws DukeException, IOException {
+
+        if (index >= taskList.getSize() || index < 0) {
+            throw new InvalidIndexException("Invalid task number!");
+        }
 
         Task deletedTask = taskList.deleteAt(index);
         storage.save(taskList);

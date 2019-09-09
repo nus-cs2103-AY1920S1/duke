@@ -1,12 +1,14 @@
 package duke.command;
 
 import duke.component.Storage;
-import duke.component.DukeException;
+import duke.exception.DukeException;
 import duke.component.TaskList;
 import duke.component.Ui;
 import duke.component.GuiResponse;
+import duke.exception.InvalidIndexException;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Command Class for changing status of task to completed.
@@ -38,12 +40,10 @@ public class DoneCommand extends Command {
             throws DukeException, IOException {
 
         if (index >= taskList.getSize() || index < 0) {
-            throw new DukeException("Invalid task number!");
+            throw new InvalidIndexException("Invalid task number!");
         }
 
         taskList.replace(index, taskList.getAtIndex(index).changeToCompletedStatus());
-
-
 
         storage.save(taskList);
 

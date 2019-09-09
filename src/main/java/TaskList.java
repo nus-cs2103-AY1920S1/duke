@@ -95,16 +95,55 @@ public class TaskList {
      * @return String of tasks that match keyword.
      */
     public String findTasks(String keyword) {
-        String response = "";
+        String exactMatches = "";
+        String similarMatches = "";
         for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
-                response += task.toString();
+            if (containsKeyword(task.getDescription(), keyword)) {
+                exactMatches += task.toString() + "\n";
+            } else if (containsSimilar(task.getDescription(), keyword)) {
+                similarMatches += task.toString() + "\n";
             }
         }
-        if (response.equals("")) {
+        if (exactMatches.equals("") && similarMatches.equals("")) {
             return "No matching tasks found.";
-        } else {
-            return response;
         }
+
+        String response = "";
+        if (!exactMatches.equals("")) {
+            response += "The following matching tasks were found:\n" + exactMatches;
+        }
+        if (!similarMatches.equals("")) {
+            response += "The following similar tasks were found:\n" + similarMatches;
+        }
+        return response;
+    }
+
+    /**
+     * Checks if a keyword is found within a target string, ignoring case.
+     *
+     * @param target String to search in.
+     * @param keyword String to search for.
+     * @return Whether the string is found.
+     */
+    private boolean containsKeyword(String target, String keyword) {
+        return target.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    /**
+     * Checks if a string similar to a keyword is found within a target string
+     *
+     * @param target String to search in.
+     * @param keyword String to search for.
+     * @return Whether the string is found.
+     */
+    private boolean containsSimilar(String target, String keyword) {
+        String lowerCaseTarget = target.toLowerCase();
+        String lowerCaseKeyword = keyword.toLowerCase();
+        String keywordSingular = lowerCaseKeyword.replaceFirst("s$", "");
+        String keywordWithoutContinuousTense = lowerCaseKeyword.replaceFirst("ing$", "");
+        String keywordWithoutPastTense = lowerCaseKeyword.replaceFirst("ed$", "");
+        return (keyword.length() > 2 && lowerCaseTarget.contains(keywordSingular)
+                || keyword.length() > 5 && lowerCaseTarget.contains(keywordWithoutContinuousTense)
+                || keyword.length() > 4 && lowerCaseTarget.contains(keywordWithoutPastTense));
     }
 }

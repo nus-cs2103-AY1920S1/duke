@@ -1,7 +1,7 @@
 package seedu.duke;
 
 /**
- * Handles the parsing of user input
+ * Handles the parsing of user input.
  */
 public class Parser {
 
@@ -22,25 +22,15 @@ public class Parser {
 
         if (s.equals("done")) {
             c = new DoneCommand(Integer.valueOf(arr[1]) - 1);
-        }
-
-        else if (s.equals("delete")) {
+        } else if (s.equals("delete")) {
             c = new DeleteCommand(Integer.valueOf(arr[1]) - 1);
-        }
-
-        else if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
+        } else if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
             c = new AddCommand(s, arr[1].trim());
-        }
-
-        else if (s.toLowerCase().equals("list")) {
+        } else if (s.toLowerCase().equals("list")) {
             c = new ListCommand();
-        }
-
-        else if (s.equals("find")) {
+        } else if (s.equals("find")) {
             c = new FindCommand(arr[1].trim());
-        }
-
-        else {
+        } else {
             if (s.equals("bye")) {
                 c = new ExitCommand();
             }
@@ -68,26 +58,20 @@ public class Parser {
             //if to do, event or deadline are missing a description
             if (task) {
                 throw new DukeException("The description of a " + first + " cannot be empty.");
-            }
-
-            //if done, delete or find are not followed by a number
-            else if (first.equals("done") || first.equals("delete") || first.equals("find")) {
+            } else if (first.equals("done") || first.equals("delete") || first.equals("find")) {
+                //if done, delete or find are not followed by a number
                 throw new DukeException("Please specify a task.");
-            }
-
-            //if it is not a single-worded valid input
-            else if (!first.equals("bye") && !first.equals("list")) {
+            } else if (!first.equals("bye") && !first.equals("list")) {
+                //if it is not a single-worded valid input
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         } else {
             //if it is an invalid input containing multiple words
             if (!task && !first.equals("done") && !first.equals("delete") && !first.equals("find")) {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
-            }
-
-            //if event or deadline do not have details
-            else if ((first.equals("event") && !input.contains("/at")) ||
-                    (first.equals("deadline") && !input.contains("/by"))) {
+            } else if ((first.equals("event") && !input.contains("/at"))
+                    || (first.equals("deadline") && !input.contains("/by"))) {
+                //if event or deadline do not have details
                 throw new DukeException("The details of a " + first + " cannot be missing.");
             }
         }

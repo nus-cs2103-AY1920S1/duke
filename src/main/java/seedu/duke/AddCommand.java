@@ -27,23 +27,11 @@ public class AddCommand extends Command {
      *  @param t TaskList.
      * @param u Ui.
      * @param s Storage.
-     * @return
+     * @return a String representing the add message
      */
     @Override
     public String execute(TaskList t, Ui u, Storage s) {
-        Task task = new Task("null");
-        if (title.equals("todo")) {
-            task = new ToDo(details);
-        } else if (title.equals("deadline")) {
-            String[] arr = details.split("/by");
-            Date date = convertToDate(arr[1].trim());
-            task = new Deadline(arr[0].trim(), date);
-        } else if (title.equals("event")) {
-            String[] arr = details.split("/at");
-            Date date = convertToDate(arr[1].trim());
-            task = new Event(arr[0].trim(), date);
-        }
-
+        Task task = createNewTask();
         t.list.add(task);
 
         try {
@@ -51,8 +39,29 @@ public class AddCommand extends Command {
             s.update(true, text, t);
         } catch (IOException e) {
             System.out.println("Something went wrong");
+        } finally {
+            return u.addLine(task.toString(), t.list.size());
         }
-        return u.addLine(task.toString(), t.list.size());
+    }
+
+    /**
+     * Creates a new Task according to the user input.
+     * @return a new Task.
+     */
+    public static Task createNewTask() {
+        Task t = null;
+        if (title.equals("todo")) {
+            t = new ToDo(details);
+        } else if (title.equals("deadline")) {
+            String[] arr = details.split("/by");
+            Date date = convertToDate(arr[1].trim());
+            t = new Deadline(arr[0].trim(), date);
+        } else if (title.equals("event")) {
+            String[] arr = details.split("/at");
+            Date date = convertToDate(arr[1].trim());
+            t = new Event(arr[0].trim(), date);
+        }
+        return t;
     }
 
     /**

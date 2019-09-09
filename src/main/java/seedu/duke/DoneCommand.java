@@ -20,7 +20,7 @@ public class DoneCommand extends Command {
      * @param t TaskList.
      * @param u Ui.
      * @param s Storage.
-     * @return
+     * @return a String containing the Done message.
      */
     @Override
     public String execute(TaskList t, Ui u, Storage s) {

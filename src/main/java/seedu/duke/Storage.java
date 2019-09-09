@@ -62,7 +62,7 @@ public class Storage {
 
     /**
      * Creates a File if the File does not exist.
-     * @throws IOException
+     * @throws IOException if File is not found.
      */
     public static void findFile() throws IOException {
         File f = new File(filepath);
@@ -75,7 +75,7 @@ public class Storage {
      * @param append Boolean representing if File can be appended, or must be overwritten.
      * @param str If appending, it is a String containing the information to be appended.
      * @param t TaskList.
-     * @throws IOException
+     * @throws IOException if File is not found.
      */
     public static void update(boolean append, String str, TaskList t) throws IOException {
         FileWriter fw;

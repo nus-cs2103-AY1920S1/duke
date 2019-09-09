@@ -54,21 +54,18 @@ public class Duke extends Application {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
             }
         }
     }
 
     /**
      * Runs process.
-     * @param args
+     * @param args list of String arguments.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
@@ -120,7 +117,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -151,7 +148,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 

@@ -28,8 +28,17 @@ public class Deadline extends Task {
      *
      * @return Original date string.
      */
-    public String getDate() {
+    public String getDateString() {
         return by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.US));
+    }
+
+    /**
+     * Returns the original date object.
+     *
+     * @return Original date object.
+     */
+    public LocalDateTime getDate() {
+        return by;
     }
 
     @Override

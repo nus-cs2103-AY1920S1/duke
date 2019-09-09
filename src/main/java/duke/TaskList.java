@@ -5,6 +5,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskEnum;
 import duke.task.Todo;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,6 +31,44 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskList() {
         return this.tasks;
+    }
+
+    /**
+     * Returns the upcoming tasks.
+     *
+     * @return Upcoming tasks.
+     */
+    public String upcomingTasks() {
+        String description = "Upcoming tasks within the week:\n";
+
+        int counter = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task instanceof Deadline) {
+                LocalDateTime date = ((Deadline) task).getDate();
+                long days = Duration.between(LocalDateTime.now(), date).getSeconds() / 86400;
+                if (days <= 7 && days >= 0) {
+                    counter += 1;
+                    description += counter + ". " + task.toString();
+
+                    if ((i + 1) != tasks.size()) {
+                        description += "\n";
+                    }
+                }
+            } else if (task instanceof Event) {
+                LocalDateTime date = ((Event) task).getDate();
+                long days = Duration.between(LocalDateTime.now(), date).getSeconds() / 86400;
+                if (days <= 7 && days >= 0) {
+                    counter += 1;
+                    description += counter + ". " + task.toString();
+
+                    if ((i + 1) != tasks.size()) {
+                        description += "\n";
+                    }
+                }
+            }
+        }
+        return description;
     }
 
     /**

@@ -27,8 +27,17 @@ public class Event extends Task {
      *
      * @return Original date string.
      */
-    public String getDate() {
+    public String getDateString() {
         return at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm", Locale.US));
+    }
+
+    /**
+     * Returns the original date object.
+     *
+     * @return Original date object.
+     */
+    public LocalDateTime getDate() {
+        return at;
     }
 
     @Override

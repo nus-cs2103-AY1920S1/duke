@@ -44,11 +44,11 @@ public class Storage {
                     text += "T|" + task.getIsDone() + "|" + task.getDescription();
                 } else if (task instanceof Deadline) {
                     text += "D|" + task.getIsDone() + "|" + task.getDescription() + "|"
-                        + ((Deadline) task).getDate();
+                        + ((Deadline) task).getDateString();
                 } else if (task instanceof Event) {
                     text +=
                         "E|" + task.getIsDone() + "|" + task.getDescription() + "|" + ((Event) task)
-                            .getDate();
+                            .getDateString();
                 }
 
                 if (i + 1 != tasks.size()) {

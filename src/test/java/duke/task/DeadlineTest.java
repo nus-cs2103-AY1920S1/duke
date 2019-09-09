@@ -9,7 +9,7 @@ class DeadlineTest {
     @Test
     void getDate() {
         Deadline deadline = new Deadline("A description", "20/12/2019 0000");
-        assertEquals("20/12/2019 0000", deadline.getDate());
+        assertEquals("20/12/2019 0000", deadline.getDateString());
     }
 
     @Test

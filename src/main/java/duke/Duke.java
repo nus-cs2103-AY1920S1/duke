@@ -20,6 +20,15 @@ public class Duke {
     }
 
     /**
+     * Returns the upcoming tasks.
+     *
+     * @return Upcoming tasks.
+     */
+    public String upcomingTasks(){
+        return taskList.upcomingTasks();
+    }
+
+    /**
      * Returns the response from executing a command.
      *
      * @param input User input command.

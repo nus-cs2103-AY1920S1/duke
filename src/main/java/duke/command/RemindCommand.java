@@ -25,7 +25,7 @@ public class RemindCommand extends Command {
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
         // create a new task list filtered to a specific task.
         TaskList remindList = taskList.filter(type);
-        String response = ui.showRemindList(remindList);
+        String response = ui.showRemindList(remindList, type);
         return new CommandResponse(response, super.isExit());
     }
 }

@@ -3,6 +3,7 @@ package duke.gui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.TaskType;
 
 import java.util.ArrayList;
 
@@ -110,8 +111,12 @@ public class Ui {
         return showToUser(SEARCH_MESSAGE, showTaskList(searchList));
     }
 
-    public String showRemindList(TaskList remindList) {
-        return showToUser(REMIND_MESSAGE, showTaskList(remindList));
+    public String showRemindList(TaskList remindList, TaskType type) {
+        return showToUser(REMIND_MESSAGE,
+                "",
+                "TASK TYPE: " + type.toString(),
+                "",
+                showTaskList(remindList));
     }
 
     /**

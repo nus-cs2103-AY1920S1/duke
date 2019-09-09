@@ -21,6 +21,7 @@ import java.io.FileReader;
 public class Storage {
     private static File file;
     private UiText ui = new UiText();
+    public static final String DEDAULT_PATH = "src/main/data/duke.txt";
 
     /**
      * Constructor to construct a Storage with given file path.

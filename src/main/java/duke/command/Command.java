@@ -21,7 +21,8 @@ public abstract class Command {
         return isExit;
     }
 
-    public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
+        return null;
     }
 
     @Override

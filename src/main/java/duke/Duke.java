@@ -7,28 +7,17 @@ import duke.taskList.TaskList;
 import duke.storage.Storage;
 import duke.ui.UiText;
 
-import javafx.application.Application;
-import javafx.event.Event;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-
-
 import java.io.FileNotFoundException;
 
 /**
- * Duke is  a Persional Assistant Chatbot that helps a person to keep track of various things.
+ * Duke is  a Personal Assistant Chatbot that helps a person to keep track of various things.
  * @author Yang Shuting
  */
 
-public class Duke extends Application implements EventHandler {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
-    private UiText ui;
-    Button button;
+    private  UiText ui;
 
     /**
      * constructor to create a Duke Chatbot
@@ -48,57 +37,56 @@ public class Duke extends Application implements EventHandler {
         }
     }
 
+    public Duke() {
+        this(Storage.DEDAULT_PATH);
+    }
+
+    public String getResponse(String text) {
+        boolean isExit;
+        try {
+            Command c = Parser.parse(text);
+            isExit = c.isExit();
+            String commandResult = c.execute(tasks, ui, storage);
+            return commandResult;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
 
     private void run() {
         try {
             ui.greeting();
             storage.printFileContents();
+            ui.printlnMsg(UiText.showLine());
             boolean isExit = false;
             while (!isExit) {
                 try {
                     String fullCommand = ui.readCommand();
-                    ui.showLine();
+                    ui.printlnMsg(UiText.showLine());
                     Command c = Parser.parse(fullCommand);
-                    c.execute(tasks, ui, storage);
+                    String commandResult = c.execute(tasks, ui, storage);
+                    ui.printlnMsg(commandResult);
                     isExit = c.isExit();
                 } catch (DukeException e) {
                     ui.printlnMsg(e.getMessage());
                 } finally {
-                    ui.showLine();
+                    ui.printlnMsg(UiText.showLine());
                 }
             }
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
+            ui.printlnMsg(UiText.LoadingError());
         }
     }
 
 
     public static void main(String[] args) {
-        //Duke duke = new Duke("src/main/data/duke.txt");
-        //duke.run();
-        launch(args);
+        Duke duke = new Duke("src/main/data/duke.txt");
+        duke.run();
+
     }
 
 
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("DUKE");
-        button = new Button();
-        button.setText("Submit");
-        button.setOnAction(this);
 
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button);
 
-        Scene scene = new Scene(layout, 300,250);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-
-    @Override
-    public void handle(Event event) {
-        if (event.getSource() == button) {
-            System.out.println
-        }
-    }
 }

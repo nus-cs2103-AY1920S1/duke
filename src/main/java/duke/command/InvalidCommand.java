@@ -17,7 +17,7 @@ public class InvalidCommand extends Command {
      * @throws DukeException invalid input
      */
     @Override
-    public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
         throw new DukeException("\u1F65 OOPS!! I\'m sorry, but I don\'t know what that means :-(");
     }
 }

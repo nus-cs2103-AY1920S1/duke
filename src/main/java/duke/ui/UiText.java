@@ -41,19 +41,27 @@ public class UiText {
         return in.nextLine();
 
     }
+    /**
+     * Prints the string by chosen PrintStream.
+     * @param msg String that to be display.
+     */
+
+    public void printlnMsg(String msg) {
+        out.println(msg);
+    }
 
     /**
      * Standard welcome message that will displayed when the user start the Chatbot.
      */
-    public void greeting() {
+    public static String greeting() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        out.println("Hello from\n" + logo);
-        out.println("Hello! I\'m Duke\n"
-                + "What can I do for you?");
+        String msg = "Hello from\n" + logo + "\nHello! I\'m Duke\n"
+                + "What can I do for you?";
+        return msg;
 
     }
 
@@ -61,8 +69,8 @@ public class UiText {
     /**
      * Divider between each action of the command.
      */
-    public void showLine() {
-        out.println("________________________________________________");
+    public static String showLine() {
+        return "________________________________________________";
     }
 
     public void echo(String msg) {
@@ -72,30 +80,23 @@ public class UiText {
     /**
      * Leaving message when the user input the leaving command.
      */
-    public void leavingMsg() {
-        out.println("Bye. Hope to see you again soon!");
+    public static String leavingMsg() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    /**
-     * Print the string by chosen PrintStream.
-     * @param msg String that to be desplay.
-     */
-    public void printlnMsg(String msg) {
-        out.println(msg);
-    }
 
-    public void showLoadingError() {
-        out.println("Cannot load the file");
+    public static String LoadingError() {
+        return "Cannot load the file";
     }
 
     /**
      * Message that will be displayed whenever a command has executed successfully.
      * @param task Task object that is added to the list.
      */
-    public void addedMsg(Task task) {
-        out.println(String.format(
+    public static String addedMsg(Task task) {
+        return String.format(
                 "Got it. I\'ve added this task:\n  "
-                        + task + "\nNow you have %s tasks in the list", Task.getNoOfTask()));
+                        + task + "\nNow you have %s tasks in the list", Task.getNoOfTask());
     }
 
     /**
@@ -103,10 +104,9 @@ public class UiText {
      * @param task Task object that marked done.
      */
 
-    public void markedMsg(Task task) {
-        out.println(
-                String.format("Nice! I've marked this task as done:\n"
-                        + "  " + task));
+    public static String markedMsg(Task task) {
+        return String.format("Nice! I've marked this task as done:\n"
+                        + "  " + task);
     }
 
     /**
@@ -115,24 +115,46 @@ public class UiText {
      * @param task Task object that was deleted.
      */
 
-    public void deleteMsg(Task task) {
-        out.println(String.format(
+    public static String deleteMsg(Task task) {
+        return String.format(
                 "Noted. I\'ve removed this task: \n  "
-                        + task + "\nNow you have %d tasks in the list.", Task.getNoOfTask()));
+                        + task + "\nNow you have %d tasks in the list.", Task.getNoOfTask());
     }
 
-    public void findMsg(ArrayList<Task> tasks) {
-        out.println("Here are the matching tasks in your list");
+    public static String findMsg(ArrayList<Task> tasks) {
+        StringBuilder output = new StringBuilder();
+        String title = "Here are the matching tasks in your list\n";
+        output.append(title);
         int count = 0;
         for (Task task : tasks) {
-            out.println(++count + "." + task.toString());
+            String result = ++count + "." + task.toString() + "\n";
+            output.append(result);
         }
-
-
+        return output.toString();
     }
 
-    public void unableToWriteFileError() {
-        out.println("Unable to write the file");
+    public static String listingMsg(ArrayList<Task> tasks) {
+        StringBuilder output = new StringBuilder();
+        output.append("Here are the tasks in your list:\n");
+        boolean isFirst = true;
+        String prefix = "\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            String result = "";
+            Task tk = tasks.get(i);
+            if (isFirst) {
+                result = (i + 1) + "." + tk;
+                isFirst = false;
+            }  else {
+                result = prefix + (i + 1) + "." + tk;
+            }
+
+            output.append(result);
+        }
+        return output.toString();
+    }
+
+    public static String unableToWriteFileError() {
+        return "Unable to write the file";
     }
 
     public void showError(String msg) {

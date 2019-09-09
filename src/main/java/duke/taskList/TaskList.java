@@ -37,4 +37,17 @@ public class TaskList {
         ArrayList<Task> copy = new ArrayList<>(tasks);
         return copy;
     }
+
+    public void addToList(Task task) {
+        tasks.add(task);
+    }
+
+    public Task deleteFromList(int index) {
+        Task tk = tasks.get(index);
+        //removed msg
+        tasks.remove(index);
+        Task.reduceByOne();
+        return tk;
+    }
 }
+

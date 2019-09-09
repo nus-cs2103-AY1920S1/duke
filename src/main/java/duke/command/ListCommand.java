@@ -21,13 +21,9 @@ public class ListCommand extends Command {
      */
 
     @Override
-    public void execute(TaskList list, UiText ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
         if (super.command.length == 1) {
-            ui.printlnMsg("Here are the tasks in your list:");
-            for (int i = 0; i < list.getList().size(); i++) {
-                Task tk = list.getList().get(i);
-                System.out.println(i + 1 + "." + tk);
-            }
+            return UiText.listingMsg(list.getList());
         } else {
             throw new DukeException("\u1F65 OOPS!! I\'m sorry, but I don\'t know what that means :-(");
         }

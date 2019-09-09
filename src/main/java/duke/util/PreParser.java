@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class PreParser {
     private CommandMap commandMap;
-    private List<Class<? extends Command>> defaultCommands = List.of(
+    private static List<Class<? extends Command>> defaultCommands = List.of(
             ByeCommand.class,
             ListCommand.class,
             DoneCommand.class,

@@ -27,13 +27,14 @@ public class TaskList {
     /**
      * Prints the addition of a task and number of tasks in the list after addition.
      */
-    protected void addMessage() {
-        System.out.println(" Got it. I've added this task: ");
-        System.out.println(taskList.get(taskList.size() - 1));
+    protected String addMessage() {
+
+
+
         if (taskList.size() == 1) {
-            System.out.println("Now you have 1 task in your list.");
+            return " Got it. I've added this task: \n" + taskList.get(taskList.size() - 1) + "\n" + "Now you have 1 task in your list.";
         } else {
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            return " Got it. I've added this task: \n" + taskList.get(taskList.size() - 1) + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
         }
     }
 
@@ -42,10 +43,10 @@ public class TaskList {
      *
      * @param x the position of the task in the list.
      */
-    protected void markAsDone(int x) {
+    protected String markAsDone(int x) {
         taskList.get(x).markAsDone();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskList.get(x));
+        return "Nice! I've marked this task as done:\n" + taskList.get(x);
+
     }
 
     /**
@@ -53,17 +54,15 @@ public class TaskList {
      *
      * @param y the position of the task in the list
      */
-    protected void deleteTask(int y) {
+    protected String deleteTask(int y) {
         if (taskList.size() == 0) {
-            System.out.println("The task list is empty");
+            return "The task list is empty\n";
         } else {
-            System.out.println("Noted. I've removed this task:");
-            System.out.println(taskList.get(y - 1));
             taskList.remove(y - 1);
             if (taskList.size() == 1) {
-                System.out.println("Now you have 1 task in your list.");
+                return ("Noted. I've removed this task:\n" + taskList.get(y - 1) + "\n" + "Now you have 1 task in your list.");
             } else {
-                System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                return ("Noted. I've removed this task:\n" + taskList.get(y - 1) + "\n" + "Now you have "+ taskList.size() + " task in your list.");
             }
         }
 
@@ -72,32 +71,37 @@ public class TaskList {
     /**
      *Finds and prints all the tasks containing the word requested by the user.
      *
-     * @param words The words that the user wants to find.
+     * @param s The word that the user wants to find.
      */
-    protected void find(String ...words) {
-        for (String s : words) {
-            int count = 0;
-            System.out.println("Here are the matching tasks in your list:");
-            for (Task task : taskList) {
-                if (task.description.contains(s)) {
-                    System.out.println(task);
-                    count += 1;
-                }
+    protected String find(String s) {
+        int count = 0;
+        System.out.println();
+        String relevant = "";
+        for (Task t : taskList) {
+            if (t.description.contains(s)) {
+                count += 1;
+                relevant = relevant + t +"\n";
             }
-            if (count == 0) {
-                System.out.println("There are no matching tasks in your list.");
-            }
+        }
+        if (count == 0) {
+            return ("There are no matching tasks in your list");
+        }
+        else {
+            return "Here are the matching tasks in your list:\n" + relevant;
         }
     }
 
     /**
      *Prints all the tasks in the list.
      */
-    protected void getList() {
-        System.out.println("Here are the tasks in your list:");
+    protected String getList() {
+        String list = "Here are the tasks in your list: \n";
         for (int i = 1; i <= taskList.size(); i += 1) {
-            System.out.println(i + ". " + taskList.get(i - 1));
+            Task t = taskList.get(i-1);
+            list = list + i + ". " + t.toString() + "\n";
+
         }
+        return list ;
     }
 
     /**
@@ -107,10 +111,10 @@ public class TaskList {
      * @param b The information of the event being processed.
      * @throws ParseException If the data is not in the required format i.e. MM/dd/yyyy HH:mm.
      */
-    protected void readEvent(String b) throws ParseException {
-
+    protected String readEvent(String b) throws ParseException {
+        String output = "";
         if (b.length() == 0) {
-            System.out.println(" OOPS!!! the description of a event cannot be empty. ");
+            output = (" OOPS!!! the description of a event cannot be empty.\n ");
         } else {
             int first = b.indexOf('/');
             String desc = b.substring(0, first - 1);
@@ -119,8 +123,9 @@ public class TaskList {
             Date at = df.parse(on);
             Task t1 = new Event(desc, at, false);
             this.add(t1);
-            this.addMessage();
+            output = this.addMessage();
         }
+        return output;
     }
 
     /**
@@ -129,18 +134,19 @@ public class TaskList {
      *
      * @param s the information of the Deadline input by the user.
      */
-    protected void readDeadline(String s) {
-
+    protected String readDeadline(String s) {
+        String output = "";
         if (s.length() == 0) {
-            System.out.println(" OOPS!!! the description of a deadline cannot be empty. ");
+            output = (" OOPS!!! the description of a deadline cannot be empty. \n");
         } else {
             int first = s.indexOf('/');
             String descr = s.substring(0, first - 1);
             String byTime = s.substring(first + 4);
             Task t1 = new Deadline(descr, byTime, false);
             this.add(t1);
-            this.addMessage();
+            output = this.addMessage();
         }
+        return output;
     }
 
     /**
@@ -148,13 +154,15 @@ public class TaskList {
      *
      * @param s The information regarding the todo task.
      */
-    protected void readTodo(String s) {
+    protected String readTodo(String s) {
+        String output = "";
         if (s.length() == 0) {
-            System.out.println(" OOPS!!! the description of a todo cannot be empty. ");
+            return (" OOPS!!! the description of a todo cannot be empty. \n");
         } else {
             Task t1 = new ToDo(s, false);
             this.add(t1);
             this.addMessage();
         }
+        return output;
     }
 }

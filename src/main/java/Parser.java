@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 /**
@@ -35,16 +36,23 @@ public class Parser {
     }
     
     /**
-     * Parses the description given in an input String.
+     * Parses the description given in an input String for a ToDoTask.
      *
      * @param input The inputted String given by the user.
-     * @param isToDo A boolean with value true if the Task is a ToDoTask, and false otherwise.
      * @return Returns the description in the given String.
      */
-    static String parseDescription(String input, boolean isToDo) {
-        return isToDo
-                ? input.split(" ", 2)[1]
-                : input.split("deadline|event", 2)[1];
+    static String parseToDoDescription(String input) {
+        return input.split(" ", 2)[1];
+    }
+    
+    /**
+     * Parses the description given in an input String for a DeadlineTask or EventTask.
+     *
+     * @param input The inputted String given by the user.
+     * @return Returns the description in the given String.
+     */
+    static String parseNonToDoContent(String input) {
+        return input.split("deadline|event", 2)[1];
     }
     
     /**
@@ -53,7 +61,7 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the content in the description of a given String.
      */
-    static String parseContent(String input) {
+    static String parseNonToDoDescription(String input) {
         return input.split("/by|/at", 2)[0].strip();
     }
     
@@ -64,7 +72,7 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns a LocalDateTime object representing the time of the Task.
      */
-    static LocalDateTime parseTime(String input) {
+    static LocalDateTime parseNonToDoTime(String input) {
         String taskTimeBeforeParse = input.split("/by|/at", 2)[1].strip();
         String[] taskTimeParsed = taskTimeBeforeParse.split("[ /]");
         return LocalDateTime.of(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]),
@@ -118,5 +126,44 @@ public class Parser {
                 Integer.parseInt(taskTimeParsed[1]), Integer.parseInt(taskTimeParsed[0]),
                 Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
                 Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
+    }
+    
+    static Command parse(String input) throws DukeException {
+        Command command;
+        String instruction = Parser.parseInstruction(input);
+        switch (instruction) {
+        case "bye":
+            command = new ByeCommand();
+            Duke.isExitRunLoop = true;
+            break;
+        case "list":
+            command = new ListCommand();
+            break;
+        case "done":
+            command = new DoneCommand(Parser.parseIndex(input));
+            break;
+        case "delete":
+            command = new DeleteCommand(Parser.parseIndex(input));
+            break;
+        case "find":
+            command = new FindCommand(Parser.parseSearchPhrase(input));
+            break;
+        case "todo":
+            command = new ToDoCommand(Parser.parseToDoDescription(input));
+            break;
+        case "deadline":
+            String deadlineTaskContent = Parser.parseNonToDoContent(input);
+            command = new DeadlineCommand(Parser.parseNonToDoDescription(deadlineTaskContent),
+                    Parser.parseNonToDoTime(deadlineTaskContent));
+            break;
+        case "event":
+            String eventTaskContent = Parser.parseNonToDoContent(input);
+            command = new EventCommand(Parser.parseNonToDoDescription(eventTaskContent),
+                    Parser.parseNonToDoTime(eventTaskContent));
+            break;
+        default:
+            throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        return command;
     }
 }

@@ -33,6 +33,8 @@ public class Duke extends Application {
      */
     private Ui ui;
     
+    static boolean isExitRunLoop;
+    
     private ScrollPane scrollPane;
     
     private VBox dialogContainer;
@@ -75,58 +77,15 @@ public class Duke extends Application {
      * Modifies the Tasks in the TaskList object based on the commands received by the user.
      */
     public void run() {
-        ui.printHello();
-        boolean isExit = false;
-        while (!isExit) {
+        ui.print(ui.showHello());
+        isExitRunLoop = false;
+        while (!isExitRunLoop) {
             try {
                 String input = ui.getNextLine();
-                String instruction = Parser.parseInstruction(input);
-                if (instruction.equals("bye")) {
-                    ui.printBye();
-                    isExit = true;
-                } else if (instruction.equals("list")) {
-                    taskList.printList();
-                } else if (instruction.equals("done")) {
-                    int index = Parser.parseIndex(input);
-                    taskList.markTask(index);
-                    storage.writeSavedList(taskList.getList());
-                } else if (instruction.equals("delete")) {
-                    int index = Parser.parseIndex(input);
-                    taskList.deleteTask(index);
-                    storage.writeSavedList(taskList.getList());
-                } else if (instruction.equals("find")) {
-                    String searchPhrase = Parser.parseSearchPhrase(input);
-                    ui.printFoundTasks(taskList.findTasks(searchPhrase));
-                } else if (instruction.equals("todo") || instruction.equals("deadline")
-                        || instruction.equals("event")) {
-                    try {
-                        if (instruction.equals("todo")) {
-                            String taskDescription = Parser.parseDescription(input, true);
-                            ui.testEmptyDescription(taskDescription);
-                            taskList.createToDo(taskDescription);
-                            storage.writeSavedList(taskList.getList());
-                        } else {
-                            String taskDescription = Parser.parseDescription(input, false);
-                            ui.testTimeFormat(taskDescription);
-                            String taskContent = Parser.parseContent(taskDescription);
-                            LocalDateTime taskTime = Parser.parseTime(taskDescription);
-                            ui.testEmptyDescription(taskContent);
-                            if (instruction.equals("deadline")) {
-                                taskList.createDeadline(taskContent, taskTime);
-                            } else {
-                                taskList.createEvent(taskContent, taskTime);
-                            }
-                            storage.writeSavedList(taskList.getList());
-                        }
-                    } catch (IndexOutOfBoundsException e) {
-                        throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
-                    }
-                    ui.printSize(taskList.getSize());
-                } else {
-                    throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (IOException | DukeException e) {
-                ui.showError(e);
+                Command command = Parser.parse(input);
+                ui.print(command.execute(taskList, ui, storage));
+            } catch (DukeException | IOException e) {
+                ui.print(ui.showError(e));
             }
         }
     }

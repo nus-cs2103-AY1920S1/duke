@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -17,6 +16,10 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
     
+    void print(String string) {
+        System.out.println(string);
+    }
+    
     /**
      * Scans the next input line by the user.
      *
@@ -27,74 +30,40 @@ public class Ui {
     }
     
     /**
-     * Displays the error message of an Exception.
+     * Shows the error message of an Exception.
      *
      * @param exception The Exception to display the error message of.
+     * @return Returns the error message as a String.
      */
-    void showError(Exception exception) {
-        System.out.println(exception.getMessage());
+    String showError(Exception exception) {
+        return exception.getMessage();
     }
     
     /**
-     * Prints a welcome message for the user.
+     * Shows a welcome message for the user.
+     *
+     * @return Returns the message String.
      */
-    void printHello() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    String showHello() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
     
     /**
      * Prints a goodbye message for the user.
+     *
+     * @return Returns the message String.
      */
-    void printBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    String showBye() {
+        return "Bye. Hope to see you again soon!";
+    }
+
+    String printAfterAddingTask(Task currentTask, int currentSize) {
+        return "Got it. I've added this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
+                + " tasks in the list.";
     }
     
-    /**
-     * Prints the current number of Tasks stored by the user.
-     *
-     * @param size The number of Tasks currently stored.
-     */
-    void printSize(int size) {
-        System.out.println("Now you have " + size + " tasks in the list.");
-    }
-    
-    /**
-     * Prints the list of Task objects whose descriptions contain the search phrase.
-     *
-     * @param listOfFoundTasks The given list of Task objects.
-     */
-    void printFoundTasks(ArrayList<Task> listOfFoundTasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        for (Task task : listOfFoundTasks) {
-            System.out.println(task);
-        }
-    }
-    
-    /**
-     * Tests for whether the description of a given Task is empty.
-     * If empty, displays an exception message.
-     * A description consisting only of whitespace is considered empty.
-     *
-     * @param taskDescription The description of the given Task.
-     * @throws EmptyTaskDescriptionException A DukeException thrown to indicate an empty Task description.
-     */
-    void testEmptyDescription(String taskDescription) throws EmptyTaskDescriptionException {
-        if (taskDescription.matches("\\s*")) {
-            throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
-        }
-    }
-    
-    /**
-     * Tests for whether the time in a given task is correctly formatted.
-     * Valid time formats require a ' /by ' or ' /at ' to be present in the String.
-     *
-     * @param taskDescription The description of the given Task.
-     * @throws IncorrectTaskTimeFormatException A DukeException thrown to indicate an incorrect format.
-     */
-    void testTimeFormat(String taskDescription) throws IncorrectTaskTimeFormatException {
-        if (!(taskDescription.contains(" /by ") || taskDescription.contains(" /at "))) {
-            throw new IncorrectTaskTimeFormatException("OOPS!!! No ' /by ' or ' /at ' detected!"
-                    + "Please use the correct format!");
-        }
+    String printAfterDeletingTask(Task currentTask, int currentSize) {
+        return "Got it. I've removed this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
+                + " tasks in the list.";
     }
 }

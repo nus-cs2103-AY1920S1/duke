@@ -17,7 +17,7 @@ public class Ui {
      */
     public void showWelcome() {
         System.out.println(LINE + "\n"
-                + "     Hello! I'm Duke\n"
+                + "     Hello! I'm duke.Duke\n"
                 + "     What can I do for you?\n" + LINE);
     }
 
@@ -61,17 +61,16 @@ public class Ui {
      * @param task deleted task object
      * @param numOfTasks number of tasks left on the list
      */
-    void showDeleted(Task task, int numOfTasks) {
-        System.out.println(
-                "     Noted. I've removed this task: \n       " + task
-                        + "\n     Now you have " + numOfTasks + " tasks in the list.");
+    String showDeleted(Task task, int numOfTasks) {
+       return "     Noted. I've removed this task: \n       " + task
+                        + "\n     Now you have " + numOfTasks + " tasks in the list.";
     }
 
     /**
      * Displays the farewell message when the user exits the program.
      */
-    public void showBye() {
-        System.out.println("     Bye. Hope to see you again soon!");
+    public String showBye() {
+        return "     Bye. Hope to see you again soon!";
     }
 
     /**
@@ -79,9 +78,8 @@ public class Ui {
      *
      * @param taskList taskList object to be shown
      */
-    public void showList(TaskList taskList) {
-        System.out.println("     Here are the tasks in your list:");
-        System.out.print(taskList);
+    public String showList(TaskList taskList) {
+        return "     Here are the tasks in your list:\n" + taskList;
     }
 
     /**
@@ -89,9 +87,8 @@ public class Ui {
      *
      * @param taskList taskList object to be shown
      */
-    public void showSearchResults(TaskList taskList) {
-        System.out.println("     Here are the matching tasks in your list:");
-        System.out.print(taskList);
+    public String showSearchResults(TaskList taskList) {
+        return "     Here are the matching tasks in your list:\n" + taskList;
     }
 
     /**
@@ -100,9 +97,9 @@ public class Ui {
      * @param task task to be added
      * @param numOfTasks current number of tasks
      */
-    void showAdded(Task task, int numOfTasks) {
-        System.out.println("     Got it. I've added this task: \n       " + task
-                + "\n     Now you have " + numOfTasks + " tasks in the list.");
+    String showAdded(Task task, int numOfTasks) {
+        return "     Got it. I've added this task: \n       " + task
+                + "\n     Now you have " + numOfTasks + " tasks in the list.";
     }
 
     /**
@@ -110,7 +107,7 @@ public class Ui {
      *
      * @param task task marked as done
      */
-    void showDone(Task task) {
-        System.out.println("     Nice! I've marked this task as done: \n       " + task);
+    String showDone(Task task) {
+        return "     Nice! I've marked this task as done: \n       " + task;
     }
 }

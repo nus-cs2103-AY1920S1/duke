@@ -29,7 +29,7 @@ public abstract class Command {
      * @param storage storage for the task list to be written
      * @throws DukeException if there are any wrong user input
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return isExit;

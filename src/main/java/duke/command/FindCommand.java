@@ -31,8 +31,8 @@ public class FindCommand extends Command {
      * @throws DukeException if task is not found
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList searchResults = taskList.find(taskToBeFound);
-        ui.showSearchResults(searchResults);
+        return ui.showSearchResults(searchResults);
     }
 }

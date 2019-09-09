@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException if index or task is not found in the task list
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        taskList.delete(deletedItemNo, ui);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return taskList.delete(deletedItemNo, ui);
     }
 }

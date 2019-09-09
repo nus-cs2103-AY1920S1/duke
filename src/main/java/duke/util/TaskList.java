@@ -34,11 +34,11 @@ public class TaskList {
      * @param ui ui object to print messages
      * @throws DukeException if task is not found
      */
-    public void delete(int deletedItemNo, Ui ui) throws DukeException {
+    public String delete(int deletedItemNo, Ui ui) throws DukeException {
         try {
             Task itemRemoved = taskList.remove(deletedItemNo - 1);
             int numOfTask = taskList.size();
-            ui.showDeleted(itemRemoved, numOfTask);
+            return ui.showDeleted(itemRemoved, numOfTask);
         } catch (Exception e) {
             throw new DukeException("    No more tasks to delete!");
         }
@@ -50,10 +50,10 @@ public class TaskList {
      * @param task task object to be added
      * @param ui ui object to print messages
      */
-    public void add(Task task, Ui ui) {
+    public String add(Task task, Ui ui) {
         taskList.add(task);
         int numOfTask = taskList.size();
-        ui.showAdded(task, numOfTask);
+        return ui.showAdded(task, numOfTask);
     }
 
     /**
@@ -62,10 +62,10 @@ public class TaskList {
      * @param itemNo index of the task to be marked
      * @param ui ui object to print messages
      */
-    public void done(int itemNo, Ui ui) {
+    public String done(int itemNo, Ui ui) {
         Task task = taskList.get(itemNo - 1);
         task.markAsDone();
-        ui.showDone(task);
+        return ui.showDone(task);
     }
 
     /**

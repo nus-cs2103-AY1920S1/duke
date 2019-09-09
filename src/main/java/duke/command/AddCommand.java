@@ -52,7 +52,7 @@ public class AddCommand extends Command {
      * @param storage storage object to write files to
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.add(task, ui);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.add(task, ui);
     }
 }

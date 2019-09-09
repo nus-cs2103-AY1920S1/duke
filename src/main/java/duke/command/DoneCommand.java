@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
      * @param storage storage for the task list to be written
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.done(itemNo, ui);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.done(itemNo, ui);
     }
 }

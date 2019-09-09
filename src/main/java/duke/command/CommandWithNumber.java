@@ -18,7 +18,7 @@ public abstract class CommandWithNumber extends Command {
         if (this.taskNumber == null) {
             throw new DukeInvalidCommandException(MISSING_TASK_NUMBER);
         }
-        if (this.taskNumber < 1 || this.taskNumber >= tasks.size()) {
+        if (this.taskNumber < 0 || this.taskNumber >= tasks.size()) {
             throw new DukeInvalidCommandException(TASK_DOES_NOT_EXIST);
         }
     }

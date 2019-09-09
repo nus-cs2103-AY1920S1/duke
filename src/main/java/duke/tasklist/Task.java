@@ -14,6 +14,8 @@ public abstract class Task {
      */
     public Task(String description) {
         taskCompletionStatus = false;
+
+        assert description != null : "Task description cannot be null";
         taskDescription = description;
     }
 

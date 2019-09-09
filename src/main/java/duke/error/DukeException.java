@@ -12,6 +12,7 @@ public class DukeException extends Exception {
      */
     public DukeException(String... messageLines) {
         super(append(messageLines));
+        assert messageLines != null;
     }
 
     /**
@@ -23,6 +24,7 @@ public class DukeException extends Exception {
     private static String append(String... segments) {
         StringBuilder message = new StringBuilder();
         for (String segment : segments) {
+            assert segment != null;
             message.append(segment);
         }
         return message.toString();

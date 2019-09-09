@@ -13,5 +13,6 @@ public class SearchCommand extends Command {
      */
     SearchCommand(String keyword) {
         super(Type.COMMAND_SEARCH, keyword);
+        assert keyword != null;
     }
 }

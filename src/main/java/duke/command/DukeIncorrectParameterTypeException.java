@@ -16,5 +16,8 @@ public class DukeIncorrectParameterTypeException extends DukeException {
      */
     public DukeIncorrectParameterTypeException(String typeExpected, String argument) {
         super("The following cannot be converted to ", typeExpected, ":\n", argument);
+        assert typeExpected != null;
+        assert (typeExpected.length() > 0);
+        assert argument != null;
     }
 }

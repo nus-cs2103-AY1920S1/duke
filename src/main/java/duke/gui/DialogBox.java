@@ -18,6 +18,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
+import java.io.File;
 
 /**
  * A custom control using FXML.
@@ -38,7 +39,11 @@ public class DialogBox extends HBox {
      * @param img The image to be used as the display picture
      */
     private DialogBox(String speakerText, Image img) {
+        assert speakerText != null;
+        assert img != null;
+
         try {
+            assert new File("src/main/resources/view/DialogBox.fxml").exists() : "DialogBox.fxml file does not exist";
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
@@ -72,6 +77,9 @@ public class DialogBox extends HBox {
      * @return The dialog box formatted to display the user's message
      */
     public static DialogBox getUserDialog(String userText, Image img) {
+        assert userText != null;
+        assert img != null;
+
         DialogBox user = new DialogBox(userText, img);
 
         // sets the background to a green rounded corner box
@@ -92,6 +100,9 @@ public class DialogBox extends HBox {
      * @return The dialog box formatted to display duke's message
      */
     public static DialogBox getDukeNormalDialog(String dukeText, Image img) {
+        assert dukeText != null;
+        assert img != null;
+
         DialogBox duke = new DialogBox(dukeText, img);
 
         // sets the background to a blue rounded corner box
@@ -114,6 +125,9 @@ public class DialogBox extends HBox {
      * @return The dialog box formatted to display duke's error message
      */
     public static DialogBox getDukeErrorDialog(String dukeErrorText, Image img) {
+        assert dukeErrorText != null;
+        assert img != null;
+
         DialogBox duke = new DialogBox(dukeErrorText, img);
 
         // sets the background to a red rounded corner box

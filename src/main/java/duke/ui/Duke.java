@@ -51,6 +51,7 @@ public class Duke {
      *
      */
     public Response setUp(String taskListPath) {
+        assert taskListPath != null;
         storage = new Storage(taskListPath);
         Response response;
         try {
@@ -82,6 +83,7 @@ public class Duke {
      * @return the Response from Duke as a result of the given user input.
      */
     public Response getResponse(String input) {
+        assert input != null;
         if (!isActive) {
             return Response.fromError(new DukeException("not accepting commands"), isActive);
         }
@@ -108,6 +110,7 @@ public class Duke {
      * @throws DukeException when the Command cannot be properly executed for some reason
      */
     private String executeCommand(Command command) throws DukeException {
+        assert command != null;
         // all commands passed to this method have all required parameter non-empty
         switch (command.getClass().getSimpleName()) {
         case "AddTaskCommand":
@@ -128,6 +131,7 @@ public class Duke {
     }
 
     private String executeAddTaskCommand(AddTaskCommand command) throws DukeException {
+        assert command != null;
         String[] parameters = Command.getArgumentsUsed(command);
         Task task;
 
@@ -165,6 +169,8 @@ public class Duke {
 
 
     private String executeCompleteTaskCommand(CompleteTaskCommand command) throws DukeException {
+        assert command != null;
+
         String[] parameters = Command.getArgumentsUsed(command);
 
         Task task = taskList.complete(parameters[0]);
@@ -174,6 +180,8 @@ public class Duke {
     }
 
     private String executeDeleteTaskCommand(DeleteTaskCommand command) throws DukeException {
+        assert command != null;
+
         String[] parameters = Command.getArgumentsUsed(command);
 
         Task task = taskList.delete(parameters[0]);
@@ -186,6 +194,8 @@ public class Duke {
     }
 
     private String executeSearchCommand(SearchCommand command) {
+        assert command != null;
+
         String[] parameters = Command.getArgumentsUsed(command);
         ArrayList<Task> results = taskList.search(parameters[0]);
         int resultsCount = results.size();
@@ -209,6 +219,7 @@ public class Duke {
     }
 
     private String executeShowListCommand() {
+        assert taskList != null;
         int taskCount = taskList.size();
 
         if (taskCount < 1) {

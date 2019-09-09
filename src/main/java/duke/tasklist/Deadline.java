@@ -18,6 +18,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String time) {
         super(description);
+        assert description != null;
+        assert time != null : "Deadline time cannot be null";
         try {
             this.time = Parser.parseDateTime(time);
         } catch (DukeException e) {
@@ -34,6 +36,8 @@ public class Deadline extends Task {
      */
     public Deadline(boolean isComplete, String description, String time) {
         super(description);
+        assert description != null;
+        assert time != null : "Deadline time cannot be null";
         try {
             this.time = Parser.parseDateTime(time);
         } catch (DukeException e) {

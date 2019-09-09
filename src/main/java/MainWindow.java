@@ -38,7 +38,7 @@ public class MainWindow extends AnchorPane {
      * Echoes welcome message to the user.
      */
     public void welcomeDuke() {
-        String response = duke.getResponse("hello");
+        String response = Ui.printHello();
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(response, dukeImage)
         );
@@ -57,5 +57,6 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        assert userInput.getText().equals("") : "User Input should have been cleared";
     }
 }

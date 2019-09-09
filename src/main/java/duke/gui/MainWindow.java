@@ -73,18 +73,30 @@ public class MainWindow extends AnchorPane {
             addDukeDialog(response);
         }
         if (warning != null) {
-            addDukeDialog(warning);
+            addDukeWarning(warning);
         }
         if (error != null) {
-            addDukeDialog(error);
+            addDukeError(error);
         }
+    }
+
+    private void addDialogBox(DialogBox dialogBox) {
+        dialogContainer.getChildren().add(dialogBox);
     }
 
     private void addUserDialog(String dialog) {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(dialog, userAvatar));
+        addDialogBox(DialogBox.getUserDialog(dialog, userAvatar));
     }
 
     private void addDukeDialog(String dialog) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dialog, dukeAvatar));
+        addDialogBox(DialogBox.getDukeDialog(dialog, dukeAvatar));
+    }
+
+    private void addDukeWarning(String dialog) {
+        addDialogBox(DialogBox.getDukeWarning(dialog, dukeAvatar));
+    }
+
+    private void addDukeError(String dialog) {
+        addDialogBox(DialogBox.getDukeError(dialog, dukeAvatar));
     }
 }

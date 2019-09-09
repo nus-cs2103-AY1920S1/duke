@@ -1,8 +1,8 @@
+import Exceptions.InvalidInputException;
 import Exceptions.MissingInputException;
 import UI.MessageGenerator;
 import UI.UI;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke{
@@ -23,7 +23,7 @@ public class Duke{
         isExit = false;
     }
 
-    private void run() throws MissingInputException {
+    private void run() throws MissingInputException, InvalidInputException {
         greeter.greet();
         ui.processFile();
         while (!isExit) {
@@ -33,11 +33,15 @@ public class Duke{
         greeter.bye();
     }
 
-    String getResponse(String input) throws IOException {
+    String greet() {
+        return greeter.greet();
+    }
+
+    String getResponse(String input) {
         return ui.processInput(input);
     }
 
-    public static void main(String[] args) throws MissingInputException {
+    public static void main(String[] args) throws MissingInputException, InvalidInputException {
         new Duke().run();
     }
 

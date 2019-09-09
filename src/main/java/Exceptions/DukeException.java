@@ -1,9 +1,11 @@
 package Exceptions;
 
 import Data.Formatter;
+import UI.MessageGenerator;
 
 public abstract class DukeException extends Exception {
-    Formatter formatter = new Formatter();
+
+    MessageGenerator msg = new MessageGenerator();
     String taskType;
 
     /**
@@ -13,6 +15,7 @@ public abstract class DukeException extends Exception {
 
     /**
      * Creates DukeException that are related to tasks.
+     *
      * @param taskType String taken in for error printing purposes.
      */
     DukeException(String taskType) {
@@ -21,6 +24,7 @@ public abstract class DukeException extends Exception {
 
     /**
      * Creates String for error message.
+     *
      * @return error message.
      */
     public abstract String getErrorMessage();
@@ -28,7 +32,7 @@ public abstract class DukeException extends Exception {
     /**
      * Prints formatted error message.
      */
-    public void printError() {
+  /*  public void printError() {
         formatter.printFormat(getErrorMessage());
-    }
+    } */
 }

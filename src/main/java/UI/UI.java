@@ -23,6 +23,7 @@ public class UI {
 
     /**
      * Processes commands from the user to interact with given file.
+     *
      * @param fileInput String that indicates file path.
      */
     public UI(String fileInput) {
@@ -46,7 +47,7 @@ public class UI {
     /**
      * Processes file in storage and adds tasks to program.
      */
-    public void processFile() throws MissingInputException {
+    public void processFile() throws MissingInputException, InvalidInputException {
         for (Task task: storage.loadTasks().getTaskList()) {
             tasks.loadTask(task);
         }
@@ -66,7 +67,7 @@ public class UI {
     /**
      *
      */
-    public String processInput(String input) throws IOException {
+    public String processInput(String input) {
         String output = processCommand(parser.process(input));
         storage.updateTaskList(tasks);
         return output;
@@ -76,6 +77,7 @@ public class UI {
     /**
      * Intermediate method to process command.
      * This updates and writes the file.
+     *
      * @param command command created from parser.
      */
     private String processCommand(Command command) {

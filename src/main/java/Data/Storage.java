@@ -37,7 +37,7 @@ public class Storage {
      * Loads tasks from file into the program.
      * @return TaskList that will be used in the program for further modifications by user.
      */
-    public TaskList loadTasks() throws MissingInputException {
+    public TaskList loadTasks() throws MissingInputException, InvalidInputException {
         int counter = 0;
         try {
             sc = new Scanner(f);
@@ -50,7 +50,6 @@ public class Storage {
                 Date date;
                 Time time;
                 counter++;
-                try {
                     switch (details[0]) {
                     case "T":
                         tasks.loadTask(new Todo(counter, details[2], "T", done));
@@ -68,9 +67,6 @@ public class Storage {
                     default:
                         throw new InvalidInputException();
                     }
-                } catch (InvalidInputException e) {
-                    e.printError();
-                }
             }
         } catch (IOException e) {
             System.out.println("file not detected");
@@ -82,9 +78,8 @@ public class Storage {
      * Writes formatted task list into file.
      *
      * @param tasks Task list that has been processed and updated.
-     * @throws IOException when there are input problems.
      */
-    public void updateTaskList(TaskList tasks) throws IOException {
+    public void updateTaskList(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks.getTaskList()) {

@@ -1,10 +1,10 @@
 import java.io.IOException;
 
-        import javafx.application.Application;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Scene;
-        import javafx.scene.layout.AnchorPane;
-        import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * A GUI for Duke using FXML.
@@ -12,6 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private boolean first = true;
 
     @Override
     public void start(Stage stage) {
@@ -22,6 +23,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

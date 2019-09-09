@@ -6,6 +6,7 @@ public class Todo extends Task {
 
     /**
      * Creates Todo (also a Task).
+     *
      * @param num Number in the list.
      * @param task String indicates description of task.
      * @param type String indicates task type, in this case "T".
@@ -17,6 +18,7 @@ public class Todo extends Task {
 
     /**
      * Creates Todo (also a Task).
+     *
      * @param num Number in the list.
      * @param task String indicates description of task.
      * @param type String indicates task type, in this case "T".
@@ -28,6 +30,7 @@ public class Todo extends Task {
 
     /**
      * Formats the todo for printing.
+     *
      * @return String in the form for printing
      */
     @Override
@@ -37,6 +40,7 @@ public class Todo extends Task {
 
     /**
      * Formats task to be written in given file.
+     *
      * @return formatted string for writing in file.
      */
     @Override

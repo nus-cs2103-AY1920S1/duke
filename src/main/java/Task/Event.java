@@ -9,6 +9,7 @@ public class Event extends Task {
 
     /**
      * Creates Events (also a Task).
+     *
      * @param num Number in the list.
      * @param task String indicates description of task.
      * @param date Date at which deadline occurs.
@@ -28,6 +29,7 @@ public class Event extends Task {
     /**
      * Creates Events (also a Task).
      * Done status is set as not done by default.
+     *
      * @param num Number in the list.
      * @param task String indicates description of task.
      * @param date Date at which deadline occurs.
@@ -45,7 +47,8 @@ public class Event extends Task {
 
     /**
      * Formats the event for printing.
-     * @return String in the form for printing
+     *
+     * @return String in the form for printing.
      */
     @Override
     public String toString() {
@@ -54,6 +57,7 @@ public class Event extends Task {
 
     /**
      * Formats task to be written in given file.
+     *
      * @return formatted string for writing in file.
      */
     @Override

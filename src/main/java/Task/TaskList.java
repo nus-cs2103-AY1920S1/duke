@@ -29,7 +29,9 @@ public class TaskList {
     /**
      * Adds task to task list.
      * Prints message when task is added via user input.
+     *
      * @param task task to be added.
+     * @return program message when task is added.
      */
     public String addTask(Task task) {
         taskList.add(task);
@@ -38,6 +40,7 @@ public class TaskList {
 
     /**
      * Adds task to task List when task is loaded from the file.
+     *
      * @param task task loaded from the file that is to be added.
      */
     public void loadTask(Task task) {
@@ -47,7 +50,10 @@ public class TaskList {
     /**
      * Removes task of given identification number from list.
      * Prints message when task is removed.
+     * Method is only called when task is a valid number.
+     *
      * @param taskNo identification number of task in list.
+     * @return message to indicate task is removed.
      */
     private String removeTask(int taskNo) {
         Task deleted = taskList.get(taskNo);
@@ -57,6 +63,7 @@ public class TaskList {
 
     /**
      * Formats task list into list of strings for printing/writing.
+     *
      * @return List of Strings.
      */
     private List<String> listify(List<Task> tasks) {
@@ -85,6 +92,7 @@ public class TaskList {
 
     /**
      * Checks if given task number exists in task list.
+     *
      * @param taskNo identification number for task.
      * @return whether or not task number exists.
      */
@@ -129,8 +137,10 @@ public class TaskList {
     }
 
     /**
-     * Searches and prints matching tasks in task list.
+     * Searches and prints matching tasks in task list
+     * .
      * @param keyword word that task must contain to be printed.
+     * @return String containing list of tasks.
      */
     public String findMatchingTasks(String keyword) {
         List<Task> matchingTasks = new ArrayList<>();

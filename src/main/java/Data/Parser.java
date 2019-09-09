@@ -1,6 +1,5 @@
 package Data;
 
-import Exceptions.DukeException;
 import Exceptions.InvalidCommandException;
 import Exceptions.InvalidInputException;
 import Exceptions.MissingInputException;
@@ -18,6 +17,7 @@ public class Parser {
 
     /**
      * Takes in line of information to process into commands for program to read.
+     *
      * @param line task description or information needed for processing.
      * @return command used for updating tasks.
      * @throws InvalidCommandException when program gives an invalid command type.
@@ -47,6 +47,7 @@ public class Parser {
 
     /**
      * Processes String to retrieve keyword for search.
+     *
      * @param command command for finding matching tasks.
      * @return keyword for matching tasks.
      */
@@ -58,9 +59,11 @@ public class Parser {
 
     /**
      * Creates task from given Command.
+     *
      * @param command command for task to be created.
      * @return task created from the command.
      * @throws MissingInputException when command's description is incomplete.
+     * @throws InvalidInputException when date/time description is not in given format.
      */
     public Task createTask(Command command) throws InvalidInputException, MissingInputException {
         String line = command.getDescription();
@@ -73,6 +76,7 @@ public class Parser {
 
     /**
      * Processes command description for task number of related task.
+     *
      * @param command command for task to be marked as done/deleted.
      * @return task number
      * @throws MissingInputException when command's description is incomplete.
@@ -90,12 +94,14 @@ public class Parser {
     /**
      * Creates task by processing information given for task.
      * Intermediate operation for Parser's createTask method.
+     *
      * @param taskNo Task's number in the list.
      * @param taskType tasks of type Todo/Deadline/Event.
      * @param arr String array that contains task description that has been processed.
      * @return Task created from given inputs.
+     * @throws MissingInputException when description is incomplete.
      */
-    Task createNewTask(int taskNo, String taskType, String[] arr) throws InvalidInputException, MissingInputException {
+    Task createNewTask(int taskNo, String taskType, String[] arr) throws MissingInputException {
         boolean firstInDescription = true;
         String desc = "";
         Date date = null;

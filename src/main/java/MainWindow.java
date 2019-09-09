@@ -8,7 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,6 +25,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private boolean first = true;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/grizz.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/panda.png"));
@@ -39,16 +41,26 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InvalidCommandException, InvalidInputException, IOException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (input.equals("bye")) {
+            Timer timer = new Timer();
+            TimerTask exitGUI = new TimerTask() {
+                public void run() {
+                    System.exit(0);
+                }
+            };
+            timer.schedule(exitGUI, 500);
+        }
         userInput.clear();
     }
 }

@@ -1,6 +1,8 @@
-package duke.command;
+package duke.command.command;
 
+import duke.command.Command;
 import duke.task.TasksController;
+import error.ui.UiException;
 
 /***
  * <p>
@@ -30,7 +32,7 @@ public class DeleteCommand implements Command {
      * @return new ListenCommand.
      */
     @Override
-    public void execute() {
+    public void execute() throws UiException {
         tasksController.deleteTask(deletedTaskIndex);
     }
 

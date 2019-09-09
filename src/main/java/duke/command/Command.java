@@ -1,5 +1,7 @@
 package duke.command;
 
+import error.ui.UiException;
+
 /***
  * <p>
  * Command interface to create classes in charge of executing specific actions in the program.
@@ -12,5 +14,5 @@ public interface Command {
      * </p>
      * @return following duke.command if available.
      */
-    public void execute();
+    public void execute() throws UiException;
 }

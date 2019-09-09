@@ -1,6 +1,6 @@
 package duke;
 
-import error.StorageException;
+import error.storage.StorageException;
 import storage.FileSystemStorage;
 import storage.Storage;
 

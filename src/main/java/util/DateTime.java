@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * Utility class to handle date and time.
  * </p>
  */
-public class DukeDateTime {
+public class DateTime {
     /***
      * <p>
      * Parses a string into a LocalDateTime object. E.g. 24/02/2022 0315.

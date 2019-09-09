@@ -1,11 +1,7 @@
-package duke.command;
+package duke.command.command;
 
-import error.ConfigurationException;
+import duke.command.Command;
 import duke.task.TasksController;
-import util.DukeInput;
-import util.OutputBuilder;
-import util.DukeOutput;
-import util.DukeStorage;
 
 /***
  * <p>
@@ -21,7 +17,7 @@ public class ByeCommand implements Command {
      * </p>
      * @param tasksController controller for duke.task list to which new tasks will be saved to.
      */
-    ByeCommand(TasksController tasksController) {
+    public ByeCommand(TasksController tasksController) {
         this.tasksController = tasksController;
     }
 
@@ -58,11 +54,6 @@ public class ByeCommand implements Command {
 //        }
 //
 //        sayGoodbye();
-//        DukeInput.close();
-    }
-
-    private void sayGoodbye() {
-        OutputBuilder goodbyeMessage = new OutputBuilder("Bye. Hope to see you again soon!");
-        DukeOutput.printMessage(goodbyeMessage);
+//        DukeInput.close();}
     }
 }

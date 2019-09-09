@@ -1,6 +1,9 @@
 package duke.task.tasks;
 
+import error.task.UnknownTaskException;
+
 import java.io.Serializable;
+import java.util.stream.Stream;
 
 /***
  * <p>
@@ -21,5 +24,12 @@ public enum TaskKeyword implements Serializable {
     TaskKeyword(String keyword, SerializableTaskProducer taskProducer) {
         this.keyword = keyword;
         this.taskProducer = taskProducer;
+    }
+
+    public static TaskKeyword parseKeyword(String keyword) throws UnknownTaskException {
+        return Stream.of(TaskKeyword.values())
+                .filter(taskKeyWord -> taskKeyWord.keyword.equals(keyword))
+                .findFirst()
+                .orElseThrow(UnknownTaskException::new);
     }
 }

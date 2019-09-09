@@ -1,6 +1,8 @@
-package duke.command;
+package duke.command.command;
 
+import duke.command.Command;
 import duke.task.TasksController;
+import error.ui.UiException;
 
 /***
  * <p>
@@ -18,7 +20,7 @@ public class FindCommand implements Command {
      * @param tasksController controller for duke.task list to be searched.
      * @param arguments substring to search for.
      */
-    FindCommand(TasksController tasksController, String arguments) {
+    public FindCommand(TasksController tasksController, String arguments) {
         this.tasksController = tasksController;
         searchParameter = arguments;
     }
@@ -30,7 +32,7 @@ public class FindCommand implements Command {
      * @return new ListenCommand.
      */
     @Override
-    public void execute() {
+    public void execute() throws UiException {
         tasksController.findTasks(searchParameter);
     }
 }

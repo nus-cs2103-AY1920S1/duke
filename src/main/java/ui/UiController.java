@@ -1,6 +1,6 @@
 package ui;
 
-import error.UiException;
+import error.ui.UiException;
 import ui.input.InputHandler;
 import ui.input.InputListener;
 import ui.output.OutputHandler;

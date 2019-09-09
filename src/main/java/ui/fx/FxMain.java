@@ -1,6 +1,5 @@
 package ui.fx;
 
-import error.UiException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +53,6 @@ public class FxMain extends Application implements InputHandler, OutputHandler {
 
     @Override
     public void updateAllListeners(String input) {
-        System.out.println("message received" + listeners.size());
         listeners.forEach(listener -> listener.update(input));
     }
 
@@ -75,7 +73,6 @@ public class FxMain extends Application implements InputHandler, OutputHandler {
 
     @Override
     public void display(String message) {
-        System.out.println("message received to print");
         controller.printDukeMessage(message);
     }
 }

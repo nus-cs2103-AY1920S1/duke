@@ -1,9 +1,11 @@
 package duke.task;
 
 import duke.task.tasks.Task;
-import error.StorageException;
+import error.storage.StorageException;
+import error.ui.UiException;
 import storage.Storage;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,12 +39,12 @@ public class TasksController {
      * </p>
      * @return list of tasks.
      */
-    public List<Task> getTasks() throws StorageException {
+    public List<Task> getTasks() throws UiException {
         try {
             return storage.getTasks();
         } catch (StorageException e) {
-            view.displayError(e);
-            throw e;
+            view.printStorageException(e);
+            return new ArrayList<>();
         }
     }
 
@@ -52,13 +54,14 @@ public class TasksController {
      * </p>
      * @param task duke.task to be added.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
             tasks.add(task);
             storage.writeTasks(tasks);
+            view.displayNewTask(task, tasks.size());
         } catch (StorageException e) {
-            view.displayError(e);
+            view.printStorageException(e);
         }
     }
 
@@ -68,7 +71,7 @@ public class TasksController {
      * </p>
      * @param index index of duke.task to be set to done.
      */
-    public void setTaskToDone(int index) {
+    public void setTaskToDone(int index) throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
             tasks.get(index).setDone(true);
@@ -77,8 +80,9 @@ public class TasksController {
 
             // write changes to storage file
             storage.writeTasks(tasks);
+
         } catch (StorageException e) {
-            view.displayError(e);
+            view.printStorageException(e);
         }
     }
 
@@ -87,13 +91,12 @@ public class TasksController {
      * Prints all tasks.
      * </p>
      */
-    public void displayAllTasks() {
+    public void displayAllTasks() throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
             view.displayAllTasks(tasks);
-
         } catch (StorageException e) {
-            view.displayError(e);
+            view.printStorageException(e);
         }
     }
 
@@ -103,7 +106,7 @@ public class TasksController {
      * </p>
      * @param index index of duke.task to be deleted.
      */
-    public void deleteTask(int index) {
+    public void deleteTask(int index) throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
 
@@ -112,8 +115,8 @@ public class TasksController {
             view.displayTaskDeleted(deleted, tasks.size());
 
             storage.writeTasks(tasks);
-        } catch (StorageException | IndexOutOfBoundsException e) {
-            view.displayError(e);
+        } catch (StorageException e) {
+            view.printStorageException(e);
         }
     }
 
@@ -123,7 +126,7 @@ public class TasksController {
      * </p>
      * @param parameter substring to be searched.
      */
-    public void findTasks(String parameter) {
+    public void findTasks(String parameter) throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
 
@@ -132,9 +135,8 @@ public class TasksController {
                     .collect(Collectors.toList());
 
             view.displaySearchResults(matchingTasks);
-
         } catch (StorageException e) {
-            view.displayError(e);
+            view.printStorageException(e);
         }
     }
 }

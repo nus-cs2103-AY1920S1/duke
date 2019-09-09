@@ -1,9 +1,10 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.CommandFactory;
+import duke.command.factory.CommandFactory;
 import duke.task.TasksView;
 import duke.task.TasksController;
+import error.ui.UiException;
 import storage.Storage;
 import ui.UiActivity;
 import ui.UiController;
@@ -55,7 +56,7 @@ public class Duke implements UiActivity {
         TasksController tasks = TasksController.fromStorage(storage, view);
 
         // Initialize command factory
-        factory = new CommandFactory(tasks);
+        factory = new CommandFactory(tasks, ui);
     }
 
     private void exit() {
@@ -64,7 +65,16 @@ public class Duke implements UiActivity {
 
     @Override
     public void onInputReceived(String input) {
-        Optional<Command> command = factory.parse(input);
-        command.ifPresent(Command::execute);
+        try {
+            Optional<? extends Command> command = factory.parse(input);
+
+            if (command.isPresent()) {
+                command.get().execute();
+            }
+
+        } catch (UiException e) {
+            System.out.println("FATAL: Ui stopped working.");
+            exit();
+        }
     }
 }

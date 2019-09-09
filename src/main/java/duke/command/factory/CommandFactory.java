@@ -1,9 +1,10 @@
-package duke.command;
+package duke.command.factory;
 
-import error.UnknownCommandException;
+import duke.command.*;
+import duke.command.command.*;
 import duke.task.TasksController;
-import util.OutputBuilder;
-import util.DukeOutput;
+import error.ui.UiException;
+import ui.UiController;
 
 import java.util.Optional;
 
@@ -14,6 +15,8 @@ import java.util.Optional;
  */
 public class CommandFactory {
     private TasksController tasksController;
+    private AddCommandFactory addCommandFactory;
+    private UiController ui;
 
     /***
      * <p>
@@ -21,8 +24,10 @@ public class CommandFactory {
      * </p>
      * @param tasksController controller for duke.task list on which commands are executed.
      */
-    public CommandFactory(TasksController tasksController) {
+    public CommandFactory(TasksController tasksController, UiController ui) {
         this.tasksController = tasksController;
+        this.addCommandFactory = new AddCommandFactory(tasksController, ui);
+        this.ui = ui;
     }
 
     /***
@@ -31,9 +36,9 @@ public class CommandFactory {
      * </p>
      * @return corresponding commands.
      */
-    public Optional<Command> parse(String userInput) {
-        String command = getCommand(userInput);
-        String arguments = getArguments(userInput);
+    public Optional<? extends Command> parse(String userInput) throws UiException {
+        String command = CommandUtils.getCommand(userInput);
+        String arguments = CommandUtils.getArguments(userInput);
 
         switch (command) {
         case "bye":
@@ -47,27 +52,11 @@ public class CommandFactory {
         case "find":
             return Optional.of(new FindCommand(tasksController, arguments));
         default:
-            try {
-                return Optional.of(new AddCommand(command, arguments, tasksController));
-            } catch (UnknownCommandException e) {
-                DukeOutput.printMessage(new OutputBuilder(e.getMessage()));
-                return Optional.empty();
-            }
+            return addCommandFactory.parse(userInput);
         }
     }
 
-    private String getCommand(String userInput) {
-        return userInput.split(" ", 2)[0];
-    }
 
-    private String getArguments(String userInput) {
-        String[] splitInput = userInput.split(" ", 2);
-        if (splitInput.length > 1) {
-            return splitInput[1];
-        } else {
-            return "";
-        }
-    }
 
 
 }

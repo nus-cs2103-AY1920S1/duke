@@ -1,7 +1,7 @@
 package storage;
 
 import duke.task.tasks.Task;
-import error.StorageException;
+import error.storage.StorageException;
 
 import java.io.*;
 import java.util.ArrayList;

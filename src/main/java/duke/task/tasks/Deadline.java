@@ -2,7 +2,7 @@ package duke.task.tasks;
 
 import error.task.InvalidArgumentsException;
 import error.task.UnknownDateTimeException;
-import util.DukeDateTime;
+import util.DateTime;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -35,7 +35,7 @@ public class Deadline extends Task {
 
     @Override
     protected Optional<String> getTaskExtraDetails() {
-        String byString = DukeDateTime.getString(by);
+        String byString = DateTime.getString(by);
         return Optional.of(String.format("by: %s", byString));
     }
 
@@ -46,7 +46,7 @@ public class Deadline extends Task {
     private LocalDateTime getTiming(String arguments) throws UnknownDateTimeException, InvalidArgumentsException {
         try {
             String dateTime = arguments.split(" /by ")[1];
-            return DukeDateTime.parseDateTime(dateTime);
+            return DateTime.parseDateTime(dateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidArgumentsException("\"/by\"");
         }

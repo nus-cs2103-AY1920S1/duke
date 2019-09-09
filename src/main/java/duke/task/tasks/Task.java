@@ -13,7 +13,6 @@ public abstract class Task implements Serializable {
     private static final long serialVersionUID = 6529685098267757690L;
     private String description;
     private boolean done;
-    private TaskKeyword keyword;
 
     /***
      * <p>
@@ -24,7 +23,6 @@ public abstract class Task implements Serializable {
      */
     public Task(String description, TaskKeyword keyword) {
         this.description = description;
-        this.keyword = keyword;
         done = false;
     }
 

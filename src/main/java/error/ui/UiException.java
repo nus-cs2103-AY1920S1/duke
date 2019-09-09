@@ -1,4 +1,4 @@
-package error;
+package error.ui;
 
 public class UiException extends Exception {
     public UiException(String message) {

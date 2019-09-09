@@ -3,22 +3,26 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 
+import duke.javafx.DialogBox;
 import duke.main.Parser;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 
 import java.io.IOException;
-/*
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;*/
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * A task list that supports several basic features:
@@ -27,7 +31,7 @@ import javafx.stage.Stage;*/
  * 3) Ability to search for expressions in given tasks.
  * 4) Ability to print current list of tasks.
  */
-public class Duke {
+public class Duke extends Application {
     /**
      * The TaskList object which abstracts out a list of tasks.
      */
@@ -45,7 +49,7 @@ public class Duke {
     
     public static boolean isExitRunLoop;
     
-    /*private ScrollPane scrollPane;
+    private ScrollPane scrollPane;
     
     private VBox dialogContainer;
     
@@ -53,7 +57,11 @@ public class Duke {
     
     private Button sendButton;
     
-    private Scene scene;*/
+    private Scene scene;
+    
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
     
     /**
      * Initializes a Duke object.
@@ -61,7 +69,7 @@ public class Duke {
      * with a constructor with parameters. This was the best workaround I could find after 4 days of trying.
      */
     public Duke() {
-    
+        this("CurrentTaskList.txt");
     }
     
     /**
@@ -71,7 +79,7 @@ public class Duke {
      *
      * @param filePath The file path of the hard drive location to read and write from, as a String.
      */
-    private void setPath(String filePath) {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -99,7 +107,48 @@ public class Duke {
             }
         }
     }
-    /*
+    
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+    
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(taskList, ui, storage);
+        } catch (DukeException | IOException e) {
+            return ui.showError(e);
+        }
+    }
+    
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+        
+        return textToAdd;
+    }
+    
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -148,13 +197,21 @@ public class Duke {
     
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+        
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
     
-        // more code to be added here later
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
-    */
+    
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.setPath("CurrentTaskList.txt");
-        duke.run();
+        new Duke("CurrentTaskList.txt").run();
     }
 }

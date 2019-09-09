@@ -135,7 +135,7 @@ public class Parser {
      * @param inputElements The inputted String array containing the stored values of the formatted String.
      * @return Returns a LocalDateTime object representing the date of the Task.
      */
-    static LocalDateTime parseStoredTime(String[] inputElements) {
+    public static LocalDateTime parseStoredTime(String[] inputElements) {
         String[] taskTimeParsed = inputElements[3].split("[ /]");
         return LocalDateTime.of(Integer.parseInt(taskTimeParsed[2]),
                 Integer.parseInt(taskTimeParsed[1]), Integer.parseInt(taskTimeParsed[0]),

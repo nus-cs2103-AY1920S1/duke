@@ -16,6 +16,10 @@ public class ListCommand extends Command {
         return ("Here are the tasks in your list:" + "\n" + tasks.showList());
     }
 
+    /**
+     * Boolean to exit from program
+     * @return true or false depending if we want to stop the program
+     */
     @Override
     public boolean isExit() {
         return false;

@@ -20,15 +20,6 @@ public abstract class Ui {
     }
 
     /**
-     * Returns the error String prompt.
-     *
-     * @param e DukeException object, which is a subclass of the Exception class.
-     */
-    public static String getLoadingError(DukeException e) {
-        return (e.getMessage());
-    }
-
-    /**
      * Returns list sequence for LIST command.
      *
      * @param tasks TaskList object.

@@ -124,11 +124,11 @@ public class Duke {
             }
             return output;
         } catch (DukeException e) {
-            return e.getMessage();
+            DukeErrorInterface dei = (e1) -> e1.getMessage();
+            return dei.getLoadingError(e);
         } catch (IOException e) {
             return e.getMessage();
         }
-
     }
 
     /**
@@ -151,7 +151,8 @@ public class Duke {
             try {
                 isBye = executeTasksCli(fullCommand);
             } catch (DukeException e) {
-                System.out.println(cli.getLoadingError(e));
+                DukeErrorInterface dei = (e1) -> e1.getMessage();
+                System.out.println(dei.getLoadingError(e));
             } catch (StringIndexOutOfBoundsException e) {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {

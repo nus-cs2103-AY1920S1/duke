@@ -13,15 +13,15 @@ import java.util.Date;
  * Represents a deadline task to added.
  */
 public class DeadlineCommand extends Command {
-    private String[] arguments;
+    private String[] details;
 
     /**
      * Initializes DeadlineCommand with deadline description and due date.
      *
-     * @param arguments contains description and due date
+     * @param details contains description and due date
      */
-    public DeadlineCommand(String[] arguments) {
-        this.arguments = arguments;
+    public DeadlineCommand(String[] details) {
+        this.details = details;
     }
 
     /**
@@ -37,8 +37,8 @@ public class DeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             StringDateConverter converter = new StringDateConverter();
-            Date by = converter.convertStringToDate(arguments[1].trim());
-            tasks.getTasks().add(new Deadline(arguments[0], by));
+            Date by = converter.convertStringToDate(details[1].trim());
+            tasks.getTasks().add(new Deadline(details[0], by));
             ui.showDeadlineCommand(tasks);
         } catch (ParseException e) {
             ui.showLoadingError("Please enter a valid date.");

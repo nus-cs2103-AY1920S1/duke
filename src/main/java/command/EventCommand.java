@@ -13,15 +13,15 @@ import java.util.Date;
  * Represent an event to be added.
  */
 public class EventCommand extends Command {
-    private String[] arguments;
+    private String[] details;
 
     /**
      * Initializes EventCommand with event description and date of event.
      *
-     * @param arguments contains event description and date of event
+     * @param details contains event description and date of event
      */
-    public EventCommand(String[] arguments) {
-        this.arguments = arguments;
+    public EventCommand(String[] details) {
+        this.details = details;
     }
 
     /**
@@ -37,8 +37,8 @@ public class EventCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             StringDateConverter converter = new StringDateConverter();
-            Date at = converter.convertStringToDate(arguments[1]);
-            tasks.getTasks().add(new Event(arguments[0], at));
+            Date at = converter.convertStringToDate(details[1]);
+            tasks.getTasks().add(new Event(details[0], at));
             ui.showEventCommand(tasks);
         } catch (ParseException e) {
             ui.showLoadingError("Please enter a valid date.");

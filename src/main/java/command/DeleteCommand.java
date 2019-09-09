@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             ui.showDeleteCommand(tasks, this.index);
-            int sizeBeforeRemove = tasks.getTasks().size();
+            int sizeBeforeRemove = tasks.getTasks().size(); // for Java assert
             tasks.getTasks().remove(this.index);
             assert tasks.getTasks().size() + 1 == sizeBeforeRemove : "incorrect delete";
         } catch (IndexOutOfBoundsException e) {

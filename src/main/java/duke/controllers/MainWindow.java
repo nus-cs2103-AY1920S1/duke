@@ -32,6 +32,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         assert userImage != null : "userImage cannot be null";
         assert dukeImage != null : "dukeImage cannot be null";
+
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         showWelcome();
     }
@@ -41,7 +42,9 @@ public class MainWindow extends AnchorPane {
      */
     public void showWelcome() {
         String welcomeMessage = "Hello! I'm Duke\n" + "What can I do for you?";;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+        );
     }
 
     /**

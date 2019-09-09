@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Ui {
-    private static final String TABS = "     ";
-
     public Ui() {
 
     }

@@ -30,7 +30,6 @@ public class DoneCommand extends Command {
      * @return String that shows what task marked as done
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String message = "";
         Task taskCompleted = tasks.getTask(taskNumber);
         taskCompleted.markAsDone();
 

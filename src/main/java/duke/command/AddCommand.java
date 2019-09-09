@@ -36,7 +36,6 @@ public class AddCommand extends Command {
         message += ui.showNumberOfTasks(numberOfTasks);
 
         storage.writeTaskToFile(tasks);
-
         return message;
     }
 }

@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, LocalDateTime dateTime) {
         super(description);
+        assert dateTime != null;
         this.dateTime = dateTime;
     }
 

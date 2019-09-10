@@ -3,12 +3,12 @@ package duke;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * The Duke class creates Duke, the personal assistant chatbot
  * that helps a person keeps track of various things.
  */
-
 public class Duke {
 
     private Storage storage;
@@ -23,8 +23,8 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadTasks());
-        } catch (DukeException e) {
-            tasks = new TaskList();
+        } catch (DukeException | ParseException e) {
+            tasks = new TaskList(); // if there are no tasks to load from tasks.txt or tasks.txt is corrupted
         } catch (FileNotFoundException e) {
             File file = new File(filePath);
             try {
@@ -38,12 +38,18 @@ public class Duke {
     }
 
     /**
-     * Returns a response from the given input by calling the repond method in the Ui class.
+     * Returns a response from the given input by calling the respond method in the Ui class.
      *
      * @param input The input from user.
      * @return string The response from duke.
      */
     public String getResponse(String input) {
-        return ui.respond(input);
+        String response = "";
+        try {
+            response = ui.respond(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
     }
 }

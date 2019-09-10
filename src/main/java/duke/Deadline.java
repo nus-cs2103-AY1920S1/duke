@@ -1,12 +1,15 @@
 package duke;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * The Deadline class creates a Deadline task
  * that extends from the Task class.
  */
 public class Deadline extends Task {
 
-    private String by;
+    private Date by;
 
     /**
      * Constructor for class Deadline.
@@ -14,18 +17,19 @@ public class Deadline extends Task {
      * @param description The Deadline task.
      * @param by Deadline of the task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
 
     /**
-     * Returns the deadline of the task.
+     * Returns the formatted deadline of the task.
      *
      * @return by Deadline of the task.
      */
     public String getBy() {
-        return by;
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
+        return dateTimeFormat.format(by);
     }
 
     /**
@@ -35,6 +39,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + this.getBy() + ")";
     }
 }

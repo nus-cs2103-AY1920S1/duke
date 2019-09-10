@@ -1,12 +1,15 @@
 package duke;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * The Event class creates a Event task
  * that extends from the Task class.
  */
 public class Event extends Task {
 
-    private String at;
+    private Date at;
 
     /**
      * Constructor for class Event.
@@ -14,18 +17,19 @@ public class Event extends Task {
      * @param description The Event task.
      * @param at The date/time of event.
      */
-    public Event(String description, String at) {
+    public Event(String description, Date at) {
         super(description);
         this.at = at;
     }
 
     /**
-     * Returns the date and time of the event.
+     * Returns the formatted date and time of the event.
      *
      * @return at Date and time of event.
      */
     public String getAt() {
-        return at;
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
+        return dateTimeFormat.format(at);
     }
 
     /**
@@ -35,6 +39,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + this.getAt() + ")";
     }
 }

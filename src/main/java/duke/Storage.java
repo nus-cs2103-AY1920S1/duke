@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,16 +28,18 @@ public class Storage {
     }
 
     /**
-     * Returns a list of tasks to load into the task list.
+     * Returns a list of tasks to load onto the task list.
      *
      * @return tasks List of tasks.
      * @throws FileNotFoundException If file to load tasks from cannot be found.
-     * @throws DukeException If file is empty.
+     * @throws DukeException If file is empty or corrupted.
+     * @throws ParseException If date/time of file is corrupted.
      */
-    public List<Task> loadTasks() throws FileNotFoundException, DukeException {
+    public List<Task> loadTasks() throws FileNotFoundException, DukeException, ParseException {
         List<Task> tasks = new ArrayList<>();
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a");
 
         if (f.length() == 0) {
             throw new DukeException();
@@ -51,12 +55,14 @@ public class Storage {
                 break;
             case "D":
                 assert task.length == 4 : "Deadline should have 4 components";
-                tasks.add(new Deadline(task[2], task[3]));
+                tasks.add(new Deadline(task[2], dateTimeFormat.parse(task[3])));
                 break;
             case "E":
                 assert task.length == 4 : "Event should have 4 components";
-                tasks.add(new Event(task[2], task[3]));
+                tasks.add(new Event(task[2], dateTimeFormat.parse(task[3])));
                 break;
+            default:
+                throw new DukeException();
             }
             if (task[1].equals("1")) {
                 tasks.get(tasks.size() - 1).setDone();

@@ -26,28 +26,25 @@ public class Ui {
      * It also stores the task list in the hard drive when it changes.
      *
      * @param input Input from user.
-     * @return output The response to the given inout.
+     * @return output The response to the given input.
+     * @throws IOException Throws if an unpredicted error occurs when saving tasks.
      */
-    public String respond(String input) {
+    public String respond(String input) throws IOException {
         assert input.strip().length() != 0 : "Input cannot be empty";
         String output = "";
         String[] task = input.split(" ");
+        if (task[0].equals("bye")) {
+            output = "Bye. Hope to see you again soon!";
+            return output;
+        }
         try {
-            if (!task[0].equals("bye")) {
-                try {
-                    output = handleInput(task, input);
-                } catch (IllegalArgumentException e) {
-                    output = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-                } catch (IndexOutOfBoundsException e) {
-                    output = "OOPS!!! I'm sorry, but task number " + task[1] + " does not exist.";
-                } finally {
-                    storage.saveTasks(taskList);
-                }
-            } else {
-                output = "Bye. Hope to see you again soon!";
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            output = handleInput(task, input);
+        } catch (IllegalArgumentException e) {
+            output = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        } catch (IndexOutOfBoundsException e) {
+            output = "OOPS!!! I'm sorry, but task number " + task[1] + " does not exist.";
+        } finally {
+            storage.saveTasks(taskList);
         }
         return output;
     }

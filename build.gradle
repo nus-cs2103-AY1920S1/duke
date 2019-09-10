@@ -2,7 +2,8 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 group 'weomucat.duke'
@@ -18,7 +19,7 @@ application {
 }
 
 javafx {
-    version = "11.0.2"
+    version = "12.0.2"
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
@@ -28,6 +29,14 @@ dependencies {
 
 run {
     standardInput = System.in
+
+    // Disable JavaFX Hardware Acceleration
+    // Hardware Acceleration not working with linux nvidia
+    jvmArgs "-Dprism.order=sw"
+}
+
+shadowJar {
+    archiveClassifier = null
 }
 
 test {

@@ -37,9 +37,7 @@ public class Storage {
                }else{
                    currentstatusBoolean = true;
                }
-
-               String taskName = currentTaskArray[2];
-               
+               String taskName = currentTaskArray[2];    
                if(taskCategory.equals("T")){
 
                     ToDoTask newTask = new ToDoTask (currentstatusBoolean, taskName);

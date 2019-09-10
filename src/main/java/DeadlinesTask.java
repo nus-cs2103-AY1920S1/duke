@@ -50,9 +50,13 @@ class DeadlinesTask extends Task{
         String doneString;
         if(super.status){
             doneString = "1";
-        }else{
+            return "D|" +doneString + "|"+ super.message+ "|" + endingDateTime.toString() + "\n";
+        }else if (! super.status ){
             doneString = "0";
+            return "D|" +doneString + "|"+ super.message+ "|" + endingDateTime.toString() + "\n";
+        }else{
+            assert false : "Status of a event must be a boolean!" ;  
+            return "Status is not a boolean!";         
         }
-        return "D|" +doneString + "|"+ super.message+ "|" + endingDateTime.toString() + "\n";
     }
 }

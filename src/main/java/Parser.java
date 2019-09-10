@@ -57,9 +57,6 @@ public class Parser {
                 int taskSize = totalTasks.size();
                 String outputText = ui.printTaskDelete(totalTasks, index);
                 tasks.deleteTask(index - 1);
-
-                assert tasks.getListOfTasks().size() == taskSize - 1 : "Task should be deleted";
-
                 storage.writeFile(tasks.getListOfTasks());
                 return outputText;
             } else if (actionKey.equals("find")) {

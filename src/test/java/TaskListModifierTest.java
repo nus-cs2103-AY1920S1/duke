@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * A class to test the {@link ModifyTaskList} class
+ * A class to test the {@link TaskListModifier} class
  */
 
-public class ModifyTaskListTest {
+public class TaskListModifierTest {
 
     /**
      * Adds and modifies Tasks to in Task array list

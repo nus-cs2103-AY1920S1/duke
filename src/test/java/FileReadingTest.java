@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class FileReadingTest {
 
     /**
-     * Utilise {@link ModifyTaskListTest} to create a 'duke'.txt file
+     * Utilise {@link TaskListModifierTest} to create a 'duke'.txt file
      * and then read the file and compare data.
      */
 
     @Test
     public void fileReadTest() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>(100);
-        ModifyTaskListTest modifyTaskListTest = new ModifyTaskListTest();
+        TaskListModifierTest modifyTaskListTest = new TaskListModifierTest();
         modifyTaskListTest.modifyTest();
         FileReading.checkFileExists(taskList);
         String expectedOutput1 = "[T][✘] finish JUnit testing";

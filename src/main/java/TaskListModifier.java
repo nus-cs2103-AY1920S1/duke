@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * The class used to modify the existing task list based on the user's requests
  */
 
-public class ModifyTaskList {
+public class TaskListModifier {
 
     private Ui ui = new Ui();
 
@@ -22,9 +22,13 @@ public class ModifyTaskList {
 
     void addToTaskList(ArrayList<Task> taskList, Task t, Duke.Action action) throws IOException {
         assert action == Duke.Action.ADD;
-        taskList.add(t);
-        ui.addTask(taskList);
-        FileWriting.writeToFile(taskList);
+
+        DuplicateChecker duplicateChecker = new DuplicateChecker(taskList);
+        if (!duplicateChecker.checkDuplicate(t)) {
+            taskList.add(t);
+            ui.addTask(taskList);
+            FileWriting.writeToFile(taskList);
+        }
     }
 
     /**

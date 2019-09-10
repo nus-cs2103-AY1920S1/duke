@@ -8,8 +8,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    String typeOfTask = "";
-    protected static int taskCount = 0;
+    String typeOfTask;
 
     /**
      * Constructs a Task object with a specific description of a task that has to be completed.
@@ -19,9 +18,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        if (!description.equals("")) {
-            taskCount += 1;
-        }
     }
 
     /**
@@ -38,23 +34,6 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
-    }
-
-    /**
-     * Returns the number of Task objects that exist. This is a getter method.
-     *
-     * @return the number of Task objects that have been created.
-     */
-    public static int getTaskCount() {
-        return taskCount;
-    }
-
-    /**
-     * Performs the reduction of the number of Task that has been created by 1. This is method is
-     * needed when a Task is destroyed and the Task counter has to be updated.
-     */
-    public static void reduceTaskCount() {
-        taskCount -= 1;
     }
 
     /**

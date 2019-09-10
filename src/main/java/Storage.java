@@ -2,13 +2,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
-import java.io.PrintWriter;
 
 /**
  * Encapsulates the Storage object that is responsible of writing existing Tasks to the local storage.
@@ -22,8 +23,20 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
+        File tempFile = new File(filePath);
+        try {
+            if (!tempFile.exists()) {
+                tempFile.createNewFile();
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to create a new file at the specified location.");
+        }
     }
 
+    /**
+     *Loads data from the local file.
+     * @return the existing tasks that are stored in the local file.
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> taskStorage = new ArrayList<>();
         try {
@@ -51,7 +64,6 @@ public class Storage {
                 }
 
                 Task task = new Task("dummy");
-                Task.reduceTaskCount();
                 if (type.equals("T")) {
                     task = new Todo(description);
                 } else if (type.equals("D")) {
@@ -87,7 +99,7 @@ public class Storage {
      * @param input The date/ time input in the form of String. It should follow either dd/MM/yyyy HHmm or HHmm format.
      * @return Date format of the input String.
      */
-    private static Date convertStringToDate(String input) {
+    public static Date convertStringToDate(String input) {
         Date date = new Date();
         try {
             if (input.length() <= 5) {
@@ -97,6 +109,8 @@ public class Storage {
             } else {
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm", Locale.ENGLISH);
                 date = format.parse(input);
+                assert date.compareTo(new Date(0)) < 0 : "The deadline cannot be in the past. Please update " +
+                        "to a future time.";
                 return date;
             }
         } catch (ParseException e) {
@@ -105,20 +119,26 @@ public class Storage {
         return date;
     }
 
+    /**
+     * Updates the local list of tasks stored in a local text file. This ensures the continuous
+     * maintenance of the same file through of the lifetime of duke.
+     * @param taskStorage list of tasks that are stored in the local text file.
+     */
     public void updateLocalFile(ArrayList<Task> taskStorage) {
         try {
             FileWriter fw = new FileWriter(filePath);
             String textToAdd = new String();
             String taskType;
             String description;
-            Boolean isDone;
-            String isDoneRepresented = "0";
+            String isDoneRepresented;
             for (Task task : taskStorage) {
                 taskType = task.getTypeOfTask();
                 description = task.getDescription();
-                isDone = task.isDone();
+                Boolean isDone = task.isDone();
                 if (isDone) {
                     isDoneRepresented = "1";
+                } else {
+                    isDoneRepresented = "0";
                 }
                 if (taskType.equals("T")) {
                     textToAdd = taskType + ", " + isDoneRepresented + ", " + description + System.lineSeparator();

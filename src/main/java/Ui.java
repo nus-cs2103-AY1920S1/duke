@@ -3,24 +3,27 @@ import java.util.ArrayList;
 /**
  * Encapsulates the User Interface operations. It is responsible of all interaction with the user.
  */
-
 public class Ui {
 
     public Ui() {
 
     }
 
-    public void welcome() {
-        String logo = " ____        _        \n"
+    public String welcome() {
+        String logo = ("Hello I am\n") +
+                " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello I am\n" + logo);
-        System.out.println("What can I do for you?");
+                + "|____/ \\__,_|_|\\_\\___|\n"
+        + ("What can I do for you?");
+        return logo;
     }
 
     public String showListOfTask(TaskList tasks) {
+        if (tasks.size() == 0) {
+            return "There's currently no task in your list.";
+        }
         String string = "Here are the tasks in your list:";
         for (int i = 1; i <= tasks.size(); i++) {
             Task evaluatingTask = tasks.get(i - 1);
@@ -32,11 +35,11 @@ public class Ui {
     public String newTaskAdded(Task task, int taskCount) {
         if (taskCount > 1) {
             return ("Got it. I've added this task:\n" + "    "
-                    + task + "\n" + "Now you have " + taskCount
+                    + task + "\nNow you have " + taskCount
                     + " tasks in the list.\n");
         } else {
             return ("Got it. I've added this task:\n" + "    "
-                    + task + "\n" + "Now you have " + taskCount
+                    + task + "\nNow you have " + taskCount
                     + " task in the list.\n");
         }
     }
@@ -46,7 +49,7 @@ public class Ui {
     }
 
     public String doneAnnouncement(Task task) {
-        return ("Nice! I've marked this task as done: " + "\n"
+        return ("Nice! I've marked this task as done:\n"
                 + "    " + task + "\n");
     }
 
@@ -72,5 +75,9 @@ public class Ui {
             return header + ("\n" + i + "." + evaluatingTask.toString());
         }
         return new String();
+    }
+
+    public String announceNoneMatchingTask() {
+        return "Sorry, there are no matching tasks found.";
     }
 }

@@ -5,10 +5,6 @@ import seedu.duke.tasks.Task;
 import java.util.Scanner;
 
 public class UI {
-    private Scanner sc;
-//    private static final String BORDER = "________________________________________________________";
-//    private static final String UPPER_BORDER = BORDER + "\n\n";
-//    private static final String LOWER_BORDER = BORDER + "\n";
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -24,6 +20,7 @@ public class UI {
     private static final String NOW_YOU_HAVE = "Now you have ";
     private static final String TASK_WRAPPER_LOWER = " tasks in the list.\n";
     private static final String FOUND = "Here are the matching tasks in your list:\n";
+    private static final String NOT_FOUND = "OOPS!!! There weren't any matching tasks in your list!\n";
 
     /**
      * Prints out a welcome message.
@@ -45,6 +42,7 @@ public class UI {
      * @param taskList TaskList to print out.
      */
     public String showTaskList(TaskList taskList) {
+        assert taskList != null: "taskList cannot be null";
         return taskList.toString();
     }
 
@@ -80,7 +78,12 @@ public class UI {
      * @param foundItems The result of finding the taskList.
      */
     public String showFound(TaskList foundItems) {
-        return FOUND + foundItems;
+        assert foundItems != null: "foundItems has to be non-null";
+        if (foundItems.getTaskListSize() == 0) {
+            return NOT_FOUND;
+        } else {
+            return FOUND + foundItems;
+        }
     }
 
     /**

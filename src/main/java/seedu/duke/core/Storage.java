@@ -2,10 +2,10 @@ package seedu.duke.core;
 
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.TaskListEmptyException;
-import seedu.duke.model.Deadline;
-import seedu.duke.model.Event;
-import seedu.duke.model.Task;
-import seedu.duke.model.Todo;
+import seedu.duke.model.dto.Deadline;
+import seedu.duke.model.dto.Event;
+import seedu.duke.model.dto.Task;
+import seedu.duke.model.dto.Todo;
 
 import java.io.*;
 import java.text.ParseException;

@@ -1,4 +1,4 @@
-package seedu.duke.model;
+package seedu.duke.model.dto;
 
 public class Todo extends Task {
 

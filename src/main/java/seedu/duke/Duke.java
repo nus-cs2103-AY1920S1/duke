@@ -14,8 +14,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.duke.core.*;
-import seedu.duke.core.command.Command;
-import seedu.duke.model.Task;
+import seedu.duke.core.Parser;
+import seedu.duke.model.dto.Task;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class Duke extends Application {
         DukeController controller = new DukeController();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        Command command = new Command();
+        Parser parser = new Parser();
 
         File file = storage.initFile();
         List<Task> list = storage.loadTask(FILEPATH);
@@ -96,7 +96,7 @@ public class Duke extends Application {
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             try {
-                handleUserInput(controller, ui, list, storage, command);
+                handleUserInput(controller, ui, list, storage, parser);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -104,7 +104,7 @@ public class Duke extends Application {
 
         userInput.setOnAction((event) -> {
             try {
-                boolean isTerminate = handleUserInput(controller, ui, list, storage, command);
+                boolean isTerminate = handleUserInput(controller, ui, list, storage, parser);
                 if(isTerminate) {
                     //delay time for 1 second
                     TimeUnit.SECONDS.sleep(1);
@@ -125,7 +125,7 @@ public class Duke extends Application {
 
     private boolean handleUserInput(DukeController controller, Ui ui,
                                  List<Task> list, Storage storage,
-                                 Command command) throws IOException {
+                                 Parser parser) throws IOException {
         String userInputText = userInput.getText();
         Label userText = new Label(userInputText);
         Label dukeText = new Label();
@@ -136,7 +136,7 @@ public class Duke extends Application {
             isTerminate = true;
         } else {
             dukeText = new Label(getResponse(controller,
-                    userInputText, ui, list, storage, command));
+                    userInputText, ui, list, storage, parser));
         }
 
         dialogContainer.getChildren().addAll(
@@ -148,9 +148,9 @@ public class Duke extends Application {
     }
 
     private String getResponse(DukeController controller, String input, Ui ui,
-                               List<Task> list, Storage storage, Command command)
+                               List<Task> list, Storage storage, Parser parser)
         throws IOException {
-        return controller.executeFx(ui, list, storage, command, input);
+        return controller.executeFx(ui, list, storage, parser, input);
     }
 }
 

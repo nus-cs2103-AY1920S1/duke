@@ -25,6 +25,7 @@ public class Task {
      */
     @Override
     public String toString() {
+        assert !description.isEmpty() : "Description field is empty";
         return "[" + getStatusIcon() + "] " + description;
     }
 
@@ -33,6 +34,7 @@ public class Task {
      * @return String that representing the completion status as 1 or 0 and the description for saving in txt file
      */
     public String toSaveString() {
+        assert !description.isEmpty() : "Description field is empty";
         return (isDone ? 1 : 0) + " | " + description;
     }
 }

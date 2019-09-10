@@ -10,6 +10,7 @@ public class Parser {
      * @throws DukeException if no valid command is entered.
      */
     public static Command parse(String fullCommand) throws DukeException {
+        assert !fullCommand.isEmpty() : "No command entered";
         if (fullCommand.equals("bye")) {
             return new ExitCommand();
         } else if (fullCommand.equals("list")) {

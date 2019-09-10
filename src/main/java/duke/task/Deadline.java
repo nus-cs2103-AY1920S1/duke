@@ -19,6 +19,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws ParseException {
         super(description);
+        assert by.length() > 0;
         this.by = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(by);
     }
 

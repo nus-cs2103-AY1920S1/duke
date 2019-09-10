@@ -1,4 +1,4 @@
-package duke.command;
+package duke.io;
 
 import duke.task.Deadline;
 import duke.task.Event;

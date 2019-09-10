@@ -1,4 +1,4 @@
-package duke.command;
+package duke.io;
 
 import duke.exception.DukeIllegalActionException;
 import duke.exception.DukeIllegalDescriptionException;

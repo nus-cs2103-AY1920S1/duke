@@ -1,7 +1,7 @@
 package duke.ui;
 
-import duke.command.Parser;
-import duke.command.Storage;
+import duke.io.Parser;
+import duke.io.Storage;
 import duke.exception.DukeIllegalActionException;
 import duke.exception.DukeIllegalDescriptionException;
 
@@ -17,13 +17,6 @@ public class Ui {
      * Generates and prints the greeting message of DukeBot.
      */
     public String initMessage() {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-
-//        return ("Hello from\n" + logo) +
           return ("Hello! I'm Duke\n" + "What can I do for you?");
     }
 

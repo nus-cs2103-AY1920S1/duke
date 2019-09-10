@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -28,6 +29,13 @@ public class Parser {
             } else if (cmd.equals("find")) {
                 String desc = inputArr[1].trim();
                 nextCommand = new FindCommand(cmd, desc);
+            } else if (cmd.equals("view")) {
+                String date = inputArr[1].trim();
+                if (!isDateValid(date)) {
+                    throw new DukeException("Please enter a valid date. Eg. 29/8/2019");
+                }
+
+                nextCommand = new ViewCommand(cmd, date);
             } else if (cmd.equals("todo")) {
                 String desc = inputArr[1].trim();
 
@@ -84,17 +92,27 @@ public class Parser {
     private static String getDateTime(String details, String delimiter, String errorMessage) throws DukeException {
         int index = details.indexOf(delimiter);
         String dateTime = details.substring(index + delimiter.length()).trim();
-        if (isDateValid(dateTime)) {
+        if (isDateTimeValid(dateTime)) {
             return dateTime;
         } else {
             throw new DukeException(errorMessage);
         }
     }
 
-    private static boolean isDateValid(String dateTime) {
+    private static boolean isDateTimeValid(String dateTime) {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             LocalDateTime tempDateTime = LocalDateTime.parse(dateTime, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    private static boolean isDateValid(String date) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+            LocalDate tempDateTime = LocalDate.parse(date, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -105,7 +123,7 @@ public class Parser {
         try {
             return Integer.parseInt(indexStr);
         } catch (NumberFormatException e) {
-            throw new DukeException("☹ Please enter a valid number.");
+            throw new DukeException("Please enter a valid number.");
         }
     }
 

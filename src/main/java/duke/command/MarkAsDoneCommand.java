@@ -21,15 +21,17 @@ public class MarkAsDoneCommand extends Command {
      * <code>done taskName</code>
      * Reads result of executed command into preset task.txt file
      *
-     * @param tasks   <code>TaskList</code> object which holds the taskList
-     *                and various methods to operate on the taskList
-     * @param messageHandler      <code>UI</code> object which handles console output
-     * @param storage <code>Storage</code> object which allows for reading
-     *                result of executed command into preset task.txt file
+     * @param tasks          <code>TaskList</code> object which holds the taskList
+     *                       and various methods to operate on the taskList
+     * @param messageHandler <code>UI</code> object which handles console output
+     * @param storage        <code>Storage</code> object which allows for reading
+     *                       result of executed command into preset task.txt file
+     * @return <code>String</code representing the task that was successfully marked as completed
      * @throws TaskDoesNotExistException if taskNumber does not exist in taskList
      */
     @Override
-    public String execute(TaskList tasks, MessageHandler messageHandler, Storage storage) throws TaskDoesNotExistException {
+    public String execute(TaskList tasks, MessageHandler messageHandler, Storage storage)
+            throws TaskDoesNotExistException {
         int taskNumber = Integer.parseInt(commandInformation);
         Task t = tasks.markTaskAsCompleted(taskNumber);
         storage.writeToTasksFile(tasks);

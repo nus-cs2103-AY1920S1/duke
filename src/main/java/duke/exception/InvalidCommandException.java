@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Inherits from abstract DukeException class
+ * Inherits from abstract DukeException class.
  * Handles errors related to invalid commands
  */
 public class InvalidCommandException extends DukeException {

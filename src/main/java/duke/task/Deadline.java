@@ -45,6 +45,4 @@ public class Deadline extends Task {
         this.byDate = formatter.parse(by);
         this.details = "(by: " + by;
     }
-
-
 }

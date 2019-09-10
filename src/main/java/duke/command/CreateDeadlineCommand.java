@@ -20,14 +20,16 @@ public class CreateDeadlineCommand extends Command {
     }
 
     /**
-     * Executes commands in this format: <code>deadline taskName /by DD/MM/YYYY HHmm</code>
+     * Executes commands with this format: <code>deadline taskName /by DD/MM/YYYY HHmm</code>
      * and reads result of executed command into preset task.txt file
      *
-     * @param tasks   <code>TaskList</code> object which holds the taskList
-     *                and various methods to operate on the taskList
-     * @param messageHandler      <code>UI</code> object which handles console output
-     * @param storage <code>Storage</code> object which allows for reading
-     *                result of executed command into preset task.txt file
+     * @param tasks          <code>TaskList</code> object which holds the taskList
+     *                       and various methods to operate on the taskList
+     * @param messageHandler <code>UI</code> object which handles console output
+     * @param storage        <code>Storage</code> object which allows for reading
+     *                       result of executed command into preset task.txt file
+     * @return a <code>String</code> referencing task execution status
+     *         (success or error)
      * @throws DukeException if error related to Duke commands occurs
      */
     @Override

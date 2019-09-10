@@ -20,15 +20,17 @@ public class CreateEventCommand extends Command {
     }
 
     /**
-     * Executes commands in this format:
+     * Executes commands with this format:
      * <code>event taskName /at DD/MM/YYYY HHmm - DD/MM/YYYY HHmm</code>
      * Reads result of executed command into preset task.txt file
      *
-     * @param tasks   <code>TaskList</code> object which holds the taskList
-     *                and various methods to operate on the taskList
-     * @param messageHandler      <code>UI</code> object which handles console output
-     * @param storage <code>Storage</code> object which allows for reading
-     *                result of executed command into preset task.txt file
+     * @param tasks          <code>TaskList</code> object which holds the taskList
+     *                       and various methods to operate on the taskList
+     * @param messageHandler <code>UI</code> object which handles console output
+     * @param storage        <code>Storage</code> object which allows for reading
+     *                       result of executed command into preset task.txt file
+     * @return a <code>String</code> referencing task execution status
+     *         (success or error)
      * @throws DukeException if error related to Duke commands occurs
      */
     @Override

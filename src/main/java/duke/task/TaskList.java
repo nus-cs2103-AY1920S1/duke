@@ -42,7 +42,7 @@ public class TaskList {
     public void addTask(Task task) throws EmptyTaskTextException {
         if (task.getTaskName().isBlank()) throw new EmptyTaskTextException("Task name cannot be empty");
         taskList.add(task);
-
+        assert taskList.size() > 0;
     }
 
 
@@ -57,6 +57,8 @@ public class TaskList {
 
         Task task = taskList.get(taskNumber - 1);
         task.markAsCompleted();
+
+        assert task.isCompleted == true;
 
         return task;
     }
@@ -73,6 +75,9 @@ public class TaskList {
 
         Task task = taskList.get(taskNumber - 1);
         taskList.remove(task);
+
+        assert !taskList.contains(task);
+
         return task;
     }
 
@@ -84,6 +89,7 @@ public class TaskList {
 
     public List<Task> findMatchingTasks(String searchTerm) {
         List<Task> searchResults = new ArrayList<>();
+        assert taskList != null;
         for (Task task : taskList) {
             if (task.getTaskName().toLowerCase().contains(searchTerm.toLowerCase())) {
                 searchResults.add(task);
@@ -93,6 +99,7 @@ public class TaskList {
     }
 
     public List<Task> getList() {
+        assert taskList != null;
         return taskList;
     }
 }

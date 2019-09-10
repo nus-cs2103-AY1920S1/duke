@@ -66,6 +66,8 @@ public class MessageHandler {
 
         message += getAllTasksAsString();
 
+        assert !message.isEmpty();
+
         return message;
     }
 
@@ -101,6 +103,8 @@ public class MessageHandler {
             }
         }
 
+        assert !taskListString.isEmpty();
+
         return taskListString;
     }
 
@@ -124,6 +128,9 @@ public class MessageHandler {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
         // getting 'T' or 'F'
         char isCompleted = ((Boolean) task.isCompleted()).toString().toUpperCase().charAt(0);
+
+        assert isCompleted == 'T' || isCompleted == 'F';
+
         return "I've removed this task: \n" +
                 "\t  [" + isCompleted + "]" + task.getTaskName() + " " + task.getDetails() + "\n" +
                 "Now you have " + taskList.size() + " " + pluralOrNot + " in the list";
@@ -140,6 +147,8 @@ public class MessageHandler {
                 results += (taskList.get(i) + "\n");
             }
         }
+
+        assert !results.isEmpty();
         return results;
     }
 }

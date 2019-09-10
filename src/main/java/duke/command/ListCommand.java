@@ -15,13 +15,15 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Prints taskList
+     * Executes commands in this format: <code>done taskName</code>
+     * and prints the entire task list.
      *
-     * @param tasks   <code>TaskList</code> object which holds the taskList
-     *                and various methods to operate on the taskList
-     * @param messageHandler      <code>UI</code> object which handles console output
-     * @param storage <code>Storage</code> object which allows for reading
-     *                result of executed command into preset task.txt file
+     * @param tasks          <code>TaskList</code> object which holds the taskList
+     *                       and various methods to operate on the taskList
+     * @param messageHandler <code>UI</code> object which handles console output
+     * @param storage        <code>Storage</code> object which allows for reading
+     *                       result of executed command into preset task.txt file
+     * @return All tasks in the list in <code>String</code> format
      */
     @Override
     public String execute(TaskList tasks, MessageHandler messageHandler, Storage storage) {

@@ -60,6 +60,7 @@ public abstract class Task {
      * @return taskName in String format
      */
     public String getTaskName() {
+        assert !taskName.isEmpty();
         return taskName;
     }
 

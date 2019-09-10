@@ -16,7 +16,7 @@ class TodoCommand extends AddTaskCommand {
      *
      * @param commandArgs String array of arguments.
      */
-    public TodoCommand(String[] commandArgs) {
+    TodoCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.TODO;
     }

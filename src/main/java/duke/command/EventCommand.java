@@ -18,7 +18,7 @@ class EventCommand extends AddTaskCommand {
      *
      * @param commandArgs String array of arguments.
      */
-    public EventCommand(String[] commandArgs) {
+    EventCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.EVENT;
     }

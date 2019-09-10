@@ -52,6 +52,9 @@ public abstract class CommandParser {
         case EVENT:
             command = new EventCommand(inputs);
             break;
+        case ARCHIVE:
+            command = new ArchiveCommand(inputs);
+            break;
         default:
             //covered in try catch above with enums, only cause will be no implementation
             throw new DukeInvalidCommandException(

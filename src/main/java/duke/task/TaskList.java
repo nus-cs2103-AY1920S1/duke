@@ -65,6 +65,14 @@ public class TaskList {
     }
 
     /**
+     * Deletes every task in the task list.
+     */
+    public void deleteAllTasks() {
+        size = 0;
+        tasks.clear();
+    }
+
+    /**
      * Adds the specified task to the task list.
      * Also adjusts the task list size.
      * Essentially a wrapper around array list's add method.

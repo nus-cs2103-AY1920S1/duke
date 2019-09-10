@@ -26,6 +26,7 @@ public class Tasklist {
 
     /**
      * Adds the task into the task list.
+     *
      * @param task Current task that needs to be added to the task list.
      */
     void add(Task task) {
@@ -35,6 +36,7 @@ public class Tasklist {
 
     /**
      * Reply the user when they added in a new task into the task list.
+     *
      * @param task the current task that the user is referring to.
      * @param size the size of the user's task list.
      * @return Duke's reply in adding the task into the task list.
@@ -53,6 +55,7 @@ public class Tasklist {
 
     /**
      * Reply the user with the tasks in the task list.
+     *
      * @return Duke's reply which shows all the tasks in the task list.
      */
     @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
@@ -70,6 +73,7 @@ public class Tasklist {
 
     /**
      * Getter method which access the task list and retrieve the desired task.
+     *
      * @param index Index of the specific task needed.
      * @return the specific task indicated.
      */
@@ -79,6 +83,7 @@ public class Tasklist {
 
     /**
      * Deletes the specific task indicated in the task list.
+     *
      * @param index Index of the specific task to be deleted in the task list.
      */
     void remove(int index) {
@@ -87,6 +92,7 @@ public class Tasklist {
 
     /**
      * Getter method which gives the size of the current task list.
+     *
      * @return the size of the task list currently.
      */
     public int size() {
@@ -95,6 +101,7 @@ public class Tasklist {
 
     /**
      * Print out the task currently on duke.txt during startup.
+     *
      * @param textArr list formed during startup consisting of current tasks.
      * @return the list of task that are saved in duke.txt.
      */
@@ -129,6 +136,7 @@ public class Tasklist {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

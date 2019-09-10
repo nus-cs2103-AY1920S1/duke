@@ -13,6 +13,7 @@ public class Event extends Task {
     /**
      * Constructor for the Event class. Takes note of the description,
      * followed by the timing in which the event is going to occur.
+     *
      * @param description Gives the main outline of the task.
      * @param at Gives the timing in which the event is occurring.
      */
@@ -23,6 +24,7 @@ public class Event extends Task {
 
     /**
      * Getter method which gets the timing the event will start.
+     *
      * @return the timing when the event will start.
      */
     public String getAt() {
@@ -31,6 +33,7 @@ public class Event extends Task {
 
     /**
      * Formats the event task into a String.
+     *
      * @return the event task formatted as a string.
      */
     @Override

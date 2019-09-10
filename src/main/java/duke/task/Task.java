@@ -17,6 +17,7 @@ public class Task {
     /**
      * Constructor for the Task class. Keeps track of the description of
      * the task and it will be stored inside a list.
+     *
      * @param description Gives the outline of the task.
      */
     public Task(String description) {
@@ -26,6 +27,7 @@ public class Task {
 
     /**
      * Getter method to check the isDone field of the current task.
+     *
      * @return either a tick or a cross depending on the isDone status of task.
      */
     private String getStatusIcon() {
@@ -41,6 +43,7 @@ public class Task {
 
     /**
      * Getter method which gives the description of the task.
+     *
      * @return the outline of the task.
      */
     public String getDescription() {
@@ -49,6 +52,7 @@ public class Task {
 
     /**
      * Formats the string of the current task.
+     *
      * @return the formatted string of the current task.
      */
     @Override

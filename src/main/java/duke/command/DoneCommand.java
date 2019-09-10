@@ -8,6 +8,7 @@ import duke.task.Task;
 public class DoneCommand extends Command {
     /**
      * Mark the current task done.
+     *
      * @param currTask refer to the specific task the user checks.
      * @return Duke's response to marking a task done.
      */
@@ -19,6 +20,7 @@ public class DoneCommand extends Command {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

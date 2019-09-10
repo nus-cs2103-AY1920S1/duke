@@ -8,6 +8,7 @@ public class Storage {
 
     /**
      * Prompts the user if duke.txt file is missing in the local drive.
+     *
      * @return ioErrorMessage which prompts the user there is no duke.txt file.
      */
     public String ioErrorMessage() {
@@ -19,6 +20,7 @@ public class Storage {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

@@ -98,6 +98,7 @@ public class Duke extends Application {
 
     /**
      * Overridden method which setups the GUI upon starting Duke.
+     *
      * @param stage setup the scene for the GUI.
      */
     @Override
@@ -183,6 +184,7 @@ public class Duke extends Application {
 
     /**
      * Return a string based on the user input.
+     *
      * @param input takes in the input command from the user.
      * @return a string which is a reply from Duke based on the input.
      */

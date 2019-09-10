@@ -18,6 +18,7 @@ public class ReadFile extends Storage {
     /**
      * Constructor for the ReadFile class. Gives thee file path to duke.txt
      * file and load the file whenever Duke starts up.
+     *
      * @param path Indicates the file path of duke.txt file in local drive.
      */
     public ReadFile(String path) {
@@ -26,6 +27,7 @@ public class ReadFile extends Storage {
 
     /**
      * Opens duke.txt file in the user local drive whenever Duke starts.
+     *
      * @return ArrayList of tasks that the user currently have.
      * @throws IOException Gives exception if there is no file to read from.
      */

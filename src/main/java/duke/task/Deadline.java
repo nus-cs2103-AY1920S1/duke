@@ -13,6 +13,7 @@ public class Deadline extends Task {
     /**
      * Constructor for the deadline class. Takes note of the description
      * of the task and also the timing that it has to be completed by.
+     *
      * @param description Gives the main outline of the task.
      * @param by Gives the timing for the task to be completed by.
      */
@@ -23,6 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Getter method to give the deadline of the specific task.
+     *
      * @return the deadline of the specific task.
      */
     public String getBy() {
@@ -31,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Format the deadline task into a string.
+     *
      * @return the deadline task formatted into a string.
      */
     @Override

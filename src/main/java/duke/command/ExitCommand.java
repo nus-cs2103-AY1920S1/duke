@@ -6,6 +6,7 @@ package duke.command;
 public class ExitCommand extends Command {
     /**
      * End the session between Duke and the user.
+     *
      * @return Duke's reply in closing the GUI and end session.
      */
     public String exit() {
@@ -17,6 +18,7 @@ public class ExitCommand extends Command {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

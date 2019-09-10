@@ -6,6 +6,7 @@ import javafx.application.Application;
 public class Launcher {
     /**
      * Main method which launches the GUI and start up the main class.
+     *
      * @param args takes in the arguments from sys
      */
     public static void main(String[] args) {

@@ -31,6 +31,7 @@ public class WriteFile extends Storage {
     /**
      * Constructor for the WriteFile class. Edits and saves any changes on
      * the task list of Duke and store it in the user's local drive.
+     *
      * @param path File path in which duke.txt is going to be saved at.
      */
     public WriteFile(String path, boolean isWritable) {
@@ -40,6 +41,7 @@ public class WriteFile extends Storage {
 
     /**
      * Write any changes made to Duke task list and save it.
+     *
      * @param text Text which describes the task and Duke will update the
      *             duke.txt file accordingly.
      * @throws IOException Exception thrown when there is no duke.txt file to write to.
@@ -53,6 +55,7 @@ public class WriteFile extends Storage {
 
     /**
      * Remove the specific task from the task list based on index.
+     *
      * @param f Indicates the file name to be renamed into.
      * @param toRemove Index of the task to be removed.
      * @throws IOException Exception thrown when there is no duke.txt file.
@@ -86,6 +89,7 @@ public class WriteFile extends Storage {
 
     /**
      * Edits the current task. Used when the command "done" is called.
+     *
      * @param f Indicates the file name to be renamed into.
      * @param toReplace Index of the task to be removed.
      * @param currTask Indicates the current task which needs to be marked

@@ -28,6 +28,7 @@ public class Parser {
 
     /**
      * Validates the input that the user gave to Duke.
+     *
      * @param commandArr Input that the user gave to Duke.
      * @throws DukeException Exception thrown when an invalid command is given.
      */
@@ -51,6 +52,7 @@ public class Parser {
 
     /**
      * Validates the timing of the task given by the user.
+     *
      * @param time Timing of the specific task.
      * @return Formatted timing of the date and time.
      * @throws DukeException Exception thrown when an invalid date or timing is given.
@@ -97,6 +99,12 @@ public class Parser {
         return sj.toString();
     }
 
+    /**
+     * Format the date using ordinal indicator.
+     *
+     * @param day day of the date indicated by the user.
+     * @return string which contains the format date.
+     */
     private String formatDate(int day) {
         int last = day % 10;
         String result;
@@ -116,6 +124,13 @@ public class Parser {
         return day + result;
     }
 
+    /**
+     * Format the time based on the 24hr clock specified by the user.
+     *
+     * @param hour hour of the time indicated by the user.
+     * @param min minute of the time indicated by the user.
+     * @return string which contains the formatted time.
+     */
     private String formatTime(int hour, int min) {
         if (hour > 12) {
             hour -= 12;
@@ -128,6 +143,7 @@ public class Parser {
 
     /**
      * Checks whether the timing of the task given by the user is valid.
+     *
      * @param str Takes in the timing of the event or deadline task.
      * @return boolean result on whether the timing is in the valid format.
      */
@@ -149,6 +165,7 @@ public class Parser {
 
     /**
      * Checks whether the date of the task given by the user is valid.
+     *
      * @param str Takes in the date of thee event or deadline task.
      * @return boolean result on whether the date is in the valid format.
      */
@@ -178,6 +195,7 @@ public class Parser {
 
     /**
      * Prompts the user that the input number they have given is invalid.
+     *
      * @return numberErrorMessage which tells that the input is invalid.
      */
     private String numberErrorMessage() {
@@ -190,6 +208,7 @@ public class Parser {
 
     /**
      * Prompts the user that the index they have given is invalid.
+     *
      * @param len takes in the length of the current task list.
      * @return indexErrorMessage which tells that the number is invalid.
      */
@@ -205,6 +224,7 @@ public class Parser {
 
     /**
      * Run Duke and generate a reply based on the user's input.
+     *
      * @param command takes in the user's input.
      * @param taskList takes in the current task list of the user.
      * @param data takes in the file path to write the data.
@@ -300,6 +320,7 @@ public class Parser {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

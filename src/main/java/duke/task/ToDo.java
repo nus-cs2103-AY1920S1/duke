@@ -8,6 +8,7 @@ public class ToDo extends Task {
     /**
      * Constructor for the To Do class. Takes note of the description of
      * the tasks.
+     *
      * @param description Gives the main outline of the task.
      */
     public ToDo(String description) {
@@ -16,6 +17,7 @@ public class ToDo extends Task {
 
     /**
      * Format the to do task into a string.
+     *
      * @return the to do task formatted as a string.
      */
     @Override

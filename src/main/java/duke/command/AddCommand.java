@@ -11,6 +11,7 @@ import java.util.StringJoiner;
 public class AddCommand extends Command {
     /**
      * Get the description the input task.
+     *
      * @param commandArr current task of the user input.
      * @return string of the description of the task.
      * @throws DukeException prompts the user if the task input is invalid.
@@ -46,6 +47,7 @@ public class AddCommand extends Command {
 
     /**
      * Format the time from the input of the user.
+     *
      * @param commandArr current task of the user input.
      * @return formatted version of the timings.
      * @throws DukeException prompts the user of invalid time format.
@@ -80,6 +82,7 @@ public class AddCommand extends Command {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

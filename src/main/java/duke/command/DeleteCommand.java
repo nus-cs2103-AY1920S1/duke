@@ -8,6 +8,7 @@ import duke.task.Task;
 public class DeleteCommand extends Command {
     /**
      * Delete the specific task from the task list prompted by the user.
+     *
      * @param size takes in the size of the task list.
      * @param currTask refer to the specific task user wants to delete.
      * @return Duke's reply in response to deleting the task.
@@ -23,6 +24,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

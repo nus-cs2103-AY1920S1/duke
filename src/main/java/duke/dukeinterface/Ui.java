@@ -14,6 +14,7 @@ public class Ui {
 
     /**
      * Reply to the user upon startup.
+     *
      * @return Duke's reply to the user upon startup.
      */
     public String greet() {
@@ -34,6 +35,7 @@ public class Ui {
 
     /**
      * Repeat the words given in the user command.
+     *
      * @param command input that is given by the user.
      * @return Duke's reply to the given user input.
      */
@@ -50,6 +52,7 @@ public class Ui {
 
     /**
      * Forms the statement for user input in the GUI.
+     *
      * @param command input that is given by the user.
      * @return Forms the statement that the user said for dialog box.
      */
@@ -66,6 +69,7 @@ public class Ui {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

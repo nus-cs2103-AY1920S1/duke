@@ -14,6 +14,7 @@ import java.util.StringJoiner;
 public class SearchCommand extends Command {
     /**
      * Search the task list based on the keyword given by the user.
+     *
      * @param commandArr input given by the user.
      * @param taskList task list which contains all current tasks.
      * @return list of tasks which has the indicated keywords.
@@ -47,6 +48,7 @@ public class SearchCommand extends Command {
 
     /**
      * Gives a string as a border.
+     *
      * @return a string that forms the border for duke.
      */
     private String printLine() {

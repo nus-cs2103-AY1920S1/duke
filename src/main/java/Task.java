@@ -3,15 +3,18 @@
  */
 abstract class Task {
     boolean completed = false;
-    String task;
+    protected String task;
+    protected String type = "";
+
 
     /**
      * Constructs a task.
      *
      * @param task The name of the task.
      */
-    public Task(String task) {
+    public Task(String task, String type) {
         this.task = task;
+        this.type = type;
     }
 
     /**
@@ -20,9 +23,10 @@ abstract class Task {
      * @param task        The name of the task.
      * @param isCompleted The state of the task's completion.
      */
-    public Task(String task, boolean isCompleted) {
+    public Task(String task, boolean isCompleted, String type) {
         this.task = task;
         this.completed = isCompleted;
+        this.type = type;
     }
 
     /**
@@ -39,12 +43,19 @@ abstract class Task {
      */
     @Override
     public String toString() {
+        String output = "[" + this.type + "]";
         if (completed) {
-            return "[✓] " + this.task;
+            output += "[" + Character.toString(10003) + "] " + this.task;
         } else {
-            return "[✗] " + this.task;
+            output += "[" + Character.toString(10005) + "] " + this.task;
         }
+        return output;
+        /*
+        ✓ "\u2713" int 100003
+        ✗ "\u2715" int 100005
+         */
     }
+
 
     abstract String toFileFormat();
 }

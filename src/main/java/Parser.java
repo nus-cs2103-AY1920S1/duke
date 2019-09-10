@@ -1,3 +1,4 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 /**
  * Represents a parser of user commands in Duke chat bot.
@@ -73,6 +74,7 @@ public class Parser {
                     try {
                         if (cmdSc.hasNext()) {
                             String tskAt = cmdSc.nextLine();
+                            assert tskAt.contains("/at") : "You didn't enter the date properly! use /at";
                             String addEvent = tasks.addEvent(tskAt);
                             storage.save(tasks);
                             return addEvent;
@@ -81,17 +83,27 @@ public class Parser {
                         }
                     } catch (DukeException exp) {
                         return "OOPS!!! " + exp.getMessage();
+                    } catch (AssertionError err) {
+                        return err.getMessage();
                     }
                 //done
                 case "done":
-                    String done = tasks.done(Integer.parseInt(cmdSc.next()) - 1);
-                    storage.save(tasks);
-                    return done;
+                    try {
+                        String done = tasks.done(Integer.parseInt(cmdSc.next()) - 1);
+                        storage.save(tasks);
+                        return done;
+                    } catch (NoSuchElementException exp) {
+                        return "You didn't enter what task you have done!";
+                    }
                 //delete
                 case "delete":
-                    String delete = tasks.delete(Integer.parseInt(cmdSc.next()) - 1);
-                    storage.save(tasks);
-                    return delete;
+                    try {
+                        String delete = tasks.delete(Integer.parseInt(cmdSc.next()) - 1);
+                        storage.save(tasks);
+                        return delete;
+                    } catch (NoSuchElementException exp) {
+                        return "You didn't enter what task you want to delete!";
+                    }
 
                 default:
                     try {

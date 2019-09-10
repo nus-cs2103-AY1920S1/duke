@@ -44,10 +44,11 @@ public class AddCommand extends Command {
      * @throws DukeException For Invalid user input.
      */
     private Task createTask(String type, String detail) throws DukeException {
-        Task t;
+        Task newTask;
+        assert (type.equals("todo") || type.equals("deadline") || type.equals("event")): "Invalid task type";
         switch (type) {
         case "todo":
-            t = new Todo(detail);
+            newTask = new Todo(detail);
             break;
         case "deadline":
             try {
@@ -60,7 +61,7 @@ public class AddCommand extends Command {
 
                 LocalDate date = LocalDate.parse(datetime[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 LocalTime time = LocalTime.parse(datetime[1], DateTimeFormatter.ofPattern("HHmm"));
-                t = new Deadline(deadlineContent[0], date, time);
+                newTask = new Deadline(deadlineContent[0], date, time);
             } catch (DateTimeParseException e) {
                 throw new DukeException("Invalid Date Time format input. Should be in the format dd/MM/yyyy HHmm");
             }
@@ -69,13 +70,13 @@ public class AddCommand extends Command {
             String[] eventContent = detail.split(" /at ", 2);
             DukeException.checkValidity(eventContent.length < 2,
                     "Invalid format for Event Task.");
-            t = new Event(eventContent[0], eventContent[1]);
+            newTask = new Event(eventContent[0], eventContent[1]);
             break;
         default:
-            t = null;
+            newTask = null;
         }
 
-        return t;
+        return newTask;
     }
 
     @Override

@@ -32,7 +32,6 @@ public class AddCommand extends Command {
      */
     public AddCommand(String[] commandArr) {
         this.commandArr = commandArr;
-        isExit = false;
     }
 
     /**

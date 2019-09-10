@@ -26,7 +26,6 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String[] commandArr) {
         this.commandArr = commandArr;
-        isExit = false;
     }
 
     /**

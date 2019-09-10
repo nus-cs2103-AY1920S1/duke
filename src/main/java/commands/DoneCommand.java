@@ -26,7 +26,6 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String[] commandArr) {
         this.commandArr = commandArr;
-        isExit = false;
     }
 
     /**

@@ -1,18 +1,25 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
+
 import javafx.stage.Stage;
+
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import javafx.util.Duration;
+
+import javafx.animation.PauseTransition;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +48,11 @@ public class Duke extends Application {
      */
     private Ui ui;
 
+    /**
+     * boolean indicating whether the program should be exited.
+     */
+    static boolean shouldExitProgram = false;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -48,6 +60,15 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/eminem.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/lelouch2.jpeg"));
+
+    /**
+     * Setter method for the boolean indicating whether program should be exited.
+     *
+     * @param shouldExitProgram boolean
+     */
+    public static void setShouldExitProgram(boolean shouldExitProgram) {
+        Duke.shouldExitProgram = shouldExitProgram;
+    }
 
     /**
      * Duke constructor that takes in a file path and
@@ -80,7 +101,6 @@ public class Duke extends Application {
         try {
             Command c = Parser.parse(fullCommand);
             reply = c.execute(tasks, ui, storage);
-            isExit = c.isExit();
         } catch (DukeException e) {
             reply = e.getMessage();
         }
@@ -171,10 +191,11 @@ public class Duke extends Application {
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
-        if (userInput.getText().equals("bye")) {
-            Platform.exit();
-        } else {
-            userInput.clear();
+        userInput.clear();
+        if (shouldExitProgram) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished( event -> System.exit(0) );
+            delay.play();
         }
     }
 }

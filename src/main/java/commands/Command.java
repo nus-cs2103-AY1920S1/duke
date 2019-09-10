@@ -19,8 +19,6 @@ import exceptions.DukeException;
  */
 public abstract class Command {
 
-    /** Boolean representing whether this command should trigger termination of the program. */
-    boolean isExit;
     /** String array containing the split text retrieved from user input. */
     String[] commandArr;
 
@@ -35,16 +33,6 @@ public abstract class Command {
      */
     static boolean checkValidTaskNumber(int taskIndex, ArrayList<Task> taskLst) {
         return taskIndex >= 0 && taskIndex < taskLst.size();
-    }
-
-    /**
-     * Returns boolean determining whether program should be terminated
-     * after execution of the command.
-     *
-     * @return boolean isExit.
-     */
-    public boolean isExit() {
-        return isExit;
     }
 
     /**

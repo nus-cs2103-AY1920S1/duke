@@ -24,7 +24,6 @@ public class FindCommand extends Command {
      */
     public FindCommand(String[] commandArr) {
         this.commandArr = commandArr;
-        isExit = false;
     }
 
     /**

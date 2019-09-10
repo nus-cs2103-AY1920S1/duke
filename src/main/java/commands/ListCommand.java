@@ -22,7 +22,6 @@ public class ListCommand extends Command {
      */
     public ListCommand(String[] commandArr) {
         this.commandArr = commandArr;
-        isExit = false;
     }
 
     /**

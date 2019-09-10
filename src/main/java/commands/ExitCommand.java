@@ -1,5 +1,6 @@
 package commands;
 
+import duke.Duke;
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
@@ -20,7 +21,7 @@ public class ExitCommand extends Command {
      */
     public ExitCommand(String[] commandArr) {
         this.commandArr = commandArr;
-        isExit = true;
+        Duke.setShouldExitProgram(true);
     }
 
     /**

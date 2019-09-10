@@ -5,25 +5,44 @@ import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
 
-// javaFx
+import java.util.Scanner;
 
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
+    private static final String filePath = "/home/abhinav/Desktop/2103T/duke/data/dukeTest.txt";
+
 
     /**
-     * Empty constructor to bridge Main and fxml.
+     * The constructor needed to kickstart JavaFx.
      *
      */
-    public Duke(){}
+    public Duke() {
+        ui = new Ui();
+        storage= new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.readFromFile());
+        } catch (DukeException e) {
+            System.out.println(ui.showErrors(e.getMessage()));
+        }
+    }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Obtains user input from command line, parses it and executes the commands.
+     * Shows errors to the user in case of invalid input.
+     *
+     * @return String feedback for gui to display
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command c;
+        try {
+            c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            e.printStackTrace();
+            return ui.showErrors(e.getMessage());
+        }
     }
 
     /**
@@ -32,7 +51,7 @@ public class Duke {
      * @param args command line arguments
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("/home/abhinav/Desktop/2103T/duke/data/dukeTest.txt");
+        Duke duke = new Duke(filePath);
         duke.run();
     }
 
@@ -53,23 +72,25 @@ public class Duke {
     }
 
     /**
-     * Obtains user input, parses it and executes the commands.
+     * Obtains user input from command line, parses it and executes the commands.
      * Shows errors to the user in case of invalid input.
      *
      */
     private void run() {
-        ui.welcomeMessage();
+        System.out.println(ui.welcomeMessage());
+
+        Scanner sc = new Scanner(System.in);
 
         boolean isExit = false;
 
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
+                String fullCommand = sc.nextLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showErrors(e.getMessage());
+                System.out.println(ui.showErrors(e.getMessage()));
             }
         }
     }

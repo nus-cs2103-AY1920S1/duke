@@ -3,7 +3,6 @@ package utils;
 import tasks.Task;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,24 +26,22 @@ public class Ui {
 
     private final Scanner in;
 
-    private final PrintStream out;
+//    private final PrintStream out;
 
     /**
-     * Public constructor that triggers user input and output from Duke.
+     * Public constructor that triggers user input from Duke.
      */
     public Ui() {
-        this(System.in, System.out);
+        this(System.in);
     }
 
     /**
      * Overridden constructor, enables user input as well as feedback from Duke.
      *
      * @param in scanner object
-     * @param out printstream object
      */
-    private Ui(InputStream in, PrintStream out) {
+    private Ui(InputStream in) {
         this.in = new Scanner(in);
-        this.out = out;
     }
 
     /**
@@ -52,7 +49,7 @@ public class Ui {
      *
      */
     public String readCommand() {
-        out.print(LINE_PREFIX + "Enter command: ");
+//        out.print(LINE_PREFIX + "Enter command: ");
         String fullInputLine = in.nextLine();
         return fullInputLine;
     }
@@ -62,29 +59,28 @@ public class Ui {
      *
      * @param input String input
      */
-    public void addBorder(String input) {
+    public String addBorder(String input) {
 
         String border = "____________________________________________________________";
 
-        out.println(border + "\n\n" + input + "\n" + border + "\n");
+        return border + "\n\n" + input + "\n" + border + "\n";
     }
 
     /**
      * Greet the user when they start up Duke.
      *
      */
-    public void welcomeMessage() {
+    public String welcomeMessage() {
 
-        out.println(DUKE_STARTUP);
-        addBorder(DUKE_SAYS_HI);
+        return DUKE_STARTUP + "\n" + addBorder(DUKE_SAYS_HI);
     }
 
     /**
      * Display exit message to user when they leave Duke.
      *
      */
-    public void exitMessage() {
-        addBorder(EXIT_MESSAGE);
+    public String exitMessage() {
+        return addBorder(EXIT_MESSAGE);
     }
 
     /**
@@ -92,7 +88,7 @@ public class Ui {
      *
      * @param tasks TaskList object.
      */
-    public void printList(TaskList tasks) {
+    public String printList(TaskList tasks) {
         StringBuilder str = new StringBuilder(LIST_MESSAGE);
 
         for (int i = 1; i < tasks.getSize() + 1; i++) {
@@ -103,7 +99,7 @@ public class Ui {
             }
         }
 
-        addBorder(str.toString());
+        return addBorder(str.toString());
     }
 
     /**
@@ -111,7 +107,7 @@ public class Ui {
      *
      * @param taskList list of tasks that match query
      */
-    public void printMatchingTasks(List<Task> taskList) {
+    public String printMatchingTasks(List<Task> taskList) {
         StringBuilder str = new StringBuilder(MATCHING_LIST_MESSAGE);
 
         for (int i = 1; i < taskList.size() + 1; i++) {
@@ -122,7 +118,7 @@ public class Ui {
             }
         }
 
-        addBorder(str.toString());
+        return addBorder(str.toString());
     }
 
     /**
@@ -130,7 +126,7 @@ public class Ui {
      *
      * @param input String input.
      */
-    public void showErrors(String input) {
-        addBorder(input);
+    public String showErrors(String input) {
+        return addBorder(input);
     }
 }

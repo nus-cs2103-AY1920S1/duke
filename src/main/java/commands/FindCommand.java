@@ -27,16 +27,17 @@ public class FindCommand extends Command {
      * @param tasks to access the list of tasks
      * @param ui to give feedback to user
      * @param storage to write changes to file
+     * @return String feedback to user
      * @throws DukeException if keyword is not found in task list
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         List<Task> matchingTasks = tasks.findMatchingTasks(this.keyword);
 
         if (matchingTasks.isEmpty()) {
             throw new DukeException("No matching tasks found!");
         } else {
-            ui.printMatchingTasks(matchingTasks);
+            return ui.printMatchingTasks(matchingTasks);
         }
     }
 }

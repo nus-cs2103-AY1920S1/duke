@@ -32,20 +32,54 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-            dialog.setPadding(new Insets(10, 10, 10, 10));
-            displayPicture.setClip(new Circle(50, 35, 50));
+            loadFxml();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         double minHeight = text.split("\n").length * 30 + 30;
-        dialog.setMinHeight(minHeight);
-        this.setMinHeight(minHeight);
-        dialog.setText(text);
+        setDialogBoxSize(minHeight);
+        setLabelSize(text, minHeight);
+        setImageViewSize(img);
+    }
+
+    /**
+     * Set the content and size of the displayPicture ImageView.
+     * @param img Image of User or Duke to be put in this ImageView.
+     */
+    private void setImageViewSize(Image img) {
         displayPicture.setImage(img);
+        displayPicture.setClip(new Circle(50, 35, 50));
+    }
+
+    /**
+     * Set the text and size of dialog Label
+     * @param text String to be set as Label text
+     * @param minHeight Minimal height of this Label
+     */
+    private void setLabelSize(String text, double minHeight) {
+        dialog.setText(text);
+        dialog.setPadding(new Insets(10, 10, 10, 10));
+        dialog.setMinHeight(minHeight);
+    }
+
+    /**
+     * Set the size of this DialogBox
+     * @param minHeight Minimal height for this DialogBox
+     */
+    private void setDialogBoxSize(double minHeight) {
+        this.setMinHeight(minHeight);
+    }
+
+    /**
+     * Load layout.
+     * @throws IOException
+     */
+    private void loadFxml() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+        fxmlLoader.setController(this);
+        fxmlLoader.setRoot(this);
+        fxmlLoader.load();
     }
 
     /**

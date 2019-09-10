@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class UserInterface {
     static TaskList todoList;
@@ -18,7 +19,12 @@ public class UserInterface {
         while (!userCommand.equals("exit")) {
             userInput = consoleScanner.nextLine();
             userCommand = userInput.split(" ",2)[0];
-            description = userInput.split("/")[0];
+            try {
+                description = userInput.split(" ")[1].split("/")[0];
+            } catch (Exception e) {
+
+            }
+
             if (userInput.split("/").length > 1) {
                 date = userInput.split("/")[1];
             }
@@ -53,6 +59,18 @@ public class UserInterface {
                         dukePrint("Nothing to delete");
                     }
                     break;
+                case "find":
+                    String lst = "";
+                    int counter = 1;
+                    for (ListItem item : TaskList.lst) {
+                        if (item.getDescription().contains(description)) {
+                            lst += counter + "." + item.toString() + "\n     ";
+                            counter++;
+                        }
+                    }
+                    dukePrint("Here are the matching tasks in your list:", lst.substring(0, lst.length() - 6));
+                    break;
+
                 default:
                     dukePrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

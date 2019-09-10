@@ -124,62 +124,62 @@ public class Controller implements UserInputListener {
   }
 
   /**
-   * Add a AddTaskCommandListener to the Controller. When a AddTaskCommand is received, this
-   * listener will be notified.
+   * Adds a AddTaskCommandListener.
+   * When a AddTaskCommand is received, this listener will be notified.
    *
    * @param listener AddTaskCommand listener
    */
-  public void newAddTaskCommandListener(AddTaskCommandListener listener) {
+  void newAddTaskCommandListener(AddTaskCommandListener listener) {
     this.addTaskCommandListeners.add(listener);
   }
 
   /**
-   * Add a DeleteTaskCommandListener to the Controller. When a DeleteTaskCommand is received, this
-   * listener will be notified.
+   * Adds a DeleteTaskCommandListener.
+   * When a DeleteTaskCommand is received, this listener will be notified.
    *
    * @param listener DeleteTaskCommand listener
    */
-  public void newDeleteTaskCommandListener(DeleteTaskCommandListener listener) {
+  void newDeleteTaskCommandListener(DeleteTaskCommandListener listener) {
     this.deleteTaskCommandListeners.add(listener);
   }
 
   /**
-   * Add a DoneTaskCommandListener to the Controller. When a DoneTaskCommand is received, this
-   * listener will be notified.
+   * Adds a DoneTaskCommandListener.
+   * When a DoneTaskCommand is received, this listener will be notified.
    *
    * @param listener DoneTaskCommand listener
    */
-  public void newDoneTaskCommandListener(DoneTaskCommandListener listener) {
+  void newDoneTaskCommandListener(DoneTaskCommandListener listener) {
     this.doneTaskCommandListeners.add(listener);
   }
 
   /**
-   * Add a FindTaskCommandListener to the Controller. When a FindTaskCommand is received, this
-   * listener will be notified.
+   * Adds a FindTaskCommandListener to the Controller.
+   * When a FindTaskCommand is received, this listener will be notified.
    *
    * @param listener FindTaskCommand listener
    */
-  public void newFindTaskCommandListener(FindTaskCommandListener listener) {
+  void newFindTaskCommandListener(FindTaskCommandListener listener) {
     this.findTaskCommandListeners.add(listener);
   }
 
   /**
-   * Add a ListTaskCommandListener to the Controller. When a ListTaskCommand is received, this
-   * listener will be notified.
+   * Adds a ListTaskCommandListener to the Controller.
+   * When a ListTaskCommand is received, this listener will be notified.
    *
    * @param listener ListTaskCommand listener
    */
-  public void newListTaskCommandListener(ListTaskCommandListener listener) {
+  void newListTaskCommandListener(ListTaskCommandListener listener) {
     this.listTaskCommandListeners.add(listener);
   }
 
   /**
-   * Add a ByeCommandListener to the Controller. When a ByeCommand is received, this listener will
-   * be notified.
+   * Adds a ByeCommandListener to the Controller.
+   * When a ByeCommand is received, this listener will be notified.
    *
    * @param listener ByeCommand listener
    */
-  public void newByeCommandListener(ByeCommandListener listener) {
+  void newByeCommandListener(ByeCommandListener listener) {
     this.byeCommandListeners.add(listener);
   }
 

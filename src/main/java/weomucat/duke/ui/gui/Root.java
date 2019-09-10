@@ -37,7 +37,7 @@ public class Root extends VBox {
    *
    * @param listener the listener to add
    */
-  public void newUserInputListener(UserInputListener listener) {
+  void newUserInputListener(UserInputListener listener) {
     this.userInputListeners.add(listener);
   }
 
@@ -48,21 +48,12 @@ public class Root extends VBox {
   }
 
   /**
-   * Adds a {@link DukeText} to the chat box.
+   * Adds a {@link Message} to the chat box.
    *
-   * @param message the message to put in {@link DukeText}
+   * @param message the message to put into the chat box
    */
-  public void addDukeText(String message) {
-    chatBox.getChildren().add(new DukeText(message));
-  }
-
-  /**
-   * Adds a {@link DukeErrorText} to the chat box.
-   *
-   * @param message the message to put in {@link DukeErrorText}
-   */
-  public void addDukeErrorText(String message) {
-    chatBox.getChildren().add(new DukeErrorText(message));
+  void addMessage(Message message) {
+    chatBox.getChildren().add(message);
   }
 
   @FXML
@@ -73,7 +64,7 @@ public class Root extends VBox {
     if (!userInput.equals("")) {
 
       // Add user input to right side of GUI
-      chatBox.getChildren().add(new UserText(userInput));
+      this.addMessage(new UserMessage(userInput));
 
       // Update duke logic with userInput
       for (UserInputListener listener : this.userInputListeners) {

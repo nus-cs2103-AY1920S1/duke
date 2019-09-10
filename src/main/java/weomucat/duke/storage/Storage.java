@@ -10,14 +10,15 @@ import weomucat.duke.exception.StorageException;
  */
 public abstract class Storage<T> {
 
-  protected String path;
+  // Path of "database"
+  String path;
 
   /**
    * Default constructor.
    *
    * @param path fixed path of database
    */
-  public Storage(String path) {
+  Storage(String path) {
     assert path != null;
 
     this.path = path;

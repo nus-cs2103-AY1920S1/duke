@@ -1,7 +1,6 @@
 package weomucat.duke;
 
 import java.util.Locale;
-import javafx.application.Application;
 import weomucat.duke.exception.StorageException;
 import weomucat.duke.storage.TaskListStorage;
 import weomucat.duke.task.TaskList;
@@ -14,8 +13,9 @@ import weomucat.duke.ui.gui.GraphicalUi;
  */
 public class Duke {
 
-  // Amount of time in milliseconds to sleep in all threads.
-  public static final long THREAD_SLEEP_DURATION = 100;
+  // Amount of time in milliseconds to sleep, in any thread spawned by Duke.
+  // Used when any thread needs to "poll" for events.
+  public static final long THREAD_POLL_SLEEP_DURATION = 100;
 
   public static final Locale LOCALE = Locale.ENGLISH;
   public static final String DATETIME_PARSE_PATTERN = "ddMMyy HHmm";
@@ -45,17 +45,12 @@ public class Duke {
   }
 
   private void run() throws Exception {
-    // Start GUI on separate thread.
-    new Thread(() -> Application.launch(GraphicalUi.class)).start();
-
-    // Block main thread until GraphicalUi instance is created.
-    while (GraphicalUi.instance == null) {
-      Thread.sleep(THREAD_SLEEP_DURATION);
-    }
+    // Create a GUI
+    GraphicalUi graphicalUi = GraphicalUi.create();
 
     // Add uis to uiList.
     this.uiList.addUi(new CommandLineUi());
-    this.uiList.addUi(GraphicalUi.instance);
+    this.uiList.addUi(graphicalUi);
 
     // Try to initialize TaskList from disk if database exists.
     if (this.storage.exists()) {

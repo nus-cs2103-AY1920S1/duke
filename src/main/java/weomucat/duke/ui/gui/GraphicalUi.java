@@ -1,5 +1,7 @@
 package weomucat.duke.ui.gui;
 
+import static weomucat.duke.Duke.THREAD_POLL_SLEEP_DURATION;
+
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -13,12 +15,15 @@ import weomucat.duke.ui.Ui;
 import weomucat.duke.ui.listener.UserInputListener;
 
 /**
- * Represents a Graphical User Interface of Duke.
+ * Represents a JavaFx Graphical User Interface of Duke.
  */
 public class GraphicalUi extends Application implements Ui, UserInputListener {
 
+  // Amount of time in milliseconds to sleep before closing the gui.
+  private static final int BYE_COMMAND_SLEEP = 1000;
+
   // For getting this instance when started by JavaFx
-  public static GraphicalUi instance;
+  private static GraphicalUi instance;
 
   private boolean running;
   private Root root;
@@ -30,7 +35,29 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   public GraphicalUi() {
     this.running = true;
     this.userInputListeners = new ArrayList<>();
+
+    // JavaFx created a GraphicalUi instance, set the instance to the static variable.
     instance = this;
+  }
+
+  /**
+   * Creates a JavaFx application on a separate thread.
+   * Blocks the main thread until the application is created.
+   *
+   * @return the instance of GraphicalUi which was created
+   */
+  public static GraphicalUi create() throws InterruptedException {
+    GraphicalUi.instance = null;
+
+    // Start GUI on separate thread.
+    new Thread(() -> Application.launch(GraphicalUi.class)).start();
+
+    // Block main thread until GraphicalUi instance is created.
+    while (GraphicalUi.instance == null) {
+      Thread.sleep(THREAD_POLL_SLEEP_DURATION);
+    }
+
+    return GraphicalUi.instance;
   }
 
   @Override
@@ -66,14 +93,14 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   @Override
   public void displayMessage(String... lines) {
     String message = String.join("\n", lines);
-    Platform.runLater(() -> this.root.addDukeText(message));
+    Platform.runLater(() -> this.root.addMessage(new DukeMessage(message)));
   }
 
   @Override
   public void displayError(String... lines) {
     lines[0] = "☹ OOPS!!! " + lines[0];
     String message = String.join("\n", lines);
-    Platform.runLater(() -> this.root.addDukeErrorText(message));
+    Platform.runLater(() -> this.root.addMessage(new DukeErrorMessage(message)));
   }
 
   @Override
@@ -87,7 +114,7 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   public void byeCommandUpdate() {
     try {
       this.running = false;
-      Thread.sleep(1000);
+      Thread.sleep(BYE_COMMAND_SLEEP);
       Platform.exit();
     } catch (InterruptedException e) {
       e.printStackTrace();

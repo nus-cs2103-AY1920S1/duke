@@ -1,6 +1,6 @@
 package weomucat.duke.ui;
 
-import static weomucat.duke.Duke.THREAD_SLEEP_DURATION;
+import static weomucat.duke.Duke.THREAD_POLL_SLEEP_DURATION;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -75,7 +75,7 @@ public class UiList implements AddTaskListener, ByeCommandListener, DeleteTaskLi
     while (this.running) {
       try {
         if (userInputQueue.isEmpty()) {
-          Thread.sleep(THREAD_SLEEP_DURATION);
+          Thread.sleep(THREAD_POLL_SLEEP_DURATION);
         } else {
           String userInput = userInputQueue.pollFirst();
           for (UserInputListener listener : this.userInputListeners) {

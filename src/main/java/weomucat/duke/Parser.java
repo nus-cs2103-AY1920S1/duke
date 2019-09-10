@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
- * A Parser is responsible for deciphering user input into: - Command - Body (i.e default parameter)
+ * A Parser is responsible for deciphering user input into:
+ * - Command
+ * - Body (i.e default parameter)
  * - Parameters
  */
 public class Parser {
@@ -20,7 +22,7 @@ public class Parser {
    *
    * @param input User input to decipher.
    */
-  public Parser(String input) {
+  Parser(String input) {
     assert input != null;
 
     // Split input by whitespace.
@@ -32,7 +34,7 @@ public class Parser {
   }
 
   /**
-   * Get command of input.
+   * Get the command from user input.
    *
    * @return Deciphered command
    */
@@ -41,7 +43,8 @@ public class Parser {
   }
 
   /**
-   * If the command expects parameters, run this after parseParameters.
+   * Get the body from user input.
+   * If Command expects parameters, run this after parseParameters.
    *
    * @return Deciphered body
    */
@@ -50,12 +53,12 @@ public class Parser {
   }
 
   /**
-   * Parse a list of parameters which the command uses.
+   * Parse a list of parameters which a Command expects.
    *
    * @param parameters The list of parameters
    * @return A HashMap of (parameter name, parameter value)
    */
-  public HashMap<String, String> parseParameters(String... parameters) {
+  HashMap<String, String> parseParameters(String... parameters) {
     assert parameters != null;
 
     LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));

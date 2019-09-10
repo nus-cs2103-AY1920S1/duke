@@ -1,6 +1,6 @@
 package weomucat.duke.ui.cli;
 
-import static weomucat.duke.Duke.THREAD_SLEEP_DURATION;
+import static weomucat.duke.Duke.THREAD_POLL_SLEEP_DURATION;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -50,7 +50,7 @@ public class CommandLineUi implements Ui {
             return;
           }
 
-          Thread.sleep(THREAD_SLEEP_DURATION);
+          Thread.sleep(THREAD_POLL_SLEEP_DURATION);
         }
 
         // Get next user input

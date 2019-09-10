@@ -55,7 +55,8 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Add a AddTaskListener to the TaskList. When addTask is called, this listener will be notified.
+   * Adds a AddTaskListener.
+   * When addTask is called, this listener will be notified.
    *
    * @param listener addTask listener
    */
@@ -64,8 +65,8 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Add a DeleteTaskListener to the TaskList. When deleteTask is called, this listener will be
-   * notified.
+   * Adds a DeleteTaskListener.
+   * When deleteTask is called, this listener will be notified.
    *
    * @param listener deleteTask listener
    */
@@ -74,8 +75,8 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Add a DoneTaskListener to the TaskList. When doneTask is called, this listener will be
-   * notified.
+   * Adds a DoneTaskListener.
+   * When doneTask is called, this listener will be notified.
    *
    * @param listener doneTask listener
    */
@@ -84,8 +85,8 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Add a FindTaskListener to the TaskList. When findTask is called, this listener will be
-   * notified.
+   * Adds a FindTaskListener.
+   * When findTask is called, this listener will be notified.
    *
    * @param listener findTask listener
    */
@@ -94,8 +95,8 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Add a ListTaskListener to the TaskList. When listTask is called, this listener will be
-   * notified.
+   * Adds a ListTaskListener.
+   * When listTask is called, this listener will be notified.
    *
    * @param listener listTask listener
    */
@@ -104,12 +105,12 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Add a task to the task list.
+   * Adds a task to the task list.
    *
    * @param task the task to add
    * @throws DukeException If any listeners throw a DukeException.
    */
-  public void addTask(Task task) throws DukeException {
+  void addTask(Task task) throws DukeException {
     // Add task to Tasks
     this.tasks.add(task);
 
@@ -120,11 +121,11 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Delete a task from the task list.
+   * Deletes a task from the task list.
    *
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
-  public void deleteTask(int i) throws DukeException {
+  void deleteTask(int i) throws DukeException {
     try {
       // Get task from tasks
       Task task = this.tasks.get(i);
@@ -142,11 +143,11 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Mark a task as done in the task list.
+   * Marks a task as done in the task list.
    *
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
-  public void doneTask(int i) throws DukeException {
+  void doneTask(int i) throws DukeException {
     try {
       // Get task from tasks
       Task task = this.tasks.get(i);
@@ -164,10 +165,10 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Searches for a keyword in all tasks. Notify listeners tasks which description matches the
-   * keyword.
+   * Searches for a keyword in all tasks.
+   * Notify listeners tasks which description matches the keyword.
    */
-  public void findTask(String keyword) {
+  void findTask(String keyword) {
     TaskListTasks result = new TaskListTasks();
 
     // Case insensitive search
@@ -189,7 +190,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   /**
    * Notify listeners to list tasks.
    */
-  public void listTask() {
+  private void listTask() {
     // Update ListTaskListeners
     for (ListTaskListener listener : listTaskListeners) {
       listener.listTaskUpdate(this.tasks);

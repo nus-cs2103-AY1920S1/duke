@@ -2,6 +2,7 @@ package duke.component;
 
 import java.lang.StringBuilder;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -72,14 +73,24 @@ public class TaskList {
      * @param searchString <code>String</code> to search <code>Task</code> descriptions with.
      * @return an <code>ArrayList</code> of <code>Task</code> objects which match the search string.
      */
-    public ArrayList<Task> searchTask(String searchString) {
-        ArrayList<Task> results = new ArrayList<Task>();
-        for (Task task: this.tasks) {
-            if (task.getDescription().contains(searchString)) {
-                results.add(task);
-            }
-        }
-        return results;
+    public ArrayList<Task> searchByDescription(String searchString) {
+        return this.tasks
+            .stream()
+            .filter(task -> task.getDescription().contains(searchString))
+            .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Returns all <code>Task</code> objects which contains the supplied tag in an <code>ArrayList</code>.
+     * 
+     * @param tagString exact <code>String</code> to search <code>Task</code> tags with.
+     * @return an <code>ArrayList</code> of <code>Task</code> objects which matches the supplied tag.
+     */
+    public ArrayList<Task> searchByTag(String tagString) {
+        return this.tasks
+            .stream()
+            .filter(task -> task.containsTag(tagString))
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**

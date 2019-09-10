@@ -31,7 +31,13 @@ public class FindCommand extends Command {
      * @return a <code>String</code> containing the output of executing this command.
      */
     public String execute(TaskList tasks, Storage fileMgr) {
-        ArrayList<Task> results = tasks.searchTask(this.searchString);
+        ArrayList<Task> results;
+        if (this.searchString.charAt(0) == '#') {
+            results = tasks.searchByTag(this.searchString.substring(1));
+        } else {
+            results = tasks.searchByDescription(this.searchString);
+        }
+        
         int numResults = results.size();
 
         StringBuilder list = new StringBuilder();

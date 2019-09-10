@@ -29,7 +29,7 @@ public final class Parser {
     // Command templates
     private static final String DONE_TEMPLATE = "done <id>";
     private static final String DELETE_TEMPLATE = "delete <id>";
-    private static final String FIND_TEMPLATE = "find <search_string>";
+    private static final String FIND_TEMPLATE = "find <search_string> | #<tag_string>";
     private static final String TAG_TEMPLATE = "tag <id> <tag_string>";
     private static final String TODO_TEMPLATE = "todo <description>";
     private static final String DEADLINE_TEMPLATE = "deadline <description> /by <date time>";
@@ -129,8 +129,16 @@ public final class Parser {
         }
 
         // Otherwise entire argString is the search string of the Find command
-        String argString = command.split(" ", 2)[1];
-        return new FindCommand(command, argString);
+        String searchString = command.split(" ", 2)[1];
+
+        // If searchString does not begin with a #, then it is a search by description
+        if (searchString.charAt(0) != '#') {
+            return new FindCommand(command, searchString);
+        }
+        
+        // Else it is a tag search (join keywords to form tag)
+        String tagString = searchString.substring(1).trim().replace(" ", "-");
+        return new FindCommand(command, String.format("#%s", tagString));
     }
 
     private static Command parseTag(String command) throws DukeException {

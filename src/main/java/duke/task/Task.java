@@ -63,6 +63,16 @@ public abstract class Task {
     }
 
     /**
+     * Returns <code>true</code> iff any of the tags of this <code>Task</code> partially matches the supplied tag.
+     * @param searchTag <code>String</code> tag to match against.
+     */
+    public boolean containsTag(String searchTag) {
+        return this.tags
+            .stream()
+            .anyMatch(tag -> tag.contains(searchTag));
+    }
+
+    /**
      * Returns all information about this <code>Task</code> encoded in a <code>String</code>.
      * 
      * @return a <code>String</code> to be written to a file to persist information of this <code>Task</code>

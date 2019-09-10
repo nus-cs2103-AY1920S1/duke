@@ -25,6 +25,17 @@ public abstract class Command {
             throws DukeException;
 
     /**
+     * Returns the result of executing a certain function.
+     *
+     * @param taskList List of tasks to manage.
+     * @param undoStack Stack of {@code Undoable} commands.
+     * @param storage Storage to save any changes.
+     * @return Result of executing this command.
+     */
+    public abstract String getResponse(TaskList taskList, UndoStack undoStack, Storage storage)
+            throws DukeException;
+
+    /**
      * Shows whether executing this Command should quit the Duke or not.
      *
      * @return True if Duke should quit, false otherwise.

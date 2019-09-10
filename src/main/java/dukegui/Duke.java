@@ -1,14 +1,14 @@
 package dukegui;
 
+import duke.command.Command;
+
 import duke.exception.DukeException;
 import duke.exception.DukeIOException;
 
+import duke.module.Parser;
 import duke.module.Storage;
 import duke.module.TaskList;
-
-import dukegui.command.Command;
-import dukegui.module.Parser;
-
+import duke.module.UndoStack;
 
 /**
  * <h1>Duke GUI</h1>
@@ -20,11 +20,9 @@ import dukegui.module.Parser;
  */
 public class Duke {
 
-    /** Stores the tasks inputted by the user. */
     private TaskList taskList;
-    /** Saves the tasks in the TaskList to use at the next boot up. */
     private Storage storage;
-    /** Indicates whether this program should keep running or quit. */
+    private UndoStack undoStack;
     private boolean isExit;
 
     /**
@@ -34,26 +32,26 @@ public class Duke {
      *     during the parsing of the save file
      */
     public Duke() throws DukeIOException {
+        this.undoStack = new UndoStack();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.load());
         this.isExit = false;
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the result of executing a command.
      */
     public String getResponse(String input) {
         String[] command = input.split(" ", 2);
         try {
             Command c = Parser.parseToCommand(command[0], command[1]);
             this.isExit = c.isExit();
-            return c.getResponse(this.taskList, this.storage);
+            return c.getResponse(this.taskList, this.undoStack, this.storage);
         } catch (ArrayIndexOutOfBoundsException e) {
             try {
                 Command c = Parser.parseToCommand(command[0], "");
                 this.isExit = c.isExit();
-                return c.getResponse(this.taskList, this.storage);
+                return c.getResponse(this.taskList, this.undoStack, this.storage);
             } catch (DukeException e2) {
                 return e2.getMessage();
             }

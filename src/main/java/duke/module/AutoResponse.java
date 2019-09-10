@@ -1,5 +1,8 @@
 package duke.module;
 
+/**
+ * Contains all the messages Duke uses.
+ */
 public class AutoResponse {
 
     public static final String DUKE_LOGO = " ____        _        \n"
@@ -26,7 +29,7 @@ public class AutoResponse {
     public static final String DUKE_UNDO_DELETE_NO_TASK = "No tasks were deleted before.";
     public static final String DUKE_UNDO_DELETE_TASK = "Got it. I've added the following task(s):";
     public static final String DUKE_UNDO_DONE_NO_TASK = "No tasks were marked as done before.";
-    public static final String DUKE_UNDO_DONE_TASK = "Noted. I've marked the following task as undone:";
+    public static final String DUKE_UNDO_DONE_TASK = "Noted. I've marked the following task as unfinished:";
     public static final String DUKE_UNDO_DONE_ALL_TASKS = "Noted. I've marked all tasks as undone.";
     public static final String DUKE_UNDO_STUB = "The %s command is not undoable.";
 

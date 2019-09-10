@@ -1,9 +1,7 @@
 package duke.module;
 
-import duke.Duke;
 import duke.task.Task;
 import duke.exception.DukeIllegalIndexException;
-import duke.module.AutoResponse;
 
 import java.util.Iterator;
 import java.util.List;
@@ -105,7 +103,7 @@ public class TaskList {
      * @param task {@link Task} to be added.
      */
     public void addTask(Task task) {
-        assert task != null : "TaskList.java (line 85) : task should not be null";
+        assert task != null : "TaskList.java (line 106) : task should not be null";
         this.taskList.add(task);
     }
 
@@ -134,10 +132,6 @@ public class TaskList {
         return this.taskList.size() == 0;
     }
 
-    public boolean delete(Task task) {
-        return this.taskList.remove(task);
-    }
-
     /**
      * Deletes the task at the given index.
      *
@@ -151,6 +145,17 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeIllegalIndexException(this.generateIndexExceptionMessage(index));
         }
+    }
+
+    /**
+     * Deletes the last task in this taskList.
+     * <p>
+     * <b>Prerequisite: </b>this taskList is not empty.
+     * @return The last task.
+     */
+    public Task deleteLastTask() {
+        assert this.taskList.size() != 0 : "TaskList.java (line 157) : This taskList should not be empty.";
+        return this.taskList.remove(this.taskList.size() - 1);
     }
 
     /**

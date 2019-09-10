@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.UndoableStub;
+import duke.command.undoable.UndoableStub;
 
 import duke.exception.DukeIllegalArgumentException;
 
@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class FindCommand extends Command {
 
-    /** Sequence of characters to match against the descriptions of <code>Task</code>s. */
     private String keyword;
 
     public FindCommand(String keyword) {
@@ -39,14 +38,34 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, UndoStack undoStack, Ui ui, Storage storage)
             throws DukeIllegalArgumentException {
+        // Display the result to the user
+        ui.printToUser(this._execute(taskList, undoStack, storage));
+    }
+
+    /**
+     * Returns the response to this FindCommand.
+     *
+     * @param taskList List of tasks to manage.
+     * @param undoStack Stack of {@code Undoable} commands.
+     * @param storage Storage to save any changes if necessary.
+     * @throws DukeIllegalArgumentException When the keyword is missing.
+     */
+    @Override
+    public String getResponse(TaskList taskList, UndoStack undoStack, Storage storage)
+            throws DukeIllegalArgumentException {
+        return String.join("\n", this._execute(taskList, undoStack, storage));
+    }
+
+    private String[] _execute(TaskList taskList, UndoStack undoStack, Storage storage)
+            throws DukeIllegalArgumentException {
         if (keyword.isEmpty()) {
             throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_KEYWORD);
         }
-        List<Task> foundTasks = taskList.findAllTasksContaining(this.keyword);
+
         // Add UndoableStub to the undoStack
-        undoStack.addUndoable(new UndoableStub("find"));
+        undoStack.addUndoable(UndoableStub.FIND);
         // Display the result to the user
-        ui.printToUser(this.listTasks(foundTasks));
+        return this.listTasks(taskList.findAllTasksContaining(this.keyword));
     }
 
     /**

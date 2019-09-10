@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.module.AutoResponse;
 import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
@@ -21,6 +22,18 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList taskList, UndoStack undoStack, Ui ui, Storage storage) {
         ui.bye();
+    }
+
+    /**
+     * Returns the response to command "bye."
+     *
+     * @param taskList List of tasks to manage.
+     * @param undoStack Stack of {@code Undoable} commands.
+     * @param storage Storage to save any changes if necessary.
+     */
+    @Override
+    public String getResponse(TaskList taskList, UndoStack undoStack, Storage storage) {
+        return AutoResponse.DUKE_BYE;
     }
 
     /**

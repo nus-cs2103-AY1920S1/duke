@@ -57,11 +57,12 @@ public class Parser {
         String[] dateAndTime = date.split(" ");
         String[] dateFormat = dateAndTime[0].split("/");
         try {
+            int split = dateAndTime[1].length() / 2;
             return new DukeDate(Integer.parseInt(dateFormat[2]),
                                 Integer.parseInt(dateFormat[0]),
                                 Integer.parseInt(dateFormat[1]),
-                                Integer.parseInt(dateAndTime[1].substring(0, 2)),
-                                Integer.parseInt(dateAndTime[1].substring(2)));
+                                Integer.parseInt(dateAndTime[1].substring(0, split)),
+                                Integer.parseInt(dateAndTime[1].substring(split)));
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new DukeDateFormatException(AutoResponse.ERROR_DATE_FORMAT);
         }

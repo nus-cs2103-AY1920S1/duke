@@ -23,6 +23,7 @@ public class Duke {
 
     /**
      * Construct a object to run the whole task manager.
+     *
      * @param filePath Directory of the file for saving and loading
      */
     public Duke(String filePath) {

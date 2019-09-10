@@ -2,8 +2,10 @@ import java.util.Scanner;
 
 public class Ui{
 
-    public Ui {
-        Scanner sc = new Scanner(System.in);
+    Scanner sc;
+
+    public Ui() {
+        sc = new Scanner(System.in);
     }
 
     public void showWelcome() {
@@ -22,9 +24,17 @@ public class Ui{
     public String readCommand() {
         return sc.nextLine();
     }
+    
+    public void showError(String msg) {
+        System.out.println(msg);
+    } 
 
-    public void printAddedMsg() {
+    public static void printAddedMsg() {
         System.out.println("Task added!");
+    }
+
+    public void showLoadingError() {
+        System.out.println("Loading Error!");
     }
 
 }

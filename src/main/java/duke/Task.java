@@ -31,11 +31,13 @@ class Task implements Serializable {
     }
 
     public void setCompleted(boolean isCompleted) {
+        assert this.isCompleted != isCompleted : 
+                "Trying to complete/uncomplete a completed/uncompleted task";
         this.isCompleted = isCompleted;
     }
 
     public String getTaskString() {
-        assert this.task != null :"task is invalid";
+        assert this.task != null : "task is invalid";
         return this.task;
     }
 

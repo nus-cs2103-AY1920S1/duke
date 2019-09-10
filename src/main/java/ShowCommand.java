@@ -14,6 +14,13 @@ public class ShowCommand extends Command {
         super(command);
     }
 
+    /**
+     * Shows all the tasks.
+     *
+     * @param tasks List of tasks.
+     * @param ui User Interface.
+     * @param storage Storage of tasks.txt files.
+     */
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if (tasks.getTaskCount() == 0) {
             throw new DukeException("No tasks available.");

@@ -36,7 +36,7 @@ public class FindCommand extends Command {
         ArrayList<Task> taskArr = tasks.getTaskArr();
         ArrayList<Task> filteredTasks = taskArr
                                             .stream()
-                                            .filter( task -> task.getDescription().contains(word))
+                                            .filter(task -> task.getDescription().contains(word))
                                             .collect(Collectors.toCollection(ArrayList<Task>::new));
         if (filteredTasks.size() == 0) {
             throw new DukeException("Cannot find any tasks that match your keyword.");

@@ -10,25 +10,9 @@ public class Ui {
     public static final String DIVIDER = "    ____________________________________________________________";
     public static final String BLANKSPACE = "     ";
     private Scanner sc;
-    private String currLine;
 
     public Ui() {
         sc = new Scanner(System.in);
-    }
-
-    /**
-     * Reads the command from the user input.
-     *
-     * @return The user input command, with leading and trailing whitespaces removed.
-     * @throws DukeException In event of an empty command
-     */
-    public String readCommand() throws DukeException {
-        String fullCommand = sc.nextLine().trim();
-        if (fullCommand.equals("")) {
-            throw new DukeException("Please enter a command. Type 'help' for a list of all valid commands.");
-        }
-        currLine = fullCommand;
-        return fullCommand;
     }
 
     /**

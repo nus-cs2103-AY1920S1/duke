@@ -44,6 +44,9 @@ public class Duke {
      * @return Duke's response to the full command in String format.
      */
     public String run(String fullCommand) {
+        if (fullCommand.equals("")) {
+            return "Please enter a command. Type 'help' for a list of all valid commands.";
+        }
         String response = "";
         try {
             Command c = Parser.parse(fullCommand);

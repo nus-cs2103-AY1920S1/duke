@@ -111,21 +111,9 @@ public class Storage {
 
         String[] arr = nextLine.split("\\|");
 
-        if (arr.length < 3 || arr.length > 4) {
-            throw new DukeException("Existing tasklist is corrupt.");
-        }
-
-        String taskType = arr[0].trim(); // Check task type
-        if (!taskType.equals("T") && !taskType.equals("E") && !taskType.equals("D")) {
-            throw new DukeException("Invalid task type found.");
-        }
-
-        int status;         // Check task status
-        try {
-            status = Integer.parseInt(arr[1].trim());
-        } catch (NumberFormatException e) {
-            throw new DukeException("Invalid task status found.");
-        }
+        checkValidTaskListFormat(arr);
+        String taskType = checkValidTaskType(arr);
+        int status = checkValidTaskStatus(arr);
 
         boolean isComplete = status != 0;
 
@@ -152,6 +140,30 @@ public class Storage {
         }
 
         return newTask;
+    }
+
+    private void checkValidTaskListFormat(String[] arr) throws DukeException {
+        if (arr.length < 3 || arr.length > 4) {
+            throw new DukeException("Existing tasklist is corrupt.");
+        }
+    }
+
+    private String checkValidTaskType(String[] arr) throws DukeException {
+        String taskType = arr[0].trim();
+        if (!taskType.equals("T") && !taskType.equals("E") && !taskType.equals("D")) {
+            throw new DukeException("Invalid task type found.");
+        }
+        return taskType;
+    }
+
+    private int checkValidTaskStatus(String[] arr) throws DukeException {
+        int status;
+        try {
+            status = Integer.parseInt(arr[1].trim());
+        } catch (NumberFormatException e) {
+            throw new DukeException("Invalid task status found.");
+        }
+        return status;
     }
 
     /**

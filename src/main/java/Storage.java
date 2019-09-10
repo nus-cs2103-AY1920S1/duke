@@ -182,11 +182,10 @@ public class Storage {
             for (int i = 1; i <= tasks.size(); i++) {
                 if (i == deletionNumber) {
                     scanFile.nextLine();
-                } else if (i == tasks.size()) {
+                } else if (i == tasks.size()
+                        || (i == tasks.size() - 1 && tasks.size() == deletionNumber)) {
                     s = s + scanFile.nextLine();
-                } else if (i == tasks.size() - 1 && tasks.size() == deletionNumber) {
-                    s = s + scanFile.nextLine();
-                } else {
+                }  else {
                     s = s + scanFile.nextLine() + System.lineSeparator();
                 }
             }

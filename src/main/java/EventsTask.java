@@ -64,9 +64,13 @@ class EventsTask extends Task{
         String doneString;
         if(super.status){
             doneString = "1";
-        }else{
+            return "E|" +doneString + "|"+ super.message+ "|" + startingDateTime.toString() +"|"+ endingDateTime.toString() + "\n";
+        }else if (! super.status){
             doneString = "0";
+            return "E|" +doneString + "|"+ super.message+ "|" + startingDateTime.toString() +"|"+ endingDateTime.toString() + "\n";
+        }else{
+            assert false : "Status of a event must be a boolean!" ;  
+            return "Status is not a boolean!";         
         }
-        return "E|" +doneString + "|"+ super.message+ "|" + startingDateTime.toString() +"|"+ endingDateTime.toString() + "\n";
     }
 }

@@ -39,9 +39,13 @@ class ToDoTask extends Task{
         String doneString;
         if(super.status){
             doneString = "1";
-        }else{
+            return "T|" +doneString +"|" + super.message + "\n";
+        }else if (! super.status){
             doneString = "0";
+            return "T|" +doneString +"|" + super.message + "\n";
+        }else{
+            assert false : "Status of a event must be a boolean!" ;  
+            return "Status is not a boolean!";   
         }
-        return "T|" +doneString +"|" + super.message + "\n";
     }
 }

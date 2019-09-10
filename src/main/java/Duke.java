@@ -37,18 +37,19 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
+        initializeElements();
+        setAttributes(primaryStage);
+        setActions();
 
-        userInput = new TextField();
-        sendButton = new Button("Send");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) { // Supposed to be Exceptions.DukeException
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
+    private void setAttributes(Stage primaryStage) {
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
@@ -71,7 +72,9 @@ public class Duke extends Application {
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
+    private void setActions() {
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -91,19 +94,24 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+    }
 
+    private void initializeElements() {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
         userIv = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
         dukeIv = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
 
         ui = new Ui();
         storage = new Storage(FILE_PATH);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) { // Supposed to be Exceptions.DukeException
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-
     }
 
     /**

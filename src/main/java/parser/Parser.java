@@ -23,7 +23,7 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeException {
         String[] splitString = command.split(" ");
-        String taskType = splitString[0];
+        String commandType = splitString[0];
         if (command.equals("list")) {
             return new ListCommand();
         } else if (splitString[0].equals("done")) {
@@ -31,49 +31,16 @@ public class Parser {
             return new DoneCommand(taskIndex);
         } else if (command.equals("bye")) {
             return new ByeCommand();
-        } else if (taskType.equals("todo")) {
-            String[] todoSplit = command.split("todo ");
-            if (todoSplit.length == 1 || todoSplit[1].isEmpty()) {
-                throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a todo cannot be empty.");
-            }
-            return new AddCommand(new Todo(todoSplit[1].trim()));
-        } else if (taskType.equals("deadline")) {
-            //branch lvl 8 test
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-            String[] deadlineSplit = command.split("/by ");
-            String[] temp = deadlineSplit[0].split("deadline ");
-            if (temp.length == 1 || temp[1].isEmpty()) {
-                throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
-            }
-            if (deadlineSplit.length < 2) {
-                throw new InvalidDescriptionException("\u2639 OOPS!!! The date of a deadline cannot be empty.");
-            }
-            try {
-                LocalDateTime ldt = LocalDateTime.parse(deadlineSplit[1].trim(), dtf);
-                return new AddCommand(new Deadline(temp[1].trim(), ldt, deadlineSplit[1].trim()));
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please enter a valid date in the format DD/MM/YYYY");
-            }
-        } else if (taskType.equals("event")) {
-            try {
-                String[] eventSplit = command.split("/at ");
-                String[] temp = eventSplit[0].split("event ");
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-                if (temp.length == 1 || temp[1].isEmpty()) {
-                    throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a event cannot be empty.");
-                }
-                if (eventSplit.length < 2) {
-                    throw new InvalidDescriptionException("\u2639 OOPS!!! The date of a event cannot be empty.");
-                }
-                LocalDateTime ldt = LocalDateTime.parse(eventSplit[1].trim(), dtf);
-                return new AddCommand(new Event(temp[1].trim(), ldt, eventSplit[1].trim()));
-            } catch (DateTimeParseException e) {
-                throw new DukeException("Please enter a valid date in the format DD/MM/YYYY");
-            }
-        } else if (taskType.equals("delete")) {
+        } else if (commandType.equals("todo")) {
+            return new AddCommand(stringToTodo(command));
+        } else if (commandType.equals("deadline")) {
+            return new AddCommand(stringToDeadLine(command));
+        } else if (commandType.equals("event")) {
+            return new AddCommand(stringToEvent(command));
+        } else if (commandType.equals("delete")) {
             int taskIndex = Integer.valueOf(splitString[1]) - 1;
             return new DeleteCommand(taskIndex);
-        } else if (taskType.equals("find")) {
+        } else if (commandType.equals("find")) {
             StringBuilder builder = new StringBuilder();
             for (int i = 1; i < splitString.length; i++) {
                 builder.append(splitString[i] + " ");
@@ -81,6 +48,50 @@ public class Parser {
             return new FindCommand(builder.toString().trim());
         } else {
             throw new InvalidCommandException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private static Todo stringToTodo(String input) throws InvalidDescriptionException {
+        String[] todoSplit = input.split("todo ");
+        if (todoSplit.length == 1 || todoSplit[1].isEmpty()) {
+            throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a todo cannot be empty.");
+        }
+        return new Todo(todoSplit[1].trim());
+    }
+
+    private static Deadline stringToDeadLine(String input) throws DukeException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        String[] deadlineSplit = input.split("/by ");
+        String[] temp = deadlineSplit[0].split("deadline ");
+        if (temp.length == 1 || temp[1].isEmpty()) {
+            throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
+        }
+        if (deadlineSplit.length < 2) {
+            throw new InvalidDescriptionException("\u2639 OOPS!!! The date of a deadline cannot be empty.");
+        }
+        try {
+            LocalDateTime ldt = LocalDateTime.parse(deadlineSplit[1].trim(), dtf);
+            return new Deadline(temp[1].trim(), ldt, deadlineSplit[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter a valid date in the format DD/MM/YYYY HHmm");
+        }
+    }
+
+    private static Event stringToEvent(String input) throws DukeException{
+        try {
+            String[] eventSplit = input.split("/at ");
+            String[] temp = eventSplit[0].split("event ");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            if (temp.length == 1 || temp[1].isEmpty()) {
+                throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a event cannot be empty.");
+            }
+            if (eventSplit.length < 2) {
+                throw new InvalidDescriptionException("\u2639 OOPS!!! The date of a event cannot be empty.");
+            }
+            LocalDateTime ldt = LocalDateTime.parse(eventSplit[1].trim(), dtf);
+            return new Event(temp[1].trim(), ldt, eventSplit[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter a valid date in the format DD/MM/YYYY HHmm");
         }
     }
 }

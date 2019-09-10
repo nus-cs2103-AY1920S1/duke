@@ -29,6 +29,7 @@ public class EventCommand extends Command {
         }
         Task eventTask = new Event(description, at);
         tasks.add(eventTask);
-        ui.printAddedTask(eventTask, tasks);
+        response = "Got it. I've added this task:\n    " + eventTask + "\nNow you have " + tasks.size()
+                + " task(s) in the " + "list.";
     }
 }

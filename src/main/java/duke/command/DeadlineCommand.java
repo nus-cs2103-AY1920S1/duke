@@ -29,6 +29,6 @@ public class DeadlineCommand extends Command {
         }
         Task deadlineTask = new Deadline(description, by);
         tasks.add(deadlineTask);
-        ui.printAddedTask(deadlineTask, tasks);
+//        ui.printAddedTask(deadlineTask, tasks);
     }
 }

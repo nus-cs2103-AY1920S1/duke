@@ -23,6 +23,20 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException, IOException {
-        ui.printQuerySet(tasks, searchPhrase);
+//        ui.printQuerySet(tasks, searchPhrase);
+        StringBuilder sb = new StringBuilder("Here are the matching task(s) in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            int k = i + 1;
+            if (task.description.contains(searchPhrase)) {
+                if (i > 0) {
+                    sb.append("\n");
+                }
+                sb.append(k);
+                sb.append(". ");
+                sb.append(task);
+            }
+        }
+        response = sb.toString();
     }
 }

@@ -27,6 +27,8 @@ public class ToDoCommand extends Command {
         }
         Task toDoTask = new ToDo(description);
         tasks.add(toDoTask);
-        ui.printAddedTask(toDoTask, tasks);
+//        ui.printAddedTask(toDoTask, tasks);
+        response = "Got it. I've added this task:\n    " + toDoTask + "\nNow you have " + tasks.size()
+                + " task(s) in the " + "list.";
     }
 }

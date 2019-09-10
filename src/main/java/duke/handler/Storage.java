@@ -55,12 +55,12 @@ public class Storage {
             while ((read = reader.readLine()) != null) {
                 String type = read.substring(1, 2);
                 String status = read.substring(4, 5);
-                String info = read.substring(9);
+                String info = read.substring(7);
 
                 Task task;
                 if (type.equals("T")) {
                     task = new ToDo(info.trim());
-                    if (status.equals("✔")) {
+                    if (status.equals("\u2713")) {
                         task.markAsDone();
                     }
                     list.add(task);
@@ -69,7 +69,7 @@ public class Storage {
                     String description = infoArr[0].substring(0, infoArr[1].length() - 1).trim();
                     String at = infoArr[1].substring(1, infoArr[1].length() - 1);
                     task = new Event(description, at);
-                    if (status.equals("✔")) {
+                    if (status.equals("\u2713")) {
                         task.markAsDone();
                     }
                     list.add(task);
@@ -78,7 +78,7 @@ public class Storage {
                     String description = infoArr[0].substring(0, infoArr[1].length() - 1).trim();
                     String by = infoArr[1].substring(1, infoArr[1].length() - 1);
                     task = new Deadline(description, by);
-                    if (status.equals("✔")) {
+                    if (status.equals("\u2713")) {
                         task.markAsDone();
                     }
                     list.add(task);

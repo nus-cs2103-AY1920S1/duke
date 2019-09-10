@@ -8,9 +8,9 @@ import duke.handler.TaskList;
 import duke.ui.Ui;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -64,34 +64,6 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * Runs the app.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                Scanner sc = new Scanner(System.in);
-                String fullCommand = sc.nextLine();
-                ui.printLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks.getList(), ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
-            } catch (IndexOutOfBoundsException e) {
-                ui.showError("The command is invalid!");
-            } finally {
-                ui.printLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
-    }
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -99,6 +71,7 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        dialogContainer.setPadding(new Insets(10));
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -143,16 +116,6 @@ public class Duke extends Application {
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
 
@@ -171,7 +134,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -186,11 +148,14 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText.getText(), new ImageView(user).getImage()),
-                DialogBox.getDukeDialog(dukeText.getText(), new ImageView(duke).getImage())
-        );
-        userInput.clear();
+
+        if (!userText.equals("")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText.getText(), new ImageView(user).getImage()),
+                    DialogBox.getDukeDialog(dukeText.getText(), new ImageView(duke).getImage())
+            );
+            userInput.clear();
+        }
     }
 
     /**
@@ -198,7 +163,15 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks.getList(), ui, storage);
+            return c.response;
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        } catch (IndexOutOfBoundsException e) {
+            return "The command is invalid!";
+        }
     }
 }
 

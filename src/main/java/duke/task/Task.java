@@ -1,6 +1,7 @@
 package duke.task;
+
 /**
- * Task class
+ * Task class.
  */
 public class Task {
     protected boolean completed;
@@ -9,7 +10,7 @@ public class Task {
     protected static int count = 0;
   
     /**
-     * Constructor for Task object
+     * Constructor for Task object.
      * @param n name of task
      */
     public Task(String n) {
@@ -20,7 +21,7 @@ public class Task {
     }
   
     /**
-     * Constructor for Task object when loading from history
+     * Constructor for Task object when loading from history.
      * @param n name of task
      * @param completed indicates if task is completed
      */
@@ -32,7 +33,7 @@ public class Task {
     }
 
     /**
-     * Checks if a task is completed
+     * Checks if a task is completed.
      * @return true if task is completed, false otherwise
      */
     public boolean isCompleted() {
@@ -40,7 +41,7 @@ public class Task {
     }
 
     /**
-     * Returns name of task
+     * Returns name of task.
      * @return name of task
      */
     public String getName() {
@@ -48,7 +49,7 @@ public class Task {
     }
 
     /**
-     * Completes the task
+     * Completes the task.
      */
     public boolean complete() {
         if (this.completed) {
@@ -58,10 +59,18 @@ public class Task {
         return true;
     }
 
+    /**
+     * Returns the index of the task.
+     * @return index of task
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     * Sets the index of the task. Used in reordering task when deletion takes place.
+     * @param i new index of task
+     */
     public void setIndex(int i) {
         index = i;
     }

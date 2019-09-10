@@ -27,7 +27,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Constructor for DialogBox
+     * Constructor for DialogBox.
      * @param text Message to be displayed
      * @param img Image to be displayed
      * @param isDuke True if the sender of the message is Duke
@@ -69,7 +69,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a user dialog object
+     * Returns a user dialog object.
      * @param text Message to be displayed
      * @param img Image to be displayed
      * @return a new DialogBox
@@ -79,7 +79,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns a duke dialog object
+     * Returns a duke dialog object.
      * @param text Message to be displayed
      * @param img Image to be displayed
      * @return a new DialogBox

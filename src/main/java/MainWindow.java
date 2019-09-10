@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Set initial attributes for controllers in the GUI
+     * Set initial attributes for controllers in the GUI.
      */
     @FXML
     public void initialize() {
@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets duke for MainWindow
+     * Sets duke for MainWindow.
      * @param d Duke object
      */
     public void setDuke(Duke d) {
@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets loader for MainWindow
+     * Sets loader for MainWindow.
      * @param l Loader object
      */
     public void setLoader(FXMLLoader l) {
@@ -71,12 +71,13 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Exits the application
+     * Exits the application.
      */
     private void exit() {
         Platform.exit();
         System.exit(0);
     }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.

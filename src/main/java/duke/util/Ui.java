@@ -1,10 +1,11 @@
 package duke.util;
+
 /**
- * Ui class to print display items
+ * Ui class to print display items.
  */
 public class Ui {
     /**
-     * Print welcome message
+     * Prints welcome message.
      */
     public static String welcomeMessage() {
         String result = "I'm Perry the Platypus.\nWhat can I do for you?";
@@ -13,7 +14,7 @@ public class Ui {
     }
 
     /**
-     * Prints bye message
+     * Prints bye message.
      */
     public String byeMessage() {
         String result = "Bye. Hope to see you again soon!";

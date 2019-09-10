@@ -1,20 +1,19 @@
 package duke.util;
-/**
- * duke.util.Duke Class
- */
 
+/**
+ * Duke Class.
+ */
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Duke {
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
     private final String path = "./saved/taskList_history.txt";
 
     /**
-     * Constructor for duke
+     * Constructor for duke.
      */
     public Duke() {
         storage = new Storage(path);
@@ -22,6 +21,9 @@ public class Duke {
         loadHistory();
     }
 
+    /**
+     * Loads history from text file to program.
+     */
     private void loadHistory() {
         try {
             if (!storage.historyExists()) {
@@ -32,11 +34,13 @@ public class Duke {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (DukeException e) {
+            e.getMessage();
         }
     }
 
     /**
-     * Returns the duke's response to a user input
+     * Returns the duke's response to a user input.
      * @param input User input
      * @return Message to be displayed
      */
@@ -53,6 +57,11 @@ public class Duke {
         return "";
     }
 
+    /**
+     * Returns the message to be displayed when an invalid command is received.
+     * @param errorMessage Description of error message
+     * @return String of entire error message
+     */
     public String invalidCommandMessage(String errorMessage) {
         return errorMessage + "\nType 'commands' to view a list of commands you can use";
     }

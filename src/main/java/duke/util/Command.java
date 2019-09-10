@@ -2,6 +2,9 @@ package duke.util;
 
 import java.io.IOException;
 
+/**
+ * Class for Command object.
+ */
 public class Command {
     private static final int BYE = 0;
     private static final int LIST = 1;
@@ -11,20 +14,20 @@ public class Command {
     private static final int TASK = 5;
     private static final int COMMANDS = -1;
     private static final String list =
-            "1) list: view your Todo list\n" +
-            "2) done {task_number}: mark a task as done\n" +
-            "3) delete {task_number}: delete a task\n" +
-            "4) find {query}: find tasks containing {query}\n\n" +
-            "          ---Task Commands---\n\n" +
-            "5) todo {task_name}\n" +
-            "6) event {event_name} /at {dd/mm/yyyy} {time_in_24hr}\n" +
-            "7) deadline {task_name} /by {dd/mm/yyyy} {time_in_24hr}";
+            "1) list: view your Todo list\n"
+                    + "2) done {task_number}: mark a task as done\n"
+                    + "3) delete {task_number}: delete a task\n"
+                    + "4) find {query}: find tasks containing {query}\n\n"
+                    + "          ---Task Commands---\n\n"
+                    + "5) todo {task_name}\n"
+                    + "6) event {event_name} /at {dd/mm/yyyy} {time_in_24hr}\n"
+                    + "7) deadline {task_name} /by {dd/mm/yyyy} {time_in_24hr}";
 
     private String[] inputParts;
     private int command;
 
     /**
-     * Constructor for Command object
+     * Constructor for Command object.
      * @param inputParts user input split into words, represented as an array
      * @param command enum to determine which command it is
      */
@@ -34,7 +37,7 @@ public class Command {
     }
 
     /**
-     * Executes command
+     * Executes command.
      * @param storage Storage object for saving/retrieving task list
      * @param ui Ui object to return duke's responses as strings
      * @param tasks List of task
@@ -66,8 +69,8 @@ public class Command {
             return result;
         case COMMANDS:
             return list;
+        default:
+            throw new DukeException("Invalid command");
         }
-        assert false : "Invalid Command";
-        return result;
     }
 }

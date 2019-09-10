@@ -1,8 +1,12 @@
 package duke.util;
 
+/**
+ * Class for Parser object.
+ */
 public class Parser {
+
     /**
-     * Returns a command according to user input
+     * Returns a command according to user input.
      * @param inputParts user input
      * @return Command object to be executed
      */
@@ -20,11 +24,8 @@ public class Parser {
             return new Command(inputParts, 4);
         case "commands":
             return new Command(inputParts, -1);
+        default:
+            return new Command(inputParts, 5);
         }
-        String taskType = inputParts[0];
-        assert taskType.equals("todo") ||
-                taskType.equals("deadline") ||
-                taskType.equals("event") : "Invalid Task";
-        return new Command(inputParts, 5);
     }
 }

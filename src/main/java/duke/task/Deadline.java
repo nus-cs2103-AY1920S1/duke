@@ -1,13 +1,14 @@
 package duke.task;
+
 /**
- * Deadline class
+ * Deadline class.
  */
 public class Deadline extends Task {
     private String date;
 
 
     /**
-     * Contructor for Deadline object
+     * Constructor for Deadline object.
      * @param n name of task
      * @param date date of task
      */
@@ -18,7 +19,7 @@ public class Deadline extends Task {
 
 
     /**
-     * Cosntructor for Deadline object when loading from history
+     * Constructor for Deadline object when loading from history.
      * @param n name of task
      * @param date date of task
      * @param completed indicates if task is completed
@@ -29,7 +30,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns date of task
+     * Returns date of task.
      * @return date of task
      */
     public String getDate() {
@@ -37,13 +38,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns string representation of Deadline object
+     * Returns string representation of Deadline object.
      * @return String representation of Deadline object
      */
     @Override
     public String toString() {
         String result = "[D][";
-        result = this.completed ? result + "\u2713" + "]" : result + "\u2718" + "]";
+        result = this.completed ? result + "✔" + "]" : result + "✘" + "]";
         result += " " + this.name;
         result += " (by: " + this.date + ")";
         return result;

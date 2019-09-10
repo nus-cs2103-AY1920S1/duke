@@ -20,7 +20,7 @@ public class Storage {
     private String path;
 
     /**
-     * Constructor for Storage object
+     * Constructor for Storage object.
      * @param path path to save/read history relative to current directory
      */
     public Storage(String path) {
@@ -28,23 +28,23 @@ public class Storage {
     }
 
     /**
-     * Retrieves history of tasklist
+     * Retrieves history of tasklist.
      * @return History of tasklist if present
      * @throws IOException if there are errors reading the file
      */
-    public ArrayList<Task> retrieveHistory() throws IOException {
+    public ArrayList<Task> retrieveHistory() throws IOException, DukeException {
         Path filePath = Paths.get(path);
         ArrayList<String> lines = new ArrayList<>(Files.readAllLines(filePath));
         ArrayList<Task> taskList = textToTaskList(lines);
         return taskList;
     }
 
-    private ArrayList<Task> textToTaskList(ArrayList<String> lines) {
+    private ArrayList<Task> textToTaskList(ArrayList<String> lines) throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         for (String line : lines) {
             String[] parts = line.split("\\|");
             String part = parts[0];
-            switch(part) {
+            switch (part) {
             case "T":
                 taskList.add(new Todo(parts[2], parts[1].equals("1")));
                 break;
@@ -54,6 +54,8 @@ public class Storage {
             case "E":
                 taskList.add(new Event(parts[2], parts[3], parts[1].equals("1")));
                 break;
+            default:
+                throw new DukeException("Corrupted history");
             }
             assert false : "Corrupted history";
         }

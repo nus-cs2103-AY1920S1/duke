@@ -7,7 +7,9 @@ import seedu.duke.task.Event;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.DukeDoneEmptyListException;
 import seedu.duke.exception.DukeIndexOutOfBoundException;
+import seedu.duke.comparator.NameComparator;
 import java.util.ArrayList;
+
 
 /**
  * Class containing the list of Tasks, and methods to modify it.
@@ -184,6 +186,18 @@ public class TaskList {
                 stringArray[z] = String.format("%3d." + matches.get(z).toString(), z + 1);
             }
             Ui.printBlock(stringArray);
+        }
+    }
+
+    public void sort(Parser parser) {
+        switch (parser.getSortBy()) {
+        case "name":
+            this.taskList.sort(new NameComparator(parser.getSortOrder()));
+            Ui.printBlock(String.format("Task list sorted by name in %s order", parser.getSortOrder()));
+            break;
+        default:
+            Ui.printBlock("Unknown parameter, task list not sorted");
+            return;
         }
     }
 

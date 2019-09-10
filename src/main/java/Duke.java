@@ -70,6 +70,8 @@ public class Duke extends Application {
             case "find":
                 taskList.find(parser);
                 break;
+            case "sort":
+                taskList.sort(parser);
             default:
                 throw new DukeNoSuchCommandException();
             }

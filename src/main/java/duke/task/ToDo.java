@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.exception.IllegalDescriptionException;
 
+import java.time.LocalDateTime;
+
 /** A class representing a todo task. */
 public class ToDo extends Task {
     /**
@@ -10,6 +12,19 @@ public class ToDo extends Task {
      */
     public ToDo(String description) throws IllegalDescriptionException {
         super(description);
+    }
+
+    /**
+     * Returns task type.
+     * @return task type.
+     */
+    public TaskType getTaskType() {
+        return TaskType.ToDo;
+    }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return null;
     }
 
     /**

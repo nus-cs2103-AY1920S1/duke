@@ -19,6 +19,23 @@ public class Event extends Task {
     }
 
     /**
+     * Returns task type.
+     * @return task type.
+     */
+    public TaskType getTaskType() {
+        return TaskType.Event;
+    }
+
+    /**
+     * Returns the time when the event happens.
+     * @return the time when the event happens.
+     */
+    @Override
+    public LocalDateTime getDateTime() {
+        return time;
+    }
+
+    /**
      * Returns a string representation of the task to be stored in file.
      * @return a string representation of the task to be stored in file, consisting of the task type,
      *         status, description and time.

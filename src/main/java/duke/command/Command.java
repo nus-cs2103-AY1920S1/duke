@@ -14,5 +14,6 @@ public abstract class Command {
      * @return the result of executing the command.
      * @throws IllegalIndexOfTaskException If the index of the task is out of range.
      */
-    public abstract CommandResult execute(TaskList tasks) throws IllegalIndexOfTaskException, IllegalDescriptionException;
+    public abstract CommandResult execute(TaskList tasks) throws
+            IllegalIndexOfTaskException, IllegalDescriptionException;
 }

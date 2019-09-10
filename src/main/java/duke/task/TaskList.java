@@ -63,6 +63,14 @@ public class TaskList {
     }
 
     /**
+     * Removes the task from task list.
+     * @param task task to be removed.
+     */
+    public void removeTask(Task task) {
+        tasks.remove(task);
+    }
+
+    /**
      * Add task to the task list.
      * @param task the task to be added.
      */

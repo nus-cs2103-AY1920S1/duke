@@ -1,12 +1,7 @@
 package duke.task;
 
-import duke.exception.IllegalDescriptionException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 public class TaskTest {
+    /*
     @Test
     public void testStringConversionForFile() throws IllegalDescriptionException {
         Task task = new Task("test");
@@ -34,6 +29,7 @@ public class TaskTest {
     }
     */
 
+    /*
     @Test
     public void constructor_emptyDescription_exceptionThrown() {
         try {
@@ -42,5 +38,5 @@ public class TaskTest {
         } catch (IllegalDescriptionException e) {
             assertEquals("The description of a task cannot be empty.", e.getMessage());
         }
-    }
+    }*/
 }

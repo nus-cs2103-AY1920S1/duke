@@ -2,8 +2,10 @@ package duke.task;
 
 import duke.exception.IllegalDescriptionException;
 
+import java.time.LocalDateTime;
+
 /** A class that represents a task. */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -19,6 +21,18 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    /**
+     * Returns task type.
+     * @return task type.
+     */
+    public abstract TaskType getTaskType();
+
+    /**
+     * Returns the date and time associated with the task.
+     * @return the date and time associated with the task.
+     */
+    public abstract LocalDateTime getDateTime();
 
     /**
      * Returns an icon showing the status of the task.

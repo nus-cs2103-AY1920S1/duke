@@ -2,7 +2,9 @@ package duke.handler;
 
 import duke.command.Command;
 import duke.command.CommandResult;
-import duke.command.CommandType;
+import duke.exception.IllegalCommandException;
+import duke.exception.IllegalDescriptionException;
+import duke.exception.IllegalIndexOfTaskException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -48,24 +50,44 @@ public class Duke {
     }
 
     /**
-     * Parses the command.
-     * @param commandString command to be parsed.
-     * @return a string representation of the response to the command.
+     * Returns the result of executing the command.
+     * @param commandString command to be parsed and executed.
+     * @return the result of executing the command.
+     * @throws IllegalDescriptionException If the task description is illegal.
+     * @throws IllegalIndexOfTaskException If the indices of task is illegal.
+     * @throws IllegalCommandException If the command is not recognized.
      */
-    public String parse(String commandString) {
-        try {
-            Command command = parser.parseCommand(commandString);
-            CommandResult result = command.execute(tasks);
-            if (result.getCommandType() == CommandType.Exit) {
-                try {
-                    storeTasks();
-                } catch (IOException e) {
-                    return ui.showStoringError(e);
-                }
-            }
-            return ui.composeResult(result);
-        } catch (Exception e) {
-            return ui.showParsingError(e);
-        }
+    public CommandResult execute(String commandString) throws
+            IllegalDescriptionException, IllegalIndexOfTaskException, IllegalCommandException {
+        Command command = parser.parseCommand(commandString);
+        CommandResult result = command.execute(tasks);
+        return result;
+    }
+
+    /**
+     * Returns a string representation of the command result.
+     * @param commandResult the result to be shown.
+     * @return a string representation of the command result.
+     */
+    public String getResultUi(CommandResult commandResult) {
+        return ui.composeResult(commandResult);
+    }
+
+    /**
+     * Returns a string representation of an exception occurring during parsing.
+     * @param e the exception to be shown.
+     * @return a string representation of an exception occurring during parsing.
+     */
+    public String getParsingErrorUi(Exception e) {
+        return ui.showParsingError(e);
+    }
+
+    /**
+     * Returns a string representation of an exception occurring during storing.
+     * @param e the exception to be shown.
+     * @return a string representation of an exception occurring during storing.
+     */
+    public String getStoringErrorUi(IOException e) {
+        return ui.showStoringError(e);
     }
 }

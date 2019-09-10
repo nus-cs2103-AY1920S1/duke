@@ -12,13 +12,17 @@ import duke.command.ToDoCommand;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalDescriptionException;
 import duke.exception.IllegalIndexOfTaskException;
+import duke.task.TaskType;
+import duke.filter.ComparisonOperator;
+import duke.filter.IndexFilter;
+import duke.filter.TimeFilter;
+import duke.filter.TypeFilter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 /**
  * A class representing a parser.
@@ -138,16 +142,9 @@ public class Parser {
         return LocalDateTime.of(date, time);
     }
 
-    private ArrayList<Integer> removeDuplicates(ArrayList<Integer> indices) {
-        Stream<Integer> uniqueIndicesStream = indices.stream().sorted().distinct();
-        ArrayList<Integer> uniqueIndices = uniqueIndicesStream
-                .collect(Collectors.toCollection(ArrayList::new));
-        return uniqueIndices;
-    }
-
-    private ArrayList<Integer> parseIndices(String description) {
+    private IntStream parseIndices(String description) {
         ArrayList<Integer> indices = new ArrayList<>();
-        while(!description.isEmpty()) {
+        while (!description.isEmpty()) {
             try {
                 indices.add(Integer.parseInt(getFirstWord(description)));
             } catch (NumberFormatException e) {
@@ -155,22 +152,79 @@ public class Parser {
             }
             description = removeFirstWord(description);
         }
-        return indices;
+        return indices.stream().mapToInt(Integer::intValue);
+    }
+
+    private IndexFilter getIndexFilter(String description) {
+        return new IndexFilter(parseIndices(description));
+    }
+
+    private TaskType parseTaskType(String taskType) throws IllegalDescriptionException {
+        switch (taskType) {
+        case "todo":
+            return TaskType.ToDo;
+        case "event":
+            return TaskType.Event;
+        case "deadline":
+            return TaskType.Deadline;
+        default:
+            throw new IllegalDescriptionException("Please provide a valid task type");
+        }
+    }
+
+    private TypeFilter getTypeFilter(String description) throws IllegalDescriptionException {
+        return new TypeFilter(parseTaskType(removeFirstWord(description)));
+    }
+
+    private TimeFilter getTimeFilter(String description) throws IllegalDescriptionException {
+        String preposition = getFirstWord(description);
+        LocalDateTime dateTime = parseDateTime(removeFirstWord(description));
+
+        switch (preposition) {
+        case "/on":
+            return new TimeFilter(ComparisonOperator.EqualTo, dateTime);
+        case "/before":
+            return new TimeFilter(ComparisonOperator.LessThan, dateTime);
+        case "/after":
+            return new TimeFilter(ComparisonOperator.GreaterThan, dateTime);
+        case "/from":
+            return new TimeFilter(ComparisonOperator.GreaterThanOrEqualTo, dateTime);
+        case "/until":
+            return new TimeFilter(ComparisonOperator.LessThanOrEqualTo, dateTime);
+        default:
+            throw new IllegalDescriptionException("I'm sorry, but I don't know what that means :-(");
+        }
     }
 
     private DeleteCommand parseDeleteCommand(String description) throws IllegalDescriptionException {
-        ArrayList<Integer> indices = parseIndices(description);
-        if (indices.isEmpty()) {
-            throw new IllegalDescriptionException("Please provide at least 1 valid index");
+        String filterType = getFirstWord(description);
+        switch (filterType) {
+        case "/type":
+            return new DeleteCommand(getTypeFilter(description));
+        case "/on":
+        case "/before":
+        case "/after":
+        case "/from":
+        case "/until":
+            return new DeleteCommand(getTimeFilter(description));
+        default:
+            return new DeleteCommand(getIndexFilter(description));
         }
-        return new DeleteCommand(removeDuplicates(indices));
     }
 
     private DoneCommand parseDoneCommand(String description) throws IllegalDescriptionException {
-        ArrayList<Integer> indices = parseIndices(description);
-        if (indices.isEmpty()) {
-            throw new IllegalDescriptionException("Please provide at least 1 valid index");
+        String filterType = getFirstWord(description);
+        switch (filterType) {
+        case "/type":
+            return new DoneCommand(getTypeFilter(description));
+        case "/on":
+        case "/before":
+        case "/after":
+        case "/from":
+        case "/until":
+            return new DoneCommand(getTimeFilter(description));
+        default:
+            return new DoneCommand(getIndexFilter(description));
         }
-        return new DoneCommand(removeDuplicates(indices));
     }
 }

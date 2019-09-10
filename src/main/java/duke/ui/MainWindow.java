@@ -1,5 +1,7 @@
 package duke.ui;
 
+import duke.command.CommandResult;
+import duke.command.CommandType;
 import duke.handler.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -13,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * A class representing the main window of the app.
@@ -80,12 +83,23 @@ public class MainWindow extends AnchorPane {
         if (input.isEmpty()) {
             return;
         }
-        addUserDialogBox(input);
-        addDukeDialogBox(duke.parse(input));
-        if (input.equals("bye")) {
-            exit();
+        try {
+            addUserDialogBox(input);
+            CommandResult commandResult = duke.execute(input);
+            addDukeDialogBox(duke.getResultUi(commandResult));
+            if (commandResult.getCommandType() == CommandType.Exit) {
+                try {
+                    duke.storeTasks();
+                } catch (IOException e) {
+                    addDukeDialogBox(duke.getStoringErrorUi(e));
+                }
+                exit();
+            }
+        } catch (Exception e) {
+            addDukeDialogBox(duke.getParsingErrorUi(e));
+        } finally {
+            userInput.clear();
         }
-        userInput.clear();
     }
 
     /**

@@ -15,7 +15,7 @@ public abstract class Command {
     protected String input;
 
     /**
-     * Constructor that takes in the main mesage of the command. Can be empty.
+     * Constructor that takes in the main message of the command. Can be empty.
      * @param message The main message of the command.
      */
     public Command(String message) {

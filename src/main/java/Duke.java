@@ -61,16 +61,6 @@ public class Duke {
     private Scene scene;
 
     /**
-     * The profile image for the user.
-     */
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/Wario.jpg"));
-
-    /**
-     * The profile image for duke.
-     */
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Waluigi.jpg"));
-
-    /**
      * Constructor that creates the main Duke class.
      * @throws Exception Used for when there are any errors.
      */

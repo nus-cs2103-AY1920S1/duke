@@ -16,6 +16,7 @@ public class AddDeadlineCommand extends Command {
     private Deadline deadline;
     private String[] inputMessage;
     private String errorMessage = "noError";
+    private TaskList listOfTasks;
 
     /**
      * Constructor that takes in main message of the deadline.
@@ -27,6 +28,7 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
+        this.listOfTasks = listOfTasks;
         inputMessage = input.split(" ");
         String mainInput = "";
         int marker = 0;
@@ -94,7 +96,9 @@ public class AddDeadlineCommand extends Command {
         if (!errorMessage.equals("noError")) {
             return errorMessage;
         } else {
-            return deadline.toString();
+            String output = "Done! I have added this deadline to the list" + deadline.toString() + "\n";
+            output += "You now have " + listOfTasks.size() + " tasks in the list!";
+            return output;
         }
     }
 }

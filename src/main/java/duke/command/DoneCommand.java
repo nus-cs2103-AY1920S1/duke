@@ -11,6 +11,7 @@ import duke.task.Task;
  */
 public class DoneCommand extends Command {
 
+    private String errorMessage = "";
     private Task task;
     private TaskList taskList;
     /**
@@ -30,6 +31,10 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
         this.taskList = listOfTasks;
+        if (index > taskList.size() || index <= 0) {
+            errorMessage = "Such task does not exist!";
+            return;
+        }
         listOfTasks.get(index - 1).completeTask();
         this.task = listOfTasks.get(index - 1);
         storage.updateTaskList(listOfTasks.getTasks());
@@ -37,8 +42,8 @@ public class DoneCommand extends Command {
     }
 
     public String toString() {
-        if (index > taskList.size() || index <= 0) {
-            return "Such task does not exist!";
+        if (!errorMessage.equals("")) {
+            return errorMessage;
         } else {
             return task.toString();
         }

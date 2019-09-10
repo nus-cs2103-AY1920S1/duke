@@ -4,6 +4,9 @@ import task.Task;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Used to store tasks.
@@ -144,7 +147,30 @@ public class TaskList implements Iterable<Task> {
         };
         return iter;
     }
-    /*
-    Note to self: the out of bounds exception should be caught earlier under the part where you process command!
+
+    /**
+     * Removes all tasks which have been marked as complete.
+     *
+     * @return an ArrayList of all completed tasks which have been removed.
      */
+    public ArrayList<Task> removeCompletedTasks() {
+        Stream<Task> taskStream = tasks.stream().filter(task -> task.isComplete());
+        List<Task> taskList = taskStream.collect(Collectors.toList());
+        ArrayList<Task> taskArrayList = new ArrayList<>(taskList);
+        tasks.removeAll(taskArrayList);
+        return taskArrayList;
+    }
+
+    /**
+     * Removes all tasks which has expired before today.
+     *
+     * @return An ArrayList of all tasks which has expired before today
+     */
+    public ArrayList<Task> removeExpiredTasks() {
+        Stream<Task> taskStream = tasks.stream().filter(task -> task.isExpired());
+        List<Task> taskList = taskStream.collect(Collectors.toList());
+        ArrayList<Task> taskArrayList = new ArrayList<>(taskList);
+        tasks.removeAll(taskArrayList);
+        return taskArrayList;
+    }
 }

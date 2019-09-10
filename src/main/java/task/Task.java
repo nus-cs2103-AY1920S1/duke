@@ -36,6 +36,15 @@ public class Task {
     }
 
     /**
+     * Returns true if task is complete.
+     *
+     * @return true if task is complete
+     */
+    public boolean isComplete() {
+        return this.isComplete;
+    }
+
+    /**
      * Sets the status of the task to complete.
      */
     public void finishTask() {
@@ -60,5 +69,15 @@ public class Task {
      */
     public boolean containsKeyword(String keyword) {
         return this.name.toLowerCase().contains(keyword);
+    }
+
+    /**
+     * Returns true if a task is expired.
+     * ToDo tasks are never expired.
+     *
+     * @return true if task is expired.
+     */
+    public boolean isExpired() {
+        return false;
     }
 }

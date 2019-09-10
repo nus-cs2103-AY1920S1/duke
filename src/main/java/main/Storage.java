@@ -16,10 +16,7 @@ import java.util.Scanner;
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
-public class Storage {
-
-    private String filePath;
-    private boolean isValidFilePath;
+public class Storage extends DataFile{
 
     /**
      * Creates a new Storage object which reads and writes to file at filepath.
@@ -29,35 +26,27 @@ public class Storage {
      * @param filePath File path to read from and to write to.
      */
     public Storage(String filePath){
-        this.filePath = filePath;
-        File file = new File(filePath);
-        isValidFilePath = file.exists();
+        super(filePath);
     }
 
-    public boolean isValidFilePath() {
-        return isValidFilePath;
-    }
-
+    /**
+     * Creates a default Storage object with predetermined file path.
+     *
+     * @throws DukeException if there is an error in createing the file at the
+     * predetermined file path
+     */
     public Storage() throws DukeException {
-        try {
-            filePath = createNewFile();
-        } catch (IOException e) {
-            isValidFilePath = false;
-            throw new DukeException("Data file cannot be created at data/tasks.txt");
-        }
+        super();
     }
 
     /**
      * Creates a new file at [root]/data/tasks.txt to store the task list.
      *
-     * @throws DukeException if file cannot be created
+     * @throws IOException if file cannot be created
      */
+    @Override
     public String createNewFile() throws IOException {
-        String root = new File(System.getProperty("user.dir")).getParentFile().getPath();
-        File dataDir = new File(root + "/data");
-        if (!dataDir.exists()) {
-            dataDir.mkdir();
-        }
+        String dataDir = makeDataDirectoryIfNotExist();
         File taskListFile = new File(dataDir + "/data.txt");
         boolean isFileCreated = taskListFile.createNewFile();
         if (isFileCreated) {
@@ -183,28 +172,6 @@ public class Storage {
             }
         } catch (IOException e) {
             throw new DukeException("Error in saving to file: " + e.getMessage());
-        }
-    }
-
-    private void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAppend);
-        fw.close();
-    }
-
-    /**
-     * Clears the file found at filePath.
-     *
-     * @throws DukeException if file is not found.
-     */
-    public void clearAll() throws DukeException {
-        if (!isValidFilePath) {
-            return;
-        }
-        try {
-            new FileWriter(filePath); //create new file
-        } catch (IOException e) {
-            throw new DukeException("File does not exist, there is nothing to clear!");
         }
     }
 }

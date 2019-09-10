@@ -2,6 +2,8 @@ package task;
 
 import task.DateTime;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a Task with type Deadline.
  */
@@ -39,5 +41,11 @@ public class Deadline extends Task {
     @Override
     public String publishTask() {
         return "D | " + super.publishTask() + " | " + this.dateTime;
+    }
+
+    @Override
+    public boolean isExpired() {
+        LocalDateTime today = LocalDateTime.now();
+        return this.dateTime.isBefore(today);
     }
 }

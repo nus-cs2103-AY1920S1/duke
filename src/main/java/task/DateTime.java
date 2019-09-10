@@ -63,4 +63,14 @@ public class DateTime {
         return dateTime.format(formatter);
     }
 
+    /**
+     * Returns true if task date and time is before the other specified date and time.
+     *
+     * @param otherDate other specified date and time
+     * @returntrue if task date and time is before the other specified date and time
+     */
+    public boolean isBefore(LocalDateTime otherDate) {
+        return this.dateTime.isBefore(otherDate);
+    }
+
 }

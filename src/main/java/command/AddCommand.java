@@ -1,9 +1,6 @@
 package command;
 
-import main.DukeException;
-import main.Storage;
-import main.TaskList;
-import main.Ui;
+import main.*;
 import task.DateTime;
 import task.Deadline;
 import task.Event;
@@ -48,10 +45,11 @@ public class AddCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @param archive
      * @return          The message to be displayed upon successful execution
      * @throws DukeException    If format of task to be added is invalid
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Archive archive) throws DukeException {
         Task newTask;
         switch (taskType) {
         case "todo":

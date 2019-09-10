@@ -1,4 +1,5 @@
 import command.Command;
+import main.Archive;
 import main.DukeException;
 import main.Parser;
 import main.Storage;
@@ -11,6 +12,7 @@ import main.Ui;
 public class Duke {
 
     private Storage storage;
+    private Archive archive;
     private TaskList tasks;
     private Ui ui;
 
@@ -18,8 +20,38 @@ public class Duke {
      * Creates a new Duke object
      */
     public Duke() {
-        String filePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt";
-        ui = new Ui();
+
+        createNewUi();
+
+        String taskListFilePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt";
+        createNewStorage(taskListFilePath);
+
+        String archiveFilePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt";
+        createNewArchive(archiveFilePath);
+        createNewTaskList();
+    }
+
+    private void createNewArchive(String filePath) {
+        archive = new Archive(filePath);
+        if (!archive.isValidFilePath()) {
+            try {
+                archive = new Archive();
+            } catch (DukeException e) {
+                ui.dukeEcho((e.getMessage()));
+            }
+        }
+    }
+
+    private void createNewTaskList() {
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.dukeEcho(e.getMessage());
+            tasks = new TaskList();
+        }
+    }
+
+    private void createNewStorage(String filePath) {
         storage = new Storage(filePath);
         if (!storage.isValidFilePath()) {
             try {
@@ -28,12 +60,10 @@ public class Duke {
                 ui.dukeEcho((e.getMessage()));
             }
         }
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.dukeEcho(e.getMessage());
-            tasks = new TaskList();
-        }
+    }
+
+    private void createNewUi() {
+        ui = new Ui();
     }
 
     /**
@@ -50,15 +80,11 @@ public class Duke {
         String response = "";
         try {
             Command c = Parser.parse(fullCommand);
-            response += c.execute(tasks, ui, storage);
+            response += c.execute(tasks, ui, storage, archive);
         } catch (DukeException e) {
             response += ui.getErrorMessage(e.getMessage());
         }
         return response;
     }
-    /**
-     * Note to self:
-     * At this moment in the application the text cuts off at 4 lines. Figure out how to make it dynamic
-     */
 
 }

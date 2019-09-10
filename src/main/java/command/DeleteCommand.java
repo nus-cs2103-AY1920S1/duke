@@ -1,9 +1,6 @@
 package command;
 
-import main.DukeException;
-import main.Storage;
-import main.TaskList;
-import main.Ui;
+import main.*;
 import task.Task;
 
 /**
@@ -29,10 +26,11 @@ public class DeleteCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @param archive
      * @return          The message to be displayed upon successful execution
      * @throws DukeException If task ID is out of bounds
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Archive archive) throws DukeException {
         if (this.taskID > tasks.size() || this.taskID <= 0) {
             throw new DukeException("Invalid task ID. Please Enter a task ID between 1 and " + tasks.size());
         }

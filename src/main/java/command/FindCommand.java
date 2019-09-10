@@ -1,9 +1,6 @@
 package command;
 
-import main.DukeException;
-import main.Storage;
-import main.TaskList;
-import main.Ui;
+import main.*;
 import task.Task;
 
 import java.util.ArrayList;
@@ -35,10 +32,11 @@ public class FindCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @param archive
      * @return          The message to be displayed upon successful execution
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage)  {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Archive archive)  {
         ArrayList<Task> tasksContainingKeyword = tasks.findTasksByKeyword(keyword);
         String[] tasksToPrint = new String[tasksContainingKeyword.size() + 1];
         tasksToPrint[0] = "Here are the matching tasks in your list:";

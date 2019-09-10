@@ -1,5 +1,7 @@
 package task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a Task with type Event.
  */
@@ -37,5 +39,11 @@ public class Event extends Task {
     @Override
     public String publishTask() {
         return "E | " + super.publishTask() + " | " + this.dateTime;
+    }
+
+    @Override
+    public boolean isExpired() {
+        LocalDateTime today = LocalDateTime.now();
+        return this.dateTime.isBefore(today);
     }
 }

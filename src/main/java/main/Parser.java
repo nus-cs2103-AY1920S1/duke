@@ -1,14 +1,6 @@
 package main;
 
-import command.AddCommand;
-import command.ClearAllTasksCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ExitCommand;
-import command.FindCommand;
-import command.HelpCommand;
-import command.ListCommand;
+import command.*;
 
 /**
  * Deals with making sense of the user command.
@@ -62,9 +54,16 @@ public class Parser {
         case "event":
         case "deadline":
             try {
-                return new AddCommand(cmd, arr[1]);
+                return new AddCommand(cmd, arr[1].trim());
             } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("The description of the command '" + cmd + "' cannot be empty!");
+            }
+        case "archive":
+            try {
+                return new ArchiveCommand(arr[1].trim());
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("Enter a command behind archive. "
+                        + "Supported commands include archive all/today/done/taskID");
             }
         default:
             throw new DukeException("I'm sorry I do not understand what you mean. "

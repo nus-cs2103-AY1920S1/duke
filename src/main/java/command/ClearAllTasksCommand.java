@@ -1,10 +1,6 @@
 package command;
 
-import command.Command;
-import main.DukeException;
-import main.Storage;
-import main.TaskList;
-import main.Ui;
+import main.*;
 
 /**
  * A ClearAllTasksCommand object to deal with clearing tasks from the task list.
@@ -24,10 +20,11 @@ public class ClearAllTasksCommand extends Command {
      * @param tasks     The existing task list
      * @param ui        The Ui object which interacts with the current user
      * @param storage   The Storage object which reads and writes to a specified file
+     * @param archive
      * @return          The message to be displayed upon successful execution
      * @throws DukeException    If there is an error in clearing the file which stores the task list.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, Archive archive) throws DukeException {
         storage.clearAll();
         String res = ui.dukeEchoString("All tasks have been cleared. You now have an empty task list!");
         tasks.clearAll();

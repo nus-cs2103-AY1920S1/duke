@@ -37,6 +37,7 @@ public class DoneCommand extends Command {
         Task task = taskList.get(index);
         task.markAsDone();
         storage.update(taskList);
+        assert(!isBye());
         return Ui.showDoneMessage(task);
     }
 }

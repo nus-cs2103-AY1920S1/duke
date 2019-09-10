@@ -26,6 +26,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(Duke duke, Storage storage, TaskList taskList) {
+        assert(isBye());
         return Ui.showByeMessage();
     }
 

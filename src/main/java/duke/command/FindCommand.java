@@ -31,6 +31,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(Duke duke, Storage storage, TaskList taskList) {
+        assert(!isBye());
         return Ui.showFindMessage(taskList, keyword);
     }
 }

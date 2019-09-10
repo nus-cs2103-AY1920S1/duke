@@ -28,6 +28,7 @@ public class Ui {
             output += (INDENTATION + message.replace("\n", "\n" + INDENTATION));
         }
         output += (HORIZONTAL_LINE + "\n");
+        assert (!output.equals(""));
         return output;
     }
 
@@ -64,6 +65,7 @@ public class Ui {
             return output("Noted. I've removed this task: \n" + task + "\n" + "Now you have "
                     + size + " task in the list.\n");
         } else {
+            assert (size > 1);
             return output("Noted. I've removed this task: \n" + task + "\n" + "Now you have "
                     + size + " tasks in the list.\n");
         }
@@ -80,6 +82,7 @@ public class Ui {
             return output("Got it. I've added this task: \n" + task + "\n" + "Now you have "
                     + size + " task in the list.\n");
         } else {
+            assert (size > 1);
             return output("Got it. I've added this task: \n" + task + "\n" + "Now you have "
                     + size + " tasks in the list.\n");
         }

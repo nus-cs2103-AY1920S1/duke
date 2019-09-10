@@ -65,6 +65,7 @@ public class Storage {
             Task task;
             int index = 1;
             for (Iterator iterator = taskList.iterator(); iterator.hasNext(); index++) {
+                assert (index >= 1);
                 if (index > 1) {
                     bufferedWriter.write("\n");
                 }

@@ -51,6 +51,7 @@ public class Storage extends DataFile{
         boolean isFileCreated = taskListFile.createNewFile();
         if (isFileCreated) {
             filePath = taskListFile.toString();
+            isValidFilePath = true;
             return taskListFile.toString();
         } else {
             return null;

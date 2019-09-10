@@ -15,7 +15,6 @@ public class Archive extends DataFile {
 
     public Archive(String filePath) {
         super(filePath);
-        System.out.println("Reached here found archive file");
     }
 
     @Override
@@ -25,6 +24,7 @@ public class Archive extends DataFile {
         boolean isFileCreated = archiveFile.createNewFile();
         if (isFileCreated) {
             filePath = archiveFile.toString();
+            isValidFilePath = true;
             return archiveFile.toString();
         } else {
             return null;

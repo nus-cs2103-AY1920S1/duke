@@ -10,6 +10,8 @@ import duke.ui.UI;
  */
 public class ListCommand extends Command {
 
+    private TaskList taskList;
+
     /**
      * Constructor that takes in empty String to create the object.
      * @param message Usually is an empty string as it is not used.
@@ -20,9 +22,14 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        if (listOfTasks.size() == 0) {
-            throw new DukeException("     The list is empty!");
+        this.taskList = listOfTasks;
+    }
+
+    public String toString() {
+        if (taskList.size() == 0) {
+            return "Sorry but the list is empty!";
+        } else {
+            return taskList.toString();
         }
-        ui.printList();
     }
 }

@@ -11,6 +11,9 @@ import duke.ui.UI;
  */
 public class DeleteCommand extends Command {
 
+    private TaskList taskList;
+    private Task toBeDeleted;
+    private String errorMessage = "";
     /**
      * Index of the file that is to be deleted from the list of tasks.
      */
@@ -27,14 +30,22 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        if (indexToDelete > listOfTasks.size() || indexToDelete <= 0) {
-            throw new DukeException("     Such task does not exist!");
+        this.taskList = listOfTasks;
+        if (indexToDelete > taskList.size() || indexToDelete <= 0) {
+            errorMessage = "Such task does not exist!";
+            return;
         }
-        Task toBeDeleted = listOfTasks.get(indexToDelete - 1);
+        toBeDeleted = listOfTasks.get(indexToDelete - 1);
         listOfTasks.removeTask(toBeDeleted);
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
-        ui.printTaskDelete(toBeDeleted);
     }
 
+    public String toString() {
+        if (!errorMessage.equals("")) {
+            return errorMessage;
+        } else {
+            return "Done! I have deleted this task : " + toBeDeleted.toString();
+        }
+    }
 }

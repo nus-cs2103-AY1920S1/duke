@@ -10,6 +10,8 @@ import duke.ui.UI;
  */
 public class ErrorCommand extends Command {
 
+    private String errorMessage;
+
     /**
      * The UI needed to print the error message.
      */
@@ -25,6 +27,10 @@ public class ErrorCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        throw new DukeException(getMessage());
+        this.errorMessage = getMessage();
+    }
+
+    public String toString() {
+        return errorMessage;
     }
 }

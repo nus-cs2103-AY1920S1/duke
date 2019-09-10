@@ -13,6 +13,10 @@ import duke.ui.UI;
  */
 public class AddDeadlineCommand extends Command {
 
+    private Deadline deadline;
+    private String[] inputMessage;
+    private String errorMessage = "noError";
+
     /**
      * Constructor that takes in main message of the deadline.
      * @param message The main message of the deadline.
@@ -23,12 +27,13 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        String[] inputMessage = input.split(" ");
+        inputMessage = input.split(" ");
         String mainInput = "";
         int marker = 0;
         for (int i = 0; i < inputMessage.length; i++) {
             if (i + 1 >= inputMessage.length) {
-                throw new DukeException("     Please provide more information");
+                errorMessage = "Please provide more information!";
+                return;
             }
             if (inputMessage[i + 1].equals("/by")) {
                 mainInput += inputMessage[i];
@@ -51,10 +56,12 @@ public class AddDeadlineCommand extends Command {
         String[] dateAndTime = tempInfo.split(" ");
         String[] date = dateAndTime[0].split("/");
         if (date.length != 3 || dateAndTime.length < 2) {
-            throw new DukeException("     Invalid date and time format!");
+            errorMessage = "Invalid date and time format!";
+            return;
         }
         if (date[0].equals("") || date[1].equals("") || date[2].equals("")) {
-            throw new DukeException("     Invalid date and time format!");
+            errorMessage = "Invalid date and time format!";
+            return;
         }
         int day = Integer.parseInt(date[0]);
         int month = Integer.parseInt(date[1]);
@@ -62,21 +69,32 @@ public class AddDeadlineCommand extends Command {
         Date inputDate = new Date(day, month, year);
         Time inputTime = new Time(Integer.parseInt(dateAndTime[1]));
         if (!inputDate.isValid()) {
-            throw new DukeException("     Sorry! Invalid date format");
+            errorMessage = "Sorry! Invalid time format";
+            return;
         }
         if (!inputTime.isValid()) {
-            throw new DukeException("     Sorry! Invalid time format");
+            errorMessage = "Sorry! Invalid time format";
+            return;
         }
         String extraInfo = inputDate + ", " + inputTime;
         if (extraInfo.equals("")) {
-            throw new DukeException("     Please provide date and time of the deadline");
+            errorMessage = "Please provide date and time for the deadline";
+            return;
         }
         if (!inputMessage[marker].equals("/by")) {
-            throw new DukeException("     Wrong syntax, should be using /by for deadline");
+            errorMessage = "Wrong syntax, should be using /by for deadline";
+            return;
         }
-        listOfTasks.addDeadline(new Deadline(mainInput, extraInfo));
+        deadline = new Deadline(input, extraInfo);
+        listOfTasks.addDeadline(deadline);
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
-        ui.printTaskAdd(listOfTasks.get(listOfTasks.size() - 1));
+    }
+    public String toString() {
+        if (!errorMessage.equals("noError")) {
+            return errorMessage;
+        } else {
+            return deadline.toString();
+        }
     }
 }

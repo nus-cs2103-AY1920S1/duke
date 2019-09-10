@@ -11,6 +11,8 @@ import duke.task.Todo;
  */
 public class AddTodoCommand extends Command {
 
+    private Todo newTodo;
+    private String[] inputMessage;
     /**
      * Constructor that takes in the main message of the todo.
      * @param message The main message of the todo.
@@ -21,7 +23,7 @@ public class AddTodoCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        String[] inputMessage = input.split(" ");
+        inputMessage = input.split(" ");
         if (inputMessage.length == 0) {
             throw new DukeException("     OOPS!! The description of a todo cannot be empty");
         }
@@ -34,10 +36,17 @@ public class AddTodoCommand extends Command {
                 item += " ";
             }
         }
-        Todo newTodo = new Todo(item);
+        newTodo = new Todo(item);
         listOfTasks.addTodo(newTodo);
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
-        ui.printTaskAdd(newTodo);
+    }
+
+    public String toString() {
+        if (inputMessage.length == 0) {
+            return "OOPS!! The description of a todo cannot be empty";
+        } else {
+            return newTodo.toString();
+        }
     }
 }

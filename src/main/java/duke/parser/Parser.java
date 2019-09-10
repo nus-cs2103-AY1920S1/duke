@@ -53,7 +53,7 @@ public class Parser {
         case "find" :
             return new FindCommand(constructedString);
         default:
-            return new ErrorCommand("     OOPS!! I'm sorry, but I don't know what that means :-(");
+            return new ErrorCommand("OOPS!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

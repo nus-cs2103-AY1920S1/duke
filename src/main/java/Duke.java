@@ -5,21 +5,20 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
 import java.io.FileNotFoundException;
-import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.image.Image;
 
 /**
  * The main class of the program.
  */
-public class Duke extends Application {
+public class Duke {
+
+    /**
+     * To indicate whether the program is done.
+     */
+    private boolean exitProgram = false;
 
     /**
      * The storage containing the file to be modified in the hard drive.
@@ -62,12 +61,23 @@ public class Duke extends Application {
     private Scene scene;
 
     /**
+     * The profile image for the user.
+     */
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Wario.jpg"));
+
+    /**
+     * The profile image for duke.
+     */
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Waluigi.jpg"));
+
+    /**
      * Constructor that creates the main Duke class.
      * @throws Exception Used for when there are any errors.
      */
     public Duke() throws Exception {
-        String filepath = "C:\\Users\\robyt\\IdeaProjects\\duke\\src\\main\\Data\\Duke.txt";
+        String filepath = "src/main/Data/Duke.txt";
         this.storage = new Storage(filepath);
+        storage.loadTasks();
         try {
             this.taskList = new TaskList(storage);
         } catch (FileNotFoundException error) {
@@ -77,81 +87,18 @@ public class Duke extends Application {
     }
 
     /**
-     * The main logic of the program that keeps taking user input until the program is exited.
-     * @throws Exception Used for when there are any errors.
+     * To exit the program;
      */
-    public void run() throws Exception {
-        ui.printIntro();
-        storage.loadTasks();
-        boolean programRunning = true;
-        while (programRunning) {
-            try {
-                String input = ui.readLine();
-                Command inputCommand = Parser.parse(input);
-                inputCommand.execute(taskList, storage, ui);
-            } catch (DukeException error) {
-                ui.printError(error);
-            }
+    public void terminate() {
+        this.exitProgram = true;
+    }
+
+    public String getResponse(String input) throws Exception {
+        if (exitProgram) {
+            return "You said you are leaving so please leave >:(";
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        new Duke().run();
-    }
-
-    @Override
-    public void start(Stage stage) {
-        // Step 1. Set up the required components.
-
-        // The container for the content of the chat to scroll.
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        // Step 2. Formatting the window to look as expected.
-
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-        stage.setScene(scene);
-        stage.show();
-
-        // Step 3. Add functionality to handle user input.
-
-
-        sendButton.onMouseClicked()
+        Command inputCommand = Parser.parse(input);
+        inputCommand.execute(taskList,storage,ui);
+        return inputCommand.toString();
     }
 }

@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 public class FindCommand extends Command {
 
+    private TaskList taskList;
+
     /**
      * The tasks to be printed.
      */
@@ -33,19 +35,22 @@ public class FindCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        if (listOfTasks.size() == 0) {
-            throw new DukeException("     The list is empty!");
-        }
+        this.taskList = listOfTasks;
         ArrayList<Task> tempList = listOfTasks.getTasks();
         for (Task task : tempList) {
             if (task.toString().contains(getMessage())) {
                 toBePrinted.addTask(task);
             }
         }
-        if (toBePrinted.isEmpty()) {
-            throw new DukeException("     The list contain no such keyword!");
+    }
+
+    public String toString() {
+        if (taskList.isEmpty()) {
+            return "The list is empty!";
+        } else if (toBePrinted.isEmpty()) {
+            return "The list contain no such keyword!";
+        } else {
+            return toBePrinted.toString();
         }
-        UI printer = new UI(toBePrinted);
-        printer.printList();
     }
 }

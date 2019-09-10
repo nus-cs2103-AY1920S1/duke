@@ -46,7 +46,9 @@ public class Time {
         }
         String hour = String.valueOf(hours);
         String minute = "";
-        if (minutes != 0) {
+        if (minutes < 10) {
+            minute = "." + "0" + minutes;
+        } else if (minutes != 0) {
             minute = "." + minutes;
         }
         outputTime = hour + minute + format;

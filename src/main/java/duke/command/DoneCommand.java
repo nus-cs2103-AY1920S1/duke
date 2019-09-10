@@ -4,12 +4,15 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
+import duke.task.Task;
 
 /**
  * Class that represent the command of finishing a task.
  */
 public class DoneCommand extends Command {
 
+    private Task task;
+    private TaskList taskList;
     /**
      * Index of the task to be completed.
      */
@@ -26,12 +29,18 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        if (index > listOfTasks.size() || index <= 0) {
-            throw new DukeException("     Such task does not exist!");
-        }
+        this.taskList = listOfTasks;
         listOfTasks.get(index - 1).completeTask();
+        this.task = listOfTasks.get(index - 1);
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
-        ui.printTaskDone(listOfTasks.get(index - 1));
+    }
+
+    public String toString() {
+        if (index > taskList.size() || index <= 0) {
+            return "Such task does not exist!";
+        } else {
+            return task.toString();
+        }
     }
 }

@@ -106,4 +106,14 @@ public class TaskList {
     public void addDeadline(Deadline task) {
         listOfTasks.add(task);
     }
+
+    @Override
+    public String toString() {
+        String output = "";
+        for (Task task : listOfTasks) {
+            output += task;
+            output += "\n";
+        }
+        return output;
+    }
 }

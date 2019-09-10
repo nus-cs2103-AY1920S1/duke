@@ -19,7 +19,10 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        ui.printBye();
-        System.exit(0);
+
+    }
+
+    public String toString() {
+        return "See you again later! Press ENTER to leave the program";
     }
 }

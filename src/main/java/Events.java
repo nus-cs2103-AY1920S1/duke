@@ -46,13 +46,24 @@ public class Events extends Task {
         String date = words[0];
         String time = words[1];
 
+        getNewDate(date);
+        this.time = time;
+
+    }
+
+    /**
+     * converts an old date format into a newly formatted date. i.e a date in d/MM/yyyy format to d MMMM yyyy format
+     * sets interpretedDate attribute into a newly formatted date.
+     *
+     * @param date date for an Events object
+     *
+     */
+    private void getNewDate(String date) {
         DateTimeFormatter oldDateFormat = DateTimeFormatter.ofPattern("d/MM/yyyy");
         DateTimeFormatter newDateFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
         LocalDate oldDate = LocalDate.parse(date, oldDateFormat);
         String newDate = oldDate.format(newDateFormat);
-
         this.interpretedDate = newDate;
-        this.time = time;
 
     }
 
@@ -66,6 +77,7 @@ public class Events extends Task {
         String msg = "Got it. I've added this task: \n";
         msg = msg + "  " + this.toString() + "\n";
         String end = " tasks in the list.";
+
         if (size == 1) {
             end = " task in the list.";
         }

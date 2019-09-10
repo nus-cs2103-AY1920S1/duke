@@ -49,18 +49,39 @@ public class Deadline extends Task {
         String date = words[0];
         String time = words[1];
 
+        convertDateFormat(date);
+        convertTimeFormat(time);
+    }
+
+    /**
+     * converts and sets interpretedDate attribute to a newly formatted date. i.e in d MMMM yyyy format.
+     *
+     * @param date date in old format for a given Deadline object. i.e time is in d/MM/yyyy format.
+     *
+     */
+
+    public void convertDateFormat(String date) {
         DateTimeFormatter oldDateFormat = DateTimeFormatter.ofPattern("d/MM/yyyy");
         DateTimeFormatter newDateFormat = DateTimeFormatter.ofPattern("d MMMM yyyy");
         LocalDate oldDate = LocalDate.parse(date, oldDateFormat);
         String newDate = oldDate.format(newDateFormat);
+        this.interpretedDate = newDate;
 
+    }
+
+    /**
+     * converts and sets interpretedTime as a newly formatted time. i.e in hhmm a format.
+     *
+     * @param oldTime time in old format for a given Deadline object. i.e time is in HHmm format.
+     *
+     */
+
+    public void convertTimeFormat(String oldTime) {
         DateTimeFormatter oldTimeFormat = DateTimeFormatter.ofPattern("HHmm");
         DateTimeFormatter newTimeFormat = DateTimeFormatter.ofPattern("hhmm a");
-        LocalTime timeObj = LocalTime.parse(time, oldTimeFormat);
+        LocalTime timeObj = LocalTime.parse(oldTime, oldTimeFormat);
         String newTime = timeObj.format(newTimeFormat);
-        this.interpretedDate = newDate;
         this.interpretedTime = newTime;
-
     }
 
     /**

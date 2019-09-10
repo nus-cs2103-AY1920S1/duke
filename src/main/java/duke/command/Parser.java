@@ -28,6 +28,9 @@ public class Parser {
      * @param  str string to be parsed
      */
     public String parseLine(String str) throws DukeException, NumberFormatException {
+        assert ui != null : "Ui should not be null";
+        assert taskList != null : "TaskList should not be null";
+
         if (str.equals("list")) {
             return ui.printList();
         } else if (str.startsWith("delete ")) {

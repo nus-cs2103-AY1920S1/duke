@@ -61,6 +61,7 @@ public class Duke extends Application {
      * Starts the program.
      */
     public void run() {
+        assert taskList.getSize() == 0 : "Initial TaskList should not be empty";
         ui.start(parser, storage, taskList);
     }
 

@@ -32,12 +32,14 @@ public class TaskList {
      *
      * @param itemNum is the index of the task to be deleted
      */
-    public void deleteTask(int itemNum) {
+    public String deleteTask(int itemNum) {
         assert(itemNum>=0 && itemNum<taskList.size()):"itemNum does not fall within range";
-        System.out.println("Noted. I've removed this task:");
-        System.out.println("  " + taskList.get(itemNum));
+        String toReturn = "";
+        toReturn += ("Noted. I've removed this task:\n");
+        toReturn += ("  " + taskList.get(itemNum) + "\n");
         taskList.remove(itemNum);
-        System.out.println("Now you have " + taskList.size() + " in the list.");
+        toReturn += ("Now you have " + taskList.size() + " in the list.");
+        return toReturn;
     }
 
     /**
@@ -45,24 +47,26 @@ public class TaskList {
      *
      * @param itemNum is the index of the task to be marked as done
      */
-    public void markTaskDone(int itemNum) {
+    public String markTaskDone(int itemNum) {
         assert(itemNum>=0 && itemNum<taskList.size()):"itemNum does not fall within range";
+        String toReturn = "";
         taskList.get(itemNum).doneJob();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + taskList.get(itemNum));
-        System.out.println("Now you have " + taskList.size() + " in the list.");
+        toReturn += ("Nice! I've marked this task as done:\n");
+        toReturn += ("  " + taskList.get(itemNum) + "\n");
+        toReturn += ("Now you have " + taskList.size() + " in the list.");
+        return toReturn;
     }
 
     /**
      * Iterates though TaskList and provides a list of tasks stored.
      */
-    public void showAllTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public String showAllTasks() {
+        String toReturn = "Here are the tasks in your list:\n";
         for(int i = 0; i < taskList.size(); i++) {
-            System.out.print((i + 1) + ".");
-            System.out.println(taskList.get(i));
-            continue;
+            toReturn += (i + 1) + "." + taskList.get(i);
+            if(i != taskList.size()-1) toReturn += "\n";
         }
+        return toReturn;
     }
 
     /**

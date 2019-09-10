@@ -35,7 +35,7 @@ public class DoneCommand implements Command {
         return index;
     }
 
-    public String getTask() {
+    public String getDescription() {
         return "error";
     }
 

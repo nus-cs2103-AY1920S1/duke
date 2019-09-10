@@ -14,7 +14,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private Parser parser = new Parser();
 
     /**
      * Constructs Duke object with filePath input from which
@@ -23,8 +22,11 @@ public class Duke {
      * @param filePath File path for input.
      */
     Duke(String filePath) {
+        // Create UI and Storage components
         ui = new Ui();
         storage = new Storage(filePath);
+
+        // Try to load the task list from storage; create new one if failed
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -63,7 +65,7 @@ public class Duke {
      */
     private void executeOnInput(String input) throws DukeException {
         // Generate command object with parser and execute the command
-        Command command = parser.parse(input);
+        Command command = Parser.parse(input);
         command.execute(tasks, ui);
 
         // Save the updated list back to data file

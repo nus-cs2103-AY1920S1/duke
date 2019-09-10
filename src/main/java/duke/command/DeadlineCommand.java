@@ -37,7 +37,7 @@ public class DeadlineCommand extends Command {
         Task currentTask = new DeadlineTask(taskDescription, taskTime);
         taskList.addTask(currentTask);
         storage.writeSavedList(taskList.getList());
-        return ui.printAfterAddingTask(currentTask, taskList.getSize());
+        return ui.showAfterAddingTask(currentTask, taskList.getSize());
     }
 }
     

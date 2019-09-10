@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
         try {
             Task currentTask = taskList.deleteTask(index - 1);
             storage.writeSavedList(taskList.getList());
-            return ui.printAfterDeletingTask(currentTask, taskList.getSize());
+            return ui.showAfterDeletingTask(currentTask, taskList.getSize());
         } catch (NumberFormatException e) {
             throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
         } catch (IndexOutOfBoundsException e) {

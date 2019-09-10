@@ -61,12 +61,12 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String printAfterAddingTask(Task currentTask, int currentSize) {
+    public String showAfterAddingTask(Task currentTask, int currentSize) {
         return "Got it. I've added this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
                 + " tasks in the list.";
     }
     
-    public String printAfterDeletingTask(Task currentTask, int currentSize) {
+    public String showAfterDeletingTask(Task currentTask, int currentSize) {
         return "Got it. I've removed this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
                 + " tasks in the list.";
     }

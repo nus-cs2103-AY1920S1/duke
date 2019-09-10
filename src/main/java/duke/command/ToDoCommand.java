@@ -34,6 +34,6 @@ public class ToDoCommand extends Command {
         Task currentTask = new ToDoTask(taskDescription);
         taskList.addTask(currentTask);
         storage.writeSavedList(taskList.getList());
-        return ui.printAfterAddingTask(currentTask, taskList.getSize());
+        return ui.showAfterAddingTask(currentTask, taskList.getSize());
     }
 }

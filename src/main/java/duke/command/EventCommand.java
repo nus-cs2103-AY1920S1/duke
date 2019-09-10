@@ -37,7 +37,7 @@ public class EventCommand extends Command {
         Task currentTask = new EventTask(taskDescription, taskTime);
         taskList.addTask(currentTask);
         storage.writeSavedList(taskList.getList());
-        return ui.printAfterAddingTask(currentTask, taskList.getSize());
+        return ui.showAfterAddingTask(currentTask, taskList.getSize());
     }
 }
     

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class InputParser {
 
     private ArrayList<Task> taskList;
-    private ModifyTaskList modifyTaskList = new ModifyTaskList();
+    private TaskListModifier taskListModifier = new TaskListModifier();
 
     /**
      * The constructor for the InputParser class.
@@ -20,11 +20,11 @@ public class InputParser {
     }
 
     /**
-     * Used to determine which method from the {@link ModifyTaskList} class to call
+     * Used to determine which method from the {@link TaskListModifier} class to call
      * depending on the first word from the input.
      *
      * @param input  The input from the user.
-     * @see ModifyTaskList
+     * @see TaskListModifier
      */
 
     protected void determineAction(String input) throws IOException {

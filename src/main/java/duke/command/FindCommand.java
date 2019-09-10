@@ -5,6 +5,7 @@ import duke.component.TaskList;
 import duke.task.Task;
 
 import java.util.ListIterator;
+import java.util.stream.IntStream;
 
 /**
  * Encapsulates a command which finds a task in the tasks list of Duke based on a keyword.
@@ -50,17 +51,19 @@ public class FindCommand extends QueryCommand {
      */
     private TaskList getMatchingList(String keyword, TaskList tasksList) {
         TaskList matchingList = new TaskList();
+
         ListIterator<Task> iterator = tasksList.listIterator();
         int size = tasksList.size();
 
         // Find the tasks that have the keyword given by user
         // and append their string representation to the message to be printed.
-        for (int i = 0; i < size; i++) {
-            Task currTask = iterator.next();
-            if (currTask.toString().contains(keyword)) {
-                matchingList.addTask(currTask);
-            }
-        }
+        IntStream.rangeClosed(1, size)
+                .forEach(i -> {
+                    Task currTask = iterator.next();
+                    if (currTask.toString().contains(keyword)) {
+                        matchingList.addTask(currTask);
+                    }
+                });
 
         return matchingList;
     }

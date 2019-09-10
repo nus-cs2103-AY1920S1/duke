@@ -12,6 +12,13 @@ import myduke.exception.DukeInvalidCommandException;
  */
 public class TaskList extends ArrayList<Task> {
 
+    /**
+     * Adds a task to the list of tasks.
+     *
+     * @param task the task to add to the list.
+     *
+     * @throws DukeException if the task is a duplicate of an existing task.
+     */
     public void addTask(Task task) throws DukeException {
         if (task == null) {
             throw new DukeInvalidCommandException("task should not be a null pointer");

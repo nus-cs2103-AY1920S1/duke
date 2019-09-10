@@ -1,4 +1,6 @@
-# Setting up
+[![Build Status](https://travis-ci.org/SakuraBlossom/duke.svg?branch=master)](https://travis-ci.org/SakuraBlossom/duke)
+
+## Setting up
 
 **Prerequisites**
 

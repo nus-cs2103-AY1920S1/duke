@@ -11,7 +11,10 @@ public class Parser {
      * @throws InvalidCommandException If there is no valid Command in the line
      */
     public Command getCommandFromLine(String line) throws InvalidCommandException {
-        return Command.getFromString(line.split(" ")[0].trim());
+        return Command.getFromString(
+            line.split(" ")[0]
+            .trim()
+        );
     }
 
     /**
@@ -22,7 +25,9 @@ public class Parser {
      */
     public int getIndexFromLine(String line) {
         try {
-            return Integer.parseInt(line.split(" ")[1]) - 1;
+            return Integer.parseInt(
+                line.split(" ")[1]
+            ) - 1;
         } catch (Exception e) {
             return -1;
         }
@@ -38,7 +43,9 @@ public class Parser {
      */
     public String getBeforeDelim(String line, String command, String delim) {
         try {
-            return line.split(command)[1].split(delim)[0].trim();
+            return line.split(command)[1]
+            .split(delim)[0]
+            .trim();
         } catch (Exception e) {
             return "";
         }
@@ -54,7 +61,9 @@ public class Parser {
      */
     public String getAfterDelim(String line, String command, String delim) {
         try {
-            return line.split(command)[1].split(delim)[1].trim();
+            return line.split(command)[1]
+            .split(delim)[1]
+            .trim();
         } catch (Exception e) {
             return "";
         }
@@ -67,7 +76,11 @@ public class Parser {
      * @return true if the provided line is not the BYE command, false otherwise
      */
     public boolean isNotByeCommand(String line) {
-        return !line.trim().equals(Command.BYE.toString());
+        return !line
+            .trim()
+            .equals(
+                Command.BYE.toString()
+            );
     }
 
     /**
@@ -79,7 +92,9 @@ public class Parser {
      */
     public String getArg(String line, String command) {
         try {
-            return line.split(command)[1].trim();
+            return line
+                .split(command)[1]
+                .trim();
         } catch (Exception e) {
             return "";
         }

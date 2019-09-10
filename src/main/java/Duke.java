@@ -45,12 +45,12 @@ public class Duke {
     public void run() {
 
         printGreeting();
-        String line = ui.nextLine();
+        String nextLine = ui.nextLine();
 
         // Keep reading input until the bye command is received.
         while (true) {
-            processInputLine(line);
-            line = ui.nextLine();
+            processInputLine(nextLine);
+            nextLine = ui.nextLine();
         }
     }
 
@@ -64,53 +64,65 @@ public class Duke {
             String response = "";
 
             switch (command) {
+
             case LIST:
                 response = ui.printList(taskList);
                 break;
+
             case DONE:
                 response = markTaskAsDone(
                     parser.getIndexFromLine(line)
                 );
                 break;
+
             case DEADLINE:
                 response = addDeadline(
                     parser.getBeforeDelim(line, commandText, DELIM_BY),
                     parser.getAfterDelim(line, commandText, DELIM_BY)
                 );
                 break;
+
             case EVENT:
                 response = addEvent(
                     parser.getBeforeDelim(line, commandText, DELIM_AT),
                     parser.getAfterDelim(line, commandText, DELIM_AT)
                 );
                 break;
+
             case TODO:
                 response = addTodo(
                     parser.getArg(line, commandText)
                 );
                 break;
+
             case DELETE:
                 response = deleteTask(
                     parser.getIndexFromLine(line)
                 );
                 break;
+
             case FIND:
                 response = findTask(
                     parser.getArg(line, commandText)
                 );
                 break;
+
             case BYE:
                 response = exitAfter(1000);
                 break;
+
             default:
                 throw new InvalidCommandException(PRINTED_OOPS + PRINTED_INVALID_COMMAND);
             }
 
             return response;
+
         } catch (DukeException e) {
             return ui.printException(e);
+
         } catch (ParseException e) {
             return ui.adviseDateFormat(DATE_FORMAT);
+
         } catch (IndexOutOfBoundsException e) {
             return ui.printIndexOutOfBoundsException();
         }
@@ -122,49 +134,47 @@ public class Duke {
         return ui.printGoodbye();
     }
 
-    private String findTask(String searchStr) {
+    private String findTask(String searchQueryStr) {
         return ui.displaySearchResults(
-            taskList.search(searchStr),
-            searchStr
+            taskList.search(searchQueryStr),
+            searchQueryStr
         );
     }
 
     private String deleteTask(int index) {
-
         Task taskToDelete = taskList.get(index); 
         taskList.remove(taskToDelete);
-
         return ui.ackDeletion(taskToDelete, taskList.size());
     }
 
     private String addDeadline(String desc, String date) throws EmptyDescriptionException, ParseException {
-        if (desc.length() != 0) {
-            Task newDeadline = new Deadline(desc, dateParser.parse(date));
-            return addTask(newDeadline);
-        } else {
+        if (desc.length() == 0) {
             throwEmptyDescriptionException(Command.DEADLINE);
             return "";
         }
+
+        Task newDeadline = new Deadline(desc, dateParser.parse(date));
+        return addTask(newDeadline);
     }
 
     private String addEvent(String desc, String date) throws EmptyDescriptionException, ParseException {
-        if (desc.length() != 0) {
-            Task newEvent = new Event(desc, dateParser.parse(date));
-            return addTask(newEvent);
-        } else {
+        if (desc.length() == 0) {
             throwEmptyDescriptionException(Command.EVENT);
             return "";
         }
+        
+        Task newEvent = new Event(desc, dateParser.parse(date));
+        return addTask(newEvent);
     }
 
     private String addTodo(String desc) throws EmptyDescriptionException {
-        if (desc.length() != 0) {
-            Task newTodo = new Todo(desc); 
-            return addTask(newTodo);
-        } else {
+        if (desc.length() == 0) {
             throwEmptyDescriptionException(Command.TODO);
             return "";
         }
+        
+        Task newTodo = new Todo(desc); 
+        return addTask(newTodo);
     }
 
     private void throwEmptyDescriptionException(Command cmd) throws EmptyDescriptionException {
@@ -177,9 +187,9 @@ public class Duke {
     }
 
     private String markTaskAsDone(int index) {
-        Task doneTask = taskList.get(index);
-        doneTask.markAsDone();
-        return ui.ackDone(doneTask);
+        Task taskToMarkAsDone = taskList.get(index);
+        taskToMarkAsDone.markAsDone();
+        return ui.ackDone(taskToMarkAsDone);
     }
 
     private String addTask(Task newTask) {

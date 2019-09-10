@@ -74,15 +74,17 @@ public class Storage {
 
                 if (line.charAt(1) == '1') {
                     taskList
-                    .get(taskList.size() - 1)
+                        .get(taskList.size() - 1)
                         .markAsDone();
                 }
             }
 
             inStream.close();
             return taskList;
+
         } catch (FileNotFoundException e) {
             System.out.println("Data file not found, starting with empty task list");
+        
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -100,13 +102,18 @@ public class Storage {
         PrintWriter outStream;
 
         try {
-            outStream = new PrintWriter(new FileOutputStream(filePath));
+            outStream = new PrintWriter(
+                new FileOutputStream(filePath)
+            );
 
             for (Task t : taskList) {
-                outStream.println(saveTask(t));
+                outStream.println(
+                    saveTask(t)
+                );
             }
 
             outStream.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,10 +127,13 @@ public class Storage {
 
         if (t instanceof Todo) {
             classChar = "T";
+
         } else if (t instanceof Event) {
             classChar = "E";
+
         } else if (t instanceof Deadline) {
             classChar = "D";
+
         } else {
             classChar = " ";
         }
@@ -132,10 +142,12 @@ public class Storage {
             timeStr = "/" + dateParser.format(
                 ((Event)t).getAt()
             );
+
         } else if (t instanceof Deadline) {
             timeStr = "/" + dateParser.format(
                 ((Deadline)t).getBy()
             );
+            
         } else {
             timeStr = "";
         }

@@ -43,6 +43,10 @@ public class ListItem {
         return isDone + "@" + this.status + "@" + this.description + "@" + this.date.format() + "\n";
     }
 
+    String getDescription() {
+        return description;
+    }
+
     @Override
     public String toString() {
         String toReturn;

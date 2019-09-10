@@ -6,7 +6,7 @@ public class TaskList {
     private static String filename = "data/duke.txt";
 
     TaskList(String filepath) {
-        this.filename = filepath;
+        TaskList.filename = filepath;
 
     }
 

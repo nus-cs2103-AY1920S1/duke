@@ -39,6 +39,8 @@ public class Parser {
      * @throws ParseException If input date format is invalid
      */
     public String processLine(String userInput) throws DukeException, ParseException {
+        assert (ui != null) : "UI should not be null";
+        assert (tasks != null) : "TaskList should not be null";
         ArrayList<Task> list = tasks.list;
         String[] words = userInput.split(" ");
         String firstWord = words[0];

@@ -1,4 +1,5 @@
-T | 0 | aa
+T | 1 | aa
 D | 1 | return book | 2/12/2019 1800
 E | 1 | event | 2/12/2019 1800
-D | 1 | deadline | 30/02/2019 1800
+D | 1 | quiz | 02/10/2019 2359
+T | 0 | study

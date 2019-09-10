@@ -115,7 +115,7 @@ public class Duke {
                         if (t.getType().equals("todo")) {
                             out.print(t.getSymbol() + " | " + t.getBoolean() + " | " + t.getDescription() + "\n");
                         } else {
-                            out.print(t.getSymbol() + " | " + t.getBoolean() + " | " + t.getDescription() + "|" + t.getDateString() + "\n");
+                            out.print(t.getSymbol() + " | " + t.getBoolean() + " | " + t.getDescription() + " | " + t.getDateString() + "\n");
                         }
                     }
                 }

@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-T | 0 | meet me
-E | 1 | hello world | computer
-D | 0 | done with this | so done
-=======
-D | 0 | e e e|2/2/2019 1800
-E | 1 | e s df e|2/4/2010 1200
->>>>>>> branch-Level-8

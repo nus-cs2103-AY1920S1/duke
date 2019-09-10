@@ -14,7 +14,7 @@ public class TaskList implements Serializable {
     private List<Task> tasks = new ArrayList<>();
 
     public TaskList() {
-
+        // No-argument constructor for Serializable
     }
 
     /**
@@ -129,10 +129,10 @@ public class TaskList implements Serializable {
      */
     @Override
     public String toString() {
-        String s = "";
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            s = s + String.format("%d. %s\n", (i + 1), tasks.get(i).toString());
+            sb.append(String.format("%d. %s\n", (i + 1), tasks.get(i).toString()));
         }
-        return s;
+        return sb.toString();
     }
 }

@@ -1,11 +1,12 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Model;
 import duke.io.UiOutput;
 import duke.task.Event;
+import duke.task.TaskList;
 import duke.util.ArgumentParser;
 import duke.Storage;
-import duke.task.TaskList;
 
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
+    public void execute(Model model, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -40,7 +41,9 @@ public class EventCommand extends Command {
         }
 
         Event e = new Event(ArgumentParser.concatenate(comArgs), ArgumentParser.concatenate(atArgs));
+        TaskList tasks = model.copyOfCurrentTasks();
         tasks.add(e);
+        model.update(tasks);
         uiOutput.say("added: " + e);
     }
 }

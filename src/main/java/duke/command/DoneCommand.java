@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Model;
 import duke.Storage;
 import duke.io.UiOutput;
 import duke.task.TaskList;
@@ -21,7 +22,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
+    public void execute(Model model, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -35,11 +36,15 @@ public class DoneCommand extends Command {
         } catch (NumberFormatException e) {
             throw new DukeException("The index to be marked must be an integer.");
         }
+
+        TaskList tasks = model.copyOfCurrentTasks();
         try {
             tasks.markDone(oneIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with index " + oneIndex + ".");
         }
+
+        model.update(tasks);
         uiOutput.say("Nice! I've marked this task as done:\n" + tasks.get(oneIndex));
     }
 }

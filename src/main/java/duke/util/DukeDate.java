@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.DukeException;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A class for representing dates or datetimes regardless of whether they are in a recognised, parsable format or not.
  */
-public class DukeDate {
+public class DukeDate implements Serializable {
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d 'of' MMMM YYYY");
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d 'of' MMMM YYYY h:mma");
 

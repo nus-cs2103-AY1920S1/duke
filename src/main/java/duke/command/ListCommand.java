@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Model;
 import duke.Storage;
 import duke.io.UiOutput;
 import duke.task.TaskList;
@@ -18,7 +20,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) {
+    public void execute(Model model, UiOutput uiOutput, Storage storage) throws DukeException {
+        TaskList tasks = model.copyOfCurrentTasks();
         if (tasks.size() > 0) {
             uiOutput.say(tasks.toString());
         } else {

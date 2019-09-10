@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Model;
 import duke.Storage;
 import duke.io.UiOutput;
 import duke.task.Task;
@@ -22,7 +23,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
+    public void execute(Model model, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -36,12 +37,17 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException e) {
             throw new DukeException("The index to be deleted must be an integer.");
         }
+
+        TaskList tasks = model.copyOfCurrentTasks();
         Task task;
         try {
             task = tasks.delete(oneIndex);
+
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with index " + oneIndex + ".");
         }
+
+        model.update(tasks);
         uiOutput.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
                 task.toString(), tasks.size(), tasks.size() == 1 ? "" : "s"));
     }

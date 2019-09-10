@@ -2,6 +2,8 @@ package duke;
 
 import duke.task.TaskList;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -29,12 +31,11 @@ public class Storage {
 
     /**
      * Returns the TaskList loaded from disk. The file on disk must have been written by {@link #save(TaskList)}
-     * using the current versions of the TaskList and Task classes. If the file does not exist, a new empty TaskList
-     * is returned.
+     * using the current versions of the TaskList and Task classes.
      *
      * @return                         the TaskList loaded from the file data
-     * @throws IOException             if there is an I/O exception. This could mean that the file exists but cannot be
-     *                                 accessed.
+     * @throws IOException             if there is an I/O exception. This could occur when the file does not exist or
+     *                                 exists but cannot be accessed.
      * @throws ClassNotFoundException  if the data in the file does not match the current TaskList and Task class
      *                                 definitions. This could mean that the file does not contain valid Duke data or
      *                                 was saved by an earlier incompatible version of Duke.
@@ -66,5 +67,23 @@ public class Storage {
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(taskList);
         oos.close();
+    }
+
+    /**
+     * Returns a deep copy of the specified object.
+     *
+     * @param serializable  the object to copy
+     * @param <T>  class that implements Serializable
+     * @return  the copied object
+     * @throws IOException  if an I/O error occurs while writing stream header
+     * @throws ClassNotFoundException  if the class of the object cannot be found
+     */
+    public static <T extends Serializable> T deepCopy(T serializable) throws IOException, ClassNotFoundException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(serializable);
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bais);
+        return (T) ois.readObject();
     }
 }

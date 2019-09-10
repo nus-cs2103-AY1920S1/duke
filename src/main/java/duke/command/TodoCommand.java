@@ -1,11 +1,12 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Model;
 import duke.io.UiOutput;
+import duke.task.TaskList;
 import duke.task.Todo;
 import duke.util.ArgumentParser;
 import duke.Storage;
-import duke.task.TaskList;
 
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
+    public void execute(Model model, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -33,7 +34,9 @@ public class TodoCommand extends Command {
         }
 
         Todo t = new Todo(ArgumentParser.concatenate(comArgs));
+        TaskList tasks = model.copyOfCurrentTasks();
         tasks.add(t);
+        model.update(tasks);
         uiOutput.say("added: " + t);
     }
 }

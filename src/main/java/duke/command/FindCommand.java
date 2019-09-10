@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Model;
 import duke.Storage;
 import duke.io.UiOutput;
 import duke.task.TaskList;
@@ -22,7 +23,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) throws DukeException {
+    public void execute(Model model, UiOutput uiOutput, Storage storage) throws DukeException {
         Map<String, String[]> switchArgs = argumentParser.parse(args);
 
         String[] comArgs = switchArgs.get(getName());
@@ -30,6 +31,7 @@ public class FindCommand extends Command {
             throw new DukeException("The search keyword cannot be blank.");
         }
 
+        TaskList tasks = model.copyOfCurrentTasks();
         List<Integer> foundTaskIndices = tasks.findKeywordOneIndices(comArgs[0], false);
         if (foundTaskIndices.size() > 0) {
             StringBuilder sb = new StringBuilder();

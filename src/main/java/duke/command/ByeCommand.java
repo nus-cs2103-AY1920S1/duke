@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Model;
 import duke.Storage;
 import duke.io.UiOutput;
-import duke.task.TaskList;
 
 /**
  * When executed, outputs a goodbye message and signals the app to exit.
@@ -18,7 +18,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UiOutput uiOutput, Storage storage) {
+    public void execute(Model model, UiOutput uiOutput, Storage storage) {
         uiOutput.say("Bye. Hope to see you again soon!");
     }
 }

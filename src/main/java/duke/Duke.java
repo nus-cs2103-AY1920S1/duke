@@ -21,7 +21,7 @@ public class Duke {
             + "\nWhat can I do for you?";
 
     private PreParser preParser;
-    private TaskList tasks;
+    private Model model;
     private Storage storage;
     private BufferedStringOutput bufferedUiOutput = new BufferedStringOutput();
     private BufferedStringOutput startupMessages = new BufferedStringOutput();
@@ -38,12 +38,15 @@ public class Duke {
             startupMessages.oops(COMMAND_ERROR_MESSAGE);
         }
         storage = new Storage(DEFAULT_FILEPATH);
+
+        TaskList tasks;
         try {
             tasks = storage.load();
         } catch (IOException | ClassNotFoundException e) {
             tasks = new TaskList();
             startupMessages.oops(LOADING_ERROR_MESSAGE);
         }
+        model = new Model(tasks);
     }
 
     /**
@@ -52,17 +55,18 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = preParser.parse(input);
-            command.execute(tasks, bufferedUiOutput, storage);
+            command.execute(model, bufferedUiOutput, storage);
+            try {
+                storage.save(model.copyOfCurrentTasks());
+            } catch (IOException e) {
+                // Unable to save
+                System.err.println("Unable to save.");
+                e.printStackTrace();
+            }
         } catch (DukeException e) {
             bufferedUiOutput.oops(e.getMessage());
+            e.printStackTrace();
         }
-
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            // Unable to save
-        }
-
         return bufferedUiOutput.nextResponse();
     }
 

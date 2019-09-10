@@ -67,7 +67,7 @@ public class Parser {
      */
     public String handleEventOrDeadline(String description, String cmd,
                               String regex, List<Task> taskList,
-                              Storage storage) throws DukeException, IOException, ParseException{
+                              Storage storage) throws DukeException, IOException, ParseException {
         String[] arr1 = description.split(regex, 2);
         validateTime(arr1);
         String desc = arr1[0];

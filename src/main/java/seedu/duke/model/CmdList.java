@@ -9,7 +9,12 @@ public class CmdList extends Cmd {
     private Ui ui;
     private List<Task> taskList;
 
-    public CmdList(List<Task> taskList, String output)  {
+    /**
+     * Subclass of Cmd, which is handles list action command.
+     * @param taskList task list (Array List).
+     * @param output string which will be appended with the action result.
+     */
+    public CmdList(List<Task> taskList, String output) {
         super();
         this.taskList = taskList;
         this.ui = new Ui();

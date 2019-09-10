@@ -10,6 +10,13 @@ import java.util.List;
 
 public class CmdDelete extends Cmd {
 
+    /**
+     * Subclass of Cmd, which handles delete action command.
+     * @param description task description for creating task object.
+     * @param taskList task list (ArrayList) which contains all tasks.
+     * @param storage storage unit which handles removing the task from the text file.
+     * @throws IOException catches error if there is any corruption in the text file.
+     */
     public CmdDelete(String description, List<Task> taskList, Storage storage)
             throws IOException {
         String output = "";

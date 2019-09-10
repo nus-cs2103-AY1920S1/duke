@@ -13,7 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import seedu.duke.core.*;
+import seedu.duke.core.DialogBox;
+import seedu.duke.core.DukeController;
+import seedu.duke.core.Storage;
+import seedu.duke.core.Ui;
 import seedu.duke.core.Parser;
 import seedu.duke.model.dto.Task;
 
@@ -47,14 +50,10 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException, ParseException{
-        DukeController controller = new DukeController();
-        Ui ui = new Ui();
-        Storage storage = new Storage();
-        Parser parser = new Parser();
+    public void start(Stage stage) throws IOException, ParseException {
 
+        Storage storage = new Storage();
         File file = storage.initFile();
-        List<Task> list = storage.loadTask(FILEPATH);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -89,11 +88,16 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        //Step 3. Add functionality to handle user input.
+        DukeController controller = new DukeController();
+        Ui ui = new Ui();
+        Parser parser = new Parser();
+        List<Task> list = storage.loadTask(FILEPATH);
+
         //Add welcome dialog in the beginning of the app.
         Label welcomeMsg = ui.showWelcome();
         dialogContainer.getChildren().add(welcomeMsg);
 
-        //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             try {
                 handleUserInput(controller, ui, list, storage, parser);
@@ -105,7 +109,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             try {
                 boolean isTerminate = handleUserInput(controller, ui, list, storage, parser);
-                if(isTerminate) {
+                if (isTerminate) {
                     //delay time for 1 second
                     TimeUnit.SECONDS.sleep(1);
 
@@ -116,7 +120,6 @@ public class Duke extends Application {
                 e.printStackTrace();
             }
         });
-
         Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
@@ -124,8 +127,8 @@ public class Duke extends Application {
     }
 
     private boolean handleUserInput(DukeController controller, Ui ui,
-                                 List<Task> list, Storage storage,
-                                 Parser parser) throws IOException {
+                                    List<Task> list, Storage storage, Parser parser)
+            throws IOException {
         String userInputText = userInput.getText();
         Label userText = new Label(userInputText);
         Label dukeText = new Label();

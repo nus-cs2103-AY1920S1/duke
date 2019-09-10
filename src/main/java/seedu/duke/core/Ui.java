@@ -61,7 +61,7 @@ public class Ui {
     public String displayTask(String output, List<Task> list, int index) {
         if (index >= 0) {
             output = new StringBuilder(output)
-                    .append(list.get(index) + "\n").toString() ;
+                    .append(list.get(index) + "\n").toString();
         }
         return output;
     }

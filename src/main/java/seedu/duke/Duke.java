@@ -110,6 +110,7 @@ public class Duke extends Application {
             try {
                 boolean isTerminate = handleUserInput(controller, ui, list, storage, parser);
                 if (isTerminate) {
+                    assert isTerminate = true;
                     //delay time for 1 second
                     TimeUnit.SECONDS.sleep(1);
 

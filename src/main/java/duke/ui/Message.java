@@ -14,10 +14,11 @@ public class Message {
     public static final String MESSAGE_LOADING_ERROR = "An empty data file duke.txt is "
             + "created in the current directory.";
     public static final String MESSAGE_NO_MATCHING_TASKS = "There are no matching tasks for the key word.";
+    private static final String MESSAGE_TASK_COUNT = "Now you have %d task%s in the list.";
 
     public static String getTaskTotalMsg(TaskList tasks) {
         int total = tasks.getSize();
-        return String.format("Now you have %d task%s in the list.", total, total > 1 ? "s" : "");
+        return String.format(MESSAGE_TASK_COUNT, total, total > 1 ? "s" : "");
     }
 
     public static String formatErrorMsg(String errorMsg) {

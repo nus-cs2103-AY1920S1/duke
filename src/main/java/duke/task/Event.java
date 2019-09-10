@@ -26,7 +26,7 @@ public class Event extends Task {
      * Constructs an Event object given a description and the start and end time (with date)
      * of the event as a String.
      *
-     * @param description The description of the event
+     * @param description the description of the event
      * @param at          a String containing date and time of both start and end of the event.
      *                    If the dates of the start and end time of the event are the same,
      *                    only the start date is required (e.g. '11/10/2019 1000 1100' means the event
@@ -49,14 +49,42 @@ public class Event extends Task {
                 this.endDate = parseDate(dateTimeArr[2]);
                 this.endTime = parseTime(dateTimeArr[3]);
             }
-
-            if (startDate.isAfter(endDate)) {
-                throw new DukeException("Start date cannot be after end date");
-            } else if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
-                throw new DukeException("Start time cannot be after end time");
-            }
+            this.validate();
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid time format.");
+        }
+    }
+
+    /**
+     * Alternative constructor for Event object.
+     *
+     * @param description the description of the event
+     * @param startDate   the start date of the event
+     * @param startTime   the start time of the event
+     * @param endDate     the end date of the event
+     * @param endTime     the end time of the event
+     * @throws DukeException if start time of the event is before the end time
+     */
+    public Event(String description, LocalDate startDate, LocalTime startTime, LocalDate endDate,
+                 LocalTime endTime) throws DukeException {
+        super(description);
+        this.startDate = startDate;
+        this.startTime = startTime;
+        this.endDate = endDate;
+        this.endTime = endTime;
+        this.validate();
+    }
+
+    public Event(String description, LocalDate eventDate, LocalTime startTime,
+                 LocalTime endTime) throws DukeException {
+        this(description, eventDate, startTime, eventDate, endTime);
+    }
+
+    private void validate() throws DukeException {
+        if (startDate.isAfter(endDate)) {
+            throw new DukeException("Start date cannot be after end date");
+        } else if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
+            throw new DukeException("Start time cannot be after end time");
         }
     }
 

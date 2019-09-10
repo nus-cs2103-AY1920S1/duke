@@ -10,6 +10,7 @@ public class Duke {
     private Ui ui;
     private TaskList taskList = new TaskList();
     private WriteFile data;
+    private Parser parser = new Parser();
 
     public Duke(String path) {
         /**
@@ -27,8 +28,7 @@ public class Duke {
         ui.link(taskList,storage);
         ui.showWelcome();
     }
-    public String getResponse(String inputOrig) throws ParseException {
-        // TODO add DukeException for this
+    public String getResponse(String inputOrig) throws ParseException, DukeException {
         /**
          *  main run method
          *  scans input and decides whether adding,
@@ -42,54 +42,39 @@ public class Duke {
          *  @return none
          *  @throws DukeException if command unknown
          */
-        Scanner sc = new Scanner(inputOrig);
-        String input = sc.next();
-        if (input.equals("bye")) {
+        //parser.scrubData();
+        parser.parse(inputOrig);
+        String command = parser.getCommand();
+        if (command.equals("bye")) {
             return ui.goodBye();
-        } else if (input.equals("list")) {  // list command
+        } else if (command.equals("list")) {  // list command
             // list all tasks
             return ui.list();
-        } else if (input.equals("todo")) {   // to do command
-            String taskInfo = sc.nextLine();
-            if (taskInfo.equals("")) {
-                return " ☹ OOPS!!! The description of a todo cannot be empty.";
-            }
+        } else if (command.equals("todo")) {   // to do command
+            String taskInfo = parser.getNextCommand();
             Task newTask = taskList.addTodo(taskInfo,0);
             return ui.addTask(newTask);
-        } else if (input.equals("deadline")) { // deadline command
-            String taskInfo = sc.nextLine();
-            if (taskInfo.equals("")) {
-                return " ☹ OOPS!!! The description of a todo cannot be empty.";
-            }
-            int seperator = taskInfo.indexOf('/');
-            // use sep to split string
-            String actualTask = taskInfo.substring(0,seperator);
-            seperator += 4; // put sep at space after /by
-            String time = taskInfo.substring(seperator);
-            Task newTask = taskList.addDeadline(actualTask,time,0);
+        } else if (command.equals("deadline")) { // deadline command
+            String time = parser.getDoByDate();
+            Task newTask = taskList.addDeadline(command,time,0);
             return ui.addTask(newTask);
-        } else if (input.equals("event")) {   // event command
-            String taskInfo = sc.nextLine();
-            if (taskInfo.equals("")) {
-               return " ☹ OOPS!!! The description of a todo cannot be empty.";
-            }
-            int seperator = taskInfo.indexOf('/');
-            // use sep to split string
-            String actualTask = taskInfo.substring(0,seperator);
-            seperator += 4; // put sep at space after /by
-            String time = taskInfo.substring(seperator);
+        } else if (command.equals("event")) {   // event command
+
+            String actualTask = parser.getNextCommand();
+
+            String time = parser.getDoByDate();
             Task newTask = taskList.addEvent(actualTask,time,0);
             return ui.addTask(newTask);
-        } else if (input.equals("done")) {   // mark done
-            int taskNum = sc.nextInt();
+        } else if (command.equals("done")) {   // mark done
+            int taskNum = parser.getTaskNum();
             Task doneTask = taskList.done(taskNum);
             return ui.markDone(doneTask);
-        } else if (input.equals("delete")) { // delete task
-            int taskNum = sc.nextInt();
+        } else if (command.equals("delete")) { // delete task
+            int taskNum = parser.getTaskNum();
             Task delTask = taskList.delete(taskNum);
             return ui.delTask(delTask);
-        } else if (input.equals("find")) { // turn into exception
-            String keyWord = sc.nextLine();
+        } else if (command.equals("find")) { // turn into exception
+            String keyWord = parser.getNextCommand();
             return ui.find(keyWord);
         } else {
             // handle all other cases

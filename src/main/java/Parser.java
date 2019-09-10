@@ -7,22 +7,56 @@ public class Parser {
      * @param command refers to the input by the user
      * @return a new Command object
      */
-    public Command parse(String command) {
+    public static Command parse(String command) throws DukeException {
         String commandType = command.split(" ")[0];
         String instruction = "";
         String date = "";
 
-        if (commandType.equals("todo") || commandType.equals("delete") || commandType.equals("done")
-                || commandType.equals("find")) {
+        switch (commandType) {
+
+        case "bye":
+            return new ByeCommand();
+
+        case "list":
+            return new ListCommand();
+
+        case "delete":
             instruction = command.substring(command.indexOf(" ") + 1);
-        } else if (commandType.equals("deadline") || commandType.equals("event")) {
+            return new DeleteCommand(instruction);
+
+        case "done":
+            instruction = command.substring(command.indexOf(" ") + 1);
+            return new DoneCommand(instruction);
+
+        case "find":
+            instruction = command.substring(command.indexOf(" ") + 1);
+            return new FindCommand(instruction);
+
+        case "todo":
+            instruction = command.substring(command.indexOf(" ") + 1);
+            return new AddTodoCommand(instruction);
+
+        case "deadline":
             if (command.contains("/")) {
                 instruction = command.substring(command.indexOf(" ") + 1, command.indexOf("/") - 1);
                 assert command.length() > command.indexOf("/") + 4 : "Incomplete date";
                 date = command.substring(command.indexOf("/") + 4);
             }
+
+            return new AddDeadlineCommand(instruction, date);
+
+        case "event":
+            if (command.contains("/")) {
+                instruction = command.substring(command.indexOf(" ") + 1, command.indexOf("/") - 1);
+                assert command.length() > command.indexOf("/") + 4 : "Incomplete date";
+                date = command.substring(command.indexOf("/") + 4);
+            }
+
+            return new AddEventCommand(instruction, date);
+
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
-        return new Command(commandType, instruction, date);
     }
 }

@@ -23,6 +23,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Represents the UI dialog box.
+     * @param text refers to the text which is going to be displayed
+     * @param img refers to the image of the user sending the text
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -47,10 +52,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the DialogBox containing the image and text of the user.
+     * @param text refers to the text the user sends
+     * @param img refers to user's image
+     * @return DialogBox containing the image and text of the user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns the DialogBox containing the image and text of DukeBot.
+     * @param text refers to the text DukeBot sends
+     * @param img refers to DukeBot's image
+     * @return DialogBox containing the image and text of DukeBot
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

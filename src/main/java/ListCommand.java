@@ -1,4 +1,4 @@
-public abstract class Command {
+public class ListCommand extends Command {
 
     /**
      * Returns the message DukeBot will show after each interaction with the user.
@@ -7,6 +7,7 @@ public abstract class Command {
      * @param storage refers to the instance of Storage class which handles read-write to the .txt file
      * @return response of DukeBot to the given user query
      */
-    public abstract  String execute(TaskList tasks, UI ui, Storage storage) throws DukeException;
-
+    public String execute(TaskList tasks, UI ui, Storage storage) {
+        return ui.showTasksInList(tasks);
+    }
 }

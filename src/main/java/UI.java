@@ -25,9 +25,7 @@ public class UI {
      * Displays goodbye message on exit.
      */
     public String showGoodbye() {
-//        System.out.println(line);
         return "    Bye. Hope to see you again soon!";
-//        System.out.println(line);
     }
 
     /**

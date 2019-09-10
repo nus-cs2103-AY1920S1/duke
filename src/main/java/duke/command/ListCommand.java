@@ -16,6 +16,8 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return tasks.printTasks();
+        String response = tasks.printTasks();
+        assert(!response.isEmpty());
+        return response;
     }
 }

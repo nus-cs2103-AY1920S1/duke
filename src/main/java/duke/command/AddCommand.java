@@ -29,6 +29,7 @@ public class AddCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) {
         String response = tasks.addTask(task);
+        assert(!response.isEmpty());
         try {
             storage.store(tasks);
         } catch (IOException e) {

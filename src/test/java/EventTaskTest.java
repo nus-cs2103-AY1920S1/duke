@@ -39,7 +39,7 @@ public class EventTaskTest {
         task.complete();
 
         assertEquals(
-            String.format("[E][V][] Receive Happy New Year text messages (at: %s)", formattedDate),
+            String.format("[E][V] Receive Happy New Year text messages (at: %s)", formattedDate),
             task.toString()
         );
     }

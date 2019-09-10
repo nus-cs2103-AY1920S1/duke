@@ -83,6 +83,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.getStatusIcon(), this.tagsToString(), this.getDescription());
+        String tagString = this.tags.size() > 0 ? String.format("[%s]", this.tagsToString()) : "";
+        return String.format("[%s]%s %s", this.getStatusIcon(), tagString, this.getDescription());
     }
 }

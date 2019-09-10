@@ -70,4 +70,18 @@ public class TaskList {
     public Task removeFromList(int i) {
         return list.remove(i);
     }
+
+    /**
+     * Checks whether a task already exists in the list.
+     * @param tsk refers to the task which is being checked
+     * @return boolean whether a task exists in the list
+     */
+    public boolean contains(Task tsk) {
+        for (int i = 0; i < list.size(); i++) {
+            if (tsk.toString().equals(list.get(i).toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

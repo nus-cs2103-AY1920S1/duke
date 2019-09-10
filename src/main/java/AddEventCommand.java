@@ -25,13 +25,17 @@ public class AddEventCommand extends Command {
         try {
             if (instruction.equals("")) {
                 throw new DukeException("☹ OOPS!!! The description of event cannot be empty");
-            } else if (!date.equals("")) {
+            } else if (date.equals("")) {
                 throw new DukeException("☹ OOPS!!! The event must be at by a certain date");
             } else {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                    tasks.addItemToList(new Event(instruction,
-                            formatter.parse(date)));
+                    Event et = new Event(instruction, formatter.parse(date));
+                    if(tasks.contains(et)) {
+                        throw new DukeException("Item already exists in the list!");
+                    } else {
+                        tasks.addItemToList(et);
+                    }
                 } catch (java.text.ParseException exp) {
                     return exp.getMessage();
                 }

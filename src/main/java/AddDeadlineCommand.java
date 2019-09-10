@@ -25,14 +25,18 @@ public class AddDeadlineCommand extends Command {
         try {
             if (instruction.equals("") || instruction.equals("deadline")) {
                 throw new DukeException("☹ OOPS!!! The description of deadline cannot be empty");
-            } else if (!date.equals("")) {
+            } else if (date.equals("")) {
                 throw new DukeException("☹ OOPS!!! The deadline must be by a certain date "
                         + "by a certain date");
             } else {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                    tasks.addItemToList(new Deadline(instruction,
-                            formatter.parse(date)));
+                    Deadline dd = new Deadline(instruction, formatter.parse(date));
+                    if(tasks.contains(dd)) {
+                        throw new DukeException("Item already exists in the list!");
+                    } else {
+                        tasks.addItemToList(dd);
+                    }
                 } catch (java.text.ParseException exp) {
                     return exp.getMessage();
                 }

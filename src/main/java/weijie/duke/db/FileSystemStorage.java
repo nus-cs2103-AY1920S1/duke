@@ -14,19 +14,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Storage {
+public class FileSystemStorage implements ITaskStorage {
 
     private File file;
 
     /**
      * <p>
-     *      Creates a Storage class which reads and writes Tasks at the specified path location. If the file does not
+     *      Creates a FileSystemStorage class which reads and writes Tasks at the specified path location. If the file does not
      *      exist, a new file with the specified name will be created at the path.
      * </p>
      * @param path Path to file to read and write Tasks from
      * @throws DukeIoException If an IO exception occurs.
      */
-    public Storage(String path) throws DukeIoException {
+    public FileSystemStorage(String path) throws DukeIoException {
         file = new File(path);
 
         if (!file.exists()) {

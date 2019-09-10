@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import weijie.duke.commands.CommandList;
 import weijie.duke.commands.TaskCommandFactory;
-import weijie.duke.db.Storage;
+import weijie.duke.db.FileSystemStorage;
+import weijie.duke.db.ITaskStorage;
 import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.models.Task;
 import weijie.duke.controllers.MainWindowController;
@@ -47,7 +48,7 @@ public class Duke extends Application {
     }
 
     private void initDependencies() throws DukeIoException {
-        Storage storage = new Storage(filePath);
+        ITaskStorage storage = new FileSystemStorage(filePath);
         IRepository<Task> repo = new TaskRepo(storage);
 
         taskCommandFactory = new TaskCommandFactory(CommandList.getCommandMap());

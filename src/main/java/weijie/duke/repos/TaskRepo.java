@@ -1,6 +1,6 @@
 package weijie.duke.repos;
 
-import weijie.duke.db.Storage;
+import weijie.duke.db.ITaskStorage;
 import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.models.Task;
 
@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 
 public class TaskRepo implements IRepository<Task> {
 
-    private Storage storage;
+    private ITaskStorage storage;
     private List<Task> tasks;
 
-    public TaskRepo(Storage storage) throws DukeIoException {
+    public TaskRepo(ITaskStorage storage) throws DukeIoException {
         this.storage = storage;
         this.tasks = storage.read();
     }

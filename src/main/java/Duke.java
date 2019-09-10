@@ -19,8 +19,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
-
 
 public class Duke extends Application {
     // String Constants used for Duke output
@@ -35,14 +33,6 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-//
-//    public Duke() {
-//    }
 
     @Override
     public void start(Stage stage) {
@@ -113,14 +103,6 @@ public class Duke extends Application {
             sb.append(err.getMessage());
         }
         return sb.toString();
-    }
-
-    Storage getStorage() {
-        return this.storage;
-    }
-
-    TaskList getTaskList() {
-        return this.tasks;
     }
 
     /**

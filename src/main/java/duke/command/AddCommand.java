@@ -18,8 +18,8 @@ public class AddCommand extends Command {
     /**
      * Executes the adding command accordingly.
      *
-     * @param tasksList the tasks list of duke.Duke.
-     * @param database the database of duke.Duke.
+     * @param database the database of Duke.
+     * @param tasksList the tasks list of Duke.
      * @throws DukeException if the user's input is incorrect.
      */
     public String execute(DukeDatabase database, TaskList tasksList) throws DukeException {

@@ -49,16 +49,31 @@ public class TaskList {
     /**
      * Returns the task at the given index in the list.
      *
-     * @param i index of the task (starts from 0).
+     * @param index index of the task (starts from 0).
      * @return the task at the given index in the list.
      * @throws DukeException if the index is invalid (see documentation on the removeTask method).
      */
-    public Task getTask(int i) throws DukeException {
-        if (!indexIsValid(i)) {
+    public Task getTask(int index) throws DukeException {
+        if (!indexIsValid(index)) {
             throw new DukeException("Index must be between 1 and the number of task added!");
         }
 
-        return tasks.get(i);
+        return tasks.get(index);
+    }
+
+    /**
+     * Replaces the task located at specified position in the list with the new specified task.
+     *
+     * @param index index of the task to replace.
+     * @param task the new task to be stored at the specified position.
+     * @throws DukeException if the index is out of range (index < 0 || index >= size()).
+     */
+    public void setTask(int index, Task task) throws DukeException {
+        if (!indexIsValid(index)) {
+            throw new DukeException("Index must be between 1 and the number of task added!");
+        }
+
+        tasks.set(index, task);
     }
 
     /**

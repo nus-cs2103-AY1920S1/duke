@@ -18,12 +18,12 @@ public class DoneCommand extends Command {
     /**
      * Executes the update command accordingly.
      *
-     * @param tasksList the tasks list of duke.Duke.
-     * @param database the database of duke.Duke.
+     * @param tasksList the tasks list of Duke.
+     * @param database the database of Duke.
      * @throws DukeException if the user's input is incorrect.
      */
     public String execute(DukeDatabase database, TaskList tasksList) throws DukeException {
-        Task task = tasksList.getTask(index - 1);
+        Task task = tasksList.getTask(index);
         task.markAsDone();
 
         return String.format("Nice! I've marked this task as done:\n%s\n", task.toString());

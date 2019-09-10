@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.Task.TaskType;
 import duke.task.ToDo;
 
 import java.io.File;
@@ -16,6 +17,10 @@ import java.util.Scanner;
  * Encapsulates the database of duke.Duke bot.
  */
 public class DukeDatabase {
+    private static final int DONE = 1;
+    private static final int NOT_DONE = 0;
+    private static final String corruptedDataMessage = "Database has corrupted data!";
+
     private String databaseDirectory; // Path of the the database file.
     private File tasksFile; // File object which represents the database file of duke.Duke bot
 
@@ -104,28 +109,25 @@ public class DukeDatabase {
      * @throws DukeException If the given data is corrupted.
      */
     private Task createTask(String dataInput) throws DukeException {
-        // Get the type of the Task.
-        String[] arr = dataInput.split("\\|");
-        String type = arr[0].trim();
+        TaskType type = getType(dataInput);
+        String[] details = getDetails(dataInput);
 
         // Create the corresponding task object.
         Task task;
-        if ("T".equals(type)) {
-            task = new ToDo(arr[2].trim());
-        } else if ("D".equals(type)) {
-            task = new Deadline(arr[2].trim(), arr[3].trim());
-        } else if ("E".equals(type)) {
-            task = new Event(arr[2].trim(), arr[3].trim());
+        if (type == TaskType.TODO) {
+            task = createToDo(details);
+        } else if (type == TaskType.DEADLINE) {
+            task = createDeadline(details);
+        } else if (type == TaskType.EVENT) {
+            task = createEvent(details);
         } else {
             throw new DukeException("Database has corrupted data!");
         }
 
         // Check and update the status of the task accordingly.
-        int status = Integer.parseInt(arr[1].trim());
-        if (status == 1) {
+        boolean isDone = isDone(dataInput);
+        if (isDone) {
             task.markAsDone();
-        } else if (status != 0) {
-            throw new DukeException("Database has corrupted data!");
         }
 
         return task;
@@ -152,6 +154,104 @@ public class DukeDatabase {
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Returns the type of the task corresponding to the data given.
+     *
+     * @param data data of the task stored in the database file.
+     * @return the type of the task corresponding to the data given.
+     * @throws DukeException if the data is corrupted.
+     */
+    private TaskType getType(String data) throws DukeException {
+        char type = data.charAt(0);
+
+        switch (type) {
+        case ('T'):
+            return TaskType.TODO;
+        case ('D'):
+            return TaskType.DEADLINE;
+        case ('E'):
+            return TaskType.EVENT;
+        default:
+            throw new DukeException("Database has corrupted data!");
+        }
+    }
+
+    /**
+     * Returns true if the task associated to the data is done.
+     *
+     * @param data data of a task stored in the database file.
+     * @return true if the task associated to the data is done.
+     * @throws DukeException if the data is corrupted.
+     */
+    private boolean isDone(String data) throws DukeException {
+        String[] details = getDetails(data);
+        int status = Integer.parseInt(details[1].trim());
+
+        switch (status) {
+        case DONE:
+            return true;
+        case NOT_DONE:
+            return false;
+        default:
+            throw new DukeException(corruptedDataMessage);
+        }
+    }
+
+    /**
+     * Returns the details of the task corresponding to the data given.
+     *
+     * @param data data of a task stored in the database file.
+     * @return the details of the task, stored in an array.
+     */
+    private String[] getDetails(String data) {
+        return data.split("\\|");
+    }
+
+    /**
+     * Creates a To Do object based on the given details of the To Do object.
+     *
+     * @param details details of the To Do object.
+     * @return a To Do object corresponding to the details given.
+     */
+    private ToDo createToDo(String[] details) {
+        String title = details[2].trim();
+
+        return new ToDo(title);
+    }
+
+    /**
+     * Creates a Deadline object based on the given details of the Deadline object.
+     *
+     * @param details details of the Deadline object.
+     * @return a Deadline object corresponding to the details given.
+     */
+    private Deadline createDeadline(String[] details) {
+        String title = details[2].trim();
+        String date = details[3].trim();
+
+        return new Deadline(title, date);
+    }
+
+    /**
+     * Creates an Event object based on the given details of the Event object.
+     *
+     * @param details details of the Event object.
+     * @return an Event object corresponding to the details given.
+     */
+    private Event createEvent(String[] details) {
+        String title = details[2].trim();
+        String date = details[3].trim();
+
+        boolean isTentative =  date.contains(";");
+
+        if (isTentative) {
+            String[] tentativeDates = date.split("; ");
+            return new Event(title, tentativeDates);
+        } else {
+            return new Event(title, date);
         }
     }
 }

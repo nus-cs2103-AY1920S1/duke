@@ -9,14 +9,33 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline object.
      *
-     * @param topic the topic of the deadline.
+     * @param title the title of the deadline.
      * @param deadline its deadline.
      */
-    public Deadline(String topic, String deadline) {
-        super(topic);
+    public Deadline(String title, String deadline) {
+        super(title);
         this.deadline = deadline;
         this.type = "D";
-        this.details = String.format("%s (by: %s)", topic, deadline);
-        this.detailsForDatabase = String.format("%s | %s", topic, deadline);
+    }
+
+    /**
+     * Returns the string representation of the Deadline object.
+     * It takes the form of [type][done status][date][deadline].
+     *
+     * @return string representation of the Deadline object.
+     */
+    @Override
+    public String toString() {
+        return String.format("[%s][%s] %s (by: %s)", type, status, title, deadline);
+    }
+
+    /**
+     * Returns the data summary of this task to record this Deadline object in the database.
+     *
+     * @return the data summary of this Deadline object.
+     */
+    public String getSummaryForDatabase() {
+        int status = isDone ? 1 : 0;
+        return String.format("%s | %d | %s | %s", type, status, title, deadline);
     }
 }

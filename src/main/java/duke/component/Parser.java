@@ -25,6 +25,8 @@ public class Parser {
             return commandGenerator.getAddCommandForToDo(input);
         } else if (input.startsWith("deadline")) {
             return commandGenerator.getAddCommandForDeadline(input);
+        } else if (input.startsWith("event setDate")) {
+            return commandGenerator.getConfirmEventDateCommand(input);
         } else if (input.startsWith("event")) {
             return commandGenerator.getAddCommandForEvent(input);
         } else if ("list".equals(input)) {

@@ -10,6 +10,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A generator which can generate Command objects based on the given user's input.
@@ -105,9 +107,37 @@ public class CommandGenerator {
     public DoneCommand getDoneCommand(String input) throws DukeException {
         try {
             int index = Integer.parseInt(input.substring(4).trim());
-            return new DoneCommand(index);
+            return new DoneCommand(index - 1);
         } catch (NumberFormatException e) {
             throw new DukeException("There can only be an integer after the word \"done\"!", e);
+        }
+    }
+
+    /**
+     * Returns a ConfirmEventDateCommand used to confirm the date of an event which previously has tentative dates.
+     *
+     * @param input user's input from the ui which contains the indices used to find the event and the date of the event
+     *              to confirm.
+     * @return a ConfirmEventDateCommand used to confirm the date of an event which previously has tentative dates.
+     * @throws DukeException if the syntax or input given by the user is invalid.
+     */
+    public ConfirmEventDateCommand getConfirmEventDateCommand(String input) throws DukeException {
+        Pattern pattern = Pattern.compile("\\d\\s+\\d");
+        Matcher matcher = pattern.matcher(input);
+
+        boolean isValidInput = matcher.find();
+        if (!isValidInput) {
+            throw new DukeException("Syntax of input is invalid");
+        }
+
+        try {
+            String[] indicesAsString = matcher.group().split("\\s+");
+            int taskIndex = Integer.parseInt(indicesAsString[0]) - 1;
+            int dateIndex = Integer.parseInt(indicesAsString[1]) - 1;
+
+            return new ConfirmEventDateCommand(taskIndex, dateIndex);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Syntax of input for index is invalid");
         }
     }
 
@@ -166,18 +196,25 @@ public class CommandGenerator {
      */
     private Event getEvent(String[] details) throws DukeException {
         try {
-            String topic = details[0].stripTrailing();
-            String dateUnformatted = details[1].stripLeading(); // Unformatted date from user's input
-            String date = formatDateAndTime(dateUnformatted);
+            String topic = details[0].trim();
+            String dateUnformatted = details[1].trim(); // Unformatted date from user's input
 
-            return new Event(topic, date);
+            boolean isDateTentative = dateUnformatted.contains(",");
+
+            if (isDateTentative) {
+                String[] dates = formatDateAndTimeArray(dateUnformatted);
+                return new Event(topic, dates);
+            } else {
+                String date = formatDateAndTime(dateUnformatted);
+                return new Event(topic, date);
+            }
         } catch (ParseException e) {
             throw new DukeException("The format of date and time is wrong!", e);
         }
     }
 
     /**
-     * Formats the date time given by the user.
+     * Formats the date and time given by the user.
      *
      * @param dateTime date and time given by user in format: dd/MM/yyyy HHmm (24 Hours format).
      * @return formatted date and time in format: d Month yyyy, h:mm (12 Hours format).
@@ -189,5 +226,24 @@ public class CommandGenerator {
         Date date = inputFormatter.parse(dateTime);
 
         return outputFormatter.format(date);
+    }
+
+    /**
+     * Format a series of date and time given by the user.
+     *
+     * @param dateTimes dates and times given by user in format: dd/MM/yyyy HHmm (24 Hours format).
+     * @return An array of formatted dates and times in format: d Month yyyy, h:mm (12 Hours format).
+     * @throws ParseException if the format of dates and times given by user is incorrect.
+     */
+    private String[] formatDateAndTimeArray(String dateTimes) throws ParseException {
+        String[] dates = dateTimes.split(",\\s+");
+        String[] datesFormatted = new String[dates.length];
+
+        int size = dates.length;
+        for (int i = 0; i < size; i++) {
+            datesFormatted[i] = formatDateAndTime(dates[i]);
+        }
+
+        return datesFormatted;
     }
 }

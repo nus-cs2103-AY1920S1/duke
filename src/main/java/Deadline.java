@@ -13,7 +13,6 @@ public class Deadline extends Task {
      *
      */
 
-
     public Deadline(String taskName, String deadLine) {
         super(taskName);
         this.deadLine = deadLine;

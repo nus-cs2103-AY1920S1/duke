@@ -22,6 +22,7 @@ public class GUI {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     private static Ui uiManager = new Ui();
+
     /**
      * initialises the GUI.
      * @param stage Stage object obtained from the start method in Duke class.
@@ -113,6 +114,5 @@ public class GUI {
     private String getResponse(String input) {
         return "Duke heard: " + input;
     }
-
 
 }

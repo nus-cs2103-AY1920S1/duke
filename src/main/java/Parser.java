@@ -15,7 +15,6 @@ public class Parser {
         String command = words[0];
 
         switch (command) {
-
         case "bye":
             return "Bye. Hope to see you again soon!";
 

@@ -15,19 +15,18 @@ public class DeleteCommand extends InputCommand {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        int del;
+
         try {
             String index = getString();
             if (index.split(" ").length > 1) {
                 System.out.println(index + index.split("").length);
                 throw new InputMismatchException();
             }
-            int del = Integer.parseInt(index);
+            del = Integer.parseInt(index);
             if (taskList.getNumTasks() < del) {
                 throw new IndexOutOfBoundsException();
             }
-
-            assert del - 1 <= taskList.getNumTasks();
-            return ui.getDeletedTask(taskList.deleteTask(del - 1), taskList.getNumTasks());
         } catch (InputMismatchException e) {
             throw new DukeException("☹ OOPS!!! Please enter a single number.");
         } catch (IndexOutOfBoundsException e) {
@@ -35,5 +34,8 @@ public class DeleteCommand extends InputCommand {
         } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! Please enter a valid number.");
         }
+        
+        assert del - 1 <= taskList.getNumTasks();
+        return ui.getDeletedTask(taskList.deleteTask(del - 1), taskList.getNumTasks());
     }
 }

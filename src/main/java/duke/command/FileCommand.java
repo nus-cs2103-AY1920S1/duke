@@ -31,8 +31,10 @@ public class FileCommand extends Command {
         try {
             duke.load(filePath);
         } catch (DukeException e) {
+            assert(!isBye());
             return Ui.showError(e.getMessage());
         }
+        assert(!isBye());
         return Ui.showLoadMessage(filePath);
     }
 }

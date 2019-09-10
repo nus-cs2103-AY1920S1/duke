@@ -18,3 +18,7 @@ src/main/java/Duke.class
 *.class
 src/main/java/.idea/workspace.xml
 src/main/java/TaskList.txt
+src/main/java/Duke.class
+src/main/java/Parser.class
+src/main/java/TaskList.txt
+src/main/java/Tasks.class

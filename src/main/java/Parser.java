@@ -29,7 +29,7 @@ public class Parser {
      * @param taskList The current list of tasks
      * @throws DukeException
      */
-    public void parseCommand(String input, TaskList taskList) throws DukeException {
+    public String parseCommand(String input, TaskList taskList) throws DukeException {
         String[] inputArr = input.split(" ");
         String taskType = inputArr[0];
         String taskDesc = getDesc(inputArr);
@@ -40,9 +40,10 @@ public class Parser {
 
         if (taskType.equals("bye")) {
             isExit = true;
+            return ui.showGoodbye();
         } else if (taskType.equals("list")) {
 
-            ui.printTaskList(taskList);
+            return ui.printTaskList(taskList);
 
         } else if (taskDesc.isEmpty()) {
             throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
@@ -52,10 +53,10 @@ public class Parser {
             Task task = taskList.getTask(taskNum);
 
             if (task.isDone()) {
-                ui.showTaskAlreadyDone(task);
+                return ui.showTaskAlreadyDone(task);
             } else {
                 task.doTask();
-                ui.showTaskDone(task);
+                return ui.showTaskDone(task);
             }
 
         } else if (taskType.equals("delete")) {
@@ -64,18 +65,18 @@ public class Parser {
             Task task = taskList.getTask(taskNum);
             taskList.deleteTask(taskNum);
 
-            ui.showTaskDeleted(task, taskList);
+            return ui.showTaskDeleted(task, taskList);
 
         } else if (taskType.equals("find")) {
 
-            ui.showFoundTasks(taskList.searchFor(taskDesc));
+            return ui.showFoundTasks(taskList.searchFor(taskDesc));
 
         } else if (taskType.equals("todo")) {
 
             Task newTodo = new Todo(taskDesc);
             taskList.addTask(newTodo);
 
-            ui.showTaskAdded(newTodo, taskList);
+            return ui.showTaskAdded(newTodo, taskList);
 
         } else if (taskType.equals("deadline")) {
 
@@ -85,7 +86,7 @@ public class Parser {
 
             taskList.addTask(newDeadline);
 
-            ui.showTaskAdded(newDeadline, taskList);
+            return ui.showTaskAdded(newDeadline, taskList);
 
         } else {
             String[] taskDescArr = taskDesc.split(" /");
@@ -94,7 +95,7 @@ public class Parser {
 
             taskList.addTask(newEvent);
 
-            ui.showTaskAdded(newEvent, taskList);
+            return ui.showTaskAdded(newEvent, taskList);
         }
     }
 

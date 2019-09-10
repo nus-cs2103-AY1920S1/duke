@@ -9,7 +9,7 @@ checkstyle{
     toolVersion = '8.23'
 }
 
-group 'Alvinnyk.duke'
+group 'seedu.duke'
 version '0.1.0'
 
 repositories {

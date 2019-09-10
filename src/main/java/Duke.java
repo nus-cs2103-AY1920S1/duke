@@ -1,34 +1,32 @@
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.PrintWriter;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import Logic.Command;
+import Logic.CommandParser;
 import Model.Tasklist;
-import Model.deadline;
-import Model.event;
-import Model.todo;
 import Storage.Storage;
 import UI.UI;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Duke extends Application{
+import java.nio.file.Paths;
+
+public class Duke extends Application {
     private Storage storage;
     private Tasklist tasks;
     private UI ui;
 
+    private final String INPUT_DELIMITER = " ";
+
+    public Duke(){}
+
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        //The container for the content of the chat to scroll.
+        //Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        //Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+        //stage.setScene(scene); // Setting the stage to show our screen
+        //stage.show(); // Render the stage.
     }
+
 
     public static void main(String[] args){
 
@@ -47,6 +45,18 @@ public class Duke extends Application{
         ui.printData("Hello! I'm Duke\n" +
                             "What can I do for you?\n");
 
+        boolean isExit = false;
+        CommandParser commandParser = new CommandParser(INPUT_DELIMITER);
+
+        while(!isExit){
+            String userInput = ui.nextLine();
+            Command command = commandParser.parseCommand(userInput);
+            command.execute(tasks, ui, storage);
+            isExit = command.isExit();
+        }
+
+
+        /*
         do{
             String input = ui.nextLine();
 
@@ -201,5 +211,7 @@ public class Duke extends Application{
             }
 
         } while(true);
+
+         */
     }
 }

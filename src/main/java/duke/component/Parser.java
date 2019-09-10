@@ -32,10 +32,11 @@ public class Parser {
     private static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     /**
-     *  Parses the given input command <code>String</code> and returns the corresponding <code>Command</code> if valid.
-     *  @param command the input user command as a <code>String</code>.
-     *  @return an executable <code>Command</code> representing the instruction.
-     *  @throws DukeException if an error occurred when attempting to parse the user input
+     * Parses the given input command <code>String</code> and returns the corresponding <code>Command</code> if valid.
+     * 
+     * @param command the input user command as a <code>String</code>.
+     * @return an executable <code>Command</code> representing the instruction.
+     * @throws DukeException if an error occurred when attempting to parse the user input
      */
     public static Command parse(String command) throws DukeException {
         // Parse trivial commands here

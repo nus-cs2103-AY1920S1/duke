@@ -10,9 +10,10 @@ public class DeadlineTask extends Task {
     protected Date byDeadline;
 
     /**
-     *  Constructs a <code>DeadlineTask</code> object with a given description and deadline.
-     *  @param description <code>String</code> description of this <code>Task</code>.
-     *  @param byDeadline deadline of this <code>DeadlineTask</code>, as a <code>Date</code> object.
+     * Constructs a <code>DeadlineTask</code> object with a given description and deadline.
+     * 
+     * @param description <code>String</code> description of this <code>Task</code>.
+     * @param byDeadline deadline of this <code>DeadlineTask</code>, as a <code>Date</code> object.
      */
     public DeadlineTask(String description, Date byDeadline) {
         super(description);
@@ -20,15 +21,16 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     *  Returns the deadline of this <code>DeadlineTask</code>.
-     *  @return deadline of this <code>DeadlineTask</code>, as a <code>Date</code>.
+     * Returns the deadline of this <code>DeadlineTask</code>.
+     * 
+     * @return deadline of this <code>DeadlineTask</code>, as a <code>Date</code>.
      */
     public Date getDeadline() {
         return this.byDeadline;
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
     public String toEncodedString() {
         return String.format(

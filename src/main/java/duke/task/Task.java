@@ -10,16 +10,18 @@ public abstract class Task {
     }
 
     /**
-     *  Returns the description of this <code>Task</code>.
-     *  @return the description of this <code>Task</code>, as a <code>String</code>.
+     * Returns the description of this <code>Task</code>.
+     * 
+     * @return the description of this <code>Task</code>, as a <code>String</code>.
      */
     public String getDescription() {
         return this.description;
     }
     
     /**
-     *  Returns the completion status of this <code>Task</code>, as a status icon.
-     *  @return the single-character <code>String</code> containing the status icon.
+     * Returns the completion status of this <code>Task</code>, as a status icon.
+     * 
+     * @return the single-character <code>String</code> containing the status icon.
      */
     public String getStatusIcon() {
         // Does not return the UTF-16 character for a tick or cross respectively
@@ -28,15 +30,16 @@ public abstract class Task {
     }
 
     /**
-     *  Marks this <code>Task</code> as complete.
+     * Marks this <code>Task</code> as complete.
      */
     public void complete() {
         this.isComplete = true;
     }
 
     /**
-     *  Returns all information about this <code>Task</code> encoded in a <code>String</code>.
-     *  @return a <code>String</code> to be written to a file to persist information of this <code>Task</code>
+     * Returns all information about this <code>Task</code> encoded in a <code>String</code>.
+     * 
+     * @return a <code>String</code> to be written to a file to persist information of this <code>Task</code>
      */
     public abstract String toEncodedString();
 

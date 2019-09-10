@@ -10,9 +10,10 @@ public class EventTask extends Task {
     protected Date atTime;
 
     /**
-     *  Constructs an <code>EventTask</code> object with a given description and event timestamp.
-     *  @param description <code>String</code> description of this <code>Task</code>.
-     *  @param atTime timestamp of this <code>EventTask</code>, as a <code>Date</code> object.
+     * Constructs an <code>EventTask</code> object with a given description and event timestamp.
+     * 
+     * @param description <code>String</code> description of this <code>Task</code>.
+     * @param atTime timestamp of this <code>EventTask</code>, as a <code>Date</code> object.
      */
     public EventTask(String description, Date atTime) {
         super(description);
@@ -20,15 +21,16 @@ public class EventTask extends Task {
     }
 
     /**
-     *  Returns the timestamp of this <code>EventTask</code>.
-     *  @return timestamp of this <code>EventTask</code>, as a <code>Date</code>.
+     * Returns the timestamp of this <code>EventTask</code>.
+     * 
+     * @return timestamp of this <code>EventTask</code>, as a <code>Date</code>.
      */
     public Date getTime() {
         return this.atTime;
     }
 
     /**
-     *  {@inheritDoc}
+     * {@inheritDoc}
      */
     public String toEncodedString() {
         return String.format(

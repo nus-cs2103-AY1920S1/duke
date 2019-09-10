@@ -53,16 +53,17 @@ public class Duke extends Application {
     private Scene scene;
 
     /**
-     *  Constructs a <code>Duke</code> application instance, an interactive task manager, with the default filepath.
+     * Constructs a <code>Duke</code> application instance, an interactive task manager, with the default filepath.
      */
     public Duke() {
         this(DEFAULT_FILEPATH);
     }
 
     /**
-     *  Constructs a <code>Duke</code> application instance, an interactive task manager, with a given file path.
-     *  @param filePath <code>String</code> containing the relative file path of the file to persist application
-     *                  data to.
+     * Constructs a <code>Duke</code> application instance, an interactive task manager, with a given file path.
+     * 
+     * @param filePath <code>String</code> containing the relative file path of the file to persist application
+     *                 data to.
      */
     public Duke(String filePath) {
         this.isRunning = true;
@@ -96,9 +97,9 @@ public class Duke extends Application {
         }
     }
 
-    // Instantiates and arranges the application window with message box, scroll pane, input area and send button
+    // Instantiates and arranges the application window
     private void instantiateWindow() {
-        // Scrollable containerFor displaying dialog between user and Duke
+        // Scrollable container for displaying dialog between user and Duke
         this.dialogContainer = new VBox();
         this.scrollPane = new ScrollPane(this.dialogContainer);
 
@@ -112,16 +113,14 @@ public class Duke extends Application {
         this.scene = new Scene(mainLayout);
     }
 
-    // Applies styling to each of the elements in the application window
+    // Applies styling to each element in the application window
     private void applyWindowStyling() {
-        // Set title and application window size
         this.stage.setTitle("Duke");
         this.stage.setResizable(false);
         this.stage.setWidth(400.0);
         this.stage.setHeight(600.0);
         this.mainLayout.setPrefSize(400.0, 600.0);
         
-        // Set settings of scrollpane and dialog container
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -132,7 +131,6 @@ public class Duke extends Application {
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
         
-        // Anchor child nodes to application window
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
@@ -154,8 +152,8 @@ public class Duke extends Application {
     }
 
     /**
-     *  Creates two <code>Label</code> elements (one for the user command and the other for Duke's response), then
-     *  attaches both to the dialog container.
+     * Creates two <code>Label</code> elements (one for the user command and the other for Duke's response), then
+     * attaches both to the dialog container.
      */
     private void handleUserInput() {
         String command = this.userInput.getText();
@@ -169,7 +167,7 @@ public class Duke extends Application {
             DialogBox.getDukeDialog(dukeText, new ImageView(this.dukePic))
         );
 
-        // If a command has set Duke to terminate, schedule the application window to close in 1s
+        // If a command has set Duke to terminate, schedule the application window to close in 0.5s
         if (!this.isRunning) {
             new Timer().schedule(
                 new TimerTask() {
@@ -184,7 +182,7 @@ public class Duke extends Application {
         }
     }
 
-    // Invoked once on applications startup - shows Duke's logo then welcome message
+    // Invoked once on application startup - shows Duke's logo then welcome message
     private void showIntroduction() {
         Label dukeLogo = new Label(Duke.DUKE_LOGO);
         dukeLogo.setFont(new Font("Consolas", 12));
@@ -199,7 +197,7 @@ public class Duke extends Application {
     }
     
     /**
-     *  Instantiates the Duke application window.
+     * Instantiates the Duke application window.
      */
     @Override
     public void start(Stage stage) {

@@ -21,11 +21,16 @@ public class AddTodoCommand extends Command {
             if (instruction.equals("") || instruction.equals("todo")) {
                 throw new DukeException("☹ OOPS!!! The description of todo cannot be empty");
             } else {
-                tasks.addItemToList(new Todo(instruction));
-                try {
-                    storage.append(tasks.getLastItem());
-                } catch (Exception exp) {
-                    return ui.showErrorMsg(exp.getMessage());
+                Todo td = new Todo(instruction);
+                if(tasks.contains(td)) {
+                    throw new DukeException("Item already exists in the list!");
+                } else {
+                    tasks.addItemToList(td);
+                    try {
+                        storage.append(tasks.getLastItem());
+                    } catch (Exception exp) {
+                        return ui.showErrorMsg(exp.getMessage());
+                    }
                 }
             }
         } catch (DukeException exp) {

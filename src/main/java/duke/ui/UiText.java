@@ -188,8 +188,4 @@ public class UiText {
     public static String unableToWriteFileError() {
         return "Unable to write the file";
     }
-
-//    public void showError(String msg) {
-//        out.println(msg);
-//    }
 }

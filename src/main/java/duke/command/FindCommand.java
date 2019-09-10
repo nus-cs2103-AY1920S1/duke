@@ -17,13 +17,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException, IOException {
-//        ui.printQuerySet(tasks, searchPhrase);
+    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder("Here are the matching task(s) in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);

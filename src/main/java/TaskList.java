@@ -20,17 +20,19 @@ public class TaskList {
      * Adds a toDo task to the task list
      * @param tsk the task to be added
      */
-    public void addToDo(String tsk) {
+    public String addToDo(String tsk) {
         taskList.add(new toDo(tsk));
-        System.out.println("Got it. I've added this task:\n  " + taskList.get(taskList.size() - 1));
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+        StringBuilder str = new StringBuilder();
+        str.append("Got it. I've added this task:\n  " + taskList.get(taskList.size() - 1) + "\n");
+        str.append("Now you have " + taskList.size() + " tasks in the list");
+        return str.toString();
     }
 
     /**
      * Adds a Deadline task to the task list
      * @param tskBy the due date of the Deadline task
      */
-    public void addDeadline(String tskBy) {
+    public String addDeadline(String tskBy) {
         Scanner ddlSc = new Scanner(tskBy).useDelimiter("\\s*/by\\s*");
         String ddlTsk = ddlSc.next();
         String ddlBy = ddlSc.next();
@@ -39,15 +41,17 @@ public class TaskList {
         } else {
             taskList.add(new Deadline(ddlTsk, ddlBy));
         }
-        System.out.println("Got it. I've added this task:\n  " + taskList.get(taskList.size() - 1));
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+        StringBuilder str = new StringBuilder();
+        str.append("Got it. I've added this task:\n  " + taskList.get(taskList.size() - 1) + "\n");
+        str.append("Now you have " + taskList.size() + " tasks in the list");
+        return str.toString();
     }
 
     /**
      * Adds an Event task to the task list
      * @param tskAt the time of the event task
      */
-    public void addEvent(String tskAt) {
+    public String addEvent(String tskAt) {
         Scanner evtSc = new Scanner(tskAt).useDelimiter("\\s*/at\\s*");
         String evtTsk = evtSc.next();
         String evtAt = evtSc.next();
@@ -56,39 +60,45 @@ public class TaskList {
         } else {
             taskList.add(new Event(evtTsk, evtAt));
         }
-        System.out.println("Got it. I've added this task:\n  " + taskList.get(taskList.size() - 1));
-        System.out.println("Now you have " + taskList.size() + " tasks in the list");
+        StringBuilder str = new StringBuilder();
+        str.append("Got it. I've added this task:\n  " + taskList.get(taskList.size() - 1) + "\n");
+        str.append("Now you have " + taskList.size() + " tasks in the list");
+        return str.toString();
     }
 
     /**
      * Prints all the tasks in list.
      */
-    public void list() {
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+        StringBuilder str = new StringBuilder();
+        str.append("Here are the tasks in your list:\n");
         for (int i = 1; i <= taskList.size(); i++) {
             Task tsk = taskList.get(i-1);
-            System.out.println(i + ". " + tsk);
+            str.append(i + ". " + tsk + "\n");
         }
+        return str.toString();
     }
 
     /**
      * Marks a specific task as done
      * @param index Index of the task to be marked as done in the task list.
      */
-    public void done(int index) {
+    public String done(int index) {
         Task itemDone = taskList.get(index);
         itemDone.mardAsDone();
-        System.out.println("Nice! I've marked this task as done:\n  " + itemDone);
+        return "Nice! I've marked this task as done:\n  " + itemDone;
     }
 
     /**
      * Deletes a task from the list.
      * @param index Index of the task to be deleted in the task list.
      */
-    public void delete(int index) {
+    public String delete(int index) {
         Task itemDelete = taskList.remove(index);
-        System.out.println("Noted. I've removed the task:\n  " + itemDelete);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        StringBuilder str = new StringBuilder();
+        str.append("Noted. I've removed the task:\n  " + itemDelete + "\n");
+        str.append("Now you have " + taskList.size() + " tasks in the list.");
+        return str.toString();
     }
 
     /**
@@ -103,17 +113,27 @@ public class TaskList {
         return lines;
     }
 
-    public void find(String str) {
+    public String find(String str) {
         List<Task> ls = new LinkedList<>();
         for (Task t : taskList) {
             if (t.match(str)) {
                 ls.add(t);
             }
         }
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder res = new StringBuilder();
+        res.append("Here are the matching tasks in your list:");
         for (int i = 1; i <= ls.size(); i++) {
             Task tsk = ls.get(i-1);
-            System.out.println(i + ". " + tsk);
+            res.append(i + ". " + tsk + "\n");
         }
+        return res.toString();
+    }
+    public String initialList() {
+        StringBuilder str = new StringBuilder();
+        str.append("Here are your current tasks:");
+        for (Task t : taskList) {
+            str.append(t.toString() + "\n");
+        }
+        return str.toString();
     }
 }

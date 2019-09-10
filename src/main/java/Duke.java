@@ -27,33 +27,35 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Parser parser;
 
-    public Duke(String filePath) {
+    /*public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
 
-    }
+    }*/
     public Duke() {
         ui = new Ui();
         storage = new Storage("save.txt");
         tasks = new TaskList(storage.load());
+        parser = new Parser();
     }
     public static void main(String[] args) throws DukeException{
-        new Duke("save.txt").run();
+        new Duke()/*.run()*/;
     }
 
-    public void Greet(){
+    /*public void Greet(){
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }
+    }*/
 
-    public void run() {
+    /*public void run() {
         Greet();
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(sc);
         parser.read(tasks);
         storage.save(tasks);
-    }
+    }*/
 
     @Override
     public void start(Stage stage) {
@@ -110,6 +112,7 @@ public class Duke extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(tasks.initialList()), new ImageView(duke)));
     }
     /**
      * Iteration 1:
@@ -144,7 +147,8 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return parser.parse(tasks, input, storage);
     }
+
 }
 

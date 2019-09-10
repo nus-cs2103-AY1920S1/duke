@@ -45,11 +45,7 @@ public class Storage {
                 }
             }
         } catch (IOException exp) {
-            System.out.println("ioExeption caught when loading file!");
-        }
-        System.out.println("Here are your current tasks:");
-        for (Task t : tasks) {
-            System.out.println(t);
+            System.out.println("ioException caught when loading file!");
         }
         return tasks;
     }

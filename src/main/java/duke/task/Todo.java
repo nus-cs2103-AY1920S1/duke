@@ -13,7 +13,7 @@ public class Todo extends Task {
     }
 
     public String toExportFormat() {
-        return "T | " + (this.isDone ? "1" : "0") + " | " + this.description;
+        return "T | " + this.getIsDoneFlag() + " | " + this.description;
     }
 
     @Override

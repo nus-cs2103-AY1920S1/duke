@@ -30,7 +30,7 @@ public class Event extends Task {
     }
 
     public String toExportFormat() {
-        return "E | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + DateUtil.formatDate(this.at);
+        return "E | " + this.getIsDoneFlag() + " | " + this.description + " | " + DateUtil.formatDate(this.at);
     }
 
     @Override

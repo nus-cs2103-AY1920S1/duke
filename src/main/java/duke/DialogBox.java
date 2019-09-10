@@ -26,6 +26,8 @@ public class DialogBox extends HBox {
     private static final double X_TRANSFORM_LABEL = 25;
     private static final double X_TRANSFORM_IMAGE = 18;
 
+    public static double transformSize = 0;
+
     @FXML
     private Label dialog;
     @FXML
@@ -54,7 +56,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        if(this.isUser) {
+        if (this.isUser) {
             this.dialog.setTranslateX(-X_TRANSFORM_LABEL);
             this.myCircle.setTranslateX(-X_TRANSFORM_IMAGE);
             this.dialog.setAlignment(Pos.TOP_RIGHT);

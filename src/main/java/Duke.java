@@ -41,21 +41,22 @@ public class Duke {
         return taskList;
     }
 
-    private void setUp() {
-        ui.showWelcome();
+    public String setUp() {
 
         try {
             taskList = new TaskList(storage.loadTasks());
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeException e) {
             ui.showLoadingError();
             taskList = new TaskList();
         }
 
+        String listInfo;
         if (taskList.getTotalTask() > 0) {
-            ui.showFullList(taskList);
+            listInfo = ui.showFullList(taskList);
         } else {
-            ui.showNoTask();
+            listInfo = ui.showNoTask();
         }
+        return ui.showWelcome() + listInfo;
     }
 
     /**

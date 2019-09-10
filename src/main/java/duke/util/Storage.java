@@ -35,7 +35,7 @@ public class Storage {
      * @return a <code>TaskList</code> object containing all tasks loaded from the hard disk storage
      * @throws FileNotFoundException If the <code>Scanner</code> cannot find the file to read information from
      */
-    public List<Task> loadTasks() throws FileNotFoundException {
+    public List<Task> loadTasks() throws FileNotFoundException, DukeException {
         Scanner scanner = new Scanner(file);
         List<Task> taskList = new ArrayList<>();
         while (scanner.hasNext()) {

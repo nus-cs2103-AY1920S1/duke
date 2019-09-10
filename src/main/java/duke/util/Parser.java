@@ -17,8 +17,6 @@ import java.util.Set;
 public class Parser {
 
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HH:mm");
-    private static Set<String> existingCommands = new HashSet<>
-            (Arrays.asList("list", "bye", "done", "delete", "todo", "deadline", "event", "find"));
 
     /**
      * Parses a given string in a certain format to a <code>LocalDateTime</code> object. The string must be in the
@@ -52,62 +50,73 @@ public class Parser {
 
         String[] infos = info.trim().split("\\s+", 2);
         String primaryCommand = infos[0];
-        if (!existingCommands.contains(primaryCommand)) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
-        if (primaryCommand.equals("list")) {
+        switch (primaryCommand) {
+        case "list":
             return new ListCommand();
-        } else if (primaryCommand.equals("bye")) {
+        case "bye":
             return new ExitCommand();
-        } else {
+        case "done":
             if (infos.length < 2) {
                 throw new DukeException("☹ OOPS!!! No enough information entered");
             }
-            switch (primaryCommand) {
-            case "done":
-                try {
-                    int order = Integer.valueOf(infos[1]);
-                    return new DoneCommand(order - 1);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("☹ OOPS!!! The task number is not a number!");
-                }
-            case "delete":
-                try {
-                    int order = Integer.valueOf(infos[1]);
-                    return new DeleteCommand(order - 1);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("☹ OOPS!!! The task number is not a number!");
-                }
-            case "todo":
-                return new AddCommand("todo", infos[1]);
-            case "deadline":
-                if (!infos[1].contains(" /by ")) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline is not enough.");
-                }
-                try {
-                    String[] details = infos[1].split(" /by ");
-                    LocalDateTime due = Parser.parseDateTime(details[1]);
-                    return new AddCommand("deadline", details[0], due);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("The deadline is in invalid format");
-                }
-            case "event":
-                if (!infos[1].contains(" /at ")) {
-                    throw new DukeException("☹ OOPS!!! The description of a event is not enough.");
-                }
-                try {
-                    String[] details = infos[1].split(" /at ");
-                    String[] times = details[1].split("-");
-                    LocalDateTime startDateTime = Parser.parseDateTime(times[0]);
-                    LocalTime time = LocalTime.parse(times[1]);
-                    return new AddCommand("event", details[0], startDateTime, time);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("The duration is in invalid format");
-                }
-            case "find":
-                return new FindCommand(infos[1]);
+            try {
+                int order = Integer.valueOf(infos[1]);
+                return new DoneCommand(order - 1);
+            } catch (NumberFormatException e) {
+                throw new DukeException("☹ OOPS!!! The task number is not a number!");
             }
+        case "delete":
+            if (infos.length < 2) {
+                throw new DukeException("☹ OOPS!!! No enough information entered");
+            }
+            try {
+                int order = Integer.valueOf(infos[1]);
+                return new DeleteCommand(order - 1);
+            } catch (NumberFormatException e) {
+                throw new DukeException("☹ OOPS!!! The task number is not a number!");
+            }
+        case "todo":
+            if (infos.length < 2) {
+                throw new DukeException("☹ OOPS!!! No enough information entered");
+            }
+            return new TodoCommand(infos[1]);
+        case "deadline":
+            if (infos.length < 2) {
+                throw new DukeException("☹ OOPS!!! No enough information entered");
+            }
+            if (!infos[1].contains(" /by ")) {
+                throw new DukeException("☹ OOPS!!! The description of a deadline is not enough.");
+            }
+            try {
+                String[] details = infos[1].split(" /by ");
+                LocalDateTime due = Parser.parseDateTime(details[1]);
+                return new DeadlineCommand(details[0], due);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("The deadline is in invalid format");
+            }
+        case "event":
+            if (infos.length < 2) {
+                throw new DukeException("☹ OOPS!!! No enough information entered");
+            }
+            if (!infos[1].contains(" /at ")) {
+                throw new DukeException("☹ OOPS!!! The description of a event is not enough.");
+            }
+            try {
+                String[] details = infos[1].split(" /at ");
+                String[] times = details[1].split("-");
+                LocalDateTime startDateTime = Parser.parseDateTime(times[0]);
+                LocalTime time = LocalTime.parse(times[1]);
+                return new EventCommand(details[0], startDateTime, time);
+            } catch (DateTimeParseException e) {
+                throw new DukeException("The duration is in invalid format");
+            }
+        case "find":
+            return new FindCommand(infos[1]);
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+
     }
+
+
 }

@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 
 /**
- * This is one kind of <code>Task</code> to specify the details and due date for the item in the task list.
+ * This is one kind of <code>Task</code> that specifies the description and due date for the item in the task list.
  */
 public class Deadline extends Task {
 
@@ -43,15 +43,32 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + formatter.format(dueDateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + DATE_TIME_FORMATTER.format(dueDateTime) + ")";
     }
 
     /**
-     * {@inheritDoc} Compares two <code>Todo</code> objects by their descriptions, <code>isDone</code> status,
-     * <code>dueDateTime</code>.
+     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status.
+     * The comparison is mainly used for JUnit tests.
+     *
+     * @param obj  the object to be compared
+     * @return     <code>true</code> if the specifications for two tasks are all the same;
+     *             <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj) && obj instanceof Deadline && this.dueDateTime.equals(((Deadline) obj).dueDateTime);
+        //@@author ZhangHuafan-reused
+        //Reused from https://www.javaworld.com/article/3305792/comparing-java-objects-with-equals-and-hashcode.html
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        //@@author
+        Deadline another = (Deadline) obj;
+        boolean isSameDescription = this.description.equals(another.description);
+        boolean isSameStatus = this.isDone == another.isDone;
+        boolean isSameDueDateTime = this.dueDateTime.equals(another.dueDateTime);
+        return isSameDescription && isSameStatus && isSameDueDateTime;
     }
 }

@@ -2,6 +2,8 @@ package duke;
 
 import duke.command.Command;
 
+import java.io.File;
+
 /**
  * Class that facilitates transfer of user input to the system, and system output back to the user.
  */
@@ -14,10 +16,12 @@ public class Duke {
         String filePath = "data/tasks.txt";
         ui = new Ui();
         storage = new Storage(filePath);
+
+        assert new File(filePath).exists() == true;
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.getLoadingError();
+            ui.getLoadingError(); // return value not assigned
             tasks = new TaskList();
         }
     }

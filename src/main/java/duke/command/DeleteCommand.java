@@ -26,6 +26,7 @@ public class DeleteCommand extends InputCommand {
                 throw new IndexOutOfBoundsException();
             }
 
+            assert del - 1 <= taskList.getNumTasks();
             return ui.getDeletedTask(taskList.deleteTask(del - 1), taskList.getNumTasks());
         } catch (InputMismatchException e) {
             throw new DukeException("☹ OOPS!!! Please enter a single number.");

@@ -11,6 +11,7 @@ public abstract class DatedTask extends Task {
     DatedTask(String icon, String description, String dateTime) {
         super(icon, description);
         this.dateTime = dateTimeConvert(dateTime.trim());
+        assert dateTime.length() != 0;
     }
 
     private String dateTimeConvert(String s) {

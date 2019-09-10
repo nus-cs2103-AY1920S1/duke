@@ -28,6 +28,7 @@ public class DoneCommand extends ListCommand {
     @Override
     public CommandResult execute() {
         taskToSetAsDone = tasks.get(taskNumber - 1);
+        assert taskToSetAsDone != null;
         taskToSetAsDone.setAsDone();
         return new CommandResult(String.format(SUCCESS_MESSAGE, taskToSetAsDone.toString()));
     }

@@ -1,6 +1,7 @@
 package duke.lib.datahandling;
 
 import duke.lib.TaskList;
+import duke.lib.autocorrect.SpellCheck;
 import duke.lib.ui.UI;
 import duke.lib.common.DukeException;
 import duke.lib.common.Time;
@@ -18,6 +19,7 @@ public class Parser {
     private DataStorage storage;
     private TaskList taskList;
     private UI ui;
+    private SpellCheck spellCheck;
     private boolean isExit;
 
     /**
@@ -26,10 +28,11 @@ public class Parser {
      * @param taskList Tasklist used by the duke program
      * @param storage Storage of where the save file is located
      */
-    public Parser(TaskList taskList, DataStorage storage) {
+    public Parser(TaskList taskList, DataStorage storage) throws DukeException{
         this.storage = storage;
         this.taskList = taskList;
         this.ui = new UI();
+        this.spellCheck = new SpellCheck();
         this.isExit = false;
     }
 
@@ -154,7 +157,11 @@ public class Parser {
                     "Now you have " + taskList.getSize() + " tasks in the list.");
         }
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :(");
+            try {
+                return "Did you mean to say \"" + spellCheck.suggest(command) + "\" instead?";
+            } catch (DukeException e) {
+                throw new DukeException("I'm sorry, but I don't know what that means :(");
+            }
         }
     }
 

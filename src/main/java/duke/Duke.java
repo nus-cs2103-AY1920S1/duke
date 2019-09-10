@@ -36,11 +36,12 @@ public class Duke {
         try {
             tasks = new TaskList();
             tasks.store(storage.load());
+            parser = new Parser(tasks, storage);
         } catch (DukeException e) {
             tasks = new TaskList();
             throw e;
         }
-        parser = new Parser(tasks, storage);
+
     }
 
     /**

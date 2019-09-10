@@ -54,6 +54,5 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
             System.exit(0);
         }
-        userInput.clear();
     }
 }

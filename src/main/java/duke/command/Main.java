@@ -21,21 +21,30 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.show();
-            String welcomeMessage  = "Hello! I'm duke.Duke\nWhat can I do for you?";
-            VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog(welcomeMessage,
-                            new Image(this.getClass().getResourceAsStream("/images/DaDuke.png")))
-            );
+            Scene scene = loadLayout(stage);
+            addWelcomeMessage(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private Scene loadLayout(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+        AnchorPane ap = fxmlLoader.load();
+        Scene scene = new Scene(ap);
+        stage.setScene(scene);
+        fxmlLoader.<MainWindow>getController().setDuke(duke);
+        stage.show();
+        return scene;
+    }
+
+    private void addWelcomeMessage(Scene scene) {
+        String welcomeMessage  = "Hello! I'm duke.Duke\nWhat can I do for you?";
+        VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage,
+                        new Image(this.getClass().getResourceAsStream("/images/DaDuke.png")))
+        );
     }
 }
 

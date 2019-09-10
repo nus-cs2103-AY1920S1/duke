@@ -13,12 +13,18 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "[\u2713] " : "[\u2718] "); // returns check mark if done, cross symbol if undone
+    public Task(String description, boolean isDone) {
+        this.description = description;
+        this.isDone = isDone;
     }
 
-    public int getBoolean() {
-        return isDone? 1 : 0;
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718"); // returns check mark if done, cross symbol if undone
+    }
+
+    public String getBoolean() {
+        return (isDone ? "1" : "0");
     }
 
     public String getDescription() {
@@ -37,8 +43,7 @@ public class Task {
         return date;
     }
 
-    public void markAsDone(Task t) {
-
-        t.isDone = true;
+    public void markAsDone() {
+        this.isDone = true;
     }
 }

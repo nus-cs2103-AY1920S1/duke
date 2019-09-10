@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19c977ff-7be3-4c1e-8b17-f5b61f3fc9f6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Command.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CommandType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Parser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Storage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TaskList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/Deadline.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TaskList.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/main/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Todo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/main/Deadline.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/Deadline.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/main/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/Duke.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/main/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/Event.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/main/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/Task.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/main/Todo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/main/Todo.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,6 +24,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />

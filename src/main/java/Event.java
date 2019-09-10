@@ -37,12 +37,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getDateString() {
-        return this.date;
-    }
-
-    @Override
     public String toString() {
-        return "[" + this.getSymbol() + "]" + this.getStatusIcon() + this.getDescription() + " (at: " + myDate.format(myFormattedDate) + " " + myTime + ")";
+        return "[" + this.getSymbol() + "][" + this.getStatusIcon() + "] " + this.getDescription() + " (at: " + myDate.format(myFormattedDate) + " " + myTime + ")";
     }
 }

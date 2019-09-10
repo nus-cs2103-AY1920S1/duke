@@ -25,23 +25,13 @@ public class AddTodoCommand extends Command {
 
     @Override
     public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
-        if (super.command.length == 2 && !super.command[1].trim().equals("")) {
-//            try {
-                Task task = new Todo(super.command[1]);
-                list.addToList(task);
-//                storage.appendToFile(String.format("T | 0 | %s\n",
-//                        task.getDescription()));
-                //ui.addingMsg
-//                ui.printlnMsg(UiText.addedMsg(task));
-                return UiText.addedMsg(task);
-//            } catch (IOException e) {
-//                //error msg
-//                ui.printlnMsg(UiText.unableToWriteFileError());
-//                return UiText.unableToWriteFileError();
-//            }
-        } else {
+        if (super.command.length != 2) {
             throw new DukeException("\u1F65 OOPS!!! The description of a todo cannot be empty.");
         }
+        assert super.command.length == 2 && !super.command[1].trim().equals("");
+        Task task = new Todo(super.command[1]);
+        list.addToList(task);
+        return UiText.addedMsg(task);
     }
 
 }

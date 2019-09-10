@@ -15,38 +15,37 @@ public class DoneCommand extends Command {
     /**
      * Check is the user input format correct.
      * If is correct then mark the task as done and update the taskList and the storage
-     * @param list  TaskList
+     * @param tasks  TaskList
      * @param ui    UiText
      * @param storage   Storage
      * @throws DukeException invalid input
      */
 
     @Override
-    public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
-        if (super.command.length == 2) {
-            try {
-                int index = Integer.parseInt(super.command[1].trim());
-                if (index > list.getList().size()) {
-                    throw new DukeException("\u1F65 OOPS! the Number you\'ve key in is to big");
-                } else if (index < 1) {
-                    throw new DukeException("OOPS!! The number should be larger than 0");
-                } else {
-                   // try {
-                        Task tk = list.getList().get(index - 1);
-                        tk.markAsDone();
-                        //marked msg
-                        return UiText.markedMsg(tk);
-                        //storage.updateFile(list.getList());
-                   // } catch (IOException e) {
-                        //error msg
-                      //  System.out.println("Unable to write the file");
-                    //}
-                }
-            } catch (NumberFormatException ex) {
-                throw new DukeException("\u1F65 OOPS! Invalid number as input");
-            }
-        } else {
+    public String execute(TaskList tasks, UiText ui, Storage storage) throws DukeException {
+        if (super.command.length != 2) {
             throw new DukeException("\u1F65 OOPS!! The format of the input is wrong");
+        }
+        assert super.command.length == 2 : "command wrong format";
+        try {
+            int index = Integer.parseInt(super.command[1].trim());
+            if (index > tasks.getList().size()) {
+                throw new DukeException("\u1F65 OOPS! the Number you\'ve key in is to big");
+            } else if (index < 1) {
+                throw new DukeException("OOPS!! The number should be larger than 0");
+            } else {
+                assert index > 0 && index <= tasks.getList().size();
+                Task tk = tasks.getList().get(index - 1);
+                if (tk.getStatusBit() == 1) {
+                    throw new DukeException("The task was already completed!");
+                }
+                assert tk.getStatusBit() == 0 : "the task was already completed!";
+                tk.markAsDone();
+                //marked msg
+                return UiText.markedMsg(tk);
+            }
+        } catch (NumberFormatException ex) {
+            throw new DukeException("\u1F65 OOPS! Invalid number as input");
         }
     }
 }

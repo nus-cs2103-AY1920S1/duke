@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.dukeexception.DukeException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A taskList storage an ArrayList of task of the user.
@@ -18,15 +19,16 @@ public class TaskList {
 
     /**
      * Construct a TaskList from existing list.
-     * @param list  ArrayList of Task.
+     * @param tasks  ArrayList of Task.
      * @throws DukeException thrown when the arrayList is empty.
      */
-    public TaskList(ArrayList<Task> list) throws DukeException {
-        if (list.size() > 0) {
-            this.tasks = list;
-        } else {
+    public TaskList(ArrayList<Task> tasks) throws DukeException {
+        if (tasks.isEmpty()) {
             throw new DukeException("Empty");
         }
+        assert !tasks.isEmpty();
+        this.tasks = new ArrayList<>(tasks);
+        assert this.tasks.equals(tasks) && this.tasks != tasks ;
     }
 
     /**
@@ -35,6 +37,7 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
         ArrayList<Task> copy = new ArrayList<>(tasks);
+        assert copy.equals(tasks) && copy != tasks;
         return copy;
     }
 
@@ -43,6 +46,7 @@ public class TaskList {
     }
 
     public Task deleteFromList(int index) {
+        assert index < tasks.size() : index;
         Task tk = tasks.get(index);
         //removed msg
         tasks.remove(index);

@@ -22,10 +22,9 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
-        if (super.command.length == 1) {
-            return UiText.listingMsg(list.getList());
-        } else {
+        if (super.command.length != 1) {
             throw new DukeException("\u1F65 OOPS!! I\'m sorry, but I don\'t know what that means :-(");
         }
+        return UiText.listingMsg(list.getList());
     }
 }

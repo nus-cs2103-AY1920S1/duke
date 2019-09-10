@@ -18,7 +18,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private  UiText ui;
-
+    private boolean isExit;
     /**
      * constructor to create a Duke Chatbot
      *
@@ -32,17 +32,15 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            //ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
     public Duke() {
-        this(Storage.DEDAULT_PATH);
+        this(Storage.DEFAULT_PATH);
     }
 
     public String getResponse(String text) {
-        boolean isExit;
         try {
             Command c = Parser.parse(text);
             isExit = c.isExit();
@@ -52,14 +50,19 @@ public class Duke {
             return e.getMessage();
         }
     }
-
+    public String getDataFromStorage() {
+        try {
+            return storage.fileContents();
+        } catch (FileNotFoundException ex) {
+            return UiText.loadingError();
+        }
+    }
 
     private void run() {
         try {
-            ui.greeting();
-            storage.printFileContents();
+            ui.printlnMsg(storage.fileContents());
+            ui.printlnMsg(UiText.greeting());
             ui.printlnMsg(UiText.showLine());
-            boolean isExit = false;
             while (!isExit) {
                 try {
                     String fullCommand = ui.readCommand();
@@ -75,10 +78,13 @@ public class Duke {
                 }
             }
         } catch (FileNotFoundException e) {
-            ui.printlnMsg(UiText.LoadingError());
+            ui.printlnMsg(UiText.loadingError());
         }
     }
 
+    public boolean isExit() {
+        return isExit;
+    }
 
     public static void main(String[] args) {
         Duke duke = new Duke("src/main/data/duke.txt");

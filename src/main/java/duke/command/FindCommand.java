@@ -16,22 +16,20 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
-        if (super.command.length == 2) {
-            ArrayList<Task> result = new ArrayList<>();
-            for (Task task : list.getList()) {
-                String description = task.getDescription();
-                String searchedWord = super.command[1].trim();
-                if (description.contains(searchedWord)) {
-                    result.add(task);
-                }
-            }
-            if (result.size() > 0) {
-                return UiText.findMsg(result);
-            } else {
-                throw new DukeException("\u1F65 OOPS!! There is no match to your searching");
-            }
-        } else {
+        if (super.command.length != 2) {
             throw new DukeException("\u1F65 OOPS!! The format of the input is wrong");
         }
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task task : list.getList()) {
+            String description = task.getDescription();
+            String searchedWord = super.command[1].trim();
+            if (description.contains(searchedWord)) {
+                result.add(task);
+            }
+        }
+        if (result.isEmpty()) {
+            throw new DukeException("\u1F65 OOPS!! There is no match to your searching");
+        }
+        return UiText.findMsg(result);
     }
 }

@@ -23,6 +23,7 @@ public class Parser {
      * @return Command
      */
     public static Command parse(String input) {
+        assert input.trim().length() > 0 : input;
         String[] msg = input.trim().split(" ", 2);
         if (msg[0].equals("bye")) {
             return new ExitCommand(msg);

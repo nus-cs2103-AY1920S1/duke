@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
  * A prototype object representation of a user task with a description.
@@ -11,10 +12,18 @@ public abstract class Task {
 
     protected boolean isComplete;
     protected String description;
+    protected ArrayList<String> tags;
 
-    public Task(String description) {
+    /**
+     * Constructs a <code>Task</code> object with a given description and collection of <code>String</code> tags.
+     * 
+     * @param description <code>String</code> description of this <code>Task</code>.
+     * @param tags an <code>ArrayList</code> of <code>String</code> tags for this task.
+     */
+    public Task(String description, ArrayList<String> tags) {
         this.isComplete = false;
         this.description = description;
+        this.tags = tags;
     }
 
     /**

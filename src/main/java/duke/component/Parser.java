@@ -2,6 +2,7 @@ package duke.component;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import duke.command.Command;
@@ -136,7 +137,7 @@ public final class Parser {
 
         // Otherwise entire argument string is the description of the Todo task
         String todoDescription = command.split(" ", 2)[1];
-        Task newTask = new TodoTask(todoDescription);
+        Task newTask = new TodoTask(todoDescription, new ArrayList<String>());
         return Parser.parseAdd(command, newTask);
     }
 
@@ -157,7 +158,7 @@ public final class Parser {
         // Attempt to parse the date to construct the Deadline
         try {
             Date deadlineTime = Parser.DATE_PARSER.parse(args[1]);
-            Task newTask = new DeadlineTask(args[0], deadlineTime);
+            Task newTask = new DeadlineTask(args[0], deadlineTime, new ArrayList<String>());
             return Parser.parseAdd(command, newTask);
         } catch (ParseException e) {
             throw new DukeInvalidArgumentException("date | time", "Date", command);
@@ -181,7 +182,7 @@ public final class Parser {
         // Attempt to parse the date to construct the Event
         try {
             Date eventTime = Parser.DATE_PARSER.parse(args[1]);
-            Task newTask = new EventTask(args[0], eventTime);
+            Task newTask = new EventTask(args[0], eventTime, new ArrayList<String>());
             return Parser.parseAdd(command, newTask);
         } catch (ParseException e) {
             throw new DukeInvalidArgumentException("date | time", "Date", command);

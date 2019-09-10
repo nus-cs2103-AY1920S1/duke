@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -58,7 +59,7 @@ public class Storage {
             if (tokens.length != 3) {
                 throw new DukeInvalidEncodedTaskException(3, "TodoTask", tokens.length, encodedString);
             }
-            task = new TodoTask(tokens[2]);
+            task = new TodoTask(tokens[2], new ArrayList<String>());
             break;
         case "D":
             if (tokens.length != 4) {
@@ -66,7 +67,7 @@ public class Storage {
             }
             try {
                 Date eventTime = Storage.DATE_PARSER.parse(tokens[3]);
-                task = new DeadlineTask(tokens[2], eventTime);
+                task = new DeadlineTask(tokens[2], eventTime, new ArrayList<String>());
             } catch (ParseException e) {
                 throw new DukeInvalidEncodedTaskException(4, "DeadlineTask", 4, encodedString);
             }
@@ -77,7 +78,7 @@ public class Storage {
             }
             try {
                 Date eventTime = Storage.DATE_PARSER.parse(tokens[3]);
-                task = new EventTask(tokens[2], eventTime);
+                task = new EventTask(tokens[2], eventTime, new ArrayList<String>());
             } catch (ParseException e) {
                 throw new DukeInvalidEncodedTaskException(4, "EventTask", 4, encodedString);
             }

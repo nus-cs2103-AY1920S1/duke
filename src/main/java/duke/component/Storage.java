@@ -51,9 +51,12 @@ public class Storage {
     }
 
     private static ArrayList<String> reconstructTags(String tagString) {
+        if (tagString.equals("")) {
+            return new ArrayList<String>();
+        }
+
         ArrayList<String> tags = new ArrayList<String>();
         Collections.addAll(tags, tagString.replace("#", "").split(" "));
-        
         return tags;
     }
 

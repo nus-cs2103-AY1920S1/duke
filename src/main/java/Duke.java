@@ -37,6 +37,13 @@ public class Duke {
         // Currently hardcoded.
         ui = new Ui();
         storage = new Storage(filePath);
+        if (!storage.isValidFilePath()) {
+            try {
+                storage = new Storage();
+            } catch (DukeException e) {
+                ui.dukeEcho((e.getMessage()));
+            }
+        }
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

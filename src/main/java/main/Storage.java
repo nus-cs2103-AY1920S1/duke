@@ -19,14 +19,52 @@ import java.util.Scanner;
 public class Storage {
 
     private String filePath;
+    private boolean isValidFilePath;
 
     /**
-     * Creates a new Storage object.
+     * Creates a new Storage object which reads and writes to file at filepath.
+     * If file path does not exist, a default task list would be created as follows:
+     * [root]/data/tasks.txt
      *
      * @param filePath File path to read from and to write to.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath){
         this.filePath = filePath;
+        File file = new File(filePath);
+        isValidFilePath = file.exists() ? true : false;
+    }
+
+    public boolean isValidFilePath() {
+        return isValidFilePath;
+    }
+
+    public Storage() throws DukeException {
+        try {
+            filePath = createNewFile();
+        } catch (IOException e) {
+            isValidFilePath = false;
+            throw new DukeException("Data file cannot be created at data/tasks.txt");
+        }
+    }
+
+    /**
+     * Creates a new file at [root]/data/tasks.txt to store the task list.
+     *
+     * @throws DukeException if file cannot be created
+     */
+    public String createNewFile() throws IOException {
+        String root = new File(System.getProperty("user.dir")).getParentFile().getPath();
+        File dataDir = new File(root + "/data");
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+        File taskListFile = new File(dataDir + "/data.txt");
+        boolean isFileCreated = taskListFile.createNewFile();
+        if (isFileCreated) {
+            return taskListFile.toString();
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -36,6 +74,9 @@ public class Storage {
      * @throws DukeException If file does not exist
      */
     public ArrayList<Task> load() throws DukeException {
+        if (!isValidFilePath) {
+            return new ArrayList<>();
+        }
         File f;
         Scanner sc;
         try {
@@ -120,6 +161,9 @@ public class Storage {
      * @throws DukeException If a file writing error arises
      */
     public void save(TaskList tasks) throws DukeException {
+        if (!isValidFilePath) {
+            return;
+        }
         try {
             new FileWriter(filePath); //create new file
             for (Task task : tasks.getTasks()) {
@@ -142,6 +186,9 @@ public class Storage {
      * @throws DukeException if file is not found.
      */
     public void clearAll() throws DukeException {
+        if (!isValidFilePath) {
+            return;
+        }
         try {
             new FileWriter(filePath); //create new file
         } catch (IOException e) {

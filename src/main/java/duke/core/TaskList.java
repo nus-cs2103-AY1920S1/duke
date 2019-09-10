@@ -48,9 +48,13 @@ public class TaskList {
      * @param i The index of the <code>Task</code>.
      * @return The <code>Task</code> in the list with this specific index.
      */
-    public Task getTask(int i) {
-        assert i >= 0 : "TaskList index cannot be negative";
-        return tasks.get(i);
+    public Task getTask(int i) throws DukeException {
+        assert i >= 0 : "Task index cannot be negative";
+        try {
+            return tasks.get(i);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(" \u2639  OOPS!!! The task does not exist.");
+        }
     }
 
     /**
@@ -68,7 +72,7 @@ public class TaskList {
      * @param i The index of the <code>Task</code> to be deleted.
      */
     public void removeTask(int i) {
-        assert i >= 0 : "TaskList index cannot be negative";
+        assert i >= 0 : "Task index cannot be negative";
         tasks.remove(i);
     }
 

@@ -75,6 +75,19 @@ public class Parser {
         }
     }
 
+    private static boolean isValidTaskId(String s) {
+        try {
+            int taskId = Integer.parseInt(s);
+            if (taskId < 1) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     /**
      * Checks for illegal user input and throws exceptions accordingly.
      *
@@ -95,8 +108,8 @@ public class Parser {
                                 || isDeleteCommand || isListCommand || isExitCommand || isFindCommand;
         boolean isAddCommand = isTodoCommand || isDeadlineCommand || isEventCommand;
         boolean isMissingDetail = words.length < 2;
-        boolean isMissingTime = findIdx(words, "/by") == -1 || findIdx(words, "/at") == -1;
-        boolean hasInvalidTaskId = words.length > 1 && Integer.parseInt(words[1]) < 1;
+        boolean DeadlineMissingTime = isDeadlineCommand && findIdx(words, "/by") == -1;
+        boolean EventMissingTime = isEventCommand && findIdx(words, "/at") == -1;
 
         if (!isValidCommand) {
             throw new DukeException(" \u2639  OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -104,17 +117,17 @@ public class Parser {
         if (isAddCommand && isMissingDetail) {
             throw new DukeException(" \u2639  OOPS!!! The description of a " + fw + " cannot be empty.");
         }
-        if ((isDeadlineCommand || isEventCommand) && isMissingTime) {
+        if (DeadlineMissingTime || EventMissingTime) {
             throw new DukeException(" \u2639  OOPS!!! The time of a " + fw + " cannot be empty.");
         }
         if ((isDoneCommand || isDeleteCommand) && isMissingDetail) {
-            throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be empty.");
+            throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " command cannot be empty.");
         }
-        if ((isDoneCommand || isDeleteCommand) && hasInvalidTaskId) {
-            throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be less than 1.");
+        if ((isDoneCommand || isDeleteCommand) && !isValidTaskId(words[1])) {
+            throw new DukeException(" \u2639  OOPS!!! The task number of the " + fw + " command is invalid.");
         }
         if (isFindCommand && isMissingDetail) {
-            throw new DukeException(" \u2639  OOPS!!! The keyword of a " + fw + " cannot be empty.");
+            throw new DukeException(" \u2639  OOPS!!! The keyword of a " + fw + " command cannot be empty.");
         }
     }
 

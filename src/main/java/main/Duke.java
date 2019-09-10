@@ -32,7 +32,7 @@ public class Duke {
 
     public static void main(String[] args) {
         Ui ui = new Ui();
-        System.out.println(ui.printMessage("Hello! I'm Duke\n     What can i do for you?"));
+        System.out.println(ui.printMessage("Hello! I'm Duke\nWhat can i do for you?"));
 
         try {
             Duke duke = new Duke();

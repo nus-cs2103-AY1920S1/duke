@@ -3,7 +3,6 @@ package task;
 import main.TaskList;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * Represents the task event.
@@ -23,6 +22,6 @@ public class Events extends DateTask {
 
     @Override
     public String toString() {
-        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + " (at: " + TaskList.localDateTimeToString(getDate())+ ")";
+        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + " (at: " + TaskList.localDateTimeToString(getDate()) + ")";
     }
 }

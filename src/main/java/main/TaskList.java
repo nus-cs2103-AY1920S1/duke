@@ -6,10 +6,9 @@ import task.Task;
 import task.ToDos;
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Represents a list of Task.
@@ -92,7 +91,7 @@ public class TaskList {
      * @param dateTime LocalDateTime object.
      * @return String representation of the LocalDateTime object.
      */
-    public static String localDateTimeToString(LocalDateTime dateTime){
+    public static String localDateTimeToString(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         return dateTime.format(formatter);
     }

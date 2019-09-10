@@ -52,11 +52,7 @@ public class Storage {
             String input = s.nextLine();
             String[] inputArr = input.split(" \\| ");
             boolean done;
-            if (inputArr[1].equals("1")) {
-                done = true;
-            } else {
-                done = false;
-            }
+            done = inputArr[1].equals("1");
 
             switch (inputArr[0]) {
             case "T":

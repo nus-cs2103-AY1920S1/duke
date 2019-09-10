@@ -13,7 +13,7 @@ public class DateTask extends Task {
      * Creates the DateTask object
      *
      * @param description Task message.
-     * @param date Date for task.
+     * @param date        Date for task.
      * @param isDone      Marks the task as done nor not done.
      */
     DateTask(String description, LocalDateTime date, boolean isDone) {

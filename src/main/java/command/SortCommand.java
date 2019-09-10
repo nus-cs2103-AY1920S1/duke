@@ -11,7 +11,7 @@ import java.util.Collections;
 /**
  * Represents the command to sort the current list from.
  */
-public class SortCommand extends Command{
+public class SortCommand extends Command {
 
     /**
      * Sorts the file in descending order by date. Todos have the lowest priority and are sorted alphabetically.
@@ -19,7 +19,6 @@ public class SortCommand extends Command{
      * @param task    The working TaskList object.
      * @param ui      The working Ui object.
      * @param storage The working storage object.
-     *
      * @return String stating List is sorted.
      */
     public String execute(TaskList task, Ui ui, Storage storage) throws IOException {

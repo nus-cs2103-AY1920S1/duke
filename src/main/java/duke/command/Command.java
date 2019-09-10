@@ -5,7 +5,7 @@ import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
 /**
- * The Command class is an abstract class for all valid commands.
+ * The Command class is an abstract class for all valid commands. All valid commands inherits from this class.
  */
 
 public abstract class Command {

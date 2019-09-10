@@ -9,8 +9,6 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.tasklist.TaskList;
 
-import java.util.Scanner;
-
 /**
  * Deals with interactions with the user.
  */
@@ -112,6 +110,7 @@ public class Ui {
         if (inputStringArr.length > 1) {
             String taskName = ((input.split(" ", 2))[1]).strip();
             Todo t = new Todo(taskName);
+            assert t != null : "t should not be null";
             tasks.add(t);
             result += "Got it. I've added this task:\n" + "       [T]" + "[ ]" + ' ' + t + '\n'
                     + "     Now you have " + tasks.size() + " tasks in the list.";
@@ -135,6 +134,7 @@ public class Ui {
         String date = ((separateTaskDate[1].split(" ", 2))[1]).strip();
         DateTime dt = new DateTime(date);
         Deadline d = new Deadline(taskName, dt.toString());
+        assert d != null : "d should not be null";
         tasks.add(d);
         result += "Got it. I've added this task:\n" + "       [D][ ] " + d + " (by: " + dt + ")\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";
@@ -155,6 +155,7 @@ public class Ui {
         String date = ((separateTaskDate[1].split(" ", 2))[1]).strip();
         DateTime dt = new DateTime(date);
         Event e = new Event(taskName, dt.toString());
+        assert e != null : "e should not be null";
         tasks.add(e);
         result += "Got it. I've added this task: \n" + "       [E][ ] " + e + " (at: " + dt + ")\n"
                 + "     Now you have " + tasks.size() + " tasks in the list.";
@@ -217,12 +218,5 @@ public class Ui {
             }
         }
         return result;
-    }
-
-    /**
-     * This method prints the divider for the application for decorative and clarity purposes.
-     */
-    public static void showLine() {
-        System.out.println("    ____________________________________________________________");
     }
 }

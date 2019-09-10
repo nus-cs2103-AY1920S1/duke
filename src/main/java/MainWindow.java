@@ -1,8 +1,4 @@
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,8 +18,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -52,7 +46,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImg)
         );
         userInput.clear();
-        // when exit command is issued, exit program after 2 seconds
+        // Exits program after 2 seconds when exit command is issued
         if (input.equals("bye")) {
             Timer tm = new Timer();
             tm.schedule(new TimerTask() {

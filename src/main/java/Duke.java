@@ -5,6 +5,7 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 import java.io.FileNotFoundException;
+import java.util.TimerTask;
 
 /**
  * This is the main class of the Duke application. The Duke application is an interface of a
@@ -43,10 +44,6 @@ public class Duke {
         }
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

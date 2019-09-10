@@ -26,19 +26,20 @@ public class DoneCommand extends Command {
      * @param tasks the object that contains the current list of tasks
      * @param ui to give feedback to the user
      * @param storage enables writing to file
+     * @return String feedback to user
      * @throws DukeException if there are any problems writing to file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String str;
         if (taskId > tasks.getSize()) {
             throw new DukeException("Please choose a task within the list");
         } else {
             Task doneTask = tasks.getTask(taskId - 1);
             doneTask.markAsDone();
+            storage.writeToFile();
             str = "Nice! I've marked this task as done:\n" + " " + doneTask.toString();
-            ui.addBorder(str);
+            return ui.addBorder(str);
         }
-        storage.writeToFile();
     }
 }

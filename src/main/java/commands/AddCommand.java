@@ -26,15 +26,16 @@ public class AddCommand extends Command {
      * @param tasks the object that contains the current list of tasks
      * @param ui to give feedback to the user
      * @param storage enables writing to file
+     * @return String feedback to user
      * @throws DukeException if there are any problems writing to file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(this.task);
+        storage.writeToFile();
         int taskNum = tasks.getSize();
         String feedback = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + taskNum
                 + " tasks in the list.";
-        ui.addBorder(feedback);
-        storage.writeToFile();
+        return ui.addBorder(feedback);
     }
 }

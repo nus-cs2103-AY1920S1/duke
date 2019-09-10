@@ -24,9 +24,10 @@ import java.util.Date;
 public class Parser {
     /**
      * Parses input text into respective command representation.
+     *
      * @param input User input string.
      * @return Appropriate command representation.
-     * @throws UnsupportedOperationException If command not understood.
+     * @throws UnsupportedOperationException  If command not understood.
      * @throws ArrayIndexOutOfBoundsException If Event/Deadline details left blank.
      */
     public static Command parse(String input) throws UnsupportedOperationException, ArrayIndexOutOfBoundsException {
@@ -56,8 +57,9 @@ public class Parser {
 
     /**
      * Returns the index of the list to be managed.
+     *
      * @param input User command
-     * @param size Size of task list
+     * @param size  Size of task list
      * @return User value specified
      * @throws NumberFormatException If number out of range or invalid input
      */
@@ -71,6 +73,7 @@ public class Parser {
 
     /**
      * Processes Input Event/Deadline to Description & Details.
+     *
      * @param input Task String (without command)
      * @return Array. Index 0 = Description. Index 1  = Details
      * @throws ArrayIndexOutOfBoundsException Command missing details
@@ -84,6 +87,7 @@ public class Parser {
 
     /**
      * Returns java date object from input string.
+     *
      * @param details String representation of date.
      * @return Date object.
      * @throws ParseException If string representation not in proper format.
@@ -95,6 +99,7 @@ public class Parser {
 
     /**
      * Creates Task from stored task data.
+     *
      * @param code Stored task data.
      * @return Appropriate Task.
      * @throws ParseException Error in stored date data.

@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Loads all data from file into task list.
+     *
      * @param ui User-Interface for display/messages.
      * @return TaskList for Duke.
      */
@@ -48,6 +49,7 @@ public class Storage {
 
     /**
      * Writes all data from task list to file.
+     *
      * @param taskList from Duke.
      */
     public void writeTasks(TaskList taskList) {
@@ -56,12 +58,15 @@ public class Storage {
                 Files.delete(Paths.get(filePath));
             } else if (!taskList.isEmpty()) {
                 StringBuilder allTasks = new StringBuilder();
-                for (int i = 0; i < taskList.size(); i++) {
-                    allTasks.append(taskList.get(i).store()).append(System.lineSeparator());
+                for (duke.task.Task task : taskList) {
+                    allTasks.append(task.store()).append(System.lineSeparator());
                 }
                 if (!file.exists()) {
-                    file.getParentFile().mkdirs();
-                    file.createNewFile();
+                    if (!file.getParentFile().mkdirs()) {
+                        if (!file.createNewFile()) {
+                            throw new IOException("Error creating file");
+                        }
+                    }
                 }
                 FileWriter fileWriter = new FileWriter(file);
                 fileWriter.write(allTasks.toString());

@@ -20,8 +20,8 @@ class EventTest {
     @Test
     public void eventToFileFormat_validInput_success() {
         try {
-            Event event = new Event("read book", "2/12/2019 1800");
-            assertEquals("E|0|read book|2/12/2019 1800", event.format());
+            Event event = new Event("read book", "2/12/2019 18:00");
+            assertEquals("E|0|read book|2/12/2019 18:00", event.format());
         } catch (ParseException e) {
             e.printStackTrace();
         }

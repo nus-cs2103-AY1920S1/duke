@@ -13,6 +13,7 @@ public class TaskRepo implements IRepository<Task> {
     private List<Task> tasks;
 
     public TaskRepo(ITaskStorage storage) throws DukeIoException {
+        assert storage != null;
         this.storage = storage;
         this.tasks = storage.read();
     }
@@ -41,12 +42,14 @@ public class TaskRepo implements IRepository<Task> {
 
     @Override
     public void create(Task entity) throws DukeIoException {
+        assert entity != null;
         tasks.add(entity);
         storage.write(tasks);
     }
 
     @Override
     public void update(int id, Task entity) throws DukeIoException {
+        assert entity != null;
         tasks.set(id, entity);
         storage.write(tasks);
     }

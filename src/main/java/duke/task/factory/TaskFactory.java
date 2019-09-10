@@ -20,9 +20,10 @@ import java.util.regex.Pattern;
 public class TaskFactory {
     private final String dateTimeRegex =
             "(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})\\s([0-9]{4}))";
-    private static final String INVALID_ARGUMENTS_MESSAGE = "☹ OOPS!!! Your task arguments are invalid! :-(";
 
-
+    private static final String INVALID_ARGUMENTS_ERROR_MESSAGE = "☹ OOPS!!! Your task arguments are invalid! :-(";
+    private static final String UNKNOWN_ERROR_MESSAGE = "☹ OOPS!!! Something went wrong while creating your task! :-(";
+    private static final String EMPTY_DETAILS_ERROR_MESSAGE = "☹ OOPS!!! Your task description cannot be empty! :-(";
 
     public Optional<Task> getTask(String input) throws TaskCreationException {
         // gets first word of input
@@ -59,7 +60,7 @@ public class TaskFactory {
             return Optional.of(result);
 
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new TaskCreationException("");
+            throw new TaskCreationException(UNKNOWN_ERROR_MESSAGE);
         }
     }
 
@@ -72,6 +73,10 @@ public class TaskFactory {
         try {
             // get description
             String description = arguments.replaceAll(dateTimeRegex, "").trim();
+            if (description.equals("")) {
+                throw new TaskCreationException(EMPTY_DETAILS_ERROR_MESSAGE);
+            }
+
             argsList.add(description);
 
             // get datetime arguments
@@ -79,7 +84,7 @@ public class TaskFactory {
             argsList.addAll(times);
 
         } catch (UnknownDateTimeException e) {
-            throw new TaskCreationException(INVALID_ARGUMENTS_MESSAGE);
+            throw new TaskCreationException(INVALID_ARGUMENTS_ERROR_MESSAGE);
         }
 
         return argsList;
@@ -108,7 +113,7 @@ public class TaskFactory {
     private Object[] reorderArgsList(Class<?>[] parameters, List<Object> arguments) throws TaskCreationException {
         // if arguments length and parameters length different, throw exception
         if (parameters.length != arguments.size()) {
-            throw new TaskCreationException(INVALID_ARGUMENTS_MESSAGE);
+            throw new TaskCreationException(INVALID_ARGUMENTS_ERROR_MESSAGE);
         }
 
         // returns sorted arguments list

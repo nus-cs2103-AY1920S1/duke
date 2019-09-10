@@ -32,8 +32,8 @@ public class TimeFrame implements Serializable {
             // task done by a particular time
             return String.format("by: %s", DateTime.getString(end));
         } else if (end == null) {
-            //task done from a particular time
-            return String.format("from: %s", DateTime.getString(start));
+            //task done after a particular time
+            return String.format("after: %s", DateTime.getString(start));
         } else if (start.equals(end)) {
             //  task done at a particular time
             return String.format("at: %s", DateTime.getString(start));

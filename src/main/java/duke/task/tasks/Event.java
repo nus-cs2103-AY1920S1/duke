@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * </p>
  */
 public class Event extends Task {
-    public Event(String description, LocalDateTime at, boolean isDone, boolean isRecurring) throws TaskCreationException {
-        super(TaskType.EVENT, description, new TimeFrame(at, at), isDone, isRecurring);
+    public Event(String details, LocalDateTime at, boolean isDone, boolean isRecurring) {
+        super(TaskType.EVENT, details, new TimeFrame(at, at), isDone, isRecurring);
     }
 }

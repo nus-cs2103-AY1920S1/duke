@@ -16,7 +16,7 @@ public class ToDo extends Task {
      * ToDo constructor.
      * </p>
      */
-    public ToDo(String description, boolean isDone, boolean isRecurring) throws TaskCreationException {
-        super(TaskType.TODO, description, new TimeFrame(null, null), isDone, isRecurring);
+    public ToDo(String details, boolean isDone, boolean isRecurring) {
+        super(TaskType.TODO, details, new TimeFrame(null, null), isDone, isRecurring);
     }
 }

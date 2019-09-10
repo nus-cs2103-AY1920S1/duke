@@ -1,7 +1,8 @@
 package duke.command.command;
 
 import duke.command.Command;
-import duke.task.TasksController;
+import duke.command.CommandType;
+import error.command.CommandCreationException;
 import error.ui.UiException;
 
 /***
@@ -9,17 +10,14 @@ import error.ui.UiException;
  * Command to list all tasks in memory.
  * </p>
  */
-public class ListCommand implements Command {
-    private TasksController tasksController;
+public class ListCommand extends Command {
+    private static final String INVALID_ARGUMENT_MESSAGE = "☹ OOPS!!! List command doesn't accept arguments! :-(";
 
-    /***
-     * <p>
-     * ListCommandConstructor.
-     * </p>
-     * @param tasksController controller for duke.task list from which tasks are listed.
-     */
-    public ListCommand(TasksController tasksController) {
-        this.tasksController = tasksController;
+    public ListCommand(String s) throws CommandCreationException {
+        super(CommandType.LIST);
+        if (!s.equals("")) {
+            throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
+        }
     }
 
     /***

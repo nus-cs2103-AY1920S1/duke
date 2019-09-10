@@ -1,9 +1,10 @@
 package duke.task.factory;
 
 import duke.task.Task;
-import duke.task.TaskType;
+import duke.task.tasks.entities.TaskType;
 import error.task.TaskCreationException;
-import error.task.UnknownDateTimeException;
+import error.datetime.UnknownDateTimeException;
+import util.CommandUtils;
 import util.DateTime;
 
 import java.lang.reflect.Constructor;
@@ -19,11 +20,13 @@ import java.util.regex.Pattern;
 public class TaskFactory {
     private final String dateTimeRegex =
             "(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})\\s([0-9]{4}))";
+    private static final String INVALID_ARGUMENTS_MESSAGE = "☹ OOPS!!! Your task arguments are invalid! :-(";
 
 
-    public Task getTask(String command) throws TaskCreationException {
-        // gets first word of command
-        String keyword = command.split(" ", 2)[0];
+
+    public Optional<Task> getTask(String input) throws TaskCreationException {
+        // gets first word of input
+        String keyword = CommandUtils.getCommand(input);
 
         // scans task types to find corresponding keyword
         Optional<Class<? extends Task>> taskOptional = Arrays.stream(TaskType.values())
@@ -32,30 +35,37 @@ public class TaskFactory {
                 .map(t1 -> t1.task);
 
         if (taskOptional.isEmpty()) {
-            throw new TaskCreationException();
+            return Optional.empty();
         }
 
         // get constructor and parameters type of particular task
         Class<?> task = taskOptional.get();
-        Constructor<?> constructor = taskOptional.get().getConstructors()[0];
+        Constructor<?> constructor = task.getConstructors()[0];
         Class<?>[] parameters = constructor.getParameterTypes();
 
         // parse arguments
-        List<Object> argsList = getArguments(command);
+        List<Object> argsList = getArguments(input);
+
+        // for now tasks are always not done and not recurring when created
         argsList.add(false);
         argsList.add(false);
 
         try {
+
             Object[] argsArray = reorderArgsList(parameters, argsList);
-            return (Task) constructor.newInstance(argsArray);
+
+            // try to instantiate task with arguments
+            Task result = (Task) constructor.newInstance(argsArray);
+            return Optional.of(result);
+
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new TaskCreationException();
+            throw new TaskCreationException("");
         }
     }
 
-    private List<Object> getArguments(String command) throws TaskCreationException {
+    private List<Object> getArguments(String input) throws TaskCreationException {
         // gets arguments
-        String arguments = command.split(" ", 2)[1];
+        String arguments = CommandUtils.getArguments(input);
 
         List<Object> argsList = new ArrayList<>();
 
@@ -70,7 +80,7 @@ public class TaskFactory {
             argsList.addAll(times);
 
         } catch (UnknownDateTimeException | AssertionError e) {
-            throw new TaskCreationException();
+            throw new TaskCreationException(INVALID_ARGUMENTS_MESSAGE);
         }
 
         return argsList;
@@ -97,7 +107,7 @@ public class TaskFactory {
     private Object[] reorderArgsList(Class<?>[] parameters, List<Object> arguments) throws TaskCreationException {
         // if arguments length and parameters length different, throw exception
         if (parameters.length != arguments.size()) {
-            throw new TaskCreationException();
+            throw new TaskCreationException(INVALID_ARGUMENTS_MESSAGE);
         }
 
         // returns sorted arguments list

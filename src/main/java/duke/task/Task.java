@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.task.TaskType;
+import duke.task.tasks.entities.TaskType;
 import duke.task.tasks.entities.TimeFrame;
 import error.task.TaskCreationException;
 
@@ -21,9 +21,16 @@ public abstract class Task implements Serializable {
     private boolean isDone;
     private final boolean isRecurring;
 
+    private static final String EMPTY_DESCRIPTION_MESSAGE = "☹ OOPS!!! Your task description cannot be empty! :-(";
+
     public Task(TaskType type, String details, TimeFrame timeFrame, boolean isDone, boolean isRecurring) throws TaskCreationException {
         if (type.task != getClass()) {
-            throw new TaskCreationException();
+            System.out.println("FATAL: TaskType does not correspond to Task.");
+            System.exit(1);
+        }
+
+        if (details.equals("")) {
+            throw new TaskCreationException(EMPTY_DESCRIPTION_MESSAGE);
         }
 
         this.type = type;

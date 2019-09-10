@@ -1,39 +1,27 @@
 package duke.command.command;
 
 import duke.command.Command;
-import duke.task.TasksController;
+import duke.command.CommandType;
+import error.command.CommandCreationException;
 import error.ui.UiException;
 
-/***
- * <p>
- * Command to delete tasks from memory.
- * </p>
- */
-public class DeleteCommand implements Command {
-    private TasksController tasksController;
+public class DeleteCommand extends Command {
     private int deletedTaskIndex;
 
-    /***
-     * <p>
-     * Delete duke.command constructor.
-     * </p>
-     * @param tasksController controller for duke.task list from which duke.task is deleted.
-     * @param argument index of duke.task to be deleted.
-     */
-    public DeleteCommand(TasksController tasksController, String argument) {
-        this.tasksController = tasksController;
-        deletedTaskIndex = Integer.valueOf(argument) - 1;
+    private static final String INVALID_INDEX_MESSAGE = "☹ OOPS!!! PLease enter a valid index! :-(";
+
+    public DeleteCommand(String argument) throws CommandCreationException {
+        super(CommandType.DELETE);
+
+        try {
+            deletedTaskIndex = Integer.parseInt(argument) - 1;
+        } catch (NumberFormatException e) {
+            throw new CommandCreationException(INVALID_INDEX_MESSAGE);
+        }
     }
 
-    /***
-     * <p>
-     * Deletes duke.task.
-     * </p>
-     * @return new ListenCommand.
-     */
     @Override
     public void execute() throws UiException {
         tasksController.deleteTask(deletedTaskIndex);
     }
-
 }

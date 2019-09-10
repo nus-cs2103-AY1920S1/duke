@@ -1,18 +1,26 @@
 package duke.command;
 
+import duke.task.TasksController;
+import error.command.CommandCreationException;
 import error.ui.UiException;
+import ui.UiController;
 
-/***
- * <p>
- * Command interface to create classes in charge of executing specific actions in the program.
- * </p>
- */
-public interface Command {
-    /***
-     * <p>
-     * Runs execution code for a specific action.
-     * </p>
-     * @return following duke.command if available.
-     */
-    public void execute() throws UiException;
+public abstract class Command {
+    private CommandType type;
+    protected UiController ui;
+    protected TasksController tasksController;
+
+    protected Command(CommandType type) throws CommandCreationException {
+        this.type = type;
+    }
+
+    public void setUi(UiController ui) {
+        this.ui = ui;
+    }
+
+    public void setTasksController(TasksController controller) {
+        this.tasksController = controller;
+    }
+
+    public abstract void execute() throws UiException;
 }

@@ -1,4 +1,4 @@
-package duke.command.factory;
+package util;
 
 public class CommandUtils {
     public static String getCommand(String userInput) {

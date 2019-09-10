@@ -2,9 +2,12 @@ package duke.task.tasks.entities;
 
 import util.DateTime;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class TimeFrame {
+public class TimeFrame implements Serializable {
+    private static final long serialVersionUID = 6529685098267111111L;
+
     private LocalDateTime start;
     private LocalDateTime end;
 

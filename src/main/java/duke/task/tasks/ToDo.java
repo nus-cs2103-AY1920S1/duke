@@ -1,7 +1,7 @@
 package duke.task.tasks;
 
 import duke.task.Task;
-import duke.task.TaskType;
+import duke.task.tasks.entities.TaskType;
 import duke.task.tasks.entities.TimeFrame;
 import error.task.TaskCreationException;
 

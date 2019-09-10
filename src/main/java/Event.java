@@ -6,7 +6,9 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
+        assert(!at.isEmpty());
         this.at = Task.parseDate(at);
+
     }
 
     @Override

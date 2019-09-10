@@ -5,6 +5,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
+        assert(!by.isEmpty());
         this.by = Task.parseDate(by);
     }
 

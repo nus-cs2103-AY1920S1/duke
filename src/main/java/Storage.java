@@ -49,6 +49,29 @@ public class Storage {
         }
         writer.close();
     }
+    public void update(ArrayList<Task> list) throws IOException {
+        BufferedWriter bufferWriter = Files.newBufferedWriter(Paths.get(filename));
+        int counter = 0;
+        while(counter < list.size()) {
+            Task tsk = list.get(counter);
+            String status = tsk.getIsDone() ? "1" : "0";
+            try{
+                if(tsk instanceof Todo) {
+                    bufferWriter.write("T, " + status + ", " + tsk.getDescription() + "\n");
+                    counter++;
+                } else if(tsk instanceof Deadline) {
+                    bufferWriter.write("D, " + status + ", " + tsk.getDescription() + ", " + ((Deadline) tsk).getBy() +  "\n");
+                    counter++;
+                } else if (tsk instanceof Event) {
+                    bufferWriter.write("E, " + status + ", " + tsk.getDescription() + ", " + ((Event) tsk).getAt() +  "\n");
+                    counter++;
+                }
+            } catch(Exception ex) {
+                System.out.println("Error in file handling");
+            }
+        }
+        bufferWriter.close();
+    }
     /*public void printToOutput(TaskList tasks) throws FileNotFoundException {
         PrintStream outputTo = new PrintStream(filename);
         outputTo.println(tasks.printForOutput());

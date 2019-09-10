@@ -43,5 +43,8 @@ public class TaskList {
     public Task getLast() {
         return list.get(list.size() -1);
     }
+    public ArrayList<Task> getList() {
+        return list;
+    }
 
 }

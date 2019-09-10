@@ -1,4 +1,10 @@
 E, 0, return, Mon
-T, 0, return
 T, 0, hello
 T, 0, return book
+T, 0, return myself
+T, 0, return myself
+T, 0, return myself
+T, 0, return myself
+T, 0, return myself
+T, 0, arjavi is awesome
+E, 1, hello Arjavi, Monday

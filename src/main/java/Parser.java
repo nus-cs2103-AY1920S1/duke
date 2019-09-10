@@ -12,14 +12,13 @@ public class Parser {
     }
 
     public void read (String command, Scanner sc) {
-        System.out.println(command.equals("deadline"));
         if (command.equals("done")) {
-
             try {
                 int num = sc.nextInt();
                 tasks.taskDone(num-1);
+                System.out.println("IsDone?" + tasks.getList().get(num-1).getIsDone());
                 System.out.println("Nice! I've marked this task as done: \n" + tasks.taskPrint(num-1));
-                storage.append(tasks.getLast());
+                storage.update(tasks.getList());
             } catch(Exception e) {
                 System.out.println("Error, you have entered an invalid number");
             }
@@ -30,7 +29,7 @@ public class Parser {
                 System.out.println(tasks.taskPrint(deleteNum -1));
                 System.out.println("Now you have " + (tasks.size() -1) + " tasks in the list. ");
                 tasks.remove(deleteNum-1);
-                storage.append(tasks.getLast());
+                storage.update(tasks.getList());
             } catch(Exception e) {
                 System.out.println("Error, you have entered an invalid number");
             }

@@ -43,6 +43,7 @@ public class TaskList {
      */
 
     public String markDone(int taskIndex) {
+        assert taskIndex >= 0 && taskIndex <= taskList.size(): "taskIndex must be within arraylist size";
         String msg;
         try {
             Task t = taskList.get(taskIndex);
@@ -69,6 +70,7 @@ public class TaskList {
      *
      */
     public String deleteTask(int taskIndex) {
+        assert taskIndex >= 0 && taskIndex <= taskList.size(): "taskIndex must be within arraylist size";
         String msg = "";
         try {
             Task deletedTask = taskList.remove(taskIndex);

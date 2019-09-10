@@ -28,7 +28,6 @@ public class Todo extends Task {
         return msg + box + this.getTask();
     }
 
-
     /**
      * returns a message by Duke, when Duke has added a Todo object.
      *

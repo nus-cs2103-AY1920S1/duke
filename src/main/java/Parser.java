@@ -27,6 +27,13 @@ public class Parser {
                 case "delete":
                     int indexDelete = Integer.parseInt(userInput[1]);
                     return new DeleteCommand(indexDelete);
+                case "massDelete":
+                    String[] indexRanges = userInput[1].split(" ", 2);
+                    int indexStart = Integer.parseInt(indexRanges[0]);
+                    int indexEnd = Integer.parseInt(indexRanges[1]);
+                    for (int i = 0; i < (indexEnd - indexStart); i++) {
+                        return new DeleteCommand(indexStart + i);
+                    }
                 case "todo":
                     String descTodo = userInput[1];
                     if (descTodo.isEmpty()) {

@@ -5,16 +5,20 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
-
+    
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
-
+        text.setFont(new Font("Elephant", 11));
+        text.setTextFill(Color.GOLD);
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
         displayPicture.setFitHeight(100.0);

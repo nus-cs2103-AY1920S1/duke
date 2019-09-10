@@ -1,20 +1,24 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
+import javafx.stage.StageStyle;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+
+import java.awt.*;
 
 /**
  * Duke, a personal chat bot assistant that helps you manage your tasks
@@ -99,18 +103,25 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        dialogContainer.setBackground(new Background(
+                new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+ //       dialogContainer.setBackground(Background.EMPTY);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
         sendButton = new Button("send! woof!");
+        sendButton.setTextFill(Color.DARKRED);
+//        sendButton.setBackground(Background.EMPTY);
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+        scene.setFill(Color.ALICEBLUE);
 
         stage.setScene(scene);
         stage.show();
+
        //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -157,7 +168,8 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
+        // setFont first argument : name of font, 2nd argument : size
+        //textToAdd.setFont(new Font("Verdana", 12));
         return textToAdd;
     }
 

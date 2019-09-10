@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
         try {
             this.taskNumber = Integer.parseInt(command);
         } catch (NumberFormatException e) {
-            throw new DukeException("    OOPS!!! Please specify a task number to be marked as done.");
+            throw new DukeException("OOPS!!! Please specify a task number to be marked as done.");
         }
     }
 
@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
      */
     public static DoneCommand process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
-            throw new DukeException("    OOPS!!! Please specify a task number to be marked as done.");
+            throw new DukeException("OOPS!!! Please specify a task number to be marked as done.");
         }
         return new DoneCommand(fullCommand[1]);
     }
@@ -53,12 +53,12 @@ public class DoneCommand extends Command {
         try {
             sb.append(tasks.completeTask(taskNumber));
         } catch (IndexOutOfBoundsException e) {
-            sb.append("    OOPS!!! Your specified task number is out of range.");
+            sb.append("OOPS!!! Your specified task number is out of range.");
         }
         try {
             storage.store(tasks);
         } catch (IOException e) {
-            sb.append("    OOPS!!! " + e.getMessage());
+            sb.append("OOPS!!! " + e.getMessage());
         }
         assert(!(sb.toString()).isEmpty());
         return sb.toString();

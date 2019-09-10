@@ -46,10 +46,20 @@ public class TaskList {
         }
 
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        return retrieveTasks(sb).toString();
+    }
+
+    /**
+     * Retrieves the contents of the tasks list.
+     *
+     * @param sb StringBuilder to append to.
+     * @return StringBuilder with tasks appended to it.
+     */
+    public StringBuilder retrieveTasks(StringBuilder sb) {
         for (int i = 0; i < tasks.size(); i++) {
             sb.append((i + 1) + "." + tasks.get(i) + "\n");
         }
-        return sb.toString();
+        return sb;
     }
 
     /**

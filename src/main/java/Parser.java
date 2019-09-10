@@ -46,12 +46,17 @@ public class Parser {
                 Task selectedTask = tasks.getListOfTasks().get(index - 1);
                 selectedTask.markAsDone();
 
+                assert selectedTask.getStatusIcon().equals("X") : "Task should be marked as done";
+
                 storage.writeFile(tasks.getListOfTasks());
                 return ui.printTaskDone(selectedTask);
             } else if (actionKey.equals("delete")) { // delete a specific plan
                 int index = Integer.parseInt(keyList[1]);
+                int taskSize = tasks.getListOfTasks().size();
                 String outputText = ui.printTaskDelete(tasks.getListOfTasks(), index);
                 tasks.deleteTask(index - 1);
+
+                assert tasks.getListOfTasks().size() == taskSize - 1 : "Task should be deleted";
 
                 storage.writeFile(tasks.getListOfTasks());
                 return outputText;

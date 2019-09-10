@@ -34,6 +34,8 @@ public class Storage {
                 file.createNewFile();
             }
 
+            assert file.exists() : "File should be existed";
+
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String taskDetails = sc.nextLine();
@@ -46,6 +48,7 @@ public class Storage {
                     Todo newTodo = new Todo(taskDescription);
                     if (isDone) {
                         newTodo.markAsDone();
+                        assert newTodo.getStatusIcon().equals("X") : "Task should be marked as done";
                     }
 
                     loadedTasks.add(newTodo);
@@ -53,6 +56,7 @@ public class Storage {
                     Deadline newDeadline = new Deadline(taskDescription, Parser.convertDateAndTime(taskArray[3]));
                     if (isDone) {
                         newDeadline.markAsDone();
+                        assert newDeadline.getStatusIcon().equals("X") : "Task should be marked as done";
                     }
 
                     loadedTasks.add(newDeadline);
@@ -60,6 +64,7 @@ public class Storage {
                     Event newEvent = new Event(taskDescription, Parser.convertDateAndTime(taskArray[3]));
                     if (isDone) {
                         newEvent.markAsDone();
+                        assert newEvent.getStatusIcon().equals("X") : "Task should be marked as done";
                     }
 
                     loadedTasks.add(newEvent);

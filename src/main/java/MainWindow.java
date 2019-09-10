@@ -55,6 +55,8 @@ public class MainWindow extends AnchorPane {
     }
 
     public void printDialog(String text) {
+        assert text != null && text.equals("") : "Reply should not be empty or null";
+
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage));
     }
 }

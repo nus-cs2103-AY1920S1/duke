@@ -21,11 +21,11 @@ public class TaskList {
      * @param date due date if any for the item
      * @return Output string for Duke to print
      */
-    static String[] addToTodo(String description, String command, String date) {
+    static String addToTodo(String description, String command, String date) {
         lst.add(new ListItem(description, command, date));
 
-        String[] ret = {"Got it. I've added this task:", lst.get(lst.size() - 1).toString(),
-                "Now you have " + lst.size() + " tasks in the list."};
+        String ret = "Got it. I've added this task:" + "\n" + lst.get(lst.size() - 1).toString() + "\n" +
+                "Now you have " + lst.size() + " tasks in the list.";
         return ret;
     }
 
@@ -34,11 +34,11 @@ public class TaskList {
      * @param index of the item to be removed
      * @return Output string for Duke to print
      */
-    static String[] removeFromTodo(String index) {
+    static String removeFromTodo(String index) {
         ListItem target = lst.get(Integer.parseInt(index) - 1);
         lst.remove(target);
-        String[] ret = {"Noted. I've removed this task:", target.toString() ,
-                ("Now you have " + lst.size() + " tasks in the list.")};
+        String ret = "Noted. I've removed this task:" + target + "\n" +
+                ("Now you have " + lst.size() + " tasks in the list.");
         return ret;
     }
 

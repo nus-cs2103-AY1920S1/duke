@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,11 +6,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * This is the main class of the Trackr application. The Trackr application is an interface of a
+ * to-do list that helps users manage a variety of tasks. This class creates the GUI for Trackr using FXML.
+ * @author Shawn Lee
+ * @version 1.0
+ * @since 2019-08-20
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Trackr trackr = new Trackr();
 
     @Override
     public void start(Stage stage) {
@@ -20,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setTrackr(trackr);
             stage.show();
             stage.setTitle("Ask Spongebob!");
             fxmlLoader.<MainWindow>getController().showWelcome();

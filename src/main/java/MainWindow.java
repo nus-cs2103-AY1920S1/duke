@@ -19,7 +19,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
 
-    private Duke duke;
+    private Trackr trackr;
 
     private Image userImg = new Image(this.getClass().getResourceAsStream("/images/patrick.png"));
     private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
@@ -29,8 +29,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setTrackr(Trackr t) {
+        trackr = t;
     }
 
     /**
@@ -40,26 +40,29 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = trackr.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImg),
                 DialogBox.getDukeDialog(response, dukeImg)
         );
         userInput.clear();
-        // Exits program after 2 seconds when exit command is issued
         if (input.equals("bye")) {
-            Timer tm = new Timer();
-            tm.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    System.exit(0);
-                }
-            }, 2000);
+            exitProgram();
         }
     }
 
+    private void exitProgram() {
+        Timer tm = new Timer();
+        tm.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, 2000);
+    }
+
     public void showWelcome() {
-        String welcomeMsg = duke.ui.welcomeMsg();
+        String welcomeMsg = trackr.ui.welcomeMsg();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMsg, dukeImg)
         );

@@ -7,30 +7,34 @@ public class Ui {
     /**
      * Greeting message for Duke
      */
-    public void hi() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public String hi() {
+
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
      * Farewell message for Duke
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String bye() {
+
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Handles the UI for "list" command
      */
-    public void list() {
-        System.out.println("Here are the tasks in your list:");
+    public String list() {
+
+        return "Here are the tasks in your list:";
     }
 
     /**
      * Handles the UI for "done" command
      * @param t
      */
-    public void done(Task t) {
-        System.out.println("Nice! I've marked this task as done:\n  " + t);
+    public String done(Task t) {
+
+        return "Nice! I've marked this task as done:\n  " + t;
     }
 
     /**
@@ -39,9 +43,9 @@ public class Ui {
      * @param size
      */
 
-    public void addTask(Task t, int size) {
-        System.out.println("Got it. I've added this task:\n  " + t
-                + "\nNow you have " + size + " tasks in the list.");
+    public String addTask(Task t, int size) {
+        return "Got it. I've added this task:\n  " + t
+                + "\nNow you have " + size + " tasks in the list.";
     }
 
     /**
@@ -49,16 +53,17 @@ public class Ui {
      * @param t
      * @param size
      */
-    public void delete(Task t, int size) {
-        System.out.println("Noted. I've removed this task:\n  " + t +
-                "\nNow you have " + size + " tasks in the list.");
+    public String delete(Task t, int size) {
+        return "Noted. I've removed this task:\n  " + t +
+                "\nNow you have " + size + " tasks in the list.";
     }
 
     /**
      * Handles the UI for "find" command
      */
-    public void find() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String find() {
+
+        return "Here are the matching tasks in your list:";
     }
 
 }

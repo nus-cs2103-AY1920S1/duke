@@ -1,24 +1,21 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import org.w3c.dom.Text;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import task.Task;
 import tool.Parser;
 import tool.Storage;
 import tool.TaskList;
 import tool.Ui;
 
-import java.util.*;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import java.util.ArrayList;
 
 
 
@@ -31,23 +28,25 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Storage storage = new Storage("src/main/java/data/duke.txt");
+
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Storage storage = new Storage("src/main/java/data/duke.txt");
-        Ui ui = new Ui();
-        ui.hi();
-        TaskList commands = new TaskList(storage.load(new ArrayList<Task>())); //TODO
-        Parser p = new Parser(commands, storage, ui);
-        while(scanner.hasNextLine()) {
-            String x = scanner.nextLine();
-            p.parse(x);
-            if (x.equals("bye")) {
-                scanner.close();
-                break;
-            }
-
-        }
+//        Scanner scanner = new Scanner(System.in);
+////        Storage storage = new Storage("src/main/java/data/duke.txt");
+//        Ui ui = new Ui();
+//        ui.hi();
+//        TaskList commands = new TaskList(storage.load(new ArrayList<Task>())); //TODO
+//        Parser p = new Parser(commands, storage, ui);
+//        while(scanner.hasNextLine()) {
+//            String x = scanner.nextLine();
+//            String xx = p.parse(x);
+//            if (x.equals("bye")) {
+//                scanner.close();
+//                break;
+//            }
+//
+//        }
     }
 
     @Override
@@ -107,7 +106,7 @@ public class Duke extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
-
+//
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
@@ -127,11 +126,11 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
@@ -140,8 +139,15 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) {
+//        Storage storage = new Storage("src/main/java/data/duke.txt");
+        Ui ui = new Ui();
+        ui.hi();
+        TaskList commands = new TaskList(this.storage.load(new ArrayList<Task>())); //TODO
+        Parser p = new Parser(commands, this.storage, ui);
+        String xx = p.parse(input);
+
+        return xx;
     }
 
 }

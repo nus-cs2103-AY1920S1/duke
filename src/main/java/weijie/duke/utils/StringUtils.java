@@ -5,6 +5,13 @@ import java.util.stream.Collectors;
 
 public class StringUtils {
 
+    /**
+     * <p>
+     *     Indents each line in the input with 4 spaces.
+     * </p>
+     * @param input A string to be indented.
+     * @return The string with each line indented with 4 spaces.
+     */
     public static String indent(String input) {
         String indentation = "    ";
         return Arrays.stream(input.split("\n"))
@@ -12,7 +19,7 @@ public class StringUtils {
                 .collect(Collectors.joining("\n"));
     }
 
-    public static String indentf(String input, Object... args) {
+    static String indentf(String input, Object... args) {
         String formattedInput = String.format(input, args);
         return indent(formattedInput);
     }

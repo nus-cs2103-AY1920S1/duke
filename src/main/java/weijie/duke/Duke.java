@@ -8,13 +8,13 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import weijie.duke.commands.CommandList;
 import weijie.duke.commands.TaskCommandFactory;
-import weijie.duke.db.Storage;
+import weijie.duke.db.FileSystemStorage;
+import weijie.duke.db.ITaskStorage;
 import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.models.Task;
 import weijie.duke.controllers.MainWindowController;
 import weijie.duke.repos.IRepository;
 import weijie.duke.repos.TaskRepo;
-import weijie.duke.views.Ui;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -25,13 +25,14 @@ public class Duke extends Application {
     private TaskCommandFactory taskCommandFactory;
 
     public Duke() {
-        this.filePath = "data/duke.txt";
+        this.filePath = "data/duke.txt"; // TODO: refactor into argument
     }
 
     @Override
     public void start(Stage primaryStage) {
-        initDependencies();
         try {
+            initDependencies();
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/MainWindow.fxml"));
             fxmlLoader.setControllerFactory(controllerFactory);
 
@@ -41,25 +42,17 @@ public class Duke extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-        } catch (IOException e) {
+        } catch (DukeIoException | IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void initDependencies() {
-        Ui ui = new Ui();
+    private void initDependencies() throws DukeIoException {
+        ITaskStorage storage = new FileSystemStorage(filePath);
+        IRepository<Task> repo = new TaskRepo(storage);
 
-        try {
-            Storage storage = new Storage(filePath);
-            IRepository<Task> repo = new TaskRepo(storage);
-
-            taskCommandFactory = new TaskCommandFactory(CommandList.getCommandMap());
-            taskCommandFactory.registerDependency(repo);
-
-        } catch (DukeIoException e) {
-            ui.printError(e);
-            ui.printExit();
-        }
+        taskCommandFactory = new TaskCommandFactory(CommandList.getCommandMap());
+        taskCommandFactory.registerDependency(repo);
     }
 
     private Callback<Class<?>, Object> controllerFactory = type -> {

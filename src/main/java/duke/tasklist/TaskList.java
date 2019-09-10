@@ -41,7 +41,7 @@ public class TaskList {
      */
     public String printTasks() {
         if (tasks.isEmpty()) {
-            return "You do not have any tasks in your list." + "Use 'help' to see how to add tasks" +
+            return "You do not have any tasks in your list.\n" + "Use 'help' to see how to add tasks" +
                     " to your list!";
         }
 
@@ -70,7 +70,7 @@ public class TaskList {
     public String deleteTask(int taskNumber) {
         String taskDescription = tasks.get(taskNumber - 1).toString();
         tasks.remove(taskNumber - 1);
-        return "Noted. I've removed this task:\n" + taskDescription + getListSize();
+        return "Noted. I've removed this task:\n" + taskDescription + "\n" + getListSize();
     }
 
     /**
@@ -104,7 +104,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         tasks.add(task);
-        return "Got it. I've added this task:\n" + task.toString() + getListSize();
+        return "Got it. I've added this task:\n" + task.toString() + "\n" + getListSize();
     }
 
     /**

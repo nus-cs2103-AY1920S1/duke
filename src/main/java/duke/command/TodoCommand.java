@@ -5,7 +5,6 @@ import duke.todo.TaskList;
 import duke.ui.Ui;
 
 public class TodoCommand implements Command {
-    private String taskType = "todo";
     private String task;
 
     /**
@@ -35,7 +34,7 @@ public class TodoCommand implements Command {
      *
      * @return Description of this todo.
      */
-    public String getTask() {
+    public String getDescription() {
         return task;
     }
 
@@ -48,7 +47,7 @@ public class TodoCommand implements Command {
     }
 
     public void execute(TaskList tasks, Ui ui) {
-        Task addedTodo = tasks.addTask(getTask());
+        Task addedTodo = tasks.addTask(getDescription());
         ui.reportAdd(addedTodo, tasks.getNumOfTasks());
     }
 }

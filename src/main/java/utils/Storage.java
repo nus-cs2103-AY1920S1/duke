@@ -25,10 +25,10 @@ public class Storage {
      * @param filePath the local path to storage file
      */
     public Storage(String filePath) {
+        assert !filePath.isEmpty(): "File path not specified!";
         this.filePath = filePath;
         this.file = new File(filePath);
         this.tasks = new ArrayList<>();
-
     }
 
     /**
@@ -120,7 +120,7 @@ public class Storage {
             e.printStackTrace();
         }
         try {
-            assert fw != null;
+            assert fw != null: "Error writing to file, file writer not initialised!";
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 if (i != tasks.size() - 1) {

@@ -74,7 +74,6 @@ public class Ui {
      *
      */
     public void welcomeMessage() {
-
         out.println(DUKE_STARTUP);
         addBorder(DUKE_SAYS_HI);
     }
@@ -93,6 +92,7 @@ public class Ui {
      * @param tasks TaskList object.
      */
     public void printList(TaskList tasks) {
+        assert tasks != null: "task list cannot be null!";
         StringBuilder str = new StringBuilder(LIST_MESSAGE);
 
         for (int i = 1; i < tasks.getSize() + 1; i++) {
@@ -112,6 +112,7 @@ public class Ui {
      * @param taskList list of tasks that match query
      */
     public void printMatchingTasks(List<Task> taskList) {
+        assert taskList != null: "List of tasks cannot be null!";
         StringBuilder str = new StringBuilder(MATCHING_LIST_MESSAGE);
 
         for (int i = 1; i < taskList.size() + 1; i++) {

@@ -25,6 +25,9 @@ public class AddCommand extends Command {
      * @throws DukeException if any of the arguments are invalid
      */
     public AddCommand(String taskType, String taskParams) throws DukeException {
+        assert taskType != null;
+        assert taskParams != null;
+
         switch (taskType) {
         case "todo":
             this.newTask = new Todo(taskParams);

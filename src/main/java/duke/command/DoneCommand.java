@@ -22,11 +22,10 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
+        assert index > 0 && index <= tasks.size(): "The task index does not exist.";
         Task task = tasks.get(index - 1);
         task.markAsDone();
-//        ui.showDoneResponse();
-//        System.out.println("        " + task);
         response = "Nice! I've marked this task as done:\n    " + task;
     }
 }

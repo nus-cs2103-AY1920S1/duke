@@ -22,10 +22,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
+        assert index > 0 && index <= tasks.size(): "The task index does not exist.";
         Task deletedTask = tasks.remove(index - 1);
-//        ui.showDeleteResponse(deletedTask);
-//        ui.showTotalNumberTasks(tasks);
         response = "Noted. I've deleted the following task:\n    " + deletedTask + "\nNow you have " + tasks.size()
                 + " task(s) in the " + "list.";
     }

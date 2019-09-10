@@ -5,7 +5,17 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        this.type = "deadline";
+        this.type = "D";
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
+    public String getBy() {
+        return this.by;
     }
 
     @Override

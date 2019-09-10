@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -19,13 +21,22 @@ public class Task {
             return "T";
         } else if (type.equals("deadline")) {
             return "D";
-        } else {
+        } else if (type.equals("event")){
             return "E";
         }
+        return "error";
     }
 
     public String getDesc() {
         return this.description;
+    }
+
+    public String getAt() {
+        return "";
+    }
+
+    public String getBy() {
+        return "";
     }
 
     /* mutators */
@@ -41,5 +52,9 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
+    }
+
+    public String toFile() throws ParseException {
+        return "";
     }
 }

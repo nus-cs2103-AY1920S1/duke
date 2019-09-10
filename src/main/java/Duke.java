@@ -1,15 +1,33 @@
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.IOException;
+import java.text.ParseException;
+
 public class Duke {
-    public static void main(String[] args) {
+
+    private ArrayList<Task> list;
+    private Saved savedFile;
+    private Scanner scan;
+
+    public static void main(String[] args) throws IOException, ParseException {
+        new Duke("src/main/java/data.txt").run();
+    }
+
+    public Duke(String filePath) throws IOException {
+        scan = new Scanner(System.in);
+        savedFile = new Saved(filePath);
+        list = savedFile.loadData();
+    }
+
+    public void run() throws IOException, ParseException {
 
         final String LINE = "____________________________________________________________";
         final String TAB = "    ";
         final String GOT_IT = "Got it. I've added this task:";
         String cmd;
-        Scanner scan = new Scanner(System.in);
-        ArrayList<Task> list = new ArrayList<Task>();
 
         /*
         String logo = " ____        _        \n"
@@ -164,6 +182,7 @@ public class Duke {
                 printDuke(LINE);
             }
         }
+        savedFile.saveToFile(list);
     }
 
     public static void printDuke(String toPrint) {

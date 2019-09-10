@@ -6,6 +6,17 @@ public class Event extends Task {
         super(description);
         this.at = at;
         this.event = "event";
+        this.type = "E";
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
+    public String getAt() {
+        return this.at;
     }
 
     @Override

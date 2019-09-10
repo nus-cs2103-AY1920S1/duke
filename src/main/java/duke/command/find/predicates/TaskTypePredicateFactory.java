@@ -7,6 +7,7 @@ import duke.model.Task;
 import duke.model.Todo;
 
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,10 +39,21 @@ public class TaskTypePredicateFactory implements FindTaskCleanableCommandPredica
         final Class<? extends Task> desiredTaskType = EVENT_TOKEN_TO_TYPE.get(desiredTaskTypeToken);
 
         if (desiredTaskType == null) {
-            throw new UnknownCommandException(String.format(
+            final StringJoiner errorMessage = new StringJoiner("");
+            errorMessage.add(String.format(
                     "I'm not sure what kind of task you mean by a \"%s\" task.",
                     desiredTaskTypeToken
             ));
+            errorMessage.add("\nThe types I understand are ");
+
+            final StringJoiner supportedTypesString = new StringJoiner(", ");
+            for (final String supportedTypeToken : EVENT_TOKEN_TO_TYPE.keySet()) {
+                supportedTypesString.add(String.format("\"%s\"", supportedTypeToken));
+            }
+            errorMessage.add(supportedTypesString.toString());
+            errorMessage.add(".");
+
+            throw new UnknownCommandException(errorMessage.toString());
         }
 
         return (task -> {

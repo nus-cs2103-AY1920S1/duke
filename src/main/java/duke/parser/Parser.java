@@ -12,6 +12,8 @@ public class Parser {
 
     public static Command parse(String userInput) {
 
+        assert !userInput.equals("");
+
         String[] input = userInput.split(" ");
         String instruction = input[0];
         StringBuilder stringBuilder = new StringBuilder();

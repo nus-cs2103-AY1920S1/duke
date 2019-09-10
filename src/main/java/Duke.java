@@ -66,10 +66,8 @@ public class Duke extends Application {
                     } catch (ErrorException e) {
                         System.out.println(e.getMessage());
                     }
-
                     break;
                 case "deadline":
-
                     try {
                         deadline(tasks.getlist(), s);
                     } catch (ErrorException e) {
@@ -83,7 +81,6 @@ public class Duke extends Application {
                 case "find":
                     find(tasks.getlist(), s);
                     break;
-
                 default:
                     try {
                         other(s);
@@ -91,7 +88,6 @@ public class Duke extends Application {
                         System.out.println(e.getMessage());
                     }
                     break;
-
             }
         }
     }
@@ -346,7 +342,6 @@ public class Duke extends Application {
                         output= e.getMessage();
                     }
 
-
                 case "event":
                     try {
                        output= eventString(tasks.getlist(), s);
@@ -370,14 +365,12 @@ public class Duke extends Application {
                 case "find":
                    output= findString(tasks.getlist(), s);
 
-
                 default:
                     try {
                        output= otherString(s);
                     } catch (ErrorException e) {
                         output= e.getMessage();
                     }
-
             }
         }
         return output;

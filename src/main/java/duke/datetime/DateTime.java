@@ -71,7 +71,7 @@ public class DateTime {
      * @return Month name in string format.
      */
     private String getMonth() {
-        String monthString = "";
+        String monthString;
         switch (month) {
         case 1:
             monthString = "January";

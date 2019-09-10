@@ -7,14 +7,23 @@ import java.util.Scanner;
  * Reads input and prints output.
  */
 public class Ui {
+    private static final String UI_LINE_BREAK = "________________________________________";
     private static final String LINE_BREAK = "______________________________________________________________________";
     private static final String HELLO_STRING = "Hello! I'm duke.Duke\nWhat can I do for you?";
     private static final String BYE_STRING = "Bye. Hope to see you again soon!";
     private static final String ERROR_PREPEND = "☹ OOPS!!!";
     private Scanner scanner;
 
+    // field that tracks the Ui's last said string
+    private String lastSaid;
+
     public Ui() {
         this.scanner = new Scanner(System.in);
+        this.lastSaid = "";
+    }
+
+    public String getLastSaid() {
+        return this.lastSaid;
     }
 
     /**
@@ -57,13 +66,17 @@ public class Ui {
      * @param sequence The String to be printed
      */
     public void say(String sequence) {
+        lastSaid = sequence;
+    }
+
+    public void CliSay(String sequence) {
         String indented = sequence.replaceAll("(?m)^", "\t\t");
-        System.out.printf(
-                "\t%s\n%s\n\t%s\n",
+        String message = String.format("\t%s\n%s\n\t%s\n",
                 LINE_BREAK,
                 indented,
-                LINE_BREAK
-        );
+                LINE_BREAK);
+        System.out.print(message);
+        lastSaid = message;
     }
 
     public void close() {

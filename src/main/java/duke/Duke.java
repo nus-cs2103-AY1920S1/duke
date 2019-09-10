@@ -64,7 +64,16 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command command = Parser.parse(input);
+            command.execute(storage, ui, tasks);
+            if(command.isExit())
+                exit();
+        } catch (DukeException e) {
+            ui.sayError(e.getMessage());
+        } finally {
+            return ui.getLastSaid();
+        }
     }
 }
 

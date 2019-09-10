@@ -2,12 +2,12 @@
 public class Parser {
 
     /**
-     * Handles and parses text commands input by user.
-     *
-     * @param in The input from user.
-     * @param sc Scanner object from UI class.
-     * @return false signals that user wants to quit.
-     */
+    * Handles and parses text commands input by user.
+    *
+    * @param in The input from user.
+    * @param sc Scanner object from UI class.
+    * @return false signals that user wants to quit.
+    */
     public static String handleCommand(String input) throws DukeException {
         String[] arr = input.split(" ", 2);
         String in = arr[0].trim();
@@ -20,13 +20,16 @@ public class Parser {
             case "bye":
                 return "Bye!";
             case "list":
-                return "Here are the tasks in your list:\n" + TaskList.stringifyTasks();
+                return "Here are the tasks in your list:\n" +
+                    TaskList.stringifyTasks();
             case "done":
                 {
                     Task t = TaskList.get(Integer.parseInt(others));
                     t.markDone();
                     return String.format(
-                            "Nice! I've marked this task as done:\n  %s", t.toString());
+                        "Nice! I've marked this task as done:\n  %s",
+                        t.toString()
+                    );
                 }
             case "delete":
                 TaskList.removeTask(Integer.parseInt(others));
@@ -42,23 +45,29 @@ public class Parser {
                 {
                     String[] details = others.split(" /by ");
                     try {
-                        return TaskList.addTask(new Deadline(details[0], details[1]));
+                        return TaskList.addTask(
+                            new Deadline(details[0], details[1])
+                        );
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Too few details for deadline!");
+                        throw new DukeException(
+                            "Too few details for deadline!"
+                        );
                     }
                 }
             case "event":
                 {
                     String[] details = others.split(" /at ");
                     try {
-                        return TaskList.addTask(new Event(details[0], details[1]));
+                        return TaskList.addTask(
+                            new Event(details[0], details[1])
+                        );
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("Too few details for event!");
                     }
                 }
             case "find":
-                return ("Here are matching tasks in your list:")
-                        + TaskList.stringifyTasks(TaskList.query(others));
+                return ("Here are matching tasks in your list:") +
+                    TaskList.stringifyTasks(TaskList.query(others));
             default:
                 throw new DukeException("Unknown command " + in);
         }

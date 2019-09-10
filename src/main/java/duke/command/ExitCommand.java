@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class ExitCommand extends Command {
 
@@ -17,11 +16,10 @@ public class ExitCommand extends Command {
      * Executes the Exit Command and kills the duke session.
      *
      * @param tasks   The TaskList containing all existing tasks.
-     * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      * @return The response string.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         return ("Bye. Hope to see you again soon!");
     }
 

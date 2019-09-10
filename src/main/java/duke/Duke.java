@@ -15,9 +15,9 @@ public class Duke extends Application {
     private TaskList tasks;
 
     /**
-     * Initialise new duke.Duke session.
+     * Initialises new duke.Duke session.
      */
-    public Duke() {
+    Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
         try {
@@ -49,7 +49,7 @@ public class Duke extends Application {
     String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }

@@ -2,13 +2,11 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
-import duke.ui.Ui;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,25 +53,13 @@ public class AddCommand extends Command {
      * Executes the AddCommand, adds the task to the LinkedList and saves it to the file.
      *
      * @param tasks   The TaskList containing all existing tasks.
-     * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      * @return The response string.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-
-        tasks.allTasks.add(task);
-        StringBuilder sb = new StringBuilder("Got it. I've added this task:\n" + task);
-        if (tasks.allTasks.size() == 1) {
-            sb.append("\nNow you have ")
-              .append(tasks.allTasks.size())
-                .append(" task in the list.");
-        } else {
-            sb.append("\nNow you have ")
-              .append(tasks.allTasks.size())
-                .append(" tasks in the list.");
-        }
+    public String execute(TaskList tasks, Storage storage) {
+        tasks.addTask(task);
         storage.appendTaskToFile(task);
-        return (sb.toString());
+        return ("Got it. I've added this task:\n" + task + tasks.getStatus());
     }
 
     /**

@@ -1,8 +1,9 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class DoneCommand extends Command {
     private final int index;
@@ -20,18 +21,24 @@ public class DoneCommand extends Command {
      * Executes the Done Command and marks the task as done.
      *
      * @param tasks   The TaskList containing all existing tasks.
-     * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      * @return The response string.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
 
-        // Delete from file, mark as done, reinsert into file
-        storage.deleteTaskFromFile(tasks.allTasks.get(index));
-        tasks.allTasks.get(index).markAsDone();
-        storage.appendTaskToFile(tasks.allTasks.get(index));
-        assert (tasks.allTasks.get(index).getStatus() == true) : "Not marked as done";
-        return ("Nice! I've marked this task as done:\n" + tasks.allTasks.get(index));
+        try {
+            Task t = tasks.getList().get(index);
+
+            // Delete from file, mark as done, reinsert into file
+            storage.deleteTaskFromFile(t);
+            t.markAsDone();
+            storage.appendTaskToFile(t);
+            assert (t.getStatus()) : "Not marked as done";
+
+            return ("Nice! I've marked this task as done:\n" + t);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid task number. Not within range");
+        }
     }
 
     /**

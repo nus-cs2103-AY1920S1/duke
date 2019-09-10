@@ -100,7 +100,7 @@ public class Storage {
                             task.isDone() ? 1 : 0,
                             task.getDescription(),
                             ((Event) task).getTime()));
-                } else {
+                } else if (task instanceof Todo) {
                     fw.append(String.format("T | %d | %s\n",
                             task.isDone() ? 1 : 0,
                             task.getDescription()));

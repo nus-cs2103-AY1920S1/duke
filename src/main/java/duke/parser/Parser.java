@@ -11,7 +11,6 @@ import duke.command.ListCommand;
 
 public class Parser {
 
-    private static final String ERROR_INVALID_INPUT = "I'm sorry, but I don't know what that means :-(";
     private static final String ERROR_MISSING_DESCRIPTION = "The description cannot be empty.";
     private static final String ERROR_MISSING_TASK_ID = "The id of the task must be provided.";
     private static final String ERROR_INVALID_TASK_ID = "The id of the task must be a number. e.g. done 1";
@@ -54,7 +53,7 @@ public class Parser {
             }
             return new ExitCommand();
         default:
-            throw new DukeException(ERROR_INVALID_INPUT);
+            throw new DukeException();
         }
     }
 

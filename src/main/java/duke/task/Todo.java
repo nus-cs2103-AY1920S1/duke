@@ -37,7 +37,7 @@ public class Todo extends Task {
      */
     @Override
     public String toSave() {
-        return "T | " + super.getBinaryStatus() + " | " + super.description;
+        return "T | " + super.getStatusIcon() + " | " + super.description;
     }
 
     /**

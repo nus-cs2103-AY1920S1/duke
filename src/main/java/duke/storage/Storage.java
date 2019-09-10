@@ -44,21 +44,21 @@ public class Storage {
             if (currTask.charAt(0) == 'T') {
                 String[] currArray = currTask.split(" \\| ");
                 Todo currTodo = new Todo(currArray[2]);
-                if (currArray[1].equals("1")) {
+                if (currArray[1].equals("v")) {
                     currTodo.markAsDone();
                 }
                 loadedTaskList.add(currTodo);
             } else if (currTask.charAt(0) == 'D') {
                 String[] currArray = currTask.split(" \\| ");
                 Deadline currDeadline = new Deadline(currArray[2], currArray[3]);
-                if (currArray[1].equals("1")) {
+                if (currArray[1].equals("v")) {
                     currDeadline.markAsDone();
                 }
                 loadedTaskList.add(currDeadline);
             } else {
                 String[] currArray = currTask.split(" \\| ");
                 Event currEvent = new Event(currArray[2], currArray[3]);
-                if (currArray[1].equals("1")) {
+                if (currArray[1].equals("v")) {
                     currEvent.markAsDone();
                 }
                 loadedTaskList.add(currEvent);

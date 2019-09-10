@@ -50,7 +50,7 @@ public class Event extends Task {
      */
     @Override
     public String toSave() {
-        return "E | " + super.getBinaryStatus() + " | " + super.description + " | " + timeInFile;
+        return "E | " + super.getStatusIcon() + " | " + super.description + " | " + timeInFile;
     }
 
     /**

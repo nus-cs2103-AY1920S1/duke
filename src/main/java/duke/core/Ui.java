@@ -1,6 +1,7 @@
 package duke.core;
 
 import duke.task.Task;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -120,21 +121,15 @@ public class Ui {
      * @param tasks The <code>TaskList</code> used to store tasks.
      */
     public void printTasks(TaskList tasks) {
-        int idx = 1;
         System.out.println("Here are the tasks in your list:");
-        for (Task t : tasks.getList()) {
-            System.out.println(idx + "." + t);
-            idx++;
-        }
+        ArrayList<Task> list = tasks.getList();
+        list.forEach(t -> System.out.println(list.indexOf(t) + 1 + "." + t));
     }
 
     public String printTasksGui(TaskList tasks) {
-        int idx = 1;
         StringBuilder sb = new StringBuilder();
-        for (Task t : tasks.getList()) {
-            sb.append(idx + "." + t + "\n");
-            idx++;
-        }
+        ArrayList<Task> list = tasks.getList();
+        list.forEach(t -> sb.append(list.indexOf(t) + 1 + "." + t + "\n"));
         return "Here are the tasks in your list:\n" + sb.toString();
     }
 

@@ -1,5 +1,6 @@
 package tasks;
 
+import exception.DukeException;
 import parser.Parser;
 import ui.Ui;
 
@@ -54,10 +55,11 @@ public class TaskList {
     public String setDone(String input) {
         // Assumption: fixed format - remove first 4 characters to get index. i.e. "done"
         String value = input.substring(4);
-
+        int size = this.list.size();
         // Get integer found in user input
         try {
             int index = Integer.parseInt(value.trim()); // Remove any blank space
+            System.out.println(index + size);
             list.get(index - 1).setDone();
             return (ui.completedTask() + "\n" + (list.get(index - 1)));
         } catch (Exception e) {
@@ -82,7 +84,7 @@ public class TaskList {
         }
     }
 
-    public String addTask(String input, String action, String description) {
+    public String addTask(String input, String action, String description) throws DukeException {
 
         switch (action) {
 
@@ -91,10 +93,12 @@ public class TaskList {
             break;
 
         case "deadline":
+            assert input.contains("/by") : "Does not contain valid date/time of deadline";
             this.list.add(new Deadline(description, parser.parseDateTime(action, input)));
             break;
 
         case "event":
+            assert input.contains("/at") : "Does not contain valid date/time of event";
             this.list.add(new Event(description, parser.parseDateTime(action, input)));
             break;
 

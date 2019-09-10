@@ -24,6 +24,7 @@ public class Ui {
     private static final String REMOVE_TASK = "Noted. I've removed this task: ";
     private static final String CLOSING_STATEMENT = "Bye. Hope to see you again soon!";
     private static final String INVALID_COMMAND = "\u2639" + " OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String INVALID_TASK = "\u2639" + " Invalid Task input! Please try again.";
 
     public Ui() {
     }
@@ -125,5 +126,9 @@ public class Ui {
     public void nextCommand() {
         System.out.println(SEPARATOR);
         System.out.println();
+    }
+
+    public String invalidTask() {
+        return INVALID_TASK;
     }
 }

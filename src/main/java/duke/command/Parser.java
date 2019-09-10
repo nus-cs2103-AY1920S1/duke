@@ -34,74 +34,191 @@ public class Parser {
      * Processes the string command by user and carries out its corresponding actions, such as
      * adding into task list and marking a task as done.
      *
-     * @param userInput a string command by user
+     * @param userInput A string command by user
+     * @return Returns a string to be placed as response in GUI
      * @throws DukeException If a command is invalid
-     * @throws ParseException If input date format is invalid
      */
-    public String processLine(String userInput) throws DukeException, ParseException {
+    public String processLine(String userInput) throws DukeException {
         assert (ui != null) : "UI should not be null";
         assert (tasks != null) : "TaskList should not be null";
+
         ArrayList<Task> list = tasks.list;
         String[] words = userInput.split(" ");
         String firstWord = words[0];
-        if (firstWord.equals("list")) {
-            return ui.printList(list);
 
-        } else if (firstWord.equals("done")) {
-            if (words.length != 2) {
-                throw new DukeException("You need to specify a task that is done.");
-            }
-            if (Integer.parseInt(words[1]) > list.size() || Integer.parseInt(words[1]) <= 0) {
-                throw new DukeException("Task does not exist.");
-            }
-            Task task = list.get(Integer.parseInt(words[1]) - 1);
-            task.setDone(true);
-            return ui.printTaskDone(task);
-
-        } else if (firstWord.equals("delete")) {
-            if (words.length != 2) {
-                throw new DukeException("You need to specify a task that is done.");
-            }
-            if (Integer.parseInt(words[1]) > list.size() || Integer.parseInt(words[1]) <= 0) {
-                throw new DukeException("Task does not exist.");
-            }
-            int index = Integer.parseInt(words[1]) - 1;
-            Task removed = tasks.delete(index);
-            return ui.printDeleteTask(removed, list);
-
-        } else if (firstWord.equals("find")) {
-            String secondWord = words[1];
-            ArrayList<Task> listFound = new ArrayList<>();
-            tasks.list.stream()
-                    .filter(task -> task.getDescription().contains(secondWord))
-                    .forEach(listFound::add);
-            return ui.printList(listFound);
-        } else {
-            Task task;
-            if (firstWord.equals("todo")) {
-                if (words.length < 2 || words[1].equals("")) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                }
-                task = new ToDo(userInput.split(" ", 2)[1]);
-            } else if (firstWord.equals("deadline")) {
-                if (words.length < 2 || words[1].equals("")) {
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                }
-                String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
-                String by = userInput.split(" ", 2)[1].split(" /by ", 2)[1];
-                task = new Deadline(description, by);
-            } else if (firstWord.equals("event")) {
-                if (words.length < 2 || words[1].equals("")) {
-                    throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-                }
-                String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
-                String at = userInput.split(" ", 2)[1].split(" /at ", 2)[1];
-                task = new Event(description, at);
-            } else {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            tasks.add(task);
-            return ui.printAddTask(task, list);
+        switch (firstWord) {
+            case "list":
+                return ui.printList(list);
+            case "done":
+                Task done = markDone(list, words);
+                return ui.printMarkDone(done);
+            case "delete":
+                Task removed = deleteTask(list, words);
+                return ui.printDeleteTask(removed, list);
+            case "find":
+                ArrayList<Task> listFound = findTasks(words[1]);
+                return ui.printList(listFound);
+            default:
+                Task newTask = addNewTask(userInput, list, words, firstWord);
+                return ui.printAddTask(newTask, list);
         }
+    }
+
+    /**
+     * Adds new task to the the list of tasks and returns it.
+     *
+     * @param userInput The input string from GUI
+     * @param list The list of tasks in storage
+     * @param words An array of words from userInput
+     * @param firstWord The first word of the userInput
+     * @return The task that is added to the the list of tasks
+     * @throws DukeException If the command is invalid
+     */
+    private Task addNewTask(String userInput, ArrayList<Task> list, String[] words, String firstWord) throws DukeException {
+        Task task;
+
+        switch (firstWord) {
+        case "todo":
+            task = createTodo(userInput, words);
+            break;
+        case "deadline":
+            task = createDeadline(userInput, words);
+            break;
+        case "event":
+            task = createEvent(userInput, words);
+            break;
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        tasks.add(task);
+        return task;
+    }
+
+    /**
+     * Creates an event and adds it to the list of tasks.
+     *
+     * @param userInput The input string from GUI
+     * @param words An array of words from userInput
+     * @return The task that is added to the list of tasks
+     * @throws DukeException If the command is invalid
+     */
+    private Task createEvent(String userInput, String[] words) throws DukeException {
+        if (words.length < 2 || words[1].equals("")) {
+            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+        }
+
+        try {
+            String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
+            String at = userInput.split(" ", 2)[1].split(" /at ", 2)[1];
+            return new Event(description, at);
+        } catch (ParseException e) {
+            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
+        }
+    }
+
+    /**
+     * Creates a deadline and adds it to the list of tasks.
+     *
+     * @param userInput The input string from GUI
+     * @param words An array of words from userInput
+     * @return The task that is added to the list of tasks
+     * @throws DukeException If the command is invalid
+     */
+    private Task createDeadline(String userInput, String[] words) throws DukeException {
+        if (words.length < 2 || words[1].equals("")) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        }
+
+        try {
+            String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
+            String by = userInput.split(" ", 2)[1].split(" /by ", 2)[1];
+            return new Deadline(description, by);
+        } catch (ParseException e) {
+            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
+        }
+    }
+
+    /**
+     * Creates a to-do and adds it to the list of tasks.
+     *
+     * @param userInput The input string from GUI
+     * @param words An array of words from userInput
+     * @return The task that is added to the list of tasks
+     * @throws DukeException If the command is invalid
+     */
+    private Task createTodo(String userInput, String[] words) throws DukeException {
+        if (words.length < 2 || words[1].equals("")) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+
+        return new ToDo(userInput.split(" ", 2)[1]);
+    }
+
+    /**
+     * Returns a list of tasks which contains a certain word.
+     *
+     * @param word The word to be searched
+     * @return Returns a list of tasks containing the string argument
+     */
+    private ArrayList<Task> findTasks(String word) {
+        ArrayList<Task> listFound = new ArrayList<>();
+        tasks.list.stream()
+                .filter(task -> task.getDescription().contains(word))
+                .forEach(listFound::add);
+        return listFound;
+    }
+
+    /**
+     * Deletes a task from the list of tasks and returns the deleted task.
+     *
+     * @param list The list of tasks
+     * @param words An array of words from the input string
+     * @return Returns the deleted task
+     * @throws DukeException If the command is invalid
+     */
+    private Task deleteTask(ArrayList<Task> list, String[] words) throws DukeException {
+
+        if (words.length != 2) {
+            throw new DukeException("You need to specify a task that is done.");
+        }
+
+        try {
+            Integer.parseInt(words[1]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(e.getMessage() + "\nInput must be an integer.");
+        }
+
+        if (Integer.parseInt(words[1]) > list.size() || Integer.parseInt(words[1]) <= 0) {
+            throw new DukeException("Task does not exist.");
+        }
+
+        System.out.println("HELLO");
+
+        int index = Integer.parseInt(words[1]) - 1;
+        Task removed = tasks.delete(index);
+        return removed;
+    }
+
+    /**
+     * Marks a task in the list of tasks as done and returns it.
+     *
+     * @param list The list of tasks
+     * @param words An array of words from the input string
+     * @return Returns the task that is marked as done
+     * @throws DukeException If the command is invalid
+     */
+    private Task markDone(ArrayList<Task> list, String[] words) throws DukeException {
+        if (words.length != 2) {
+            throw new DukeException("You need to specify a task that is done.");
+        }
+
+        if (Integer.parseInt(words[1]) > list.size() || Integer.parseInt(words[1]) <= 0) {
+            throw new DukeException("Task does not exist.");
+        }
+
+        Task task = list.get(Integer.parseInt(words[1]) - 1);
+        task.setDone(true);
+        return task;
     }
 }

@@ -16,7 +16,6 @@ import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.DukeIncorrectArgumentsException;
 import duke.exception.DukeInvalidArgumentException;
-import duke.exception.DukeNoCommandException;
 import duke.exception.DukeUnknownCommandException;
 
 public class Parser {
@@ -41,15 +40,14 @@ public class Parser {
     public static Command parse(String command) throws DukeException {
         // Parse trivial commands here
         switch (command) {
-        case "":
-            // Catch empty commands (ENTER key pressed with no other input)
-            throw new DukeNoCommandException();
         case "bye":
             return new ByeCommand();
         case "list":
             return new ListCommand();
         default:
         }
+
+        assert command.length() > 0 : "Attempting to parse an invalid empty command string!";
 
         // Determine the type of command from the first token
         switch (command.split(" ")[0]) {

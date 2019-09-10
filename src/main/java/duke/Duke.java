@@ -159,6 +159,11 @@ public class Duke extends Application {
         String command = this.userInput.getText();
         this.userInput.clear();
 
+        // GUARD: against empty commands
+        if (command.equals("")) {
+            return;
+        }
+
         Label userText = new Label(command);
         Label dukeText = new Label(this.handleCommand(command));
 
@@ -203,13 +208,8 @@ public class Duke extends Application {
     public void start(Stage stage) {
         this.stage = stage;
         
-        // Instantiate application window elements
         this.instantiateWindow();
-
-        // Style application window elements
         this.applyWindowStyling();
-
-        // Attach event handlers for interactive elements
         this.attachEventHandlers();
     
         this.stage.setScene(this.scene);

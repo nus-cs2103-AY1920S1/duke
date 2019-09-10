@@ -89,6 +89,7 @@ public class Ui {
      * @param tasks TaskList object.
      */
     public String printList(TaskList tasks) {
+        assert tasks != null: "task list cannot be null!";
         StringBuilder str = new StringBuilder(LIST_MESSAGE);
 
         for (int i = 1; i < tasks.getSize() + 1; i++) {
@@ -108,6 +109,8 @@ public class Ui {
      * @param taskList list of tasks that match query
      */
     public String printMatchingTasks(List<Task> taskList) {
+        assert taskList != null: "List of tasks cannot be null!";
+
         StringBuilder str = new StringBuilder(MATCHING_LIST_MESSAGE);
 
         for (int i = 1; i < taskList.size() + 1; i++) {

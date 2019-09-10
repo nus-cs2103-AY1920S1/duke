@@ -5,11 +5,13 @@ import duke.Duke;
 import java.io.File;
 import java.io.IOException;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * A GUI for Duke using FXML.
@@ -32,6 +34,13 @@ public class Main extends Application {
             stage.show();
             fxmlLoader.<MainWindow>getController().showWelcome();
             fxmlLoader.<MainWindow>getController().load();
+            fxmlLoader.<MainWindow>getController().isExit.addListener((observable, oldValue, newValue) -> {
+                if (oldValue != newValue) {
+                    PauseTransition delay = new PauseTransition(Duration.seconds(1));
+                    delay.setOnFinished(event -> stage.close());
+                    delay.play();
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

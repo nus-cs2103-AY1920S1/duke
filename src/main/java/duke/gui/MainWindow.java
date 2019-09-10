@@ -2,6 +2,7 @@ package duke.gui;
 
 import duke.Duke;
 import duke.core.Ui;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -19,6 +20,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private TextField userInput;
 
+    public SimpleBooleanProperty isExit;
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
@@ -27,6 +29,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        isExit = new SimpleBooleanProperty();
     }
 
     public void setDuke(Duke d) {
@@ -56,6 +59,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.equals("bye")) {
+            isExit.set(true);
+        }
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

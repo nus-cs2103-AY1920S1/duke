@@ -6,7 +6,12 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Represents a Task.
+     * @param description description of task
+     */
     public Task(String description) {
+        assert description != "" : "description of task cannot be empty";
         this.description = description;
         this.isDone = false;
     }

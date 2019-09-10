@@ -5,8 +5,14 @@
 public class Event extends Task {
     protected DateTime at;
 
+    /**
+     * Represents an event task.
+     * @param description description of task
+     * @param at date and time of task
+     */
     public Event(String description, DateTime at) {
         super(description);
+        assert at != null : "the dateTime of an event cannot be empty";
         this.at = at;
     }
 

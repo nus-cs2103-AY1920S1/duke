@@ -136,10 +136,12 @@ public class DateTime {
             minute = time % 100;
             hour = 12;
             timeSuffix = "pm";
-        } else {
+        } else if (time >= 1300 && time <= 2359) {
             minute = time % 100;
             hour = (time - minute) / 100 - 12;
             timeSuffix = "pm";
+        } else {
+            throw new DukeException("OOPS!!! Please indicate the date/time in the format DD/MM/YYYY HHMM.");
         }
         return hour + ":" + String.format("%02d", minute) + timeSuffix;
     }

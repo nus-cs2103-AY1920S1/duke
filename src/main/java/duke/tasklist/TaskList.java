@@ -43,13 +43,13 @@ public class TaskList {
         if (tasks.isEmpty()) {
             return "You do not have any tasks in your list." + "Use 'help' to see how to add tasks" +
                     " to your list!";
-        } else {
-            StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-            for (int i = 0; i < tasks.size(); i++) {
-                sb.append((i + 1) + "." + tasks.get(i) + "\n");
-            }
-            return sb.toString();
         }
+
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append((i + 1) + "." + tasks.get(i) + "\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -85,15 +85,16 @@ public class TaskList {
                 searchResults.add(task);
             }
         }
+
         if (searchResults.isEmpty()) {
             return "OOPS!!! You don't have any tasks containing the term \"" + searchTerm + "\".";
-        } else {
-            StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < searchResults.size(); i++) {
-                sb.append((i + 1) + "." + searchResults.get(i) + "\n");
-            }
-            return sb.toString();
         }
+
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < searchResults.size(); i++) {
+            sb.append((i + 1) + "." + searchResults.get(i) + "\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -114,9 +115,9 @@ public class TaskList {
     public String getListSize() {
         if (tasks.size() == 1) {
             return "Now you have 1 task in the list.";
-        } else {
-            return "Now you have " + tasks.size() + " tasks in the list.";
         }
+
+        return "Now you have " + tasks.size() + " tasks in the list.";
     }
 
 }

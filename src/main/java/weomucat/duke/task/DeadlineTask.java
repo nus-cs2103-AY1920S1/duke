@@ -1,12 +1,7 @@
 package weomucat.duke.task;
 
-import static weomucat.duke.Duke.DATETIME_FORMAT_PATTERN;
-import static weomucat.duke.Duke.DATETIME_PARSE_PATTERN;
-
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import weomucat.duke.date.Date;
 import weomucat.duke.exception.InvalidParameterException;
 
 /**
@@ -14,7 +9,7 @@ import weomucat.duke.exception.InvalidParameterException;
  */
 public class DeadlineTask extends Task {
 
-  private ZonedDateTime by;
+  private Date by;
 
   /**
    * Default constructor.
@@ -34,22 +29,12 @@ public class DeadlineTask extends Task {
       throw new InvalidParameterException("The date of a deadline cannot be empty.");
     }
 
-    try {
-      // Parse 'by' into a ZonedDateTime object.
-      DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_PATTERN)
-          .withZone(ZoneId.systemDefault());
-      this.by = ZonedDateTime.parse(by, dateTimeFormatter);
-    } catch (DateTimeParseException e) {
-      throw new InvalidParameterException(String
-          .format("I do not understand the date. Please enter in '%s' format.",
-              DATETIME_PARSE_PATTERN));
-    }
+    // Parse 'by' into a ZonedDateTime object.
+    this.by = new Date(by);
   }
 
   @Override
   public String toString() {
-    // Format ZonedDateTime object into a String.
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT_PATTERN);
-    return String.format("[D]%s (by: %s)", super.toString(), this.by.format(dateTimeFormatter));
+    return String.format("[D]%s (by: %s)", super.toString(), this.by);
   }
 }

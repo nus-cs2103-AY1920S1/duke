@@ -2,7 +2,7 @@ package weomucat.duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static weomucat.duke.Duke.DATETIME_PARSE_PATTERN;
+import static weomucat.duke.date.Date.DATETIME_PARSE_PATTERN;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +13,7 @@ public class DeadlineTaskTest {
 
   @Test
   public void descriptionShouldNotBeEmptyString() {
+    // TODO: Date.format()
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_PATTERN);
     String by = LocalDateTime.now().format(dateTimeFormatter);
 

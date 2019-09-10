@@ -1,5 +1,6 @@
 package weomucat.duke.task;
 
+import weomucat.duke.date.Event;
 import weomucat.duke.exception.InvalidParameterException;
 
 /**
@@ -7,7 +8,9 @@ import weomucat.duke.exception.InvalidParameterException;
  */
 public class EventTask extends Task {
 
-  private String at;
+  private static final String EVENT_DELIMETER = "\\|";
+
+  private Event at;
 
   /**
    * Default constructor.
@@ -25,9 +28,9 @@ public class EventTask extends Task {
 
     if (at.equals("")) {
       throw new InvalidParameterException("The location of an event cannot be empty.");
-    } else {
-      this.at = at;
     }
+
+    String[] events = at.split(EVENT_DELIMETER);
   }
 
   @Override

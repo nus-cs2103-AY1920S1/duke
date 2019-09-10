@@ -17,9 +17,9 @@ public class Duke {
   // Used when any thread needs to "poll" for events.
   public static final long THREAD_POLL_SLEEP_DURATION = 100;
 
+  // Language that Duke understands.
+  // Used in String.toLowerCase
   public static final Locale LOCALE = Locale.ENGLISH;
-  public static final String DATETIME_PARSE_PATTERN = "ddMMyy HHmm";
-  public static final String DATETIME_FORMAT_PATTERN = "dd MMMM yyyy, hh:mma, O";
 
   private Controller controller;
   private TaskList taskList;

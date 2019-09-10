@@ -18,6 +18,21 @@ import duke.command.TodoCommand;
 public class Parser {
 
     /**
+     * Array of valid command types. Valid types are:
+     * 1. done
+     * 2. undone
+     * 3. delete
+     * 4. todo
+     * 5. event
+     * 6. deadline
+     * 7. find
+     * 8. list
+     * 9. bye
+     */
+    private static final String[] VALID_COMMANDS = {"done", "undone",
+        "delete", "todo", "event", "deadline", "find", "list", "bye"};
+
+    /**
      * Parses the input string and returns a Command corresponding to the
      * required action.
      *
@@ -26,82 +41,102 @@ public class Parser {
      * @throws DukeException    If input is invalid, etc.
      */
     public static Command parse(String input) throws DukeException {
-        String command = input.strip();
-        validate(command);
-
-        if (command.startsWith("done")) {
-            return new DoneCommand(command.substring(5), true);
-        } else if (command.startsWith("undo")) {
-            return new DoneCommand(command.substring(5), false);
-        } else if (command.startsWith("delete")) {
-            return new DeleteCommand(command.substring(7));
-        } else if (command.startsWith("todo")) {
-            return new TodoCommand(command.substring(5));
-        } else if (command.startsWith("event")) {
-            return new EventCommand(command.substring(6));
-        } else if (command.startsWith("deadline")) {
-            return new DeadlineCommand(command.substring(9));
-        } else if (command.equals("list")) {
-            return new ListCommand();
-        } else if (command.startsWith("find")) {
-            return new FindCommand(command.substring(5));
-        } else { // input is "bye"
-            return new ByeCommand();
-        }
+        String trimmedInput = input.strip();
+        String commandType = trimmedInput.split(" ", 2)[0];
+        String commandArgs = input.substring(commandType.length()).strip();
+        validate(commandType, trimmedInput.length());
+        return makeCommand(commandType, commandArgs);
     }
 
     /**
-     * Throws an exception if the given input does not have a valid format.
-     * Valid formats are:
-     * 1. "list"
-     * 2. "done [taskIndex]"
-     * 3. "undo [taskIndex]"
-     * 4. "todo [description]"
-     * 5. "deadline [description] /by [time]"
-     * 6. "event [description] /at [time]"
-     * 7. "delete [taskIndex]"
-     * 8. "find [description]"
-     * 9. "bye"
+     * Checks that a given command type is valid and that the input length
+     * indicates a non-empty command description (or details).
      *
-     * @param input             Text input to be validated.
+     * @param commandType       Type of command to be checked.
+     * @param inputLength       Length of input.
      * @throws DukeException    An exception with a message describing Duke's
      *                          response to the problem.
      */
-    private static void validate(String input) throws DukeException {
-        if (input.startsWith("done") || input.startsWith("undo")) {
-            if (input.length() < 6) {
-                throw new DukeException("what's the task number again?");
+    private static void validate(String commandType, int inputLength)
+            throws DukeException {
+        boolean isInvalidType = true;
+        for (String type : VALID_COMMANDS) {
+            if (commandType.equals(type)) {
+                isInvalidType = false;
+                break;
             }
-        } else if (input.startsWith("delete")) {
-            if (input.length() < 8) {
-                throw new DukeException("I couldn't find a task to delete.");
-            }
-        } else if (input.startsWith("todo")) {
-            if (input.length() < 6) {
-                throw new DukeException("I can't see the description of your todo.");
-            }
-        } else if (input.startsWith("event")) {
-            if (input.length() < 7) {
-                throw new DukeException("I need to know the event description.");
-            } else if (!input.contains(" /at ")) {
-                throw new DukeException("I also need to know when your event is.");
-            }
-        } else if (input.startsWith("deadline")) {
-            if (input.length() < 10) {
-                throw new DukeException("I didn't catch what you need to do.");
-            } else if (!input.contains(" /by ")) {
-                throw new DukeException("what's the deadline for this?");
-            }
-        } else if (input.startsWith("find")) {
-            if (input.length() < 6) {
-                throw new DukeException("I need something to find!");
-            }
-        } else if (!input.equals("list") && !input.equals("bye")) {
+        }
+        if (isInvalidType) {
             throw new DukeException("I don't know what that means... :(");
+        }
+
+        boolean isCommandWithNoArgs = commandType.equals("list") || commandType.equals("bye");
+
+        boolean isTooShort = !isCommandWithNoArgs && inputLength < commandType.length() + 2;
+        if (isTooShort) {
+            switch (commandType) {
+            case "done":
+                // Fallthrough
+            case "undone":
+                throw new DukeException("what's the task number again?");
+            case "delete":
+                throw new DukeException("I couldn't find a task to delete.");
+            case "todo":
+                throw new DukeException("I can't see the description of your todo.");
+            case "event":
+                throw new DukeException("I need to know the event description.");
+            case "deadline":
+                throw new DukeException("I didn't catch what you need to do.");
+            case "find":
+                throw new DukeException("I need something to find!");
+            default: // should not reach here
+                assert false;
+            }
+        }
+
+        boolean hasExtraWords = isCommandWithNoArgs && inputLength > commandType.length();
+        if (hasExtraWords) {
+            throw new DukeException("did you mean to type another command?");
         }
         // TODO: Case insensitive commands
         // TODO: Validate format of "event" and "deadline" date/time
         // TODO: Use better control flow (not exceptions)
         // TODO: Add alternative commands e.g. "exit"
+    }
+
+    /**
+     * Returns a Command based on the given type and arguments.
+     *
+     * @param type              String of the Command type.
+     * @param commandArgs       String of arguments to be included in the
+     *                          Command.
+     * @return                  New Command of the given type with the given
+     *                          arguments.
+     * @throws DukeException    If the type of Command is invalid.
+     */
+    private static Command makeCommand(String type, String commandArgs) throws
+            DukeException {
+        switch (type) {
+        case "done":
+            return new DoneCommand(commandArgs, true);
+        case "undone":
+            return new DoneCommand(commandArgs, false);
+        case "delete":
+            return new DeleteCommand(commandArgs);
+        case "todo":
+            return new TodoCommand(commandArgs);
+        case "event":
+            return new EventCommand(commandArgs);
+        case "deadline":
+            return new DeadlineCommand(commandArgs);
+        case "list":
+            return new ListCommand();
+        case "find":
+            return new FindCommand(commandArgs);
+        case "bye":
+            return new ByeCommand();
+        default:
+            throw new DukeException("I don't know what this command means!");
+        }
     }
 }

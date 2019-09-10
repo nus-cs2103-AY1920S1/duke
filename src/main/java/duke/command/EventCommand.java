@@ -12,12 +12,16 @@ import duke.task.TaskList;
 public class EventCommand extends AddCommand {
 
     /**
-     * Constructs a new EventCommand with the given command details.
+     * Constructs a new EventCommand using the given details.
      *
-     * @param details   Command details.
+     * @param details           Command details.
+     * @throws DukeException    If the given details do not include an event time.
      */
-    public EventCommand(String details) {
+    public EventCommand(String details) throws DukeException {
         super(details);
+        if (!details.contains(" /at ")) {
+            throw new DukeException("I need to know when your event is!");
+        }
     }
 
     /**

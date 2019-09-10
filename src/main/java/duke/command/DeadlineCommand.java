@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.Storage;
 import duke.TextUi;
@@ -14,10 +15,14 @@ public class DeadlineCommand extends AddCommand {
     /**
      * Construct a new DeadlineCommand with the given command details.
      *
-     * @param details   Command details.
+     * @param details           Command details.
+     * @throws DukeException    If the given details do not include a deadline.
      */
-    public DeadlineCommand(String details) {
+    public DeadlineCommand(String details) throws DukeException {
         super(details);
+        if (!details.contains(" /by ")) {
+            throw new DukeException("what's the deadline for this?");
+        }
     }
 
     /**

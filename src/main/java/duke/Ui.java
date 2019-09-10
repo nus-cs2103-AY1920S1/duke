@@ -37,6 +37,10 @@ public class Ui {
      * @param taskList   Task list to be output.
      */
     public static String showTaskList(TaskList taskList) {
+        if (taskList.size() == 0) {
+            return output("Your list is empty.\n");
+        }
+        assert (taskList.size() > 0);
         return output("Here are the tasks in your list:\n" + taskList.list());
     }
 
@@ -106,13 +110,6 @@ public class Ui {
     }
 
     /**
-     * Outputs message indicating a loading error.
-     */
-    public static String showLoadingError() {
-        return output("File not found.\n");
-    }
-
-    /**
      * Outputs message describing an error.
      *
      * @param error  Description of error to be output.
@@ -121,4 +118,12 @@ public class Ui {
         return output(error);
     }
 
+    /**
+     * Outputs message indicating that action of loading saved data file was a success.
+     *
+     * @param filePath  Path to saved data file on hard disk.
+     */
+    public static String showLoadMessage(String filePath) {
+        return output("Your saved data has been successfully loaded from " + filePath + "\n");
+    }
 }

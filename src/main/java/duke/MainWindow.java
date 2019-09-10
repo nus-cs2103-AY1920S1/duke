@@ -15,6 +15,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    protected static final String DUKE_FILE = "duke.txt";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -47,11 +49,6 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(Ui.showWelcomeMessage(), dukeImage)
         );
-        if (duke.isHasLoadingError()) {
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeDialog(Ui.showLoadingError(), dukeImage)
-            );
-        }
     }
 
     /**

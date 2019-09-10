@@ -12,10 +12,6 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    protected static final String DUKE_FILE = "duke.txt";
-
-    private Duke duke = new Duke(DUKE_FILE);
-
     /**
      * Shows the GUI.
      *
@@ -28,7 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(new Duke());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -18,12 +19,13 @@ public class ByeCommand extends Command {
     /**
      * Executes the command.
      *
+     * @param duke Chat bot.
      * @param storage  Data file of chat bot.
      * @param taskList  Task list of chat bot.
      * @return Result of command.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList) {
+    public String execute(Duke duke, Storage storage, TaskList taskList) {
         return Ui.showByeMessage();
     }
 

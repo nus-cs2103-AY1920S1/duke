@@ -44,9 +44,10 @@ public class Storage {
             }
             bufferedReader.close();
         } catch (FileNotFoundException ex) {
-            throw new DukeException("");
+            throw new DukeException("File not found.\n");
         } catch (IOException e) {
             e.printStackTrace();
+            throw new DukeException("IO Exception.\n");
         }
         return taskList;
     }

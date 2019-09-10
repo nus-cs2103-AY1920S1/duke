@@ -26,7 +26,10 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<Task>();
         File file = new File(filePath);
-        Scanner s = null;
+        Scanner s;
+
+        assert file.exists() : "No save file exists";
+
         try {
             s = new Scanner(file);
             while (s.hasNext()) {

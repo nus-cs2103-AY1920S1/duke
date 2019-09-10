@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-class Command {
+abstract class Command {
 
     /**
      * constructor.
@@ -10,9 +10,7 @@ class Command {
      * @throws DukeException when input is different from required.
      * @throws IOException when input is different from required.
      */
-    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException{
-        return "";
-    }
+    abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
 
     /**
      * whether is it an exit command
@@ -24,9 +22,6 @@ class Command {
 }
 
 class AddCommand extends Command {
-    /**
-     * command to add a task.
-     */
     private Task t;
 
     /**
@@ -55,9 +50,6 @@ class AddCommand extends Command {
 }
 
 class DeleteCommand extends Command {
-    /**
-     * command to delete a task.
-     */
     private int index;
 
     /**
@@ -122,9 +114,6 @@ class ListCommand extends Command {
 }
 
 class DoneCommand extends Command {
-    /**
-     * command to mark a task as done.
-     */
     private int index;
 
     DoneCommand(int index) {

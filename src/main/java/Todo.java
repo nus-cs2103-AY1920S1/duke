@@ -9,6 +9,13 @@ public class Todo extends Task {
     }
 
     @Override
+    String getStoredForm() {
+        String name = this.getDescription();
+        int status = this.isDone()? 1 : 0;
+        return "T " + status + " " + name + "\n";
+    }
+
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }

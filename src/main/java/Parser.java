@@ -4,7 +4,7 @@ import java.util.Scanner;
 class Parser {
 
     /**
-     * parsing the statement by the user.
+     * parse the statement by the user.
      * @param fullCommand input by user.
      * @return a command
      * @throws DukeException when input does not follow required format.

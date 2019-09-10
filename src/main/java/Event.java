@@ -27,6 +27,13 @@ public class Event extends Task {
     }
 
     @Override
+    String getStoredForm() {
+        String name = this.getDescription();
+        int status = this.isDone()? 1 : 0;
+        return "E " + status + " " + name + " " + this.at + "\n";
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + Duke.formatter.format(at) + ")";
     }

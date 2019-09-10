@@ -22,6 +22,12 @@ class EmptyCommandException extends DukeException {
     }
 }
 
+class InvalidTaskException extends DukeException {
+    @Override
+    public String toString() {
+        return " ☹ OOPS!!! I'm sorry, there is no such type of task :-(";
+    }
+}
 class UnknownCommandExeption extends DukeException {
     @Override
     public String toString() {

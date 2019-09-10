@@ -14,7 +14,7 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
-    public Main() throws IOException, ParseException {
+    public Main() throws IOException, ParseException, InvalidTaskException {
     }
 
     @Override

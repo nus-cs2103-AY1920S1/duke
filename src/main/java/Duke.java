@@ -30,7 +30,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/duke.png"));
 
     // Constructor needed for Application to launch.
-    public Duke() throws IOException, ParseException {
+    public Duke() throws IOException, ParseException, InvalidTaskException {
         this("./duke.txt");
     }
     /**
@@ -39,7 +39,7 @@ public class Duke extends Application {
      * @throws IOException when input is different from required.
      * @throws ParseException when input is different from required.
      */
-    private Duke(String filePath) throws IOException, ParseException{
+    private Duke(String filePath) throws IOException, ParseException, InvalidTaskException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
@@ -149,7 +149,7 @@ public class Duke extends Application {
         return textToAdd;
     }
 
-    public static void main(String[] args) throws IOException, ParseException{
+    public static void main(String[] args) throws IOException, ParseException, InvalidTaskException {
         new Duke("./duke.txt").run();
     }
 

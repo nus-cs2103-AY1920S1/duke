@@ -2,9 +2,6 @@ import java.text.ParseException;
 import java.util.Date;
 
 public class Deadline extends Task {
-    /**
-     * a deadline task.
-     */
     private Date by;
 
     /**
@@ -27,7 +24,16 @@ public class Deadline extends Task {
     }
 
     @Override
+    String getStoredForm() {
+        String name = this.getDescription();
+        int status = this.isDone()? 1 : 0;
+        return "D " + status + " " + name + " " + this.by + "\n";
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + Duke.formatter.format(by) + ")";
     }
+
+
 }

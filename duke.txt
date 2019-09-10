@@ -1,8 +1,9 @@
-E 0 potato 25/06/1998 1256
-D 1 chop 23/12/1987 1200
-E 0 chop 23/12/1987 1200
+E 0 potato Thu Jun 25 12:56:00 SGT 1998
+D 1 chop Wed Dec 23 12:00:00 SGT 1987
+E 0 chop Wed Dec 23 12:00:00 SGT 1987
 T 0 yoyo
-D 0 hello 23/12/1982 1200
+D 0 hello Thu Dec 23 12:00:00 SGT 1982
 T 0 yoyoyoyo
 T 0 yoyoy
 T 0 jsekjf
+T 0 skjdiodicjakojdkosjdkajsdkajsdiasjioajidjsaidjiasojdaoisjdioasjd

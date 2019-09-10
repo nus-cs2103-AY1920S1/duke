@@ -20,8 +20,8 @@ public class FileSystemStorage implements ITaskStorage {
 
     /**
      * <p>
-     *      Creates a FileSystemStorage class which reads and writes Tasks at the specified path location. If the file does not
-     *      exist, a new file with the specified name will be created at the path.
+     *      Creates a FileSystemStorage class which reads and writes Tasks at the specified path location.
+     *      If the file does not exist, a new file with the specified name will be created at the path.
      * </p>
      * @param path Path to file to read and write Tasks from
      * @throws DukeIoException If an IO exception occurs.

@@ -15,7 +15,7 @@ public class TodoCommand extends Command {
         try {
             String taskName = parts[1];
             // Add new task to list
-            Todo newTodoTask = new Todo(taskName, false);
+            Todo newTodoTask = new Todo(taskName, false, "todo");
             tasks.add(newTodoTask);
 
             String response = "Got it. I've added this task:\n"

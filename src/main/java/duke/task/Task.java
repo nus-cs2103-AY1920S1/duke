@@ -7,10 +7,12 @@ package duke.task;
 public class Task {
     private String name;
     private boolean isDone;
+    private String type;
 
-    public Task(String name, boolean isDone) {
+    public Task(String name, boolean isDone, String type) {
         this.name = name;
         this.isDone = isDone;
+        this.type = type;
     }
 
     public boolean hasDone() {
@@ -27,5 +29,9 @@ public class Task {
 
     public void setDone(boolean done) {
         isDone = done;
+    }
+
+    public String getType() {
+        return type;
     }
 }

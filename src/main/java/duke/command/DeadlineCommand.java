@@ -20,7 +20,7 @@ public class DeadlineCommand extends Command {
         LocalDateTime localDateTime = Parser.changeToDateTimeFormat(dateTime);
 
         // Add new task to list
-        Deadline newDeadline = new Deadline(name, false, dateTime, localDateTime);
+        Deadline newDeadline = new Deadline(name, false, "deadline", dateTime, localDateTime);
         tasks.add(newDeadline);
 
         String response = "Got it. I've added this task:\n"

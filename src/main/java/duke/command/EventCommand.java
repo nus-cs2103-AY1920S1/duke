@@ -19,7 +19,7 @@ public class EventCommand extends Command {
         LocalDateTime localDateTime = Parser.changeToDateTimeFormat(dateTime);
 
         // Add new task to list
-        Event newEvent = new Event(name, false, dateTime, localDateTime);
+        Event newEvent = new Event(name, false,"event", dateTime, localDateTime);
         tasks.add(newEvent);
 
         String response = "Got it. I've added this task:\n"

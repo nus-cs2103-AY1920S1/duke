@@ -6,22 +6,16 @@ import java.time.LocalDateTime;
  * Represents a duke.task.Task with a time of event attached
  */
 
-public class Event extends Task {
+public class Event extends TimeTask {
     private String time;
-    private LocalDateTime localDateTime;
 
-    public Event(String name, boolean isDone, String time, LocalDateTime localDateTime) {
-        super(name, isDone);
+    public Event(String name, boolean isDone, String type,  String time, LocalDateTime localDateTime) {
+        super(name, isDone, type, localDateTime);
         this.time = time;
-        this.localDateTime = localDateTime;
-    }
-
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
     }
 
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + getName() + " (at: " + localDateTime.toString()  + ")";
+        return "[E][" + getStatusIcon() + "] " + getName() + " (at: " + getLocalDateTime().toString()  + ")";
     }
 }

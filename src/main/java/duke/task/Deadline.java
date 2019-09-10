@@ -6,21 +6,16 @@ import java.time.LocalDateTime;
  * Represents a duke.task.Task with a deadline time attached
  */
 
-public class Deadline extends Task {
+public class Deadline extends TimeTask {
     private String time;
-    private LocalDateTime localDateTime;
 
-    public Deadline(String name, boolean isDone, String time, LocalDateTime localDateTime) {
-        super(name, isDone);
+
+    public Deadline(String name, boolean isDone, String type, String time, LocalDateTime localDateTime) {
+        super(name, isDone, type, localDateTime);
         this.time = time;
-        this.localDateTime = localDateTime;
-    }
-
-    public LocalDateTime getLocalDateTime() {
-        return localDateTime;
     }
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + getName() + " (by: " + localDateTime.toString()  + ")";    }
+        return "[D][" + getStatusIcon() + "] " + getName() + " (by: " + getLocalDateTime().toString()  + ")";    }
 }

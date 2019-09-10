@@ -1,15 +1,6 @@
 package duke;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.TodoCommand;
-import duke.command.EventCommand;
-import duke.command.WrongCommand;
+import duke.command.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,6 +31,8 @@ public class Parser {
             return new DeadlineCommand(parts);
         case "event":
             return new EventCommand(parts);
+        case "sort":
+            return new SortCommand(parts);
         default:
             return new WrongCommand(parts);
         }

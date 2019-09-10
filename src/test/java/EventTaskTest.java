@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import duke.task.EventTask;
@@ -17,10 +18,10 @@ public class EventTaskTest {
         String dateString = "09/08/0706 0504";
         SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy HHmm");
         Date date = dateParser.parse(dateString);
-        EventTask task = new EventTask("Make useless PRs", date);
+        EventTask task = new EventTask("Make useless PRs", date, new ArrayList<String>());
 
         assertEquals(
-            String.format("E | 0 | Make useless PRs | %s", dateString),
+            String.format("E | 0 |  | Make useless PRs | %s", dateString),
             task.toEncodedString()
         );
     }
@@ -34,11 +35,11 @@ public class EventTaskTest {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy, h:mm a");
         Date date = dateParser.parse(dateString);
         String formattedDate = dateFormatter.format(date);
-        EventTask task = new EventTask("Receive Happy New Year text messages", date);
+        EventTask task = new EventTask("Receive Happy New Year text messages", date, new ArrayList<String>());
         task.complete();
 
         assertEquals(
-            String.format("[E][V] Receive Happy New Year text messages (at: %s)", formattedDate),
+            String.format("[E][V][] Receive Happy New Year text messages (at: %s)", formattedDate),
             task.toString()
         );
     }

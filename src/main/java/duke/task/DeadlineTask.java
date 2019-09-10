@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,9 +14,10 @@ public class DeadlineTask extends Task {
      * 
      * @param description <code>String</code> description of this <code>Task</code>.
      * @param byDeadline deadline of this <code>DeadlineTask</code>, as a <code>Date</code> object.
+     * @param tags an <code>ArrayList</code> of <code>String</code> tags for this task.
      */
-    public DeadlineTask(String description, Date byDeadline) {
-        super(description);
+    public DeadlineTask(String description, Date byDeadline, ArrayList<String> tags) {
+        super(description, tags);
         this.byDeadline = byDeadline;
     }
 
@@ -33,8 +35,9 @@ public class DeadlineTask extends Task {
      */
     public String toEncodedString() {
         return String.format(
-            "D | %d | %s | %s",
+            "D | %d | %s | %s | %s",
             this.isComplete ? 1 : 0,
+            this.tagsToString(),
             this.description,
             Task.DATE_WRITER.format(this.byDeadline)
         );

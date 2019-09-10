@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import duke.task.DeadlineTask;
@@ -17,11 +18,11 @@ public class DeadlineTaskTest {
         String dateString = "12/12/2012 1212";
         SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy HHmm");
         Date date = dateParser.parse(dateString);
-        DeadlineTask task = new DeadlineTask("Finish duking it out", date);
+        DeadlineTask task = new DeadlineTask("Finish duking it out", date, new ArrayList<String>());
         task.complete();
 
         assertEquals(
-            String.format("D | 1 | Finish duking it out | %s", dateString),
+            String.format("D | 1 |  | Finish duking it out | %s", dateString),
             task.toEncodedString()
         );
     }
@@ -35,10 +36,10 @@ public class DeadlineTaskTest {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("EEE, dd MMM yyyy, h:mm a");
         Date date = dateParser.parse(dateString);
         String formattedDate = dateFormatter.format(date);
-        DeadlineTask task = new DeadlineTask("S/U this module", date);
+        DeadlineTask task = new DeadlineTask("S/U this module", date, new ArrayList<String>());
 
         assertEquals(
-            String.format("[D][X] S/U this module (by: %s)", formattedDate),
+            String.format("[D][X][] S/U this module (by: %s)", formattedDate),
             task.toString()
         );
     }

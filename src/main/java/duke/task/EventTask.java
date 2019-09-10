@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,9 +14,10 @@ public class EventTask extends Task {
      * 
      * @param description <code>String</code> description of this <code>Task</code>.
      * @param atTime timestamp of this <code>EventTask</code>, as a <code>Date</code> object.
+     * @param tags an <code>ArrayList</code> of <code>String</code> tags for this task.
      */
-    public EventTask(String description, Date atTime) {
-        super(description);
+    public EventTask(String description, Date atTime, ArrayList<String> tags) {
+        super(description, tags);
         this.atTime = atTime;
     }
 
@@ -33,8 +35,9 @@ public class EventTask extends Task {
      */
     public String toEncodedString() {
         return String.format(
-            "E | %d | %s | %s",
+            "E | %d | %s | %s | %s",
             this.isComplete ? 1 : 0,
+            this.tagsToString(),
             this.description,
             Task.DATE_WRITER.format(this.atTime)
         );

@@ -1,6 +1,6 @@
 package storage;
 
-import duke.task.tasks.Task;
+import duke.task.Task;
 import error.storage.StorageException;
 
 import java.util.List;

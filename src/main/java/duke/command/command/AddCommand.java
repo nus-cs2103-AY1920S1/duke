@@ -1,7 +1,7 @@
 package duke.command.command;
 
 import duke.command.Command;
-import duke.task.tasks.Task;
+import duke.task.Task;
 import duke.task.TasksController;
 import error.ui.UiException;
 

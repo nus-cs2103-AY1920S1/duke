@@ -1,6 +1,6 @@
 package util;
 
-import duke.task.tasks.Task;
+import duke.task.Task;
 
 import java.util.List;
 
@@ -104,14 +104,14 @@ public class OutputBuilder {
     public OutputBuilder appendTasks(List<Task> tasks) {
         if (!tasks.isEmpty()) {
             message.append("1.")
-                    .append(tasks.get(0).getDisplayMessage());
+                    .append(tasks.get(0).getDescription());
         }
 
         for (int i = 1; i < tasks.size(); i++) {
             message.append("\n")
                     .append(i + 1)
                     .append(".")
-                    .append(tasks.get(i).getDisplayMessage());
+                    .append(tasks.get(i).getDescription());
         }
 
         return this;

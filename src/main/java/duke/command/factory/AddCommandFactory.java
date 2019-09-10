@@ -2,8 +2,7 @@ package duke.command.factory;
 
 import duke.command.command.AddCommand;
 import duke.task.TasksController;
-import duke.task.tasks.Task;
-import duke.task.tasks.TaskKeyword;
+import duke.task.Task;
 import error.task.UnknownTaskException;
 import error.task.TaskCreationException;
 import error.ui.UiException;
@@ -34,18 +33,13 @@ public class AddCommandFactory {
             ui.displayOutput(UNKNOWN_TASK_MESSAGE);
         } catch (TaskCreationException e) {
 
-            ui.displayOutput(e.getDetails());
+            ui.displayOutput(e.toString());
         }
 
         return Optional.empty();
     }
 
     private Task getTask(String input) throws UnknownTaskException, TaskCreationException {
-        String command = CommandUtils.getCommand(input);
-        String arguments = CommandUtils.getArguments(input);
-
-        TaskKeyword keyword = TaskKeyword.parseKeyword(command);
-
-        return keyword.taskProducer.getTask(arguments);
+        return null;
     }
 }

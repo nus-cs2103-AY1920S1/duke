@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.task.tasks.Deadline;
 import duke.task.tasks.Event;
-import duke.task.tasks.Task;
 import duke.task.tasks.ToDo;
 
 public enum TaskType {

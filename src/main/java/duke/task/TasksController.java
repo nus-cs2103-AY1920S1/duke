@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.task.tasks.Task;
 import error.storage.StorageException;
 import error.ui.UiException;
 import storage.Storage;
@@ -144,7 +143,7 @@ public class TasksController {
             List<Task> tasks = storage.getTasks();
 
             List<Task> matchingTasks = tasks.stream()
-                    .filter(task -> task.getDescription().contains(parameter))
+                    .filter(task -> task.getDetails().contains(parameter))
                     .collect(Collectors.toList());
 
             view.displaySearchResults(matchingTasks, ui);

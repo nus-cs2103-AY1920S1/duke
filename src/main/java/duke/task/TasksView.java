@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.tasks.Task;
-import error.storage.StorageException;
 import error.ui.UiException;
 import ui.UiController;
 import util.OutputBuilder;
@@ -58,7 +56,7 @@ public class TasksView {
         builder.append("Got it. I've added this duke.task:")
                 .newLine()
                 .indent()
-                .append(task.getDisplayMessage())
+                .append(task.getDescription())
                 .newLine()
                 .append(String.format("Now you have %d tasks in the list", tasksLength));
 
@@ -77,7 +75,7 @@ public class TasksView {
         builder.append("Nice! I've marked this duke.task as done:")
                 .newLine()
                 .indent()
-                .append(task.getDisplayMessage());
+                .append(task.getDescription());
 
         String output = builder.build();
         ui.displayOutput(output);
@@ -95,7 +93,7 @@ public class TasksView {
         builder.append("Noted. I've removed this duke.task:")
                 .newLine()
                 .indent()
-                .append(task.getDisplayMessage())
+                .append(task.getDescription())
                 .newLine()
                 .append(String.format("Now you have %d tasks in the list", tasksLength));
 

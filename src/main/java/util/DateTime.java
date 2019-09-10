@@ -20,7 +20,7 @@ public class DateTime {
      * @return LocalDateTime.
      * @throws UnknownDateTimeException if date and time is not in the correct format.
      */
-    public static LocalDateTime parseDateTime(String dateTimeString) throws UnknownDateTimeException {
+    public static LocalDateTime parse(String dateTimeString) throws UnknownDateTimeException {
         try {
             String[] dateTimeStrings = dateTimeString.split("\\s+");
 

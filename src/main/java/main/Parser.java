@@ -20,7 +20,11 @@ public class Parser {
 
         switch (cmd) {
         case "help":
-            return new HelpCommand();
+            if (arr.length == 2) {
+                return new HelpCommand(arr[1].trim().toLowerCase());
+            } else {
+                return new HelpCommand();
+            }
         case "bye":
             return new ExitCommand();
         case "list":

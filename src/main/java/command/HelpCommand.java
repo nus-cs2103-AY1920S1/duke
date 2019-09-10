@@ -2,16 +2,31 @@ package command;
 
 import main.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * A HelpCommand Object to deal with help requests from the user.
  */
 public class HelpCommand extends Command {
+
+    private String command = "";
+    ArrayList<String> commandList = new ArrayList<>(
+            Arrays.asList("bye", "list", "done", "delete", "todo", "event", "deadline", "archive", "find"));
 
     /**
      * Creates a new HelpCommand.
      */
     public HelpCommand() {
         super();
+    }
+
+    /**
+     * Creates a new HelpCommand.
+     */
+    public HelpCommand(String command) {
+        super();
+        this.command = command;
     }
 
     /**
@@ -25,7 +40,13 @@ public class HelpCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage, Archive archive) {
         Helper helper = new Helper();
-        String res = ui.dukeEchoString(helper.getCommands());
+        String res;
+        if (command.equals("")) {
+            res = ui.dukeEchoString(helper.getCommands());
+        } else {
+            res = ui.dukeEchoString(helper.getSpecificCommand(command));
+        }
+
         return res;
     }
 }

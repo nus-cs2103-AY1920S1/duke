@@ -37,15 +37,6 @@ public class TaskList {
     }
 
     /**
-     * Marks task at given index as undone
-     * @param idx - Index of task in list
-     */
-    public void undone(int idx) {
-        assert (idx >= 0 && idx < this.list.size());
-        this.list.get(idx).markUndone();
-    }
-
-    /**
      * Marks task at given index as done
      * @param idx - Index of task in list
      */
@@ -86,5 +77,16 @@ public class TaskList {
                           })
                           .collect(Collectors.joining());
         return response;
+    }
+
+    /**
+     * Returns a new tasklist containing a copy of all the same values
+     */
+    public TaskList getCopyTaskList() {
+        TaskList newList = new TaskList();
+        for (int i = 0; i < this.size(); i ++) {
+            newList.add(this.list.get(i).getTaskCopy());
+        }
+        return newList;
     }
 }

@@ -8,7 +8,7 @@ import duke.task.TaskList;
 import duke.ui.MainWindow;
 
 public class Duke {
-    private static TaskList taskList;
+    private TaskList taskList;
     private static ParserManager parserManager;
     private static DataStorage dataStorage;
     private static MainWindow mainWindow;
@@ -16,31 +16,38 @@ public class Duke {
 
     public Duke(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        Duke.initialize();
+        initialize();
         mainWindow.display(Ui.getWelcomeMessage());
+        commandHistory = new CommandHistoryStack();
     }
 
     /**
      * Initialize static variables
      */
-    public static void initialize() {
+    public void initialize() {
         dataStorage = new DataStorage();
-        taskList = dataStorage.getStoredTaskList();
+        this.taskList = dataStorage.getStoredTaskList();
         parserManager = new ParserManager();
-        commandHistory = new CommandHistoryStack();
     }
 
     /**
      * Adds commands to lists and runs executes commands
      */
-    public static String getResponse(String input) {
+    public String getResponse(String input) {
         if(!input.trim().toLowerCase().equals("bye")) {
             try {
-                Command command = parserManager.parseCommand(taskList, input.trim(), commandHistory);
-                assert command != null;
-                String response = command.execute(taskList);
-                dataStorage.storeTaskList(taskList);
-                return response;
+                if (isUndoCommand(input)) {
+                    this.taskList = commandHistory.pop();
+                    dataStorage.storeTaskList(this.taskList);
+                    return commandHistory.getUndoMessage(this.taskList);
+                } else {
+                    Command command = parserManager.parseCommand(this.taskList, input.trim());
+                    assert command != null;
+                    commandHistory.update(command, this.taskList);
+                    String response = command.execute(this.taskList);
+                    dataStorage.storeTaskList(this.taskList);
+                    return response;
+                }
             } catch (UnknownCommandException e) {
                 return e.getMessage();
             } catch (IndexOutOfBoundsException e) {
@@ -50,5 +57,9 @@ public class Duke {
             }
         }
         return Ui.getGoodbyeMessage();
+    }
+
+    private static boolean isUndoCommand(String fullCommand) {
+        return fullCommand.toLowerCase().trim().equals("undo");
     }
 }

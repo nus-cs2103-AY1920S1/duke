@@ -35,6 +35,14 @@ public class DeadlineTask extends Task {
         return this.deadLine;
     }
 
+    public Task getTaskCopy() {
+        Task task = new DeadlineTask(this.getName(), this.getDeadline());
+        if (this.isDone()) {
+            task.markDone();
+        }
+        return task;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " (by: " + this.deadLine + ")";

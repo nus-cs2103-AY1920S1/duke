@@ -27,8 +27,6 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    /** Marks Task as Undone **/
-    public void markUndone() { this.isDone = false; }
     /**
      * Returns taskName
      * @return String name
@@ -62,6 +60,9 @@ public abstract class Task {
     private String getTaskIcon() {
         return this.taskIcon;
     }
+
+    /** Returns a copy of the existing task **/
+    public abstract Task getTaskCopy();
 
     @Override
     public String toString() {

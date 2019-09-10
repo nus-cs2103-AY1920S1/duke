@@ -9,46 +9,34 @@ import java.util.Stack;
  * A Stack containing past commands - doesn't keep track of commands from previous runs
  */
 public class CommandHistoryStack {
-    private static Stack<Command> commandStack;
-    private static final boolean MARK_AS_UNDONE = true;
+    private Stack<TaskList> commandStack;
+    private static final String UNDO_MESSAGE = "The last action was undone :)\n";
 
     public CommandHistoryStack() {
-        commandStack = new Stack<>();
+        this.commandStack = new Stack<>();
     }
 
     /**
      * @return most recent command
      */
-    public Command pop() throws EmptyHistoryException {
-        if(commandStack.isEmpty()) { throw new EmptyHistoryException(); }
-        return commandStack.pop();
+    public TaskList pop() throws EmptyHistoryException {
+        if(this.commandStack.isEmpty()) { throw new EmptyHistoryException(); }
+        return this.commandStack.pop();
     }
 
     public void update(Command command, TaskList taskList) {
-        switch(command.getCommandType()) {
-        case DELETE:
-            commandStack.push(retrieveAddCommand(command, taskList));
-            break;
-        case DONE:
-            commandStack.push(retrieveDeleteCommand(command, taskList));
-            break;
+        switch (command.getCommandType()) {
         case TODO:
         case DEADLINE:
         case EVENT:
-            commandStack.push(new DeleteCommand(taskList.size()));
+        case DELETE:
+        case DONE:
+            this.commandStack.push(taskList.getCopyTaskList());
             break;
         }
     }
 
-    private Command retrieveAddCommand(Command command, TaskList taskList) {
-        DeleteCommand deleteCommand = (DeleteCommand) command;
-        Task task = taskList.get(deleteCommand.getIndex());
-        return new AddCommand(task);
-    }
-
-    private Command retrieveDeleteCommand(Command command, TaskList taskList) {
-        DoneCommand doneCommand = (DoneCommand) command;
-        int idx = doneCommand.getIndex();
-        return new DoneCommand(idx, MARK_AS_UNDONE);
+    public String getUndoMessage(TaskList taskList) {
+        return UNDO_MESSAGE + taskList.getPrintListMessage();
     }
 }

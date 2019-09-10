@@ -35,6 +35,14 @@ public class EventTask extends Task {
         return this.duration;
     }
 
+    public Task getTaskCopy() {
+        Task task = new EventTask(this.getName(), this.getDuration());
+        if (this.isDone()) {
+            task.markDone();
+        }
+        return task;
+    }
+
     @Override
     public String toString() {
         return super.toString() + " (at: " + this.duration + ")";

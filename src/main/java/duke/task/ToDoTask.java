@@ -14,4 +14,12 @@ public class ToDoTask extends Task {
     public ToDoTask(String taskName) {
         super(taskName, DEFAULT_TODO_ICON,TODO_TASK_TYPE);
     }
+
+    public Task getTaskCopy() {
+        Task task = new ToDoTask(this.getName());
+        if (this.isDone()) {
+            task.markDone();
+        }
+        return task;
+    }
 }

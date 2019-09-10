@@ -97,6 +97,7 @@ public class Storage {
      */
     public void updateFile(TaskList taskList) {
         List<Task> list = taskList.getTaskList();
+        assert list != null;
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < list.size(); i++) {

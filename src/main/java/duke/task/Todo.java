@@ -13,4 +13,9 @@ public class Todo extends Task {
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
+
+    @Override
+    protected Todo clone() {
+        return new Todo(this.getDescription(), this.getIsDone());
+    }
 }

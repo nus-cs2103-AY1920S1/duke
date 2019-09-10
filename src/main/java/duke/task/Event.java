@@ -25,4 +25,9 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E]%s (at: %s)", super.toString(), at.format(DATE_TIME_FORMAT));
     }
+
+    @Override
+    protected Event clone() {
+        return new Event(this.getDescription(), at.format(DATE_TIME_FORMAT), this.getIsDone());
+    }
 }

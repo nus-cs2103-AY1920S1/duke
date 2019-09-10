@@ -25,4 +25,9 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), by.format(DATE_TIME_FORMAT));
     }
+
+    @Override
+    protected Deadline clone() {
+        return new Deadline(this.getDescription(), by.format(DATE_TIME_FORMAT), this.getIsDone());
+    }
 }

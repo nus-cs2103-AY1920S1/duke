@@ -7,7 +7,10 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.TaskListHistory;
 import duke.task.Todo;
+
+import java.util.Collections;
 
 public class Parser {
 
@@ -25,6 +28,9 @@ public class Parser {
         case "todo":
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) throws DukeException {
+                    // Saves a snapshot of the previous tasklist
+                    TaskListHistory.getInstance().push(tasks);
+
                     try {
                         Task task = new Todo(inputs[1]);
                         tasks.add(task);
@@ -38,6 +44,9 @@ public class Parser {
         case "deadline":
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) throws DukeException {
+                    // Saves a snapshot of the previous tasklist
+                    TaskListHistory.getInstance().push(tasks);
+
                     try {
                         String[] strings = inputs[1].split("/by", 2);
                         String desc = strings[0].trim();
@@ -55,6 +64,9 @@ public class Parser {
         case "event":
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) throws DukeException {
+                    // Saves a snapshot of the previous tasklist
+                    TaskListHistory.getInstance().push(tasks);
+
                     try {
                         String[] strings = inputs[1].split("/by", 2);
                         String desc = strings[0].trim();
@@ -89,6 +101,9 @@ public class Parser {
         case "done":
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) throws DukeException {
+                    // Saves a snapshot of the previous tasklist
+                    TaskListHistory.getInstance().push(tasks);
+
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskDone = tasks.get(taskNumber - 1);
@@ -104,6 +119,9 @@ public class Parser {
         case "delete":
             return new Command() {
                 public String execute(TaskList tasks, Storage storage) throws DukeException {
+                    // Saves a snapshot of the previous tasklist
+                    TaskListHistory.getInstance().push(tasks);
+
                     try {
                         int taskNumber = Integer.parseInt(inputs[1].trim());
                         Task taskRemoved = tasks.remove(taskNumber - 1);
@@ -156,6 +174,26 @@ public class Parser {
 
                 public boolean isExit() {
                     return true;
+                }
+            };
+        case "undo":
+            return new Command() {
+                public String execute(TaskList tasks, Storage storage) throws DukeException {
+                    TaskList prevTasks = TaskListHistory.getInstance().pop();
+
+                    if (prevTasks == null) {
+                        throw new DukeException("Oops! There is nothing to undo.");
+                    }
+
+                    tasks.clear();
+
+                    Task[] tasksToAdd = new Task[prevTasks.size()];
+                    prevTasks.toArray(tasksToAdd);
+
+                    Collections.addAll(tasks, tasksToAdd);
+                    storage.saveTasks(tasks);
+
+                    return "I've undo the previous command.";
                 }
             };
         default:

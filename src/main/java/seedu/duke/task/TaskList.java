@@ -1,10 +1,10 @@
 package seedu.duke.task;
 
 import seedu.duke.exception.DukeException;
+import seedu.duke.priority.Priority;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,7 +19,6 @@ public class TaskList extends ArrayList<Task> {
 
     /** This is the second constructor which is used to initialise a non-empty TaskList.
      * It reads the existing Task objects from a file and adds them to the TaskList.
-     *
      * @param f Represents the file to be read.
      * @throws DukeException  If f cannot be found.
      */
@@ -35,16 +34,25 @@ public class TaskList extends ArrayList<Task> {
                 case "T":
                     add(new Todo(parts[2]));
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
+                    if (parts.length > 3 ) {
+                        this.get(this.size() - 1).priority = readPriority(parts[3]);
+                    }
                     break;
                 case "E":
                     assert parts[2].equals("") == false: "Error in file recording.";
                     add(new Event(parts[2], parts[3]));
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
+                    if (parts.length > 4) {
+                        this.get(this.size() - 1).priority = readPriority(parts[4]);
+                    }
                     break;
                 case "D":
                     assert parts[2].equals("") == false: "Error in file recording.";
                     add(new Deadline(parts[2], parts[3]));
                     this.get(this.size() - 1).isDone = (parts[1].equals("1"));
+                    if (parts.length > 4) {
+                        this.get(this.size() - 1).priority = readPriority(parts[4]);
+                    }
                     break;
                 default:
                     break;
@@ -52,6 +60,19 @@ public class TaskList extends ArrayList<Task> {
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("");
+        }
+    }
+
+    private Priority readPriority(String strPriority) {
+        switch (strPriority) {
+        case "HIGH":
+            return Priority.HIGH;
+        case "MEDIUM":
+            return Priority.MEDIUM;
+        case "LOW":
+            return Priority.LOW;
+        default:
+            return null;
         }
     }
 }

@@ -33,6 +33,8 @@ public class Parser {
             return new AddCommand(parts[0], parts[1]);
         case "deadline": case "event":
             return new AddCommand(parts[0], parts[1]);
+        case "#1" : case "#2" : case "#3":
+            return new PriorityCommand(parts[0], parts[1]);
         default:
             throw new DukeException("");
         }

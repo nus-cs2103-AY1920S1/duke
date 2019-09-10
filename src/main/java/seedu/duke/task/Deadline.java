@@ -22,11 +22,13 @@ public class Deadline extends Task {
 
     @Override
     public String writeToFile() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + strBy + "\n";
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + strBy + ((priority == null)? "\n" : " | "
+                + priority + "\n");
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + strBy + ")";
+        return "[D]" + super.toString() + " (by: " + strBy + ")" + ((priority == null)? "" : " <<Priority: " + priority
+                + ">>");
     }
 }

@@ -1,12 +1,16 @@
 package seedu.duke.task;
 
+import seedu.duke.priority.Priority;
+
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        //this.priority = Priority.LOW;
     }
 
     public String getStatusIcon() {
@@ -24,6 +28,12 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public Priority getPriority() { return priority; }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public String writeToFile() {

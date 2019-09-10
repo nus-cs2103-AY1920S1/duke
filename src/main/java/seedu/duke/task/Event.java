@@ -21,11 +21,13 @@ public class Event extends Task {
 
     @Override
     public String writeToFile() {
-        return "E | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.strAt + "\n";
+        return "E | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.strAt +
+                ((priority == null)? "\n" : " | " + priority + "\n");
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + strAt + ")";
+        return "[E]" + super.toString() + " (at: " + strAt + ")" + ((priority == null)? "" : " <<Priority: " + priority
+                + ">>");
     }
 }

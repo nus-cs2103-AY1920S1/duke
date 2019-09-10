@@ -60,6 +60,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
+
         return "Duke heard: " + input;
     }
 }

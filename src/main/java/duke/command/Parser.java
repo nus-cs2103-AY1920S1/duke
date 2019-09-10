@@ -29,16 +29,13 @@ public class Parser {
      * @throws ParseException  If date is not in date format.
      */
     public void process(String line) throws DukeException, ParseException {
-        Integer num; //number in list which is done
         Task currTask; //refers to current task in list
-        String currEvent;
-        String desc = ""; //current task being added
-        String time = ""; //current time of current task being added
         String[] words = line.split(" ", 2);
-        currEvent = words[0];
+        String currEvent = words[0];
         if (line.equals("list")) {
             ui.printList(taskList.list);
         } else if (words[0].equals("done")) {
+            Integer num; //number in list which is done
             num = Integer.valueOf(words[1]);
             currTask = taskList.list.get(num - 1);
             currTask.setStatusIcon(true);
@@ -47,7 +44,7 @@ public class Parser {
             if (words.length < 2) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            desc = words[1];
+            String desc = words[1];
             currTask = new ToDos(desc);
             taskList.add(currTask);
             ui.printAdd(currTask, taskList);
@@ -56,8 +53,8 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
             int before = taskList.getSize();
-            desc = words[1].split(" /by ", 2)[0];
-            time = words[1].split(" /by ", 2)[1];
+            String desc = words[1].split(" /by ", 2)[0];
+            String time = words[1].split(" /by ", 2)[1];
             currTask = new Deadline(desc, time);
             taskList.add(currTask);
             assert taskList.getSize() == (before + 1) : "taskList size not incremented.";
@@ -66,8 +63,8 @@ public class Parser {
             if (words.length < 2) {
                 throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
             }
-            desc = words[1].split(" /at ", 2)[0];
-            time = words[1].split(" /at ", 2)[1];
+            String desc = words[1].split(" /at ", 2)[0];
+            String time = words[1].split(" /at ", 2)[1];
             currTask = new Event(desc, time);
             taskList.add(currTask);
             ui.printAdd(currTask, taskList);

@@ -2,7 +2,7 @@
  * Inherits from the Task class and contains information about the Deadline tasks.
  */
 public class Deadline extends Task {
-    private String by;
+    private String byDate;
 
     /**
      * Creates a deadline task with description, deadline and status (done or not done) .
@@ -13,13 +13,14 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, boolean b) {
         super(description);
-        this.by = by;
+        this.byDate = by;
+        //used while loading data from file to update the status of the task
         this.isDone = b;
     }
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.byDate = by;
     }
 
     /**
@@ -29,6 +30,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + byDate + ")";
     }
 }

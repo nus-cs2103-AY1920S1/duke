@@ -9,17 +9,14 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Scanner;
-
 import javafx.scene.control.Label;
 
 /**
- * Represents the personal assistant and contains the main method.
+ * Represents the personal assistant and contains JavaFX details for the application.
  */
 public class Duke extends Application {
 
@@ -43,16 +40,19 @@ public class Duke extends Application {
         ui = new Ui();
         parser = new Parser();
         storage = new Storage("../Duke/data/Duke.txt");
+        // file contains user data
         File file = new File("../Duke/data/Duke.txt");
-        Scanner loadData = new Scanner(file);
-        while (loadData.hasNextLine()) {
-            String tasks = loadData.nextLine();
-            parser.readTask(tasks,list);
-        }
+        //read and load the existing data into the task list.
+        list.readDataFromFile(file,parser);
+
     }
 
+    /**
+     * Contains the JavaFX elements' details.
+     * @param stage the stage where the scene of the application is set.
+     */
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -127,6 +127,11 @@ public class Duke extends Application {
 
     }
 
+    /**
+     * Method to get responses and queries in the form of a label.
+     * @param text the string to be displayed in the label
+     * @return label consisting of required data
+     */
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);

@@ -54,7 +54,6 @@ public class Parser {
             } else if (actionKey.equals("delete")) { // delete a specific plan
                 LinkedList<Task> totalTasks = tasks.getListOfTasks();
                 int index = Integer.parseInt(keyList[1]);
-                int taskSize = totalTasks.size();
                 String outputText = ui.printTaskDelete(totalTasks, index);
                 tasks.deleteTask(index - 1);
                 storage.writeFile(tasks.getListOfTasks());

@@ -36,17 +36,53 @@ public class Ui extends AnchorPane {
      * @return an output text for the UI.
      */
     public String searchTaskKeyword(TaskList taskList, String keyword) {
-        String outputText = "Here are the matching tasks in your list:\n";
         int counter = 1;
+        int typoCounter = 1;
+        boolean hasMatchResult = false;
+        boolean hasPartialMatchResult = false;
+        char[] charOfKeyword = keyword.toCharArray();
+        String outputText = "Here are the matching tasks in your list:\n";
+        String typoInputReplyText = "Did you mean by this?\n";
+
+        String firstLetter = Character.toString(charOfKeyword[0]);
+        String lastLetter = Character.toString(charOfKeyword[charOfKeyword.length - 1]);
 
         for (Task subTask : taskList.getListOfTasks()) {
             if (subTask.getDescription().contains(keyword)) {
                 outputText = (outputText + counter + ". " + subTask) + "\n";
                 counter++;
+                hasMatchResult = true;
+            }
+
+            String[] listOfWords = subTask.getDescription().split(" ");
+
+            for (String word : listOfWords) {
+                if (word.startsWith(firstLetter) && word.endsWith(lastLetter)) {
+                    typoInputReplyText = (typoInputReplyText + typoCounter + ". " + subTask) + "\n";
+                    typoCounter++;
+                    hasPartialMatchResult = true;
+                    break;
+                }
             }
         }
 
-        return outputText;
+        if (!hasPartialMatchResult) {
+            for (Task subTask : taskList.getListOfTasks()) {
+                if (subTask.getDescription().startsWith(firstLetter)) {
+                    typoInputReplyText = (typoInputReplyText + typoCounter + ". " + subTask) + "\n";
+                    typoCounter++;
+                    hasPartialMatchResult = true;
+                }
+            }
+        }
+
+        if (hasMatchResult) {
+            return outputText;
+        } else if (hasPartialMatchResult) {
+            return typoInputReplyText;
+        } else {
+            return "No result found!";
+        }
     }
 
     /**

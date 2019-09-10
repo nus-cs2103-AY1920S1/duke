@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @param tasks to access the list of tasks
      * @param ui to give feedback to user
      * @param storage to write changes to file
-     * @return String feedback to user
+     * @return feedback from Duke
      * @throws DukeException if keyword is not found in task list
      */
     @Override

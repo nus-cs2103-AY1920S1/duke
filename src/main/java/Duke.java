@@ -20,7 +20,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage= new Storage(filePath);
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
@@ -79,13 +79,11 @@ public class Duke {
     private void run() {
         System.out.println(ui.welcomeMessage());
 
-        Scanner sc = new Scanner(System.in);
-
         boolean isExit = false;
 
         while (!isExit) {
             try {
-                String fullCommand = sc.nextLine();
+                String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
                 System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit();

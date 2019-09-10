@@ -25,7 +25,7 @@ public class Storage {
      * @param filePath the local path to storage file
      */
     public Storage(String filePath) {
-        assert !filePath.isEmpty(): "File path not specified!";
+        assert !filePath.isEmpty() : "File path not specified!";
         this.filePath = filePath;
         this.file = new File(filePath);
         this.tasks = new ArrayList<>();
@@ -52,47 +52,33 @@ public class Storage {
         String name;
         String time;
         String done;
+
         // parse input and create tasks
         while (sc.hasNextLine()) {
             try {
                 String line = sc.nextLine();
+
+                // since task details are separated by | when saved
+                // refer to printForStorage method in Task component
                 String[] savedTask = line.split("\\|");
 
                 for (int i = 0; i < savedTask.length; i++) {
                     savedTask[i] = savedTask[i].trim();
                 }
 
-                switch (savedTask[0]) {
+                String taskType = savedTask[0];
+
+                switch (taskType) {
                 case "T":
-                    name = savedTask[2];
-                    done = savedTask[1];
-                    Task todo = new Todo(name);
-                    if (done.equals("1")) {
-                        todo.markAsDone();
-                    }
-                    tasks.add(todo);
+                    createAndAddTodo(savedTask);
                     break;
 
                 case "D":
-                    name = savedTask[2];
-                    done = savedTask[1];
-                    time = savedTask[3];
-                    Task deadline = new Deadline(name, new StringToDate(time));
-                    if (done.equals("1")) {
-                        deadline.markAsDone();
-                    }
-                    tasks.add(deadline);
+                    createAndAddDeadline(savedTask);
                     break;
 
                 case "E":
-                    name = savedTask[2];
-                    done = savedTask[1];
-                    time = savedTask[3];
-                    Task event = new Event(name, new StringToDate(time));
-                    if (done.equals("1")) {
-                        event.markAsDone();
-                    }
-                    tasks.add(event);
+                    createAndAddEvent(savedTask);
                     break;
 
                 default:
@@ -108,6 +94,56 @@ public class Storage {
     }
 
     /**
+     * Create a todo task found in the file.
+     * Adds the  task to the list of tasks.
+     *
+     * @param taskDetails an array containing details of the task
+     */
+    private void createAndAddTodo(String[] taskDetails) {
+        String done = taskDetails[1];
+        String name = taskDetails[2];
+        Task todo = new Todo(name);
+        if (done.equals("1")) {
+            todo.markAsDone();
+        }
+        tasks.add(todo);
+    }
+
+    /**
+     * Create a deadline task found in the file.
+     * Adds the  task to the list of tasks.
+     *
+     * @param taskDetails an array containing details of the task
+     */
+    private void createAndAddDeadline(String[] taskDetails) throws ParseException, DukeException {
+        String done = taskDetails[1];
+        String name = taskDetails[2];
+        String time = taskDetails[3];
+        Task deadline = new Deadline(name, new StringToDate(time));
+        if (done.equals("1")) {
+            deadline.markAsDone();
+        }
+        tasks.add(deadline);
+    }
+
+    /**
+     * Create a event task found in the file.
+     * Adds the  task to the list of tasks.
+     *
+     * @param taskDetails an array containing details of the task
+     */
+    private void createAndAddEvent(String[] taskDetails) throws ParseException, DukeException {
+        String done = taskDetails[1];
+        String name = taskDetails[2];
+        String time = taskDetails[3];
+        Task event = new Event(name, new StringToDate(time));
+        if (done.equals("1")) {
+            event.markAsDone();
+        }
+        tasks.add(event);
+    }
+
+    /**
      * Takes the current list of task objects and adds them in the correct format to the data file.
      *
      * @throws DukeException in case of error writing to file
@@ -120,7 +156,7 @@ public class Storage {
             e.printStackTrace();
         }
         try {
-            assert fw != null: "Error writing to file, file writer not initialised!";
+            assert fw != null : "Error writing to file, file writer not initialised!";
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
                 if (i != tasks.size() - 1) {

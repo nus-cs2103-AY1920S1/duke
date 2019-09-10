@@ -93,7 +93,7 @@ public class TaskList {
     }
 
     /**
-     * Re-indexes the tasks when deletion occurs
+     * Re-indexes the tasks when deletion occurs.
      */
     public void reIndex() {
         int count = 1;

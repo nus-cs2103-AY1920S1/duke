@@ -42,7 +42,7 @@ public class Storage {
      * Returns a list of Tasks.
      * @param lines List of lines read from .txt.file
      * @return list of Task objects
-     * @throws DukeException
+     * @throws DukeException when history is corrupted
      */
     private ArrayList<Task> textToTaskList(ArrayList<String> lines) throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();

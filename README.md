@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/WeomuCat/Duke.svg?branch=master)](https://travis-ci.com/WeomuCat/Duke)
+
 # Setting up
 
 **Prerequisites**

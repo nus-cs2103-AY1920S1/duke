@@ -54,6 +54,11 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Prints out the text from a string to UI.
+     *
+     * @param text the string to be shown in UI
+     */
     public void printDialog(String text) {
         assert text != null && text.equals("") : "Reply should not be empty or null";
 

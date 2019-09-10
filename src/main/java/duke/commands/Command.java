@@ -35,8 +35,8 @@ public class Command {
      * @param ui       UiResponse object that is responsible for returning a String response to GUI
      * @param storage  Storage object respnsible for saving the Tasks into a pre-defined format
      * @param allTasks TaskList object containing all tasks.
-     * @throws DukeException re-thrown from underlying method calls.
      * @return String representing Duke's response
+     * @throws DukeException re-thrown from underlying method calls.
      */
     public String execute(UiResponse ui, Storage storage, TaskList allTasks) throws DukeException {
         //Default behaviour is to save current TaskList

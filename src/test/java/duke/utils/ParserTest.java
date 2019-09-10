@@ -37,7 +37,8 @@ public class ParserTest {
     @Test
     public void testParseEvent() {
         try {
-            ArrayList<String> commandParams = Parser.parseEvent("    project meeting     /at     26/05/1997 18:00   -    26/05/1997 18:30  ");
+            String eventString = "    project meeting     /at     26/05/1997 18:00   -    26/05/1997 18:30  ";
+            ArrayList<String> commandParams = Parser.parseEvent(eventString);
             boolean boolFirstArg = commandParams.get(1).equals("project meeting");
             boolean boolSecondArg = commandParams.get(2).equals("26/05/1997 18:00");
             boolean boolThirdArg = commandParams.get(3).equals("26/05/1997 18:30");
@@ -51,7 +52,8 @@ public class ParserTest {
     @Test
     public void testParseDeadline() {
         try {
-            ArrayList<String> commandParams = Parser.parseDeadline("     return library   books     /by     26/05/1997 18:00    ");
+            String deadlineString = "     return library   books     /by     26/05/1997 18:00    ";
+            ArrayList<String> commandParams = Parser.parseDeadline(deadlineString);
             boolean boolFirstArg = commandParams.get(1).equals("return library   books");
             boolean boolSecondArg = commandParams.get(2).equals("26/05/1997 18:00");
             assertTrue(boolFirstArg && boolSecondArg);

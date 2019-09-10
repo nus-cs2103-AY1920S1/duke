@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 
@@ -25,6 +26,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox.
+     * @param text String to be displayed in DialogBox
+     * @param img Image to be displayed in DialogBox
+     * @param isDuke boolean representing whether the DialogBox is for Duke or for the User
+     */
     private DialogBox(String text, Image img, boolean isDuke) {
         try {
             String fxmlResourcePath;
@@ -43,6 +50,7 @@ public class DialogBox extends HBox {
 
         this.dialog.setText(text);
         this.displayPicture.setImage(img);
+        this.setHeight(Region.USE_COMPUTED_SIZE);
     }
 
     /**
@@ -55,10 +63,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox object customised for Users.
+     * @param text String to be displayed in DialogBox
+     * @param img Image to be displayed in DialogBox
+     * @return DialogBox object customised for Users
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, true);
     }
 
+    /**
+     * Returns a DialogBox object customised for Duke.
+     * @param text String to be displayed in DialogBox
+     * @param img Image to be displayed in DialogBox
+     * @return DialogBox object customised for Duke
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img, false);
         db.flip();

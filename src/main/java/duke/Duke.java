@@ -3,7 +3,10 @@ package duke;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
-import duke.utils.*;
+import duke.utils.Storage;
+import duke.utils.TaskList;
+import duke.utils.UiResponse;
+import duke.utils.Parser;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -36,7 +39,7 @@ public class Duke {
     /**
      * Generates a response to user input.
      */
-    public String getResponse(String input) throws DukeException, NoSuchElementException{
+    public String getResponse(String input) throws DukeException, NoSuchElementException {
         Command c = Parser.parse(input);
         return c.execute(this.ui, this.storage, this.allTasks);
     }

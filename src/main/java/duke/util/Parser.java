@@ -3,11 +3,14 @@ package duke.util;
 import duke.command.Command;
 import duke.command.CommandFind;
 import duke.command.CommandHelp;
+import duke.command.CommandHistory;
 import duke.command.CommandList;
 import duke.command.CommandMark;
 import duke.command.CommandDelete;
 import duke.command.CommandAdd;
 import duke.command.CommandExit;
+import duke.command.CommandRedo;
+import duke.command.CommandUndo;
 
 import java.time.LocalDateTime;
 
@@ -59,6 +62,12 @@ public class Parser {
             }
         case "help":
             return new CommandHelp();
+        case "undo":
+            return new CommandUndo();
+        case "redo":
+            return new CommandRedo();
+        case "history":
+            return new CommandHistory();
         case "bye":
             return new CommandExit();
         default:

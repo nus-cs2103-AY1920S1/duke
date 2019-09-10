@@ -7,6 +7,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 
 import duke.util.DukeException;
+import duke.util.History;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
@@ -29,14 +30,15 @@ public class CommandAdd extends Command {
     }
 
     /**
-     * Creates a new Task, adds it to the TaskList, saves it to disk, and prints a confirmation.
+     * Creates a new Task, adds it to the TaskList, saves it to disk, and returns a confirmation.
      * @param tasks The TaskList containing the user's added Tasks.
      * @param ui The UI to interact with the user by printing instructions/messages.
      * @param storage Storage to use for loading/saving tasks from/to a file on the hard disk.
+     * @param history History of commands for the current session.
      * @return Duke's response to the Command as a String.
      * @throws DukeException If task creation, adding, or saving fails.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, History history) throws DukeException {
         Task newTask = null;
 
         // create new task of specified type
@@ -71,8 +73,8 @@ public class CommandAdd extends Command {
         }
 
         tasks.add(newTask);
-
         storage.save(tasks);
+        history.add(String.format("%s %s", taskType, taskDescription), tasks);
 
         return ui.getTaskAddedMessage(tasks, newTask);
     }

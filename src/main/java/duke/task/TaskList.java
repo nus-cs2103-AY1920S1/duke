@@ -13,7 +13,7 @@ public class TaskList {
      * Instantiates a new Task ArrayList.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        this.tasks = new ArrayList<Task>();
     }
 
     /**
@@ -57,5 +57,40 @@ public class TaskList {
      */
     public Task remove(int taskNumber) {
         return tasks.remove(taskNumber - 1);
+    }
+
+    /**
+     * Empties the task list.
+     */
+    public void clear() {
+        tasks.clear();
+    }
+
+    /**
+     * Creates a deep copy of the TaskList.
+     * @return The copy of the TaskList.
+     */
+    public TaskList copy() {
+        TaskList copiedList = new TaskList();
+        for (Task task : tasks) {
+            copiedList.add(task);
+        }
+        return copiedList;
+    }
+
+    /**
+     * Gets a String of all the tasks in the TaskList.
+     * @return A String of all tasks, with each Task on one row.
+     */
+    @Override
+    public String toString() {
+        StringBuilder tasksString = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            tasksString.append(String.format("%d.%s", i + 1, tasks.get(i)));
+            if (i != tasks.size() - 1) {
+                tasksString.append("\n");
+            }
+        }
+        return tasksString.toString();
     }
 }

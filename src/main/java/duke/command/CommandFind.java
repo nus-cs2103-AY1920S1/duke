@@ -3,6 +3,7 @@ package duke.command;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.DukeException;
+import duke.util.History;
 import duke.util.Storage;
 import duke.util.Ui;
 
@@ -25,14 +26,15 @@ public class CommandFind extends Command {
     }
 
     /**
-     * Searches the TaskList with the user's query and prints the results.
+     * Searches the TaskList with the user's query and returns the results as a String.
      * @param tasks The TaskList containing the user's added Tasks.
      * @param ui The UI to interact with the user by printing instructions/messages.
      * @param storage Storage to use for loading/saving tasks from/to a file on the hard disk.
+     * @param history History of commands for the current session.
      * @return Duke's response to the Command as a String.
      * @throws DukeException If the search fails (error in search method).
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, History history) throws DukeException {
         try {
             for (int i = 1; i <= tasks.size(); i++) {
                 Task task = tasks.get(i);

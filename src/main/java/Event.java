@@ -17,7 +17,6 @@ public class Event extends Task {
         this.at = at;
     }
 
-    // get the date and time with specific format
     public String getAt() {
         return at.format(dateTimeFormatter);
     }

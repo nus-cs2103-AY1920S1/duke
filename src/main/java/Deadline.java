@@ -6,7 +6,7 @@ public class Deadline extends Task {
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
-     * A subclass of Task that categorized itself as an important thing to-do
+     * A task that categorized itself as an important thing to-do
      * before a particular time.
      *
      * @param description description of the Deadline (Task).
@@ -17,7 +17,6 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    // get the date and time with specific format
     public String getBy() {
         return by.format(dateTimeFormatter);
     }

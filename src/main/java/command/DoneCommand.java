@@ -24,11 +24,11 @@ public class DoneCommand extends Command {
      */
 
     @Override
-    public void executeCommand(TaskList reference, Ui printer) {
+    public String executeCommand(TaskList reference, Ui printer) {
         this.reference = reference;
         this.printer = printer;
         done = reference.taskDone(doneIndex);
-        this.passToUI(this.formatOutput());
+        return this.formatOutput();
     }
 
     /**

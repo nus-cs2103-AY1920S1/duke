@@ -16,10 +16,10 @@ public abstract class Command {
      *
      */
 
-    public void executeCommand(TaskList reference, Ui printer) {
+    public String executeCommand(TaskList reference, Ui printer) {
         this.reference = reference;
         this.printer = printer;
-        this.passToUI(this.formatOutput());
+        return this.formatOutput();
     }
 
     /**

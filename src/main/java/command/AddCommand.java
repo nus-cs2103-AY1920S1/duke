@@ -28,11 +28,11 @@ public class AddCommand extends Command {
      */
 
     @Override
-    public void executeCommand(TaskList reference, Ui printer) {
+    public String executeCommand(TaskList reference, Ui printer) {
         this.reference = reference;
         this.printer = printer;
         added = reference.addTasks(addedTask);
-        this.passToUI(this.formatOutput());
+        return this.formatOutput();
     }
 
     /**

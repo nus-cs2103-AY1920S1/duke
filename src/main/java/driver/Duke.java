@@ -26,73 +26,54 @@ public class Duke {
     /**
      *
      */
- public Duke() {
 
- }
-
-    public Duke(String x) {
+    public Duke() {
         myUserInterface = new Ui();
         //Create TaskList for Duke
         myTaskList = new TaskList();
-        myTaskManager = new Storage(x);
+        myTaskManager = new Storage("src/main/java/data/loggedData.txt");
         myParser = new Parser();
-        //Copy tasks from .txt file to my taskList
-        try {
-            myTaskManager.loadTasks(myTaskList);
-        }
-        catch (FileNotFoundException err) {
-            System.out.println(err);
-        }
+
     }
 
     /**
      *
      */
 
-    public void run()  {
-        //Say Hello
-        HelloCommand sayHello = new HelloCommand();
-        sayHello.executeCommand(myTaskList,myUserInterface);
-
-        Scanner userInput = new Scanner(System.in);
-        while(userInput.hasNextLine()) {
-            String temp = userInput.nextLine();
+    public String getResponse(String temp)  {
+            String answer = "";
             if (temp.equalsIgnoreCase("bye")) {
-                break;
+                ByeCommand sayBye = new ByeCommand();
+                answer =  sayBye.executeCommand(myTaskList,myUserInterface);
+
             }
             try {
+                myTaskManager.loadTasks(myTaskList);
                 Command curr = myParser.parse(temp);
-                curr.executeCommand(myTaskList, myUserInterface);
+                answer =  curr.executeCommand(myTaskList, myUserInterface);
+                myTaskManager.updateTasks(myTaskList);
+
+            }  catch (FileNotFoundException err) {
+                System.out.println(err);
+            } catch (IOException err) {
+            System.out.println(err);
             } catch (Exception err) {
                 myUserInterface.printError(TextFormatter.errorFormat(err));
             }
-        }
-
-        //Update the .txt file with the new changes
-
-        try {
-            myTaskManager.updateTasks(myTaskList);
-        }
-        catch (IOException err) {
-            System.out.println(err);
+            return answer;
 
         }
-        ByeCommand sayBye = new ByeCommand();
-        sayBye.executeCommand(myTaskList,myUserInterface);
 
-    }
 
-    /**
-     *
-     */
 
-    public static void main(String[] args) {
-        Duke testRun = new Duke("src/main/java/data/loggedData.txt");
-        testRun.run();
+
+
     }
 
 
 
 
-    }
+
+
+
 

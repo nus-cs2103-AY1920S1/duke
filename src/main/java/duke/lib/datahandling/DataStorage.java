@@ -17,18 +17,16 @@ import java.util.ArrayList;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class DataStorage {
-    private String filePath;
+    final static String filePath = "data/save.txt";
     private ArrayList<Task> tasks;
 
     private final String newLine = System.getProperty("line.separator");
 
     /**
      * Public constructor for the storage of the list of tasks.
-     * @param filePath file path to save and load in the computer.
      */
-    public DataStorage(String filePath) {
+    public DataStorage() {
         tasks = new ArrayList<Task>();
-        this.filePath = filePath;
     }
 
     /**

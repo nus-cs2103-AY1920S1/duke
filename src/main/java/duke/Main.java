@@ -38,7 +38,7 @@ public class Main extends Application {
      * Runs duke by checking for input and displaying errors.
      */
     public void run() throws DukeException {
-        duke = new Duke("data/save.txt");
+        duke = new Duke();
         mainWindow.init(duke);
         mainWindow.showWelcome();
     }

@@ -23,12 +23,13 @@ public class DeleteCommand implements Command {
      * @param ui the Ui object dealing with interactions with the user
      * @param tasks the TaskList object containing the existing list of tasks
      */
-    public void execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
         try {
             Task deleted = tasks.removeTask(index);
-            ui.output(String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list",
-                    deleted.toString(), tasks.getTasksSize()));
             storage.writeToFile(tasks);
+            return String.format("Noted. I've removed this task:\n  %s\nNow you have %d tasks in the list",
+                    deleted.toString(), tasks.getTasksSize());
+
         }
         catch (Exception e) {
             throw new DukeException(String.format("OOPS!!! Please input a number between 1 and %d after 'delete'",

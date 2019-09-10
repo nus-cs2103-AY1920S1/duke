@@ -15,9 +15,6 @@ import duke.exception.DukeException;
  * Deals with understanding the commands given to the bot by the user.
  */
 public class Parser {
-    public Parser() {
-    }
-
     /**
      * Returns a Command object that corresponds to the fullCommand argument given to the bot
      * by the user as a String.
@@ -26,9 +23,10 @@ public class Parser {
      * @return the corresponding Command object
      * @throws DukeException if fullCommand is not one of the recognised commands
      */
-    public Command parse(String[] fullCommand) throws DukeException {
-        String command = fullCommand[0];
-        String details = fullCommand[1];
+    public Command parse(String fullCommand) throws DukeException {
+        String[] split = fullCommand.split(" ", 2);
+        String command = split[0];
+        String details = split.length == 1 ? "" : split[1];
         if (command.equals("bye")) {
             return parseBye(details);
         } else if (command.equals("list")) {

@@ -18,11 +18,12 @@ public class ListCommand implements Command {
      * @param ui the Ui object dealing with interactions with the user
      * @param tasks the TaskList object containing the existing list of tasks
      */
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
-        ui.output("Here are the tasks in your list: ");
+    public String execute(Storage storage, Ui ui, TaskList tasks) {
+        String output = "Here are the tasks in your list: \n";
         for (int i = 0; i < tasks.getTasksSize(); i++) {
-            ui.output((i + 1) + ". " + tasks.getTask(i).toString());
+            output = output + (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
         }
+        return output;
     }
 
     public boolean isRunning() {

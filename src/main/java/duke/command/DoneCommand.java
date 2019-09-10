@@ -23,12 +23,12 @@ public class DoneCommand implements Command {
      * @param ui the Ui object dealing with interactions with the user
      * @param tasks the TaskList object containing the existing list of tasks
      */
-    public void execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
         try {
             Task doneTask = tasks.getTask(index);
             doneTask.markDone();
-            ui.output("Nice! I've marked this task as done: \n" + doneTask.toString());
             storage.writeToFile(tasks);
+            return "Nice! I've marked this task as done: \n" + doneTask.toString();
         }
         catch (Exception e) {
             throw new DukeException(String.format("OOPS!!! Please input a number between 1 and %d after 'done'",

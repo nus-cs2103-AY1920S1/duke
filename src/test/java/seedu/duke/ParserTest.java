@@ -6,11 +6,6 @@ import seedu.duke.exception.DukeException;
 
 public class ParserTest {
     @Test
-    public void getTypeTest() throws DukeException {
-        assertEquals(new Parser("bye").getType(), "bye");
-    }
-
-    @Test
     public void getDescriptionTest() throws DukeException {
         assertEquals(new Parser("todo test").getDescription(), "test");
     }

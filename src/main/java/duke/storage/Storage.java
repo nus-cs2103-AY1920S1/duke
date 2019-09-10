@@ -1,5 +1,6 @@
 package duke.storage;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -55,13 +56,15 @@ public class Storage {
                     currDeadline.markAsDone();
                 }
                 loadedTaskList.add(currDeadline);
-            } else {
+            } else if (currTask.charAt(0) == 'E') {
                 String[] currArray = currTask.split(" \\| ");
                 Event currEvent = new Event(currArray[2], currArray[3]);
                 if (currArray[1].equals("v")) {
                     currEvent.markAsDone();
                 }
                 loadedTaskList.add(currEvent);
+            } else {
+                throw new DukeException("OOPS!!! Your task file appears to be corrupted.");
             }
         }
         sc.close();

@@ -27,7 +27,7 @@ public class Todo extends Task {
     /**
      * Returns the letter "T", representing the type Todo.
      *
-     * @return  "T"
+     * @return  String of the letter "T".
      */
     @Override
     public String getType() {

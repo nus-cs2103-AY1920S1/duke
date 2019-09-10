@@ -48,7 +48,7 @@ public class TaskList {
     /**
      * Adds a Task to the TaskList
      *
-     * @param newTask   Task to be added
+     * @param newTask   Task to be added.
      */
     public void add(Task newTask) {
         tasks.add(newTask);
@@ -76,7 +76,7 @@ public class TaskList {
     /**
      * Returns a String of all tasks as a one-indexed list.
      *
-     * @return  String containing all tasks as a one-indexed list
+     * @return  String containing all tasks as a one-indexed list.
      */
     public String asIndexedString() {
         String output = "";

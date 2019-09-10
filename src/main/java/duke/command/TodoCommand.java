@@ -14,7 +14,7 @@ public class TodoCommand extends AddCommand {
     /**
      * Constructs a new TodoCommand with the given command details.
      *
-     * @param details   Command details
+     * @param details   Command details.
      */
     public TodoCommand(String details) {
         super(details);
@@ -25,11 +25,10 @@ public class TodoCommand extends AddCommand {
      * TodoCommand, then adds it to the task list. The superclass method
      * execute(TaskList, TextUi, Storage) is called as part of the process.
      *
-     * @param tasks             List of tasks
-     * @param ui                User interface
-     * @param storage           Hard disk storage
-     * @throws DukeException    If the superclass method fails, etc.
-     * @return                  String containing Duke's response
+     * @param tasks             List of tasks.
+     * @param ui                User interface.
+     * @param storage           Hard disk storage.
+     * @return                  String containing Duke's response.
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {

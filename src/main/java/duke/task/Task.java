@@ -63,9 +63,9 @@ public class Task {
      * specified in Task.DATE_FORMATS), returns the Date representing the
      * current instant.
      *
-     * @param date      String representing a date
+     * @param date      String representing a date.
      * @return Date     Date corresponding to the given date String, or the
-     *                  current instant
+     *                  current instant.
      */
     static Date parseDate(String date) {
         for (SimpleDateFormat format : DATE_FORMATS) {
@@ -92,7 +92,7 @@ public class Task {
     /**
      * Returns a String of length 1 that indicates the current Task type.
      *
-     * @return  String indicating Task type
+     * @return  String indicating Task type.
      */
     public String getType() {
         return "-";

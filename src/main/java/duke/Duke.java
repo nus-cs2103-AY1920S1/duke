@@ -26,7 +26,7 @@ public class Duke {
     /**
      * Sets up Duke's user interface, storage, and task list.
      *
-     * @param filePath  Path to data file
+     * @param filePath  Path to data file.
      */
     public Duke(String filePath) {
         ui = new TextUi();
@@ -40,9 +40,9 @@ public class Duke {
     }
 
     /**
-     * Initialises and runs the Duke application.
+     * Initialises and runs the Duke application using the command line.
      *
-     * @param args  Standard arguments
+     * @param args  Standard arguments.
      */
     public static void main(String[] args) {
         new Duke("data/duke.txt").run();
@@ -51,8 +51,8 @@ public class Duke {
     /**
      * Executes the user input and returns Duke's response.
      *
-     * @param input     String of user-given input
-     * @return          String of Duke's response to given input
+     * @param input     String of user-given input.
+     * @return          String of Duke's response to given input.
      */
     public String getResponse(String input) {
         try {
@@ -65,7 +65,7 @@ public class Duke {
     }
 
     /**
-     * Runs the main application by interacting with user input.
+     * Runs the main application by interacting with user input via CLI.
      *
      * <p>Duke begins by printing a welcome message. Subsequently, it scans
      * for user input, then validates and processes it accordingly. This is

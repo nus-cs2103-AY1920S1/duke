@@ -36,7 +36,7 @@ public class Event extends Task {
     /**
      * Returns the letter "E", representing the type Event.
      *
-     * @return  The letter "E"
+     * @return  The letter "E".
      */
     @Override
     public String getType() {

@@ -1,6 +1,5 @@
 package duke;
 
-import duke.task.TaskList;
 import java.util.Scanner;
 
 /**
@@ -34,7 +33,7 @@ public class TextUi {
      * Reads a command from standard input and returns it. If input is
      * terminated, automatically returns an exit command.
      *
-     * @return  String representing a user-given command
+     * @return  String representing a user-given command.
      */
     public String readCommand() {
         return scanner.hasNext() ? scanner.nextLine() : "bye";
@@ -45,7 +44,7 @@ public class TextUi {
     /**
      * Prints the given text with indentation of five spaces.
      *
-     * @param text      Single line of text to be printed
+     * @param text      Single line of text to be printed.
      */
     // TODO: Wrap text for longer lines
     private void show(String text) {
@@ -57,18 +56,6 @@ public class TextUi {
      */
     public void showLine() {
         System.out.println(INDENT + HORIZONTAL_LINE);
-    }
-
-    /**
-     * Prints the items in the given list with their corresponding index
-     * numbers (one-indexed).
-     *
-     * @param list      A task list to be printed
-     */
-    public void showList(TaskList list) {
-        for (int i = 1; i <= list.size(); i++) {
-            show(i + "." + list.get(i - 1).toString());
-        }
     }
 
     /**
@@ -87,7 +74,7 @@ public class TextUi {
     /**
      * Prints an apology followed by the given message.
      *
-     * @param message   Message from the exception that caused the error
+     * @param message   Message from the exception that caused the error.
      */
     public void showErrorMessage(String message) {
         showText("Sorry, " + message);

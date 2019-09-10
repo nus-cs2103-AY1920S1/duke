@@ -16,7 +16,7 @@ public class FindCommand extends Command {
      * Creates a new FindCommand that can search for the given details.
      *
      * @param details   String containing details that found tasks should
-     *                  contain
+     *                  contain.
      */
     public FindCommand(String details) {
         super(details);
@@ -27,10 +27,11 @@ public class FindCommand extends Command {
      * FindCommand. Tasks are evaluated using their default toString() values
      * and are matched against the current command's details using the String
      * method contains(String).
-     *  @param tasks             List of tasks
-     * @param ui                User interface
-     * @param storage           Hard disk storage
-     * @return                  String containing Duke's response
+     *
+     * @param tasks             List of tasks.
+     * @param ui                User interface.
+     * @param storage           Hard disk storage.
+     * @return                  String containing Duke's response.
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {

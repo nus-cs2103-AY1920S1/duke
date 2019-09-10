@@ -118,37 +118,24 @@ public class Storage {
     }
 
     /**
-     * Add the task of type Todo to the file.
+     * Add the task to the file.
      *
-     * @param taskname A TaskList containing an ArrayList of tasks.
-     */
-    public void addTodo(String taskname, TaskList tasks) {
-        try {
-            FileWriter append = new FileWriter("data/duke.txt", true);
-            if (tasks.size() != 0) {
-                append.write("\n");
-            }
-            append.write("T | 0 | " + taskname);
-            append.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Add the task of type Deadline to the file.
-     *
+     * @param taskHeader A string reprensentation of the task header.
      * @param description A string representation of the task.
-     * @param deadline A string representation of the deadline of the task.
-     * @param tasks A TaskList containing an ArrayList of tasks.
+     * @param time A string representation of the time.
+     * @param tasks An ArrayList containing tasks from the file.
      */
-    public void addDeadline(String description, String deadline, TaskList tasks) {
+    public void addTask(String taskHeader, String description, String time, TaskList tasks) {
         try {
             FileWriter append = new FileWriter("data/duke.txt", true);
             if (tasks.size() != 0) {
                 append.write("\n");
             }
-            append.write("D | 0 | " + description + " | " + deadline);
+            if (time.equals("")) {
+                append.write(taskHeader + description);
+            } else {
+                append.write(taskHeader + description + " | " + time);
+            }
             append.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -156,43 +143,23 @@ public class Storage {
     }
 
     /**
-     * Add the task of type Event to the file.
+     * Generates the header for the different task.
      *
-     * @param description A string description of the task.
-     * @param when A string representation of when the event will happen.
-     * @param tasks A TaskList containing an ArrayList of tasks.
+     * @param task A string identifier for the type of task.
+     * @return A String representing the task header.
      */
-    public void addEvent(String description, String when, TaskList tasks) {
-        try {
-            FileWriter append = new FileWriter("data/duke.txt", true);
-            if (tasks.size() != 0) {
-                append.write("\n");
-            }
-            append.write("E | 0 | " + description + " | " + when);
-            append.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /**
-     * Add the task of type DoAfter to the file.
-     *
-     * @param description A string description of the task.
-     * @param after A string representation of the task that needs
-     *              to be done after a certain time.
-     * @param tasks A TaskList containing an ArrayList of tasks.
-     */
-    public void addDoAfter(String description, String after, TaskList tasks) {
-        try {
-            FileWriter append = new FileWriter("data/duke.txt", true);
-            if (tasks.size() != 0) {
-                append.write("\n");
-            }
-            append.write("DA | 0 | " + description + " | " + after);
-            append.close();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
+    public String generateTaskHeader(String task) {
+        switch (task) {
+        case "Todo":
+            return "T | 0 | ";
+        case "Deadline":
+            return "D | 0 | ";
+        case "Event":
+            return "E | 0 | ";
+        case "DoAfter":
+            return "DA | 0 | ";
+        default:
+            return null;
         }
     }
 

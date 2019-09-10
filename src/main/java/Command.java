@@ -62,7 +62,8 @@ public class Command {
                 }
                 assert !taskname.equals("") : "Task name should not be empty";
                 Task t = new Todo(taskname);
-                storage.addTodo(taskname, tasks);
+                storage.addTask(storage.generateTaskHeader("Todo"),
+                        taskname, "", tasks);
                 tasks.add(t);
                 return ui.printAdd(t, tasks);
             } catch (DukeException e) {
@@ -83,7 +84,8 @@ public class Command {
                 String[] arrDeadline = deadline.split("/by");
                 String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
                 Task taskDeadline = new Deadline(arrDeadline[0].trim(), timeDeadline);
-                storage.addDeadline(arrDeadline[0].trim(), arrDeadline[1].trim(), tasks);
+                storage.addTask(storage.generateTaskHeader("Deadline"),
+                        arrDeadline[0].trim(), arrDeadline[1].trim(), tasks);
                 tasks.add(taskDeadline);
                 return ui.printAdd(taskDeadline, tasks);
             } catch (DukeException e) {
@@ -92,7 +94,7 @@ public class Command {
         case "event":
             try {
                 if (!sc.hasNextLine()) {
-                    assert action.equals("deadline") : "Command should be: event";
+                    assert action.equals("event") : "Command should be: event";
                     throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                 }
                 String event = sc.nextLine().trim();
@@ -104,7 +106,8 @@ public class Command {
                 String[] arrEvent = event.split("/at");
                 String time = Parser.convertDateAndTime(arrEvent[1].trim());
                 Task taskEvent = new Event(arrEvent[0].trim(), time);
-                storage.addEvent(arrEvent[0].trim(), arrEvent[1].trim(), tasks);
+                storage.addTask(storage.generateTaskHeader("Event"),
+                        arrEvent[0].trim(), arrEvent[1].trim(), tasks);
                 tasks.add(taskEvent);
                 return ui.printAdd(taskEvent, tasks);
             } catch (DukeException e) {
@@ -141,7 +144,8 @@ public class Command {
                     throw new DukeException("Invalid DoAfter task format");
                 }
                 Task doAfter = new DoAfter(doAfterArray[0].trim(), after);
-                storage.addDoAfter(doAfterArray[0].trim(), doAfterArray[1].trim(), tasks);
+                storage.addTask(storage.generateTaskHeader("DoAfter"),
+                        doAfterArray[0].trim(), doAfterArray[1].trim(), tasks);
                 tasks.add(doAfter);
                 return ui.printAdd(doAfter, tasks);
             } catch (DukeException e) {

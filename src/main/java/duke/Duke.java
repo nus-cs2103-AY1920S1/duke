@@ -7,8 +7,6 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import java.util.Scanner;
-
 /**
  * Main class for Duke application.
  */
@@ -27,33 +25,6 @@ public class Duke {
         this.storage = new Storage(filePath);
         this.ui = new Ui();
         this.taskList = new TaskList(storage);
-    }
-
-    /**
-     * Runs the Duke application.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-
-        boolean isExit = false;
-        while (!isExit && sc.hasNextLine()) {
-            String input = sc.nextLine();
-            try {
-                Command command = Parser.parseCommand(input);
-                ui.print(command.execute(taskList));
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
-                ui.print("\u26A0 OOPS! " + e.getMessage());
-                //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
-            }
-        }
-
-        sc.close();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 
     /**

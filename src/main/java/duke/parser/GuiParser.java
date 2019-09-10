@@ -89,7 +89,8 @@ public class GuiParser {
             }
             return storeTaskList.editTask(indexOfItemToEdit, newDesc.trim(), false);
         } catch (IndexOutOfBoundsException e) {
-            return "invalid input. make sure you enter your command as:\n" +
+            return "invalid input. make sure you enter your command as:\n"
+                    +
                     "edit <item num> desc <desc>";
         }
     }
@@ -108,7 +109,8 @@ public class GuiParser {
             //System.out.println(newDateAndTime);
             return storeTaskList.editTask(indexOfItemToEdit, newDateAndTime, true);
         } catch (IndexOutOfBoundsException | DukeException e) {
-            return "invalid input. make sure you enter your command as:\n" +
+            return "invalid input. make sure you enter your command as:\n"
+                    +
                     "edit <item num> time <dd/mm/yy hhmm-hhmm>";
         }
     }
@@ -322,7 +324,7 @@ public class GuiParser {
      */
     private static String getMonth(String month) {
         String[] arrMonths = {"", "January", "February", "March", "April", "May",
-                "June", "July", "August", "September", "October", "November", "December"};
+            "June", "July", "August", "September", "October", "November", "December"};
         int temp = Integer.valueOf(month);
         return arrMonths[temp];
     }

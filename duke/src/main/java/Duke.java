@@ -35,7 +35,7 @@ public class Duke extends Application {
 	private static String filename = "./data/duke.txt"; // todo isDone? description
 
 	public Duke() {}
-	public Duke(String filename) {
+	public Duke (String filename) {
 		ui = new Ui();
 		storage = new Storage(filename);
 
@@ -55,10 +55,12 @@ public class Duke extends Application {
 		ui.showWelcome();
 		boolean isExit = false;
 		while (!isExit) {
-	        try {
-	        	String command = ui.readWord();
-	            String remainingCommand = ui.readCommand();
-	            ui.showLine(); // show the divider line ("_______")
+			try {
+				String command = ui.readCommand();
+				String[] parts = command.split(" ");
+				String type = parts[0];
+				String remainingCommand = command.substring(type.length()+1);
+				ui.showLine(); // show the divider line ("_______")
 	            Command c = Parser.parse(command, remainingCommand);
 	            c.execute(tasks, ui);
 	            storage.update(tasks, filename);
@@ -82,10 +84,6 @@ public class Duke extends Application {
 			ui.showError("Something went wrong with the file: " + e.getMessage());
 		}
 	}
-
-    public static void main(String[] args) {
-		new Duke(filename).run();
-    }
 
 	@Override
 	public void start(Stage stage) {
@@ -181,12 +179,15 @@ public class Duke extends Application {
 	 * the dialog container. Clears the user input after processing.
 	 */
 	private void handleUserInput() {
-		Label userText = new Label(userInput.getText());
-		Label dukeText = new Label(getResponse(userInput.getText()));
+		String command = userInput.getText();
+
+		Label userText = new Label(command);
+		Label dukeText = new Label(getResponse(command));
 		dialogContainer.getChildren().addAll(
 				DialogBox.getUserDialog(userText, new ImageView(user)),
 				DialogBox.getDukeDialog(dukeText, new ImageView(duke))
 		);
+
 		userInput.clear();
 	}
 
@@ -194,7 +195,22 @@ public class Duke extends Application {
 	 * You should have your own function to generate a response to user input.
 	 * Replace this stub with your completed method.
 	 */
-	private String getResponse(String input) {
-		return "You said: " + input;
+	private String getResponse(String command) {
+		assert (tasks != null && ui != null && storage != null); // they really shldnt be null
+		if (command.equals("bye")) {
+			ui.exit();
+		}
+		try {
+			String[] parts = command.split(" ");
+			String type = parts[0];
+			String remainingCommand = command.substring(type.length());
+			Command c = Parser.parse(type, remainingCommand);
+			c.execute(tasks, ui);
+			storage.update(tasks, filename);
+		} catch (DukeException | ParseException | IOException e) {
+			ui.showError(e.getMessage());
+		}
+
+		return ui.out();
 	}
 }

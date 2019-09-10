@@ -6,10 +6,10 @@ class ListCommand extends Command {
 	}
 
 	public void execute(TaskList tasks, Ui ui) {
-		ui.print("Here are the tasks in your list:");
+		ui.print("Here are the tasks in your list:\n");
 		ArrayList<Task> list = tasks.getList();
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println((i + 1) + "." + list.get(i).toString());
+			ui.print((i + 1) + "." + list.get(i).toString());
 		}
 	}
 }

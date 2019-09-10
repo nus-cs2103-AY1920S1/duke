@@ -14,10 +14,13 @@ src/main/resources/docs/
 bin/
 
 # JavaDocs
-src/JavaDocs
+src/JavaDocs/*
 
 # Compiled Files
 *.class
 
 # Package Files
 *.jar
+
+# Data Files
+src/main/data/*

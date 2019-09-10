@@ -7,7 +7,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public class FindCommand extends Command {
-    private String search;
+    private String keyword;
 
     private static final String MESSAGE_LIST = "Here are the matching tasks in your list:\n";
     private static final String MESSAGE_NO_TASKS = "You have no matching tasks in your list.";
@@ -15,10 +15,10 @@ public class FindCommand extends Command {
     /**
      * Constructs a Find command. Searches for the search param in all task descriptions.
      *
-     * @param search String to search in tasks.
+     * @param keyword String to search in tasks.
      */
-    public FindCommand(String search) {
-        this.search = search;
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -32,21 +32,21 @@ public class FindCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList filteredTasks = new TaskList();
         for (Task task : tasks) {
-            if (task.getDescription().contains(search)) {
+            if (task.getDescription().contains(keyword)) {
                 filteredTasks.add(task);
             }
         }
 
-        StringBuilder lines = new StringBuilder();
+        StringBuilder searchResults = new StringBuilder();
         if (filteredTasks.isEmpty()) {
-            lines.append(MESSAGE_NO_TASKS);
-            ui.append(lines.toString());
+            searchResults.append(MESSAGE_NO_TASKS);
+            ui.append(searchResults.toString());
             return;
         }
-        lines.append(MESSAGE_LIST);
+        searchResults.append(MESSAGE_LIST);
         for (int i = 0; i < filteredTasks.size(); i++) {
-            lines.append(String.format("%d. %s\n", i + 1, filteredTasks.get(i).toString()));
+            searchResults.append(String.format("%d. %s\n", i + 1, filteredTasks.get(i).toString()));
         }
-        ui.append(lines.toString());
+        ui.append(searchResults.toString());
     }
 }

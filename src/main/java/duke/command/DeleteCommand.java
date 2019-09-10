@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.Arrays;
 
 public class DeleteCommand extends Command {
     private int[] taskIds;
@@ -46,6 +46,7 @@ public class DeleteCommand extends Command {
         for (int i = taskIds.length - 1; i >= 0; i--) {
             tasks.remove(taskIds[i] - 1);
         }
-        ui.append(String.format(MESSAGE_REMAINDER, tasks.size(), tasks.size() != 1 ? "tasks" : "task"));
+        String pluralizeTasks = tasks.size() != 1 ? "tasks" : "task";
+        ui.append(String.format(MESSAGE_REMAINDER, tasks.size(), pluralizeTasks));
     }
 }

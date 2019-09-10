@@ -1,20 +1,17 @@
 package duke.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.DukeException;
-
 import duke.storage.Storage;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
     private String type;
@@ -24,10 +21,9 @@ public class AddCommand extends Command {
             + "Now you have %d %s in the list.";
 
     private static final String ERROR_MISSING_DESCRIPTION = "The description cannot be empty.";
-    private static final String ERROR_MISSING_DESCRIPTION_AND_TIME = "The description and time cannot be empty.";
-    private static final String ERROR_MISSING_DEADLINE = "The deadline must be present. e.g. task /by Monday";
-    private static final String ERROR_MISSING_EVENT_TIME = "The event time must be present. e.g. meeting /at Monday";
-    private static final String ERROR_WRONG_DATE_FORMAT  = "The date time provided is in the wrong format. "
+    private static final String ERROR_MISSING_DESCRIPTION_AND_DATETIME = "The description and datetime cannot be empty.";
+    private static final String ERROR_MISSING_DATETIME = "The datetime must be present. e.g. sleep /by 12/10/2019 12:00";
+    private static final String ERROR_WRONG_DATETIME_FORMAT = "The datetime provided is in the wrong format. "
             + "Expected d/m/yyyy hh:mm.";
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
@@ -52,58 +48,71 @@ public class AddCommand extends Command {
      * @throws DukeException If invalid input.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task;
+        Task newTask;
         switch (type) {
-        case "event": {
-            if (!description.matches(".+\\s/at\\s.+$")) {
-                if (description.length() == 0 || description.matches("^\\s?/at\\s?$")) {
-                    throw new DukeException(ERROR_MISSING_DESCRIPTION_AND_TIME);
-                }
-                if (description.matches("^\\s?/at.*")) {
-                    throw new DukeException(ERROR_MISSING_DESCRIPTION);
-                }
-                if (!description.contains("/at") || description.matches(".*/at\\s?")) {
-                    throw new DukeException(ERROR_MISSING_EVENT_TIME);
-                }
-            }
-            String[] desc = description.split(" /at ");
-            LocalDateTime time;
-            try {
-                time = LocalDateTime.parse(desc[1], DATE_TIME_FORMATTER);
-            } catch (DateTimeParseException ex) {
-                throw new DukeException(ERROR_WRONG_DATE_FORMAT);
-            }
-            task = new Event(desc[0], time);
+        case "event":
+            newTask = makeEvent();
             break;
-        }
-        case "deadline": {
-            if (!description.matches(".+\\s/by\\s.+$")) {
-                if (description.length() == 0 || description.matches("^\\s?/by\\s?$")) {
-                    throw new DukeException(ERROR_MISSING_DESCRIPTION_AND_TIME);
-                }
-                if (description.matches("^\\s?/by.*")) {
-                    throw new DukeException(ERROR_MISSING_DESCRIPTION);
-                }
-                if (!description.contains("/by") || description.matches(".*/by\\s?")) {
-                    throw new DukeException(ERROR_MISSING_DEADLINE);
-                }
-            }
-            String[] desc = description.split(" /by ");
-            LocalDateTime time;
-            try {
-                time = LocalDateTime.parse(desc[1], DATE_TIME_FORMATTER);
-            } catch (DateTimeParseException ex) {
-                throw new DukeException(ERROR_WRONG_DATE_FORMAT);
-            }
-            task = new Deadline(desc[0], time);
+        case "deadline":
+            newTask = makeDeadline();
             break;
-        }
+        case "todo":
+            newTask = new Todo(description);
+            break;
         default:
-            task = new Todo(description);
+            throw new DukeException();
         }
-        assert task != null : "A new task must exist to be added to the TaskList.";
-        tasks.add(task);
-        ui.append(String.format(MESSAGE_ADD,  task.toString(), tasks.size(),
-                tasks.size() != 1 ? "tasks" : "task"));
+        assert newTask != null : "A new task must exist to be added to the TaskList.";
+        tasks.add(newTask);
+
+        String pluralizeTasks = tasks.size() != 1 ? "tasks" : "task";
+        ui.append(String.format(MESSAGE_ADD,  newTask.toString(), tasks.size(), pluralizeTasks));
+    }
+
+    private Task makeEvent() throws DukeException {
+        verifyDescriptionFormat("/at");
+        String[] desc = description.split(" /at ");
+        LocalDateTime time = extractDateTime(desc[1]);
+        return new Event(desc[0], time);
+    }
+
+    private Task makeDeadline() throws DukeException {
+        verifyDescriptionFormat("/by");
+        String[] desc = description.split(" /by ");
+        LocalDateTime time = extractDateTime(desc[1]);
+        return new Deadline(desc[0], time);
+    }
+
+    private LocalDateTime extractDateTime(String datetime) throws DukeException {
+        LocalDateTime time;
+        try {
+            time = LocalDateTime.parse(datetime, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException(ERROR_WRONG_DATETIME_FORMAT);
+        }
+        return time;
+    }
+
+    /**
+     * Verify whether description is in proper format. Particularly used in Event and Deadline.
+     * @param separator Separator to split description and time.
+     * @throws DukeException If input is not in proper format.
+     */
+    private void verifyDescriptionFormat(String separator) throws DukeException {
+        // Check if description has both description and time
+        if (!description.matches(String.format(".+\\s%s\\s.+$", separator))) {
+            // Check if description and time is missing
+            if (description.length() == 0 || description.matches(String.format("^\\s?%s\\s?$", separator))) {
+                throw new DukeException(ERROR_MISSING_DESCRIPTION_AND_DATETIME);
+            }
+            // Check if description is missing
+            if (description.matches(String.format("^\\s?%s.*", separator))) {
+                throw new DukeException(ERROR_MISSING_DESCRIPTION);
+            }
+            // Check if time is missing
+            if (!description.contains(separator) || description.matches(String.format(".*%s\\s?", separator))) {
+                throw new DukeException(ERROR_MISSING_DATETIME);
+            }
+        }
     }
 }

@@ -73,6 +73,10 @@ public class Duke {
                 ui.printToUser(taskList.createEvent(params));
                 break;
 
+            case "note":
+                ui.printToUser(taskList.createNote(params));
+                break;
+
             case "find":
                 ui.printToUser(taskList.findEvent(params));
                 break;

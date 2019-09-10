@@ -83,6 +83,10 @@ public class TaskList {
         return CreateEvent.createEvent(taskList, params, storage);
     }
 
+    public String createNote(String[] params) throws DukeException {
+        return CreateNote.createNote(taskList, params, storage);
+    }
+
     /**
      * Finds all the tasks matching a certain keyword.
      * @param params A string array of the keyword(s) to search for

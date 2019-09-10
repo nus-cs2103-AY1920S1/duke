@@ -4,7 +4,7 @@
 public class Ui {
 
     /** Intro message. */
-    private static String intro = "Hello! I'm Duke\n What can I do for you?\n";
+    private static String intro = "Hello! I'm Duke\nWhat can I do for you?\n";
     /** Help prompt for user.*/
     private static String help_prompt = "Unsure what to do? Type 'help'.";
     /** Goodbye message. */

@@ -8,11 +8,8 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Status;
-import duke.task.Task;
-import duke.task.ToDo;
+
+import duke.task.*;
 
 /**
  * duke.command.Storage class. Handles the reading/writing of data to disk.
@@ -63,6 +60,9 @@ public class Storage {
                 case "E":
                     taskList.add(new Event(status, params[2], LocalDateTime.parse(params[3], formatter)));
                     break;
+
+                case "N":
+                    taskList.add(new Note(params[1]));
 
                 default:
                     break;

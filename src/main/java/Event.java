@@ -6,13 +6,16 @@ public class Event extends Task {
 
     public Event(String description, String at) {
         super(description);
-        assert(!at.isEmpty());
+        assert (!at.isEmpty());
         this.at = Task.parseDate(at);
-
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Task.stringifyDate(at) + ")";
+        return "[E]" +
+            super.toString() +
+            " (at: " +
+            Task.stringifyDate(at) +
+            ")";
     }
 }

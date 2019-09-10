@@ -5,12 +5,16 @@ public class Deadline extends Task {
 
     public Deadline(String description, String by) {
         super(description);
-        assert(!by.isEmpty());
+        assert (!by.isEmpty());
         this.by = Task.parseDate(by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Task.stringifyDate(by) + ")";
+        return "[D]" +
+            super.toString() +
+            " (by: " +
+            Task.stringifyDate(by) +
+            ")";
     }
 }

@@ -72,4 +72,19 @@ public class Task {
         String statusIcon = this.getStatusIcon();
         return ("[" + typeOfTask + "]" + "[" + statusIcon + "] " + description);
     }
+
+    public boolean equals(Task taskOfComparison) {
+        if (this == taskOfComparison) {
+            return true;
+        }
+        if (taskOfComparison == null || getClass() != taskOfComparison.getClass()) {
+            return false;
+        }
+        Task task = taskOfComparison;
+        if (this.description.equals(task.getDescription())
+                && this.typeOfTask.equals(task.getTypeOfTask())) {
+            return true;
+        }
+        return false;
+    }
 }

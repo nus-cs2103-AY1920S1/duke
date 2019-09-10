@@ -168,18 +168,27 @@ public class Duke extends Application {
                 throw new EmptyToDoDescriptionException("The description of a todo cannot be empty.");
             }
             t = new Todo(taskDescription);
-            typeOfTask = "T";
-            tasks.add(t);
-            storage.writeToFile(typeOfTask, "0", taskDescription, t);
+            System.out.println(tasks.checkForSameTask(t));
+            if (tasks.checkForSameTask(t)) {
+                return ui.announceExisted();
+            } else {
+                typeOfTask = "T";
+                tasks.add(t);
+                storage.writeToFile(typeOfTask, "0", taskDescription, t);
+            }
         } else if (userCommand.equals("deadline")) {
             Date dateDue = storage.convertStringToDate(due);
             if (taskDescription.equals("dummy")) {
                 throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
             }
             t = new Deadline(taskDescription, dateDue);
-            tasks.add(t);
-            typeOfTask = "D";
-            storage.writeToFile(typeOfTask, "0", taskDescription, t);
+            if (tasks.checkForSameTask(t)) {
+                return ui.announceExisted();
+            } else {
+                tasks.add(t);
+                typeOfTask = "D";
+                storage.writeToFile(typeOfTask, "0", taskDescription, t);
+            }
         } else if (userCommand.equals("event")) {
             String[] eventStartEnd = due.split("-", 2);
             Date start = storage.convertStringToDate(eventStartEnd[0]);
@@ -189,9 +198,13 @@ public class Duke extends Application {
                 throw new EmptyDescriptionException("The description of a event cannot be empty.");
             }
             t = new Event(taskDescription, start, end);
-            typeOfTask = "E";
-            tasks.add(t);
-            storage.writeToFile(typeOfTask, "0", taskDescription, t);
+            if (tasks.checkForSameTask(t)) {
+                return ui.announceExisted();
+            } else {
+                typeOfTask = "E";
+                tasks.add(t);
+                storage.writeToFile(typeOfTask, "0", taskDescription, t);
+            }
         } else {
             throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
         }

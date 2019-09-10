@@ -88,4 +88,13 @@ public class TaskList {
         }
         return ui.announceNoneMatchingTask();
     }
+
+    public Boolean checkForSameTask(Task task) {
+        for (Task t : taskStorage) {
+            if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

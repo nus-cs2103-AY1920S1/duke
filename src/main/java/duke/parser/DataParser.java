@@ -12,6 +12,7 @@ import duke.command.EditTaskNameCommand;
 import duke.command.EndCommand;
 import duke.command.FindTaskCommand;
 import duke.command.ListTaskCommand;
+import duke.command.FindTaggedTaskCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEditTaskException;
@@ -93,6 +94,8 @@ public class DataParser {
             return new EditTaskNameCommand();
         } else if (shouldEditTaskDate()) {
             return new EditTaskDateCommand();
+        } else if (shouldFindTaggedTask()) {
+            return new FindTaggedTaskCommand();
         } else {
             throw new UnknownCommandException();
         }
@@ -314,10 +317,25 @@ public class DataParser {
     }
 
     /**
-     * Checks if the user input indicates that the data parser should end the parsing of user input.
-     * @return Returns true if input is "bye".
+     * Returns the keyword to start the search of matching tasks.
+     * @return the matching keyword.
      */
     public String findKeyWord() throws InvalidKeywordException {
+        String[] data = this.input.split(" ");
+        if (!hasKeyWord(data)) {
+            throw new InvalidKeywordException();
+        }
+        if (isEmptyData(data[1])) {
+            throw new InvalidKeywordException();
+        }
+        return data[1];
+    }
+
+    /**
+     * Returns the tag to start the search of matching tasks.
+     * @return the matching tag.
+     */
+    public String findTag() throws InvalidKeywordException {
         String[] data = this.input.split(" ");
         if (!hasKeyWord(data)) {
             throw new InvalidKeywordException();
@@ -386,6 +404,14 @@ public class DataParser {
      */
     public boolean shouldFindTask() {
         return input.split(" ")[0].equals("find");
+    }
+
+    /**
+     * Checks if the user wishes to find a task based on a tag.
+     * @return True if the input starts with "findTag".
+     */
+    public boolean shouldFindTaggedTask() {
+        return input.split(" ")[0].equals("findTag");
     }
 
     /**

@@ -2,16 +2,17 @@ package duke.storage;
 
 import duke.exception.DukeException;
 import duke.exception.DukeLoadingError;
+import duke.tag.Tag;
+import duke.task.EventTask;
+import duke.task.DeadlineTask;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.DeadlineTask;
-import duke.task.EventTask;
 import duke.task.ToDoTask;
 
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 
 /**
  * Represents a Storage Class which loads and saves data to the output file.
@@ -49,11 +50,16 @@ public class Storage {
         String completion = taskDetails[1];
         String nameOfTask = taskDetails[2];
         String deadline = taskDetails[3];
+        String tag = taskDetails[4];
 
         if (completion.equals("Y")) {
-            tasks.add(new DeadlineTask(nameOfTask, true, deadline));
+            DeadlineTask theTask = new DeadlineTask(nameOfTask, true, deadline);
+            theTask.pushTag(new Tag(tag));
+            tasks.add(theTask);
         } else {
-            tasks.add(new DeadlineTask(nameOfTask, false, deadline));
+            DeadlineTask theTask = new DeadlineTask(nameOfTask, true, deadline);
+            theTask.pushTag(new Tag(tag));
+            tasks.add(theTask);
         }
     }
 
@@ -66,11 +72,16 @@ public class Storage {
         String completion = taskDetails[1];
         String nameOfTask = taskDetails[2];
         String time = taskDetails[3];
+        String tag = taskDetails[4];
 
         if (completion.equals("Y")) {
-            tasks.add(new EventTask(nameOfTask, true, time));
+            EventTask theTask = new EventTask(nameOfTask, true, time);
+            theTask.pushTag(new Tag(tag));
+            tasks.add(theTask);
         } else {
-            tasks.add(new EventTask(nameOfTask, false, time));
+            EventTask theTask = new EventTask(nameOfTask, false, time);
+            theTask.pushTag(new Tag(tag));
+            tasks.add(theTask);
         }
     }
 
@@ -82,11 +93,16 @@ public class Storage {
         String[] taskDetails = task.split(" / ");
         String completion = taskDetails[1];
         String nameOfTask = taskDetails[2];
+        String tag = taskDetails[3];
 
         if (completion.equals("Y")) {
-            tasks.add(new ToDoTask(nameOfTask, true));
+            ToDoTask theTask = new ToDoTask(nameOfTask, true);
+            theTask.pushTag(new Tag(tag));
+            tasks.add(theTask);
         } else {
-            tasks.add(new ToDoTask(nameOfTask, false));
+            ToDoTask theTask = new ToDoTask(nameOfTask, false);
+            theTask.pushTag(new Tag(tag));
+            tasks.add(theTask);
         }
     }
 
@@ -133,23 +149,29 @@ public class Storage {
                 if (task instanceof DeadlineTask) {
                     DeadlineTask deadlineTask = (DeadlineTask) task;
                     if (task.isCompleted) {
-                        writer.write(String.format("D / Y / %s / %s", task.todo, deadlineTask.deadline));
+                        writer.write(String.format("D / Y / %s / %s / %s", task.todo,
+                                deadlineTask.deadline, task.getTag().getTagName()));
                     } else {
-                        writer.write(String.format("D / N / %s / %s", task.todo, deadlineTask.deadline));
+                        writer.write(String.format("D / N / %s / %s / %s", task.todo,
+                                deadlineTask.deadline, task.getTag().getTagName()));
                     }
                 } else if (task instanceof EventTask) {
                     EventTask eventTask = (EventTask) task;
                     if (task.isCompleted) {
-                        writer.write(String.format("E / Y / %s / %s", task.todo, eventTask.time));
+                        writer.write(String.format("E / Y / %s / %s / %s", task.todo,
+                                eventTask.time, task.getTag().getTagName()));
                     } else {
-                        writer.write(String.format("E / N / %s / %s", task.todo, eventTask.time));
+                        writer.write(String.format("E / N / %s / %s / %s", task.todo,
+                                eventTask.time, task.getTag().getTagName()));
                     }
                 } else {
                     ToDoTask todoTask = (ToDoTask) task;
                     if (task.isCompleted) {
-                        writer.write(String.format("T / Y / %s", task.todo));
+                        writer.write(String.format("T / Y / %s / %s", task.todo,
+                                task.getTag().getTagName()));
                     } else {
-                        writer.write(String.format("T / N / %s", task.todo));
+                        writer.write(String.format("T / N / %s / %s", task.todo,
+                                task.getTag().getTagName()));
                     }
                 }
                 writer.write("\n");

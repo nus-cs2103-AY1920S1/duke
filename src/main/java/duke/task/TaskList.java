@@ -193,6 +193,22 @@ public class TaskList {
     }
 
     /**
+     * Returns a list of indexes of matching tasks which contain specific tag.
+     * @param tag the matching tag.
+     * @return A list of indexes of tasks containing the tag.
+     */
+    public ArrayList<Integer> findMatchingTaggedTasks(String tag) {
+        ArrayList<Integer> matchingIndexes = new ArrayList<>();
+        for (int i = 0; i < getNumberOfTasks(); i++) {
+            Task task = tasks.get(i);
+            if (task.getTag().getTagName().equals(tag)) {
+                matchingIndexes.add(i);
+            }
+        }
+        return matchingIndexes;
+    }
+
+    /**
      * Adds a tag to the task at the specified index.
      * @param index the index of the task.
      * @param tag the tag of the task.

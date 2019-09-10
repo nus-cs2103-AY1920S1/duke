@@ -1,6 +1,7 @@
 package duke.ui;
 
 import duke.exception.DukeException;
+import duke.tag.Tag;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -148,12 +149,10 @@ public class Ui {
         }
         for (int tasknum = 0; tasknum < TaskList.getNumberOfTasks(); tasknum++) {
             Task task = TaskList.getTask(tasknum);
+            Tag tag = task.getTag();
             String todo = task.toString();
-            if (task.isCompleted) {
-                append((tasknum + 1) + ". " + todo);
-            } else {
-                append((tasknum + 1) + ". " + todo);
-            }
+            append((tasknum + 1) + ". " + todo);
+            append("Tag: "  + tag);
         }
     }
 }

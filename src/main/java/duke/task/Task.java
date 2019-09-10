@@ -17,7 +17,7 @@ public class Task {
     public Task(String todo) {
         this.todo = todo;
         this.isCompleted = false;
-        this.tag = null;
+        this.tag = new Tag("");
     }
 
     /**

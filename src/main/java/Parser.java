@@ -20,8 +20,10 @@ public class Parser {
      * @param tasks The list where the information is stored after being processed
      * @throws ParseException If date for event is not in the specified format i.e. MM/dd/yyyy HH:mm
      */
+
     public void readTask(String userInput, TaskList tasks) throws ParseException {
         DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
+        assert userInput.length() > 0 : "Enter something";
         if (userInput.contains("[T]")) {
             if (userInput.contains("[" + "1" + "]")) {
                 tasks.add(new ToDo(userInput.substring(7), true));
@@ -62,6 +64,7 @@ public class Parser {
      */
     public String readUserCommand(String command, Ui ui, TaskList list, Storage storage) throws IOException, ParseException {
         String output = "";
+        assert command.length() > 0 : "Please enter something";
         if (command.equals("bye")) {
             //update user data before exiting
             String writeDataToFile = "";

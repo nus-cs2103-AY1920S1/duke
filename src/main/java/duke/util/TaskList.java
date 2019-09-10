@@ -43,8 +43,12 @@ public class TaskList implements Iterable<Task> {
      *
      * @param task Task to be added into TaskList.
      */
-    public void add(Task task) {
+    public void add(Task task) throws DukeException {
         assert task != null : "Task should not be null.";
+
+        if (tasks.contains(task)) {
+            throw new DukeException("Sorry! This task is already tracked by Duke!");
+        }
 
         tasks.add(task);
     }

@@ -3,6 +3,7 @@ package duke.task;
 import duke.util.DateManager;
 import duke.util.DukeException;
 
+import java.util.Objects;
 import java.util.Date;
 
 /**
@@ -46,5 +47,29 @@ public class Event extends Task {
     public String getSaveString() {
         return "E | " + (isDone ? 1 : 0) + " | " + description + " | "
                 + DateManager.dateToString(eventDate);
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+
+        Event event = (Event) obj;
+        return this.description.equals(event.getDescription())
+                && this.eventDate.equals(event.getEventDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.description, this.eventDate);
     }
 }

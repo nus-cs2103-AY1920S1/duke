@@ -21,6 +21,25 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Task)) {
+            return false;
+        }
+
+        Task task = (Task) obj;
+        return this.description.equals(task.getDescription());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.description.hashCode();
+    }
+
     /**
      * Returns the status icon regarding whether the task is done or not.
      *

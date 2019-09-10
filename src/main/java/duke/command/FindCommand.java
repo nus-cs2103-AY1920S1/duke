@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.task.Task;
 
+import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -28,7 +29,7 @@ public class FindCommand extends Command {
      * @param storage Storage where the Tasks are retrieved from and stored to.
      */
     @Override
-    public void executeCli(TaskList tasks, Ui ui, Storage storage) {
+    public void executeCli(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList tasksWithKeyword = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(args)) {
@@ -40,7 +41,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String executeGui(TaskList tasks, Ui ui, Storage storage) {
+    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList tasksWithKeyword = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(args)) {

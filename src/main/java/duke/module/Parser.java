@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RedoCommand;
 import duke.command.UndoCommand;
 
 import duke.date.DukeDate;
@@ -39,6 +40,7 @@ public class Parser {
         DEADLINE,
         DELETE,
         UNDO,
+        REDO,
         BYE;
     }
 
@@ -133,8 +135,8 @@ public class Parser {
      * @throws DukeIllegalCommandException When the string inputted is not a valid {@link CommandType}.
      */
     public static Command parseToCommand(String command, String description) throws DukeIllegalCommandException {
-        assert command != null : "Parser.java (line 133) : command should not be null";
-        assert description != null : "Parser.java (line 134) : description should not be null";
+        assert command != null : "Parser.java (line 138) : command should not be null";
+        assert description != null : "Parser.java (line 139) : description should not be null";
         try {
             switch (CommandType.valueOf(command.toUpperCase())) {
             case LIST:
@@ -153,6 +155,8 @@ public class Parser {
                 return new DeleteCommand(description);
             case UNDO:
                 return new UndoCommand();
+            case REDO:
+                return new RedoCommand();
             case BYE:
                 return new ExitCommand();
             default:

@@ -107,6 +107,12 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    public void addTaskAt(int index, Task task) {
+        assert task != null : "TaskList.java (line 111) : task should not be null";
+        assert index > 0 && index <= this.taskList.size() : "TaskList.java (line 112) : index is out of bounds";
+        this.taskList.add(index - 1, task);
+    }
+
     /**
      * Returns the {@link Task} at given index.
      * <p>
@@ -154,7 +160,7 @@ public class TaskList {
      * @return The last task.
      */
     public Task deleteLastTask() {
-        assert this.taskList.size() != 0 : "TaskList.java (line 157) : This taskList should not be empty.";
+        assert this.taskList.size() != 0 : "TaskList.java (line 163) : This taskList should not be empty.";
         return this.taskList.remove(this.taskList.size() - 1);
     }
 

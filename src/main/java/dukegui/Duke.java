@@ -5,10 +5,10 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeIOException;
 
+import duke.module.CommandStack;
 import duke.module.Parser;
 import duke.module.Storage;
 import duke.module.TaskList;
-import duke.module.UndoStack;
 
 /**
  * <h1>Duke GUI</h1>
@@ -22,7 +22,7 @@ public class Duke {
 
     private TaskList taskList;
     private Storage storage;
-    private UndoStack undoStack;
+    private CommandStack commandStack;
     private boolean isExit;
 
     /**
@@ -32,7 +32,7 @@ public class Duke {
      *     during the parsing of the save file
      */
     public Duke() throws DukeIOException {
-        this.undoStack = new UndoStack();
+        this.commandStack = new CommandStack();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.load());
         this.isExit = false;
@@ -46,12 +46,12 @@ public class Duke {
         try {
             Command c = Parser.parseToCommand(command[0], command[1]);
             this.isExit = c.isExit();
-            return c.getResponse(this.taskList, this.undoStack, this.storage);
+            return c.getResponse(this.taskList, this.commandStack, this.storage);
         } catch (ArrayIndexOutOfBoundsException e) {
             try {
                 Command c = Parser.parseToCommand(command[0], "");
                 this.isExit = c.isExit();
-                return c.getResponse(this.taskList, this.undoStack, this.storage);
+                return c.getResponse(this.taskList, this.commandStack, this.storage);
             } catch (DukeException e2) {
                 return e2.getMessage();
             }

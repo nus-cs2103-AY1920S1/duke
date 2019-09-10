@@ -5,9 +5,9 @@ package duke.exception;
  * <p>
  * Thrown when the user tries to undo a command when no commands are left to be undone.
  */
-public class DukeEmptyUndoStackException extends DukeException {
+public class DukeEmptyCommandStackException extends DukeException {
 
-    public DukeEmptyUndoStackException(String message) {
+    public DukeEmptyCommandStackException(String message) {
         super(message);
     }
 

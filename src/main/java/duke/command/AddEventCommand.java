@@ -9,11 +9,11 @@ import duke.exception.DukeIOException;
 import duke.exception.DukeIllegalArgumentException;
 
 import duke.module.AutoResponse;
+import duke.module.CommandStack;
 import duke.module.Parser;
 import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
-import duke.module.UndoStack;
 
 import duke.task.EventTask;
 import duke.task.Task;
@@ -26,6 +26,7 @@ public class AddEventCommand extends Command implements Undoable {
     private static final String DELIMITER_EVENT_DATE = "/at";
 
     private String description;
+    private Task eventTask;
 
     public AddEventCommand(String description) {
         this.description = description;
@@ -35,7 +36,7 @@ public class AddEventCommand extends Command implements Undoable {
      * Adds a {@link EventTask} to the <code>TaskList</code>.
      *
      * @param taskList List of tasks to manage.
-     * @param undoStack Stack of {@code Undoable} commands.
+     * @param commandStack Stack of {@code Undoable} commands.
      * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalArgumentException When the description or date of task is missing.
@@ -43,29 +44,29 @@ public class AddEventCommand extends Command implements Undoable {
      * @throws DukeIOException When there is an error during an input-output process.
      */
     @Override
-    public void execute(TaskList taskList, UndoStack undoStack, Ui ui, Storage storage)
+    public void execute(TaskList taskList, CommandStack commandStack, Ui ui, Storage storage)
             throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
         // Display the result to the user
-        ui.printToUser(this._execute(taskList, undoStack, storage));
+        ui.printToUser(this._execute(taskList, commandStack, storage));
     }
 
     /**
      * Returns the result of adding a {@link EventTask} to the <code>TaskList</code>.
      *
      * @param taskList List of tasks to manage.
-     * @param undoStack Stack of {@code Undoable} commands.
+     * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalArgumentException When the description or date of task is missing.
      * @throws DukeDateFormatException When the date is formatted incorrectly.
      * @throws DukeIOException When there is an error during an input-output process.
      */
     @Override
-    public String getResponse(TaskList taskList, UndoStack undoStack, Storage storage)
+    public String getResponse(TaskList taskList, CommandStack commandStack, Storage storage)
             throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
-        return String.join("\n", this._execute(taskList, undoStack, storage));
+        return String.join("\n", this._execute(taskList, commandStack, storage));
     }
 
-    private String[] _execute(TaskList taskList, UndoStack undoStack, Storage storage)
+    private String[] _execute(TaskList taskList, CommandStack commandStack, Storage storage)
             throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
         String[] arg = this.description.split(DELIMITER_EVENT_DATE);
 
@@ -80,8 +81,8 @@ public class AddEventCommand extends Command implements Undoable {
         Task eventTask = new EventTask(arg[0].trim(), dukeDate);
         taskList.addTask(eventTask);
 
-        // Add this command to the undoStack
-        undoStack.addUndoable(this);
+        // Add this command to the commandStack
+        commandStack.addUndo(this);
 
         // Save new task to the storage file
         storage.saveTasks(taskList);
@@ -122,28 +123,21 @@ public class AddEventCommand extends Command implements Undoable {
     }
 
     /**
-     * Returns false.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Undoes the addition of an event task.
      * In other words, deletes the last event task added.
      *
      * @param taskList List of tasks to manage.
+     * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes if necessary.
      * @return The result of undoing this command.
      * @throws DukeIOException If an error occurs while saving.
      */
     @Override
-    public String[] undo(TaskList taskList, Storage storage) throws DukeIOException {
-        Task eventTask = taskList.deleteLastTask();
+    public String[] undo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIOException {
+        this.eventTask = taskList.deleteLastTask();
 
+        // Add this command to the redo stack
+        commandStack.addRedo(this);
         // Save the modified taskList
         storage.saveTasks(taskList);
 
@@ -151,6 +145,40 @@ public class AddEventCommand extends Command implements Undoable {
         return new String[] { AutoResponse.DUKE_UNDO_ADD_TASK,
                               "  " + eventTask.getStatus(),
                               String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize())};
+    }
+
+    /**
+     * Redoes the undoing of this command.
+     *
+     * @param taskList List of tasks to manage.
+     * @param commandStack Stack of {@code Undoable} commands.
+     * @param storage Storage to save any changes if necessary.
+     * @return The result of redoing this command.
+     * @throws DukeIOException If an error occurs while saving.
+     */
+    @Override
+    public String[] redo(TaskList taskList, CommandStack commandStack, Storage storage)
+            throws DukeIOException {
+        assert this.eventTask != null : "AddEventCommand.java (line 162) : eventTask should not be null.";
+
+        taskList.addTask(this.eventTask);
+        // Add this command to the undo stack
+        commandStack.addUndo(this);
+        // Save the modified taskList
+        storage.saveTasks(taskList);
+        return new String[] { AutoResponse.DUKE_REDO_ADD_TASK,
+                              "  " + this.eventTask.getStatus(),
+                              String.format(AutoResponse.DUKE_NUMBER_OF_TASKS, taskList.getSize()) };
+    }
+
+    /**
+     * Returns false.
+     *
+     * @return False.
+     */
+    @Override
+    public boolean isExit() {
+        return false;
     }
 
 }

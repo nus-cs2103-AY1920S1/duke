@@ -9,7 +9,7 @@ import duke.module.Parser;
 import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
-import duke.module.UndoStack;
+import duke.module.CommandStack;
 
 /**
  * <h1>Duke</h1>
@@ -24,7 +24,7 @@ public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
-    private UndoStack undoStack;
+    private CommandStack commandStack;
 
     /**
      * Initializes the necessary modules to run the Duke application.
@@ -34,7 +34,7 @@ public class Duke {
      */
     public Duke() throws DukeIOException {
         this.ui = new Ui();
-        this.undoStack = new UndoStack();
+        this.commandStack = new CommandStack();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.load());
     }
@@ -53,7 +53,7 @@ public class Duke {
                 String command = this.ui.readCommand();
                 String description = this.ui.readDescription();
                 Command c = Parser.parseToCommand(command, description);
-                c.execute(this.taskList, this.undoStack, this.ui, this.storage);
+                c.execute(this.taskList, this.commandStack, this.ui, this.storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 this.ui.printToUser(e.getMessage());

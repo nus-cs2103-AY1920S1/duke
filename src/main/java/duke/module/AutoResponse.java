@@ -22,16 +22,22 @@ public class AutoResponse {
     public static final String DUKE_MARK_AS_DONE = "Nice! I've marked this task as done:";
     public static final String DUKE_DONE_ALL_TASKS = "Nice! All of your tasks are marked as done.";
     public static final String DUKE_FOUND_TASKS = "Here are the matching tasks in your list:";
-    public static final String DUKE_NO_FOUND_TASKS = "There were no matching tasks for the keyword: ";
+    public static final String DUKE_NO_FOUND_TASKS = "There were no matching tasks for the keyword: \"%s\"";
     public static final String DUKE_LIST_TASKS = "Here are the tasks in your list:";
     public static final String DUKE_NO_TASKS = "You currently have no tasks in your list.";
-    public static final String DUKE_UNDO_ADD_TASK = "Noted. I've removed this task:";
+    public static final String DUKE_UNDO_ADD_TASK = "Noted. I've removed this task again:";
     public static final String DUKE_UNDO_DELETE_NO_TASK = "No tasks were deleted before.";
     public static final String DUKE_UNDO_DELETE_TASK = "Got it. I've added the following task(s):";
     public static final String DUKE_UNDO_DONE_NO_TASK = "No tasks were marked as done before.";
     public static final String DUKE_UNDO_DONE_TASK = "Noted. I've marked the following task as unfinished:";
     public static final String DUKE_UNDO_DONE_ALL_TASKS = "Noted. I've marked all tasks as undone.";
-    public static final String DUKE_UNDO_STUB = "The %s command is not undoable.";
+    public static final String DUKE_REDO_ADD_TASK = "Got it. I've added back this task:";
+    public static final String DUKE_REDO_DELETE_NO_TASK = "No tasks were added before.";
+    public static final String DUKE_REDO_DELETE_TASK = "Noted. The following task was deleted again:";
+    public static final String DUKE_REDO_DELETE_ALL_TASKS = "Noted. I've deleted all tasks again.";
+    public static final String DUKE_REDO_DONE_NO_TASK = "No tasks were marked as unfinished before.";
+    public static final String DUKE_REDO_DONE_TASK = "Nice! I've marked this task as done again:";
+    public static final String DUKE_REDO_DONE_ALL_TASKS = "Nice! I've marked all tasks as done again.";
 
     public static final String ERROR_MISSING_TASK_DESCRIPTION = "☹ OOPS!!! The description of a task "
             + "cannot be empty.";
@@ -56,5 +62,6 @@ public class AutoResponse {
     public static final String ERROR_NONPOSITIVE_INDEX = "☹ OOPS!!! Index has to be greater than zero.";
     public static final String ERROR_EXCEED_INDEX = "☹ OOPS!!! Currently there are only %d tasks.";
     public static final String ERROR_EMPTY_UNDO_STACK = "☹ OOPS!!! There are no commands to be undone.";
+    public static final String ERROR_EMPTY_REDO_STACK = "☹ OOPS!!! There are no commands to be redone.";
     
 }

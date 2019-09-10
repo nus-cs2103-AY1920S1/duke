@@ -1,10 +1,12 @@
 package duke.command;
 
+import duke.exception.DukeIOException;
+
 import duke.module.AutoResponse;
+import duke.module.CommandStack;
 import duke.module.Storage;
 import duke.module.TaskList;
 import duke.module.Ui;
-import duke.module.UndoStack;
 
 /**
  * Represents the "exit" command supported by Duke.
@@ -15,12 +17,16 @@ public class ExitCommand extends Command {
      * Quits Duke.
      *
      * @param taskList List of tasks to manage.
-     * @param undoStack Stack of {@code Undoable} commands.
+     * @param commandStack Stack of {@code Undoable} commands.
      * @param ui UI to show result to user.
      * @param storage Storage to save any changes if necessary.
+     * @throws DukeIOException If an error occurs while saving.
      */
     @Override
-    public void execute(TaskList taskList, UndoStack undoStack, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, CommandStack commandStack, Ui ui, Storage storage)
+            throws DukeIOException {
+        // Save taskList before quitting
+        storage.saveTasks(taskList);
         ui.bye();
     }
 
@@ -28,11 +34,14 @@ public class ExitCommand extends Command {
      * Returns the response to command "bye."
      *
      * @param taskList List of tasks to manage.
-     * @param undoStack Stack of {@code Undoable} commands.
+     * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes if necessary.
      */
     @Override
-    public String getResponse(TaskList taskList, UndoStack undoStack, Storage storage) {
+    public String getResponse(TaskList taskList, CommandStack commandStack, Storage storage)
+            throws DukeIOException {
+        // Save taskList before quitting
+        storage.saveTasks(taskList);
         return AutoResponse.DUKE_BYE;
     }
 

@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) {
         String deleteNumber = input.substring(6).trim();
+        assert deleteNumber != null || !deleteNumber.equals("") : "deleteNumber should not be null";
         if (deleteNumber.length() == 0) {
             return "No number detected to be removed";
         }

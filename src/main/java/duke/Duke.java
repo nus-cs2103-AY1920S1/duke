@@ -44,7 +44,6 @@ public class Duke extends Application {
 
     private Storage fileMgr;
     private TaskList tasks;
-    private boolean isRunning;
 
     // Application UI elements
     private AnchorPane mainLayout;
@@ -69,8 +68,6 @@ public class Duke extends Application {
      *                 data to.
      */
     public Duke(String filePath) {
-        this.isRunning = true;
-        
         try {
             this.fileMgr = new Storage(filePath);
         } catch (IOException e) {
@@ -93,13 +90,35 @@ public class Duke extends Application {
 
     // ======================== DUKE APPLICATON WITH GRAPHICAL USER INTERFACE ========================
 
+    // Schedules an action to be executed by a thread after a specified delay
+    private static void deferAction(long delayDuration, Runnable action) {
+        new Timer().schedule(
+            new TimerTask() {
+                @Override
+                public void run() {
+                    action.run();
+                }
+            },
+            delayDuration
+        );
+    }
+
     // Parses and executes a command input by a user through the GUI, returning the String output of the command
     private String handleCommand(String command) {
         // Parse the command to return a Command object
         try {
             Command c = Parser.parse(command);
-            this.isRunning = !c.willTerminate();
-            return c.execute(this.tasks, this.fileMgr);
+            String commandOutput = c.execute(this.tasks, this.fileMgr);
+
+            // If this command terminates Duke, schedule the application window to close in 0.5s
+            if (c.willTerminate()) {
+                Duke.deferAction(500, () -> {
+                    Platform.exit();
+                    System.exit(0);
+                });
+            }
+
+            return commandOutput;
         } catch (DukeException e) {
             // Return the full error message
             return e.toString();
@@ -180,20 +199,6 @@ public class Duke extends Application {
             DialogBox.getUserDialog(userText, new ImageView(this.userPic)),
             DialogBox.getDukeDialog(dukeText, new ImageView(this.dukePic))
         );
-
-        // If a command has set Duke to terminate, schedule the application window to close in 0.5s
-        if (!this.isRunning) {
-            new Timer().schedule(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        Platform.exit();
-                        System.exit(0);
-                    }
-                },
-                500
-            );
-        }
     }
 
     // Invoked once on application startup - shows Duke's logo then welcome message

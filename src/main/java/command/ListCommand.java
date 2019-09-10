@@ -6,16 +6,16 @@ import utils.Ui;
 
 public class ListCommand extends Command {
 
-  public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
-    String output = "";
+        String output = "";
 
-    // Save output as String
-    output += ui.getTopBorder();
-    output += "\n\tHere are the tasks in your list: ";
-    output += ui.getTasksAsString(tasks.getTaskList());
-    output += ui.getBottomBorder();
-    return output;
-  }
+        // Save output as String
+        output += ui.getTopBorder();
+        output += "\n\tHere are the tasks in your list: ";
+        output += ui.getTasksAsString(tasks.getTaskList());
+        output += ui.getBottomBorder();
+        return output;
+    }
 
 }

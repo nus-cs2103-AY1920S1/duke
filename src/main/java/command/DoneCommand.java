@@ -2,6 +2,7 @@ package command;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import utils.TaskList;
 import utils.Storage;
 import utils.Ui;
@@ -12,35 +13,35 @@ import tasks.Task;
  */
 public class DoneCommand extends Command {
 
-  int index;
+    int index;
 
-  public DoneCommand(int index) {
-    this.index = index - 1;
-  }
-
-  public String execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, IOException {
-
-    String output = "";
-
-    if (index < 0 || index > tasks.getSize() - 1) {
-      return new InvalidCommand("Integer supplied should be within range of list.").execute(tasks, ui, storage);
+    public DoneCommand(int index) {
+        this.index = index - 1;
     }
 
-    // Execute Command
-    tasks.getTaskList().get(index).setAsDone();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, IOException {
 
-    Task doneTask = tasks.getTaskList().get(index);
+        String output = "";
 
-    // Save output as String
-    output += ui.getTopBorder();
-    output += "\n\tNice! I have marked this task as done: ";
-    output += "\n\t" + doneTask;
-    output += ui.getBottomBorder();
+        if (index < 0 || index > tasks.getSize() - 1) {
+            return new InvalidCommand("Integer supplied should be within range of list.").execute(tasks, ui, storage);
+        }
 
-    // Saving to file
-    storage.updateAsDone(index);
+        // Execute Command
+        tasks.getTaskList().get(index).setAsDone();
 
-    return output;
+        Task doneTask = tasks.getTaskList().get(index);
 
-  }
+        // Save output as String
+        output += ui.getTopBorder();
+        output += "\n\tNice! I have marked this task as done: ";
+        output += "\n\t" + doneTask;
+        output += ui.getBottomBorder();
+
+        // Saving to file
+        storage.updateAsDone(index);
+
+        return output;
+
+    }
 }

@@ -16,7 +16,7 @@ public class DeadLine extends Task {
 
     /**
      * Returns the deadline in which the task is due by.
-     * 
+     *
      * @return deadline
      */
     public String getDeadLine() {

@@ -6,21 +6,21 @@ import utils.Ui;
 
 public class FindCommand extends Command {
 
-  String description;
+    String description;
 
-  public FindCommand(String description) {
-    this.description = description;
-  }
+    public FindCommand(String description) {
+        this.description = description;
+    }
 
-  public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
-    String output = "";
+        String output = "";
 
-    // Save output as String
-    output += ui.getTopBorder();
-    output += "\n\tHere are the matching tasks in your list: ";
-    output += ui.getTasksAsString(tasks.findTasks(description));
-    output += ui.getBottomBorder();
-    return output;
-  }
+        // Save output as String
+        output += ui.getTopBorder();
+        output += "\n\tHere are the matching tasks in your list: ";
+        output += ui.getTasksAsString(tasks.findTasks(description));
+        output += ui.getBottomBorder();
+        return output;
+    }
 }

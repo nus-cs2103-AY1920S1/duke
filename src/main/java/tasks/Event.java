@@ -16,7 +16,7 @@ public class Event extends Task {
 
     /**
      * Returns the timing at which the event happens.
-     * 
+     *
      * @return timing
      */
     public String getTiming() {

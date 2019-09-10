@@ -4,14 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ExitCommand;
-import command.FindCommand;
-import command.InvalidCommand;
-import command.ListCommand;
+import command.*;
 
 /**
  * Parser object handles all input reading and prints the respective output.
@@ -20,7 +13,7 @@ public class Parser {
 
     /**
      * A method to determine the suffix, given the date.
-     * 
+     *
      * @param dateTime a LocalDateTime
      * @return String representing "st", "nd", "rd" or "th"
      */
@@ -43,7 +36,7 @@ public class Parser {
     /**
      * A method to convert dates into the correct format of type: "1st November
      * 2019, 2.30pm".
-     * 
+     *
      * @param dateTimeString the unformatted date
      * @return String representing dates in the format: "1st November 2019, 2.30pm"
      */
@@ -62,7 +55,7 @@ public class Parser {
 
     /**
      * Static method that parses strings into their respective commands.
-     * 
+     *
      * @param fullCommand The fullCommand read from input.
      * @return Command
      */
@@ -115,6 +108,8 @@ public class Parser {
                 String formattedDate = getDate(wordArr[1].trim());
                 return new AddCommand(keyCommand, wordArr[0].trim(), formattedDate);
 
+            } else if (keyCommand.equals("help")) {
+                return new HelpCommand();
             } else {
                 return new InvalidCommand("Sorry! I don't understand what that means :(");
             }

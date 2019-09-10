@@ -40,7 +40,7 @@ public class Storage {
 
     /**
      * A method to create a list of tasks, from an input file.
-     * 
+     *
      * @return List of tasks
      */
     public ArrayList<Task> load() throws FileNotFoundException, IOException {
@@ -86,7 +86,7 @@ public class Storage {
 
     /**
      * Adds the task specified into the text file.
-     * 
+     *
      * @param textToAdd Text to be added into file.
      */
     public void saveTask(String textToAdd) throws IOException {
@@ -95,7 +95,7 @@ public class Storage {
 
     /**
      * Deletes the task specified at index in the text file.
-     * 
+     *
      * @param index the specific index of task to be deleted.
      */
     public void deleteTask(int index) throws FileNotFoundException, IOException {
@@ -120,7 +120,7 @@ public class Storage {
 
     /**
      * Updates the task specified at index as done in the text file.
-     * 
+     *
      * @param index the specific index for task which is to be set as done.
      */
     public void updateAsDone(int index) throws FileNotFoundException, IOException {

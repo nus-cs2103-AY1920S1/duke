@@ -4,7 +4,17 @@ import Model.Tasklist;
 import Storage.Storage;
 import UI.UI;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.nio.file.Paths;
 
@@ -15,17 +25,115 @@ public class Duke extends Application {
 
     private final String INPUT_DELIMITER = " ";
 
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
     public Duke(){}
 
     @Override
     public void start(Stage stage) {
         //The container for the content of the chat to scroll.
-        //Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        //Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
 
-        //stage.setScene(scene); // Setting the stage to show our screen
-        //stage.show(); // Render the stage.
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        //stage.setScene(scene);
+        //stage.show();
+
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+
+        stage.setScene(scene);
+        stage.show();
+
     }
+
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
+
 
 
     public static void main(String[] args){
@@ -55,163 +163,5 @@ public class Duke extends Application {
             isExit = command.isExit();
         }
 
-
-        /*
-        do{
-            String input = ui.nextLine();
-
-            if(input.equals("bye")){
-                ui.printData("Bye. Hope to see you again soon!");
-                break;
-            } else if(input.equals("list")) {
-                int i;
-
-                String content = "";
-
-                for(i = 0; i < tasks.size(); i++){
-                    content = content.concat((i + 1) + ". ");
-                    content = content.concat("[" + tasks.get(i).getSymbol() + "]");
-                    content = content.concat("[" + tasks.get(i).getIsDoneSymbol() + "]");
-                    content = content.concat(" " + tasks.get(i).getDescription());
-                    if(tasks.get(i).getSymbol() == 'D'){
-                        content = content.concat(" (by: " + tasks.get(i).getDetails() + ")");
-                    } else if(tasks.get(i).getSymbol() == 'E'){
-                        content = content.concat(" (at: " + tasks.get(i).getDetails() + ")");
-                    }
-                    content = content.concat("\n");
-                }
-
-                ui.printData(content);
-                storage.save(tasks);
-
-            } else if(input.startsWith("done")) {
-                String[] sp = input.split(" ", 2);
-                int index = Integer.parseInt(sp[1]);
-
-                tasks.get(index - 1).markAsDone();
-
-                String content = "Nice! I've marked this task as done:\n" +
-                                "[" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription() +"\n";
-
-                ui.printData(content);
-
-            } else if(input.startsWith("delete")){
-                String[] sp = input.split(" ", 2);
-                int index = Integer.parseInt(sp[1]);
-
-                String content = "";
-                content = content.concat("Noted. I've removed this task:\n");
-                content = content.concat("[" + tasks.get(index - 1).getSymbol() + "][" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription());
-                if(tasks.get(index - 1).getSymbol() == 'D'){
-                    content = content.concat(" (by: " + tasks.get(index - 1).getDetails() + ")");
-                } else if (tasks.get(index - 1).getSymbol() == 'E'){
-                    content = content.concat(" (at: " + tasks.get(index - 1).getDetails() + ")");
-                }
-                content = content.concat("\n");
-
-                tasks.remove(index - 1);
-
-                content = content.concat("You now have " + tasks.size() + " tasks in this list\n");
-                ui.printData(content);
-
-
-            } else if(input.startsWith("todo")) {
-                String[] sp = input.split(" ", 2);
-
-                if(sp.length < 2){
-                    ui.printData("OOPS! The description of a todo cannot be empty.\n");
-                    continue;
-                }
-
-                tasks.add(new todo(sp[1]));
-
-                String content = "";
-
-                content = content.concat("Got it. I've added this task:\n");
-                content = content.concat("[T][✗] " + sp[1] +'\n');
-                content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
-
-                ui.printData(content);
-
-            } else if(input.startsWith("deadline")) {
-                String[] sp = input.split(" ", 2);
-
-                if(sp.length < 2){
-                    ui.printData("OOPS! The description of a deadline cannot be empty.\n");
-                    continue;
-                }
-
-                String[] sp2 = sp[1].split(" /by ", 2);
-
-                tasks.add(new deadline(sp2[0], sp2[1]));
-
-                String content = "";
-
-                content = content.concat("Got it. I've added this task:\n");
-                content = content.concat("[D][✗] " + sp2[0] + " (by: " + sp2[1] + ")\n");
-                content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
-
-                ui.printData(content);
-
-            } else if(input.startsWith("event")) {
-                String[] sp = input.split(" ", 2);
-
-                if(sp.length < 2){
-                    ui.printData("OOPS!!! The description of a event cannot be empty.");
-                    continue;
-                }
-
-                String[] sp2 = sp[1].split(" /at ", 2);
-
-                tasks.add(new event(sp2[0], sp2[1]));
-
-                String content = "";
-
-                content = content.concat("Got it. I've added this task:");
-                content = content.concat("[E][✗] " + sp2[0] + " (at: " + sp2[1] + ")");
-                content = content.concat("Now you have " + tasks.size() + " tasks in this list");
-
-                ui.printData(content);
-
-            } else if(input.startsWith("find")) {
-
-                String[] sp = input.split(" ", 2);
-
-                if(sp.length < 2){
-                    ui.printData("OOPS!!! The description of a find cannot be empty.");
-                    continue;
-                }
-
-                ArrayList<Integer> indexes = new ArrayList<Integer>();
-                int i;
-                for(i = 0; i < tasks.size(); i++) {
-                    if(tasks.get(i).getDescription().contains(sp[1])) {
-                        indexes.add(i);
-                    }
-                }
-                String content = "";
-                for(i = 0; i < indexes.size(); i++) {
-                    content = content.concat((i + 1) + ". ");
-                    content = content.concat("[" + tasks.get(indexes.get(i)).getSymbol() + "]");
-                    content = content.concat("[" + tasks.get(indexes.get(i)).getIsDoneSymbol() + "]");
-                    content = content.concat(" " + tasks.get(indexes.get(i)).getDescription());
-                    if(tasks.get(indexes.get(i)).getSymbol() == 'D'){
-                        content = content.concat(" (by: " + tasks.get(indexes.get(i)).getDetails() + ")");
-                    } else if(tasks.get(indexes.get(i)).getSymbol() == 'E'){
-                        content = content.concat(" (at: " + tasks.get(indexes.get(i)).getDetails() + ")");
-                    }
-                    content = content.concat("\n");
-                }
-                ui.printData(content);
-
-
-            } else {
-
-                ui.printData("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
-            }
-
-        } while(true);
-
-         */
     }
 }

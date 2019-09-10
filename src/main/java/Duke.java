@@ -40,7 +40,9 @@ public class Duke extends Application {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNextLine()) {
             String s = sc.nextLine();
+            assert s.length() > 0 : "no new input";
             String[] a = Parser.parse(s);
+            assert a.length > 0 : "input wrong";
             switch (a[0]) {
                 case "bye":
                     ui.bye();

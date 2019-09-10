@@ -129,6 +129,17 @@ public class Ui {
     }
 
     /**
+     * Returns the successful keyword replacement message in the standard format.
+     *
+     * @param oldKeyword Keyword to be replaced
+     * @param newKeyword Keyword to replace
+     * @return String Successful keyword replacement message
+     */
+    public String getReplaceKeywordMessage(String oldKeyword, String newKeyword) {
+        return getStandard(String.format("Successfully replaced %s with %s", oldKeyword, newKeyword));
+    }
+
+    /**
      * Converts and returns any given String into the correct output format.
      *
      * @param string Input String

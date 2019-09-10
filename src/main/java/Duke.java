@@ -13,6 +13,7 @@ public class Duke {
      * @param filePath the location of the save file.
      */
     public Duke(String filePath) {
+        assert true : "this should be true";
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.getData());

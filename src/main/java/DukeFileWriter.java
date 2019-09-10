@@ -15,6 +15,7 @@ public class DukeFileWriter {
      * @throws IOException throws IOException when there is an error in the IO process.
      */
     public static void writeToFile(String filePath, ArrayList<Task> tasks) throws IOException {
+        assert !filePath.equals("") : "filePath should not be empty";
         FileWriter fw = new FileWriter(filePath);
         String allTaskData = "";
         for (Task x : tasks) {

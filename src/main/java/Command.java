@@ -36,6 +36,8 @@ public class Command {
             int number = sc.nextInt();
             try {
                 if (!tasks.getList().get(number - 1).isDone()) {
+                    assert number - 1 <= tasks.size() && number >= 1 :
+                            "Task number is not within task list";
                     tasks.markDone(number);
                     storage.updateDone(number, tasks);
                     return ui.printDone(number, tasks);
@@ -52,14 +54,17 @@ public class Command {
                 if (sc.hasNextLine()) {
                     String taskname = sc.nextLine().trim();
                     if (!taskname.equals("")) {
+                        assert !taskname.equals("") : "Task name should not be empty";
                         Task t = new Todo(taskname);
                         storage.addTodo(taskname, tasks);
                         tasks.add(t);
                         return ui.printAdd(t, tasks);
                     } else {
+                        assert taskname.equals("") : " Task name should be empty";
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
                 } else {
+                    assert action.equals("todo") : "Command should be: todo";
                     throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                 }
             } catch (DukeException e) {
@@ -70,6 +75,7 @@ public class Command {
                 if (sc.hasNextLine()) {
                     String deadline = sc.nextLine().trim();
                     if (!deadline.equals("")) {
+                        assert !deadline.equals("") : "Task name should not be empty";
                         String[] arrDeadline = deadline.split("/by");
                         String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
                         Task taskDeadline = new Deadline(arrDeadline[0].trim(), timeDeadline);
@@ -77,9 +83,11 @@ public class Command {
                         tasks.add(taskDeadline);
                         return ui.printAdd(taskDeadline, tasks);
                     } else {
+                        assert deadline.equals("") : " Task name should be empty";
                         throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                     }
                 } else {
+                    assert action.equals("deadline") : "Command should be: deadline";
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
                 }
             } catch (DukeException e) {
@@ -90,6 +98,7 @@ public class Command {
                 if (sc.hasNextLine()) {
                     String event = sc.nextLine().trim();
                     if (!event.equals("")) {
+                        assert !event.equals("") : "Task name should not be empty";
                         String[] arrEvent = event.split("/at");
                         String time = Parser.convertDateAndTime(arrEvent[1].trim());
                         Task taskEvent = new Event(arrEvent[0].trim(), time);
@@ -97,9 +106,11 @@ public class Command {
                         tasks.add(taskEvent);
                         return ui.printAdd(taskEvent, tasks);
                     } else {
+                        assert event.equals("") : " Task name should be empty";
                         throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                     }
                 } else {
+                    assert action.equals("deadline") : "Command should be: event";
                     throw new DukeException("OOPS!!! The description of a event cannot be empty.");
                 }
             } catch (DukeException e) {

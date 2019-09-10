@@ -1,10 +1,6 @@
 package commands;
 
-import logic.DukeException;
-import logic.Storage;
-import logic.TaskList;
-import logic.Ui;
-import logic.Parser;
+import logic.*;
 import task.Events;
 import task.Task;
 
@@ -16,7 +12,7 @@ import java.util.Arrays;
  */
 public class EventCommand extends Command {
     private String args;
-    private static String EVENT_WRONG_FORMAT = "Invalid format. Please follow the format:\nevent [description] /at DD/MM/YYYY HHMM - DD/MM/YYYY HHMM";
+
 
     public EventCommand(String args) {
         this.args = args;
@@ -36,24 +32,24 @@ public class EventCommand extends Command {
         if (splitStr[0].trim().isEmpty()) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
         } else if (splitStr.length == 1) {
-            throw new DukeException(EVENT_WRONG_FORMAT);
+            throw new DukeException(DukeStrings.EVENT_WRONG_FORMAT);
         }
 
         String[] dateString;
         try {
             dateString = splitStr[1].trim().split(" - "); //e.g. 2/12/2019 1800 - 2/12/2019 1800
             if (dateString.length != 2) {
-                throw new DukeException(EVENT_WRONG_FORMAT);
+                throw new DukeException(DukeStrings.EVENT_WRONG_FORMAT);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(EVENT_WRONG_FORMAT);
+            throw new DukeException(DukeStrings.EVENT_WRONG_FORMAT);
         }
 
         LocalDateTime start = Parser.parseDateTime(dateString[0]);
         LocalDateTime end = Parser.parseDateTime(dateString[1]);
 
         if (start.isAfter(end)) {
-            throw new DukeException("☹ OOPS!!! Start DateTime cannot be after End DateTime!");
+            throw new DukeException(DukeStrings.EVENT_NOT_CHRONO);
         }
 
         Task task = new Events(false, splitStr[0].trim(), start, end);

@@ -1,9 +1,6 @@
 package commands;
 
-import logic.DukeException;
-import logic.Storage;
-import logic.TaskList;
-import logic.Ui;
+import logic.*;
 import task.Task;
 import task.ToDo;
 
@@ -28,7 +25,7 @@ public class ToDoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (args.trim().isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty");
+            throw new DukeException(DukeStrings.TODO_EMPTY);
         }
 
         Task task = new ToDo(false, args); //args is the description string

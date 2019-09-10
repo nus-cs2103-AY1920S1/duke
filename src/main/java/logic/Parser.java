@@ -33,8 +33,7 @@ public class Parser {
 
             return LocalDateTime.of(year, month, day, hours, mins);
         } catch (ArrayIndexOutOfBoundsException | DateTimeException | NumberFormatException e) {
-            throw new DukeException("Invalid Date-Time format.\n"
-                    + "Please use DD/MM/YYYY HHMM E.g. [2/12/2019 1800]");
+            throw new DukeException(DukeStrings.INVALID_DATETIME_FORMAT);
         }
     }
 
@@ -77,10 +76,10 @@ public class Parser {
         try {
             taskInt = Integer.parseInt(str);
             if (taskInt > taskList.size() || taskInt <= 0) {
-                throw new DukeException("That task number does not exist, please try again");
+                throw new DukeException(DukeStrings.NONEXISTENT_TASK_NUMBER);
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("Please state a valid task number");
+            throw new DukeException(DukeStrings.INVALID_TASK_NUMBER);
         }
 
         return taskInt;
@@ -105,37 +104,37 @@ public class Parser {
             try {
                 return new DoneCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Please enter a valid task number");
+                throw new DukeException(DukeStrings.INVALID_TASK_NUMBER);
             }
         case "delete":
             try {
                 return new DeleteCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("Please enter a valid task number");
+                throw new DukeException(DukeStrings.INVALID_TASK_NUMBER);
             }
         case "todo":
             try {
                 return new ToDoCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty");
+                throw new DukeException(DukeStrings.TODO_EMPTY);
             }
         case "deadline":
             try {
                 return new DeadlineCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty");
+                throw new DukeException(DukeStrings.DEADLINE_EMPTY);
             }
         case "event":
             try {
                 return new EventCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
+                throw new DukeException(DukeStrings.EVENT_EMPTY);
             }
         case "find":
             try {
                 return new FindCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! Please enter a keyword");
+                throw new DukeException(DukeStrings.FIND_EMPTY);
             }
         default:
             return new UnknownCommand();

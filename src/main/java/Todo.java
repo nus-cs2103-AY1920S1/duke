@@ -5,8 +5,12 @@ public class Todo extends Tasks {
         super(dets);
     }
 
-    public void finishTask() {
-        super.finishTask();
+    public Todo(String dets, int status) {
+        super(dets, status);
+    }
+
+    public void doTask() {
+        super.doTask();
     }
 
 

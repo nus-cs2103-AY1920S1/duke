@@ -11,6 +11,9 @@ package tasks;
  */
 public class Todo extends Task {
 
+    /** Tag identifying Todo. */
+    private static final String TODO_TAG = "T-";
+
     /**
      * Create a todo with a description.
      *
@@ -27,6 +30,6 @@ public class Todo extends Task {
      * @return string representing this todo.
      */
     public String toString() {
-        return "T-" + super.toString();
+        return TODO_TAG + super.toString();
     }
 }

@@ -16,6 +16,12 @@ public class Deadline extends Task {
     /** The date by which task is due. */
     private String dueDate;
 
+    /** Fixed string pattern for date time format. */
+    private static final String DATE_TIME_FORMAT_PATTERN = "dd/MM/yyyy HHmm";
+
+    /** Tag identifying deadline. */
+    private static final String DEADLINE_TAG = "D-";
+
     /** Date / Time converted to Date format. */
     private Date byWhen;
 
@@ -40,7 +46,7 @@ public class Deadline extends Task {
      * @return string representing this deadline.
      */
     public String toString() {
-        return "D-" + super.toString() + "-" + dueDate;
+        return DEADLINE_TAG + super.toString() + "-" + dueDate;
     }
 
     /**
@@ -51,6 +57,6 @@ public class Deadline extends Task {
      * @throws ParseException if the date/time is entered in the wrong format
      */
     private Date toDate() throws ParseException {
-        return new SimpleDateFormat("dd/MM/yyyy HHmm").parse(this.dueDate);
+        return new SimpleDateFormat(DATE_TIME_FORMAT_PATTERN).parse(this.dueDate);
     }
 }

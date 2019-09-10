@@ -14,6 +14,13 @@ import java.text.ParseException;
  * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public class Event extends Task {
+
+    /** Tag identifying event. */
+    private static final String EVENT_TAG = "E-";
+
+    /** Fixed string pattern for date time format. */
+    private static final String DATE_TIME_FORMAT_PATTERN = "dd/MM/yyyy HHmm";
+
     /** String representing date or time at which event is slated to occur. */
     private String dateTime;
 
@@ -41,7 +48,7 @@ public class Event extends Task {
      * @return string representing this event.
      */
     public String toString() {
-        return "E-" + super.toString() + "-" + dateTime;
+        return EVENT_TAG + super.toString() + "-" + dateTime;
     }
 
     /**
@@ -52,6 +59,6 @@ public class Event extends Task {
      * @throws ParseException if the date/time is entered in the wrong format
      */
     private Date toDate() throws ParseException {
-        return new SimpleDateFormat("dd/MM/yyyy HHmm").parse(this.dateTime);
+        return new SimpleDateFormat(DATE_TIME_FORMAT_PATTERN).parse(this.dateTime);
     }
 }

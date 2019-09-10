@@ -44,6 +44,7 @@ public class TaskList implements Iterable<Task> {
      * @throws DukeException if encountered IO exceptions while updating disk storage.
      */
     public String[] addNewTask(Task task) throws DukeException {
+        assert task != null : "Task cannot be null.";
         this.taskList.add(task);
         this.updateDatabase();
         return new String[] {

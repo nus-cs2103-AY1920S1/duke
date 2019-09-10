@@ -23,6 +23,7 @@ public class Duke {
      * @param filePath filepath for disk storage
      */
     public Duke(String filePath) {
+        assert filePath != null : "Filepath cannot be null.";
         this.storage = new Storage(filePath);
         this.ui = new Ui();
         this.taskList = new TaskList(storage);

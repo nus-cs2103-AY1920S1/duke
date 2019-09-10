@@ -42,6 +42,9 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case FIND:
+            if (commandArr.length <= 1) {
+                throw new DukeException("Keyword missing!");
+            }
             return new FindCommand(commandArr[1]);
         case DONE:
             if (commandArr.length <= 1) {
@@ -66,7 +69,7 @@ public class Parser {
             return new DeadlineCommand(deadlineInputArr[0], deadlineInputArr[1]);
         case EVENT:
             if (commandArr.length <= 1) {
-                throw new DukeException("Deadline description missing!");
+                throw new DukeException("Event description missing!");
             }
             String[] eventInputArr = parseEvent(commandArr[1]);
             return new EventCommand(eventInputArr[0], eventInputArr[1]);

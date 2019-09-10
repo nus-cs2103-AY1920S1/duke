@@ -59,17 +59,21 @@ public class Storage {
                 Task task;
                 switch (description[0]) {
                 case "T":
+                    assert description.length == 3 : "Wrong todo task format stored.";
                     task = new ToDo(description[2]);
                     break;
                 case "D":
+                    assert description.length == 4 : "Wrong deadline task format stored.";
                     task = new Deadline(description[2], description[3]);
                     break;
                 case "E":
+                    assert description.length == 4 : "Wrong event task format stored.";
                     task = new Event(description[2], description[3]);
                     break;
                 default:
                     throw new DukeException("Task description invalid!");
                 }
+                assert description[1].equals("0") || description[1].equals("1") : "Wrong task format stored.";
                 if (description[1].equals("1")) {
                     task.markAsDone();
                 }

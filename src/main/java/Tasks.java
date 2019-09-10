@@ -7,7 +7,12 @@ public class Tasks {
         this.details = details;
     }
 
-    public void finishTask() {
+    public Tasks(String details, int status) {
+        this.status = status;
+        this.details = details;
+    }
+
+    public void doTask() {
         this.status = 0;
     }
 

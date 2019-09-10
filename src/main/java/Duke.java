@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 
 /*
@@ -26,10 +27,7 @@ public class Duke {
         ui.link(taskList,storage);
         ui.showWelcome();
     }
-    public String getResponse(String input) {
-        return input;
-    }
-    private void run() {
+    public String getResponse(String inputOrig) throws ParseException {
         // TODO add DukeException for this
         /**
          *  main run method
@@ -44,68 +42,58 @@ public class Duke {
          *  @return none
          *  @throws DukeException if command unknown
          */
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(inputOrig);
         String input = sc.next();
-
-        while (!input.equals("bye")) {
-
-            if (input.equals("list")) {  // list command
-                // list all tasks
-                ui.list();
-            } else if (input.equals("todo")) {   // to do command
-                String taskInfo = sc.nextLine();
-                if (taskInfo.equals("")) {
-                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                Task newTask = taskList.addTodo(taskInfo,0);
-                ui.addTask(newTask);
-            } else if (input.equals("deadline")) { // deadline command
-                String taskInfo = sc.nextLine();
-                if (taskInfo.equals("")) {
-                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                int seperator = taskInfo.indexOf('/');
-                // use sep to split string
-                String actualTask = taskInfo.substring(0,seperator);
-                seperator += 4; // put sep at space after /by
-                String time = taskInfo.substring(seperator);
-                Task newTask = taskList.addDeadline(actualTask,time,0);
-                ui.addTask(newTask);
-            } else if (input.equals("event")) {   // event command
-                String taskInfo = sc.nextLine();
-                if (taskInfo.equals("")) {
-                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                int seperator = taskInfo.indexOf('/');
-                // use sep to split string
-                String actualTask = taskInfo.substring(0,seperator);
-                seperator += 4; // put sep at space after /by
-                String time = taskInfo.substring(seperator);
-                Task newTask = taskList.addEvent(actualTask,time,0);
-                ui.addTask(newTask);
-            } else if (input.equals("done")) {   // mark done
-                int taskNum = sc.nextInt();
-                Task doneTask = taskList.done(taskNum);
-                ui.markDone(doneTask);
-            } else if (input.equals("delete")) { // delete task
-                int taskNum = sc.nextInt();
-                Task delTask = taskList.delete(taskNum);
-                ui.delTask(delTask);
-            } else if (input.equals("find")) { // turn into exception
-                String keyWord = sc.nextLine();
-                ui.find(keyWord);
-            } else {
-                // handle all other cases
-                ui.printLine();
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                ui.printLine();
+        if (input.equals("bye")) {
+            return ui.goodBye();
+        } else if (input.equals("list")) {  // list command
+            // list all tasks
+            return ui.list();
+        } else if (input.equals("todo")) {   // to do command
+            String taskInfo = sc.nextLine();
+            if (taskInfo.equals("")) {
+                return " ☹ OOPS!!! The description of a todo cannot be empty.";
             }
-            input = sc.next();
+            Task newTask = taskList.addTodo(taskInfo,0);
+            return ui.addTask(newTask);
+        } else if (input.equals("deadline")) { // deadline command
+            String taskInfo = sc.nextLine();
+            if (taskInfo.equals("")) {
+                return " ☹ OOPS!!! The description of a todo cannot be empty.";
+            }
+            int seperator = taskInfo.indexOf('/');
+            // use sep to split string
+            String actualTask = taskInfo.substring(0,seperator);
+            seperator += 4; // put sep at space after /by
+            String time = taskInfo.substring(seperator);
+            Task newTask = taskList.addDeadline(actualTask,time,0);
+            return ui.addTask(newTask);
+        } else if (input.equals("event")) {   // event command
+            String taskInfo = sc.nextLine();
+            if (taskInfo.equals("")) {
+               return " ☹ OOPS!!! The description of a todo cannot be empty.";
+            }
+            int seperator = taskInfo.indexOf('/');
+            // use sep to split string
+            String actualTask = taskInfo.substring(0,seperator);
+            seperator += 4; // put sep at space after /by
+            String time = taskInfo.substring(seperator);
+            Task newTask = taskList.addEvent(actualTask,time,0);
+            return ui.addTask(newTask);
+        } else if (input.equals("done")) {   // mark done
+            int taskNum = sc.nextInt();
+            Task doneTask = taskList.done(taskNum);
+            return ui.markDone(doneTask);
+        } else if (input.equals("delete")) { // delete task
+            int taskNum = sc.nextInt();
+            Task delTask = taskList.delete(taskNum);
+            return ui.delTask(delTask);
+        } else if (input.equals("find")) { // turn into exception
+            String keyWord = sc.nextLine();
+            return ui.find(keyWord);
+        } else {
+            // handle all other cases
+            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
-        ui.goodBye();
-    }
-    public static void main(String[] args) {
-        Duke d = new Duke("C:\\Users\\Seb\\duke\\storage\\duke.txt");
-        d.run();
     }
 }

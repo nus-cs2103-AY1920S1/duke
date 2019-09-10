@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 
@@ -49,13 +50,15 @@ public class Storage {
             }
             // close file
             bufferedReader.close();
+        } catch(ParseException ex) {
+            System.out.println("wtf dude");
         } catch(FileNotFoundException ex) {
             System.out.println("I can't see");
         } catch(IOException ex) {
             System.out.println("That sign will stop me, cos I can't read!");
         }
     }
-    public void loadTask(String task) {
+    public void loadTask(String task) throws ParseException {
         /**
          *   string task is a line loaded from text file
          *   line is unparsed, use scanner to parse it

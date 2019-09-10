@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -9,7 +10,7 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return taskArr;
     }
-    public ToDo addTodo(String taskInfo, int isDone) {
+    public ToDo addTodo(String taskInfo, int isDone) throws ParseException {
         // TODO add DukeException for this
         /**
          *  creates new To Do, add to tasklist
@@ -27,7 +28,7 @@ public class TaskList {
         taskArr.add(newToDo);
         return newToDo;
     }
-    public Deadline addDeadline(String taskInfo, String by,int isDone) {
+    public Deadline addDeadline(String taskInfo, String by,int isDone) throws ParseException {
         // TODO add DukeException for this
         /**
          *  creates new Deadline, add to tasklist
@@ -45,7 +46,7 @@ public class TaskList {
         taskArr.add(newDeadline);
         return newDeadline;
     }
-    public Event addEvent(String taskInfo, String by, int isDone) {
+    public Event addEvent(String taskInfo, String by, int isDone) throws ParseException {
         // TODO add DukeException for this
         /**
          *  creates new event, add to tasklist

@@ -1,7 +1,7 @@
 import java.text.ParseException;
 
 public class Event extends Task {
-    public Event(String info, String type, String by) {
+    public Event(String info, String type, String by) throws ParseException {
         /**
          *  overrides original constructor
          *  @params String info: task information

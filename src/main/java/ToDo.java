@@ -1,6 +1,8 @@
+import java.text.ParseException;
+
 public class ToDo extends Task {
     // task with nothing attached, so no frills, everything can be simply inherited
-    public ToDo(String info, String type, String by) {
+    public ToDo(String info, String type, String by) throws ParseException {
         /**
          *  overrides original constructor
          *  @params String info: task information
@@ -8,8 +10,5 @@ public class ToDo extends Task {
          * @return none
          */
         super(info,"T","");
-        if (!by.equals("")) {
-            System.out.println("Please Use a deadline if you have a data to do this task by.");
-        }
     }
 }

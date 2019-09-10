@@ -2,7 +2,7 @@ import java.text.ParseException;
 
 public class Deadline extends Task {
 
-    public Deadline(String info, String type, String by) {
+    public Deadline(String info, String type, String by) throws ParseException {
         /**
          *  overrides original constructor
          *  @params String info: task information

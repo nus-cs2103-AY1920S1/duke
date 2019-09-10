@@ -13,37 +13,24 @@ public class Ui {
         tasks = dukeTaskList;
         storage = dukeStorage;
     }
-    public void showWelcome() {
+    public String showWelcome() {
         /**
          *  prints welcome message with lines to beautify
          * @params none
          *  @return none
          */
-        printLine();
-        System.out.println("Hello, I'm Duke\nWhat can I do for you?");
-        printLine();
+        return "Hello, I'm Duke\nWhat can I do for you?";
     }
-    public void printLine() {
-        /**
-         *  helper function, prints formatted solid line
-         * @params none
-         *  @return none
-         */
-        System.out.println("____________________________________________________________");
-    }
-    public void markDone(Task doneTask) {
+    public String markDone(Task doneTask) {
         /**
          *  ui function to show user message
          *  when task has been marked as done
          * @params Task doneTask that is completed
-         *  @return none
+         *  @return String
          */
-        printLine();
-        System.out.print("Nice! I've marked this task as done:\n");
-        System.out.println(doneTask.printTask());
-        printLine();
+        return "Nice! I've marked this task as done:\n"+doneTask.printTask();
     }
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         /**
          *  ui function to show message when task has been added
          *  wrapped in solid lines
@@ -51,26 +38,20 @@ public class Ui {
          * @params Task task to be added
          *  @return none
          */
-        printLine();
-        System.out.println("Got it. I've added this task:");
-        System.out.print(" " + task.printTask() + "\n");
-        System.out.println("Now you have " + tasks.getList().size() + " tasks in the list.");
-        printLine();
+        return("Got it. I've added this task:\n"+" " + task.printTask() + "\n" +
+                "Now you have " + tasks.getList().size() + " tasks in the list.\n");
     }
-    public void delTask(Task task) {
+    public String delTask(Task task) {
         /**
          *  ui function to show message when task has been deleted
          *  wrapped in solid lines
          * @params Task task to be deleted
          *  @return none
          */
-        printLine();
-        System.out.print("Noted. I've removed this task: \n");
-        System.out.println(" " + task.printTask());
-        System.out.println("Now you have " + tasks.getList().size() + " tasks in the list.");
-        printLine();
+        return "Noted. I've removed this task: \n"+" " + task.printTask() +
+                "Now you have " + tasks.getList().size() + " tasks in the list.\n";
     }
-    public void goodBye() {
+    public String goodBye() {
         /**
          * say goodbye:
          * saves current tasks into text file by saving over past text file
@@ -79,9 +60,9 @@ public class Ui {
          * @returns none
          */
         storage.saveToTextFile();
-        System.out.println("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!\n";
     }
-    public void list() {
+    public String list() {
         ArrayList<Task> taskArr = tasks.getList();
         /**
          *  prints all tasks from current taskList
@@ -101,11 +82,10 @@ public class Ui {
             String numAsString = printInt + ".";
             mainString += numAsString + currTask.printTask() + "\n";
         }
-        printLine();
-        System.out.println(mainString);
-        printLine();
+        return mainString;
+
     }
-    public void find(String keyWord) {
+    public String find(String keyWord) {
         /**
          *  uses task list to find tasks
          *  that have the keywords as a substring
@@ -114,14 +94,13 @@ public class Ui {
          * @params keyword to search
          * @return none
          */
-        printLine();
-        System.out.println("Here are the matching tasks in your list:");
+        String matchingString = "Here are the matching tasks in your list:\n";
         ArrayList<Task> matchingTasks = tasks.findTasks(keyWord);
         int taskCount = 1;
         for (Task match: matchingTasks) {
-            System.out.println(taskCount + "." + match.printTask());
+            matchingString = matchingString + taskCount + "." + match.printTask() + "\n";
             taskCount++;
         }
-        printLine();
+        return matchingString;
     }
 }

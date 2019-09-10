@@ -72,6 +72,7 @@ public class GuiParser {
         // format for toDo: edit 1 change task t:
         int indexOfItemToEdit = Integer.parseInt(inputArray[1]);
         String typeOfEditCommand = inputArray[2];
+        System.out.println(typeOfEditCommand);
         if (typeOfEditCommand.equals("desc")) {
             return changeDescInput(inputArray, indexOfItemToEdit);
         } else if (typeOfEditCommand.equals("time")) {
@@ -99,6 +100,7 @@ public class GuiParser {
         } else {
             newDateAndTime = convertStringToDate(newDateAndTime.trim());
         }
+        //System.out.println(newDateAndTime);
         return storeTaskList.editTask(indexOfItemToEdit, newDateAndTime, true);
     }
 
@@ -233,7 +235,7 @@ public class GuiParser {
      */
     private static String convertStringToDate(String dateAndTimeString) throws DukeException {
         String[] arrayOfDateAndTime = dateAndTimeString.split(" ");
-        System.out.println(arrayOfDateAndTime);
+        //System.out.println(arrayOfDateAndTime);
         String date = arrayOfDateAndTime[0];
         String time = arrayOfDateAndTime[1];
         // d/mm/yyyy

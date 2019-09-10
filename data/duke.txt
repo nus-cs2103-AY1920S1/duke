@@ -1,4 +1,4 @@
-D 1 changet kitchen /by 2nd of November 15, 5am
+D 1 change time /by 2nd of December 12, 6pm
 E 0 project meeting /at 2nd of April 15, 923am-1023am
 T 0 change clubbbb
 T 0 borrow book

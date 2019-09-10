@@ -52,7 +52,7 @@ public class GuiUi {
      * @return help text
      */
     public static String helpText() {
-        return  "List of commands are as follows:\n"
+        return  "List of commands are as follows:\n\n"
                 +
                 "[list]: list all tasks\n"
                 +
@@ -64,21 +64,25 @@ public class GuiUi {
                 +
                 "[event <task name> /at dd/mm/yy hhmm-hhmm]: \n create task with specified event \n"
                 +
-                "[find <query>] searches ur list of tasks and return a result \n"
+                "[find <query>] searches ur list of tasks and return a result \n\n"
                 +
                 "[edit]: edit has three modes:\n"
                 +
                 "first, edit both date and time:\n"
                 +
-                " [edit <item num> <desc> :t <dd/mm/yy hhmm-hhmm>] \n"
+                "    [edit <item num> <desc> :t <dd/mm/yy hhmm-hhmm>] \n"
                 +
-                " ****second 'hhmm' can be omitted for Deadline task\n"
+                "    ****second 'hhmm' can be omitted for Deadline task\n"
                 +
-                " ****for todo Task, end input with :t\n"
+                "    ****for todo Task, end input with :t\n"
                 +
-                "edit desc/time only:\n"
+                "  edit desc only:\n"
                 +
-                " [edit <item num> <desc/time>]\n"
+                "    [edit <item num> desc <desc>]\n"
+                +
+                "   edit time only:\n"
+                +
+                "    [edit <item num> time dd/m/yy hhmm]\n\n"
                 +
                 "[bye]: closes applications";
     }

@@ -47,14 +47,15 @@ public class Duke {
      */
 
     String getResponse(String input) throws IOException {
-        if (!input.equals("bye")) {
-            inputParser.determineAction(input);
-            String response = ui.getGuidedUserInterfaceMsg();
-            ui.setGuidedUserInterfaceMsg("");
-            return response;
-        }
 
-        return ui.goodByeMsg;
+            if (!input.equals("bye")) {
+                inputParser.determineAction(input);
+                String response = ui.getGuidedUserInterfaceMsg();
+                ui.setGuidedUserInterfaceMsg("");
+                return response;
+            }
+
+            return ui.goodByeMsg;
     }
 
     private static void loadFile(){

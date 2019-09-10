@@ -3,6 +3,9 @@ package duke.command;
 import duke.todo.TaskList;
 import duke.ui.Ui;
 
+/**
+ * An interface for command classes.
+ */
 public interface Command {
 
     public String getTaskType();

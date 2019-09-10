@@ -23,10 +23,10 @@ public class Duke {
 
         createNewUi();
 
-        String taskListFilePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt";
+        String taskListFilePath = "data/tasks.txt";
         createNewStorage(taskListFilePath);
 
-        String archiveFilePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/archive.txt";
+        String archiveFilePath = "data/archive.txt";
         createNewArchive(archiveFilePath);
         createNewTaskList();
     }

@@ -20,7 +20,7 @@ public class TaskList {
      * @param i The i-th task.
      * @return The task.
      */
-    public static Task get(int i) {
+    public static Task get(int i) throws DukeException {
         try {
             return storage.get(i - 1);
         } catch (Exception e) {

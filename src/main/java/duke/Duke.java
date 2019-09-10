@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,16 +16,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import duke.command.Command;
 import duke.component.Parser;
 import duke.component.TaskList;
 import duke.component.Storage;
-import duke.component.Window;
 import duke.exception.DukeException;
 import duke.ui.DialogBox;
 
+/**
+ * A class containing the main logic and UI elements of the Duke application.
+ */
 public class Duke extends Application {
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 
@@ -40,7 +44,6 @@ public class Duke extends Application {
 
     private Storage fileMgr;
     private TaskList tasks;
-    private Window window;
 
     // Application UI elements
     private AnchorPane mainLayout;
@@ -52,64 +55,37 @@ public class Duke extends Application {
     private Scene scene;
 
     /**
-     *  Constructs a <code>Duke</code> application instance, an interactive task manager, with the default filepath.
+     * Constructs a <code>Duke</code> application instance, an interactive task manager, with the default filepath.
      */
     public Duke() {
         this(DEFAULT_FILEPATH);
     }
 
     /**
-     *  Constructs a <code>Duke</code> application instance, an interactive task manager, with a given file path.
-     *  @param filePath <code>String</code> containing the relative file path of the file to persist application
-     *                  data to.
+     * Constructs a <code>Duke</code> application instance, an interactive task manager, with a given file path.
+     * 
+     * @param filePath <code>String</code> containing the relative file path of the file to persist application
+     *                 data to.
      */
     public Duke(String filePath) {
-        this.window = new Window();
-        
         try {
             this.fileMgr = new Storage(filePath);
         } catch (IOException e) {
-            this.window.print("Error creating file to write application data. Exiting!");
             System.exit(1);
         }
+
+        assert this.fileMgr instanceof Storage :
+            "Attempting to proceed without succesfully creating a Storage!";
 
         // Attempt to re-construct TaskList from data in file
         try {
             tasks = fileMgr.readTaskList();
         } catch (DukeException e) {
-            this.window.print(String.format("%s\n\nInitialised with empty TaskList", e.toString()));
             tasks = new TaskList();
         }
-    }
 
-    /** 
-     *  Initiates the Duke application instance, allowing users to input commands to interact with the task maanger.
-     */
-    public void run() {
-        // Show Duke's logo and welcome message
-        this.window.showWelcome(Duke.DUKE_LOGO, Duke.DUKE_INTRODUCTION);
-
-        boolean isRunning = true;
-        while (isRunning && this.window.hasCommand()) {
-            String command = this.window.readCommand();
-            
-            // Parse the command to return a Command object
-            try {
-                Command c = Parser.parse(command);
-                this.window.print(c.execute(tasks, fileMgr));
-                isRunning = !c.willTerminate();
-            } catch (DukeException e) {
-                this.window.print(e.toString());
-            }
-        }
-    }
-    
-    /**
-     *  Driver main method.
-     *  @param args an array of <code>String</code> arguments.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
+        assert this.tasks instanceof TaskList :
+            "Attempting to proceed without successfully creating a TaskList!";
     }
 
     // ======================== DUKE APPLICATON WITH GRAPHICAL USER INTERFACE ========================
@@ -149,9 +125,9 @@ public class Duke extends Application {
         }
     }
 
-    // Instantiates and arranges the application window with message box, scroll pane, input area and send button
+    // Instantiates and arranges the application window
     private void instantiateWindow() {
-        // Scrollable containerFor displaying dialog between user and Duke
+        // Scrollable container for displaying dialog between user and Duke
         this.dialogContainer = new VBox();
         this.scrollPane = new ScrollPane(this.dialogContainer);
 
@@ -165,21 +141,14 @@ public class Duke extends Application {
         this.scene = new Scene(mainLayout);
     }
 
-    // Applies styling to each of the elements in the application window
+    // Applies styling to each element in the application window
     private void applyWindowStyling() {
-        // Style image nodes
-
-        // this.duke.setClip(new Circle(25.0, 25.0, 25.0));
-        // this.user.setClip(new Circle(25.0, 25.0, 25.0));
-
-        // Set title and application window size
         this.stage.setTitle("Duke");
         this.stage.setResizable(false);
         this.stage.setWidth(400.0);
         this.stage.setHeight(600.0);
         this.mainLayout.setPrefSize(400.0, 600.0);
         
-        // Set settings of scrollpane and dialog container
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -190,7 +159,6 @@ public class Duke extends Application {
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
         
-        // Anchor child nodes to application window
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
@@ -212,12 +180,17 @@ public class Duke extends Application {
     }
 
     /**
-     *  Creates two <code>Label</code> elements (one for the user command and the other for Duke's response), then
-     *  attaches both to the dialog container.
+     * Creates two <code>Label</code> elements (one for the user command and the other for Duke's response), then
+     * attaches both to the dialog container.
      */
     private void handleUserInput() {
         String command = this.userInput.getText();
         this.userInput.clear();
+
+        // GUARD: against empty commands
+        if (command.equals("")) {
+            return;
+        }
 
         Label userText = new Label(command);
         Label dukeText = new Label(this.handleCommand(command));
@@ -228,8 +201,14 @@ public class Duke extends Application {
         );
     }
 
-    // Invoked on applications startup - shows Duke's welcome message
+    // Invoked once on application startup - shows Duke's logo then welcome message
     private void showIntroduction() {
+        Label dukeLogo = new Label(Duke.DUKE_LOGO);
+        dukeLogo.setFont(new Font("Consolas", 12));
+        dukeLogo.setMaxWidth(this.scrollPane.getWidth());
+        dukeLogo.setAlignment(Pos.CENTER);
+        this.dialogContainer.getChildren().add(dukeLogo);
+
         Label dukeWelcome = new Label(Duke.DUKE_INTRODUCTION);
         this.dialogContainer.getChildren().add(
             DialogBox.getDukeDialog(dukeWelcome, new ImageView(this.dukePic))
@@ -237,19 +216,14 @@ public class Duke extends Application {
     }
     
     /**
-     *  Instantiates the Duke application window.
+     * Instantiates the Duke application window.
      */
     @Override
     public void start(Stage stage) {
         this.stage = stage;
         
-        // Instantiate application window elements
         this.instantiateWindow();
-
-        // Style application window elements
         this.applyWindowStyling();
-
-        // Attach event handlers for interactive elements
         this.attachEventHandlers();
     
         this.stage.setScene(this.scene);

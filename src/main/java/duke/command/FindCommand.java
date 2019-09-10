@@ -6,13 +6,17 @@ import duke.component.TaskList;
 import duke.component.Storage;
 import duke.task.Task;
 
+/**
+ * An executable object representation of a user command to search for tasks containing a given string.
+ */
 public class FindCommand extends Command {
     private String searchString;
 
     /**
-     *  Constructs a <code>FindCommand</code> object with a given search string.
-     *  @param command raw command string that generated this <code>Command</code> object.
-     *  @param searchString <code>String</code> to search for in descriptions of <code>Task</code> objects.
+     * Constructs a <code>FindCommand</code> object with a given search string.
+     * 
+     * @param command raw command string that generated this <code>Command</code> object.
+     * @param searchString <code>String</code> to search for in descriptions of <code>Task</code> objects.
      */
     public FindCommand(String command, String searchString) {
         super(command);
@@ -20,10 +24,11 @@ public class FindCommand extends Command {
     }
     
     /**
-     *  Executes this command with the supplied <code>TaskList</code> and <code>Storage</code> objects.
-     *  @param tasks associated <code>TaskList</code> object to execute the command with.
-     *  @param fileMgr associated <code>Storage</code> object to execute the command with.
-     *  @return a <code>String</code> containing the output of executing this command.
+     * Executes this command with the supplied <code>TaskList</code> and <code>Storage</code> objects.
+     * 
+     * @param tasks associated <code>TaskList</code> object to execute the command with.
+     * @param fileMgr associated <code>Storage</code> object to execute the command with.
+     * @return a <code>String</code> containing the output of executing this command.
      */
     public String execute(TaskList tasks, Storage fileMgr) {
         ArrayList<Task> results = tasks.searchTask(this.searchString);

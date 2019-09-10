@@ -5,21 +5,25 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import duke.command.Command;
+import duke.command.AddCommand;
 import duke.command.ByeCommand;
-import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
-import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.command.TodoCommand;
 import duke.exception.DukeException;
 import duke.exception.DukeIncorrectArgumentsException;
 import duke.exception.DukeInvalidArgumentException;
-import duke.exception.DukeNoCommandException;
 import duke.exception.DukeUnknownCommandException;
+import duke.task.Task;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TodoTask;
 
-public class Parser {
+/**
+ * Contains methods that parse supplied command strings for the Duke application.
+ */
+public final class Parser {
     // Command templates
     private static final String DONE_TEMPLATE = "done <id>";
     private static final String DELETE_TEMPLATE = "delete <id>";
@@ -32,23 +36,23 @@ public class Parser {
     private static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     /**
-     *  Parses the given input command <code>String</code> and returns the corresponding <code>Command</code> if valid.
-     *  @param command the input user command as a <code>String</code>.
-     *  @return an executable <code>Command</code> representing the instruction.
-     *  @throws DukeException if an error occurred when attempting to parse the user input
+     * Parses the given input command <code>String</code> and returns the corresponding <code>Command</code> if valid.
+     * 
+     * @param command the input user command as a <code>String</code>.
+     * @return an executable <code>Command</code> representing the instruction.
+     * @throws DukeException if an error occurred when attempting to parse the user input
      */
     public static Command parse(String command) throws DukeException {
         // Parse trivial commands here
         switch (command) {
-        case "":
-            // Catch empty commands (ENTER key pressed with no other input)
-            throw new DukeNoCommandException();
         case "bye":
             return new ByeCommand();
         case "list":
             return new ListCommand();
         default:
         }
+
+        assert command.length() > 0 : "Attempting to parse an invalid empty command string!";
 
         // Determine the type of command from the first token
         switch (command.split(" ")[0]) {
@@ -130,9 +134,10 @@ public class Parser {
             throw new DukeIncorrectArgumentsException(1, TODO_TEMPLATE, 0, command);
         }
 
-        // Otherwise entire argString is the description of the Todo task
-        String argString = command.split(" ", 2)[1];
-        return new TodoCommand(command, argString);
+        // Otherwise entire argument string is the description of the Todo task
+        String todoDescription = command.split(" ", 2)[1];
+        Task newTask = new TodoTask(todoDescription);
+        return Parser.parseAdd(command, newTask);
     }
 
     private static Command parseDeadline(String command) throws DukeException {
@@ -151,8 +156,9 @@ public class Parser {
 
         // Attempt to parse the date to construct the Deadline
         try {
-            Date eventTime = Parser.DATE_PARSER.parse(args[1]);
-            return new DeadlineCommand(command, args[0], eventTime);
+            Date deadlineTime = Parser.DATE_PARSER.parse(args[1]);
+            Task newTask = new DeadlineTask(args[0], deadlineTime);
+            return Parser.parseAdd(command, newTask);
         } catch (ParseException e) {
             throw new DukeInvalidArgumentException("date | time", "Date", command);
         }
@@ -175,9 +181,14 @@ public class Parser {
         // Attempt to parse the date to construct the Event
         try {
             Date eventTime = Parser.DATE_PARSER.parse(args[1]);
-            return new EventCommand(command, args[0], eventTime);
+            Task newTask = new EventTask(args[0], eventTime);
+            return Parser.parseAdd(command, newTask);
         } catch (ParseException e) {
             throw new DukeInvalidArgumentException("date | time", "Date", command);
         }
+    }
+
+    private static Command parseAdd(String command, Task newTask) {
+        return new AddCommand(command, newTask);
     }
 }

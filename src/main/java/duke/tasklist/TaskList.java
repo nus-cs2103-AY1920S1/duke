@@ -1,10 +1,9 @@
-package duke.taskList;
+package duke.tasklist;
 
 import duke.task.Task;
 import duke.dukeexception.DukeException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A taskList storage an ArrayList of task of the user.
@@ -28,11 +27,11 @@ public class TaskList {
         }
         assert !tasks.isEmpty();
         this.tasks = new ArrayList<>(tasks);
-        assert this.tasks.equals(tasks) && this.tasks != tasks ;
+        assert this.tasks.equals(tasks) && this.tasks != tasks;
     }
 
     /**
-     * duplicate an return a copy of the list
+     * duplicate an return a copy of the list.
      * @return a copy of the list
      */
     public ArrayList<Task> getList() {
@@ -45,6 +44,11 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * deletes a task from the task list.
+     * @param index the sequence number of the task in the list
+     * @return the task that has been deleted
+     */
     public Task deleteFromList(int index) {
         assert index < tasks.size() : index;
         Task tk = tasks.get(index);

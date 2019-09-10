@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Event extends Task {
     /**
-     * constructor to create an event task
+     * constructor to create an event task.
      * @param description  description of the content
      * @param at the date and time
      */

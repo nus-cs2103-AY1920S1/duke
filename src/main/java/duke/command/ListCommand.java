@@ -1,9 +1,8 @@
 package duke.command;
 
 import duke.dukeexception.DukeException;
-import duke.task.Task;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.UiText;
 
 public class ListCommand extends Command {
@@ -23,7 +22,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
         if (super.command.length != 1) {
-            throw new DukeException("\u1F65 OOPS!! I\'m sorry, but I don\'t know what that means :-(");
+            throw new DukeException("OOPS!! I\'m sorry, but I don\'t know what that means :-(");
         }
         return UiText.listingMsg(list.getList());
     }

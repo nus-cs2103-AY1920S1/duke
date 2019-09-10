@@ -3,7 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.dukeexception.DukeException;
 import duke.parser.Parser;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.ui.UiText;
 
@@ -19,12 +19,14 @@ public class Duke {
     private TaskList tasks;
     private  UiText ui;
     private boolean isExit;
+
     /**
-     * constructor to create a Duke Chatbot
+     * constructor to create a Duke Chatbot.
      *
      * @param filePath The path for the text file that storages
      *                 the data
      */
+
     public Duke(String filePath) {
         ui = new UiText();
         storage = new Storage(filePath);
@@ -40,6 +42,11 @@ public class Duke {
         this(Storage.DEFAULT_PATH);
     }
 
+    /**
+     * returns a string of duke's respond base on the user input command.
+     * @param text user input text.
+     * @return duke's response
+     */
     public String getResponse(String text) {
         try {
             Command c = Parser.parse(text);
@@ -50,6 +57,11 @@ public class Duke {
             return e.getMessage();
         }
     }
+
+    /**
+     * read the information from the storage and display to the user.
+     * @return content from the storage.
+     */
     public String getDataFromStorage() {
         try {
             return storage.fileContents();
@@ -59,33 +71,38 @@ public class Duke {
     }
 
     private void run() {
-        try {
-            ui.printlnMsg(storage.fileContents());
-            ui.printlnMsg(UiText.greeting());
-            ui.printlnMsg(UiText.showLine());
-            while (!isExit) {
-                try {
-                    String fullCommand = ui.readCommand();
-                    ui.printlnMsg(UiText.showLine());
-                    Command c = Parser.parse(fullCommand);
-                    String commandResult = c.execute(tasks, ui, storage);
-                    ui.printlnMsg(commandResult);
-                    isExit = c.isExit();
-                } catch (DukeException e) {
-                    ui.printlnMsg(e.getMessage());
-                } finally {
-                    ui.printlnMsg(UiText.showLine());
-                }
+        ui.printlnMsg(getDataFromStorage());
+        ui.printlnMsg(UiText.greeting());
+        ui.printlnMsg(UiText.showLine());
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.printlnMsg(UiText.showLine());
+                Command c = Parser.parse(fullCommand);
+                String commandResult = c.execute(tasks, ui, storage);
+                ui.printlnMsg(commandResult);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.printlnMsg(e.getMessage());
+            } finally {
+                ui.printlnMsg(UiText.showLine());
             }
-        } catch (FileNotFoundException e) {
-            ui.printlnMsg(UiText.loadingError());
         }
+
     }
 
+    /**
+     * check if the user has key in exit command.
+     * @return true if user has enter the exit command, or else otherwise.
+     */
     public boolean isExit() {
         return isExit;
     }
 
+    /**
+     * main method in the Duke.
+     * @param args system input
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("src/main/data/duke.txt");
         duke.run();

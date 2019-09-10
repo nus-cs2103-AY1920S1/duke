@@ -97,6 +97,9 @@ public class Storage {
                         task.getStatusBit(),
                         task.getDescription(),
                         task.getInformation());
+                break;
+            default:
+                input = "";
             }
             writer.write(input);
         }

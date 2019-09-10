@@ -1,4 +1,12 @@
-import duke.command.*;
+import duke.command.ExitCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.AddTodoCommand;
+import duke.command.AddDeadlineCommand;
+import duke.command.InvalidCommand;
+import duke.command.AddEventCommand;
+import duke.command.ListCommand;
+import duke.command.FindCommand;
 import duke.parser.Parser;
 import org.junit.jupiter.api.Test;
 

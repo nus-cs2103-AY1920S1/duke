@@ -11,7 +11,7 @@ import java.util.Date;
 
 public class Deadline extends Task {
     /**
-     * construct a deadline task
+     * construct a deadline task.
      * @param description what is the task
      * @param by time
      */

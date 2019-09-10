@@ -3,10 +3,8 @@ package duke.command;
 import duke.dukeexception.DukeException;
 import duke.task.Task;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.UiText;
-
-import java.io.IOException;
 
 public class DoneCommand extends Command {
     public DoneCommand(String[] msg) {
@@ -24,13 +22,13 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, UiText ui, Storage storage) throws DukeException {
         if (super.command.length != 2) {
-            throw new DukeException("\u1F65 OOPS!! The format of the input is wrong");
+            throw new DukeException("OOPS!! The format of the input is wrong");
         }
         assert super.command.length == 2 : "command wrong format";
         try {
             int index = Integer.parseInt(super.command[1].trim());
             if (index > tasks.getList().size()) {
-                throw new DukeException("\u1F65 OOPS! the Number you\'ve key in is to big");
+                throw new DukeException("OOPS! the Number you\'ve key in is to big");
             } else if (index < 1) {
                 throw new DukeException("OOPS!! The number should be larger than 0");
             } else {
@@ -45,7 +43,7 @@ public class DoneCommand extends Command {
                 return UiText.markedMsg(tk);
             }
         } catch (NumberFormatException ex) {
-            throw new DukeException("\u1F65 OOPS! Invalid number as input");
+            throw new DukeException("OOPS! Invalid number as input");
         }
     }
 }

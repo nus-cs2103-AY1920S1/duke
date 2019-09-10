@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.dukeexception.DukeException;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.UiText;
 
 public abstract class Command {
@@ -28,6 +28,9 @@ public abstract class Command {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        if (command == null) {
+            return "Invalid";
+        }
         for (String s : command) {
             sb.append(s);
             sb.append(" ");

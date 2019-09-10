@@ -127,7 +127,7 @@ public class MessageHandler {
     public String taskDeletedConfirmationMessage(Task task) {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
         // getting 'T' or 'F'
-        char isCompleted = ((Boolean) task.isCompleted()).toString().toUpperCase().charAt(0);
+        char isCompleted = ((Boolean) task.getCompletionStatus()).toString().toUpperCase().charAt(0);
 
         assert isCompleted == 'T' || isCompleted == 'F';
 

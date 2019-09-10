@@ -9,11 +9,11 @@ import java.util.Date;
  * Represents a Duke <code>event</code>
  */
 public class Event extends Task {
-    Date date1;
-    Date date2;
+    private Date date1;
+    private Date date2;
 
     /**
-     * Default constructor for Event class
+     * Default constructor for Event class.
      *
      * @param taskName A String which represents the taskName
      *                 e.g., <code>event borrow books</code>
@@ -32,7 +32,7 @@ public class Event extends Task {
     }
 
     /**
-     * Alternative constructor for Event class
+     * Alternative constructor for Event class.
      *
      * @param taskName    A String which represents the taskName
      *                    e.g., <code>event borrow books</code>
@@ -49,7 +49,6 @@ public class Event extends Task {
         this.date1 = formatter.parse(parts[0]);
         this.date2 = formatter.parse(parts[1]);
         this.details = "(at: " + at;
-
     }
 
 

@@ -5,14 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Inherits from abstract Task class.
+ * Inherits from abstrac3t Task class.
  * Represents a Duke <code>deadline</code>
  */
 public class Deadline extends Task {
-    protected Date byDate;
+    private Date byDate;
 
     /**
-     * Default constructor for Deadline class
+     * Default constructor for Deadline class.
      *
      * @param taskName A String which represents the taskName
      *                 e.g., <code>deadline borrow books</code>
@@ -29,7 +29,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Alternative constructor for Deadline class
+     * Alternative constructor for Deadline class.
      *
      * @param taskName    A String which represents the taskName
      *                    e.g., <code>deadline borrow books</code>

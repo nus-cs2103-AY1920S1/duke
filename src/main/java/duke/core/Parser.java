@@ -12,6 +12,10 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 /**
  * Represents a <code>Parser</code> that parses user input into a specific 
  * type of <code>Command</code>. The <code>Parser</code> also parses tasks
@@ -29,9 +33,7 @@ public class Parser {
      */
     private static String subString(String[] words, int start, int end) {
         StringBuilder sb = new StringBuilder();
-        for (int i = start; i < end; i++) {
-            sb.append(words[i] + " ");
-        }
+        IntStream.rangeClosed(start, end - 1).forEach(i -> sb.append(words[i] + " "));
         return sb.toString().trim();
     }
 
@@ -44,12 +46,7 @@ public class Parser {
      *          the given string does not occur in the array.
      */
     private static int findIdx(String[] words, String s) {
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].equals(s)) {
-                return i;
-            }
-        }
-        return -1;
+        return Stream.of(words).collect(Collectors.toList()).indexOf(s);
     }
 
     /**

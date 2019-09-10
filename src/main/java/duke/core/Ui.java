@@ -2,7 +2,9 @@ package duke.core;
 
 import duke.task.Task;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Represents a system that deals with user interaction, for example, printing 
@@ -154,25 +156,19 @@ public class Ui {
      * @param keyword A string representation of the keyword.
      */
     public void printSearchResults(TaskList tasks, String keyword) {
-        int idx = 1;
         System.out.println("Here are the matching tasks in your list:");
-        for (Task t : tasks.getList()) {
-            if (t.toString().contains(keyword)) {
-                System.out.println(idx + "." + t);
-                idx++;
-            }
-        }
+        List<Task> results = tasks.getList().stream()
+                    .filter(t -> t.toString().contains(keyword))
+                    .collect(Collectors.toList());
+        results.forEach(t -> System.out.println(results.indexOf(t) + 1 + "." + t));
     }
 
     public String printSearchResultsGui(TaskList tasks, String keyword) {
-        int idx = 1;
         StringBuilder sb = new StringBuilder();
-        for (Task t : tasks.getList()) {
-            if (t.toString().contains(keyword)) {
-                sb.append(idx + "." + t + "\n");
-                idx++;
-            }
-        }
+        List<Task> results = tasks.getList().stream()
+                .filter(t -> t.toString().contains(keyword))
+                .collect(Collectors.toList());
+        results.forEach(t -> sb.append(results.indexOf(t) + 1 + "." + t + "\n"));
         return "Here are the matching tasks in your list:\n" + sb.toString();
     }
 

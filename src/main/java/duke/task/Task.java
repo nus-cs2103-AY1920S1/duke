@@ -3,7 +3,7 @@ package duke.task;
 /**
  * A base class that Deadline, Event, and ToDo inherit from.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String typeOfTask = "";
@@ -23,6 +23,8 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
+
+    public abstract void update(String updatedContents);
 
     @Override
     public String toString() {

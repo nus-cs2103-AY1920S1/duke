@@ -15,19 +15,16 @@ public class Ui {
 
     }
 
-    /**
-     * Prints a welcome message.
-     */
-    public void showWelcome() {
-        System.out.println("\t Hello! I'm Duke\n" + "What can I do for you?");
-    }
-
     public String showDoneMessage() {
         return "Nice! I've marked this task as done: \n";
     }
 
     public String showDeleteMessage() {
         return "Noted. I've removed this task: \n";
+    }
+
+    public String showUpdateMessage() {
+        return "The following task is updated: \n";
     }
 
     /**

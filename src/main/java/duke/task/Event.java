@@ -17,6 +17,20 @@ public class Event extends Task {
         this.at = new DateTime(at);
     }
 
+    public void setAt(String at) {
+        this.at = new DateTime(at);
+    }
+
+    public void setDescription (String description) {
+        this.description  = description;
+    }
+
+    public void update(String updatedContents) {
+        String[] taskContentsList = updatedContents.split(" /at ");
+        setDescription(taskContentsList[0]);
+        setAt(taskContentsList[1]);
+    }
+
     @Override
     public String toString() {
         return super.toString() + " (at: " + at.toString() + ")";

@@ -15,7 +15,7 @@ public class Duke {
     private boolean isExit;
 
     /**
-     * Replace this stub with completed method.
+     * Retrieves response from Duke based on user input.
      */
     public String getResponse(String input) {
         try {

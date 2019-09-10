@@ -1,12 +1,6 @@
 package duke.parse;
 
-import duke.command.ExitCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.AddCommand;
-import duke.command.DoneCommand;
-import duke.command.SearchCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.EmptyToDoDescriptionException;
 import duke.exception.UnknownCommandException;
@@ -78,6 +72,11 @@ public class Parser {
 
     }
 
+    private static Command createUpdateCommand(String command) {
+        String task = command.replaceFirst("update ", "");
+        return new UpdateCommand(task);
+    }
+
     /**
      * Parses user input and returns the relevant command to be executed in the main message.
      * @param userInput user command
@@ -105,6 +104,8 @@ public class Parser {
             return createDeadlineTask(userInput);
         case "event":
             return createEventTask(userInput);
+        case "update":
+            return createUpdateCommand(userInput);
         default:
             throw new UnknownCommandException("I'm sorry, but I don't know what that means :-(");
         }

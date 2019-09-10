@@ -8,6 +8,7 @@ import duke.ui.Ui;
 public abstract class Command {
     protected String message = "";
     protected boolean isExit;
+    protected boolean isUpdate;
 
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 

@@ -4,7 +4,7 @@ package duke.task;
  * This class represents Deadline tasks which is a type of Task.
  */
 public class Deadline extends Task {
-    DateTime deadline;
+    private DateTime deadline;
 
     /**
      * Constructor for Deadline class.
@@ -15,6 +15,20 @@ public class Deadline extends Task {
         super(description);
         this.typeOfTask = "[D]";
         this.deadline = new DateTime(deadline);
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = new DateTime(deadline);
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void update(String updatedContents) {
+        String[] taskContentsList = updatedContents.split(" /by ");
+        setDescription(taskContentsList[0]);
+        setDeadline(taskContentsList[1]);
     }
 
     @Override

@@ -8,4 +8,12 @@ public class ToDo extends Task {
         super(description);
         this.typeOfTask = "[T]";
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void update(String updatedContents) {
+        setDescription(updatedContents);
+    }
 }

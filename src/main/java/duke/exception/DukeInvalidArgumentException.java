@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Thrown to indicate that the user supplied an invalid argument type in a command string.
+ */
 @SuppressWarnings("serial")
 public class DukeInvalidArgumentException extends DukeException {
     /**

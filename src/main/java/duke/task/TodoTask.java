@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * An object representation of a user task with a specified description.
+ */
 public class TodoTask extends Task {
     /**
      * Constructs a <code>TodoTask</code> object with a given description.

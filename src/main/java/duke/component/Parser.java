@@ -18,7 +18,10 @@ import duke.exception.DukeIncorrectArgumentsException;
 import duke.exception.DukeInvalidArgumentException;
 import duke.exception.DukeUnknownCommandException;
 
-public class Parser {
+/**
+ * Contains methods that parse supplied command strings for the Duke application.
+ */
+public final class Parser {
     // Command templates
     private static final String DONE_TEMPLATE = "done <id>";
     private static final String DELETE_TEMPLATE = "delete <id>";

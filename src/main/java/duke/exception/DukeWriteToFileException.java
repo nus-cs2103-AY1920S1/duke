@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Thrown to indicate a failure in writing an encoded task to the storage file.
+ */
 @SuppressWarnings("serial")
 public class DukeWriteToFileException extends DukeException {
     /**

@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Generic exception thrown to indicate an unusual application state that should be caught.
+ */
 @SuppressWarnings("serial")
 public class DukeException extends Exception {
     protected String errorSource;

@@ -4,6 +4,9 @@ import duke.component.TaskList;
 import duke.component.Storage;
 import duke.exception.DukeException;
 
+/**
+ * A prototype executable object representation of a user command.
+ */
 public abstract class Command {
     private String command;
 

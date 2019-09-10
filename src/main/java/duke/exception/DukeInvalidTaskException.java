@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Thrown to indicate the user attempted to reference an invalid or non-existent task in a command string.
+ */
 @SuppressWarnings("serial")
 public class DukeInvalidTaskException extends DukeException {
     /**

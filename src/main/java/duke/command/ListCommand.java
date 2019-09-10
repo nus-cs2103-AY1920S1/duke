@@ -3,6 +3,9 @@ package duke.command;
 import duke.component.TaskList;
 import duke.component.Storage;
 
+/**
+ * An executable object representation of a user command to list all current tracked tasks.
+ */
 public class ListCommand extends Command {
     /**
      * Constructs a <code>ListCommand</code> object.

@@ -10,6 +10,9 @@ import duke.exception.DukeWriteToFileException;
 import duke.task.Task;
 import duke.task.EventTask;
 
+/**
+ * An executable object representation of a user command to add a new event task.
+ */
 public class EventCommand extends Command {
     private String description;
     private Date atTime;

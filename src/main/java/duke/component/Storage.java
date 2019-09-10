@@ -16,6 +16,9 @@ import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TodoTask;
 
+/**
+ * A class that handles read and write operations to a destination storage file for the Duke application.
+ */
 public class Storage {
     private static final SimpleDateFormat DATE_PARSER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 

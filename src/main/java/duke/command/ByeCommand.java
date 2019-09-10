@@ -3,6 +3,9 @@ package duke.command;
 import duke.component.TaskList;
 import duke.component.Storage;
 
+/**
+ * An executable object representation of a user command to exit the application.
+ */
 public class ByeCommand extends Command {
     /**
      * Constructs a <code>ByeCommand</code> object.

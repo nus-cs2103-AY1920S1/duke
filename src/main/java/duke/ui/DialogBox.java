@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * An UI object representation of a dialog entry in the application window.
+ */
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;

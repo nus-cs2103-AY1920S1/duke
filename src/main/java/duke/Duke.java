@@ -26,6 +26,9 @@ import duke.component.Storage;
 import duke.exception.DukeException;
 import duke.ui.DialogBox;
 
+/**
+ * A class containing the main logic and UI elements of the Duke application.
+ */
 public class Duke extends Application {
     private static final String DEFAULT_FILEPATH = "./data/duke.txt";
 

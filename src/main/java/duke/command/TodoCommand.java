@@ -9,6 +9,9 @@ import duke.exception.DukeWriteToFileException;
 import duke.task.Task;
 import duke.task.TodoTask;
 
+/**
+ * An executable object representation of a user command to add a new to-do task.
+ */
 public class TodoCommand extends Command {
     private String description;
 

@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Thrown to indicate a failure in reading an encoded task from the storage file.
+ */
 @SuppressWarnings("serial")
 public class DukeInvalidEncodedTaskException extends DukeException {
     /**

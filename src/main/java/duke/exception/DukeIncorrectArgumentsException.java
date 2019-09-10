@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Thrown to indicate that the user supplied an incorrect number of arguments in a command string.
+ */
 @SuppressWarnings("serial")
 public class DukeIncorrectArgumentsException extends DukeException {
     protected String commandFormat;

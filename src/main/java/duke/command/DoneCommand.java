@@ -9,6 +9,9 @@ import duke.exception.DukeInvalidTaskException;
 import duke.exception.DukeWriteToFileException;
 import duke.task.Task;
 
+/**
+ * An executable object representation of a user command to mark a specified task as complete.
+ */
 public class DoneCommand extends Command {
     private int id;
 

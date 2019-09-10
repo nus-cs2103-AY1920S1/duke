@@ -9,6 +9,9 @@ import duke.exception.DukeInvalidTaskException;
 import duke.exception.DukeWriteToFileException;
 import duke.task.Task;
 
+/**
+ * An executable object representation of a user command to delete a specified task.
+ */
 public class DeleteCommand extends Command {
     private int id;
 

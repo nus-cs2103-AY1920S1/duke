@@ -10,6 +10,9 @@ import duke.exception.DukeWriteToFileException;
 import duke.task.Task;
 import duke.task.DeadlineTask;
 
+/**
+ * An executable object representation of a user command to add a new deadline task.
+ */
 public class DeadlineCommand extends Command {
     private String description;
     private Date byDeadline;

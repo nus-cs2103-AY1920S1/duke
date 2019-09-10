@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A prototype object representation of a user task with a description.
+ */
 public abstract class Task {
     protected boolean isComplete;
     protected String description;

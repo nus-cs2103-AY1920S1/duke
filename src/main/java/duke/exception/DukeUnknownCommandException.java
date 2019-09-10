@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Thrown to indicate the user supplied a command string that does not correspond to a known command.
+ */
 @SuppressWarnings("serial")
 public class DukeUnknownCommandException extends DukeException {
     /**

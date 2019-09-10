@@ -6,6 +6,9 @@ import duke.component.TaskList;
 import duke.component.Storage;
 import duke.task.Task;
 
+/**
+ * An executable object representation of a user command to search for tasks containing a given string.
+ */
 public class FindCommand extends Command {
     private String searchString;
 

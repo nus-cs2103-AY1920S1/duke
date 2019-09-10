@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import duke.task.Task;
 
+/**
+ * Represents a collection of Tasks tracked by the Duke application with implementation of operations on the task list.
+ */
 public class TaskList {
     protected ArrayList<Task> tasks;
 

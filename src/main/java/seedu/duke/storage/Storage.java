@@ -62,7 +62,7 @@ public class Storage {
      * @throws IOException An IOException may occur when trying to write the file.
      */
     public void writeToFile(String text) throws IOException {
-        assert text.isEmpty() : "Text to be written should at least have | |";
+        assert !text.isEmpty() : "Text to be written should at least have | |";
         FileWriter fw = new FileWriter(this.getFilePath(), true);
         fw.write(text + System.lineSeparator());
         fw.close();

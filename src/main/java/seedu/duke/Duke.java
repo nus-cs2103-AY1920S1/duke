@@ -7,10 +7,7 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 import seedu.duke.tasklist.TaskList;
-import seedu.duke.ui.CommandLineUi;
-import seedu.duke.ui.DialogBox;
-import seedu.duke.ui.GraphicalUi;
-import seedu.duke.ui.Ui;
+import seedu.duke.ui.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

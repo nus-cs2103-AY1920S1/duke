@@ -36,7 +36,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        assert this.description.isEmpty() : "Empty description should be handled by Duke Exception during input";
+        assert !this.description.isEmpty() : "Empty description should be handled by Duke Exception during input";
         return "[T]" + super.toString();
     }
 

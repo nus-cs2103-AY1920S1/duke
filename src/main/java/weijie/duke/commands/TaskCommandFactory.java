@@ -69,10 +69,15 @@ public class TaskCommandFactory {
      *         be found.
      */
     private Object[] generateConstructorDependencies(Class<?>[] constructorClasses) {
-        Object[] dependencies = IntStream.range(0, constructorClasses.length)
-                .boxed()
-                .flatMap(index -> registeredDependencies.stream()
-                        .filter(dependency -> constructorClasses[index].isInstance(dependency))
+//        IntStream.range(0, constructorClasses.length)
+//                .boxed()
+//                .flatMap(index -> registeredDependencies.stream()
+//                        .filter(dependency -> constructorClasses[index].isInstance(dependency))
+//                        .limit(1))
+//                .toArray();
+        Object[] dependencies = Arrays.stream(constructorClasses)
+                .flatMap(paramClass -> registeredDependencies.stream()
+                        .filter(paramClass::isInstance)
                         .limit(1))
                 .toArray();
 

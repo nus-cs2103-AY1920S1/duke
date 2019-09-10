@@ -1,6 +1,7 @@
 package duke.task.tasks.entities;
 
 import duke.task.Task;
+import duke.task.tasks.After;
 import duke.task.tasks.Deadline;
 import duke.task.tasks.Event;
 import duke.task.tasks.ToDo;
@@ -10,7 +11,8 @@ import java.io.Serializable;
 public enum TaskType implements Serializable {
     TODO("todo", 'T', ToDo.class),
     EVENT("event", 'E', Event.class),
-    DEADLINE("deadline", 'D', Deadline.class);
+    DEADLINE("deadline", 'D', Deadline.class),
+    AFTER("after", 'A', After.class);
 
     private static final long serialVersionUID = 6529685098267757688L;
 

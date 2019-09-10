@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 /** Class to represent a list of tasks. */
@@ -20,6 +21,41 @@ class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Update name of a task.
+     * @param index Index of task to be updated.
+     * @param name New name for the task.
+     * @return Updated task.
+     */
+    public Task updateName(int index, String name) {
+        this.tasks.get(index).setName(name);
+        return this.tasks.get(index);
+    }
+
+    /**
+     * Update date of a task.
+     * @param index Index of task to be updated.
+     * @param date New date for the task.
+     * @return Updated task.
+     */
+    public Task updateDate(int index, Date date) {
+        this.tasks.get(index).setDate(date);
+        return this.tasks.get(index);
+    }
+
+    /**
+     * Update name and date of a task.
+     * @param index Index of task to be updated.
+     * @param name New name for the task.
+     * @param date New date for the task.
+     * @return Updated task.
+     */
+    public Task updateBoth(int index, String name, Date date) {
+        this.tasks.get(index).setName(name);
+        this.tasks.get(index).setDate(date);
+        return this.tasks.get(index);
     }
 
     /**

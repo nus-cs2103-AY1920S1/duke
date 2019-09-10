@@ -13,7 +13,7 @@ class Parser {
      * @return String representing the type of command.
      */
     public String parseCommand(String input) {
-        return input.split(" ", 2)[0];
+        return input.split(" ", 2)[0].toLowerCase();
     }
 
     /**
@@ -41,12 +41,10 @@ class Parser {
         try {
             String taskStr = input.split(" ", 2)[1];
             String desc = taskStr.split(" /by ")[0];
-            Date date = format.parse(taskStr.split(" /by ")[1]);
+            Date date = parseDate(taskStr.split(" /by ")[1]);
             return new Deadline(desc, date);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please provide both deadline description and date.");
-        } catch (ParseException e) {
-            throw new DukeException("Could not parse the deadline. :(");
         }
     }
 
@@ -60,12 +58,24 @@ class Parser {
         try {
             String taskStr = input.split(" ", 2)[1];
             String desc = taskStr.split(" /at ")[0];
-            Date date = format.parse(taskStr.split(" /at ")[1]);
+            Date date = parseDate(taskStr.split(" /at ")[1]);
             return new Event(desc, date);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Please provide both event description and date.");
+        }
+    }
+
+    /**
+     * Parse an integer from the string.
+     * @param Date String representing the date.
+     * @return Parsed date.
+     * @throws DukeException Exception in case cannot parse date.
+     */
+    public Date parseDate(String str) throws DukeException {
+        try {
+            return format.parse(str);
         } catch (ParseException e) {
-            throw new DukeException("Could not parse the event. :(");
+            throw new DukeException("Cannot parse date. :(");
         }
     }
 

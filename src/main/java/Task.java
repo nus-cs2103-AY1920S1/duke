@@ -5,6 +5,7 @@ abstract class Task {
     protected String name;
     protected boolean done;
     protected TaskType type;
+    protected Date date;
 
     /**
      * Constructor for the object.
@@ -50,4 +51,30 @@ abstract class Task {
      * @return Date of task.
      */
     public abstract Date getDate();
+
+    /**
+     * Function for updating date of a task.
+     * @param date New date for the task.
+     */
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    /**
+     * Function for updating name of a task.
+     * @param date New name for the task.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Function for updating name and date of a task.
+     * @param name New name for the task.
+     * @param date New date for the task.
+     */
+    public void setBoth(String name, Date date) {
+        this.name = name;
+        this.date = date;
+    }
 }

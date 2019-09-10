@@ -39,7 +39,6 @@ class UI {
         if (this.sc.hasNextLine()) {
             return sc.nextLine();
         }
-
         return null;
     }
 
@@ -87,6 +86,32 @@ class UI {
      */
     public String showTaskList(TaskList tl) {
         return prettyPrint(tl.listTasks());
+    }
+
+    /**
+     * Display task which is being updated.
+     * @param task Task being updated.
+     * @return formatted string.
+     */
+    public String showTaskBeingUpdated(Task task) {
+        StringBuilder sb = new StringBuilder("Okay! Updating this task:\n");
+        sb.append(String.format("     %s\n\n", task.toString()));
+        sb.append(String.format("     %s\n", "Please use one of these options to update:"));
+        sb.append(String.format("     %s\n", "1. name <new_name>"));
+        sb.append(String.format("     %s\n", "2. date <new_date>"));
+        sb.append(String.format("     %s\n", "3. both <new_name> <new_date>"));
+        return prettyPrint(sb.toString());
+    }
+
+    /**
+     * Display task which just got updated.
+     * @param task Task updated.
+     * @return formatted string.
+     */
+    public String showTaskIsUpdated(Task task) {
+        StringBuilder sb = new StringBuilder("Okay! Here's the updated task:\n");
+        sb.append(String.format("     %s", task.toString()));
+        return prettyPrint(sb.toString());
     }
 
     /**

@@ -4,8 +4,6 @@ import java.util.Date;
 /** Task to represent a deadline. */
 class Deadline extends Task {
 
-    protected Date date;
-
     /**
      * Class constructor for Deadline.
      * @param name Description of the deadline.

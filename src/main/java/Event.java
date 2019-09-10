@@ -4,8 +4,6 @@ import java.util.Date;
 /** Task to represent an event. */
 class Event extends Task {
 
-    protected Date date;
-
     /**
      * Constructor for the event.
      * @param name Description of event.

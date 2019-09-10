@@ -15,7 +15,7 @@ class DeadlineTest {
     @Test
     void deadlineToStringManualInputCorrectFormat() {
         // remove dependency
-        DeadlineStub deadline = new DeadlineStub("Test", "031219 1800", false);
-        assertEquals("[D][X] Test (by: 03 December 2019, 06:00PM, GMT+8)", deadline.toString());
+        DeadlineStub deadline = new DeadlineStub("Testing", "031219 1800", false);
+        assertEquals("[D][X] Testing (by: 03 December 2019, 06:00PM, GMT+8)", deadline.toString());
     }
 }

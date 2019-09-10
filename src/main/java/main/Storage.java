@@ -50,6 +50,7 @@ public class Storage extends DataFile{
         File taskListFile = new File(dataDir + "/data.txt");
         boolean isFileCreated = taskListFile.createNewFile();
         if (isFileCreated) {
+            filePath = taskListFile.toString();
             return taskListFile.toString();
         } else {
             return null;
@@ -111,15 +112,15 @@ public class Storage extends DataFile{
         try {
             switch (taskType) {
             case "T":
-                newTask = new ToDo(arr[2], isComplete);
+                newTask = new ToDo(arr[2].trim(), isComplete);
                 break;
             case "E":
                 dateTime = DateTime.parseTaskListFormat(arr[3].trim());
-                newTask = new Event(arr[2], isComplete, dateTime);
+                newTask = new Event(arr[2].trim(), isComplete, dateTime);
                 break;
             case "D":
                 dateTime = DateTime.parseTaskListFormat(arr[3].trim());
-                newTask = new Deadline(arr[2], isComplete, dateTime);
+                newTask = new Deadline(arr[2].trim(), isComplete, dateTime);
                 break;
             default:
                 newTask = null;
@@ -168,7 +169,7 @@ public class Storage extends DataFile{
         try {
             new FileWriter(filePath); //create new file
             for (Task task : tasks.getTasks()) {
-                appendToFile(filePath, task.publishTask() + System.lineSeparator());
+                appendToFile(filePath, task.publishTask());
             }
         } catch (IOException e) {
             throw new DukeException("Error in saving to file: " + e.getMessage());

@@ -1,1 +1,1 @@
-T | 0 |  play
+E | 0 | nonexpired event B | July 17 2020 11:59 PM

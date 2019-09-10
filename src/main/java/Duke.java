@@ -26,7 +26,7 @@ public class Duke {
         String taskListFilePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt";
         createNewStorage(taskListFilePath);
 
-        String archiveFilePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/tasks.txt";
+        String archiveFilePath = "/Users/zhangxuan/Desktop/CS2103/duke/data/archive.txt";
         createNewArchive(archiveFilePath);
         createNewTaskList();
     }

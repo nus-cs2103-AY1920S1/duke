@@ -41,7 +41,7 @@ public abstract class DataFile {
 
     void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
-        fw.write(textToAppend);
+        fw.write(textToAppend + System.lineSeparator());
         fw.close();
     }
 

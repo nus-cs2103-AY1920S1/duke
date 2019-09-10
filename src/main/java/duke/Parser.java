@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -38,6 +32,10 @@ public class Parser {
             input = input.replaceFirst("^find", "");
             String keyword = input.substring(input.indexOf(" ") + 1);
             return new FindCommand(keyword);
+        } else if (input.startsWith("load")) {
+            input = input.replaceFirst("^load", "");
+            String filePath = input.substring(input.indexOf(" ") + 1);
+            return new FileCommand(filePath);
         } else { // add task
             Task task;
             if (input.startsWith("todo")) {

@@ -10,30 +10,24 @@ import java.lang.String;
 public class Duke {
     protected Storage storage;
     protected TaskList taskList;
-    protected boolean hasLoadingError = false;
 
     /**
      * Constructs a Duke object.
-     *
-     * @param filePath  Path to saved data file on hard disk.
      */
-    public Duke(String filePath) {
+    public Duke() {
+        this.taskList = new TaskList();
+    }
+
+    /**
+     * Attempts to load data file.
+     */
+    public void load(String filePath) throws DukeException {
         this.storage = new Storage(filePath);
         try {
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            hasLoadingError = true;
-            this.taskList = new TaskList();
+            throw e;
         }
-    }
-
-    /**
-     * Checks if loading of saved data file was a success.
-     *
-     * @return True if failed to load saved data file, false otherwise.
-     */
-    public boolean isHasLoadingError() {
-        return hasLoadingError;
     }
 
     /**
@@ -45,7 +39,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-            return command.execute(storage, taskList);
+            return command.execute(this, storage, taskList);
         } catch (DukeException e) {
             return Ui.showError(e.getMessage());
         }

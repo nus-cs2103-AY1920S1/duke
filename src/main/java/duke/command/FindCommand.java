@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -23,12 +24,13 @@ public class FindCommand extends Command {
     /**
      * Executes the command, listing all tasks in the task list containing the keyword.
      *
+     * @param duke Chat bot.
      * @param storage  Data file of chat bot.
      * @param taskList  Task list of chat bot.
      * @return Result of command.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList) {
+    public String execute(Duke duke, Storage storage, TaskList taskList) {
         assert(!isBye());
         return Ui.showFindMessage(taskList, keyword);
     }

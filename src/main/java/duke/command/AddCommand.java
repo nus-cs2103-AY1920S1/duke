@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -25,13 +26,14 @@ public class AddCommand extends Command {
     /**
      * Executes the command, adding the task to the task list.
      *
+     * @param duke Chat bot.
      * @param storage  Data file of chat bot.
      * @param taskList  Task list of chat bot.
      * @return Result of command.
      * @throws DukeException  If data file pointed to by storage cannot be updated.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList) throws DukeException {
+    public String execute(Duke duke, Storage storage, TaskList taskList) throws DukeException {
         taskList.add(task);
         storage.update(taskList);
         assert(!isBye());

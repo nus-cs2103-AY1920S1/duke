@@ -1,3 +1,4 @@
+import java.util.ArrayList; 
 /**
  * Represents a specific type of task - Tasks that are events
  *
@@ -7,6 +8,7 @@ class Task{
     protected boolean status;
     protected String message;
     protected String type;
+    protected ArrayList <String> tagList;
 
     /**
      * Constructor for EventsTask class
@@ -19,6 +21,7 @@ class Task{
         this.status = status;
         this.message = message;
         this.type = type;
+        tagList = new ArrayList<String>();
     }
 
     /**
@@ -39,6 +42,19 @@ class Task{
 
     public String getMessage(){
         return message;
+    }
+
+    public ArrayList<String> getTagList(){
+        return tagList;
+    }
+
+    /**
+     *Adds a new tag to the arraylist containing all the tags.
+     * 
+     * @param tag
+     */
+    public void addTag(String tag){
+        tagList.add(tag);
     }
 
     /**

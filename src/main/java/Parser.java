@@ -92,6 +92,13 @@ public class Parser{
                             storage.save();
                             return new Response(deleteResponse).toString();
                         }
+                    case "tag":
+                        Command TagCommand = new TagCommand(line, taskName, taskList);
+                        String processedTagCommand = TagCommand.processCommand();
+                        String tagResponse = TagCommand.execute(processedTagCommand);
+                        return new Response(tagResponse).toString();
+
+
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); 
             }

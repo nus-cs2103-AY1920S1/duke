@@ -85,6 +85,12 @@ public class TaskList{
         return message;
     }
 
+    public String addTag(int index, String tagName){
+        taskList.get(index).addTag(tagName);
+        String message = "Nice! I've tagged this task as " +tagName;
+        return message;
+    }
+
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();

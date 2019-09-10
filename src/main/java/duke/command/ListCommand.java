@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 
@@ -16,12 +14,11 @@ public class ListCommand extends Command {
      * Prints all the tasks in the list.
      *
      * @param tasks   List of Tasks
-     * @param ui      User Interface displaying the tasks in the TaskList
      * @param storage External storage where the list of tasks is stored
      */
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         return tasks.toString();
     }
 }

@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -22,28 +21,29 @@ public class AddToDoCommand extends Command {
      * @param commandArray Array of Strings that form the initial user input
      */
     public AddToDoCommand(String[] commandArray) {
-        String taskLine = "";
+        StringBuilder taskNameBuilder = new StringBuilder();
+        // creates a taskName string by appending all the words in the user input
         for (int i = 1; i < commandArray.length; i++) {
-            taskLine += " " + commandArray[i];
+            taskNameBuilder.append(" " + commandArray[i]);
         }
-        this.task = new Task(taskLine, false);
+        String taskName = taskNameBuilder.toString();
+        this.task = new Task(taskName, false);
     }
 
     /**
      * Adds a Task object into the TaskList as per the command inputted.
      * 
      * @param tasks   List of Tasks
-     * @param ui      User Interface displaying the tasks in the TaskList
      * @param storage External storage where the list of tasks is stored
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         tasks.addTask(task);
         assert task != null : "task should hold an actual Task object.";
         try {
             storage.writeToFile(task.toFile());
         } catch (IOException e) {
-            ui.showIoException(e);
+            return "Something went wrong: " + e.getMessage();
         }
         return "Got it. I've added this task:\n"
                 + "  " + task + "\n"

@@ -29,78 +29,33 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
-//    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
-//    private Scene scene;
-//
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Inititalises the Duke programme.
-     *
-     * @param filePath The directory where storage file is stored
+     * Inititalises the Duke class.
      */
-
-    private Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
 
     public Duke() {
         String filePath = "C:\\Users\\Khairul\\Desktop\\Computing Resources\\CS2103T\\duke\\data\\duke.txt";
-        ui = new Ui();
         storage = new Storage(filePath);
         assert storage !=null : "storage should hold an actual Storage object.";
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
+            System.out.println("File not found");
             tasks = new TaskList();
         }
     }
 
     /**
-     * Main run of the Duke Programme.
-     */
-
-    private void run() {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showDukeError(e);
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets a response in the form of a String after receiving user
+     * input
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             assert c != null : "c should hold an actual command object.";
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage);
         } catch (DukeException e) {
             return e.toString();
         }

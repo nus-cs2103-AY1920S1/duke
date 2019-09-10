@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.formats.DateTime;
 import duke.storage.Storage;
@@ -26,31 +25,35 @@ public class AddDeadlineCommand extends Command {
      */
 
     public AddDeadlineCommand(String[] commandArray) throws DukeException {
-        String deadlineName = "";
-        int i = 1;
-        while (!commandArray[i].equals("/by")) {
-            if (i >= commandArray.length - 1) {
+        StringBuilder deadlineNameBuilder = new StringBuilder();
+        int arrayIndex = 1;
+        //adds all the words in the user input before the substring /by into deadlineNameBuilder
+        while (!commandArray[arrayIndex].equals("/by")) {
+            if (arrayIndex >= commandArray.length - 1) {
                 throw new DukeException("☹ OOPS!!! The '/by' sequence couldn't be found.");
             }
-            deadlineName += " " + commandArray[i];
-            i++;
+            deadlineNameBuilder.append(" " + commandArray[arrayIndex]);
+            arrayIndex++;
         }
-        deadlineName += " ";
-        i++;
-        String deadlineDue = "";
-        if (i >= commandArray.length) {
+        deadlineNameBuilder.append(" ");
+        arrayIndex++;
+        // creates the due date string in the form of deadlineDueBuilder
+        StringBuilder deadlineDueBuilder = new StringBuilder();
+        if (arrayIndex >= commandArray.length) {
             throw new DukeException("☹ OOPS!!! The deadline must be specified.");
         }
         boolean isFirstWord = true;
-        while (i < commandArray.length) {
+        while (arrayIndex < commandArray.length) {
             if (!isFirstWord) {
-                deadlineDue += " ";
+                deadlineDueBuilder.append(" ");
             }
-            deadlineDue += commandArray[i];
-            i++;
+            deadlineDueBuilder.append(commandArray[arrayIndex]);
+            arrayIndex++;
             isFirstWord = false;
         }
+        String deadlineDue = deadlineDueBuilder.toString();
         DateTime dateTime = new DateTime(deadlineDue);
+        String deadlineName = deadlineNameBuilder.toString();
         this.deadline = new Deadline(deadlineName, false, dateTime.toString());
     }
 
@@ -58,18 +61,17 @@ public class AddDeadlineCommand extends Command {
      * Adds a Deadline object into the TaskList as per the command inputted.
      * 
      * @param tasks   List of Tasks
-     * @param ui      User Interface displaying the tasks in the TaskList
      * @param storage External storage where the list of tasks is stored
      */
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         assert deadline != null : "deadline should hold an actual Deadline object.";
         tasks.addTask(deadline);
         try {
             storage.writeToFile(deadline.toFile());
         } catch (IOException e) {
-            ui.showIoException(e);
+            return "Something went wrong: " + e.getMessage();
         }
         return "Got it. I've added this task:\n"
                 + "  " + deadline + "\n"

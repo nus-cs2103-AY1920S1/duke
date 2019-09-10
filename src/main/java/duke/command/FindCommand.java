@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 
@@ -21,7 +19,7 @@ public class FindCommand extends Command {
      */
 
     public FindCommand(String[] commandArray) {
-        String toFind = "";
+        StringBuilder stringToFindBuilder = new StringBuilder();
         boolean isFirst = true;
         for (int i = 1; i < commandArray.length; i++) {
             if (!isFirst) {
@@ -29,8 +27,8 @@ public class FindCommand extends Command {
                 isFirst = false;
                 break;
             }
-            toFind += " " + commandArray[i];
-            this.toFind = toFind;
+            stringToFindBuilder.append(" " + commandArray[i]);
+            this.toFind = stringToFindBuilder.toString();
         }
     }
 
@@ -38,12 +36,11 @@ public class FindCommand extends Command {
      * Prints a list of tasks that contains a substring equal to the String inputted.
      *
      * @param tasks   List of Tasks
-     * @param ui      User Interface displaying the tasks in the TaskList
      * @param storage External storage where the list of tasks is stored
      */
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         assert toFind != null : "toFind should contain an actual String";
         TaskList matchingTasks = tasks.search(toFind);
         return "Here are the tasks in your list:\n"

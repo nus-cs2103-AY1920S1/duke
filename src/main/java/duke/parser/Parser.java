@@ -25,7 +25,8 @@ public class Parser {
      * @throws DukeException If input doesn't follow correct format
      */
     public static Command parse(String fullCommand) throws DukeException {
-        String[] words = fullCommand.split(" ");
+        String trimmedFullCommand = fullCommand.trim();
+        String[] words = trimmedFullCommand.split(" ");
         String command = words[0];
         switch (command) {
 

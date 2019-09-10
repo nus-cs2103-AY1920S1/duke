@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
@@ -26,6 +25,7 @@ public class DoneCommand extends Command {
 
     public DoneCommand(String[] commandArray) {
         String indexString = commandArray[1];
+        //parsing index of the Task that should be marked as done
         this.index = Integer.parseInt(indexString);
     }
 
@@ -33,13 +33,12 @@ public class DoneCommand extends Command {
      * Marks a task with specified index as completed.
      * 
      * @param tasks   List of Tasks
-     * @param ui      User Interface displaying the tasks in the TaskList
      * @param storage External storage where the list of tasks is stored
      * @throws DukeException If the index doesn't correspond to a task
      */
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (index < 1 || tasks.getSize() < index) {
             throw new DukeException("☹ OOPS!!! There is no available task in the given index.");
         }
@@ -48,7 +47,7 @@ public class DoneCommand extends Command {
         try {
             storage.updateFile(tasks);
         } catch (IOException e) {
-            e.printStackTrace();
+            return "Something went wrong: " + e.getMessage();
         }
         return "Nice! I've marked this task as done:\n"
                 + "  " + doneTask;

@@ -105,12 +105,12 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String toReturn = "";
+        StringBuilder toReturnBuilder = new StringBuilder();
         int length = tasks.size();
         for (int i = 0; i < length; i++) {
             int index = i + 1;
-            toReturn = toReturn + index + "." + tasks.get(i) + "\n";
+            toReturnBuilder.append(index + "." + tasks.get(i) + "\n");
         }
-        return toReturn;
+        return toReturnBuilder.toString();
     }
 }

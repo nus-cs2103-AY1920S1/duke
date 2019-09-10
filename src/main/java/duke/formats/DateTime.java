@@ -12,10 +12,11 @@ public class DateTime {
     private String month;
     private String year;
     private String time;
-    private String ampm;
+    private String meridiem;
 
     /**
      * Constructs the DateTime object from a formatted String.
+     *
      * 
      * @param toDateTime formatted string representing date and time
      */
@@ -25,25 +26,46 @@ public class DateTime {
         String date = dateAndTime[0];
         String[] dayMonthYear = date.split("/");
         int dayInt = Integer.valueOf(dayMonthYear[0]);
-        switch (dayInt) {
-        case 1:
-            this.day = "1st";
-            break;
-        case 2:
-            this.day = "2nd";
-            break;
-        case 3:
-            this.day = "3rd";
-            break;
-        default:
-            this.day = dayInt + "th";
-        }
+        setDay(dayInt);
         int monthInt = Integer.valueOf(dayMonthYear[1]);
         this.month = new DateFormatSymbols().getMonths()[monthInt - 1];
         this.year = dayMonthYear[2];
         String time = dateAndTime[1];
         int timeInt = Integer.valueOf(time);
-        this.ampm = timeInt >= 1200 ? "pm" : "am";
+        setTime(timeInt);
+    }
+
+    /**
+     * Sets the day field of DateTime based on the day of the month
+     * provided
+     *
+     * @param dayInt
+     */
+
+    private void setDay(int dayInt){
+        assert dayInt <= 31 : "day int can only go up to 31";
+        switch (dayInt) {
+            case 1:
+                this.day = "1st";
+                break;
+            case 2:
+                this.day = "2nd";
+                break;
+            case 3:
+                this.day = "3rd";
+                break;
+            default:
+                this.day = dayInt + "th";
+        }
+    }
+
+    /**
+     * Sets the time of the DateTime object based on the timeInt provided
+     * @param timeInt
+     */
+
+    private void setTime(int timeInt){
+        this.meridiem = timeInt >= 1200 ? "pm" : "am";
         int minutes = timeInt % 100;
         int twentyFourHour = (timeInt - minutes) / 100;
         int hours = twentyFourHour % 12 == 0 ? 12 : twentyFourHour % 12;
@@ -58,6 +80,6 @@ public class DateTime {
     
     @Override
     public String toString() {
-        return " " + day + " of " + month + " " + year + ", " + time + ampm;
+        return " " + day + " of " + month + " " + year + ", " + time + meridiem;
     }
 }

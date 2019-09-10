@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.formats.DateTime;
 import duke.storage.Storage;
@@ -26,31 +25,35 @@ public class AddEventCommand extends Command {
      */
 
     public AddEventCommand(String[] commandArray) throws DukeException {
-        String eventName = "";
-        int i = 1;
-        while (!commandArray[i].equals("/at")) {
-            if (i >= commandArray.length - 1) {
+        StringBuilder eventNameBuilder = new StringBuilder();
+        int arrayIndex = 1;
+        //creates name of event by appending all words before the substring /at
+        while (!commandArray[arrayIndex].equals("/at")) {
+            if (arrayIndex >= commandArray.length - 1) {
                 throw new DukeException("☹ OOPS!!! The '/at' sequence couldn't be found.");
             }
-            eventName += " " + commandArray[i];
-            i++;
+            eventNameBuilder.append(" " + commandArray[arrayIndex]);
+            arrayIndex++;
         }
-        eventName += " ";
-        i++;
-        String eventDuration = "";
-        if (i >= commandArray.length) {
+        eventNameBuilder.append(" ");
+        arrayIndex++;
+        StringBuilder eventDurationBuilder = new StringBuilder();
+        //creates duration of event by appending all words after the substring /at
+        if (arrayIndex >= commandArray.length) {
             throw new DukeException("☹ OOPS!!! The event timing must be specified.");
         }
         boolean isFirstWord = true;
-        while (i < commandArray.length) {
+        while (arrayIndex < commandArray.length) {
             if (!isFirstWord) {
-                eventDuration += " ";
+                eventDurationBuilder.append(" ");
             }
-            eventDuration += commandArray[i];
-            i++;
+            eventDurationBuilder.append(commandArray[arrayIndex]);
+            arrayIndex++;
             isFirstWord = false;
         }
+        String eventDuration = eventDurationBuilder.toString();
         DateTime dateTime = new DateTime(eventDuration);
+        String eventName = eventNameBuilder.toString();
         this.event = new Event(eventName, false, dateTime.toString());
     }
 
@@ -58,18 +61,17 @@ public class AddEventCommand extends Command {
      * Adds an Event object into the TaskList as per the command inputted.
      * 
      * @param tasks   List of Tasks
-     * @param ui      User Interface displaying the tasks in the TaskList
      * @param storage External storage where the list of tasks is stored
      */
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         tasks.addTask(event);
         assert event != null : "event should hold an actual Event object.";
         try {
             storage.writeToFile(event.toFile());
         } catch (IOException e) {
-            ui.showIoException(e);
+            return "Something went wrong: " + e.getMessage();
         }
         return "Got it. I've added this task:\n"
                 + "  " + event + "\n"

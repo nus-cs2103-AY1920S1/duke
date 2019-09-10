@@ -16,6 +16,7 @@ import java.util.List;
 public class FindCommand extends Command {
     private String[] oneLine;
     private List<Task> myList = new ArrayList<>();
+    private List<Integer> idxList = new ArrayList<>();
 
     public FindCommand(String[] oneLine) {
         this.oneLine = oneLine;
@@ -31,14 +32,14 @@ public class FindCommand extends Command {
         assert storage != null;
 
         String partTaskName = oneLine[1].trim();
-        update_fList(tasks, partTaskName);
+        betterSearch(tasks, partTaskName);
         return getTasks();
     }
 
     /**
      * print out all the matched task.
      *
-     * @return all the matched task in String format.
+     * @return all the matched task in String format, including the task position in txt file.
      */
     private String getTasks() throws TaskNotExistException {
         int i = 0;
@@ -47,7 +48,9 @@ public class FindCommand extends Command {
             StringBuilder temp = new StringBuilder();
             for (Task tk : myList) {
                 i++;
-                temp.append(Ui.frontSpace).append(" ").append(i).append(". ").append(tk).append("\n");
+                temp.append(Ui.frontSpace).append(" ").append(i).append(". ")
+                        .append("[" + idxList.get(i - 1) + "]")
+                        .append(tk).append("\n");
             }
             return Ui.frontSpace + " Here are the matching tasks in your list: \n" + temp;
         } else {
@@ -56,16 +59,20 @@ public class FindCommand extends Command {
     }
 
     /**
-     * print out the list when list command is called.
+     * More flexibility in searching for items, used to store the matched task into myList.
      *
-     * @param tasks        The list of tasks need to print out.
+     * @param tasks        The list of tasks that store in txt file.
      * @param partTaskName The part need to match for task name.
-     * @return The output of the matched tasks in String format.
      */
-    private void update_fList(TaskList tasks, String partTaskName) {
-        for (Task t : tasks.getTaskList()) {
+    private void betterSearch(TaskList tasks, String partTaskName) {
+        List<Task> taskList = tasks.getTaskList();
+        int size = taskList.size();
+        Task t;
+        for (int idx = 0; idx < size; idx++) {
+            t = taskList.get(idx);
             if (t.getDescription().contains(partTaskName)) {
                 myList.add(t);
+                idxList.add(idx + 1);
             }
         }
     }

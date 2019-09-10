@@ -39,6 +39,8 @@ public class Parser {
             case "find":
                 String word = input[1];
                 return new FindCommand(word);
+            case "statistics":
+                return new StatisticsCommand();
             default:
                 return new Command();
         }

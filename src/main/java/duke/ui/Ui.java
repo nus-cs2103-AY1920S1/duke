@@ -57,6 +57,10 @@ public class Ui {
         System.out.println(message);
     }
 
+    public String showStatistics(int numberOfTasksCompleted) {
+        System.out.println("You have completed "+ numberOfTasksCompleted + " tasks. Good Job!");
+        return "You have completed "+ numberOfTasksCompleted + " tasks. Good Job!";
+    }
     public String bye() {
         System.out.println("Bye. Hope to see you again soon!");
         return "Bye. Hope to see you again soon!";

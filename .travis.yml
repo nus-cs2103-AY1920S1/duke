@@ -2,6 +2,8 @@ language: java
 jdk:
   - openjdk11
 
+script: "./gradlew checkstyleMain checkstyleTest"
+
 # avoid uploading the cache after every build
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock

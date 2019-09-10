@@ -7,58 +7,58 @@ import myduke.exception.DukeEmptyDescriptionException;
 import myduke.task.parameters.DukeDateTime;
 
 /**
- * A Task representing a Deadline.
+ * A Task representing an Event.
  */
-public class Deadline extends Task {
+public class DoAfter extends Task {
     //Constants
-    public static final String DATABASE_UNIQUE_IDENTIFIER = "D";
+    public static final String DATABASE_UNIQUE_IDENTIFIER = "A";
 
     //Class variables
-    protected final DukeDateTime byDate;
+    protected final DukeDateTime after;
 
     /**
      * Constructor for DeadLine Task.
      *
      * @param description description of task.
-     * @param by          due-date of task.
+     * @param after       start date of task.
      *
-     * @throws DukeEmptyDescriptionException if description or due date of task is empty.
+     * @throws DukeEmptyDescriptionException if description or start date of task is empty.
      */
-    public Deadline(String description, String by) throws DukeEmptyDescriptionException {
+    public DoAfter(String description, String after) throws DukeEmptyDescriptionException {
         super(description);
         if (description.isEmpty()) {
-            throw new DukeEmptyDescriptionException("The description of a deadline cannot be empty.");
-        } else if (by.isEmpty()) {
-            throw new DukeEmptyDescriptionException("The due date of a deadline cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of task cannot be empty.");
+        } else if (after.isEmpty()) {
+            throw new DukeEmptyDescriptionException("The start date of task cannot be empty.");
         }
-        this.byDate = new DukeDateTime(by);
+        this.after = new DukeDateTime(after);
     }
 
     /**
-     * Parses the query as a Deadline Task.
+     * Parses the query as a DoAfter Task.
      *
      * @param in A query from the user.
      *
-     * @return A Deadline task.
+     * @return A Event task.
      *
-     * @throws DukeException representing any checked exceptions.
+     * @throws DukeException representing any checked exceptions
      */
     public static Task parse(Scanner in) throws DukeException {
 
-        String delimiter = "/by";
+        String delimiter = "/after";
         in.useDelimiter(delimiter);
         if (!in.hasNext()) {
-            throw new DukeEmptyDescriptionException("The description of a deadline cannot be empty.");
+            throw new DukeEmptyDescriptionException("The description of task cannot be empty.");
         }
         String description = in.next().trim();
 
         in.useDelimiter("\\z");
         if (!in.hasNext()) {
-            throw new DukeEmptyDescriptionException("The due date of a deadline cannot be empty.");
+            throw new DukeEmptyDescriptionException("The start date of task cannot be empty.");
         }
-        String by = in.next().substring(delimiter.length()).trim();
+        String after = in.next().substring(delimiter.length()).trim();
 
-        return new Deadline(description, by);
+        return new DoAfter(description, after);
     }
 
     /**
@@ -74,7 +74,7 @@ public class Deadline extends Task {
     public boolean equals(Object task) {
         if (task == this) {
             return true;
-        } else if (task instanceof Deadline) {
+        } else if (task instanceof DoAfter) {
             return this.toString().compareToIgnoreCase(task.toString()) == 0;
         }
 
@@ -87,14 +87,14 @@ public class Deadline extends Task {
                 getDataBaseDescriptor(),
                 (isDone ? 1 : 0),
                 description,
-                byDate);
+                after);
     }
 
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)",
+        return String.format("[%s]%s (after: %s)",
                 getDataBaseDescriptor(),
                 super.toString(),
-                byDate);
+                after);
     }
 }

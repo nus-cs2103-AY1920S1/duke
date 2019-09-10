@@ -5,16 +5,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.NoSuchElementException;
 import java.util.function.BiConsumer;
 
+import myduke.exception.DukeException;
 import myduke.task.Deadline;
+import myduke.task.DoAfter;
 import myduke.task.Event;
 import myduke.task.Task;
 import myduke.task.ToDo;
 import myduke.type.LoggerMessageType;
+import myduke.util.TaskFactoryHashMap;
+import myduke.util.ThrowableFunction;
 
 /**
  * Manages the Storage of Data Base Files.
@@ -25,6 +30,7 @@ public class StorageManager {
     //Class Variables
     private String dataBaseLocation;
     private List<Task> taskList;
+    private TaskFactoryHashMap taskConstuctorMapping;
     private BiConsumer<String, LoggerMessageType> loggerConsumer;
 
     /**
@@ -38,6 +44,23 @@ public class StorageManager {
         this.dataBaseLocation = fileLocation;
         this.taskList = taskList;
         this.loggerConsumer = logger;
+        this.taskConstuctorMapping = generateTaskMapping();
+    }
+
+    /**
+     * Creates a map mapping the task type unique identifier to their respective constructors.
+     *
+     * @return a mapping from the task type unique identifier to their respective constructors.
+     */
+    private TaskFactoryHashMap generateTaskMapping() {
+
+        TaskFactoryHashMap taskMap = new TaskFactoryHashMap();
+        taskMap.put(ToDo.getDataBaseDescriptor(), in -> new ToDo(in.next()));
+        taskMap.put(DoAfter.getDataBaseDescriptor(), in -> new DoAfter(in.next(), in.next()));
+        taskMap.put(Deadline.getDataBaseDescriptor(), in -> new Deadline(in.next(), in.next()));
+        taskMap.put(Event.getDataBaseDescriptor(), in -> new Event(in.next(), in.next()));
+
+        return taskMap;
     }
 
     /**
@@ -64,47 +87,36 @@ public class StorageManager {
                 String taskType = in.next().trim();
 
                 if (taskType.equals("END")) {
-                    successfullyLoadedDb = true;
+                    successfullyLoadedDb = !in.hasNext();
                     break;
                 }
 
-                Task newTask;
                 boolean markDone = (in.nextInt() != 0);
-                String description = in.next();
-
-                switch (taskType) {
-                case "T": //Todo Task
-                    newTask = new ToDo(description);
-                    break;
-
-                case "D": //Deadline Task
-                    newTask = new Deadline(description, in.next());
-                    break;
-
-                case "E": //Event Task
-                    newTask = new Event(description, in.next());
-                    break;
-
-                default:
-                    throw new IllegalStateException("Unexpected value: " + taskType);
+                ThrowableFunction<Scanner,Task, DukeException> constructor = taskConstuctorMapping.get(taskType);
+                if (constructor == null) {
+                    throw new NoSuchElementException("Task type [" + taskType + "] is not recognised");
                 }
 
-                if (newTask != null) {
-                    if (markDone) {
-                        newTask.markAsDone();
-                    }
-                    taskList.add(newTask);
+                Task newTask = constructor.accept(in);
+                if (markDone) {
+                    newTask.markAsDone();
                 }
+                taskList.add(newTask);
 
             }
             in.close();
 
-            loggerConsumer.accept("Successfully loaded DB File", LoggerMessageType.LOGGER_MESSAGE_INFO);
+            if (successfullyLoadedDb) {
+                loggerConsumer.accept("Successfully loaded DB file.", LoggerMessageType.LOGGER_MESSAGE_INFO);
+            } else {
+                loggerConsumer.accept("Format of DB file is incorrect.", LoggerMessageType.LOGGER_MESSAGE_ERROR);
+            }
+
         } catch (FileNotFoundException ex) {
-            loggerConsumer.accept("Could find DB File", LoggerMessageType.LOGGER_MESSAGE_ERROR);
-        } catch (IllegalStateException ex) {
-            loggerConsumer.accept("DB File is corrupt. " + ex.getMessage(), LoggerMessageType.LOGGER_MESSAGE_ERROR);
+            loggerConsumer.accept("Could find DB File.", LoggerMessageType.LOGGER_MESSAGE_ERROR);
         } catch (NoSuchElementException ex) {
+            loggerConsumer.accept("DB File is corrupt. " + ex.getMessage(), LoggerMessageType.LOGGER_MESSAGE_ERROR);
+        } catch (DukeException ex) {
             loggerConsumer.accept("DB File is corrupt. " + ex.getMessage(), LoggerMessageType.LOGGER_MESSAGE_ERROR);
         }
 

@@ -3,12 +3,33 @@ package myduke.task;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import myduke.exception.DukeDuplicateException;
+import myduke.exception.DukeException;
 import myduke.exception.DukeInvalidCommandException;
 
 /**
  * Manages a list of tasks.
  */
 public class TaskList extends ArrayList<Task> {
+
+    /**
+     * Adds a task to the list of tasks.
+     *
+     * @param task the task to add to the list.
+     *
+     * @throws DukeException if the task is a duplicate of an existing task.
+     */
+    public void addTask(Task task) throws DukeException {
+        if (task == null) {
+            throw new DukeInvalidCommandException("task should not be a null pointer");
+        }
+
+        if (this.contains(task)) {
+            throw new DukeDuplicateException("duplicated task detected");
+        }
+
+        this.add(task);
+    }
 
     /**
      * Deletes the specified task from the list and returns it.
@@ -69,7 +90,7 @@ public class TaskList extends ArrayList<Task> {
     public TaskList filterTasks(String keyword) {
         TaskList newList = new TaskList();
         this.stream()
-                .filter(task -> task.description.toLowerCase().contains(keyword.toLowerCase()))
+                .filter(task -> task.toString().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toCollection(() -> newList));
 
         return newList;

@@ -10,10 +10,28 @@ import myduke.task.parameters.DukeDateTime;
  * A Task representing an Event.
  */
 public class Event extends Task {
+    //Constants
+    public static final String DATABASE_UNIQUE_IDENTIFIER = "E";
+
+    //Class variables
     protected final DukeDateTime at;
 
-    public Event(String description, String at) {
+    /**
+     * Constructor for DeadLine Task.
+     *
+     * @param description description of task.
+     * @param at          date of task.
+     *
+     * @throws DukeEmptyDescriptionException if description or date of task is empty.
+     */
+    public Event(String description, String at) throws DukeEmptyDescriptionException {
         super(description);
+
+        if (description.isEmpty()) {
+            throw new DukeEmptyDescriptionException("The description of a event cannot be empty.");
+        } else if (at.isEmpty()) {
+            throw new DukeEmptyDescriptionException("The duration of a event cannot be empty.");
+        }
         this.at = new DukeDateTime(at);
     }
 
@@ -28,7 +46,7 @@ public class Event extends Task {
      */
     public static Task parse(Scanner in) throws DukeException {
 
-        String delimiter = "/at ";
+        String delimiter = "/at";
         in.useDelimiter(delimiter);
         if (!in.hasNext()) {
             throw new DukeEmptyDescriptionException("The description of an event cannot be empty.");
@@ -44,13 +62,40 @@ public class Event extends Task {
         return new Event(description, at);
     }
 
+    /**
+     *  Gets the data base descriptor character.
+     *
+     * @return A unique character to identify the task.
+     */
+    public static String getDataBaseDescriptor() {
+        return DATABASE_UNIQUE_IDENTIFIER;
+    }
+
+    @Override
+    public boolean equals(Object task) {
+        if (task == this) {
+            return true;
+        } else if (task instanceof Event) {
+            return this.toString().compareToIgnoreCase(task.toString()) == 0;
+        }
+
+        return false;
+    }
+
     @Override
     public String getDataBaseFormat() {
-        return String.format("E | %d | %s | %s |\r\n", (isDone ? 1 : 0), description, at);
+        return String.format("%s | %d | %s | %s |\r\n",
+                getDataBaseDescriptor(),
+                (isDone ? 1 : 0),
+                description,
+                at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return String.format("[%s]%s (at: %s)",
+                getDataBaseDescriptor(),
+                super.toString(),
+                at);
     }
 }

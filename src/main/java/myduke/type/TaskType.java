@@ -11,5 +11,8 @@ public enum TaskType {
     TASK_DEADLINE,
 
     /** A event task. */
-    TASK_EVENT
+    TASK_EVENT,
+
+    /** A do after time or task. */
+    TASK_DO_AFTER
 }

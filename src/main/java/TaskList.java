@@ -1,7 +1,14 @@
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Tasks> listOfTasks = new ArrayList<>();
+    private ArrayList<Tasks> listOfTasks;
+
+    public TaskList() {
+        this.listOfTasks = new ArrayList<Tasks>();
+    }
+    public TaskList(ArrayList<Tasks> list) {
+        this.listOfTasks = list;
+    }
 
     protected void addTask(Tasks t) {
         listOfTasks.add(t);
@@ -24,7 +31,9 @@ public class TaskList {
     }
 
     protected void printAll() {
-
+        for(Tasks t: listOfTasks) {
+            System.out.println(t);
+        }
     }
 
 }

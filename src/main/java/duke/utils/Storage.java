@@ -5,10 +5,9 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 
+import java.nio.Buffer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -57,12 +56,14 @@ public class Storage {
      * @return returns a list of all the tasks in the file
      * @throws FileNotFoundException File is not found
      */
-    public LinkedList<Task> printFileContents() throws FileNotFoundException {
+    public LinkedList<Task> printFileContents() throws IOException {
         LinkedList<Task> li = new LinkedList<>();
-        File f = new File(filePath);
-        Scanner scan = new Scanner(f);
-        while (scan.hasNext()) {
-            String[] what = scan.nextLine().split("\\|");
+        FileReader f = new FileReader(filePath);
+        BufferedReader bf = new BufferedReader(f);
+
+        String line = null;
+        while ((line = bf.readLine()) != null) {
+            String[] what = line.split("\\|");
             // 0 is the task type
             // 1 is the done level
             // 2 is the description

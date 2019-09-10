@@ -21,19 +21,20 @@ public class TaskList {
     /**
      * Prints the tasks that are in the list.
      */
-    public void printList() {
-        String line =  "\t____________________________________________________________";
-        System.out.println(line);
+    public String printList() {
+//        String line =  "\t____________________________________________________________";
+//        System.out.println(line);
         if (!li.isEmpty()) {
-            System.out.println("\tHere are the Duke.tasks in your list:");
+            String msg = "\tHere are the Duke.tasks in your list:\n";
             for (int i = 0; i < li.size(); i++) {
                 int j = i + 1;
-                System.out.println("\t" + j + " " + li.get(i));
+                msg = msg + "\t" + j + " " + li.get(i).toString();
             }
+            return msg;
         } else {
-            System.out.println("\tThe task list is empty");
+            return "\tThe task list is empty";
         }
-        System.out.println(line);
+//        System.out.println(line);
     }
 
     /**

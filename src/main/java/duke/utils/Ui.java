@@ -49,12 +49,13 @@ public class Ui {
      * @param t task that is being added into the list
      * @param i number of task that are in the list
      */
-    public void takeInput(Task t, int i) {
+    public String takeInput(Task t, int i) {
         printline();
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t\t" + t);
-        System.out.println("\tNow you have " + i + " tasks in the list");
-        printline();
+        String msg = "\tGot it. I've added this task:\n";
+        msg = msg + "\t\t" + t + "\n";
+        msg = msg + "\tNow you have " + i + " tasks in the list";
+//        printline();
+        return msg;
     }
 
     /**
@@ -79,11 +80,12 @@ public class Ui {
      * @param task the task that has been completed
      */
     //completion of task confirmation
-    public void printDone(Task task) {
+    public String printDone(Task task) {
         printline();
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t\t" + task);
-        printline();
+        String msg = "\tNice! I've marked this task as done:\n";
+        msg = msg + "\t\t" + task;
+//        printline();
+        return msg;
     }
 
     /**
@@ -94,12 +96,13 @@ public class Ui {
      * @param i the number of tasks left in the list
      */
     //completion of removal of task
-    public void printDelete(Task task, int i) {
+    public String printDelete(Task task, int i) {
         printline();
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t\t" + task);
-        System.out.println("\tNow you have " + i + " Duke.tasks in the list");
-        printline();
+        String msg = "\tNoted. I've removed this task:\n";
+        msg = msg + "\t\t" + task + "\n";
+        msg = msg + "\tNow you have " + i + " Duke.tasks in the list";
+//        printline();
+        return msg;
     }
 
 

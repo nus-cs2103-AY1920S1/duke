@@ -9,7 +9,7 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
 
-import java.util.Scanner;
+import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
@@ -33,9 +33,6 @@ public class Duke extends Application{
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(){
-
-    }
 
     /**
      * Creates a Duke object that takes in a filepath to
@@ -46,9 +43,10 @@ public class Duke extends Application{
         ui = new Ui();
         storage = new Storage(filePath);
         try {
+//        tasks = new TaskList(new LinkedList<Task>());
             tasks = new TaskList(storage.printFileContents());
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -58,10 +56,16 @@ public class Duke extends Application{
     /**
      * Runs the logic for Duke.
      */
-    public void run() {
-        Scanner scan = new Scanner(System.in);
+    public String run(String input) {
+        try {
+//        tasks = new TaskList(new LinkedList<Task>());
+            tasks = new TaskList(storage.printFileContents());
+        } catch (IOException e) {
+            System.out.println("File not found");
+        }
+//        Scanner scan = new Scanner(System.in);
         
-        ui.showWelcome();
+//        ui.showWelcome();
 
         //LinkedList used to store all the String given by the user;
         // LinkedList<Task> li = new LinkedList<Task>();
@@ -75,9 +79,10 @@ public class Duke extends Application{
         //     //System.out.println("File not found");
         // }
 
-        while (true) {
-            ui.printnewline();
-            String echo = scan.nextLine();
+//        while (true) {
+//            ui.printnewline();
+//            String echo = scan.nextLine();
+            String echo = input;
             Parser split = new Parser(echo);
             String error = "";
 
@@ -85,17 +90,18 @@ public class Duke extends Application{
 
             if (firstWord.equals("bye")) {
                 // if bye, then end the program
-                ui.printline();
-                System.out.println("\tBye. Hope to see you again soon!");
-                ui.printline();
+//                ui.printline();
+                return "\tBye. Hope to see you again soon!";
+//                System.out.println("\tBye. Hope to see you again soon!");
+//                ui.printline();
                 
                 
-                break;
+//                break;
 
             } else if (firstWord.equals("list")) {
                 //if list, print the list of Duke.tasks
+                return tasks.printList();
 
-                tasks.printList();
 
             } else if (firstWord.equals("done")) {
                 //if done, change the task status and tell them what they have completed
@@ -113,7 +119,8 @@ public class Duke extends Application{
                 } else {
                     Task change = tasks.getTask(taskNumb);
                     change.completed();
-                    ui.printDone(change);
+                    saving((tasks.getList()));
+                    return ui.printDone(change);
                 }
 
             } else if (firstWord.equals("delete")) {
@@ -123,8 +130,10 @@ public class Duke extends Application{
                 if (taskNumb >= tasks.size()) {
                     error = "taskDoNotExist";
                 } else {
-                    ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
+
                     tasks.remove(taskNumb);
+                    saving((tasks.getList()));
+                    return ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
                 }
 
             } else if (firstWord.equals("find")) {
@@ -137,7 +146,7 @@ public class Duke extends Application{
                         containsWord.add(taskInList);
                     }
                 }
-                containsWord.printList();
+                return containsWord.printList();
             } else {
                 String actual =  "";
                 Task newTask = null;
@@ -210,27 +219,30 @@ public class Duke extends Application{
                 if (!error.isEmpty() || newTask == null) {
                     
                     AException ee =  new AException();
-                    ui.printline();
+//                    ui.printline();
+                    String emsg = "";
                     if (error.equals("emptyToDo")) {
-                        ee.emptyToDoException();
+                        emsg =  ee.emptyToDoException();
                     } else if (error.equals("emptyDeadline")) {
-                        ee.emptyDeadlineException();
+                        emsg =  ee.emptyDeadlineException();
                     } else if (error.equals("emptyBy")) {
-                        ee.emptyByException();
+                        emsg = ee.emptyByException();
                     } else if (error.equals("emptyEvent")) {
-                        ee.emptyEventException();
+                        emsg = ee.emptyEventException();
                     } else if (error.equals("emptyAt")) {
-                        ee.emptyAtException();
+                        emsg = ee.emptyAtException();
                     } else {
-                        ee.dontUnderstand();
+                        emsg = ee.dontUnderstand();
                     }
 
-                    ui.printline();
+//                    ui.printline();
                     error = "";
+                    return emsg;
                 } else {
+//                    return "here";
                     tasks.add(newTask);
-                    ui.takeInput(newTask, tasks.size());
-                    
+                    saving((tasks.getList()));
+                    return ui.takeInput(newTask, tasks.size());
                 }
 
             }
@@ -239,25 +251,35 @@ public class Duke extends Application{
                 AException ee2 =  new AException();
                 ui.printline();
                 if (error.equals("taskDoNotExist")) {
-                    ee2.exceedListSize();
+                    return ee2.exceedListSize();
                 } else if (error.equals("taskAlreadyCompleted")) {
-                    ee2.taskAlreadyCompleted();
+                    return ee2.taskAlreadyCompleted();
                 }
-                ui.printline();
+//                ui.printline();
             }
 
-            try {
-                storage.writeFile(tasks.getList());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            return "";
+
+//            try {
+//                storage.writeFile(tasks.getList());
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//        }
+    }
+
+    public void saving(LinkedList<Task> li){
+        try {
+            storage.writeFile(li);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
     
     
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
-    }
+//    public static void main(String[] args) {
+//        new Duke("duke.txt");
+//    }
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -288,8 +310,8 @@ public class Duke extends Application{
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(getResponse(userInput.getText()));
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(run(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText.getText(), user),
                 DialogBox.getDukeDialog(dukeText.getText(), duke)

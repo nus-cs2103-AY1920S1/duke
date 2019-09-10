@@ -19,8 +19,8 @@ public class DateTime {
      * @return Date and time in the indicated output format if input format is a match, and original input otherwise.
      */
     public static String parse(String input) {
-        Date dateTime = null;
-        String output = null;
+        Date dateTime;
+        String output;
         SimpleDateFormat inputFormat = new SimpleDateFormat("d/MM/yyyy HHmm");
         SimpleDateFormat outputFormat = new SimpleDateFormat("MMMMM yyyy, h:mm a");
         try {

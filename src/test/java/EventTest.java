@@ -7,18 +7,18 @@ public class EventTest {
     Event event = new Event("Meeting", "19/9/2019");
 
     @Test
-    public void EventGetDescriptionTest() {
+    public void eventGetDescriptionTest() {
         assertEquals("Meeting", event.getDescription());
 
     }
 
     @Test
-    public void EventGetInformationTest() {
+    public void eventGetInformationTest() {
         assertEquals("(at: 19/9/2019)", event.getInformation());
     }
 
     @Test
-    public void EventGetStatusBitTest() {
+    public void eventGetStatusBitTest() {
         assertEquals(0, event.getStatusBit());
     }
 }

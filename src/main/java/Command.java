@@ -22,6 +22,7 @@ public class Command {
      * @param tasks A TaskList object containing the list of tasks.
      * @param ui An Ui object that helps to interact with the user.
      * @param storage A Storage object that contains a file with the tasks in it.
+     * @return  A string of Duke's response.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Scanner sc = new Scanner(command);
@@ -78,7 +79,7 @@ public class Command {
             } catch (DukeException e) {
                 return e.getMessage();
             }
-            case "event":
+        case "event":
             try {
                 if (sc.hasNextLine()) {
                     String event = sc.nextLine().trim();
@@ -115,17 +116,4 @@ public class Command {
             }
         }
     }
-
-    /**
-     * Gets a boolean true or false depending on the user's command.
-     * @return true if user's command is bye.
-     */
-    public boolean isExit() {
-        boolean flag = false;
-        if (command.equals("bye")) {
-            flag = true;
-        }
-        return flag;
-    }
-
 }

@@ -1,10 +1,14 @@
-import javafx.fxml. FXML;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -20,14 +24,26 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
+    private Ui ui = new Ui();
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialize the layout of the scrollPane and dialogContainer.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(ui.showWelcome(), dukeImage));
     }
 
+    /**
+     * Set the Duke object in the class.
+     *
+     * @param d A duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -45,5 +61,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask() {
+                public void run() {
+                    System.exit(0);
+                }
+            };
+            timer.schedule(task, 500);
+        }
     }
 }

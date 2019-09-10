@@ -18,13 +18,11 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
-    public static void main(String[] args) {
-        System.out.println("AAA");
-    }
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates a response based on the user's input.
+     *
+     * @param input A string of input provided by the user.
+     * @return A string of Duke's response based on the input by user.
      */
     public String getResponse(String input) {
         Command c = Parser.parse(input);

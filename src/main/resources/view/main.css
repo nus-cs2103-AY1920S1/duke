@@ -1,0 +1,32 @@
+.root {
+    -fx-font-family: "Lucida Handwriting";
+}
+
+/* This is never used byt for some reason I have a dialogContainer in MainWindow */
+#dialogContainer {
+    -fx-font-size: 14px;
+    -fx-padding: 4px 4px 4px 4px;
+}
+
+/* USER */
+RightDialogBox Label {
+    -fx-border-color: #bbb;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px 10px 5px 10px;
+    -fx-background-color: #D7EFCD;
+    -fx-border-insets: 0 10px 0 30px;
+    -fx-background-insets: 0 10px 0 30px;
+}
+
+/* DUKE */
+LeftDialogBox Label {
+    -fx-border-color: #bbb;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px 10px 5px 10px;
+    -fx-background-color: #C1DCE1;
+    -fx-border-insets: 0 30px 0 10px;
+    -fx-background-insets: 0 30px 0 10px;
+}
+

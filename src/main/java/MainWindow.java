@@ -43,8 +43,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText().trim();
         String response = duke.run(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                new RightDialogBox(input, userImage),
+                new LeftDialogBox(response, dukeImage)
         );
         if (input.toLowerCase().equals("bye")) {
             Platform.exit();

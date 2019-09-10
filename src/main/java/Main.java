@@ -29,7 +29,7 @@ public class Main extends Application {
 
             VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("Hello! I'm Duke.\nWhat can I do for you?", dukeImage)
+                    new LeftDialogBox("Hello! I'm Duke.\nWhat can I do for you?", dukeImage)
             );
 
         } catch (IOException e) {

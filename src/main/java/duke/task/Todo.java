@@ -10,7 +10,7 @@ package duke.task;
 public class Todo extends Task {
     /**
      * constructs a Todo task
-     * @param description
+     * @param description detail of the task
      */
     public Todo(String description) {
         super(description.trim());

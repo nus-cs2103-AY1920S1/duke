@@ -4,10 +4,8 @@ import duke.dukeexception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.UiText;
-
-import java.io.IOException;
 
 public class AddEventCommand extends Command {
     public AddEventCommand(String[] msg) {

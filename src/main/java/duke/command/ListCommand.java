@@ -1,9 +1,8 @@
 package duke.command;
 
 import duke.dukeexception.DukeException;
-import duke.task.Task;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.UiText;
 
 public class ListCommand extends Command {

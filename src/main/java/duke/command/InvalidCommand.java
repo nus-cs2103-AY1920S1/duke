@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.dukeexception.DukeException;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.UiText;
 
 public class InvalidCommand extends Command {

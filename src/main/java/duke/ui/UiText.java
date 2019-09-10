@@ -17,7 +17,7 @@ public class UiText {
     private final PrintStream out;
 
     /**
-     * Default constructor with standard I/O
+     * Default constructor with standard I/O.
      */
     public UiText() {
         this(System.in, System.out);
@@ -192,6 +192,4 @@ public class UiText {
 //    public void showError(String msg) {
 //        out.println(msg);
 //    }
-
-
 }

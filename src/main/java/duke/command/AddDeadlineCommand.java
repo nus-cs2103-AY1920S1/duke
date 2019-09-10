@@ -4,10 +4,8 @@ import duke.dukeexception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.storage.Storage;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.ui.UiText;
-
-import java.io.IOException;
 
 public class AddDeadlineCommand extends Command {
     public AddDeadlineCommand(String[] msg) {

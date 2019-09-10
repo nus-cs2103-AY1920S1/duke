@@ -34,7 +34,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * sets up initial window when the user enters the application
+     * sets up initial window when the user enters the application.
      */
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

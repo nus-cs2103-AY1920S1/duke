@@ -3,7 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.dukeexception.DukeException;
 import duke.parser.Parser;
-import duke.taskList.TaskList;
+import duke.tasklist.TaskList;
 import duke.storage.Storage;
 import duke.ui.UiText;
 
@@ -99,6 +99,10 @@ public class Duke {
         return isExit;
     }
 
+    /**
+     * main method in the Duke.
+     * @param args system input
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("src/main/data/duke.txt");
         duke.run();

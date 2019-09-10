@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,13 +16,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import duke.command.Command;
 import duke.component.Parser;
 import duke.component.TaskList;
 import duke.component.Storage;
-import duke.component.Window;
 import duke.exception.DukeException;
 import duke.ui.DialogBox;
 
@@ -40,7 +41,6 @@ public class Duke extends Application {
 
     private Storage fileMgr;
     private TaskList tasks;
-    private Window window;
     private boolean isRunning;
 
     // Application UI elements
@@ -66,12 +66,10 @@ public class Duke extends Application {
      */
     public Duke(String filePath) {
         this.isRunning = true;
-        this.window = new Window();
         
         try {
             this.fileMgr = new Storage(filePath);
         } catch (IOException e) {
-            this.window.print("Error creating file to write application data. Exiting!");
             System.exit(1);
         }
 
@@ -79,38 +77,8 @@ public class Duke extends Application {
         try {
             tasks = fileMgr.readTaskList();
         } catch (DukeException e) {
-            this.window.print(String.format("%s\n\nInitialised with empty TaskList", e.toString()));
             tasks = new TaskList();
         }
-    }
-
-    /** 
-     *  Initiates the Duke application instance, allowing users to input commands to interact with the task maanger.
-     */
-    public void run() {
-        // Show Duke's logo and welcome message
-        this.window.showWelcome(Duke.DUKE_LOGO, Duke.DUKE_INTRODUCTION);
-
-        while (this.isRunning && this.window.hasCommand()) {
-            String command = this.window.readCommand();
-            
-            // Parse the command to return a Command object
-            try {
-                Command c = Parser.parse(command);
-                this.window.print(c.execute(tasks, fileMgr));
-                this.isRunning = !c.willTerminate();
-            } catch (DukeException e) {
-                this.window.print(e.toString());
-            }
-        }
-    }
-    
-    /**
-     *  Driver main method.
-     *  @param args an array of <code>String</code> arguments.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
     }
 
     // ======================== DUKE APPLICATON WITH GRAPHICAL USER INTERFACE ========================
@@ -146,11 +114,6 @@ public class Duke extends Application {
 
     // Applies styling to each of the elements in the application window
     private void applyWindowStyling() {
-        // Style image nodes
-
-        // this.duke.setClip(new Circle(25.0, 25.0, 25.0));
-        // this.user.setClip(new Circle(25.0, 25.0, 25.0));
-
         // Set title and application window size
         this.stage.setTitle("Duke");
         this.stage.setResizable(false);
@@ -221,8 +184,14 @@ public class Duke extends Application {
         }
     }
 
-    // Invoked on applications startup - shows Duke's welcome message
+    // Invoked once on applications startup - shows Duke's logo then welcome message
     private void showIntroduction() {
+        Label dukeLogo = new Label(Duke.DUKE_LOGO);
+        dukeLogo.setFont(new Font("Consolas", 12));
+        dukeLogo.setMaxWidth(this.scrollPane.getWidth());
+        dukeLogo.setAlignment(Pos.CENTER);
+        this.dialogContainer.getChildren().add(dukeLogo);
+
         Label dukeWelcome = new Label(Duke.DUKE_INTRODUCTION);
         this.dialogContainer.getChildren().add(
             DialogBox.getDukeDialog(dukeWelcome, new ImageView(this.dukePic))

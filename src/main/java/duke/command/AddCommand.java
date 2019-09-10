@@ -19,9 +19,10 @@ public class AddCommand extends Command {
     public String getDescription(String[] commandArr) throws DukeException {
         StringJoiner description = new StringJoiner(" ");
         int index;
-        if (commandArr[0].equals("todo")) {
+        String start = commandArr[0];
+        if (start.equals("todo") || start.equals("t")) {
             index = commandArr.length;
-        } else if (commandArr[0].equals("deadline")) {
+        } else if (start.equals("deadline") || start.equals("d")) {
             index = Arrays.asList(commandArr).indexOf("/by");
         } else {
             index = Arrays.asList(commandArr).indexOf("/at");

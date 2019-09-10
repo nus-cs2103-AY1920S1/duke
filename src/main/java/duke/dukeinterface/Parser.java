@@ -36,14 +36,14 @@ public class Parser {
      */
     public void checkCommand(String... commandArr) throws DukeException {
         if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete|find|help"
-                + "|morehelp")) {
+                + "|morehelp|l|t|d|e|f|do|dd|bb")) {
             throw new DukeException(
                     printLine()
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + printLine());
         }
 
-        if (commandArr[0].matches("list|bye|help|morehelp")) {
+        if (commandArr[0].matches("list|bye|help|morehelp|l|bb")) {
             if (commandArr.length > 1) {
                 throw new DukeException(
                         printLine()
@@ -242,6 +242,7 @@ public class Parser {
             String helpname = "help/index.html";
             switch (commandArr[0]) {
             case "list":
+            case "l":
                 result = taskList.printArray();
                 break;
 
@@ -257,6 +258,7 @@ public class Parser {
                 break;
 
             case "done":
+            case "do":
                 c = new DoneCommand();
                 int indexDone = Integer.parseInt(commandArr[1]) - 1;
                 assert indexDone >= 0 : "Index of the list cannot be less than 0";
@@ -267,6 +269,7 @@ public class Parser {
                 break;
 
             case "delete":
+            case "dd":
                 c = new DeleteCommand();
                 int index = Integer.parseInt(commandArr[1]) - 1;
                 assert index >= 0 : "Index of the list cannot be less than 0";
@@ -277,11 +280,13 @@ public class Parser {
                 break;
 
             case "find":
+            case "f":
                 c = new SearchCommand();
                 result = ((SearchCommand) c).searchKeyword(taskList, commandArr);
                 break;
 
             case "todo":
+            case "t":
                 c = new AddCommand();
                 result = ((AddCommand) c).getDescription(commandArr);
                 Task todo = new ToDo(result);
@@ -291,6 +296,7 @@ public class Parser {
                 break;
 
             case "deadline":
+            case "d":
                 c = new AddCommand();
                 String deadlineDescription = ((AddCommand) c).getDescription(commandArr);
                 String deadlineTime = ((AddCommand) c).getTime(commandArr);
@@ -303,6 +309,7 @@ public class Parser {
                 break;
 
             case "event":
+            case "e":
                 c = new AddCommand();
                 String eventDescription = ((AddCommand) c).getDescription(commandArr);
                 String eventTime = ((AddCommand) c).getTime(commandArr);
@@ -313,7 +320,8 @@ public class Parser {
                 result = taskList.printTask(event, taskList.size());
                 break;
 
-            case "exit":
+            case "bye":
+            case "bb":
                 c = new ExitCommand();
                 result = ((ExitCommand) c).exit();
                 break;

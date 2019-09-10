@@ -12,7 +12,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (super.description.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
@@ -26,6 +26,6 @@ public class AddDeadlineCommand extends Command {
         tasks.addTask(deadline);
 
         storage.save(tasks);
-        ui.showTask(deadline, tasks, "     Got it. I've added this task: ");
+        return ui.showTask(deadline, tasks, "Got it. I've added this task: ");
     }
 }

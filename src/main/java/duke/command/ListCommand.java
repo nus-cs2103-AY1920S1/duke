@@ -11,12 +11,15 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String finalMsg = "";
         int totalNumber = tasks.numberOfTasks();
         for (int i = 0; i < totalNumber; i++) {
             int index = i + 1;
-            System.out.println("     " + index + ". " + tasks.getList().get(i));
+            finalMsg = finalMsg.concat(index + ". " + tasks.getList().get(i));
         }
+        //test
+        System.out.println(finalMsg);
+        return finalMsg;
     }
 }

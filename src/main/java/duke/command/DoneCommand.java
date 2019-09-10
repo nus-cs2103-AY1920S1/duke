@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (description.length < 2) {
             throw new DukeException("☹ OOPS!!! The index of a done task cannot be empty.");
         }
@@ -26,6 +26,6 @@ public class DoneCommand extends Command {
         Task checkedTask = tasks.doneTask(index);
         storage.save(tasks);
 
-        ui.showTask(checkedTask, tasks, "     Nice! I've marked this task as done: ");
+        return ui.showTask(checkedTask, tasks, "Nice! I've marked this task as done: ");
     }
 }

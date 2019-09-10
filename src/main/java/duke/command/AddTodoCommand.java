@@ -13,7 +13,7 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (super.description.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
@@ -24,6 +24,6 @@ public class AddTodoCommand extends Command {
         tasks.addTask(todo);
         storage.save(tasks);
 
-        ui.showTask(todo, tasks, "     Got it. I've added this task: ");
+        return ui.showTask(todo, tasks, "Got it. I've added this task: ");
     }
 }

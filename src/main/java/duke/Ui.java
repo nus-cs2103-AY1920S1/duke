@@ -15,45 +15,33 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void showWelcome() {
+    /*public String showWelcome() {
+        String finalMsg;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        showLine();
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-        showLine();
+        finalMsg = "Hello from\n" + logo;
+        finalMsg += "Hello! I'm Duke\n";
+        finalMsg += "What can I do for you?\n";
+        return finalMsg;
+    }*/
+
+    public String showLoadingError() {
+        return "File cannot be loaded. A new task list is created.\n";
     }
 
-    public void showLoadingError() {
-        System.out.println("File cannot be loaded. A new task list is created.");
+    public String showTask(Task task, TaskList tasks, String message) {
+        String finalMsg = message;
+        finalMsg += task;
+        finalMsg += tasks.printNumber();
+        return finalMsg;
     }
 
-    public void showError(String msg) {
-        showLine();
-        System.out.println("     " + msg);
-        //showLine();
-    }
-
-    public void showLine() {
-        System.out.println("    ____________________________________________________________");
-    }
-
-    public void showTask(Task task, TaskList tasks, String msg) {
-        showLine();
-        System.out.println(msg);
-        System.out.println("       " + task);
-        tasks.printNumber();
-        //showLine();
-    }
-
-    public void showExit() {
-        showLine();
-        System.out.println("     Bye. Hope to see you again soon!");
-        //showLine();
+    public String showExit() {
+        String finalMsg = "Bye. Hope to see you again soon!\n";
+        return finalMsg;
     }
 
     public String readCommand() {

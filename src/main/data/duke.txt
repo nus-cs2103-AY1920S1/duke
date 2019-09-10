@@ -1,5 +1,6 @@
 T | 1 | read book
-D | 1 | return book | 02/12/2019 1800
-E | 1 | project meeting | 02/12/2019 1800
-T | 1 | finish homework
-T | 1 | sleep
+D | 1 | return book | 06/06/20189 1700
+E | 0 | project meeting | 08/06/2019 1400
+T | 1 | join sports club
+T | 1 | homework
+D | 0 | return book | 02/12/2019 1800

@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filepath;
+    public static final String DEFAULT_FILEPATH = "src/main/data/duke.txt";
 
     public Storage(String filepath) {
         this.filepath = filepath;
@@ -30,6 +31,7 @@ public class Storage {
             while (sc.hasNextLine()) {
                 Task task;
                 String instruction = sc.nextLine();
+                //test
                 System.out.println(instruction);
                 String[] lines = instruction.split(" \\| ");
 

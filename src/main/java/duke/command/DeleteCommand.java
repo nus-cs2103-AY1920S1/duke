@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (description.length < 2) {
             throw new DukeException("☹ OOPS!!! The index of a delete task cannot be empty.");
         }
@@ -26,6 +26,6 @@ public class DeleteCommand extends Command {
         Task deletedTask = tasks.removeTask(index);
         storage.save(tasks);
 
-        ui.showTask(deletedTask, tasks, "     Noted. I've removed this task: ");
+        return ui.showTask(deletedTask, tasks, "Noted. I've removed this task: ");
     }
 }

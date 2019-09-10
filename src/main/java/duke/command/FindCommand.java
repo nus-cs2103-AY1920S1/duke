@@ -12,19 +12,19 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (description.length < 2) {
             throw new DukeException("☹ OOPS!!! The keyword cannot be empty.");
         }
 
         String keyword = description[1];
-        ui.showLine();
+        String finalMsg = "";
         for (Task task: tasks.getList()) {
             String d = task.getDescription();
             if (d.contains(keyword)) {
-                System.out.println("       " + task);
+                finalMsg = finalMsg.concat(task.toString());
             }
         }
-        ui.showLine();
+        return finalMsg;
     }
 }

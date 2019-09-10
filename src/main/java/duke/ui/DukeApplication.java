@@ -18,7 +18,7 @@ public class DukeApplication extends Application {
     /** Duke instance of this javafx duke application. */
     private Duke duke;
     /** Minimum window width to be used for the stage. */
-    private static final int MIN_WINDOW_WIDTH = 900;
+    private static final int MIN_WINDOW_WIDTH = 600;
     /** Minimum window height to be used for the stage. */
     private static final int MIN_WINDOW_HEIGHT = 300;
 

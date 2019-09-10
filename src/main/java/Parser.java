@@ -29,43 +29,45 @@ public class Parser {
         if (array.length == 2) {
             String[] dateArray = array[0].split("/");
             if (dateArray.length == 3) {
-                if ((dateArray[0].equals("1")
+                if ((dateArray[0].equals("1") || dateArray[0].equals("01")
                         || dateArray[0].equals("21")
                         || dateArray[0].equals("31"))) {
-                    day = dateArray[0] + "st";
-                } else if ((dateArray[0].equals("2") || dateArray[0].equals("22"))) {
-                    day = dateArray[0] + "nd";
-                } else if ((dateArray[0].equals("3") || dateArray[0].equals("23"))) {
-                    day = dateArray[0] + "rd";
+                    day = Integer.valueOf(dateArray[0]) + "st";
+                } else if ((dateArray[0].equals("2") || dateArray[0].equals("02")
+                        || dateArray[0].equals("22"))) {
+                    day = Integer.valueOf(dateArray[0]) + "nd";
+                } else if ((dateArray[0].equals("3") || dateArray[0].equals("03")
+                        || dateArray[0].equals("23"))) {
+                    day = Integer.valueOf(dateArray[0]) + "rd";
                 } else {
-                    day = dateArray[0] + "th";
+                    day = Integer.valueOf(dateArray[0]) + "th";
                 }
                 switch (dateArray[1]) {
-                case "1":
+                case "1": case "01":
                     day = day + " of January ";
                     break;
-                case "2":
+                case "2": case "02":
                     day = day + " of February ";
                     break;
-                case "3":
+                case "3": case "03":
                     day = day + " of March ";
                     break;
-                case "4":
+                case "4": case "04":
                     day = day + " of April ";
                     break;
-                case "5":
+                case "5": case "05":
                     day = day + " of May ";
                     break;
-                case "6":
+                case "6": case "06":
                     day = day + " of June ";
                     break;
-                case "7":
+                case "7": case "07":
                     day = day + " of July ";
                     break;
-                case "8":
+                case "8": case "08":
                     day = day + " of August ";
                     break;
-                case "9":
+                case "9": case "09":
                     day = day + " of September ";
                     break;
                 case "10":

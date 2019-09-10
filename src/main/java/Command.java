@@ -83,7 +83,7 @@ public class Command {
                 String[] arrDeadline = deadline.split("/by");
                 String timeDeadline = Parser.convertDateAndTime(arrDeadline[1].trim());
                 Task taskDeadline = new Deadline(arrDeadline[0].trim(), timeDeadline);
-                storage.addDeadline(deadline, tasks);
+                storage.addDeadline(arrDeadline[0].trim(), arrDeadline[1].trim(), tasks);
                 tasks.add(taskDeadline);
                 return ui.printAdd(taskDeadline, tasks);
             } catch (DukeException e) {
@@ -104,7 +104,7 @@ public class Command {
                 String[] arrEvent = event.split("/at");
                 String time = Parser.convertDateAndTime(arrEvent[1].trim());
                 Task taskEvent = new Event(arrEvent[0].trim(), time);
-                storage.addEvent(event, tasks);
+                storage.addEvent(arrEvent[0].trim(), arrEvent[1].trim(), tasks);
                 tasks.add(taskEvent);
                 return ui.printAdd(taskEvent, tasks);
             } catch (DukeException e) {
@@ -125,7 +125,25 @@ public class Command {
             return ui.printFind(keyword, tasks);
         default:
             try {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                if (!sc.hasNextLine()) {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                String input = action + sc.nextLine();
+                if (!input.contains("/after")) {
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                String[] doAfterArray = input.split("/after");
+                if (doAfterArray.length != 2) {
+                    throw new DukeException("Invalid DoAfter task format");
+                }
+                String after = Parser.convertDateAndTime(doAfterArray[1].trim());
+                if (after.equals("")) {
+                    throw new DukeException("Invalid DoAfter task format");
+                }
+                Task doAfter = new DoAfter(doAfterArray[0].trim(), after);
+                storage.addDoAfter(doAfterArray[0].trim(), doAfterArray[1].trim(), tasks);
+                tasks.add(doAfter);
+                return ui.printAdd(doAfter, tasks);
             } catch (DukeException e) {
                 return e.getMessage();
             }

@@ -38,7 +38,7 @@ public class Storage {
      *
      * @return List of tasks.
      * @throws DukeException If data loaded was of an incorrect format
-     * @throws IOException If the storage file failed to be created.
+     * @throws IOException   If the storage file failed to be created.
      */
     public ArrayList<Task> load() throws DukeException, IOException {
         try {

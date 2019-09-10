@@ -48,7 +48,7 @@ public class DialogBox extends HBox {
      * Creates a DialogBox for Duke.
      *
      * @param text the text to display
-     * @param img the image to display
+     * @param img  the image to display
      * @return Duke's DialogBox
      */
     public static DialogBox getDukeDialog(String text, Image img) {

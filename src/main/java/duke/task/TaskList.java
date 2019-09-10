@@ -74,7 +74,7 @@ public class TaskList {
      */
     public TaskList find(String keyword) {
         return new TaskList(tasks.stream()
-            .filter(task -> task.description.contains(keyword))
-            .collect(Collectors.toList()));
+                .filter(task -> task.description.contains(keyword))
+                .collect(Collectors.toList()));
     }
 }

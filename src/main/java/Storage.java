@@ -7,11 +7,16 @@ import java.io.IOException;
 import java.text.ParseException;
 
 public class Storage {
-    private String fileLocation =  "data/duke.txt";
-    private File file = new File(fileLocation);
+    private String fileLocation;
+    private File file;
+    
+    public Storage(String fileLocation){
+        this.fileLocation = fileLocation;
+        this.file = new File(fileLocation);
+    }
 
     //reading from saved state
-    public ArrayList<Task> recoverTasks(){
+    public ArrayList<Task> load(){
         ArrayList<Task> tasks = new ArrayList<>();
         try{
             Scanner sc = new Scanner(file);
@@ -59,7 +64,7 @@ public class Storage {
         }		     
         return tasks;
     }
-    public void saveFile(ArrayList<Task> tasks){
+    public void saveFile(TaskList tasks){
         try {
             FileWriter fw = new FileWriter("data/duke.txt");
             String total = "";
@@ -76,6 +81,5 @@ public class Storage {
  		} catch (IOException e) {
  			System.out.println("Something went wrong: " + e.getMessage());
  		}
- 	}
-    
+ 	} 
 }

@@ -72,7 +72,6 @@ public class GuiParser {
         // format for toDo: edit 1 change task t:
         int indexOfItemToEdit = Integer.parseInt(inputArray[1]);
         String typeOfEditCommand = inputArray[2];
-        System.out.println(typeOfEditCommand);
         if (typeOfEditCommand.equals("desc")) {
             return changeDescInput(inputArray, indexOfItemToEdit);
         } else if (typeOfEditCommand.equals("time")) {
@@ -82,26 +81,36 @@ public class GuiParser {
         }
     }
 
-    private String changeDescInput(String[] inputArray, int indexOfItemToEdit) throws DukeException {
-        String newDesc = " ";
-        for (int i = 3; i < inputArray.length; i++) {
-            newDesc = newDesc + inputArray[i] + " ";
+    private String changeDescInput(String[] inputArray, int indexOfItemToEdit) {
+        try {
+            String newDesc = " ";
+            for (int i = 3; i < inputArray.length; i++) {
+                newDesc = newDesc + inputArray[i] + " ";
+            }
+            return storeTaskList.editTask(indexOfItemToEdit, newDesc.trim(), false);
+        } catch (IndexOutOfBoundsException e) {
+            return "invalid input. make sure you enter your command as:\n" +
+                    "edit <item num> desc <desc>";
         }
-        return storeTaskList.editTask(indexOfItemToEdit, newDesc.trim(), false);
     }
 
-    private String changeTimeInput(String[] inputArray, int indexOfItemToEdit) throws DukeException {
-        String newDateAndTime = "";
-        for (int i = 3; i < inputArray.length; i++) {
-            newDateAndTime = newDateAndTime + inputArray[i] + " ";
+    private String changeTimeInput(String[] inputArray, int indexOfItemToEdit) {
+        try {
+            String newDateAndTime = "";
+            for (int i = 3; i < inputArray.length; i++) {
+                newDateAndTime = newDateAndTime + inputArray[i] + " ";
+            }
+            if (newDateAndTime.contains("-")) {
+                newDateAndTime = convertStringToDateEvent(newDateAndTime.trim());
+            } else {
+                newDateAndTime = convertStringToDate(newDateAndTime.trim());
+            }
+            //System.out.println(newDateAndTime);
+            return storeTaskList.editTask(indexOfItemToEdit, newDateAndTime, true);
+        } catch (IndexOutOfBoundsException | DukeException e) {
+            return "invalid input. make sure you enter your command as:\n" +
+                    "edit <item num> time <dd/mm/yy hhmm-hhmm>";
         }
-        if (newDateAndTime.contains("-")) {
-            newDateAndTime = convertStringToDateEvent(newDateAndTime.trim());
-        } else {
-            newDateAndTime = convertStringToDate(newDateAndTime.trim());
-        }
-        //System.out.println(newDateAndTime);
-        return storeTaskList.editTask(indexOfItemToEdit, newDateAndTime, true);
     }
 
 
@@ -133,7 +142,7 @@ public class GuiParser {
                         "is not in the correct format. Type help to see format of commands";
             }
         }
-        return storeTaskList.editTask(indexOfItemToEdit,newDesc.trim(), newDateAndTime);
+        return storeTaskList.editTask(indexOfItemToEdit, newDesc.trim(), newDateAndTime);
     }
 
     private String processDone(String[] inputArray) throws DukeException {
@@ -230,6 +239,7 @@ public class GuiParser {
     /**
      * String manipulation method to return a formatted.
      * from 2/12/2019 1800 to 2nd of December 2019 6pm etc.
+     *
      * @param dateAndTimeString given string in the format of d/mm/yyyy HHmm
      * @return formatted date and time
      */
@@ -249,6 +259,7 @@ public class GuiParser {
 
     /**
      * converts time to string.
+     *
      * @param timeInInt given input e.g 1630
      * @return formatted string e.g 1630 becomes 430pm
      * @throws DukeException exception when the input is not four digits / out of bounds e.g 2500
@@ -288,6 +299,7 @@ public class GuiParser {
 
     /**
      * helper function to convert d/mm/yyyy to the correct format.
+     *
      * @param date inputdate etc 2/12/2019
      * @return formatted date
      */
@@ -304,18 +316,20 @@ public class GuiParser {
 
     /**
      * method to return the month in full spelling.
+     *
      * @param month given month number as input
      * @return name of the month
      */
     private static String getMonth(String month) {
         String[] arrMonths = {"", "January", "February", "March", "April", "May",
-            "June", "July", "August", "September", "October", "November", "December"};
+                "June", "July", "August", "September", "October", "November", "December"};
         int temp = Integer.valueOf(month);
         return arrMonths[temp];
     }
 
     /**
      * method to find the ordinal of each number e.g 1st, 2nd, 3rd.
+     *
      * @param num input num
      * @return formatted number e.g 1 becomes 1st, 21 becomes 21st
      */
@@ -334,6 +348,7 @@ public class GuiParser {
 
     /**
      * Helper function to convert the inputed date for the Event task.
+     *
      * @param dateAndTimeString e.g 2/12/2019 1400-1500
      * @return formatted string
      */
@@ -359,6 +374,7 @@ public class GuiParser {
 
     /**
      * method for testing private static methods.
+     *
      * @param test dummy String
      * @return
      */
@@ -368,6 +384,7 @@ public class GuiParser {
 
     /**
      * method for testing private static method.
+     *
      * @param convertedTime dummy int
      * @return String String that is converted
      * @throws DukeException thrown if erroneous input

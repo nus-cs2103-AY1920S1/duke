@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.javafxui;
 import java.io.IOException;
 import java.util.Collections;
 

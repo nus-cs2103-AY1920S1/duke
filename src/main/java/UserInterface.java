@@ -8,6 +8,9 @@ public class UserInterface {
         this.data = store;
     }
 
+    /**
+     * starts Duke up until exit command is entered
+     */
     static void listen () {
         Scanner consoleScanner = new Scanner(System.in);
         String userCommand = "";

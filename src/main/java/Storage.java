@@ -12,6 +12,10 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * loads a list from the initiated filepath
+     * @return formatted and read list
+     */
     ArrayList<ListItem> load() {
         try {
             Scanner reader = new Scanner(new FileReader(filepath));
@@ -34,6 +38,10 @@ public class Storage {
         return new ArrayList<>();
     }
 
+    /**
+     * Saves data to associated filepath
+     * @param toSave List that you want to save
+     */
     void save(ArrayList<ListItem> toSave) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));

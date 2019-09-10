@@ -41,6 +41,10 @@ public class Duke{
      *              each prints on a new line.
      */
 
+    /**
+     * Prints texts in the correct format on console
+     * @param texts varargs to print on different lines
+     */
     private static void dukePrint(Object... texts) {
         System.out.println("    _____________________________");
         for (Object text : texts) {

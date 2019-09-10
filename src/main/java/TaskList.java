@@ -14,6 +14,13 @@ public class TaskList {
         lst = loadedList;
     }
 
+    /**
+     * adds an item to the todoList
+     * @param description of the list item
+     * @param command type of item it is
+     * @param date due date if any for the item
+     * @return Output string for Duke to print
+     */
     static String[] addToTodo(String description, String command, String date) {
         lst.add(new ListItem(description, command, date));
 
@@ -21,8 +28,14 @@ public class TaskList {
                 "Now you have " + lst.size() + " tasks in the list."};
         return ret;
     }
-    static String[] removeFromTodo(String description) {
-        ListItem target = lst.get(Integer.parseInt(description) - 1);
+
+    /**
+     * removes an item from list based off of index
+     * @param index of the item to be removed
+     * @return Output string for Duke to print
+     */
+    static String[] removeFromTodo(String index) {
+        ListItem target = lst.get(Integer.parseInt(index) - 1);
         lst.remove(target);
         String[] ret = {"Noted. I've removed this task:", target.toString() ,
                 ("Now you have " + lst.size() + " tasks in the list.")};

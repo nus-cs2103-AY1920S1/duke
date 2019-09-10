@@ -1,5 +1,8 @@
 import java.text.SimpleDateFormat;
 
+/**
+ * Date representation of date string that's given
+ */
 public class Date {
     boolean exists = false;
     String precursor = "";

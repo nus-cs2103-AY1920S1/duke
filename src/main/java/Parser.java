@@ -1,8 +1,9 @@
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 
 public class Parser {
     /**
-     * Convert a String into a LocalDateTime that is understood by the computer.
+     * Converts a string into a LocalDateTime that is understood by the computer.
      *
      * @param rawTimestamp time and date in string format.
      * @return LocalDateTime with desired format.
@@ -51,9 +52,10 @@ public class Parser {
                 storage.writeFile(tasks.getListOfTasks());
                 return ui.printTaskDone(selectedTask);
             } else if (actionKey.equals("delete")) { // delete a specific plan
+                LinkedList<Task> totalTasks = tasks.getListOfTasks();
                 int index = Integer.parseInt(keyList[1]);
-                int taskSize = tasks.getListOfTasks().size();
-                String outputText = ui.printTaskDelete(tasks.getListOfTasks(), index);
+                int taskSize = totalTasks.size();
+                String outputText = ui.printTaskDelete(totalTasks, index);
                 tasks.deleteTask(index - 1);
 
                 assert tasks.getListOfTasks().size() == taskSize - 1 : "Task should be deleted";
@@ -65,32 +67,16 @@ public class Parser {
                 return ui.searchTaskKeyword(tasks, textToSearch);
             } else { // to handle addition of a specific type of plan
                 if (actionKey.equals("deadline")) {
-                    if (keyList.length <= 1) {
-                        throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                    }
-
-                    String[] contentList = keyList[1].split(" /by ");
-                    if (contentList.length <= 1) {
-                        throw new DukeException("OOPS!!! Time need to be specified");
-                    }
-
-                    LocalDateTime convertedTimeStamp = convertDateAndTime(contentList[1]);
-                    Deadline newDeadline = new Deadline(contentList[0], convertedTimeStamp);
+                    String[] deadlineList = deadlineHandler(keyList);
+                    LocalDateTime convertedTimeStamp = convertDateAndTime(deadlineList[1]);
+                    Deadline newDeadline = new Deadline(deadlineList[0], convertedTimeStamp);
                     tasks.addTask(newDeadline);
                     storage.writeFile(tasks.getListOfTasks());
                     return ui.printAddTask(tasks, newDeadline);
                 } else if (actionKey.equals("event")) {
-                    if (keyList.length <= 1) {
-                        throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-                    }
-
-                    String[] contentList = keyList[1].split(" /at ");
-                    if (contentList.length == 1) {
-                        throw new DukeException("OOPS!!! Time need to be specified");
-                    }
-
-                    LocalDateTime convertedTimeStamp = convertDateAndTime(contentList[1]);
-                    Event newEvent = new Event(contentList[0], convertedTimeStamp);
+                    String[] eventList = eventHandler(keyList);
+                    LocalDateTime convertedTimeStamp = convertDateAndTime(eventList[1]);
+                    Event newEvent = new Event(eventList[0], convertedTimeStamp);
                     tasks.addTask(newEvent);
                     storage.writeFile(tasks.getListOfTasks());
                     return ui.printAddTask(tasks, newEvent);
@@ -112,5 +98,31 @@ public class Parser {
         } catch (Exception err) {
             return "[Exception] " + err;
         }
+    }
+
+    private static String[] deadlineHandler(String[] keyList) throws DukeException {
+        if (keyList.length <= 1) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        }
+
+        String[] contentList = keyList[1].split(" /by ");
+        if (contentList.length <= 1) {
+            throw new DukeException("OOPS!!! Time need to be specified");
+        }
+
+        return contentList;
+    }
+
+    private static String[] eventHandler(String[] keyList) throws DukeException {
+        if (keyList.length <= 1) {
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+        }
+
+        String[] contentList = keyList[1].split(" /at ");
+        if (contentList.length == 1) {
+            throw new DukeException("OOPS!!! Time need to be specified");
+        }
+
+        return contentList;
     }
 }

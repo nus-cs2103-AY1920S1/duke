@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -45,28 +46,15 @@ public class Storage {
                 boolean isDone = taskArray[1].equals("1");
 
                 if (actionTask.equals("T")) {
-                    Todo newTodo = new Todo(taskDescription);
-                    if (isDone) {
-                        newTodo.markAsDone();
-                        assert newTodo.getStatusIcon().equals("X") : "Task should be marked as done";
-                    }
-
+                    Todo newTodo = createTodoList(taskDescription, isDone);
                     loadedTasks.add(newTodo);
                 } else if (actionTask.equals("D")) {
-                    Deadline newDeadline = new Deadline(taskDescription, Parser.convertDateAndTime(taskArray[3]));
-                    if (isDone) {
-                        newDeadline.markAsDone();
-                        assert newDeadline.getStatusIcon().equals("X") : "Task should be marked as done";
-                    }
-
+                    LocalDateTime localDateTime = Parser.convertDateAndTime(taskArray[3]);
+                    Deadline newDeadline = createDeadlineList(taskDescription, isDone, localDateTime);
                     loadedTasks.add(newDeadline);
                 } else if (actionTask.equals("E")) {
-                    Event newEvent = new Event(taskDescription, Parser.convertDateAndTime(taskArray[3]));
-                    if (isDone) {
-                        newEvent.markAsDone();
-                        assert newEvent.getStatusIcon().equals("X") : "Task should be marked as done";
-                    }
-
+                    LocalDateTime localDateTime = Parser.convertDateAndTime(taskArray[3]);
+                    Event newEvent = createEventList(taskDescription, isDone, localDateTime);
                     loadedTasks.add(newEvent);
                 } else {
                     throw new DukeException("Not an action!");
@@ -81,6 +69,36 @@ public class Storage {
         }
 
         return loadedTasks;
+    }
+
+    private Todo createTodoList(String taskDescription, boolean isDone) {
+        Todo newTodo = new Todo(taskDescription);
+        if (isDone) {
+            newTodo.markAsDone();
+            assert newTodo.getStatusIcon().equals("X") : "Task should be marked as done";
+        }
+
+        return newTodo;
+    }
+
+    private Deadline createDeadlineList(String taskDescription, boolean isDone, LocalDateTime localDateTime) {
+        Deadline newDeadline = new Deadline(taskDescription, localDateTime);
+        if (isDone) {
+            newDeadline.markAsDone();
+            assert newDeadline.getStatusIcon().equals("X") : "Task should be marked as done";
+        }
+
+        return newDeadline;
+    }
+
+    private Event createEventList(String taskDescription, boolean isDone, LocalDateTime localDateTime) {
+        Event newEvent = new Event(taskDescription, localDateTime);
+        if (isDone) {
+            newEvent.markAsDone();
+            assert newEvent.getStatusIcon().equals("X") : "Task should be marked as done";
+        }
+
+        return newEvent;
     }
 
     /**
@@ -101,29 +119,7 @@ public class Storage {
 
             FileWriter fw = new FileWriter(filePath);
             for (Task subTask: updatedTask) {
-                if (subTask instanceof Todo) {
-                    String newTodo = "T | "
-                            + (subTask.isDone ? "1" : "0")
-                            + " | "
-                            + (subTask.getDescription());
-                    fw.write(newTodo + System.lineSeparator());
-                } else if (subTask instanceof Deadline) {
-                    String newDeadline = "D | "
-                            + (subTask.isDone ? "1" : "0")
-                            + " | "
-                            + (subTask.getDescription())
-                            + " | "
-                            + (((Deadline) subTask).getBy());
-                    fw.write(newDeadline + System.lineSeparator());
-                } else if (subTask instanceof Event) {
-                    String newEvent = "E | "
-                            + (subTask.isDone ? "1" : "0")
-                            + " | "
-                            + (subTask.getDescription())
-                            + " | "
-                            + (((Event) subTask).getAt());
-                    fw.write(newEvent + System.lineSeparator());
-                } else {
+                if (!isSuccessfulWriteFile(fw, subTask)) {
                     fw.close();
                     throw new DukeException("Task is unknown");
                 }
@@ -135,5 +131,35 @@ public class Storage {
         } catch (DukeException err) {
             System.out.println(err.getMessage());
         }
+    }
+
+    private static boolean isSuccessfulWriteFile(FileWriter fw, Task subTask) throws IOException {
+        if (subTask instanceof Todo) {
+            String newTodo = "T | "
+                    + (subTask.isDone ? "1" : "0")
+                    + " | "
+                    + (subTask.getDescription());
+            fw.write(newTodo + System.lineSeparator());
+        } else if (subTask instanceof Deadline) {
+            String newDeadline = "D | "
+                    + (subTask.isDone ? "1" : "0")
+                    + " | "
+                    + (subTask.getDescription())
+                    + " | "
+                    + (((Deadline) subTask).getBy());
+            fw.write(newDeadline + System.lineSeparator());
+        } else if (subTask instanceof Event) {
+            String newEvent = "E | "
+                    + (subTask.isDone ? "1" : "0")
+                    + " | "
+                    + (subTask.getDescription())
+                    + " | "
+                    + (((Event) subTask).getAt());
+            fw.write(newEvent + System.lineSeparator());
+        } else {
+            return false;
+        }
+
+        return true;
     }
 }

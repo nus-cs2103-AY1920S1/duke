@@ -7,7 +7,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Setting up several classes ready to be called.
+     * Constructs a Duke instance that saves its data at a specified path.
      */
     public Duke() {
         ui = new Ui();

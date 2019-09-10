@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,17 +14,20 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Duke duke = new Duke();
-    FXMLLoader fxmlLoader;
+    private FXMLLoader fxmlLoader;
 
     public Main() {
-        fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+        URL url = Main.class.getResource("/view/MainWindow.fxml");
+        fxmlLoader = new FXMLLoader(url);
     }
 
     @Override
     public void start(Stage stage) {
         try {
+            InputStream inputStream = this.getClass().getResourceAsStream("/images/duke.png");
+            Image imgIcon = new Image(inputStream);
             stage.setTitle("Duke");
-            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/duke.png")));
+            stage.getIcons().add(imgIcon);
 
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
@@ -29,9 +35,11 @@ public class Main extends Application {
 
             assert stage.getTitle().equals("Duke") : "Application title should be Duke";
 
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            fxmlLoader.<MainWindow>getController().printDialog("Hello! I'm Duke");
-            fxmlLoader.<MainWindow>getController().printDialog("What can I do for you?");
+            MainWindow mainWindow = fxmlLoader.getController();
+            mainWindow.setDuke(duke);
+            mainWindow.printDialog("Hello! I'm Duke");
+            mainWindow.printDialog("What can I do for you?");
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

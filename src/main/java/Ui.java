@@ -6,7 +6,7 @@ import java.util.LinkedList;
  */
 public class Ui extends AnchorPane {
 
-    public String showLoadingError() {
+    String showLoadingError() {
         return "File loaded unsuccessful";
     }
 

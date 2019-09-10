@@ -14,6 +14,10 @@ public class Event extends Task {
     	this.type = "event";
     }
 
+    public void changeTime(String time) {
+        this.at = time;
+    }
+
     @Override
     public String getDescription() {
     	return this.description + " /at " + this.at;

@@ -27,6 +27,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void changeDesc(String desc) {
+        this.description = desc;
+    }
+
     public String toString() {
         return (isDone ? "[\u2713] " + this.description : "[\u2718] " + this.description); //return tick or X symbols
     }

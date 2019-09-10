@@ -14,6 +14,10 @@ public class Deadline extends Task {
     	this.type = "deadline";
     }
 
+    public void changeTime(String time) {
+        this.by = time;
+    }
+
     @Override
     public String getDescription() {
     	return this.description + " /by " + this.by;

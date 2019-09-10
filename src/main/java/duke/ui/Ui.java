@@ -42,21 +42,15 @@ public class Ui {
         return sc.nextLine();
     }
 
-    /**
-     * method that prints message for a successful adding of task to ArrayList.
-     * @param listManager to access actual list of tasks.
-     */
-    public void successfulAdd(ListManager listManager) {
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + listManager.actualList.get(listManager.actualList.size() - 1));
-        System.out.println("\tNow you have " + listManager.actualList.size() + " tasks in the list.");
-    }
-
     public void exit() {
         System.out.println("\nBye. Hope to see you again soon!");
     }
 
     public void showLoadingError() {
         System.out.println("File not found!");
+    }
+
+    public void printMessage(String string) {
+        System.out.println(string);
     }
 }

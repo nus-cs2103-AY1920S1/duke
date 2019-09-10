@@ -14,7 +14,7 @@ public abstract class Command {
         this.splitCommand = splitCommand;
     }
 
-    public abstract void execute(ListManager listManager, Ui ui, Storage storage);
+    public abstract String execute(ListManager listManager, Ui ui, Storage storage);
 
     public abstract boolean isExit();
 }

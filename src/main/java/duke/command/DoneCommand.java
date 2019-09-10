@@ -11,9 +11,9 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(ListManager listManager, Ui ui, Storage storage) {
+    public String execute(ListManager listManager, Ui ui, Storage storage) {
         int index = Integer.parseInt(splitCommand[1]);
-        listManager.done(index);
+        return listManager.done(index);
     }
 
     @Override

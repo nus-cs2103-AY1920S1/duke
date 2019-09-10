@@ -27,6 +27,7 @@ public class Duke {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private boolean isExit;
 
     Duke() {
     }
@@ -34,8 +35,9 @@ public class Duke {
      * Main method that drives the running of the app. Creates new UI/Storage and ListManagers
      * @param filePath to access a pre-existing list (if-any)
      */
-    private Duke(String filePath) {
+    Duke(String filePath) {
         ui = new Ui();
+        isExit = false;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         storage = new Storage(filePath, formatter);
         try {
@@ -50,29 +52,25 @@ public class Duke {
     /**
      * method to ask the UI to ask user for input and change String input into Command class.
      */
-    private void run() {
-        ui.welcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.inputCommand();
-            ui.bar();
-            Command c = Parser.parse(fullCommand);
-            c.execute(listManager, ui, storage);
-            isExit = c.isExit();
-            ui.bar();
-        }
+    private String run(String input) {
+        String output = "";
+        Command c = Parser.parse(input);
+        output = c.execute(listManager, ui, storage);
+        isExit = c.isExit();
+        return output;
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+       if (!this.isExit) {
+           return this.run(input);
+       } else {
+           return "Program has already terminated.";
+        }
     }
 
     public void init() {

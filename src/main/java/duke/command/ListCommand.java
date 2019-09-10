@@ -11,8 +11,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(ListManager listManager, Ui ui, Storage storage) {
-        listManager.iterate();
+    public String execute(ListManager listManager, Ui ui, Storage storage) {
+        return listManager.iterate();
     }
 
     @Override

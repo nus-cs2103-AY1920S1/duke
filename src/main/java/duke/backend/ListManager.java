@@ -28,13 +28,17 @@ public class ListManager {
      * @param fullCommand full String command.
      * @param splitCommand output of java.split(fullCommand).
      */
-    public void add(String fullCommand, String[] splitCommand) {
+    public String add(String fullCommand, String[] splitCommand) {
+        String output = "";
         switch (splitCommand[0]) {
         case "todo": {
             String[] stringBreaker = fullCommand.split("todo", 2);
             if (!stringBreaker[1].equals("")) {
                 ToDos todo = new ToDos(stringBreaker[1], this.formatter);
                 actualList.add(todo);
+                output += "\tGot it. I've added this task:\n";
+                output += "\t  " + this.actualList.get(this.actualList.size() - 1) + '\n';
+                output += "\tNow you have " + this.actualList.size() + " tasks in the list.";
             } else {
                 //Should throw exception here
                 System.out.println("\t☹ OOPS!!! The description of a todo cannot be empty.");
@@ -48,6 +52,9 @@ public class ListManager {
                 Date date = formatter.parse(stringBreaker[1]);
                 Deadlines deadline = new Deadlines(stringBreaker[0], formatter, date);
                 actualList.add(deadline);
+                output += "\tGot it. I've added this task:\n";
+                output += "\t  " + this.actualList.get(this.actualList.size() - 1) + '\n';
+                output += "\tNow you have " + this.actualList.size() + " tasks in the list.";
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -60,6 +67,9 @@ public class ListManager {
                 Date date = formatter.parse(stringBreaker[1]);
                 Events event = new Events(stringBreaker[0], formatter, date);
                 actualList.add(event);
+                output += "\tGot it. I've added this task:\n";
+                output += "\t  " + this.actualList.get(this.actualList.size() - 1) + '\n';
+                output += "\tNow you have " + this.actualList.size() + " tasks in the list.";
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -67,59 +77,67 @@ public class ListManager {
         }
         default:
             //Throw exception here
-            System.out.println("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            output += "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
             break;
         }
+        return output;
     }
 
     /**
      * Iterates through the list and prints out each item.
      */
-    public void iterate() {
+    public String iterate() {
+        String output = "";
         if (this.actualList.isEmpty()) {
-            System.out.println("\tYou have nothing on your to-do list!");
+            output += "\tYou have nothing on your to-do list!";
         } else {
-            System.out.println("\tHere are the tasks in your list:");
+            output += "\tHere are the tasks in your list:\n";
             for (int i = 0; i < actualList.size(); i++) {
-                System.out.print('\t');
-                System.out.print((i + 1) + ".");
-                System.out.println(actualList.get(i));
+                output += '\t';
+                output += (i + 1) + ".";
+                output += actualList.get(i).toString() + '\n';
             }
         }
+        return output;
     }
 
     /**
      * Sets a task within the list (of given index) as completed.
      * @param index index of task stored within the list.
      */
-    public void done(int index) {
+    public String done(int index) {
+        String output = "";
         if (index <= actualList.size()) {
             actualList.get(index - 1).done = true;
-            System.out.println("\tNice! I've marked this task as done:");
-            System.out.println("\t  [✓] " + actualList.get(index - 1).name);
+            output += "\tNice! I've marked this task as done:\n";
+            output += "\t  [✓] " + actualList.get(index - 1).name;
         } else {
-            System.out.println("\tTask does not exist!");
+            output += "\tTask does not exist!";
         }
+        return output;
     }
 
     /**
      * removes task of given index from the list.
      * @param index index of task stored within the list.
      */
-    public void delete(int index) {
+    public String delete(int index) {
+        String output = "";
         Task removed = this.actualList.remove(index - 1);
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t  " + removed);
-        System.out.println("\tNow you have " + actualList.size() + " tasks in the list.");
+        output += "\tNoted. I've removed this task:\n";
+        output += "\t  " + removed.toString() + '\n';
+        output += "\tNow you have " + actualList.size() + " tasks in the list.";
+        return output;
     }
 
     /**
      * searches through the list and outputs every task in which its name contains the query.
      * @param query String query to search for tasks.
      */
-    public void find(String query) {
+    public String find(String query) {
+        String output = "";
         if (this.actualList.isEmpty()) {
-            System.out.println("\tYou have nothing on your to-do list!");
+            output += "\tYou have nothing on your to-do list!";
         } else {
             ArrayList<Task> tempList = new ArrayList<>();
             for (int i = 0; i < actualList.size(); i++) {
@@ -128,14 +146,15 @@ public class ListManager {
                 }
             }
             if (tempList.isEmpty()) {
-                System.out.println("\tSorry no tasks matched your query!");
+                output += "\tSorry no tasks matched your query!";
             } else {
                 for (int j = 0; j < tempList.size(); j++) {
-                    System.out.print('\t');
-                    System.out.print((j + 1) + ".");
-                    System.out.println(tempList.get(j));
+                    output += '\t';
+                    output += (j + 1) + ".";
+                    output += tempList.get(j).toString() + '\n';
                 }
             }
         }
+        return output;
     }
 }

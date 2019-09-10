@@ -11,9 +11,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(ListManager listManager, Ui ui, Storage storage) {
-        listManager.add(this.fullCommand, this.splitCommand);
-        ui.successfulAdd(listManager);
+    public String execute(ListManager listManager, Ui ui, Storage storage) {
+        return listManager.add(this.fullCommand, this.splitCommand);
+
     }
 
     @Override

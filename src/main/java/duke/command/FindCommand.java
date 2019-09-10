@@ -11,8 +11,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(ListManager listManager, Ui ui, Storage storage) {
-        listManager.find(this.splitCommand[1]);
+    public String execute(ListManager listManager, Ui ui, Storage storage) {
+        return listManager.find(this.splitCommand[1]);
     }
 
     @Override

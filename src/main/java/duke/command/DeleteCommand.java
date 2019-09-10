@@ -11,9 +11,9 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(ListManager listManager, Ui ui, Storage storage) {
+    public String execute(ListManager listManager, Ui ui, Storage storage) {
         int index = Integer.parseInt(splitCommand[1]);
-        listManager.delete(index);
+        return listManager.delete(index);
     }
 
     @Override

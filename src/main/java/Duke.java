@@ -83,6 +83,10 @@ public class Duke extends Application {
                 case "find":
                     find(tasks.getlist(), s);
                     break;
+                case "stats":
+                    stats(tasks.getlist());
+                    break;
+
                 default:
                     try {
                         other(s);
@@ -211,6 +215,22 @@ public class Duke extends Application {
     public String otherString(String s) throws ErrorException {
        throw new ErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+    public void stats(ArrayList<Task> list) {
+        ui.drawline();
+        int n = list.size();
+        System.out.println("     There are Total "+n+ " tasks in the task list");
+        int a = 0;
+        int b = 0;
+        for(int i = 0;i<list.size();i++){
+            if(list.get(i).getStatusIcon()=="\u2713"){
+                a++;
+            }
+            else{b++;}
+        }
+        System.out.println("     " +a+" events have done");
+        System.out.println("     " +b+" events have not GIT done");
+        ui.drawline();
+    }
 
     /**
      * Executes the command and returns the result.
@@ -218,6 +238,7 @@ public class Duke extends Application {
      * @param p user command
      * @return result of the command
      */
+
     public void delete(ArrayList<Task> list, int p) {
         Task rt = list.get(p);
         ui.drawline();

@@ -55,10 +55,12 @@ public class Parser {
             if (words.length < 2) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
             }
+            int before = taskList.getSize();
             desc = words[1].split(" /by ", 2)[0];
             time = words[1].split(" /by ", 2)[1];
             currTask = new Deadline(desc, time);
             taskList.add(currTask);
+            assert taskList.getSize() == (before + 1) : "taskList size not incremented.";
             ui.printAdd(currTask, taskList);
         } else if (currEvent.equals("event")) {
             if (words.length < 2) {

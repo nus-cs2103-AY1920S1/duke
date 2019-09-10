@@ -2,6 +2,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * contains actions for event task
+ */
 public class Event extends Task {
     /**
      * midCommand is attribute for the string command after "deadline"

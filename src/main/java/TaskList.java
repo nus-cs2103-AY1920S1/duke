@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * An arrayList like feature which contains the tasks and also carries out certain activities on it
+ */
 public class TaskList {
     /**
      * variable list contains all of user's tasks

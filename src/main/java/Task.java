@@ -1,5 +1,8 @@
 import java.text.ParseException;
 
+/**
+ * parent class for all tasks
+ */
 public class Task {
     /**
      * attributes for the user input string and to flag whether task is done

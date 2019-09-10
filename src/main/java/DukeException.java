@@ -1,3 +1,6 @@
+/**
+ * Exception class for incorrect date format
+ */
 public class DukeException extends Exception {
     /**
      * exception for incorrect date format

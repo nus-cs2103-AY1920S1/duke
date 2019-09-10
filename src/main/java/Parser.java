@@ -1,14 +1,20 @@
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
+/**
+ * Parser processes the user commands and carries out the specific functions on it
+ */
 public class Parser {
+
     /**
-     * storage and tasks variables dictates where to store and output
+     * Class Attributes
      */
     private Storage storage;
     private TaskList tasks;
 
+
     /**
-     * constructor
+     * Class Constructor
      * @param storage is object is store and retrieve data for text file
      * @param tasks is object containing all tasks
      */
@@ -16,6 +22,67 @@ public class Parser {
         this.storage = storage;
         this.tasks = tasks;
     }
+
+
+    /**
+     * Prints introduction, takes in user input, and processes it
+     * @throws FileNotFoundException
+     */
+    public void run() throws FileNotFoundException {
+
+        final String LINE_BORDER = "____________________________________________________________";
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            String command = sc.nextLine();
+            String[]words = command.split(" ");
+            System.out.println(LINE_BORDER);
+
+            if (command.equals("bye")) {                                                                                //IF BYE
+                System.out.println("Bye. Hope to see you again soon!" + "\n" + LINE_BORDER);
+                System.exit(0);
+                break;
+            } else if (command.equals("EmptyOutput")) {
+                this.EmptyOutput();
+            } else if ( (words.length==2) && (words[0].equals("done")) && (isNumeric(words[1])) ) {                     //IF DONE
+                this.done(command);
+            } else if ((words.length==2)&&(words[0].equals("delete"))&&(isNumeric(words[1]))){                          //IF DELETE
+                this.delete(command);
+            } else if (command.equals("list")){                                                                         //IF LIST
+                tasks.printForList();
+            } else if(words[0].equals("find")){
+                this.find(command);
+            } else {
+                try {
+                    String[]splitWords = command.trim().split("\\s",2);
+
+                    if (splitWords[0].equals("todo")) {                                                                 //IF TODO
+                        this.createTodo(command);
+                    } else if (splitWords[0].equals("deadline")) {                                                      //IF DEADLINE
+                        this.createDeadline(command);
+                    } else if (splitWords[0].equals("event")) {                                                         //IF EVENT
+                        this.createEvent(command);
+                    } else {
+                        throw new IllegalArgumentException();
+                    }
+
+                    System.out.println("Got it. I've added this task:" + "\n" + tasks.printLatest()
+                            + "\n" + "Now you have " + tasks.size() + " tasks in the list.");
+
+                } catch (IllegalArgumentException e){
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
+                } catch (DukeException e){
+                    System.out.println("☹ OOPS!!! The date format is wrong.");
+                } catch (Exception e){
+                    System.out.println("☹ OOPS!!! The description of a event cannot be empty.");
+                }
+            }
+            System.out.println(LINE_BORDER);
+        }
+    }
+
+
+
 
     /**
      * clears the DukeOutput in case anything goes wrong, but does not clear list
@@ -25,6 +92,7 @@ public class Parser {
         storage.emptyOutput();
         System.out.println("Output Emptied");
     }
+
 
     /**
      * marks tasks as done and prints the output
@@ -42,6 +110,7 @@ public class Parser {
             System.out.println("Error, you have entered an invalid number");
         }
     }
+
 
     /**
      * deletes the task from TaskList
@@ -61,6 +130,7 @@ public class Parser {
         }
     }
 
+
     /**
      * finds for the search results use inputs
      * @param command is the user input string
@@ -72,7 +142,7 @@ public class Parser {
 
         for(int i = 0; i < tasks.size(); i++){
             String taskCommand = tasks.get(i).getCommand();
-            if (isSubstring(wordToFind, taskCommand) ){
+            if (taskCommand.contains(wordToFind) ){
                 findResults.add(tasks.get(i));
             }else{}
         }
@@ -85,29 +155,6 @@ public class Parser {
 
     }
 
-    /**
-     * to be used for the method find
-     * @param s1 is the shorter string to be checked
-     * @param s2 is the longer string that might contain s1
-     * @return boolean value, whether s1 is a substring of s2
-     */
-    private boolean isSubstring(String s1, String s2) {
-        int M = s1.length();
-        int N = s2.length();
-
-        for (int i = 0; i <= N - M; i++) {
-            int j;
-            for (j = 0; j < M; j++) {
-                if (s2.charAt(i + j) != s1.charAt(j)) {
-                    break;
-                } else {}
-            }
-            if (j == M) {
-                return true;
-            } else {}
-        }
-        return false;
-    }
 
     /**
      * Creates a new ToDo task
@@ -126,6 +173,7 @@ public class Parser {
         }
     }
 
+
     /**
      * Creates a new deadline task
      * @param command is the user string input to be processed
@@ -143,6 +191,7 @@ public class Parser {
         }
     }
 
+
     /**
      * Creates a new event task
      * @param command is the user string input to be processed
@@ -157,6 +206,21 @@ public class Parser {
             storage.printToOutput(tasks);
         } else {
             throw new Exception();
+        }
+    }
+
+
+    /**
+     * determines whether parameter is an integer
+     * @param str takes in the string that will be checked
+     * @return boolean value
+     */
+    public static boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }

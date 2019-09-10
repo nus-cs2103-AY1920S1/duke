@@ -5,6 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Storage enables data to be retrieved and stored in the text file
+ */
 public class Storage {
 
     /**

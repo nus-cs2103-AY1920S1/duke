@@ -2,6 +2,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * contains actions for deadline task
+ */
 public class Deadline extends Task {
 
     /**

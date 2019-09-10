@@ -1,6 +1,7 @@
 package seedu.duke.model;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.model.dto.Deadline;
 
 import java.text.ParseException;
 

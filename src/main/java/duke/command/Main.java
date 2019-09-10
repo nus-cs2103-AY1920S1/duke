@@ -29,7 +29,7 @@ public class Main extends Application {
             stage.show();
             VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("Hello! I'm duke.command.Duke.\nWhat can I do for you?", dukeImage)
+                    DialogBox.getDukeDialog("Hello! I'm Duke.\nWhat can I do for you?", dukeImage)
             );
         } catch (IOException e) {
             e.printStackTrace();

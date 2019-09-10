@@ -28,13 +28,14 @@ public class Duke{
      * Start getting user input and update the storage.
      */
     public String run(String input) {
-        String s = "";
+        String response = "";
         try {
-            s = ui.start(new Parser(taskList, ui), input);
+            response = ui.start(new Parser(taskList, ui), input);
             storage.save(taskList);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return s;
+        assert !response.equals("") : "Response is not updated";
+        return response;
     }
 }

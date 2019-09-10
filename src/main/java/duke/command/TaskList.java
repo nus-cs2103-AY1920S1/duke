@@ -36,4 +36,8 @@ public class TaskList {
         int numInt = Integer.valueOf(numString);
         return list.remove(numInt - 1);
     }
+
+    public int getSize() {
+        return list.size();
+    }
 }

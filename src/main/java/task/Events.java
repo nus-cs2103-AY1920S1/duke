@@ -3,13 +3,12 @@ package task;
 import main.TaskList;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Represents the task event.
  */
-public class Events extends Task {
-
-    private LocalDateTime date;
+public class Events extends DateTask {
 
     /**
      * Creates the Events object
@@ -19,21 +18,11 @@ public class Events extends Task {
      * @param isDone      Marks the task as done nor not done.
      */
     public Events(String description, LocalDateTime date, boolean isDone) {
-        super(description, isDone);
-        this.date = date;
-    }
-
-    /**
-     * Returns the DateTime object of Events.
-     *
-     * @return DateTime object of events.
-     */
-    public LocalDateTime getDate() {
-        return this.date;
+        super(description, date, isDone);
     }
 
     @Override
     public String toString() {
-        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + " (at: " + TaskList.localDateTimeToString(this.date)+ ")";
+        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + " (at: " + TaskList.localDateTimeToString(getDate())+ ")";
     }
 }

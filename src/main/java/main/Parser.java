@@ -21,6 +21,8 @@ public class Parser {
 
         if (input.equals("list")) {
             return new ListCommand();
+        } else if (input.equals("sort")) {
+            return new SortCommand();
         } else {
             String[] temp = input.split(" ");
             if (temp[0].equals("done")) {

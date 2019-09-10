@@ -7,9 +7,7 @@ import java.time.LocalDateTime;
 /**
  * Represents the task deadline.
  */
-public class Deadlines extends Task {
-
-    private LocalDateTime date;
+public class Deadlines extends DateTask {
 
     /**
      * Creates the Deadlines object
@@ -19,21 +17,12 @@ public class Deadlines extends Task {
      * @param isDone      Marks the task as done nor not done.
      */
     public Deadlines(String description, LocalDateTime date, boolean isDone) {
-        super(description, isDone);
-        this.date = date;
-    }
-
-    /**
-     * Returns the DateTime object of deadline.
-     *
-     * @return DateTime object of deadline.
-     */
-    public LocalDateTime getDate() {
-        return this.date;
+        super(description, date, isDone);
     }
 
     @Override
     public String toString() {
-        return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + " (by: " + TaskList.localDateTimeToString(this.date) + ")";
+        return "[D]" + "[" + getStatusIcon() + "] " + getDescription()
+                + " (by: " + TaskList.localDateTimeToString(getDate()) + ")";
     }
 }

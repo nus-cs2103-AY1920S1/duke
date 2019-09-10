@@ -32,9 +32,10 @@ public class DoneCommand extends Command {
      * @throws DukeException If task ID provided is out of bounds
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.taskID > tasks.size()) {
+        if (this.taskID > tasks.size() || this.taskID <= 0) {
             throw new DukeException("Invalid task ID. Please Enter a task ID between 1 and " + tasks.size());
         }
+        assert this.taskID <= tasks.size() && this.taskID > 0 : "Task ID is invalid.";
         Task completedTask = tasks.finishTask(taskID);
         String res = ui.dukeEchoString("Nice! I've marked this task as done:", completedTask.toString());
         storage.save(tasks);

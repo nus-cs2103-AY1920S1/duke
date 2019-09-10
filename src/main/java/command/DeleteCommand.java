@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If task ID is out of bounds
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.taskID > tasks.size()) {
+        if (this.taskID > tasks.size() || this.taskID <= 0) {
             throw new DukeException("Invalid task ID. Please Enter a task ID between 1 and " + tasks.size());
         }
         Task removedTask = tasks.deleteTask(taskID);

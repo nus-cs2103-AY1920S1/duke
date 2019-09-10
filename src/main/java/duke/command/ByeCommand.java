@@ -6,6 +6,9 @@ package duke.command;
 public class ByeCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Exits Duke" + System.lineSeparator()
+            + "Usage: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute() {

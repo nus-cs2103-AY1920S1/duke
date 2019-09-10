@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.IncorrectCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
@@ -33,6 +34,9 @@ public class Parser {
         final String args = arr.length > 1 ? arr[1] : null;
 
         switch (commandWord) {
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
         case DeadlineCommand.COMMAND_WORD:
             return prepareDeadline(args);
 

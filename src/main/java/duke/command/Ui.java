@@ -87,4 +87,13 @@ public class Ui {
         return ("Noted. I've edited this task:\n" +
                 "  " + task.toString() + "\n");
     }
+
+    String printHelp() {
+        return ("Available commands:\n" +
+                "\"list\"\n" +
+                "\"done <index>\"\n" +
+                "\"delete <index>\"\n" +
+                "\"find <string>\"\n" +
+                "\"update <index> w/<description> d/<date>\"\n");
+    }
 }

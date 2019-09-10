@@ -47,6 +47,8 @@ public class Parser {
         String firstWord = words[0];
 
         switch (firstWord) {
+            case "help":
+                return ui.printHelp();
             case "list":
                 return ui.printList(list);
             case "done":

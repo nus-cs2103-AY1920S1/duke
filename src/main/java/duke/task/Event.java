@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Event class
+ * Event class.
  */
 public class Event extends Task {
     private String date;

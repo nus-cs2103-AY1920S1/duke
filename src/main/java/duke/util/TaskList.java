@@ -1,9 +1,5 @@
 package duke.util;
 
-/**
- * TaskList class to store list of tasks.
- */
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -13,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
+/**
+ * TaskList class to store list of tasks.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
     private int count;
@@ -93,6 +92,9 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * Re-indexes the tasks when deletion occurs
+     */
     public void reIndex() {
         int count = 1;
         for (Task t : taskList) {

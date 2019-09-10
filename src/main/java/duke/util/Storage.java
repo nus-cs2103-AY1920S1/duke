@@ -1,7 +1,4 @@
 package duke.util;
-/**
- * Class to handle storage of data
- */
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -15,7 +12,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
-
+/**
+ * Class to handle storage of data.
+ */
 public class Storage {
     private String path;
 
@@ -39,6 +38,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Returns a list of Tasks.
+     * @param lines List of lines read from .txt.file
+     * @return list of Task objects
+     * @throws DukeException
+     */
     private ArrayList<Task> textToTaskList(ArrayList<String> lines) throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         for (String line : lines) {
@@ -63,7 +68,7 @@ public class Storage {
     }
 
     /**
-     * Saves the history before closing the app
+     * Saves the history before closing the app.
      * @param taskList tasklist to be saved as a .txt file
      * @throws IOException if there are errors writing to the file
      */
@@ -99,7 +104,7 @@ public class Storage {
     }
 
     /**
-     * Checks if tasklist history exists
+     * Checks if tasklist history exists.
      * @return true if tasklist history exists, false otherwise
      */
     public boolean historyExists() {
@@ -108,7 +113,7 @@ public class Storage {
     }
 
     /**
-     * Creates a new .txt file to write history to
+     * Creates a new .txt file to write history to.
      * @throws IOException if there are errors creating the file
      */
     public void createFile() throws IOException {

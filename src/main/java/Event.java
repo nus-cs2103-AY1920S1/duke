@@ -7,8 +7,13 @@ public class Event extends Tasks {
         this.dateTime = dateTime;
     }
 
-    public void finishTask() {
-        super.finishTask();
+    public Event(String dets, String dateTime, int status) {
+        super(dets, status);
+        this.dateTime = dateTime;
+    }
+
+    public void doTask() {
+        super.doTask();
     }
 
     @Override

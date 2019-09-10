@@ -4,6 +4,7 @@ import duke.command.Command;
 
 import duke.task.TaskList;
 import duke.util.DukeException;
+import duke.util.History;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
@@ -24,6 +25,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
+    private History history;
 
     /**
      * Starts a new Duke session, loading any existing tasks from previous sessions from the hard disk.
@@ -36,6 +38,7 @@ public class Duke {
         } catch (DukeException e) {
             tasks = new TaskList();
         }
+        history = new History(tasks);
     }
 
     /**
@@ -50,7 +53,7 @@ public class Duke {
             if (isExiting) {
                 exitDuke();
             }
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, ui, storage, history);
         } catch (DukeException e) {
             return e.getMessage();
         }

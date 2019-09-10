@@ -4,6 +4,8 @@ import javafx.scene.control.Label;
 import seedu.duke.model.dto.Task;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Ui {
     private static String LOGO =
@@ -45,11 +47,9 @@ public class Ui {
      */
     public String displayList(String output, List<Task> list) {
         output += "Here are the tasks in your list:\n";
-        int index = 0;
-        for (Task task : list) {
-            index++;
-            output += (index + "." + task + "\n");
-        }
+        output += IntStream.rangeClosed(1, list.size())
+                .mapToObj(index -> (String)(index + "." + list.get(index - 1)))
+                .collect(Collectors.joining("\n"));
         return output;
     }
 

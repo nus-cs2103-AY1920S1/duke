@@ -231,7 +231,7 @@ public class Duke extends Application {
             else{b++;}
         }
         System.out.println("     " +a+" events have done");
-        System.out.println("     " +b+" events have not done");
+        System.out.println("     " +b+" events have not GIT done");
         ui.drawline();
     }
 

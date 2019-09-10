@@ -30,6 +30,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         try {
             initDependencies();
 

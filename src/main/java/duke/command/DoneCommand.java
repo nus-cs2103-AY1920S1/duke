@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.Arrays;
 
 public class DoneCommand extends Command {
     private int[] taskIds;

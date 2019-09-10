@@ -34,7 +34,7 @@ public class DeleteCommand implements Command {
         return index;
     }
 
-    public String getDescription() {
+    public String getTask() {
         return "";
     }
 

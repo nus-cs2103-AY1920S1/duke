@@ -1,11 +1,10 @@
 package duke.todo;
 
 import duke.DukeException;
-import duke.parser.Parser;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.lang.StringBuilder;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * TaskList class for task list operations and storage.
@@ -20,28 +19,29 @@ public class TaskList {
      * @param fileInput Input from the data file.
      * @throws DukeException When input is empty.
      */
-    public TaskList(List<String> fileInput) throws DukeException {
+    public TaskList(ArrayList<String> fileInput) throws DukeException {
         if (fileInput.size() == 0) {
             throw new DukeException("");
         } else {
-            this.taskList = parseFileInput(fileInput);
-        }
-    }
+            this.taskList = new ArrayList<>();
 
-    /**
-     * Parses the list of file input from data file and returns a list of tasks.
-     *
-     * @param fileInput Data file entries.
-     * @return List of tasks stored in data file.
-     * @throws DukeException When some entries are corrupted.
-     */
-    private List<Task> parseFileInput(List<String> fileInput) throws DukeException {
-        List<Task> tasks = new ArrayList<>();
+            for (String fileEntry : fileInput) {
+                // Split the file entry by delimiter "|"
+                String[] processedEntry = fileEntry.split("\\|", 3);
+                // Extract task type
+                String taskType = processedEntry[0].trim();
 
-        for (String fileEntry : fileInput) {
-            tasks.add(Parser.parseTaskFromFile(fileEntry));
+                // Store todo task
+                if (taskType.equals("T")) {
+                    String taskDescription = processedEntry[1];
+                    this.addTask(taskDescription);
+                } else { // Store event and deadline tasks
+                    String taskDescription = processedEntry[1].trim();
+                    String taskDate = processedEntry[2].trim();
+                    this.addTask(taskType, taskDescription, taskDate);
+                }
+            }
         }
-        return tasks;
     }
 
     /**
@@ -73,7 +73,7 @@ public class TaskList {
      *
      * @return String of all formatted tasks.
      */
-    public String outputTasksInString() {
+    public String outputTasks() {
         StringBuilder output = new StringBuilder();
 
         for (Task task : this.taskList) {
@@ -87,15 +87,16 @@ public class TaskList {
      *
      * @return String of formmated report on the current task list.
      */
-    public String generateListInString() {
+    public String generateList() {
         StringBuilder output = new StringBuilder();
         int index;
         Task currentTask;
 
-        output.append("Here are the tasks in your list:\n");
+        output.append("    Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             currentTask = taskList.get(i);
             index = i + 1;
+            output.append("    ");
             output.append(index);
             output.append(". ");
             output.append(currentTask);
@@ -181,14 +182,14 @@ public class TaskList {
      * @param taskDate Due date of the task added.
      * @return Task added.
      */
-    public Task addTask(String taskType, String taskDetail, LocalDateTime taskDate) {
+    public Task addTask(String taskType, String taskDetail, String taskDate) {
         Task newTask = new Task("");
 
         switch (taskType) {
-        case "deadline":
+        case "D":
             newTask = new Deadline(taskDetail, taskDate);
             break;
-        case "event":
+        case "E":
             newTask = new Event(taskDetail, taskDate);
             break;
         default:
@@ -197,10 +198,6 @@ public class TaskList {
 
         taskList.add(newTask);
         return newTask;
-    }
-
-    public void addTask(Task newTask) {
-        taskList.add(newTask);
     }
 
     /**

@@ -4,22 +4,21 @@ import duke.todo.Task;
 import duke.todo.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDateTime;
-
 public class DeadlineCommand implements Command {
-    private String description;
-    private LocalDateTime deadline;
+    private String task;
+    private String deadline;
 
     /**
      * Generates deadline command based on the input string.
      * Processes the input string and store it as task and deadline.
      *
-     * @param description Description for the deadline.
-     * @param deadline Deadline in LocalDateTime.
+     * @param input Input string.
      */
-    public DeadlineCommand(String description, LocalDateTime deadline) {
-        this.description = description;
-        this.deadline = deadline;
+    public DeadlineCommand(String input) {
+        String[] processedInput = input.split("/by");
+
+        this.task = processedInput[0];
+        this.deadline = processedInput[1];
     }
 
     /**
@@ -36,7 +35,7 @@ public class DeadlineCommand implements Command {
      *
      * @return Date of the deadline.
      */
-    public LocalDateTime getDate() {
+    public String getDate() {
         return deadline;
     }
 
@@ -44,8 +43,8 @@ public class DeadlineCommand implements Command {
         return 0;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTask() {
+        return task;
     }
 
     public String getKeyword() {
@@ -53,7 +52,7 @@ public class DeadlineCommand implements Command {
     }
 
     public void execute(TaskList tasks, Ui ui) {
-        Task addedDeadline = tasks.addTask(getTaskType(), getDescription(), getDate());
-        ui.reportAdd(addedDeadline, tasks.getNumOfTasks());
+        Task addedTodo = tasks.addTask(getTask());
+        ui.reportAdd(addedTodo, tasks.getNumOfTasks());
     }
 }

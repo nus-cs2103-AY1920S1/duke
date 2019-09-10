@@ -17,7 +17,11 @@ public class ByeCommand implements Command {
         return 0;
     }
 
-    public String getDescription() {
+    public String getTask() {
+        return "error";
+    }
+
+    public String getDate() {
         return "error";
     }
 

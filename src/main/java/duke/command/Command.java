@@ -9,7 +9,9 @@ public interface Command {
 
     public int getIndex();
 
-    public String getDescription();
+    public String getTask();
+
+    public String getDate();
 
     public String getKeyword();
 

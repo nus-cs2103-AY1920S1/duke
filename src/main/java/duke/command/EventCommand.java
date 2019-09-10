@@ -4,22 +4,21 @@ import duke.todo.Task;
 import duke.todo.TaskList;
 import duke.ui.Ui;
 
-import java.time.LocalDateTime;
-
 public class EventCommand implements Command {
     private String task;
-    private LocalDateTime eventDate;
+    private String eventDate;
 
     /**
      * Constructs an event command based on the input string,
-     * and store it as description description and event date.
+     * and store it as task description and event date.
      *
-     * @param description Description for the event.
-     * @param eventDate Date in LocalDateTime.
+     * @param input Input string.
      */
-    public EventCommand(String description, LocalDateTime eventDate) {
-        this.task = description;
-        this.eventDate = eventDate;
+    public EventCommand(String input) {
+        String[] processedInput = input.split("/by");
+
+        this.task = processedInput[0];
+        this.eventDate = processedInput[1];
     }
 
     /**
@@ -40,7 +39,7 @@ public class EventCommand implements Command {
      *
      * @return Description of this event.
      */
-    public String getDescription() {
+    public String getTask() {
         return task;
     }
 
@@ -49,7 +48,7 @@ public class EventCommand implements Command {
      *
      * @return Event date.
      */
-    public LocalDateTime getDate() {
+    public String getDate() {
         return eventDate;
     }
 
@@ -58,7 +57,7 @@ public class EventCommand implements Command {
     }
 
     public void execute(TaskList tasks, Ui ui) {
-        Task addedEvent = tasks.addTask(getTaskType(), getDescription(), getDate());
+        Task addedEvent = tasks.addTask("E", getTask(), getDate());
         ui.reportAdd(addedEvent, tasks.getNumOfTasks());
     }
 }

@@ -18,11 +18,6 @@ public class Main extends Application {
     private static final String FILE_PATH = "src/main/java/duke/data/tasks.txt";
     private Duke duke = new Duke(FILE_PATH);
 
-    /**
-     * Start the Application.
-     *
-     * @param stage Stage component for JavaFX GUI.
-     */
     @Override
     public void start(Stage stage) {
         try {

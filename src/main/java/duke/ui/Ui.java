@@ -1,21 +1,18 @@
 package duke.ui;
 
-import duke.todo.Task;
 import duke.DukeException;
+import duke.todo.Task;
 
 public class Ui {
     StringBuilder messageBuffer;
-
     /**
-     * Constructor for class Ui.
+     * Displays error when loading file.
      */
+
     public Ui() {
         this.messageBuffer = new StringBuilder();
     }
 
-    /**
-     * Displays error when loading file.
-     */
     public void showLoadingError() {
         messageBuffer.append("Unable to load file");
     }
@@ -57,9 +54,9 @@ public class Ui {
      * @param numOfTasks Number of tasks left in the task list.e
      */
     public void reportAdd(Task task, int numOfTasks) {
-        messageBuffer.append("Got it. I've added this task:\n");
-        messageBuffer.append("  " + task);
-        messageBuffer.append("\nNow you have " + numOfTasks);
+        messageBuffer.append("    Got it. I've added this task:\n");
+        messageBuffer.append("      " + task);
+        messageBuffer.append("\n    Now you have " + numOfTasks);
         messageBuffer.append(" task" + (numOfTasks > 1 ? "s" : "") + " in the list.");
     }
 
@@ -88,11 +85,6 @@ public class Ui {
         messageBuffer.append(formattedTasks);
     }
 
-    /**
-     * Adds error message to output buffer.
-     *
-     * @param e Error caught.
-     */
     public void reportError(DukeException e) {
         messageBuffer.append(e.getMessage());
     }
@@ -107,7 +99,7 @@ public class Ui {
     }
 
     /**
-     * Resets output buffer.
+     * Resets message buffer.
      */
     public void resetMessage() {
         messageBuffer = new StringBuilder();

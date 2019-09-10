@@ -1,7 +1,5 @@
 package duke.todo;
 
-import duke.parser.Parser;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,11 +13,11 @@ public class Deadline extends Task {
      * @param description Description of the deadline.
      * @param deadline Date of the deadline.
      */
-    public Deadline(String description, LocalDateTime deadline) {
+    public Deadline(String description, String deadline) {
         super(description);
 
-        this.formatter = DateTimeFormatter.ofPattern(Parser.DATE_FORMAT);
-        this.deadline = deadline;
+        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        this.deadline = LocalDateTime.parse(deadline, formatter);
     }
 
     /**

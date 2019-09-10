@@ -17,7 +17,7 @@ public class ListCommand implements Command {
         return 0;
     }
 
-    public String getDescription() {
+    public String getTask() {
         return "";
     }
 
@@ -30,6 +30,6 @@ public class ListCommand implements Command {
     }
 
     public void execute(TaskList tasks, Ui ui) {
-        ui.reportList(tasks.generateListInString());
+        ui.reportList(tasks.generateList());
     }
 }

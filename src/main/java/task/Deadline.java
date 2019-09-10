@@ -15,8 +15,8 @@ public class Deadline extends Task {
      * @param description Description of deadline.
      * @param by          Date of deadline.
      */
-    public Deadline(String description, String by) {
-        super(description);
+    public Deadline(String description, String by, int priority) {
+        super(description, priority);
         this.by = by;
         this.date = formatDate();
     }
@@ -28,8 +28,8 @@ public class Deadline extends Task {
      * @param by          Date of deadline.
      * @param isDone      If deadline is completed/over.
      */
-    public Deadline(String description, String by, int isDone) {
-        super(description, isDone);
+    public Deadline(String description, String by, int isDone, int priority) {
+        super(description, isDone, priority);
         this.by = by;
         this.date = formatDate();
     }
@@ -65,6 +65,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date + ")";
+        return "[D]" + super.toString() + " (by: " + date + ") " + super.priority;
     }
 }

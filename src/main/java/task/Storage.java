@@ -26,15 +26,22 @@ public class Storage {
         while (sc.hasNext()) {
             String taskLine = sc.nextLine();
             String[] taskLineSplit = taskLine.split(":");
+            String description = taskLineSplit[2];
+            int isDone = Integer.parseInt(taskLineSplit[1]);
             switch (taskLineSplit[0]) {
             case "T":
-                task.add(new Todo(taskLineSplit[2], Integer.parseInt(taskLineSplit[1])));
+                int priorityTodo = Integer.parseInt(taskLineSplit[3]);
+                task.add(new Todo(description, isDone, priorityTodo));
                 break;
             case "E":
-                task.add(new Event(taskLineSplit[2], taskLineSplit[3], Integer.parseInt(taskLineSplit[1])));
+                String at = taskLineSplit[3];
+                int priorityEvent = Integer.parseInt(taskLineSplit[4]);
+                task.add(new Event(description, at, isDone, priorityEvent));
                 break;
             case "D":
-                task.add(new Deadline(taskLineSplit[2], taskLineSplit[3], Integer.parseInt(taskLineSplit[1])));
+                String by = taskLineSplit[3];
+                int priorityDeadline = Integer.parseInt(taskLineSplit[4]);
+                task.add(new Deadline(description, by, isDone, priorityDeadline));
                 break;
             default:
             }
@@ -60,22 +67,26 @@ public class Storage {
 
         for (int i = 0; i < counter; i++) {
             Task taskToWrite = task.get(i);
+            int priority = taskToWrite.getPriority().getPriorityLevel();
             if (taskToWrite instanceof Todo) {
                 stringToWrite += "T:";
                 stringToWrite += writeStatus(taskToWrite);
                 stringToWrite += taskToWrite.getDescription();
+                stringToWrite += ":" + priority;
             } else if (taskToWrite instanceof Event) {
                 stringToWrite += "E:";
                 stringToWrite += writeStatus(taskToWrite);
                 stringToWrite += taskToWrite.getDescription() + ":";
                 Event e = (Event) taskToWrite;
                 stringToWrite += e.getTime();
+                stringToWrite += ":" + priority;
             } else if (taskToWrite instanceof Deadline) {
                 stringToWrite += "D:";
                 stringToWrite += writeStatus(taskToWrite);
                 stringToWrite += taskToWrite.getDescription() + ":";
                 Deadline d = (Deadline) taskToWrite;
                 stringToWrite += d.getTime();
+                stringToWrite += ":" + priority;
             }
 
             if (i != counter - 1) {

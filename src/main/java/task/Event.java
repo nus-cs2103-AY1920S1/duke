@@ -15,8 +15,8 @@ public class Event extends Task {
      * @param description Description of deadline.
      * @param at          Date of deadline.
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, String at, int priority) {
+        super(description, priority);
         this.at = at;
         this.date = formatDate();
     }
@@ -28,8 +28,8 @@ public class Event extends Task {
      * @param at          Date of deadline.
      * @param isDone      If deadline is completed/over.
      */
-    public Event(String description, String at, int isDone) {
-        super(description, isDone);
+    public Event(String description, String at, int isDone, int priority) {
+        super(description, isDone, priority);
         this.at = at;
         this.date = formatDate();
     }
@@ -80,6 +80,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ")";
+        return "[E]" + super.toString() + " (at: " + date + ") " + super.priority;
     }
 }

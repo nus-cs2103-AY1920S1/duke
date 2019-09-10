@@ -70,7 +70,8 @@ public class Storage {
     }
 
     /**
-     * Returns a deep copy of the specified object.
+     * Returns a deep copy of the specified object. The copy is performed by serializing the target object with a stream
+     * and then deserializing it.
      *
      * @param serializable  the object to copy
      * @param <T>  class that implements Serializable

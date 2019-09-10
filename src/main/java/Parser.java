@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Represents a Parser which is used to parse the user input depending on their commands.
@@ -44,6 +45,9 @@ public class Parser {
             break;
         case "bye":
             handleByeInput(ui, userInput);
+            break;
+        case "sortby":
+            handleSortInput(taskList, ui, userInput);
             break;
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -248,6 +252,30 @@ public class Parser {
             ui.printFindTasks(filterTasks);
         } catch (Exception e) {
             throw new DukeException("OOPS!!! Your input format is wrong. Use: find [task description]");
+        }
+    }
+
+    /**
+     * Parses "sortby" user input type.
+     *
+     * @param taskList TaskList of the current file.
+     * @param ui Ui of the project.
+     * @param userInput The user input to be parsed.
+     * @throws DukeException If user input is not in the format
+     */
+    private static void handleSortInput(
+            TaskList taskList, Ui ui, String userInput) throws DukeException {
+        try {
+            userInput = userInput.substring(6).trim();
+            System.out.println(userInput);
+            if (userInput.equals("deadline")) {
+                Collections.sort(taskList.getListOfTasks(), new SortByDeadline());
+            } else {
+                throw new Exception();
+            }
+            ui.printSortTasks(taskList.getListOfTasks(), userInput);
+        } catch (Exception e) {
+            throw new DukeException("OOPS!!! Your input format is wrong. Use: sortby [type of sort]");
         }
     }
 

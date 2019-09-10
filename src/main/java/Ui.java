@@ -95,7 +95,22 @@ public class Ui {
         String str = "    Here are the matching tasks in your list:\n    ";
         for (int i = 0; i < listOfTasks.size(); i++) {
             int number = i + 1;
-            str += number + "." + listOfTasks.get(i);
+            str += number + "." + listOfTasks.get(i) + "\n    ";
+        }
+        setPrintStatement(str);
+    }
+
+    /**
+     * Prints the list of tasks after performing sorting.
+     *
+     * @param listOfTasks Tasks that have been sorted.
+     * @param sortType Type of the sort that user specified.
+     */
+    public void printSortTasks(ArrayList<Task> listOfTasks, String sortType) {
+        String str = "    The list have been sorted according to: " + sortType + "\n    ";
+        for (int i = 0; i < listOfTasks.size(); i++) {
+            int number = i + 1;
+            str += number + "." + listOfTasks.get(i) + "\n    ";
         }
         setPrintStatement(str);
     }

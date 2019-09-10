@@ -14,6 +14,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public LocalDateTime getDeadlineTime() {
+        return this.by;
+    }
+
     public String getTaskBy() {
         return this.by.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }

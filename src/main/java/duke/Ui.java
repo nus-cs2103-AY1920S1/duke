@@ -7,7 +7,6 @@ import java.util.Scanner;
  * Reads input and prints output.
  */
 public class Ui {
-    private static final String UI_LINE_BREAK = "________________________________________";
     private static final String LINE_BREAK = "______________________________________________________________________";
     private static final String HELLO_STRING = "Hello! I'm duke.Duke\nWhat can I do for you?";
     private static final String BYE_STRING = "Bye. Hope to see you again soon!";

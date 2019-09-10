@@ -36,6 +36,7 @@ public class AddCommand extends Command {
                     String[] eventArgs =
                             input.split(EVENT_COMMAND)[1]
                                     .split(AT_DELIMITER);
+                    assert eventArgs.length == 2;
                     newTask = new EventTask(
                             eventArgs[0], eventArgs[1]);
                     break;
@@ -43,6 +44,7 @@ public class AddCommand extends Command {
                     String[] deadlineArgs =
                             input.split(DEADLINE_COMMAND)[1]
                                     .split(BY_DELIMITER);
+                    assert deadlineArgs.length == 2;
                     newTask = new DeadlineTask(
                             deadlineArgs[0],
                             DATE_FORMAT.parse(deadlineArgs[1]));

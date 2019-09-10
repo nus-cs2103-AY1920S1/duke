@@ -30,15 +30,15 @@ public class AddCommand extends Command {
             description.add(commandArr[i]);
         }
 
-        assert index >= 0: "    ____________________________________________________________\n"
+        assert index >= 0: printLine()
                 +  "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
-                + "    ____________________________________________________________\n";
+                + printLine();
 
         if (description.toString().equals("")) {
             throw new DukeException(
-                    "    ____________________________________________________________\n"
+                    printLine()
                             + "     ☹ OOPS!!! The description of a " + commandArr[0] + " cannot be empty.\n"
-                            + "    ____________________________________________________________\n");
+                            + printLine());
         }
 
         return description.toString();
@@ -64,17 +64,25 @@ public class AddCommand extends Command {
         }
 
         //Check whether there is /at or /by in the command
-        assert index >= 0: "    ____________________________________________________________\n"
+        assert index >= 0: printLine()
                 + "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
-                + "    ____________________________________________________________\n";
+                + printLine();
 
         if (timing.toString().equals("")) {
             throw new DukeException(
-                    "    ____________________________________________________________\n"
+                    printLine()
                             + "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
-                            + "    ____________________________________________________________\n");
+                            + printLine());
         }
 
         return timing.toString();
+    }
+
+    /**
+     * Gives a string as a border.
+     * @return a string that forms the border for duke.
+     */
+    private String printLine() {
+        return "    ____________________________________________________________\n";
     }
 }

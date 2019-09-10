@@ -34,17 +34,17 @@ public class Parser {
     public void checkCommand(String... commandArr) throws DukeException {
         if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete|find")) {
             throw new DukeException(
-                    "    ____________________________________________________________\n"
+                    printLine()
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                    + "    ____________________________________________________________\n");
+                    + printLine());
         }
 
         if (commandArr[0].matches("list|bye")) {
             if (commandArr.length > 1) {
                 throw new DukeException(
-                        "    ____________________________________________________________\n"
+                        printLine()
                         + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                        + "    ____________________________________________________________\n");
+                        + printLine());
             }
         }
     }
@@ -66,53 +66,64 @@ public class Parser {
                 if (validateDate(str)) {
                     String[] date = str.split("/");
                     int day = Integer.parseInt(date[0]);
-                    int last = day % 10;
                     int monthCurr = Integer.parseInt(date[1]);
                     int year = Integer.parseInt(date[2]);
 
-                    if (last == 1) {
-                        sj.add(day + "st of");
-                    } else if (last == 2) {
-                        sj.add(day + "nd of");
-                    } else if (last == 3) {
-                        sj.add(day + "rd of");
-                    } else {
-                        sj.add(day + "th of");
-                    }
-
+                    sj.add(formatDate(day));
                     sj.add(month[monthCurr]);
                     sj.add(year + ",");
                 } else {
                     throw new DukeException(
-                            "    ____________________________________________________________\n"
+                            printLine()
                             + "     ☹ OOPS!!! Please type in a valid date: DD/MM/YYYY\n"
-                            + "    ____________________________________________________________\n");
+                            + printLine());
                 }
             } else if (str.matches("[0-9]{4}")) {
                 if (validateTime(str)) {
                     int hour = Integer.parseInt(str.substring(0, 2));
                     int min = Integer.parseInt(str.substring(2, 4));
 
-                    if (hour == 12) {
-                        sj.add(String.format("%d:%02dpm", hour, min));
-                    } else if (hour > 12) {
-                        sj.add(String.format("%d:%02dpm", hour - 12, min));
-                    } else if (hour == 0) {
-                        sj.add(String.format("12:%02dam", min));
-                    } else {
-                        sj.add(String.format("%d:%02dam", hour, min));
-                    }
+                    sj.add(formatTime(hour, min));
                 } else {
                     throw new DukeException(
-                            "    ____________________________________________________________\n"
+                            printLine()
                             + "     ☹ OOPS!!! Please type in a valid 24hrs timing\n"
-                            + "    ____________________________________________________________\n");
+                            + printLine());
                 }
             } else {
                 sj.add(str);
             }
         }
         return sj.toString();
+    }
+
+    private String formatDate(int day) {
+        int last = day % 10;
+        String result;
+
+        if (last >= 1 && last <= 3 && day / 10 != 1) {
+            if (last == 1) {
+                result = "st of";
+            } else if (last == 2) {
+                result = "nd of";
+            } else {
+                result = "rd of";
+            }
+        } else {
+            result = "th of";
+        }
+
+        return day + result;
+    }
+
+    private String formatTime(int hour, int min) {
+        if (hour > 12) {
+            hour -= 12;
+        } else if (hour == 0) {
+            hour = 12;
+        }
+
+        return String.format("%d:%02dam", hour, min);
     }
 
     /**
@@ -206,74 +217,74 @@ public class Parser {
             checkCommand(commandArr);
             String filename = "data/duke.txt";
             switch (commandArr[0]) {
-            case "list":
-                result = taskList.printArray();
-                break;
+                case "list":
+                    result = taskList.printArray();
+                    break;
 
-            case "done":
-                duke.command.Command c = new DoneCommand();
-                int indexDone = Integer.parseInt(commandArr[1]) - 1;
-                assert indexDone >= 0: "Index of the list cannot be less than 0";
-                Task currTask = taskList.get(indexDone);
-                currTask.markAsDone();
-                result = ((DoneCommand) c).taskComplete(currTask);
-                data.replaceNthLine(filename, indexDone, currTask);
-                break;
+                case "done":
+                    duke.command.Command c = new DoneCommand();
+                    int indexDone = Integer.parseInt(commandArr[1]) - 1;
+                    assert indexDone >= 0: "Index of the list cannot be less than 0";
+                    Task currTask = taskList.get(indexDone);
+                    currTask.markAsDone();
+                    result = ((DoneCommand) c).taskComplete(currTask);
+                    data.replaceNthLine(filename, indexDone, currTask);
+                    break;
 
-            case "delete":
-                c = new DeleteCommand();
-                int index = Integer.parseInt(commandArr[1]) - 1;
-                assert index >= 0: "Index of the list cannot be less than 0";
-                result = ((DeleteCommand) c).deleteComplete(taskList.size(),
-                        taskList.get(index));
-                taskList.remove(index);
-                data.removeNthLine(filename, index);
-                break;
+                case "delete":
+                    c = new DeleteCommand();
+                    int index = Integer.parseInt(commandArr[1]) - 1;
+                    assert index >= 0: "Index of the list cannot be less than 0";
+                    result = ((DeleteCommand) c).deleteComplete(taskList.size(),
+                            taskList.get(index));
+                    taskList.remove(index);
+                    data.removeNthLine(filename, index);
+                    break;
 
-            case "find":
-                c = new SearchCommand();
-                result = ((SearchCommand) c).searchKeyword(taskList, commandArr);
-                break;
+                case "find":
+                    c = new SearchCommand();
+                    result = ((SearchCommand) c).searchKeyword(taskList, commandArr);
+                    break;
 
-            case "todo":
-                c = new AddCommand();
-                result = ((AddCommand) c).getDescription(commandArr);
-                Task todo = new ToDo(result);
-                taskList.add(todo);
-                data.writeToFile("T | ✘ | " + result);
-                result = taskList.printTask(todo, taskList.size());
-                break;
+                case "todo":
+                    c = new AddCommand();
+                    result = ((AddCommand) c).getDescription(commandArr);
+                    Task todo = new ToDo(result);
+                    taskList.add(todo);
+                    data.writeToFile("T | ✘ | " + result);
+                    result = taskList.printTask(todo, taskList.size());
+                    break;
 
-            case "deadline":
-                c = new AddCommand();
-                String deadlineDescription = ((AddCommand) c).getDescription(commandArr);
-                String deadlineTime = ((AddCommand) c).getTime(commandArr);
-                deadlineTime = checkTime(deadlineTime);
-                Task deadline = new Deadline(deadlineDescription, deadlineTime);
-                taskList.add(deadline);
-                data.writeToFile("D | ✘ | " + deadlineDescription + " | "
-                        + deadlineTime);
-                result = taskList.printTask(deadline, taskList.size());
-                break;
+                case "deadline":
+                    c = new AddCommand();
+                    String deadlineDescription = ((AddCommand) c).getDescription(commandArr);
+                    String deadlineTime = ((AddCommand) c).getTime(commandArr);
+                    deadlineTime = checkTime(deadlineTime);
+                    Task deadline = new Deadline(deadlineDescription, deadlineTime);
+                    taskList.add(deadline);
+                    data.writeToFile("D | ✘ | " + deadlineDescription + " | "
+                            + deadlineTime);
+                    result = taskList.printTask(deadline, taskList.size());
+                    break;
 
-            case "event":
-                c = new AddCommand();
-                String eventDescription = ((AddCommand) c).getDescription(commandArr);
-                String eventTime = ((AddCommand) c).getTime(commandArr);
-                eventTime = checkTime(eventTime);
-                Task event = new Event(eventDescription, eventTime);
-                taskList.add(event);
-                data.writeToFile("E | ✘ | " + eventDescription + " | " + eventTime);
-                result = taskList.printTask(event, taskList.size());
-                break;
+                case "event":
+                    c = new AddCommand();
+                    String eventDescription = ((AddCommand) c).getDescription(commandArr);
+                    String eventTime = ((AddCommand) c).getTime(commandArr);
+                    eventTime = checkTime(eventTime);
+                    Task event = new Event(eventDescription, eventTime);
+                    taskList.add(event);
+                    data.writeToFile("E | ✘ | " + eventDescription + " | " + eventTime);
+                    result = taskList.printTask(event, taskList.size());
+                    break;
 
-            case "exit":
-                c = new ExitCommand();
-                result = ((ExitCommand) c).exit();
-                break;
+                case "exit":
+                    c = new ExitCommand();
+                    result = ((ExitCommand) c).exit();
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
             }
         } catch (DukeException ex) {
             result = (ex.getMessage()) + "\n";

@@ -8,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EventTest {
     @Test
     void testEventCreation() throws DukeException {
-        assertEquals("[E][✗] Rest (at: 1 Sep 2019 00:00)", new Event("Rest", "01/09/2019 0000").toString());
+        //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
+        assertEquals("[E][\u2718] Rest (at: 1 Sep 2019 00:00)", new Event("Rest", "01/09/2019 0000").toString());
+        //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
     }
 
     @Test

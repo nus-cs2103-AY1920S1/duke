@@ -7,7 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DeadlineTest {
     @Test
     void testDeadlineCreation() throws DukeException {
-        assertEquals("[D][✗] Rest (by: 1 Sep 2019 00:00)", new Deadline("Rest", "01/09/2019 0000").toString());
+        //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
+        assertEquals("[D][\u2718] Rest (by: 1 Sep 2019 00:00)", new Deadline("Rest", "01/09/2019 0000").toString());
+        //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
     }
 
     @Test

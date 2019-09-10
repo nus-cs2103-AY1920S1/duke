@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ToDoTest {
     @Test
     void testToDoCreation() {
-        assertEquals("[T][✗] Rest", new ToDo("Rest").toString());
+        //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
+        assertEquals("[T][\u2718] Rest", new ToDo("Rest").toString());
+        //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
     }
 
     @Test

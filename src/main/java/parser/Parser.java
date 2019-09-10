@@ -124,6 +124,7 @@ public class Parser {
             emptyList.add(new Todo(splitLine[2], isTaskDone));
             break;
         default:
+            assert emptyList.isEmpty();
             System.out.println("list remains empty.");
         }
     }

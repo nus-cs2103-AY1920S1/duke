@@ -162,9 +162,36 @@ public class TaskManager {
     }
 
     /**
+     * Returns string containing all tasks that is keyword in its description
+     * @param keyword word to match with task description
+     * @return string of tasks
+     */
+    protected String findMatch(String keyword){
+        ArrayList<Task> foundList = new ArrayList<>();
+        int foundTask = 0;
+        for(Task t: todoList){
+            if(t.description.contains(keyword)){
+                foundTask++;
+                foundList.add(t);
+            }
+        }
+        return this.listToString(foundList);
+    }
+
+    private String listToString(ArrayList<Task> taskList){
+        StringBuilder outputMessage = new StringBuilder();
+        int i = taskList.size();
+        for(int x = 1; x <=i; x++){
+            outputMessage.append("\n  " + x + "." + taskList.get(x-1));
+        }
+        return outputMessage.toString();
+    }
+
+    /**
      * Returns number of tasks currently
      * @return number of tasks
      */
+
     protected int getSize(){
         return this.todoList.size();
     }

@@ -20,14 +20,16 @@ public class Parser {
         case "todo":
         case "event":
         case "deadline":
-            return new Command(taskInfo, true, false, false);
+            return new Command(taskInfo, true, false, false, false);
         case "delete":
-            return new Command(taskInfo, false, true, false);
+            return new Command(taskInfo, false, true, false, false);
         case "done":
-            return new Command(taskInfo, false, false, true);
+            return new Command(taskInfo, false, false, true, false);
+        case "find":
+            return new Command(taskInfo, false, false, false, true);
         case "list":
         case "bye":
-            return new Command(taskInfo, false, false, false);
+            return new Command(taskInfo, false, false, false, false);
         default:
             throw new DukeException("Command not recognized");
         }

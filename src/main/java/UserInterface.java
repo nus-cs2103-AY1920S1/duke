@@ -96,10 +96,18 @@ public class UserInterface {
 
     /**
      * Prints list
-     * @param list the list duh
+     * @param list the list
      */
     protected void printList(String list){
         this.print("List:" + list);
+    }
+
+    /**
+     * Prints list of tasks that match keyword given by user
+     * @param list list of tasks
+     */
+    protected void printFind(String list){
+        this.print("Matching tasks:" + list);
     }
 
     /**

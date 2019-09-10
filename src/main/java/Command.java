@@ -7,6 +7,7 @@ public class Command {
     boolean isAdd;
     boolean isDelete;
     boolean isDone;
+    boolean isFind;
     boolean isExit = false;
 
     /**
@@ -16,11 +17,12 @@ public class Command {
      * @param delete if this is a delete command
      * @param done if this is a done command
      */
-    public Command(String[] info, boolean add, boolean delete, boolean done){
+    public Command(String[] info, boolean add, boolean delete, boolean done, boolean find){
         this.info = info;
         this.isAdd = add;
         this.isDelete = delete;
         this.isDone = done;
+        this.isFind = find;
     }
 
     /**
@@ -46,6 +48,9 @@ public class Command {
             fileManager.fileSetDone(Integer.parseInt(info[1]) - 1);
             ui.printDone(task);
             return;
+        }else if(isFind){
+            String foundList = tasks.findMatch(info[1]);
+            ui.printFind(foundList);
         }
         if(info[0].equals("list")){
             ui.printList(tasks.generateList());

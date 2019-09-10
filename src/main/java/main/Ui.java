@@ -32,13 +32,6 @@ public class Ui {
     }
 
     /**
-     * Shows the divider line.
-     */
-    public void showLine() {
-        System.out.println(DIVIDER);
-    }
-
-    /**
      * Returns a welcome message from duke
      *
      * @return a welcome message from duke
@@ -95,7 +88,6 @@ public class Ui {
         }
         StringBuilder sb = new StringBuilder();
         for (String msg : messages) {
-            //sb.append(BLANKSPACE + msg + "\n");
             sb.append(msg + "\n");
         }
         return sb.toString();

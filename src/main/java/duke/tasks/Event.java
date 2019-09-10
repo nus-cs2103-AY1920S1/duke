@@ -20,6 +20,10 @@ public class Event extends Task {
         this.duration = duration;
     }
 
+    public void setDuration(String newDuration){
+        this.duration = newDuration;
+    }
+
     /**
      * Returns a string to represent the event in the storage file.
      * @return Event String in file form

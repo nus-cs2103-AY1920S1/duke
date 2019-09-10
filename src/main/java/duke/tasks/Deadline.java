@@ -20,6 +20,10 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    public void setDeadline(String newDeadline){
+        this.deadline = newDeadline;
+    }
+
     /**
      * Returns a string to represent the deadline in the storage file.
      * @return Deadline String in file form

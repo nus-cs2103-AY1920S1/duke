@@ -54,6 +54,10 @@ public class Task {
         return taskName.contains(toSearch);
     }
 
+    public String getTaskName(){
+        return this.taskName;
+    }
+
     /**
      * Returns Task in string form to be printed.
      * 

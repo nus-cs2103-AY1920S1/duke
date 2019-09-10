@@ -1,14 +1,6 @@
 package duke.parser;
 
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddToDoCommand;
-import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exceptions.DukeException;
 
 /**
@@ -72,6 +64,12 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! The description of the task to find must be specified");
             }
             return new FindCommand(words);
+
+        case "snooze":
+            if (words.length <= 3) {
+                throw new DukeException("☹ OOPS!!! Please specify the new timing");
+            }
+            return new SnoozeCommand(words);
 
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

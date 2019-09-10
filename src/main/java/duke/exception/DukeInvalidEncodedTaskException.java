@@ -1,14 +1,18 @@
 package duke.exception;
 
+/**
+ * Thrown to indicate a failure in reading an encoded task from the storage file.
+ */
 @SuppressWarnings("serial")
 public class DukeInvalidEncodedTaskException extends DukeException {
     /**
-     *  Constructs a <code>DukeInvalidEncodedTaskException</code> that contains information about an encoded task that
-     *  failed to be parsed due to an incorrect number of tokens.
-     *  @param numTaskArgs <code>int</code> number of tokens expected.
-     *  @param taskType type of the encoded <code>Task</code> as a <code>String</code>.
-     *  @param numArgs <code>int</code> number of arguments in the parsed encoded <code>Task</code>
-     *  @param errorSource encoded <code>Task</code> string that failed to be parsed.
+     * Constructs a <code>DukeInvalidEncodedTaskException</code> that contains information about an encoded task that
+     * failed to be parsed due to an incorrect number of tokens.
+     * 
+     * @param numTaskArgs <code>int</code> number of tokens expected.
+     * @param taskType type of the encoded <code>Task</code> as a <code>String</code>.
+     * @param numArgs <code>int</code> number of arguments in the parsed encoded <code>Task</code>
+     * @param errorSource encoded <code>Task</code> string that failed to be parsed.
      */
     public DukeInvalidEncodedTaskException(
         int numTaskArgs, String taskType, int numArgs, String errorSource) {

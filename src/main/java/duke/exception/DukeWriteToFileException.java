@@ -1,7 +1,16 @@
 package duke.exception;
 
+/**
+ * Thrown to indicate a failure in writing an encoded task to the storage file.
+ */
 @SuppressWarnings("serial")
 public class DukeWriteToFileException extends DukeException {
+    /**
+     * Constructs a <code>DukeWriteToFileException</code> that contains information about an action that
+     * triggered a failed write to the storage File.
+     * 
+     * @param errorSource <code>String</code> describing the source of the failed write.
+     */
     public DukeWriteToFileException(String errorSource) {
         super("Failed to write updated TaskList to file", errorSource);
     }

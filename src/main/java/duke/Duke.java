@@ -5,6 +5,7 @@ import duke.command.TaskList;
 import duke.command.Ui;
 import duke.command.Parser;
 
+import duke.exceptions.DukeDuplicateException;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeIllegalDescriptionException;
 import duke.exceptions.DukeIllegalInputException;
@@ -156,7 +157,7 @@ public class Duke extends Application {
             String[] action = userInput.getText().split(" ", 2);
             Parser parser = new Parser(action);
             response = parser.parse();
-        } catch (DukeIllegalDescriptionException e) {
+        } catch (DukeIllegalDescriptionException | DukeDuplicateException e) {
             response = e.getMessage();
         } catch (IllegalArgumentException e) {
             response = new DukeIllegalInputException().getMessage();

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.DukeDuplicateException;
 import duke.exceptions.DukeIllegalDescriptionException;
 
 import duke.task.Deadline;
@@ -34,7 +35,7 @@ public class Parser {
      *
      * @throws DukeIllegalDescriptionException To deal with the illegal and invalid inputs from users.
      */
-    public String parse() throws DukeIllegalDescriptionException {
+    public String parse() throws DukeIllegalDescriptionException, DukeDuplicateException {
         String output = "";
         switch (Command.valueOf(actions[0])) {
         case bye:
@@ -117,7 +118,8 @@ public class Parser {
      *
      * @throws DukeIllegalDescriptionException To deal with the illegal input after to_do command such as no input.
      */
-    private String commandTodo() throws DukeIllegalDescriptionException {
+    private String commandTodo() throws DukeIllegalDescriptionException, DukeDuplicateException {
+        checkDuplicateTodo(actions[1]);
         String output = "";
         try {
             Ui ui = new Ui();
@@ -140,7 +142,7 @@ public class Parser {
      * @throws DukeIllegalDescriptionException To deal with the illegal input after deadline such as
      *                                         without stating /by time.
      */
-    private String commandDeadline() throws DukeIllegalDescriptionException {
+    private String commandDeadline() throws DukeIllegalDescriptionException, DukeDuplicateException {
         String output = "";
         try {
             Ui ui = new Ui();
@@ -150,7 +152,9 @@ public class Parser {
             assert !ddlTime.isEmpty() : "The input time is invalid.";
             SimpleDateFormat ddlFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Date ddlDate = ddlFormat.parse(ddlTime);
-            Task deadline = new Deadline(dl[0], ui.getNewFormatDeadline().format(ddlDate));
+            String newDdlTime = ui.getNewFormatDeadline().format(ddlDate);
+            checkDuplicate(dl[0], newDdlTime);
+            Task deadline = new Deadline(dl[0], newDdlTime);
             TaskList.getList().add(deadline);
             output += ui.printAddTask();
             output += (deadline + "\n");
@@ -170,7 +174,7 @@ public class Parser {
      * @throws DukeIllegalDescriptionException To deal with the illegal input after event such as
      *                                         without stating /at time.
      */
-    private String commandEvent() throws DukeIllegalDescriptionException {
+    private String commandEvent() throws DukeIllegalDescriptionException, DukeDuplicateException {
         String output = "";
         try {
             Ui ui = new Ui();
@@ -185,8 +189,10 @@ public class Parser {
             SimpleDateFormat eventFormatEnd = new SimpleDateFormat("HHmm");
             Date eventDateStart = eventFormatStart.parse(eventStart);
             Date eventDateEnd = eventFormatEnd.parse(eventEnd);
-            Task event = new Event(ev[0], ui.getNewFormatEvStart().format(eventDateStart) +
-                    " to " + ui.getNewFormatEvEnd().format(eventDateEnd));
+            String newEventTime = ui.getNewFormatEvStart().format(eventDateStart) +
+                    " to " + ui.getNewFormatEvEnd().format(eventDateEnd);
+            checkDuplicate(ev[0], newEventTime);
+            Task event = new Event(ev[0], newEventTime);
             TaskList.getList().add(event);
             output += ui.printAddTask();
             output += (event + "\n");
@@ -247,6 +253,22 @@ public class Parser {
             throw new DukeIllegalDescriptionException(actions[0]);
         }
         return output;
+    }
+
+    private void checkDuplicateTodo(String string) throws DukeDuplicateException {
+        for (Task tasks : TaskList.getList()) {
+            if (tasks.toString().contains(string)) {
+                throw new DukeDuplicateException();
+            }
+        }
+    }
+
+    private void checkDuplicate(String thing, String time) throws DukeDuplicateException {
+        for (Task tasks : TaskList.getList()) {
+            if (tasks.toString().contains(thing) && tasks.toString().contains(time)) {
+                throw new DukeDuplicateException();
+            }
+        }
     }
 
 

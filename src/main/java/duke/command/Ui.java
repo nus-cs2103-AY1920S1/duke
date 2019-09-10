@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exceptions.DukeDuplicateException;
 import duke.exceptions.DukeIllegalDescriptionException;
 import duke.exceptions.DukeIllegalInputException;
 
@@ -66,6 +67,8 @@ public class Ui {
                 }
             } catch (IllegalArgumentException e) {
                 throw new DukeIllegalInputException();
+            } catch (DukeDuplicateException e) {
+                System.out.println(e.getMessage());
             }
         }
     }

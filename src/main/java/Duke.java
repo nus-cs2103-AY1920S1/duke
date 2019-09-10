@@ -22,6 +22,10 @@ public class Duke {
         loadFile();
     }
 
+    /**
+     * Used to start Duke application via the CLI
+     */
+
     public static void main(String[] args) throws IOException {
 
         Scanner scan = new Scanner(System.in);
@@ -37,6 +41,10 @@ public class Duke {
 
         ui.sayGoodbye();
     }
+
+    /**
+     * Used to start Duke application via the CLI
+     */
 
     String getResponse(String input) throws IOException {
         if (!input.equals("bye")) {

@@ -66,13 +66,25 @@ class Ui {
         printToConsoleAndGui("Nice! I've marked this task as done:\n" + taskList.get(taskNumber).toString());
     }
 
+    /**
+     * Returns the GUI message
+     */
+
     String getGuidedUserInterfaceMsg() {
         return guidedUserInterfaceMsg;
     }
 
+    /**
+     * Sets the GUI message
+     */
+
     void setGuidedUserInterfaceMsg(String guidedUserInterfaceMsg) {
         Ui.guidedUserInterfaceMsg = guidedUserInterfaceMsg;
     }
+
+    /**
+     * Prints the output to both the console and sets the GUI message
+     */
 
     void printToConsoleAndGui (String message){
         System.out.println(message);

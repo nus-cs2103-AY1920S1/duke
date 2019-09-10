@@ -1,3 +1,7 @@
+/**
+ * The class used to split user input
+ */
+
 class InputSplitter {
 
     private String input;
@@ -6,6 +10,11 @@ class InputSplitter {
     InputSplitter(String input){
         this.input = input;
     }
+
+    /**
+     * Returns a String array containing the split input.
+     * @param type Output changes based on what tye of task in parsed in
+     */
 
     String[] splitInput (String type){
         String[] output = new String[2];
@@ -16,6 +25,7 @@ class InputSplitter {
                 "remember to use the /by keyword.\n";
         final String ERROR_EVENT = "OOPS!!! Incorrect description for event; " +
                 "remember to use the /at keyword.\n";
+        final String ERROR_FIND = "OOPS!!! Incorrect format for the 'find' command.\n";
 
         switch (type){
 
@@ -42,6 +52,14 @@ class InputSplitter {
                 output[1] = input.split(" /at ")[1];
             } catch (IndexOutOfBoundsException err) {
                 ui.printToConsoleAndGui(ERROR_EVENT);
+            }
+            break;
+
+        case "find":
+            try {
+                output[0] = input.split(" ", 2)[1];
+            } catch (IndexOutOfBoundsException err) {
+                ui.printToConsoleAndGui(ERROR_FIND);
             }
             break;
 

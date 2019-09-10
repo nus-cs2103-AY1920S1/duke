@@ -35,11 +35,8 @@ public class InputParser {
         String at;
         String firstWord;
         Ui ui = new Ui();
-        String guidedUserInterfaceMsg;
         InputSplitter inputSplitter = new InputSplitter(input);
-        final String MSG_LIST = "Here are the tasks in your list:\n";
-        final String MSG_FIND = "Here are the matching tasks in your list:\n";
-        final String ERROR_FIND = "OOPS!!! Incorrect format for the 'find' command.\n";
+        OutputLister outputLister = new OutputLister(taskList);
         final String MSG_UNKNOWN = "OOPS!!! I'm sorry, but I don't know what that means\n";
 
         firstWord = input.split(" ")[0];
@@ -70,15 +67,7 @@ public class InputParser {
             break;
 
         case "list":
-            System.out.println(MSG_LIST);
-            guidedUserInterfaceMsg = MSG_LIST;
-
-            for (int a = 0; a < taskList.size(); a++) {
-                System.out.println((a + 1) + ". " + taskList.get(a).toString());
-                guidedUserInterfaceMsg += (a + 1) + ". " + taskList.get(a).toString() + "\n";
-            }
-            ui.setGuidedUserInterfaceMsg(guidedUserInterfaceMsg);
-            System.out.println();
+            outputLister.listTasks();
             break;
 
         case "done":
@@ -92,25 +81,9 @@ public class InputParser {
             break;
 
         case "find":
-            try {
-                desc = input.split(" ")[1];
-                int findCounter = 0;
-                System.out.println(MSG_FIND);
-                guidedUserInterfaceMsg = MSG_FIND;
-                for (int a = 0; a < taskList.size(); a++) {
-                    if (taskList.get(a).description.contains(desc)) {
-                        findCounter++;
-                        System.out.println(findCounter + ". " + taskList.get(a).toString());
-                        guidedUserInterfaceMsg += findCounter + ". " + taskList.get(a).toString() +"\n";
-                    }
-                }
-                ui.setGuidedUserInterfaceMsg(guidedUserInterfaceMsg);
-                break;
-            } catch (IndexOutOfBoundsException err) {
-                System.out.println(ERROR_FIND);
-                ui.setGuidedUserInterfaceMsg(ERROR_FIND);
-                break;
-            }
+            desc = inputSplitter.splitInput("find")[0];
+            outputLister.findTasks(desc);
+            break;
 
         default:
             ui.printToConsoleAndGui(MSG_UNKNOWN);

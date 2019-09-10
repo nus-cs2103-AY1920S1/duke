@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,11 +21,15 @@ public class Event extends Task {
      * @param at The time at which the event occurs.
      * @throws ParseException If input date format is invalid
      */
-    public Event(String description, String at) throws ParseException {
+    public Event(String description, String at) throws DukeException {
         super(description);
         this.at = at;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
-        this.date = formatter.parse(at);
+        try {
+            this.date = formatter.parse(at);
+        } catch (ParseException e) {
+            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
+        }
     }
 
     /**
@@ -32,13 +38,17 @@ public class Event extends Task {
      * @param description The description of the event.
      * @param isDone Define whether an event is done.
      * @param at The time at which the event occurs.
-     * @throws ParseException If input date format is invalid
+     * @throws DukeException If input date format is invalid
      */
-    public Event(String description, boolean isDone, String at) throws ParseException {
+    public Event(String description, boolean isDone, String at) throws DukeException {
         super(description, isDone);
         this.at = at;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
-        this.date = formatter.parse(at);
+        try {
+            this.date = formatter.parse(at);
+        } catch (ParseException e) {
+            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
+        }
     }
 
     @Override
@@ -60,8 +70,14 @@ public class Event extends Task {
         return at;
     }
 
-    public void setAt(String at) {
+    public void setAt(String at) throws DukeException {
         this.at = at;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
+        try {
+            this.date = formatter.parse(at);
+        } catch (ParseException e) {
+            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
+        }
     }
 
     public Date getDate() {

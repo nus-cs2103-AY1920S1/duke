@@ -58,10 +58,55 @@ public class Parser {
             case "find":
                 ArrayList<Task> listFound = findTasks(words[1]);
                 return ui.printList(listFound);
+            case "update":
+                Task updatedTask = updateTask(userInput, list, words);
+                return ui.printUpdateTask(updatedTask);
             default:
                 Task newTask = addNewTask(userInput, list, words, firstWord);
                 return ui.printAddTask(newTask, list);
         }
+    }
+
+    /** w d
+     * desc, date
+     * @param userInput
+     * @param list
+     * @param words
+     * @return
+     */
+    private Task updateTask(String userInput, ArrayList<Task> list, String[] words) throws DukeException {
+        int index = Integer.parseInt(words[1]);
+        Task task = list.get(index - 1);
+
+        if (task instanceof ToDo) {
+            updateToDo(userInput, (ToDo) task);
+        } else if (task instanceof Deadline) {
+            updateDeadline(userInput, (Deadline) task);
+        } else if (task instanceof Event) {
+            updateEvent(userInput, (Event) task);
+        } else {
+            throw new DukeException("Task is neither a to-do, a deadline nor an event");
+        }
+        return task;
+    }
+
+    private void updateEvent(String userInput, Event task) throws DukeException {
+        String description = userInput.split(" ", 3)[2].split("w/", 2)[1].split(" d/", 2)[0];
+        String by = userInput.split(" ", 3)[2].split("d/", 2)[1];
+        task.setDescription(description);
+        task.setAt(by);
+    }
+
+    private void updateDeadline(String userInput, Deadline task) throws DukeException {
+        String description = userInput.split(" ", 3)[2].split("w/", 2)[1].split(" d/", 2)[0];
+        String by = userInput.split(" ", 3)[2].split("d/", 2)[1];
+        task.setDescription(description);
+        task.setBy(by);
+    }
+
+    private void updateToDo(String userInput, ToDo task) {
+        String description = userInput.split(" ", 3)[2].split("w/", 2)[1];
+        task.setDescription(description);
     }
 
     /**
@@ -108,13 +153,9 @@ public class Parser {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
 
-        try {
-            String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
-            String at = userInput.split(" ", 2)[1].split(" /at ", 2)[1];
-            return new Event(description, at);
-        } catch (ParseException e) {
-            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
-        }
+        String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
+        String at = userInput.split(" ", 2)[1].split(" /at ", 2)[1];
+        return new Event(description, at);
     }
 
     /**
@@ -130,13 +171,9 @@ public class Parser {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
 
-        try {
-            String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
-            String by = userInput.split(" ", 2)[1].split(" /by ", 2)[1];
-            return new Deadline(description, by);
-        } catch (ParseException e) {
-            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
-        }
+        String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
+        String by = userInput.split(" ", 2)[1].split(" /by ", 2)[1];
+        return new Deadline(description, by);
     }
 
     /**

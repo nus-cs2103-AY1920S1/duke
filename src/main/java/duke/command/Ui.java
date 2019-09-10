@@ -82,4 +82,9 @@ public class Ui {
                 "  " + task.toString() + "\n" +
                 "Now you have " + list.size() + " tasks in the list");
     }
+
+    String printUpdateTask(Task task) {
+        return ("Noted. I've edited this task:\n" +
+                "  " + task.toString() + "\n");
+    }
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,11 +21,15 @@ public class Deadline extends Task {
      * @param by The time at which the deadline is due.
      * @throws ParseException If input date format is invalid
      */
-    public Deadline(String description, String by) throws ParseException {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         this.by = by;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
-        this.date = formatter.parse(by);
+        try {
+            this.date = formatter.parse(by);
+        } catch (ParseException e) {
+            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
+        }
     }
 
     /**
@@ -34,11 +40,15 @@ public class Deadline extends Task {
      * @param by The time at which the deadline is due.
      * @throws ParseException If input date format is invalid
      */
-    public Deadline(String description, boolean isDone, String by) throws ParseException {
+    public Deadline(String description, boolean isDone, String by) throws DukeException {
         super(description, isDone);
         this.by = by;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
-        this.date = formatter.parse(by);
+        try {
+            this.date = formatter.parse(by);
+        } catch (ParseException e) {
+            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
+        }
     }
 
     @Override
@@ -60,8 +70,14 @@ public class Deadline extends Task {
         return by;
     }
 
-    public void setBy(String by) {
+    public void setBy(String by) throws DukeException {
         this.by = by;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
+        try {
+            this.date = formatter.parse(by);
+        } catch (ParseException e) {
+            throw new DukeException(e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
+        }
     }
 
     public Date getDate() {

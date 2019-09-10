@@ -76,7 +76,7 @@ public class Storage {
                     list.add(deadline);
                 }
             }
-        } catch (FileNotFoundException | ParseException e) {
+        } catch (FileNotFoundException | DukeException e) {
             throw new DukeException(e.getMessage());
         }
 

@@ -1,9 +1,14 @@
 package duke.task;
 
+import java.text.SimpleDateFormat;
+
 /**
  * A prototype object representation of a user task with a description.
  */
 public abstract class Task {
+    protected static final SimpleDateFormat DATE_WRITER = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    protected static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("EEE, dd MMM yyyy, h:mm a");
+
     protected boolean isComplete;
     protected String description;
 

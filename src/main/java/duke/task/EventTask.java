@@ -1,15 +1,11 @@
 package duke.task;
 
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 /**
  * An object representation of a user task occurring at a specified time.
  */
 public class EventTask extends Task {
-    private static final SimpleDateFormat DATE_WRITER = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("EEE, dd MMM yyyy, h:mm a");
-
     protected Date atTime;
 
     /**
@@ -40,13 +36,13 @@ public class EventTask extends Task {
             "E | %d | %s | %s",
             this.isComplete ? 1 : 0,
             this.description,
-            DATE_WRITER.format(this.atTime)
+            Task.DATE_WRITER.format(this.atTime)
         );
     }
 
     @Override
     public String toString() {
         // Adds the type of the Task and its time period to the base toString() representation
-        return String.format("[E]%s (at: %s)", super.toString(), DATE_FORMATTER.format(this.atTime));
+        return String.format("[E]%s (at: %s)", super.toString(), Task.DATE_FORMATTER.format(this.atTime));
     }
 }

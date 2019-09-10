@@ -1,15 +1,11 @@
 package duke.task;
 
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 /**
  * An object representation of a user task to be completed by some deadline.
  */
 public class DeadlineTask extends Task {
-    private static final SimpleDateFormat DATE_WRITER = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("EEE, dd MMM yyyy, h:mm a");
-
     protected Date byDeadline;
 
     /**
@@ -40,13 +36,13 @@ public class DeadlineTask extends Task {
             "D | %d | %s | %s",
             this.isComplete ? 1 : 0,
             this.description,
-            DATE_WRITER.format(this.byDeadline)
+            Task.DATE_WRITER.format(this.byDeadline)
         );
     }
 
     @Override
     public String toString() {
         // Adds the type of the Task and its deadline to the base toString() representation
-        return String.format("[D]%s (by: %s)", super.toString(), DATE_FORMATTER.format(this.byDeadline));
+        return String.format("[D]%s (by: %s)", super.toString(), Task.DATE_FORMATTER.format(this.byDeadline));
     }
 }

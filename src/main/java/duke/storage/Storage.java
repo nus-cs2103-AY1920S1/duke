@@ -26,6 +26,8 @@ public class Storage {
     private String filePath;
     private static final int FULL_COMMAND_INDEX = 0;
     private static final int TASK_STATUS_INDEX = 1;
+    private static final String SAVE_FAIL_MESSAGE = "Data could not be saved."
+            + "Please check the hard disk file.\n";
 
     /**
      * Constructs a Storage class that is connected to the specified file path.
@@ -46,15 +48,7 @@ public class Storage {
             Scanner fileScanner = new Scanner(dataFile);
             TaskList tasks = new TaskList();
             while (fileScanner.hasNextLine()) {
-                String dataLine = fileScanner.nextLine();
-                String fullCommand = getFullCommand(dataLine);
-                Command command = Parser.parse(fullCommand);
-                command.setTaskListToExecuteOn(tasks);
-                command.execute();
-                boolean isTaskDone = getTaskStatus(dataLine).equals("1");
-                if (isTaskDone) {
-                    tasks.get(tasks.size() - 1).setAsDone();
-                }
+                loadTasksFromHardDisk(fileScanner, tasks);
             }
             fileScanner.close();
             return tasks;
@@ -64,11 +58,36 @@ public class Storage {
     }
 
     /**
+     * Loads tasks from the hard disk into the specified task list using the specified scanner.
+     * @param fileScanner The specified scanner.
+     * @param tasks The specified task list.
+     */
+    private void loadTasksFromHardDisk(Scanner fileScanner, TaskList tasks) {
+        String dataLine = fileScanner.nextLine();
+        String input = getInput(dataLine);
+        Command command = getCommand(input);
+        command.setTaskListToExecuteOn(tasks);
+        command.execute();
+        if (getTaskStatus(dataLine).equals("1")) {
+            tasks.get(tasks.size() - 1).setAsDone();
+        }
+    }
+
+    /**
+     * Parses the specified input and returns the appropriate command.
+     * @param input The specified input.
+     * @return The appropriate command.
+     */
+    private Command getCommand(String input) {
+        return Parser.parse(input);
+    }
+
+    /**
      * Returns the full command in the specified line of data.
      * @param dataLine The specified line of data.
      * @return The full command in the specified line of data.
      */
-    private String getFullCommand(String dataLine) {
+    private String getInput(String dataLine) {
         return dataLine.split(" \\| ")[FULL_COMMAND_INDEX];
     }
 
@@ -97,7 +116,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Data could not be saved. Please check the hard disk file.\n");
+            throw new DukeException(SAVE_FAIL_MESSAGE);
         }
     }
 

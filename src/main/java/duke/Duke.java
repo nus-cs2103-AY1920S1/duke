@@ -19,6 +19,8 @@ import duke.ui.TextUi;
  */
 public class Duke {
 
+    private static final String DATA_FILE_PATH = "src/main/java/duke/data/tasks.txt";
+
     private Storage storage;
     private TaskList tasks;
     private TextUi ui;
@@ -39,36 +41,10 @@ public class Duke {
     }
 
     /**
-     * Constructs a Duke instance (so that the application can be launched).
+     * Constructs a Duke instance (used for the Launcher class).
      */
     public Duke() {
 
-    }
-
-    /**
-     * Runs the Duke chat bot until the exit command is given.
-     */
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readInput();
-                ui.showHorizontalBorder();
-                Command command = Parser.parse(input);
-                command.setTaskListToExecuteOn(tasks);
-                CommandResult commandResult = command.execute();
-                ui.showMessage(commandResult.getMessage());
-                isExit = command.isExit();
-                storage.save(tasks);
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            } finally {
-                ui.showHorizontalBorder();
-                ui.showEmptyLine();
-            }
-        }
-        ui.close();
     }
 
     /**
@@ -76,21 +52,25 @@ public class Duke {
      * @param input The specified input.
      * @return The appropriate message.
      */
-    private String process(String input) {
-        Command command = Parser.parse(input);
+    private String processInput(String input) {
+        Command command = getCommand(input);
         command.setTaskListToExecuteOn(tasks);
         CommandResult commandResult = command.execute();
+        try {
+            storage.save(tasks);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
         return commandResult.getMessage();
     }
 
     /**
-     * Executes the program.
-     * @param args Command line arguments (unused).
+     * Parses the specified input and returns the appropriate command.
+     * @param input The specified input.
+     * @return The appropriate command.
      */
-    public static void main(String[] args) {
-        // new Duke("src/main/java/duke/data/tasks.txt").run();
-        //Application.launch(args);
-        new Duke("src/main/java/duke/data/tasks.txt");
+    private Command getCommand(String input) {
+        return Parser.parse(input);
     }
 
     /**
@@ -98,8 +78,8 @@ public class Duke {
      * @param input The specified input.
      * @return Duke's response based on the specified input.
      */
-    public String getResponse(String input) {
-        return new Duke("src/main/java/duke/data/tasks.txt").process(input);
+    public String execute(String input) {
+        return new Duke(DATA_FILE_PATH).processInput(input);
     }
 
 }

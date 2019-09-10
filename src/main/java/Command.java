@@ -3,13 +3,15 @@ public class Command {
     boolean add;
     boolean delete;
     boolean done;
+    boolean isFind;
     boolean isExit = false;
 
-    public Command(String[] info, boolean add, boolean delete, boolean done){
+    public Command(String[] info, boolean add, boolean delete, boolean done, boolean find){
         this.info = info;
         this.add = add;
         this.delete = delete;
         this.done = done;
+        this.isFind = find;
     }
 
     protected void execute(TaskManager tasks, UserInterface ui, FileManager fileManager) throws DukeException{
@@ -28,6 +30,9 @@ public class Command {
             fileManager.fileSetDone(Integer.parseInt(info[1]) - 1);
             ui.printDone(task);
             return;
+        }else if(isFind){
+            String foundList = tasks.findMatch(info[1]);
+            ui.printFind(foundList);
         }
         if(info[0].equals("list")){
             ui.printList(tasks.generateList());

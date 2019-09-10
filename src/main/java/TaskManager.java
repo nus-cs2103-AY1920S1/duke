@@ -104,6 +104,27 @@ public class TaskManager {
         return outputMessage.toString();
     }
 
+    protected String findMatch(String keyword){
+        ArrayList<Task> foundList = new ArrayList<>();
+        int foundTask = 0;
+        for(Task t: todoList){
+            if(t.description.contains(keyword)){
+                foundTask++;
+                foundList.add(t);
+            }
+        }
+        return this.listToString(foundList);
+    }
+
+    private String listToString(ArrayList<Task> taskList){
+        StringBuilder outputMessage = new StringBuilder();
+        int i = taskList.size();
+        for(int x = 1; x <=i; x++){
+            outputMessage.append("\n  " + x + "." + taskList.get(x-1));
+        }
+        return outputMessage.toString();
+    }
+
     protected int getSize(){
         return this.todoList.size();
     }

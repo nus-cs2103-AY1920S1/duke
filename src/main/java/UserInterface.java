@@ -58,6 +58,10 @@ public class UserInterface {
         this.print("List:" + list);
     }
 
+    protected void printFind(String list){
+        this.print("Matching tasks:" + list);
+    }
+
     protected String readLine(){
         return sc.nextLine();
     }

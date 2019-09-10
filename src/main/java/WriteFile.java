@@ -48,7 +48,7 @@ public class WriteFile {
         for (int x = 0; x < taskArr.size(); x++) {
             Task task = taskArr.get(x);
             String typeOfTask = String.valueOf(task.toString().charAt(1));
-            String status = task.getStatusIcon() == "\u2713" ? "1" : "0";
+            String status = task.isDone() ? "1" : "0";
             String desc = task.getDescription();
 
             pw.printf(typeOfTask + " | " + status + " | " + desc);

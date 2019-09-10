@@ -29,7 +29,7 @@ public class TaskListTest {
             tasks.addTask(newTask);
             tasks.markTaskDone(0);
         } catch (Exception e) {
-            assertEquals("☹ The task is already marked done.", e.getMessage());
+            assertEquals("The task is already marked done.", e.getMessage());
         }
 
     }

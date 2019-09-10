@@ -74,6 +74,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Contains the image and message of Duke.
+     *
+     * @param text Text to display.
+     * @param img Icon for user.
+     * @return Flipped horizontal dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

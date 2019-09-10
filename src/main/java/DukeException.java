@@ -14,7 +14,7 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        String emoji = "\uD83D\uDE41";
+        String emoji = "\uD83D\uDE41"; // unicode represents frowning sad face
         String errMessage = emoji + " " + this.getMessage();
 
         return errMessage;

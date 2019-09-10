@@ -25,12 +25,12 @@ public class DeadlineCommand implements Command {
      * @param ui the Ui object dealing with interactions with the user
      * @param tasks the TaskList object containing the existing list of tasks
      */
-    public void execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
         Deadline dl = new Deadline(task, time, false);
         tasks.addTask(dl);
-        ui.output(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
-                dl.toString(), tasks.getTasksSize()));
         storage.appendToFile(dl);
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
+                dl.toString(), tasks.getTasksSize());
     }
 
     public boolean isRunning() {

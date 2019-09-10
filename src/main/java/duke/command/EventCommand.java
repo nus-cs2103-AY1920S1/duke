@@ -25,12 +25,13 @@ public class EventCommand implements Command {
      * @param ui the Ui object dealing with interactions with the user
      * @param tasks the TaskList object containing the existing list of tasks
      */
-    public void execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
+    public String execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
         Event ev = new Event(task, time, false);
         tasks.addTask(ev);
-        ui.output(String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
-                ev.toString(), tasks.getTasksSize()));
         storage.appendToFile(ev);
+        return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
+                ev.toString(), tasks.getTasksSize());
+
     }
 
     public boolean isRunning() {

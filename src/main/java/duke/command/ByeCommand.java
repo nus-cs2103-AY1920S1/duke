@@ -11,8 +11,8 @@ public class ByeCommand implements Command {
     public ByeCommand() {
     }
 
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
-        ui.sayBye();
+    public String execute(Storage storage, Ui ui, TaskList tasks) {
+        return "Bye. Hope to see you again soon!";
     }
 
     public boolean isRunning() {

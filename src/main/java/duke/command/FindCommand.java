@@ -11,15 +11,16 @@ public class FindCommand implements Command {
         this.keyword = keyword;
     }
 
-    public void execute(Storage storage, Ui ui, TaskList tasks) {
+    public String execute(Storage storage, Ui ui, TaskList tasks) {
         int counter = 1;
-        ui.output("Here are the matching tasks in your list: ");
+        String output = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < tasks.getTasksSize(); i++) {
             if (tasks.getTask(i).getName().contains(keyword)) {
-                ui.output(counter + ". " + tasks.getTask(i).toString());
+                output = output + counter + ". " + tasks.getTask(i).toString() + "\n";
                 counter++;
             }
         }
+        return output;
     }
 
     public boolean isRunning() {

@@ -67,6 +67,7 @@ public class Parser {
             String by = subString(words, i + 1, words.length);
             return new Deadline(description, by);
         } else {
+            assert words[0].equals("event") : "Instruction type should be event";
             int i = findIdx(words, "/at");
             String description = subString(words, 1, i);
             String at = subString(words, i + 1, words.length);
@@ -95,6 +96,9 @@ public class Parser {
         if ((fw.equals("done") || fw.equals("delete")) && words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be empty.");
         }
+        if ((fw.equals("done") || fw.equals("delete")) && Integer.parseInt(words[1]) < 1) {
+            throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be less than 1.");
+        }
         if (fw.equals("find") && words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The keyword of a " + fw + " cannot be empty.");
         }
@@ -111,7 +115,11 @@ public class Parser {
     public static Command parse(String s) throws DukeException {
         String[] words = s.split(" ");
         checkIllegalInstruction(words);
-        switch (words[0]) {
+        String fw = words[0];
+        assert fw.equals("bye") || fw.equals("done") || fw.equals("delete")
+                || fw.equals("list") || fw.equals("find") || fw.equals("todo")
+                || fw.equals("event") || fw.equals("deadline") : "Invalid user input";
+        switch (fw) {
         case "bye":
             return new ExitCommand();
         case "done":
@@ -123,6 +131,8 @@ public class Parser {
         case "find":
             return new FindCommand(words[1]);
         default:
+            assert fw.equals("todo") || fw.equals("event") || fw.equals("deadline")
+                    : "First word should be todo / deadline / event";
             Task t = parseTask(words);
             return new AddCommand(t);
         }

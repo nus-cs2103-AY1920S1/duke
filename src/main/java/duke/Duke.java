@@ -7,6 +7,8 @@ import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
 
+import java.io.File;
+
 /**
  * Represents <code>Duke</code>, a Personal Assistant Chatbot that helps a 
  * person to keep track of various things.
@@ -29,6 +31,7 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
+        assert new File("data/tasks.txt").exists() : "tasks.txt not found";
         storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
@@ -46,6 +49,7 @@ public class Duke {
      */
     private Duke(String filePath) {
         ui = new Ui();
+        assert new File(filePath).exists() : "File not found";
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());

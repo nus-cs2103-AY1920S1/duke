@@ -3,3 +3,4 @@ T | ✓ | read books
 E | ✓ | project meeting | tomorrow 2-4pm
 D | ✘ | project | tomorrow
 T | ✘ | birdwatching
+E | ✘ | team presentation | tomorrow 12-2pm

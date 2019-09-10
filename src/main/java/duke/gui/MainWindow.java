@@ -2,7 +2,6 @@ package duke.gui;
 
 import duke.Duke;
 import duke.core.Ui;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;

@@ -41,6 +41,9 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
         }
+
+        assert file.exists() : "Attempting to proceed despite failure to create File!";
+
         // File exists: bind a Scanner to read input directly from the file when needed
         this.fileReader = new Scanner(file);
     }

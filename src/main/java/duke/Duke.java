@@ -77,12 +77,18 @@ public class Duke extends Application {
             System.exit(1);
         }
 
+        assert this.fileMgr instanceof Storage :
+            "Attempting to proceed without succesfully creating a Storage!";
+
         // Attempt to re-construct TaskList from data in file
         try {
             tasks = fileMgr.readTaskList();
         } catch (DukeException e) {
             tasks = new TaskList();
         }
+
+        assert this.tasks instanceof TaskList :
+            "Attempting to proceed without successfully creating a TaskList!";
     }
 
     // ======================== DUKE APPLICATON WITH GRAPHICAL USER INTERFACE ========================

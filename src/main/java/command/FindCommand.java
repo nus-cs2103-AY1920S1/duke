@@ -26,6 +26,7 @@ public class FindCommand extends Command {
             throw new DukeException("Please enter a keyword to find!");
         }
         this.keyword = keyword;
+        assert keyword.length() > 0: "There should be a keyword to find";
     }
 
     /**

@@ -31,7 +31,7 @@ public class Storage {
     public Storage(String filePath){
         this.filePath = filePath;
         File file = new File(filePath);
-        isValidFilePath = file.exists() ? true : false;
+        isValidFilePath = file.exists();
     }
 
     public boolean isValidFilePath() {

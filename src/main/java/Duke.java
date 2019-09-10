@@ -60,7 +60,6 @@ public class Duke {
      * @return Duke's response to the full command in String format.
      */
     public String run(String fullCommand) {
-
         String response = "";
         //response += Ui.DIVIDER + "\n";
         try {

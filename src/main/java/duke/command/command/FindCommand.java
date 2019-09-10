@@ -1,7 +1,8 @@
 package duke.command.command;
 
 import duke.command.Command;
-import duke.task.TasksController;
+import duke.command.CommandType;
+import error.command.CommandCreationException;
 import error.ui.UiException;
 
 /***
@@ -9,19 +10,11 @@ import error.ui.UiException;
  * Command to find tasks.
  * </p>
  */
-public class FindCommand implements Command {
-    private TasksController tasksController;
+public class FindCommand extends Command {
     private String searchParameter;
 
-    /***
-     * <p>
-     * Finds tasks that contains a particular substring.
-     * </p>
-     * @param tasksController controller for duke.task list to be searched.
-     * @param arguments substring to search for.
-     */
-    public FindCommand(TasksController tasksController, String arguments) {
-        this.tasksController = tasksController;
+    public FindCommand(String arguments) throws CommandCreationException {
+        super(CommandType.FIND);
         searchParameter = arguments;
     }
 

@@ -1,7 +1,8 @@
 package duke.command.command;
 
 import duke.command.Command;
-import duke.task.TasksController;
+import duke.command.CommandType;
+import error.command.CommandCreationException;
 import error.ui.UiException;
 
 /***
@@ -9,20 +10,17 @@ import error.ui.UiException;
  * Command to mark tasks as done.
  * </p>
  */
-public class DoneCommand implements Command {
-    private TasksController tasksController;
+public class DoneCommand extends Command {
     private int completedTaskIndex;
+    private static final String INVALID_INDEX_MESSAGE = "☹ OOPS!!! PLease enter a valid index! :-(";
 
-    /***
-     * <p>
-     * DoneCommand constructor.
-     * </p>
-     * @param tasksController controller for duke.task list that contains duke.task.
-     * @param argument index of duke.task to be marked as done.
-     */
-    public DoneCommand(TasksController tasksController, String argument) {
-        this.tasksController = tasksController;
-        completedTaskIndex = Integer.valueOf(argument) - 1;
+    public DoneCommand(String doneIndex) throws CommandCreationException {
+        super(CommandType.DONE);
+        try {
+            completedTaskIndex = Integer.parseInt(doneIndex) - 1;
+        } catch (NumberFormatException e) {
+            throw new CommandCreationException(INVALID_INDEX_MESSAGE);
+        }
     }
 
     /***

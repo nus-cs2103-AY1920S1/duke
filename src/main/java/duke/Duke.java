@@ -20,9 +20,7 @@ import java.util.Optional;
 
 public class Duke implements UiActivity {
     private UiController ui;
-    private CommandFactory factory;
-    private boolean guiEnabled;
-
+    private CommandFactory commandFactory;
 
     public static void main(String[] args) {
         Duke duke = new Duke();
@@ -34,7 +32,7 @@ public class Duke implements UiActivity {
                 guiEnabled = false;
             } else {
                 System.out.println("Invalid arguments.");
-                System.exit(0);
+                System.exit(1);
             }
         }
 
@@ -66,21 +64,21 @@ public class Duke implements UiActivity {
         TasksController tasks = TasksController.fromStorage(storage, ui);
 
         // Initialize command factory
-        factory = new CommandFactory(tasks, ui);
+        commandFactory = new CommandFactory(tasks, ui);
     }
 
     @Override
     public void onInputReceived(String input) {
         try {
-            Optional<? extends Command> command = factory.parse(input);
-
+            // Get command and execute
+            Optional<Command> command = commandFactory.parse(input);
             if (command.isPresent()) {
                 command.get().execute();
             }
 
         } catch (UiException e) {
             System.out.println("FATAL: Ui stopped working.");
-            stopActivity();
+            System.exit(1);
         }
     }
 

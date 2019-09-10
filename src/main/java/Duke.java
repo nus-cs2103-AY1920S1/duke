@@ -46,7 +46,7 @@ public class Duke {
 
         printGreeting();
         String nextLine = ui.nextLine();
-        assert line != null : "Ui.nextLine() returned null.";
+        assert nextLine != null : "Ui.nextLine() returned null.";
 
         // Keep reading input until the bye command is received.
         while (true) {

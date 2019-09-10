@@ -72,9 +72,19 @@ public class Parser {
             if (!moreThanOne) {
                 throw new DukeException("Sorry, you need to input something to find what you're looking for.");
             }
-
-            return ui.format("Here are all the matching tasks with that name",
-                    true, (String[]) findAllTaskWithName(words[1]).toArray());
+            try {
+                ArrayList<String> taskWithName = findAllTaskWithName(words[1]);
+                String[] tasksInArray = taskWithName.toArray(new String[taskWithName.size()]);
+                return ui.format("Here are all the matching tasks with that name",
+                        true, tasksInArray);
+            } catch (IllegalArgumentException e) {
+                try {
+                    return "I couldn't find what any tasks with that name, " +
+                            "perhaps you meant \"" + spellCheck.suggest(words[1]) + "\" instead?";
+                } catch (DukeException e2) {
+                    throw new DukeException(e.getMessage());
+                }
+            }
         }
         case "bye": {
             isExit = true;
@@ -165,7 +175,7 @@ public class Parser {
         }
     }
 
-    private ArrayList<String> findAllTaskWithName(String name) throws DukeException {
+    private ArrayList<String> findAllTaskWithName(String name) throws IllegalArgumentException {
         ArrayList<Task> tempTaskList = taskList.getList();
         ArrayList<String> listWithMatchingName = new ArrayList<>();
         for (Task t : tempTaskList) {
@@ -174,7 +184,7 @@ public class Parser {
             }
         }
         if (listWithMatchingName.isEmpty()) {
-            throw new DukeException("Oh looks like there's no tasks with that name in your list");
+            throw new IllegalArgumentException("Oh looks like there's no tasks with that name in your list");
         }
         return listWithMatchingName;
     }

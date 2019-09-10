@@ -36,6 +36,7 @@ public class SpellCheck {
     }
 
     public String suggest(String word) throws DukeException {
+        dict.updateWordList();
         Iterator<String> it = dict.getWordList().iterator();
         PriorityQueue<Pair<String, Integer>> suggestions =
                 new PriorityQueue<>((p1, p2) -> p1.getValue() - p2.getValue());

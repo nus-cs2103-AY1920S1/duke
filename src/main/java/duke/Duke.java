@@ -27,11 +27,9 @@ public class Duke {
 
     /**
      * Constructor which instantiates a ui, data storage, and attempts loading save dat from the filepath given.
-     *
-     * @param filePath the location of the save file for duke
      */
-    public Duke(String filePath) throws DukeException {
-        DataStorage storage = new DataStorage(filePath);
+    public Duke( ) throws DukeException {
+        DataStorage storage = new DataStorage();
         TaskList tasks;
         try {
             tasks = new TaskList();

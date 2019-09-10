@@ -16,7 +16,7 @@ public class DeadlineTask extends Task {
      * @param task a string that defines the deadline task. a deadline task requires a /by to split it's name and time.
      */
     public DeadlineTask(String task) {
-        super(task);
+        super(task, "D");
         assert task != null || !task.equals("") : "task should not be null";
         String[] taskSplit = task.split("/by");
         if (taskSplit.length < 2) {
@@ -45,7 +45,7 @@ public class DeadlineTask extends Task {
      * @param taskTime    The Time of the task represented by a string.
      */
     public DeadlineTask(String isCompleted, String taskName, String taskTime) {
-        super(taskName, Boolean.parseBoolean(isCompleted));
+        super(taskName, Boolean.parseBoolean(isCompleted), "D");
         assert taskName != null || !taskName.equals("") : "TaskName should not be empty";
         assert taskTime != null || !taskTime.equals("") : "taskTime should not be empty";
         this.taskName = taskName;
@@ -59,13 +59,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        String output = "[D]";
-        if (super.completed) {
-            output += "[\u2713]";
-        } else {
-            output += "[\u2717]";
-        }
-        output += " " + this.taskName + " (By: " + this.taskTime + ")";
+        String output = super.toString() + " (By: " + this.taskTime + ")";
         return output;
     }
 

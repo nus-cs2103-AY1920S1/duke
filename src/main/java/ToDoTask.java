@@ -8,7 +8,7 @@ public class ToDoTask extends Task {
      * @param task The name to be assigned to the Task.
      */
     public ToDoTask(String task) {
-        super(task);
+        super(task, "T");
         assert task != null || !task.equals("") : "task should not be null";
         if (task.trim().length() == 0 || task == null) {
             throw new EmptyDescriptionDukeException("todo");
@@ -22,7 +22,7 @@ public class ToDoTask extends Task {
      * @param task        The name of the task.
      */
     public ToDoTask(String isCompleted, String task) {
-        super(task, Boolean.parseBoolean(isCompleted));
+        super(task, Boolean.parseBoolean(isCompleted), "T");
         assert task != null || !task.equals("") : "task should not be empty";
         if (task.trim().length() == 0) {
             throw new EmptyDescriptionDukeException("todo");
@@ -36,13 +36,7 @@ public class ToDoTask extends Task {
      */
     @Override
     public String toString() {
-        String output = "[T]";
-        if (super.completed) {
-            output += "[\u2713]";
-        } else {
-            output += "[\u2717]";
-        }
-        output += " " + super.task;
+        String output = super.toString();
         return output;
     }
 

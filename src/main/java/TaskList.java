@@ -47,6 +47,7 @@ public class TaskList {
      * @param x the position of the task in the list.
      */
     protected String markAsDone(int x) {
+        assert x < taskList.size() : "There is no task corresponding to that number";
         taskList.get(x).markAsDone();
         return "Nice! I've marked this task as done:\n" + taskList.get(x);
 
@@ -58,6 +59,7 @@ public class TaskList {
      * @param y the position of the task in the list
      */
     protected String deleteTask(int y) {
+        assert y < taskList.size() : "There is no task corresponding to that number";
         if (taskList.size() == 0) {
             return "The task list is empty\n";
         } else {
@@ -143,9 +145,9 @@ public class TaskList {
             output = (" OOPS!!! the description of a deadline cannot be empty. \n");
         } else {
             int first = deadlineDetails.indexOf('/');
-            String descr = deadlineDetails.substring(0, first - 1);
+            String description = deadlineDetails.substring(0, first - 1);
             String byTime = deadlineDetails.substring(first + 4);
-            Task t1 = new Deadline(descr, byTime, false);
+            Task t1 = new Deadline(description, byTime, false);
             this.add(t1);
             output = this.addMessage();
         }

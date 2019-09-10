@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             description.add(commandArr[i]);
         }
 
-        assert index >= 0: printLine()
+        assert index >= 0 : printLine()
                 +  "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
                 + printLine();
 
@@ -66,7 +66,7 @@ public class AddCommand extends Command {
         }
 
         //Check whether there is /at or /by in the command
-        assert index >= 0: printLine()
+        assert index >= 0 : printLine()
                 + "     ☹ OOPS!!! The timing of a " + commandArr[0] + " cannot be empty.\n"
                 + printLine();
 

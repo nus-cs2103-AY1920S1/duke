@@ -1,18 +1,20 @@
 package duke.dukeinterface;
 
-import textfiles.WriteFile;
-
 import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.SearchCommand;
-import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.HelpCommand;
+import duke.command.SearchCommand;
+import textfiles.WriteFile;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.util.StringJoiner;
 import java.lang.StringBuilder;
@@ -33,14 +35,15 @@ public class Parser {
      * @throws DukeException Exception thrown when an invalid command is given.
      */
     public void checkCommand(String... commandArr) throws DukeException {
-        if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete|find")) {
+        if (!commandArr[0].matches("todo|deadline|event|done|list|bye|delete|find|help"
+                + "|morehelp")) {
             throw new DukeException(
                     printLine()
                     + "     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                     + printLine());
         }
 
-        if (commandArr[0].matches("list|bye")) {
+        if (commandArr[0].matches("list|bye|help|morehelp")) {
             if (commandArr.length > 1) {
                 throw new DukeException(
                         printLine()
@@ -236,75 +239,87 @@ public class Parser {
         try {
             checkCommand(commandArr);
             String filename = "data/duke.txt";
+            String helpname = "help/index.html";
             switch (commandArr[0]) {
-                case "list":
-                    result = taskList.printArray();
-                    break;
+            case "list":
+                result = taskList.printArray();
+                break;
 
-                case "done":
-                    duke.command.Command c = new DoneCommand();
-                    int indexDone = Integer.parseInt(commandArr[1]) - 1;
-                    assert indexDone >= 0: "Index of the list cannot be less than 0";
-                    Task currTask = taskList.get(indexDone);
-                    currTask.markAsDone();
-                    result = ((DoneCommand) c).taskComplete(currTask);
-                    data.replaceNthLine(filename, indexDone, currTask);
-                    break;
+            case "help":
+                duke.command.Command c = new HelpCommand();
+                result = ((HelpCommand) c).helpCommand();
+                break;
 
-                case "delete":
-                    c = new DeleteCommand();
-                    int index = Integer.parseInt(commandArr[1]) - 1;
-                    assert index >= 0: "Index of the list cannot be less than 0";
-                    result = ((DeleteCommand) c).deleteComplete(taskList.size(),
-                            taskList.get(index));
-                    taskList.remove(index);
-                    data.removeNthLine(filename, index);
-                    break;
+            case "morehelp":
+                c = new HelpCommand();
+                fileRead(helpname);
+                result = ((HelpCommand) c).moreHelpCommand();
+                break;
 
-                case "find":
-                    c = new SearchCommand();
-                    result = ((SearchCommand) c).searchKeyword(taskList, commandArr);
-                    break;
+            case "done":
+                c = new DoneCommand();
+                int indexDone = Integer.parseInt(commandArr[1]) - 1;
+                assert indexDone >= 0 : "Index of the list cannot be less than 0";
+                Task currTask = taskList.get(indexDone);
+                currTask.markAsDone();
+                result = ((DoneCommand) c).taskComplete(currTask);
+                data.replaceNthLine(filename, indexDone, currTask);
+                break;
 
-                case "todo":
-                    c = new AddCommand();
-                    result = ((AddCommand) c).getDescription(commandArr);
-                    Task todo = new ToDo(result);
-                    taskList.add(todo);
-                    data.writeToFile("T | ✘ | " + result);
-                    result = taskList.printTask(todo, taskList.size());
-                    break;
+            case "delete":
+                c = new DeleteCommand();
+                int index = Integer.parseInt(commandArr[1]) - 1;
+                assert index >= 0 : "Index of the list cannot be less than 0";
+                result = ((DeleteCommand) c).deleteComplete(taskList.size(),
+                        taskList.get(index));
+                taskList.remove(index);
+                data.removeNthLine(filename, index);
+                break;
 
-                case "deadline":
-                    c = new AddCommand();
-                    String deadlineDescription = ((AddCommand) c).getDescription(commandArr);
-                    String deadlineTime = ((AddCommand) c).getTime(commandArr);
-                    deadlineTime = checkTime(deadlineTime);
-                    Task deadline = new Deadline(deadlineDescription, deadlineTime);
-                    taskList.add(deadline);
-                    data.writeToFile("D | ✘ | " + deadlineDescription + " | "
-                            + deadlineTime);
-                    result = taskList.printTask(deadline, taskList.size());
-                    break;
+            case "find":
+                c = new SearchCommand();
+                result = ((SearchCommand) c).searchKeyword(taskList, commandArr);
+                break;
 
-                case "event":
-                    c = new AddCommand();
-                    String eventDescription = ((AddCommand) c).getDescription(commandArr);
-                    String eventTime = ((AddCommand) c).getTime(commandArr);
-                    eventTime = checkTime(eventTime);
-                    Task event = new Event(eventDescription, eventTime);
-                    taskList.add(event);
-                    data.writeToFile("E | ✘ | " + eventDescription + " | " + eventTime);
-                    result = taskList.printTask(event, taskList.size());
-                    break;
+            case "todo":
+                c = new AddCommand();
+                result = ((AddCommand) c).getDescription(commandArr);
+                Task todo = new ToDo(result);
+                taskList.add(todo);
+                data.writeToFile("T | ✘ | " + result);
+                result = taskList.printTask(todo, taskList.size());
+                break;
 
-                case "exit":
-                    c = new ExitCommand();
-                    result = ((ExitCommand) c).exit();
-                    break;
+            case "deadline":
+                c = new AddCommand();
+                String deadlineDescription = ((AddCommand) c).getDescription(commandArr);
+                String deadlineTime = ((AddCommand) c).getTime(commandArr);
+                deadlineTime = checkTime(deadlineTime);
+                Task deadline = new Deadline(deadlineDescription, deadlineTime);
+                taskList.add(deadline);
+                data.writeToFile("D | ✘ | " + deadlineDescription + " | "
+                        + deadlineTime);
+                result = taskList.printTask(deadline, taskList.size());
+                break;
 
-                default:
-                    break;
+            case "event":
+                c = new AddCommand();
+                String eventDescription = ((AddCommand) c).getDescription(commandArr);
+                String eventTime = ((AddCommand) c).getTime(commandArr);
+                eventTime = checkTime(eventTime);
+                Task event = new Event(eventDescription, eventTime);
+                taskList.add(event);
+                data.writeToFile("E | ✘ | " + eventDescription + " | " + eventTime);
+                result = taskList.printTask(event, taskList.size());
+                break;
+
+            case "exit":
+                c = new ExitCommand();
+                result = ((ExitCommand) c).exit();
+                break;
+
+            default:
+                break;
             }
         } catch (DukeException ex) {
             result = (ex.getMessage()) + "\n";
@@ -316,6 +331,23 @@ public class Parser {
             result = data.ioErrorMessage();
         }
         return result;
+    }
+
+    /**
+     * Direct the user to the detailed help page.
+     *
+     * @param helpname file path to the help page.
+     */
+    private void fileRead(String helpname) {
+        try {
+            File file = new File(helpname);
+            Desktop desktop = Desktop.getDesktop();
+            if (file.exists()) {
+                desktop.open(file);
+            }
+        } catch (Exception e) {
+            System.out.println("File not found");
+        }
     }
 
     /**

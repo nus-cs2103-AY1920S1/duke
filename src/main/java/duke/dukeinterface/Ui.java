@@ -27,6 +27,7 @@ public class Ui {
 
         sb.append(logo);
         sb.append("     Hello! I'm Duke\n     What can I do for you?\n");
+        sb.append("     To show a list my commands please type help\n");
         sb.append(printLine());
         sb.append(printLine());
         sb.append("     Here are the tasks that you have now:\n");

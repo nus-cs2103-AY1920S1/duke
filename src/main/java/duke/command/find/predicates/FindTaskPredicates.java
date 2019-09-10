@@ -12,7 +12,8 @@ public class FindTaskPredicates {
             new TaskDescriptionContainsPredicateFactory(this::cleanCommand),
             new TaskBeforeDatePredicateFactory(),
             new TaskOnDatePredicateFactory(),
-            new TaskAfterDatePredicateFactory()
+            new TaskAfterDatePredicateFactory(),
+            new TaskTypePredicateFactory()
     ));
 
     public FindTaskPredicates() {

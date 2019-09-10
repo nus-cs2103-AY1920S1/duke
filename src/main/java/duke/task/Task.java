@@ -65,7 +65,7 @@ public abstract class Task {
      * @return true if the task is done, false otherwise
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "x"); //return tick or X symbols
+        return (isDone ? "✓" : "✗"); //return tick or X symbols
     }
 
     public void markAsDone() {

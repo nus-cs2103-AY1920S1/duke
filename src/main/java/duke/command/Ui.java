@@ -3,6 +3,8 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -10,6 +12,7 @@ import java.util.Scanner;
  */
 public class Ui {
     public static TaskList taskList;
+    public static Storage storage;
 
     /**
      * Creates a new Ui object.
@@ -26,6 +29,7 @@ public class Ui {
      */
     public void start(Parser parser, Storage storage, TaskList taskList) {
         this.taskList = taskList;
+        this.storage = storage;
 
         System.out.println("Hello! I'm duke.Duke");
         System.out.println("What can I do for you?");
@@ -40,6 +44,8 @@ public class Ui {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
                 System.out.println("Must input an integer");
+            } catch (FileNotFoundException e) {
+                System.out.println("Archive not found");
             } finally {
                 word = sc.nextLine();
             }
@@ -119,6 +125,29 @@ public class Ui {
                 result += i + ". " + task + "\n";
                 i++;
             }
+        }
+        return result;
+    }
+
+    public String printArchive() {
+        storage.addToArchive(taskList.getList());
+        taskList.clean();;
+        return "Data has been moved to archive.";
+    }
+
+    public String printArchiveList() {
+        int i = 1;
+        String result = "Here are the the tasks that you have archived:\n";
+        ArrayList<Task> archivedTasks = null;
+        try {
+            archivedTasks = Storage.loadArchive();
+            for (Task t: archivedTasks) {
+                System.out.println(i + ". " + t);
+                result += i + ". " + t + "\n";
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            return "File not found";
         }
         return result;
     }

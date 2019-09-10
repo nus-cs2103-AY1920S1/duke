@@ -34,21 +34,7 @@ public class Storage {
         ArrayList<Task> list = new ArrayList<>();
         File f = new File(filePath);
         Scanner s = new Scanner(f);
-        while (s.hasNext()) {
-            String line = s.nextLine();
-            String[] arr  = line.split("[|]");
-            boolean isDone = !arr[1].trim().equals("0");
-            Task task;
-            if  (arr[0].trim().equals("T")) {
-                task = new Todo(arr[2].trim(), isDone, "");
-            } else if (arr[0].trim().equals("D")) {
-                task = new Deadline(arr[2].trim(), isDone, arr[3].trim());
-            } else {
-                task = new Event(arr[2].trim(), isDone, arr[3].trim());
-            }
-            list.add(task);
-        }
-        return list;
+        return readFile(list, s);
     }
 
     /**
@@ -75,5 +61,56 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
+    }
+
+    public static void addToArchive(ArrayList<Task> arr) {
+        File dir = new File("/Users/joannasara/Desktop/duke/data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
+        String  fileString = "";
+        for (Task t : arr) {
+            fileString += t.getFileStringFormat() + "\n";
+        }
+
+        try {
+            File f = new File("data/archive.txt");
+            FileWriter fw = new FileWriter(f, true);
+            fw.write(fileString);
+            fw.close();
+
+            File currentFile = new File("data/tasks.txt");
+            FileWriter fileWriter = new FileWriter("data/tasks.txt");
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    public static ArrayList<Task> loadArchive() throws FileNotFoundException{
+        ArrayList<Task> list = new ArrayList<>();
+        File f = new File("data/archive.txt");
+        Scanner s = new Scanner(f);
+        return readFile(list, s);
+    }
+
+    private static ArrayList<Task> readFile(ArrayList<Task> list, Scanner s) {
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String[] arr = line.split("[|]");
+            boolean isDone = !arr[1].trim().equals("0");
+            Task task;
+            if (arr[0].trim().equals("T")) {
+                task = new Todo(arr[2].trim(), isDone, "");
+            } else if (arr[0].trim().equals("D")) {
+                task = new Deadline(arr[2].trim(), isDone, arr[3].trim());
+            } else {
+                task = new Event(arr[2].trim(), isDone, arr[3].trim());
+            }
+            list.add(task);
+        }
+        return list;
     }
 }

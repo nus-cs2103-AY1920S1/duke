@@ -6,6 +6,8 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.io.FileNotFoundException;
+
 /**
  * Represents a parser that will be used to parse each line of input.
  */
@@ -27,12 +29,16 @@ public class Parser {
      * Parses the inputted string into a Task.
      * @param  str string to be parsed
      */
-    public String parseLine(String str) throws DukeException, NumberFormatException {
+    public String parseLine(String str) throws DukeException, NumberFormatException, FileNotFoundException {
         assert ui != null : "Ui should not be null";
         assert taskList != null : "TaskList should not be null";
 
         if (str.equals("list")) {
             return parseList();
+        } else if (str.equals("archive")) {
+            return parseArchive();
+        } else if (str.equals("list archive")) {
+            return parseArchiveList();
         } else if (str.startsWith("delete ")) {
             return parseDelete(str);
         } else if (str.startsWith("done ")) {
@@ -138,5 +144,13 @@ public class Parser {
 
     private String parseList() {
         return ui.printList();
+    }
+
+    private String parseArchive() {
+        return ui.printArchive();
+    }
+
+    private String parseArchiveList() {
+        return ui.printArchiveList();
     }
 }

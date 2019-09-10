@@ -84,6 +84,8 @@ public class Duke extends Application {
                 return e.getMessage();
             } catch (NumberFormatException e) {
                 return "Must input an integer";
+            } catch (FileNotFoundException e) {
+                return "File not found";
             }
         }
     }

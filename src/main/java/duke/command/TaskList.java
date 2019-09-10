@@ -67,4 +67,8 @@ public class TaskList {
         task.markAsDone();
         return task;
     }
+
+    public void clean() {
+        list = new ArrayList<>();
+    }
 }

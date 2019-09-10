@@ -17,6 +17,6 @@ class EventTest {
         Event event = new Event("A new event", false, "by 12/10/2019 2100");
         TaskList taskList = new TaskList();
         taskList.addTask(new Todo("Do this thing",  false, ""));
-        assertEquals("[E][x] A new event (at: 12th of October 2019, 9PM)", event.toString());
+        assertEquals("[E][✗] A new event (at: 12th of October 2019, 9PM)", event.toString());
     }
 }

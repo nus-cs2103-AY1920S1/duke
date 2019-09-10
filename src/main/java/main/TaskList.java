@@ -44,6 +44,7 @@ public class TaskList implements Iterable<Task> {
      * @return The task that has been added
      */
     public Task addTask(Task newTask) {
+        assert !newTask.equals(null) : "New task cannot be null";
         tasks.add(newTask);
         return newTask;
     }
@@ -87,6 +88,7 @@ public class TaskList implements Iterable<Task> {
      * @return Task Object with the corresponding task ID.
      */
     public Task getTask(int taskID) {
+        assert taskID <= tasks.size() && taskID > 0 : "Task ID must not be out of bounds.";
         return tasks.get(taskID - 1);
     }
 

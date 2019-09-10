@@ -93,6 +93,24 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Tags the given task.
+     *
+     * @param index Index of task to be marked as done.
+     * @param tag Tag to be added to the task.
+     * @return message to be printed.
+     * @throws DukeException if encountered IO exceptions while updating disk storage.
+     */
+    public String[] tagTask(int index, String tag) throws DukeException {
+        Task task = taskList.get(index - 1);
+        task.addTag(tag);
+        this.updateDatabase();
+        return new String[] {
+            "Tag " + tag + " added to this task:",
+            task.toString()
+        };
+    }
+
+    /**
      * Prints the entire task list to ui.
      * @return list to be printed.
      */

@@ -10,6 +10,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.command.TodoCommand;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -56,6 +57,12 @@ public class Parser {
                 throw new DukeException("Task number missing!");
             }
             return new DeleteCommand(parseTaskNumber(commandArr[1]));
+        case TAG:
+            if (commandArr.length <= 1) {
+                throw new DukeException("Tag description missing!");
+            }
+            String[] tagInputArr = parseTag(commandArr[1]);
+            return new TagCommand(parseTaskNumber(tagInputArr[0]), tagInputArr[1]);
         case TODO:
             if (commandArr.length <= 1) {
                 throw new DukeException("Todo description missing!");
@@ -129,6 +136,25 @@ public class Parser {
             }
         }
         return eventArr;
+    }
+
+    /**
+     * Parses the input string to an array of useful information.
+     *
+     * @param tagString Input string representing a tag.
+     * @return an array of useful information corresponding to the input string.
+     * @throws DukeException if the string format is invalid.
+     */
+    private static String[] parseTag(String tagString) throws DukeException {
+        String[] tagArr = tagString.split(" /as ");
+        if (tagArr.length <= 1) {
+            if (tagString.indexOf("/as") == 0) {
+                throw new DukeException("Tag description format invalid!");
+            } else {
+                throw new DukeException("Tag name missing!");
+            }
+        }
+        return tagArr;
     }
 
     /**

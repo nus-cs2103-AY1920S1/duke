@@ -5,6 +5,7 @@ package duke.task;
  */
 public class Task {
     private String description;
+    private String tag;
     private boolean isDone = false;
 
     /**
@@ -14,6 +15,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
+        this.tag = "";
     }
 
     /**
@@ -23,12 +25,24 @@ public class Task {
      */
     private String getStatusIcon() {
         //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
-        if (this.isDone) {
-            return "[\u2713] ";
-        } else {
-            return "[\u2718] ";
-        }
+        return this.isDone ? "[\u2713]" : "[\u2718]";
         //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
+    }
+
+    /**
+     * Returns the string representation of the tag.
+     *
+     * @return the string representation of the tag.
+     */
+    private String getTagString() {
+        return this.tag.equals("") ? "" : "[#" + this.tag + "]";
+    }
+
+    /**
+     * Adds tag to the task.
+     */
+    public void addTag(String tag) {
+        this.tag = tag;
     }
 
     /**
@@ -48,16 +62,29 @@ public class Task {
     }
 
     /**
+     * Extracts tag of the task.
+     *
+     * @return tag of the task.
+     */
+    public String getTag() {
+        return this.tag;
+    }
+
+    /**
      * Gives a string representation of the task for storage.
      *
      * @return a string representation of the task for storage.
      */
     public String toDataString() {
-        return (this.isDone ? 1 : 0) + " | " + this.description;
+        return (this.isDone ? 1 : 0)
+            + " | " + this.description
+            + (this.tag.equals("") ? "" : " | " + this.tag);
     }
 
     @Override
     public String toString() {
-        return this.getStatusIcon() + this.description;
+        return this.getStatusIcon()
+            + this.getTagString()
+            + " " + this.description;
     }
 }

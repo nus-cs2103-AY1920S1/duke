@@ -11,5 +11,6 @@ public enum CommandEnum {
     EVENT,
     FIND,
     LIST,
+    TAG,
     TODO;
 }

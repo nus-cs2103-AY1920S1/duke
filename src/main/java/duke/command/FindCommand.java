@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     public String[] execute(TaskList taskList) {
         ArrayList<Task> filteredList = new ArrayList<Task>();
         for (Task task : taskList) {
-            if (task.getDescription().contains(this.keyword)) {
+            if ((task.getDescription() + task.getTag()).contains(this.keyword)) {
                 filteredList.add(task);
             }
         }

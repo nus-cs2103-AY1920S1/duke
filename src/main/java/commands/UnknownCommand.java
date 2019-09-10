@@ -1,9 +1,6 @@
 package commands;
 
-import logic.DukeException;
-import logic.Storage;
-import logic.TaskList;
-import logic.Ui;
+import logic.*;
 
 public class UnknownCommand extends Command {
     /**
@@ -16,6 +13,6 @@ public class UnknownCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException(DukeStrings.UNKNOWN_INPUT);
     }
 }

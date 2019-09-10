@@ -1,10 +1,6 @@
 package commands;
 
-import logic.DukeException;
-import logic.Storage;
-import logic.TaskList;
-import logic.Ui;
-import logic.Parser;
+import logic.*;
 import task.Deadlines;
 import task.Task;
 
@@ -33,10 +29,9 @@ public class DeadlineCommand extends Command {
         String[] splitStr = args.split("/by");
 
         if (splitStr.length == 1) {
-            throw new DukeException("Invalid format. Please include '/by' to state your deadline"
-                    + "\nE.g. deadline work /by 12/7/2019 2000");
+            throw new DukeException(DukeStrings.DEADLINE_WRONG_FORMAT);
         } else if (splitStr[0].trim().isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty");
+            throw new DukeException(DukeStrings.DEADLINE_EMPTY);
         }
 
         LocalDateTime deadline = Parser.parseDateTime(splitStr[1].trim());

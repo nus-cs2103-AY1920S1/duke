@@ -81,6 +81,7 @@ public class Storage {
                         : tasks.get(i) instanceof Todo ? "T"
                         : tasks.get(i) instanceof Deadline ? "D"
                         : "INVALID CLASS";
+                assert !type.equals("INVALID CLASS"): "Type of task in storage invalid";
                 String isDone = tasks.get(i).isDone() ? "1" : "0";
                 if (tasks.get(i) instanceof Todo) {
                     fw.append(type + " | " + isDone + " | " + tasks.get(i).getDescription());

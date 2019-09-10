@@ -1,5 +1,7 @@
 package tasks;
 
+import exceptions.DukeException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -36,8 +38,13 @@ public class Task {
     /**
      * Sets the boolean isDone as true.
      */
-    public void markAsDone() {
-        this.isDone = true;
+    public boolean markAsDone() throws DukeException {
+        if (!this.isDone) {
+            this.isDone = true;
+            return this.isDone;
+        } else {
+            throw new DukeException("Task has already been marked as done");
+        }
     }
 
     @Override

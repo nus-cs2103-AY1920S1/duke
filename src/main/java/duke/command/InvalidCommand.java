@@ -18,6 +18,6 @@ public class InvalidCommand extends Command {
      */
     @Override
     public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
-        throw new DukeException("\u1F65 OOPS!! I\'m sorry, but I don\'t know what that means :-(");
+        throw new DukeException("OOPS!! I\'m sorry, but I don\'t know what that means :-(");
     }
 }

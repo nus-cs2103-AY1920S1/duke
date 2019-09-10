@@ -1,5 +1,5 @@
 package duke;
-//@Override
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -12,13 +12,6 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    //    private ScrollPane scrollPane;
-//    private VBox dialogContainer;
-//    private TextField userInput;
-//    private Button sendButton;
-//    private Scene scene;
-//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Duke duke = new Duke();
 
     @Override

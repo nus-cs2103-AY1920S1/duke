@@ -30,16 +30,16 @@ public class DeleteCommand extends Command {
         try {
             int index = Integer.parseInt(super.command[1].trim());
             if (index > tasks.getList().size()) {
-                throw new DukeException("\u1F65 OOPS! the Number you\'ve key in is to big");
+                throw new DukeException(" OOPS! the Number you\'ve key in is to big");
             } else if (index < 1) {
                 throw new DukeException("OOPS!! The number should be larger than 0");
             } else {
                 assert index > 0 && index <= tasks.getList().size();
                 Task tk = tasks.deleteFromList(index - 1);
-                    return UiText.deleteMsg(tk);
+                return UiText.deleteMsg(tk);
             }
         } catch (NumberFormatException ex) {
-            throw new DukeException("\u1F65 OOPS! Invalid number as input");
+            throw new DukeException("OOPS! Invalid number as input");
         }
     }
 }

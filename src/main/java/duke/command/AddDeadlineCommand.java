@@ -25,7 +25,7 @@ public class AddDeadlineCommand extends Command {
     @Override
     public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
         if (super.command.length <= 1) {
-            throw new DukeException("\u1F65 OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
         assert super.command.length > 1;
         String[] msgs = super.command[1].split("/by");
@@ -35,7 +35,7 @@ public class AddDeadlineCommand extends Command {
             list.addToList(task);
             return UiText.addedMsg(task);
         } else {
-            throw new DukeException("\u1F65 OOPS!!! The format of the description of a deadline is wrong");
+            throw new DukeException("OOPS!!! The format of the description of a deadline is wrong");
 
         }
     }

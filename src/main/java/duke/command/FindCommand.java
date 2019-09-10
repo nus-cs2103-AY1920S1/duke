@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList list, UiText ui, Storage storage) throws DukeException {
         if (super.command.length != 2) {
-            throw new DukeException("\u1F65 OOPS!! The format of the input is wrong");
+            throw new DukeException("OOPS!! The format of the input is wrong");
         }
         ArrayList<Task> result = new ArrayList<>();
         for (Task task : list.getList()) {
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
             }
         }
         if (result.isEmpty()) {
-            throw new DukeException("\u1F65 OOPS!! There is no match to your searching");
+            throw new DukeException("OOPS!! There is no match to your searching");
         }
         return UiText.findMsg(result);
     }

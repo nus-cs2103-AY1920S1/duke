@@ -91,7 +91,7 @@ public class UiText {
     }
 
     /**
-     * Message that will be displayed whenever a command has executed successfully.
+     * Message when a command has executed successfully.
      * @param task Task object that is added to the list.
      */
     public static String addedMsg(Task task) {
@@ -101,7 +101,7 @@ public class UiText {
     }
 
     /**
-     * Message that will be displayed when a task has successfully marked done.
+     * Message when a task has successfully marked done.
      * @param task Task object that marked done.
      */
 
@@ -112,8 +112,7 @@ public class UiText {
     }
 
     /**
-     * Message displayed when a task is deleted from the list.
-     *
+     * Message when a task is deleted from the list.
      * @param task Task object that was deleted.
      */
 
@@ -123,6 +122,11 @@ public class UiText {
                         + task + "\nNow you have %d tasks in the list.", Task.getNoOfTask());
     }
 
+    /**
+     * Message when there a item on the list matched what user searched.
+     * @param tasks list of item match the searched word
+     * @return Message of list of items
+     */
     public static String findMsg(ArrayList<Task> tasks) {
         assert tasks.size() > 0;
         StringBuilder output = new StringBuilder();
@@ -136,6 +140,11 @@ public class UiText {
         return output.toString();
     }
 
+    /**
+     * list of items stored.
+     * @param tasks list of items on in the storage
+     * @return Message of items in the list
+     */
     public static String listingMsg(ArrayList<Task> tasks) {
         assert tasks.size() > 0;
         StringBuilder output = new StringBuilder();
@@ -157,6 +166,11 @@ public class UiText {
         return output.toString();
     }
 
+    /**
+     * reads the items in the storage.
+     * @param sc scanner that scan the storage file
+     * @return content in the storage file
+     */
     public static String itemsFromFile(Scanner sc) {
         String output = "";
         boolean isFirst = true;
@@ -170,13 +184,14 @@ public class UiText {
         }
         return output;
     }
+
     public static String unableToWriteFileError() {
         return "Unable to write the file";
     }
 
-    public void showError(String msg) {
-        out.println(msg);
-    }
+//    public void showError(String msg) {
+//        out.println(msg);
+//    }
 
 
 }

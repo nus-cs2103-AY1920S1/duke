@@ -28,11 +28,11 @@ public class TaskList {
         }
         assert !tasks.isEmpty();
         this.tasks = new ArrayList<>(tasks);
-        assert this.tasks.equals(tasks) && this.tasks != tasks ;
+        assert this.tasks.equals(tasks) && this.tasks != tasks;
     }
 
     /**
-     * duplicate an return a copy of the list
+     * duplicate an return a copy of the list.
      * @return a copy of the list
      */
     public ArrayList<Task> getList() {

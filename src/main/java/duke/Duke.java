@@ -103,7 +103,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        // 1.  Set up the required components.
+        //Set up the required components.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -114,8 +114,18 @@ public class Duke extends Application {
         scene = new Scene(mainLayout);
         stage.setScene(scene);
         stage.show();
+        //Formatting the window to look as expected.
+        formatWindow(stage, mainLayout);
+        //Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    }
 
-        // 2. Formatting the window to look as expected.
+    private void formatWindow(Stage stage, AnchorPane mainLayout) {
         stage.setTitle("duke.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -137,14 +147,6 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(ui.greet()), new ImageView(duke)));
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
     }
 
     private void handleUserInput() {

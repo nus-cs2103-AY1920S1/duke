@@ -18,15 +18,15 @@ import java.util.Date;
  */
 public class Parser {
 
-    private String[] action;
+    private String[] actions;
 
     /**
      * Constructor of the Parser class.
      *
-     * @param action A string array contains split commands.
+     * @param actions A string array contains split commands.
      */
-    public Parser(String[] action) {
-        this.action = action;
+    public Parser(String[] actions) {
+        this.actions = actions;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Parser {
      */
     public String parse() throws DukeIllegalDescriptionException {
         String output = "";
-        switch (Command.valueOf(action[0])) {
+        switch (Command.valueOf(actions[0])) {
         case bye:
             output = commandBye();
             break;
@@ -92,7 +92,7 @@ public class Parser {
         String output = "";
         try {
             Storage storage = new Storage();
-            int num = Integer.parseInt(action[1]);
+            int num = Integer.parseInt(actions[1]);
             assert num >= 0 : "The input number is invalid.";
             Task newTask = TaskList.getList().get(num - 1);
             newTask.markAsDone();
@@ -107,7 +107,7 @@ public class Parser {
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeIllegalDescriptionException(action[0]);
+            throw new DukeIllegalDescriptionException(actions[0]);
         }
         return output;
     }
@@ -122,14 +122,14 @@ public class Parser {
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
-            Task todo = new Todo(action[1]);
+            Task todo = new Todo(actions[1]);
             TaskList.getList().add(todo);
             output += ui.printAddTask();
             output += (todo + "\n");
             output += ui.printCountTasks();
             storage.appendToFile(storage.getFilePath(), todo.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeIllegalDescriptionException(action[0]);
+            throw new DukeIllegalDescriptionException(actions[0]);
         }
         return output;
     }
@@ -145,7 +145,7 @@ public class Parser {
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
-            String[] dl = action[1].split(" /by ");
+            String[] dl = actions[1].split(" /by ");
             String ddlTime = dl[1];
             assert !ddlTime.isEmpty() : "The input time is invalid.";
             SimpleDateFormat ddlFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
@@ -157,7 +157,7 @@ public class Parser {
             output += ui.printCountTasks();
             storage.appendToFile(storage.getFilePath(), deadline.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeIllegalDescriptionException(action[0]);
+            throw new DukeIllegalDescriptionException(actions[0]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -175,7 +175,7 @@ public class Parser {
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
-            String[] ev = action[1].split(" /at ");
+            String[] ev = actions[1].split(" /at ");
             String eventTime = ev[1];
             assert !eventTime.isEmpty() : "The input time is invalid.";
             String[] eventSplit = eventTime.split("-");
@@ -193,7 +193,7 @@ public class Parser {
             output += ui.printCountTasks();
             storage.appendToFile(storage.getFilePath(), event.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeIllegalDescriptionException(action[1]);
+            throw new DukeIllegalDescriptionException(actions[1]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -208,7 +208,7 @@ public class Parser {
         try {
             Ui ui = new Ui();
             Storage storage = new Storage();
-            int delNum = Integer.parseInt(action[1]) - 1;
+            int delNum = Integer.parseInt(actions[1]) - 1;
             assert delNum > 0 : "The input number is invalid.";
             Task delTask = TaskList.getList().get(delNum);
             TaskList.getList().remove(delNum);
@@ -222,7 +222,7 @@ public class Parser {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeIllegalDescriptionException(action[0]);
+            throw new DukeIllegalDescriptionException(actions[0]);
         }
         return output;
     }
@@ -233,7 +233,7 @@ public class Parser {
     private String commandFind() throws DukeIllegalDescriptionException {
         String output = "";
         try {
-            String keyword = action[1];
+            String keyword = actions[1];
             assert !keyword.isEmpty() : "The keyword to find can not be empty.";
             output += "Here are the matching tasks in your list:\n";
             int count = 1;
@@ -244,7 +244,7 @@ public class Parser {
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeIllegalDescriptionException(action[0]);
+            throw new DukeIllegalDescriptionException(actions[0]);
         }
         return output;
     }

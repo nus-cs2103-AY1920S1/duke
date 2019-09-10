@@ -13,6 +13,9 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/**
+ * Handles interactions of the duke bot's list of tasks and the file that saves these tasks.
+ */
 public class Storage {
     private String filePath;
 
@@ -20,6 +23,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads file with previously saved list of tasks, if any, or creates a new file in the desired location.
+     *
+     * @return List of tasks.
+     * @throws DukeException If unable to create new file or read from an existing file.
+     */
     public LinkedList<Task> load() throws DukeException {
         LinkedList<Task> taskList = new LinkedList<>();
 
@@ -66,6 +75,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes tasks in the taskList to a file in the hard drive that can be retrieved by the user when they use the bot
+     * again.
+     *
+     * @param taskList List of tasks.
+     * @throws IOException If unable to write updated taskList to the file.
+     */
     public void writeToFile(TaskList taskList) throws IOException {
         LinkedList<Task> tasks = taskList.getTasks();
         FileWriter fw = new FileWriter(filePath);

@@ -4,8 +4,19 @@ import duke.command.*;
 
 import java.lang.ArrayIndexOutOfBoundsException;
 
+/**
+ * Handles parsing of user input to commands so that they can be interpreted by the bot.
+ */
 public class Parser {
 
+    /**
+     * Parses the user input and returns a specific command type upon interpretation (on a case-by-case basis of the
+     * user input).
+     *
+     * @param userInput Command given by user.
+     * @return Sub-class of Command.
+     * @throws DukeException if error in parsing certain Add Command subclasses.
+     */
     static Command parse(String userInput) throws DukeException {
         String[] command = userInput.split(" ", 2);
         switch (command[0]) {

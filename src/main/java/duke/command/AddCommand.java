@@ -5,6 +5,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Handles commands that require adding a task to the list of tasks, namely deadline, event, and todo.
+ */
 public class AddCommand extends Command {
 
     private Task addedTask;

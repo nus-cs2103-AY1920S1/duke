@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 
+/**
+ * Starts execution of the bot.
+ */
 public class Duke {
 
     private Storage storage;
@@ -19,6 +22,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke bot with given ui, storage, and task list generated from the storage (if any)
+     * and prompts user input.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -37,6 +44,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates and runs new Duke object.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
     }

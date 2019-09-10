@@ -41,15 +41,6 @@ public class Task {
     /**
      * Gets the status of the task as done or undone.
      *
-     * @return 1 or 0 if done or undone respectively.
-     */
-    public String getBinaryStatus() {
-        return (isDone ? "1" : "0");
-    }
-
-    /**
-     * Gets the status of the task as done or undone.
-     *
      * @return v or x if done or undone respectively.
      */
     public String getStatusIcon() {

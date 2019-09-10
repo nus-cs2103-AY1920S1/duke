@@ -41,15 +41,25 @@ public class TaskList {
      */
     public String printTasks() {
         if (tasks.isEmpty()) {
-            return "You do not have any tasks in your list." + "Use 'help' to see how to add tasks" +
+            return "You do not have any tasks in your list.\n" + "Use 'help' to see how to add tasks" +
                     " to your list!";
-        } else {
-            StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-            for (int i = 0; i < tasks.size(); i++) {
-                sb.append((i + 1) + "." + tasks.get(i) + "\n");
-            }
-            return sb.toString();
         }
+
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        return retrieveTasks(sb).toString();
+    }
+
+    /**
+     * Retrieves the contents of the tasks list.
+     *
+     * @param sb StringBuilder to append to.
+     * @return StringBuilder with tasks appended to it.
+     */
+    public StringBuilder retrieveTasks(StringBuilder sb) {
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append((i + 1) + "." + tasks.get(i) + "\n");
+        }
+        return sb;
     }
 
     /**
@@ -70,7 +80,7 @@ public class TaskList {
     public String deleteTask(int taskNumber) {
         String taskDescription = tasks.get(taskNumber - 1).toString();
         tasks.remove(taskNumber - 1);
-        return "Noted. I've removed this task:\n" + taskDescription + getListSize();
+        return "Noted. I've removed this task:\n" + taskDescription + "\n" + getListSize();
     }
 
     /**
@@ -85,15 +95,16 @@ public class TaskList {
                 searchResults.add(task);
             }
         }
+
         if (searchResults.isEmpty()) {
             return "OOPS!!! You don't have any tasks containing the term \"" + searchTerm + "\".";
-        } else {
-            StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
-            for (int i = 0; i < searchResults.size(); i++) {
-                sb.append((i + 1) + "." + searchResults.get(i) + "\n");
-            }
-            return sb.toString();
         }
+
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < searchResults.size(); i++) {
+            sb.append((i + 1) + "." + searchResults.get(i) + "\n");
+        }
+        return sb.toString();
     }
 
     /**
@@ -103,7 +114,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         tasks.add(task);
-        return "Got it. I've added this task:\n" + task.toString() + getListSize();
+        return "Got it. I've added this task:\n" + task.toString() + "\n" + getListSize();
     }
 
     /**
@@ -114,9 +125,9 @@ public class TaskList {
     public String getListSize() {
         if (tasks.size() == 1) {
             return "Now you have 1 task in the list.";
-        } else {
-            return "Now you have " + tasks.size() + " tasks in the list.";
         }
+
+        return "Now you have " + tasks.size() + " tasks in the list.";
     }
 
 }

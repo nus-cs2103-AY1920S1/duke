@@ -43,8 +43,7 @@ public class DateTime {
             return new DateTime(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]),
                     Integer.parseInt(dateArray[0]), Integer.parseInt(timeString));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("    OOPS!!! Please indicate the date/time in the format DD/MM/YYYY "
-                    + "HHMM.");
+            throw new DukeException("OOPS!!! Please indicate the date/time in the format DD/MM/YYYY HHMM.");
         }
     }
 
@@ -60,8 +59,10 @@ public class DateTime {
             return day + "nd";
         } else if (day == 3 || day == 23) {
             return day + "rd";
-        } else {
+        } else if (day <= 30){
             return day + "th";
+        } else {
+            throw new DukeException("OOPS!!! Please enter a valid date.");
         }
     }
 
@@ -71,48 +72,47 @@ public class DateTime {
      * @return Month name in string format.
      */
     private String getMonth() {
-        String monthString = "";
+        String monthString;
         switch (month) {
         case 1:
             monthString = "January";
-            break;
+            return monthString;
         case 2:
             monthString = "February";
-            break;
+            return monthString;
         case 3:
             monthString = "March";
-            break;
+            return monthString;
         case 4:
             monthString = "April";
-            break;
+            return monthString;
         case 5:
             monthString = "May";
-            break;
+            return monthString;
         case 6:
             monthString = "June";
-            break;
+            return monthString;
         case 7:
             monthString = "July";
-            break;
+            return monthString;
         case 8:
             monthString = "August";
-            break;
+            return monthString;
         case 9:
             monthString = "September";
-            break;
+            return monthString;
         case 10:
             monthString = "October";
-            break;
+            return monthString;
         case 11:
             monthString = "November";
-            break;
+            return monthString;
         case 12:
             monthString = "December";
-            break;
+            return monthString;
         default:
-            monthString = "invalid month";
+            throw new DukeException("OOPS!!! Please enter a valid month.");
         }
-        return monthString;
     }
 
     /**
@@ -136,10 +136,12 @@ public class DateTime {
             minute = time % 100;
             hour = 12;
             timeSuffix = "pm";
-        } else {
+        } else if (time >= 1300 && time <= 2359) {
             minute = time % 100;
             hour = (time - minute) / 100 - 12;
             timeSuffix = "pm";
+        } else {
+            throw new DukeException("OOPS!!! Please enter a valid time.");
         }
         return hour + ":" + String.format("%02d", minute) + timeSuffix;
     }

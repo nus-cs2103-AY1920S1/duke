@@ -32,23 +32,13 @@ public class Deadline extends Task {
      */
     public static Deadline process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
-            throw new DukeException("     OOPS!!! The description of a deadline cannot be empty :-(");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty :-(");
         }
         String[] detailsArray = fullCommand[1].split(" /by ", 2);
         if (detailsArray.length == 1) {
-            throw new DukeException("     OOPS!!! Please specify a date and time for your deadline :-(");
+            throw new DukeException("OOPS!!! Please specify a date and time for your deadline :-(");
         }
         return new Deadline(detailsArray[0], detailsArray[1]);
-    }
-
-    /**
-     * Formats the deadline to be stored in the hard disk.
-     *
-     * @return Deadline details in the format D | 1 or 0 | description | time.
-     */
-    @Override
-    public String toSave() {
-        return "D | " + super.getBinaryStatus() + " | " + super.description + " | " + timeInFile;
     }
 
     /**

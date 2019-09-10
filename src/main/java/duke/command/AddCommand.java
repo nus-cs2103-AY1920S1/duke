@@ -33,7 +33,7 @@ public class AddCommand extends Command {
         try {
             storage.store(tasks);
         } catch (IOException e) {
-            return "    OOPS!!! " + e.getMessage();
+            return "OOPS!!! " + e.getMessage();
         }
         return response;
     }

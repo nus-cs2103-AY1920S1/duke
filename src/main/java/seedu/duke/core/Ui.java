@@ -1,7 +1,7 @@
 package seedu.duke.core;
 
 import javafx.scene.control.Label;
-import seedu.duke.model.Task;
+import seedu.duke.model.dto.Task;
 
 import java.util.List;
 
@@ -49,6 +49,19 @@ public class Ui {
         for (Task task : list) {
             index++;
             output += (index + "." + task + "\n");
+        }
+        return output;
+    }
+
+    /**
+     * Prints only the specified task from task list.
+     * @param list Task list (ArrayList) where all tasks are stored
+     * @param index index of which task user want to print out.
+     */
+    public String displayTask(String output, List<Task> list, int index) {
+        if (index >= 0) {
+            output = new StringBuilder(output)
+                    .append(list.get(index) + "\n").toString() ;
         }
         return output;
     }

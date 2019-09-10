@@ -1,4 +1,4 @@
-package seedu.duke.model;
+package seedu.duke.model.dto;
 
 import java.text.ParseException;
 import java.util.Date;

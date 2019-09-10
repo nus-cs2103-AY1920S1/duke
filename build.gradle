@@ -11,6 +11,11 @@ checkstyle {
     toolVersion = '8.23'
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 group 'seedu.duke'
 version '0.2.0'

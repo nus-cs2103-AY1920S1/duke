@@ -29,6 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList) {
+        assert(!isBye());
         return Ui.showFindMessage(taskList, keyword);
     }
 }

@@ -79,6 +79,8 @@ public class Task {
                 task.markAsDone();
             }
             return task;
+        } else {
+            assert false;
         }
         return null;
     }

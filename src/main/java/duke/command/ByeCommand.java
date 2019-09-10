@@ -24,6 +24,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList) {
+        assert(isBye());
         return Ui.showByeMessage();
     }
 

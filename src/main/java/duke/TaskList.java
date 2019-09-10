@@ -37,6 +37,7 @@ public class TaskList {
         String message = "";
         int index = 1;
         for (Iterator iterator = taskList.iterator(); iterator.hasNext(); index++) {
+            assert (index >= 1);
             message = message + index + "." + iterator.next() + "\n";
         }
         return message;
@@ -49,6 +50,7 @@ public class TaskList {
      * @return Task at given index.
      */
     public Task get(int index) {
+        assert (index <= taskList.size());
         return taskList.get(index);
     }
 
@@ -59,6 +61,7 @@ public class TaskList {
      * @return Task at given index.
      */
     public Task remove(int index) {
+        assert (index <= taskList.size());
         return taskList.remove(index);
     }
 
@@ -78,6 +81,7 @@ public class TaskList {
      */
     public void add(Task task) {
         taskList.add(task);
+        assert (taskList.contains(task));
     }
 
     /**
@@ -91,6 +95,8 @@ public class TaskList {
         int i = 1;
         int index = 1;
         for (Iterator iterator = taskList.iterator(); iterator.hasNext(); i++) {
+            assert (i >= 1);
+            assert (index >= 1);
             Task current = (Task) iterator.next();
             if (current.containsKeyword(keyword)) {
                 message = message + index + "." + current + "\n";

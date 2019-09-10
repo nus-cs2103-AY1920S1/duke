@@ -25,6 +25,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(Storage storage, TaskList taskList) {
+        assert(!isBye());
         return Ui.showTaskList(taskList);
     }
 }

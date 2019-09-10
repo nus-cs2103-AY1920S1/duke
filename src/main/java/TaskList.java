@@ -55,6 +55,17 @@ public class TaskList {
 
     }
 
+    public String addTaskApp(Task current) {
+        this.list.add(current);
+        if (list.size() > 1) {
+            return "Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
+                    "Now you have " + list.size() + " tasks in the list. ";
+        } else {
+            return "Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
+                    "Now you have " + list.size() + " task in the list. ";
+        }
+    }
+
     /**
      * Deletes a task off the list attribute of this TaskList object.
      *
@@ -74,6 +85,20 @@ public class TaskList {
 
     }
 
+    public String deleteTaskApp(int current) {
+
+        Task deleted = list.get(current);
+        list.remove(current);
+        if (list.size() > 1) {
+            return "Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
+                    "Now you have " + list.size() + " tasks in the list. ";
+        } else {
+            return "Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
+                    "Now you have " + list.size() + " task in the list. ";
+        }
+
+    }
+
     /**
      * Marks the task to be completed. The method removes the task by referencing the task based on its position on the
      * list.
@@ -86,6 +111,13 @@ public class TaskList {
         completed.markAsDone();
         System.out.println("Nice! I've marked this task as done: \n" + "   " + completed);
 
+    }
+
+
+    public String completeTaskApp(int taskNumber) {
+        Task completed = list.get(taskNumber);
+        completed.markAsDone();
+        return "Nice! I've marked this task as done: \n" + "   " + completed;
     }
 
     /**
@@ -107,6 +139,19 @@ public class TaskList {
 
         }
     }
+
+    public String currentList() {
+        int n = 1;
+        StringBuilder str = new StringBuilder();
+
+        for (Task item : list) {
+            str.append(n + "." + item + '\n');
+            n++;
+        }
+
+        return str.toString();
+    }
+
 
     /**
      * Finds the existing list for tasks that have matching keywords.

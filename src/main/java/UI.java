@@ -32,6 +32,16 @@ public class UI {
         System.out.println("Hello I'm\n" + logo + "\nWhat can I do for you?");
     }
 
+    public String welcomeApp() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+       return "Hello I'm\n" + logo + "\nWhat can I do for you?";
+    }
+
     /**
      * Prints out a goodbye statement when the users enter bye, before the program ends.
      */
@@ -40,6 +50,11 @@ public class UI {
         System.out.println("Bye. Hope to see you again soon!");
         this.isRunning = false;
 
+    }
+
+    public String goodbyeApp() {
+        this.isRunning = false;
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -193,6 +208,7 @@ public class UI {
         }
         //code exits here when the user enters the command "bye"
     }
+
 
 
 

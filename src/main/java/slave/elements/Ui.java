@@ -85,7 +85,7 @@ public class Ui {
         String formattedMessage = Formatter.getLine()
                 + Formatter.indentLine("Clearing List...")
                 + Formatter.getLine();
-        System.out.print(Formatter.indentLine("Clearing List..."));
+        System.out.print(Formatter.indentLine(formattedMessage));
         return formattedMessage;
     }
 

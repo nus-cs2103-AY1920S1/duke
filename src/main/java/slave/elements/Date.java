@@ -42,6 +42,8 @@ public class Date {
     public Date(String dateFormat, String time) throws DukeException {
         this.dateFormat = dateFormat;
         this.time = time;
+        assert time.length() == 4 : "Invalid Time Format";
+        assert dateFormat.length() > 5 : "Invalid Date Format";
         format();
     }
 
@@ -58,10 +60,14 @@ public class Date {
             this.month = Integer.parseInt(splitDateTimeTokens[1]);
             this.year = Integer.parseInt(splitDateTimeTokens[2]);
 
+            assert this.month <= 12 : "Invalid Month";
+            assert this.day <= 31 : "Invalid Day";
+
             String hour = time.substring(0, 2);
             String minute = time.substring(2);
 
             int indexHour = Integer.parseInt(hour);
+            assert indexHour <= 23 : "Invalid index for Hour and Time";
             this.timeFormat = timeHourSuffixes[indexHour] + "." + minute + timeSuffixes[indexHour];
 
         } catch (ArrayIndexOutOfBoundsException e) {

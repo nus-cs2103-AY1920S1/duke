@@ -1,5 +1,7 @@
 package seedu.duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Event class is a subclass of Task class.
  * Additional attribute is the String location, which holds the venue of the Event task.
@@ -28,8 +30,8 @@ public class Event extends Task {
      * @param location Location String of the task.
      * @param isDone isDone status of the task.
      */
-    public Event(String description, String location, Boolean isDone) {
-        super(description, isDone);
+    public Event(String description, String location, Boolean isDone, LocalDate createdDate, LocalDate lastModified) {
+        super(description, isDone, createdDate, lastModified);
         this.location = location;
         taskType = PossibleTaskTypes.EVENT;
     }
@@ -57,7 +59,12 @@ public class Event extends Task {
     @Override
     public String toSaveString() {
         assert !this.location.isEmpty() : "Empty location should be handled by Duke Exception during input";
-        return ("E" + super.toSaveString() + " | " + this.location);
+        return ("E" + super.toSaveString() + " | " + this.getLocation() + " | " + this.getCreatedDate().toString()
+        + " | " + this.getLastModifiedDate().toString());
+    }
+
+    public String getLocation() {
+        return this.location;
     }
 
 }

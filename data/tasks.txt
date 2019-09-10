@@ -1,12 +1,5 @@
-event type | isDone | description | extra description
-T | 1 | Sleep
-T | 0 | c
-T | 0 | d
-T | 0 | e
-T | 0 | f
-E | 0 | sleep | sdad
-D | 1 |  | 12th of September 2019, 12.01pm
-E | 0 | Sleep | wjekwe
-T | 0 | falcon
-T | 0 | fresh
-T | 0 | A
+event type | isDone | description | extra description | dateCreated | lastModified
+T | 0 | A |  dummyExtraDescriptionForTodo | 2019-09-10 | 2019-09-10
+T | 0 | B |  dummyExtraDescriptionForTodo | 2019-09-10 | 2019-09-10
+E | 0 | run  | Tampines Hub | 2019-09-10 | 2019-09-10
+D | 0 | CS2103 Assignment  | 21st of December 2009, 9.15am | 2019-09-10 | 2019-09-10

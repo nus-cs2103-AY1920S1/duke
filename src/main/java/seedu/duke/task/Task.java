@@ -1,5 +1,8 @@
 package seedu.duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * Task class represents a Task created by the user.
  * Attribute description holds the Task description.
@@ -10,10 +13,14 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected PossibleTaskTypes taskType;
+    protected LocalDate createdDate;
+    protected LocalDate lastModified;
+
 
     /**
      * Returns a Task object after initializing with the String description.
      * By default, isDone is set to false.
+     * Deafult constructor when creating from scratch.
      *
      * @param description Description String of the task.
      */
@@ -21,18 +28,22 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.taskType = PossibleTaskTypes.DEFAULT;
+        this.createdDate = LocalDate.now();
+        this.lastModified = LocalDate.now();
     }
 
     /**
-     * Returns a Task object after initializing with the String description and isDone status.
+     * Returns a Task object from user input after initializing with the String description and isDone status.
      *
      * @param description Description String of the task.
      * @param isDone Boolean status of the task.
      */
-    public Task(String description, Boolean isDone) {
+    public Task(String description, Boolean isDone, LocalDate createdDate, LocalDate lastModified) {
         this.description = description;
         this.isDone = isDone;
         this.taskType = PossibleTaskTypes.DEFAULT;
+        this.createdDate = createdDate;
+        this.lastModified = lastModified;
     }
 
     /**
@@ -67,6 +78,7 @@ public class Task {
     public void setDone() {
         if (!this.isDone) {
             this.isDone = true;
+            updateLastModified();
         }
         return;
     }
@@ -146,6 +158,18 @@ public class Task {
     public Boolean isDone() {
 
         return this.isDone;
+    }
+
+    public LocalDate getCreatedDate() {
+        return this.createdDate;
+    }
+
+    public LocalDate getLastModifiedDate() {
+        return this.lastModified;
+    }
+
+    public void updateLastModified(){
+        this.lastModified = LocalDate.now();
     }
 }
 

@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.DukeException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -76,7 +78,7 @@ public class Storage {
     public void clearFileBeforeSaving() throws IOException {
         // Overwrites text file and adds headers before saving tasks
         FileWriter fw = new FileWriter(this.getFilePath(), false);
-        fw.write("event type | isDone | description | extra description" + System.lineSeparator());
+        fw.write("event type | isDone | description | extra description | dateCreated | lastModified" + System.lineSeparator());
         fw.close();
     }
 
@@ -86,11 +88,13 @@ public class Storage {
      * @return ArrayList(Task) parsed from text file.
      * @throws FileNotFoundException An FilenotFoundException may occur when if filePath is invalid.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> loadTasks() throws FileNotFoundException, DukeException {
         // Initialises variables to handle the txt input file.
         ArrayList<String> inputsFromFile = new ArrayList<>();
         String description = "";
         String extraDescription = "";
+        String createdDate = "";
+        String lastModified = "";
         ArrayList<Task> tasks = new ArrayList<>();
 
         // Creates a scanner object to read the txt file from filePath.
@@ -108,8 +112,67 @@ public class Storage {
 
             if (words[0].length() < 3) {
                 // If condition to avoid reading in the header.
+                String taskType = words[0];
+
+                switch (taskType){
+                case "T":
+                    // Create a Todo class.
+
+                    if (words[1].contains("1")) {
+                        isDone = true;
+                    } else if (words[1].contains("0")) {
+                        isDone = false;
+                    }
+                    description = words[2].trim();
+                    createdDate = words[4].trim();
+                    lastModified = words[5].trim();
 
 
+                    Todo newTodo = new Todo(description, isDone, LocalDate.parse(createdDate),
+                            LocalDate.parse(lastModified));
+                    tasks.add(newTodo);
+                    break;
+
+                case "E":
+                    // Create an Event class.
+
+                    if (words[1].contains("1")) {
+                        isDone = true;
+                    } else if (words[1].contains("0")) {
+                        isDone = false;
+                    }
+                    description = words[2].trim();
+                    extraDescription = words[3].trim();
+                    createdDate = words[4].trim();
+                    lastModified = words[5].trim();
+
+                    Event newEvent = new Event(description, extraDescription, isDone, LocalDate.parse(createdDate),
+                            LocalDate.parse(lastModified));
+                    tasks.add(newEvent);
+                    break;
+
+                case "D":
+                    // Create a Deadline class.
+
+                    if (words[1].contains("1")) {
+                        isDone = true;
+                    } else if (words[1].contains("0")) {
+                        isDone = false;
+                    }
+                    description = words[2].trim();
+                    extraDescription = words[3].trim();
+                    createdDate = words[4].trim();
+                    lastModified = words[5].trim();
+
+                    Deadline newDeadline = new Deadline(description, extraDescription, isDone,
+                            LocalDate.parse(createdDate), LocalDate.parse(lastModified));
+                    tasks.add(newDeadline);
+                    break;
+
+                default:
+                        throw new DukeException("Unable to read from saved file");
+                }
+                /*
                 if (words[0].contains("T")) {
                     // Create a Todo class.
 
@@ -153,6 +216,7 @@ public class Storage {
                     Deadline newDeadline = new Deadline(description, extraDescription, isDone);
                     tasks.add(newDeadline);
                 }
+                */
             }
         }
         return tasks;

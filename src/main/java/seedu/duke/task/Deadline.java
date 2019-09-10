@@ -1,5 +1,7 @@
 package seedu.duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Deadline class is a subclass of Task class.
  * Additional attribute is the String dateTime, which holds the dateTime of the Deadline task.
@@ -7,47 +9,47 @@ package seedu.duke.task;
 public class Deadline extends Task {
 
 
-    protected String dateTime;
+    protected String dueDateTime;
 
     /**
      * Returns a Deadline object after initializing with 2 Strings, description and dateTime.
      *
      * @param description Description String of the task.
-     * @param dateTime dateTime String of the task.
+     * @param dueDateTime dateTime String of the task.
      */
-    public Deadline(String description, String dateTime) {
+    public Deadline(String description, String dueDateTime) {
         // Sets isDone to the default value, false.
         // Possible String for dateTime = 2/12/2019 1800.
         // Sample fullCommand = "deadline cs /by 21/12/2019 0800".
         super(description);
-        this.dateTime = dateTime;
+        this.dueDateTime = dueDateTime;
 
-        if (!dateTime.contains("of")) {
+        if (!dueDateTime.contains("of")) {
             // Checks if the String has already been formatted.
             // If "of" is present, this indicated that dateTime has already been formatted.
             // Main purpose is for creating Deadline objects when reading from saved data.
-            this.dateTime = parseBy(dateTime);
+            this.dueDateTime = parseBy(dueDateTime);
         }
     }
 
     /**
-     * Returns a Deadline object after initializing with 2 Strings, description and dateTime;
-     * and Boolean status of the task.
+     * Returns a Deadline object after initializing with description, dateTime, isDone,
+     * createdDate and lastModified date of the task. Meant to be used when constructing object from saved data.
      *
      * @param description Description String of the task.
-     * @param dateTime dateTime String of the task.
+     * @param dueDateTime dateTime String of the task.
      * @param isDone isDone Boolean status of the task.
      */
-    public Deadline(String description, String dateTime, Boolean isDone) {
+    public Deadline(String description, String dueDateTime, Boolean isDone, LocalDate createdDate,
+                    LocalDate lastModified) {
+        super(description, isDone, createdDate, lastModified);
+        this.dueDateTime = dueDateTime;
 
-        super(description, isDone);
-        this.dateTime = dateTime;
-
-        if (!dateTime.contains("of")) {
+        if (!dueDateTime.contains("of")) {
             // Checks if the String has already been formatted.
             // If "of" is present, this indicated that dateTime has already been formatted.
             // Main purpose is for creating Deadline objects when reading from saved data.
-            this.dateTime = parseBy(dateTime);
+            this.dueDateTime = parseBy(dueDateTime);
 
         }
     }
@@ -61,7 +63,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateTime + ")";
+        return "[D]" + super.toString() + " (by: " + dueDateTime + ")";
+    }
+
+    public String getDueDateTime(){
+        return this.dueDateTime;
     }
 
     /**
@@ -74,7 +80,8 @@ public class Deadline extends Task {
     @Override
     public String toSaveString() {
 
-        return ("D" + super.toSaveString() + " | " + this.dateTime);
+        return ("D" + super.toSaveString() + " | " + this.getDueDateTime() + " | " + this.getCreatedDate().toString()
+        + " | " + this.getLastModifiedDate().toString());
     }
 
     /**
@@ -89,8 +96,8 @@ public class Deadline extends Task {
 
         taskType = PossibleTaskTypes.DEADLINE;
 
-        String[] words = dateTime.split("/");
-        String[] years = dateTime.split(" ");
+        String[] words = dueDateTime.split("/");
+        String[] years = dueDateTime.split(" ");
 
         int day = Integer.parseInt(words[0]);
 

@@ -53,6 +53,18 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Handles creating Event or Deadline task object adding tasks to the storage.
+     * @param description description of the task.
+     * @param cmd type of Task (Event/Deadline).
+     * @param regex split indicator (/by or /at).
+     * @param taskList task list.
+     * @param storage storage unit which handles saving and loading of the tasks created/modified.
+     * @return String output after handling the event/deadline creation.
+     * @throws DukeException when user does not write full command input.
+     * @throws ParseException when user inputs the date in incorrect format.
+     * @throws IOException when file is not found or cannot be opened.
+     */
     public String handleEventOrDeadline(String description, String cmd,
                               String regex, List<Task> taskList,
                               Storage storage) throws DukeException, IOException, ParseException{

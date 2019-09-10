@@ -1,5 +1,5 @@
 public class Deadline extends Tasks {
-    private final TAG = "D";
+    private final String TAG = "D";
     private String date;
 
     public Deadline(String dets, String date) {
@@ -7,8 +7,13 @@ public class Deadline extends Tasks {
         this.date = date;
     }
 
-    public void finishTask() {
-        super.finishTask();
+    public Deadline(String dets, String date, int status) {
+        super(dets, status);
+        this.date = date;
+    }
+
+    public void doTask() {
+        super.doTask();
     }
 
     @Override

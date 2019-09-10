@@ -47,16 +47,15 @@ public class Storage {
             dir.mkdir();
         }
 
-        String  fileString = "";
-        for (Task t : arr) {
-            fileString += t.getFileStringFormat() + "\n";
-        }
+        final StringBuilder sb = new StringBuilder();
+        arr.stream()
+                .forEach(task -> sb.append(task.getFileStringFormat() + "\n"));
 
         try {
             File f = new File("data/tasks.txt");
             f.createNewFile();
             FileWriter fw = new FileWriter("data/tasks.txt");
-            fw.write(fileString);
+            fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
@@ -69,21 +68,21 @@ public class Storage {
             dir.mkdir();
         }
 
-        String  fileString = "";
-        for (Task t : arr) {
-            fileString += t.getFileStringFormat() + "\n";
-        }
+        final StringBuilder sb = new StringBuilder();
+        arr.stream()
+                .forEach(task -> sb.append(task.getFileStringFormat() + "\n"));
 
         try {
             File f = new File("data/archive.txt");
             FileWriter fw = new FileWriter(f, true);
-            fw.write(fileString);
+            fw.write(sb.toString());
             fw.close();
 
             File currentFile = new File("data/tasks.txt");
-            FileWriter fileWriter = new FileWriter("data/tasks.txt");
-            fw.write("");
-            fw.close();
+            currentFile.createNewFile();
+            FileWriter fileWriter = new FileWriter(currentFile);
+            fileWriter.write("");
+            fileWriter.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }

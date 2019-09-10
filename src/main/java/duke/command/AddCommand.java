@@ -7,23 +7,22 @@ import duke.component.Storage;
 import duke.exception.DukeException;
 import duke.exception.DukeWriteToFileException;
 import duke.task.Task;
-import duke.task.TodoTask;
 
 /**
- * An executable object representation of a user command to add a new to-do task.
+ * An executable object representation of a user command to add a new task of some type.
  */
-public class TodoCommand extends Command {
-    private String description;
+public class AddCommand extends Command {
+    private Task newTask;
 
     /**
-     * Constructs a <code>TodoCommand</code> object with a given description.
+     * Constructs an <code>AddCommand</code> object with a given <code>Task</code> instance to add.
      * 
      * @param command raw command string that generated this <code>Command</code> object.
-     * @param description <code>String</code> description of the <code>TodoTask</code> to be created.
+     * @param newTask <code>Task</code> instance to add to a <code>TaskList</code>.
      */
-    public TodoCommand(String command, String description) {
+    public AddCommand(String command, Task newTask) {
         super(command);
-        this.description = description;
+        this.newTask = newTask;
     }
 
     /**
@@ -35,15 +34,14 @@ public class TodoCommand extends Command {
      * @throws DukeException if an I/O error occured when writing the updated TaskList to the file.
      */
     public String execute(TaskList tasks, Storage fileMgr) throws DukeException {
-        Task task = new TodoTask(this.description);
-        tasks.addTask(task);
+        tasks.addTask(this.newTask);
         try {
             fileMgr.writeTaskList(tasks);
         } catch (IOException e) {
-            throw new DukeWriteToFileException("writeTaskList method invocation in TodoCommand");
+            throw new DukeWriteToFileException("writeTaskList method invocation in AddCommand");
         }
         
-        String template = "Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.";
-        return String.format(template, task.toString(), tasks.numberOfTasks());
+        String responseTemplate = "Got it. I've added this task:\n  %s\nNow you have %d tasks in the list.";
+        return String.format(responseTemplate, this.newTask.toString(), tasks.numberOfTasks());
     }
 }

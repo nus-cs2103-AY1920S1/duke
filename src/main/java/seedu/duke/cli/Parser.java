@@ -76,6 +76,8 @@ public class Parser {
      *                          for their type
      */
     public static Command parse(String in) throws CommandException {
+        assert constructors != null : "ConstructorCache map is null";
+
         String[] tok = in.split("\\s", 2);
         ConstructorCache ctor = constructors.get(tok[0].toLowerCase());
         if (ctor == null) {
@@ -85,6 +87,9 @@ public class Parser {
         Class<?>[] paramTypes = ctor.getParameterTypes();
         Argument[] paramAnns = ctor.getParameterAnnotations();
         Object[] params = new Object[paramTypes.length];
+
+        assert paramTypes != null : "ConstructorCache parameter type list is null";
+        assert paramAnns != null : "ConstructorCache parameter annotation list is null";
 
         for (int i = 0; i < params.length; ++i) {
             Argument me = paramAnns[i];

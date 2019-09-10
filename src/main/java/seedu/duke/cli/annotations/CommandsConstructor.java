@@ -5,12 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.PARAMETER)
+@Target(ElementType.CONSTRUCTOR)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Argument {
-    String prefix() default "";
-
-    boolean isTrailing() default false;
-
-    boolean isCommandName() default false;
+public @interface CommandsConstructor {
+    CommandConstructor[] value();
 }

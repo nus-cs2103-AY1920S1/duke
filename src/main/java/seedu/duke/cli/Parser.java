@@ -9,6 +9,7 @@ import seedu.duke.cli.commands.DoneCommand;
 import seedu.duke.cli.commands.EventCommand;
 import seedu.duke.cli.commands.FindCommand;
 import seedu.duke.cli.commands.ListCommand;
+import seedu.duke.cli.commands.LoanCommand;
 import seedu.duke.cli.commands.TodoCommand;
 
 import java.lang.annotation.Annotation;
@@ -34,6 +35,7 @@ public class Parser {
         addConstructors(DeadlineCommand.class);
         addConstructors(DeleteCommand.class);
         addConstructors(FindCommand.class);
+        addConstructors(LoanCommand.class);
     }
 
     // This class is to be used statically only.
@@ -43,23 +45,25 @@ public class Parser {
     @SuppressWarnings("unchecked")
     private static <A extends Command> void addConstructors(Class<A> clazz) {
         for (Constructor<?> c : clazz.getDeclaredConstructors()) {
-            CommandConstructor ccAnn = c.getAnnotation(CommandConstructor.class);
-            if (ccAnn == null) {
+            CommandConstructor[] ccAnns = c.getDeclaredAnnotationsByType(CommandConstructor.class);
+            if (ccAnns == null) {
                 continue;
             }
 
-            ConstructorCache cc = new ConstructorCache((Constructor<? extends Command>) c);
-            constructors.put(ccAnn.value().toLowerCase(), cc);
-            boolean seenTrailing = false;
-            for (Argument a : cc.getParameterAnnotations()) {
-                if (a == null || !a.isTrailing() || !a.prefix().isBlank()) {
-                    continue;
-                }
+            for (CommandConstructor ccAnn : ccAnns) {
+                ConstructorCache cc = new ConstructorCache((Constructor<? extends Command>) c);
+                constructors.put(ccAnn.value().toLowerCase(), cc);
+                boolean seenTrailing = false;
+                for (Argument a : cc.getParameterAnnotations()) {
+                    if (a == null || a.isCommandName() || !a.isTrailing() || !a.prefix().isBlank()) {
+                        continue;
+                    }
 
-                if (!seenTrailing) {
-                    seenTrailing = true;
-                } else {
-                    throw new RuntimeException("Cannot have multiple trailing arguments without a prefix");
+                    if (!seenTrailing) {
+                        seenTrailing = true;
+                    } else {
+                        throw new RuntimeException("Cannot have multiple trailing arguments without a prefix");
+                    }
                 }
             }
         }
@@ -79,7 +83,8 @@ public class Parser {
         assert constructors != null : "ConstructorCache map is null";
 
         String[] tok = in.split("\\s", 2);
-        ConstructorCache ctor = constructors.get(tok[0].toLowerCase());
+        final String commandName = tok[0].toLowerCase();
+        ConstructorCache ctor = constructors.get(commandName);
         if (ctor == null) {
             return null;
         }
@@ -93,8 +98,13 @@ public class Parser {
 
         for (int i = 0; i < params.length; ++i) {
             Argument me = paramAnns[i];
+            if (me != null && me.isCommandName()) {
+                params[i] = commandName;
+                continue;
+            }
+
             if (tok.length < 2) {
-                if (me.isTrailing()) {
+                if (me != null && me.isTrailing()) {
                     params[i] = null;
                     continue;
                 } else {

@@ -8,6 +8,7 @@ import seedu.duke.cli.commands.DoneCommand;
 import seedu.duke.cli.commands.EventCommand;
 import seedu.duke.cli.commands.FindCommand;
 import seedu.duke.cli.commands.ListCommand;
+import seedu.duke.cli.commands.LoanCommand;
 import seedu.duke.cli.commands.TodoCommand;
 
 import java.time.LocalDateTime;
@@ -65,5 +66,15 @@ public class ParserTest {
     @Test
     public void findTest() throws CommandException {
         assertEquals(Parser.parse("find asdasd"), new FindCommand("asdasd"));
+    }
+
+    @Test
+    public void loanTest() throws CommandException {
+        assertEquals(Parser.parse("loanout 123 hello /by 1/1/2019 00:00"),
+                new LoanCommand("loanout", 123, "hello",
+                        LocalDateTime.of(2019, 1, 1, 0, 0)));
+        assertEquals(Parser.parse("loanin 123 hello /by 1/1/2019 00:00"),
+                new LoanCommand("loanin", 123, "hello",
+                        LocalDateTime.of(2019, 1, 1, 0, 0)));
     }
 }

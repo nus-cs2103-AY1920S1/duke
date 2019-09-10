@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Storage {
     String filePath;
@@ -64,9 +65,11 @@ public class Storage {
 
         try {
             FileWriter fw = new FileWriter(file);
-            for (Task t : taskList.getTasks()) {
-                fw.write( t.toStorageString() + "\n");
-            }
+            List<String> strings = taskList.getTasks()
+                    .stream()
+                    .map(Task::toStorageString)
+                    .collect(Collectors.toList());
+            fw.write(String.join("\n", strings));
             fw.close();
         } catch (IOException e) {
             throw new DukeException("Error saving to file");

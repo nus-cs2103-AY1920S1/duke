@@ -8,12 +8,25 @@ public class Task {
     protected boolean isDone;
     protected Priority priority;
 
+    /**
+     * Constructor for Task. More commonly used.
+     * 
+     * @param description Description of Task.
+     * @param priority    Priority level of the task.
+     */
     public Task(String description, int priority) {
         this.description = description;
         this.isDone = false;
         this.priority = whichPriority(priority);
     }
 
+    /**
+     * Another constructor for Task. Used mainly in Storage.
+     * 
+     * @param description Description of Task.
+     * @param isDone      1 if the Task is done, else 0.
+     * @param priority    Priority level of the task.
+     */
     public Task(String description, int isDone, int priority) {
         this.description = description;
         this.isDone = isDone == 1;
@@ -32,6 +45,12 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Converts priority from Integer to Priority.
+     * 
+     * @param priority Priority in Integer object.
+     * @return Priority with correct priority level.
+     */
     public Priority whichPriority(int priority) {
         switch (priority) {
         case 1:

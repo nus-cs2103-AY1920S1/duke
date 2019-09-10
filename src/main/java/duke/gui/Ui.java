@@ -51,6 +51,8 @@ public class Ui {
 
     /**
      * Prints out a welcome message.
+     *
+     * @return the formatted text string.
      */
     String showWelcomeMessage() {
         return showToUser(WELCOME_MESSAGE_1, LOGO, WELCOME_MESSAGE_2);
@@ -60,6 +62,7 @@ public class Ui {
      * Prints out a specified error message.
      *
      * @param e the error to print.
+     * @return the formatted text string.
      */
     public String showError(DukeException e) {
         return showToUser(e.getMessage());
@@ -70,6 +73,7 @@ public class Ui {
      *
      * @param task the task added.
      * @param taskCount the number of tasks currently in the task list.
+     * @return the formatted text string.
      */
     public String showAddMessage(Task task, long taskCount) {
         return showToUser(ADD_MESSAGE,
@@ -83,6 +87,7 @@ public class Ui {
      * Prints out the message indicating a task has been marked done.
      *
      * @param task the task marked done.
+     * @return the formatted text string.
      */
     public String showDoneMessage(Task task) {
         return showToUser(DONE_MESSAGE, task.toString());
@@ -93,6 +98,7 @@ public class Ui {
      *
      * @param task the deleted task.
      * @param taskCount the number of tasks remaining in the task list.
+     * @return the formatted text string.
      */
     public String showDeleteMessage(Task task, long taskCount) {
         return showToUser(DELETE_MESSAGE,
@@ -106,11 +112,19 @@ public class Ui {
      * Prints out the list of results from a keyword search.
      *
      * @param searchList the task list of results.
+     * @return the formatted text string.
      */
     public String showSearchList(TaskList searchList) {
         return showToUser(SEARCH_MESSAGE, showTaskList(searchList));
     }
 
+    /**
+     * Prints out a sorted list of tasks, filtered by the specified task.
+     *
+     * @param remindList the list to filter and sort.
+     * @param type the task type to show reminders for.
+     * @return the formatted text string.
+     */
     public String showRemindList(TaskList remindList, TaskType type) {
         return showToUser(REMIND_MESSAGE,
                 "",
@@ -123,6 +137,7 @@ public class Ui {
      * Prints out a task list.
      *
      * @param taskList the task list to print.
+     * @return the formatted text string.
      */
     public String showTaskList(TaskList taskList) {
         StringBuilder sb = new StringBuilder();
@@ -138,6 +153,8 @@ public class Ui {
 
     /**
      * Prints the exit message.
+     *
+     * @return the formatted text string.
      */
     public String showExitMessage() {
         return showToUser(EXIT_MESSAGE);
@@ -147,6 +164,7 @@ public class Ui {
      * Prints out a sequence of messages with dividers at beginning and end, and prefix added to each line.
      *
      * @param messages the sequence of messages to print.
+     * @return the formatted text string.
      */
     private String showToUser(String... messages) {
         StringBuilder sb = new StringBuilder();

@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.RemindCommand;
 import duke.exception.DukeException;
 import duke.exception.DukeIndexOutOfBoundsException;
 import duke.exception.DukeMissingDescriptionException;
@@ -14,7 +21,10 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Locale;
 
-import static duke.task.TaskType.*;
+import static duke.task.TaskType.TODO;
+import static duke.task.TaskType.DEADLINE;
+import static duke.task.TaskType.EVENT;
+import static duke.task.TaskType.ALL;
 
 /**
  * Deals with making sense of commands.
@@ -41,21 +51,21 @@ public class Parser {
 
         switch (commands[0]) {
         case "todo":
-            return parseTodo(args);
+            return parseTodoCommand(args);
         case "event":
-            return parseEvent(args);
+            return parseEventCommand(args);
         case "deadline":
-            return parseDeadline(args);
+            return parseDeadlineCommand(args);
         case "find":
-            return parseFind(args);
+            return parseFindCommand(args);
         case "done":
-            return parseDone(args);
+            return parseDoneCommand(args);
         case "delete":
-            return parseDelete(args);
+            return parseDeleteCommand(args);
         case "list":
-            return parseList(args);
+            return parseListCommand(args);
         case "remindme":
-            return parseRemind(args);
+            return parseRemindCommand(args);
         case "bye":
             return parseBye(args);
         default:
@@ -66,14 +76,14 @@ public class Parser {
     /*
     Business logic for each command. Refactor concept: Extract Method
      */
-    private static Command parseTodo(String[] args) throws DukeMissingDescriptionException {
+    private static Command parseTodoCommand(String[] args) throws DukeMissingDescriptionException {
         if (args.length == 0) {
             throw new DukeMissingDescriptionException("OOPS! The description of a todo cannot be empty.");
         }
         return new AddCommand(TODO, args, false);
     }
 
-    private static Command parseEvent(String[] args) throws DukeUnknownInputException {
+    private static Command parseEventCommand(String[] args) throws DukeUnknownInputException {
         String[] eventArgs = String.join(" ", args).split(" /at ");
         if (eventArgs.length != 2) {
             throw new DukeUnknownInputException("Incorrect argument count for event!");
@@ -82,7 +92,7 @@ public class Parser {
         return new AddCommand(EVENT, args, false);
     }
 
-    private static Command parseDeadline(String[] args) throws DukeUnknownInputException {
+    private static Command parseDeadlineCommand(String[] args) throws DukeUnknownInputException {
         String[] deadlineArgs = String.join(" ", args).split(" /by ");
         if (deadlineArgs.length != 2) {
             throw new DukeUnknownInputException("Incorrect argument count for deadline!");
@@ -93,7 +103,7 @@ public class Parser {
         return new AddCommand(DEADLINE, args, false);
     }
 
-    private static Command parseFind(String[] args) throws DukeMissingDescriptionException {
+    private static Command parseFindCommand(String[] args) throws DukeMissingDescriptionException {
         if (args.length == 0) {
             throw new DukeMissingDescriptionException("OOPS! The keyword of a search cannot be empty.");
         }
@@ -102,7 +112,7 @@ public class Parser {
         return new FindCommand(keyword, false);
     }
 
-    private static Command parseDone(String[] args) throws DukeIndexOutOfBoundsException {
+    private static Command parseDoneCommand(String[] args) throws DukeIndexOutOfBoundsException {
         int doneIdx = Integer.valueOf(args[0]);
         if (doneIdx < 0) {
             throw new DukeIndexOutOfBoundsException("Attempting to mark task not in list!");
@@ -111,7 +121,7 @@ public class Parser {
         return new DoneCommand(doneIdx, false);
     }
 
-    private static Command parseDelete(String[] args) throws DukeIndexOutOfBoundsException {
+    private static Command parseDeleteCommand(String[] args) throws DukeIndexOutOfBoundsException {
         int deleteIdx = Integer.valueOf(args[0]);
         if (deleteIdx < 0) {
             throw new DukeIndexOutOfBoundsException("Attempting to delete task not in list!");
@@ -120,11 +130,11 @@ public class Parser {
         return new DeleteCommand(deleteIdx, false);
     }
 
-    private static Command parseList(String[] args) {
+    private static Command parseListCommand(String[] args) {
         return new ListCommand(false);
     }
 
-    private static Command parseRemind(String[] args) {
+    private static Command parseRemindCommand(String[] args) {
         if (args.length != 1) {
             throw new DukeUnknownInputException("Incorrect argument count for remind, should be 1");
         }

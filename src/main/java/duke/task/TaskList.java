@@ -3,14 +3,12 @@ package duke.task;
 import duke.Parser;
 import duke.exception.DukeIndexOutOfBoundsException;
 
-import java.lang.reflect.Array;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
-import static duke.task.TaskType.*;
+import static duke.task.TaskType.TODO;
+import static duke.task.TaskType.EVENT;
+import static duke.task.TaskType.DEADLINE;
 
 /**
  * Represents a list of tasks in Duke.
@@ -137,6 +135,8 @@ public class TaskList {
             return newList; // have list point at the updated list
         case TODO:
             break;
+        default:
+            assert false;
         }
         return list;
     }

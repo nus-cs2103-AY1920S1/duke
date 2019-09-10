@@ -68,6 +68,9 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Clear the ArrayList
+     */
     public void clean() {
         list = new ArrayList<>();
     }

@@ -62,6 +62,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Add the current arraylist of tasks to archive.txt
+     * @param arr an ArrayList of Tasks
+     */
     public static void addToArchive(ArrayList<Task> arr) {
         File dir = new File("/Users/joannasara/Desktop/duke/data");
         if (!dir.exists()) {
@@ -88,6 +92,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the ArrayList of Tasks saved in archive.txt
+     * @return an ArrayList containing the Tasks saved in archive.txt
+     * @throws FileNotFoundException
+     */
     public static ArrayList<Task> loadArchive() throws FileNotFoundException{
         ArrayList<Task> list = new ArrayList<>();
         File f = new File("data/archive.txt");
@@ -95,6 +104,12 @@ public class Storage {
         return readFile(list, s);
     }
 
+    /**
+     * Read the tasks from the given Scanner and saved it in list
+     * @param list an ArrayList of Tasks to save the read Tasks
+     * @param s Scanner for reading the Tasks
+     * @return an ArrayList of Tasks
+     */
     private static ArrayList<Task> readFile(ArrayList<Task> list, Scanner s) {
         while (s.hasNext()) {
             String line = s.nextLine();

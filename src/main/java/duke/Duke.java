@@ -74,7 +74,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        storage.updateFile(taskList.getList());
         if (input.equals("bye")) {
             return "Bye. Hope to see you again soon!";
         } else {
@@ -88,5 +87,9 @@ public class Duke extends Application {
                 return "File not found";
             }
         }
+    }
+
+    public void updateFile() {
+        storage.updateFile(taskList.getList());
     }
 }

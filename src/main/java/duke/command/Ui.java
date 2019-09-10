@@ -129,12 +129,20 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Saves data into archive.txt and delete the contents of the current arraylist.
+     * @return the String "Data has been moved to archive."
+     */
     public String printArchive() {
         storage.addToArchive(taskList.getList());
         taskList.clean();;
         return "Data has been moved to archive.";
     }
 
+    /**
+     * Prints the list of archived tasks.
+     * @return a String containing all the archived tasks.
+     */
     public String printArchiveList() {
         int i = 1;
         String result = "Here are the the tasks that you have archived:\n";

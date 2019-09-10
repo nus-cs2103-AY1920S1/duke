@@ -28,6 +28,12 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Set up the FXML
+     * @param stage Stage which the fxml file is used
+     * @return a Scene
+     * @throws IOException
+     */
     private Scene loadLayout(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
         AnchorPane ap = fxmlLoader.load();
@@ -38,6 +44,10 @@ public class Main extends Application {
         return scene;
     }
 
+    /**
+     * Prints the welcome message
+     * @param scene the Scene at which the welcome message is displayed
+     */
     private void addWelcomeMessage(Scene scene) {
         String welcomeMessage  = "Hello! I'm duke.Duke\nWhat can I do for you?";
         VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");

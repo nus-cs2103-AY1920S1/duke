@@ -92,10 +92,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Create a new dialog box using with the user picture
+     * @param text message String
+     * @param img user profile photo Image
+     * @return DialogBox with the message String and user profile photo Image
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Create a new dialog box with duke photo
+     * @param text message String
+     * @param img duke profile photo Image
+     * @return DialogBox with the message String and duke profile photo Image
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -60,6 +60,7 @@ public class DoneCommand extends Command {
         } catch (IOException e) {
             sb.append("    OOPS!!! " + e.getMessage());
         }
+        assert(!(sb.toString()).isEmpty());
         return sb.toString();
     }
 }

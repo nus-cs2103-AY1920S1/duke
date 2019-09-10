@@ -42,6 +42,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return tasks.findTasks(searchTerm);
+        String response = tasks.findTasks(searchTerm);
+        assert(!response.isEmpty());
+        return response;
     }
 }

@@ -43,6 +43,8 @@ public class Parser {
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DukeException("\u2639 OOPS!!! The description of the event is incomplete.");
                 }
+            case "find":
+                return new FindCommand(command[1]);
             default:
                 return new UnknownCommand();
         }

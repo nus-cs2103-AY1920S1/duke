@@ -41,4 +41,21 @@ public class TaskList {
     public void addTask(Task t) {
         taskList.add(t);
     }
+
+    public LinkedList<Task> findTasks(String toFind) {
+        LinkedList<Task> result = new LinkedList<>();
+        CharSequence cs = toFind;
+
+        for (int k = 0; k < taskList.size(); k++) {
+            Task t = taskList.get(k);
+            if (t.getDescription().contains(cs)) {
+                result.add(t);
+            } else {
+                result.add(new Task("fake task"));
+            }
+        }
+
+        return result;
+    }
+
 }

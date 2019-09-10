@@ -17,6 +17,7 @@ public class Parser {
      * @throws DukeException exception returned when format of command not right.
      */
     public Parser(String command) throws DukeException {
+        command = command.trim();
         String[] commandWords = command.split(" ");
         String order = commandWords[0];
         if (command.split(order  + " ").length == 1
@@ -61,11 +62,21 @@ public class Parser {
             int startMinutes = startTime % 100;
             int endHours = endTime / 100;
             int endMinutes = endTime % 100;
+            assert startHours >= 0 && startHours <= 24 : "Hours should be in 0-24 range!";
+            assert endHours >= 0 && endHours <= 24 : "Hours should be in 0-24 range!";
+            assert startMinutes >= 0 && startMinutes <= 60 : "Minutes should be in 0-60 range!";
+            assert endMinutes >= 0 && endMinutes <= 60 : "Minutes should be in 0-60 range!";
             String[] dateArray = dateAndTime[0].split("/");
+            String day = dateArray[0];
+            String month = dateArray[1];
+            String year = dateArray[2];
+            assert Integer.parseInt(month) >= 1 && Integer.parseInt(month) <= 12 : "Month should be in 1-12 range!";
+            assert Integer.parseInt(year) > 0 : "Year should be positive (restricted to A.D.)";
+            assert Integer.parseInt(day) >= 1 && Integer.parseInt(day) <= 31 : "Day should be restricted in 1-31 range";
             list.add(details[0]);
-            list.add(dateArray[0]);
-            list.add(dateArray[1]);
-            list.add(dateArray[2]);
+            list.add(day);
+            list.add(month);
+            list.add(year);
             list.add("" + startHours);
             list.add("" + startMinutes);
             list.add("" + endHours);
@@ -94,6 +105,14 @@ public class Parser {
             }
             int hours = time / 100;
             int minutes = time % 100;
+            assert hours >= 0 && hours <= 24 : "Hour should be within 0-24 range!";
+            assert minutes >= 0 && minutes <= 60 : "Minutes should be within 0-60 range!";
+            String day = dateArray[0];
+            String month = dateArray[1];
+            String year = dateArray[2];
+            assert Integer.parseInt(month) >= 1 && Integer.parseInt(month) <= 12 : "Month should be in 1-12 range!";
+            assert Integer.parseInt(year) > 0 : "Year should be positive (restricted to A.D.)";
+            assert Integer.parseInt(day) >= 1 && Integer.parseInt(day) <= 31 : "Day should be restricted in 1-31 range";
             list.add(details[0]);
             list.add(dateArray[0]);
             list.add(dateArray[1]);

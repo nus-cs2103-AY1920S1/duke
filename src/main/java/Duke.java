@@ -50,7 +50,7 @@ public class Duke {
                     for (int i = 0; i < list.size(); i++) {
                         Task task = list.get(i);
                         printDuke((i + 1) + ". [" + task.getType() + "][" +
-                                    task.getStatusIcon() + "]"  + task.getDesc());
+                                    task.getStatusIcon() + "] "  + task.getDesc());
                     }
 
                     printDuke(LINE);

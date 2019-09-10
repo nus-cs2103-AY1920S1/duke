@@ -32,7 +32,6 @@ public class Duke {
      */
     void run() {
         ui.greet();
-
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             try {

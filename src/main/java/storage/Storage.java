@@ -34,38 +34,44 @@ public class Storage {
             String[] storedTasks = content.split("\n");
             // Adding tasks stored in the text file
             for (String s: storedTasks) {
-                if (s.charAt(0) == 'T') {
-                    Todo todo = new Todo(s.substring(8));
-                    if (s.charAt(4) != '0') {
-                        todo.markAsDone();
-                    }
-                    tasks.add(todo);
-                } else if (s.charAt(0) == 'E') {
-                    String[] tempSplit = s.substring(8).split("\\u007C ");
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-                    LocalDateTime ldt = LocalDateTime.parse(tempSplit[1].trim(), dtf);
-                    Event event = new Event(tempSplit[0].trim(), ldt, tempSplit[1].trim());
-                    if (s.charAt(4) != '0') {
-                        event.markAsDone();
-                    }
-                    tasks.add(event);
-                } else if (s.charAt(0) == 'D') {
-                    String[] tempSplit = s.substring(8).split("\\u007C ");
-                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-                    LocalDateTime ldt = LocalDateTime.parse(tempSplit[1].trim(), dtf);
-                    Deadline deadline = new Deadline(tempSplit[0].trim(), ldt, tempSplit[1].trim());
-                    if (s.charAt(4) != '0') {
-                        deadline.markAsDone();
-                    }
-                    tasks.add(deadline);
-                } else {
-                    throw new DukeException("Invalid Duke File");
-                }
+                char taskType = s.charAt(0);
+                tasks.add(taskStringToTask(taskType, s));
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             return tasks;
+        }
+    }
+
+    public Task taskStringToTask(char taskType, String taskString) throws DukeException{
+        if (taskType == 'T') {
+            Todo todo = new Todo(taskString.substring(8));
+            if (taskString.charAt(4) != '0') {
+                todo.markAsDone();
+            }
+            return todo;
+        } else if (taskType == 'E') {
+            String[] tempSplit = taskString.substring(8).split("\\u007C ");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            LocalDateTime ldt = LocalDateTime.parse(tempSplit[1].trim(), dtf);
+            Event event = new Event(tempSplit[0].trim(), ldt, tempSplit[1].trim());
+            if (taskString.charAt(4) != '0') {
+                event.markAsDone();
+            }
+            return event;
+        } else if (taskType == 'D') {
+            String[] tempSplit = taskString.substring(8).split("\\u007C ");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+            LocalDateTime ldt = LocalDateTime.parse(tempSplit[1].trim(), dtf);
+            Deadline deadline = new Deadline(tempSplit[0].trim(), ldt, tempSplit[1].trim());
+            if (taskString.charAt(4) != '0') {
+                deadline.markAsDone();
+            }
+            return deadline;
+        } else {
+            assert false: "Invalid task type stored in storage";
+            return null;
         }
     }
 

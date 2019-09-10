@@ -82,24 +82,38 @@ public class Parser {
      */
     private static void checkIllegalInstruction(String[] words) throws DukeException {
         String fw = words[0];
-        if (!(fw.equals("done") || fw.equals("todo") || fw.equals("deadline") || fw.equals("event")
-                    || fw.equals("delete") || fw.equals("list") || fw.equals("bye") || fw.equals("find"))) {
+        boolean isDoneCommand = fw.equals("done");
+        boolean isTodoCommand = fw.equals("todo");
+        boolean isDeadlineCommand = fw.equals("deadline");
+        boolean isEventCommand = fw.equals("event");
+        boolean isDeleteCommand = fw.equals("delete");
+        boolean isListCommand = fw.equals("list");
+        boolean isExitCommand = fw.equals("bye");
+        boolean isFindCommand = fw.equals("find");
+
+        boolean isValidCommand = isDoneCommand || isTodoCommand || isDeadlineCommand || isEventCommand
+                                || isDeleteCommand || isListCommand || isExitCommand || isFindCommand;
+        boolean isAddCommand = isTodoCommand || isDeadlineCommand || isEventCommand;
+        boolean isMissingDetail = words.length < 2;
+        boolean isMissingTime = findIdx(words, "/by") == -1 || findIdx(words, "/at") == -1;
+        boolean hasInvalidTaskId = words.length > 1 && Integer.parseInt(words[1]) < 1;
+
+        if (!isValidCommand) {
             throw new DukeException(" \u2639  OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        if ((fw.equals("todo") || fw.equals("deadline") || fw.equals("event")) && words.length < 2) {
+        if (isAddCommand && isMissingDetail) {
             throw new DukeException(" \u2639  OOPS!!! The description of a " + fw + " cannot be empty.");
         }
-        if ((fw.equals("deadline") && findIdx(words, "/by") == -1)
-                || (fw.equals("event") && findIdx(words, "/at") == -1)) {
+        if ((isDeadlineCommand || isEventCommand) && isMissingTime) {
             throw new DukeException(" \u2639  OOPS!!! The time of a " + fw + " cannot be empty.");
         }
-        if ((fw.equals("done") || fw.equals("delete")) && words.length < 2) {
+        if ((isDoneCommand || isDeleteCommand) && isMissingDetail) {
             throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be empty.");
         }
-        if ((fw.equals("done") || fw.equals("delete")) && Integer.parseInt(words[1]) < 1) {
+        if ((isDoneCommand || isDeleteCommand) && hasInvalidTaskId) {
             throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " cannot be less than 1.");
         }
-        if (fw.equals("find") && words.length < 2) {
+        if (isFindCommand && isMissingDetail) {
             throw new DukeException(" \u2639  OOPS!!! The keyword of a " + fw + " cannot be empty.");
         }
     }

@@ -35,7 +35,7 @@ public class StringToDate {
      * month and year of date entered by user.
      * Checks if said date details are within an acceptable range.
      *
-     * @return boolean true if date is acceptable range, false otherwise
+     * @return true if date is acceptable range, false otherwise
      */
     private boolean checkDateValues(String rawDate) {
         String[] dateAndTime = rawDate.split(" ");

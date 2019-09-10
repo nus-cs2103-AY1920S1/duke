@@ -37,12 +37,17 @@ public class Parser {
         String[] keywords;
         int i;
         int taskId;
+        String userCommand = commandArr[0];
 
         try {
-            switch (commandArr[0].toLowerCase()) {
+            switch (userCommand) {
             case "todo":
                 String name = "";
-                checkCommand(commandArr);
+
+                if (commandArr.length < 2) {
+                    throw new DukeException(ERROR_TODO);
+                }
+
                 for (i = 1; i < commandArr.length; i++) {
                     name += commandArr[i] + " ";
                 }
@@ -94,18 +99,6 @@ public class Parser {
     }
 
     /**
-     * Check specifically for invalid inputs related to todo events.
-     *
-     * @param commandArr array of commands from user
-     * @throws DukeException for invalid input
-     */
-    private static void checkCommand(String[] commandArr) throws DukeException {
-        if (commandArr.length < 2) {
-            throw new DukeException(ERROR_TODO);
-        }
-    }
-
-    /**
      * Parse the deadline and event input to obtain name of task
      * and time.
      *
@@ -119,7 +112,7 @@ public class Parser {
         String name = "";
         String time = "";
         boolean flag = false;
-        int i = 1; // skip the task type
+        int i;
         for (i = 1; i < commandArr.length; i++) {
             if (commandArr[i].equals(keyword)) {
                 flag = true;
@@ -130,7 +123,8 @@ public class Parser {
             }
         }
 
-        // error handling
+        // checks if the name of event or deadline and their timings are given by user
+        // appropriate errors are then thrown if needed
         if (name.isEmpty()) {
             throw new DukeException("☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
         } else if (!flag) {

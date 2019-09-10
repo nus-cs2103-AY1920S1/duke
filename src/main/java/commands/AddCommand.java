@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      * @param tasks the object that contains the current list of tasks
      * @param ui to give feedback to the user
      * @param storage enables writing to file
-     * @return String feedback to user
+     * @return feedback from duke
      * @throws DukeException if there are any problems writing to file
      */
     @Override

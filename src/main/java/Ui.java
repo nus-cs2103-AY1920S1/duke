@@ -48,6 +48,8 @@ public class Ui {
      * @param listSize The new size of the TaskList
      */
     public String ackDeletion(Task deletedTask, int listSize) {
+        assert listSize >= 0 : "ackDeletion was passed a negative listSize";
+
         return printWithLongLines(
             "Noted. I've removed this task:\n"
             + deletedTask
@@ -76,7 +78,9 @@ public class Ui {
      * @param newTask The Task that was newly added
      * @param listSize The new size of the TaskList
      */
-    public String ackAddition(Task newTask, int listSize) {
+    public String ackAddition(Task newTask, int listSize) {        
+        assert listSize >= 0 : "ackAddition was passed a negative listSize";
+
         return printWithLongLines(
             "Got it. I've added this task:\n"
             + newTask

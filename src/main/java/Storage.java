@@ -21,6 +21,10 @@ public class Storage {
      * @param filePath Path of the data file
      */
     public Storage(DateParser dateParser, String filePath) {
+        assert dateParser != null : "Storage constructor was passed a null arg (dateParser)";
+        assert filePath != null : "Storage constructor was passed a null arg (filePath)";
+        assert filePath.length() > 0 : "Storage constructor was passed an empty String (filePath)";
+
         this.dateParser = dateParser;
         this.filePath = filePath;
     }
@@ -96,7 +100,8 @@ public class Storage {
      * @param taskList The TaskList to be written
      */
     public void writeDataFile(TaskList taskList) {
-        
+        assert taskList != null : "writeDataFile was passed a null argument";
+
         PrintWriter outStream;
 
         try {
@@ -113,6 +118,8 @@ public class Storage {
     }
 
     private String saveTask(Task t) {
+        
+        assert t != null : "saveTask was passed a null Task to save";
 
         String doneChar = (t.isDone ? "1" : "0");
         String classChar;

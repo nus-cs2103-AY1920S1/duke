@@ -4,6 +4,7 @@ import command.Command;
 import command.DeadlineCommand;
 import command.DeleteCommand;
 import command.DoneCommand;
+import command.EditCommand;
 import command.EventCommand;
 import command.ExitCommand;
 import command.FindCommand;
@@ -24,7 +25,7 @@ public class Parser {
      * @return the command based on user input
      * @throws DukeException if user input is invalid
      */
-    public Command parse(String userInput) throws DukeException {
+    public Command parse(String userInput) {
         String[] separatedInputs = userInput.trim().split("\\s+");
         switch (separatedInputs[0].toLowerCase()) {
         case "bye":
@@ -32,10 +33,10 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            int doneIdx = checkInput(separatedInputs);
+            int doneIdx = checkDoneDeleteInput(separatedInputs);
             return new DoneCommand(doneIdx);
         case "delete":
-            int deleteIdx = checkInput(separatedInputs);
+            int deleteIdx = checkDoneDeleteInput(separatedInputs);
             return new DeleteCommand(deleteIdx);
         case "todo":
             String description = userInput.trim().substring(separatedInputs[0].length()).trim();
@@ -58,6 +59,20 @@ public class Parser {
         case "find":
             String keyword = userInput.trim().substring(separatedInputs[0].length()).trim();
             return new FindCommand(keyword);
+        case "edit":
+            try {
+                int editIdx = Integer.parseInt(separatedInputs[1]) - 1;
+                String editDetail = userInput.substring(
+                        separatedInputs[0].length()
+                                + separatedInputs[1].length()
+                                + 1).trim();
+                if (editDetail.isEmpty()) {
+                    throw new DukeException(DukeException.ErrorType.INVALID_EDIT_FIELD);
+                }
+                return new EditCommand(editIdx, editDetail);
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new DukeException(DukeException.ErrorType.INVALID_NUMBER);
+            }
         default:
             throw new DukeException(DukeException.ErrorType.GIBBERISH);
         }
@@ -70,7 +85,7 @@ public class Parser {
      * @return the index of the task to be marked done or deleted
      * @throws DukeException the user input has entered invalid task ID
      */
-    private int checkInput(String[] separatedInputs) throws DukeException {
+    private int checkDoneDeleteInput(String[] separatedInputs) throws DukeException {
         if (separatedInputs.length != 2) {
             throw new DukeException(DukeException.ErrorType.INVALID_NUMBER);
         }

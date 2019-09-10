@@ -36,6 +36,10 @@ public class Deadline extends Task {
         return by;
     }
 
+    public void setBy(Date by) {
+        this.by = by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

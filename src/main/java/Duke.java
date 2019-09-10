@@ -50,9 +50,6 @@ public class Duke extends Application {
 
         scene = new Scene(mainLayout);
 
-        //stage.setScene(scene);
-        //stage.show();
-
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
@@ -133,11 +130,7 @@ public class Duke extends Application {
         return "Duke heard: " + input;
     }
 
-
-
-
     public static void main(String[] args){
-
         new Duke("duke.txt").run();
     }
 

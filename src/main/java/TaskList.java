@@ -1,8 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 /**
  * Contains the methods to execute user's commands and store the information while the program runs.
@@ -108,17 +111,17 @@ public class TaskList {
      *Reads and processes the event given by the user.
      * Stores the information in the list after processing.
      *
-     * @param b The information of the event being processed.
+     * @param eventDetails The information of the event being processed.
      * @throws ParseException If the data is not in the required format i.e. MM/dd/yyyy HH:mm.
      */
-    protected String readEvent(String b) throws ParseException {
+    protected String readEvent(String eventDetails) throws ParseException {
         String output = "";
-        if (b.length() == 0) {
+        if (eventDetails.length() == 0) {
             output = (" OOPS!!! the description of a event cannot be empty.\n ");
         } else {
-            int first = b.indexOf('/');
-            String desc = b.substring(0, first - 1);
-            String on = b.substring(first + 4);
+            int first = eventDetails.indexOf('/');
+            String desc = eventDetails.substring(0, first - 1);
+            String on = eventDetails.substring(first + 4);
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             Date at = df.parse(on);
             Task t1 = new Event(desc, at, false);
@@ -132,16 +135,16 @@ public class TaskList {
      *Reads and processes the deadline given by the user.
      * Stores the information in the list after processing.
      *
-     * @param s the information of the Deadline input by the user.
+     * @param deadlineDetails the information of the Deadline input by the user.
      */
-    protected String readDeadline(String s) {
+    protected String readDeadline(String deadlineDetails) {
         String output = "";
-        if (s.length() == 0) {
+        if (deadlineDetails.length() == 0) {
             output = (" OOPS!!! the description of a deadline cannot be empty. \n");
         } else {
-            int first = s.indexOf('/');
-            String descr = s.substring(0, first - 1);
-            String byTime = s.substring(first + 4);
+            int first = deadlineDetails.indexOf('/');
+            String descr = deadlineDetails.substring(0, first - 1);
+            String byTime = deadlineDetails.substring(first + 4);
             Task t1 = new Deadline(descr, byTime, false);
             this.add(t1);
             output = this.addMessage();
@@ -152,17 +155,24 @@ public class TaskList {
     /**
      *Reads and processes the ToDo task given by the user.
      *
-     * @param s The information regarding the todo task.
+     * @param todoDetails The information regarding the todo task.
      */
-    protected String readTodo(String s) {
+    protected String readTodo(String todoDetails) {
         String output = "";
-        if (s.length() == 0) {
+        if (todoDetails.length() == 0) {
             return (" OOPS!!! the description of a todo cannot be empty. \n");
         } else {
-            Task t1 = new ToDo(s, false);
+            Task t1 = new ToDo(todoDetails, false);
             this.add(t1);
            output = this.addMessage();
         }
         return output;
+    }
+    public void readDataFromFile(File userData, Parser parser) throws FileNotFoundException, ParseException {
+        Scanner loadData = new Scanner(userData);
+        while (loadData.hasNextLine()) {
+            String tasks = loadData.nextLine();
+            parser.readTask(tasks,this);
+        }
     }
 }

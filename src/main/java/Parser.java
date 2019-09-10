@@ -16,38 +16,37 @@ public class Parser {
     /**
      * Contains the methods to read the input and process it into the form required for the algorithm.
      *
-     * @param s The information to be read and processed
-     * @param t The list where the information is stored after being processed
+     * @param userInput The information to be read and processed
+     * @param tasks The list where the information is stored after being processed
      * @throws ParseException If date for event is not in the specified format i.e. MM/dd/yyyy HH:mm
      */
-    public void readTask(String s, TaskList t) throws ParseException {
+    public void readTask(String userInput, TaskList tasks) throws ParseException {
         DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
-
-        if (s.contains("[T]")) {
-            if (s.contains("[" + "1" + "]")) {
-                t.add(new ToDo(s.substring(7), true));
+        if (userInput.contains("[T]")) {
+            if (userInput.contains("[" + "1" + "]")) {
+                tasks.add(new ToDo(userInput.substring(7), true));
             } else {
-                t.add(new ToDo(s.substring(7)));
+                tasks.add(new ToDo(userInput.substring(7)));
             }
-        } else if (s.contains("[E]")) {
-            int start = s.indexOf('(');
-            String e = s.substring(7, start - 1);
-            String dl = s.substring(start + 5, start + 27);
+        } else if (userInput.contains("[E]")) {
+            int start = userInput.indexOf('(');
+            String e = userInput.substring(7, start - 1);
+            String dl = userInput.substring(start + 5, start + 27);
             Date at = df.parse(dl);
-            if (s.contains("[" + "1" + "]")) {
-                t.add(new Event(e, at, true));
+            if (userInput.contains("[" + "1" + "]")) {
+                tasks.add(new Event(e, at, true));
             } else {
-                t.add(new Event(e, at));
+                tasks.add(new Event(e, at));
             }
         } else {
-            int sl = s.indexOf('(');
-            String d = s.substring(7, sl - 1);
-            int sec = s.indexOf(')');
-            String by = s.substring(sl + 5, sec);
-            if (s.contains("[" + "1" + "]")) {
-                t.add(new Deadline(d, by, true));
+            int sl = userInput.indexOf('(');
+            String d = userInput.substring(7, sl - 1);
+            int sec = userInput.indexOf(')');
+            String by = userInput.substring(sl + 5, sec);
+            if (userInput.contains("[" + "1" + "]")) {
+                tasks.add(new Deadline(d, by, true));
             } else {
-                t.add(new Deadline(d, by));
+                tasks.add(new Deadline(d, by));
             }
         }
     }
@@ -64,6 +63,7 @@ public class Parser {
     public String readUserCommand(String command, Ui ui, TaskList list, Storage storage) throws IOException, ParseException {
         String output = "";
         if (command.equals("bye")) {
+            //update user data before exiting
             String writeDataToFile = "";
             for (Task t : list.taskList) {
                 writeDataToFile = writeDataToFile + t.toString() + "\n";
@@ -71,12 +71,14 @@ public class Parser {
             storage.writeFile(writeDataToFile);
             output = ui.exit();
         } else if (command.equals("list")) {
+            // returns all the tasks in the list.
             output = list.getList();
         } else if (command.startsWith("done")) {
             int numberToBeMarked = Integer.parseInt(command.substring(5));
             output = list.markAsDone(numberToBeMarked - 1);
         } else if (command.startsWith("event")) {
             String eventGiven = command.substring(6);
+            //reads and stores the event in the list
             output = list.readEvent(eventGiven);
         } else if (command.startsWith("deadline")) {
             String deadlineGiven = command.substring(9);

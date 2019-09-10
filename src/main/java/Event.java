@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Event extends Task {
 
-    private Date on;
+    private Date onDate;
 
     /**
      * Creates a event task with description, event time and status (done or not done) .
@@ -17,13 +17,13 @@ public class Event extends Task {
      */
     public Event(String description, Date on, boolean b) {
         super(description);
-        this.on = on;
+        this.onDate = on;
         this.isDone = b;
     }
 
     public Event(String description, Date on) {
         super(description);
-        this.on = on;
+        this.onDate = on;
     }
 
     /**
@@ -34,6 +34,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
-        return "[E]" + super.toString() + " (at: " + df.format(on) + ")";
+        return "[E]" + super.toString() + " (at: " + df.format(onDate) + ")";
     }
 }

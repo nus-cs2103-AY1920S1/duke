@@ -18,14 +18,15 @@ public class Ui {
     public Ui() {
         scanner = new Scanner(System.in);
         dukeOut = new StringBuilder();
-        showLine();
         out("Hello! I'm Duke");
     }
 
+    @Deprecated
     public String read() {
         return scanner.nextLine();
     }
 
+    @Deprecated
     public void close() {
         scanner.close();
     }
@@ -43,12 +44,9 @@ public class Ui {
         dukeOut = new StringBuilder();
     }
 
-    public void showLine() {
-        //out("================================");
-    }
-
     /**
      * Prints out list of tasks.
+     *
      * @param taskList List of tasks
      */
     public void list(TaskList taskList) {

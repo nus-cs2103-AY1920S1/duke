@@ -6,11 +6,13 @@ import duke.io.Parser;
 import duke.io.Storage;
 import duke.io.Ui;
 import duke.task.TaskList;
+
 import java.text.ParseException;
 
 /**
- *  CS2103 iP Deliverable, Duke.
- *  @author Ahmed Bahajjaj
+ * CS2103 iP Deliverable, Duke.
+ *
+ * @author Ahmed Bahajjaj
  */
 public class Duke {
     private Ui ui;
@@ -19,15 +21,15 @@ public class Duke {
 
     /**
      * Constructor creates ui, storage, and taskList.
+     *
      * @param filePath Path for duke data file.
      */
-    public Duke(String filePath) {
+    Duke(String filePath) {
         assert filePath != null : "Empty file path";
         ui = new Ui();
         storage = new Storage(filePath);
         taskList = storage.loadTasks(ui);
         ui.out("What can I do for you?");
-        ui.showLine();
     }
 
     public String getOutput() {
@@ -37,6 +39,7 @@ public class Duke {
     /**
      * Runs the duke To-do Application.
      */
+    @Deprecated
     public void run() {
         boolean isExit = false;
         while (!isExit) {
@@ -61,6 +64,7 @@ public class Duke {
 
     /**
      * Provides duke function upon input.
+     *
      * @param input user command
      * @return duke response
      */
@@ -82,7 +86,6 @@ public class Duke {
     }
 
     public void close() {
-        ui.close();
         storage.writeTasks(taskList);
     }
 }

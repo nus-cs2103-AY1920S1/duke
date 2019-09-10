@@ -13,14 +13,16 @@ public class EventCommand extends AddCommand {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        Event eventTask;
+
         try {
             String[] eventArr = getDesc().split("/at");
-            Event eventTask = Event.of(eventArr[0], eventArr[1]);
-            taskList.addTask(eventTask);
-
-            return ui.getAddedTask(eventTask.toString(), taskList.getNumTasks());
+            eventTask = Event.of(eventArr[0], eventArr[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! Please follow correct format of \"event [description] /at [date]\".");
         }
+
+        taskList.addTask(eventTask);
+        return ui.getAddedTask(eventTask.toString(), taskList.getNumTasks());
     }
 }

@@ -10,9 +10,9 @@ public class Todo extends Task {
     public static Todo of(String description) throws DukeException {
         if (description.length() == 0) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-        } else {
-            return new Todo(description);
         }
+
+        return new Todo(description);
     }
 
     private Todo(String description) {

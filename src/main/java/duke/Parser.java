@@ -32,15 +32,13 @@ public class Parser {
             command = new AddCommand(arr);
             break;
         case "done":
-            if (arr.length < 2) {
-                throw new DukeException("An Integer is required to choose the task.");
-            }
+            DukeException.checkValidity(arr.length < 2,
+                    "An Integer is required to choose the task.");
             command = new DoneCommand(arr[1]);
             break;
         case "delete":
-            if (arr.length < 2) {
-                throw new DukeException("An Integer is required to delete the task.");
-            }
+            DukeException.checkValidity(arr.length < 2,
+                    "An Integer is required to choose the task.");
             command = new DeleteCommand(arr[1]);
             break;
         case "list":
@@ -50,9 +48,8 @@ public class Parser {
             command = new ByeCommand();
             break;
         case "find":
-            if (arr.length < 2) {
-                throw new DukeException("An expression is required to find the task.");
-            }
+            DukeException.checkValidity(arr.length < 2,
+                    "An expression is required to find the task.");
             command = new FindCommand(arr[1]);
             break;
         case "clear":

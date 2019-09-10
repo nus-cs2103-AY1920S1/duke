@@ -30,9 +30,8 @@ public class DoneCommand extends Command {
 
     @Override
     public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
-        if (index < 1 || index > tasklist.getTaskSize()) {
-            throw new DukeException("Index out of range.");
-        }
+        DukeException.checkValidity(index < 1 || index > tasklist.getTaskSize(),
+                "Index out of range.");
         tasklist.markDone(index);
         storage.updateData(tasklist);
         return ui.generateResponse("Nice! I've marked this task as done:",

@@ -30,9 +30,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
-        if (index < 1 || index > tasklist.getTaskSize()) {
-            throw new DukeException("Index out of range.");
-        }
+        DukeException.checkValidity(index < 1 || index > tasklist.getTaskSize(),
+                "Index out of range.");
         Task task = tasklist.removeTaskByIndex(index);
         storage.updateData(tasklist);
         return ui.generateResponse("Noted. I've removed this task:",

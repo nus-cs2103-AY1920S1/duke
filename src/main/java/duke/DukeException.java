@@ -15,6 +15,20 @@ public class DukeException extends Exception {
         this.description = description;
     }
 
+    /**
+     * Checks if a DukeException should be thrown or not based on evaluating
+     * the given predicate.
+     *
+     * @param shouldThrowError Given evaluation predicate.
+     * @param message Error Message for DukeException if thrown.
+     * @throws DukeException If shouldThrowError evaluates to true.
+     */
+    public static void checkValidity(boolean shouldThrowError, String message) throws DukeException {
+        if (shouldThrowError) {
+            throw new DukeException(message);
+        }
+    }
+
     @Override
     public String toString() {
         return this.description;

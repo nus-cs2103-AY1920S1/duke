@@ -41,6 +41,7 @@ public class Duke {
 
 
     public static void main(String[] args) {
+        System.out.println("\u2718");
         Duke duke = new Duke();
         UI.start();
         try {

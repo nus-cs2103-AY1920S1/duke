@@ -48,9 +48,10 @@ public class DeleteCommand extends Command {
             return ui.showEmptyListError();
         } else {
             try {
-                int taskIndex = Integer.parseInt(taskNumber) - 1; // 1 indexed
+                int taskIndex = parseStringToIntIndex(this.taskNumber);
                 assert taskIndex >= 0;
-                // retrieve task to be removed, remove it, and inform the user
+
+                // retrieve task to be removed and remove it
                 Task taskToRemove = tasks.get(taskIndex);
                 assert taskToRemove != null;
                 tasks.remove(taskIndex);
@@ -58,7 +59,7 @@ public class DeleteCommand extends Command {
                 // update storage
                 storage.update(tasks);
 
-                // return message
+                // inform user that task has been removed
                 return ui.showDeleteTaskMessage(taskToRemove, tasks.size());
 
             } catch (IndexOutOfBoundsException exceptionOne) {

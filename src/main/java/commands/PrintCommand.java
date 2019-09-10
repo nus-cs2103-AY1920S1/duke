@@ -32,7 +32,7 @@ public class PrintCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        // call UI to print task list
+        // print task list
         return ui.printTasks(tasks);
     }
 }

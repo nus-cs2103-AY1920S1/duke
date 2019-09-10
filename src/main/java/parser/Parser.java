@@ -59,18 +59,20 @@ public class Parser {
         case LIST:
             return new PrintCommand(imperative);
         case TODO:
-            return new AddCommand(imperative, new Todo(splitCommand[1],
-                    false));
+            Todo todoForAddCommand = new Todo(splitCommand[1],false);
+            return new AddCommand(imperative, todoForAddCommand);
         case DEADLINE:
-            return new AddCommand(imperative, new Deadline(
-                    splitTaskAttributes(splitCommand[1], "\\/")[0],
-                    splitTaskAttributes(splitCommand[1], "\\/")[1],
-                    false));
+            String newDeadlineDescription = splitTaskAttributes(splitCommand[1], "\\/")[0];
+            String newDeadlineDueDate = splitTaskAttributes(splitCommand[1], "\\/")[1];
+            Deadline deadlineForAddCommand = new Deadline(newDeadlineDescription,
+                    newDeadlineDueDate, false);
+            return new AddCommand(imperative, deadlineForAddCommand);
         case EVENT:
-            return new AddCommand(imperative, new Event(
-                    splitTaskAttributes(splitCommand[1], "\\/")[0],
-                    splitTaskAttributes(splitCommand[1], "\\/")[1],
-                    false));
+            String newEventDescription = splitTaskAttributes(splitCommand[1], "\\/")[0];
+            String newEventDate = splitTaskAttributes(splitCommand[1], "\\/")[1];
+            Event newEventForAddCommand = new Event(newEventDescription,
+                    newEventDate, false);
+            return new AddCommand(imperative, newEventForAddCommand);
         case FIND:
             return new FindCommand(imperative, splitCommand[1]);
         default:
@@ -90,9 +92,9 @@ public class Parser {
         // try to obtain the description and date/time information of
         // the deadline / event. Inform user if the input is in an
         // incorrect format.
-        String[] splitTaskAttributes = command.split(regex, 2);
-        String taskDescription = splitTaskAttributes[0];
-        String taskDateTime = splitTaskAttributes[1].split(" ", 2)[1];
+        String[] taskAttributes = command.split(regex, 2);
+        String taskDescription = taskAttributes[0];
+        String taskDateTime = taskAttributes[1].split(" ", 2)[1];
         return new String[] {taskDescription, taskDateTime};
     }
 

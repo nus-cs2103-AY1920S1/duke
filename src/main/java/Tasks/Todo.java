@@ -16,6 +16,7 @@ public class Todo extends Task {
      */
     public Todo(String description, String by) {
         super(description);
+        assert(description.length()!=0):"Todo description cannot be empty";
         this.by = by;
     }
 

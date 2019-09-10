@@ -1,6 +1,5 @@
 package Tasks;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -34,6 +33,7 @@ public class TaskList {
      * @param itemNum is the index of the task to be deleted
      */
     public void deleteTask(int itemNum) {
+        assert(itemNum>=0 && itemNum<taskList.size()):"itemNum does not fall within range";
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + taskList.get(itemNum));
         taskList.remove(itemNum);
@@ -46,6 +46,7 @@ public class TaskList {
      * @param itemNum is the index of the task to be marked as done
      */
     public void markTaskDone(int itemNum) {
+        assert(itemNum>=0 && itemNum<taskList.size()):"itemNum does not fall within range";
         taskList.get(itemNum).doneJob();
         System.out.println("Nice! I've marked this task as done:");
         System.out.println("  " + taskList.get(itemNum));

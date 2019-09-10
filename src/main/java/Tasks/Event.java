@@ -15,6 +15,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
+        assert(description.length()!=0):"Event description cannot be empty";
         this.at = at;
     }
 

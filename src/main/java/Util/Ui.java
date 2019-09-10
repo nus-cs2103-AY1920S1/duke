@@ -1,10 +1,7 @@
 package Util;
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
-import Tasks.TaskList;
+import Exception.DukeException;
+import Tasks.*;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -12,12 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
-import Exception.DukeException;
-import Exception.IncorrectTaskNameException;
-import Exception.EmptyDeadlineDescriptionException;
-import Exception.EmptyEventDescriptionException;
-import Exception.EmptyTodoDescriptionException;
 
 /**
  * Handles the User Interface for the program where the user will interact with
@@ -157,11 +148,8 @@ public class Ui {
         if((itemIndex + 1) > tasksList.getTaskList().size()) {
             System.out.println("failed to delete item, please try again.");
         } else {
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + tasksList.getTaskList().get(itemIndex));
-            tasksList.getTaskList().remove(itemIndex);
+            tasksList.deleteTask(itemIndex);
             storage.rewriteWriter(tasksList);
-            System.out.println("Now you have " + tasksList.getTaskList().size() + " in the list.");
         }
     }
 

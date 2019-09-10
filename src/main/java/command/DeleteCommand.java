@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
     public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         DukeException.checkValidity(index < 1 || index > tasklist.getTaskSize(),
                 "Index out of range.");
-        assert tasklist.getTaskSize() > 0: "TaskList should not be empty";
+        assert tasklist.getTaskSize() > 0 : "TaskList should not be empty";
         Task task = tasklist.removeTaskByIndex(index);
         storage.updateData(tasklist);
         return ui.generateResponse("Noted. I've removed this task:",

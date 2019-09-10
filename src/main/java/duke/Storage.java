@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -17,14 +18,47 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filepath;
+    private String vocabpath;
+    private VocabularyList vocabularyList;
 
     /**
-     * duke.Storage constructor.
+     * Storage constructor.
      *
-     * @param filepath path of data file.
+     * @param filepath Path of data for the TaskList
+     * @param vocabpath Path of data for VocabularyList
      */
-    public Storage(String filepath) {
+    public Storage(String filepath, String vocabpath) throws DukeException {
         this.filepath = filepath;
+        this.vocabpath = vocabpath;
+        this.vocabularyList = new VocabularyList(loadVocabulary());
+    }
+
+    /**
+     * Updates the vocabulary file.
+     *
+     * @throws DukeException Catches IOException.
+     */
+    public void updateVocabulary() throws DukeException {
+        try {
+            String[] list = vocabularyList.getList();
+            FileWriter fw = new FileWriter(this.vocabpath);
+            for (String pair : list) {
+                String data = String.format("%s\n", pair);
+                fw.write(data);
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException(e.toString());
+        }
+    }
+
+    /**
+     * Getter function for VocabularyList.
+     *
+     * @return VocabularyList of Storage.
+     */
+    public VocabularyList getVocabularyList() {
+        return this.vocabularyList;
     }
 
     /**
@@ -62,6 +96,35 @@ public class Storage {
             break;
         default:
             throw new DukeException("Invalid Task Type");
+        }
+    }
+
+    /**
+     * Initial seeding of vocabulary from hard drive memory.
+     *
+     * @return HashMap mapping vocabulary to content.
+     * @throws DukeException Catches various Exceptions that can possibly appear.
+     */
+    public HashMap<String, String> loadVocabulary() throws DukeException {
+        HashMap<String, String> dictionary = new HashMap<>();
+        try {
+            File f = new File(vocabpath);
+            if (!f.exists()) {
+                DukeException.checkValidity(!f.createNewFile(), "Data file not created");
+            }
+            Scanner fileReader = new Scanner(f);
+            while (fileReader.hasNextLine()) {
+                String line = fileReader.nextLine();
+                String[] vocabularyArr = line.split(" ", 2);
+                assert vocabularyArr.length == 2 : "Vocabulary file is corrupted.";
+                dictionary.put(vocabularyArr[0], vocabularyArr[1]);
+            }
+            fileReader.close();
+            return dictionary;
+        } catch (FileNotFoundException e) {
+            throw new DukeException(e.toString());
+        } catch (IOException e) {
+            throw new DukeException(e.toString());
         }
     }
 

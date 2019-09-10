@@ -1,13 +1,14 @@
 package duke;
 
 import command.AddCommand;
+import command.ByeCommand;
+import command.ClearCommand;
 import command.Command;
 import command.DeleteCommand;
 import command.DoneCommand;
-import command.ListCommand;
-import command.ByeCommand;
 import command.FindCommand;
-import command.ClearCommand;
+import command.ListCommand;
+import command.TriviaCommand;
 
 /**
  * Parser class to parse a given input command.
@@ -54,6 +55,13 @@ public class Parser {
             break;
         case "clear":
             command = new ClearCommand();
+            break;
+        case "trivia":
+            if (arr.length < 2) {
+                command = new TriviaCommand();
+            } else {
+                command = new TriviaCommand(arr[1]);
+            }
             break;
         default:
             throw new DukeException("I'm sorry, but I don't know what that means.");

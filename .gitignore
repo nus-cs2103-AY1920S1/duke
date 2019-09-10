@@ -13,4 +13,5 @@ src/main/resources/docs/
 *.iml
 *.class
 list.txt
+vocabulary.txt
 bin/

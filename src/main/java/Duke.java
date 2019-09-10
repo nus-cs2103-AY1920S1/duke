@@ -18,9 +18,16 @@ public class Duke {
      * Constructor for Duke Class.
      */
     public Duke() {
-        String filePath = "list.txt";
+        String filepath = "list.txt";
+        String vocabpath = "vocabulary.txt";
         ui = new Ui();
-        storage = new Storage(filePath);
+
+        try {
+            storage = new Storage(filepath, vocabpath);
+        } catch (DukeException duke) {
+            ui.showLoadingError(duke);
+        }
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException duke) {
@@ -37,7 +44,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
+            Command c = Parser.parse(storage.getVocabularyList().format(input));
             String response = c.getResponse(tasks, ui, storage);
             if (c.isExit()) {
                 this.setExit();

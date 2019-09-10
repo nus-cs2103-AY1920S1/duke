@@ -45,7 +45,7 @@ public class AddCommand extends Command {
      */
     private Task createTask(String type, String detail) throws DukeException {
         Task newTask;
-        assert (type.equals("todo") || type.equals("deadline") || type.equals("event")): "Invalid task type";
+        assert (type.equals("todo") || type.equals("deadline") || type.equals("event")) : "Invalid task type";
         switch (type) {
         case "todo":
             newTask = new Todo(detail);

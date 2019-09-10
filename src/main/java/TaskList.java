@@ -190,6 +190,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * Sorts the task list according to the settings specified by the user's command.
+     */
     public void sort(Parser parser) {
         switch (parser.getSortBy()) {
         case "name":

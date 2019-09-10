@@ -65,7 +65,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the date (by) of this event
+     * Returns the date (by) of this event.
      * @return Time when this deadline ends.
      */
     public Date getDate() {

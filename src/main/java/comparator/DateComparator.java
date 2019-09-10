@@ -11,11 +11,22 @@ public class DateComparator<T extends Task> implements Comparator<T> {
 
     String order;
 
+    /**
+     * Creates a date comparator for sorting purpose.
+     * @param order Chooses whether to sort in ascending/descending order.
+     */
     public DateComparator(String order) {
         this.order = order;
     }
 
-    // If no date (todo), its always considered lower priority
+    /**
+     * Compares two tasks by date and returns integer depending on order specified.
+     * Todo tasks always have the lowest priority.
+     * @param t1 First task to compare.
+     * @param t2 Second task to compare.
+     * @return -1, 0, or 1 as first task is less than, equal to, or greater than the second task.
+     *         Reverse if the order is descending.
+     */
     public int compare(Task t1, Task t2) {
         if (t1 instanceof Todo) {
             if (t2 instanceof Todo) {

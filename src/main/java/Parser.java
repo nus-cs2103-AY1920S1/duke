@@ -33,8 +33,6 @@ public class Parser {
      * @throws DukeException If there are problems with the command.
      */
     public Parser(String input) throws DukeException {
-        String[] inputs = input.split(" ", 2);
-        String[] params;
 
         this.description = null;
         this.time = null;
@@ -42,6 +40,9 @@ public class Parser {
         this.searchTerm = null;
         this.sortBy = null;
         this.sortOrder = null;
+
+        String[] inputs = input.split(" ", 2);
+        String[] params;
 
         this.type = inputs[0];
         switch (type) {

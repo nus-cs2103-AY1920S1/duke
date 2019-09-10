@@ -64,7 +64,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the date (at) of this event
+     * Returns the date (at) of this event.
      * @return Time when this event occurs.
      */
     public Date getDate() {

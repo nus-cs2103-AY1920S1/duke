@@ -64,6 +64,14 @@ public class Deadline extends Task {
         return output;
     }
 
+    /**
+     * Returns the date (by) of this event
+     * @return Time when this deadline ends.
+     */
+    public Date getDate() {
+        return this.by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateFormatter.format(by) + ")";

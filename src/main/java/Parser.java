@@ -16,7 +16,7 @@ import seedu.duke.exception.DukeInvalidSortParameterException;
 
 public class Parser {
 
-    private static final String[] ALLOWED_SORT_BY = {"name"};
+    private static final String[] ALLOWED_SORT_BY = {"name", "date"};
     private static final String[] ALLOWED_SORT_ORDER = {"ascending", "descending"};
 
     private String type;

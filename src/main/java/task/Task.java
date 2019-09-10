@@ -1,5 +1,7 @@
 package seedu.duke.task;
 
+import java.util.Date;
+
 public abstract class Task {
 
     String taskName;
@@ -24,9 +26,12 @@ public abstract class Task {
     // Method used to convert this object into a storable string form.
     public abstract String toStorageString();
 
+    // Method used to get the name of the task
     public String getTaskName() {
         return this.taskName;
     }
+
+    public abstract Date getDate();
 
     private String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols

@@ -1,5 +1,7 @@
 package seedu.duke.task;
 
+import java.util.Date;
+
 public class Todo extends Task {
 
     /**
@@ -36,6 +38,14 @@ public class Todo extends Task {
         }
         output = output + super.taskName;
         return output;
+    }
+
+    /**
+     * Returns the date of todo, which is null for Todo class.
+     * @return Date of this todo, which is null.
+     */
+    public Date getDate() {
+        return null;
     }
 
     @Override

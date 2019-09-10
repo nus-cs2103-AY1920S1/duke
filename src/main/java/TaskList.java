@@ -8,6 +8,7 @@ import seedu.duke.exception.DukeException;
 import seedu.duke.exception.DukeDoneEmptyListException;
 import seedu.duke.exception.DukeIndexOutOfBoundException;
 import seedu.duke.comparator.NameComparator;
+import seedu.duke.comparator.DateComparator;
 import java.util.ArrayList;
 
 
@@ -195,6 +196,12 @@ public class TaskList {
             this.taskList.sort(new NameComparator(parser.getSortOrder()));
             Ui.printBlock(String.format("Task list sorted by name in %s order", parser.getSortOrder()));
             break;
+
+        case "date":
+            this.taskList.sort(new DateComparator(parser.getSortOrder()));
+            Ui.printBlock(String.format("Task list sorted by date in %s order", parser.getSortOrder()));
+            break;
+
         default:
             Ui.printBlock("Unknown parameter, task list not sorted");
             return;

@@ -63,6 +63,14 @@ public class Event extends Task {
         return output;
     }
 
+    /**
+     * Returns the date (at) of this event
+     * @return Time when this event occurs.
+     */
+    public Date getDate() {
+        return this.at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + dateFormatter.format(at) + ")";

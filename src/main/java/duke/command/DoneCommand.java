@@ -44,7 +44,7 @@ public class DoneCommand extends Command {
             throw new DukeException("There is no task with index " + oneIndex + ".");
         }
 
-        model.update(tasks);
+        model.update(this, tasks);
         uiOutput.say("Nice! I've marked this task as done:\n" + tasks.get(oneIndex));
     }
 }

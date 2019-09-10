@@ -36,7 +36,7 @@ public class TodoCommand extends Command {
         Todo t = new Todo(ArgumentParser.concatenate(comArgs));
         TaskList tasks = model.copyOfCurrentTasks();
         tasks.add(t);
-        model.update(tasks);
+        model.update(this, tasks);
         uiOutput.say("added: " + t);
     }
 }

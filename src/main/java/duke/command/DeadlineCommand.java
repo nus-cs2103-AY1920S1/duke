@@ -42,7 +42,7 @@ public class DeadlineCommand extends Command {
         Deadline d = new Deadline(ArgumentParser.concatenate(comArgs), ArgumentParser.concatenate(byArgs));
         TaskList tasks = model.copyOfCurrentTasks();
         tasks.add(d);
-        model.update(tasks);
+        model.update(this, tasks);
         uiOutput.say("added: " + d);
     }
 }

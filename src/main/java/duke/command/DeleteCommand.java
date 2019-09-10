@@ -47,7 +47,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("There is no task with index " + oneIndex + ".");
         }
 
-        model.update(tasks);
+        model.update(this, tasks);
         uiOutput.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d task%s in the list.",
                 task.toString(), tasks.size(), tasks.size() == 1 ? "" : "s"));
     }

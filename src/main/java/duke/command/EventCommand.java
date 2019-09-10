@@ -43,7 +43,7 @@ public class EventCommand extends Command {
         Event e = new Event(ArgumentParser.concatenate(comArgs), ArgumentParser.concatenate(atArgs));
         TaskList tasks = model.copyOfCurrentTasks();
         tasks.add(e);
-        model.update(tasks);
+        model.update(this, tasks);
         uiOutput.say("added: " + e);
     }
 }

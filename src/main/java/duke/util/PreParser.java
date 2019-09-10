@@ -11,6 +11,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.UndoCommand;
 
 import java.util.List;
 
@@ -28,7 +29,8 @@ public class PreParser {
             DeadlineCommand.class,
             EventCommand.class,
             DeleteCommand.class,
-            FindCommand.class
+            FindCommand.class,
+            UndoCommand.class
     );
 
     /**

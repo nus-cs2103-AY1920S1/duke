@@ -1,5 +1,12 @@
 package duke.command;
 
+import duke.task.Deadline;
+import duke.task.Status;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Note;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -9,7 +16,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import duke.task.*;
 
 /**
  * duke.command.Storage class. Handles the reading/writing of data to disk.
@@ -63,6 +69,7 @@ public class Storage {
 
                 case "N":
                     taskList.add(new Note(params[1]));
+                    break;
 
                 default:
                     break;

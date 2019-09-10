@@ -36,7 +36,7 @@ public class TaskList {
     /**
      * Marks a task as done.
      * @param index The index number of the task to be marked done (starting from 1).
-     * @return A string with the confirmation message that the task was successfully deleted.
+     * @return A string confirming message that the task was successfully deleted.
      * @throws DukeException If the task at index does not currently exist.
      */
     public String markAsDone(int index) throws DukeException {
@@ -46,7 +46,7 @@ public class TaskList {
     /**
      * Deletes a task.
      * @param index The index number of the task to be marked done (starting from 1).
-     * @return A string with the confirmation message that the task was successfully deleted.
+     * @return A string confirming message that the task was successfully deleted.
      * @throws DukeException If the task at index does not currently exist.
      */
     public String delete(int index) throws DukeException {
@@ -56,7 +56,7 @@ public class TaskList {
     /**
      * Creates a new ToDo task.
      * @param params The parameters (description) for the ToDo task.
-     * @return A string with the confirmation that the task was successfully added.
+     * @return A string confirming that the task was successfully added.
      * @throws DukeException If the description is empty.
      */
     public String createToDo(String[] params) throws DukeException {
@@ -66,7 +66,7 @@ public class TaskList {
     /**
      * Creates a new Deadline task.
      * @param params The parameters (description, due by date) for the Deadline task.
-     * @return A string with the confirmation that the task was successfully added.
+     * @return A string confirming that the task was successfully added.
      * @throws DukeException If the description or due by date is empty or in the wrong format.
      */
     public String createDeadline(String[] params) throws DukeException {
@@ -76,13 +76,19 @@ public class TaskList {
     /**
      * Creates a new Event task.
      * @param params The parameters (description, due by date) for the Event task.
-     * @return A string with the confirmation that the task was successfully added.
+     * @return A string confirming that the task was successfully added.
      * @throws DukeException If the description or due by date is empty or in the wrong format.
      */
     public String createEvent(String[] params) throws DukeException {
         return CreateEvent.createEvent(taskList, params, storage);
     }
 
+    /**
+     * Creates a new note.
+     * @param params The parameters (content) for the note.
+     * @return A string confirming that the task was successfully added.
+     * @throws DukeException if the note's contents are empty.
+     */
     public String createNote(String[] params) throws DukeException {
         return CreateNote.createNote(taskList, params, storage);
     }

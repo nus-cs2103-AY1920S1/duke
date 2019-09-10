@@ -34,12 +34,18 @@ public class Command {
             return ui.listTask(tasks);
         case "done":
             int number = sc.nextInt();
-            if (!tasks.getList().get(number - 1).isDone()) {
-                tasks.markDone(number);
-                storage.updateDone(number, tasks);
-                return ui.printDone(number, tasks);
-            } else {
-                return "Task is already done.";
+            try {
+                if (!tasks.getList().get(number - 1).isDone()) {
+                    tasks.markDone(number);
+                    storage.updateDone(number, tasks);
+                    return ui.printDone(number, tasks);
+                } else {
+                    assert tasks.getList().get(number - 1).isDone() :
+                            "Task should already be done";
+                    return "Task is already done.";
+                }
+            } catch (IndexOutOfBoundsException e) {
+                return "Task number is invalid.";
             }
         case "todo":
             try {
@@ -101,10 +107,14 @@ public class Command {
             }
         case "delete":
             int deletionNumber = sc.nextInt();
-            storage.delete(deletionNumber, tasks);
-            Task toDelete = tasks.getList().get(deletionNumber - 1);
-            tasks.delete(deletionNumber);
-            return ui.printDelete(toDelete, tasks);
+            try {
+                storage.delete(deletionNumber, tasks);
+                Task toDelete = tasks.getList().get(deletionNumber - 1);
+                tasks.delete(deletionNumber);
+                return ui.printDelete(toDelete, tasks);
+            } catch (IndexOutOfBoundsException e) {
+                return "Task number is invalid.";
+            }
         case "find":
             String keyword = sc.nextLine().trim();
             return ui.printFind(keyword, tasks);

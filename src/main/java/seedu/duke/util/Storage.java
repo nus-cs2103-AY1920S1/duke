@@ -43,71 +43,15 @@ public class Storage {
             while (fileReader.hasNext()) {
                 String line = fileReader.nextLine();
                 String[] keywords = line.split(" ");
-                boolean isDone = false;
-                switch (keywords[1]) {
-                case "[+]":
-                    isDone = true;
-                case "[-]":
-                    if (keywords[0].equals("[T]")) {
-                        keywords[0] = "";
-                        keywords[1] = "";
-                        String desc = String.join(" ", keywords).strip();
-                        Todo temp = new Todo(desc);
-                        if (isDone) {
-                            temp.setDone();
-                        }
-                        taskList.add(temp);
-                    } else if (keywords[0].equals("[D]")) {
-                        keywords[0] = "";
-                        String desc = "";
-                        String time = "";
-                        boolean flag = false;
-                        for (int i = 2; i < keywords.length; i++) {
-                            if (flag) {
-                                if (keywords[i].equals(")")) {
-                                    break;
-                                } else {
-                                    time = time + " " + keywords[i];
-                                }
-                            } else if (keywords[i].equals("(by:")) {
-                                flag = true;
-                            } else {
-                                desc = desc + " " + keywords[i];
-                            }
-                        }
-                        Deadline temp = new Deadline(desc.strip(), time.strip());
-                        if (isDone) {
-                            temp.setDone();
-                        }
-                        taskList.add(temp);
-                    } else if (keywords[0].equals("[E]")) {
-                        keywords[0] = "";
-                        String desc = "";
-                        String time = "";
-                        boolean flag = false;
-                        for (int i = 2; i < keywords.length; i++) {
-                            if (flag) {
-                                if (keywords[i].equals(")")) {
-                                    break;
-                                } else {
-                                    time = time + " " + keywords[i];
-                                }
-                            } else if (keywords[i].equals("(at:")) {
-                                flag = true;
-                            } else {
-                                desc = desc + " " + keywords[i];
-                            }
-                        }
-                        Event temp = new Event(desc.strip(), time.strip());
-                        if (isDone) {
-                            temp.setDone();
-                        }
-                        taskList.add(temp);
-                    } else {
-                        throw new DukeException();
-                    }
-                default:
-                    break;
+                boolean isDone = isDone(keywords);
+                if (keywords[0].equals("[T]")) {
+                    taskList.add(toTodo(keywords, isDone));
+                } else if (keywords[0].equals("[D]")) {
+                    taskList.add(toDeadline(keywords, isDone));
+                } else if (keywords[0].equals("[E]")) {
+                    taskList.add(toEvent(keywords, isDone));
+                } else {
+                    throw new DukeException();
                 }
             }
             fileReader.close();
@@ -117,6 +61,110 @@ public class Storage {
         } catch (FileNotFoundException ex) {
             throw new DukeException();
         }
+    }
+
+    /**
+     * Checks if the task read from the file is done or not.
+     *
+     * @param keywords The task in string array form where the entry in index 1 is the done indicator.
+     * @return Returns true if the task is done and false if it is not.
+     * @throws DukeException Throws if the entry is not "[+]" or "[-]".
+     */
+    public static boolean isDone(String[] keywords) throws DukeException {
+        if (keywords[1].equals("[-]")) {
+            return false;
+        } else if (keywords[1].equals("[+]")) {
+            return true;
+        } else {
+            throw new DukeException("YOoooUR fILe haS BeEN cORRupTEd.");
+        }
+    }
+
+    /**
+     * Converts the string array into a Todo command.
+     *
+     * @param keywords String array representing the string read from storage.
+     * @param isDone Whether the task is done or not.
+     * @return A Todo command with isDone status updated.
+     * @throws DukeException Throws if the entry has no description.
+     */
+    public static Todo toTodo(String[] keywords, boolean isDone) throws DukeException {
+        if (keywords.length < 2) {
+            throw new DukeException("YOoooUR fILe haS BeEN cORRupTEd.");
+        } else {
+            keywords[0] = "";
+            keywords[1] = "";
+            String desc = String.join(" ", keywords).strip();
+            Todo temp = new Todo(desc);
+            if (isDone) {
+                temp.setDone();
+            }
+            return temp;
+        }
+    }
+
+    /**
+     * Converts the string array into a Deadline command.
+     *
+     * @param keywords String array representing the string read from storage.
+     * @param isDone Whether the task is done or not.
+     * @return A deadline command with isDone status updated.
+     * @throws DukeException Throws if the entry violates the requirements for Deadline.
+     */
+    public static Deadline toDeadline(String[] keywords, boolean isDone) throws DukeException {
+        String desc = "";
+        String time = "";
+        boolean flag = false;
+        for (int i = 2; i < keywords.length; i++) {
+            if (flag) {
+                if (keywords[i].equals(")")) {
+                    break;
+                } else {
+                    time = time + " " + keywords[i];
+                }
+            } else if (keywords[i].equals("(by:")) {
+                flag = true;
+            } else {
+                desc = desc + " " + keywords[i];
+            }
+        }
+        Deadline temp = new Deadline(desc.strip(), time.strip());
+        if (isDone) {
+            temp.setDone();
+        }
+        return temp;
+    }
+
+    /**
+     * Converts the string array into a Event command.
+     *
+     * @param keywords String array representing the string read from storage.
+     * @param isDone Whether the task is done or not.
+     * @return A event command with isDone status updated.
+     * @throws DukeException Throws if the entry violates the requirements for Event.
+     */
+    public static Event toEvent(String[] keywords, boolean isDone) throws DukeException {
+        String desc = "";
+        String time = "";
+        boolean flag = false;
+        for (int i = 2; i < keywords.length; i++) {
+            if (flag) {
+                if (keywords[i].equals(")")) {
+                    break;
+                } else {
+                    time = time + " " + keywords[i];
+                }
+            } else if (keywords[i].equals("(at:")) {
+                flag = true;
+            } else {
+                desc = desc + " " + keywords[i];
+            }
+        }
+        Event temp = new Event(desc.strip(), time.strip());
+        if (isDone) {
+            temp.setDone();
+        }
+        return temp;
     }
 
     /**

@@ -20,11 +20,7 @@ public class Parser {
             } else if (keywords[0].equals("list")) {
                 return new ListCommand();
             } else if (keywords[0].equals("done")) {
-                if (keywords.length > 2) {
-                    throw new DukeException("OOPS!!! You supplied too many arguments :-(");
-                } else {
-                    return new DoneCommand(Integer.parseInt(keywords[1]));
-                }
+                return new DoneCommand(parseIndex(keywords));
             } else if (keywords[0].equals("todo")) {
                 String temp = parseTask(keywords, "todo");
                 return new TodoCommand(temp);
@@ -35,11 +31,7 @@ public class Parser {
                 String[] temp = parseTaskTime(keywords, "event");
                 return new EventCommand(temp[0], temp[1]);
             } else if (keywords[0].equals("delete")) {
-                if (keywords.length > 2) {
-                    throw new DukeException("OOPS!!! You supplied too many arguments :-(");
-                } else {
-                    return new DeleteCommand(Integer.parseInt(keywords[1]));
-                }
+                return new DeleteCommand(parseIndex(keywords));
             } else if (keywords[0].equals("find")) {
                 String temp = parseTask(keywords, "find");
                 return new FindCommand(temp);
@@ -66,6 +58,23 @@ public class Parser {
         } else {
             keywords[0] = "";
             return String.join(" ", keywords).strip();
+        }
+    }
+
+    /**
+     * Parses commands that have index numbers as arguments
+     *
+     * @param keywords String array consisting of taskType as entry 0 and the index for entry 1.
+     * @return Am integer that serves as the index of the task being operated on.
+     * @throws DukeException Throws if user does not provide exactly 2 arguments in their command.
+     */
+    public static int parseIndex(String[] keywords) throws DukeException {
+        if (keywords.length > 2) {
+            throw new DukeException("OOPS!!! You supplied too may arguments.");
+        } else if (keywords.length < 2) {
+            throw new DukeException("OOPS!!! I cannot perform the task without an entry.");
+        } else {
+            return Integer.parseInt(keywords[1]);
         }
     }
 

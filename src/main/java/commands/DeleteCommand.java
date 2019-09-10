@@ -49,8 +49,10 @@ public class DeleteCommand extends Command {
         } else {
             try {
                 int taskIndex = Integer.parseInt(taskNumber) - 1; // 1 indexed
+                assert taskIndex >= 0;
                 // retrieve task to be removed, remove it, and inform the user
                 Task taskToRemove = tasks.get(taskIndex);
+                assert taskToRemove != null;
                 tasks.remove(taskIndex);
 
                 // update storage

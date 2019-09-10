@@ -186,6 +186,9 @@ public class Duke extends Application {
         String fullCommand = userInput.getText(); // get command
         String dukeResponse = getResponse(fullCommand); // run command
 
+        assert fullCommand != null;
+        assert dukeResponse != null;
+
         // create labels
         Label userText = new Label(fullCommand);
         Label dukeText = new Label(dukeResponse);
@@ -209,6 +212,7 @@ public class Duke extends Application {
                 Command command = Parser.parse(inputString);
                 String responseString = command.execute(tasks, ui, storage);
                 this.isListening = !command.getIsExit();
+                assert responseString != null;
                 return responseString;
             } catch (IllegalArgumentException exceptionOne) {
                 return ui.showInvalidCommandError();

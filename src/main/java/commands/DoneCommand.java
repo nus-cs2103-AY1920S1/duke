@@ -51,6 +51,7 @@ public class DoneCommand extends Command {
 
                 // retrieve task from list, mark as done, and inform the user
                 Task taskToMarkDone = tasks.get(taskIndex);
+                assert taskToMarkDone != null;
                 if (!taskToMarkDone.getIsDone()) {
                     taskToMarkDone.setTaskAsDone(true);
 

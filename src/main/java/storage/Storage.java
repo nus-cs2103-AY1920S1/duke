@@ -63,6 +63,7 @@ public class Storage {
             int listSize = modifiedList.size();
             for (int i = 0; i < listSize; i++) {
                 Task currentTask = modifiedList.get(i);
+                assert currentTask != null;
                 this.writeToFile(currentTask.toString());
             }
         }
@@ -73,9 +74,11 @@ public class Storage {
                 int listSize = modifiedList.size();
                 for (int i = 0; i < listSize; i++) {
                     Task currentTask = modifiedList.get(i);
+                    assert currentTask != null;
                     sb.append(currentTask.toString());
                     sb.append("\n");
                 }
+                assert !sb.toString().isEmpty();
                 this.writeToFile(sb.toString());
             }
         } catch (IOException exception) {

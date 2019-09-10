@@ -130,7 +130,7 @@ public class TaskList {
     }
     public String initialList() {
         StringBuilder str = new StringBuilder();
-        str.append("Here are your current tasks:");
+        str.append("Here are your current tasks:\n");
         for (Task t : taskList) {
             str.append(t.toString() + "\n");
         }

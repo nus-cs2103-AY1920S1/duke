@@ -16,6 +16,11 @@ public class Parser {
     public String parse(TaskList tasks, String input, Storage storage) {
         String cmd = input;
         Scanner cmdSc = new Scanner(cmd);
+        try {
+            assert cmdSc.hasNext() : "You didn't enter anything!";
+        } catch (AssertionError err) {
+            return err.getMessage();
+        }
         if (cmd.toLowerCase().equals("bye")) {
             return "Bye. Hope to see you again soon!";
         } else {
@@ -35,7 +40,12 @@ public class Parser {
                     }
                     //break;
                 case "find":
-                    return tasks.find(cmdSc.nextLine());
+                    try {
+                        assert cmdSc.hasNext() : "OOPS!!! The keyword is empty!";
+                        return tasks.find(cmdSc.nextLine());
+                    } catch (AssertionError err) {
+                        return err.getMessage();
+                    }
                     //break;
                 //list
                 case "list":
@@ -46,6 +56,7 @@ public class Parser {
                     try {
                         if (cmdSc.hasNext()) {
                             String tskBy = cmdSc.nextLine();
+                            assert tskBy.contains("/by") : "You didn't enter the due date properly! User /by";
                             String addDeadline = tasks.addDeadline(tskBy);
                             storage.save(tasks);
                             return addDeadline;
@@ -54,6 +65,8 @@ public class Parser {
                         }
                     } catch (DukeException exp) {
                         return "OOPS!!! " + exp.getMessage();
+                    } catch (AssertionError err) {
+                        return err.getMessage();
                     }
                 //event
                 case "event":

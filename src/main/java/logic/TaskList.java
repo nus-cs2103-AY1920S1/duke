@@ -25,6 +25,7 @@ public class TaskList {
      * @param task Task Obj to be added
      */
     public void addTask(Task task) {
+        assert task != null;
         taskList.add(task);
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this task:\n");
@@ -43,6 +44,7 @@ public class TaskList {
         int taskNum = Parser.parseTaskInt(taskNumStr, taskList);
         StringBuilder sb = new StringBuilder();
         Task task = taskList.get(taskNum - 1);
+        assert task != null;
         task.markDone();
         sb.append("Nice! I've marked this task as done:\n");
         sb.append("  " + task.toString());
@@ -58,9 +60,10 @@ public class TaskList {
     public void deleteTask(String taskNumStr) throws DukeException {
         int taskNum = Parser.parseTaskInt(taskNumStr, taskList);
         StringBuilder sb = new StringBuilder();
-        Task t = taskList.get(taskNum - 1);
+        Task task = taskList.get(taskNum - 1);
+        assert task != null;
         sb.append("Noted. I've removed this task: \n");
-        sb.append("  " + t + "\n");
+        sb.append("  " + task + "\n");
         taskList.remove(taskNum - 1);
         sb.append("Now you have " + taskList.size() + " tasks in the list.");
         Ui.loadStr(sb.toString());

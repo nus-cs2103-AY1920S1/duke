@@ -45,6 +45,7 @@ public class Parser {
      * @return DateTime string E.g. 10/12/2019 0830
      */
     public static String toFileDateTime(LocalDateTime dateObj) {
+        assert dateObj != null;
         return dateObj.getDayOfMonth() + "/" + dateObj.getMonthValue()
                 + "/" + dateObj.getYear() + " "
                 + String.format("%02d", dateObj.getHour())
@@ -58,6 +59,7 @@ public class Parser {
      * @return Date String e.g. 10 DECEMBER 2019 0830
      */
     public static String printDate(LocalDateTime dateObj) {
+        assert dateObj != null;
         return dateObj.getDayOfMonth() + " " + dateObj.getMonth()
                 + " " + dateObj.getYear() + " " + String.format("%02d", dateObj.getHour())
                 + String.format("%02d", dateObj.getMinute());

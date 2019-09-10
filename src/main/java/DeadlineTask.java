@@ -17,6 +17,7 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String task) {
         super(task, "D");
+        assert task != null || !task.equals("") : "task should not be null";
         String[] taskSplit = task.split("/by");
         if (taskSplit.length < 2) {
             throw new EmptyDescriptionDukeException("deadline", "/by");
@@ -45,6 +46,8 @@ public class DeadlineTask extends Task {
      */
     public DeadlineTask(String isCompleted, String taskName, String taskTime) {
         super(taskName, Boolean.parseBoolean(isCompleted), "D");
+        assert taskName != null || !taskName.equals("") : "TaskName should not be empty";
+        assert taskTime != null || !taskTime.equals("") : "taskTime should not be empty";
         this.taskName = taskName;
         this.taskTime = taskTime;
     }

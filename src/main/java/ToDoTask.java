@@ -9,6 +9,7 @@ public class ToDoTask extends Task {
      */
     public ToDoTask(String task) {
         super(task, "T");
+        assert task != null || !task.equals("") : "task should not be null";
         if (task.trim().length() == 0 || task == null) {
             throw new EmptyDescriptionDukeException("todo");
         }
@@ -22,6 +23,7 @@ public class ToDoTask extends Task {
      */
     public ToDoTask(String isCompleted, String task) {
         super(task, Boolean.parseBoolean(isCompleted), "T");
+        assert task != null || !task.equals("") : "task should not be empty";
         if (task.trim().length() == 0) {
             throw new EmptyDescriptionDukeException("todo");
         }

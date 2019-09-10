@@ -18,6 +18,7 @@ public class DukeFileReader {
      * @throws FileNotFoundException The exception when a file is not found.
      */
     public static ArrayList<Task> getData(String filePath) throws FileNotFoundException {
+        assert !filePath.equals("") : "filePath should not be empty";
         File file = new File(filePath);
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {

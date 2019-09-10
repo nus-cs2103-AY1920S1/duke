@@ -1,9 +1,9 @@
 package driver;
 
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.Scanner;
 import task.TaskList;
 import command.HelloCommand;
@@ -15,19 +15,20 @@ import command.ByeCommand;
  *
  */
 
-public class Duke   {
+public class Duke {
 
     Ui myUserInterface;
     TaskList myTaskList;
     Storage myTaskManager;
     Parser myParser;
 
+
     /**
      *
      */
+ public Duke() {
 
-    public Duke() {
-    }
+ }
 
     public Duke(String x) {
         myUserInterface = new Ui();

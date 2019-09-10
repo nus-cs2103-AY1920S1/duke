@@ -11,6 +11,7 @@ public class CommandParser {
     private final String DONE = "done";
     private final String DELETE = "delete";
     private final String FIND = "find";
+    private final String HELP = "help";
 
     public CommandParser(String delimiter){
         this.DELIMITER = delimiter;
@@ -33,6 +34,8 @@ public class CommandParser {
             return new DeadlineCommand(arguments);
         } else if (commandName.equals(FIND)){
             return new FindCommand(arguments);
+        } else if (commandName.equals(HELP)) {
+            return new HelpCommand();
         } else {
             return new WrongCommand();
         }

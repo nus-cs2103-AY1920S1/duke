@@ -16,6 +16,9 @@ import java.io.IOException;
  * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
 public abstract class Command {
+    /** Constant to indicate the list indexing is one-based. */
+    static final int ONE_BASED_LIST_INDEX = 1;
+
     /** The term used to identify command type. */
     private String imperative;
 
@@ -41,5 +44,16 @@ public abstract class Command {
      */
     public boolean getIsExit() {
         return this.isExit;
+    }
+
+    /**
+     * Parses a string into an integer corresponding to the index to the
+     * task to be retrieved.
+     *
+     * @param indexString the string representing the task index.
+     * @return the integer corresponding to indexString.
+     */
+    public int parseStringToIntIndex(String indexString) {
+        return Integer.parseInt(indexString) - ONE_BASED_LIST_INDEX;
     }
 }

@@ -41,13 +41,12 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws IOException {
-        // add task to list
         tasks.add(this.task);
 
-        // call storage to update the saved file of tasks
+        // update the saved file of tasks
         storage.update(tasks);
 
-        // call UI to send message informing user that task has been added
+        // inform the user that task has been added
         return ui.showAddTaskMessage(this.task, tasks.size());
     }
 }

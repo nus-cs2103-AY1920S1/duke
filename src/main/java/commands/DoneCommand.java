@@ -47,11 +47,13 @@ public class DoneCommand extends Command {
             return ui.showEmptyListError();
         } else {
             try {
-                int taskIndex = Integer.parseInt(taskNumber) - 1;
+                int taskIndex = parseStringToIntIndex(this.taskNumber);
 
-                // retrieve task from list, mark as done, and inform the user
+                // retrieve task from list
                 Task taskToMarkDone = tasks.get(taskIndex);
                 assert taskToMarkDone != null;
+
+                // mark task as done only if its not yet done
                 if (!taskToMarkDone.getIsDone()) {
                     taskToMarkDone.setTaskAsDone(true);
 

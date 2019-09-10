@@ -227,13 +227,21 @@ public class Duke extends Application {
 
         // user has requested to restart duke.
         if (inputString.equalsIgnoreCase("restart")) {
-            this.isListening = true;
-            return ui.getWelcomeMessage();
+            return restart();
         }
 
         // let user know that a recent instance of Duke has stopped running
         // and steps to take next.
         return "Duke has already stopped running! "
                 + "Type 'restart' to talk to Duke again, or simply close the window!!!";
+    }
+
+    /**
+     * Restarts Duke.
+     * @return string representing welcome message after restart.
+     */
+    private String restart() {
+        this.isListening = true;
+        return ui.getWelcomeMessage();
     }
 }

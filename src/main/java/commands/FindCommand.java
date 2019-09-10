@@ -48,7 +48,7 @@ public class FindCommand extends Command {
         // initialise a temporary container to hold matching tasks
         TaskList foundTasksContainer = new TaskList();
         boolean[] isTaskAlreadyFound = new boolean[taskListSize]; // false
-
+        
         // find task if applicable and add to container
         for (int i = 0; i < taskListSize; i++) {
             for (int j = 0; j < keywordArraySize; j++) {

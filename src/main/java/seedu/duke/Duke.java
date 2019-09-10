@@ -29,7 +29,7 @@ import javafx.scene.Scene;
  */
 public class Duke {
 
-    private Storage storage;
+    private Storage tasksStorage;
     private TaskList tasks;
     private CommandLineUi cli;
     private GraphicalUi gui;
@@ -47,10 +47,11 @@ public class Duke {
      * Default constructor to support seedu.duke.Launcher of javaFX.
      */
     public Duke() {
-        String filePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
+        String tasksFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
         gui = new GraphicalUi();
         cli = new CommandLineUi();
-        storage = new Storage(filePath);
+        tasksStorage = new Storage(tasksFilePath);
+        String statsFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
     }
 
     /**
@@ -62,7 +63,7 @@ public class Duke {
     public Duke(String filePath) {
         gui = new GraphicalUi();
         cli = new CommandLineUi();
-        storage = new Storage(filePath);
+        tasksStorage = new Storage(filePath);
     }
 
     /**
@@ -107,17 +108,19 @@ public class Duke {
 
         try {
             // Loads the data from txt file to the TaskList object, tasks.
-            tasks = new TaskList(this.storage.load());
+            tasks = new TaskList(this.tasksStorage.loadTasks());
         } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (DukeException e){
             System.out.println(e.getMessage());
         }
 
         String output = "";
         try {
             output = executeTasksGui(input);
-            this.storage.clearFileBeforeSaving();
+            this.tasksStorage.clearFileBeforeSaving();
             for (int i = 0; i < this.tasks.getSize(); i++) {
-                this.storage.writeToFile(this.tasks.getTask(i).toSaveString());
+                this.tasksStorage.writeToFile(this.tasks.getTask(i).toSaveString());
             }
             return output;
         } catch (DukeException e) {
@@ -136,8 +139,10 @@ public class Duke {
         Boolean isBye = false;
         try {
             // Loads the data from txt file to the TaskList object, tasks.
-            tasks = new TaskList(this.storage.load());
+            tasks = new TaskList(this.tasksStorage.loadTasks());
         } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (DukeException e){
             System.out.println(e.getMessage());
         }
         // Creates scanner object to handle input.
@@ -198,7 +203,7 @@ public class Duke {
             System.out.println(findRoutine(cli, tasks, fullCommand));
             break;
         case("bye"):
-            System.out.println(byeRoutineCli(cli, tasks, storage));
+            System.out.println(byeRoutineCli(cli, tasks, tasksStorage));
             return true;
         default:
             unknownCommandRoutine();

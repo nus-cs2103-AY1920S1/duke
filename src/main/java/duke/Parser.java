@@ -17,9 +17,13 @@ public class Parser {
      * @throws DukeException if the raw command string cannot be parsed into any Command objects.
      */
     public static Command parse(String rawCommand) throws DukeException {
+        rawCommand = rawCommand.strip();
         String[] words = rawCommand.split(" ");
         switch (words[0]) {
         case "todo":
+            if (rawCommand.length() < words[0].length() + 2) {
+                throw new DukeException("The description of a todo cannot be empty.");
+            }
             return new AddCommand("todo", rawCommand.substring(5));
         case "deadline":
         case "event":
@@ -41,10 +45,19 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "delete":
+            if (rawCommand.length() < words[0].length() + 2) {
+                throw new DukeException("Please specify the task to be deleted.");
+            }
             return new DeleteCommand(Integer.parseInt(rawCommand.substring(7)));
         case "done":
+            if (rawCommand.length() < words[0].length() + 2) {
+                throw new DukeException("Please specify the task to be marked as done.");
+            }
             return new DoneCommand(Integer.parseInt(rawCommand.substring(5)));
         case "find":
+            if (rawCommand.length() < words[0].length() + 2) {
+                throw new DukeException("Please specify a search keyword.");
+            }
             return new FindCommand(rawCommand.substring(5));
         case "bye":
             return new ExitCommand();

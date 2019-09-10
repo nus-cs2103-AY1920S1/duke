@@ -11,12 +11,9 @@ public abstract class Task {
      * Constructs a task with the given description.
      *
      * @param description the description of the task.
-     * @throws DukeException if no description is supplied.
      */
-    public Task(String description) throws DukeException {
-        if (description.equals("")) {
-            throw new DukeException("The description of " + this.getTypeNameWithQuantifier() + " cannot be empty.");
-        }
+    public Task(String description) {
+        assert description.length() > 0 : description;
         this.description = description;
         this.isDone = false;
     }
@@ -63,6 +60,7 @@ public abstract class Task {
      * @throws DukeException if the raw string cannot be converted to a task.
      */
     public static Task fromImportFormat(String text) throws DukeException {
+        assert text.length() > 0 && text.contains("|");
         String[] stringArray = text.split(" \\| ");
         Task t;
         switch (stringArray[0]) {

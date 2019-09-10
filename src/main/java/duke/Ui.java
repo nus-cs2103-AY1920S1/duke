@@ -31,6 +31,7 @@ public class Ui {
      */
     @Deprecated
     public void printMessage(String message) {
+        assert message.strip().length() > 0 : message;
         String[] messages = message.split("\n");
         System.out.println("    ____________________________________________________________");
         for (String line : messages) {
@@ -46,6 +47,7 @@ public class Ui {
      * @param message the message to be printed.
      */
     public void printGuiMessage(String message) {
+        assert message.strip().length() > 0 : message;
         window.handleDukeResponse(message);
     }
 
@@ -84,6 +86,8 @@ public class Ui {
      * @return the plural form of the item with quantifier.
      */
     public static String pluralize(String item, Integer quantity) {
+        assert quantity > 0 : quantity;
+        assert item.length() > 0 : item;
         if (quantity == 1) {
             return "1 " + item;
         } else {

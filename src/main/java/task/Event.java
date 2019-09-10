@@ -36,6 +36,10 @@ public class Event extends Task {
         return at;
     }
 
+    public void setAt(Date at) {
+        this.at = at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

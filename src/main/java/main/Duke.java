@@ -67,10 +67,10 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 Command command = new Parser().parse(fullCommand);
                 command.execute(tasks, ui, storage);
-                ui.printNonGuiDisplayMsg();
                 canEnd = command.canEnd();
             } catch (DukeException e) {
                 ui.showLoadingError(e.getMessage());
+            } finally {
                 ui.printNonGuiDisplayMsg();
             }
         }

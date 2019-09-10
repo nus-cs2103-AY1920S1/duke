@@ -40,6 +40,10 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "[" + getDoneIcon() + "] " + description;

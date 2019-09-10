@@ -51,7 +51,6 @@ public class Ui {
 
     /**
      * Sets displayMsg to error message.
-     * Prints error message if using CLI.
      *
      * @param message of error
      */
@@ -62,7 +61,6 @@ public class Ui {
 
     /**
      * Sets displayMsg to welcome message.
-     * Prints welcome message if using CLI.
      */
     public void showWelcome() {
         displayMsg = new StringJoiner(System.lineSeparator());
@@ -80,7 +78,6 @@ public class Ui {
 
     /**
      * Sets displayMsg to message produced by DeadlineCommand.
-     * Prints deadline has been added to task list message if using CLI.
      *
      * @param tasks is the list of task
      */
@@ -93,7 +90,6 @@ public class Ui {
 
     /**
      * Sets displayMsg to message produced by DeleteCommand.
-     * Prints task has been removed from task list message if using CLI.
      *
      * @param tasks is the list of task
      * @param index is the index of task to be removed
@@ -107,7 +103,6 @@ public class Ui {
 
     /**
      * Sets displayMsg to message produced by ListCommand.
-     * Prints all the tasks in task list if using CLI.
      *
      * @param tasks is the list of tasks.
      */
@@ -122,7 +117,6 @@ public class Ui {
 
     /**
      * Sets displayMsg to message produced by DoneCommand.
-     * Prints task has been marked done if using CLI.
      *
      * @param tasks is the list of tasks
      * @param index is the index of task that is marked done
@@ -135,8 +129,18 @@ public class Ui {
     }
 
     /**
+     * Sets displayMsg to message produced by EditCommand.
+     *
+     * @param task the edited task
+     */
+    public void showEditCommand(Task task) {
+        displayMsg = new StringJoiner(System.lineSeparator());
+        displayMsg.add("I've update this task as:");
+        displayMsg.add(task.toString());
+    }
+
+    /**
      * Sets displayMsg to message produced by EventCommand.
-     * Prints event has been added to task list message if using CLI.
      *
      * @param tasks is the list of tasks.
      */
@@ -148,7 +152,7 @@ public class Ui {
     }
 
     /**
-     * Prints goodbye message if using CLI.
+     * Sets displayMsg to goodbye message.
      */
     public void showExitCommand() {
         displayMsg = new StringJoiner(System.lineSeparator());
@@ -157,7 +161,6 @@ public class Ui {
 
     /**
      * Sets displayMsg to message produced by FindCommand.
-     * Prints the list of tasks that contains the search term if using CLI.
      *
      * @param tasks is the list of tasks
      * @param keyword is the searched term
@@ -175,7 +178,6 @@ public class Ui {
 
     /**
      * Sets displayMsg to message produced by ToDoCommand.
-     * Prints todo has been added to task list message if using CLI.
      *
      * @param tasks is the list of task
      */

@@ -37,7 +37,7 @@ class Duke {
      * <p>The list of tasks saved locally would be updated each time this method is called.</p>
      *
      * @param input The input text
-     * @return
+     * @return Returns the response by Duke in the form of string
      */
     String getResponse(String input) {
         String response;
@@ -45,11 +45,7 @@ class Duke {
             response = parser.processLine(input); // add, delete, etc
         } catch (DukeException e) {
             response = e.getMessage();
-        } catch (NumberFormatException e) {
-            response = "Input must be an integer.";
-        } catch (ParseException e) {
-            response = (e.getMessage() + "\nPlease use the format: dd/MM/yyyy hhmm");
-        } catch (Exception e) {
+        } catch (Exception e) { // for unhandled exceptions
             response = ("Something is wrong: " + e.getMessage());
         }
 

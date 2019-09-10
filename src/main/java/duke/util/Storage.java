@@ -27,6 +27,15 @@ public class Storage {
      */
     public Storage(String filePath) {
         file = new File(filePath);
+
+        try {
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     /**

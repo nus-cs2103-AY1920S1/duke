@@ -58,20 +58,16 @@ public class Storage {
                 done = false;
             }
 
-            try {
-                switch (inputArr[0]) {
-                case "T":
-                    clone.add(new ToDos(inputArr[2], done));
-                    break;
-                case "D":
-                    clone.add(new Deadlines(inputArr[2], new DateTime(inputArr[3]), done));
-                    break;
-                case "E":
-                    clone.add(new Events(inputArr[2], new DateTime(inputArr[3]), done));
-                    break;
-                }
-            } catch (DukeException e) {
-                System.out.println(e);
+            switch (inputArr[0]) {
+            case "T":
+                clone.add(new ToDos(inputArr[2], done));
+                break;
+            case "D":
+                clone.add(new Deadlines(inputArr[2], TaskList.dateTimeParser(inputArr[3]), done));
+                break;
+            case "E":
+                clone.add(new Events(inputArr[2], TaskList.dateTimeParser(inputArr[3]), done));
+                break;
             }
 
         }
@@ -112,9 +108,11 @@ public class Storage {
             if (i instanceof ToDos) {
                 memo = memo + "T | " + done + " | " + i.getDescription() + "\n";
             } else if (i instanceof Deadlines) {
-                memo = memo + "D | " + done + " | " + i.getDescription() + " | " + ((Deadlines) i).getDate() + "\n";
+                memo = memo + "D | " + done + " | " + i.getDescription() + " | "
+                        + TaskList.localDateTimeToString(((Deadlines) i).getDate()) + "\n";
             } else {
-                memo = memo + "E | " + done + " | " + i.getDescription() + " | " + ((Events) i).getDate() + "\n";
+                memo = memo + "E | " + done + " | " + i.getDescription() + " | "
+                        + TaskList.localDateTimeToString(((Events) i).getDate()) + "\n";
             }
         }
 

@@ -29,7 +29,7 @@ public class Parser {
             } else if (temp[0].equals("delete")) {
                 return new DeleteCommand(temp);
 
-            } else if (temp[0].equals("find")){
+            } else if (temp[0].equals("find")) {
                 return new FindCommand(temp);
             } else {
                 return new AddCommand(input, temp);

@@ -17,12 +17,12 @@ public class Duke {
     private Storage storage;
     private TaskList task;
 
-    public Duke(){
+    public Duke() {
         try {
             this.ui = new Ui();
             this.storage = new Storage("./todoList.txt");
             this.task = new TaskList(storage.fileInitialization());
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println(ui.printError("File not found"));
         } catch (IOException e) {
             System.out.println(ui.printError(e.getMessage()));
@@ -76,7 +76,7 @@ public class Duke {
 
         try {
             assert !input.equals("bye") : "input = bye, error in code.";
-            
+
             Command c = Parser.parse(input);
             output = c.execute(task, ui, storage);
         } catch (IOException e) {

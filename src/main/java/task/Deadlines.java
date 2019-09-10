@@ -1,13 +1,15 @@
 package task;
 
-import main.DateTime;
+import main.TaskList;
+
+import java.time.LocalDateTime;
 
 /**
  * Represents the task deadline.
  */
 public class Deadlines extends Task {
 
-    private DateTime date;
+    private LocalDateTime date;
 
     /**
      * Creates the Deadlines object
@@ -16,7 +18,7 @@ public class Deadlines extends Task {
      * @param date        Date of deadline in DD/MM/YYYY TTTT format.
      * @param isDone      Marks the task as done nor not done.
      */
-    public Deadlines(String description, DateTime date, boolean isDone) {
+    public Deadlines(String description, LocalDateTime date, boolean isDone) {
         super(description, isDone);
         this.date = date;
     }
@@ -26,12 +28,12 @@ public class Deadlines extends Task {
      *
      * @return DateTime object of deadline.
      */
-    public DateTime getDate() {
+    public LocalDateTime getDate() {
         return this.date;
     }
 
     @Override
     public String toString() {
-        return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + " (by: " + date + ")";
+        return "[D]" + "[" + getStatusIcon() + "] " + getDescription() + " (by: " + TaskList.localDateTimeToString(this.date) + ")";
     }
 }

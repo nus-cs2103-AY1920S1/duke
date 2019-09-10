@@ -40,6 +40,8 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
    * @param tasks an existing list of tasks
    */
   public TaskList(TaskListTasks tasks) {
+    assert tasks != null;
+
     this.tasks = tasks;
     init();
   }

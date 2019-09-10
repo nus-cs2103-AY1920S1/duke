@@ -36,6 +36,8 @@ public class Duke {
    * @param taskListPath Relative path of taskList database.
    */
   public Duke(String taskListPath) {
+    assert taskListPath != null;
+
     this.controller = new Controller();
     this.taskList = new TaskList();
     this.storage = new TaskListStorage(taskListPath);

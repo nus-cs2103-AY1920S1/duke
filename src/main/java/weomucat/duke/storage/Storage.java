@@ -18,6 +18,8 @@ public abstract class Storage<T> {
    * @param path fixed path of database
    */
   public Storage(String path) {
+    assert path != null;
+
     this.path = path;
   }
 

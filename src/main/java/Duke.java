@@ -30,6 +30,9 @@ public class Duke {
             tasks = new TaskList();
             parser = new Parser(tasks);
         }
+        assert ui == null : "ui should exist";
+        assert storage == null : "storage should exist";
+        assert parser == null : "parser should exist";
     }
 
     /**

@@ -86,6 +86,7 @@ public class Storage {
                     }
                     break;
                 default:
+                    assert false : "Task type should be T, D or E";
                     break;
                 }
             }

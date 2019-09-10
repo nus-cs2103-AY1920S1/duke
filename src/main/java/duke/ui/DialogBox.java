@@ -47,7 +47,6 @@ class DialogBox extends HBox {
         displayPicture.setImage(img);
         this.setBackground(new Background(new BackgroundFill(
                 Color.gray(0.865), new CornerRadii(10), new Insets(5, 5, 5, 5))));
-        this.setSpacing(10);
     }
 
     /**

@@ -13,7 +13,7 @@ class Parser {
     static Command parse(String fullCommand) throws DukeException, ParseException {
         Scanner sc = new Scanner(fullCommand);
         String command = sc.next();
-
+        assert sc.hasNext(): "Command cannot be empty";
         switch(command) {
         case "done": {
             if (!sc.hasNextInt()) {

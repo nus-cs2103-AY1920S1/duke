@@ -10,8 +10,8 @@ class Command {
      * @throws DukeException when input is different from required.
      * @throws IOException when input is different from required.
      */
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException{
-
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException{
+        return "";
     }
 
     /**
@@ -45,12 +45,12 @@ class AddCommand extends Command {
      * @throws IOException when input is different from required.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         tasks.addTask(t);
         storage.save();
-        System.out.println("     Got it. I've added this task:");
-        System.out.println("       " + t);
-        System.out.println("      Now you have " + tasks.getSize() + " tasks in the list.");
+        return "     Got it. I've added this task:\n" +
+        "       " + t + "\n"
+        + "      Now you have " + tasks.getSize() + " tasks in the list.";
     }
 }
 
@@ -65,6 +65,7 @@ class DeleteCommand extends Command {
      * @param index to know which position to delete.
      */
     DeleteCommand(int index) {
+        assert index >= 0 : "index of task cannot be negative";
         this.index = index;
     }
 
@@ -77,16 +78,16 @@ class DeleteCommand extends Command {
      * @throws IOException when input is different from required.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (index >= tasks.getSize()) {
             throw new NoTaskException();
         }
         Task t = tasks.getTask(index);
         tasks.deleteTask(index);
         storage.save();
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + t);
-        System.out.println("      Now you have "  + tasks.getSize() + " tasks in the list.");
+        return "     Noted. I've removed this task:\n" +
+        "       " + t + "\n" +
+        "      Now you have "  + tasks.getSize() + " tasks in the list.";
     }
 
 }
@@ -100,9 +101,8 @@ class ExitCommand extends Command {
      * @param storage is the Storage class.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println(
-                "     Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "     Bye. Hope to see you again soon!";
     }
 }
 
@@ -114,9 +114,10 @@ class ListCommand extends Command {
      * @param ui is the UI class.
      * @param storage is the Storage class.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("     Here are the tasks in your list:");
-        tasks.printList();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String print = "     Here are the tasks in your list:\n";
+        print = print + tasks.printList();
+        return print;
     }
 }
 
@@ -127,6 +128,7 @@ class DoneCommand extends Command {
     private int index;
 
     DoneCommand(int index) {
+        assert index >= 0 : "index of task cannot be negative";
         this.index = index;
     }
 
@@ -139,15 +141,16 @@ class DoneCommand extends Command {
      * @throws IOException when input is different from required.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (index >= tasks.getSize()) {
             throw new NoTaskException();
         }
+        String print = "";
         Task t = tasks.getTask(index);
         t.markAsDone();
         storage.save();
-        System.out.println("     Nice! I've marked this task as done: ");
-        System.out.println("       " + t);
+        return "     Nice! I've marked this task as done: \n" +
+        "       " + t;
     }
 }
 
@@ -163,8 +166,8 @@ class FindCommand extends Command {
      * @param storage is the Storage class.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("     Here are the matching tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "     Here are the matching tasks in your list:" +
         tasks.printListWithKeyword(keyword);
     }
 }

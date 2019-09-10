@@ -50,22 +50,26 @@ class TaskList {
     /**
      * print the whole list of tasks
      */
-    void printList() {
+    String printList() {
         int counter = 1;
+        String print = "";
         for (Task t: taskList) {
-            System.out.println("      " + counter + "." + t) ;
+            print = print + "      " + counter + "." + t + "\n" ;
             counter++;
         }
+        return print;
     }
 
-    void printListWithKeyword(String keyword) {
+    String printListWithKeyword(String keyword) {
         int counter = 1;
+        String print = "";
         for (Task t: taskList) {
             if (t.getDescription().indexOf(keyword) != -1) {
-                System.out.println("      " + counter + "." + t) ;
+                print = print + "      " + counter + "." + t + "\n" ;
                 counter++;
             }
         }
+        return print;
     }
 
 }

@@ -14,7 +14,8 @@ public class DukeException extends Exception {
 
     @Override
     public String toString() {
-        String errMessage = "\t " + this.getMessage();
+        String emoji = "\uD83D\uDE41";
+        String errMessage = emoji + " " + this.getMessage();
 
         return errMessage;
     }

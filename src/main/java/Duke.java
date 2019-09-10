@@ -51,7 +51,7 @@ public class Duke {
             assert c.toString() != "" : "Response from Duke cannot be empty!";
             return c.toString();
         } catch (DukeException e) {
-            reply = e.getMessage();
+            reply = e.toString();
         }
         return reply;
     }

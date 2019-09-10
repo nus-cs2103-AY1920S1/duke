@@ -14,7 +14,10 @@ public class ShowCommand extends Command {
         super(command);
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+        if (tasks.getTaskCount() == 0) {
+            throw new DukeException("No tasks available.");
+        }
         this.tasks = tasks;
     }
 

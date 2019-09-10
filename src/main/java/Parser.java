@@ -15,7 +15,8 @@ public class Parser {
      * @throws DukeException if user input fields are incorrect.
      */
     public static Command parse(String input) throws DukeException {
-        String[] inputArr = input.split(" ", 2);
+        String trimmedInput = input.trim();
+        String[] inputArr = trimmedInput.split(" ", 2);
 
         //Check what type of command is it
         String cmd = inputArr[0];
@@ -29,9 +30,12 @@ public class Parser {
                 nextCommand = new FindCommand(cmd, desc);
             } else if (cmd.equals("todo")) {
                 String desc = inputArr[1].trim();
+
+                assert desc.length() > 0 : "Description of todo task should not be empty!";
+
                 nextCommand = new AddCommand(cmd, desc);
             } else if (cmd.equals("deadline")) {
-                String errorMessage = "☹ Incorrect format. Eg. deadline Do Project /by 29/8/2019 1800";
+                String errorMessage = "Incorrect format. Eg. deadline Do Project /by 29/8/2019 1800";
                 String desc = getDesc(inputArr[1], " /by ", errorMessage);
                 String dateTime = getDateTime(inputArr[1], " /by ", errorMessage);
 
@@ -40,7 +44,7 @@ public class Parser {
 
                 nextCommand = new AddCommand(cmd, desc, dateTime);
             } else if (cmd.equals("event")) {
-                String errorMessage = "☹ Incorrect format. Eg. event Talk Show /at 29/8/2019 1800";
+                String errorMessage = "Incorrect format. Eg. event Talk Show /at 29/8/2019 1800";
                 String desc = getDesc(inputArr[1], " /at ", errorMessage);
                 String dateTime = getDateTime(inputArr[1], " /at ", errorMessage);
 
@@ -58,10 +62,10 @@ public class Parser {
                 //go with default command
             } else {
                 //if command can't be recognised
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ Incorrect input fields.");
+            throw new DukeException("Incorrect input fields.");
         }
 
         return nextCommand;

@@ -22,6 +22,6 @@ public class ExitCommand extends Command {
 
     @Override
     public String toString() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Your tasks have been saved. Hope to see you again soon!";
     }
 }

@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
      */
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if (this.getIndex() >= tasks.getTaskCount()) {
-            throw new DukeException("☹ Index is not within the list. Please enter a index within the list.");
+            throw new DukeException("Index is not within the list. Please enter a index within the list.");
         }
 
         Task deletedTask = tasks.getTask(this.getIndex());

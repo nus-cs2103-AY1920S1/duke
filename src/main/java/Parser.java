@@ -15,6 +15,9 @@ public class Parser {
      */
     public static void handleInput(String type, String userInput) throws
             EmptyFieldException, InvalidInputException, ParseException {
+        assert type != "" : "type of command cannot be empty";
+        assert userInput != "" : "user input cannot be empty";
+
         if (type.equals("find")) {
             if (userInput.substring(5).isBlank()) {
                 throw new EmptyFieldException("☹ OOPS!!! You have to type something that you want to find");

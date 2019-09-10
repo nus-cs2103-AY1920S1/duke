@@ -12,7 +12,11 @@ public class Storage {
     private static String filePath;
     private ArrayList<Task> taskList;
 
+    /**
+     * Represents a storage for users' tasklist.
+     */
     public Storage(String filePath) {
+        assert filePath != "" : "file path cannot be empty";
         this.filePath = filePath;
         this.taskList = new ArrayList<>();
     }

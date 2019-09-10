@@ -1,11 +1,9 @@
 package driver;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Scanner;
 import task.TaskList;
 import command.HelloCommand;
@@ -17,7 +15,7 @@ import command.ByeCommand;
  *
  */
 
-public class Duke extends Application  {
+public class Duke   {
 
     Ui myUserInterface;
     TaskList myTaskList;
@@ -27,6 +25,9 @@ public class Duke extends Application  {
     /**
      *
      */
+
+    public Duke() {
+    }
 
     public Duke(String x) {
         myUserInterface = new Ui();
@@ -85,20 +86,9 @@ public class Duke extends Application  {
      */
 
     public static void main(String[] args) {
-        Duke testRun = new Duke("data/loggedData.txt");
+        Duke testRun = new Duke("src/main/java/data/loggedData.txt");
         testRun.run();
-
     }
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
-
 
 
 

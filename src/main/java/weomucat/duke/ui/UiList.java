@@ -45,6 +45,8 @@ public class UiList implements AddTaskListener, ByeCommandListener, DeleteTaskLi
    * @param ui the ui to add
    */
   public void addUi(Ui ui) {
+    assert ui != null;
+
     this.uis.add(ui);
     ui.newUserInputListener(this);
   }

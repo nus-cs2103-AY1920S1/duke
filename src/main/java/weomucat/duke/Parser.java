@@ -21,6 +21,8 @@ public class Parser {
    * @param input User input to decipher.
    */
   public Parser(String input) {
+    assert input != null;
+
     // Split input by whitespace.
     this.tokens = input.trim().split(" ");
 
@@ -54,6 +56,8 @@ public class Parser {
    * @return A HashMap of (parameter name, parameter value)
    */
   public HashMap<String, String> parseParameters(String... parameters) {
+    assert parameters != null;
+
     LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));
 
     // Remove command from tokens.

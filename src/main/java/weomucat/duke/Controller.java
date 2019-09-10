@@ -190,6 +190,8 @@ public class Controller implements UserInputListener {
 
   @Override
   public void userInputUpdate(String userInput) throws DukeException {
+    assert userInput != null;
+
     // Initialize parser for this line of user input.
     Parser parser = new Parser(userInput);
 

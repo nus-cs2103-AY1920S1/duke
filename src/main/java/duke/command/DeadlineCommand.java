@@ -18,17 +18,11 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
         if (description.equals("")) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
         Task deadlineTask = new Deadline(description, by);
         tasks.add(deadlineTask);
-//        ui.printAddedTask(deadlineTask, tasks);
     }
 }

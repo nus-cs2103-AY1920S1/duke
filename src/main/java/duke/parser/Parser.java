@@ -12,6 +12,8 @@ public class Parser {
 
     public static Command parse(String userInput) {
 
+        assert !userInput.equals("");
+
         String[] input = userInput.split(" ");
         String instruction = input[0];
         StringBuilder stringBuilder = new StringBuilder();
@@ -37,6 +39,8 @@ public class Parser {
             case "find":
                 String word = input[1];
                 return new FindCommand(word);
+            case "statistics":
+                return new StatisticsCommand();
             default:
                 return new Command();
         }

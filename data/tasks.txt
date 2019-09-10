@@ -1,0 +1,5 @@
+T | 1 | eat
+T | 0 | sleep
+T | 0 | run
+T | 0 | jog
+E | 0 | read | 29/05/2019 0400

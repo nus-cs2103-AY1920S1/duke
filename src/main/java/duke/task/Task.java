@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Comparator;
+
 /**
  * Task is a class to represent a task. It contains a description of the task and its status
  * (whether the task has been completed).
@@ -39,4 +41,10 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
+    public static Comparator<Task> typeComparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+            return t1.toString().compareTo(t2.toString());
+        }
+    };
 }

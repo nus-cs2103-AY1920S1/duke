@@ -43,6 +43,9 @@ public class Parser {
         } else if (commandType.equals("find")) {
             String searchPhrase = fullCommand.substring(5).trim();
             return new FindCommand(searchPhrase);
+        } else if (commandType.equals("sort")) {
+            String by = fullCommand.substring(5).trim();
+            return new SortCommand(by);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means.");
         }

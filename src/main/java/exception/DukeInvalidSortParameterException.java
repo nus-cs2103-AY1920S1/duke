@@ -7,7 +7,7 @@ public class DukeInvalidSortParameterException extends DukeException {
      */
     public DukeInvalidSortParameterException() {
         super("The parameters for the sort command are invalid. Please input in the following format:\n"
-            + "sort name (ascending/descending)\n"
+            + "sort (name/date) (ascending/descending)\n"
             + "Example: sort name ascending");
     }
 

@@ -36,7 +36,6 @@ public class Parser {
             if (todoSplit.length == 1 || todoSplit[1].isEmpty()) {
                 throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
-
             return new AddCommand(new Todo(todoSplit[1].trim()));
         } else if (taskType.equals("deadline")) {
             //branch lvl 8 test

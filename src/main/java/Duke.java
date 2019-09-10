@@ -99,7 +99,7 @@ public class Duke extends Application {
         storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
-        } catch (Exception e) { // Supposed to be Exceptions.DukeException
+        } catch (DukeException e) { // Supposed to be Exceptions.DukeException
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -113,7 +113,6 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -147,7 +146,7 @@ public class Duke extends Application {
             Command c = Parser.parse(fullCommand);
             isExit = c.isExit();
             if (isExit) {
-
+                Runtime.getRuntime().exit(0);
                 return c.execute(tasks, ui, storage);
             } else {
                 return c.execute(tasks, ui, storage);

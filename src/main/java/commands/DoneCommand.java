@@ -1,5 +1,6 @@
 package commands;
 
+import exceptions.DukeException;
 import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
@@ -22,6 +23,8 @@ public class DoneCommand extends Command {
 
         } catch (IndexOutOfBoundsException e) {
             return "Enter a valid task index u pepega :)";
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

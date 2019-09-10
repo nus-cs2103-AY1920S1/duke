@@ -68,8 +68,9 @@ public class TaskList {
      * Marks the indicated task as done.
      * @param taskIndex task to be marked as done
      */
-    public void markAsDone(int taskIndex) {
-        tasks.get(taskIndex).markAsDone();
+    public void markAsDone(int taskIndex) throws DukeException {
+        boolean markedAsDone = tasks.get(taskIndex).markAsDone();
+        assert markedAsDone: "TaskList.markAsDone() error";
     }
 
     /**

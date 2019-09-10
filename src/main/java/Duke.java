@@ -45,6 +45,7 @@ public class Duke extends Application{
         try {
 //        tasks = new TaskList(new LinkedList<Task>());
             tasks = new TaskList(storage.printFileContents());
+            assert tasks!= null;
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -22,32 +22,35 @@ public class UpdateCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int num;
+        String[] inputArr = input.split(" ");
         switch (action) {
-            case DONE:
-                try {
-                    //no input number
-                    if (ui.getInputArr().length == 1) {
-                        throw new NumberFormatException();
-                    }
-                    num = Integer.parseInt(ui.getInputArr()[1]);
-                    //invalid num, will index out of bounds
-                    if (num > tasks.getSize()) {
-                        throw new NumberFormatException();
-                    } else {
-                        tasks.getTask(num - 1).markAsDone();
-                    }
-                } catch (NumberFormatException e) {
-                    Duke.print("☹ OOPS!!! Please input a valid number.");
+        case DONE:
+            try {
+                //no input number
+                if (inputArr.length == 1) {
+                    throw new NumberFormatException();
                 }
-                break;
-            case LIST:
-                tasks.listTasks();
-                break;
-            default:
-                break;
+                num = Integer.parseInt(inputArr[1]);
+                //invalid num, will index out of bounds
+                if (num > tasks.getSize()) {
+                    throw new NumberFormatException();
+                } else {
+                    tasks.getTask(num - 1).markAsDone();
+                }
+            } catch (NumberFormatException e) {
+                Duke.print("☹ OOPS!!! Please input a valid number.");
+                return ("☹ OOPS!!! Please input a valid number.");
+
+            }
+            break;
+        case LIST:
+            return tasks.listTasks();
+        default:
+            break;
         }
+        return null;
     }
 
 

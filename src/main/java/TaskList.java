@@ -11,13 +11,15 @@ public class TaskList implements Serializable {
     /**
      * Prints all the tasks in the TaskList.
      */
-    public void listTasks() {
+    public String listTasks() {
         int size = this.tasks.size();
         StringBuilder listOfTask = new StringBuilder();
         for (int i = 0; i < size; i++) {
             listOfTask.append(i + 1 + ". " + this.tasks.get(i) + "\n" + "     ");
         }
         Duke.print(listOfTask.toString());
+        return (listOfTask.toString());
+
     }
 
     /**

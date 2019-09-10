@@ -22,9 +22,12 @@ public class Task implements Serializable {
     public void markAsDone() {
         this.status = true;
         System.out.println(
-                "    ____________________________________________________________\n" +
-                        "     Nice! I've marked this task as done:\n" +
-                        "     " + this + "\n" +
+                "    ____________________________________________________________\n"
+                        +
+                        "     Nice! I've marked this task as done:\n"
+                        +
+                        "     " + this + "\n"
+                        +
                         "    ____________________________________________________________\n");
     }
 
@@ -55,6 +58,7 @@ public class Task implements Serializable {
     public boolean contains(String s) {
         return task.contains(s);
     }
+
     @Override
     public String toString() {
         String logo;
@@ -63,7 +67,12 @@ public class Task implements Serializable {
         } else {
             logo = "✓";
         }
-        return "[" + logo + "] " + this.getTask();
+        return "["
+                +
+                logo
+                +
+                "] "
+                + this.getTask();
     }
 
 }

@@ -1,5 +1,3 @@
-import java.util.*;
-
 /**
  * Todo task that inherits from Task.
  */

@@ -1,19 +1,59 @@
-import java.io.*;
 import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
-//import javafx.application.Application;
-//import javafx.scene.Scene;
-//import javafx.scene.control.Label;
-//import javafx.stage.Stage;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Main class that runs the Duke program.
  */
-public class Duke {
+public class Duke extends Application {
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    protected Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    protected Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Storage storage = new Storage();
+    private TaskList tasks = new TaskList();
+    private Ui ui = new Ui();
+
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    protected String getResponse(String input) {
+        try {
+            System.out.println(input);
+            Command c = Parser.parse(input);
+            System.out.println(input);
+            String output = c.execute(tasks, ui, storage);
+            System.out.println(input);
+            storage.save(tasks);
+            return output;
+        } catch (Exception e) {
+            System.out.println(e);
+            return e + "from getResponse";
+        }
+    }
+    @Override
+    public void start(Stage stage) {
+
+    }
 
     /**
      * Converts a date and time string from dd/mm/yy hh:mm format to Day of Month, Year hh.mm(am/pm) format.
@@ -23,12 +63,9 @@ public class Duke {
      */
     public static String toDateString(String dateTime) {
         try {
-            String result = "";
             String[] s = dateTime.split(" ");
             String[] date = s[0].split("/");
             int intDay = Integer.parseInt(date[0]);
-            int intMonth = Integer.parseInt(date[1]);
-            int year = Integer.parseInt(date[2]);
             String day = "";
             int intTime = Integer.parseInt(s[1]);
             String time = "";
@@ -54,7 +91,10 @@ public class Duke {
             } else if (intTime < 1159) {
                 time = intTime / 100 + "." + minutes + "am";
             }
+            int intMonth = Integer.parseInt(date[1]);
             String month = new DateFormatSymbols().getMonths()[intMonth - 1];
+            int year = Integer.parseInt(date[2]);
+            String result = "";
             result = day + " of " + month + " " + year + ", " + time;
             return result;
         } catch (Exception e) {
@@ -69,24 +109,23 @@ public class Duke {
      */
     public static void print(String message) {
         System.out.println(
-                "    ____________________________________________________________\n" +
-                        "     " + message + "\n" +
+                "    ____________________________________________________________\n"
+                        +
+                        "     " + message + "\n"
+                        +
                         "    ____________________________________________________________");
     }
 
-    private Storage storage;
-    private TaskList tasks = new TaskList();
-    private Ui ui;
+
 
     /**
      * Constructs a new Duke object.
      */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage();
         try {
             storage.load(tasks);
         } catch (Exception e) {
+            System.out.println("No file is loaded!");
         }
 
     }
@@ -96,7 +135,8 @@ public class Duke {
      */
     public void run() {
         Parser parser = new Parser();
-        print("Hello! I am Duke\n" +
+        print("Hello! I am Duke\n"
+                +
                 "     What can I do for you?");
         this.tasks.listTasks();
         boolean isExit = false;
@@ -105,11 +145,11 @@ public class Duke {
                 ui.setInput();
                 String input = ui.getInput();
                 Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
+                String output = c.execute(tasks, ui, storage);
                 isExit = c.isExit();
                 storage.save(tasks);
             } catch (Exception e) {
-//                System.out.println(e);
+                System.out.println(e);
             }
         }
     }

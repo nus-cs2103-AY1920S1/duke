@@ -23,73 +23,83 @@ public class AddCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int num;
         String desc;
         Task task = null;
+        String[] inputArr = input.split(" ");
         switch (action) {
-            case TODO:
+        case TODO:
+            //trim so that cannot pass with just spaces
+            desc =input.substring(4).trim();
+            if (desc.equals("")) {
+                Duke.print("☹ OOPS!!! The description of a todo cannot be empty.");
+                return "☹ OOPS!!! The description of a todo cannot be empty.";
+            } else {
+                task = new Todo(desc);
+            }
+            break;
+        case DEADLINE:
+            num = input.indexOf("/by");
+            //length == 1 means only has 'deadline', and temp[1] equal /by means no desc as well
+            if (inputArr.length == 1 || inputArr[1].equals("/by")) {
+                Duke.print("☹ OOPS!!! The description of a deadline cannot be empty.");
+                return("☹ OOPS!!! The description of a deadline cannot be empty.");
+            } else if (num == -1) { //-1 means /by is not found
+                Duke.print("☹ OOPS!!! Please type /by before inputting the deadline.");
+                return("☹ OOPS!!! Please type /by before inputting the deadline.");
+            } else {
+                desc = input.substring(9, num);
                 //trim so that cannot pass with just spaces
-                desc = ui.getTodoDesc();
-                if (desc.equals("")) {
-                    Duke.print("☹ OOPS!!! The description of a todo cannot be empty.");
+                String by = input.substring(num + 3).trim();
+                //no input time after /by
+                if (by.equals("")) {
+                    Duke.print("☹ OOPS!!! Please input a deadline after /by");
+                    return("☹ OOPS!!! Please input a deadline after /by");
                 } else {
-                    task = new Todo(desc);
+                    task = new Deadline(desc, by);
                 }
-                break;
-            case DEADLINE:
-                num = ui.getInput().indexOf("/by");
-                //length == 1 means only has 'deadline', and temp[1] equal /by means no desc as well
-                if (ui.getInputArr().length == 1 || ui.getInputArr()[1].equals("/by")) {
-                    Duke.print("☹ OOPS!!! The description of a deadline cannot be empty.");
-                }
-                //-1 means /by is not found
-                else if (num == -1) {
-                    Duke.print("☹ OOPS!!! Please type /by before inputting the deadline.");
-
+            }
+            break;
+        case EVENT:
+            num = input.indexOf("/at");
+            //length == 1 means only has 'event', and temp[1] equal /at means no desc as well
+            if (inputArr.length == 1 || inputArr[1].equals("/at")) {
+                Duke.print("☹ OOPS!!! The description of a event cannot be empty.");
+                return("☹ OOPS!!! The description of a event cannot be empty.");
+            } else if (num == -1) { //-1 means /at is not found
+                return("☹ OOPS!!! Please type /at before inputting the time.");
+            } else {
+                desc = input.substring(6, num);
+                //trim so that cannot pass with just spaces
+                String at = input.substring(num + 3).trim();
+                //no input time after /at
+                if (at.equals("")) {
+                    Duke.print("☹ OOPS!!! Please input a time after /at");
+                    return("☹ OOPS!!! Please input a time after /at");
                 } else {
-                    desc = ui.getInput().substring(9, num);
-                    //trim so that cannot pass with just spaces
-                    String by = ui.getInput().substring(num + 3).trim();
-                    //no input time after /by
-                    if (by.equals("")) {
-                        Duke.print("☹ OOPS!!! Please input a deadline after /by");
-                    } else {
-                        task = new Deadline(desc, by);
-                    }
+                    task = new Event(desc, at);
                 }
-                break;
-            case EVENT:
-                num = ui.getInput().indexOf("/at");
-                //length == 1 means only has 'event', and temp[1] equal /at means no desc as well
-                if (ui.getInputArr().length == 1 || ui.getInputArr()[1].equals("/at")) {
-                    Duke.print("☹ OOPS!!! The description of a event cannot be empty.");
-                }
-                //-1 means /at is not found
-                else if (num == -1) {
-                    Duke.print("☹ OOPS!!! Please type /at before inputting the time.");
-                } else {
-                    desc = ui.getInput().substring(6, num);
-                    //trim so that cannot pass with just spaces
-                    String at = ui.getInput().substring(num + 3).trim();
-                    //no input time after /at
-                    if (at.equals("")) {
-                        Duke.print("☹ OOPS!!! Please input a time after /at");
-                    } else {
-                        task = new Event(desc, at);
-                    }
-                }
-                break;
-            default:
-                break;
+            }
+            break;
+        default:
+            break;
         }
         // if task is still null do nothing
-        if (task == null) {
-        } else {
+        if (task != null) {
             tasks.addTask(task);
-            Duke.print("Got it. I've added this task:\n" +
-                    "       " + task + "\n" +
+            Duke.print("Got it. I've added this task:\n"
+                    +
+                    "       " + task + "\n"
+                    +
                     "     Now you have " + tasks.getSize() + " tasks in the list.");
+            return ("Got it. I've added this task:\n"
+                    +
+                    "       " + task + "\n"
+                    +
+                    "     Now you have " + tasks.getSize() + " tasks in the list.");
+        } else {
+            return null;
         }
     }
 

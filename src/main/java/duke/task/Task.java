@@ -12,7 +12,7 @@ public class Task {
      * @param description description of task
      */
     Task(String description) {
-        //assert description.length() > 0;
+        assert description.length() > 0;
         this.description = description;
         this.isDone = false;
     }

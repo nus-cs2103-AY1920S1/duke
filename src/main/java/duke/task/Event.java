@@ -19,7 +19,7 @@ public class Event extends Task {
      */
     public Event(String description, String at) throws ParseException {
         super(description);
-        //assert at.length() > 0;
+        assert at.length() > 0;
         this.at = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(at);
     }
 

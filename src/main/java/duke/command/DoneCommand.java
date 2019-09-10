@@ -38,11 +38,11 @@ public class DoneCommand extends Command {
             throw new DukeException(ERROR_INVALID_TASK_ID);
         }
         ui.append(MESSAGE_DONE);
-        for (int taskId : taskIds) {
+        Arrays.stream(taskIds).forEach(taskId -> {
             Task task = tasks.get(taskId - 1);
             task.markAsDone();
             assert task.isDone() : "Task should be marked done.";
             ui.append(task.toString());
-        }
+        });
     }
 }

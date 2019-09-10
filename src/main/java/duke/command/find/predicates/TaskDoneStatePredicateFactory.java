@@ -1,5 +1,6 @@
 package duke.command.find.predicates;
 
+import duke.command.UnknownCommandException;
 import duke.model.Task;
 
 import java.util.function.Predicate;
@@ -7,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class TaskDoneStatePredicateFactory implements FindTaskCleanableCommandPredicateFactory {
-    private static Pattern COMMAND_MATCHER = Pattern.compile(" ?/isdone (?<argument>yes|no) ?");
+    private static Pattern COMMAND_MATCHER = Pattern.compile(" ?/isdone (?<argument>\\w+) ?");
 
     @Override
     public boolean shouldEnable(String command) {
@@ -18,6 +19,15 @@ class TaskDoneStatePredicateFactory implements FindTaskCleanableCommandPredicate
     public Predicate<Task> createPredicate(String command) {
         final Matcher m = COMMAND_MATCHER.matcher(command);
         m.find();
+
+        final String commandArgument = m.group("argument");
+        final boolean isValidArgument = commandArgument.equals("yes") || commandArgument.equals("no");
+        if (!isValidArgument) {
+            throw new UnknownCommandException(String.format(
+                    "I don't understand \"/isdone %s\".\nTry using \"/isdone yes\" or \"/isdone no\" instead.",
+                    commandArgument
+            ));
+        }
 
         final boolean desiredDoneState = m.group("argument").equals("yes");
 

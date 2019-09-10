@@ -76,10 +76,9 @@ public class TaskFactory {
 
             // get datetime arguments
             List<LocalDateTime> times = extractLocalDateTime(arguments);
-            assert times.size() <= 2;
             argsList.addAll(times);
 
-        } catch (UnknownDateTimeException | AssertionError e) {
+        } catch (UnknownDateTimeException e) {
             throw new TaskCreationException(INVALID_ARGUMENTS_MESSAGE);
         }
 
@@ -92,10 +91,12 @@ public class TaskFactory {
 
         List<String> dateTimePatterns = new ArrayList<>();
 
+        // find all substrings that match regex pattern
         while (matcher.find()) {
             dateTimePatterns.add(matcher.group(1));
         }
 
+        // cannot use streams because of checked exception :(
         List<LocalDateTime> dateTimeArguments = new ArrayList<>();
         for (String s : dateTimePatterns) {
             dateTimeArguments.add(DateTime.parse(s));
@@ -113,7 +114,7 @@ public class TaskFactory {
         // returns sorted arguments list
         return Arrays.stream(parameters).map(type -> {
             Optional<Object> matchingArg = arguments.stream().findFirst();
-            matchingArg.ifPresent(arguments::remove); // in case of multiple arguments of the same type
+            matchingArg.ifPresent(arguments::remove); // delete in case of multiple arguments of the same type
             return matchingArg.orElse(null);
         }).toArray();
     }

@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+//import javafx.event.EventTarget;
 
 /**
  * Represents a chat bot that manages your daily tasks.

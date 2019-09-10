@@ -6,14 +6,20 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
-    private ArrayList<String> fileEntries;
+    private List<String> fileEntries;
     private String filePath;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filePath File path of the data file.
+     */
     public Storage(String filePath) {
-        this.fileEntries = processFile(filePath);
+        this.fileEntries = parseFromFile(filePath);
     }
 
     /**
@@ -22,20 +28,20 @@ public class Storage {
      * @param filePath File path from user.
      * @return fileInput Processed file entries.
      */
-    public ArrayList<String> processFile(String filePath) {
-        ArrayList<String> fileInput = new ArrayList<>();
+    public List<String> parseFromFile(String filePath) {
+        List<String> fileInput = new ArrayList<>();
         this.filePath = filePath;
 
         // Try to create the file if it is not found
         // and throw IOException if file cannot be created
         try {
             File file = new File(filePath);
-            if (!file.isFile() && !file.createNewFile()) {
-                throw new IOException("Error creating new file "
-                        + file.getAbsolutePath());
-            }
-            Scanner fileScanner = new Scanner(file);
 
+            if (!file.isFile() && !file.createNewFile()) {
+                throw new IOException("Error creating new file " + file.getAbsolutePath());
+            }
+
+            Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNext()) {
                 String nextLine = fileScanner.nextLine();
                 fileInput.add(nextLine);
@@ -54,7 +60,7 @@ public class Storage {
      *
      * @return fileEntries Processed file entries from the file.
      */
-    public ArrayList<String> load() {
+    public List<String> load() {
         return fileEntries;
     }
 
@@ -66,7 +72,7 @@ public class Storage {
     public void save(TaskList tasks) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
-            fileWriter.write(tasks.outputTasks());
+            fileWriter.write(tasks.outputTasksInString());
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());

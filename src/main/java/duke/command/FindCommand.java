@@ -18,7 +18,7 @@ public class FindCommand implements Command {
         return 0;
     }
 
-    public String getTask() {
+    public String getDescription() {
         return "";
     }
 

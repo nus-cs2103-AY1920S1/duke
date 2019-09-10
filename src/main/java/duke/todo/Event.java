@@ -1,5 +1,7 @@
 package duke.todo;
 
+import duke.parser.Parser;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,16 +10,16 @@ public class Event extends Task {
     private DateTimeFormatter formatter;
 
     /**
-     * Constructs an Event based on the description and the date.
+     * Constructs an Event based on the description and the eventDate.
      *
      * @param description Detail of the event.
-     * @param date Date of the event.
+     * @param eventDate Date of the event.
      */
-    public Event(String description, String date) {
+    public Event(String description, LocalDateTime eventDate) {
         super(description);
 
-        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        this.date = LocalDateTime.parse(date, formatter);
+        this.formatter = DateTimeFormatter.ofPattern(Parser.DATE_FORMAT);
+        this.date = eventDate;
     }
 
     /**

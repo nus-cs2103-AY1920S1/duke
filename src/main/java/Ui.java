@@ -134,11 +134,7 @@ public class Ui {
         // I chose not to remove this code in case I need it in future.
 
         String outValue = (
-            //PRINTED_LONG_LINE
-            // + "\n"
-            /*+*/ stringToPrint
-            //+ "\n"
-            //+ PRINTED_LONG_LINE
+            stringToPrint
             + "\n"
         );
 

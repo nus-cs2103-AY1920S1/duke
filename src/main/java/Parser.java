@@ -13,8 +13,10 @@ public class Parser {
     public Command getCommandFromLine(String line) throws InvalidCommandException {
         assert line != null : "getCommandFromLine was passed a null argument";
         assert line.length() > 0 : "getCommandFromLine was passed an empty String";
-
-        return Command.getFromString(line.split(" ")[0].trim());
+        return Command.getFromString(
+            line.split(" ")[0]
+            .trim()
+        );
     }
 
     /**
@@ -28,7 +30,9 @@ public class Parser {
         assert line.length() > 0 : "getIndexFromLine was passed an empty String";
 
         try {
-            return Integer.parseInt(line.split(" ")[1]) - 1;
+            return Integer.parseInt(
+                line.split(" ")[1]
+            ) - 1;
         } catch (Exception e) {
             return -1;
         }
@@ -51,7 +55,9 @@ public class Parser {
         assert delim.length() > 0 : "getBeforeDelim was passed an empty String (delim)";
 
         try {
-            return line.split(command)[1].split(delim)[0].trim();
+            return line.split(command)[1]
+            .split(delim)[0]
+            .trim();
         } catch (Exception e) {
             return "";
         }
@@ -67,7 +73,9 @@ public class Parser {
      */
     public String getAfterDelim(String line, String command, String delim) {
         try {
-            return line.split(command)[1].split(delim)[1].trim();
+            return line.split(command)[1]
+            .split(delim)[1]
+            .trim();
         } catch (Exception e) {
             return "";
         }
@@ -82,8 +90,11 @@ public class Parser {
     public boolean isNotByeCommand(String line) {
         assert line != null : "isNotByeCommand was passed a null argument";
         assert line.length() > 0 : "isNotByeCommand was passed an empty String";
-
-        return !line.trim().equals(Command.BYE.toString());
+        return !line
+            .trim()
+            .equals(
+                Command.BYE.toString()
+            );
     }
 
     /**
@@ -100,7 +111,9 @@ public class Parser {
         assert command.length() > 0 : "getArg was passed an empty String (command)";
 
         try {
-            return line.split(command)[1].trim();
+            return line
+                .split(command)[1]
+                .trim();
         } catch (Exception e) {
             return "";
         }

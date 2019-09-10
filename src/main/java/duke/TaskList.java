@@ -21,6 +21,7 @@ public class TaskList {
      * @throws DukeException if the raw string cannot be formatted into tasks.
      */
     public TaskList(String s) throws DukeException {
+        assert s.length() > 0 : s;
         String[] lines = s.split("\n");
         tasks = new ArrayList<>();
         for (String line : lines) {
@@ -55,9 +56,10 @@ public class TaskList {
      */
     public Task getTask(int taskNum) throws DukeException {
         try {
+            assert taskNum > 0 && taskNum <= tasks.size() : taskNum;
             return tasks.get(taskNum - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Index is out of bounds.");
+        } catch (AssertionError e) {
+            throw new DukeException("You do not have a task with index " + taskNum + ".");
         }
     }
 
@@ -78,9 +80,10 @@ public class TaskList {
      */
     public void deleteTask(int taskNum) throws DukeException {
         try {
+            assert taskNum > 0 && taskNum <= tasks.size() : taskNum;
             tasks.remove(taskNum - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Index is out of bounds.");
+        } catch (AssertionError e) {
+            throw new DukeException("You do not have a task with index " + taskNum + ".");
         }
     }
 

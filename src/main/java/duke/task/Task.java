@@ -52,6 +52,10 @@ public abstract class Task {
      */
     public abstract String toExportFormat();
 
+    protected String getIsDoneFlag() {
+        return this.isDone ? "1" : "0";
+    }
+
     /**
      * Constructs a task from imported raw string.
      *
@@ -66,24 +70,26 @@ public abstract class Task {
         switch (stringArray[0]) {
         case "T":
             t = new Todo(stringArray[2]);
-            if (stringArray[1].equals("1")) {
-                t.markAsDone();
-            }
+            markTaskDoneFromImport(t, stringArray[1]);
             return t;
         case "E":
             t = new Event(stringArray[2], DateUtil.parseDate(stringArray[3]));
-            if (stringArray[1].equals("1")) {
-                t.markAsDone();
-            }
+            markTaskDoneFromImport(t, stringArray[1]);
             return t;
         case "D":
             t = new Deadline(stringArray[2], DateUtil.parseDate(stringArray[3]));
-            if (stringArray[1].equals("1")) {
-                t.markAsDone();
-            }
+            markTaskDoneFromImport(t, stringArray[1]);
             return t;
         default:
-            throw new DukeException("Invalid format");
+            throw new DukeException("Invalid format.");
+        }
+    }
+
+    private static void markTaskDoneFromImport(Task task, String statusFlag) {
+        if (statusFlag.equals("1")) {
+            task.markAsDone();
+        } else {
+            assert statusFlag.equals("0") : statusFlag;
         }
     }
 

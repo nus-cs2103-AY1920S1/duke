@@ -30,7 +30,7 @@ public class Deadline extends Task {
     }
 
     public String toExportFormat() {
-        return "D | " + (this.isDone ? "1" : "0") + " | " + this.description + " | " + DateUtil.formatDate(this.by);
+        return "D | " + this.getIsDoneFlag() + " | " + this.description + " | " + DateUtil.formatDate(this.by);
     }
 
     @Override

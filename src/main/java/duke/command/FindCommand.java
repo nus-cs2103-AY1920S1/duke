@@ -25,14 +25,6 @@ public class FindCommand extends Command {
      * @param storage the file storage supplied.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList results = tasks.findTask(argument);
-        if (results.getSize() > 0) {
-            StringBuilder myBuilder = new StringBuilder();
-            myBuilder.append("Here are the matching tasks in your list:\n");
-            myBuilder.append(tasks.findTask(argument).toString());
-            ui.printGuiMessage(myBuilder.toString());
-        } else {
-            ui.printGuiMessage("There is no matching task in your list.");
-        }
+        ui.printFindTasks(tasks.findTask(argument));
     }
 }

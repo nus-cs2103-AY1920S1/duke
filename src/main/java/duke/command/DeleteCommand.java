@@ -18,7 +18,7 @@ class DeleteCommand extends WritableCommand {
      *
      * @param commandArgs String array of arguments.
      */
-    public DeleteCommand(String[] commandArgs) {
+    DeleteCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.DELETE;
     }

@@ -3,6 +3,8 @@ package duke.command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.MainWindow;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 /**
  * Abstraction of the bye command for exiting the program.
@@ -20,7 +22,7 @@ class ByeCommand extends Command {
     }
 
     /**
-     * Displays the program exit message.
+     * Displays the program exit message then exits after a short delay.
      *
      * @param tasks TaskList of tasks to use.
      * @param ui MainWindow to use for displaying command output.
@@ -29,6 +31,10 @@ class ByeCommand extends Command {
     @Override
     void run(TaskList tasks, MainWindow ui, Storage storage) {
         ui.showMessage("Bye. Hope to see you again soon!");
+
+        PauseTransition exitDelay = new PauseTransition(new Duration(1000));
+        exitDelay.setOnFinished(ui.exitHandler);
+        exitDelay.play();
     }
 
     /**

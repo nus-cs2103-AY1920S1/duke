@@ -18,7 +18,7 @@ class DoneCommand extends WritableCommand {
      *
      * @param commandArgs String array of arguments.
      */
-    public DoneCommand(String[] commandArgs) {
+    DoneCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.DONE;
     }

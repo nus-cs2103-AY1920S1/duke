@@ -11,5 +11,6 @@ public enum Commands {
     DELETE,
     TODO,
     DEADLINE,
-    EVENT
+    EVENT,
+    ARCHIVE
 }

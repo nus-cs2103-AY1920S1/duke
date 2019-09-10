@@ -2,14 +2,11 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandParser;
-import duke.command.Commands;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.DukeApplication;
 import duke.ui.MainWindow;
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.util.Duration;
 
 /**
  * Main class of the Duke app.
@@ -66,12 +63,6 @@ public class Duke {
         try {
             Command command = CommandParser.parseCommand(input);
             command.execute(tasks, ui, storage);
-
-            if (command.commandType == Commands.BYE) {
-                PauseTransition exitDelay = new PauseTransition(new Duration(1000));
-                exitDelay.setOnFinished(ui.exitHandler);
-                exitDelay.play();
-            }
         } catch (DukeExceptions ex) {
             ui.showMessage(ex.getDisplayMsg());
         }

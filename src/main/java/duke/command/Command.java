@@ -11,7 +11,7 @@ import duke.storage.Storage;
  */
 public abstract class Command {
     /** Commands enum type of the command. */
-    public Commands commandType;
+    Commands commandType;
 
     /** String array of arguments provided to the command. */
     String[] commandArgs;

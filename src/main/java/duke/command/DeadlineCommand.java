@@ -18,7 +18,7 @@ class DeadlineCommand extends AddTaskCommand {
      *
      * @param commandArgs String array of arguments.
      */
-    public DeadlineCommand(String[] commandArgs) {
+    DeadlineCommand(String[] commandArgs) {
         super(commandArgs);
         commandType = Commands.DEADLINE;
     }

@@ -26,11 +26,13 @@ import java.util.Map;
  */
 public class Storage {
 
-    /** The filename of the task data file to use. */
-    private static final String DATA_FILE_NAME = "taskData.txt";
+    /** The default filename of the task data file to use. */
+    private static final String DEFAULT_FILE_NAME = "taskData.txt";
     /** The upward recursive search limit for the existing specified dirName. */
     private static final int DIRECTORY_SEARCH_LIMIT = 5;
 
+    /** The filename of the task data file to use. */
+    private String dataFileName;
     /** The directory name to use for storing the task data file. */
     private String dirName;
     /** The absolute filePath of the task data file to use. */
@@ -39,11 +41,12 @@ public class Storage {
     private MainWindow ui;
 
     /**
-     * Constructor of the storage object.
+     * Primary constructor of the storage object.
      * Searches recursively upward from the present working directory for
      * the directory dirName.
      * If it is not found, the directory is creating in
      * the present working directory.
+     * Uses DEFAULT_FILE_NAME for the file name.
      *
      * @param dirName The directory name as a string.
      * @param ui The user interface object to use.
@@ -51,6 +54,26 @@ public class Storage {
     public Storage(String dirName, MainWindow ui) {
         this.dirName = dirName;
         this.ui = ui;
+        this.dataFileName = DEFAULT_FILE_NAME;
+        setFilePath();
+    }
+
+    /**
+     * Secondary constructor of the storage object.
+     * Searches recursively upward from the present working directory for
+     * the directory dirName.
+     * If it is not found, the directory is creating in
+     * the present working directory.
+     * Uses dataFileName for the dataFileName of the file.
+     *
+     * @param dataFilename The file name as a string.
+     * @param dirName The directory name as a string.
+     * @param ui The user interface object to use.
+     */
+    public Storage(String dataFilename, String dirName, MainWindow ui) {
+        this.dirName = dirName;
+        this.ui = ui;
+        this.dataFileName = dataFilename;
         setFilePath();
     }
 
@@ -69,7 +92,6 @@ public class Storage {
             return;
         }
 
-        Map<StorageKey, String> inputs;
         int lineNumber = 0;
 
         while (dataScanner.hasNextLine()) {
@@ -290,9 +312,9 @@ public class Storage {
             } catch (IOException ex) {
                 printNoStorageMsg();
             }
-            this.filePath = Paths.get(fallbackDirPath.toString(), DATA_FILE_NAME).toString();
+            this.filePath = Paths.get(fallbackDirPath.toString(), dataFileName).toString();
         } else {
-            this.filePath = Paths.get(currentDir.toString(), dirName, DATA_FILE_NAME).toString();
+            this.filePath = Paths.get(currentDir.toString(), dirName, dataFileName).toString();
         }
     }
 

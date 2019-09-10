@@ -100,6 +100,9 @@ public class Duke extends Application {
      */
     private void handleUserInput(Stage stage) {
         Label userText = new Label(userInput.getText());
+        if (userText.getText().equals("bye")) {
+            stage.close();
+        }
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),

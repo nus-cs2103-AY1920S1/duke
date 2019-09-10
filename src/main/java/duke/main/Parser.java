@@ -44,10 +44,13 @@ public class Parser {
                 throw new DukeException(String.format(error, directive));
             }
             if (directive.equals("todo")) {
-                return new CreateCommand(directive, commandArr[1]);
+                String description = "";
+                for (int i = 1; i < commandArr.length; i++) {
+                    description += commandArr[i] + " ";
+                }
+                return new CreateCommand(directive, description.trim());
             } else {
                 try {
-                    //return CreateCommand for event or deadline
                     CreateCommand eventWithAddOn = createDeadlineOrEventCommand(directive, command);
                     return eventWithAddOn;
                 } catch (ArrayIndexOutOfBoundsException ex) {

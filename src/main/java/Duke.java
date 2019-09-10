@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -104,6 +105,10 @@ public class Duke {
                         } catch (ArrayIndexOutOfBoundsException exception) {
                             printDuke(LINE);
                             printDuke("\u2639 OOPS!!! Please enter when the deadline is due");
+                            printDuke(LINE);
+                        } catch (ParseException exception) {
+                            printDuke(LINE);
+                            printDuke("\u2639 OOPS!!! Please enter a valid deadline");
                             printDuke(LINE);
                         }
                     } catch (ArrayIndexOutOfBoundsException exception) {

@@ -91,7 +91,7 @@ public class Parser {
         String description = input.replace(action, "");
 
         //Split task and date or time
-        String[] parts = description.split("\\/..");
+        String[] parts = description.split("/..");
         if (action.equals("todo") || action.equals("find")) {
             return description.trim(); //no date or time
         } else {
@@ -107,10 +107,13 @@ public class Parser {
      * @param action The designated user action,
      * @return dateTime The date or time as a String
      */
-    public String parseDateTime(String action, String input) {
+    public String parseDateTime(String action, String input) throws DukeException {
         String substring = input.replace(action, "");
         //Split task and date time
-        String[] parts = substring.split("\\/..");
+        String[] parts = substring.split("/..");
+        if (parts.length <= 1) {
+            throw new DukeException(ui.invalidTask());
+        }
         String dateTime = parts[1].trim(); // Remove blank spaces
 
         return dateTime;

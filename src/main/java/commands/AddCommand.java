@@ -10,7 +10,6 @@ public class AddCommand extends Command {
     private String input;
     private String action;
     private String description;
-    private Parser parser;
 
     public AddCommand(String input, String action, String description) {
         this.input = input;

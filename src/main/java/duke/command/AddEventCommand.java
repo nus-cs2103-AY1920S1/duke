@@ -25,6 +25,8 @@ public class AddEventCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.addToStack();
+
         Event event;
         if (eventDate == null) {
             event = new Event(description, eventAt);

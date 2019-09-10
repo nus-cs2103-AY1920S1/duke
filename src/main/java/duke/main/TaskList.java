@@ -4,16 +4,50 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class TaskList {
     private ArrayList<Task> tasks;
+    private Stack<ArrayList<Task>> taskListStack;
 
     TaskList() {
         this.tasks = new ArrayList<>();
+        taskListStack = new Stack<>();
     }
 
     TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+        taskListStack = new Stack<>();
+    }
+
+    /**
+     * Adds a deep copy of itself to task list stack.
+     */
+    public void addToStack() {
+        // Make a deep copy of task list
+        ArrayList<Task> newList = new ArrayList<>(tasks);
+        taskListStack.push(newList);
+    }
+
+    /**
+     * Restores task list by performing the undo operation.
+     *
+     * @param numOfSteps the num of steps
+     */
+    public void undo(int numOfSteps) {
+        for (int i = 0; i < numOfSteps - 1; i++) {
+            taskListStack.pop();
+        }
+        tasks = taskListStack.pop();
+    }
+
+    /**
+     * Gets max undo.
+     *
+     * @return the max undo
+     */
+    public int getMaxUndo() {
+        return taskListStack.size();
     }
 
     /**

@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
             throw new DukeException("OOPS!!! The index to mark as done cannot be less than 0 or "
                     + "greater than the length of the list.");
         }
+        tasks.addToStack();
 
         tasks.markTaskAsDone(zeroBasedIndex);
         ui.printMessage("Nice! I've marked this task as done:\n\t\t" + tasks.get(zeroBasedIndex));

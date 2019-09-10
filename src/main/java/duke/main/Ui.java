@@ -24,6 +24,15 @@ public class Ui {
     }
 
     /**
+     * Prints a success message after an undo operation is successfully performed.
+     *
+     * @param stepsToUndo Number of times to perform undo operation.
+     */
+    public void printUndoSuccessMessage(int stepsToUndo) {
+        appendToOutput("Performed undo " + stepsToUndo + " times!");
+    }
+
+    /**
      * Prints a success message after a task is successfully added to the list.
      *
      * @param task Task added to list.

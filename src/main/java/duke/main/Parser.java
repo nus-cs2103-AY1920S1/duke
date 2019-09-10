@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 
 import java.text.ParseException;
@@ -19,6 +20,10 @@ class Parser {
     static Command parse(String fullCommand) throws DukeException {
         if (isExitCommand(fullCommand)) {
             return new ExitCommand();
+        } else if (isUndoCommand(fullCommand)) {
+            String newInput = fullCommand.replaceFirst("undo", "").trim();
+            int stepsToUndo = validateUndo(newInput);
+            return new UndoCommand(stepsToUndo);
         } else if (isListCommand(fullCommand)) {
             return new ListCommand();
         } else if (isDoneCommand(fullCommand)) {
@@ -82,8 +87,8 @@ class Parser {
         return validateDoneOrDeleteIndex(doneInput);
     }
 
-    private static int validateDeleteIndex(String doneInput) throws DukeException {
-        return validateDoneOrDeleteIndex(doneInput);
+    private static int validateDeleteIndex(String deleteInput) throws DukeException {
+        return validateDoneOrDeleteIndex(deleteInput);
     }
 
     private static int validateDoneOrDeleteIndex(String doneInput) throws DukeException {
@@ -93,6 +98,15 @@ class Parser {
         }
 
         return Integer.parseInt(doneInput);
+    }
+
+    private static int validateUndo(String undoInput) throws DukeException {
+        // Checks that the string is not empty and is an integer
+        if (undoInput.isEmpty() || isNotNumeric(undoInput)) {
+            throw new DukeException("OOPS!!! The number of steps to undo cannot be blank or not an integer.");
+        }
+
+        return Integer.parseInt(undoInput);
     }
 
     private static boolean isNotNumeric(String input) {
@@ -137,6 +151,10 @@ class Parser {
                     + "Please make sure that the task description and dates are not empty!");
         }
         return splitInput;
+    }
+
+    private static boolean isUndoCommand(String input) {
+        return input.startsWith("undo");
     }
 
     private static boolean isFindCommand(String input) {

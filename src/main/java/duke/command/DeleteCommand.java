@@ -19,6 +19,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("OOPS!!! The index to remove cannot be less than 0 or "
                     + "greater than the length of the list.");
         }
+        tasks.addToStack();
 
         Task deletedTask = tasks.get(zeroBasedIndex);
         tasks.delete(zeroBasedIndex);

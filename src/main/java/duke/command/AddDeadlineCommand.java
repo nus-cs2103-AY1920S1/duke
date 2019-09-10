@@ -25,6 +25,8 @@ public class AddDeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        tasks.addToStack();
+
         Deadline deadline;
         if (deadlineDate == null) {
             deadline = new Deadline(description, deadlineBy);

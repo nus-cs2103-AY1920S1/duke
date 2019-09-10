@@ -12,11 +12,10 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public boolean execute(List<Task> taskList) {
+    public void execute(List<Task> taskList) {
         for (int i = 0; i < taskList.size(); ++i) {
             System.out.printf("%d. %s%n", i + 1, taskList.get(i));
         }
-        return true;
     }
 
     @Override

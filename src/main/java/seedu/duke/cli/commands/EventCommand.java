@@ -14,8 +14,8 @@ public class EventCommand extends AddCommand {
     private final LocalDateTime time;
 
     @CommandConstructor("event")
-    public EventCommand(@Argument(trailing = true) String description,
-                        @Argument(trailing = true, prefix = "/at") LocalDateTime time) {
+    public EventCommand(@Argument(isTrailing = true) String description,
+                        @Argument(isTrailing = true, prefix = "/at") LocalDateTime time) {
         this.description = description;
         this.time = time;
     }
@@ -40,8 +40,8 @@ public class EventCommand extends AddCommand {
         }
 
         EventCommand that = (EventCommand) o;
-        return Objects.equals(description, that.description) &&
-                Objects.equals(time, that.time);
+        return Objects.equals(description, that.description)
+                && Objects.equals(time, that.time);
     }
 
     @Override

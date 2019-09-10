@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class Parser {
-    private final static DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/uuuu HH:mm");
     private static HashMap<String, ConstructorCache> constructors;
 
     static {
@@ -52,7 +52,7 @@ public class Parser {
             constructors.put(ccAnn.value().toLowerCase(), cc);
             boolean seenTrailing = false;
             for (Argument a : cc.getParameterAnnotations()) {
-                if (a == null || !a.trailing() || !a.prefix().isBlank()) {
+                if (a == null || !a.isTrailing() || !a.prefix().isBlank()) {
                     continue;
                 }
 
@@ -94,7 +94,7 @@ public class Parser {
         for (int i = 0; i < params.length; ++i) {
             Argument me = paramAnns[i];
             if (tok.length < 2) {
-                if (me.trailing()) {
+                if (me.isTrailing()) {
                     params[i] = null;
                     continue;
                 } else {
@@ -110,7 +110,7 @@ public class Parser {
             //     The next token up to the prefix of the next argument is our value.
 
             String value;
-            if (me == null || !me.trailing()) {
+            if (me == null || !me.isTrailing()) {
                 // Case 1
                 tok = tok[1].split("\\s", 2);
                 value = tok[0];

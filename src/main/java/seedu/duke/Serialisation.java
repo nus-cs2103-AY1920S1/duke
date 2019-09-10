@@ -13,7 +13,7 @@ public class Serialisation {
     /**
      * The path the data file is stored at.
      */
-    public final static String DATA_FILE_PATH = "duke.dat";
+    public static final String DATA_FILE_PATH = "duke.dat";
 
     private Serialisation() {
     }
@@ -50,8 +50,8 @@ public class Serialisation {
      */
     public static void serialise(TaskList tasks) {
         try (FileOutputStream file = new FileOutputStream(DATA_FILE_PATH);
-             ObjectOutputStream ois = new ObjectOutputStream(file)) {
-            ois.writeObject(tasks);
+             ObjectOutputStream oos = new ObjectOutputStream(file)) {
+            oos.writeObject(tasks);
         } catch (IOException e) {
             System.err.println("Error while writing data file.");
             e.printStackTrace();

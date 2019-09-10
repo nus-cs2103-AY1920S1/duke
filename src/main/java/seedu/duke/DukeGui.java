@@ -20,6 +20,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+/**
+ * The main class for the graphical Duke.
+ */
 public class DukeGui extends Application {
     private TextArea outputArea;
     private TextField commandLine;

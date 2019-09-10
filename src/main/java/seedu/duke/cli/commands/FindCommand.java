@@ -13,12 +13,12 @@ public class FindCommand implements Command {
     private final String substring;
 
     @CommandConstructor("find")
-    public FindCommand(@Argument(trailing = true) String substring) {
+    public FindCommand(@Argument(isTrailing = true) String substring) {
         this.substring = substring;
     }
 
     @Override
-    public boolean execute(List<Task> taskList) throws CommandException {
+    public void execute(List<Task> taskList) throws CommandException {
         System.out.println("Here are the matching tasks:");
 
         String substring = this.substring.toLowerCase();
@@ -28,8 +28,6 @@ public class FindCommand implements Command {
                 System.out.printf("%d. %s%n", i + 1, t);
             }
         }
-
-        return true;
     }
 
     @Override

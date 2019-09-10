@@ -17,7 +17,7 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public boolean execute(List<Task> taskList) throws CommandException {
+    public void execute(List<Task> taskList) throws CommandException {
         if (id < 1 || id > taskList.size()) {
             throw new CommandException("Invalid task ID");
         }
@@ -26,7 +26,6 @@ public class DeleteCommand implements Command {
         System.out.printf(
                 "Noted. I've removed this task:%n  %s%nNow you have %d tasks in the list.%n",
                 t, taskList.size());
-        return true;
     }
 
     @Override

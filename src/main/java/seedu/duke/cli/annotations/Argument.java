@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface Argument {
     String prefix() default "";
 
-    boolean trailing() default false;
+    boolean isTrailing() default false;
 }

@@ -12,9 +12,7 @@ public class ByeCommand implements Command {
     }
 
     @Override
-    public boolean execute(List<Task> taskList) {
-        return false;
-    }
+    public void execute(List<Task> taskList) {}
 
     @Override
     public boolean equals(Object obj) {

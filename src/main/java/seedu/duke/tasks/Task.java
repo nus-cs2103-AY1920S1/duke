@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task implements Serializable {
-    protected static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("EEE, dd LLL uuuu HH:mm");
+    protected static final DateTimeFormatter DATE_TIME_FORMATTER
+            = DateTimeFormatter.ofPattern("EEE, dd LLL uuuu HH:mm");
     private static final long serialVersionUID = -2528903467902347L;
     private final String description;
     private boolean done;

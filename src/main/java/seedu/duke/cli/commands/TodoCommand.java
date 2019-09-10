@@ -12,7 +12,7 @@ public class TodoCommand extends AddCommand {
     private final String description;
 
     @CommandConstructor("todo")
-    public TodoCommand(@Argument(trailing = true) String description) {
+    public TodoCommand(@Argument(isTrailing = true) String description) {
         this.description = description;
     }
 

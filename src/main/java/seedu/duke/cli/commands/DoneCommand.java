@@ -17,7 +17,7 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public boolean execute(List<Task> taskList) throws CommandException {
+    public void execute(List<Task> taskList) throws CommandException {
         if (id < 1 || id > taskList.size()) {
             throw new CommandException("Invalid task ID");
         }
@@ -25,7 +25,6 @@ public class DoneCommand implements Command {
         Task t = taskList.get(id - 1);
         t.setDone(true);
         System.out.printf("Nice! I've marked this task as done:%n%s%n", t);
-        return true;
     }
 
     @Override

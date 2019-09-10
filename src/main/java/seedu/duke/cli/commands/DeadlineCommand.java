@@ -14,8 +14,8 @@ public class DeadlineCommand extends AddCommand {
     private final LocalDateTime deadline;
 
     @CommandConstructor("deadline")
-    public DeadlineCommand(@Argument(trailing = true) String description,
-                           @Argument(trailing = true, prefix = "/by") LocalDateTime deadline) {
+    public DeadlineCommand(@Argument(isTrailing = true) String description,
+                           @Argument(isTrailing = true, prefix = "/by") LocalDateTime deadline) {
         this.description = description;
         this.deadline = deadline;
     }
@@ -40,8 +40,8 @@ public class DeadlineCommand extends AddCommand {
         }
 
         DeadlineCommand that = (DeadlineCommand) o;
-        return Objects.equals(description, that.description) &&
-                Objects.equals(deadline, that.deadline);
+        return Objects.equals(description, that.description)
+                && Objects.equals(deadline, that.deadline);
     }
 
     @Override

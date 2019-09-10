@@ -18,6 +18,7 @@ public class Parser {
         } else if (commandType.equals("deadline") || commandType.equals("event")) {
             if (command.contains("/")) {
                 instruction = command.substring(command.indexOf(" ") + 1, command.indexOf("/") - 1);
+                assert command.length() > command.indexOf("/") + 4 : "Incomplete date";
                 date = command.substring(command.indexOf("/") + 4);
             }
         }

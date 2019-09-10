@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
+
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -17,13 +18,15 @@ public class Duke {
             ui.showLoadingError();
             list = new TaskList();
         }
-        ui = new Ui(list);
+        ui = new Ui(list, storage);
     }
 
+    /*
     public void run() throws DukeException {
         ui.start();
         storage.save(ui.getFinalList());
     }
+     */
 
     public void displayIntro() {
         String logo = " ____        _        \n"
@@ -34,10 +37,16 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
     }
 
+    public String getResponse(String input) throws DukeException {
+        return ui.start(input);
+    }
+
+    /*
     public static void main(String[] args) throws DukeException {
         String dir = System.getProperty("user.dir") + "/src/main/java/data/dukeData.txt";
         Duke duke = new Duke(dir);
         duke.displayIntro();
         duke.run();
     }
+     */
 }

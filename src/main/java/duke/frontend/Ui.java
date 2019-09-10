@@ -1,12 +1,12 @@
 package duke.frontend;
 
 import duke.task.TaskList;
-import java.util.Scanner;
 import static java.lang.Integer.parseInt;
 import duke.exception.*;
 import duke.task.*;
 import duke.parser.Parser;
 import java.util.ArrayList;
+import duke.storage.Storage;
 
 public class Ui {
     private static int cnt = 0;
@@ -15,15 +15,18 @@ public class Ui {
 
     private TaskList list;
 
-    public Ui(TaskList ls) {
+    private Storage storage;
+
+    public Ui(TaskList ls, Storage st) {
         this.list = ls;
+        this.storage = st;
     }
 
     public TaskList getFinalList() {
         return list;
     }
 
-    public void action(String cmd) throws DukeWrongTaskException, UnknownCmdException, DeleteTaskException, CompleteTaskException {
+    public String action(String cmd) throws DukeWrongTaskException, UnknownCmdException, DeleteTaskException, CompleteTaskException {
         Task t;
 
         String command = p.parseCommand(cmd);
@@ -32,6 +35,8 @@ public class Ui {
 
         String desc = "";
 
+        String response = "";
+
         switch (command) {
             case "done":
                 if (cmd.length() <= 5 || parseInt(cmd.substring(5)) >= list.size() + 1) {
@@ -39,30 +44,30 @@ public class Ui {
                 }
                 index = parseInt(cmd.substring(5));
                 list.get(index - 1).markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println(list.get(index - 1).toString());
-                return;
+                response = "Nice! I've marked this task as done:\n";
+                response = response.concat(list.get(index - 1).toString()).concat("\n");
+                return response;
             case "find":
                 String keyWord = p.parseDesc(cmd);
                 ArrayList<Task> lst = list.returnAllMatchingTasks(keyWord);
                 if (lst.size() != 0) {
-                    System.out.println("Here are the matching tasks in your list:");
-                    for (Task ta: lst) {
-                        System.out.printf("%d.%s\n", list.getTaskList().indexOf(ta) + 1, ta.toString());
+                    response = "Here are the matching tasks in your list:\n";
+                    for (Task ta : lst) {
+                        response = response.concat(String.format("%d.%s\n", list.getTaskList().indexOf(ta) + 1, ta.toString()));
                     }
                 }
-                return;
+                return response;
             case "delete":
                 if (cmd.length() <= 7 || parseInt(cmd.substring(7)) >= list.size() + 1) {
                     throw (new DeleteTaskException());
                 }
                 index = parseInt(cmd.substring(7));
-                System.out.println("Noted! I've removed this task:");
-                System.out.println(list.get(index - 1).toString());
+                response = "Noted! I've removed this task:\n";
+                response = response.concat(list.get(index - 1).toString()).concat("\n");
                 list.remove(index - 1);
                 cnt--;
-                System.out.printf("Now you have %d tasks in the list.\n", list.size());
-                return;
+                response = response.concat(String.format("Now you have %d tasks in the list.\n", list.size()));
+                return response ;
             case "deadline":
                 if (cmd.length() <= 9 || !cmd.contains("/")) {
                     throw (new DukeWrongTaskException("deadline"));
@@ -91,52 +96,47 @@ public class Ui {
             default:
                 throw (new UnknownCmdException());
         }
-        System.out.println("Got it. I've added this task:");
-        System.out.println(t);
-        System.out.printf("Now you have %d tasks in the list.\n", list.size());
+        response = "Got it. I've added this task:\n";
+        response = response.concat(t.toString()).concat("\n");
+        response = response.concat(String.format("Now you have %d tasks in the list.\n", list.size()));
+        return response;
     }
 
-    public void showLoadingError() {
-        System.out.println("There's no event in your task list!");
+    public String showLoadingError() {
+        return "There's no event in your task list!";
     }
 
-    public void start() {
+    public String start(String input) throws DukeException {
         cnt = list.size();
 
-        Scanner sc =  new Scanner(System.in);
+        String command = p.parseCommand(input);
+        String response;
 
-        while (true) {
-            System.out.print("\n");
-            System.out.println("How can I help you?");
-            String input = sc.nextLine();
-            String command = p.parseCommand(input);
-
-            switch (command) {
-                case "bye":
-                    System.out.println("Saving tasks...");
-                    System.out.println("Bye. Hope to see you again soon!");
-                    return;
-                case "list":
-                    try {
-                        if (list.size() == 0) {
-                            throw (new EmptyListException());
-                        }
-                        System.out.println("Here are the tasks in your list:");
-                        for(int i = 0; i < list.size(); i++) {
-                            System.out.println(((i + 1) + ".").concat(list.get(i).toString()));
-                        }
-                        break;
-                    } catch (EmptyListException e) {
-                        System.out.println(e.getMessage());
-                        break;
+        switch (command) {
+            case "bye":
+                storage.save(getFinalList());
+                return "Saving tasks...\nBye. Hope to see you again soon!";
+            case "list":
+                try {
+                    if (list.size() == 0) {
+                        throw (new EmptyListException());
                     }
-                default:
-                    try {
-                        action(input);
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
+                    response = "Here are the tasks in your list:\n";
+                    for (int i = 0; i < list.size(); i++) {
+                        response = response.concat(((i + 1) + ".")
+                                           .concat(list.get(i).toString()))
+                                           .concat("\n");
                     }
+                    return response;
+                } catch (EmptyListException e) {
+                    return e.getMessage();
                 }
-            }
+            default:
+                try {
+                    return action(input);
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
         }
     }
+}

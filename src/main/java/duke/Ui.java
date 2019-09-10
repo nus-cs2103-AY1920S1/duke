@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -47,6 +49,60 @@ public class Ui {
      */
     public void printGuiMessage(String message) {
         window.handleDukeResponse(message);
+    }
+
+    /**
+     * Prints a message when a task is added to the task list.
+     *
+     * @param task the task added to the task list.
+     * @param tasks the task list.
+     */
+    public void printTaskAdded(Task task, TaskList tasks) {
+        printGuiMessage("Got it. I've added this task: \n  " + task
+                + "\nNow you have " + Ui.pluralize("task", tasks.getSize()) + " in the list.");
+    }
+
+    /**
+     * Prints a message when a task is marked as done.
+     *
+     * @param task the task marked as done.
+     */
+    public void printTaskDone(Task task) {
+        printGuiMessage("Nice! I've marked this task as done:\n  " + task);
+    }
+
+    /**
+     * Prints a message when a task is to be deleted.
+     *
+     * @param task the task to be deleted.
+     * @param tasks the task list before deletion.
+     */
+    public void printTaskDeleted(Task task, TaskList tasks) {
+        printGuiMessage("Noted. I've removed this task: \n  " + task
+                + "\nNow you have " + Ui.pluralize("task", tasks.getSize() - 1) + " in the list.");
+    }
+
+    /**
+     * Prints all tasks in the task list.
+     *
+     * @param tasks the task list.
+     */
+    public void printListTasks(TaskList tasks) {
+        StringBuilder myBuilder = new StringBuilder();
+        myBuilder.append("Here are the tasks in your list:\n").append(tasks.toString());
+        printGuiMessage(myBuilder.toString());
+    }
+
+    /**
+     * Prints search results from the task list.
+     *
+     * @param tasks the list of search results.
+     */
+    public void printFindTasks(TaskList tasks) {
+        StringBuilder myBuilder = new StringBuilder();
+        myBuilder.append("Here are the matching tasks in your list:\n");
+        myBuilder.append(tasks.toString());
+        printGuiMessage(myBuilder.toString());
     }
 
     /**

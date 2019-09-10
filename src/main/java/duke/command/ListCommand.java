@@ -13,8 +13,6 @@ public class ListCommand extends Command {
      * @param storage the file storage supplied.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        StringBuilder myBuilder = new StringBuilder();
-        myBuilder.append("Here are the tasks in your list:\n").append(tasks.toString());
-        ui.printGuiMessage(myBuilder.toString());
+        ui.printListTasks(tasks);
     }
 }

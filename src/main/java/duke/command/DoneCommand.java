@@ -29,7 +29,7 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task myTask = tasks.getTask(argument);
         myTask.markAsDone();
-        ui.printGuiMessage("Nice! I've marked this duke.task as done:\n  " + myTask);
+        ui.printTaskDone(myTask);
         storage.save(tasks);
     }
 }

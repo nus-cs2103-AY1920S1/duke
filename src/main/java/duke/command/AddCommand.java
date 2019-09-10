@@ -56,8 +56,7 @@ public class AddCommand extends Command {
         case "todo":
             myTask = new Todo(this.argument);
             tasks.addTask(myTask);
-            ui.printGuiMessage("Got it. I've added this duke.task: \n  " + myTask
-                    + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
+            ui.printTaskAdded(myTask, tasks);
             break;
         case "deadline":
             if (!this.optionName.equals("by") || this.optionArgument.equals("")) {
@@ -65,8 +64,7 @@ public class AddCommand extends Command {
             }
             myTask = new Deadline(this.argument, DateUtil.parseDate(optionArgument));
             tasks.addTask(myTask);
-            ui.printGuiMessage("Got it. I've added this duke.task: \n  " + myTask
-                    + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
+            ui.printTaskAdded(myTask, tasks);
             break;
         case "event":
             if (!this.optionName.equals("at") || this.optionArgument.equals("")) {
@@ -74,8 +72,7 @@ public class AddCommand extends Command {
             }
             myTask = new Event(this.argument, DateUtil.parseDate(optionArgument));
             tasks.addTask(myTask);
-            ui.printGuiMessage("Got it. I've added this duke.task: \n  " + myTask
-                    + "\nNow you have " + Ui.pluralize("duke/task", tasks.getSize()) + " in the list.");
+            ui.printTaskAdded(myTask, tasks);
             break;
         default:
             break;

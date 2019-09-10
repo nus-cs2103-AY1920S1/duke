@@ -21,6 +21,8 @@ public class TaskList {
      *  @return the <code>Task</code> with the given ID.
      */
     public Task getTask(int id) {
+        assert id >= 1 && id <= this.numberOfTasks() : "Attempting to retrieve non-existent Task!";
+
         return this.tasks.get(id - 1);
     }
 
@@ -38,6 +40,8 @@ public class TaskList {
      *  @return the <code>Task</code> that was removed.
      */
     public Task deleteTask(int id) {
+        assert id >= 1 && id <= this.numberOfTasks() : "Attempting to delete non-existent Task!";
+
         return this.tasks.remove(id - 1);
     }
 

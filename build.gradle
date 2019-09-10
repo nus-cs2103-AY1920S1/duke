@@ -19,6 +19,10 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
+run {
+    enableAssertions = true
+}
+
 test {
     testLogging {
         exceptionFormat = 'full'

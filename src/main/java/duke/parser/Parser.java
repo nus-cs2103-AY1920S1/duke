@@ -142,6 +142,30 @@ public class Parser {
         return LocalDateTime.of(date, time);
     }
 
+    private IntStream parseRange(String description) throws IllegalIndexOfTaskException {
+        int indexOfOpenBracket = description.indexOf('[');
+        int indexOfColon = description.indexOf(':');
+        int indexOfCloseBracket = description.indexOf(']');
+        String start = description.substring(indexOfOpenBracket + 1, indexOfColon).strip();
+        String end = description.substring(indexOfColon + 1, indexOfCloseBracket).strip();
+        try {
+            int startingIndex = 0;
+            if (!start.isEmpty()) {
+                startingIndex = Integer.parseInt(start);
+            }
+            if (end.isEmpty()) {
+                return IntStream.iterate(startingIndex, index -> index + 1);
+            } else {
+                int endingIndex = Integer.parseInt(end);
+                return IntStream.iterate(startingIndex,
+                        index -> index < endingIndex,
+                        index -> index + 1);
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalIndexOfTaskException("Please provide valid indices for the range");
+        }
+    }
+
     private IntStream parseIndices(String description) {
         ArrayList<Integer> indices = new ArrayList<>();
         while (!description.isEmpty()) {
@@ -152,11 +176,15 @@ public class Parser {
             }
             description = removeFirstWord(description);
         }
-        return indices.stream().mapToInt(Integer::intValue);
+        return indices.stream().mapToInt(Integer::intValue).sorted().distinct();
     }
 
-    private IndexFilter getIndexFilter(String description) {
-        return new IndexFilter(parseIndices(description));
+    private IndexFilter getIndexFilter(String description) throws IllegalIndexOfTaskException {
+        if (description.matches("\\[.*:.*\\]")) {
+            return new IndexFilter(parseRange(description));
+        } else {
+            return new IndexFilter(parseIndices(description));
+        }
     }
 
     private TaskType parseTaskType(String taskType) throws IllegalDescriptionException {
@@ -196,7 +224,8 @@ public class Parser {
         }
     }
 
-    private DeleteCommand parseDeleteCommand(String description) throws IllegalDescriptionException {
+    private DeleteCommand parseDeleteCommand(String description) throws
+            IllegalDescriptionException, IllegalIndexOfTaskException {
         String filterType = getFirstWord(description);
         switch (filterType) {
         case "/type":
@@ -212,7 +241,7 @@ public class Parser {
         }
     }
 
-    private DoneCommand parseDoneCommand(String description) throws IllegalDescriptionException {
+    private DoneCommand parseDoneCommand(String description) throws IllegalDescriptionException, IllegalIndexOfTaskException {
         String filterType = getFirstWord(description);
         switch (filterType) {
         case "/type":

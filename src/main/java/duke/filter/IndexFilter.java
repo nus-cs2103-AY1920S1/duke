@@ -17,7 +17,7 @@ public class IndexFilter implements Filter {
      * @param range a range of indices of resulting tasks.
      */
     public IndexFilter(IntStream range) {
-        this.range = range.sorted().distinct();
+        this.range = range;
     }
 
     /**
@@ -28,13 +28,14 @@ public class IndexFilter implements Filter {
     @Override
     public ArrayList<Task> filter(TaskList tasks) {
         ArrayList<Task> result = new ArrayList<>();
-        range.forEach(index -> {
-            try {
-                result.add(tasks.getTaskAtIndex(index));
-            } catch (Exception e) {
-                //Ignore out of bounds index
-            }
-        });
+        range.takeWhile(index -> index <= tasks.getSize())
+                .forEach(index -> {
+                    try {
+                        result.add(tasks.getTaskAtIndex(index));
+                    } catch (Exception e) {
+                        //Ignore out of bounds index
+                    }
+                });
         return result;
     }
 }

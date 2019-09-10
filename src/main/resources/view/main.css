@@ -4,20 +4,27 @@
 
 #dialogContainer {
     -fx-font-size: 14px;
-    -fx-padding: 0 5px 0 5px;
+    -fx-padding: 5px 5px 0 5px;
 }
 
-DialogBox {
-    -fx-label-padding: 0;
-    -fx-background-color: #eee;
+RightDialogBox, LeftDialogBox {
+    -fx-padding: 3px 0 3px 5px;
 }
 
-DialogBox Label, FlippedDialogBox Label {
-    -fx-border-color: #000000;
+RightDialogBox Label, LeftDialogBox Label {
+    -fx-border-color: #bbb;
     -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
     -fx-padding: 0 10px 5px 10px;
+    -fx-background-color: #d0e1f9;
 }
 
-DialogBox Label {
+RightDialogBox Label {
+    -fx-border-insets: 0 10px 0 30px;
+    -fx-background-insets: 0 10px 0 30px;
+}
 
+LeftDialogBox Label {
+    -fx-border-insets: 0 30px 0 10px;
+    -fx-background-insets: 0 30px 0 10px;
 }

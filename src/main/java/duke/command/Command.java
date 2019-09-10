@@ -6,7 +6,15 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 public abstract class Command {
+    private String commandContent;
     protected boolean isExit = false;
+
+    public Command() {
+    }
+
+    public Command(String commandContent) {
+        this.commandContent = commandContent;
+    }
 
     /**
      * Getter for variable isExit.
@@ -23,8 +31,6 @@ public abstract class Command {
      * @param ui Ui instance
      * @param storage Storage instance
      * @throws DukeException If command word is invalid
-     * @return
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

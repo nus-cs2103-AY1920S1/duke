@@ -119,11 +119,15 @@ public class TaskList {
 
     public List<Task> find(String keyword) {
         List<Task> tasks = new ArrayList<>();
-        this.getTasks().forEach(x -> {
+        getTasks().forEach(x -> {
             if (x.desc.contains(keyword)) {
                 tasks.add(x);
             }
         });
         return tasks;
+    }
+
+    public void clear() {
+        getTasks().clear();
     }
 }

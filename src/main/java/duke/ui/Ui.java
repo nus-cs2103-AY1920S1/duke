@@ -13,14 +13,14 @@ public class Ui {
     protected TaskList tasks;
     public String line = "    ____________________________________________________________";
     public String indent = "     ";
-    public String hiMsg = "Hello! I'm Duke" + "\n" + indent + "What can I do for you?";
+    public String hiMsg = "Hello! I'm duke.core.Duke" + "\n" + indent + "What can I do for you?";
     public String byeMsg = "Bye. Hope to see you again soon!";
     public String addMsg = "Got it. I've added this task:";
     public String doneMsg = "Nice! I've marked this task as done:";
+    public String notDoneMsg = "Nice! I've marked this task as not done:";
     public String delMsg = "Noted. I've removed this task:";
     public String emptyListMsg = "You have no task in the list";
-
-    private List<String> list = new ArrayList<>();
+    public List<String> outputs = new ArrayList<>();
 
     /**
      * Initialize a Ui object.
@@ -30,7 +30,53 @@ public class Ui {
     }
 
     /**
+     * Getter method for output buffer.
+     * @return Output buffer as a list of output strings
+     */
+    public List<String> getOutputs() {
+        return outputs;
+    }
+
+    /**
+     * Set output buffer.
+     * @param outputs Output buffer contain list of outputs
+     */
+    public void setOutputs(List<String> outputs) {
+        this.outputs = outputs;
+    }
+
+    /**
+     * Add string to program output buffer.
+     *
+     * @param output Output string
+     */
+    public void addToOutputs(String output) {
+        outputs.add(output);
+    }
+
+    /**
+     * Get program output string without clearing output buffer.
+     *
+     * @return Output string
+     */
+    public String getOutputString() {
+        return String.join("\n", getOutputs());
+    }
+
+    /**
+     * Get program output string and clear output buffer.
+     *
+     * @return Output String
+     */
+    public String getOutputStringAndClear() {
+        String s = getOutputString();
+        getOutputs().clear();
+        return s;
+    }
+
+    /**
      * Read a line of input.
+     *
      * @return Line of input.
      * @throws DukeException If no next line.
      */
@@ -42,24 +88,24 @@ public class Ui {
         }
     }
 
-    public String showLine() {
-        return line;
+    public void showLine() {
+        showMsg(line);
     }
 
-    public String showMsg(String msg) {
-        return msg;
+    public void showMsg(String msg) {
+        addToOutputs(msg);
     }
 
-    public String showError(String message) {
-        return showMsg(message);
+    public void showError(String message) {
+        showMsg(message);
     }
 
-    public String showHiMsg() {
-        return showMsg(hiMsg);
+    public void showHiMsg() {
+        showMsg(hiMsg);
     }
 
-    public String showByeMsg() {
-        return showMsg(byeMsg);
+    public void showByeMsg() {
+        showMsg(byeMsg);
     }
 
     /**
@@ -67,19 +113,20 @@ public class Ui {
      *
      * @param t Task to be shown
      */
-    public String showAddTaskMsg(Task t) {
-        list.clear();
-        list.add(showMsg(addMsg));
-        list.add(showTask(t));
-        list.add(showListSize());
-        return String.join("\n", list);
+    public void showAddTaskMsg(Task t) {
+        showMsg(addMsg);
+        showTask(t);
+        showListSize();
     }
 
-    public String showTaskDoneMsg(Task t) {
-        list.clear();
-        list.add(showMsg(doneMsg));
-        list.add(showTask(t));
-        return String.join("\n", list);
+    public void showTaskDoneMsg(Task t) {
+        showMsg(doneMsg);
+        showTask(t);
+    }
+
+    public void showTaskNotDoneMsg(Task t) {
+        showMsg(notDoneMsg);
+        showTask(t);
     }
 
     /**
@@ -87,27 +134,21 @@ public class Ui {
      *
      * @param t Task to be shown
      */
-    public String showTaskDelMsg(Task t) {
-        list.clear();
-        list.add(showMsg(delMsg));
-        list.add(showTask(t));
-        list.add(showListSize());
-        return String.join("\n", list);
+    public void showTaskDelMsg(Task t) {
+        showMsg(delMsg);
+        showTask(t);
+        showListSize();
     }
 
-    public String showEmptyListMsg() {
-        return showMsg(emptyListMsg);
+    public void showEmptyListMsg() {
+        showMsg(emptyListMsg);
     }
 
     /**
      * Show Welcome text.
      */
-    public String showWelcome() {
-        list.clear();
-        list.add(showLine());
-        list.add(showHiMsg());
-        list.add(showLine());
-        return String.join("\n", list);
+    public void showWelcome() {
+        showHiMsg();
     }
 
     /**
@@ -115,85 +156,84 @@ public class Ui {
      *
      * @throws DukeException If there is no task in task list
      */
-    public String showTasks() throws DukeException {
-        list.clear();
+    public void showTasks() throws DukeException {
         if (!tasks.isEmpty()) {
-            list.add(showMsg("Here are the tasks in your list:"));
+            showMsg("Here are the tasks in your list:");
             for (Task t: tasks.getTasks()) {
-                list.add(showMsg((tasks.indexOf(t) + 1) + ". " + t));
+                showMsg((tasks.indexOf(t) + 1) + ". " + t);
             }
         } else {
-            list.add(showEmptyListMsg());
+            showEmptyListMsg();
         }
-        return String.join("\n", list);
     }
 
     /**
      * Shows size of list.
      */
-    public String showListSize() {
+    public void showListSize() {
         if (!tasks.isEmpty()) {
-            return showMsg("Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list");
+            showMsg("Now you have " + tasks.size() + " task" + (tasks.size() == 1 ? "" : "s") + " in the list");
         } else {
-            return showEmptyListMsg();
+            showEmptyListMsg();
         }
     }
 
-    public String showTask(Task task) {
-        return showMsg("  " + task);
+    public void showTask(Task task) {
+        showMsg("  " + task);
     }
 
     public void setTasks(TaskList tasks) {
         this.tasks = tasks;
     }
 
-    public String showLoadTaskMsg() {
-        return showMsg("Loading data from file...");
+    public void showLoadTaskMsg() {
+        showMsg("Loading data from file...");
     }
 
-    public String noRecordsFoundMsg() {
-        return showMsg("No Records Found");
+    public void showNoRecordsFoundMsg() {
+        showMsg("No Records Found");
     }
 
-    public String showSaveDataMsg() {
-        return showMsg("Saving data...");
+    public void showSaveDataMsg() {
+        showMsg("Saving data...");
     }
 
-    public String showNothingToSaveMsg() {
-        return showMsg("Nothing to save.");
+    public void showNothingToSaveMsg() {
+        showMsg("Nothing to save.");
     }
 
-    public String showSaveErrMsg() {
-        return showMsg("Error saving to file");
+    public void showSaveErrMsg() {
+        showMsg("Error saving to file");
     }
 
-    public String showDataSavedMsg() {
-        return showMsg("Data saved successfully");
+    public void showDataSavedMsg() {
+        showMsg("Data saved successfully");
     }
 
-    public String showDataLoadedMsg(int size) {
-        return showMsg(size + " tasks loaded");
+    public void showDataLoadedMsg(int size) {
+        showMsg(size + " tasks loaded");
     }
 
-    public String showLoadingError() {
-        return showMsg("Error loading tasks from file");
+    public void showLoadingError() {
+        showMsg("Error loading tasks from file");
     }
 
-    public String showFoundTasks(List<Task> foundTasks) throws DukeException {
-        list.clear();
+    public void showFoundTasks(List<Task> foundTasks) throws DukeException {
         if (!foundTasks.isEmpty()) {
-            list.add(showMsg("Here are the matching tasks in your list:"));
+            showMsg("Here are the matching tasks in your list:");
             for (Task t: foundTasks) {
-                list.add(showMsg((foundTasks.indexOf(t) + 1) + ". " + t));
+                showMsg((foundTasks.indexOf(t) + 1) + ". " + t);
             }
         } else {
-            list.add(showNothingFoundMsg());
+            showNothingFoundMsg();
         }
-        return String.join("\n", list);
     }
 
-    private String showNothingFoundMsg() {
-        return showMsg("No tasks found.");
+    private void showNothingFoundMsg() {
+        showMsg("No tasks found.");
     }
 
+    public void showClearSuccessMsg() {
+        showMsg("All tasks cleared.");
+    }
 }

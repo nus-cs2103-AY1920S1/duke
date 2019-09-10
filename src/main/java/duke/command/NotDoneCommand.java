@@ -6,10 +6,10 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class DoneCommand extends Command {
+public class NotDoneCommand extends Command {
     protected int index;
 
-    public DoneCommand(String commandContent) throws DukeException {
+    public NotDoneCommand(String commandContent) throws DukeException {
         super(commandContent);
 
         if (!commandContent.matches("(0|[1-9]\\d*)")) {
@@ -24,8 +24,8 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.get(index);
-        task.setDone();
+        task.setNotDone();
         storage.save(tasks);
-        ui.showTaskDoneMsg(task);
+        ui.showTaskNotDoneMsg(task);
     }
 }

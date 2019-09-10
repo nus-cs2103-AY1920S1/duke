@@ -1,3 +1,6 @@
+package duke.ui;
+
+import duke.core.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +14,7 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for duke.ui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -49,7 +52,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.core.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -57,8 +60,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                new FlippedDialogBox(input, userImage),
-                new DialogBox(response, dukeImage)
+                new LeftDialogBox(input, userImage),
+                new RightDialogBox(response, dukeImage)
         );
         userInput.clear();
 

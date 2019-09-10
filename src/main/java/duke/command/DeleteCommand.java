@@ -9,14 +9,22 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
     protected int index;
 
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(String commandContent) throws DukeException {
+        super(commandContent);
+
+        if (!commandContent.matches("(0|[1-9]\\d*)")) {
+            throw new DukeException("OOPS!!! Index must be a positive integer.");
+        }
+
+        index = Integer.parseInt(commandContent);
+
+        assert index > 0 : "index cannot be a negative integer";
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.remove(index);
         storage.save(tasks);
-        return ui.showTaskDelMsg(task);
+        ui.showTaskDelMsg(task);
     }
 }

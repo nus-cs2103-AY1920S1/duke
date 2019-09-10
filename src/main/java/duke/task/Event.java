@@ -46,6 +46,12 @@ public class Event extends Task {
         this.endDate = endDate;
     }
 
+    /**
+     * Parses user input and look for Event object.
+     *
+     * @param commandContent Input string
+     * @return Event object
+     */
     public static Task parse(String commandContent) throws DukeException {
         Matcher matcher = PAT.matcher(commandContent);
 
@@ -60,6 +66,36 @@ public class Event extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
         }
+    }
+
+    /**
+     *  Parses stored data string and look for Event object.
+     *
+     * @param input Data string from save file.
+     * @return Event object
+     */
+    public static Event parseFromData(String input) throws DukeException {
+        try {
+            String[] inputs = input.split(gap);
+            LocalDateTime startDate = LocalDateTime.parse(inputs[3]);
+            LocalDateTime endDate = LocalDateTime.parse(inputs[4]);
+            return new Event(inputs[2], startDate, endDate);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid data");
+        }
+    }
+
+    /**
+     *  Parses stored data string and look for Event object.
+     *
+     * @param input Data string from save file.
+     * @param isDone Whether event task is done.
+     * @return Event object
+     */
+    public static Event parseFromData(String input, boolean isDone) throws DukeException {
+        Event event = parseFromData(input);
+        event.setDone(isDone);
+        return event;
     }
 
     /**
@@ -96,6 +132,11 @@ public class Event extends Task {
      */
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String toStorageString() {
+        return "E" + gap + super.toStorageString() + gap + getStartDate() + gap + getEndDate();
     }
 
     @Override

@@ -46,6 +46,12 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    /**
+     * Parses user input and look for Deadline object.
+     *
+     * @param commandContent Input string
+     * @return Deadline object
+     */
     public static Task parse(String commandContent) throws DukeException {
         Matcher matcher = PAT.matcher(commandContent);
 
@@ -59,6 +65,35 @@ public class Deadline extends Task {
         } catch (DateTimeParseException e) {
             throw new DukeException("OOPS!!! The date inputted is not in 'DD/MM/YYYY HHmm' format");
         }
+    }
+
+    /**
+     *  Parses stored data string and look for Deadline object.
+     *
+     * @param input Data string from save file.
+     * @return Deadline object
+     */
+    public static Deadline parseFromData(String input) throws DukeException {
+        String[] inputs = input.split(gap);
+        try {
+            LocalDateTime dateBy = LocalDateTime.parse(inputs[3]);
+            return new Deadline(inputs[2], dateBy);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid data");
+        }
+    }
+
+    /**
+     *  Parses stored data string and look for Deadline object.
+     *
+     * @param input Data string from save file.
+     * @param isDone Whether deadline task is done.
+     * @return Deadline object
+     */
+    public static Deadline parseFromData(String input, boolean isDone) throws DukeException {
+        Deadline deadline = parseFromData(input);
+        deadline.setDone(isDone);
+        return deadline;
     }
 
     /**
@@ -77,6 +112,11 @@ public class Deadline extends Task {
      */
     public void setDateBy(LocalDateTime by) {
         this.by = by;
+    }
+
+    @Override
+    public String toStorageString() {
+        return "D" + gap + super.toStorageString() + gap + getDateBy();
     }
 
     @Override

@@ -14,18 +14,25 @@ public class FindCommand extends Command {
     private static final Pattern PAT = Pattern.compile(" ");
     String keyWord;
 
-    public FindCommand(String keyWord) {
+    public FindCommand(String fullCommand) throws DukeException {
         super();
-        this.keyWord = keyWord;
+
+        String[] fullCommandSplit = fullCommand.split(" ", 2);
+
+        if (fullCommandSplit.length < 2) {
+            throw new DukeException("OOPS!!! The object to find cannot be empty.");
+        }
+
+        keyWord = fullCommandSplit[1];
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         List<Task> foundTasks = PAT.splitAsStream(keyWord)
                 .map(x -> tasks.find(x))
                 .flatMap(x -> x.stream())
                 .distinct()
                 .collect(Collectors.toList());
-        return ui.showFoundTasks(foundTasks);
+        ui.showFoundTasks(foundTasks);
     }
 }

@@ -1,9 +1,11 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 public class Task {
+    protected static final String gap = "  ";
     protected String desc;
     protected boolean isDone;
-    static String gap = "  ";
 
     /**
      * Initialize a Task object.
@@ -24,6 +26,34 @@ public class Task {
     public Task(String desc, boolean done) {
         this.desc = desc;
         this.isDone = done;
+    }
+
+    /**
+     * Parse data string to find a task.
+     *
+     * @param input Input data string
+     * @return Task found in data string
+     * @throws DukeException If task cannot be created from input data string
+     */
+    public static Task parseFromData(String input) throws DukeException {
+        String[] inputs = input.split(gap, 3);
+        String type = inputs[0];
+        boolean isDone = inputs[1].equals("1");
+        Task task;
+        switch (type) {
+        case "T":
+            task = Todo.parseFromData(input, isDone);
+            break;
+        case "D":
+            task = Deadline.parseFromData(input, isDone);
+            break;
+        case "E":
+            task = Event.parseFromData(input, isDone);
+            break;
+        default:
+            throw new DukeException("Invalid data");
+        }
+        return task;
     }
 
     /**
@@ -79,8 +109,16 @@ public class Task {
         return isDone() ? "\u2714" : "\u2718";
     }
 
+    public String toStorageString() {
+        return (isDone() ? "1" : "0") + gap + getDesc();
+    }
+
     @Override
     public String toString() {
         return "[" + this.getDoneStatus() + "] " + getDesc();
+    }
+
+    public void setNotDone() {
+        setDone(false);
     }
 }

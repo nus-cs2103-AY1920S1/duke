@@ -13,4 +13,4 @@ jobs:
   include:
     - stage: "Tests"
       name: "Unit tests"
-      script: gradlew test
+      script: ./gradlew test

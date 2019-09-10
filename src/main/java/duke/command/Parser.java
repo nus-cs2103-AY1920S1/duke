@@ -93,6 +93,7 @@ public class Parser {
         try {
             Storage storage = new Storage();
             int num = Integer.parseInt(action[1]);
+            assert num >= 0 : "The input number is invalid.";
             Task newTask = TaskList.getList().get(num - 1);
             newTask.markAsDone();
             TaskList.getList().set(num - 1, newTask);
@@ -146,6 +147,7 @@ public class Parser {
             Storage storage = new Storage();
             String[] dl = action[1].split(" /by ");
             String ddlTime = dl[1];
+            assert !ddlTime.isEmpty() : "The input time is invalid.";
             SimpleDateFormat ddlFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Date ddlDate = ddlFormat.parse(ddlTime);
             Task deadline = new Deadline(dl[0], ui.getNewFormatDeadline().format(ddlDate));
@@ -175,6 +177,7 @@ public class Parser {
             Storage storage = new Storage();
             String[] ev = action[1].split(" /at ");
             String eventTime = ev[1];
+            assert !eventTime.isEmpty() : "The input time is invalid.";
             String[] eventSplit = eventTime.split("-");
             String eventStart = eventSplit[0];
             String eventEnd = eventSplit[1];
@@ -206,6 +209,7 @@ public class Parser {
             Ui ui = new Ui();
             Storage storage = new Storage();
             int delNum = Integer.parseInt(action[1]) - 1;
+            assert delNum > 0 : "The input number is invalid.";
             Task delTask = TaskList.getList().get(delNum);
             TaskList.getList().remove(delNum);
             output += ("Noted. I've removed this task:\n" + delTask.toString() + "\n");
@@ -230,6 +234,7 @@ public class Parser {
         String output = "";
         try {
             String keyword = action[1];
+            assert !keyword.isEmpty() : "The keyword to find can not be empty.";
             output += "Here are the matching tasks in your list:\n";
             int count = 1;
             for (Task task : TaskList.getList()) {

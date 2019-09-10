@@ -11,6 +11,8 @@ public class Parser {
      * @throws InvalidCommandException If there is no valid Command in the line
      */
     public Command getCommandFromLine(String line) throws InvalidCommandException {
+        assert line != null : "getCommandFromLine was passed a null argument";
+        assert line.length() > 0 : "getCommandFromLine was passed an empty String";
         return Command.getFromString(
             line.split(" ")[0]
             .trim()
@@ -24,6 +26,9 @@ public class Parser {
      * @return The int index present in the line
      */
     public int getIndexFromLine(String line) {
+        assert line != null : "getIndexFromLine was passed a null argument";
+        assert line.length() > 0 : "getIndexFromLine was passed an empty String";
+
         try {
             return Integer.parseInt(
                 line.split(" ")[1]
@@ -42,6 +47,13 @@ public class Parser {
      * @return String representation of the part of the line between the command and delimiter
      */
     public String getBeforeDelim(String line, String command, String delim) {
+        assert line != null : "getBeforeDelim was passed a null argument (line)";
+        assert line.length() > 0 : "getBeforeDelim was passed an empty String (line)";
+        assert command != null : "getBeforeDelim was passed a null argument (command)";
+        assert command.length() > 0 : "getBeforeDelim was passed an empty String (command)";
+        assert delim != null : "getBeforeDelim was passed a null argument (delim)";
+        assert delim.length() > 0 : "getBeforeDelim was passed an empty String (delim)";
+
         try {
             return line.split(command)[1]
             .split(delim)[0]
@@ -76,6 +88,8 @@ public class Parser {
      * @return true if the provided line is not the BYE command, false otherwise
      */
     public boolean isNotByeCommand(String line) {
+        assert line != null : "isNotByeCommand was passed a null argument";
+        assert line.length() > 0 : "isNotByeCommand was passed an empty String";
         return !line
             .trim()
             .equals(
@@ -91,6 +105,11 @@ public class Parser {
      * @return The argument within the line
      */
     public String getArg(String line, String command) {
+        assert line != null : "getArg was passed a null argument (line)";
+        assert line.length() > 0 : "getArg was passed an empty String (line)";
+        assert command != null : "getArg was passed a null argument (command)";
+        assert command.length() > 0 : "getArg was passed an empty String (command)";
+
         try {
             return line
                 .split(command)[1]

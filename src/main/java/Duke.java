@@ -46,6 +46,7 @@ public class Duke {
 
         printGreeting();
         String nextLine = ui.nextLine();
+        assert line != null : "Ui.nextLine() returned null.";
 
         // Keep reading input until the bye command is received.
         while (true) {
@@ -129,6 +130,8 @@ public class Duke {
     }
 
     private String exitAfter(int ms) {
+        assert ms >= 0 : "exitAfter was passed a negative argument";
+
         exiter.exitAfter(ms);
         storage.writeDataFile(taskList);
         return ui.printGoodbye();
@@ -142,7 +145,8 @@ public class Duke {
     }
 
     private String deleteTask(int index) {
-        Task taskToDelete = taskList.get(index); 
+        Task taskToDelete = taskList.get(index);
+        assert taskToDelete != null : "The task to be deleted cannot be found."; 
         taskList.remove(taskToDelete);
         return ui.ackDeletion(taskToDelete, taskList.size());
     }
@@ -188,11 +192,13 @@ public class Duke {
 
     private String markTaskAsDone(int index) {
         Task taskToMarkAsDone = taskList.get(index);
+        assert taskToMarkAsDone != null : "The task to be marked as done is null.";
         taskToMarkAsDone.markAsDone();
         return ui.ackDone(taskToMarkAsDone);
     }
 
     private String addTask(Task newTask) {
+        assert newTask != null : "The task to be added is null.";
         taskList.add(newTask);
         return ui.ackAddition(newTask, taskList.size());
     }

@@ -15,6 +15,9 @@ public class DateParser {
      * @param format String that represents the expected format of the Date
      */
     public DateParser(String format) {
+        assert format != null : "DateParser constructor was given null argument";
+        assert format.length() > 0 : "DateParser constructor was given empty String as argument";
+
         formatter = new SimpleDateFormat(format);
     }
 
@@ -26,6 +29,8 @@ public class DateParser {
      * @throws ParseException If the String cannot be parsed into a Date object according to given format
      */
     public Date parse(String str) throws ParseException {
+        assert str != null : "parse function was given a null argument";
+
         return formatter.parse(str);
     }
 
@@ -36,6 +41,8 @@ public class DateParser {
      * @return String representation of the Date, in the desired format
      */
     public String format(Date d) {
+        assert d != null : "format function was given a null argument";
+
         return formatter.format(d);
     }
 }

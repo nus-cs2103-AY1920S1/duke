@@ -10,23 +10,28 @@ import java.util.stream.IntStream;
  */
 public class Ui {
     /**
-     * Prints the welcome message.
+     * Returns the welcome message.
+     *
+     * @return Returns the welcome message.
      */
     public static String printWelcome() {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
-     * Prints the error message due to file not found.
+     * Returns the error message due to file not found.
+     *
+     * @return Returns the error message due to file not found.
      */
     public String showLoadingError() {
         return "Error: Unable to load. File not found. Empty list is created.";
     }
 
     /**
-     * Prints each task in the list provided.
+     * Returns a string response containing the string representation of the list of tasks.
      *
      * @param list The list to be printed.
+     * @return Returns a string response containing the string representation of the list of tasks.
      */
     public String printList(ArrayList<Task> list) {
         if (list.isEmpty()) {
@@ -43,19 +48,21 @@ public class Ui {
     }
 
     /**
-     * Prints a message to remind user that a task has been marked as done.
+     * Returns a message to remind user that a task has been marked as done.
      *
      * @param task The task to be marked as done.
+     * @return Returns a message to remind user that a task has been marked as done.
      */
-    String printTaskDone(Task task) {
+    String printMarkDone(Task task) {
         return ("Nice! I've marked this task as done:\n  " + task.toString());
     }
 
     /**
-     * Prints a message to remind user that a task has been removed from the list.
+     * Returns a message to remind user that a task has been removed from the list.
      *
      * @param removed The deleted task.
      * @param list The list, in which the task has been removed from.
+     * @return Returns a message to remind user that a task has been removed from the list.
      */
     String printDeleteTask(Task removed, ArrayList<Task> list) {
         return ("Noted. I've removed this task:\n" +
@@ -64,10 +71,11 @@ public class Ui {
     }
 
     /**
-     * Prints a message to remind user that a task has been added to the list.
+     * Returns a message to remind user that a task has been added to the list.
      *
      * @param task The task to be added.
      * @param list The list, to which the task is to be added to.
+     * @return Returns a message to remind user that a task has been added to the list.
      */
     String printAddTask(Task task, ArrayList<Task> list) {
         return ("Got it. I've added this task:\n" +

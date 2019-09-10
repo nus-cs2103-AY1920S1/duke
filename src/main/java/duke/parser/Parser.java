@@ -157,9 +157,7 @@ public class Parser {
                 return IntStream.iterate(startingIndex, index -> index + 1);
             } else {
                 int endingIndex = Integer.parseInt(end);
-                return IntStream.iterate(startingIndex,
-                        index -> index < endingIndex,
-                        index -> index + 1);
+                return IntStream.iterate(startingIndex, index -> index < endingIndex, index -> index + 1);
             }
         } catch (NumberFormatException e) {
             throw new IllegalIndexOfTaskException("Please provide valid indices for the range");
@@ -241,7 +239,8 @@ public class Parser {
         }
     }
 
-    private DoneCommand parseDoneCommand(String description) throws IllegalDescriptionException, IllegalIndexOfTaskException {
+    private DoneCommand parseDoneCommand(String description) throws
+            IllegalDescriptionException, IllegalIndexOfTaskException {
         String filterType = getFirstWord(description);
         switch (filterType) {
         case "/type":

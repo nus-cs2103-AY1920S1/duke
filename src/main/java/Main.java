@@ -27,6 +27,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
 
+            assert stage.getTitle().equals("Duke") : "Application title should be Duke";
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().printDialog("Hello! I'm Duke");
             fxmlLoader.<MainWindow>getController().printDialog("What can I do for you?");

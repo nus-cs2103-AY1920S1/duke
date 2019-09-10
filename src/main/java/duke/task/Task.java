@@ -69,7 +69,12 @@ public abstract class Task {
      */
     public abstract String toEncodedString();
 
-    private String tagsToString() {
+    /**
+     * Returns a <code>String</code> built from concatenating the <code>String</code> tags of this <code>Task</code>.
+     * 
+     * @return a <code>String</code> containing all the tags of this <code>Task</code>.
+     */
+    protected String tagsToString() {
         return this.tags
             .stream()
             .map(tag -> String.format("#%s", tag))

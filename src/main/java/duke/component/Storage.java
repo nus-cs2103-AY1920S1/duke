@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -49,6 +50,13 @@ public class Storage {
         this.fileReader = new Scanner(file);
     }
 
+    private static ArrayList<String> reconstructTags(String tagString) {
+        ArrayList<String> tags = new ArrayList<String>();
+        Collections.addAll(tags, tagString.replace("#", "").split(" "));
+        
+        return tags;
+    }
+
     private static Task parseEncodedTask(String encodedString) throws DukeException {
         // Escape the pipe character as it is a metacharacter in regex
         String[] tokens = encodedString.split(" \\| ");
@@ -56,31 +64,31 @@ public class Storage {
         Task task;
         switch (tokens[0]) {
         case "T":
-            if (tokens.length != 3) {
-                throw new DukeInvalidEncodedTaskException(3, "TodoTask", tokens.length, encodedString);
+            if (tokens.length != 4) {
+                throw new DukeInvalidEncodedTaskException(4, "TodoTask", tokens.length, encodedString);
             }
-            task = new TodoTask(tokens[2], new ArrayList<String>());
+            task = new TodoTask(tokens[3], Storage.reconstructTags(tokens[2]));
             break;
         case "D":
-            if (tokens.length != 4) {
-                throw new DukeInvalidEncodedTaskException(4, "DeadlineTask", tokens.length, encodedString);
+            if (tokens.length != 5) {
+                throw new DukeInvalidEncodedTaskException(5, "DeadlineTask", tokens.length, encodedString);
             }
             try {
-                Date eventTime = Storage.DATE_PARSER.parse(tokens[3]);
-                task = new DeadlineTask(tokens[2], eventTime, new ArrayList<String>());
+                Date eventTime = Storage.DATE_PARSER.parse(tokens[4]);
+                task = new DeadlineTask(tokens[3], eventTime, Storage.reconstructTags(tokens[2]));
             } catch (ParseException e) {
-                throw new DukeInvalidEncodedTaskException(4, "DeadlineTask", 4, encodedString);
+                throw new DukeInvalidEncodedTaskException(5, "DeadlineTask", 4, encodedString);
             }
             break;
         case "E":
-            if (tokens.length != 4) {
-                throw new DukeInvalidEncodedTaskException(4, "EventTask", tokens.length, encodedString);
+            if (tokens.length != 5) {
+                throw new DukeInvalidEncodedTaskException(5, "EventTask", tokens.length, encodedString);
             }
             try {
-                Date eventTime = Storage.DATE_PARSER.parse(tokens[3]);
-                task = new EventTask(tokens[2], eventTime, new ArrayList<String>());
+                Date eventTime = Storage.DATE_PARSER.parse(tokens[4]);
+                task = new EventTask(tokens[3], eventTime, Storage.reconstructTags(tokens[2]));
             } catch (ParseException e) {
-                throw new DukeInvalidEncodedTaskException(4, "EventTask", 4, encodedString);
+                throw new DukeInvalidEncodedTaskException(5, "EventTask", 4, encodedString);
             }
             break;
         default:

@@ -35,8 +35,9 @@ public class DeadlineTask extends Task {
      */
     public String toEncodedString() {
         return String.format(
-            "D | %d | %s | %s",
+            "D | %d | %s | %s | %s",
             this.isComplete ? 1 : 0,
+            this.tagsToString(),
             this.description,
             Task.DATE_WRITER.format(this.byDeadline)
         );

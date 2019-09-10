@@ -35,8 +35,9 @@ public class EventTask extends Task {
      */
     public String toEncodedString() {
         return String.format(
-            "E | %d | %s | %s",
+            "E | %d | %s | %s | %s",
             this.isComplete ? 1 : 0,
+            this.tagsToString(),
             this.description,
             Task.DATE_WRITER.format(this.atTime)
         );

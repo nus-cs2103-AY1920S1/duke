@@ -21,7 +21,7 @@ public class EventTaskTest {
         EventTask task = new EventTask("Make useless PRs", date, new ArrayList<String>());
 
         assertEquals(
-            String.format("E | 0 | Make useless PRs | %s", dateString),
+            String.format("E | 0 |  | Make useless PRs | %s", dateString),
             task.toEncodedString()
         );
     }
@@ -39,7 +39,7 @@ public class EventTaskTest {
         task.complete();
 
         assertEquals(
-            String.format("[E][V] Receive Happy New Year text messages (at: %s)", formattedDate),
+            String.format("[E][V][] Receive Happy New Year text messages (at: %s)", formattedDate),
             task.toString()
         );
     }

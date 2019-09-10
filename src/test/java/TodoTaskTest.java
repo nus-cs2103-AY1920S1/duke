@@ -16,7 +16,7 @@ public class TodoTaskTest {
         task.complete();
 
         assertEquals(
-            "T | 1 | Go eat a banana",
+            "T | 1 |  | Go eat a banana",
             task.toEncodedString()
         );
     }
@@ -29,7 +29,7 @@ public class TodoTaskTest {
         task.complete();
         
         assertEquals(
-            "[T][V] Go fly a kite",
+            "[T][V][] Go fly a kite",
             task.toString()
         );
     }

@@ -22,7 +22,7 @@ public class DeadlineTaskTest {
         task.complete();
 
         assertEquals(
-            String.format("D | 1 | Finish duking it out | %s", dateString),
+            String.format("D | 1 |  | Finish duking it out | %s", dateString),
             task.toEncodedString()
         );
     }
@@ -39,7 +39,7 @@ public class DeadlineTaskTest {
         DeadlineTask task = new DeadlineTask("S/U this module", date, new ArrayList<String>());
 
         assertEquals(
-            String.format("[D][X] S/U this module (by: %s)", formattedDate),
+            String.format("[D][X][] S/U this module (by: %s)", formattedDate),
             task.toString()
         );
     }

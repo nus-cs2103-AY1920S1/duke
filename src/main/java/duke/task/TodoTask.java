@@ -20,7 +20,12 @@ public class TodoTask extends Task {
      * {@inheritDoc}
      */
     public String toEncodedString() {
-        return String.format("T | %d | %s", this.isComplete ? 1 : 0, this.description);
+        return String.format(
+            "T | %d | %s | %s",
+            this.isComplete ? 1 : 0,
+            this.tagsToString(),
+            this.description
+        );
     }
 
     @Override

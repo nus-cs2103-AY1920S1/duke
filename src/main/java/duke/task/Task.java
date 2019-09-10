@@ -2,6 +2,7 @@ package duke.task;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * A prototype object representation of a user task with a description.
@@ -54,14 +55,29 @@ public abstract class Task {
     }
 
     /**
+     * Adds a <code>String</code> tag to this <code>Task</code>.
+     * @param tag <code>String</code> tag to apply to this <code>Task</code>.
+     */
+    public void addTag(String tag) {
+        this.tags.add(tag);
+    }
+
+    /**
      * Returns all information about this <code>Task</code> encoded in a <code>String</code>.
      * 
      * @return a <code>String</code> to be written to a file to persist information of this <code>Task</code>
      */
     public abstract String toEncodedString();
 
+    private String tagsToString() {
+        return this.tags
+            .stream()
+            .map(tag -> String.format("#%s", tag))
+            .collect(Collectors.joining(" "));
+    }
+
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.getDescription());
+        return String.format("[%s][%s] %s", this.getStatusIcon(), this.tagsToString(), this.getDescription());
     }
 }

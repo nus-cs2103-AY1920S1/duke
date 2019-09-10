@@ -12,6 +12,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
 import duke.exception.DukeIncorrectArgumentsException;
 import duke.exception.DukeInvalidArgumentException;
@@ -29,6 +30,7 @@ public final class Parser {
     private static final String DONE_TEMPLATE = "done <id>";
     private static final String DELETE_TEMPLATE = "delete <id>";
     private static final String FIND_TEMPLATE = "find <search_string>";
+    private static final String TAG_TEMPLATE = "tag <id> <tag_string>";
     private static final String TODO_TEMPLATE = "todo <description>";
     private static final String DEADLINE_TEMPLATE = "deadline <description> /by <date time>";
     private static final String EVENT_TEMPLATE = "event <description> /by <date time>";
@@ -69,6 +71,9 @@ public final class Parser {
         // "find" returns all tasks whose description contains the search string
         case "find":
             return Parser.parseFind(command);
+        // "tag" tags a given task with a string
+        case "tag":
+            return Parser.parseTag(command);
         // "todo": creates a Todo task (no attached date/time)
         case "todo":
             return Parser.parseTodo(command);
@@ -126,6 +131,23 @@ public final class Parser {
         // Otherwise entire argString is the search string of the Find command
         String argString = command.split(" ", 2)[1];
         return new FindCommand(command, argString);
+    }
+
+    private static Command parseTag(String command) throws DukeException {
+        String[] tokens = command.split(" ", 3);
+        // GUARD: against too few (e.g. tag 1) arguments
+        if (tokens.length < 3) {
+            throw new DukeIncorrectArgumentsException(2, TAG_TEMPLATE, tokens.length - 1, command);
+        }
+
+        try {
+            // GUARD: against non-integer task IDs (attempt to parse the id of the task as an int)
+            int id = Integer.valueOf(tokens[1]);
+            String tag = String.join("-", tokens[2].split(" "));
+            return new TagCommand(command, id, tag);
+        } catch (NumberFormatException e) {
+            throw new DukeInvalidArgumentException("id", "int", command);
+        }
     }
 
     private static Command parseTodo(String command) throws DukeException {

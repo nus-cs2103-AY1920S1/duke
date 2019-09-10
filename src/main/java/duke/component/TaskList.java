@@ -52,6 +52,21 @@ public class TaskList {
     }
 
     /**
+     * Tags a <code>Task</code> with a given <code>String</code> then returns it.
+     * 
+     * @param id <code>int</code> ID of the task.
+     * @param tag <code>String</code> tag to apply to this <code>Task</code>.
+     * @return the <code>Task</code> that was updated.
+     */
+    public Task tagTask(int id, String tag) {
+        assert id >= 1 && id <= this.numberOfTasks() : "Attempting to tag non-existent Task!";
+
+        Task updatedTask = this.tasks.get(id - 1);
+        updatedTask.addTag(tag);
+        return updatedTask;
+    }
+
+    /**
      * Returns all <code>Task</code> objects whose descriptions contain a search string in an <code>ArrayList</code>.
      * 
      * @param searchString <code>String</code> to search <code>Task</code> descriptions with.

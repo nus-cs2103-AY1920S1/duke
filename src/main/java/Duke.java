@@ -99,7 +99,7 @@ public class Duke {
      * the command accordingly.
      */
     private void run() {
-        System.out.println(Ui.showWelcomeMessage());
+        Ui.showWelcomeMessage();
         while (true) {
             try {
                 String fullCommand = ui.readCommand();

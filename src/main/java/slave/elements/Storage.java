@@ -58,9 +58,8 @@ public class Storage {
      * @throws DukeException Throws if file cannot be found or input went wrong.
      */
     public ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> taskList;
+        ArrayList<Task> taskList = new ArrayList<>();
         try {
-            taskList = new ArrayList<>();
             List<String> list = Files.readAllLines(this.file.toPath());
             int index = 1;
             for (String line : list) {
@@ -68,7 +67,8 @@ public class Storage {
                 index++;
             }
         } catch (IOException e) {
-            throw new InOutWentWrongException();
+            this.file = new File("./duke.txt");
+            return taskList;
         }
         return taskList;
     }

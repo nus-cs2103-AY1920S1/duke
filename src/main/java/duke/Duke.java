@@ -41,7 +41,6 @@ public class Duke extends Application {
     private Storage fileMgr;
     private TaskList tasks;
     private Window window;
-    private boolean isRunning;
 
     // Application UI elements
     private AnchorPane mainLayout;
@@ -65,7 +64,6 @@ public class Duke extends Application {
      *                  data to.
      */
     public Duke(String filePath) {
-        this.isRunning = true;
         this.window = new Window();
         
         try {
@@ -91,14 +89,15 @@ public class Duke extends Application {
         // Show Duke's logo and welcome message
         this.window.showWelcome(Duke.DUKE_LOGO, Duke.DUKE_INTRODUCTION);
 
-        while (this.isRunning && this.window.hasCommand()) {
+        boolean isRunning = true;
+        while (isRunning && this.window.hasCommand()) {
             String command = this.window.readCommand();
             
             // Parse the command to return a Command object
             try {
                 Command c = Parser.parse(command);
                 this.window.print(c.execute(tasks, fileMgr));
-                this.isRunning = !c.willTerminate();
+                isRunning = !c.willTerminate();
             } catch (DukeException e) {
                 this.window.print(e.toString());
             }
@@ -115,13 +114,35 @@ public class Duke extends Application {
 
     // ======================== DUKE APPLICATON WITH GRAPHICAL USER INTERFACE ========================
 
+    // Schedules an action to be executed by a thread after a specified delay
+    private static void deferAction(long delayDuration, Runnable action) {
+        new Timer().schedule(
+            new TimerTask() {
+                @Override
+                public void run() {
+                    action.run();
+                }
+            },
+            delayDuration
+        );
+    }
+
     // Parses and executes a command input by a user through the GUI, returning the String output of the command
     private String handleCommand(String command) {
         // Parse the command to return a Command object
         try {
             Command c = Parser.parse(command);
-            this.isRunning = !c.willTerminate();
-            return c.execute(this.tasks, this.fileMgr);
+            String commandOutput = c.execute(this.tasks, this.fileMgr);
+
+            // If this command terminates Duke, schedule the application window to close in 0.5s
+            if (c.willTerminate()) {
+                Duke.deferAction(500, () -> {
+                    Platform.exit();
+                    System.exit(0);
+                });
+            }
+
+            return commandOutput;
         } catch (DukeException e) {
             // Return the full error message
             return e.toString();
@@ -205,20 +226,6 @@ public class Duke extends Application {
             DialogBox.getUserDialog(userText, new ImageView(this.userPic)),
             DialogBox.getDukeDialog(dukeText, new ImageView(this.dukePic))
         );
-
-        // If a command has set Duke to terminate, schedule the application window to close in 1s
-        if (!this.isRunning) {
-            new Timer().schedule(
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        Platform.exit();
-                        System.exit(0);
-                    }
-                },
-                500
-            );
-        }
     }
 
     // Invoked on applications startup - shows Duke's welcome message

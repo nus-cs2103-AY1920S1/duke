@@ -1,6 +1,5 @@
 package weijie.duke.commands;
 
-import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.exceptions.DukeInvalidInputException;
 import weijie.duke.models.Task;
 import weijie.duke.models.Todo;
@@ -8,7 +7,6 @@ import weijie.duke.repos.IRepository;
 import weijie.duke.responses.TaskResponse;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public class AddTodoCommand extends AddCommand {
 
@@ -27,12 +25,7 @@ public class AddTodoCommand extends AddCommand {
         }
 
         Task task = new Todo(description);
-        try {
-            repo.create(task);
-        } catch (DukeIoException e) {
-            return new TaskResponse(e);
-        }
 
-        return new TaskResponse(getResponseFormat(), Collections.singletonList(task));
+        return tryCreateTask(task);
     }
 }

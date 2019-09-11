@@ -37,7 +37,6 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Object DialogPanel;
 
     public Duke() {
         this("/data/duke.txt");
@@ -60,41 +59,8 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     *This method aimed to make use of the readCommand() method in Ui class, and print out a bottom line at last.
-     */
-    //public void run() {
-      //  ui.readCommand();
-        //ui.showLine();
-    //}
-
-    /**
-     * This method makes use of showWelcome() method in Ui class to print out the greetings.
-     */
-   // private void greeting() {
-     //   ui.showWelcome();
-    //}
-
-    /**
-     * This is the main method to create a new Duke object and run it by steps,
-     * which terminate the program when command "bye" appears.
-     * @param args unused
-     */
-  /*  public static void main(String[] args) {
-        Duke duke = new Duke("Users/xutunan/duke/duke.txt");
-        duke.greeting();
-        duke.ui.showLine();
-        while (!Ui.getIsExit()) {
-            duke.run();
-        }
-
-    }*/
-
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -110,7 +76,6 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-        //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -125,7 +90,6 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -145,7 +109,7 @@ public class Duke extends Application {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(ui.showWelcome()), new ImageView(duke))
         );
-        //Step 3. Add functionality to handle user input.
+
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -155,7 +119,7 @@ public class Duke extends Application {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
         });
-        //Part 3. Add functionality to handle user input.
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -171,10 +135,8 @@ public class Duke extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
      private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
     /**

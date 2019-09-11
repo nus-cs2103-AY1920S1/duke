@@ -38,34 +38,26 @@ public class Parser {
         switch (Command.valueOf(splitCommand[0])) {
         case list:
             return commandList();
-            //break;
         case bye:
             return commandBye();
-            //break;
         case done:
             return commandDone(storage);
-            //break;
         case todo:
             return commandTodo(storage);
-            //break;
         case deadline:
             return commandDeadline(storage);
-            //break;
         case event:
             return commandEvent(storage);
-            //break;
         case delete:
             return commandDelete(storage);
-            //break;
         case find:
             return commandFind();
-            //break;
         }
         return "";
     }
 
     /**
-     * method for "list" command, print the list out
+     * method for "list" command, return the list
      */
     private String commandList() {
         String tasks = "Here are the tasks in your list:\n";
@@ -73,11 +65,10 @@ public class Parser {
         return tasks + TaskList.listString() + "\n";
     }
     /**
-     * method for "bye" command, print ending and set isExit to true
+     * method for "bye" command, return ending and set isExit to true
      */
     private String commandBye() {
         String Exit = "Bye. Hope to see you again soon!\n";
-        Ui.setIsExit(true);
         return Exit;
     }
 

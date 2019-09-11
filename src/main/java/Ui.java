@@ -35,6 +35,7 @@ public class Ui {
     public String list(TaskList tasks) {
         // Get the list of tasks in the Arraylist
         String listOfTasks = "Here are the tasks in your list:\n     ";
+        assert listOfTasks == "Here are the tasks in your list:\n     " : "Oops";
         for (int i = 0; i < tasks.getSize(); i++) {
             listOfTasks += (i + 1) + "." + tasks.getElement(i);
             if (i != tasks.getSize() - 1) listOfTasks += "\n     ";

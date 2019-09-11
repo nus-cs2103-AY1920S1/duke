@@ -14,7 +14,7 @@ class TaskListTest {
                 new TaskList().add("event check3 /at today").toString());
     }
 
-    @org.junit.jupiter.api.Test
+    /*@org.junit.jupiter.api.Test
     void add_userTaskInput_exceptionThrown() throws DukeException {
         try {assertEquals("", new TaskList().add("task check1 /by 25/9/2019 0900").toString());
             fail();
@@ -40,7 +40,7 @@ class TaskListTest {
                     "\n    ____________________________________________________________\n", e.getMessage());
         }
     }
-
+    */
     @org.junit.jupiter.api.Test
     void done_integerInput_success() {
         assertEquals("[E][\u2713] check1 (at: today)", new TaskList(List.of(new Event("check1", "today"),

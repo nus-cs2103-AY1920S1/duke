@@ -28,9 +28,12 @@ public class Parser {
             String userCommand = inputArr[0];
             String dukeText;
             try {
+                Boolean b = false;
+                String assertOutput = "Did not use storage";
                 if (userCommand.equals("bye")) {
                     dukeText = this.ui.bye();
-                    this.storage.close(this.commands);
+                    b = this.storage.close(this.commands);
+                    assertOutput = "Did not close";
                 } else if (userCommand.equals("list")) {
                     dukeText = this.ui.list() + "\n" + this.commands.list();
                 } else if (userCommand.equals("done")) {
@@ -39,7 +42,8 @@ public class Parser {
                         try {
                             Task doneTask = this.commands.done(index);
                             dukeText = this.ui.done(doneTask);
-                            storage.done(doneTask, index + 1);
+                            b = storage.done(doneTask, index + 1);
+                            assertOutput = "Not done";
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("OOPS!!! Index for done does not exist in the list.");
                         }
@@ -56,7 +60,8 @@ public class Parser {
                             Task tt = new Deadline(taskD, new DateTime(by));
                             this.commands.add(tt);
                             dukeText = this.ui.addTask(tt, this.commands.size());
-                            storage.save(tt);
+                            b = storage.save(tt);
+                            assertOutput = "Did not save";
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeException("OOPS!!! The format for deadline is wrong. Please follow: <description> /by <time>");
                         }
@@ -73,7 +78,8 @@ public class Parser {
                             Task ee = new Event(taskE, new DateTime(at));
                             this.commands.add(ee);
                             dukeText = this.ui.addTask(ee, this.commands.size());
-                            storage.save(ee);
+                            b = storage.save(ee);
+                            assertOutput = "Did not save";
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeException("OOPS!!! The format for event is wrong. Please follow: <description> /at <time>");
                         }
@@ -86,7 +92,8 @@ public class Parser {
                         Task t = new Todo(todoT);
                         this.commands.add(t);
                         dukeText = this.ui.addTask(t, this.commands.size());
-                        storage.save(t);
+                        b = storage.save(t);
+                        assertOutput = "Did not save";
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -96,7 +103,8 @@ public class Parser {
                         try {
                             Task tt = this.commands.delete(i);
                             dukeText = this.ui.delete(tt, this.commands.size());
-                            storage.delete(i + 1);
+                            b = storage.delete(i + 1);
+                            assertOutput = "Did not delete";
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("OOPS!!! Index for delete does not exist in the list.");
                         }
@@ -109,6 +117,8 @@ public class Parser {
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+
+                assert b : assertOutput;
             } catch (DukeException e) {
                 dukeText = e.getMessage();
             }

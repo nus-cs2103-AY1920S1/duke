@@ -142,11 +142,11 @@ public class Duke extends Application {
     String getResponse(String input) {
 //        Storage storage = new Storage("src/main/java/data/duke.txt");
         Ui ui = new Ui();
-        ui.hi();
+//        ui.hi();
         TaskList commands = new TaskList(this.storage.load(new ArrayList<Task>())); //TODO
         Parser p = new Parser(commands, this.storage, ui);
         String xx = p.parse(input);
-        storage.close(commands);
+        this.storage.close(commands);
         return xx;
     }
 

@@ -120,7 +120,6 @@ public class Storage {
         List<Task> taskListDeadline = new ArrayList<>();
         List<Task> taskListEvent = new ArrayList<>();
         for (int i = 0; i < taskList.getSize(); i++) {
-            System.out.println("I loop");
             if (taskList.getTask(i) instanceof Deadline) {
                 taskListDeadline.add(taskList.getTask(i));
             } else if (taskList.getTask(i) instanceof Event) {
@@ -133,22 +132,20 @@ public class Storage {
         taskList.clearTask();
 
         for (int j = 0; j < taskListTodo.size(); j++) {
-            System.out.println("I loop2");
             taskList.addTask(taskListTodo.get(j));
         }
 
         for (int j = 0; j < taskListDeadline.size(); j++) {
-            System.out.println("I loop2");
             taskList.addTask(taskListDeadline.get(j));
         }
 
         for (int j = 0; j < taskListEvent.size(); j++) {
-            System.out.println("I loop2");
             taskList.addTask(taskListEvent.get(j));
         }
+        taskListTodo.clear();
+        taskListDeadline.clear();
+        taskListEvent.clear();
 
         return taskList;
     }
-
-
 }

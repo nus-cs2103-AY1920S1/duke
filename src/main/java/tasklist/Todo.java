@@ -1,5 +1,7 @@
 package tasklist;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Represents the Todo type of task.
  */
@@ -8,6 +10,7 @@ public class Todo extends Task {
 
     public Todo(String description, boolean completionStatus) {
         super(description,completionStatus);
+        taskType = new SimpleStringProperty("Todo");
     }
 
     @Override

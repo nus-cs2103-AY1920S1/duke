@@ -11,9 +11,11 @@ import java.time.format.DateTimeFormatter;
  * gurantees that all important methods are implemented
  */
 public abstract class Task {
+
+    protected SimpleStringProperty taskType;
     protected SimpleStringProperty description;
     protected SimpleBooleanProperty isDone;
-    protected LocalDateTime date;
+    protected LocalDateTime dateDue;
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
     /**
@@ -22,7 +24,7 @@ public abstract class Task {
     public Task(String description, boolean completionStatus, LocalDateTime date) {
         this.description = new SimpleStringProperty(description);
         this.isDone = new SimpleBooleanProperty(completionStatus);
-        this.date = date;
+        this.dateDue = date;
     }
 
     /**
@@ -61,4 +63,49 @@ public abstract class Task {
      * @return a string that contains the details of the task in a format the parser can read
      */
     public abstract String encodeForStorage();
+
+    public String getTaskType() {
+        return taskType.get();
+    }
+
+    public SimpleStringProperty taskTypeProperty() {
+        return taskType;
+    }
+
+    public void setTaskType(String taskType) {
+        this.taskType.set(taskType);
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public SimpleStringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    public boolean isIsDone() {
+        return isDone.get();
+    }
+
+    public SimpleBooleanProperty isDoneProperty() {
+        return isDone;
+    }
+
+    public void setIsDone(boolean isDone) {
+        this.isDone.set(isDone);
+    }
+
+    public LocalDateTime getDateDue() {
+        return dateDue;
+    }
+
+    public void setDateDue(LocalDateTime dateDue) {
+        this.dateDue = dateDue;
+    }
+
 }

@@ -1,6 +1,7 @@
 package storage;
 
 
+import javafx.collections.ObservableList;
 import ui.TextUi;
 import tasklist.Task;
 import tasklist.TaskList;
@@ -10,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
 
 /**
  * Stores and loads files from a user specified file path.
@@ -31,7 +31,7 @@ public class Storage {
      * @throws IOException if the filepath specified is invalid
      */
 
-    public void storeData(LinkedList<Task> toStore) throws IOException {
+    public void storeData(ObservableList<Task> toStore) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         StringBuilder fullList = new StringBuilder();
         for (Task task : toStore) {
@@ -47,7 +47,7 @@ public class Storage {
      * @throws IOException if the the file path is invalid
      */
 
-    public LinkedList<Task> loadData() throws IOException {
+    public ObservableList<Task> loadData() throws IOException {
         FileReader reader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(reader);
         TaskList storedData = new TaskList();
@@ -63,7 +63,7 @@ public class Storage {
             tasknumber++;
         }
         bufferedReader.close();
-        return storedData.getTaskList();
+        return storedData.getTasks();
     }
 
 }

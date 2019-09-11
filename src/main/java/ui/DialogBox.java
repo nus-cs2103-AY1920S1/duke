@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import ui.MainWindow;
 
 /**
  * An example of a custom control using FXML.
@@ -58,6 +59,4 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-
-
 }

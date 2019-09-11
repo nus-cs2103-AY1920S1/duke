@@ -1,5 +1,7 @@
 package tasklist;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -12,17 +14,18 @@ public class Event extends Task {
 
     public Event(String name, boolean completionStatus, LocalDateTime date) {
         super(name, completionStatus,date);
+        taskType = new SimpleStringProperty("Event");
     }
 
     @Override
     public String getOverallStatus() {
-        return "[E]" + getCurrentStatus() + description.getValue() + "(at:" + date.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + getCurrentStatus() + description.getValue() + "(at:" + dateDue.format(OUTPUT_FORMAT) + ")";
     }
 
     @Override
     public String encodeForStorage() {
         int myInt = isDone.getValue() ? 1 : 0;
         return "event [" + myInt + "]" + description.getValue() + "/at"
-                + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                + dateDue.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 }

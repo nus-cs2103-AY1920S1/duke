@@ -1,5 +1,7 @@
 package core;
 
+import javafx.collections.ObservableList;
+import tasklist.Task;
 import ui.TextUi;
 import storage.Storage;
 import tasklist.TaskList;
@@ -23,63 +25,32 @@ import javafx.scene.image.Image;
 public class Duke{
     private Storage saveFile;
     private TextUi textui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image ui = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private TaskList tasks;
 
 
     public Duke() throws IOException {
         saveFile = new Storage("tasklist.txt");
         textui = new TextUi();
+        tasks = new TaskList(saveFile.loadData());
     }
 
     public Duke(String filepath) throws IOException {
         saveFile = new Storage(filepath);
         textui = new TextUi();
-    }
-
-    /**
-     * Runs the program until termination.
-     * @throws IOException in case file doesn't load
-     */
-    public void run() throws IOException {
-        textui.printIntroduction();
-        Scanner input = new Scanner(System.in);
-        String user = input.nextLine();
-        TaskList scheduler;
-        Parser parser = new Parser();
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        while (!user.equals("bye")) {
-            scheduler = new TaskList(saveFile.loadData());
-            parser.parse(user, scheduler,false);
-            saveFile.storeData(scheduler.getTaskList());
-            user = input.nextLine();
-        }
-
-        textui.printGoodByeMsg();
-
+        tasks = new TaskList(saveFile.loadData());
     }
 
     public String getResponse(String input) throws IOException {
-        //textui.printIntroduction();
-        TaskList scheduler;
         Parser parser = new Parser();
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        scheduler = new TaskList(saveFile.loadData());
-        parser.parse(input, scheduler,false);
-        saveFile.storeData(scheduler.getTaskList());
+        tasks.setTasks(saveFile.loadData());
+        parser.parse(input, tasks,false);
+        saveFile.storeData(tasks.getTasks());
         return outContent.toString();
     }
 
-
-
-    public static void main(String[] args) throws IOException {
-        new Duke("tasklist.txt").run();
+    public ObservableList<Task> getAllTasks() {
+        return tasks.getTasks();
     }
 }

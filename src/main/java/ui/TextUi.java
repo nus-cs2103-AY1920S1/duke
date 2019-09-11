@@ -1,5 +1,6 @@
 package ui;
 
+import javafx.collections.ObservableList;
 import tasklist.Task;
 import java.util.LinkedList;
 
@@ -36,7 +37,7 @@ public class TextUi {
      * prints out the entire list.
      * @param taskList is the linkedlist containing the tasks to be printed
      */
-    public void printTaskList(LinkedList<Task> taskList) {
+    public void printTaskList(ObservableList<Task> taskList) {
         int i = 0;
         System.out.println(DIVIDER + "\n"
                 + "     Here are the tasks in your list:");
@@ -131,7 +132,7 @@ public class TextUi {
      * prints the ui for listing the found tasks.
      * @param foundtasks list containing the tasks that were found
      */
-    public void printFoundTasks(LinkedList<String> foundtasks) {
+    public void printFoundTasks(ObservableList<String> foundtasks) {
         if (foundtasks.isEmpty()) {
             System.out.println(DIVIDER + "\n"
                     + "     ☹ OOPS!!! I'm sorry, but I couldn't find anything :-(\n"

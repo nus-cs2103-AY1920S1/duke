@@ -12,7 +12,9 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.Scanner;
 import javafx.scene.control.Label;
 
 /**
@@ -24,6 +26,7 @@ public class Duke extends Application {
     private Ui ui;
     private Parser parser;
     private Storage storage;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -39,9 +42,9 @@ public class Duke extends Application {
         list = new TaskList();
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage("../Duke/data/Duke.txt");
+        storage = new Storage("C:/Users/sairo/OneDrive/Desktop/Duke/data/Duke.txt");
         // file contains user data
-        File file = new File("../Duke/data/Duke.txt");
+        File file = new File("C:/Users/sairo/OneDrive/Desktop/Duke/data/Duke.txt");
         //read and load the existing data into the task list.
         list.readDataFromFile(file,parser);
 
@@ -157,5 +160,12 @@ public class Duke extends Application {
     }
 
 
+    public static void main(String[] args) throws IOException, ParseException {
+        Scanner scan = new Scanner(System.in);
+        String command = scan.nextLine();
+        Duke d = new Duke();
+        String output = d.parser.readUserCommand(command,d.ui,d.list,d.storage);
+        System.out.println(output);
+    }
 
 }

@@ -1,3 +1,4 @@
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -39,3 +40,4 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+

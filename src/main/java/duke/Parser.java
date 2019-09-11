@@ -17,6 +17,7 @@ import java.util.InputMismatchException;
  * @see Command
  */
 public class Parser {
+    String stringCommand;
 
     /**
      * Default constructor for duke.Parser.
@@ -31,27 +32,82 @@ public class Parser {
      * @throws InputMismatchException duke.command.Command is not recognised
      */
     public Command parse(String stringCommand) throws InputMismatchException, DateTimeException {
-        if (stringCommand.equalsIgnoreCase("bye")) {
-            return new ByeCommand(stringCommand);
-        } else if (stringCommand.equalsIgnoreCase("list")) {
-            return new ListCommand(stringCommand);
-        } else {
-            String[] commandSplit = stringCommand.split(" ");
-            String deadline = "deadline";
-            String event = "event";
-            String todo = "todo";
-            if (commandSplit[0].equalsIgnoreCase("done")) {
-                return new DoneCommand(stringCommand);
-            } else if (commandSplit[0].equalsIgnoreCase("find")) {
-                return new FindCommand(stringCommand);
-            } else if (commandSplit[0].equalsIgnoreCase("delete")) {
-                return new DeleteCommand(stringCommand);
-            } else if (commandSplit[0].equalsIgnoreCase(deadline) || commandSplit[0].equalsIgnoreCase(event)
-                    || commandSplit[0].equalsIgnoreCase(todo)) {
-                return new AddCommand(stringCommand);
-            } else {
+        this.stringCommand = stringCommand;
+
+        String[] commandSplitBySpaces = stringCommand.split(" ");
+        switch(commandSplitBySpaces[0]) {
+            case "bye":
+                return createByeCommand(commandSplitBySpaces);
+            case "list":
+                return createListCommand(commandSplitBySpaces);
+            case "done":
+                return createDoneCommand(commandSplitBySpaces);
+            case "find":
+                return createFindCommand(commandSplitBySpaces);
+            case "delete":
+                return createDeleteCommand(commandSplitBySpaces);
+            case "deadline":
+            case "event":
+            case "todo":
+                return createAddCommand(commandSplitBySpaces);
+            default:
                 throw new InputMismatchException("I'm sorry, but I don't know what that means :-(");
-            }
         }
+    }
+
+    private Command createListCommand(String[] commandSplitBySpaces) throws InputMismatchException{
+        if(commandSplitBySpaces.length != 1) {
+            throw new InputMismatchException("I'm sorry, are you trying to call \"list\"?");
+        }
+        return new ListCommand(commandSplitBySpaces);
+    }
+
+    private Command createByeCommand(String[] commandSplitBySpaces) throws InputMismatchException{
+        if(commandSplitBySpaces.length != 1) {
+            throw new InputMismatchException("I'm sorry, are you trying to call \"bye\"?");
+        }
+        return new ByeCommand(commandSplitBySpaces);
+    }
+
+    private Command createDoneCommand(String[] commandSplitBySpaces) throws InputMismatchException{
+        if (commandSplitBySpaces.length != 2) {
+            throw new InputMismatchException("I'm sorry, are you trying to call \"done \\number\" ?");
+        }
+        return new DoneCommand(commandSplitBySpaces);
+    }
+
+    private Command createDeleteCommand(String[] commandSplitBySpaces) throws InputMismatchException{
+        if (commandSplitBySpaces.length != 2) {
+            throw new InputMismatchException("I'm sorry, are you trying to call \"delete \\number\" ?");
+        }
+        return new DeleteCommand(commandSplitBySpaces);
+    }
+
+    private Command createFindCommand(String[] commandSplitBySpaces) throws InputMismatchException{
+        if (commandSplitBySpaces.length != 2) {
+            throw new InputMismatchException("I'm sorry, are you trying to call \"find \\number\" ?");
+        }
+        return new FindCommand(commandSplitBySpaces);
+    }
+
+    private Command createAddCommand(String[] commandSplitBySpaces) throws InputMismatchException{
+        if (commandSplitBySpaces.length == 1) {
+            throw new InputMismatchException("The description cannot be empty");
+        }
+
+        String[] detail;
+        switch (commandSplitBySpaces[0]) {
+            case "deadline":
+                String commandWithoutDeadline = stringCommand.substring("deadline".length()).trim();
+                detail = commandWithoutDeadline.split(" /by ");
+                return new AddCommand("deadline", detail);
+            case "todo":
+                return new AddCommand("todo", commandSplitBySpaces);
+            case "event":
+                String commandWithoutEvent = stringCommand.substring("event".length()).trim();
+                detail = commandWithoutEvent.split(" /at ");
+                return new AddCommand("event", detail);
+        }
+        return null;
     }
 }

@@ -54,9 +54,10 @@ public class Duke {
         //assert isTestForAssertion = false;
             try {
                 Command command = new Parser().parse(input);
+                assert command != null;
                 output = command.execute(taskList, ui, storage);
             } catch (InputMismatchException | IllegalArgumentException |
-                    ArrayIndexOutOfBoundsException | DateTimeException e) {
+                    IndexOutOfBoundsException | DateTimeException e) {
                 output = ui.printErrorMessage(e.getMessage());
             }
 

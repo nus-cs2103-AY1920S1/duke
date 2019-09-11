@@ -28,16 +28,6 @@ public class TaskList {
     }
 
     /**
-     * Checks the list of tasks.
-     * @throws IllegalArgumentException list is called with 0 items
-     */
-    public void list() throws IllegalArgumentException {
-        if (tasks.size() == 0) {
-            throw new IllegalArgumentException("Nothing found in list");
-        }
-    }
-
-    /**
      * Adds a task into list of task.
      * @param task task to be added
      */
@@ -47,12 +37,9 @@ public class TaskList {
 
     /**
      * Sets task at number to be done in task list.
-     * @throws IndexOutOfBoundsException index is less than 0 or greater than task size
+     * @param number number for task to be deleted
      */
-    public void done(int number) throws IndexOutOfBoundsException {
-        if (number > tasks.size() || number <= 0) {
-            throw new IndexOutOfBoundsException("The task number does not exist.");
-        }
+    public void done(int number) {
         Task task = tasks.get(number - 1);
         task.setDone();
     }
@@ -60,13 +47,9 @@ public class TaskList {
     /**
      * Deletes duke.task.Task at number in task list.
      * @param number number for task to be deleted
-     * @throws IndexOutOfBoundsException index is less than 0 or greater than task size
      */
-    public void delete(int number) throws IndexOutOfBoundsException {
-        if (number > tasks.size() || number <= 0) {
-            throw new IndexOutOfBoundsException("The task number does not exist.");
-        }
-        Task task = tasks.get(number - 1);
-        tasks.remove(number - 1);
+    public void delete(int number) {
+        Task task = tasks.get(number);
+        tasks.remove(number);
     }
 }

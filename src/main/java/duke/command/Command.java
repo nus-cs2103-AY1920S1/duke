@@ -19,13 +19,14 @@ import duke.Ui;
 
 public abstract class Command {
     String stringCommand;
+    String[] commandSplitBySpaces;
 
     /**
-     * Constructor for duke.command.ByeCommand
-     * @param stringCommand String representation of the user input
+     * Constructor for all commands
+     * @param commandSplitBySpaces String representation of the user input
      */
-    public Command(String stringCommand) {
-        this.stringCommand = stringCommand;
+    Command(String[] commandSplitBySpaces) {
+        this.commandSplitBySpaces = commandSplitBySpaces;
     }
 
     /**

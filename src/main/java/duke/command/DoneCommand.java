@@ -5,6 +5,8 @@ import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.InputMismatchException;
+
 /**
  * Represents a command which changes duke.task.Task specified in an index in the Tasklist to be done.
  * @see TaskList
@@ -12,14 +14,12 @@ import duke.Ui;
  */
 
 public class DoneCommand extends Command {
-    String[] commandSplit = super.stringCommand.split(" ");
-
     /**
      * Constructor for duke.command.DoneCommand.
-     * @param stringCommand String representation of the user input
+     * @param commandSplitBySpaces String representation of the user input
      */
-    public DoneCommand(String stringCommand) {
-        super(stringCommand);
+    public DoneCommand(String[] commandSplitBySpaces) {
+        super(commandSplitBySpaces);
     }
 
     /**
@@ -30,12 +30,17 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String outputString = "";
-        int index = Integer.parseInt(commandSplit[1]);
-        outputString = outputString + ui.printDoneMessage();
-        taskList.done(index);
-        outputString = outputString + ui.printTask(taskList.getTasks().get(index-1));
-        return outputString;
+        try {
+            String outputString = "";
+            int index = Integer.parseInt(super.commandSplitBySpaces[1]);
+            outputString = outputString + ui.printDoneMessage();
+            taskList.done(index);
+            outputString = outputString + ui.printTask(taskList.getTasks().get(index - 1));
+            return outputString;
+        } catch (IndexOutOfBoundsException e) {
+            throw new InputMismatchException("I'm sorry, the task number does not exist?");
+        } catch (NumberFormatException e) {
+            throw new InputMismatchException("I'm sorry, can you please write a number after done?");
+        }
     }
-
 }

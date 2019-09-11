@@ -11,10 +11,10 @@ import duke.Ui;
 public class ByeCommand extends Command{
     /**
      * Constructor for duke.command.ByeCommand
-     * @param stringCommand String representation of the user input
+     * @param commandSplitBySpaces String representation of the user input
      */
-    public ByeCommand(String stringCommand){
-        super(stringCommand);
+    public ByeCommand(String[] commandSplitBySpaces){
+        super(commandSplitBySpaces);
     }
 
     /**

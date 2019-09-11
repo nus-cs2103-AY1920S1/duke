@@ -5,6 +5,8 @@ import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.InputMismatchException;
+
 /**
  * Represents a command which deletes duke.task.Task specified in an index in the Tasklist.
  * @see TaskList
@@ -12,14 +14,12 @@ import duke.Ui;
  */
 
 public class DeleteCommand extends Command {
-    String[] commandSplit = super.stringCommand.split(" ");
-
     /**
      * Constructor for duke.command.DeleteCommand.
-     * @param stringCommand
+     * @param commandSplitBySpaces
      */
-    public DeleteCommand(String stringCommand) {
-        super(stringCommand);
+    public DeleteCommand(String[] commandSplitBySpaces) {
+        super(commandSplitBySpaces);
     }
 
     /**
@@ -30,13 +30,19 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        String outputString = "";
-        int index = Integer.parseInt(commandSplit[1]);
-        outputString = outputString + ui.printDeletedMessage();
-        taskList.delete(index);
-        outputString = outputString + ui.printNumberOfTasks(taskList);
-        outputString = outputString + ui.printTask(taskList.getTasks().get(index-1));
-        return outputString;
+        try {
+            String outputString = "";
+            int index = Integer.parseInt(commandSplitBySpaces[1]);
+            outputString = outputString + ui.printDeletedMessage();
+            outputString = outputString + ui.printTask(taskList.getTasks().get(index-1));
+            taskList.delete(index-1);
+            outputString = outputString + ui.printNumberOfTasks(taskList);
+            outputString = outputString + ui.printTaskList(taskList);
+            return outputString;
+        } catch (IndexOutOfBoundsException e) {
+            throw new InputMismatchException("I'm sorry, the task number does not exist?");
+        } catch (NumberFormatException e) {
+            throw new InputMismatchException("I'm sorry, can you please write a number after delete?");
+        }
     }
-
 }

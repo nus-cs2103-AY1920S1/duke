@@ -55,7 +55,7 @@ public class Ui {
      * @param error
      */
     public String printErrorMessage(String error) {
-        return "OOPS!!! " + error + "\n";
+        return "Oops!!! " + error + "\n";
     }
 
     /**

@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Deadline class is a subclass of Task class.
@@ -40,9 +41,9 @@ public class Deadline extends Task {
      * @param dueDateTime dateTime String of the task.
      * @param isDone isDone Boolean status of the task.
      */
-    public Deadline(String description, String dueDateTime, Boolean isDone, LocalDate createdDate,
-                    LocalDate lastModified) {
-        super(description, isDone, createdDate, lastModified);
+    public Deadline(String description, String dueDateTime, Boolean isDone, LocalDateTime createDateTime,
+                    LocalDateTime lastModifiedDateTime) {
+        super(description, isDone, createDateTime, lastModifiedDateTime);
         this.dueDateTime = dueDateTime;
 
         if (!dueDateTime.contains("of")) {
@@ -80,8 +81,8 @@ public class Deadline extends Task {
     @Override
     public String toSaveString() {
 
-        return ("D" + super.toSaveString() + " | " + this.getDueDateTime() + " | " + this.getCreatedDate().toString()
-        + " | " + this.getLastModifiedDate().toString());
+        return ("D" + super.toSaveString() + " | " + this.getDueDateTime() + " | " + this.getCreateDateTime().toString()
+        + " | " + this.getLastModifiedDateTime().toString());
     }
 
     /**

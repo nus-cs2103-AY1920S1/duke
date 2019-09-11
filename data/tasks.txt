@@ -1,5 +1,4 @@
 event type | isDone | description | extra description | dateCreated | lastModified
-T | 0 | A |  dummyExtraDescriptionForTodo | 2019-09-10 | 2019-09-10
-T | 0 | B |  dummyExtraDescriptionForTodo | 2019-09-10 | 2019-09-10
-E | 0 | run | Tampines Hub | 2019-09-10 | 2019-09-10
-D | 0 | CS2103 Assignment | 21st of December 2009, 9.15am | 2019-09-10 | 2019-09-10
+T | 1 | A |  dummyExtraDescriptionForTodo | 2019-09-11T15:25:54.985928300 | 2019-09-11T15:27:11.337107
+D | 0 | B | 29th of June 2018, 9.18am | 2019-09-11T15:26:08.989970100 | 2019-09-11T15:26:08.989970100
+E | 0 | event | Home | 2019-09-11T15:26:19.018073600 | 2019-09-11T15:26:19.018073600

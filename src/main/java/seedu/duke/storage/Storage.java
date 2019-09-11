@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -93,8 +94,8 @@ public class Storage {
         ArrayList<String> inputsFromFile = new ArrayList<>();
         String description = "";
         String extraDescription = "";
-        String createdDate = "";
-        String lastModified = "";
+        String createDateTime = "";
+        String lastModifiedDateTime = "";
         ArrayList<Task> tasks = new ArrayList<>();
 
         // Creates a scanner object to read the txt file from filePath.
@@ -124,12 +125,12 @@ public class Storage {
                         isDone = false;
                     }
                     description = words[2].trim();
-                    createdDate = words[4].trim();
-                    lastModified = words[5].trim();
+                    createDateTime = words[4].trim();
+                    lastModifiedDateTime = words[5].trim();
 
 
-                    Todo newTodo = new Todo(description, isDone, LocalDate.parse(createdDate),
-                            LocalDate.parse(lastModified));
+                    Todo newTodo = new Todo(description, isDone, LocalDateTime.parse(createDateTime),
+                            LocalDateTime.parse(lastModifiedDateTime));
                     tasks.add(newTodo);
                     break;
 
@@ -143,11 +144,11 @@ public class Storage {
                     }
                     description = words[2].trim();
                     extraDescription = words[3].trim();
-                    createdDate = words[4].trim();
-                    lastModified = words[5].trim();
+                    createDateTime = words[4].trim();
+                    lastModifiedDateTime = words[5].trim();
 
-                    Event newEvent = new Event(description, extraDescription, isDone, LocalDate.parse(createdDate),
-                            LocalDate.parse(lastModified));
+                    Event newEvent = new Event(description, extraDescription, isDone, LocalDateTime.parse(createDateTime),
+                            LocalDateTime.parse(lastModifiedDateTime));
                     tasks.add(newEvent);
                     break;
 
@@ -161,11 +162,11 @@ public class Storage {
                     }
                     description = words[2].trim();
                     extraDescription = words[3].trim();
-                    createdDate = words[4].trim();
-                    lastModified = words[5].trim();
+                    createDateTime = words[4].trim();
+                    lastModifiedDateTime = words[5].trim();
 
                     Deadline newDeadline = new Deadline(description, extraDescription, isDone,
-                            LocalDate.parse(createdDate), LocalDate.parse(lastModified));
+                            LocalDateTime.parse(createDateTime), LocalDateTime.parse(lastModifiedDateTime));
                     tasks.add(newDeadline);
                     break;
 

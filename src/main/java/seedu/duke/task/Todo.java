@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Todo class is a subclass of Task class.
@@ -24,9 +25,9 @@ public class Todo extends Task {
      * @param description Description String ot the task.
      * @param isDone isDone status of the task.
      */
-    public Todo(String description, Boolean isDone, LocalDate dateCreated, LocalDate lastModified) {
+    public Todo(String description, Boolean isDone, LocalDateTime dateCreateDateTime, LocalDateTime lastModifiedDateTime) {
 
-        super(description, isDone, dateCreated, lastModified);
+        super(description, isDone, dateCreateDateTime, lastModifiedDateTime);
     }
 
     /**
@@ -52,7 +53,7 @@ public class Todo extends Task {
     @Override
     public String toSaveString() {
         return ("T" + super.toSaveString() + " | " + " dummyExtraDescriptionForTodo"
-        + " | " + this.getCreatedDate().toString() + " | " + this.getLastModifiedDate().toString());
+        + " | " + this.getCreateDateTime().toString() + " | " + this.getLastModifiedDateTime().toString());
     }
 }
 

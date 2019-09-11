@@ -93,6 +93,6 @@ public class Duke {
             }
         }
         assert !reply.isEmpty() : "Reply should not be empty";
-        return ui.showOpeningLine() + reply + ui.showClosingLine();
+        return reply;
     }
 }

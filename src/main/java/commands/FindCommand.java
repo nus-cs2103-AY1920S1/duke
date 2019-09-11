@@ -55,10 +55,10 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String[] keywords = commandArr[1].split(" ");
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        StringBuilder store = new StringBuilder("     Here are the matching tasks in your list:\n");
+        StringBuilder store = new StringBuilder("Here are the matching tasks in your list:");
         for (int i = 0; i < taskLst.size(); i++) {
             if (containsKeyWords(taskLst.get(i).getDescription(), keywords)) {
-                store.append(String.format("     %d.%s\n",
+                store.append(String.format("\n%d.%s",
                         i + 1, taskLst.get(i)));
             }
         }

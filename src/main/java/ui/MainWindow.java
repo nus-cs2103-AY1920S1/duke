@@ -4,6 +4,7 @@ import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 
 import duke.Duke;
+import duke.Ui;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -41,6 +42,9 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("Hello i'm Duke! What can i do for you?", dukeImage)
+        );
     }
 
     /**

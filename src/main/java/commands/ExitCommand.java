@@ -39,7 +39,7 @@ public class ExitCommand extends Command {
         } catch (IOException e) {
             ui.showSavingError(e.getMessage());
         }
-        return "     Bye. Hope to see you again soon!\n";
+        return "Bye. Hope to see you again soon!";
     }
 
 }

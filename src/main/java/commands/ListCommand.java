@@ -35,9 +35,9 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> taskLst = tasks.getTaskLst();
-        StringBuilder store= new StringBuilder("     Here are the tasks in your list:\n");
+        StringBuilder store= new StringBuilder("Here are the tasks in your list:");
         for (int i = 0; i < taskLst.size(); i++) {
-            store.append(String.format("     %d.%s\n",
+            store.append(String.format("\n%d.%s",
                     i + 1, taskLst.get(i)));
         }
         return store.toString();

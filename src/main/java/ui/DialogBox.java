@@ -16,6 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -26,9 +30,9 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private Circle displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String color, Paint textFill) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,9 +41,40 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
-        displayPicture.setImage(img);
+        dialog.setTextFill(textFill);
+        dialog.setStyle("-fx-background-color:" + color + "; -fx-background-radius: 20");
+        getCircleImg(img, displayPicture);
+//        displayPicture.setImage(img);
+//        // Set the height and width of the pictures
+//        displayPicture.setFitWidth(80.0);
+//        displayPicture.setFitHeight(80.0);
+//        // Make the user's and Duke's profile pictures appear as circles
+//        displayPicture.setClip(new Circle(40.0, 40.0, 40.0, Paint.valueOf("white")));
+    }
+
+    /**
+     * Returns a DialogBox representing the user input.
+     *
+     * @param text the user input.
+     * @param img user's profile image.
+     * @return DialogBox for user.
+     */
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img, "#94EFD1", Color.BLACK);
+    }
+
+    /**
+     * Returns a DialogBox representing Duke's response.
+     *
+     * @param text Duke's response.
+     * @param img Duke's profile image.
+     * @return DialogBox for Duke.
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img, "#216168", Color.WHITE);
+        db.flip();
+        return db;
     }
 
     /**
@@ -52,13 +87,14 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+    /**
+     * Obtain a circular image by filling a circle with image.
+     *
+     * @param img image to fill the circle.
+     * @param circle circle which will be filled by the image.
+     */
+    public void getCircleImg(Image img, Circle circle) {
+        circle.setStroke(Color.TEAL);
+        circle.setFill(new ImagePattern(img));
     }
 }

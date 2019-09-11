@@ -50,8 +50,8 @@ public class AddCommand extends Command {
         if (commandArr[0].equals("todo")) {
             // Add a ToDo task
             if (commandArr.length <= 1) {
-                throw new DukeException("     \u2639 OOPS!!! "
-                        + "The description of a todo cannot be empty.\n");
+                throw new DukeException("\u2639 OOPS!!! "
+                        + "The description of a todo cannot be empty.");
             }
             taskLst.add(new ToDo(commandArr[1], false));
         } else if (commandArr[0].equals("deadline") || commandArr[0].equals("event")) {
@@ -62,19 +62,19 @@ public class AddCommand extends Command {
                 fullCommand = commandArr[1].split(" /at ");
             }
             if (fullCommand.length <= 1) {
-                String msg = "     \u2639 Either the description of " + (commandArr[0].equals("deadline")
-                        ? "a deadline " : "an event ") + "or its date-time is not provided.\n";
+                String msg = "\u2639 Either the description of " + (commandArr[0].equals("deadline")
+                        ? "a deadline " : "an event ") + "or its date-time is not provided.";
                 throw new DukeException(msg);
             }
             String description = fullCommand[0];
             String userDateTimeString = fullCommand[1];
             LocalDateTime localDateTime = Parser.parseDateTime(userDateTimeString);
             if (localDateTime == null) {
-                String dateInstruction = "     Example date formats allowed: 07101997, 07/10/1997, " +
+                String dateInstruction = "Example date formats allowed: 07101997, 07/10/1997, " +
                         "07 10 1997, 7 October 1997.\n";
-                String timeInstruction = "     Example time formats allowed: 8:39AM, 0839.\n";
-                String dtInstruction = "     Example date-times allowed: 07/10/1997 0839, 7 October 8:39AM.\n";
-                String msg = "     \u2639 You have entered an invalid date-time format!\n"
+                String timeInstruction = "Example time formats allowed: 8:39AM, 0839.\n";
+                String dtInstruction = "Example date-times allowed: 07/10/1997 0839, 7 October 8:39AM.";
+                String msg = "\u2639 You have entered an invalid date-time format!\n"
                         + dateInstruction + timeInstruction + dtInstruction;
                 throw new DukeException(msg);
             }
@@ -85,11 +85,11 @@ public class AddCommand extends Command {
             }
         } else {
             // Invalid command being supplied by the user
-            throw new DukeException("     \u2639 OOPS!!! I'm sorry, "
-                    + "but I don't know what that means :-(\n");
+            throw new DukeException("\u2639 OOPS!!! I'm sorry, "
+                    + "but I don't know what that means :-(");
         }
-        return String.format("     Got it. I've added this task:\n       %s\n"
-                        + "     Now you have %d tasks in the list.\n",
+        return String.format("Got it. I've added this task:\n       %s\n"
+                        + "Now you have %d tasks in the list.",
             taskLst.get(taskLst.size() - 1), taskLst.size());
     }
 

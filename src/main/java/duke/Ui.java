@@ -12,18 +12,6 @@ public class Ui {
     private String hrzLine = "    ____________________________________________________________\n";
 
     /**
-     * Prints a welcome message.
-     *
-     * @return String welcome message.
-     */
-    String showWelcome() {
-        String store = hrzLine;
-        store += "     Hello! I'm Duke\n     What can I do for you?\n";
-        store += String.format("%s\n", hrzLine);
-        return store;
-    }
-
-    /**
      * Prints the Opening Line.
      */
     String showOpeningLine() {

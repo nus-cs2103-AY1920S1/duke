@@ -187,7 +187,6 @@ public class Storage {
     public void updateComplete(String input) {
         try {
             BufferedReader br = new BufferedReader(new FileReader(filePath));
-            
             String[] inputs = input.split(" ");
             int index = Integer.parseInt(inputs[1]) - 1;
             String line = null;

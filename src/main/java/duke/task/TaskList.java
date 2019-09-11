@@ -57,7 +57,8 @@ public class TaskList {
     public Task doTask(String input) throws DukeException {
         try {
             int itemIndex = Integer.parseInt(input);
-            if (itemIndex > tasks.size() || itemIndex < 1) {
+            boolean isWithinSize = itemIndex > tasks.size() || itemIndex < 1;
+            if (isWithinSize) {
                 throw new DukeListException("The task number specified is not within the list.");
             } else {
                 Task currTask = tasks.get(itemIndex - 1);
@@ -89,7 +90,8 @@ public class TaskList {
     public Task deleteTask(String input) throws DukeException {
         try {
             int deleteIndex = Integer.parseInt(input);
-            if (deleteIndex > tasks.size() || deleteIndex < 1) {
+            boolean isWithinSize = deleteIndex > tasks.size() || deleteIndex < 1;
+            if (isWithinSize) {
                 throw new DukeListException("The task number specified is not within the list.");
             }
             Task deleted = tasks.remove(deleteIndex - 1);

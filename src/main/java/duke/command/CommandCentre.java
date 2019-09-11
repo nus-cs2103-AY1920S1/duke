@@ -16,6 +16,8 @@ import java.util.Optional;
 
 public class CommandCentre {
     private HashMap<String, Command> commands;
+    private TaskList taskList;
+    private Ui ui;
 
     /**
      * Constructs a CommandCentre and populate it with standard commands.
@@ -25,109 +27,9 @@ public class CommandCentre {
      */
     public CommandCentre(TaskList taskList, Ui ui) {
         commands = new HashMap<>();
-        commands.put("bye", new Command() {
-            public String execute(Optional<String[]> input) throws DukeException {
-                if (input.isEmpty()) {
-                    return ui.showBye();
-                } else {
-                    throw new DukeTaskException("Bye should not have a description.");
-                }
-            }
-
-            @Override
-            public boolean isExit() {
-                return true;
-            }
-        });
-
-        commands.put("list", new Command() {
-            public String execute(Optional<String[]> input) throws DukeException {
-                if (input.isEmpty()) {
-                    return ui.showList(taskList.getTaskList());
-                } else {
-                    throw new DukeTaskException("List should not have a description.");
-                }
-            }
-        });
-
-        commands.put("done", new Command() {
-            public String execute(Optional<String[]> input) throws DukeException {
-                if (input.isPresent()) {
-                    Task doneTask = taskList.doTask(input.get()[0]);
-                    return ui.showCompletedTask(doneTask);
-                } else {
-                    throw new DukeTaskException("The task to be done is not specified.");
-                }
-            }
-        });
-
-        commands.put("todo", new Command() {
-            public String execute(Optional<String[]> input) throws DukeException {
-                if (input.isPresent()) {
-                    Todo todo = new Todo(input.get()[0]);
-                    taskList.addTask(todo);
-                    return ui.showAddedTask(todo, taskList);
-                } else {
-                    throw new DukeTaskException("The description of Todo cannot be empty.");
-                }
-            }
-        });
-
-        commands.put("deadline", new Command() {
-            public String execute(Optional<String[]> input) throws DukeException {
-                if (input.isPresent()) {
-                    if (input.get().length > 2) {
-                        throw new DukeTaskException("There are too many /by in the description.");
-                    } else if (input.get().length < 2) {
-                        throw new DukeTaskException("The description of the deadline is insufficient.");
-                    }
-                    Deadline deadline = new Deadline(input.get()[0], Parser.parseDate(input.get()[1]));
-                    taskList.addTask(deadline);
-                    return ui.showAddedTask(deadline, taskList);
-                } else {
-                    throw new DukeTaskException("The description of a deadline cannot be empty.");
-                }
-            }
-        });
-
-        commands.put("event", new Command() {
-            public String execute(Optional<String[]> input) throws DukeException {
-                if (input.isPresent()) {
-                    if (input.get().length > 2) {
-                        throw new DukeTaskException("There are too many /at in the description.");
-                    } else if (input.get().length < 2) {
-                        throw new DukeTaskException("The description of the deadline is insufficient.");
-                    }
-                    Event event = new Event(input.get()[0], Parser.parseDate(input.get()[1]));
-                    taskList.addTask(event);
-                    return ui.showAddedTask(event, taskList);
-                } else {
-                    throw new DukeTaskException("The description of a event cannot be empty.");
-                }
-            }
-        });
-
-        commands.put("delete", new Command() {
-            public String execute(Optional<String[]> input) throws DukeException {
-                if (input.isPresent()) {
-                    Task deletedTask = taskList.deleteTask(input.get()[0]);
-                    return ui.showDeletedTask(deletedTask, taskList);
-                } else {
-                    throw new DukeTaskException("The task to be deleted is not specified.");
-                }
-            }
-        });
-
-        commands.put("find", new Command() {
-            public String execute(Optional<String[]> input) throws DukeException {
-                if (input.isPresent()) {
-                    TaskList foundList = taskList.findTask(input.get()[0]);
-                    return ui.showFound(foundList);
-                } else {
-                    throw new DukeTaskException("The keyword(s) is not specified.");
-                }
-            }
-        });
+        this.taskList = taskList;
+        this.ui = ui;
+        this.initialiseCommandList();
     }
 
     /**
@@ -142,7 +44,128 @@ public class CommandCentre {
             Command command = commands.get(key);
             return command;
         } else {
-            throw new DukeCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeCommandException("I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private void initialiseCommandList() {
+        this.addByeCommand();
+        this.addListCommand();
+        this.addDoneCommand();
+        this.addTodoCommand();
+        this.addDeadlineCommand();
+        this.addEventCommand();
+        this.addDeleteCommand();
+        this.addFindCommand();
+    }
+
+    private void addByeCommand() {
+        commands.put("bye", new Command() {
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isPresent()) {
+                    throw new DukeTaskException("Bye should not have a description.");
+                }
+                return ui.showBye();
+            }
+
+            @Override
+            public boolean isExit() {
+                return true;
+            }
+        });
+    }
+
+    private void addListCommand() {
+        commands.put("list", new Command() {
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isPresent()) {
+                    throw new DukeTaskException("List should not have a description.");
+                }
+                return ui.showList(taskList.getTaskList());
+            }
+        });
+    }
+
+    private void addDoneCommand() {
+        commands.put("done", new Command() {
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isEmpty()) {
+                    throw new DukeTaskException("The task to be done is not specified.");
+                }
+                Task doneTask = taskList.doTask(input.get()[0]);
+                return ui.showCompletedTask(doneTask);
+            }
+        });
+    }
+
+    private void addTodoCommand() {
+        commands.put("todo", new Command() {
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isEmpty()) {
+                    throw new DukeTaskException("The description of Todo cannot be empty.");
+                }
+                Todo todo = new Todo(input.get()[0]);
+                taskList.addTask(todo);
+                return ui.showAddedTask(todo, taskList);
+            }
+        });
+    }
+
+    private void addDeadlineCommand() {
+        commands.put("deadline", new Command() {
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isEmpty()) {
+                    throw new DukeTaskException("The description of a deadline cannot be empty.");
+                } else if (input.get().length > 2) {
+                    throw new DukeTaskException("There are too many /by in the description.");
+                } else if (input.get().length < 2) {
+                    throw new DukeTaskException("The description of the deadline is insufficient.");
+                }
+                Deadline deadline = new Deadline(input.get()[0], Parser.parseDate(input.get()[1]));
+                taskList.addTask(deadline);
+                return ui.showAddedTask(deadline, taskList);
+            }
+        });
+    }
+
+    private void addEventCommand() {
+        commands.put("event", new Command() {
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isEmpty()) {
+                    throw new DukeTaskException("The description of a event cannot be empty.");
+                } else if (input.get().length > 2) {
+                    throw new DukeTaskException("There are too many /at in the description.");
+                } else if (input.get().length < 2) {
+                    throw new DukeTaskException("The description of the deadline is insufficient.");
+                }
+                Event event = new Event(input.get()[0], Parser.parseDate(input.get()[1]));
+                taskList.addTask(event);
+                return ui.showAddedTask(event, taskList);
+            }
+        });
+    }
+
+    private void addDeleteCommand() {
+        commands.put("delete", new Command() {
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isEmpty()) {
+                    throw new DukeTaskException("The task to be deleted is not specified.");
+                }
+                Task deletedTask = taskList.deleteTask(input.get()[0]);
+                return ui.showDeletedTask(deletedTask, taskList);
+            }
+        });
+    }
+
+    private void addFindCommand() {
+        commands.put("find", new Command() {
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isEmpty()) {
+                    throw new DukeTaskException("The keyword(s) is not specified.");
+                }
+                TaskList foundList = taskList.findTask(input.get()[0]);
+                return ui.showFound(foundList);
+            }
+        });
     }
 }

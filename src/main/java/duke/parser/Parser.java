@@ -42,19 +42,17 @@ public class Parser {
         String[] userInput = input.split(" ", 2);
         if (userInput.length == 1) {
             return Optional.empty();
-        } else {
-            String desc = userInput[1];
-            if (desc.contains("/by")) {
-                String[] keywords = desc.split(" /by ");
-                return Optional.of(keywords);
-            } else if (desc.contains("/at")) {
-                String[] keywords = desc.split(" /at ");
-                return Optional.of(keywords);
-            } else {
-                return Optional.of(new String[]{desc});
-            }
         }
-
+        String desc = userInput[1];
+        if (desc.contains("/by")) {
+            String[] keywords = desc.split(" /by ");
+            return Optional.of(keywords);
+        } else if (desc.contains("/at")) {
+            String[] keywords = desc.split(" /at ");
+            return Optional.of(keywords);
+        } else {
+            return Optional.of(new String[]{desc});
+        }
     }
 
     /**

@@ -38,7 +38,16 @@ shadowJar {
     archiveAppendix = null
 }
 
+sourceSets {
+    test {
+        java {
+            srcDirs = ["src/test/java"]
+        }
+    }
+}
+
 test {
+    failFast = true
     useJUnitPlatform()
 }
 

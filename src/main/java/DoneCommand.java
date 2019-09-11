@@ -33,9 +33,9 @@ public class DoneCommand extends Command {
         try {
             storage.updateTaskInFile(doIndex);
             return ("Nice! I've marked this task as done:\n  "
-                    + chosenTask.toString());
+                    + chosenTask.toString() + "\n");
         } catch (IOException ex) {
-            return "Can't update task in the file";
+            return "Can't update task in the file\n";
         }
     }
 }

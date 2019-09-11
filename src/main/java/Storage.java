@@ -28,41 +28,12 @@ public class Storage {
         File file = new File(filePath);
         Scanner s;
 
-        assert file.exists() : "No save file exists";
-
         try {
             s = new Scanner(file);
             while (s.hasNext()) {
                 String taskString = s.nextLine();
-                String taskType = taskString.substring(0, 1);
-                String isDone = taskString.substring(4, 5);
-                if (taskType.equals("T")) {
-                    String desc = taskString.substring(8);
-                    ToDo task = new ToDo(desc);
-                    if (isDone.equals("1")) {
-                        task.markAsDone();
-                    }
-                    list.add(task);
-                } else {
-                    int i = taskString.lastIndexOf("|");
-                    String desc = taskString.substring(8, i - 1);
-                    String time = taskString.substring(i + 2, i + 12) + taskString.substring(i + 13);
-                    DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm");
-                    LocalDateTime dateTime = LocalDateTime.parse(time, format);
-                    if (taskType.equals("D")) {
-                        Deadline task = new Deadline(desc, dateTime);
-                        if (isDone.equals("1")) {
-                            task.markAsDone();
-                        }
-                        list.add(task);
-                    } else {
-                        Event task = new Event(desc, dateTime);
-                        if (isDone.equals("1")) {
-                            task.markAsDone();
-                        }
-                        list.add(task);
-                    }
-                }
+                Task task = evaluateLineAndGetTask(taskString);
+                list.add(task);
             }
         } catch (FileNotFoundException e) {
             throw new DukeException("Loading Error");
@@ -89,9 +60,11 @@ public class Storage {
             lineNum++;
         }
         FileWriter fw = new FileWriter(filePath);
+        //write all but the last task to file to avoid adding extra line separator
         for (int i = 0; i < list.size() - 1; i++) {
             fw.write(list.get(i) + System.lineSeparator());
         }
+        //write last task to file
         fw.write(list.get(list.size() - 1));
         fw.close();
     }
@@ -141,5 +114,39 @@ public class Storage {
         }
 
         fw.close();
+    }
+
+    //evaluates a line in the saved file to determine whether it is a todo, deadline or event,
+    //and creates the respective task object to be returned so that it can be saved in the list
+    private Task evaluateLineAndGetTask(String line) {
+        String taskType = line.substring(0, 1);
+        String isDone = line.substring(4, 5);
+        if (taskType.equals("T")) {
+            String desc = line.substring(8);
+            ToDo task = new ToDo(desc);
+            if (isDone.equals("1")) {
+                task.markAsDone();
+            }
+            return task;
+        } else {
+            int i = line.lastIndexOf("|");
+            String desc = line.substring(8, i - 1);
+            String time = line.substring(i + 2, i + 12) + line.substring(i + 13);
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(time, format);
+            if (taskType.equals("D")) {
+                Deadline task = new Deadline(desc, dateTime);
+                if (isDone.equals("1")) {
+                    task.markAsDone();
+                }
+                return task;
+            } else {
+                Event task = new Event(desc, dateTime);
+                if (isDone.equals("1")) {
+                    task.markAsDone();
+                }
+                return task;
+            }
+        }
     }
 }

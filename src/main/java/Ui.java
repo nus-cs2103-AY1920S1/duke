@@ -30,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Prints welcome message from Duke.
+     * Returns welcome message from Duke.
      */
     public void showWelcome() {
         String logo = " ____        _        \n"
@@ -38,8 +38,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+        System.out.println("Hello from\n" + logo + "Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     /**
@@ -56,5 +55,13 @@ public class Ui {
      */
     public void showError(String message) {
         System.out.println(message);
+    }
+
+    /**
+     * Prints the error message.
+     * @param reply prints the reply message.
+     */
+    public void showReply(String reply) {
+        System.out.print(reply);
     }
 }

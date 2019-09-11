@@ -36,9 +36,9 @@ public class DeleteCommand extends Command {
             storage.deleteFromFile(deleteIndex);
             return "Noted. I've removed this task:\n  " + chosenTask.toString() + "\n"
                     + "Now you have " + tasks.tasks.size()
-                    + (tasks.tasks.size() == 1 ? " task" : " tasks") + " in the list.";
+                    + (tasks.tasks.size() == 1 ? " task" : " tasks") + " in the list.\n";
         } catch (IOException ex) {
-            return "Error when deleting task from saved file";
+            return "Error when deleting task from saved file\n";
         }
     }
 }

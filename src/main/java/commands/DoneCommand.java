@@ -19,14 +19,14 @@ public class DoneCommand extends TaskCommands {
     /**
      * Overridden Method to execute the DoneCommand.
      *
-     * @param tasks   list of tasks
+     * @param list   list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      * @throws DukeException If problem encountered with file update
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
-        ((TaskList) tasks).markTask(args); //will mark task.task Obj as done
-        storage.updateTaskFile(tasks);
+    public void execute(DukeList list, Ui ui, Storage storage) throws DukeException {
+        ((TaskList) list).markTask(args); //will mark task.task Obj as done
+        storage.updateTaskFile(list);
     }
 }

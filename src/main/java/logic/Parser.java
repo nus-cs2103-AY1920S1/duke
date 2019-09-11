@@ -4,16 +4,16 @@ import commands.AddContactCommand;
 import commands.Command;
 import commands.ContactListCommand;
 import commands.DeadlineCommand;
-import commands.DeleteCommand;
+import commands.DeleteContactCommand;
+import commands.DeleteTaskCommand;
 import commands.DoneCommand;
 import commands.EventCommand;
 import commands.ExitCommand;
+import commands.FindContactCommand;
 import commands.FindTaskCommand;
 import commands.TaskListCommand;
 import commands.ToDoCommand;
 import commands.UnknownCommand;
-import contacts.Contact;
-import task.Task;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
@@ -80,23 +80,23 @@ public class Parser {
      * Attempts to convert input string into an int.
      *
      * @param str      String to be parsed
-     * @param taskList List of Tasks
+     * @param dukeList List of valid objects
      * @return Int of Task in the TaskList
      * @throws DukeException If task number doesnt exist
      */
-    public static int parseTaskInt(String str, List<Task> taskList) throws DukeException {
-        int taskInt;
+    public static int parseInt(String str, List dukeList) throws DukeException {
+        int listInt;
 
         try {
-            taskInt = Integer.parseInt(str);
-            if (taskInt > taskList.size() || taskInt <= 0) {
-                throw new DukeException(DukeStrings.NONEXISTENT_TASK_NUMBER);
+            listInt = Integer.parseInt(str);
+            if (listInt > dukeList.size() || listInt <= 0) {
+                throw new DukeException(DukeStrings.NONEXISTENT_NUMBER);
             }
         } catch (NumberFormatException e) {
-            throw new DukeException(DukeStrings.INVALID_TASK_NUMBER);
+            throw new DukeException(DukeStrings.INVALID_NUMBER);
         }
 
-        return taskInt;
+        return listInt;
     }
 
     /**
@@ -114,19 +114,17 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new TaskListCommand();
-        case "contacts":
-            return new ContactListCommand();
         case "done":
             try {
                 return new DoneCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(DukeStrings.INVALID_TASK_NUMBER);
+                throw new DukeException(DukeStrings.INVALID_NUMBER);
             }
         case "delete":
             try {
-                return new DeleteCommand(strSplit[1]);
+                return new DeleteTaskCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new DukeException(DukeStrings.INVALID_TASK_NUMBER);
+                throw new DukeException(DukeStrings.INVALID_NUMBER);
             }
         case "todo":
             try {
@@ -152,12 +150,25 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(DukeStrings.FIND_EMPTY);
             }
+        case "contacts":
+            return new ContactListCommand();
         case "addContact":
             try {
-                System.out.println("Adding contact: " + strSplit[1]);
                 return new AddContactCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(DukeStrings.CONTACT_EMPTY);
+            }
+        case "findContact":
+            try {
+                return new FindContactCommand(strSplit[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(DukeStrings.FIND_EMPTY);
+            }
+        case "deleteContact":
+            try {
+                return new DeleteContactCommand(strSplit[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(DukeStrings.INVALID_CONTACT_NUMBER);
             }
         default:
             return new UnknownCommand();

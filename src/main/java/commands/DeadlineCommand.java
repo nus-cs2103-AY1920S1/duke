@@ -1,6 +1,11 @@
 package commands;
 
-import logic.*;
+import logic.DukeException;
+import logic.DukeList;
+import logic.DukeStrings;
+import logic.Parser;
+import logic.Storage;
+import logic.Ui;
 import task.Deadlines;
 import task.Task;
 
@@ -19,13 +24,13 @@ public class DeadlineCommand extends TaskCommands {
     /**
      * Overridden Method to execute the DeadlineCommand.
      *
-     * @param tasks   list of tasks
+     * @param list   list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      * @throws DukeException If command arguments is invalid
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(DukeList list, Ui ui, Storage storage) throws DukeException {
         String[] splitStr = args.split("/by");
 
         if (splitStr.length == 1) {
@@ -36,8 +41,8 @@ public class DeadlineCommand extends TaskCommands {
 
         LocalDateTime deadline = Parser.parseDateTime(splitStr[1].trim());
         Task task = new Deadlines(false, splitStr[0].trim(), deadline);
-        tasks.add(task);
-        storage.updateTaskFile(tasks);
+        list.add(task);
+        storage.updateTaskFile(list);
     }
 
 

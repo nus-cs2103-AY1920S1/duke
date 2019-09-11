@@ -2,8 +2,10 @@ package logic;
 
 public class DukeStrings {
     public static final String CONTACT_EMPTY = "☹ OOPS!!! You cannot add an empty contact";
-    public static final String INVALID_TASK_NUMBER = "Please state a valid task number";
-    public static final String NONEXISTENT_TASK_NUMBER = "That task number does not exist, please try again";
+    public static final String CONTACT_WRONG_FORMAT = "Invalid Contact Format"
+            + "\nPlease use [{name}, {relationship}, {Contact Number}, {Email}]";
+    public static final String INVALID_NUMBER = "Please state a valid number";
+    public static final String NONEXISTENT_NUMBER = "That number does not exist on the list, please try again";
     public static final String TODO_EMPTY = "☹ OOPS!!! The description of a todo cannot be empty";
     public static final String DEADLINE_EMPTY = "☹ OOPS!!! The description of a deadline cannot be empty";
     public static final String EVENT_EMPTY = "☹ OOPS!!! The description of an event cannot be empty";
@@ -16,4 +18,6 @@ public class DukeStrings {
             + "Please use DD/MM/YYYY HHMM E.g. [2/12/2019 1800]";
     public static final String FIND_EMPTY = "☹ OOPS!!! Please enter a keyword";
     public static final String UNKNOWN_INPUT = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+
+    public static final String INVALID_CONTACT_NUMBER = "Please state a valid contact number";
 }

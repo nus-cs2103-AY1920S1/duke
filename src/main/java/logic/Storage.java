@@ -32,7 +32,6 @@ public class Storage {
     /**
      * Reads and scans text file, convert them to Task Objs to be added.
      *
-     *
      * @return List of Tasks loaded from text file
      * @throws DukeException If encounter file creation/parsing problems
      */
@@ -69,7 +68,7 @@ public class Storage {
      *
      * @return List of Contacts loaded from text file
      */
-    public List<Contact> loadContacts() {
+    public List<Contact> loadContacts() throws DukeException {
         List<Contact> contactList = new ArrayList<>();
 
         try {
@@ -79,9 +78,12 @@ public class Storage {
             while (sc.hasNext()) {
                 String line = sc.nextLine();
 
-                String[] strArr = line.split(Pattern.quote(" | "));
+                String[] contactArr = line.split(Pattern.quote(" | "));
                 //Name, RS, Num, Email
-                Contact c = new Contact(strArr[0], strArr[1], strArr[2], strArr[3]); //creates contacts
+                if (contactArr.length != 4) {
+                    throw new DukeException("Error: File corrupted, cannot read");
+                }
+                Contact c = new Contact(contactArr); //creates contacts
                 contactList.add(c);
             }
 
@@ -133,7 +135,7 @@ public class Storage {
     }
 
     /**
-     * Updates text file after command execution.
+     * Updates taskList text file after command execution.
      *
      * @param taskList List of Tasks in logic.TaskList
      */
@@ -152,6 +154,33 @@ public class Storage {
 
         try {
             FileWriter fw = new FileWriter(taskFilePath);
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            Ui.loadStr("Cannot write to file: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Updates contactList tcext file after command execution.
+     *
+     * @param contactList List of contacts in logic.ContactList
+     */
+    public void updateContactFile(DukeList contactList) {
+        List<Contact> list = contactList.getList();
+        assert list != null;
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < list.size(); i++) {
+            Contact t = list.get(i);
+            sb.append(t.toFileString());
+            if (i != list.size() - 1) { //final item, dont add new line
+                sb.append("\n");
+            }
+        }
+
+        try {
+            FileWriter fw = new FileWriter(contactFilePath);
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {

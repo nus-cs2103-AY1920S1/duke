@@ -9,16 +9,20 @@ public class Contact {
     /**
      * Constructor for Contact Object.
      *
-     * @param name Name of Contact
-     * @param relationship My r/s with the contact
+     * @param name          Name of Contact
+     * @param relationship  My r/s with the contact
      * @param contactNumber Contact Number of contact
-     * @param email Email of contact
+     * @param email         Email of contact
      */
-    public Contact(String name, String relationship, String contactNumber, String email) {
+    private Contact(String name, String relationship, String contactNumber, String email) {
         this.name = name;
         this.relationship = relationship;
         this.contactNumber = contactNumber;
         this.email = email;
+    }
+
+    public Contact(String[] contactDetails) {
+        this(contactDetails[0], contactDetails[1], contactDetails[2], contactDetails[3]);
     }
 
     public String getName() {

@@ -8,4 +8,6 @@ public interface DukeList<T> {
     void add(T t);
 
     List<T> find(String keyword);
+
+    void delete(String num) throws DukeException;
 }

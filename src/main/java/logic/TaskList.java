@@ -56,7 +56,7 @@ public class TaskList implements DukeList<Task> {
      * @throws DukeException If cannot parse string to int
      */
     public void markTask(String taskNumStr) throws DukeException {
-        int taskNum = Parser.parseTaskInt(taskNumStr, taskList);
+        int taskNum = Parser.parseInt(taskNumStr, taskList);
         StringBuilder sb = new StringBuilder();
         Task task = taskList.get(taskNum - 1);
         assert task != null;
@@ -72,8 +72,8 @@ public class TaskList implements DukeList<Task> {
      * @param taskNumStr String to be parsed as int
      * @throws DukeException If cannot parse string to int
      */
-    public void deleteTask(String taskNumStr) throws DukeException {
-        int taskNum = Parser.parseTaskInt(taskNumStr, taskList);
+    public void delete(String taskNumStr) throws DukeException {
+        int taskNum = Parser.parseInt(taskNumStr, taskList);
         StringBuilder sb = new StringBuilder();
         Task task = taskList.get(taskNum - 1);
         assert task != null;

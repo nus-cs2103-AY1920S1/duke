@@ -21,19 +21,19 @@ public class ToDoCommand extends TaskCommands {
     /**
      * Overridden Method to execute the ToDo command.
      *
-     * @param tasks   list of tasks
+     * @param list   list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      * @throws DukeException If command arguments is invalid
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(DukeList list, Ui ui, Storage storage) throws DukeException {
         if (args.trim().isEmpty()) {
             throw new DukeException(DukeStrings.TODO_EMPTY);
         }
 
         Task task = new ToDo(false, args); //args is the description string
-        tasks.add(task);
-        storage.updateTaskFile(tasks);
+        list.add(task);
+        storage.updateTaskFile(list);
     }
 }

@@ -21,13 +21,13 @@ public class FindTaskCommand extends TaskCommands {
     /**
      * Overridden Method to exit the program.
      *
-     * @param tasks   list of tasks
+     * @param list    list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
-        List<Task> filteredTasks = tasks.find(args);
+    public void execute(DukeList list, Ui ui, Storage storage) {
+        List<Task> filteredTasks = list.find(args);
         ui.printList(filteredTasks, "printFilteredTask");
     }
 }

@@ -28,7 +28,7 @@ public class ContactList implements DukeList<Contact> {
         contactList.add(contact);
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this contact:\n");
-        sb.append("  " + contact + "\n");
+        sb.append(contact + "\n");
         Ui.loadStr(sb.toString());
     }
 
@@ -43,5 +43,18 @@ public class ContactList implements DukeList<Contact> {
         return contactList.stream()
                 .filter(contact -> contact.getName().contains(keyword))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void delete(String num) throws DukeException {
+        int contactNum = Parser.parseInt(num, contactList);
+        StringBuilder sb = new StringBuilder();
+        Contact task = contactList.get(contactNum - 1);
+        assert task != null;
+        sb.append("Noted. I've removed this contact: \n");
+        sb.append(task + "\n");
+        contactList.remove(contactNum - 1);
+        sb.append("Now you have " + contactList.size() + " contacts in your contact list.");
+        Ui.loadStr(sb.toString());
     }
 }

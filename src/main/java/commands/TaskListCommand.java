@@ -12,12 +12,12 @@ public class TaskListCommand extends TaskCommands {
     /**
      * Overridden Method to execute the GetList command.
      *
-     * @param tasks   list of tasks
+     * @param list   list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks.getList(), "printTask");
+    public void execute(DukeList list, Ui ui, Storage storage) {
+        ui.printList(list.getList(), "printTask");
     }
 }

@@ -10,13 +10,13 @@ public class UnknownCommand implements Command {
     /**
      * Overridden Method to throw an exception due to an unknown command.
      *
-     * @param tasks   list of tasks
+     * @param list   list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      * @throws DukeException By default due to unknown command
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(DukeList list, Ui ui, Storage storage) throws DukeException {
         throw new DukeException(DukeStrings.UNKNOWN_INPUT);
     }
 }

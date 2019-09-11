@@ -9,24 +9,24 @@ import logic.Ui;
 /**
  * Encapsulates command to delete a task from the Task List.
  */
-public class DeleteCommand extends TaskCommands {
+public class DeleteTaskCommand extends TaskCommands {
     private String args;
 
-    public DeleteCommand(String args) {
+    public DeleteTaskCommand(String args) {
         this.args = args;
     }
 
     /**
      * Overridden Method to execute the delete command.
      *
-     * @param tasks   list of tasks
+     * @param list    list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      * @throws DukeException If problems encountered with file update
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
-        ((TaskList) tasks).deleteTask(args); //deletes task obj
-        storage.updateTaskFile(tasks);
+    public void execute(DukeList list, Ui ui, Storage storage) throws DukeException {
+        list.delete(args); //deletes task obj
+        storage.updateTaskFile(list);
     }
 }

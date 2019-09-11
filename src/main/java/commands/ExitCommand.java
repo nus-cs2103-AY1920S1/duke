@@ -12,12 +12,12 @@ public class ExitCommand extends TaskCommands {
     /**
      * Overridden Method to exit the program.
      *
-     * @param tasks   list of tasks
+     * @param list   list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) {
+    public void execute(DukeList list, Ui ui, Storage storage) {
         ui.bye();
         System.exit(0);
     }

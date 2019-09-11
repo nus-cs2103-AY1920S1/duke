@@ -25,13 +25,13 @@ public class EventCommand extends TaskCommands {
     /**
      * Overridden Method to execute the EventCommand.
      *
-     * @param tasks   list of tasks
+     * @param list   list of tasks
      * @param ui      User Interface
      * @param storage File Storage and Management
      * @throws DukeException If command arguments is invalid
      */
     @Override
-    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(DukeList list, Ui ui, Storage storage) throws DukeException {
         String[] splitStr = args.split("/at");
         if (splitStr[0].trim().isEmpty()) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty");
@@ -57,7 +57,7 @@ public class EventCommand extends TaskCommands {
         }
 
         Task task = new Events(false, splitStr[0].trim(), start, end);
-        tasks.add(task);
-        storage.updateTaskFile(tasks);
+        list.add(task);
+        storage.updateTaskFile(list);
     }
 }

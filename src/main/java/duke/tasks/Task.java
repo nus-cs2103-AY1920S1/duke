@@ -26,6 +26,10 @@ public class Task implements Serializable {
         this.isDone = true;
     }
 
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
     public String toSaveFormat() {
         return isDone + "`" + description;
     }

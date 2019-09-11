@@ -15,6 +15,12 @@ public class Parser {
             "find .+?", // find
     };
 
+    public static void main(String[] args){
+        assert returnArgs("deadline work /by tomorrow").length == 3 : "Parsing failed";
+        assert returnArgs("deadline work /at tomorrow").length == 2 : "Parsing failed";
+        assert returnArgs("todo work").length == 2 : "Parsing failed";
+    }
+
     /**
      * Parse string into arguments
      * @param input String

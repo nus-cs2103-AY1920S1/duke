@@ -1,6 +1,5 @@
 package seedu.duke.statistic;
 
-import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -18,17 +17,14 @@ public class Statistic {
      * Default constructor.
      */
     public Statistic (TreeMap<String, Integer> map) {
-        /*
-        for(Map.Entry m:map.entrySet()){
-            System.out.println(m.getKey()+" "+m.getValue());
-        }
-        */
-         totalCommandsExecuted = map.get("totalCommandsExecuted") + 1;
-         totalTasksDeleted = map.get("totalTasksDeleted") + 1;
-         totalTodosCompleted = map.get("totalTodosCompleted") + 1;
-         totalDeadlinesCompleted = map.get("totalDeadlinesCompleted") + 1;
-         totalEventsCompleted = map.get("totalEventsCompleted") + 1;
+         totalCommandsExecuted = map.get("totalCommandsExecuted");
+         totalTasksDeleted = map.get("totalTasksDeleted");
+         totalTodosCompleted = map.get("totalTodosCompleted");
+         totalDeadlinesCompleted = map.get("totalDeadlinesCompleted");
+         totalEventsCompleted = map.get("totalEventsCompleted");
     }
+
+
 
     public int getTotalCommandsExecuted() {
         return totalCommandsExecuted;

@@ -191,6 +191,7 @@ public class Duke {
      * @throws IOException To catch file error when interacting with Storage class.
      */
     public Boolean executeTasksCli(String fullCommand) throws DukeException, IOException {
+        // parseCommand will return the first word of fullCommand
         String taskType = Parser.parseCommand(fullCommand);
 
         switch(taskType){
@@ -218,6 +219,18 @@ public class Duke {
         case("bye"):
             System.out.println(byeRoutineCli(cli, tasks, taskStorage, stat, statStorage));
             return true;
+        case("stats"):
+            String statCommandType = Parser.parseStatCommand(fullCommand);
+
+            switch(statCommandType){
+            case ("all"):
+                System.out.println(cli.getAllStats(stat));
+                break;
+            default:
+                unknownCommandRoutine();
+            }
+            break;
+
         default:
             unknownCommandRoutine();
             return false;
@@ -283,11 +296,7 @@ public class Duke {
      * Executes and returns the String for BYE command for CLI.
      * For CLI, txt file is saved during BYE command.
      *
-     * @param ui Ui object.
-     * @param tasks TaskList object.
-     * @param storage Storage object of the txt file.
-     * @return Bye string sequence.
-     * @throws IOException Exception threw when reading the file.
+     *
      */
     public String byeRoutineCli(Ui ui, TaskList tasks, Storage taskStorage, Statistic stat, Storage statStorage) throws IOException {
         // Clear the tasks txt file and adds headers.

@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.statistic.Statistic;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -154,6 +155,17 @@ public class CommandLineUi extends Ui {
     public String getTasksRemainingSequence(int numOfTaskRemaining) {
         String output = "\n     Now you have "
                 + numOfTaskRemaining + " tasks in the list.\n" + underscore;
+        return output;
+    }
+
+    public String getAllStats(Statistic stat) {
+        String output = "\n     Listing all statistics:"
+                + "\n     Total Commands Executed:    " + stat.getTotalCommandsExecuted()
+                + "\n     Total Tasks Deleted:        " + stat.getTotalTasksDeleted()
+                + "\n     Total To-Dos Completed:     " + stat.getTotalTodosCompleted()
+                + "\n     Total Deadlines Completed:  " + stat.getTotalDeadlinesCompleted()
+                + "\n     Total Events Completed:     " + stat.getTotalEventsCompleted()
+                + "\n" + underscore;
         return output;
     }
 }

@@ -21,6 +21,10 @@ public class Parser {
 
     }
 
+    public static String parseStatCommand(String fullCommand) {
+        return (fullCommand.split(" ")[1]);
+    }
+
     /**
      * Returns the todo task description of a Todo object.
      * @param fullCommand Input of the user, read from Scanner object.

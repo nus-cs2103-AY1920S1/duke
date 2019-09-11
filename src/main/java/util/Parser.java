@@ -29,7 +29,12 @@ public class Parser {
         keywords.add("find");
     }
 
-    public static Command parse(String[] args) throws DukeException {
+    public static Command parse(String args) {
+        String[] spaceSeparatedStrings = args.trim().split("\\s+");
+        return parse(spaceSeparatedStrings);
+    }
+
+    private static Command parse(String[] args) throws DukeException {
         if (!keywords.contains(args[0])) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

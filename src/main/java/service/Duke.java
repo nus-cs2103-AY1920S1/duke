@@ -24,30 +24,8 @@ public class Duke {
         this(FILE_PATH);
     }
 
-    private void run() {
-        this.ui.printResponse(this.ui.welcome());
-
-        while (true) {
-            try {
-                Command command = this.ui.getUserInput();
-                String response = command.run(tasks, storage);
-                this.ui.printResponse(response);
-                if (command.isExit()) {
-                    break;
-                }
-            } catch (DukeException e) {
-                this.ui.printErrorMessage(e);
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke(FILE_PATH);
-        duke.run();
-    }
-
     public String getResponse(String input) {
-        Command c = Parser.parse(input.trim().split("\\s+"));
+        Command c = Parser.parse(input);
         return ui.encase(c.run(tasks, storage));
     }
 

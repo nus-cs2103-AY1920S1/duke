@@ -26,3 +26,4 @@ public class DukeException extends Exception {
         return String.format("☹ OOPS!!! %s", message);
     }
 }
+

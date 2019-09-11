@@ -11,18 +11,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
 
     @Test
-    void parse1() {
-        assertEquals(new PrintCommand(), Parser.parse("add"));
+    void parsePrint() {
+        assertEquals(new PrintCommand(), Parser.parse("list"));
     }
 
     @Test
-    void parse2() {
-        assertEquals(new AddCommand("random", "random"),
-                Parser.parse("bye"));
+    void parseToDo() {
+        assertEquals(new AddCommand("todo", "random"),
+                Parser.parse("todo random"));
     }
 
     @Test
-    void parse3() {
-        assertEquals(new ExitCommand(), Parser.parse("any"));
+    void parseExit() {
+        assertEquals(new ExitCommand(), Parser.parse("bye"));
     }
 }

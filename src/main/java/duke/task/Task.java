@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,13 +9,14 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     protected String description;
     protected boolean isDone;
-    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    public static final int LENGTH_OF_DATE_DESCRIPTION = 32;
 
     /**
      * Constructor for duke.task.Task.
      * @param description String representation of the description
      */
-    public Task(String description) {
+    public Task(String description) throws DateTimeException{
         this.description = description;
         this.isDone = false;
     }
@@ -24,7 +26,7 @@ public class Task {
      * @param description String representation of the description
      * @param isDone whether it is done or not
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone) throws DateTimeException {
         this.description = description;
         this.isDone = isDone;
     }

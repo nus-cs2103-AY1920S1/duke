@@ -6,6 +6,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.time.DateTimeException;
 import java.util.InputMismatchException;
 /**
  * Represents a command which adds duke.task.Task to the Tasklist.
@@ -13,7 +14,6 @@ import java.util.InputMismatchException;
  * @see Task
  */
 public class AddCommand extends Command {
-    String[] commandSplit = super.stringCommand.split(" ");
     String deadline = "deadline";
     String event = "event";
     String todo = "todo";
@@ -33,25 +33,32 @@ public class AddCommand extends Command {
      * @param storage
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DateTimeException {
         Task addTask;
+        String[] commandSplit = super.stringCommand.split(" ");
         String outputString = "";
         if (commandSplit[0].equalsIgnoreCase(deadline)) {
+            System.out.println(super.stringCommand);
             String details = super.stringCommand.substring(deadline.length()).trim();
-            if (details.length() == 0) {
-                throw new InputMismatchException("The description of a deadline cannot be empty.");
+            if (details.contains("/by")) {
+                throw new DateTimeException("No date time detected");
             }
             String[] detail = details.split(" /by ");
+            if (details.length() == 0 || commandSplit[1].equals("/by")) {
+                throw new InputMismatchException("The description of a deadline cannot be empty.");
+            }
+            assert detail[1] != null;
             addTask = new Deadline(detail[0], detail[1]);
             outputString = outputString + ui.printAddedMessage();
             outputString = outputString + ui.printTask(addTask);
             taskList.add(addTask);
         } else if (commandSplit[0].equalsIgnoreCase(event)) {
             String details = super.stringCommand.substring(event.length()).trim();
+            String[] detail = details.split(" /at ");
             if (details.length() == 0) {
                 throw new InputMismatchException("The description of a event cannot be empty.");
             }
-            String[] detail = details.split(" /at ");
+            assert detail[1] != null;
             addTask = new Event(detail[0], detail[1]);
             outputString = outputString + ui.printAddedMessage();
             outputString = outputString + ui.printTask(addTask);

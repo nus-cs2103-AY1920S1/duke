@@ -1,6 +1,8 @@
 package duke.task;
 
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a type of duke.task.Task object with a fixed time format.
@@ -14,8 +16,11 @@ public class Event extends Task{
      * @param description
      * @param at time in the format of dd/MM/yyyy HHmm
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DateTimeException {
         super(description);
+        if (at.length() <= LENGTH_OF_DATE_DESCRIPTION) {
+            throw new DateTimeException("Date should be in DD/MM/YYYY HHMM format");
+        }
         this.at = LocalDateTime.parse(at, Task.TIME_FORMATTER);
     }
 

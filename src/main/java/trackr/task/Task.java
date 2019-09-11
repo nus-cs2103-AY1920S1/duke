@@ -32,6 +32,10 @@ public class Task {
         isDone = true;
     }
 
+    public void setName(String taskName) {
+        this.taskName = taskName;
+    }
+
     /**
      * This method is used to get the status of the task.
      * @return boolean This indicates whether the task has been completed

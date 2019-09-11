@@ -1,14 +1,6 @@
 package trackr.parser;
 
-import trackr.command.Command;
-import trackr.command.DeadlineCommand;
-import trackr.command.DeleteCommand;
-import trackr.command.DoneCommand;
-import trackr.command.EventCommand;
-import trackr.command.ExitCommand;
-import trackr.command.FindCommand;
-import trackr.command.ListCommand;
-import trackr.command.TodoCommand;
+import trackr.command.*;
 import trackr.exception.TrackrException;
 
 /**
@@ -41,6 +33,10 @@ public class Parser {
             return new DeleteCommand(input);
         case "find":
             return new FindCommand(input);
+        case "help":
+            return new HelpCommand();
+        case "update":
+            return new UpdateCommand(input);
         default:
             throw new TrackrException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

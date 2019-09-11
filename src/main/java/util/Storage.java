@@ -1,3 +1,5 @@
+package util;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -5,14 +7,14 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.io.FileNotFoundException;
 
-class Storage {
+public class Storage {
     private final String fileName;
 
-    Storage(String s) {
+    public Storage(String s) {
         this.fileName = s;
     }
 
-    void save(TodoList todoList) {
+    public void save(TodoList todoList) {
         try {
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -24,7 +26,7 @@ class Storage {
 
     }
 
-    TodoList load() {
+    public TodoList load() {
         TodoList todoList = new TodoList();
         try {
             FileInputStream fileInputStream = new FileInputStream(fileName);

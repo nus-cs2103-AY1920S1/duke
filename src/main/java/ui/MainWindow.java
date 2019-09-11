@@ -1,11 +1,16 @@
+package ui;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.ScrollPane;
-        import javafx.scene.control.TextField;
-        import javafx.scene.image.Image;
-        import javafx.scene.layout.AnchorPane;
-        import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import service.Duke;
+import util.Parser;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -29,7 +34,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    void setDuke(Duke d) {
+    public void setDuke(Duke d) {
         duke = d;
     }
 
@@ -54,7 +59,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    void welcome() {
+    public void welcome() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.welcome(), dukeImage));
     }
 }

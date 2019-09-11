@@ -1,3 +1,7 @@
+package util;
+
+import task.Task;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +15,21 @@ public class TodoList implements Serializable {
         this.list = new ArrayList<>(100);
     }
 
-    void add(Task task) {
+    public void add(Task task) {
         list.add(task);
     }
 
-    Task markAsDone(int index) {
+    public Task markAsDone(int index) {
         Task task = list.get(index - 1);
         task.markAsDone();
         return task;
     }
 
-    Task delete(int index) {
+    public Task delete(int index) {
         return list.remove(index - 1);
     }
 
-    int length() {
+    public int length() {
         return list.size();
     }
 
@@ -36,7 +40,7 @@ public class TodoList implements Serializable {
                         .collect(Collectors.joining("\n"));
     }
 
-    List<Task> find(String description) {
+    public List<Task> find(String description) {
         return  this.list.stream()
                 .filter(task -> task.toString().contains(description))
                 .collect(Collectors.toList());

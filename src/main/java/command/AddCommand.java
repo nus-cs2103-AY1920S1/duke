@@ -1,3 +1,9 @@
+package command;
+
+import task.Task;
+import util.Storage;
+import util.TodoList;
+
 public class AddCommand extends Command {
     private Task task;
 
@@ -5,7 +11,7 @@ public class AddCommand extends Command {
      * Creates an AddCommand that contains a given Task
      *
      */
-    AddCommand(Task task) {
+    public AddCommand(Task task) {
         this.task = task;
     }
 
@@ -20,7 +26,6 @@ public class AddCommand extends Command {
     /*
      * Adds a task into TodoList tasks and saves into storage
      */
-    @Override
     public String run(TodoList tasks, Storage storage) {
         tasks.add(this.task);
         super.run(tasks, storage);

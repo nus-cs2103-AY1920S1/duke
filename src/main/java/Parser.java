@@ -37,9 +37,10 @@ public class Parser {
             return new CommandAdd(fullCommand);
         } else if (fullCommand.split(" ")[0].equals("find")) {
             return new CommandFind(fullCommand.split(" ", 2)[1]);
+        } else if (fullCommand.split(" ")[0].equals("help")) {
+            return new CommandHelp(fullCommand);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }
-

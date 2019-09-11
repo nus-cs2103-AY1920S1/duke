@@ -18,11 +18,13 @@ public class Sheet {
      * @param tasks List of tasks contained the list.
      */
     public Sheet(List<Task> tasks) {
+        assert tasks != null;
         this.tasks = tasks;
         numOfTask = tasks.size();
     }
 
     public List<Task> getList() {
+        assert tasks != null;
         return this.tasks;
     }
 
@@ -42,6 +44,7 @@ public class Sheet {
      * @param index Serial index of the task in list.
      */
     public Task delete(int index) {
+        assert index <= tasks.size();
         Task removed = tasks.remove(index - 1);
         numOfTask--;
         return removed;
@@ -62,6 +65,7 @@ public class Sheet {
      * @param index Serial index of the task in list.
      */
     public Task markAsDone(int index) {
+        assert index <= tasks.size();
         Task doneTask = tasks.get(index - 1).finish();
         tasks.set(index - 1, doneTask);
         return doneTask;

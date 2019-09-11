@@ -29,6 +29,7 @@ public class CommandEvent extends Command {
             throw new MissingDescriptionException(
                     "> < OOPS!!! The event span is incomplete.");
         } else {
+            assert commands.length > 3;
             String description = commands[0].trim();
             String start = commands[1].trim();
             String end = commands[2].trim();

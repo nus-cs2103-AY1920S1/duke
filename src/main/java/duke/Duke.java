@@ -29,6 +29,7 @@ public class Duke {
     public void start(String input) {
 
         try {
+            assert mw != null;
             String fullCommand = mw.getInput();
             Command c = Parser.parse(fullCommand);
             if (c.isExit()) {

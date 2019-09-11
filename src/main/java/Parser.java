@@ -50,59 +50,59 @@ public class Parser {
             }
         }
         switch (command) {
-            case "list":
-                return ui.list(list.getList());
-            case "done":
-                try {
-                    Task task = list.doTask(taskDetails);
-                    return ui.taskDone(task);
-                } catch (Exception ex) {
-                    return ui.noSuchTaskError();
-                }
-            case "delete":
-                try {
-                    Task task = list.deleteTask(taskDetails);
-                    return ui.taskDeleted(task) + "\n" +
-                            ui.showNumberOfTasks(list.getList());
-                } catch (Exception ex) {
-                    return ui.noSuchTaskError();
-                }
-            case "todo":
-                Todo task = new Todo(taskDetails);
-                list.addTask(task);
-                return ui.taskCreated(task) + "\n" +
-                        ui.showNumberOfTasks(list.getList());
-            case "deadline": {
-                //split the string by /
-                String[] halves = taskDetails.split("/by");
-                String description = halves[0];
-                String by = halves[1];
-                Deadline deadline = new Deadline(description, by);
-                list.addTask(deadline);
-                return ui.taskCreated(deadline) + "\n" +
-                        ui.showNumberOfTasks(list.getList());
+        case "list":
+            return ui.list(list.getList());
+        case "done":
+            try {
+                Task task = list.doTask(taskDetails);
+                return ui.taskDone(task);
+            } catch (Exception ex) {
+                return ui.noSuchTaskError();
             }
-            case "event": {
-                String[] halves = taskDetails.split("/at");
-                String description = halves[0];
-                String by = halves[1];
-                Event event = new Event(description, by);
-                list.addTask(event);
-                return ui.taskCreated(event) + "\n" +
+        case "delete":
+            try {
+                Task task = list.deleteTask(taskDetails);
+                return ui.taskDeleted(task) + "\n" +
                         ui.showNumberOfTasks(list.getList());
+            } catch (Exception ex) {
+                return ui.noSuchTaskError();
             }
-            case "find": {
-                String keyword = taskDetails;
-                ArrayList<Task> filteredList = new ArrayList<>();
-                for (Task item: list.getList()) {
-                    if (item.getDescription().contains(keyword)) {
-                        filteredList.add(item);
-                    }
-                }
-                return ui.list(filteredList);
-            }
-            default:
-                return ui.showWrongCommandError();
+        case "todo":
+            Todo task = new Todo(taskDetails);
+            list.addTask(task);
+            return ui.taskCreated(task) + "\n" +
+                    ui.showNumberOfTasks(list.getList());
+        case "deadline": {
+            //split the string by /
+            String[] halves = taskDetails.split("/by");
+            String description = halves[0];
+            String by = halves[1];
+            Deadline deadline = new Deadline(description, by);
+            list.addTask(deadline);
+            return ui.taskCreated(deadline) + "\n" +
+                    ui.showNumberOfTasks(list.getList());
         }
+        case "event": {
+            String[] halves = taskDetails.split("/at");
+            String description = halves[0];
+            String by = halves[1];
+            Event event = new Event(description, by);
+            list.addTask(event);
+            return ui.taskCreated(event) + "\n" +
+                    ui.showNumberOfTasks(list.getList());
+        }
+        case "find": {
+            String keyword = taskDetails;
+            ArrayList<Task> filteredList = new ArrayList<>();
+            for (Task item: list.getList()) {
+                if (item.getDescription().contains(keyword)) {
+                    filteredList.add(item);
+                }
+            }
+            return ui.list(filteredList);
+        }
+        default:
+            return ui.showWrongCommandError();
+    }
     }
 }

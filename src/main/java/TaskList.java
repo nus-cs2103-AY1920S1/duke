@@ -29,6 +29,7 @@ public class TaskList {
 
     public Task deleteTask(String position) {
         int index = Integer.parseInt(position) - 1;
+        assert index >= 0 : "index should not be negative";
         Task currTask = list.get(index);
         list.remove(index);
         return currTask;
@@ -43,6 +44,7 @@ public class TaskList {
      */
     public Task doTask(String position) {
         int index = Integer.parseInt(position) - 1;
+        assert index >= 0 : "index should not be negative";
         Task currTask = list.get(index);
         currTask.doTask();
         return currTask;

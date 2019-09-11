@@ -87,17 +87,8 @@ public class Duke {
     }
 
 
-    /**
-     * Converts a Date object to a String object in dd/MM/yyyy HHmm format
-     *
-     * @param date Date object
-     * @return String
-     */
-    public static String dateToStringConverter(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        String sDate = sdf.format(date);
-        return sDate;
-    }
+
+
 
 
 }

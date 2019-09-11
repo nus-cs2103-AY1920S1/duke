@@ -4,3 +4,4 @@ todo>>1>>run faster
 deadline>>1>>party hard >>13/12/1111 1200
 deadline>>0>>midterms >>12/12/2012 2300
 event>>0>>party >>03/12/2012 2359
+todo>>0>>run

@@ -112,7 +112,7 @@ public class Storage {
 
             if (words[0].length() < 3) {
                 // If condition to avoid reading in the header.
-                String taskType = words[0];
+                String taskType = words[0].trim();
 
                 switch (taskType){
                 case "T":
@@ -170,53 +170,9 @@ public class Storage {
                     break;
 
                 default:
+
                         throw new DukeException("Unable to read from saved file");
                 }
-                /*
-                if (words[0].contains("T")) {
-                    // Create a Todo class.
-
-                    if (words[1].contains("1")) {
-                        isDone = true;
-                    } else if (words[1].contains("0")) {
-                        isDone = false;
-                    }
-                    description = words[2].trim();
-
-                    Todo newTodo = new Todo(description, isDone);
-                    tasks.add(newTodo);
-
-                } else if (words[0].contains("E")) {
-
-                    // Create an Event class.
-
-                    if (words[1].contains("1")) {
-                        isDone = true;
-                    } else if (words[1].contains("0")) {
-                        isDone = false;
-                    }
-                    description = words[2].trim();
-                    extraDescription = words[3].trim();
-
-                    Event newEvent = new Event(description, extraDescription, isDone);
-                    tasks.add(newEvent);
-
-                } else if (words[0].contains("D")) {
-
-                    // Create a Deadline class.
-
-                    if (words[1].contains("1")) {
-                        isDone = true;
-                    } else if (words[1].contains("0")) {
-                        isDone = false;
-                    }
-                    description = words[2].trim();
-                    extraDescription = words[3].trim();
-
-                    Deadline newDeadline = new Deadline(description, extraDescription, isDone);
-                    tasks.add(newDeadline);
-                }
-                */
             }
         }
         return tasks;

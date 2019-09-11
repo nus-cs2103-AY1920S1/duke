@@ -12,11 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
-import javafx.scene.layout.CornerRadii;
-import javafx.geometry.Insets;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog

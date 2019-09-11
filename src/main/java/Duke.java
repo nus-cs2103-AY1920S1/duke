@@ -1,14 +1,11 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import task.TaskList;
 import task.Parser;
 import task.Storage;
 import task.Ui;
 
 public class Duke {
-
-    private TaskList taskList;
     private Storage storage;
 
     public Duke() {
@@ -26,7 +23,7 @@ public class Duke {
 
     private void run() {
         try {
-            taskList = storage.readData();
+            storage.readData();
         } catch (FileNotFoundException e) {
             Ui.printException(e);
         }
@@ -54,7 +51,7 @@ public class Duke {
 
     protected String startOfShow() {
         try {
-            taskList = storage.readData();
+            storage.readData();
             return Ui.startOfInteractions();
         } catch (FileNotFoundException e) {
             return Ui.printException(e);

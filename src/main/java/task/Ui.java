@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Ui {
 
     public static String startOfInteractions() {
-        return "Hello I'm Duke\n" + "What can I do for you?";
+        return "Konnichiwa!\n" + "Watashi wa Nezuko-chan!\n" + "What can I do for you?";
     }
 
     /**

@@ -8,13 +8,13 @@ import duke.ui.Ui;
  */
 public interface Command {
 
-    public String getTaskType();
+    String getTaskType();
 
-    public int getIndex();
+    int getIndex();
 
-    public String getDescription();
+    String getDescription();
 
-    public String getKeyword();
+    String getKeyword();
 
-    public void execute(TaskList tasks, Ui ui);
+    void execute(TaskList tasks, Ui ui);
 }

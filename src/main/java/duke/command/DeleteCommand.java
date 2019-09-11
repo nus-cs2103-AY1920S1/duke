@@ -4,6 +4,9 @@ import duke.todo.Task;
 import duke.todo.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class for delete command.
+ */
 public class DeleteCommand implements Command {
     private int index;
 

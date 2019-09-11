@@ -212,6 +212,7 @@ public class TaskList {
     public Task markTaskDone(int index) {
         Task taskDone = taskList.get(index);
         taskDone.markAsDone();
+        assert taskDone.getTaskStatus() == true : "Update task status failed";
         return taskDone;
     }
 

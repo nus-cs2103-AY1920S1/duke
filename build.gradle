@@ -1,12 +1,9 @@
 plugins {
-    id 'java'
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
-}
-
-checkstyle {
-    toolVersion = '8.23'
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 dependencies {
@@ -17,13 +14,6 @@ test {
     useJUnitPlatform()
 }
 
-shadowJar {
-    archiveBaseName = "Duke"
-    archiveVersion = "0.1.0"
-    archiveClassifier = null
-    archiveAppendix = null
-}
-
 group 'Duke'
 version '0.1.0'
 
@@ -31,9 +21,25 @@ repositories {
     mavenCentral()
 }
 
+checkstyle {
+    toolVersion = '8.23'
+}
+
+shadowJar {
+    archiveBaseName = "Duke"
+    archiveVersion = "0.1.0"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "Launcher"
 }
 
 run {

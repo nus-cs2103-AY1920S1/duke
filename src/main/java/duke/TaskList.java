@@ -76,6 +76,18 @@ public class TaskList {
     }
 
     /**
+     * Returns the prioritised task.
+     *
+     * @param num Number of the task in the task list.
+     * @return prioritisedTask Task that has been prioritised.
+     */
+    public Task prioritise(int num) {
+        Task prioritisedTask = list.get(num - 1);
+        prioritisedTask.setAsPriority();
+        return prioritisedTask;
+    }
+
+    /**
      * Returns a string consisting of all tasks that matches the given keyword in the task list.
      *
      * @param s The keyword.

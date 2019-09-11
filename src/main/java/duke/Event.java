@@ -16,9 +16,10 @@ public class Event extends Task {
      *
      * @param description The Event task.
      * @param at The date/time of event.
+     * @param isPriority The priority level of event.
      */
-    public Event(String description, Date at) {
-        super(description);
+    public Event(String description, Date at, boolean isPriority) {
+        super(description, isPriority);
         this.at = at;
     }
 

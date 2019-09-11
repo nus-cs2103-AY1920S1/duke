@@ -16,9 +16,10 @@ public class Deadline extends Task {
      *
      * @param description The Deadline task.
      * @param by Deadline of the task.
+     * @param isPriority The priority level of event.
      */
-    public Deadline(String description, Date by) {
-        super(description);
+    public Deadline(String description, Date by, boolean isPriority) {
+        super(description, isPriority);
         this.by = by;
     }
 

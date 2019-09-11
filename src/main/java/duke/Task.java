@@ -8,19 +8,21 @@ public class Task {
 
     private String description;
     private boolean isDone;
+    private boolean isPriority;
 
     /**
      * Constructor for Task class.
      *
      * @param description The task.
      */
-    public Task(String description) {
+    public Task(String description, boolean isPriority) {
         this.description = description;
+        this.isPriority = isPriority;
         this.isDone = false;
     }
 
     /**
-     * Returns tick or cross symbols to signify if a task is done.
+     * Returns "+" symbol if a task is done.
      *
      * @return symbol A tick or cross symbol.
      */
@@ -30,6 +32,24 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Returns the priority level of the task,
+     * H represents high priority and L represents low priority.
+     *
+     * @return priorityLevel The priority level of the task.
+     */
+    public String getPriority() {
+        String priorityLevel = isPriority ? "H" : "L";
+        return priorityLevel;
+    }
+
+    /**
+     * Sets the task to high priority.
+     */
+    public void setAsPriority() {
+        isPriority = true;
     }
 
     /**
@@ -55,6 +75,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return "[" + this.getStatusIcon() + "][" + this.getPriority() + "] " + this.getDescription();
     }
 }

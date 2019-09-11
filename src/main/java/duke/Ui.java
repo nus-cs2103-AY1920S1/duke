@@ -61,18 +61,25 @@ public class Ui {
             Task doneTask = taskList.markAsDone(Integer.parseInt(task[1]));
             output = "Nice! I've marked this task as done:\n" + doneTask;
             break;
+        case "prioritise":
+            Task prioritisedTask = taskList.prioritise(Integer.parseInt(task[1]));
+            output = "Okay! I've marked this as a high priority task:\n" + prioritisedTask;
+            break;
         case "list":
             output = "Here are the tasks in your list:\n" + taskList.printList();
             break;
         case "find":
             output = "Here are the matching tasks in your list:\n" + taskList.find(task[1]);
             break;
+        case "priority":
+            output = handleTasks(task[1], input, true);
+            break;
         case "todo":
             // Fallthrough
         case "deadline":
             // Fallthrough
         case "event":
-            output = handleTasks(task[0], input);
+            output = handleTasks(task[0], input, false);
             break;
         default:
             throw new IllegalArgumentException();
@@ -80,8 +87,8 @@ public class Ui {
         return output;
     }
 
-    private String handleTasks(String taskType, String t) {
-        Parser p = new Parser(t);
+    private String handleTasks(String taskType, String t, boolean isPriority) {
+        Parser p = new Parser(t, isPriority);
         String output = "";
         try {
             Task parsedTask = p.parse();

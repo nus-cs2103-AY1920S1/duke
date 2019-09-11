@@ -48,18 +48,28 @@ public class Storage {
         while (sc.hasNext()) {
             String input = sc.nextLine();
             String[] task = input.split(" \\| ");
+            boolean isPriority;
+
+            if (task[2].equals("H")) {
+                isPriority = true;
+            } else if (task[2].equals("L")) {
+                isPriority = false;
+            } else {
+                throw new DukeException();
+            }
+
             switch (task[0]) {
             case "T":
-                assert task.length == 3 : "ToDo should have 3 components";
-                tasks.add(new ToDo(task[2]));
+                assert task.length == 4 : "ToDo should have 4 components";
+                tasks.add(new ToDo(task[3], isPriority));
                 break;
             case "D":
-                assert task.length == 4 : "Deadline should have 4 components";
-                tasks.add(new Deadline(task[2], dateTimeFormat.parse(task[3])));
+                assert task.length == 5 : "Deadline should have 5 components";
+                tasks.add(new Deadline(task[3], dateTimeFormat.parse(task[4]), isPriority));
                 break;
             case "E":
-                assert task.length == 4 : "Event should have 4 components";
-                tasks.add(new Event(task[2], dateTimeFormat.parse(task[3])));
+                assert task.length == 5 : "Event should have 5 components";
+                tasks.add(new Event(task[3], dateTimeFormat.parse(task[4]), isPriority));
                 break;
             default:
                 throw new DukeException();
@@ -82,13 +92,15 @@ public class Storage {
         for (Task task : tasks.getList()) {
             if (task instanceof Deadline) {
                 Deadline d = (Deadline) task;
-                fw.write("D | " + d.isDone() + " | " + d.getDescription() + " | " + d.getBy() + "\n");
+                fw.write("D | " + d.isDone() + " | " + d.getPriority() + " | "
+                        + d.getDescription() + " | " + d.getBy() + "\n");
             } else if (task instanceof Event) {
                 Event e = (Event) task;
-                fw.write("E | " + e.isDone() + " | " + e.getDescription() + " | " + e.getAt() + "\n");
+                fw.write("E | " + e.isDone() + " | " + e.getPriority() + " | "
+                        + e.getDescription() + " | " + e.getAt() + "\n");
             } else if (task instanceof ToDo) {
                 ToDo t = (ToDo) task;
-                fw.write("T | " + t.isDone() + " | " + t.getDescription() + "\n");
+                fw.write("T | " + t.isDone() + " | " + t.getPriority() + " | " + t.getDescription() + "\n");
             }
         }
         fw.close();

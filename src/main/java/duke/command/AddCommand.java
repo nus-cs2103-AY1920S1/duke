@@ -21,8 +21,10 @@ public class AddCommand extends Command {
             + "Now you have %d %s in the list.";
 
     private static final String ERROR_MISSING_DESCRIPTION = "The description cannot be empty.";
-    private static final String ERROR_MISSING_DESCRIPTION_AND_DATETIME = "The description and datetime cannot be empty.";
-    private static final String ERROR_MISSING_DATETIME = "The datetime must be present. e.g. sleep /by 12/10/2019 12:00";
+    private static final String ERROR_MISSING_DESCRIPTION_AND_DATETIME = "The description and datetime "
+            + "cannot be empty.";
+    private static final String ERROR_MISSING_DATETIME = "The datetime must be present. "
+            + "e.g. sleep /by 12/10/2019 12:00";
     private static final String ERROR_WRONG_DATETIME_FORMAT = "The datetime provided is in the wrong format. "
             + "Expected d/m/yyyy hh:mm.";
 

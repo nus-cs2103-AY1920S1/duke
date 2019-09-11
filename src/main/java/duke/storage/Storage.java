@@ -21,8 +21,8 @@ public class Storage {
 
     private static final String ERROR_FAILED_TO_FIND     = "Failed to find save data. Creating new task list.";
     private static final String ERROR_FAILED_SAVE        = "Failed to save file.";
-    private static final String ERROR_INCORRECT_FORMAT   = "Failed to read save data. Save data was in wrong format. " +
-            "Creating new task list.";
+    private static final String ERROR_INCORRECT_FORMAT   = "Failed to read save data. Save data was in wrong format. "
+            + "Creating new task list.";
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER =
             DateTimeFormatter.ofPattern("EEE, d MMM uuuu, hh.mma");

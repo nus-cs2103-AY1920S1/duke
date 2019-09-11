@@ -33,6 +33,9 @@ public class Duke {
             tasks = new TaskList();
         } finally {
             commandCentre = new CommandCentre(tasks, ui);
+            assert ui == null : "Ui should not be null";
+            assert storage == null : "Storage should not be null";
+            assert tasks == null : "TaskList should not be null";
         }
     }
 

@@ -11,7 +11,7 @@ public class Formatter {
      * @return Formatted message.
      */
     private String formatMessage(String message) {
-        return message + "\n";
+        return String.format("  %s\n", message);
     }
 
     /**
@@ -22,12 +22,13 @@ public class Formatter {
      * @return Formatted messages.
      */
     public String echo(String... messages) {
-        String border = "_______________________________________________\n";
+        String border = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
         StringBuilder toEcho = new StringBuilder(border);
 
         for (String message : messages) {
             toEcho.append(this.formatMessage(message));
         }
+        toEcho.append(border);
         System.out.println(toEcho);
         return toEcho.toString();
     }

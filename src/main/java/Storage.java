@@ -13,15 +13,45 @@ import java.util.Scanner;
 public class Storage {
 
     private String filepath;
+    private String[] funFacts;
 
     /**
      * Constructs a storage object.
      * @param filepath refers to the file path of TaskList
      */
 
-
     public Storage (String filepath) {
         this.filepath = filepath;
+        this.funFacts = loadFunFacts("C:\\repos\\duke\\src\\main\\resources\\funFacts\\FunFacts.txt");
+    }
+
+    /**
+     * Loading up the funfacts from the hard disk
+     * @param filePath
+     * @return A string array of fun facts
+     */
+    public String[] loadFunFacts(String filePath) {
+        StringBuilder sb = new StringBuilder("");
+        try {
+            Scanner sc = new Scanner(new File(filePath));
+            while (sc.hasNextLine()) {
+                // scan til EOF
+                sb.append(sc.nextLine());
+            }
+        } catch (FileNotFoundException f) {
+            f.printStackTrace();
+        }
+        String[] funFacts = sb.toString().split("-", 20);
+        return funFacts;
+    }
+
+    /**
+     * Getting a random fun-fact
+     * @param index
+     * @return random fun fact
+     */
+    public String getFunFact(int index) {
+        return funFacts[index];
     }
 
     /**

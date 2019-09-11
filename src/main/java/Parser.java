@@ -21,6 +21,8 @@ public class Parser {
                     return new ExitCommand();
                 case "list":
                     return new ListCommand();
+                case "funfact":
+                    return new FunFactCommand();
                 case "done":
                     int indexDone = Integer.parseInt(userInput[1]);
                     return new DoneCommand(indexDone);

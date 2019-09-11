@@ -50,6 +50,7 @@ public class Duke extends Application {
      * @param filePath path of the saved file.
      */
     public Duke(String filePath) {
+        assert !filePath.equals("") : "file path should not be empty!";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -187,6 +188,7 @@ public class Duke extends Application {
      */
     String getResponse(String input) throws DukeException {
         //return "Duke heard: " + input;
+        assert !input.equals("") :  "string from GUI parser should not be empty ";
         Command c = Parser.parse(input);
         try {
             return c.executeForGUI(tasks, storage);

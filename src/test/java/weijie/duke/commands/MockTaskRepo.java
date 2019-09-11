@@ -44,6 +44,11 @@ class MockTaskRepo implements IRepository<Task> {
     }
 
     @Override
+    public void insert(int id, Task entity) {
+        tasks.add(id, entity);
+    }
+
+    @Override
     public void update(int id, Task entity) {
         tasks.set(id, entity);
     }
@@ -51,5 +56,10 @@ class MockTaskRepo implements IRepository<Task> {
     @Override
     public void delete(int id) {
         tasks.remove(id);
+    }
+
+    @Override
+    public void delete(Task task) {
+        tasks.remove(task);
     }
 }

@@ -15,7 +15,7 @@ public class UndoCommand implements ITaskCommand {
 
     @Override
     public TaskResponse execute(String... args) {
-        return null;
+        return history.undo();
     }
 
     @Override

@@ -7,6 +7,7 @@ import weijie.duke.responses.TaskResponse;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -38,5 +39,10 @@ public class FindCommand implements ITaskCommand {
                 .collect(Collectors.joining("\n"));
 
         return new TaskResponse(responseFormat, queriedTasks);
+    }
+
+    @Override
+    public Optional<UndoingAction> getUndoingAction() {
+        return Optional.empty();
     }
 }

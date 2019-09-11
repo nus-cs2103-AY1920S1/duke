@@ -68,8 +68,9 @@ public class MainWindowController extends AnchorPane {
         dialogList.add(new UserDialogController(input, userImage));
 
         if (input.equals("bye")) {
-            dialogList.add(
-                    new DukeDialogController(StringUtils.indent("Bye. Hope to see you again soon!"), dukeImage));
+            doAfter(300, () -> dialogList.add(
+                    new DukeDialogController(StringUtils.indent("Bye. Hope to see you again soon!"),
+                            dukeImage)));
             doAfter(1000, () -> {
                 Platform.exit();
                 System.exit(0);
@@ -82,6 +83,7 @@ public class MainWindowController extends AnchorPane {
         try {
             ITaskCommand command = factory.tryMakeCommand(args[0]);
             TaskResponse response = command.execute(args);
+            commandHistory.addCommand(command);
 
             doAfter(300, () -> {
                 if (response.isInvalidInput()) {

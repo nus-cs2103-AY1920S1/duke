@@ -23,6 +23,10 @@ public abstract class Task implements Serializable {
         this.isDone = true;
     }
 
+    public void unmarkAsDone() {
+        this.isDone = false;
+    }
+
     public abstract String getDateTime();
 
     public abstract String getTaskIcon();

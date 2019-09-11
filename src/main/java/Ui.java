@@ -73,6 +73,9 @@ public class Ui {
         return ("___________________________________________________");
     }
 
+    public String printStatistics(Statistics s) {
+        return s.toString();
+    }
     public String printFunFact() {
         return "Fun fact! Did you know that...?";
     }

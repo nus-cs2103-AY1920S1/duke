@@ -109,7 +109,7 @@ public class Storage {
                     }
                     tasks.add(taskE);
                 } else {
-
+                    throw new DukeException("File has invalid contents!!");
                 }
             }
             scLoad.close();

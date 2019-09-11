@@ -38,6 +38,7 @@ public class Ui {
         for (int i = 0; i < listToPrint.size(); i++) {
             listOfTasksToPrint.append(i + 1).append(".").append(listToPrint.get(i)).append("\n");
         }
+        System.out.println(listOfTasksToPrint.toString());
         return listOfTasksToPrint.toString();
     }
 

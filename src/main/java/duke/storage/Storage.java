@@ -38,11 +38,12 @@ public class Storage {
         File f;
         f = new File(targetFilePath);
 
-        Scanner s = new Scanner(f);
+        Scanner s = new Scanner(f, "Unicode");
         ArrayList<String> listInput = new ArrayList<>();
 
         while (s.hasNextLine()) {
             String i = s.nextLine();
+            System.out.println(i);
             listInput.add(i);
         }
 

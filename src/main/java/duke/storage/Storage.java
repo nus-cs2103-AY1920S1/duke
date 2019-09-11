@@ -44,31 +44,41 @@ public class Storage {
             String currLine;
             while ((currLine = bufferedReader.readLine()) != null) {
                 assert (currLine.contains("|")) : "No | detected in line";
-                String[] formattedText = currLine.split("\\|");
-                Task t;
-                switch (formattedText[0]) {
-                case "T":
-                    t = new ToDo(formattedText[2]);
-                    break;
-                case "D":
-                    t = new Deadline(formattedText[2], formattedText[3]);
-                    break;
-                case "E":
-                    t = new Event(formattedText[2], formattedText[3]);
-                    break;
-                default:
-                    t = new Task("");
-                    break;
-                }
-                if (formattedText[1].equals("1")) {
-                    t.markAsDone();
-                }
-                allTasks.add(t);
+                allTasks.add(convertLineToTask(currLine));
             }
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
         return allTasks;
+    }
+
+    /**
+     * Converts a line from file to a Task object.
+     *
+     * @param currLine The current line to be converted.
+     * @return The Task object generated from the line.
+     */
+    private Task convertLineToTask(String currLine) {
+        String[] formattedText = currLine.split("\\|");
+        Task t;
+        switch (formattedText[0]) {
+        case "T":
+            t = new ToDo(formattedText[2]);
+            break;
+        case "D":
+            t = new Deadline(formattedText[2], formattedText[3]);
+            break;
+        case "E":
+            t = new Event(formattedText[2], formattedText[3]);
+            break;
+        default:
+            t = new Task("");
+            break;
+        }
+        if (formattedText[1].equals("1")) {
+            t.markAsDone();
+        }
+        return t;
     }
 
     /**
@@ -90,8 +100,9 @@ public class Storage {
      * Deletes a task from the file.
      *
      * @param t The task to be deleted.
+     * @return The deletion status boolean.
      */
-    public void deleteTaskFromFile(Task t) {
+    public boolean deleteTaskFromFile(Task t) {
         File inputFile = new File(filepath);
         File tempFile = new File("data/temp.txt");
         try {
@@ -115,6 +126,6 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        tempFile.renameTo(inputFile);
+        return tempFile.renameTo(inputFile);
     }
 }

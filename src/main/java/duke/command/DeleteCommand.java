@@ -1,8 +1,9 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
-import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private final int index;
@@ -20,25 +21,22 @@ public class DeleteCommand extends Command {
      * Executes the Delete Command and removes the task from the Linked List and file.
      *
      * @param tasks   The TaskList containing all existing tasks.
-     * @param ui      The Ui for printing purposes.
      * @param storage The Storage for saving tasks to file.
      * @return The response string.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        try {
+            Task t = tasks.getList().get(index);
 
-        StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n" + tasks.allTasks.get(index));
-        storage.deleteTaskFromFile(tasks.allTasks.get(index));
-        tasks.allTasks.remove(index);
-        if (tasks.allTasks.size() == 1) {
-            sb.append("\nNow you have ")
-              .append(tasks.allTasks.size())
-                .append(" task in the list.");
-        } else {
-            sb.append("\nNow you have ")
-              .append(tasks.allTasks.size())
-                .append(" tasks in the list.");
+            StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n" + t);
+            storage.deleteTaskFromFile(t);
+            tasks.deleteTask(t);
+            sb.append(tasks.getStatus());
+
+            return (sb.toString());
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Invalid task number. Not within range");
         }
-        return (sb.toString());
     }
 
     /**

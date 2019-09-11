@@ -94,7 +94,8 @@ public class AddCommand extends Command {
             output += ui.getBottomBorder();
             break;
         }
-        }
+        default:
+            assert (false) : "Something went wrong in AddCommand";
         }
         return output;
     }

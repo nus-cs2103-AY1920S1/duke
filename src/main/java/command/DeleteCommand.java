@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
      * @return false as command is a DeleteCommand.
      */
     public boolean isExit() {
+        assert(!super.type.getName().equals("bye"));
         return false;
     }
 

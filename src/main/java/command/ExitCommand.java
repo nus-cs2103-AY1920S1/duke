@@ -10,6 +10,7 @@ import ui.Ui;
  */
 public class ExitCommand extends Command {
     public ExitCommand() {
+        assert(super.type.getName().equals("bye"));
         this.type = FullCommand.BYE;
     }
 

@@ -23,6 +23,7 @@ public class EditCommand extends Command {
      * @return false as command is an EditCommand.
      */
     public boolean isExit() {
+        assert(!super.type.getName().equals("bye"));
         return false;
     }
 

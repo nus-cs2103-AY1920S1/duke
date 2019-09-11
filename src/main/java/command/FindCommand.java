@@ -31,6 +31,7 @@ public class FindCommand extends Command {
      */
 
     public boolean isExit() {
+        assert(!super.type.getName().equals("bye"));
         return false;
     }
 

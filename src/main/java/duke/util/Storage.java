@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.note.Note;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     private String path;
+    private final String LINE_DIVIDER = "____________________";
 
     /**
      * Constructor for Storage object.
@@ -31,11 +33,11 @@ public class Storage {
      * @return History of tasklist if present
      * @throws IOException if there are errors reading the file
      */
-    public ArrayList<Task> retrieveHistory() throws IOException, DukeException {
+    public ListManager retrieveHistory() throws IOException, DukeException {
         Path filePath = Paths.get(path);
         ArrayList<String> lines = new ArrayList<>(Files.readAllLines(filePath));
-        ArrayList<Task> taskList = textToTaskList(lines);
-        return taskList;
+        ListManager lists = textToListManager(lines);
+        return lists;
     }
 
     /**
@@ -44,36 +46,50 @@ public class Storage {
      * @return list of Task objects
      * @throws DukeException when history is corrupted
      */
-    private ArrayList<Task> textToTaskList(ArrayList<String> lines) throws DukeException {
+    private ListManager textToListManager(ArrayList<String> lines) throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Note> notesList = new ArrayList<>();
+        boolean readingTasks = true;
         for (String line : lines) {
-            String[] parts = line.split("\\|");
-            String part = parts[0];
-            switch (part) {
-            case "T":
-                taskList.add(new Todo(parts[2], parts[1].equals("1")));
-                break;
-            case "D":
-                taskList.add(new Deadline(parts[2], parts[3], parts[1].equals("1")));
-                break;
-            case "E":
-                taskList.add(new Event(parts[2], parts[3], parts[1].equals("1")));
-                break;
-            default:
-                throw new DukeException("Corrupted history");
+            if (line.equals(LINE_DIVIDER)) {
+                readingTasks = false;
+                continue;
             }
-            assert false : "Corrupted history";
+            if (readingTasks) {
+                String[] parts = line.split("\\|");
+                String part = parts[0];
+                switch (part) {
+                case "T":
+                    taskList.add(new Todo(parts[2], parts[1].equals("1")));
+                    break;
+                case "D":
+                    taskList.add(new Deadline(parts[2], parts[3], parts[1].equals("1")));
+                    break;
+                case "E":
+                    taskList.add(new Event(parts[2], parts[3], parts[1].equals("1")));
+                    break;
+                default:
+                    throw new DukeException("Corrupted history");
+                }
+                assert false : "Corrupted history";
+            } else {
+                notesList.add(new Note(line));
+            }
         }
-        return taskList;
+        System.out.println("hihihi");
+        System.out.println(taskList);
+        System.out.println(notesList);
+        return new ListManager(new TaskList(taskList), new NoteList(notesList));
     }
 
     /**
      * Saves the history before closing the app.
-     * @param taskList tasklist to be saved as a .txt file
+     * @param lists lists to be saved as a .txt file
      * @throws IOException if there are errors writing to the file
      */
-    public void saveHistory(ArrayList<Task> taskList) throws IOException {
+    public void saveHistory(ListManager lists) throws IOException {
         String result = "";
+        ArrayList<Task> taskList = lists.getTasks().getTaskAsArrayList();
         for (Task t : taskList) {
             String type = "";
             String date = "";
@@ -97,6 +113,11 @@ public class Storage {
                 String currentTask = type + "|" + completed + "|" + title + "|" + date + "\n";
                 result += currentTask;
             }
+        }
+        result += LINE_DIVIDER + "\n";
+        ArrayList<Note> noteList = lists.getNotes().getNotesAsArrayList();
+        for (Note n : noteList) {
+            result += n.getDesc() + "\n";
         }
         Path filePath = Paths.get(path);
         Files.deleteIfExists(filePath);

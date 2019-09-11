@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Creates a deadline for a task which has to be done. A sub class of Task.
  */
@@ -33,6 +35,16 @@ public class Deadline extends Task {
 		String dateD = deadLineDate[1];
 		Deadline newDeadLine = new Deadline(taskD, dateD);
 		return newDeadLine;
+	}
+
+	public String execute(Deadline task, DukeWriteFile storage, TaskList tasks) throws IOException {
+		StringBuilder printTask = new StringBuilder();
+		printTask.append(Ui.BORDER + "\nGot it. I've added this task:\n");
+		printTask.append(task.toString() + "\n");
+		printTask.append("Now you have " + tasks.getCounter() + " tasks in the list.\n" + Ui.BORDER);
+		storage.appendToFile("E~" + task.getStatus() + "~" +
+				                task.getDescription() + "~" + task.getDeadline() + "\n");
+		return printTask.toString();
 	}
 
 	/**

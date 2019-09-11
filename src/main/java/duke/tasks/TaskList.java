@@ -60,6 +60,10 @@ public class TaskList {
         return tasks.get(index - 1);
     }
 
+    public void updateTask(int index, Task task) {
+        tasks.set(index - 1, task);
+    }
+
     public int numTasks() {
         return tasks.size();
     }

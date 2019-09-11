@@ -1,7 +1,5 @@
 package duke.ui;
 
-import duke.DukeException;
-
 import java.util.Scanner;
 
 /**
@@ -11,15 +9,15 @@ public class Ui {
     /**
      * String of a line.
      */
-    final public static String line = "    ____________________________________________________________\n";
+    final private static String line = "    ____________________________________________________________\n";
     /**
      * String of an indent.
      */
-    final public static String indent = "    ";
+    final private static String indent = "    ";
     /**
      * String of Duke logo.
      */
-    final public static String logo = line
+    final private static String logo = line
             + "     ____        _           \n"
             + "    |  _ \\ _   _| | _____   \n"
             + "    | | | | | | | |/ / _ \\  \n"

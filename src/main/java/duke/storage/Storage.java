@@ -22,9 +22,7 @@ public class Storage {
      * Charset for reading and writing .txt files.
      */
     final static Charset ENCODING = StandardCharsets.UTF_8;
-    /**
-     * Path for data.
-     */
+
     private Path path;
 
     /**

@@ -41,6 +41,7 @@ public class Duke {
             result = taskList.doCommand(command);
             storage.writeDuke(result.getTaskList());
         } catch (DukeException | IOException ex) {
+            result.setOutput(ex.getMessage());
             ui.printError(ex);
         }
         return result.getOutput();

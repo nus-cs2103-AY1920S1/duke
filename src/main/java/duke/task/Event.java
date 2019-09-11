@@ -17,7 +17,7 @@ public class Event extends Task {
      * Constructor for event.
      *
      * @param description description of event
-     * @param date        date and time of event
+     * @param date        date and time of event in String format
      */
     public Event(String description, String date) {
         super(description);

@@ -11,10 +11,10 @@ public class Deadline extends Task {
     private DateTimeFormatter formatter;
 
     /**
-     * Constructor for event.
+     * Constructor for deadline.
      *
-     * @param description description of event
-     * @param date        date and time of event
+     * @param description description of deadline
+     * @param date        date and time of deadline in String format
      */
     public Deadline(String description, String date) {
         super(description);

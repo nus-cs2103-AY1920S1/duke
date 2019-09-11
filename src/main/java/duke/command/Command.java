@@ -5,17 +5,16 @@ import java.util.ArrayList;
 import duke.task.Task;
 import duke.parser.Comd;
 
+/**
+ * A class for storing information for commands.
+ */
 public class Command {
-    Comd comd;
-    String input;
-    String output;
-    ArrayList<Task> taskList;
+    private Comd comd;
+    private String input;
+    private String output;
+    private ArrayList<Task> taskList;
 
-    public Command() {}
-
-    public Command(String output, ArrayList<Task> taskList) {
-        this.output = output;
-        this.taskList = taskList;
+    public Command() {
     }
 
     public Command(Comd comd, String input) {

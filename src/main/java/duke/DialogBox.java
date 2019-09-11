@@ -27,6 +27,7 @@ public class DialogBox extends HBox {
     
     private DialogBox(String text, Image img) {
         try {
+            assert (MainWindow.class.getResource("/view/DialogBox.fxml") != null);
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
@@ -55,6 +56,7 @@ public class DialogBox extends HBox {
     
     /**
      * Gets the dialogbox for duke.
+     *
      * @param text text in which Duke is supposed to response
      * @param img  display picture of Duke
      * @return db

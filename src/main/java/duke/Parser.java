@@ -1,3 +1,8 @@
+import javafx.util.Pair; 
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * Represents a Parse Manager, which parses the inputs given by the user, so our other classes
  * are able to read it with ease.
@@ -39,9 +44,9 @@ class Parser {
             case TODO :
                 return new AddCommand(new Todo(inputArr[1]));
             case DEADLINE :
-                return new AddCommand(createDeadline(inputArr[1]));
+                return new AddCommand(createTimedTask(inputArr[1], action));
             case EVENT :
-                return new AddCommand(createEvent(inputArr[1]));
+                return new AddCommand(createTimedTask(inputArr[1], action));
             case DONE :
                 return new DoneCommand(parseToNumber(inputArr[1], "Done"));
             case DELETE :
@@ -107,47 +112,100 @@ class Parser {
     }
 
     /**
-     * Returns a Task, or specifically, a Deadline.
+     * Returns a Task that is time-limited e.g. Deadline, Event.
      * 
-     * <p>The taskArr string is split with ' /by ', which the taskArr[0] is the given
-     * task, while taskArr[1] is the date, time or both.
-     * Otherwise, it will throw a DukeException, if the format is wrong.
-     * 
-     * @param taskString A String that contain the task including the date to be split
-     * @return A Deadline Task to be added.
-     * @throws DukeException When the format of Deadline is wrong.
-     * @see Deadline#Deadline(String, String)
+     * <p>Returns by splitting the taskString by a indicator and parsing it.
+     * @param taskString The String given by the user without the Action/Command.
+     * @param action The given Action by the user to decipher which task to return.
+     * @return a Time-limited Task.
+     * @throws DukeException When the format of the input is wrong.
      */
-    private Task createDeadline(String taskString) throws DukeException {
-        String[] taskArr = taskString.split(" /by ", 2);
-        if (taskArr.length == 1) {
-            throw new DukeException("Oof. There seems to be an error with your deadline format. "
-                    + "Here's an example: \'deadline Handup Quiz /by 17/05/2019 14:05\'");
+    private Task createTimedTask(String taskString, Action action) throws DukeException {
+        String[] taskArr = null;
+        switch (action) {
+        case DEADLINE :
+            taskArr = taskString.split(" /by ", 2);
+            break;
+        case EVENT :
+            taskArr = taskString.split(" /at ", 2);
+            break;
+        default :
+            throw new DukeException("Creating a time-limited task when not supposed to.");
+        }
+
+        if (taskArr.length == 2) {
+            return checkTimedTask(taskArr, action);
         } else {
-            return new Deadline(taskArr[0], taskArr[1]);
+            throw new DukeException("Oof. There seems to be an error with your format.\n" 
+            + "Please type \'help\' for more information.");
         }
     }
 
     /**
-     * Returns a Task, or specifically, an Event.
+     * Returns a Task that is time-limited e.g. Deadline, Event.
      * 
-     * <p>The taskArr string is split with ' /by ', which the taskArr[0] is the given
-     * task, while taskArr[1] is the date, time or both.
-     * Otherwise, it will throw a DukeException, if the format is wrong.
+     * <p>Used to check against the action and return the task accordingly
      * 
-     * @param taskString A String that contain the task including the date to be split.
-     * @return An Event Task to be added.
-     * @throws DukeException When the format of the Event is wrong.
-     * @see Event#Event(String, String)
+     * @param taskArr The task containing the task itself, and the date
+     * @param action The given Action by the user to decipher which task to return.
+     * @return A time-limited Task.
+     * @throws DukeException When creating a time-limited task when not supposed to.
      */
-    private Task createEvent(String taskString) throws DukeException {
-        String[] taskArr = taskString.split(" /at ", 2);
-        if (taskArr.length == 1) {
-            throw new DukeException("Oof. There seems to be an eror with your event format" 
-                    + "Here's an example: \'event Go to class /at 17/05/2019 14:05\'");
-        } else {
-            return new Event(taskArr[0], taskArr[1]);
+    private Task checkTimedTask(String[] taskArr, Action action) throws DukeException {
+        Pair<LocalDate, LocalTime> pair = obtainDateTime(taskArr[1]);
+        switch (action) {
+        case DEADLINE :
+            return new Deadline(taskArr[0], pair.getKey(), pair.getValue());
+        case EVENT :
+            return new Event(taskArr[0], pair.getKey(), pair.getValue());
+        default :
+            throw new DukeException("Oof. Creating a time-limited task when not supposed to.");
         }
+    }
+
+    /**
+     * Returns a Pair which contains the Date and Time, either can be null, not both.
+     * 
+     * <p>Parses the date and time and converts them into a pair to be returned.
+     * 
+     * @param dateTime The time and date to be parsed.
+     * @return A Pair which contains the Date and Time, either can be null, not both.
+     * @throws DukeException When there is an error parsing the date, time or both.
+     */
+    private Pair<LocalDate, LocalTime> obtainDateTime(String dateTime) throws DukeException {
+        String[] dateTimeArr = dateTime.split(" ", 2);
+        LocalDate date = null;
+        LocalTime time = null;
+        assert dateTimeArr.length == 1 || dateTimeArr.length == 2 : "dateTimeArr is wrong length.";
+
+        if (dateTimeArr.length == 2) {
+            try {
+                // Parse both date and time
+                date = LocalDate.parse(dateTimeArr[0], Task.DATE_FORMATTER);
+                time = LocalTime.parse(dateTimeArr[1], Task.TIME_FORMATTER);
+            } catch (Exception error) {
+                throw new DukeException("Oof. Unable to parse both time and date.\n" 
+                        + "Please use \'help\' for the formatting of time and date");
+            }
+        } else if (dateTimeArr.length == 1) {
+            try {
+                // Parse date only
+                date = LocalDate.parse(dateTimeArr[0], Task.DATE_FORMATTER);
+            } catch (Exception error) {
+                try {
+                    // Parse time only
+                    time = LocalTime.parse(dateTimeArr[0], Task.TIME_FORMATTER);
+                } catch (Exception errorAgain) {
+                    throw new DukeException("Oof. Unable to parse both time and date.\n" 
+                        + "Please use \'help\' for the formatting of time and date");
+                }
+            }
+        } else {
+            throw new DukeException("Oof. There seems to be a formatting issue.\n" 
+                    + "Please use \'help\' for the formatting of time and date");
+        }
+
+        return new Pair<LocalDate,LocalTime>(date, time);
     }
 
     /**

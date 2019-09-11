@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * that can be easily printed out in readable format. 
  */
 class Task implements Serializable {
-    protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    protected static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     private static final String CIRCLE = "O";    
     private static final String CROSS = "X";  

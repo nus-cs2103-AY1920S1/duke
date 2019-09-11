@@ -5,11 +5,8 @@ import duke.exception.MissingDescriptionException;
 import duke.exception.MissingInputException;
 
 import duke.parser.Parser;
-import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
-
-import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -49,7 +46,7 @@ public class Ui {
             command = command.trim();
 
             try {
-                parser.executeCommand(command);
+                parser.getResponseToCommand(command);
             } catch (InvalidCommandException | MissingInputException | MissingDescriptionException e) {
                 System.out.println(e.getMessage());
             }
@@ -65,22 +62,11 @@ public class Ui {
         Parser parser = new Parser();
         String output = "";
         try {
-            output = parser.executeCommand(command.trim());
+            output = parser.getResponseToCommand(command.trim());
         } catch (InvalidCommandException | MissingInputException | MissingDescriptionException e) {
             output += e.getMessage();
         }
         return output;
-    }
-
-    /**
-     * Prints the necessary output when a specific task is added to the tasks list.
-     * @param task The specified task that was added to the task list.
-     */
-    public void printAddedTask(Task task) {
-        System.out.println("\tGot it. I've added this task:");
-        System.out.println("\t  " + task.toString());
-        int size = (new TaskList()).getSize();
-        System.out.println(String.format("\tNow you have %d tasks in the list.", size));
     }
 
     /**
@@ -97,10 +83,6 @@ public class Ui {
         return output;
     }
 
-    public void printMarkAsDone(Task task) {
-        System.out.println("\tNice! I've marked this task as done:\n\t\t" + task.toString());
-    }
-
     /**
      * Retrieves the response that Duke gives when the specified task is marked as done.
      * @param task the specified task that is marked as done.
@@ -108,17 +90,6 @@ public class Ui {
      */
     public String getDoneTaskResponse(Task task) {
         return "\tNice! I've marked this task as done:\n\t\t" + task.toString();
-    }
-
-    /**
-     * Prints the necessary output when a specific task is deleted from the tasks list.
-     * @param task The specified task that was deleted from the task list.
-     */
-    public void printDeletedTask(Task task) {
-        System.out.println("\tNoted. I've removed this task:");
-        System.out.println("\t  " + task.toString());
-        int size = (new TaskList()).getSize();
-        System.out.println(String.format("\tNow you have %d tasks in the list.", size));
     }
 
     /**
@@ -136,17 +107,6 @@ public class Ui {
     }
 
     /**
-     * Prints the specified matching tasks one by one.
-     * @param matchingTasks the specified list of matching tasks.
-     */
-    public void printMatchingTasks(ArrayList<Task> matchingTasks) {
-        System.out.println("\tHere are the matching tasks in your list:");
-        for (int i = 0; i < matchingTasks.size(); i++) {
-            System.out.println(String.format("\t%d.%s", i + 1, matchingTasks.get(i)));
-        }
-    }
-
-    /**
      * Retrieves the appropriate response that Duke gives when the user wants to find certain tasks.
      * @param matchingTasks the list of matching tasks that are found for the user.
      * @return the response that Duke gives for the user to view the matching tasks.
@@ -160,16 +120,6 @@ public class Ui {
     }
 
     /**
-     * Prints the entire list task by task.
-     */
-    public void printList(ArrayList<Task> tasks) {
-        System.out.println("\tHere are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("\t%d.%s", i + 1, tasks.get(i)));
-        }
-    }
-
-    /**
      * Retrieves the appropriate response that Duke gives when the user wants to view the task list.
      * @param tasks the current list of tasks.
      * @return the appropriate response that Duke gives for the user to view the task list.
@@ -180,20 +130,6 @@ public class Ui {
             output.append(String.format("\t%d. %s\n", i + 1, tasks.get(i)));
         }
         return output.toString();
-    }
-
-    /**
-     * Prints the exit message when user exits the program. Overwrites the tasks in the stored tasks file.
-     */
-    public void exit() {
-        System.out.println("\tBye. Hope to see you again soon!");
-        Storage storage = new Storage();
-        try {
-            storage.updateTasks();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        System.exit(0);
     }
 
     /**

@@ -41,7 +41,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         Storage.filePath = filePath;
-        this.formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
     }
 
     /**
@@ -97,25 +97,14 @@ public class Storage {
         FileWriter fw = new FileWriter(filePath);
         TaskList taskList = new TaskList();
         ArrayList<Task> tasks = taskList.getTaskList();
-        String fileContent = "";
+        StringBuilder fileContent = new StringBuilder();
 
         for (Task task : tasks) {
-//            if (task instanceof Todo) {
-//                fileContent += "T," + (task.isDone() ? 0 : 1) + "," + task.getDesc();
-//                // format the task in the way it was read from the file
-//            } else if (task instanceof Deadline) {
-//                fileContent += "D," + (task.isDone() ? 0 : 1) + "," + task.getDesc() + ","
-//                        + ((Deadline)task).getDeadline().format(formatter);
-//                        // format the date and time back to how it was read from the file
-//            } else {
-//                fileContent += "E," + (task.isDone() ? 0 : 1) + "," + task.getDesc() + ","
-//                        + ((Event)task).getWhen().format(formatter);
-//            }
-            fileContent += formatTask(task);
-            fileContent += System.lineSeparator();
+            fileContent.append(formatTask(task));
+            fileContent.append(System.lineSeparator());
         }
 
-        fw.write(fileContent);
+        fw.write(fileContent.toString());
         fw.close();
     }
 

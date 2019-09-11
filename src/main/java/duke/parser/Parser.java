@@ -30,13 +30,13 @@ public class Parser {
     /**
      * Executes the specified command by the user.
      * @param command The specified command given by the user.
+     * @return the response to the specified user's input.
      * @throws InvalidCommandException if an invalid or recognisable command is given by the user.
      * @throws MissingInputException if there are missing inputs when creating a Deadline or Event task, such as the
      *     deadline or event time and day.
-     * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create.
-     * @return the response to the specified user's input.
+     * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create
      */
-    public String executeCommand(String command) throws InvalidCommandException, MissingInputException,
+    public String getResponseToCommand(String command) throws InvalidCommandException, MissingInputException,
             MissingDescriptionException {
         String[] commandWords = command.trim().split(" ");
         String commandType = commandWords[0];

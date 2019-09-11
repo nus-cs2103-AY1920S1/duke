@@ -9,7 +9,7 @@ import logic.Ui;
 /**
  * Encapsulates command to delete a task from the Task List.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends TaskCommands {
     private String args;
 
     public DeleteCommand(String args) {

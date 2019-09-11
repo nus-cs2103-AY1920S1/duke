@@ -5,7 +5,7 @@ import logic.DukeList;
 import logic.Storage;
 import logic.Ui;
 
-public class AddContactCommand extends Command {
+public class AddContactCommand extends ContactCommands {
     private String args;
 
     public AddContactCommand(String args) {

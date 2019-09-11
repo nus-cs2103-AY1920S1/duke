@@ -1,4 +1,6 @@
 import commands.Command;
+import commands.ContactCommands;
+import commands.TaskCommands;
 import logic.ContactList;
 import logic.DukeException;
 import logic.Parser;
@@ -53,7 +55,11 @@ public class Duke {
     String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);
-            c.execute(tasks, ui, storage);
+            if (c instanceof TaskCommands) {
+                c.execute(tasks, ui, storage);
+            } else {
+                c.execute(contacts, ui, storage);
+            }
         } catch (DukeException e) {
             Ui.loadStr(e.getMessage());
         } finally {

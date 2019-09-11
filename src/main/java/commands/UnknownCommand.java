@@ -6,7 +6,7 @@ import logic.DukeStrings;
 import logic.Storage;
 import logic.Ui;
 
-public class UnknownCommand extends Command {
+public class UnknownCommand implements Command {
     /**
      * Overridden Method to throw an exception due to an unknown command.
      *

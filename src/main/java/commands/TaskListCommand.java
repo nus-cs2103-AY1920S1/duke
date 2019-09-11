@@ -7,7 +7,7 @@ import logic.Ui;
 /**
  * Encapsulates command to get and print an ordered list of tasks.
  */
-public class TaskListCommand extends Command {
+public class TaskListCommand extends TaskCommands {
 
     /**
      * Overridden Method to execute the GetList command.

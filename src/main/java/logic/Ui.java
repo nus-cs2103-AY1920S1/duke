@@ -84,10 +84,6 @@ public class Ui<T> {
         loadStr(sb.toString());
     }
 
-    public void printFilteredContactList(List<Contact> contactList) {
-
-    }
-
     /**
      * Exit Message to be printed.
      */

@@ -8,7 +8,7 @@ import logic.Ui;
 /**
  * Find Contacts by name.
  */
-public class FindContactCommand extends Command {
+public class FindContactCommand extends ContactCommands {
     @Override
     public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
 

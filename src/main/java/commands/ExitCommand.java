@@ -7,7 +7,7 @@ import logic.Ui;
 /**
  * Encapsulates command to exit and terminate the program.
  */
-public class ExitCommand extends Command {
+public class ExitCommand extends TaskCommands {
 
     /**
      * Overridden Method to exit the program.

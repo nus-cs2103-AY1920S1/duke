@@ -11,7 +11,7 @@ import task.ToDo;
 /**
  * Encapsulates command to create a ToDo object to be added to the list of tasks.
  */
-public class ToDoCommand extends Command {
+public class ToDoCommand extends TaskCommands {
     private String args;
 
     public ToDoCommand(String args) {

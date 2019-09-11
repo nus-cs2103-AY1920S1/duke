@@ -5,7 +5,7 @@ import logic.DukeList;
 import logic.Storage;
 import logic.Ui;
 
-public class DeleteContactCommand extends Command {
+public class DeleteContactCommand extends ContactCommands {
     @Override
     public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
 

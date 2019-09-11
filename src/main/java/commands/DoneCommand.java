@@ -9,7 +9,7 @@ import logic.Ui;
 /**
  * Encapsulates command to mark a task as done.
  */
-public class DoneCommand extends Command {
+public class DoneCommand extends TaskCommands {
     private String args;
 
     public DoneCommand(String args) {

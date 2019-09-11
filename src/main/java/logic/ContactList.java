@@ -1,7 +1,6 @@
 package logic;
 
 import contacts.Contact;
-import task.Task;
 
 import java.util.List;
 import java.util.stream.Collectors;

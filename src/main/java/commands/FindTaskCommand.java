@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Encapsulates command to find and filter tasks by keyword.
  */
-public class FindTaskCommand extends Command {
+public class FindTaskCommand extends TaskCommands {
     private String args;
 
     public FindTaskCommand(String args) {

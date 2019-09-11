@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 /**
  * Encapsulates command to create an Event Task to be added to List of Tasks.
  */
-public class EventCommand extends Command {
+public class EventCommand extends TaskCommands {
     private String args;
 
 

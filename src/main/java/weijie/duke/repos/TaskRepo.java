@@ -55,7 +55,8 @@ public class TaskRepo implements IRepository<Task> {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws DukeIoException {
         tasks.remove(id);
+        storage.write(tasks);
     }
 }

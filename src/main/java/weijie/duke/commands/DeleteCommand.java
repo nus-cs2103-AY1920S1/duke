@@ -1,6 +1,7 @@
 package weijie.duke.commands;
 
 import weijie.duke.exceptions.DukeInvalidInputException;
+import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.models.Task;
 import weijie.duke.repos.IRepository;
 import weijie.duke.responses.TaskResponse;
@@ -30,7 +31,12 @@ public class DeleteCommand implements ITaskCommand {
         }
 
         Task deletedTask = repo.get(id);
-        repo.delete(id);
+        try {
+            repo.delete(id);
+        } catch (DukeIoException e) {
+            return new TaskResponse(e);
+        }
+
         int size = repo.getSize();
 
         String responseFormat = "Noted. I've removed this task:\n  " + deletedTask.getDescription()

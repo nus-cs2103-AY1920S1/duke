@@ -195,6 +195,7 @@ public class Duke {
         String taskType = Parser.parseCommand(fullCommand);
 
         switch(taskType){
+
         case ("list"):
             System.out.println(listRoutine(cli, tasks));
             break;
@@ -221,7 +222,6 @@ public class Duke {
             return true;
         case("stats"):
             String statCommandType = Parser.parseStatCommand(fullCommand);
-
             switch(statCommandType){
             case ("all"):
                 System.out.println(getAllStatsRoutine(cli, stats));
@@ -292,6 +292,7 @@ public class Duke {
      * @return String that needs to be printed to the user after LIST command.
      */
     public String listRoutine(Ui ui, TaskList tasks) {
+        stats.incrementTotalCommandsExecuted();
         return ui.getListSequence(tasks);
     }
 
@@ -302,6 +303,7 @@ public class Duke {
      *
      */
     public String byeRoutineCli(Ui ui, TaskList tasks, Storage taskStorage, Statistic stat, Storage statStorage) throws IOException {
+        stats.incrementTotalCommandsExecuted();
         // Clear the tasks txt file and adds headers.
         taskStorage.clearTaskFileBeforeSaving();
 
@@ -325,6 +327,7 @@ public class Duke {
      * @return Bye string sequence
      */
     public String byeRoutineGui(Ui ui, TaskList tasks) {
+        stats.incrementTotalCommandsExecuted();
         // For GUI, txt file is always saved after each change
         return (ui.getByeSequence());
     }
@@ -338,6 +341,7 @@ public class Duke {
      * @return Find string sequence.
      */
     public String findRoutine(Ui ui, TaskList tasks, String fullCommand) {
+        stats.incrementTotalCommandsExecuted();
         // Parser will parse the command and obtain the searchString.
         // findSimilarTasks will return a TaskList containing only matching tasks.
         TaskList similarTasks = tasks.findSimilarTasks(Parser.getFindTask(fullCommand));
@@ -354,6 +358,7 @@ public class Duke {
      * @throws DukeException Duke exception to handle invalid task index.
      */
     public String deleteRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
+        stats.incrementTotalCommandsExecuted();
         int taskNum = Parser.getDeletedTaskNum(fullCommand);
 
         // taskList index (starts from 0) differs from taskNum (starts from 1) by 1.
@@ -366,6 +371,9 @@ public class Duke {
 
         Task taskToDelete = tasks.getTask(taskNum);
         tasks.deleteTask(taskNum);
+
+        stats.incrementTotalTasksDeleted();
+
         return ui.getDeleteSequence(tasks, taskToDelete);
     }
 
@@ -379,6 +387,7 @@ public class Duke {
      * @throws DukeException Handles the error case when there is no description or location.
      */
     public String eventRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
+        stats.incrementTotalCommandsExecuted();
         if ((fullCommand.length() < 6)) {
             // Input is only "event".
 
@@ -410,6 +419,7 @@ public class Duke {
      * @throws DukeException To handle the case when description or time period is empty.
      */
     public String deadlineRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
+        stats.incrementTotalCommandsExecuted();
         if ((fullCommand.length() < 9)) {
 
             // fullCommand contains only the string "deadline".
@@ -446,6 +456,7 @@ public class Duke {
      * @throws DukeException Handles the case when description is empty.
      */
     public String todoRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
+        stats.incrementTotalCommandsExecuted();
         if (fullCommand.length() < 5) {
             // fullCommand contains only the string "todo".
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -469,12 +480,14 @@ public class Duke {
      * @return Done string sequence.
      */
     public String doneRoutine(Ui ui, TaskList tasks, String fullCommand) {
+        stats.incrementTotalCommandsExecuted();
+
         int taskNum = Parser.getFinishedTaskNum(fullCommand);
 
         // taskList index (starts from 0) differs from taskNum (starts from 1) by 1,
         taskNum--;
 
-        tasks.getTask(taskNum).setDone();
+        tasks.getTask(taskNum).setDone(stats);
 
         return ui.getDoneSequence(tasks, taskNum);
     }
@@ -494,6 +507,7 @@ public class Duke {
     }
 
     public String getAllStatsRoutine(Ui ui, Statistic stats) {
+        stats.incrementTotalCommandsExecuted();
         return ui.getAllStatSequence(stats);
     }
 

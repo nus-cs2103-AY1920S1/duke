@@ -1,6 +1,6 @@
 package seedu.duke.task;
 
-import java.time.LocalDate;
+import seedu.duke.statistic.Statistic;
 import java.time.LocalDateTime;
 
 /**
@@ -67,6 +67,12 @@ public class Event extends Task {
 
     public String getLocation() {
         return this.location;
+    }
+
+    @Override
+    public void setDone(Statistic stats) {
+        super.setDone(stats);
+        stats.incrementTotalEventsCompleted();
     }
 
 }

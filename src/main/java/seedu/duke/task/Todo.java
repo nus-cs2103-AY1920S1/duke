@@ -1,6 +1,6 @@
 package seedu.duke.task;
 
-import java.time.LocalDate;
+import seedu.duke.statistic.Statistic;
 import java.time.LocalDateTime;
 
 /**
@@ -54,6 +54,12 @@ public class Todo extends Task {
     public String toSaveString() {
         return ("T" + super.toSaveString() + " | " + " dummyExtraDescriptionForTodo"
         + " | " + this.getCreateDateTime().toString() + " | " + this.getLastModifiedDateTime().toString());
+    }
+
+    @Override
+    public void setDone(Statistic stats){
+        super.setDone(stats);
+        stats.incrementTotalTodosCompleted();
     }
 }
 

@@ -32,6 +32,26 @@ public class Statistic {
         totalEventsCompleted = 0;
     }
 
+    public void incrementTotalCommandsExecuted() {
+        totalCommandsExecuted += 1;
+    }
+
+    public void incrementTotalTasksDeleted() {
+        totalTasksDeleted += 1;
+    }
+
+    public void incrementTotalTodosCompleted() {
+        totalTodosCompleted += 1;
+    }
+
+    public void incrementTotalDeadlinesCompleted() {
+        totalDeadlinesCompleted += 1;
+    }
+
+    public void incrementTotalEventsCompleted() {
+        totalEventsCompleted += 1;
+    }
+
     public int getTotalCommandsExecuted() {
         return totalCommandsExecuted;
     }

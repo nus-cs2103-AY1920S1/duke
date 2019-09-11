@@ -1,6 +1,6 @@
 package seedu.duke.task;
 
-import java.time.LocalDate;
+import seedu.duke.statistic.Statistic;
 import java.time.LocalDateTime;
 
 /**
@@ -155,5 +155,11 @@ public class Deadline extends Task {
         String monthString = possibleMonths[month - 1];
 
         return (day + dayString + " of " + monthString + " " + year + ", " + hourString + minuteString + amOrpm);
+    }
+
+    @Override
+    public void setDone(Statistic stats) {
+        super.setDone(stats);
+        stats.incrementTotalEventsCompleted();
     }
 }

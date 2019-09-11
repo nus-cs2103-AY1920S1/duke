@@ -2,6 +2,7 @@ package seedu.duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import seedu.duke.statistic.Statistic;
 
 /**
  * Task class represents a Task created by the user.
@@ -75,7 +76,7 @@ public class Task {
     /**
      * Setter function for setting a Task isDone from false to true.
      */
-    public void setDone() {
+    public void setDone(Statistic stats) {
         if (!this.isDone) {
             this.isDone = true;
             updateLastModified();

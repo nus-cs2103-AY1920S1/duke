@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.command.Parser;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -61,53 +63,10 @@ public class Deadline extends Task {
         if (time.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
             jargon = "th ";
         }
-        String nameOfMonth = "";
-        switch (time.get(Calendar.MONTH)) {
-        case 0 : nameOfMonth = "January";
-            break;
-        case 1 : nameOfMonth = "February";
-            break;
-        case 2 : nameOfMonth = "March";
-            break;
-        case 3 : nameOfMonth = "April";
-            break;
-        case 4 : nameOfMonth = "May";
-            break;
-        case 5 : nameOfMonth = "June";
-            break;
-        case 6 : nameOfMonth = "July";
-            break;
-        case 7 : nameOfMonth = "August";
-            break;
-        case 8 : nameOfMonth = "September";
-            break;
-        case 9 : nameOfMonth = "October";
-            break;
-        case 10 : nameOfMonth = "November";
-            break;
-        case 11 : nameOfMonth = "December";
-            break;
-        default : nameOfMonth = "Invalid Month";
-        }
-        String hoursAndMinutes = "";
-        if (time.get(Calendar.HOUR_OF_DAY) <= 12) {
-            hoursAndMinutes += time.get(Calendar.HOUR_OF_DAY) + ":";
-        } else {
-            hoursAndMinutes += time.get(Calendar.HOUR) + ":";
-        }
-        if (time.get(Calendar.MINUTE) < 10) {
-            hoursAndMinutes += "0";
-        }
-        hoursAndMinutes += time.get(Calendar.MINUTE);
-        if (time.get(Calendar.AM_PM) == 0) {
-            hoursAndMinutes += "am";
-        } else {
-            hoursAndMinutes += "pm";
-        }
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM, YYYY. h:mma");
+        String dateWithoutDay = dateFormatter.format(time.getTime()).replace("AM","am").replace("PM","pm");
         return time.get(Calendar.DAY_OF_MONTH) + jargon
-                + nameOfMonth + ", "
-                + time.get(Calendar.YEAR) + ". "
-                + hoursAndMinutes;
+                + dateWithoutDay;
     }
 
     @Override

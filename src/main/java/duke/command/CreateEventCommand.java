@@ -8,6 +8,7 @@ import duke.task.Event;
 import duke.task.Task;
 
 import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Inherits from abstract Command class.
@@ -45,7 +46,7 @@ public class CreateEventCommand extends Command {
             Task t = new Event(eventText, at);
             tasks.addTask(new Event(eventText, at));
             response = messageHandler.addTaskConfirmationMessage(t);
-        } catch (ParseException error) {
+        } catch (DateTimeParseException error) {
             response = error.getMessage() + ". Please enter date in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM";
         }
         storage.writeToTasksFile(tasks);

@@ -1,15 +1,17 @@
 package duke.task;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
- * Inherits from abstrac3t Task class.
+ * Inherits from abstract Task class.
  * Represents a Duke <code>deadline</code>
  */
 public class Deadline extends Task {
-    private Date byDate;
+
+    private LocalDateTime byDate;
+
 
     /**
      * Default constructor for Deadline class.
@@ -19,12 +21,12 @@ public class Deadline extends Task {
      *                 where the taskName is "borrow books"
      * @param by       A String for date-time in the format <code>DD/MM/YYYY HHmm</code>
      */
-    public Deadline(String taskName, String by) throws ParseException {
+    public Deadline(String taskName, String by) throws DateTimeParseException {
         super(taskName);
         this.taskType = TypeOfTask.DEADLINE;
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        this.byDate = formatter.parse(by);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.byDate = LocalDateTime.parse(by, formatter);
         this.details = "(by: " + by + ")";
     }
 
@@ -37,12 +39,12 @@ public class Deadline extends Task {
      * @param by          A String for date-time in the format <code>DD/MM/YYYY HHmm</code>
      * @param isCompleted A boolean indicating if the task is completed
      */
-    public Deadline(String taskName, String by, boolean isCompleted) throws ParseException {
+    public Deadline(String taskName, String by, boolean isCompleted) throws DateTimeParseException {
         super(taskName, isCompleted);
         this.taskType = TypeOfTask.DEADLINE;
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        this.byDate = formatter.parse(by);
-        this.details = "(by: " + by;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.byDate = LocalDateTime.parse(by, formatter);
+        this.details = "(by: " + by + ")";
     }
 }

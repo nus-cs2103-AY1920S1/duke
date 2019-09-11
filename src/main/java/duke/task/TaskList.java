@@ -50,6 +50,9 @@ public class TaskList {
      * Marks a task as completed.
      *
      * @param taskNumber integer representing the number of the task to be marked as completed
+     *
+     * @return <code>Task</code> that was marked as completed
+     *
      * @throws TaskDoesNotExistException if taskNumber does not correspond to task in list
      */
     public Task markTaskAsCompleted(int taskNumber) throws TaskDoesNotExistException {
@@ -67,8 +70,10 @@ public class TaskList {
 
     /**
      * Deletes a task given its taskNumber.
-     *
      * @param taskNumber integer representing the number of the task to be marked as completed
+     *
+     * @return <code>Task</code> that was deleted
+     *
      * @throws TaskDoesNotExistException if taskNumber does not correspond to task in list
      */
     public Task deleteTask(int taskNumber) throws TaskDoesNotExistException {

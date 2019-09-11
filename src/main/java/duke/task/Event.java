@@ -1,16 +1,16 @@
 package duke.task;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Inherits from abstract Task class.
  * Represents a Duke <code>event</code>
  */
 public class Event extends Task {
-    private Date date1;
-    private Date date2;
+    private LocalDateTime date1;
+    private LocalDateTime date2;
 
     /**
      * Default constructor for Event class.
@@ -21,13 +21,13 @@ public class Event extends Task {
      * @param at       A String represents two date-times
      *                 in the format <code>DD/MM/YYYY HHmm - DD/MM/YYYY HHmm</code>
      */
-    public Event(String taskName, String at) throws ParseException {
+    public Event(String taskName, String at) throws DateTimeParseException {
         super(taskName);
         this.taskType = TypeOfTask.EVENT;
         String[] parts = at.split(" - ");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        this.date1 = formatter.parse(parts[0]);
-        this.date2 = formatter.parse(parts[1]);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.date1 = LocalDateTime.parse(parts[0], formatter);
+        this.date2 = LocalDateTime.parse(parts[1], formatter);
         this.details = "(at: " + at + ")";
     }
 
@@ -41,14 +41,15 @@ public class Event extends Task {
      *                    in the format <code>DD/MM/YYYY HHmm - DD/MM/YYYY HHmm</code>
      * @param isCompleted A boolean indicating if the task is completed
      */
-    public Event(String taskName, String at, boolean isCompleted) throws ParseException {
+    public Event(String taskName, String at, boolean isCompleted) throws DateTimeParseException {
         super(taskName, isCompleted);
         this.taskType = TypeOfTask.EVENT;
         String[] parts = at.split(" - ");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        this.date1 = formatter.parse(parts[0]);
-        this.date2 = formatter.parse(parts[1]);
-        this.details = "(at: " + at;
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        this.date1 = LocalDateTime.parse(parts[0], formatter);
+        this.date2 = LocalDateTime.parse(parts[1], formatter);
+        this.details = "(at: " + at + ")";
     }
 
 

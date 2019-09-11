@@ -10,6 +10,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+
+/**
+ * Custom container for the application.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -25,8 +29,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/jx.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/keanu.png"));
 
-
-
+    /**
+     * Set up when MainWindow is initialized.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -48,6 +53,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (duke.applicationShouldExit()) Main.exit();
+        if (duke.applicationShouldExit()) {
+            Main.exit();
+        }
     }
 }

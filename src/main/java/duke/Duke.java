@@ -30,6 +30,7 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Scanner sc = new Scanner(System.in);
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -49,16 +50,17 @@ public class Duke extends Application {
         }
     }
 
-    public Duke() {}
+    Duke() {}
 
     /**
      * Greets users, reads in inputs, processes the command, prints the outputs.
      */
-    public void run() {
+    private void run() {
         ui.greet();
-        String fullCommand = ui.readInput(new Scanner(System.in));
+        String fullCommand = ui.readInput(sc);
 
         while (!fullCommand.equals("bye")) {
+
             try {
                 Parser parser = new Parser(fullCommand);
                 boolean valid = parser.checkValidity();
@@ -99,7 +101,7 @@ public class Duke extends Application {
                         storage.updateFile(tasks);
                         break;
                     default:
-                        break;
+                        assert false : commandType;
                     }
                 }
             } catch (DukeException | IOException ex) {
@@ -107,7 +109,7 @@ public class Duke extends Application {
             }
 
             // Scans the next command line.
-            fullCommand = ui.readInput(new Scanner(System.in));
+            fullCommand = ui.readInput(sc);
         }
 
         ui.sayBye();

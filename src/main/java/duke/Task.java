@@ -4,14 +4,14 @@ package duke;
  * Encapsulates a Task object which stores activity name, status (done or not done).
  */
 
-public class Task {
+class Task {
 
     /** 2 attribute.
      * tasName represents the String of task name.
      * done is true if the task is done, or false otherwise.
      */
-    protected String taskName;
-    protected boolean done;
+    String taskName;
+    boolean isDone;
 
     /**
      * The constructor takes in a String of taskName and a boolean variable
@@ -19,16 +19,16 @@ public class Task {
      * @param taskName a String of task / activity name.
      * @param done true if the task is done or false otherwise.
      */
-    public Task(String taskName, boolean done) {
+    Task(String taskName, boolean done) {
         this.taskName = taskName;
-        this.done = done;
+        this.isDone = done;
     }
 
     /**
      * Changes the status of the task when a "done" command is executed.
      */
-    public void markAsDone() {
-        done = true;
+    void markAsDone() {
+        isDone = true;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Task {
      * @return a String showing the status and the task name.
      */
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[✓]" + taskName;
         } else {
             return "[✗]" + taskName;

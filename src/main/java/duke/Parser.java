@@ -3,7 +3,7 @@ package duke;
 /**
  * Encapsulates a Parser object to deals with making sense of the user command.
  */
-public class Parser {
+class Parser {
 
     /** 2 attribute.
      * fullCommand represents the String of input from the user.
@@ -25,7 +25,7 @@ public class Parser {
      * Returns the command type which is the first word of the full command.
      * @return String of command type.
      */
-    public String getCommandType() {
+    String getCommandType() {
         return part[0];
     }
 
@@ -33,11 +33,11 @@ public class Parser {
      * Returns the index of the targeted task when there is a Done/Delete command.
      * @return integer of the task index.
      */
-    public int getIndex() {
+    int getIndex() {
         return Integer.parseInt(part[1]);
     }
 
-    public String getKeyword() {
+    String getKeyword() {
         return fullCommand.substring(fullCommand.indexOf(" ") + 1);
     }
 
@@ -45,7 +45,7 @@ public class Parser {
      * Returns the activity name of a Todo task.
      * @return String of activity name of a Todo task.
      */
-    public String getActivityNameWithoutTime() {
+    String getActivityNameWithoutTime() {
         return fullCommand.substring(fullCommand.indexOf(" ") + 1);
     }
 
@@ -53,7 +53,7 @@ public class Parser {
      * Returns the activity name of a Deadline or Event task.
      * @return String of activity name of a Deadine or Event task.
      */
-    public String getActivityNameWithTime() {
+    String getActivityNameWithTime() {
         return fullCommand.substring(fullCommand.indexOf(" ") + 1,
                 fullCommand.indexOf("/"));
     }
@@ -62,7 +62,7 @@ public class Parser {
      * Returns the deadline in a "deadline" command.
      * @return String of deadline.
      */
-    public String getDeadline() {
+    String getDeadline() {
         String[] deadline = fullCommand.split("by");
         return deadline[1];
     }
@@ -71,7 +71,7 @@ public class Parser {
      * Returns the time of a Event task in a "event" command.
      * @return String of time of a Event task.
      */
-    public String getTime() {
+    String getTime() {
         String[] time = fullCommand.split("at");
         return time[1];
     }
@@ -81,7 +81,7 @@ public class Parser {
      * @return boolean variable representing the validity of the command.
      * @throws DukeException if the command is invalid.
      */
-    public boolean checkValidity() throws DukeException {
+    boolean checkValidity() throws DukeException {
         switch (getCommandType()) {
         case "list":
             break;

@@ -11,19 +11,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage {
+class Storage {
 
     /** 1 attribute.
      * filePath represents a string of file path of the file that stores
      * data of the task list.
      */
-    String filePath;
+    private String filePath;
 
     /**
      * The constructor takes in filePath and creates a new storage object.
      * @param filePath the string representing the file path of the stored task list.
      */
-    public Storage(String filePath) {
+    Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -32,7 +32,7 @@ public class Storage {
      * @return an ArrayList of tasks loaded from the file.
      * @throws FileNotFoundException if the file cannot be found by the path.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    ArrayList<Task> load() throws FileNotFoundException {
         FileReader fr = new FileReader(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner s = new Scanner(fr);
@@ -40,14 +40,12 @@ public class Storage {
         while (s.hasNext()) {
             String line = s.nextLine();
             String[] part = line.split("/");
+
             // Status is either done or not done.
             String status = part[1];
             boolean isDone;
-            if (status.equals("✓")) {
-                isDone = true;
-            } else {
-                isDone = false;
-            }
+            isDone = status.equals("✓");
+
             // Checks the type of task.
             switch (part[0]) {
             case "T":
@@ -60,7 +58,7 @@ public class Storage {
                 tasks.add(new Event(part[2], isDone, part[3]));
                 break;
             default:
-                break;
+                assert false : part[0];
             }
         }
         return tasks;
@@ -69,7 +67,7 @@ public class Storage {
     /**
      * Saves the tasks in the list whenever there is any change.
      */
-    public void updateFile(TaskList tasks) throws IOException {
+    void updateFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks.getTaskList()) {
             fw.write(task.storageFormat() + "\n");

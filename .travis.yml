@@ -1,17 +1,18 @@
 language: java
 
-jdk:
-  - oraclejdk11
-  - openjdk11
+jdk: openjdk11
 
 sudo: false
+#
+#cache:
+#  directories:
+#    - $HOME/.m2
+#    - $HOME/.gradle
 
-cache:
-  directories:
-    - $HOME/.m2
-    - $HOME/.gradle
-
-
+script:
+  - jdk_switcher use openjdk11
+  - export JAVA_HOME=$HOME/openjdk11
+  - $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
 
 # Specify a display with xvfb for UI testing
 before_script:

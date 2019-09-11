@@ -31,11 +31,13 @@ public class Command {
     public String execute(Ui ui, TaskList t, Storage s) throws DukeException {
         boolean find = false;
         String output = "";
-        if (input.length() <= 3) {
+        if (input.length() < 3) {
             throw new IncorrectInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (input.equals("bye")) {
+            return ui.showBye();
         }
         else {
-            assert(input.length() > 3) : "input length incorrect";
+            assert(input.length() >= 3) : "input length incorrect";
             if (input.equals("list")) {
                 output = ui.printList(t, s);
             } else if (input.substring(0, 4).equals("done")) {

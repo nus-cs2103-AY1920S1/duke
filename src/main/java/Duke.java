@@ -33,6 +33,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Stage stage;
 
     /**
      * Constructor for the Duke object.
@@ -58,6 +59,8 @@ public class Duke extends Application {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
+
+        this.stage = stage;
 
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -107,6 +110,7 @@ public class Duke extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();

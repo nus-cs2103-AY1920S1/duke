@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.Command;
 
 
+import java.time.DateTimeException;
 import java.util.InputMismatchException;
 
 /**
@@ -29,7 +30,7 @@ public class Parser {
      * @return duke.command.Command which would be executed
      * @throws InputMismatchException duke.command.Command is not recognised
      */
-    public Command parse(String stringCommand) throws InputMismatchException {
+    public Command parse(String stringCommand) throws InputMismatchException, DateTimeException {
         if (stringCommand.equalsIgnoreCase("bye")) {
             return new ByeCommand(stringCommand);
         } else if (stringCommand.equalsIgnoreCase("list")) {

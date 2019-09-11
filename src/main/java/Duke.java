@@ -6,6 +6,7 @@ import duke.command.Command;
 import duke.task.Task;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.InputMismatchException;
 import java.util.ArrayList;
 
@@ -49,10 +50,13 @@ public class Duke {
      */
     public String getResponse(String input) {
         String output = "";
+        //boolean isTestForAssertion = true;
+        //assert isTestForAssertion = false;
             try {
                 Command command = new Parser().parse(input);
                 output = command.execute(taskList, ui, storage);
-            } catch (InputMismatchException | IllegalArgumentException | IndexOutOfBoundsException e) {
+            } catch (InputMismatchException | IllegalArgumentException |
+                    ArrayIndexOutOfBoundsException | DateTimeException e) {
                 output = ui.printErrorMessage(e.getMessage());
             }
 

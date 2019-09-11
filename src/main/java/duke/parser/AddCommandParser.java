@@ -11,7 +11,7 @@ import duke.task.ToDoTask;
 public class AddCommandParser {
 
     /**
-     * Parse new task (without date) based on existing format
+     * Parse new task (without date) based on existing format.
      * @param commandDescription - array of strings containing command description
      * @return Optional containing either valid command or null (when exception thrown)
      * @throws IncompleteCommandException - throws error if the command is not in complete format
@@ -22,7 +22,7 @@ public class AddCommandParser {
     }
 
     /**
-     * Parse new task (with date) based on existing format
+     * Parse new task (with date) based on existing format.
      * @param commandDescription - array of strings containing command description
      * @return Optional containing either valid command or null (when exception thrown)
      * @throws IncompleteCommandException - throws error if the command is not in correct format
@@ -42,6 +42,7 @@ public class AddCommandParser {
             case "event":
                 EventTask.verifyTaskStatement(statementAndDate[0].toLowerCase());
                 return new AddCommand(new EventTask(taskName, statementAndDate[1]));
+            default:
             }
         } catch (IndexOutOfBoundsException e) {
             throw new IncompleteCommandException("incomplete", commandDescription[0]);
@@ -50,7 +51,7 @@ public class AddCommandParser {
     }
 
     /**
-     * Throws error if the given command is empty
+     * Throws error if the given command is empty.
      * @param commandDescription - array of strings containing command description
      * @throws IncompleteCommandException - throws error if the command is not in complete format
      */

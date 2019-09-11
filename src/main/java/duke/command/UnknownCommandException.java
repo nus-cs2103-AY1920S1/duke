@@ -3,7 +3,7 @@ package duke.command;
 public class UnknownCommandException extends Exception {
 
     /**
-     * Constructor
+     * Constructor.
      * @param message - unknown command given by user
      */
     public UnknownCommandException(String message) {

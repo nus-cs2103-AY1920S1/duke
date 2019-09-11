@@ -5,8 +5,13 @@ import duke.task.ToDoTask;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class TaskListTest {
     private TaskList taskList;
+
+    /**
+     * Constructor.
+     */
     public TaskListTest() {
         taskList = new TaskList();
         taskList.add(new ToDoTask("Say hi"));

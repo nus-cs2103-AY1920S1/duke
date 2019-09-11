@@ -6,7 +6,7 @@ public class WrongDateFormatException extends UnknownCommandException {
     private String date;
 
     /**
-     * Constructor
+     * Constructor.
      * @param date - Given date format from user
      */
     public WrongDateFormatException(String date) {
@@ -16,7 +16,8 @@ public class WrongDateFormatException extends UnknownCommandException {
 
     @Override
     public String getMessage() {
-        return "The format for \"" + this.date + "\" is wrong. The correct format for dates should be: " +
-                "\"dd/MM/yyyy HHmm\"";
+        return "The format for \"" + this.date
+                + "\" is wrong. The correct format for dates should be: "
+                + "\"dd/MM/yyyy HHmm\"";
     }
 }

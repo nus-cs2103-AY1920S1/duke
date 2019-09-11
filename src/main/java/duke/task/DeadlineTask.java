@@ -10,7 +10,7 @@ public class DeadlineTask extends Task {
     private String deadLine;
 
     /**
-     * Constructor
+     * Constructor.
      * @param taskName - Name of task
      * @param deadLine - Deadline of task
      */
@@ -20,7 +20,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Verifies that given statement complies with the required Deadline format
+     * Verifies that given statement complies with the required Deadline format.
      * @param statement - String containing expected statement
      * @throws IncorrectStatementException - thrown if the verification fails
      */
@@ -30,11 +30,15 @@ public class DeadlineTask extends Task {
         }
     }
 
-    /** Returns the task deadline **/
+    /** Returns the task deadline. **/
     public String getDeadline() {
         return this.deadLine;
     }
 
+    /**
+     * Returns a copy of the existing task.
+     * @return new task
+     */
     public Task getTaskCopy() {
         Task task = new DeadlineTask(this.getName(), this.getDeadline());
         if (this.isDone()) {
@@ -50,7 +54,7 @@ public class DeadlineTask extends Task {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof DeadlineTask) {
+        if (obj instanceof DeadlineTask) {
             DeadlineTask deadlineTask = (DeadlineTask) obj;
             return (deadlineTask.getName().equals(this.getName())
                     && (deadlineTask.getTaskType().equals(this.getTaskType()))

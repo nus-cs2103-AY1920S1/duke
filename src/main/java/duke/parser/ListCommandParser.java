@@ -7,7 +7,7 @@ import duke.command.UnknownCommandException;
 public class ListCommandParser {
 
     /**
-     * Parse list command based on required format
+     * Parse list command based on required format.
      * @return Optional containing either valid command or null (when exception thrown)
      */
     public static Command parse(String command) throws UnknownCommandException {

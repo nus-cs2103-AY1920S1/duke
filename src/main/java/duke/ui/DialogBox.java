@@ -48,12 +48,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Retrieves user Dialog Box.
+     * @param text - user input
+     * @param img - user image
+     * @return - Dialog box of user info
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
         dialogBox.setMinHeight(dialogBox.dialog.getMinHeight());
         return dialogBox;
     }
 
+    /**
+     * Retrieves Duke Dialog box.
+     * @param text - duke input
+     * @param img - duke image
+     * @return - Dialog box of duke info
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var dialogBox = new DialogBox(text, img);
         dialogBox.setMinHeight(dialogBox.dialog.getMaxHeight());

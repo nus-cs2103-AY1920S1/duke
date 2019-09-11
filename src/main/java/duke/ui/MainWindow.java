@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -57,7 +58,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates a new dialog box storing response message
+     * Creates a new dialog box storing response message.
      * @param message - message to be displayed
      */
     public void display(String message) {

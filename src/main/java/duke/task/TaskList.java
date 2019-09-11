@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,14 +10,14 @@ public class TaskList {
     private List<Task> list;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public TaskList() {
         this.list = new ArrayList<Task>();
     }
 
     /**
-     * Adds new task (without date) into list
+     * Adds new task (without date) into list.
      * @param task - task to add
      */
     public void add(Task task) {
@@ -28,7 +26,7 @@ public class TaskList {
     }
 
     /**
-     * Marks task at given index as done
+     * Marks task at given index as done.
      * @param idx - Index of task in list
      */
     public void done(int idx) {
@@ -37,7 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Marks task at given index as done
+     * Marks task at given index as done.
      * @param idx - Index of task in list
      */
     public void delete(int idx) {
@@ -46,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Returns task at index idx
+     * Returns task at index idx.
      * @param idx - index of task
      * @return duke.task.Task at index idx
      */
@@ -56,7 +54,7 @@ public class TaskList {
     }
 
     /**
-     * Returns the current size of list
+     * Returns the current size of list.
      * @return size of list
      */
     public int size() {
@@ -64,7 +62,8 @@ public class TaskList {
     }
 
     /**
-     * Prints out contents of list
+     * Prints out contents of list.
+     * @return String containing list contents
      */
     public String getPrintListMessage() {
         String response = "Here are the tasks in your list:\n";
@@ -73,18 +72,18 @@ public class TaskList {
         response += Arrays.stream(printedList)
                           .map(str -> {
                               int idx = index.getAndIncrement();
-                              return (idx+1) + "." + this.list.get(idx) + "\n";
+                              return (idx + 1) + "." + this.list.get(idx) + "\n";
                           })
                           .collect(Collectors.joining());
         return response;
     }
 
     /**
-     * Returns a new tasklist containing a copy of all the same values
+     * Returns a new tasklist containing a copy of all the same values.
      */
     public TaskList getCopyTaskList() {
         TaskList newList = new TaskList();
-        for (int i = 0; i < this.size(); i ++) {
+        for (int i = 0; i < this.size(); i++) {
             newList.add(this.list.get(i).getTaskCopy());
         }
         return newList;

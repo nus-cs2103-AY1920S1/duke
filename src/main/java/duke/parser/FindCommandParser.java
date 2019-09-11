@@ -7,7 +7,7 @@ import duke.command.IncompleteCommandException;
 public class FindCommandParser {
 
     /**
-     * Parse find command
+     * Parse find command.
      * @param commandDescription - array of strings containing command description
      * @return Optional containing either valid command
      * @throws IncompleteCommandException - throws error if the command is not in complete format
@@ -18,7 +18,7 @@ public class FindCommandParser {
     }
 
     /**
-     * Throws error if the given command is empty
+     * Throws error if the given command is empty.
      * @param commandDescription - array of strings containing command description
      * @throws IncompleteCommandException - throws error if the command is not in complete format
      */

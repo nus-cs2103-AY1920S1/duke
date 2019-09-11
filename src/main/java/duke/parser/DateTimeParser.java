@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 public class DateTimeParser {
 
     /**
-     * Validates the format of the given string as a proper Date format
+     * Validates the format of the given string as a proper Date format.
      * @param dateToValidate - String containing expected date
      * @throws WrongDateFormatException - thrown when the given String does not comply with Date formet
      */

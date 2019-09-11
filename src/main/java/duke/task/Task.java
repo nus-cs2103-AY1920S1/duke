@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.command.Command;
 import duke.command.Commands;
 
 public abstract class Task {
@@ -10,7 +9,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Constructor
+     * Constructor.
      * @param taskName - Name of given task
      * @param taskIcon - Icon for the task - [D]/[E] etc..
      * @param taskType - Type of task - Deadline/Event etc..
@@ -22,13 +21,13 @@ public abstract class Task {
         this.taskType = taskType;
     }
 
-    /** Marks duke.task.Task as Done **/
+    /** Marks duke.task.Task as Done. **/
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * Returns taskName
+     * Returns taskName.
      * @return String name
      */
     public String getName() {
@@ -36,32 +35,32 @@ public abstract class Task {
     }
 
     /**
-     * Returns tick if task is Done, else returns cross
+     * Returns tick if task is Done, else returns cross.
      * @return String symbol
      */
     private String getDoneSymbol() {
-        if(this.isDone) {
+        if (this.isDone) {
             return "Done";
         }
         return "Not done";
     }
 
-    /** Returns task type **/
+    /** Returns task type. **/
     public Commands getTaskType() {
         return this.taskType;
     }
 
-    /** Returns true if task is done, else returns false **/
+    /** Returns true if task is done, else returns false. **/
     public boolean isDone() {
         return this.isDone;
     }
 
-    /** Returns task icon **/
+    /** Returns task icon. **/
     private String getTaskIcon() {
         return this.taskIcon;
     }
 
-    /** Returns a copy of the existing task **/
+    /** Returns a copy of the existing task. **/
     public abstract Task getTaskCopy();
 
     @Override
@@ -71,7 +70,7 @@ public abstract class Task {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Task) {
+        if (obj instanceof Task) {
             Task task = (Task) obj;
             return (task.getName().equals(this.getName())
                     && (task.getTaskType().equals(this.getTaskType()))

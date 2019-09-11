@@ -10,7 +10,7 @@ public class EventTask extends Task {
     private String duration;
 
     /**
-     * Constructor
+     * Constructor.
      * @param taskName - Name of task
      * @param duration - Deadline of task
      */
@@ -20,7 +20,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Verifies that given statement complies with the required Deadline format
+     * Verifies that given statement complies with the required Deadline format.
      * @param statement - String containing expected statement
      * @throws IncorrectStatementException - thrown if the verification fails
      */
@@ -30,11 +30,15 @@ public class EventTask extends Task {
         }
     }
 
-    /** Returns task duration **/
+    /** Returns task duration. **/
     public String getDuration() {
         return this.duration;
     }
 
+    /**
+     * Returns a copy of the existing task.
+     * @return new task
+     */
     public Task getTaskCopy() {
         Task task = new EventTask(this.getName(), this.getDuration());
         if (this.isDone()) {
@@ -50,7 +54,7 @@ public class EventTask extends Task {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof EventTask) {
+        if (obj instanceof EventTask) {
             EventTask eventTask = (EventTask) obj;
             return (eventTask.getName().equals(this.getName())
                     && (eventTask.getTaskType().equals(this.getTaskType()))

@@ -3,6 +3,7 @@ package duke.ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.types.SortType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -235,5 +236,9 @@ public class Ui {
 
     public void showClearSuccessMsg() {
         showMsg("All tasks cleared.");
+    }
+
+    public void showSortSuccessMsg(SortType sortType) {
+        showMsg("Tasks sorted according to " + sortType.toString());
     }
 }

@@ -9,6 +9,8 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.NotDoneCommand;
+import duke.command.SortCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -73,6 +75,18 @@ public enum CommandWord {
         @Override
         public Command parseCommand(String commandContent) throws DukeException {
             return new NotDoneCommand(commandContent);
+        }
+    },
+    TAG {
+        @Override
+        public Command parseCommand(String commandContent) {
+            return new TagCommand(commandContent);
+        }
+    },
+    SORT {
+        @Override
+        public Command parseCommand(String commandContent) throws DukeException {
+            return new SortCommand(commandContent);
         }
     };
 

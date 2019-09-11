@@ -1,9 +1,12 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.types.SortType;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class TaskList {
@@ -123,16 +126,29 @@ public class TaskList {
                         .filter(t -> t.getDesc().contains(keyword))
                         .collect(Collectors.toList())
         );
-        /*
-        getTasks().forEach(x -> {
-            if (x.desc.contains(keyword)) {
-                tasks.add(x);
-            }
-        });*/
         return tasks;
     }
 
     public void clear() {
         getTasks().clear();
+    }
+
+    public void sort(SortType sortType) throws DukeException {
+        Comparator<Task> comparator;
+        Function<Task, String> fn;
+        switch (sortType) {
+        case DESC:
+            fn = Task::getDesc;
+            break;
+        case TASKTYPE:
+            fn = t -> t.getClass().getName();
+            break;
+        case DONE:
+            fn = t -> t.getDoneStatus();
+            break;
+        default:
+            throw new DukeException("Invalid sort type");
+        }
+        getTasks().sort(Comparator.comparing(fn));
     }
 }

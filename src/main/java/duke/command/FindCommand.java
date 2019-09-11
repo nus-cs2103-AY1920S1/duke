@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.Ui;
 import duke.Storage;
 import duke.exception.DukeException;
@@ -13,6 +13,7 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert super.description != null;
         if (description.length < 2) {
             throw new DukeException("☹ OOPS!!! The keyword cannot be empty.");
         }

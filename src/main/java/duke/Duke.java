@@ -3,6 +3,7 @@ package duke;
 import duke.exception.DukeException;
 import duke.command.Command;
 import duke.parser.Parser;
+import duke.task.TaskList;
 
 /**
  * Represents a duke object.

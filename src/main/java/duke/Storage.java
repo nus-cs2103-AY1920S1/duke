@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.*;
 import duke.exception.DukeException;
+import duke.task.TaskList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -68,7 +69,7 @@ public class Storage {
         try {
             FileWriter filewriter = new FileWriter(filepath);
 
-            for (Task task : tasklist.list) {
+            for (Task task : tasklist.getList()) {
                 filewriter.write(task.textFormat());
                 filewriter.write(System.lineSeparator());
             }

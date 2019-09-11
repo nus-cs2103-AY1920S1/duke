@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.task.TaskList;
 import duke.Ui;
 import duke.Storage;
 import duke.exception.DukeException;
@@ -13,15 +13,18 @@ public class AddEventCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert super.description != null;
         if (super.description.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
+
         String content = description[1];
         String[] actionAndDate = content.split("/at");
 
         if (actionAndDate.length < 2) {
             throw new DukeException("☹ OOPS!!! The format for event is invalid.");
         }
+
         Event event = new Event(actionAndDate[0], actionAndDate[1]);
         tasks.addTask(event);
 

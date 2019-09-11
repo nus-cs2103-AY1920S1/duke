@@ -5,6 +5,9 @@ import java.util.InputMismatchException;
  */
 public class Parser {
 
+    /**
+     * Constructor for Parser class.
+     */
     public Parser() {
     }
 

@@ -1,7 +1,6 @@
 /**
  * Represents a to-do object.
  */
-
 public class Todo extends Task {
 
     /**

@@ -33,7 +33,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Stage stage;
+    public Stage stage;
 
     /**
      * Constructor for the Duke object.
@@ -60,7 +60,6 @@ public class Duke extends Application {
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
-        this.stage = stage;
 
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -122,7 +121,6 @@ public class Duke extends Application {
         stage.setScene(scene);
         stage.show();
 
-
     }
 
     /**
@@ -167,7 +165,6 @@ public class Duke extends Application {
         try {
             Command command = new Command(input);
             out = command.execute(ui, tasks, storage);
-            String in = out;
             return out;
         } catch (DukeException e) {
             String message = e.getMessage();

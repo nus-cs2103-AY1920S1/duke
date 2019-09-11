@@ -41,7 +41,7 @@ public class Duke {
      */
     public String getResponse(String input) throws DukeException, NoSuchElementException {
         Command c = Parser.parse(input);
-        assert false : "Command object cannot be null";
+        assert c != null : "Command object cannot be null";
         return c.execute(this.ui, this.storage, this.allTasks);
     }
 }

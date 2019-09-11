@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
 
-    String divider;
+    static String divider;
     String logo;
     String commandType;
     Scanner scanner;
@@ -15,25 +15,9 @@ public class Ui {
     }
 
     /**
-     * Prints out the Duke logo as well we welcome message
-     */
-    public void showWelcome() {
-        logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        showLine();
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you");
-        showLine();
-    }
-
-    /**
      * Prints out the divider that is to be used for each command or output
      */
-    public void showLine() {
+    public static void showLine() {
         divider = "_____________________________________________________";
         System.out.println(divider);
     }

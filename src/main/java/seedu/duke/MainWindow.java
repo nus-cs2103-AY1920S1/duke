@@ -69,6 +69,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (response.equals("tutorial")) {
+            userInput.clear();
             showTutorialScene();
         } else {
             var db = DialogBox.getDukeDialog(response, dukeImage);

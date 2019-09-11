@@ -15,12 +15,14 @@ public class TaskList {
         return this.commands.size();
     }
 
-    public void list() {
+    public String list() {
         int count = 1;
+        String str = "";
         for (Task s : this.commands) {
-            System.out.println(count + ". " + s);
+            str = str + count + ". " + s + "\n";
             count++;
         }
+        return str;
     }
 
     public Task done(int index) {
@@ -37,13 +39,15 @@ public class TaskList {
         return this.commands.remove(index);
     }
 
-    public void find(String word) {
+    public String find(String word) {
         int count = 1;
+        String res = "";
         for (Task ttt : this.commands) {
             if (ttt.toString().contains(word)) {
-                System.out.println(count + ". " + ttt);
+                res += count + ". " + ttt + "\n";
                 count++;
             }
         }
+        return res;
     }
 }

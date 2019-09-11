@@ -23,22 +23,22 @@ public class Parser {
      * to tool.TaskList
      * @param command
      */
-    public void parse(String command) {
+    public String parse(String command) {
             String[] inputArr = command.split(" ");
             String userCommand = inputArr[0];
+            String dukeText;
             try {
                 if (userCommand.equals("bye")) {
-                    this.ui.bye();
+                    dukeText = this.ui.bye();
                     this.storage.close(this.commands);
                 } else if (userCommand.equals("list")) {
-                    this.ui.list();
-                    this.commands.list();
+                    dukeText = this.ui.list() + "\n" + this.commands.list();
                 } else if (userCommand.equals("done")) {
                     try {
                         int index = Integer.parseInt(inputArr[1]) - 1;
                         try {
                             Task doneTask = this.commands.done(index);
-                            this.ui.done(doneTask);
+                            dukeText = this.ui.done(doneTask);
                             storage.done(doneTask, index + 1);
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("OOPS!!! Index for done does not exist in the list.");
@@ -55,7 +55,7 @@ public class Parser {
                             String by = taskDeadLine[1];
                             Task tt = new Deadline(taskD, new DateTime(by));
                             this.commands.add(tt);
-                            this.ui.addTask(tt, this.commands.size());
+                            dukeText = this.ui.addTask(tt, this.commands.size());
                             storage.save(tt);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeException("OOPS!!! The format for deadline is wrong. Please follow: <description> /by <time>");
@@ -72,7 +72,7 @@ public class Parser {
                             String at = taskEvent[1];
                             Task ee = new Event(taskE, new DateTime(at));
                             this.commands.add(ee);
-                            this.ui.addTask(ee, this.commands.size());
+                            dukeText = this.ui.addTask(ee, this.commands.size());
                             storage.save(ee);
                         } catch (ArrayIndexOutOfBoundsException e) {
                             throw new DukeException("OOPS!!! The format for event is wrong. Please follow: <description> /at <time>");
@@ -85,7 +85,7 @@ public class Parser {
                         String todoT = command.split(" ", 2)[1];
                         Task t = new Todo(todoT);
                         this.commands.add(t);
-                        this.ui.addTask(t, this.commands.size());
+                        dukeText = this.ui.addTask(t, this.commands.size());
                         storage.save(t);
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -95,7 +95,7 @@ public class Parser {
                         int i = Integer.parseInt(inputArr[1]) - 1;
                         try {
                             Task tt = this.commands.delete(i);
-                            this.ui.delete(tt, this.commands.size());
+                            dukeText = this.ui.delete(tt, this.commands.size());
                             storage.delete(i + 1);
                         } catch (IndexOutOfBoundsException e) {
                             throw new DukeException("OOPS!!! Index for delete does not exist in the list.");
@@ -105,14 +105,15 @@ public class Parser {
                     }
                 } else if (userCommand.equals("find")) {
                     String word = inputArr[1];
-                    this.ui.find();
-                    this.commands.find(word);
+                    dukeText = this.ui.find() + "\n" + this.commands.find(word);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                dukeText = e.getMessage();
             }
+
+            return dukeText;
 
     }
 }

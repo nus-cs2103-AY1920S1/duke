@@ -1,11 +1,14 @@
 package utils;
 
-import java.util.ArrayList;
-
 import tasks.Task;
+
+import java.util.ArrayList;
 
 public class Ui {
 
+    /**
+     * Returns a welcome message.
+     */
     public String getWelcomeMessage() {
         String output = "";
 
@@ -26,6 +29,9 @@ public class Ui {
         return "\n____________________________________________________________";
     }
 
+    /**
+     * Returns the list of tasks as a String.
+     */
     public String getTasksAsString(ArrayList<Task> tasks) {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {

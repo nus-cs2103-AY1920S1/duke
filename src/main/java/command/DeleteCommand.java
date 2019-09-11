@@ -1,12 +1,11 @@
 package command;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
+import tasks.Task;
 import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
-import tasks.Task;
+
+import java.io.IOException;
 
 /**
  * Delete Command is a Command, specifically for delete operation.
@@ -19,6 +18,9 @@ public class DeleteCommand extends Command {
         this.index = index - 1;
     }
 
+    /**
+     * Executes the given task and prints the respective output.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 
         String output = "";
@@ -33,8 +35,7 @@ public class DeleteCommand extends Command {
 
         // Save output as String
         output += ui.getTopBorder();
-        output += "\n\tNoted. I have removed this task: ";
-        output += "\n\t" + removed;
+        output += "\n\tNoted. I have removed this task: " + "\n\t" + removed;
         output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
         output += ui.getBottomBorder();
 

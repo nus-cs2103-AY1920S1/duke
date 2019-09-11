@@ -1,16 +1,15 @@
 package utils;
 
+import tasks.DeadLine;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import tasks.Task;
-import tasks.ToDo;
-import tasks.DeadLine;
-import tasks.Event;
 
 /**
  * Storage object holds the file, in which writing and reading will happen.
@@ -35,7 +34,7 @@ public class Storage {
 
     public Storage(String filePath) {
         this.file = new File(filePath);
-        assert(file.exists()) : "File doesn't exist.";
+        assert (file.exists()) : "File doesn't exist.";
     }
 
     /**

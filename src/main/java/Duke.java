@@ -1,11 +1,11 @@
-import java.io.IOException;
-import java.io.FileNotFoundException;
-
+import command.Command;
+import utils.Parser;
 import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
-import utils.Parser;
-import command.Command;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Duke {
 
@@ -27,6 +27,9 @@ public class Duke {
         return ui.getWelcomeMessage();
     }
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         String filePath = "src/main/java/data/tasks.txt";
         ui = new Ui();

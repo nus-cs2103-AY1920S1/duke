@@ -6,16 +6,19 @@ import utils.Ui;
 
 public class HelpCommand extends Command {
 
-    final String HELP_WELCOME = "Welcome to help! Here are the available commands:";
-    final String LIST_MSG = "list - Shows you a list of all current tasks.";
-    final String FIND_MSG = "find [description] - List items matching the description.";
-    final String EXIT_MSG = "bye - Exits the application.";
-    final String DELETE_MSG = "delete [index] - Removes task specified at index.";
-    final String DONE_MSG = "done [index] - Sets task specified at index as done.";
-    final String TODO_MSG = "todo [description] - Adds a todo task.";
-    final String DEADLINE_MSG = "deadline [description] [/by] [date] - Adds a deadline task.";
-    final String EVENT_MSG = "event [description] [/at] [date] - Adds an event task.";
+    private static final String HELP_WELCOME = "Welcome to help! Here are the available commands:";
+    private static final String LIST_MSG = "list - Shows you a list of all current tasks.";
+    private static final String FIND_MSG = "find [description] - List items matching the description.";
+    private static final String EXIT_MSG = "bye - Exits the application.";
+    private static final String DELETE_MSG = "delete [index] - Removes task specified at index.";
+    private static final String DONE_MSG = "done [index] - Sets task specified at index as done.";
+    private static final String TODO_MSG = "todo [description] - Adds a todo task.";
+    private static final String DEADLINE_MSG = "deadline [description] [/by] [date] - Adds a deadline task.";
+    private static final String EVENT_MSG = "event [description] [/at] [date] - Adds an event task.";
 
+    /**
+     * Executes the given task and prints the respective output.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = "";
 

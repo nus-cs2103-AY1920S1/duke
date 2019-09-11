@@ -35,6 +35,9 @@ public class AddCommand extends Command {
         this.taskDescription = taskDescription;
     }
 
+    /**
+     * Executes the given task and prints the respective output.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 
         String output = "";
@@ -91,8 +94,9 @@ public class AddCommand extends Command {
             output += ui.getBottomBorder();
             break;
         }
+        default:
+            assert (false) : "Something went wrong in AddCommand";
         }
-
         return output;
     }
 }

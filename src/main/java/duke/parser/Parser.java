@@ -7,10 +7,10 @@ import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 import duke.commands.IncorrectCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
-
 import duke.data.tasks.Deadline;
 import duke.data.tasks.Event;
 import duke.data.tasks.Todo;
@@ -52,6 +52,8 @@ public class Parser {
             return prepareExitCommand();
         case FindCommand.COMMAND_WORD:
             return prepareFindCommand(input);
+        case HelpCommand.COMMAND_WORD:
+            return prepareHelpCommand();
         case ListCommand.COMMAND_WORD:
             return prepareListCommand();
         case TodoCommand.COMMAND_WORD:
@@ -121,7 +123,7 @@ public class Parser {
             return new DeleteCommand(taskNumber);
         } catch (ArrayIndexOutOfBoundsException
                 | IllegalArgumentException e) {
-            String errorMessage = "delete command format: delete <number>";
+            String errorMessage = "delete command format: delete <task number>";
             return new IncorrectCommand(errorMessage);
         } catch (IndexOutOfBoundsException e) {
             String errorMessage = "Please enter a valid task number for the delete command.\n"
@@ -146,7 +148,7 @@ public class Parser {
             return new DoneCommand(taskNumber);
         } catch (ArrayIndexOutOfBoundsException
                 | IllegalArgumentException e) {
-            String errorMessage = "done command format: done <number>\n";
+            String errorMessage = "done command format: done <task number>\n";
             return new IncorrectCommand(errorMessage);
         } catch (IndexOutOfBoundsException e) {
             String errorMessage = "Please enter a valid task number for the done command.\n"
@@ -198,6 +200,14 @@ public class Parser {
             String errorMessage = "find command format: find <keyword>\n";
             return new IncorrectCommand(errorMessage);
         }
+    }
+
+    /**
+     * Prepares and returns a help command based on the specified input.
+     * @return A help command.
+     */
+    private static Command prepareHelpCommand() {
+        return new HelpCommand();
     }
 
     /**

@@ -39,6 +39,7 @@ public class DoneCommand extends Command {
 
         for (Object index : indexList) {
             list.getTask((int) index).markAsDone();
+            list.getTask((int) index).setDoneDateTime();
             output += list.getTask((int) index) + "\n";
             storage.writeToFile(list);
         }

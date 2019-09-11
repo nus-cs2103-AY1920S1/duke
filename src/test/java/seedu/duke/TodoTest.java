@@ -22,6 +22,7 @@ public class TodoTest {
     public void testWriteToFile1() {
         Todo todoTask = new Todo("read book");
         todoTask.markAsDone();
-        assertEquals("T | 1 | read book", todoTask.writeToFile());
+        String actualOutput = todoTask.writeToFile();
+        assertEquals("T | 1 | read book" + " | " + todoTask.getDoneDateTime(), actualOutput);
     }
 }

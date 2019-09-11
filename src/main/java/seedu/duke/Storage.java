@@ -62,6 +62,7 @@ public class Storage {
             }
             if (splitArr[1].equals("1")) {
                 t.markAsDone();
+                t.setDoneDateTime(splitArr[splitArr.length - 1]);
             }
             taskList.add(t);
         }
@@ -106,7 +107,7 @@ public class Storage {
     public void appendToFile(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         if (taskList.getSize() == 1) {
-            fw.write(taskList.getTask(taskList.getSize() - 1).writeToFile());
+            fw.write(taskList.getTask(taskList.getSize() - 1).writeToFile()); // only append the latest task
         } else {
             fw.write(System.lineSeparator() + taskList.getTask(taskList.getSize() - 1).writeToFile());
         }

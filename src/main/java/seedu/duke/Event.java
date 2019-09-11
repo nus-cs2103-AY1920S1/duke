@@ -40,7 +40,11 @@ public class Event extends Task {
      */
     @Override
     public String writeToFile() {
-        return ("E " + super.writeToFile() + " | " + DATE_FORMAT.format(dateTime));
+        if (!isDone) {
+            return ("E " + super.writeToFile() + " | " + DATE_FORMAT.format(dateTime));
+        } else {
+            return ("E " + super.writeToFile() + " | " + DATE_FORMAT.format(dateTime) + " | " + this.getDoneDateTime());
+        }
     }
 
     /**

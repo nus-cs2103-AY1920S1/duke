@@ -37,7 +37,11 @@ public class Todo extends Task {
      */
     @Override
     public String writeToFile() {
-        return ("T " + super.writeToFile());
+        if (!isDone) {
+            return ("T " + super.writeToFile());
+        } else {
+            return ("T " + super.writeToFile() + " | " + this.getDoneDateTime());
+        }
     }
 
     /**

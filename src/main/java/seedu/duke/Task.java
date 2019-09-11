@@ -2,6 +2,9 @@ package seedu.duke;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -12,12 +15,14 @@ import java.util.Date;
  */
 public class Task implements Comparable<Task> {
 
+    static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HHmm");
     static final DateFormat PRINT_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH.mm aa");
     private String description;
     boolean isDone;
     int doneIcon;
     private Date dateTime;
+    private LocalDateTime doneDateTime;
 
     /**
      * Constructor of the Task class.
@@ -41,7 +46,7 @@ public class Task implements Comparable<Task> {
 
     /**
      * Sets the isDone variable to true and the doneIcon to 1.
-     * Prints the done message.
+     * Prints the done message and updates the date when it was marked done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -106,4 +111,38 @@ public class Task implements Comparable<Task> {
         }
     }
 
+    /**
+     * Convert date in Date format to LocalDateTime format.
+     *
+     * @param date the date to be converted
+     * @return the date in LocalDateTime format
+     */
+    public LocalDateTime convertToLocalDateTime(Date date) {
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+    }
+
+    /**
+     * Returns the DateTime when the task was marked done.
+     *
+     * @return the DateTime when the task was marked done
+     */
+    public LocalDateTime getDoneDateTime() {
+        return doneDateTime;
+    }
+
+    /**
+     * Sets the dateTime of when the task was done.
+     */
+    public void setDoneDateTime() {
+        this.doneDateTime = LocalDateTime.parse(LocalDateTime.now().format(formatter), formatter);
+    }
+
+    /**
+     * Sets the dateTime of when the task was done.
+     */
+    public void setDoneDateTime(String str) {
+        this.doneDateTime = LocalDateTime.parse(str);
+    }
 }

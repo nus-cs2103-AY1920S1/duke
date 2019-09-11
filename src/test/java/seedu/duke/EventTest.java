@@ -30,7 +30,8 @@ public class EventTest {
         Date date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse("2/12/2019 1521");
         Event eventTask = new Event("project meeting", date);
         eventTask.markAsDone();
-        assertEquals("E | 1 | project meeting | 02/12/2019 1521", eventTask.writeToFile());
+        assertEquals("E | 1 | project meeting | 02/12/2019 1521" + " | " + eventTask.getDoneDateTime(),
+                eventTask.writeToFile());
     }
 
 }

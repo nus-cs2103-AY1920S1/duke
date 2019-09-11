@@ -40,7 +40,11 @@ public class Deadline extends Task {
      */
     @Override
     public String writeToFile() {
-        return ("D " + super.writeToFile() + " | " + DATE_FORMAT.format(dateTime));
+        if (!isDone) {
+            return ("D " + super.writeToFile() + " | " + DATE_FORMAT.format(dateTime));
+        } else {
+            return ("D " + super.writeToFile() + " | " + DATE_FORMAT.format(dateTime) + " | " + this.getDoneDateTime());
+        }
     }
 
     /**

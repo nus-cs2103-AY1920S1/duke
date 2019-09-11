@@ -106,14 +106,12 @@ public class Parser {
         ArrayList<Object> indexList = new ArrayList<>();
         String[] arr1 = command.split(" ", 2);    // to split the command and the index
         String[] arr2 = arr1[1].split("[,] ");
-        System.out.println(arr1);
-        System.out.println(arr2);
 
         switch (arr1[0]) {
         case "find":
             for (int i = 0; i < arr2.length; i++) {
                 // split the individual keyword to check if it contains multiple words
-                if (arr2[i].split(" ").length > 2) {
+                if (arr2[i].split(" ").length >= 2) {
                     System.out.println(arr2[i]);
                     throw new InvalidFindDescription(ui.getInvalidFindMsg());
                 } else {

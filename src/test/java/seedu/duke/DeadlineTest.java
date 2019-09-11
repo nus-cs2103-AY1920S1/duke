@@ -29,7 +29,9 @@ public class DeadlineTest {
         Date date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse("2/12/2019 1521");
         Deadline deadlineTask = new Deadline("return book", date);
         deadlineTask.markAsDone();
-        assertEquals("D | 1 | return book | 02/12/2019 1521", deadlineTask.writeToFile());
+        //String[] arr = deadlineTask.writeToFile().split(" [|] ");
+        assertEquals("D | 1 | return book | 02/12/2019 1521" + " | " + deadlineTask.getDoneDateTime(),
+                deadlineTask.writeToFile());
     }
 
 }

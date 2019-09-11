@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,8 +11,9 @@ import java.util.Collections;
 public class TaskList {
 
     private static ArrayList<Task> taskList;
-    private static int numTaskDone = 0;
-    private static int numTaskNotDone = 0;
+    private int numTaskDone = 0;
+    private int numTaskNotDone = 0;
+    private int numDonePastWeek = 0;
 
     /**
      * Constructor of the Tasklist class.
@@ -109,6 +112,10 @@ public class TaskList {
         for (Task t: this.taskList) {
             if (t.isDone) {
                 this.numTaskDone++;
+                Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
+                if (duration.toDays() <= 7) {
+                    numDonePastWeek++;
+                }
             }
         }
         numTaskNotDone = this.getSize() - numTaskDone;
@@ -132,4 +139,12 @@ public class TaskList {
         return numTaskNotDone;
     }
 
+    /**
+     * Return number of tasks done in the past week.
+     *
+     * @return the number of tasks done in the past week
+     */
+    public int getNumDonePastWeek() {
+        return numDonePastWeek;
+    }
 }

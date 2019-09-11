@@ -36,8 +36,4 @@ public class DeleteCommand implements Command {
                     tasks.getTasksSize()));
         }
     }
-
-    public boolean isRunning() {
-        return true;
-    }
 }

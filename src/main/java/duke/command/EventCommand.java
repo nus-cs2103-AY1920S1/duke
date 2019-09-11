@@ -45,8 +45,4 @@ public class EventCommand implements Command {
         }
         return false;
     }
-
-    public boolean isRunning() {
-        return true;
-    }
 }

@@ -22,8 +22,4 @@ public class FindCommand implements Command {
         }
         return output;
     }
-
-    public boolean isRunning() {
-        return true;
-    }
 }

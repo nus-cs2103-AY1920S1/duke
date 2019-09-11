@@ -8,9 +8,6 @@ import duke.main.TaskList;
  * Represents the 'list' command
  */
 public class ListCommand implements Command {
-    public ListCommand() {
-    }
-
     /**
      * Lists the current tasks in the task list
      *
@@ -24,9 +21,5 @@ public class ListCommand implements Command {
             output = output + (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
         }
         return output;
-    }
-
-    public boolean isRunning() {
-        return true;
     }
 }

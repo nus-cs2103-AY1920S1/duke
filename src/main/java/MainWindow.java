@@ -25,10 +25,17 @@ public class MainWindow extends AnchorPane {
     
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    
+
+    /**
+     * Initialize controls.
+     * https://stackoverflow.com/questions/51392203/what-does-initialize-mean-in-javafx
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(UI.STARTMESSAGE, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

@@ -1,9 +1,8 @@
 import duke.Parser;
 import duke.Storage;
-import duke.TaskList;
 import duke.Ui;
+import duke.TaskList;
 import duke.command.Command;
-import duke.exception.DateTimeParseDukeException;
 import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
@@ -15,46 +14,20 @@ public class DukeTest {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
-
+//@@adapted from author: CarbonGrid for formatting
     private StringBuilder tests = new StringBuilder().append("todo borrow book\n")
-            .append("list\n")
-            .append("deadline D1 Project Assignment /by 2dect1900\n")
-            .append("done 0\n")
+            .append("deadline to homework /by: 2019-12-12T10:10:00\n");
+            /*.append("event watch movie /at: 2019-10-10T20:30:00\n")
             .append("done 3\n")
-            .append("event music festival\n")
-            .append("bye\n");
+            .append("list\n")
+            .append("bye\n");*/
 
-    private String[] expected = {
-            "Got it. I've added this task:\n  [T][✘] borrow book\nNow you have 1 tasks in the list.\n",
+    private String [] expected = {
+        "Got it. I've added this task:\n        [T][0] borrow book\n      Now you have 1 tasks in the list.\n",
+            "Got it. I've added this task:\n        [D][0] to homework (at: 2019-12-12T10:10)\n      Now you have 2 tasks in the list."
 
-            "Here are the tasks in your list:\n1.[T][✘] borrow book\n",
-
-            "Got it. I've added this task:\n  [D][✘] D1 Project Assignment (by: December 2 2019, 7:00 PM)\nNow you have 2"
-                    + " tasks in the list.\n",
-
-            "Index given is out of bound.\nUse from 1 to last index of list only.\n",
-
-            "Index given is out of bound.\nUse from 1 to last index of list only.\n",
-
-            "☹ OOPS!!! The time of an event cannot be empty.\n",
-
-            "Bye. Hope to see you again soon!\n"
     };
-/*
-    @Test
-    public void fixedTest() {
-        assertThrows(IndexFormatDukeException.class, () -> Parser.parse("done 3k"));
-        assertThrows(IndexFormatDukeException.class, () -> Parser.parse("  delete   1.0 "));
-        assertDoesNotThrow(() -> Parser.parse(" list 0"));
-        assertDoesNotThrow(() -> Parser.parse("  delete   -10 "));
-        assertDoesNotThrow(() -> Parser.parse("  event  music festival  /at dec2t2019 "));
-        assertDoesNotThrow(() -> Parser.parse("event golf /at 2 December"));
-        assertDoesNotThrow(() -> Parser.parse("event bowling /at 2/12 T2019"));
-        assertDoesNotThrow(() -> Parser.parse("  deadline D1 project assignment   /by t2019 "));
-        assertThrows(DateTimeParseDukeException.class, () -> Parser.parse("event running /at 2019"));
-        assertThrows(LoadFileFailDukeException.class, () -> new Storage("doesNotExist.txt").load());
-    }*/
-    /*
+//@@author
     @Test
     public void runTest() {
         System.setIn(new ByteArrayInputStream(tests.toString()
@@ -62,8 +35,8 @@ public class DukeTest {
 
         int i = 0;
 
-        ui = new TestUi();
-        storage = new TestStorage();
+        ui = new UiTest();
+        storage = new StorageTest();
         tasks = new TaskList();
         ui.showWelcome();
 
@@ -72,7 +45,6 @@ public class DukeTest {
             try {
                 String fullCommand = ui.readCommand();
                 System.out.println(fullCommand);
-                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
@@ -82,5 +54,5 @@ public class DukeTest {
                 assertEquals(expected[i++], ui.toString());
             }
         }
-    }*/
+    }
 }

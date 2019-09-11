@@ -33,6 +33,6 @@ public class Event extends Task {
     //@@author CarbonGrid
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at.toString() + ")\n";
+        return "[E]" + super.toString() + " (at: " + this.at.toString() + ")";
     }
 }

@@ -1,0 +1,4 @@
+T | 1 | buy milk
+T | 0 | watch dog
+E | 1 | watch movie (at: 2019-12-12T12:10:10)
+D | 0 | submit project (by: 2019-10-05T08:00:10)

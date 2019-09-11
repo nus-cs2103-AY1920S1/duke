@@ -32,6 +32,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (at: " + this.by.toString() + ")\n";
+        return "[D]" + super.toString() + " (at: " + this.by.toString() + ")";
     }
 }

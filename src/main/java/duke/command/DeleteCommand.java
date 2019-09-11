@@ -15,7 +15,7 @@ public class DeleteCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = tasks.delete(index);
         ui.show("Noted. I've removed this task: \n"
-                + "       " + t + "       Now you have "
+                + "        " + t + "     Now you have "
                 + tasks.size() + " tasks in the list.");
         storage.updateSaveFile(tasks);
     }

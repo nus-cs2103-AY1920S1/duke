@@ -7,7 +7,6 @@ import duke.exception.DukeIllegalActionException;
 import duke.exception.DukeIllegalDescriptionException;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
@@ -31,12 +30,6 @@ public class Ui {
         this.storage = storage;
     }
 
-    static Scanner sc = new Scanner(System.in);
-
-    public static Scanner getScanner() {
-        return sc;
-    }
-
     public void showLoadingError() {
         System.out.println("Task list not retrieved.");
     }
@@ -47,10 +40,9 @@ public class Ui {
     public String readUserInput(String act) {
         try {
             return Parser.parse(act, storage);
-        } catch (DukeIllegalDescriptionException | DukeIllegalActionException | DukeDuplicateTaskException e) {
+        } catch (DukeIllegalDescriptionException | DukeIllegalActionException |
+                DukeDuplicateTaskException | FileNotFoundException e) {
             return (e.getMessage());
-        } catch (FileNotFoundException e) {
-            return "File not found.";
         }
     }
 }

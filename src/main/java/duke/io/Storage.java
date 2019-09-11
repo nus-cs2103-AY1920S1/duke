@@ -85,7 +85,7 @@ public class Storage {
      * Saves the tasks of <code>TaskList</code> in designated file.
      * @throws FileNotFoundException
      */
-    void saveData() throws FileNotFoundException {
+    public void saveData() throws FileNotFoundException {
         File file = new File(basePath + filePath);
         try (PrintWriter out = new PrintWriter(file)) {
             for (Task task : TaskList.taskList) {

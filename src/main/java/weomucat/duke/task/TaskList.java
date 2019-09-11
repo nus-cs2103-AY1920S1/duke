@@ -11,8 +11,10 @@ import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidIndexException;
+import weomucat.duke.exception.StorageException;
 import weomucat.duke.task.listener.ListTaskListener;
 import weomucat.duke.task.listener.ModifyTaskListener;
+import weomucat.duke.task.listener.SaveTaskListListener;
 import weomucat.duke.task.listener.TaskListSizeListener;
 import weomucat.duke.ui.Message;
 
@@ -24,9 +26,10 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
     ListTaskCommandListener {
 
   private TaskListTasks tasks;
+  private ArrayList<ListTaskListener> listTaskListeners;
   private ArrayList<ModifyTaskListener> modifyTaskListeners;
   private ArrayList<TaskListSizeListener> taskListSizeListeners;
-  private ArrayList<ListTaskListener> listTaskListeners;
+  private ArrayList<SaveTaskListListener> saveTaskListListeners;
 
   public TaskList() {
     this.tasks = new TaskListTasks();
@@ -46,9 +49,20 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   private void init() {
+    this.listTaskListeners = new ArrayList<>();
     this.modifyTaskListeners = new ArrayList<>();
     this.taskListSizeListeners = new ArrayList<>();
-    this.listTaskListeners = new ArrayList<>();
+    this.saveTaskListListeners = new ArrayList<>();
+  }
+
+  /**
+   * Adds a ListTaskListener.
+   * When listTask is called, this listener will be notified.
+   *
+   * @param listener listTask listener
+   */
+  public void newListTaskListener(ListTaskListener listener) {
+    this.listTaskListeners.add(listener);
   }
 
   /**
@@ -72,13 +86,13 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   }
 
   /**
-   * Adds a ListTaskListener.
-   * When listTask is called, this listener will be notified.
+   * Adds a SaveTaskListListener.
+   * Whenever the task list needs to be saved, this listener will be notified.
    *
-   * @param listener listTask listener
+   * @param listener saveTaskList listener
    */
-  public void newListTaskListener(ListTaskListener listener) {
-    this.listTaskListeners.add(listener);
+  public void newSaveTaskListListener(SaveTaskListListener listener) {
+    this.saveTaskListListeners.add(listener);
   }
 
   /**
@@ -86,14 +100,12 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
    *
    * @param task the task to add
    */
-  void addTask(Task task) {
+  void addTask(Task task) throws StorageException {
     // Add task to Tasks
     this.tasks.add(task);
 
     // Update ModifyTaskListeners
-    for (ModifyTaskListener listener : this.modifyTaskListeners) {
-      listener.modifyTaskUpdate(new Message("Got it. I've added this task:"), task);
-    }
+    modifyTaskUpdate(new Message("Got it. I've added this task:"), task);
 
     // Update TaskListSizeListeners
     for (TaskListSizeListener listener : this.taskListSizeListeners) {
@@ -119,9 +131,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
     this.tasks.remove(i);
 
     // Update ModifyTaskListeners
-    for (ModifyTaskListener listener : this.modifyTaskListeners) {
-      listener.modifyTaskUpdate(new Message("Noted. I've removed this task:"), task);
-    }
+    modifyTaskUpdate(new Message("Noted. I've removed this task:"), task);
 
     // Update TaskListSizeListeners
     for (TaskListSizeListener listener : this.taskListSizeListeners) {
@@ -147,9 +157,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
     task.setDone(true);
 
     // Update ModifyTaskListeners
-    for (ModifyTaskListener listener : this.modifyTaskListeners) {
-      listener.modifyTaskUpdate(new Message("Nice! I've marked this task as done:"), task);
-    }
+    modifyTaskUpdate(new Message("Nice! I've marked this task as done:"), task);
   }
 
   /**
@@ -176,9 +184,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
     event.setAt(atIndex);
 
     // Update ModifyTaskListeners
-    for (ModifyTaskListener listener : this.modifyTaskListeners) {
-      listener.modifyTaskUpdate(new Message("Got it. I've set the schedule for this event:"), task);
-    }
+    modifyTaskUpdate(new Message("Got it. I've set the schedule for this event:"), task);
   }
 
   /**
@@ -214,8 +220,18 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
     }
   }
 
+  private void modifyTaskUpdate(Message message, Task task) throws StorageException {
+    for (ModifyTaskListener listener : this.modifyTaskListeners) {
+      listener.modifyTaskUpdate(message, task);
+    }
+
+    for (SaveTaskListListener listener : this.saveTaskListListeners) {
+      listener.saveTaskListUpdate(this.tasks);
+    }
+  }
+
   @Override
-  public void addTaskCommandUpdate(Task task) {
+  public void addTaskCommandUpdate(Task task) throws DukeException {
     addTask(task);
   }
 

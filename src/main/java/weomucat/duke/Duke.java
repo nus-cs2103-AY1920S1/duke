@@ -74,7 +74,7 @@ public class Duke {
     this.controller.newListTaskCommandListener(this.taskList);
     this.controller.newByeCommandListener(this.uiList);
 
-    this.taskList.newModifyTaskListener(this.storage);
+    this.taskList.newSaveTaskListListener(this.storage);
 
     this.taskList.newModifyTaskListener(this.uiList);
     this.taskList.newTaskListSizeListener(this.uiList);

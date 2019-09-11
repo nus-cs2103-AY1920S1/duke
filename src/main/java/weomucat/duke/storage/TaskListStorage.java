@@ -7,17 +7,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import weomucat.duke.exception.StorageException;
-import weomucat.duke.task.Task;
 import weomucat.duke.task.TaskListTasks;
-import weomucat.duke.task.listener.ModifyTaskListener;
-import weomucat.duke.ui.Message;
+import weomucat.duke.task.listener.SaveTaskListListener;
 
 /**
  * TaskListStorage is responsible for serializing TaskListTasks and deserializing TaskListTasks,
  * before saving to disk and loading from disk respectively.
  */
-public class TaskListStorage extends Storage<TaskListTasks> implements ModifyTaskListener {
+public class TaskListStorage extends Storage<TaskListTasks> implements SaveTaskListListener {
 
+  // TODO: Saving with JSON
   public TaskListStorage(String path) {
     super(path);
   }
@@ -63,8 +62,7 @@ public class TaskListStorage extends Storage<TaskListTasks> implements ModifyTas
   }
 
   @Override
-  public void modifyTaskUpdate(Message message, Task task) {
-    // TODO: Saving with JSON
-    // save(tasks);
+  public void saveTaskListUpdate(TaskListTasks tasks) throws StorageException {
+    save(tasks);
   }
 }

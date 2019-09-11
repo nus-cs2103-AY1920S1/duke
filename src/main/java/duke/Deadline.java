@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a deadline, with a given date/time/both 
@@ -18,40 +17,11 @@ class Deadline extends Task {
      * @param dateTime A String of the user's inputted date, time, or both.
      * @throws DukeException When the user inputs a illegitamate date, time, both or wrong format.
      */
-    public Deadline(String task, String dateTime) throws DukeException {
+    public Deadline(String task, LocalDate date, LocalTime time) throws DukeException {
         super(task);
-        assert !task.equals("") : "Empty String is inserted";
-        assert !dateTime.equals("") : "Empty dateTime is inserted";
-
-        String[] dateTimeArr = dateTime.split(" ", 2);
-        assert dateTimeArr.length != 1 || dateTimeArr.length != 2 : "dateTimeArr is wrong length.";
-
-        if (dateTimeArr.length == 1) {
-            try {
-                this.date = LocalDate.parse(dateTimeArr[0], DATE_FORMATTER);
-                this.time = null;
-            } catch (Exception e) {
-                try {
-                    this.time = LocalTime.parse(dateTimeArr[0], TIME_FORMATTER);
-                    this.date = null;
-                } catch (DateTimeParseException error) {
-                    throw new DukeException("Please enter a legitamate date, time or both");
-                } catch (Exception error) {
-                    throw new DukeException("The format entered is wrong. Use \'help\' "
-                            + "for formatting styles");
-                }
-            }
-        } else {
-            try {
-                this.date = LocalDate.parse(dateTimeArr[0], DATE_FORMATTER);
-                this.time = LocalTime.parse(dateTimeArr[1], TIME_FORMATTER);
-            } catch (DateTimeParseException error) {
-                throw new DukeException("Please enter a legitamate date, time or both");
-            } catch (Exception error) {
-                throw new DukeException("The format entered is wrong. Use \'help\' "
-                        + "for formatting styles");
-            }
-        }
+        assert date != null || time != null : "Both date and time are null";
+        this.date = date;
+        this.time = time;
     }
 
     /**

@@ -25,6 +25,9 @@ public class Task {
         return this.isDone ? 1 : 0;
     }
 
+    public boolean isMarkedAsDone() {
+        return this.isDone ? true : false;
+    }
     public String getTask() {
         return this.task;
     }

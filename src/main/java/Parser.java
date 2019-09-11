@@ -14,26 +14,35 @@ public class Parser {
     // parse the command string keyed in by the user
     public static Command parse (String input) throws DukeException {
         String[] userInput = input.split(" ", 2);
-        String firstWord = userInput[0]; 
+        String firstWord = userInput[0];
             switch (firstWord) {
                 case "bye":
+                case "exit":
+                case "quit":
                     return new ExitCommand();
                 case "list":
+                case "tasks":
                     return new ListCommand();
+                case "funfact":
+                case "funFact":
+                case "facts":
+                case "fun":
+                    return new FunFactCommand();
+                case "stat" :
+                case "stats":
+                case "statistics":
+                    return new StatisticsCommand();
                 case "done":
                     int indexDone = Integer.parseInt(userInput[1]);
                     return new DoneCommand(indexDone);
                 case "delete":
+                case "del":
                     int indexDelete = Integer.parseInt(userInput[1]);
                     return new DeleteCommand(indexDelete);
-                case "massDelete":
-                    String[] indexRanges = userInput[1].split(" ", 2);
-                    int indexStart = Integer.parseInt(indexRanges[0]);
-                    int indexEnd = Integer.parseInt(indexRanges[1]);
-                    for (int i = 0; i < (indexEnd - indexStart); i++) {
-                        return new DeleteCommand(indexStart + i);
-                    }
                 case "todo":
+                case "t":
+                case "td":
+                case "toDo":
                     String descTodo = userInput[1];
                     if (descTodo.isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -41,6 +50,9 @@ public class Parser {
                     ToDo todo = new ToDo(descTodo);
                     return new AddCommand(todo);
                 case "deadline":
+                case "d":
+                case "dl":
+                case "deadLine":
                     String descDeadline = userInput[1];
                     if (descDeadline.isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -59,6 +71,7 @@ public class Parser {
                     }
                     return new AddCommand(deadline);
                 case "event":
+                case "e":
                     String descEvent = userInput[1];
                     if (descEvent.isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -77,6 +90,7 @@ public class Parser {
                     }
                     return new AddCommand(event);
                 case "find":
+                case "search":
                     String query = userInput[1];
                     return new FindCommand(query);
                 default :

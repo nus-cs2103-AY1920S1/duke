@@ -24,6 +24,7 @@ public class Parser {
      * @param command
      */
     public String parse(String command) {
+            assert command.isEmpty() : "Command cannot be empty";
             String[] inputArr = command.split(" ");
             String userCommand = inputArr[0];
             String dukeText;
@@ -93,6 +94,7 @@ public class Parser {
                 } else if (userCommand.equals("delete")) {
                     try {
                         int i = Integer.parseInt(inputArr[1]) - 1;
+                        assert i <= commands.size() : "Index for delete is out of bounds";
                         try {
                             Task tt = this.commands.delete(i);
                             dukeText = this.ui.delete(tt, this.commands.size());
@@ -104,6 +106,7 @@ public class Parser {
                         throw new DukeException("OOPS!!! Index for delete cannot be empty.");
                     }
                 } else if (userCommand.equals("find")) {
+                    assert inputArr.length > 1 : "Missing word to find";
                     String word = inputArr[1];
                     dukeText = this.ui.find() + "\n" + this.commands.find(word);
                 } else {

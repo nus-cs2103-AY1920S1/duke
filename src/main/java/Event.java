@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param command is the user input string
      * @throws DukeException in case date is not entered in the correct format
      */
-    public Event(String command) throws DukeException {
+    public Event(String command) throws IllegalArgumentException {
         super(command);
         this.done = false;
         String[]splitUpDate = command.split("/",2);
@@ -32,7 +32,7 @@ public class Event extends Task {
             formattedDate = dateFormat.format(formalDate);
 
         } catch (Exception e) {
-            throw new DukeException("");
+            throw new IllegalArgumentException();
         }
 
         midCommand = splitUpDate[0];
@@ -82,6 +82,27 @@ public class Event extends Task {
         } else {}
 
         return newTask;
+    }
+
+    /**
+     * Creates a new event task
+     * @param command is the user string input to be processed
+     * @throws Exception in case user inputs in an incorrect format
+     */
+    public static void createEvent(String command, TaskList tasks, Storage storage) throws DukeException {
+        String[]splitWords = command.trim().split("\\s",2);
+        String midCommand = splitWords[1].trim();
+
+        try{
+            if (midCommand.length() != 0) {
+                tasks.add(new Event(midCommand));
+                storage.updateFile(tasks);
+            } else {
+                throw new Exception();
+            }
+        }catch (Exception e){
+            throw new DukeException("");
+        }
     }
 
     /**

@@ -55,7 +55,7 @@ public class Storage {
      * @param tasks is the list of tasks to be printed
      * @throws FileNotFoundException in case filename is not found
      */
-    public void printToOutput(TaskList tasks) throws FileNotFoundException {
+    public void updateFile(TaskList tasks) throws FileNotFoundException {      //previously named as printToOutput
         PrintStream outputTo = new PrintStream(filename);
         outputTo.println(tasks.printForOutput());
         outputTo.close();

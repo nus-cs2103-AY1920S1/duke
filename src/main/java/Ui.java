@@ -1,24 +1,40 @@
-import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Shows the interface
  */
 public class Ui {
 
-    public void run(TaskList tasks, Storage storage) throws FileNotFoundException {
+    private final String LINE_BORDER = "____________________________________________________________";
+
+    public void showWelcome(){
         final String DUKE_LOGO = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        final String LINE_BORDER = "____________________________________________________________";
 
         System.out.println("Hello from\n" + DUKE_LOGO);
         System.out.println(LINE_BORDER + "\n" + "Hello! I'm Duke" + "\n" +
                 "What can I do for you?" + "\n" + LINE_BORDER);
+    }
 
-        Parser parser = new Parser(storage, tasks);
-        parser.run();
+    public void showConclusion(){
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public String readCommand(){
+        Scanner sc = new Scanner(System.in);
+        String fullCommand = sc.nextLine();
+        return fullCommand;
+    }
+
+    public void showLine(){
+        System.out.println(LINE_BORDER);
+    }
+
+    public void showError(String message){
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
     }
 
     /**
@@ -27,5 +43,44 @@ public class Ui {
     public void showLoadingError(){
         System.out.println("File not available");
     }
+
+    /**
+     * print method for done message
+     * @param n
+     * @param tasks
+     */
+    public void doneMessage(int n, TaskList tasks){
+        System.out.println("Nice! I've marked this task as done: \n" + tasks.taskPrint(n));
+    }
+
+    public void deleteMessage(int n, TaskList tasks){
+        System.out.println("Noted. I've removed this task:"+ "\n" + tasks.taskPrint(n) +
+                "\n"+ "Now you have " + (tasks.size()-1) + " tasks in the list.");
+    }
+
+    /**
+     * prints all contents in list format
+     * @param tasks
+     */
+    public void ListCommand(TaskList tasks){
+        for (int i=1; i<=tasks.size(); i++) {
+            System.out.println(i + ". " + tasks.get(i-1).printer());
+        }
+    }
+
+    /**
+     * to print the find command results
+     * @param tasks
+     */
+    public void FindCommand(TaskList tasks){
+        if(tasks.isEmpty()){
+            System.out.println("Sorry, we couldn't find any results!");
+        }else{
+            System.out.println("Here are the matching tasks in your list:");
+            this.ListCommand(tasks);
+        }
+    }
+
+
 
 }

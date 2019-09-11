@@ -56,6 +56,27 @@ public class ToDo extends Task {
     }
 
     /**
+     * Creates a new ToDo task
+     * @param command is the user string input to be processed
+     * @throws Exception in case user inputs in an incorrect format
+     */
+    public static void createTodo(String command, TaskList tasks, Storage storage) throws DukeException{
+        String[]splitWords = command.trim().split("\\s",2);
+        String midCommand = splitWords[1].trim();
+
+        try{
+            if (midCommand.length() != 0) {
+                tasks.add(new ToDo(midCommand));
+                storage.updateFile(tasks);
+            } else {
+                throw new DukeException("");
+            }
+        } catch (Exception e){
+            throw new DukeException("");
+        }
+    }
+
+    /**
      * marks task as done
      */
     public void taskDone(){

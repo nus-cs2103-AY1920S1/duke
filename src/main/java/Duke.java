@@ -1,17 +1,17 @@
-import java.io.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
 
 
 /**
@@ -32,8 +32,8 @@ public class Duke extends Application{
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/pic1.jpeg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/pic2.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/daduke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
 
 
     /**
@@ -62,8 +62,27 @@ public class Duke extends Application{
      * asks ui to run the application
      * @throws FileNotFoundException in case text file is not found
      */
-    public void run() throws FileNotFoundException {
-        ui.run(tasks, storage);
+    public void run() throws Exception {
+        ui.showWelcome();
+        boolean isExit = false;
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                ui.showLine(); // show the divider line ("_______")
+                Command c = Parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            } catch (Exception e) {
+                System.out.println("fk");
+            }finally {
+                ui.showLine();
+            }
+        }
+        ui.showLine();
+        ui.showConclusion();
+        ui.showLine();
     }
 
 
@@ -75,6 +94,7 @@ public class Duke extends Application{
      */
     public static void main(String[] args) throws Exception {
         new Duke("DukeOutput.txt").run();
+        System.exit(0);
     }
 
 
@@ -150,8 +170,8 @@ public class Duke extends Application{
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
     }

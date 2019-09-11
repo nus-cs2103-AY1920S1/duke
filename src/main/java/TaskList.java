@@ -24,14 +24,14 @@ public class TaskList {
         this.list = new ArrayList<>();
     }
 
-    /**
+    /*/**
      * prints the tasks on the list in the format of list required
      */
-    public void printForList(){
+    /*public void printForList(){
         for (int i=1; i<=list.size(); i++) {
             System.out.println(i + ". " + list.get(i-1).printer());
         }
-    }
+    }*/
 
     /**
      * outputs the tasks on the list in the format for hard drive output

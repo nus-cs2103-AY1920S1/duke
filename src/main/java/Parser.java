@@ -1,34 +1,54 @@
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 /**
  * Parser processes the user commands and carries out the specific functions on it
  */
 public class Parser {
-
+/*
     /**
      * Class Attributes
      */
-    private Storage storage;
-    private TaskList tasks;
+    //private Storage storage;
+    //private TaskList tasks;
+    //private Ui ui;
 
 
     /**
      * Class Constructor
-     * @param storage is object is store and retrieve data for text file
-     * @param tasks is object containing all tasks
      */
-    public Parser(Storage storage, TaskList tasks){
-        this.storage = storage;
-        this.tasks = tasks;
+    public Parser(/*Storage storage, TaskList tasks, Ui ui*/){
+        //this.storage = storage;
+        //this.tasks = tasks;
+        //this.ui = ui;
     }
 
+    /**
+     * Interprets the command and calls the executing class
+     * @param command
+     * @return the command as an object
+     */
+    public static Command parse(String command){
+        String[]words = command.split(" ");
+        if (command.equals("bye")) {                                                                                    //IF BYE
+            return new ByeCommand(command);
+        } else if ( (words.length==2) && (words[0].equals("done")) && (isNumeric(words[1])) ) {                         //IF DONE
+            return new DoneCommand(command);
+        } else if ((words.length==2)&&(words[0].equals("delete"))&&(isNumeric(words[1]))){                              //IF DELETE
+            return new DeleteCommand(command);
+        } else if (command.equals("list")){
+            return new ListCommand(command);
+        } else if(words[0].equals("find")){
+            return new FindCommand(command);
+        } else {
+            return new TaskCommand(command);
+        }
 
+    }
+
+/*
     /**
      * Prints introduction, takes in user input, and processes it
      * @throws FileNotFoundException
      */
-    public void run() throws FileNotFoundException {
+    /*public void run() throws FileNotFoundException {
 
         final String LINE_BORDER = "____________________________________________________________";
         Scanner sc = new Scanner(System.in);
@@ -88,7 +108,7 @@ public class Parser {
      * clears the DukeOutput in case anything goes wrong, but does not clear list
      * @throws FileNotFoundException
      */
-    public void EmptyOutput() throws FileNotFoundException {
+/*    public void EmptyOutput() throws FileNotFoundException {
         storage.emptyOutput();
         System.out.println("Output Emptied");
     }
@@ -98,7 +118,7 @@ public class Parser {
      * marks tasks as done and prints the output
      * @param command is the string input that is processed
      */
-    public void done(String command){
+/*    public void done(String command){
         String[]splitWords = command.split(" ");
 
         try {
@@ -111,12 +131,12 @@ public class Parser {
         }
     }
 
-
+/*
     /**
      * deletes the task from TaskList
      * @param command is the string input that is processed
      */
-    public void delete(String command){
+ /*   public void delete(String command){
         String[]splitWords = command.split(" ");
 
         try {
@@ -135,7 +155,7 @@ public class Parser {
      * finds for the search results use inputs
      * @param command is the user input string
      */
-    public void find(String command){
+ /*   public void find(String command){
         String[]splitWords = command.split(" ",2);
         String wordToFind = splitWords[1];
         TaskList findResults = new TaskList();
@@ -161,7 +181,7 @@ public class Parser {
      * @param command is the user string input to be processed
      * @throws Exception in case user inputs in an incorrect format
      */
-    public void createTodo(String command) throws Exception {
+ /*   public void createTodo(String command) throws Exception {
         String[]splitWords = command.trim().split("\\s",2);
         String midCommand = splitWords[1].trim();
 
@@ -179,7 +199,7 @@ public class Parser {
      * @param command is the user string input to be processed
      * @throws Exception in case user inputs in an incorrect format
      */
-    public void createDeadline(String command) throws Exception {
+ /*   public void createDeadline(String command) throws Exception {
         String[]splitWords = command.trim().split("\\s",2);
         String midCommand = splitWords[1].trim();
 
@@ -197,7 +217,7 @@ public class Parser {
      * @param command is the user string input to be processed
      * @throws Exception in case user inputs in an incorrect format
      */
-    public void createEvent(String command) throws Exception {
+ /*   public void createEvent(String command) throws Exception {
         String[]splitWords = command.trim().split("\\s",2);
         String midCommand = splitWords[1].trim();
 
@@ -208,7 +228,7 @@ public class Parser {
             throw new Exception();
         }
     }
-
+*/
 
     /**
      * determines whether parameter is an integer

@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 /**
- * Deals with reading and making sense of the user command.
+ * Deals with reading and making sense of the user commands.
  */
 public class Parser {
 

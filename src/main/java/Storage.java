@@ -38,7 +38,7 @@ public class Storage {
      * Loads file from the file path and converts instances into <code>Task</code> objects.
      *
      * @return list of tasksList.
-     * @throws FileNotFoundException Exception produced if file not found.
+     * @throws FileNotFoundException Exception produced if file not found here.
      * @throws DukeException in case of empty file.
      */
 
@@ -79,7 +79,6 @@ public class Storage {
                     task.mark();
             }
         }
-
         return tasksList;
     }
 

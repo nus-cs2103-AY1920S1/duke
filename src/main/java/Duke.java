@@ -50,6 +50,7 @@ public class Duke {
             taskList = new TaskList();
         }
 
+        assert taskList != null;
         String listInfo;
         if (taskList.getTotalTask() > 0) {
             listInfo = ui.showFullList(taskList);

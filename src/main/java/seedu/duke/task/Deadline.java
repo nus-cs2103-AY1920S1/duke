@@ -162,4 +162,8 @@ public class Deadline extends Task {
         super.setDone(stats);
         stats.incrementTotalEventsCompleted();
     }
+
+    public char getTaskType(){
+        return 'D';
+    }
 }

@@ -75,4 +75,8 @@ public class Event extends Task {
         stats.incrementTotalEventsCompleted();
     }
 
+    public char getTaskType(){
+        return 'E';
+    }
+
 }

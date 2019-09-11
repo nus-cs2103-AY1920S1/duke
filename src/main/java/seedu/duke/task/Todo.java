@@ -61,5 +61,9 @@ public class Todo extends Task {
         super.setDone(stats);
         stats.incrementTotalTodosCompleted();
     }
+
+    public char getTaskType(){
+        return 'T';
+    }
 }
 

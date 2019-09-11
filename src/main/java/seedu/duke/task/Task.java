@@ -10,7 +10,7 @@ import seedu.duke.statistic.Statistic;
  * Attribute isDone holds the status of completion of a task.
  * Attribute possibleTaskTypes is an enumerated list of the possible task types ie DEFAULT, DEADLINE, EVENT, TODO.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected PossibleTaskTypes taskType;
@@ -173,5 +173,7 @@ public class Task {
 
         this.lastModifiedDateTime = LocalDateTime.now();
     }
+
+    public abstract char getTaskType();
 }
 

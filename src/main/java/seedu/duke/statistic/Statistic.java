@@ -32,6 +32,7 @@ public class Statistic {
         totalEventsCompleted = 0;
     }
 
+
     public void incrementTotalCommandsExecuted() {
         totalCommandsExecuted += 1;
     }

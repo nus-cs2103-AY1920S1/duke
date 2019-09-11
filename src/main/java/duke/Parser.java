@@ -12,9 +12,10 @@ import duke.task.ToDo;
 public class Parser {
 
     /**
-     * (Review:
-     * @param fullCommand
-     * @return object of a particular childClass of Command
+     * Parses user input string and returns requested command.
+     * @param fullCommand expects specific format for string
+     * @return child class of Command object, corresponding to parsed string
+     * @throws DukeException if command is not of expected format
      */
     public static Command parse(String fullCommand) throws DukeException {
         String s = fullCommand.trim();

@@ -30,11 +30,19 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Updates save file with current list of tasks.
+     * @param tasks duke.Tasklist
+     */
     public void updateSaveFile(TaskList tasks) {
         String temp = tasks.generateListForFile();
         this.writeStringToFile(temp);
     }
 
+    /**
+     * Writes input string to specified file location.
+     * @param temp String to be saved into file.
+     */
     private void writeStringToFile(String temp) {
         try {
             FileWriter fileWriter = new FileWriter(filePath, false);

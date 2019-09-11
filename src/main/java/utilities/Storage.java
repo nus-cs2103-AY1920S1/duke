@@ -70,7 +70,7 @@ public class Storage {
 						String doneTask = command.substring(4);
 						Task newDoneTask = parser.generateTask(doneTask);
 						taskList.add(newDoneTask);
-						taskList.get(taskList.size() - 1).markAsDone();
+						//newDoneTask.markAsDone();
 						break;
 					case "todo":
 					case "deadline":

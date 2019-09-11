@@ -10,23 +10,12 @@ import utilities.Ui;
  * @version 0.1
  */
 public class Duke {
-	/**
-	 * utilities.Storage.utilities.Storage object.
-	 */
 	private Storage storage;
-	/**
-	 * utilities.TaskList.tasks.Task list object.
-	 */
 	private TaskList tasks;
-	/**
-	 * UI object.
-	 */
 	private Ui ui;
-	/**
-	 * utilities.Parser object.
-	 */
 	private Parser parser;
-	
+	private boolean initialised;
+
     /**
      * Constructor.
      * @param filePath Path to save file.
@@ -42,6 +31,7 @@ public class Duke {
         }
         ui.setTaskList(tasks);
         parser = new Parser();
+        initialised = false;
     }
 
 	/**
@@ -52,10 +42,8 @@ public class Duke {
 	 * @return String if Duke's response.
      */
     public String run(String rawInput) {
-    	try {
-			storage.load();
-		} catch (DukeException e) {
-			ui.showException(e);
+		if (!initialised) {
+			loadData();
 		}
 
 		String command = parser.getCommand(rawInput);
@@ -90,6 +78,10 @@ public class Duke {
 					storage.saveMemory(tasks);
 					result = ui.printAdded();
 					break;
+				case "undo":
+					result = ui.printUndo(tasks.undoTask());
+					storage.saveMemory(tasks);
+					break;
 				case "none":
 					result = ui.showLoadingError();
 					break;
@@ -97,7 +89,6 @@ public class Duke {
 		} catch (DukeException e) {
 			result = ui.showException(e);
 		}
-
 		return result;
     }
 
@@ -108,6 +99,15 @@ public class Duke {
 	 */
 	String getResponse(String input) {
 	    return run(input);
+	}
+
+	void loadData() {
+		try {
+			storage.load();
+			initialised = true;
+		} catch (DukeException e) {
+			ui.showException(e);
+		}
 	}
 
 	String getIntro() {

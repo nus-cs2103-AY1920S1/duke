@@ -26,6 +26,9 @@ public class TaskList {
 		memory = inputMemory;
 	}
 
+	private Task lastTask;
+	private String lastCommand;
+
 	/**
 	 * Empty constructor for when there is no previous data.
 	 */
@@ -74,8 +77,14 @@ public class TaskList {
 		return memory.get(memory.size() - 1).showTask();
 	}
 
+	/**
+	 * Adds a task into memory, updates the last known command and task.
+	 * @param t Added task.
+	 */
 	public void addTask(Task t) {
 		memory.add(t);
+		lastTask = t;
+		lastCommand = "add";
 	}
 
 	/**
@@ -88,6 +97,8 @@ public class TaskList {
 		try {
 			Task removed = memory.get(index);
 			memory.remove(index);
+			lastTask = removed;
+			lastCommand = "delete " + index;
 			return removed;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new DukeException("Please indicate which task to delete.");
@@ -102,11 +113,40 @@ public class TaskList {
 	public void doneTask(int index) throws DukeException {
 		try {
 			memory.get(index).markAsDone();
-			System.out.println("   " + memory.get(index).showTask());
+			lastTask = memory.get(index);
+			lastCommand = "done " + index;
 		} catch (IndexOutOfBoundsException e) {
 			throw new DukeException("Indicated task does not exist.");
 		}
+	}
 
+	public String undoTask() throws DukeException {
+		System.out.println("CALLED " + lastCommand);
+		try {
+			String result = "";
+			String command = lastCommand.split(" ")[0];
+			switch (command) {
+				case "add":
+					result = " Got it! The following task has been removed:\n   ";
+					memory.remove(memory.size() - 1);
+					break;
+				case "delete":
+					result = " Got it! The following task has been recovered:\n   ";
+					int deleteIndex = Integer.parseInt(lastCommand.split(" ")[1]);
+					memory.add(deleteIndex, lastTask);
+					break;
+				case "done":
+					result = " Got it! The following command has been undone:\n   ";
+					int doneIndex = Integer.parseInt(lastCommand.split(" ")[1]);
+					memory.get(doneIndex).markAsUndone();
+					break;
+			}
+			lastCommand = null;
+			result += lastTask.showTask() + "\n";
+			return result;
+		} catch (NullPointerException e) {
+			throw new DukeException("No task to undo!");
+		}
 	}
 
 	/**

@@ -128,4 +128,10 @@ public class Ui {
 				+ tasks.keywordList(keyword) + "\n"
 				+ breakLine;
 	}
+
+	public String printUndo(String undoMessage) {
+		return breakLine
+				+ undoMessage
+				+ breakLine;
+	}
 }

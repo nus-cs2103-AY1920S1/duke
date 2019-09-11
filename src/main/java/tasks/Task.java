@@ -33,6 +33,10 @@ public class Task {
     	isDone = true;
     }
 
+    public void markAsUndone() {
+        isDone = false;
+    }
+
     public String getDesc() {
     	return this.description;
     }

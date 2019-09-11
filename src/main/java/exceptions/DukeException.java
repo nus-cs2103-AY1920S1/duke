@@ -20,6 +20,6 @@ public class DukeException extends Exception {
 	 */
 	@Override public String toString() {
 		String temp = super.toString();
-		return temp.substring(15);
+		return temp.substring(26);
 	}
 }

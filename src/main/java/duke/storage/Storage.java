@@ -12,7 +12,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +20,6 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
-    private SimpleDateFormat formatter;
 
     /**
      * Constructs a new Storage object to read and write to a text file stored
@@ -31,7 +29,6 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
     }
 
     /**
@@ -68,7 +65,7 @@ public class Storage {
                     }
                     break;
                 case "D":
-                    Deadline deadline = new Deadline(line[2], Parser.parseDate(formatter, line[3]));
+                    Deadline deadline = new Deadline(line[2], Parser.parseDate(line[3]));
                     if (line[1].equals("1")) {
                         deadline.markDone();
                         tasks.add(deadline);
@@ -77,7 +74,7 @@ public class Storage {
                     }
                     break;
                 case "E":
-                    Event event = new Event(line[2], Parser.parseDate(formatter, line[3]));
+                    Event event = new Event(line[2], Parser.parseDate(line[3]));
                     if (line[1].equals("1")) {
                         event.markDone();
                         tasks.add(event);

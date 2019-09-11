@@ -1,3 +1,5 @@
+import duke.command.Command;
+import duke.command.CommandCentre;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -13,22 +15,24 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private Parser parser;
+    private CommandCentre commandCentre;
+    private boolean isExit;
 
     /**
      * Constructs a Duke object.
      */
     public Duke() {
         String filePath = "data/duke.txt";
-        ui = new Ui();
+        ui = new Ui(new Scanner(System.in));
         storage = new Storage(filePath);
+        isExit = false;
         try {
             tasks = new TaskList(storage.load());
-            parser = new Parser(tasks);
         } catch (DukeException e) {
             ui.showError(e.toString());
             tasks = new TaskList();
-            parser = new Parser(tasks);
+        } finally {
+            commandCentre = new CommandCentre(tasks, ui);
         }
     }
 
@@ -36,29 +40,35 @@ public class Duke {
      * Starts Duke.
      */
     public void run() {
-        boolean isExit = false;
-        Scanner sc = new Scanner(System.in);
-
         System.out.println(ui.showWelcome());
 
         while(!isExit) {
-            String input = sc.nextLine();
-            if(input.equals("bye")) {
-                System.out.println(parser.parse(input));
-                isExit = true;
-            } else {
-                System.out.println(parser.parse(input));
+            String input = ui.readMessage();
+            try {
+                Command command = commandCentre.get(Parser.parseCommand(input));
+                ui.printMessage(command.execute(Parser.parseDescription(input)));
+                isExit = command.isExit();
+            } catch (DukeException e) {
+                ui.printMessage(ui.showError(e.getMessage()));
             }
         }
-        sc.close();
+        ui.closeScanner();
         storage.write(tasks);
     }
 
     public String getResponse(String input) {
-        if(input.equals("bye")) {
+        if(isExit) {
             storage.write(tasks);
+            return null;
+        } else {
+            try {
+                Command command = commandCentre.get(Parser.parseCommand(input));
+                isExit = command.isExit();
+                return command.execute(Parser.parseDescription(input));
+            } catch (DukeException e) {
+                return ui.showError(e.getMessage());
+            }
         }
-        return parser.parse(input);
     }
 
     public static void main(String[] args) {

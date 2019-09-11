@@ -4,11 +4,47 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * A user interface that handles the user input and interactions with the user.
  */
 public class Ui {
+    private Scanner sc;
+
+    /**
+     * Constructs a Ui object with a Scanner to read input from the command line.
+     *
+     * @param sc the Scanner used to read input from the command line.
+     */
+    public Ui(Scanner sc) {
+        this.sc = sc;
+    }
+
+    /**
+     * Returns a String that has been read by the Scanner.
+     *
+     * @return the String that is returned by the Scanner.
+     */
+    public String readMessage() {
+        return sc.nextLine();
+    }
+
+    /**
+     * Closes the scanner at the end of Duke's execution.
+     */
+    public void closeScanner() {
+        sc.close();
+    }
+
+    /**
+     * Prints a message.
+     *
+     * @param message the message to be printed.
+     */
+    public void printMessage(String message) {
+        System.out.print(message);
+    }
 
     /**
      * Returns the String representation of the Duke logo and the welcome message.
@@ -30,7 +66,7 @@ public class Ui {
      * <p>This method is called when Parser is done scanning the user's input.
      */
     public String showBye() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**

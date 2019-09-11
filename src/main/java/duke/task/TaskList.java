@@ -55,21 +55,17 @@ public class TaskList {
      *      a Task number or if the user did not specify which Task to be deleted.
      */
     public Task doTask(String input) throws DukeException {
-        if (input.split(" ").length > 1) {
-            try {
-                int itemIndex = Integer.parseInt(input.split(" ")[1]);
-                if (itemIndex > tasks.size() || itemIndex < 1) {
-                    throw new DukeListException("The task number specified is not within the list.");
-                } else {
-                    Task currTask = tasks.get(itemIndex - 1);
-                    currTask.doTask();
-                    return currTask;
-                }
-            } catch (NumberFormatException e) {
-                throw new DukeParserException("The task specified is not a number.");
+        try {
+            int itemIndex = Integer.parseInt(input);
+            if (itemIndex > tasks.size() || itemIndex < 1) {
+                throw new DukeListException("The task number specified is not within the list.");
+            } else {
+                Task currTask = tasks.get(itemIndex - 1);
+                currTask.doTask();
+                return currTask;
             }
-        } else {
-            throw new DukeException("The task to be done is not specified.");
+        } catch (NumberFormatException e) {
+            throw new DukeParserException("The task specified is not a number.");
         }
     }
 
@@ -91,19 +87,15 @@ public class TaskList {
      *      a Task number or if the user did not specify which Task to be deleted.
      */
     public Task deleteTask(String input) throws DukeException {
-        if (input.split(" ").length > 1) {
-            try {
-                int deleteIndex = Integer.parseInt(input.split(" ")[1]);
-                if (deleteIndex > tasks.size() || deleteIndex < 1) {
-                    throw new DukeListException("The task number specified is not within the list.");
-                }
-                Task deleted = tasks.remove(deleteIndex - 1);
-                return deleted;
-            } catch (NumberFormatException e) {
-                throw new DukeParserException("The task specified is not a number.");
+        try {
+            int deleteIndex = Integer.parseInt(input);
+            if (deleteIndex > tasks.size() || deleteIndex < 1) {
+                throw new DukeListException("The task number specified is not within the list.");
             }
-        } else {
-            throw new DukeException("The task to be deleted is not specified.");
+            Task deleted = tasks.remove(deleteIndex - 1);
+            return deleted;
+        } catch (NumberFormatException e) {
+            throw new DukeParserException("The task specified is not a number.");
         }
     }
 
@@ -115,9 +107,8 @@ public class TaskList {
      */
     public TaskList findTask(String input) {
         ArrayList<Task> foundTasks = new ArrayList<>();
-        String keyword = input.split(" ", 2)[1];
         for (Task task: this.tasks) {
-            if (task.getDescription().contains(keyword)) {
+            if (task.getDescription().contains(input)) {
                 foundTasks.add(task);
             }
         }

@@ -1,9 +1,7 @@
-package duke;
+package duke.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -13,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
-import java.util.Collections;
 
 /**
  * This control represents a dialog box consisting of an ImageView to represent the User's face and a label

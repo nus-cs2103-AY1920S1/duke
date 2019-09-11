@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Storage {
-    private static String DIRECTORY_PATH = "D:/project/CS2103T/duke/data";
+    private static String DIRECTORY_PATH = "data";
     private static String FILEPATH = DIRECTORY_PATH + "/duke.txt";
 
     /**

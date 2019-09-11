@@ -7,10 +7,12 @@ public class DeleteCommand extends Command {
         this.deleteIdx = deleteTaskIdx;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    // NEW (remove return)
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    //public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task deletedTask = taskList.deleteTask(deleteIdx);
         storage.save(taskList.getTaskArr());
-        ui.showDeleteTaskMessage(deletedTask, taskList.getTaskArr());
+        return ui.showDeleteTaskMessage(deletedTask, taskList.getTaskArr());
     }
 
     public void print() {

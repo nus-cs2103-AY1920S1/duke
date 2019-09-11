@@ -14,10 +14,12 @@ public class DoneCommand extends Command {
      * @param storage Save changes to file in hard disk
      * @throws IOException exception
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    // NEW (remove return)
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    //public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         Task doneTask = taskList.markTaskDone(doneIdx);
         storage.save(taskList.getTaskArr());
-        ui.showMarkTaskDoneMessage(doneTask);
+        return ui.showMarkTaskDoneMessage(doneTask);
     }
 
     public void print() {

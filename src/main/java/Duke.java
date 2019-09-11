@@ -164,32 +164,50 @@ public class Duke extends Application {
      */
     public String getResponse(String input) {
     //private String getResponse(String input) {
-        return "Duke heard: " + input;
+        //return "Duke heard: " + input;
+        try {
+            return run(input);
+        } catch (IOException e) {
+            return e.getMessage();
+        }
     }
     // ----- JavaFX -----
 
-    /**
-     * Starts Duke program.
-     * @throws IOException exception
-     */
-    public void run() throws IOException {
-        ui.showGreetings();
-        boolean inProgram = true;
-        while (inProgram) {
-            try {
-                String userFullInput = ui.readUserInput();
-                Command c = parser.parse(userFullInput, taskList);
-                c.execute(taskList, ui, storage);
-                inProgram = c.toContinueProgram();
-            } catch (DukeException e) {
-                ui.showMessage(e.getMessage());
-            }
+//    /**
+//     * Starts Duke program.
+//     * @throws IOException exception
+//     */
+//    public void run() throws IOException {
+//        ui.showGreetings();
+//        boolean inProgram = true;
+//        while (inProgram) {
+//            try {
+//                String userFullInput = ui.readUserInput();
+//                Command c = parser.parse(userFullInput, taskList);
+//                c.execute(taskList, ui, storage);
+//                inProgram = c.toContinueProgram();
+//            } catch (DukeException e) {
+//                ui.showMessage(e.getMessage());
+//            }
+//        }
+//    }
+
+    // NEW
+    public String run(String input) throws IOException {
+        try {
+            Command c = parser.parse(input, taskList);
+            String response = c.execute(taskList, ui, storage);
+            return response;
+        } catch (DukeException e) {
+            ui.showMessage(e.getMessage());
         }
+        return "Cannot understand";
     }
 
     public static void main(String[] args) throws IOException {
         //new Duke("F:\\CS2103\\duke\\data\\duke.txt").run();
-        new Duke().run();
+        //new Duke().run();
+        new Duke();
     }
 
     public TaskList getTaskList() {

@@ -17,20 +17,28 @@ public class AddCommand extends Command {
         this.hasSubCommand = hasSubCommand;
     }
 
-    /**
-     * Executes commands <code>todo</code>.
-     * Adds ToDo task to list, saves new list to txt file, shows user message
-     * @param taskList AL of tasks
-     * @param ui Deals with console input and outputs
-     * @param storage Deals with data in hard disk
-     * @throws IOException exception
-     * @throws DukeException If no description of ToDo task provided
-     */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+//    /**
+//     * Executes commands <code>todo</code>.
+//     * Adds ToDo task to list, saves new list to txt file, shows user message
+//     * @param taskList AL of tasks
+//     * @param ui Deals with console input and outputs
+//     * @param storage Deals with data in hard disk
+//     * @throws IOException exception
+//     * @throws DukeException If no description of ToDo task provided
+//     */
+//    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+//        Task newTask = new ToDo(description);
+//        taskList.addTask(newTask);
+//        storage.save(taskList.getTaskArr());
+//        ui.showAddTaskMessage(newTask, taskList.getTaskArr());
+//    }
+
+    // NEW (remove return)
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         Task newTask = new ToDo(description);
         taskList.addTask(newTask);
         storage.save(taskList.getTaskArr());
-        ui.showAddTaskMessage(newTask, taskList.getTaskArr());
+        return ui.showAddTaskMessage(newTask, taskList.getTaskArr());
     }
 
     public void print() {

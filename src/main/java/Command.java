@@ -19,7 +19,12 @@ public class Command {
         this.isFinished = false;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+//    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+//    }
+
+    // NEW
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+        return null;
     }
 
     /**

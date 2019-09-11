@@ -3,11 +3,13 @@ public class ListCommand extends Command {
         super("list");
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    // NEW
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    //public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (taskList.getNumTasks() == 0) {
-            ui.showMessage("You have no tasks yet!");
+            return ui.showMessage("You have no tasks yet!");
         } else {
-            ui.showAllTasks(taskList);
+            return ui.showAllTasks(taskList);
         }
     }
 }

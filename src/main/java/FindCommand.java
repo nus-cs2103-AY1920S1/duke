@@ -7,7 +7,9 @@ public class FindCommand extends Command {
         this.keyword = findDescription;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    // NEW (remove return)
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    //public void execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> matchingTasksArr = new ArrayList<Task>();
         for (Task currTask : taskList.getTaskArr()) {
             if (currTask.containsKeyword(keyword)) {
@@ -15,9 +17,9 @@ public class FindCommand extends Command {
             }
         }
         if (matchingTasksArr.size() == 0) {
-            ui.showMessage("No matching tasks!");
+            return ui.showMessage("No matching tasks!");
         } else {
-            ui.showMatchingKeywordTasks(matchingTasksArr);
+            return ui.showMatchingKeywordTasks(matchingTasksArr);
         }
 
     }

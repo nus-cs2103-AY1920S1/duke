@@ -9,13 +9,15 @@ public class SubCommand extends AddCommand {
         this.subDescription = subDescription;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    // NEW
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    //public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         Task newTask = this.command.equals("deadline") ?
                 new Deadline(this.description, this.subDescription) :
                 new Event(this.description, this.subDescription);
         taskList.addTask(newTask);
         storage.save(taskList.getTaskArr());
-        ui.showAddTaskMessage(newTask, taskList.getTaskArr());
+        return ui.showAddTaskMessage(newTask, taskList.getTaskArr());
     }
 
     public void print() {

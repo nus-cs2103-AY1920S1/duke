@@ -40,7 +40,7 @@ public class Parser {
             MissingDescriptionException {
         String[] commandWords = command.trim().split(" ");
         String commandType = commandWords[0];
-        String output = "";
+        String output;
         TaskList taskList = new TaskList();
 
         switch (commandType) {

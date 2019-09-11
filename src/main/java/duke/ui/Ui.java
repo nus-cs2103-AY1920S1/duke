@@ -40,6 +40,7 @@ public class Ui {
         } catch (InvalidCommandException | MissingInputException | MissingDescriptionException e) {
             output += e.getMessage();
         }
+        assert(output != null);
         return output;
     }
 

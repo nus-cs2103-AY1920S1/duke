@@ -18,10 +18,7 @@ import duke.task.Event;
  * Class for reading and writing Duke data.
  */
 public class Storage {
-    /**
-     * Charset for reading and writing .txt files.
-     */
-    final static Charset ENCODING = StandardCharsets.UTF_8;
+    final private static Charset ENCODING = StandardCharsets.UTF_8;
 
     private Path path;
 
@@ -29,9 +26,8 @@ public class Storage {
      * Constructor for Storage.
      *
      * @param path path for duke.txt
-     * @throws IOException
      */
-    public Storage(String path) throws IOException {
+    public Storage(String path) {
         this.path = Paths.get(path);
     }
 
@@ -62,17 +58,23 @@ public class Storage {
      * @throws IOException
      */
     public ArrayList<Task> readDuke() throws IOException {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<>();
         List<String> lines = read();
         for (String s : lines) {
             String[] split = s.split("\\|");
             Task task = new Task();
-            if (split[0].contains("T")) {
-                task = new ToDo(split[2]);
-            } else if (split[0].contains("D")) {
-                task = new Deadline(split[2], split[3]);
-            } else if (split[0].contains("E")) {
-                task = new Event(split[2], split[3]);
+            switch (split[0]) {
+                case "T":
+                    task = new ToDo(split[2]);
+                    break;
+                case "D":
+                    task = new Deadline(split[2], split[3]);
+                    break;
+                case "E":
+                    task = new Event(split[2], split[3]);
+                    break;
+                default:
+                    assert false : "Wrong format in file.";
             }
             if (split[1].contains("Y")) {
                 task.markAsDone();
@@ -89,7 +91,7 @@ public class Storage {
      * @throws IOException
      */
     public void writeDuke(List<Task> tasks) throws IOException {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         for (Task task : tasks) {
             lines.add(task.toFile());
         }

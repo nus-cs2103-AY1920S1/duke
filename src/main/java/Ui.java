@@ -14,11 +14,11 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
-    ///////////////
-    // MESSAGES //
-    /////////////
-    private String INDENT_STR = "    ";
-    private String BORDER_STR = "-----";
+    ////////////////
+    // CONSTANTS //
+    //////////////
+    private static final String STR_INDENT = "    ";
+    private static final String STR_BORDER = STR_INDENT + "___________________________________";
 
     //////////////////
     // USER INPUTS //
@@ -37,71 +37,74 @@ public class Ui {
     ////////////////////
 
     public void showGreetings() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println("=====");
+        String greeting = joinWithNewLines("Hello! I'm Duke",
+                "What can I do for you?",
+                "=====");
+        showMessage(greeting);
     }
 
     public void showGoodbye() {
-        showMessage("Bye. Hope to see you again soon!");
+        String goodbye = indentMessage("Bye. Hope to see you again soon!");
+        showMessage(goodbye);
+    }
+
+    public void showAddTaskResponse(Task addedTask, ArrayList<Task> taskArr) {
+        String message = joinWithNewLines("Noted. I've added this task",
+                addedTask.toString(),
+                numTasksLeftMessage(taskArr));
+        showMessage(message);
+    }
+
+    public void showDeleteTaskResponse(Task deletedTask, ArrayList<Task> taskArr) {
+        String message = joinWithNewLines("Noted. I've removed this task",
+                deletedTask.toString(),
+                numTasksLeftMessage(taskArr));
+        showMessage(message);
+    }
+
+    public void showMarkTaskDoneResponse(Task doneTask) {
+        String message = joinWithNewLines("Nice! I've marked this task as done:",
+                doneTask.toString());
+        showMessage(message);
+    }
+
+    public void showListCommandResponse(ArrayList<Task> taskArr) {
+        String response = joinWithNewLines("Here are the tasks in your list:",
+                listOfTasksMessage(taskArr));
+        showMessage(response);
+    }
+
+    public void showFindKeywordResponse(ArrayList<Task> taskArr) {
+        String message = joinWithNewLines("Here are the matching tasks in your list:",
+                listOfTasksMessage(taskArr));
+        showMessage(message);
     }
 
     /**
-     * Prints out information of tasks currently in list.
-     * Includes their order, done or not, description etc.
+     * Ordered list of tasks in string.
+     * Includes their index in list, done or not, description etc.
      * Presents each task in a new line.
-     * @param taskList
+     * Format:
+     * 1. [T][x] task-description
+     * 2. [E][v] task-description (at: venue)
+     * 3. [D][x] task-description (by: date)
+     * @param taskArr ArrayList of Task objects
+     * @return Message in a single string
      */
-    public void showAllTasks(TaskList taskList) {
-        ArrayList<Task> taskArr = taskList.getTaskArr();
-        System.out.println(BORDER_STR);
-        System.out.println(INDENT_STR + "Here are the tasks in your list:");
-        showTasksInList(taskArr);
-        System.out.println(BORDER_STR);
-    }
-
-    public void showTasksInList(ArrayList<Task> taskArr) {
+    private String listOfTasksMessage(ArrayList<Task> taskArr) {
+        String output = "";
         for (Task task : taskArr) {
-            // Format: 1. [T/D/E][v/x] task-description (by/at: ...)
-            System.out.println(INDENT_STR +
-                    (taskArr.indexOf(task)+1) + "." +
+            int taskIdx = taskArr.indexOf(task)+1;
+            output += indentMessage(taskIdx + "." +
                     task.toString());
         }
+        return output;
     }
 
-    public void showAddTaskMessage(Task addedTask, ArrayList<Task> taskArr) {
-        modifiedTaskListMessage("Noted. I've added this task:",
-                addedTask, taskArr);
-    }
-
-    public void showDeleteTaskMessage(Task deletedTask, ArrayList<Task> taskArr) {
-        modifiedTaskListMessage("Noted. I've removed this task:",
-                deletedTask, taskArr);
-    }
-
-    public void showMatchingKeywordTasks(ArrayList<Task> taskArr) {
-        System.out.println(BORDER_STR);
-        System.out.println(INDENT_STR + "Here are the matching tasks in your list:");
-        showTasksInList(taskArr);
-        System.out.println(BORDER_STR);
-    }
-
-    public void showMarkTaskDoneMessage(Task doneTask) {
-        System.out.println(BORDER_STR);
-        System.out.println(indentMessage("Nice! I've marked this task as done:"));
-        System.out.println(indentMessage("  " + doneTask.toString()));
-        System.out.println(BORDER_STR);
-    }
-
-    private void modifiedTaskListMessage(String message, Task task, ArrayList<Task> taskArr) {
-        System.out.println(BORDER_STR);
-        System.out.println(indentMessage(message));
-        System.out.println(indentMessage("  " + task.toString()));
-        // Show current number of tasks in list
-        System.out.println(indentMessage(
-                "Now you have " + taskArr.size() +
-                        (taskArr.size() == 1? " task":" tasks") +
-                        " in the list."));
-        System.out.println(BORDER_STR);
+    private String numTasksLeftMessage(ArrayList<Task> taskArr) {
+        return ("Now you have " + taskArr.size() +
+                (taskArr.size() == 1? " task":" tasks") +
+                " in the list.");
     }
 
     /////////////////////
@@ -109,17 +112,30 @@ public class Ui {
     ///////////////////
 
     private String indentMessage(String message) {
-        return INDENT_STR + message;
+        return STR_INDENT + message;
     }
 
     /**
-     * Sandwiches text between -----s
+     * Indents and ends each line in message with a "\n"
+     * @param message Using varargs, each argument is a line in the message
+     * @return Final message to be output to console, in a single string
+     */
+    private String joinWithNewLines(String... message) {
+        String output = "";
+        for (String line : message) {
+            output += indentMessage(line + "\n");
+        }
+        return output;
+    }
+
+    /**
+     * Sandwiches text between lines, prints it.
      * @param message
      */
     public void showMessage(String message) {
-        System.out.println(BORDER_STR);
-        System.out.println(indentMessage(message));
-        System.out.println(BORDER_STR);
+        System.out.println(STR_BORDER);
+        System.out.println(message);
+        System.out.println(STR_BORDER);
     }
 
 }

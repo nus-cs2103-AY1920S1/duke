@@ -1,10 +1,10 @@
 import java.util.ArrayList;
-
+// TODO change finddscription to accept a arraylist of keywords to match by
 public class FindCommand extends Command {
-    protected String keyword;
-    public FindCommand(String findDescription) {
+    protected ArrayList<String> keywords;
+    public FindCommand(ArrayList<String> keywords) {
         super("find");
-        this.keyword = findDescription;
+        this.keyword = keywords;
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) {

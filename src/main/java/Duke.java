@@ -19,27 +19,15 @@ public class Duke {
         parser = new Parser();
 
         taskList = new TaskList(storage.load());
-/*        try {
-            // Initialise taskList with AL of tasks
-            taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
-            // If file does not exist, just create new taskList
-            ui.showMessage("File in given path does not exist yet. Creating new list of tasks...");
-            taskList = new TaskList();
-        }*/
     }
 
-    /**
-     * Starts Duke program.
-     * @throws IOException exception
-     */
     public void run() throws IOException {
         ui.showGreetings();
         boolean inProgram = true;
         while (inProgram) {
             try {
                 String userFullInput = ui.readUserInput();
-                Command c = parser.parse(userFullInput, taskList);
+                Command c = parser.parse(userFullInput);
                 c.execute(taskList, ui, storage);
                 inProgram = c.toContinueProgram();
             } catch (DukeException e) {
@@ -48,7 +36,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) throws DukeException, IOException {
         new Duke("F:\\CS2103\\duke\\data\\duke.txt").run();
     }
 

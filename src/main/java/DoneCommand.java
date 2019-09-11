@@ -1,6 +1,7 @@
 import java.io.IOException;
 
 public class DoneCommand extends Command {
+    // TODO somehow change to accept string and throw exception when not within range
     protected int doneIdx;
     public DoneCommand(int doneTaskIdx) {
         super("done");

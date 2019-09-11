@@ -1,18 +1,25 @@
-import java.util.ArrayList;
+import java.awt.font.NumericShaper;
+import java.util.List;
 import java.util.Arrays;
+import java.util.ArrayList;
 
-// Deals with making sense of the user command
+/**
+ * Makes sense of the user input.
+ * Creates the appropriate Command to be executed later.
+ */
 public class Parser {
 
     // Constructor
-    public Parser() { }
+    public Parser() {
+    }
 
-    public Command parse(String userInput, TaskList taskList) throws DukeException {
-        ArrayList<String> userInputArr = splitStrIntoArr(userInput, " ");
+    public Command parse(String userInput) throws DukeException {
+        // Split input into individual words
+        ArrayList<String> fullUserInputArr = splitStrIntoArr(userInput, " ");
         Command currCommand;
-        String taskDescription;
         // Identify command by first word
-        switch (userInputArr.get(0)) {
+        String firstWord = fullUserInputArr.get(0);
+        switch (firstWord) {
         case "bye":
             currCommand = new ExitCommand();
             break;
@@ -20,113 +27,165 @@ public class Parser {
             currCommand = new ListCommand();
             break;
         case "todo":
-            // Empty description
-            if (userInputArr.size() == 1) {
-                throw new EmptyDescriptionException("todo");
-            } else {
-                // Splice back the description
-                taskDescription = String.join(" ",
-                        userInputArr.subList(1, userInputArr.size()));
-                currCommand = new AddCommand("todo",
-                        taskDescription, false);
-            }
+            currCommand = parseToDoCommand(fullUserInputArr);
             break;
         case "find":
-            // Empty description
-            if (userInputArr.size() == 1) {
-                throw new EmptyDescriptionException("find");
-            } else {
-                // Splice back the description
-                String findDescription = String.join(" ",
-                        userInputArr.subList(1, userInputArr.size()));
-                currCommand = new FindCommand(findDescription);
-            }
+            currCommand = parseFindCommand(fullUserInputArr);
             break;
         case "deadline":
-            currCommand = parseSubCommand("deadline", "/by", userInputArr);
+            currCommand = parseDeadlineCommand(fullUserInputArr);
             break;
         case "event":
-            currCommand = parseSubCommand("event", "/at", userInputArr);
+            currCommand = parseEventCommand(fullUserInputArr);
             break;
         case "done":
-            // Empty/no list index of task provided
-            if (userInputArr.size() == 1 || userInputArr.size() > 2) {
-                throw new DukeException("Please put the list index of the " +
-                        "completed task after \"done\" and nothing else.");
-            } else {
-                // Check if integer is provided
-                try {
-                    int doneIdx = Integer.parseInt(userInputArr.get(1));
-                    // Check if integer is within range of number of tasks
-                    if (doneIdx > taskList.getNumTasks() || doneIdx < 1) {
-                        throw new DukeException("Integer is not within range of tasks.");
-                    }
-                    currCommand = new DoneCommand(doneIdx);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Please enter a valid integer after \"Done\".");
-                }
-            }
+            currCommand = parseDoneCommand(fullUserInputArr);
             break;
         case "delete":
-            // Empty/no list index of task provided
-            if (userInputArr.size() == 1 || userInputArr.size() > 2) {
-                throw new DukeException("Please put the list index of the " +
-                        "completed task after \"delete\" and nothing else.");
-            } else {
-                // Check if integer is provided
-                try {
-                    int deleteIdx = Integer.parseInt(userInputArr.get(1));
-                    // Check if integer is within range of number of tasks
-                    if (deleteIdx > taskList.getNumTasks() || deleteIdx < 1) {
-                        throw new DukeException("Integer is not within range of tasks.");
-                    }
-                    currCommand = new DeleteCommand(deleteIdx);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Please enter a valid integer after \"delete\".");
-                }
-            }
+            currCommand = parseDeleteCommand(fullUserInputArr);
             break;
         default:
             throw new UnknownCommandException();
         }
-    return currCommand;
+        return currCommand;
     }
 
-    // Handles user input of commands with subcommands
-    private Command parseSubCommand(String command, String subCommand, ArrayList<String> userInputArr) throws DukeException{
-        // Empty Description
-        // E.g. (only "deadline" or "deadline /by") or (only "event" or "deadline /at")
-        if (userInputArr.size() == 1 || userInputArr.get(1).equalsIgnoreCase(subCommand)) {
+    private Command parseToDoCommand(ArrayList<String> fullUserInputArr) throws DukeException {
+        int numInputWords = fullUserInputArr.size();
+        // Empty task description, just "todo"
+        if (numInputWords == 1) {
+            throw new EmptyDescriptionException("todo");
+        }
+        // Splice back the description
+        String taskDescription = joinArrIntoStr(fullUserInputArr.subList(1, numInputWords));
+        Command newCommand = new AddCommand("todo", taskDescription, false);
+        return newCommand;
+    }
+
+    /**
+     * Handles user input of commands with subcommands (e.g. /by, /at).
+     * @param command Command word (e.g. deadline, event)
+     * @param subCommand String preceding sub-description, starts with backslash (e.g. /by, /at)
+     * @param fullUserInputArr ArrayList of user input split into words
+     * @return Corresponding command
+     * @throws DukeException
+     */
+    private Command parseSubCommand(String command, String subCommand, ArrayList<String> fullUserInputArr) throws DukeException{
+        int numInputWords = fullUserInputArr.size();
+        boolean hasOnlyCommandWord = numInputWords == 1;
+        // Empty description (e.g. just "deadline", "event /at")
+        if (hasOnlyCommandWord || fullUserInputArr.get(1).equalsIgnoreCase(subCommand)) {
             throw new EmptyDescriptionException(command);
-        } else {
-            int firstByIdx = userInputArr.indexOf(subCommand);
-            int lastByIdx = userInputArr.lastIndexOf(subCommand);
-            // No "/by" or multiple "/by"s provided
-            if (firstByIdx == -1 || firstByIdx != lastByIdx) {
-                throw new IncorrectInfoInputException(subCommand);
-                // No description of "/by" or "/at"
-            } else if (firstByIdx == userInputArr.size()-1) {
-                throw new EmptyDescriptionException(subCommand);
-            } else {
-                // Splice words after first-word command and before "/by" or "/at"
-                String taskDescription = String.join(" ",
-                        userInputArr.subList(1, firstByIdx));
-                // Description for '/by', '/at'
-                String subCommandDescription = String.join(" ",
-                        userInputArr.subList(firstByIdx+1, userInputArr.size()));
-                Command newCommand = new SubCommand(command, taskDescription, subCommand, subCommandDescription);
-                return newCommand;
-            }
+        }
+
+        // Index of first occurrence of subcommand
+        int firstSubCommandIdx = fullUserInputArr.indexOf(subCommand);
+        int lastSubCommandIdx = fullUserInputArr.indexOf(subCommand);
+
+        boolean hasSubCommand = firstSubCommandIdx != 1;
+        boolean hasMultipleSubCommands = firstSubCommandIdx != lastSubCommandIdx;
+        // No "/by","/at" or multiple "/by"s, "/at"s provided
+        if (!hasSubCommand || hasMultipleSubCommands) {
+            throw new IncorrectInfoInputException(subCommand);
+        }
+        boolean hasSubCommandDescription = firstSubCommandIdx != fullUserInputArr.size()-1;
+        // No description of "/by" or "/at"
+        if (!hasSubCommandDescription) {
+            throw new EmptyDescriptionException(subCommand);
+        }
+
+        String taskDescription = joinArrIntoStr(fullUserInputArr.subList(1, firstSubCommandIdx));
+        String subCommandDescription = joinArrIntoStr(fullUserInputArr.subList(firstSubCommandIdx+1, numInputWords));
+        Command newCommand = new SubCommand(command, taskDescription, subCommand, subCommandDescription);
+        return newCommand;
+    }
+
+    private Command parseDeadlineCommand(ArrayList<String> fullUserInputArr) throws DukeException {
+        return parseSubCommand("deadline", "/by", fullUserInputArr);
+    }
+
+    private Command parseEventCommand(ArrayList<String> fullUserInputArr) throws DukeException {
+        return parseSubCommand("event", "/at", fullUserInputArr);
+    }
+
+    private Command parseFindCommand(ArrayList<String> fullUserInputArr) throws DukeException {
+        int numInputWords = fullUserInputArr.size();
+        // Empty description, just "find" with no keyword
+        if (numInputWords == 1) {
+            throw new EmptyDescriptionException("find");
+        }
+        ArrayList<String> findKeywords = convertToArrayList(fullUserInputArr.subList(1, numInputWords));
+        Command newCommand = new FindCommand(findKeywords);
+        return newCommand;
+    }
+
+    private Command parseDoneCommand(ArrayList<String> fullUserInputArr) throws DukeException {
+        int numInputWords = fullUserInputArr.size();
+        // Empty description, just "done" with no keyword
+        if (numInputWords == 1) {
+            throw new DukeException("Please provide index of task in list to be marked done.")
+        }
+        // More than one input after "done"
+        if (numInputWords > 2) {
+            throw new DukeException("Please just put the index of task in list after \"done\" and nothing else.");
+        }
+        try {
+            // Check if integer is provided, not characters
+            int doneIdx = Integer.parseInt(fullUserInputArr.get(1));
+            Command newCommand = new DoneCommand(doneIdx);
+            return newCommand;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter an integer after \"done\".");
         }
     }
 
-    // Splits a string by given regex pattern to AL
-    // E.g. "A B C" to [A, B, C] with pattern " "
-    public ArrayList<String> splitStrIntoArr(String input, String pattern) {
-        ArrayList<String> result = new ArrayList<String>(
-                // Split string by pattern
-                Arrays.asList(input.split(pattern))
-        );
+    private Command parseDeleteCommand(ArrayList<String> fullUserInputArr) throws DukeException {
+        int numInputWords = fullUserInputArr.size();
+        // Empty description, just "delete" with no keyword
+        if (numInputWords == 1) {
+            throw new DukeException("Please provide index of task in list to be deleted.")
+        }
+        // More than one input after "delete"
+        if (numInputWords > 2) {
+            throw new DukeException("Please just put the index of task in list after \"delete\" and nothing else.");
+        }
+        try {
+            // Check if integer is provided, not characters
+            int deleteIdx = Integer.parseInt(fullUserInputArr.get(1));
+            Command newCommand = new DeleteCommand(deleteIdx);
+            return newCommand;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter an integer after \"delete\".");
+        }
+    }
+
+
+    ////////////////////
+    // HELPER METHODS //
+    ///////////////////
+
+    private ArrayList<String> convertToArrayList(String[] arr) {
+        return new ArrayList<String>(Arrays.asList(arr));
+    }
+    private ArrayList<String> convertToArrayList(List<String> arr) {
+        return new ArrayList<String>(arr);
+    }
+
+    /**
+     * Splits a string by given regex pattern.
+     * E.g. "A B C" to [A, B, C] with pattern " "
+     * @param input String or sentence
+     * @param pattern Regex expression to separate string by
+     * @return ArrayList where each item is a substring
+     */
+    private ArrayList<String> splitStrIntoArr(String input, String pattern) {
+        ArrayList<String> result = convertToArrayList(input.split(pattern));
         return result;
     }
+
+    private String joinArrIntoStr(List<String> arr) {
+        String result = String.join(" ", arr);
+        return result;
+    }
+
 }

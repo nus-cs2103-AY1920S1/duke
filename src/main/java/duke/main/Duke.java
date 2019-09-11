@@ -1,19 +1,5 @@
 package duke.main;
 
-<<<<<<< HEAD
-import duke.exception.DukeException;
-import duke.exception.EmptyDeadlineDscDukeException;
-import duke.exception.EmptyTodoDscDukeException;
-import duke.exception.UnknownCmdDukeException;
-import duke.exception.EmptyEventDscDukeException;
-import duke.exception.NoDateDukeException;
-import duke.exception.InvalidTaskIndexDukeException;
-import duke.storage.Storage;
-import duke.task.TaskList;
-import duke.ui.UI;
-import java.io.FileNotFoundException;
-import java.text.ParseException;
-=======
 import duke.command.Command;
 import duke.exception.SaveFileWrongFormatDukeException;
 import duke.storage.Storage;
@@ -21,7 +7,6 @@ import duke.task.TaskList;
 import duke.ui.UI;
 
 import java.io.FileNotFoundException;
->>>>>>> code-quality-fixing
 
 /**
  * Duke is an application that keeps track of your

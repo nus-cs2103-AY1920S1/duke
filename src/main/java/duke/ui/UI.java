@@ -76,10 +76,6 @@ public class UI {
         return "\u2639 OOPS!!! You need to provide a date, with / to indicate it:-(";
     }
 
-    /**
-     * Prints a message of an error.
-     */
-    public String errorItide() {
     public String invalidTaskIndexExceptionMsg() {
         return "\u2639 OOPS!!! You need to provide a valid task number :-(";
     }

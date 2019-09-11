@@ -1,7 +1,0 @@
-T | 0 | read book
-D | 0 | return book | Sunday
-E | 0 | project meeting | 2th of December 2019, 6pm
-T | 0 | read book
-D | 0 | project meeting | Sunday
-D | 0 | return book | Monday
-T | 0 | book

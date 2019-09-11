@@ -1,6 +1,8 @@
 package command;
+import javafx.application.Application;
 
 import command.Command;
+import javafx.application.Platform;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
@@ -33,6 +35,7 @@ public class CommandExit extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printString("Bye. Hope to see you again soon!");
         this.isExit = true;
+        System.exit(0);
     }
 
     /**
@@ -43,6 +46,7 @@ public class CommandExit extends Command {
      */
     @Override
     public String executeForGUI(TaskList tasks, Storage storage) {
+        Platform.exit();
         return "Bye. Hope to see you again soon!";
     }
 }

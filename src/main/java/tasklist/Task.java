@@ -1,6 +1,8 @@
 package tasklist;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDateTime;
@@ -15,7 +17,7 @@ public abstract class Task {
     protected SimpleStringProperty taskType;
     protected SimpleStringProperty description;
     protected SimpleBooleanProperty isDone;
-    protected LocalDateTime dateDue;
+    protected ObjectProperty<LocalDateTime> dateDue;
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
     /**
@@ -24,7 +26,7 @@ public abstract class Task {
     public Task(String description, boolean completionStatus, LocalDateTime date) {
         this.description = new SimpleStringProperty(description);
         this.isDone = new SimpleBooleanProperty(completionStatus);
-        this.dateDue = date;
+        this.dateDue = new SimpleObjectProperty<>(date);
     }
 
     /**
@@ -101,11 +103,16 @@ public abstract class Task {
     }
 
     public LocalDateTime getDateDue() {
+        return dateDue.get();
+    }
+
+    public ObjectProperty<LocalDateTime> dateDueProperty() {
         return dateDue;
     }
 
     public void setDateDue(LocalDateTime dateDue) {
-        this.dateDue = dateDue;
+        this.dateDue.set(dateDue);
     }
+
 
 }

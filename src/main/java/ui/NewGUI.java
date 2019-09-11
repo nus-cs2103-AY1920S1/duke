@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import tasklist.Task;
 
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class NewGUI extends VBox {
     private TableColumn<Task, String> descriptionCol;
     @FXML
     private TableColumn<Task, LocalDateTime> dateDueCol;
+    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
     @FXML
     private ObservableList<Task> tasks;
 
@@ -62,7 +64,8 @@ public class NewGUI extends VBox {
         statusCol.setCellValueFactory(new PropertyValueFactory<>("isDone"));
         statusCol.setCellFactory(tc -> new CheckBoxTableCell<>());
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
-        dateDueCol.setCellValueFactory(cellData -> cellData.getValue().date);
+        dateDueCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
+        dateDueCol.setCellFactory(new NewGUI.ColumnFormatter<>(outputFormat));
     }
 
 
@@ -74,6 +77,33 @@ public class NewGUI extends VBox {
         userInput.clear();
         taskView.setItems(duke.getAllTasks());
 
+    }
+
+    private class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
+
+        private final DateTimeFormatter format;
+
+        public ColumnFormatter(DateTimeFormatter format) {
+            super();
+            this.format = format;
+        }
+
+        @Override
+        public TableCell<S, T> call(TableColumn<S, T> arg0) {
+            return new TableCell<S, T>() {
+                @Override
+                protected void updateItem(T item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (item == null || empty) {
+                        setGraphic(null);
+                    } else {
+                        LocalDateTime ld = (LocalDateTime) item;
+                        String val = ld.format(format);
+                        setGraphic(new Label(val));
+                    }
+                }
+            };
+        }
     }
 
 

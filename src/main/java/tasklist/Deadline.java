@@ -17,14 +17,15 @@ public class Deadline extends Task {
 
     @Override
     public String getOverallStatus() {
-        return "[D]" + getCurrentStatus() + description.getValue() + "(by:" + dateDue.format(OUTPUT_FORMAT) + ")";
+        return "[D]" + getCurrentStatus() + description.getValue() + "(by:"
+                + dateDue.getValue().format(OUTPUT_FORMAT) + ")";
     }
 
     @Override
     public String encodeForStorage() {
         int myInt = isDone.getValue() ? 1 : 0;
         return "deadline [" + myInt + "]" + description.getValue() + "/by"
-                + dateDue.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                + dateDue.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
 }

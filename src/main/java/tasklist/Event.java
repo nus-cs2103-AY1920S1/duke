@@ -19,13 +19,14 @@ public class Event extends Task {
 
     @Override
     public String getOverallStatus() {
-        return "[E]" + getCurrentStatus() + description.getValue() + "(at:" + dateDue.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + getCurrentStatus() + description.getValue() + "(at:"
+                + dateDue.getValue().format(OUTPUT_FORMAT) + ")";
     }
 
     @Override
     public String encodeForStorage() {
         int myInt = isDone.getValue() ? 1 : 0;
         return "event [" + myInt + "]" + description.getValue() + "/at"
-                + dateDue.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+                + dateDue.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 }

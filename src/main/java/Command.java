@@ -5,9 +5,20 @@ import java.io.IOException;
  */
 public class Command {
 
+    /**
+     * Default constructor for Command class.
+     */
     public Command() {
     }
 
+    /**
+     * Executes the commands in the taskList and updates text file.
+     * @param tasks TaskList object to store list of tasks.
+     * @param ui Ui object to read the command.
+     * @param storage Storage object to store and update text file.
+     * @throws DukeException
+     * @throws IOException
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         storage.loadFile();
         ui.printGreeting();

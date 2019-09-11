@@ -11,6 +11,10 @@ public class Storage {
         this.taskList = taskList;
     }
 
+    /**
+     * Loads content from file into commands that can be understood by Duke.
+     * @throws IOException
+     */
     public void loadFile() throws IOException {
         try {
             checkFile();
@@ -53,6 +57,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Updates data in file.
+     * @throws IOException
+     */
     public void rewriteData() throws IOException {
         try (PrintStream out = new PrintStream(new FileOutputStream(taskListText))) {
             for (int i = 0; i < taskList.size(); i++) {
@@ -66,6 +74,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if file exists, otherwise create one.
+     * @throws IOException
+     */
     public void checkFile() throws IOException {
         File tmpDir = new File("TaskList.txt");
         if (!tmpDir.exists()) {

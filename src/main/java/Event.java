@@ -10,6 +10,11 @@ public class Event extends Task {
     protected LocalTime myTime;
     protected DateTimeFormatter myFormattedDate;
 
+    /**
+     * Constructor for Event class.
+     * @param description task description.
+     * @param date event date and time.
+     */
     public Event(String description, String date) {
         super(description);
         this.date = date;

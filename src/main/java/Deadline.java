@@ -10,6 +10,11 @@ public class Deadline extends Task {
     protected LocalTime myTime;
     protected DateTimeFormatter myFormattedDate;
 
+    /**
+     * Constructor for Deadline class.
+     * @param description task description.
+     * @param date deadline date and time.
+     */
     public Deadline(String description, String date) {
         super(description);
         this.date = date;

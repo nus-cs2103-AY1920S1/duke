@@ -8,7 +8,11 @@ public class Parser {
     public Parser() {
     }
 
-    //Converts a string of user input into actual command to be executed.
+    /**
+     * Constructor for Parser class. Converts string of user input into actual command to be executed.
+     * @param command string of command given by user.
+     * @return CommandType.
+     */
     public CommandType parse(String command) {
         String[] commandSplit = command.split(" ");
         String taskType = commandSplit[0];
@@ -30,7 +34,7 @@ public class Parser {
         case ("find") :
             return CommandType.FIND;
         default :
-            throw new InputMismatchException("⚆ _ ⚆ I'm sorry, but I don't know what that means");
+            throw new InputMismatchException("I'm sorry, but I don't know what that means");
         }
     }
 }

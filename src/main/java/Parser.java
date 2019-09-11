@@ -36,6 +36,8 @@ public class Parser {
             return CommandType.BYE;
         case ("find") :
             return CommandType.FIND;
+        case ("help") :
+            return CommandType.HELP;
         default :
             throw new InputMismatchException("I'm sorry, but I don't know what that means");
         }

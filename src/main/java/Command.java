@@ -94,6 +94,9 @@ public class Command {
                 }
                 response = ui.printFind(findList);
                 break outerLoop;
+            case HELP:
+                response = ui.printHelp();
+                break outerLoop;
             default:
                 response = ui.printOops();
                 break outerLoop;

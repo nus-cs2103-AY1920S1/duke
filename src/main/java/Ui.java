@@ -34,6 +34,7 @@ public class Ui {
         String greet = line
                 + " Hello! My name is Smart Baby~\n"
                 + " ≧◡≦ What can I do for you?\n"
+                + " To see my baby powers, type 'help'\n"
                 + line;
         return greet;
     }
@@ -43,7 +44,7 @@ public class Ui {
      */
     public String printBye() {
         String bye = line
-                + "Zzz...sleeping time! ~u~\n"
+                + "Zzz...sleeping time! ≖‿≖\n"
                 + line;
         return bye;
     }
@@ -53,7 +54,8 @@ public class Ui {
      */
     public String printOops() {
         String oops = line
-                + "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                + "(ヾﾉ꒪ཫ꒪ ) OOPS!!! I'm sorry, but I don't know what that means\n"
+                + "Type 'help' to see what I can do for you. (｡◕‿◕｡)"
                 + line;
         return oops;
     }
@@ -70,7 +72,7 @@ public class Ui {
             taskList = taskList + (i + 1) + "." + t.toString() + "\n";
         }
         return line
-                + "Here are the tasks in your list:\n"
+                + "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Here are the tasks in your list:\n"
                 + taskList
                 + line;
     }
@@ -81,7 +83,7 @@ public class Ui {
      */
     public String printDone(Task task) {
         return line
-                + "Nice! I've marked this task as done:\n"
+                + "´ ▽ ` )ﾉ Nice! I've marked this task as done:\n"
                 + "[" + task.getStatusIcon() + "]" + task.getDescription() + "\n"
                 + line;
     }
@@ -93,7 +95,7 @@ public class Ui {
      */
     public String printAddTask(Task task, int sizeOfTaskList) {
         return line
-                + "Got it. I've added this task:\n" + task.toString() + "\n"
+                + "ಥ◡ಥ Got it. I've added this task:\n" + task.toString() + "\n"
                 + "Now you have " + sizeOfTaskList + " tasks in the list.\n"
                 + line;
     }
@@ -104,7 +106,7 @@ public class Ui {
      * @param sizeOfTaskList size of taskList.
      */
     public String printDelete(Task deletedTask, int sizeOfTaskList) {
-        return line + "Noted. I've removed this task: \n"
+        return line + "(¬‿¬) Noted. I've removed this task: \n"
                 + deletedTask.toString() + "\n"
                 + "Now you have " + (sizeOfTaskList - 1) + " tasks in the list.\n"
                 + line;
@@ -121,7 +123,7 @@ public class Ui {
             taskList = taskList + (i+1) + "." + task.toString() + "\n";
         }
         return line
-                + "Here are the matching tasks in your list:\n"
+                + "இ~இ Here are the matching tasks in your list:\n"
                 + taskList
                 + line;
     }
@@ -130,14 +132,14 @@ public class Ui {
      * Prints correct format for event input.
      */
     public String printEventFormat() {
-        return line + "Doesn't match the event format. Please use /at dd/mm/yyyy 0000 (in 24hr).\n" + line;
+        return line + " (;´･д･`) Doesn't match the event format.\n Please use /at dd/mm/yyyy 0000 (in 24hr).\n" + line;
     }
 
     /**
      * Prints correct format for deadline input.
      */
     public String printDeadlineFormat() {
-        return line + "Doesn't match the deadline format. Please use /by dd/mm/yyyy 0000 (in 24hr).\n" + line;
+        return line + " (. ﾟーﾟ) Doesn't match the deadline format.\n Please use /by dd/mm/yyyy 0000 (in 24hr).\n" + line;
     }
 
     /**
@@ -147,9 +149,9 @@ public class Ui {
      */
     public String throwErrorMessage(String taskType) throws DukeException {
         if (Stream.of("delete", "done", "todo", "deadline", "event").anyMatch(s -> taskType.equals(s))) {
-            throw new DukeException(line + "\nOOPS!!! The description of a " + taskType + " cannot be empty.\n" + line);
+            throw new DukeException(line + "∑(゜Д゜;) OOPS!!! The description of a " + taskType + " cannot be empty.\n" + line);
         } else {
-            throw new DukeException(line + "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n" + line);
+            throw new DukeException(line + "_(꒪ཀ꒪」∠)_ OOPS!!! I'm sorry, but I don't know what that means.\n" + line);
         }
     }
 
@@ -159,5 +161,17 @@ public class Ui {
      */
     public String printErrorMessage(String error) {
         return "OOPS!!! " + error + "\n";
+    }
+
+    public String printHelp() {
+        String help = "Come, lemme teachu baby talk (●´ω｀●):\n"
+                + "list - returns current tasks in task list.\n"
+                + "done [task number] - mark task as done.\n"
+                + "delete [task number] - delete task from task list.\n"
+                + "todo [description] - insert a todo task into task list.\n"
+                + "deadline [description] /by [dd/MM/yyyy] [0000] - insert a deadline task into task list.\n"
+                + "event [description] /at [dd/MM/yyyy] [0000] - insert an event into task list.\n"
+                + "find [keyword] - find task(s) containing keyword in task list.\n";
+        return line + help + line;
     }
 }

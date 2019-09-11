@@ -9,7 +9,8 @@ public enum CommandType {
     DELETE,
     DONE,
     BYE,
-    FIND;
+    FIND,
+    HELP;
 
     @Override
     public String toString() {

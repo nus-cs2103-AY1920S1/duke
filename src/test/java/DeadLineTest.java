@@ -8,8 +8,8 @@ public class DeadLineTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[D] [ ] return book (by:Sunday)", new DeadLine("return book", "Sunday").toString());
-        assertEquals("[D] [ ] sign book (by:Monday)", new DeadLine("sign book", "Monday").toString());
+        assertEquals("[D] [ ] return book (by: Sunday)", new DeadLine("return book", "Sunday").toString());
+        assertEquals("[D] [ ] sign book (by: Monday)", new DeadLine("sign book", "Monday").toString());
     }
 
     @Test

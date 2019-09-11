@@ -30,16 +30,6 @@ public class Duke extends Application {
     public Duke() {
     }
 
-    /*public void run() throws IOException, DukeException {
-        UI ui = new UI();
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage(taskList);
-        Command c = new Command();
-    }
-    public static void main (String[] args) throws IOException, DukeException {
-        new Duke().run();
-    }*/
-
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -156,6 +146,4 @@ public class Duke extends Application {
             return "error";
         }
     }
-
-
 }

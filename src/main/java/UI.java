@@ -1,21 +1,11 @@
 import javafx.scene.control.TextField;
-import java.util.Scanner;
 
 /**
  * Printing of the dialogues
  */
 public class UI {
-    protected Scanner sc;
     private TextField userInput;
     public UI() {
-        this.sc = sc;
-    }
-
-    public String readCommand() {
-        sc = new Scanner(System.in);
-        userInput = new TextField();
-        return userInput.getText();
-        //return sc.nextLine();
     }
 
     String line = ("____________________________________________________\n");
@@ -104,30 +94,30 @@ public class UI {
 
     }
 
-    public String throwInputError(String taskType) throws DukeException {
+    public String throwInputError(String taskType) {
         switch (taskType) {
         case "todo" :
-            throw new DukeException(line +
+            return (line +
                     "     Hey! Description of a todo cannot be empty :(\n" +
                     lineOnly);
         case "event" :
-            throw new DukeException(line +
+            return (line +
                     "     Hey! Description of a event cannot be empty :(\n" +
                     lineOnly);
         case "deadline" :
-            throw new DukeException(line +
+            return (line +
                     "     Hey! Description of a deadline cannot be empty :(\n" +
                     lineOnly);
         case "done" :
-            throw new DukeException(line +
+            return (line +
                     "     Hey! Description of a done cannot be empty :(\n" +
                     lineOnly);
         case "delete" :
-            throw new DukeException(line +
+            return (line +
                     "     Hey! Description of a delete cannot be empty :(\n" +
                     lineOnly);
         default :
-            throw new DukeException(line +
+            return (line +
                     "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
                     lineOnly);
         }

@@ -71,10 +71,10 @@ public class Ui {
     public void showAddedTask(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
         char icon;
         if(isDone){
-            icon = '✓';
+            icon = 'Y';
         }
         else{
-            icon = '❌';
+            icon = 'X';
         }
 
         System.out.println("Got it. I've added this task: ");
@@ -85,10 +85,10 @@ public class Ui {
     public String getAddedTask(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
         char icon;
         if(isDone){
-            icon = '✓';
+            icon = 'Y';
         }
         else{
-            icon = '❌';
+            icon = 'X';
         }
         return "Got it. I've added this task: \n" + "\t[" + firstAlphabet + "][" + icon + "] " + taskDescription +
                "\nNow you " + "have " + numberOfItems + " in the list.";

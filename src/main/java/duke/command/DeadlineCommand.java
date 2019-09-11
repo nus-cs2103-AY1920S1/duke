@@ -29,8 +29,7 @@ public class DeadlineCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = new Deadline(description, dueDateTime);
-        taskList.add(newTask);
-        return ui.showTaskAdded(taskList.getTotalTask(), newTask);
+        return Command.addTask(taskList, ui, newTask);
     }
 
     /**

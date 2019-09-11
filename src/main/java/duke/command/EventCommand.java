@@ -33,13 +33,7 @@ public class EventCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = new Event(description, startDateTime, endTime);
-        taskList.add(newTask);
-        try {
-            storage.recordTasks(taskList);
-        } catch (IOException e) {
-            return ui.showSavingError();
-        }
-        return ui.showTaskAdded(taskList.getTotalTask(), newTask);
+        return Command.addTask(taskList, ui, newTask);
     }
 
     /**

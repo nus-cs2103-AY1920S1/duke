@@ -25,9 +25,9 @@ public class TodoCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = new Todo(description);
-        taskList.add(newTask);
-        return ui.showTaskAdded(taskList.getTotalTask(), newTask);
+        return Command.addTask(taskList, ui, newTask);
     }
+
 
     /**
      * Compares two <code>TodoCommand</code> objects according to their description.

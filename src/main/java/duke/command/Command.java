@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.task.Task;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -33,6 +34,19 @@ public abstract class Command {
      * @throws DukeException  If a certain execution fails
      */
     abstract public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+
+    static String addTask(TaskList taskList, Ui ui, Task newTask) {
+        boolean isAdding = false;
+        if (taskList.hasSameTask(newTask)) {
+            ui.showTaskDuplicating();
+            isAdding = (ui.readCommand().equals("y"));
+        }
+        if (isAdding) {
+            taskList.add(newTask);
+            return ui.showTaskAdded(taskList.getTotalTask(), newTask);
+        }
+        return ui.showIgnore();
+    }
 
     /**
      * Compares two commands based on their types.

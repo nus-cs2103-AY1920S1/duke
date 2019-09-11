@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.task.Deadline;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -34,6 +35,10 @@ public class TaskList {
 
     public Task removeTaskAt(int index) {
         return tasks.remove(index);
+    }
+
+    public boolean hasSameTask(Task task) {
+        return tasks.contains(task);
     }
 
     /**

@@ -14,11 +14,13 @@ import java.util.Scanner;
 public class Ui {
     private static final String INDENTATION = "     ";
     private static final String SEPARATOR = "    ____________________________________________________________\n";
-    private static final String WELCOME_Msg = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String ENDING_Msg = "Bye. Hope to see you again soon!";
-    private static final String SAVING_ERROR_Msg = "☹ OOPS!!! We cannot save your data!";
-    private static final String LOADING_ERROR_Msg = "☹ OOPS!!! We cannot load your data!";
-    private static final String NO_TASK_Msg = "kkk ~ There is no task in your todo list now!";
+    private static final String WELCOME_MSG = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String ENDING_MSG = "Bye. Hope to see you again soon!";
+    private static final String SAVING_ERROR_MSG = "☹ OOPS!!! We cannot save your data!";
+    private static final String LOADING_ERROR_MSG = "☹ OOPS!!! We cannot load your data!";
+    private static final String NO_TASK_MSG = "kkk ~ There is no task in your todo list now!";
+    private static final String DUPLICATES_NOTIFY_MSG = "A same task exists. Do you still want to add?" + "(y for yes)";
+    private static final String IGNORE_MSG = "Okay! I ignored this duplicate task!";
     private Scanner scanner;
 
     /**
@@ -34,23 +36,23 @@ public class Ui {
     }
 
     public String showWelcome() {
-        System.out.println(getFormattedStr(WELCOME_Msg));
-        return WELCOME_Msg;
+        System.out.println(getFormattedStr(WELCOME_MSG));
+        return WELCOME_MSG;
     }
 
     public String showGoodbye() {
-        System.out.println(getFormattedStr(ENDING_Msg));
-        return ENDING_Msg;
+        System.out.println(getFormattedStr(ENDING_MSG));
+        return ENDING_MSG;
     }
 
     public String showSavingError() {
-        System.out.println(getFormattedStr(SAVING_ERROR_Msg));
-        return SAVING_ERROR_Msg;
+        System.out.println(getFormattedStr(SAVING_ERROR_MSG));
+        return SAVING_ERROR_MSG;
     }
 
     public String showLoadingError() {
-        System.out.println(getFormattedStr(LOADING_ERROR_Msg));
-        return LOADING_ERROR_Msg;
+        System.out.println(getFormattedStr(LOADING_ERROR_MSG));
+        return LOADING_ERROR_MSG;
     }
 
     public String showError(String errorMsg) {
@@ -59,8 +61,13 @@ public class Ui {
     }
 
     public String showNoTask() {
-        System.out.println(getFormattedStr(NO_TASK_Msg));
-        return NO_TASK_Msg;
+        System.out.println(getFormattedStr(NO_TASK_MSG));
+        return NO_TASK_MSG;
+    }
+
+    public String showIgnore() {
+        System.out.println(getFormattedStr(IGNORE_MSG));
+        return IGNORE_MSG;
     }
 
     public String showTaskAdded(int total, Task newTask) {
@@ -82,6 +89,11 @@ public class Ui {
         String msg = "Nice! I've marked this task as done:\n" + "  " + doneTask;
         System.out.println(getFormattedStr(msg));
         return msg;
+    }
+
+    public String showTaskDuplicating() {
+        System.out.println(getFormattedStr(DUPLICATES_NOTIFY_MSG));
+        return DUPLICATES_NOTIFY_MSG;
     }
 
     public String showFullList(TaskList taskList) {

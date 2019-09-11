@@ -40,8 +40,8 @@ shadowJar {
 
 application {
     // Change this to your main class.
-    mainClassName = "duke.Launcher"
-    //mainClassName = "duke.Duke"
+    //mainClassName = "duke.Launcher"
+    mainClassName = "duke.Duke"
 }
 
 javafx {

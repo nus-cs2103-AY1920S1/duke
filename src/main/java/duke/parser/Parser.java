@@ -1,15 +1,6 @@
 package duke.parser;
 
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.Command;
-import duke.command.FindCommand;
-import duke.command.AddEventCommand;
-import duke.command.InvalidCommand;
-import duke.command.AddDeadlineCommand;
-import duke.command.AddTodoCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
+import duke.command.*;
 
 
 /**
@@ -41,6 +32,8 @@ public class Parser {
             return new DeleteCommand(msg);
         } else if (msg[0].equals("find")) {
             return new FindCommand(msg);
+        } else if (msg[0].equals("help")) {
+            return new HelpCommand(msg);
         } else {
             return new InvalidCommand();
         }

@@ -27,6 +27,7 @@ public class Parser {
     public static Command parse(String commandText) throws DukeException {
         String[] arr = commandText.split(" ", 2);
         String command = arr[0];
+        int size = arr.length;
 
         switch (command) {
         case "list":
@@ -36,17 +37,16 @@ public class Parser {
             return new DoneCommand(commandText);
 
         case "delete":
-            System.out.println(arr[1]);
-            return new DeleteCommand(arr[1]);
+            return new DeleteCommand(commandText);
 
         case "todo":
-            return new AddCommand(arr[0], arr[1]);
+            return new AddCommand(commandText);
 
         case "deadline":
-            return new AddCommand(arr[0], arr[1]);
+            return new AddCommand(commandText);
 
         case "event":
-            return new AddCommand(arr[0], arr[1]);
+            return new AddCommand(commandText);
 
         case "bye":
             return new ExitCommand();

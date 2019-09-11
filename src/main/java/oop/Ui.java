@@ -29,6 +29,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println(logo);
         return ("Hello from\n" + logo);
     }
 
@@ -37,6 +38,7 @@ public class Ui {
      * @param text The text to be displayed.
      */
     public String showText(String text) {
+        System.out.println(text);
         return text;
     }
 
@@ -45,6 +47,7 @@ public class Ui {
      * @param error The Error to be displayed.
      */
     public String showError(DukeException error) {
+        System.out.println(error.getMessage());
         return error.getMessage();
     }
 
@@ -53,7 +56,8 @@ public class Ui {
      * start of the application.
      * @param error The Error to be displayed.
      */
-    public String showLoadingError(DukeException   error) {
+    public String showLoadingError(DukeException error) {
+        System.out.println(error.getMessage());
         return error.getMessage();
     }
 
@@ -61,7 +65,9 @@ public class Ui {
      * A method to display the exit message to be shown when the application terminates.
      */
     public String showExitMessage() {
-        return "Bye! Hope to see you again soon.";
+        String exitMessage = "Bye! Hope to see you again soon.";
+        scanner.close();
+        return exitMessage;
     }
 
     /**

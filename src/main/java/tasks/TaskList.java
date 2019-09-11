@@ -35,7 +35,7 @@ public class TaskList {
     public TaskList(String currentList) {
         xs = new ArrayList<Task>();
         numOfTasks = 0;
-        integrateList(xs, currentList);
+        integrateList(currentList);
     }
 
     /**
@@ -60,6 +60,11 @@ public class TaskList {
      * @return Returns a String to be printed when the list is updated.
      */
     public String addTask(Task t) {
+        for (Task task : xs) {
+            if (task.toString().equals(t.toString())) {
+                return "Sorry, a similar tasks has been found in the list.";
+            }
+        }
         numOfTasks++;
         assert numOfTasks >= 1 : "Task started from a negative value";
         xs.add(t);
@@ -71,7 +76,7 @@ public class TaskList {
      * @param num The index of the task in the list.
      * @return Returns a String to be printed when the task is marked as done.
      */
-    public String tickTask(int num) {
+    public String tickTask (int num) {
         xs.get(num - 1).markAsDone();
         return String.format("Nice! I've marked this task as done:\n%s", xs.get(num - 1));
     }
@@ -94,7 +99,7 @@ public class TaskList {
      * @return Returns a String representation of all the Task in the TaskList.
      */
     public String printTasks() {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list: ");
         for (int i = 1; i <= xs.size(); i++) {
             sb.append("\n" + String.format("%d.%s", i, xs.get(i - 1)));
         }
@@ -114,12 +119,11 @@ public class TaskList {
     }
 
     /**
-     * A method to process the data of previous taskings, and add them to the
+     * A method to process the data of previous tasking, and add them to the
      * current TaskList.
-     * @param list List of Task to be updated.
      * @param content Data to be processed.
      */
-    private void integrateList(ArrayList<Task> list, String content) {
+    private void integrateList (String content) {
         Scanner s = new Scanner(content);
         while (s.hasNextLine()) {
             String text = s.nextLine();

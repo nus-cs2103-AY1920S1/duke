@@ -32,13 +32,20 @@ public class DeleteCommand extends Command {
      *      an exception occurring in the running of the application.
      */
     public String execute(TaskList task, Ui ui, Storage storage) throws DukeException {
+        String[] arrOfText = description.split(" ", 2);
+        if (arrOfText.length < 2) {
+            throw new InvalidDescriptionException("Wrong description");
+        }
+
         int sizeOfList = task.getNumOfTasks();
-        if (description.matches("^\\d+")) {
-            int taskNum = Integer.parseInt(description);
+        if (arrOfText[1].matches("^\\d+")) {
+            int taskNum = Integer.parseInt(arrOfText[1]);
             if (taskNum > sizeOfList || taskNum < 1) {
                 throw new InvalidDescriptionException("Wrong description");
             } else {
-                return ui.showText(task.removeTask(taskNum));
+                String response = ui.showText(task.removeTask(taskNum));
+                storage.writeToFile(task);
+                return response;
             }
         } else {
             throw new InvalidDescriptionException("Wrong description");

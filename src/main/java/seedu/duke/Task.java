@@ -106,22 +106,4 @@ public class Task implements Comparable<Task> {
         }
     }
 
-
-
-
-/*
-
-        if (this.getDateTime() == null && o.getDateTime() == null) { // both are instance of Todo
-            return this.getDescription().compareTo(o.getDescription());
-        } else if (!(o instanceof Todo) && !(this instanceof Todo)) {
-            return this.getDateTime().compareTo(o.getDateTime());
-        } else if (o.getDateTime() == null) {
-            return (int) Double.MIN_VALUE;
-        } else if (this.getDateTime() == null) {
-            return (int) Double.MAX_VALUE;
-        } else {
-            return this.getDescription().compareTo(o.getDescription());
-        }
-    }
-*/
 }

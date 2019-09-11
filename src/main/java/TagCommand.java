@@ -21,14 +21,18 @@ public class TagCommand extends Command {
      * @return a string containing the procesedCommand
      */
     @Override
-    public String processCommand(){
+    public String processCommand() throws DukeException{
         String [] tagCommandArray = taskName.split(" ");
         String userInputIndex = tagCommandArray[0] ;
 
         Integer tagIndex = Integer.parseInt(userInputIndex) - 1;
         String tagName = tagCommandArray[1];
-        String message = taskList.addTag(tagIndex, tagName);
-        return message;
+        if(! tagName.contains("#")){
+            throw new DukeException("Tag should contain the # at the start!");
+        }else{
+            String message = taskList.addTag(tagIndex, tagName);
+            return message;
+        }
     }
 
     /**

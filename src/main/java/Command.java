@@ -21,7 +21,7 @@ public class Command{
      * 
      * @return a cleaned command
      */
-    public String processCommand(){
+    public String processCommand() throws DukeException{
         return null;
     }
 

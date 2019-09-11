@@ -1,6 +1,5 @@
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.*;
-
 /**
  * Find command is used to create find tasks.
  */
@@ -35,39 +34,62 @@ public class FindCommand extends Command {
     @Override
     public String execute(String processedCommand){
         if(processedCommand.contains("#")){
-            return executeTagCommand(processedCommand.split(" ")[1]);
+            return executeTagCommand(processedCommand);
         }else{
-            TaskList taskListsWithKeyWords = new TaskList();
-            int length = super.taskList.size();
-            for(int i = 0; i < length; i++){
-                Task currentTask = taskList.getTask(i);
-    
-                if(currentTask.getMessage().contains(command)){
-                    taskListsWithKeyWords.add(currentTask);
-                }
-            }
-            return taskListsWithKeyWords.toString();
+            return executeNormalFindCommand(processedCommand);
         }
-
     }
 
+    /**
+     * Abstraction of finding a tag. 
+     * 
+     * @param tagName
+     * @return string containing the tasks that contain this tag.
+     */
     public String executeTagCommand(String tagName){
-        System.out.println(tagName);
         TaskList taskListsWithKeyWords = new TaskList();
-            int length = super.taskList.size();
-            for(int i = 0; i < length; i++){
-                Task currentTask = taskList.getTask(i);
-                ArrayList <String> tagList = currentTask.getTagList();
+        int length = super.taskList.size();
+        for(int i = 0; i < length; i++){
+            Task currentTask = taskList.getTask(i);
+            ArrayList <String> tagList = currentTask.getTagList();
 
-                for (int j= 0; j < tagList.size(); j ++){
-                    if(tagList.get(j).equals(tagName)){
-                        taskListsWithKeyWords.add(currentTask);
-                        System.out.println("yes");
-                        break;
-                    }
+            for (int j= 0; j < tagList.size(); j ++){
+                if(tagList.get(j).equals(tagName)){
+                    taskListsWithKeyWords.add(currentTask);
+                    break;
                 }
             }
+        }
+
+        if(taskListsWithKeyWords.size() < 1){
+            return "Cannot find any tasks with that tag! ";
+        }else{
             return taskListsWithKeyWords.toString();
+        }
+    }
+
+    /**
+     * Abstraction of finding a string. 
+     * 
+     * @param tagName
+     * @return string containing the tasks that contain this string.
+     */
+    public String executeNormalFindCommand(String tagName){
+        TaskList taskListsWithKeyWords = new TaskList();
+        int length = super.taskList.size();
+        for(int i = 0; i < length; i++){
+            Task currentTask = taskList.getTask(i);
+
+            if(currentTask.getMessage().contains(tagName)){
+                taskListsWithKeyWords.add(currentTask);
+            }
+        }
+
+        if(taskListsWithKeyWords.size() < 1){
+            return "Cannot find any tasks with that keyword! ";
+        }else{
+            return taskListsWithKeyWords.toString();
+        }
     }
     
 }

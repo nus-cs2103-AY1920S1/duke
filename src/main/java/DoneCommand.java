@@ -19,10 +19,30 @@ public class DoneCommand extends Command {
      * @return a string containing the procesedCommand
      */
     @Override
-    public String processCommand(){
-        String stringFromUser = super.command.replaceAll("\\D+","");
-        Integer indexFromUser = Integer.parseInt(stringFromUser);
-        return Integer.toString(indexFromUser);
+    public String processCommand() throws DukeException{
+        String userIndex = super.command.split(" ", 2)[1];
+        
+        if (containsNonNumber(userIndex)){
+            throw new DukeException("☹ OOPS!!! You have chosen an invalid task number!");
+        }else {
+            String stringFromUser = super.command.replaceAll("\\D+","");
+            Integer indexFromUser = Integer.parseInt(stringFromUser);
+
+            if(indexFromUser > taskList.size() -1 || indexFromUser < 1 ){
+                String taskListMaxIndex = Integer.toString(taskList.size()) ;
+                throw new DukeException("☹ OOPS!!! Please choose a number from 1 to " +taskListMaxIndex );
+            }else{
+                return Integer.toString(indexFromUser);
+            }
+        }
+    }
+
+    public boolean containsNonNumber(String userIndex){
+        if(userIndex.matches(".*[a-zA-Z]+.*") || userIndex.contains("-")){
+            return true; 
+        }else{
+            return false;
+        }
     }
 
     /**

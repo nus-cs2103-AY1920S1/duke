@@ -54,22 +54,14 @@ public class Parser{
                         return new Response(toDoResponse).toString();
 
                     case "deadline" :
-                        String [] deadlineArray = line.split("/");
-                        if(deadlineArray.length < 2){
-                            throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty."); 
-                        }
-                        Command deadLineCommand = new DeadLineCommand(line, taskName, deadlineArray, taskList);
+                        Command deadLineCommand = new DeadLineCommand(line, taskName, taskList);
                         String processeddeadLineCommand = deadLineCommand.processCommand();
                         String deadlineResponse = deadLineCommand.execute(processeddeadLineCommand);
                         storage.save();
                         return new Response(deadlineResponse).toString();
                         
                     case "event" :
-                        String [] deadlineArray1 = line.split("/");
-                        if(deadlineArray1.length < 2){
-                            throw new DukeException("☹ OOPS!!! The date of an event cannot be empty."); 
-                        }
-                        Command eventCommand = new EventCommand(line, taskName, deadlineArray1, taskList);
+                        Command eventCommand = new EventCommand(line, taskName, taskList);
                         String processedeventCommand = eventCommand.processCommand();
                         String eventResponse = eventCommand.execute(processedeventCommand);
                         storage.save();
@@ -82,22 +74,17 @@ public class Parser{
                         return new Response(response).toString();
                         
                     case "delete" :
-                        int offset = Integer.parseInt(taskName) - 1;
-                        if(offset > taskList.size() - 1){
-                            throw new DukeException("☹ OOPS!!! There aren't so many tasks!"); 
-                        }else{
-                            Command deleteCommand = new DeleteCommand(line, offset, taskList);
-                            String processedDeleteCommand = deleteCommand.processCommand();
-                            String deleteResponse = deleteCommand.execute(processedDeleteCommand);
-                            storage.save();
-                            return new Response(deleteResponse).toString();
-                        }
+                        Command deleteCommand = new DeleteCommand(line, taskName, taskList);
+                        String processedDeleteCommand = deleteCommand.processCommand();
+                        String deleteResponse = deleteCommand.execute(processedDeleteCommand);
+                        storage.save();
+                        return new Response(deleteResponse).toString();
+                        
                     case "tag":
                         Command TagCommand = new TagCommand(line, taskName, taskList);
                         String processedTagCommand = TagCommand.processCommand();
                         String tagResponse = TagCommand.execute(processedTagCommand);
                         return new Response(tagResponse).toString();
-
 
                     default:
                         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); 

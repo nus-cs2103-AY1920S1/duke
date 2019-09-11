@@ -6,12 +6,6 @@ import duke.database.Storage;
 import duke.command.Command;
 import duke.component.Parser;
 import duke.exception.DukeException;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
 
 /**
  * Duke class handle the initialise of the Duke Program,
@@ -29,27 +23,6 @@ public class Duke {
 
     /** Ui of the Duke Program. */
     private Ui ui;
-
-    /** Panel of Duke Program. */
-    private ScrollPane scrollPane;
-
-    /** Dialog Box of user and Duke. */
-    private VBox dialogContainer;
-
-    /** User Input. */
-    private TextField userInput;
-
-    /** Send Button. */
-    private Button sendButton;
-
-    /** The Scene of Duke Program. */
-    private Scene scene;
-
-    /** Image of User. */
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-
-    /** Image of Duke Program. */
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Duke program to initalise the Database, Ui and get the task list.

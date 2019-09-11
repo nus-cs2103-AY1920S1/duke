@@ -1,15 +1,10 @@
 package duke.command;
 
+import duke.date.DateFormatter;
 import duke.exception.DukeException;
-import duke.component.Ui;
 import duke.component.TaskList;
 import duke.database.Storage;
 import duke.task.Event;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * This Event Command class get the input of the task description
@@ -67,26 +62,18 @@ public class EventCommand extends Command {
 
         String achieve = result[0].trim();
         String timeline = result[1].trim();
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        DateFormat outputformat = new SimpleDateFormat("d MMMM yyyy',' h:mm a");
-        Date date = null;
-        String formattedDate = null;
-        try {
-            date = df.parse(timeline);
-            formattedDate = outputformat.format(date);
-            tasks.getTask().add(new Event(achieve, formattedDate));
-            reply.append("Got it. I've added this task: ");
-            reply.append("\n");
-            reply.append(tasks.getTask().get(tasks.getItemNo()));
-            reply.append("\n");
-            tasks.setItemNo(tasks.getItemNo() + 1);
-            reply.append("Now you have "
-                    + tasks.getItemNo() + " tasks in the list.");
-            return reply.toString();
-        } catch (ParseException pe) {
-            throw new DukeException("Invalid Data and Time Format");
-        }
 
+        DateFormatter formattedDate = new DateFormatter(timeline);
+        tasks.getTask().add(new Event(achieve, formattedDate.getTime()));
 
+        reply.append("Got it. I've added this task: ");
+        reply.append("\n");
+        reply.append(tasks.getTask().get(tasks.getItemNo()));
+        reply.append("\n");
+        tasks.setItemNo(tasks.getItemNo() + 1);
+        reply.append("Now you have "
+                + tasks.getItemNo() + " tasks in the list.");
+
+        return reply.toString();
     }
 }

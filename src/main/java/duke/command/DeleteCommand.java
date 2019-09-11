@@ -2,9 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.component.TaskList;
-import duke.component.Ui;
 import duke.database.Storage;
-import duke.main.Duke;
 
 /**
  * This Delete Command class get the input of the task description

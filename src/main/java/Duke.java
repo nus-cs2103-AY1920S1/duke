@@ -35,18 +35,21 @@ public class Duke {
 
     /**
      * This is the main method of the task manager.
-     * @throws FileNotFoundException If file is not found
-     * @throws IOException If an input or output exception occurred
-     * @throws ParseException If a parse exception occurred
+     *
+     * @throws FileNotFoundException If file is not found.
+     * @throws IOException If an input or output exception occurred.
+     * @throws ParseException If a parse exception occurred.
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+    public static void main(String[] args) throws FileNotFoundException,
+            IOException, ParseException {
         new Duke("/Users/michelleyong/Desktop/duke/data/duke.txt").run();
     }
 
     /**
      * Runs the task manager.
-     * @throws IOException If an input or output exception occurred
-     * @throws ParseException If a parse exception occurred
+     *
+     * @throws IOException If an input or output exception occurred.
+     * @throws ParseException If a parse exception occurred.
      */
     public void run() throws IOException, ParseException {
         ui.printHello();
@@ -76,7 +79,8 @@ public class Duke {
                     }
                     String[] descArr = parser.breakDownDescription(text);
                     Date date = parser.getDate(descArr, storage);
-                    Deadline deadline = new Deadline(parser.getDeadlineDesc(descArr), date);
+                    Deadline deadline =
+                            new Deadline(parser.getDeadlineDesc(descArr), date);
                     taskList.addTask(deadline);
                     ui.printTaskAdded(deadline, taskList.getSize());
                     storage.appendTaskToFile(deadline);

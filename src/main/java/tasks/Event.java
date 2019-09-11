@@ -10,6 +10,7 @@ public class Event extends Task {
 
     /**
      * Creates a event object.
+     *
      * @param description The description of the event.
      * @param at The date of the event.
      */
@@ -21,6 +22,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + super.date + ")";
+        return "[E]" + super.toString()
+                + " (at: " + super.date + ")";
     }
 }

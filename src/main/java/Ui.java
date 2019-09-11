@@ -51,21 +51,21 @@ public class Ui {
      * Prints todo error.
      */
     public void printTodoError() {
-        System.out.println("OOPS!!! The description of a todo cannot be empty.");
+        System.out.println("OOPS!!! The todo description cannot be empty.");
     }
 
     /**
      * Prints deadline error.
      */
     public void printDeadlineError() {
-        System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+        System.out.println("OOPS!!! The deadline description cannot be empty.");
     }
 
     /**
      * Prints event error.
      */
     public void printEventError() {
-        System.out.println("OOPS!!! The description of a event cannot be empty.");
+        System.out.println("OOPS!!! The event description cannot be empty.");
     }
 
     /**
@@ -79,6 +79,6 @@ public class Ui {
      * Prints command error.
      */
     public void printUnknownCommandError() {
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        System.out.println("OOPS!!! I'm sorry, I don't know what you mean :(");
     }
 }

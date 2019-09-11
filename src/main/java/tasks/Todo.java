@@ -6,6 +6,7 @@ package tasks;
 public class Todo extends Task {
     /**
      * Creates a todo object.
+     *
      * @param description The description of the todo.
      */
     public Todo(String description) {

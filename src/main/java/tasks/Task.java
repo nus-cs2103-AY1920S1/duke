@@ -13,7 +13,8 @@ public class Task {
 
     /**
      * Creates a task object.
-     * @param description The description of the task
+     *
+     * @param description The description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -22,7 +23,8 @@ public class Task {
 
     /**
      * Gets the description of the task.
-     * @return The description of the task
+     *
+     * @return The description of the task.
      */
     public String getDescription() {
         return this.description;
@@ -30,7 +32,8 @@ public class Task {
 
     /**
      * Gets the date of the task.
-     * @return The date of the task
+     *
+     * @return The date of the task.
      */
     public Date getDate() {
         return this.date;
@@ -38,7 +41,8 @@ public class Task {
 
     /**
      * Gets the type of the task.
-     * @return The type of the task
+     *
+     * @return The type of the task.
      */
     public String getType() {
         return this.type;
@@ -47,6 +51,7 @@ public class Task {
     /**
      * Gets the status icon of the task.
      * Tick if it is done, cross otherwise.
+     *
      * @return The status icon of the task.
      */
     public String getStatusIcon() {
@@ -56,6 +61,7 @@ public class Task {
     /**
      * Gets the status number of the task.
      * 1 if it is done, 0 otherwise.
+     *
      * @return The status number of the task
      */
     public String getStatusNum() {
@@ -71,6 +77,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return "[" + this.getStatusIcon() + "] "
+                + this.getDescription();
     }
 }

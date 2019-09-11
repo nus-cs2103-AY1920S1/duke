@@ -6,8 +6,11 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EmptyStackException;
+import java.util.Stack;
 
 /**
  * @author bakwxh
@@ -18,16 +21,17 @@ public class TaskList {
 	 * Array list for memory.
 	 */
 	private ArrayList<Task> memory;
+	private Stack<Task> lastTasks;
+	private Stack<String> lastCommands;
 
 	/** Constructor for when there is previously saved data.
 	 * @param inputMemory Previous memory.
 	 */
 	public TaskList(ArrayList<Task> inputMemory) {
+		lastTasks = new Stack<>();
+		lastCommands = new Stack<>();
 		memory = inputMemory;
 	}
-
-	private Task lastTask;
-	private String lastCommand;
 
 	/**
 	 * Empty constructor for when there is no previous data.
@@ -83,8 +87,8 @@ public class TaskList {
 	 */
 	public void addTask(Task t) {
 		memory.add(t);
-		lastTask = t;
-		lastCommand = "add";
+		lastTasks.push(t);
+		lastCommands.push("add");
 	}
 
 	/**
@@ -97,11 +101,13 @@ public class TaskList {
 		try {
 			Task removed = memory.get(index);
 			memory.remove(index);
-			lastTask = removed;
-			lastCommand = "delete " + index;
+			lastTasks.push(removed);
+			lastCommands.push("delete " + index);
 			return removed;
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new DukeException("Please indicate which task to delete.");
+		} catch (IndexOutOfBoundsException e) {
+			throw new DukeException("That task does not exist!");
 		}
 	}
 
@@ -113,18 +119,19 @@ public class TaskList {
 	public void doneTask(int index) throws DukeException {
 		try {
 			memory.get(index).markAsDone();
-			lastTask = memory.get(index);
-			lastCommand = "done " + index;
+			lastTasks.push(memory.get(index));
+			lastCommands.push("done " + index);
 		} catch (IndexOutOfBoundsException e) {
 			throw new DukeException("Indicated task does not exist.");
 		}
 	}
 
 	public String undoTask() throws DukeException {
-		System.out.println("CALLED " + lastCommand);
 		try {
 			String result = "";
+			String lastCommand = lastCommands.pop();
 			String command = lastCommand.split(" ")[0];
+			Task lastTask = lastTasks.pop();
 			switch (command) {
 				case "add":
 					result = " Got it! The following task has been removed:\n   ";
@@ -144,7 +151,7 @@ public class TaskList {
 			lastCommand = null;
 			result += lastTask.showTask() + "\n";
 			return result;
-		} catch (NullPointerException e) {
+		} catch (EmptyStackException e) {
 			throw new DukeException("No task to undo!");
 		}
 	}

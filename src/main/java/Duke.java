@@ -1,5 +1,9 @@
 import commands.Command;
-import logic.*;
+import logic.DukeException;
+import logic.Parser;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
 
 import java.util.Scanner;
 

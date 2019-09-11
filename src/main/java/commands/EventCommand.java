@@ -1,11 +1,15 @@
 package commands;
 
-import logic.*;
+import logic.DukeException;
+import logic.DukeStrings;
+import logic.Parser;
+import logic.Storage;
+import logic.TaskList;
+import logic.Ui;
 import task.Events;
 import task.Task;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 /**
  * Encapsulates command to create an Event Task to be added to List of Tasks.

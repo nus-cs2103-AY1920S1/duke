@@ -25,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * Method called by getResponse in Duke()
+     * Method called by getResponse in Duke().
      *
      * @return String to be shown on the GUI.
      */

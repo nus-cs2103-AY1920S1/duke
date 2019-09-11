@@ -51,6 +51,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates DialogBox based on program output.
+     *
+     * @param text String of displayed output.
+     * @param img  Defined image avatar
+     * @return DialogBox used in MainWindow
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

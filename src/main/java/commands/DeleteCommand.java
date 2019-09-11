@@ -1,6 +1,7 @@
 package commands;
 
 import logic.DukeException;
+import logic.DukeList;
 import logic.Storage;
 import logic.TaskList;
 import logic.Ui;
@@ -24,8 +25,8 @@ public class DeleteCommand extends Command {
      * @throws DukeException If problems encountered with file update
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.deleteTask(args); //deletes task obj
-        storage.updateFile(tasks);
+    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
+        ((TaskList) tasks).deleteTask(args); //deletes task obj
+        storage.updateTaskFile(tasks);
     }
 }

@@ -1,4 +1,5 @@
 import commands.Command;
+import logic.ContactList;
 import logic.DukeException;
 import logic.Parser;
 import logic.Storage;
@@ -12,20 +13,22 @@ import java.util.Scanner;
  */
 public class Duke {
     private Scanner sc = new Scanner(System.in);
-    private String taskListPath;
+    private String taskListPath = "./src/main/data/taskList.txt";
+    private String contactListPath = "./src/main/data/contactList.txt";
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
+    private ContactList contacts;
 
     /**
      * Constructor.
      */
     public Duke() {
-        taskListPath = "./src/main/data/taskList.txt";
-        storage = new Storage(taskListPath);
+        storage = new Storage(taskListPath, contactListPath);
         ui = new Ui();
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadTasks());
+            contacts = new ContactList(storage.loadContacts());
         } catch (DukeException e) {
             Ui.loadStr(e.getMessage());
         }

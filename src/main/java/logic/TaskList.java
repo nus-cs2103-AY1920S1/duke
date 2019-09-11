@@ -8,14 +8,15 @@ import java.util.stream.Collectors;
 /**
  * Contains the logic.TaskList and has the operations to add/delete tasks in the list.
  */
-public class TaskList {
+public class TaskList implements DukeList<Task> {
     private List<Task> taskList;
 
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
 
-    public List<Task> getTaskList() {
+    @Override
+    public List<Task> getList() {
         return taskList;
     }
 
@@ -24,7 +25,8 @@ public class TaskList {
      *
      * @param task Task Obj to be added
      */
-    public void addTask(Task task) {
+    @Override
+    public void add(Task task) {
         assert task != null;
         taskList.add(task);
         StringBuilder sb = new StringBuilder();
@@ -32,6 +34,19 @@ public class TaskList {
         sb.append("  " + task + "\n");
         sb.append("Now you have " + taskList.size() + " tasks in the list.");
         Ui.loadStr(sb.toString());
+    }
+
+    /**
+     * Find and filter tasks by keyword.
+     *
+     * @param taskDescription Keyword string to filter with
+     * @return Filtered list of tasks
+     */
+    @Override
+    public List<Task> find(String taskDescription) {
+        return taskList.stream()
+                .filter(task -> task.getDescription().contains(taskDescription))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -69,15 +84,4 @@ public class TaskList {
         Ui.loadStr(sb.toString());
     }
 
-    /**
-     * Find and filter tasks by keyword.
-     *
-     * @param taskDescription Keyword string to filter with
-     * @return Filtered list of tasks
-     */
-    public List<Task> findTask(String taskDescription) {
-        return taskList.stream()
-                .filter(task -> task.getDescription().contains(taskDescription))
-                .collect(Collectors.toList());
-    }
 }

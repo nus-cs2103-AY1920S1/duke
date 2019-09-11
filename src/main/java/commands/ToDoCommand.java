@@ -1,9 +1,9 @@
 package commands;
 
 import logic.DukeException;
+import logic.DukeList;
 import logic.DukeStrings;
 import logic.Storage;
-import logic.TaskList;
 import logic.Ui;
 import task.Task;
 import task.ToDo;
@@ -27,13 +27,13 @@ public class ToDoCommand extends Command {
      * @throws DukeException If command arguments is invalid
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
         if (args.trim().isEmpty()) {
             throw new DukeException(DukeStrings.TODO_EMPTY);
         }
 
         Task task = new ToDo(false, args); //args is the description string
-        tasks.addTask(task);
-        storage.updateFile(tasks);
+        tasks.add(task);
+        storage.updateTaskFile(tasks);
     }
 }

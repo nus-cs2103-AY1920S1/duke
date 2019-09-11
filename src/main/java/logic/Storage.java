@@ -1,5 +1,6 @@
 package logic;
 
+import contacts.Contact;
 import task.Deadlines;
 import task.Events;
 import task.Task;
@@ -20,23 +21,26 @@ import java.util.regex.Pattern;
  */
 
 public class Storage {
-    private String filePath;
+    private String taskFilePath;
+    private String contactFilePath;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String taskFilePath, String contactFilePath) {
+        this.taskFilePath = taskFilePath;
+        this.contactFilePath = contactFilePath;
     }
 
     /**
      * Reads and scans text file, convert them to Task Objs to be added.
      *
+     *
      * @return List of Tasks loaded from text file
      * @throws DukeException If encounter file creation/parsing problems
      */
-    public List<Task> load() throws DukeException {
+    public List<Task> loadTasks() throws DukeException {
         List<Task> taskList = new ArrayList<>();
 
         try {
-            File f = new File(filePath); //hardCoded file directory
+            File f = new File(taskFilePath); //hardCoded file directory
             Scanner sc = new Scanner(f);
 
             while (sc.hasNext()) {
@@ -49,7 +53,7 @@ public class Storage {
             Ui.loadStr("Data is loaded from data/taskList.txt");
         } catch (FileNotFoundException e) {
             Ui.loadStr("File not found, data not loaded!\nCreating new file taskList.txt");
-            File f = new File(filePath);
+            File f = new File(taskFilePath);
 
             try {
                 f.createNewFile(); //creates new text file
@@ -61,7 +65,42 @@ public class Storage {
     }
 
     /**
-     * Creates task from reading the string from text file. Called from load().
+     * Reads and scans text file, convert them to Contact Objs to be added.
+     *
+     * @return List of Contacts loaded from text file
+     */
+    public List<Contact> loadContacts() {
+        List<Contact> contactList = new ArrayList<>();
+
+        try {
+            File f = new File(contactFilePath); //hardCoded file directory
+            Scanner sc = new Scanner(f);
+
+            while (sc.hasNext()) {
+                String line = sc.nextLine();
+
+                String[] strArr = line.split(Pattern.quote(" | "));
+                //Name, RS, Num, Email
+                Contact c = new Contact(strArr[0], strArr[1], strArr[2], strArr[3]); //creates contacts
+                contactList.add(c);
+            }
+
+            Ui.loadStr("Data is loaded from data/contactList.txt");
+        } catch (FileNotFoundException e) {
+            Ui.loadStr("File not found, data not loaded!\nCreating new file contactList.txt");
+            File f = new File(contactFilePath);
+
+            try {
+                f.createNewFile(); //creates new text file
+            } catch (IOException ioE) {
+                Ui.loadStr(ioE.getMessage());
+            }
+        }
+        return contactList;
+    }
+
+    /**
+     * Creates task from reading the string from text file. Called from loadTasks().
      *
      * @param textArr String Array obtained after splitted
      * @return Task Object to be added to TaskList
@@ -98,8 +137,8 @@ public class Storage {
      *
      * @param taskList List of Tasks in logic.TaskList
      */
-    public void updateFile(TaskList taskList) {
-        List<Task> list = taskList.getTaskList();
+    public void updateTaskFile(DukeList taskList) {
+        List<Task> list = taskList.getList();
         assert list != null;
         StringBuilder sb = new StringBuilder();
 
@@ -112,7 +151,7 @@ public class Storage {
         }
 
         try {
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(taskFilePath);
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {

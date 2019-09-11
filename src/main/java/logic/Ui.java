@@ -1,5 +1,6 @@
 package logic;
 
+import contacts.Contact;
 import task.Task;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 /**
  * Deals with interactions with the user and output on CLI.
  */
-public class Ui {
+public class Ui<T> {
     public static String HORIZONTAL_LINE = "________________________________________________\n";
     public static String printString = "";
 
@@ -52,24 +53,39 @@ public class Ui {
     /**
      * Prints out ordered list of tasks.
      *
-     * @param taskList List of Tasks
+     * @param list List of Tasks
      */
-    public void printList(List<Task> taskList, boolean isMatching) {
+    public void printList(List<T> list, String command) {
         StringBuilder sb = new StringBuilder();
-        if (isMatching) {
-            sb.append("Here are the matching tasks in your list:\n");
-        } else {
+        switch (command) {
+        case "printTask":
             sb.append("Here are the tasks in your list:\n");
+            break;
+        case "printFilteredTask":
+            sb.append("Here are the matching tasks in your list:\n");
+            break;
+        case "printContacts":
+            sb.append("Here is your list of contacts:\n");
+            break;
+        case "printFilteredContacts":
+            sb.append("Here is your list of contacts matching your keyword:\n");
+            break;
+        default:
+            break;
         }
 
-        for (int i = 0; i < taskList.size(); i++) {
-            sb.append((i + 1) + ". " + taskList.get(i).toString());
-            if (i != taskList.size() - 1) { //last item
+        for (int i = 0; i < list.size(); i++) {
+            sb.append((i + 1) + ". " + list.get(i).toString());
+            if (i != list.size() - 1) { //last item
                 sb.append("\n");
             }
         }
 
         loadStr(sb.toString());
+    }
+
+    public void printFilteredContactList(List<Contact> contactList) {
+
     }
 
     /**

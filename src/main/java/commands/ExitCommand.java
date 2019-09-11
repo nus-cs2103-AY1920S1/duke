@@ -1,7 +1,7 @@
 package commands;
 
+import logic.DukeList;
 import logic.Storage;
-import logic.TaskList;
 import logic.Ui;
 
 /**
@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      * @param storage File Storage and Management
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(DukeList tasks, Ui ui, Storage storage) {
         ui.bye();
         System.exit(0);
     }

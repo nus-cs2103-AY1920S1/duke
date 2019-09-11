@@ -1,13 +1,13 @@
 package commands;
 
+import logic.DukeList;
 import logic.Storage;
-import logic.TaskList;
 import logic.Ui;
 
 /**
  * Encapsulates command to get and print an ordered list of tasks.
  */
-public class GetListCommand extends Command {
+public class TaskListCommand extends Command {
 
     /**
      * Overridden Method to execute the GetList command.
@@ -17,7 +17,7 @@ public class GetListCommand extends Command {
      * @param storage File Storage and Management
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks.getTaskList(), false);
+    public void execute(DukeList tasks, Ui ui, Storage storage) {
+        ui.printList(tasks.getList(), "printTask");
     }
 }

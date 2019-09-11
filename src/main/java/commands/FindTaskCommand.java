@@ -1,8 +1,8 @@
 package commands;
 
 import logic.DukeException;
+import logic.DukeList;
 import logic.Storage;
-import logic.TaskList;
 import logic.Ui;
 import task.Task;
 
@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * Encapsulates command to find and filter tasks by keyword.
  */
-public class FindCommand extends Command {
+public class FindTaskCommand extends Command {
     private String args;
 
-    public FindCommand(String args) {
+    public FindTaskCommand(String args) {
         this.args = args;
     }
 
@@ -26,8 +26,8 @@ public class FindCommand extends Command {
      * @param storage File Storage and Management
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        List<Task> filteredTasks = tasks.findTask(args);
-        ui.printList(filteredTasks, true);
+    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
+        List<Task> filteredTasks = tasks.find(args);
+        ui.printList(filteredTasks, "printFilteredTask");
     }
 }

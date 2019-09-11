@@ -1,10 +1,10 @@
 package commands;
 
 import logic.DukeException;
+import logic.DukeList;
 import logic.DukeStrings;
 import logic.Parser;
 import logic.Storage;
-import logic.TaskList;
 import logic.Ui;
 import task.Deadlines;
 import task.Task;
@@ -30,7 +30,7 @@ public class DeadlineCommand extends Command {
      * @throws DukeException If command arguments is invalid
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(DukeList tasks, Ui ui, Storage storage) throws DukeException {
         String[] splitStr = args.split("/by");
 
         if (splitStr.length == 1) {
@@ -41,7 +41,7 @@ public class DeadlineCommand extends Command {
 
         LocalDateTime deadline = Parser.parseDateTime(splitStr[1].trim());
         Task task = new Deadlines(false, splitStr[0].trim(), deadline);
-        tasks.addTask(task);
-        storage.updateFile(tasks);
+        tasks.add(task);
+        storage.updateTaskFile(tasks);
     }
 }

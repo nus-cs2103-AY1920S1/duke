@@ -1,15 +1,18 @@
 package logic;
 
+import commands.AddContactCommand;
 import commands.Command;
+import commands.ContactListCommand;
 import commands.DeadlineCommand;
 import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.EventCommand;
 import commands.ExitCommand;
-import commands.FindCommand;
-import commands.GetListCommand;
+import commands.FindTaskCommand;
+import commands.TaskListCommand;
 import commands.ToDoCommand;
 import commands.UnknownCommand;
+import contacts.Contact;
 import task.Task;
 
 import java.time.DateTimeException;
@@ -110,7 +113,9 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
-            return new GetListCommand();
+            return new TaskListCommand();
+        case "contacts":
+            return new ContactListCommand();
         case "done":
             try {
                 return new DoneCommand(strSplit[1]);
@@ -143,9 +148,16 @@ public class Parser {
             }
         case "find":
             try {
-                return new FindCommand(strSplit[1]);
+                return new FindTaskCommand(strSplit[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(DukeStrings.FIND_EMPTY);
+            }
+        case "addContact":
+            try {
+                System.out.println("Adding contact: " + strSplit[1]);
+                return new AddContactCommand(strSplit[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException(DukeStrings.CONTACT_EMPTY);
             }
         default:
             return new UnknownCommand();

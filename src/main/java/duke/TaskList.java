@@ -40,7 +40,7 @@ public class TaskList {
      * @param number number for task to be deleted
      */
     public void done(int number) {
-        Task task = tasks.get(number - 1);
+        Task task = tasks.get(number);
         task.setDone();
     }
 

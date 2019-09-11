@@ -69,14 +69,14 @@ public class Ui {
      * String representation of the pre-message for the delete command.
      */
     public String printDeletedMessage() {
-        return ("Noted. I've removed this task:") + "\n";
+        return ("Noted. I've removed the task(s):") + "\n";
     }
 
     /**
      * String representation of the pre-message for the done command.
      */
     public String printDoneMessage() {
-        return ("Nice! I've marked this task as done: ") + "\n";
+        return ("Nice! I've marked the task(s) as done: ") + "\n";
     }
 
     /**

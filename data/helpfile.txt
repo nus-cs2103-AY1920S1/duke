@@ -1,0 +1,29 @@
+This is Duke's support of cli commands:
+Help2 to see next page>>
+
+list
+-Lists out all your tasks
+
+done (number)
+-Marks the task at (number) to done
+
+delete (number)
+-Deletes the task at (number)
+
+bye
+-Saves and exit the bot
+
+find (keyword)
+-Finds all the tasks with (keyword) in the description
+
+help
+-Shows all the commands
+
+todo (description)
+-Creates a todo task with (description)
+
+event (description) /at (DD/MM/YYYY HHMM)
+-Creates a event task with (description) at (DD/MM/YYYY HHMM)
+
+deadline (description) /by (DD/MM/YYYY HHMM)
+-Creates a deadline task with (description) at (DD/MM/YYYY HHMM)

@@ -5,6 +5,8 @@ import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.InputMismatchException;
 
 /**
@@ -32,15 +34,29 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             String outputString = "";
-            int index = Integer.parseInt(super.commandSplitBySpaces[1]);
+            Integer[] numbers;
+            numbers = convertToInteger(commandSplitBySpaces[1].split(","));
+            Arrays.sort(numbers, Collections.reverseOrder());
+
             outputString = outputString + ui.printDoneMessage();
-            taskList.done(index);
-            outputString = outputString + ui.printTask(taskList.getTasks().get(index - 1));
+            for(Integer number : numbers) {
+                outputString = outputString + ui.printTask(taskList.getTasks().get(number - 1));
+                taskList.done(number - 1);
+            }
             return outputString;
+
         } catch (IndexOutOfBoundsException e) {
             throw new InputMismatchException("I'm sorry, the task number does not exist?");
         } catch (NumberFormatException e) {
             throw new InputMismatchException("I'm sorry, can you please write a number after done?");
         }
+    }
+
+    public Integer[] convertToInteger(String[] stringArr) {
+        Integer[] index = new Integer[stringArr.length];
+        for(int i = 0; i<stringArr.length; i++) {
+            index[i] = Integer.parseInt(stringArr[i]);
+        }
+        return index;
     }
 }

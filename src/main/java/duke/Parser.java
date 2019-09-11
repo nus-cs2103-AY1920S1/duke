@@ -71,7 +71,7 @@ public class Parser {
 
     private Command createDoneCommand(String[] commandSplitBySpaces) throws InputMismatchException{
         if (commandSplitBySpaces.length != 2) {
-            throw new InputMismatchException("I'm sorry, are you trying to call \"done \\number\" ?");
+            throw new InputMismatchException("I'm sorry, are you trying to call \"done\\space\\number,...\" ?");
         }
         return new DoneCommand(commandSplitBySpaces);
     }

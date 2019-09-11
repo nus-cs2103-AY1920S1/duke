@@ -1,6 +1,5 @@
 package duke;
 
-import duke.TaskList;
 import duke.task.Task;
 
 import java.util.LinkedList;
@@ -66,8 +65,9 @@ public class Ui {
      * @param taskList List of tasks.
      */
     public void showTasks(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
         LinkedList<Task> tasks = taskList.getTasks();
+
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + "." + tasks.get(i));
         }
@@ -116,6 +116,7 @@ public class Ui {
      */
     public void printAddedTask(Task task, TaskList tasks) {
         int taskListSize = tasks.getTasks().size();
+
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.print("Now you have " + taskListSize);

@@ -30,7 +30,7 @@ public class Storage {
      * @throws DukeException If unable to create new file or read from an existing file.
      */
     public LinkedList<Task> load() throws DukeException {
-        LinkedList<Task> taskList = new LinkedList<>();
+        LinkedList<Task> tasks = new LinkedList<>();
 
         File file = new File(filePath);
         file.getParentFile().mkdirs();
@@ -43,12 +43,12 @@ public class Storage {
             }
         } else {
             try {
-                taskList = readData(file, taskList);
+                tasks = readData(file, tasks);
             } catch (FileNotFoundException e) {
                 throw new DukeException(e.getMessage());
             }
         }
-        return taskList;
+        return tasks;
 
     }
 

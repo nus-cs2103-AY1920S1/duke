@@ -27,6 +27,7 @@ public class Parser {
         keywords.add("list");
         keywords.add("delete");
         keywords.add("find");
+        keywords.add("update");
     }
 
     public static Command parse(String args) {
@@ -52,14 +53,21 @@ public class Parser {
             return new ListCommand();
         case "done":
             return new DoneCommand(Integer.parseInt(args[1]));
+        case "update":
+            Task newTask = Parser.parseTask(sliceArguments(args, 2));
+            return new UpdateCommand(Integer.parseInt(args[1]),newTask);
         default:
             return new AddCommand(parseTask(args));
         }
     }
 
     private static String[] sliceArguments(String[] args) {
-        assert args.length > 1;
-        return Arrays.copyOfRange(args, 1, args.length);
+        return sliceArguments(args, 1);
+    }
+
+    private static String[] sliceArguments(String[] args, int n) {
+        assert args.length > n;
+        return Arrays.copyOfRange(args, n, args.length);
     }
 
     private static String joinArguments(String[] args) {

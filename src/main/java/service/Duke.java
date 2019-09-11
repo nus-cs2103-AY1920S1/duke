@@ -1,10 +1,10 @@
 package service;
 
 import command.Command;
+import javafx.application.Platform;
 import ui.Ui;
 import util.Storage;
 import util.TodoList;
-import util.exception.DukeException;
 import util.Parser;
 
 public class Duke {
@@ -26,6 +26,9 @@ public class Duke {
 
     public String getResponse(String input) {
         Command c = Parser.parse(input);
+        if(c.isExit()) {
+            Platform.exit();
+        }
         return ui.encase(c.run(tasks, storage));
     }
 

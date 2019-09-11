@@ -1,5 +1,7 @@
 package duke.io;
 
+import duke.actionstack.DukeActionStack;
+import duke.exception.DukeDuplicateTaskException;
 import duke.exception.DukeIllegalActionException;
 import duke.exception.DukeIllegalDescriptionException;
 import duke.task.Deadline;
@@ -26,8 +28,11 @@ public class Parser {
      * @throws DukeIllegalActionException
      */
     public static String parse(String act, Storage storage) throws FileNotFoundException,
-            DukeIllegalDescriptionException, DukeIllegalActionException {
+            DukeIllegalDescriptionException, DukeIllegalActionException, DukeDuplicateTaskException {
         String response = "";
+        if(DuplicateChecker.checkDuplication(act)) {
+            throw new DukeDuplicateTaskException();
+        }
         try {
             switch (Action.valueOf(act.split(" ")[0])) {
             case list:
@@ -122,6 +127,7 @@ public class Parser {
                 }
                 break;
             }
+            DukeActionStack.pushAction(act);
         } catch (IllegalArgumentException e) {
             throw new DukeIllegalActionException();
         }

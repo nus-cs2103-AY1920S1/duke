@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.exception.DukeDuplicateTaskException;
 import duke.io.Parser;
 import duke.io.Storage;
 import duke.exception.DukeIllegalActionException;
@@ -46,7 +47,7 @@ public class Ui {
     public String readUserInput(String act) {
         try {
             return Parser.parse(act, storage);
-        } catch (DukeIllegalDescriptionException | DukeIllegalActionException e) {
+        } catch (DukeIllegalDescriptionException | DukeIllegalActionException | DukeDuplicateTaskException e) {
             return (e.getMessage());
         } catch (FileNotFoundException e) {
             return "File not found.";

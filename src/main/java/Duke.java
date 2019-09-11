@@ -1,3 +1,4 @@
+import duke.actionstack.DukeActionStack;
 import duke.io.Storage;
 import duke.ui.DialogPanel;
 import duke.ui.Ui;
@@ -41,6 +42,7 @@ public class Duke extends Application {
     public Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui(storage);
+        DukeActionStack stack = new DukeActionStack();
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {

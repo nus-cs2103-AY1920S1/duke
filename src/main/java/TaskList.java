@@ -68,20 +68,6 @@ public class TaskList {
     }
 
     /**
-     * Removes a <code>Task</code> from list of tasks based on task number.
-     *
-     * @param index Task number.
-     * @return Removed <code>Task</code>.
-     */
-    public Task deleteTask(String index) {
-        int listRank = Integer.valueOf(index) - 1;
-        Task t = tasks.get(listRank);
-        tasks.remove(listRank);
-        numTask--;
-        return t;
-    }
-
-    /**
      * Updates list of task with a new <code>Todo</code>.
      *
      * @param detail Task details.
@@ -109,5 +95,30 @@ public class TaskList {
     public void addEventTask(String[] details) {
         tasks.add(new Event(details[0], details[1]));
         numTask++;
+    }
+
+    /**
+     * Removes a <code>Task</code> from list of tasks based on task number.
+     *
+     * @param index Task number.
+     * @return Removed <code>Task</code>.
+     */
+    public Task deleteTask(String index) {
+        int listRank = Integer.valueOf(index) - 1;
+        Task t = tasks.get(listRank);
+        tasks.remove(listRank);
+        numTask--;
+        return t;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder response = new StringBuilder();
+
+        for (int i = 0; i < numTask; i++) {
+            response.append(String.format("%d.%s", i + 1, getTask(i)) + "\n");
+        }
+
+        return response.toString();
     }
 }

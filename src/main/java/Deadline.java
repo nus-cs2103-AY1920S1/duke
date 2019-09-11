@@ -21,6 +21,23 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructs a <code>Deadline</code> with task done indicator,
+     * task description and task deadline.
+     *
+     * @param indicator Done indication of task.
+     * @param description Description of task.
+     * @param by Deadline of task.
+     */
+    public Deadline(String indicator, String description, String by) {
+        super(description);
+        this.by = by;
+
+        if (indicator.equals("1")) {
+            this.setDone();
+        }
+    }
+
+    /**
      * Returns condensed description of specified deadline task.
      *
      * @return Condensed description.

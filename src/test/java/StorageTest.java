@@ -3,6 +3,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 public class StorageTest {
@@ -13,7 +15,7 @@ public class StorageTest {
         try {
             assertEquals(new ArrayList<Task>(), dummy.load());
             fail();
-        } catch (DukeException e) {
+        } catch (FileNotFoundException e) {
             assertEquals("File does not exist", e.getMessage());
         }
     }

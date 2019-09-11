@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * Represents a chatbot assistant. A <code>Duke</code> object corresponds
  * to a chatbot that has <code>Storage</code>, <code>TaskList</code>
@@ -20,17 +23,10 @@ public class Duke {
 
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (FileNotFoundException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-    }
-
-    /**
-     * Initiates the chatbot to take user input.
-     */
-    public void run() {
-        ui.initiate(storage, tasks);
     }
 
     /**
@@ -45,7 +41,14 @@ public class Duke {
         return ui;
     }
 
-    public static void main(String[] args) {
+    /**
+     * Initiates the chatbot to take user input.
+     */
+    public void run() throws IOException {
+        ui.initiate(storage, tasks);
+    }
+
+    public static void main(String[] args) throws IOException {
         new Duke("data/tasks.txt").run();
     }
 }

@@ -35,13 +35,6 @@ public abstract class Task {
     }
 
     /**
-     * Returns condensed description of specified task.
-     *
-     * @return Condensed description.
-     */
-    public abstract String formatString();
-
-    /**
      * Returns true if specified task has description which contains given keyword.
      *
      * @param keyword Possible word in task description.
@@ -50,6 +43,13 @@ public abstract class Task {
     public boolean hasKeyword(String keyword) {
         return description.contains(keyword);
     }
+
+    /**
+     * Returns condensed description of specified task.
+     *
+     * @return Condensed description.
+     */
+    public abstract String formatString();
 
     @Override
     public String toString() {

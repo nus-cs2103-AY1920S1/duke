@@ -28,11 +28,14 @@ public class Storage {
      * @throws IOException when file cannot be created.
      */
     public File initFile() throws IOException {
+        assert DIRECTORY_PATH != null && FILEPATH != null;
         new File(DIRECTORY_PATH).mkdir();
 
         //System.out.println(FILEPATH);
         File textFile = new File(FILEPATH);
-        textFile.createNewFile();
+        boolean isFileCreated = textFile.createNewFile();
+        assert isFileCreated;
+
         return textFile;
     }
 
@@ -42,6 +45,7 @@ public class Storage {
      * @throws IOException when file cannot be opened or modified.
      */
     public void saveTask(List<Task> list) throws IOException {
+        assert FILEPATH != null;
         FileWriter fileWriter = new FileWriter(FILEPATH, false);
         PrintWriter printWriter = new PrintWriter(fileWriter);
         for (Task t : list) {
@@ -60,6 +64,7 @@ public class Storage {
      * @throws ParseException when date written in duke.txt has incorrect format.
      */
     public List<Task> loadTask(String filePath) throws IOException, ParseException {
+        assert filePath != null;
         FileReader fileReader = new FileReader(filePath);
         BufferedReader reader = new BufferedReader(fileReader);
         List<Task> list = new ArrayList<>();

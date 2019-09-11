@@ -59,7 +59,9 @@ public class Ui {
      * @param index index of which task user want to print out.
      */
     public String displayTask(String output, List<Task> list, int index) {
-        if (index >= 0) {
+        boolean isValidIndex = index >= 0 &&
+                index + 1 <= list.size();
+        if (isValidIndex) {
             output = new StringBuilder(output)
                     .append(list.get(index) + "\n").toString();
         }

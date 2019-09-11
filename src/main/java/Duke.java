@@ -21,8 +21,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    //private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -77,13 +77,13 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
+        /*sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
             handleUserInput();
-        });
+        });*/
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -118,7 +118,7 @@ public class Duke extends Application {
         userInput.clear();
     }*/
 
-    private void handleUserInput() {
+    /*private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -126,13 +126,13 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         userInput.clear();
-    }
+    }*/
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return "Duke heard: " + input;
     }
 

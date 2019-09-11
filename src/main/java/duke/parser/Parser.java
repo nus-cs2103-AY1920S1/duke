@@ -1,7 +1,5 @@
 package duke.parser;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 
 import duke.datetime.DateTime;

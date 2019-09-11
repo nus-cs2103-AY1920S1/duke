@@ -47,9 +47,9 @@ public class Storage {
         }
 
         ArrayList<Task> listTask = new ArrayList<>();
-        for (int i = 0; i < listInput.size(); i++) {
+        for (String value : listInput) {
             try {
-                listTask.add(Parser.parseFromFile(listInput.get(i), ui));
+                listTask.add(Parser.parseFromFile(value, ui));
 
             } catch (IncorrectFileFormatException f1) {
                 throw new IncorrectFileFormatException(ui.getLoadingError());
@@ -69,8 +69,8 @@ public class Storage {
     public void save(ArrayList<String> l) throws IOException {
         try {
             FileWriter fw = new FileWriter(printFilePath);
-            for (int i = 0; i < l.size(); i++) {
-                fw.write(l.get(i) + System.lineSeparator());
+            for (String s : l) {
+                fw.write(s + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

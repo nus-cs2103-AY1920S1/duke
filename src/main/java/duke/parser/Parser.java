@@ -14,7 +14,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.ui.Ui;
-
 import java.util.ArrayList;
 
 
@@ -76,12 +75,13 @@ public class Parser {
         ArrayList<String> taskInformation = new ArrayList<>();
         String subsequentStringAfterTaskDescription = userInput.substring(commandName.length());
         int firstIndexSlash = subsequentStringAfterTaskDescription.indexOf((char) '/');
+        assert firstIndexSlash != -1 : "slash should exist in the string";
+        assert firstIndexSlash < subsequentStringAfterTaskDescription.length() : "index of slash should be in string";
 
         // Handle exception later
         String date = subsequentStringAfterTaskDescription.substring(firstIndexSlash + separatorAfterFirstSlash.length() + 1);
         String taskDescription = subsequentStringAfterTaskDescription.substring(0, firstIndexSlash).trim();
 
-        System.out.println(date);
         taskInformation.add(date);
         taskInformation.add(taskDescription);
         return taskInformation;

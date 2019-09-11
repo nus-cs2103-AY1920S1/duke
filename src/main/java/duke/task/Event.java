@@ -60,20 +60,12 @@ public class Event extends Task {
      *
      * @return String representation of task.
      */
-    @Override
     public String printTask() {
-        return "[" + getFirstCharTask() + "][" + getIcon() + "] "
-               + getTaskDescription() + " (at: " + getGivenTime() + ")";
-    }
-
-    /**
-     * Set time for given deadline.
-     *
-     * @param time String representation of time.
-     * @throws ParseException If format of time in string does not match specified format.
-     */
-    public void setGivenTime(String time) throws ParseException {
-        this.givenTime = df.parse(time);
+        StringBuilder taskInformation = new StringBuilder();
+        taskInformation.append("[").append(getFirstCharTask()).append("]");
+        taskInformation.append("[").append(getIcon()).append("] ");
+        taskInformation.append(getTaskDescription()).append(" (by: ").append(getGivenTime()).append(")");
+        return taskInformation.toString();
     }
 
     /**

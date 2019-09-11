@@ -26,14 +26,31 @@ public class CmdDone extends Cmd {
         if (description.equals("") || description == null) {
             throw new DukeException("Oops! list index not entered for 'done'");
         } else {
+            boolean isValidIndex = validateIndex(taskList, description);
+            if (isValidIndex) {
+                int index = Integer.valueOf(description) - 1;
+                taskList.get(index).markAsDone();
 
-            int index = Integer.valueOf(description) - 1;
-            taskList.get(index).markAsDone();
-
-            storage.saveTask(taskList);
-            String message = "Nice! I've marked this task as done:\n"
-                    + ui.displayTask(this.getMsg(), taskList, index);
-            this.setMsg(message);
+                storage.saveTask(taskList);
+                String message = "Nice! I've marked this task as done:\n"
+                        + ui.displayTask(this.getMsg(), taskList, index);
+                this.setMsg(message);
+            }
         }
+    }
+
+    private boolean validateIndex(List<Task> taskList, String description) {
+        boolean isValidIndex = false;
+        try {
+            int index = Integer.valueOf(description) - 1;
+            if (index >= 0 && index < taskList.size()) {
+                isValidIndex = true;
+            } else {
+                throw new DukeException("Index out of bound.. please enter a valid index!");
+            }
+        } catch (NumberFormatException | DukeException e) {
+            this.setMsg(e.toString());
+        }
+        return isValidIndex;
     }
 }

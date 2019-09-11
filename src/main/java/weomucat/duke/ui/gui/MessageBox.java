@@ -18,9 +18,14 @@ import javafx.scene.text.TextFlow;
  */
 class MessageBox extends HBox {
 
+  private static final String FONT_NAME = "Monospaced";
+  private static final int FONT_SIZE = 14;
+  private static final FontWeight FONT_WEIGHT = FontWeight.BOLD;
+
   private static final String DEFAULT_TEXT = "";
   private static final String DEFAULT_BACKGROUND_COLOR = "#ffffff";
 
+  private static final int EMPTY_BODY_PADDING = 5;
   private static final int PADDING = 10;
   private static final int BACKGROUND_RADIUS = 5;
 
@@ -35,6 +40,7 @@ class MessageBox extends HBox {
   private String titleBackgroundColor;
 
   private String bodyText;
+  private String bodyColor;
   private String bodyBackgroundColor;
 
   /**
@@ -90,15 +96,7 @@ class MessageBox extends HBox {
   void setBodyText(String text, String color) {
     // Use UTF_8 encoding
     this.bodyText = new String(text.getBytes(), UTF_8);
-
-    this.body.setPadding(new Insets(PADDING));
-
-    Text textNode = new Text(this.bodyText);
-    textNode.setFill(Color.valueOf(color));
-    textNode.setFont(Font.font("Monospaced", FontWeight.BOLD, 14));
-
-    this.body.getChildren().clear();
-    this.body.getChildren().add(textNode);
+    this.bodyColor = color;
   }
 
   /**
@@ -119,14 +117,27 @@ class MessageBox extends HBox {
       this.title.setPadding(new Insets(PADDING));
 
       Text textNode = new Text(this.titleText);
-      textNode.setFill(Color.valueOf(titleColor));
-      textNode.setFont(Font.font("Monospaced", FontWeight.BOLD, 14));
+      textNode.setFill(Color.valueOf(this.titleColor));
+      textNode.setFont(Font.font(FONT_NAME, FONT_WEIGHT, FONT_SIZE));
 
       this.title.getChildren().clear();
       this.title.getChildren().add(textNode);
 
       bodyBackgroundRadius = String.format("-fx-background-radius: 0 0 %d %d",
           BACKGROUND_RADIUS, BACKGROUND_RADIUS);
+    }
+
+    if (this.bodyText.equals(DEFAULT_TEXT)) {
+      this.body.setPadding(new Insets(EMPTY_BODY_PADDING));
+    } else {
+      this.body.setPadding(new Insets(PADDING));
+
+      Text textNode = new Text(this.bodyText);
+      textNode.setFill(Color.valueOf(this.bodyColor));
+      textNode.setFont(Font.font(FONT_NAME, FONT_WEIGHT, FONT_SIZE));
+
+      this.body.getChildren().clear();
+      this.body.getChildren().add(textNode);
     }
 
     this.title.setStyle(String.format("-fx-background-color: %s; -fx-background-radius: %d %d 0 0",

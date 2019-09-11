@@ -1,17 +1,19 @@
 package weomucat.duke.task.listener;
 
 import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.ui.Message;
 
 /**
- * When all tasks need to be listed, this listener will be notified.
+ * When tasks need to be listed, this listener will be notified.
  */
 @FunctionalInterface
 public interface ListTaskListener {
 
   /**
-   * When all tasks need to be listed, this method will be called.
+   * When tasks need to be listed, this method will be called.
    *
-   * @param tasks an ArrayList of all tasks
+   * @param message message to display
+   * @param tasks   an ArrayList of all tasks
    */
-  void listTaskUpdate(TaskListTasks tasks);
+  void listTaskUpdate(Message message, TaskListTasks tasks);
 }

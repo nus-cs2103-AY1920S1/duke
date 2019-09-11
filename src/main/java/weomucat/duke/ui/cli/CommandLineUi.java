@@ -16,8 +16,10 @@ import weomucat.duke.ui.listener.UserInputListener;
  */
 public class CommandLineUi implements Ui {
 
-  private static final String SAY_INDENTATION = "\t";
-  private static final String SAY_HORIZONTAL_LINE =
+  private static final String MESSAGE_INDENTATION = "\t";
+  private static final String SINGLE_HORIZONTAL_LINE =
+      "------------------------------------------------------------";
+  private static final String DOUBLE_HORIZONTAL_LINE =
       "============================================================";
 
   private ArrayList<UserInputListener> userInputListeners;
@@ -71,30 +73,36 @@ public class CommandLineUi implements Ui {
 
   @Override
   public void displayMessage(Message message) {
-    System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
-    for (String line : message.getBody().split("\n")) {
-      System.out.println(SAY_INDENTATION + line);
+    System.out.println(MESSAGE_INDENTATION + DOUBLE_HORIZONTAL_LINE);
+
+    // Title
+    String title = message.getTitle();
+    if (!title.equals("")) {
+      System.out.println(MESSAGE_INDENTATION + title);
+      System.out.println(MESSAGE_INDENTATION + SINGLE_HORIZONTAL_LINE);
     }
-    System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
+
+    // Body
+    String[] body = message.getBody().split("\n");
+    if (!(body.length == 1 && body[0].equals(""))) {
+      for (String line : body) {
+        System.out.println(MESSAGE_INDENTATION + line);
+      }
+    }
+
+    System.out.println(MESSAGE_INDENTATION + DOUBLE_HORIZONTAL_LINE);
   }
 
   @Override
   public void displayError(Message message) {
     // TODO: ANSI Colors might not work on all terminals
     System.out.print("\033[38;2;255;0;0m");
-    System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
+    System.out.println(MESSAGE_INDENTATION + DOUBLE_HORIZONTAL_LINE);
     for (String line : message.getBody().split("\n")) {
-      System.out.println(SAY_INDENTATION + line);
+      System.out.println(MESSAGE_INDENTATION + line);
     }
-    System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
+    System.out.println(MESSAGE_INDENTATION + DOUBLE_HORIZONTAL_LINE);
     System.out.print("\033[38;2;0;0;0m");
-  }
-
-  @Override
-  public void addTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage(new Message("Got it. I've added this task:",
-        task.toString(),
-        String.format("Now you have %d task(s) in the list.", tasks.size())));
   }
 
   @Override
@@ -103,46 +111,28 @@ public class CommandLineUi implements Ui {
   }
 
   @Override
-  public void deleteTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage(new Message("Noted. I've removed this task:",
-        task.toString(),
-        String.format("Now you have %d task(s) in the list.", tasks.size())));
-  }
-
-  @Override
-  public void doneTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage(new Message("Nice! I've marked this task as done:", task.toString()));
-  }
-
-  @Override
-  public void findTaskUpdate(TaskListTasks tasks) {
-    ArrayList<String> result = new ArrayList<>();
-    result.add("Here are the matching tasks in your list:");
-
+  public void listTaskUpdate(Message message, TaskListTasks tasks) {
+    displayMessage(message);
     for (int i = 0; i < tasks.size(); i++) {
       // Get task from tasks
       Task task = tasks.get(i);
 
       // Format task with no. in front
-      result.add(String.format("%d. %s", i + 1, task));
+      Message m = task.toMessage();
+      String title = String.format("%d. %s", i + 1, m.getTitle());
+      displayMessage(m.setTitle(title));
     }
-
-    displayMessage(new Message(result.toArray(new String[0])));
   }
 
   @Override
-  public void listTaskUpdate(TaskListTasks tasks) {
-    ArrayList<String> out = new ArrayList<>();
-    out.add("Here are the tasks in your list:");
+  public void modifyTaskUpdate(Message message, Task task) {
+    displayMessage(message);
+    displayMessage(task.toMessage());
+  }
 
-    for (int i = 0; i < tasks.size(); i++) {
-      // Get task from tasks
-      Task task = tasks.get(i);
-
-      // Format task with no. in front
-      out.add(String.format("%d. %s", i + 1, task));
-    }
-
-    displayMessage(new Message(out.toArray(new String[0])));
+  @Override
+  public void taskListSizeUpdate(int size) {
+    displayMessage(new Message(
+        String.format("Now you have %d task(s) in the list.", size)));
   }
 }

@@ -7,6 +7,7 @@ import weomucat.duke.command.Command;
 import weomucat.duke.command.DeadlineCommand;
 import weomucat.duke.command.DeleteCommand;
 import weomucat.duke.command.DoneCommand;
+import weomucat.duke.command.EventAtCommand;
 import weomucat.duke.command.EventCommand;
 import weomucat.duke.command.FindCommand;
 import weomucat.duke.command.ListCommand;
@@ -15,6 +16,7 @@ import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.ByeCommandListener;
 import weomucat.duke.command.listener.DeleteTaskCommandListener;
 import weomucat.duke.command.listener.DoneTaskCommandListener;
+import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.exception.DukeException;
@@ -33,6 +35,7 @@ public class Controller implements UserInputListener {
   private static final String COMMAND_TODO = "todo";
   private static final String COMMAND_DELETE = "delete";
   private static final String COMMAND_DONE = "done";
+  private static final String COMMAND_EVENT_AT = "event_at";
   private static final String COMMAND_FIND = "find";
   private static final String COMMAND_LIST = "list";
   private static final String COMMAND_BYE = "bye";
@@ -41,6 +44,7 @@ public class Controller implements UserInputListener {
   private ArrayList<AddTaskCommandListener> addTaskCommandListeners;
   private ArrayList<DeleteTaskCommandListener> deleteTaskCommandListeners;
   private ArrayList<DoneTaskCommandListener> doneTaskCommandListeners;
+  private ArrayList<EventAtCommandListener> eventAtCommandListeners;
   private ArrayList<FindTaskCommandListener> findTaskCommandListeners;
   private ArrayList<ListTaskCommandListener> listTaskCommandListeners;
   private ArrayList<ByeCommandListener> byeCommandListeners;
@@ -52,6 +56,7 @@ public class Controller implements UserInputListener {
     this.addTaskCommandListeners = new ArrayList<>();
     this.deleteTaskCommandListeners = new ArrayList<>();
     this.doneTaskCommandListeners = new ArrayList<>();
+    this.eventAtCommandListeners = new ArrayList<>();
     this.findTaskCommandListeners = new ArrayList<>();
     this.listTaskCommandListeners = new ArrayList<>();
     this.byeCommandListeners = new ArrayList<>();
@@ -94,6 +99,14 @@ public class Controller implements UserInputListener {
       public void updateListeners(int i) throws DukeException {
         for (DoneTaskCommandListener listener : doneTaskCommandListeners) {
           listener.doneTaskCommandUpdate(i);
+        }
+      }
+    });
+    this.commands.put(COMMAND_EVENT_AT, new EventAtCommand() {
+      @Override
+      public void updateListeners(int taskIndex, int atIndex) throws DukeException {
+        for (EventAtCommandListener listener : eventAtCommandListeners) {
+          listener.eventAtCommandUpdate(taskIndex, atIndex);
         }
       }
     });
@@ -151,6 +164,16 @@ public class Controller implements UserInputListener {
    */
   void newDoneTaskCommandListener(DoneTaskCommandListener listener) {
     this.doneTaskCommandListeners.add(listener);
+  }
+
+  /**
+   * Adds a EventAtCommandListener to the Controller.
+   * When a FindTaskCommand is received, this listener will be notified.
+   *
+   * @param listener EventAtCommand listener
+   */
+  void newEventAtCommandListener(EventAtCommandListener listener) {
+    this.eventAtCommandListeners.add(listener);
   }
 
   /**

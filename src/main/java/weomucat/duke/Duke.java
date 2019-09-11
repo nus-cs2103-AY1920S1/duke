@@ -69,18 +69,15 @@ public class Duke {
     this.controller.newAddTaskCommandListener(this.taskList);
     this.controller.newDeleteTaskCommandListener(this.taskList);
     this.controller.newDoneTaskCommandListener(this.taskList);
+    this.controller.newEventAtCommandListener(this.taskList);
     this.controller.newFindTaskCommandListener(this.taskList);
     this.controller.newListTaskCommandListener(this.taskList);
     this.controller.newByeCommandListener(this.uiList);
 
-    this.taskList.newAddTaskListener(this.storage);
-    this.taskList.newDeleteTaskListener(this.storage);
-    this.taskList.newDoneTaskListener(this.storage);
+    this.taskList.newModifyTaskListener(this.storage);
 
-    this.taskList.newAddTaskListener(this.uiList);
-    this.taskList.newDeleteTaskListener(this.uiList);
-    this.taskList.newDoneTaskListener(this.uiList);
-    this.taskList.newFindTaskListener(this.uiList);
+    this.taskList.newModifyTaskListener(this.uiList);
+    this.taskList.newTaskListSizeListener(this.uiList);
     this.taskList.newListTaskListener(this.uiList);
 
     // Greet user

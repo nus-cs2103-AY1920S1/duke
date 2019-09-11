@@ -6,20 +6,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.StorageException;
 import weomucat.duke.task.Task;
 import weomucat.duke.task.TaskListTasks;
-import weomucat.duke.task.listener.AddTaskListener;
-import weomucat.duke.task.listener.DeleteTaskListener;
-import weomucat.duke.task.listener.DoneTaskListener;
+import weomucat.duke.task.listener.ModifyTaskListener;
+import weomucat.duke.ui.Message;
 
 /**
  * TaskListStorage is responsible for serializing TaskListTasks and deserializing TaskListTasks,
  * before saving to disk and loading from disk respectively.
  */
-public class TaskListStorage extends Storage<TaskListTasks> implements AddTaskListener,
-    DeleteTaskListener, DoneTaskListener {
+public class TaskListStorage extends Storage<TaskListTasks> implements ModifyTaskListener {
 
   public TaskListStorage(String path) {
     super(path);
@@ -66,17 +63,8 @@ public class TaskListStorage extends Storage<TaskListTasks> implements AddTaskLi
   }
 
   @Override
-  public void addTaskUpdate(TaskListTasks tasks, Task task) throws DukeException {
-    save(tasks);
-  }
-
-  @Override
-  public void deleteTaskUpdate(TaskListTasks tasks, Task task) throws DukeException {
-    save(tasks);
-  }
-
-  @Override
-  public void doneTaskUpdate(TaskListTasks tasks, Task task) throws DukeException {
-    save(tasks);
+  public void modifyTaskUpdate(Message message, Task task) {
+    // TODO: Saving with JSON
+    // save(tasks);
   }
 }

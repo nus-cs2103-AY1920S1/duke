@@ -8,11 +8,9 @@ import weomucat.duke.command.listener.ByeCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.task.Task;
 import weomucat.duke.task.TaskListTasks;
-import weomucat.duke.task.listener.AddTaskListener;
-import weomucat.duke.task.listener.DeleteTaskListener;
-import weomucat.duke.task.listener.DoneTaskListener;
-import weomucat.duke.task.listener.FindTaskListener;
 import weomucat.duke.task.listener.ListTaskListener;
+import weomucat.duke.task.listener.ModifyTaskListener;
+import weomucat.duke.task.listener.TaskListSizeListener;
 import weomucat.duke.ui.listener.UserInputListener;
 
 /**
@@ -20,8 +18,9 @@ import weomucat.duke.ui.listener.UserInputListener;
  * Whenever any user input is received from any ui, all ui listeners will be notified.
  * Whenever a task update is received, all uis will be notified.
  */
-public class UiList implements AddTaskListener, ByeCommandListener, DeleteTaskListener,
-    DoneTaskListener, FindTaskListener, ListTaskListener, UserInputListener {
+public class UiList implements ByeCommandListener,
+    ListTaskListener, ModifyTaskListener, TaskListSizeListener,
+    UserInputListener {
 
   private ArrayList<Ui> uis;
   private ArrayList<UserInputListener> userInputListeners;
@@ -113,13 +112,6 @@ public class UiList implements AddTaskListener, ByeCommandListener, DeleteTaskLi
   }
 
   @Override
-  public void addTaskUpdate(TaskListTasks tasks, Task task) throws DukeException {
-    for (Ui ui : this.uis) {
-      ui.addTaskUpdate(tasks, task);
-    }
-  }
-
-  @Override
   public void byeCommandUpdate() {
     this.running = false;
 
@@ -132,30 +124,23 @@ public class UiList implements AddTaskListener, ByeCommandListener, DeleteTaskLi
   }
 
   @Override
-  public void deleteTaskUpdate(TaskListTasks tasks, Task task) throws DukeException {
+  public void listTaskUpdate(Message message, TaskListTasks tasks) {
     for (Ui ui : this.uis) {
-      ui.deleteTaskUpdate(tasks, task);
+      ui.listTaskUpdate(message, tasks);
     }
   }
 
   @Override
-  public void doneTaskUpdate(TaskListTasks tasks, Task task) throws DukeException {
+  public void modifyTaskUpdate(Message message, Task task) {
     for (Ui ui : this.uis) {
-      ui.doneTaskUpdate(tasks, task);
+      ui.modifyTaskUpdate(message, task);
     }
   }
 
   @Override
-  public void findTaskUpdate(TaskListTasks tasks) {
+  public void taskListSizeUpdate(int size) {
     for (Ui ui : this.uis) {
-      ui.findTaskUpdate(tasks);
-    }
-  }
-
-  @Override
-  public void listTaskUpdate(TaskListTasks tasks) {
-    for (Ui ui : this.uis) {
-      ui.listTaskUpdate(tasks);
+      ui.taskListSizeUpdate(size);
     }
   }
 

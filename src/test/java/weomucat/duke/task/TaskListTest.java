@@ -6,47 +6,47 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import weomucat.duke.exception.InvalidTaskIndexException;
-import weomucat.duke.task.listener.StubAddTaskListener;
-import weomucat.duke.task.listener.StubDeleteTaskListener;
-import weomucat.duke.task.listener.StubFindTaskListener;
+import weomucat.duke.exception.InvalidIndexException;
+import weomucat.duke.task.listener.StubListTaskListener;
+import weomucat.duke.task.listener.StubModifyTaskListener;
+import weomucat.duke.task.listener.StubTaskListSizeListener;
 
 public class TaskListTest {
 
   @Test
   public void deleteTaskShouldNotBeInvalidIndex() {
     TaskList taskList = new TaskList();
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.deleteTask(0));
+    assertThrows(InvalidIndexException.class, () -> taskList.deleteTask(0));
 
     assertDoesNotThrow(() -> taskList.addTask(new StubTask("one")));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.deleteTask(-1));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.deleteTask(1));
+    assertThrows(InvalidIndexException.class, () -> taskList.deleteTask(-1));
+    assertThrows(InvalidIndexException.class, () -> taskList.deleteTask(1));
 
     assertDoesNotThrow(() -> taskList.addTask(new StubTask("two")));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.deleteTask(-1));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.deleteTask(2));
+    assertThrows(InvalidIndexException.class, () -> taskList.deleteTask(-1));
+    assertThrows(InvalidIndexException.class, () -> taskList.deleteTask(2));
 
     assertDoesNotThrow(() -> taskList.addTask(new StubTask("three")));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.deleteTask(-1));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.deleteTask(3));
+    assertThrows(InvalidIndexException.class, () -> taskList.deleteTask(-1));
+    assertThrows(InvalidIndexException.class, () -> taskList.deleteTask(3));
   }
 
   @Test
   public void doneTaskShouldNotBeInvalidIndex() {
     TaskList taskList = new TaskList();
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.doneTask(0));
+    assertThrows(InvalidIndexException.class, () -> taskList.doneTask(0));
 
     assertDoesNotThrow(() -> taskList.addTask(new StubTask("one")));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.doneTask(-1));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.doneTask(1));
+    assertThrows(InvalidIndexException.class, () -> taskList.doneTask(-1));
+    assertThrows(InvalidIndexException.class, () -> taskList.doneTask(1));
 
     assertDoesNotThrow(() -> taskList.addTask(new StubTask("two")));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.doneTask(-1));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.doneTask(2));
+    assertThrows(InvalidIndexException.class, () -> taskList.doneTask(-1));
+    assertThrows(InvalidIndexException.class, () -> taskList.doneTask(2));
 
     assertDoesNotThrow(() -> taskList.addTask(new StubTask("three")));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.doneTask(-1));
-    assertThrows(InvalidTaskIndexException.class, () -> taskList.doneTask(3));
+    assertThrows(InvalidIndexException.class, () -> taskList.doneTask(-1));
+    assertThrows(InvalidIndexException.class, () -> taskList.doneTask(3));
   }
 
   @Test
@@ -56,38 +56,43 @@ public class TaskListTest {
     final StubTask taskThree = new StubTask("three");
 
     TaskList taskList = new TaskList();
-    StubAddTaskListener addTaskListener = new StubAddTaskListener();
+    StubListTaskListener listTaskListener = new StubListTaskListener();
+    StubModifyTaskListener modifyTaskListener = new StubModifyTaskListener();
+    StubTaskListSizeListener taskListSizeListener = new StubTaskListSizeListener();
 
     // Initialize Listeners
-    taskList.newAddTaskListener(addTaskListener);
+    taskList.newListTaskListener(listTaskListener);
+    taskList.newModifyTaskListener(modifyTaskListener);
+    taskList.newTaskListSizeListener(taskListSizeListener);
 
     /* Add Tasks */
     // Expect 1 task.
     assertDoesNotThrow(() -> taskList.addTask(taskOne));
-    assertEquals(1, addTaskListener.getTasks().size());
+    assertEquals(1, taskListSizeListener.getSize());
 
     // Validate that the tasks are correct
-    assertEquals(taskOne, addTaskListener.getTask());
-    assertTrue(addTaskListener.getTasks().contains(taskOne));
+    assertEquals(taskOne, modifyTaskListener.getTask());
 
     // Expect 2 tasks.
     assertDoesNotThrow(() -> taskList.addTask(taskTwo));
-    assertEquals(2, addTaskListener.getTasks().size());
+    assertEquals(2, taskListSizeListener.getSize());
 
     // Validate that the tasks are correct
-    assertEquals(taskTwo, addTaskListener.getTask());
-    assertTrue(addTaskListener.getTasks().contains(taskOne));
-    assertTrue(addTaskListener.getTasks().contains(taskTwo));
+    assertEquals(taskTwo, modifyTaskListener.getTask());
+    taskList.listTask();
+    assertTrue(listTaskListener.getTasks().contains(taskOne));
+    assertTrue(listTaskListener.getTasks().contains(taskTwo));
 
     // Expect 3 tasks.
     assertDoesNotThrow(() -> taskList.addTask(taskThree));
-    assertEquals(3, addTaskListener.getTasks().size());
+    assertEquals(3, taskListSizeListener.getSize());
 
     // Validate that the tasks are correct
-    assertEquals(taskThree, addTaskListener.getTask());
-    assertTrue(addTaskListener.getTasks().contains(taskOne));
-    assertTrue(addTaskListener.getTasks().contains(taskTwo));
-    assertTrue(addTaskListener.getTasks().contains(taskThree));
+    assertEquals(taskThree, modifyTaskListener.getTask());
+    taskList.listTask();
+    assertTrue(listTaskListener.getTasks().contains(taskOne));
+    assertTrue(listTaskListener.getTasks().contains(taskTwo));
+    assertTrue(listTaskListener.getTasks().contains(taskThree));
   }
 
   @Test
@@ -97,10 +102,14 @@ public class TaskListTest {
     final StubTask taskThree = new StubTask("three");
 
     TaskList taskList = new TaskList();
-    StubDeleteTaskListener deleteTaskListener = new StubDeleteTaskListener();
+    StubListTaskListener listTaskListener = new StubListTaskListener();
+    StubModifyTaskListener modifyTaskListener = new StubModifyTaskListener();
+    StubTaskListSizeListener taskListSizeListener = new StubTaskListSizeListener();
 
     // Initialize Listeners
-    taskList.newDeleteTaskListener(deleteTaskListener);
+    taskList.newListTaskListener(listTaskListener);
+    taskList.newModifyTaskListener(modifyTaskListener);
+    taskList.newTaskListSizeListener(taskListSizeListener);
 
     /* Add Tasks */
     assertDoesNotThrow(() -> taskList.addTask(taskOne));
@@ -110,27 +119,29 @@ public class TaskListTest {
     /* Delete Tasks */
     // Expect 2 tasks.
     assertDoesNotThrow(() -> taskList.deleteTask(0));
-    assertEquals(2, deleteTaskListener.getTasks().size());
+    assertEquals(2, taskListSizeListener.getSize());
 
     // Validate that the tasks are correct
-    assertEquals(taskOne, deleteTaskListener.getTask());
-    assertTrue(deleteTaskListener.getTasks().contains(taskTwo));
-    assertTrue(deleteTaskListener.getTasks().contains(taskThree));
+    assertEquals(taskOne, modifyTaskListener.getTask());
+    taskList.listTask();
+    assertTrue(listTaskListener.getTasks().contains(taskTwo));
+    assertTrue(listTaskListener.getTasks().contains(taskThree));
 
     // Expect 1 task.
     assertDoesNotThrow(() -> taskList.deleteTask(0));
-    assertEquals(1, deleteTaskListener.getTasks().size());
+    assertEquals(1, taskListSizeListener.getSize());
 
     // Validate that the tasks are correct
-    assertEquals(taskTwo, deleteTaskListener.getTask());
-    assertTrue(deleteTaskListener.getTasks().contains(taskThree));
+    assertEquals(taskTwo, modifyTaskListener.getTask());
+    taskList.listTask();
+    assertTrue(listTaskListener.getTasks().contains(taskThree));
 
     // Expect 0 tasks.
     assertDoesNotThrow(() -> taskList.deleteTask(0));
-    assertEquals(0, deleteTaskListener.getTasks().size());
+    assertEquals(0, taskListSizeListener.getSize());
 
     // Validate that the tasks are correct
-    assertEquals(taskThree, deleteTaskListener.getTask());
+    assertEquals(taskThree, modifyTaskListener.getTask());
   }
 
   @Test
@@ -140,10 +151,10 @@ public class TaskListTest {
     final StubTask taskThree = new StubTask("three");
 
     TaskList taskList = new TaskList();
-    StubFindTaskListener findTaskListener = new StubFindTaskListener();
+    StubListTaskListener listTaskListener = new StubListTaskListener();
 
     // Initialize Listeners
-    taskList.newFindTaskListener(findTaskListener);
+    taskList.newListTaskListener(listTaskListener);
 
     /* Add Tasks */
     assertDoesNotThrow(() -> taskList.addTask(taskOne));
@@ -153,27 +164,27 @@ public class TaskListTest {
     /* Find Tasks */
     // Empty string should return all tasks.
     taskList.findTask("");
-    assertTrue(findTaskListener.getTasks().contains(taskOne));
-    assertTrue(findTaskListener.getTasks().contains(taskTwo));
-    assertTrue(findTaskListener.getTasks().contains(taskThree));
+    assertTrue(listTaskListener.getTasks().contains(taskOne));
+    assertTrue(listTaskListener.getTasks().contains(taskTwo));
+    assertTrue(listTaskListener.getTasks().contains(taskThree));
 
     // Character should return tasks with that character.
     taskList.findTask("o");
-    assertTrue(findTaskListener.getTasks().contains(taskOne));
-    assertTrue(findTaskListener.getTasks().contains(taskTwo));
+    assertTrue(listTaskListener.getTasks().contains(taskOne));
+    assertTrue(listTaskListener.getTasks().contains(taskTwo));
 
     taskList.findTask("t");
-    assertTrue(findTaskListener.getTasks().contains(taskTwo));
-    assertTrue(findTaskListener.getTasks().contains(taskThree));
+    assertTrue(listTaskListener.getTasks().contains(taskTwo));
+    assertTrue(listTaskListener.getTasks().contains(taskThree));
 
     // Should be case insensitive.
     taskList.findTask("One");
-    assertTrue(findTaskListener.getTasks().contains(taskOne));
+    assertTrue(listTaskListener.getTasks().contains(taskOne));
 
     taskList.findTask("tWo");
-    assertTrue(findTaskListener.getTasks().contains(taskTwo));
+    assertTrue(listTaskListener.getTasks().contains(taskTwo));
 
     taskList.findTask("thREE");
-    assertTrue(findTaskListener.getTasks().contains(taskThree));
+    assertTrue(listTaskListener.getTasks().contains(taskThree));
   }
 }

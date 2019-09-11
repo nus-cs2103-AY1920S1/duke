@@ -102,14 +102,6 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   }
 
   @Override
-  public void addTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage(new Message("Got it. I've added this task:"));
-    displayMessage(task.toMessage());
-    displayMessage(new Message(
-        String.format("Now you have %d task(s) in the list.", tasks.size())));
-  }
-
-  @Override
   public void byeCommandUpdate() {
     try {
       this.running = false;
@@ -121,51 +113,22 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   }
 
   @Override
-  public void deleteTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage(new Message("Noted. I've removed this task:"));
-    displayMessage(task.toMessage());
-    displayMessage(new Message(
-        String.format("Now you have %d task(s) in the list.", tasks.size())));
-  }
-
-  @Override
-  public void doneTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage(new Message("Nice! I've marked this task as done:"));
-    displayMessage(task.toMessage());
-  }
-
-  @Override
-  public void findTaskUpdate(TaskListTasks tasks) {
-    displayMessage(new Message("Here are the matching tasks in your list:"));
-
-    for (int i = 0; i < tasks.size(); i++) {
-      // Get task from tasks
-      Task task = tasks.get(i);
-
-      // Format task with no. in front
-      Message message = task.toMessage();
-      String title = String.format("%d. %s", i + 1, message.getTitle());
-      displayMessage(message.setTitle(title));
-    }
-  }
-
-  @Override
-  public void listTaskUpdate(TaskListTasks tasks) {
-    displayMessage(new Message("Here are the tasks in your list:"));
-    for (int i = 0; i < tasks.size(); i++) {
-      // Get task from tasks
-      Task task = tasks.get(i);
-
-      // Format task with no. in front
-      Message message = task.toMessage();
-      String title = String.format("%d. %s", i + 1, message.getTitle());
-      displayMessage(message.setTitle(title));
-    }
-  }
-
-  @Override
   public void byeUpdate() {
 
+  }
+
+  @Override
+  public void listTaskUpdate(Message message, TaskListTasks tasks) {
+    displayMessage(message);
+    for (int i = 0; i < tasks.size(); i++) {
+      // Get task from tasks
+      Task task = tasks.get(i);
+
+      // Format task with no. in front
+      Message m = task.toMessage();
+      String title = String.format("%d. %s", i + 1, m.getTitle());
+      displayMessage(m.setTitle(title));
+    }
   }
 
   @Override
@@ -173,5 +136,17 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
     for (UserInputListener listener : this.userInputListeners) {
       listener.userInputUpdate(userInput);
     }
+  }
+
+  @Override
+  public void modifyTaskUpdate(Message message, Task task) {
+    displayMessage(message);
+    displayMessage(task.toMessage());
+  }
+
+  @Override
+  public void taskListSizeUpdate(int size) {
+    displayMessage(new Message(
+        String.format("Now you have %d task(s) in the list.", size)));
   }
 }

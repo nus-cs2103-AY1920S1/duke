@@ -2,6 +2,7 @@ package weomucat.duke.task;
 
 import java.util.ArrayList;
 import weomucat.duke.date.DateRange;
+import weomucat.duke.exception.InvalidIndexException;
 import weomucat.duke.exception.InvalidParameterException;
 import weomucat.duke.ui.Message;
 
@@ -45,6 +46,20 @@ public class EventTask extends Task {
     }
   }
 
+  /**
+   * Set the schedule of this event.
+   *
+   * @param i an index from the list of tentative schedules
+   * @throws InvalidIndexException if the index is invalid
+   */
+  public void setAt(int i) throws InvalidIndexException {
+    try {
+      this.at = this.atSlots.get(i);
+    } catch (IndexOutOfBoundsException e) {
+      throw new InvalidIndexException("That is not a valid index of a schedule.");
+    }
+  }
+
   @Override
   public Message toMessage() {
     ArrayList<String> out = new ArrayList<>();
@@ -55,7 +70,7 @@ public class EventTask extends Task {
     }
 
     if (this.atSlots.size() > 1) {
-      out.add("===== TENTATIVELY AT =====");
+      out.add("===== TENTATIVE SCHEDULES =====");
       for (int i = 0; i < this.atSlots.size(); i++) {
         DateRange range = this.atSlots.get(i);
 

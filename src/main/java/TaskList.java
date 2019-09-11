@@ -1,6 +1,10 @@
 import Task.Task;
+import Task.Event;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TaskList {
     private ArrayList<Task> list;
@@ -50,5 +54,44 @@ public class TaskList {
         return currTask;
     }
 
+    public ArrayList<Date> getFilledTimeSlots() {
+        ArrayList<Date> timeSlots = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            Task task = list.get(i);
+            if (task instanceof Event) {
+                Date date = ((Event) task).getAt();
+                timeSlots.add(date);
+            }
+        }
+        return timeSlots;
+    }
 
+    public Date findFreeTime(int duration) {
+        ArrayList<Date> timeSlots = this.getFilledTimeSlots();
+        Date currentTime = new Date();
+        while (true) {
+            boolean passed = true;
+            for (Date slot: timeSlots) {
+                long diff = slot.getTime() - currentTime.getTime();
+                int diffHours = (int) (diff / (60 * 60 * 1000));
+                if (diffHours >= -duration && diffHours <= duration) {
+                    passed = false;
+                    break;
+                }
+            }
+            if (passed) {
+                break;
+            } else {
+                currentTime = addHours(currentTime, 1);
+            }
+        }
+        return currentTime;
+    }
+
+    public static Date addHours(Date currentDate, int hours) {
+        Calendar cal = Calendar.getInstance(); // creates calendar
+        cal.setTime(currentDate); // sets calendar time/date
+        cal.add(Calendar.HOUR_OF_DAY, hours); // adds one hour
+        return cal.getTime();
+    }
 }

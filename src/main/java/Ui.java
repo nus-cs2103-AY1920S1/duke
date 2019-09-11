@@ -1,16 +1,12 @@
 import Task.Task;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Ui {
 
     public String greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n" + logo + "\n What can I do for you? \n";
+        return "Hello, I'm Thanos!\nWhat can I do for you? \n";
     }
 
     public String taskDone(Task task) {
@@ -47,18 +43,22 @@ public class Ui {
     }
 
     public String showDescriptionEmptyError() {
-        return "☹ OOPS!!! The description of a task cannot be empty.";
+        return "OOPS!!! The description of a task cannot be empty.";
     }
 
     public String showWrongCommandError() {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     public String showLoadingError() {
-        return "☹ OOPS!!! Error loading file.";
+        return "OOPS!!! Error loading file.";
     }
 
     public String noSuchTaskError() {
         return "Unable to find task. Please try again.";
+    }
+
+    public String findFreeTime(int hours, Date time) {
+        return "Next available time slot of " + hours + " hour(s) is on " + time + ".";
     }
 }

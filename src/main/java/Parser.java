@@ -5,6 +5,7 @@ import Task.Todo;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Parser {
     private String command;
@@ -50,6 +51,10 @@ public class Parser {
             }
         }
         switch (command) {
+        case "when":
+            int duration = Integer.parseInt(taskDetails);
+            Date timeSlot = list.findFreeTime(duration);
+            return ui.findFreeTime(duration, timeSlot);
         case "list":
             return ui.list(list.getList());
         case "done":

@@ -1,2 +1,0 @@
-null|0|terminal1234
-null|0|terminal

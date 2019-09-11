@@ -23,10 +23,11 @@ public class DeadlineCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    void execute(TaskList tasks, Storage storage) throws IOException {
+    String execute(TaskList tasks, Storage storage) throws IOException {
         Parser parser = new Parser(fullCommand);
-        tasks.addDeadline(parser.getActivityNameWithTime(),
+        String message = tasks.addDeadline(parser.getActivityNameWithTime(),
         parser.getDeadline(), false);
         storage.updateFile(tasks);
+        return message;
     }
 }

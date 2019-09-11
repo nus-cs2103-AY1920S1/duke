@@ -33,35 +33,36 @@ public class TaskList {
     /**
      * Prints out the tasks in the list currently.
      */
-    void showTasks() {
-        System.out.println("Here are the tasks in your list:");
+    String showTasks() {
+        String message = "Here are the tasks in your list: \n";
         for (int i = 0; i < list.size(); i++) {
-            System.out.println((i + 1) + ". " + list.get(i));
+            message += (i + 1) + ". " + list.get(i) + "\n";
         }
+        return message;
     }
 
     /**
      * Prints out the tasks with keyword in the list currently.
      */
-    void findTask(String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    String findTask(String keyword) {
+        String message = "Here are the matching tasks in your list: \n";
         int i = 0;
         for (Task task : list) {
             if (task.toString().contains(keyword)) {
-                System.out.println((i + 1) + ". " + task);
+               message += (i + 1) + ". " + task + "\n";
                 i++;
             }
         }
+        return message;
     }
 
     /**
      * Adds a new task into the list and prints out the message.
      * @param newTask newly created task object.
      */
-    private void addAndPrint(Task newTask) {
-        list.add(newTask);
-        System.out.println("Got it. I've added this task: \n  "
-                + newTask + "\nNow you have " + list.size() + " tasks in the list.");
+    private String getMessage(Task newTask) {
+        return "Got it. I've added this task: \n  "
+                + newTask + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
     /**
@@ -69,9 +70,10 @@ public class TaskList {
      * @param activityName String of take name.
      * @param isDone true if the task is done, or false otherwise.
      */
-    void addTodo(String activityName, boolean isDone) {
+    String addTodo(String activityName, boolean isDone) {
         Task newTask = new Todo(activityName,isDone);
-        addAndPrint(newTask);
+        list.add(newTask);
+        return getMessage(newTask);
     }
 
     /**
@@ -80,9 +82,10 @@ public class TaskList {
      * @param deadline String of deadline time.
      * @param isDone true if the task is done, or false otherwise.
      */
-    void addDeadline(String activityName, String deadline, boolean isDone) {
+    String addDeadline(String activityName, String deadline, boolean isDone) {
         Task newTask = new Deadline(activityName, isDone, deadline);
-        addAndPrint(newTask);
+        list.add(newTask);
+        return getMessage(newTask);
     }
 
     /**
@@ -91,31 +94,32 @@ public class TaskList {
      * @param time String of activity time.
      * @param isDone true if the task is done, or false otherwise.
      */
-    void addEvent(String activityName, String time, boolean isDone) {
+    String addEvent(String activityName, String time, boolean isDone) {
         Task newTask = new Event(activityName,isDone, time);
-        addAndPrint(newTask);
+        list.add(newTask);
+        return getMessage(newTask);
     }
 
     /**
      * Marks the task of the specified index to "done".
      * @param idx integer that represents the index of the task in the command.
      */
-    void doneTask(int idx) {
+    String doneTask(int idx) {
         assert idx >=1 && idx <= list.size() : "Invalid index input";
         list.get(idx - 1).markAsDone();
-        System.out.println("Nice! I've marked this task as done: \n  "
-                + list.get(idx - 1));
+        return "Nice! I've marked this task as done: \n  "
+                + list.get(idx - 1);
     }
 
     /**
      * Deletes the task in the command from the task list.
      * @param idx integer that represents the index of the task in the command.
      */
-    void deleteTask(int idx) {
+    String deleteTask(int idx) {
         assert idx >=1 && idx <= list.size() : "Invalid index input";
         Task removed = list.remove(idx - 1);
-        System.out.println("Noted. I've removed this task: \n  " + removed
-                + "\nNow you have " + list.size() + " tasks in the list.");
+        return "Noted. I've removed this task: \n  " + removed
+                + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
     /**

@@ -32,12 +32,21 @@ public class Duke {
         }
     }
 
-    Duke() {}
+    Duke() {
+        ui = new Ui();
+        storage = new Storage("data/tasks.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
     /**
      * Greets users, reads in inputs, processes the command, prints the outputs.
      */
-    private void run() {
+    void run() {
         ui.greet();
         String fullCommand = ui.readInput(sc);
 
@@ -62,6 +71,15 @@ public class Duke {
     }
 
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        if (input.equals("bye")) {
+            return ui.sayBye();
+        } else {
+            try {
+                Command command = cg.generateCommand(input);
+                return command.execute(tasks, storage);
+            } catch (DukeException | IOException ex) {
+                return ex.getMessage();
+            }
+        }
     }
 }

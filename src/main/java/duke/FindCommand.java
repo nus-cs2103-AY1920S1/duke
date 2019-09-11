@@ -21,8 +21,8 @@ public class FindCommand extends Command {
      * @param tasks TaskList object containing a list of existing tasks.
      * @param storage
      */
-    void execute(TaskList tasks, Storage storage) {
+    String execute(TaskList tasks, Storage storage) {
         Parser parser = new Parser(fullCommand);
-        tasks.findTask(parser.getKeyword());
+        return tasks.findTask(parser.getKeyword());
     }
 }

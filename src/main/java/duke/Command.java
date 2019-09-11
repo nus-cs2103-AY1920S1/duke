@@ -24,5 +24,7 @@ public class Command {
      * @param storage
      * @throws IOException
      */
-    void execute(TaskList tasks, Storage storage) throws IOException {}
+    String execute(TaskList tasks, Storage storage) throws IOException {
+        return "";
+    }
 }

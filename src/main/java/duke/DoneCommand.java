@@ -23,9 +23,10 @@ public class DoneCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    void execute(TaskList tasks, Storage storage) throws IOException {
+    String execute(TaskList tasks, Storage storage) throws IOException {
         Parser parser = new Parser(fullCommand);
-        tasks.doneTask(parser.getIndex());
+        String message = tasks.doneTask(parser.getIndex());
         storage.updateFile(tasks);
+        return message;
     }
 }

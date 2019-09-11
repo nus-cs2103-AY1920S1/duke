@@ -23,9 +23,10 @@ public class DeleteCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    void execute(TaskList tasks, Storage storage) throws IOException {
+    String execute(TaskList tasks, Storage storage) throws IOException {
         Parser parser = new Parser(fullCommand);
-        tasks.deleteTask(parser.getIndex());
+        String message = tasks.deleteTask(parser.getIndex());
         storage.updateFile(tasks);
+        return message;
     }
 }

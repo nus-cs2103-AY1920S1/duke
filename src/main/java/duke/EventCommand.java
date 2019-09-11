@@ -23,10 +23,11 @@ public class EventCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    void execute(TaskList tasks, Storage storage) throws IOException {
+    String execute(TaskList tasks, Storage storage) throws IOException {
         Parser parser = new Parser(fullCommand);
-        tasks.addEvent(parser.getActivityNameWithTime(),
+        String message = tasks.addEvent(parser.getActivityNameWithTime(),
         parser.getTime(), false);
         storage.updateFile(tasks);
+        return message;
     }
 }

@@ -28,8 +28,8 @@ class Ui {
     /**
      * Prints out the bye-bye message when the user enters "bye" command.
      */
-    void sayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    String sayBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

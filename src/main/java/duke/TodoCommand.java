@@ -23,11 +23,11 @@ public class TodoCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    void execute(TaskList tasks, Storage storage) throws IOException {
+    String execute(TaskList tasks, Storage storage) throws IOException {
         Parser parser = new Parser(fullCommand);
-        tasks.addTodo(parser.getActivityNameWithoutTime(),
+        String message = tasks.addTodo(parser.getActivityNameWithoutTime(),
         false);
         storage.updateFile(tasks);
-
+        return message;
     }
 }

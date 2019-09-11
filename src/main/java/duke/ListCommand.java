@@ -20,7 +20,7 @@ public class ListCommand extends Command {
      * @param tasks TaskList object containing a list of existing tasks.
      * @param storage
      */
-    void execute(TaskList tasks, Storage storage) {
-        tasks.showTasks();
+    String execute(TaskList tasks, Storage storage) {
+        return tasks.showTasks();
     }
 }

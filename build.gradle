@@ -30,9 +30,9 @@ dependencies {
 run {
     standardInput = System.in
 
-    // Disable JavaFX Hardware Acceleration
     // Hardware Acceleration not working with linux nvidia
-    jvmArgs "-Dprism.order=sw"
+    // Found the issue: It was with rendering unicode characters.
+    // https://github.com/javafxports/openjdk-jfx/issues/287
 }
 
 shadowJar {

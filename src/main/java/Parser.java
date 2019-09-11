@@ -14,8 +14,7 @@ public class Parser {
     // parse the command string keyed in by the user
     public static Command parse (String input) throws DukeException {
         String[] userInput = input.split(" ", 2);
-        String firstWord = userInput[0]; //firstword of the user input
-        //try {
+        String firstWord = userInput[0]; 
             switch (firstWord) {
                 case "bye":
                     return new ExitCommand();

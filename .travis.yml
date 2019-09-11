@@ -3,20 +3,15 @@ language: java
 jdk: openjdk11
 
 sudo: false
-#
-#cache:
-#  directories:
-#    - $HOME/.m2
-#    - $HOME/.gradle
+
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle
 
 script:
   - jdk_switcher use openjdk11
   - export JAVA_HOME=$HOME/openjdk11
   - $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
 
-# Specify a display with xvfb for UI testing
-before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3 # give xvfb some time to start
 

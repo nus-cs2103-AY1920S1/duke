@@ -1,12 +1,6 @@
 package duke.util;
 
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
-import duke.command.AddCommand;
-import duke.command.FindCommand;
-import duke.command.ExitCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 /**
@@ -53,6 +47,8 @@ public class Parser {
             case "find":
                 String taskToBeFound = fullCommand.substring(5);
                 return new FindCommand(taskToBeFound);
+            case "sort":
+                return new SortCommand();
             default:
                 throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

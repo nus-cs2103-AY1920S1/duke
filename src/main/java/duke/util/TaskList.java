@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Represents a list of tasks defined by the user.
@@ -96,6 +97,11 @@ public class TaskList {
             throw new DukeException("     File not found! :(");
         }
         return new TaskList(searchResults);
+    }
+
+    public String sortByDescription(Ui ui) {
+        taskList.sort(Comparator.comparing(Task::getDescription));
+        return "Sorted.\n" + ui.showList(this);
     }
 
     /**

@@ -46,8 +46,7 @@ public class Duke {
      * @param args Arguments entered when main method is executed.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke(SAVE_PATH);
-        duke.run();
+        new Duke(SAVE_PATH).run();
     }
 
     /**
@@ -56,7 +55,14 @@ public class Duke {
      * @param input Input entered by user.
      */
     public String getResponse(String input) {
-        return this.step(input);
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            this.storage.save(tasks);
+        } catch (DukeException e) {
+            this.ui.showError(e.getMessage());
+        }
+        return this.ui.getOutput();
     }
 
     /**
@@ -68,8 +74,7 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
+                Command c = Parser.parse(ui.readCommand());
                 c.execute(tasks, ui, storage);
                 storage.save(tasks);
                 isExit = c.isExit();
@@ -77,21 +82,5 @@ public class Duke {
                 ui.showError(e.getMessage());
             }
         }
-    }
-
-    /**
-     * Step-wise execution of Duke.
-     * 
-     * @param input User input.
-     */
-    public String step(String input) {
-        try {
-            Command c = Parser.parse(input);
-            c.execute(tasks, ui, storage);
-            this.storage.save(tasks);
-        } catch (DukeException e) {
-            this.ui.showError(e.getMessage());
-        }
-        return this.ui.getOutput();
     }
 }

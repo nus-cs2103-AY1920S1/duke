@@ -30,7 +30,7 @@ public class Ui {
      */
     public void printResponse(String output) {
         this.buffer = format(output);
-        System.out.println(format(output));
+        System.out.println(this.buffer);
     }
 
     public String getOutput() {

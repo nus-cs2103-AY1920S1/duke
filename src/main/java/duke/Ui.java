@@ -107,11 +107,17 @@ public class Ui {
         this.content.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
     }
 
+    /**
+     * Add message to output string when there is no task matching the given keyword.
+     */
     public void showNoMatchingTask() {
         this.content.append(INDENT);
         this.content.append("There is no matching task in the list!\n");
     }
 
+    /**
+     * Add message and task information of all matching tasks to output string when there are tasks in the task list.
+     */
     public void showMatchingTasks(List<Task> selectedTasks) {
         this.content.append(INDENT);
         this.content.append("Here are the matching tasks in your list:\n");

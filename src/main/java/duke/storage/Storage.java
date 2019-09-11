@@ -40,7 +40,7 @@ public class Storage {
     public List<Task> load() throws DukeIoException {
         try {
             File f = new File(pathToFile);
-            f.createNewFile();
+//            f.createNewFile();
             this.tasks = f;
             Path p = Paths.get(pathToFile);
             List<String> lst = Files.readAllLines(p);

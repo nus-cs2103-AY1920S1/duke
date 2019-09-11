@@ -94,12 +94,7 @@ public class Ui {
         System.out.printf(INDENT + "Oops, something went wrong\n");
     }
 
-    /**
-     * Displays the number of tasks in the task list.
-     *
-     * @param numOfTask Number of tasks.
-     */
-    public String showCount(int numOfTask) {
+    private String showCount(int numOfTask) {
         if (numOfTask < 2) {
             return "Now you have " + numOfTask + " task in the list.\n";
         } else {

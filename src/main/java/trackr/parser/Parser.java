@@ -20,22 +20,30 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
+        case "l":
             return new ListCommand(input);
-        case "done":
-            return new DoneCommand(input);
+        case "complete":
+        case "c":
+            return new CompleteCommand(input);
         case "todo":
+        case "t":
             return new TodoCommand(input);
         case "deadline":
+        case "d":
             return new DeadlineCommand(input);
         case "event":
+        case "e":
             return new EventCommand(input);
-        case "delete":
-            return new DeleteCommand(input);
+        case "remove":
+        case "r":
+            return new RemoveCommand(input);
         case "find":
+        case "f":
             return new FindCommand(input);
         case "help":
             return new HelpCommand();
         case "update":
+        case "u":
             return new UpdateCommand(input);
         default:
             throw new TrackrException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");

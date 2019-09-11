@@ -9,7 +9,7 @@ import trackr.ui.Ui;
 /**
  * Class when user issues a Done command.
  */
-public class DoneCommand extends Command {
+public class CompleteCommand extends Command {
 
     /**
      * Input from user.
@@ -20,7 +20,7 @@ public class DoneCommand extends Command {
      * Class constructor that assigns instance with user input.
      * @param userInput Input from user.
      */
-    public DoneCommand(String userInput) {
+    public CompleteCommand(String userInput) {
         this.userInput = userInput;
     }
 
@@ -30,7 +30,8 @@ public class DoneCommand extends Command {
      * @param ui Deals with interactions with the user
      * @param storage Deals with loading tasks from the file and saving tasks in the file
      * @throws TrackrException When task has already been marked done or number provided not in range
-     * @throws NumberFormatException When the regex specified following the 'done' command is not an integer
+     * @throws NumberFormatException When the regex specified following the 'complete' command is not an
+     * integer
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws TrackrException, NumberFormatException {
@@ -41,7 +42,7 @@ public class DoneCommand extends Command {
             try {
                 taskNum = Integer.parseInt(inputStringArr[1]);
             } catch (NumberFormatException e) {
-                return ":( OOPS!!! The 'done' command requires you to input a number";
+                return ":( OOPS!!! The 'complete' command requires you to input a number";
             }
             int totalTasks = tasks.size();
             if (taskNum < 1 || taskNum > totalTasks) {

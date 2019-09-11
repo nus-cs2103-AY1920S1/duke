@@ -8,7 +8,7 @@ import trackr.ui.Ui;
 /**
  * Class when user issues a Delete command.
  */
-public class DeleteCommand extends Command {
+public class RemoveCommand extends Command {
 
     /**
      * Input from user.
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
      * Class constructor that assigns instance with user input.
      * @param userInput Input from user.
      */
-    public DeleteCommand(String userInput) {
+    public RemoveCommand(String userInput) {
         this.userInput = userInput;
     }
 

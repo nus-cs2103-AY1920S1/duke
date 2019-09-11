@@ -1,3 +1,7 @@
+import duke.Duke;
+import duke.MyPaths;
+import duke.MainWindow;
+
 import java.io.IOException;
 
 import javafx.application.Application;

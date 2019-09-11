@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        duke = d;
+        this.duke = d;
     }
 
     /**
@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
         try {
             String input = this.userInput.getText();
             String response = this.duke.getResponse(input);
+            assert response.length() != 0 : "Duke has no response (invalid behaviour)";
             this.dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, this.userImage),
                     DialogBox.getDukeDialog(response, this.dukeImage)
@@ -65,6 +66,7 @@ public class MainWindow extends AnchorPane {
      * @param errorMsg An error message that Duke prints to the GUI for the user.
      */
     private void handleError(String errorMsg) {
+        assert errorMsg.length() != 0 : "Duke error message cannot be blank";
         this.dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(errorMsg, this.dukeImage));
         this.userInput.clear();

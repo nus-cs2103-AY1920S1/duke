@@ -23,7 +23,7 @@ public class Duke {
 
     /**
      * Constructor. Will attempt to load any saved tasks specified in the
-     * Duke.savedFilePath class attribute. If not saved tasks are found, then
+     * Duke.savedFilePath class attribute. If no saved tasks are found, then
      * an empty TaskList is initialised.
      */
     public Duke() {
@@ -41,6 +41,7 @@ public class Duke {
      */
     public String getResponse(String input) throws DukeException, NoSuchElementException {
         Command c = Parser.parse(input);
+        assert false : "Command object cannot be null";
         return c.execute(this.ui, this.storage, this.allTasks);
     }
 }

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.storage.Storage;
 import duke.ui.MainWindow;
 
 import java.io.IOException;

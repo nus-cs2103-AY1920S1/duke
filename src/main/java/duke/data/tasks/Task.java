@@ -19,16 +19,6 @@ public abstract class Task {
     }
 
     /**
-     * Constructs a task with the specified description and isDone status.
-     * @param description The specified description.
-     * @param isDone The specified isDone status.
-     */
-    public Task(String description, boolean isDone) {
-        this.description = description;
-        this.isDone = isDone;
-    }
-
-    /**
      * Returns true if this task is done.
      * @return true if this task is done.
      */

@@ -32,6 +32,8 @@ public class Storage {
             + " Creating an empty task list.";
     private static final String FILE_INPUT_ERROR_MESSAGE = "The hard disk file could not be read."
             + " Creating an empty task list.";
+    private static final String SAVE_FAIL_MESSAGE = "Data could not be saved."
+            + "Please check the hard disk file.\n";
 
     /**
      * Constructs a Storage class that is connected to the specified file path.
@@ -52,7 +54,7 @@ public class Storage {
             TaskList tasks = new TaskList();
             Stream<String> dataLinesStream = Files.lines(dataFile.toPath());
             dataLinesStream.forEach(dataLine -> {
-                String input = getFullCommand(dataLine);
+                String input = getInput(dataLine);
                 Command command = Parser.parse(input);
                 command.setTaskListToExecuteOn(tasks);
                 command.execute();
@@ -74,7 +76,7 @@ public class Storage {
      * @param dataLine The specified line of data.
      * @return The full command in the specified line of data.
      */
-    private String getFullCommand(String dataLine) {
+    private String getInput(String dataLine) {
         return dataLine.split(" \\| ")[FULL_COMMAND_INDEX];
     }
 
@@ -103,7 +105,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            throw new DukeException("Data could not be saved. Please check the hard disk file.\n");
+            throw new DukeException(SAVE_FAIL_MESSAGE);
         }
     }
 

@@ -188,4 +188,93 @@ public class UiText {
     public static String unableToWriteFileError() {
         return "Unable to write the file";
     }
+
+    /**
+     * display a list of content of the commands and their formate.
+     * @return a whole list of all the commands
+     */
+    public static String helpFullContent() {
+        StringBuilder content = new StringBuilder();
+        content.append("Here is the list of commands with their format and function\n");
+        content.append("\t-");
+        content.append(UiText.helpForDeadline());
+        content.append("\n\t-");
+        content.append(UiText.helpForEvent());
+        content.append("\n\t-");
+        content.append(UiText.helpForTodo());
+        content.append("\n\t-");
+        content.append(UiText.helpForFind());
+        content.append("\n\t-");
+        content.append(UiText.helpForDelete());
+        content.append("\n\t-");
+        content.append(UiText.helpForDone());
+        content.append("\n\t-");
+        content.append(UiText.helpForExit());
+        content.append("\n\t-");
+        content.append(UiText.helpForList());
+        return content.toString();
+    }
+
+    /**
+     * display a help for a specific command.
+     * @param keyword command
+     * @return helping message for that command
+     */
+    public static String helpForKeyword(String keyword) {
+        switch (keyword) {
+            case "deadline":
+                return UiText.helpForDeadline();
+            case "todo":
+                return UiText.helpForTodo();
+            case "event":
+                return UiText.helpForEvent();
+            case "delete":
+                return UiText.helpForDelete();
+            case "done":
+                return UiText.helpForDone();
+            case "exit":
+                return UiText.helpForExit();
+            case "list":
+                return UiText.helpForList();
+            case "find":
+                return UiText.helpForFind();
+            default:
+                return "Please key in a valid keyword";
+        }
+
+    }
+
+    public static String helpForDeadline() {
+        return "deadline <task description> /by <date and time in dd/mmm/yyyy xx:xx>" +
+                " an deadline task of the given time will be added to the task list";
+    }
+
+    public static String helpForEvent() {
+        return "event <task description> /at <date and time in dd/mmm/yyyy xx:xx>"
+                + " an event task with the given time will be added to the task list.";
+    }
+
+    public static String helpForTodo() {
+        return "todo <task description> --a todo task will be added to the task list.";
+    }
+
+    public static String helpForDelete() {
+        return "delete <no of the task in the list> --the task that associated with the number on the list will be deleted.";
+    }
+
+    public static String helpForDone() {
+        return "done <no of the task in the list> --the task that associated with the number on the list will be mark as done.";
+    }
+
+    public static String helpForExit() {
+        return "bye --you will exit the application.";
+    }
+
+    public static String helpForFind() {
+        return "find <keyword> --task that contain the keyword will be shown as a list.";
+    }
+
+    public static String helpForList() {
+        return "list --list of task will be displayed.";
+    }
 }

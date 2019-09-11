@@ -2,7 +2,6 @@ import java.io.IOException;
 
 /**
  * The duke.Duke program implements an app that enables users to track their tasks.
- *
  * @author Yen-Peng
  */
 

@@ -34,6 +34,7 @@ public class CommandEvent extends Command {
             String end = commands[2].trim();
             Task evTask = new Event(description, DateUtil.toTime(start), DateUtil.toTime(end));
             sh.add(evTask);
+            ui.showAdd(evTask.toString().trim(), sh.getNumOfTask());
             stor.save(sh.getList());
         }
     }

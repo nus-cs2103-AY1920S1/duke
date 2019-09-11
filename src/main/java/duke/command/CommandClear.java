@@ -17,6 +17,7 @@ public class CommandClear extends Command {
 
     @Override
     public void execute(Sheet sh, Ui ui, Storage stor) throws DukeException {
+        ui.showClearList();
         sh.clearList();
         stor.save(sh.getList());
     }

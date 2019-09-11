@@ -33,6 +33,7 @@ public class CommandDeadline extends Command {
             String deadline = commands[1].trim();
             Task dlTask = new Deadline(description, DateUtil.toTime(deadline));
             sh.add(dlTask);
+            ui.showAdd(dlTask.toString().trim(), sh.getNumOfTask());
             stor.save(sh.getList());
         }
     }

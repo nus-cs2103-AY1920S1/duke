@@ -5,6 +5,7 @@ import duke.exception.IllegalTaskIndexException;
 import duke.exception.TaskNotFoundException;
 import duke.sheet.Sheet;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.ui.Ui;
 
 /**
@@ -33,7 +34,8 @@ public class CommandDelete extends Command {
             if (index < 1) {
                 throw new TaskNotFoundException("> < Oops! Do we have non-positive tasks?");
             }
-            sh.delete(index);
+            Task removed = sh.delete(index);
+            ui.showRemove(removed.toString().trim(), sh.getNumOfTask());
             stor.save(sh.getList());
         } catch (NumberFormatException e) {
             throw new IllegalTaskIndexException(

@@ -16,7 +16,8 @@ public class CommandList extends Command {
 
     @Override
     public void execute(Sheet sh, Ui ui, Storage stor) {
-        sh.showList();
+        String list = sh.showList();
+        ui.showList(list);
     }
 
     @Override

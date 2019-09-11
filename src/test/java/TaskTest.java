@@ -1,3 +1,5 @@
+import duke.task.Event;
+import duke.task.Task;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

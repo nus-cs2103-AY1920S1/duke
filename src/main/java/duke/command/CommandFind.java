@@ -22,7 +22,8 @@ public class CommandFind extends Command {
             throw new MissingDescriptionException(
                     "> < Sorry, I did not catch your search keyword.");
         }
-        sh.find(this.command.trim());
+        String found = sh.find(this.command.trim());
+        ui.showSearch(found);
     }
 
     @Override

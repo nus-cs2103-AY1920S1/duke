@@ -20,7 +20,7 @@ public class Duke {
         this.ui = new Ui(mw);
         storage = new Storage(pathToFile);
         try {
-            sheet = new Sheet(storage.load(), ui);
+            sheet = new Sheet(storage.load());
         } catch (DukeIoException e) {
             ui.showLoadingError();
         }

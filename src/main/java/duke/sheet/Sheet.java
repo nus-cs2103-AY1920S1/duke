@@ -1,7 +1,6 @@
 package duke.sheet;
 
 import duke.task.Task;
-import duke.ui.Ui;
 
 import java.util.List;
 
@@ -12,15 +11,13 @@ import java.util.List;
 public class Sheet {
     private List<Task> tasks;
     private int numOfTask;
-    private Ui ui;
 
     /**
      * Construct a task list.
      *
      * @param tasks List of tasks contained the list.
      */
-    public Sheet(List<Task> tasks, Ui ui) {
-        this.ui = ui;
+    public Sheet(List<Task> tasks) {
         this.tasks = tasks;
         numOfTask = tasks.size();
     }
@@ -36,7 +33,7 @@ public class Sheet {
      */
     public void add(Task task) {
         tasks.add(task);
-        ui.showAdd(task.toString().trim(), ++numOfTask);
+        numOfTask++;
     }
 
     /**
@@ -44,9 +41,10 @@ public class Sheet {
      *
      * @param index Serial index of the task in list.
      */
-    public void delete(int index) {
+    public Task delete(int index) {
         Task removed = tasks.remove(index - 1);
-        ui.showRemove(removed.toString().trim(), --numOfTask);
+        numOfTask--;
+        return removed;
     }
 
     /**
@@ -63,10 +61,10 @@ public class Sheet {
      *
      * @param index Serial index of the task in list.
      */
-    public void markAsDone(int index) {
+    public Task markAsDone(int index) {
         Task doneTask = tasks.get(index - 1).finish();
         tasks.set(index - 1, doneTask);
-        ui.showDone(doneTask.toString().trim());
+        return doneTask;
     }
 
     /**
@@ -82,20 +80,19 @@ public class Sheet {
      * Outputs the task list.
      *
      */
-    public void showList() {
+    public String showList() {
         StringBuilder sb = new StringBuilder("");
 
         for (int i = 0; i < numOfTask; i++) {
             sb.append((" " + (i + 1) +  ". " + tasks.get(i).toString().trim() + "\n"));
         }
-        ui.showList(sb.toString());
+        return sb.toString();
     }
 
     /**
      * Remove all tasks from the task list.
      */
     public void clearList() {
-        ui.showClearList();
         tasks.clear();
         numOfTask = 0;
     }
@@ -105,7 +102,7 @@ public class Sheet {
      *
      * @param keyword Keyword for searching.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         StringBuilder sb = new StringBuilder("");
         int count = 0;
         for (Task task : tasks) {
@@ -117,7 +114,7 @@ public class Sheet {
         if (count == 0) {
             sb.append("> < Sorry, nothing has been found.\n");
         }
-        ui.showSearch(sb.toString());
+        return sb.toString();
     }
 
     /**

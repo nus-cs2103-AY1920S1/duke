@@ -26,6 +26,7 @@ public class CommandTodo extends Command {
         }
         Task todoTask = new Todo(command.trim());
         sh.add(todoTask);
+        ui.showAdd(todoTask.toString().trim(), sh.getNumOfTask());
         stor.save(sh.getList());
     }
 

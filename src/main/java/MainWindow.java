@@ -48,7 +48,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        duke.updateDb();
+        duke.updateTasksHelper();
         userInput.clear();
     }
 }

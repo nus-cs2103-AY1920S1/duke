@@ -37,44 +37,50 @@ public class Storage {
      * @param filePath location of the file as a string.
      * @param list The existing ArrayList of Tasks after user has made changes to it.
      */
-    public void updateTasks(String filePath, ArrayList<Task> list) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        String result = "";
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
+    public boolean updateTasks(String filePath, ArrayList<Task> list) {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            String result = "";
+            for (int i = 0; i < list.size(); i++) {
+                Task task = list.get(i);
 
-            if (task instanceof Todo) {
-                String description = task.getDescription();
-                Boolean isDone = task.getStatus();
-                int done = 0;
-                if (isDone) {
-                    done = 1;
+                if (task instanceof Todo) {
+                    String description = task.getDescription();
+                    Boolean isDone = task.getStatus();
+                    int done = 0;
+                    if (isDone) {
+                        done = 1;
+                    }
+                    result += "todo" + ">>" + done + ">>" + description + "\n";
+                } else if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    String description = deadline.getDescription();
+                    Boolean isDone = deadline.getStatus();
+                    String by = dateToStringConverter(deadline.getBy());
+                    int done = 0;
+                    if (isDone) {
+                        done = 1;
+                    }
+                    result += "deadline" + ">>" + done + ">>" + description + ">>" + by + "\n";
+                } else if (task instanceof Event) {
+                    Event event = (Event) task;
+                    String description = event.getDescription();
+                    Boolean isDone = event.getStatus();
+                    String at = dateToStringConverter(event.getAt());
+                    int done = 0;
+                    if (isDone) {
+                        done = 1;
+                    }
+                    result += "event" + ">>" + done + ">>" + description + ">>" + at + "\n";
                 }
-                result += "todo" + ">>" + done + ">>" + description + "\n";
-            } else if (task instanceof Deadline) {
-                Deadline deadline = (Deadline) task;
-                String description = deadline.getDescription();
-                Boolean isDone = deadline.getStatus();
-                String by = dateToStringConverter(deadline.getBy());
-                int done = 0;
-                if (isDone) {
-                    done = 1;
-                }
-                result += "deadline" + ">>" + done + ">>" + description + ">>" + by + "\n";
-            } else if (task instanceof Event) {
-                Event event = (Event) task;
-                String description = event.getDescription();
-                Boolean isDone = event.getStatus();
-                String at = dateToStringConverter(event.getAt());
-                int done = 0;
-                if (isDone) {
-                    done = 1;
-                }
-                result += "event" + ">>" + done + ">>" + description + ">>" + at + "\n";
             }
+            fw.write(result);
+            fw.close();
+            return true;
+        } catch (IOException e) {
+            return false;
         }
-        fw.write(result);
-        fw.close();
+
     }
 
     /**
@@ -95,7 +101,6 @@ public class Storage {
      *
      * @return ArrayList of Tasks
      */
-
     public ArrayList<Task> getTasks() throws FileNotFoundException, ParseException {
         File file = getFile(filePath);
         assert file != null : "file should exist by now";

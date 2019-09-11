@@ -1,0 +1,4 @@
+language: java
+# Needed for gradlew assemble
+before_install:
+  - chmod +x gradlew

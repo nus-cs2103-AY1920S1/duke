@@ -30,6 +30,25 @@ public class Parser {
             case "delete":
                 c = new DeleteCommand(Integer.parseInt(arr[1]) - 1);
                 break;
+            case "update":
+                int a = 3;
+                String taskName = "";
+                while (!arr[a].contains("/to")) {
+                    taskName += " " + arr[a];
+                    a++;
+                }
+                String updatedInfo = arr[a + 1];
+                for (int i = a + 2; i < arr.length; i++) {
+                    updatedInfo += " " + arr[i];
+                }
+                if (arr[1].contains("description")) {
+                    c = new UpdateDescriptionCommand(taskName.trim(), updatedInfo);
+                } else if (arr[1].contains("date")) {
+                    c = new UpdateDateCommand(taskName.trim(), updatedInfo);
+                } else {
+                    throw new UnknownTaskException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+                break;
             default:
                 String description = "";
                 Task t;

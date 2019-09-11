@@ -8,18 +8,15 @@ import java.text.SimpleDateFormat;
 
 public class Deadline extends Task {
 
-    protected String by;
     protected Date date;
 
     public Deadline(String description, String by) throws ParseException {
         super(description);
-        this.by = by;
         this.date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(by);
     }
 
     public Deadline(String description, boolean isDone, String by) throws ParseException {
         super(description, isDone);
-        this.by = by;
         this.date = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(by);
     }
 
@@ -32,10 +29,16 @@ public class Deadline extends Task {
 
     @Override
     public String print() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        String formattedDate = formatter.format(this.date);
         if (this.isDone) {
-            return "D @ 1 @ " + this.description + " @ " + this.by;
+            return "D @ 1 @ " + this.description +  " @ " + formattedDate;
         } else {
-            return "D @ 0 @ " + this.description + " @ " + this.by;
+            return "D @ 0 @ " + this.description + " @ " + formattedDate;
         }
+    }
+
+    public void setDate(Date newDate) {
+        this.date = newDate;
     }
 }

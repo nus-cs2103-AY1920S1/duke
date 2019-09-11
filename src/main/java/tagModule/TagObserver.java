@@ -1,3 +1,4 @@
+package tagModule;
 /**
  * Implement this to be updated what TagOberservable updates
  *

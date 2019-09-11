@@ -1,3 +1,5 @@
+//package tagModule;
+import tagModule.TagInterface;
 /**
  * Wrap an object to store into Hashmap
  *  to store into a store of Tags

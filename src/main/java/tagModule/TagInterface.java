@@ -1,3 +1,4 @@
+package tagModule;
 /**
  * Interface for Tags to implement
  *  the rationale is to ensure developers need to implement

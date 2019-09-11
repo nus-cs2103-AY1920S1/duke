@@ -1,24 +1,17 @@
 import tagModule.TagStore;
+import tagModule.GenericBiMap;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
-public class TagStoreTest {
-
-    @Test
-    public void registerObserver_test() {
-        //TagStore store = new TagStore();
-        assertTrue(true);
-
-    }
-
+public class GenericBiMapTest {
 
 
     @Test
     public void deleteTag_test() {
-        TagStore store1 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store1 = new GenericBiMap<>();
         store1.insertTag("#alive", new TagAbstractStub("loki"));
         store1.insertTag("#alive", new TagAbstractStub("thor"));
         store1.insertTag("#asgard", new TagAbstractStub("loki"));
@@ -37,7 +30,7 @@ public class TagStoreTest {
 
     @Test
     public void deleteTaggedObject_test() {
-        TagStore store1 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store1 = new GenericBiMap<>();
         store1.insertTag("#alive", new TagAbstractStub("loki"));
         store1.insertTag("#alive", new TagAbstractStub("thor"));
         store1.insertTag("#asgard", new TagAbstractStub("loki"));
@@ -58,7 +51,7 @@ public class TagStoreTest {
 
     @Test
     public void replaceTag_test() {
-        TagStore store1 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store1 = new GenericBiMap<>();
         store1.insertTag("#alive", new TagAbstractStub("loki"));
         store1.insertTag("#alive", new TagAbstractStub("peterparker"));
         store1.insertTag("#asgard", new TagAbstractStub("loki"));
@@ -81,7 +74,7 @@ public class TagStoreTest {
 
     @Test
     public void replaceTagggedObject_test() {
-        TagStore store1 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store1 = new GenericBiMap<>();
         store1.insertTag("#alive", new TagAbstractStub("loki"));
         store1.insertTag("#asgard", new TagAbstractStub("loki"));
         store1.insertTag("#tessaract", new TagAbstractStub("loki"));
@@ -98,14 +91,14 @@ public class TagStoreTest {
 
     @Test
     public void deleteTagFromObj_test() {
-        TagStore store1 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store1 = new GenericBiMap<>();
         store1.insertTag("#spiderman", new TagAbstractStub("peterparker"));
         assertTrue(store1.containsTagPair("#spiderman", new TagAbstractStub("peterparker")));
         store1.deleteTagFromObject("#spiderman", new TagAbstractStub("peterparker"));
         assertFalse(store1.containsTagPair("#spiderman", new TagAbstractStub("peterparker")));
 
 
-        TagStore store2 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store2 = new GenericBiMap<>();
 
         store2.insertTag("#sony", new TagAbstractStub("peterparker"));
 
@@ -156,7 +149,7 @@ public class TagStoreTest {
     @Test
     public void insertTag_test() {
 
-        TagStore store1 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store1 = new GenericBiMap<>();
         store1.insertTag("#avengers", new TagAbstractStub("peterparker"));
         store1.insertTag("#snapped", new TagAbstractStub("peterparker"));
         store1.insertTag("#avengers", new TagAbstractStub("tonystark"));
@@ -168,7 +161,7 @@ public class TagStoreTest {
 
 
 
-        TagStore store2 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store2 = new GenericBiMap<>();
 
         store2.insertTag("#sony", new TagAbstractStub("peterparker"));
         assertTrue(store2.containsTagPair("#sony", new TagAbstractStub("peterparker")));
@@ -193,18 +186,18 @@ public class TagStoreTest {
     public void containsTagPair_test() {
         TagAbstractStub tas1a = new TagAbstractStub("tonystark");
         TagAbstractStub tas1b = new TagAbstractStub("tonystark");
-        TagStore store1 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store1 = new GenericBiMap<>();
         store1.insertTag("#ironman", tas1a);
         assertTrue(store1.containsTagPair("#ironman", tas1b));
 
         
         TagAbstractStub tas2a = new TagAbstractStub("romanov");
         TagAbstractStub tas2b = new TagAbstractStub("tonystark");
-        TagStore store2 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store2 = new GenericBiMap<>();
         store2.insertTag("#ironman", tas2b);
         assertFalse(store2.containsTagPair("#ironman", tas2a));
 
-        TagStore store3 = new TagStore();
+        GenericBiMap<String, TagAbstractStub> store3 = new GenericBiMap<>();
         store3.insertTag("#avengers", new TagAbstractStub("steverodgers"));
         store3.insertTag("#avengers", new TagAbstractStub("tonystark"));
         assertTrue(store3.containsTagPair("#avengers", new TagAbstractStub("steverodgers")));

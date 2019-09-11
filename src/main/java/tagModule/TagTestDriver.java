@@ -1,3 +1,5 @@
+package tagModule;
+
 public class TagTestDriver {
     static class TagAbstractStub extends TagAbstractWrapper {
         private String containsStr;

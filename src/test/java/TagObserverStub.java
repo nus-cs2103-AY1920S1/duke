@@ -1,3 +1,6 @@
+import tagModule.TagObserver;
+import tagModule.TagObservable;
+
 public class TagObserverStub implements TagObserver {
 
     public int timesUpdated;

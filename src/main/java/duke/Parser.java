@@ -1,6 +1,14 @@
 package duke;
 
-import command.*;
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EmptyCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
+
 import exception.DukeException;
 import exception.EmptyDescriptionException;
 import exception.WrongDateFormatException;
@@ -15,7 +23,7 @@ public class Parser {
     private Ui ui;
 
     /**
-     * Returns a parser that parses user's input
+     * Returns a parser that parses user's input.
      *
      * @param ui duke.Ui object that Duke has initialised
      */
@@ -138,7 +146,7 @@ public class Parser {
                 ui.println("     ☹ OOPS!!! The description cannot be empty.");
                 ui.showLine();
             }
-        break;
+            break;
         default:
             try {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
@@ -158,7 +166,7 @@ public class Parser {
      * @param dateString String in the format of dd/mm/yyyy hhmm
      * @return Calendar that represents the given date
      */
-    private static Calendar convertStringToCalendar (String dateString) throws WrongDateFormatException {
+    private static Calendar convertStringToCalendar(String dateString) throws WrongDateFormatException {
         try {
             String[] dateAndTime = dateString.split("\\s");
             String date = dateAndTime[0];

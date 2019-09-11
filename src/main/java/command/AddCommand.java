@@ -17,12 +17,25 @@ public class AddCommand extends Command {
     private String message;
     private Calendar calendar;
 
+    /**
+     * Creates a Command to add a new task with a date.
+     *
+     * @param taskType type of the task.
+     * @param message message of the task.
+     * @param calendar date of the task represented in a Calendar object.
+     */
     public AddCommand(TaskType taskType, String message, Calendar calendar) {
         this.taskType = taskType;
         this.message = message;
         this.calendar = calendar;
     }
 
+    /**
+     * Creates a Command to add a new task without a date.
+     *
+     * @param taskType type of the task.
+     * @param message message of the task.
+     */
     public AddCommand(TaskType taskType, String message) {
         this.taskType = taskType;
         this.message = message;

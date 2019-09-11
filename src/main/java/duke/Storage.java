@@ -25,7 +25,7 @@ public class Storage {
      * Writes a string to the file path of this duke.Storage object.
      *
      * @param textToAdd String that the user wants to write to a file.
-     * @throws IOException
+     * @throws IOException When no such file is available.
      */
     public void writeToFile(String... textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -37,7 +37,7 @@ public class Storage {
      * Loads strings from a text file and parse them into an ArrayList of Tasks.
      *
      * @return ArrayList of Tasks stored in the file
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException When no such file is available.
      */
     public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException {
         File f = new File(filePath); // create a File for the given file path
@@ -81,6 +81,8 @@ public class Storage {
                     eventTask.markAsDone();
                 }
                 result.add(eventTask);
+                break;
+            default:
                 break;
             }
         }

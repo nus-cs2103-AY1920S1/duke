@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 import task.Task;
 import task.TaskType;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskTest {
 

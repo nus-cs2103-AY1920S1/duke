@@ -5,7 +5,7 @@ import task.Task;
 import java.util.Scanner;
 
 /**
- * Deals with user interaction for Duke
+ * Deals with user interaction for Duke.
  */
 public class Ui {
     public static final String LINE = "    ____________________________________________________________\n";
@@ -55,6 +55,8 @@ public class Ui {
         case EVENT:
             result += "       [E][✗] ";
             break;
+        default:
+            break;
         }
         result += task;
         System.out.println(result);
@@ -70,7 +72,7 @@ public class Ui {
     }
 
     /**
-     * Shows the farewell message when the user exits Duke
+     * Shows the farewell message when the user exits Duke.
      */
     public void showFarewellMessage() {
         showLine();

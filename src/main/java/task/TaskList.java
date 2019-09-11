@@ -72,6 +72,8 @@ public class TaskList {
                 result.append(task.getTime());
                 result.append("\n");
                 break;
+            default:
+                break;
             }
         }
 

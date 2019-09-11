@@ -12,6 +12,12 @@ public class Task {
     protected TaskType type;
     protected Calendar time;
 
+    /**
+     * Creates a new task.
+     *
+     * @param description description of the task.
+     * @param type type of the task.
+     */
     public Task(String description, TaskType type) {
         this.description = description;
         this.isDone = false;
@@ -27,14 +33,29 @@ public class Task {
         this.time = time;
     }
 
+    /**
+     * Returns the task type of this task.
+     *
+     * @return task type of this task;
+     */
     public TaskType getType() {
         return type;
     }
 
+    /**
+     * Returns the description of this task.
+     *
+     * @return description of this task.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Returns the time of this task.
+     *
+     * @return time of this task in String representation in milliseconds.
+     */
     public String getTime() {
         return time.getTimeInMillis() + "";
     }
@@ -48,6 +69,11 @@ public class Task {
         return (isDone ? "[\u2713]" : "[\u2718]"); //return tick or X symbols
     }
 
+    /**
+     * Returns the String representation of this task's icon.
+     *
+     * @return String representation of this task's icon.
+     */
     public String getTypeIcon() {
         String result = "";
         switch (type) {
@@ -59,6 +85,8 @@ public class Task {
             break;
         case EVENT:
             result = "E";
+            break;
+        default:
             break;
         }
 

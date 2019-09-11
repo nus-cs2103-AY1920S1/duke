@@ -11,9 +11,9 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Returns a String representation of the Exception
+     * Returns a String representation of the Exception.
      *
-     * @return String representation of the Exception
+     * @return String representation of the Exception.
      */
     @Override
     public String toString() {

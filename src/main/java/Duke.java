@@ -89,7 +89,7 @@ public class Duke {
             Command c = parser.parse(input);
             c.execute(tasks, ui, storage);
         } catch (Exception e) {
-
+            ui.println(e.getMessage());
         }
 
         String toReturn = Main.getBaos().toString();

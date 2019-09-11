@@ -24,6 +24,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert index <= tasks.size() : "index out of range!";
+
         Task taskDone = tasks.getTasks().get(index - 1);
         taskDone.markAsDone();
 

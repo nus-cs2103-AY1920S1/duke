@@ -174,6 +174,9 @@ public class Parser {
             String[] dateAndTime = dateString.split("\\s");
             String date = dateAndTime[0];
             String time = dateAndTime[1];
+
+            assert time != null : "no time entered!";
+
             int hour = Integer.parseInt(time) / 100;
             int minute = Integer.parseInt(time) % 100;
 

@@ -1,6 +1,5 @@
 package duke;
 
-import duke.Parser;
 import task.Task;
 
 import java.util.Scanner;

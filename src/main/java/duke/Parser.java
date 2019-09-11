@@ -21,78 +21,98 @@ public class Parser {
         String firstWord = arr[0];
         switch (firstWord) {
         case "tag":
-            String tagDescription = arr[1];
-            if (tagDescription.isEmpty()) {
-                throw new DukeException("OOPS!!! The description of a tag cannot be empty.");
-            }
-            String[] indexTag = tagDescription.split(" ");
-            int indexOfTag = Integer.parseInt(indexTag[0]);
-            String wordOfTag = indexTag[1];
-            if (wordOfTag.isEmpty()) {
-                throw new DukeException("OOPS!!! The tag word cannot be empty.");
-            }
-            return new TagCommand(indexOfTag, wordOfTag);
+            return createTagCommand(arr);
         case "bye":
             return new ExitCommand();
         case "list":
             return new ListCommand();
         case "delete":
-            int index = Integer.parseInt(arr[1]);
-            return new DeleteCommand(index);
+            int indexDelete = Integer.parseInt(arr[1]);
+            return new DeleteCommand(indexDelete);
         case "done":
             int indexDone = Integer.parseInt(arr[1]);
             return new DoneCommand(indexDone);
         case "todo":
-            String what = arr[1];
-            if (what.isEmpty()) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            Todo todo = new Todo(what);
-            return new AddCommand(todo);
+            return createTodoCommand(arr);
         case "deadline":
-            String when = arr[1];
-            if (when.isEmpty()) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            }
-            String[] parts = when.split("/by");
-            if (parts.length == 1) {
-                throw new DukeException("OOPS!!! The time of a deadline cannot be empty.");
-            }
-            String desc = parts[0];
-            String time = parts[1];
-            Deadline deadline = new Deadline(desc);
-            try {
-                deadline.parseTime(time);
-            } catch (ParseException ex) {
-                throw new DukeException(ex.getMessage());
-            }
-            return new AddCommand(deadline);
+            return createDeadlineCommand(arr);
         case "event":
-            String where = arr[1];
-            if (where.isEmpty()) {
-                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-            }
-            String[] partsE = where.split("/at");
-            if (partsE.length == 1) {
-                throw new DukeException("OOPS!!! The time of an event cannot be empty.");
-            }
-            String descE = partsE[0];
-            String timeE = partsE[1];
-            Event event = new Event(descE);
-            try {
-                event.parseTime(timeE);
-            } catch (ParseException ex) {
-                throw new DukeException(ex.getMessage());
-            }
-            return new AddCommand(event);
+            return createEventCommand(arr);
         case "find":
-            String word = arr[1];
-            if (word.isEmpty()) {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what to find :-(");
-            }
-            return new FindCommand(word);
+            return createFindCommand(arr);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private static TagCommand createTagCommand(String[] arr) throws DukeException {
+        String tagDescription = arr[1];
+        if (tagDescription.isEmpty()) {
+            throw new DukeException("OOPS!!! The description of a tag cannot be empty.");
+        }
+        String[] indexTag = tagDescription.split(" ");
+        int indexOfTag = Integer.parseInt(indexTag[0]);
+        String wordOfTag = indexTag[1];
+        if (wordOfTag.isEmpty()) {
+            throw new DukeException("OOPS!!! The tag word cannot be empty.");
+        }
+        return new TagCommand(indexOfTag, wordOfTag);
+    }
+
+    private static AddCommand createTodoCommand(String[] arr) throws DukeException {
+        String what = arr[1];
+        if (what.isEmpty()) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        Todo todo = new Todo(what);
+        return new AddCommand(todo);
+    }
+
+    private static AddCommand createDeadlineCommand(String[] arr) throws DukeException {
+        String when = arr[1];
+        if (when.isEmpty()) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        }
+        String[] parts = when.split("/by");
+        if (parts.length == 1) {
+            throw new DukeException("OOPS!!! The time of a deadline cannot be empty.");
+        }
+        String desc = parts[0];
+        String time = parts[1];
+        Deadline deadline = new Deadline(desc);
+        try {
+            deadline.parseTime(time);
+        } catch (ParseException ex) {
+            throw new DukeException(ex.getMessage());
+        }
+        return new AddCommand(deadline);
+    }
+
+    private static AddCommand createEventCommand(String[] arr) throws DukeException {
+        String where = arr[1];
+        if (where.isEmpty()) {
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+        }
+        String[] partsE = where.split("/at");
+        if (partsE.length == 1) {
+            throw new DukeException("OOPS!!! The time of an event cannot be empty.");
+        }
+        String descE = partsE[0];
+        String timeE = partsE[1];
+        Event event = new Event(descE);
+        try {
+            event.parseTime(timeE);
+        } catch (ParseException ex) {
+            throw new DukeException(ex.getMessage());
+        }
+        return new AddCommand(event);
+    }
+
+    private static FindCommand createFindCommand(String[] arr) throws DukeException {
+        String word = arr[1];
+        if (word.isEmpty()) {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what to find :-(");
+        }
+        return new FindCommand(word);
     }
 }

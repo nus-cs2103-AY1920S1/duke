@@ -12,6 +12,8 @@ import java.util.ArrayList;
  */
 class Storage {
     private String filepath;
+    private ArrayList<Task> alist;
+    final char TICK = '\u2713';
 
     Storage(String filepath) {
         this.filepath = filepath;
@@ -25,15 +27,16 @@ class Storage {
      * @throws DukeException If there is input output exception.
      */
     ArrayList<Task> load() throws DukeException {
-        ArrayList<Task> alist = new ArrayList<>();
+        alist = new ArrayList<>();
         String line;
         BufferedReader br;
+        String description;
+        String tags;
         try {
             br = new BufferedReader(new FileReader(filepath));
-            char tick = '\u2713';
             while ((line = br.readLine()) != null) {
-                String description = line.substring(7);
-                String tags = "";
+                description = line.substring(7);
+                tags = "";
                 if (description.contains("#")) {
                     String[] array = description.split("#", 2);
                     description = array[0];
@@ -42,36 +45,12 @@ class Storage {
                 char eventType = line.charAt(1);
                 char symbol = line.charAt(4);
                 if (eventType == 'T') {
-                    Todo todo = new Todo(description);
-                    if (!tags.isEmpty()) {
-                        loadTags(tags, todo);
-                    }
-                    if (symbol == tick) {
-                        todo.markDone();
-                    }
-                    alist.add(todo);
-                    assert todo != null : "Todo should have been loaded from hard disk";
+                    loadTodo(tags,symbol, description);
                 } else if (eventType == 'D') {
-                    Deadline deadline = new Deadline(description);
-                    if (!tags.isEmpty()) {
-                        loadTags(tags, deadline);
-                    }
-                    if (symbol == tick) {
-                        deadline.markDone();
-                    }
-                    alist.add(deadline);
-                    assert deadline != null : "Deadline should have been loaded from hard disk";
+                    loadDeadline(tags, symbol, description);
                 } else {
                     assert eventType == 'E' : "Event loaded from hard disk should be event type";
-                    Event event = new Event(description);
-                    if (!tags.isEmpty()) {
-                        loadTags(tags, event);
-                    }
-                    if (symbol == tick) {
-                        event.markDone();
-                    }
-                    alist.add(event);
-                    assert event != null : "Event should have been loaded from hard disk";
+                    loadEvent(tags, symbol, description);
                 }
             }
             br.close();
@@ -79,6 +58,39 @@ class Storage {
             throw new DukeException(ex.getMessage());
         }
         return alist;
+    }
+
+    private void loadTodo(String tags, char symbol, String description) {
+        Todo todo = new Todo(description);
+        if (!tags.isEmpty()) {
+            loadTags(tags, todo);
+        }
+        if (symbol == TICK) {
+            todo.markDone();
+        }
+        alist.add(todo);
+    }
+
+    private void loadDeadline(String tags, char symbol, String description) {
+        Deadline deadline = new Deadline(description);
+        if (!tags.isEmpty()) {
+            loadTags(tags, deadline);
+        }
+        if (symbol == TICK) {
+            deadline.markDone();
+        }
+        alist.add(deadline);
+    }
+
+    private void loadEvent(String tags, char symbol, String description) {
+        Event event = new Event(description);
+        if (!tags.isEmpty()) {
+            loadTags(tags, event);
+        }
+        if (symbol == TICK) {
+            event.markDone();
+        }
+        alist.add(event);
     }
 
     private void loadTags(String tags, Task task) {
@@ -96,7 +108,6 @@ class Storage {
      * @throws DukeException  If there is input output exception.
      */
     void writeToHardDisk(TaskList tasks) throws DukeException {
-
         try {
             FileWriter fileWriter = new FileWriter(filepath);
             for (Task t: tasks.taskList) {

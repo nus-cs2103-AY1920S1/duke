@@ -51,7 +51,6 @@ public class Duke extends Application {
      * the user. isExit boolean ensures that the while loop doesn't end until the user input of
      * "bye" is encountered. User's input will be read through the ui and then parsed to give
      * a Command object. The specific command will then be executed.
-     * <p>
      * This method has try and catch blocks within to help with catching both DukeException
      * and ParseException
      *

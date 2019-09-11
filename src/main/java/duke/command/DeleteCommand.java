@@ -5,6 +5,8 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Represents a delete command.
  * To remove task from task list, perform Ui task and save updated list to hard disk.
@@ -34,7 +36,11 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         Task t = list.deleteTask(taskNumberToDelete - 1);
-        storage.save(list.printList());
+        try{
+            storage.save(list.printList());
+        } catch(IOException o){
+            return ui.getSavingError();
+        }
         return ui.getDeletedTask(t, list.getTaskCount());
     }
 

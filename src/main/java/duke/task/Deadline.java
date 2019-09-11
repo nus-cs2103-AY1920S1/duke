@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class Deadline extends Task {
     private Date givenTime;
-    private SimpleDateFormat df;
+    private SimpleDateFormat dateFormatting;
 
     /**
      * Constructor to create Deadline task object.
@@ -26,27 +26,8 @@ public class Deadline extends Task {
         super(taskType, taskDescription, isDone);
 
         try {
-            df = new SimpleDateFormat("dd/mm/yyyy Hm");
-            this.givenTime = df.parse(givenTime, new ParsePosition(0));
-
-        } catch (NullPointerException n) {
-            throw new NullPointerException();
-        }
-    }
-
-    /**
-     * Constructor to create deadline task object.
-     *
-     * @param taskDescription String input of command from user.
-     * @param isDone          Boolean indicating if task is completed.
-     * @param givenTime       String of given time of deadline.
-     */
-    public Deadline(String taskDescription, boolean isDone, String givenTime) {
-        super(taskDescription, isDone);
-
-        try {
-            df = new SimpleDateFormat("dd/mm/yyyy Hm");
-            this.givenTime = df.parse(givenTime, new ParsePosition(0));
+            dateFormatting = new SimpleDateFormat("dd/mm/yyyy Hm");
+            this.givenTime = dateFormatting.parse(givenTime, new ParsePosition(0));
 
         } catch (NullPointerException n) {
             throw new NullPointerException();
@@ -61,24 +42,17 @@ public class Deadline extends Task {
      */
     @Override
     public String printTask() {
-        return "[" + getFirstCharTask()
-               + "][" + getIcon() + "] " + getTaskDescription() + " (by: " + getGivenTime() + ")";
-    }
-
-    /**
-     * Set time for given deadline.
-     *
-     * @param time String representation of time.
-     * @throws ParseException If format of time in string does not match specified format.
-     */
-    public void setGivenTime(String time) throws ParseException {
-        this.givenTime = df.parse(time);
+        StringBuilder taskInformation = new StringBuilder();
+        taskInformation.append("[").append(getFirstCharTask()).append("]");
+        taskInformation.append("[").append(getIcon()).append("] ");
+        taskInformation.append(getTaskDescription()).append(" (by: ").append(getGivenTime()).append(")");
+        return taskInformation.toString();
     }
 
     /**
      * Get time for given deadline.
      */
     public String getGivenTime() {
-        return df.format(givenTime);
+        return dateFormatting.format(givenTime);
     }
 }

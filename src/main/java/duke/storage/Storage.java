@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
-
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Represents a storage function of duke.
@@ -17,11 +17,13 @@ import duke.task.Task;
  */
 public class Storage {
     private String targetFilePath;
-    private String printFilePath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\print.txt";
+    private String printFilePath;
 
     public Storage(String filePath) {
         // Convert string filePath to actual filepath and store in FilePath class
         targetFilePath = filePath;
+
+        printFilePath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\print.txt";
     }
 
     /**
@@ -32,11 +34,11 @@ public class Storage {
      * @throws IncorrectFileFormatException If file format is incorrect.
      * @throws FileNotFoundException        if file is not found.
      */
-    public ArrayList<Task> load() throws IncorrectFileFormatException, FileNotFoundException {
+    public ArrayList<Task> load(Ui ui) throws IncorrectFileFormatException, FileNotFoundException {
         File f;
         f = new File(targetFilePath);
 
-        Scanner s = new Scanner(f, "Unicode");
+        Scanner s = new Scanner(f);
         ArrayList<String> listInput = new ArrayList<>();
 
         while (s.hasNextLine()) {
@@ -47,10 +49,10 @@ public class Storage {
         ArrayList<Task> listTask = new ArrayList<>();
         for (int i = 0; i < listInput.size(); i++) {
             try {
-                listTask.add(Parser.parseFromFile(listInput.get(i)));
+                listTask.add(Parser.parseFromFile(listInput.get(i), ui));
 
             } catch (IncorrectFileFormatException f1) {
-                throw new IncorrectFileFormatException();
+                throw new IncorrectFileFormatException(ui.getLoadingError());
 
             } catch (NullPointerException n) {
                 throw new NullPointerException();
@@ -64,7 +66,7 @@ public class Storage {
      *
      * @param l List containing all string format tasks to save.
      */
-    public void save(ArrayList<String> l) {
+    public void save(ArrayList<String> l) throws IOException {
         try {
             FileWriter fw = new FileWriter(printFilePath);
             for (int i = 0; i < l.size(); i++) {
@@ -72,7 +74,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            throw e;
         }
     }
 }

@@ -10,11 +10,6 @@ import java.util.Scanner;
  * Contains functions to interact with user.
  */
 public class Ui {
-    private Scanner sc;
-
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
 
     public String getWelcome() {
         return "Hello! I'm Duke, what can I do for you?";
@@ -24,22 +19,6 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
-    /**
-     * Display loading error message.
-     */
-    public void showLoadingError() {
-        System.out.println("Error in loading tasks into Duke.");
-    }
-
-    /**
-     * Read user input from system input.
-     *
-     * @return String User input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
     public String getAddedTask(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
         char icon;
         if (isDone) {
@@ -47,45 +26,39 @@ public class Ui {
         } else {
             icon = 'X';
         }
-        return "Got it. I've added this task: \n" + "\t[" + firstAlphabet + "][" + icon + "] " + taskDescription +
-               "\nNow you " + "have " + numberOfItems + " in the list.";
+
+        StringBuilder addedTaskMessage = new StringBuilder("Got it. I've added this task: \n");
+        addedTaskMessage.append("\t[").append(firstAlphabet).append("][").append(icon).append("] ").append(taskDescription).append("\n");
+        addedTaskMessage.append("Now you have ").append(numberOfItems).append(" in the list.\n");
+        return addedTaskMessage.toString();
     }
 
     public String getList(ArrayList<String> listToPrint) {
-        String result = "Here are the tasks in your list:";
+        StringBuilder listOfTasksToPrint = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < listToPrint.size(); i++) {
-            result = result + "\n" + (i + 1) + "." + listToPrint.get(i);
+            listOfTasksToPrint.append(i + 1).append(".").append(listToPrint.get(i)).append("\n");
         }
-        return result;
+        return listOfTasksToPrint.toString();
     }
 
     public String getDeletedTask(Task t, int taskCount) {
-        return "Noted. I've removed this task:" + t.printTask() + "Now you have " + taskCount + " tasks in the list.";
+        StringBuilder deletedTaskMessage = new StringBuilder("Noted. I've removed this task:\n");
+        deletedTaskMessage.append(t.printTask()).append("\n");
+        deletedTaskMessage.append("Now you have ").append(taskCount).append(" tasks in the list.");
+        return deletedTaskMessage.toString();
     }
 
     public String getDoneTask(Task t) {
-        return "Nice! I've marked this task as done:" + t.printTask();
+        StringBuilder doneTaskMessage = new StringBuilder("Nice! I've marked this task as done:\n");
+        doneTaskMessage.append(t.printTask());
+        return doneTaskMessage.toString();
     }
 
     /**
-     * Display index error message.
+     * Display error message.
      */
-    public void showIndexError() {
-        System.out.println("Invalid task number. Please check again.");
-    }
-
-    /**
-     * Display input error message.
-     */
-    public void showInputError() {
-        System.out.println("Error! Please check input again");
-    }
-
-    /**
-     * Display command not found message.
-     */
-    public void showCommandNotFoundError() {
-        System.out.println("Command not found. Please check command again.");
+    public String getIndexError() {
+        return "Invalid file or tasks. Please check again.";
     }
 
     public String getMatchingTaskList(ArrayList<String> listFound) {
@@ -93,11 +66,18 @@ public class Ui {
             return "No matching result from your list.";
         }
 
-        String result;
-        result = "Here are the matching tasks in your list:";
+        StringBuilder matchingTaskResult = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < listFound.size(); i++) {
-            result = result + (i + 1) + "." + listFound.get(i);
+            matchingTaskResult.append(i + 1).append(".").append(listFound.get(i)).append("\n");
         }
-        return result;
+        return matchingTaskResult.toString();
+    }
+
+    public String getLoadingError(){
+        return "Error in Loading files\n";
+    }
+
+    public String getSavingError() {
+        return "Error in saving to disk.";
     }
 }

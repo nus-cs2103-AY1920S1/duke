@@ -1,17 +1,19 @@
+package duke;
+
 /**
  * Encapsulates a Todo object that inherits from Task class and
  * stores task name and status.
  */
 
-public class Todo extends Task {
+class Todo extends Task {
 
     /**
      * The constructor is inherited from Task class.
      * @param taskName String of task name.
-     * @param done true if the task is done, or false otherwise.
+     * @param isDone true if the task is done, or false otherwise.
      */
-    public Todo(String taskName, boolean done) {
-        super(taskName, done);
+    public Todo(String taskName, boolean isDone) {
+        super(taskName, isDone);
     }
 
     @Override
@@ -20,7 +22,7 @@ public class Todo extends Task {
      * @returna String showing the status and the task name of a Todo object.
      */
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[T][✓]" + taskName;
         } else {
             return "[T][✗]" + taskName;
@@ -32,7 +34,7 @@ public class Todo extends Task {
      * @return String of representation of the task that is to be recorded in the file.
      */
     public String storageFormat() {
-        if (done) {
+        if (isDone) {
             return "T/✓/" + taskName;
         } else {
             return "T/✗/" + taskName;

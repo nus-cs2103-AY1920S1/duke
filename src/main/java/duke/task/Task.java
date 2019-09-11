@@ -67,7 +67,10 @@ public class Task {
      * @return char icon.
      */
     public char getIcon() {
-        return isDone ? 'Y' : 'X';
+        if(isDone){
+            return 'Y';
+        }
+        return 'N';
     }
 
     /**

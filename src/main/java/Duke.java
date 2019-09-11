@@ -44,6 +44,9 @@ public class Duke {
         new Duke("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt").run();
     }
 
+    /**
+     * Kick-starts the Duke application.
+     */
     private void run() {
         ui.greet();
 

@@ -4,12 +4,8 @@ import command.*;
 import exception.DukeException;
 import exception.EmptyDescriptionException;
 import exception.WrongDateFormatException;
-import task.Task;
-import task.TaskList;
 import task.TaskType;
 
-import java.security.spec.RSAOtherPrimeInfo;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -62,7 +58,6 @@ public class Parser {
                     throw new EmptyDescriptionException("The description of a todo cannot be empty.");
                 }
                 command = new AddCommand(TaskType.TODO, messageTodo);
-
             } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The description of a todo cannot be empty.");
@@ -81,7 +76,6 @@ public class Parser {
                 }
                 Calendar deadlineCalendar = convertStringToCalendar(deadlineMessageAndTime[1]);
                 command = new AddCommand(TaskType.DEADLINE, messageDeadline, deadlineCalendar);
-
             } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -108,8 +102,6 @@ public class Parser {
                 }
                 Calendar eventCalendar = convertStringToCalendar(eventMessageAndTime[1]);
                 command = new AddCommand(TaskType.EVENT, messageEvent, eventCalendar);
-
-
             } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The description of an event cannot be empty.");
@@ -128,7 +120,6 @@ public class Parser {
             try {
                 int index = Integer.parseInt(userInput.split("\\s")[1]);
                 command = new DeleteCommand(index);
-
             } catch (IndexOutOfBoundsException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The task you want to delete doesn't exist.");
@@ -141,9 +132,7 @@ public class Parser {
                 if (textToFind.trim().length() == 0) {
                     throw new EmptyDescriptionException("The description cannot be empty.");
                 }
-
                 command = new FindCommand(textToFind);
-
             } catch (ArrayIndexOutOfBoundsException | EmptyDescriptionException e) {
                 ui.showLine();
                 ui.println("     ☹ OOPS!!! The description cannot be empty.");

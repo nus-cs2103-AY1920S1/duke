@@ -54,6 +54,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox for the user.
+     *
+     * @param text Text to be put into the dialog box.
+     * @param img Image to represent the user.
+     * @return DialogBox for the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.setBackground(new Background(new BackgroundFill(
@@ -61,6 +68,13 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Returns a DialogBox for the Duke avatar.
+     *
+     * @param text Text to be put into the dialog box.
+     * @param img Image to represent Duke.
+     * @return DialogBox for Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

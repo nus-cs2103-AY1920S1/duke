@@ -48,8 +48,8 @@ public class MainWindow extends AnchorPane {
             String input = this.userInput.getText();
             String response = this.duke.getResponse(input);
             this.dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, this.userImage),
-                    DialogBox.getDukeDialog(response, this.dukeImage)
+                    new UserDialogBox(input, this.userImage),
+                    new DukeDialogBox(response, this.dukeImage)
             );
             this.userInput.clear();
         } catch (DukeException e) {
@@ -66,7 +66,7 @@ public class MainWindow extends AnchorPane {
      */
     private void handleError(String errorMsg) {
         this.dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(errorMsg, this.dukeImage));
+                new DukeDialogBox(errorMsg, this.dukeImage));
         this.userInput.clear();
     }
 }

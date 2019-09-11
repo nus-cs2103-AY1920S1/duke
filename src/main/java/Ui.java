@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 
 /**
  * A Class to handle UI.
@@ -25,7 +26,7 @@ public class Ui {
         this.inStream = inStream;
         this.in = new BufferedReader(new InputStreamReader(inStream));
         this.outStream = outStream;
-        this.out = new PrintWriter(outStream);
+        this.out = new PrintWriter(outStream, false, Charset.forName("UTF-16LE"));
     }
 
     /**

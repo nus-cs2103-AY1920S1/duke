@@ -1,3 +1,16 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,9 +20,9 @@ import java.util.NoSuchElementException;
 /**
  * Represents a duke chatbot
  */
-public class Duke implements Serializable {
+public class Duke extends Application implements Serializable {
     // constants
-    private static final String PRINT_INDENT = "    ";
+    private static final String PRINT_INDENT = "";
     private static final String PRINT_HORIZONTAL_LINE = "____________________________________________________________";
 
     // main loop behavior constants
@@ -18,13 +31,30 @@ public class Duke implements Serializable {
 
     // class members
     // data members
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Ui ui;
     private TaskList<Task> todoList;
     private Storage storage;
     private Parser parser;
 
+    // jfx components
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
     public static void main(String[] args) {
-        new Duke(System.in, System.out, "data/duke.txt").run();
+        // new Duke(System.in, System.out, "data/duke.txt").run();
+        Application.launch(Duke.class, args);
+    }
+
+    public Duke() {
+        this.ui = Ui.newUi(new DukeInputStream(), new DukeOutputStream());
+
+        this.todoList = new TaskList();
+        this.storage = Storage.newStorage("data/duke.txt");
     }
 
     /**
@@ -67,9 +97,7 @@ public class Duke implements Serializable {
      */
     // prints out bye message to out stream
     private void bye() throws IOException {
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.write(String.format("%s Bye. Hope to see you again soon!\n", PRINT_INDENT));
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
     }
 
@@ -88,6 +116,11 @@ public class Duke implements Serializable {
         } while (code == STATE_CONTINUE);
     }
 
+    int processInput() throws IOException {
+        String command = ui.readLine();
+        return processInput(command);
+    }
+
     /**
      * Main loop logic
      * @return CONTINUE if continue main loop, EXIT if exiting main loop
@@ -96,8 +129,7 @@ public class Duke implements Serializable {
     // main logic
     // returns EXIT if signalling to exit main loop
     // returns CONTINUE if to continue with loop
-    private int processInput() throws IOException {
-        String command = ui.readLine();
+    int processInput(String command) throws IOException {
         if (command == null) {
             // EOF
             return STATE_EXIT;
@@ -128,9 +160,7 @@ public class Duke implements Serializable {
                 throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException e) {
-            ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
             ui.write(String.format("%s %s\n", PRINT_INDENT, e.getMessage()));
-            ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
             ui.flush();
         }
         return STATE_CONTINUE;
@@ -165,11 +195,9 @@ public class Duke implements Serializable {
         Task removedTask;
         try {
             removedTask = todoList.remove(thingToDo - 1);
-            ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
             ui.write(String.format("%s Noted. I've removed this task: \n", PRINT_INDENT));
             ui.write(String.format("%s   %s\n", PRINT_INDENT, removedTask));
             ui.write(String.format("%s  Now you have %d tasks in the list.\n", PRINT_INDENT, todoList.size()));
-            ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
             ui.flush();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(String.format("\u2639 OOPS!!! There is no task %d.", thingToDo));
@@ -200,10 +228,8 @@ public class Duke implements Serializable {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(String.format("\u2639 OOPS!!! There is no task %d.", thingToDo));
         }
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.write(String.format("%s Nice! I've marked this task as done: \n", PRINT_INDENT));
         ui.write(String.format("%s   %s\n", PRINT_INDENT, todoList.get(thingToDo - 1)));
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
         storage.save(todoList);
     }
@@ -221,7 +247,6 @@ public class Duke implements Serializable {
     }
 
     private void printList(TaskList<Task> tl) throws IOException {
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         int counter = 1;
         for (Task item : todoList) {
             ui.write(String.format("%s %d.%s\n", PRINT_INDENT, counter++, item));
@@ -229,7 +254,6 @@ public class Duke implements Serializable {
         if (counter == 1) {
             ui.write(String.format("%s Such empty, much wow\n", PRINT_INDENT));
         }
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
     }
 
@@ -267,11 +291,9 @@ public class Duke implements Serializable {
             }
             break;
         }
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.write(String.format("%s Got it. I've added this task: \n", PRINT_INDENT));
         ui.write(String.format("%s   %s\n", PRINT_INDENT, todoList.get(todoList.size() - 1)));
         ui.write(String.format("%s  Now you have %d tasks in the list.\n", PRINT_INDENT, todoList.size()));
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
         storage.save(todoList);
     }
@@ -282,9 +304,7 @@ public class Duke implements Serializable {
      * @throws IOException if stream fed to Duke is not valid
      */
     private void echo(String command) throws IOException {
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.write(String.format("%s%s\n", PRINT_INDENT, command));
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
     }
 
@@ -293,14 +313,171 @@ public class Duke implements Serializable {
      * @throws IOException if stream fed to Duke is not valid
      */
     private void greet() throws IOException {
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.write(String.format("%s Hello! I'm Duke\n", PRINT_INDENT));
         ui.write(String.format("%s What can I do for you?\n", PRINT_INDENT));
-        ui.write(String.format("%s%s\n", PRINT_INDENT, PRINT_HORIZONTAL_LINE));
         ui.flush();
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    private void handleUserInput() {
+        createLabelAndAdd(userInput.getText(), true, false);
+        // createLabelAndAdd(getResponse(userInput.getText()), false, true);
+        try {
+            if(processInput(userInput.getText()) == STATE_EXIT){
+                bye();
+                stop();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        userInput.clear();
+    }
+
+    private void createLabelAndAdd(String text, boolean isUser, boolean isDuke){
+        Label textbox = new Label(text);
+        if(isUser){
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(textbox, new ImageView(user))
+            );
+        }
+        if(isDuke){
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(textbox, new ImageView(duke))
+            );
+        }
+    }
+
+    private String getResponse(String input) {
+        return input;
+    }
+
+    class DukeInputStream extends InputStream{
+        int i = 0;
+
+        @Override
+        public int read() throws IOException {
+            return userInput.getText().charAt(i++);
+        }
+
+        @Override
+        public int available() throws IOException {
+            return userInput.getText().length();
+        }
+
+        @Override
+        public int read(byte[] b, int off, int len) throws IOException {
+            int counter = 0;
+            try{
+                int boron;
+                for(;;){
+                    boron = read();
+                    b[off + counter++] = (byte) boron;
+                }
+            } catch (Exception e){
+
+            }
+            return counter;
+        }
+    }
+
+    class DukeOutputStream extends OutputStream {
+        String print = "";
+        boolean prevValid = false;
+        int prev = 0;
+
+        @Override
+        public void write(int i) throws IOException {
+            if(prevValid){
+                print += (char) ((i << 8) | (prev & 0xff));
+            } else {
+                prev = i;
+            }
+            prevValid = !prevValid;
+        }
+
+        @Override
+        public void write(byte[] b) throws IOException {
+            print.concat(new String(b, "UTF-16LE"));
+        }
+
+        @Override
+        public void flush(){
+            createLabelAndAdd(print, false, true);
+            print = "";
+        }
+    }
 }
+
 
 class DukeException extends Exception {
     DukeException(String error) {

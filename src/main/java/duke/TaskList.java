@@ -7,6 +7,7 @@ import duke.tasks.Task;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
+import duke.tasks.DoAfter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -117,6 +118,24 @@ public class TaskList {
                 throw new InvalidDescriptionException("event");
             }
         } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
+    
+    public String addDoAfter(String input) {
+        try {
+            int index = input.indexOf("doAfter");
+            if ((input.substring(0, index).isEmpty()) || (input.substring(index + 7).isBlank())) {
+                throw new InvalidDescriptionException("addAfter");
+            } else {
+                String doAfterTask = input.substring(index + 8);
+                String before = input.substring(0, index);
+                DoAfter doAfter = new DoAfter(before, doAfterTask);
+                tasks.add(doAfter);
+                String result = responseOut(doAfter);
+                return result;
+            }
+        } catch (DukeException e) {
             return e.getMessage();
         }
     }

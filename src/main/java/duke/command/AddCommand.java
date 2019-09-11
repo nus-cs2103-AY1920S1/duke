@@ -41,6 +41,9 @@ public class AddCommand extends Command {
             } else if (command.startsWith("event")) {
                 storage.storeEvent(command);
                 return tasks.addEvent(command);
+            } else if (command.contains("doAfter")) {
+                storage.storeEvent(command);
+                return tasks.addDoAfter(command);
             } else {
                 throw new InvalidInputException();
             }

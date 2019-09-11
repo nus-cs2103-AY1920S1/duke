@@ -52,28 +52,42 @@ public class Parser {
 
     private Command parseDeadline(String input) throws DukeException {
         String[] taskDetails = getDetails(input).split("/by");
-        String description = taskDetails[0].trim();
-        String by = taskDetails[1].trim();
-        if (description.isBlank()) {
-            throw new DukeException("The task description cannot be empty.");
-        } else if (by.isBlank()) {
-            throw new DukeException("The task deadline cannot be empty.");
+        try {
+            String description = taskDetails[0].trim();
+            String by = taskDetails[1].trim();
+            if (description.isBlank()) {
+                throw new DukeException("The task description cannot be empty.");
+            } else if (by.isBlank()) {
+                throw new DukeException("The task deadline cannot be empty.");
+            }
+            return new DeadlineCommand(description, by);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The task description and deadline cannot be empty.");
         }
-        return new DeadlineCommand(description, by);
     }
 
     private Command parseEvent(String input) throws DukeException {
         String[] taskDetails = getDetails(input).split("/at");
-        String description = taskDetails[0].trim();
-        String at = taskDetails[1].trim();
-        if (description.isBlank()) {
-            throw new DukeException("The task description cannot be empty.");
-        } else if (at.isBlank()) {
-            throw new DukeException("The task date/time cannot be empty.");
+        try {
+            String description = taskDetails[0].trim();
+            String at = taskDetails[1].trim();
+            if (description.isBlank()) {
+                throw new DukeException("The task description cannot be empty.");
+            } else if (at.isBlank()) {
+                throw new DukeException("The task date/time cannot be empty.");
+            }
+            return new EventCommand(description, at);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The task description and deadline cannot be empty.");
         }
-        return new EventCommand(description, at);
     }
 
+    /**
+     * Translate the input into commands.
+     * @param input the text users type in
+     * @return the command of the user
+     * @throws DukeException if error occurs when parsing input
+     */
     public Command parse(String input) throws DukeException {
         String command = this.getCommand(input);
         switch (command) {

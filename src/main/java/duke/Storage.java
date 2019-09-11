@@ -12,6 +12,11 @@ import duke.tasks.TaskList;
 public class Storage {
     private static final String filePath = "data/duke.txt";
 
+    /**
+     * Retrieve data from the storage file.
+     * @return the task list stored in data file
+     * @throws DukeException if errors occur when loading data
+     */
     public TaskList loadData() throws DukeException {
         try {
             FileInputStream file = new FileInputStream(filePath);
@@ -33,6 +38,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Store data into the storage file.
+     * @param tasks the task list of the project
+     * @throws DukeException if errors occur when saving data
+     */
     public void saveData(TaskList tasks) throws DukeException {
         try {
             FileOutputStream file = new FileOutputStream(filePath);

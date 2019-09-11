@@ -9,6 +9,9 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Create an instance of Duke.
+     */
     public Duke() {
         parser = new Parser();
         storage = new Storage();
@@ -22,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Start executing the duke project.
+     */
     public void run() {
         ui.showGreeting();
         boolean isExit = false;

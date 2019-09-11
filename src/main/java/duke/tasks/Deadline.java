@@ -9,6 +9,12 @@ public class Deadline extends Task {
 
     protected Date by;
 
+    /**
+     * Create a deadline task instance.
+     * @param description information about the deadline task
+     * @param by the deadline in string format
+     * @throws DukeException if errors occur in parsing the deadline
+     */
     public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
@@ -18,6 +24,10 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Generate the text representation of the deadline task in display format.
+     * @return the representation of the deadline task in display format.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dateTimeFormatter.format(by) + ")";

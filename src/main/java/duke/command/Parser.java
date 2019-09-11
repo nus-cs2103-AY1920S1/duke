@@ -114,6 +114,7 @@ public class Parser {
     private String commandTodo(Storage storage) throws IllegalDukeArgumentException {
         try {
             String descriptionT = splitCommand[1];
+            assert descriptionT.length() > 0: "invalid description";
             Task todo = new Todo(descriptionT);
             TaskList.getList().add(todo);
             storage.textWrite(todo.toString(), true);
@@ -134,6 +135,7 @@ public class Parser {
         try {
             String[] fullCommand = splitCommand[1].split(" /by ");
             String deadlineTime = fullCommand[1];
+            assert deadlineTime.length() > 0: "invalid time";
             Task deadline = new Deadline(fullCommand[0], deadlineTime);
             TaskList.getList().add(deadline);
             storage.textWrite(deadline.toString(), true);
@@ -156,6 +158,7 @@ public class Parser {
         try {
             String[] fullCommand = splitCommand[1].split(" /at ");
             String eventTime = fullCommand[1];
+            assert eventTime.length() > 0: "invalid time";
             Task event = new Event(fullCommand[0], eventTime);
             TaskList.getList().add(event);
             storage.textWrite(event.toString(), true);
@@ -209,7 +212,8 @@ public class Parser {
                 int index = i + 1;
                 list += "  " + index + "." + targetList.get(i).toString() +"\n";
             }
-            return list;
+            assert list.length() > 0: "empty list";
+            return reply + list;
         } else {
             return "OOPS! No such key word detected." + "\n";
         }

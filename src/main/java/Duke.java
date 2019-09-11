@@ -130,6 +130,7 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText.getText(), new ImageView(duke).getImage())
         );
         userInput.clear();
+        assert userInput.getText().isEmpty() : "user input should be reset";
     }
 
     /**

@@ -118,6 +118,7 @@ public class Parser {
 		} else if (input.startsWith("todo")) {
 			try {
 				Todo toDoTask = Todo.createToDo(input);
+				tasks.addTask(toDoTask);
 				counter = tasks.getCounter();
 				storedText.append(Ui.BORDER + "\nGot it. I've added this task:\n");
 				storedText.append(toDoTask.toString() + "\n");

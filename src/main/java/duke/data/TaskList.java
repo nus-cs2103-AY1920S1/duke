@@ -4,6 +4,8 @@ import duke.data.tasks.Task;
 
 import java.util.ArrayList;
 
+import java.util.stream.Stream;
+
 /**
  * Implements a list for storing tasks.
  * @author Lim Yong Shen, Kevin
@@ -68,12 +70,9 @@ public class TaskList {
      */
     public TaskList subTaskListContainingKeyWord(String keyword) {
         TaskList subTaskList = new TaskList();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if (task.getDescription().contains(keyword)) {
-                subTaskList.add(task);
-            }
-        }
+        Stream<Task> allTasks = tasks.stream();
+        allTasks.filter(task -> task.getDescription().contains(keyword))
+                .forEach(task -> subTaskList.add(task));
         return subTaskList;
     }
 

@@ -38,18 +38,27 @@ class Ui {
     }
 
     /**
+     * Outputs a list of lines.
+     *
+     * @param messages List of lines.
+     */
+    private void printMessage(String... messages) {
+        printMessage(List.of(messages));
+    }
+
+    /**
      * Shows an error message.
      *
      * @param message Error message.
      */
     void showError(String message) {
-        printMessage(List.of(message));
+        printMessage(message);
     }
 
     /**
      * Outputs a welcome message.
      */
     void showWelcome() {
-        printMessage(List.of("Hello! I'm Duke", "What can I do for you?"));
+        printMessage("Hello! I'm Duke", "What can I do for you?");
     }
 }

@@ -9,14 +9,16 @@ import java.util.ArrayList;
 
 /**
  * Represents a command which finds the Tasks in the Tasklist which contains the same use input String.
+ *
  * @see TaskList
  * @see Task
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String KeywordToFind;
 
     /**
      * Constructor for duke.command.FindCommand
+     *
      * @param commandSplitBySpaces String representation of the user input
      */
     public FindCommand(String[] commandSplitBySpaces) {
@@ -26,6 +28,7 @@ public class FindCommand extends Command{
 
     /**
      * Executes the command by using the three arguments provided
+     *
      * @param taskList
      * @param ui
      * @param storage

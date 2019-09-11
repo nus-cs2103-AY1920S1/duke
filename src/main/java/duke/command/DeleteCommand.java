@@ -11,6 +11,7 @@ import java.util.InputMismatchException;
 
 /**
  * Represents a command which deletes duke.task.Task specified in an index in the Tasklist.
+ *
  * @see TaskList
  * @see Task
  */
@@ -18,6 +19,7 @@ import java.util.InputMismatchException;
 public class DeleteCommand extends Command {
     /**
      * Constructor for duke.command.DeleteCommand.
+     *
      * @param commandSplitBySpaces
      */
     public DeleteCommand(String[] commandSplitBySpaces) {
@@ -26,6 +28,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the command by using the three arguments provided.
+     *
      * @param taskList
      * @param ui
      * @param storage
@@ -39,7 +42,7 @@ public class DeleteCommand extends Command {
             Arrays.sort(numbers, Collections.reverseOrder());
             outputString = outputString + ui.printDeletedMessage();
 
-            for(Integer number : numbers) {
+            for (Integer number : numbers) {
                 outputString = outputString + ui.printTask(taskList.getTasks().get(number - 1));
                 taskList.delete(number - 1);
             }
@@ -57,7 +60,7 @@ public class DeleteCommand extends Command {
 
     public Integer[] convertToInteger(String[] stringArr) {
         Integer[] index = new Integer[stringArr.length];
-        for(int i = 0; i<stringArr.length; i++) {
+        for (int i = 0; i < stringArr.length; i++) {
             index[i] = Integer.parseInt(stringArr[i]);
         }
         return index;

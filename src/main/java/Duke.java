@@ -29,6 +29,7 @@ public class Duke {
     /**
      * Default constructor.
      * Initialises the duke bot and if data file is not found, creates a new file
+     *
      * @param filePath String representation of where the data file is stored
      */
     public Duke(String filePath) {
@@ -45,6 +46,7 @@ public class Duke {
 
     /**
      * Returns the String representation of the output.
+     *
      * @param input user input
      * @return output from Duke
      */
@@ -52,15 +54,14 @@ public class Duke {
         String output = "";
         //boolean isTestForAssertion = true;
         //assert isTestForAssertion = false;
-            try {
-                Command command = new Parser().parse(input);
-                assert command != null;
-                output = command.execute(taskList, ui, storage);
-            } catch (InputMismatchException | IllegalArgumentException |
-                    IndexOutOfBoundsException | DateTimeException e) {
-                output = ui.printErrorMessage(e.getMessage());
-            }
-
+        try {
+            Command command = new Parser().parse(input);
+            assert command != null;
+            output = command.execute(taskList, ui, storage);
+        } catch (InputMismatchException | IllegalArgumentException
+                | IndexOutOfBoundsException | DateTimeException e) {
+            output = ui.printErrorMessage(e.getMessage());
+        }
         return output;
     }
 

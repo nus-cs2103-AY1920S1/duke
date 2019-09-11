@@ -5,7 +5,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +21,7 @@ public class Storage {
 
     /**
      * Constructor for storage that reads and writes to data file.
+     *
      * @param filePath where the data file is stored
      */
     public Storage(String filePath) {
@@ -25,16 +30,17 @@ public class Storage {
 
     /**
      * Reads data from filepath and creates an arraylist of duke.task.Task.
+     *
      * @return an arraylist of duke.task.Task from read data
      * @throws IOException file is not found
      */
-    public ArrayList<Task> load() throws IOException{
+    public ArrayList<Task> load() throws IOException {
         try {
             File file = new File(filePath);
             BufferedReader in = new BufferedReader(new FileReader(file));
             String line;
             while ((line = in.readLine()) != null) {
-                String regex = " " +  "\\|"  + " ";
+                String regex = " " + "\\|" + " ";
                 String[] data = line.split(regex);
                 Task t;
                 if (data[0].equals("T")) {
@@ -50,12 +56,12 @@ public class Storage {
         } finally {
             System.out.println("Attempting to load from: " + filePath);
             return tasks;
-
         }
     }
 
     /**
      * Converts number into boolean. 1 for true and 0 for false.
+     *
      * @param number number to be determined
      * @return true or false
      */

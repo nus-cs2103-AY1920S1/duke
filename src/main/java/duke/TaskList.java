@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 /**
  * Represents a task list that would be populated by task objects.
+ *
  * @see Task
  */
 public class TaskList {
@@ -13,6 +14,7 @@ public class TaskList {
 
     /**
      * Constructor that takes in a Arraylist of tasks.
+     *
      * @param tasks Arraylist of tasks
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -21,6 +23,7 @@ public class TaskList {
 
     /**
      * Gets the list of tasks.
+     *
      * @return list of task
      */
     public ArrayList<Task> getTasks() {
@@ -29,6 +32,7 @@ public class TaskList {
 
     /**
      * Adds a task into list of task.
+     *
      * @param task task to be added
      */
     public void add(Task task) {
@@ -37,6 +41,7 @@ public class TaskList {
 
     /**
      * Sets task at number to be done in task list.
+     *
      * @param number number for task to be deleted
      */
     public void done(int number) {
@@ -46,6 +51,7 @@ public class TaskList {
 
     /**
      * Deletes duke.task.Task at number in task list.
+     *
      * @param number number for task to be deleted
      */
     public void delete(int number) {

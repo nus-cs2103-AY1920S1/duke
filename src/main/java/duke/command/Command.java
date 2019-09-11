@@ -7,6 +7,7 @@ import duke.Ui;
 
 /**
  * Represents a command which has specific uses.
+ *
  * @see TaskList
  * @see Task
  * @see AddCommand
@@ -23,6 +24,7 @@ public abstract class Command {
 
     /**
      * Constructor for all commands
+     *
      * @param commandSplitBySpaces String representation of the user input
      */
     Command(String[] commandSplitBySpaces) {
@@ -32,6 +34,7 @@ public abstract class Command {
     /**
      * Executes the command by using the three arguments provided and
      * Returns the String to be written.
+     *
      * @param taskList
      * @param ui
      * @param storage
@@ -40,6 +43,7 @@ public abstract class Command {
 
     /**
      * Checks if Duke will end.
+     *
      * @return false
      */
     public boolean isExit() {

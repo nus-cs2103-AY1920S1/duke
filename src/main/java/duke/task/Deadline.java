@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 /**
  * Represents a type of duke.task.Task object with a fixed time format.
+ *
  * @see Task
  */
 public class Deadline extends Task {
@@ -11,8 +12,9 @@ public class Deadline extends Task {
 
     /**
      * Constructor for duke.task.Deadline
+     *
      * @param description
-     * @param by time in the format of dd/MM/yyyy HHmm
+     * @param by          time in the format of dd/MM/yyyy HHmm
      */
     public Deadline(String description, String by) {
         super(description);
@@ -21,9 +23,10 @@ public class Deadline extends Task {
 
     /**
      * Another constructor for duke.task.Deadline
+     *
      * @param description
-     * @param by time in the format of dd/MM/yyyy HHmm
-     * @param isDone boolean value on whether it is done or not
+     * @param by          time in the format of dd/MM/yyyy HHmm
+     * @param isDone      boolean value on whether it is done or not
      */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
@@ -32,6 +35,7 @@ public class Deadline extends Task {
 
     /**
      * Gets the String representation of the deadline.
+     *
      * @return the String representation of the deadlnie
      */
     @Override

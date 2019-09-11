@@ -20,6 +20,7 @@ public class Ui {
 
     /**
      * Returns the number of tasks in the taskList.
+     *
      * @param taskList
      */
     public String printNumberOfTasks(TaskList taskList) {
@@ -29,6 +30,7 @@ public class Ui {
 
     /**
      * Returns the string representation of task t.
+     *
      * @param t duke.task.Task to be printed out
      */
     public String printTask(Task t) {
@@ -37,6 +39,7 @@ public class Ui {
 
     /**
      * Returns the String representation of all the tasks in taskList
+     *
      * @param taskList
      */
     public String printTaskList(TaskList taskList) {
@@ -44,7 +47,7 @@ public class Ui {
         int number = 1;
         String outputString = "";
         for (Task task : tasks) {
-             outputString = outputString + number + ". " + task.toString() + "\n";
+            outputString = outputString + number + ". " + task.toString() + "\n";
             number++;
         }
         return outputString + "\n";
@@ -112,7 +115,7 @@ public class Ui {
      */
     public String printFindMessage(ArrayList<Task> tasks) {
         String outputString = "";
-        outputString = "Here are the matching tasks in your list:\n" ;
+        outputString = "Here are the matching tasks in your list:\n";
         int count = 1;
         for (Task t : tasks) {
             String taskString = count + "." + t.toString() + "\n";

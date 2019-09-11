@@ -10,8 +10,10 @@ import duke.task.Todo;
 
 import java.time.DateTimeException;
 import java.util.InputMismatchException;
+
 /**
  * Represents a command which adds duke.task.Task to the Tasklist.
+ *
  * @see TaskList
  * @see Task
  */
@@ -49,25 +51,25 @@ public class AddCommand extends Command {
         Task addTask;
         String outputString = "";
         switch (type) {
-            case "todo":
-                String joinedString = String.join(" ", commandSplitBySpaces);
-                String details = joinedString.substring("todo".length()).trim();
-                addTask = new Todo(details);
-                break;
-            case "deadline":
-                if(commandSplitBySpaces.length == 1) {
-                    throw new InputMismatchException("You are either missing description or time");
-                }
-                addTask = new Deadline(commandSplitBySpaces[0], commandSplitBySpaces[1]);
-                break;
-            case "event":
-                if(commandSplitBySpaces.length == 1) {
-                    throw new InputMismatchException("You are either missing description or time");
-                }
-                addTask = new Event(commandSplitBySpaces[0], commandSplitBySpaces[1]);
-                break;
-            default:
-                throw new InputMismatchException("type not found");
+        case "todo":
+            String joinedString = String.join(" ", commandSplitBySpaces);
+            String details = joinedString.substring("todo".length()).trim();
+            addTask = new Todo(details);
+            break;
+        case "deadline":
+            if (commandSplitBySpaces.length == 1) {
+                throw new InputMismatchException("You are either missing description or time");
+            }
+            addTask = new Deadline(commandSplitBySpaces[0], commandSplitBySpaces[1]);
+            break;
+        case "event":
+            if (commandSplitBySpaces.length == 1) {
+                throw new InputMismatchException("You are either missing description or time");
+            }
+            addTask = new Event(commandSplitBySpaces[0], commandSplitBySpaces[1]);
+            break;
+        default:
+            throw new InputMismatchException("type not found");
         }
         outputString = outputString + ui.printAddedMessage();
         outputString = outputString + ui.printTask(addTask);

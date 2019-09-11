@@ -7,6 +7,7 @@ import duke.Ui;
 
 /**
  * Represents a command which lists out the Tasks in the Tasklist.
+ *
  * @see TaskList
  * @see Task
  */
@@ -14,6 +15,7 @@ import duke.Ui;
 public class ListCommand extends Command {
     /**
      * Constructor for duke.command.ListCommand
+     *
      * @param commandSplitBySpaces String representation of the user input
      */
     public ListCommand(String[] commandSplitBySpaces) {
@@ -22,6 +24,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes the command by using the three arguments provided
+     *
      * @param taskList
      * @param ui
      * @param storage

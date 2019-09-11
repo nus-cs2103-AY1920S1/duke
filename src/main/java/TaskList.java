@@ -1,3 +1,5 @@
+import Exception.DukeException;
+import Tasks.Task;
 
 import java.util.ArrayList;
 
@@ -6,7 +8,7 @@ public class TaskList {
 
     public TaskList() {}
 
-    public TaskList(ArrayList<Task> list) throws DukeException{
+    public TaskList(ArrayList<Task> list) throws DukeException {
         this.list = list;
     }
 

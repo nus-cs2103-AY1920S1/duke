@@ -1,4 +1,9 @@
 
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;

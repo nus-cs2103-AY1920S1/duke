@@ -1,9 +1,10 @@
+import Tasks.Task;
 
 public class Ui {
     public Ui() {}
 
     public void printHello() {
-        System.out.println("Hello! I'm Duke");
+        System.out.println("Hello! I'm your task manager!");
         System.out.println("What can I do for you?");
     }
 

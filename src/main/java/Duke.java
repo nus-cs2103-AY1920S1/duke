@@ -1,12 +1,14 @@
-
+import Exception.DukeException;
+import Tasks.Deadline;
+import Tasks.Event;
+import Tasks.Task;
+import Tasks.Todo;
 
 import java.util.Scanner;
 import java.util.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.ParseException;
 
 public class Duke {
     protected Storage storage;

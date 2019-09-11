@@ -83,7 +83,7 @@ public class UiList implements AddTaskListener, ByeCommandListener, DeleteTaskLi
           }
         }
       } catch (DukeException e) {
-        displayError(e.getMessage());
+        displayError(new Message("☹ OOPS!!! " + e.getMessage()));
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
@@ -93,22 +93,22 @@ public class UiList implements AddTaskListener, ByeCommandListener, DeleteTaskLi
   /**
    * Displays a nice message to the user.
    *
-   * @param lines use varargs for multiline messages.
+   * @param message message to display
    */
-  public void displayMessage(String... lines) {
+  public void displayMessage(Message message) {
     for (Ui ui : this.uis) {
-      ui.displayMessage(lines.clone());
+      ui.displayMessage(message);
     }
   }
 
   /**
    * Displays an error message to the user.
    *
-   * @param lines use varargs for multiline messages.
+   * @param message error message to display
    */
-  public void displayError(String... lines) {
+  public void displayError(Message message) {
     for (Ui ui : this.uis) {
-      ui.displayError(lines.clone());
+      ui.displayError(message);
     }
   }
 
@@ -124,7 +124,7 @@ public class UiList implements AddTaskListener, ByeCommandListener, DeleteTaskLi
     this.running = false;
 
     // Farewell user
-    displayMessage("Bye. Hope to see you again soon!");
+    displayMessage(new Message("Bye. Hope to see you again soon!"));
 
     for (Ui ui : this.uis) {
       ui.byeCommandUpdate();

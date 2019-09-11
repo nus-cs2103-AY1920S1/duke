@@ -1,8 +1,9 @@
 package weomucat.duke.task;
 
-import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import weomucat.duke.date.Date;
 import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.ui.Message;
 
 /**
  * A deadline is a special task that has a due date.
@@ -26,7 +27,7 @@ public class DeadlineTask extends Task {
     }
 
     if (by.equals("")) {
-      throw new InvalidParameterException("The date of a deadline cannot be empty.");
+      throw new InvalidParameterException("The due date of a deadline cannot be empty.");
     }
 
     // Parse 'by' into a ZonedDateTime object.
@@ -34,7 +35,17 @@ public class DeadlineTask extends Task {
   }
 
   @Override
+  public Message toMessage() {
+    ArrayList<String> out = new ArrayList<>();
+    out.add("===== BY =====");
+    out.add(this.by.toString());
+
+    return new Message(out.toArray(new String[0]))
+        .setTitle(this.toString());
+  }
+
+  @Override
   public String toString() {
-    return String.format("[D]%s (by: %s)", super.toString(), this.by);
+    return String.format("[D]%s", super.toString());
   }
 }

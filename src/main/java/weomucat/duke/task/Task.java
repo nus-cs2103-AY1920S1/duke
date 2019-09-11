@@ -1,6 +1,7 @@
 package weomucat.duke.task;
 
 import java.io.Serializable;
+import weomucat.duke.ui.Message;
 
 /**
  * A Task is something the user has to do. By default, a Task is not done.
@@ -38,6 +39,8 @@ public abstract class Task implements Serializable {
   public String getDescription() {
     return description;
   }
+
+  public abstract Message toMessage();
 
   @Override
   public String toString() {

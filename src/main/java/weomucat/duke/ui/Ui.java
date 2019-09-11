@@ -30,14 +30,14 @@ public interface Ui extends AddTaskListener, ByeCommandListener, DeleteTaskListe
   /**
    * Displays a nice message to the user.
    *
-   * @param lines use varargs for multiline messages.
+   * @param message message to display.
    */
-  void displayMessage(String... lines);
+  void displayMessage(Message message);
 
   /**
    * Displays an error message to the user.
    *
-   * @param lines use varargs for multiline messages.
+   * @param message error message to display.
    */
-  void displayError(String... lines);
+  void displayError(Message message);
 }

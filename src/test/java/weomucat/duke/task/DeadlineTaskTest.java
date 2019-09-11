@@ -2,27 +2,26 @@ package weomucat.duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static weomucat.duke.date.Date.DATETIME_PARSE_PATTERN;
+import static weomucat.duke.date.Date.DATE_PARSE_PATTERN;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Test;
+import weomucat.duke.date.Date;
 import weomucat.duke.exception.InvalidParameterException;
 
 public class DeadlineTaskTest {
 
   @Test
   public void descriptionShouldNotBeEmptyString() {
-    // TODO: Date.format()
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_PATTERN);
-    String by = LocalDateTime.now().format(dateTimeFormatter);
+    // Format current datetime to a pattern which the command can parse.
+    String by = Date.format(LocalDateTime.now(), DATE_PARSE_PATTERN);
 
     assertThrows(InvalidParameterException.class, () -> new DeadlineTask("", by),
         formatMessage("", by));
   }
 
   @Test
-  public void byShouldBeProperlyFormatted() {
+  public void byShouldNotBeEmptyString() {
     String[] descriptions = {"one", "one two", "one two three"};
 
     for (String description : descriptions) {
@@ -34,10 +33,11 @@ public class DeadlineTaskTest {
   @Test
   public void validUsage() {
     String[] descriptions = {"one", "one two", "one two three"};
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATETIME_PARSE_PATTERN);
 
     for (String description : descriptions) {
-      String by = LocalDateTime.now().format(dateTimeFormatter);
+      // Format current datetime to a pattern which the command can parse.
+      String by = Date.format(LocalDateTime.now(), DATE_PARSE_PATTERN);
+
       assertDoesNotThrow(() -> new DeadlineTask(description, by), formatMessage(description, by));
     }
   }

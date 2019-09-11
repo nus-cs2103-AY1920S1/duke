@@ -1,6 +1,7 @@
 package weomucat.duke.task;
 
 import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.ui.Message;
 
 /**
  * Todo is a special task that must have a description.
@@ -19,6 +20,12 @@ public class TodoTask extends Task {
     if (description.equals("")) {
       throw new InvalidParameterException("The description of a todo cannot be empty.");
     }
+  }
+
+  @Override
+  public Message toMessage() {
+    return new Message()
+        .setTitle(this.toString());
   }
 
   @Override

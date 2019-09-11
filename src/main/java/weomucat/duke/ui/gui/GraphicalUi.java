@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.task.Task;
 import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.ui.Message;
 import weomucat.duke.ui.Ui;
 import weomucat.duke.ui.listener.UserInputListener;
 
@@ -91,23 +92,21 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   }
 
   @Override
-  public void displayMessage(String... lines) {
-    String message = String.join("\n", lines);
+  public void displayMessage(Message message) {
     Platform.runLater(() -> this.root.addMessage(new DukeMessage(message)));
   }
 
   @Override
-  public void displayError(String... lines) {
-    lines[0] = "☹ OOPS!!! " + lines[0];
-    String message = String.join("\n", lines);
+  public void displayError(Message message) {
     Platform.runLater(() -> this.root.addMessage(new DukeErrorMessage(message)));
   }
 
   @Override
   public void addTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage("Got it. I've added this task:",
-        task.toString(),
-        String.format("Now you have %d task(s) in the list.", tasks.size()));
+    displayMessage(new Message("Got it. I've added this task:"));
+    displayMessage(task.toMessage());
+    displayMessage(new Message(
+        String.format("Now you have %d task(s) in the list.", tasks.size())));
   }
 
   @Override
@@ -123,46 +122,45 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
 
   @Override
   public void deleteTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage("Noted. I've removed this task:",
-        task.toString(),
-        String.format("Now you have %d task(s) in the list.", tasks.size()));
+    displayMessage(new Message("Noted. I've removed this task:"));
+    displayMessage(task.toMessage());
+    displayMessage(new Message(
+        String.format("Now you have %d task(s) in the list.", tasks.size())));
   }
 
   @Override
   public void doneTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage("Nice! I've marked this task as done:", task.toString());
+    displayMessage(new Message("Nice! I've marked this task as done:"));
+    displayMessage(task.toMessage());
   }
 
   @Override
   public void findTaskUpdate(TaskListTasks tasks) {
-    ArrayList<String> result = new ArrayList<>();
-    result.add("Here are the matching tasks in your list:");
+    displayMessage(new Message("Here are the matching tasks in your list:"));
 
     for (int i = 0; i < tasks.size(); i++) {
       // Get task from tasks
       Task task = tasks.get(i);
 
       // Format task with no. in front
-      result.add(String.format("%d. %s", i + 1, task));
+      Message message = task.toMessage();
+      String title = String.format("%d. %s", i + 1, message.getTitle());
+      displayMessage(message.setTitle(title));
     }
-
-    displayMessage(result.toArray(new String[0]));
   }
 
   @Override
   public void listTaskUpdate(TaskListTasks tasks) {
-    ArrayList<String> out = new ArrayList<>();
-    out.add("Here are the tasks in your list:");
-
+    displayMessage(new Message("Here are the tasks in your list:"));
     for (int i = 0; i < tasks.size(); i++) {
       // Get task from tasks
       Task task = tasks.get(i);
 
       // Format task with no. in front
-      out.add(String.format("%d. %s", i + 1, task));
+      Message message = task.toMessage();
+      String title = String.format("%d. %s", i + 1, message.getTitle());
+      displayMessage(message.setTitle(title));
     }
-
-    displayMessage(out.toArray(new String[0]));
   }
 
   @Override

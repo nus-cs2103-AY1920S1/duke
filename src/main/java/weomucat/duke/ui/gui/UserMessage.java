@@ -6,9 +6,9 @@ import javafx.geometry.Pos;
  * Represents a message that is sent from the user.
  * Used in {@link GraphicalUi}.
  */
-class UserMessage extends Message {
+class UserMessage extends MessageBox {
 
-  private static final String COLOR = "#000000";
+  private static final String TEXT_COLOR = "#000000";
   private static final String BACKGROUND_COLOR = "#ffffff";
 
   /**
@@ -18,8 +18,7 @@ class UserMessage extends Message {
    */
   UserMessage(String message) {
     setAlignment(Pos.TOP_RIGHT);
-    setText(message);
-    setTextColor(COLOR);
-    setBackgroundColor(BACKGROUND_COLOR);
+    setBodyText(message, TEXT_COLOR);
+    setBodyBackgroundColor(BACKGROUND_COLOR);
   }
 }

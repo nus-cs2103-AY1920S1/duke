@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import weomucat.duke.task.Task;
 import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.ui.Message;
 import weomucat.duke.ui.Ui;
 import weomucat.duke.ui.listener.UserInputListener;
 
@@ -69,31 +70,31 @@ public class CommandLineUi implements Ui {
   }
 
   @Override
-  public void displayMessage(String... lines) {
+  public void displayMessage(Message message) {
     System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
-    for (String line : lines) {
+    for (String line : message.getBody().split("\n")) {
       System.out.println(SAY_INDENTATION + line);
     }
     System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
   }
 
   @Override
-  public void displayError(String... lines) {
-    System.out.print("\033[0;31m");
+  public void displayError(Message message) {
+    // TODO: ANSI Colors might not work on all terminals
+    System.out.print("\033[38;2;255;0;0m");
     System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
-    lines[0] = "☹ OOPS!!! " + lines[0];
-    for (String line : lines) {
+    for (String line : message.getBody().split("\n")) {
       System.out.println(SAY_INDENTATION + line);
     }
     System.out.println(SAY_INDENTATION + SAY_HORIZONTAL_LINE);
-    System.out.print("\033[0;30m");
+    System.out.print("\033[38;2;0;0;0m");
   }
 
   @Override
   public void addTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage("Got it. I've added this task:",
+    displayMessage(new Message("Got it. I've added this task:",
         task.toString(),
-        String.format("Now you have %d task(s) in the list.", tasks.size()));
+        String.format("Now you have %d task(s) in the list.", tasks.size())));
   }
 
   @Override
@@ -103,14 +104,14 @@ public class CommandLineUi implements Ui {
 
   @Override
   public void deleteTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage("Noted. I've removed this task:",
+    displayMessage(new Message("Noted. I've removed this task:",
         task.toString(),
-        String.format("Now you have %d task(s) in the list.", tasks.size()));
+        String.format("Now you have %d task(s) in the list.", tasks.size())));
   }
 
   @Override
   public void doneTaskUpdate(TaskListTasks tasks, Task task) {
-    displayMessage("Nice! I've marked this task as done:", task.toString());
+    displayMessage(new Message("Nice! I've marked this task as done:", task.toString()));
   }
 
   @Override
@@ -126,7 +127,7 @@ public class CommandLineUi implements Ui {
       result.add(String.format("%d. %s", i + 1, task));
     }
 
-    displayMessage(result.toArray(new String[0]));
+    displayMessage(new Message(result.toArray(new String[0])));
   }
 
   @Override
@@ -142,6 +143,6 @@ public class CommandLineUi implements Ui {
       out.add(String.format("%d. %s", i + 1, task));
     }
 
-    displayMessage(out.toArray(new String[0]));
+    displayMessage(new Message(out.toArray(new String[0])));
   }
 }

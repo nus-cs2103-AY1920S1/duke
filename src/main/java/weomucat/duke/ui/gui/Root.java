@@ -48,11 +48,11 @@ public class Root extends VBox {
   }
 
   /**
-   * Adds a {@link Message} to the chat box.
+   * Adds a {@link MessageBox} to the chat box.
    *
    * @param message the message to put into the chat box
    */
-  void addMessage(Message message) {
+  void addMessage(MessageBox message) {
     chatBox.getChildren().add(message);
   }
 

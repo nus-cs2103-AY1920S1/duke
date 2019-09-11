@@ -4,6 +4,7 @@ import java.util.Locale;
 import weomucat.duke.exception.StorageException;
 import weomucat.duke.storage.TaskListStorage;
 import weomucat.duke.task.TaskList;
+import weomucat.duke.ui.Message;
 import weomucat.duke.ui.UiList;
 import weomucat.duke.ui.cli.CommandLineUi;
 import weomucat.duke.ui.gui.GraphicalUi;
@@ -56,9 +57,9 @@ public class Duke {
     if (this.storage.exists()) {
       try {
         this.taskList = new TaskList(this.storage.load());
-        this.uiList.displayMessage("Loaded tasks from disk.");
+        this.uiList.displayMessage(new Message("Loaded tasks from disk."));
       } catch (StorageException e) {
-        this.uiList.displayError(e.getMessage());
+        this.uiList.displayError(new Message(e.getMessage()));
       }
     }
 
@@ -83,12 +84,13 @@ public class Duke {
     this.taskList.newListTaskListener(this.uiList);
 
     // Greet user
-    this.uiList.displayMessage(" ____        _        ",
+    this.uiList.displayMessage(new Message(
+        " ____        _        ",
         "|  _ \\ _   _| | _____ ",
         "| | | | | | | |/ / _ \\",
         "| |_| | |_| |   <  __/",
-        "|____/ \\__,_|_|\\_\\___|");
-    this.uiList.displayMessage("Hello! I'm Duke!", "What can I do for you?");
+        "|____/ \\__,_|_|\\_\\___|"));
+    this.uiList.displayMessage(new Message("Hello! I'm Duke!", "What can I do for you?"));
 
     // Tell uis to start listening for user input.
     this.uiList.acceptUserInput();

@@ -20,22 +20,20 @@ public class TodoCommand extends Command {
      * @param storage the Storage to be used
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             ui.showLine();
-            String remaining = ui.getRemainingWords().trim();
-            if (remaining.equals("")) {
+            if (ui.getRemainingWords().equals("")) {
                 throw new DukeException("☹OOPS!!! The Description of a todo cannot be empty");
             }
-            Todo t = new Todo(remaining.substring(0));
+            Todo t = new Todo(ui.getRemainingWords());
             tasks.add(t);
             storage.writeData();
-            System.out.println("Got it. I've added this task:");
-            System.out.println(t);
-            System.out.println("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list.");
-            ui.showLine();
+            String toPrint = "Got it. I've added this task: \n "
+                    + t + "\n" + "Now you have " + tasks.getTaskArrayList().size() + " tasks in the list.";
+            return toPrint;
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 

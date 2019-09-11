@@ -17,13 +17,14 @@ public class DeadlineCommand extends Command {
     /**
      * Creates new deadline task using a TaskList, Ui and Storage, it will then be added into the taskArrayList that
      * was loaded into the TaskList as param.
+     *
      * @param tasks the TaskList to be used
      * @param ui the Ui to be used
      * @param storage the Storage to be used
-     * @throws DukeException
+     * @throws DukeException if the return type is not properly formatted
      * @throws ParseException if the date is not able to be parsed
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, ParseException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, ParseException {
 
         int end2 = ui.getRemainingWords().indexOf('/');
         if (end2 > 0) {
@@ -36,10 +37,9 @@ public class DeadlineCommand extends Command {
                 Deadline k = new Deadline(description2, makeDate(time2));
                 tasks.add(k);
                 storage.writeData();
-                System.out.println("Got it. I've added this task:");
-                System.out.println(k);
-                System.out.println("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list.");
-                ui.showLine();
+                String toPrint = "Got it. I've added this task: \n "
+                        + k + "\n" + "Now you have " + tasks.getTaskArrayList().size() + " tasks in the list.";
+                return toPrint;
             }
         } else {
             throw new DukeException("☹OOPS!!! Wrong format");

@@ -16,16 +16,18 @@ public class DeleteCommand extends Command {
      * @throws DukeException when the format of remainingwords is not legit
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (ui.getRemainingWords().isEmpty()) {
             throw new DukeException("☹OOPS!!! Wrong format");
         }
         int position = Integer.parseInt(ui.getRemainingWords().trim());
-        System.out.println("Noted. I've removed this task.");
-        System.out.println(tasks.getTaskArrayList().get(position-1));
+
+        String toPrint = "Noted. I've removed this task. \n";
+        toPrint += (tasks.getTaskArrayList().get(position-1)) + "\n";
         tasks.delete(position-1);
         storage.writeData();
-        System.out.println("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list");
+        toPrint += ("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list");
+        return toPrint;
     }
 
     /**

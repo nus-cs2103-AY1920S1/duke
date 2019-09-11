@@ -14,14 +14,13 @@ public class ListCommand extends Command {
      * @param storage the Storage to be used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
-        System.out.println("Here are the tasks in your list:");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String toPrint = "Here are the tasks in your list: \n";
 
         for (int i = 0; i < tasks.getTaskArrayList().size(); i++) {
-            System.out.println(i + 1 + "." + tasks.getTaskArrayList().get(i));
+            toPrint += (i + 1 + "." + tasks.getTaskArrayList().get(i)) + "\n";
         }
-        ui.showLine();
+        return toPrint;
     }
 
     /**

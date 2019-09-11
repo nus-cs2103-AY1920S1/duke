@@ -23,7 +23,7 @@ public class EventCommand extends Command {
      * @throws DukeException
      * @throws ParseException if the date is not able to be parsed
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, ParseException{
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, ParseException{
         ui.showLine();
         int end = ui.getRemainingWords().indexOf('/');
         if (end > 0) {
@@ -36,10 +36,9 @@ public class EventCommand extends Command {
                 tasks.add(m);
                 storage.writeData();
 
-                System.out.println("Got it. I've added this task:");
-                System.out.println(m);
-                System.out.println("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list.");
-                ui.showLine();
+                String toPrint = "Got it. I've added this task: \n "
+                        + m + "\n" + "Now you have " + tasks.getTaskArrayList().size() + " tasks in the list.";
+                return toPrint;
             }
         } else {
             throw new DukeException("☹OOPS!!! Wrong format'");

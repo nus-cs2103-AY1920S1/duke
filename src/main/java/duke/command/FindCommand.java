@@ -23,7 +23,7 @@ public class FindCommand extends Command {
      * @param storage the Storage to be used
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, ParseException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, ParseException {
         ui.showLine();
         toFind = ui.getRemainingWords().trim();
 
@@ -36,7 +36,7 @@ public class FindCommand extends Command {
                 toPrintArrayList.add(currentTask);
             }
         }
-        printArrayList();
+        return printArrayList();
     }
 
     @Override
@@ -44,9 +44,11 @@ public class FindCommand extends Command {
         return false;
     }
 
-    public void printArrayList() {
+    public String printArrayList() {
+        String toPrint = "";
         for (int i = 0; i < toPrintArrayList.size(); i++) {
-            System.out.println(i + 1 + "." + toPrintArrayList.get(i).toString());
+            toPrint += (i + 1 + "." + toPrintArrayList.get(i).toString());
         }
+        return toPrint;
     }
 }

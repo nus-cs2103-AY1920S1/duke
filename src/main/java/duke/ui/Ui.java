@@ -22,16 +22,8 @@ public class Ui {
         System.out.println(divider);
     }
 
-    /**
-     * Reads user input with commandType being the type of command and remainingWords
-     * to be the remaining words from the user input that will be used in creation of more
-     * Task objects. Remaining words can also be Integers in the case of done and delete commands
-     * @return only the commandType so that it can be parsed by the Parser
-     */
-    public String readCommand() {
-        commandType = scanner.next();
-        remainingWords = scanner.nextLine();
-        return commandType;
+    public void storeRemaining(String string) {
+        remainingWords = string;
     }
 
     /**

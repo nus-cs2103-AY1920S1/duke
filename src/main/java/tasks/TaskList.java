@@ -76,7 +76,7 @@ public class TaskList {
      * @param num The index of the task in the list.
      * @return Returns a String to be printed when the task is marked as done.
      */
-    public String tickTask (int num) {
+    public String tickTask(int num) {
         xs.get(num - 1).markAsDone();
         return String.format("Nice! I've marked this task as done:\n%s", xs.get(num - 1));
     }
@@ -123,7 +123,7 @@ public class TaskList {
      * current TaskList.
      * @param content Data to be processed.
      */
-    private void integrateList (String content) {
+    private void integrateList(String content) {
         Scanner s = new Scanner(content);
         while (s.hasNextLine()) {
             String text = s.nextLine();

@@ -116,6 +116,10 @@ public class UI {
             return (line +
                     "     Hey! Description of a delete cannot be empty :(\n" +
                     lineOnly);
+        case "duplicate" :
+            return (line +
+                    "     Hey! You are repeating your tasks :(\n" +
+                    lineOnly);
         default :
             return (line +
                     "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +

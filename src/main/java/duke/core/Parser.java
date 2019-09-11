@@ -49,6 +49,8 @@ public class Parser {
         switch (splitCommand[0]) {
         case "bye":
             return new ExitCommand();
+        case "archive":
+            return new ArchiveCommand();
         case "list":
             return new ListCommand();
         case "find":

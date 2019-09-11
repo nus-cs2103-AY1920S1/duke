@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -58,6 +59,27 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean archiveTaskList(TaskList list) {
+        try {
+            String textToAdd = "";
+            String archiveFilePath = "data/archive/" + Instant.now().toEpochMilli() + ".txt";
+            new File(archiveFilePath).createNewFile();
+            FileWriter fw = new FileWriter(archiveFilePath);
+            for (Task t : list.getTasks()) {
+                textToAdd += t.serialize();
+            }
+            fw.write(textToAdd);
+            fw.close();
+            if(taskFile.delete()) {
+                createFile();
+            }
+            return true;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return false;
         }
     }
 

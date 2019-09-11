@@ -31,6 +31,10 @@ public class TaskList {
     }
 
     /**
+     * Clear list of Tasks.
+     */
+    public void clearList() { taskList.clear(); }
+    /**
      * Return number of Tasks.
      */
     public int getSize() {

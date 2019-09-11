@@ -141,8 +141,12 @@ public class Gui extends VBox implements UiInterface {
      * @param msg Message to be echoed
      */
     public void echoMessage(String msg) {
+        String output = "";
+        output += "_____________________________________________________\n";
+        output += String.format("     *** %s ***     \n", msg);
+        output += "_____________________________________________________";
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(msg, duke));
+                DialogBox.getDukeDialog(output, duke));
     }
 
     /**

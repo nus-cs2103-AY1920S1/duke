@@ -112,7 +112,10 @@ public class Clui implements UiInterface {
      * @param e Exception to be echoed
      */
     public void echoException(Exception e) {
-        System.out.println(e.getMessage());
+        System.out.println(String.format("    ____________________________________________________________\n"
+                        + "       %s\n"
+                        + "    ____________________________________________________________",
+                e.getMessage()));
     }
 
     /**
@@ -120,7 +123,10 @@ public class Clui implements UiInterface {
      * @param msg Message to be echoed
      */
     public void echoMessage(String msg) {
-        System.out.println(msg);
+        System.out.println(String.format("    ____________________________________________________________\n"
+                        + "       %s\n"
+                        + "    ____________________________________________________________",
+                msg));
     }
 
     /**

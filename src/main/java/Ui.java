@@ -9,14 +9,16 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    private Scanner scanner;
+    private Scanner input;
     public Ui() {
-        scanner = new Scanner(System.in);
+        input = new Scanner(System.in);
     }
 
     ////////////////
     // CONSTANTS //
     //////////////
+    // TODO make strings universal
+    // TODO package classes
     private static final String STR_INDENT = "    ";
     private static final String STR_BORDER = STR_INDENT + "___________________________________";
 
@@ -29,7 +31,7 @@ public class Ui {
      * @return User input as string
      */
     public String readUserInput() {
-        return scanner.nextLine();
+        return input.nextLine();
     }
 
     //////////////////////
@@ -37,9 +39,7 @@ public class Ui {
     ////////////////////
 
     public void showGreetings() {
-        String greeting = joinWithNewLines("Hello! I'm Duke",
-                "What can I do for you?",
-                "=====");
+        String greeting = joinWithNewLines("Hello! I'm Duke", "What can I do for you?");
         showMessage(greeting);
     }
 
@@ -122,8 +122,15 @@ public class Ui {
      */
     private String joinWithNewLines(String... message) {
         String output = "";
+        int numLines = 1;
         for (String line : message) {
-            output += indentMessage(line + "\n");
+            // Add new line if not last sentence in message
+            if (numLines != message.length) {
+                output += indentMessage(line + "\n");
+                numLines++;
+            } else {
+                output += indentMessage(line);
+            }
         }
         return output;
     }

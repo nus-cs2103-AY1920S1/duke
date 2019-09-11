@@ -58,7 +58,7 @@ public class Parser {
         }
         // Splice back the description
         String taskDescription = joinArrIntoStr(fullUserInputArr.subList(1, numInputWords));
-        Command newCommand = new AddCommand("todo", taskDescription, false);
+        Command newCommand = new ToDoCommand(taskDescription);
         return newCommand;
     }
 
@@ -123,7 +123,7 @@ public class Parser {
         int numInputWords = fullUserInputArr.size();
         // Empty description, just "done" with no keyword
         if (numInputWords == 1) {
-            throw new DukeException("Please provide index of task in list to be marked done.")
+            throw new DukeException("Please provide index of task in list to be marked done.");
         }
         // More than one input after "done"
         if (numInputWords > 2) {
@@ -143,7 +143,7 @@ public class Parser {
         int numInputWords = fullUserInputArr.size();
         // Empty description, just "delete" with no keyword
         if (numInputWords == 1) {
-            throw new DukeException("Please provide index of task in list to be deleted.")
+            throw new DukeException("Please provide index of task in list to be deleted.");
         }
         // More than one input after "delete"
         if (numInputWords > 2) {
@@ -158,7 +158,6 @@ public class Parser {
             throw new DukeException("Please enter an integer after \"delete\".");
         }
     }
-
 
     ////////////////////
     // HELPER METHODS //

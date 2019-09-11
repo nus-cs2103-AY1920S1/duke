@@ -5,6 +5,7 @@
  * (e.g. todo, event, deadline, list, done)
  */
 public class EmptyDescriptionException extends DukeException {
+
     public EmptyDescriptionException(String command) {
         super("The description of " +
                 command +

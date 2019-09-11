@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * A program named Duke.
@@ -13,7 +14,7 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke(String filePath) throws DukeException {
+    public Duke(String filePath) throws DukeException, IOException, ParseException {
         ui = new Ui();
         storage = new Storage(filePath);
         parser = new Parser();
@@ -27,16 +28,20 @@ public class Duke {
         while (inProgram) {
             try {
                 String userFullInput = ui.readUserInput();
+                // Entered no input
+                if (userFullInput == "") {
+                    continue;
+                }
                 Command c = parser.parse(userFullInput);
                 c.execute(taskList, ui, storage);
-                inProgram = c.toContinueProgram();
+                inProgram = c.toContinue();
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
             }
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException {
+    public static void main(String[] args) throws DukeException, IOException, ParseException {
         new Duke("F:\\CS2103\\duke\\data\\duke.txt").run();
     }
 

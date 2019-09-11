@@ -1,7 +1,14 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
+/**
+ * Commands which adds a task to list,
+ * where task has meta information.
+ */
 public class SubCommand extends AddCommand {
+
     protected String subCommand, subDescription;
+
     public SubCommand(String commandWord, String description,
                       String subCommandWord, String subDescription) {
         super(commandWord, description, true);
@@ -9,13 +16,24 @@ public class SubCommand extends AddCommand {
         this.subDescription = subDescription;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
-        Task newTask = this.command.equals("deadline") ?
-                new Deadline(this.description, this.subDescription) :
-                new Event(this.description, this.subDescription);
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+        Task newTask;
+        switch (command) {
+        case "deadline":
+            newTask = new Deadline(description, subDescription);
+            break;
+        case "event":
+            newTask = new Event(description, subDescription);
+            break;
+        default:
+            throw new DukeException("Something went wrong :-( No such command with subcommand!");
+        }
+
         taskList.addTask(newTask);
-        storage.save(taskList.getTaskArr());
-        ui.showAddTaskMessage(newTask, taskList.getTaskArr());
+        ArrayList<Task> taskArr = taskList.getTaskArr();
+        storage.save(taskArr);
+        ui.showAddTaskResponse(newTask, taskArr);
+
     }
 
     public void print() {
@@ -26,12 +44,16 @@ public class SubCommand extends AddCommand {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) { return true; }
+        if (o == this) {
+            return true;
+        }
         // Not even the same class
-        if (!(o instanceof SubCommand)) { return false; }
-        SubCommand c = (SubCommand) o;
-        return c.subCommand == subCommand &&
-                c.subDescription == subDescription;
+        if (!(o instanceof SubCommand)) {
+            return false;
+        }
+        SubCommand sc = (SubCommand) o;
+        return sc.subCommand == subCommand &&
+                sc.subDescription == subDescription;
     }
 
 }

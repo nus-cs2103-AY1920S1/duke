@@ -10,21 +10,16 @@ public class Deadline extends Task {
      * @param by when to finish the task by
      * @throws DukeException exception
      */
-    // TODO: don't throw exception
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws ParseException {
         super(description, by);
         // If deadline /by is of correct format
         if (isValidDateTimeFormat(by)) {
-            try {
-                SimpleDateFormat displayFormat = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
-                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                Date date = inputFormat.parse(by);
-                // Output: 2nd of December 2019, 6pm
-                by = displayFormat.format(date);
-                this.subDescription = by;
-            } catch (ParseException e) {
-                throw new DukeException("Unable to recognise date-time provided.");
-            }
+            SimpleDateFormat displayFormat = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
+            SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            Date date = inputFormat.parse(by);
+            // Output: 2nd of December 2019, 6pm
+            String newBy = displayFormat.format(date);
+            this.subDescription = newBy;
         }
     }
 
@@ -33,7 +28,9 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + subDescription + ")";
     }
 
-    public String getTaskType() { return "D"; }
+    public String getTaskType() {
+        return "D";
+    }
 
     public boolean containsKeyword(String keyword) {
         return description.contains(keyword) || subDescription.contains(keyword);

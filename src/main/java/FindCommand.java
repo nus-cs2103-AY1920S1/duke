@@ -1,24 +1,32 @@
 import java.util.ArrayList;
-// TODO change finddscription to accept a arraylist of keywords to match by
+
 public class FindCommand extends Command {
+
+    /**
+     * List of words to find from tasks' descriptions.
+     */
     protected ArrayList<String> keywords;
+
     public FindCommand(ArrayList<String> keywords) {
         super("find");
-        this.keyword = keywords;
+        this.keywords = keywords;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ArrayList<Task> matchingTasksArr = new ArrayList<Task>();
-        for (Task currTask : taskList.getTaskArr()) {
-            if (currTask.containsKeyword(keyword)) {
-                matchingTasksArr.add(currTask);
+    public void execute(TaskList taskList, Ui ui) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
+        for (String keyword : keywords) {
+            for (Task currTask : taskList.getTaskArr()) {
+                boolean alreadyFound = matchingTasks.contains(currTask);
+                if (!alreadyFound && currTask.containsKeyword(keyword)) {
+                    matchingTasks.add(currTask);
+                }
             }
         }
-        if (matchingTasksArr.size() == 0) {
+        if (matchingTasks.size() == 0) {
             ui.showMessage("No matching tasks!");
         } else {
-            ui.showMatchingKeywordTasks(matchingTasksArr);
+            ui.showFindKeywordResponse(matchingTasks);
         }
-
     }
+
 }

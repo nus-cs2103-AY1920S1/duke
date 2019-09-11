@@ -21,6 +21,23 @@ public class Event extends Task {
     }
 
     /**
+     * Constructs a <code>Event</code> with task done indicator,
+     * task description and task event time.
+     *
+     * @param indicator Done indication of task.
+     * @param description Description of task.
+     * @param at Event time of task.
+     */
+    public Event(String indicator, String description, String at) {
+        super(description);
+        this.at = at;
+
+        if (indicator.equals("1")) {
+            this.setDone();
+        }
+    }
+
+    /**
      * Returns condensed description of specified event task.
      *
      * @return Condensed description.

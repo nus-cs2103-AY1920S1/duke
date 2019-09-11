@@ -15,6 +15,20 @@ public class Todo extends Task {
     }
 
     /**
+     * Constructs a <code>Todo</code> with task done indicator and task description.
+     *
+     * @param indicator Done indication of task.
+     * @param description Description of task.
+     */
+    public Todo(String indicator, String description) {
+        super(description);
+
+        if (indicator.equals("1")) {
+            this.setDone();
+        }
+    }
+
+    /**
      * Returns condensed description of specified todo task.
      *
      * @return Condensed description.

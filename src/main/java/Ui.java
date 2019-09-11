@@ -1,5 +1,7 @@
 import javafx.application.Platform;
 
+import java.io.IOException;
+
 import java.util.Scanner;
 
 /**
@@ -12,13 +14,21 @@ public class Ui {
     private Storage mainStorage;
     private TaskList mainTaskList;
 
+    public void setStorage(Storage storage) {
+        mainStorage = storage;
+    }
+
+    public void setList(TaskList taskList) {
+        mainTaskList = taskList;
+    }
+
     /**
      * Sets up the user interface to take in user commands.
      *
      * @param storage Storage handling.
      * @param taskList Task handling.
      */
-    public void initiate(Storage storage, TaskList taskList) {
+    public void initiate(Storage storage, TaskList taskList) throws IOException {
         mainStorage = storage;
         mainTaskList = taskList;
 
@@ -46,15 +56,13 @@ public class Ui {
         }
 
         System.out.println("Bye. Hope to see you again soon!");
-        Platform.exit();
     }
 
-    public void setStorage(Storage storage) {
-        mainStorage = storage;
-    }
-
-    public void setList(TaskList taskList) {
-        mainTaskList = taskList;
+    /**
+     * Prints out loading error message.
+     */
+    public void showLoadingError() {
+        System.out.println(LOADING_ERROR);
     }
 
     /**
@@ -72,13 +80,6 @@ public class Ui {
     }
 
     /**
-     * Prints out loading error message.
-     */
-    public void showLoadingError() {
-        System.out.println(LOADING_ERROR);
-    }
-
-    /**
      * Returns chatbot response based on user commands.
      *
      * @param input User commands.
@@ -92,33 +93,31 @@ public class Ui {
             int currentNum = mainTaskList.getNumTask();
 
             switch (parseInfo[0]) {
-            case "DONE":
+            case "done":
                 response.append("Nice! I've marked this task as done:\n");
                 response.append(mainTaskList.getDoneTask(parseInfo[1]) + "\n");
                 break;
-            case "DELETE":
+            case "delete":
                 response.append("Noted. I've removed this task:\n");
                 response.append(mainTaskList.deleteTask(parseInfo[1]) + "\n");
                 break;
-            case "TODO":
+            case "todo":
                 mainTaskList.addTodoTask(parseInfo[1]);
                 response.append(getTaskAddition(mainTaskList) + "\n");
                 break;
-            case "DEADLINE":
+            case "deadline":
                 mainTaskList.addDeadlineTask(Parser.parseDetails(parseInfo[1]));
                 response.append(getTaskAddition(mainTaskList) + "\n");
                 break;
-            case "EVENT":
+            case "event":
                 mainTaskList.addEventTask(Parser.parseDetails(parseInfo[1]));
                 response.append(getTaskAddition(mainTaskList) + "\n");
                 break;
-            case "LIST":
+            case "list":
                 response.append("Here are the tasks in your list:\n");
-                for (int i = 0; i < mainTaskList.getNumTask(); i++) {
-                    response.append(String.format("%d.%s", i + 1, mainTaskList.getTask(i)) + "\n");
-                }
+                response.append(mainTaskList);
                 break;
-            case "FIND":
+            case "find":
                 response.append("Here are the matching tasks in your list:\n");
                 for (int i = 0, j = 0; i < mainTaskList.getNumTask(); i++) {
                     Task current = mainTaskList.getTask(i);
@@ -133,9 +132,9 @@ public class Ui {
                     if (input.equals("todo") || input.equals("deadline") || input.equals("event")
                             || input.equals("done") || input.equals("find")) {
                         String message = String.format("The description of a %s cannot be empty.", input);
-                        throw new InsufficientArgumentException(message);
+                        throw new DukeException(message);
                     } else {
-                        throw new InvalidArgumentException("I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException exception) {
                     response.append(exception.getMessage());
@@ -155,7 +154,7 @@ public class Ui {
     /**
      * Calls for <code>Storage</code> to overwrite stored list of tasks.
      */
-    public void write() {
+    public void write() throws IOException {
         mainStorage.overWrite(mainTaskList.getList());
     }
 }

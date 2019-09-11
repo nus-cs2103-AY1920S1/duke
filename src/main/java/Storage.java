@@ -1,5 +1,7 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,43 +30,26 @@ public class Storage {
      * @return List of tasks.
      * @throws DukeException If diskList does not exist.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
+        Scanner s = new Scanner(diskList);
 
-        try {
-            Scanner s = new Scanner(diskList);
+        while (s.hasNext()) {
+            String[] savedTasks = s.nextLine().split(" \\| ");
 
-            while (s.hasNext()) {
-                String[] savedTasks = s.nextLine().split(" \\| ");
-
-                switch (savedTasks[0]) {
-                case "T":
-                    Todo t = new Todo(savedTasks[2]);
-                    if (savedTasks[1].equals("1")) {
-                        t.setDone();
-                    }
-                    tasks.add(t);
-                    break;
-                case "D":
-                    Deadline d = new Deadline(savedTasks[2], savedTasks[3]);
-                    if (savedTasks[1].equals("1")) {
-                        d.setDone();
-                    }
-                    tasks.add(d);
-                    break;
-                case "E":
-                    Event e = new Event(savedTasks[2], savedTasks[3]);
-                    if (savedTasks[1].equals("1")) {
-                        e.setDone();
-                    }
-                    tasks.add(e);
-                    break;
-                default:
-                    assert false : "Saved task should only begin with either T, D or E";
-                }
+            switch (savedTasks[0]) {
+            case "T":
+                tasks.add(new Todo(savedTasks[1], savedTasks[2]));
+                break;
+            case "D":
+                tasks.add(new Deadline(savedTasks[1], savedTasks[2], savedTasks[3]));
+                break;
+            case "E":
+                tasks.add(new Event(savedTasks[1], savedTasks[2], savedTasks[3]));
+                break;
+            default:
+                assert false : "Saved task should only begin with either T, D or E";
             }
-        } catch (Exception e) {
-            throw new DukeException();
         }
 
         return tasks;
@@ -75,12 +60,8 @@ public class Storage {
      *
      * @param tasks List of tasks.
      */
-    public void overWrite(ArrayList<Task> tasks) {
-        try {
-            diskList.createNewFile();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void overWrite(ArrayList<Task> tasks) throws IOException {
+        diskList.createNewFile();
 
         StringBuilder sb = new StringBuilder();
         boolean first = true;
@@ -96,12 +77,8 @@ public class Storage {
             }
         }
 
-        try {
-            FileWriter fw = new FileWriter(diskList);
-            fw.write(sb.toString());
-            fw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FileWriter fw = new FileWriter(diskList);
+        fw.write(sb.toString());
+        fw.close();
     }
 }

@@ -203,7 +203,7 @@ public class GenericBiMap<L,R> {
     /**
      * Delete a remove a tag-obj relationship from all stores
      */
-    public boolean deleteTagFromObject(L str, R obj) {
+    public boolean deleteRelation(L str, R obj) {
         if (! deleteFromLeftKeyStore(str, obj)) return false;
         if (! deleteFromRightKeyStore(obj, str)) return false;
         return true;

@@ -94,7 +94,7 @@ public class GenericBiMapTest {
         GenericBiMap<String, TagAbstractStub> store1 = new GenericBiMap<>();
         store1.insertRelation("#spiderman", new TagAbstractStub("peterparker"));
         assertTrue(store1.containsRelation("#spiderman", new TagAbstractStub("peterparker")));
-        store1.deleteTagFromObject("#spiderman", new TagAbstractStub("peterparker"));
+        store1.deleteRelation("#spiderman", new TagAbstractStub("peterparker"));
         assertFalse(store1.containsRelation("#spiderman", new TagAbstractStub("peterparker")));
 
 
@@ -113,10 +113,10 @@ public class GenericBiMapTest {
 
 
         // NOTE: test if tag doesnt exist and so cannot be deleted
-        boolean del2z = store2.deleteTagFromObject("mcu",new TagAbstractStub("peterparker"));
+        boolean del2z = store2.deleteRelation("mcu",new TagAbstractStub("peterparker"));
         assertFalse(del2z);
 
-        boolean del2a = store2.deleteTagFromObject("#mcu",new TagAbstractStub("peterparker"));
+        boolean del2a = store2.deleteRelation("#mcu",new TagAbstractStub("peterparker"));
         assertTrue(del2a);
         assertFalse(store2.containsRelation("#mcu", new TagAbstractStub("peterparker")));
         assertTrue(store2.containsRelation("#sony", new TagAbstractStub("peterparker")));
@@ -124,23 +124,23 @@ public class GenericBiMapTest {
         assertTrue(store2.containsRelation("#snapped", new TagAbstractStub("peterparker")));
 
 
-        boolean del2b = store2.deleteTagFromObject("#sony",new TagAbstractStub("peterparker"));
+        boolean del2b = store2.deleteRelation("#sony",new TagAbstractStub("peterparker"));
         assertTrue(del2b);
         assertFalse(store2.containsRelation("#sony", new TagAbstractStub("peterparker")));
         assertTrue(store2.containsRelation("#spiderman", new TagAbstractStub("peterparker")));
         assertTrue(store2.containsRelation("#snapped", new TagAbstractStub("peterparker")));
 
-        boolean del2c = store2.deleteTagFromObject("#spiderman",new TagAbstractStub("peterparker"));
+        boolean del2c = store2.deleteRelation("#spiderman",new TagAbstractStub("peterparker"));
         assertTrue(del2c);
         assertFalse(store2.containsRelation("#spiderman", new TagAbstractStub("peterparker")));
         assertTrue(store2.containsRelation("#snapped", new TagAbstractStub("peterparker")));
 
-        boolean del2d = store2.deleteTagFromObject("#snapped",new TagAbstractStub("peterparker"));
+        boolean del2d = store2.deleteRelation("#snapped",new TagAbstractStub("peterparker"));
         assertTrue(del2d);
         assertFalse(store2.containsRelation("#snapped", new TagAbstractStub("peterparker")));
 
 
-        boolean del2e = store2.deleteTagFromObject("#snapped",new TagAbstractStub("peterparker"));
+        boolean del2e = store2.deleteRelation("#snapped",new TagAbstractStub("peterparker"));
         // unable to delete cos peterparker no longer tagged #snapped
         assertFalse(del2e);
         assertFalse(store2.containsRelation("#snapped", new TagAbstractStub("peterparker")));

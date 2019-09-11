@@ -32,7 +32,7 @@ public class AddDeadlineCommand extends Command {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
                     Deadline dd = new Deadline(instruction, formatter.parse(date));
-                    if(tasks.contains(dd)) {
+                    if (tasks.contains(dd)) {
                         throw new DukeException("Item already exists in the list!");
                     } else {
                         tasks.addItemToList(dd);

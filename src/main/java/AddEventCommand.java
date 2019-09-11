@@ -31,7 +31,7 @@ public class AddEventCommand extends Command {
                 try {
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
                     Event et = new Event(instruction, formatter.parse(date));
-                    if(tasks.contains(et)) {
+                    if (tasks.contains(et)) {
                         throw new DukeException("Item already exists in the list!");
                     } else {
                         tasks.addItemToList(et);

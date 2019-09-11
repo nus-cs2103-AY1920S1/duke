@@ -22,7 +22,7 @@ public class AddTodoCommand extends Command {
                 throw new DukeException("☹ OOPS!!! The description of todo cannot be empty");
             } else {
                 Todo td = new Todo(instruction);
-                if(tasks.contains(td)) {
+                if (tasks.contains(td)) {
                     throw new DukeException("Item already exists in the list!");
                 } else {
                     tasks.addItemToList(td);

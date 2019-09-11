@@ -71,8 +71,7 @@ public class Parser {
 		} catch (IOException e) {
 			storedText.append(Ui.BORDER + "\n" + e + "\n" + Ui.BORDER);
 		}
-
-
+		
 		return storedText.toString();
 	}
 

@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private final String LOADING_ERROR = "No existing task list can be loaded. New task list will be created.";
+    private static final String LOADING_ERROR = "No existing task list can be loaded. New task list will be created.";
 
     private Storage mainStorage;
     private TaskList mainTaskList;

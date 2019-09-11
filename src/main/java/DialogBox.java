@@ -48,10 +48,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a horizontal box containing user input and image.
+     *
+     * @param text User input.
+     * @param img User image.
+     * @return User dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a horizontal box containing chatbot input and image.
+     *
+     * @param text Chatbot input.
+     * @param img Chatbot image.
+     * @return Chatbot dialog box.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -19,7 +19,8 @@ public class Parser {
      *
      */
 
-    public Command parse(String userInput) throws DukeException, IncompleteInputException {
+
+    public static Command parse(String userInput) throws DukeException, IncompleteInputException {
                  if (userInput.equalsIgnoreCase("list")) {
                     return new ListCommand();
                 } else if (userInput.contains("done")) {

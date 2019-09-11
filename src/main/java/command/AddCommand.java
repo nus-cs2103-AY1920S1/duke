@@ -5,7 +5,6 @@ package command;
 
 import task.Task;
 import task.TaskList;
-import driver.Ui;
 
 /**
  *
@@ -28,9 +27,8 @@ public class AddCommand extends Command {
      */
 
     @Override
-    public String executeCommand(TaskList reference, Ui printer) {
+    public String executeCommand(TaskList reference) {
         this.reference = reference;
-        this.printer = printer;
         added = reference.addTasks(addedTask);
         return this.formatOutput();
     }
@@ -43,13 +41,6 @@ public class AddCommand extends Command {
         return TextFormatter.addFormat(added,reference.getSize());
     }
 
-    /**
-     *
-     */
-
-    public void passToUI(String input) {
-        printer.printAdd(input);
-    }
 }
 
 

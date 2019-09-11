@@ -15,12 +15,4 @@ public class ListCommand extends Command {
         return TextFormatter.listFormat(reference.getList());
     }
 
-    /**
-     *
-     */
-
-    public void passToUI(String input) {
-
-        printer.printTasks(input);
-    }
 }

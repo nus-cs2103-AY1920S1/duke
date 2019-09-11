@@ -1,7 +1,6 @@
 package command;
 import task.Task;
 import task.TaskList;
-import driver.Ui;
 
 /**
  *
@@ -24,9 +23,8 @@ public class DoneCommand extends Command {
      */
 
     @Override
-    public String executeCommand(TaskList reference, Ui printer) {
+    public String executeCommand(TaskList reference) {
         this.reference = reference;
-        this.printer = printer;
         done = reference.taskDone(doneIndex);
         return this.formatOutput();
     }
@@ -40,14 +38,7 @@ public class DoneCommand extends Command {
         return TextFormatter.doneFormat(done);
     }
 
-    /**
-     *
-     */
 
-    public void passToUI(String input) {
-
-        printer.printDone(input);
-    }
 }
 
 

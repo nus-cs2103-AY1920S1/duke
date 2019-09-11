@@ -1,7 +1,6 @@
 package command;
 import task.Task;
 import task.TaskList;
-import driver.Ui;
 
 /**
  *
@@ -24,9 +23,8 @@ public class DeleteCommand extends Command {
      */
 
     @Override
-    public String executeCommand(TaskList reference, Ui printer) {
+    public String executeCommand(TaskList reference) {
         this.reference = reference;
-        this.printer = printer;
         removed = reference.deleteTask(deletedIndex);
         return this.formatOutput();
     }
@@ -39,11 +37,5 @@ public class DeleteCommand extends Command {
         return TextFormatter.deleteFormat(removed,reference.getSize());
     }
 
-    /**
-     *
-     */
 
-    public void passToUI(String input) {
-        printer.printDelete(input);
-    }
 }

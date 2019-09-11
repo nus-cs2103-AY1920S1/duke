@@ -42,7 +42,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         try {
-            return "  [D]" + super.toString() + " (by: " + convertEventTime() + ")";
+            return "[D]" + super.toString() + " (by: " + convertEventTime() + ")";
         } catch (ParseException exception) {
             return "Error";
         }

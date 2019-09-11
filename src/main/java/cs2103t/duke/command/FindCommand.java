@@ -7,14 +7,28 @@ import cs2103t.duke.ui.Ui;
 
 import java.util.List;
 
+/**
+ * Represents a find command. Searches for occurrence of a given phrase in the description of task.
+ */
 public class FindCommand extends Command {
     private String wordToFind;
 
+    /**
+     * Constructs a find command.
+     * @param keyword phrase to find in task descriptions.
+     */
     public FindCommand(String keyword) {
         this.wordToFind = keyword;
         super.isExit = false;
     }
 
+    /**
+     * Executes the find command.
+     * @param taskList TaskList agent to handle list of tasks.
+     * @param ui Ui in charge of printing.
+     * @param storage Storage agent in charge of reading/writing to file.
+     * @return
+     */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> foundTasks = taskList.findTasks(this.wordToFind);

@@ -52,6 +52,8 @@ public class Deadline extends Task {
 
         this.datetime = date;
         this.date = Parser.convertToDate(date);
+
+        assert this.date != null;
     }
 
     /**

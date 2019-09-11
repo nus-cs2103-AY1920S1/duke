@@ -115,11 +115,6 @@ public class Parser {
         } catch (ParseException e) {
             throw new DukeException("Date is wrong format, try again");
         }
-        /*
-         finally {
-            return date;
-        }
-         */
     }
 
     /**

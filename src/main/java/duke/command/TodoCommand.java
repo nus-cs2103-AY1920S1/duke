@@ -4,8 +4,12 @@ import duke.todo.Task;
 import duke.todo.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Class for TodoCommand.
+ */
 public class TodoCommand implements Command {
     private String task;
+    private String duration;
 
     /**
      * Constructs a todo command based on the description.
@@ -14,6 +18,11 @@ public class TodoCommand implements Command {
      */
     public TodoCommand(String task) {
         this.task = task;
+    }
+
+    public TodoCommand(String task, String duration) {
+        this.task = task;
+        this.duration = duration;
     }
 
     /**
@@ -27,6 +36,14 @@ public class TodoCommand implements Command {
 
     public int getIndex() {
         return 0;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public boolean hasFixedDuration() {
+        return duration != null;
     }
 
     /**
@@ -47,7 +64,13 @@ public class TodoCommand implements Command {
     }
 
     public void execute(TaskList tasks, Ui ui) {
-        Task addedTodo = tasks.addTask(getDescription());
-        ui.reportAdd(addedTodo, tasks.getNumOfTasks());
+        Task addedTodo;
+        if (duration != null) {
+            addedTodo = tasks.addTask(getDescription(), duration);
+            ui.reportAdd(addedTodo, tasks.getNumOfTasks());
+        } else {
+            addedTodo = tasks.addTask(getDescription());
+            ui.reportAdd(addedTodo, tasks.getNumOfTasks());
+        }
     }
 }

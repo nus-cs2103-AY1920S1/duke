@@ -14,5 +14,13 @@
 }
 
 .chat-bubble {
-    -fx-background-color: lightblue;
+    -fx-border-style: solid;
+    -fx-border-radius: 8px;
+    -fx-label-padding: 5px;
+}
+
+.changeSourceButton {
+    -fx-background-color: #F4F4F4;
+    -fx-background-image: url("../images/open_folder.png");
+    -fx-background-size: 100% 100%;
 }

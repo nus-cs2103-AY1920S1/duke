@@ -1,19 +1,17 @@
 package duke;
 
+import Exception.DukeException;
 import helper.DateTimeHandler;
+import task.Deadline;
+import task.Event;
 import task.Task;
 import task.Todo;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import Exception.DukeException;
-import task.Deadline;
-import task.Event;
 public class Storage {
 
     private String filePath = "";
@@ -78,7 +76,7 @@ public class Storage {
                 Task task = decodeTask(s.nextLine());
                 taskList.add(task);
             }
-        } catch (FileNotFoundException ex) {
+        } catch (Exception ex) {
             throw new DukeException("I can't load your tasks.");
         }
         return taskList;

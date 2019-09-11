@@ -1,11 +1,11 @@
 package duke.parser;
 
 import duke.exception.DukeException;
-import duke.tasklist.GuiTaskList;
-import duke.ui.GuiUi;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
-public class GuiParser {
-    GuiTaskList storeTaskList;
+public class Parser {
+    TaskList storeTaskList;
 
     /**
      * Parser class responsible for parsing user input.
@@ -14,7 +14,7 @@ public class GuiParser {
      *
      * @param list TaskList object at any instance, usually the TaskList read from the hard drive
      */
-    public GuiParser(GuiTaskList list) {
+    public Parser(TaskList list) {
         this.storeTaskList = list;
     }
 
@@ -48,7 +48,7 @@ public class GuiParser {
                     String result = storeTaskList.findTask(inputArray[1]);
                     return result;
                 } else if (inputArray[0].equals("help")) {
-                    return GuiUi.helpText();
+                    return Ui.helpText();
                 } else if (inputArray[0].equals("edit")) {
                     return processEdit(inputArray);
                 } else if (inputArray[0].equals("bye")) {

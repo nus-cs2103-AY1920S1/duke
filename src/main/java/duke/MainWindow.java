@@ -1,6 +1,6 @@
 package duke;
 
-import duke.ui.GuiUi;
+import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,7 +23,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private GuiUi ui = new GuiUi();
+    private Ui ui = new Ui();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/MuppetUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Kermit_the_Frog.jpg"));
@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void handlePrintGreeting() {
-        String output =  GuiUi.showGreeting();
+        String output =  Ui.showGreeting();
         System.out.println(output);
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(output, dukeImage)

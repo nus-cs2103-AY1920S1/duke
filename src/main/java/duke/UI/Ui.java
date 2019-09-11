@@ -1,6 +1,6 @@
 package duke.ui;
 
-public class GuiUi {
+public class Ui {
     /**
      * Utility class that sends general String to display to duke GUI.
      * @return String of greeting

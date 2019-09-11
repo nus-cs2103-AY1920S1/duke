@@ -1,6 +1,6 @@
 package duke.tasklist;
 
-import duke.ui.GuiUi;
+import duke.ui.Ui;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -9,7 +9,7 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 
-public class GuiTaskList {
+public class TaskList {
     ArrayList<Task> store;
     Storage storage;
 
@@ -20,13 +20,13 @@ public class GuiTaskList {
      * @param listOfTasks List of task objects stored
      * @param storage storage instance to interact with file
      */
-    public GuiTaskList(ArrayList<Task> listOfTasks, Storage storage) {
+    public TaskList(ArrayList<Task> listOfTasks, Storage storage) {
         assert listOfTasks != null : "list of tasks read should not be null";
         this.store = listOfTasks;
         this.storage = storage;
     }
 
-    public GuiTaskList(ArrayList<Task> listOfTasks) {
+    public TaskList(ArrayList<Task> listOfTasks) {
         this.store = listOfTasks;
     }
 
@@ -70,9 +70,9 @@ public class GuiTaskList {
         Task toDoTask = new ToDo(toDoTaskString);
         store.add(toDoTask);
         storage.saveTaskToFile(store);
-        result = result + GuiUi.printGotIt() + "\n" + (" "
+        result = result + Ui.printGotIt() + "\n" + (" "
                 + toDoTask.toString()) + "\n"
-                + (GuiUi.printNow(store.size()));
+                + (Ui.printNow(store.size()));
         return result;
     }
 
@@ -89,9 +89,9 @@ public class GuiTaskList {
                 deadlineTaskDateAndTimeString);
         store.add(deadlineTask);
         storage.saveTaskToFile(store);
-        result = result + GuiUi.printGotIt() + "\n" + (" "
+        result = result + Ui.printGotIt() + "\n" + (" "
                 + deadlineTask.toString()) + "\n"
-                + (GuiUi.printNow(store.size()));
+                + (Ui.printNow(store.size()));
         return result;
     }
 
@@ -107,9 +107,9 @@ public class GuiTaskList {
         Task eventTask = new Event(eventTaskDescriptionString, eventTaskDateAndTimeString);
         store.add(eventTask);
         storage.saveTaskToFile(store);
-        result = result + GuiUi.printGotIt() + "\n" + (" "
+        result = result + Ui.printGotIt() + "\n" + (" "
                 + eventTask.toString()) + "\n"
-                + (GuiUi.printNow(store.size()));
+                + (Ui.printNow(store.size()));
         return result;
     }
 
@@ -121,9 +121,9 @@ public class GuiTaskList {
         String result = "";
         Task removed = store.remove(index);
         storage.saveTaskToFile(store);
-        result = result + GuiUi.printNoted() + "\n"
+        result = result + Ui.printNoted() + "\n"
                 + removed.toString() + "\n"
-                + GuiUi.printNow(store.size());
+                + Ui.printNow(store.size());
         return result;
     }
 
@@ -193,7 +193,7 @@ public class GuiTaskList {
         for (Task i : store) {
             listOfAllDesc.add(i.getDescription());
         }
-        GuiTaskList temp = new GuiTaskList(new ArrayList<Task>());
+        TaskList temp = new TaskList(new ArrayList<Task>());
         for (int i = 0; i < store.size(); i++) {
             String eachDescription = listOfAllDesc.get(i);
             if (eachDescription.contains(query)) {

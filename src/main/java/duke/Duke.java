@@ -1,16 +1,16 @@
 package duke;
 
-import duke.parser.GuiParser;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
-import duke.tasklist.GuiTaskList;
+import duke.tasklist.TaskList;
 
 import java.util.ArrayList;
 
 public class Duke  {
 
     private Storage storage;
-    private GuiParser parser;
+    private Parser parser;
     ArrayList<Task> tempStore = new ArrayList<Task>();
 
     /**
@@ -21,8 +21,8 @@ public class Duke  {
         assert !filepath.equals("") : "file path should not be empty!";
         storage = new Storage(filepath);
         //initialise an arraylist to store Tasks
-        GuiTaskList store = new GuiTaskList(storage.createTasksFromFile(), storage);
-        this.parser = new GuiParser(store);
+        TaskList store = new TaskList(storage.createTasksFromFile(), storage);
+        this.parser = new Parser(store);
     }
 
 

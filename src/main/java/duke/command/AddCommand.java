@@ -30,6 +30,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws DukeException {
+        assert task != null;
         taskList.addTask(task);
         storage.save(task.getSimplifiedRepresentation());
         return Message.MESSAGE_ADDED + "\n " + task + "\n"

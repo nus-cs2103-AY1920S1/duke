@@ -33,6 +33,7 @@ public class DoneCommand extends Command {
             throw new DukeException(Message.MESSAGE_INVALID_TASK_INDEX);
         }
         Task task = taskList.markDone(index);
+        assert task != null;
         storage.save(taskList.getSimplifiedTaskRepresentations());
         return Message.MESSAGE_MARK_DONE + "\n " + task;
     }

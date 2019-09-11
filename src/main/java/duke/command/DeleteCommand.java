@@ -34,6 +34,7 @@ public class DeleteCommand extends Command {
             throw new DukeException(Message.MESSAGE_INVALID_TASK_INDEX);
         }
         Task task = taskList.delete(index);
+        assert task != null;
         storage.save(taskList.getSimplifiedTaskRepresentations());
         return Message.MESSAGE_DELETED + "\n " + task + "\n"
                 + String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size());

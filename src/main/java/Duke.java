@@ -1,32 +1,147 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-import java.io.*;
-import java.util.Scanner;
-import java.util.ArrayList;
-public class Duke {
-
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
-    }
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        //The container for the content of the chat to scroll.
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+
+
+        //Step 2. Formatting the window to look as expected
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        //Part 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /*/**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    /*private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(userImage)),
+                new DialogBox(dukeText, new ImageView(dukeImage))
+        );
+        userInput.clear();
+    }*/
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
+        );
+        userInput.clear();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 
     /**
      * This class tests for chatbot Duke.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage();
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
@@ -38,165 +153,11 @@ public class Duke {
         ui.run(tasks, storage);
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new Duke("../../../data/tasks.txt").run();
+    }*/
+    public static void main(String[] args) {
+        new Duke().run();
     }
 
-    /*public void runn() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-
-        ArrayList<Task> arr = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        int i = 0;
-        //PrintWriter writer = new PrintWriter("duke.txt", "UTF-8");
-
-        while(sc.hasNext()) {
-            String input = sc.next();
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (input.equals("list")) { //go through the arrayList
-                PrintWriter writer = new PrintWriter("duke.txt", "UTF-8");
-                System.out.println("Here are the tasks in your list: ");
-                String output = "";
-                for (int j = 0; j < arr.size(); j++) {
-                    System.out.println((j + 1) + "." + arr.get(j));
-                    output += ((j+1) + "." + arr.get(j));
-                    output += "\n";
-                }
-                //PrintWriter writer = new PrintWriter("duke.txt", "UTF-8"));
-                writer.print(output);
-                writer.close();
-            } else if (input.equals("done")) {
-                int num = sc.nextInt();
-                System.out.println("Nice! I've marked this task as done: ");
-                arr.get(num - 1).markAsDone();
-                System.out.println(arr.get(num));
-            } else if (input.equals("todo")) {
-                String descTodo = sc.nextLine();
-                if (descTodo.isEmpty()) {
-                    throw new IllegalArgumentException("OOPS!!! The description of a todo cannot be empty.");
-                }
-                arr.add(new Todo(descTodo));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + arr.get(i));
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                i++;
-                //writer.println("" + arr.get(i));
-            } else if (input.equals("deadline")) {
-                String rem = sc.nextLine();
-                String[] descriptionNDate = rem.split("/by");
-                String description = descriptionNDate[0];
-                String by = descriptionNDate[1];
-                arr.add(new Deadline(description, by));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + arr.get(i));
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                i++;
-                //writer.println(arr.get(i));
-            } else if (input.equals("event")) {
-                String rest = sc.nextLine();
-                String[] descriptionNAt = rest.split("/at");
-                String desc = descriptionNAt[0];
-                String at = descriptionNAt[1];
-                arr.add(new Event(desc, at));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + arr.get(i));
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                i++;
-                //writer.println(arr.get(i));
-            } else if (input.equals("delete")) {
-                int deleteNum = sc.nextInt();
-                Task toRemove = arr.get(deleteNum - 1);
-                arr.remove(deleteNum-1);
-                System.out.println("Noted. I've removed this task: ");
-                System.out.println(" " + toRemove);
-                System.out.println("Now you have " + arr.size() + " tasks in the list. ");
-                i--;
-            } else {
-                throw new IllegalArgumentException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-        }
-    }*/
-
-
-    /*public static void main(String[] args) throws IOException {
-
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
-
-        ArrayList<Task> arr = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        int i = 0;
-        //PrintWriter writer = new PrintWriter("duke.txt", "UTF-8");
-
-        while(sc.hasNext()) {
-            String input = sc.next();
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (input.equals("list")) { //go through the arrayList
-                PrintWriter writer = new PrintWriter("duke.txt", "UTF-8");
-                System.out.println("Here are the tasks in your list: ");
-                String output = "";
-                for (int j = 0; j < arr.size(); j++) {
-                    System.out.println((j + 1) + "." + arr.get(j));
-                    output += ((j+1) + "." + arr.get(j));
-                    output += "\n";
-                }
-                //PrintWriter writer = new PrintWriter("duke.txt", "UTF-8"));
-                writer.print(output);
-                writer.close();
-            } else if (input.equals("done")) {
-                int num = sc.nextInt();
-                System.out.println("Nice! I've marked this task as done: ");
-                arr.get(num - 1).markAsDone();
-                System.out.println(arr.get(num));
-            } else if (input.equals("todo")) {
-                String descTodo = sc.nextLine();
-                if (descTodo.isEmpty()) {
-                    throw new IllegalArgumentException("OOPS!!! The description of a todo cannot be empty.");
-                }
-                arr.add(new Todo(descTodo));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + arr.get(i));
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                i++;
-                //writer.println("" + arr.get(i));
-            } else if (input.equals("deadline")) {
-                String rem = sc.nextLine();
-                String[] descriptionNDate = rem.split("/by");
-                String description = descriptionNDate[0];
-                String by = descriptionNDate[1];
-                arr.add(new Deadline(description, by));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + arr.get(i));
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                i++;
-                //writer.println(arr.get(i));
-            } else if (input.equals("event")) {
-                String rest = sc.nextLine();
-                String[] descriptionNAt = rest.split("/at");
-                String desc = descriptionNAt[0];
-                String at = descriptionNAt[1];
-                arr.add(new Event(desc, at));
-                System.out.println("Got it. I've added this task: ");
-                System.out.println(" " + arr.get(i));
-                System.out.println("Now you have " + arr.size() + " tasks in the list.");
-                i++;
-                //writer.println(arr.get(i));
-            } else if (input.equals("delete")) {
-                int deleteNum = sc.nextInt();
-                Task toRemove = arr.get(deleteNum - 1);
-                arr.remove(deleteNum-1);
-                System.out.println("Noted. I've removed this task: ");
-                System.out.println(" " + toRemove);
-                System.out.println("Now you have " + arr.size() + " tasks in the list. ");
-                i--;
-            } else {
-                throw new IllegalArgumentException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-        }
-    }*/
 }

@@ -8,8 +8,8 @@ public class Storage {
 
     private String filename;
 
-    public Storage(String filename) {
-        this.filename = filename;
+    public Storage() {
+        this.filename = "../../../data/tasks.txt";
         //PrintWriter writer = new PrintWriter(filename);
     }
     public ArrayList<Task> load() throws IOException {

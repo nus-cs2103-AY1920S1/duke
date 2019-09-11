@@ -24,7 +24,7 @@ public class Ui {
     }
 
     public Command getUserInput() throws DukeException {
-        String[] input = this.scanner.nextLine().trim().split("\\s+");
+        String input = this.scanner.nextLine();
         return Parser.parse(input);
     }
 

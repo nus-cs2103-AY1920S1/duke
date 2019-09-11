@@ -45,4 +45,8 @@ public class TodoList implements Serializable {
                 .filter(task -> task.toString().contains(description))
                 .collect(Collectors.toList());
     }
+
+    public Task update(int index, Task newTask) {
+        return list.set(index - 1, newTask);
+    }
 }

@@ -77,6 +77,9 @@ public class TaskList {
     //Retrieve the task, complete it and return the formatted String
     //"Nice! I've marked..."
     public Task taskDone(int index) {
+
+        assert index>0: "You cant do this guy";
+
         return myTaskList.get(index).taskComplete();
     }
 
@@ -86,6 +89,8 @@ public class TaskList {
      */
 
     public Task deleteTask(int index) {
+        assert index>0: "You cant delete this guy";
+
         Task removed = myTaskList.remove(index);
         return removed;
     }

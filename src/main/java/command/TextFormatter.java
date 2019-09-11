@@ -38,11 +38,11 @@ public class TextFormatter {
      */
 
     public static String deleteFormat(Task removed, int size) {
-    String separator = "    ____________________________________________________________";
-    String removingTask = "    Noted. I've removed this task:";
-    String converted = "      "+ removed;
-    String taskTracking = "    Now you have " + size + " tasks in the list.";
-    String answer = separator + "\n" + removingTask + "\n"
+        String separator = "    ____________________________________________________________";
+        String removingTask = "    Noted. I've removed this task:";
+        String converted = "      "+ removed;
+        String taskTracking = "    Now you have " + size + " tasks in the list.";
+        String answer = separator + "\n" + removingTask + "\n"
             + converted + "\n" + taskTracking + "\n" + separator + "\n";
 
        return answer;

@@ -44,6 +44,8 @@ public class Storage {
                 myTasksStore.add(new DeadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
             } else if (splitTask[0].equalsIgnoreCase("E")) {
                 myTasksStore.add(new DeadlineTask(splitTask[2], Boolean.parseBoolean(splitTask[1]), TimeFormatter.convertToDate(splitTask[3])));
+            } else {
+                assert false:"Wrong input: " + current;
             }
         }
         s.close();
@@ -58,20 +60,23 @@ public class Storage {
         ArrayList<Task> myTasksStore = myList.getList();
         FileWriter fw = new FileWriter(filePath);
         for(Task current:myTasksStore) {
+
             if((current.getType()).equalsIgnoreCase("T")) {
                   String task = String.format("%s,%b,%s", current.getType(),current.getDoneStatus(), current.getName());
-                fw.write(task+ System.lineSeparator());
-            } else {
-                if((current.getType()).equalsIgnoreCase("E")) {
+                  fw.write(task+ System.lineSeparator());
+
+            } else if ((current.getType()).equalsIgnoreCase("E")) {
                     EventTask event = (EventTask)current;
                     String task = String.format("%s,%b,%s,%s", event.getType(),event.getDoneStatus(),event.getName(),TimeFormatter.convertToString(event.getTime()));
                     fw.write(task+ System.lineSeparator());
-                } else {
-                    DeadlineTask deadline = (DeadlineTask)current;
-                    String task = String.format("%s,%b,%s,%s", deadline.getType(),deadline.getDoneStatus(),deadline.getName(),TimeFormatter.convertToString(deadline.getTime()));
-                    fw.write(task+System.lineSeparator());
-                }
 
+            } else if ((current.getType()).equalsIgnoreCase("D")) {
+                DeadlineTask deadline = (DeadlineTask) current;
+                String task = String.format("%s,%b,%s,%s", deadline.getType(), deadline.getDoneStatus(), deadline.getName(), TimeFormatter.convertToString(deadline.getTime()));
+                fw.write(task + System.lineSeparator());
+
+            } else {
+                assert false:current + " Something is wrong with your command";
                 }
         }
 

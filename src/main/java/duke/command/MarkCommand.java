@@ -17,12 +17,10 @@ public class MarkCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws NumberFormatException {
-
         int value = Parser.getIndex(input, taskList.size());
         assert value >= 0 : "Negative Index";
         taskList.get(value - 1).setDone();
         ui.out("Nice! I've marked this task as done:");
         ui.out(taskList.get(value - 1).toString());
-
     }
 }

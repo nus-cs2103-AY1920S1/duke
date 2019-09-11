@@ -1,5 +1,6 @@
 package duke.io;
 
+import duke.location.LocationList;
 import duke.task.TaskList;
 
 import java.util.Scanner;
@@ -56,6 +57,22 @@ public class Ui {
             out("Here are the tasks in your list:");
             for (int i = 0; i < taskList.size(); i++) {
                 out((i + 1) + "." + taskList.get(i));
+            }
+        }
+    }
+
+    /**
+     * Prints out list of locations.
+     *
+     * @param placeList List of locations
+     */
+    public void list(LocationList placeList) {
+        if (placeList.size() == 0) {
+            out("List is empty!");
+        } else {
+            out("Here are the tasks in your list:");
+            for (int i = 0; i < placeList.size(); i++) {
+                out((i + 1) + "." + placeList.get(i));
             }
         }
     }

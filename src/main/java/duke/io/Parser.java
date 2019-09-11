@@ -9,6 +9,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
+import duke.command.PlaceCommand;
 import duke.task.Deadline;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -43,7 +44,9 @@ public class Parser {
         case "find":
             return new FindCommand(input);
         case "list":
-            return new ListCommand();
+            return new ListCommand(input);
+        case "place":
+            return new PlaceCommand(input);
         case "todo":
             return new AddCommand(input);
         case "event":

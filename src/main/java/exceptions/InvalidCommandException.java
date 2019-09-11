@@ -1,6 +1,5 @@
 package exceptions;
 
-
 /**
  * The InvalidCommandException class handles all invalid command
  * input by the user.
@@ -15,3 +14,4 @@ public class InvalidCommandException extends DukeException {
         super(message);
     }
 }
+

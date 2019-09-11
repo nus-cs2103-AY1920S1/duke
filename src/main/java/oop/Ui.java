@@ -72,3 +72,4 @@ public class Ui {
         return scanner.nextLine();
     }
 }
+

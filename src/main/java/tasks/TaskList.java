@@ -39,6 +39,81 @@ public class TaskList {
     }
 
     /**
+     * A method to return the number of Task that exist in TaskList.
+     * @return Returns the number of Task.
+     */
+    public int getNumOfTasks() {
+        return numOfTasks;
+    }
+
+    /**
+     * A method to retrieve the list of task in TaskList.
+     * @return Returns the list of Task.
+     */
+    public ArrayList<Task> getTaskList() {
+        return xs;
+    }
+
+    /**
+     * A method to add a task to the list of task in TaskList.
+     * @param t The task to be added.
+     * @return Returns a String to be printed when the list is updated.
+     */
+    public String addTask(Task t) {
+        numOfTasks++;
+        assert numOfTasks >= 1 : "Task started from a negative value";
+        xs.add(t);
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.", t, numOfTasks);
+    }
+
+    /**
+     * A method to mark a specified task in the list as done.
+     * @param num The index of the task in the list.
+     * @return Returns a String to be printed when the task is marked as done.
+     */
+    public String tickTask(int num) {
+        xs.get(num - 1).markAsDone();
+        return String.format("Nice! I've marked this task as done:\n%s", xs.get(num - 1));
+    }
+
+    /**
+     * A method to remove a task from the list of task in TaskList.
+     * @param num The index of the task in the list.
+     * @return Returns a String to be printed when the task is removed.
+     */
+    public String removeTask(int num) {
+        numOfTasks--;
+        assert numOfTasks >= 0 : " Negative task numbers found";
+        Task t = xs.get(num - 1);
+        xs.remove(num - 1);
+        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.", t, numOfTasks);
+    }
+
+    /**
+     * A method iterate through the list of task and print each Task.
+     * @return Returns a String representation of all the Task in the TaskList.
+     */
+    public String printTasks() {
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
+        for (int i = 1; i <= xs.size(); i++) {
+            sb.append("\n" + String.format("%d.%s", i, xs.get(i - 1)));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * A method to print the tasks in the list that matches the predicate.
+     * @return Returns a String representation of all the Task that match the predicate.
+     */
+    public String printMatchingTasks() {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
+        for (int i = 1; i <= xs.size(); i++) {
+            sb.append("\n" + String.format("%d.%s", i, xs.get(i - 1)));
+        }
+        return sb.toString();
+    }
+
+    /**
      * A method to process the data of previous taskings, and add them to the
      * current TaskList.
      * @param list List of Task to be updated.
@@ -71,77 +146,5 @@ public class TaskList {
         }
         s.close();
     }
-
-    /**
-     * A method to return the number of Task that exist in TaskList.
-     * @return Returns the number of Task.
-     */
-    public int getNumOfTasks() {
-        return numOfTasks;
-    }
-
-    /**
-     * A method to retrieve the list of task in TaskList.
-     * @return Returns the list of Task.
-     */
-    public ArrayList<Task> getTaskList() {
-        return xs;
-    }
-
-    /**
-     * A method to add a task to the list of task in TaskList.
-     * @param t The task to be added.
-     * @return Returns a String to be printed when the list is updated.
-     */
-    public String addTask(Task t) {
-        numOfTasks++;
-        xs.add(t);
-        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.", t, numOfTasks);
-    }
-
-    /**
-     * A method to mark a specified task in the list as done.
-     * @param num The index of the task in the list.
-     * @return Returns a String to be printed when the task is marked as done.
-     */
-    public String tickTask(int num) {
-        xs.get(num - 1).markAsDone();
-        return String.format("Nice! I've marked this task as done:\n%s", xs.get(num - 1));
-    }
-
-    /**
-     * A method to remove a task from the list of task in TaskList.
-     * @param num The index of the task in the list.
-     * @return Returns a String to be printed when the task is removed.
-     */
-    public String removeTask(int num) {
-        numOfTasks--;
-        Task t = xs.get(num - 1);
-        xs.remove(num - 1);
-        return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.", t, numOfTasks);
-    }
-
-    /**
-     * A method iterate through the list of task and print each Task.
-     * @return Returns a String representation of all the Task in the TaskList.
-     */
-    public String printTasks() {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
-        for (int i = 1; i <= xs.size(); i++) {
-            sb.append("\n" + String.format("%d.%s", i, xs.get(i - 1)));
-        }
-        return sb.toString();
-    }
-
-    /**
-     * A method to print the tasks in the list that matches the predicate.
-     * @return Returns a String representation of all the Task that match the predicate.
-     */
-    public String printMatchingTasks() {
-        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
-        for (int i = 1; i <= xs.size(); i++) {
-            sb.append("\n" + String.format("%d.%s", i, xs.get(i - 1)));
-        }
-        return sb.toString();
-    }
 }
+

@@ -27,13 +27,9 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             Task t = tasks.getList().get(index);
-
-            StringBuilder sb = new StringBuilder("Noted. I've removed this task:\n" + t);
             storage.deleteTaskFromFile(t);
             tasks.deleteTask(t);
-            sb.append(tasks.getStatus());
-
-            return (sb.toString());
+            return ("Noted. I've removed this task:\n" + t + tasks.getStatus());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number. Not within range");
         }

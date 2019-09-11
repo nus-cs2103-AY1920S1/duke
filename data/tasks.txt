@@ -1,14 +1,9 @@
-D|0| return book |Mon, 2 Dec 2019, 06:00 PM
-T|1|make my bed
-D|0|Quiz 1 | tomorrow
-T|0|Make bed
-T|0|make bed
-T|0|read book
-D|0|return my stuff |tomorrow
-D|0|cskam |tomorrow
-D|0|csasa |tomrrow
-T|0|run1
-T|1|run
-T|0|canned
-T|0|make bed
 T|0|ca
+T|0|make bed again
+D|0|make bed |Sat, 11 Dec 1999, 04:00 PM
+E|0|gala dinner |Sat, 11 Dec 1999, 06:00 PM|Mon, 20 Dec 1999, 08:00 PM
+D|0|make bread |Thu, 11 Dec 2008, 09:00 PM
+D|0|csamkxs |Thu, 11 Jan 1000, 08:00 PM
+T|1|make my bed
+D|0|csakms |Mon, 11 Feb 2019, 03:00 PM
+T|0|best

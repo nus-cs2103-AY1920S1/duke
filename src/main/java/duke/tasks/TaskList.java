@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,14 +57,32 @@ public class TaskList {
      * @return The string representation of its status.
      */
     public String getStatus() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nNow you have ")
-          .append(allTasks.size());
-        if (allTasks.size() == 1) {
-            sb.append(" task in the list.");
-        } else {
-            sb.append(" tasks in the list.");
-        }
-        return sb.toString();
+        return "\nNow you have " + allTasks.size()
+                + (allTasks.size() == 1 ? " task in the list." : " tasks in the list.");
+    }
+
+    /**
+     * Sorts the LinkedList containing all existing tasks by name.
+     *
+     * @return The sorted LinkedList.
+     */
+    public LinkedList<Task> sortByName() {
+        LinkedList<Task> copy = new LinkedList<>(allTasks);
+        Comparator<Task> nameSorter = Comparator.comparing(Task::getDescription);
+        copy.sort(nameSorter);
+        return copy;
+    }
+
+    /**
+     * Sorts the LinkedList containing all existing tasks by date.
+     *
+     * @return The sorted LinkedList.
+     */
+    public LinkedList<Task> sortByDate() {
+        LinkedList<Task> copy = new LinkedList<>(allTasks);
+        Comparator<Task> nameSorter = Comparator.comparing(Task::getDate,
+                Comparator.nullsFirst(Comparator.naturalOrder()));
+        copy.sort(nameSorter);
+        return copy;
     }
 }

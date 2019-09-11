@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 public class Storage {
@@ -48,6 +50,8 @@ public class Storage {
             }
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
+        } catch (ParseException e) {
+            throw new DukeException("Cannot parse items...");
         }
         return allTasks;
     }
@@ -58,7 +62,7 @@ public class Storage {
      * @param currLine The current line to be converted.
      * @return The Task object generated from the line.
      */
-    private Task convertLineToTask(String currLine) {
+    private Task convertLineToTask(String currLine) throws ParseException {
         String[] formattedText = currLine.split("\\|");
         Task t;
         switch (formattedText[0]) {
@@ -66,10 +70,13 @@ public class Storage {
             t = new ToDo(formattedText[2]);
             break;
         case "D":
-            t = new Deadline(formattedText[2], formattedText[3]);
+            t = new Deadline(formattedText[2],
+                    new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").parse(formattedText[3]));
             break;
         case "E":
-            t = new Event(formattedText[2], formattedText[3]);
+            t = new Event(formattedText[2],
+                    new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").parse(formattedText[3]),
+                    new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").parse(formattedText[4]));
             break;
         default:
             t = new Task("");

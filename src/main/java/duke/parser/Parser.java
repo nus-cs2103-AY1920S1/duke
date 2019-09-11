@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 
 public class Parser {
@@ -38,6 +39,8 @@ public class Parser {
                 return new AddCommand(details[0], fullCommand.split(details[0]));
             case "bye":
                 return new ExitCommand();
+            case "sort":
+                return new SortCommand(details[1]);
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-( ");
             }

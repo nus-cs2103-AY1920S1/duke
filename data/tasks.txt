@@ -11,8 +11,8 @@ T | 0 | movie & film
 E | 1 | music exhibition | 05/07/1997 0813
 E | 1 | movie screening | 05/01/2039 1942
 D | 0 | art project | 04/01/2022 2313
-T | 0 | watering
+T | 1 | watering
 T | 0 | movie #fun
 D | 0 | meeting | 06/11/2313 1913
-T | 0 | zzz
+T | 1 | zzz
 T | 0 | artt

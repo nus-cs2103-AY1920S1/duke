@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public abstract class AddCommand implements ITaskCommand {
     IRepository<Task> repo;
+    private String[] args;
     private Task createdTask;
 
     AddCommand(IRepository<Task> repo) {
@@ -17,20 +18,36 @@ public abstract class AddCommand implements ITaskCommand {
     }
 
     @Override
-    public Optional<UndoingAction> getUndoingAction() {
-        UndoingAction undoingAction = () -> {
-            assert createdTask != null;
+    public final TaskResponse execute(String... args) {
+        this.args = args;
+        return executeAdd(args);
+    }
 
-            try {
-                repo.delete(createdTask);
-                return new TaskResponse(getUndoResponseFormat(), Collections.singletonList(createdTask));
+    public abstract TaskResponse executeAdd(String... args);
 
-            } catch (DukeIoException e) {
-                return new TaskResponse(e);
+    @Override
+    public Optional<CommandState> getCommandState() {
+        CommandState commandState = new CommandState() {
+            @Override
+            public TaskResponse undo() {
+                assert createdTask != null;
+
+                try {
+                    repo.delete(createdTask);
+                    return new TaskResponse(getUndoResponseFormat(), Collections.singletonList(createdTask));
+
+                } catch (DukeIoException e) {
+                    return new TaskResponse(e);
+                }
+            }
+
+            @Override
+            public TaskResponse redo() {
+                return execute(args);
             }
         };
 
-        return Optional.of(undoingAction);
+        return Optional.of(commandState);
     }
 
     TaskResponse tryCreateTask(Task task) {

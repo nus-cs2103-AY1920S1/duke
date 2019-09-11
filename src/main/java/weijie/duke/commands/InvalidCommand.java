@@ -13,7 +13,7 @@ public class InvalidCommand implements ITaskCommand {
     }
 
     @Override
-    public Optional<UndoingAction> getUndoingAction() {
+    public Optional<CommandState> getCommandState() {
         return Optional.empty();
     }
 }

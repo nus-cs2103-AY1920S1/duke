@@ -83,12 +83,12 @@ public class MainWindowController extends AnchorPane {
         try {
             ITaskCommand command = factory.tryMakeCommand(args[0]);
             TaskResponse response = command.execute(args);
-            commandHistory.addCommand(command);
 
             doAfter(300, () -> {
                 if (response.isInvalidInput()) {
                     dialogList.add(new DukeDialogController(response.getErrorMessage(), dukeImage));
                 } else {
+                    commandHistory.addCommand(command);
                     dialogList.add(new DukeDialogController(response.getFormattedResponse(), dukeImage));
                 }
             });

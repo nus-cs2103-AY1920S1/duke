@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class DeleteCommand implements ITaskCommand {
     private IRepository<Task> repo;
+    private String[] args;
     private Task deletedTask;
     private int deletedTaskIndex;
 
@@ -21,6 +22,8 @@ public class DeleteCommand implements ITaskCommand {
     @Override
     @SuppressWarnings("Duplicates")
     public TaskResponse execute(String... args) {
+        this.args = args;
+
         if (args.length < 2) {
             return new TaskResponse(
                     new DukeInvalidInputException("☹ OOPS!!! Please input the number of the task to mark as done."));
@@ -28,7 +31,7 @@ public class DeleteCommand implements ITaskCommand {
 
         int id = Integer.parseInt(args[1]) - 1;
 
-        if (id > repo.getSize()) {
+        if (id >= repo.getSize()) {
             return new TaskResponse(
                     new DukeInvalidInputException("☹ OOPS!!! Task with that number does not exist!"));
         }
@@ -50,20 +53,28 @@ public class DeleteCommand implements ITaskCommand {
     }
 
     @Override
-    public Optional<UndoingAction> getUndoingAction() {
-        UndoingAction undoingAction = () -> {
-            assert deletedTask != null;
+    public Optional<CommandState> getCommandState() {
+        CommandState commandState = new CommandState() {
+            @Override
+            public TaskResponse undo() {
+                assert deletedTask != null;
 
-            try {
-                repo.insert(deletedTaskIndex, deletedTask);
-                return new TaskResponse("Undid delete command.\nThis task was restored:\n  %s",
-                        Collections.singletonList(deletedTask));
+                try {
+                    repo.insert(deletedTaskIndex, deletedTask);
+                    return new TaskResponse("Undid delete command.\nThis task was restored:\n  %s",
+                            Collections.singletonList(deletedTask));
 
-            } catch (DukeIoException e) {
-                return new TaskResponse(e);
+                } catch (DukeIoException e) {
+                    return new TaskResponse(e);
+                }
+            }
+
+            @Override
+            public TaskResponse redo() {
+                return execute(args);
             }
         };
 
-        return Optional.of(undoingAction);
+        return Optional.of(commandState);
     }
 }

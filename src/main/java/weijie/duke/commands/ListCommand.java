@@ -28,7 +28,7 @@ public class ListCommand implements ITaskCommand {
     }
 
     @Override
-    public Optional<UndoingAction> getUndoingAction() {
+    public Optional<CommandState> getCommandState() {
         return Optional.empty();
     }
 }

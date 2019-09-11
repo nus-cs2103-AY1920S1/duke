@@ -7,24 +7,28 @@ import java.util.List;
 
 public class CommandHistory {
 
-    private List<UndoingAction> undoHistory;
+    private List<CommandState> commandStateHistory;
     private int presentState;
+    private int maxIndex;
 
     public CommandHistory() {
-        undoHistory = new ArrayList<>();
+        commandStateHistory = new ArrayList<>();
         presentState = -1;
     }
 
     public void addCommand(ITaskCommand command) {
-        command.getUndoingAction()
+        System.out.println("before: " + commandStateHistory + "\nindex: " + presentState);
+        command.getCommandState()
                 .ifPresent(undo -> {
                     presentState++;
-                    if (presentState >= undoHistory.size()) {
-                        undoHistory.add(undo);
+                    maxIndex = presentState;
+                    if (presentState >= commandStateHistory.size()) {
+                        commandStateHistory.add(undo);
                     } else {
-                        undoHistory.set(presentState, undo);
+                        commandStateHistory.set(presentState, undo);
                     }
                 });
+        System.out.println("after: " + commandStateHistory + "\nindex: " + presentState);
     }
 
     TaskResponse undo() {
@@ -32,8 +36,17 @@ public class CommandHistory {
             return new TaskResponse("There is no command to undo!", new ArrayList<>());
         }
 
-        TaskResponse taskResponse = undoHistory.get(presentState).undo();
+        TaskResponse taskResponse = commandStateHistory.get(presentState).undo();
         presentState--;
         return taskResponse;
+    }
+
+    TaskResponse redo() {
+        if (presentState >= commandStateHistory.size() - 1 || presentState >= maxIndex) {
+            return new TaskResponse("There is no command to redo!", new ArrayList<>());
+        }
+
+        presentState++;
+        return commandStateHistory.get(presentState).redo();
     }
 }

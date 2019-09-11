@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface ITaskCommand {
     TaskResponse execute(String... args);
 
-    Optional<UndoingAction> getUndoingAction();
+    Optional<CommandState> getCommandState();
 }

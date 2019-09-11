@@ -1,21 +1,19 @@
 package weijie.duke.commands;
 
-
 import weijie.duke.responses.TaskResponse;
 
 import java.util.Optional;
 
-public class UndoCommand implements ITaskCommand {
-
+public class RedoCommand implements ITaskCommand {
     private CommandHistory history;
 
-    UndoCommand(CommandHistory history) {
+    RedoCommand(CommandHistory history) {
         this.history = history;
     }
 
     @Override
     public TaskResponse execute(String... args) {
-        return history.undo();
+        return history.redo();
     }
 
     @Override

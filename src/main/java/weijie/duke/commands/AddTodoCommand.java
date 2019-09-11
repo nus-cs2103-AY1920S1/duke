@@ -16,7 +16,7 @@ public class AddTodoCommand extends AddCommand {
 
     @Override
     @SuppressWarnings("Duplicates")
-    public TaskResponse execute(String... args) {
+    public TaskResponse executeAdd(String... args) {
         String description = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
 
         if (description.isEmpty()) {

@@ -13,6 +13,7 @@ public enum CommandList {
     DELETE_COMMAND("delete", DeleteCommand.class),
     FIND_COMMAND("find", FindCommand.class),
     UNDO_COMMAND("undo", UndoCommand.class),
+    REDO_COMMAND("redo", RedoCommand.class),
     INVALID_COMMAND(null, InvalidCommand.class);
 
 

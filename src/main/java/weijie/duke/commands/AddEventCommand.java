@@ -19,7 +19,7 @@ public class AddEventCommand extends AddCommand {
 
     @Override
     @SuppressWarnings("Duplicates")
-    public TaskResponse execute(String... args) {
+    public TaskResponse executeAdd(String... args) {
         String input = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
         String[] descriptionAndDate = input.split(" /at ");
 

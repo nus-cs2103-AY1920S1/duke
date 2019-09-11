@@ -20,19 +20,29 @@ public abstract class TimedTask extends Task {
     protected TimedTask(String details, Calendar date) {
         super(details);
         this.date = date;
-        int suffixConstant = date.get(Calendar.DAY_OF_MONTH) % 10;
-        String suffix = suffixConstant == 1
-                ? "st"
-                : suffixConstant == 2
-                    ? "nd"
-                    : suffixConstant == 3
-                        ? "rd"
-                        : "th";
+        String suffix = getDaySuffix(date);
         this.dateFormat = new SimpleDateFormat("d'" + suffix + " of' MMMM yyyy, h:mma");
         DateFormatSymbols symbols = new DateFormatSymbols(Locale.getDefault());
         symbols.setAmPmStrings(new String[] { "am", "pm" });
         this.dateFormat.setDateFormatSymbols(symbols);
         this.fileDateFormat = new SimpleDateFormat("d/M/yyyy kkmm");
+    }
+
+    /**
+     * Takes the Calendar object and gets the suffix for the day of the month.
+     * A day ending with the number 2 should have the suffix "nd" to make the word "2nd".
+     * @param date The Calendar object of the TimedTask.
+     * @return The suffix of the day in the Calendar.
+     */
+    private String getDaySuffix(Calendar date) {
+        int suffixConstant = date.get(Calendar.DAY_OF_MONTH) % 10;
+        return suffixConstant == 1
+                ? "st"
+                : suffixConstant == 2
+                ? "nd"
+                : suffixConstant == 3
+                ? "rd"
+                : "th";
     }
 
     /**
@@ -42,7 +52,7 @@ public abstract class TimedTask extends Task {
      * @throws DukeException Thrown when the date or its format is invalid.
      */
     public static Calendar parseDateTime(String input) throws DukeException {
-        // Input Validation...
+        // Input Validation
         String[] inputArr = input.split(" ");
         if (inputArr.length != 2) {
             throw new DukeException("Invalid date/time format!"

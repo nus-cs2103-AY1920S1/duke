@@ -28,28 +28,61 @@ public abstract class Task {
         String taskType = commandArray[0];
         command = command.replaceFirst(taskType + " ", "");
         if (taskType.equals("event")) {
-            commandArray = command.split(" /at ");
-            String details = commandArray[0];
-            if (commandArray.length != 2) {
-                throw new DukeException("Invalid command format! Proper usage: "
-                        + "'event <details> /at <timing>'");
-            } else if (details.equals("")) {
-                throw new DukeException("The description of an event cannot be empty.");
-            } else {
-                return new EventTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
-            }
+            return createEventTask(command);
         } else if (taskType.equals("deadline")) {
-            commandArray = command.split(" /by ");
-            String details = commandArray[0];
-            if (commandArray.length != 2) {
-                throw new DukeException("Invalid command format! Proper usage: "
-                        + "'deadline <details> /by <timing>'");
-            } else if (details.equals("")) {
-                throw new DukeException("The description of a deadline cannot be empty.");
-            } else {
-                return new DeadlineTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
-            }
-        } else if (commandArray.length < 2) {
+            return createDeadlineTask(command);
+        } else {
+            return createToDoTask(command);
+        }
+    }
+
+    /**
+     * Helper function to create an Event task.
+     * @param command the original command by the user without the first parameter.
+     * @return An event task, if the command is valid.
+     * @throws DukeException Exception thrown if the format is invalid.
+     */
+    private static EventTask createEventTask(String command) throws DukeException {
+        String[] commandArray = command.split(" /at ");
+        String details = commandArray[0];
+        if (commandArray.length != 2) {
+            throw new DukeException("Invalid command format! Proper usage: "
+                    + "'event <details> /at <timing>'");
+        } else if (details.equals("")) {
+            throw new DukeException("The description of an event cannot be empty.");
+        } else {
+            return new EventTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
+        }
+    }
+
+    /**
+     * Helper function to create a Deadline task.
+     * @param command the original command by the user without the first parameter.
+     * @return A deadline task, if the command is valid.
+     * @throws DukeException Exception thrown if the format is invalid.
+     */
+    private static DeadlineTask createDeadlineTask(String command) throws DukeException {
+        String[] commandArray = command.split(" /by ");
+        String details = commandArray[0];
+        if (commandArray.length != 2) {
+            throw new DukeException("Invalid command format! Proper usage: "
+                    + "'deadline <details> /by <timing>'");
+        } else if (details.equals("")) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        } else {
+            return new DeadlineTask(commandArray[0], TimedTask.parseDateTime(commandArray[1]));
+        }
+    }
+
+    /**
+     * Helper function to create a to do task.
+     * @param command the original command by the user without the first parameter.
+     * @return A to do task, if the command is valid.
+     * @throws DukeException Exception thrown if the format is invalid.
+     */
+    private static ToDoTask createToDoTask(String command) throws DukeException {
+        String[] commandArray = command.split(" ");
+        if (commandArray.length == 0) {
             throw new DukeException("The description of a todo cannot be empty.");
         } else {
             return new ToDoTask(command);
@@ -64,18 +97,18 @@ public abstract class Task {
      */
     protected static Task createFromFile(String item) throws DukeException {
         String[] args = item.split(" \\| ");
-        assert(args.length > 1);
+        assert args.length > 1;
         String taskType = args[0];
         boolean isAlreadyDone = Integer.parseInt(args[1]) == 1;
         Task newTask;
         if (taskType.equals("D")) {
-            assert(args.length == 4);
+            assert args.length == 4;
             newTask = new DeadlineTask(args[2], TimedTask.parseDateTime(args[3]));
         } else if (taskType.equals("E")) {
-            assert(args.length == 4);
+            assert args.length == 4;
             newTask = new EventTask(args[2], TimedTask.parseDateTime(args[3]));
         } else {
-            assert(args.length == 3);
+            assert args.length == 3;
             newTask = new ToDoTask(args[2]);
         }
         if (isAlreadyDone) {

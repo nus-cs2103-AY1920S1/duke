@@ -46,7 +46,7 @@ shadowJar {
 
 application {
     // Change this to your main class.
-    mainClassName = "Main"
+    mainClassName = "Launcher"
 }
 
 compileKotlin {

@@ -6,11 +6,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import myduke.ui.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class ApplicationLauncher extends Application {
+
     @Override
     public void start(Stage stage) {
         try {
@@ -25,6 +27,12 @@ public class ApplicationLauncher extends Application {
             //stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
+
+            MainWindow controller = fxmlLoader.getController();
+            stage.setOnCloseRequest(we -> {
+                we.consume();
+                controller.shutdown();
+            });
 
         } catch (IOException e) {
             e.printStackTrace();

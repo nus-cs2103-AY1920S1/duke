@@ -67,19 +67,38 @@ public class MainWindow extends AnchorPane {
         }
 
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-        if (!dukeEngine.respondToQuery(input)) {
-            sendButton.setDisable(true);
-            Thread thread = new Thread(() -> {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    System.out.println(ex.getMessage());
-                } finally {
-                    Platform.runLater(() -> Platform.exit());
-                }
-            });
-            thread.start();
-        }
+        findResponse(input);
         userInput.clear();
+    }
+
+    /**
+     * Finds and display the responses to a user query.
+     *
+     * @param input query from the user.
+     */
+    private void findResponse(String input) {
+        boolean ignoreQuery = input.isEmpty() || sendButton.isDisabled();
+        if (ignoreQuery || dukeEngine.respondToQuery(input)) {
+            return;
+        }
+
+        sendButton.setDisable(true);
+        Thread thread = new Thread(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            } finally {
+                Platform.runLater(() -> Platform.exit());
+            }
+        });
+        thread.start();
+    }
+
+    /**
+     * Shuts down Duke.
+     */
+    public void shutdown() {
+        findResponse("bye");
     }
 }

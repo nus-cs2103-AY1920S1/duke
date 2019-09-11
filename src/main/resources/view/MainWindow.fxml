@@ -15,15 +15,7 @@
     </Button>
     <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
       <content>
-        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0">
-          <children>
-            <ScrollPane hbarPolicy="AS_NEEDED" prefHeight="552.0" prefWidth="388.0" vbarPolicy="ALWAYS">
-              <content>
-                <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-              </content>
-            </ScrollPane>
-          </children>
-        </VBox>
+        <VBox fx:id="dialogContainer" focusTraversable="false" opacity="1.0" prefHeight="552.0" prefWidth="388.0" />
       </content>
     </ScrollPane>
   </children>

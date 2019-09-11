@@ -11,7 +11,7 @@ public class TaskListTest {
         Task testTask = new Task("buy bread");
         test.add(testTask);
         assertEquals(test.size(), 1);
-        assertEquals(test.get(1), testTask);
+        assertEquals(test.get(0), testTask);
         test.delete(1);
         assertEquals(test.size(), 0);
     }

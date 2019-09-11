@@ -1,5 +1,6 @@
 package duke;
 
+import duke.Alias;
 import duke.error.DukeException;
 import duke.command.Command;
 import duke.command.AddCommand;
@@ -8,6 +9,8 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ExitCommand;
+import duke.command.ListAlias;
+import duke.command.AddAlias;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -27,7 +30,14 @@ public class Parser {
         try {
             String subcommand = fullcommand.split(" ")[0];
             String command = fullcommand.replaceFirst(subcommand, "").trim();
-            switch (subcommand) {
+            String type;
+            if (Alias.aliases.containsKey(subcommand)) {
+                type = Alias.aliases.get(subcommand);
+            } else {
+                throw new DukeException("       OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+
+            switch (type.toLowerCase()) {
             case "list":
                 return new ListCommand();
             case "done":
@@ -44,8 +54,12 @@ public class Parser {
                 return new AddCommand("E", command);
             case "exit":
                 return new ExitCommand();
+            case "addsyntax":
+                return new AddAlias(command);
+            case "listsyntax":
+                return new ListAlias();
             default:
-                throw new DukeException("       OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new AssertionError("INVALID PARSE: " + fullcommand);
             }
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());

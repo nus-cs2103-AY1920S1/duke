@@ -22,6 +22,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            Alias.loadAliases();
         } catch (Exception e) {
             tasks = new TaskList();
         }

@@ -1,0 +1,10 @@
+LIST | list
+EXIT | exit
+FIND | find
+DONE | done
+DELETE | delete
+TODO | t
+DEADLINE | deadline
+EVENT | event
+ADDSYNTAX | addsyntax
+LISTSYNTAX | listsyntax

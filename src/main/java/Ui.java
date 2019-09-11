@@ -66,6 +66,19 @@ public class Ui {
     }
 
     /**
+     * Generates add syntax message once AddAlias is successful.
+     *
+     * @param type Type of command for alias
+     * @param alias
+     * @return String of successful add alias message
+     */
+    public static String printAddAlias(String type, String alias) {
+        return liner + "\n\tGot it. I've overwritten the alias:\n\t" + type + " : " + alias
+                + liner;
+    }
+
+
+    /**
      * Generates done task message once successful.
      *
      * @param currTask Most recent Task executed

@@ -19,7 +19,7 @@ public class ParserTest {
 
     @Test
     public void testCommandParsing() {
-        String[] expectedOutputs = new String[] {"DONE", "1"};
+        String[] expectedOutputs = new String[] {"done", "1"};
         String input = "done 1";
         assertEquals(expectedOutputs[0], Parser.parseCommand(input)[0]);
         assertEquals(expectedOutputs[1], Parser.parseCommand(input)[1]);

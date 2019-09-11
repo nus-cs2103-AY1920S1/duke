@@ -59,6 +59,8 @@ public class Storage {
                     }
                     tasks.add(e);
                     break;
+                default:
+                    assert false : "Saved task should only begin with either T, D or E";
                 }
             }
         } catch (Exception e) {

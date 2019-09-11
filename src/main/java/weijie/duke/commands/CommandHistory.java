@@ -13,40 +13,41 @@ public class CommandHistory {
 
     public CommandHistory() {
         commandStateHistory = new ArrayList<>();
-        presentState = -1;
+        presentState = 0;
     }
 
     public void addCommand(ITaskCommand command) {
         System.out.println("before: " + commandStateHistory + "\nindex: " + presentState);
         command.getCommandState()
                 .ifPresent(undo -> {
-                    presentState++;
-                    maxIndex = presentState;
                     if (presentState >= commandStateHistory.size()) {
                         commandStateHistory.add(undo);
                     } else {
                         commandStateHistory.set(presentState, undo);
                     }
+
+                    presentState++;
+                    maxIndex = presentState;
                 });
         System.out.println("after: " + commandStateHistory + "\nindex: " + presentState);
     }
 
     TaskResponse undo() {
-        if (presentState < 0) {
+        if (presentState <= 0) {
             return new TaskResponse("There is no command to undo!", new ArrayList<>());
         }
 
-        TaskResponse taskResponse = commandStateHistory.get(presentState).undo();
         presentState--;
-        return taskResponse;
+        return commandStateHistory.get(presentState).undo();
     }
 
     TaskResponse redo() {
-        if (presentState >= commandStateHistory.size() - 1 || presentState >= maxIndex) {
+        if (presentState >= commandStateHistory.size() || presentState >= maxIndex) {
             return new TaskResponse("There is no command to redo!", new ArrayList<>());
         }
 
+        TaskResponse taskResponse = commandStateHistory.get(presentState).redo();
         presentState++;
-        return commandStateHistory.get(presentState).redo();
+        return taskResponse;
     }
 }

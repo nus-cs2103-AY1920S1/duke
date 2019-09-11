@@ -11,6 +11,7 @@ import weijie.duke.commands.CommandList;
 import weijie.duke.commands.TaskCommandFactory;
 import weijie.duke.db.FileSystemStorage;
 import weijie.duke.db.ITaskStorage;
+import weijie.duke.exceptions.DukeIllegalArgumentException;
 import weijie.duke.exceptions.DukeIoException;
 import weijie.duke.models.Task;
 import weijie.duke.controllers.MainWindowController;
@@ -45,12 +46,12 @@ public class Duke extends Application {
             primaryStage.setScene(scene);
             primaryStage.show();
 
-        } catch (DukeIoException | IOException e) {
+        } catch (DukeIoException | IOException | DukeIllegalArgumentException e) {
             e.printStackTrace();
         }
     }
 
-    private void initDependencies() throws DukeIoException {
+    private void initDependencies() throws DukeIoException, DukeIllegalArgumentException {
         ITaskStorage storage = new FileSystemStorage(filePath);
         IRepository<Task> repo = new TaskRepo(storage);
         history = new CommandHistory();

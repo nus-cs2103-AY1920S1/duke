@@ -1,7 +1,9 @@
 package weijie.duke.commands;
 
+import org.apache.commons.lang3.ClassUtils;
 import weijie.duke.exceptions.DukeDependencyNotFoundException;
 import weijie.duke.exceptions.DukeException;
+import weijie.duke.exceptions.DukeIllegalArgumentException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -9,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 public class TaskCommandFactory {
 
@@ -55,7 +56,10 @@ public class TaskCommandFactory {
         }
     }
 
-    public void registerDependency(Object dependency) {
+    public void registerDependency(Object dependency) throws DukeIllegalArgumentException {
+        if (ClassUtils.isPrimitiveOrWrapper(dependency.getClass())) {
+            throw new DukeIllegalArgumentException("Cannot register boxed/unboxed primitive dependencies!");
+        }
         registeredDependencies.add(dependency);
     }
 

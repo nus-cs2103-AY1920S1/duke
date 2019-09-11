@@ -80,6 +80,7 @@ public class UI {
      * Prints a message of an error.
      */
     public String errorItide() {
+    public String invalidTaskIndexExceptionMsg() {
         return "\u2639 OOPS!!! You need to provide a valid task number :-(";
     }
 

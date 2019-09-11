@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.main.Parser;
+
 import java.util.Date;
 
 /**
@@ -9,7 +11,7 @@ import java.util.Date;
 public class Event extends Task {
     private Date eventAt;
 
-    Event(String taskDetails, Date eventAt) {
+    public Event(String taskDetails, Date eventAt) {
         super(taskDetails);
         this.eventAt = eventAt;
     }
@@ -21,7 +23,7 @@ public class Event extends Task {
      * @return string that contains information about a task.
      */
     String saveInfo() {
-        return "event" + " " + taskDetails + " /at " + TaskList.inputDateFormat.format(eventAt)
+        return "event" + " " + taskDetails + " /at " + Parser.inputDateFormat.format(eventAt)
                 + System.getProperty("line.separator") + completed;
     }
 
@@ -35,7 +37,7 @@ public class Event extends Task {
         }
         sb.append(taskDetails);
         sb.append(" (");
-        sb.append(TaskList.outputDateFormat.format(eventAt));
+        sb.append(Parser.outputDateFormat.format(eventAt));
         sb.append(")");
         return sb.toString();
     }

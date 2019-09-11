@@ -32,7 +32,7 @@ public class Task {
 
     /**
      * Returns a StatusIcon, based on whether the task is completed or not.
-     * 
+     *
      * @return StatusIcon
      */
     public String getStatusIcon() {

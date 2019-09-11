@@ -6,21 +6,21 @@ import utils.Ui;
 
 public class InvalidCommand extends Command {
 
-  String errorMessage;
+    String errorMessage;
 
-  public InvalidCommand(String errorMessage) {
-    this.errorMessage = errorMessage;
-  }
+    public InvalidCommand(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 
-  public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
 
-    String output = "";
+        String output = "";
 
-    // Save output as String
-    output += ui.getTopBorder();
-    output += "\n\t" + errorMessage;
-    output += ui.getBottomBorder();
-    return output;
+        // Save output as String
+        output += ui.getTopBorder();
+        output += "\n\t" + errorMessage;
+        output += ui.getBottomBorder();
+        return output;
 
-  }
+    }
 }

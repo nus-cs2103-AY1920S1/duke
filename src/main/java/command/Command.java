@@ -1,7 +1,6 @@
 package command;
 
 import task.TaskList;
-import driver.Ui;
 
 /**
  *
@@ -9,16 +8,14 @@ import driver.Ui;
 
 public abstract class Command {
     TaskList reference;
-    Ui printer;
 
 
     /**
      *
      */
 
-    public String executeCommand(TaskList reference, Ui printer) {
+    public String executeCommand(TaskList reference) {
         this.reference = reference;
-        this.printer = printer;
         return this.formatOutput();
     }
 
@@ -28,9 +25,5 @@ public abstract class Command {
 
     public abstract String formatOutput();
 
-    /**
-     *
-     */
 
-    public abstract void passToUI(String input);
 }

@@ -5,6 +5,11 @@ package driver;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+
+import response.ErrorResponse;
+import response.ExitResponse;
+import response.Response;
+import response.StandardResponse;
 import task.TaskList;
 import command.HelloCommand;
 import command.Command;
@@ -16,11 +21,8 @@ import command.ByeCommand;
  */
 
 public class Duke {
-
-    Ui myUserInterface;
     TaskList myTaskList;
     Storage myTaskManager;
-    Parser myParser;
 
 
     /**
@@ -28,11 +30,9 @@ public class Duke {
      */
 
     public Duke() {
-        myUserInterface = new Ui();
         //Create TaskList for Duke
         myTaskList = new TaskList();
         myTaskManager = new Storage("src/main/java/data/loggedData.txt");
-        myParser = new Parser();
 
     }
 
@@ -40,32 +40,37 @@ public class Duke {
      *
      */
 
+    public void startProcess() {
+        try {
+            myTaskManager.loadTasks(myTaskList);
+        } catch (FileNotFoundException err) {
+                ErrorResponse myError = new ErrorResponse(err);
+                myError.returnResponse();
+            }
+    }
+
+
     public String getResponse(String temp)  {
-            String answer = "";
-            if (temp.equalsIgnoreCase("bye")) {
-                ByeCommand sayBye = new ByeCommand();
-                answer =  sayBye.executeCommand(myTaskList,myUserInterface);
-
-            }
+        if (temp.equalsIgnoreCase("bye"))
             try {
-                myTaskManager.loadTasks(myTaskList);
-                Command curr = myParser.parse(temp);
-                answer =  curr.executeCommand(myTaskList, myUserInterface);
                 myTaskManager.updateTasks(myTaskList);
-
-            }  catch (FileNotFoundException err) {
-                System.out.println(err);
+                ExitResponse sayBye = new ExitResponse();
+                return sayBye.returnResponse();
             } catch (IOException err) {
-            System.out.println(err);
-            } catch (Exception err) {
-                myUserInterface.printError(TextFormatter.errorFormat(err));
+                ErrorResponse myError = new ErrorResponse(err);
+                return myError.returnResponse();
+            } finally {
+                System.exit(0);
             }
-            return answer;
 
+            try {
+                StandardResponse myResponse = new StandardResponse(temp,myTaskList);
+                return myResponse.returnResponse();
+            } catch (Exception err) {
+                ErrorResponse myError = new ErrorResponse(err);
+                return myError.returnResponse();
+                }
         }
-
-
-
 
 
     }

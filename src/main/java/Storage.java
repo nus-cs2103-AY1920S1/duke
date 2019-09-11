@@ -71,7 +71,17 @@ public class Storage {
                         )
                     ));
                     break;
-                    
+
+                case 'A':
+                    String afterTaskLine = line.substring(2, line.length());
+                    taskList.add(new AfterTask(
+                        afterTaskLine.split("/")[0],
+                        dateParser.parse(
+                            afterTaskLine.split("/")[1]
+                        )
+                    ));
+                    break;
+    
                 default:
                     break;
                 }
@@ -141,6 +151,8 @@ public class Storage {
         } else if (t instanceof Deadline) {
             classChar = "D";
 
+        } else if (t instanceof AfterTask) {
+            classChar = "A";
         } else {
             classChar = " ";
         }
@@ -155,6 +167,10 @@ public class Storage {
                 ((Deadline)t).getBy()
             );
             
+        } else if (t instanceof AfterTask) {
+            timeStr = "/" + dateParser.format(
+                ((AfterTask)t).getAfter()
+            );
         } else {
             timeStr = "";
         }

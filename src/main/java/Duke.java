@@ -14,6 +14,7 @@ public class Duke {
     // Delimiters
     public static final String DELIM_BY = "/by";
     public static final String DELIM_AT = "/at";
+    public static final String DELIM_AFTER = "/after";
 
     public static final String DATE_FORMAT = "dd-MM-yy HHmm";
 
@@ -93,6 +94,13 @@ public class Duke {
             case TODO:
                 response = addTodo(
                     parser.getArg(line, commandText)
+                );
+                break;
+
+            case AFTERTASK:
+                response = addAfterTask(
+                    parser.getBeforeDelim(line, commandText, DELIM_AFTER),
+                    parser.getAfterDelim(line, commandText, DELIM_AFTER)
                 );
                 break;
 
@@ -179,6 +187,16 @@ public class Duke {
         
         Task newTodo = new Todo(desc); 
         return addTask(newTodo);
+    }
+    
+    private String addAfterTask(String desc, String date) throws EmptyDescriptionException, ParseException {
+        if (desc.length() == 0) {
+            throwEmptyDescriptionException(Command.AFTERTASK);
+            return "";
+        }
+        
+        Task newAfterTask = new AfterTask(desc, dateParser.parse(date));
+        return addTask(newAfterTask);
     }
 
     private void throwEmptyDescriptionException(Command cmd) throws EmptyDescriptionException {

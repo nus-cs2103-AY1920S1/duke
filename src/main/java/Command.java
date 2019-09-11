@@ -9,6 +9,7 @@ enum Command {
     TODO("todo"),
     EVENT("event"),
     DEADLINE("deadline"),
+    AFTERTASK("aftertask"),
     DELETE("delete"),
     FIND("find");
 

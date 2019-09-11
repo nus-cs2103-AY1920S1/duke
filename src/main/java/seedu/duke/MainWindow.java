@@ -88,7 +88,7 @@ public class MainWindow extends AnchorPane {
 
     private void showTutorialScene() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/TutorialScene.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/TutorialScene.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);

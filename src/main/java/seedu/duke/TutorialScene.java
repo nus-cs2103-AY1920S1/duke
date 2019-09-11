@@ -33,19 +33,11 @@ public class TutorialScene {
 
     @FXML
     public void initialize() {
-        Ui ui = new Ui();
         layout.getChildren().add(DialogBox.getDukeDialog("For the tutorial, \n" +
                 "To learn more about the task managing commands, enter 'tasks'\n" +
                 "To learn more about the expense tracking commands, enter 'expenses'\n " +
                 "To return to the actual chat bot, enter 'back' anytime.\n", dukeImage));
         helpContainer.vvalueProperty().bind(layout.heightProperty());
-    }
-
-    public void showIntro() {
-        layout.getChildren().add(DialogBox.getDukeDialog("For the tutorial, \n" +
-                "To learn more about the task managing commands, enter 'tasks'\n" +
-                "To learn more about the expense tracking commands, enter 'expenses'\n " +
-                "To return to the actual chat bot, enter 'back' anytime.\n", dukeImage));
     }
 
     @FXML

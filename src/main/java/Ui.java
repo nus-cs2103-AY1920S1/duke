@@ -12,26 +12,27 @@ import java.util.ArrayList;
 public class Ui {
 
     Scanner scanner;
-    Ui(){
+    public Ui(){
         scanner = new Scanner(System.in);
     }
 
     /**
      * Displays welcome message.
      */
-    void showWelcome(){
+    public void showWelcome(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        String guide = "enter <Help> to access the help page.";
+        System.out.println("Hello from\n" + logo + guide + "\n");
     }
 
     /**
      * Displays partition line.
      */
-    void showLine(){
+    public void showLine(){
         System.out.println("    ____________________________________________________________");
     }
 
@@ -39,7 +40,7 @@ public class Ui {
      * Reads the command input.
      * @return returns the command line.
      */
-    String readCommand(){
+    public String readCommand(){
         return scanner.nextLine();
     }
 
@@ -54,7 +55,7 @@ public class Ui {
     /**
      * Displays loading error.
      */
-    void showLoadingError(){
+    public void showLoadingError(){
         System.out.println("    Failed to load file");
     }
 
@@ -62,7 +63,7 @@ public class Ui {
      * Displays error.
      * @param string description of error
      */
-    void showError(String string){
+    public void showError(String string){
         printString(string);
     }
 }

@@ -13,12 +13,12 @@ public class DeleteCommand extends Command {
     @Override
     public String execute() {
         if (isInvalidCommand(textInput, "delete")) {
-            throw new DukeException("OOPS!!! Index required.");
+            throw new DukeException("Gomennasai! Index required.");
         }
 
         int deletedIndex = Integer.parseInt(textInput.replaceFirst("delete ", "")) - 1;
         if (isInvalidIndex(deletedIndex)) {
-            throw new DukeException("OOPS!!! Index not found.");
+            throw new DukeException("Gomennasai! Index not found.");
         }
 
         return TaskList.deleteTask(deletedIndex);

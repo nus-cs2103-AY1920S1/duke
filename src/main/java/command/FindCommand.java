@@ -13,7 +13,7 @@ public class FindCommand extends Command {
     @Override
     public String execute() {
         if (isInvalidCommand(textInput, "find")) {
-            throw new DukeException("OOPS!!! Keyword required!");
+            throw new DukeException("Gomennasai! Keyword required!");
         }
 
         String keyWord = textInput.replaceFirst("find ", "");

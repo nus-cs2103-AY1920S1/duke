@@ -1,2 +1,3 @@
-T | 1 | eat 
+T | 1 | eat
 E | 1 | exams | my house
+T | 0 | eat 

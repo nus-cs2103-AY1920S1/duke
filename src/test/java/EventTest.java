@@ -8,8 +8,8 @@ public class EventTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[E] [ ] project meeting (at:Sunday)", new Event("project meeting", "Sunday").toString());
-        assertEquals("[E] [ ] CS2103 discussion (at:2pm)", new Event("CS2103 discussion", "2pm").toString());
+        assertEquals("[E] [ ] project meeting (at: Sunday)", new Event("project meeting", "Sunday").toString());
+        assertEquals("[E] [ ] CS2103 discussion (at: 2pm)", new Event("CS2103 discussion", "2pm").toString());
     }
 
     @Test

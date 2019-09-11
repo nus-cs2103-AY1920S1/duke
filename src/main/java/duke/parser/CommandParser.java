@@ -18,10 +18,21 @@ import java.util.regex.Pattern;
  * Handles command parsing.
  */
 public class CommandParser {
-    private static int getIndexFromMatcher(String matcherResult) throws DukeException {
+    private static final Pattern DONE_PATTERN = Pattern.compile("done (\\d+$)");
+    private static final Pattern DELETE_PATTERN = Pattern.compile("delete (\\d+$)");
+    private static final Pattern FIND_PATTERN = Pattern.compile("find (.*)");
+
+    /**
+     * Parses a index. It must be a positive integer.
+     *
+     * @param input Input containing the number
+     * @return Index
+     * @throws DukeException If the result could not be parsed
+     */
+    private static int parseIndex(String input) throws DukeException {
         int index;
         try {
-            index = Integer.parseInt(matcherResult);
+            index = Integer.parseInt(input);
 
             if (index <= 0) {
                 throw new NumberFormatException();
@@ -49,34 +60,33 @@ public class CommandParser {
         }
 
         Matcher matcher;
+        String[] tokens = input.split("\\s+", 2);
 
-        if (input.equals("bye")) {
+        switch (tokens[0]) {
+        case "bye":
             return new ExitCommand();
-        } else if (input.equals("list")) {
+        case "list":
             return new ListCommand();
-        } else if (input.startsWith("done")) {
-            Pattern donePattern = Pattern.compile("done (\\d+$)");
-            matcher = donePattern.matcher(input);
+        case "done":
+            matcher = DONE_PATTERN.matcher(input);
 
             if (!matcher.matches()) {
                 throw new InvalidInputDukeException("Syntax error. "
                         + "Usage: done [task number from 1 onwards]");
             }
 
-            return new DoneCommand(getIndexFromMatcher(matcher.group(1)));
-        } else if (input.startsWith("delete")) {
-            Pattern deletePattern = Pattern.compile("delete (\\d+$)");
-            matcher = deletePattern.matcher(input);
+            return new DoneCommand(parseIndex(matcher.group(1)));
+        case "delete":
+            matcher = DELETE_PATTERN.matcher(input);
 
             if (!matcher.matches()) {
                 throw new InvalidInputDukeException("Syntax error. "
                         + "Usage: delete [task number from 1 onwards]");
             }
 
-            return new DeleteCommand(getIndexFromMatcher(matcher.group(1)));
-        } else if (input.startsWith("find")) {
-            Pattern findPattern = Pattern.compile("find (.*)");
-            matcher = findPattern.matcher(input);
+            return new DeleteCommand(parseIndex(matcher.group(1)));
+        case "find":
+            matcher = FIND_PATTERN.matcher(input);
 
             if (!matcher.matches()) {
                 throw new InvalidInputDukeException("Syntax error. "
@@ -84,7 +94,7 @@ public class CommandParser {
             }
 
             return new FindCommand(matcher.group(1));
-        } else {
+        default:
             Task task = TaskParser.parse(input);
             return new AddCommand(task);
         }

@@ -9,7 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class StorageSerializer {
-    // Date format used for serialization
+    /** Date format used for serialization. **/
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
 
     /**

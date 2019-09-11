@@ -18,14 +18,21 @@ import java.util.regex.Pattern;
  * Handles task parsing.
  */
 public class TaskParser {
+    /** Generic syntax error message prefix. **/
+    private static final String SYNTAX_PREFIX = "Syntax error.\nFormat: ";
+
     /** Syntax for date. **/
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
 
     /** Syntax for deadline. **/
     private static final Pattern DEADLINE_PATTERN = Pattern.compile("deadline (.*) /by (.*)");
+    private static final String DEADLINE_SYNTAX = "deadline [description] /by [dd/MM/yyyy HHmm]";
+    private static final String DEADLINE_SYNTAX_MSG = SYNTAX_PREFIX + DEADLINE_SYNTAX;
 
     /** Syntax for event. **/
     private static final Pattern EVENT_PATTERN = Pattern.compile("event (.*) /at (.*)");
+    private static final String EVENT_SYNTAX = "event [description] /at [dd/MM/yyyy HHmm]";
+    private static final String EVENT_SYNTAX_MSG = SYNTAX_PREFIX + EVENT_SYNTAX;
 
     /**
      * Parses a given input to generate a Task.
@@ -52,15 +59,13 @@ public class TaskParser {
             matcher = DEADLINE_PATTERN.matcher(input);
 
             if (!matcher.matches()) {
-                throw new InvalidInputDukeException("Syntax error. "
-                        + "Deadline should be: deadline [description] /by [dd/MM/yyyy HHmm]");
+                throw new InvalidInputDukeException(DEADLINE_SYNTAX_MSG);
             }
 
             try {
                 date = DATE_FORMAT.parse(matcher.group(2));
             } catch (ParseException e) {
-                throw new InvalidInputDukeException("Syntax error. "
-                        + "Deadline should be: deadline [description] /by [dd/MM/yyyy HHmm]");
+                throw new InvalidInputDukeException(DEADLINE_SYNTAX_MSG);
             }
 
             return new Deadline(matcher.group(1), date, false);
@@ -68,15 +73,13 @@ public class TaskParser {
             matcher = EVENT_PATTERN.matcher(input);
 
             if (!matcher.matches()) {
-                throw new InvalidInputDukeException("Syntax error. "
-                        + "Event should be: event [description] /at [d/M/yyyy HHmm]");
+                throw new InvalidInputDukeException(EVENT_SYNTAX_MSG);
             }
 
             try {
                 date = DATE_FORMAT.parse(matcher.group(2));
             } catch (ParseException e) {
-                throw new InvalidInputDukeException("Syntax error. "
-                        + "Event should be: event [description] /by [dd/MM/yyyy HHmm]");
+                throw new InvalidInputDukeException(EVENT_SYNTAX_MSG);
             }
 
             return new Event(matcher.group(1), date, false);

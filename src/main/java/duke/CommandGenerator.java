@@ -24,7 +24,7 @@ public class CommandGenerator {
                 case "event":
                     return new EventCommand(fullCommand);
                 default:
-                    return new Command(fullCommand);
+                    assert false : parser.getCommandType();
             }
         }
         return new Command(fullCommand);

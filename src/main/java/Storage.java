@@ -26,9 +26,10 @@ public class Storage {
 
     /**
      * Loads the task from the file into an array list.
-     * @return The list of tasks to be loaded from the file
-     * @throws FileNotFoundException If file is not found
-     * @throws ParseException If a parse exception occurred
+     *
+     * @return The list of tasks to be loaded from the file.
+     * @throws FileNotFoundException If file is not found.
+     * @throws ParseException If a parse exception occurred.
      */
     public ArrayList<Task> load() throws FileNotFoundException, ParseException {
         ArrayList<Task> list = new ArrayList<Task>();
@@ -45,16 +46,21 @@ public class Storage {
                 }
                 list.add(todo);
             } else if (type.equals("D")) {
-                String date = taskArr[3].substring(8, 10) + " " + taskArr[3].substring(4, 7) + " "
-                        + taskArr[3].substring(24, 28) + " " + taskArr[3].substring(11, 16);
-                Deadline deadline = new Deadline(taskArr[2], convertToDate(date));
+                String date = taskArr[3].substring(8, 10) + " "
+                        + taskArr[3].substring(4, 7) + " "
+                        + taskArr[3].substring(24, 28) + " "
+                        + taskArr[3].substring(11, 16);
+                Deadline deadline = new Deadline(taskArr[2],
+                        convertToDate(date));
                 if (taskArr[1].equals("1")) {
                     deadline.markAsDone();
                 }
                 list.add(deadline);
             } else if (type.equals("E")) {
-                String date = taskArr[3].substring(8, 10) + " " + taskArr[3].substring(4, 7) + " "
-                        + taskArr[3].substring(24, 28) + " " + taskArr[3].substring(11, 16);
+                String date = taskArr[3].substring(8, 10) + " "
+                        + taskArr[3].substring(4, 7) + " "
+                        + taskArr[3].substring(24, 28) + " "
+                        + taskArr[3].substring(11, 16);
                 Event event = new Event(taskArr[2], convertToDate(date));
                 if (taskArr[1].equals("1")) {
                     event.markAsDone();
@@ -68,9 +74,10 @@ public class Storage {
 
     /**
      * Converts the string to a date.
-     * @param str The date in string format
-     * @return The date
-     * @throws ParseException If a parse exception occurred
+     *
+     * @param str The date in string format.
+     * @return The date.
+     * @throws ParseException If a parse exception occurred.
      */
     public Date convertToDate(String str) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm");
@@ -80,9 +87,10 @@ public class Storage {
 
     /**
      * Loads the task from the file into an array list.
-     * @param textToAppend The text to be appended to the file
-     * @return The list of tasks to be loaded from the file
-     * @throws IOException If an input or output exception occurred
+     *
+     * @param textToAppend The text to be appended to the file.
+     * @return The list of tasks to be loaded from the file.
+     * @throws IOException If an input or output exception occurred.
      */
     private void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
@@ -92,8 +100,9 @@ public class Storage {
 
     /**
      * Converts the task to string format to be added to the file.
-     * @param task The task to be converted in string format
-     * @return The task in a string format
+     *
+     * @param task The task to be converted in string format.
+     * @return The task in a string format.
      */
     private String convertTaskToFileFormat(Task task) {
         StringBuffer textToAdd = new StringBuffer();
@@ -118,8 +127,9 @@ public class Storage {
 
     /**
      * Appends task to the file.
-     * @param task The task to be appended to the file
-     * @throws IOException If an input or output exception occurred
+     *
+     * @param task The task to be appended to the file.
+     * @throws IOException If an input or output exception occurred.
      */
     public void appendTaskToFile(Task task) throws IOException {
         String textToAppend = convertTaskToFileFormat(task);
@@ -128,8 +138,9 @@ public class Storage {
 
     /**
      * Writes the current task to the file.
-     * @param textToAdd The task to be written to the file
-     * @throws IOException If an input or output exception occurred
+     *
+     * @param textToAdd The task to be written to the file.
+     * @throws IOException If an input or output exception occurred.
      */
     private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -139,8 +150,9 @@ public class Storage {
 
     /**
      * Updates the current list of tasks to the file.
-     * @param list The list of tasks to be updated to the file
-     * @throws IOException If an input or output exception occurred
+     *
+     * @param list The list of tasks to be updated to the file.
+     * @throws IOException If an input or output exception occurred.
      */
     public void updateTaskInFile(ArrayList<Task> list) throws IOException {
         StringBuffer textToAdd = new StringBuffer();

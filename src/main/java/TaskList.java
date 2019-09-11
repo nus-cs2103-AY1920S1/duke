@@ -17,7 +17,8 @@ public class TaskList {
 
     /**
      * Gets the list of tasks.
-     * @return The list of tasks
+     *
+     * @return The list of tasks.
      */
     public ArrayList<Task> getList() {
         return list;
@@ -25,8 +26,9 @@ public class TaskList {
 
     /**
      * Gets the task of index n.
-     * @param n The index of the task in the list
-     * @return The task of index n
+     *
+     * @param n The index of the task in the list.
+     * @return The task of index n.
      */
     public Task getTask(int n) {
         return list.get(n);
@@ -34,6 +36,7 @@ public class TaskList {
 
     /**
      * Gets the size of the task list.
+     *
      * @return The size of the task list.
      */
     public int getSize() {
@@ -42,7 +45,8 @@ public class TaskList {
 
     /**
      * Adds new task to the task list.
-     * @param t The task to be added to the task list
+     *
+     * @param t The task to be added to the task list.
      */
     public void addTask(Task t) {
         list.add(t);
@@ -50,8 +54,9 @@ public class TaskList {
 
     /**
      * Marks task of index n in the list as done.
-     * @param n The index of the task to be marked as done in the list
-     * @return The task after it is marked as done
+     *
+     * @param n The index of the task to be marked as done in the list.
+     * @return The task after it is marked as done.
      */
     public Task markTaskAsDone(int n) {
         Task task = list.get(n);
@@ -61,8 +66,9 @@ public class TaskList {
 
     /**
      * Removes task of index n from the list.
-     * @param n The index of the task to be removed from the list
-     * @return The task after it is removed from the list
+     *
+     * @param n The index of the task to be removed from the list.
+     * @return The task after it is removed from the list.
      */
     public Task removeTask(int n) {
         return list.remove(n);
@@ -76,6 +82,20 @@ public class TaskList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 1; i <= length; i++) {
             Task task = list.get(i - 1);
+            System.out.println(i + ". " + task);
+        }
+    }
+
+    /**
+     * Prints the list of tasks found by keyword in the task list.
+     *
+     * @param taskList The list of tasks found by the keyword.
+     */
+    public void printTaskFound(ArrayList<Task> taskList) {
+        int length = taskList.size();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= length; i++) {
+            Task task = taskList.get(i - 1);
             System.out.println(i + ". " + task);
         }
     }

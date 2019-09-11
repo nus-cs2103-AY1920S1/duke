@@ -3,6 +3,8 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
 import java.text.ParseException;
@@ -35,18 +37,21 @@ public class Duke {
 
     /**
      * This is the main method of the task manager.
-     * @throws FileNotFoundException If file is not found
-     * @throws IOException If an input or output exception occurred
-     * @throws ParseException If a parse exception occurred
+     *
+     * @throws FileNotFoundException If file is not found.
+     * @throws IOException If an input or output exception occurred.
+     * @throws ParseException If a parse exception occurred.
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+    public static void main(String[] args) throws FileNotFoundException,
+            IOException, ParseException {
         new Duke("/Users/michelleyong/Desktop/duke/data/duke.txt").run();
     }
 
     /**
      * Runs the task manager.
-     * @throws IOException If an input or output exception occurred
-     * @throws ParseException If a parse exception occurred
+     *
+     * @throws IOException If an input or output exception occurred.
+     * @throws ParseException If a parse exception occurred.
      */
     public void run() throws IOException, ParseException {
         ui.printHello();
@@ -76,7 +81,8 @@ public class Duke {
                     }
                     String[] descArr = parser.breakDownDescription(text);
                     Date date = parser.getDate(descArr, storage);
-                    Deadline deadline = new Deadline(parser.getDeadlineDesc(descArr), date);
+                    Deadline deadline =
+                            new Deadline(parser.getDeadlineDesc(descArr), date);
                     taskList.addTask(deadline);
                     ui.printTaskAdded(deadline, taskList.getSize());
                     storage.appendTaskToFile(deadline);
@@ -132,6 +138,17 @@ public class Duke {
                 } catch (DukeException e) {
                     ui.printNoSuchTaskError();
                 }
+            } else if (command.equals("find")) {
+                String toFind = parser.getKeyWord(text);
+                ArrayList<Task> tasks = taskList.getList();
+                ArrayList<Task> taskFound = new ArrayList<>();
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task t = tasks.get(i);
+                    if (t.hasKeyword(toFind)) {
+                        taskFound.add(t);
+                    }
+                }
+                taskList.printTaskFound(taskFound);
             } else {
                 try {
                     throw new DukeException();

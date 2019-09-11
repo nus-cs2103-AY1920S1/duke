@@ -59,31 +59,6 @@ public class Duke {
         }
     }
 
-    /*/**
-     * Runs Duke chatbot.
-     */
-    /*
-    public void run() {
-        this.ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(this.tasks, this.ui, this.storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                this.ui.showError(e.toString());
-            }
-        }
-    }
-     */
-
-    public static void main(String[] args) {
-    //    new Duke("./data/tasks.txt").run();
-    }
-
-
     /**
      * Gets response from duke logic given a command.
      * @param fullCommand the entire command given to duke.
@@ -97,9 +72,9 @@ public class Duke {
         } catch (DukeException e) {
             res = e.toString();
         }
-        if (res == null) {
-            res = "cannot work sia";
-        }
+
+        assert res != null : "getResponse cannot work properly";
+
         return res;
     }
 

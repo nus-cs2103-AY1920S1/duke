@@ -36,11 +36,18 @@ public class TaskList {
         return tasks;
     }
 
-    public String editTask(int index, String description) {
-        Task taskToEdit = tasks.get(index - 1);
-        String oldTaskString = taskToEdit.toString();
-        taskToEdit.changeDescription(description);
-        return "I have updated the task\n" + oldTaskString + "\n" + "as follows\n" + taskToEdit.toString();
+    /**
+     * Updates task description only while retaining task's position in list.
+     *
+     * @param index Index of the task to be updated.
+     * @param description New description of the task.
+     * @return Response to user.
+     */
+    public String updateDescription(int index, String description) {
+        Task taskToUpdate = tasks.get(index - 1);
+        String oldTaskString = taskToUpdate.toString();
+        taskToUpdate.updateDescription(description);
+        return "I have updated the task\n" + oldTaskString + "\n" + "as follows\n" + taskToUpdate.toString();
     }
 
     /**

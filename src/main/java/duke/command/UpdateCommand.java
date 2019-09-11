@@ -6,11 +6,20 @@ import duke.tasklist.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Command to update the description of a task.
+ */
 public class UpdateCommand extends Command {
 
     private int taskNumber;
     private String newDescription;
 
+    /**
+     * Creates a UpdateCommand object with the task number and new description to be updated assigned.
+     *
+     * @param commandArray Containing task number in the first entry and new description in the second entry.
+     * @throws NumberFormatException If index of task to be updated is not a number.
+     */
     public UpdateCommand(String[] commandArray) throws NumberFormatException {
         try {
             this.taskNumber = Integer.parseInt(commandArray[0]);
@@ -20,9 +29,14 @@ public class UpdateCommand extends Command {
         }
     }
 
-    // should receive as update 4 eat food
+    /**
+     * Parses the command given to Duke and creates a UpdateCommand if possible.
+     *
+     * @param fullCommand Full command split by whitespace.
+     * @return UpdateCommand object to be created.
+     * @throws DukeException If input is not in the format update [task number] [new description].
+     */
     public static UpdateCommand process(String[] fullCommand) throws DukeException {
-        // if command is only update
         if (fullCommand.length == 1) {
             throw new DukeException("OOPS!!! Please enter in the format update [task number] [new "
                     + "description]");
@@ -38,7 +52,7 @@ public class UpdateCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        String response = tasks.editTask(taskNumber, newDescription);
+        String response = tasks.updateDescription(taskNumber, newDescription);
         try {
             storage.store(tasks);
         } catch (IOException e) {

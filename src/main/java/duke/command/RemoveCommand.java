@@ -6,28 +6,28 @@ import duke.tasklist.TaskList;
 import duke.storage.Storage;
 
 /**
- * Command to delete tasks from the task list.
+ * Command to remove tasks from the task list.
  */
 public class RemoveCommand extends Command {
 
     private int taskNumber;
 
     /**
-     * Creates a DeleteCommand object with the specified task number to be deleted assigned.
+     * Creates a RemoveCommand object with the specified task number to be removed assigned.
      *
-     * @param command Contains the index of the task to be deleted.
-     * @throws NumberFormatException If index of task to be deleted is not a number.
+     * @param command Contains the index of the task to be removed.
+     * @throws NumberFormatException If index of task to be removed is not a number.
      */
     public RemoveCommand(String command) throws NumberFormatException {
         try {
             this.taskNumber = Integer.parseInt(command);
         } catch (NumberFormatException e) {
-            throw new DukeException("    OOPS!!! Please specify the index of the task to be deleted.");
+            throw new DukeException("OOPS!!! Please specify the index of the task to be removed.");
         }
     }
 
     /**
-     * Parses the command given to Duke and creates a DeleteCommand if possible.
+     * Parses the command given to Duke and creates a RemoveCommand if possible.
      *
      * @param fullCommand Full command split by whitespace.
      * @return RemoveCommand object to be created.
@@ -35,16 +35,16 @@ public class RemoveCommand extends Command {
      */
     public static RemoveCommand process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
-            throw new DukeException("    OOPS!!! Please specify the index of the task to be deleted.");
+            throw new DukeException("OOPS!!! Please specify the index of the task to be removed.");
         }
         return new RemoveCommand(fullCommand[1]);
     }
 
     /**
-     * Executes the delete command.
+     * Executes the remove command.
      *
      * @param tasks Task list where the task should be deleted from.
-     * @param storage Storage to be updated with the task deleted.
+     * @param storage Storage to be updated with the task removed.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {

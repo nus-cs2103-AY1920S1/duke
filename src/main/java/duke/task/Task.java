@@ -22,7 +22,7 @@ public class Task {
         return description;
     }
 
-    public void changeDescription(String newDescription) {
+    public void updateDescription(String newDescription) {
         description = newDescription;
     }
 

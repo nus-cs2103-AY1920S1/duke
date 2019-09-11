@@ -42,6 +42,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = parser.parse(input);
+
+            assert c != null : "Command c should not be null";
+            
             return c.execute(storage, ui, tasks);
         }
         catch (DukeException e) {

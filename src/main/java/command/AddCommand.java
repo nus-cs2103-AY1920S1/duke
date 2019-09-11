@@ -1,6 +1,5 @@
 package command;
 
-import priority.Priority;
 import task.DukeException;
 import task.Todo;
 import task.Event;

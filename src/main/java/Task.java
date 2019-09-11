@@ -37,5 +37,13 @@ public class Task {
         assert !description.isEmpty() : "Description field is empty";
         return (isDone ? 1 : 0) + " | " + description;
     }
+
+    /**
+     * Edits the description of the task.
+     * @param newDesc new description to be updated
+     */
+    public void editDescription(String newDesc) {
+        this.description = newDesc;
+    }
 }
 

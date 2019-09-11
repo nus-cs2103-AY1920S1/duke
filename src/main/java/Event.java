@@ -1,4 +1,6 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
@@ -67,5 +69,19 @@ public class Event extends Task {
     @Override
     public String toSaveString() {
         return "E | " + super.toSaveString() + " | " + at;
+    }
+
+    /**
+     * Updates the date time, "at" field of the event task.
+     * @param newDateTime new date and time to be updated
+     * @throws DukeException if the format of the new date time is wrong
+     */
+    public void editDateTime(String newDateTime) throws DukeException {
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            at = LocalDateTime.parse(newDateTime, format);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please enter date and time in format: dd/MM/yyyy HHmm");
+        }
     }
 }

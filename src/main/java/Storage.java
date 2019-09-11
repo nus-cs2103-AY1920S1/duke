@@ -59,14 +59,7 @@ public class Storage {
             list.add(s);
             lineNum++;
         }
-        FileWriter fw = new FileWriter(filePath);
-        //write all but the last task to file to avoid adding extra line separator
-        for (int i = 0; i < list.size() - 1; i++) {
-            fw.write(list.get(i) + System.lineSeparator());
-        }
-        //write last task to file
-        fw.write(list.get(list.size() - 1));
-        fw.close();
+        writeBackToFile(list, filePath);
     }
 
     /**
@@ -148,5 +141,37 @@ public class Storage {
                 return task;
             }
         }
+    }
+
+    /**
+     * Edits the task in the saved file.
+     * @param taskNum the line number of the task to be edited
+     * @throws IOException if stream to file cannot be written to or closed.
+     */
+    public void editTaskInFile(int taskNum, String newText) throws IOException {
+        File file =  new File(filePath);
+        Scanner scn = new Scanner(file);
+        List<String> list = new ArrayList<String>();
+        int lineNum = 1;
+        while (scn.hasNext()) {
+            String s = scn.nextLine();
+            if (lineNum == taskNum) {
+                s = newText;
+            }
+            list.add(s);
+            lineNum++;
+        }
+        writeBackToFile(list, filePath);
+    }
+
+    private void writeBackToFile(List<String> list, String filePath) throws IOException{
+        FileWriter fw = new FileWriter(filePath);
+        //write all but the last task to file to avoid adding extra line separator
+        for (int i = 0; i < list.size() - 1; i++) {
+            fw.write(list.get(i) + System.lineSeparator());
+        }
+        //write last task to file
+        fw.write(list.get(list.size() - 1));
+        fw.close();
     }
 }

@@ -46,4 +46,13 @@ public class TaskList {
     public int getNumOfTasks() {
         return tasks.size();
     }
+
+    /**
+     * Replaces the task in the tasklist with the new task.
+     * @param index index of task to be replaced
+     * @param newTask new task to replace
+     */
+    public void setTask(int index, Task newTask) {
+        tasks.set(index, newTask);
+    }
 }

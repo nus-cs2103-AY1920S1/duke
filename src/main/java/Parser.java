@@ -30,6 +30,11 @@ public class Parser {
                     throw new DukeException("Please indicate what you want to find!");
                 }
                 return new FindCommand(fullCommand.substring(5));
+            } else if (command.equals("edit")) {
+                if (secondFieldIsEmpty(fields)) {
+                    throw new DukeException("Please indicate what you want to edit!");
+                }
+                return new EditCommand(fullCommand.substring(5));
             } else if (command.equals("delete")) {
                 if (secondFieldIsEmpty(fields)) {
                     throw new DukeException("Please indicate what you want to delete!");

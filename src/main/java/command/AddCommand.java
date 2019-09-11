@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Constructor for AddCommand, for type of: todo.
+     * Constructor for AddCommand, for type of: Todo.
      */
     public AddCommand(String type, String taskDescription) {
         this.type = type;
@@ -39,7 +39,8 @@ public class AddCommand extends Command {
 
         String output = "";
 
-        if (type.equals("todo")) {
+        switch (type) {
+        case "todo": {
             // Create ToDo object
             ToDo t = new ToDo(taskDescription);
             tasks.addTask(t);
@@ -54,8 +55,9 @@ public class AddCommand extends Command {
             output += "\n\t" + t.toString();
             output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
             output += ui.getBottomBorder();
-
-        } else if (type.equals("deadline")) {
+            break;
+        }
+        case "deadline": {
             // Create DeadLine object
             DeadLine d = new DeadLine(taskDescription, time);
             tasks.addTask(d);
@@ -70,8 +72,9 @@ public class AddCommand extends Command {
             output += "\n\t" + d.toString();
             output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
             output += ui.getBottomBorder();
-
-        } else if (type.equals("event")) {
+            break;
+        }
+        case "event": {
             // Create Event object
             Event e = new Event(taskDescription, time);
             tasks.addTask(e);
@@ -86,6 +89,7 @@ public class AddCommand extends Command {
             output += "\n\t" + e.toString();
             output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
             output += ui.getBottomBorder();
+            break;
         }
 
         return output;

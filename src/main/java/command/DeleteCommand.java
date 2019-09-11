@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
         this.index = index - 1;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 
         String output = "";
 

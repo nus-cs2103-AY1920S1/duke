@@ -14,15 +14,6 @@ public class Event extends Task {
         this.timing = timing;
     }
 
-    /**
-     * Returns the timing at which the event happens.
-     *
-     * @return timing
-     */
-    public String getTiming() {
-        return this.timing;
-    }
-
     @Override
     public String toString() {
         return "[E] " + super.toString() + " (at: " + timing + ")";

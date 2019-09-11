@@ -27,21 +27,10 @@ public class Ui {
     }
 
     public String getTasksAsString(ArrayList<Task> tasks) {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            output += "\n\t" + (i + 1) + ". " + tasks.get(i).toString();
+            output.append("\n\t").append(i + 1).append(". ").append(tasks.get(i).toString());
         }
-
-        return output;
+        return output.toString();
     }
-
-    public String getLoadingError() {
-        String output = "";
-        output += getTopBorder();
-        output += "\n\tSorry! There was an error loading the files from the system.";
-        output += getBottomBorder();
-
-        return output;
-    }
-
 }

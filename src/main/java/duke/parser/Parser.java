@@ -13,6 +13,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,49 @@ public class Parser {
         commandList.add("FIND");
     }
 
+    private static boolean isCommandValid(String userInput) {
+        for (String s : commandList) {
+            if (userInput.toUpperCase().startsWith(s)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static String classifyCommand(String command){
+        if (command.equals("TODO") || command.equals("DEADLINE") || command.equals("EVENT")) {
+            return "ADD";
+        }
+        return command;
+    }
+
+    private static String getCommandName(String userInput){
+        String command = "";
+        for (String s : commandList) {
+            if (userInput.toUpperCase().startsWith(s)) {
+                command = s;
+                break;
+            }
+        }
+        return command;
+    }
+
+    private static ArrayList<String> parseTaskInformationAndDate(String userInput, String commandName,
+                                                                 String separatorAfterFirstSlash){
+        ArrayList<String> taskInformation = new ArrayList<>();
+        String subsequentStringAfterTaskDescription = userInput.substring(commandName.length());
+        int firstIndexSlash = subsequentStringAfterTaskDescription.indexOf((char) '/');
+
+        // Handle exception later
+        String date = subsequentStringAfterTaskDescription.substring(firstIndexSlash + separatorAfterFirstSlash.length() + 1);
+        String taskDescription = subsequentStringAfterTaskDescription.substring(0, firstIndexSlash).trim();
+
+        System.out.println(date);
+        taskInformation.add(date);
+        taskInformation.add(taskDescription);
+        return taskInformation;
+    }
+
     /**
      * Checks if user input follows format of: command description time
      * Throws CommandNotFoundException if command is not found.
@@ -53,53 +97,28 @@ public class Parser {
      * @throws CommandNotFoundException If command entered by user is not found.
      */
     public static Command parse(String input) throws CommandNotFoundException, IncorrectNumberOfArgumentsException {
-        Task task;
-        Command command;
-        boolean isFound = false;
-        String commandName = "";
-        String commandType = "";
-
-        for (int i = 0; i < commandList.size(); i++) {
-            if (input.toUpperCase().startsWith(commandList.get(i))) {
-                commandName = commandList.get(i);
-                isFound = true;
-                break;
-            }
-        }
-        if (!isFound) {
+        boolean isCommandFound = isCommandValid(input);
+        if(!isCommandFound) {
             throw new CommandNotFoundException();
         }
-
-        if (commandName.equals("TODO") || commandName.equals("DEADLINE") || commandName.equals("EVENT")) {
-            commandType = "ADD";
-        } else {
-            commandType = commandName;
-        }
-
+        String commandName = getCommandName(input);
+        String commandType = classifyCommand(commandName);
         CommandType type = CommandType.valueOf(commandType);
 
+        Task task;
+        Command command;
         if (type == CommandType.ADD) {
             if (commandName.equals("TODO")) {
-                task = new ToDo(commandName.toUpperCase().charAt(0),
-                input.substring("Todo".length()).trim(), false);
+                task = new ToDo(commandName.toUpperCase().charAt(0), input.substring("Todo".length()).trim(), false);
 
             } else if (commandName.equals("DEADLINE")) {
-                String subsequent = input.substring("Deadline".length());
-                int lastIndexSlash = subsequent.lastIndexOf((char) '/');
-
-                String date = subsequent.substring(lastIndexSlash + 1);
-                String taskInfo = subsequent.substring(0, lastIndexSlash + "by ".length() + 1).trim();
-
-                task = new Deadline(commandName.toUpperCase().charAt(0), taskInfo, false, date);
+                ArrayList<String> taskInfo = parseTaskInformationAndDate(input, commandName, "by ");
+                task = new Deadline(commandName.toUpperCase().charAt(0), taskInfo.get(1), false, taskInfo.get(0));
 
             } else {
-                String subsequent = input.substring("Event".length());
-                int lastIndexSlash = subsequent.lastIndexOf((char) '/');
-                String date = subsequent.substring(lastIndexSlash + 1);
+                ArrayList<String> taskInfo = parseTaskInformationAndDate(input, commandName, "at ");
+                task = new Event(commandName.toUpperCase().charAt(0),taskInfo.get(1), false, taskInfo.get(0));
 
-                String taskInfo = subsequent.substring(0, lastIndexSlash
-                                                          + "at ".length() + 1).trim();
-                task = new Event(commandName.toUpperCase().charAt(0), taskInfo, false, date);
             }
             command = new AddCommand(commandType, task);
 
@@ -109,14 +128,12 @@ public class Parser {
 
         } else if (type == CommandType.DELETE) {
             String subsequent = input.substring("Delete ".length()).trim();
-
             int numberToDelete = Integer.parseInt(subsequent);
             task = new Task();
             command = new DeleteCommand(commandName, task, numberToDelete);
 
         } else if (type == CommandType.DONE) {
             String subsequent = input.substring("Done ".length()).trim();
-
             int numberDone = Integer.parseInt(subsequent);
             task = new Task();
             command = new DoneCommand(commandName, task, numberDone);
@@ -130,11 +147,11 @@ public class Parser {
             }
 
             String keyword = input.substring("Find ".length()).trim();
-
             if (keyword.equals("")) {
                 throw new IncorrectNumberOfArgumentsException();
             }
             command = new FindCommand(commandName, keyword, new Task());
+
         } else {
 
             throw new CommandNotFoundException();
@@ -142,6 +159,7 @@ public class Parser {
 
         return command;
     }
+
 
     /**
      * Checks if file input follows format of: command description time
@@ -152,52 +170,47 @@ public class Parser {
      * @return task object of the file.
      * @throws IncorrectFileFormatException If input entered by user is not recognized.
      */
-    public static Task parseFromFile(String input) throws IncorrectFileFormatException {
+    public static Task parseFromFile(String input, Ui ui) throws IncorrectFileFormatException {
         Task task = new Task();
-        String subsequent;
-        boolean isDone = false;
+        boolean isTaskDone = false;
 
-        boolean check = input.startsWith("[D]") || input.startsWith("[E]") || input.startsWith("[T]");
-        if (!check) {
-            throw new IncorrectFileFormatException();
+        boolean isStartWithChar = input.startsWith("[D]") || input.startsWith("[E]") || input.startsWith("[T]");
+        if (!isStartWithChar) {
+            throw new IncorrectFileFormatException(ui.getLoadingError());
+        }
 
+        String subsequentString = input.substring("[X]".length());
+        if (subsequentString.startsWith("[1]")) {
+            isTaskDone = true;
+        } else if (subsequentString.startsWith("[0]")) {
+            isTaskDone = false;
         } else {
-            subsequent = input.substring("[X]".length());
+            throw new IncorrectFileFormatException(ui.getLoadingError());
+        }
 
-            if (subsequent.startsWith("[1]")) {
-                isDone = true;
+        // Move to after cross/tick and space
+        subsequentString = subsequentString.substring(4).trim();
 
-            } else if (subsequent.startsWith("[0]")) {
-                isDone = false;
+        if (input.startsWith("[T]")) {
+            task = new ToDo('T', subsequentString, isTaskDone);
 
-            } else {
-                throw new IncorrectFileFormatException();
+        } else if (input.startsWith("[D]") || input.startsWith("[E]")) {
+            int slashIndex = subsequentString.indexOf('/');
+            if (slashIndex == -1) {
+                throw new IncorrectFileFormatException(ui.getLoadingError());
             }
 
-            // Move to after cross/tick and space
-            subsequent = subsequent.substring(4).trim();
+            String taskDescription = subsequentString.substring(0, slashIndex).trim();
+            String date = subsequentString.substring(slashIndex + "xx: ".length() + 1);
 
-            if (input.startsWith("[T]")) {
-                task = new ToDo('T', subsequent, isDone);
+            if (input.startsWith("[D]")) {
+                task = new Deadline('D', taskDescription, isTaskDone, date);
 
-            } else if (input.startsWith("[D]") || input.startsWith("[E]")) {
-                int slashIndex = subsequent.indexOf('/');
-                if (slashIndex == -1) {
-                    throw new IncorrectFileFormatException();
-                }
+            } else if (input.startsWith("[E]")) {
+                task = new Event('E', taskDescription, isTaskDone, date);
 
-                String taskDescription = subsequent.substring(0, slashIndex).trim();
-                String date = subsequent.substring(slashIndex + "xx: ".length() + 1);
-
-                if (input.startsWith("[D]")) {
-                    task = new Deadline('D', taskDescription, isDone, date);
-
-                } else if (input.startsWith("[E]")) {
-                    task = new Event('E', taskDescription, isDone, date);
-
-                } else {
-                    throw new IncorrectFileFormatException();
-                }
+            } else {
+                throw new IncorrectFileFormatException(ui.getLoadingError());
             }
         }
         return task;

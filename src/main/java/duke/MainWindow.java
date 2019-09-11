@@ -1,17 +1,16 @@
 package duke;
 
-import duke.command.CommandNotFoundException;
-import duke.parser.IncorrectNumberOfArgumentsException;
+import duke.parser.IncorrectFileFormatException;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import duke.ui.Ui;
 
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.nio.file.InvalidPathException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -23,25 +22,42 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
-
     private Duke duke;
-    private Ui ui;
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage;
+    private Image dukeImage;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
-        ui = new Ui();
-        dialogContainer.getChildren().add(new DialogBox(ui.getWelcome(), dukeImage));
+        userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+        dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        String loadingErrorMessage = "";
+        boolean isErrorOccurred = false;
+
+        // Perform loading of tasks from disk
+        try{
+            duke.performDukeStartup();
+        } catch (InvalidPathException i) {
+            isErrorOccurred = true;
+            loadingErrorMessage = i.getMessage();
+        } catch (IncorrectFileFormatException f) {
+            loadingErrorMessage = f.getMessage();
+        } catch (NullPointerException n) {
+            loadingErrorMessage = n.getMessage();
+        } catch (FileNotFoundException z){
+            loadingErrorMessage = z.getMessage();
+        }
+
+        if(isErrorOccurred) {
+            dialogContainer.getChildren().add(new DialogBox(loadingErrorMessage, dukeImage));
+        }
+
+        // Throw initial duke greeting
+        dialogContainer.getChildren().add(new DialogBox(duke.getDukeWelcome(), dukeImage));
     }
 
     /**
@@ -49,15 +65,11 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws CommandNotFoundException, IOException, IncorrectNumberOfArgumentsException {
+    private void handleUserInput() {
         String input = userInput.getText();
+        String response = duke.getDukeResponse(input);
 
-        String response = duke.getResponse(input);
-
-        dialogContainer.getChildren().addAll(
-        DialogBox.getUserDialog(input, userImage),
-        DialogBox.getDukeDialog(response, dukeImage)
-        );
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage), DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
     }
 }

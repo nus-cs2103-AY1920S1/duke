@@ -4,7 +4,7 @@ package duke.parser;
  * Exception thrown when file read has incorrect format.
  */
 public class IncorrectFileFormatException extends Exception {
-    public IncorrectFileFormatException() {
+    public IncorrectFileFormatException(String loadingError) {
         super();
     }
 }

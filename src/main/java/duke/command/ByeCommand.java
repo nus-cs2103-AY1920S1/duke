@@ -3,6 +3,9 @@ package duke.command;
 import duke.todo.TaskList;
 import duke.ui.Ui;
 
+/**
+ *
+ */
 public class ByeCommand implements Command {
     /**
      * Returns task type.

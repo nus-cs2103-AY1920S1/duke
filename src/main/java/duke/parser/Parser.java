@@ -3,8 +3,8 @@ package duke.parser;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
+import duke.command.CompleteCommand;
+import duke.command.RemoveCommand;
 import duke.command.FindCommand;
 import duke.command.AddCommand;
 import duke.command.HelpCommand;
@@ -31,20 +31,28 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
+        case "l":
             return new ListCommand();
-        case "done":
-            return DoneCommand.process(currArray);
-        case "delete":
-            return DeleteCommand.process(currArray);
+        case "complete":
+        case "c":
+            return CompleteCommand.process(currArray);
+        case "remove":
+        case "r":
+            return RemoveCommand.process(currArray);
         case "find":
+        case "f":
             return FindCommand.process(currArray);
         case "todo":
+        case "t":
             return new AddCommand(Todo.process(currArray));
         case "deadline":
+        case "d":
             return new AddCommand(Deadline.process(currArray));
         case "event":
+        case "e":
             return new AddCommand(Event.process(currArray));
         case "help":
+        case "h":
             return new HelpCommand();
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -69,7 +69,7 @@ public class TaskList {
      */
     public String completeTask(int taskNumber) {
         tasks.get(taskNumber - 1).markAsDone();
-        return "Nice! I've marked this task as done:\n" + tasks.get(taskNumber - 1).toString();
+        return "Nice! I've marked this task as completed:\n" + tasks.get(taskNumber - 1).toString();
     }
 
     /**

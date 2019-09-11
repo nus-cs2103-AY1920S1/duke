@@ -9,36 +9,36 @@ import duke.storage.Storage;
 /**
  * Command to mark a task as completed.
  */
-public class DoneCommand extends Command {
+public class CompleteCommand extends Command {
 
     private int taskNumber;
 
     /**
-     * Creates a DoneCommand object with the specified task number to be marked as completed assigned.
+     * Creates a CompleteCommand object with the specified task number to be marked as completed assigned.
      *
      * @param command Contains the index of the task to be marked as completed.
      * @throws NumberFormatException If index of task to be marked as done is not a number.
      */
-    public DoneCommand(String command) throws NumberFormatException {
+    public CompleteCommand(String command) throws NumberFormatException {
         try {
             this.taskNumber = Integer.parseInt(command);
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please specify a task number to be marked as done.");
+            throw new DukeException("OOPS!!! Please specify a task number to be marked as completed.");
         }
     }
 
     /**
-     * Parses the command given to Duke and creates a DoneCommand if possible.
+     * Parses the command given to Duke and creates a CompleteCommand if possible.
      *
      * @param fullCommand Full command split by whitespace.
-     * @return DoneCommand object to be created.
+     * @return CompleteCommand object to be created.
      * @throws DukeException If no index is given.
      */
-    public static DoneCommand process(String[] fullCommand) throws DukeException {
+    public static CompleteCommand process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
-            throw new DukeException("OOPS!!! Please specify a task number to be marked as done.");
+            throw new DukeException("OOPS!!! Please specify a task number to be marked as completed.");
         }
-        return new DoneCommand(fullCommand[1]);
+        return new CompleteCommand(fullCommand[1]);
     }
 
     /**

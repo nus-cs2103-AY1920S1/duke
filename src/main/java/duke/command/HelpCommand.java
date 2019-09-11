@@ -20,13 +20,14 @@ public class HelpCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         sb.append("Here is how you can use me:\n");
         print("bye", "to exit");
-        print("list", "to show the tasks you have on your list");
-        print("todo [description]", "to add a task of type todo");
-        print("deadline [description] /by [date and time]", "to add a task of type deadline");
-        print("event [description] /at [date and time]", "to add a task of type event");
-        print("delete [task number]", "to delete the task of that specified index number from the task list");
-        print("done [task number]", "to mark the task of that specified index number from the task list as "
-                + "done");
+        print("list or l", "to show the tasks you have on your list");
+        print("todo or t [description]", "to add a task of type todo");
+        print("deadline or d [description] /by [date and time]", "to add a task of type deadline");
+        print("event or e [description] /at [date and time]", "to add a task of type event");
+        print("remove or r [task number]", "to delete the task of that specified index number from the task"
+                + " list");
+        print("complete or c [task number]", "to mark the task of that specified index number from the task"
+                + " list as completed");
         return sb.toString();
     }
 

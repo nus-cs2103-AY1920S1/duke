@@ -8,7 +8,7 @@ import duke.storage.Storage;
 /**
  * Command to delete tasks from the task list.
  */
-public class DeleteCommand extends Command {
+public class RemoveCommand extends Command {
 
     private int taskNumber;
 
@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
      * @param command Contains the index of the task to be deleted.
      * @throws NumberFormatException If index of task to be deleted is not a number.
      */
-    public DeleteCommand(String command) throws NumberFormatException {
+    public RemoveCommand(String command) throws NumberFormatException {
         try {
             this.taskNumber = Integer.parseInt(command);
         } catch (NumberFormatException e) {
@@ -30,14 +30,14 @@ public class DeleteCommand extends Command {
      * Parses the command given to Duke and creates a DeleteCommand if possible.
      *
      * @param fullCommand Full command split by whitespace.
-     * @return DeleteCommand object to be created.
+     * @return RemoveCommand object to be created.
      * @throws DukeException If no index is given.
      */
-    public static DeleteCommand process(String[] fullCommand) throws DukeException {
+    public static RemoveCommand process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
             throw new DukeException("    OOPS!!! Please specify the index of the task to be deleted.");
         }
-        return new DeleteCommand(fullCommand[1]);
+        return new RemoveCommand(fullCommand[1]);
     }
 
     /**

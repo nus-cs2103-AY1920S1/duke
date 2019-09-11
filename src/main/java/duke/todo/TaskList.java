@@ -173,6 +173,16 @@ public class TaskList {
     }
 
     /**
+     * Adds a todo task based on the input detail and
+     * returns the task.
+     */
+    public Task addTask(String taskDetail, String duration) {
+        Task newTask = Todo.getTodoWithDuration(taskDetail, duration);
+        taskList.add(newTask);
+        return newTask;
+    }
+
+    /**
      * Adds a task based on the input task type, task detail, and the date where
      * the task is due, and returns the task.
      *

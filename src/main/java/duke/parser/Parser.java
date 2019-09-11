@@ -56,7 +56,7 @@ public class Parser {
             index = Integer.parseInt(input.split(" ")[1]);
             return new DeleteCommand(index);
         case "todo":
-            return new TodoCommand(input.substring("todo ".length()));
+            return handleTodo(input);
         case "deadline":
             trimmedInput = input.substring("deadline ".length());
             return new DeadlineCommand(parseUserEntryDescription(trimmedInput), parseUserEntryDate(trimmedInput));
@@ -68,6 +68,19 @@ public class Parser {
         default:
             throw new DukeException(ERROR_INVALID_INPUT);
         }
+    }
+
+    private static Command handleTodo(String input) {
+        String trimmedInput;
+        trimmedInput = input.substring("todo ".length());
+
+        if (trimmedInput.contains("(needs")) {
+            String description = trimmedInput.split("\\(needs")[0].trim();
+            String duration = trimmedInput.split("\\(needs")[1].split("\\)")[0].trim();
+            System.out.println(duration);
+            return new TodoCommand(description, duration);
+        }
+        return new TodoCommand(trimmedInput);
     }
 
     /**

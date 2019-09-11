@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Ui {
 
     public static String startOfInteractions() {
-        return "Hello I'm Duke\n" + "What can I do for you?";
+        return "Konnichiwa!\n" + "Watashi wa Nezuko-chan!\n" + "What can I do for you?";
     }
 
     /**
@@ -30,7 +30,7 @@ public class Ui {
     }
 
     public static String endOfInteractions() {
-        return "Bye. Hope to see you again soon!";
+        return "Sayonara. Hope to see you again soon!";
     }
 
     /**
@@ -44,7 +44,7 @@ public class Ui {
         int counter = TaskList.getCounter();
         String isPlural = counter == 1 ? "is" : "are";
         String taskIfPlural = counter == 1 ? "task" : "tasks";
-        output += "Here " + isPlural + " the " + taskIfPlural + " in your list:\n";
+        output += "Hai! Here " + isPlural + " the " + taskIfPlural + " in your list:\n";
         for (int i = 1; i <= counter; i++) {
             output += "" + i + "." + task.get(i - 1) + "\n";
         }
@@ -60,7 +60,7 @@ public class Ui {
      */
     public static String printDoneTask(Task task) {
         String output = "";
-        output += "Nice! I've marked this task as done:\n";
+        output += "Hai! I've marked this task as done:\n";
         output += task + "\n";
         return output;
     }
@@ -73,7 +73,7 @@ public class Ui {
      */
     public static String printAddedTask(Task t) {
         String output = "";
-        output += "Got it. I've added this task:\n" + t + "\n";
+        output += "Hai! I've added this task:\n" + t + "\n";
         int counter = TaskList.getCounter();
         String taskIfPlural = counter == 1 ? "task" : "tasks";
         output += "Now you have " + counter + " " + taskIfPlural + " in the list.\n";
@@ -90,7 +90,7 @@ public class Ui {
         String output = "";
         int counter = TaskList.getCounter();
         String taskIfPlural = counter <= 1 ? "task" : "tasks";
-        output += "Noted. I've removed this task:\n";
+        output += "Hai! I've removed this task:\n";
         output += task + "\n";
         output += "Now you have " + counter + " " + taskIfPlural + " in the list.\n";
         return output;
@@ -107,7 +107,7 @@ public class Ui {
         int counter = foundTasks.size();
         String isPlural = counter == 1 ? "is" : "are";
         String taskIfPlural = counter == 1 ? "task" : "tasks";
-        output += "Here " + isPlural + " the matching " + taskIfPlural + " in your list:\n";
+        output += "Hai! Here " + isPlural + " the matching " + taskIfPlural + " in your list:\n";
         for (int i = 1; i <= counter; i++) {
             output += "" + i + "." + foundTasks.get(i - 1) + "\n";
         }

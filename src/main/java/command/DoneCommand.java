@@ -13,12 +13,12 @@ public class DoneCommand extends Command {
     @Override
     public String execute() {
         if (isInvalidCommand(textInput, "done")) {
-            throw new DukeException("OOPS!!! Index required.");
+            throw new DukeException("Gomennasai! Index required.");
         }
 
         int doneIndex = Integer.parseInt(textInput.replaceFirst("done ", "")) - 1;
         if (isInvalidIndex(doneIndex)) {
-            throw new DukeException("OOPS!!! Index not found.");
+            throw new DukeException("Gomennasai! Index not found.");
         }
 
         return TaskList.doneTask(doneIndex);

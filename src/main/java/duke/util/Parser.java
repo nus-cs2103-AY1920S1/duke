@@ -22,6 +22,7 @@ public class Parser {
      * @throws DukeException if the command is invalid
      */
     public static Command parse(String fullCommand) throws DukeException {
+        assert fullCommand.isEmpty() : "Please enter something!";
         String[] commandWords = fullCommand.split(" ");
         String action = commandWords[0];
         try {

@@ -16,37 +16,12 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    /**
-     * Display welcome message.
-     */
-    public void showWelcome() {
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(greeting);
-    }
-
-    public String getWelcome(){
+    public String getWelcome() {
         return "Hello! I'm Duke, what can I do for you?";
     }
 
-    /**
-     * Display line.
-     */
-    public void showLine() {
-        final String horizontalLine = "____________________________________________________________";
-        System.out.println(horizontalLine);
-    }
-
-    /**
-     * Display bye message.
-     */
-    public void showBye() {
-        final String goodbye = "Bye. Hope to see you again soon!";
-        sc.close();
-        System.out.println(goodbye);
-    }
-
-    public String getBye(){
-       return "Bye. Hope to see you again soon!";
+    public String getBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -65,72 +40,27 @@ public class Ui {
         return sc.nextLine();
     }
 
-    /**
-     * Display added task message.
-     */
-    public void showAddedTask(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
-        char icon;
-        if(isDone){
-            icon = 'Y';
-        }
-        else{
-            icon = 'X';
-        }
-
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("\t[" + firstAlphabet + "][" + icon + "] " + taskDescription);
-        System.out.println("Now you have " + numberOfItems + " in the list.");
-    }
-
     public String getAddedTask(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
         char icon;
-        if(isDone){
+        if (isDone) {
             icon = 'Y';
-        }
-        else{
+        } else {
             icon = 'X';
         }
         return "Got it. I've added this task: \n" + "\t[" + firstAlphabet + "][" + icon + "] " + taskDescription +
                "\nNow you " + "have " + numberOfItems + " in the list.";
     }
 
-    /**
-     * Display list message.
-     */
-    public void showList(ArrayList<String> listToPrint) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < listToPrint.size(); i++) {
-            System.out.println((i + 1) + "." + listToPrint.get(i));
-        }
-    }
-
     public String getList(ArrayList<String> listToPrint) {
         String result = "Here are the tasks in your list:";
         for (int i = 0; i < listToPrint.size(); i++) {
-           result = result + "\n" + (i + 1) + "." + listToPrint.get(i);
+            result = result + "\n" + (i + 1) + "." + listToPrint.get(i);
         }
         return result;
     }
 
-    /**
-     * Display deleted task message.
-     */
-    public void showDeletedTask(Task t, int taskCount) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(t.printTask());
-        System.out.println("Now you have " + taskCount + " tasks in the list.");
-    }
-
     public String getDeletedTask(Task t, int taskCount) {
         return "Noted. I've removed this task:" + t.printTask() + "Now you have " + taskCount + " tasks in the list.";
-    }
-
-    /**
-     * Display task done message.
-     */
-    public void showDoneTask(Task t) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t.printTask());
     }
 
     public String getDoneTask(Task t) {
@@ -158,21 +88,6 @@ public class Ui {
         System.out.println("Command not found. Please check command again.");
     }
 
-    /**
-     * Display list of tasks found with matching keyword.
-     */
-    public void showMatchingTaskList(ArrayList<String> listFound) {
-        if (listFound.size() == 0) {
-            System.out.println("No matching result from your list.");
-            return;
-        }
-
-        System.out.println("Here are the matching tasks in your list:");
-        for (int i = 0; i < listFound.size(); i++) {
-            System.out.println((i + 1) + "." + listFound.get(i));
-        }
-    }
-
     public String getMatchingTaskList(ArrayList<String> listFound) {
         if (listFound.size() == 0) {
             return "No matching result from your list.";
@@ -184,9 +99,5 @@ public class Ui {
             result = result + (i + 1) + "." + listFound.get(i);
         }
         return result;
-    }
-
-    public void showIncorrectNumberOfArgument() {
-        System.out.println("Incorrect number of arguments in command.");
     }
 }

@@ -109,7 +109,7 @@ public class Storage {
             t = new Deadline(description, deadline);
             break;
         default:
-            break;
+            throw new DukeException("Invalid command encountered while generating saved task: " + command);
         }
 
         if (isDone) {

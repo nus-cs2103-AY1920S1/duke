@@ -19,6 +19,7 @@ public class AddCommand extends Command {
      *                      required for the different Task types.
      */
     public AddCommand(ArrayList<String> commandParams) {
+        assert commandParams.size() != 0 : "Command Params cannot be empty";
         this.commandParams = commandParams;
     }
 

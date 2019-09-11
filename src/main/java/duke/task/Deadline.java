@@ -42,6 +42,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Formats the event to be stored in the hard disk.
+     *
+     * @return Deadline details in the format D | v or x | description | time.
+     */
+    @Override
+    public String toSave() {
+        return "D | " + super.getStatusIcon() + " | " + super.description + " | " + timeInFile;
+    }
+
+    /**
      * Formats the deadline to be displayed to the user.
      *
      * @return Deadline details in the format [D][v or x] description (at: date and time).

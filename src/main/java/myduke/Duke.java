@@ -18,6 +18,7 @@ public class Duke {
     private static final String DATABASE_LOCATION = System.getProperty("user.dir") + "/data/duke.csv";
 
     //Class Variables
+    private CommandParser parser;
     private StorageManager storage;
     private TaskList tasks;
     private Ui ui;
@@ -27,6 +28,7 @@ public class Duke {
      */
     public Duke(Consumer<String> logger, MessageFormatType format) {
         assert logger != null : " Logger for Duke should not be null";
+        parser = new CommandParser();
         ui = new Ui(logger, format);
         tasks = new TaskList();
         storage = new StorageManager(DATABASE_LOCATION, tasks, ui::log);
@@ -43,12 +45,13 @@ public class Duke {
         boolean shouldContinueChat = true;
 
         assert tasks != null   : " TaskList was not initialised";
-        assert ui != null      : " ui was not initialised";
+        assert ui != null      : " Ui was not initialised";
         assert storage != null : " Storage Manager was not initialised";
+        assert parser != null  : " parser was not initialised";
 
         //Find and give Response
         try {
-            Command cmd = CommandParser.create(query);
+            Command cmd = parser.create(query);
             cmd.execute(tasks, ui, storage);
             shouldContinueChat = !cmd.shouldExit();
         } catch (Exception ex) {

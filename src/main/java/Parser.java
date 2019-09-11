@@ -10,11 +10,11 @@ public class Parser {
 
     /**
      * Constructor for Parser class. Converts string of user input into actual command to be executed.
-     * @param command string of command given by user.
+     * @param input string of command given by user.
      * @return CommandType.
      */
-    public CommandType parse(String command) {
-        String[] commandSplit = command.split(" ");
+    public CommandType parse(String input) {
+        String[] commandSplit = input.split(" ");
         String taskType = commandSplit[0];
         switch (taskType) {
         case ("todo") :

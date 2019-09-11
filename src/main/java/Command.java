@@ -19,95 +19,88 @@ public class Command {
      * @throws DukeException
      * @throws IOException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, String userInput) throws DukeException, IOException {
         storage.loadFile();
-        ui.printGreeting();
-        String taskLine = ui.readCommand();
+        String input = userInput;
+        String response = "";
         Parser parser = new Parser();
         outerLoop:
-        while (taskLine != null) {
-            String[] words = taskLine.split(" ");
-            switch (parser.parse(taskLine)) {
+        while (input != null) {
+            String[] words = input.split(" ");
+            switch (parser.parse(input)) {
             case TODO:
-                if (taskLine.length() == 4) {
+                if (input.length() == 4) {
                     ui.throwErrorMessage("todo");
                 } else {
-                    Task todo = new Todo(taskLine.substring(5));
+                    Task todo = new Todo(input.substring(5));
                     tasks.add(todo);
-                    ui.printAddTask(todo, tasks.size());
+                    response = ui.printAddTask(todo, tasks.size());
                 }
-                taskLine = ui.readCommand();
-                break;
+                break outerLoop;
             case EVENT:
-                String[] parts = taskLine.split("/at", 2);
+                String[] parts = input.split("/at", 2);
                 String part1 = parts[0];
                 String part2 = parts[1];
-                if (taskLine.length() == 5) {
-                    ui.throwErrorMessage("event");
+                if (input.length() == 5) {
+                    response = ui.throwErrorMessage("event");
                 } else if (part2.matches(" \\d{2}/\\d{2}/\\d{4} \\d{4}")) {
-                    int indexOfSlash = taskLine.indexOf("/");
-                    Task eventTask = new Event(taskLine.substring(6, indexOfSlash - 1), taskLine.substring(indexOfSlash + 4));
+                    int indexOfSlash = input.indexOf("/");
+                    Task eventTask = new Event(input.substring(6, indexOfSlash - 1), input.substring(indexOfSlash + 4));
                     tasks.add(eventTask);
-                    ui.printAddTask(eventTask, tasks.size());
+                    response = ui.printAddTask(eventTask, tasks.size());
                 } else {
-                    ui.printEventFormat();
+                    response = ui.printEventFormat();
                 }
-                taskLine = ui.readCommand();
-                break;
+                break outerLoop;
             case DEADLINE:
-                String[] segments = taskLine.split("/by", 2);
+                String[] segments = input.split("/by", 2);
                 String segment1 = segments[0];
                 String segment2 = segments[1];
-                if (taskLine.length() == 8) {
+                if (input.length() == 8) {
                     ui.throwErrorMessage("deadline");
                 } else if (segment2.matches(" \\d{2}/\\d{2}/\\d{4} \\d{4}")) {
-                    int indexOfSlash2 = taskLine.indexOf("/");
-                    Task deadlineTask = new Deadline(taskLine.substring(9, indexOfSlash2 - 1), taskLine.substring(indexOfSlash2 + 4));
+                    int indexOfSlash2 = input.indexOf("/");
+                    Task deadlineTask = new Deadline(input.substring(9, indexOfSlash2 - 1), input.substring(indexOfSlash2 + 4));
                     tasks.add(deadlineTask);
-                    ui.printAddTask(deadlineTask, tasks.size());
+                    response = ui.printAddTask(deadlineTask, tasks.size());
                 } else {
-                    ui.printDeadlineFormat();
+                    response = ui.printDeadlineFormat();
                 }
-                taskLine = ui.readCommand();
-                break;
+                break outerLoop;
             case LIST:
-                ui.printList(tasks);
-                taskLine = ui.readCommand();
-                break;
+                response = ui.printList(tasks);
+                break outerLoop;
             case DELETE:
-                int taskNum = Integer.parseInt(taskLine.substring(7));
+                int taskNum = Integer.parseInt(input.substring(7));
                 Task deletedTask = tasks.get(taskNum - 1);
-                ui.printDelete(deletedTask, tasks.size());
+                response = ui.printDelete(deletedTask, tasks.size());
                 tasks.remove(taskNum - 1);
-                taskLine = ui.readCommand();
-                break;
+                break outerLoop;
             case DONE:
-                int taskIndex = Integer.parseInt(taskLine.substring(5));
+                int taskIndex = Integer.parseInt(input.substring(5));
                 tasks.get(taskIndex - 1).markAsDone();
-                ui.printDone(tasks.get(taskIndex - 1));
-                taskLine = ui.readCommand();
-                break;
+                response = ui.printDone(tasks.get(taskIndex - 1));
+                break outerLoop;
             case BYE:
-                ui.printBye();
+                response = ui.printBye();
                 break outerLoop;
             case FIND:
-                String keyword = taskLine.substring(5);
+                String keyword = input.substring(5);
                 TaskList findList = new TaskList();
                 for (int i = 0; i < tasks.size(); i++) {
                     if (tasks.get(i).getDescription().contains(keyword)) {
                         findList.add(tasks.get(i));
                     }
                 }
-                ui.printFind(findList);
-                taskLine = ui.readCommand();
-                break;
+                response = ui.printFind(findList);
+                break outerLoop;
             default:
-                ui.printOops();
-                taskLine = ui.readCommand();
-                break;
+                response = ui.printOops();
+                break outerLoop;
             }
         }
         storage.rewriteData();
+        return response;
     }
 
 }

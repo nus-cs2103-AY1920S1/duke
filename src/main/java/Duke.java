@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.InputMismatchException;
+
 import javafx.scene.control.Label;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,23 +19,16 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private Button sendButton;
     private Scene scene;
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
     private TextField userInput;
     private VBox dialogContainer;
 
+    private Storage storage;
+    private TaskList tasks;
+    private Command command;
+    private Ui ui;
+
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    /*public static void main(String[] args) throws IOException, DukeException {
-        Ui ui = new Ui();
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage(taskList);
-        Command c = new Command();
-        c.execute(taskList, ui, storage);
-
-    }*/
 
     @Override
     public void start(Stage stage) {
@@ -82,7 +77,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -96,9 +91,11 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
+
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -130,6 +127,20 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Smart Baby heard: " + input;
+        if (input != null) {
+            String response = "";
+            try {
+                TaskList tasks = new TaskList();
+                Storage storage = new Storage(tasks);
+                Ui ui = new Ui();
+                Command command = new Command();
+                response = command.execute(tasks, ui, storage, input);
+            } catch (InputMismatchException | IllegalArgumentException | IndexOutOfBoundsException | IOException | DukeException e) {
+                response = ui.printErrorMessage(e.getMessage());
+            }
+            return "Smart Baby says: " + response;
+        } else {
+            return "error";
+        }
     }
 }

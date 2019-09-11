@@ -30,12 +30,8 @@ public class Duke {
      * Runs Duke.
      */
     public String run(String command) {
-
-
         Parser parser = new Parser(taskList, ui, storage);
-
         String response = parser.processCommand(command); //returns string
-
         return response;
     }
 

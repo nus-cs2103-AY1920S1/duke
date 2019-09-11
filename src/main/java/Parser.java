@@ -35,109 +35,18 @@ public class Parser {
         if (command.equals("list")) {
             String list = taskList.printAllTasks();
             reply = "Here are the tasks in your list:" + "\n" + list;
-
         } else if (command.contains("done")) {
-            String[] sentence = command.split(" ");
-
-            // When command is 'done'
-            try {
-                if (sentence[0].equals("done")) { // Check if the first word is done
-                    String taskIndexAsString = sentence[1];
-                    assert isInteger(taskIndexAsString) : "Wrong format. Done command needs an integer index of task.";
-                    int taskIndexAsInteger = Integer.parseInt(sentence[1]);
-                    reply = taskList.markAsDone(taskIndexAsInteger);
-                    // If it wasn't marked before, this would print out a notification saying it is now marked.
-
-                    // Save new list to storage
-                    try {
-                        storage.saveToFile(taskList.toString());
-                    } catch (IOException e) {
-                        reply = ui.showLoadingError();
-                    }
-
-                } else {
-                    throw new UnknownTaskTypeException();
-                }
-
-            } catch (ArrayIndexOutOfBoundsException e) {
-                reply = ui.promptDoneCompletion();
-            } catch (IndexOutOfBoundsException e) {
-                reply = ui.promptList();
-            } catch (NumberFormatException e) {
-                reply = ui.promptDoneFormat();
-            } catch (UnknownTaskTypeException e) {
-                reply = ui.showErrorMessage(e);
-            }
-
-
+            reply = executeDone(command);
         } else if (command.contains("delete")) {
-            String[] sentence = command.split(" ");
-
-            // When command is 'delete'
-            try {
-                if (sentence[0].equals("delete")) {
-                    String taskIndexAsString = sentence[1];
-                    assert isInteger(sentence[1]) : "Wrong format. Delete command needs an integer index of task";
-                    int taskIndex = Integer.parseInt(taskIndexAsString);
-                    Task deletedTask = taskList.deleteTask((taskIndex - 1));
-                    reply = ui.showDeletedTask(deletedTask, taskList.numTasks);
-
-                    // Save new list to storage
-                    try {
-                        storage.saveToFile(taskList.toString());
-                    } catch (IOException e) {
-                        reply = ui.showLoadingError();
-                    }
-
-                } else {
-                    throw new UnknownTaskTypeException();
-                }
-
-            } catch (ArrayIndexOutOfBoundsException e) {
-                reply = ui.promptDeleteCompletion();
-            } catch (IndexOutOfBoundsException e) {
-                reply = ui.promptList();
-            } catch (NumberFormatException e) {
-                reply = ui.promptDeleteFormat();
-            } catch (UnknownTaskTypeException e) {
-                reply = ui.showErrorMessage(e);
-            }
-
-
+            reply = executeDelete(command);
         } else if (command.contains("find")) {
-            String[] sentence = command.split(" ");
-            String keyword = "";
-
-            try {
-                if (sentence[0].equals("find")) {
-                    keyword = sentence[1];
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                reply = ui.promptFindKeyword();
-            }
-
-            reply = ui.showSearchList(taskList.searchFor(keyword));
-
+            reply = executeFind(command);
+        } else if (containsTask(command)) {
+            // Processes task command, not the same as generateNewTask()
+            reply = executeNewTask(command);
         } else {
-            // Generate new task
-            try {
-                if (!command.isEmpty()) {
-                    Task newTask = Parser.generateNewTask(command);
-                    taskList.addTask(newTask);
-
-                    // Save the new list to storage
-                    try {
-                        storage.saveToFile(taskList.toString());
-                    } catch (IOException e) {
-                        reply = ui.showLoadingError();
-                    }
-
-                    reply = ui.showAddTask(newTask, taskList.numTasks);
-                }
-
-            } catch (DukeException err) {
-                reply = ui.showErrorMessage(err);
-            }
+            // Unknown command
+            reply = ui.showErrorMessage(new UnknownTaskTypeException());
         }
 
         // When command is bye
@@ -244,5 +153,164 @@ public class Parser {
 
         // Only reaches here if input string is an integer and no exceptions are thrown.
         return true;
+    }
+
+    /**
+     * Saves the newest version of the list to the file.
+     * @throws IOException if the save fails.
+     */
+    private void saveToStorage() throws IOException {
+        storage.saveToFile(taskList.toString());
+    }
+
+    /**
+     * Executes the command for "done".
+     * @param command string to be carried out.
+     * @return the reply from Duke.
+     */
+    private String executeDone(String command) {
+        String[] sentence = command.split(" ");
+        String reply;
+
+        try {
+            if (sentence[0].equals("done")) { // Check if the first word is done
+                String taskIndexAsString = sentence[1];
+                assert isInteger(taskIndexAsString) : "Wrong format. Done command needs an integer index of task.";
+                int taskIndexAsInteger = Integer.parseInt(sentence[1]);
+
+                // If it wasn't marked before, this would print out a notification saying it is now marked.
+                reply = taskList.markAsDone(taskIndexAsInteger);
+
+                // Save new list to storage
+                try {
+                    saveToStorage();
+                } catch (IOException e) {
+                    reply = ui.showLoadingError();
+                }
+
+            } else {
+                throw new UnknownTaskTypeException();
+            }
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            reply = ui.promptDoneCompletion(); // if task index is not given (Eg "done")
+        } catch (IndexOutOfBoundsException e) {
+            reply = ui.promptList();           // if the index given exceeds the number of tasks on the list
+        } catch (NumberFormatException e) {
+            reply = ui.promptDoneFormat();     // if the string after done is not an integer (Eg "done two")
+        } catch (UnknownTaskTypeException e) {
+            reply = ui.showErrorMessage(e);    // if the command is unknown (Eg "done22")
+        }
+
+        return reply;
+    }
+
+    /**
+     * Executes the command for "delete".
+     * @param command string to be carried out.
+     * @return the reply from Duke.
+     */
+    private String executeDelete(String command) {
+        String[] sentence = command.split(" ");
+        String reply;
+
+        try {
+            if (sentence[0].equals("delete")) {
+                String taskIndexAsString = sentence[1];
+                assert isInteger(sentence[1]) : "Wrong format. Delete command needs an integer index of task";
+                int taskIndex = Integer.parseInt(taskIndexAsString);
+                Task deletedTask = taskList.deleteTask((taskIndex - 1));
+                reply = ui.showDeletedTask(deletedTask, taskList.numTasks);
+
+                // Save new list to storage
+                try {
+                    saveToStorage();
+                } catch (IOException e) {
+                    reply = ui.showLoadingError();
+                }
+
+            } else {
+                throw new UnknownTaskTypeException();
+            }
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            reply = ui.promptDeleteCompletion();    // if task index is not given (Eg "delete")
+        } catch (IndexOutOfBoundsException e) {
+            reply = ui.promptList();                // if index of task to be deleted does not exist
+        } catch (NumberFormatException e) {
+            reply = ui.promptDeleteFormat();        // if the string after delete is not an integer (Eg "delete two")
+        } catch (UnknownTaskTypeException e) {
+            reply = ui.showErrorMessage(e);         // if the command is unknown (Eg "deleted")
+        }
+
+        return reply;
+    }
+
+    /**
+     * Executes the command for "find".
+     * @param command string to be carried out.
+     * @return the reply from duke.
+     */
+    private String executeFind(String command) {
+        String[] sentence = command.split(" ");
+        String reply;
+        String keyword = "";
+
+        try {
+            if (sentence[0].equals("find")) {
+                keyword = sentence[1];
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            reply = ui.promptFindKeyword();
+        }
+
+        reply = ui.showSearchList(taskList.searchFor(keyword));
+        return reply;
+    }
+
+    /**
+     * Processes the command to generate a new task. If command is not empty, it calls generateNewTask() and saves the
+     * list automatically.
+     * @param command string given
+     * @return the response from duke, either successful or error.
+     */
+    private String executeNewTask(String command) {
+        String reply;
+
+        try {
+            if (!command.isEmpty()) {
+                Task newTask = Parser.generateNewTask(command);
+                taskList.addTask(newTask);
+
+                // Save the new list to storage
+                try {
+                    saveToStorage();
+                } catch (IOException e) {
+                    reply = ui.showLoadingError();
+                }
+
+                reply = ui.showAddTask(newTask, taskList.numTasks);
+            } else {
+                throw new UnknownTaskTypeException();
+            }
+
+        } catch (DukeException err) {
+            reply = ui.showErrorMessage(err);
+        }
+
+        return reply;
+    }
+
+    /**
+     * Checks if the command contains any tasks.
+     * @param command string to be checked.
+     * @return true is the given string contains tasks, false otherwise.
+     */
+    private boolean containsTask(String command) {
+        boolean containsToDo = command.contains("todo");
+        boolean containsDeadline = command.contains("deadline");
+        boolean containsEvent = command.contains("event");
+        boolean containsAnyTask = (containsToDo | containsDeadline | containsEvent);
+        return containsAnyTask;
     }
 }

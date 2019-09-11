@@ -64,14 +64,18 @@ public abstract class Task {
      */
     protected static Task createFromFile(String item) throws DukeException {
         String[] args = item.split(" \\| ");
+        assert(args.length > 1);
         String taskType = args[0];
         boolean isAlreadyDone = Integer.parseInt(args[1]) == 1;
         Task newTask;
         if (taskType.equals("D")) {
+            assert(args.length == 4);
             newTask = new DeadlineTask(args[2], TimedTask.parseDateTime(args[3]));
         } else if (taskType.equals("E")) {
+            assert(args.length == 4);
             newTask = new EventTask(args[2], TimedTask.parseDateTime(args[3]));
         } else {
+            assert(args.length == 3);
             newTask = new ToDoTask(args[2]);
         }
         if (isAlreadyDone) {

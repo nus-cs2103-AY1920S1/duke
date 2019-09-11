@@ -5,12 +5,15 @@ import java.util.ArrayList;
  */
 public class Ui {
     private String response;
+    private boolean isEmptyResponse;
 
     private void setResponse(String response) {
+        isEmptyResponse = false;
         this.response = response;
     }
 
     public String getResponse() {
+        assert !isEmptyResponse : "Cannot return empty response.";
         return response;
     }
 
@@ -18,6 +21,7 @@ public class Ui {
      * Constructor for the Ui object.
      */
     public Ui() {
+        this.isEmptyResponse = true;
     }
 
     /**

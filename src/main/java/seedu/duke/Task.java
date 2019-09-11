@@ -3,11 +3,13 @@ package seedu.duke;
 /**
  * Base class used for Task objects.
  */
-public class Task {
-    /** String representing the description of the Task.*/
+public abstract class Task {
+    /** String representing the title of the Task.*/
     protected String description;
     /** Boolean representing whether the task has been done.*/
     protected boolean isDone;
+    /** String representing type of Task. */
+    protected String type = null;
 
     /** Constructor.*/
     public Task(String description) {
@@ -54,4 +56,6 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+
+    public abstract void editTask(String description, String details);
 }

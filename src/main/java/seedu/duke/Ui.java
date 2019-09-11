@@ -142,4 +142,10 @@ public class Ui {
         }
         return result;
     }
+
+    public static String editMessage(String original, String newString) {
+        String result = "You have successfully edited the task:\n" + original
+                + "\nto:\n" + newString;
+        return result;
+    }
 }

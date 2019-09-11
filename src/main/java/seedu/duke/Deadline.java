@@ -9,6 +9,8 @@ import java.util.Date;
 public class Deadline extends Task {
     /** Date representing the deadline details (date and time). */
     protected Date by;
+    /** String representing type of Task. */
+    protected String type = "Deadline";
 
     /** Constructor. */
     public Deadline(String description, Date by) {
@@ -43,5 +45,11 @@ public class Deadline extends Task {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMMM yyyy hh:mm a");
         String date = formatter.format(by);
         return "[D]" + super.toString() + " (by: " + date + ")";
+    }
+
+    @Override
+    public void editTask(String description, String details) {
+        this.description = description;
+        this.by = AddCommand.convertToDate(details);
     }
 }

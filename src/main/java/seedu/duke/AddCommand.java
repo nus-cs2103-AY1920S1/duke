@@ -32,6 +32,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList t, Ui u, Storage s) {
         Task task = createNewTask();
+        int size = t.list.size();
         t.list.add(task);
         assert t.list.size() == size + 1: "Current list size should be one more";
 

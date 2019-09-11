@@ -4,6 +4,8 @@ package seedu.duke;
  * Class for creating Task objects representing things to be done.
  */
 public class ToDo extends Task {
+    /** String representing type of Task. */
+    protected String type = "ToDo";
 
     /** Constructor.*/
     public ToDo(String description) {
@@ -26,5 +28,10 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public void editTask(String description, String details) {
+        this.description = description;
     }
 }

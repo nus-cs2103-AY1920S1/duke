@@ -9,6 +9,8 @@ import java.util.Date;
 public class Event extends Task {
     /** Date representing the Event details (date and time). */
     protected Date at;
+    /** String representing type of Task. */
+    protected String type = "Event";
 
     /** Constructor.*/
     public Event(String description, Date at) {
@@ -43,5 +45,11 @@ public class Event extends Task {
         SimpleDateFormat formatter = new SimpleDateFormat("dd MMMMM yyyy hh:mm a");
         String date = formatter.format(at);
         return "[E]" + super.toString() + " (at: " + date + ")";
+    }
+
+    @Override
+    public void editTask(String description, String details) {
+        this.description = description;
+        this.at = AddCommand.convertToDate(details);
     }
 }

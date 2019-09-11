@@ -24,6 +24,10 @@ public class Parser {
             c = new DoneCommand(Integer.valueOf(arr[1]) - 1);
         } else if (s.equals("delete")) {
             c = new DeleteCommand(Integer.valueOf(arr[1]) - 1);
+        } else if (s.equals("edit")) {
+            String information = arr[1].trim();
+            String[] split = information.split(" ", 2);
+            c = new EditCommand(Integer.valueOf(split[0]) - 1, split[1]);
         } else if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
             c = new AddCommand(s, arr[1].trim());
         } else if (s.toLowerCase().equals("list")) {
@@ -67,7 +71,7 @@ public class Parser {
             }
         } else {
             //if it is an invalid input containing multiple words
-            if (!task && !first.equals("done") && !first.equals("delete") && !first.equals("find")) {
+            if (!task && !first.equals("done") && !first.equals("delete") && !first.equals("find") && !first.equals("edit")) {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             } else if ((first.equals("event") && !input.contains("/at"))
                     || (first.equals("deadline") && !input.contains("/by"))) {

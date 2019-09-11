@@ -1,3 +1,7 @@
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -39,13 +43,13 @@ public class Duke {
     public String getResponse(String input) {
         if (input.equals("bye")) {
             try {
-                storage.overwriteTasks();
+                storage.updateTasks();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return ui.getByeResponse();
         }
-        return ui.readUserInput(input);
+        return ui.getResponseToUserInput(input);
     }
 
     public String getHello() {

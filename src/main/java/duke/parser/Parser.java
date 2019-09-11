@@ -1,3 +1,5 @@
+package duke.parser;
+
 import duke.exception.InvalidCommandException;
 import duke.exception.MissingDescriptionException;
 import duke.exception.MissingInputException;
@@ -6,6 +8,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -30,6 +34,7 @@ public class Parser {
      * @throws MissingInputException if there are missing inputs when creating a Deadline or Event task, such as the
      *     deadline or event time and day.
      * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create.
+     * @return the response to the specified user's input.
      */
     public String executeCommand(String command) throws InvalidCommandException, MissingInputException,
             MissingDescriptionException {
@@ -41,16 +46,17 @@ public class Parser {
         switch (commandType) {
         case "list":
             ArrayList<Task> tasks = taskList.getTaskList();
-            //.printList(tasks);
             output = ui.getListResponse(tasks);
             break;
         case "done":
-            int taskNumber = Integer.parseInt(commandWords[1]);
+            String taskNumberString = commandWords[1];
+            int taskNumber = Integer.parseInt(taskNumberString);
             output = taskList.markAsDone(taskNumber);
             break;
         case "delete":
-            int taskNumber2 = Integer.parseInt(commandWords[1]);
-            output = taskList.deleteTask(taskNumber2);
+            String taskNumberString1 = commandWords[1];
+            int taskNumber1 = Integer.parseInt(taskNumberString1);
+            output = taskList.deleteTask(taskNumber1);
             break;
         case "find":
             output = taskList.findMatchingTasks(commandWords[1]);
@@ -81,25 +87,25 @@ public class Parser {
      *     deadline or event time and day.
      */
     private String addTask(String command, String taskType) throws MissingDescriptionException, MissingInputException {
-        String desc = command.substring(taskType.length()).trim();
+        String fullDesc = command.substring(taskType.length());
         Task task = new Task();
 
-        if (desc.isEmpty()) {
+        if (fullDesc.isEmpty()) {
             throw new MissingDescriptionException("☹ OOPS!!! The description of " + taskType + " cannot be empty.");
         }
 
         switch (taskType) {
         case ("todo"):
-            task = new Todo(desc);
+            task = new Todo(fullDesc);
             break;
         case ("deadline"):
-            if (!desc.contains("/by")) {
+            if (!fullDesc.contains("/by")) {
                 throw new MissingInputException("☹ OOPS!!! The deadline cannot be found because /by is missing");
             }
 
-            String[] splitDeadlineDesc = desc.split("/by");
-            desc = splitDeadlineDesc[0].trim(); // first element in string array is solely the task description
-            // second element in string array is the deadline of the task, unless it is not found
+            String[] splitDeadlineDesc = fullDesc.split("/by");
+            // to separate the task description from the deadline
+            String desc = splitDeadlineDesc[0].trim();
 
             String deadline;
             try {
@@ -113,14 +119,14 @@ public class Parser {
             task = new Deadline(desc, deadline);
             break;
         case ("event"):
-            if (!desc.contains("/at")) {
+            if (!fullDesc.contains("/at")) {
                 throw new MissingInputException(
                         "☹ OOPS!!! The event date and time cannot be found because /at is missing"
                 );
             }
 
-            String[] splitEventDesc = desc.split("/at"); // first element is simply the string description
-            // second element would be the event time/day, unless it is not found
+            String[] splitEventDesc = fullDesc.split("/at");
+            // to separate the task description from the event time and day
             desc = splitEventDesc[0].trim();
 
             String when;

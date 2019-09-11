@@ -1,4 +1,7 @@
+package duke.tasklist;
+
 import duke.task.Task;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -72,10 +75,9 @@ public class TaskList {
      */
     public String findMatchingTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        String desc;
 
         for (Task task : TaskList.tasks) {
-            desc = task.getDesc();
+            String desc = task.getDesc();
             if (desc.contains(keyword)) {
                 matchingTasks.add(task);
             }

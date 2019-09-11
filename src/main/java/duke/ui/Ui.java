@@ -1,8 +1,13 @@
+package duke.ui;
+
 import duke.exception.InvalidCommandException;
 import duke.exception.MissingDescriptionException;
 import duke.exception.MissingInputException;
 
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.Task;
+import duke.tasklist.TaskList;
 
 import java.io.IOException;
 
@@ -56,7 +61,7 @@ public class Ui {
      * @param command the input given by the user.
      * @return the response to user's input.
      */
-    public String readUserInput(String command) {
+    public String getResponseToUserInput(String command) {
         Parser parser = new Parser();
         String output = "";
         try {
@@ -172,7 +177,7 @@ public class Ui {
     public String getListResponse(ArrayList<Task> tasks) {
         StringBuilder output = new StringBuilder("\tHere are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            output.append(String.format("\t%d.%s", i + 1, tasks.get(i)));
+            output.append(String.format("\t%d. %s\n", i + 1, tasks.get(i)));
         }
         return output.toString();
     }
@@ -184,7 +189,7 @@ public class Ui {
         System.out.println("\tBye. Hope to see you again soon!");
         Storage storage = new Storage();
         try {
-            storage.overwriteTasks();
+            storage.updateTasks();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

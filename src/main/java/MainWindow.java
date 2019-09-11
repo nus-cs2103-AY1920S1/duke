@@ -56,4 +56,10 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+    
+    public void showReminder(String reminder) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(reminder, dukeImage)
+        );
+    }
 }

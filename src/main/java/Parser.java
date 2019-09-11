@@ -1,4 +1,14 @@
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+
+import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Parser {
 
@@ -120,6 +130,33 @@ public class Parser {
             result.add("Now you have " + tasks.getTaskListLength() + " task(s) in the list.");
 
             break;
+        case "remind":
+            if (inputArray.length < 2) {
+                throw new DukeException("OOPS!!! You need to specify the number of the task.");
+            }
+            
+            cmdArgs = inputArray[1].split(" /at ", 2);
+            String reminder = "Reminder for task no. " + cmdArgs[0];
+            
+            Duration duration = Duration.between(LocalDateTime.now(), LocalDateTime.parse(cmdArgs[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+            long initalDelay = duration.getSeconds();
+            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+            scheduler.schedule(new Runnable(){
+                @Override
+                public void run() {
+                    //new dialog box in main window to show
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
+                    try {
+                        Parent root = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    
+                    loader.<MainWindow>getController().showReminder(reminder);
+                }
+                               },
+                    initalDelay,
+                    TimeUnit.SECONDS);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

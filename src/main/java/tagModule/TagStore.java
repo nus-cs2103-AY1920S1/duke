@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 /**
- * Store all tags
+ * Store all tags, deprecaed, kept for reference only
+ *  use genericbimap
  *
  */
 public class TagStore implements TagObserver {

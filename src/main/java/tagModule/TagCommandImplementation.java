@@ -3,8 +3,8 @@ package tagModule;
 import java.util.List;
 import java.util.ArrayList;
 /**
- * Encapsulates Tag Command  updates all Observers
- */
+ *  * Encapsulates Tag Command  updates all Observers
+ *   */
 public class TagCommandImplementation implements TagObservable {
     private List<TagObserver> observers;
 
@@ -23,8 +23,8 @@ public class TagCommandImplementation implements TagObservable {
     }
 
     /**
-     * Call  when you need to add a tag
-     */
+     *      * Call  when you need to add a tag
+     *           */
     public void execute(String command) {
 
         this.notifyObservers();

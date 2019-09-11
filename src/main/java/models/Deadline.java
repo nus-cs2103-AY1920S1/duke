@@ -1,15 +1,17 @@
+package models;
+
 /**
- * Represents the attributes of a Deadline object, which is a sub-class of Task.
+ * Represents the attributes of a models.Deadline object, which is a sub-class of models.Task.
  */
 public class Deadline extends Task {
 
     protected String date;
 
     /**
-     * Creates a Deadline object with a description.
-     * The identity is also intialised as D, for all Deadline objects.
+     * Creates a models.Deadline object with a description.
+     * The identity is also intialised as D, for all models.Deadline objects.
      *
-     * @param description of the Deadline task.
+     * @param description of the models.Deadline task.
      */
     public Deadline(String description, String date) {
         super(description);
@@ -18,7 +20,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Recovery of a Deadline object based on the format of a task in the Duke.txt file that we save our information into.
+     * Recovery of a models.Deadline object based on the format of a task in the Duke.txt file that we save our information into.
      * Whether the task is done or not depends on the int value of the task when it is saved.
      *
      * @param intDone if task is done, the int value == 1. If the task is not done, int value == 0.
@@ -37,9 +39,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the string value of a Deadline object.
+     * Returns the string value of a models.Deadline object.
      *
-     * @return the identity of the Deadline task followed by the status icon and description.
+     * @return the identity of the models.Deadline task followed by the status icon and description.
      */
     @Override
     public String toString() {
@@ -49,7 +51,7 @@ public class Deadline extends Task {
     /**
      * Returns a string value to be saved in the Duke.txt file.
      *
-     * @return a string in the Duke.txt file format for a Deadline object.
+     * @return a string in the Duke.txt file format for a models.Deadline object.
      */
     public String toTextFile() {
         int done = isDone ? 1 : 0;

@@ -1,3 +1,7 @@
+package execution;
+
+import models.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -26,6 +30,10 @@ public class TaskList {
         this.list = currentList;
     }
 
+    public int getSize() {
+        return this.list.size();
+    }
+
     /**
      * Returns the current list.
      *
@@ -37,40 +45,33 @@ public class TaskList {
 
     }
 
+    public Task getTaskByIndex(int index) {
+
+        return this.list.get(index);
+    }
+
     /**
-     * Adds a task to the list attribute of this TaskList object.
+     * Adds a task to the list attribute of this execution.TaskList object.
      *
-     * @param current the Task object to be added to the list.
+     * @param current the models.Task object to be added to the list.
      */
     public void addTask(Task current) {
 
         this.list.add(current);
-        if (list.size() > 1) {
-            System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
-                    "Now you have " + list.size() + " tasks in the list. ");
-        } else {
-            System.out.println("Got it. I've added this task: \n" + "   " + current.toString() + "\n" +
-                    "Now you have " + list.size() + " task in the list. ");
-        }
 
     }
 
     /**
-     * Deletes a task off the list attribute of this TaskList object.
+     * Deletes a task off the list attribute of this execution.TaskList object.
      *
-     * @param current the Task object to be deleted off the list.
+     * @param current the models.Task object to be deleted off the list.
      */
-    public void deleteTask(int current) {
+    public Task deleteTask(int current) {
 
         Task deleted = list.get(current);
         list.remove(current);
-        if (list.size() > 1) {
-            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
-                    "Now you have " + list.size() + " tasks in the list. ");
-        } else {
-            System.out.println("Noted. I've removed this task: \n" + "   " + deleted.toString() + "\n" +
-                    "Now you have " + list.size() + " task in the list. ");
-        }
+
+        return deleted;
 
     }
 
@@ -117,7 +118,7 @@ public class TaskList {
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> list = new ArrayList<>();
         for (Task current : this.list) {
-            String taskInString = current.description;
+            String taskInString = current.getDescription();
 
             if (taskInString.toLowerCase().contains(keyword.toLowerCase())) {
                 list.add(current);

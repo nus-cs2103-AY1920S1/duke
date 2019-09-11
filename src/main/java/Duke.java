@@ -1,3 +1,11 @@
+import exception.DukeException;
+import execution.Parser;
+import execution.Storage;
+import execution.TaskList;
+import execution.UI;
+import execution.commands.Command;
+import models.Task;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,7 +41,7 @@ public class Duke {
      * @param args
      * @throws IOException if there is an issue reading the file.
      */
-    public static void main(String[] args) throws IOException  {
+    public static void main(String[] args) throws IOException, DukeException  {
 
        new Duke().run();
 
@@ -45,23 +53,20 @@ public class Duke {
      *
      * @throws IOException if there is an issue reading the .txt file to recover the previous list.
      */
-    public void run() throws IOException {
+    public void run() throws IOException, DukeException {
         this.ui.welcome();
         String command = ui.promptEntry();
-        ui.handleCommand(command, this.taskList);
-        //after all commands are done, we will save the updated list into the txt file.
-        ArrayList<Task> updated = this.taskList.getList();
-
-        if (!updated.isEmpty()) {
-            for (Task task : updated) {
-                if (storage.isFileEmpty()) {
-                        storage.writeToFile(task.toTextFile());
-                } else {
-                    storage.appendToFile(task.toTextFile());
-                }
+        try {
+            while (ui.isRunning()) {
+                Command current = Parser.parse(command);
+                current.execute(taskList, ui, storage);
+                command = this.ui.promptEntry();
             }
+
+        } catch (Exception e) {
+            System.out.print(e);
         }
-        this.ui.goodbye();
+
     }
 
 

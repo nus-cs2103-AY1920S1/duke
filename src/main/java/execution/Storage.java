@@ -1,7 +1,11 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+package execution;
+
+import models.Deadline;
+import models.Event;
+import models.Task;
+import models.ToDo;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +14,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private String file;
+    private String filePath;
 
     /**
      * Constructor of a storage object, initiating the file we are storing the information into.
@@ -18,16 +22,16 @@ public class Storage {
      * @param filepath the string value of the filepath of the duke.txt file.
      */
     public Storage(String filepath) {
-        this.file = filepath;
+        this.filePath = filepath;
     }
 
     /**
-     * This method will print the contents of the Storage object (file).
+     * This method will print the contents of the execution.Storage object (file).
      *
      * @throws FileNotFoundException if the file is not found based on the filepath.
      */
     public ArrayList<Task> readFileContents() throws FileNotFoundException {
-        File currentFile = new File(this.file);
+        File currentFile = new File(this.filePath);
         Scanner sc = new Scanner(currentFile);
         ArrayList<Task> list = new ArrayList<>();
         while (sc.hasNext()) {
@@ -69,7 +73,7 @@ public class Storage {
      * @return a boolean on whether the file is empty or not.
      */
     public boolean isFileEmpty() {
-        File file = new File(this.file);
+        File file = new File(this.filePath);
         return 0 == file.length();
     }
 
@@ -81,21 +85,30 @@ public class Storage {
      * @throws IOException if there is an issue writing to the file.
      */
     public void writeToFile(String toAdd) throws IOException {
-        FileWriter fw = new FileWriter(this.file);
+        FileWriter fw = new FileWriter(this.filePath);
         fw.write(toAdd);
         fw.close();
     }
 
     /**
-     * Appends to the duke.txt file and does not overwrite the current information on the Duke.txt file.
-     *
-     * @param toAppend string to be appended to the list.
-     * @throws IOException if there is an error writing to the file.
+     * Saves tasks into specified file.
+     * @param taskList Tasks to be saved.
      */
-    public void appendToFile(String toAppend) throws IOException {
-        FileWriter fw = new FileWriter(this.file, true);
-        fw.write(System.lineSeparator() + toAppend);
-        fw.close();
+    public void saveToDataFile(TaskList taskList) {
+        try {
+            ArrayList<Task> tasks = taskList.getList();
+            FileWriter fileWriter = new FileWriter(filePath);
+            assert fileWriter != null;
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            for (Task task: tasks) {
+                String taskData = task.toTextFile();
+                bufferedWriter.write(taskData);
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 

@@ -1,6 +1,8 @@
+package models;
+
 /**
- * Representing the attributes and behavior of a general Task. The abstract methods will be more specific for the child
- * classes of the Task class.
+ * Representing the attributes and behavior of a general models.Task. The abstract methods will be more specific for the child
+ * classes of the models.Task class.
  */
 public abstract class Task {
 
@@ -52,7 +54,7 @@ public abstract class Task {
     }
 
     /**
-     * Returns the string value of a Task object.
+     * Returns the string value of a models.Task object.
      *
      * @return the status icon and description of the task.
      */
@@ -68,5 +70,14 @@ public abstract class Task {
      * @return string value to be saved in the Duke.txt file.
      */
     public abstract String toTextFile() ;
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean contains(String text) {
+        return this.description.contains(text);
+    }
+
 
 }

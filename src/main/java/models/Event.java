@@ -1,15 +1,17 @@
+package models;
+
 /**
- * Represents the attributes of an Event object, which is a sub-class of Task.
+ * Represents the attributes of an models.Event object, which is a sub-class of models.Task.
  */
 public class Event extends Task {
 
     protected String dateAndTime;
 
     /**
-     * Creates an Event object with a description.
-     * The identity is also intialised as E, for all Event objects.
+     * Creates an models.Event object with a description.
+     * The identity is also intialised as E, for all models.Event objects.
      *
-     * @param description of the Event task.
+     * @param description of the models.Event task.
      */
     public Event(String description, String at) {
         super(description);
@@ -21,7 +23,7 @@ public class Event extends Task {
     }
 
     /**
-     * Recovery of an Event object based on the format of a task in the Duke.txt file that we save our information into.
+     * Recovery of an models.Event object based on the format of a task in the Duke.txt file that we save our information into.
      * Whether the task is done or not depends on the int value of the task when it is saved.
      *
      * @param intDone if task is done, the int value == 1. If the task is not done, int value == 0.
@@ -39,9 +41,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string value of an Event object.
+     * Returns the string value of an models.Event object.
      *
-     * @return the identity of the Event task followed by the status icon and description.
+     * @return the identity of the models.Event task followed by the status icon and description.
      */
     @Override
     public String toString() {
@@ -51,7 +53,7 @@ public class Event extends Task {
     /**
      * Returns a string value to be saved in the Duke.txt file.
      *
-     * @return a string in the Duke.txt file format for an Event object.
+     * @return a string in the Duke.txt file format for an models.Event object.
      */
     public String toTextFile() {
         int done = isDone ? 1 : 0;

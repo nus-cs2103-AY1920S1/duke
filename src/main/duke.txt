@@ -1,0 +1,2 @@
+T | 1 | eat 
+E | 1 | exams | my house

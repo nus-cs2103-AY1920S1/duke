@@ -1,14 +1,9 @@
-deadline hw  /by 29/08/2019 0000
+todo abc
 true
-event splashdown  /at 28/08/2019 1800
-false
-deadline hw2  /by 29/08/2019 1200
-false
-todo 123
+HIGH
+deadline hw      /by 29/08/2019 0000
 true
-todo 124719
-true
-todo kkkk
+MEDIUM
+event an_event      /at 02/03/1997 1922
 false
-event abc2213  /at 02/11/2019 0100
-false
+LOW

@@ -15,16 +15,17 @@ public class TodoTask  extends Task {
      * @return string that contains information about a task.
      */
     String saveInfo() {
-        return "todo" + " " + taskDetails + System.getProperty("line.separator")
-                + completed;
+        return "todo" + " " + taskDetails
+                + System.getProperty("line.separator") + completed
+                + System.getProperty("line.separator") + priority.toString();
     }
 
     @Override
     public String toString() {
         if (this.completed) {
-            return "[T][\u2713] " + taskDetails;
+            return "[T][\u2713] " + taskDetails + " " + priority.toString();
         } else {
-            return "[T][\u2717] " + taskDetails;
+            return "[T][\u2717] " + taskDetails + " " + priority.toString();
         }
     }
 }

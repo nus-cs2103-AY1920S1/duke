@@ -5,6 +5,7 @@ import duke.exception.DukeException;
 import duke.exception.SaveFileWrongFormatDukeException;
 import duke.command.UnloadableCommand;
 import duke.main.Parser;
+import duke.task.PriorityLevel;
 import duke.task.TaskList;
 
 import java.io.File;
@@ -43,14 +44,14 @@ public class Storage {
      * Loads the save-file to Duke.
      *
      * @return TaskList that was saved in the save-file.
-     * @throws DukeException  If there was an error in the save-file and TaskList does not generate properly.
      * @throws FileNotFoundException If there is an error in the file path, or the file does not exists.
-     * @throws ParseException If there is an error in parsing.
+     * @throws SaveFileWrongFormatDukeException If there is an error in the save file that affects loading.
      */
     public TaskList load(Parser parser) throws FileNotFoundException, SaveFileWrongFormatDukeException {
         TaskList tl = new TaskList();
         Scanner fileSc = new Scanner(this.file);
         String line;
+        int currentTaskIndex = 0;
         while (fileSc.hasNext()) {
             line = fileSc.nextLine();
             Command commandToLoadTask = parser.parse(line);
@@ -59,8 +60,23 @@ public class Storage {
             }
             commandToLoadTask.execute(tl);
             if (Boolean.parseBoolean(fileSc.nextLine())) {
-                tl.checkTask(tl.getSizeOfTaskList() - 1);
+                tl.checkTask(currentTaskIndex);
             }
+            String priorityInString = fileSc.nextLine();
+            switch (priorityInString) {
+            case "HIGH":
+                tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.HIGH);
+                break;
+            case "MEDIUM":
+                tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.MEDIUM);
+                break;
+            case "LOW":
+                tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.LOW);
+                break;
+            default:
+                throw new SaveFileWrongFormatDukeException("Save file contains an invalid priority level");
+            }
+            currentTaskIndex += 1;
         }
         return tl;
     }

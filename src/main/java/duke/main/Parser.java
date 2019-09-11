@@ -1,12 +1,9 @@
 package duke.main;
 
 import duke.command.*;
-import duke.exception.EmptyDscDukeException;
-import duke.exception.InvalidTaskIndexDukeException;
-import duke.exception.NoDateDukeException;
-import duke.exception.NoTaskIndexDukeException;
+import duke.exception.*;
+import duke.task.PriorityLevel;
 
-import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,6 +46,9 @@ public class Parser {
             break;
         case "event":
             parsedInput = createParsedInputForEvent(task, input);
+            break;
+        case "priority":
+            parsedInput = createParsedInputForPriority(task, input);
             break;
         default:
             parsedInput = createParsedInputForUnknownTask();
@@ -213,6 +213,43 @@ public class Parser {
     private void checkForEmptyDsc(String dsc) throws EmptyDscDukeException{
         if (dsc.trim().length() == 0) {
             throw new EmptyDscDukeException("Empty description");
+        }
+    }
+
+    private Command createParsedInputForPriority(String task, String input) {
+        Command c;
+        try {
+            checkIfAnythingAfterCommand(task, input);
+            String indexInString = input.substring(9, 10);
+            int index = tryToParseIndex(indexInString) - 1;
+            checkIfPriorityAfterIndex(11, input);
+            String priorityInString = input.substring(11).toUpperCase();
+            PriorityLevel p = parsePriorityLevel(priorityInString);
+            c = new PriorityCommand(index, p);
+        } catch (NoTaskIndexDukeException e) {
+            c = new InvalidCommand("Index not provided");
+        } catch (NumberFormatException e) {
+            c = new InvalidCommand("Index given is not a number");
+        } catch (NoPriorityDukeException e) {
+            c = new InvalidCommand("No priority after index");
+        } catch (InvalidPriorityDukeException e) {
+            c = new InvalidCommand("Invalid priority");
+        }
+        return c;
+    }
+
+    private PriorityLevel parsePriorityLevel(String s) throws InvalidPriorityDukeException{
+        for (PriorityLevel p : PriorityLevel.values()) {
+            if (s.equals(p.name())) {
+                return p;
+            }
+        }
+        throw new InvalidPriorityDukeException("Invalid priority");
+    }
+
+    private void checkIfPriorityAfterIndex(int indexToStartFrom, String input) throws NoPriorityDukeException {
+        if (input.length() < indexToStartFrom) {
+            throw new NoPriorityDukeException("No priority after index");
         }
     }
 

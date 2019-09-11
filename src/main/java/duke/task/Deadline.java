@@ -23,7 +23,8 @@ public class Deadline extends Task {
      */
     public String saveInfo() {
         return "deadline" + " " + taskDetails + " /by " + Parser.inputDateFormat.format(deadlineBy)
-                + System.getProperty("line.separator") + completed;
+                + System.getProperty("line.separator") + completed
+                + System.getProperty("line.separator") + priority.toString();
     }
 
     @Override
@@ -38,6 +39,8 @@ public class Deadline extends Task {
         sb.append(" (");
         sb.append(Parser.outputDateFormat.format(deadlineBy));
         sb.append(")");
+        sb.append(" ");
+        sb.append(priority.toString());
         return sb.toString();
     }
 }

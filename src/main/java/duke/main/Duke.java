@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.exception.SaveFileWrongFormatDukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.UI;
 
 import java.io.FileNotFoundException;
 
@@ -13,7 +12,6 @@ import java.io.FileNotFoundException;
  * to-do tasks, deadlines and events.
  */
 public class Duke {
-    private UI ui;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;

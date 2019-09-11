@@ -24,7 +24,8 @@ public class Event extends Task {
      */
     String saveInfo() {
         return "event" + " " + taskDetails + " /at " + Parser.inputDateFormat.format(eventAt)
-                + System.getProperty("line.separator") + completed;
+                + System.getProperty("line.separator") + completed
+                + System.getProperty("line.separator") + priority.toString();
     }
 
     @Override
@@ -39,6 +40,8 @@ public class Event extends Task {
         sb.append(" (");
         sb.append(Parser.outputDateFormat.format(eventAt));
         sb.append(")");
+        sb.append(" ");
+        sb.append(priority.toString());
         return sb.toString();
     }
 }

@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * TaskList contains an array-list of tasks. It keeps tracks
@@ -16,10 +17,12 @@ public class TaskList {
 
     public void addTask(Task t) {
         taskList.add(t);
+        Collections.sort(taskList);
     }
 
     public void deleteTask(int index) {
         taskList.remove(index);
+        Collections.sort(taskList);
     }
 
     public int getSizeOfTaskList() {
@@ -35,6 +38,18 @@ public class TaskList {
     public void checkTask(int taskIndex) {
         Task t = taskList.get(taskIndex);
         t.taskDone();
+    }
+
+    /**
+     * Marks a task as completed by changing its
+     * completed field to true.
+     *
+     * @param taskIndex the index of the task.
+     */
+    public void setPriorityOfTask(int taskIndex, PriorityLevel priority) {
+        Task t = taskList.get(taskIndex);
+        t.setPriority(priority);
+        Collections.sort(taskList);
     }
 
     public String getTaskDsc(int taskIndex) {

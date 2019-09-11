@@ -80,4 +80,38 @@ public class Ui {
             return res;
         }
     }
+
+    public String askQuestion(QuestionList qList){
+        return qList.getCurrentQuestion().question;
+    }
+
+    public String checkTriviaAnswer(QuestionList qList, String answer){
+        if (qList.getCurrentQuestion().isCorrect(answer)){
+            qList.advance();
+            qList.isAsking = false;
+            return "Oh, that's wonderful! You've gotten it right!";
+        }
+        else {
+            return "I'm sorry, that's not quite right. Please try again, dear.\n(or say 'give up' to see the answer)";
+        }
+    }
+
+	public String getAnswer(QuestionList qList) {
+        String res = qList.getCurrentQuestion().answer;
+        qList.advance();
+        qList.isAsking = false;
+        return res;
+	}
+
+	public String questionAdded(QuestionList qList) {
+		return "cool! i've added this question to the list: \n" + qList.questions.get(qList.questions.size() -1);
+    }
+    
+    public String showQuestions(QuestionList qList){
+        return "here are all the questions you've stored:\n" + qList; 
+    }
+
+	public String questionDelete(TriviaQuestion t) {
+        return "Noted. I've removed this question:\n" + t;
+	}
 }

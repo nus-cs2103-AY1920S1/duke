@@ -43,11 +43,9 @@ public class Duke extends Application {
         }
     }
 
-    public String ask(String inputString, TaskList list) throws DukeException {
+    public String ask(String inputString, TaskList list, QuestionList qList) {
         String res = "";
-        res = p.parse(inputString, list, formatter, res);
-        //System.out.println(inputString);
-        //System.out.println(res);
+        res = p.parse(inputString, list, formatter, res, qList);
         return res;
     }
 }

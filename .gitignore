@@ -20,3 +20,4 @@ bin/
 data/duke.txt
 .vscode/settings.json
 .vscode/launch.json
+data/trivia.txt

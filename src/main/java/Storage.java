@@ -9,8 +9,8 @@ import java.util.Scanner;
  * Storage class deals with file input/output
  */
 public class Storage {
-    File file;
-    Scanner sFile;
+    File file, triviaFile;
+    Scanner sFile, sTrivFile;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     FileWriter fw;
     /**
@@ -18,6 +18,7 @@ public class Storage {
      */
     public Storage() {
         file = new File("data/duke.txt");
+        triviaFile = new File("data/trivia.txt");
     }
     /**
      * reads in tasks from the file if it exists and populates the task list
@@ -46,6 +47,21 @@ public class Storage {
             }
         }
     }
+    public void readTriviaFile(QuestionList qList) {
+        if (!triviaFile.exists()) {
+            return;
+        }
+        try {
+            sTrivFile = new Scanner(triviaFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        while (sTrivFile.hasNextLine()) {
+            String ln = sTrivFile.nextLine();
+            String[] lnSplit = ln.split(",");
+            qList.questions.add(new TriviaQuestion(lnSplit[0], lnSplit[1]));
+        }
+    }
     /**
      * at the end of the program logic, 
      * replaces the content of the file (if it exists)
@@ -61,6 +77,23 @@ public class Storage {
         }
         try {
             for (Task t : list.list) {
+                fw.write(t.toFile() + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeTriviaFile(QuestionList qList) {
+        try {
+            triviaFile.createNewFile();
+            fw = new FileWriter(triviaFile);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        try {
+            for (TriviaQuestion t : qList.questions) {
                 fw.write(t.toFile() + "\n");
             }
             fw.close();

@@ -24,6 +24,7 @@ public class ChatScreenController extends AnchorPane {
     
     Storage s = new Storage();
     TaskList list = new TaskList();
+    QuestionList qList = new QuestionList();
     File dukeFile = new File("src/main/java/images/Duke.png");
     File userFile = new File("src/main/java/images/User.png");
     public Image dukeIm = new Image(dukeFile.toURI().toString());
@@ -46,6 +47,7 @@ public class ChatScreenController extends AnchorPane {
         scrollPane.setContent(chats);
         scrollPane.vvalueProperty().bind(chats.heightProperty());
         s.readFile(list);
+        s.readTriviaFile(qList);
     }
 
     @FXML
@@ -54,17 +56,18 @@ public class ChatScreenController extends AnchorPane {
     }
 
     @FXML
-    public void handleSend() throws DukeException {
+    public void handleSend(){
         //System.out.println("clicked");
         String inputString = input.getText();
         if(inputString.equals("bye")){
             input.setDisable(true);
             send.setDisable(true);
             s.writeFile(list);
+            s.writeTriviaFile(qList);
             close.setVisible(true);
             close.setDisable(false);
         }
-        String reply = duke.ask(inputString, list);
+        String reply = duke.ask(inputString, list, qList);
         chats.getChildren().addAll(DialogLineController.getUserDialog(inputString, userIm),
                 DialogLineController.getDukeDialog(reply, dukeIm));
         //System.out.println(chats.getChildren().size());

@@ -1,7 +1,5 @@
 package exception;
 
-import exception.DukeException;
-
 /**
  * Exception where the user does not enter anything after a command.
  */

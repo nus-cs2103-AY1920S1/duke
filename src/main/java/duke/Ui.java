@@ -58,8 +58,6 @@ public class Ui {
         }
         result += task;
         System.out.println(result);
-
-        // return result;
     }
 
     /**

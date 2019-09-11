@@ -33,7 +33,6 @@ public class FindCommand extends Command {
             }
         }
 
-
         if (matchingTasks.size() == 0) {
             ui.showLine();
             ui.println("     I'm sorry, but I can't find any matching tasks :-(");

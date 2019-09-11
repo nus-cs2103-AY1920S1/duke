@@ -37,7 +37,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = new Task("placeholder", TaskType.TODO);
+        Task task;
 
         switch (taskType) {
         case TODO:
@@ -57,6 +57,8 @@ public class AddCommand extends Command {
             tasks.add(newTaskEvent);
             task = newTaskEvent;
             break;
+        default:
+            task = new Task("placeholder", TaskType.TODO);
         }
 
         ui.showLine();

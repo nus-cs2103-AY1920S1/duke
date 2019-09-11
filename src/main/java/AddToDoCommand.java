@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class AddToDoCommand extends Command{
 
     String [] tokens;
@@ -10,12 +8,11 @@ public class AddToDoCommand extends Command{
     }
 
 
-
-    public void execute(List<Task> lst, Ui ui) throws DukeException {
+    @Override
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         ToDo task = ToDo.createToDo(tokens);
-        lst.add(task);
-        ui.printInput(task, lst);
+        taskList.addToList(task);
+        ui.printInput(task, taskList);
     }
-
 
 }

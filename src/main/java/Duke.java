@@ -1,16 +1,12 @@
-import java.util.List;
-import java.util.ArrayList;
-
-
-
 public class Duke {
 
     private Ui ui;
-    public static List<Task> lst = new ArrayList<>();
+    private TaskList taskList;
 
 
     public Duke()  {
         this.ui = new Ui();
+        this.taskList = new TaskList();
     }
 
     public void run() {
@@ -19,7 +15,7 @@ public class Duke {
             try {
                 String input = ui.readCommand();
                 Command command = Parser.parse(input);
-                command.execute(lst, this.ui);
+                command.execute(taskList, this.ui);
                 if (command.getCommandType().equals(CommandType.EXIT)) {
                     break;
                 }

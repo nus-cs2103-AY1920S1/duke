@@ -1,6 +1,3 @@
-import java.util.List;
-
-
 public class ExitCommand extends Command {
 
     public ExitCommand(){
@@ -8,8 +5,9 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> lst, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         ui.printByeMessage();
     }
+
 }
 

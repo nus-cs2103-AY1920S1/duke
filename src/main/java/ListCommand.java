@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class ListCommand extends Command {
 
     public ListCommand(){
@@ -7,7 +5,9 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> lst, Ui ui) throws DukeException {
-        ui.printNumberList(lst);
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
+        ui.printNumberList(taskList);
     }
+
+
 }

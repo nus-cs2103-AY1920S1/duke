@@ -25,23 +25,23 @@ public class Ui {
     }
 
 
-    public void printInput(Task input, List<Task> lst) {
+    public void printInput(Task input, TaskList taskList) {
         System.out.println(horizontalLine);
 
         System.out.println("     Got it. I've added this task: ");
         System.out.println(String.format("       %s",input));
-        System.out.println(String.format("     Now you have %d tasks in the list.",lst.size()));
+        System.out.println(String.format("     Now you have %d tasks in the list.", taskList.getSize()));
         System.out.println(horizontalLine);
         System.out.println();
 
     }
 
-    public void printDeletion(Task input, List<Task> lst) {
+    public void printDeletion(Task input, TaskList taskList) {
         System.out.println(horizontalLine);
 
         System.out.println("     Noted. I've removed this task: ");
         System.out.println(String.format("       %s",input));
-        System.out.println(String.format("     Now you have %d tasks in the list.",lst.size()));
+        System.out.println(String.format("     Now you have %d tasks in the list.",taskList.getSize()));
         System.out.println(horizontalLine);
         System.out.println();
 
@@ -65,11 +65,13 @@ public class Ui {
 
     }
 
-    public void printNumberList(List<Task> lst) {
+    public void printNumberList(TaskList taskList) {
         System.out.println(horizontalLine);
         System.out.println("     Here are the tasks in your list:");
-        for (int i = 0; i < lst.size(); i++) {
-            System.out.println(String.format("     %d.%s",i+1, lst.get(i)));
+        for (int i = 0; i < taskList.getSize(); i++) {
+            //may run into error for our taskList index
+            //System.out.println(String.format("     %d.%s",i+1, lst.get(i)));
+            System.out.println(String.format("     %d.%s",i+1, taskList.getTaskAt(i+1)));
         }
 
         System.out.println(horizontalLine);

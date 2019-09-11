@@ -1,6 +1,3 @@
-import java.util.List;
-
-
 public class NullCommand extends Command{
 
     public NullCommand(){
@@ -8,9 +5,8 @@ public class NullCommand extends Command{
     }
 
     @Override
-    public void execute(List<Task> lst , Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         throw new DukeException("Invalid Command! Please try again.", DukeExceptionType.INVALIDCOMMAND);
     }
-
 
 }

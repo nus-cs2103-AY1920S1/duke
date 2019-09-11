@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.List;
 
 public class AddEventCommand extends Command{
 
@@ -18,10 +17,12 @@ public class AddEventCommand extends Command{
         }
     }
 
-    public void execute(List<Task> lst, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         Event task = Event.createEvent(tokens);
-        lst.add(task);
-        ui.printInput(task, lst);
+        taskList.addToList(task);
+        ui.printInput(task, taskList);
     }
+
+
 
 }

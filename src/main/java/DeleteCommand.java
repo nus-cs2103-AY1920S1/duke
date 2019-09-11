@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class DeleteCommand extends Command {
 
     int index;
@@ -19,15 +17,14 @@ public class DeleteCommand extends Command {
         }
     }
 
-    public void execute(List<Task> lst, Ui ui) throws DukeException {
+    @Override
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         try {
-            Task task = lst.get(index);
-            lst.remove(task);
-            ui.printDeletion(task, lst);
+            Task task = taskList.getTaskAt(index+1);
+            taskList.removeFromList(task);
+            ui.printDeletion(task, taskList);
         } catch (IndexOutOfBoundsException error3) {
             ui.printOneLine(new DukeException("No such task",DukeExceptionType.MISSINGTASK).getMessage());
         }
     }
-
-
 }

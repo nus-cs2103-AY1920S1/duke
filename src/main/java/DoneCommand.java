@@ -21,9 +21,9 @@ public class DoneCommand extends Command{
 
 
     @Override
-    public void execute(List<Task> lst, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         try {
-            Task task = lst.get(index);
+            Task task = taskList.getTaskAt(index+1);
             boolean isDoneBefore = task.setDone();
             if (isDoneBefore) {
                 throw new IllegalArgumentException("Task has already been done");
@@ -37,4 +37,5 @@ public class DoneCommand extends Command{
             ui.printOneLine(new DukeException(error2.getMessage(), DukeExceptionType.GENERALMISTAKE).getMessage());
         }
     }
+
 }

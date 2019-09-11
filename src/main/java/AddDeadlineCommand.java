@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.List;
 
 public class AddDeadlineCommand extends Command {
 
@@ -19,11 +18,14 @@ public class AddDeadlineCommand extends Command {
         }
     }
 
-    public void execute(List<Task> lst, Ui ui) throws DukeException {
+    @Override
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         Deadline task = Deadline.createDeadline(tokens);
-        lst.add(task);
-        ui.printInput(task, lst);
+        taskList.addToList(task);
+        ui.printInput(task, taskList);
     }
+
+
 
 
 

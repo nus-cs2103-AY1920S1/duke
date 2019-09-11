@@ -7,7 +7,7 @@ public abstract class Command {
         return commandType;
     }
 
-    public abstract void execute(List<Task> lst, Ui ui) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
 
     public static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
         List<String> validCommands = List.of("todo", "deadline", "event");

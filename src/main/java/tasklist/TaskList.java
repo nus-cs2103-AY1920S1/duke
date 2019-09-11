@@ -55,6 +55,7 @@ public class TaskList {
      * @param date sets the date of the task
      */
     public void addTask(String taskType, String description, boolean completionStatus, LocalDateTime date) {
+        assert !description.isEmpty() : "description should not be empty";
         switch (taskType) {
         case "todo":
             taskList.addLast(new Todo(description,completionStatus));

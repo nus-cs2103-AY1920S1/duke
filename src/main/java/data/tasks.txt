@@ -1,0 +1,5 @@
+T/false/read books/null
+E/false/reading club /null
+D/false/deadline/null
+D/true/do something/12-12-1990 0900
+D/false/do something/15-12-1990 0900

@@ -146,7 +146,7 @@ public class Duke extends Application {
         TaskList commands = new TaskList(this.storage.load(new ArrayList<Task>())); //TODO
         Parser p = new Parser(commands, this.storage, ui);
         String xx = p.parse(input);
-
+        this.storage.close(commands);
         return xx;
     }
 

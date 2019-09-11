@@ -1,16 +1,24 @@
 package duke.utilities;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.MarkAsDoneCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.CreateTodoCommand;
+import duke.command.CreateDeadlineCommand;
+import duke.command.CreateEventCommand;
+import duke.command.FindTaskCommand;
 import duke.exception.InvalidCommandException;
 
 
 /**
- * Helper class for parsing Duke commands
+ * Helper class for parsing Duke commands.
  */
 public class Parser {
 
     /**
-     * Parses and executes Duke commands
+     * Parses and executes Duke commands.
      *
      * @param fullCommand A <code>String</code> representing the full input command
      */

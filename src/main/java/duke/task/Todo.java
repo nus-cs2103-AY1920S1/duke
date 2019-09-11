@@ -7,7 +7,7 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Default constructor for Todo class
+     * Default constructor for Todo class.
      *
      * @param taskName A String which represents the taskName
      *                 e.g., <code>todo borrow books</code>
@@ -22,7 +22,7 @@ public class Todo extends Task {
 
 
     /**
-     * Alternative constructor for Todo class
+     * Alternative constructor for Todo class.
      *
      * @param taskName    A String which represents the taskName
      *                    e.g., <code>todo borrow books</code>

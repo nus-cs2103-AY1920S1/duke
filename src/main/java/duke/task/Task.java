@@ -11,7 +11,7 @@ public abstract class Task {
     protected TypeOfTask taskType;
 
     /**
-     * Default constructor for Task class
+     * Default constructor for Task class.
      *
      * @param taskName A String which represents the taskName
      *                 e.g., <code>todo borrow books</code>
@@ -23,7 +23,7 @@ public abstract class Task {
     }
 
     /**
-     * Alternative constructor for Task class
+     * Alternative constructor for Task class.
      *
      * @param taskName    Information about the task
      *                    e.g., <code>todo borrow books</code>
@@ -36,28 +36,29 @@ public abstract class Task {
     }
 
     /**
-     * Converts task to String that will be scanned into preset task.txt file
+     * Converts task to <code>String</code> that will be scanned into preset task.txt file.
      *
      * @return A String representing the task in the specified format
      */
     public String convertTaskToFileString() {
         char isCompleted = this.isCompleted ? 'Y' : 'N';
+
         String taskType = this.taskType.toString();
         String result = taskType + " | " + isCompleted + " | " + this.taskName + " " + this.details;
         return result.stripTrailing();
     }
 
     /**
-     * Mark task as completed
+     * Mark task as completed.
      */
     public void markAsCompleted() {
         this.isCompleted = true;
     }
 
     /**
-     * Get name of task
+     * Get name of task.
      *
-     * @return taskName in String format
+     * @return taskName in <code>String</code> format
      */
     public String getTaskName() {
         assert !taskName.isEmpty();
@@ -65,7 +66,7 @@ public abstract class Task {
     }
 
     /**
-     * Get details of task
+     * Get details of task.
      *
      * @return String representing extra details of task
      */
@@ -73,12 +74,12 @@ public abstract class Task {
         return details;
     }
 
-    public boolean isCompleted() {
+    public boolean getCompletionStatus() {
         return isCompleted;
     }
 
     /**
-     * Get entire task represented in a String
+     * Get entire task represented in a String.
      *
      * @return String representing a task instance
      */

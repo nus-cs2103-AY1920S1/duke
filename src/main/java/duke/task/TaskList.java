@@ -9,24 +9,23 @@ import java.util.List;
 
 /**
  * This class encapsulates methods and fields related to
- * direct operations on the list of <code>Task</code> objects
+ * direct operations on the list of <code>Task</code> objects.
  */
 public class TaskList {
     private List<Task> taskList;
 
     /**
-     * Default constructor for <code>TaskList</code> class
+     * Default constructor for <code>TaskList</code> class.
      *
      * @param taskList A <code>List</code> object containing objects of type <code>Task</code>
      */
-    public TaskList(List taskList) {
+    public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
      * Alternative constructor for <code>TaskList</code> class
-     * Creates a new <code>TaskList</code> instance
-     *
+     * Creates a new <code>TaskList</code> instance.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -34,26 +33,32 @@ public class TaskList {
 
 
     /**
-     * Adds task to <code>TaskList</code> object
+     * Adds task to <code>TaskList</code> object.
      *
-     * @param task         A <code>Task</code> instance to be added
+     * @param task A <code>Task</code> instance to be added
      * @throws EmptyTaskTextException if taskName is blank
      */
     public void addTask(Task task) throws EmptyTaskTextException {
-        if (task.getTaskName().isBlank()) throw new EmptyTaskTextException("Task name cannot be empty");
+        if (task.getTaskName().isBlank()) {
+            throw new EmptyTaskTextException("Task name cannot be empty");
+        }
         taskList.add(task);
         assert taskList.size() > 0;
     }
 
-
     /**
-     * Marks a task as completed
+     * Marks a task as completed.
      *
-     * @param taskNumber   integer representing the number of the task to be marked as completed
+     * @param taskNumber integer representing the number of the task to be marked as completed
+     *
+     * @return <code>Task</code> that was marked as completed
+     *
      * @throws TaskDoesNotExistException if taskNumber does not correspond to task in list
      */
     public Task markTaskAsCompleted(int taskNumber) throws TaskDoesNotExistException {
-        if (taskNumber < 1 || taskNumber > taskList.size()) throw new TaskDoesNotExistException("Task not found");
+        if (taskNumber < 1 || taskNumber > taskList.size()) {
+            throw new TaskDoesNotExistException("Task not found");
+        }
 
         Task task = taskList.get(taskNumber - 1);
         task.markAsCompleted();
@@ -64,14 +69,18 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task given its taskNumber
+     * Deletes a task given its taskNumber.
      *
-     * @param taskNumber   integer representing the number of the task to be marked as completed
-
+     * @param taskNumber integer representing the number of the task to be marked as completed
+     *
+     * @return <code>Task</code> that was deleted
+     *
      * @throws TaskDoesNotExistException if taskNumber does not correspond to task in list
      */
     public Task deleteTask(int taskNumber) throws TaskDoesNotExistException {
-        if (taskNumber > taskList.size()) throw new TaskDoesNotExistException("Task not found");
+        if (taskNumber > taskList.size()) {
+            throw new TaskDoesNotExistException("Task not found");
+        }
 
         Task task = taskList.get(taskNumber - 1);
         taskList.remove(task);
@@ -82,7 +91,7 @@ public class TaskList {
     }
 
     /**
-     * Gets list from <code>TaskList</code> object
+     * Gets list from <code>TaskList</code> object.
      *
      * @return <code>List</code> object which contains list matching search results
      */

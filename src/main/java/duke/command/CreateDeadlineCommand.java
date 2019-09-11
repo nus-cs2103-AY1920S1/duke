@@ -8,6 +8,7 @@ import duke.task.Deadline;
 import duke.task.Task;
 
 import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Inherits from abstract Command class.
@@ -44,7 +45,7 @@ public class CreateDeadlineCommand extends Command {
             Task task = new Deadline(deadLineText, by);
             tasks.addTask(task);
             response = messageHandler.addTaskConfirmationMessage(task);
-        } catch (ParseException error) {
+        } catch (DateTimeParseException error) {
             response = error.getMessage() + ". Please enter date in this format DD/MM/YYYY HHMM";
         }
 

@@ -26,7 +26,7 @@ public class Duke {
     public String getResponse(String fullCommand) {
         String response;
         try {
-        Command c = Parser.parse(fullCommand);
+            Command c = Parser.parse(fullCommand);
             response = c.execute(tasks, messageHandler, storage);
             isExit = c.isExit();
         } catch (DukeException e) {

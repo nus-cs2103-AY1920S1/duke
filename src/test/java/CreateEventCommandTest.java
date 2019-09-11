@@ -17,11 +17,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class CreateEventCommandTest {
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
-
     private static String filePath = "C:\\Users\\jxken\\Desktop\\Github\\duke\\src\\test\\java\\dukeTest.txt";
     private static Storage storage = new Storage(filePath);
     private static TaskList tasks = new TaskList();
@@ -41,12 +36,12 @@ public class CreateEventCommandTest {
     @Test
     public void executeCreateEventCommand() {
         String expectedSubString1 = "Got it. I've added this task:";
-        String expectedSubString2 = "[Event][N] Project Meeting (at: 28/08/19 1600 - 28/08/19 1800)";
+        String expectedSubString2 = "[Event][N] Project Meeting (at: 28/08/2019 16:00 - 28/08/2019 18:00)";
         String expectedSubString3 = "Now you have 1 task in the list";
 
         String actual = "";
 
-        CreateEventCommand command = new CreateEventCommand("Project Meeting /at 28/08/19 1600 - 28/08/19 1800");
+        CreateEventCommand command = new CreateEventCommand("Project Meeting /at 28/08/2019 16:00 - 28/08/2019 18:00");
         try {
             actual = command.execute(tasks, messageHandler, storage);
         } catch (DukeException e) {

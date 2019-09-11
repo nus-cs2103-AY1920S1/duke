@@ -26,7 +26,7 @@ public class MarkAsDoneCommand extends Command {
      * @param messageHandler <code>UI</code> object which handles console output
      * @param storage        <code>Storage</code> object which allows for reading
      *                       result of executed command into preset task.txt file
-     * @return <code>String</code representing the task that was successfully marked as completed
+     * @return <code>String</code> representing the task that was successfully marked as completed
      * @throws TaskDoesNotExistException if taskNumber does not exist in taskList
      */
     @Override

@@ -18,6 +18,7 @@ public class DukeDate {
      * @throws ParseException Exception thrown when error encountered parsing dateStr
      */
     public DukeDate(String dateStr) throws ParseException {
+        assert dateStr.length() != 0 : "dateStr String cannot be of length 0";
         this.df = new SimpleDateFormat(this.dateFormatString);
         this.time = this.df.parse(dateStr);
     }

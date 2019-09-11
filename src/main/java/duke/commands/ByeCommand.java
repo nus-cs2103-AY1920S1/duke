@@ -21,7 +21,8 @@ public class ByeCommand extends Command {
         //Will cause while loop in Duke to exit
         this.isExit = true;
 
-        //Parent method invoked to save TaskList
-        return super.execute(ui, storage, allTasks);
+        //Save TaskList
+        storage.save(allTasks);
+        return "Bye! Duke will close the window now!";
     }
 }

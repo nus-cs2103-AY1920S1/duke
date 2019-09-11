@@ -39,8 +39,6 @@ public class Command {
      * @throws DukeException re-thrown from underlying method calls.
      */
     public String execute(UiResponse ui, Storage storage, TaskList allTasks) throws DukeException {
-        //Default behaviour is to save current TaskList
-        storage.save(allTasks);
         return "Duke has heard you!";
     }
 }

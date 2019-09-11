@@ -54,8 +54,8 @@ public class AddCommand extends Command {
         ui.addSentence("\t" + t);
         ui.addSentence("Now you have " + allTasks.size() + " tasks in the list");
 
-        //Parent method invoked to save TaskList
-        super.execute(ui, storage, allTasks);
+        //Save TaskList
+        storage.save(allTasks);
 
         return ui.getResponse();
     }

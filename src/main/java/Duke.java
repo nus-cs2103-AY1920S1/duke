@@ -1,12 +1,4 @@
-import duke.Deadline;
-import duke.DukeException;
-import duke.Event;
-import duke.Parser;
-import duke.Storage;
-import duke.Task;
-import duke.TaskList;
-import duke.Todo;
-import duke.Ui;
+
 
 import java.util.Scanner;
 import java.util.Date;
@@ -36,7 +28,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
-        new Duke("/Users/michelleyong/Desktop/CS2103T/duke/data/duke.txt").run();
+        new Duke("/Users/michelleyong/Desktop/duke/data/duke.txt").run();
     }
 
     public void run() throws IOException, ParseException {

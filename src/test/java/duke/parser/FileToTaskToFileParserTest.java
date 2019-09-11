@@ -1,6 +1,6 @@
 package duke.parser;
 
-import duke.exception.LineInFileParseException;
+import duke.exception.FailedToLoadIOException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -58,13 +58,13 @@ class FileToTaskToFileParserTest {
     @Test
     public void parse_with_ExceptionThrown() {
 
-        Assertions.assertThrows(LineInFileParseException.class, () -> FileToTaskParser.parse("deadline,"));
-        Assertions.assertThrows(LineInFileParseException.class, () -> FileToTaskParser
+        Assertions.assertThrows(FailedToLoadIOException.class, () -> FileToTaskParser.parse("deadline,"));
+        Assertions.assertThrows(FailedToLoadIOException.class, () -> FileToTaskParser
                                                                       .parse("event,true,meeting, 1834233"));
-        Assertions.assertThrows(LineInFileParseException.class, () -> FileToTaskParser.parse("thisisainvalidargument"));
-        Assertions.assertThrows(LineInFileParseException.class, () -> FileToTaskParser.parse("event,sdfsdfgdfsgdf"));
-        Assertions.assertThrows(LineInFileParseException.class, () -> FileToTaskParser.parse("deadline,wasdwasdwasd"));
-        Assertions.assertThrows(LineInFileParseException.class, () -> FileToTaskParser.parse(""));
+        Assertions.assertThrows(FailedToLoadIOException.class, () -> FileToTaskParser.parse("thisisainvalidargument"));
+        Assertions.assertThrows(FailedToLoadIOException.class, () -> FileToTaskParser.parse("event,sdfsdfgdfsgdf"));
+        Assertions.assertThrows(FailedToLoadIOException.class, () -> FileToTaskParser.parse("deadline,wasdwasdwasd"));
+        Assertions.assertThrows(FailedToLoadIOException.class, () -> FileToTaskParser.parse(""));
         Assertions.assertThrows(NullPointerException.class, () -> FileToTaskParser.parse(null));
     }
 

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
 import duke.task.Deadline;
 
@@ -16,13 +17,20 @@ public class AddDeadlineCommand extends AddCommand {
      * @param line the line contents of the command passed as a parameter
      * @throws InvalidParameterException if the line is blank
      */
-    public AddDeadlineCommand(String line) {
+    public AddDeadlineCommand(String line) throws InvalidParameterException {
         super(line);
+        if(line.isBlank()) {
+            throw new InvalidParameterException();
+        }
         try {
             String[] arr = super.line.split(" /by ");
-            super.task = new Deadline(arr[0], arr[1]);
+            String taskDescription = arr[0];
+            String deadlineBy = arr[1];
+            super.task = new Deadline(taskDescription, deadlineBy);
         } catch (ArrayIndexOutOfBoundsException aioobe) {
-            throw new InvalidParameterException(line.isBlank() ? null : line);
+            throw new InvalidParameterException(line);
+        } catch(InvalidDateTimeException idte) {
+            throw new InvalidParameterException(idte.getInvalidDateTime());
         }
     }
 

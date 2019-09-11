@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.InvalidDateTimeException;
 import duke.formatter.DateFormatter;
 import duke.parser.DateParser;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class Event extends Task {
      * @param description the description of the event task
      * @param at the date the event will be held at
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws InvalidDateTimeException {
         super(description);
         this.at = DateParser.parse(at);
     }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
 import duke.task.Event;
 
@@ -16,13 +17,20 @@ public class AddEventCommand extends AddCommand {
      * @param line the line contents of the command passed as a parameter
      * @throws InvalidParameterException if the line is blank
      */
-    public AddEventCommand(String line) {
+    public AddEventCommand(String line) throws InvalidParameterException {
         super(line);
+        if(line.isBlank()) {
+            throw new InvalidParameterException();
+        }
         try {
             String[] arr = super.line.split(" /at ");
-            super.task = new Event(arr[0], arr[1]);
+            String taskDescription = arr[0];
+            String eventAt = arr[1];
+            super.task = new Event(taskDescription, eventAt);
         } catch (ArrayIndexOutOfBoundsException aioobe) {
-            throw new InvalidParameterException(line.isBlank() ? null : line);
+            throw new InvalidParameterException(line);
+        } catch (InvalidDateTimeException idte) {
+            throw new InvalidParameterException(idte.getInvalidDateTime());
         }
     }
 

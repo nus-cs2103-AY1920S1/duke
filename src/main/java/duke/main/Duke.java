@@ -46,17 +46,14 @@ public class Duke {
     }
 
     public String runWithUserInput(String userInput) {
-        boolean isExit = false;
         try {
             String fullCommand = userInterface.readCommand(userInput);
             Command c = CommandParser.parse(fullCommand);
             return c.execute(tasks, userInterface, storage);
-        } catch (InvalidCommandException ice) {
-            return userInterface.showError("Invalid command: " + ice.getInvalidCommand());
-        } catch (InvalidParameterException ipe) {
-            return userInterface.showError("Invalid parameters: " + ipe.getInvalidParameter());
-        } catch (InvalidDateTimeException idte) {
-            return userInterface.showError("Invalid date and time: " + idte.getInvalidDateTime());
+        } catch (InvalidCommandException invalidCommand) {
+            return userInterface.showInvalidCommandError(invalidCommand);
+        } catch (InvalidParameterException invalidParameters) {
+            return userInterface.showInvalidParametersError(invalidParameters);
         }
     }
 
@@ -73,12 +70,10 @@ public class Duke {
                 Command c = CommandParser.parse(fullCommand);
                 c.execute(tasks, userInterface, storage);
                 isExit = c.isExit();
-            } catch (InvalidCommandException ice) {
-                userInterface.showError("Invalid command: " + ice.getInvalidCommand());
-            } catch (InvalidParameterException ipe) {
-                userInterface.showError("Invalid parameters: " + ipe.getInvalidParameter());
-            } catch (InvalidDateTimeException idte) {
-                userInterface.showError("Invalid date and time: " + idte.getInvalidDateTime());
+            } catch (InvalidCommandException invalidCommand) {
+                userInterface.showInvalidCommandError(invalidCommand);
+            } catch (InvalidParameterException invalidParameters) {
+                userInterface.showInvalidParametersError(invalidParameters);
             }
         }
 

@@ -10,6 +10,9 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidParameterException;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -26,7 +29,7 @@ public class CommandParser {
      * @return a command
      * @throws InvalidCommandException if a invalid command is entered by the user
      */
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws InvalidCommandException, InvalidParameterException {
         String[] arr = fullCommand.split(" ");
         String parameter = Arrays.stream(arr).skip(1).collect(Collectors.joining(" ")).trim();
         try {

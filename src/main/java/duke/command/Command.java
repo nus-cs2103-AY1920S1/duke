@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.InvalidParameterException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
@@ -13,10 +14,10 @@ public interface Command {
     /**
      * Executes the command.
      * @param tasks the list of tasks
-     * @param commandLineUserInterface the user interface
+     * @param ui the user interface
      * @param storage the storage for the tasks
      */
-    String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage);
+    String execute(TaskList tasks, UserInterface ui, Storage storage) throws InvalidParameterException;
 
     /**
      * Returns <code>true</code> if the command is an exit command and <code>false</code> otherwise.

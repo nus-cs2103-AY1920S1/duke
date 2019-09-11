@@ -17,7 +17,7 @@ public class DateParser {
      * @return a <code>Date</code> class object
      * @throws InvalidDateTimeException if an invalid date and time is entered by the user
      */
-    public static Date parse(String dateTime) {
+    public static Date parse(String dateTime) throws InvalidDateTimeException {
         try {
             return new SimpleDateFormat("dd/MM/yyyy HHmm").parse(dateTime);
         }  catch (ParseException pe) {

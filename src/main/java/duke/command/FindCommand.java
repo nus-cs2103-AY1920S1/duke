@@ -27,11 +27,11 @@ public class FindCommand implements Command {
      * Executes the command. This will look through all the tasks in the list of tasks in {@link TaskList} and show
      * results found in the user interface
      * @param tasks the list of tasks
-     * @param commandLineUserInterface the user interface
+     * @param ui the user interface
      * @param storage the storage for the tasks
      */
-    public String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
-        return commandLineUserInterface.showResultsFound(tasks.find(keyword));
+    public String execute(TaskList tasks, UserInterface ui, Storage storage) {
+        return ui.showResultsFound(tasks.find(keyword));
     }
 
     /**

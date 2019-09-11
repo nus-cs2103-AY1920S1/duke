@@ -1,5 +1,9 @@
 package duke.ui;
 
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidParameterException;
+
 import java.lang.StringBuilder;
 import java.util.Scanner;
 
@@ -31,20 +35,45 @@ public class Ui implements UserInterface {
         outputBuilder.append("    What can I do for you?\n");
         outputBuilder.append("    ------------------------------------------------------------\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 
     /** Prints a error message for the user when an error has occurred.
      * @param message the error message for the error
      */
-    public String showError(String message) {
+    public String showSaveError() {
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append("    ------------------------------------------------------------\n");
-        outputBuilder.append("    🙁 OOPS!! " + message + " 🙁\n");
+        outputBuilder.append("    ⚠️ Cannot be saved to 'data/duke.txt' ⚠️");
         outputBuilder.append("    ------------------------------------------------------------\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
+        return output;
+    }
+
+    public String showInvalidCommandError(InvalidCommandException invalidCommand) {
+        StringBuilder outputBuilder = new StringBuilder();
+        outputBuilder.append("    ------------------------------------------------------------\n");
+        outputBuilder.append("    🙁 OOPS!! Invalid Command: " + invalidCommand.getInvalidCommand() + " 🙁\n");
+        outputBuilder.append("    ------------------------------------------------------------\n");
+        String output = outputBuilder.toString();
+        return output;
+    }
+
+    public String showInvalidParametersError(InvalidParameterException invalidParameter) {
+        StringBuilder outputBuilder = new StringBuilder();
+        outputBuilder.append("    ------------------------------------------------------------\n");
+        outputBuilder.append("    🙁 OOPS!! Invalid Parameters: " + invalidParameter.getInvalidParameter() + " 🙁\n");
+        outputBuilder.append("    ------------------------------------------------------------\n");
+        String output = outputBuilder.toString();
+        return output;
+    }
+
+    public String showInvalidDateTimeError(InvalidDateTimeException invalidDateTime) {
+        StringBuilder outputBuilder = new StringBuilder();
+        outputBuilder.append("    ------------------------------------------------------------\n");
+        outputBuilder.append("    🙁 OOPS!! Invalid Parameters: " + invalidDateTime.getInvalidDateTime() + " 🙁\n");
+        outputBuilder.append("    ------------------------------------------------------------\n");
+        String output = outputBuilder.toString();
         return output;
     }
 
@@ -56,7 +85,6 @@ public class Ui implements UserInterface {
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append("* FAILED TO LOAD DATA\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 
@@ -69,7 +97,6 @@ public class Ui implements UserInterface {
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append("* Unable to parse line " + lineCount + " : " + line + "\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 
@@ -97,7 +124,6 @@ public class Ui implements UserInterface {
         outputBuilder.append(list);
         outputBuilder.append("    ============================================================\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 
@@ -113,7 +139,6 @@ public class Ui implements UserInterface {
         outputBuilder.append(list);
         outputBuilder.append("    ============================================================\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 
@@ -130,7 +155,6 @@ public class Ui implements UserInterface {
         outputBuilder.append("     Now you have " + size + " tasks in the list.\n");
         outputBuilder.append("     ------------------------------------------------------------\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 
@@ -145,7 +169,6 @@ public class Ui implements UserInterface {
         outputBuilder.append("      " + task + "\n");
         outputBuilder.append("    ------------------------------------------------------------\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 
@@ -162,7 +185,6 @@ public class Ui implements UserInterface {
         outputBuilder.append("    Now you have " + size + " tasks in the list.\n");
         outputBuilder.append("    ------------------------------------------------------------\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 
@@ -175,7 +197,6 @@ public class Ui implements UserInterface {
         outputBuilder.append("    Bye. Hope to see you again soon!\n");
         outputBuilder.append("    ------------------------------------------------------------\n");
         String output = outputBuilder.toString();
-        System.out.print(output);
         return output;
     }
 

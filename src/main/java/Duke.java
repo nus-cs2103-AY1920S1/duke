@@ -3,6 +3,8 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
 import java.text.ParseException;
@@ -136,6 +138,17 @@ public class Duke {
                 } catch (DukeException e) {
                     ui.printNoSuchTaskError();
                 }
+            } else if (command.equals("find")) {
+                String toFind = parser.getKeyWord(text);
+                ArrayList<Task> tasks = taskList.getList();
+                ArrayList<Task> taskFound = new ArrayList<>();
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task t = tasks.get(i);
+                    if (t.hasKeyword(toFind)) {
+                        taskFound.add(t);
+                    }
+                }
+                taskList.printTaskFound(taskFound);
             } else {
                 try {
                     throw new DukeException();

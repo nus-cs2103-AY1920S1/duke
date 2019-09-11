@@ -85,4 +85,18 @@ public class TaskList {
             System.out.println(i + ". " + task);
         }
     }
+
+    /**
+     * Prints the list of tasks found by keyword in the task list.
+     *
+     * @param taskList The list of tasks found by the keyword.
+     */
+    public void printTaskFound(ArrayList<Task> taskList) {
+        int length = taskList.size();
+        System.out.println("Here are the matching tasks in your list:");
+        for (int i = 1; i <= length; i++) {
+            Task task = taskList.get(i - 1);
+            System.out.println(i + ". " + task);
+        }
+    }
 }

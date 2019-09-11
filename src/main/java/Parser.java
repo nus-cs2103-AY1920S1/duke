@@ -108,4 +108,13 @@ public class Parser {
     public int getTaskNum(String[] arr) {
         return Integer.parseInt(arr[1]) - 1;
     }
+
+    /**
+     * Get the keyword to be searched.
+     * @param line The command line.
+     * @return The keyword.
+     */
+    public String getKeyWord(String line) {
+        return line.substring(5);
+    }
 }

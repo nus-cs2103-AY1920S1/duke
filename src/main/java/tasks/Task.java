@@ -75,6 +75,15 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Checks if the task description contains the keyword
+     * @param keyword the word to be found
+     * @return true if the task description contains the keyword
+     */
+    public boolean hasKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] "

@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Storage;
-import duke.TextUi;
 import duke.task.Event;
 import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.TextUi;
 
 /**
  * An EventCommand contains instructions to create an event task.
@@ -14,8 +14,8 @@ public class EventCommand extends AddCommand {
     /**
      * Constructs a new EventCommand using the given details.
      *
-     * @param details           Command details.
-     * @throws DukeException    If the given details do not include an event time.
+     * @param details Command details.
+     * @throws DukeException If the given details do not include an event time.
      */
     public EventCommand(String details) throws DukeException {
         super(details);
@@ -30,14 +30,14 @@ public class EventCommand extends AddCommand {
      * method execute(TaskList, TextUi, Storage) is called as part of the
      * process.
      *
-     * @param tasks             List of tasks.
-     * @param ui                User interface.
-     * @param storage           Hard disk storage.
-     * @return                  String containing Duke's response.
+     * @param tasks List of tasks.
+     * @param ui User interface.
+     * @param storage Hard disk storage.
+     * @return String containing Duke's response.
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {
-        String[] taskDetails = details.split(" /at ");
+        String[] taskDetails = details.split(" /at ", 2);
         tasks.add(new Event(taskDetails[0], taskDetails[1]));
         return super.execute(tasks, ui, storage);
     }

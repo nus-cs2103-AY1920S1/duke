@@ -1,3 +1,5 @@
+package ui;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -25,8 +27,10 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
+
         String guide = "enter <Help> to access the help page.";
         System.out.println("Hello from\n" + logo + guide + "\n");
+
     }
 
     /**

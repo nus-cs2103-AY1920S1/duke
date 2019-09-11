@@ -1,3 +1,10 @@
+package command;
+
+import command.Command;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 /**
  * Represents the adder command to delete the task from the task list.
  */

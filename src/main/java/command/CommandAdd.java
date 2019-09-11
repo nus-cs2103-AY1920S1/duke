@@ -1,3 +1,11 @@
+package command;
+
+import command.Command;
+import date.Date;
+import storage.Storage;
+import task.*;
+import ui.Ui;
+
 /**
  * Represents the adder command to add the task to the task list.
  */

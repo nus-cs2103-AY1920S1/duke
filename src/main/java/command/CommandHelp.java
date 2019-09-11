@@ -1,3 +1,10 @@
+package command;
+
+import exception.DukeException;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 /**
  * Represents the help command to exit the program.
  */

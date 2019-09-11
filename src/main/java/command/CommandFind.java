@@ -1,3 +1,11 @@
+package command;
+
+import command.Command;
+import storage.Storage;
+import task.Task;
+import task.TaskList;
+import ui.Ui;
+
 /**
  * Represents the find command to find specific tasks.
  */

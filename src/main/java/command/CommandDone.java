@@ -1,3 +1,10 @@
+package command;
+
+import command.Command;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
+
 /**
  * Represents the done command to complete a task.
  */

@@ -14,7 +14,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.util.Scanner;
+import java.nio.file.Files;
+
+import java.util.stream.Stream;
 
 /**
  * Implements the Storage class that reads from and writes to the hard disk.
@@ -26,6 +28,10 @@ public class Storage {
     private String filePath;
     private static final int FULL_COMMAND_INDEX = 0;
     private static final int TASK_STATUS_INDEX = 1;
+    private static final String FILE_NOT_FOUND_MESSAGE = "The hard disk file could not be loaded."
+            + " Creating an empty task list.";
+    private static final String FILE_INPUT_ERROR_MESSAGE = "The hard disk file could not be read."
+            + " Creating an empty task list.";
 
     /**
      * Constructs a Storage class that is connected to the specified file path.
@@ -43,23 +49,23 @@ public class Storage {
     public TaskList load() throws DukeException {
         try {
             dataFile = new File(filePath);
-            Scanner fileScanner = new Scanner(dataFile);
             TaskList tasks = new TaskList();
-            while (fileScanner.hasNextLine()) {
-                String dataLine = fileScanner.nextLine();
-                String fullCommand = getFullCommand(dataLine);
-                Command command = Parser.parse(fullCommand);
+            Stream<String> dataLinesStream = Files.lines(dataFile.toPath());
+            dataLinesStream.forEach(dataLine -> {
+                String input = getFullCommand(dataLine);
+                Command command = Parser.parse(input);
                 command.setTaskListToExecuteOn(tasks);
                 command.execute();
                 boolean isTaskDone = getTaskStatus(dataLine).equals("1");
                 if (isTaskDone) {
                     tasks.get(tasks.size() - 1).setAsDone();
                 }
-            }
-            fileScanner.close();
+            });
             return tasks;
         } catch (FileNotFoundException e) {
-            throw new DukeException();
+            throw new DukeException(FILE_NOT_FOUND_MESSAGE);
+        } catch  (IOException e) {
+            throw new DukeException(FILE_INPUT_ERROR_MESSAGE);
         }
     }
 

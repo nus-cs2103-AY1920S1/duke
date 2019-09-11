@@ -1,9 +1,5 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents a task with a deadline. The <code>Deadline</code> class 
  * inherits from the <code>Task</code> class.
@@ -11,12 +7,6 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
     /** A string that represents the deadline of the task, as inputted by user. */
     private String by;
-
-    /**
-     * A <code>LocalDateTime</code> object that represents the date and time
-     * when the task is due.
-     */
-    private LocalDateTime dateTime;
 
     /**
      * Constructs a <code>Deadline</code> object. Date and time are parsed and 
@@ -31,12 +21,6 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-        try {
-            dateTime = LocalDateTime.parse(by, f);
-        } catch (DateTimeParseException e) {
-            dateTime = null;
-        }
     }
 
     /**

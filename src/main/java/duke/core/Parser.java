@@ -12,6 +12,9 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -49,26 +52,75 @@ public class Parser {
         return Stream.of(words).collect(Collectors.toList()).indexOf(s);
     }
 
+    private static String intToOrdinal(int i) {
+        assert i >= 1 && i <= 31 : "Days of the month should be in the range 1 to 31";
+        if (i == 11 || i == 12 || i == 13) {
+            return i + "th";
+        } else {
+            switch (i % 10) {
+            case 1:
+                return i + "st";
+            case 2:
+                return i + "nd";
+            case 3:
+                return i + "rd";
+            default:
+                return i + "th";
+            }
+        }
+    }
+
+    private static String timeToAmPm(LocalDateTime dateTime) {
+        int hour = dateTime.getHour();
+        int minute = dateTime.getMinute();
+        assert hour >= 0 && hour <= 24 : "Hour should be in the range 0 to 24";
+        assert minute >=0 && minute <=60 : "Minute should be in the range 0 to 60";
+        String minuteString = minute == 0 ? "" : ":" + minute;
+        if (hour == 0) {
+            return 12 + minuteString + "am";
+        } else if (hour <= 12) {
+            return hour + minuteString + "am";
+        } else {
+            return hour - 12 + minuteString + "pm";
+        }
+    }
+
+    private static String parseDateTime(String s) throws DukeException {
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(s, f);
+            int day = dateTime.getDayOfMonth();
+            String monthAllCaps = dateTime.getMonth().toString();
+            String monthFirstCap = monthAllCaps.substring(0, 1) + monthAllCaps.substring(1).toLowerCase();
+            int year = dateTime.getYear();
+            return intToOrdinal(day) + " of " + monthFirstCap + " " + year + ", " + timeToAmPm(dateTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Input date and time is not in dd/MM/yyyy HHmm format (24-hour clock) :-(");
+        }
+    }
+
     /**
      * Parses a <code>Task</code> from a string array.
      *
      * @param words The string array to be parsed.
      * @return The <code>Task</code> that is parsed from the string array.
      */
-    private static Task parseTask(String[] words) {
+    private static Task parseTask(String[] words) throws DukeException {
         if (words[0].equals("todo")) {
             return new ToDo(subString(words, 1, words.length));
         } else if (words[0].equals("deadline")) {
             int i = findIdx(words, "/by");
             String description = subString(words, 1, i);
             String by = subString(words, i + 1, words.length);
-            return new Deadline(description, by);
+            String dateTimeString = parseDateTime(by);
+            return new Deadline(description, dateTimeString);
         } else {
             assert words[0].equals("event") : "Instruction type should be event";
             int i = findIdx(words, "/at");
             String description = subString(words, 1, i);
             String at = subString(words, i + 1, words.length);
-            return new Event(description, at);
+            String dateTimeString = parseDateTime(at);
+            return new Event(description, dateTimeString);
         }
     }
 

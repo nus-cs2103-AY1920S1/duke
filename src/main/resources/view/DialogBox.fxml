@@ -8,9 +8,9 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="69.0" prefWidth="534.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="dialog" alignment="CENTER" prefHeight="128.0" prefWidth="458.0" text="Here are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the " wrapText="true">
+      <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="458.0" text="Here are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the " wrapText="true">
          <font>
-            <Font name="Wawati SC Regular" size="17.0" />
+            <Font name="Lao MN" size="12.0" />
          </font>
          <HBox.margin>
             <Insets />

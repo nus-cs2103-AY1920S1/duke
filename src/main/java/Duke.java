@@ -377,6 +377,10 @@ public class Duke extends Application implements Serializable {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        greet();
+        Object obj = storage.load();
+        todoList = obj == null ? new TaskList() : (TaskList) obj;
     }
 
     private Label getDialogLabel(String text) {
@@ -391,9 +395,9 @@ public class Duke extends Application implements Serializable {
         createLabelAndAdd(userInput.getText(), true, false);
         // createLabelAndAdd(getResponse(userInput.getText()), false, true);
         try {
-            if(processInput(userInput.getText()) == STATE_EXIT){
+            if(processInput() == STATE_EXIT){
                 bye();
-                stop();
+                System.exit(0);
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -425,28 +429,23 @@ public class Duke extends Application implements Serializable {
         int i = 0;
 
         @Override
+        public synchronized void reset() throws IOException {
+            // super.reset();
+            i = 0;
+        }
+
+        @Override
         public int read() throws IOException {
-            return userInput.getText().charAt(i++);
+            try {
+                return userInput.getText().charAt(i++);
+            }catch (StringIndexOutOfBoundsException e){
+                return -1;
+            }
         }
 
         @Override
         public int available() throws IOException {
             return userInput.getText().length();
-        }
-
-        @Override
-        public int read(byte[] b, int off, int len) throws IOException {
-            int counter = 0;
-            try{
-                int boron;
-                for(;;){
-                    boron = read();
-                    b[off + counter++] = (byte) boron;
-                }
-            } catch (Exception e){
-
-            }
-            return counter;
         }
     }
 

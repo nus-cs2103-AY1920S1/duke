@@ -82,6 +82,8 @@ public class Ui {
      * @throws IOException
      */
     public String readLine() throws IOException {
-        return in.readLine();
+        String rtv = in.readLine();
+        inStream.reset();
+        return rtv;
     }
 }

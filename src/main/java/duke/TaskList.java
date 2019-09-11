@@ -55,12 +55,10 @@ public class TaskList {
      * @throws DukeException if the task cannot be found.
      */
     public Task getTask(int taskNum) throws DukeException {
-        try {
-            assert taskNum > 0 && taskNum <= tasks.size() : taskNum;
-            return tasks.get(taskNum - 1);
-        } catch (AssertionError e) {
+        if (taskNum < 1 || taskNum > tasks.size()) {
             throw new DukeException("You do not have a task with index " + taskNum + ".");
         }
+        return tasks.get(taskNum - 1);
     }
 
     /**
@@ -79,12 +77,10 @@ public class TaskList {
      * @throws DukeException if the task cannot be found.
      */
     public void deleteTask(int taskNum) throws DukeException {
-        try {
-            assert taskNum > 0 && taskNum <= tasks.size() : taskNum;
-            tasks.remove(taskNum - 1);
-        } catch (AssertionError e) {
+        if (taskNum < 1 || taskNum > tasks.size()) {
             throw new DukeException("You do not have a task with index " + taskNum + ".");
         }
+        tasks.remove(taskNum - 1);
     }
 
     /**

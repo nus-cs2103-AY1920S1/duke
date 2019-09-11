@@ -1,14 +1,21 @@
-import java.io.IOException;
-import java.text.Normalizer;
+import java.util.List;
 
 public class AddToDoCommand extends Command{
 
-    String task;
-    ToDo toDoTask;
+    String [] tokens;
 
-    public AddToDoCommand(String task){
+    public AddToDoCommand(String [] tokens) {
+        this.tokens = tokens;
         this.commandType = CommandType.ADDTODO;
-        this.task = task;
     }
+
+
+
+    public void execute(List<Task> lst, Ui ui) throws DukeException {
+        ToDo task = ToDo.createToDo(tokens);
+        lst.add(task);
+        ui.printInput(task, lst);
+    }
+
 
 }

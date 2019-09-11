@@ -7,12 +7,6 @@ public class DukeException extends Exception {
         this.type = type;
     }
 
-    public void printError(){
-        String horizontalLine = "    ____________________________________________________________";
-        System.out.println(horizontalLine);
-        System.out.println(horizontalLine);
-    }
-
     public String getMessage() {
     	switch (type) {
     		case INVALIDCOMMAND:

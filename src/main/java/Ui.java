@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -58,7 +57,6 @@ public class Ui {
         System.out.println();
     }
 
-    //may remove soon
     public void printOneLine(String input) {
         System.out.println(horizontalLine);
         System.out.println(String.format("     %s",input));
@@ -66,15 +64,6 @@ public class Ui {
         System.out.println();
 
     }
-
-    public void printOneLine(Command command) {
-        System.out.println(horizontalLine);
-        System.out.println(String.format("     %s",command));
-        System.out.println(horizontalLine);
-        System.out.println();
-
-    }
-
 
     public void printNumberList(List<Task> lst) {
         System.out.println(horizontalLine);
@@ -89,12 +78,22 @@ public class Ui {
 
 
 
-
-    public void checkValidLength(String[] tokens) throws IllegalArgumentException {
-        if (tokens.length == 1) {
-            throw new IllegalArgumentException(String.format("☹ OOPS!!! The description of a %s cannot be empty.",tokens[0]));
-        }
+    public void printByeMessage() {
+        this.printOneLine("Bye. Hope to see you again soon!");
     }
 
+    public void printErrorMessage(Exception e) {
+        this.printOneLine(e.getMessage());
+    }
 
+    public static void checkValidLength(String[] tokens) throws IllegalArgumentException {
+        List<String> group1 = List.of("todo", "deadline", "event");
+        List<String> group2 = List.of("done", "delete");
+        if (tokens.length == 1 && group1.contains(tokens[0])) {
+            throw new IllegalArgumentException(String.format("☹ OOPS!!! The description of a %s cannot be empty.",tokens[0]));
+        } else if (tokens.length == 1 && group2.contains(tokens[0])) {
+            throw new IllegalArgumentException(String.format("☹ OOPS!!! %s command requires integer.",tokens[0]));
+        }
+    }
 }
+

@@ -1,15 +1,27 @@
-import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class AddEventCommand extends Command{
 
-    String task;
-    String date;
-    Event eventTask;
+    String [] tokens;
 
-    public AddEventCommand(String task, String date){
+    public AddEventCommand(String [] tokens) {
+        this.tokens = tokens;
         this.commandType = CommandType.ADDEVENT;
-        this.task = task;
-        this.date = date;
+    }
+
+    public static AddEventCommand addEventIfValid(String [] tokens) {
+        if (!Arrays.asList(tokens).contains("/at")) {
+            throw new IllegalArgumentException("Missing deadline");
+        } else {
+            return new AddEventCommand(tokens);
+        }
+    }
+
+    public void execute(List<Task> lst, Ui ui) throws DukeException {
+        Event task = Event.createEvent(tokens);
+        lst.add(task);
+        ui.printInput(task, lst);
     }
 
 }

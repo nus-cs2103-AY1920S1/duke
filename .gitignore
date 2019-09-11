@@ -2,9 +2,6 @@
 /.idea/
 /out/
 /*.iml
-/*.txt
-data/tasks.txt
-
 # Gradle build files
 /.gradle/
 /build/

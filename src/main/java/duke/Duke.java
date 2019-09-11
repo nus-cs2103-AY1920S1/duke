@@ -34,6 +34,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets a response from user and sends back the output.
+     *
+     * @param input input String from user
+     * @return output String from duke
+     */
     public String getResponse(String input) {
         Command command = new Command(parser.getCommand(input), input);
         Command result = new Command();

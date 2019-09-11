@@ -78,6 +78,7 @@ public class Duke {
      */
     private String process(String input) {
         Command command = Parser.parse(input);
+        assert tasks != null;
         command.setTaskListToExecuteOn(tasks);
         CommandResult commandResult = command.execute();
         return commandResult.getMessage();

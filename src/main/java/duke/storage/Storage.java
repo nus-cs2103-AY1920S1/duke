@@ -47,6 +47,7 @@ public class Storage {
             TaskList tasks = new TaskList();
             while (fileScanner.hasNextLine()) {
                 String dataLine = fileScanner.nextLine();
+                assert fileScanner != null;
                 String fullCommand = getFullCommand(dataLine);
                 Command command = Parser.parse(fullCommand);
                 command.setTaskListToExecuteOn(tasks);

@@ -46,7 +46,7 @@ public class Event extends Task {
     /**
      * Formats the event to be stored in the hard disk.
      *
-     * @return Event details in the format E | 1 or 0 | description | time.
+     * @return Event details in the format E | v or x | description | time.
      */
     @Override
     public String toSave() {

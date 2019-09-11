@@ -33,7 +33,7 @@ public class Todo extends Task {
     /**
      * Formats the todo to be stored in the hard disk.
      *
-     * @return Todo details in the format T | 1 or 0 | description.
+     * @return Todo details in the format T | v or x | description.
      */
     @Override
     public String toSave() {

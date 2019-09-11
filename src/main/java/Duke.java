@@ -13,13 +13,14 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import java.io.*;
 
 /**
  * Represents main running class of the Duke program.
  */
 public class Duke extends Application {
     private Storage storage = new Storage("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\iP\\dukenew\\src\\main\\java\\TaskList.txt");
-    private TaskList tasks = new TaskList();
+    private TaskList tasks;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -31,6 +32,11 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            tasks = new TaskList();
+        }
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -48,6 +54,8 @@ public class Duke extends Application {
         //sendButton.setStyle("-fx-background-color: #D6E6FE");
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+
         Scene scene = new Scene(mainLayout, Color.WHITE);
 
         stage.setScene(scene);
@@ -58,14 +66,17 @@ public class Duke extends Application {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(800.0);
+        stage.setMinWidth(700.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        //stage.setFullScreen(true);
 
-        scrollPane.setPrefSize(385, 535);
+        mainLayout.setPrefSize(700.0, 750.0);
+        //scrollPane.prefWidthProperty().bind(stage.widthProperty());
+        scrollPane.setPrefSize(685, 735);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
@@ -73,9 +84,9 @@ public class Duke extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(580.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(100.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 

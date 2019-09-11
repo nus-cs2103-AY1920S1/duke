@@ -51,9 +51,7 @@ public class AddCommand extends Command {
             assert false : "Program is not supposed to get here!";
             newTask = null;
         }
-
-        storage.save(tasks.getTaskList());
-        return addTask(newTask, tasks);
+        return addTask(newTask, tasks, storage);
     }
 
     /**
@@ -62,10 +60,10 @@ public class AddCommand extends Command {
      * @param tasks the existing taskList
      * @return String informing the user of the task addition
      */
-    private String addTask(Task newTask, TaskList tasks) {
+    private String addTask(Task newTask, TaskList tasks, Storage storage) throws DukeException {
         tasks.add(newTask);
         int numTasks = tasks.size();
-
+        storage.save(tasks.getTaskList());
         assert numTasks != 0 : "Tasks did not get added to the task list!";
 
         return "Got it. I've added this task:" + "\n" + newTask.toString() +

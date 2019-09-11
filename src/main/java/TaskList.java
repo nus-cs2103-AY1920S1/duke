@@ -23,9 +23,9 @@ public class TaskList {
             case "T":
                 add = new Todo(type, listItem[2]);
                 addTask(add, listItem[1]);
-
+                break;
             case "D":
-                add = new Deadline(type, listItem[2], listItem[3]);
+                add = new Deadline(type, listItem[1], listItem[3]);
                 addTask(add, listItem[1]);
                 break;
 

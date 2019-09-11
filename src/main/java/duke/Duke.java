@@ -54,6 +54,8 @@ public class Duke {
      */
     private String processInput(String input) {
         Command command = getCommand(input);
+        assert tasks != null;
+
         command.setTaskListToExecuteOn(tasks);
         CommandResult commandResult = command.execute();
         try {

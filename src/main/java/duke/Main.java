@@ -11,9 +11,8 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Duke duke;
-    private MainWindow mainWindow;
 
-    public Main() throws Exception{
+    public Main() throws Exception {
         duke = new Duke();
     }
 

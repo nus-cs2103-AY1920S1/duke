@@ -9,7 +9,8 @@ class DukeManager {
     private Storage storeManager;
     private Parser parseManager;
     private TaskList taskList;
-
+    
+    // For Console Duke
     private boolean isActive;
     
     /**

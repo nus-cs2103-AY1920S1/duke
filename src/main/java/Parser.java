@@ -18,7 +18,7 @@ public class Parser {
     public static String[] parseCommand(String input) {
         String[] parseInfo = new String[2];
 
-        if (input.matches("(done|delete)\\s+\\d+|(todo|deadline|event|find)\\s+.+")) {
+        if (input.matches("(done|delete)\\s+\\d+|(todo|deadline|event|find|set)\\s+.+")) {
             parseInfo = input.split("\\s+", 2);
         } else if (input.equals("list")) {
             parseInfo[0] = "list";

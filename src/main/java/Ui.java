@@ -113,6 +113,10 @@ public class Ui {
                 mainTaskList.addEventTask(Parser.parseDetails(parseInfo[1]));
                 response.append(getTaskAddition(mainTaskList) + "\n");
                 break;
+            case "set":
+                response.append("Data source has been changed\n");
+                setStorage(new Storage(parseInfo[1]));
+                break;
             case "list":
                 response.append("Here are the tasks in your list:\n");
                 response.append(mainTaskList);

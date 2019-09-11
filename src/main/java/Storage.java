@@ -63,7 +63,19 @@ public class Storage {
         String type = "" + detailsArray[1];
         String desc = line.substring(7);
 
+        String tag = "";
+        boolean hasTags = false;
         Task newTask = new Task("dummy");
+
+        // if there are tags, reprocess string and add them to task
+        if (desc.contains("tags")) {
+            hasTags = true;
+            desc = desc.replace("(", "");
+            desc = desc.replace(")", "");
+            String[] processed = desc.split("tags:");
+            desc = processed[0];
+            tag = processed[1];
+        }
 
         if (type.equals("T")) {
             newTask = new ToDo(desc);
@@ -91,6 +103,27 @@ public class Storage {
             newTask.quietMarkAsDone();
         }
 
+        if (hasTags) {
+            newTask.addTag(tag);
+        }
+
         return newTask;
+    }
+
+    //For debugging, delete later
+    public String openFile() throws DukeException{
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String str = "";
+            String allLines = "";
+
+            while ((str = br.readLine()) != null) {
+                allLines += str;
+            }
+            return allLines;
+
+        } catch (IOException e) {
+            throw new DukeException("File cannot be accessed");
+        }
     }
 }

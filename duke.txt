@@ -1,4 +1,3 @@
-[E][+] wash dishes (at: 2pm)
-[D][ ] drink beer (by: 12 Feb 2018, 18:00 PM)
-[D][+] change clothes (by: 23 Sep 2019, 18:00 PM)
-[T][ ] poop (tags: dirty)
+[E][+] wash dishes(at: 2pm) (tags:  )
+[D][+] change clothes(by: 23 Sep 2019, 18:00 PM) (tags:  )
+[E][ ] poop (at: 3pm ) (tags: dirty)

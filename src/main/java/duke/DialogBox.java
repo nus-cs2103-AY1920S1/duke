@@ -69,6 +69,7 @@ class DialogBox extends HBox {
 
     /**
      * Gets Duke Dialogue.
+     *
      * @param text The text to pass in.
      * @param img The image of Duke.
      * @return The User Dialog Box.

@@ -6,4 +6,12 @@ D|0|do homework |Fri, 20 Dec 2019, 08:00 PM
 D|0|do work |Sun, 22 Dec 2019, 08:00 PM
 T|0|make fishball
 T|0|make bed
-D|1|csamkxs |Thu, 11 Jan 1000, 08:00 PM
+T|0|make
+D|0|csa |Sat, 10 Feb 1000, 08:00 PM
+D|0|ca |Fri, 13 Sep 2019, 12:34 AM
+D|0|csac |Fri, 13 Sep 2019, 11:59 PM
+D|0|saca |Thu, 12 Sep 2019, 11:59 PM
+E|0|csa |Thu, 12 Sep 2019, 11:59 PM|Fri, 13 Sep 2019, 11:59 PM
+D|0|casm |Wed, 11 Dec 2019, 08:00 PM
+D|0|cac |Mon, 11 Dec 2000, 08:00 PM
+D|0|ca |Fri, 13 Sep 2019, 11:59 PM

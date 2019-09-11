@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.SortCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 public class Parser {
@@ -15,8 +8,8 @@ public class Parser {
     /**
      * Parses any user inputs and determines the type of command that was entered.
      *
-     * @param fullCommand The command input by user
-     * @return The type of command entered
+     * @param fullCommand The command input by user.
+     * @return The type of command entered.
      * @throws DukeException In the event that a command has an incorrect format/ empty description.
      */
     public static Command parse(String fullCommand) throws DukeException {

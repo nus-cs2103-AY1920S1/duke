@@ -69,6 +69,16 @@ public class Parser {
         try {
             String type = task.substring(0, task.indexOf(' '));
             String taskDescription = task.substring(task.indexOf(' ') + 1);
+            boolean hasTags = false;
+            String tag = "";
+
+            if (taskDescription.contains("#")) {
+                hasTags = true;
+                String[] processed = taskDescription.split("#");
+                taskDescription = processed[0];
+                tag = processed[1];
+            }
+
             Task newTask = new Task("dummy");
 
             // Create the appropriate Task type
@@ -100,6 +110,10 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new MissingDateTimeException("Event time period missing."
                         + "Please set a start and end time. (Eg. event dance /at Mon 2-4pm)");
+            }
+
+            if (hasTags) {
+                newTask.addTag(tag);
             }
 
             return newTask;

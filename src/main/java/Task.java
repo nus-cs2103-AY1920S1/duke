@@ -1,9 +1,12 @@
+import java.util.LinkedList;
+
 /**
  * Represent Tasks and its given description.
  */
-public class Task {
+public class Task implements Taggable {
     private String description;
     private boolean isDone;
+    private LinkedList<String> allTags;
 
     /**
      * Creates a new Task with the given description.
@@ -12,6 +15,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.allTags = new LinkedList<>();
     }
 
     /**
@@ -51,6 +55,19 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public void addTag(String tag) {
+        allTags.add(tag);
+    }
+
+    public String getAllTags() {
+        String tags = "";
+        for (String tag : allTags) {
+            tags += tag;
+        }
+        return tags;
     }
 
     @Override

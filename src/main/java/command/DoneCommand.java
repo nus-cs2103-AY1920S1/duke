@@ -1,12 +1,11 @@
 package command;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import utils.TaskList;
-import utils.Storage;
-import utils.Ui;
 import tasks.Task;
+import utils.Storage;
+import utils.TaskList;
+import utils.Ui;
+
+import java.io.IOException;
 
 /**
  * Done Command is a Command, specifically for a done operation.
@@ -19,7 +18,9 @@ public class DoneCommand extends Command {
         this.index = index - 1;
     }
 
-
+    /**
+     * Executes the given task and prints the respective output.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 
         String output = "";

@@ -1,7 +1,7 @@
 package command;
 
-import utils.TaskList;
 import utils.Storage;
+import utils.TaskList;
 import utils.Ui;
 
 public class InvalidCommand extends Command {
@@ -12,6 +12,9 @@ public class InvalidCommand extends Command {
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * Executes the given task and prints the respective output.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         String output = "";

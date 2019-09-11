@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.util.Collections;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,6 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+
+import java.io.IOException;
+import java.util.Collections;
 
 /**
  * An example of a custom control using FXML. This control represents a dialog
@@ -49,12 +49,18 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox for the User.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userBox = new DialogBox(text, img);
         userBox.setMinHeight(Region.USE_PREF_SIZE);
         return userBox;
     }
 
+    /**
+     * Returns a DialogBox for Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox dukeBox = new DialogBox(text, img);
         dukeBox.flip();
@@ -62,6 +68,9 @@ public class DialogBox extends HBox {
         return dukeBox;
     }
 
+    /**
+     * Returns a DialogBox, specifically for start message.
+     */
     public static DialogBox getStartDialog(String text, Image img) {
         DialogBox startBox = new DialogBox(text, img);
         startBox.flip();

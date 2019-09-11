@@ -10,6 +10,4 @@ import duke.exception.DukeException;
  */
 public interface Command {
     public abstract String execute(Storage storage, Ui ui, TaskList tasks) throws DukeException;
-
-    public abstract boolean isRunning();
 }

@@ -42,8 +42,4 @@ public class TodoCommand implements Command {
         }
         return false;
     }
-
-    public boolean isRunning() {
-        return true;
-    }
 }

@@ -35,8 +35,4 @@ public class DoneCommand implements Command {
                     tasks.getTasksSize()));
         }
     }
-
-    public boolean isRunning() {
-        return true;
-    }
 }

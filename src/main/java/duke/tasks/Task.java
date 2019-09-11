@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 public class Task implements Serializable {
 
-    protected final SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    protected static final SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     protected String description;
     protected boolean isDone;
 

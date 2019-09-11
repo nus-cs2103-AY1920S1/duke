@@ -40,6 +40,7 @@ public class TaskList {
      * @param task task to be added.
      */
     public void addTask(Task task) {
+        assert task != null;
         this.tasks.add(task);
     }
 
@@ -51,6 +52,7 @@ public class TaskList {
      */
     public Task markDone(int index) {
         Task task = this.tasks.get(index - 1);
+        assert task != null;
         task.setDone(true);
         return task;
     }
@@ -63,6 +65,7 @@ public class TaskList {
      */
     public Task delete(int index) {
         Task task = this.tasks.get(index - 1);
+        assert task != null;
         this.tasks.remove(index - 1);
         return task;
     }

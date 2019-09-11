@@ -133,6 +133,10 @@ public class Storage {
         } catch (IOException ioe) {
             throw new DukeException(String.format(MESSAGE_ERROR_CREATING_STORAGE_FILE, filePath, ioe.getMessage()));
         }
+        assert storageFile.exists();
+        assert storageFile.isFile();
+        assert storageFile.canRead();
+        assert storageFile.canWrite();
     }
 
     /**

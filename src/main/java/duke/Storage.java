@@ -10,11 +10,11 @@ import java.io.ObjectOutputStream;
 import duke.tasks.TaskList;
 
 public class Storage {
-    private static final String filePath = "data/duke.txt";
+    private static final String FILEPATH = "data/duke.txt";
 
     public TaskList loadData() throws DukeException {
         try {
-            FileInputStream file = new FileInputStream(filePath);
+            FileInputStream file = new FileInputStream(FILEPATH);
             if (file.available() == 0) {
                 return new TaskList();
             }
@@ -35,7 +35,7 @@ public class Storage {
 
     public void saveData(TaskList tasks) throws DukeException {
         try {
-            FileOutputStream file = new FileOutputStream(filePath);
+            FileOutputStream file = new FileOutputStream(FILEPATH);
             ObjectOutputStream object = new ObjectOutputStream(file);
 
             object.writeObject(tasks);

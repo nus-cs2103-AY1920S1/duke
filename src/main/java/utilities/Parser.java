@@ -25,6 +25,8 @@ public class Parser {
 			return "bye";
 		} else if (rawInput.toLowerCase().equals("list")) {
 			return "list";
+		} else if (rawInput.toLowerCase().equals("undo")) {
+			return "undo";
 		} else if (rawInput.toLowerCase().startsWith("todo")) {
 			return "todo";
 		} else if (rawInput.toLowerCase().startsWith("done")) {
@@ -50,20 +52,19 @@ public class Parser {
 	 */
 	public Task generateTask(String rawInput) throws DukeException {
 		Task result = null;
-		Parser parser = new Parser();
-		String taskType = parser.getCommand(rawInput);
+		String taskType = getCommand(rawInput);
 		switch (taskType) {
 			case "todo":
-				result = new Todo(parser.todoDesc(rawInput));
+				result = new Todo(todoDesc(rawInput));
 				break;
 			case "deadline":
-				String deadlineDesc = parser.deadlineDesc(rawInput);
-				Date deadlineTime = parser.deadlineTime(rawInput);
+				String deadlineDesc = deadlineDesc(rawInput);
+				Date deadlineTime = deadlineTime(rawInput);
 				result = new Deadline(deadlineDesc, deadlineTime);
 				break;
 			case "event":
-				String eventDesc = parser.eventDesc(rawInput);
-				Date eventTime = parser.eventTime(rawInput);
+				String eventDesc = eventDesc(rawInput);
+				Date eventTime = eventTime(rawInput);
 				result = new Event(eventDesc, eventTime);
 				break;
 		}

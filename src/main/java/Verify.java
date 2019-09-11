@@ -32,7 +32,7 @@ public class Verify {
      * @param formatter date formatter to catch wrong date format exceptions
      * @throws DukeException in the case of invalid input
      */
-    public static String checkCommandValidity(String command, TaskList list, DateTimeFormatter formatter) {
+    public static String checkCommandValidity(String command, TaskList list, DateTimeFormatter formatter, QuestionList qList){
         String message;
         assert command != null;
         if (command.startsWith("done")) {
@@ -159,7 +159,46 @@ public class Verify {
                     return message;
                 }
             }
-        } else if (command.equals("bye") || command.equals("list")) {
+        } else if (command.startsWith("trivia new")) {
+            if (command.length() <= 10) {
+                message = "oopsie! you forgot to write the question and its answer!";
+                try {
+                    throw new DukeException(message);
+                } catch (DukeException e) {
+                    return message;
+                }
+            } else if (command.substring(10).split(" / ").length < 2) {
+                message = "oh dear, please enter the question and answer separated by ' / '";
+                try {
+                    throw new DukeException(message);
+                } catch (DukeException e) {
+                    return message;
+                }
+            }
+        } else if (command.startsWith("trivia delete")) {
+            if (command.substring(13).length() == 0) {
+                message = "whoops! please enter a number after trivia delete";
+                try {
+                    throw new DukeException(message);
+                } catch (DukeException e) {
+                    return message;
+                }
+            } else if (!isNum(command.substring(14))) {
+                message = "whoops! you need to enter a number, not anything else";
+                try {
+                    throw new DukeException(message);
+                } catch (DukeException e) {
+                    return message;
+                }
+            } else if ((Integer.parseInt(command.substring(14)) - 1) >= qList.questions.size()) {
+                message = "oh! that question doesn't exist! please enter a question within the list!";
+                try {
+                    throw new DukeException(message);
+                } catch (DukeException e) {
+                    return message;
+                }
+            }
+        } else if (command.equals("bye") || command.equals("list") || command.equals("trivia") || command.equals("trivia list")) {
         } else {
             message = "blast! i don't understand that!";
             try {

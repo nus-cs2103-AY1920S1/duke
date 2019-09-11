@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DukeTest{
     TaskList taskList = new TaskList();
+    QuestionList qlist = new QuestionList();
 
     @Test
     public void testAddGet(){
@@ -20,6 +21,6 @@ public class DukeTest{
     @Test
     public void testVerify(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-        assertThrows(DukeException.class, () -> Verify.checkCommandValidity("blah", taskList, formatter));
+        assertThrows(DukeException.class, () -> Verify.checkCommandValidity("blah", taskList, formatter, qlist));
     }
 }

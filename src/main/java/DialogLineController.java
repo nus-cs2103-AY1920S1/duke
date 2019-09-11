@@ -56,6 +56,9 @@ public class DialogLineController extends HBox {
         var dl = new DialogLineController(text, img);
         dl.dialog.setFont(new Font("Consolas", 10));
         dl.setMinHeight(dl.dialog.getMinHeight());
+        dl.dialog.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        //dl.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+
         return dl;
     }
 

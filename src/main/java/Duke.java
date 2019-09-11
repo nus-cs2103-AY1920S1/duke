@@ -37,7 +37,7 @@ public class Duke{
         return greeter.greet();
     }
 
-    String getResponse(String input) {
+    String getResponse(String input) throws InvalidInputException {
         return ui.processInput(input);
     }
 

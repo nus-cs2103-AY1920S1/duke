@@ -1,6 +1,5 @@
 package Task;
 
-import Exceptions.InvalidItemException;
 import Exceptions.MissingInputException;
 
 public class Date {
@@ -8,6 +7,7 @@ public class Date {
     Month month;
     int monthNum;
     int year;
+    public static String INCOMPLETE_DATE_MESSAGE = "Date is incomplete!\n Date should be in DD/MM/YYYY format.";
 
     /**
      * Documents months of a year.
@@ -74,8 +74,12 @@ public class Date {
      */
     public static Date processDate(String dateString) throws MissingInputException {
         String[] date = dateString.split("/");
+        String s = "";
             if (date.length < 3) {
-                throw new MissingInputException("Date");
+                for (String ind: date) {
+                    s += " " + ind;
+                }
+                throw new MissingInputException(date.length + " " + s + " " + INCOMPLETE_DATE_MESSAGE);
             }
         return new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
     }

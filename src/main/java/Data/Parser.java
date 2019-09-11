@@ -40,11 +40,37 @@ public class Parser {
             return new Command(CommandType.DELETE, line);
         case "find":
             return new Command(CommandType.FIND, line);
+        case "update":
+            return new Command(CommandType.UPDATE, line);
         default:
             return new Command(CommandType.INVALID);
         }
     }
 
+    public String[] getUpdateInfo(Command command) throws MissingInputException, InvalidInputException {
+        String desc = command.getDescription();
+        String[] description = desc.split(" \\| ");
+        if (description.length <= 3) {
+            throw new MissingInputException("Description for update is incomplete!\n" +
+                    "Instruction should be in the form Update | [TaskNo] | [Type] | [Info]");
+        }
+        String updateType = description[2];
+        switch (updateType) {
+        case "desc":
+        case "time":
+        case "date":
+            //allow cases to fall through
+            String[] info = new String[3];
+            for (int i = 0; i < 3; i++) {
+                    info[i] = description[i+1];
+            }
+            return info;
+        default:
+            throw new InvalidInputException("This is not an update type.\n"
+                + "An update type should be: \n"
+                + "desc, time or date.");
+        }
+    }
     /**
      * Processes String to retrieve keyword for search.
      *
@@ -65,7 +91,7 @@ public class Parser {
      * @throws MissingInputException when command's description is incomplete.
      * @throws InvalidInputException when date/time description is not in given format.
      */
-    public Task createTask(Command command) throws InvalidInputException, MissingInputException {
+    public Task createTask(Command command) throws MissingInputException, InvalidInputException {
         String line = command.getDescription();
         String[] description = line.split(" ");
         String eventType = description[0];
@@ -86,7 +112,7 @@ public class Parser {
         String[] description = line.split(" ");
         String eventType = description[0];
             if (description.length <= 1) {
-                throw new MissingInputException(eventType);
+                throw new MissingInputException(Task.MISSING_DESC_ERROR_MESSAGE);
             }
         return Integer.parseInt(description[1]);
     }
@@ -101,7 +127,7 @@ public class Parser {
      * @return Task created from given inputs.
      * @throws MissingInputException when description is incomplete.
      */
-    Task createNewTask(int taskNo, String taskType, String[] arr) throws MissingInputException {
+    Task createNewTask(int taskNo, String taskType, String[] arr) throws MissingInputException, InvalidInputException {
         boolean firstInDescription = true;
         String desc = "";
         Date date = null;
@@ -119,13 +145,13 @@ public class Parser {
         switch (taskType) {
         case "todo":
             if (desc.equals("")) {
-                throw new MissingInputException("T");
+                throw new MissingInputException(Task.MISSING_DESC_ERROR_MESSAGE);
             }
             task = new Todo(taskNo, desc, "T");
             break;
         case "event":
             if (arr.length <= 2) {
-                throw new MissingInputException("Date/Time");
+                throw new MissingInputException(Task.MISSING_DATE_TIME_MESSAGE);
             }
             date = Date.processDate(arr[arr.length-2]);
             time = Time.processTime(arr[arr.length-1]);
@@ -133,7 +159,7 @@ public class Parser {
             break;
         case "deadline":
             if (arr.length <= 2) {
-                throw new MissingInputException("Date/Time");
+                throw new MissingInputException(Task.MISSING_DATE_TIME_MESSAGE);
             }
             date = Date.processDate(arr[arr.length-2]);
             time = Time.processTime(arr[arr.length-1]);

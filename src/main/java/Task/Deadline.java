@@ -4,9 +4,6 @@ import Exceptions.MissingInputException;
 
 public class Deadline extends Task {
 
-    private Date date;
-    private Time time;
-
     /**
      * Creates Deadline (also a Task).
      *
@@ -18,12 +15,7 @@ public class Deadline extends Task {
      * @param done boolean indicates whether the task is done.
      */
     public Deadline(int num, String task, Date date, Time time, String type, boolean done) throws MissingInputException {
-        super(num, task, type, done);
-        this.date = date;
-        this.time = time;
-        if (date==null || time == null) {
-            throw new MissingInputException(type);
-        }
+        super(num, task, date, time, type, done);
     }
     /**
      * Creates Deadline (also a Task).
@@ -36,12 +28,7 @@ public class Deadline extends Task {
      * @param type String indicates task type, in this case "D".
      */
     public Deadline(int num, String task, Date date, Time time, String type) throws MissingInputException {
-        super(num, task, type);
-        this.date = date;
-        this.time = time;
-        if (date==null || time == null) {
-            throw new MissingInputException(type);
-        }
+       super(num, task, date, time, type);
     }
 
     /**

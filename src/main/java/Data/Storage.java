@@ -65,7 +65,7 @@ public class Storage {
                         tasks.loadTask(new Event(counter, details[2], date, time, "E", done));
                         break;
                     default:
-                        throw new InvalidInputException();
+                        throw new InvalidInputException("Task types should only be T, D, and E.");
                     }
             }
         } catch (IOException e) {

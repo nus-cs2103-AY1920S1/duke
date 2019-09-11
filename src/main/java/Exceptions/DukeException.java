@@ -1,12 +1,11 @@
 package Exceptions;
 
-import Data.Formatter;
 import UI.MessageGenerator;
 
 public abstract class DukeException extends Exception {
 
     MessageGenerator msg = new MessageGenerator();
-    String taskType;
+    String errorMessage = "OOPS!!! ";
 
     /**
      * Creates Duke Exception for exceptions in programs.
@@ -16,10 +15,10 @@ public abstract class DukeException extends Exception {
     /**
      * Creates DukeException that are related to tasks.
      *
-     * @param taskType String taken in for error printing purposes.
+     * @param errorMessage takes in error message for printing.
      */
-    DukeException(String taskType) {
-        this.taskType = taskType;
+    DukeException(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     /**
@@ -29,10 +28,4 @@ public abstract class DukeException extends Exception {
      */
     public abstract String getErrorMessage();
 
-    /**
-     * Prints formatted error message.
-     */
-  /*  public void printError() {
-        formatter.printFormat(getErrorMessage());
-    } */
 }

@@ -4,9 +4,6 @@ import Exceptions.MissingInputException;
 
 public class Event extends Task {
 
-    Date date;
-    Time time;
-
     /**
      * Creates Events (also a Task).
      *
@@ -18,12 +15,7 @@ public class Event extends Task {
      * @param done boolean indicates whether the task is done.
      */
     public Event(int num, String task, Date date, Time time, String type, boolean done) throws MissingInputException {
-        super(num, task, type, done);
-        this.time = time;
-        this.date = date;
-        if (date==null || time == null) {
-            throw new MissingInputException(type);
-        }
+        super(num, task, date, time, type, done);
     }
 
     /**
@@ -37,12 +29,7 @@ public class Event extends Task {
      * @param type String indicates task type, in this case "E".
      */
     public Event(int num, String task, Date date, Time time, String type) throws MissingInputException {
-        super(num, task, type);
-        this.time = time;
-        this.date = date;
-        if (date==null || time == null) {
-            throw new MissingInputException(type);
-        }
+        super(num, task, date, time, type);
     }
 
     /**

@@ -60,6 +60,10 @@ public class MessageGenerator {
         return "Here are the matching tasks in your list:";
     }
 
+    private String updateTask() {
+        return "Got it. Your task is now updated as: ";
+    }
+
     /**
      * @return String to greet user.
      */
@@ -110,9 +114,18 @@ public class MessageGenerator {
      * @param n Number tagged to task.
      */
     public String getRemoveMessage(Task task, int n) {
-        String s = "";
-        s += line();
+        String s = line();
         s += formatter.appendStrings(removeTask(), formatTask(task), numTask(n));
+        s += line();
+        return s;
+    }
+
+    /**
+     *
+     */
+    public String getUpdateMessage(Task task, int n) {
+        String s = line();
+        s += formatter.appendStrings(updateTask(), formatTask(task), numTask(n));
         s += line();
         return s;
     }
@@ -185,5 +198,4 @@ public class MessageGenerator {
     public void bye() {
         formatter.printFormat(byeString());
     }
-
 }

@@ -2,7 +2,9 @@ package Exceptions;
 
 public class InvalidInputException extends DukeException {
 
-    private String message = "OOPS!!! ";
+    public InvalidInputException(String message) {
+        this.errorMessage += message;
+    }
 
     /**
      * Creates String for error message.
@@ -10,7 +12,6 @@ public class InvalidInputException extends DukeException {
      */
     @Override
     public String getErrorMessage() {
-        message += "Date and time should be written in DD/MM/YYYY HH:MM format!";
-        return msg.getLinedMessage(message);
+        return msg.getLinedMessage(errorMessage);
     }
 }

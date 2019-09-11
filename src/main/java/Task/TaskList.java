@@ -1,7 +1,9 @@
 package Task;
 
 import Exceptions.DukeException;
+import Exceptions.InvalidInputException;
 import Exceptions.InvalidItemException;
+import Exceptions.MissingInputException;
 import UI.MessageGenerator;
 
 import java.util.ArrayList;
@@ -58,6 +60,7 @@ public class TaskList {
     private String removeTask(int taskNo) {
         Task deleted = taskList.get(taskNo);
         taskList.remove(taskNo);
+        assert !(taskList.contains(taskList.get(taskNo)));
         return msgGenerator.getRemoveMessage(deleted, noTasks());
     }
 
@@ -129,11 +132,72 @@ public class TaskList {
             if (invalidTaskNo(taskNo)) {
                 throw new InvalidItemException();
             }
-            assert taskList.contains(taskList.get(taskNo));
             return removeTask(taskNo);
         } catch (DukeException e) {
             return e.getErrorMessage();
         }
+    }
+
+    /**
+     * Updates task depending on what type of instruction.
+     *
+     * @param strings Variable number of strings taken in.
+     */
+    public String updateTask(String...strings) throws InvalidInputException, MissingInputException {
+        String updateType = strings[1];
+        String info = strings[2];
+        int taskNo;
+        try {
+            taskNo = Integer.parseInt(strings[0]);
+            if (invalidTaskNo(taskNo)) {
+                throw new InvalidItemException();
+            }
+        } catch (NumberFormatException | InvalidItemException e) {
+            throw new InvalidInputException("Task number should be given!");
+        }
+        switch (updateType) {
+        case "desc":
+            return updateTaskDesc(taskNo, info);
+        case "time":
+            return updateTaskTime(taskNo, info);
+        case "date":
+            return updateTaskDate(taskNo, info);
+        default:
+            assert false; //update types should be filtered out.
+            return "Wrong update type!";
+        }
+    }
+    /**
+     * Updates Task Description.
+     *
+     * @param taskNo identification number for task.
+     * @return message when task is updated.
+     */
+    public String updateTaskDesc(int taskNo, String desc) {
+        taskList.get(taskNo).updateTaskDesc(desc);
+        return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
+    }
+
+    /**
+     * Updates Task Timing.
+     *
+     * @param taskNo identification number for task.
+     * @return message when task is updated.
+     */
+    public String updateTaskTime(int taskNo, String time) throws InvalidInputException, MissingInputException {
+        taskList.get(taskNo).updateTaskTime(time);
+        return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
+    }
+
+    /**
+     * Updates Task Date.
+     *
+     * @param taskNo identification number for task.
+     * @return message when task is updated.
+     */
+    public String updateTaskDate(int taskNo, String date) throws MissingInputException {
+        taskList.get(taskNo).updateTaskDate(date);
+        return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
     }
 
     /**

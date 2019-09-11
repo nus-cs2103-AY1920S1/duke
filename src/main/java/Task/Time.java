@@ -9,6 +9,7 @@ public class Time {
     private int hour;
     private int minutes;
     private int time;
+    public static String TIME_FORMAT_MESSAGE = "Time should be given in HHMM format";
 
     /**
      * Documents whether given time is am or pm.
@@ -37,14 +38,19 @@ public class Time {
      * @param timeString String in form HHMM.
      * @return Time object.
      */
-    public static Time processTime(String timeString) throws MissingInputException {
+    public static Time processTime(String timeString) throws MissingInputException, InvalidInputException{
+        if (timeString.equals("")) {
+            throw new MissingInputException("Time is missing! \n" + TIME_FORMAT_MESSAGE);
+        }
 
-            if (timeString.equals("")) {
-                throw new MissingInputException("Time");
-            }
-            int time = Integer.parseInt(timeString);
+        int timeInt = 0000;
 
-        return new Time(Integer.parseInt(timeString));
+        try {
+            timeInt = Integer.parseInt(timeString);
+        } catch (NumberFormatException e) {
+            throw new InvalidInputException(TIME_FORMAT_MESSAGE);
+        }
+        return new Time(timeInt);
     }
 
     /**

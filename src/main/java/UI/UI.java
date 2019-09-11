@@ -10,7 +10,6 @@ import Exceptions.MissingInputException;
 import Task.Task;
 import Task.TaskList;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class UI {
@@ -96,6 +95,8 @@ public class UI {
                     return tasks.setDone(parser.getTaskNo(command));
                 case FIND:
                     return tasks.findMatchingTasks(parser.getKeyword(command));
+                case UPDATE:
+                    return tasks.updateTask(parser.getUpdateInfo(command));
                 default:
                     assert command.type.equals(CommandType.INVALID); //cases should always fall up to Invalid case.
                     throw new InvalidCommandException();

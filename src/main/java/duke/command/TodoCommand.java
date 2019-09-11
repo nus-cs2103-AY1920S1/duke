@@ -24,11 +24,23 @@ public class TodoCommand implements Command {
      * @param tasks the TaskList object containing the existing list of tasks
      */
     public String execute(Storage storage, Ui ui, TaskList tasks) throws DukeException {
+        if (isDuplicate(task, tasks)) {
+            throw new DukeException("OOPS!!! Duplicate task already exists!");
+        }
         Todo td = new Todo(task, false);
         tasks.addTask(td);
         storage.appendToFile(td);
         return String.format("Got it. I've added this task:\n  %s\nNow you have %d tasks in the list",
                 td.toString(), tasks.getTasksSize());
+    }
+
+    public boolean isDuplicate(String task, TaskList tasks) {
+        for (int i = 0; i < tasks.getTasksSize(); i++) {
+            if (tasks.getTask(i).getName().equals(task)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isRunning() {

@@ -1,6 +1,5 @@
 package ui;
 
-import commands.Command;
 import parser.Parser;
 import storage.Storage;
 import util.TaskList;
@@ -209,9 +208,8 @@ public class Duke extends Application {
         // code adapted from JavaFX tutorials by CS2103 teaching dept
         while (this.isListening) {
             try {
-                Command command = Parser.parse(inputString);
-                String responseString = command.execute(tasks, ui, storage);
-                this.isListening = !command.getIsExit();
+                String responseString = Parser.parse(inputString, tasks, ui, storage);
+                this.isListening = !Parser.isItTimeToExit;
                 assert responseString != null;
                 return responseString;
             } catch (IllegalArgumentException exceptionOne) {

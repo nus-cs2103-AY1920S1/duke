@@ -14,10 +14,13 @@ import java.io.IOException;
  * @author atharvjoshi
  * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends UndoableCommand {
 
     /** The serial number (1-indexed) of the task to be deleted. */
     private String taskNumber;
+
+    /** The task that was deleted by this command. */
+    private Task task;
 
     /**
      * Initialises a command for deleting the specified task.
@@ -53,6 +56,7 @@ public class DeleteCommand extends Command {
 
                 // retrieve task to be removed and remove it
                 Task taskToRemove = tasks.get(taskIndex);
+                this.task = taskToRemove;
                 assert taskToRemove != null;
                 tasks.remove(taskIndex);
 
@@ -67,6 +71,29 @@ public class DeleteCommand extends Command {
             } catch (NumberFormatException exceptionTwo) {
                 return ui.showInvalidIndexError();
             }
+        }
+    }
+
+    /**
+     * Undo the command by adding the task that was deleted.
+     *
+     * @param tasks the task list the task is to be added to.
+     * @param ui the user interface associated with this run of Duke.
+     * @param storage the storage handler associated with this run of Duke.
+     * @return Duke's response to the user command.
+     * @throws IOException when file the list is to be written to is not found.
+     */
+    public String undo(TaskList tasks, Ui ui, Storage storage)
+            throws IOException {
+        assert this.task != null;
+        if (this.task != null) {
+            tasks.add(this.task);
+
+            storage.update(tasks);
+
+            return ui.showCommandUndoneMessage(tasks);
+        } else {
+            return ui.showNoCommandToUndoError();
         }
     }
 }

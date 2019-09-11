@@ -27,6 +27,10 @@ public class DateTime {
         this.time = time;
     }
 
+    public int[] getDate() {
+        return new int[]{day, month, year};
+    }
+
     /**
      * Creates a DateTime object by splitting up the date and time given in a string.
      *
@@ -34,7 +38,7 @@ public class DateTime {
      * @return DateTime object created.
      * @throws ArrayIndexOutOfBoundsException If date and time given is not in the accepted format.
      */
-    public static DateTime create(String dateTimeString) throws ArrayIndexOutOfBoundsException {
+    public static DateTime create(String dateTimeString) throws ArrayIndexOutOfBoundsException, DukeException {
         try {
             String[] currArray = dateTimeString.split("\\s+", 2);
             String dateString = currArray[0];
@@ -52,7 +56,7 @@ public class DateTime {
      *
      * @return Date with suffix -st, -nd, -rd and -th when appropriate.
      */
-    private String getDate() {
+    private String getDay() {
         if (day == 1 || day == 21 || day == 31) {
             return day + "st";
         } else if (day == 2 || day == 22) {
@@ -148,6 +152,6 @@ public class DateTime {
 
     @Override
     public String toString() {
-        return getDate() + " of " + getMonth() + " " +  year + ", " + getTime();
+        return getDay() + " of " + getMonth() + " " +  year + ", " + getTime();
     }
 }

@@ -1,7 +1,13 @@
 package duke.tasklist;
 
+import duke.datetime.DateTime;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Contains the task list.
@@ -117,6 +123,35 @@ public class TaskList {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < searchResults.size(); i++) {
             sb.append((i + 1) + "." + searchResults.get(i) + "\n");
+        }
+        return sb.toString();
+    }
+
+    public String findSchedule(int[] scheduleDate) {
+        ArrayList<Task> scheduledTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (!(task instanceof Todo)) {
+                int[] taskDate = task.getDate();
+                if (Arrays.equals(scheduleDate, taskDate)) {
+                    scheduledTasks.add(task);
+                }
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        if (scheduledTasks.isEmpty()) {
+            return "You do not have any tasks on that day!";
+        } else if (scheduledTasks.size() == 1) {
+            sb.append("You have 1 task on that day:\n");
+        } else if (scheduledTasks.size() > 1) {
+            sb.append("You have " + scheduledTasks.size() + " tasks on that day:\n");
+        } else {
+            return "OOPS!!! Duke encountered an unexpected error.";
+        }
+
+        for (Task task : scheduledTasks) {
+            sb.append(task.toString() + "\n");
         }
         return sb.toString();
     }

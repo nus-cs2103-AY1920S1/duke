@@ -1,14 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.CompleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
-import duke.command.RemoveCommand;
-import duke.command.UpdateCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -58,6 +50,8 @@ public class Parser {
         case "update":
         case "u":
             return UpdateCommand.process(currArray);
+        case "schedule":
+            return ScheduleCommand.process(currArray);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

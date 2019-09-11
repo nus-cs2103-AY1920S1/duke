@@ -41,6 +41,11 @@ public class Deadline extends Task {
         return new Deadline(detailsArray[0], detailsArray[1]);
     }
 
+    @Override
+    public int[] getDate() {
+        return dateTime.getDate();
+    }
+
     /**
      * Formats the event to be stored in the hard disk.
      *

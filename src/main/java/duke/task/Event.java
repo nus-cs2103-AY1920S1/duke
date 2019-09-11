@@ -43,6 +43,11 @@ public class Event extends Task {
         return new Event(detailsArray[0], detailsArray[1]);
     }
 
+    @Override
+    public int[] getDate() {
+        return dateTime.getDate();
+    }
+
     /**
      * Formats the event to be stored in the hard disk.
      *

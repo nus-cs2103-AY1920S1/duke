@@ -35,6 +35,10 @@ public class Task {
         return "";
     }
 
+    public int[] getDate() {
+        return new int[]{0};
+    }
+
     /**
      * Marks a task as done.
      */

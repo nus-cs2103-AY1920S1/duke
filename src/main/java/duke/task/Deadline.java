@@ -22,6 +22,10 @@ public class Deadline extends Task {
         dateTime = LocalDateTime.parse(date, formatter);
     }
 
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
     /**
      * Returns String in text file format.
      *

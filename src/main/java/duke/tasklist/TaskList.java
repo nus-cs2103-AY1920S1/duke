@@ -1,6 +1,8 @@
 package duke.tasklist;
 
 import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
 import duke.command.Command;
@@ -32,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Carry out operations according to commands from user.
+     * Carry out operations according to commands from user and returns the output.
      *
      * @param command command object with input string and command
      * @return resultant command with updated task list
@@ -73,6 +75,48 @@ public class TaskList {
         command.setOutput(output);
         command.setTaskList(tasks);
         return command;
+    }
+
+    /**
+     * Returns a list of upcoming events and deadlines.
+     *
+     * @return reminders of a list of events/deadlines
+     */
+    public String getReminder() {
+        LocalDateTime now = LocalDateTime.now();
+        ArrayList<Task> remindTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task instanceof Deadline) {
+                Deadline deadline = (Deadline) task;
+                LocalDateTime deadlineDate = deadline.getDateTime();
+                if (now.isBefore(deadlineDate)) {
+                    if (!deadline.isDone()) {
+                        remindTasks.add(task);
+                    }
+                }
+            } else if (task instanceof Event) {
+                Event event = (Event) task;
+                LocalDateTime eventDate = event.getDateTime();
+                if (now.isBefore(eventDate)) {
+                    remindTasks.add(task);
+                }
+            }
+        }
+        String s;
+        if (remindTasks.isEmpty()) {
+            s = "No upcoming tasks.";
+        } else {
+            s = "Here's a list of upcoming tasks:\n";
+            StringBuilder sb = new StringBuilder(s);
+            for (int i = 0; i < remindTasks.size(); i++) {
+                sb.append(i + 1).append(".").append(remindTasks.get(i));
+                if (i < remindTasks.size() - 1) {
+                    sb.append("\n");
+                }
+            }
+            s = sb.toString();
+        }
+        return s;
     }
 
     private String byeCommand() {

@@ -39,11 +39,6 @@ public class Task {
         return (isDone ? "Y" : "N");
     }
 
-    /**
-     * Returns description of task.
-     *
-     * @return description of task
-     */
     public String getDescription() {
         return description;
     }
@@ -53,6 +48,10 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

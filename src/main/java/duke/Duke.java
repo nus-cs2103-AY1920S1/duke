@@ -35,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Gets a response from user and sends back the output.
+     * Gets a response from user and sends back the output. Prints output in both CLI and GUI.
      *
      * @param input input String from user
      * @return output String from duke
@@ -45,11 +45,17 @@ public class Duke {
         Command result = new Command();
         try {
             result = taskList.doCommand(command);
+            ui.printOutput(result.getOutput());
+            ui.printOutput(taskList.getReminder());
             storage.writeDuke(result.getTaskList());
         } catch (DukeException | IOException ex) {
             result.setOutput(ex.getMessage());
             ui.printError(ex);
         }
         return result.getOutput();
+    }
+
+    public String getReminder() {
+        return taskList.getReminder();
     }
 }

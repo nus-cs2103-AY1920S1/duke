@@ -8,7 +8,7 @@ public class TutorialCommand extends Command {
 
     }
 
-    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage, Storage expenseStorage) throws Exception {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage, Storage expenseStorage) {
         return "tutorial";
     }
 

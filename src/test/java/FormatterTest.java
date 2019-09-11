@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import jermi.component.Formatter;
 
 public class FormatterTest {
-    private final static Formatter FORMATTER = new Formatter();
-    private final static String BORDER = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    private static final Formatter FORMATTER = new Formatter();
+    private static final String BORDER = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
 
     @Test
     public void greet_welcomeMessage() {
@@ -65,7 +65,10 @@ public class FormatterTest {
 
     @Test
     public void echo_multipleNonEmptyStrings_multipleNonEmptyStringsBetweenBorders() {
-        String[] testStrings = {"Test string 1", "Test string 2", "Test string 3", "Test string 4"};
+        String[] testStrings = {"Test string 1",
+                "Test string 2",
+                "Test string 3",
+                "Test string 4"};
         String expected = BORDER
                 + "  " + testStrings[0] + "\n"
                 + "  " + testStrings[1] + "\n"
@@ -89,8 +92,7 @@ public class FormatterTest {
 
     @Test
     public void readCommand_inputCommand_inputCommand() {
-        String[] inputCommands = {
-                "list",
+        String[] inputCommands = {"list",
                 "todo",
                 "event",
                 "deadline",
@@ -113,15 +115,13 @@ public class FormatterTest {
 
     @Test
     public void readCommand_userInput_inputCommand() {
-        String[] userInputs = {
-                "todo read book",
+        String[] userInputs = {"todo read book",
                 "event meeting /at 28/11/2019",
                 "deadline homework /by 29 Aug",
                 "done 2",
                 "remove 3",
                 "find book meeting"};
-        String[] expectedOutputs = {
-                "todo",
+        String[] expectedOutputs = {"todo",
                 "event",
                 "deadline",
                 "done",
@@ -145,8 +145,7 @@ public class FormatterTest {
 
     @Test
     public void readDetails_userInputWithoutDetails_emptyDetails() {
-        String[] userInputsWithoutDetails = {
-                "list",
+        String[] userInputsWithoutDetails = {"list",
                 "todo",
                 "event",
                 "deadline",
@@ -155,8 +154,7 @@ public class FormatterTest {
                 "bye",
                 "done",
                 "clear"};
-        String[] expectedOutputs = {
-                "",
+        String[] expectedOutputs = {"",
                 "",
                 "",
                 "",
@@ -179,15 +177,13 @@ public class FormatterTest {
 
     @Test
     public void readDetails_userInput_details() {
-        String[] userInputs = {
-                "todo read book",
+        String[] userInputs = {"todo read book",
                 "event meeting /at 28/11/2019",
                 "deadline homework /by 29 Aug",
                 "done 2",
                 "remove 3",
                 "find book meeting"};
-        String[] expectedOutputs = {
-                "read book",
+        String[] expectedOutputs = {"read book",
                 "meeting /at 28/11/2019",
                 "homework /by 29 Aug",
                 "2",

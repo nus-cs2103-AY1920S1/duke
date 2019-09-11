@@ -54,6 +54,7 @@ public class Storage {
         } catch (Exception e) {
             throw new DukeException("Save data not found.");
         }
+        
         return list;
     }
 }

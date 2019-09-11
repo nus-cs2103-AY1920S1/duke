@@ -53,7 +53,14 @@ public class Ui {
      * Shows welcome message of Duke.
      */
     public void showWelcome() {
-        this.printResponse("Hello! I'm Duke\n"
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        this.printResponse("Hello from\n" 
+                + logo 
+                + "Hello! I'm Duke\n"
                 + "What can I do for you?");
     }
 

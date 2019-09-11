@@ -11,31 +11,17 @@ import duke.task.Task;
  * Command containing method for finding Tasks in TaskList.
  */
 public class FindCommand extends Command {
-    /**
-     * Constructor for FindCommand without parameters.
-     */
-    public FindCommand() {
-        this("");
-    }
+    private String query;
 
     /**
-     * Constructor for DeleteCommand with String parameter.
+     * Constructor for FindCommand.
      * 
-     * @param fullCommand Input entered by user.
+     * @param query Query to be matched.
      */
-    public FindCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public FindCommand(String query) {
+        this.query = query;
     }
     
-    /**
-     * Returns a FindCommand as initialized by the constructor.
-     * 
-     * @param fullCommand Input entered by user.
-     */
-    public Command clone(String fullCommand) {
-        return new FindCommand(fullCommand);
-    }
-
     /**
      * Finds Tasks from the TaskList that matches the query.
      *
@@ -45,9 +31,8 @@ public class FindCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList tempList = new TaskList();
-        String query = Parser.parseFind(this.fullCommand);
         for (Task task : tasks) {
-            if (task.toString().contains(query)) {
+            if (task.toString().contains(this.query)) {
                 tempList.add(task);
             }
         }

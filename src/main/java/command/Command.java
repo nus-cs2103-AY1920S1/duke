@@ -10,16 +10,6 @@ import duke.exception.DukeException;
  * interacting with TaskList, Ui and Storage objects based on input.
  */
 public abstract class Command {
-    protected String fullCommand;
-
-    /**
-     * Public method to initialize Command objects.
-     *
-     * @param fullCommand Input entered by user.
-     * @return Command object initialized by constructor.
-     */
-    public abstract Command clone(String fullCommand);
-
     /**
      * Interacts with TaskList, Ui and Storage objects based on input.
      *

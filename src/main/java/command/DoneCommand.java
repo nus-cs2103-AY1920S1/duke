@@ -11,31 +11,17 @@ import duke.task.Task;
  * Command containing method for marking Task from TaskList as done.
  */
 public class DoneCommand extends Command {
-    /**
-     * Constructor for DoneCommand without parameters.
-     */
-    public DoneCommand() {
-        this("");
-    }
+    private int itemId;
 
     /**
-     * Constructor for DoneCommand with String parameter.
+     * Constructor for DoneCommand.
      * 
-     * @param fullCommand Input entered by user.
+     * @param itemId Id of item to be marked done.
      */
-    public DoneCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public DoneCommand(int itemId) {
+        this.itemId = itemId;
     }
     
-    /**
-     * Returns a DoneCommand as initialized by the constructor.
-     * 
-     * @param fullCommand Input entered by user.
-     */
-    public Command clone(String fullCommand) {
-        return new DoneCommand(fullCommand);
-    }
-
     /**
      * Marks a Task from the TaskList as done.
      *
@@ -44,14 +30,13 @@ public class DoneCommand extends Command {
      * @param storage Storage that stores the modified TaskList.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        int itemId = Parser.parseDone(this.fullCommand);
         try {
-            tasks.markAsDone(itemId);
+            tasks.markAsDone(this.itemId);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! There is no item " + itemId + ".");
         }
         ui.printResponse("Nice! I've marked this task as done: \n  "
-                + tasks.get(itemId).toString());
+                + tasks.get(this.itemId).toString());
     }
 
     /**

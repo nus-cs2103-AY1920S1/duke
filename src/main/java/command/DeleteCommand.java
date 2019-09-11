@@ -11,29 +11,15 @@ import duke.task.Task;
  * Command containing method for deleting Task from TaskList.
  */
 public class DeleteCommand extends Command {
-    /**
-     * Constructor for DeleteCommand without parameters.
-     */
-    public DeleteCommand() {
-        this("");
-    }
+    private int itemId;
 
     /**
-     * Constructor for DeleteCommand with String parameter.
+     * Constructor for DeleteCommand.
      * 
-     * @param fullCommand Input entered by user.
+     * @param itemId Id of item to be deleted.
      */
-    public DeleteCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
-    }
-    
-    /**
-     * Returns a DeleteCommand as initialized by the constructor.
-     * 
-     * @param fullCommand Input entered by user.
-     */
-    public Command clone(String fullCommand) {
-        return new DeleteCommand(fullCommand);
+    public DeleteCommand(int itemId) {
+        this.itemId = itemId;
     }
 
     /**
@@ -44,14 +30,13 @@ public class DeleteCommand extends Command {
      * @param storage Storage that stores the modified TaskList.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        int itemId = Parser.parseDelete(this.fullCommand);
         try {
-            Task item = tasks.remove(itemId);
+            Task item = tasks.remove(this.itemId);
             ui.printResponse("Noted. I've removed this task:  \n  "
                 + item.toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! There is no item " + itemId + ".");
+            throw new DukeException("☹ OOPS!!! There is no item " + this.itemId + ".");
         }   
     }
 

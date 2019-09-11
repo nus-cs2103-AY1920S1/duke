@@ -11,6 +11,8 @@ import duke.command.Command;
  * Application class for Duke.
  */
 public class Duke {
+    private static final String SAVE_PATH = "data/duke.txt";
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -19,7 +21,7 @@ public class Duke {
      * Constructor of Duke class without parameters.
      */
     public Duke() {
-        this("data/duke.txt");
+        this(SAVE_PATH);
     }
 
     /**
@@ -44,7 +46,7 @@ public class Duke {
      * @param args Arguments entered when main method is executed.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
+        Duke duke = new Duke(SAVE_PATH);
         duke.run();
     }
 
@@ -61,12 +63,6 @@ public class Duke {
      * Run method of Duke.
      */
     public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         this.ui.showWelcome();
 
         boolean isExit = false;

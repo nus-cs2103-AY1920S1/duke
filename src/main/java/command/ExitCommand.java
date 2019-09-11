@@ -9,31 +9,6 @@ import duke.task.TaskList;
  */
 public class ExitCommand extends Command {
     /**
-     * Constructor for ExitCommand without parameters.
-     */
-    public ExitCommand() {
-        this("");
-    }
-
-    /**
-     * Constructor for ExitCommand with String parameter.
-     * 
-     * @param fullCommand Input entered by user.
-     */
-    public ExitCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
-    }
-    
-    /**
-     * Returns an ExitCommand as initialized by the constructor.
-     * 
-     * @param fullCommand Input entered by user.
-     */
-    public Command clone(String fullCommand) {
-        return new ExitCommand(fullCommand);
-    }
-    
-    /**
      * Exits program.
      *
      * @param tasks TaskList of program.

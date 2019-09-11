@@ -11,31 +11,17 @@ import duke.task.Task;
  * Command containing method for adding Task to TaskList.
  */
 public class AddCommand extends Command {
-    /**
-     * Constructor for AddCommand without parameters.
-     */
-    public AddCommand() {
-        this("");
-    }
+    private Task task;
 
     /**
-     * Constructor for AddCommand with String parameter.
+     * Constructor for AddCommand.
      * 
-     * @param fullCommand Input entered by user.
+     * @param task Task to be added.
      */
-    public AddCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public AddCommand(Task task) {
+        this.task = task;
     }
     
-    /**
-     * Returns an AddCommand as initialized by the constructor.
-     * 
-     * @param fullCommand Input entered by user.
-     */
-    public Command clone(String fullCommand) {
-        return new AddCommand(fullCommand);
-    }
-
     /**
      * Adds a Task to the TaskList.
      *
@@ -44,10 +30,9 @@ public class AddCommand extends Command {
      * @param storage Storage that stores the modified TaskList.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = Parser.parseTask(this.fullCommand);
-        tasks.add(task);
+        tasks.add(this.task);
         ui.printResponse("Got it. I've added this task:\n  "
-                + task.toString() + "\n"
+                + this.task.toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.");
     }
 

@@ -56,7 +56,7 @@ public abstract class Task {
      * @return Status and the description of this Task.
      */
     public String getStatus() {
-        String icon = (isDone ? "\u2713" : "\u2718"); //tick or X symbol
+        String icon = (isDone ? "✓" : "✘"); //tick or X symbol
         return String.format("[%s] %s", icon, this.description);
     }
 

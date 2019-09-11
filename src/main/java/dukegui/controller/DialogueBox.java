@@ -21,6 +21,7 @@ import javafx.scene.layout.Region;
  * containing text from the speaker.
  */
 public class DialogueBox extends HBox {
+
     @FXML
     private Label dialogue;
     @FXML
@@ -59,10 +60,24 @@ public class DialogueBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Returns the dialogueBox containing user commands.
+     *
+     * @param text User command.
+     * @param img User profile picture.
+     * @return DialogueBox containing user commands.
+     */
     public static DialogueBox getUserDialogue(String text, Image img) {
         return new DialogueBox(text, img);
     }
 
+    /**
+     * Returns the dialogueBox containing Duke's response.
+     *
+     * @param text Duke's response.
+     * @param img Profile picture of Duke.
+     * @return DialogueBox containing Duke's response.
+     */
     public static DialogueBox getDukeDialogue(String text, Image img) {
         DialogueBox db = new DialogueBox(text, img);
         db.flip();

@@ -5,7 +5,7 @@ import duke.command.undoable.Undoable;
 import duke.date.DukeDate;
 
 import duke.exception.DukeDateFormatException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeIllegalArgumentException;
 
 import duke.module.AutoResponse;
@@ -41,13 +41,13 @@ public class AddDeadlineCommand extends Command implements Undoable {
      * @param storage   Storage to save any changes.
      * @throws DukeIllegalArgumentException When the description or date of task is missing.
      * @throws DukeDateFormatException      When the date is formatted incorrectly.
-     * @throws DukeIOException              When there is an error during an input-output process.
+     * @throws DukeIoException              When there is an error during an input-output process.
      */
     @Override
     public void execute(TaskList taskList, CommandStack commandStack, Ui ui, Storage storage)
-            throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
+            throws DukeIllegalArgumentException, DukeDateFormatException, DukeIoException {
         // Display the result to the user
-        ui.printToUser(this._execute(taskList, commandStack, storage));
+        ui.printToUser(this.getMessage(taskList, commandStack, storage));
     }
 
     /**
@@ -59,16 +59,16 @@ public class AddDeadlineCommand extends Command implements Undoable {
      * @return Result of executing this {@code AddDeadlineCommand}.
      * @throws DukeIllegalArgumentException When the description or date of task is missing.
      * @throws DukeDateFormatException      When the date is formatted incorrectly.
-     * @throws DukeIOException              When there is an error during an input-output process.
+     * @throws DukeIoException              When there is an error during an input-output process.
      */
     @Override
     public String getResponse(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
-        return String.join("\n", this._execute(taskList, commandStack, storage));
+            throws DukeIllegalArgumentException, DukeDateFormatException, DukeIoException {
+        return String.join("\n", this.getMessage(taskList, commandStack, storage));
     }
 
-    private String[] _execute(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalArgumentException, DukeDateFormatException, DukeIOException {
+    private String[] getMessage(TaskList taskList, CommandStack commandStack, Storage storage)
+            throws DukeIllegalArgumentException, DukeDateFormatException, DukeIoException {
         String[] arg = this.description.split(DELIMITER_DEADLINE_DATE);
 
         // Check for errors
@@ -131,10 +131,10 @@ public class AddDeadlineCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage  Storage to save any changes if necessary.
      * @return The result of undoing this command.
-     * @throws DukeIOException If an error occurs while saving.
+     * @throws DukeIoException If an error occurs while saving.
      */
     @Override
-    public String[] undo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIOException {
+    public String[] undo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIoException {
         this.deadlineTask = taskList.deleteLastTask();
 
         // Add this command to the redo stack
@@ -155,10 +155,10 @@ public class AddDeadlineCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes if necessary.
      * @return The result of redoing this command.
-     * @throws DukeIOException If an error occurs while saving.
+     * @throws DukeIoException If an error occurs while saving.
      */
     @Override
-    public String[] redo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIOException {
+    public String[] redo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIoException {
         assert this.deadlineTask != null : "AddDeadlineCommand.java (line 162) : deadlineTask should not be null";
 
         // Add the task that was removed back

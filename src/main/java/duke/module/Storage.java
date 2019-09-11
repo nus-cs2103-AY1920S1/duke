@@ -1,6 +1,6 @@
 package duke.module;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.task.Task;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
@@ -30,21 +30,21 @@ public class Storage {
 
     /**
      * Initializes a save file to keep track of user tasks.
-     * <p>
-     * Creates a new file if it does not exist.
-     * <p>
-     * Finds the file if it exists.
      *
-     * @throws DukeIOException When an error occurs during the input-output process.
+     * <p>Creates a new file if it does not exist.
+     *
+     * <p>Finds the file if it exists.
+     *
+     * @throws DukeIoException When an error occurs during the input-output process.
      */
-    public Storage() throws DukeIOException {
+    public Storage() throws DukeIoException {
         this.cwd = "src/main/resources/save-file";
         this.fileName = "tasks.txt";
         this.savedFile = new File(this.cwd + File.separator + this.fileName);
         try {
             this.savedFile.createNewFile();
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage());
+            throw new DukeIoException(e.getMessage());
         }
     }
 
@@ -56,9 +56,9 @@ public class Storage {
      * Saves the tasks in the given TaskList to the save file initialized.
      *
      * @param taskList {@link TaskList} storing the user tasks.
-     * @throws DukeIOException When an error occurs while writing to the saved file.
+     * @throws DukeIoException When an error occurs while writing to the saved file.
      */
-    public void saveTasks(TaskList taskList) throws DukeIOException {
+    public void saveTasks(TaskList taskList) throws DukeIoException {
         assert taskList != null : "Storage.java (line 62) : taskList should not be null";
 
         // Each task's information delimited by " | "
@@ -90,7 +90,7 @@ public class Storage {
             bw.write(lines.toString());
             bw.close();
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage());
+            throw new DukeIoException(e.getMessage());
         }
     }
 
@@ -98,9 +98,9 @@ public class Storage {
      * Parses each line in the save file to a {@link Task} and returns it as a List of Tasks.
      *
      * @return a list of Tasks in correspondence to each line of the save file.
-     * @throws DukeIOException When an error occurs while reading the save file.
+     * @throws DukeIoException When an error occurs while reading the save file.
      */
-    public List<Task> load() throws DukeIOException {
+    public List<Task> load() throws DukeIoException {
         try {
             List<Task> lines = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(this.savedFile));
@@ -111,7 +111,7 @@ public class Storage {
             br.close();
             return lines;
         } catch (IOException e) {
-            throw new DukeIOException(e.getMessage());
+            throw new DukeIoException(e.getMessage());
         }
     }
 

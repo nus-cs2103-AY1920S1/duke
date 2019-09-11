@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.command.undoable.Undoable;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeIllegalArgumentException;
 
 import duke.module.AutoResponse;
@@ -34,13 +34,13 @@ public class AddTodoCommand extends Command implements Undoable {
      * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalArgumentException When the description of task is missing.
-     * @throws DukeIOException When there is an error during an input-output process.
+     * @throws DukeIoException When there is an error during an input-output process.
      */
     @Override
     public void execute(TaskList taskList, CommandStack commandStack, Ui ui, Storage storage)
-            throws DukeIllegalArgumentException, DukeIOException {
+            throws DukeIllegalArgumentException, DukeIoException {
         // Display the result to the user
-        ui.printToUser(this._execute(taskList, commandStack, storage));
+        ui.printToUser(this.getMessage(taskList, commandStack, storage));
     }
 
     /**
@@ -50,16 +50,16 @@ public class AddTodoCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalArgumentException When the description of task is missing.
-     * @throws DukeIOException When there is an error during an input-output process.
+     * @throws DukeIoException When there is an error during an input-output process.
      */
     @Override
     public String getResponse(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalArgumentException, DukeIOException {
-        return String.join("\n", this._execute(taskList, commandStack, storage));
+            throws DukeIllegalArgumentException, DukeIoException {
+        return String.join("\n", this.getMessage(taskList, commandStack, storage));
     }
 
-    private String[] _execute(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalArgumentException, DukeIOException {
+    private String[] getMessage(TaskList taskList, CommandStack commandStack, Storage storage)
+            throws DukeIllegalArgumentException, DukeIoException {
         if (this.description.isEmpty()) {
             throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_TASK_DESCRIPTION);
         }
@@ -86,10 +86,10 @@ public class AddTodoCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes if necessary.
      * @return The result of undoing this command.
-     * @throws DukeIOException If an error occurs while saving.
+     * @throws DukeIoException If an error occurs while saving.
      */
     @Override
-    public String[] undo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIOException {
+    public String[] undo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIoException {
         this.todoTask = taskList.deleteLastTask();
 
         // Add this command to the redo stack
@@ -110,10 +110,10 @@ public class AddTodoCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes if necessary.
      * @return The result of redoing this command.
-     * @throws DukeIOException If an error occurs while saving.
+     * @throws DukeIoException If an error occurs while saving.
      */
     @Override
-    public String[] redo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIOException {
+    public String[] redo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIoException {
         assert this.todoTask != null : "AddTodoCommand.java (line 117) : todoTask should not be null.";
         // Add the deleted task back to the taskList
         taskList.addTask(this.todoTask);

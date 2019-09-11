@@ -4,7 +4,7 @@ import duke.date.DukeDateStub;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTaskTest {
 
@@ -35,7 +35,7 @@ class DeadlineTaskTest {
                 false,
                 dds);
 
-        String expected = String.format("[D][\u2718] essay 1 (by: %s)", dds.format());
+        String expected = String.format("[D][✘] essay 1 (by: %s)", dds.format());
         assertEquals(expected, dt.getStatus());
     }
 }

@@ -15,7 +15,7 @@ import duke.command.UndoCommand;
 import duke.date.DukeDate;
 
 import duke.exception.DukeDateFormatException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeIllegalCommandException;
 
 import duke.task.Task;
@@ -46,8 +46,8 @@ public class Parser {
 
     /**
      * Parses the given date in String to a {@link DukeDate} object.
-     * <p>
-     * <b>Prerequisite: </b>String must be in MM/DD/YYYY HHMM form in 24-hour format.
+     *
+     * <p><b>Prerequisite: </b>String must be in MM/DD/YYYY HHMM form in 24-hour format.
      *
      * @param date String to be parsed.
      * @return {@link DukeDate} with information formatted in the date String.
@@ -75,9 +75,9 @@ public class Parser {
      *
      * @param line A line in the save file.
      * @return {@link Task} corresponding to the line.
-     * @throws DukeIOException When the lines in the save file is formatted incorrectly.
+     * @throws DukeIoException When the lines in the save file is formatted incorrectly.
      */
-    static Task parseToTask(String line) throws DukeIOException {
+    static Task parseToTask(String line) throws DukeIoException {
         assert line != null : "Parser.java (line 76) : line should not be null";
         try {
             String[] taskComponents = line.split("-");
@@ -94,10 +94,10 @@ public class Parser {
                         taskComponents[1].equals("1"),
                         parseToDukeDate(taskComponents[3]));
             default:
-                throw new DukeIOException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
+                throw new DukeIoException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
             }
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-            throw new DukeIOException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
+            throw new DukeIoException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
         }
     }
 
@@ -106,9 +106,9 @@ public class Parser {
      *
      * @param date Result of {@link DeadlineTask#getDateAsString()} or {@link EventTask#getDateAsString()}.
      * @return {@link DukeDate} corresponding to the date String.
-     * @throws DukeIOException When the date in the save file is formatted incorrectly.
+     * @throws DukeIoException When the date in the save file is formatted incorrectly.
      */
-    private static DukeDate parseToDukeDate(String date) throws DukeIOException {
+    private static DukeDate parseToDukeDate(String date) throws DukeIoException {
         // dd MM, yyyy, hh:mm a
         assert date != null : "Parser.java (line 108) : date should not be null";
         try {
@@ -122,7 +122,7 @@ public class Parser {
                     hour,
                     Integer.parseInt(parsed[4]));
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException | DukeDateFormatException e) {
-            throw new DukeIOException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
+            throw new DukeIoException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
         }
     }
 

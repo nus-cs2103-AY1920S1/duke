@@ -37,7 +37,7 @@ public class FindCommand extends Command {
     public void execute(TaskList taskList, CommandStack commandStack, Ui ui, Storage storage)
             throws DukeIllegalArgumentException {
         // Display the result to the user
-        ui.printToUser(this._execute(taskList, commandStack, storage));
+        ui.printToUser(this.getMessage(taskList, commandStack, storage));
     }
 
     /**
@@ -51,10 +51,10 @@ public class FindCommand extends Command {
     @Override
     public String getResponse(TaskList taskList, CommandStack commandStack, Storage storage)
             throws DukeIllegalArgumentException {
-        return String.join("\n", this._execute(taskList, commandStack, storage));
+        return String.join("\n", this.getMessage(taskList, commandStack, storage));
     }
 
-    private String[] _execute(TaskList taskList, CommandStack commandStack, Storage storage)
+    private String[] getMessage(TaskList taskList, CommandStack commandStack, Storage storage)
             throws DukeIllegalArgumentException {
         if (keyword.isEmpty()) {
             throw new DukeIllegalArgumentException(AutoResponse.ERROR_MISSING_KEYWORD);

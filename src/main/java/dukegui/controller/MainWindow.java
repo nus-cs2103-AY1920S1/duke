@@ -32,6 +32,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ryan.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/D.png"));
 
+    /**
+     * Initializes the properties of children nodes in the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogueContainer.heightProperty());
@@ -43,6 +46,9 @@ public class MainWindow extends AnchorPane {
         this.duke = duke;
     }
 
+    /**
+     * Greets the user.
+     */
     public void greetUser() {
         String dukeText = AutoResponse.DUKE_HELLO.replace("    ", "");
         dialogueContainer.getChildren().addAll(
@@ -83,6 +89,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Exits after delaying for 1.7 seconds on a different thread
+     * to not disrupt any ongoing processes.
+     */
     private void exit() {
         Thread t = new Thread(() -> {
             try {

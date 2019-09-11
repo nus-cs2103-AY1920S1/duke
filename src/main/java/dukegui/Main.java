@@ -1,6 +1,6 @@
 package dukegui;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import dukegui.controller.MainWindow;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ public class Main extends Application {
 
     private Duke duke;
 
-    public Main() throws DukeIOException {
+    public Main() throws DukeIoException {
         duke = new Duke();
     }
 

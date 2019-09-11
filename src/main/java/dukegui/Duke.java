@@ -3,7 +3,7 @@ package dukegui;
 import duke.command.Command;
 
 import duke.exception.DukeException;
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 
 import duke.module.CommandStack;
 import duke.module.Parser;
@@ -28,10 +28,10 @@ public class Duke {
     /**
      * Initializes the necessary modules to run the Duke application.
      *
-     * @throws DukeIOException When an error occurs during the input-output process or
+     * @throws DukeIoException When an error occurs during the input-output process or
      *     during the parsing of the save file
      */
-    public Duke() throws DukeIOException {
+    public Duke() throws DukeIoException {
         this.commandStack = new CommandStack();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.load());

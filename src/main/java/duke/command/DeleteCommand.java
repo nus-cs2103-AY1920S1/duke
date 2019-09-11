@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.command.undoable.Undoable;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeIllegalIndexException;
 
 import duke.module.AutoResponse;
@@ -34,13 +34,13 @@ public class DeleteCommand extends Command implements Undoable {
      * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalIndexException When the index inputted is out of bounds or missing.
-     * @throws DukeIOException When there is an error during an input-output process.
+     * @throws DukeIoException When there is an error during an input-output process.
      */
     @Override
     public void execute(TaskList taskList, CommandStack commandStack, Ui ui, Storage storage)
-            throws DukeIllegalIndexException, DukeIOException {
+            throws DukeIllegalIndexException, DukeIoException {
         // Display the result to the user
-        ui.printToUser(this._execute(taskList, commandStack, storage));
+        ui.printToUser(this.getMessage(taskList, commandStack, storage));
     }
 
     /**
@@ -49,16 +49,16 @@ public class DeleteCommand extends Command implements Undoable {
      * @param taskList List of tasks to manage.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalIndexException When the index inputted is out of bounds.
-     * @throws DukeIOException When there is an error during an input-output process.
+     * @throws DukeIoException When there is an error during an input-output process.
      */
     @Override
     public String getResponse(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalIndexException, DukeIOException {
-        return String.join("\n", this._execute(taskList, commandStack, storage));
+            throws DukeIllegalIndexException, DukeIoException {
+        return String.join("\n", this.getMessage(taskList, commandStack, storage));
     }
 
-    private String[] _execute(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalIndexException, DukeIOException {
+    private String[] getMessage(TaskList taskList, CommandStack commandStack, Storage storage)
+            throws DukeIllegalIndexException, DukeIoException {
         String[] message;
         try {
             int index = Integer.parseInt(this.detail);
@@ -101,15 +101,15 @@ public class DeleteCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes if necessary.
      * @return The result of undoing this command.
-     * @throws DukeIOException If an error occurs while saving.
+     * @throws DukeIoException If an error occurs while saving.
      */
     @Override
-    public String[] undo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIOException {
+    public String[] undo(TaskList taskList, CommandStack commandStack, Storage storage) throws DukeIoException {
         assert this.deletedTasks != null : "DeleteCommand.java (line 110) : deletedTasks should not be null.";
 
         // Add the deleted tasks back.
         String[] message;
-        switch (this.deletedIndex){
+        switch (this.deletedIndex) {
         case "-1":
             message = new String[] { AutoResponse.DUKE_UNDO_DELETE_NO_TASK };
             break;
@@ -141,11 +141,11 @@ public class DeleteCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage      Storage to save any changes if necessary.
      * @return The result of redoing this command.
-     * @throws DukeIOException If an error occurs while saving.
+     * @throws DukeIoException If an error occurs while saving.
      */
     @Override
     public String[] redo(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalIndexException, DukeIOException {
+            throws DukeIllegalIndexException, DukeIoException {
         assert this.deletedTasks != null : "DeleteCommand.java (line 147) : deletedTasks should not be null.";
 
         String[] message;
@@ -160,7 +160,7 @@ public class DeleteCommand extends Command implements Undoable {
         default:
             int index = Integer.parseInt(this.deletedIndex);
             message = new String[] { AutoResponse.DUKE_REDO_DELETE_TASK,
-                    "  " + taskList.deleteTaskAt(index).getStatus() };
+                                     "  " + taskList.deleteTaskAt(index).getStatus() };
             break;
         }
         // Add this command to the undo stack

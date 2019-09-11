@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.command.undoable.Undoable;
 
-import duke.exception.DukeIOException;
+import duke.exception.DukeIoException;
 import duke.exception.DukeIllegalIndexException;
 
 import duke.module.AutoResponse;
@@ -31,13 +31,13 @@ public class DoneCommand extends Command implements Undoable {
      * @param ui UI to show result to user.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalIndexException When the index inputted is out of bounds or missing.
-     * @throws DukeIOException When there is an error during an input-output process.
+     * @throws DukeIoException When there is an error during an input-output process.
      */
     @Override
     public void execute(TaskList taskList, CommandStack commandStack, Ui ui, Storage storage)
-            throws DukeIllegalIndexException, DukeIOException {
+            throws DukeIllegalIndexException, DukeIoException {
         // Display the result to the user
-        ui.printToUser(this._execute(taskList, commandStack, storage));
+        ui.printToUser(this.getMessage(taskList, commandStack, storage));
     }
 
     /**
@@ -47,16 +47,16 @@ public class DoneCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes.
      * @throws DukeIllegalIndexException When the index inputted is out of bounds.
-     * @throws DukeIOException When there is an error during an input-output process.
+     * @throws DukeIoException When there is an error during an input-output process.
      */
     @Override
     public String getResponse(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalIndexException, DukeIOException{
-        return String.join("\n", this._execute(taskList, commandStack, storage));
+            throws DukeIllegalIndexException, DukeIoException {
+        return String.join("\n", this.getMessage(taskList, commandStack, storage));
     }
 
-    private String[] _execute(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalIndexException, DukeIOException {
+    private String[] getMessage(TaskList taskList, CommandStack commandStack, Storage storage)
+            throws DukeIllegalIndexException, DukeIoException {
         String[] message;
 
         try {
@@ -98,12 +98,12 @@ public class DoneCommand extends Command implements Undoable {
      * @param commandStack Stack of {@code Undoable} commands.
      * @param storage Storage to save any changes if necessary.
      * @return The result of undoing this command.
-     * @throws DukeIOException If an error occurs while saving.
+     * @throws DukeIoException If an error occurs while saving.
      * @throws DukeIllegalIndexException If index stored is out of bounds.
      */
     @Override
     public String[] undo(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIOException, DukeIllegalIndexException {
+            throws DukeIoException, DukeIllegalIndexException {
         assert this.finishedIndex != null : "DoneCommand.java (line 107) : finishedIndex should not be null";
 
         String[] message;
@@ -138,11 +138,11 @@ public class DoneCommand extends Command implements Undoable {
      * @param storage      Storage to save any changes if necessary.
      * @return The result of redoing this command.
      * @throws DukeIllegalIndexException If an error occurs while retrieving a task from the taskList.
-     * @throws DukeIOException If an error occurs while saving.
+     * @throws DukeIoException If an error occurs while saving.
      */
     @Override
     public String[] redo(TaskList taskList, CommandStack commandStack, Storage storage)
-            throws DukeIllegalIndexException, DukeIOException {
+            throws DukeIllegalIndexException, DukeIoException {
         assert this.finishedIndex != null : "DoneCommand.java (line 144) : finishedIndex should not be null";
 
         String[] message;
@@ -159,7 +159,7 @@ public class DoneCommand extends Command implements Undoable {
             int index = Integer.parseInt(this.finishedIndex);
             taskList.markAsDoneTaskAt(index);
             message = new String[] { AutoResponse.DUKE_REDO_DONE_TASK,
-                    "  " + taskList.getTaskAt(index).getStatus() };
+                                     "  " + taskList.getTaskAt(index).getStatus() };
             break;
         }
 

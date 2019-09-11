@@ -53,8 +53,8 @@ public class TaskList {
 
     /**
      * Marks the {@link Task} at given index as unfinished.
-     * <p>
-     * <b>Prerequisite: </b>index starts from 1.
+     *
+     * <p><b>Prerequisite: </b>index starts from 1.
      *
      * @param index Index of the Task to mark as unfinished.
      * @throws DukeIllegalIndexException When the given index is out of bounds.
@@ -76,8 +76,8 @@ public class TaskList {
 
     /**
      * Marks the {@link Task} at given index as done.
-     * <p>
-     * <b>Prerequisite: </b>index starts from 1.
+     *
+     * <p><b>Prerequisite: </b>index starts from 1.
      *
      * @param index Index of the Task to mark as done.
      * @throws DukeIllegalIndexException When the given index is out of bounds.
@@ -107,16 +107,22 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    /**
+     * Adds given task to the given index, where given index starts from 1.
+     *
+     * @param index Index of which task is to be added.
+     * @param task Task to be added.
+     */
     public void addTaskAt(int index, Task task) {
-        assert task != null : "TaskList.java (line 111) : task should not be null";
-        assert index > 0 && index <= this.taskList.size() : "TaskList.java (line 112) : index is out of bounds";
+        assert task != null : "TaskList.java (line 117) : task should not be null";
+        assert index > 0 && index <= this.taskList.size() : "TaskList.java (line 118) : index is out of bounds";
         this.taskList.add(index - 1, task);
     }
 
     /**
      * Returns the {@link Task} at given index.
-     * <p>
-     * <b>Prerequisite: </b>index starts from 1.
+     *
+     * <p><b>Prerequisite: </b>index starts from 1.
      *
      * @param index Index of the Task to return.
      * @return The Task at the index.
@@ -155,12 +161,12 @@ public class TaskList {
 
     /**
      * Deletes the last task in this taskList.
-     * <p>
-     * <b>Prerequisite: </b>this taskList is not empty.
+     *
+     * <p><b>Prerequisite: </b>this taskList is not empty.
      * @return The last task.
      */
     public Task deleteLastTask() {
-        assert this.taskList.size() != 0 : "TaskList.java (line 163) : This taskList should not be empty.";
+        assert this.taskList.size() != 0 : "TaskList.java (line 169) : This taskList should not be empty.";
         return this.taskList.remove(this.taskList.size() - 1);
     }
 

@@ -2,6 +2,9 @@ package duke.date;
 
 import java.text.DecimalFormat;
 
+/**
+ * DukeDate stub to be used for testing.
+ */
 public class DukeDateStub extends DukeDate {
 
     private int year;
@@ -10,6 +13,15 @@ public class DukeDateStub extends DukeDate {
     private int hour;
     private int minute;
 
+    /**
+     * Constructs a DukeDateStub.
+     *
+     * @param year Year of this stub.
+     * @param month Month of this stub.
+     * @param day Day of this stub.
+     * @param hour Hour of this stub.
+     * @param minute Minute of this stub.
+     */
     public DukeDateStub(int year, int month, int day, int hour, int minute) {
         this.year = year;
         this.month = month;
@@ -18,6 +30,11 @@ public class DukeDateStub extends DukeDate {
         this.minute = minute;
     }
 
+    /**
+     * Formats this stub to string form.
+     *
+     * @return String form of this stub.
+     */
     @Override
     public String format() {
         DecimalFormat df = new DecimalFormat("00");

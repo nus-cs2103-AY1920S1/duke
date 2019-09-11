@@ -4,16 +4,17 @@ import duke.exception.DukeException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     protected List<Task> tasks;
 
-    public TaskList() {
-        tasks = new ArrayList<>();
-    }
-
-    public TaskList(List<Task> tasks) {
-        this.tasks = tasks;
+    public TaskList(List<Task>... tasks) {
+        if (tasks.length == 1) {
+            this.tasks = tasks[0];
+        } else {
+            this.tasks = new ArrayList<>();
+        }
     }
 
     /**
@@ -116,14 +117,18 @@ public class TaskList {
         return index >= 1 && index <= tasks.size();
     }
 
-
-    public List<Task> find(String keyword) {
-        List<Task> tasks = new ArrayList<>();
+    public List<Task> findByKeyword(String keyword) {
+        List<Task> tasks = new ArrayList<>(
+                getTasks().stream()
+                        .filter(t -> t.getDesc().contains(keyword))
+                        .collect(Collectors.toList())
+        );
+        /*
         getTasks().forEach(x -> {
             if (x.desc.contains(keyword)) {
                 tasks.add(x);
             }
-        });
+        });*/
         return tasks;
     }
 

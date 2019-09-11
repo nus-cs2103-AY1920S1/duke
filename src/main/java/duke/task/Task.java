@@ -11,21 +11,15 @@ public class Task {
      * Initialize a Task object.
      *
      * @param desc User inputted description.
+     * @param done Optional, true if task is done, default is false.
      */
-    public Task(String desc) {
+    public Task(String desc, boolean... done) {
         this.desc = desc;
         this.isDone = false;
-    }
 
-    /**
-     * Initialize a Task object.
-     *
-     * @param desc User inputted description.
-     * @param done true if task is done, default is false.
-     */
-    public Task(String desc, boolean done) {
-        this.desc = desc;
-        this.isDone = done;
+        if (done.length == 1) {
+            this.isDone = done[0];
+        }
     }
 
     /**
@@ -84,15 +78,8 @@ public class Task {
     }
 
     /**
-     * Setter method for done variable.
-     * Set task to done.
-     */
-    public void setDone() {
-        setDone(true);
-    }
-
-    /**
-     * Setter method for done variable.
+     * Label task done status as requested in input.
+     *
      *
      * @param done Done state of task.
      */
@@ -101,10 +88,25 @@ public class Task {
     }
 
     /**
+     * Label task as done.
+     */
+    public void setDone() {
+        setDone(true);
+    }
+
+    /**
+     * Label task as not done.
+     */
+    public void setNotDone() {
+        setDone(false);
+    }
+
+    /**
      * Returns done status of task.
      *
      * @return Tick if done, cross if not done.
      */
+
     public String getDoneStatus() {
         return isDone() ? "\u2714" : "\u2718";
     }
@@ -118,7 +120,4 @@ public class Task {
         return "[" + this.getDoneStatus() + "] " + getDesc();
     }
 
-    public void setNotDone() {
-        setDone(false);
-    }
 }

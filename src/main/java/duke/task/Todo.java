@@ -2,12 +2,11 @@ package duke.task;
 
 public class Todo extends Task {
 
-    public Todo(String desc) {
+    public Todo(String desc, boolean... done) {
         super(desc);
-    }
-
-    public Todo(String desc, boolean done) {
-        super(desc, done);
+        if (done.length == 1) {
+            setDone(done[0]);
+        }
     }
 
     /**
@@ -24,23 +23,15 @@ public class Todo extends Task {
      *  Parses stored data string and look for Todo object.
      *
      * @param input Data string from save file.
+     * @param done Optional isDone input
      * @return Todo object
      */
-    public static Todo parseFromData(String input) {
+    public static Todo parseFromData(String input, boolean... done) {
         String[] inputs = input.split(gap);
-        return new Todo(inputs[2]);
-    }
-
-    /**
-     *  Parses stored data string and look for Todo object.
-     *
-     * @param input Data string from save file.
-     * @param isDone Whether todo task is done.
-     * @return Todo object
-     */
-    public static Todo parseFromData(String input, boolean isDone) {
-        Todo todo = parseFromData(input);
-        todo.setDone(isDone);
+        Todo todo = new Todo(inputs[2]);
+        if (done.length == 1) {
+            todo.setDone(done[0]);
+        }
         return todo;
     }
 

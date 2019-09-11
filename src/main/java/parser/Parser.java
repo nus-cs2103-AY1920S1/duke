@@ -1,16 +1,23 @@
 package parser;
 
-import commands.PrintCommand;
 import commands.Command;
+import commands.PrintCommand;
+import commands.CommandManager;
 import commands.AddCommand;
 import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.ExitCommand;
 import commands.FindCommand;
+import commands.UndoableCommand;
+import java.io.IOException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
+import tasks.Task;
 import util.TaskList;
+import storage.Storage;
+import ui.Ui;
+
 
 import java.text.ParseException;
 
@@ -25,8 +32,14 @@ public class Parser {
      * Enumeration of all command types supported by Duke.
      */
     private enum Imperative {
-        BYE, DEADLINE, DELETE, DONE, EVENT, FIND, LIST, TODO
+        BYE, DEADLINE, DELETE, DONE, EVENT, FIND, LIST, TODO, UNDO
     }
+
+    /** Command manager. */
+    private static CommandManager manager = new CommandManager();
+
+    /** Boolean to indicate whether it is time to exit Duke.*/
+    public static boolean isItTimeToExit = false;
 
     /**
      * Parses user input into a command executed by Duke.
@@ -37,9 +50,9 @@ public class Parser {
      * @throws IndexOutOfBoundsException if incomplete commands
      * @throws ParseException if incorrect date/time format
      */
-    public static Command parse(String fullCommand)
+    public static String parse(String fullCommand, TaskList tasks, Ui ui, Storage storage)
             throws IllegalArgumentException, IndexOutOfBoundsException,
-            ParseException {
+            ParseException, IOException {
 
         // try to create the command based on the imperative and run it
         // if the imperative entered is unrecognised, inform the user
@@ -51,33 +64,84 @@ public class Parser {
 
         switch (Imperative.valueOf(imperative)) {
         case BYE:
-            return new ExitCommand(imperative);
+            isItTimeToExit = true;
+            return parseByeCommand(imperative, tasks, ui, storage);
         case DELETE:
-            return new DeleteCommand(imperative, splitCommand[1]);
+            return parseDeleteCommand(imperative, splitCommand[1], tasks, ui, storage);
         case DONE:
-            return new DoneCommand(imperative, splitCommand[1]);
+            return parseDoneCommand(imperative, splitCommand[1], tasks, ui, storage);
         case LIST:
-            return new PrintCommand(imperative);
+            return parsePrintCommand(imperative, tasks, ui, storage);
         case TODO:
             Todo todoForAddCommand = new Todo(splitCommand[1],false);
-            return new AddCommand(imperative, todoForAddCommand);
+            return parseAddCommand(imperative, todoForAddCommand, tasks, ui, storage);
         case DEADLINE:
             String newDeadlineDescription = splitTaskAttributes(splitCommand[1], "\\/")[0];
             String newDeadlineDueDate = splitTaskAttributes(splitCommand[1], "\\/")[1];
             Deadline deadlineForAddCommand = new Deadline(newDeadlineDescription,
                     newDeadlineDueDate, false);
-            return new AddCommand(imperative, deadlineForAddCommand);
+            return parseAddCommand(imperative, deadlineForAddCommand, tasks, ui, storage);
         case EVENT:
             String newEventDescription = splitTaskAttributes(splitCommand[1], "\\/")[0];
             String newEventDate = splitTaskAttributes(splitCommand[1], "\\/")[1];
-            Event newEventForAddCommand = new Event(newEventDescription,
+            Event eventForAddCommand = new Event(newEventDescription,
                     newEventDate, false);
-            return new AddCommand(imperative, newEventForAddCommand);
+            return parseAddCommand(imperative, eventForAddCommand, tasks, ui, storage);
         case FIND:
-            return new FindCommand(imperative, splitCommand[1]);
+            return parseFindCommand(imperative, splitCommand[1], tasks, ui, storage);
+        case UNDO:
+            return parseUndoCommand(tasks, ui, storage);
         default:
             throw new IllegalArgumentException();
         }
+    }
+
+    private static String parseByeCommand(String imperative, TaskList tasks, Ui ui,
+                                          Storage storage) throws IOException {
+        ExitCommand exitCommand  = new ExitCommand(imperative);
+        String responseString = manager.executeCommand(exitCommand, tasks, ui, storage);
+        return responseString;
+    }
+
+    private static String parseDeleteCommand(String imperative, String index, TaskList tasks,
+                                             Ui ui, Storage storage) throws IOException {
+        UndoableCommand deleteCommand  = new DeleteCommand(imperative, index);
+        String responseString = manager.executeCommand(deleteCommand, tasks, ui, storage);
+        return responseString;
+    }
+
+    private static String parseDoneCommand(String imperative, String index, TaskList tasks,
+                                             Ui ui, Storage storage) throws IOException {
+        UndoableCommand doneCommand  = new DoneCommand(imperative, index);
+        String responseString = manager.executeCommand(doneCommand, tasks, ui, storage);
+        return responseString;
+    }
+
+    private static String parsePrintCommand(String imperative, TaskList tasks, Ui ui,
+                                          Storage storage) throws IOException {
+        PrintCommand printCommand  = new PrintCommand(imperative);
+        String responseString = manager.executeCommand(printCommand, tasks, ui, storage);
+        return responseString;
+    }
+
+    private static String parseAddCommand(String imperative, Task task, TaskList tasks,
+                                           Ui ui, Storage storage) throws IOException {
+        UndoableCommand addCommand  = new AddCommand(imperative, task);
+        String responseString = manager.executeCommand(addCommand, tasks, ui, storage);
+        return responseString;
+    }
+
+    private static String parseFindCommand(String imperative, String searchTerm, TaskList tasks,
+                                           Ui ui, Storage storage) throws IOException {
+        Command findCommand  = new FindCommand(imperative, searchTerm);
+        String responseString = manager.executeCommand(findCommand, tasks, ui, storage);
+        return responseString;
+    }
+
+    private static String parseUndoCommand(TaskList tasks, Ui ui,
+                                           Storage storage) throws IOException {
+        String responseString = manager.undoCommand(tasks, ui, storage);
+        return responseString;
     }
 
     /**

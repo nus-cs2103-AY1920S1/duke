@@ -14,10 +14,13 @@ import java.io.IOException;
  * @author atharvjoshi
  * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
-public class DoneCommand extends Command {
+public class DoneCommand extends UndoableCommand {
 
     /** The serial number (1-indexed) of the task to be marked done. */
     private String taskNumber;
+
+    /** The task modified by this command. */
+    private Task task;
 
     /**
      * Initialises a command for marking the specified task as done.
@@ -51,6 +54,7 @@ public class DoneCommand extends Command {
 
                 // retrieve task from list
                 Task taskToMarkDone = tasks.get(taskIndex);
+                this.task = taskToMarkDone;
                 assert taskToMarkDone != null;
 
                 // mark task as done only if its not yet done
@@ -70,6 +74,29 @@ public class DoneCommand extends Command {
             } catch (NumberFormatException exceptionTwo) {
                 return ui.showInvalidIndexError();
             }
+        }
+    }
+
+    /**
+     * Undos the command by marking the task as not done, if it was earlier
+     * marked as done.
+     *
+     * @param tasks the task list the task is to be added to.
+     * @param ui the user interface associated with this run of Duke.
+     * @param storage the storage handler associated with this run of Duke.
+     * @return Duke's response to the user command.
+     */
+    public String undo(TaskList tasks, Ui ui, Storage storage) {
+        assert this.task != null;
+        if (this.task != null) {
+            if (this.task.getIsDone()) {
+                this.task.setTaskAsDone(false);
+                return ui.showCommandUndoneMessage(tasks);
+            } else {
+                return ui.showNoCommandToUndoError();
+            }
+        } else {
+            return ui.showNoCommandToUndoError();
         }
     }
 }

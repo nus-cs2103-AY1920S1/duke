@@ -13,7 +13,7 @@ import java.io.IOException;
  * @author atharvjoshi
  * @version CS2103 AY19/20 Sem 1 iP Week 4
  */
-public class AddCommand extends Command {
+public class AddCommand extends UndoableCommand {
 
     /** The task created in response to this command. */
     private Task task;
@@ -48,5 +48,24 @@ public class AddCommand extends Command {
 
         // inform the user that task has been added
         return ui.showAddTaskMessage(this.task, tasks.size());
+    }
+
+    /**
+     * Undos the command by deleting the task that was added.
+     *
+     * @param tasks the task list the task is to be added to.
+     * @param ui the user interface associated with this run of Duke.
+     * @param storage the storage handler associated with this run of Duke.
+     * @return Duke's response to user command.
+     * @throws IOException when file the list is to be written to is not found.
+     */
+    public String undo(TaskList tasks, Ui ui, Storage storage)
+            throws IOException {
+        int listSize = tasks.size();
+        tasks.remove(listSize - 1);
+
+        storage.update(tasks);
+
+        return ui.showCommandUndoneMessage(tasks);
     }
 }

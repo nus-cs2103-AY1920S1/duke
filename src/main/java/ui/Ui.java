@@ -206,4 +206,20 @@ public class Ui {
             return sb.toString();
         }
     }
+
+    public String showNoCommandToUndoError() {
+        return "No command to undo!";
+    }
+
+    /**
+     * Shows command undone message, along with a printed list of tasks.
+     * @param tasks the tasks to be printed.
+     * @return string containing undone message.
+     */
+    public String showCommandUndoneMessage(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Last command undone!\n");
+        sb.append(printTasks(tasks));
+        return sb.toString();
+    }
 }

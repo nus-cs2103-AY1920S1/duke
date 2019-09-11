@@ -35,7 +35,7 @@ public class Storage {
         File textFile = new File(FILEPATH);
         boolean isFileCreated = textFile.createNewFile();
         assert isFileCreated;
-        
+
         return textFile;
     }
 

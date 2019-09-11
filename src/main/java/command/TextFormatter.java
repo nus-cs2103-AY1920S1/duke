@@ -120,8 +120,23 @@ public class TextFormatter {
         return separator + listMessageTitle + tasks + separator;
     }
 
+    public static String statsFormat(int[] stats) {
+        String separator = "    ____________________________________________________________\n";
+        String statsMessageTitle = "    Here are your statistics: \n";
+        StringBuilder myTasks = new StringBuilder();
+        myTasks.append("Total Tasks :" + stats[0] + "\n");
+        myTasks.append("Total Tasks Done:" + stats[1] + "\n");
+        myTasks.append("Total ToDo Tasks:" + stats[2] + "\n");
+        myTasks.append("Total ToDo Tasks Done:" + stats[3] + "\n");
+        myTasks.append("Total Deadline Tasks:" + stats[4] + "\n");
+        myTasks.append("Total Deadline Tasks Done:" + stats[5] + "\n");
+        myTasks.append("Total Event Tasks:" + stats[6] + "\n");
+        myTasks.append("Total Event Tasks Done:" + stats[7] + "\n");
+
+        String statsString = myTasks.toString();
+        return separator + statsMessageTitle + statsString + separator;
+    }
+
+    }
 
 
-
-
-}

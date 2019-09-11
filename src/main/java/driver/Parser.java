@@ -1,13 +1,8 @@
 package driver;
 
+import command.*;
 import exception.DukeException;
 import exception.IncompleteInputException;
-import command.Command;
-import command.ListCommand;
-import command.DoneCommand;
-import command.DeleteCommand;
-import command.AddCommand;
-import command.SearchCommand;
 
 /**
  *
@@ -36,6 +31,8 @@ public class Parser {
                  } else if (userInput.contains("find")) {
                      String mystery = userInput.replace("find ", "");
                      return new SearchCommand(mystery);
+                 } else if (userInput.equalsIgnoreCase("stats")) {
+                     return new StatisticsCommand();
                 } else {
                      if((userInput.contains("todo")&&(userInput.length()>5))||
                              (userInput.contains("deadline")&&(userInput.length()>9)&&userInput.contains("/")) ||

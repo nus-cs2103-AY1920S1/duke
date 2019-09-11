@@ -10,9 +10,12 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(){}
+    public Duke() {
+    }
+
     /**
      * Creates a duke.Duke object.
+     *
      * @param filePath storage path.
      */
     public Duke(String filePath) {
@@ -42,14 +45,9 @@ public class Duke {
         }
     }
 
-    public void changeFilePath(String filePath) {
-        try {
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.load());
-        } catch (DukeException ex) {
-
-        }
-
+    public void changeFilePath(String filePath) throws DukeException {
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load());
     }
 
     /**

@@ -43,6 +43,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
+            <Button fx:id="sendButton1" layoutX="352.0" layoutY="18.0" mnemonicParsing="false" onAction="#openFile" opacity="0.6" prefHeight="28.0" prefWidth="28.0" styleClass="changeSourceButton" stylesheets="@../stylesheets/Duke.css" />
          </children>
       </Pane>
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="-3.0" layoutY="60.0" prefHeight="495.0" prefWidth="400.0" style="-fx-background-color: white;" styleClass="scrollPane" stylesheets="@../stylesheets/Duke.css">

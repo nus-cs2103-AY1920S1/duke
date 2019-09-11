@@ -1,5 +1,6 @@
 package controllers;
 
+import Exception.DukeException;
 import duke.Duke;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -8,6 +9,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
+import java.io.File;
+
 
 public class MainWindow {
     @FXML
@@ -63,5 +68,25 @@ public class MainWindow {
         });
         new Thread(sleeper).start();
         userInput.clear();
+    }
+
+    @FXML
+    private void openFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select txt files");
+        fileChooser.setInitialDirectory(new File("data"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("txt files", "*.txt")
+        );
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            try {
+                duke.changeFilePath(selectedFile.getPath());
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog("I have changed your data source successfully!", dukeImage));
+            } catch (DukeException ex) {
+                dialogContainer.getChildren().add(DialogBox.getDukeDialog("☹ OOPS!!! I'm sorry, but " + ex.getMessage() + " \nPlease make sure that the file content is of the correct format.", dukeImage));
+            }
+        }
+
     }
 }

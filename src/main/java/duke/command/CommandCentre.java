@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 public class CommandCentre {
-    private HashMap<String, Command> commands;
+    private static HashMap<String, Command> commands;
     private TaskList taskList;
     private Ui ui;
 
@@ -39,7 +39,7 @@ public class CommandCentre {
      * @return the Command with it's implementation.
      * @throws DukeCommandException if the Command cannot be identified.
      */
-    public Command get(String key) throws DukeCommandException {
+    public static Command getCommand(String key) throws DukeCommandException {
         if (commands.containsKey(key)) {
             Command command = commands.get(key);
             return command;
@@ -57,6 +57,7 @@ public class CommandCentre {
         this.addEventCommand();
         this.addDeleteCommand();
         this.addFindCommand();
+        this.addAliasCommand();
     }
 
     private void addByeCommand() {
@@ -166,6 +167,20 @@ public class CommandCentre {
                 TaskList foundList = taskList.findTask(input.get()[0]);
                 return ui.showFound(foundList);
             }
+        });
+    }
+
+    private void addAliasCommand() {
+        commands.put("alias", new Command() {
+           public String execute(Optional<String[]> input) throws DukeException {
+               if (input.isEmpty()) {
+                   throw new DukeTaskException("The alias of the command is not specified");
+               }
+               String keyword = input.get()[0].split(" ")[0];
+               String alias = input.get()[0].split(" ")[1];
+               commands.put(alias, CommandCentre.getCommand(keyword));
+               return ui.showAddedAliasCommand(keyword, alias);
+           }
         });
     }
 }

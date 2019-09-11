@@ -48,7 +48,7 @@ public class Duke {
         while (!isExit) {
             String input = ui.readMessage();
             try {
-                Command command = commandCentre.get(Parser.parseCommand(input));
+                Command command = CommandCentre.getCommand(Parser.parseCommand(input));
                 ui.printMessage(command.execute(Parser.parseDescription(input)));
                 isExit = command.isExit();
             } catch (DukeException e) {
@@ -71,7 +71,7 @@ public class Duke {
             return null;
         } else {
             try {
-                Command command = commandCentre.get(Parser.parseCommand(input));
+                Command command = CommandCentre.getCommand(Parser.parseCommand(input));
                 isExit = command.isExit();
                 return command.execute(Parser.parseDescription(input));
             } catch (DukeException e) {

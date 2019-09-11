@@ -141,4 +141,15 @@ public class Ui {
         }
         return found;
     }
+
+    /**
+     * Returns the String representation of the alias that has been associated to the command.
+     *
+     * @param keyword the command keyword.
+     * @param alias the alias of the command.
+     * @return the String representation of the alias.
+     */
+    public String showAddedAliasCommand(String keyword, String alias) {
+        return String.format("%s has been added as an alias to the %s command.\n", alias, keyword);
+    }
 }

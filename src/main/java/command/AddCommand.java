@@ -57,7 +57,8 @@ public class AddCommand extends Command {
             output += ui.getBottomBorder();
             break;
         }
-        case "deadline": {// Create DeadLine object
+        case "deadline": {
+            // Create DeadLine object
             DeadLine d = new DeadLine(taskDescription, time);
             tasks.addTask(d);
 
@@ -73,7 +74,8 @@ public class AddCommand extends Command {
             output += ui.getBottomBorder();
             break;
         }
-        case "event": {// Create Event object
+        case "event": {
+            // Create Event object
             Event e = new Event(taskDescription, time);
             tasks.addTask(e);
 
@@ -88,7 +90,6 @@ public class AddCommand extends Command {
             output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
             output += ui.getBottomBorder();
             break;
-        }
         }
 
         return output;

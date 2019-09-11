@@ -112,4 +112,8 @@ public class Ui {
     public String showExitMessage() {
         return "Bye. Hope to see you again soon!\n";
     }
+
+    public String readCommand() {
+        return userCommandTaker.nextLine();
+    }
 }

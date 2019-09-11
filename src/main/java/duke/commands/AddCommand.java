@@ -54,7 +54,7 @@ public class AddCommand extends Command {
             case T: toAdd = new Todo(taskName); break;
             case D: toAdd = new Deadline(taskName, taskTime); break;
             case E: toAdd = new Event(taskName, taskTime); break;
-            default: throw new DukeException("The task type is invalid");
+            default: throw new DukeException("The task type is invalid.");
         }
         tl.addTask(toAdd);
         return ui.showAddMessage(toAdd, tl.getTotalNumber());

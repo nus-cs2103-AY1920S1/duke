@@ -1,10 +1,10 @@
 package utils;
 
+import command.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import command.*;
 
 /**
  * Parser object handles all input reading and prints the respective output.
@@ -60,7 +60,6 @@ public class Parser {
      * @return Command
      */
     public static Command parse(String fullCommand) {
-        assert (false) :"Assert is working fine";
         String[] arr = fullCommand.split(" ", 2);
         String keyCommand = arr[0].trim();
 
@@ -86,8 +85,8 @@ public class Parser {
                 if (arr.length != 2) {
                     return new InvalidCommand("Description for todo should not be empty!");
                 } else {
-                    String description = arr[1].trim();
-                    return new AddCommand(keyCommand, description);
+                    String todoDesc = arr[1].trim();
+                    return new AddCommand(keyCommand, todoDesc);
                 }
             case "deadline": {
 
@@ -114,7 +113,7 @@ public class Parser {
                 return new AddCommand(keyCommand, wordArr[0].trim(), formattedDate);
 
             }
-            case: "help": {
+            case "help": {
                 return new HelpCommand();
             }
             default:

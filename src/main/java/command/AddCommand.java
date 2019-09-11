@@ -1,22 +1,22 @@
 package command;
 
-import java.io.IOException;
-
-import utils.TaskList;
-import utils.Ui;
-import utils.Storage;
 import tasks.DeadLine;
 import tasks.Event;
 import tasks.ToDo;
+import utils.Storage;
+import utils.TaskList;
+import utils.Ui;
+
+import java.io.IOException;
 
 /**
  * AddCommand is a Command, specifically for todo, event and deadlines.
  */
 public class AddCommand extends Command {
 
-    String type;
-    String taskDescription;
-    String time;
+    private String type;
+    private String taskDescription;
+    private String time;
 
     /**
      * Constructor for AddCommand, for type of: event or deadlines.
@@ -90,6 +90,7 @@ public class AddCommand extends Command {
             output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
             output += ui.getBottomBorder();
             break;
+        }
         }
 
         return output;

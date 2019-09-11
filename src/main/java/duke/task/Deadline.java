@@ -44,16 +44,6 @@ public class Deadline extends Task {
         this.dueBy = Storage.convertStringToDateTime(dueBy);
     }
 
-//    /**
-//     * Converts the specified string to a LocalDateTime object.
-//     * @param dueBy The specified due date/time to be converted.
-//     * @return The LocalDateTime of the specified due date/time.
-//     */
-//    private LocalDateTime convertStringToDateTime(String dueBy) {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-//        return LocalDateTime.parse(dueBy, formatter);
-//    }
-
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");

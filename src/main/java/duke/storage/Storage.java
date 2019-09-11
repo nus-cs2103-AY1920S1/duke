@@ -55,13 +55,12 @@ public class Storage {
         Scanner sc = new Scanner(file);
 
         while (sc.hasNext()) {
-            String line = sc.nextLine(); // eg. T,0,read book
+            String line = sc.nextLine(); // eg. T,false,read book
             String[] taskDetails = line.split(",");
             // to separate the line into its different components
             // namely, the taskType, isDone boolean value, description and the deadline/event time and day
             String taskType = taskDetails[0];
-            int isDoneInt = Integer.parseInt(taskDetails[1]);
-            boolean isDone = isDoneInt == 0;
+            boolean isDone = Boolean.parseBoolean(taskDetails[1]);
 
             switch (taskType) {
             case "T":
@@ -123,7 +122,7 @@ public class Storage {
             Deadline deadline = (Deadline) task;
             LocalDateTime due = deadline.getDueBy();
             String dueAsString = convertDateTimeToString(due);
-            return String.format("%s,%b,%s,%s", "D", isDone, desc, dueAsString);
+            return String.format("%s,%d,%s,%s", "D", isDone, desc, dueAsString);
         } else {
             Event event = (Event) task;
             LocalDateTime when = event.getWhen();

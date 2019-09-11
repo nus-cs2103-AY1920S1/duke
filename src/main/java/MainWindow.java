@@ -57,7 +57,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     System.exit(0);
                 }
-            }, 1000);
+            }, 1000); // so that the bye message will be printed before the program terminates
         }
 
         userInput.clear();

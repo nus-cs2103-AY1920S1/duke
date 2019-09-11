@@ -23,34 +23,8 @@ public class Ui {
 
     }
 
-    /**
-     * Prints the hello message at the start of the program.
-     */
-    public void hello() {
-        String openingMessage = "\tHello! I'm Duke\n\tWhat can I do for you?\n";
-        System.out.println(openingMessage);
-    }
-
     public String getHelloMessage() {
         return "\tHello! I'm Duke\n\tWhat can I do for you?\n";
-    }
-
-    /**
-     * Takes in user input and passes it on to a Parser object to deal with the input.
-     */
-    public void takeInUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        Parser parser = new Parser();
-        while (scanner.hasNext()) {
-            String command = scanner.nextLine();
-            command = command.trim();
-
-            try {
-                parser.getResponseToCommand(command);
-            } catch (InvalidCommandException | MissingInputException | MissingDescriptionException e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 
     /**

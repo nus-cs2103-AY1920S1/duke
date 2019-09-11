@@ -28,14 +28,6 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke program.
-     */
-    public void run() {
-        ui.hello();
-        ui.takeInUserInput();
-    }
-
-    /**
      * Gets the appropriate response with the specified input/command given by the user.
      * @param input given by the user.
      * @return String the appropriate response to the user's input.hello
@@ -54,11 +46,6 @@ public class Duke {
 
     public String getHello() {
         return ui.getHelloMessage();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 
 }

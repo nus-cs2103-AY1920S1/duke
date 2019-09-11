@@ -51,22 +51,22 @@ public class Parser {
         case "done":
             String taskNumberString = commandWords[1];
             int taskNumber = Integer.parseInt(taskNumberString);
-            output = taskList.markAsDone(taskNumber);
+            output = taskList.getResponseToMarkAsDone(taskNumber);
             break;
         case "delete":
             String taskNumberString1 = commandWords[1];
             int taskNumber1 = Integer.parseInt(taskNumberString1);
-            output = taskList.deleteTask(taskNumber1);
+            output = taskList.getResponseToDeleteTask(taskNumber1);
             break;
         case "find":
-            output = taskList.findMatchingTasks(commandWords[1]);
+            output = taskList.getResponseToFindTask(commandWords[1]);
             break;
         case "todo":
             // Fallthrough
         case "deadline":
             // Fallthrough
         case "event":
-            output = addTask(command, commandType);
+            output = getResponseToAddTask(command, commandType);
             break;
         case "bye":
             output = this.ui.getByeResponse();
@@ -82,11 +82,13 @@ public class Parser {
      * Adds a task to the task list.
      * @param command The specified command given by the user.
      * @param taskType The type of the task that the user wants to add to the tasks list.
+     * @return the appropriate response to the user after the task is added.
      * @throws MissingDescriptionException if a description is missing for the task that the user is trying to create.
      * @throws MissingInputException if there are missing inputs when creating a Deadline or Event task, such as the
      *     deadline or event time and day.
      */
-    private String addTask(String command, String taskType) throws MissingDescriptionException, MissingInputException {
+    private String getResponseToAddTask(String command, String taskType) throws MissingDescriptionException,
+            MissingInputException {
         String fullDesc = command.substring(taskType.length());
         Task task = new Task();
 
@@ -145,7 +147,7 @@ public class Parser {
         }
 
         TaskList taskList = new TaskList();
-        return taskList.addTask(task);
+        return taskList.getResponseToAddTask(task);
     }
 
 }

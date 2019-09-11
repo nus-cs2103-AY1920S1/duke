@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Creates an event which will be added to the task list for reminders.
  */
@@ -33,6 +35,16 @@ public class Event extends Task {
 		String dateE = eventDate[1];
 		Event newEvent = new Event(taskE, dateE);
 		return newEvent;
+	}
+
+	public String execute(Event task, DukeWriteFile storage, TaskList tasks) throws IOException {
+		StringBuilder printTask = new StringBuilder();
+		printTask.append(Ui.BORDER + "\nGot it. I've added this task:\n");
+		printTask.append(task.toString() + "\n");
+		printTask.append("Now you have " + tasks.getCounter() + " tasks in the list.\n" + Ui.BORDER);
+		storage.appendToFile("D~" + task.getStatus() + "~" +
+				                task.getDescription() + "~" + task.getVenue() + "\n");
+		return printTask.toString();
 	}
 
 	/**

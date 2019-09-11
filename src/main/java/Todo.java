@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Creates a todo task which will be added to the task list.
  */
@@ -21,6 +23,16 @@ public class Todo extends Task {
 		String taskToDo = input.substring(5);
 		Todo newToDo = new Todo(taskToDo);
 		return newToDo;
+	}
+
+	public String execute(Todo task, DukeWriteFile storage, TaskList tasks) throws IOException {
+		StringBuilder printTask = new StringBuilder();
+		printTask.append(Ui.BORDER + "\nGot it. I've added this task:\n");
+		printTask.append(task.toString() + "\n");
+		printTask.append("Now you have " + tasks.getCounter() + " tasks in the list.\n" + Ui.BORDER);
+		storage.appendToFile("T~" + task.getStatus() + "~" +
+				                task.getDescription() + "\n");
+		return printTask.toString();
 	}
 
 	/**

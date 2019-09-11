@@ -54,7 +54,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+                isExit = c.checkExit();
             } catch (DukeException e) {
                 ui.showError(e);
             }

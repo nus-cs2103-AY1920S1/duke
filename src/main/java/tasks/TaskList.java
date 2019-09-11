@@ -35,7 +35,7 @@ public class TaskList {
     public TaskList(String currentList) {
         xs = new ArrayList<Task>();
         numOfTasks = 0;
-        integrateList(xs, currentList);
+        integrateList(currentList);
     }
 
     /**
@@ -94,6 +94,11 @@ public class TaskList {
      * @return Returns a String to be printed when the list is updated.
      */
     public String addTask(Task t) {
+        for (Task task : xs) {
+            if (task.toString().equals(t.toString())) {
+                return "Sorry, a similar tasks has been found in the list.";
+            }
+        }
         numOfTasks++;
         xs.add(t);
         return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.", t, numOfTasks);
@@ -104,7 +109,7 @@ public class TaskList {
      * @param num The index of the task in the list.
      * @return Returns a String to be printed when the task is marked as done.
      */
-    public String tickTask(int num) {
+    public String tickTask (int num) {
         xs.get(num - 1).markAsDone();
         return String.format("Nice! I've marked this task as done:\n%s", xs.get(num - 1));
     }
@@ -126,7 +131,7 @@ public class TaskList {
      * @return Returns a String representation of all the Task in the TaskList.
      */
     public String printTasks() {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list: ");
         for (int i = 1; i <= xs.size(); i++) {
             sb.append("\n" + String.format("%d.%s", i, xs.get(i - 1)));
         }
@@ -144,4 +149,40 @@ public class TaskList {
         }
         return sb.toString();
     }
+<<<<<<< Updated upstream
+=======
+
+    /**
+     * A method to process the data of previous tasking, and add them to the
+     * current TaskList.
+     * @param content Data to be processed.
+     */
+    private void integrateList (String content) {
+        Scanner s = new Scanner(content);
+        while (s.hasNextLine()) {
+            String text = s.nextLine();
+            String[] itemArr = text.split(" [|] ");
+            switch (itemArr[0]) {
+            case "T":
+                xs.add(new ToDos(itemArr[2], itemArr[1]));
+                numOfTasks++;
+                break;
+
+            case "D":
+                xs.add(new Deadlines(itemArr[2], itemArr[1], itemArr[3]));
+                numOfTasks++;
+                break;
+
+            case "E":
+                xs.add(new Event(itemArr[2], itemArr[1], itemArr[3]));
+                numOfTasks++;
+                break;
+
+            default:
+                break;
+            }
+        }
+        s.close();
+    }
+>>>>>>> Stashed changes
 }

@@ -39,6 +39,7 @@ public class DoneCommand extends Command {
             if (taskNum > sizeOfList || taskNum < 1) {
                 throw new InvalidDescriptionException("Wrong description");
             } else {
+                storage.writeToFile(task);
                 return ui.showText(task.tickTask(taskNum));
             }
         } else {

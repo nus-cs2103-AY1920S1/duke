@@ -16,20 +16,14 @@ import tasks.ToDos;
  * add tasks onto the current task list.
  */
 public class AddCommand extends Command {
-    /**
-     * The type of task, whether it is a ToDo, Event or Deadline task.
-     */
-    private String typeOfTask;
 
     /**
      * Constructs and initializes the attributes of a new AddCommand object.
-     * @param typeOfTask The type of AddCommand task to be added to the task list.
      * @param commandText The portion of text that contains the details of the task.
      */
-    public AddCommand(String typeOfTask, String commandText) {
+    public AddCommand(String commandText) {
         super();
         this.description = commandText;
-        this.typeOfTask = typeOfTask;
     }
 
     /**
@@ -42,26 +36,34 @@ public class AddCommand extends Command {
      *      an exception occurring in the running of the application.
      */
     public String execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-        switch (typeOfTask) {
+        String[] arrOfText = description.split(" ", 2);
+        if (arrOfText.length < 2 || arrOfText[1].matches("\\s*")) {
+            throw new InvalidDescriptionException("Wrong description");
+        }
+
+        switch (arrOfText[0]) {
         case "todo":
-            if (description.equals("")) {
-                throw new InvalidDescriptionException("Wrong description");
-            }
-            return ui.showText(task.addTask(new ToDos(description)));
+            String response = ui.showText(task.addTask(new ToDos(arrOfText[1])));
+            storage.writeToFile(task);
+            return response;
 
         case "deadline":
-            String[] input2 = description.trim().split("/by");
+            String[] input2 = arrOfText[1].trim().split("/by");
             if (input2.length != 2) {
                 throw new InvalidDescriptionException("Wrong description");
             }
-            return ui.showText(task.addTask(new Deadlines(input2[0], input2[1])));
+            String response2 = ui.showText(task.addTask(new Deadlines(input2[0], input2[1])));
+            storage.writeToFile(task);
+            return response2;
 
         case "event":
-            String[] input3 = description.trim().split("/at");
+            String[] input3 = arrOfText[1].trim().split("/at");
             if (input3.length != 2) {
                 throw new InvalidDescriptionException("Wrong description");
             }
-            return ui.showText(task.addTask(new Event(input3[0], input3[1])));
+            String response3 = ui.showText(task.addTask(new Event(input3[0], input3[1])));
+            storage.writeToFile(task);
+            return response3;
 
         default:
             return "";

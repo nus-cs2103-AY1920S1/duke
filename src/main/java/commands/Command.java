@@ -36,7 +36,7 @@ public abstract class Command {
      * the application.
      * @return returns a boolean, true if "bye" is called, false if it is not.
      */
-    public boolean isExit() {
+    public boolean checkExit() {
         return isExit;
     }
 

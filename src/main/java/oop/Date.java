@@ -75,7 +75,6 @@ public class Date {
      * @param time month information to be formatted.
      * @return The formatted time.
      */
-
     private String getTime(String time) {
         String timing = "";
         if (time.startsWith("0")) {

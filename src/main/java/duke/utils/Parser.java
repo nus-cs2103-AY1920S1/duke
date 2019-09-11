@@ -8,6 +8,7 @@ import duke.commands.AddCommand;
 import duke.commands.ListCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class Parser {
             return new DeleteCommand(sc.nextInt());
         case "find":
             return new FindCommand(sc.nextLine());
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException("Unrecognised command: " + command);
         }

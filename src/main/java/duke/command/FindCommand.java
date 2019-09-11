@@ -12,24 +12,22 @@ import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
     private static final Pattern PAT = Pattern.compile(" ");
-    String keyWord;
+    String keyWords;
 
-    public FindCommand(String fullCommand) throws DukeException {
+    public FindCommand(String commandContent) throws DukeException {
         super();
 
-        String[] fullCommandSplit = fullCommand.split(" ", 2);
-
-        if (fullCommandSplit.length < 2) {
+        if (commandContent.isEmpty()) {
             throw new DukeException("OOPS!!! The object to find cannot be empty.");
         }
 
-        keyWord = fullCommandSplit[1];
+        keyWords = commandContent;
     }
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        List<Task> foundTasks = PAT.splitAsStream(keyWord)
-                .map(x -> tasks.find(x))
+        List<Task> foundTasks = PAT.splitAsStream(keyWords)
+                .map(x -> tasks.findByKeyword(x))
                 .flatMap(x -> x.stream())
                 .distinct()
                 .collect(Collectors.toList());

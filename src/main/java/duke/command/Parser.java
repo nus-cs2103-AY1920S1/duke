@@ -47,27 +47,26 @@ public class Parser {
      * @param input  Command to be executed or Task to be created.
      * @throws DukeException  if Task has incomplete description.
      */
-    public void parseLineInput(String input) throws DukeException, IOException, ParseException {
+    public String parseLineInput(String input) throws DukeException, IOException, ParseException {
         String firstWord = input.split(" ")[0];
-        //ArrayList<Task> list = taskList.getList();
         if (firstWord.equals("bye")) {
-            ui.printByeMessage();
+            return new String("Bye. Hope to see you again soon!");
         } else if (firstWord.equals("list")) {
-            ui.printList(taskList.getList());
+            return ui.printList(this.taskList.getList());
         } else if (firstWord.equals("done")) {
             Integer taskNum = Integer.valueOf(input.substring(5));
             Task currTask = taskList.getTask(taskNum - 1);
             currTask.markAsDone();
-            ui.printTaskDone(currTask);
             storage.updateFile();
+            return ui.printTaskDone(currTask);
         } else if (firstWord.equals("todo")) {
             if (input.length() == 4) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             } else {
                 Task toDoTask = new Todo(input.substring(5));
-                ui.printToDoTask(toDoTask, taskList.getList());
                 taskList.addTask(toDoTask);
                 storage.appendToFile(toDoTask);
+                return ui.printToDoTask(toDoTask, this.taskList.getList());
             }
         } else if (firstWord.equals("deadline")) {
             if (input.length() == 8) {
@@ -77,8 +76,8 @@ public class Parser {
                 String description = input.split(" /by", 2)[0];
                 Task deadlineTask = new Deadline(description, time);
                 taskList.addTask(deadlineTask);
-                ui.printDeadlineTask(deadlineTask, taskList.getList());
                 storage.appendToFile(deadlineTask);
+                return ui.printDeadlineTask(deadlineTask, this.taskList.getList());
             }
         } else if (firstWord.equals("event")) {
             if (input.length() == 5) {
@@ -88,31 +87,34 @@ public class Parser {
                 String description = input.split(" /at", 2)[0];
                 Task eventTask = new Event(description, time);
                 taskList.addTask(eventTask);
-                ui.printEvenTask(eventTask, taskList.getList());
                 storage.appendToFile(eventTask);
+                return ui.printEventtTask(eventTask, this.taskList.getList());
             }
         } else if (firstWord.equals("delete")) {
             Integer index = Integer.valueOf(input.substring(7));
-            ui.printDeleteTask(taskList.getTask(index - 1), taskList.getList());
+            Task deletedTask = taskList.getTask(index - 1);
             taskList.deleteTask((int) index - 1);
             storage.updateFile();
+            return ui.printDeleteTask(deletedTask, this.taskList.getList());
         } else if (firstWord.equals("bye")) {
             ui.printByeMessage();
         } else if (firstWord.equals("find")) {
             String item = "(.*)" + input.split(" ", 2)[1] + "(.*)";
             ArrayList<Task> list = taskList.getList();
+            String message = "";
             for (int i = 0; i < list.size(); i++) {
                 String description = list.get(i).getDescription();
                 boolean isPresent = description.matches(item);
-                //System.out.println(description);
-                //System.out.println(item);
-                //System.out.println(isPresent);
                 if (isPresent) {
-                    System.out.println(list.get(i));
+                    message = message + list.get(i).toString() + "\n";
                 }
+            }
+            if (!message.equals("")) {
+                throw new DukeException ("Sorry we cannot find the task :(");
             }
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but i don't know what that means :-(");
         }
+        return "";
     }
 }

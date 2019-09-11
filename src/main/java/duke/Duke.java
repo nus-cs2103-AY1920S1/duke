@@ -1,6 +1,9 @@
 package duke;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+
 import duke.command.TaskList;
 import duke.command.Ui;
 import duke.command.Parser;
@@ -71,11 +74,11 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!");
-        Scene scene = new Scene(helloWorld);
-
-        stage.setScene(scene);
-        stage.show();
+//        Label helloWorld = new Label("Hello World!");
+//        Scene scene = new Scene(helloWorld);
+//
+//        stage.setScene(scene);
+//        stage.show();
 
         //Step 1. Setting up required components
 
@@ -94,10 +97,6 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
-
-        //Step 1. Formatting the window to look as expected.
-
-        //...
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
@@ -144,6 +143,7 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         //Part 3. Add functionality to handle user input.
+
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -151,6 +151,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
     }
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -175,9 +176,10 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+
     private void handleUserInput() {
-        String userText = new Label(userInput.getText()).toString();
-        String dukeText = new Label(getResponse(userInput.getText())).toString();
+        String userText = userInput.getText();
+        String dukeText = userInput.getText();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new Image(String.valueOf(user))),
                 DialogBox.getDukeDialog(dukeText, new Image(String.valueOf(duke)))
@@ -185,11 +187,38 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+
+    private TaskList getTaskList() {
+        return this.taskList;
+    }
+
+    private Ui getUi() {
+        return this.ui;
+    }
+
+    private Storage getStorage() {
+        return this.storage;
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) {
+        String response;
+        Duke duke = new Duke("tasks.txt");
+        Parser parser = new Parser(duke.getTaskList(), duke.getUi(), duke.getStorage());
+        try {
+            response = parser.parseLineInput(input);
+            return response;
+        } catch (DukeException e) {
+            response = e.getMessage();
+            return response;
+        } catch (ParseException e) {
+            response = e.getMessage();
+            return response;
+        } catch (IOException e) {
+            return e.getMessage();
+        }
     }
 }

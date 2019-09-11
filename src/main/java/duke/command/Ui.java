@@ -1,11 +1,8 @@
 package duke.command;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import duke.command.Parser;
+
 import duke.task.Task;
 import duke.DukeException;
 
@@ -48,10 +45,13 @@ public class Ui {
     /**
      * prints the message when a task is done.
      * @param task task that has just been marked as done.
+     * @return
      */
-    public void printTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("[" + "\u2713" + "] " + task.getDescription());
+    public String printTaskDone(Task task) {
+        String message;
+        message = "Nice! I've marked this task as done:";
+        message =  message + "[" + "\u2713" + "] " + task.getDescription();
+        return message;
     }
 
     /**
@@ -59,10 +59,12 @@ public class Ui {
      * @param task The task that is removed from the list.
      * @param list The list of Task where the task was from.
      */
-    public void printDeleteTask(Task task, ArrayList<Task> list) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + list.size() + " tasks in the list");
+    public String printDeleteTask(Task task, ArrayList<Task> list) {
+        String message;
+        message = "Noted. I've removed this task:\n";
+        message = message + task + "\n";
+        message = message + "Now you have " + list.size() + " tasks in the list";
+        return message;
     }
 
     /**
@@ -70,10 +72,12 @@ public class Ui {
      * @param task Todo task that is added to the list of Task.
      * @param list The list of task to which the todo task is added.
      */
-    public void printToDoTask(Task task, ArrayList<Task> list) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(" " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list");
+    public String printToDoTask(Task task, ArrayList<Task> list) {
+        String message;
+        message = "Got it. I've added this task:\n";
+        message = message + " " + task + "\n";
+        message = message + "Now you have " + list.size() + " tasks in the list";
+        return message;
     }
 
     /**
@@ -81,10 +85,12 @@ public class Ui {
      * @param task Event task that is added to the list of Task.
      * @param list The list of task to which the event task is added.
      */
-    public void printEvenTask(Task task, ArrayList<Task> list) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(" " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    public String printEventtTask(Task task, ArrayList<Task> list) {
+        String message;
+        message = "Got it. I've added this task:\n";
+        message = message + " " + task + "\n";
+        message = message + "Now you have " + list.size() + " tasks in the list.";
+        return message;
     }
 
     /**
@@ -92,44 +98,51 @@ public class Ui {
      * @param task Deadline task that is added to the list of Task.
      * @param list The list of task to which the deadline task is added.
      */
-    public void printDeadlineTask(Task task, ArrayList<Task> list) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(" " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list.");
+    public String printDeadlineTask(Task task, ArrayList<Task> list) {
+        String message;
+        message = "Got it. I've added this task: \n";
+        message = message + " " + task + "\n";
+        message = message + "Now you have " + list.size() + " tasks in the list.";
+        return message;
     }
 
     /**
      * prints all the task that is in the list of Task.
      * @param list The list of task in which all the tasks are to be printed.
      */
-    public void printList(ArrayList<Task> list) {
+    public String printList(ArrayList<Task> list) {
+        String message;
         if (list.size() == 0) {
-            System.out.println("Nothing added yet");
+            message = "Nothing added yet";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            message = "Here are the tasks in your list:";
             for (int i = 1; i <= list.size(); i++) {
-                System.out.println("" + i + "." + list.get(i - 1));
+                message = message + "\n" + i + "." + list.get(i - 1);
             }
         }
+        return message;
     }
 
     /**
      * prints a "bye" message when the programme terminates.
      */
-    public void printByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printByeMessage() {
+        String message = "Bye. Hope to see you again soon!";
+        return message;
     }
 
     /**
      * prints a "welcome" message when the programme starts.
      */
-    public void printWelcomeMessage() {
+    public static String printWelcomeMessage() {
+        String message;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+        message = "Hello from\n" + logo + "\n";
+        message = message + "What can I do for you?";
+        return message;
     }
 }

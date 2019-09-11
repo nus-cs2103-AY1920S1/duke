@@ -48,6 +48,13 @@ public class TaskRepo implements IRepository<Task> {
     }
 
     @Override
+    public void insert(int id, Task entity) throws DukeIoException {
+        assert entity != null;
+        tasks.add(id, entity);
+        storage.write(tasks);
+    }
+
+    @Override
     public void update(int id, Task entity) throws DukeIoException {
         assert entity != null;
         tasks.set(id, entity);
@@ -57,6 +64,12 @@ public class TaskRepo implements IRepository<Task> {
     @Override
     public void delete(int id) throws DukeIoException {
         tasks.remove(id);
+        storage.write(tasks);
+    }
+
+    @Override
+    public void delete(Task task) throws DukeIoException {
+        tasks.remove(task);
         storage.write(tasks);
     }
 }

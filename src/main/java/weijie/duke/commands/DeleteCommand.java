@@ -7,9 +7,12 @@ import weijie.duke.repos.IRepository;
 import weijie.duke.responses.TaskResponse;
 
 import java.util.Collections;
+import java.util.Optional;
 
 public class DeleteCommand implements ITaskCommand {
     private IRepository<Task> repo;
+    private Task deletedTask;
+    private int deletedTaskIndex;
 
     public DeleteCommand(IRepository<Task> repo) {
         this.repo = repo;
@@ -30,17 +33,37 @@ public class DeleteCommand implements ITaskCommand {
                     new DukeInvalidInputException("☹ OOPS!!! Task with that number does not exist!"));
         }
 
-        Task deletedTask = repo.get(id);
+        Task toBeDeleted = repo.get(id);
         try {
             repo.delete(id);
+            deletedTask = toBeDeleted;
+            deletedTaskIndex = id;
         } catch (DukeIoException e) {
             return new TaskResponse(e);
         }
 
         int size = repo.getSize();
 
-        String responseFormat = "Noted. I've removed this task:\n  " + deletedTask.getDescription()
+        String responseFormat = "Noted. I've removed this task:\n  " + toBeDeleted.getDescription()
                 + "\nNow you have " + size + " tasks in the list.";
-        return new TaskResponse(responseFormat, Collections.singletonList(deletedTask));
+        return new TaskResponse(responseFormat, Collections.singletonList(toBeDeleted));
+    }
+
+    @Override
+    public Optional<UndoingAction> getUndoingAction() {
+        UndoingAction undoingAction = () -> {
+            assert deletedTask != null;
+
+            try {
+                repo.insert(deletedTaskIndex, deletedTask);
+                return new TaskResponse("Undid delete command.\nThis task was restored:\n  %s",
+                        Collections.singletonList(deletedTask));
+
+            } catch (DukeIoException e) {
+                return new TaskResponse(e);
+            }
+        };
+
+        return Optional.of(undoingAction);
     }
 }

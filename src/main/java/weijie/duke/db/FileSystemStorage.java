@@ -28,7 +28,6 @@ public class FileSystemStorage implements ITaskStorage {
      */
     public FileSystemStorage(String path) throws DukeIoException {
         file = new File(path);
-
         if (!file.exists()) {
             createDirWithFile(path);
         }
@@ -49,8 +48,10 @@ public class FileSystemStorage implements ITaskStorage {
             return new ArrayList<>(Arrays.asList(tasks));
 
         } catch (FileNotFoundException e) {
-            throw new DukeIoException("☹ OOPS!!! Invalid file file provided.");
+            e.printStackTrace();
+            throw new DukeIoException("☹ OOPS!!! Invalid file provided.");
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
             throw new DukeIoException("☹ OOPS!!! Unexpected IO error has occurred!");
         }
     }
@@ -80,9 +81,12 @@ public class FileSystemStorage implements ITaskStorage {
         boolean createdDirs = false;
 
         if (lastSlashPos >= 0) {
+            System.out.println("1");
             File directory = new File(path.substring(0, lastSlashPos));
             if (!directory.exists()) {
                 createdDirs = directory.mkdirs();
+            } else {
+                write(new ArrayList<>());
             }
         }
 

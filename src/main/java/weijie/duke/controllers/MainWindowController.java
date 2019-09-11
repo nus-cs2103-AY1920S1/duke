@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import weijie.duke.commands.CommandHistory;
 import weijie.duke.commands.ITaskCommand;
 import weijie.duke.commands.TaskCommandFactory;
 import weijie.duke.exceptions.DukeException;
@@ -29,6 +30,7 @@ public class MainWindowController extends AnchorPane {
     private TextField userInput;
 
     private final TaskCommandFactory factory;
+    private final CommandHistory commandHistory;
     private final Image userImage;
     private final Image dukeImage;
 
@@ -37,9 +39,11 @@ public class MainWindowController extends AnchorPane {
      *     Constructor for MainWindowController.
      * </p>
      * @param factory TaskCommandFactory dependency to create ITaskCommands.
+     * @param commandHistory dependency that manages the command history.
      */
-    public MainWindowController(TaskCommandFactory factory) {
+    public MainWindowController(TaskCommandFactory factory, CommandHistory commandHistory) {
         this.factory = factory;
+        this.commandHistory = commandHistory;
         this.userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
         this.dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
     }

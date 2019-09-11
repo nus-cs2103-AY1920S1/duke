@@ -23,6 +23,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public void updateAt(String newAt) {
+        this.at = newAt;
+    }
+
     /**
      * Returns a string representatio of the task to be stored in a local file.
      *

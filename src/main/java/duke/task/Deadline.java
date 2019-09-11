@@ -23,6 +23,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public void updateBy(String newBy) {
+        this.by = newBy;
+    }
+
     /**
      * Returns a string representatio of the task to be stored in a local file.
      *

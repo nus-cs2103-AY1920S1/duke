@@ -2,9 +2,10 @@ package duke.command;
 
 import duke.core.DukeException;
 import duke.core.Storage;
-import duke.task.Task;
 import duke.core.TaskList;
 import duke.core.Ui;
+
+import duke.task.Task;
 
 /**
  * Represents a command to add a task. The <code>AddCommand</code> class 

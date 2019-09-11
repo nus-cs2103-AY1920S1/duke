@@ -1,6 +1,9 @@
 package duke.core;
 
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -49,11 +52,11 @@ public class TaskList {
      * @return The <code>Task</code> in the list with this specific index.
      */
     public Task getTask(int i) throws DukeException {
-        assert i >= 0 : "Task index cannot be negative";
+        assert i >= 1 : "Task ID starts from 1";
         try {
-            return tasks.get(i);
+            return tasks.get(i - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(" \u2639  OOPS!!! The task does not exist.");
+            throw new DukeException(" \u2639  OOPS!!! The task does not exist :-(");
         }
     }
 
@@ -72,8 +75,24 @@ public class TaskList {
      * @param i The index of the <code>Task</code> to be deleted.
      */
     public void removeTask(int i) {
-        assert i >= 0 : "Task index cannot be negative";
-        tasks.remove(i);
+        assert i >= 1 : "Task ID starts from 1";
+            tasks.remove(i - 1);
+    }
+
+    public void updateTask(int i, String attribute, String newValue) throws DukeException {
+        assert i >= 1 : "Task ID starts from 1";
+        Task t = this.getTask(i);
+        if (attribute.equals("description")) {
+            t.updateDescription(newValue);
+        } else if (attribute.equals("time")) {
+            if (t instanceof Deadline) {
+                ((Deadline) t).updateBy(newValue);
+            } else if (t instanceof Event) {
+                ((Event) t).updateAt(newValue);
+            } else {
+                throw new DukeException(" \u2639  OOPS!!! Todo tasks do not have a time attribute.");
+            }
+        }
     }
 
     /**

@@ -7,6 +7,8 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UpdateCommand;
+
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Deadline;
@@ -15,6 +17,7 @@ import duke.task.Event;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -78,7 +81,9 @@ public class Parser {
         String minuteString = minute == 0 ? "" : ":" + minute;
         if (hour == 0) {
             return 12 + minuteString + "am";
-        } else if (hour <= 12) {
+        } else if (hour == 12) {
+            return 12 + minuteString + "pm";
+        } else if (hour < 12) {
             return hour + minuteString + "am";
         } else {
             return hour - 12 + minuteString + "pm";
@@ -152,9 +157,11 @@ public class Parser {
         boolean isListCommand = fw.equals("list");
         boolean isExitCommand = fw.equals("bye");
         boolean isFindCommand = fw.equals("find");
+        boolean isUpdateCommand = fw.equals("update");
 
         boolean isValidCommand = isDoneCommand || isTodoCommand || isDeadlineCommand || isEventCommand
-                                || isDeleteCommand || isListCommand || isExitCommand || isFindCommand;
+                                || isDeleteCommand || isListCommand || isExitCommand || isFindCommand
+                                || isUpdateCommand;
         boolean isAddCommand = isTodoCommand || isDeadlineCommand || isEventCommand;
         boolean isMissingDetail = words.length < 2;
         boolean DeadlineMissingTime = isDeadlineCommand && findIdx(words, "/by") == -1;
@@ -167,13 +174,21 @@ public class Parser {
             throw new DukeException(" \u2639  OOPS!!! The description of a " + fw + " cannot be empty.");
         }
         if (DeadlineMissingTime || EventMissingTime) {
-            throw new DukeException(" \u2639  OOPS!!! The time of a " + fw + " cannot be empty.");
+            throw new DukeException(" \u2639  OOPS!!! The time of a(n) " + fw + " cannot be empty.");
         }
-        if ((isDoneCommand || isDeleteCommand) && isMissingDetail) {
-            throw new DukeException(" \u2639  OOPS!!! The task number of a " + fw + " command cannot be empty.");
+        if ((isDoneCommand || isDeleteCommand || isUpdateCommand) && isMissingDetail) {
+            throw new DukeException(" \u2639  OOPS!!! The task number of a(n) " + fw + " command cannot be empty.");
         }
-        if ((isDoneCommand || isDeleteCommand) && !isValidTaskId(words[1])) {
+        if ((isDoneCommand || isDeleteCommand || isUpdateCommand) && !isValidTaskId(words[1])) {
             throw new DukeException(" \u2639  OOPS!!! The task number of the " + fw + " command is invalid.");
+        }
+        if (isUpdateCommand && words.length < 4) {
+            throw new DukeException(" \u2639  OOPS!!! The update command is missing further details. "
+                    + "It should have 4 components.");
+        }
+        if (isUpdateCommand && !(words[2].equals("description") || words[2].equals("time"))) {
+            throw new DukeException(" \u2639  OOPS!!! The attribute of an update command can only be" +
+                    " \"description\" or \"time\".");
         }
         if (isFindCommand && isMissingDetail) {
             throw new DukeException(" \u2639  OOPS!!! The keyword of a " + fw + " command cannot be empty.");
@@ -194,7 +209,8 @@ public class Parser {
         String fw = words[0];
         assert fw.equals("bye") || fw.equals("done") || fw.equals("delete")
                 || fw.equals("list") || fw.equals("find") || fw.equals("todo")
-                || fw.equals("event") || fw.equals("deadline") : "Invalid user input";
+                || fw.equals("event") || fw.equals("deadline") || fw.equals("update")
+                : "Invalid user input";
         switch (fw) {
         case "bye":
             return new ExitCommand();
@@ -206,6 +222,14 @@ public class Parser {
             return new ListCommand();
         case "find":
             return new FindCommand(words[1]);
+        case "update":
+            String newValue = subString(words, 3, words.length);
+            if (words[2].equals("description")) {
+                return new UpdateCommand(Integer.parseInt(words[1]), words[2], newValue);
+            } else {
+                assert words[2].equals("time") : "Invalid attribute type for an update command";
+                return new UpdateCommand(Integer.parseInt(words[1]), words[2], parseDateTime(newValue));
+            }
         default:
             assert fw.equals("todo") || fw.equals("event") || fw.equals("deadline")
                     : "First word should be todo / deadline / event";

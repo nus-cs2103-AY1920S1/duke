@@ -1,6 +1,7 @@
 package duke.core;
 
 import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -52,7 +53,7 @@ public class Ui {
     }
 
     public String showLoadingSuccessGui() {
-        return "Past tasks loaded successsfully :-)";
+        return "Past tasks loaded successfully :-)";
     }
 
     /**
@@ -80,12 +81,12 @@ public class Ui {
      */
     public void addedTask(Task t, int size) {
         System.out.println("Got it. I've added this task: \n  " + t + "\nNow you have "
-                + size + " tasks in the list.");
+                + size + " task(s) in the list.");
     }
 
     public String addedTaskGui(Task t, int size) {
         return "Got it. I've added this task: \n  " + t + "\nNow you have "
-                + size + " tasks in the list.";
+                + size + " task(s) in the list.";
     }
 
     /**
@@ -109,12 +110,22 @@ public class Ui {
      */
     public void removedTask(Task t, int size) {
         System.out.println("Noted. I've removed this task: \n  " + t + "\nNow you have "
-                + size + " tasks in the list.");
+                + size + " task(s) in the list.");
     }
 
     public String removedTaskGui(Task t, int size) {
         return "Noted. I've removed this task: \n  " + t + "\nNow you have "
-                + size + " tasks in the list.";
+                + size + " task(s) in the list.";
+    }
+
+    public void updatedTask(Task t, int size) {
+        System.out.println("Ok! I've updated this task: \n  " + t + "\nNow you have "
+                + size + " task(s) in the list.");
+    }
+
+    public String updatedTaskGui(Task t, int size) {
+        return "Ok! I've updated this task: \n  " + t + "\nNow you have "
+                + size + " task(s) in the list.";
     }
 
     /**

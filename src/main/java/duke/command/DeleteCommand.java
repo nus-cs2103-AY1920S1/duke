@@ -2,9 +2,10 @@ package duke.command;
 
 import duke.core.DukeException;
 import duke.core.Storage;
-import duke.task.Task;
 import duke.core.TaskList;
 import duke.core.Ui;
+
+import duke.task.Task;
 
 /**
  * Represents a command to delete a task. The <code>DeleteCommand</code> class 
@@ -48,16 +49,16 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task t = tasks.getTask(taskId - 1);
-        tasks.removeTask(taskId - 1);
+        Task t = tasks.getTask(taskId);
+        tasks.removeTask(taskId);
         ui.removedTask(t, tasks.getSize());
         storage.save(tasks);
     }
 
     @Override
     public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task t = tasks.getTask(taskId - 1);
-        tasks.removeTask(taskId - 1);
+        Task t = tasks.getTask(taskId);
+        tasks.removeTask(taskId);
         storage.save(tasks);
         return ui.removedTaskGui(t, tasks.getSize());
     }

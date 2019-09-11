@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.core.Storage;
 import duke.core.TaskList;
 import duke.core.Ui;
-import duke.core.Storage;
 
 /**
  * Represents a command to search a keyword. The <code>FindCommand</code> class

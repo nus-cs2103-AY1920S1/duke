@@ -1,7 +1,10 @@
 package duke.command;
 
 import duke.storage.Storage;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
+
+import java.util.LinkedList;
 
 public class SortCommand extends Command {
 
@@ -25,18 +28,19 @@ public class SortCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) {
         StringBuilder sb = new StringBuilder("Sorted list by " + way + ":\n");
+        LinkedList<Task> t = new LinkedList<>();
         switch (way) {
         case ("name"):
-            tasks.sortByName().forEach(x ->
-                    sb.append(tasks.getList().indexOf(x) + 1).append(". ").append(x).append("\n"));
+            t = tasks.sortByName();
             break;
         case ("date"):
-            tasks.sortByDate().forEach(x ->
-                    sb.append(tasks.getList().indexOf(x) + 1).append(". ").append(x).append("\n"));
+            t = tasks.sortByDate();
             break;
         default:
             break;
         }
+        t.forEach(x ->
+                sb.append(tasks.getList().indexOf(x) + 1).append(". ").append(x).append("\n"));
         return sb.toString();
     }
 

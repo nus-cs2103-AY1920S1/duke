@@ -39,7 +39,7 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " \n(from: "
                 + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(start) + " \n to:  "
-                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(end) + ")\n";
+                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(end) + ")";
     }
 
     /**

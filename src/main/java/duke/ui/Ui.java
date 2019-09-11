@@ -8,30 +8,26 @@ public class Ui {
      * Initialises a Ui.
      */
     public Ui() {
-
     }
 
     /**
      * Prints out the logo and welcome message.
+     * @return The welcome string.
      */
-    public void showWelcome() {
-        this.showLine();
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
-        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?\n");
-        this.showLine();
-    }
-
-    /**
-     * Prints out a horizontal line.
-     */
-    public void showLine() {
-        String line = "____________________________________________________________";
-        System.out.println(line);
+    public String showWelcome() {
+        String s = " __    _  _   _  __  ___    \n"
+                + "| _\\  | || | | |/ / | __|   \n"
+                + "| v | | \\/ | |   <  | _|    \n"
+                + "|__/ \\__/  |_|\\_\\|___|   \n";
+        String x = " _                   __    \n"
+                + "|  \\ |    | |__/ |__     \n"
+                + "|__/\\__/ |   \\ |__    \n"
+                + "                       \n";
+        String a = " __                   __    \n"
+                + "|   \\ |     | |__/ |__     \n"
+                + "|__/ \\__/  |  \\  |__    \n"
+                + "                       \n";
+        return s + "Hello! I'm Duke. \nWhat can I do for you?\n";
     }
 
     /**

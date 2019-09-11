@@ -27,11 +27,16 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
 
         // Print all existing items in the list
-        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
+        boolean hasMatching = false;
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         for (Task x : tasks.getList()) {
             if (x.toString().toLowerCase().contains(keyword)) {
+                hasMatching = true;
                 sb.append(tasks.getList().indexOf(x) + 1).append(". ").append(x).append("\n");
             }
+        }
+        if (!hasMatching) {
+            sb = new StringBuilder("No matching tasks found.");
         }
         return sb.toString();
     }

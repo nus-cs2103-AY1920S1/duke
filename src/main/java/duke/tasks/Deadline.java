@@ -36,7 +36,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + "\n(by: "
-                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(date) + ")\n";
+                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(date) + ")";
     }
 
     /**

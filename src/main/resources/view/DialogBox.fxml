@@ -11,10 +11,14 @@
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
     </padding>
-    <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" text="Label"
-           textAlignment="JUSTIFY" wrapText="true" HBox.hgrow="ALWAYS">
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
+    <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308"
+           minHeight="-Infinity" style="-fx-line-spacing: 0.5em;" text="Label" textAlignment="JUSTIFY"
+           wrapText="true" HBox.hgrow="ALWAYS">
         <font>
-            <Font name="Chalkboard" size="13.0"/>
+            <Font name="Lucida Grande" size="14.0"/>
         </font>
         <HBox.margin>
             <Insets/>
@@ -23,5 +27,9 @@
             <Insets bottom="2.0" left="3.0" right="3.0" top="2.0"/>
         </padding>
     </Label>
-    <ImageView fx:id="displayPicture" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+    <ImageView fx:id="displayPicture" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+        <HBox.margin>
+            <Insets/>
+        </HBox.margin>
+    </ImageView>
 </fx:root>

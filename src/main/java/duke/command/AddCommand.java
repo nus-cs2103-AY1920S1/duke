@@ -22,8 +22,8 @@ public class AddCommand extends Command {
     /**
      * Initialises an AddCommand.
      *
-     * @param type        The type of AddCommand
-     * @param description The description of the command
+     * @param type        The type of AddCommand.
+     * @param description The description of the command.
      * @throws DukeException In the event of empty descriptions/invalid commands/ invalid command formats.
      */
     public AddCommand(String type, String[] description) throws DukeException {

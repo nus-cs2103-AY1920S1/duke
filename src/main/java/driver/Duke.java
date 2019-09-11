@@ -4,17 +4,11 @@ package driver;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
-
 import response.ErrorResponse;
 import response.ExitResponse;
-import response.Response;
 import response.StandardResponse;
 import task.TaskList;
-import command.HelloCommand;
-import command.Command;
-import command.TextFormatter;
-import command.ByeCommand;
+
 
 /**
  *

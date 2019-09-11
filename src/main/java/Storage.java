@@ -49,6 +49,7 @@ public class Storage {
                 }
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

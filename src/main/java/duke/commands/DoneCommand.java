@@ -37,8 +37,8 @@ public class DoneCommand extends Command {
         ui.addSentence("Nice! I've marked this task as done: ");
         ui.addSentence("\t" + t);
 
-        //Parent method invoked to save TaskList
-        super.execute(ui, storage, allTasks);
+        //Save TaskList
+        storage.save(allTasks);
         return ui.getResponse();
     }
 }

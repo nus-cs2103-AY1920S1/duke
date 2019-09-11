@@ -7,16 +7,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import duke.exceptions.DukeException;
 import duke.commands.Command;
-import duke.commands.ByeCommand;
+import duke.commands.SaveCommand;
 
 import java.util.ArrayList;
 
 public class ParserTest {
     @Test
-    public void testParse_Bye_ByeCommand() {
+    public void testParse_Save_SaveCommand() {
         try {
-            Command c = Parser.parse("bye");
-            assertTrue(c instanceof ByeCommand);
+            Command c = Parser.parse("save");
+            assertTrue(c instanceof SaveCommand);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             fail();

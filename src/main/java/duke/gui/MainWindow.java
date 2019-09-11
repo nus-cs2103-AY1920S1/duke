@@ -1,5 +1,6 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
 import duke.exceptions.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -49,8 +50,8 @@ public class MainWindow extends AnchorPane {
             String response = this.duke.getResponse(input);
             assert response.length() != 0 : "Duke has no response (invalid behaviour)";
             this.dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, this.userImage),
-                    DialogBox.getDukeDialog(response, this.dukeImage)
+                    new UserDialogBox(input, this.userImage),
+                    new DukeDialogBox(response, this.dukeImage)
             );
             this.userInput.clear();
         } catch (DukeException e) {
@@ -68,7 +69,7 @@ public class MainWindow extends AnchorPane {
     private void handleError(String errorMsg) {
         assert errorMsg.length() != 0 : "Duke error message cannot be blank";
         this.dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(errorMsg, this.dukeImage));
+                new DukeDialogBox(errorMsg, this.dukeImage));
         this.userInput.clear();
     }
 }

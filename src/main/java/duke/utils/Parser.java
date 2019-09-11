@@ -3,7 +3,7 @@ package duke.utils;
 import duke.exceptions.DukeException;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
-import duke.commands.ByeCommand;
+import duke.commands.SaveCommand;
 import duke.commands.AddCommand;
 import duke.commands.ListCommand;
 import duke.commands.DoneCommand;
@@ -30,8 +30,8 @@ public class Parser {
         Scanner sc = new Scanner(fullCommand);
         String command = sc.next();
         switch (command.toLowerCase()) {
-        case "bye":
-            return new ByeCommand();
+        case "save":
+            return new SaveCommand();
         case "list":
             return new ListCommand();
         case "todo":

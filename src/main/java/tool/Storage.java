@@ -83,17 +83,15 @@ public class Storage {
      * Saves the latest task in the .txt file
      * @param Task t
      */
-    public Boolean save(Task t) {
+    public void save(Task t) {
         try {
             this.fw.append(t.storageString() + System.lineSeparator());
-            return true;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
-    public Boolean delete(int i) {
+    public void delete(int i) {
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
@@ -110,10 +108,8 @@ public class Storage {
             ff.close();
             Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("src/main/java/data/temp.txt"));
-            return true;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
@@ -122,7 +118,7 @@ public class Storage {
      * @param t
      * @param index
      */
-    public Boolean done(Task t, int index) {
+    public void done(Task t, int index) {
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
@@ -140,14 +136,12 @@ public class Storage {
             ff.close();
             Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get("src/main/java/data/duke.txt"), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("src/main/java/data/temp.txt"));
-            return true;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
-    public Boolean close(TaskList tasks) {
+    public void close(TaskList tasks) {
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
@@ -160,10 +154,8 @@ public class Storage {
             ff.close();
             Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("src/main/java/data/temp.txt"));
-            return true;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
     }
 }

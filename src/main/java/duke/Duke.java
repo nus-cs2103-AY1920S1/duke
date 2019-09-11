@@ -34,29 +34,6 @@ public class Duke {
         }
     }
 
-    /**
-     * run() method loops the functions of Duke. Starts Duke by printing the logo then get an input. Input
-     * gets passed into a Parser object which gives an Integer result. That including the original input
-     * string gets passed into a TaskList object that returns the resultant List of tasks. That gets written
-     * onto disk with a Storage object. It loops until input is "bye".
-     */
-    public void run() {
-        ui.printLogo();
-        String input;
-        do {
-            input = ui.getInput();
-            Command command = new Command(parser.getCommand(input), input);
-            Command result = new Command();
-            try {
-                result = taskList.doCommand(command);
-                ui.printOutput(result.getOutput());
-                storage.writeDuke(result.getTaskList());
-            } catch (DukeException | IOException ex) {
-                ui.printError(ex);
-            }
-        } while (!input.contains("bye"));
-    }
-
     public String getResponse(String input) {
         Command command = new Command(parser.getCommand(input), input);
         Command result = new Command();
@@ -68,8 +45,4 @@ public class Duke {
         }
         return result.getOutput();
     }
-    /*
-    public static void main(String[] args) {
-        new Duke("resources/data/duke.txt").run();
-    }*/
 }

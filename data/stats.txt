@@ -1,6 +1,6 @@
 statistic | integerValue
-totalCommandsExecuted  : 12
-totalTasksDeleted  : 4
-totalTodosCompleted  : 13
-totalDeadlinesCompleted  : 14
-totalEventsCompleted  : 15
+totalCommandsExecuted  : 0
+totalTasksDeleted  : 0
+totalTodosCompleted  : 0
+totalDeadlinesCompleted  : 0
+totalEventsCompleted  : 0

@@ -33,7 +33,7 @@ public class Duke {
     private Storage taskStorage;
     private Storage statStorage;
     private TaskList tasks;
-    private Statistic stat;
+    private Statistic stats;
     private CommandLineUi cli;
     private GraphicalUi gui;
 
@@ -152,7 +152,7 @@ public class Duke {
             tasks = new TaskList(this.taskStorage.loadTasks());
 
             // Loads the stats data from txt file.
-            stat = new Statistic(this.statStorage.loadStats());
+            stats = new Statistic(this.statStorage.loadStats());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (DukeException e){
@@ -217,14 +217,17 @@ public class Duke {
             System.out.println(findRoutine(cli, tasks, fullCommand));
             break;
         case("bye"):
-            System.out.println(byeRoutineCli(cli, tasks, taskStorage, stat, statStorage));
+            System.out.println(byeRoutineCli(cli, tasks, taskStorage, stats, statStorage));
             return true;
         case("stats"):
             String statCommandType = Parser.parseStatCommand(fullCommand);
 
             switch(statCommandType){
             case ("all"):
-                System.out.println(cli.getAllStats(stat));
+                System.out.println(getAllStatsRoutine(cli, stats));
+                break;
+            case ("reset"):
+                System.out.println(resetStatsRoutine(cli, stats));
                 break;
             default:
                 unknownCommandRoutine();
@@ -485,6 +488,14 @@ public class Duke {
         new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
     }
 
+    public String resetStatsRoutine(Ui ui, Statistic stats) {
+        stats.resetStats();
+        return ui.getResetStatSequence(stats);
+    }
+
+    public String getAllStatsRoutine(Ui ui, Statistic stats) {
+        return ui.getAllStatSequence(stats);
+    }
 
     /**
      * possibleTasks  is an enumeration of the constant, pre-defined, recognizable commands.

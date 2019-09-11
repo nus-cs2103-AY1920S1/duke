@@ -24,7 +24,13 @@ public class Statistic {
          totalEventsCompleted = map.get("totalEventsCompleted");
     }
 
-
+    public void resetStats(){
+        totalCommandsExecuted = 0;
+        totalTasksDeleted = 0;
+        totalTodosCompleted = 0;
+        totalDeadlinesCompleted = 0;
+        totalEventsCompleted = 0;
+    }
 
     public int getTotalCommandsExecuted() {
         return totalCommandsExecuted;

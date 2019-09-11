@@ -158,7 +158,7 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
-    public String getAllStats(Statistic stat) {
+    public String getAllStatSequence(Statistic stat) {
         String output = "\n     Listing all statistics:"
                 + "\n     Total Commands Executed:    " + stat.getTotalCommandsExecuted()
                 + "\n     Total Tasks Deleted:        " + stat.getTotalTasksDeleted()
@@ -166,6 +166,12 @@ public class CommandLineUi extends Ui {
                 + "\n     Total Deadlines Completed:  " + stat.getTotalDeadlinesCompleted()
                 + "\n     Total Events Completed:     " + stat.getTotalEventsCompleted()
                 + "\n" + underscore;
+        return output;
+    }
+
+    public String getResetStatSequence(Statistic stat) {
+        String output = "\n     All statistics have been reset";
+        output += getAllStatSequence(stat);
         return output;
     }
 }

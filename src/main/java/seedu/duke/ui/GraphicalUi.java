@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.statistic.Statistic;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -163,4 +164,23 @@ public class GraphicalUi extends Ui {
                 + numOfTaskRemaining + " tasks in the list.\n";
         return output;
     }
+
+    public String getAllStatSequence(Statistic stat) {
+        String output = "Listing all statistics:"
+                + "Total Commands Executed:    " + stat.getTotalCommandsExecuted()
+                + "Total Tasks Deleted:        " + stat.getTotalTasksDeleted()
+                + "Total To-Dos Completed:     " + stat.getTotalTodosCompleted()
+                + "Total Deadlines Completed:  " + stat.getTotalDeadlinesCompleted()
+                + "Total Events Completed:     " + stat.getTotalEventsCompleted()
+                + "\n";
+        return output;
+    }
+
+    public String getResetStatSequence(Statistic stat) {
+        String output = "All statistics have been reset\n";
+        output += getAllStatSequence(stat);
+        return output;
+    }
+
+
 }

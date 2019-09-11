@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    
-    public TaskList(ArrayList<Task> tasks){
+    private Ui ui;
+
+    public TaskList(ArrayList<Task> tasks, Ui ui){
         this.tasks = tasks;
+        this.ui = ui;
     }
     public TaskList(){
         this.tasks = new ArrayList<Task>();
@@ -19,9 +21,31 @@ public class TaskList {
     public Task get(int i){
         return tasks.get(i);
     }
-    public void remove(int i){
-        tasks.remove(i);
+    public void addTodo(String description){
+        tasks.add(new Todo(description));
     }
+    public void addEvent(String description, DateTime datetime){
+        Task current = new Event(description, datetime);
+        tasks.add(current);
+        ui.printMsg(current, tasks.size());
+    }
+    public void addDeadline(String description, DateTime datetime){
+        Task current = new Deadline(description, datetime);
+        tasks.add(current);
+        ui.printMsg(current, tasks.size());
+    }   
+    public void delete(int i){
+        Task current = tasks.get(i);
+        tasks.remove(i);
+        ui.printTab("Noted. I've removed this task: \n" + "    " + current.toString() + "\n     Now you have " + tasks.size() + " tasks in the list.");
+    }
+
+    public void markAsDone(int i){
+        Task current = tasks.get(i);
+        current.markAsDone();
+        ui.printTab("Nice! I've marked this task as done:\n" + "    " + current.toString());
+    }
+
     @Override
     public String toString(){
         String output = ""; 

@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList; 
-import java.text.ParseException;
 
 public class Duke {
     private Storage storage;
@@ -8,14 +6,9 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filepath){
-        //try{
-            ui = new Ui();
-            storage = new Storage(filepath);
-            tasks = new TaskList(storage.load());
-        // } catch (DukeException e) {
-        //     ui.showLoadingError();
-        //     tasks = new TaskList();
-        // }
+        ui = new Ui();
+        storage = new Storage(filepath);
+        tasks = new TaskList(storage.load(), ui);
     }
     
     
@@ -24,11 +17,9 @@ public class Duke {
         Parser parser = new Parser(tasks, ui, storage);
         while (sc.hasNextLine()){
             try{
-                
-                    parser.parse(sc.nextLine());
-                
+                parser.parse(sc.nextLine());
             }catch(DukeException e){
-                System.out.println(e);
+                ui.print(e.getMessage());
             }
         }
         sc.close();

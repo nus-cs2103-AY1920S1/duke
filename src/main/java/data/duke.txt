@@ -1,2 +1,4 @@
-T | false | asidofjasdiofja
-T | false | asdfioajsdfna
+T | true | asdfioajsdfna
+E | false |  | 13-02-2019 06:34
+D | false |  | 12-11-2322 12:12
+T | false | dasfdasdsfasd

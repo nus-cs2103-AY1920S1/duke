@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 public class Ui{
     public Ui(){
         logo();
@@ -23,14 +22,17 @@ public class Ui{
     
     static String addDoubleLine(String str){
         String line = "    ____________________________________________________________";
-        return line + "\n     " + str + "\n" + line;
+        return line + "\n" + str + "\n" + line;
     }
 
     public void printMsg(Task t, int size){
         System.out.println(addDoubleLine("     Got it. I've added this task: \n" + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list."));
     }
     public void print(String str){
-        System.out.println(addDoubleLine("    " + str));
+        System.out.println(addDoubleLine(str));
+    }
+    public void printTab(String str){
+        print("    " + str);
     }
     public void showLoadingError(){
 

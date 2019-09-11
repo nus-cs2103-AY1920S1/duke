@@ -21,23 +21,18 @@ public class Parser {
                 ui.bye();
                 storage.saveFile(tasks);
                 System.exit(0);
+
             //list
             }else if(check.equals("list")){
                 ui.print(tasks.toString());
             //done
             }else if(check.equals("done")){
-                String taskNum = splited[1];
-                Task current = tasks.get(Integer.parseInt(taskNum) - 1);
-                current.markAsDone();
-                ui.print("Nice! I've marked this task as done:\n" + "    " + current.toString());
-                storage.saveFile(tasks);
+                int taskNum = Integer.parseInt(splited[1]) -1;
+                tasks.markAsDone(taskNum);
 
             }else if(check.equals("delete")){
-                String taskNum = splited[1];
-                Task current = tasks.get(Integer.parseInt(taskNum) - 1);
-                tasks.remove(Integer.parseInt(taskNum) - 1);
-                ui.print("Noted. I've removed this task: \n" + "    " + current.toString() + "\n     Now you have " + tasks.size() + " tasks in the list.");
-                storage.saveFile(tasks);
+                int taskNum = Integer.parseInt(splited[1]) - 1;
+                tasks.delete(taskNum);
 
             }else if(check.equals("todo")){
                 String description = str.replace("todo", "").trim();
@@ -46,34 +41,25 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 
                 }else{ //successful addition 
-                    tasks.add(new Todo(description));
+                    tasks.addTodo(description);
                     Task current = tasks.get(tasks.size()-1);
                     ui.printMsg(current, tasks.size());
-                    storage.saveFile(tasks);
 
                 }
-            //make an event task
             }else if(check.equals("event")){
-                //removes the command and splits it into 2
                 String [] splitDate = str.replace("event", "").split("/at");
                 if(splitDate.length < 2){
-                    throw new DukeException("    ☹ OOPS!!! Events require both a description and a date \n    (e.g. event go to concert /at 13 Feb)");
+                    throw new DukeException("☹ OOPS!!! Events require both a description and a date /at");
                 }else{
                     //if it reaches here it is successful
-                    tasks.add(new Event(splitDate[0].trim(), new DateTime(splitDate[1].trim())));
-                    Task current = tasks.get(tasks.size()-1);
-                    ui.printMsg(current, tasks.size());
-                    storage.saveFile(tasks);
+                    tasks.addEvent(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
                 }
-            //make deadline task
             }else if(check.equals("deadline")){
                 String [] splitDate = str.replace("deadline", "").split("/by");
                 if(splitDate.length < 2){
-                    throw new DukeException("☹ OOPS!!! Deadlines require both a description and a date by \n    (e.g. deadline homework3 /by tomorrow");
+                    throw new DukeException("☹ OOPS!!! Deadlines require both a description and a date by");
                 }else{
-                    tasks.add(new Deadline(splitDate[0].trim(), new DateTime(splitDate[1].trim())));
-                    Task current = tasks.get(tasks.size()-1);
-                    ui.printMsg(current, tasks.size());
+                    tasks.addDeadline(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
                 }
             //error handling
             }else{
@@ -85,8 +71,10 @@ public class Parser {
         }catch (ParseException e) {
             throw new DukeException("☹ OOPS!!! I'm sorry,Please enter the date in the format dd-MM-yyyy HH:mm");
         }             
-   
+        
+        storage.saveFile(tasks);
         
     }
+
 
 }

@@ -36,6 +36,13 @@ public class TaskList {
         return tasks;
     }
 
+    public String editTask(int index, String description) {
+        Task taskToEdit = tasks.get(index - 1);
+        String oldTaskString = taskToEdit.toString();
+        taskToEdit.changeDescription(description);
+        return "I have updated the task\n" + oldTaskString + "\n" + "as follows\n" + taskToEdit.toString();
+    }
+
     /**
      * Displays the contents of the task list to the user.
      */

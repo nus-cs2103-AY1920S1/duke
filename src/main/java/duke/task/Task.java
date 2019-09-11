@@ -22,6 +22,10 @@ public class Task {
         return description;
     }
 
+    public void changeDescription(String newDescription) {
+        description = newDescription;
+    }
+
     /**
      * Formats the task to be stored in the hard disk.
      *

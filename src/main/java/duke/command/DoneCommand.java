@@ -55,6 +55,8 @@ public class DoneCommand extends Command {
 
             int item = Integer.parseInt(data);
 
+            assert (item > 0) : "Index Must be more than 1";
+
             if (item > tasks.getItemNo()) {
                 if (tasks.getItemNo() == 0) {
                     throw new DukeException("OOPS !!! " + "The task list are currently empty.");

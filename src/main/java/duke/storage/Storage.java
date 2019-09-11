@@ -45,13 +45,13 @@ public class Storage implements DukeStorage {
     public void updateList(MyList taskList) throws IOException {
         FileWriter fw = new FileWriter(directory + filename, false);
         for (Task task : taskList.getList()) {
-            StorageItem sI;
+            StorageItem si;
             if (task.getType().equals("T")) {
-                sI = new StorageItem(task.getType(), task.getIsDone(), task.getDescription());
+                si = new StorageItem(task.getType(), task.getIsDone(), task.getDescription());
             } else {
-                sI = new StorageItem(task.getType(), task.getIsDone(), task.getDescription(), task.getDateTime());
+                si = new StorageItem(task.getType(), task.getIsDone(), task.getDescription(), task.getDateTime());
             }
-            fw.write(sI.getData() + System.lineSeparator());
+            fw.write(si.getData() + System.lineSeparator());
         }
         fw.close();
     }

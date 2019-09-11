@@ -15,8 +15,8 @@ public class UserInterface implements DukeUserInterface {
      * Prints the introduction of the application.
      */
     public String printIntro() {
-        return "Hello! I'm Duke!\n" +
-                "What can I do for you?";
+        return "Hello! I'm Duke!\n"
+                + "What can I do for you?";
     }
 
     /**

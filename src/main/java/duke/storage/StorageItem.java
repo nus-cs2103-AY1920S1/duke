@@ -32,7 +32,8 @@ public class StorageItem {
      * @param datetime Date object of the task.
      */
     public StorageItem(String type, boolean isDone, String description, Date datetime) {
-        data = String.format("%s | %d | %s | %s", type, isDone ? 1 : 0, description, Consts.DATE_TIME_FORMATTER.format(datetime));
+        data = String.format("%s | %d | %s | %s", type, isDone ? 1 : 0, description,
+                Consts.DATE_TIME_FORMATTER.format(datetime));
     }
 
     /**

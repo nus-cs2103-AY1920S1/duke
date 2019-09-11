@@ -43,8 +43,7 @@ public class AddCommand extends Command {
      * @param ui The main user interface of the application.
      * @param storage The main storage of the application.
      * @throws DukeFileSaveException Thrown when the new task cannot be added to the file.
-     * @throws DukeWrongDateFormatException Thrown when the user enters the wrong format for the
-     * date and time of the task.
+     * @throws DukeWrongDateFormatException Thrown when the user enters the wrong format for the datetime of the task.
      */
     @Override
     public String execute(MyList taskList, DukeUserInterface ui, DukeStorage storage) throws DukeFileSaveException,

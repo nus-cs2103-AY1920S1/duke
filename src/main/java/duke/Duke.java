@@ -12,7 +12,6 @@ import duke.ui.UserInterface;
  * Duke is a task manager which allows users to organise their tasks by adding different types
  * of tasks, list out the tasks, marking the tasks as done, deleting the task and storing the
  * tasks into a file so that they can be retrieved the next time the user uses the application.
- *
  * This application reads word by word so any additional arguments would be ignored.
  */
 public class Duke {

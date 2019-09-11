@@ -1,7 +1,20 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+
+import duke.exception.DukeException;
+import duke.exception.DukeIntFormatException;
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeMissingDateTimeException;
+import duke.exception.DukeMissingKeywordException;
+import duke.exception.DukeUnknownCommandException;
+
 
 /**
  * Represents a class that takes in inputs and translates them into different commands.

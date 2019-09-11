@@ -1,7 +1,7 @@
 package duke.parser;
 
+import duke.exception.FailedToLoadIOException;
 import duke.exception.InvalidDateTimeException;
-import duke.exception.LineInFileParseException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -22,28 +22,30 @@ public class FileToTaskParser {
      * Parses the string into a {@link Task} that can be added into a list of tasks in {@link duke.task.TaskList}.
      * @param line the line to be parsed
      * @return a task that can be added into a list of tasks
-     * @throws LineInFileParseException if the line cannot be parsed by the <code>FileToTaskParser</code>
+     * @throws FailedToLoadIOException if the line cannot be parsed by the <code>FileToTaskParser</code>
      */
-    public static Task parse(String line) {
+    public static Task parse(String line) throws FailedToLoadIOException {
         lineCount++;
         String[] arr = line.split(",");
         try {
             boolean isDone = arr[1].equals("true");
+            String taskDescription = arr[2];
             switch (arr[0]) {
             case "todo":
-                return new Todo(arr[2], isDone);
+                return new Todo(taskDescription, isDone);
             case "deadline":
-                return new Deadline(arr[2], DateParser.parse(arr[3]), isDone);
+                String deadlineBy = arr[3];
+                return new Deadline(taskDescription, DateParser.parse(deadlineBy), isDone);
             case "event":
-                return new Event(arr[2], DateParser.parse(arr[3]), isDone);
+                String eventAt = arr[3];
+                return new Event(arr[2], DateParser.parse(eventAt), isDone);
             default:
-                throw new LineInFileParseException(lineCount, line);
+                throw new FailedToLoadIOException(lineCount, line);
             }
         } catch (ArrayIndexOutOfBoundsException aiobe) {
-            throw new LineInFileParseException(lineCount, line);
+            throw new FailedToLoadIOException(lineCount, line);
         } catch (InvalidDateTimeException idte) {
-            throw new LineInFileParseException(lineCount, line);
+            throw new FailedToLoadIOException(lineCount, line);
         }
     }
-
 }

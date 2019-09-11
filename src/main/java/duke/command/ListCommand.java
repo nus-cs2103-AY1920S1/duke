@@ -13,11 +13,11 @@ public class ListCommand implements Command {
     /**
      * Executes the command. This will display the list of tasks in the user interface.
      * @param tasks the list of tasks
-     * @param commandLineUserInterface the user interface
+     * @param ui the user interface
      * @param storage the storage for the tasks
      */
-    public String execute(TaskList tasks, UserInterface commandLineUserInterface, Storage storage) {
-        return commandLineUserInterface.showTable(tasks.list());
+    public String execute(TaskList tasks, UserInterface ui, Storage storage) {
+        return ui.showTable(tasks.list());
     }
 
 }

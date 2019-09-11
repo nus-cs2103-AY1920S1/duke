@@ -1,13 +1,8 @@
 package duke.storage;
 
-import duke.exception.LineInFileWriteException;
-import duke.ui.Ui;
+import duke.exception.FailedToSaveIOException;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.stream.Stream;
 
 /**
@@ -16,7 +11,8 @@ import java.util.stream.Stream;
  * easy parsing into the list of tasks. See {@link duke.task.TaskList} for more information.
  */
 public class Storage {
-
+    private BufferedWriter writer;
+    private BufferedReader reader;
     /**
      * This is a string representation of the file path for storage.
      */
@@ -36,8 +32,15 @@ public class Storage {
      * @throws IOException if an I/O error occurs
      */
     public Stream<String> load() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        return reader.lines();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            return reader.lines();
+        } catch(FileNotFoundException fnfe) {
+            File file = new File("data/duke.txt");
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            return Stream.empty();
+        }
     }
 
     /**
@@ -45,16 +48,31 @@ public class Storage {
      * @param stream the stream of lines to be saved into the file
      * @throws IOException if an I/O error occurs
      */
-    public void save(Stream<String> stream) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-        stream.forEach(line -> {
+    public void save(Stream<String> stream) throws FailedToSaveIOException {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            stream.forEach(line -> {
+                try {
+                    writer.write(line);
+                } catch (IOException ioe) {
+                    throw new UncheckedIOException(line, ioe);
+                }
+            });
+            writer.close();
+        } catch (FileNotFoundException fnfe) {
             try {
-                writer.write(line);
-            } catch (IOException io) {
-                new Ui().showLineError(new LineInFileWriteException(line).getLineCount(), line);
+                File file = new File("data/duke.txt");
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+                save(stream);
+            } catch (IOException ioex) {
+                throw new FailedToSaveIOException();
             }
-        });
-        writer.close();
+        } catch(IOException ioe) {
+            throw new FailedToSaveIOException();
+        } catch (UncheckedIOException uioe) {
+            throw new FailedToSaveIOException(uioe.getMessage());
+        }
     }
 
 }

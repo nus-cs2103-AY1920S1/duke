@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.InvalidDateTimeException;
 import duke.formatter.DateFormatter;
 import duke.parser.DateParser;
 import java.util.Date;
@@ -21,7 +22,7 @@ public class Deadline extends Task {
      * @param description the description of the deadline task
      * @param by the date the task is due by
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws InvalidDateTimeException {
         super(description);
         this.by = DateParser.parse(by);
     }

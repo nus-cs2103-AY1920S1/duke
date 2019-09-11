@@ -16,12 +16,13 @@ public class AddTodoCommand extends AddCommand {
      * @param line the line contents of the command passed as a parameter
      * @throws InvalidParameterException if the line is blank
      */
-    public AddTodoCommand(String line) {
+    public AddTodoCommand(String line) throws InvalidParameterException {
         super(line);
         if (line.isBlank()) {
             throw new InvalidParameterException();
         } else {
-            super.task = new Todo(line);
+            String taskDescription = line;
+            super.task = new Todo(taskDescription);
         }
     }
 

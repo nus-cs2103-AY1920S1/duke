@@ -24,9 +24,9 @@ import javafx.scene.text.TextAlignment;
  */
 public class DialogBox extends HBox {
 
-    private static Image USER_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/user.png"));
+    private static Image USER_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/user.png"));
 
-    private static Image DUKE_IMAGE = new Image(DialogBox.class.getResourceAsStream("/images/duke.png"));
+    private static Image DUKE_IMAGE = new Image(MainWindow.class.getResourceAsStream("/images/duke.png"));
 
     private static Duke DUKE = new Duke();
     @FXML

@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.exception.LineInFileParseException;
+import duke.exception.FailedToLoadIOException;
 import duke.parser.FileToTaskParser;
 import duke.parser.TaskToFileParser;
 import duke.ui.Ui;
-import java.lang.StringBuffer;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -37,7 +38,7 @@ public class TaskList {
         lines.forEach(line -> {
             try {
                 taskList.add(FileToTaskParser.parse(line));
-            } catch (LineInFileParseException lifpe) {
+            } catch (FailedToLoadIOException lifpe) {
                 new Ui().showLineError(lifpe.getLineCount(), line);
             }
         });
@@ -86,13 +87,12 @@ public class TaskList {
      * @return a string representation of the list of tasks
      */
     public String list() {
-        StringBuffer buffer = new StringBuffer();
-        int i = 1;
-        for (Task task :  taskList) {
-            buffer.append("    " + i + "." + task.toString() + "\n");
-            i++;
-        }
-        return buffer.toString();
+        return IntStream.range(0, taskList.size())
+                 .mapToObj(index -> {
+                     int numbering = index + 1;
+                     return ("    " + numbering + "." + taskList.get(index).toString() + "\n");
+                 })
+                .reduce("", (x, y) -> x + y);
     }
 
     /**

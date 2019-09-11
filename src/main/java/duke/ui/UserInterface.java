@@ -1,5 +1,9 @@
 package duke.ui;
 
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidParameterException;
+
 /**
  * This is the user interface of the Duke program. The Duke program will print information here. The user interface can
  * display the change information, error messages, exit message, list of task, welcome message to the user.
@@ -7,8 +11,6 @@ package duke.ui;
 public interface UserInterface {
 
     public String showWelcome();
-
-    public String showError(String message);
 
     public String showLoadingError();
 
@@ -30,4 +32,11 @@ public interface UserInterface {
 
     public String showExitMessage();
 
+    public String showInvalidCommandError(InvalidCommandException invalidCommand);
+
+    public String showInvalidParametersError(InvalidParameterException invalidParameter);
+
+    public String showInvalidDateTimeError(InvalidDateTimeException invalidDateTime);
+
+    public String showSaveError();
 }

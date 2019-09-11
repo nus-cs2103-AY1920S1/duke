@@ -1,11 +1,10 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
     public void correctInputTest(){
-        assertEquals(true, Parser.correctInput("bye"));
+        Assertions.assertEquals(true, Parser.correctInput("bye"));
     }
 
     @Test
@@ -13,6 +12,6 @@ public class ParserTest {
         String event = ("event project meeting /at 2/12/2019 1800");
         String[] eventArr = event.split(" ");
 
-        assertEquals("project meeting /at 2/12/2019 1800", Parser.getDesc(eventArr));
+        Assertions.assertEquals("project meeting /at 2/12/2019 1800", Parser.getDesc(eventArr));
     }
 }

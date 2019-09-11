@@ -174,4 +174,18 @@ public class CommandLineUi extends Ui {
         output += getAllStatSequence(stat);
         return output;
     }
+
+    public String getCompletedEventStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int eventsCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
+        if (eventsCompleted == 0){
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\n     Events completed today: "
+                + stat.getCompletedEventsFromOneDayAgo(tasks)
+                + "\n     " + encouragement + "\n" + underscore;
+        return output;
+    }
 }

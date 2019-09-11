@@ -1,1 +1,4 @@
 event type | isDone | description | extra description | dateCreated | lastModified
+E | 0 | a | home | 2019-09-12T00:39:28.264836300 | 2019-09-12T00:49:26.912650900
+E | 0 | b | school | 2019-09-12T00:39:46.046525 | 2019-09-12T00:39:46.046525
+E | 0 | c | SoC | 2019-09-12T00:39:51.049950600 | 2019-09-12T00:39:51.049950600

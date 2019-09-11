@@ -92,4 +92,6 @@ public abstract class Ui {
 
     public abstract String getAllStatSequence(Statistic stats);
 
+    public abstract String getCompletedEventStatSequence(Statistic stat, TaskList tasks);
+
 }

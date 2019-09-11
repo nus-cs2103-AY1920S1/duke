@@ -183,4 +183,21 @@ public class GraphicalUi extends Ui {
     }
 
 
+    public String getCompletedEventStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int eventsCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
+        if (eventsCompleted == 0){
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+
+
+        String output = "\nEvents completed today: "
+                + eventsCompleted
+                + "\n" + encouragement + "\n";
+        return output;
+    }
+
+
 }

@@ -1,5 +1,11 @@
 package seedu.duke.statistic;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import seedu.duke.task.Task;
+import seedu.duke.tasklist.TaskList;
+
+import java.time.LocalDateTime;
 import java.util.TreeMap;
 
 /**
@@ -32,6 +38,26 @@ public class Statistic {
         totalEventsCompleted = 0;
     }
 
+    public int getCompletedEventsFromOneDayAgo(TaskList tasks){
+        return getSpecifiedCompletedTasksFromVariableDaysAgo(tasks, 'E', 1);
+    }
+
+    public int getSpecifiedCompletedTasksFromVariableDaysAgo(TaskList tasks, char taskType, int daysAgo){
+        int count = 0;
+        for (Task t : tasks.getArrayList()){
+            if ( (t.getTaskType() == taskType) && (t.isDone())){
+                LocalDateTime taskModifiedDateTime = t.getLastModifiedDateTime();
+                LocalDateTime currentDateTime = LocalDateTime.now();
+
+                // If lastModifiedDate is greater than yesterday, increment count
+                if (taskModifiedDateTime.compareTo(currentDateTime.minusDays(daysAgo)) > 0){
+                    count += 1;
+                }
+
+            }
+        }
+        return count;
+    }
 
     public void incrementTotalCommandsExecuted() {
         totalCommandsExecuted += 1;

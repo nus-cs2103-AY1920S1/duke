@@ -229,6 +229,9 @@ public class Duke {
             case ("reset"):
                 System.out.println(resetStatsRoutine(cli, stats));
                 break;
+            case ("event"):
+                System.out.println(completedEventStatsRoutine(cli, stats, tasks));
+                break;
             default:
                 unknownCommandRoutine();
             }
@@ -282,6 +285,11 @@ public class Duke {
      */
     public void unknownCommandRoutine() throws DukeException {
         throw new DukeException(":-( OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public String completedEventStatsRoutine(Ui ui, Statistic stats, TaskList tasks) {
+        stats.incrementTotalCommandsExecuted();
+        return ui.getCompletedEventStatSequence(stats,tasks );
     }
 
     /**

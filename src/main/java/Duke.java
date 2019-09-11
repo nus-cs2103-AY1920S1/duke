@@ -1,3 +1,7 @@
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -24,14 +28,6 @@ public class Duke {
     }
 
     /**
-     * Starts the Duke program.
-     */
-    public void run() {
-        ui.hello();
-        ui.takeInUserInput();
-    }
-
-    /**
      * Gets the appropriate response with the specified input/command given by the user.
      * @param input given by the user.
      * @return String the appropriate response to the user's input.hello
@@ -39,22 +35,17 @@ public class Duke {
     public String getResponse(String input) {
         if (input.equals("bye")) {
             try {
-                storage.overwriteTasks();
+                storage.updateTasks();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return ui.getByeResponse();
         }
-        return ui.readUserInput(input);
+        return ui.getResponseToUserInput(input);
     }
 
     public String getHello() {
         return ui.getHelloMessage();
-    }
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.storage.Storage;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,45 +10,38 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    private LocalDateTime deadline;
+    private LocalDateTime dueBy;
 
     /**
-     * Creates a Deadline task with the specified description and deadline.
-     * @param desc Description of the deadline.
-     * @param deadline Deadline that the task is due by.
+     * Creates a Deadline task with the specified description and due date/time.
+     * @param desc describes the deadline.
+     * @param dueBy the time/day that the task is due by.
      */
-    public Deadline(String desc, String deadline) {
+    public Deadline(String desc, String dueBy) {
         super(desc);
-        this.deadline = convertStringToDateTime(deadline);
+        new Storage();
+        this.dueBy = (Storage.convertStringToDateTime(dueBy));
     }
 
     /**
      * Creates a Deadline task with the specified description, isDone status and deadline.
-     * @param desc Deadline that the task is due by.
+     * @param desc deadline that the task is due by.
      * @param isDone if true, the Deadline task is done.
-     * @param deadline Deadline that the task is due by.
+     * @param dueBy the time/day that the task is due by.
      */
-    public Deadline(String desc, boolean isDone, String deadline) {
+    public Deadline(String desc, boolean isDone, String dueBy) {
         super(desc, isDone);
-        this.deadline = convertStringToDateTime(deadline);
+        new Storage();
+        this.dueBy = Storage.convertStringToDateTime(dueBy);
     }
 
-    public LocalDateTime getDeadline() {
-        return this.deadline;
+    public LocalDateTime getDueBy() {
+        return this.dueBy;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadline = convertStringToDateTime(deadline);
-    }
-
-    /**
-     * Converts the specified string to a LocalDateTime object.
-     * @param deadline The specified deadline to be converted.
-     * @return The LocalDateTime of the specified deadline.
-     */
-    private LocalDateTime convertStringToDateTime(String deadline) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        return LocalDateTime.parse(deadline, formatter);
+    public void setDueBy(String dueBy) {
+        new Storage();
+        this.dueBy = Storage.convertStringToDateTime(dueBy);
     }
 
     @Override
@@ -57,7 +52,7 @@ public class Deadline extends Task {
                 "D",
                 super.getDoneSymbol(),
                 this.desc,
-                this.deadline.format(formatter));
+                this.dueBy.format(formatter));
     }
 
 }

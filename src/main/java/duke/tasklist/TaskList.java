@@ -1,4 +1,7 @@
+package duke.tasklist;
+
 import duke.task.Task;
+import duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -41,8 +44,9 @@ public class TaskList {
     /**
      * Adds the specified task to the tasks list and prints the necessary output.
      * @param task The specified task to be added.
+     * @return the appropriate response to the user after the task is added.
      */
-    public String addTask(Task task) {
+    public String getResponseToAddTask(Task task) {
         tasks.add(task);
         return ui.getAddTaskResponse(task);
     }
@@ -50,8 +54,9 @@ public class TaskList {
     /**
      * Marks the task with the specified task number as done and prints the necessary output.
      * @param taskNo The specified number of the task that is to be marked as done.
+     * @return the appropriate response to the user after the task is marked as done.
      */
-    public String markAsDone(int taskNo) {
+    public String getResponseToMarkAsDone(int taskNo) {
         Task taskDone = tasks.get(taskNo - 1);
         taskDone.markAsDone();
         return ui.getDoneTaskResponse(taskDone);
@@ -60,8 +65,9 @@ public class TaskList {
     /**
      * Deletes the task with the specified task number from the tasks list and prints the necessary output.
      * @param taskNumber The specified number of the task to be deleted from the tasks list.
+     * @return the appropriate response to the user after the task is deleted from the task list.
      */
-    public String deleteTask(int taskNumber) {
+    public String getResponseToDeleteTask(int taskNumber) {
         Task task = tasks.remove(taskNumber - 1);
         return ui.getDeleteTaskResponse(task);
     }
@@ -69,13 +75,13 @@ public class TaskList {
     /**
      * Find the matching tasks in the task list with the specified keyword.
      * @param keyword The specified keyword that the matching tasks will contain.
+     * @return the appropriate response to the user with the matching tasks.
      */
-    public String findMatchingTasks(String keyword) {
+    public String getResponseToFindTask(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        String desc;
 
         for (Task task : TaskList.tasks) {
-            desc = task.getDesc();
+            String desc = task.getDesc();
             if (desc.contains(keyword)) {
                 matchingTasks.add(task);
             }

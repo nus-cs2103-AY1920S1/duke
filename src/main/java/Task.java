@@ -19,6 +19,14 @@ public abstract class Task implements Serializable {
         isDone = true;
     }
 
+    public boolean isTimed() {
+        return false;
+    }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
     /**
      * Formats the task such that it can be outputted in a readable form for the user.
      *

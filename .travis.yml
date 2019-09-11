@@ -5,8 +5,10 @@ deploy:
   provider: heroku
   file_glob: true
   file: "build/*.jar"
+  skip_cleanup: true
   api_key:
     secure: $HEROKU_API_KEY
+  app: weiijiie-duke
 
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -22,5 +24,6 @@ jobs:
     name: Unit tests
     script: "./gradlew test"
 
-before_deploy: "./gradlew shadowJar"
+before_deploy:
+  - "./gradlew shadowJar"
 

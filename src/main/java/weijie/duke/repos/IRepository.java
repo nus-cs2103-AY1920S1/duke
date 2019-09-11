@@ -17,5 +17,5 @@ public interface IRepository<T> {
 
     void update(int id, T entity) throws DukeIoException;
 
-    void delete(int id);
+    void delete(int id) throws DukeIoException;
 }

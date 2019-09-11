@@ -1,0 +1,6 @@
+statistic | integerValue
+totalCommandsExecuted  : 11
+totalTasksDeleted  : 3
+totalTodosCompleted  : 12
+totalDeadlinesCompleted  : 13
+totalEventsCompleted  : 14

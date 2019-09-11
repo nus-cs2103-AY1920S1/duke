@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.parser.Parser;
+import seedu.duke.statistic.Statistic;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
@@ -29,8 +30,10 @@ import javafx.scene.Scene;
  */
 public class Duke {
 
-    private Storage tasksStorage;
+    private Storage taskStorage;
+    private Storage statStorage;
     private TaskList tasks;
+    private Statistic stat;
     private CommandLineUi cli;
     private GraphicalUi gui;
 
@@ -43,15 +46,19 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/117.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/commando.jpg"));
 
+    private String taskFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
+    private String statFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
+
     /**
      * Default constructor to support seedu.duke.Launcher of javaFX.
      */
     public Duke() {
-        String tasksFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
+        taskStorage = new Storage(taskFilePath);
+        statStorage = new Storage(statFilePath);
+
         gui = new GraphicalUi();
         cli = new CommandLineUi();
-        tasksStorage = new Storage(tasksFilePath);
-        String statsFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
+
     }
 
     /**
@@ -63,7 +70,8 @@ public class Duke {
     public Duke(String filePath) {
         gui = new GraphicalUi();
         cli = new CommandLineUi();
-        tasksStorage = new Storage(filePath);
+        taskStorage = new Storage(filePath);
+        statStorage = new Storage(this.statFilePath);
     }
 
     /**
@@ -108,7 +116,7 @@ public class Duke {
 
         try {
             // Loads the data from txt file to the TaskList object, tasks.
-            tasks = new TaskList(this.tasksStorage.loadTasks());
+            tasks = new TaskList(this.taskStorage.loadTasks());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (DukeException e){
@@ -118,9 +126,11 @@ public class Duke {
         String output = "";
         try {
             output = executeTasksGui(input);
-            this.tasksStorage.clearFileBeforeSaving();
+
+            // Saves tasks to txt file before returning output to GUI.
+            this.taskStorage.clearTaskFileBeforeSaving();
             for (int i = 0; i < this.tasks.getSize(); i++) {
-                this.tasksStorage.writeToFile(this.tasks.getTask(i).toSaveString());
+                this.taskStorage.writeToTaskFile(this.tasks.getTask(i).toSaveString());
             }
             return output;
         } catch (DukeException e) {
@@ -139,7 +149,10 @@ public class Duke {
         Boolean isBye = false;
         try {
             // Loads the data from txt file to the TaskList object, tasks.
-            tasks = new TaskList(this.tasksStorage.loadTasks());
+            tasks = new TaskList(this.taskStorage.loadTasks());
+
+            // Loads the stats data from txt file.
+            stat = new Statistic(this.statStorage.loadStats());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (DukeException e){
@@ -203,7 +216,7 @@ public class Duke {
             System.out.println(findRoutine(cli, tasks, fullCommand));
             break;
         case("bye"):
-            System.out.println(byeRoutineCli(cli, tasks, tasksStorage));
+            System.out.println(byeRoutineCli(cli, tasks, taskStorage, stat, statStorage));
             return true;
         default:
             unknownCommandRoutine();
@@ -276,14 +289,18 @@ public class Duke {
      * @return Bye string sequence.
      * @throws IOException Exception threw when reading the file.
      */
-    public String byeRoutineCli(Ui ui, TaskList tasks, Storage storage) throws IOException {
-        storage.clearFileBeforeSaving();
-        // Clear the txt file and adds headers.
+    public String byeRoutineCli(Ui ui, TaskList tasks, Storage taskStorage, Statistic stat, Storage statStorage) throws IOException {
+        // Clear the tasks txt file and adds headers.
+        taskStorage.clearTaskFileBeforeSaving();
 
         // Saves the task list to the file, following the pre-defined format.
         for (int i = 0; i < tasks.getSize(); i++) {
-            storage.writeToFile(tasks.getTask(i).toSaveString());
+            taskStorage.writeToTaskFile(tasks.getTask(i).toSaveString());
         }
+
+        // Saves the stats data to the stats file.
+        statStorage.saveStatFile(stat);
+
         return ui.getByeSequence();
     }
 

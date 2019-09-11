@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.DukeException;
+import seedu.duke.statistic.Statistic;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 /**
  * Storage class is used to read and write data from the text file.
@@ -64,11 +66,25 @@ public class Storage {
      * @param text The text to be appended to the txt file.
      * @throws IOException An IOException may occur when trying to write the file.
      */
-    public void writeToFile(String text) throws IOException {
-        assert !text.isEmpty() : "Text to be written should at least have | |";
+    public void writeToTaskFile(String text) throws IOException {
+        assert !text.isEmpty() : "Text to be written should not be empty";
         FileWriter fw = new FileWriter(this.getFilePath(), true);
         fw.write(text + System.lineSeparator());
         fw.close();
+    }
+
+    public void saveStatFile(Statistic stat) throws IOException {
+        clearStatFileBeforeSaving();
+
+        FileWriter fw = new FileWriter(this.getFilePath(), true);
+        fw.write("totalCommandsExecuted " + " : " + stat.getTotalCommandsExecuted() + System.lineSeparator());
+        fw.write("totalTasksDeleted " + " : " + stat.getTotalTasksDeleted() + System.lineSeparator());
+        fw.write("totalTodosCompleted " + " : " + stat.getTotalTodosCompleted() + System.lineSeparator());
+        fw.write("totalDeadlinesCompleted " + " : " + stat.getTotalDeadlinesCompleted() + System.lineSeparator());
+        fw.write("totalEventsCompleted " + " : " + stat.getTotalEventsCompleted() + System.lineSeparator());
+
+        fw.close();
+
     }
 
     /**
@@ -76,10 +92,20 @@ public class Storage {
      *
      * @throws IOException An IOException may occur when trying to write the file.
      */
-    public void clearFileBeforeSaving() throws IOException {
+    public void clearTaskFileBeforeSaving() throws IOException {
         // Overwrites text file and adds headers before saving tasks
         FileWriter fw = new FileWriter(this.getFilePath(), false);
         fw.write("event type | isDone | description | extra description | dateCreated | lastModified" + System.lineSeparator());
+        fw.close();
+    }
+
+    /**
+     * Clears and appends headers to the Statistics file.
+     * @throws IOException An IOException may occur when trying to write the file.
+     */
+    public void clearStatFileBeforeSaving() throws IOException {
+        FileWriter fw = new FileWriter(this.getFilePath(), false);
+        fw.write("statistic | integerValue" + System.lineSeparator());
         fw.close();
     }
 
@@ -177,6 +203,26 @@ public class Storage {
             }
         }
         return tasks;
+    }
+
+    public TreeMap<String, Integer> loadStats() throws FileNotFoundException {
+        ArrayList<String> inputsFromFile = new ArrayList<>();
+
+        Scanner scanner = new Scanner(new File(getFilePath()));
+
+        while (scanner.hasNextLine()) {
+            inputsFromFile.add(scanner.nextLine());
+        }
+
+        TreeMap<String, Integer> map = new TreeMap<String, Integer>();
+
+        for (String input : inputsFromFile) {
+            if (input.contains(":")) {
+                String[] words = input.split(":");
+                map.put(words[0].trim(), Integer.parseInt(words[1].trim()));
+            }
+        }
+        return map;
     }
 
     /**

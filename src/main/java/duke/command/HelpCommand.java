@@ -28,6 +28,7 @@ public class HelpCommand extends Command {
                 + " list");
         print("complete or c [task number]", "to mark the task of that specified index number from the task"
                 + " list as completed");
+        print("update or u [task number] [new description]", "to update the description of a task");
         return sb.toString();
     }
 

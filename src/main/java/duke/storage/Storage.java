@@ -11,8 +11,6 @@ import java.util.stream.Stream;
  * easy parsing into the list of tasks. See {@link duke.task.TaskList} for more information.
  */
 public class Storage {
-    private BufferedWriter writer;
-    private BufferedReader reader;
     /**
      * This is a string representation of the file path for storage.
      */

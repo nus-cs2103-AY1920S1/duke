@@ -6,8 +6,6 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
 
-import java.io.IOException;
-
 /**
  *  The <code>DoneCommand</code> is created when the user enters <code>"done"</code>. The done command will mark a
  *  specified task entered by the user as done. The user interface will display the updated information if it is

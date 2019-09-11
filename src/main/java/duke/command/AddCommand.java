@@ -6,8 +6,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
 
-import java.io.IOException;
-
 /**
  * The <code>AddCommand</code> is the parent class of {@link AddTodoCommand}, {@link AddDeadlineCommand},
  * {@link AddEventCommand}.

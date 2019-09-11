@@ -3,13 +3,11 @@ package duke.main;
 import duke.command.Command;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidParameterException;
-import duke.exception.InvalidDateTimeException;
 import duke.parser.CommandParser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.ui.UserInterface;
-import javafx.application.Platform;
 
 import java.io.IOException;
 

@@ -10,7 +10,6 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
 
 import java.util.Arrays;

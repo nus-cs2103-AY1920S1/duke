@@ -5,8 +5,6 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UserInterface;
 
-import java.io.IOException;
-
 /**
  * The <code>ExitCommand</code> is created when the user enters <code>"bye"</code>. The exit command will show the exit
  * message and save all tasks in the list of tasks in the {@link TaskList} class object to the

@@ -1,15 +1,19 @@
-import Exception.DukeException;
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
-
+import exception.DukeException;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 import java.util.Scanner;
 import java.util.Date;
 import java.text.ParseException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+/**
+ * Represents a task manager.
+ * A Duke object has a file with the list of tasks.
+ * Tasks can be added, deleted and updated.
+ */
 public class Duke {
     protected Storage storage;
     protected TaskList taskList;
@@ -29,10 +33,21 @@ public class Duke {
         }
     }
 
+    /**
+     * This is the main method of the task manager.
+     * @throws FileNotFoundException If file is not found
+     * @throws IOException If an input or output exception occurred
+     * @throws ParseException If a parse exception occurred
+     */
     public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
         new Duke("/Users/michelleyong/Desktop/duke/data/duke.txt").run();
     }
 
+    /**
+     * Runs the task manager.
+     * @throws IOException If an input or output exception occurred
+     * @throws ParseException If a parse exception occurred
+     */
     public void run() throws IOException, ParseException {
         ui.printHello();
         Scanner sc = new Scanner(System.in);

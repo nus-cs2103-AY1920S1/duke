@@ -1,6 +1,6 @@
 
-import Tasks.Event;
-import Tasks.Task;
+import tasks.Event;
+import tasks.Task;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;

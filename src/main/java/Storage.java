@@ -1,8 +1,8 @@
 
-import Tasks.Deadline;
-import Tasks.Event;
-import Tasks.Task;
-import Tasks.Todo;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,6 +14,9 @@ import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file.
+ */
 public class Storage {
     private String filePath;
 
@@ -21,6 +24,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the task from the file into an array list.
+     * @return The list of tasks to be loaded from the file
+     * @throws FileNotFoundException If file is not found
+     * @throws ParseException If a parse exception occurred
+     */
     public ArrayList<Task> load() throws FileNotFoundException, ParseException {
         ArrayList<Task> list = new ArrayList<Task>();
         File file = new File(filePath);
@@ -57,18 +66,35 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Converts the string to a date.
+     * @param str The date in string format
+     * @return The date
+     * @throws ParseException If a parse exception occurred
+     */
     public Date convertToDate(String str) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy hh:mm");
         Date date = sdf.parse(str);
         return date;
     }
 
+    /**
+     * Loads the task from the file into an array list.
+     * @param textToAppend The text to be appended to the file
+     * @return The list of tasks to be loaded from the file
+     * @throws IOException If an input or output exception occurred
+     */
     private void appendToFile(String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAppend);
         fw.close();
     }
 
+    /**
+     * Converts the task to string format to be added to the file.
+     * @param task The task to be converted in string format
+     * @return The task in a string format
+     */
     private String convertTaskToFileFormat(Task task) {
         StringBuffer textToAdd = new StringBuffer();
         String type = task.getType();
@@ -90,17 +116,32 @@ public class Storage {
         return textToAdd.toString();
     }
 
+    /**
+     * Appends task to the file.
+     * @param task The task to be appended to the file
+     * @throws IOException If an input or output exception occurred
+     */
     public void appendTaskToFile(Task task) throws IOException {
         String textToAppend = convertTaskToFileFormat(task);
         appendToFile(textToAppend);
     }
 
+    /**
+     * Writes the current task to the file.
+     * @param textToAdd The task to be written to the file
+     * @throws IOException If an input or output exception occurred
+     */
     private void writeToFile(String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
+    /**
+     * Updates the current list of tasks to the file.
+     * @param list The list of tasks to be updated to the file
+     * @throws IOException If an input or output exception occurred
+     */
     public void updateTaskInFile(ArrayList<Task> list) throws IOException {
         StringBuffer textToAdd = new StringBuffer();
         for (Task task : list) {

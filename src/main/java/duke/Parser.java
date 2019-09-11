@@ -6,6 +6,7 @@ import duke.commands.ExitCommand;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
 
@@ -74,6 +75,14 @@ public class Parser {
         return new EventCommand(description, at);
     }
 
+    private Command parseFind(String input) throws DukeException {
+        String keyword = getDetails(input).trim();
+        if (keyword.isBlank()) {
+            throw new DukeException("The task keyword cannot be empty.");
+        }
+        return new FindCommand(keyword);
+    }
+
     public Command parse(String input) throws DukeException {
         String command = this.getCommand(input);
         switch (command) {
@@ -91,6 +100,8 @@ public class Parser {
             return parseDeadline(input);
         case "event":
             return parseEvent(input);
+        case "find":
+            return parseFind(input);
         default:
             throw new DukeException("Please enter a valid command!");
         }

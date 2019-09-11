@@ -3,6 +3,7 @@ package duke;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -72,6 +73,20 @@ public class Ui {
         this.content.append(String.format("  %s\n", task));
         this.content.append(indent);
         this.content.append(String.format("Now you have %d tasks in the list.\n", taskList.getSize()));
+    }
+
+    public void showNoMatchingTask() {
+        this.content.append(indent);
+        this.content.append("There is no matching task in the list!\n");
+    }
+
+    public void showMatchingTasks(List<Task> selectedTasks) {
+        this.content.append(indent);
+        this.content.append("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < selectedTasks.size(); i++) {
+            this.content.append(indent);
+            this.content.append(String.format("     %d.%s\n", i + 1, selectedTasks.get(i)));
+        }
     }
 
     public void print() {

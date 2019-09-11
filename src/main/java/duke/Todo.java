@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Encapsulates a Todo object that inherits from Task class and
  * stores task name and status.

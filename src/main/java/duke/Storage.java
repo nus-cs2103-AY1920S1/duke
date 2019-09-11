@@ -1,4 +1,4 @@
-/**
+package duke; /**
  * Encapsulates a Storage object to deal with loading tasks from the file
  * and saving tasks in the file.
  */

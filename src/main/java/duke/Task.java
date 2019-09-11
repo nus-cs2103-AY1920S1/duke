@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Encapsulates a Task object which stores activity name, status (done or not done).
  */

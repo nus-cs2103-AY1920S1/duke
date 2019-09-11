@@ -1,4 +1,4 @@
-/**
+package duke; /**
  * Encapsulates a Deadline object that inherits from Task class and
  * stores task name, status and deadline time.
  */

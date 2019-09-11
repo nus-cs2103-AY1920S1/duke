@@ -1,3 +1,5 @@
+package duke;
+
 /**
  * Encapsulates a Parser object to deals with making sense of the user command.
  */

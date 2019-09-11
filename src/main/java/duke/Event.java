@@ -1,4 +1,4 @@
-/**
+package duke; /**
  * Encapsulates aa Event object that inherits from Task class and
  * stores task name, status and event time.
  */

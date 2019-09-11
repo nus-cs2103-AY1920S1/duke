@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * Converts dd/mm/yyyy XXXX hours to Date of Month, Year, Time in 12-hour format.
+ */
 public class DateAndTime {
     protected String dateAndTime;
     protected int date;
@@ -36,6 +39,12 @@ public class DateAndTime {
         }
     }
 
+    /**
+     * Saves the original dd/mm/yyyy XXXX hours as a string to use when saving these tasks into
+     * the hard drive.
+     *
+     * @return String format in which Date and Time was received in the constructor.
+     */
     public String toSave() {
         return dateAndTime;
     }

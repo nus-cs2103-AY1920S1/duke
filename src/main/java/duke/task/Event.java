@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.DukeException;
 
+/**
+ * Handles a certain type of Task with a description and date and time when event will happen.
+ */
 public class Event extends Task {
     protected DateAndTime at;
 

@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Handles a certain type of Task with only a description.
+ */
 public class Todo extends Task {
 
     public Todo(String description) {

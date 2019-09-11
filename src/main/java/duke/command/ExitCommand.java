@@ -7,6 +7,9 @@ import duke.Ui;
 
 import java.io.IOException;
 
+/**
+ * Handles the command to exit from the program and close the bot.
+ */
 public class ExitCommand extends Command {
 
     @Override

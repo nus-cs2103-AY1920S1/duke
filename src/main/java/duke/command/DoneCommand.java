@@ -6,6 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+/**
+ * Handles command that marks a task from the list of tasks as done.
+ */
 public class DoneCommand extends Command {
 
     private int taskNum;

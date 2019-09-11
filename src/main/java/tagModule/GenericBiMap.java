@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
  * Store all tags
  *
  */
-public class GenericBiMap<E,T> {
-    HashMap<T, List<E>> objKeyStore;
-    HashMap<E, List<T>> tagKeyStore;
+public class GenericBiMap<L,R> {
+    HashMap<R, List<L>> objKeyStore;
+    HashMap<L, List<R>> tagKeyStore;
 
     public GenericBiMap() {
         this.objKeyStore = new HashMap<>();
@@ -21,10 +21,10 @@ public class GenericBiMap<E,T> {
 
 
     /**
-     * Testing method, to evaluate if it has been added
+     * Resting method, to evaluate if it has been added
      *  it is inefficint on purpose to check sync.
      */
-    public boolean containsTagPair(E strTag, T obj) {
+    public boolean containsTagPair(L strTag, R obj) {
         /* these parts, and return streams based on query */
         boolean strTagContains = 
             queryByStringTag(strTag)
@@ -43,10 +43,10 @@ public class GenericBiMap<E,T> {
     // Test feature only
     public String queryAll() {
         StringBuilder sb = new StringBuilder();
-        List<E> tagList = tagKeyStore.keySet()
+        List<L> tagList = tagKeyStore.keySet()
             .stream().collect(Collectors.toList());
 
-        for (E tag : tagList) {
+        for (L tag : tagList) {
             sb.append(tag + ":\n");
             queryByStringTag(tag).forEach(x -> sb.append(x + "\n"));
             sb.append("\n");
@@ -58,7 +58,7 @@ public class GenericBiMap<E,T> {
     /**
      * Return Stream of hits if string tag can be found in store
      */
-    public Stream <T> queryByStringTag(E strKey) {
+    public Stream <R> queryByStringTag(L strKey) {
         if (! tagKeyStore.containsKey(strKey)) {
             return Stream.empty();
         } else {
@@ -69,7 +69,7 @@ public class GenericBiMap<E,T> {
     /**
      * Return Stream of hits if obj can be found in store
      */
-    public Stream <E> queryByObjTag(T obj) {
+    public Stream <L> queryByObjTag(R obj) {
         if (! objKeyStore.containsKey(obj)) {
             return Stream.empty();
         } else {
@@ -82,16 +82,16 @@ public class GenericBiMap<E,T> {
     /**
      * replace an object with a new object keeping all tags
      */
-    public boolean replaceTaggedObject(T oldObj, T updatedObj) {
-        //get oldObj->List<E>
-        //assign updatedObj->List<E> into hashmap
-        //for List<E> replaceTagKeyStore(key)
+    public boolean replaceTaggedObject(R oldObj, R updatedObj) {
+        //get oldObj->List<L>
+        //assign updatedObj->List<L> into hashmap
+        //for List<L> replaceTagKeyStore(key)
 
         if (! objKeyStore.containsKey(oldObj)) {
             return false;
         }
 
-        List<E> xs = objKeyStore.get(oldObj);
+        List<L> xs = objKeyStore.get(oldObj);
         objKeyStore.put(updatedObj, xs);
         objKeyStore.remove(oldObj);
 
@@ -107,7 +107,7 @@ public class GenericBiMap<E,T> {
     /**
      * Goto Tag KeyStore replace object with replacement
      */
-    private boolean replaceTagKeyStore(E strKey, T oldObj, T updatedObj) {
+    private boolean replaceTagKeyStore(L strKey, R oldObj, R updatedObj) {
         //delete Tag, DONOT USE THE PUBLIC METHOD
         //alternatively, replace a one for one but im not doing
         //that now
@@ -121,8 +121,8 @@ public class GenericBiMap<E,T> {
     /**
      * replace a tag with a new tag keeping all objs
      */
-    public boolean replaceTag(E oldTag, E updatedTag) {
-        //get oldTag->List<T>
+    public boolean replaceTag(L oldTag, L updatedTag) {
+        //get oldTag->List<R>
         //assign updatedTag->List<Obj> into hashmap
         //for List<Obj> replaceObjKeyStore(updatedTag)
 
@@ -130,7 +130,7 @@ public class GenericBiMap<E,T> {
             return false;
         }
 
-        List<T> xs = tagKeyStore.get(oldTag);
+        List<R> xs = tagKeyStore.get(oldTag);
         tagKeyStore.put(updatedTag, xs);
         tagKeyStore.remove(oldTag);
 
@@ -145,7 +145,7 @@ public class GenericBiMap<E,T> {
     /**
      * Goto Tag KeyStore replace object with replacement
      */
-    private boolean replaceObjKeyStore(T objKey, E oldTag, E updatedTag) {
+    private boolean replaceObjKeyStore(R objKey, L oldTag, L updatedTag) {
 
         if (!deleteObjKeyStore(objKey, oldTag)) return false;
         insertObjKeyStore(objKey, updatedTag);
@@ -157,12 +157,12 @@ public class GenericBiMap<E,T> {
     /**
      * Delete an object and all instance of it from tags
      */
-    public boolean deleteTaggedObject(T delObj) {
+    public boolean deleteTaggedObject(R delObj) {
         if (! objKeyStore.containsKey(delObj)) {
             return false;
         }
 
-        List<E> tagList = objKeyStore.get(delObj);
+        List<L> tagList = objKeyStore.get(delObj);
 
         //remove objKey from objHashTable
         objKeyStore.remove(delObj);
@@ -179,12 +179,12 @@ public class GenericBiMap<E,T> {
     /**
      * Delete an tag and all instance of it from objs 
      */
-    public boolean deleteTag(E delTag) {
+    public boolean deleteTag(L delTag) {
         if (! tagKeyStore.containsKey(delTag)) {
             return false;
         }
 
-        List<T> objList = tagKeyStore.get(delTag);
+        List<R> objList = tagKeyStore.get(delTag);
 
         //remove objKey from objHashTable
         tagKeyStore.remove(delTag);
@@ -203,7 +203,7 @@ public class GenericBiMap<E,T> {
     /**
      * Delete a remove a tag-obj relationship from all stores
      */
-    public boolean deleteTagFromObject(E str, T obj) {
+    public boolean deleteTagFromObject(L str, R obj) {
         if (! deleteTagKeyStore(str, obj)) return false;
         if (! deleteObjKeyStore(obj, str)) return false;
         return true;
@@ -214,12 +214,12 @@ public class GenericBiMap<E,T> {
      * Goto ObjkeyStore, and remove a tag given the object
      *  INTERNAL METHOD ONLY.
      */
-    private boolean deleteObjKeyStore(T objKey, E strVal) {
+    private boolean deleteObjKeyStore(R objKey, L strVal) {
         if (! objKeyStore.containsKey(objKey)) {
             return false;
         }
 
-        List<E> xs = objKeyStore.get(objKey);
+        List<L> xs = objKeyStore.get(objKey);
         if (xs.contains(strVal)) {
             int indexToRemove = xs.indexOf(strVal);
             assert xs.size() > indexToRemove 
@@ -231,12 +231,12 @@ public class GenericBiMap<E,T> {
         }
     }
 
-    private boolean deleteObjKeyStore(T objKey, int index) {
+    private boolean deleteObjKeyStore(R objKey, int index) {
         if (! objKeyStore.containsKey(objKey)) {
             return false;
         }
 
-        List<E> xs = objKeyStore.get(objKey);
+        List<L> xs = objKeyStore.get(objKey);
         if (xs.size() > index) {
             xs.remove(index);
             return true;
@@ -250,13 +250,13 @@ public class GenericBiMap<E,T> {
      *  @return false on failure to locate Tag or Object not 
      *  tagged to object.
      */
-    private boolean deleteTagKeyStore(E strKey, T objVal) {
+    private boolean deleteTagKeyStore(L strKey, R objVal) {
         if (! tagKeyStore.containsKey(strKey)) {
             // tag not found in store
             return false;
         }
 
-        List<T> xs = tagKeyStore.get(strKey);
+        List<R> xs = tagKeyStore.get(strKey);
         if (xs.contains(objVal)) {
             int indexToRemove = xs.indexOf(objVal);
             assert xs.size() > indexToRemove 
@@ -268,12 +268,12 @@ public class GenericBiMap<E,T> {
             return false;
         }
     }
-    private boolean deleteTagKeyStore(E strKey, int index) {
+    private boolean deleteTagKeyStore(L strKey, int index) {
         if (! tagKeyStore.containsKey(strKey)) {
             return false;
         }
 
-        List<T> xs = tagKeyStore.get(strKey);
+        List<R> xs = tagKeyStore.get(strKey);
         if (xs.size() > index) {
             xs.remove(index);
             return true;
@@ -286,7 +286,7 @@ public class GenericBiMap<E,T> {
     /**
      * inserts a tag and the object into the store 
      */
-    public void insertTag(E strTag, T obj) {
+    public void insertTag(L strTag, R obj) {
         insertTagKeyStore(strTag, obj);
         insertObjKeyStore(obj, strTag);
     }
@@ -294,12 +294,12 @@ public class GenericBiMap<E,T> {
     /**
      * Insert a n object based on tag into a tag->obj store.
      */
-    private void insertTagKeyStore(E strKey, T objVal) {
+    private void insertTagKeyStore(L strKey, R objVal) {
         if (! tagKeyStore.containsKey(strKey)) {
             initTagKeyStore(strKey);
         }
 
-        List<T> xs = tagKeyStore.get(strKey);
+        List<R> xs = tagKeyStore.get(strKey);
         if (xs.contains(objVal)) {
             return;
         } else {
@@ -310,12 +310,12 @@ public class GenericBiMap<E,T> {
     /**
      * Insert an object based on the tag it has, obj->tag store.
      */
-    private void insertObjKeyStore(T objKey, E strVal) {
+    private void insertObjKeyStore(R objKey, L strVal) {
         if (! objKeyStore.containsKey(objKey)) {
             initObjKeyStore(objKey);
         }
 
-        List<E> xs = objKeyStore.get(objKey);
+        List<L> xs = objKeyStore.get(objKey);
         if (xs.contains(strVal)) {
             //duplicate
             return;
@@ -327,16 +327,16 @@ public class GenericBiMap<E,T> {
     /**
      * Initializes List in Hashmap before it can be used.
      */
-    private void initTagKeyStore(E tagStr) {
-        List<T> objList = new ArrayList<>();
+    private void initTagKeyStore(L tagStr) {
+        List<R> objList = new ArrayList<>();
         tagKeyStore.put(tagStr, objList);
     }
 
     /**
      * Initializes List in Hashmap before it can be used.
      */
-    private void initObjKeyStore(T objKey) {
-        List<E> tagList = new ArrayList<>();
+    private void initObjKeyStore(R objKey) {
+        List<L> tagList = new ArrayList<>();
         objKeyStore.put(objKey, tagList);
     }
 

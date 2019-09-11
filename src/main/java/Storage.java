@@ -7,12 +7,13 @@ public class Storage {
     private TaskList taskList;
     private File taskListText;
 
-    public Storage(TaskList taskList){
+    public Storage(TaskList taskList) {
         this.taskList = taskList;
     }
 
     /**
      * Loads content from file into commands that can be understood by Duke.
+     *
      * @throws IOException
      */
     public void loadFile() throws IOException {
@@ -59,6 +60,7 @@ public class Storage {
 
     /**
      * Updates data in file.
+     *
      * @throws IOException
      */
     public void rewriteData() throws IOException {
@@ -76,12 +78,18 @@ public class Storage {
 
     /**
      * Checks if file exists, otherwise create one.
+     *
      * @throws IOException
      */
     public void checkFile() throws IOException {
-        File tmpDir = new File("TaskList.txt");
-        if (!tmpDir.exists()) {
-            tmpDir.createNewFile();
+        try {
+            File tmpDir = new File("TaskList.txt");
+            if (!tmpDir.exists()) {
+                tmpDir.createNewFile();
+            }
+            assert taskListText.exists() : "File should exist now";
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }

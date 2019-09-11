@@ -5,6 +5,8 @@ import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Represents an add command.
  * To add task to task list, perform Ui task and save to hard disk.
@@ -23,7 +25,7 @@ public class AddCommand extends Command {
      * @param storage Storage interface.
      */
     @Override
-    public String execute(TaskList list, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         Task temp = getPendingTask();
         list.addNewTask(temp);
         list.increaseTaskCount();

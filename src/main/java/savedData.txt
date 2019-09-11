@@ -1,3 +1,2 @@
-todo die
-event die again /at 01/10/1001 1010
-todo test
+todo fill water
+deadline buy waterbottle /by 05/05/2005 2050

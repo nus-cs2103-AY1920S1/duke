@@ -3,20 +3,16 @@ package duke.task;
 /**
  * Task class.
  */
-public class Task {
+public abstract class Task {
     protected boolean completed;
-    protected int index;
     protected String name;
-    protected static int count = 0;
-  
+
     /**
      * Constructor for Task object.
      * @param n name of task
      */
     public Task(String n) {
-        count++;
         this.name = n;
-        this.index = count;
         completed = false;
     }
   
@@ -26,9 +22,7 @@ public class Task {
      * @param completed indicates if task is completed
      */
     public Task(String n, boolean completed) {
-        count++;
         this.name = n;
-        this.index = count;
         this.completed = completed;
     }
 
@@ -59,19 +53,5 @@ public class Task {
         return true;
     }
 
-    /**
-     * Returns the index of the task.
-     * @return index of task
-     */
-    public int getIndex() {
-        return index;
-    }
-
-    /**
-     * Sets the index of the task. Used in reordering task when deletion takes place.
-     * @param i new index of task
-     */
-    public void setIndex(int i) {
-        index = i;
-    }
+    public abstract String toString();
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Duke {
     private Storage storage;
-    private TaskList tasks;
+    private ListManager lists;
     private Ui ui;
     private final String path = "./saved/taskList_history.txt";
 
@@ -28,14 +28,14 @@ public class Duke {
         try {
             if (!storage.historyExists()) {
                 storage.createFile();
-                tasks = new TaskList(new ArrayList<>());
+                lists = new ListManager();
             } else {
-                tasks = new TaskList(storage.retrieveHistory());
+                lists = storage.retrieveHistory();
             }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DukeException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -48,7 +48,7 @@ public class Duke {
         try {
             String[] inputParts = input.split(" ", 2);
             Command c = Parser.parse(inputParts);
-            return c.execute(storage, ui, tasks);
+            return c.execute(storage, ui, lists);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DukeException e) {

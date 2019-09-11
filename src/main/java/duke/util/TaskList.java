@@ -16,6 +16,11 @@ public class TaskList {
     private ArrayList<Task> taskList;
     private int count;
 
+    public TaskList() {
+        this.taskList = new ArrayList<Task>();
+        count = 0;
+    }
+
     /**
      * Constructor for TaskList object.
      * @param taskList List of tasks
@@ -29,7 +34,7 @@ public class TaskList {
      * Returns the tasklist.
      * @return list of tasks
      */
-    public ArrayList<Task> getTaskList() {
+    public ArrayList<Task> getTaskAsArrayList() {
         return this.taskList;
     }
 
@@ -41,9 +46,9 @@ public class TaskList {
             return "You have no tasks in your list!";
         }
         String result = "Here are the tasks in your list:\n";
-        return taskList.stream()
-                       .map(task -> task.getIndex() + "." + task + "\n")
-                       .reduce(result, (a, b) -> a + b);
+        return IntStream.rangeClosed(0, count - 1)
+                        .mapToObj(x -> (x + 1) + ". " + taskList.get(x).toString() + "\n")
+                        .reduce(result, (a, b) -> a + b);
     }
 
     /**
@@ -71,6 +76,7 @@ public class TaskList {
     /**
      * Deletes a task item from the list.
      * @param index Index of task in the list
+     * @return String representation of deleted task
      * @throws DukeException if invalid task number is passed to this method
      */
     public String deleteItem(int index) throws DukeException {
@@ -80,7 +86,6 @@ public class TaskList {
         index--;
         Task t = taskList.get(index);
         taskList.remove(index);
-        reIndex();
         String result = "Noted. I've removed this task:\n";
         result += t + "\n";
         count -= 1;
@@ -90,17 +95,6 @@ public class TaskList {
             result += "Now you have " + count + " tasks in the list";
         }
         return result;
-    }
-
-    /**
-     * Re-indexes the tasks when deletion occurs.
-     */
-    public void reIndex() {
-        int count = 1;
-        for (Task t : taskList) {
-            t.setIndex(count);
-            count++;
-        }
     }
 
     /**
@@ -302,9 +296,9 @@ public class TaskList {
      */
     public String findItem(String name) {
         String initial = "Here are the matching tasks in your list:\n";
-        return taskList.stream()
-                .filter(task -> task.getName().contains(name))
-                .map(task -> task.getIndex() + "." + task + "\n")
+        return IntStream.rangeClosed(0, count - 1)
+                .mapToObj(x -> (x + 1) + "." + taskList.get(x).toString() + "\n")
+                .filter(task -> task.contains(name))
                 .reduce(initial, (a, b) -> a + b);
     }
 }

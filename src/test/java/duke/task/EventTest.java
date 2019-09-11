@@ -7,7 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EventTest {
 
     @Test
-    void getDate() {
-        assertEquals(2, 2);
+    public void createEventTest1() {
+        Event e = new Event("lecture", "2:00pm 12 Sep 2019");
+        assertEquals(e.toString(), "[E][\u2718] lecture (at: 2:00pm 12 Sep 2019)");
+    }
+
+    @Test
+    public void createEventTest2() {
+        Event e = new Event("lecture", "2:00pm 12 Sep 2019", true);
+        assertEquals(e.toString(), "[E][\u2713] lecture (at: 2:00pm 12 Sep 2019)");
+    }
+
+    @Test
+    public void getDateTest() {
+        Event e = new Event("lecture", "2:00pm 12 Sep 2019", true);
+        assertEquals(e.getDate(), "2:00pm 12 Sep 2019");
     }
 }

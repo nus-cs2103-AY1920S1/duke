@@ -42,7 +42,7 @@ public class Duke {
     public void run() {
         System.out.println(ui.showWelcome());
 
-        while(!isExit) {
+        while (!isExit) {
             String input = ui.readMessage();
             try {
                 Command command = commandCentre.get(Parser.parseCommand(input));
@@ -56,8 +56,14 @@ public class Duke {
         storage.write(tasks);
     }
 
+    /**
+     * Get's Duke's response after executing the User's command.
+     *
+     * @param input the User's input.
+     * @return a String representation of Duke's response.
+     */
     public String getResponse(String input) {
-        if(isExit) {
+        if (isExit) {
             storage.write(tasks);
             return null;
         } else {

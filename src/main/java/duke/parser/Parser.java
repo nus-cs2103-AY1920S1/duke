@@ -25,22 +25,29 @@ public class Parser {
     /**
      * Parses the user input passed into duke and extracts the command keyword.
      *
-     * @return the command keyword
+     * @param input the user's input.
+     * @return the command keyword.
      */
     public static String parseCommand(String input) {
-           return input.split(" ", 2)[0];
+        return input.split(" ", 2)[0];
     }
 
+    /**
+     * Parses the user input passed into duke and extract the description of the command.
+     *
+     * @param input the user's input.
+     * @return the command's description.
+     */
     public static Optional<String[]> parseDescription(String input) {
         String[] userInput = input.split(" ", 2);
-        if(userInput.length == 1) {
+        if (userInput.length == 1) {
             return Optional.empty();
         } else {
             String desc = userInput[1];
-            if(desc.contains("/by")) {
+            if (desc.contains("/by")) {
                 String[] keywords = desc.split(" /by ");
                 return Optional.of(keywords);
-            } else if(desc.contains("/at")) {
+            } else if (desc.contains("/at")) {
                 String[] keywords = desc.split(" /at ");
                 return Optional.of(keywords);
             } else {

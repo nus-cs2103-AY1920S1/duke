@@ -4,7 +4,11 @@ import duke.exception.DukeCommandException;
 import duke.exception.DukeException;
 import duke.exception.DukeTaskException;
 import duke.parser.Parser;
-import duke.task.*;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Event;
+import duke.task.Todo;
+import duke.task.Deadline;
 import duke.ui.Ui;
 
 import java.util.HashMap;
@@ -23,7 +27,7 @@ public class CommandCentre {
         commands = new HashMap<>();
         commands.put("bye", new Command() {
             public String execute(Optional<String[]> input) throws DukeException {
-                if(input.isEmpty()) {
+                if (input.isEmpty()) {
                     return ui.showBye();
                 } else {
                     throw new DukeTaskException("Bye should not have a description.");
@@ -38,7 +42,7 @@ public class CommandCentre {
 
         commands.put("list", new Command() {
             public String execute(Optional<String[]> input) throws DukeException {
-                if(input.isEmpty()) {
+                if (input.isEmpty()) {
                     return ui.showList(taskList.getTaskList());
                 } else {
                     throw new DukeTaskException("List should not have a description.");
@@ -48,7 +52,7 @@ public class CommandCentre {
 
         commands.put("done", new Command() {
             public String execute(Optional<String[]> input) throws DukeException {
-                if(input.isPresent()) {
+                if (input.isPresent()) {
                     Task doneTask = taskList.doTask(input.get()[0]);
                     return ui.showCompletedTask(doneTask);
                 } else {
@@ -58,20 +62,20 @@ public class CommandCentre {
         });
 
         commands.put("todo", new Command() {
-           public String execute(Optional<String[]> input) throws DukeException {
-               if(input.isPresent()) {
-                   Todo todo = new Todo(input.get()[0]);
-                   taskList.addTask(todo);
-                   return ui.showAddedTask(todo, taskList);
-               } else {
-                   throw new DukeTaskException("The description of Todo cannot be empty.");
-               }
-           }
+            public String execute(Optional<String[]> input) throws DukeException {
+                if (input.isPresent()) {
+                    Todo todo = new Todo(input.get()[0]);
+                    taskList.addTask(todo);
+                    return ui.showAddedTask(todo, taskList);
+                } else {
+                    throw new DukeTaskException("The description of Todo cannot be empty.");
+                }
+            }
         });
 
         commands.put("deadline", new Command() {
             public String execute(Optional<String[]> input) throws DukeException {
-                if(input.isPresent()) {
+                if (input.isPresent()) {
                     if (input.get().length > 2) {
                         throw new DukeTaskException("There are too many /by in the description.");
                     } else if (input.get().length < 2) {
@@ -88,7 +92,7 @@ public class CommandCentre {
 
         commands.put("event", new Command() {
             public String execute(Optional<String[]> input) throws DukeException {
-                if(input.isPresent()) {
+                if (input.isPresent()) {
                     if (input.get().length > 2) {
                         throw new DukeTaskException("There are too many /at in the description.");
                     } else if (input.get().length < 2) {
@@ -105,7 +109,7 @@ public class CommandCentre {
 
         commands.put("delete", new Command() {
             public String execute(Optional<String[]> input) throws DukeException {
-                if(input.isPresent()) {
+                if (input.isPresent()) {
                     Task deletedTask = taskList.deleteTask(input.get()[0]);
                     return ui.showDeletedTask(deletedTask, taskList);
                 } else {
@@ -116,7 +120,7 @@ public class CommandCentre {
 
         commands.put("find", new Command() {
             public String execute(Optional<String[]> input) throws DukeException {
-                if(input.isPresent()) {
+                if (input.isPresent()) {
                     TaskList foundList = taskList.findTask(input.get()[0]);
                     return ui.showFound(foundList);
                 } else {
@@ -134,7 +138,7 @@ public class CommandCentre {
      * @throws DukeCommandException if the Command cannot be identified.
      */
     public Command get(String key) throws DukeCommandException {
-        if(commands.containsKey(key)) {
+        if (commands.containsKey(key)) {
             Command command = commands.get(key);
             return command;
         } else {

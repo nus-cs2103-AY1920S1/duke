@@ -33,14 +33,4 @@ public class Ui {
         }
         return output.toString();
     }
-
-    public String getAddCommandOutput(Task t, TaskList list) {
-        String output = "";
-        output += getTopBorder();
-        output += "\n\tGot it! I've added this task: ";
-        output += "\n\t" + t.toString();
-        output += "\n\tNow you have " + list.getSize() + " tasks in the list.";
-        output += getBottomBorder();
-        return output;
-    }
 }

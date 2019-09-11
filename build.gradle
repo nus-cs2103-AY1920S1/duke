@@ -6,6 +6,10 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
+run {
+    enableAssertions = true
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveVersion = "0.1.3"

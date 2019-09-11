@@ -9,7 +9,7 @@ public class Command {
     private static final int BYE = 0;
     private static final int LIST = 1;
     private static final int DONE = 2;
-    private static final int DELETE_TASK= 3;
+    private static final int DELETE_TASK = 3;
     private static final int FIND = 4;
     private static final int TASK = 5;
     private static final int NOTE = 6;

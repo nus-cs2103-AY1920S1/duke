@@ -40,10 +40,10 @@ public class NoteList {
     }
 
     /**
-     * Deletes a note from the notelist
+     * Deletes a note from the notelist.
      * @param index index of note to be deleted
      * @return String representation of deleted note
-     * @throws DukeException
+     * @throws DukeException when note number is invalid
      */
     public String deleteItem(int index) throws DukeException {
         if (index <= 0 || index > count) {

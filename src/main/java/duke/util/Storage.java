@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class Storage {
     private String path;
-    private final String LINE_DIVIDER = "____________________";
+    private static final String LINE_DIVIDER = "____________________";
 
     /**
      * Constructor for Storage object.

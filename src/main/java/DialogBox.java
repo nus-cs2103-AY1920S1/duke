@@ -5,16 +5,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
+
 
 /**
  * An example of a custom control using FXML.
@@ -37,13 +39,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        // process the image to make it look circular
-        Circle cir2 = new Circle(250,200,80);
-        cir2.setStroke(Color.SEAGREEN);
-        cir2.setFill(new ImagePattern(img));
-        cir2.setEffect(new DropShadow(+25d, 0d, +2d, Color.DARKSEAGREEN));
-
         dialog.setText(text);
+        //dialog.setStyle("-fx-font: 12 arial;");
         displayPicture.setImage(img);
     }
 
@@ -58,7 +55,10 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.setBackground(new Background(new BackgroundFill(
+                Color.gray(0.865), CornerRadii.EMPTY, Insets.EMPTY)));
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
@@ -67,42 +67,3 @@ public class DialogBox extends HBox {
         return db;
     }
 }
-
-
-//public class DialogBox extends HBox {
-//
-//    private Label text;
-//    private ImageView displayPicture;
-//
-//    public DialogBox(Label l, ImageView iv) {
-//        text = l;
-//        displayPicture = iv;
-//
-//        text.setWrapText(true);
-//        displayPicture.setFitWidth(100.0);
-//        displayPicture.setFitHeight(100.0);
-//
-//        this.setAlignment(Pos.TOP_RIGHT);
-//        this.getChildren().addAll(text, displayPicture);
-//    }
-//
-//    /**
-//     * Flips the dialog box such that the ImageView is on the left and text on the right.
-//     */
-//    private void flip() {
-//        this.setAlignment(Pos.TOP_LEFT);
-//        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-//        FXCollections.reverse(tmp);
-//        this.getChildren().setAll(tmp);
-//    }
-//
-//    public static DialogBox getUserDialog(Label l, ImageView iv) {
-//        return new DialogBox(l, iv);
-//    }
-//
-//    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-//        var db = new DialogBox(l, iv);
-//        db.flip();
-//        return db;
-//    }
-//}

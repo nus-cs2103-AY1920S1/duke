@@ -32,7 +32,7 @@ public class DeleteCommand extends MutateTaskCommand {
      */
     @Override
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
-        Task task = taskList.getTask(this.index);
+        final Task task = taskList.getTask(this.index);
         taskList.remove(this.index);
         int numOfTasks = taskList.getSize();
         storage.taskListToFile();

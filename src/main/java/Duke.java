@@ -1,11 +1,7 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
 
+import command.Command;
+import exception.DukeException;
 import javafx.application.Application;
 import javafx.scene.control.*;
 import javafx.scene.layout.Region;
@@ -15,7 +11,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import parser.Parser;
+import storage.Storage;
+import task.TaskList;
+import ui.Ui;
 
 /**
  * Represents the task manager.

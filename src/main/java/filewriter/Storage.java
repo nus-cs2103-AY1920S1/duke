@@ -12,8 +12,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class used to store and read from text file.
@@ -114,6 +118,7 @@ public class Storage {
         switch (line.charAt(line.indexOf("[") + 1)) {
         case 'T':
             output = new Todo(line.substring(7, line.length()));
+            updateStatus(output, line);
             return output;
         case 'D':
             try {
@@ -121,6 +126,7 @@ public class Storage {
                 String input = line.substring(7, divider);
                 input += "/by " + DateTime.readDeadLine(line.substring(divider + 5, line.length() - 1)).toString();
                 output = new Deadline(input);
+                updateStatus(output, line);
                 return output;
             } catch (Exception e) {
                 throw new DukeException("Deadline task not stored properly.");
@@ -131,6 +137,7 @@ public class Storage {
                 String input = line.substring(7, divider);
                 input += "/at " + DateTime.readEventTime(line.substring(divider + 5, line.length() - 1)).toString();
                 output = new Event(input);
+                updateStatus(output, line);
                 return output;
             } catch (Exception e) {
                 throw new DukeException("Event task not stored properly.");
@@ -138,10 +145,14 @@ public class Storage {
         }
     }
 
+    private void updateStatus(Task task, String line){
+        if (line.substring(2,4).equals("+")){
+            task.markAsDone();
+        }
+    }
+
     /**
      * Reads txt file and updates TaskList accordingly.
-     * Calls read method line by line, and gets corresponding Task.
-     * Check each line to check if Task should markAsDone.
      * @return object with updated ArrayList taskList used in construction of TaskList object.
      * @throws DukeException when read throws DukeException.
      */
@@ -150,19 +161,21 @@ public class Storage {
             taskList = new ArrayList<>();
             File f = new File(filePath); // create a File for the given file path
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
-            while (s.hasNextLine()) {
-                String line = s.nextLine();
-                if (! line.equals("")) {
-                    Task newTask = read(line.replace("\n", ""));
-                    if (line.substring(4,5).equals("\u2713")) {
-                        newTask.markAsDone();
-                    }
-                    taskList.add(newTask);
-                }
-            }
+            Stream<String> stream = Files.lines(Paths.get(filePath));
+            taskList = new ArrayList(stream.filter(line -> !line.equals(""))
+                    .map(line -> {
+                        try {
+                            return read(line);
+                        } catch (DukeException e) {
+                            throw new RuntimeException();
+                        }
+                    }).collect(Collectors.toList()));
             return this;
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found!");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         } catch (Exception e) {
             throw new DukeException("Unforseen load errors: " + e.getMessage());
         }

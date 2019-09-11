@@ -11,22 +11,44 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         assert !fullCommand.isEmpty() : "No command entered";
+
         if (fullCommand.equals("bye")) {
             return new ExitCommand();
         } else if (fullCommand.equals("list")) {
             return new ListCommand();
-        } else if (fullCommand.length() >= 4 && fullCommand.substring(0, 4).equals("done")) {
-            int doIndex = Integer.parseInt(fullCommand.substring(5));
-            return new DoneCommand(doIndex);
-        } else if (fullCommand.length() >= 5 && fullCommand.substring(0, 4).equals("find")) {
-            return new FindCommand(fullCommand.substring(5));
-        } else if (fullCommand.length() >= 6 && fullCommand.substring(0, 6).equals("delete")) {
-            int deleteIndex = Integer.parseInt(fullCommand.substring(7));
-            return new DeleteCommand(deleteIndex);
-        } else if (fullCommand.contains("todo") || fullCommand.contains("deadline") || fullCommand.contains("event")) {
-            return new AddCommand(fullCommand);
         } else {
-            throw new DukeException("Please enter a valid command");
+            String[] fields = fullCommand.split(" ", 2);
+            String command = fields[0];
+            if (command.equals("done")) {
+                if (secondFieldIsEmpty(fields)) {
+                    throw new DukeException("Please indicate the task number!");
+                }
+                int doIndex = Integer.parseInt(fullCommand.substring(5));
+                return new DoneCommand(doIndex);
+            } else if (command.equals("find")) {
+                if (secondFieldIsEmpty(fields)) {
+                    throw new DukeException("Please indicate what you want to find!");
+                }
+                return new FindCommand(fullCommand.substring(5));
+            } else if (command.equals("delete")) {
+                if (secondFieldIsEmpty(fields)) {
+                    throw new DukeException("Please indicate what you want to delete!");
+                }
+                int deleteIndex = Integer.parseInt(fullCommand.substring(7));
+                return new DeleteCommand(deleteIndex);
+            } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
+                if (secondFieldIsEmpty(fields)) {
+                    throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+                }
+                return new AddCommand(fullCommand);
+            } else {
+                throw new DukeException("Please enter a valid command");
+            }
         }
+    }
+
+    //Used to check if the description field is empty
+    private static boolean secondFieldIsEmpty(String[] fields) {
+        return fields.length <= 1;
     }
 }

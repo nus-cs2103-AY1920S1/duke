@@ -1,9 +1,13 @@
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
     private String fullCommand;
+    private String command;
+    private String description;
+    private String dateTime;
 
     /**
      * Instantiates AddCommand object.
@@ -28,35 +32,27 @@ public class AddCommand extends Command {
      * @param tasks TaskList containing the user's saved tasks
      * @param ui Ui object to handle the user input
      * @param storage storage object to determine where the executed results are stored
-     * @throws DukeException if user input is invalid
+     * @throws Exception if user input is invalid
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (fullCommand.substring(0, 4).equals("todo")) {
-            if (fullCommand.length() == 4) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            }
-            tasks.addTask(new ToDo(fullCommand.substring(5)));
-        } else if (fullCommand.substring(0, 5).equals("event")) {
-            if (fullCommand.length() == 5) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
-            }
-            int i = fullCommand.indexOf('/');
-            String dateAndTime = fullCommand.substring(i + 4);
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, format);
-            tasks.addTask(new Event(fullCommand.substring(6, i - 1), dateTime));
-        } else if (fullCommand.substring(0, 8).equals("deadline")) {
-            if (fullCommand.length() == 8) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
-            int i = fullCommand.indexOf('/');
-            String dateAndTime = fullCommand.substring(i + 4);
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, format);
-            tasks.addTask(new Deadline(fullCommand.substring(9, i - 1), dateTime));
+        setFields(fullCommand);
+        if (command.equals("todo")) {
+            tasks.addTask(new ToDo(description));
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            try {
+                if (command.equals("event")) {
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                    LocalDateTime dateAndTime = LocalDateTime.parse(dateTime, format);
+                    tasks.addTask(new Event(description, dateAndTime));
+                } else { //deadline
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+                    LocalDateTime dateAndTime = LocalDateTime.parse(dateTime, format);
+                    tasks.addTask(new Deadline(description, dateAndTime));
+                }
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter date and time in format: dd/MM/yyyy HHmm");
+            }
         }
 
         try {
@@ -66,7 +62,24 @@ public class AddCommand extends Command {
                     + "Now you have " + tasks.getNumOfTasks()
                     + (tasks.getNumOfTasks() == 1 ? " task" : " tasks") + " in the list.\n";
         } catch (IOException ex) {
-            return "Cannot save new task in file";
+            return "Cannot save new task in file\n";
+        }
+    }
+
+    //Used to set the command, description and date and time for the add command
+    private void setFields(String line) {
+        String[] fields = line.split(" ", 2);
+        this.command = fields[0];
+        if (fields[0].equals("deadline")) {
+            String[] descAndDateTime = fields[1].split(" /by ", 2);
+            this.description = descAndDateTime[0];
+            this.dateTime = descAndDateTime[1];
+        } else if (fields[0].equals("event")) {
+            String[] descAndDateTime = fields[1].split(" /at ", 2);
+            this.description = descAndDateTime[0];
+            this.dateTime = descAndDateTime[1];
+        } else {
+            this.description = fields[1];
         }
     }
 }

@@ -27,9 +27,15 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the scrollPane and shows the welcome message from Duke.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(getWelcomeMessage(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -43,28 +49,42 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        String response;
         try {
-            String response = duke.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
-            if (response.equals(duke.getResponse("bye"))) {
-                Platform.exit();
+            response = duke.getResponse(input);
+            if (response.equals("Bye. Hope to see you again soon!")) {
+                showMessages(input, response);
+                exitApplication();
             }
-            userInput.clear();
         } catch (IOException e) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog("Error when saving file", dukeImage)
-            );
-            userInput.clear();
+            response = "Error when saving file";
         } catch (DukeException e) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(e.getMessage(), dukeImage)
-            );
-            userInput.clear();
+            response = e.getMessage();
         }
+        showMessages(input, response);
+        userInput.clear();
+    }
+
+    //Generates the welcome message upon initialization of Duke
+    private String getWelcomeMessage() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        return "Hello from\n" + logo + "Hello! I'm Duke\n" + "What can I do for you?";
+    }
+
+    //Shows the conversation between the user and Duke
+    private void showMessages(String input, String response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+    }
+
+    private void exitApplication() {
+        userInput.clear();
+        Platform.exit();
     }
 }

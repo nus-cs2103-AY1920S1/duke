@@ -39,6 +39,7 @@ public class Ui {
 
     /**
      * Generic response template for displaying an error.
+     *
      * @param e The error message to be displayed.
      */
     public void printException(DukeException e) {
@@ -47,6 +48,7 @@ public class Ui {
 
     /**
      * Prints the whole list of items in the order as stored by the program.
+     *
      * @param listItems The list of all the items in the task list.
      */
     protected void printList(ArrayList<Task> listItems) {
@@ -66,6 +68,7 @@ public class Ui {
 
     /**
      * Prints the list of items stored by the program that matched the keyword given by the user.
+     *
      * @param listItems The list of matched items in the task list.
      */
     protected void printMatchList(ArrayList<Task> listItems) {
@@ -92,6 +95,7 @@ public class Ui {
 
     /**
      * Displays a message when a task has been added to the task list.
+     *
      * @param taskString The String representation of the added task.
      * @param listSize The new size of the list.
      */
@@ -104,6 +108,7 @@ public class Ui {
 
     /**
      * Displays a message when a task in the task list has been set as Done.
+     *
      * @param taskString The String representation of the modified task.
      */
     protected void taskListDone(String taskString) {
@@ -113,6 +118,7 @@ public class Ui {
 
     /**
      * Displays a message when a task in the task list has been deleted.
+     *
      * @param taskString The String representation of the deleted task.
      * @param listSize The new size of the list.
      */
@@ -120,6 +126,13 @@ public class Ui {
         setResponse("I've removed this task:\n"
                 + "  " + taskString + "\n"
                 + "Now you have " + listSize + " tasks in the list.");
+    }
+
+    /**
+     * Displays a message stating that Duke has successfully undone the previous action of the user.
+     */
+    protected void taskListUndo() {
+        setResponse("I've successfully undone the previous action.");
     }
 
 }

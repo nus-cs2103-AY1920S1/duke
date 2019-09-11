@@ -19,6 +19,7 @@ public abstract class Task {
 
     /**
      * Creates the type of task to be added to the list based on user's command.
+     *
      * @param command The entire line of command input by the user into the program.
      * @return A Task object that follows the specifications of the input.
      * @throws DukeException Exception thrown if the format is invalid.
@@ -38,6 +39,7 @@ public abstract class Task {
 
     /**
      * Helper function to create an Event task.
+     *
      * @param command the original command by the user without the first parameter.
      * @return An event task, if the command is valid.
      * @throws DukeException Exception thrown if the format is invalid.
@@ -57,6 +59,7 @@ public abstract class Task {
 
     /**
      * Helper function to create a Deadline task.
+     *
      * @param command the original command by the user without the first parameter.
      * @return A deadline task, if the command is valid.
      * @throws DukeException Exception thrown if the format is invalid.
@@ -76,13 +79,13 @@ public abstract class Task {
 
     /**
      * Helper function to create a to do task.
+     *
      * @param command the original command by the user without the first parameter.
      * @return A to do task, if the command is valid.
      * @throws DukeException Exception thrown if the format is invalid.
      */
     private static ToDoTask createToDoTask(String command) throws DukeException {
-        String[] commandArray = command.split(" ");
-        if (commandArray.length == 0) {
+        if (command.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
         } else {
             return new ToDoTask(command);
@@ -91,6 +94,7 @@ public abstract class Task {
 
     /**
      * Creates the type of task to be added to the list based on the line in the save file.
+     *
      * @param item The entire line of command input by the user into the program.
      * @return A Task object according to the line in the save file.
      * @throws DukeException Exception thrown if the line does not follow the format for some reason.
@@ -119,12 +123,14 @@ public abstract class Task {
 
     /**
      * String representation of the Task object that can be processed by the program.
+     *
      * @return A String that can be written to the save file.
      */
     protected abstract String toFileString();
 
     /**
      * String representing the Task object.
+     *
      * @return String representation of the Task object.
      */
     @Override

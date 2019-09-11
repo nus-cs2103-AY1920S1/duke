@@ -10,6 +10,7 @@ public class Parser {
 
     /**
      * The constructor of the Parser object. This mainly processes the input of the user.
+     *
      * @param taskList The task list of the program.
      */
     public Parser(TaskList taskList, Ui ui) {
@@ -20,6 +21,7 @@ public class Parser {
 
     /**
      * Processes the user input and performs an action based on it, if valid.
+     *
      * @param command The user's input.
      */
     public void parse(String command) {
@@ -29,6 +31,8 @@ public class Parser {
                 parseByeCommand();
             } else if (command.equals("list")) {
                 parseListCommand();
+            } else if (command.equals("undo")) {
+                parseUndoCommand();
             } else if (commandArray[0].equals("find")) {
                 parseFindCommand(command);
             } else if (commandArray[0].equals("done")) {
@@ -60,7 +64,17 @@ public class Parser {
     }
 
     /**
+     * Helper function to parse the undo command.
+     *
+     * @throws DukeException Exception thrown if there is nothing left to undo.
+     */
+    private void parseUndoCommand() throws DukeException {
+        taskList.undo();
+    }
+
+    /**
      * Helper function to parse the find command.
+     *
      * @param command The original command input by the user.
      * @throws DukeException Exception thrown if no keywords were specified by the user.
      */
@@ -75,6 +89,7 @@ public class Parser {
 
     /**
      * Helper function to parse the done command.
+     *
      * @param command The original command input by the user.
      * @throws DukeException Exception thrown if the id was not specified or is invalid.
      */
@@ -91,6 +106,7 @@ public class Parser {
 
     /**
      * Helper function to parse the delete command.
+     *
      * @param command The original command input by the user.
      * @throws DukeException Exception thrown if the id was not specified or is invalid.
      */
@@ -107,6 +123,7 @@ public class Parser {
 
     /**
      * Helper function to parse the to do command.
+     *
      * @param command The original command input by the user.
      * @throws DukeException Exception thrown if there was no description provided.
      */
@@ -120,6 +137,7 @@ public class Parser {
 
     /**
      * Check against the list of valid Task types to see if the command is valid.
+     *
      * @param taskType the first argument of the command input.
      * @return True if the first argument of the command input is valid.
      */

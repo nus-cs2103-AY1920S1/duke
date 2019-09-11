@@ -14,6 +14,7 @@ public abstract class TimedTask extends Task {
 
     /**
      * Constructor for the TimedTask object.
+     *
      * @param details The description of the task.
      * @param date The Calendar object representing the date attached to the task.
      */
@@ -31,6 +32,7 @@ public abstract class TimedTask extends Task {
     /**
      * Takes the Calendar object and gets the suffix for the day of the month.
      * A day ending with the number 2 should have the suffix "nd" to make the word "2nd".
+     *
      * @param date The Calendar object of the TimedTask.
      * @return The suffix of the day in the Calendar.
      */
@@ -47,6 +49,7 @@ public abstract class TimedTask extends Task {
 
     /**
      * Converts the user inputted date/time to a Calendar object.
+     *
      * @param input the user's input of the date and time, specified by DD/MM/YYYY HHMM.
      * @return A Calendar object representing the date and time.
      * @throws DukeException Thrown when the date or its format is invalid.
@@ -91,6 +94,7 @@ public abstract class TimedTask extends Task {
 
     /**
      * Helper function to check if the date provided is valid.
+     *
      * @param day The number representing the day of the month.
      * @param month The number representing the month.
      * @param year The number representing the year.
@@ -121,6 +125,7 @@ public abstract class TimedTask extends Task {
 
     /**
      * Helper function that checks if the time provided is valid.
+     *
      * @param hour The hour given in the 24h format.
      * @param minute The minute as given in the 24h format.
      * @return True if the time provided is valid.

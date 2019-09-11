@@ -20,17 +20,6 @@ public class TaskTest {
     }
 
     @Test
-    public void creatingFailTodoTask() {
-        try {
-            // test case 3
-            Task t = Task.create("todo");
-            fail("Did not throw an error");
-        } catch (DukeException e) {
-            assertNotNull(e);
-        }
-    }
-
-    @Test
     public void creatingGoodEventTask() {
         try {
             Task t = Task.create("event hello /at 01/01/2011 1500");

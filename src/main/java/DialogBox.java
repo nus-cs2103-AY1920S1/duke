@@ -16,6 +16,7 @@ public class DialogBox extends HBox {
 
     /**
      * Constructor for the DialogBox object.
+     *
      * @param l The label containing text to be displayed.
      * @param iv The profile picture of the user or Duke.
      */
@@ -48,6 +49,7 @@ public class DialogBox extends HBox {
     /**
      * Performs the same action as getUserDialog(),
      * but flips it so that the DialogBox is on the left side of the window.
+     *
      * @param l The Label containing Duke's response.
      * @param iv The profile picture of Duke.
      * @return a Dialog Box that is on the left side of the window.

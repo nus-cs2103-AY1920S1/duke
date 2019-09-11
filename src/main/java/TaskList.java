@@ -21,6 +21,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list based on the given command.
+     *
      * @param command The command given by the user to be processed.
      * @throws DukeException Exception thrown during the creation of
      *     the Task object if the command is invalid.
@@ -34,6 +35,7 @@ public class TaskList {
 
     /**
      * Mark a task in the list as done based on its ID.
+     *
      * @param id the ID of the task that is done.
      * @throws DukeException Exception thrown if the ID input is invalid.
      */
@@ -49,6 +51,7 @@ public class TaskList {
 
     /**
      * Delete a task in the list based on its ID.
+     *
      * @param id the ID of the task that is to be deleted.
      * @throws DukeException Exception thrown if the ID input is invalid.
      */
@@ -63,6 +66,7 @@ public class TaskList {
 
     /**
      * Searches the list for tasks that match the user specified keyword.
+     *
      * @param keyword The keyword specified by the user.
      */
     protected void find(String keyword) {
@@ -73,5 +77,15 @@ public class TaskList {
             }
         }
         ui.printMatchList(matchList);
+    }
+
+    /**
+     * Undoes the last action made by the user.
+     *
+     * @throws DukeException Exception thrown when there is nothing to undo.
+     */
+    protected void undo() throws DukeException {
+        this.listItems = storage.undo();
+        ui.taskListUndo();
     }
 }

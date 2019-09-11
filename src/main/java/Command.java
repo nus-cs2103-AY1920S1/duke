@@ -11,71 +11,72 @@ public class Command {
 
 
     public void execute(TaskList list, Ui ui, SaveToFile store) throws DukeException {
-        switch(cmd) {
-            case "bye":
-                System.out.println("Bye! See you again soon!");
-                this.isExit = true;
-                break;
+        switch (cmd) {
+        case "bye":
+            System.out.println("Bye! See you again soon!");
+            this.isExit = true;
+            break;
 
-            case "list":
-                list.printAll();
-                break;
+        case "list":
+            list.printAll();
+            break;
 
-            case "delete":
-                if(cmdDetails.length() < 1) {
-                    throw new DukeException("Please specify the task to be deleted.");
-                } else {
-                    list.deleteTask(Integer.parseInt(cmdDetails) - 1);
-                    store.updateFile(list);
-                }   
-                break;
+        case "delete":
+            if (cmdDetails.length() < 1) {
+                throw new DukeException("Please specify the task to be deleted.");
+            } else {
 
-            case "done":
-                if(cmdDetails.length() < 1) {
-                    throw new DukeException("Please specify the task that is completed.");
-                } else {
-                    int taskIndex =  Integer.parseInt(cmdDetails);
-                    list.getTask(taskIndex - 1).doTask();
-                    store.updateFile(list);
-                }
-                break;
+                list.deleteTask(Integer.parseInt(cmdDetails) - 1);
+                store.updateFile(list);
+            }
+            break;
 
-            case "todo":
-                if(cmdDetails.length() < 1) {
-                    throw new DukeException("The details of todo cannot be blank.");
-                } else {
-                    Tasks newTodo = new Todo(cmdDetails);
-                    list.addTask(newTodo);
-                    store.updateFile(list);
-                    Ui.printAddedMsg();
-                }
-                break;
+        case "done":
+            if (cmdDetails.length() < 1) {
+                throw new DukeException("Please specify the task that is completed.");
+            } else {
+                int taskIndex =  Integer.parseInt(cmdDetails);
+                list.getTask(taskIndex - 1).doTask();
+                store.updateFile(list);
+            }
+            break;
 
-            case "deadline":
-                String[] separate = cmdDetails.split("/");
-                try {
-                    Tasks newDeadline = new Deadline(separate[0].trim(), separate[1].trim());
-                    list.addTask(newDeadline);
-                    store.updateFile(list);
-                    Ui.printAddedMsg();
-                } catch(ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("OOPS! I do not know what that means!");
-                }
-                break;
+        case "todo":
+            if (cmdDetails.length() < 1) {
+                throw new DukeException("The details of todo cannot be blank.");
+            } else {
+                Tasks newTodo = new Todo(cmdDetails);
+                list.addTask(newTodo);
+                store.updateFile(list);
+                Ui.printAddedMsg();
+            }
+            break;
 
-            case "event":
-                String[] separate2 = cmdDetails.split("/");
-                try{
-                    Tasks newEvent = new Event(separate2[0].trim(), separate2[1].trim());
-                    list.addTask(newEvent);
-                    store.updateFile(list);
-                    Ui.printAddedMsg();
-                } catch(ArrayIndexOutOfBoundsException e) {
-                    throw new DukeException("OOPS! I do not know what that means!");
-                }
-                break;
+        case "deadline":
+            String[] separate = cmdDetails.split("/");
+            try {
+                Tasks newDeadline = new Deadline(separate[0].trim(), separate[1].trim());
+                list.addTask(newDeadline);
+                store.updateFile(list);
+                Ui.printAddedMsg();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("OOPS! I do not know what that means!");
+            }
+            break;
 
-            default:
+        case "event":
+            String[] separate2 = cmdDetails.split("/");
+            try {
+                Tasks newEvent = new Event(separate2[0].trim(), separate2[1].trim());
+                list.addTask(newEvent);
+                store.updateFile(list);
+                Ui.printAddedMsg();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("OOPS! I do not know what that means!");
+            }
+            break;
+
+        default:
             throw new DukeException("OOPS! I do not know what that means!");
         }
     }

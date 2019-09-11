@@ -9,7 +9,8 @@ public class Parser {
         String remaining;
         try {
             remaining = sc.nextLine().trim();
-        } catch(NoSuchElementException e) {
+
+        } catch (NoSuchElementException e) {
             remaining = "";
         }
         sc.close();

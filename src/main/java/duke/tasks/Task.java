@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.util.Date;
+
 public class Task {
     private final String description;
     private boolean isDone;
@@ -29,8 +31,27 @@ public class Task {
      * @return The boolean status of a task.
      */
     public boolean getStatus() {
-        return isDone; //return tick or X symbols
+        return isDone;
     }
+
+    /**
+     * Gets the description of a task.
+     *
+     * @return The description of a task.
+     */
+    String getDescription() {
+        return description.trim().toLowerCase();
+    }
+
+    /**
+     * Gets the date of a task.
+     *
+     * @return The date of a task.
+     */
+    public Date getDate() {
+        return null;
+    }
+
 
     /**
      * Marks a task as done.

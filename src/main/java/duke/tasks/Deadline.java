@@ -1,18 +1,31 @@
 package duke.tasks;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Deadline extends Task {
 
-    private final String by;
+    private final Date date;
 
     /**
      * Initialises a Deadline task.
      *
      * @param description The deadline description.
-     * @param by          The time at which the deadline is up.
+     * @param date          The time at which the deadline is up.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, Date date) {
         super(description);
-        this.by = by;
+        this.date = (Date) date.clone();
+    }
+
+    /**
+     * Gets the date of the deadline.
+     *
+     * @return The date of the deadline.
+     */
+    @Override
+    public Date getDate() {
+        return (Date) date.clone();
     }
 
     /**
@@ -22,7 +35,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + "\n(by: "
+                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(date) + ")\n";
     }
 
     /**
@@ -32,6 +46,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toStore() {
-        return "D" + super.toStore() + "|" + by;
+        return "D" + super.toStore() + "|" + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(date);
     }
 }

@@ -1,18 +1,33 @@
 package duke.tasks;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event extends Task {
 
-    private final String range;
+    private final Date start;
+    private final Date end;
 
     /**
      * Initialises an event.
      *
      * @param description The event description
-     * @param range       The time period during which the event occurs
+     * @param start       The time period during which the event occurs
      */
-    public Event(String description, String range) {
+    public Event(String description, Date start, Date end) {
         super(description);
-        this.range = range;
+        this.start = (Date) start.clone();
+        this.end = (Date) end.clone();
+    }
+
+    /**
+     * Gets the date of the deadline.
+     *
+     * @return The date of the deadline.
+     */
+    @Override
+    public Date getDate() {
+        return (Date) start.clone();
     }
 
     /**
@@ -22,7 +37,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + range + ")";
+        return "[E]" + super.toString() + " \n(from: "
+                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(start) + " \n to:  "
+                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(end) + ")\n";
     }
 
     /**
@@ -32,6 +49,8 @@ public class Event extends Task {
      */
     @Override
     public String toStore() {
-        return "E" + super.toStore() + "|" + range;
+        return "E" + super.toStore() + "|"
+                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(start) + "|"
+                + new SimpleDateFormat("EEE, d MMM yyyy, hh:mm a").format(end);
     }
 }

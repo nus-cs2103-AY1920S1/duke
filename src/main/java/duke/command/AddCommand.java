@@ -16,7 +16,8 @@ public class AddCommand extends Command {
     private Task task;
     private String type;
     private String description;
-    private String time;
+    private String start;
+    private String end;
 
     /**
      * Initialises an AddCommand.
@@ -36,10 +37,10 @@ public class AddCommand extends Command {
                 task = new ToDo(parseDescription());
                 break;
             case "deadline":
-                task = new Deadline(parseDescription("/by"), parseDate());
+                task = new Deadline(parseDescription("/by"), parseDate(start));
                 break;
             case "event":
-                task = new Event(parseDescription("/at"), parseDate());
+                task = new Event(parseDescription("/at"), parseDate(start), parseDate(end));
                 break;
             default:
                 break;
@@ -76,14 +77,16 @@ public class AddCommand extends Command {
      *
      * @return The string representation of the new date object.
      */
-    public String parseDate() {
+    public Date parseDate(String date) throws DukeException {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm", java.util.Locale.ENGLISH);
-            Date myDate = sdf.parse(time.replaceAll("-", "/"));
+            Date myDate = sdf.parse(date.replaceAll("-", "/"));
             sdf.applyPattern("EEE, d MMM yyyy, hh:mm a");
-            return sdf.format(myDate);
+            String dateString = sdf.format(myDate);
+            return sdf.parse(dateString);
         } catch (ParseException e) {
-            return time.trim();
+            throw new DukeException("Invalid date format supported. \nPlease try again with the format below: \n"
+                    + "11/12/1999 1600");
         }
     }
 
@@ -110,13 +113,23 @@ public class AddCommand extends Command {
      */
     public String parseDescription(String delimiter) throws DukeException {
         String[] details = description.split(delimiter);
-        if (details.length == 1) {
-            if (details[0].length() != 0) {
-                throw new DukeException("Incorrect format. \nPlease try again with the format below: \n"
-                        + type + " ($task_name) " + delimiter + " ($date/day)");
-            }
+        String exceptionMessage = "\nPlease try again with the format below: \n"
+                + type + " ($task_name) " + delimiter + " ($date/day)";
+        if (details.length <= 1 && details[0].length() != 0) {
+            throw new DukeException("Incorrect format. " + exceptionMessage);
+
+        } else if (details[0].isBlank()) {
+            throw new DukeException("No $task_name specified. " + exceptionMessage);
         }
-        this.time = details[1];
+
+        if (details[1].contains("to")) {
+            String[] dates = details[1].split("to");
+            this.start = dates[0];
+            this.end = dates[1];
+            System.out.println(end);
+        } else {
+            this.start = details[1];
+        }
         return details[0];
     }
 }

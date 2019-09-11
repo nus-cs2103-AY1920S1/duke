@@ -22,10 +22,7 @@ public class ListCommand extends Command {
 
         // Print all existing items in the list
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-        tasks.getList().forEach(x -> sb.append(tasks.getList().indexOf(x) + 1)
-                                       .append(". ")
-                                       .append(x)
-                                       .append("\n"));
+        tasks.getList().forEach(x -> sb.append(tasks.getList().indexOf(x) + 1).append(". ").append(x).append("\n"));
         return sb.toString();
     }
 

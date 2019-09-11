@@ -34,7 +34,6 @@ public class DoneCommand extends Command {
             t.markAsDone();
             storage.appendTaskToFile(t);
             assert (t.getStatus()) : "Not marked as done";
-
             return ("Nice! I've marked this task as done:\n" + t);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number. Not within range");

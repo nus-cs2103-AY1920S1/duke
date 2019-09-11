@@ -30,9 +30,7 @@ public class FindCommand extends Command {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         for (Task x : tasks.getList()) {
             if (x.toString().toLowerCase().contains(keyword)) {
-                sb.append(tasks.getList().indexOf(x) + 1)
-                  .append(". ")
-                  .append(x);
+                sb.append(tasks.getList().indexOf(x) + 1).append(". ").append(x).append("\n");
             }
         }
         return sb.toString();

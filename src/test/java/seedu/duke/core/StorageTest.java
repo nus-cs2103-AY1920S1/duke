@@ -22,7 +22,7 @@ public class StorageTest {
     void loadTask() throws IOException, ParseException {
         //create a new text file with dummy task values. then load it and then assertEqual with the
         // first element of the list
-        List<Task> list = new Storage().loadTask("D:/project/CS2103T/duke/data/duke_test.txt");
+        List<Task> list = new Storage().loadTask("data/duke_test.txt");
         assertEquals(false, list.get(0).getIsDone());
     }
 }

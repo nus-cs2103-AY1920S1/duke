@@ -7,7 +7,7 @@ public class AddCommand extends Command {
     private Task task;
 
     /**
-     * Constructor
+     * Constructor.
      * @param task - duke.task.Task given to execute command
      */
     public AddCommand(Task task) {
@@ -15,14 +15,15 @@ public class AddCommand extends Command {
     }
 
     /**
-     * @return Command type of command
+     * Returns the command type.
+     * @return Command type
      */
     public Commands getCommandType() {
         return this.task.getTaskType();
     }
 
     /**
-     * Adds given task into tasklist
+     * Adds given task into tasklist.
      * @param taskList - list containing all existing tasks
      */
     @Override
@@ -32,13 +33,13 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Prints out message after successful deletion of task
+     * Prints out message after successful deletion of task.
      * @param size - Current size of list
      */
     private String getSuccessfulAddMessage(int size) {
-        return "Got it. I've added this task: \n" +
-                "  " + this.task + "\n" +
-                "Now you have " + size + " tasks in the list.";
+        return "Got it. I've added this task: \n"
+                + "  " + this.task + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /* Returns stored task of comment */
@@ -48,9 +49,9 @@ public class AddCommand extends Command {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof AddCommand) {
+        if (obj instanceof AddCommand) {
             AddCommand addCommand = (AddCommand) obj;
-            if(addCommand.getTask().equals(this.task)) {
+            if (addCommand.getTask().equals(this.task)) {
                 return true;
             }
         }

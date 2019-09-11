@@ -15,6 +15,10 @@ public class Duke {
     private static MainWindow mainWindow;
     private static CommandHistoryStack commandHistory;
 
+    /**
+     * Constructor.
+     * @param mainWindow - Mainwindow application for JavaFX
+     */
     public Duke(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
         initialize();
@@ -23,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Initialize static variables
+     * Initialize static variables.
      */
     public void initialize() {
         dataStorage = new DataStorage();
@@ -32,12 +36,14 @@ public class Duke {
     }
 
     /**
-     * Adds commands to lists and runs executes commands
+     * Adds commands to lists and runs executes commands.
      */
     public String getResponse(String input) {
-        if(!input.trim().toLowerCase().equals("bye")) {
+        if (!input.trim().toLowerCase().equals("bye")) {
             try {
-                if (isUndoCommand(input)) { return executeUndo(); }
+                if (isUndoCommand(input)) {
+                    return executeUndo();
+                }
                 return executeCommand(input);
             } catch (UnknownCommandException e) {
                 return e.getMessage();
@@ -51,14 +57,14 @@ public class Duke {
     }
 
     /**
-     * Returns true if command complies to Undo Command Format, else returns false
+     * Returns true if command complies to Undo Command Format, else returns false.
      */
     private boolean isUndoCommand(String fullCommand) {
         return fullCommand.toLowerCase().trim().equals("undo");
     }
 
     /**
-     * Revert existing tasklist to state before last modification
+     * Revert existing tasklist to state before last modification.
      * @return - String containing message for successful undo
      * @throws EmptyHistoryException - if no more previous tasks to undo
      */
@@ -69,7 +75,7 @@ public class Duke {
     }
 
     /**
-     * Executes command based on input and updates tasklist based on given change
+     * Executes command based on input and updates tasklist based on given change.
      * @param input given directly by user
      * @return - String containing successful execution of command
      * @throws UnknownCommandException - Format errors of command

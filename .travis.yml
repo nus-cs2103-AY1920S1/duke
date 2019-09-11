@@ -1,7 +1,5 @@
 language: java
-
-before_install:
-  - ./gradlew assemble
+install: true
 
 script:
   - ./gradlew test

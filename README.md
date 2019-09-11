@@ -1,3 +1,4 @@
+﻿[![Build Status](https://travis-ci.org/Ellieyee/duke.svg?branch=master)](https://travis-ci.org/Ellieyee/duke)
 # Setting up
 
 **Prerequisites**

@@ -1,12 +1,11 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.task.TaskList;
 
 import java.util.Stack;
 
 /**
- * A Stack containing past commands - doesn't keep track of commands from previous runs
+ * A Stack containing past commands - doesn't keep track of commands from previous runs.
  */
 public class CommandHistoryStack {
     private Stack<TaskList> commandStack;
@@ -17,13 +16,21 @@ public class CommandHistoryStack {
     }
 
     /**
-     * @return most recent command
+     * Returns the most recent taskList - prior most recent modification.
+     * @return most recent taskList
      */
     public TaskList pop() throws EmptyHistoryException {
-        if(this.commandStack.isEmpty()) { throw new EmptyHistoryException(); }
+        if (this.commandStack.isEmpty()) {
+            throw new EmptyHistoryException();
+        }
         return this.commandStack.pop();
     }
 
+    /**
+     * Adds in new taskList after modification is made.
+     * @param command command that made modification
+     * @param taskList existing taksList
+     */
     public void update(Command command, TaskList taskList) {
         switch (command.getCommandType()) {
         case TODO:
@@ -33,9 +40,16 @@ public class CommandHistoryStack {
         case DONE:
             this.commandStack.push(taskList.getCopyTaskList());
             break;
+        default:
+
         }
     }
 
+    /**
+     * Returns message after successful undo-ing.
+     * @param taskList - new tasklist
+     * @return undo message
+     */
     public String getUndoMessage(TaskList taskList) {
         return UNDO_MESSAGE + taskList.getPrintListMessage();
     }

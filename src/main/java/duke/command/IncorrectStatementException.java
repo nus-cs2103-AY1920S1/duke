@@ -3,8 +3,9 @@ package duke.command;
 public class IncorrectStatementException extends UnknownCommandException {
     private String actualStatement;
     private String givenStatement;
+    
     /**
-     * Constructor
+     * Constructor.
      * @param givenStatement - Given message input by user
      * @param actualStatement - Expected ouput
      */
@@ -16,7 +17,7 @@ public class IncorrectStatementException extends UnknownCommandException {
 
     @Override
     public String getMessage() {
-        return "Sorry that statement is invalid. Try using \"/" + this.actualStatement + "\" instead of \"/"
-                + this.givenStatement + "\".";
+        return "Sorry that statement is invalid. Try using \"/" + this.actualStatement
+                + "\" instead of \"/" + this.givenStatement + "\".";
     }
 }

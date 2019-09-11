@@ -5,7 +5,7 @@ public class IncompleteCommandException extends UnknownCommandException {
     private String taskName;
 
     /**
-     * Constructor
+     * Constructor.
      * @param message - Message describing command: Empty or incomplete
      * @param taskName - Name of task
      */

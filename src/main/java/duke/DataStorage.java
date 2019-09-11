@@ -1,12 +1,20 @@
 package duke;
 
 import duke.command.Commands;
-import duke.task.*;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.TaskList;
+import duke.task.ToDoTask;
+import duke.task.Task;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 public class DataStorage {
     private static final String FILE_NAME = "duke.txt";
     private static final String PARENT_DIR_NAME = "data";
@@ -16,8 +24,9 @@ public class DataStorage {
     public DataStorage() {
         this.setFilePath();
     }
+
     /**
-     * Stores all tasks in tasklist into given txt file
+     * Stores all tasks in tasklist into given txt file.
      * @param taskList - list containing all existing tasks
      */
     public void storeTaskList(TaskList taskList) {
@@ -30,7 +39,7 @@ public class DataStorage {
     }
 
     /**
-     * Retrieves tasks from given txt file and stores into new duke.task.TaskList
+     * Retrieves tasks from given txt file and stores into new duke.task.TaskList.
      * @return duke.task.TaskList - list containing all existing tasks
      */
     public TaskList getStoredTaskList() {
@@ -52,8 +61,11 @@ public class DataStorage {
                 case "Todo":
                     taskList.add(new ToDoTask(taskInfo[2]));
                     break;
+                default:
                 }
-                if (taskInfo[1].equals("1")) { taskList.done(idx); }
+                if (taskInfo[1].equals("1")) {
+                    taskList.done(idx);
+                }
                 idx++;
             }
         } catch (Exception e) {
@@ -63,7 +75,7 @@ public class DataStorage {
     }
 
     /**
-     * Converts existing taskList into storable and easily retrievable string format
+     * Converts existing taskList into storable and easily retrievable string format.
      * @param taskList - list containing all existing tasks
      * @return String format of taskList
      */
@@ -71,7 +83,6 @@ public class DataStorage {
         String contents = "";
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            Commands taskType = task.getTaskType();
             String isDone = (task.isDone()) ? "1" : "0";
             String taskName = task.getName();
             switch (task.getTaskType()) {
@@ -88,11 +99,15 @@ public class DataStorage {
             case TODO:
                 contents += "Todo" + "|" + isDone + "|" + taskName + "\n";
                 break;
+            default:
             }
         }
         return contents;
     }
 
+    /**
+     * Sets the file path based on the user's system.
+     */
     //@@author {ang-zeyu}-reused
     //Reused from https://github.com/ang-zeyu/duke/blob/master/src/main/java/duke/storage/Storage.java with minor modifications
     private void setFilePath() {

@@ -8,7 +8,7 @@ public class DeleteCommand extends Command {
     private static final Commands DELETE_COMMAND_TYPE = Commands.DELETE;
 
     /**
-     * Constructor
+     * Constructor.
      * @param idx - Index of task to delete
      */
     public DeleteCommand(int idx) {
@@ -16,21 +16,15 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * @return Command type of command
+     * Returns command type of command.
+     * @return Command type
      */
     public Commands getCommandType() {
         return DELETE_COMMAND_TYPE;
     }
 
     /**
-     * @return Index of task to delete
-     */
-    public int getIndex() {
-        return this.idx;
-    }
-
-    /**
-     * Execute delete command on given task and save into tasklist
+     * Execute delete command on given task and save into taskList.
      * @param taskList - list containing all existing tasks
      */
     @Override
@@ -41,13 +35,13 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Prints out message after successful deletion of task
+     * Prints out message after successful deletion of task.
      * @param task - duke.task.Task that has been successfully deleted
      * @param size - Current size of list
      */
     private String getSuccessDeleteTaskMessage(Task task, int size) {
-        return "Noted. I've removed this task:\n" +
-                "  " + task + "\n" +
-                "Now you have " + size + " tasks in the list.";
+        return "Noted. I've removed this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 }

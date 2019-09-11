@@ -28,7 +28,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Storage storage = new Storage("src/main/java/data/duke.txt");
+    private static Storage storage = new Storage("src/main/java/data/duke.txt");
 
 
     public static void main(String[] args) {
@@ -146,7 +146,7 @@ public class Duke extends Application {
         TaskList commands = new TaskList(this.storage.load(new ArrayList<Task>())); //TODO
         Parser p = new Parser(commands, this.storage, ui);
         String xx = p.parse(input);
-
+        storage.close(commands);
         return xx;
     }
 

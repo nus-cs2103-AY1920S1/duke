@@ -12,12 +12,12 @@ public class Todo extends Task {
 
     @Override
     public String getOverallStatus() {
-        return "[T]" + getCurrentStatus() + description;
+        return "[T]" + getCurrentStatus() + description.getValue();
     }
 
     @Override
     public String encodeForStorage() {
-        int myInt = isDone ? 1 : 0;
-        return "todo [" + myInt + "]" + description;
+        int myInt = isDone.getValue() ? 1 : 0;
+        return "todo [" + myInt + "]" + description.getValue();
     }
 }

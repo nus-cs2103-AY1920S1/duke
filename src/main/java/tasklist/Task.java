@@ -1,5 +1,8 @@
 package tasklist;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,8 +11,8 @@ import java.time.format.DateTimeFormatter;
  * gurantees that all important methods are implemented
  */
 public abstract class Task {
-    protected String description;
-    protected boolean isDone;
+    protected SimpleStringProperty description;
+    protected SimpleBooleanProperty isDone;
     protected LocalDateTime date;
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
@@ -17,8 +20,8 @@ public abstract class Task {
      * First of two constructors for deadline and event tasks.
      */
     public Task(String description, boolean completionStatus, LocalDateTime date) {
-        this.description = description;
-        this.isDone = completionStatus;
+        this.description = new SimpleStringProperty(description);
+        this.isDone = new SimpleBooleanProperty(completionStatus);
         this.date = date;
     }
 
@@ -26,8 +29,8 @@ public abstract class Task {
      * Second of two constructors for todo tasks.
      */
     public Task(String description, boolean completionStatus) {
-        this.description = description;
-        this.isDone = completionStatus;
+        this.description = new SimpleStringProperty(description);
+        this.isDone = new SimpleBooleanProperty(completionStatus);
     }
 
     /**
@@ -35,7 +38,7 @@ public abstract class Task {
      * @return returns either a tick or cross according to the completion status
      */
     public String getCurrentStatus() {
-        return ((isDone ? "[✓] " : "[✗] ")); //return tick or X symbols
+        return ((isDone.getValue() ? "[✓] " : "[✗] ")); //return tick or X symbols
     }
 
     /**
@@ -49,7 +52,7 @@ public abstract class Task {
      * changes task status to done.
      */
     public void completeTask() {
-        isDone = true;
+        isDone.setValue(true);
     }
 
     /**

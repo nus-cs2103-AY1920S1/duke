@@ -16,13 +16,13 @@ public class Event extends Task {
 
     @Override
     public String getOverallStatus() {
-        return "[E]" + getCurrentStatus() + description + "(at:" + date.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + getCurrentStatus() + description.getValue() + "(at:" + date.format(OUTPUT_FORMAT) + ")";
     }
 
     @Override
     public String encodeForStorage() {
-        int myInt = isDone ? 1 : 0;
-        return "event [" + myInt + "]" + description + "/at"
+        int myInt = isDone.getValue() ? 1 : 0;
+        return "event [" + myInt + "]" + description.getValue() + "/at"
                 + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 }

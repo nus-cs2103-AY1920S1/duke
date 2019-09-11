@@ -14,13 +14,13 @@ public class Deadline extends Task {
 
     @Override
     public String getOverallStatus() {
-        return "[D]" + getCurrentStatus() + description + "(by:" + date.format(OUTPUT_FORMAT) + ")";
+        return "[D]" + getCurrentStatus() + description.getValue() + "(by:" + date.format(OUTPUT_FORMAT) + ")";
     }
 
     @Override
     public String encodeForStorage() {
-        int myInt = isDone ? 1 : 0;
-        return "deadline [" + myInt + "]" + description + "/by"
+        int myInt = isDone.getValue() ? 1 : 0;
+        return "deadline [" + myInt + "]" + description.getValue() + "/by"
                 + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 

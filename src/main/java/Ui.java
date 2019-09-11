@@ -1,5 +1,6 @@
 import javafx.application.Platform;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.Scanner;
@@ -113,8 +114,18 @@ public class Ui {
                 mainTaskList.addEventTask(Parser.parseDetails(parseInfo[1]));
                 response.append(getTaskAddition(mainTaskList) + "\n");
                 break;
-            case "set":
-                response.append("Data source has been changed\n");
+            case "read":
+                response.append("Data source for reading has been changed\n");
+
+                try {
+                    setList(new TaskList(new Storage(parseInfo[1]).load()));
+                } catch (FileNotFoundException e) {
+                    response.append(LOADING_ERROR + "\n");
+                    setList(new TaskList());
+                }
+                break;
+            case "write":
+                response.append("Data source for writing has been changed\n");
                 setStorage(new Storage(parseInfo[1]));
                 break;
             case "list":
@@ -133,8 +144,7 @@ public class Ui {
                 break;
             default:
                 try {
-                    if (input.equals("todo") || input.equals("deadline") || input.equals("event")
-                            || input.equals("done") || input.equals("find")) {
+                    if (input.matches("todo|deadline|event|done|find|read|write")) {
                         String message = String.format("The description of a %s cannot be empty.", input);
                         throw new DukeException(message);
                     } else {

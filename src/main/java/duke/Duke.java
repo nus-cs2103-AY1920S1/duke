@@ -23,7 +23,7 @@ public class Duke {
      *
      * @param filePath File path of the save file to store tasks.
      */
-    public Duke(String filePath) {
+    Duke(String filePath) {
         ui = new Ui();
         Storage storage = new Storage(filePath);
         TaskList tasks;
@@ -70,5 +70,27 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
+    }
+
+    String getResponse(String input) {
+        try {
+            String[] words = input.split(" ");
+            Command command = parser.parse(words);
+            return String.join("\n", command.run(words));
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
+
+    boolean isExit(String input) {
+        String[] words = input.split(" ");
+        try {
+            return parser.parse(words).isExit();
+        } catch (DukeException e) {
+            return false;
+        }
     }
 }

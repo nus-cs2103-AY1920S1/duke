@@ -127,4 +127,19 @@ public class Ui {
         }
     }
 
+    public void printFoundTasks(LinkedList<Task> foundTasks) {
+        if (foundTasks.size() == 0) {
+            System.out.println("No matching tasks found!");
+        } else {
+            System.out.println("Here are the matching tasks in your list:");
+
+            for (int i = 0; i < foundTasks.size(); i++) {
+                Task t = foundTasks.get(i);
+                if (!t.getDescription().equals("fake task")) {
+                    System.out.println((i + 1) + "." + t);
+                }
+            }
+        }
+    }
+
 }

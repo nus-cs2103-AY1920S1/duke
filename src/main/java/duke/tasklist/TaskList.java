@@ -19,7 +19,7 @@ public class TaskList {
      * Default constructor for TaskList. Used in case of unable to locate file.
      */
     public TaskList() {
-        tasks = new ArrayList<Task>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -40,107 +40,31 @@ public class TaskList {
      */
     public Command doCommand(Command command) throws DukeException {
         String input = command.getInput();
-        String[] s = input.split("\\s");
         String output = null;
-        String desc = null;
-        String date = null;
-        int n;
-        Task task;
         switch (command.getComd()) {
             case BYE:
-                output = "See you again.";
+                output = byeCommand();
                 break;
             case LIST:
-                output = "Here are the tasks in your list:\n";
-                for (int i = 0; i < tasks.size(); i++) {
-                    output += (i + 1) + "." + tasks.get(i);
-                    if (i < tasks.size() - 1) {
-                        output += "\n";
-                    }
-                }
+                output = listCommand();
                 break;
             case DONE:
-                if (s.length <= 1) {
-                    throw new DukeException("Task number cannot be empty.\n");
-                }
-                n = Integer.parseInt(s[1]) - 1;
-                if (n < 0 || n > tasks.size() - 1) {
-                    throw new DukeException("Task number is not in the list.\n");
-                }
-                tasks.get(n).markAsDone();
-                output = "Nice! I've marked this task as done: \n" + tasks.get(n);
+                output = doneCommand(input);
                 break;
             case DELETE:
-                if (s.length <= 1) {
-                    throw new DukeException("Task number cannot be empty.\n");
-                }
-                n = Integer.parseInt(s[1]) - 1;
-                if (n < 0 || n > tasks.size() - 1) {
-                    throw new DukeException("Task number is not in the list.\n");
-                }
-                output = "Noted. I've removed this task: \n" + tasks.get(n) +
-                        "\nNow you have " + (tasks.size() - 1) + " tasks in the list.";
-                tasks.remove(n);
+                output = deleteCommand(input);
                 break;
             case TODO:
-                if (s.length <= 1) {
-                    throw new DukeException("The description cannot be empty.\n");
-                }
-                task = new ToDo(input.substring(5));
-                tasks.add(task);
-                output = "Got it. I've added this task: \n" + task +
-                        "\nNow you have " + tasks.size() + " tasks in the list.";
+                output = toDoCommand(input);
                 break;
             case DEADLINE:
-                if (s.length <= 1) {
-                    throw new DukeException("The description cannot be empty.\n");
-                }
-                if (!input.contains("/by")) {
-                    throw new DukeException("Missing /by.\n");
-                }
-                desc = input.substring(9, input.indexOf('/') - 1);
-                date = input.substring(input.indexOf("/by") + 4);
-                task = new Deadline(desc, date);
-                tasks.add(task);
-                output = "Got it. I've added this task: \n" + task +
-                        "\nNow you have " + tasks.size() + " tasks in the list.";
+                output = deadlineCommand(input);
                 break;
             case EVENT:
-                if (s.length <= 1) {
-                    throw new DukeException("The description cannot be empty.\n");
-                }
-                if (!input.contains("/at")) {
-                    throw new DukeException("Missing /at.\n");
-                }
-                desc = input.substring(6, input.indexOf('/') - 1);
-                date = input.substring(input.indexOf("/at") + 4);
-                task = new Event(desc, date);
-                tasks.add(task);
-                output = "Got it. I've added this task: \n" + task +
-                        "\nNow you have " + tasks.size() + " tasks in the list.";
+                output = eventCommand(input);
                 break;
             case FIND:
-                if (s.length <= 1) {
-                    throw new DukeException("The description cannot be empty.\n");
-                }
-                ArrayList<Task> foundTasks = new ArrayList<Task>();
-                String search = input.substring(5).toLowerCase();
-                for (Task t : tasks) {
-                    if (t.getDescription().toLowerCase().contains(search)) {
-                        foundTasks.add(t);
-                    }
-                }
-                if (foundTasks.isEmpty()) {
-                    output = "There are no matching tasks.";
-                } else {
-                    output = "These are the found tasks:\n";
-                    for (int i = 0; i < foundTasks.size(); i++) {
-                        output += (i + 1) + "." + foundTasks.get(i);
-                        if (i < foundTasks.size() - 1) {
-                            output += "\n";
-                        }
-                    }
-                }
+                output = findCommand(input);
                 break;
             case NULL:
                 throw new DukeException("Wrong input.");
@@ -149,5 +73,119 @@ public class TaskList {
         command.setOutput(output);
         command.setTaskList(tasks);
         return command;
+    }
+
+    private String byeCommand() {
+        return "See you again.";
+    }
+
+    private String listCommand() {
+        String s = "Here are the tasks in your list:\n";
+        StringBuilder sb = new StringBuilder(s);
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(i + 1).append(".").append(tasks.get(i));
+            if (i < tasks.size() - 1) {
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+
+    private String doneCommand(String input) throws DukeException {
+        String[] s = input.split("\\s");
+        if (s.length <= 1) {
+            throw new DukeException("Task number cannot be empty.\n");
+        }
+        int n = Integer.parseInt(s[1]) - 1;
+        if (n < 0 || n > tasks.size() - 1) {
+            throw new DukeException("Task number is not on the list.\n");
+        }
+        tasks.get(n).markAsDone();
+        return "Nice! I've marked this task as done: \n" + tasks.get(n);
+    }
+
+    private String deleteCommand(String input) throws DukeException {
+        String[] s = input.split("\\s");
+        if (s.length <= 1) {
+            throw new DukeException("Task number cannot be empty.\n");
+        }
+        int n = Integer.parseInt(s[1]) - 1;
+        if (n < 0 || n > tasks.size() - 1) {
+            throw new DukeException("Task number is not in the list.\n");
+        }
+        String output = "Noted. I've removed this task: \n" + tasks.get(n) +
+                "\nNow you have " + (tasks.size() - 1) + " tasks in the list.";
+        tasks.remove(n);
+        return output;
+    }
+
+    private String toDoCommand(String input) throws DukeException {
+        String[] s = input.split("\\s");
+        if (s.length <= 1) {
+            throw new DukeException("The description cannot be empty.\n");
+        }
+        Task task = new ToDo(input.substring(5));
+        tasks.add(task);
+        return "Got it. I've added this task: \n" + task +
+                "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
+
+    private String deadlineCommand(String input) throws DukeException {
+        String[] s = input.split("\\s");
+        if (s.length <= 1) {
+            throw new DukeException("The description cannot be empty.\n");
+        }
+        if (!input.contains("/by")) {
+            throw new DukeException("Missing /by.\n");
+        }
+        String desc = input.substring(9, input.indexOf('/') - 1);
+        String date = input.substring(input.indexOf("/by") + 4);
+        Task task = new Deadline(desc, date);
+        tasks.add(task);
+        return "Got it. I've added this task: \n" + task +
+                "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
+
+    private String eventCommand(String input) throws DukeException {
+        String[] s = input.split("\\s");
+        if (s.length <= 1) {
+            throw new DukeException("The description cannot be empty.\n");
+        }
+        if (!input.contains("/at")) {
+            throw new DukeException("Missing /at.\n");
+        }
+        String desc = input.substring(6, input.indexOf('/') - 1);
+        String date = input.substring(input.indexOf("/at") + 4);
+        Task task = new Event(desc, date);
+        tasks.add(task);
+        return "Got it. I've added this task: \n" + task +
+                "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
+
+    private String findCommand(String input) throws DukeException {
+        String[] s = input.split("\\s");
+        if (s.length <= 1) {
+            throw new DukeException("The description cannot be empty.\n");
+        }
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        String search = input.substring(5).toLowerCase();
+        for (Task t : tasks) {
+            if (t.getDescription().toLowerCase().contains(search)) {
+                foundTasks.add(t);
+            }
+        }
+        StringBuilder sb;
+        if (foundTasks.isEmpty()) {
+            sb = new StringBuilder("There are no matching tasks.");
+        } else {
+            sb = new StringBuilder("These are the found tasks:\n");
+            for (int i = 0; i < foundTasks.size(); i++) {
+                sb.append(i + 1).append(".").append(foundTasks.get(i));
+                if (i < foundTasks.size() - 1) {
+                    sb.append("\n");
+                }
+            }
+        }
+        return sb.toString();
     }
 }

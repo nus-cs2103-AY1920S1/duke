@@ -5,74 +5,75 @@ public class Command {
     public Command() {
     }
 
-    public void execute(TaskList taskList, UI ui,Storage storage) throws DukeException, IOException {
+    public String execute(TaskList taskList, UI ui,Storage storage, String input) throws DukeException, IOException {
         storage.LoadFile();
         ui.printGreeting();
-        String TaskLine = ui.readCommand();
+        String TaskLine = input;
         Parser parser = new Parser();
+        String reply = "";
         outLoop:
         while (TaskLine != null) {
             String[] words = TaskLine.split(" ");
             switch (parser.parse(TaskLine)) {
             case BYE:
-                ui.printBye();
+                reply = ui.printBye();
                 break outLoop;
 
             case LIST :
-                ui.printList(taskList);
-                TaskLine = ui.readCommand();
-                break;
+                reply = ui.printList(taskList);
+                //TaskLine = ui.readCommand();
+                break outLoop;
 
             case DONE :
                 int taskNo = Integer.parseInt(TaskLine.substring(5));
                 taskList.get(taskNo - 1).markAsDone(taskList.get(taskNo - 1));
-                ui.printDone(taskList.get(taskNo - 1));
-                TaskLine = ui.readCommand();
-                break;
+                reply = ui.printDone(taskList.get(taskNo - 1));
+                //TaskLine = ui.readCommand();
+                break outLoop;
 
             case TODO :
                 if (TaskLine.length() == 4) {
-                    ui.throwInputError("todo");
+                    reply =  ui.throwInputError("todo");
                 } else {
                     Task todoTask = new Todo(TaskLine.substring(5));
                     taskList.add(todoTask);
-                    ui.printAddTask(todoTask,taskList.size());
+                    reply =  ui.printAddTask(todoTask,taskList.size());
                 }
-                TaskLine = ui.readCommand();
+                //TaskLine = ui.readCommand();
 
-                break;
+                break outLoop;
 
             case DEADLINE :
                 if (TaskLine.length() == 8) {
-                    ui.throwInputError("deadline");
+                    reply =  ui.throwInputError("deadline");
                 } else {
                     int indexOfSlash = TaskLine.indexOf("/");
                     Task deadlineTask = new Deadline(TaskLine.substring(9, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
                     taskList.add(deadlineTask);
-                    ui.printAddTask(deadlineTask,taskList.size());
+                    reply =  ui.printAddTask(deadlineTask,taskList.size());
                 }
-                TaskLine = ui.readCommand();
-                break;
+                //TaskLine = ui.readCommand();
+                break outLoop;
 
             case EVENT :
                 if (TaskLine.length() == 5) {
-                    ui.throwInputError("event");
+                    reply =  ui.throwInputError("event");
                 } else {
                     int indexOfSlash = TaskLine.indexOf("/");
                     Task eventTask = new Event(TaskLine.substring(6, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
                     taskList.add(eventTask);
-                    ui.printAddTask(eventTask,taskList.size());
+                    reply =  ui.printAddTask(eventTask,taskList.size());
                 }
-                TaskLine = ui.readCommand();
-                break;
+                //TaskLine = ui.readCommand();
+                break outLoop;
 
             case DELETE :
                 int taskNoDelete = Integer.parseInt(TaskLine.substring(7));
                 Task deletedTask = taskList.get(taskNoDelete - 1);
-                ui.printDelete(deletedTask, taskList.size());
+                reply =  ui.printDelete(deletedTask, taskList.size());
                 taskList.remove(taskNoDelete - 1);
-                TaskLine = ui.readCommand();
-                break;
+                //TaskLine = ui.readCommand();
+                break outLoop;
 
             case FIND :
                 String keyword = TaskLine.substring(5);
@@ -82,16 +83,17 @@ public class Command {
                         findList.add(taskList.get(i));
                     }
                 }
-                ui.printFind(findList);
-                TaskLine = ui.readCommand();
-                break;
+                reply =  ui.printFind(findList);
+                //TaskLine = ui.readCommand();
+                break outLoop;
 
             default :
-                ui.printIDK();
-                TaskLine = ui.readCommand();
-                break;
+                reply =  ui.printIDK();
+                //TaskLine = ui.readCommand();
+                break outLoop;
             }
         }
         storage.UpdateFile();
+        return reply;
     }
 }

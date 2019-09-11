@@ -1,3 +1,4 @@
+import javafx.scene.control.TextField;
 import java.util.Scanner;
 
 /**
@@ -5,17 +6,22 @@ import java.util.Scanner;
  */
 public class UI {
     protected Scanner sc;
-
+    private TextField userInput;
     public UI() {
         this.sc = sc;
     }
 
     public String readCommand() {
         sc = new Scanner(System.in);
-        return sc.nextLine();
+        userInput = new TextField();
+        return userInput.getText();
+        //return sc.nextLine();
     }
 
-    public void printGreeting() {
+    String line = ("____________________________________________________\n");
+    String lineOnly = ("____________________________________________________");
+
+    public String printGreeting() {
         String logo = "   _     _      _     _      _     _       _     _      _     _      _     _      _     _   \n" +
                 "  (c).-.(c)    (c).-.(c)    (c).-.(c)     (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)  \n" +
                 "   / ._. \\      / ._. \\      / ._. \\       / ._. \\      / ._. \\      / ._. \\      / ._. \\   \n" +
@@ -25,104 +31,105 @@ public class UI {
                 " _.' `-' '._  _.' `-' '._  _.' `-' '._   _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._ \n" +
                 "(.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.) (.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.)\n" +
                 " `-'     `-'  `-'     `-'  `-'     `-'   `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-' ";
-        System.out.println("Hello from\n" + logo);
-        String greet = "____________________________________________________________\n" +
+
+        String greet = line +
                 "     Hello! I'm Tai Ping\n" +
                 "     What can I do for you?\n" +
-                "____________________________________________________________";
-        System.out.println(greet);
+                lineOnly;
+        return "Hello from\n" + logo + greet;
     }
 
-    public void printBye() {
-        String bye = "____________________________________________________________\n" +
+    public String printBye() {
+        String bye = line +
                 "     Bye. Hope to see you again soon!\n" +
-                "____________________________________________________________\n";
-        System.out.println(bye);
+                line;
+        return bye;
     }
 
-    public void printIDK() {
-        System.out.println("____________________________________________________________\n" +
+    public String printIDK() {
+        return line +
                 "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
-                "____________________________________________________________");
+                lineOnly;
     }
 
-    public void printLine() {
-        System.out.println("____________________________________________________________\n");
-    }
-
-    public void printList(TaskList taskList) {
-        System.out.println("____________________________________________________________\n" +
-                "Here are the tasks in your list:");
+    public String printList(TaskList taskList) {
         int count = 1;
+        String tasks = "";
         for (int i = 0; i < taskList.size(); i++) {
             Task t = taskList.get(i);
-            System.out.println(count + "." + t.toString());
+            tasks = tasks + count + "." + t.toString() + "\n";
             count++;
         }
-        System.out.println("____________________________________________________________\n");
+        return (line +
+                "Here are the tasks in your list:\n" +
+                tasks +
+                line);
     }
 
-    public void printDone(Task task) {
-        System.out.println("____________________________________________________________\n" +
-                "Congratulations! I've marked this task as done: ");
-        System.out.println("[" + task.getStatusIcon() + "] " + task.getDescription());
-        System.out.println("____________________________________________________________\n");
+    public String printDone(Task task) {
+        return (line +
+                "Congratulations! I've marked this task as done: \n" +
+        "[" + task.getStatusIcon() + "] " + task.getDescription() + "\n" +
+        line);
     }
 
-    public void printAddTask(Task task, int taskListSize) {
-        System.out.println("____________________________________________________________\n" +
-                "Got it. I've added this task: ");
-        System.out.println(task.toString());
-        System.out.println("Now you have " +  taskListSize + " task(s) in the list.");
-        System.out.println("____________________________________________________________\n");
+    public String printAddTask(Task task, int taskListSize) {
+        return line +
+                "Got it. I've added this task: \n" +
+        task.toString() + "\n" +
+        "Now you have " +  taskListSize + " task(s) in the list.\n" +
+        line;
     }
 
-    public void printDelete(Task deletedTask, int taskListSize) {
-        System.out.println("____________________________________________________________\n" +
+    public String printDelete(Task deletedTask, int taskListSize) {
+        return line +
                 "Noted. I've removed this task: \n" +
                 deletedTask.toString() + "\n" +
                 "Now you have " + (taskListSize - 1) + " task(s) in the list.\n" +
-                "____________________________________________________________");
+                lineOnly;
     }
 
-    public void printFind(TaskList findList) {
-        System.out.println("____________________________________________________________\n" +
-                "Here are the matching tasks in your list:");
+    public String printFind(TaskList findList) {
         int count = 1;
+        String tasks = "";
         for (int i = 0; i < findList.size(); i++) {
             Task t = findList.get(i);
-            System.out.println(count + "." + t.toString());
+            tasks = tasks + count + "." + t.toString() +"\n";
             count++;
         }
-        System.out.println("____________________________________________________________\n");
+        return line +
+                "Here are the matching tasks in your list:\n" +
+                tasks + "\n" +
+                line;
+
     }
 
-    public void throwInputError(String taskType) throws DukeException {
+    public String throwInputError(String taskType) throws DukeException {
         switch (taskType) {
         case "todo" :
-            throw new DukeException("____________________________________________________________\n" +
+            throw new DukeException(line +
                     "     Hey! Description of a todo cannot be empty :(\n" +
-                    "____________________________________________________________");
+                    lineOnly);
         case "event" :
-            throw new DukeException("____________________________________________________________\n" +
+            throw new DukeException(line +
                     "     Hey! Description of a event cannot be empty :(\n" +
-                    "____________________________________________________________");
+                    lineOnly);
         case "deadline" :
-            throw new DukeException("____________________________________________________________\n" +
+            throw new DukeException(line +
                     "     Hey! Description of a deadline cannot be empty :(\n" +
-                    "____________________________________________________________");
+                    lineOnly);
         case "done" :
-            throw new DukeException("____________________________________________________________\n" +
+            throw new DukeException(line +
                     "     Hey! Description of a done cannot be empty :(\n" +
-                    "____________________________________________________________");
+                    lineOnly);
         case "delete" :
-            throw new DukeException("____________________________________________________________\n" +
+            throw new DukeException(line +
                     "     Hey! Description of a delete cannot be empty :(\n" +
-                    "____________________________________________________________");
+                    lineOnly);
         default :
-            throw new DukeException("____________________________________________________________\n" +
+            throw new DukeException(line +
                     "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
-                    "____________________________________________________________");
+                    lineOnly);
         }
     }
 }

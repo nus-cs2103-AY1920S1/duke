@@ -17,23 +17,28 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private Button sendButton;
     private Scene scene;
-    private Storage storage;
-    private TaskList tasks;
-    private UI ui;
     private TextField userInput;
     private VBox dialogContainer;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Storage storage;
+    private TaskList tasks;
+    private UI ui;
+    private Command c;
 
-    public static void main(String[] args) throws IOException, DukeException {
+    public Duke() {
+    }
+
+    /*public void run() throws IOException, DukeException {
         UI ui = new UI();
         TaskList taskList = new TaskList();
         Storage storage = new Storage(taskList);
         Command c = new Command();
-        c.execute(taskList, ui, storage);
-
     }
+    public static void main (String[] args) throws IOException, DukeException {
+        new Duke().run();
+    }*/
 
     @Override
     public void start(Stage stage) {
@@ -132,6 +137,24 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) {
-        return "Duke heard: " + input;
+        if (input != null) {
+            String output = "";
+            try {
+                UI ui = new UI();
+                TaskList taskList = new TaskList();
+                Storage storage = new Storage(taskList);
+                Command c = new Command();
+                output = c.execute(taskList, ui, storage, input);
+            } catch (DukeException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return "TaiPing say: " + output;
+        } else {
+            return "error";
+        }
     }
+
+
 }

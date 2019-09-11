@@ -25,7 +25,6 @@ public class Duke {
      * @return String of message.
      */
     public String getResponse(String input) {
-        System.out.println("inside get response");
         return run(input);
     }
 

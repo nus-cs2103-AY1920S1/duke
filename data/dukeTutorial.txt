@@ -1,3 +1,2 @@
-T | 0 | homework
 E | 0 | meeting | 31/12/2019 1800
 D | 0 | assignment | 31/12/2019 1800

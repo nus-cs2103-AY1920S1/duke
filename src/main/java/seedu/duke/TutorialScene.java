@@ -11,128 +11,44 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-/**
- * Controller for MainWindow. Provides the layout for the other controls.
- */
-public class MainWindow extends AnchorPane {
-    @FXML
-    private ScrollPane scrollPane;
-    @FXML
-    private VBox dialogContainer;
-    @FXML
-    private TextField userInput;
-    @FXML
-    private Button sendButton;
+public class TutorialScene {
     @FXML
     private VBox layout;
+    @FXML
+    private TextField input;
+    @FXML
+    private Button enterBtn;
+    @FXML
+    private ScrollPane helpContainer;
 
-    private Duke duke;
+    private Stage stage;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Stage stage;
-    private Scene scene;
     private Duke tutorialDuke;
-    private TextField input;
+    private Scene scene;
+    private Scene mainScene;
 
+    public TutorialScene() {
+    }
 
-    /**
-     * Class constructor.
-     */
-    public MainWindow() {}
-
-    /**
-     * Initialises the layout for the main window.
-     */
     @FXML
     public void initialize() {
         Ui ui = new Ui();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.showIntro(), dukeImage));
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    /**
-     * Sets the duke attribute of Main Window.
-     */
-    public void setDuke(Duke d) {
-        duke = d;
-        duke.load();
-    }
-
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    @FXML
-    private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
-        if (response.equals("tutorial")) {
-            showTutorialScene();
-        } else {
-            var db = DialogBox.getDukeDialog(response, dukeImage);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage), db);
-            userInput.clear();
-        }
-   }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void setMainScene(Scene scene) {
-        this.scene = scene;
-    }
-
-    private void showTutorialScene() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/TutorialScene.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            fxmlLoader.<TutorialScene>getController().setStage(stage);
-            fxmlLoader.<TutorialScene>getController().setScene(this.scene);
-            stage.setTitle("DUKE PROJECT");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /*layout = new VBox(20);
-        layout.setPrefHeight(552.0);
-        layout.setPrefWidth(388.0);
-        AnchorPane anchor = new AnchorPane();
-        input = new TextField();
-        input.setPrefHeight(41.0);
-        input.setPrefWidth(324.0);
-        Button enterBtn = new Button("Send");
-        anchor.setBottomAnchor(input, 1.0);
-        anchor.setBottomAnchor(enterBtn, 1.0);
-        enterBtn.layoutXProperty().setValue(324.0);
-        enterBtn.layoutYProperty().setValue(558.0);
-        enterBtn.setPrefHeight(41.0);
-        enterBtn.setPrefWidth(76.0);
-        ScrollPane helpContainer = new ScrollPane();
-        helpContainer.setContent(layout);
-        helpContainer.vvalueProperty().bind(layout.heightProperty());
-        helpContainer.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        helpContainer.setHvalue(1.0);
-        helpContainer.setPrefHeight(557.0);
-        helpContainer.setPrefWidth(400.0);
         layout.getChildren().add(DialogBox.getDukeDialog("For the tutorial, \n" +
                 "To learn more about the task managing commands, enter 'tasks'\n" +
                 "To learn more about the expense tracking commands, enter 'expenses'\n " +
                 "To return to the actual chat bot, enter 'back' anytime.\n", dukeImage));
-        enterBtn.setDefaultButton(true);
-        enterBtn.setOnAction(event -> handleHelpUserInput());
-        anchor.getChildren().addAll(input, enterBtn, helpContainer);
-        Scene helpScene = new Scene(anchor, 400, 600);
-        stage.setScene(helpScene);
-        stage.show();*/
+        helpContainer.vvalueProperty().bind(layout.heightProperty());
     }
 
+    public void showIntro() {
+        layout.getChildren().add(DialogBox.getDukeDialog("For the tutorial, \n" +
+                "To learn more about the task managing commands, enter 'tasks'\n" +
+                "To learn more about the expense tracking commands, enter 'expenses'\n " +
+                "To return to the actual chat bot, enter 'back' anytime.\n", dukeImage));
+    }
 
+    @FXML
     private void handleHelpUserInput() {
         String userInput = input.getText();
         if (userInput.equals("tasks")) {
@@ -257,5 +173,12 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input.getText(), userImage),
                     DialogBox.getDukeDialog(response, dukeImage));
         }
+    }
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
     }
 }

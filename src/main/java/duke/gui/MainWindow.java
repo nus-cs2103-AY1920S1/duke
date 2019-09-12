@@ -11,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
-
 import duke.ui.Response;
 
 /**
@@ -28,7 +26,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
     @FXML
-    public SimpleBooleanProperty dukeActivityStatus;
+    SimpleBooleanProperty dukeActivityStatus;
 
     private Duke duke;
 
@@ -57,37 +55,28 @@ public class MainWindow extends AnchorPane {
      *
      * @param filePath The file path from which to try to load a TaskList from
      */
-    public void loadExistingTaskList(String filePath) {
+    void loadExistingTaskList(String filePath) {
         assert filePath != null;
 
         Response response = duke.setUp(filePath);
         if (!response.wasCausedByError()) {
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeNormalDialog(
-                            response.toString(),
-                            dukeImage));
+            display(DialogBox.getDukeNormalDialog(response.toString(), dukeImage));
         } else {
-            dialogContainer.getChildren().add(
-                    DialogBox.getDukeErrorDialog(
-                            response.toString(),
-                            dukeImage));
+            display(DialogBox.getDukeErrorDialog(response.toString(), dukeImage));
         }
     }
 
     /**
      * Displays the Response from activating Duke.
      */
-    public void activateDuke() {
+    void activateDuke() {
         Response response = duke.greet();
 
         assert response != null;
         dukeActivityStatus.set(response.isActive());
 
         assert response.toString() != null;
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeNormalDialog(
-                        response.toString(),
-                        dukeImage));
+        display(DialogBox.getDukeNormalDialog(response.toString(), dukeImage));
     }
 
 
@@ -95,12 +84,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         assert input != null;
+
         Response res = duke.getResponse(input);
+
         if (res.wasCausedByError()) {
             displayError(input, res.toString());
         } else {
             displayDialog(input, res.toString());
         }
+
         userInput.clear();
         dukeActivityStatus.set(res.isActive());
     }
@@ -114,7 +106,8 @@ public class MainWindow extends AnchorPane {
     private void displayDialog(String input, String response) {
         assert input != null;
         assert response != null;
-        dialogContainer.getChildren().addAll(
+
+        display(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeNormalDialog(response, dukeImage)
         );
@@ -130,9 +123,15 @@ public class MainWindow extends AnchorPane {
         assert input != null;
         assert response != null;
 
-        dialogContainer.getChildren().addAll(
+        display(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeErrorDialog(response, dukeImage)
         );
+    }
+
+    private void display(DialogBox... dialogs) {
+        for (DialogBox dialog : dialogs) {
+            dialogContainer.getChildren().add(dialog);
+        }
     }
 }

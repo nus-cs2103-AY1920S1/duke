@@ -15,7 +15,7 @@ public class DukeMissingArgumentException extends DukeException {
      * @param type The type of the Command which parameters were not all provided arguments
      * @param arguments The arguments provided along with the Command
      */
-    public DukeMissingArgumentException(Type type, String[] arguments) {
+    DukeMissingArgumentException(Type type, String[] arguments) {
         super(missingArguments(type, arguments));
     }
 
@@ -25,11 +25,11 @@ public class DukeMissingArgumentException extends DukeException {
         assert argumentsProvided != null;
 
         StringBuilder message = new StringBuilder("The following field(s) cannot be empty:");
-        ArrayList<String> parameters = Type.getParametersFor(type);
-        for (int i = 0; i < Type.getNumberOfParametersExpectedFor(type); i++) {
-            if (argumentsProvided[i] == null) {
+        ArrayList<String> parameters = type.getParameters();
+        for (int argumentIndex = 0; argumentIndex < type.getNumberOfArgumentsExpected(); argumentIndex++) {
+            if (argumentsProvided[argumentIndex] == null) {
                 message.append("\n>>>");
-                message.append(parameters.get(i));
+                message.append(parameters.get(argumentIndex));
             }
         }
         return message.toString();

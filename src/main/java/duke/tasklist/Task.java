@@ -24,7 +24,7 @@ public abstract class Task {
      *
      * @return This Task which has been marked as completed
      */
-    public Task complete() {
+    Task complete() {
         taskCompletionStatus = true;
         return this;
     }
@@ -44,7 +44,7 @@ public abstract class Task {
      * @return The description of the task
      */
     public String getDescription() {
-        return new String(taskDescription);
+        return taskDescription;
     }
 
     /**

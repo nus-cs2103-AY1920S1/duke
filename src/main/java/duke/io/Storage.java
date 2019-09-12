@@ -21,7 +21,13 @@ import java.io.FileNotFoundException;
  */
 public class Storage {
     private String filePath;
-
+    
+    private static final String DEADLINE_FLAG = "D";
+    private static final String EVENT_FLAG = "E";
+    private static final String TODO_FLAG = "T";
+    private static final String COMPLETE = "1";
+    private static final String INCOMPLETE = "0";
+    
     /**
      * Constructs an instance of the file handler for a specified file path.
      *
@@ -32,42 +38,55 @@ public class Storage {
         filePath = "src/".concat(path);
     }
 
-
+    /**
+     * Helper method to write a Deadline Task to a file.
+     */
     private static void writeFromDeadline(Deadline task, FileWriter file) throws IOException {
         assert task != null;
         assert file != null;
-        file.append("D");
-        file.append(System.lineSeparator());
-        file.append(task.isComplete() ? "1" : "0");
-        file.append(System.lineSeparator());
-        file.append(task.getDescription());
-        file.append(System.lineSeparator());
-        file.append(task.time);
-        file.append(System.lineSeparator());
+        writeLinesToFile(
+                file,
+                DEADLINE_FLAG,
+                task.isComplete() ? COMPLETE : INCOMPLETE,
+                task.getDescription(),
+                task.time);
     }
 
+    /**
+     * Helper method to write a Event Task to a file.
+     */
     private static void writeFromEvent(Event task, FileWriter file) throws IOException {
         assert task != null;
         assert file != null;
-        file.append("E");
-        file.append(System.lineSeparator());
-        file.append(task.isComplete() ? "1" : "0");
-        file.append(System.lineSeparator());
-        file.append(task.getDescription());
-        file.append(System.lineSeparator());
-        file.append(task.time);
-        file.append(System.lineSeparator());
+        writeLinesToFile(
+                file,
+                EVENT_FLAG,
+                task.isComplete() ? COMPLETE : INCOMPLETE,
+                task.getDescription(),
+                task.time);
     }
 
+    /**
+     * Helper method to write a ToDo Task to a file.
+     */
     private static void writeFromToDo(ToDo task, FileWriter file) throws IOException {
         assert task != null;
         assert file != null;
-        file.append("T");
-        file.append(System.lineSeparator());
-        file.append(task.isComplete() ? "1" : "0");
-        file.append(System.lineSeparator());
-        file.append(task.getDescription());
-        file.append(System.lineSeparator());
+        writeLinesToFile(
+                file,
+                TODO_FLAG,
+                task.isComplete() ? COMPLETE : INCOMPLETE,
+                task.getDescription());
+    }
+
+    /**
+     * Helper method to write multiple lines to a file.
+     */
+    private static void writeLinesToFile(FileWriter file, String... lines) throws IOException {
+        for (String line : lines) {
+            file.append(line);
+            file.append(System.lineSeparator());
+        }
     }
 
     /**
@@ -86,17 +105,15 @@ public class Storage {
             // populate tasklist
             TaskList taskList = new TaskList();
 
-            int tasksExpected = Integer.parseInt(file.readLine());
-            while (tasksExpected > 0) {
-                tasksExpected--;
+            for (int tasksExpected = Integer.parseInt(file.readLine()); tasksExpected > 0; tasksExpected--) {
                 switch (file.readLine()) {
-                case "D":
+                case DEADLINE_FLAG:
                     taskList.add(readAsDeadline(file));
                     break;
-                case "E":
+                case EVENT_FLAG:
                     taskList.add(readAsEvent(file));
                     break;
-                case "T":
+                case TODO_FLAG:
                     taskList.add(readAsToDo(file));
                     break;
                 default:
@@ -104,32 +121,29 @@ public class Storage {
                 }
             }
             return taskList;
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException exception) {
             throw new DukeInvalidFilePathException(filePath);
-        } catch (IOException | NumberFormatException ex) {
+        } catch (IOException | NumberFormatException exception) {
             throw new DukeCorruptFileException(filePath);
         }
     }
 
     private Deadline readAsDeadline(BufferedReader file) throws IOException {
         assert file != null;
-        boolean isComplete = !file.readLine().equals("0");
 
-        return new Deadline(isComplete, file.readLine(), file.readLine());
+        return new Deadline(!file.readLine().equals(INCOMPLETE), file.readLine(), file.readLine());
     }
 
     private ToDo readAsToDo(BufferedReader file) throws IOException {
         assert file != null;
-        boolean isComplete = !file.readLine().equals("0");
 
-        return new ToDo(isComplete, file.readLine());
+        return new ToDo(!file.readLine().equals(INCOMPLETE), file.readLine());
     }
 
     private Event readAsEvent(BufferedReader file) throws IOException {
         assert file != null;
-        boolean isComplete = !file.readLine().equals("0");
 
-        return new Event(isComplete, file.readLine(), file.readLine());
+        return new Event(!file.readLine().equals(INCOMPLETE), file.readLine(), file.readLine());
     }
 
     /**

@@ -43,6 +43,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Displays the reminder in a dialogue box.
+     */
     public void displayReminder() {
         assert duke != null;
         Reminder reminder = new Reminder(duke.getSheet(), duke.getUi());

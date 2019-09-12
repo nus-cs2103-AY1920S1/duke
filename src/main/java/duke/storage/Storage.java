@@ -64,7 +64,7 @@ public class Storage {
         try {
             this.tasks = new File(pathToFile);
             if (this.tasks.exists()) {
-            this.tasks.delete();
+                this.tasks.delete();
             }
             this.tasks.createNewFile();
             FileWriter fw = new FileWriter(tasks, true);

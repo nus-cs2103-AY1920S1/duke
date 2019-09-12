@@ -127,7 +127,7 @@ public class ExpensesWindow extends BorderPane {
     void render() {
         creditColumn.getChildren().clear();
         debitColumn.getChildren().clear();
-        setError("");
+        clearError();
         AtomicInteger index = new AtomicInteger(0);
         List<ColumnItem> creditItems = expenses.credit
                 .stream()

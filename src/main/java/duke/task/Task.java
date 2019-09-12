@@ -20,13 +20,13 @@ public class Task {
     public static String printDateAndTime(Calendar time) {
         String jargon = "";
         switch (time.get(Calendar.DAY_OF_MONTH) % 10) {
-            case 1 : jargon = "st ";
-                break;
-            case 2 : jargon = "nd ";
-                break;
-            case 3 : jargon = "rd ";
-                break;
-            default : jargon = "th ";
+        case 1 : jargon = "st ";
+            break;
+        case 2 : jargon = "nd ";
+            break;
+        case 3 : jargon = "rd ";
+            break;
+        default : jargon = "th ";
         }
         if (time.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
             jargon = "th ";

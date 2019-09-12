@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 
 public class Task {
     String description;
+    LocalDateTime date;
     boolean isDone;
 
     Task(String description) {
@@ -31,6 +32,9 @@ public class Task {
         return (isDone ? "1" : "0") + " " + description;
     }
 
+    LocalDateTime getDate() {
+        return date;
+    }
 }
 
 class ToDo extends Task {
@@ -52,7 +56,6 @@ class ToDo extends Task {
 class Deadline extends Task {
     private String memo;
     private String preposition;
-    private LocalDateTime date;
 
     Deadline(String description, String preposition, String memo) {
         super(description);
@@ -87,7 +90,6 @@ class Deadline extends Task {
 class Event extends Task {
     private String memo;
     private String preposition;
-    private LocalDateTime date;
 
     Event(String description, String preposition, String memo) {
         super(description);

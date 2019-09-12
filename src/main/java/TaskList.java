@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 
 class TaskList {
     private static ArrayList<Task> list = new ArrayList<>();
@@ -15,6 +16,9 @@ class TaskList {
 
     void add(Task task) {
         list.add(task);
+        list.sort((Task t1, Task t2) -> (t1.getDate() == null || t2.getDate() == null)
+                ? 0
+                : t1.getDate().compareTo(t2.getDate()));
     }
 
     Task remove(int i) throws ListItemEmptyException {

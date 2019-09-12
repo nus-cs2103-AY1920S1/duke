@@ -9,7 +9,7 @@ import exception.DukeException;
  */
 public enum FullCommand {
     LIST("list"), DONE("done"), DELETE("delete"), TODO("todo"), DEADLINE("deadline"),
-        EVENT("event"), BYE("bye"), FIND("find");
+        EVENT("event"), BYE("bye"), FIND("find"), RECUR("recur");
 
     private String name;
 

@@ -1,5 +1,6 @@
 package ui;
 
+import task.Recurrence;
 import task.Task;
 import task.TaskList;
 
@@ -28,6 +29,7 @@ public class Ui {
      * Called when execute method of ExitCommand is called.
      */
     public void showGoodbye() {
+        showLine();
         System.out.println("    Bye. Hope to see you again soon!");
         showLine();
     }
@@ -37,7 +39,7 @@ public class Ui {
      */
     public void showLine() {
         String output = "    ";
-        for (int n = 0; n < 50; n++) {
+        for (int n = 0; n < 40; n++) {
             output += "_";
         }
         System.out.println(output);
@@ -119,6 +121,22 @@ public class Ui {
         showLine();
         System.out.println("     Here are the matching task(s) in your list: ");
         System.out.println(tasks);
+        showLine();
+    }
+
+    public void showRecurMessage(Recurrence task){
+        showLine();
+        System.out.println(" Got it. Setting this event to recurring:");
+        System.out.println(task);
+        showLine();
+    }
+
+    /**
+     * Message shown when recurring event is updated to next session.
+     */
+    public void showUpdateMessage(Task task){
+        System.out.println("I've updated your schedule with the timing for next session."
+                + System.lineSeparator() + task);
         showLine();
     }
 

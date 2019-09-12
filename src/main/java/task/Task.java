@@ -1,5 +1,7 @@
 package task;
 
+import exception.DukeException;
+
 /**
  * Abstract class which all other Task classes extend. (Event etc...)
  */
@@ -7,6 +9,7 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected boolean deleted;
+
 
     /**
      *Constructor method of Task.
@@ -50,5 +53,12 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Generates uncompleted clone of task.
+     * @return
+     * @throws DukeException
+     */
+
     public abstract String toString();
+
 }

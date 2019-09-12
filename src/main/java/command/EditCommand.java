@@ -2,6 +2,7 @@ package command;
 
 import exception.DukeException;
 import filewriter.Storage;
+import task.Recurrence;
 import task.Task;
 import task.TaskList;
 import ui.Ui;
@@ -42,6 +43,11 @@ public class EditCommand extends Command {
             }
             Task completedTask = tasks.complete(index);
             ui.readDone(completedTask);
+            if (completedTask instanceof Recurrence & ((Recurrence) completedTask).isRecurring) {
+                Task nextTask = ((Recurrence) completedTask).getRecurrence();
+                tasks.addTask(nextTask);
+                ui.showUpdateMessage(nextTask);
+            }
             storage.editFile(tasks);
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             throw new DukeException("Index out of bounds.");

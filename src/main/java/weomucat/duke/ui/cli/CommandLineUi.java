@@ -5,8 +5,10 @@ import static weomucat.duke.Duke.THREAD_POLL_SLEEP_DURATION;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import weomucat.duke.Pair;
+import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
-import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.task.TaskList;
 import weomucat.duke.ui.Message;
 import weomucat.duke.ui.Ui;
 import weomucat.duke.ui.listener.UserInputListener;
@@ -111,15 +113,15 @@ public class CommandLineUi implements Ui {
   }
 
   @Override
-  public void listTaskUpdate(Message message, TaskListTasks tasks) {
+  public void listTaskUpdate(Message message, NumberedTaskList tasks) {
     displayMessage(message);
-    for (int i = 0; i < tasks.size(); i++) {
+    for (Pair<Integer, Task> pair : tasks) {
       // Get task from tasks
-      Task task = tasks.get(i);
+      Task task = pair.getValue();
 
       // Format task with no. in front
       Message m = task.toMessage();
-      String title = String.format("%d. %s", i + 1, m.getTitle());
+      String title = String.format("%d. %s", pair.getKey(), m.getTitle());
       displayMessage(m.setTitle(title));
     }
   }

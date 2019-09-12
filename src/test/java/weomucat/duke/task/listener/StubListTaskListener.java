@@ -1,18 +1,19 @@
 package weomucat.duke.task.listener;
 
-import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.task.NumberedTaskList;
+import weomucat.duke.task.TaskList;
 import weomucat.duke.ui.Message;
 
 public class StubListTaskListener implements ListTaskListener {
 
-  private TaskListTasks tasks;
+  private NumberedTaskList tasks;
 
   @Override
-  public void listTaskUpdate(Message message, TaskListTasks tasks) {
+  public void listTaskUpdate(Message message, NumberedTaskList tasks) {
     this.tasks = tasks;
   }
 
-  public TaskListTasks getTasks() {
+  public NumberedTaskList getTasks() {
     return tasks;
   }
 }

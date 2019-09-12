@@ -9,6 +9,7 @@ import weomucat.duke.ui.Message;
 
 /**
  * An event is a special task that has a date range.
+ * It can also have tentative schedules (date ranges).
  */
 public class EventTask extends Task {
 
@@ -19,14 +20,17 @@ public class EventTask extends Task {
    * Default constructor.
    *
    * @param description a description of the event
-   * @param at          date range of the event
-   * @throws InvalidParameterException If the description is empty or at is empty.
+   * @param at          date range(s) of the event
+   * @throws InvalidParameterException if the description is empty or at is empty
    */
   public EventTask(String description, Collection<DateRange> at) throws InvalidParameterException {
     super(description);
-
     if (description.equals("")) {
       throw new InvalidParameterException("The description of an event cannot be empty.");
+    }
+
+    if (at.size() == 0) {
+      throw new InvalidParameterException("The date range(s) of an event cannot be empty.");
     }
 
     this.atSlots = new ArrayList<>(at);

@@ -30,9 +30,8 @@ public class AddCommand extends Command {
      * @throws DukeException If Description is empty.
      */
     public AddCommand(String[] taskDetail) throws DukeException {
-        if (taskDetail.length < 2) {
-            throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
-        }
+        DukeException.checkValidity(taskDetail.length < 2,
+                "Please provide a description for the task.");
         this.task = createTask(taskDetail[0], taskDetail[1]);
     }
 
@@ -53,13 +52,11 @@ public class AddCommand extends Command {
         case "deadline":
             try {
                 String[] deadlineContent = detail.split(" /by ", 2);
-                if (deadlineContent.length < 2) {
-                    throw new DukeException("Invalid format for Deadline Task.");
-                }
+                DukeException.checkValidity(deadlineContent.length < 2,
+                        "Invalid format for Deadline Task.");
                 String[] datetime = deadlineContent[1].split(" ", 2);
-                if (datetime.length < 2) {
-                    throw new DukeException("Invalid format for Deadline Task.");
-                }
+                DukeException.checkValidity(datetime.length < 2,
+                        "Invalid format for Deadline Task.");
 
                 LocalDate date = LocalDate.parse(datetime[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 LocalTime time = LocalTime.parse(datetime[1], DateTimeFormatter.ofPattern("HHmm"));
@@ -70,9 +67,8 @@ public class AddCommand extends Command {
             break;
         case "event":
             String[] eventContent = detail.split(" /at ", 2);
-            if (eventContent.length < 2) {
-                throw new DukeException("Invalid format for Event Task.");
-            }
+            DukeException.checkValidity(eventContent.length < 2,
+                    "Invalid format for Event Task.");
             t = new Event(eventContent[0], eventContent[1]);
             break;
         default:

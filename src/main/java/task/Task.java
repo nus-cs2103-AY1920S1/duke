@@ -24,12 +24,23 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Gets icon that indicates the status of task.
+     *
+     * @return Status of Task as String.
+     */
     public String getStatusIcon() {
         return (isDone ? "[done]" : "[x]");
     }
 
+    /**
+     *  Indicates if Task is done.
+     *  For saving to hard drive memory.
+     *
+     * @return String value if task is done.
+     */
     public String isDoneString() {
-        return this.isDone ? "1" : "0";
+        return isDone ? "1" : "0";
     }
 
     public String getDescription() {
@@ -41,5 +52,4 @@ public abstract class Task {
         return String.format("%s %s", this.getStatusIcon(), this.getDescription());
     }
 
-    //...
 }

@@ -77,9 +77,7 @@ public class Storage {
         try {
             File f = new File(filepath);
             if (!f.exists()) {
-                if (!f.createNewFile()) {
-                    throw new DukeException("Data file not created");
-                }
+                DukeException.checkValidity(!f.createNewFile(), "Data file not created");
             }
             Scanner fileReader = new Scanner(f);
             while (fileReader.hasNextLine()) {

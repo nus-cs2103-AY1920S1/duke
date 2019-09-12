@@ -1,7 +1,7 @@
 package task;
 
 /**
- * Task that has a description of "todo".
+ * Task that has a description of todo.
  */
 public class Todo extends Task {
 

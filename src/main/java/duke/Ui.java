@@ -1,8 +1,5 @@
 package duke;
 
-import duke.DukeException;
-
-import java.util.Scanner;
 import java.util.stream.Stream;
 
 import static java.lang.String.format;
@@ -12,7 +9,6 @@ import static java.lang.String.format;
  *
  */
 public class Ui {
-    private String line;
 
     /**
      * Ui Constructor.

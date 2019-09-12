@@ -85,12 +85,24 @@ public class TaskList{
         return message;
     }
 
+    /**
+     * Adds a tag to a specified task. Provides funcitonality for the tagging of 
+     * an event.
+     * 
+     * @param index
+     * @param tagName
+     * @return 
+     */
     public String addTag(int index, String tagName){
         taskList.get(index).addTag(tagName);
         String message = "Nice! I've tagged this task as " +tagName;
         return message;
     }
 
+    /**
+     * Returns a string representation of a taglist 
+     * 
+     */
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();

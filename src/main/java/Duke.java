@@ -11,7 +11,7 @@ public class Duke  {
     /**
      * The constructor initiates the storage, tasklist and parser objects.
      */
-    public Duke(){
+    public Duke() throws DukeException{
         this.filepath = "../resources/data/duke.txt";
         this.storage = new Storage(filepath);
         this.taskList = storage.loadStorage();

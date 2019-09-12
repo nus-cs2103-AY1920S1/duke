@@ -22,7 +22,7 @@ public class Storage {
      * 
      * @return a taslist contaning the stored information.
      */
-    public TaskList loadStorage(){
+    public TaskList loadStorage() throws DukeException{
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line;
@@ -60,10 +60,7 @@ public class Storage {
                }
             }
         }catch(Exception e){
-            StackTraceElement[] elements = e.getStackTrace();  
-            for (int iterator=1; iterator<=elements.length; iterator++){  
-                   System.out.println("Class Name:"+elements[iterator-1].getClassName()+" Method Name:"+elements[iterator-1].getMethodName()+" Line Number:"+elements[iterator-1].getLineNumber());
-            }
+            throw new DukeException("Cannot read file!");
         }
 
         return taskList;

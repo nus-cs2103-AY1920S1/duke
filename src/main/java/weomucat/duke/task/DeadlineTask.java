@@ -30,14 +30,33 @@ public class DeadlineTask extends Task implements SnoozableTask {
     this.by = by;
   }
 
+  private DeadlineTask(String description, Date by, Duration every) {
+    super(description);
+    this.by = by;
+    this.every = every;
+  }
+
   public DeadlineTask setEvery(Duration duration) {
     this.every = duration;
     return this;
   }
 
+  public boolean isAfter(DeadlineTask deadlineTask) {
+    return this.by.isAfter(deadlineTask.by);
+  }
+
+  public DeadlineTask getNextRecurrence() {
+    if (this.every == null) {
+      return null;
+    }
+
+    Date by = this.by.plus(this.every);
+    return new DeadlineTask(getDescription(), by, this.every);
+  }
+
   @Override
   public void snooze(Duration duration) {
-    this.by.plus(duration);
+    this.by = this.by.plus(duration);
   }
 
   @Override
@@ -45,6 +64,11 @@ public class DeadlineTask extends Task implements SnoozableTask {
     ArrayList<String> out = new ArrayList<>();
     out.add("===== BY =====");
     out.add(this.by.toString());
+
+    if (this.every != null) {
+      out.add("===== RECURRENCE =====");
+      out.add(this.every.toString());
+    }
 
     return new Message(out.toArray(new String[0]))
         .setTitle(this.toString());

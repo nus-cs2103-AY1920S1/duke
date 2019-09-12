@@ -1,7 +1,6 @@
 package weomucat.duke.task.listener;
 
 import weomucat.duke.task.NumberedTaskList;
-import weomucat.duke.task.TaskList;
 import weomucat.duke.ui.Message;
 
 public class StubListTaskListener implements ListTaskListener {

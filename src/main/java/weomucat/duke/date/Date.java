@@ -88,15 +88,16 @@ public class Date implements Serializable {
   }
 
   /**
-   * Adds a duration to the current Date.
+   * Returns a new Date instance with Duration added to the current Date.
    *
    * @param duration the duration to add
+   * @return new Date instance
    */
-  public void plus(Duration duration) {
-    this.date = this.date.plus(duration);
+  public Date plus(Duration duration) {
+    return new Date(this.date.plus(duration));
   }
 
-  boolean isAfter(Date date) {
+  public boolean isAfter(Date date) {
     return this.date.isAfter(date.date);
   }
 

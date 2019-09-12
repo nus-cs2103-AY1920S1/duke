@@ -11,6 +11,12 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    /**
+     * Prints any Calendar object in a specific user-friendly date and time format.
+     * Used by Event and Deadline classes.
+     * @param time Calendar object that needs to be printed
+     * @return String representing the date and time of Calendar object in specific format
+     */
     public static String printDateAndTime(Calendar time) {
         String jargon = "";
         switch (time.get(Calendar.DAY_OF_MONTH) % 10) {

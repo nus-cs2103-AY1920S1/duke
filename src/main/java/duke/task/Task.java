@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Encapsulates a task object containing task description and task status.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     private String description;
     private boolean isDone;
 
@@ -24,7 +24,7 @@ public class Task {
     }
 
     /**
-     * onstructs a unspecified Task object.
+     * Constructs a unspecified Task object.
      *
      * @param description Description of the task.
      * @param isDone True if the task is finished.
@@ -41,6 +41,29 @@ public class Task {
      */
     public Task finish() {
         return new Task(this.description, true);
+    }
+
+    /**
+     * Returns the a {@Class LocalDateTime} object associated with this task.
+     * Starting Time for an {@Class Event} object. Deadline for a {@Class Deadline} object.
+     * Max value for a {@Class Todo} object.
+     *
+     * @return LocalDateTime object associated with this task.
+     */
+    protected LocalDateTime getTime() {
+        return LocalDateTime.MAX;
+    }
+
+    /**
+     * Compares two {@Class Task} object based on the time at which the task takes place.
+     * {@Class Todo} task has the lowest priority.
+     *
+     * @param other The other {@Class Task} object being compared to.
+     * @return Difference in the time of the two tasks, if applicable.
+     */
+    @Override
+    public int compareTo(Task other) {
+        return this.getTime().compareTo(other.getTime());
     }
 
     /**

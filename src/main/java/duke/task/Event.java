@@ -40,6 +40,16 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the starting time of this {@Class Event} object.
+     *
+     * @return Starting time of this event object.
+     */
+    @Override
+    protected LocalDateTime getTime() {
+        return this.startTime;
+    }
+
+    /**
      * Marks the task as done.
      *
      * @return New finished task.

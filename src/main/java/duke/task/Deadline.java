@@ -34,6 +34,15 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the deadline of this {@Class Deadline} object.
+     *
+     * @return Deadline of this task.
+     */
+    protected LocalDateTime getTime() {
+        return this.deadline;
+    }
+
+    /**
      * Marks the task as done.
      *
      * @return New finished task.

@@ -43,6 +43,7 @@ public class TaskList {
      * @return confirmation message of task being deleted
      */
     public String deleteTask(int deleteIndex) {
+        assert deleteIndex < list.size() : "deleteIndex should not be larger than amount of tasks in list";
         Task temp = list.remove(deleteIndex - 1);
         String message = "Noted. I've removed this task:\n" + temp
                 + "\nNow you have " + list.size() + " tasks in the list.";
@@ -97,6 +98,11 @@ public class TaskList {
      * @return confirmation message of task being done
      */
     public String setDoneTask(int doneIndex) {
+        /*
+        // Code for testing assertion
+        doneIndex = 20;
+         */
+        assert doneIndex < list.size() : "doneIndex should not be larger than amount of tasks in list";
         list.get(doneIndex - 1).markAsDone();
         String message = "Nice! I've marked this task as done:\n"
                 + list.get(doneIndex - 1);

@@ -6,9 +6,24 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.scene.layout.Region;
 
-public class Duke {
+public class Duke{
 
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
     private Storage storage;
     //private TaskList tasks;
     private Ui ui;
@@ -106,16 +121,13 @@ public class Duke {
     /////////////////////////////// Duke constructor  ///////////////////////////////////////////////////
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\DukesDiary.txt");
-        /*try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }*/
+        storage = new Storage(filePath);
+
     }
     /////////////////////////////// End of Duke constructor //////////////////////////////////////////
-
+    public Duke() {
+        this("src/main/java/Duke.txt");
+    }
 
     //////////////////////////////////// start of run //////////////////////////////////////////////
     public void run() throws IOException {
@@ -251,18 +263,22 @@ public class Duke {
 
 
     //////////////////////////////////////////////////////////////////////////////////////
+        public static void main(String[] args) throws IOException {
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
+            System.out.println("What can i do for you?\n");
 
-    public static void main(String[] args) throws IOException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can i do for you?\n");
+            new Duke().run();
+        }
 
-        new Duke("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\DukesDiary.txt").run();
-    }
+        public static String getResponse(String input){
+        return "hi";
+        }
+
 
 }
 

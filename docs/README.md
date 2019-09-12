@@ -8,12 +8,12 @@ Save your list to your hard disk. Each time you use the app your task is saved t
 
 ### Support for different tasks: 
 Each task has different attributes based on their types: 
-    1. Todo task:
-        *   Only has description name. No date or time present.
-    2. Deadline task:
-        *   Has description name, date and time. (in the format dd/mm/yy hhmm e.g 05/09/18 1300) 
-    3. Event task:
-        *   Has description name, date and time  (in the format dd/mm/yy hhmm-hhmm e.g 05/09/18 1300-1500) 
+1. Todo task:
+    *   Only has description name. No date or time present.
+2. Deadline task:
+    *   Has description name, date and time. (in the format dd/mm/yy hhmm e.g 05/09/18 1300) 
+3. Event task:
+    *   Has description name, date and time  (in the format dd/mm/yy hhmm-hhmm e.g 05/09/18 1300-1500) 
 
 ## Usage
 

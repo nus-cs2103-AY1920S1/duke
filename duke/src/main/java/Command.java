@@ -15,4 +15,8 @@ abstract class Command {
 	}
 
 	abstract public void execute(TaskList tasks, Ui ui) throws DukeException, ParseException;
+
+	public String toString() {
+		return "Command type: " + command + ", description: " + remainingCommand;
+	}
 }

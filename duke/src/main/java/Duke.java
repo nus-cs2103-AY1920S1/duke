@@ -1,3 +1,5 @@
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -32,58 +34,12 @@ public class Duke extends Application {
 	private TaskList tasks;
 	private Ui ui;
 
-	private static String filename = "data/duke.txt"; // todo isDone? description
+	private static String filename = "/Users/mandy/CS2103/duke/src/main/java/data/duke.txt"; // todo isDone? description
 
-	public Duke() {
+	public Duke() throws FileNotFoundException, DukeException, ParseException {
 		ui = new Ui();
 		storage = new Storage(filename);
-
-		try {
-			System.out.println("try block starts");
-			tasks = new TaskList(storage.load());
-			System.out.println("try block ends");
-		} catch (FileNotFoundException fe) {
-			ui.showError(fe.getMessage());
-		} catch (DukeException e) {
-			tasks = new TaskList();
-			ui.showLoadingError(); // i suppose this just says file is corrupted therefore creating new or sth
-		} catch (ParseException pe) {
-			ui.showError(pe.getMessage());
-		}
-	}
-
-	public void run() {
-		ui.showWelcome();
-		boolean isExit = false;
-		while (!isExit) {
-			try {
-				String command = ui.readCommand();
-				String[] parts = command.split(" ");
-				String type = parts[0];
-				String remainingCommand = command.substring(type.length()+1);
-				ui.showLine(); // show the divider line ("_______")
-	            Command c = Parser.parse(command, remainingCommand);
-	            c.execute(tasks, ui);
-	            storage.update(tasks, filename);
-	        	isExit = c.isExit();
-	        } catch (DukeException e) {
-	            ui.showError(e.getMessage());
-	        } catch (ParseException pe) {
-	        	ui.showError(pe.getMessage());
-	        } catch (IOException e) {
-				ui.showError("Something went wrong: " + e.getMessage());
-			} finally {
-	            ui.showLine();
-	        }
-	    }
-		// bye invoked
-		// update duke.txt with list
-
-		try {
-			storage.update(tasks, filename);
-		} catch (IOException e) {
-			ui.showError("Something went wrong with the file: " + e.getMessage());
-		}
+		tasks = new TaskList(storage.load());
 	}
 
 	@Override
@@ -208,11 +164,14 @@ public class Duke extends Application {
 			String[] parts = command.split(" ");
 			String type = parts[0];
 			String remainingCommand = command.substring(type.length());
-			Command c = Parser.parse(type, remainingCommand);
+			Command c = Parser.parse(type, remainingCommand);  // ?
 			c.execute(tasks, ui);
 			storage.update(tasks, filename);
-			return ui.out();
-		} catch (DukeException | ParseException | IOException e) {
+		} catch (FileNotFoundException | ParseException e) {
+			ui.showError(e.getMessage());
+		} catch (IOException ie){
+			ui.showError(ie.getMessage());
+		} catch (DukeException e) {
 			ui.showError(e.getMessage());
 		}
 

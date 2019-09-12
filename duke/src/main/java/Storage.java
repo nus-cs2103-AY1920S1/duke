@@ -28,7 +28,7 @@ class Storage {
 		
 		while (s.hasNext()) {
 			AddCommand c = (AddCommand) Parser.parse(s.next(), s.nextLine().trim());
-			commands.add(c);		
+			commands.add(c);
 		}
 		s.close();
 

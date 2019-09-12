@@ -9,7 +9,7 @@ class ListCommand extends Command {
 		ui.print("Here are the tasks in your list:\n");
 		ArrayList<Task> list = tasks.getList();
 		for (int i = 0; i < list.size(); i++) {
-			ui.print((i + 1) + "." + list.get(i).toString());
+			ui.print((i + 1) + "." + list.get(i).toString() + "\n");
 		}
 	}
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="DukeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-12T04:20:12" hostname="r-37-97-25-172.comp.nus.edu.sg" time="0.016">
+<testsuite name="DukeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-12T05:00:24" hostname="r-37-97-25-172.comp.nus.edu.sg" time="0.018">
   <properties/>
-  <testcase name="testList()" classname="DukeTest" time="0.016"/>
+  <testcase name="testList()" classname="DukeTest" time="0.018"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

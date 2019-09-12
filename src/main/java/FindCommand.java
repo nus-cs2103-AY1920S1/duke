@@ -1,3 +1,6 @@
+/**
+ * A command to find a task based on a keyword.
+ */
 public class FindCommand extends Command {
 
 	private String input;
@@ -8,6 +11,13 @@ public class FindCommand extends Command {
 			throw new DukeException(Ui.EMPTY_INPUT);
 		}
 	}
+
+	/**
+	 * Executes the command and find tasks that has the the corresponding keyword.
+	 * @param tasks List of the tasks.
+	 * @param storage Storage of the data.
+	 * @return A string containing all the tasks with the corresponding keyword.
+	 */
 	@Override
 	public String execute(TaskList tasks, DukeWriteFile storage) {
 		StringBuilder taskFound = new StringBuilder();

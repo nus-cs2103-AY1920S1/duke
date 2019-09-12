@@ -15,6 +15,7 @@ public class HelpCommand extends Command {
         builder.append("\n" + ListCommand.getHelp());
         builder.append("\n" + ByeCommand.getHelp());
         builder.append("\n" + DoneCommand.getHelp());
+        builder.append("\n" + DeleteCommand.getHelp());
 
         return builder.toString();
     }

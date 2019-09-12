@@ -30,4 +30,13 @@ public class DeleteCommand extends Command {
         boolean isPlural = tasks.size() > 1;
         builder.append("Now you have " + tasks.size() + " task" + (isPlural ? "s" : "") + " in the list.\n");
     }
+
+    public static String getHelp() {
+        StringBuilder builder = new StringBuilder("Command: delete\n");
+        builder.append("- Format: 'delete {index}'.\n");
+        builder.append("- Description: Deletes the index-th task.\n");
+        builder.append("- Example: 'delete 1' command will delete the 1st task in the list.\n");
+
+        return builder.toString();
+    }
 }

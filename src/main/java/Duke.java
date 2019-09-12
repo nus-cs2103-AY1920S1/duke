@@ -6,10 +6,9 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
-
-    public Duke() throws DukeException, IOException {
+    public Duke(String filePath) throws DukeException, IOException {
         this.ui = new Ui();
-        this.storage = new Storage("/Users/isaac/Desktop/CS2103T+CS2101/CS2103T/duke/data/duke.txt");
+        this.storage = new Storage(filePath);
         this.taskList = new TaskList(this.storage.load(), this.storage);
         Task.setTaskList(taskList);
     }
@@ -31,7 +30,8 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke().run();
+        new Duke("/Users/isaac/Desktop/CS2103T+CS2101/CS2103T/duke/data/duke.txt")
+        .run();
     }
    
 }

@@ -29,7 +29,7 @@ public class DoneCommand extends Command{
             if (isDoneBefore) {
                 throw new IllegalArgumentException("Task has already been done");
             }
-            taskList.setDoneInList(this.index+1);//not sure if supported
+            taskList.setDoneInList(this.index+1);
 
             List<String> inst = List.of("Nice! I've marked this task as done: ",
                     "  "+task.toString());

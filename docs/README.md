@@ -16,7 +16,7 @@ Duke also utilises of local storage, remembering your tasks even after the appli
 2. [Text search through your saved tasks](#text-search)
 3. [View your tasks chronologically by time](#view-tasks)
 4. [Interact with chatbot](#chatbot)
-3. [Tasks are saved on local storage](#save-tasks)
+5. [Tasks are saved on local storage](#save-tasks)
 
 ### <a name="track-tasks"></a>Tracks various types of tasks
 Duke can manage your pending tasks such as [todos](#todo), [deadlines](#deadline), and [events](#event). 
@@ -56,7 +56,7 @@ This feature is done automatically and do not require any specific commands.
 ### <a name="chatbot"></a>Interact with chatbot
 You interact with duke in a chatbot fashion, allowing you to 'talk' to your application, breaking off from a monotonous interaction with Duke.
 
-### Tasks are saved on local storage
+### <a name="save-tasks"></a>Tasks are saved on local storage
 Duke saves your tasks to your machine's local storage. 
 That means that you do not need to keep your application running!  
 Duke will remember what tasks you are tracking even when you close the application.

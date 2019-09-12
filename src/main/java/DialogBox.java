@@ -11,6 +11,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates the dialog box.
+     * @param l creates label.
+     * @param iv creates image view.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -37,6 +42,12 @@ public class DialogBox extends HBox {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * to flip the dialog box so you get one on the left and right.
+     * @param l takes in label.
+     * @param iv takes in image view.
+     * @return
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

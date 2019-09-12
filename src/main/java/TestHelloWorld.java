@@ -11,7 +11,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class TestHelloWorld extends Application{
+public class TestHelloWorld extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -74,7 +74,7 @@ public class TestHelloWorld extends Application{
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.

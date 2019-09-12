@@ -5,7 +5,11 @@ import java.text.ParseException;
 import java.util.Objects;
 
 public class DataForDuke {
-    public DataForDuke(String filePath){
+    /**
+     * reads a file and extracts data from it.
+     * @param filePath location of where your data.txt file should be.
+     */
+    public DataForDuke(String filePath) {
 
         BufferedReader reader;
         String bye = "bye";
@@ -88,12 +92,12 @@ public class DataForDuke {
                     } else {
                         System.out.println("\t\tHey Heyyyy, " + filePath
                                 + "sorry but I have no idea what are you saying, please try again!");
-                    } assert wordSplit != null;
+                    } 
+                    assert wordSplit != null;
                 }
                 inputString = reader.readLine();
             }
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }        
     }

@@ -7,6 +7,7 @@ import duke.task.Deadline;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -104,39 +105,16 @@ public class Storage {
             textToAdd += "[" + type + "] -- " + "[" + t.getStatusIcon() + "] -- " + t.getDescription();
             if (t instanceof Event) {
                 Calendar startTime = ((Event) t).getStartTime();
-                textToAdd += " -- " + startTime.get(Calendar.DAY_OF_MONTH) + "/"
-                        + startTime.get(Calendar.MONTH) + "/" + startTime.get(Calendar.YEAR) + " ";
-                if (startTime.get(Calendar.HOUR_OF_DAY) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += startTime.get(Calendar.HOUR_OF_DAY);
-                if (startTime.get(Calendar.MINUTE) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += startTime.get(Calendar.MINUTE);
-                textToAdd += "-";
                 Calendar endTime = ((Event) t).getEndTime();
-                if (endTime.get(Calendar.HOUR_OF_DAY) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += endTime.get(Calendar.HOUR_OF_DAY);
-                if (endTime.get(Calendar.MINUTE) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += endTime.get(Calendar.MINUTE);
+                SimpleDateFormat startDateFormat = new SimpleDateFormat(" -- dd/MM/YYYY HHmm");
+                textToAdd += startDateFormat.format(startTime.getTime());
+                SimpleDateFormat endDateFormat = new SimpleDateFormat("-HHmm");
+                textToAdd += endDateFormat.format(endTime.getTime());
             }
             if (t instanceof Deadline) {
                 Calendar time = ((Deadline) t).getTime();
-                textToAdd += " -- " + time.get(Calendar.DAY_OF_MONTH) + "/"
-                        + time.get(Calendar.MONTH) + "/" + time.get(Calendar.YEAR) + " ";
-                if (time.get(Calendar.HOUR_OF_DAY) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += time.get(Calendar.HOUR_OF_DAY);
-                if (time.get(Calendar.MINUTE) < 10) {
-                    textToAdd += "0";
-                }
-                textToAdd += time.get(Calendar.MINUTE);
+                SimpleDateFormat dateFormat = new SimpleDateFormat(" -- dd/MM/YYYY HHmm");
+                textToAdd += dateFormat.format(time.getTime());
             }
             textToAdd += "\n";
         }

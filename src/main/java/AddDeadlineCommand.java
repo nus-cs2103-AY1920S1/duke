@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Arrays;
 
 public class AddDeadlineCommand extends Command {
@@ -19,7 +20,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
         Deadline task = Deadline.createDeadline(tokens);
         taskList.addToList(task);
         ui.printInput(task, taskList);

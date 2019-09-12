@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class DeleteCommand extends Command {
 
     int index;
@@ -9,7 +11,7 @@ public class DeleteCommand extends Command {
 
     public static DeleteCommand createDeleteIfValid(String [] tokens) throws DukeException {
         try {
-            Ui.checkValidLength(tokens);
+            Parser.checkValidLength(tokens);
             int index = Integer.parseInt(tokens[1])-1;
             return new DeleteCommand(index);
         } catch (NumberFormatException error) {
@@ -18,7 +20,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+
+    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
         try {
             Task task = taskList.getTaskAt(index+1);
             taskList.removeFromList(task);
@@ -27,4 +30,5 @@ public class DeleteCommand extends Command {
             ui.printOneLine(new DukeException("No such task",DukeExceptionType.MISSINGTASK).getMessage());
         }
     }
+
 }

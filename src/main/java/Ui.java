@@ -69,8 +69,6 @@ public class Ui {
         System.out.println(horizontalLine);
         System.out.println("     Here are the tasks in your list:");
         for (int i = 0; i < taskList.getSize(); i++) {
-            //may run into error for our taskList index
-            //System.out.println(String.format("     %d.%s",i+1, lst.get(i)));
             System.out.println(String.format("     %d.%s",i+1, taskList.getTaskAt(i+1)));
         }
 
@@ -88,14 +86,7 @@ public class Ui {
         this.printOneLine(e.getMessage());
     }
 
-    public static void checkValidLength(String[] tokens) throws IllegalArgumentException {
-        List<String> group1 = List.of("todo", "deadline", "event");
-        List<String> group2 = List.of("done", "delete");
-        if (tokens.length == 1 && group1.contains(tokens[0])) {
-            throw new IllegalArgumentException(String.format("☹ OOPS!!! The description of a %s cannot be empty.",tokens[0]));
-        } else if (tokens.length == 1 && group2.contains(tokens[0])) {
-            throw new IllegalArgumentException(String.format("☹ OOPS!!! %s command requires integer.",tokens[0]));
-        }
-    }
+    
+    
 }
 

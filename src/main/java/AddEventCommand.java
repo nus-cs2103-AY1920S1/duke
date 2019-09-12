@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Arrays;
 
 public class AddEventCommand extends Command{
@@ -17,7 +18,8 @@ public class AddEventCommand extends Command{
         }
     }
 
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+
+    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
         Event task = Event.createEvent(tokens);
         taskList.addToList(task);
         ui.printInput(task, taskList);

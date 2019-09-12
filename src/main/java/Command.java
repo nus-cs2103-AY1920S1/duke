@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.List;
 
 public abstract class Command {
@@ -7,7 +8,7 @@ public abstract class Command {
         return commandType;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui) throws DukeException;
+    public abstract void execute(TaskList taskList, Ui ui) throws DukeException, IOException ;
 
     public static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
         List<String> validCommands = List.of("todo", "deadline", "event");
@@ -15,7 +16,7 @@ public abstract class Command {
         if (!validCommands.contains(tokens[0])) {
             throw new DukeException("Command doesn't exist", DukeExceptionType.INVALIDCOMMAND);
         }
-        Ui.checkValidLength(tokens);
+        Parser.checkValidLength(tokens);
 
         if (tokens[0].equals("todo")) {
             return new AddToDoCommand(tokens);

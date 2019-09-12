@@ -17,6 +17,10 @@ public class DukeException extends Exception {
     			return "☹ No such task";
     		case GENERALMISTAKE:
     			return super.getMessage();
+            case FILENOTFOUND: 
+                return "File not found!!";
+			case TASKNOTFOUND:
+				return "Task not found!!";
     		default:
     			return "Unknown error! Please try again.";
     	}

@@ -1,15 +1,20 @@
+import java.io.IOException;
+
 public class Duke {
 
     private Ui ui;
     private TaskList taskList;
+    private Storage storage;
 
 
-    public Duke()  {
+    public Duke() throws DukeException, IOException {
         this.ui = new Ui();
-        this.taskList = new TaskList();
+        this.storage = new Storage("/Users/isaac/Desktop/CS2103T+CS2101/CS2103T/duke/data/duke.txt");
+        this.taskList = new TaskList(this.storage.load(), this.storage);
+        Task.setTaskList(taskList);
     }
 
-    public void run() {
+    public void run() throws IOException {
         ui.printWelcomeMessage();
         while (ui.hasInputs()) {
             try {
@@ -25,7 +30,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException, IOException {
         new Duke().run();
     }
    

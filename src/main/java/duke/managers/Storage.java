@@ -115,21 +115,31 @@ public class Storage {
         if (memory.size() > 0) {
             String text = "";
             for (Task task : memory) {
-                if (task instanceof ToDo) {
-                    ToDo spec = (ToDo) task;
-                    text += spec.format();
-                } else if (task instanceof Deadline) {
-                    Deadline spec = (Deadline) task;
-                    text += spec.format();
-                } else {
-                    Event spec = (Event) task;
-                    text += spec.format();
-                }
+                text += saveTask(task);
                 text += System.lineSeparator();
             }
             writeToFile(filePath, text.trim());
         } else {
             writeToFile(filePath, "");
+        }
+    }
+
+    /**
+     * Checks the type of task and returns the task to be saved in a formatted String in the hard drive.
+     *
+     * @param task to be formatted and saved
+     * @return String containing information of that task
+     */
+    private static String saveTask(Task task) {
+        if (task instanceof ToDo) {
+            ToDo spec = (ToDo) task;
+            return spec.format();
+        } else if (task instanceof Deadline) {
+            Deadline spec = (Deadline) task;
+            return spec.format();
+        } else {
+            Event spec = (Event) task;
+            return spec.format();
         }
     }
 

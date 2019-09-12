@@ -43,9 +43,24 @@ public class Parser {
         } else if (key.equals("bye")) {
             return new ExitCommand();
         } else if (comm[0].equals("todo") || comm[0].equals("deadline") || comm[0].equals("event")) {
-            return new AddCommand(comm);
+            String processedComm = parseAddCommand(comm);
+            return new AddCommand(comm, processedComm);
         } else {
             throw new DukeException("Oops! I'm sorry, but I don't know what that means :(");
         }
+    }
+
+    /**
+     * Parses information in AddCommand before passing into the AddCommand class.
+     *
+     * @param comm containing information to be parsed
+     * @return information that is processed for the AddCommand constructor
+     */
+    private static String parseAddCommand(String[] comm) {
+        String processedComm = "";
+        for (int i = 1; i < comm.length; i++) {
+            processedComm += comm[i] + " ";
+        }
+        return processedComm;
     }
 }

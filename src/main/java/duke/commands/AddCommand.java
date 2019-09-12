@@ -34,11 +34,9 @@ public class AddCommand extends Command {
      *
      * @param allDetails a String array containing all the details to create the appropriate task
      */
-    public AddCommand(String[] allDetails) {
+    public AddCommand(String[] allDetails, String processedDetails) {
         this.allDetails = allDetails;
-        for (int i = 1; i < allDetails.length; i++) {
-            processedDetails += allDetails[i] + " ";
-        }
+        this.processedDetails = processedDetails;
     }
 
     /**

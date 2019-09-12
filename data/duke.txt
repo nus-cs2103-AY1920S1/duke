@@ -1,3 +1,1 @@
-T | 0 | another thing
-T | 0 | thing 
 E | 0 | something | 23rd of April 2019, 6pm-7pm

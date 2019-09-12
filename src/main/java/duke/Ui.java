@@ -54,6 +54,8 @@ public class Ui {
         }
 
         stringToPrint = result;
+
+        assert !stringToPrint.equals("");
     }
 
     /**
@@ -68,6 +70,8 @@ public class Ui {
         result += t + "\n";
 
         stringToPrint = result;
+
+        assert !stringToPrint.equals("");
     }
 
     /**
@@ -82,6 +86,8 @@ public class Ui {
         result += t + "\n";
 
         stringToPrint = result;
+
+        assert !stringToPrint.equals("");
     }
 
     /**
@@ -101,6 +107,8 @@ public class Ui {
         }
 
         stringToPrint += result;
+
+        assert !stringToPrint.equals("");
     }
 
     /**
@@ -116,6 +124,7 @@ public class Ui {
 
         stringToPrint = result;
 
+        assert !stringToPrint.equals("");
     }
 
     public void printFoundTasks(LinkedList<Task> foundTasks) {
@@ -135,6 +144,8 @@ public class Ui {
 
             stringToPrint = result;
         }
+
+        assert !stringToPrint.equals("");
     }
 
 }

@@ -1,3 +1,4 @@
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -14,7 +15,7 @@ public class TodoCommandTest {
 
     @Test
     // Since this method returns void, testing it using its side effects
-    public void executingCommand_todoCommand_success() {
+    public void executingCommand_todoCommand_success() throws DukeException {
         // Setting up actual TaskList
         TaskList t = new TaskList();
         Ui ui = new Ui();

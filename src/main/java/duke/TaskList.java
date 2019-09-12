@@ -44,6 +44,9 @@ public class TaskList {
         Task t = taskList.remove(taskNum);
         t.markAsDone();
         taskList.add(taskNum, t);
+
+        assert t.getStatusIcon().equals("\u2713");
+
         return t;
     }
 
@@ -55,11 +58,15 @@ public class TaskList {
      * @throws DukeException if the taskNum passed in is not valid.
      */
     public Task deleteTask(int taskNum) throws DukeException {
-        if (taskNum + 1 > taskList.size() || taskNum + 1 < 0) {
+        int taskListSize = taskList.size();
+
+        if (taskNum + 1 > taskListSize || taskNum + 1 < 0) {
             throw new DukeException("\u2639 OOPS!!! This task does not exist.");
         }
 
         Task t = taskList.remove(taskNum);
+        assert taskList.size() == taskListSize - 1;
+
         return t;
     }
 
@@ -69,14 +76,19 @@ public class TaskList {
      * @param t Task to add.
      */
     public void addTask(Task t) {
+        int taskListSize = taskList.size();
+
         taskList.add(t);
+
+        assert taskList.size() == taskListSize + 1;
     }
 
     public LinkedList<Task> findTasks(String toFind) {
+        int taskListSize = taskList.size();
         LinkedList<Task> result = new LinkedList<>();
         CharSequence cs = toFind;
 
-        for (int k = 0; k < taskList.size(); k++) {
+        for (int k = 0; k < taskListSize; k++) {
             Task t = taskList.get(k);
             if (t.getDescription().contains(cs)) {
                 result.add(t);
@@ -84,6 +96,8 @@ public class TaskList {
                 result.add(new Task("fake task"));
             }
         }
+
+        assert taskList.size() == taskListSize;
 
         return result;
     }

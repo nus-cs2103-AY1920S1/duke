@@ -32,6 +32,14 @@ public class Event extends Task {
         this.at = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(at);
     }
 
+    public Date getAt() {
+        return at;
+    }
+
+    public void setAt(Date at) {
+        this.at = at;
+    }
+
     @Override
     public String toTextFileString() {
         return super.toTextFileString()

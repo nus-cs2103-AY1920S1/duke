@@ -1,10 +1,7 @@
 package seedu.duke.core;
 
 import seedu.duke.exception.DukeException;
-import seedu.duke.model.Cmd;
-import seedu.duke.model.CmdDelete;
-import seedu.duke.model.CmdDone;
-import seedu.duke.model.CmdList;
+import seedu.duke.model.*;
 import seedu.duke.model.dto.Task;
 
 import java.io.IOException;
@@ -46,6 +43,8 @@ public class Parser {
             command = new CmdDone(description, list, ui, storage);
         } else if (cmd.equals("find")) {
             command.setMsg(ui.displayList(output, storage.searchTask(list, description.split(" "))));
+        } else if (cmd.equals("update")) {
+            command = new CmdUpdate(list, description, storage);
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -90,6 +89,4 @@ public class Parser {
             throw new DukeException("Oops! please specify time (/at, /by ...");
         }
     }
-
-
 }

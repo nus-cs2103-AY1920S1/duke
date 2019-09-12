@@ -35,6 +35,14 @@ public class Deadline extends Task {
         this.by = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(by);
     }
 
+    public Date getBy() {
+        return by;
+    }
+
+    public void setBy(Date by) {
+        this.by = by;
+    }
+
     @Override
     public String toTextFileString() {
         return super.toTextFileString() + ","

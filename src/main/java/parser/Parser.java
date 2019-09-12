@@ -8,6 +8,7 @@ import command.ExitCommand;
 import command.FindCommand;
 import command.FullCommand;
 import command.ListCommand;
+import command.RecurCommand;
 import exception.DukeException;
 
 /**
@@ -36,6 +37,8 @@ public class Parser {
                 return new DeleteCommand(Integer.parseInt(wordArr[1]) - 1);
             case FIND:
                 return new FindCommand(wordArr[1]);
+            case RECUR:
+                return new RecurCommand(wordArr[1]);
             default:
                 if (wordArr[1].equals("")) {
                     throw new DukeException("");

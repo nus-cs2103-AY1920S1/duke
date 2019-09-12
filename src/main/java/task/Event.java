@@ -6,7 +6,7 @@ import exception.DukeException;
 /**
  * Event task object. Has an task name, date, starting time and ending time.
  */
-public class Event extends Task {
+public class Event extends Recurrence {
     DateTime dateTime;
 
     /**
@@ -26,6 +26,28 @@ public class Event extends Task {
         super.description = super.description.substring(0, divider);
     }
 
+    /**
+     * Constructor used for generating next recurrence of Event.
+     * @param taskName name of event.
+     * @param dateTime next session timing.
+     */
+    public Event(String taskName, DateTime dateTime){
+        super(taskName);
+        this.dateTime = dateTime;
+    }
+
+    /**
+     * Generates uncompleted clone of task.
+     * @return new task.
+     * @throws DukeException
+     */
+    public Task getRecurrence() throws DukeException{
+        assert(super.isRecurring);
+        DateTime newDateTime = this.dateTime.setNewDate(super.unitTime, super.quantity);
+        Event newTask = new Event(super.description, newDateTime);
+        newTask.isDone = false;
+        return newTask;
+    }
 
     /**
      * toString method of Event.
@@ -35,6 +57,9 @@ public class Event extends Task {
     public String toString() {
         String output = "[E][" + super.getStatusIcon() + "]" + " " + super.description + "(at: "
                 + dateTime.toString() + ")";
+        if (super.isRecurring) {
+            output += " every: " + super.quantity + " " + super.unitTime + "(s)";
+        }
         return output;
     }
 }

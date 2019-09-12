@@ -6,7 +6,7 @@ import exception.DukeException;
 /**
  * Deadline task object. Has an task name, date and time.
  */
-public class Deadline extends Task {
+public class Deadline extends Recurrence {
     DateTime dateTime;
 
     /**
@@ -26,6 +26,28 @@ public class Deadline extends Task {
         super.description = super.description.substring(0, divider);
     }
 
+    /**
+     * Constructor used for generating next recurrence of Deadline.
+     * @param taskName name of event.
+     * @param dateTime next session timing.
+     */
+    public Deadline(String taskName, DateTime dateTime){
+        super(taskName);
+        this.dateTime = dateTime;
+    }
+
+    /**
+     * Generates uncompleted clone of task.
+     * @return new task.
+     * @throws DukeException
+     */
+    public Task getRecurrence() throws DukeException{
+        assert(super.isRecurring);
+        DateTime newDateTime = this.dateTime.setNewDate(super.unitTime, super.quantity);
+        Deadline newTask = new Deadline(super.description, newDateTime);
+        newTask.isDone = false;
+        return newTask;
+    }
 
     /**
      * toString method of DeadLine.
@@ -35,6 +57,9 @@ public class Deadline extends Task {
     public String toString() {
         String output = "[D][" + super.getStatusIcon() + "]" + " " + super.description
                 + "(by: " + dateTime.toString() + ")";
+        if (super.isRecurring) {
+            output += " every: " + super.quantity + " " + super.unitTime + "(s)";
+        }
         return output;
     }
 }

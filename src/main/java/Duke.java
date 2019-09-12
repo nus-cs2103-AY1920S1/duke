@@ -22,6 +22,9 @@ import ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.TimeUnit;
 
 public class Duke extends Application{
@@ -196,6 +199,7 @@ public class Duke extends Application{
             ByteArrayOutputStream outContent = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outContent));
             if (c.isExit()){
+                c.execute(tasks, ui, storage);
                 ui.showGoodbye();
             } else {
                 c.execute(tasks, ui, storage);
@@ -204,6 +208,10 @@ public class Duke extends Application{
             return outContent.toString();
         } catch (DukeException e){
             return e.getMessage();
+        } catch (NullPointerException e){
+            StringWriter errors = new StringWriter();
+            e.printStackTrace(new PrintWriter(errors));
+            return errors.toString();
         }
     }
 }

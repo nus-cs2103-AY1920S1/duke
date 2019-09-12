@@ -2,11 +2,7 @@ package filewriter;
 
 import datetime.DateTime;
 import exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.TaskList;
-import task.Todo;
+import task.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -122,32 +118,63 @@ public class Storage {
             return output;
         case 'D':
             try {
-                int divider = line.indexOf("(by:");
-                String input = line.substring(7, divider);
-                input += "/by " + DateTime.readDeadLine(line.substring(divider + 5, line.length() - 1)).toString();
+                int timeDivider = line.indexOf("(by:");
+                int recDivider = line.indexOf(" every: ");
+                String input = line.substring(7, timeDivider);
+                boolean isRecurring = (recDivider != -1);
+                if (isRecurring){
+                    input += "/by " + DateTime.readDeadLine(line.substring(timeDivider + 5, recDivider - 1)).toString();
+
+                } else {
+                    input += "/by "
+                            + DateTime.readDeadLine(line.substring(timeDivider + 5, line.length() - 1)).toString();
+                }
                 output = new Deadline(input);
                 updateStatus(output, line);
+                getRecurrance(recDivider, line, output);
                 return output;
             } catch (Exception e) {
                 throw new DukeException("Deadline task not stored properly.");
             }
-        default:
+        case 'E':
             try {
-                int divider = line.indexOf("(at:");
-                String input = line.substring(7, divider);
-                input += "/at " + DateTime.readEventTime(line.substring(divider + 5, line.length() - 1)).toString();
+                int timeDivider = line.indexOf("(at:");
+                int recDivider = line.indexOf(" every: ");
+                String input = line.substring(7, timeDivider);
+                boolean isRecurring = (recDivider != -1);
+                if (isRecurring){
+                    input += "/at "
+                            + DateTime.readEventTime(line.substring(timeDivider + 5, recDivider - 1)).toString();
+                } else {
+                    input += "/at "
+                            + DateTime.readEventTime(line.substring(timeDivider + 5, line.length() - 1)).toString();
+                }
                 output = new Event(input);
                 updateStatus(output, line);
+                getRecurrance(recDivider, line, output);
                 return output;
             } catch (Exception e) {
                 throw new DukeException("Event task not stored properly.");
             }
+        default:
+            throw new DukeException("Invalid entry in txt file: "+ line);
         }
     }
 
     private void updateStatus(Task task, String line){
         if (line.substring(2,4).equals("+")){
             task.markAsDone();
+        }
+    }
+
+
+    private void getRecurrance(int recDivider, String line, Task task) throws DukeException{
+        if (recDivider != -1){
+            if (task instanceof Todo){
+                throw new DukeException("Txt error: Can only set Event or Deadline as a recurrence.");
+            }
+            String[] details = line.substring(recDivider + 8, line.length() - 4).split(" ");
+            ((Recurrence) task).setAsRecurring(details[1], Integer.parseInt(details[0]));
         }
     }
 

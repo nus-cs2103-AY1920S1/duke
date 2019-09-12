@@ -18,10 +18,10 @@ public class DateValidator {
             + "    Events : \"DD/MM/YYYY HHMM-HHMM\"";
 
     /**
-     * Validates the date-time string entered by the user.
+     * Validates the date-time string entered by the user and returns an array with start, end times.
      * @param date Date-time input by the user.
      * @param hasEndTime Boolean indicating if the date-time has an end time.
-     * @return Boolean output.
+     * @return Array of start time, along with end time for event.
      * @throws InvalidDateDukeException If the date format is invalid.
      */
     public LocalDateTime[] getAndValidateDates(String date, boolean hasEndTime) throws InvalidDateDukeException {

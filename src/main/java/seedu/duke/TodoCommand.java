@@ -6,6 +6,7 @@ package seedu.duke;
  */
 public class TodoCommand extends Command {
     private String command;
+
     /**
      * Class constructor.
      *
@@ -17,8 +18,8 @@ public class TodoCommand extends Command {
 
 
     /**
-     * Executes the command by checking exceptions,
-     * and printing out what has been done
+     * Executes the command by checking exceptions.
+     * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
      * @param expenses ExpenseList of all expenses currently.
@@ -40,8 +41,9 @@ public class TodoCommand extends Command {
         } else {
             taskStorage.writeFile(tasks);
         }
-        return ui.printAddedTask(tasks.get(tasks.size() - 1)) + "\n" +
-            ui.printNoOfTaskInList(tasks);
+        return ui.printAddedTask(tasks.get(tasks.size() - 1))
+                + "\n"
+                + ui.printNoOfTaskInList(tasks);
     }
 
     /**

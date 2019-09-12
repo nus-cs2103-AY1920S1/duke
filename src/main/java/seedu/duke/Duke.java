@@ -17,7 +17,8 @@ public class Duke {
     /**
      * Class constructor.
      */
-    public Duke() {}
+    public Duke() {
+    }
 
     /**
      * Returns a message response to user input.
@@ -68,6 +69,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Loads new empty lists for expenses and tasks.
+     */
     public void loadEmptyLists() {
         ui = new Ui();
         storage = new Storage("data/dukeTutorial.txt");

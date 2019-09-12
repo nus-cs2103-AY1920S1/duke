@@ -18,8 +18,8 @@ public class EventCommand extends Command {
 
 
     /**
-     * Executes the command by checking exceptions,
-     * and printing out what has been done
+     * Executes the command by checking exceptions.
+     * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
      * @param expenses ExpenseList of all expenses currently.
@@ -31,7 +31,8 @@ public class EventCommand extends Command {
      * @throws java.io.IOException If there is problems reading/writing or appending to file.
      * @throws Exception If there is problems with Parser reading in file line.
      */
-    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage, Storage expenseStorage) throws Exception {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
+                          Storage expenseStorage) throws Exception {
         Parser.checkErrorForEventCommand(command, tasks, ui);
         tasks.add(Parser.createEvent(command));
         if (tasks.size() > 1) {
@@ -40,8 +41,9 @@ public class EventCommand extends Command {
             taskStorage.writeFile(tasks);
         }
         assert tasks.size() > 0 : "tasks size invalid";
-        return ui.printAddedTask(tasks.get(tasks.size() - 1)) +"\n" +
-            ui.printNoOfTaskInList(tasks);
+        return ui.printAddedTask(tasks.get(tasks.size() - 1))
+                + "\n"
+                + ui.printNoOfTaskInList(tasks);
     }
 
     /**

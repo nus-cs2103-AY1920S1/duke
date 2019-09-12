@@ -14,8 +14,8 @@ public class EListCommand extends Command {
 
 
     /**
-     * Executes the command by checking exceptions,
-     * and printing out what has been done
+     * Executes the command by checking exceptions.
+     * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
      * @param expenses ExpenseList of all expenses currently.

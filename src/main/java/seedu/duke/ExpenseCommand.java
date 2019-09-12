@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class ExpenseCommand extends Command{
+public class ExpenseCommand extends Command {
     protected String command;
 
     /**
@@ -14,8 +14,8 @@ public class ExpenseCommand extends Command{
 
 
     /**
-     * Executes the command by checking exceptions,
-     * and printing out what has been done
+     * Executes the command by checking exceptions.
+     * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
      * @param expenses ExpenseList of all expenses currently.
@@ -37,8 +37,9 @@ public class ExpenseCommand extends Command{
         } else {
             expenseStorage.writeExpenseFile(expenses);
         }
-        return ui.printAddedExpense(expenses.get(expenses.size() - 1)) +"\n" +
-                ui.printNoOfExpenseInList(expenses);
+        return ui.printAddedExpense(expenses.get(expenses.size() - 1))
+                + "\n"
+                + ui.printNoOfExpenseInList(expenses);
     }
 
     /**

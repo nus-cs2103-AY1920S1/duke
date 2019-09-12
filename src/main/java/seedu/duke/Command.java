@@ -12,8 +12,8 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command by checking exceptions,
-     * and printing out what has been done
+     * Executes the command by checking exceptions.
+     * Also, prints out what has been done.
      *
      * @param tasks  TaskList of all tasks currently.
      * @param expenses ExpenseList of all expenses currently.
@@ -25,7 +25,8 @@ public abstract class Command {
      * @throws java.io.IOException If there is problems reading/writing or appending to file.
      * @throws Exception If there is problems with Parser reading in file line.
      */
-    public abstract String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage, Storage expenseStorage) throws Exception;
+    public abstract String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
+                                   Storage expenseStorage) throws Exception;
 
     /**
      * Returns if duke should end.

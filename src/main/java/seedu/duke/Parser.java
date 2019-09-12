@@ -24,12 +24,12 @@ public class Parser {
     private static final int CHAR_LENGTH_OF_DELETE = 6;
     private static final int CHAR_LENGTH_OF_LIST = 4;
     private static final int CHAR_LENGTH_OF_EXPENSE = 7;
-    private static final int CHAR_LENGTH_OF_DELETE_E = 8 ;
+    private static final int CHAR_LENGTH_OF_DELETE_E = 8;
+
     /**
      * Class constructor.
      */
     public Parser() {
-
     }
 
     /**
@@ -60,7 +60,7 @@ public class Parser {
      * Creates a <code>Task</code> object by reading in a line of input in data file format.
      *
      * @param line String of a line of input in the data file format.
-     * @return <code>Deadline</code> , <code>Event</code> or <code>Todo</code >object created from the input in data file format.
+     * @return <code>Deadline</code> , <code>Event</code> or <code>Todo</code >object in data file format.
      * @throws ParseException If there is incorrect input format, different from standard data file format.
      */
     public static Task readInFileLine(String line) throws ParseException {
@@ -86,7 +86,7 @@ public class Parser {
             Date date = createDate(dateTimeArr[0]);
             Date time = createTime(dateTimeArr[1]);
             Deadline dl = new Deadline(stringArr[2], date, time);
-            if (stringArr[1] .equals("1")) {
+            if (stringArr[1].equals("1")) {
                 dl.markAsDone();
             }
             return dl;
@@ -155,9 +155,10 @@ public class Parser {
         assert command.contains("/at") : "event command invalid";
         String[] arr = command.split(" /at ", 2);
         String[] dateTimeArr = (arr[1]).split(" ", 2);
-        Date date, time;
+        Date date;
+        Date time;
         try {
-             date = dateFormat.parse(dateTimeArr[0]);
+            date = dateFormat.parse(dateTimeArr[0]);
         } catch (ParseException e) {
             date = dashDateFormat.parse(dateTimeArr[0]);
         }
@@ -191,7 +192,8 @@ public class Parser {
         assert command.contains("/by") : "deadline command invalid";
         String[] arr = command.split(" /by ", 2);
         String[] dateTimeArr = (arr[1]).split(" ", 2);
-        Date date, time;
+        Date date;
+        Date time;
         try {
             date = dateFormat.parse(dateTimeArr[0]);
         } catch (ParseException e) {
@@ -251,7 +253,7 @@ public class Parser {
             return new ByeCommand(command);
         } else if (Parser.isHelpCommand(command)) {
             return new HelpCommand();
-        }else if (Parser.isDeleteExpenseCommand(command)) {
+        } else if (Parser.isDeleteExpenseCommand(command)) {
             return new DeleteExpenseCommand(command);
         } else if (Parser.isDeleteCommand(command)) {
             return new DeleteCommand(command);
@@ -273,7 +275,7 @@ public class Parser {
             return new EListCommand(command);
         } else if (Parser.isTutorialCommand(command)) {
             return new TutorialCommand();
-        }  else {
+        } else {
             throw new DukeException(ui.noSuchCommand());
         }
     }
@@ -318,10 +320,9 @@ public class Parser {
      * incorrectly inputted by the user.
      *
      * @param command String of command that user input.
-     * @throws DukeException If there is a incorrectly inputted user command
-     * that is intended to find a task with a keyword.
+     * @throws DukeException If there is a incorrectly inputted user command that is intended to find a task.
      */
-    public static void checkErrorForFindCommand(String command , Ui ui) throws DukeException {
+    public static void checkErrorForFindCommand(String command, Ui ui) throws DukeException {
         if (command.contains(" ")) {
             //throw exception for no task number and there is just trailing whitespaces
             String res = command.replace(" ", "");
@@ -341,8 +342,7 @@ public class Parser {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException If there is a incorrectly inputted user command
-     * that is intended to mark a task as done.
+     * @throws DukeException If there is a incorrectly inputted user command that is intended to mark a task as done.
      */
     public static void checkMarkDoneError(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.contains(" ")) {
@@ -369,8 +369,7 @@ public class Parser {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException If there is a incorrectly inputted user command
-     * that is intended to create a deadline task.
+     * @throws DukeException If there is a incorrectly inputted user command that is intended to create a deadline task.
      */
     public static void checkErrorForDeadlineCommand(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.length() == CHAR_LENGTH_OF_DEADLINE) {
@@ -407,8 +406,7 @@ public class Parser {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException If there is a incorrectly inputted user command
-     * that is intended to delete task.
+     * @throws DukeException If there is a incorrectly inputted user command that is intended to delete task.
      */
     public static void checkErrorForDeleteCommand(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.contains(" ")) {
@@ -438,8 +436,7 @@ public class Parser {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException If there is a incorrectly inputted user command
-     * that is intended to create a todo task.
+     * @throws DukeException If there is a incorrectly inputted user command that is intended to create a todo task.
      */
     public static void checkErrorForTodoCommand(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.length() == CHAR_LENGTH_OF_TODO) {
@@ -463,8 +460,7 @@ public class Parser {
      *
      * @param command String of command that user input.
      * @param tasks TaskList of all the tasks currently.
-     * @throws DukeException If there is a incorrectly inputted user command
-     * that is intended to create an event task.
+     * @throws DukeException If there is a incorrectly inputted user command that is intended to create an event task.
      */
     public static void checkErrorForEventCommand(String command, TaskList tasks, Ui ui) throws DukeException {
         if (command.length() == CHAR_LENGTH_OF_EVENT) {
@@ -494,6 +490,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates an expense object.
+     *
+     * @param command User input.
+     * @return Expense object.
+     */
     public static Expense createExpense(String command) {
         String[] arr = command.split(" ");
         double amount = Double.parseDouble(arr[2]);
@@ -501,6 +503,11 @@ public class Parser {
         return e;
     }
 
+    /**
+     * Reads in data file for expense.
+     * @param line File line.
+     * @return Expense object.
+     */
     public static Expense readInExpenseFileLine(String line) {
         String[] stringArr = line.split(": ", 0);
         assert line.length() > 0 : "file path invalid in Parser line 493";
@@ -508,14 +515,34 @@ public class Parser {
         return new Expense(stringArr[0], amount);
     }
 
+    /**
+     * Returns boolean if the command is intended to be an expense command.
+     *
+     * @param command User input.
+     * @return Boolean whether command is expense command.
+     */
     public static boolean isExpenseCommand(String command) {
         return command.length() >= 7 && command.contains("expense");
     }
 
+    /**
+     * Returns boolean if command is intended to be elist command.
+     *
+     * @param command User input.
+     * @return Boolean whether command is elist command.
+     */
     public static boolean isEListCommand(String command) {
         return command.length() == 5 && command.equals("elist");
     }
 
+    /**
+     * Checks for errors in user input for expense command.
+     *
+     * @param command User input.
+     * @param ui Ui.
+     * @param storage Storage.
+     * @throws DukeException If wrong user input
+     */
     public static void checkErrorForExpenseCommand(String command, Ui ui, Storage storage) throws DukeException {
         if (command.length() == CHAR_LENGTH_OF_EXPENSE) {
             //throw exception for no description
@@ -535,19 +562,46 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns integer of expense index in list to delete.
+     *
+     * @param command User input.
+     * @return Integer.
+     */
     public static int expenseToDelete(String command) {
         return Integer.parseInt(command.substring(8));
     }
 
+    /**
+     * Returns boolean if command is intended to be delete expense command.
+     *
+     * @param command User input.
+     * @return Boolean whether command is delete expense command.
+     */
     public static boolean isDeleteExpenseCommand(String command) {
         return command.length() >= 8 && command.contains("delete e");
     }
 
+    /**
+     * Returns boolean if the command is intended to be help command.
+     *
+     * @param command User input.
+     * @return Boolean whether command is help command.
+     */
     public static boolean isHelpCommand(String command) {
         return command.length() == 4 && command.equals("help");
     }
 
-    public static void checkErrorForDeleteExpenseCommand(String command, ExpenseList expenses, Ui ui) throws DukeException {
+    /**
+     * Checks error for user input for delete expense command.
+     *
+     * @param command User input.
+     * @param expenses Expense list.
+     * @param ui Ui.
+     * @throws DukeException If  wrong user input for delete expense command.
+     */
+    public static void checkErrorForDeleteExpenseCommand(String command, ExpenseList expenses, Ui ui)
+            throws DukeException {
         if (command.contains(" ")) {
             //throw exception for no task number and there is just trailing whitespaces
             String res = command.replace(" ", "");

@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 public class FindCommand extends Command {
     protected String command;
     protected TaskList matchList;
-    protected DateFormat outDateFormat = new SimpleDateFormat( "dd/MM/yyyy");
+    protected DateFormat outDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected DateFormat outTimeFormat = new SimpleDateFormat("H.mm aa");
 
     /**
@@ -26,8 +26,8 @@ public class FindCommand extends Command {
 
 
     /**
-     * Executes the command by checking exceptions,
-     * and printing out what has been done
+     * Executes the command by checking exceptions.
+     * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
      * @param expenses ExpenseList of all expenses currently.
@@ -56,7 +56,7 @@ public class FindCommand extends Command {
                 if (td.getDescription().contains(keyword)) {
                     matchList.add(td);
                 }
-            } else if (tasks.get(i) instanceof  Deadline){
+            } else if (tasks.get(i) instanceof Deadline) {
                 Deadline dl = (Deadline) tasks.get(i);
                 if (dl.getDescription().contains(keyword)) {
                     matchList.add(dl);

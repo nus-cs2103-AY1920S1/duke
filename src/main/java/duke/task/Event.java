@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    final String TYPE_EVENT = "E";
     private LocalDateTime dateTime;
 
     public Event(String taskName, LocalDateTime dateTime) {
@@ -18,7 +17,7 @@ public class Event extends Task {
 
     @Override
     public String getType() {
-        return TYPE_EVENT;
+        return "E";
     }
 
     public String getDateTime() {
@@ -30,7 +29,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s][%s][%d] %s (at: %s)",
-                this.getType(), isDone ? "\u2713" : "\u2718", getPriorityValue(),
+                this.getType(), isDone ? "T" : "F", getPriorityValue(),
                 this.taskName, this.getDateTime());
     }
 }

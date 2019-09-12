@@ -6,11 +6,19 @@ import duke.ui.Ui;
 
 import java.io.IOException;
 
+/**
+ * Priority Command.
+ */
 public class PriorityCommand extends Command {
 
     private int index;
     private int taskPriority;
 
+    /**
+     * Constructor for PriorityCommand.
+     * @param num is the taskNumber that needs to be changed.
+     * @param taskPriority new taskPriority value.
+     */
     public PriorityCommand(int num, int taskPriority) {
         super(false);
         this.index = num - 1;

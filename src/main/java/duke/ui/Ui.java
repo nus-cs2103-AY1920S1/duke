@@ -170,6 +170,11 @@ public class Ui {
     }
 
 
+    /**
+     * Prints out priority change message.
+     * @param task to print.
+     * @return String output.
+     */
     public String showPriorityChange(Task task) {
         sb = new StringBuilder();
         sb.append("Nice! I've changed the priority of this task!");

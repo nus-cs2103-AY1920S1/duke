@@ -20,6 +20,12 @@ public class ConfirmBox {
 
     static boolean answer;
 
+    /**
+     * Displays the Confirm Exit Box.
+     * @param title title text to be shown.
+     * @param message message text to be ouput.
+     * @return answer if user wants to exit or not.
+     */
     public static boolean display(String title, String message) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -30,12 +36,12 @@ public class ConfirmBox {
 
         Button yesButton = new Button("Yes");
         Button noButton = new Button("No");
-        yesButton.setOnAction(e ->{
+        yesButton.setOnAction(e -> {
             answer = true;
             window.close();
         });
 
-        noButton.setOnAction(e ->{
+        noButton.setOnAction(e -> {
             answer = false;
             window.close();
         });

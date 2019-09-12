@@ -13,6 +13,11 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * DialogBox constructor.
+     * @param l Label.
+     * @param iv ImageView.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
@@ -32,10 +37,22 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Returns new DialogBox for the User.
+     * @param l Label.
+     * @param iv ImageView.
+     * @return new DialogBox.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Returns new DialogBox for Duke.
+     * @param l Label.
+     * @param iv ImageView.
+     * @return new DialogBox for Duke.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();

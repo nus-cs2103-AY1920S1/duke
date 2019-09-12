@@ -86,6 +86,9 @@ public class Storage {
             case "4":
                 lastTask.setPriority(4);
                 break;
+            default:
+                lastTask.setPriority(1);
+                break;
             }
         }
 
@@ -106,7 +109,7 @@ public class Storage {
 
             if (entry instanceof Deadline) {
                 sb.append(String.format("D | %s | %d | %s | %s", entry.isDone() ? "1" : "0",
-                        entry.getPriorityValue() , entry.getTaskName(), ((Deadline) entry).getDateTime()));
+                        entry.getPriorityValue(), entry.getTaskName(), ((Deadline) entry).getDateTime()));
             } else if (entry instanceof Event) {
                 sb.append(String.format("E | %s | %d | %s | %s", entry.isDone() ? "1" : "0",
                         entry.getPriorityValue(), entry.getTaskName(), ((Event) entry).getDateTime()));

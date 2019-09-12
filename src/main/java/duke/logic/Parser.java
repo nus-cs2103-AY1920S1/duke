@@ -106,7 +106,7 @@ public class Parser {
             || (! isValidMonth(stringArr[1]))
             || (! isNumeric(stringArr[2]))
             || (stringArr[2].length() != 4)
-            ||(stringArr[3].length() != 4)) {
+            || (stringArr[3].length() != 4)) {
             return false;
         }
 
@@ -115,10 +115,10 @@ public class Parser {
 
     private static boolean isValidMonth(String month) {
         String[] months = {
-                "Jan", "Feb", "Mar",
-                "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep",
-                "Oct", "Nov", "Dec"
+            "Jan", "Feb", "Mar",
+            "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep",
+            "Oct", "Nov", "Dec"
         };
         for (String str: months) {
             if (str.equals(month)) {
@@ -176,7 +176,7 @@ public class Parser {
             || firstWord.equals("delete")
             || firstWord.equals("find")
             || firstWord.equals("done")
-            || firstWord.equals("priority") )) {
+            || firstWord.equals("priority"))) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
         } else if (! firstWord.equals("list") && str.split(" ").length == 1) {

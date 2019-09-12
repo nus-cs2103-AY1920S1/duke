@@ -11,6 +11,11 @@ public class Task {
     protected boolean isDone;
     protected TaskPriority taskPriority;
 
+
+    /**
+     * Constructor for Task.
+     * @param name taskName.
+     */
     public Task(String name) {
         this.isDone = false;
         this.taskName = name;
@@ -20,7 +25,7 @@ public class Task {
     @Override
     public String toString() {
         return String.format("[%s][%s][%d] %s ",
-                this.getType(), isDone ? "\u2713" : "\u2718",
+                this.getType(), isDone ? "T" : "F",
                 getPriorityValue(), taskName);
     }
 
@@ -32,6 +37,10 @@ public class Task {
         return taskPriority.toString().toLowerCase();
     }
 
+    /**
+     * Set taskPriority according to value given.
+     * @param value Priority Number.
+     */
     public void setPriority(int value) {
         switch (value) {
         case 1:
@@ -44,6 +53,9 @@ public class Task {
             taskPriority = TaskPriority.STANDARD;
             break;
         case 4:
+            taskPriority = TaskPriority.NORMAL;
+            break;
+        default:
             taskPriority = TaskPriority.NORMAL;
             break;
         }

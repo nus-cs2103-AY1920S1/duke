@@ -5,7 +5,6 @@ package duke.task;
  */
 public class ToDo extends Task {
 
-    final String TYPE_TODO = "T";
 
     public ToDo(String taskName) {
         super(taskName);
@@ -13,7 +12,7 @@ public class ToDo extends Task {
 
     @Override
     public String getType() {
-        return TYPE_TODO;
+        return "T";
     }
 
 }

@@ -117,13 +117,13 @@ public class Storage {
             for (Task task : memory) {
                 if (task instanceof ToDo) {
                     ToDo spec = (ToDo) task;
-                    text = spec.format();
+                    text += spec.format();
                 } else if (task instanceof Deadline) {
                     Deadline spec = (Deadline) task;
-                    text = spec.format();
+                    text += spec.format();
                 } else {
                     Event spec = (Event) task;
-                    text = spec.format();
+                    text += spec.format();
                 }
                 text += System.lineSeparator();
             }

@@ -1,18 +1,16 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.exception.DukeLoadingError;
-import duke.tag.Tag;
-import duke.task.EventTask;
-import duke.task.DeadlineTask;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.ToDoTask;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+
+import duke.tag.Tag;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDoTask;
 
 /**
  * Represents a Storage Class which loads and saves data to the output file.
@@ -107,12 +105,25 @@ public class Storage {
     }
 
     /**
+     * Checks if the storage file is found or not.
+     * @return false is the storage file is not found.
+     */
+    public boolean hasStorage() {
+        try {
+            new FileWriter(filepath);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Loads all the data from the output file.
      * If there is no data provided, an error is thrown.
      * @return A list of Tasks loaded from the file.
-     * @throws DukeException If there is no file or data provided.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() {
         try {
             reader = new BufferedReader(new FileReader(filepath));
             String task;
@@ -129,11 +140,11 @@ public class Storage {
                 hasStartedLoading = true;
             }
             if (!hasStartedLoading) {
-                throw new DukeLoadingError();
+
             }
             reader.close();
         } catch (Exception e) {
-            throw new DukeLoadingError();
+
         }
         return tasks;
     }
@@ -178,7 +189,7 @@ public class Storage {
             }
             writer.close();
         } catch (Exception e) {
-            System.out.println(e);
+
         }
     }
 

@@ -1,11 +1,11 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.tag.Tag;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * The Class which handles user input and interacts with the user.

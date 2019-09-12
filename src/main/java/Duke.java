@@ -52,13 +52,13 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/tasks.txt");
         parser = new DataParser();
         dateHelper = new DateParser();
         hasTerminated = false;
+        storage = new Storage("data/tasks.txt");
         try {
             taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (Exception e) {
             ui.showLoadingError();
             taskList = new TaskList();
         }
@@ -90,6 +90,14 @@ public class Duke {
     }
 
     /**
+     * Checks if the storage file is present in the storage or not.
+     * @return false if the storage file is absent.
+     */
+    protected boolean isStoragePresent() {
+        return storage.hasStorage();
+    }
+
+    /**
      *  Takes in a input and returns a response which duke says.
      * @param input the input received from the user.
      * @return a response in the form of a String.
@@ -98,7 +106,6 @@ public class Duke {
         if (hasTerminated) {
             return ".";
         }
-
         ui.reset();
         try {
             parser.readInput(input);

@@ -72,7 +72,11 @@ public class Duke {
      * Saves tasks into hard disk and exits the Duke programme.
      */
     public static void exitDuke() {
-        String toSave = tasks.convertTasksToString();
+        String toSave = "";
+        if (tasks != null) {
+            toSave = tasks.convertTasksToString();
+        }
+
         try {
             storage.writeToFile(toSave);
         } catch (IOException e) {

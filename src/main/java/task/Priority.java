@@ -6,7 +6,7 @@ public enum Priority {
     HIGH, MEDIUM, LOW;
 
     public static Priority parsePriority(String string) throws DukeException {
-        string.toLowerCase();
+        string = string.trim().toLowerCase();
         switch (string) {
         case "high":
             return Priority.HIGH;

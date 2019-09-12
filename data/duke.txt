@@ -1,7 +1,7 @@
-T | true | HAHAHAHAH
-T | false | add one more task
-T | false | OWOWOWO
-T | false | hihih
-T | false | more tasks
-T | false | hahahahha
-D | false | hahaha | 1562475600000
+T | false | buy bread | HIGH
+D | false | essay due soon | 1568044740000 | LOW
+E | false | festival | 1549122300000 | HIGH
+T | false | HAHAHAH | MEDIUM
+T | false | add more tasks | null
+T | false | one more task | null
+T | false | HAAHAHA | MEDIUM

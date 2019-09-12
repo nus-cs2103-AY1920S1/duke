@@ -50,23 +50,7 @@ public class Deadline extends Task {
      * @return string representing time of the deadline in a particular format.
      */
     public String printTime() {
-        String jargon = "";
-        switch (time.get(Calendar.DAY_OF_MONTH) % 10) {
-        case 1 : jargon = "st ";
-            break;
-        case 2 : jargon = "nd ";
-            break;
-        case 3 : jargon = "rd ";
-            break;
-        default : jargon = "th ";
-        }
-        if (time.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
-            jargon = "th ";
-        }
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM, YYYY. h:mma");
-        String dateWithoutDay = dateFormatter.format(time.getTime()).replace("AM","am").replace("PM","pm");
-        return time.get(Calendar.DAY_OF_MONTH) + jargon
-                + dateWithoutDay;
+        return printDateAndTime(time);
     }
 
     @Override

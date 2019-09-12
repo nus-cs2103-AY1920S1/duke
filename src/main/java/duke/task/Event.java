@@ -67,23 +67,7 @@ public class Event extends Task {
      * @return string representing the startTime in a printing friendly format.
      */
     public String printStartTime() {
-        String jargon = "";
-        switch (startTime.get(Calendar.DAY_OF_MONTH) % 10) {
-        case 1 : jargon = "st ";
-            break;
-        case 2 : jargon = "nd ";
-            break;
-        case 3 : jargon = "rd ";
-            break;
-        default : jargon = "th ";
-        }
-        if (startTime.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
-            jargon = "th ";
-        }
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM, YYYY. h:mma");
-        String dateWithoutDay = dateFormatter.format(startTime.getTime()).replace("AM","am").replace("PM","pm");
-        return startTime.get(Calendar.DAY_OF_MONTH) + jargon
-                + dateWithoutDay;
+        return printDateAndTime(startTime);
     }
     
     /**
@@ -91,23 +75,7 @@ public class Event extends Task {
      * @return string representing the endTime in a printing friendly format.
      */
     public String printEndTime() {
-        String jargon = "";
-        switch (endTime.get(Calendar.DAY_OF_MONTH) % 10) {
-        case 1 : jargon = "st ";
-            break;
-        case 2 : jargon = "nd ";
-            break;
-        case 3 : jargon = "rd ";
-            break;
-        default : jargon = "th ";
-        }
-        if (endTime.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
-            jargon = "th ";
-        }
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MMMM, YYYY. h:mma");
-        String dateWithoutDay = dateFormatter.format(endTime.getTime()).replace("AM","am").replace("PM","pm");
-        return endTime.get(Calendar.DAY_OF_MONTH) + jargon
-                + dateWithoutDay;
+        return printDateAndTime(endTime);
     }
 
     @Override

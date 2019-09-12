@@ -23,7 +23,7 @@ test {
 
 
 application {
-    mainClassName = "com.tysng.duke.Main"
+    mainClassName = "com.tysng.duke.Launcher"
 }
 
 run {

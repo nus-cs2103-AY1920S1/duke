@@ -11,4 +11,11 @@ public class ByeCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         return "Bye. Hope to see you again soon!\n";
     }
+
+    public static String getHelp() {
+        StringBuilder builder = new StringBuilder("Command: bye\n");
+        builder.append("- Description: This command terminates Duke.\n");
+
+        return builder.toString();
+    }
 }

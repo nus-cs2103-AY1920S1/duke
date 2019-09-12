@@ -13,6 +13,7 @@ public class HelpCommand extends Command {
 
         builder.append("\n" + HelpCommand.getHelp());
         builder.append("\n" + ListCommand.getHelp());
+        builder.append("\n" + ByeCommand.getHelp());
 
         return builder.toString();
     }

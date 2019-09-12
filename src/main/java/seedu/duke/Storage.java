@@ -29,7 +29,6 @@ public class Storage {
      *
      * @return ArrayList of tasks that is loaded from data file
      * @throws Exception If file cannot be loaded or created thrown by <code>BufferedReader</code> or <code>File</code>.
-     * In addition, if the format of the tasks in the data file is incorrect.
      */
     public ArrayList<Task> loadTaskFile() throws Exception {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -50,7 +49,6 @@ public class Storage {
      * Writes it in format according to <code>toWriteIntoFile</code> in <code>Deadline</code>,
      * <code>Event</code> or <code>Todo</code>.
      *
-     * @return ArrayList of tasks that is loaded from data file
      * @throws IOException If file cannot be written into thrown by <code>FileWriter</code>.
      */
     public void writeFile(TaskList tasks) throws IOException {
@@ -72,7 +70,6 @@ public class Storage {
      * Appends it in format according to <code>toWriteIntoFile</code> in <code>Deadline</code>,
      * <code>Event</code> or <code>Todo</code>.
      *
-     * @return ArrayList of tasks that is loaded from data file
      * @throws IOException If file cannot be appended to thrown by <code>FileWriter</code>.
      */
     public void appendFile(TaskList tasks) throws IOException {
@@ -82,6 +79,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Appends the information of expense into existing data file.
+     *
+     * @param expenses Expense list.
+     * @throws IOException If file cannot be appended.
+     */
     public void appendExpenseFile(ExpenseList expenses) throws IOException {
         String textFileMsg = System.lineSeparator() + expenses.get(expenses.size() - 1).toWriteIntoFile();
         FileWriter fw = new FileWriter(filepath, true);
@@ -89,6 +92,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads data file information into expense list.
+     *
+     * @return Expense list.
+     * @throws Exception If file cannot be read in.
+     */
     public ArrayList<Expense> loadExpenseFile() throws Exception {
         ArrayList<Expense> expenses = new ArrayList<>();
         File f = new File(filepath);
@@ -103,6 +112,12 @@ public class Storage {
         return expenses;
     }
 
+    /**
+     * Writes data file from the beginning according to expense list.
+     *
+     * @param expenses Expense list.
+     * @throws IOException If data file cannot be written into.
+     */
     public void writeExpenseFile(ExpenseList expenses) throws IOException {
         FileWriter fw = new FileWriter(this.filepath);
         String textFileMsg = "";

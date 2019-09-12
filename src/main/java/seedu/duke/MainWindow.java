@@ -11,8 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -40,7 +38,8 @@ public class MainWindow extends AnchorPane {
     /**
      * Class constructor.
      */
-    public MainWindow() {}
+    public MainWindow() {
+    }
 
     /**
      * Initialises the layout for the main window.
@@ -77,7 +76,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input, userImage), db);
             userInput.clear();
         }
-   }
+    }
 
     public void setStage(Stage stage) {
         this.stage = stage;

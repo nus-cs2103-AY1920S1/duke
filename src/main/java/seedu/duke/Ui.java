@@ -18,10 +18,10 @@ public class Ui {
      * @return String of the welcome message.
      */
     public String showIntro() {
-        String greeting = "Hello! I'm Duke\n" +
-                "What can I do for you?\n" +
-                "Enter 'help' if you need a summary of all the commands.\n" +
-                "Enter 'tutorial' if you need a tutorial on the commands.\n";
+        String greeting = "Hello! I'm Duke\n"
+                + "What can I do for you?\n"
+                + "Enter 'help' if you need a summary of all the commands.\n"
+                + "Enter 'tutorial' if you need a tutorial on the commands.\n";
         return greeting;
     }
 
@@ -31,7 +31,7 @@ public class Ui {
      * @return String of exception message
      */
     public String showLoadingError() {
-        return "\u2639 OOPS!!! There is an error loading data file";
+        return "OOPS!!! There is an error loading data file";
     }
 
     /**
@@ -40,7 +40,7 @@ public class Ui {
      * @return String of exception message when user input cannot be understood.
      */
     public String noSuchCommand() {
-        return "\u2639 OOPS!!! I'm sorry but I don't know what that means :-(\n";
+        return "OOPS!!! I'm sorry but I don't know what that means :-(\n";
     }
 
     /**
@@ -64,7 +64,9 @@ public class Ui {
         if (tasks.size() == 1) {
             statusOfList = "Now you have 1 task in the list.\n";
         } else {
-            statusOfList = "Now you have " + tasks.size() + " tasks in the list.\n";
+            statusOfList = "Now you have "
+                    + tasks.size()
+                    + " tasks in the list.\n";
         }
         return statusOfList;
     }
@@ -88,8 +90,12 @@ public class Ui {
      * @return String of message
      */
     public String printMarkDoneMsg(Task task) {
-        String markAsDoneMsg = "Nice! I've marked this task as done:\n" +
-                "[" + task.getStatusIcon() + "] " + task.getDescription() + "\n";
+        String markAsDoneMsg = "Nice! I've marked this task as done:\n"
+                + "["
+                + task.getStatusIcon()
+                + "] "
+                + task.getDescription()
+                + "\n";
         return markAsDoneMsg;
     }
 
@@ -115,8 +121,8 @@ public class Ui {
      * @return String of message.
      */
     public String showParseError() {
-        return "\u2639 OOPS!!! Please input the date in dd/mm/yyyy " +
-                "and time in 24hr format or 12hr format as HHmm or H.mmAM or H.mmPM, separated by a space.\n";
+        return "OOPS!!! Please input the date in dd/mm/yyyy "
+                + "and time in 24hr format or 12hr format as HHmm or H.mmAM or H.mmPM, separated by a space.\n";
     }
 
     /**
@@ -161,7 +167,7 @@ public class Ui {
      * @return String of message.
      */
     public String showNoTaskNumber() {
-        String error = "\u2639 OOPS!!! Please input the task number you would like to mark as done.\n";
+        String error = "OOPS!!! Please input the task number you would like to mark as done.\n";
         return error;
     }
 
@@ -171,8 +177,8 @@ public class Ui {
      * @return String of message.
      */
     public String showNoSuchTask() {
-        String error = "\u2639 OOPS!!! You do not have that task in your list. " +
-                "Call 'list' to see all your tasks :-)\n";
+        String error = "OOPS!!! You do not have that task in your list. "
+                + "Call 'list' to see all your tasks :-)\n";
         return error;
     }
 
@@ -182,7 +188,7 @@ public class Ui {
      * @return String of message.
      */
     public String showNoFindKeyword() {
-        String error = "\u2639 OOPS!!! Please input the keyword for me to search in the list.\n";
+        String error = "OOPS!!! Please input the keyword for me to search in the list.\n";
         return error;
     }
 
@@ -193,7 +199,9 @@ public class Ui {
      * @return String of message.
      */
     public String showNoDescription(String taskType) {
-        String error = "\u2639 OOPS!!! The description of '" + taskType + "' cannot be empty.\n";
+        String error = "OOPS!!! The description of '"
+                + taskType
+                + "' cannot be empty.\n";
         return error;
     }
 
@@ -204,8 +212,9 @@ public class Ui {
      * @return String of message.
      */
     public String showNoWhitespaceForDescription(String taskType) {
-        String error = "\u2639 OOPS!!! Please input a whitespace between the command '" + taskType +
-                "' and your task description for me to keep track of it correctly :-)\n";
+        String error = "OOPS!!! Please input a whitespace between the command '"
+                + taskType
+                + "' and your task description for me to keep track of it correctly :-)\n";
         return error;
     }
 
@@ -217,12 +226,16 @@ public class Ui {
      */
     public String showNoDate(String taskType) {
         if (taskType.equals("event")) {
-            String error = "\u2639 OOPS!!! You would need to schedule a date and time duration for"
-                    + "this " + taskType + " using '/at'.\n";
+            String error = "OOPS!!! You would need to schedule a date and time duration for"
+                    + "this "
+                    + taskType
+                    + " using '/at'.\n";
             return error;
         } else if (taskType.equals("deadline")) {
-            String error = "\u2639 OOPS!!! You would need to schedule a date and time duration for"
-                    + "this " + taskType + " using '/by'.\n";
+            String error = "OOPS!!! You would need to schedule a date and time duration for"
+                    + "this "
+                    + taskType
+                    + " using '/by'.\n";
             return error;
         } else {
             return "error with input";
@@ -238,11 +251,11 @@ public class Ui {
      */
     public String showNoWhitespaceForDate(String taskType) {
         if (taskType.equals("event")) {
-            String error = "\u2639 OOPS!!! Please input a whitespace before and after '/at' for me "
+            String error = "OOPS!!! Please input a whitespace before and after '/at' for me "
                     + "to keep track of the date/time correctly :-)\n";
             return error;
         } else if (taskType.equals("deadline")) {
-            String error = "\u2639 OOPS!!! Please input a whitespace before and after '/by' for me "
+            String error = "OOPS!!! Please input a whitespace before and after '/by' for me "
                     + "to keep track of the date/time correctly :-)\n";
             return error;
         } else {
@@ -256,7 +269,7 @@ public class Ui {
      * @return String of message.
      */
     public String showNoTaskInList() {
-        String error = "\u2639 OOPS!!! You do not have any tasks in your list.\n";
+        String error = "OOPS!!! You do not have any tasks in your list.\n";
         return error;
     }
 
@@ -287,7 +300,9 @@ public class Ui {
         for (int i = 0; i < expenses.size(); i++) {
             sum = sum + expenses.get(i).getAmount();
         }
-        String totalAmount = "The total expenditure is now: " + sum + "\n";
+        String totalAmount = "The total expenditure is now: "
+                + sum
+                + "\n";
         return statusOfList + totalAmount;
     }
 
@@ -307,7 +322,9 @@ public class Ui {
         for (int i = 0; i < expenses.size(); i++) {
             sum = sum + expenses.get(i).getAmount();
         }
-        String totalAmount = "Total expenditure: " + sum + "\n";
+        String totalAmount = "Total expenditure: "
+                + sum
+                + "\n";
         return listMsg + totalAmount;
     }
 
@@ -317,8 +334,9 @@ public class Ui {
      * @return String of message.
      */
     public String showNoWhitespaceForExpenseDescription(String taskType) {
-        String error = "\u2639 OOPS!!! Please input a whitespace between the command '" + taskType +
-                "' and your expense type or description for me to keep track of it correctly :-)\n";
+        String error = "OOPS!!! Please input a whitespace between the command '"
+                + taskType
+                + "' and your expense type or description for me to keep track of it correctly :-)\n";
         return error;
     }
 
@@ -328,8 +346,8 @@ public class Ui {
      * @return String of message.
      */
     public String showNoWhitespaceForAmount() {
-        String error = "\u2639 OOPS!!! Please input a whitespace between the description '" +
-                "' and your amount spent for me to keep track of it correctly :-)\n";
+        String error = "OOPS!!! Please input a whitespace between the description '"
+                + "' and your amount spent for me to keep track of it correctly :-)\n";
         return error;
     }
 
@@ -339,7 +357,8 @@ public class Ui {
      * @return String of message.
      */
     public String printDeletedExpenseMsg(Expense expense) {
-        return "Noted. I've removed this expense:\n" + expense;
+        return "Noted. I've removed this expense:\n"
+                + expense;
     }
 
     /**
@@ -348,7 +367,7 @@ public class Ui {
      * @return String of message.
      */
     public String showNoExpenseNumber() {
-        String error = "\u2639 OOPS!!! Please input the expense number you would like to mark as done.\n";
+        String error = "OOPS!!! Please input the expense number you would like to mark as done.\n";
         return error;
     }
 
@@ -358,7 +377,7 @@ public class Ui {
      * @return String of message.
      */
     public String showNoExpenseInList() {
-        String error = "\u2639 OOPS!!! You do not have any expenses in your list.\n";
+        String error = "OOPS!!! You do not have any expenses in your list.\n";
         return error;
     }
 
@@ -368,8 +387,8 @@ public class Ui {
      * @return String of message.
      */
     public String showNoSuchExpense() {
-        String error = "\u2639 OOPS!!! You do not have that expense in your list. " +
-                "Call 'list' to see all your tasks :-)\n";
+        String error = "OOPS!!! You do not have that expense in your list. "
+                + "Call 'list' to see all your tasks :-)\n";
         return error;
     }
 }

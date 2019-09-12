@@ -13,8 +13,8 @@ public class DeleteExpenseCommand extends Command {
     }
 
     /**
-     * Executes the command by checking exceptions,
-     * and printing out what has been done
+     * Executes the command by checking exceptions.
+     * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
      * @param expenses ExpenseList of all expenses currently.
@@ -34,8 +34,8 @@ public class DeleteExpenseCommand extends Command {
         Expense deletedExpense = expenses.get(curr - 1);
         expenses.remove(curr - 1);
         expenseStorage.writeExpenseFile(expenses);
-        return ui.printDeletedExpenseMsg(deletedExpense) + "\n" +
-                ui.printNoOfExpenseInList(expenses);
+        return ui.printDeletedExpenseMsg(deletedExpense) + "\n"
+                + ui.printNoOfExpenseInList(expenses);
     }
 
     /**

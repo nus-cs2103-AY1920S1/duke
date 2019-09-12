@@ -42,7 +42,7 @@ public class Task {
      * @return String status icon of task.
      */
     public String getStatusIcon() {
-        return (isDone? "\u2713" : "\u2718");
+        return (isDone ? "DONE" : "NOT DONE");
     }
 
     /**
@@ -52,7 +52,7 @@ public class Task {
      * @return String 1 or 0 of task.
      */
     public String getIfDone() {
-        return (isDone? "1" : "0");
+        return (isDone ? "1" : "0");
     }
 
     /**

@@ -48,14 +48,14 @@ public class Parser {
             if (!userInput.contains("/by")) {
                 throw new DukeException(DukeException.ErrorType.EMPTY_DEADLINE_DATE);
             }
-            String[] DeadlineDetails = getDetails(userInput, "/by", separatedInputs[0].length());
-            return new DeadlineCommand(DeadlineDetails);
+            String[] deadlineDetails = getDetails(userInput, "/by", separatedInputs[0].length());
+            return new DeadlineCommand(deadlineDetails);
         case "event":
             if (!userInput.contains("/at")) {
                 throw new DukeException(DukeException.ErrorType.EMPTY_EVENT_DATE);
             }
-            String[] EventDetails = getDetails(userInput, "/at", separatedInputs[0].length());
-            return new EventCommand(EventDetails);
+            String[] eventDetails = getDetails(userInput, "/at", separatedInputs[0].length());
+            return new EventCommand(eventDetails);
         case "find":
             String keyword = userInput.trim().substring(separatedInputs[0].length()).trim();
             return new FindCommand(keyword);

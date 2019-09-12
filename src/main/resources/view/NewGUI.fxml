@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -36,45 +33,21 @@
           </Menu>
         </menus>
       </MenuBar>
-      <HBox prefHeight="51.0" prefWidth="600.0" style="-fx-background-color: grey;">
-         <children>
-            <ImageView fx:id="userImage" fitHeight="51.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/DaUser.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="userInput" alignment="CENTER" onAction="#handleUserInput" prefHeight="52.0" prefWidth="549.0" promptText="Please enter your commands here!">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </TextField>
-         </children>
-      </HBox>
+      <TextField fx:id="userInput" alignment="CENTER" onAction="#handleUserInput" prefHeight="10.0" prefWidth="600.0" promptText="Please enter your commands here!" />
       <HBox prefHeight="19.0" prefWidth="600.0" style="-fx-border-color: black;">
          <children>
-            <ImageView fx:id="systemImage" fitHeight="51.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="systemImage" fitHeight="78.0" fitWidth="86.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/DaDuke.png" />
                </image>
             </ImageView>
-            <ScrollPane prefHeight="51.0" prefWidth="550.0">
+            <ScrollPane prefHeight="111.0" prefWidth="547.0">
                <content>
                   <Label fx:id="systemOutput" text="Hi, how can I help you today" />
                </content>
             </ScrollPane>
          </children>
       </HBox>
-      <StackPane fx:id="tableArea" prefHeight="272.0" prefWidth="600.0">
-         <children>
-            <TableView fx:id="taskView" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn fx:id="taskTypeCol" prefWidth="75.0" text="TaskType" />
-                  <TableColumn fx:id="statusCol" prefWidth="75.0" text="Status" />
-                  <TableColumn fx:id="descriptionCol" prefWidth="75.0" text="Description" />
-                  <TableColumn fx:id="dateDueCol" prefWidth="75.0" text="DateDue" />
-              </columns>
-            </TableView>
-         </children>
-      </StackPane>
+      <StackPane fx:id="tableArea" prefHeight="272.0" prefWidth="600.0" />
    </children>
 </VBox>

@@ -3,11 +3,13 @@ package ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import tasklist.Task;
 
 import java.io.IOException;
@@ -19,6 +21,8 @@ import java.time.format.DateTimeFormatter;
 public class TaskView extends TableView<Task> {
 
     @FXML
+    private TableView<Task> taskView;
+    @FXML
     private TableColumn<Task, String> taskTypeCol;
     @FXML
     private TableColumn<Task, Boolean> statusCol;
@@ -26,6 +30,7 @@ public class TaskView extends TableView<Task> {
     private TableColumn<Task, String> descriptionCol;
     @FXML
     private TableColumn<Task, LocalDateTime> dateDueCol;
+    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
     @FXML
     private ObservableList<Task> tasks;
 
@@ -39,36 +44,49 @@ public class TaskView extends TableView<Task> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        taskView.setItems(tasks);
         taskTypeCol.setCellValueFactory(new PropertyValueFactory<>("taskType"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("isDone"));
         statusCol.setCellFactory(tc -> new CheckBoxTableCell<>());
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         dateDueCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
-        dateDueCol.setCellFactory(col-> {
-            TableCell<Task, LocalDateTime> cell = new TableCell<Task, LocalDateTime>() {
-                private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+        dateDueCol.setCellFactory(new TaskView.ColumnFormatter<>(outputFormat));
+    }
 
+    public TableView<Task> getTable(){
+        return taskView;
+    }
+
+    public void setTable(ObservableList<Task> tasks){
+        taskView.setItems(tasks);
+    }
+
+    private class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
+
+        private final DateTimeFormatter format;
+
+        public ColumnFormatter(DateTimeFormatter format) {
+            super();
+            this.format = format;
+        }
+
+        @Override
+        public TableCell<S, T> call(TableColumn<S, T> arg0) {
+            return new TableCell<S, T>() {
                 @Override
-                protected void updateItem(LocalDateTime item, boolean empty) {
+                protected void updateItem(T item, boolean empty) {
                     super.updateItem(item, empty);
-                    if (empty) {
-                        setText(null);
+                    if (item == null || empty) {
+                        setGraphic(null);
                     } else {
-                        setText(outputFormat.format(item));
+                        LocalDateTime ld = (LocalDateTime) item;
+                        String val = ld.format(format);
+                        setGraphic(new Label(val));
                     }
                 }
             };
-
-            return cell;
-        });
-        this.setItems(tasks);
+        }
     }
-
-    public static TaskView getTable(ObservableList<Task> tasks){
-        return new TaskView(tasks);
-    }
-
-
 
 
 }

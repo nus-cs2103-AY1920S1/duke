@@ -1,10 +1,10 @@
-public interface Command {
+public abstract class Command {
     /**
      * Returns whether this is the last command.
-     * 
+     *
      * @return true if this is the last command
      */
-    public boolean isExit();
+    public abstract boolean isExit();
 
     /**
      * Executes command.
@@ -13,5 +13,14 @@ public interface Command {
      * @param storage Storage to write datas to hard disk.
      * @throws DukeException if there is an invalid command.
      */
-    public String execute(TaskList tasks, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
+
+    /**
+     * Explains the commands.
+     *
+     * @return Explanation of the commands.
+     */
+    public static String getHelp() {
+        return "Help has not been provided.\n";
+    }
 }

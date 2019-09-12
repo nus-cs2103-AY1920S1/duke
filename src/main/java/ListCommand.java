@@ -1,4 +1,4 @@
-public class ListCommand implements Command {
+public class ListCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
@@ -15,6 +15,13 @@ public class ListCommand implements Command {
         for (int i = 1; i <= tasks.size(); ++i) {
             builder.append(i + "." + tasks.get(i) + "\n");
         }
+
+        return builder.toString();
+    }
+
+    public static String getHelp() {
+        StringBuilder builder = new StringBuilder("Command: list\n");
+        builder.append("- Description: Shows all tasks.\n");
 
         return builder.toString();
     }

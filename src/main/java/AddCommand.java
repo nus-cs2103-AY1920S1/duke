@@ -1,4 +1,4 @@
-public class AddCommand implements Command {
+public abstract class AddCommand extends Command {
     private Task task;
 
     public AddCommand(Task task) {

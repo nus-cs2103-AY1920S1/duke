@@ -53,7 +53,7 @@ public class Parser {
             String by = suffix.split(" /by ", 2)[1];
 
             Deadline task = new Deadline(description, by);
-            return new AddCommand(task);
+            return new DeadlineCommand(task);
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Deadline task formatting error.");
         }
@@ -64,7 +64,7 @@ public class Parser {
             String description = command.split(" ", 2)[1];
 
             Todo task = new Todo(description);
-            return new AddCommand(task);
+            return new TodoCommand(task);
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -77,7 +77,7 @@ public class Parser {
             String at = suffix.split(" /at ", 2)[1];
 
             Event task = new Event(description, at);
-            return new AddCommand(task);
+            return new EventCommand(task);
         } catch (IndexOutOfBoundsException ex) {
             throw new DukeException("Event task formatting error.");
         }

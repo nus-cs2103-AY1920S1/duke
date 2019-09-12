@@ -1,3 +1,10 @@
+//package tagModule;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Stream;
+import java.util.stream.Collectors;
+
 public class TagStoreAlpha extends AbstractTagStore<TaskInterface>
     implements AddTagObserver, QueryTagObserver, 
     QueryTaskObserver, DeletePairObserver, DeleteTaskObserver,
@@ -19,21 +26,21 @@ public class TagStoreAlpha extends AbstractTagStore<TaskInterface>
     }
 
     public void addTagUpdate(String tag, TaskInterface task) {
-        super.store.addTaggedItem(tag, task);
+        super.addTaggedItem(tag, task);
     }
 
     public void deleteTagUpdate(String tag) {
-        super.store.deleteTag(tag)
+        super.deleteTag(tag);
     }            
 
     public void deleteTaskUpdate(TaskInterface task) {
-        super.store.deleteItem(task);
+        super.deleteItem(task);
     }
 
     public void queryTagUpdate(String tag) {
     }
 
-    public void queryTaskUpdate(String tag) {
+    public void queryTaskUpdate(TaskInterface task) {
     }
 
     public void deletePairUpdate(String tag, TaskInterface task) {

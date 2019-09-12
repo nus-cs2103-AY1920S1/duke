@@ -1,11 +1,11 @@
-package tagModule;
+//package tagModule;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
-public abstract class AbstractTagStore<E> implements TagObserver {
+public abstract class AbstractTagStore<E> {
     // Left:= strTag, Right:=TagInterface
     private GenericBiMap<String, TagInterface> store;
 
@@ -58,13 +58,13 @@ public abstract class AbstractTagStore<E> implements TagObserver {
         this.store = new GenericBiMap<>();
     }
 
-    public void registerObservable(TagObservable o) {
-        o.registerObserver(this);
-    }
+    //public void registerObservable(TagObservable o) {
+    //    o.registerObserver(this);
+    //}
 
-    public void update(TagObservable o) {
+    //public void update(TagObservable o) {
 
-    }
+    //}
 
     /**
      * inserts a tag-item relation into storage

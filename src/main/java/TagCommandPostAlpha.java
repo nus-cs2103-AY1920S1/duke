@@ -1,11 +1,11 @@
-
+//package tagModule;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
-public class TagCommandPostAlpha implements TagObserver {
+public class TagCommandPostAlpha implements TagCommandObserver {
     //implement UIObserver 
     /* before use: 
     * 1. new TaskList
@@ -17,7 +17,7 @@ public class TagCommandPostAlpha implements TagObserver {
     * make store, which technically can just be taskID & string
     */
     //private AbstractTagStore<TaskInterface> store;
-    private TaskModelInterface taskList;
+    private TaskModelInterface tasklist;
     private List<AddTagObserver> addTagObservers; // ??
     private List<DeleteTagObserver> deleteTagObservers;
     private List<DeleteTaskObserver> deleteTaskObservers;
@@ -25,9 +25,9 @@ public class TagCommandPostAlpha implements TagObserver {
     private List<QueryTaskObserver> queryTaskObservers;
     private List<DeletePairObserver> deletePairObservers;
 
-    public TagCommandPostAlpha(TaskModelInterface taskList)  {//AbstractTagStore<TaskInterface> store) {
+    public TagCommandPostAlpha(TaskModelInterface tasklist)  {//AbstractTagStore<TaskInterface> store) {
         //this.store = store;
-        this.taskList = taskList;
+        this.tasklist = tasklist;
         //this.store = new AbstractTagStore<TaskInterface>() {
         //    public String tagCode(TaskInterface task) {
         //        return task.getSaveFormat();
@@ -117,7 +117,7 @@ public class TagCommandPostAlpha implements TagObserver {
 
     public void notifyDeletePair(String tag, int taskId) {
         TaskInterface task = this.tasklist.getTask(taskId);
-        for (DeletePairObserver obs : DeletePairObservers) {
+        for (DeletePairObserver obs : deletePairObservers) {
             obs.deletePairUpdate(tag, task);
         }
     }
@@ -127,8 +127,33 @@ public class TagCommandPostAlpha implements TagObserver {
     //    }
     //}
 
-    public void tagCommandUpdate(String str) {
+    public void tagCommandUpdate(String command) {
         //parse logic on which of the notifies to call
+        String[] cmds = command.split("");
+        assert cmds.length > 2 
+            : "tag command is too showt";
+
+        if (cmds[1].toUpperCase().equals("ADDTAG")) {
+            notifyAddTag(cmds[2], Integer.valueOf(cmds[3]));
+        } else if 
+            (cmds[2].toUpperCase().equals("DELETETAG")) {
+            notifyDeleteTag(cmds[2]);
+        } else if 
+            (cmds[2].toUpperCase().equals("DELETETASK")) {
+            notifyDeleteTask(Integer.valueOf(cmds[2]));
+        } else if 
+            (cmds[2].toUpperCase().equals("QUERYTAG")) {
+            notifyQueryTag(cmds[2]);
+        } else if 
+            (cmds[2].toUpperCase().equals("QUERYTASK")) {
+            notifyQueryTask(Integer.valueOf(cmds[2]));
+        } else if 
+            (cmds[2].toUpperCase().equals("DELETEPAIR")) {
+            notifyDeletePair(cmds[2], Integer.valueOf(cmds[3]));
+        } else {
+            /* TODO */
+        }
+
     }
 
 }

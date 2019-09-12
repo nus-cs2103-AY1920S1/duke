@@ -52,7 +52,6 @@ public class TaskList {
                 result.append(task.isDone);
                 result.append(" | ");
                 result.append(task.getDescription());
-                result.append("\n");
                 break;
             case DEADLINE:
                 result.append("D | ");
@@ -61,7 +60,6 @@ public class TaskList {
                 result.append(task.getDescription());
                 result.append(" | ");
                 result.append(task.getTime());
-                result.append("\n");
                 break;
             case EVENT:
                 result.append("E | ");
@@ -70,11 +68,15 @@ public class TaskList {
                 result.append(task.getDescription());
                 result.append(" | ");
                 result.append(task.getTime());
-                result.append("\n");
                 break;
             default:
                 break;
             }
+
+            // add priority level
+            result.append(" | ");
+            result.append(task.getPriority() == null ? "null" : task.getPriority().toString());
+            result.append("\n");
         }
 
         return result.toString();

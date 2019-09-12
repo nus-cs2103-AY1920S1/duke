@@ -1,5 +1,7 @@
 package duke;
 
+import exception.DukeException;
+import task.Priority;
 import task.Task;
 import task.TaskType;
 
@@ -39,7 +41,7 @@ public class Storage {
      * @return ArrayList of Tasks stored in the file
      * @throws FileNotFoundException When no such file is available.
      */
-    public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException {
+    public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException, DukeException {
         File f = new File(filePath); // create a File for the given file path
         Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<Task> result = new ArrayList<>();
@@ -54,6 +56,8 @@ public class Storage {
                 if (isDoneTodo) {
                     todoTask.markAsDone();
                 }
+                Priority todoPriority = Priority.parsePriority(todoLine[3]);
+                todoTask.setPriority(todoPriority);
                 result.add(todoTask);
                 break;
             case "D":
@@ -67,6 +71,8 @@ public class Storage {
                 if (isDoneDeadline) {
                     deadlineTask.markAsDone();
                 }
+                Priority deadlinePriority = Priority.parsePriority(deadlineLine[4]);
+                deadlineTask.setPriority(deadlinePriority);
                 result.add(deadlineTask);
                 break;
             case "E":
@@ -80,6 +86,8 @@ public class Storage {
                 if (isDoneEvent) {
                     eventTask.markAsDone();
                 }
+                Priority eventPriority = Priority.parsePriority(eventLine[4]);
+                eventTask.setPriority(eventPriority);
                 result.add(eventTask);
                 break;
             default:

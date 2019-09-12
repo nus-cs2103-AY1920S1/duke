@@ -14,10 +14,7 @@ public class DukeManagerTest {
             System.setIn(in);
             DukeManager dukeManager = new DukeManager();
             dukeManager.initializeDuke();
-        } catch (DukeException e) {
-            fail(e.getMessage());
         } catch (Exception e) {
-            // Not suppose to happen
             fail(e.getMessage());
         }
     }
@@ -31,11 +28,8 @@ public class DukeManagerTest {
             DukeManager dukeManager = new DukeManager();
             dukeManager.initializeDuke();
             fail();
-        } catch (DukeException e) {
-            // Pass
         } catch (Exception e) {
-            // Not suppose to happen
-            fail(e.getMessage());
+            // Pass
         }
     }
 }

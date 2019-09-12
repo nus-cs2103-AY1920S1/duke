@@ -27,7 +27,7 @@ public class ParserTest {
                     || !(find instanceof FindCommand)) {
                 fail();
             }
-        } catch (DukeException e) {
+        } catch (Exception e) {
             fail();
         }
     }
@@ -42,7 +42,7 @@ public class ParserTest {
             try {
                 parseManager.parseToCommand(tests);
                 fail(tests);
-            } catch (DukeException e) {
+            } catch (Exception e) {
                 // Pass
             } 
         }

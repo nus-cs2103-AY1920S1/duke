@@ -25,7 +25,7 @@ class Parser {
     public Command parseToCommand(String input) throws DukeException {
         String[] inputArr = input.split(" ", 2);
         Action action = getAction(inputArr[0]);
-        assert inputArr.length != 1 || inputArr.length != 2 : "inputArr length is wrong length"; 
+        assert inputArr.length == 1 || inputArr.length == 2 : "inputArr length is wrong length"; 
 
         if (inputArr.length == 1) {
             switch (action) {

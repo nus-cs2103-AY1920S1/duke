@@ -15,15 +15,14 @@ public class DeadlineTask extends Task implements SnoozableTask {
   private Duration every;
 
   /**
-   * Default constructor.
+   * Creates a DeadlineTask.
    *
    * @param description a description of the deadline
-   * @param by          date due. format of the date is DATETIME_PARSE_PATTERN
-   * @throws InvalidParameterException If the description is empty, by is empty or by is invalid.
+   * @param by          date due
+   * @throws InvalidParameterException if the description is empty
    */
   public DeadlineTask(String description, Date by) throws InvalidParameterException {
     super(description);
-
     if (description.equals("")) {
       throw new InvalidParameterException("The description of a deadline cannot be empty.");
     }

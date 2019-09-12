@@ -7,14 +7,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import weomucat.duke.exception.StorageException;
-import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.task.TaskList;
 import weomucat.duke.task.listener.SaveTaskListListener;
 
 /**
  * TaskListStorage is responsible for serializing TaskListTasks and deserializing TaskListTasks,
  * before saving to disk and loading from disk respectively.
  */
-public class TaskListStorage extends Storage<TaskListTasks> implements SaveTaskListListener {
+public class TaskListStorage extends Storage<TaskList> implements SaveTaskListListener {
 
   // TODO: Saving with JSON
   public TaskListStorage(String path) {
@@ -22,7 +22,7 @@ public class TaskListStorage extends Storage<TaskListTasks> implements SaveTaskL
   }
 
   @Override
-  public void save(TaskListTasks tasks) throws StorageException {
+  public void save(TaskList tasks) throws StorageException {
     try {
       FileOutputStream fileOutputStream = new FileOutputStream(this.path);
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -40,13 +40,13 @@ public class TaskListStorage extends Storage<TaskListTasks> implements SaveTaskL
   }
 
   @Override
-  public TaskListTasks load() throws StorageException {
+  public TaskList load() throws StorageException {
     try {
       FileInputStream fileInputStream = new FileInputStream(this.path);
       ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
       // Deserialize tasks
-      TaskListTasks tasks = (TaskListTasks) objectInputStream.readObject();
+      TaskList tasks = (TaskList) objectInputStream.readObject();
 
       objectInputStream.close();
       fileInputStream.close();
@@ -62,7 +62,7 @@ public class TaskListStorage extends Storage<TaskListTasks> implements SaveTaskL
   }
 
   @Override
-  public void saveTaskListUpdate(TaskListTasks tasks) throws StorageException {
+  public void saveTaskListUpdate(TaskList tasks) throws StorageException {
     save(tasks);
   }
 }

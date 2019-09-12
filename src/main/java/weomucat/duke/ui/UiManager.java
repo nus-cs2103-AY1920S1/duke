@@ -6,19 +6,20 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import weomucat.duke.command.listener.ByeCommandListener;
 import weomucat.duke.exception.DukeException;
+import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
-import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.task.TaskList;
 import weomucat.duke.task.listener.ListTaskListener;
 import weomucat.duke.task.listener.ModifyTaskListener;
 import weomucat.duke.task.listener.TaskListSizeListener;
 import weomucat.duke.ui.listener.UserInputListener;
 
 /**
- * UiList is responsible for managing many uis.
+ * UiManager is responsible for managing many uis.
  * Whenever any user input is received from any ui, all ui listeners will be notified.
  * Whenever a task update is received, all uis will be notified.
  */
-public class UiList implements ByeCommandListener,
+public class UiManager implements ByeCommandListener,
     ListTaskListener, ModifyTaskListener, TaskListSizeListener,
     UserInputListener {
 
@@ -31,7 +32,7 @@ public class UiList implements ByeCommandListener,
   /**
    * Default constructor.
    */
-  public UiList() {
+  public UiManager() {
     this.uis = new ArrayList<>();
     this.userInputListeners = new ArrayList<>();
     this.userInputQueue = new LinkedList<>();
@@ -124,7 +125,7 @@ public class UiList implements ByeCommandListener,
   }
 
   @Override
-  public void listTaskUpdate(Message message, TaskListTasks tasks) {
+  public void listTaskUpdate(Message message, NumberedTaskList tasks) {
     for (Ui ui : this.uis) {
       ui.listTaskUpdate(message, tasks);
     }

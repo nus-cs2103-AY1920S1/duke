@@ -3,9 +3,9 @@ package weomucat.duke;
 import java.util.Locale;
 import weomucat.duke.exception.StorageException;
 import weomucat.duke.storage.TaskListStorage;
-import weomucat.duke.task.TaskList;
+import weomucat.duke.task.TaskManager;
 import weomucat.duke.ui.Message;
-import weomucat.duke.ui.UiList;
+import weomucat.duke.ui.UiManager;
 import weomucat.duke.ui.cli.CommandLineUi;
 import weomucat.duke.ui.gui.GraphicalUi;
 
@@ -23,9 +23,9 @@ public class Duke {
   public static final Locale LOCALE = Locale.ENGLISH;
 
   private Controller controller;
-  private TaskList taskList;
+  private TaskManager taskList;
   private TaskListStorage storage;
-  private UiList uiList;
+  private UiManager uiList;
 
   /**
    * Default constructor.
@@ -36,9 +36,9 @@ public class Duke {
     assert taskListPath != null;
 
     this.controller = new Controller();
-    this.taskList = new TaskList();
+    this.taskList = new TaskManager();
     this.storage = new TaskListStorage(taskListPath);
-    this.uiList = new UiList();
+    this.uiList = new UiManager();
   }
 
   public static void main(String[] args) throws Exception {
@@ -56,7 +56,7 @@ public class Duke {
     // Try to initialize TaskList from disk if database exists.
     if (this.storage.exists()) {
       try {
-        this.taskList = new TaskList(this.storage.load());
+        this.taskList = new TaskManager(this.storage.load());
         this.uiList.displayMessage(new Message("Loaded tasks from disk."));
       } catch (StorageException e) {
         this.uiList.displayError(new Message(e.getMessage()));

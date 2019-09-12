@@ -1,6 +1,6 @@
 package weomucat.duke.task.listener;
 
-import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.ui.Message;
 
 /**
@@ -15,5 +15,5 @@ public interface ListTaskListener {
    * @param message message to display
    * @param tasks   an ArrayList of all tasks
    */
-  void listTaskUpdate(Message message, TaskListTasks tasks);
+  void listTaskUpdate(Message message, NumberedTaskList tasks);
 }

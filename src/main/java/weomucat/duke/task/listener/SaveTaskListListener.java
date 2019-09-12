@@ -1,7 +1,7 @@
 package weomucat.duke.task.listener;
 
 import weomucat.duke.exception.StorageException;
-import weomucat.duke.task.TaskListTasks;
+import weomucat.duke.task.TaskList;
 
 /**
  * When the task list needs to be saved, this listener will be notified.
@@ -15,5 +15,5 @@ public interface SaveTaskListListener {
    * @param tasks the task list
    * @throws StorageException if an error occurred while saving
    */
-  void saveTaskListUpdate(TaskListTasks tasks) throws StorageException;
+  void saveTaskListUpdate(TaskList tasks) throws StorageException;
 }

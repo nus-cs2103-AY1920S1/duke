@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
      * @param command The full message received from user.
      */
     public DeleteCommand(String command) {
+        assert !command.isEmpty();
         this.command = command;
     }
 

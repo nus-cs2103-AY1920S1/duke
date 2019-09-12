@@ -13,12 +13,12 @@ public abstract class FindCommand implements Command {
   }
 
   @Override
-  public void setParameters(String body, HashMap<String, String> parameters) throws DukeException {
+  public void setParameters(String body, HashMap<String, String> parameters) {
     this.keyword = body;
   }
 
   @Override
-  public void run() throws DukeException {
+  public void run() {
     updateListeners(keyword);
   }
 

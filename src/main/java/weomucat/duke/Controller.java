@@ -1,5 +1,6 @@
 package weomucat.duke;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import weomucat.duke.command.ByeCommand;
@@ -11,6 +12,7 @@ import weomucat.duke.command.EventAtCommand;
 import weomucat.duke.command.EventCommand;
 import weomucat.duke.command.FindCommand;
 import weomucat.duke.command.ListCommand;
+import weomucat.duke.command.SnoozeCommand;
 import weomucat.duke.command.TodoCommand;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.ByeCommandListener;
@@ -19,6 +21,7 @@ import weomucat.duke.command.listener.DoneTaskCommandListener;
 import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
+import weomucat.duke.command.listener.SnoozeTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.UnknownCommandException;
 import weomucat.duke.task.Task;
@@ -38,6 +41,7 @@ public class Controller implements UserInputListener {
   private static final String COMMAND_EVENT_AT = "event_at";
   private static final String COMMAND_FIND = "find";
   private static final String COMMAND_LIST = "list";
+  private static final String COMMAND_SNOOZE = "snooze";
   private static final String COMMAND_BYE = "bye";
 
   private HashMap<String, Command> commands;
@@ -47,6 +51,7 @@ public class Controller implements UserInputListener {
   private ArrayList<EventAtCommandListener> eventAtCommandListeners;
   private ArrayList<FindTaskCommandListener> findTaskCommandListeners;
   private ArrayList<ListTaskCommandListener> listTaskCommandListeners;
+  private ArrayList<SnoozeTaskCommandListener> snoozeTaskCommandListeners;
   private ArrayList<ByeCommandListener> byeCommandListeners;
 
   /**
@@ -59,6 +64,7 @@ public class Controller implements UserInputListener {
     this.eventAtCommandListeners = new ArrayList<>();
     this.findTaskCommandListeners = new ArrayList<>();
     this.listTaskCommandListeners = new ArrayList<>();
+    this.snoozeTaskCommandListeners = new ArrayList<>();
     this.byeCommandListeners = new ArrayList<>();
 
     this.commands = new HashMap<>();
@@ -123,6 +129,14 @@ public class Controller implements UserInputListener {
       public void updateListeners() {
         for (ListTaskCommandListener listener : listTaskCommandListeners) {
           listener.listTaskCommandUpdate();
+        }
+      }
+    });
+    this.commands.put(COMMAND_SNOOZE, new SnoozeCommand() {
+      @Override
+      public void updateListeners(int taskIndex, Duration duration) throws DukeException {
+        for (SnoozeTaskCommandListener listener : snoozeTaskCommandListeners) {
+          listener.snoozeTaskCommandUpdate(taskIndex, duration);
         }
       }
     });
@@ -194,6 +208,16 @@ public class Controller implements UserInputListener {
    */
   void newListTaskCommandListener(ListTaskCommandListener listener) {
     this.listTaskCommandListeners.add(listener);
+  }
+
+  /**
+   * Adds a SnoozeTaskCommandListener to the Controller.
+   * When a SnoozeTaskCommand is received, this listener will be notified.
+   *
+   * @param listener SnoozeTaskCommand listener
+   */
+  void newSnoozeTaskCommandListener(SnoozeTaskCommandListener listener) {
+    this.snoozeTaskCommandListeners.add(listener);
   }
 
   /**

@@ -72,6 +72,7 @@ public class Duke {
     this.controller.newEventAtCommandListener(this.taskList);
     this.controller.newFindTaskCommandListener(this.taskList);
     this.controller.newListTaskCommandListener(this.taskList);
+    this.controller.newSnoozeTaskCommandListener(this.taskList);
     this.controller.newByeCommandListener(this.uiList);
 
     this.taskList.newSaveTaskListListener(this.storage);

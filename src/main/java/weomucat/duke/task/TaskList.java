@@ -2,6 +2,7 @@ package weomucat.duke.task;
 
 import static weomucat.duke.Duke.LOCALE;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.DeleteTaskCommandListener;
@@ -9,6 +10,7 @@ import weomucat.duke.command.listener.DoneTaskCommandListener;
 import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
+import weomucat.duke.command.listener.SnoozeTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidIndexException;
 import weomucat.duke.exception.StorageException;
@@ -23,7 +25,7 @@ import weomucat.duke.ui.Message;
  */
 public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListener,
     DoneTaskCommandListener, EventAtCommandListener, FindTaskCommandListener,
-    ListTaskCommandListener {
+    ListTaskCommandListener, SnoozeTaskCommandListener {
 
   private TaskListTasks tasks;
   private ArrayList<ListTaskListener> listTaskListeners;
@@ -220,6 +222,33 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
     }
   }
 
+  /**
+   * Snoozes a task by a certain duration.
+   *
+   * @param taskIndex the index of the task in the task list
+   * @param duration  the duration to snooze a task
+   * @throws DukeException If the index is invalid or any listeners throw a DukeException.
+   */
+  private void snoozeTask(int taskIndex, Duration duration) throws DukeException {
+    Task task;
+    try {
+      // Get task from tasks
+      task = this.tasks.get(taskIndex);
+    } catch (IndexOutOfBoundsException e) {
+      throw new InvalidIndexException("That is not a valid index of a task.");
+    }
+
+    if (!(task instanceof SnoozableTask)) {
+      throw new InvalidIndexException("The task selected cannot be snoozed!");
+    }
+
+    SnoozableTask snoozableTask = (SnoozableTask) task;
+    snoozableTask.snooze(duration);
+
+    // Update ModifyTaskListeners
+    modifyTaskUpdate(new Message("Got it. I've set the schedule for this task:"), task);
+  }
+
   private void modifyTaskUpdate(Message message, Task task) throws StorageException {
     for (ModifyTaskListener listener : this.modifyTaskListeners) {
       listener.modifyTaskUpdate(message, task);
@@ -258,5 +287,10 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
   @Override
   public void listTaskCommandUpdate() {
     listTask();
+  }
+
+  @Override
+  public void snoozeTaskCommandUpdate(int taskIndex, Duration duration) throws DukeException {
+    snoozeTask(taskIndex, duration);
   }
 }

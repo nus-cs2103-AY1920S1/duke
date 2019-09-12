@@ -11,12 +11,12 @@ public abstract class ByeCommand implements Command {
   }
 
   @Override
-  public void setParameters(String body, HashMap<String, String> parameters) throws DukeException {
+  public void setParameters(String body, HashMap<String, String> parameters) {
 
   }
 
   @Override
-  public void run() throws DukeException {
+  public void run() {
     updateListeners();
   }
 

@@ -1,6 +1,7 @@
 package weomucat.duke.date;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -64,6 +65,15 @@ public class Date implements Serializable {
   public static String format(ZonedDateTime date, String pattern) {
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
     return date.format(dateTimeFormatter);
+  }
+
+  /**
+   * Adds a duration to the current Date.
+   *
+   * @param duration the duration to add
+   */
+  public void plus(Duration duration) {
+    this.date = this.date.plus(duration);
   }
 
   boolean isAfter(Date date) {

@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
     }
 
     void setDuke(Duke d) {
+        assert duke != null;
         duke = d;
         duke.initialize(this);
     }
@@ -42,6 +43,7 @@ public class MainWindow extends AnchorPane {
      * @param s output String
      */
     void dukeSays(String s) {
+        assert(s instanceof String);
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(s, dukeImage)
         );

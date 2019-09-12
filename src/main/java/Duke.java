@@ -10,6 +10,7 @@ public class Duke {
      * @param input
      */
     void getResponse(String input) {
+        assert input != null;
         if (!parser.parse(input, tasks, mw)) {
             mw.closeSequence();
         }
@@ -22,6 +23,7 @@ public class Duke {
      * @param mw
      */
     void initialize(MainWindow mw) {
+        assert mw != null;
         this.mw = mw;
         try {
             tasks = Storage.load();

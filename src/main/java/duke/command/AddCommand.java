@@ -6,6 +6,8 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+import java.io.IOException;
+
 /**
  * Handles commands that require adding a task to the list of tasks, namely deadline, event, and todo.
  */
@@ -20,17 +22,14 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(addedTask);
+
         ui.printAddedTask(addedTask);
         ui.showNumTasks(tasks);
+
         try {
             storage.writeToFile(tasks);
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

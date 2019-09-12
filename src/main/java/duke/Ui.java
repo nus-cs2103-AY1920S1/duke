@@ -16,11 +16,16 @@ public class Ui {
         return stringToPrint;
     }
 
+    private void addNewLine() {
+        stringToPrint += "\n";
+    }
+
     /**
      * Prints loading error message if any exception thrown when file with tasks is loaded from storage or created.
      */
     public void showLoadingError() {
-        stringToPrint = "\u2639 OOPS!!! Unable to load file. Try again!\n";
+        stringToPrint = "\u2639 OOPS!!! Unable to load file. Try again!";
+        addNewLine();
     }
 
     /**
@@ -29,14 +34,16 @@ public class Ui {
      * @param error Error message to be printed to screen.
      */
     public void showError(String error) {
-        stringToPrint = error + "\n";
+        stringToPrint = error;
+        addNewLine();
     }
 
     /**
      * Prints exit message before the bot is closed.
      */
     public void showExit() {
-        stringToPrint = "Bye. Hope to see you again soon!\n";
+        stringToPrint = "Bye. Hope to see you again soon!";
+        addNewLine();
     }
 
     /**
@@ -67,9 +74,10 @@ public class Ui {
         String result = "";
 
         result += "Nice! I've marked this task as done:\n";
-        result += t + "\n";
+        result += t;
 
         stringToPrint = result;
+        addNewLine();
 
         assert !stringToPrint.equals("");
     }
@@ -83,9 +91,10 @@ public class Ui {
         String result = "";
 
         result += "Noted. I've removed this task:\n";
-        result += t + "\n";
+        result += t;
 
         stringToPrint = result;
+        addNewLine();
 
         assert !stringToPrint.equals("");
     }
@@ -101,12 +110,14 @@ public class Ui {
 
         result += "Now you have " + taskListSize;
         if (taskListSize == 1) {
-            result += " task in the list.\n";
+            result += " task ";
         } else {
-            result += " tasks in the list.\n";
+            result += " tasks ";
         }
+        result += "in the list.";
 
         stringToPrint += result;
+        addNewLine();
 
         assert !stringToPrint.equals("");
     }
@@ -120,16 +131,18 @@ public class Ui {
         String result = "";
 
         result += "Got it. I've added this task:\n";
-        result += task + "\n";
+        result += task;
 
         stringToPrint = result;
+        addNewLine();
 
         assert !stringToPrint.equals("");
     }
 
     public void printFoundTasks(LinkedList<Task> foundTasks) {
         if (foundTasks.size() == 0) {
-            stringToPrint = "No matching tasks found!\n";
+            stringToPrint = "No matching tasks found!";
+            addNewLine();
         } else {
             String result = "";
 
@@ -144,7 +157,6 @@ public class Ui {
 
             stringToPrint = result;
         }
-
         assert !stringToPrint.equals("");
     }
 

@@ -20,9 +20,4 @@ public class FindCommand extends Command {
         LinkedList<Task> tasksWithKeyword = tasks.findTasks(toFind);
         ui.printFoundTasks(tasksWithKeyword);
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -21,9 +21,4 @@ public class ExitCommand extends Command {
             throw new DukeException(e.getMessage());
         }
     }
-
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

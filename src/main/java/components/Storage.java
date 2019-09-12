@@ -1,5 +1,6 @@
 package components;
 
+import commands.DukeException;
 import tasks.Task;
 
 import java.io.*;
@@ -13,9 +14,9 @@ public class Storage {
     }
 
     /**
-     * Overwrites entire file with current items in Arr, using '***' as a separator.
+     * Overwrites entire file with current items
      */
-    public void save(ArrayList<Task> arr) {
+    public void save(ArrayList<Task> arr) throws DukeException {
         //First delete the old file
         File file = new File(filepath);
         if (file.exists()) file.delete();
@@ -30,7 +31,7 @@ public class Storage {
                 oos.writeObject(task);
             }
         } catch (IOException e) {
-            System.err.println("I could not save your updated list to my file :( Please try again.");
+            throw new DukeException("I could not save your updated list to my file :( Please try again.");
         }
     }
 
@@ -39,7 +40,7 @@ public class Storage {
      *
      * @return an empty ArrayList if file has not been created or is empty, and the ArrayList of existing Tasks otherwise.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws DukeException {
         try (FileInputStream fi = new FileInputStream(new File(filepath));
              ObjectInputStream oi = new ObjectInputStream(fi)) {
             ArrayList<Task> tasks = new ArrayList<>();
@@ -52,14 +53,11 @@ public class Storage {
             return tasks;
 
         } catch (FileNotFoundException e) {
-            Ui.printErr("I could not find the file I saved your data to! I'll load an empty list first.");
-            return new ArrayList<>();
+            throw new DukeException("I didn't detect any file with tasks in it! I'll load an empty list first.");
         } catch (IOException e) {
-            Ui.printErr("I had an issue reading your items from memory! I'll load an empty list first.");
-            return new ArrayList<>();
+            throw new DukeException("I had an issue reading your items from memory! I'll load an empty list first.");
         } catch (ClassNotFoundException e) {
-            Ui.printErr("Your data does not resemble any format I know. I'll load an empty list first.");
-            return new ArrayList<>();
+            throw new DukeException("Your data does not resemble any format I know. I'll load an empty list first.");
         }
     }
 

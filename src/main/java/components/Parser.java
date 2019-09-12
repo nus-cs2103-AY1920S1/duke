@@ -19,10 +19,14 @@ public class Parser {
         return dateFormatter.parse(str, new ParsePosition(0));
     }
 
-    public static Command parse(String fullCommand) {
+    public static Command parse(String fullCommand) throws DukeException {
         Scanner sc = new Scanner(fullCommand);
         String firstWord = sc.next();
         switch (firstWord) {
+            case "deleteAll":
+                return new DeleteAllTasksCommand();
+            case "rmdone":
+                return new DeleteAllCompletedCommand();
             case "find":
                 try {
                     String keyword = sc.nextLine();
@@ -52,7 +56,7 @@ public class Parser {
                     }
                     if (!deadline.isBlank()) {
                         Date date = parseAsDate(deadline);
-                        return new AddDeadlineCommand(taskName,date);
+                        return new AddDeadlineCommand(taskName, date);
                     } else {
                         return new PrintUserInputErrorCommand("OOPS!!! The deadline cannot be empty.");
                     }
@@ -75,19 +79,20 @@ public class Parser {
                     }
                     if (!timeFrame.isBlank()) {
                         Date date = parseAsDate(timeFrame);
-                        return new AddEventCommand(taskName,date);
+                        return new AddEventCommand(taskName, date);
                     } else {
-                        return new PrintUserInputErrorCommand("OOPS!!! The time frame of an event cannot be empty.");
+                        return new PrintUserInputErrorCommand("Oops!!! The time frame of an event cannot be empty.");
                     }
                 } else {
-                    return new PrintUserInputErrorCommand("OOPS!!! The description of an event cannot be empty.");
+                    return new PrintUserInputErrorCommand("Oops!!! The description of an event cannot be empty.");
                 }
             case "delete":
                 try {
-                    int index = sc.nextInt() - 1;
-                    return new DeleteCommand(index);
+                    return new DeleteCommand(sc.nextLine());
                 } catch (InputMismatchException e) {
                     return new PrintUserInputErrorCommand("OOPS!!! You need to enter a natural number.");
+                } catch (NoSuchElementException e) {
+                    return new PrintUserInputErrorCommand("You need to give me something to delete!");
                 }
             case "bye":
                 return new EndSessionCommand();

@@ -1,27 +1,15 @@
 import commands.Command;
+import commands.DukeException;
 import components.Parser;
 import components.Storage;
 import components.TaskList;
-import components.Ui;
-import javafx.scene.control.Label;
+
+import java.util.ArrayList;
 
 public class Duke {
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
-
-
-
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-
+    private String initializationErrorMessage;
 
     /**
      * Constructs a Duke instance.
@@ -30,31 +18,51 @@ public class Duke {
      */
     Duke(String filepath) {
         storage = new Storage(filepath);
-        taskList = new TaskList(storage.load());
-        ui = new Ui();
-    }
-
-
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String fullCommand = ui.readCommand();
-            ui.showLine();
-            Command c = Parser.parse(fullCommand);
-            c.execute(ui, storage, taskList);
-            isExit = c.isExit();
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            initializationErrorMessage = e.getMessage();
+            taskList = new TaskList(new ArrayList<>());
         }
     }
 
-    /**
-     * Starts a Duke instance.
-     *
-     * @param args takes in arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("src/data/duke.txt").run();
+    String[] deleteCompletedTasks() {
+        return taskList.removeCompletedTasks();
     }
+
+    String[] deleteAll() {
+        return taskList.deleteAll();
+    }
+
+    String[] run(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            return c.execute(storage, taskList);
+        } catch (DukeException e) {
+            return new String[]{e.getMessage()};
+        }
+    }
+
+    String[] getWelcomeMessage() {
+        if (initializationErrorMessage == null) {
+            return new String[]{"Hello! I'm Duke. How can I help you?"};
+        }
+        return new String[]{"Hello! I'm Duke. How can I help you?", initializationErrorMessage};
+
+    }
+
+    void loadTasksWithNoOverwrite(String filepath) throws DukeException {
+        Storage tempStorage = new Storage(filepath);
+        this.taskList.getArr().addAll(tempStorage.load());
+        storage.save(this.taskList.getArr());
+    }
+
+    void loadTasksWithOverwrite(String filepath) throws DukeException {
+        Storage tempStorage = new Storage(filepath);
+        this.taskList = new TaskList(tempStorage.load());
+        storage.save(this.taskList.getArr());
+    }
+
 }
 
 

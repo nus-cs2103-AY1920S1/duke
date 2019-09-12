@@ -1,12 +1,13 @@
 package components;
 
+import commands.DukeException;
 import tasks.Task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class TaskList {
-    final String ANSI_RESET = "\u001B[0m";
-    final String ANSI_YELLOW = "\u001B[33m";
     private ArrayList<Task> arr;
 
     public ArrayList<Task> getArr() {
@@ -25,11 +26,13 @@ public class TaskList {
      *
      * @param task refers to the task to add.
      */
-    public void addTask(Task task) {
-        Ui.print("Got it. I've added this task:");
-        Ui.print(task.toString());
+    public String[] addTask(Task task) {
+        String[] temp = new String[3];
+        temp[0] = "Got it. I've added this task:";
+        temp[1] = task.toString();
         arr.add(task);
-        Ui.print("Now you have " + arr.size() + (arr.size() == 1 ? " task" : " tasks") + " in the list.");
+        temp[2] = "Now you have " + arr.size() + (arr.size() == 1 ? " task" : " tasks") + " in the list.";
+        return temp;
     }
 
     /**
@@ -38,61 +41,99 @@ public class TaskList {
      * @param index of the task to be removed.
      * @return the tasks.Task or null
      */
-    public Task deleteTask(int index) {
+    public Task deleteTask(int index) throws DukeException {
         try {
             return arr.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printErr("Oops! You have entered a number out of range.");
-            return null;
+            throw new DukeException("Oops! You have entered a number out of range.");
         }
+    }
+
+    public ArrayList<Task> batchDelete(ArrayList<Integer> indicesToDeleteAt) throws DukeException {
+        try {
+            ArrayList<Task> deleted = new ArrayList<>(indicesToDeleteAt.stream().map(i -> arr.get(i)).collect(Collectors.toList()));
+            arr.removeAll(deleted);
+            return deleted;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Oops! You have entered a number out of range.");
+        }
+    }
+
+    /**
+     * Delete all items currently in the list.
+     *
+     * @return a string array with a success message.
+     */
+    public String[] deleteAll() {
+        arr.clear();
+        return new String[]{"All items have been deleted."};
     }
 
     /**
      * Switch a cross to a tick to mark a task as done.
+     *
      * @param index of the task to be marked as done.
      */
-    public void markAsDone(int index) {
+    public String[] markAsDone(int index) throws DukeException {
         try {
+            String[] temp = new String[2];
             arr.get(index).markAsDone();
-            Ui.print("Nice! I've marked this task as done:");
-            Ui.print(arr.get(index).toString());
+            temp[0] = "Nice! I've marked this task as done:";
+            temp[1] = arr.get(index).toString();
+            return temp;
         } catch (IndexOutOfBoundsException e) {
-            Ui.printErr("Oops! You have entered a number out of range.");
+            throw new DukeException("Oops! You have entered a number out of range.");
         }
+
     }
+
 
     /**
      * Display all tasks on the list.
      */
-    public void displayList() {
+    public String[] displayList() {
+        ArrayList<String> t = new ArrayList<>();
         if (arr.size() == 0) {
-            Ui.print("You have no tasks in your list!");
-            return;
+            t.add("You currently have no tasks in your list!");
+            return t.toArray(new String[0]);
         }
-        Ui.print("Here are the tasks in your list:");
-        printListOnly();
+        t.add("Here are the current tasks in your list:");
+        t.addAll(generateList());
+        return t.toArray(new String[0]);
 
     }
 
-    private void printListOnly() {
+    private ArrayList<String> generateList() {
+        ArrayList<String> temp = new ArrayList<>();
         int i = 0;
         for (Task t : arr) {
-            Ui.print(++i + "." + t);
+            temp.add(++i + ". " + t);
         }
+        return temp;
     }
 
-    public void findTaskByKeywordAndPrintList(String str) {
-        ArrayList<Task> temp = new ArrayList<>();
+    public String[] removeCompletedTasks() {
+        arr.removeIf(t -> t.isDone);
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add("I've removed all the tasks marked as done!");
+        String[] list = displayList();
+        temp.addAll(Arrays.asList(list));
+        return temp.toArray(new String[0]);
+    }
+
+    public String[] findTaskByKeywordAndPrintList(String str) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Placeholder for first line");
         for (Task task : arr) {
             if (task.getDescription().contains(str)) {
-                temp.add(task);
+                list.add(task.toString());
             }
         }
-        if (temp.size() == 0) {
-            Ui.print("I could not find any matching tasks with this keyword: " + ANSI_YELLOW + str + ANSI_RESET);
-            return;
+        if (list.size() == 1 && list.get(0).equals("Placeholder for first line")) {
+            list.set(0, "I could not find any matching tasks with this keyword: " + str);
+            return list.toArray(new String[0]);
         }
-        Ui.print("Here are the matching tasks in your list:");
-        printListOnly();
+        list.set(0, "Here are the matching tasks in your list:");
+        return list.toArray(new String[0]);
     }
 }

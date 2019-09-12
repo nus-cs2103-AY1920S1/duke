@@ -1,7 +1,6 @@
 package commands;
 
 import components.Storage;
-import components.Ui;
 import components.TaskList;
 
 public class PrintUserInputErrorCommand implements Command {
@@ -12,7 +11,7 @@ public class PrintUserInputErrorCommand implements Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList) {
-        Ui.printErr(message);
+    public String[] execute(Storage storage, TaskList taskList) {
+        return new String[]{message};
     }
 }

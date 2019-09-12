@@ -31,6 +31,51 @@ public class Storage {
     }
 
     /**
+     * Interprets the todo in the saved string format and creates a todo object.
+     *
+     * @param todoInString Todo in saved string format.
+     * @return Todo object created.
+     */
+    private Todo loadTodo(String todoInString) {
+        String[] currArray = todoInString.split(" \\| ");
+        Todo currTodo = new Todo(currArray[2]);
+        if (currArray[1].equals("v")) {
+            currTodo.markAsCompleted();
+        }
+        return currTodo;
+    }
+
+    /**
+     * Interprets the deadline in the saved string format and creates a deadline object.
+     *
+     * @param deadlineInString Deadline in saved string format.
+     * @return Deadline object created.
+     */
+    private Deadline loadDeadline(String deadlineInString) {
+        String[] currArray = deadlineInString.split(" \\| ");
+        Deadline currDeadline = new Deadline(currArray[2], currArray[3]);
+        if (currArray[1].equals("v")) {
+            currDeadline.markAsCompleted();
+        }
+        return currDeadline;
+    }
+
+    /**
+     * Interprets the event in the saved string format and creates an event object.
+     *
+     * @param eventInString Event in saved string format.
+     * @return Event object created.
+     */
+    private Event loadEvent(String eventInString) {
+        String[] currArray = eventInString.split(" \\| ");
+        Event currEvent = new Event(currArray[2], currArray[3]);
+        if (currArray[1].equals("v")) {
+            currEvent.markAsCompleted();
+        }
+        return currEvent;
+    }
+
+    /**
      * Loads the task list from the previous session form the hard disk, if any.
      *
      * @return ArrayList of task that has been loaded from previous session.
@@ -43,26 +88,11 @@ public class Storage {
         while (sc.hasNextLine()) {
             String currTask = sc.nextLine();
             if (currTask.charAt(0) == 'T') {
-                String[] currArray = currTask.split(" \\| ");
-                Todo currTodo = new Todo(currArray[2]);
-                if (currArray[1].equals("v")) {
-                    currTodo.markAsCompleted();
-                }
-                loadedTaskList.add(currTodo);
+                loadedTaskList.add(loadTodo(currTask));
             } else if (currTask.charAt(0) == 'D') {
-                String[] currArray = currTask.split(" \\| ");
-                Deadline currDeadline = new Deadline(currArray[2], currArray[3]);
-                if (currArray[1].equals("v")) {
-                    currDeadline.markAsCompleted();
-                }
-                loadedTaskList.add(currDeadline);
+                loadedTaskList.add(loadDeadline(currTask));
             } else if (currTask.charAt(0) == 'E') {
-                String[] currArray = currTask.split(" \\| ");
-                Event currEvent = new Event(currArray[2], currArray[3]);
-                if (currArray[1].equals("v")) {
-                    currEvent.markAsCompleted();
-                }
-                loadedTaskList.add(currEvent);
+                loadedTaskList.add(loadEvent(currTask));
             } else {
                 throw new DukeException("OOPS!!! Your task file appears to be corrupted.");
             }

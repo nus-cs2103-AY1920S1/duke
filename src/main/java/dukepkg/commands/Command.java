@@ -7,7 +7,7 @@ import dukepkg.exceptions.FormatException;
  */
 public abstract class Command {
     /**
-     * The Is exit.
+     * The flag to check whether the command leads to a shutdown of system.
      */
     protected boolean isExit = false;
 

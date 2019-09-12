@@ -69,9 +69,9 @@ public class Duke {
     }
 
     /**
-     * Is exit boolean.
+     * Flag to indicate whether the system should exit.
      *
-     * @return the boolean
+     * @return the boolean to indicate the system should exit.
      */
     public boolean isExit() {
       return this.isExit;

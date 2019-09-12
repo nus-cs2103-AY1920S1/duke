@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Initialize.
+     * Initialize the scrollPane with dialogContainer.
      */
     @FXML
     public void initialize() {

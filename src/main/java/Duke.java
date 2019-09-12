@@ -29,6 +29,9 @@ public class Duke {
         ui.showWelcome();
     }
     public String getResponse(String inputOrig) throws ParseException, DukeException {
+        if (inputOrig.equals("hey bb")) {
+            return "Ay bb wan sum fuk";
+        }
         /**
          *  main run method
          *  scans input and decides whether adding,
@@ -42,7 +45,6 @@ public class Duke {
          *  @return none
          *  @throws DukeException if command unknown
          */
-        //parser.scrubData();
         parser.parse(inputOrig);
         String command = parser.getCommand();
         if (command.equals("bye")) {
@@ -78,7 +80,7 @@ public class Duke {
             return ui.find(keyWord);
         } else {
             // handle all other cases
-            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            return "Comrade, I do not know that of which you speak.";
         }
     }
 }

@@ -79,7 +79,7 @@ public class Task implements Comparable<Task> {
     /**
      * Returns whether the task is finished.
      *
-     * @return {@Code true} if the task is finished.
+     * @return true if the task is finished.
      */
     public boolean isDone() {
         return this.isDone;

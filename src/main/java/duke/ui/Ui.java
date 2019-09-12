@@ -124,7 +124,7 @@ public class Ui {
     /**
      * Displays the sorted tasks as a reminder.
      *
-     * @param sortedTask
+     * @param sortedTask String representation of the sorted tasks.
      */
     public void showReminder(String sortedTask) {
         mw.displayMsg("Nezuko has found a few urgent tasks:\n" + sortedTask);

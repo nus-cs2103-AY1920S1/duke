@@ -31,5 +31,5 @@ test {
 }
 application {
     // Change this to your main class.
-    mainClassName = "Duke"
+    mainClassName = "duke.application.Launcher"
 }

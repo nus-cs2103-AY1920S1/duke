@@ -87,7 +87,7 @@ public class Sheet {
         StringBuilder sb = new StringBuilder("");
 
         for (int i = 0; i < numOfTask; i++) {
-            sb.append((" " + (i + 1) +  ". " + tasks.get(i).toString().trim() + "\n"));
+            sb.append((" " + (i + 1) + ". " + tasks.get(i).toString().trim() + "\n"));
         }
         return sb.toString();
     }
@@ -112,7 +112,7 @@ public class Sheet {
                 j++;
                 continue;
             }
-            sb.append((" " + (i + 1) +  ". " + sortedList.get(j).toString().trim() + "\n"));
+            sb.append((" " + (i + 1) + ". " + sortedList.get(j).toString().trim() + "\n"));
             j++;
             i++;
         }

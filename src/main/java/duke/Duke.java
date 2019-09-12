@@ -25,7 +25,7 @@ public class Duke {
     private MainWindow mw;
 
     /**
-     * Constructs a {@Class Duke} object.
+     * Constructs a Duke object.
      *
      * @param pathToFile Path to file storing the task list.
      * @param mw MainWindow.
@@ -54,6 +54,7 @@ public class Duke {
             Command c = Parser.parse(fullCommand);
             if (c.isExit()) {
                 // exit
+                System.exit(0);
             }
             c.execute(sheet, ui, storage);
         } catch (DukeException e) {

@@ -10,40 +10,73 @@ public class JsonValue {
     private JsonObject valueObject;
     private JsonArray valueArray;
 
+    /**
+     * Construct the value as an int.
+     * @param value int value
+     */
     public JsonValue(int value) {
         type = ValueTypes.INT;
         valueInt = value;
     }
 
+    /**
+     * Construct the value as a double.
+     * @param value double value
+     */
     public JsonValue(double value) {
         type = ValueTypes.DOUBLE;
         valueDouble = value;
     }
 
+    /**
+     * Construct the value as a boolean.
+     * @param value boolean value
+     */
     public JsonValue(boolean value) {
         type = ValueTypes.BOOLEAN;
         valueBoolean = value;
     }
 
+    /**
+     * Construct the value as a string.
+     * @param value string value
+     */
     public JsonValue(String value) {
         type = ValueTypes.STRING;
         valueString = value;
     }
 
+    /**
+     * Construct the value as a JsonObject.
+     * @param value JsonObject value
+     */
     public JsonValue(JsonObject value) {
         type = ValueTypes.OBJECT;
         valueObject = value;
     }
 
+    /**
+     * Construct the value as a JsonArray.
+     * @param value JsonArray value
+     */
     public JsonValue(JsonArray value) {
         type = ValueTypes.ARRAY;
         valueArray = value;
     }
 
+    /**
+     * Get the type of this value.
+     * @return  type
+     */
     public ValueTypes getType() {
         return type;
     }
 
+    /**
+     * Get the value if it is an int.
+     * @return  value
+     * @throws JsonWrongValueTypeException  exception if value type is not a match
+     */
     public int getInt() throws JsonWrongValueTypeException {
         if (type != ValueTypes.INT) {
             throw new JsonWrongValueTypeException(ValueTypes.INT, type);
@@ -51,6 +84,11 @@ public class JsonValue {
         return valueInt;
     }
 
+    /**
+     * Get the value if it is an double.
+     * @return  value
+     * @throws JsonWrongValueTypeException  exception if value type is not a match
+     */
     public double getDouble() throws JsonWrongValueTypeException {
         if (type != ValueTypes.DOUBLE) {
             throw new JsonWrongValueTypeException(ValueTypes.DOUBLE, type);
@@ -58,6 +96,11 @@ public class JsonValue {
         return valueDouble;
     }
 
+    /**
+     * Get the value if it is an boolean.
+     * @return  value
+     * @throws JsonWrongValueTypeException  exception if value type is not a match
+     */
     public boolean getBoolean() throws JsonWrongValueTypeException {
         if (type != ValueTypes.BOOLEAN) {
             throw new JsonWrongValueTypeException(ValueTypes.BOOLEAN, type);
@@ -65,6 +108,11 @@ public class JsonValue {
         return valueBoolean;
     }
 
+    /**
+     * Get the value if it is an string.
+     * @return  value
+     * @throws JsonWrongValueTypeException  exception if value type is not a match
+     */
     public String getString() throws JsonWrongValueTypeException {
         if (type != ValueTypes.STRING) {
             throw new JsonWrongValueTypeException(ValueTypes.STRING, type);
@@ -72,6 +120,11 @@ public class JsonValue {
         return valueString;
     }
 
+    /**
+     * Get the value if it is an JsonObject.
+     * @return  value
+     * @throws JsonWrongValueTypeException  exception if value type is not a match
+     */
     public JsonObject getObject() throws JsonWrongValueTypeException {
         if (type != ValueTypes.OBJECT) {
             throw new JsonWrongValueTypeException(ValueTypes.OBJECT, type);
@@ -79,6 +132,11 @@ public class JsonValue {
         return valueObject;
     }
 
+    /**
+     * Get the value if it is an JsonArray.
+     * @return  value
+     * @throws JsonWrongValueTypeException  exception if value type is not a match
+     */
     public JsonArray getArray() throws JsonWrongValueTypeException {
         if (type != ValueTypes.ARRAY) {
             throw new JsonWrongValueTypeException(ValueTypes.ARRAY, type);
@@ -86,6 +144,10 @@ public class JsonValue {
         return valueArray;
     }
 
+    /**
+     * Get string representation of object.
+     * @return  string representation
+     */
     public String toString() {
         try {
             switch (type) {

@@ -5,30 +5,66 @@ import java.util.HashMap;
 
 public class JsonObject extends HashMap<String,JsonValue> {
 
+    /**
+     * Puts an int into the object.
+     * @param key   key for the value
+     * @param value int value
+     * @return      result of the put function from HashMap
+     */
     public JsonValue put(String key, int value) {
         return super.put(key, new JsonValue(value));
     }
 
+    /**
+     * Puts an double into the object.
+     * @param key   key for the value
+     * @param value double value
+     * @return      result of the put function from HashMap
+     */
     public JsonObject put(String key, double value) {
         super.put(key, new JsonValue(value));
         return this;
     }
 
+    /**
+     * Puts an boolean into the object.
+     * @param key   key for the value
+     * @param value boolean value
+     * @return      result of the put function from HashMap
+     */
     public JsonObject put(String key, boolean value) {
         super.put(key, new JsonValue(value));
         return this;
     }
 
+    /**
+     * Puts an string into the object.
+     * @param key   key for the value
+     * @param value string value
+     * @return      result of the put function from HashMap
+     */
     public JsonObject put(String key, String value) {
         super.put(key, new JsonValue(value));
         return this;
     }
 
+    /**
+     * Puts an JsonObject into the object.
+     * @param key   key for the value
+     * @param value JsonObject value
+     * @return      result of the put function from HashMap
+     */
     public JsonObject put(String key, JsonObject value) {
         super.put(key, new JsonValue(value));
         return this;
     }
 
+    /**
+     * Puts an JsonArray into the object.
+     * @param key   key for the value
+     * @param value JsonArray value
+     * @return      result of the put function from HashMap
+     */
     public JsonObject put(String key, JsonArray value) {
         super.put(key, new JsonValue(value));
         return this;

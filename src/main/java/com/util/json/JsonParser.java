@@ -2,7 +2,13 @@ package com.util.json;
 
 public class JsonParser {
 
-    public static JsonValue parseJsonString(String input) throws JsonFormatException {
+    /**
+     * Given a string input, parse it as a JsonValue.
+     * @param input input string
+     * @return      JsonValue
+     * @throws JsonFormatException Exceptions indicate incorrect syntax for json files
+     */
+    public static JsonValue parseJsonInput(String input) throws JsonFormatException {
         return processDynamicValue(input.toCharArray(), 0).snd;
     }
 
@@ -307,7 +313,8 @@ public class JsonParser {
         boolean escape = false;
         i = skipWhiteSpace(input, i);
         if (input[i] != '"') {
-            throw new JsonFormatException(input, i, "Expected starting double quotes for string but encountered something else", 2);
+            throw new JsonFormatException(input, i,
+                    "Expected starting double quotes for string but encountered something else", 2);
         }
         i++;
         while (i < input.length) {

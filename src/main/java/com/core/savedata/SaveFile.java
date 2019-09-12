@@ -99,7 +99,7 @@ public class SaveFile {
 
         try {
             try {
-                for (JsonValue obj : JsonParser.parseJsonString(input).getArray()) {
+                for (JsonValue obj : JsonParser.parseJsonInput(input).getArray()) {
                     DoableTask task;
                     JsonValue attrObj;
                     if ((attrObj = obj.getObject().get(Schema.TASK_TODO)) != null) {

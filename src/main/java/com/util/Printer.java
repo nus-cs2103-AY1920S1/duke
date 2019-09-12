@@ -129,6 +129,11 @@ public class Printer {
         return String.valueOf(c).repeat(Math.max(0, length));
     }
 
+    /**
+     * All printString and printError messages are collated into a buffer,
+     * call flush to receive them and reset the buffer.
+     * @return  buffered text
+     */
     public static String flush() {
         String buf = buffer + "";
         buffer = "";

@@ -1,11 +1,11 @@
 package com.util.json;
 
-class Pair<Integer, Object> {
+class Pair<U, T> {
 
-    public Integer fst;
-    public Object snd;
+    public U fst;
+    public T snd;
 
-    public Pair(Integer a, Object b) {
+    public Pair(U a, T b) {
         fst = a;
         snd = b;
     }

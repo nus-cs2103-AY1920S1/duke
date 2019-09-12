@@ -26,6 +26,9 @@ public class State {
         list = initialList;
     }
 
+    /**
+     * Default constructor that does not add items to the list.
+     */
     public State() {
     }
 }

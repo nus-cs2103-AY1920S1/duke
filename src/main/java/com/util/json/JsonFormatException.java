@@ -37,16 +37,35 @@ public class JsonFormatException extends Exception {
         errorCode = 1;
     }
 
+    /**
+     * Construct the exception with references to the source json file with an error code.
+     * @param input json file character string
+     * @param index index where error occurred in string
+     * @param msg   message for the error
+     * @param err   error code
+     */
     public JsonFormatException(char[] input, Integer index, String msg, Integer err) {
         super(msg + "\n" + getPointToErrorString(input, index));
         errorCode = err;
     }
 
+    /**
+     * Construct the exception with references to the source json file.
+     * @param input json file character string
+     * @param index index where error occurred in string
+     * @param msg   message for the error
+     */
     public JsonFormatException(char[] input, Integer index, String msg) {
         super(msg + "\n" + getPointToErrorString(input, index));
         errorCode = 1;
     }
 
+    /**
+     * Generate reference string for error.
+     * @param input json file character string
+     * @param index index where error occurred in string
+     * @return  formatted reference string
+     */
     private static String getPointToErrorString(char[] input, Integer index) {
         int line = 1;
         int col = 0;
@@ -66,7 +85,9 @@ public class JsonFormatException extends Exception {
             }
             lineBuf.append(input[i]);
         }
-        return lineBuf.toString() + "\n" + Printer.indentString("^", Printer.repeatChar(col - 1, ' ')) + "(" + line + ":" + col + ")\n";
+        return lineBuf.toString() + "\n"
+                + Printer.indentString("^", Printer.repeatChar(col - 1, ' '))
+                + "(" + line + ":" + col + ")\n";
     }
 
     /**

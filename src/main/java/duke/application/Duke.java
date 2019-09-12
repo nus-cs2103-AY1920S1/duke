@@ -1,3 +1,5 @@
+package duke.application;
+
 import duke.command.Ui;
 import duke.command.Parser;
 import duke.command.Executor;

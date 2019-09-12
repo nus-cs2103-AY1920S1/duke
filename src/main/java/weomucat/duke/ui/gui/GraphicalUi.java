@@ -101,6 +101,10 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
     Platform.runLater(() -> this.root.addMessage(new DukeErrorMessage(message)));
   }
 
+  public void displayTaskMessage(Message message) {
+    Platform.runLater(() -> this.root.addMessage(new DukeTaskMessage(message)));
+  }
+
   @Override
   public void byeCommandUpdate() {
     try {
@@ -127,8 +131,20 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
       // Format task with no. in front
       Message m = task.toMessage();
       String title = String.format("%d. %s", i + 1, m.getTitle());
-      displayMessage(m.setTitle(title));
+      displayTaskMessage(m.setTitle(title));
     }
+  }
+
+  @Override
+  public void modifyTaskUpdate(Message message, Task task) {
+    displayMessage(message);
+    displayTaskMessage(task.toMessage());
+  }
+
+  @Override
+  public void taskListSizeUpdate(int size) {
+    displayMessage(new Message(
+        String.format("Now you have %d task(s) in the list.", size)));
   }
 
   @Override
@@ -136,17 +152,5 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
     for (UserInputListener listener : this.userInputListeners) {
       listener.userInputUpdate(userInput);
     }
-  }
-
-  @Override
-  public void modifyTaskUpdate(Message message, Task task) {
-    displayMessage(message);
-    displayMessage(task.toMessage());
-  }
-
-  @Override
-  public void taskListSizeUpdate(int size) {
-    displayMessage(new Message(
-        String.format("Now you have %d task(s) in the list.", size)));
   }
 }

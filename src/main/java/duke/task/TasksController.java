@@ -7,6 +7,8 @@ import ui.UiController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /***
@@ -147,6 +149,27 @@ public class TasksController {
                     .collect(Collectors.toList());
 
             view.displaySearchResults(matchingTasks, ui);
+        } catch (StorageException e) {
+            ui.displayOutput(e.getMessage());
+        }
+    }
+
+    public void deleteTaskByUuid (UUID uuid, boolean printMessage) throws UiException, NoSuchElementException {
+        try {
+            List<Task> tasks = storage.getTasks();
+
+            Task deleted = tasks.stream()
+                    .filter(task -> task.getUuid().equals(uuid))
+                    .findFirst()
+                    .get();
+
+            tasks.remove(deleted);
+
+            if (printMessage) {
+                view.displayTaskDeleted(deleted, tasks.size(), ui);
+            }
+
+            storage.writeTasks(tasks);
         } catch (StorageException e) {
             ui.displayOutput(e.getMessage());
         }

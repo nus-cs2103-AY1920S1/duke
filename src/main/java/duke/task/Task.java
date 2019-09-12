@@ -5,6 +5,7 @@ import duke.task.tasks.entities.TimeFrame;
 import error.task.TaskCreationException;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /***
  * <p>
@@ -15,7 +16,8 @@ import java.io.Serializable;
 public abstract class Task implements Serializable {
     private static final long serialVersionUID = 6529685098267757690L;
 
-    private TaskType type;
+    private final UUID uuid;
+    private final TaskType type;
     private String details;
     private TimeFrame timeFrame;
     private boolean isDone;
@@ -27,11 +29,16 @@ public abstract class Task implements Serializable {
             System.exit(1);
         }
 
+        this.uuid = UUID.randomUUID();
         this.type = type;
         this.details = details;
         this.timeFrame = timeFrame;
         this.isDone = isDone;
         this.isRecurring = isRecurring;
+    }
+
+    public UUID getUuid() {
+        return this.uuid;
     }
 
     public TaskType getTaskType() {

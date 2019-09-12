@@ -88,7 +88,7 @@ public class DataForDuke {
                     } else {
                         System.out.println("\t\tHey Heyyyy, " + filePath
                                 + "sorry but I have no idea what are you saying, please try again!");
-                    }
+                    } assert wordSplit != null;
                 }
                 inputString = reader.readLine();
             }

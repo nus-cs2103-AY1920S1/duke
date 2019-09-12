@@ -2,6 +2,7 @@ import command.Command;
 import duke.Parser;
 import duke.Storage;
 import duke.Ui;
+import exception.DukeException;
 import task.TaskList;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,8 +32,10 @@ public class Duke {
         try {
             tasks = new TaskList(storage.loadTasksFromFile());
         } catch (FileNotFoundException e) {
-            System.out.println("FILE NOT FOUND");
+            ui.println("FILE NOT FOUND");
             tasks = new TaskList();
+        } catch (DukeException e) {
+            ui.println(e.toString());
         }
     }
 

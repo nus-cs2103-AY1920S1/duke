@@ -1,13 +1,17 @@
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     public static final String symbol = "D";
 
-    protected Date by;
+    protected LocalDateTime by;
 
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, String by) {
         super(description);
         this.by = parseDate(by);
+    }
+
+    public LocalDateTime getBy() {
+        return by;
     }
 
     @Override

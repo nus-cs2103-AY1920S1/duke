@@ -157,6 +157,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 ui.println("     ☹ OOPS!!! The format must be: priority [task index] [high/medium/low]");
             }
+            break;
         default:
             try {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");

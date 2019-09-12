@@ -30,7 +30,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(DukeResponse dukeResponse, TaskList taskList, Storage storage) throws DukeException {
         dukeResponse.add(String.format(Message.MESSAGE_SHOW_TASK_LIST, " matching"));
-        for (String taskName : taskList.getTaskNamesIfMatch(keyword)) {
+        for (String taskName : taskList.getTasksIfMatch(keyword)) {
             dukeResponse.add(taskName);
         }
     }

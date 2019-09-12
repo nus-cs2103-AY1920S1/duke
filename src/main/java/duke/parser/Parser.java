@@ -52,7 +52,7 @@ public class Parser {
     }
 
     public static String getCommandFrom(String inputLine) {
-        return inputLine.strip().split(" ")[0];
+        return inputLine.strip().split(" ")[0].toLowerCase();
     }
 
     private static int getIndexFrom(String inputLine) throws DukeException {

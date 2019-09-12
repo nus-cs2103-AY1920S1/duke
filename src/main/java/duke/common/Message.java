@@ -18,9 +18,9 @@ public class Message {
             + "E.g. event project meeting /at 2/12/2019 1800";
     public static final String MESSAGE_INVALID_TASK_INDEX = "Invalid task number. Task numbers use 1-based indexing.";
     public static final String MESSAGE_INVALID_KEYWORD_FORMAT = "Invalid keyword. Specify keyword to search for tasks.";
-    public static final String MESSAGE_ERROR_MISSING_STORAGE_FILE = "%1$sMissing storage file: %2$s";
+    public static final String MESSAGE_ERROR_MISSING_STORAGE_FILE = "Missing storage file: %1$s";
     public static final String MESSAGE_ERROR_CREATING_STORAGE_FILE = "Unable to create new file %1$s. %2$s";
-    public static final String MESSAGE_STORAGE_FILE_CREATED = "%1$sCreated new empty storage file: %2$s";
+    public static final String MESSAGE_STORAGE_FILE_CREATED = "Created new empty storage file: %1$s";
     public static final String MESSAGE_ERROR_READING_FROM_FILE = "Error when reading file";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date. Use d/M/yyyy HHmm (2/12/2019 1800) format.";
     public static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";

@@ -26,7 +26,6 @@ import duke.task.Todo;
  */
 public class Storage {
     private final String filePath;
-    public static final String LINE_PREFIX = "     ";
 
     /**
      * Constructor of data storage at a given file.
@@ -126,10 +125,10 @@ public class Storage {
         if (storageFile.exists()) {
             return;
         }
-        System.out.println(String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, LINE_PREFIX, filePath));
+        System.out.println(String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, filePath));
         try {
             storageFile.createNewFile();
-            System.out.println(String.format(MESSAGE_STORAGE_FILE_CREATED, LINE_PREFIX,filePath));
+            System.out.println(String.format(MESSAGE_STORAGE_FILE_CREATED,filePath));
         } catch (IOException ioe) {
             throw new DukeException(String.format(MESSAGE_ERROR_CREATING_STORAGE_FILE, filePath, ioe.getMessage()));
         }

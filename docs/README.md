@@ -1,7 +1,7 @@
 # User Guide
 Duke is a friendly event scheduler that helps you keep track of your outstanding tasks.
 
-##How to Use
+## How to Use
 - Create a duke.txt file in the directory of your choosing.
 - Specify the path of the duke.txt file inside Duke.java and replace LIST_PATH with your own path.
 - Enjoy!
@@ -12,7 +12,7 @@ Duke is a friendly event scheduler that helps you keep track of your outstanding
 - Update your task status.
 - Delete tasks that you no longer need to keep an eye on.
 
-##Commands
+## Commands
 Command | Note | Result | Example
 --------|--------|---------|---------
 todo _Task_ |    |Adds todo to scheduler, status of task is undone | todo praise Duke

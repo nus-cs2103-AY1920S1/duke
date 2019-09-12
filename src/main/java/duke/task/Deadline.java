@@ -3,12 +3,15 @@ package duke.task;
 import duke.date.DateValidator;
 import duke.date.InvalidDateDukeException;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a deadline. Consists of a description which the user intends to perform by a certain deadline.
  */
 public class Deadline extends Task {
 
     protected String by;
+    private LocalDateTime dateTime;
 
     /**
      * Constructor for a task of type deadline.
@@ -29,13 +32,13 @@ public class Deadline extends Task {
      */
     public void setBy(String by) throws InvalidDateDukeException {
         DateValidator v = new DateValidator();
-        boolean isValid = v.validateDate(by, false);
-        if (!isValid) {
-            throw new InvalidDateDukeException("Invalid date format! Please ensure your date sticks to this format:\n"
-                    + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
-                    + "    Events : \"DD/MM/YYYY HHMM-HHMM\"");
-        }
+        LocalDateTime[] date = v.getAndValidateDates(by, false);
+        this.dateTime = date[0];
         this.by = by;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     /**

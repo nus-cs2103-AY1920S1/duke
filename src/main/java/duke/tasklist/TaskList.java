@@ -1,6 +1,8 @@
 package duke.tasklist;
 
 import duke.command.InvalidDeleteDukeException;
+import duke.date.EventConflictChecker;
+import duke.task.Event;
 import duke.task.InvalidTaskDukeException;
 import duke.task.Task;
 
@@ -23,9 +25,16 @@ public class TaskList {
     public String removeTaskFromList(int id) throws InvalidDeleteDukeException {
         try {
             Task t = tasks.remove(id - 1);
+            updateIntervals(t);
             return getRemoveTaskMessage(t);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidDeleteDukeException("Invalid \"delete\" command. Please enter a valid task ID.");
+        }
+    }
+
+    private void updateIntervals(Task task) {
+        if (task instanceof Event) {
+            EventConflictChecker.deleteInterval((Event) task);
         }
     }
 
@@ -57,6 +66,7 @@ public class TaskList {
         for (int i = 0; i < listOfTaskIds.size(); i++) {
             Task t = tasks.get(listOfTaskIds.get(i) - 1);
             t.setDone(true);
+            updateIntervals(t);
             finalOutput.append("  " + t.toString());
             if (i != listOfTaskIds.size() - 1) {
                 finalOutput.append("\n");

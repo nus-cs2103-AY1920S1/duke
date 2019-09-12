@@ -24,14 +24,14 @@ public class DateValidator {
      * @return Boolean output.
      * @throws InvalidDateDukeException If the date format is invalid.
      */
-    public boolean validateDate(String date, boolean hasEndTime) throws InvalidDateDukeException {
+    public LocalDateTime[] getAndValidateDates(String date, boolean hasEndTime) throws InvalidDateDukeException {
         ArrayList<String> dateParams = getDateParameters(date);
         if (isInvalidFormat(dateParams, hasEndTime)) {
-            return false;
+            throw new InvalidDateDukeException(INVALID_DATE_MSG);
         }
         try {
             Month month = getMonth(dateParams);
-            return hasValidSemantics(dateParams, hasEndTime, month);
+            return getValidDate(dateParams, hasEndTime, month);
         } catch (DateTimeException e) {
             throw new InvalidDateDukeException(INVALID_DATE_MSG);
         }
@@ -64,15 +64,15 @@ public class DateValidator {
         return dateParams;
     }
 
-    private boolean hasValidSemantics(ArrayList<String> dateParams, boolean hasEndTime, Month month)
+    private LocalDateTime[] getValidDate(ArrayList<String> dateParams, boolean hasEndTime, Month month)
             throws InvalidDateDukeException {
         try {
             ArrayList<Integer> integerDateParams = getIntegerDateParams(dateParams);
             if (hasEndTime) {
                 ArrayList<Integer> integerEndTimeParams = getEndTimeParams(dateParams);
-                return hasValidEventDateSemantics(integerDateParams, month, integerEndTimeParams);
+                return getValidEventDates(integerDateParams, month, integerEndTimeParams);
             } else {
-                return hasValidDeadlineDateSemantics(integerDateParams, month);
+                return getValidDeadlineDate(integerDateParams, month);
             }
         } catch (NumberFormatException e) {
             throw new InvalidDateDukeException(INVALID_DATE_MSG);
@@ -113,17 +113,19 @@ public class DateValidator {
         return dateParams;
     }
 
-    private boolean hasValidDeadlineDateSemantics(ArrayList<Integer> intParams, Month month) {
+    private LocalDateTime[] getValidDeadlineDate(ArrayList<Integer> intParams, Month month)
+            throws InvalidDateDukeException {
         try {
             LocalDateTime dateTime = LocalDateTime.of(intParams.get(1),
                     month, intParams.get(0), intParams.get(2), intParams.get(3));
-            return true;
+            return new LocalDateTime[] {dateTime};
         } catch (DateTimeException e) {
-            return false;
+            throw new InvalidDateDukeException("Invalid date semantics!");
         }
     }
 
-    private boolean hasValidEventDateSemantics(ArrayList<Integer> intParams, Month month, ArrayList<Integer> endParams) {
+    private LocalDateTime[] getValidEventDates(ArrayList<Integer> intParams, Month month, ArrayList<Integer> endParams)
+            throws InvalidDateDukeException {
         try {
             int year = intParams.get(1);
             int day = intParams.get(0);
@@ -132,11 +134,11 @@ public class DateValidator {
             LocalDateTime dateTimeEnd = LocalDateTime.of(year, month, day,
                     endParams.get(0), endParams.get(1));
             if (areInvalidStartEndTimes(dateTimeStart, dateTimeEnd)) {
-                return false;
+                throw new InvalidDateDukeException("Invalid date semantics!");
             }
-            return true;
+            return new LocalDateTime[] {dateTimeStart, dateTimeEnd};
         } catch (DateTimeException e) {
-            return false;
+            throw new InvalidDateDukeException("Invalid date semantics!");
         }
     }
 

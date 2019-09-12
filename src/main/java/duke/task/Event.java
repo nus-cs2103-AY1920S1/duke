@@ -1,7 +1,10 @@
 package duke.task;
 
 import duke.date.DateValidator;
+import duke.date.EventConflictChecker;
 import duke.date.InvalidDateDukeException;
+
+import java.time.LocalDateTime;
 
 /**
  * Represents an event that is held from a start time to an end time.
@@ -9,6 +12,8 @@ import duke.date.InvalidDateDukeException;
 public class Event extends Task {
 
     protected String at;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     /**
      * Constructor for the event class.
@@ -29,13 +34,19 @@ public class Event extends Task {
      */
     public void setAt(String at) throws InvalidDateDukeException {
         DateValidator v = new DateValidator();
-        boolean isValid = v.validateDate(at, true);
-        if (!isValid) {
-            throw new InvalidDateDukeException("Invalid date format! Please ensure your date sticks to this format:\n"
-                    + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
-                    + "    Events : \"DD/MM/YYYY HHMM-HHMM\"");
-        }
+        LocalDateTime[] dates = v.getAndValidateDates(at, true);
+        this.startTime = dates[0];
+        this.endTime = dates[1];
+        EventConflictChecker.addInterval(this);
         this.at = at;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
     /**

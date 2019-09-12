@@ -8,6 +8,10 @@ public abstract class Task {
 
     protected String description;
     protected boolean isDone;
+    protected static final String INVALID_DATE_MSG = "Invalid date format! "
+            + "Please ensure your date sticks to this format:\n"
+            + "    Deadlines : \"DD/MM/YYYY HHMM\"\n"
+            + "    Events : \"DD/MM/YYYY HHMM-HHMM\"";
 
     /**
      * Constructor for an abstract task.

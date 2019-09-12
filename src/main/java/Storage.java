@@ -1,15 +1,24 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+        import java.io.FileNotFoundException;
+        import java.io.FileWriter;
+        import java.io.IOException;
+        import java.text.ParseException;
+        import java.text.SimpleDateFormat;
+        import java.util.ArrayList;
+        import java.util.List;
+        import java.util.Scanner;
+
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 
 public class Storage {
-    private static File file = new File("../duke.txt");
+
+    private static File file;
+
+    Storage(String filePath) {
+        file = new File(filePath);
+    }
 
     /**
      * Loads a file to add tasks into taskList
@@ -17,7 +26,7 @@ public class Storage {
      * @return taskList
      */
 
-    public static ArrayList<Task> load() throws FileNotFoundException {
+    static ArrayList<Task> load() throws FileNotFoundException {
 
         ArrayList<Task> taskList = new ArrayList<>();
         try {

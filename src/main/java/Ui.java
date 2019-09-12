@@ -1,30 +1,71 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
+    private String output;
 
-    private Scanner sc = new Scanner(System.in);
-    protected static ArrayList<Task> taskList = new ArrayList<>();
-
-    String line = "    ____________________________________________________________\n";
-
-    public void greet() { //duke greet
-        System.out.println(line +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" + line);
+    String getOutput() {
+        return this.output;
     }
 
-    public void farewell() {
-        System.out.println(line + "     Bye. Hope to see you again soon!\n" + line);
+    String greet() { //duke greet
+        return "Hello! I'm Duke.\n" + "What can I do for you?\n";
     }
 
-    public void printFindTasks(ArrayList<Task> relatedTask) {
-        System.out.println(line + "     Here are the matching tasks in your list:");
-        for (int i = 0; i < relatedTask.size(); i++) {
-            int num = i + 1;
-            System.out.println("     " + num + "." + relatedTask.get(i));
+    void setToFarewell() {
+        output = "Bye. Hope to see you again soon!";
+    }
+
+    void setToList(TaskList taskList) {
+
+        output = "Here are the tasks in your list:\n";
+        for (int i = 0; i < taskList.getTaskList().size(); i++) {
+            String num = "" + (i + 1);
+            output += "     " + num + ".[" + taskList.getTaskList().get(i).getStatusIcon() + "] "
+                    + taskList.getTaskList().get(i).toString() + "\n";
         }
-        System.out.print("\n" + line);
+    }
+
+    void setToTodo(Task todoTask, TaskList taskList) {
+        output = "Got it. I've added this task:\n"
+                + todoTask.toString() + "\n" +
+                "Now you have " + taskList.getTaskList().size() + " tasks in the list.";
+    }
+
+    void setToDeadline(Task dlTask, TaskList taskList) {
+        output = "Got it. I've added this task:\n"
+                + dlTask.toString() + "\n" +
+                "Now you have " + taskList.getTaskList().size() + " tasks in the list.";
+    }
+
+    void setToEvent(Task eventTask, TaskList taskList) {
+        output = "Got it. I've added this task:\n"
+                + eventTask.toString() + "\n" + "Now you have "
+                + taskList.getTaskList().size() + " tasks in the list.";
+    }
+
+    void setToDone(int taskNum, TaskList taskList) {
+        output = "Nice! I've marked this task as done:\n"
+                + "[" + taskList.getTaskList().get(taskNum - 1).getStatusIcon() + "]"
+                + taskList.getTaskList().get(taskNum - 1).toString();
+    }
+
+    void setToDelete(int taskNum2, TaskList taskList) {
+        output = "Noted. I've removed this task:\n"
+                + taskList.getTaskList().get(taskNum2 - 1).toString() + "\n"
+                + "Now you have " + (taskList.getTaskList().size() - 1) + "tasks in the list.";
+    }
+
+    void setToFind(ArrayList<Task> relatedTasks, TaskList taskList, String findWord) {
+        for (Task task : taskList.getTaskList()) {
+            if (task.getDescription().contains(findWord)) {
+                relatedTasks.add(task);
+            }
+        }
+        output = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < relatedTasks.size(); i++) {
+            int num = i + 1;
+            output += num + "." + relatedTasks.get(i);
+        }
     }
 
 }

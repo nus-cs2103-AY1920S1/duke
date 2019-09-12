@@ -20,7 +20,7 @@ public class Ui {
     }
 
     public void sayHi() {
-        mw.displayMsg("こんにちは! Say Something to me!\n");
+        mw.displayMsg("Hi! Say Something to me!\n");
         System.out.printf(INDENT + "Hi :-D Say Something to me!\n");
     }
 
@@ -42,7 +42,7 @@ public class Ui {
      */
     public void showAdd(String task, int num) {
         mw.displayMsg("Got it. I've added this task: \n" + " " + task + "\n"
-        + showCount(num));
+                + showCount(num));
         System.out.printf(INDENT + "Got it. I've added this task: \n" + INDENT + " " + task + "\n");
     }
 

@@ -1,6 +1,17 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandDelete;
+import duke.command.CommandExit;
+import duke.command.CommandList;
+import duke.command.CommandDone;
+import duke.command.CommandClear;
+import duke.command.CommandHi;
+import duke.command.CommandTodo;
+import duke.command.CommandDeadline;
+import duke.command.CommandEvent;
+import duke.command.CommandFind;
+import duke.command.IllegalCommand;
 
 /**
  * Deals with making sense of the user command.

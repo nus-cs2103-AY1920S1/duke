@@ -15,6 +15,12 @@ public class Duke {
     private Ui ui;
     private MainWindow mw;
 
+    /**
+     * Constructs a {@Class Duke} object.
+     *
+     * @param pathToFile Path to file storing the task list.
+     * @param mw MainWindow.
+     */
     public Duke(String pathToFile, MainWindow mw) {
         this.mw = mw;
         this.ui = new Ui(mw);
@@ -26,6 +32,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke programme.
+     *
+     * @param input User input String.
+     */
     public void start(String input) {
 
         try {

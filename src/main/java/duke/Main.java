@@ -1,6 +1,4 @@
-import duke.Duke;
-import duke.MyPaths;
-import duke.MainWindow;
+package duke;
 
 import java.io.IOException;
 

@@ -10,6 +10,9 @@ public class Task {
     private String description;
     private boolean isDone;
 
+    private static final String TICK = "v";
+    private static final String CROSS = "×";
+
     /**
      * Constructs a unspecified and unfinished Task object.
      *
@@ -56,7 +59,7 @@ public class Task {
      * @return String symbol of the status of task.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? TICK : CROSS); //return tick or X symbols
     }
 
     /**
@@ -67,7 +70,7 @@ public class Task {
      */
     public static Task toTask(String s) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy_@_hh:mma");
-        Boolean isDone = (String.valueOf(s.charAt(4)).equals("\u2713"));
+        boolean isDone = (String.valueOf(s.charAt(4)).equals(TICK));
         switch (s.charAt(1)) {
         case 'T':
             return isDone ? new Todo(s.substring(7)).finish() : new Todo(s.substring(7));

@@ -3,5 +3,5 @@ matrix:
   include:
     - jdk: openjdk11
 
-script: >-
-      ./gradlew clean checkstyleMain
+#script: >-
+#      ./gradlew clean checkstyleMain

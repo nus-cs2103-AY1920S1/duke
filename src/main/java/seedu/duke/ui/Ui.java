@@ -1,7 +1,5 @@
 package seedu.duke.ui;
 
-import seedu.duke.DukeException;
-
 import seedu.duke.statistic.Statistic;
 import seedu.duke.task.Event;
 import seedu.duke.task.Deadline;

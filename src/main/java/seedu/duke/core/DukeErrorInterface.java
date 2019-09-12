@@ -1,6 +1,4 @@
-package seedu.duke.ui;
-
-import seedu.duke.DukeException;
+package seedu.duke.core;
 
 /**
  * Functional interface to help implement lambdas.

@@ -1,7 +1,6 @@
-package seedu.duke;
+package seedu.duke.core;
 
 import javafx.application.Application;
-import seedu.duke.Main;
 
 /**
  * A launcher class to workaround classpath issues.

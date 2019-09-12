@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.core;
 
 /**
  * DukeException class is a custom Exception class.

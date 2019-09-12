@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.core;
 
 import seedu.duke.parser.Parser;
 import seedu.duke.statistic.Statistic;
@@ -50,7 +50,7 @@ public class Duke {
     private String statFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
 
     /**
-     * Default constructor to support seedu.duke.Launcher of javaFX.
+     * Default constructor to support seedu.duke.core.Launcher of javaFX.
      */
     public Duke() {
         taskStorage = new Storage(taskFilePath);

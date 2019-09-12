@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.core;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import seedu.duke.ui.MainWindow;
 
 
 /**

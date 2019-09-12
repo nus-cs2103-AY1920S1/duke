@@ -12,7 +12,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import seedu.duke.MainWindow;
 
 import java.io.IOException;
 import java.util.Collections;

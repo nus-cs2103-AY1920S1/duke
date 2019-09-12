@@ -1,3 +1,4 @@
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -24,12 +25,7 @@ public class Duke extends Application {
 
     }
 
-    /**
-     * Instantiates Duke that contains its own UI, storage and TaskList.
-     *
-     * @param filePath The path at which the storage file is stored.
-     */
-    public Duke(String filePath) {
+    public void init(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -38,7 +34,6 @@ public class Duke extends Application {
             ui.showLoadingError();
         }
     }
-
     /**
      * Runs the Duke UI and executes commands based on user input.
      */
@@ -74,7 +69,9 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke("duke.txt").run();
+        Duke duke = new Duke();
+        duke.init("duke.txt");
+        duke.run();
 
     }
 }

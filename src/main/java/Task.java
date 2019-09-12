@@ -1,4 +1,4 @@
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -52,7 +52,7 @@ class ToDo extends Task {
 class Deadline extends Task {
     private String memo;
     private String preposition;
-    private LocalDate date;
+    private LocalDateTime date;
 
     Deadline(String description, String preposition, String memo) {
         super(description);
@@ -61,7 +61,7 @@ class Deadline extends Task {
         try {
             // deadline 12 /by 12/12/2012 2359
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            date = LocalDate.parse(memo, formatter);
+            date = LocalDateTime.parse(memo, formatter);
         } catch (DateTimeParseException e) {
             // System.out.println("parse failed");
             // do nothing
@@ -69,7 +69,8 @@ class Deadline extends Task {
     }
 
     public String getMemo() {
-        return date != null ? date.toString() : memo;
+        return date != null ? date.format(DateTimeFormatter.ofPattern("dd MMM YYYY, HH:mm")) : memo;
+//        return date != null ? date.toString() : memo;
     }
 
     @Override
@@ -86,7 +87,7 @@ class Deadline extends Task {
 class Event extends Task {
     private String memo;
     private String preposition;
-    private LocalDate date;
+    private LocalDateTime date;
 
     Event(String description, String preposition, String memo) {
         super(description);
@@ -95,7 +96,7 @@ class Event extends Task {
         try {
             // deadline 12 /by 12/12/2012 2359
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-            date = LocalDate.parse(memo, formatter);
+            date = LocalDateTime.parse(memo, formatter);
         } catch (DateTimeParseException e) {
             // System.out.println("parse failed");
             // do nothing
@@ -103,7 +104,7 @@ class Event extends Task {
     }
 
     public String getMemo() {
-        return date != null ? date.toString() : memo;
+        return date != null ? date.format(DateTimeFormatter.ofPattern("dd MMM YYYY, HH:mm")) : memo;
     }
 
     @Override

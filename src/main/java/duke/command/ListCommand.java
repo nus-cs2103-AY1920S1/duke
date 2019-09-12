@@ -2,12 +2,12 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class ListCommand extends Command {
 
     /**
-     * duke.Ui lists all tasks in duke.TaskList.
+     * Display all tasks in TaskList via Ui.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.show(tasks.toUiString());

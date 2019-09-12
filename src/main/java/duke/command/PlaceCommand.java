@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import place.Place;
 
@@ -29,7 +29,7 @@ public class PlaceCommand extends Command {
      * Then updates storage.
      *
      * @param tasks   duke.TaskList
-     * @param ui      duke.Ui
+     * @param ui      duke.ui.Ui
      * @param storage duke.Storage
      * @throws DukeException when problems with duke.Storage writing
      */

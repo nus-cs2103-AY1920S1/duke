@@ -6,9 +6,9 @@ import place.Place;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Storage {
@@ -27,6 +27,7 @@ public class Storage {
     /**
      * Try to load raw data from filePath and deserialize everything.
      *
+     * @return TaskList from casting
      * @throws LoadFileFailDukeException if file or raw data can't be loaded
      */
     @SuppressWarnings("unchecked")
@@ -36,7 +37,7 @@ public class Storage {
             Place.setRefLatLong((HashMap) ois.readObject());
             Place.setRefAlias((HashMap) ois.readObject());
             return (TaskList) ois.readObject();
-        } catch (Exception e) {
+        } catch (IOException | ClassNotFoundException e) {
             throw new LoadFileFailDukeException(filePath);
         }
     }
@@ -47,13 +48,13 @@ public class Storage {
      * @param tasks TaskList to be written over into file at filePath
      * @throws WriteFileFailDukeException if directory does not exists or unable to write to file
      */
-    public void rewrite(TaskList tasks) throws WriteFileFailDukeException {
+    public void rewrite(TaskList tasks) throws WriteFileFailDukeException  {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath));
             oos.writeObject(Place.getRefLatLong());
             oos.writeObject(Place.getRefAlias());
             oos.writeObject(tasks);
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new WriteFileFailDukeException();
         }
     }

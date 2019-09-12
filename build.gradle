@@ -10,8 +10,7 @@ group 'duke'
 version '0.1'
 
 application {
-    // Change this to your main class.
-    mainClassName = "Main"
+    mainClassName = "Launcher"
 }
 
 compileJava {
@@ -44,6 +43,7 @@ shadowJar {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
 
 dependencies {

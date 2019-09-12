@@ -27,9 +27,9 @@ public class TaskList implements Serializable {
     }
 
     /**
-     * Returns String with all items to be displayed on duke.Ui.
+     * Returns String with all items to be displayed on duke.ui.Ui.
      *
-     * @return String with all items to be displayed on duke.Ui
+     * @return String with all items to be displayed on duke.ui.Ui
      */
     public String toUiString() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");

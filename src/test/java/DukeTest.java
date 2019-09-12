@@ -1,5 +1,5 @@
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.command.Command;
 import duke.exception.DateTimeParseDukeException;
 import duke.exception.DukeException;

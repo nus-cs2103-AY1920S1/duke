@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.exception.IndexFormatDukeException;
 import duke.task.Task;
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
      * Then duke.Storage rewrite using duke.TaskList.
      *
      * @param tasks   duke.TaskList
-     * @param ui      duke.Ui
+     * @param ui      duke.ui.Ui
      * @param storage duke.Storage
      * @throws DukeException On index out of bound or problems with duke.Storage writing
      */

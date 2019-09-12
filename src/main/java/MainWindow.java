@@ -1,7 +1,7 @@
 import duke.DialogBox;
 import duke.Duke;
+import duke.ui.MainUi;
 
-import duke.MainUi;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -56,14 +56,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String uiInput = userInput.getText().trim();
-        int index = uiInput.indexOf(' ');
-        if (index < 0) {
-            index = uiInput.length();
-        }
-        if (uiInput.substring(0, index).equals("bye")) {
+        if (uiInput.matches("\\s*?bye(\\s.)*?")) {
             System.exit(0);
         }
-
         Label userText = new Label(uiInput);
         Label dukeText = new Label(duke.getResponse(uiInput));
 

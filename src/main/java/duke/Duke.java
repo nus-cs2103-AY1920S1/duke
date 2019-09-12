@@ -2,6 +2,8 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.ui.MainUi;
+import duke.ui.Ui;
 
 public class Duke {
 
@@ -27,7 +29,7 @@ public class Duke {
 
 
     public Duke usingMainUi() {
-        this.ui = new MainUi();
+        ui = new MainUi();
         return this;
     }
 

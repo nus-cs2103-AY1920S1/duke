@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.exception.AliasParseDukeException;
 import place.Place;
 
@@ -19,7 +19,7 @@ public class AliasCommand extends Command {
      * If still not found, then Place does not exist.
      *
      * @param tasks   duke.TaskList
-     * @param ui      duke.Ui
+     * @param ui      duke.ui.Ui
      * @param storage duke.Storage
      * @throws AliasParseDukeException When 2 args cannot be parsed as latitude and longitude
      */

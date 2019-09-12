@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 public class MainUi extends Ui {
     private String tmpBuf;

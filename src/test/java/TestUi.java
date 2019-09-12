@@ -1,4 +1,4 @@
-import duke.Ui;
+import duke.ui.Ui;
 
 public class TestUi extends Ui {
     private String output;

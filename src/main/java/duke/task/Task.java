@@ -15,7 +15,7 @@ public abstract class Task implements Serializable {
     private boolean isDone;
 
     /**
-     * DateTimeFormatter meant for duke.Ui output.
+     * DateTimeFormatter meant for duke.ui.Ui output.
      */
     protected static DateTimeFormatter outDTF = DateTimeFormatter.ofPattern("MMMM d y, K:mm a");
 

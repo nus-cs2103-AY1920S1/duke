@@ -26,18 +26,17 @@ public class DialogBox extends HBox {
     public DialogBox(Label l, ImageView iv) {
         assert l != null;
         assert iv != null;
+        text = l;
+        displayPicture = iv;
 
         this.setStyle("-fx-background-color: #222");
         this.setMinHeight(Region.USE_PREF_SIZE);
-        l.setWrapText(true);
-        l.setFont(Font.font("DejaVu Sans"));
 
-        text = l;
+        text.setFocusTraversable(true);
+        text.setFont(Font.font("DejaVu Sans"));
         text.setStyle("-fx-background-color: #666; -fx-border-color: #222; -fx-border-width: 10; -fx-padding: 5");
-
-        displayPicture = iv;
-
         text.setWrapText(true);
+
         displayPicture.setFitWidth(100);
         displayPicture.setFitHeight(100);
 
@@ -51,9 +50,8 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clip);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren()
-            .addAll(text, displayPicture);
-        text.setFocusTraversable(true);
+        this.getChildren().addAll(text, displayPicture);
+
     }
 
     private void flip() {

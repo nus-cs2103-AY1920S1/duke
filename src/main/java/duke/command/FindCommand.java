@@ -2,8 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.exception.DukeException;
+import duke.ui.Ui;
 
 public class FindCommand extends Command {
     private String str;
@@ -12,7 +11,10 @@ public class FindCommand extends Command {
         this.str = str.trim();
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    /**
+     * Finds all Task containing str and display them via Ui.
+     */
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.show(tasks.findAllIncludesAsUiString(str));
     }
 }

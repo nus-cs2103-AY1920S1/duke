@@ -29,26 +29,24 @@ public class Parser {
     public static Command parse(String str) throws DukeException {
         assert str != null;
 
-        str = str.trim();
-        int lastIndex = str.indexOf(' ');
-        if (lastIndex < 0) {
-            lastIndex = str.length();
-        }
+        String[] strArr = str.trim().split("\\s+", 2);
+        String command = strArr[0];
+        String arg = strArr.length >= 2 ? strArr[1] : "";
         String[] temp;
-        switch (str.substring(0, lastIndex)) {
+
+        switch (command) {
         case "bye":
             return new ExitCommand();
         case "delete":
-            return new DeleteCommand(str.substring(lastIndex));
+            return new DeleteCommand(arg);
         case "done":
-            return new DoneCommand(str.substring(lastIndex));
+            return new DoneCommand(arg);
         case "find":
-            return new FindCommand(str.substring(lastIndex));
+            return new FindCommand(arg);
         case "list":
             return new ListCommand();
         case "deadline":
-            temp = str.substring(8)
-                .split(" /by ");
+            temp = arg.split(" /by ");
             if (temp.length < 1 || temp[0].isBlank()) {
                 throw new EmptyFieldDukeException("description", "deadline");
             }
@@ -57,8 +55,7 @@ public class Parser {
             }
             return new AddCommand(new Deadline(temp[0], temp[1]));
         case "event":
-            temp = str.substring(5)
-                .split(" /at ");
+            temp = arg.split(" /at ");
             if (temp.length < 1 || temp[0].isBlank()) {
                 throw new EmptyFieldDukeException("description", "event");
             }
@@ -67,9 +64,9 @@ public class Parser {
             }
             return new AddCommand(new Event(temp[0], temp[1]));
         case "todo":
-            return new AddCommand(new Todo(str.substring(lastIndex)));
+            return new AddCommand(new Todo(arg));
         case "place":
-            temp = str.substring(lastIndex).trim().split("\\s+");
+            temp = arg.split("\\s+");
             try {
                 double latitude = Double.parseDouble(temp[1]);
                 double longitude = Double.parseDouble(temp[2]);
@@ -80,7 +77,7 @@ public class Parser {
                 throw new PlaceParseDukeException();
             }
         case "alias":
-            return new AliasCommand(str.substring(lastIndex));
+            return new AliasCommand(arg);
         default:
             throw new InvalidCommandDukeException();
         }

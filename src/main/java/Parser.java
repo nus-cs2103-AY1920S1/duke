@@ -23,13 +23,26 @@ public class Parser {
         String[] splitCommand = trimmedCommand.split(" ");
         switch (splitCommand[0]) {
         case "bye":
+            if (splitCommand.length != 1) {
+                throw new InvalidCommandDukeException("OOF!!! I'm sorry, no characters after 'bye' allowed!!");
+            }
             return new ExitCommand();
         case "list":
+            if (splitCommand.length != 1) {
+                throw new InvalidCommandDukeException("OOF!!! I'm sorry, no characters after 'list' allowed!!");
+            }
             return new ListCommand();
         case "help":
+            if (splitCommand.length != 1) {
+                throw new InvalidCommandDukeException("OOF!!! I'm sorry, no characters after 'help' allowed!!");
+            }
             return new HelpCommand();
         case "done":
             try {
+                if (splitCommand.length > 2) {
+                    throw new InvalidCommandDukeException("OOF!!! Please enter only one task number!!");
+                }
+
                 int taskNumber = Integer.parseInt(splitCommand[1]) - 1;
                 assert taskNumber >= 0: "Task number entered can only be non-negative"; // Precondition for DoneCommand
                 return new DoneCommand(taskNumber);
@@ -38,6 +51,10 @@ public class Parser {
             }
         case "delete":
             try {
+                if (splitCommand.length > 2) {
+                    throw new InvalidCommandDukeException("OOF!!! Please enter only one task number!!");
+                }
+
                 int taskNumber = Integer.parseInt(splitCommand[1]) - 1;
                 assert taskNumber >= 0: "Task number entered can only be non-negative"; // Precondition for DeleteCommand
                 return new DeleteCommand(taskNumber);

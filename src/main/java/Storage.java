@@ -3,6 +3,7 @@
  */
 public class Storage {
     protected String filePath;
+    protected String fileAccessStatus;
 
     /**
      * Creates a Storage object with the file's file path as the argument.
@@ -13,7 +14,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
-
+    public String getFileAccessStatus() {
+        return fileAccessStatus;
+    }
 
     /**
      * Converts a String in the valid format into a task object.

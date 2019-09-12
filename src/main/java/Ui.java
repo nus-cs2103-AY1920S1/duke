@@ -267,14 +267,14 @@ public class Ui {
                 + "'find [keyword]'\n" + longLine;
         helpList += "To exit and close Duke:\n" + "'bye'\n" + longLine;
         helpList += "Archives Instructions:\n\n"
-                + "Create a new empty archive: 'archive create [archive name]'\n\n"
-                + "Add task from task list to an existing archive: 'archive add [task list index] [archive name]'\n\n"
-                + "Display list of existing archive names: 'archive list'\n\n"
-                + "Display list of tasks in an existing archive: 'archive view [archive name]'\n\n"
-                + "Display lists of tasks of all existing archives: 'archive viewall'\n\n"
-                + "Delete a task in an archive: 'archive delete [task archive list index] [archive name]'\n\n"
-                + "Delete an entire archive: 'archive deleteall [archive name]'\n\n"
-                + "To unarchive a task in an existing archive and revert it back to the current list of tasks: "
+                + "Create a new empty archive:\n'archive create [archive name]'\n\n"
+                + "Add task from task list to an existing archive:\n'archive add [task list index] [archive name]'\n\n"
+                + "Display list of existing archive names:\n'archive list'\n\n"
+                + "Display list of tasks in an existing archive:\n'archive view [archive name]'\n\n"
+                + "Display lists of tasks of all existing archives:\n'archive viewall'\n\n"
+                + "Delete a task in an archive:\n'archive delete [task archive list index] [archive name]'\n\n"
+                + "Delete an entire archive:\n'archive deleteall [archive name]'\n\n"
+                + "To unarchive a task in an existing archive and revert it back to the current list of tasks:\n"
                 + "'revert [task archive list index] [archive name]'\n"
                 + longLine;
         helpList += "I hope this helps :)\nEnter 'help' again to display this again!!";

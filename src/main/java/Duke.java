@@ -48,12 +48,9 @@ public class Duke extends Application {
         taskStorage = new TaskStorage("data/tasks.txt");
         archiveStorage = new ArchiveStorage("data/archives.txt");
         tasks = new TaskList();
-        try {
-            taskStorage.getTasksFromFile(tasks);
-            archives = archiveStorage.getArchivedTasksFromFile();
-        } catch (Exception e) {
-            ui.showExceptionError(e);
-        }
+        archives = new HashMap<>();
+        taskStorage.getTasksFromFile(tasks);
+        archiveStorage.getArchivedTasksFromFile(archives);
     }
 
     /**
@@ -67,7 +64,7 @@ public class Duke extends Application {
             Command c = Parser.parse(input);
             assert c != null: "Command should not be null"; //Precondition for execute method
             return c.execute(tasks, ui, taskStorage, archiveStorage, archives);
-        } catch (Exception e) {
+        } catch (DukeException e) {
             return ui.showExceptionError(e);
         }
     }
@@ -199,7 +196,8 @@ public class Duke extends Application {
                 "D    D   U     U    K  K     E    \n" +
                 "DDD    UUUU  K      K   EEEEEE \n";
 
-        Label greetingText = new Label("Hello I'm\n" + logo2 + "\n" + ui.showWelcomeMessage());
+        Label greetingText = new Label("Hello I'm\n" + logo2 + "\n" + ui.showWelcomeMessage() + "\n\n" +
+                taskStorage.getFileAccessStatus() + "\n" + archiveStorage.getFileAccessStatus());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingText, new ImageView(duke)));
     }
 

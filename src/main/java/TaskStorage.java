@@ -20,18 +20,24 @@ public class TaskStorage extends Storage {
     /**
      * Accesses the file and extracts tasks from it, saving the tasks into a TaskList object.
      *
-     * @param taskList Tasks extracted from file will be added to this TaskList object
-     * @throws FileNotFoundException Thrown when the file specified by the filepath does not exist.
-     * @throws InvalidTaskArgumentDukeException Thrown when the file contains invalid information
-     *     to create task objects.
+     * @param taskList Tasks extracted from file will be added to this TaskList object.
      */
-    public void getTasksFromFile(TaskList taskList) throws FileNotFoundException, InvalidTaskArgumentDukeException {
-        File taskFile = new File(filePath);
-        Scanner scanner = new Scanner(taskFile);
-        while (scanner.hasNext()) {
-            String textLine = scanner.nextLine();
-            taskList.addTask(stringToTask(textLine));
+    public void getTasksFromFile(TaskList taskList) {
+
+        try {
+            File taskFile = new File(filePath);
+            Scanner scanner = new Scanner(taskFile);
+            while (scanner.hasNext()) {
+                String textLine = scanner.nextLine();
+                taskList.addTask(stringToTask(textLine));
+            }
+            this.fileAccessStatus = "Previously saved list of tasks successfully loaded :)";
+        } catch (FileNotFoundException e) {
+            this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: File not found :(";
+        } catch (InvalidTaskArgumentDukeException e) {
+            this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: Invalid format in file :(";
         }
+
     }
 
     /**

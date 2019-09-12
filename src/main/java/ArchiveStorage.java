@@ -26,33 +26,33 @@ public class ArchiveStorage extends Storage{
      * saving the tasks of each archive into its own TaskList object and storing all Taskist archives into a HashMap.
      * Each archive is hashed with its archive name as the key.
      *
-     * @return HashMap of all TaskList archives, with their archive name as keys.
-     * @throws FileNotFoundException Thrown when the file specified by the filepath does not exist.
-     * @throws InvalidTaskArgumentDukeException Thrown when the file contains invalid information
-     *     to create task objects.
+     * @param archives Archives of tasks extracted from the file will be added to this HashMap.
      */
-    public HashMap<String, TaskList> getArchivedTasksFromFile() throws FileNotFoundException, InvalidTaskArgumentDukeException {
-        File taskFile = new File(filePath);
-        Scanner scanner = new Scanner(taskFile);
-        HashMap<String, TaskList> archives = new HashMap<>();
-        String currentArchiveName = "";
-        TaskList currentArchiveTasks = new TaskList();
+    public void getArchivedTasksFromFile(HashMap<String, TaskList> archives) {
+        try {
+            File taskFile = new File(filePath);
+            Scanner scanner = new Scanner(taskFile);
+            String currentArchiveName = "";
+            TaskList currentArchiveTasks = new TaskList();
 
-        while (scanner.hasNext()) {
-            String textLine = scanner.nextLine();
+            while (scanner.hasNext()) {
+                String textLine = scanner.nextLine();
 
-            if (isEndOfArchiveMarker(textLine)) {
-                archives.put(currentArchiveName, currentArchiveTasks);
-            } else if (isArchiveName(textLine)) {
-                currentArchiveName = textLine;
-                currentArchiveTasks = new TaskList();
-            } else {
-                currentArchiveTasks.addTask(stringToTask(textLine));
+                if (isEndOfArchiveMarker(textLine)) {
+                    archives.put(currentArchiveName, currentArchiveTasks);
+                } else if (isArchiveName(textLine)) {
+                    currentArchiveName = textLine;
+                    currentArchiveTasks = new TaskList();
+                } else {
+                    currentArchiveTasks.addTask(stringToTask(textLine));
+                }
             }
-
+            this.fileAccessStatus = "Previously saved archives successfully loaded :)";
+        } catch (FileNotFoundException e) {
+            this.fileAccessStatus = "Any previously saved archives were not be loaded: File not found :(";
+        } catch (InvalidTaskArgumentDukeException e) {
+            this.fileAccessStatus = "Any previously saved archives were not be loaded: Invalid format in file :(";
         }
-
-        return archives;
     }
 
     /**

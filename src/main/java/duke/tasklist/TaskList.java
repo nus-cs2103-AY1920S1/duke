@@ -159,8 +159,10 @@ public class TaskList {
             return "OOPS!!! Duke encountered an unexpected error.";
         }
 
+        int counter = 1;
         for (Task task : scheduledTasks) {
-            sb.append(task.toString() + "\n");
+            sb.append(counter + "." + task.toString() + "\n");
+            counter++;
         }
         return sb.toString();
     }

@@ -18,4 +18,11 @@ public class ListCommand extends Command {
 
         return builder.toString();
     }
+
+    public static String getHelp() {
+        StringBuilder builder = new StringBuilder("Command: list\n");
+        builder.append("- Description: Shows all tasks.\n");
+
+        return builder.toString();
+    }
 }

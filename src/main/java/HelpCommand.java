@@ -12,13 +12,15 @@ public class HelpCommand extends Command {
         StringBuilder builder = new StringBuilder("Here are the list of available commands:");
 
         builder.append("\n" + HelpCommand.getHelp());
+        builder.append("\n" + ListCommand.getHelp());
 
         return builder.toString();
     }
 
     public static String getHelp() {
-        StringBuilder builder = new StringBuilder("Command: HELP\n");
+        StringBuilder builder = new StringBuilder("Command: help\n");
         builder.append("- Description: Shows all duke commands.\n");
+
         return builder.toString();
     }
 }

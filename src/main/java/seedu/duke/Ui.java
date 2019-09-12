@@ -18,9 +18,10 @@ public class Ui {
      * @return String of the welcome message.
      */
     public String showIntro() {
-        String greeting = "Hello! I'm Duke\n"
-                + "What can I do for you?\n"
-                +  "Enter 'help' if you need help on how to use me.\n";
+        String greeting = "Hello! I'm Duke\n" +
+                "What can I do for you?\n" +
+                "Enter 'help' if you need a summary of all the commands.\n" +
+                "Enter 'tutorial' if you need a tutorial on the commands.\n";
         return greeting;
     }
 

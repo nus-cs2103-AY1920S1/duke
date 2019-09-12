@@ -1,12 +1,17 @@
 package seedu.duke;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -20,10 +25,17 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private VBox layout;
 
     private Duke duke;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Stage stage;
+    private Scene scene;
+    private Duke tutorialDuke;
+    private TextField input;
+
 
     /**
      * Class constructor.
@@ -56,10 +68,37 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        if (response.equals("tutorial")) {
+            userInput.clear();
+            showTutorialScene();
+        } else {
+            var db = DialogBox.getDukeDialog(response, dukeImage);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage), db);
+            userInput.clear();
+        }
+   }
 
-        var db = DialogBox.getDukeDialog(response, dukeImage);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage), db);
-        userInput.clear();
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setMainScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    private void showTutorialScene() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/TutorialScene.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<TutorialScene>getController().setStage(stage);
+            fxmlLoader.<TutorialScene>getController().setScene(this.scene);
+            stage.setTitle("DUKE PROJECT");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

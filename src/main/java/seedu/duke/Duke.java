@@ -67,4 +67,12 @@ public class Duke {
             expenses = new ExpenseList();
         }
     }
+
+    public void loadEmptyLists() {
+        ui = new Ui();
+        storage = new Storage("data/dukeTutorial.txt");
+        expenseStorage = new Storage("data/expensesTutorial.txt");
+        tasks = new TaskList();
+        expenses = new ExpenseList();
+    }
 }

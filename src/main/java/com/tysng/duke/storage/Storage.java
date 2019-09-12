@@ -113,6 +113,7 @@ public class Storage {
     }
 
     private Optional<Task> parse(String line) {
+        assert !line.isEmpty();
         try {
             List<String> data = Stream.of(line.split("\\|")).map(String::trim).collect(Collectors.toList());
             Task task;

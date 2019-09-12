@@ -34,8 +34,4 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
-    public static void exit() {
-        Platform.exit();
-    }
 }

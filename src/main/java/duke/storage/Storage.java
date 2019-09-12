@@ -120,14 +120,12 @@ public class Storage {
 
     /**
      * Loads all the data from the output file.
-     * If there is no data provided, an error is thrown.
      * @return A list of Tasks loaded from the file.
      */
     public ArrayList<Task> load() {
         try {
             reader = new BufferedReader(new FileReader(filepath));
             String task;
-            boolean hasStartedLoading = false;
             while ((task = reader.readLine()) != null) {
                 if (task.startsWith("D")) {
                     addBackDeadlineTask(task);
@@ -136,15 +134,10 @@ public class Storage {
                 } else {
                     addBackToDoTask(task);
                 }
-
-                hasStartedLoading = true;
-            }
-            if (!hasStartedLoading) {
-
             }
             reader.close();
         } catch (Exception e) {
-
+            System.out.println("Please check if you have your data folder!");
         }
         return tasks;
     }
@@ -189,7 +182,7 @@ public class Storage {
             }
             writer.close();
         } catch (Exception e) {
-
+            System.out.println("Please check if you have your data folder!");
         }
     }
 

@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.util.ArrayList;
 
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.tag.Tag;
 import duke.task.Task;
@@ -153,6 +154,17 @@ public class Ui {
             String todo = task.toString();
             append((tasknum + 1) + ". " + todo);
             append("Tag: "  + tag);
+        }
+    }
+
+    /**
+     * Lists all the commands available to the user.
+     */
+    public void listCommands() {
+        ArrayList<Command> commands = Command.getAllCommands();
+        append("Here are the list of commands available: ");
+        for (int i = 0; i < commands.size(); i++) {
+            append(commands.get(i).toString());
         }
     }
 }

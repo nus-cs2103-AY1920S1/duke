@@ -34,4 +34,12 @@ public class ListTaskCommand extends Command {
         ui.listTasks();
     }
 
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "List all tasks: \nlist\n";
+        return helper;
+    }
 }

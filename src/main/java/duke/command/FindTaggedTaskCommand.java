@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.parser.DataParser;
 import duke.parser.DateParser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Represents a Command find matching tasks based on a specific tag.
@@ -38,4 +38,12 @@ public class FindTaggedTaskCommand extends Command {
         ui.showMatchingTasks(taskIndexes);
     }
 
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Find Tasks with a tag: \nfindTag <tag>\n";
+        return helper;
+    }
 }

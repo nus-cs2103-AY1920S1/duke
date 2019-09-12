@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.parser.DataParser;
 import duke.parser.DateParser;
@@ -20,6 +22,28 @@ public abstract class Command {
      */
     public Command(boolean isExit) {
         this.isExit =  isExit;
+    }
+
+    /**
+     * Gets all the commands available.
+     * @return a list of all commands available.
+     */
+    public static ArrayList<Command> getAllCommands() {
+        ArrayList<Command> commands = new ArrayList<>();
+        commands.add(new AddDeadlineTaskCommand());
+        commands.add(new AddEventTaskCommand());
+        commands.add(new AddTagCommand());
+        commands.add(new AddToDoTaskCommand());
+        commands.add(new CompleteTaskCommand());
+        commands.add(new DeleteTaskCommand());
+        commands.add(new EditTaskDateCommand());
+        commands.add(new EditTaskNameCommand());
+        commands.add(new EndCommand());
+        commands.add(new FindTaggedTaskCommand());
+        commands.add(new FindTaskCommand());
+        commands.add(new ListCommandsCommand());
+        commands.add(new ListTaskCommand());
+        return commands;
     }
 
     /**

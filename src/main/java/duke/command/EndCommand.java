@@ -33,4 +33,13 @@ public class EndCommand extends Command {
                         DataParser dataParser, DateParser dateParser) throws DukeException {
         ui.sendFarewell();
     }
+
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Ends the program: \nbye\n";
+        return helper;
+    }
 }

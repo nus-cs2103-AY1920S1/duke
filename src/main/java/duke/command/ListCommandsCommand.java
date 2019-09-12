@@ -1,29 +1,27 @@
 package duke.command;
 
+import duke.task.TaskList;
 import duke.exception.DukeException;
 import duke.parser.DataParser;
 import duke.parser.DateParser;
-import duke.parser.TagParser;
-import duke.storage.Storage;
-import duke.task.Task;
-import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.storage.Storage;
 
 /**
- * Represents a Command to add a tag to a specific task.
+ * Represents a Command to list all commands available.
  */
-public class AddTagCommand extends Command {
+public class ListCommandsCommand extends Command {
 
     /**
      * Constructs a new Command where it does not terminate the Duke Application.
      */
-    public AddTagCommand() {
+    public ListCommandsCommand() {
         super(false);
     }
 
     /**
      * Executes the specific command based on the type of the command.
-     * In this case, it adds a tag to a Task.
+     * In this case, it asks the ui to list all the comamnds available.
      * @param taskList The List of tasks involved.
      * @param ui The Interface which deals with user input and interaction.
      * @param storage The storage to load and save task data into the output file.
@@ -33,12 +31,7 @@ public class AddTagCommand extends Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage,
                         DataParser dataParser, DateParser dateParser) throws DukeException {
-        String[] tagData = dataParser.parseTagData();
-        TagParser tagParser = new TagParser();
-        tagParser.createTag(tagData);
-        Task task = taskList.addTag(tagParser.getIndex(), tagParser.getTag());
-        ui.showTaggedTask(task);
-        storage.save();
+        ui.listCommands();
     }
 
     /**
@@ -46,8 +39,7 @@ public class AddTagCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Adds a tag to a task: \ntag <tasknumber> <tag>\n";
+        String helper = "List all commands: \nhelp\n";
         return helper;
     }
-
 }

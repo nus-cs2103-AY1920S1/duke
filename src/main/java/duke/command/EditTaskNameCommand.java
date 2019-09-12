@@ -36,4 +36,13 @@ public class EditTaskNameCommand extends Command {
         ui.showEditedTask(task);
         storage.save();
     }
+
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Edits a Task Name: \nedit name <tasknumber> <newtaskname>\n";
+        return helper;
+    }
 }

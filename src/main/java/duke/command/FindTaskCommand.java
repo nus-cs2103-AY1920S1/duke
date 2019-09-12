@@ -37,4 +37,12 @@ public class FindTaskCommand extends Command {
         ui.showMatchingTasks(taskIndexes);
     }
 
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Finds tasks with a keyword\nfind <keyword>\n";
+        return helper;
+    }
 }

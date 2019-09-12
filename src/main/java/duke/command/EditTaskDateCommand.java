@@ -36,4 +36,13 @@ public class EditTaskDateCommand extends Command {
         ui.showEditedTask(task);
         storage.save();
     }
+
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Edits a Task Date: \nedit date <tasknumber> <DD/MM/YYYY> <hhmm>\n";
+        return helper;
+    }
 }

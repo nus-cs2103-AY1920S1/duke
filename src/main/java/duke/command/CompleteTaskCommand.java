@@ -37,4 +37,13 @@ public class CompleteTaskCommand extends Command {
         storage.save();
     }
 
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Completes a Task: \ndone <tasknumber>\n";
+        return helper;
+    }
+
 }

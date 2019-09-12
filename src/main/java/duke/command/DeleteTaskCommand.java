@@ -37,4 +37,13 @@ public class DeleteTaskCommand extends Command {
         ui.showDeletedTask(deletedTask);
         storage.save();
     }
+
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Deletes a task from the list: \ndelete <tasknumber>\n";
+        return helper;
+    }
 }

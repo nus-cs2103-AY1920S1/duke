@@ -41,4 +41,13 @@ public class AddDeadlineTaskCommand extends Command {
         storage.save();
     }
 
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Add a deadline task: \ndeadline <taskname> /by <DD/MM/YYYY> <hhmm>\n";
+        return helper;
+    }
+
 }

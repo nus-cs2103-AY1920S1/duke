@@ -38,4 +38,13 @@ public class AddToDoTaskCommand extends Command {
         storage.save();
     }
 
+    /**
+     * Returns a String representation for user guidance.
+     * @return a String representation for user guidance.
+     */
+    public String toString() {
+        String helper = "Adds a todo task: \ntodo <taskname>\n";
+        return helper;
+    }
+
 }

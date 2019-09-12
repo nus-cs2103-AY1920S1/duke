@@ -14,6 +14,7 @@ import duke.command.EditTaskNameCommand;
 import duke.command.EndCommand;
 import duke.command.FindTaggedTaskCommand;
 import duke.command.FindTaskCommand;
+import duke.command.ListCommandsCommand;
 import duke.command.ListTaskCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDeadlineException;
@@ -98,6 +99,8 @@ public class DataParser {
             return new EditTaskDateCommand();
         } else if (shouldFindTaggedTask()) {
             return new FindTaggedTaskCommand();
+        } else if (shouldListCommands()) {
+            return new ListCommandsCommand();
         } else {
             throw new UnknownCommandException();
         }
@@ -445,4 +448,13 @@ public class DataParser {
         return input.split(" ")[0].equals("edit")
                 && input.split(" ")[1].equals("date");
     }
+
+    /**
+     * Checks if the user wishes to list the commands available.
+     * @return true if the input is "help".
+     */
+    private boolean shouldListCommands() {
+        return input.equals("help");
+    }
+
 }

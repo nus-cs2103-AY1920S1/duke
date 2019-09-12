@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -17,9 +18,15 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(addedTask);
-        ui.printAddedTask(addedTask, tasks);
+        ui.printAddedTask(addedTask);
+        ui.showNumTasks(tasks);
+        try {
+            storage.writeToFile(tasks);
+        } catch (java.io.IOException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     @Override

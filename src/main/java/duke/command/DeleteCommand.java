@@ -6,6 +6,8 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
+import java.io.IOException;
+
 /**
  * Handles command that requires deleting a task from the list of tasks.
  */
@@ -22,6 +24,11 @@ public class DeleteCommand extends Command {
         Task taskChanged = tasks.deleteTask(taskNum);
         ui.showDeletedTask(taskChanged);
         ui.showNumTasks(tasks);
+        try {
+            storage.writeToFile(tasks);
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     @Override

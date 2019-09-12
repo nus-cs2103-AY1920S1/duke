@@ -8,14 +8,6 @@ import duke.command.TaskList;
 import java.util.Scanner;
 import java.io.IOException;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
 /**
  * Represents an application that manages <code>ToDo</code>s, <code>duke.task.Event</code>s, and <code>Deadline</code>s.
  * A Duke object can add <code>Task</code>s, delete them, mark them as Done, and maintain a history of Tasks entered
@@ -66,19 +58,6 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/dukerepo/src/main/java/history.txt").run();
-    }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 
     /**

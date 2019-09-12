@@ -1,5 +1,7 @@
 package duke.parser;
 
+import java.util.Scanner;
+
 import duke.command.AddDeadlineTaskCommand;
 import duke.command.AddEventTaskCommand;
 import duke.command.AddTagCommand;
@@ -10,9 +12,9 @@ import duke.command.DeleteTaskCommand;
 import duke.command.EditTaskDateCommand;
 import duke.command.EditTaskNameCommand;
 import duke.command.EndCommand;
+import duke.command.FindTaggedTaskCommand;
 import duke.command.FindTaskCommand;
 import duke.command.ListTaskCommand;
-import duke.command.FindTaggedTaskCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDeadlineException;
 import duke.exception.InvalidEditTaskException;
@@ -22,8 +24,6 @@ import duke.exception.InvalidTagException;
 import duke.exception.InvalidTaskIndexException;
 import duke.exception.InvalidToDoException;
 import duke.exception.UnknownCommandException;
-
-import java.util.Scanner;
 
 /**
  * Represents a Data Parser to parse in all user input provided.
@@ -90,6 +90,8 @@ public class DataParser {
             return new FindTaskCommand();
         } else if (shouldTagTask()) {
             return new AddTagCommand();
+        } else if (isNotProperEditCommand()) {
+            throw new UnknownCommandException();
         } else if (shouldEditTaskName()) {
             return new EditTaskNameCommand();
         } else if (shouldEditTaskDate()) {
@@ -188,6 +190,10 @@ public class DataParser {
      */
     private boolean isTodoNameProvided(String[] data) {
         return data.length >= 2;
+    }
+
+    private boolean isNotProperEditCommand() {
+        return input.trim().equals("edit");
     }
 
     /**

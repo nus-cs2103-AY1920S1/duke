@@ -3,8 +3,6 @@ package duke.task;
 import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -40,7 +38,7 @@ class DeadlineTest {
         try {
             task = new Deadline("submit quiz", "20/09/2019");
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "Unparseable date: \"20/09/2019\"");
+            assertEquals(e.getMessage(), "Unparseable date: \"20/09/2019\"\nPlease use the format: dd/MM/yyyy hhmm");
         }
     }
 

@@ -40,7 +40,7 @@ class EventTest {
         try {
             task = new Event("event", "20/09/2019");
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "Unparseable date: \"20/09/2019\"");
+            assertEquals(e.getMessage(), "Unparseable date: \"20/09/2019\"\nPlease use the format: dd/MM/yyyy hhmm");
         }
     }
 

@@ -54,6 +54,7 @@ public class Storage {
     public ArrayList<Task> readFile() throws ParseException, IOException {
         ArrayList<Task> result = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(file));
+        assert br != null;
         String st;
         while ((st = br.readLine()) != null) {
             result.add(Parser.parseTaskString(st));

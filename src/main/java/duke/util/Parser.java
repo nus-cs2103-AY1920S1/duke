@@ -31,10 +31,12 @@ public class Parser {
      * @throws ParseException When the input string format is wrong.
      */
     public static Task parseTaskString(String str) throws ParseException {
+        assert !str.isEmpty() : "something wrong with the data file";
         String[] strs = str.split("\\|");
         switch (strs[0]) {
         case ("ToDo"):
             Task todo = new ToDo(strs[2]);
+            assert todo != null;
             if (strs[1].equals("1")) {
                 todo.toggleState();
             }
@@ -42,6 +44,7 @@ public class Parser {
         case ("Deadline"):
             Date date = FORMATTER.parse(strs[3]);
             Task deadline = new Deadline(strs[2], date);
+            assert deadline != null;
             if (strs[1].equals("1")) {
                 deadline.toggleState();
             }
@@ -49,6 +52,7 @@ public class Parser {
         case ("Event"):
             Date time = FORMATTER.parse(strs[3]);
             Task event = new Event(strs[2], time);
+            assert event != null;
             if (strs[1].equals("1")) {
                 event.toggleState();
             }
@@ -71,6 +75,7 @@ public class Parser {
     // return a string arr of length 3, index 0 is type of task, index 1 is content of task, index 2 is datetime
     // of task if the task requires datetime if not it will be empty string
     public static Command parseUserInput(String str) throws DukeException, ParseException {
+        assert str.isEmpty() : "did not receive input";
         if (str.equals("list")) {
             return new ListCommand();
         } else if (str.contains("done") && str.split(" ", 2)[0].equals("done")) {

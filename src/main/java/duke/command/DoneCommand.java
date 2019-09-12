@@ -20,6 +20,7 @@ public class DoneCommand extends Command {
      * @param command The full message received from user.
      */
     public DoneCommand(String command) {
+        assert !command.isEmpty();
         this.command = command;
     }
 

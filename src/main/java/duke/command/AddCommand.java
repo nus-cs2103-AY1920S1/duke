@@ -52,6 +52,8 @@ public class AddCommand extends Command {
      * @param date A Date object which specifies the date for the task
      */
     public AddCommand(String[] command, Date date) {
+        assert command.length > 0;
+        assert date != null;
         this.parsedString = command;
         this.date = date;
     }
@@ -63,6 +65,7 @@ public class AddCommand extends Command {
      * @param command Include type of task and content of the task.
      */
     public AddCommand(String[] command) {
+        assert command.length > 0;
         this.parsedString = command;
     }
 

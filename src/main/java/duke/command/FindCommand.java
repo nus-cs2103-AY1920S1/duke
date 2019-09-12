@@ -14,6 +14,7 @@ import duke.command.Command;
 public class FindCommand extends Command {
 
     public FindCommand(String command) {
+        assert !command.isEmpty();
         this.command = command;
     }
 

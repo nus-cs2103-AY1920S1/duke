@@ -14,21 +14,21 @@ import com.tasks.Todo;
 import java.util.stream.Stream;
 
 public enum Response {
-    BYE("(?i)^bye\\s*", (i, s) -> {
+    BYE("(?i)^b(ye)?\\s*", (i, s) -> {
         Printer.printString("Bye. Hope to see you again soon!");
         s.toExit = true;
         return true;
     }),
-    LIST("(?i)^list\\s*", (j, s) -> {
+    LIST("(?i)^l(ist)?\\s*", (j, s) -> {
         String finalString = listIndexStreamToString(IntStream.range(0, s.list.size()).boxed(), s);
         Printer.printString(finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString);
         return true;
     }),
-    FIND_BLANK("(?i)^find\\s*", (i, s) -> {
+    FIND_BLANK("(?i)^f(ind)?\\s*", (i, s) -> {
         Printer.printString("Did not specify substring to find");
         return true;
     }),
-    FIND("(?i)^find .+", (i, s) -> {
+    FIND("(?i)^f(ind)? .+", (i, s) -> {
         String substr = i.split(" ", 2)[1];
         String finalString = listIndexStreamToString(IntStream.range(0,
                 s.list.size()).boxed().filter((ti) -> s.list.get(ti).getName().contains(substr)), s);
@@ -60,25 +60,25 @@ public enum Response {
         }
         return false;
     }),
-    TODO_NO_NAME("(?i)^todo\\s*", (i, s) -> {
+    TODO_NO_NAME("(?i)^t(odo)?\\s*", (i, s) -> {
         Printer.printError("The description of a todo cannot be empty");
         return true;
     }),
-    TODO("(?i)^todo .+", (i, s) -> {
-        addTask(new Todo(i.split("todo ", 2)[1]), s);
+    TODO("(?i)^t(odo)? .+", (i, s) -> {
+        addTask(new Todo(i.split("t(odo)? ", 2)[1]), s);
         assert s.list.size() >= 1 : "expecting non empty list";
         return true;
     }),
-    EVENT_NO_NAME("(?i)^event\\s*", (i, s) -> {
+    EVENT_NO_NAME("(?i)^e(vent)?\\s*", (i, s) -> {
         Printer.printError("The description of an event cannot be empty");
         return true;
     }),
-    EVENT_NO_TIME("^(?i)event (((?!/at).)+$)|(.+ /at\\s*$)", (i, s) -> {
+    EVENT_NO_TIME("^(?i)e(vent)? (((?!/at).)+$)|(.+ /at\\s*$)", (i, s) -> {
         Printer.printError("The date range of an event cannot be empty");
         return true;
     }),
-    EVENT("(?i)^event .+ /at \\d{1,2}/\\d{1,2}/\\d{4} \\d{4} to \\d{1,2}/\\d{1,2}/\\d{4} \\d{4}", (i, s) -> {
-        String[] parts = splitTwoDelimiters(i, "(?i)^event ", "(?i)/at ");
+    EVENT("(?i)^e(vent)? .+ /at \\d{1,2}/\\d{1,2}/\\d{4} \\d{4} to \\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$", (i, s) -> {
+        String[] parts = splitTwoDelimiters(i, "(?i)^e(vent)? ", "(?i)/at ");
 
         String[] dates = parts[1].split(" to ", 2);
         addTask(new Event(parts[0], DateTime.parseString(dates[0]),
@@ -86,26 +86,26 @@ public enum Response {
         assert s.list.size() >= 1 : "expecting non empty list";
         return true;
     }),
-    EVENT_WRONG_TIME("(?i)^event .+ /at .+", (i, s) -> {
+    EVENT_WRONG_TIME("(?i)^e(vent)? .+ /at .+", (i, s) -> {
         Printer.printError(
                 "The date range must be in the format 'DD/MM/YYYY HHMM to DD/MM/YYYY HHMM'");
         return true;
     }),
-    DEADLINE_NO_NAME("(?i)^deadline\\s*", (i, s) -> {
+    DEADLINE_NO_NAME("(?i)^d(eadline)?\\s*", (i, s) -> {
         Printer.printError("The description of a deadline cannot be empty");
         return true;
     }),
-    DEADLINE_NO_TIME("(?i)^deadline (((?!/by).)+$)|(.+ /by\\s*$)", (i, s) -> {
+    DEADLINE_NO_TIME("(?i)^d(eadline)? (((?!/by).)+$)|(.+ /by\\s*$)", (i, s) -> {
         Printer.printError("The due date of a deadline cannot be empty");
         return true;
     }),
-    DEADLINE("(?i)^deadline .+ /by .+", (i, s) -> {
-        String[] parts = splitTwoDelimiters(i, "(?i)^deadline ", "(?i)/by ");
+    DEADLINE("(?i)^d(eadline)? .+ /by \\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$", (i, s) -> {
+        String[] parts = splitTwoDelimiters(i, "(?i)^d(eadline)? ", "(?i)/by ");
         addTask(new Deadline(parts[0], DateTime.parseString(parts[1])), s);
         assert s.list.size() >= 1 : "expecting non empty list";
         return true;
     }),
-    DEADLINE_WRONG_TIME("(?i)^deadline .+ /by .+", (i, s) -> {
+    DEADLINE_WRONG_TIME("(?i)^d(eadline)? .+ /by .+", (i, s) -> {
         Printer.printError("The date must be in the format 'DD/MM/YYYY HHMM'");
         return true;
     }),

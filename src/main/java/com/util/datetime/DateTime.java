@@ -29,7 +29,11 @@ public class DateTime extends GregorianCalendar {
         int month = Integer.parseInt(dateStrings[1]);
         int year = Integer.parseInt(dateStrings[2]);
         int hour = Integer.parseInt(dateTimeStrings[1].substring(0, 2));
-        int min = Integer.parseInt(dateTimeStrings[1].substring(2));
+        String minStr = dateTimeStrings[1].substring(2);
+        if (minStr.charAt(0) == ':') {
+            minStr = minStr.substring(1);
+        }
+        int min = Integer.parseInt(minStr);
         return new DateTime(year, month, day, hour, min);
     }
 

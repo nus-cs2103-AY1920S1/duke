@@ -246,7 +246,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
     snoozableTask.snooze(duration);
 
     // Update ModifyTaskListeners
-    modifyTaskUpdate(new Message("Got it. I've set the schedule for this task:"), task);
+    modifyTaskUpdate(new Message("Got it. I've snoozed this task:"), task);
   }
 
   private void modifyTaskUpdate(Message message, Task task) throws StorageException {

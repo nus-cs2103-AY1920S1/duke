@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.ui.listener.UserInputListener;
@@ -22,12 +23,15 @@ public class Root extends VBox {
   @FXML
   private TextField userInput;
 
+  private int userInputHistoryIndex;
+  private ArrayList<String> userInputHistory;
   private ArrayList<UserInputListener> userInputListeners;
 
   /**
    * Creates a root controller of Duke's {@link GraphicalUi}.
    */
   public Root() {
+    this.userInputHistory = new ArrayList<>();
     this.userInputListeners = new ArrayList<>();
   }
 
@@ -57,22 +61,68 @@ public class Root extends VBox {
   }
 
   @FXML
-  private void userInputUpdate() throws DukeException {
+  private void userInputOnAction() throws DukeException {
     String userInput = this.userInput.getText().trim();
 
     // Ignore empty userInput
-    if (!userInput.equals("")) {
-
-      // Add user input to right side of GUI
-      this.addMessage(new UserMessage(userInput));
-
-      // Update duke logic with userInput
-      for (UserInputListener listener : this.userInputListeners) {
-        listener.userInputUpdate(userInput);
-      }
+    if (userInput.equals("")) {
+      resetUserInputHistoryIndex();
+      return;
     }
+
+    // Add user input to right side of GUI
+    this.addMessage(new UserMessage(userInput));
+
+    // Update duke logic with userInput
+    for (UserInputListener listener : this.userInputListeners) {
+      listener.userInputUpdate(userInput);
+    }
+
+    // Keep track of userInputs
+    this.userInputHistory.add(userInput);
+    resetUserInputHistoryIndex();
 
     // Clear TextField
     this.userInput.clear();
+  }
+
+  @FXML
+  private void userInputKeyPressed(KeyEvent e) {
+    switch (e.getCode()) {
+      case UP:
+        if (this.userInputHistoryIndex <= 0) {
+          break;
+        }
+
+        this.userInputHistoryIndex--;
+        updateUserInputToHistory();
+        break;
+      case DOWN:
+        if (this.userInputHistoryIndex >= this.userInputHistory.size()) {
+          break;
+        }
+
+        this.userInputHistoryIndex++;
+
+        if (this.userInputHistoryIndex == this.userInputHistory.size()) {
+          this.userInput.clear();
+          break;
+        }
+
+        updateUserInputToHistory();
+        break;
+      default:
+        break;
+    }
+  }
+
+  private void resetUserInputHistoryIndex() {
+    this.userInputHistoryIndex = this.userInputHistory.size();
+  }
+
+  private void updateUserInputToHistory() {
+    String userInput = this.userInputHistory.get(this.userInputHistoryIndex);
+    this.userInput.setText(userInput);
+    this.userInput.positionCaret(userInput.length());
   }
 }

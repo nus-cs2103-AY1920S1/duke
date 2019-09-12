@@ -1,5 +1,12 @@
 package jermi.task;
 
+import static jermi.misc.Constant.TASK_DONE_ICON;
+import static jermi.misc.Constant.TASK_DONE_STRING_REPRESENTATION;
+import static jermi.misc.Constant.TASK_SAVE_FORMAT;
+import static jermi.misc.Constant.TASK_STRING_REPRESENTATION;
+import static jermi.misc.Constant.TASK_UNDONE_ICON;
+import static jermi.misc.Constant.TASK_UNDONE_STRING_REPRESENTATION;
+
 /**
  * Base class for task.
  */
@@ -12,7 +19,7 @@ public abstract class Task {
     /** Constructor for class. */
     Task(String description, String isDone) {
         this.description = description;
-        this.isDone = isDone.equals("1");
+        this.isDone = isDone.equals(TASK_DONE_STRING_REPRESENTATION);
     }
 
     /**
@@ -21,7 +28,7 @@ public abstract class Task {
      * @return Tick if task is completed, else cross.
      */
     private String getStatusIcon() {
-        return this.isDone ? "✔" : "✘";
+        return this.isDone ? TASK_DONE_ICON : TASK_UNDONE_ICON;
     }
 
     /**
@@ -45,7 +52,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s][%s] %s", this.getTypeCode(), this.getStatusIcon(), this.description);
+        return String.format(TASK_STRING_REPRESENTATION, this.getTypeCode(), this.getStatusIcon(), this.description);
     }
 
     /**
@@ -54,7 +61,8 @@ public abstract class Task {
      * @return A string in save format.
      */
     public String toSaveFormat() {
-        return String.format("%s|%d|%s", this.getTypeCode(), this.isDone ? 1 : 0, this.description);
+        return String.format(TASK_SAVE_FORMAT, this.getTypeCode(),
+                this.isDone ? TASK_DONE_STRING_REPRESENTATION : TASK_UNDONE_STRING_REPRESENTATION, this.description);
     }
 
     /**

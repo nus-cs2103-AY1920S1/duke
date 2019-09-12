@@ -1,5 +1,7 @@
 package jermi.component;
 
+import static jermi.misc.Constant.TASK_LIST_START_INDEX;
+
 import jermi.task.Task;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +56,7 @@ public class TaskList {
      * @return Task of the specified index.
      */
     public Task getTask(int index) {
-        return this.list.get(index - 1);
+        return this.list.get(index - TASK_LIST_START_INDEX);
     }
 
     /**
@@ -63,7 +65,7 @@ public class TaskList {
      * @param index Index (starting from 1) of task.
      */
     public void remove(int index) {
-        this.list.remove(index - 1);
+        this.list.remove(index - TASK_LIST_START_INDEX);
     }
 
     /**

@@ -6,14 +6,14 @@ import jermi.component.Formatter;
 
 public class FormatterTest {
     private static final Formatter FORMATTER = new Formatter();
-    private static final String BORDER = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    private static final String FORMATTER_BORDER = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
 
     @Test
     public void greet_welcomeMessage() {
-        String expected = BORDER
+        String expected = FORMATTER_BORDER
                 + "  Hello! I'm Jermi\n"
                 + "  What can I do for you?\n"
-                + BORDER;
+                + FORMATTER_BORDER;
 
         assertEquals(expected,
                 FORMATTER.greet());
@@ -21,9 +21,9 @@ public class FormatterTest {
 
     @Test
     public void exit_exitMessage() {
-        String expected = BORDER
+        String expected = FORMATTER_BORDER
                 + "  Bye. Hope to see you again soon!\n"
-                + BORDER;
+                + FORMATTER_BORDER;
 
         assertEquals(expected,
                 FORMATTER.exit());
@@ -31,34 +31,34 @@ public class FormatterTest {
 
     @Test
     public void echo_noString_onlyBorders() {
-        String expected = BORDER + BORDER;
+        String expected = FORMATTER_BORDER + FORMATTER_BORDER;
 
         assertEquals(expected, FORMATTER.echo());
     }
 
     @Test
     public void echo_singleEmptyString_singleBlankLineBetweenBorders() {
-        String expected = BORDER + "  \n" + BORDER;
+        String expected = FORMATTER_BORDER + "  \n" + FORMATTER_BORDER;
 
         assertEquals(expected, FORMATTER.echo(""));
     }
 
     @Test
     public void echo_multipleEmptyStrings_multipleBlankLinesBetweenBorders() {
-        String expected = BORDER
+        String expected = FORMATTER_BORDER
                 + "  \n"
                 + "  \n"
                 + "  \n"
                 + "  \n"
                 + "  \n"
-                + BORDER;
+                + FORMATTER_BORDER;
 
         assertEquals(expected, FORMATTER.echo("", "", "", "", ""));
     }
 
     @Test
     public void echo_singleNonEmptyString_singleNonEmptyStringBetweenBorders() {
-        String expected = BORDER + "  Test string\n" + BORDER;
+        String expected = FORMATTER_BORDER + "  Test string\n" + FORMATTER_BORDER;
 
         assertEquals(expected, FORMATTER.echo("Test string"));
     }
@@ -69,12 +69,12 @@ public class FormatterTest {
                 "Test string 2",
                 "Test string 3",
                 "Test string 4"};
-        String expected = BORDER
+        String expected = FORMATTER_BORDER
                 + "  " + testStrings[0] + "\n"
                 + "  " + testStrings[1] + "\n"
                 + "  " + testStrings[2] + "\n"
                 + "  " + testStrings[3] + "\n"
-                + BORDER;
+                + FORMATTER_BORDER;
 
         assertEquals(expected, FORMATTER.echo(testStrings[0],
                 testStrings[1],

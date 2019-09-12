@@ -1,6 +1,10 @@
 package jermi.task;
 
-import jermi.type.TaskType;
+import static jermi.misc.Constant.DEADLINE_STRING_REPRESENTATION;
+import static jermi.misc.Constant.DEADLINE_TYPE_CODE;
+import static jermi.misc.Constant.TASK_UNDONE_STRING_REPRESENTATION;
+
+import jermi.misc.TaskType;
 
 /**
  * A representation of the deadline task.
@@ -14,7 +18,7 @@ public class Deadline extends TaskWithDateTime {
      * @param deadline Deadline of task.
      */
     public Deadline(String description, String deadline) {
-        this(description, deadline, "0");
+        this(description, deadline, TASK_UNDONE_STRING_REPRESENTATION);
     }
 
     /**
@@ -36,7 +40,7 @@ public class Deadline extends TaskWithDateTime {
      */
     @Override
     String getTypeCode() {
-        return TaskType.DEADLINE.getTypeCode();
+        return DEADLINE_TYPE_CODE;
     }
 
     /**
@@ -46,7 +50,7 @@ public class Deadline extends TaskWithDateTime {
      */
     @Override
     public String toString() {
-        return String.format("%s (by: %s)", super.toString(), this.getDateTime());
+        return String.format(DEADLINE_STRING_REPRESENTATION, super.toString(), this.getDateTime());
     }
 
 }

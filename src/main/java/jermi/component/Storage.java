@@ -1,5 +1,14 @@
 package jermi.component;
 
+import static jermi.misc.Constant.DEADLINE_TYPE_CODE;
+import static jermi.misc.Constant.EVENT_TYPE_CODE;
+import static jermi.misc.Constant.STORAGE_DATE_TIME_INDEX;
+import static jermi.misc.Constant.STORAGE_DESCRIPTION_INDEX;
+import static jermi.misc.Constant.STORAGE_IS_DONE_INDEX;
+import static jermi.misc.Constant.STORAGE_SAVE_FORMAT_DELIMITER;
+import static jermi.misc.Constant.STORAGE_TYPE_CODE_INDEX;
+import static jermi.misc.Constant.TO_DO_TYPE_CODE;
+
 import jermi.exception.CorruptedSaveFormatException;
 import jermi.exception.JermiException;
 import jermi.exception.LoadingException;
@@ -8,7 +17,7 @@ import jermi.task.Deadline;
 import jermi.task.Event;
 import jermi.task.Task;
 import jermi.task.ToDo;
-import jermi.type.TaskType;
+import jermi.misc.TaskType;
 
 import java.io.File;
 import java.io.IOException;
@@ -47,20 +56,25 @@ public class Storage {
     private Task saveFormatToTask(String saveFormat) throws JermiException {
         try {
             Task task = null;
-            String[] components = saveFormat.split("\\|");
-            String typeCode = components[0];
-            String isDone = components[1];
-            String description = components[2];
+            String[] components = saveFormat.split(STORAGE_SAVE_FORMAT_DELIMITER);
+            String typeCode = components[STORAGE_TYPE_CODE_INDEX];
+            String isDone = components[STORAGE_IS_DONE_INDEX];
+            String description = components[STORAGE_DESCRIPTION_INDEX];
 
-            if (typeCode.equals(TaskType.TO_DO.getTypeCode())) {
+            switch (typeCode) {
+            case TO_DO_TYPE_CODE:
                 task = new ToDo(description, isDone);
-            } else {
-                String dateTime = components[3];
-                if (typeCode.equals(TaskType.DEADLINE.getTypeCode())) {
+                break;
+            default:
+                String dateTime = components[STORAGE_DATE_TIME_INDEX];
+                switch (typeCode) {
+                case DEADLINE_TYPE_CODE:
                     task = new Deadline(description, dateTime, isDone);
-                } else if (typeCode.equals(TaskType.EVENT.getTypeCode())) {
+                    break;
+                case EVENT_TYPE_CODE:
                     task = new Event(description, dateTime, isDone);
-                } else {
+                    break;
+                default:
                     throw new CorruptedSaveFormatException(saveFormat);
                 }
             }

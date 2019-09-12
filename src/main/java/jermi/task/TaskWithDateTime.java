@@ -1,5 +1,9 @@
 package jermi.task;
 
+import static jermi.misc.Constant.TASK_INPUT_DATE_TIME_FORMAT;
+import static jermi.misc.Constant.TASK_OUTPUT_DATE_TIME_FORMAT;
+import static jermi.misc.Constant.TASK_SAVE_FORMAT_DATE_TIME_EXTENSION;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -34,7 +38,7 @@ abstract class TaskWithDateTime extends Task {
      * @return Date and time in LocalDateTime format.
      */
     private LocalDateTime stringToDateTime(String string) {
-        return LocalDateTime.parse(string, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        return LocalDateTime.parse(string, DateTimeFormatter.ofPattern(TASK_INPUT_DATE_TIME_FORMAT));
     }
 
     /**
@@ -44,7 +48,7 @@ abstract class TaskWithDateTime extends Task {
      * @return Date and time in string format.
      */
     private String dateTimeToString(LocalDateTime dateTime) {
-        return dateTime.format(DateTimeFormatter.ofPattern("d MMMM yyyy, h.mma"));
+        return dateTime.format(DateTimeFormatter.ofPattern(TASK_OUTPUT_DATE_TIME_FORMAT));
     }
 
     /**
@@ -73,6 +77,6 @@ abstract class TaskWithDateTime extends Task {
      */
     @Override
     public String toSaveFormat() {
-        return String.format("%s|%s", super.toSaveFormat(), this.dateTime);
+        return String.format(TASK_SAVE_FORMAT_DATE_TIME_EXTENSION, super.toSaveFormat(), this.dateTime);
     }
 }

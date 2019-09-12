@@ -1,5 +1,16 @@
 package jermi.component;
 
+import static jermi.misc.Constant.FORMATTER_BORDER;
+import static jermi.misc.Constant.FORMATTER_COMMAND_DETAILS_DELIMITER;
+import static jermi.misc.Constant.FORMATTER_COMMAND_DETAILS_SPLIT_LIMIT;
+import static jermi.misc.Constant.FORMATTER_COMMAND_INDEX;
+import static jermi.misc.Constant.FORMATTER_DEFAULT_DETAILS;
+import static jermi.misc.Constant.FORMATTER_DETAILS_INDEX;
+import static jermi.misc.Constant.FORMATTER_EXIT_MESSAGE;
+import static jermi.misc.Constant.FORMATTER_MESSAGE_FORMAT;
+import static jermi.misc.Constant.FORMATTER_WELCOME_MESSAGE_LINE_1;
+import static jermi.misc.Constant.FORMATTER_WELCOME_MESSAGE_LINE_2;
+
 /**
  * A class that deals with interaction with the user.
  */
@@ -11,7 +22,7 @@ public class Formatter {
      * @return Formatted message.
      */
     private String formatMessage(String message) {
-        return String.format("  %s\n", message);
+        return String.format(FORMATTER_MESSAGE_FORMAT, message);
     }
 
     /**
@@ -22,13 +33,12 @@ public class Formatter {
      * @return Formatted messages.
      */
     public String echo(String... messages) {
-        String border = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
-        StringBuilder toEcho = new StringBuilder(border);
+        StringBuilder toEcho = new StringBuilder(FORMATTER_BORDER);
 
         for (String message : messages) {
             toEcho.append(this.formatMessage(message));
         }
-        toEcho.append(border);
+        toEcho.append(FORMATTER_BORDER);
         System.out.println(toEcho);
         return toEcho.toString();
     }
@@ -39,7 +49,7 @@ public class Formatter {
      * @return Welcome message.
      */
     public String greet() {
-        return this.echo("Hello! I'm Jermi", "What can I do for you?");
+        return this.echo(FORMATTER_WELCOME_MESSAGE_LINE_1, FORMATTER_WELCOME_MESSAGE_LINE_2);
     }
 
     /**
@@ -48,7 +58,7 @@ public class Formatter {
      * @return Exit message.
      */
     public String exit() {
-        return this.echo("Bye. Hope to see you again soon!");
+        return this.echo(FORMATTER_EXIT_MESSAGE);
     }
 
     /**
@@ -58,7 +68,8 @@ public class Formatter {
      * @return Input command.
      */
     public String readCommand(String input) {
-        return input.split(" ", 2)[0];
+        return input.split(FORMATTER_COMMAND_DETAILS_DELIMITER,
+                FORMATTER_COMMAND_DETAILS_SPLIT_LIMIT)[FORMATTER_COMMAND_INDEX];
     }
 
     /**
@@ -69,9 +80,10 @@ public class Formatter {
      */
     public String readDetails(String input) {
         try {
-            return input.split(" ", 2)[1];
+            return input.split(FORMATTER_COMMAND_DETAILS_DELIMITER,
+                    FORMATTER_COMMAND_DETAILS_SPLIT_LIMIT)[FORMATTER_DETAILS_INDEX];
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "";
+            return FORMATTER_DEFAULT_DETAILS;
         }
     }
 }

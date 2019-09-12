@@ -1,6 +1,10 @@
 package jermi.task;
 
-import jermi.type.TaskType;
+import static jermi.misc.Constant.EVENT_STRING_REPRESENTATION;
+import static jermi.misc.Constant.EVENT_TYPE_CODE;
+import static jermi.misc.Constant.TASK_UNDONE_STRING_REPRESENTATION;
+
+import jermi.misc.TaskType;
 
 /**
  * A representation of the event task.
@@ -14,7 +18,7 @@ public class Event extends TaskWithDateTime {
      * @param dateTime Date and time of event.
      */
     public Event(String description, String dateTime) {
-        this(description, dateTime, "0");
+        this(description, dateTime, TASK_UNDONE_STRING_REPRESENTATION);
     }
 
     /**
@@ -36,7 +40,7 @@ public class Event extends TaskWithDateTime {
      */
     @Override
     String getTypeCode() {
-        return TaskType.EVENT.getTypeCode();
+        return EVENT_TYPE_CODE;
     }
 
     /**
@@ -46,6 +50,6 @@ public class Event extends TaskWithDateTime {
      */
     @Override
     public String toString() {
-        return String.format("%s (at: %s)", super.toString(), this.getDateTime());
+        return String.format(EVENT_STRING_REPRESENTATION, super.toString(), this.getDateTime());
     }
 }

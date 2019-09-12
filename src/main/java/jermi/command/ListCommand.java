@@ -1,5 +1,11 @@
 package jermi.command;
 
+import static jermi.misc.Constant.COMMAND_LIST_MESSAGE;
+import static jermi.misc.Constant.COMMAND_TASK_FORMAT_WITH_INDEX;
+import static jermi.misc.Constant.DUMMY_ARRAY_SIZE;
+import static jermi.misc.Constant.INSERT_MESSAGE_INDEX;
+import static jermi.misc.Constant.TASK_LIST_START_INDEX;
+
 import jermi.component.Formatter;
 import jermi.component.Storage;
 import jermi.component.TaskList;
@@ -31,12 +37,12 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
-        List<String> formattedTasksInString = IntStream.rangeClosed(1, taskList.getSize())
-                .mapToObj(index -> String.format("%d.%s", index, taskList.getTask(index)))
+        List<String> formattedTasksInString = IntStream.rangeClosed(TASK_LIST_START_INDEX, taskList.getSize())
+                .mapToObj(index -> String.format(COMMAND_TASK_FORMAT_WITH_INDEX, index, taskList.getTask(index)))
                 .collect(Collectors.toList());
 
-        formattedTasksInString.add(0, "Here are the tasks in your list:");
-        return formatter.echo(formattedTasksInString.toArray(new String[0]));
+        formattedTasksInString.add(INSERT_MESSAGE_INDEX, COMMAND_LIST_MESSAGE);
+        return formatter.echo(formattedTasksInString.toArray(new String[DUMMY_ARRAY_SIZE]));
     }
 
     /**

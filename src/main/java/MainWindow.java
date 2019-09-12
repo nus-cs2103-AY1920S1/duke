@@ -1,3 +1,8 @@
+import static jermi.misc.Constant.DATA_PATH;
+import static jermi.misc.Constant.JERMI_IMAGE_PATH;
+import static jermi.misc.Constant.SHOULD_EXIT_INDEX;
+import static jermi.misc.Constant.USER_IMAGE_PATH;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,9 +34,9 @@ public class MainWindow extends AnchorPane {
     /** Indicator for if the program should close. */
     private boolean[] shouldExit = {false};
     /** Display image of user. */
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_PATH));
     /** Display image of Jermi. */
-    private Image jermiImage = new Image(this.getClass().getResourceAsStream("/images/Jermi.png"));
+    private Image jermiImage = new Image(this.getClass().getResourceAsStream(JERMI_IMAGE_PATH));
 
     /**
      * Allows the scroll pane to scroll down automatically when the dialog container stretches beyond
@@ -50,7 +55,7 @@ public class MainWindow extends AnchorPane {
     public void setup(Jermi jermi) {
         this.jermi = jermi;
         this.dialogContainer.getChildren().addAll(
-                DialogBox.getJermiDialog(this.jermi.initialiseStorage("data/jermi.txt"), this.jermiImage));
+                DialogBox.getJermiDialog(this.jermi.initialiseStorage(DATA_PATH), this.jermiImage));
     }
 
     /**
@@ -67,7 +72,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getJermiDialog(response, this.jermiImage)
         );
         userInput.clear();
-        if (this.shouldExit[0]) {
+        if (this.shouldExit[SHOULD_EXIT_INDEX]) {
             Platform.exit();
             System.exit(0);
         }

@@ -1,5 +1,11 @@
 package jermi.command;
 
+import static jermi.misc.Constant.COMMAND_DELETE_MESSAGE;
+import static jermi.misc.Constant.COMMAND_NUMBER_OF_TASKS;
+import static jermi.misc.Constant.COMMAND_PLURAL_NOUN;
+import static jermi.misc.Constant.COMMAND_SINGULAR_NOUN;
+import static jermi.misc.Constant.COMMAND_TASK_FORMAT;
+
 import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.component.Formatter;
@@ -37,8 +43,9 @@ public class DeleteCommand extends MutateTaskCommand {
         int numOfTasks = taskList.getSize();
         storage.taskListToFile();
         assert numOfTasks >= 0 : "numOfTasks should be >= 0";
-        return formatter.echo("Noted. I've removed this task:",
-                "  " + task,
-                String.format("Now you have %d task%s in the list.", numOfTasks, numOfTasks == 1 ? "" : "s"));
+        return formatter.echo(COMMAND_DELETE_MESSAGE,
+                String.format(COMMAND_TASK_FORMAT, task),
+                String.format(COMMAND_NUMBER_OF_TASKS, numOfTasks,
+                        numOfTasks == 1 ? COMMAND_SINGULAR_NOUN : COMMAND_PLURAL_NOUN));
     }
 }

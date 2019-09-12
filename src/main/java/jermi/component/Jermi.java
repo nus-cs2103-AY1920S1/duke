@@ -1,5 +1,7 @@
 package jermi.component;
 
+import static jermi.misc.Constant.SHOULD_EXIT_INDEX;
+
 import jermi.command.Command;
 import jermi.exception.JermiException;
 
@@ -61,7 +63,7 @@ public class Jermi {
             String inputCommand = this.formatter.readCommand(input);
             String inputDetails = this.formatter.readDetails(input);
             Command command = this.parser.parse(inputCommand, inputDetails);
-            shouldExit[0] = command.shouldExit();
+            shouldExit[SHOULD_EXIT_INDEX] = command.shouldExit();
             return command.execute(this.taskList, this.formatter, this.storage);
         } catch (JermiException e) {
             return this.exceptionHandler.handleCheckedExceptions(e);

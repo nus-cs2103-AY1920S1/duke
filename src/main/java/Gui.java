@@ -1,3 +1,5 @@
+import static jermi.misc.Constant.MAIN_WINDOW_FXML_PATH;
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -19,7 +21,7 @@ public class Gui extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource(MAIN_WINDOW_FXML_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);

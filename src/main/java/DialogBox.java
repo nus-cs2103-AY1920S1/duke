@@ -1,3 +1,5 @@
+import static jermi.misc.Constant.DIALOG_BOX_FXML_PATH;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -34,7 +36,7 @@ public class DialogBox extends HBox {
      */
     private DialogBox(String text, Image image) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(DIALOG_BOX_FXML_PATH));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

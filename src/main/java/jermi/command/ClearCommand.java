@@ -1,5 +1,7 @@
 package jermi.command;
 
+import static jermi.misc.Constant.COMMAND_CLEAR_MESSAGE;
+
 import jermi.component.Formatter;
 import jermi.component.Storage;
 import jermi.component.TaskList;
@@ -22,7 +24,7 @@ public class ClearCommand extends Command {
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
         taskList.clear();
         storage.taskListToFile();
-        return formatter.echo("Noted. I've removed all the tasks in the list.");
+        return formatter.echo(COMMAND_CLEAR_MESSAGE);
     }
 
     /**

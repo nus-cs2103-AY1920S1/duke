@@ -1,5 +1,8 @@
 package jermi.command;
 
+import static jermi.misc.Constant.COMMAND_DONE_MESSAGE;
+import static jermi.misc.Constant.COMMAND_TASK_FORMAT;
+
 import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.component.Formatter;
@@ -35,6 +38,6 @@ public class DoneCommand extends MutateTaskCommand {
         Task task = taskList.getTask(this.index);
         task.markAsDone();
         storage.taskListToFile();
-        return formatter.echo("Nice! I've marked this task as done:", "  " + task);
+        return formatter.echo(COMMAND_DONE_MESSAGE, String.format(COMMAND_TASK_FORMAT, task));
     }
 }

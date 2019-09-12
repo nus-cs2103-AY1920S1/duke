@@ -1,5 +1,15 @@
 package jermi.component;
 
+import static jermi.misc.Constant.PARSER_CLEAR;
+import static jermi.misc.Constant.PARSER_DEADLINE;
+import static jermi.misc.Constant.PARSER_DELETE;
+import static jermi.misc.Constant.PARSER_DONE;
+import static jermi.misc.Constant.PARSER_EVENT;
+import static jermi.misc.Constant.PARSER_EXIT;
+import static jermi.misc.Constant.PARSER_FIND;
+import static jermi.misc.Constant.PARSER_LIST;
+import static jermi.misc.Constant.PARSER_TODO;
+
 import jermi.command.AddCommand;
 import jermi.command.ClearCommand;
 import jermi.command.Command;
@@ -11,31 +21,12 @@ import jermi.command.ListCommand;
 import jermi.exception.EmptyDescriptionException;
 import jermi.exception.InvalidCommandException;
 import jermi.exception.JermiException;
-import jermi.type.TaskType;
+import jermi.misc.TaskType;
 
 /**
  * A class that deals with making sense of the user input.
  */
 public class Parser {
-    /** Command to list tasks. */
-    private static final String LIST = "list";
-    /** Command to exit Jermi. */
-    private static final String EXIT = "bye";
-    /** Command to clear list. */
-    private static final String CLEAR = "clear";
-    /** Command to add todo task. */
-    private static final String TODO = "todo";
-    /** Command to add deadline task. */
-    private static final String DEADLINE = "deadline";
-    /** Command to add event task. */
-    private static final String EVENT = "event";
-    /** Command to mark task as done. */
-    private static final String DONE = "done";
-    /** Command to delete a task. */
-    private static final String DELETE = "delete";
-    /** Command to find tasks. */
-    private static final String FIND = "find";
-
     /**
      * Parses and returns the {@link Command} associated with the user input.
      *
@@ -47,46 +38,46 @@ public class Parser {
     public Command parse(String inputCommand, String inputDetails) throws JermiException {
         Command command = null;
         switch (inputCommand) {
-        case LIST:
+        case PARSER_LIST:
             command = new ListCommand();
             break;
-        case EXIT:
+        case PARSER_EXIT:
             command = new ExitCommand();
             break;
-        case CLEAR:
+        case PARSER_CLEAR:
             command = new ClearCommand();
             break;
-        case TODO:
+        case PARSER_TODO:
             //Fallthrough
-        case DEADLINE:
+        case PARSER_DEADLINE:
             //Fallthrough
-        case EVENT:
+        case PARSER_EVENT:
             //Fallthrough
-        case DONE:
+        case PARSER_DONE:
             //Fallthrough
-        case DELETE:
+        case PARSER_DELETE:
             //Fallthrough
-        case FIND:
+        case PARSER_FIND:
             if (inputDetails.isEmpty()) {
                 throw new EmptyDescriptionException(inputCommand);
             }
             switch (inputCommand) {
-            case TODO:
+            case PARSER_TODO:
                 command = new AddCommand(TaskType.TO_DO, inputDetails);
                 break;
-            case DEADLINE:
+            case PARSER_DEADLINE:
                 command = new AddCommand(TaskType.DEADLINE, inputDetails);
                 break;
-            case EVENT:
+            case PARSER_EVENT:
                 command = new AddCommand(TaskType.EVENT, inputDetails);
                 break;
-            case DONE:
+            case PARSER_DONE:
                 command = new DoneCommand(inputDetails);
                 break;
-            case DELETE:
+            case PARSER_DELETE:
                 command = new DeleteCommand(inputDetails);
                 break;
-            case FIND:
+            case PARSER_FIND:
                 command = new FindCommand(inputDetails);
                 break;
             default:

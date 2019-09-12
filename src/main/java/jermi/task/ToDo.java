@@ -1,6 +1,9 @@
 package jermi.task;
 
-import jermi.type.TaskType;
+import static jermi.misc.Constant.TASK_UNDONE_STRING_REPRESENTATION;
+import static jermi.misc.Constant.TO_DO_TYPE_CODE;
+
+import jermi.misc.TaskType;
 
 /**
  * A representation of the todo task.
@@ -13,7 +16,7 @@ public class ToDo extends Task {
      * @param description Description of todo.
      */
     public ToDo(String description) {
-        this(description, "0");
+        this(description, TASK_UNDONE_STRING_REPRESENTATION);
     }
 
     /**
@@ -34,6 +37,6 @@ public class ToDo extends Task {
      */
     @Override
     String getTypeCode() {
-        return TaskType.TO_DO.getTypeCode();
+        return TO_DO_TYPE_CODE;
     }
 }

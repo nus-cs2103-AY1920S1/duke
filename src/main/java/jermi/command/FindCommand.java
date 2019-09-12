@@ -1,5 +1,12 @@
 package jermi.command;
 
+import static jermi.misc.Constant.COMMAND_FIND_KEYWORDS_DELIMITER;
+import static jermi.misc.Constant.COMMAND_FIND_MESSAGE;
+import static jermi.misc.Constant.COMMAND_TASK_FORMAT_WITH_INDEX;
+import static jermi.misc.Constant.DUMMY_ARRAY_SIZE;
+import static jermi.misc.Constant.INSERT_MESSAGE_INDEX;
+import static jermi.misc.Constant.TASK_LIST_START_INDEX;
+
 import jermi.component.Formatter;
 import jermi.component.Storage;
 import jermi.component.TaskList;
@@ -23,7 +30,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String keywords) {
         super();
-        this.keywords = keywords.split(" ");
+        this.keywords = keywords.split(COMMAND_FIND_KEYWORDS_DELIMITER);
     }
 
     /**
@@ -38,12 +45,13 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
         List<String> tasksInString = taskList.find(this.keywords);
-        List<String> formattedTasksInString = IntStream.rangeClosed(1, tasksInString.size())
-                .mapToObj(index -> String.format("%d.%s", index, tasksInString.get(index - 1)))
+        List<String> formattedTasksInString = IntStream.rangeClosed(TASK_LIST_START_INDEX, tasksInString.size())
+                .mapToObj(index -> String.format(COMMAND_TASK_FORMAT_WITH_INDEX,
+                        index, tasksInString.get(index - TASK_LIST_START_INDEX)))
                 .collect(Collectors.toList());
 
-        formattedTasksInString.add(0, "Here are the matching tasks in your list:");
-        return formatter.echo(formattedTasksInString.toArray(new String[0]));
+        formattedTasksInString.add(INSERT_MESSAGE_INDEX, COMMAND_FIND_MESSAGE);
+        return formatter.echo(formattedTasksInString.toArray(new String[DUMMY_ARRAY_SIZE]));
     }
 
     /**

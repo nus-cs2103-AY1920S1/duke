@@ -26,7 +26,7 @@ class EventTest {
             e.printStackTrace();
         }
         assert task != null;
-        assertEquals(task.toString(), "[E][\u2718] party (at: 29/08/2019 2200)");
+        assertEquals(task.toString(), "[E][x] party (at: 29/08/2019 2200)");
     }
 
     /**

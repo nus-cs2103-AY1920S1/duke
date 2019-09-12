@@ -26,7 +26,7 @@ class DeadlineTest {
             e.printStackTrace();
         }
         assert task != null;
-        assertEquals(task.toString(), "[D][\u2718] submit assignment (by: 29/08/2019 2359)");
+        assertEquals(task.toString(), "[D][x] submit assignment (by: 29/08/2019 2359)");
     }
 
     /**

@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Unit test for TaskList class.
@@ -27,7 +27,7 @@ class TaskListTest {
 
         @Override
         public String toString() {
-            return "[\u2718] wash dishes";
+            return "[x] wash dishes";
         }
 
         @Override

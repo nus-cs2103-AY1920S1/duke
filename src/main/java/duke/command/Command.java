@@ -5,6 +5,8 @@ import error.command.CommandCreationException;
 import error.ui.UiException;
 import ui.UiController;
 
+import java.util.Optional;
+
 public abstract class Command {
     private CommandType type;
     protected UiController ui;
@@ -23,4 +25,7 @@ public abstract class Command {
     }
 
     public abstract void execute() throws UiException;
+
+    public abstract Optional<UndoAction> getUndoAction();
+
 }

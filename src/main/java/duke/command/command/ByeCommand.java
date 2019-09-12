@@ -2,8 +2,11 @@ package duke.command.command;
 
 import duke.command.Command;
 import duke.command.CommandType;
+import duke.command.UndoAction;
 import error.command.CommandCreationException;
 import error.ui.UiException;
+
+import java.util.Optional;
 
 /***
  * <p>
@@ -23,5 +26,10 @@ public class ByeCommand extends Command {
     @Override
     public void execute() throws UiException {
         ui.exit();
+    }
+
+    @Override
+    public Optional<UndoAction> getUndoAction() {
+        return Optional.empty();
     }
 }

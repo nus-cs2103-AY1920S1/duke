@@ -2,8 +2,11 @@ package duke.command.command;
 
 import duke.command.Command;
 import duke.command.CommandType;
+import duke.command.UndoAction;
 import error.command.CommandCreationException;
 import error.ui.UiException;
+
+import java.util.Optional;
 
 /***
  * <p>
@@ -29,5 +32,10 @@ public class ListCommand extends Command {
     @Override
     public void execute() throws UiException {
         tasksController.displayAllTasks();
+    }
+
+    @Override
+    public Optional<UndoAction> getUndoAction() {
+        return Optional.empty();
     }
 }

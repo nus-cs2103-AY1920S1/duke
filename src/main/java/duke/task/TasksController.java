@@ -5,10 +5,7 @@ import error.ui.UiException;
 import storage.Storage;
 import ui.UiController;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /***
@@ -57,7 +54,7 @@ public class TasksController {
      * </p>
      * @param task duke.task to be added.
      */
-    public void addTask(Task task) throws UiException {
+    public void addTask(Task task, boolean displayMessage) throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
             tasks.add(task);
@@ -65,7 +62,10 @@ public class TasksController {
             assert tasks.contains(task);
 
             storage.writeTasks(tasks);
-            view.displayNewTask(task, tasks.size(), ui);
+
+            if (displayMessage) {
+                view.displayNewTask(task, tasks.size(), ui);
+            }
         } catch (StorageException e) {
             ui.displayOutput(e.getMessage());
         }
@@ -77,10 +77,11 @@ public class TasksController {
      * </p>
      * @param index index of duke.task to be set to done.
      */
-    public void setTaskToDone(int index) throws UiException {
+    public Optional<Task> setTaskToDone(int index) throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
-            tasks.get(index).setDone(true);
+            Task done = tasks.get(index);
+            done.setDone(true);
 
             view.displayTaskDone(tasks.get(index), ui);
 
@@ -89,8 +90,11 @@ public class TasksController {
             // write changes to storage file
             storage.writeTasks(tasks);
 
+            return Optional.of(done);
+
         } catch (StorageException e) {
             ui.displayOutput(e.getMessage());
+            return Optional.empty();
         }
     }
 
@@ -114,7 +118,7 @@ public class TasksController {
      * </p>
      * @param index index of duke.task to be deleted.
      */
-    public void deleteTask(int index) throws UiException {
+    public Optional<Task> deleteTask(int index) throws UiException {
         try {
             List<Task> tasks = storage.getTasks();
 
@@ -125,12 +129,16 @@ public class TasksController {
             assert !tasks.contains(deleted);
 
             storage.writeTasks(tasks);
+
+            return Optional.of(deleted);
         } catch (StorageException e) {
             ui.displayOutput(e.getMessage());
+            return Optional.empty();
         } catch (IndexOutOfBoundsException e) {
             String message = " ☹ OOPS!!! You have entered an invalid index :-(";
 
             ui.displayOutput(message);
+            return Optional.empty();
         }
     }
 
@@ -168,6 +176,21 @@ public class TasksController {
             if (printMessage) {
                 view.displayTaskDeleted(deleted, tasks.size(), ui);
             }
+
+            storage.writeTasks(tasks);
+        } catch (StorageException e) {
+            ui.displayOutput(e.getMessage());
+        }
+    }
+
+    public void setTaskToUndoneByUuid(UUID uuid) throws UiException {
+        try {
+            List<Task> tasks = storage.getTasks();
+
+            tasks.stream()
+                    .filter(task -> task.getUuid().equals(uuid))
+                    .findFirst()
+                    .ifPresent(task -> task.setDone(false));
 
             storage.writeTasks(tasks);
         } catch (StorageException e) {

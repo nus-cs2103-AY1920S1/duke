@@ -2,8 +2,12 @@ package duke.command.command;
 
 import duke.command.Command;
 import duke.command.CommandType;
+import duke.command.UndoAction;
+import duke.task.Task;
 import error.command.CommandCreationException;
 import error.ui.UiException;
+
+import java.util.Optional;
 
 /***
  * <p>
@@ -12,6 +16,7 @@ import error.ui.UiException;
  */
 public class DoneCommand extends Command {
     private int completedTaskIndex;
+    private Optional<Task> done;
     private static final String INVALID_INDEX_MESSAGE = "☹ OOPS!!! PLease enter a valid index! :-(";
 
     public DoneCommand(String doneIndex) throws CommandCreationException {
@@ -31,6 +36,16 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute() throws UiException {
-        tasksController.setTaskToDone(completedTaskIndex);
+        done = tasksController.setTaskToDone(completedTaskIndex);
+    }
+
+    @Override
+    public Optional<UndoAction> getUndoAction() {
+        if (done.isEmpty()) {
+            return Optional.empty();
+        } else {
+            Task restore = done.get();
+            return Optional.of(() -> tasksController.setTaskToUndoneByUuid(restore.getUuid()));
+        }
     }
 }

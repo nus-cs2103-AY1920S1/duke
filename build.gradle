@@ -43,5 +43,5 @@ run {
 
 application {
     // Change this to your main class.
-    mainClassName = "GUI"
+    mainClassName = "Gui"
 }

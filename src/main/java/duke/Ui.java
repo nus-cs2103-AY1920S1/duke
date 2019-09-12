@@ -3,7 +3,6 @@ package duke;
 import duke.task.Task;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 
 /**
  * Handles user's interactions with the bot's ui, printing appropriate messages when needed to indicate
@@ -11,36 +10,17 @@ import java.util.Scanner;
  */
 public class Ui {
 
+    private String stringToPrint;
+
+    public String getStringToPrint() {
+        return stringToPrint;
+    }
+
     /**
      * Prints loading error message if any exception thrown when file with tasks is loaded from storage or created.
      */
     public void showLoadingError() {
-        System.out.println("\u2639 OOPS!!! Unable to load file. Try again!");
-    }
-
-    /**
-     * Prints welcome message to user to prompt user input.
-     */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }
-
-    /**
-     * Reads user input and returns it.
-     *
-     * @return userInput that was scanned.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
-        return userInput;
-    }
-
-    /**
-     * Prints line before and after the bot's response to a command.
-     */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
+        stringToPrint = "\u2639 OOPS!!! Unable to load file. Try again!\n";
     }
 
     /**
@@ -49,14 +29,14 @@ public class Ui {
      * @param error Error message to be printed to screen.
      */
     public void showError(String error) {
-        System.out.println(error);
+        stringToPrint = error + "\n";
     }
 
     /**
      * Prints exit message before the bot is closed.
      */
     public void showExit() {
-        System.out.println("Bye. Hope to see you again soon!");
+        stringToPrint = "Bye. Hope to see you again soon!\n";
     }
 
     /**
@@ -66,11 +46,14 @@ public class Ui {
      */
     public void showTasks(TaskList taskList) {
         LinkedList<Task> tasks = taskList.getTasks();
+        String result = "";
 
-        System.out.println("Here are the tasks in your list:");
+        result += "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i));
+            result += (i + 1) + "." + tasks.get(i) + "\n";
         }
+
+        stringToPrint = result;
     }
 
     /**
@@ -79,8 +62,12 @@ public class Ui {
      * @param t Changed Task.
      */
     public void showChangedTask(Task t) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t);
+        String result = "";
+
+        result += "Nice! I've marked this task as done:\n";
+        result += t + "\n";
+
+        stringToPrint = result;
     }
 
     /**
@@ -89,56 +76,64 @@ public class Ui {
      * @param t Deleted task.
      */
     public void showDeletedTask(Task t) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(t);
+        String result = "";
+
+        result += "Noted. I've removed this task:\n";
+        result += t + "\n";
+
+        stringToPrint = result;
     }
 
     /**
      * Prints number of tasks left in the list once a task has been deleted through the delete command.
      *
-     * @param taskList List of tasks.
+     * @param tasks List of tasks.
      */
-    public void showNumTasks(TaskList taskList) {
-        int size = taskList.getTasks().size();
-        System.out.print("Now you have " + size);
-        if (size == 1) {
-            System.out.println(" task in the list.");
+    public void showNumTasks(TaskList tasks) {
+        int taskListSize = tasks.getTasks().size();
+        String result = "";
+
+        result += "Now you have " + taskListSize;
+        if (taskListSize == 1) {
+            result += " task in the list.\n";
         } else {
-            System.out.println(" tasks in the list.");
+            result += " tasks in the list.\n";
         }
+
+        stringToPrint += result;
     }
 
     /**
      * Prints a task that was added to task list through the commands deadline, event, or todo.
      *
      * @param task Added task.
-     * @param tasks List of tasks.
      */
-    public void printAddedTask(Task task, TaskList tasks) {
-        int taskListSize = tasks.getTasks().size();
+    public void printAddedTask(Task task) {
+        String result = "";
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.print("Now you have " + taskListSize);
-        if (taskListSize == 1) {
-            System.out.println(" task in the list.");
-        } else {
-            System.out.println(" tasks in the list.");
-        }
+        result += "Got it. I've added this task:\n";
+        result += task + "\n";
+
+        stringToPrint = result;
+
     }
 
     public void printFoundTasks(LinkedList<Task> foundTasks) {
         if (foundTasks.size() == 0) {
-            System.out.println("No matching tasks found!");
+            stringToPrint = "No matching tasks found!\n";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            String result = "";
+
+            result += "Here are the matching tasks in your list:\n";
 
             for (int i = 0; i < foundTasks.size(); i++) {
                 Task t = foundTasks.get(i);
                 if (!t.getDescription().equals("fake task")) {
-                    System.out.println((i + 1) + "." + t);
+                    result += (i + 1) + "." + t + "\n";
                 }
             }
+
+            stringToPrint = result;
         }
     }
 

@@ -25,18 +25,6 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
-        dialog = l;
-        displayPicture = iv;
-
-        dialog.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(dialog, displayPicture);
-    }
-
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));

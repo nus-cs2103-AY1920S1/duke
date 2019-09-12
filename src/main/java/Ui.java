@@ -14,8 +14,8 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String NEW_LINE = "\n";
-    private static final String INTRO_MESSAGE = "Hello! I'm Duke!\n" + "What can I do for you?";
-    private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
+    private static final String INTRO_MESSAGE = "Hello! I'm Damith!\n" + "What can I do for you?";
+    private static final String GOODBYE_MESSAGE = "Bye. Please come for lectures!";
     private static final String ADDED_MESSAGE = "Got it. I've added this task:\n";
     private static final String DELETED_MESSAGE = "Noted. I've removed this task:\n";
     private static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n";

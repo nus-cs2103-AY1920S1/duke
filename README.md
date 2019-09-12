@@ -22,7 +22,7 @@
 
 **Screenshot**
 
-![Screenshot of Duke](screenshot.png)
+![Screenshot of Duke](docs/Ui.png)
 
 * If you have feedback or bug reports, please post in [se-edu/dukeModel issue tracker](https://github.com/se-edu/dukeModel/issues).
 * We welcome pull requests too.

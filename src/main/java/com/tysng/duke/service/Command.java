@@ -46,6 +46,29 @@ public class Command {
         this.addedTask = addedTask;
     }
 
+    private static void checkArgsLength(String[] command) throws CommandException {
+        switch (command[0]) {
+        case "done":
+        case "delete":
+            if (command.length <= 1) {
+                throw new CommandException("☹ OOPS!!! You must specify a task number.");
+            }
+            break;
+
+        case "find":
+            if (command.length <= 1) {
+                throw new CommandException("☹ OOPS!!! You must specify a keyword.");
+            }
+            break;
+        case "todo":
+            if (command.length <= 1) {
+                throw new CommandException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            break;
+        }
+    }
+
+
     /**
      * Creates a new command from the user input. This static factory method parses a line of user
      * input into a Command object.
@@ -59,30 +82,21 @@ public class Command {
         Date date;
 
         String[] command = instruction.split(" ");
+
+        Command.checkArgsLength(command);
+
         switch (command[0]) {
         case "list":
             return new Command(CommandType.LIST);
         case "bye":
             return new Command(CommandType.BYE);
         case "done":
-            if (command.length <= 1) {
-                throw new CommandException("☹ OOPS!!! You must specify a task number.");
-            }
             return new Command(CommandType.DONE, Integer.parseInt(command[1]));
         case "delete":
-            if (command.length <= 1) {
-                throw new CommandException("☹ OOPS!!! You must specify a task number.");
-            }
             return new Command(CommandType.DELETE, Integer.parseInt(command[1]));
         case "find":
-            if (command.length <= 1) {
-                throw new CommandException("☹ OOPS!!! You must specify a keyword.");
-            }
             return new Command(CommandType.FIND, command[1]);
         case "todo":
-            if (command.length <= 1) {
-                throw new CommandException("☹ OOPS!!! The description of a todo cannot be empty.");
-            }
             return new Command(CommandType.ADD, new Todo(
                     String.join(" ", Arrays.copyOfRange(command, 1, command.length))));
         case "deadline":
@@ -119,6 +133,7 @@ public class Command {
 
         }
     }
+
 
     public int getTargetIndex() {
         return targetIndex;

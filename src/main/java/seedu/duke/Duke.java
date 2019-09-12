@@ -5,6 +5,7 @@ import seedu.duke.commands.*;
 
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.storage.Storage;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Event;
 import seedu.duke.trackables.Task;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 public class Duke {
 
     static final String HORIZONTAL_LINE = "______________________________"
-            + "______________________________";
+        + "______________________________";
 
     enum CommandName {
         LIST("list"),
@@ -54,24 +55,27 @@ public class Duke {
 
     /**
      * Main Method.
+     *
      * @param args string arguments for console.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Storage.StorageOperationException {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
 
         System.out.println("Hello from\n" + logo);
 
         greet();
 
+        taskList = Storage.getInstance().loadFromDisk();
+
         Scanner in = new Scanner(System.in);
 
         while (continueRunning) {
-            String input  = in.nextLine();
+            String input = in.nextLine();
             try {
                 parseCommand(input);
             } catch (InvalidCommandException | InvalidArgumentException ex) {
@@ -82,9 +86,11 @@ public class Duke {
 
     /**
      * Parses the input command into the specific Command object to execute.
+     *
      * @param input Input from the console.
      */
-    private static void parseCommand(String input) throws InvalidCommandException, InvalidArgumentException {
+    private static void parseCommand(String input) throws InvalidCommandException,
+        InvalidArgumentException, Storage.StorageOperationException {
 
         // Identify Command
         CommandName command = null;
@@ -107,7 +113,8 @@ public class Duke {
             } else if (command == CommandName.DONE) {
                 try {
                     int taskId = Integer.parseInt(matcher.group(2));
-                    taskList.get(taskId-1);
+                    // Try to get task. Will Throw and error if is is not valid.
+                    taskList.get(taskId - 1);
                     commandToExecute = new DoneCommand(taskId);
                 } catch (IndexOutOfBoundsException ibx) {
                     throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
@@ -118,16 +125,18 @@ public class Duke {
             } else if (command == CommandName.EVENT) {
                 commandToExecute = new EventCommand(new Event(matcher.group(2), matcher.group(3)));
             } else if (command == CommandName.DEADLINE) {
-                commandToExecute = new DeadlineCommand(new Deadline(matcher.group(2),matcher.group(3)));
+                commandToExecute = new DeadlineCommand(new Deadline(matcher.group(2), matcher.group(3)));
             } else if (command == CommandName.DELETE) {
                 try {
                     int taskId = Integer.parseInt(matcher.group(2));
-                    taskList.get(taskId-1);
+                    taskList.get(taskId - 1);
                     commandToExecute = new DeleteCommand(taskId);
                 } catch (IndexOutOfBoundsException ibx) {
                     throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
-                }            } else if (command == CommandName.BYE) {
+                }
+            } else if (command == CommandName.BYE) {
                 commandToExecute = new ByeCommand();
+                Storage.getInstance().saveToDisk(taskList);
             } else {
                 // Code should never reach here. If it does, return to caller.
                 return;
@@ -185,7 +194,7 @@ public class Duke {
     private static void greet() {
         printLine();
         System.out.println("\t" + "Hello! I'm Duke\n\t"
-                + "What can I do for you?");
+            + "What can I do for you?");
         printLine();
     }
 }

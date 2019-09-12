@@ -4,6 +4,7 @@ import static jermi.misc.Constant.COMMAND_LIST_MESSAGE;
 import static jermi.misc.Constant.COMMAND_TASK_FORMAT_WITH_INDEX;
 import static jermi.misc.Constant.DUMMY_ARRAY_SIZE;
 import static jermi.misc.Constant.INSERT_MESSAGE_INDEX;
+import static jermi.misc.Constant.PARSER_LIST;
 import static jermi.misc.Constant.TASK_LIST_START_INDEX;
 
 import jermi.component.Formatter;
@@ -11,6 +12,7 @@ import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.exception.JermiException;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -53,5 +55,15 @@ public class ListCommand extends Command {
     @Override
     public boolean shouldExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ListCommand;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(PARSER_LIST);
     }
 }

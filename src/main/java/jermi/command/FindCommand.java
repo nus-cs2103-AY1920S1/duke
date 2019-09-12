@@ -12,7 +12,9 @@ import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.exception.JermiException;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -62,5 +64,22 @@ public class FindCommand extends Command {
     @Override
     public boolean shouldExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (!(obj instanceof FindCommand)) {
+            return false;
+        } else {
+            FindCommand other = (FindCommand) obj;
+            return Arrays.equals(this.keywords, other.keywords);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.keywords);
     }
 }

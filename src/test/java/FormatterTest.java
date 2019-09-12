@@ -1,3 +1,4 @@
+import static jermi.misc.Constant.FORMATTER_BORDER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -6,7 +7,6 @@ import jermi.component.Formatter;
 
 public class FormatterTest {
     private static final Formatter FORMATTER = new Formatter();
-    private static final String FORMATTER_BORDER = "* * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
 
     @Test
     public void greet_welcomeMessage() {
@@ -96,7 +96,7 @@ public class FormatterTest {
                 "todo",
                 "event",
                 "deadline",
-                "remove",
+                "delete",
                 "find",
                 "bye",
                 "done",
@@ -119,13 +119,13 @@ public class FormatterTest {
                 "event meeting /at 28/11/2019",
                 "deadline homework /by 29 Aug",
                 "done 2",
-                "remove 3",
+                "delete 3",
                 "find book meeting"};
         String[] expectedOutputs = {"todo",
                 "event",
                 "deadline",
                 "done",
-                "remove",
+                "delete",
                 "find"};
 
         assertEquals(expectedOutputs[0], FORMATTER.readCommand(userInputs[0]));
@@ -149,7 +149,7 @@ public class FormatterTest {
                 "todo",
                 "event",
                 "deadline",
-                "remove",
+                "delete",
                 "find",
                 "bye",
                 "done",
@@ -181,7 +181,7 @@ public class FormatterTest {
                 "event meeting /at 28/11/2019",
                 "deadline homework /by 29 Aug",
                 "done 2",
-                "remove 3",
+                "delete 3",
                 "find book meeting"};
         String[] expectedOutputs = {"read book",
                 "meeting /at 28/11/2019",

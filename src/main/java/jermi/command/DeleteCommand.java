@@ -6,6 +6,8 @@ import static jermi.misc.Constant.COMMAND_PLURAL_NOUN;
 import static jermi.misc.Constant.COMMAND_SINGULAR_NOUN;
 import static jermi.misc.Constant.COMMAND_TASK_FORMAT;
 
+import java.util.Objects;
+
 import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.component.Formatter;
@@ -47,5 +49,22 @@ public class DeleteCommand extends MutateTaskCommand {
                 String.format(COMMAND_TASK_FORMAT, task),
                 String.format(COMMAND_NUMBER_OF_TASKS, numOfTasks,
                         numOfTasks == 1 ? COMMAND_SINGULAR_NOUN : COMMAND_PLURAL_NOUN));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (!(obj instanceof DeleteCommand)) {
+            return false;
+        } else {
+            DeleteCommand other = (DeleteCommand) obj;
+            return this.index == other.index;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.index);
     }
 }

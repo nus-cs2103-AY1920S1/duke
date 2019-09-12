@@ -12,7 +12,7 @@ import static jermi.misc.Constant.FORMATTER_WELCOME_MESSAGE_LINE_1;
 import static jermi.misc.Constant.FORMATTER_WELCOME_MESSAGE_LINE_2;
 
 /**
- * A class that deals with interaction with the user.
+ * A class that deals with formatting I/O strings.
  */
 public class Formatter {
     /**

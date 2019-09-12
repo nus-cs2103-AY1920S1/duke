@@ -3,6 +3,8 @@ package jermi.command;
 import static jermi.misc.Constant.COMMAND_DONE_MESSAGE;
 import static jermi.misc.Constant.COMMAND_TASK_FORMAT;
 
+import java.util.Objects;
+
 import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.component.Formatter;
@@ -39,5 +41,22 @@ public class DoneCommand extends MutateTaskCommand {
         task.markAsDone();
         storage.taskListToFile();
         return formatter.echo(COMMAND_DONE_MESSAGE, String.format(COMMAND_TASK_FORMAT, task));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (!(obj instanceof DoneCommand)) {
+            return false;
+        } else {
+            DoneCommand other = (DoneCommand) obj;
+            return this.index == other.index;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.index);
     }
 }

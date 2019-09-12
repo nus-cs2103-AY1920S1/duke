@@ -13,6 +13,8 @@ import static jermi.misc.Constant.COMMAND_ADD_PREPOSITION_DATE_TIME_SPLIT_LIMIT;
 import static jermi.misc.Constant.COMMAND_SINGULAR_NOUN;
 import static jermi.misc.Constant.COMMAND_TASK_FORMAT;
 
+import java.util.Objects;
+
 import jermi.component.Formatter;
 import jermi.component.Storage;
 import jermi.component.TaskList;
@@ -110,5 +112,22 @@ public class AddCommand extends Command {
     @Override
     public boolean shouldExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (!(obj instanceof AddCommand)) {
+            return false;
+        } else {
+            AddCommand other = (AddCommand) obj;
+            return this.taskType == other.taskType && this.description.equals(other.description);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.taskType, this.description);
     }
 }

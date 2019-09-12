@@ -1,5 +1,9 @@
 package jermi.command;
 
+import static jermi.misc.Constant.PARSER_EXIT;
+
+import java.util.Objects;
+
 import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.component.Formatter;
@@ -38,5 +42,15 @@ public class ExitCommand extends Command {
     @Override
     public boolean shouldExit() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof ExitCommand;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(PARSER_EXIT);
     }
 }

@@ -4,6 +4,7 @@ import static weomucat.duke.Duke.LOCALE;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 import weomucat.duke.Pair;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.DeleteTaskCommandListener;
@@ -127,7 +128,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   void deleteTask(int i) throws DukeException {
-    Task task = getTask(i);
+    Task task = this.tasks.getUnsafe(i);
 
     // Remove task
     this.tasks.remove(i);
@@ -147,10 +148,12 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   void doneTask(int i) throws DukeException {
-    Task task = getTask(i);
+    Task task = this.tasks.getUnsafe(i);
 
     // Set task to done
     task.setDone(true);
+
+    this.tasks.populateRecurringTasks();
 
     // Update ModifyTaskListeners
     modifyTaskUpdate(new Message("Nice! I've marked this task as done:"), task);
@@ -164,7 +167,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   private void eventAt(int taskIndex, int atIndex) throws DukeException {
-    Task task = getTask(taskIndex);
+    Task task = this.tasks.getUnsafe(taskIndex);
 
     if (!(task instanceof EventTask)) {
       throw new InvalidIndexException("The task selected is not an event.");
@@ -182,40 +185,21 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * Notify listeners tasks which description matches the keyword.
    */
   void findTask(String keyword) {
-    NumberedTaskList result = new NumberedTaskList();
-
     // Case insensitive search
     // Use a single locale to prevent issues with case conversion.
-    keyword = keyword.toLowerCase(LOCALE);
-    for (int i = 0; i < this.tasks.size(); i++) {
-      Task task = this.tasks.get(i);
+    String key = keyword.toLowerCase(LOCALE);
+    listFilteredTasks(task -> {
       String description = task.getDescription().toLowerCase(LOCALE);
-      if (description.contains(keyword)) {
-        result.add(new Pair<>(i + 1, task));
-      }
-    }
-
-    // Update ListTaskListeners
-    for (ListTaskListener listener : this.listTaskListeners) {
-      listener.listTaskUpdate(new Message("Here are the matching tasks in your list:"), result);
-    }
+      return description.contains(key);
+    }, new Message("Here are the matching tasks in your list:"));
   }
 
   /**
    * Notify listeners to list tasks.
    */
-  void listTask() {
-    NumberedTaskList result = new NumberedTaskList();
-
-    for (int i = 0; i < this.tasks.size(); i++) {
-      Task task = this.tasks.get(i);
-      result.add(new Pair<>(i + 1, task));
-    }
-
-    // Update ListTaskListeners
-    for (ListTaskListener listener : this.listTaskListeners) {
-      listener.listTaskUpdate(new Message("Here are the tasks in your list:"), result);
-    }
+  void listTasks() {
+    listFilteredTasks(task -> !task.isDone(), new Message("Here are the undone tasks in your list:"));
+    listFilteredTasks(Task::isDone, new Message("Here are the done tasks:"));
   }
 
   /**
@@ -226,7 +210,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   private void snoozeTask(int taskIndex, Duration duration) throws DukeException {
-    Task task = getTask(taskIndex);
+    Task task = this.tasks.getUnsafe(taskIndex);
 
     if (!(task instanceof SnoozableTask)) {
       throw new InvalidIndexException("The task selected cannot be snoozed!");
@@ -239,12 +223,25 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     modifyTaskUpdate(new Message("Got it. I've snoozed this task:"), task);
   }
 
-  private Task getTask(int i) throws InvalidIndexException {
-    try {
-      // Get task from tasks
-      return this.tasks.get(i);
-    } catch (IndexOutOfBoundsException e) {
-      throw new InvalidIndexException("That is not a valid index of a task.");
+  private NumberedTaskList filterTasks(Predicate<Task> predicate) {
+    NumberedTaskList result = new NumberedTaskList();
+
+    for (int i = 0; i < this.tasks.size(); i++) {
+      Task task = this.tasks.get(i);
+      if (predicate.test(task)) {
+        result.add(new Pair<>(i + 1, task));
+      }
+    }
+
+    return result;
+  }
+
+  private void listFilteredTasks(Predicate<Task> predicate, Message message) {
+    NumberedTaskList filtered = filterTasks(predicate);
+
+    // Update ListTaskListeners
+    for (ListTaskListener listener : this.listTaskListeners) {
+      listener.listTaskUpdate(message, filtered);
     }
   }
 
@@ -285,7 +282,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
 
   @Override
   public void listTaskCommandUpdate() {
-    listTask();
+    listTasks();
   }
 
   @Override

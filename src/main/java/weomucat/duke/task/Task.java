@@ -1,6 +1,7 @@
 package weomucat.duke.task;
 
 import java.io.Serializable;
+import java.util.UUID;
 import weomucat.duke.ui.Message;
 
 /**
@@ -9,6 +10,7 @@ import weomucat.duke.ui.Message;
 public abstract class Task implements Serializable {
 
   private String description;
+  private UUID uuid;
   private boolean done;
 
   /**
@@ -20,6 +22,20 @@ public abstract class Task implements Serializable {
     assert description != null;
 
     this.description = description;
+    this.uuid = UUID.randomUUID();
+  }
+
+  /**
+   * Returns the description of this Task.
+   *
+   * @return description of this Task
+   */
+  public String getDescription() {
+    return description;
+  }
+
+  public boolean isDone() {
+    return this.done;
   }
 
   /**
@@ -31,13 +47,12 @@ public abstract class Task implements Serializable {
     this.done = done;
   }
 
-  /**
-   * Returns the description of this Task.
-   *
-   * @return description of this Task
-   */
-  public String getDescription() {
-    return description;
+  public UUID getUuid() {
+    return uuid;
+  }
+
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
   }
 
   public abstract Message toMessage();

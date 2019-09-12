@@ -4,8 +4,8 @@ import exception.DukeException;
 import task.Task;
 import task.TaskList;
 import task.ToDo;
-import task.Deadline;
 import task.Event;
+import task.Deadline;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,13 +26,21 @@ public class Storage {
      * Storage Constructor.
      * @param filepath the file location in local pc.
      */
-    public Storage(String filepath) {
+    public Storage(String filepath) throws DukeException {
         this.filepath = filepath;
         try {
             this.sc = new Scanner(new File(this.filepath));
         } catch (FileNotFoundException e) {
-            System.err.println(e);
+            throw new DukeException("No such file exits");
         }
+    }
+
+    /**
+     * Storage constructor when file is not found.
+     */
+    public Storage() {
+        this.filepath = null;
+        this.sc = null;
     }
 
     /**

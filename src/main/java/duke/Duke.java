@@ -3,6 +3,7 @@ package duke;
 import command.Command;
 import exception.DukeException;
 import parser.Parser;
+import storage.FakeStorage;
 import storage.Storage;
 import task.TaskList;
 import ui.Ui;
@@ -23,7 +24,13 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/tasks.txt");
+        try {
+            storage = new Storage("data/tasks.txt");
+        } catch (DukeException e) {
+            System.err.println(e);
+            System.out.println("You can still use Duke, but progress will not be saved");
+            storage = new FakeStorage();
+        }
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

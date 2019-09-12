@@ -41,7 +41,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
-     * Runs the Duke program.
+     * Starts the Duke GUI.
      */
     public static void run() {
 

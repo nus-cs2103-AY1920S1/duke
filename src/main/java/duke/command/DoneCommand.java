@@ -58,6 +58,13 @@ public class DoneCommand extends Command {
     }
 
     /**
+     * Get the command string
+     */
+    public String getCommand() {
+        return this.command;
+    }
+
+    /**
      * Compare another object with this object to see if they have the same
      * information.
      *

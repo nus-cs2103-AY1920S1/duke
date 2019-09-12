@@ -20,6 +20,7 @@ public class ExitCommand extends Command {
         return "Good bye!";
     }
 
+
     /**
      * Checks if this is the exit command.
      *
@@ -28,6 +29,13 @@ public class ExitCommand extends Command {
     @Override
     public boolean isExit() {
         return true;
+    }
+
+    /**
+     * Get the command string
+     */
+    public String getCommand() {
+        return this.command;
     }
 
     /**

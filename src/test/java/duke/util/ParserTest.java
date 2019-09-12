@@ -51,12 +51,14 @@ public class ParserTest {
     @Test
     void parseUserInput() throws Exception {
         String inputA = "done 2";
-        Command commandExpectedA = new DoneCommand(inputA);
+        Command commandExpectedA = new DoneCommand("2");
         Command commandActualA = parser.parseUserInput(inputA);
+        System.out.println(commandActualA.getCommand());
+        System.out.println(commandExpectedA.getCommand());
         assertTrue(commandExpectedA.equals(commandActualA));
 
         String inputB = "delete 1";
-        Command commandExpectedB = new DeleteCommand(inputB);
+        Command commandExpectedB = new DeleteCommand("1");
         Command commandActualB = parser.parseUserInput(inputB);
         assertTrue(commandExpectedB.equals(commandActualB));
 
@@ -96,7 +98,7 @@ public class ParserTest {
         String inputI = "delete "; //exception
         Exception exceptionI = assertThrows(DukeException.class, () ->
                 parser.parseUserInput(inputI));
-        assertEquals("☹ OOPS!!! Please input a number for delete.", exceptionI.getMessage());
+        assertEquals("☹ OOPS!!! Please input a number after delete and nothing else.", exceptionI.getMessage());
 
         String inputJ = "todo "; //exception
         Exception exceptionJ = assertThrows(DukeException.class, () ->
@@ -112,24 +114,5 @@ public class ParserTest {
         Exception exceptionL = assertThrows(DukeException.class, () ->
                 parser.parseUserInput(inputL));
         assertEquals("☹ OOPS!!! You need a /at to separate out the date time for this task.", exceptionL.getMessage());
-        /*
-        AddCommand test1 = (AddCommand) commandActualF;
-        AddCommand test2 = (AddCommand) commandExpectedF;
-
-        System.out.println(Arrays.toString(test1.getParsedString()));
-        System.out.println(Arrays.toString(test2.getParsedString()));
-        System.out.println(test1.getDate());
-        System.out.println(test2.getDate());
-        System.out.println(commandActualE.equals(commandExpectedE));
-
-
-        assertEquals(commandExpectedA, (commandActualA));
-        assertEquals(commandExpectedB, commandActualB);
-        assertEquals(commandExpectedC, commandActualC);
-        assertEquals(commandExpectedD, commandActualD);
-        assertEquals(commandExpectedE, commandActualE);
-        assertEquals(commandExpectedF, commandActualF);
-        assertEquals(commandExpectedG, commandActualG);
-        */
     }
 }

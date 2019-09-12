@@ -48,6 +48,13 @@ public class FindCommand extends Command {
         return false;
     }
 
+    /**
+     * Get the command string
+     */
+    public String getCommand() {
+        return this.command;
+    }
+
     @Override
     public boolean equals(Object o) {
 

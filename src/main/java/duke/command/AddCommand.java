@@ -111,10 +111,16 @@ public class AddCommand extends Command {
      *
      * @return false as it is an AddCommand.
      */
-
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    /**
+     * Get the command string
+     */
+    public String getCommand() {
+        return this.command;
     }
 
     /**
@@ -124,7 +130,6 @@ public class AddCommand extends Command {
      * @param o The other object that is going to be compared to this.
      * @return true or false based on the execution of the method.
      */
-
     // Overriding equals() to compare two AddCommand objects
     @Override
     public boolean equals(Object o) {

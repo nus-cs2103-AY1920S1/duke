@@ -37,6 +37,13 @@ public abstract class Task {
                 + dateWithoutDay;
     }
 
+    public static boolean equal(Calendar time1, Calendar time2) {
+        return time1.get(Calendar.DAY_OF_MONTH) == time2.get(Calendar.DAY_OF_MONTH)
+                && time1.get(Calendar.MONTH) == time2.get(Calendar.MONTH)
+                && time1.get(Calendar.YEAR) == time2.get(Calendar.YEAR)
+                && time1.get(Calendar.HOUR_OF_DAY) == time2.get(Calendar.HOUR_OF_DAY)
+                && time1.get(Calendar.MINUTE) == time2.get(Calendar.MINUTE);
+    }
     /**
      * Creates a task object with description as input.
      * @param des description of task.

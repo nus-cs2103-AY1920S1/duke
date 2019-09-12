@@ -92,8 +92,8 @@ public class Event extends Task {
             return false;
         } else {
             return this.getDescription().equals(((Event) o).getDescription())
-                    && this.startTime.equals(((Event) o).startTime)
-                    && this.endTime.equals(((Event) o).endTime);
+                    && equal(this.startTime, ((Event) o).startTime)
+                    && equal(this.endTime, ((Event) o).endTime);
         }
     }
 }

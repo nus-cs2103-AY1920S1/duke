@@ -65,7 +65,7 @@ public class Deadline extends Task {
             return false;
         } else {
             return this.getDescription().equals(((Deadline) o).getDescription())
-                    && this.time.equals(((Deadline) o).time);
+                    && equal(this.time, ((Deadline) o).time);
         }
     }
 }

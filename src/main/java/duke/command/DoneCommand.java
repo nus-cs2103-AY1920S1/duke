@@ -22,16 +22,13 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task taskChanged = tasks.markDone(taskNum);
+
         ui.showChangedTask(taskChanged);
+
         try {
             storage.writeToFile(tasks);
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

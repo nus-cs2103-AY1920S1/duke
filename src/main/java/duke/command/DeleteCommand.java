@@ -22,17 +22,14 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task taskChanged = tasks.deleteTask(taskNum);
+
         ui.showDeletedTask(taskChanged);
         ui.showNumTasks(tasks);
+
         try {
             storage.writeToFile(tasks);
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

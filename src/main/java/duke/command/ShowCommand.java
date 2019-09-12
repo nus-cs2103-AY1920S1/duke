@@ -14,8 +14,4 @@ public class ShowCommand extends Command {
         ui.showTasks(tasks);
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

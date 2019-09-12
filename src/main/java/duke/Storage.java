@@ -35,16 +35,16 @@ public class Storage {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
 
-        if (!file.exists()) {
+        if (file.exists()) {
             try {
-                file.createNewFile();
-            } catch (IOException e) {
+                tasks = readData(file, tasks);
+            } catch (FileNotFoundException e) {
                 throw new DukeException(e.getMessage());
             }
         } else {
             try {
-                tasks = readData(file, tasks);
-            } catch (FileNotFoundException e) {
+                file.createNewFile();
+            } catch (IOException e) {
                 throw new DukeException(e.getMessage());
             }
         }
@@ -57,21 +57,25 @@ public class Storage {
         while (readFile.hasNext()) {
             String nextTask = readFile.nextLine();
             String[] details = nextTask.split(Pattern.quote(" | "));
-
             assert details.length == 3 || details.length == 4;
 
             String type = details[0];
-            Task task;
+            Task task = new Task("dummy task");
 
             if (type.equals("T")) {
                 task = new Todo(details[2]);
             } else if (type.equals("D")) {
                 task = new Deadline(details[2], details[3]);
-            } else {
+            } else if (type.equals("E")) {
                 task = new Event(details[2], details[3]);
+            } else {
+                assert false;
             }
 
-            if (details[1].equals("1")) task.markAsDone();
+            if (details[1].equals("1")) {
+                task.markAsDone();
+            }
+
             tasks.add(task);
         }
 
@@ -89,9 +93,13 @@ public class Storage {
         LinkedList<Task> tasks = taskList.getTasks();
         FileWriter fw = new FileWriter(filePath);
         String toWrite = "";
+
+        int lastTask = tasks.size() - 1;
         for (int i = 0; i < tasks.size(); i++) {
             toWrite += tasks.get(i).toSave();
-            if (i != tasks.size() - 1) toWrite += "\n";
+            if (i != lastTask) {
+                toWrite += "\n";
+            }
         }
         fw.write(toWrite);
         fw.close();

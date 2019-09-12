@@ -21,11 +21,4 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
-    /**
-     * Returns a boolean based on whether a user command requires the Duke Bot to exit or not.
-     *
-     * @return Boolean that is true only for the bye command.
-     */
-    public abstract boolean isExit();
-
 }

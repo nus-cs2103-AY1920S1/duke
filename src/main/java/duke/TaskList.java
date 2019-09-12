@@ -29,6 +29,13 @@ public class TaskList {
         return taskList;
     }
 
+    private boolean isValidTaskNum(int taskNum) {
+        boolean isTooBig = taskNum + 1 > taskList.size();
+        boolean isTooSmall = taskNum + 1 <= 0;
+
+        return isTooBig || isTooSmall;
+    }
+
     /**
      * Marks a certain task as done in the taskList when user inputs done command.
      *
@@ -37,14 +44,13 @@ public class TaskList {
      * @throws DukeException if the taskNum passed in is not valid.
      */
     public Task markDone(int taskNum) throws DukeException {
-        if (taskNum + 1 > taskList.size() || taskNum + 1 < 0) {
+        if (isValidTaskNum(taskNum)) {
             throw new DukeException("\u2639 OOPS!!! This task does not exist.");
         }
 
         Task t = taskList.remove(taskNum);
         t.markAsDone();
         taskList.add(taskNum, t);
-
         assert t.getStatusIcon().equals("\u2713");
 
         return t;
@@ -60,7 +66,7 @@ public class TaskList {
     public Task deleteTask(int taskNum) throws DukeException {
         int taskListSize = taskList.size();
 
-        if (taskNum + 1 > taskListSize || taskNum + 1 < 0) {
+        if (isValidTaskNum(taskNum)) {
             throw new DukeException("\u2639 OOPS!!! This task does not exist.");
         }
 
@@ -79,7 +85,6 @@ public class TaskList {
         int taskListSize = taskList.size();
 
         taskList.add(t);
-
         assert taskList.size() == taskListSize + 1;
     }
 

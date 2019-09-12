@@ -131,4 +131,26 @@ public class TaskList {
         }
         return results;
     }
+
+    /**
+     * Returns an ArrayList containing the Tasks with descriptions containing a word that
+     * fuzzy-matches the keyword provided.
+     *
+     * @param keyword The keyword to search for in the TaskList
+     * @return An ArrayList containing the Tasks which fuzzy-matches the keyword.
+     */
+    public ArrayList<Task> relaxedSearch(String keyword) {
+        assert keyword != null;
+
+        ArrayList<Task> results = new ArrayList<>();
+        for (Task matchingTask : taskList) {
+            for (String word : matchingTask.getDescription().split("\\s+")) {
+                if (results.contains(matchingTask) || !duke.util.Match.matchFuzzyIgnoreCase(keyword, word, 3)) {
+                    break;
+                }
+                results.add(matchingTask);
+            }
+        }
+        return results;
+    }
 }

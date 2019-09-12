@@ -109,6 +109,8 @@ public class Parser {
             return new CompleteTaskCommand(arguments[0]);
         case COMMAND_SEARCH:
             return new SearchCommand(arguments[0]);
+        case COMMAND_RELAX_SEARCH:
+            return new RelaxedSearchCommand(arguments[0]);
         case COMMAND_ADD_TODO:
             //Fallthrough
         case COMMAND_ADD_DEADLINE:
@@ -176,6 +178,8 @@ public class Parser {
             return Type.COMMAND_COMPLETE_TASK;
         case "find":
             return Type.COMMAND_SEARCH;
+        case "relaxfind":
+            return Type.COMMAND_RELAX_SEARCH;
         default:
             throw new DukeUnknownCommandException();
         }

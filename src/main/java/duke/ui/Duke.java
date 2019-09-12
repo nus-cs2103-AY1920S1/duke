@@ -5,6 +5,7 @@ import duke.command.Command;
 import duke.command.CompleteTaskCommand;
 import duke.command.DeleteTaskCommand;
 import duke.command.SearchCommand;
+import duke.command.RelaxedSearchCommand;
 import duke.command.DukeUnknownCommandException;
 import duke.command.Parser;
 
@@ -125,6 +126,8 @@ public class Duke {
             return executeDeleteTaskCommand((DeleteTaskCommand) command);
         case COMMAND_SEARCH:
             return executeSearchCommand((SearchCommand) command);
+        case COMMAND_RELAX_SEARCH:
+            return executeSearchCommand((RelaxedSearchCommand) command);
         case COMMAND_SHOW_LIST:
             return executeShowListCommand();
         case COMMAND_EXIT:
@@ -202,6 +205,33 @@ public class Duke {
 
         String[] parameters = command.getArgumentsUsed();
         ArrayList<Task> results = taskList.search(parameters[0]);
+        int resultsCount = results.size();
+
+        if (resultsCount > 0) {
+            StringBuilder output = new StringBuilder();
+            int width = Integer.toString(resultsCount).length();
+            int count = 0;
+
+            output.append("Here are the matching task(s) in your list:");
+
+            for (Task task : taskList.search(parameters[0])) {
+                count++;
+                output.append(String.format("\n%0" + width + "d. %s", count, task.toString()));
+            }
+
+            return output.toString();
+        } else {
+            return new StringBuilder("There are no matching tasks in your list!\n")
+                    .append("Maybe you can check your query, or use relaxfind instead!")
+                    .toString();
+        }
+    }
+
+    private String executeSearchCommand(RelaxedSearchCommand command) {
+        assert command != null;
+
+        String[] parameters = command.getArgumentsUsed();
+        ArrayList<Task> results = taskList.relaxedSearch(parameters[0]);
         int resultsCount = results.size();
 
         if (resultsCount > 0) {

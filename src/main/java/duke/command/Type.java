@@ -16,6 +16,7 @@ public enum Type {
     COMMAND_DELETE_TASK(1, "task number"),
     COMMAND_COMPLETE_TASK(1, "task number"),
     COMMAND_SEARCH(1, "keyword"),
+    COMMAND_RELAX_SEARCH(1, "keyword"),
     COMMAND_ADD_TODO(1, "description"),
     COMMAND_ADD_DEADLINE(2, "description", "time", "/by"),
     COMMAND_ADD_EVENT(2, "description", "time", "/at");

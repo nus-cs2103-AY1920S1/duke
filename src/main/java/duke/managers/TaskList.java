@@ -8,8 +8,6 @@ package duke.managers;
 import duke.exceptions.DukeException;
 
 import duke.tasks.Event;
-import duke.tasks.ToDo;
-import duke.tasks.Deadline;
 import duke.tasks.Task;
 
 
@@ -73,7 +71,6 @@ public class TaskList {
         OptionalInt clashingTaskIndex = OptionalInt.empty();
         for (Task task : allTasks) {
             if (task instanceof Event) {
-                System.out.println("task is an event: " + task.toString());
                 String[] eventTimeArr = ((Event) task).getEventTime().split("[,]");
                 if (eventTimeArr[0].trim().equals(date)) {
                     clashingTaskIndex = noTimeClashes(timeToTime, index);
@@ -98,7 +95,6 @@ public class TaskList {
         String[] newEventTime = timeToTime.split("-");
         double newEventTime1 = processTime(newEventTime[0]);
         double newEventTime2 = processTime(newEventTime[1]);
-        System.out.println("index given is: " + index);
         Event targetEvent = (Event) allTasks.get(index);
         String[] targetEventTime = targetEvent.getEventTime().split(",")[1].split("-");
         double targetTime1 = processTime(targetEventTime[0]);

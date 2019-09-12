@@ -18,7 +18,6 @@ import duke.tasks.ToDo;
 import duke.tasks.Event;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.OptionalInt;
 
 public class AddCommand extends Command {

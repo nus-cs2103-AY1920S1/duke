@@ -66,7 +66,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
 
-        if(input.toLowerCase().equals("help")){
+        if(input.toLowerCase().startsWith("help")){
             handleHelpPage();
         } else{
             handleOperations(input);
@@ -78,7 +78,12 @@ public class MainWindow extends AnchorPane {
      */
     private void handleHelpPage(){
        Image jigglypuff = new Image(this.getClass().getResourceAsStream("/images/jigglypuff.png"));
-        dialogContainer.getChildren().addAll(new HelpBox("Welcome to help page!", jigglypuff));
+        //dialogContainer.getChildren().addAll(new HelpBox("Welcome to help page!", jigglypuff));
+
+        String helpLine1 = "Welcome to help page!\n";
+        String helpLine2 = "Here are some commands you can use:\n";
+        String helpLine3 = "list, todo, event, deadline, done, delete, find, bye";
+        dialogContainer.getChildren().addAll(new HelpBox(helpLine1 + helpLine2 + helpLine3, jigglypuff));
         userInput.clear();
 
     }

@@ -8,7 +8,7 @@ Duke is a Personal Assistant Chatbot that helps you keep track of different task
 
 ## Features 
 
-### Add Tasks and Delete Tasks 
+### Add and Delete Tasks 
 You can add and delete different types of tasks to the chatbot task manager.
 Currently, there are four types of tasks supported by Duke. These are the tasks you can input into the chatbot, to track your schedule.
 
@@ -45,7 +45,7 @@ Example of usage:
 'todo Borrow books'
 
 Expected outcome: 
-
+![Outcome of command 'todo'](/docs/Todo.png)
 
 
 ### `deadline` - Adds a DEADLINE task to the chatbot's tasklist
@@ -54,6 +54,8 @@ Example of usage:
 'deadline Submit CS2100 report /by 02/12/2019 1900'
 
 Expected outcome: 
+![Outcome of command 'deadline'](/docs/Deadline.png)
+
 
 ### `event` - Adds an EVENT task to the chatbot's tasklist
 
@@ -61,6 +63,7 @@ Example of usage:
 'event CS2103T team meeting /at 15/09/2019 1500-1800'
 
 Expected outcome: 
+![Outcome of command 'event'](/docs/Event.png)
 
 ### `fixed` - Adds a FIXED DURATION TASK to the chatbot's tasklist
 
@@ -68,11 +71,15 @@ Example of usage:
 'fixed Do my laundry /needs 2 hours
 
 Expected outcome:
+![Outcome of command 'fixed'](/docs/Fixed.png)
 
 ### `list` - Lists all the tasks added to the tasklist
 
 Example of usage:
 'list'
+
+Expected Outcome:
+![Outcome of command 'list'](/docs/List.png)
 
 ### `done` - Marks the task corresponding to inputted task number as 'done'
 
@@ -80,6 +87,7 @@ Example of usage:
 'done 1'
 
 Expected outcome: 
+![Outcome of command 'done 1'](/docs/Done.png)
 
 ### `delete` - Deletes the task corresponding to inputted task number
 
@@ -87,7 +95,7 @@ Example of usage:
 'delete 1'
 
 Expected outcome: 
-
+![Outcome of command 'delete 1'](/docs/Delete.png)
 
 ### `sort` - Sorts the task in the tasklist either according to date / type (as inputted)
 
@@ -95,6 +103,6 @@ Example of usage:
 'sort date'
 
 Expected outcome: 
-
+![Outcome of command 'sort date'](/docs/Sort.png)
 
 

@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.application.Platform;
 
 /**
@@ -28,6 +29,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        userInput.setFont(Font.font(18));
         greetUser();
     }
 

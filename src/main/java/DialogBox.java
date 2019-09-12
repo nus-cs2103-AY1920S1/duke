@@ -6,11 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 
 public class DialogBox extends HBox {
     @FXML
@@ -29,6 +31,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(Font.font(18));
         displayPicture.setImage(img);
     }
 

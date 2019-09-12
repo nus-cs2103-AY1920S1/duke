@@ -1,13 +1,12 @@
 DeadlineTest.class
+FindCommandTest.class
+StorageTest.class
+DeleteCommandTest.class
 ParserTest.class
 TaskTest.class
+TodoTest.class
 EventTest.class
 ListCommandTest.class
 DoneCommandTest.class
 TaskListTest.class
-FindCommandTest.class
-StorageTest.class
-DeleteCommandTest.class
-DukeManagerTest.class
-TodoTest.class
 AddCommandTest.class

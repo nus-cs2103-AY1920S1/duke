@@ -12,6 +12,7 @@ import java.io.File;
  */
 class Storage {
     private File tasks;
+    private boolean firstTime;
 
     /**
      * Constructor for Storage. 
@@ -51,11 +52,13 @@ class Storage {
      * @return a Tasklist that is deserialized from the  file.
      * @throws DukeException When the file is corrupted
      */
-    public TaskList retrieve() throws DukeException {
+    public TaskList retrieve(DukeManager dukeManager) throws DukeException {
         assert this.tasks != null : "tasks file is invalid";
         if (!this.tasks.exists()) {
+            dukeManager.setFirstTime(true);
             return createNewTaskList();
         } else {
+            dukeManager.setFirstTime(false);
             return deserializeOldTaskList();
         }
     }
@@ -123,4 +126,5 @@ class Storage {
                 + "I have rewrote the old save file with a new one. "
                 + "Please restart me again.");
     }
+
 }

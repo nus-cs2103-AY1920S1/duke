@@ -16,24 +16,4 @@ public class StorageTest {
             fail();
         }
     }
-
-    @Test
-    public void retreiveTest() throws Exception {
-        File file = new File("RetreiveTest.sav");
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new Exception(e.getMessage());
-            }
-        }
-        Storage storage = new Storage("RetreiveTest.sav");
-        try {
-            storage.retrieve();
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-
 }

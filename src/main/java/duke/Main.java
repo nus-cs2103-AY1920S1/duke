@@ -11,9 +11,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private Duke duke;
+    private DukeManager dukeManager;
 
     public Main() throws Exception {
         duke = new Duke();
+        dukeManager = duke.getDukeManager();
     }
 
     @Override
@@ -25,9 +27,16 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            fxmlLoader.<MainWindow>getController().welcomeMessage();
+            beginDukeMessages(fxmlLoader);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void beginDukeMessages(FXMLLoader fxmlLoader) {
+        fxmlLoader.<MainWindow>getController().welcomeMessage();
+        if (this.dukeManager.getFirstTime()) {
+            fxmlLoader.<MainWindow>getController().tutorialMessage();
         }
     }
 }

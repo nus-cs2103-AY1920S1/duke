@@ -34,7 +34,9 @@ class Parser {
             case EXIT :
                 return new ExitCommand();      
             case HELP :
-                return new HelpCommand();      
+                return new HelpCommand();     
+            case TUTORIAL: 
+                return createTutorialCommand();
             default :
                 throwInputError(action);
                 return null;
@@ -90,6 +92,8 @@ class Parser {
             return Action.DELETE;
         case "find" :
             return Action.FIND;
+        case "tutorial" :
+            return Action.TUTORIAL;
         default :
             throw new DukeException("Oof. I apologize, but no such command exists.");
         }
@@ -184,6 +188,8 @@ class Parser {
                 date = LocalDate.parse(dateTimeArr[0], Task.DATE_FORMATTER);
                 time = LocalTime.parse(dateTimeArr[1], Task.TIME_FORMATTER);
             } catch (Exception error) {
+                System.out.println(dateTimeArr[0]);
+                System.out.println(dateTimeArr[1]);
                 throw new DukeException("Oof. Unable to parse both time and date.\n" 
                         + "Please use \'help\' for the formatting of time and date");
             }
@@ -206,6 +212,34 @@ class Parser {
         }
 
         return new Pair<LocalDate,LocalTime>(date, time);
+    }
+
+    /**
+     * Returns a tutorial command containing templates for todo, deadline and event.
+     * @return a tutorial command
+     * @throws DukeException When gettign error creating the tasks.
+     */
+    private TutorialCommand createTutorialCommand() throws DukeException {
+        Command addTodo = parseToCommand("todo This is a Todo.");
+        Command addDeadline = parseToCommand("deadline This is a Deadline. /by 12/09/2019 10:10");
+        Command addEvent = parseToCommand("event This is an Event. /at 12/09/2019");
+        return new TutorialCommand(addTodo, addDeadline, addEvent);
+    }
+
+    /**
+     * Returns a String containing the response of duke for whether the user wants a tutorial.
+     * @param input The user's input
+     * @return a String of duke's response.
+     */
+    public String parseTutorialResponse(
+            String input, DukeManager dukeManager, Ui uiManager) throws DukeException {
+        if (input.toLowerCase().equals("yes")) {
+            return dukeManager.runDuke("tutorial");
+        } else if (input.toLowerCase().equals("no")) {
+            return uiManager.printNoTutorial();
+        } else {
+            throw new DukeException("Oof. I do not understand. If you need help, type \'help\'.");
+        }
     }
 
     /**

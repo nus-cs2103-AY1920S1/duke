@@ -10,8 +10,7 @@ class DukeManager {
     private Parser parseManager;
     private TaskList taskList;
     
-    // For Console Duke
-    private boolean isActive;
+    private boolean firstTime;
     
     /**
      * Constructor for DukeManager, which instantiates several other classes as well.
@@ -21,8 +20,7 @@ class DukeManager {
         this.uiManager = new Ui();
         this.storeManager = new Storage("Tasks.sav");
         this.parseManager = new Parser();
-        this.isActive = false;
-        this.taskList = this.storeManager.retrieve();
+        this.taskList = this.storeManager.retrieve(this);
     }
 
     /**
@@ -53,33 +51,23 @@ class DukeManager {
         return uiManager.printWelcome();
     }
 
-    /**
-     * Initializes the Duke program, and recursively reads input
-     * and produces and output, unless encountered with a DukeException.
-     * 
-     * <p>There are 8 different Commands the user can input:
-     * list, done, delete, todo, deadline, event, help, bye.
-     * This method will end when the user inputs 'bye' or anything else which causes a DukeException.
-     * 
-     * <p>This method is only used for the console version of Duke, and is not
-     * used in the javaFX version. For console version, look at runDuke instead.
-     * 
-     * @throws DukeException When parsing user's input and executing commands.
-     * @see DukeManager#runDuke(String)
-     */
-    public void initializeDuke() throws DukeException {
-        uiManager.printWelcome();
-        this.taskList = this.storeManager.retrieve();
-        this.isActive = true;
-        while (isActive) {
-            uiManager.printWhatToDo();
-            String input = uiManager.readLine();
-            Command command = parseManager.parseToCommand(input);
-            command.execute(this.uiManager, this.taskList, this.storeManager);
-            if (command instanceof ExitCommand) {
-                isActive = false;
-            }
-            uiManager.printEmpty();
+    public void setFirstTime(boolean firstTime) {
+        this.firstTime = firstTime;
+    }
+
+    public boolean getFirstTime() {
+        return this.firstTime;
+    }
+
+    public String getTutorial() {
+        return uiManager.printWantTutorial();
+    }
+
+    public String getTutorialResponse(String input) {
+        try {
+            return parseManager.parseTutorialResponse(input, this, this.uiManager);    
+        } catch (DukeException e) {
+            return e.getMessage();   
         }
     }
 }

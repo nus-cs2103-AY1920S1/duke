@@ -70,7 +70,7 @@
           <target>1.8</target>
           <archive>
             <manifest>
-              <mainClass>Duke</mainClass>
+              <mainClass>Launcher</mainClass>
             </manifest>
           </archive>
         </configuration>

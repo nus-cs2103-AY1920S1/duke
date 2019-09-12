@@ -50,6 +50,13 @@ class Ui {
     }
 
     /**
+     * Clears the output of the duke program. Used mainly in tutorial.
+     */
+    public void clear() {
+        this.output.setLength(0);
+    }
+
+    /**
      * Appends an empty line to separate Commands.
      */
     public void printEmpty() {
@@ -66,6 +73,31 @@ class Ui {
                 + "If you need help, type \'help\' anytime.\n"
                 + "What can I do for you?\n");
         return welcome;
+    }
+
+    /**
+     * Returns a String of whether the user want's a tutorial or not.
+     * 
+     * @return A String of whether the user want's a tutorial or not
+     */
+    public String printWantTutorial() {
+        String output = ("It seems it is your first time here.\n" 
+                + "Would you like a tutorial for this?\n"
+                + "Type \'Yes\' or\'No\'.\n");
+        return output;
+    }
+
+    public String printNoTutorial() {
+        return "Okay. If you ever need help type \'help\'.\n";
+    }
+
+    /**
+     * Appends the initial tutorial messages.
+     */
+    public void printTutorial() {
+        this.output.append("I've added a temporary save file first.\n");
+        this.output.append("Try typing \'list\' to get started.");
+        this.output.append("And if you ever need help, type \'help\'!\n");
     }
 
     /**
@@ -177,7 +209,7 @@ class Ui {
     public void printHelp() {
         assert isEmpty() : "About to print items before help page.";
         this.output.append("Hello this is Duke's help page.\n");
-        this.output.append("There are 8 main features excluding help\n");
+        this.output.append("There are 8 main features excluding help and tutorial\n");
         
         this.output.append("1. \'list\': Prints your current tasks.\n");
         
@@ -202,6 +234,8 @@ class Ui {
         this.output.append("7. \'find myWord\' Finds myWord in all of the Tasks\n");
         
         this.output.append("8. \'bye\' to exit. What else?\n");
+
+        this.output.append("And if you ever need an example, type \'tutorial\' for one!\n");
     }
 
     /**

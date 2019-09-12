@@ -27,8 +27,8 @@ public class Duke {
         return output;
     }
 
-    public String welcomeMessage() {
-        return this.dukeManager.welcomeMessage();
+    public DukeManager getDukeManager() {
+        return this.dukeManager;
     }
     
 }

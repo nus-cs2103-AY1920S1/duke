@@ -20,9 +20,12 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private DukeManager dukeManager;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+
+    private boolean isInTutorial;
 
     @FXML
     public void initialize() {
@@ -31,6 +34,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dukeManager = this.duke.getDukeManager();
     }
 
     /**
@@ -40,7 +44,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = null;
+        if (isInTutorial) {
+            response = dukeManager.getTutorialResponse(input);
+            isInTutorial = false;
+        } else {
+            response = duke.getResponse(input);
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -53,7 +63,17 @@ public class MainWindow extends AnchorPane {
      */
     public void welcomeMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(this.duke.welcomeMessage(), dukeImage)
+                DialogBox.getDukeDialog(this.dukeManager.welcomeMessage(), dukeImage)
         );
+    }
+
+    /**
+     * Prints to ask if the user wants a tutorial on their initial startup of the program.
+     */
+    public void tutorialMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(this.dukeManager.getTutorial(), dukeImage)
+        );
+        isInTutorial = true;
     }
 }

@@ -3,5 +3,5 @@
  * This enum is also the first word which the user inputs
  */
 enum Action {
-    LIST, EXIT, HELP, TODO, DEADLINE, EVENT, DONE, DELETE, FIND;
+    LIST, EXIT, TUTORIAL, HELP, TODO, DEADLINE, EVENT, DONE, DELETE, FIND;
 }

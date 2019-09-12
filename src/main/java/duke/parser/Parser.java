@@ -4,8 +4,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * A parser that interprets user input.
+ */
 public class Parser {
 
+    /**
+     * Interprets the type of command from user input.
+     *
+     * @param s user input text.
+     * @return the type of command.
+     */
     public String parseCommand(String s) {
         if (s.toLowerCase().equals("bye")) {
             return "bye";
@@ -28,6 +37,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Interprets the description of a task from user input.
+     *
+     * @param s user input text.
+     * @return the description of that particular task.
+     */
     public String parseDesc(String s) {
         String cmd = parseCommand(s);
         int index = 0;
@@ -46,6 +61,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Interprets the date of a task from user input.
+     *
+     * @param s user input text.
+     * @return the date of that particular task.
+     */
     public String parseDate(String s) {
         int index = s.indexOf("/");
         String rawDate = s.substring(index + 4).trim();

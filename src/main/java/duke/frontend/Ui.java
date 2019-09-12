@@ -8,6 +8,9 @@ import duke.parser.Parser;
 import java.util.ArrayList;
 import duke.storage.Storage;
 
+/**
+ * Handles user input by producing a response or providing information on the current state.
+ */
 public class Ui {
     private static int cnt = 0;
 
@@ -17,15 +20,36 @@ public class Ui {
 
     private Storage storage;
 
+    /**
+     * Constructs an instance of Ui.
+     *
+     * @param ls an instance of TaskList that Ui works on.
+     * @param st an instance of Storage utilised.
+     */
     public Ui(TaskList ls, Storage st) {
         this.list = ls;
         this.storage = st;
     }
 
+    /**
+     * Obtains the finalized TaskList.
+     *
+     * @return the final TaskList object.
+     */
     public TaskList getFinalList() {
         return list;
     }
 
+    /**
+     * Produces an action/response based on user input/command.
+     *
+     * @param cmd user input text/command.
+     * @return Duke's response to the user input/command.
+     * @throws DukeWrongTaskException an instance of wrong task exception.
+     * @throws UnknownCmdException an instance of unknown command exception.
+     * @throws DeleteTaskException an instance of delete task exception.
+     * @throws CompleteTaskException an instance of complete task exception.
+     */
     public String action(String cmd) throws DukeWrongTaskException, UnknownCmdException, DeleteTaskException, CompleteTaskException {
         Task t;
 
@@ -102,10 +126,22 @@ public class Ui {
         return response;
     }
 
+    /**
+     * Displays an error message during loading, when saved list is empty.
+     *
+     * @return the error message to be displayed.
+     */
     public String showLoadingError() {
         return "There's no event in your task list!";
     }
 
+    /**
+     * Starts the Duke response generating process based on user input.
+     *
+     * @param input user input text.
+     * @return Duke's response to the user input.
+     * @throws DukeException error occurred during the execution of Duke response generating process.
+     */
     public String start(String input) throws DukeException {
         cnt = list.size();
 

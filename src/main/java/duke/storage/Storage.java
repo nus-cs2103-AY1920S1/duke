@@ -9,15 +9,29 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 
+/**
+ * Performs actions on the save data file on hard disk.
+ */
 public class Storage {
     private String filePath;
 
     private ArrayList<Task> list;
 
+    /**
+     * Constructs an instance of Storage based on the location of the save data file.
+     *
+     * @param fp path of the save data file.
+     */
     public Storage(String fp) {
         this.filePath = fp;
     }
 
+    /**
+     * Loads the list of tasks stored on hard disk.
+     *
+     * @return an ArrayList to be stored in an instance of Storage.
+     * @throws DukeException error occurred during the reading of saved tasks.
+     */
     public ArrayList<Task> load() throws DukeException {
         list = new ArrayList<>();
         try {
@@ -67,6 +81,12 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves and updates the list of tasks.
+     *
+     * @param tl an instance of TaskList object.
+     * @throws DukeException error occurred during the saving of new tasks.
+     */
     public void save(TaskList tl) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);

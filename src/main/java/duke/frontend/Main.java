@@ -12,9 +12,15 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    // Constructs a Duke.
     String dir = System.getProperty("user.dir") + "/src/main/java/data/dukeData.txt";
     Duke duke = new Duke(dir);
 
+    /**
+     * Stages the main window after initialisation.
+     *
+     * @param stage stage to be shown in the main window.
+     */
     @Override
     public void start(Stage stage) {
         try {

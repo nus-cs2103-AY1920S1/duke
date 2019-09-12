@@ -35,13 +35,18 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the current Duke instance that the GUI will interacts with.
+     *
+     * @param d the duke instance to be set.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing. Exits the program if user requests so.
      */
     @FXML
     private void handleUserInput() {
@@ -57,7 +62,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        // issue to be clarified
         if (input.toLowerCase().startsWith("bye")) {
             System.exit(0);
         }

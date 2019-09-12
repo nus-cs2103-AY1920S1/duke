@@ -3,7 +3,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import duke.parser.Parser;
 import duke.task.Deadline;
 
+/**
+ * Class to test the functionality of Duke.
+ */
 public class DukeTest {
+    /**
+     * Tests whether a parser can parse user input of a deadline task.
+     */
     @Test
     public void parseDeadlineTest(){
         Parser p = new Parser();

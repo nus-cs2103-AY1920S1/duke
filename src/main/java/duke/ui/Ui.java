@@ -31,7 +31,7 @@ public class Ui {
      */
     public void showDone(String doneTask) {
         mw.displayMsg("Nice! I've marked this task as done: \n" + " " + doneTask + "\n");
-        System.out.printf(INDENT + "Nice! I've marked this task as done: \n" + INDENT  + " " + doneTask + "\n");
+        System.out.printf(INDENT + "Nice! I've marked this task as done: \n" + INDENT + " " + doneTask + "\n");
 
     }
 
@@ -114,7 +114,7 @@ public class Ui {
      * Displays the task.
      *
      * @param index Index of the task in the task list.
-     * @param task Task to be displayed.
+     * @param task  Task to be displayed.
      */
     public void showTask(int index, String task) {
         mw.displayMsg(" " + index + ". " + task + "\n");

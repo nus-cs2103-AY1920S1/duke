@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.date.DateUtil;
+
 import java.time.LocalDateTime;
 
 /**
@@ -16,8 +17,8 @@ public class Event extends Task {
      * Constructs an unfinished Event object.
      *
      * @param description Description of the task.
-     * @param start Date and time when the event starts.
-     * @param end Date and time when the event ends.
+     * @param start       Date and time when the event starts.
+     * @param end         Date and time when the event ends.
      */
     public Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
@@ -29,9 +30,9 @@ public class Event extends Task {
      * Constructs an Event object.
      *
      * @param description Description of the task.
-     * @param start Date and time when the event starts.
-     * @param end Date and time when the event ends.
-     * @param isDone True if the taks is finished.
+     * @param start       Date and time when the event starts.
+     * @param end         Date and time when the event ends.
+     * @param isDone      True if the taks is finished.
      */
     private Event(String description, LocalDateTime start, LocalDateTime end, boolean isDone) {
         super(description, isDone);
@@ -56,7 +57,7 @@ public class Event extends Task {
      */
     @Override
     public Event finish() {
-        return new Event(this.getDescription(), startTime, endTime,true);
+        return new Event(this.getDescription(), startTime, endTime, true);
     }
 
     /**

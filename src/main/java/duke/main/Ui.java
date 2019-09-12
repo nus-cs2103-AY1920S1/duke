@@ -92,8 +92,7 @@ public class Ui {
         return string + "\n";
     }
 
-    public void greetings() {
-        System.out.println("Hello! I am Jeong's Slave");
-        System.out.println("What can I do for you?");
+    public String greetings() {
+        return "Hello! I am Jeong's Pet\nWhat can I do for you?";
     }
 }

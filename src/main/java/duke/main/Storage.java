@@ -134,7 +134,7 @@ public class Storage {
     public void addTaskToFile(Task task) throws DukeException {
         try {
             FileWriter fw = new FileWriter(planner, true); // create a FileWriter in append mode
-            fw.write(task + "\n");
+            fw.write(task.toString() + "\n");
             fw.close();
         } catch (IOException ex) {
             throw new DukeException(ex.getMessage());

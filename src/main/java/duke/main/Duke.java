@@ -85,6 +85,11 @@ public class Duke extends Application {
         initControls(stage, mainLayout);
         styleControls(stage, mainLayout);
 
+        Label greetings = new Label(ui.greetings());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greetings, new ImageView(duke))
+        );
+
         //Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput(stage);
@@ -101,6 +106,11 @@ public class Duke extends Application {
     private void handleUserInput(Stage stage) {
         Label userText = new Label(userInput.getText());
         if (userText.getText().equals("bye")) {
+            try {
+                storage.writeListToFile(tasks);
+            } catch (DukeException e) {
+
+            }
             stage.close();
         }
         Label dukeText = new Label(getResponse(userInput.getText()));

@@ -10,7 +10,7 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(List<Task> tasks) {
-        echo(new String[]{"\t" + "Bye. Hope to see you again soon!"});
+        echo("\t" + "Bye. Hope to see you again soon!");
         System.exit(0);
     }
 }

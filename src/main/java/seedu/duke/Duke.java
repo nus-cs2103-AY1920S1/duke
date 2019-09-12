@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.commands.*;
 
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.trackables.Deadline;
@@ -19,7 +20,7 @@ import java.util.regex.Pattern;
 public class Duke {
 
     static final String HORIZONTAL_LINE = "______________________________"
-            + "______________________________";
+        + "______________________________";
 
     enum CommandName {
         LIST("list"),
@@ -54,14 +55,15 @@ public class Duke {
 
     /**
      * Main Method.
+     *
      * @param args string arguments for console.
      */
     public static void main(String[] args) {
         String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
 
         System.out.println("Hello from\n" + logo);
@@ -71,10 +73,10 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         while (continueRunning) {
-            String input  = in.nextLine();
+            String input = in.nextLine();
             try {
                 parseCommand(input);
-            } catch (InvalidCommandException | InvalidArgumentException ex) {
+            } catch (InvalidCommandException ex) {
                 System.out.println(ex.getMessage());
             }
         }
@@ -82,16 +84,17 @@ public class Duke {
 
     /**
      * Parses the input command into the specific Command object to execute.
+     *
      * @param input Input from the console.
      */
-    private static void parseCommand(String input) throws InvalidCommandException, InvalidArgumentException {
+    private static void parseCommand(String input) throws InvalidCommandException {
 
         // Identify Command
         CommandName command = null;
         try {
             command = CommandName.valueOf(input.split(" ")[0].toUpperCase());
         } catch (IllegalArgumentException iae) {
-            throw new InvalidCommandException();
+            throw new InvalidCommandException("No Such command found", iae);
         }
 
         Command commandToExecute = null;
@@ -103,39 +106,37 @@ public class Duke {
             if (command == CommandName.LIST) {
                 commandToExecute = new ListCommand();
             } else if (command == CommandName.ADD) {
-                commandToExecute = new AddCommand(new Task(matcher.group(2)));
+                commandToExecute = new AddCommand(matcher.group(2));
             } else if (command == CommandName.DONE) {
-                try {
-                    int taskId = Integer.parseInt(matcher.group(2));
-                    taskList.get(taskId-1);
-                    commandToExecute = new DoneCommand(taskId);
-                } catch (IndexOutOfBoundsException ibx) {
-                    throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
-                }
-
+                int taskId = Integer.parseInt(matcher.group(2));
+                commandToExecute = new DoneCommand(taskId);
             } else if (command == CommandName.TODO) {
-                commandToExecute = new TodoCommand(new Todo(matcher.group(2)));
+                commandToExecute = new TodoCommand(matcher.group(2));
             } else if (command == CommandName.EVENT) {
-                commandToExecute = new EventCommand(new Event(matcher.group(2), matcher.group(3)));
+                commandToExecute = new EventCommand(matcher.group(2), matcher.group(3));
             } else if (command == CommandName.DEADLINE) {
-                commandToExecute = new DeadlineCommand(new Deadline(matcher.group(2),matcher.group(3)));
+                commandToExecute = new DeadlineCommand(matcher.group(2), matcher.group(3));
             } else if (command == CommandName.DELETE) {
-                try {
-                    int taskId = Integer.parseInt(matcher.group(2));
-                    taskList.get(taskId-1);
-                    commandToExecute = new DeleteCommand(taskId);
-                } catch (IndexOutOfBoundsException ibx) {
-                    throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
-                }            } else if (command == CommandName.BYE) {
+                int taskId = Integer.parseInt(matcher.group(2));
+                commandToExecute = new DeleteCommand(taskId);
+            } else if (command == CommandName.BYE) {
                 commandToExecute = new ByeCommand();
             } else {
                 // Code should never reach here. If it does, return to caller.
                 return;
             }
         } else {
-            throw new InvalidArgumentException("Invalid or missing arguments in command " + command.name() + ".", null);
+            commandToExecute = new ErrorCommand(
+                new InvalidArgumentException("Invalid or missing arguments in command "
+                    + command.name() + ".", null));
         }
-        commandToExecute.execute(taskList);
+
+        try {
+            commandToExecute.execute(taskList);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     private static String getPattern(CommandName command) {
@@ -185,7 +186,7 @@ public class Duke {
     private static void greet() {
         printLine();
         System.out.println("\t" + "Hello! I'm Duke\n\t"
-                + "What can I do for you?");
+            + "What can I do for you?");
         printLine();
     }
 }

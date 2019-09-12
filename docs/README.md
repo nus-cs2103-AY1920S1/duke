@@ -8,9 +8,8 @@ Duke is a Personal Assistant Chatbot that helps you keep track of different task
 
 ## Features 
 
-### Add Tasks, Delete Tasks and Mark Tasks as Done 
+### Add Tasks and Delete Tasks 
 You can add and delete different types of tasks to the chatbot task manager.
-Any tasks added in initially will be marked as incomplete. Upon completion, the tasks can easily be marked as done.
 Currently, there are four types of tasks supported by Duke. These are the tasks you can input into the chatbot, to track your schedule.
 
 * **Todo**:
@@ -29,12 +28,14 @@ The Event task is a task that starts at a specific time and ends at a specific t
 The Fixed Duration Task is an unscheduled task that takes a fixed amount of time.  
 (Eg. Reading the sales report needs 2 hours)
 
+### Mark Tasks as Done 
+Any tasks initilly added into the task list will be marked as incomplete. Upon completion, the tasks can easily be marked as done.
 
 ### List Tasks
-Displays the task list.
+Displays the task list with all the tasks you previously added.
 
 ### Sort Tasks
-Sorts the task list according to type or date of completion (if any)
+Sorts the task list according to type or date of completion (if any).
 
 ## Usage
 ### `Keyword` - Describe action

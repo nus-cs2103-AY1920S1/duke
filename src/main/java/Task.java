@@ -63,7 +63,7 @@ class Deadline extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             date = LocalDate.parse(memo, formatter);
         } catch (DateTimeParseException e) {
-            System.out.println("parse failed");
+            // System.out.println("parse failed");
             // do nothing
         }
     }
@@ -74,7 +74,7 @@ class Deadline extends Task {
 
     @Override
     public String getStatus() {
-        return "[D][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + memo + ")";
+        return "[D][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + getMemo() + ")";
     }
 
     @Override
@@ -97,7 +97,7 @@ class Event extends Task {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             date = LocalDate.parse(memo, formatter);
         } catch (DateTimeParseException e) {
-            System.out.println("parse failed");
+            // System.out.println("parse failed");
             // do nothing
         }
     }
@@ -108,7 +108,7 @@ class Event extends Task {
 
     @Override
     public String getStatus() {
-        return "[E][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + memo + ")";
+        return "[E][" + getStatusIcon() + "] " + description + " (" + preposition + ": " + getMemo() + ")";
     }
 
     @Override

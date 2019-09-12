@@ -32,7 +32,7 @@ public class Duke {
             storage = new FakeStorage();
         }
 
-        assert storage != null: "Storage should not be NULL";
+        assert storage != null : "Storage should not be NULL";
 
         try {
             tasks = new TaskList(storage.load());

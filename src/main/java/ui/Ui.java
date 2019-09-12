@@ -27,8 +27,8 @@ public class Ui {
      * Prints out error about unable to load data stored in user's hard disk.
      */
     public String showLoadingError() {
-        return "Note: task.TaskList storage is initially empty / the file is corrupted\n"
-                + "New empty file will be created.";
+        return showError("Note: task.TaskList storage is initially empty / the file is corrupted\n"
+                + "New empty file will be created.");
     }
 
 }

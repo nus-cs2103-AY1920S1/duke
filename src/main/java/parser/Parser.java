@@ -25,23 +25,24 @@ public class Parser {
      */
     public static Command parse(String userInput) {
         String[] input = userInput.split(" ");
-        if (input[0].equals("list")) { // list out
+        switch (input[0]) {
+        case "list":
             return new ListCommand();
-        } else if (input[0].equals("done")) { // done
+        case "done":
             return new DoneCommand(input);
-        } else if (input[0].equals("todo")) { // todo task
+        case "todo":
             return new ToDoCommand(input);
-        } else if (input[0].equals("deadline")) { // deadline task
+        case "deadline":
             return new DeadlineCommand(input);
-        } else if (input[0].equals("event")) { // event task
+        case "event":
             return new EventCommand(input);
-        } else if (input[0].equals("delete")) { // delete
+        case "delete":
             return new DeleteCommand(input);
-        } else if (input[0].equals("bye")) { // bye
+        case "bye":
             return new ByeCommand();
-        } else if (input[0].equals("find")) { // find
+        case "find":
             return new FindCommand(input);
-        } else {
+        default:
             return new InvalidCommand();
         }
     }

@@ -1,7 +1,7 @@
 public abstract class Command {
     /**
      * Returns whether this is the last command.
-     * 
+     *
      * @return true if this is the last command
      */
     public abstract boolean isExit();

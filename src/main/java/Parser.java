@@ -7,7 +7,9 @@ public class Parser {
      * @throws DukeException if the parsing process fails.
      */
     public static Command parse(String command) throws DukeException {
-        if (command.equals("bye")) {
+        if (command.equals("help")) {
+            return new HelpCommand();
+        } else if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {
             return new ListCommand();

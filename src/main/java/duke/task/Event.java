@@ -1,6 +1,8 @@
 package duke.task;
 
 import duke.command.Parser;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -65,66 +67,7 @@ public class Event extends Task {
      * @return string representing the startTime in a printing friendly format.
      */
     public String printStartTime() {
-        String jargon = "";
-        switch (startTime.get(Calendar.DAY_OF_MONTH) % 10) {
-        case 1 : jargon = "st ";
-            break;
-        case 2 : jargon = "nd ";
-            break;
-        case 3 : jargon = "rd ";
-            break;
-        default : jargon = "th ";
-        }
-        if (startTime.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
-            jargon = "th ";
-        }
-        String nameOfMonth = "";
-        switch (startTime.get(Calendar.MONTH)) {
-        case 0 : nameOfMonth = "January";
-            break;
-        case 1 : nameOfMonth = "February";
-            break;
-        case 2 : nameOfMonth = "March";
-            break;
-        case 3 : nameOfMonth = "April";
-            break;
-        case 4 : nameOfMonth = "May";
-            break;
-        case 5 : nameOfMonth = "June";
-            break;
-        case 6 : nameOfMonth = "July";
-            break;
-        case 7 : nameOfMonth = "August";
-            break;
-        case 8 : nameOfMonth = "September";
-            break;
-        case 9 : nameOfMonth = "October";
-            break;
-        case 10 : nameOfMonth = "November";
-            break;
-        case 11 : nameOfMonth = "December";
-            break;
-        default : nameOfMonth = "Invalid Start Month";
-        }
-        String hoursAndMinutes;
-        if (startTime.get(Calendar.HOUR_OF_DAY) <= 12) {
-            hoursAndMinutes = startTime.get(Calendar.HOUR_OF_DAY) + ":";
-        } else {
-            hoursAndMinutes = startTime.get(Calendar.HOUR) + ":";
-        }
-        if (startTime.get(Calendar.MINUTE) < 10) {
-            hoursAndMinutes += "0";
-        }
-        hoursAndMinutes += startTime.get(Calendar.MINUTE);
-        if (startTime.get(Calendar.AM_PM) == 0) {
-            hoursAndMinutes += "am";
-        } else {
-            hoursAndMinutes += "pm";
-        }
-        return startTime.get(Calendar.DAY_OF_MONTH) + jargon
-                + nameOfMonth + ", "
-                + startTime.get(Calendar.YEAR) + ". "
-                + hoursAndMinutes;
+        return printDateAndTime(startTime);
     }
     
     /**
@@ -132,66 +75,7 @@ public class Event extends Task {
      * @return string representing the endTime in a printing friendly format.
      */
     public String printEndTime() {
-        String jargon = "";
-        switch (endTime.get(Calendar.DAY_OF_MONTH) % 10) {
-        case 1 : jargon = "st ";
-            break;
-        case 2 : jargon = "nd ";
-            break;
-        case 3 : jargon = "rd ";
-            break;
-        default : jargon = "th ";
-        }
-        if (endTime.get(Calendar.DAY_OF_MONTH) / 10 == 1) {
-            jargon = "th ";
-        }
-        String nameOfMonth = "";
-        switch (endTime.get(Calendar.MONTH)) {
-        case 0 : nameOfMonth = "January";
-            break;
-        case 1 : nameOfMonth = "February";
-            break;
-        case 2 : nameOfMonth = "March";
-            break;
-        case 3 : nameOfMonth = "April";
-            break;
-        case 4 : nameOfMonth = "May";
-            break;
-        case 5 : nameOfMonth = "June";
-            break;
-        case 6 : nameOfMonth = "July";
-            break;
-        case 7 : nameOfMonth = "August";
-            break;
-        case 8 : nameOfMonth = "September";
-            break;
-        case 9 : nameOfMonth = "October";
-            break;
-        case 10 : nameOfMonth = "November";
-            break;
-        case 11 : nameOfMonth = "December";
-            break;
-        default : nameOfMonth = "Invalid End Time";
-        }
-        String hoursAndMinutes;
-        if (endTime.get(Calendar.HOUR_OF_DAY) <= 12) {
-            hoursAndMinutes = endTime.get(Calendar.HOUR_OF_DAY) + ":";
-        } else {
-            hoursAndMinutes = endTime.get(Calendar.HOUR) + ":";
-        }
-        if (endTime.get(Calendar.MINUTE) < 10) {
-            hoursAndMinutes += "0";
-        }
-        hoursAndMinutes += endTime.get(Calendar.MINUTE);
-        if (endTime.get(Calendar.AM_PM) == 0) {
-            hoursAndMinutes += "am";
-        } else {
-            hoursAndMinutes += "pm";
-        }
-        return endTime.get(Calendar.DAY_OF_MONTH) + jargon
-                + nameOfMonth + ", "
-                + endTime.get(Calendar.YEAR) + ". "
-                + hoursAndMinutes;
+        return printDateAndTime(endTime);
     }
 
     @Override

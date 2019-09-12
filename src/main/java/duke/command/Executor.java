@@ -8,6 +8,15 @@ import duke.task.ToDo;
 import java.io.IOException;
 
 public class Executor {
+    /**
+     * Analyzes a Parser's data and returns a string that responds to the command in the parser using Ui's methods.
+     * While executing a command, method also updates TaskList and the database file accordingly.
+     * @param commandAnalyzer parser object containing command information
+     * @param ui interface that can provide responses to the command
+     * @param tasks TaskList to be updated according to the command
+     * @param storage Storage object that updates database file 'history'
+     * @return string that represents Duke's response to the User's command
+     */
     public static String execute(Parser commandAnalyzer, Ui ui, TaskList tasks, Storage storage) {
         String result = "";
         if (commandAnalyzer.isValid()) {

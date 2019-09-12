@@ -1,3 +1,5 @@
+package duke.application;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -22,18 +24,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    public DialogBox(Label l, ImageView iv) {
-        dialog = l;
-        displayPicture = iv;
-
-        dialog.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(dialog, displayPicture);
-    }
 
     private DialogBox(String text, Image img) {
         try {
@@ -63,6 +53,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Gets DialogBox for Duke.
+     * @param text text that will be displayed in Duke's dialog box
+     * @param img image that will be displayed in Duke's dialog box
+     * @return DialogBox for Duke with text and an image
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

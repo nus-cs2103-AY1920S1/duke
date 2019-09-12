@@ -59,12 +59,12 @@ public class Parser {
                         + "'DD/MM/YYYY HHMM-HHMM' format");
             }
             int startHours = startTime / 100;
-            int startMinutes = startTime % 100;
-            int endHours = endTime / 100;
-            int endMinutes = endTime % 100;
             assert startHours >= 0 && startHours <= 24 : "Hours should be in 0-24 range!";
+            int endHours = endTime / 100;
             assert endHours >= 0 && endHours <= 24 : "Hours should be in 0-24 range!";
+            int startMinutes = startTime % 100;
             assert startMinutes >= 0 && startMinutes <= 60 : "Minutes should be in 0-60 range!";
+            int endMinutes = endTime % 100;
             assert endMinutes >= 0 && endMinutes <= 60 : "Minutes should be in 0-60 range!";
             String[] dateArray = dateAndTime[0].split("/");
             String day = dateArray[0];
@@ -95,7 +95,6 @@ public class Parser {
             if (dateAndTime.length != 2) {
                 throw new DukeException(" :( OOPS!!! Invalid format for date and time. Please enter 'DD/MM/YYYY HHMM'");
             }
-            String[] dateArray = dateAndTime[0].split("/");
             int time = 0;
             try {
                 time = Integer.parseInt(dateAndTime[1]);
@@ -105,6 +104,7 @@ public class Parser {
             }
             int hours = time / 100;
             int minutes = time % 100;
+            String[] dateArray = dateAndTime[0].split("/");
             assert hours >= 0 && hours <= 24 : "Hour should be within 0-24 range!";
             assert minutes >= 0 && minutes <= 60 : "Minutes should be within 0-60 range!";
             String day = dateArray[0];

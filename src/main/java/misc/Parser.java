@@ -177,7 +177,7 @@ public class Parser {
 
             if (userInput.hasNext()) {
                 errorMessage = "The command \"list\" should not have anything after!\n"
-                        + "Please remove any additional words!";
+                        + "Please remove any additional characters!";
             } else {
                 return taskList.listAllTasks("list");
             }

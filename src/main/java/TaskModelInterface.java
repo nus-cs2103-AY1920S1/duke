@@ -14,6 +14,8 @@ interface TaskModelInterface {
 
     TaskInterface doneTask(int refNum); 
 
+    TaskInterface getTask(int refNum); 
+
     TaskInterface deleteTask(int refNum); 
 
     //delete this

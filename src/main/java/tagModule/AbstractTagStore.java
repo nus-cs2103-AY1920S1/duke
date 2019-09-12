@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
-public abstract class AbstractTagCommandPost<E> implements TagObserver {
+public abstract class AbstractTagStore<E> implements TagObserver {
     // Left:= strTag, Right:=TagInterface
     private GenericBiMap<String, TagInterface> store;
 
@@ -50,11 +50,11 @@ public abstract class AbstractTagCommandPost<E> implements TagObserver {
         }
 
         public String tagCode() {
-            return AbstractTagCommandPost.this.tagCode(contains);
+            return AbstractTagStore.this.tagCode(contains);
         }
     }
 
-    public AbstractTagCommandPost() {
+    public AbstractTagStore() {
         this.store = new GenericBiMap<>();
     }
 
@@ -86,8 +86,9 @@ public abstract class AbstractTagCommandPost<E> implements TagObserver {
 
     /* TODO replace tag with new tag */
     /* TODO replace item with new item */
-    /* TODO find all tags an item has */
-    /* TODO find all items a tag has */
+    /* TODO delete a tag-item relation */ 
+    /* TODO query all tags an item has */
+    /* TODO query all items a tag has */
     // note for this one, remember to convert from 
     // the wrapper class to the containedItem
     /* TODO more unit tests for everything besides add*/

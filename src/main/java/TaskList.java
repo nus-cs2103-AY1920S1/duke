@@ -98,6 +98,12 @@ class TaskList implements TaskModelInterface {
         return deletedTask;
     }
 
+    public TaskInterface getTask(int refNum) {
+        int indexNum = refNum - 1;
+        //this.notifyObservers();
+        return this.taskList.get(refNum);
+    }
+
     /**
      * deprecated to be removed.
      */

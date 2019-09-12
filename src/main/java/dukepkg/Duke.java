@@ -16,6 +16,9 @@ public class Duke {
     private static Parser parser;
     private boolean isExit;
 
+    /**
+     * Instantiates a new Duke.
+     */
     public Duke() {
         Storage storage = new Storage("data/tasks.txt");
         ui = new Ui();
@@ -48,6 +51,12 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Gets response.
+     *
+     * @param input the input
+     * @return the response
+     */
     public String getResponse(String input) {
         try {
             Command c = parser.constructCommand(input);
@@ -59,6 +68,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Is exit boolean.
+     *
+     * @return the boolean
+     */
     public boolean isExit() {
       return this.isExit;
     }

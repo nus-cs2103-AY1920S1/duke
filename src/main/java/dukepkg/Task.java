@@ -55,6 +55,7 @@ public class Task {
         return "[" + getSymbol() + "] " + task_;
     }
     public boolean equals(Object obj) {
+        assert(obj instanceof Task);
         Task o = (Task) obj;
         return (this.task_.equals(o.task_));
     }

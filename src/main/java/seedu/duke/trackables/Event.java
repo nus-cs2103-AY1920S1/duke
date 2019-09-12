@@ -8,22 +8,35 @@ import java.util.Date;
 
 public class Event extends Task {
 
-    protected Date at;
+    private Date at;
 
     public Event(String description, Date at)  {
         super(description);
         this.at = at;
     }
 
+    /**
+     * Constructs a new Event using string arguments. Typically used when restoring Event from Storage.
+     *
+     * @param args String arguments containing Event data from Storage.
+     */
     public Event(String... args) {
         super(args);
-        this.at = args[3];
+        try {
+            this.at = new SimpleDateFormat("d/MM/yyyy HHmm").parse(args[3]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getAtAsFormatedDate() {
+        return new SimpleDateFormat("d/MM/yyyy HHmm").format(at);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-            + new SimpleDateFormat("d/MM/yyyy HHmm").format(at) + ")";
+            + getAtAsFormatedDate() + ")";
     }
 
     @Override
@@ -32,7 +45,7 @@ public class Event extends Task {
         sb.append("E").append(" | ")
             .append(isDone ? "1" : "0")
             .append(" | ").append(this.description)
-            .append(" | ").append(this.at);
+            .append(" | ").append(getAtAsFormatedDate());
         return sb.toString();
     }
 }

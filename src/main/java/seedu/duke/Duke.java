@@ -90,12 +90,8 @@ public class Duke {
      *
      * @param input Input from the console.
      */
-<<<<<<< HEAD
-    private static void parseCommand(String input) throws InvalidCommandException,
-        InvalidArgumentException, Storage.StorageOperationException {
-=======
-    private static void parseCommand(String input) throws InvalidCommandException {
->>>>>>> branch-Level-8
+    private static void parseCommand(String input) throws InvalidCommandException
+        , Storage.StorageOperationException {
 
         // Identify Command
         CommandName command = null;
@@ -116,41 +112,17 @@ public class Duke {
             } else if (command == CommandName.ADD) {
                 commandToExecute = new AddCommand(matcher.group(2));
             } else if (command == CommandName.DONE) {
-<<<<<<< HEAD
-                try {
-                    int taskId = Integer.parseInt(matcher.group(2));
-                    // Try to get task. Will Throw and error if is is not valid.
-                    taskList.get(taskId - 1);
-                    commandToExecute = new DoneCommand(taskId);
-                } catch (IndexOutOfBoundsException ibx) {
-                    throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
-                }
-
-=======
                 int taskId = Integer.parseInt(matcher.group(2));
                 commandToExecute = new DoneCommand(taskId);
->>>>>>> branch-Level-8
             } else if (command == CommandName.TODO) {
                 commandToExecute = new TodoCommand(matcher.group(2));
             } else if (command == CommandName.EVENT) {
                 commandToExecute = new EventCommand(matcher.group(2), matcher.group(3));
             } else if (command == CommandName.DEADLINE) {
-<<<<<<< HEAD
-                commandToExecute = new DeadlineCommand(new Deadline(matcher.group(2), matcher.group(3)));
-            } else if (command == CommandName.DELETE) {
-                try {
-                    int taskId = Integer.parseInt(matcher.group(2));
-                    taskList.get(taskId - 1);
-                    commandToExecute = new DeleteCommand(taskId);
-                } catch (IndexOutOfBoundsException ibx) {
-                    throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
-                }
-=======
                 commandToExecute = new DeadlineCommand(matcher.group(2), matcher.group(3));
             } else if (command == CommandName.DELETE) {
                 int taskId = Integer.parseInt(matcher.group(2));
                 commandToExecute = new DeleteCommand(taskId);
->>>>>>> branch-Level-8
             } else if (command == CommandName.BYE) {
                 commandToExecute = new ByeCommand();
                 Storage.getInstance().saveToDisk(taskList);

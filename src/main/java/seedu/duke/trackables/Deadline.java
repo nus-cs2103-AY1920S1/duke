@@ -1,29 +1,40 @@
 package seedu.duke.trackables;
 
-import seedu.duke.exceptions.InvalidArgumentException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Deadline extends Task {
 
-    protected Date by;
+    private Date by;
 
-    public Deadline(String description, Date by) throws InvalidArgumentException {
+    public Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * Constructs a new Deadline using string arguments. Typically used when restoring Deadline from Storage.
+     *
+     * @param args String arguments containing Deadline data from Storage.
+     */
     public Deadline(String... args) {
         super(args);
-        this.by = args[3];
+        try {
+            this.by = new SimpleDateFormat("d/MM/yyyy HHmm").parse(args[3]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getByAsFormattedString() {
+        return new SimpleDateFormat("d/MM/yyyy HHmm").format(by);
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-            + new SimpleDateFormat("d/MM/yyyy HHmm").format(by) + ")";
+            + getByAsFormattedString() + ")";
     }
 
     @Override
@@ -32,7 +43,7 @@ public class Deadline extends Task {
         sb.append("D").append(" | ")
             .append(isDone ? "1" : "0")
             .append(" | ").append(this.description)
-            .append(" | ").append(this.by);
+            .append(" | ").append(getByAsFormattedString());
         return sb.toString();
     }
 }

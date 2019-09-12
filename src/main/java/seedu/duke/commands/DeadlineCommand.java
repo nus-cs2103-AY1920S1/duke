@@ -31,7 +31,7 @@ public class DeadlineCommand extends Command {
                 "  " + deadline.toString(),
                 "Now you have " + tasks.size() + " tasks in the list.");
         } catch (ParseException pe) {
-            throw new InvalidArgumentException("Date input is not in the right format d/MM/yyyy HH:mm", pe);
+            throw new InvalidArgumentException("Date input is not in the right format d/MM/yyyy HHmm", pe);
         }
     }
 }

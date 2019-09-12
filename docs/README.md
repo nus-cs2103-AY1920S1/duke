@@ -45,7 +45,7 @@ Example of usage:
 'todo Borrow books'
 
 Expected outcome: 
-![Outcome of command 'todo'](/docs/Todo.png)
+![Outcome of command 'todo'](https://github.com/seahlynn/duke/blob/master/docs/Todo.png)
 
 
 ### `deadline` - Adds a DEADLINE task to the chatbot's tasklist
@@ -54,7 +54,7 @@ Example of usage:
 'deadline Submit CS2100 report /by 02/12/2019 1900'
 
 Expected outcome: 
-![Outcome of command 'deadline'](/docs/Deadline.png)
+![Outcome of command 'deadline'](https://github.com/seahlynn/duke/blob/master/docs/Deadline.png)
 
 
 ### `event` - Adds an EVENT task to the chatbot's tasklist
@@ -63,7 +63,7 @@ Example of usage:
 'event CS2103T team meeting /at 15/09/2019 1500-1800'
 
 Expected outcome: 
-![Outcome of command 'event'](/docs/Event.png)
+![Outcome of command 'event'](https://github.com/seahlynn/duke/blob/master/docs/Event.png)
 
 ### `fixed` - Adds a FIXED DURATION TASK to the chatbot's tasklist
 
@@ -71,7 +71,7 @@ Example of usage:
 'fixed Do my laundry /needs 2 hours
 
 Expected outcome:
-![Outcome of command 'fixed'](/docs/Fixed.png)
+![Outcome of command 'fixed'](https://github.com/seahlynn/duke/blob/master/docs/Fixed.png)
 
 ### `list` - Lists all the tasks added to the tasklist
 
@@ -79,7 +79,7 @@ Example of usage:
 'list'
 
 Expected Outcome:
-![Outcome of command 'list'](/docs/List.png)
+![Outcome of command 'list'](https://github.com/seahlynn/duke/blob/master/docs/List.png)
 
 ### `done` - Marks the task corresponding to inputted task number as 'done'
 
@@ -87,7 +87,7 @@ Example of usage:
 'done 1'
 
 Expected outcome: 
-![Outcome of command 'done 1'](/docs/Done.png)
+![Outcome of command 'done 1'](https://github.com/seahlynn/duke/blob/master/docs/Done.png)
 
 ### `delete` - Deletes the task corresponding to inputted task number
 
@@ -95,7 +95,7 @@ Example of usage:
 'delete 1'
 
 Expected outcome: 
-![Outcome of command 'delete 1'](/docs/Delete.png)
+![Outcome of command 'delete 1'](https://github.com/seahlynn/duke/blob/master/docs/Delete.png)
 
 ### `sort` - Sorts the task in the tasklist either according to date / type (as inputted)
 
@@ -103,6 +103,6 @@ Example of usage:
 'sort date'
 
 Expected outcome: 
-![Outcome of command 'sort date'](/docs/Sort.png)
+![Outcome of command 'sort date'](https://github.com/seahlynn/duke/blob/master/docs/Sort.png)
 
 

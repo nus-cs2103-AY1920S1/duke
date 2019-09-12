@@ -34,12 +34,15 @@ public class Duke {
      * @return the opening welcome message to be displayed.
      */
     public String displayIntro() {
+        /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        return "Hello from\n".concat(logo);
+
+         */
+        return "Hello from Duke! What can I do for you? :)\n";
     }
 
     /**

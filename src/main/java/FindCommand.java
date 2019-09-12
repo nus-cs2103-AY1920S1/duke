@@ -28,4 +28,14 @@ public class FindCommand extends Command {
 
         return builder.toString();
     }
+
+    public static String getHelp() {
+        StringBuilder builder = new StringBuilder("Command: find\n");
+        builder.append("- Format: 'find {keyword}'.\n");
+        builder.append("- Description: Shows all task which description contains the keyword.\n");
+        builder.append("- Example: 'find CS2103T Project'");
+        builder.append(" will show all tasks with phrase 'CS2103T Project' in their description.\n");
+
+        return builder.toString();
+    }
 }

@@ -1,2 +1,0 @@
-D | 1 | deadline return book | 4/10/2019 1900
-E | 1 | event project meeting | 5/12/2019 2359

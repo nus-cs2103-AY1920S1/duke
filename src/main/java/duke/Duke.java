@@ -26,7 +26,7 @@ import javafx.scene.image.ImageView;
 /**
  * Represents the main class of the programme.
  */
-public class Duke extends Application {
+public class Duke<x> extends Application {
 
     private Ui ui;
     private TaskList taskList;
@@ -142,20 +142,7 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        //Part 3. Add functionality to handle user input.
-
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
     }
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Iteration 1:
@@ -170,23 +157,6 @@ public class Duke extends Application {
 
         return textToAdd;
     }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-
-    private void handleUserInput() {
-        String userText = userInput.getText();
-        String dukeText = userInput.getText();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new Image(String.valueOf(user))),
-                DialogBox.getDukeDialog(dukeText, new Image(String.valueOf(duke)))
-        );
-        userInput.clear();
-    }
-
 
     private TaskList getTaskList() {
         return this.taskList;
@@ -207,9 +177,16 @@ public class Duke extends Application {
     String getResponse(String input) {
         String response;
         Duke duke = new Duke("tasks.txt");
+
+        Storage x = duke.getStorage();
+        assert x != null : "storage should not point to null pointer";
+        TaskList y = duke.getTaskList();
+        assert y != null : "TaskList should not point to null pointer";
+
         Parser parser = new Parser(duke.getTaskList(), duke.getUi(), duke.getStorage());
         try {
             response = parser.parseLineInput(input);
+            assert !response.equals("") : "Response should not be empty";
             return response;
         } catch (DukeException e) {
             response = e.getMessage();

@@ -1,13 +1,23 @@
 import java.lang.StringBuilder;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.LocalDateTime;
 
 public class Event extends Task {
 
     private String time;
 
+    private LocalDateTime dateTime;
+
     public Event(String description, String time) {
         super(description);
         this.time = time;
         this.type = TaskType.EVENT;
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        try {
+            this.dateTime = LocalDateTime.parse(time, f);
+        } catch (DateTimeParseException e) {
+        }
     }
 
     public static Event createEvent(String [] tokens) {

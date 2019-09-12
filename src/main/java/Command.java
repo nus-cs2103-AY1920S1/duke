@@ -10,6 +10,6 @@ public class Command {
 
     public String nextCommand(String input) {
         String text = input;
-        
+        switch ()
     }
 }

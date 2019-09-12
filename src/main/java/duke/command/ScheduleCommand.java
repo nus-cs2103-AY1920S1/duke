@@ -4,14 +4,29 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
+/**
+ * Command to show users the tasks they have on a specific date.
+ */
 public class ScheduleCommand extends Command {
 
     private int[] date;
 
+    /**
+     * Creates a UpdateCommand object with the task number and new description to be updated assigned.
+     *
+     * @param date Specific date to be checked, in the array {dd, mm, yyyy}
+     */
     public ScheduleCommand(int[] date) {
         this.date = date;
     }
 
+    /**
+     * Parses the command given to Duke and creates a ScheduleCommand if possible.
+     *
+     * @param fullCommand Full command split by whitespace.
+     * @return ScheduleCommand object to be created.
+     * @throws NumberFormatException If date given is not in number format (eg. 9/Sep/2019).
+     */
     public static ScheduleCommand process(String[] fullCommand) throws NumberFormatException {
         if (fullCommand.length == 1) {
             throw new DukeException("OOPS!!! Please specify the date that you want to check.");
@@ -33,6 +48,13 @@ public class ScheduleCommand extends Command {
         }
     }
 
+    /**
+     * Executes the ScheduleCommand through the TaskList object.
+     *
+     * @param tasks Task list to refer to.
+     * @param storage Unused.
+     * @return Response to user.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) {
         return tasks.findSchedule(date);

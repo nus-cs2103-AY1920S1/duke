@@ -127,11 +127,20 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Searches for deadlines and events on a specified date and compiles it for the user.
+     *
+     * @param scheduleDate Date the user is searching for.
+     * @return Response to user.
+     */
     public String findSchedule(int[] scheduleDate) {
+        // i know this method is super long i will change it
         ArrayList<Task> scheduledTasks = new ArrayList<>();
+        // searching through tasks and ignoring todo types
         for (Task task : tasks) {
             if (!(task instanceof Todo)) {
                 int[] taskDate = task.getDate();
+                // checking if date of task matches date we are searching for
                 if (Arrays.equals(scheduleDate, taskDate)) {
                     scheduledTasks.add(task);
                 }

@@ -49,7 +49,13 @@ public class UpdateCommand extends Command {
         return new UpdateCommand(currArray);
     }
 
-
+    /**
+     * Executes the UpdateCommand.
+     *
+     * @param tasks Task list to refer to.
+     * @param storage Storage where the list is updated with the new description.
+     * @return Response to user.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) {
         String response = tasks.updateDescription(taskNumber, newDescription);

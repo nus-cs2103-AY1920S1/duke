@@ -32,15 +32,16 @@ public class Duke extends Application {
 	private TaskList tasks;
 	private Ui ui;
 
-	private static String filename = "./data/duke.txt"; // todo isDone? description
+	private static String filename = "data/duke.txt"; // todo isDone? description
 
-	public Duke() {}
-	public Duke (String filename) {
+	public Duke() {
 		ui = new Ui();
 		storage = new Storage(filename);
 
 		try {
+			System.out.println("try block starts");
 			tasks = new TaskList(storage.load());
+			System.out.println("try block ends");
 		} catch (FileNotFoundException fe) {
 			ui.showError(fe.getMessage());
 		} catch (DukeException e) {
@@ -196,7 +197,10 @@ public class Duke extends Application {
 	 * Replace this stub with your completed method.
 	 */
 	private String getResponse(String command) {
-		assert (tasks != null && ui != null && storage != null); // they really shldnt be null
+		assert (tasks != null); // they really shldnt be null
+		assert (ui != null);
+		assert (storage != null);
+
 		if (command.equals("bye")) {
 			ui.exit();
 		}
@@ -207,6 +211,7 @@ public class Duke extends Application {
 			Command c = Parser.parse(type, remainingCommand);
 			c.execute(tasks, ui);
 			storage.update(tasks, filename);
+			return ui.out();
 		} catch (DukeException | ParseException | IOException e) {
 			ui.showError(e.getMessage());
 		}

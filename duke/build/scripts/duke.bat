@@ -82,7 +82,7 @@ set CMD_LINE_ARGS=%*
 set CLASSPATH=%APP_HOME%\lib\duke-0.1.0.jar;%APP_HOME%\lib\javafx-fxml-11.0.2-mac.jar;%APP_HOME%\lib\javafx-controls-11.0.2-mac.jar;%APP_HOME%\lib\javafx-controls-11.0.2.jar;%APP_HOME%\lib\javafx-graphics-11.0.2-mac.jar;%APP_HOME%\lib\javafx-graphics-11.0.2.jar;%APP_HOME%\lib\javafx-base-11.0.2-mac.jar;%APP_HOME%\lib\javafx-base-11.0.2.jar
 
 @rem Execute duke
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %DUKE_OPTS%  -classpath "%CLASSPATH%" Duke %CMD_LINE_ARGS%
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %DUKE_OPTS%  -classpath "%CLASSPATH%" Launcher %CMD_LINE_ARGS%
 
 :end
 @rem End local scope for the variables with windows NT shell

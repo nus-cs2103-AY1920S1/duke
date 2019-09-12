@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AddCommandTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-04T03:21:17" hostname="Mandys-MacBook-Pro.local" time="0.053">
+<testsuite name="AddCommandTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-12T04:20:12" hostname="r-37-97-25-172.comp.nus.edu.sg" time="0.032">
   <properties/>
-  <testcase name="testExecute()" classname="AddCommandTest" time="0.053"/>
+  <testcase name="testExecute()" classname="AddCommandTest" time="0.032"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

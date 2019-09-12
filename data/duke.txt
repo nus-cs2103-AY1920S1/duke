@@ -1,4 +1,4 @@
 T | ✓ | borrow books
 E | ✓ | bizit meeting | Tuesday 6:30pm
 T | ✘ | read books
-D | ✓ | CS2105 assignment 0 | 7th of September 2019, 11:59pm
+T | ✓ | return books

@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class DateValidatorTest {
 
+    /**
+     * REDUNDANT
+     *
     @Test
     public void validateDate_validDatesDeadline_trueReturned() {
         try {
@@ -49,5 +52,6 @@ public class DateValidatorTest {
             fail();
         }
     }
+    */
 
 }

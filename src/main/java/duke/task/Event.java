@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
  * The second LocalDateTime represents the date and time when the event ends.
  */
 public class Event extends Task {
-    protected LocalDateTime startTime;
-    protected LocalDateTime endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     /**
      * Constructs an unfinished Event object.
@@ -40,7 +40,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the starting time of this {@Class Event} object.
+     * Returns the starting time of this Event object.
      *
      * @return Starting time of this event object.
      */

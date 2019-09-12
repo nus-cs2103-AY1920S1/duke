@@ -46,7 +46,7 @@ public class Duke {
      *
      * @param input User input String.
      */
-    public void start(String input) {
+    void start(String input) {
 
         try {
             assert mw != null;

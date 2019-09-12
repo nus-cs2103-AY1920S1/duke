@@ -55,6 +55,7 @@ public class Parser {
     }
 
     private static String concatCommand(String[] strs) {
+        assert strs != null;
         StringBuffer output = new StringBuffer("");
         for (int i = 1; i < strs.length; i++) {
             output.append(strs[i] + " ");

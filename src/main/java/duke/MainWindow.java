@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     private static final int NUMBER_OF_REMINDER = 5;
 
     /**
-     * Initializes a {@class MainWindow} object.
+     * Initializes a MainWindow object.
      */
     @FXML
     public void initialize() {
@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Displays the reminder in a dialogue box.
      */
-    public void displayReminder() {
+    void displayReminder() {
         assert duke != null;
         Reminder reminder = new Reminder(duke.getSheet(), duke.getUi());
         reminder.remind(NUMBER_OF_REMINDER);

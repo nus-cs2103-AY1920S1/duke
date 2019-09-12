@@ -29,7 +29,6 @@ public class CommandDeadline extends Command {
             throw new MissingDescriptionException(
                     "> < OOPS!! Did you forget to add the deadline?");
         } else {
-            assert commands.length > 1;
             String description = commands[0].trim();
             String deadline = commands[1].trim();
             Task dlTask = new Deadline(description, DateUtil.toTime(deadline));

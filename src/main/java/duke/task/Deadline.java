@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime deadline;
+    private LocalDateTime deadline;
 
     /**
      * Constructs an unfinished Deadline object.

@@ -12,7 +12,10 @@ import java.util.Scanner;
 public class Ui {
 
     public String getWelcome() {
-        return "Hello! I'm Duke, what can I do for you?";
+        StringBuilder welcomeMessage = new StringBuilder("Hello! I'm Duke, what can I do for you?");
+        welcomeMessage.append("\n");
+        welcomeMessage.append("For help, please enter \"HELP\"");
+        return welcomeMessage.toString();
     }
 
     public String getBye() {

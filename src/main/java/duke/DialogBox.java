@@ -37,7 +37,6 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setWrapText(true);
-        System.out.println("testing");
         displayPicture.setImage(img);
     }
 

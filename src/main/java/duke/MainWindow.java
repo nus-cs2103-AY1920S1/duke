@@ -7,9 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
 import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
 import java.nio.file.InvalidPathException;
 
 /**
@@ -67,9 +65,31 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+
+        if(input.toLowerCase().equals("help")){
+            handleHelpPage();
+        } else{
+            handleOperations(input);
+        }
+    }
+
+    /*
+        Handles the display for help page and helpful advice for users.
+     */
+    private void handleHelpPage(){
+       Image jigglypuff = new Image(this.getClass().getResourceAsStream("/images/jigglypuff.png"));
+        dialogContainer.getChildren().addAll(new HelpBox("Welcome to help page!", jigglypuff));
+        userInput.clear();
+
+    }
+
+    /*
+        Handles usual operations other than help page.
+     */
+    private void handleOperations(String input){
         String response = duke.getDukeResponse(input);
 
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage), DialogBox.getDukeDialog(response, dukeImage));
-        userInput.clear();
+
     }
 }

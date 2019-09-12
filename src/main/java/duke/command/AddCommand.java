@@ -10,7 +10,7 @@ import duke.task.Task;
 /**
  * Represents a command to add a task. The <code>AddCommand</code> class 
  * inherits from the <code>Command</code> class to represent user instruction 
- * to add a new <code>ToDo</code>, <code>Deadline</code> or <code>Event</code>
+ * to add a new <code>NormalTask</code>, <code>Deadline</code> or <code>Event</code>
  * task.
  */
 public class AddCommand extends Command {

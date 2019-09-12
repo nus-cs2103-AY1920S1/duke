@@ -28,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string representatio of the task to be stored in a local file.
+     * Returns a string representation of the task to be stored in a local file.
      *
      * @return A string in a specific format for clear display in a local file.
      */

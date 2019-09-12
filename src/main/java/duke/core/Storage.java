@@ -1,7 +1,7 @@
 package duke.core;
 
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.NormalTask;
 import duke.task.Deadline;
 import duke.task.Event;
 
@@ -47,7 +47,7 @@ public class Storage {
                 String nextLine = fileScanner.nextLine();
                 String[] words = nextLine.split(" \\| ");
                 if (words[0].equals("T")) {
-                    Task t = new ToDo(words[2]);
+                    Task t = new NormalTask(words[2]);
                     if (words[1].equals("✓")) {
                         t.markAsDone();
                     }

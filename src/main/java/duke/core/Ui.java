@@ -149,14 +149,14 @@ public class Ui {
     /**
      * Shows content of an error.
      *
-     * @param s A string that represents the content of the error.
+     * @param errorMessage A string that represents the content of the error.
      */
-    public void showError(String s) {
-        System.out.println(s);
+    public void showError(String errorMessage) {
+        System.out.println(errorMessage);
     }
 
-    public String showErrorGui(String s) {
-        return s;
+    public String showErrorGui(String errorMessage) {
+        return errorMessage;
     }
 
     /**

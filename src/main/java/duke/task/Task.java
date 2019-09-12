@@ -55,9 +55,9 @@ public abstract class Task {
     }
 
     /**
-     * Formats the task in a pecific format for clear display and storage.
+     * Formats the task in a specific format for clear display and storage.
      *
-     * @return A string representatio of the task to be stored in a local file.
+     * @return A string representation of the task to be stored in a local file.
      */
     public abstract String format();
 

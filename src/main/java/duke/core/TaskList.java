@@ -90,7 +90,7 @@ public class TaskList {
             } else if (t instanceof Event) {
                 ((Event) t).updateOccurTime(newValue);
             } else {
-                throw new DukeException(" \u2639  OOPS!!! Todo tasks do not have a time attribute.");
+                throw new DukeException(" \u2639  OOPS!!! Normal tasks do not have a time attribute.");
             }
         }
     }

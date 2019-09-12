@@ -49,10 +49,10 @@ public class Task {
      * Prints a statement informing the user that the bot
      * has added the task into the list.
      */
-    public void printGI() {
+    public String printGI() {
         Ui.printLine();
         Ui.printIndent();
-        System.out.println("Got it. I've added this task:");
+        return "Got it. I've added this task:";
     }
 
     /**
@@ -61,11 +61,10 @@ public class Task {
      * @throws IOException If the named file exists but is a directory rather than a regular file,
      *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
-    public void printNumOfTasks() throws IOException {
+    public String printNumOfTasks() throws IOException {
         Ui.printIndent();
-        System.out.println("Now you have "
-                + Ui.getNumOfTasks() + " tasks in the list.");
-        Ui.printLine();
+        return "Now you have " + Ui.getNumOfTasks() + " tasks in the list.";
+        //Ui.printLine();
     }
 
     /**
@@ -81,10 +80,10 @@ public class Task {
     /**
      * Prints a statement to tell the user that the task has been removed.
      */
-    public void printRemove() {
+    public String printRemove() {
         Ui.printLine();
         Ui.printIndent();
-        System.out.println("Noted. I've removed this task.");
+        return "Noted. I've removed this task.";
     }
 
     /**

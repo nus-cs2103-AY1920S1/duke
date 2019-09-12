@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -33,9 +32,9 @@ public class TaskList {
      * @throws IOException If the named file exists but is a directory rather than a regular file,
      *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
-    public void deleteCommand(String text) throws IOException {
-        int num = text.indexOf(" ");
-        int taskNumber = Integer.parseInt(text.substring(num + 1, num + 2));
+    public String deleteCommand(String text) throws IOException {
+        int spaceIndex = text.indexOf(" ");
+        int taskNumber = Integer.parseInt(text.substring(spaceIndex + 1, spaceIndex + 2));
         tasking.printRemove();
         Ui.printDelete(taskNumber);
         listOfTasks.remove(taskNumber - 1);
@@ -43,7 +42,7 @@ public class TaskList {
         for (Task task : listOfTasks) {
             store.addToFile(Storage.file, task.toString());
         }
-        tasking.printNumOfTasks();
+        return tasking.printNumOfTasks();
     }
 
     /**
@@ -54,14 +53,14 @@ public class TaskList {
      *     does not exist but cannot be created,
      *     or cannot be opened for any other reason.
      */
-    public void deleteAllCommand(String text) throws IOException {
+    public String deleteAllCommand(String text) throws IOException {
         store.writeToFile(Storage.file, "");
         listOfTasks.clear();
         Ui.printLine();
         Ui.printIndent();
-        System.out.println("Everything in your list has been removed! "
-                + "Add more tasks to get started again!!!");
-        Ui.printLine();
+        return "Everything in your list has been removed! "
+                + "Add more tasks to get started again!!!";
+        //Ui.printLine();
     }
 
     /**
@@ -71,15 +70,19 @@ public class TaskList {
      * @throws IOException If the named file exists but is a directory rather than a regular file,
      *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
-    public void toDoCommand(String text) throws IOException {
+    public String toDoCommand(String text) throws IOException {
         tasking.printGI();
+        System.out.println("1");
         Ui.printIndent();
+        System.out.println("2");
         int num = text.indexOf(" ");
         Task task = new Todo(text.substring(num + 1));
+        System.out.println("3");
         System.out.println("  " + task.toString());
         listOfTasks.add(task);
+        System.out.println("4");
         store.addToFile(Storage.file, task.toString());
-        tasking.printNumOfTasks();
+        return tasking.printNumOfTasks();
     }
 
     /**
@@ -92,7 +95,7 @@ public class TaskList {
      * @throws IOException If the named file exists but is a directory rather than a regular file,
      *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
-    public void eventCommand(String text) throws DukeException, IOException {
+    public String eventCommand(String text) throws DukeException, IOException {
         int num = text.indexOf("/");
         int num1 = text.indexOf(" ");
         int dayDate = Integer.parseInt(text.substring(num + 4, num + 6));
@@ -110,7 +113,7 @@ public class TaskList {
                 System.out.println("  " + taskers);
                 listOfTasks.add(task);
                 store.addToFile(Storage.file, taskers);
-                tasking.printNumOfTasks();
+                return tasking.printNumOfTasks();
             } else {
                 Ui.printIndent();
                 throw new DukeException(taskers);
@@ -134,7 +137,7 @@ public class TaskList {
      * @throws IOException If the named file exists but is a directory rather than a regular file,
      *     does not exist but cannot be created, or cannot be opened for any other reason.
      */
-    public void deadlineCommand(String text) throws DukeException, IOException {
+    public String deadlineCommand(String text) throws DukeException, IOException {
         int num = text.indexOf("/");
         int num1 = text.indexOf(" ");
         int dayDate = Integer.parseInt(text.substring(num + 4, num + 6));
@@ -152,7 +155,7 @@ public class TaskList {
                 System.out.println("  " + taskers);
                 listOfTasks.add(task);
                 store.addToFile(Storage.file, taskers);
-                tasking.printNumOfTasks();
+                return tasking.printNumOfTasks();
             } else {
                 Ui.printIndent();
                 throw new DukeException(taskers);

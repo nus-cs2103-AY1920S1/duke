@@ -17,6 +17,9 @@ public class Ui {
 
     }
 
+    public String readInput() {
+        return scan.nextLine();
+    }
     /**
      * Prints the greeting at the initiation of the chat bot.
      */
@@ -138,11 +141,12 @@ public class Ui {
     /**
      * Ends the chat bot.
      */
-    private static void printBye() {
+    static String printBye() {
         printLine();
         printIndent();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+        //System.out.println("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!";
+        //printLine();
     }
 
     /**
@@ -150,14 +154,14 @@ public class Ui {
      *
      * @param i To indicate which task number is done.
      */
-    private static void printDone(int i) {
+    static String printDone(int i) {
         TaskList.listOfTasks.get(i - 1).markAsDone();
         printLine();
         printIndent();
         System.out.println("Nice! I've marked this task as done:");
         printIndent();
-        System.out.println(TaskList.listOfTasks.get(i - 1).toString());
-        printLine();
+        return TaskList.listOfTasks.get(i - 1).toString();
+        //printLine();
     }
 
     /**
@@ -165,10 +169,10 @@ public class Ui {
      *
      * @param i Indicates the task number that is done.
      */
-    public static void printDelete(int i) {
+    public static String printDelete(int i) {
         printIndent();
-        System.out.println(TaskList.listOfTasks.get(i - 1).toString());
-        printLine();
+        return TaskList.listOfTasks.get(i - 1).toString();
+        //printLine();
     }
 
     /**
@@ -176,11 +180,11 @@ public class Ui {
      *
      * @throws FileNotFoundException if there is no such file that contains the tasks.
      */
-    private static void printList() throws FileNotFoundException {
+    static String printList() throws FileNotFoundException {
         printLine();
         printIndent();
         if (TaskList.listOfTasks.isEmpty()) {
-            System.out.println("There is no tasks in your list currently!!!");
+            return "There is no tasks in your list currently!!!";
         } else {
             System.out.println("Here are the tasks in your list:");
             File temp = new File(Storage.file);
@@ -191,8 +195,9 @@ public class Ui {
                 System.out.println(numbering + ". " + s.nextLine());
                 numbering++;
             }
+            return "";
         }
-        printLine();
+        //printLine();
     }
 
     /**
@@ -263,7 +268,7 @@ public class Ui {
      * @param list Prints out the array list of tasks
      *             that contains the keyword.
      */
-    public void printKeywordList(ArrayList<String> list) {
+    public String printKeywordList(ArrayList<String> list) {
         printLine();
         printIndent();
         System.out.println("Here are the matching tasks in your list!");
@@ -272,5 +277,6 @@ public class Ui {
             System.out.println(str);
         }
         printLine();
+        return "";
     }
 }

@@ -4,7 +4,7 @@ import duke.ui.Ui;
 
 import duke.exception.DukeException;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
@@ -15,7 +15,7 @@ public class TaskList {
      * Constructor to create a TaskList object.
      */
     public TaskList() {
-        tasks = new LinkedList<>();
+        tasks = new ArrayList<>();
     }
 
     /**

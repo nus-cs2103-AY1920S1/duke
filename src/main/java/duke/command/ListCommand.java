@@ -22,14 +22,4 @@ public class ListCommand extends Command {
 
         return ui.printTasks(taskList.getTasks());
     }
-
-    /**
-     * Checks if the command is an ExitCommand.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

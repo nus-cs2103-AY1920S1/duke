@@ -33,14 +33,4 @@ public class FindCommand extends Command {
 
         return ui.printMatchingTasks(taskList.getTasks(), keyword);
     }
-
-    /**
-     * Check if it is a ExitCommand object.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

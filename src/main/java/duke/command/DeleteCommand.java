@@ -52,14 +52,4 @@ public class DeleteCommand extends Command {
             throw new DukeException("OOPS!!! Enter a valid task number.");
         }
     }
-
-    /**
-     * Checks if the command is an ExitCommand.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -72,14 +72,4 @@ public class AddCommand extends Command {
             throw new DukeException(e.getMessage());
         }
     }
-
-    /**
-     * Checks if the command is an ExitCommand.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

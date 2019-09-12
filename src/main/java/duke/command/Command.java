@@ -22,8 +22,9 @@ public abstract class Command {
     /**
      * Checks if the command is an ExitCommand.
      *
-     * @return True if it is an ExitCommand, false if otherwise.
+     * @return False by default. To be overridden in ExitCommand class.
      */
-    public abstract boolean isExit();
-
+    public boolean isExit() {
+        return false;
+    }
 }

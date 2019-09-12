@@ -114,7 +114,7 @@ public class Ui {
      */
     public String showWelcome()  {
         sb = new StringBuilder();
-        sb.append("Hello I'm Duke! \nWhat can I do for you?");
+        sb.append("Hello I'm Pikachu! \nWhat can I do for you?");
         sb.append(System.lineSeparator());
         return sb.toString();
     }

@@ -73,6 +73,21 @@ public class Ui {
     }
 
     /**
+     * Prints list of reminder.
+     *
+     * @param list list of reminders to be printed.
+     */
+    public void printReminder(ArrayList<Task> list) {
+        s += "Reminders:\n";
+        for (int i = 1; i <= list.size(); i++) {
+            Task curr = list.get(i - 1);
+            if (curr.getDiffDays() <= 3 && curr.getDiffDays() >= 0) {
+                s += curr + "\n";
+            }
+        }
+    }
+
+    /**
      * Prints message when a task is done.
      *
      * @param currTask current task which is done.

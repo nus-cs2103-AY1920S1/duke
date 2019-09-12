@@ -4,3 +4,5 @@ T|1|borrow book
 T|0|abc
 T|0|anything
 T|0|abcdef
+E|0|abc|12/09/2019 03:49
+D|1|amidone|14/09/2019 2:59

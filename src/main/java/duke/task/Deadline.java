@@ -2,6 +2,7 @@ package duke.task;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -22,6 +23,20 @@ public class Deadline extends Task {
         super(description);
         this.by = by;
         this.date = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(by);
+    }
+
+    /**
+     * Calculates the number of days to the deadline.
+     *
+     * @return the number of days between current date versus deadline date.
+     */
+
+    public int getDiffDays() {
+        Calendar cal = Calendar.getInstance();
+        Date current = cal.getTime();
+        long diff = date.getTime() - current.getTime();
+        int diffDays = (int) (diff / (24 * 60 * 60 * 1000));
+        return diffDays;
     }
 
     /**

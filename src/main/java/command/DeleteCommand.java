@@ -44,6 +44,9 @@ public class DeleteCommand extends Command {
                 } else {
                     output += "Now you have " + tasks.getSize() + " task in the list.\n";
                 }
+
+                assert !output.equals("") : "Output should not be empty";
+
                 return output;
             }
         }

@@ -33,6 +33,9 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("No such file exits");
         }
+
+        assert sc != null: "Scanner should not be NULL";
+        assert filepath != null: "Filepath should not be NULL";
     }
 
     /**

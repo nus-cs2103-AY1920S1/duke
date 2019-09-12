@@ -45,6 +45,9 @@ public class ToDoCommand extends Command {
             } else {
                 output += "Now you have " + tasks.getSize() + " task in the list.";
             }
+
+            assert !output.equals("") : "Output should not be empty";
+
             return output;
         }
     }

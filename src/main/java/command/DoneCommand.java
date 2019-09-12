@@ -45,6 +45,9 @@ public class DoneCommand extends Command {
                     output += "Nice! I've marked this task as done:\n";
                     output += "  " + task + "\n";
                 }
+
+                assert !output.equals("") : "Output should not be empty";
+
                 return output;
             }
         }

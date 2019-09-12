@@ -31,6 +31,9 @@ public class Duke {
             System.out.println("You can still use Duke, but progress will not be saved");
             storage = new FakeStorage();
         }
+
+        assert storage != null: "Storage should not be NULL";
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

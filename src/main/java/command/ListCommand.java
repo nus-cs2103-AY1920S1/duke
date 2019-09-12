@@ -26,6 +26,9 @@ public class ListCommand extends Command {
             output += i + ". " + task + "\n";
             i++;
         }
+
+        assert !output.equals("") : "Output should not be empty";
+
         return output;
     }
 

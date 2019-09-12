@@ -23,8 +23,6 @@ public class CommandGenerator {
                     return new DeadlineCommand(fullCommand);
                 case "event":
                     return new EventCommand(fullCommand);
-                default:
-                    assert false : parser.getCommandType();
             }
         }
         return new Command(fullCommand);

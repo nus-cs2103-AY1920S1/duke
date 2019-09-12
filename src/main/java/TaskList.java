@@ -32,14 +32,18 @@ public class TaskList {
      *
      * @throws DukeException If the task list is empty.
      */
-    public void list() throws DukeException{
+    public String list() throws DukeException{
         if (list.size() == 1) {
             throw new DukeException("OOPS!!! You have no tasks to be displayed.");
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String result = "Here are the tasks in your list:\n";
             for (int i = 1; i < list.size(); i++) {
-                System.out.println(i + "." + list.get(i));
+                result = result + i + "." + list.get(i);
+                if (i < list.size() - 1) {
+                    result = result + "\n";
+                }
             }
+            return result;
         }
     }
 
@@ -49,11 +53,11 @@ public class TaskList {
      * @param num Index of the Task object to be marked as done.
      * @throws DukeException If a Task object does not exist at the given index.
      */
-    public void markAsDone(int num) throws DukeException {
+    public String markAsDone(int num) throws DukeException {
         if (num >= list.size() || num < 1) {
             throw new DukeException("This task does not exist.");
         } else {
-            System.out.println(list.get(num).markAsDone());
+            return list.get(num).markAsDone();
         }
     }
 
@@ -62,10 +66,10 @@ public class TaskList {
      *
      * @param task Task object representing task to be added to the list.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         list.add(task);
-        System.out.println("Got it. I've added this task:\n" + list.get(list.size() - 1));
-        System.out.println("Now you have " + (list.size() - 1) + " tasks in the list");
+        return String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.",
+                list.get(list.size() - 1), list.size()-1);
     }
 
     /**
@@ -74,12 +78,12 @@ public class TaskList {
      * @param num Index of the Task to be deleted from the ArrayList.
      * @throws DukeException If the Task object at the given index does not exist.
      */
-    public void deleteTask(int num) throws DukeException {
+    public String deleteTask(int num) throws DukeException {
         if (num >= list.size() || num < 1) {
             throw new DukeException("This task does not exist.");
         } else {
-            System.out.println("Noted. I've removed this task:\n" + list.remove(num));
-            System.out.println("Now you have " + (list.size() - 1) + " tasks in the list.");
+            return String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.",
+                    list.remove(num), list.size() - 1);
         }
     }
 
@@ -88,16 +92,20 @@ public class TaskList {
      *
      * @param keyword String to be searched for in the tasks.
      */
-    public void findTasks(String keyword) {
+    public String findTasks(String keyword) {
         ArrayList<Task> tasksMatched = new ArrayList<>();
         for (int i = 1; i < list.size(); i++) {
             if (list.get(i).getName().contains(keyword)) {
                 tasksMatched.add(list.get(i));
             }
         }
-        System.out.println("Here are the matching tasks in your list:");
+        String result = "Here are the matching tasks in your list:\n";
         for (int j = 0; j < tasksMatched.size(); j++) {
-            System.out.println(j+1 + "." + tasksMatched.get(j));
+            result = result + j+1 + "." + tasksMatched.get(j);
+            if (j < tasksMatched.size() - 1) {
+                result = result + "\n";
+            }
         }
+        return result;
     }
 }

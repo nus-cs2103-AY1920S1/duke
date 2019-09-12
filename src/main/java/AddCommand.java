@@ -21,7 +21,7 @@ public class AddCommand extends Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If the task failed to be added.
      */
-    public void execute(TaskList tasks) throws DukeException {
-        tasks.addTask(this.taskToAdd);
+    public String execute(TaskList tasks) throws DukeException {
+        return tasks.addTask(this.taskToAdd);
     }
 }

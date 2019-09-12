@@ -8,5 +8,5 @@ public abstract class Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If the command failed to be executed.
      */
-    public abstract void execute(TaskList tasks) throws DukeException;
+    public abstract String execute(TaskList tasks) throws DukeException;
 }

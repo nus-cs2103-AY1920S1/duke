@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If the task could not be deleted.
      */
-    public void execute(TaskList tasks) throws DukeException {
-        tasks.deleteTask(taskNum);
+    public String execute(TaskList tasks) throws DukeException {
+        return tasks.deleteTask(taskNum);
     }
 }

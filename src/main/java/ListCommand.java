@@ -9,7 +9,7 @@ public class ListCommand extends Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If a TaskList is empty.
      */
-    public void execute(TaskList tasks)throws DukeException {
-       tasks.list();
+    public String execute(TaskList tasks)throws DukeException {
+       return tasks.list();
     }
 }

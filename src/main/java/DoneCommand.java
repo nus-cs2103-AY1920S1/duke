@@ -21,7 +21,7 @@ public class DoneCommand extends Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If the Task does not exist.
      */
-    public void execute(TaskList tasks) throws DukeException {
-        tasks.markAsDone(taskNum);
+    public String execute(TaskList tasks) throws DukeException {
+        return tasks.markAsDone(taskNum);
     }
 }

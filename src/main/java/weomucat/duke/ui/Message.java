@@ -17,13 +17,13 @@ public class Message {
     this.body = body;
   }
 
+  public String getTitle() {
+    return title;
+  }
+
   public Message setTitle(String title) {
     this.title = title;
     return this;
-  }
-
-  public String getTitle() {
-    return title;
   }
 
   public String getBody() {

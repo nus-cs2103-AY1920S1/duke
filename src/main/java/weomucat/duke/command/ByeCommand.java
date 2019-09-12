@@ -1,7 +1,6 @@
 package weomucat.duke.command;
 
 import java.util.HashMap;
-import weomucat.duke.exception.DukeException;
 
 public abstract class ByeCommand implements Command {
 

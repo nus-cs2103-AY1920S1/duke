@@ -1,18 +1,19 @@
-package weomucat.duke;
+package weomucat.duke.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;
+import weomucat.duke.parser.CommandParser;
 
-public class ParserTest {
+public class CommandParserTest {
 
   @Test
   public void commandShouldBeEmptyString() {
     String[] tests = {"", " ", "  ", "   "};
 
     for (String test : tests) {
-      Parser parser = new Parser(test);
+      CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
 
       assertEquals("", command, formatMessage(test));
@@ -27,7 +28,7 @@ public class ParserTest {
     };
 
     for (String test : tests) {
-      Parser parser = new Parser(test);
+      CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
 
       assertEquals("todo", command, formatMessage(test));
@@ -42,7 +43,7 @@ public class ParserTest {
     };
 
     for (String test : tests) {
-      Parser parser = new Parser(test);
+      CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
       HashMap<String, String> parameters = parser.parseParameters("/from", "/to");
 
@@ -61,7 +62,7 @@ public class ParserTest {
     };
 
     for (String test : tests) {
-      Parser parser = new Parser(test);
+      CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
       HashMap<String, String> parameters = parser.parseParameters("/from", "/to");
 
@@ -82,7 +83,7 @@ public class ParserTest {
     };
 
     for (String test : tests) {
-      Parser parser = new Parser(test);
+      CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
       HashMap<String, String> parameters = parser.parseParameters("/from", "/to");
 
@@ -103,7 +104,7 @@ public class ParserTest {
     };
 
     for (String test : tests) {
-      Parser parser = new Parser(test);
+      CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
       HashMap<String, String> parameters = parser.parseParameters("/from", "/to");
 
@@ -123,7 +124,7 @@ public class ParserTest {
     };
 
     for (String test : tests) {
-      Parser parser = new Parser(test);
+      CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
       HashMap<String, String> parameters = parser.parseParameters("/a", "/b", "/c");
 

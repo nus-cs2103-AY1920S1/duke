@@ -27,10 +27,6 @@ public class Duke {
   private TaskListStorage storage;
   private UiList uiList;
 
-  public static void main(String[] args) throws Exception {
-    new Duke("data/tasks").run();
-  }
-
   /**
    * Default constructor.
    *
@@ -43,6 +39,10 @@ public class Duke {
     this.taskList = new TaskList();
     this.storage = new TaskListStorage(taskListPath);
     this.uiList = new UiList();
+  }
+
+  public static void main(String[] args) throws Exception {
+    new Duke("data/tasks").run();
   }
 
   private void run() throws Exception {

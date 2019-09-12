@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * A task class that represents a task. It usually contains the description and boolean
@@ -63,5 +64,8 @@ public class Task {
      */
     public boolean isDone() {
         return done;
+    }
+
+    public void reschedule(Date date) {
     }
 }

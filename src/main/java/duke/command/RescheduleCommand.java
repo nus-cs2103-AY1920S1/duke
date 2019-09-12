@@ -1,29 +1,26 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.UI;
-import duke.storage.Storage;
 
 import java.io.FileNotFoundException;
+import java.util.Date;
 
-/**
- * Represents a DoneCommand. Upon execution will mark the
- * task as done.
- *
- */
-
-public class DoneCommand extends Command {
+public class RescheduleCommand extends Command {
+    Date date;
 
     /**
-     * Initializes an DoneCommand instance with command.
+     * Initializes an RescheduleCommand instance with command.
      * The command should include the index of task to be marked done.
      *
      * @param command The index given by user.
      */
-    public DoneCommand(String command) {
-        assert !command.isEmpty();
+    public RescheduleCommand(String command, Date date) {
         this.command = command;
+        this.date = date;
     }
 
     /**
@@ -34,29 +31,26 @@ public class DoneCommand extends Command {
      * @param ui An UI object.
      * @param storage Storage of the current list of tasks.
      * @throws DukeException If index is negative or exceeds the size of TaskList.
-     * @throws FileNotFoundException If file cannot be found.
+     * @throws FileNotFoundException If the file cannot be found.
      */
-    @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException, FileNotFoundException {
         int index = Integer.valueOf(command);
         if (index > tasks.size() || index < 1) {
             throw new DukeException("☹ OOPS!!! That number you put in does not exit");
         }
-        tasks.get(index - 1).toggleState();
+        Task task = tasks.get(index - 1);
+        task.reschedule(this.date);
         StringBuilder sb = new StringBuilder();
-        sb.append("Nice! I've marked this task as done: \n  " + tasks.get(index - 1).toString() + "\n");
+        sb.append("Nice! I've rescheduled this task: \n  " + tasks.get(index - 1).toString() + "\n");
         storage.updateFile(tasks);
-        String result = sb.toString();
-        System.out.println(result);
-        return result;
+        return sb.toString();
     }
 
     /**
      * Checks if this is the exit command.
      *
-     * @return false as it is an DoneCommand.
+     * @return false as it is an RescheduleCommand.
      */
-    @Override
     public boolean isExit() {
         return false;
     }
@@ -85,13 +79,15 @@ public class DoneCommand extends Command {
 
         /* Check if o is an instance of Complex or not
           "null instanceof [type]" also returns false */
-        if (!(o instanceof DoneCommand)) {
+        if (!(o instanceof AddCommand)) {
             return false;
         }
 
         // typecast o to Complex so that we can compare data members
-        DoneCommand c = (DoneCommand) o;
+        RescheduleCommand c = (RescheduleCommand) o;
 
-        return this.command.equals(c.command);
+        // Compare the data members and return accordingly
+        return this.command.equals(c.command)
+                && date.equals(c.date);
     }
 }

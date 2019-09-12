@@ -28,6 +28,15 @@ public class Event extends Task {
     }
 
     /**
+     * Reschedule the date of the event.
+     * @param date Date object
+     */
+    @Override
+    public void reschedule(Date date) {
+        this.time = date;
+    }
+
+    /**
      * Format the task into a format presentable to users.
      * @return The format that the user wish to see.
      */

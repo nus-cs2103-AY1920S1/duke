@@ -1,12 +1,6 @@
 package duke.util;
 
-import duke.command.AddCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.ExitCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.Command;
+import duke.command.*;
 import duke.command.Command;
 import duke.task.Task;
 import duke.task.Deadline;
@@ -84,8 +78,10 @@ public class Parser {
             return createExitCommand();
         } else if (isAdd(str)) {
             return createAddCommand(str);
+        } else if (isReschedule(str)) {
+            return createRescheduleCommand(str);
         } else {
-            throw new DukeException("☹ OOPS!!! I do not understand what did you just typed.");
+                throw new DukeException("☹ OOPS!!! I do not understand what did you just typed.");
         }
     }
 
@@ -147,6 +143,17 @@ public class Parser {
         return new ExitCommand();
     }
 
+    /**
+     * Creates a RescheduleCommand
+     * @param str User's input
+     * @return RescheduleCommand
+     */
+    public static Command createRescheduleCommand(String str) throws ParseException {
+        String[] info = str.split(" ", 3);
+        Date date;
+        date = FORMATTER.parse(info[2].trim());
+        return new RescheduleCommand(info[1], date);
+    }
     /**
      * Create AddCommand for respective task.
      * @param str The user's input
@@ -283,5 +290,15 @@ public class Parser {
     public static boolean isAdd(String str) {
         String commandWord = str.trim().split(" ", 2)[0];
         return commandWord.equals("todo") || commandWord.equals("deadline") || commandWord.equals("event");
+    }
+
+    /**
+     * Checks if the command is to reschedule a task
+     * @param str The user's input
+     * @return Whether the input's first word is reschedule
+     */
+    public static boolean isReschedule(String str) {
+        String commandWord = str.trim().split(" ", 2)[0];
+        return commandWord.equals("reschedule");
     }
 }

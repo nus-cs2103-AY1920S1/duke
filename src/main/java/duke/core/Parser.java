@@ -55,50 +55,12 @@ public class Parser {
         return Stream.of(words).collect(Collectors.toList()).indexOf(s);
     }
 
-    private static String intToOrdinal(int i) {
-        assert i >= 1 && i <= 31 : "Days of the month should be in the range 1 to 31";
-        if (i == 11 || i == 12 || i == 13) {
-            return i + "th";
-        } else {
-            switch (i % 10) {
-            case 1:
-                return i + "st";
-            case 2:
-                return i + "nd";
-            case 3:
-                return i + "rd";
-            default:
-                return i + "th";
-            }
-        }
-    }
-
-    private static String timeToAmPm(LocalDateTime dateTime) {
-        int hour = dateTime.getHour();
-        int minute = dateTime.getMinute();
-        assert hour >= 0 && hour <= 24 : "Hour should be in the range 0 to 24";
-        assert minute >=0 && minute <=60 : "Minute should be in the range 0 to 60";
-        String minuteString = minute == 0 ? "" : ":" + minute;
-        if (hour == 0) {
-            return 12 + minuteString + "am";
-        } else if (hour == 12) {
-            return 12 + minuteString + "pm";
-        } else if (hour < 12) {
-            return hour + minuteString + "am";
-        } else {
-            return hour - 12 + minuteString + "pm";
-        }
-    }
-
-    private static String parseDateTime(String s) throws DukeException {
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+    private static String parseDateTime(String input) throws DukeException {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         try {
-            LocalDateTime dateTime = LocalDateTime.parse(s, f);
-            int day = dateTime.getDayOfMonth();
-            String monthAllCaps = dateTime.getMonth().toString();
-            String monthFirstCap = monthAllCaps.substring(0, 1) + monthAllCaps.substring(1).toLowerCase();
-            int year = dateTime.getYear();
-            return intToOrdinal(day) + " of " + monthFirstCap + " " + year + ", " + timeToAmPm(dateTime);
+            LocalDateTime dateTime = LocalDateTime.parse(input, inputFormatter);
+            DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("EEE, d MMM yyyy, h:mma");
+            return outputFormatter.format(dateTime);
         } catch (DateTimeParseException e) {
             throw new DukeException("Input date and time is not in dd/MM/yyyy HHmm format (24-hour clock) :-(");
         }
@@ -132,11 +94,7 @@ public class Parser {
     private static boolean isValidTaskId(String s) {
         try {
             int taskId = Integer.parseInt(s);
-            if (taskId < 1) {
-                return false;
-            } else {
-                return true;
-            }
+            return taskId >= 1;
         } catch (NumberFormatException e) {
             return false;
         }

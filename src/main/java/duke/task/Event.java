@@ -6,7 +6,7 @@ package duke.task;
  */
 public class Event extends Task {
     /** A string that represents the time of the event, as inputted by user. */
-    private String at;
+    private String occurTime;
 
     /**
      * Constructs a <code>Event</code> object. Date and time are parsed and 
@@ -15,16 +15,16 @@ public class Event extends Task {
      *
      * @param description A string that describes the specific
      *          content of the task.
-     * @param at A string that specifies the time of the 
+     * @param occurTime A string that specifies the time of the
      *          event.
      */
-    public Event(String description, String at) {
+    public Event(String description, String occurTime) {
         super(description);
-        this.at = at;
+        this.occurTime = occurTime;
     }
 
-    public void updateAt(String newAt) {
-        this.at = newAt;
+    public void updateOccurTime(String newOccurTime) {
+        this.occurTime = newOccurTime;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Event extends Task {
      */
     @Override
     public String format() {
-        return "E | " + this.getStatusIcon() + " | " + this.getDescription() + " | " + this.at;
+        return "E | " + this.getStatusIcon() + " | " + this.getDescription() + " | " + this.occurTime;
     }
 
     /**
@@ -46,6 +46,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + occurTime + ")";
     }
 }

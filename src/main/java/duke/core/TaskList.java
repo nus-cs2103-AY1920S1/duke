@@ -86,9 +86,9 @@ public class TaskList {
             t.updateDescription(newValue);
         } else if (attribute.equals("time")) {
             if (t instanceof Deadline) {
-                ((Deadline) t).updateBy(newValue);
+                ((Deadline) t).updateDueTime(newValue);
             } else if (t instanceof Event) {
-                ((Event) t).updateAt(newValue);
+                ((Event) t).updateOccurTime(newValue);
             } else {
                 throw new DukeException(" \u2639  OOPS!!! Todo tasks do not have a time attribute.");
             }

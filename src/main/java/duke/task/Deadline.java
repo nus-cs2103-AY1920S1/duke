@@ -6,7 +6,7 @@ package duke.task;
  */
 public class Deadline extends Task {
     /** A string that represents the deadline of the task, as inputted by user. */
-    private String by;
+    private String dueTime;
 
     /**
      * Constructs a <code>Deadline</code> object. Date and time are parsed and 
@@ -15,16 +15,16 @@ public class Deadline extends Task {
      *
      * @param description A string that describes the specific
      *          content of the task.
-     * @param by A string that specifies the deadline of the 
+     * @param dueTime A string that specifies the deadline of the
      *          task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueTime) {
         super(description);
-        this.by = by;
+        this.dueTime = dueTime;
     }
 
-    public void updateBy(String newBy) {
-        this.by = newBy;
+    public void updateDueTime(String newDueTime) {
+        this.dueTime = newDueTime;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Deadline extends Task {
      */
     @Override
     public String format() {
-        return "D | " + this.getStatusIcon() + " | " + this.getDescription() + " | " + this.by;
+        return "D | " + this.getStatusIcon() + " | " + this.getDescription() + " | " + this.dueTime;
     }
 
     /**
@@ -46,6 +46,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + dueTime + ")";
     }
 }

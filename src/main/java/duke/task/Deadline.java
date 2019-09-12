@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.date.DateUtil;
+
 import java.time.LocalDateTime;
 
 /**
@@ -14,7 +15,7 @@ public class Deadline extends Task {
      * Constructs an unfinished Deadline object.
      *
      * @param description Description of the task.
-     * @param deadline Date and time by which the task is due.
+     * @param deadline    Date and time by which the task is due.
      */
     public Deadline(String description, LocalDateTime deadline) {
         super(description);
@@ -25,8 +26,8 @@ public class Deadline extends Task {
      * Constructs a Deadline object.
      *
      * @param description Descriptio of the task.
-     * @param deadline Date and time by which the task is due.
-     * @param isDone True if the task is finished.
+     * @param deadline    Date and time by which the task is due.
+     * @param isDone      True if the task is finished.
      */
     private Deadline(String description, LocalDateTime deadline, boolean isDone) {
         super(description, isDone);
@@ -34,7 +35,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the deadline of this {@Class Deadline} object.
+     * Returns the deadline of this Deadline object.
      *
      * @return Deadline of this task.
      */
@@ -49,7 +50,7 @@ public class Deadline extends Task {
      */
     @Override
     public Deadline finish() {
-        return new Deadline(this.getDescription(), this.deadline,true);
+        return new Deadline(this.getDescription(), this.deadline, true);
     }
 
     /**

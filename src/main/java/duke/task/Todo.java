@@ -2,7 +2,6 @@ package duke.task;
 
 /**
  * A Task object that contains no date and time information.
- *
  */
 public class Todo extends Task {
 
@@ -19,7 +18,7 @@ public class Todo extends Task {
      * Constructs a Todo task.
      *
      * @param description Description of the task.
-     * @param isDone True if the task is finished.
+     * @param isDone      True if the task is finished.
      */
     private Todo(String description, boolean isDone) {
         super(description, isDone);
@@ -32,7 +31,7 @@ public class Todo extends Task {
      */
     @Override
     public Todo finish() {
-        return new Todo(getDescription(),true);
+        return new Todo(getDescription(), true);
     }
 
     /**

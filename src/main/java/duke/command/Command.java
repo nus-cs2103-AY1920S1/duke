@@ -25,8 +25,8 @@ public abstract class Command {
     /**
      * Instructs Sheet to execute the commend, Storage to update the file, and Ui to print message, if necessary.
      *
-     * @param sh Sheet object to carry out the command.
-     * @param ui Ui object to print the message.
+     * @param sh   Sheet object to carry out the command.
+     * @param ui   Ui object to print the message.
      * @param stor Storage object to update the change to file.
      * @throws DukeException If error occurs when accessing the file by Storage.
      */

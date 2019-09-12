@@ -60,10 +60,16 @@ public class TaskList {
 
     /**
      * Appends a task to the TaskList.
-     * @param task task to be appended to the TaskList.
+     * @param task task to be appended to the TaskList
+     * @return boolean indicating if the given task in argument is unique to the TaskList
      */
-    public void add(Task task) {
-        arr.add(task);
+    public boolean add(Task task) {
+        if (arr.contains(task)) {
+            return false;
+        } else {
+            arr.add(task);
+            return true;
+        }
     }
 
     /**

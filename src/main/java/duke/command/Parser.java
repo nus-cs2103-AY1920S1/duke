@@ -20,6 +20,7 @@ public class Parser {
         command = command.trim();
         String[] commandWords = command.split(" ");
         String order = commandWords[0];
+        boolean addedTask = true;
         if (command.split(order  + " ").length == 1
                 && (order.equals("event") || order.equals("todo") || order.equals("deadline"))) {
             throw new DukeException(" :( OOPS!!! The description of " + order + "s cannot be empty.");

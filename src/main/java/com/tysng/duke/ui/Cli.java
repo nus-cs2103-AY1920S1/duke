@@ -42,11 +42,11 @@ public class Cli {
             Command command;
             try {
                 command = Command.newCommand(sc.nextLine());
-
             } catch (CommandException e) {
                 Response.newException(e);
                 continue;
             }
+
             this.duke.handle(command).print();
             if (command.getType() == Command.CommandType.BYE) {
                 break;

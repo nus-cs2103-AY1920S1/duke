@@ -1,4 +1,10 @@
-import duke.command.*;
+import duke.command.Command;
+import duke.command.CommandDelete;
+import duke.command.CommandHi;
+import duke.command.CommandTodo;
+import duke.command.CommandFind;
+import duke.command.IllegalCommand;
+
 import duke.parser.Parser;
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void parseTest(){
+    public void parseTest() {
         Command cmd1 = new CommandHi("");
         Command cmd2 = Parser.parse("hi");
         assertEquals(cmd1.toString(), cmd2.toString());

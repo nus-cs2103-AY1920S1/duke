@@ -65,15 +65,25 @@ public class FindCommand extends Command {
     private String printAllMatches() {
         if (matchedTasks.size() > 0) {
             String printedLines = "Here are the matching tasks in your list:" + "\n";
-            int index = 1;
-            for (Task task : matchedTasks) {
-                printedLines += index + "." + task.toString() + "\n";
-                index++;
-            }
+            printedLines += printMatchesFromList();
             return this.ui.printLine(printedLines.trim());
         } else {
             return this.ui.printLine("Oops, there are no tasks with that keyword!");
         }
+    }
+
+    /**
+     * Prints each task that matches the keyword given by the user.
+     * @return String all matching tasks in storage
+     */
+    private String printMatchesFromList() {
+        int index = 1;
+        String printedLines = "";
+        for (Task task : matchedTasks) {
+            printedLines += index + "." + task.toString() + "\n";
+            index++;
+        }
+        return printedLines;
     }
 
     public boolean isExit() {

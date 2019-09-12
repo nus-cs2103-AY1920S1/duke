@@ -38,7 +38,7 @@ public class Deadline extends Task {
      * @param description The description of the deadline.
      * @param isDone Define whether a deadline is done.
      * @param by The time at which the deadline is due.
-     * @throws ParseException If input date format is invalid
+     * @throws DukeException If input date format is invalid
      */
     public Deadline(String description, boolean isDone, String by) throws DukeException {
         super(description, isDone);
@@ -70,6 +70,12 @@ public class Deadline extends Task {
         return by;
     }
 
+    /**
+     * Sets 'by' and 'date' field according to the argument of the method.
+     *
+     * @param by The new 'by' field
+     * @throws DukeException If input date format is invalid
+     */
     public void setBy(String by) throws DukeException {
         this.by = by;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");

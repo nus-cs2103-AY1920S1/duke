@@ -1,4 +1,5 @@
 package duke;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -55,6 +56,13 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Flips a dialog box an returns it.
+     *
+     * @param text the text for the dialog box
+     * @param img the image for the dialog box
+     * @return return a flipped dialog box
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -65,9 +65,9 @@ public class Ui {
      * @return Returns a message to remind user that a task has been removed from the list.
      */
     String printDeleteTask(Task removed, ArrayList<Task> list) {
-        return ("Noted. I've removed this task:\n" +
-                "  " + removed.toString() + "\n" +
-                "Now you have " + list.size() + " in the list.");
+        return ("Noted. I've removed this task:\n"
+                + "  " + removed.toString() + "\n"
+                + "Now you have " + list.size() + " in the list.");
     }
 
     /**
@@ -78,22 +78,22 @@ public class Ui {
      * @return Returns a message to remind user that a task has been added to the list.
      */
     String printAddTask(Task task, ArrayList<Task> list) {
-        return ("Got it. I've added this task:\n" +
-                "  " + task.toString() + "\n" +
-                "Now you have " + list.size() + " tasks in the list");
+        return ("Got it. I've added this task:\n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + list.size() + " tasks in the list");
     }
 
     String printUpdateTask(Task task) {
-        return ("Noted. I've edited this task:\n" +
-                "  " + task.toString() + "\n");
+        return ("Noted. I've edited this task:\n"
+                + "  " + task.toString() + "\n");
     }
 
     String printHelp() {
-        return ("Available commands:\n" +
-                "\"list\"\n" +
-                "\"done <index>\"\n" +
-                "\"delete <index>\"\n" +
-                "\"find <string>\"\n" +
-                "\"update <index> w/<description> d/<date>\"\n");
+        return ("Available commands:\n"
+                + "\"list\"\n"
+                + "\"done <index>\"\n"
+                + "\"delete <index>\"\n"
+                + "\"find <string>\"\n"
+                + "\"update <index> w/<description> d/<date>\"\n");
     }
 }

@@ -47,34 +47,35 @@ public class Parser {
         String firstWord = words[0];
 
         switch (firstWord) {
-            case "help":
-                return ui.printHelp();
-            case "list":
-                return ui.printList(list);
-            case "done":
-                Task done = markDone(list, words);
-                return ui.printMarkDone(done);
-            case "delete":
-                Task removed = deleteTask(list, words);
-                return ui.printDeleteTask(removed, list);
-            case "find":
-                ArrayList<Task> listFound = findTasks(words[1]);
-                return ui.printList(listFound);
-            case "update":
-                Task updatedTask = updateTask(userInput, list, words);
-                return ui.printUpdateTask(updatedTask);
-            default:
-                Task newTask = addNewTask(userInput, list, words, firstWord);
-                return ui.printAddTask(newTask, list);
+        case "help":
+            return ui.printHelp();
+        case "list":
+            return ui.printList(list);
+        case "done":
+            Task done = markDone(list, words);
+            return ui.printMarkDone(done);
+        case "delete":
+            Task removed = deleteTask(list, words);
+            return ui.printDeleteTask(removed, list);
+        case "find":
+            ArrayList<Task> listFound = findTasks(words[1]);
+            return ui.printList(listFound);
+        case "update":
+            Task updatedTask = updateTask(userInput, list, words);
+            return ui.printUpdateTask(updatedTask);
+        default:
+            Task newTask = addNewTask(userInput, list, words, firstWord);
+            return ui.printAddTask(newTask, list);
         }
     }
 
-    /** w d
-     * desc, date
-     * @param userInput
-     * @param list
-     * @param words
-     * @return
+    /**
+     * Update a task according to the description provided and returns it.
+     *
+     * @param userInput The user input string to be processed
+     * @param list The list of tasks containing the task to be updated
+     * @param words An array of words from userInput
+     * @return Returns the updated task
      */
     private Task updateTask(String userInput, ArrayList<Task> list, String[] words) throws DukeException {
         int index = Integer.parseInt(words[1]);
@@ -121,7 +122,8 @@ public class Parser {
      * @return The task that is added to the the list of tasks
      * @throws DukeException If the command is invalid
      */
-    private Task addNewTask(String userInput, ArrayList<Task> list, String[] words, String firstWord) throws DukeException {
+    private Task addNewTask(String userInput, ArrayList<Task> list, String[] words, String firstWord)
+            throws DukeException {
         Task task;
 
         switch (firstWord) {

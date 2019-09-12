@@ -70,6 +70,12 @@ public class Event extends Task {
         return at;
     }
 
+    /**
+     * Sets 'at' and 'date' field according to the argument of the method.
+     *
+     * @param at The new 'at' field
+     * @throws DukeException If input date format is invalid
+     */
     public void setAt(String at) throws DukeException {
         this.at = at;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");

@@ -6,21 +6,25 @@ import java.util.ArrayList;
 public class TaskList {
 
     private ArrayList<Task> list;
+    private Ui ui;
 
     /**
-     * Default Constructor to generate an empty ArrayList of Task type.
+     * Constructor to generate an empty ArrayList of Task type and takes Ui for print functionality.
      */
-    public TaskList() {
+    public TaskList(Ui ui) {
         list = new ArrayList<>();
+        this.ui = ui;
     }
 
     /**
-     * Constructor to take in a populated ArrayList of Task type (i.e. from text file).
+     * Constructor to take in a populated ArrayList of Task type (i.e. from text file)
+     * and takes Ui for print functionality.
      *
      * @param list ArrayList of Task Type
      */
-    public TaskList(ArrayList<Task> list) {
+    public TaskList(ArrayList<Task> list, Ui ui) {
         this.list = list;
+        this.ui = ui;
     }
 
     /**
@@ -31,9 +35,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         list.add(task);
-        String message = "Got it. I've added this task:\n" + task
-                + "\nNow you have " + list.size() + " tasks in the list.";
-        return message;
+        return ui.showAdd(task, list.size());
     }
 
     /**
@@ -43,11 +45,9 @@ public class TaskList {
      * @return confirmation message of task being deleted
      */
     public String deleteTask(int deleteIndex) {
-        assert deleteIndex < list.size() : "deleteIndex should not be larger than amount of tasks in list";
+        assert deleteIndex <= list.size() : "deleteIndex should not be larger than amount of tasks in list";
         Task temp = list.remove(deleteIndex - 1);
-        String message = "Noted. I've removed this task:\n" + temp
-                + "\nNow you have " + list.size() + " tasks in the list.";
-        return message;
+        return ui.showDelete(temp, list.size());
     }
 
     /**
@@ -102,11 +102,9 @@ public class TaskList {
         // Code for testing assertion
         doneIndex = 20;
          */
-        assert doneIndex < list.size() : "doneIndex should not be larger than amount of tasks in list";
+        assert doneIndex <= list.size() : "doneIndex should not be larger than amount of tasks in list";
         list.get(doneIndex - 1).markAsDone();
-        String message = "Nice! I've marked this task as done:\n"
-                + list.get(doneIndex - 1);
-        return message;
+        return ui.showDone(list.get(doneIndex - 1));
     }
 
     /**

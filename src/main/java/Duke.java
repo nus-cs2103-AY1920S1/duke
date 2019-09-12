@@ -24,10 +24,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            taskList = new TaskList(storage.loadData());
+            taskList = new TaskList(storage.loadData(), ui);
         } catch (DukeException e) {
             ui.showError(e.getMessage());
-            taskList = new TaskList();
+            taskList = new TaskList(ui);
         }
     }
 
@@ -42,17 +42,17 @@ public class Duke {
             String fullCommand = input;
             String[] commandArr = fullCommand.split(" ", 2);
             Command c = Parser.parse(commandArr[0].trim());
-            if (commandArr.length > 1) {
-                return c.execute(storage, taskList, ui, commandArr[1].trim());
-            } else {
+            if (commandArr.length <= 1) {
                 return c.execute(storage, taskList, ui, "");
             }
+            return c.execute(storage, taskList, ui, commandArr[1].trim());
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
     }
 
     /*
+    // Legacy code for starting up Duke in Command Line
     /**
      * Method to start up Duke Chatbot.
      *

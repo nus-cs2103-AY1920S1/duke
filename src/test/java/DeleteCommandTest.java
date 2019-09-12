@@ -15,7 +15,8 @@ public class DeleteCommandTest {
     @BeforeEach
     void init() {
         storage = new Storage("");
-        taskList = new TaskList();
+        ui = new Ui();
+        taskList = new TaskList(ui);
         taskList.addTask(new Task("test task"));
     }
 
@@ -24,7 +25,6 @@ public class DeleteCommandTest {
         String input = "1";
         InputStream in = new ByteArrayInputStream((input.getBytes()));
         System.setIn(in);
-        ui = new Ui();
         try {
             DeleteCommand dc = new DeleteCommand();
             dc.execute(storage, taskList, ui, input);

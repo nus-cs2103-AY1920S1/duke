@@ -7,12 +7,6 @@ public class DukeException extends Exception {
         this.type = type;
     }
 
-    public void printError(){
-        String horizontalLine = "    ____________________________________________________________";
-        System.out.println(horizontalLine);
-        System.out.println(horizontalLine);
-    }
-
     public String getMessage() {
     	switch (type) {
     		case INVALIDCOMMAND:
@@ -23,6 +17,10 @@ public class DukeException extends Exception {
     			return "☹ No such task";
     		case GENERALMISTAKE:
     			return super.getMessage();
+            case FILENOTFOUND: 
+                return "File not found!!";
+			case TASKNOTFOUND:
+				return "Task not found!!";
     		default:
     			return "Unknown error! Please try again.";
     	}

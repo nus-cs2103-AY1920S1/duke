@@ -1,11 +1,15 @@
+import java.io.IOException;
+
 public class ExitCommand extends Command {
 
     public ExitCommand(){
         this.commandType = CommandType.EXIT;
     }
 
-    public String toString() {
-        return "Bye. Hope to see you again soon!";
+    @Override
+    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+        ui.printByeMessage();
     }
+
 }
 

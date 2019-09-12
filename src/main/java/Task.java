@@ -3,6 +3,7 @@ public abstract class Task {
     protected boolean isDone;
     protected TaskType type;
 
+    public static TaskList taskList;
 
     public Task(String description) {
         this.description = description;
@@ -32,5 +33,13 @@ public abstract class Task {
         } else {
             return true;
         }
+    }
+
+    public static void setTaskList(TaskList taskList) {
+        Task.taskList = taskList;
+    }
+
+    public static int getTaskID(Task task) {
+        return Task.taskList.getTaskID(task);
     }
 }

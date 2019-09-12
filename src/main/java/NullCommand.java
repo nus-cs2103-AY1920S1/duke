@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class NullCommand extends Command{
 
     public NullCommand(){
@@ -5,7 +7,8 @@ public class NullCommand extends Command{
     }
 
     @Override
-    public String toString() {
-        return "Hello just for fun";
+    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+        throw new DukeException("Invalid Command! Please try again.", DukeExceptionType.INVALIDCOMMAND);
     }
+
 }

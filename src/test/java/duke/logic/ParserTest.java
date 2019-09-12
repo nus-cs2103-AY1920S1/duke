@@ -15,9 +15,9 @@ class ParserTest {
     @Test
     public void testParserBye() throws DukeException {
         try {
-            assertEquals(new ByeCommand(),Parser.parse("bye")  );
+            assertEquals(new ByeCommand(),Parser.parse("bye"));
         } catch (DukeException e) {
-            assertEquals(e.getMessage() ,e.getMessage());
+            assertEquals(e.getMessage(),e.getMessage());
         }
 
 
@@ -26,9 +26,9 @@ class ParserTest {
     @Test
     public void testParserList() throws DukeException {
         try {
-            assertEquals(new ListCommand(),Parser.parse("list")  );
+            assertEquals(new ListCommand(),Parser.parse("list"));
         } catch (DukeException e) {
-            assertEquals(e.getMessage() ,e.getMessage());
+            assertEquals(e.getMessage(),e.getMessage());
         }
     }
 }

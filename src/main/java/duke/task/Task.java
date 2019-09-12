@@ -27,7 +27,7 @@ public class Task implements Comparable<Task> {
      * Constructs a unspecified Task object.
      *
      * @param description Description of the task.
-     * @param isDone True if the task is finished.
+     * @param isDone      True if the task is finished.
      */
     public Task(String description, Boolean isDone) {
         this.description = description.trim();
@@ -44,9 +44,9 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Returns the a {@Class LocalDateTime} object associated with this task.
-     * Starting Time for an {@Class Event} object. Deadline for a {@Class Deadline} object.
-     * Max value for a {@Class Todo} object.
+     * Returns the a LocalDateTime object associated with this task.
+     * Starting Time for an Event object. Deadline for a Class Deadline} object.
+     * Max value for a Class Todo object.
      *
      * @return LocalDateTime object associated with this task.
      */
@@ -111,20 +111,20 @@ public class Task implements Comparable<Task> {
             String description = s.substring(7, s.lastIndexOf('(') - 1);
             String[] times = s.substring(s.lastIndexOf('(') - 1).split(" ");
             LocalDateTime start = LocalDateTime.parse(times[2], formatter);
-            LocalDateTime end = LocalDateTime.parse(times[5],formatter);
+            LocalDateTime end = LocalDateTime.parse(times[5], formatter);
             Event e = new Event(description, start, end);
             return isDone ? e.finish() : e;
         case 'D':
             String description2 = s.substring(7, s.lastIndexOf('(') - 1);
             String[] deadlines = s.substring(s.lastIndexOf('(') - 1).split(" ");
-            LocalDateTime dl = LocalDateTime.parse(deadlines[2],formatter);
+            LocalDateTime dl = LocalDateTime.parse(deadlines[2], formatter);
             Deadline d = new Deadline(description2, dl);
             return isDone ? d.finish() : d;
         default:
             return new Task(s.substring(7));
         }
     }
-    
+
     /**
      * ToString method for printing.
      *

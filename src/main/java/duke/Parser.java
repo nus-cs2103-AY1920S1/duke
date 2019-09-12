@@ -1,17 +1,11 @@
 package duke;
 
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.EmptyCommand;
-import command.ExitCommand;
-import command.FindCommand;
-import command.ListCommand;
+import command.*;
 
 import exception.DukeException;
 import exception.EmptyDescriptionException;
 import exception.WrongDateFormatException;
+import task.Priority;
 import task.TaskType;
 
 import java.util.Calendar;
@@ -147,6 +141,22 @@ public class Parser {
                 ui.showLine();
             }
             break;
+        case "priority":
+            try{
+                String indexString = userInput.split("\\s")[1];
+                String priorityString = userInput.split("\\s")[2];
+
+                int index = Integer.parseInt(indexString);
+                Priority priority = Priority.parsePriority(priorityString);
+
+                command = new PriorityCommand(index, priority);
+            } catch (DukeException e) {
+                ui.showLine();
+                ui.println("     ☹ OOPS!!!" + e.toString());
+                ui.showLine();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                ui.println("     ☹ OOPS!!! The format must be: priority [task index] [high/medium/low]");
+            }
         default:
             try {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");

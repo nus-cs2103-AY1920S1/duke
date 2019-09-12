@@ -11,6 +11,7 @@ public class Task {
     protected boolean isDone;
     protected TaskType type;
     protected Calendar time;
+    protected Priority priority;
 
     /**
      * Creates a new task.
@@ -101,6 +102,24 @@ public class Task {
     }
 
     /**
+     * Sets the priority level of this task.
+     *
+     * @param priority priority level of this task.
+     */
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    /**
+     * Returns the priority level of this task.
+     *
+     * @return priority level of this task.
+     */
+    public Priority getPriority() {
+        return priority;
+    }
+
+    /**
      * Returns the String representation of this task, which the user will see on the console.
      *
      * @return String representation of this task.
@@ -113,15 +132,20 @@ public class Task {
             timeString = formatter.format(time.getTime());
         }
 
+        String priorityString = "";
+        if (priority != null) {
+            priorityString = " [Priority: " + priority.toString() + "]";
+        }
+
         switch (type) {
         case TODO:
-            return description;
+            return description + priorityString;
         case DEADLINE:
-            return description + " (by: " + timeString + ")";
+            return description + " (by: " + timeString + ")" + priorityString;
         case EVENT:
-            return description + " (at: " + timeString + ")";
+            return description + " (at: " + timeString + ")" + priorityString;
         default:
-            return description;
+            return description + priorityString;
         }
     }
 }

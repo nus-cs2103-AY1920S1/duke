@@ -14,7 +14,8 @@ public class Ui {
     public String getWelcome() {
         StringBuilder welcomeMessage = new StringBuilder("Hello! I'm Duke, what can I do for you?");
         welcomeMessage.append("\n");
-        welcomeMessage.append("For help, please enter \"HELP\"");
+        welcomeMessage.append("For help, please enter \"HELP\" for commands to use.\n");
+        welcomeMessage.append("For help on using commands, please enter \"HELP <COMMAND>\"\n");
         return welcomeMessage.toString();
     }
 
@@ -77,7 +78,7 @@ public class Ui {
         return matchingTaskResult.toString();
     }
 
-    public String getLoadingError(){
+    public String getLoadingError() {
         return "Error in Loading files\n";
     }
 

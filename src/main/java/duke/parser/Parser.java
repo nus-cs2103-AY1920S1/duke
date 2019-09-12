@@ -14,6 +14,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.ui.Ui;
+
 import java.util.ArrayList;
 
 
@@ -52,14 +53,14 @@ public class Parser {
         return false;
     }
 
-    private static String classifyCommand(String command){
+    private static String classifyCommand(String command) {
         if (command.equals("TODO") || command.equals("DEADLINE") || command.equals("EVENT")) {
             return "ADD";
         }
         return command;
     }
 
-    private static String getCommandName(String userInput){
+    private static String getCommandName(String userInput) {
         String command = "";
         for (String s : commandList) {
             if (userInput.toUpperCase().startsWith(s)) {
@@ -71,7 +72,7 @@ public class Parser {
     }
 
     private static ArrayList<String> parseTaskInformationAndDate(String userInput, String commandName,
-                                                                 String separatorAfterFirstSlash){
+                                                                 String separatorAfterFirstSlash) {
         ArrayList<String> taskInformation = new ArrayList<>();
         String subsequentStringAfterTaskDescription = userInput.substring(commandName.length());
         int firstIndexSlash = subsequentStringAfterTaskDescription.indexOf((char) '/');
@@ -98,7 +99,7 @@ public class Parser {
      */
     public static Command parse(String input) throws CommandNotFoundException, IncorrectNumberOfArgumentsException {
         boolean isCommandFound = isCommandValid(input);
-        if(!isCommandFound) {
+        if (!isCommandFound) {
             throw new CommandNotFoundException();
         }
         String commandName = getCommandName(input);
@@ -117,7 +118,7 @@ public class Parser {
 
             } else {
                 ArrayList<String> taskInfo = parseTaskInformationAndDate(input, commandName, "at ");
-                task = new Event(commandName.toUpperCase().charAt(0),taskInfo.get(1), false, taskInfo.get(0));
+                task = new Event(commandName.toUpperCase().charAt(0), taskInfo.get(1), false, taskInfo.get(0));
 
             }
             command = new AddCommand(commandType, task);

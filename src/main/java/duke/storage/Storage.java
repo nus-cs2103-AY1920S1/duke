@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
+
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
 import duke.task.Task;

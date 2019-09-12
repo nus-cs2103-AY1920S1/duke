@@ -3,6 +3,7 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
+
 import duke.command.CommandNotFoundException;
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.IncorrectNumberOfArgumentsException;
@@ -48,7 +49,7 @@ public class Duke {
             throw new IncorrectFileFormatException(ui.getLoadingError());
         } catch (NullPointerException n) {
             throw new NullPointerException(ui.getIndexError());
-        } catch (FileNotFoundException f1){
+        } catch (FileNotFoundException f1) {
             throw new FileNotFoundException(ui.getLoadingError());
         }
     }
@@ -59,21 +60,21 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             output = c.execute(tasks, ui, storage);
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             output = "Incorrect input value.\nPlease check again.";
         } catch (CommandNotFoundException c) {
             output = "Command not found.\nPlease check again.";
-        } catch (NullPointerException n){
+        } catch (NullPointerException n) {
             output = "Internal error encountered." + " (Null Ptr)";
-        } catch (IOException i){
+        } catch (IOException i) {
             output = "Internal error encountered." + " (IO exception)";
-        } catch(IncorrectNumberOfArgumentsException a){
+        } catch (IncorrectNumberOfArgumentsException a) {
             output = "Incorrect command format.\nPlease check again.";
         }
         return output;
     }
 
-    String getDukeWelcome(){
+    String getDukeWelcome() {
         return ui.getWelcome();
     }
 }

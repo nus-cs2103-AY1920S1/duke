@@ -1,0 +1,49 @@
+package duke.tasks;
+
+import duke.core.TaskList;
+
+public abstract class Task {
+    protected String description;
+    protected boolean isDone;
+    protected TaskType type;
+
+    public static TaskList taskList;
+
+    public Task(String description) {
+        this.description = description;
+        this.isDone = false;
+    }
+
+    public TaskType getType() {
+        return type;
+    }
+
+    public String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String toString() {
+        return String.format("[%s] %s", getStatusIcon(), getDescription());
+    }
+
+    public boolean setDone() {
+        if (!isDone) {
+            this.isDone = true;
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static void setTaskList(TaskList taskList) {
+        Task.taskList = taskList;
+    }
+
+    public static int getTaskID(Task task) {
+        return Task.taskList.getTaskID(task);
+    }
+}

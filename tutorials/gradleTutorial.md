@@ -36,7 +36,7 @@ As a developer, you write a _build file_ that describes the project. A build fil
        mainClassName = "seedu.duke.Duke"
    }
    ```
-1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the command `gradlew run`. This should result in Gradle running the main method of your project.
+1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the command `./gradlew run`. This should result in Gradle running the main method of your project.
 
 :bulb: Simply run the command `gradlew {taskName}` in the terminal and Gradle will run the task! Here are some example commands:
 * `gradlew tasks` (or `gradlew tasks --all`): shows a list of tasks available

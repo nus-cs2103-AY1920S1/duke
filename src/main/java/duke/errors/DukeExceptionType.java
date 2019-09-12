@@ -1,0 +1,5 @@
+package duke.errors;
+
+public enum DukeExceptionType {
+    INVALIDCOMMAND,NOTINTEGER,MISSINGTASK,GENERALMISTAKE, FILENOTFOUND, TASKNOTFOUND
+}

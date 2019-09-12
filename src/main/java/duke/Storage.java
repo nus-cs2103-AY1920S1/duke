@@ -57,6 +57,9 @@ public class Storage {
         while (readFile.hasNext()) {
             String nextTask = readFile.nextLine();
             String[] details = nextTask.split(Pattern.quote(" | "));
+
+            assert details.length == 3 || details.length == 4;
+
             String type = details[0];
             Task task;
 

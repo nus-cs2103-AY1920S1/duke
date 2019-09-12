@@ -75,18 +75,19 @@ public class AddCommand extends Command {
             return toDoTask();
         } else if (commandWord.equals("deadline")) {
             String[] details = processedDetails.split("/by");
-            if (details.length < 2) {
-                throw new DukeException(deadlineErrorMsg);
-            } else {
-                return deadlineTask(details);
-            }
+            checkDetailsPresent(details);
+            return deadlineTask(details);
         } else {
             String[] details = processedDetails.split("/at");
-            if (details.length < 2) {
-                throw new DukeException(eventErrorMsg);
-            } else {
-                return eventTask(details);
-            }
+            checkDetailsPresent(details);
+            return eventTask(details);
+
+        }
+    }
+
+    private void checkDetailsPresent(String[] details) throws DukeException {
+        if (details.length < 2) {
+            throw new DukeException(deadlineErrorMsg);
         }
     }
 
@@ -123,7 +124,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Produces a formatted String that is used in creation of a Deadline Task.
+     * Checks if there is sufficient information to create the time of the newly added deadline.
      *
      * @param deadlineTime containing the information about the date for the Deadline Task
      * @return String containing some details needed to create a Deadline task
@@ -133,11 +134,22 @@ public class AddCommand extends Command {
         if (deadlineTime.length < 2) {
             throw new DukeException(deadlineErrorMsg);
         } else {
-            try {
-                return DateTime.getDate(deadlineTime[0]) + DateTime.getTime(deadlineTime[1]);
-            } catch (DateException e) {
-                throw new DukeException(e.getMessage() + deadlineErrorMsg);
-            }
+            return createDeadlineTime(deadlineTime);
+        }
+    }
+
+    /**
+     * Produces a formatted String that is used in creation of a Deadline Task.
+     *
+     * @param deadlineTime containing the information about the date for the Deadline Task
+     * @return String containing some details needed to create a Deadline task
+     * @throws DukeException is thrown when there is an error with the input
+     */
+    private String createDeadlineTime(String[] deadlineTime) throws DukeException {
+        try {
+            return DateTime.getDate(deadlineTime[0]) + DateTime.getTime(deadlineTime[1]);
+        } catch (DateException e) {
+            throw new DukeException(e.getMessage() + deadlineErrorMsg);
         }
     }
 
@@ -159,9 +171,9 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Produces a formatted String that is used in creation of an Event task.
+     * Checks if there is sufficient information to create the time of the newly added Event.
      *
-     * @param eventTime containing the information about the date for the Event task
+     * @param eventTime containing the information about the date for the Event Task
      * @return String containing some details needed to create a Event task
      * @throws DukeException is thrown when there is an error with the input
      */
@@ -173,13 +185,25 @@ public class AddCommand extends Command {
             if (hoursMin.length < 2) {
                 throw new DukeException(eventErrorMsg);
             } else {
-                try {
-                    return DateTime.getDate(eventTime[0]) + DateTime.getTime(hoursMin[0]) + "-"
-                            + DateTime.getTime(hoursMin[1]);
-                } catch (DateException e) {
-                    throw new DukeException(e.getMessage() + " " + eventErrorMsg);
-                }
+                return createEventTime(eventTime, hoursMin);
             }
+        }
+    }
+
+    /**
+     * Produces a formatted String that is used in creation of an Event task.
+     *
+     * @param eventTime containing the information about the date for the Event task
+     * @param hoursMin containing the information about the time for the Event task
+     * @return String containing some details needed to create a Event task
+     * @throws DukeException is thrown when there is an error with the input
+     */
+    private String createEventTime(String[] eventTime, String[] hoursMin) throws DukeException {
+        try {
+            return DateTime.getDate(eventTime[0]) + DateTime.getTime(hoursMin[0]) + "-"
+                    + DateTime.getTime(hoursMin[1]);
+        } catch (DateException e) {
+            throw new DukeException(e.getMessage() + " " + eventErrorMsg);
         }
     }
 
@@ -214,8 +238,7 @@ public class AddCommand extends Command {
         boolean isNotClashing = true;
         for (Task task : allTasks) {
             if (task instanceof Event) {
-                String eventTime = ((Event) task).getEventTime();
-                String[] eventTimeArr = eventTime.split("[,]");
+                String[] eventTimeArr = ((Event) task).getEventTime().split("[,]");
                 if (eventTimeArr[0].trim().equals(date)) {
                     isNotClashing = noTimeClashes(timeToTime, index);
                     if (!isNotClashing) {

@@ -1,2 +1,1 @@
-E | 0 | something | 23rd of March 2019, 6pm-7pm
-
+T | 0 | submit GER quiz

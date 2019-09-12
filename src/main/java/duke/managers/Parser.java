@@ -28,7 +28,6 @@ public class Parser {
      * @exception DukeException is thrown when there is an error with the input
      */
     public static Command parse(String c) throws DukeException {
-        //assert false : "assertion was successful";
         String[] comm = c.split(" ");
         String key = comm[0];
         assert !c.isEmpty() : "No command was given to Duke!";

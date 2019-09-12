@@ -1,9 +1,14 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * An abstract class to instantiate all the Task objects.
  */
 public abstract class Task {
     protected String description;
-    protected Boolean isdone;
+    protected Boolean taskIsDone;
 
     /**
      * Task object is instantiated when User enters the description of task.
@@ -11,7 +16,7 @@ public abstract class Task {
      */
     protected Task (String description) {
         this.description = description;
-        this.isdone = false;
+        this.taskIsDone = false;
     }
 
     /**
@@ -28,7 +33,7 @@ public abstract class Task {
      * @return Status of task.
      */
     protected String getStatusIcon() {
-        return (isdone ? "\u2713" : "\u2718");
+        return (taskIsDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -36,11 +41,14 @@ public abstract class Task {
      * @return Status of task, "1" means its done and "0" means its yet to be completed.
      */
     protected String checkStatus() {
-        if (isdone == true) {
-            return "1";
+        String statusWhenSavingTask = "";
+        if (taskIsDone == true) {
+            statusWhenSavingTask = "1";
         } else {
-            return "0";
+            statusWhenSavingTask = "0";
         }
+
+        return statusWhenSavingTask;
     }
 
     /**
@@ -49,9 +57,9 @@ public abstract class Task {
      */
     protected void recoverStatus(String status) {
         if (status.equals("1")) {
-            isdone = true ;
+            taskIsDone = true;
         } else {
-            isdone = false;
+            taskIsDone = false;
         }
     }
 
@@ -59,8 +67,95 @@ public abstract class Task {
      * A flag to toggle when a task is done.
      */
     protected void markAsDone() {
-        isdone = true;
+        taskIsDone = true;
     }
+
+    /**
+     * Get the date from a numeric format eg. (23/05/2019) and convert it
+     * into words (23rd of May 2019).
+     * @return a String consisting the date in wording format
+     */
+    protected String getDate(String[] datetime) {
+        String[] splitDates = datetime[0].split("/");
+        String day = splitDates[0];
+        String month = splitDates[1];
+        String year = splitDates[2];
+
+        try {
+            return this.getDay(day) + " of " + this.getMonth(month) + " " + year;
+        } catch (ParseException parseError) {
+            return parseError.toString();
+        }
+
+    }
+
+    /**
+     * Get the formatted day.
+     * @param day The numerical format of day.
+     * @return The formatted word of day.
+     */
+    private String getDay(String day) {
+        String editedDay = "";
+
+        if (day.equals("1") || day.equals("01")) {
+            editedDay = "1st";
+        } else if (day.equals("2") || day.equals("02")) {
+            editedDay = "2nd";
+        } else if (day.equals("3") || day.equals("03")) {
+            editedDay = "3rd";
+        } else if (day.equals("21")) {
+            editedDay = "21st";
+        } else if (day.equals("22")) {
+            editedDay = "22nd";
+        } else if (day.equals("23")) {
+            editedDay = "23rd";
+        } else if (day.equals("31")) {
+            editedDay = "31st";
+        } else if (Integer.valueOf(day) < 31) {
+            editedDay = day + "th";
+        } else {
+            assert false : "No such day";
+        }
+
+        return editedDay;
+    }
+
+    /**
+     * Get the formatted month.
+     * @param month Numerical month.
+     * @return Formatted word of month.
+     */
+    private String getMonth(String month) throws ParseException {
+
+        DateFormat df = new SimpleDateFormat("MM");
+        DateFormat outputFormat = new SimpleDateFormat("MMMM");
+        try {
+            Date strToMonth = df.parse(month);
+            String monthFormat = outputFormat.format(strToMonth);
+            return monthFormat;
+        } catch (ParseException parseError) {
+            return parseError.toString();
+        }
+
+    }
+
+    /**
+     * Get the time format from 24Hr eg.(2300) to a 12Hr HH:MM format
+     * eg.(11.00pm).
+     * @return Time in 12Hr HH:MM format.
+     */
+    protected String getTime(String[] datetime) throws ParseException {
+        DateFormat df = new SimpleDateFormat("HHmm");
+        DateFormat outputFormat = new SimpleDateFormat("h:mm a");
+        try {
+            Date strToTime = df.parse(datetime[1]);
+            String timeFormat = outputFormat.format(strToTime);
+            return timeFormat;
+        } catch (ParseException parseError) {
+            return parseError.toString();
+        }
+    }
+
 
     /**
      * Format the String into a save file format.

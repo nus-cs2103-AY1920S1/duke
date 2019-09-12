@@ -89,6 +89,7 @@ Adds a todo task for duke to track.
 The format for adding a todo is `todo <todo description>`.
 - `<todo description>` can be any text.
     - Examples: Revise CS2103T Lecture Notes on Git Commands.
+
 ```
 // user input
 todo Revise CS2103T Lecture Notes on Git Commands
@@ -110,6 +111,7 @@ The format for adding a deadline is `deadline <deadline description> /by <date d
     - Examples: 14/9/2019.
 - `<time 24 hour clock>` is the format of the time.
     - Examples: 2359
+
 ```
 // user input
 deadline CS2102 Assignment 2 /by 14/9/2019 2359
@@ -121,6 +123,7 @@ deadline CS2102 Assignment 2 /by 14/9/2019 2359
      Now you have 1 tasks in the list.
     ____________________________________________________________
 ```
+
 ### <a name="event-usage"></a>`event` - Adds an event task to Duke
 Adds a event task for duke to track.  
 The format for adding a event is `event <event description> /by <date d/m/yyyy> <time 24 hour clock>`.
@@ -142,6 +145,7 @@ event CS2103T Finals /at 29/11/2019 0900
      Now you have 1 tasks in the list.
     ___________________________________________________________e
 ```
+
 ### <a name="list-usage"></a>`list` - Lists out all tracked tasks
 Lists out all tasks being tracked by duke.  
 Tasks are sorted according to their dates and times, with todo tasks being displayed first since they do not have dates and times.  
@@ -151,6 +155,7 @@ Suppose the following commands are keyed in sequence.
 1. `event CS2103T Finals /at 29/11/2019 0900`
 2. `deadline CS2102 Assignment 2 /by 14/9/2019 2359`
 3. `todo Revise CS2103T Lecture Notes on Git Commands`
+
 ```
 // user input
 list
@@ -175,6 +180,7 @@ Suppose the following commands are keyed in sequence.
 1. `event CS2103T Finals /at 29/11/2019 0900`
 2. `deadline CS2102 Assignment 2 /by 14/9/2019 2359`
 3. `todo Revise CS2103T Lecture Notes on Git Commands`
+
 ```
 // user input
 done 1
@@ -196,6 +202,7 @@ list
      3.[E][N] CS2103T Finals (at: 29th of November 2019, 9:00am)
     ____________________________________________________________
 ```
+
 ### <a name="delete-usage"></a>`delete` - Deletes a task from Duke  
 The format for deleting a task is `delete <index>`.
 - `delete <index>` is the index of the task to be deleted.
@@ -204,6 +211,7 @@ Suppose the following commands are keyed in sequence.
 1. `event CS2103T Finals /at 29/11/2019 0900`
 2. `deadline CS2102 Assignment 2 /by 14/9/2019 2359`
 3. `todo Revise CS2103T Lecture Notes on Git Commands`
+
 ```
 // user input
 delete 1
@@ -225,6 +233,7 @@ list
      2.[E][N] CS2103T Finals (at: 29th of November 2019, 9:00am)
     ____________________________________________________________
 ```
+
 ### <a name="find-usage"></a>`find` - Finds tasks matching a specific text
 Searches and retrieves tasks that match a certain text.  
 The format for searching for tasks by a given matching text is `find <text match>`.
@@ -234,6 +243,7 @@ Suppose the following commands are keyed in sequence.
 1. `event CS2103T Finals /at 29/11/2019 0900`
 2. `deadline CS2102 Assignment 2 /by 14/9/2019 2359`
 3. `todo Revise CS2103T Lecture Notes on Git Commands`
+
 ```
 // user input
 find CS2103T
@@ -266,6 +276,7 @@ find CS3230
 ### <a name="bye-usage"></a>`bye` - Tells Duke bye
 Tells Duke bye.  
 Format of telling duke bye is `bye`.
+
 ```
 // user input
 bye

@@ -74,7 +74,6 @@ public class TaskList {
 
     /**
      * Clears all existing item in the list.
-     *
      */
     public void clearAll() {
         list.clear();

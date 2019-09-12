@@ -1,6 +1,5 @@
 package command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -19,7 +18,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui, Storage storage) {
         Stream<String> taskStream = tasklist
                 .getList()
                 .stream()

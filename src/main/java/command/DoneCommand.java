@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
         try {
             this.index = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new DukeException("Please ensure that your input is an integer.");
+            throw new DukeException("Please ensure that your input is an Integer.");
         }
     }
 

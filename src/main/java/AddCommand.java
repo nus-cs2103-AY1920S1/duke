@@ -5,7 +5,7 @@
 public class AddCommand extends Command {
 
 	public AddCommand(String type, String command) {
-	    super(type, command);
+        super(type, command);
     }
 
     /**
@@ -54,9 +54,9 @@ public class AddCommand extends Command {
         }
         System.out.println("    Got it. I've added this task:");
         System.out.println("      " + newTask);
-	    System.out.println("    Now you have " + TaskList.tasks.size() + " tasks in the list");
-	    String output = "Got it. I've added this task:" + newTask + "\n";
-	    output += "Now you have " + TaskList.tasks.size() + " tasks in the list";
-	    return output;
+        System.out.println("    Now you have " + TaskList.tasks.size() + " tasks in the list");
+        String output = "Got it. I've added this task:" + newTask + "\n";
+        output += "Now you have " + TaskList.tasks.size() + " tasks in the list";
+        return output;
     }
 }

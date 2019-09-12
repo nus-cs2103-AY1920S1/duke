@@ -2,8 +2,8 @@
  * Represents a task list command.
  * Types of command include "clear", "delete", "done", "find", "list".
  */
-public class TaskListCommand extends Command {
 
+public class TaskListCommand extends Command {
     public TaskListCommand(String type, String command) {
         super(type, command);
     }

@@ -44,9 +44,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the time of the Task
+     * Returns the time of the Task.
      *
-     * @return timeToGet String containing the time of the Task
+     * @return timeToGet String containing the time of the Task.
      */
     @Override
     public String getTime() {

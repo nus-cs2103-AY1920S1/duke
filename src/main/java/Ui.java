@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Represents the User Interface of Duke, including the user input fields.
+ * Handles the printing of Duke messages.
  */
 public class Ui {
 
@@ -42,13 +42,6 @@ public class Ui {
     }
 
     /**
-     * Prints a straight line for clarity purposes.
-     */
-    public void showLine() {
-        System.out.print(lineSpace);
-    }
-
-    /**
      * Prints a specified error message.
      *
      * @param error Message of error
@@ -59,7 +52,55 @@ public class Ui {
     }
 
     /**
+     * Prints a message when tasks are added.
+     *
+     * @param task Task being added
+     * @param listSize Size of list
+     * @return Message of successful add
+     */
+    public String showAdd(Task task, int listSize) {
+        String message = "Got it. I've added this task:\n" + task
+                + "\nNow you have " + listSize + " tasks in the list.";
+        return message;
+    }
+
+    /**
+     * Prints a message when tasks are set to done.
+     *
+     * @param task Task selected to be done
+     * @return Message of marking done
+     */
+    public String showDone(Task task) {
+        String message = "Nice! I've marked this task as done:\n"
+                + task;
+        return message;
+    }
+
+    /**
+     * Prints a message when tasks are deleted.
+     *
+     * @param task Task selected for deletion
+     * @param listSize Size of list
+     * @return Message of successful deletion
+     */
+    public String showDelete(Task task, int listSize) {
+        String message = "Noted. I've removed this task:\n" + task
+                + "\nNow you have " + listSize + " tasks in the list.";
+        return message;
+    }
+
+
+    /**
+     * Prints a straight line for clarity purposes.
+     * Legacy code for Command Line display.
+     */
+    public void showLine() {
+        System.out.print(lineSpace);
+    }
+
+    /**
      * Reads the user input and returns a String.
+     * Legacy code for Command Line display.
      *
      * @return User input
      */

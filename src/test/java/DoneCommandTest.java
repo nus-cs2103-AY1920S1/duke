@@ -15,7 +15,8 @@ public class DoneCommandTest {
     @BeforeEach
     void init() {
         storage = new Storage("");
-        taskList = new TaskList();
+        ui = new Ui();
+        taskList = new TaskList(ui);
         taskList.addTask(new Task("test task"));
     }
 
@@ -24,7 +25,6 @@ public class DoneCommandTest {
         String input = "1";
         InputStream in = new ByteArrayInputStream((input.getBytes()));
         System.setIn(in);
-        ui = new Ui();
         try {
             DoneCommand dc = new DoneCommand();
             dc.execute(storage, taskList, ui, input);

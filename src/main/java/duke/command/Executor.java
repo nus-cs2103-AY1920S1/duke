@@ -19,6 +19,7 @@ public class Executor {
      */
     public static String execute(Parser commandAnalyzer, Ui ui, TaskList tasks, Storage storage) {
         String result = "";
+        boolean addedTask = true;
         if (commandAnalyzer.isValid()) {
             String type = commandAnalyzer.getType();
             if (type.equals("done")) {
@@ -46,27 +47,39 @@ public class Executor {
                 if (type.equals("todo")) {
                     try {
                         Task temp = new ToDo(commandAnalyzer);
-                        tasks.add(temp);
-                        result = ui.showTaskCreated(temp, tasks.size()); //change arr to TaskList
-                        storage.update(tasks);
+                        addedTask = tasks.add(temp);
+                        if (addedTask) {
+                            result = ui.showTaskCreated(temp, tasks.size()); //change arr to TaskList
+                            storage.update(tasks);
+                        } else {
+                            result = ui.showDuplicateTaskMessage(temp);
+                        }
                     } catch (IOException de) {
                         result = ui.showException(de);
                     }
                 } else if (type.equals("deadline")) {
                     try {
                         Task temp = new Deadline(commandAnalyzer);
-                        tasks.add(temp);
-                        result += ui.showTaskCreated(temp, tasks.size());
-                        storage.update(tasks);
+                        addedTask = tasks.add(temp);
+                        if (addedTask) {
+                            result += ui.showTaskCreated(temp, tasks.size());
+                            storage.update(tasks);
+                        } else {
+                            result += ui.showDuplicateTaskMessage(temp);
+                        }
                     } catch (IOException de) {
                         result += ui.showException(de);
                     }
                 } else if (type.equals("event")) {
                     try {
                         Task temp = new Event(commandAnalyzer);
-                        tasks.add(temp);
-                        result += ui.showTaskCreated(temp, tasks.size());
-                        storage.update(tasks);
+                        addedTask = tasks.add(temp);
+                        if (addedTask) {
+                            result += ui.showTaskCreated(temp, tasks.size());
+                            storage.update(tasks);
+                        } else {
+                            result += ui.showDuplicateTaskMessage(temp);
+                        }
                     } catch (IOException de) {
                         result += ui.showException(de);
                     }

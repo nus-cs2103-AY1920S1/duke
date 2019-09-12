@@ -119,4 +119,8 @@ public class Ui {
     public String showLoadingError() {
         return " :( OOPS!!! Error occurred while loading the history file.";
     }
+
+    public String showDuplicateTaskMessage(Task task) {
+        return " :( OOPS!!! " + task.toString() + " already exists! Please enter a different Task.";
+    }
 }

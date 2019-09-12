@@ -3,7 +3,7 @@
 ## What is Duke
 Duke is a Personal Assistant Chatbot that helps you keep track of different tasks as you go about your daily activities.
 
-![Duke's User Interface](/docs/Ui.png)
+![Duke's User Interface](Ui.png)
 
 
 ## Features 

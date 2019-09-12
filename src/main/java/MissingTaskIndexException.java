@@ -1,4 +1,4 @@
-public class MissingTaskIndexException extends Exception {
+public class MissingTaskIndexException extends DukeException {
 
     public String toString() {
         return "☹ OOPS!!! Please indicate a task index.";

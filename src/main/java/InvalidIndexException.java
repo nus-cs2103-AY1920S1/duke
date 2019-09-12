@@ -1,4 +1,4 @@
-public class InvalidIndexException extends Exception {
+public class InvalidIndexException extends DukeException {
 
     public String toString() {
         return "☹ OOPS!!! Please indicate the correct task index.";

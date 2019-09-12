@@ -26,6 +26,9 @@ public class TaskList {
     public Task deleteTask(int index) {
         Task task = tasks.get(index);
         tasks.remove(index);
+
+        assert !task.equals(tasks.get(index)) : "Might have deleted the wrong task";
+
         return task;
     }
 

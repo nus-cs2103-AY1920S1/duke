@@ -53,6 +53,9 @@ public class FindCommand extends Command {
                     i++;
                 }
             }
+
+            assert !output.equals("") : "Output should not be empty";
+
             return output;
         }
     }

@@ -44,11 +44,7 @@ public class EventCommand extends Command {
                 tasks.addTask(newEventTask);
                 output += "Got it. I've added this task:\n";
                 output += "  " + newEventTask + "\n";
-                if (tasks.getSize() > 1) {
-                    output += "Now you have " + tasks.getSize() + " tasks in the list.\n";
-                } else {
-                    output += "Now you have " + tasks.getSize() + " task in the list.\n";
-                }
+                output += taskListInformation(tasks);
 
                 assert !output.equals("") : "Output should not be empty";
 

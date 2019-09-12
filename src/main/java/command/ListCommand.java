@@ -1,7 +1,6 @@
 package command;
 
 import storage.Storage;
-import task.Task;
 import task.TaskList;
 import ui.Ui;
 
@@ -21,11 +20,7 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = "";
         output += "Here are the tasks in your list:\n";
-        int i = 1;
-        for (Task task : tasks.getTaskList()) {
-            output += i + ". " + task + "\n";
-            i++;
-        }
+        output += iterateTaskList(tasks.getTaskList());
 
         assert !output.equals("") : "Output should not be empty";
 

@@ -39,11 +39,7 @@ public class DeleteCommand extends Command {
                 Task task = tasks.deleteTask(taskToDelete - 1);
                 output += "Noted I've removed this task:\n";
                 output += "  " + task + "\n";
-                if (tasks.getSize() > 1) {
-                    output += "Now you have " + tasks.getSize() + " tasks in the list.\n";
-                } else {
-                    output += "Now you have " + tasks.getSize() + " task in the list.\n";
-                }
+                output += taskListInformation(tasks);
 
                 assert !output.equals("") : "Output should not be empty";
 

@@ -47,11 +47,7 @@ public class FindCommand extends Command {
                 output += "There are no matching tasks in your list\n";
             } else {
                 output += "Here are the matching tasks in your list:\n";
-                int i = 1;
-                for (Task task : resultList) {
-                    output += i + "." + task.toString() + "\n";
-                    i++;
-                }
+                output += iterateTaskList(resultList);
             }
 
             assert !output.equals("") : "Output should not be empty";

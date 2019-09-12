@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
-    private boolean isExit = false;
+    private boolean isExit;
 
     @FXML
     public void initialize() {
@@ -40,6 +40,7 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
+        isExit = false;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.showWelcome(), dukeImage)
         );

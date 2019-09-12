@@ -5,6 +5,9 @@ import task.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * FakeStorage which extends Storage for polymorphism use.
+ */
 public class FakeStorage extends Storage {
 
     /**

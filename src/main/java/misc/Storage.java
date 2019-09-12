@@ -74,15 +74,18 @@ public class Storage {
             Scanner sc = new Scanner(saveFile);
             Parser parser = new Parser();
 
-            while (sc.hasNextLine()) {
-                String stringTask = sc.nextLine();
-                Task task = parser.readTextAsTask(stringTask);
-                listOfExistingTasks.add(task);
-            }
-
+            readTasksIntoTaskList(listOfExistingTasks, sc, parser);
             sc.close();
         }
 
         return listOfExistingTasks;
+    }
+
+    private void readTasksIntoTaskList(ArrayList<Task> listOfExistingTasks, Scanner sc, Parser parser) {
+        while (sc.hasNextLine()) {
+            String stringTask = sc.nextLine();
+            Task task = parser.readTextAsTask(stringTask);
+            listOfExistingTasks.add(task);
+        }
     }
 }

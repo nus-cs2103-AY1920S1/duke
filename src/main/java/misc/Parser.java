@@ -61,8 +61,8 @@ public class Parser {
         String taskTag = taskContents[0];
         boolean isDone = taskContents[1].equals("1");
         String taskDetails = taskContents[2];
-        String dateTime;
 
+        String dateTime;
         Task outputTask;
 
         switch (taskTag) {
@@ -97,47 +97,22 @@ public class Parser {
 
         switch (taskType) {
         case "deadline":
-            DateTimeFormatter deadlineInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
-            LocalDateTime deadlineDateTime = LocalDateTime.parse(stringDate, deadlineInputFormatter);
-
-            DateTimeFormatter deadlineOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
-            convertedTime = deadlineDateTime.format(deadlineOutputFormatter);
+            convertedTime = formatDeadline(stringDate);
             break;
         case "event":
-            String[] dateTime = stringDate.split(" ");
-
-            if (dateTime.length != 2) {
-                throw new IncorrectDukeCommand("The Date or Time is missing!");
-            }
+            String[] dateTime = splitDateTime(stringDate);
 
             String eventDate = dateTime[0];
             String eventTime = dateTime[1];
 
-            DateTimeFormatter eventDateInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
-            DateTimeFormatter eventDateOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
-            LocalDate eventDateLdt = LocalDate.parse(eventDate, eventDateInputFormatter);
-            String dateOutput = eventDateLdt.format(eventDateOutputFormatter);
+            String dateOutput = formatDeadlineDate(eventDate);
 
-            if (!eventTime.contains("-")) {
-                String errorMessage = "You seem to be missing the Start/End time of your event!\n"
-                        + "Please follow this format for an task.Event: 'dd/mm/yy hhmm-hhmm'";
-                throw new IncorrectDukeCommand(errorMessage);
-            }
-
+            checkEventStartEndExists(eventTime);
             String[] timeStartEnd = eventTime.split("-");
-
             String startTime = timeStartEnd[0];
             String endTime = timeStartEnd[1];
 
-            DateTimeFormatter eventTimeInputFormatter = DateTimeFormatter.ofPattern("HHmm");
-            DateTimeFormatter eventTimeOutputFormatter = DateTimeFormatter.ofPattern("hh:mma");
-
-            LocalTime startTimeLdt = LocalTime.parse(startTime, eventTimeInputFormatter);
-            LocalTime endTimeLdt = LocalTime.parse(endTime, eventTimeInputFormatter);
-            String startTimeOutput = startTimeLdt.format(eventTimeOutputFormatter);
-            String endTimeOutput = endTimeLdt.format(eventTimeOutputFormatter);
-
-            convertedTime = String.format("%s %s to %s", dateOutput, startTimeOutput, endTimeOutput);
+            convertedTime = formatDeadlineTime(dateOutput, startTime, endTime);
             break;
         default:
             convertedTime = null;
@@ -147,10 +122,55 @@ public class Parser {
         return convertedTime;
     }
 
+    private String formatDeadlineTime(String dateOutput, String startTime, String endTime) {
+        DateTimeFormatter eventTimeInputFormatter = DateTimeFormatter.ofPattern("HHmm");
+        DateTimeFormatter eventTimeOutputFormatter = DateTimeFormatter.ofPattern("hh:mma");
+
+        LocalTime startTimeLdt = LocalTime.parse(startTime, eventTimeInputFormatter);
+        LocalTime endTimeLdt = LocalTime.parse(endTime, eventTimeInputFormatter);
+        String startTimeOutput = startTimeLdt.format(eventTimeOutputFormatter);
+        String endTimeOutput = endTimeLdt.format(eventTimeOutputFormatter);
+
+        return String.format("%s %s to %s", dateOutput, startTimeOutput, endTimeOutput);
+    }
+
+    private void checkEventStartEndExists(String eventTime) {
+        if (!eventTime.contains("-")) {
+            String errorMessage = "You seem to be missing the Start/End time of your event!\n"
+                    + "Please follow this format for an Event: 'dd/mm/yy hhmm-hhmm'";
+            throw new IncorrectDukeCommand(errorMessage);
+        }
+    }
+
+    private String formatDeadlineDate(String eventDate) {
+        DateTimeFormatter eventDateInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter eventDateOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        LocalDate eventDateLdt = LocalDate.parse(eventDate, eventDateInputFormatter);
+        return eventDateLdt.format(eventDateOutputFormatter);
+    }
+
+    private String[] splitDateTime(String stringDate) {
+        String[] dateTime = stringDate.split(" ");
+
+        if (dateTime.length != 2) {
+            throw new IncorrectDukeCommand("The Date or Time is missing!");
+        }
+        return dateTime;
+    }
+
+    private String formatDeadline(String stringDate) {
+        DateTimeFormatter deadlineInputFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+        LocalDateTime deadlineDateTime = LocalDateTime.parse(stringDate, deadlineInputFormatter);
+
+        DateTimeFormatter deadlineOutputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
+        return deadlineDateTime.format(deadlineOutputFormatter);
+    }
+
     /**
      * Parses user input instruction into a command that Duke can act on.
      * @param instruction The user instruction to be parsed.
      * @param taskList The TaskList object that stores all of user's tasks.
+     * @return A corresponding String to indicate to user that the instruction has been executed successfully.
      * @throws VoidDukeCommand if there is no user input.
      * @throws IncorrectDukeCommand if the input command exists, but Duke cannot understand parts of it.
      * @throws InvalidDukeCommand if the input command does not exist.
@@ -159,6 +179,7 @@ public class Parser {
      */
     public String parseInstruction(String instruction, TaskList taskList) throws VoidDukeCommand,
             IncorrectDukeCommand, InvalidDukeCommand, IOException, DukeException {
+
         Scanner userInput = new Scanner(instruction);
         String command;
 
@@ -192,30 +213,19 @@ public class Parser {
             }
             break;
         case "done":
-            int taskNumberDone;
-
             if (userInput.hasNextInt()) {
-                taskNumberDone = userInput.nextInt();
-
-                if (taskList.temporarySearchList != null) {
-                    return taskList.markTaskAsDone(taskNumberDone, true);
-                } else {
-                    return taskList.markTaskAsDone(taskNumberDone, false);
-                }
+                int taskNumberDone = userInput.nextInt();
+                return taskMarkedDoneMessage(taskList, taskNumberDone);
+            } else {
+                errorMessage = "You need to tell me which task to mark as done!";
             }
             break;
         case "delete":
-            int taskNumberDelete;
-
             if (userInput.hasNextInt()) {
-                taskNumberDelete = userInput.nextInt();
-
-                if (taskList.temporarySearchList != null) {
-                    return taskList.delete(taskNumberDelete, true);
-                } else {
-                    return taskList.delete(taskNumberDelete, false);
-                }
-
+                int taskNumberDelete = userInput.nextInt();
+                return taskDeletedMessage(taskList, taskNumberDelete);
+            } else {
+                errorMessage = "You need to tell me which task to delete!";
             }
             break;
         case "find":
@@ -244,7 +254,7 @@ public class Parser {
                     String[] contentDateTime = userInput.nextLine().strip().split(" by ");
 
                     if (contentDateTime.length == 0 || contentDateTime.length == 1) {
-                        errorMessage = "You are missing the details/date&time of your task.Deadline!";
+                        errorMessage = "You are missing the details/date&time of your Deadline!";
                     } else if (contentDateTime[0].isBlank()) {
                         errorMessage = "The details of your deadline cannot be empty!";
                     } else if (contentDateTime[1].isBlank()) {
@@ -259,7 +269,7 @@ public class Parser {
                     errorMessage = "Sorry but I can't seem to detect the due date of the deadline!";
                 }
             } else {
-                errorMessage = "The description of a task.Deadline cannot be empty!";
+                errorMessage = "The description of a Deadline cannot be empty!";
             }
             break;
         case "event":
@@ -270,11 +280,11 @@ public class Parser {
                     String[] contentDateTime = userInput.nextLine().strip().split(" at ");
 
                     if (contentDateTime.length == 0 || contentDateTime.length == 1) {
-                        errorMessage = "You are missing the details/date&time of your task.Event!";
+                        errorMessage = "You are missing the details/date&time of your Event!";
                     } else if (contentDateTime[0].isBlank()) {
-                        errorMessage = "The details of your task.Event cannot be empty!";
+                        errorMessage = "The details of your Event cannot be empty!";
                     } else if (contentDateTime[1].isBlank()) {
-                        errorMessage = "The date/time of your task.Event cannot be empty!";
+                        errorMessage = "The date/time of your Event cannot be empty!";
                     } else {
                         String taskDescription = contentDateTime[0].strip();
                         String dateTime = contentDateTime[1].strip();
@@ -285,7 +295,7 @@ public class Parser {
                     errorMessage = "Sorry but I can't seem to detect the Date & Time of the event!";
                 }
             } else {
-                errorMessage = "The description of an task.Event cannot be empty!";
+                errorMessage = "The description of an Event cannot be empty!";
             }
             break;
         default:
@@ -300,5 +310,21 @@ public class Parser {
 
         userInput.close();
         return null;
+    }
+
+    private String taskDeletedMessage(TaskList taskList, int taskNumberDelete) throws IOException {
+        if (taskList.temporarySearchList != null) {
+            return taskList.delete(taskNumberDelete, true);
+        } else {
+            return taskList.delete(taskNumberDelete, false);
+        }
+    }
+
+    private String taskMarkedDoneMessage(TaskList taskList, int taskNumberDone) throws DukeException, IOException {
+        if (taskList.temporarySearchList != null) {
+            return taskList.markTaskAsDone(taskNumberDone, true);
+        } else {
+            return taskList.markTaskAsDone(taskNumberDone, false);
+        }
     }
 }

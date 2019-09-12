@@ -55,37 +55,53 @@ public class TaskList {
      * @throws IOException if the completion status of the task cannot be updated in a local save file.
      */
     public String markTaskAsDone(int taskNumber, boolean useTempSearchList) throws DukeException, IOException {
-        ArrayList<Task> taskListToUse;
-        String errorMessage = null;
+        ArrayList<Task> taskListToUse = defineTaskList(useTempSearchList);
+        String errorMessage = checkInvalidTaskNumber(taskNumber, taskListToUse);
 
-        if (useTempSearchList) {
-            taskListToUse = temporarySearchList;
-        } else {
-            taskListToUse = tasks;
-        }
+        handleInvalidTaskNumberError(errorMessage);
+        handleTaskAlreadyMarkedDoneError(taskNumber, taskListToUse);
 
-        if (taskNumber <= 0) {
-            errorMessage = "Number cannot be negative!";
-        } else if (taskListToUse.size() == 0) {
-            errorMessage = "You don't have any tasks yet!";
-        } else if (taskNumber > taskListToUse.size()) {
-            errorMessage = "You don't have that many tasks!";
-        }
+        return markTaskDoneSuccess(taskNumber, taskListToUse);
+    }
 
-        if (errorMessage != null) {
-            throw new DukeException(errorMessage);
-        }
-
-        if (taskListToUse.get(taskNumber - 1).isDone) {
-            errorMessage = "Task has already been marked done!";
-            throw new DukeException(errorMessage);
-        }
-
+    private String markTaskDoneSuccess(int taskNumber, ArrayList<Task> taskListToUse) throws IOException {
         taskListToUse.get(taskNumber - 1).isDone = true;
         storage.overwriteLocalSave(tasks);
-        temporarySearchList = null;
+
+        if (taskListToUse == temporarySearchList) {
+            temporarySearchList = null;
+        }
 
         return ("Nice! I've marked this task as done:\n" + taskListToUse.get(taskNumber - 1));
+    }
+
+    private void handleTaskAlreadyMarkedDoneError(int taskNumber, ArrayList<Task> taskListToUse) throws DukeException {
+        if (taskListToUse.get(taskNumber - 1).isDone) {
+            String errorMessage = "Task has already been marked done!";
+            throw new DukeException(errorMessage);
+        }
+    }
+
+    private void handleInvalidTaskNumberError(String errorMessage) throws IncorrectDukeCommand {
+        if (errorMessage != null) {
+            throw new IncorrectDukeCommand(errorMessage);
+        }
+    }
+
+    private String checkInvalidTaskNumber(int taskNumber, ArrayList<Task> taskListToUse) {
+        if (taskNumber <= 0) {
+            return "Number cannot be negative!";
+        } else if (taskListToUse.size() == 0) {
+            return "You don't have any tasks yet!";
+        } else if (taskNumber > taskListToUse.size()) {
+            return "You don't have that many tasks!";
+        } else {
+            return null;
+        }
+    }
+
+    private ArrayList<Task> defineTaskList(boolean useTempSearchList) {
+        return useTempSearchList ? temporarySearchList : tasks;
     }
 
     /**
@@ -94,10 +110,7 @@ public class TaskList {
      * @throws DukeException if there are no task to list.
      */
     public String listAllTasks(String type) throws DukeException {
-        if (tasks.size() == 0) {
-            String errorMessage = "There are no task(s) to list!";
-            throw new DukeException(errorMessage);
-        }
+        handleEmptyTaskListError();
 
         ArrayList<Task> taskListToUse;
         StringBuilder output = new StringBuilder();
@@ -117,6 +130,13 @@ public class TaskList {
         }
 
         return output.toString();
+    }
+
+    private void handleEmptyTaskListError() throws DukeException {
+        if (tasks.size() == 0) {
+            String errorMessage = "There are no task(s) to list!";
+            throw new DukeException(errorMessage);
+        }
     }
 
     /**
@@ -144,10 +164,11 @@ public class TaskList {
             break;
         }
 
-        if (tasks.contains(task)) {
-            throw new DukeException("Task already exists!");
-        }
+        handleTaskAlreadyExistsError(task);
+        return taskAddSuccess(task);
+    }
 
+    private String taskAddSuccess(Task task) throws IOException {
         tasks.add(task);
         storage.addToLocalSave(task);
 
@@ -160,6 +181,12 @@ public class TaskList {
         return output.toString();
     }
 
+    private void handleTaskAlreadyExistsError(Task task) throws DukeException {
+        if (tasks.contains(task)) {
+            throw new DukeException("Task already exists!");
+        }
+    }
+
     /**
      * Deletes a task upon user request.
      * @param taskNumber The position of the task in the ArrayList to be deleted.
@@ -168,35 +195,21 @@ public class TaskList {
      * @throws IncorrectDukeCommand if the task number given does not fall within the correct range.
      */
     public String delete(int taskNumber, boolean useTempSearchList) throws IOException, IncorrectDukeCommand {
-        String errorMessage;
-        ArrayList<Task> taskListToUse;
+        ArrayList<Task> taskListToUse = defineTaskList(useTempSearchList);
+        String errorMessage = checkInvalidTaskNumber(taskNumber, taskListToUse);
 
-        if (useTempSearchList) {
-            taskListToUse = temporarySearchList;
-        } else {
-            taskListToUse = tasks;
-        }
+        handleInvalidTaskNumberError(errorMessage);
 
-        if (taskNumber <= 0) {
-            errorMessage = "Number cannot be negative!";
-        } else if (taskListToUse.size() == 0) {
-            errorMessage = "You don't have any tasks yet!";
-        } else if (taskNumber > taskListToUse.size()) {
-            errorMessage = "You don't have that many tasks!";
-        } else {
-            errorMessage = null;
-        }
+        return taskDeleteSuccess(taskNumber, taskListToUse);
+    }
 
-        if (errorMessage != null) {
-            throw new IncorrectDukeCommand(errorMessage);
-        }
-        
+    private String taskDeleteSuccess(int taskNumber, ArrayList<Task> taskListToUse) throws IOException {
         Task removedTask = taskListToUse.remove(taskNumber - 1);
 
-        if(taskListToUse == temporarySearchList) {
+        if (taskListToUse == temporarySearchList) {
             tasks.remove(removedTask);
         }
-        
+
         storage.overwriteLocalSave(tasks);
         temporarySearchList = null;
 
@@ -211,23 +224,69 @@ public class TaskList {
      * @throws DukeException if the original task list is empty or there are no search results.
      */
     public String find(String keyword) throws DukeException {
-        if (tasks.isEmpty()) {
-            throw new DukeException("There is nothing to search from!");
-        }
-        
-        ArrayList<Task> tempList = new ArrayList<>();
+        handleEmptyTaskListError();
 
-        for (Task t : tasks) {
-            if (t.toString().contains(keyword)) {
-                tempList.add(t);
-            }
-        }
+        ArrayList<Task> tempList = getMatchingTasks(keyword);
 
+        handleEmptySearchListError(tempList);
+
+        temporarySearchList = tempList;
+        return listAllTasks("find");
+
+    }
+
+    private void handleEmptySearchListError(ArrayList<Task> tempList) throws DukeException {
         if (tempList.isEmpty()) {
             throw new DukeException("There isn't a task that can be found with that keyword!");
-        } else {
-            temporarySearchList = tempList;
-            return listAllTasks("find");
         }
+    }
+
+    private ArrayList<Task> getMatchingTasks(String keyword) {
+        if (keyword.equalsIgnoreCase("todos")) {
+            return searchBy("todo");
+        } else if (keyword.equalsIgnoreCase("deadlines")) {
+            return searchBy("deadline");
+        } else if (keyword.equalsIgnoreCase("events")) {
+            return searchBy("event");
+        } else {
+            return searchBy(keyword);
+        }
+    }
+
+    private ArrayList<Task> searchBy(String s) {
+        ArrayList<Task> output = new ArrayList<>();
+
+        switch (s) {
+        case "todo":
+            for (Task t : tasks) {
+                if (t instanceof ToDo) {
+                    output.add(t);
+                }
+            }
+            break;
+        case "deadline":
+            for (Task t : tasks) {
+                if (t instanceof Deadline) {
+                    output.add(t);
+                }
+            }
+            break;
+        case "event":
+            for (Task t : tasks) {
+                if (t instanceof Event) {
+                    output.add(t);
+                }
+            }
+            break;
+        default:
+            for (Task t : tasks) {
+                if (t.toString().contains(s)) {
+                    output.add(t);
+                }
+            }
+            break;
+        }
+
+        return output;
     }
 }

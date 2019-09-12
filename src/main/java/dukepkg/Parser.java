@@ -79,7 +79,7 @@ public class Parser {
     }
 
     /**
-     * Validate deadline format.
+     * Validates deadline format.
      *
      * @param arr the user input line.
      * @throws FormatException thrown if deadline task format is wrong.
@@ -95,6 +95,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Validates time format for the TimeCommand that contains duration of tasks.
+     *
+     * @param arr the arr that contains type of command and task content
+     * @throws FormatException the format exception
+     */
     public static void validateTimeFormat(String[] arr) throws FormatException {
         String[] ddl = arr[1].trim().split("/for", 2);
         if(ddl.length < 2) {
@@ -105,6 +111,7 @@ public class Parser {
             throw new FormatException("☹ oops!!! you forget to add duration for the " + arr[0] + " command.");
         }
     }
+
     /**
      * Standardize time for the deadline task.
      *

@@ -1,8 +1,5 @@
 package duke.tasklist;
 
-import duke.datetime.DateTime;
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -43,6 +40,45 @@ public class TaskList {
     }
 
     /**
+     * Prints tasks with their index for the user.
+     *
+     * @param tasksToPrint List to print from.
+     * @return Tasks with the index starting from 1.
+     */
+    private String printNumberedTasks(ArrayList<Task> tasksToPrint) {
+        StringBuilder sb = new StringBuilder();
+        int counter = 1;
+        for (Task task : tasksToPrint) {
+            sb.append(counter + "." + task.toString() + "\n");
+            counter++;
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Informs users of the size of their task list.
+     *
+     * @return Number of tasks in the list.
+     */
+    private String getListSize() {
+        if (tasks.size() == 1) {
+            return "Now you have 1 task in the list.";
+        }
+
+        return "Now you have " + tasks.size() + " tasks in the list.";
+    }
+
+    /**
+     * Adds the task to the task list.
+     *
+     * @param task Task to be added.
+     */
+    public String addTask(Task task) {
+        tasks.add(task);
+        return "Got it. I've added this task:\n" + task.toString() + "\n" + getListSize();
+    }
+
+    /**
      * Updates task description only while retaining task's position in list.
      *
      * @param index Index of the task to be updated.
@@ -66,38 +102,26 @@ public class TaskList {
         }
 
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-        return retrieveTasks(sb).toString();
+        sb.append(printNumberedTasks(tasks));
+        return sb.toString();
     }
 
     /**
-     * Retrieves the contents of the tasks list.
-     *
-     * @param sb StringBuilder to append to.
-     * @return StringBuilder with tasks appended to it.
-     */
-    public StringBuilder retrieveTasks(StringBuilder sb) {
-        for (int i = 0; i < tasks.size(); i++) {
-            sb.append((i + 1) + "." + tasks.get(i) + "\n");
-        }
-        return sb;
-    }
-
-    /**
-     * Marks the task as completed and informs the user.
+     * Marks a task as completed and informs the user.
      *
      * @param taskNumber Index of the task to be marked as completed.
      */
     public String completeTask(int taskNumber) {
-        tasks.get(taskNumber - 1).markAsDone();
+        tasks.get(taskNumber - 1).markAsCompleted();
         return "Nice! I've marked this task as completed:\n" + tasks.get(taskNumber - 1).toString();
     }
 
     /**
-     * Deletes the task an informs the user.
+     * Removes a task and informs the user.
      *
-     * @param taskNumber Index of the task to be deleted.
+     * @param taskNumber Index of the task to be removed.
      */
-    public String deleteTask(int taskNumber) {
+    public String removeTask(int taskNumber) {
         String taskDescription = tasks.get(taskNumber - 1).toString();
         tasks.remove(taskNumber - 1);
         return "Noted. I've removed this task:\n" + taskDescription + "\n" + getListSize();
@@ -109,22 +133,45 @@ public class TaskList {
      * @param searchTerm Key word/phrase to search for.
      */
     public String findTasks(String searchTerm) {
+        ArrayList<Task> searchResults = getFoundResults(searchTerm);
+        StringBuilder sb = new StringBuilder(printFoundGreeting(searchResults.size(), searchTerm));
+        sb.append(printNumberedTasks(searchResults));
+        return sb.toString();
+    }
+
+    /**
+     * Saves tasks containing the search term into an ArrayList.
+     * @param searchTerm
+     * @return
+     */
+    private ArrayList<Task> getFoundResults(String searchTerm) {
         ArrayList<Task> searchResults = new ArrayList<>();
         for (Task task : tasks) {
             if (task.getDescription().contains(searchTerm)) {
                 searchResults.add(task);
             }
         }
+        return searchResults;
+    }
 
-        if (searchResults.isEmpty()) {
+    /**
+     * Prints the opening message when users search for a term, depending on how many results their search
+     * term yielded.
+     *
+     * @param numResults Number of search results yielded.
+     * @param searchTerm Specified search term.
+     * @return Customised message to user.
+     */
+    private String printFoundGreeting(int numResults, String searchTerm) {
+        if (numResults == 0) {
             return "OOPS!!! You don't have any tasks containing the term \"" + searchTerm + "\".";
+        } else if (numResults == 1) {
+            return "You have 1 task containing the term \"" + searchTerm + "\":";
+        } else if (numResults > 1) {
+            return "You have " + numResults + " tasks containing the term \"" + searchTerm + "\":";
+        } else {
+            return "OOPS!!! Duke has encountered an unexpected error.";
         }
-
-        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
-        for (int i = 0; i < searchResults.size(); i++) {
-            sb.append((i + 1) + "." + searchResults.get(i) + "\n");
-        }
-        return sb.toString();
     }
 
     /**
@@ -133,61 +180,50 @@ public class TaskList {
      * @param scheduleDate Date the user is searching for.
      * @return Response to user.
      */
-    public String findSchedule(int[] scheduleDate) {
-        // i know this method is super long i will change it
+    public String displaySchedule(int[] scheduleDate) {
+        ArrayList<Task> scheduledTasks = getScheduledTasks(scheduleDate);
+        StringBuilder sb = new StringBuilder();
+        sb.append(printScheduleGreeting(scheduledTasks.size()));
+        sb.append(printNumberedTasks(scheduledTasks));
+        return sb.toString();
+    }
+
+    /**
+     * Saves deadlines and events scheduled on a specific date into an ArrayList.
+     *
+     * @param scheduleDate Specified date to match.
+     * @return ArrayList with the deadlines and events scheduled on that specific date.
+     */
+    private ArrayList<Task> getScheduledTasks(int[] scheduleDate) {
         ArrayList<Task> scheduledTasks = new ArrayList<>();
-        // searching through tasks and ignoring todo types
         for (Task task : tasks) {
             if (!(task instanceof Todo)) {
                 int[] taskDate = task.getDate();
-                // checking if date of task matches date we are searching for
                 if (Arrays.equals(scheduleDate, taskDate)) {
                     scheduledTasks.add(task);
                 }
             }
         }
+        return scheduledTasks;
+    }
 
-        StringBuilder sb = new StringBuilder();
-
-        if (scheduledTasks.isEmpty()) {
+    /**
+     * Prints the opening message when users call for a schedule, depending on how many tasks they have
+     * scheduled on that specific day.
+     *
+     * @param listSize Number of tasks scheduled on a specific day.
+     * @return Customised message to user.
+     */
+    private String printScheduleGreeting(int listSize) {
+        if (listSize == 0) {
             return "You do not have any tasks on that day!";
-        } else if (scheduledTasks.size() == 1) {
-            sb.append("You have 1 task on that day:\n");
-        } else if (scheduledTasks.size() > 1) {
-            sb.append("You have " + scheduledTasks.size() + " tasks on that day:\n");
+        } else if (listSize == 1) {
+            return "You have 1 task on that day:\n";
+        } else if (listSize > 1) {
+            return "You have " + listSize + " tasks on that day:\n";
         } else {
             return "OOPS!!! Duke encountered an unexpected error.";
         }
-
-        int counter = 1;
-        for (Task task : scheduledTasks) {
-            sb.append(counter + "." + task.toString() + "\n");
-            counter++;
-        }
-        return sb.toString();
-    }
-
-    /**
-     * Adds the task to the task list.
-     *
-     * @param task Task to be added.
-     */
-    public String addTask(Task task) {
-        tasks.add(task);
-        return "Got it. I've added this task:\n" + task.toString() + "\n" + getListSize();
-    }
-
-    /**
-     * Informs users of the size of their task list.
-     *
-     * @return Number of tasks in the list.
-     */
-    public String getListSize() {
-        if (tasks.size() == 1) {
-            return "Now you have 1 task in the list.";
-        }
-
-        return "Now you have " + tasks.size() + " tasks in the list.";
     }
 
 }

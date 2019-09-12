@@ -57,6 +57,6 @@ public class ScheduleCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return tasks.findSchedule(date);
+        return tasks.displaySchedule(date);
     }
 }

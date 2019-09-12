@@ -6,7 +6,7 @@ package duke.task;
 public class Task {
 
     protected String description;
-    protected boolean isDone;
+    protected boolean isCompleted;
 
     /**
      * Creates a task that is initialised as incomplete.
@@ -15,7 +15,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        this.isCompleted = false;
     }
 
     public String getDescription() {
@@ -40,10 +40,10 @@ public class Task {
     }
 
     /**
-     * Marks a task as done.
+     * Marks a task as completed.
      */
-    public void markAsDone() {
-        this.isDone = true;
+    public void markAsCompleted() {
+        this.isCompleted = true;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Task {
      * @return v or x if done or undone respectively.
      */
     public String getStatusIcon() {
-        return (isDone ? "v" : "x"); //return tick or X symbols
+        return (isCompleted ? "v" : "x"); //return tick or X symbols
     }
 
 }

@@ -50,7 +50,7 @@ public class RemoveCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         StringBuilder sb = new StringBuilder();
         try {
-            sb.append(tasks.deleteTask(taskNumber));
+            sb.append(tasks.removeTask(taskNumber));
         } catch (IndexOutOfBoundsException e) {
             sb.append("OOPS!!! Your specified task number is out of range.");
         }

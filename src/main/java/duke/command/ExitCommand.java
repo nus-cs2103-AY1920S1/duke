@@ -1,9 +1,10 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.Storage;
-import duke.exception.DukeException;
+
+import static duke.ui.Message.EXIT_MESSAGE;
 
 public class ExitCommand extends Command {
     public ExitCommand(String[] description) {
@@ -13,6 +14,6 @@ public class ExitCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         isExit = true;
-        return ui.showExit();
+        return EXIT_MESSAGE;
     }
 }

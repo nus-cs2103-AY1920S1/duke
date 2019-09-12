@@ -2,6 +2,7 @@ package duke.parser;
 
 import duke.command.*;
 import duke.exception.DukeException;
+import static duke.ui.Message.INVALID_INPUT_ERROR;
 
 /**
  * Represents a parser to parse user command.
@@ -28,7 +29,7 @@ public class Parser {
         } else if (command.equals("bye")) {
             return new ExitCommand(description);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(INVALID_INPUT_ERROR);
         }
     }
 }

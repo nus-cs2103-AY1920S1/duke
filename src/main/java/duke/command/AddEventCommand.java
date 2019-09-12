@@ -1,10 +1,12 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Event;
+
+import static duke.ui.Message.ADD_TASK_MESSAGE;
 
 public class AddEventCommand extends Command {
     public AddEventCommand(String[] description) {
@@ -29,6 +31,6 @@ public class AddEventCommand extends Command {
         tasks.addTask(event);
 
         storage.save(tasks);
-        return ui.showTask(event, tasks, "Got it. I've added this task: ");
+        return ui.showTask(event, tasks, ADD_TASK_MESSAGE);
     }
 }

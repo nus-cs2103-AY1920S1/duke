@@ -30,39 +30,42 @@ public class Storage {
             Scanner sc = new Scanner(file);
 
             while (sc.hasNextLine()) {
-                Task task;
+
                 String instruction = sc.nextLine();
                 //test
                 System.out.println(instruction);
                 String[] lines = instruction.split(" \\| ");
-
-                switch (lines[0]) {
-                    case "T":
-                        task = new ToDo(lines[2]);
-                        break;
-                    case "D":
-                        task = new Deadline(lines[2], lines[3]);
-                        break;
-                    case "E":
-                        task = new Event(lines[2], lines[3]);
-                        break;
-                    default:
-                        throw new DukeException("The task does not exist.");
-                }
-
-                if (lines[1].equals("1")) {
-                    task.markAsDone();
-                }
+                Task task = createTask(lines);
 
                 tasks.add(task);
             }
-
             return tasks;
 
         } catch (FileNotFoundException ex) {
             throw new DukeException("File is not found");
         }
+    }
 
+    private Task createTask(String[] lines) throws DukeException {
+        Task task;
+        switch (lines[0]) {
+            case "T":
+                task = new ToDo(lines[2]);
+                break;
+            case "D":
+                task = new Deadline(lines[2], lines[3]);
+                break;
+            case "E":
+                task = new Event(lines[2], lines[3]);
+                break;
+            default:
+                throw new DukeException("The task does not exist.");
+        }
+
+        if (lines[1].equals("1")) {
+            task.markAsDone();
+        }
+        return task;
     }
 
     public void save(TaskList tasklist) throws DukeException {
@@ -73,13 +76,10 @@ public class Storage {
                 filewriter.write(task.textFormat());
                 filewriter.write(System.lineSeparator());
             }
-
             filewriter.close();
 
         } catch (IOException e) {
             throw new DukeException("Failed to save tasks.");
         }
     }
-
-
 }

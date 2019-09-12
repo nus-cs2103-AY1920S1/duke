@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -19,13 +19,13 @@ public class FindCommand extends Command {
         }
 
         String keyword = description[1];
-        String finalMsg = "";
+        StringBuilder sb = new StringBuilder();
         for (Task task: tasks.getList()) {
             String d = task.getDescription();
             if (d.contains(keyword)) {
-                finalMsg = finalMsg.concat(task.toString());
+                sb.append(task.toString());
             }
         }
-        return finalMsg;
+        return sb.toString();
     }
 }

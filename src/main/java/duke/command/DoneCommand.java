@@ -1,10 +1,12 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
+
+import static duke.ui.Message.DONE_MESSAGE;
 
 public class DoneCommand extends Command {
     public DoneCommand(String[] description) {
@@ -28,6 +30,6 @@ public class DoneCommand extends Command {
         Task checkedTask = tasks.doneTask(index);
         storage.save(tasks);
 
-        return ui.showTask(checkedTask, tasks, "Nice! I've marked this task as done: ");
+        return ui.showTask(checkedTask, tasks, DONE_MESSAGE);
     }
 }

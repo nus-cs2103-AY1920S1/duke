@@ -1,8 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
-import duke.exception.DukeException;
+import duke.ui.Ui;
 import duke.Storage;
 
 public class ListCommand extends Command {
@@ -11,15 +10,15 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String finalMsg = "";
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        StringBuilder sb = new StringBuilder();
         int totalNumber = tasks.numberOfTasks();
         for (int i = 0; i < totalNumber; i++) {
             int index = i + 1;
-            finalMsg = finalMsg.concat(index + ". " + tasks.getList().get(i));
+            sb.append(index + ". " + tasks.getList().get(i));
         }
         //test
-        System.out.println(finalMsg);
-        return finalMsg;
+        System.out.println(sb.toString());
+        return sb.toString();
     }
 }

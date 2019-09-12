@@ -41,9 +41,4 @@ public class TaskList {
         return this.list;
     }
 
-    public String printNumber() {
-        String string = String.format("Now you have %d tasks in the list.\n", list.size());
-        return string;
-    }
-
 }

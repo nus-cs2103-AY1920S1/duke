@@ -1,10 +1,12 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.Task;
+
+import static duke.ui.Message.DELETE_MESSAGE;
 
 public class DeleteCommand extends Command {
     public DeleteCommand(String[] description) {
@@ -28,6 +30,6 @@ public class DeleteCommand extends Command {
         Task deletedTask = tasks.removeTask(index);
         storage.save(tasks);
 
-        return ui.showTask(deletedTask, tasks, "Noted. I've removed this task: ");
+        return ui.showTask(deletedTask, tasks, DELETE_MESSAGE);
     }
 }

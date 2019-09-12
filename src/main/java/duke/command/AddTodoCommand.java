@@ -1,10 +1,12 @@
 package duke.command;
 
 import duke.task.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.Storage;
 import duke.exception.DukeException;
 import duke.task.ToDo;
+
+import static duke.ui.Message.ADD_TASK_MESSAGE;
 
 public class AddTodoCommand extends Command {
 
@@ -25,6 +27,6 @@ public class AddTodoCommand extends Command {
         tasks.addTask(todo);
         storage.save(tasks);
 
-        return ui.showTask(todo, tasks, "Got it. I've added this task: ");
+        return ui.showTask(todo, tasks, ADD_TASK_MESSAGE);
     }
 }

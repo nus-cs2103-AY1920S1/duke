@@ -1,5 +1,6 @@
 package duke;
 
+import duke.reminder.Reminder;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -26,6 +27,8 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    private static final int NUMBER_OF_REMINDER = 5;
+
     /**
      * Initializes a {@class MainWindow} object.
      */
@@ -38,6 +41,12 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    public void displayReminder() {
+        assert duke != null;
+        Reminder reminder = new Reminder(duke.getSheet(), duke.getUi());
+        reminder.remind(NUMBER_OF_REMINDER);
     }
 
     public String getInput() {

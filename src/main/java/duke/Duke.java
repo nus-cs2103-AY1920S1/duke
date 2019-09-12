@@ -12,6 +12,15 @@ public class Duke {
 
     private Storage storage;
     private Sheet sheet;
+
+    public Sheet getSheet() {
+        return sheet;
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
     private Ui ui;
     private MainWindow mw;
 

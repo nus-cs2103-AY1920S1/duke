@@ -40,7 +40,7 @@ public class Storage {
     public List<Task> load() throws DukeIoException {
         try {
             File f = new File(pathToFile);
-            // f.createNewFile();
+            f.createNewFile();
             this.tasks = f;
             Path p = Paths.get(pathToFile);
             List<String> lst = Files.readAllLines(p);
@@ -63,10 +63,10 @@ public class Storage {
     public void save(List<Task> lst) throws DukeIoException {
         try {
             this.tasks = new File(pathToFile);
-            //if (this.tasks.exists()) {
-            //this.tasks.delete();
-            //}
-            //this.tasks.createNewFile();
+            if (this.tasks.exists()) {
+            this.tasks.delete();
+            }
+            this.tasks.createNewFile();
             FileWriter fw = new FileWriter(tasks, true);
             Path p = Paths.get(pathToFile);
             for (Task tsk : lst) {

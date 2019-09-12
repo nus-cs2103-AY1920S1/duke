@@ -26,6 +26,7 @@ public class Main extends Application {
             duke = new Duke(MyPaths.TASK_LIST, mw);
             mw.setDuke(duke);
             stage.show();
+            mw.displayReminder();
         } catch (IOException e) {
             e.printStackTrace();
         }

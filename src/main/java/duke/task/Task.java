@@ -55,10 +55,11 @@ public class Task implements Comparable<Task> {
     }
 
     /**
-     * Compares two {@Class Task} object based on the time at which the task takes place.
-     * {@Class Todo} task has the lowest priority.
+     * Compares this task to another task. Comparison is based on the ordering of the time at which the task
+     * is due to take place.
+     * Todo task has the lowest priority.
      *
-     * @param other The other {@Class Task} object being compared to.
+     * @param other The other task to compare to, not null
      * @return Difference in the time of the two tasks, if applicable.
      */
     @Override
@@ -73,6 +74,15 @@ public class Task implements Comparable<Task> {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Returns whether the task is finished.
+     *
+     * @return {@Code true} if the task is finished.
+     */
+    public boolean isDone() {
+        return this.isDone;
     }
 
     /**

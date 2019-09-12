@@ -2,6 +2,8 @@ package duke.sheet;
 
 import duke.task.Task;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -83,12 +85,46 @@ public class Sheet {
     /**
      * Outputs the task list.
      *
+     * @return String representation of the list.
      */
     public String showList() {
         StringBuilder sb = new StringBuilder("");
 
         for (int i = 0; i < numOfTask; i++) {
             sb.append((" " + (i + 1) +  ". " + tasks.get(i).toString().trim() + "\n"));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Sorts the tasks in the list and outputs the required number of tasks.
+     *
+     * @param requiredNum Required number of tasks.
+     * @return String representation of the sorted first few tasks.
+     */
+    public String sortList(int requiredNum) {
+        int numOfReminder = Math.min(requiredNum, numOfTask);
+        List<Task> sortedList = new ArrayList<>(tasks);
+        Collections.sort(sortedList);
+
+        StringBuilder sb = new StringBuilder("");
+
+        int i = 0;
+        int j = 0;
+        while (i < numOfReminder && j < numOfTask) {
+            if (sortedList.get(j).isDone()) {
+                j++;
+                continue;
+            }
+            sb.append((" " + (i + 1) +  ". " + sortedList.get(j).toString().trim() + "\n"));
+            j++;
+            i++;
+        }
+
+        if (sb.toString().isBlank()) {
+            sb.append("There are currently no urgent tasks~");
+        } else {
+            sb.append("Don't miss them! > <");
         }
         return sb.toString();
     }

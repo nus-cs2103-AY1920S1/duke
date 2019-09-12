@@ -120,5 +120,10 @@ public class Ui {
         mw.displayMsg(" " + index + ". " + task + "\n");
         System.out.printf(INDENT + " " + index + ". " + task + "\n");
     }
+
+    public void showReminder(String sortedTask) {
+        mw.displayMsg("Nezuko has found a few urgent tasks:\n" + sortedTask);
+        System.out.printf("Nezuko has found a few urgent tasks:\n" + sortedTask);
+    }
 }
 

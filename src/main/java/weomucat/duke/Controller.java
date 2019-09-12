@@ -24,6 +24,7 @@ import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.command.listener.SnoozeTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.UnknownCommandException;
+import weomucat.duke.parser.CommandParser;
 import weomucat.duke.task.Task;
 import weomucat.duke.ui.listener.UserInputListener;
 
@@ -240,7 +241,7 @@ public class Controller implements UserInputListener {
     assert userInput != null;
 
     // Initialize parser for this line of user input.
-    Parser parser = new Parser(userInput);
+    CommandParser parser = new CommandParser(userInput);
 
     // Get the command of the user input.
     String commandString = parser.getCommand();

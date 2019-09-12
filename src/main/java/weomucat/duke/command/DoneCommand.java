@@ -3,6 +3,7 @@ package weomucat.duke.command;
 import java.util.HashMap;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.parser.NumberParser;
 
 public abstract class DoneCommand implements Command {
 
@@ -15,12 +16,10 @@ public abstract class DoneCommand implements Command {
 
   @Override
   public void setParameters(String body, HashMap<String, String> parameters) throws DukeException {
-    // Get index of task
-    try {
-      this.index = Integer.parseInt(body) - 1;
-    } catch (NumberFormatException e) {
-      throw new InvalidParameterException("The index is not a valid number.");
+    if (body.equals("")) {
+      throw new InvalidParameterException("The index cannot be empty!");
     }
+    this.index = new NumberParser(body).parse("The index is not a valid number.") - 1;
   }
 
   @Override

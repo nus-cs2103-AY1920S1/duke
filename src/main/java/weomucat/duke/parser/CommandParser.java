@@ -1,4 +1,4 @@
-package weomucat.duke;
+package weomucat.duke.parser;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
- * A Parser is responsible for deciphering user input into:
+ * A CommandParser is responsible for deciphering user input into:
  * - Command
  * - Body (i.e default parameter)
  * - Parameters
  */
-public class Parser {
+public class CommandParser {
 
   private String command;
   private String body;
@@ -22,7 +22,7 @@ public class Parser {
    *
    * @param input User input to decipher.
    */
-  Parser(String input) {
+  public CommandParser(String input) {
     assert input != null;
 
     // Split input by whitespace.
@@ -54,11 +54,13 @@ public class Parser {
 
   /**
    * Parse a list of parameters which a Command expects.
+   * Given parameters are trimmed.
+   * Empty parameters are returned as an empty string.
    *
    * @param parameters The list of parameters
    * @return A HashMap of (parameter name, parameter value)
    */
-  HashMap<String, String> parseParameters(String... parameters) {
+  public HashMap<String, String> parseParameters(String... parameters) {
     assert parameters != null;
 
     LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));

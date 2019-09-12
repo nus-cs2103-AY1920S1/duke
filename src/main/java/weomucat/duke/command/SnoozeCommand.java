@@ -1,10 +1,11 @@
 package weomucat.duke.command;
 
 import java.time.Duration;
-import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.parser.DurationParser;
+import weomucat.duke.parser.NumberParser;
 
 public abstract class SnoozeCommand implements Command {
 
@@ -23,25 +24,13 @@ public abstract class SnoozeCommand implements Command {
     if (body.equals("")) {
       throw new InvalidParameterException("The task index cannot be empty!");
     }
-
-    try {
-      // Get index of task
-      this.taskIndex = Integer.parseInt(body) - 1;
-    } catch (NumberFormatException e) {
-      throw new InvalidParameterException("The task index is not a valid number.");
-    }
+    this.taskIndex = new NumberParser(body).parse("The task index is not a valid number.") - 1;
 
     String by = parameters.get(PARAMETER_BY);
     if (by.equals("")) {
       throw new InvalidParameterException("The duration cannot be empty!");
     }
-
-    try {
-      this.duration = Duration.parse(by);
-    } catch (DateTimeParseException e) {
-      throw new InvalidParameterException("I do not understand the duration."
-          + "Please enter in ISO-8601 format.");
-    }
+    this.duration = new DurationParser(by).parse();
   }
 
   @Override

@@ -21,24 +21,36 @@ public class DateRange implements Serializable {
   private Date to;
 
   /**
-   * Creates a DateRange object from two datetime strings.
+   * Creates a DateRange from two Dates.
+   *
+   * @param from start Date
+   * @param to   end Date
+   * @throws InvalidParameterException if start date is after end date
+   */
+  public DateRange(Date from, Date to) throws InvalidParameterException {
+    this.from = from;
+    this.to = to;
+
+    if (this.from.isAfter(this.to)) {
+      throw new InvalidParameterException("The start date must come before the end date.");
+    }
+  }
+
+  /**
+   * Creates a DateRange object from two datetime strings separated by a delimiter.
    *
    * @param range two datetime strings separated by a delimiter
    * @throws InvalidParameterException thrown if range is invalid
    */
-  public DateRange(String range) throws InvalidParameterException {
-    // TODO: DateRangeParser
+  public static DateRange parse(String range) throws InvalidParameterException {
     String[] dates = range.split(DELIMITER);
     if (dates.length < 2) {
       throw new InvalidParameterException(PARSE_ERROR_MESSAGE);
     }
 
-    this.from = new Date(dates[0]);
-    this.to = new Date(dates[1]);
-
-    if (this.from.isAfter(this.to)) {
-      throw new InvalidParameterException("The start date must come before the end date.");
-    }
+    Date from = Date.parse(dates[0]);
+    Date to = Date.parse(dates[1]);
+    return new DateRange(from, to);
   }
 
   /**
@@ -50,9 +62,8 @@ public class DateRange implements Serializable {
    * @return a formatted datetime string
    */
   public static String format(LocalDateTime from, LocalDateTime to, String pattern) {
-    return String.format("%s %s %s", Date.format(from, pattern),
-        DELIMITER,
-        Date.format(to, DATE_PARSE_PATTERN));
+    return String.format("%s %s %s", Date.format(from, pattern), DELIMITER,
+        Date.format(to, pattern));
   }
 
   @Override

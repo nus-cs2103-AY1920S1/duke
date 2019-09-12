@@ -9,10 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import weomucat.duke.exception.InvalidParameterException;
 
+/**
+ * A Date is a given moment in time.
+ */
 public class Date implements Serializable {
 
   // Pattern used to parse and format DateTime objects.
-  public static final String DATE_PARSE_PATTERN = "ddMMyy HHmm";
+  static final String DATE_PARSE_PATTERN = "ddMMyy HHmm";
   private static final String DATE_FORMAT_PATTERN = "dd MMM yyyy, hh:mma, O";
 
   // Timezone that Duke uses.
@@ -26,18 +29,35 @@ public class Date implements Serializable {
   private ZonedDateTime date;
 
   /**
+   * Creates a Date from a LocalDateTime.
+   *
+   * @param date the date time object
+   */
+  public Date(LocalDateTime date) {
+    this.date = ZonedDateTime.of(date, TIMEZONE);
+  }
+
+  /**
+   * Creates a Date from a ZonedDateTime.
+   *
+   * @param date the date time object
+   */
+  private Date(ZonedDateTime date) {
+    this.date = date;
+  }
+
+  /**
    * Creates a Date object from a valid datetime string.
    *
    * @param dateTime the datetime string
    * @throws InvalidParameterException thrown if datetime string is invalid
    */
-  public Date(String dateTime) throws InvalidParameterException {
-    // TODO: DateParser
+  public static Date parse(String dateTime) throws InvalidParameterException {
     try {
       // Parses the datetime string into a ZonedDateTime object.
       DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_PARSE_PATTERN)
           .withZone(TIMEZONE);
-      this.date = ZonedDateTime.parse(dateTime.trim(), dateTimeFormatter);
+      return new Date(ZonedDateTime.parse(dateTime.trim(), dateTimeFormatter));
     } catch (DateTimeParseException e) {
       throw new InvalidParameterException(PARSE_ERROR_MESSAGE);
     }

@@ -121,13 +121,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   void deleteTask(int i) throws DukeException {
-    Task task;
-    try {
-      // Get task from tasks
-      task = this.tasks.get(i);
-    } catch (IndexOutOfBoundsException e) {
-      throw new InvalidIndexException("That is not a valid index of a task.");
-    }
+    Task task = getTask(i);
 
     // Remove task
     this.tasks.remove(i);
@@ -147,13 +141,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   void doneTask(int i) throws DukeException {
-    Task task;
-    try {
-      // Get task from tasks
-      task = this.tasks.get(i);
-    } catch (IndexOutOfBoundsException e) {
-      throw new InvalidIndexException("That is not a valid index of a task.");
-    }
+    Task task = getTask(i);
 
     // Set task to done
     task.setDone(true);
@@ -170,13 +158,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   private void eventAt(int taskIndex, int atIndex) throws DukeException {
-    Task task;
-    try {
-      // Get task from tasks
-      task = this.tasks.get(taskIndex);
-    } catch (IndexOutOfBoundsException e) {
-      throw new InvalidIndexException("That is not a valid index of a task.");
-    }
+    Task task = getTask(taskIndex);
 
     if (!(task instanceof EventTask)) {
       throw new InvalidIndexException("The task selected is not an event.");
@@ -230,13 +212,7 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   private void snoozeTask(int taskIndex, Duration duration) throws DukeException {
-    Task task;
-    try {
-      // Get task from tasks
-      task = this.tasks.get(taskIndex);
-    } catch (IndexOutOfBoundsException e) {
-      throw new InvalidIndexException("That is not a valid index of a task.");
-    }
+    Task task = getTask(taskIndex);
 
     if (!(task instanceof SnoozableTask)) {
       throw new InvalidIndexException("The task selected cannot be snoozed!");
@@ -247,6 +223,15 @@ public class TaskList implements AddTaskCommandListener, DeleteTaskCommandListen
 
     // Update ModifyTaskListeners
     modifyTaskUpdate(new Message("Got it. I've snoozed this task:"), task);
+  }
+
+  private Task getTask(int i) throws InvalidIndexException {
+    try {
+      // Get task from tasks
+      return this.tasks.get(i);
+    } catch (IndexOutOfBoundsException e) {
+      throw new InvalidIndexException("That is not a valid index of a task.");
+    }
   }
 
   private void modifyTaskUpdate(Message message, Task task) throws StorageException {

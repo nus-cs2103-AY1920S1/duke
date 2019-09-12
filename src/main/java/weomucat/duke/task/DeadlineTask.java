@@ -12,6 +12,7 @@ import weomucat.duke.ui.Message;
 public class DeadlineTask extends Task implements SnoozableTask {
 
   private Date by;
+  private Duration every;
 
   /**
    * Default constructor.
@@ -20,19 +21,24 @@ public class DeadlineTask extends Task implements SnoozableTask {
    * @param by          date due. format of the date is DATETIME_PARSE_PATTERN
    * @throws InvalidParameterException If the description is empty, by is empty or by is invalid.
    */
-  public DeadlineTask(String description, String by) throws InvalidParameterException {
+  public DeadlineTask(String description, Date by) throws InvalidParameterException {
     super(description);
 
     if (description.equals("")) {
       throw new InvalidParameterException("The description of a deadline cannot be empty.");
     }
 
-    if (by.equals("")) {
-      throw new InvalidParameterException("The due date of a deadline cannot be empty.");
-    }
+    this.by = by;
+  }
 
-    // Parse 'by' into a ZonedDateTime object.
-    this.by = new Date(by);
+  public DeadlineTask setEvery(Duration duration) {
+    this.every = duration;
+    return this;
+  }
+
+  @Override
+  public void snooze(Duration duration) {
+    this.by.plus(duration);
   }
 
   @Override
@@ -48,10 +54,5 @@ public class DeadlineTask extends Task implements SnoozableTask {
   @Override
   public String toString() {
     return String.format("[D]%s", super.toString());
-  }
-
-  @Override
-  public void snooze(Duration duration) {
-    this.by.plus(duration);
   }
 }

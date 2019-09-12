@@ -30,7 +30,7 @@ public class TaskView extends TableView<Task> {
     private TableColumn<Task, String> descriptionCol;
     @FXML
     private TableColumn<Task, LocalDateTime> dateDueCol;
-    DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
+    private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
     @FXML
     private ObservableList<Task> tasks;
 
@@ -50,22 +50,22 @@ public class TaskView extends TableView<Task> {
         statusCol.setCellFactory(tc -> new CheckBoxTableCell<>());
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         dateDueCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
-        dateDueCol.setCellFactory(new TaskView.ColumnFormatter<>(outputFormat));
+        dateDueCol.setCellFactory(new ColumnFormatter<>(outputFormat));
     }
 
-    public TableView<Task> getTable(){
+    TableView<Task> getTable(){
         return taskView;
     }
 
-    public void setTable(ObservableList<Task> tasks){
+    void setTable(ObservableList<Task> tasks){
         taskView.setItems(tasks);
     }
 
-    private class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
+    private static class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
 
         private final DateTimeFormatter format;
 
-        public ColumnFormatter(DateTimeFormatter format) {
+        ColumnFormatter(DateTimeFormatter format) {
             super();
             this.format = format;
         }

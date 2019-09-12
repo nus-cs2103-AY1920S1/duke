@@ -17,10 +17,6 @@ import java.time.format.DateTimeFormatter;
 
 public class NewGUI extends VBox {
     @FXML
-    private HBox userPane;
-    @FXML
-    private HBox systemPane;
-    @FXML
     private StackPane tableArea;
     @FXML
     private TextField userInput;

@@ -36,4 +36,20 @@ public class Event extends Task {
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description, formattedDateTime);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof Event) {
+            Event otherEvent = (Event) o;
+
+            boolean isDescEqual = description.equals(otherEvent.description);
+            boolean isDateTimeEqual = unformattedDateTime.equals(otherEvent.unformattedDateTime);
+
+            return isDescEqual && isDateTimeEqual;
+        } else {
+            return false;
+        }
+    }
 }

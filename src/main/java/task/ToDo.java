@@ -16,4 +16,16 @@ public class ToDo extends Task {
     public String toString() {
         return String.format("[T][%s] %s", getStatusIcon(), description);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof ToDo) {
+            ToDo otherToDo = (ToDo) o;
+            return description.equals(otherToDo.description);
+        } else {
+            return false;
+        }
+    }
 }

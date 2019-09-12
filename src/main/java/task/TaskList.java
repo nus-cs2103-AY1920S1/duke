@@ -126,7 +126,7 @@ public class TaskList {
      * @param taskType The type of the task (e.g. Todo, Event etc)
      * @throws IOException if task created cannot be saved to a local save file.
      */
-    public String makeNewTask(String description, String dateTime, String taskType) throws IOException {
+    public String makeNewTask(String description, String dateTime, String taskType) throws IOException, DukeException {
         Task task;
 
         switch (taskType) {
@@ -142,6 +142,10 @@ public class TaskList {
         default:
             task = null;
             break;
+        }
+
+        if (tasks.contains(task)) {
+            throw new DukeException("Task already exists!");
         }
 
         tasks.add(task);

@@ -36,4 +36,21 @@ public class Deadline extends Task {
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", getStatusIcon(), description, formattedDateTime);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (o instanceof Deadline) {
+            Deadline otherDeadline = (Deadline)o;
+
+            boolean isDescEqual = description.equals(otherDeadline.description);
+            boolean isDateTimeEqual = unformattedDateTime.equals(otherDeadline.unformattedDateTime);
+
+            return isDescEqual && isDateTimeEqual;
+        } else {
+            return false;
+        }
+    }
+
 }

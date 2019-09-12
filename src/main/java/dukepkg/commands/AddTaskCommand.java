@@ -9,7 +9,7 @@ import java.io.IOException;
  * The type of command used to add tasks.
  */
 public class AddTaskCommand extends Command {
-    private final Task t;
+    protected Task t;
 
     /**
      * Instantiates a new Add task command.

@@ -46,7 +46,12 @@ public abstract class Command {
                 return new EventCommand(t);
             }
         }
-        return new TodoCommand(t);
+        if(arr[1].contains("/for")) {
+            Parser.validateTimeFormat(arr);
+            return new TimeCommand(t);
+        } else {
+            return new TodoCommand(t);
+        }
     }
 
     /**

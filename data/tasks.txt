@@ -6,3 +6,9 @@ E # 0 # a # 12nd of December 2019, 2pm
 D # 0 # b # 8th of December 2008, 6pm
 E # 0 # add # tmr
 T # 0 # 3244
+T # 0 # 3333 /for 2hr
+T # 0 # 33333 /for
+T # 0 # 123 /for
+T # 0 # 4321 /for 2hr
+T # 0 # 43210 /for
+T # 0 # 12345 /for 1hr

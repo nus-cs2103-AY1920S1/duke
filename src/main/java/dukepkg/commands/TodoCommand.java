@@ -1,6 +1,6 @@
 package dukepkg.commands;
 
-import dukepkg.Task;
+import dukepkg.*;
 
 /**
  * The command used to add a todo command.
@@ -14,4 +14,5 @@ class TodoCommand extends AddTaskCommand {
     TodoCommand(Task t) {
         super(t);
     }
+
 }

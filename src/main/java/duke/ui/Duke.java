@@ -214,7 +214,7 @@ public class Duke {
 
             output.append("Here are the matching task(s) in your list:");
 
-            for (Task task : taskList.search(parameters[0])) {
+            for (Task task : results) {
                 count++;
                 output.append(String.format("\n%0" + width + "d. %s", count, task.toString()));
             }
@@ -241,7 +241,7 @@ public class Duke {
 
             output.append("Here are the matching task(s) in your list:");
 
-            for (Task task : taskList.search(parameters[0])) {
+            for (Task task : results) {
                 count++;
                 output.append(String.format("\n%0" + width + "d. %s", count, task.toString()));
             }

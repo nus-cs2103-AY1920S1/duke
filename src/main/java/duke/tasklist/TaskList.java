@@ -2,6 +2,7 @@ package duke.tasklist;
 
 import duke.command.DukeIncorrectParameterTypeException;
 import duke.error.DukeException;
+import duke.util.Match;
 
 import java.util.ArrayList;
 
@@ -115,18 +116,28 @@ public class TaskList {
     }
 
     /**
-     * Returns an ArrayList containing the Tasks which contain the keyword provided.
+     * Returns an ArrayList containing the Tasks which have descriptions containing an exact match
+     * with the keyword provided.
      *
      * @param keyword The keyword to search for in the TaskList
-     * @return An ArrayList containing the Tasks which contain the keyword
+     * @return An ArrayList containing the Tasks which contain the matching Tasks
      */
     public ArrayList<Task> search(String keyword) {
         assert keyword != null;
         //searches the string representation of the class
         ArrayList<Task> results = new ArrayList<>();
-        for (Task t : this.taskList) {
-            if (t.toString().contains(keyword)) {
-                results.add(t);
+        for (Task task : this.taskList) {
+            for (String word : task.getDescription().split("\\s+")) {
+                if (results.contains(task)) {
+                    break;
+                }
+
+                if (!word.equals(keyword)) {
+                    continue;
+                }
+
+                results.add(task);
+                break;
             }
         }
         return results;
@@ -137,18 +148,24 @@ public class TaskList {
      * fuzzy-matches the keyword provided.
      *
      * @param keyword The keyword to search for in the TaskList
-     * @return An ArrayList containing the Tasks which fuzzy-matches the keyword.
+     * @return An ArrayList containing the matching Tasks
      */
     public ArrayList<Task> relaxedSearch(String keyword) {
         assert keyword != null;
 
         ArrayList<Task> results = new ArrayList<>();
-        for (Task matchingTask : taskList) {
-            for (String word : matchingTask.getDescription().split("\\s+")) {
-                if (results.contains(matchingTask) || !duke.util.Match.matchFuzzyIgnoreCase(keyword, word, 3)) {
+        for (Task task : this.taskList) {
+            for (String word : task.getDescription().split("\\s+")) {
+                if (results.contains(task)) {
                     break;
                 }
-                results.add(matchingTask);
+
+                if (Match.matchFuzzyIgnoreCase(keyword, word, 3)) {
+                    continue;
+                }
+
+                results.add(task);
+                break;
             }
         }
         return results;

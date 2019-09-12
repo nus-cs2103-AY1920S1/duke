@@ -1,21 +1,23 @@
 6
 T
 1
-c
+Sample ToDo Task 1
 T
 0
-a
+Sample ToDo Task 2
 D
 0
-a
-12
+Sample Deadline 1
+12th of DECEMBER 1212, 12:12pm
+D
+0
+Sample Deadline 2
+Whenever
 E
 0
-a
-3
-T
+Sample Event Task 1
+12th of SEPTEMBER 2020, 12am
+E
 0
-a
-T
-0
-b
+Sample Event Task 2
+Next Year

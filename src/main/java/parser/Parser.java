@@ -18,7 +18,8 @@ public class Parser {
     private boolean isDone;
     String description;
     private LocalDateTime date;
-    private boolean isSafe;
+    private boolean isSafe = true;
+    private TaskList scheduler;
     private TextUi ui;
     public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\w+)"
             + "\\s*(?<completionStatus>(\\[[01]\\])?)"
@@ -35,60 +36,68 @@ public class Parser {
      * @param scheduler TaskList object that commands are to be executed on
      * @param isLoading boolean variable to check if the input is from a user or save file (to stop some print actions)
      */
-    public void parse(String fullCommand, TaskList scheduler, boolean isLoading) {
-        isSafe = true;
+    public void parseTasks(String fullCommand, TaskList scheduler, boolean isLoading) {
+        this.scheduler = scheduler;
         Matcher matcher = COMMAND_FORMAT.matcher(fullCommand);
         if (matcher.find()) {
-            command = matcher.group("commandWord");
-            isDone = matcher.group("completionStatus").equals("[1]");
-            description = matcher.group("description").trim();
-            if (!matcher.group("date").isEmpty()) {
-                try {
-                    // Parsing the date
-                    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-                    date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
-                } catch (DateTimeParseException e) {
-                    ui.printWrongDate();
-                    isSafe = false;
-                }
-            }
-
+            splitTaskKeywords(matcher);
             if (isSafe) {
-                switch (command) {
-                case "todo":
-                case "deadline":
-                case "event":
-                    scheduler.addTask(command, description, isDone, date);
-                    if (!isLoading) {
-                        scheduler.printNewTask();
-                    }
-                    break;
-                case "list":
-                    scheduler.listTasks();
-                    break;
-                case "done":
-                    scheduler.completeTask(description);
-                    break;
-                case "delete":
-                    scheduler.removeTask(description);
-                    break;
-                case "find":
-                    scheduler.findTasks(description);
-                    break;
-                default:
-                    ui.printErrorMsg1();
-                    isSafe = false;
-                }
+                executeCommand(command,isLoading);
             }
         } else {
             ui.printErrorMsg2();
             isSafe = false;
         }
-
     }
+
+    public void parseFina
 
     public boolean isSafe() {
         return isSafe;
+    }
+
+    public void splitTaskKeywords(Matcher matcher){
+        command = matcher.group("commandWord");
+        isDone = matcher.group("completionStatus").equals("[1]");
+        description = matcher.group("description").trim();
+        if (!matcher.group("date").isEmpty()) {
+            try {
+                // Parsing the date
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
+            } catch (DateTimeParseException e) {
+                ui.printWrongDate();
+                isSafe = false;
+            }
+        }
+    }
+
+    public void executeCommand(String command, Boolean isLoading){
+        switch (command) {
+        case "todo":
+        case "deadline":
+        case "event":
+            scheduler.addTask(command, description, isDone, date);
+            if (!isLoading) {
+                scheduler.printNewTask();
+            }
+            break;
+        case "list":
+            scheduler.listTasks();
+            break;
+        case "done":
+            scheduler.completeTask(description);
+            break;
+        case "delete":
+            scheduler.removeTask(description);
+            break;
+        case "find":
+            scheduler.findTasks(description);
+            break;
+        default:
+            ui.printErrorMsg1();
+            isSafe = false;
+        }
     }
 
 }

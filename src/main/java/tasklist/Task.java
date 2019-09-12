@@ -1,9 +1,11 @@
 package tasklist;
 
+import financedata.CashFlow;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +20,7 @@ public abstract class Task {
     protected SimpleStringProperty description;
     protected SimpleBooleanProperty isDone;
     protected ObjectProperty<LocalDateTime> dateDue;
+    protected ObservableList<CashFlow> cashFlows;
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
     /**
@@ -65,6 +68,7 @@ public abstract class Task {
      * @return a string that contains the details of the task in a format the parser can read
      */
     public abstract String encodeForStorage();
+
 
     public String getTaskType() {
         return taskType.get();
@@ -114,5 +118,11 @@ public abstract class Task {
         this.dateDue.set(dateDue);
     }
 
+    public ObservableList<CashFlow> getCashFlows() {
+        return cashFlows;
+    }
 
+    public void setCashFlows(ObservableList<CashFlow> cashFlows) {
+        this.cashFlows = cashFlows;
+    }
 }

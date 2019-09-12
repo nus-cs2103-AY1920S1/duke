@@ -10,13 +10,6 @@ import parser.Parser;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Scanner;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
 
 /**
  * Main class of the program.
@@ -45,7 +38,7 @@ public class Duke{
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         tasks.setTasks(saveFile.loadData());
-        parser.parse(input, tasks,false);
+        parser.parseTasks(input, tasks,false);
         saveFile.storeData(tasks.getTasks());
         return outContent.toString();
     }

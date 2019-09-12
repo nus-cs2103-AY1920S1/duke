@@ -56,7 +56,7 @@ public class Storage {
         int tasknumber = 1;
 
         while ((line = bufferedReader.readLine()) != null) {
-            parser.parse(line,storedData,true);
+            parser.parseTasks(line,storedData,true);
             if (!parser.isSafe()) {
                 ui.printLoadingError(tasknumber);
             }

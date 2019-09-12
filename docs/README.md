@@ -14,7 +14,7 @@ Currently, there are four types of tasks supported by Duke. These are the tasks 
 
 * **Todo**:
 The Todo task is a task with no date / time attached to it. 
-(Eg. visit a new theme park)
+(Eg. Visit a new theme park)
 
 * **Deadline**:
 The Deadline task is a task that needs to be done before a specific date / time.
@@ -42,7 +42,7 @@ Sorts the task list according to type or date of completion (if any).
 ### `todo` - Adds a TODO task to the chatbot's tasklist 
 
 Example of usage:
-'todo borrow books'
+'todo Borrow books'
 
 Expected outcome: 
 
@@ -51,21 +51,21 @@ Expected outcome:
 ### `deadline` - Adds a DEADLINE task to the chatbot's tasklist
 
 Example of usage:
-'deadline submit CS2100 report /by 02/12/2019 1900'
+'deadline Submit CS2100 report /by 02/12/2019 1900'
 
 Expected outcome: 
 
 ### `event` - Adds an EVENT task to the chatbot's tasklist
 
 Example of usage:
-'event CS2103 team meeting /at 15/09/2019 1500-1800'
+'event CS2103T team meeting /at 15/09/2019 1500-1800'
 
 Expected outcome: 
 
 ### `fixed` - Adds a FIXED DURATION TASK to the chatbot's tasklist
 
 Example of usage:
-'fixed do my laundry /needs 2 hours
+'fixed Do my laundry /needs 2 hours
 
 Expected outcome:
 
@@ -77,14 +77,14 @@ Example of usage:
 ### `done` - Marks the task corresponding to inputted task number as 'done'
 
 Example of usage:
-'done 3'
+'done 1'
 
 Expected outcome: 
 
 ### `delete` - Deletes the task corresponding to inputted task number
 
 Example of usage:
-'done 2'
+'delete 1'
 
 Expected outcome: 
 

@@ -17,13 +17,13 @@ public class DeleteCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         if (taskIndex > tasks.size()) {
             throw new DukeException("");
         }
         Task removedTask = tasks.remove(taskIndex - 1);
         String reply = "Noted. I've removed this task:\n\t  " + removedTask + "\n\t" + "Now you have " + tasks.size()
                 + ((tasks.size() == 1) ? " task" : " tasks") + " in the list.";
-        ui.printReply(reply);
+        return reply;
     }
 }

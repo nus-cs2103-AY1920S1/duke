@@ -10,7 +10,7 @@ import seedu.duke.ui.UI;
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         String reply = "Here are the tasks in your list:\n\t ";
         for (int i = 0; i < tasks.size(); i++) {
             reply += (i + 1) + "." + tasks.get(i);
@@ -18,6 +18,6 @@ public class ListCommand extends Command {
                 reply += "\n\t ";
             }
         }
-        ui.printReply(reply);
+        return reply;
     }
 }

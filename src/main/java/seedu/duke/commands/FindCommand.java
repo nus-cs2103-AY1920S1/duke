@@ -16,7 +16,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storagae) {
+    public String execute(TaskList tasks, UI ui, Storage storagae) {
         TaskList matchingTasks = new TaskList();
         String reply = "Here are the matching tasks in your list:\n\t ";
         for (Task task: tasks) {
@@ -30,6 +30,6 @@ public class FindCommand extends Command {
                 reply += "\n\t ";
             }
         }
-        ui.printReply(reply);
+        return reply;
     }
 }

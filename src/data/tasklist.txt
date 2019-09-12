@@ -3,3 +3,4 @@ T | 0 | run
 T | 0 | list
 T | 0 | go for tutorial | LOW
 D | 1 | presentation | 9aug
+T | 0 | run around the school

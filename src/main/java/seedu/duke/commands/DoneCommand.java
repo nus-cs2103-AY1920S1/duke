@@ -15,7 +15,8 @@ public class DoneCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.printReply(tasks.get(taskIndex - 1).markAsDone());
+    public String execute(TaskList tasks, UI ui, Storage storage) {
+        String reply = tasks.get(taskIndex - 1).markAsDone();
+        return reply;
     }
 }

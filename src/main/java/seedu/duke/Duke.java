@@ -13,9 +13,6 @@ public class Duke {
     private TaskList tasks;
     private UI ui;
 
-    public Duke() {
-    }
-
     /**
      * Constructs a Duke object. Reads and loads the latest record of the Task List
      * from the file that stores the list.
@@ -32,35 +29,17 @@ public class Duke {
         }
     }
 
-    /** Executes the Duke program. */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while(!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = new Parser().parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printReply(Messages.MESSAGE_UNKNOWN_COMMAND);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                ui.printReply("The description cannot be empty :-(");
-            }
-        }
-        ui.showGoodByeMessage();
-    }
-
-    public static void main(String[] args) {
-        new Duke("C:/duke/src/data/tasklist.txt").run();
-    }
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Takes in command from user and executes the command. Returns a reply as String.
      */
     protected String getResponse(String input) {
-
-        return "Duke heard: " + input;
+        try {
+            Command c = new Parser().parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return Messages.MESSAGE_UNKNOWN_COMMAND;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "The description cannot be empty :-(";
+        }
     }
 }

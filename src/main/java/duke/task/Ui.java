@@ -54,7 +54,18 @@ public class Ui {
         System.out.print(sb.toString());
     }
 
+    /**
+     * This function prints out the given error message.
+     * @param message The exception message.
+     */
+    public static void printError(String message) {
+        System.err.println(message);
+    }
+
+    /**
+     * This function prints out an error message when an error occurred during the loading of the storage file.
+     */
     public void showLoadingError() {
-        System.out.println("An error occurred with loading the input file, using an empty one instead.");
+        printError("An error occurred with loading the input file, using an empty one instead.");
     }
 }

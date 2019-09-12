@@ -20,6 +20,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * The constructor function for the DialogBox class, which handles the display of the dialog box component in GUI.
+     * @param text The text to display for the message within the dialog box.
+     * @param img The image to show beside the message within the dialog box.
+     */
     public DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -45,6 +50,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * This function generates the DialogBox object given the text string and the image to use.
+     * @param text The text message to display in the dialog box.
+     * @param img The image to use beside the text message in the dialog box.
+     * @return DialogBox
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -42,7 +42,7 @@ public class Parser {
         try {
             date = new SimpleDateFormat(pattern).parse(input);
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            Ui.printError(e.getMessage());
             System.exit(1);
         }
 

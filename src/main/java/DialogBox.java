@@ -18,10 +18,14 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private HBox mainView;
+
 
     private DialogBox(String text, Image img) {
         try {
@@ -49,22 +53,25 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a dialogbox design used for Duke user's.
-     * @param text
-     * @param img
-     * @return
+     * @param text The text to be displayed in the dialogbox. 
+     * @param img The user's image to be shown in the dialogbox.
+     * @return The dialog box as designed for the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.getStyleClass().add("hboxUser");
+        return db;
     }
 
     /**
      * Creates a dialogbox design used for Duke.
-     * @param text
-     * @param img
-     * @return
+     * @param text The text to be displayed in the dialogbox. 
+     * @param img Duke's image to be shown in the dialogbox.
+     * @return The dialog box as designed for Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.getStyleClass().add("hboxDuke");
         db.flip();
         return db;
     }

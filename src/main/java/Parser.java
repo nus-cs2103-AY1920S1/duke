@@ -76,10 +76,11 @@ public class Parser {
      * @param storage The Storage object needed to load and write back to the tasks file. 
      * @throws Exception When any error occurs during the execution of the user command.
      */
-    public StringBuilder processCommand(String input, TaskList taskList, Ui ui, Storage storage) throws Exception {
+    public StringBuilder processCommand(String input, TaskList taskList, Storage storage) throws Exception {
         String[] command = input.split(" ");
-        if (command[0].equals("list")) { //done
-            return ui.printTasks(taskList.getTaskList());
+        assert command.length > 0 : "command length should be greater than 0";
+        if (command[0].equals("list")) {
+            return taskList.printTasks();
         } else if (command[0].equals("delete")) {
             return deleteTask(input, taskList, storage);
         } else if (command[0].equals("done")) {
@@ -88,12 +89,17 @@ public class Parser {
             if (command.length == 1) {
                 throw new DukeException("Find query must be specified!!!");
             } 
-            return ui.printTasks(taskList.matchingTasks(command[1]));
-        } else if (command[0].equals("bye")) { 
-            return new StringBuilder(Ui.showGoodbyeMessage());
+            return taskList.printMatchingTasks(command[1]);
+        } else if (command[0].equals("bye")) {
+            StringBuilder sb = new StringBuilder(showGoodbyeMessage());
+            return sb;
         } else { 
             return addTask(input, taskList, storage);
         }
+    }
+
+    private static String showGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     private static StringBuilder deleteTask(String input, TaskList taskList, Storage storage) throws DukeException, IOException {
@@ -125,35 +131,35 @@ public class Parser {
     private static StringBuilder addToDo(String details, TaskList list, Storage storage) throws IOException {
         Task task = new ToDos(details);
         list.addTask(task, storage);
-        return Ui.addSuccess(task).append("\n" + "Now you have " + 
+        return addSuccess(task).append("\n" + "Now you have " + 
             list.getNumberOfTasks() + " tasks in the list.");
     }
 
     private static StringBuilder addDeadline(String details, TaskList list, Storage storage) throws DukeException, IOException {
         String[] detAsArr = details.split(" /by ");
-        Ui.validateDeadlineDetails(detAsArr);
+        validateDeadlineDetails(detAsArr);
         String deadline = detAsArr[0];
         String dueDetail = detAsArr[1];
         Task task = new Deadline(deadline, processDeadlineDate(dueDetail));
         list.addTask(task, storage);
-        return Ui.addSuccess(task).append("\n" + "Now you have " + list.getNumberOfTasks() 
+        return addSuccess(task).append("\n" + "Now you have " + list.getNumberOfTasks() 
             + " tasks in the list.");
     }
 
     private static StringBuilder addEvent(String details, TaskList list, Storage storage) throws DukeException, IOException {
         String[] detAsArr = details.split(" /at ");
-        Ui.validateEventDetails(detAsArr);
+        validateEventDetails(detAsArr);
         String event = detAsArr[0];
         String dueDetail = detAsArr[1];
         Task task = new Event(event, processEventDate(dueDetail));
         list.addTask(task, storage);
-        return Ui.addSuccess(task).append("\n" + "Now you have " + list.getNumberOfTasks() 
+        return addSuccess(task).append("\n" + "Now you have " + list.getNumberOfTasks() 
             + " tasks in the list.");
     }
     
     private static StringBuilder addTask(String input, TaskList list, Storage storage) throws Exception {
         String[] inputAsArr = input.split(" ");
-        Ui.validateDetail(inputAsArr);
+        validateDetail(inputAsArr);
         String command = inputAsArr[0];
         String rest = input.substring(input.indexOf(" ") + 1);
         if (command.equals("todo")) {
@@ -162,6 +168,37 @@ public class Parser {
             return addDeadline(rest, list, storage);
         } else {
             return addEvent(rest, list, storage);
+        }
+    }
+
+    private static StringBuilder addSuccess(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:");
+        sb.append("\n");
+        sb.append("\t" + task.toString());
+        assert sb.length() == 0 : "The stringbuilder should not be empty.";
+        return sb;
+    }
+
+    private static void validateDetail(String[] detail) throws DukeException {
+        if (detail.length == 0) {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (! detail[0].equals("todo") && ! detail[0].equals("event") && ! detail[0].equals("deadline")) {
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        } else if (detail.length == 1) {
+            throw new DukeException("OOPS!!! The description of a " + detail[0] + " cannot be empty.");
+        }
+    }
+
+    private static void validateDeadlineDetails(String[] detail) throws DukeException {
+        if (detail.length != 2) {
+            throw new DukeException("OOPS!!! The due date of a deadline must be specified.");
+        }
+    }
+
+    private static void validateEventDetails(String[] detail) throws DukeException {
+        if (detail.length != 2) {
+            throw new DukeException("OOPS!!! The timeline of an event must be specified.");
         }
     }
 

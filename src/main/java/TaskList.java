@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 /**
  * The TaskList class handles the storage, adding and deleting of
@@ -49,31 +50,57 @@ public class TaskList {
      * @param query The string being searched for in each task.
      * @return List of all tasks containing the queried string.
      */
-    public ArrayList<Task> matchingTasks(String query) {
-        ArrayList<Task> matches = new ArrayList<>();
-        for (Task t : this.taskList) {
-            String queryLowerCase = query.toLowerCase();
-            String stringUnderCheck = t.toString().toLowerCase();
-            if (stringUnderCheck.indexOf(queryLowerCase) != -1) {
-                matches.add(t);
+    public StringBuilder printMatchingTasks(String query) {
+        StringBuilder sb = new StringBuilder();
+        int index = 1;
+        String queryLowerCase = query.toLowerCase();
+        queryLowerCase = queryLowerCase.replaceAll("\\*", "\\\\w*");
+        for (Task task : this.taskList) {
+            String stringUnderCheck = task.toString().toLowerCase();
+            if (stringUnderCheck.matches(queryLowerCase) || stringUnderCheck.contains(query.toLowerCase())) {
+                sb.append(index + ". " + task.toString() + "\n");
             }
+            index++;
         }
-        return matches;
+        if (sb.length() == 0) {
+            return sb.append("No such tasks found :( (" + queryLowerCase + ")");
+        } else {
+            return sb;
+        }
     }
 
     /**
+     * Returns a stringbuilder object with all the tasks in the
+     * arraylist of tasks returned in a list form.
+     * @return Stringbuilder object with tasks in string form as a list.
+     */
+    public StringBuilder printTasks() {
+        int index = 1;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:" + "\n");
+        for (Task task : this.getTaskList()) {
+            sb.append(index + ". " + task.toString());
+            sb.append("\n");
+            index++;
+        }
+        return sb;
+    }
+
+    /**
+     * 
      * Deletes a specific task from the task list and writes
      * the changes back into the local file of tasks as well.
      * @param index The index of the task to be deleted from the array list.
      * @param storage The Storage object handling the read and write from the local file storing the tasks.
-     * @throws DukeException When the index specified by the user does not exist.
+     * @return A stringbuilder object containing the response to be given by Duke upon deleting a task successfully.
+     * @throws IndexOutOfBoundsException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
-    public StringBuilder deleteTask(int index, Storage storage) throws DukeException, IOException {
+    public StringBuilder deleteTask(int index, Storage storage) throws IndexOutOfBoundsException, IOException {
         try {
             this.taskList.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The item specified does not exist.");
+            throw new IndexOutOfBoundsException("☹ OOPS!!! The item specified does not exist.");
         }
         StringBuilder sb = new StringBuilder();
         sb.append("Noted. I've removed this task: " + "\n");
@@ -81,6 +108,7 @@ public class TaskList {
         this.taskList.remove(index - 1);
         storage.writeToFile(storage.getFilePath(), taskList);
         sb.append("Now you have " + taskList.size() + " tasks in the list.");
+        assert sb.length() == 0 : "The stringbuilder should not be empty.";   
         return sb;
     }
 
@@ -89,19 +117,21 @@ public class TaskList {
      * completed thereby signifying that the task has been completed.
      * @param index The index of the task in the array list to be set to completed to be marked as completed.
      * @param storage The Storage object handling the read and write from the local file storing the tasks.
-     * @throws DukeException When the index specified by the user does not exist.
+     * @return A stringbuilder object containing the response to be given by Duke upon marking a task as done successfully.
+     * @throws IndexOutOfBoundsException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
-    public StringBuilder markAsDone(int index, Storage storage) throws DukeException, IOException {
+    public StringBuilder markAsDone(int index, Storage storage) throws IndexOutOfBoundsException, IOException {
         StringBuilder sb = new StringBuilder();
         try {
             taskList.get(index - 1).markAsDone();
             storage.writeToFile(storage.getFilePath(), taskList);
             sb.append("Nice! I've marked this task as done: " + "\n");
             sb.append(taskList.get(index - 1).toString());
+            assert sb.length() == 0 : "The stringbuilder should not be empty.";   
             return sb;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The item specified does not exist.");
+            throw new IndexOutOfBoundsException("☹ OOPS!!! The item specified does not exist.");
         }
     }
 

@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.io.FileNotFoundException;
 
 /**
  * Main class of the program where supporting classes are called
@@ -9,7 +9,6 @@ public class Duke {
 
     private TaskList taskList;
     private Storage storage;
-    private Ui ui;
     private Parser parser = new Parser();
 
     /**
@@ -18,24 +17,33 @@ public class Duke {
      * @throws IOException If the file path provided does not find a file.
      * @throws DukeException If an unknown or unidentifiable command is stored within the tasks file.
      */
-    public Duke(String filePath) throws IOException, DukeException {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        taskList = new TaskList(storage.load());
-        
+    public Duke(String filePath) throws DukeException, FileNotFoundException {
+        try {
+            storage = new Storage(filePath);
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            System.err.println(e.toString());
+        } catch (FileNotFoundException e) {
+            System.err.println(e.toString());
+        }
     }
 
-    public Duke() throws IOException, DukeException {
-        ui = new Ui();
+    /**
+     * Creates a new Duke object.
+     * @throws IOException If the file path provided does not find a file.
+     * @throws DukeException If an unknown or unidentifiable command is stored within the tasks file.
+     */
+    public Duke() throws FileNotFoundException, DukeException {
         storage = new Storage("/Users/abhimanyadav/Desktop/Duke/duke/src/main/java/dukeTasks.txt");
         taskList = new TaskList(storage.load());
     }
 
     public String getResponse(String input) {
         try {
-            return parser.processCommand(input, taskList, ui, storage).toString();
+            return parser.processCommand(input, taskList, storage).toString();
         } catch(Exception e) {
             return e.getMessage();
         }
     }
+
 }

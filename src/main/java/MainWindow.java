@@ -26,6 +26,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showGreetingMessage(dialogContainer, dukeImage);
     }
 
     /**
@@ -36,6 +37,18 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    /**
+     * Creates the greeting message from Duke in the 
+     * appropriate dialogbox form.
+     */
+    @FXML
+    private static void showGreetingMessage(VBox dialogContainer, Image image) {
+        String dukeGoodbyeText = "Hello! I'm Duke" + "\n" + "What can I do for you?";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(dukeGoodbyeText, image)
+        );
     }
 
     /**

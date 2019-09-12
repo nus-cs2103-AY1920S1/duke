@@ -3,6 +3,9 @@ public class TodoCommand extends AddCommand {
         super(task);
     }
 
+    /**
+     * Explains TodoCommand.
+     */
     public static String getHelp() {
         StringBuilder builder = new StringBuilder("Command: todo\n");
         builder.append("- Format: 'todo {description}'.\n");

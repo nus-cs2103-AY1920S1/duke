@@ -24,6 +24,9 @@ public class DoneCommand extends Command {
         return builder.toString();
     }
 
+    /**
+     * Explains DoneCommand.
+     */
     public static String getHelp() {
         StringBuilder builder = new StringBuilder("Command: done\n");
         builder.append("- Format: 'done {index}'.\n");

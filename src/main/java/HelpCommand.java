@@ -24,6 +24,9 @@ public class HelpCommand extends Command {
         return builder.toString();
     }
 
+    /**
+     * Explains HelpCommand.
+     */
     public static String getHelp() {
         StringBuilder builder = new StringBuilder("Command: help\n");
         builder.append("- Description: Shows all duke commands.\n");

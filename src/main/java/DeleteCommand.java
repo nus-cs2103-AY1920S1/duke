@@ -31,6 +31,9 @@ public class DeleteCommand extends Command {
         builder.append("Now you have " + tasks.size() + " task" + (isPlural ? "s" : "") + " in the list.\n");
     }
 
+    /**
+     * Explains DeleteCommand.
+     */
     public static String getHelp() {
         StringBuilder builder = new StringBuilder("Command: delete\n");
         builder.append("- Format: 'delete {index}'.\n");

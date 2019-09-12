@@ -12,6 +12,9 @@ public class ByeCommand extends Command {
         return "Bye. Hope to see you again soon!\n";
     }
 
+    /**
+     * Explains ByeCommands.
+     */
     public static String getHelp() {
         StringBuilder builder = new StringBuilder("Command: bye\n");
         builder.append("- Description: This command terminates Duke.\n");

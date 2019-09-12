@@ -3,6 +3,9 @@ public class DeadlineCommand extends AddCommand {
         super(task);
     }
 
+    /**
+     * Explains DeadlineCommand.
+     */
     public static String getHelp() {
         StringBuilder builder = new StringBuilder("Command: deadline\n");
         builder.append("- Format: 'deadline {description} /by {full_date}'.");

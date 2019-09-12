@@ -29,6 +29,9 @@ public class FindCommand extends Command {
         return builder.toString();
     }
 
+    /**
+     * Explains FindCommand.
+     */
     public static String getHelp() {
         StringBuilder builder = new StringBuilder("Command: find\n");
         builder.append("- Format: 'find {keyword}'.\n");

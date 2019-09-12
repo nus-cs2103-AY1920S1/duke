@@ -3,6 +3,9 @@ public class EventCommand extends AddCommand {
         super(task);
     }
 
+    /**
+     * Explains EventCommand.
+     */
     public static String getHelp() {
         StringBuilder builder = new StringBuilder("Command: event\n");
         builder.append("- Format: 'event {description} /at {full_date}'.");

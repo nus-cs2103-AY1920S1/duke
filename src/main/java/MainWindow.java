@@ -58,7 +58,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private void greetUser() {
-        String greet = "Hello! I'm Duke\nWhat can I do for you?";
+        String greet = "Hello! I'm Duke\nWhat can I do for you?\n\nFor list of commands, pelase send 'help'.";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greet, dukeImage));
     }
 }

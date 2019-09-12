@@ -166,6 +166,9 @@ public class Parser {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
 
+        // The task created should not be done yet
+        assert !task.isDone() : "Tasks that are just created should not be marked as done";
+
         tasks.add(task);
         return task;
     }

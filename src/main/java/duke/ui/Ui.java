@@ -121,6 +121,11 @@ public class Ui {
         System.out.printf(INDENT + " " + index + ". " + task + "\n");
     }
 
+    /**
+     * Displays the sorted tasks as a reminder.
+     *
+     * @param sortedTask
+     */
     public void showReminder(String sortedTask) {
         mw.displayMsg("Nezuko has found a few urgent tasks:\n" + sortedTask);
         System.out.printf("Nezuko has found a few urgent tasks:\n" + sortedTask);

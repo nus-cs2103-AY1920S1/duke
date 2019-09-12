@@ -1,4 +1,4 @@
-public class DoneCommand implements Command {
+public class DoneCommand extends Command {
     private int index;
 
     public DoneCommand(int index) {

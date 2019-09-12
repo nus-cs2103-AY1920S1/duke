@@ -1,4 +1,4 @@
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
     private int index;
 
     public DeleteCommand(int index) {

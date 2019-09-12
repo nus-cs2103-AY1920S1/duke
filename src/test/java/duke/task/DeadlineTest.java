@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
@@ -21,9 +22,10 @@ class DeadlineTest {
         Task task = null;
         try {
             task = new Deadline("submit assignment", "29/08/2019 2359");
-        } catch (ParseException e) {
+        } catch (DukeException e) {
             e.printStackTrace();
         }
+        assert task != null;
         assertEquals(task.toString(), "[D][\u2718] submit assignment (by: 29/08/2019 2359)");
     }
 
@@ -37,7 +39,7 @@ class DeadlineTest {
         Task task = null;
         try {
             task = new Deadline("submit quiz", "20/09/2019");
-        } catch (ParseException e) {
+        } catch (DukeException e) {
             assertEquals(e.getMessage(), "Unparseable date: \"20/09/2019\"");
         }
     }
@@ -53,7 +55,8 @@ class DeadlineTest {
         try {
             task = new Deadline("submit quiz", "20/09/2019 2359");
             assertEquals("D | 0 | submit quiz | 20/09/2019 2359", task.getFileStringFormat());
-        } catch (ParseException ignored) {
+        } catch (DukeException e) {
+            System.err.println(e.getMessage());
         }
     }
 }

@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Task;
 
@@ -14,13 +15,16 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> tasks) {
+    public void execute(List<Task> tasks) throws InvalidArgumentException {
+        try {
+            tasks.get(taskId - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidArgumentException("No task with id " + taskId + " exists.", e);
+        }
         Task taskToRemove = tasks.get(taskId);
         tasks.remove(taskId);
-        echo(new String[] {
-            "Noted. I've removed this task:",
+        echo("Noted. I've removed this task:",
             "  " + taskToRemove.toString(),
-            "Now you have " + tasks.size() + " tasks in the list."
-        });
+            "Now you have " + tasks.size() + " tasks in the list.");
     }
 }

@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.trackables.Task;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public abstract class Command {
     static final String HORIZONTAL_LINE = "______________________________"
             + "______________________________";
 
-    public void execute(List<Task> tasks) {
+    public void execute(List<Task> tasks) throws DukeException {
 
     }
 
@@ -17,10 +18,10 @@ public abstract class Command {
      * Prints out the message.
      * @param messages Array of messages to show.
      */
-    protected void echo(String[] messages) {
+    protected void echo(String... messages) {
         printLine();
-        for (int i = 0; i < messages.length; i++) {
-            System.out.println("\t" + messages[i]);
+        for (String message : messages) {
+            System.out.println("\t" + message);
         }
         printLine();
     }

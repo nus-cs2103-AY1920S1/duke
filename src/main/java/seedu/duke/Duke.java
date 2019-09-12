@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.commands.*;
 
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.storage.Storage;
@@ -78,7 +79,7 @@ public class Duke {
             String input = in.nextLine();
             try {
                 parseCommand(input);
-            } catch (InvalidCommandException | InvalidArgumentException ex) {
+            } catch (InvalidCommandException ex) {
                 System.out.println(ex.getMessage());
             }
         }
@@ -89,15 +90,19 @@ public class Duke {
      *
      * @param input Input from the console.
      */
+<<<<<<< HEAD
     private static void parseCommand(String input) throws InvalidCommandException,
         InvalidArgumentException, Storage.StorageOperationException {
+=======
+    private static void parseCommand(String input) throws InvalidCommandException {
+>>>>>>> branch-Level-8
 
         // Identify Command
         CommandName command = null;
         try {
             command = CommandName.valueOf(input.split(" ")[0].toUpperCase());
         } catch (IllegalArgumentException iae) {
-            throw new InvalidCommandException();
+            throw new InvalidCommandException("No Such command found", iae);
         }
 
         Command commandToExecute = null;
@@ -109,8 +114,9 @@ public class Duke {
             if (command == CommandName.LIST) {
                 commandToExecute = new ListCommand();
             } else if (command == CommandName.ADD) {
-                commandToExecute = new AddCommand(new Task(matcher.group(2)));
+                commandToExecute = new AddCommand(matcher.group(2));
             } else if (command == CommandName.DONE) {
+<<<<<<< HEAD
                 try {
                     int taskId = Integer.parseInt(matcher.group(2));
                     // Try to get task. Will Throw and error if is is not valid.
@@ -120,11 +126,16 @@ public class Duke {
                     throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
                 }
 
+=======
+                int taskId = Integer.parseInt(matcher.group(2));
+                commandToExecute = new DoneCommand(taskId);
+>>>>>>> branch-Level-8
             } else if (command == CommandName.TODO) {
-                commandToExecute = new TodoCommand(new Todo(matcher.group(2)));
+                commandToExecute = new TodoCommand(matcher.group(2));
             } else if (command == CommandName.EVENT) {
-                commandToExecute = new EventCommand(new Event(matcher.group(2), matcher.group(3)));
+                commandToExecute = new EventCommand(matcher.group(2), matcher.group(3));
             } else if (command == CommandName.DEADLINE) {
+<<<<<<< HEAD
                 commandToExecute = new DeadlineCommand(new Deadline(matcher.group(2), matcher.group(3)));
             } else if (command == CommandName.DELETE) {
                 try {
@@ -134,6 +145,12 @@ public class Duke {
                 } catch (IndexOutOfBoundsException ibx) {
                     throw new InvalidArgumentException("No task with id " + matcher.group(2) + " exists.", ibx);
                 }
+=======
+                commandToExecute = new DeadlineCommand(matcher.group(2), matcher.group(3));
+            } else if (command == CommandName.DELETE) {
+                int taskId = Integer.parseInt(matcher.group(2));
+                commandToExecute = new DeleteCommand(taskId);
+>>>>>>> branch-Level-8
             } else if (command == CommandName.BYE) {
                 commandToExecute = new ByeCommand();
                 Storage.getInstance().saveToDisk(taskList);
@@ -142,9 +159,17 @@ public class Duke {
                 return;
             }
         } else {
-            throw new InvalidArgumentException("Invalid or missing arguments in command " + command.name() + ".", null);
+            commandToExecute = new ErrorCommand(
+                new InvalidArgumentException("Invalid or missing arguments in command "
+                    + command.name() + ".", null));
         }
-        commandToExecute.execute(taskList);
+
+        try {
+            commandToExecute.execute(taskList);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     private static String getPattern(CommandName command) {

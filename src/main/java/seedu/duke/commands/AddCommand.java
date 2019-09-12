@@ -6,15 +6,16 @@ import java.util.List;
 
 public class AddCommand extends Command {
 
-    private Task task;
+    private String description;
 
-    public AddCommand(Task task) {
-        this.task = task;
+    public AddCommand(String description) {
+        this.description = description;
     }
 
     @Override
     public void execute(List<Task> tasks) {
+        Task task = new Task(description);
         tasks.add(task);
-        echo(new String[]{"added: " + task.toString()});
+        echo("added: " + task.toString());
     }
 }

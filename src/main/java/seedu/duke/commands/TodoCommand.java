@@ -7,19 +7,18 @@ import java.util.List;
 
 public class TodoCommand extends Command {
 
-    private Todo todo;
+    private String description;
 
-    public TodoCommand(Todo todo) {
-        this.todo = todo;
+    public TodoCommand(String description) {
+        this.description = description;
     }
 
     @Override
     public void execute(List<Task> tasks) {
+        Todo todo = new Todo(description);
         tasks.add(todo);
-        echo(new String[] {
-            "Got it. I've added this task:",
+        echo("Got it. I've added this task:",
             "  " + todo.toString(),
-            "Now you have " + tasks.size() + " tasks in the list."
-        });
+            "Now you have " + tasks.size() + " tasks in the list.");
     }
 }

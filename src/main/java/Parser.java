@@ -98,10 +98,6 @@ public class Parser {
         }
     }
 
-    private static String showGoodbyeMessage() {
-        return "Bye. Hope to see you again soon!";
-    }
-
     private static StringBuilder deleteTask(String input, TaskList taskList, Storage storage) throws DukeException, IOException {
         String[] command = input.split(" ");
         if (command.length == 1) {
@@ -200,6 +196,10 @@ public class Parser {
         if (detail.length != 2) {
             throw new DukeException("OOPS!!! The timeline of an event must be specified.");
         }
+    }
+
+    private static String showGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
 }

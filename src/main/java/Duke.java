@@ -38,6 +38,12 @@ public class Duke {
         taskList = new TaskList(storage.load());
     }
 
+    /**
+     * Returns the String representation of the response to be given by Duke in response
+     * to user commands.
+     * @param input The user's command.
+     * @return String representation of Duke's response.
+     */
     public String getResponse(String input) {
         try {
             return parser.processCommand(input, taskList, storage).toString();

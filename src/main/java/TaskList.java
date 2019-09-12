@@ -55,9 +55,10 @@ public class TaskList {
         int index = 1;
         String queryLowerCase = query.toLowerCase();
         queryLowerCase = queryLowerCase.replaceAll("\\*", "\\\\w*");
+        String toFind = Pattern.quote(queryLowerCase);
         for (Task task : this.taskList) {
             String stringUnderCheck = task.toString().toLowerCase();
-            if (stringUnderCheck.matches(queryLowerCase) || stringUnderCheck.contains(query.toLowerCase())) {
+            if (stringUnderCheck.matches(toFind) || stringUnderCheck.contains(query.toLowerCase())) {
                 sb.append(index + ". " + task.toString() + "\n");
             }
             index++;

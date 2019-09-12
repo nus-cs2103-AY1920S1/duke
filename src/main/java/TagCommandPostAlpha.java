@@ -129,27 +129,39 @@ public class TagCommandPostAlpha implements TagCommandObserver {
 
     public void tagCommandUpdate(String command) {
         //parse logic on which of the notifies to call
-        String[] cmds = command.split("");
+        String[] cmds = command.split(" ");
+
+        System.out.println("cmdread <<<<");
+        //System.out.println(cmds[0]);
+        //System.out.println(cmds[1]);
+        //System.out.println(cmds[2]);
+        //System.out.println(cmds[3]);
+
         assert cmds.length > 2 
             : "tag command is too showt";
 
         if (cmds[1].toUpperCase().equals("ADDTAG")) {
-            notifyAddTag(cmds[2], Integer.valueOf(cmds[3]));
+            System.out.println("ADDTAG <<<<");
+            int taskId = Integer.valueOf(cmds[3]) - 1;
+            notifyAddTag(cmds[2], taskId);
         } else if 
             (cmds[2].toUpperCase().equals("DELETETAG")) {
             notifyDeleteTag(cmds[2]);
         } else if 
             (cmds[2].toUpperCase().equals("DELETETASK")) {
-            notifyDeleteTask(Integer.valueOf(cmds[2]));
+            int taskId = Integer.valueOf(cmds[2]) - 1;
+            notifyDeleteTask(taskId);
         } else if 
             (cmds[2].toUpperCase().equals("QUERYTAG")) {
             notifyQueryTag(cmds[2]);
         } else if 
             (cmds[2].toUpperCase().equals("QUERYTASK")) {
-            notifyQueryTask(Integer.valueOf(cmds[2]));
+            int taskId = Integer.valueOf(cmds[2]) - 1;
+            notifyQueryTask(Integer.valueOf(taskId));
         } else if 
             (cmds[2].toUpperCase().equals("DELETEPAIR")) {
-            notifyDeletePair(cmds[2], Integer.valueOf(cmds[3]));
+            int taskId = Integer.valueOf(cmds[3]) - 1;
+            notifyDeletePair(cmds[2], taskId);
         } else {
             /* TODO */
         }

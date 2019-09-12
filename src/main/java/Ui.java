@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
  * Other classes should call on this class' methods to 
  * interact with user.
  */
-class Ui implements TaskObserver, UiObservable {
+class Ui implements TaskObserver, UiObservable, 
+    TaskFeedbackObserver, TagFeedbackObserver, 
+    PairFeedbackObserver, QueryFeedbackObserver {
     private ControllerInterface controller; 
     private TaskModelInterface model;
     private Scanner sc;
@@ -47,9 +49,64 @@ class Ui implements TaskObserver, UiObservable {
 
 
 
+    public void tagFeedbackUpdate(String header, String tag, String footer) {
+        StringBuilder sbOut = new StringBuilder();
+        sbOut = sbOut.append(header);
+        sbOut = sbOut.append(tag);
+        sbOut = sbOut.append(footer);
+        printSection(sbOut.toString());
+    }
+
+    public void taskFeedbackUpdate(String header, TaskInterface task, String footer) {
+        StringBuilder sbOut = new StringBuilder();
+        sbOut = sbOut.append(header);
+        sbOut = sbOut.append(task.toString());
+        sbOut = sbOut.append(footer);
+        printSection(sbOut.toString());
+    }
 
 
+    public void pairFeedbackUpdate(String header, String tag,
+           String mid, TaskInterface task, String footer) {
+        StringBuilder sbOut = new StringBuilder();
+        sbOut = sbOut.append(header);
+        sbOut = sbOut.append(tag);
+        sbOut = sbOut.append(mid);
+        sbOut = sbOut.append(task.toString());
+        sbOut = sbOut.append(footer);
+        printSection(sbOut.toString());
+    }
     
+    public <T,E> void queryFeedbackUpdate(String header, 
+            T searchTerm, String mid, Stream<E> stream,
+            String footer) {
+        StringBuilder sbOut = new StringBuilder();
+        sbOut = sbOut.append(header);
+        sbOut = sbOut.append(searchTerm.toString());
+
+        List<E> taskList = stream 
+            .collect(Collectors.toCollection(ArrayList::new));
+        Iterator<E> iter = taskList.listIterator();
+
+        ArrayList<String> printxs = new ArrayList<>();
+        //String headermsg = "Here are the tasks in your list:";
+
+        int counter = 1;
+
+        while (iter.hasNext()) {
+            String taskLine = "" + counter + ". " 
+                + iter.next() + "\n";
+            sbOut.append(taskLine);
+
+            ++counter;
+        }
+
+        //stream
+        //    .map(TaskInterface::toString)
+        //    .forEach(x->sbOut.append(x));
+        sbOut = sbOut.append(footer);
+        printSection(sbOut.toString());
+    }
 
     private void printGreeting() {
         StringBuilder sbOut = new StringBuilder();

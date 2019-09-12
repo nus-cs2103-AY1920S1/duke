@@ -177,6 +177,18 @@ public class Main extends Application {
         StorageInterface storage = new Storage(model);
         ControllerInterface friday = new Parser(model);
         this.bridge = ((Parser) friday).getBridge();
+        Ui display = friday.getUi();
+
+
+        //tag stuff
+        TagCommandPostAlpha tagcommand = new TagCommandPostAlpha(model);
+        ((Parser) friday).registerTagCommandObserver(tagcommand);
+        TagStoreAlpha tagstore = new TagStoreAlpha();
+        tagcommand.registerAddTagObserver(tagstore);
+        tagstore.registerPairFeedbackObserver(display);
+
+
+
         Label banner = new Label(Ui.stringGreeting());
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(banner, new ImageView(duke)));

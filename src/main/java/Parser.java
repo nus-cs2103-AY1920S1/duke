@@ -32,6 +32,10 @@ class Parser implements ControllerInterface,
         this.tagCommandObservers = new ArrayList<>();
     }
 
+    public Ui getUi() {
+        return this.display;
+    }
+
     /**
      * Returns void, call UI to generate UI and start session.
      *  for user
@@ -85,6 +89,7 @@ class Parser implements ControllerInterface,
             this.findTasks(command);
         } else if 
             (commandlist[0].toUpperCase().equals("TAG")) {
+            System.out.println("here<<<<");
             this.notifyTagCommandObservers(command);
         } else if (isEndCommand(command)) {
             display.printExitMessage();

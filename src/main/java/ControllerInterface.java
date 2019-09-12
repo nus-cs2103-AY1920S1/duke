@@ -16,4 +16,6 @@ public interface ControllerInterface {
     void listTasks();
 
     void findTasks(String command);
+
+    Ui getUi();
 }

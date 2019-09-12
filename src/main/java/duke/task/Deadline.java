@@ -41,6 +41,11 @@ public class Deadline extends Task {
         return new Deadline(detailsArray[0], detailsArray[1]);
     }
 
+    /**
+     * Retrieves the date of this deadline.
+     *
+     * @return Date in the array {dd, mm, yyyy}.
+     */
     @Override
     public int[] getDate() {
         return dateTime.getDate();

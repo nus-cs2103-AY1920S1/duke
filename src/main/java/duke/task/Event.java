@@ -43,6 +43,11 @@ public class Event extends Task {
         return new Event(detailsArray[0], detailsArray[1]);
     }
 
+    /**
+     * Retrieves the date of this event.
+     * 
+     * @return Date in the array {dd, mm, yyyy}.
+     */
     @Override
     public int[] getDate() {
         return dateTime.getDate();

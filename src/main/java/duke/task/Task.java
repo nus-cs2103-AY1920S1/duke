@@ -18,25 +18,31 @@ public class Task {
         this.isCompleted = false;
     }
 
+    /**
+     * Retrieves the description of the task.
+     *
+     * @return Task description.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Updates the description of the task.
+     *
+     * @param newDescription New description to replace the existing one.
+     */
     public void updateDescription(String newDescription) {
         description = newDescription;
     }
 
     /**
-     * Formats the task to be stored in the hard disk.
+     * Retrieves the date assigned to the task (not applicable to todo types).
      *
-     * @return Formatted task with its details.
+     * @return A dummy value - this method will be overridden in Deadline and Event classes.
      */
-    public String toSave() {
-        return "";
-    }
-
     public int[] getDate() {
-        return new int[]{0};
+        return null;
     }
 
     /**
@@ -52,7 +58,15 @@ public class Task {
      * @return v or x if done or undone respectively.
      */
     public String getStatusIcon() {
-        return (isCompleted ? "v" : "x"); //return tick or X symbols
+        return (isCompleted ? "v" : "x");
     }
 
+    /**
+     * Formats the task to be stored in the hard disk, which differs based on the task type.
+     *
+     * @return Formatted task with its details.
+     */
+    public String toSave() {
+        return "";
+    }
 }

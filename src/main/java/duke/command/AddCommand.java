@@ -77,7 +77,7 @@ public class AddCommand extends Command {
         default:
             break;
         }
-        storage.save(tasks);
+        storage.saveMain(tasks);
     }
 
     @Override

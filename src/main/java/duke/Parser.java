@@ -1,12 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 public class Parser {
     /**
@@ -59,6 +53,11 @@ public class Parser {
                 throw new DukeException("Please specify a search keyword.");
             }
             return new FindCommand(rawCommand.substring(5));
+        case "archive":
+            if (rawCommand.length() < words[0].length() + 2) {
+                throw new DukeException("Please specify the task to be archived.");
+            }
+            return new ArchiveCommand(Integer.parseInt(rawCommand.substring(8)));
         case "bye":
             return new ExitCommand();
         default:

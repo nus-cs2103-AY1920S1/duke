@@ -6,7 +6,9 @@ import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
 
-public class DeleteCommand extends Command {
+import java.io.FileNotFoundException;
+
+public class ArchiveCommand extends Command {
     private int argument;
 
     /**
@@ -14,12 +16,12 @@ public class DeleteCommand extends Command {
      *
      * @param argument the argument supplied to the command.
      */
-    public DeleteCommand(int argument) {
+    public ArchiveCommand(int argument) {
         this.argument = argument;
     }
 
     /**
-     * Executes a delete command using the given task list, UI and file storage.
+     * Executes an archive command using the given task list, UI and file storage.
      *
      * @param tasks the task list supplied.
      * @param ui the UI supplied.
@@ -27,8 +29,16 @@ public class DeleteCommand extends Command {
      * @throws DukeException if the command fails to execute.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        TaskList archivedTasks;
+        try {
+            archivedTasks = new TaskList(storage.loadArchive());
+        } catch (FileNotFoundException e) {
+            archivedTasks = new TaskList();
+        }
         Task myTask = tasks.getTask(argument);
-        ui.printTaskDeleted(myTask, tasks);
+        ui.printTaskArchived(myTask, tasks);
+        archivedTasks.addTask(myTask);
+        storage.saveArchive(archivedTasks);
         tasks.deleteTask(argument);
         storage.saveMain(tasks);
     }

@@ -30,6 +30,6 @@ public class DoneCommand extends Command {
         Task myTask = tasks.getTask(argument);
         myTask.markAsDone();
         ui.printTaskDone(myTask);
-        storage.save(tasks);
+        storage.saveMain(tasks);
     }
 }

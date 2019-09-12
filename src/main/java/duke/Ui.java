@@ -85,6 +85,17 @@ public class Ui {
     }
 
     /**
+     * Prints a message when a task is to be archived.
+     *
+     * @param task the task to be deleted.
+     * @param tasks the task list before deletion.
+     */
+    public void printTaskArchived(Task task, TaskList tasks) {
+        printGuiMessage("Noted. I've archived this task: \n  " + task
+                + "\nNow you have " + Ui.pluralize("task", tasks.getSize() - 1) + " in the list.");
+    }
+
+    /**
      * Prints all tasks in the task list.
      *
      * @param tasks the task list.

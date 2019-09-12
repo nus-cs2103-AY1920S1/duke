@@ -21,7 +21,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadMain());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         } catch (DukeException e) {
@@ -41,7 +41,7 @@ public class Duke {
         ui = new Ui(window);
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadMain());
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         } catch (DukeException e) {

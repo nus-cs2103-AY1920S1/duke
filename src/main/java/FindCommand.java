@@ -30,7 +30,8 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, TaskStorage taskStorage, ArchiveStorage archiveStorage,
                           HashMap<String, TaskList> archives) {
         TaskList tasksWithKeyword = tasks.findTasks(this.keyWord);
-        assert tasksWithKeyword != null: "List of tasks returned from search should never be null"; // Postcondition for findTasks method.
+        // Postcondition for findTasks method.
+        assert tasksWithKeyword != null : "List of tasks returned from search should never be null";
         return ui.showFindTasksMessage(tasksWithKeyword);
     }
 }

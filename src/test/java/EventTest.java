@@ -23,7 +23,7 @@ public class EventTest {
             assertEquals(0, (new Event("test event 4","monday")).dateToString());
             fail(); // the test should not reach this line
         } catch (Exception e) {
-            assertEquals("☹ OOPS!!! The format of event timing is invalid.", e.getMessage());
+            assertEquals("OOPS!!! The format of event timing is invalid.", e.getMessage());
         }
     }
 

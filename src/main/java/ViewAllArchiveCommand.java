@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 /**
- * Represents the command of viewing all lists of tasks in every archive in a Duke object's HashMap of archive Tasklists.
+ * Represents the command of viewing all archive tasks in a Duke object's HashMap of archive Tasklists.
  */
 public class ViewAllArchiveCommand extends ArchiveCommand {
 

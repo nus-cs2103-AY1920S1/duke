@@ -8,7 +8,7 @@ public class DeleteArchiveTaskCommand extends ArchiveCommand {
     private int taskNumber;
 
     /**
-     * Creates a DeleteArchiveTaskCommand object
+     * Creates a DeleteArchiveTaskCommand object.
      *
      * @param taskNumber Index of task in archive to be deleted.
      * @param archiveName Name of archive to delete task from.

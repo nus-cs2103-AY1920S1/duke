@@ -20,10 +20,10 @@ public class DeadlineTest {
     @Test
     public void dateToStringConversion_inValidDates_exceptionThrown() throws Exception {
         try {
-            assertEquals(0, (new Deadline("test event 4","monday")).dateToString());
+            assertEquals(0, (new Deadline("test deadline 4","monday")).dateToString());
             fail(); // the test should not reach this line
         } catch (Exception e) {
-            assertEquals("☹ OOPS!!! The format of deadline timing is invalid.", e.getMessage());
+            assertEquals("OOPS!!! The format of deadline timing is invalid.", e.getMessage());
         }
     }
 }

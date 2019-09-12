@@ -44,7 +44,8 @@ public class Parser {
                 }
 
                 int taskNumber = Integer.parseInt(splitCommand[1]) - 1;
-                assert taskNumber >= 0: "Task number entered can only be non-negative"; // Precondition for DoneCommand
+                // Precondition for DoneCommand
+                assert taskNumber >= 0 : "Task number entered can only be non-negative";
                 return new DoneCommand(taskNumber);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new InvalidCommandDukeException("OOF!!! Please enter a task number!!");
@@ -56,7 +57,8 @@ public class Parser {
                 }
 
                 int taskNumber = Integer.parseInt(splitCommand[1]) - 1;
-                assert taskNumber >= 0: "Task number entered can only be non-negative"; // Precondition for DeleteCommand
+                // Precondition for DeleteCommand
+                assert taskNumber >= 0 : "Task number entered can only be non-negative";
                 return new DeleteCommand(taskNumber);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new InvalidCommandDukeException("OOF!!! Please enter a task number!!");
@@ -160,6 +162,8 @@ public class Parser {
                     throw new InvalidCommandDukeException("OOF!!! Please enter a task number!!");
                 }
             }
+
+            throw new InvalidCommandDukeException("OOF!!! Please enter a valid archive instruction :-(");
 
         default:
             throw new InvalidCommandDukeException("OOF!!! I'm sorry, but I don't know what that means :-(");

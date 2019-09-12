@@ -16,6 +16,13 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Represents the dialog box in the GUI that display the text of user and Duke.
+     *
+     * @param l Label object containing text to be displayed in dialog box.
+     * @param iv Contains picture to be displayed in dialog box.
+     * @param color String code for background color of dialog box.
+     */
     public DialogBox(Label l, ImageView iv, String color) {
         text = l;
         displayPicture = iv;
@@ -64,10 +71,24 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Returns a dialog box to display text by the user.
+     *
+     * @param l Label object containing text from the user to be displayed in dialog box.
+     * @param iv Contains the user's picture to be displayed in dialog box.
+     * @return dialog box to display text by the user.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv, "CORAL");
     }
 
+    /**
+     * Returns a dialog box to display text by Duke.
+     *
+     * @param l Label object containing text from Duke to be displayed in dialog box.
+     * @param iv Contains the Duke's picture to be displayed in dialog box.
+     * @return dialog box to display text by the Duke.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv, "ORANGE");
         db.flip();

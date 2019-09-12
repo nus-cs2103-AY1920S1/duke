@@ -2,15 +2,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Deals with loading/saving a Duke object's archives from/to a file in the hard drive.
  */
-public class ArchiveStorage extends Storage{
+public class ArchiveStorage extends Storage {
 
-    /** The string used to mark the end of an archive in the text file */
-    private final String END_OF_ARCHIVE_MARKER = "/end";
+    /** The string used to mark the end of an archive in the text file. */
+    private String endOfArchiveMarker = "/end";
 
     /**
      * Creates an ArchiveStorage object with the file's file path as the argument.
@@ -73,7 +76,7 @@ public class ArchiveStorage extends Storage{
                     fileWriter.write(System.lineSeparator());
                 }
 
-                fileWriter.write(END_OF_ARCHIVE_MARKER);
+                fileWriter.write(endOfArchiveMarker);
                 if (archiveIndex != archiveNames.size() - 1) {
                     fileWriter.write(System.lineSeparator());
                 }
@@ -98,7 +101,8 @@ public class ArchiveStorage extends Storage{
         String[] split = text.split("\\|");
         return split.length == 1;
     }
+
     public boolean isEndOfArchiveMarker(String text) {
-        return text.equals(END_OF_ARCHIVE_MARKER);
+        return text.equals(endOfArchiveMarker);
     }
 }

@@ -72,7 +72,7 @@ public class Ui {
      */
     public String showAddTaskMessage(Task task, int taskListSize) {
         String output = "Got it. I've added this task: \n" + "       " + task.toString() + "\n"
-                + "Now you have " + taskListSize + " task(s) in the list.\n" ;
+                + "Now you have " + taskListSize + " task(s) in the list.\n";
 
         return output;
     }
@@ -129,7 +129,7 @@ public class Ui {
      * @return Confirmation message that a new archive has been created.
      */
     public String showCreateArchiveMessage(String archiveName) {
-        return "New archive created: " + archiveName +"\n";
+        return "New archive created: " + archiveName + "\n";
     }
 
     /**
@@ -260,7 +260,7 @@ public class Ui {
                 + "'deadline [deadline task description] /by [deadline date and time in 24 hour format "
                 + "(dd/mm/yyyy hh:mm)]'\n" + longLine;
         helpList += "To display current list of tasks:\n"
-                + "'list'\n" +longLine;
+                + "'list'\n" + longLine;
         helpList += "To delete a task:\n" + "'delete [task list number]'\n" + longLine;
         helpList += "To mark a task as done:\n" + "'done [task list number]'\n" + longLine;
         helpList += "To search for a task with a certain keyword in its description:\n"

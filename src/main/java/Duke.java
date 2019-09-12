@@ -34,8 +34,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private final int STAGE_HEIGHT = 800;
-    private final int STAGE_WIDTH = 600;
+    private int stageHeight;
+    private int stageWidth;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/drakeNO.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/drakeYES.jpg"));
@@ -44,6 +44,8 @@ public class Duke extends Application {
      * Creates a Duke Object.
      */
     public Duke() {
+        stageHeight = 800;
+        stageWidth = 600;
         ui = new Ui();
         taskStorage = new TaskStorage("data/tasks.txt");
         archiveStorage = new ArchiveStorage("data/archives.txt");
@@ -62,7 +64,7 @@ public class Duke extends Application {
     public String run(String input) {
         try {
             Command c = Parser.parse(input);
-            assert c != null: "Command should not be null"; //Precondition for execute method
+            assert c != null : "Command should not be null"; //Precondition for execute method
             return c.execute(tasks, ui, taskStorage, archiveStorage, archives);
         } catch (DukeException e) {
             return ui.showExceptionError(e);
@@ -75,7 +77,7 @@ public class Duke extends Application {
         setUpStageComponents(stage);
 
         //Step 2. Formatting the window to look as expected
-        formatComponents(stage, "Duke", STAGE_WIDTH, STAGE_HEIGHT);
+        formatComponents(stage, "Duke", stageWidth, stageHeight);
 
         displayLogo();
 
@@ -124,10 +126,10 @@ public class Duke extends Application {
      * @param stageHeight Height of the stage.
      */
     private void formatComponents(Stage stage, String title, int stageWidth, int stageHeight) {
-        final int SCROLLPANE_WIDTH = STAGE_WIDTH - 15;
-        final int SCROLLPANE_HEIGHT = STAGE_HEIGHT - 65;
-        final int USERINPUT_WIDTH = STAGE_WIDTH - 75;
-        final int SENDBUTTON_WIDTH = 55;
+        final int SCROLL_PANE_WIDTH = this.stageWidth - 15;
+        final int SCROLL_PANE_HEIGHT = this.stageHeight - 65;
+        final int USER_INPUT_WIDTH = this.stageWidth - 75;
+        final int SEND_BUTTON_WIDTH = 55;
 
         stage.setTitle(title);
         stage.setResizable(false);
@@ -136,7 +138,7 @@ public class Duke extends Application {
 
         mainLayout.setPrefSize(stageWidth, stageHeight);
 
-        scrollPane.setPrefSize(SCROLLPANE_WIDTH, SCROLLPANE_HEIGHT);
+        scrollPane.setPrefSize(SCROLL_PANE_WIDTH, SCROLL_PANE_HEIGHT);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -145,16 +147,16 @@ public class Duke extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);;
 
-        userInput.setPrefWidth(USERINPUT_WIDTH);
+        userInput.setPrefWidth(USER_INPUT_WIDTH);
 
-        sendButton.setPrefWidth(SENDBUTTON_WIDTH);
+        sendButton.setPrefWidth(SEND_BUTTON_WIDTH);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
@@ -175,7 +177,7 @@ public class Duke extends Application {
 
         if (userInput.getText().equals("bye")) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished( event -> stage.close() );
+            delay.setOnFinished(event -> stage.close());
             delay.play();
         }
 
@@ -190,14 +192,14 @@ public class Duke extends Application {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         String logo2 =
-                "DDD    U     U   K     K    EEEEEE \n" +
-                "D    D   U     U    K  K     E    \n" +
-                "D     D  U     U    K K      EEEE  \n" +
-                "D    D   U     U    K  K     E    \n" +
-                "DDD    UUUU  K      K   EEEEEE \n";
+                "DDD    U     U   K     K    EEEEEE \n"
+                        + "D    D   U     U    K  K     E    \n"
+                        + "D     D  U     U    K K      EEEE  \n"
+                        + "D    D   U     U    K  K     E    \n"
+                        + "DDD    UUUU  K      K   EEEEEE \n";
 
-        Label greetingText = new Label("Hello I'm\n" + logo2 + "\n" + ui.showWelcomeMessage() + "\n\n" +
-                taskStorage.getFileAccessStatus() + "\n" + archiveStorage.getFileAccessStatus());
+        Label greetingText = new Label("Hello I'm\n" + logo2 + "\n" + ui.showWelcomeMessage() + "\n\n"
+                + taskStorage.getFileAccessStatus() + "\n" + archiveStorage.getFileAccessStatus());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingText, new ImageView(duke)));
     }
 

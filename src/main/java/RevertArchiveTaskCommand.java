@@ -8,7 +8,7 @@ public class RevertArchiveTaskCommand extends ArchiveCommand {
     private String archiveName;
 
     /**
-     * Creates a RevertArchiveTaskCommand object
+     * Creates a RevertArchiveTaskCommand object.
      *
      * @param taskNumber Index of task in archive to be reverted.
      * @param archiveName Name of archive to revert task from.

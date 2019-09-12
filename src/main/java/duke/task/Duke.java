@@ -74,7 +74,7 @@ public class Duke extends Application {
             try {
                 this.handleInput(next);
             } catch (DukeException e) {
-                System.err.println(e.getMessage());
+                Ui.printError(e.getMessage());
             }
 
             if (this.toBreak) {
@@ -147,13 +147,13 @@ public class Duke extends Application {
         // Scroll down to the end every time dialogContainer's height changes
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-//        sendButton.setOnMouseClicked((event) -> {
-//            handleUserInput();
-//        });
-//
-//        userInput.setOnAction((event) -> {
-//            handleUserInput();
-//        });
+        // sendButton.setOnMouseClicked((event) -> {
+        //     handleUserInput();
+        // });
+
+        // userInput.setOnAction((event) -> {
+        //     handleUserInput();
+        // });
     }
 
     /**

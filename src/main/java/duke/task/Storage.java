@@ -36,7 +36,7 @@ public class Storage {
 
             this.fileScanner = new Scanner(this.fileData);
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            Ui.printError(e.getMessage());
             System.exit(1);
         }
     }

@@ -7,7 +7,7 @@ import java.util.Calendar;
  * Represents a Task object.
  * Super class of ToDos, Events, and Deadlines.
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -73,4 +73,7 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
     }
+
+    @Override
+    public abstract boolean equals(Object o);
 }

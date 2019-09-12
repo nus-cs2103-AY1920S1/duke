@@ -85,4 +85,15 @@ public class Event extends Task {
                 + this.printEndTime()
                 + ")";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Event)) {
+            return false;
+        } else {
+            return this.getDescription().equals(((Event) o).getDescription())
+                    && this.startTime.equals(((Event) o).startTime)
+                    && this.endTime.equals(((Event) o).endTime);
+        }
+    }
 }

@@ -26,4 +26,13 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ToDo)) {
+            return false;
+        } else {
+            return this.getDescription().equals(((ToDo) o).getDescription());
+        }
+    }
 }

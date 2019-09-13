@@ -79,7 +79,7 @@ public class Date {
                 for (String ind: date) {
                     s += " " + ind;
                 }
-                throw new MissingInputException(date.length + " " + s + " " + INCOMPLETE_DATE_MESSAGE);
+                throw new MissingInputException(INCOMPLETE_DATE_MESSAGE);
             }
         return new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]));
     }

@@ -44,7 +44,7 @@ public class DialogBox extends HBox {
      * @param text The text to be displayed - Which can be the user or Rori.
      * @param img The image to be displayed - Which can be the user or Rori.
      */
-    private DialogBox(String text, Image img, boolean isUser) {
+    private DialogBox(String text, Image img, boolean isUser, Color roriShadowColor) {
         this.isUser = isUser;
         
         try {
@@ -67,9 +67,9 @@ public class DialogBox extends HBox {
             this.dialog.setTranslateX(X_TRANSFORM_LABEL);
             this.myCircle.setTranslateX(X_TRANSFORM_IMAGE);
             this.dialog.setAlignment(Pos.TOP_LEFT);
-            myCircle.setStroke(Color.CRIMSON);
+            myCircle.setStroke(roriShadowColor);
             myCircle.setFill(new ImagePattern(img));
-            myCircle.setEffect(new DropShadow(+14d, 0d, +2d, Color.RED));
+            myCircle.setEffect(new DropShadow(+14d, 0d, +2d, roriShadowColor));
         }
         
         dialog.setFont(fontRegular);
@@ -95,7 +95,7 @@ public class DialogBox extends HBox {
      * @return DialogBox containing user's text and image
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, true);
+        return new DialogBox(text, img, true, Color.SEAGREEN);
     }
 
     /**
@@ -105,8 +105,8 @@ public class DialogBox extends HBox {
      * @param img Rori's Image
      * @return DialogBox containing Rori's text and image
      */
-    public static DialogBox getRoriDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img, false);
+    public static DialogBox getRoriDialog(String text, Image img, Color color) {
+        DialogBox db = new DialogBox(text, img, false, color);
         db.flip();
         return db;
     }

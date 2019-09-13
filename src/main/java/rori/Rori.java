@@ -16,14 +16,9 @@ public class Rori {
      * @param input The users input.
      * @return The String which is obtained when calling RoriException.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws RoriException {
         assert !input.equals("") : "Empty input";
-        String output;
-        try {
-            output = roriManager.runRori(input);
-        } catch (RoriException e) {
-            output = e.getMessage();
-        }
+        String output = roriManager.runRori(input);
         return output;
     }
 

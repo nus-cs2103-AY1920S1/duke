@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 /**
  * A GUI for Rori using FXML.
@@ -26,6 +27,8 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setRori(rori);
+            stage.setTitle("Rori");
+            stage.getIcons().add(new Image("/images/RoriIcon.png"));
             stage.show();
             beginRoriMessages(fxmlLoader);
         } catch (IOException e) {

@@ -29,7 +29,7 @@ class TaskFactoryTest {
     @Test
     void testCreateEvent() throws TaskCreationException {
         TaskFactory factory = new TaskFactory();
-        Task task = factory.getTask("event hello 02/01/2020 0210").get();
+        Task task = factory.getTask("event hello everyone 02/01/2020 0210").get();
 
         assert task.getClass().equals(Event.class);
     }

@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
  * </p>
  */
 public class Deadline extends Task {
-    public Deadline(String details, LocalDateTime by, boolean isDone, boolean isRecurring) {
+    public Deadline(String details, LocalDateTime by, Boolean isDone, Boolean isRecurring) {
         super(TaskType.DEADLINE, details, new TimeFrame(null, by), isDone, isRecurring);
     }
 }

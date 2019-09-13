@@ -7,7 +7,8 @@ public enum CommandType {
     DELETE("delete", DeleteCommand::new),
     DONE("done", DoneCommand::new),
     FIND("find", FindCommand::new),
-    LIST("list", ListCommand::new);
+    LIST("list", ListCommand::new),
+    UNDO("undo", null);
 
     public final String keyword;
     public final CommandProducer producer;

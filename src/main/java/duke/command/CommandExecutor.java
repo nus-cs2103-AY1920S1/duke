@@ -19,5 +19,4 @@ public class CommandExecutor {
 
     public void undoPreviousCommand() throws UiException {
         this.undoActions.pop().undo();
-    }
-}
+    }}

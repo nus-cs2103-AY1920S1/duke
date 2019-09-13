@@ -37,6 +37,6 @@ public class DeleteCommand extends Command {
         }
 
         Task restore = deleted.get();
-        return Optional.of(() -> tasksController.addTask(restore, false));
+        return Optional.of(() -> tasksController.addTask(restore, true));
     }
 }

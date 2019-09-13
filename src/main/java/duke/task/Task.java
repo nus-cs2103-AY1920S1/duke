@@ -2,7 +2,6 @@ package duke.task;
 
 import duke.task.tasks.entities.TaskType;
 import duke.task.tasks.entities.TimeFrame;
-import error.task.TaskCreationException;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -23,7 +22,7 @@ public abstract class Task implements Serializable {
     private boolean isDone;
     private final boolean isRecurring;
 
-    public Task(TaskType type, String details, TimeFrame timeFrame, boolean isDone, boolean isRecurring) {
+    public Task(TaskType type, String details, TimeFrame timeFrame, Boolean isDone, Boolean isRecurring) {
         if (type.task != getClass()) {
             System.out.println("FATAL: TaskType does not correspond to Task.");
             System.exit(1);

@@ -13,6 +13,7 @@ import util.CommandUtils;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Stack;
 
 /***
  * <p>
@@ -23,6 +24,7 @@ public class CommandFactory {
     private TasksController tasksController;
     private TaskFactory taskFactory;
     private UiController ui;
+    private Stack<Command> history;
 
     private static final String UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
@@ -36,6 +38,7 @@ public class CommandFactory {
         this.tasksController = tasksController;
         this.taskFactory = new TaskFactory();
         this.ui = ui;
+        this.history = new Stack<>();
     }
 
     /***
@@ -46,10 +49,15 @@ public class CommandFactory {
      */
     public Optional<Command> parse(String input) throws UiException {
         try {
+            // check to see if its an undo command
+            if (CommandUtils.getCommand(input).equals("undo")) {
+                return getUndoCommand(input);
+            }
 
             // try to parse as a regular command
             Optional<Command> command = parseAsCommand(input);
             if (command.isPresent()) {
+                history.add(command.get());
                 return command;
             }
 
@@ -60,6 +68,7 @@ public class CommandFactory {
                 result.setUi(ui);
                 result.setTasksController(tasksController);
 
+                history.add(result);
                 return Optional.of(result);
             }
 
@@ -71,6 +80,47 @@ public class CommandFactory {
             ui.displayOutput(e.getMessage());
             return Optional.empty();
         }
+    }
+
+    private Optional<Command> getUndoCommand(String input) throws UiException, CommandCreationException {
+        if (!CommandUtils.getArguments(input).equals("")) {
+            ui.displayOutput("☹ OOPS!!! I'm sorry, undo doesn't accept arguments :-(");
+            return Optional.empty();
+        }
+
+        UndoAction nextUndo = null;
+
+        while (!history.isEmpty()) {
+            Command prevCommand = history.pop();
+            if(prevCommand.getUndoAction().isPresent()) {
+                nextUndo = prevCommand.getUndoAction().get();
+                break;
+            }
+        }
+
+        if (nextUndo == null) {
+            ui.displayOutput("☹ OOPS!!! There is no previous action to undo! :-(");
+            return Optional.empty();
+        }
+
+        final UndoAction finalUndo = nextUndo;
+
+        Command undoCommand = new Command(CommandType.UNDO) {
+            private UndoAction undo = finalUndo;
+            @Override
+            public void execute() throws UiException {
+                undo.undo();
+            }
+
+            @Override
+            public Optional<UndoAction> getUndoAction() {
+                return Optional.empty();
+            }
+        };
+
+        undoCommand.setTasksController(tasksController);
+        undoCommand.setUi(ui);
+        return Optional.of(undoCommand);
     }
 
     private Optional<Command> parseAsCommand(String input) throws CommandCreationException {

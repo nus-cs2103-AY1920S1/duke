@@ -71,6 +71,11 @@ public class TaskFactory {
         List<Object> argsList = new ArrayList<>();
 
         try {
+
+            // get datetime arguments
+            List<LocalDateTime> times = extractLocalDateTime(arguments);
+            argsList.addAll(times);
+
             // get description
             String description = arguments.replaceAll(dateTimeRegex, "").trim();
             if (description.equals("")) {
@@ -78,10 +83,6 @@ public class TaskFactory {
             }
 
             argsList.add(description);
-
-            // get datetime arguments
-            List<LocalDateTime> times = extractLocalDateTime(arguments);
-            argsList.addAll(times);
 
         } catch (UnknownDateTimeException e) {
             throw new TaskCreationException(INVALID_ARGUMENTS_ERROR_MESSAGE);
@@ -118,7 +119,10 @@ public class TaskFactory {
 
         // returns sorted arguments list
         return Arrays.stream(parameters).map(type -> {
-            Optional<Object> matchingArg = arguments.stream().findFirst();
+            Optional<Object> matchingArg = arguments.stream()
+                    .filter(arg -> type.equals(arg.getClass()))
+                    .findFirst();
+
             matchingArg.ifPresent(arguments::remove); // delete in case of multiple arguments of the same type
             return matchingArg.orElse(null);
         }).toArray();

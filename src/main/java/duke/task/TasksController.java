@@ -183,14 +183,16 @@ public class TasksController {
         }
     }
 
-    public void setTaskToUndoneByUuid(UUID uuid) throws UiException {
+    public void setTaskToUndoneByUuid(UUID uuid) throws UiException, NoSuchElementException {
         try {
             List<Task> tasks = storage.getTasks();
 
-            tasks.stream()
+            Task undone = tasks.stream()
                     .filter(task -> task.getUuid().equals(uuid))
-                    .findFirst()
-                    .ifPresent(task -> task.setDone(false));
+                    .findFirst().get();
+
+            undone.setDone(false);
+            view.displayTaskUndone(undone, ui);
 
             storage.writeTasks(tasks);
         } catch (StorageException e) {

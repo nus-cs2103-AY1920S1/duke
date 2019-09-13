@@ -23,6 +23,6 @@ public class AddCommand extends Command {
 
     @Override
     public Optional<UndoAction> getUndoAction() {
-        return Optional.of(() -> tasksController.deleteTaskByUuid(task.getUuid(), false));
+        return Optional.of(() -> tasksController.deleteTaskByUuid(task.getUuid(), true));
     }
 }

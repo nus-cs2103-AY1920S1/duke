@@ -45,6 +45,7 @@ public class StorageData {
             }
         } catch (FileNotFoundException e) {
             try {
+                new File("data").mkdir();
                 new File("data/tasks.txt").createNewFile();
                 assert newData.exists() : "Data not created";
                 this.data = newData;

@@ -1,6 +1,7 @@
 package duke.storage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -109,13 +110,7 @@ public class Storage {
      * @return false is the storage file is not found.
      */
     public boolean hasStorage() {
-        try {
-            new FileWriter(filepath);
-        } catch (Exception e) {
-            return false;
-        }
-
-        return true;
+        return new File(filepath).exists();
     }
 
     /**
@@ -182,7 +177,7 @@ public class Storage {
             }
             writer.close();
         } catch (Exception e) {
-            System.out.println("Please check if you have your data folder!");
+            System.out.println(e);
         }
     }
 

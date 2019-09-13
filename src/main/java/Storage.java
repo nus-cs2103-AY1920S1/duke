@@ -24,7 +24,7 @@ public class Storage {
         parse = p;
         user = p.getUser();
         items = p.getList();
-        pastScan = new Scanner(new FileReader("/Users/teojunhong/JavaProject/2103T/duke/savedList.txt"));
+        pastScan = new Scanner(new FileReader("savedList.txt"));
     }
 
     /**

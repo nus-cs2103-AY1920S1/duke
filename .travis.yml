@@ -1,0 +1,7 @@
+language: java
+# Needed for gradlew assemble
+before_install:
+  - chmod +x gradlew
+# Config not to send emails
+notifications:
+  email: false

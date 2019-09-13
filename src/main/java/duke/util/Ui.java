@@ -21,13 +21,14 @@ public class Ui {
     /**
      * Prints the welcome message for Duke
      */
-    public void showWelcome() {
-        System.out.println("Hello from\n" + LOGO);
-
-        //Greets user
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public String showLogo() {
+        String result = "Hello from\n" + LOGO;
+        return result;
     }
 
+    public String showWelcome() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
+    }
     /**
      * Takes in input from the users.
      *

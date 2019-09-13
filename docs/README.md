@@ -175,6 +175,6 @@ Example(s):
 Removes the 7th task in the `Leisure` archive and adds it back ot the current list of tasks.
 
 ### 3.8 Exiting the program
-Closes the program.
+Displays the exit message and closes the program.
 
 Format: `bye`

@@ -98,7 +98,7 @@ public class Duke extends Application {
             Scene scene = new Scene(vb);
             stage.setScene(scene);
             stage.setTitle("Isla");
-            stage.setResizable(true);
+            stage.setResizable(false);
             fxmlLoader.<MainController>getController().setDuke(new Duke());
             stage.show();
         } catch (IOException e) {

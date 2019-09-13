@@ -12,6 +12,13 @@ public class DeleteCommand extends Command{
         this.index = index;
     }
 
+    /**
+     *Removes task of this.index from TaskList. Updates savefile with new list
+     * Prints out new list
+     * @param tasks   duke.TaskList
+     * @param ui      duke.Ui
+     * @param storage duke.Storage
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task t = tasks.delete(index);
         ui.show("Noted. I've removed this task: \n"

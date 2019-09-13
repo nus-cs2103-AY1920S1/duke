@@ -1,18 +1,3 @@
-
-import javafx.application.Application;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import java.io.IOException;
 
 /**
@@ -52,49 +37,19 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke UI and executes commands based on user input.
-     */
-    public void run() {
-        ui.showWelcome();
-        String fullCommand = ui.readCommand();
-        while (!fullCommand.equals("bye")) {
-            try {
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks);
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-            fullCommand = ui.readCommand();
-        }
-
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            ui.showError(e.getMessage());
-        } finally {
-            ui.exit();
-        }
-    }
-
-
-    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        String result = "";
         try {
             if (!input.equals("bye")) {
                 Command c = Parser.parse(input);
-                result = c.execute(tasks);
+                return c.execute(tasks, storage);
             } else {
-                result = ui.exit();
+                return ui.exit();
             }
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
-        } finally {
-            return result;
+        } catch (DukeException | IOException e) {
+            return ui.showError(e.getMessage());
         }
-
     }
 }

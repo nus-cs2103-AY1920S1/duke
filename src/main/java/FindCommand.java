@@ -20,7 +20,7 @@ public class FindCommand extends Command {
      *
      * @param tasks TaskList on which the Command should be executed on.
      */
-    public String execute(TaskList tasks) {
+    public String execute(TaskList tasks, Storage storage) {
         return tasks.findTasks(keyword);
     }
 }

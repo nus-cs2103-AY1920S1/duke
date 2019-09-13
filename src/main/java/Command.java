@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Represents a Command that can be executed.
  */
@@ -8,5 +10,5 @@ public abstract class Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If the command failed to be executed.
      */
-    public abstract String execute(TaskList tasks) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException, IOException;
 }

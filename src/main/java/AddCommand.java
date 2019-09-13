@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Represents the adding of tasks.
  */
@@ -21,7 +23,11 @@ public class AddCommand extends Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If the task failed to be added.
      */
-    public String execute(TaskList tasks) throws DukeException {
-        return tasks.addTask(this.taskToAdd);
+    public String execute(TaskList tasks, Storage storage) throws IOException {
+        String result = tasks.addTask(this.taskToAdd);
+        storage.save(tasks);
+        return result;
+
     }
+
 }

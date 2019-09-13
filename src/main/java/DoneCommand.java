@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Represents the command to mark tasks as done.
  */
@@ -21,7 +23,9 @@ public class DoneCommand extends Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If the Task does not exist.
      */
-    public String execute(TaskList tasks) throws DukeException {
-        return tasks.markAsDone(taskNum);
+    public String execute(TaskList tasks, Storage storage) throws DukeException, IOException {
+        String result = tasks.markAsDone(taskNum);
+        storage.save(tasks);
+        return result;
     }
 }

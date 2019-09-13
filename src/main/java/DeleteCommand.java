@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * Represents the deleting of tasks.
  */
@@ -20,7 +22,9 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList on which the Command should be executed on.
      * @throws DukeException If the task could not be deleted.
      */
-    public String execute(TaskList tasks) throws DukeException {
-        return tasks.deleteTask(taskNum);
+    public String execute(TaskList tasks, Storage storage) throws DukeException, IOException {
+        String result = tasks.deleteTask(taskNum);
+        storage.save(tasks);
+        return result;
     }
 }

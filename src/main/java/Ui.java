@@ -48,8 +48,8 @@ public class Ui {
      *
      * @param error Returns a String containing an error message.
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return(error);
     }
 
     /**

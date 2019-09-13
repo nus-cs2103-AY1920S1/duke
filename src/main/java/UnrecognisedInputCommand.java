@@ -12,11 +12,13 @@ public class UnrecognisedInputCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("I don't quite understand what you mean by that. Feel free to enter 'help'" +
+                " to see all the commands you can enter.");
     }
 
     @Override
     public String executeForGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("I don't quite understand what you mean by that. Feel free to enter 'help'" +
+                " to see all the commands you can enter.");
     }
 }

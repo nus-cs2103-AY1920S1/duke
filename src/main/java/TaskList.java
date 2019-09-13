@@ -126,6 +126,10 @@ public class TaskList {
      * Prints the full list of tasks.
      */
     public void displayFullList() {
+        if (dukeTaskList.isEmpty()) {
+            System.out.println("Your task list is currently empty. Feel free to add tasks and check again.");
+        }
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < dukeTaskList.size(); i++) {
             int itemIndex = i + 1;
             String itemDisplay = itemIndex + "." + dukeTaskList.get(i).toString();
@@ -134,7 +138,11 @@ public class TaskList {
     }
 
     public String displayFullListForGui() {
+        if (dukeTaskList.isEmpty()) {
+            return "Your task list is currently empty. Feel free to add tasks and check again.";
+        }
         StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < dukeTaskList.size(); i++) {
             int itemIndex = i + 1;
             String itemDisplay = itemIndex + "." + dukeTaskList.get(i).toString();

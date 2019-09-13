@@ -49,43 +49,61 @@ class Ui implements TaskObserver, UiObservable,
 
 
 
-    public void tagFeedbackUpdate(String header, String tag, String footer) {
-        StringBuilder sbOut = new StringBuilder();
-        sbOut = sbOut.append(header);
-        sbOut = sbOut.append(tag);
-        sbOut = sbOut.append(footer);
-        printSection(sbOut.toString());
+    public void tagFeedbackUpdate(String tag, String msg) {
+        //StringBuilder sbOut = new StringBuilder();
+        String out = String.format("Hi! %s has been %s! UwU%n", 
+            tag, msg);
+        //sbOut = sbOut.append(header);
+        //sbOut = sbOut.append(tag);
+        //sbOut = sbOut.append(footer);
+        //printSection(sbOut.toString());
+        printSection(out);
     }
 
-    public void taskFeedbackUpdate(String header, TaskInterface task, String footer) {
-        StringBuilder sbOut = new StringBuilder();
-        sbOut = sbOut.append(header);
-        sbOut = sbOut.append(task.toString());
-        sbOut = sbOut.append(footer);
-        printSection(sbOut.toString());
+    public void taskFeedbackUpdate(TaskInterface task, 
+        String msg) {
+        String out = String.format("Hi!%n%s%n"
+            + "has been %s! UwU%n", task.toString(), msg);
+
+        //StringBuilder sbOut = new StringBuilder();
+        //sbOut = sbOut.append(header);
+        //sbOut = sbOut.append(task.toString());
+        //sbOut = sbOut.append(footer);
+        //printSection(sbOut.toString());
+        printSection(out);
     }
 
 
-    public void pairFeedbackUpdate(String header, String tag,
-           String mid, TaskInterface task, String footer) {
-        StringBuilder sbOut = new StringBuilder();
-        sbOut = sbOut.append(header);
-        sbOut = sbOut.append(tag);
-        sbOut = sbOut.append(mid);
-        sbOut = sbOut.append(task.toString());
-        sbOut = sbOut.append(footer);
-        printSection(sbOut.toString());
+    public void pairFeedbackUpdate(String tag, TaskInterface task,
+           String verb) {
+
+        //StringBuilder sbOut = new StringBuilder();
+        String output = 
+            String.format("The following pair has been been %s:\n"
+                + " %s - %s", 
+                verb, tag.toString(), task.toString());
+        printSection(output);
     }
-    
-    public <T,E> void queryFeedbackUpdate(String header, 
-            T searchTerm, String mid, Stream<E> stream,
-            String footer) {
+    public <T,E> void queryFeedbackUpdate(T searchTerm, 
+            Stream<E> stream, String msg) {
+        System.out.println("UI.queryFeedbackUpdate<<<<");
         StringBuilder sbOut = new StringBuilder();
+        String header = String.format("Hi! Hewes that %s seawch "
+            + "tewm you wanted\nbased on the quewy fow:\n%s%n", 
+            msg, searchTerm.toString());
         sbOut = sbOut.append(header);
-        sbOut = sbOut.append(searchTerm.toString());
 
         List<E> taskList = stream 
             .collect(Collectors.toCollection(ArrayList::new));
+
+        if (taskList.size() < 1) {
+            String err = String.format("Oops! Seawch term for:%n"
+                + "%s%ndidnt wetuwn any wesults!", 
+                searchTerm.toString());
+            printSection(err);
+            return;
+        }
+
         Iterator<E> iter = taskList.listIterator();
 
         ArrayList<String> printxs = new ArrayList<>();
@@ -101,11 +119,8 @@ class Ui implements TaskObserver, UiObservable,
             ++counter;
         }
 
-        //stream
-        //    .map(TaskInterface::toString)
-        //    .forEach(x->sbOut.append(x));
-        sbOut = sbOut.append(footer);
         printSection(sbOut.toString());
+        return;
     }
 
     private void printGreeting() {

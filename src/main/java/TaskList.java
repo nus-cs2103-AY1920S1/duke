@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  * Class which stores all the tasks .
  */
-class TaskList implements TaskModelInterface {
+class TaskList implements TaskModelInterface, PrimaryStoreInterface<TaskInterface> {
     private List<TaskObserver> observers;
     private List<TaskInterface> taskList;
 
@@ -102,6 +102,11 @@ class TaskList implements TaskModelInterface {
         int indexNum = refNum - 1;
         //this.notifyObservers();
         return this.taskList.get(refNum);
+    }
+
+    public TaskInterface getItem(int refNum) {
+        //this.notifyObservers();
+        return this.getTask(refNum);
     }
 
     /**

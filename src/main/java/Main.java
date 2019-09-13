@@ -181,11 +181,21 @@ public class Main extends Application {
 
 
         //tag stuff
-        TagCommandPostAlpha tagcommand = new TagCommandPostAlpha(model);
+        TagCommandPostAlpha tagcommand = new TagCommandPostAlpha((PrimaryStoreInterface) model);
         ((Parser) friday).registerTagCommandObserver(tagcommand);
         TagStoreAlpha tagstore = new TagStoreAlpha();
         tagcommand.registerAddTagObserver(tagstore);
+        tagcommand.registerQueryTagObserver(tagstore);
+        tagcommand.registerQueryTaskObserver(tagstore);
+        tagcommand.registerDeleteTagObserver(tagstore);
+        tagcommand.registerDeleteTaskObserver(tagstore);
+        tagcommand.registerDeletePairObserver(tagstore);
+        tagcommand.registerUpdateTagObserver(tagstore);
+        tagcommand.registerUpdateTaskObserver(tagstore);
         tagstore.registerPairFeedbackObserver(display);
+        tagstore.registerQueryFeedbackObserver(display);
+        tagstore.registerTaskFeedbackObserver(display);
+        tagstore.registerTagFeedbackObserver(display);
 
 
 

@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 
 public abstract class AbstractTagStore<E> {
     // Left:= strTag, Right:=TagInterface
-    private GenericBiMap<String, TagInterface> store;
+    //private GenericBiMap<String, TagInterface> store;
+    private GenericBiMap<String, TagGenericWrapper> store;
 
     /**
      * Used only in this class, the purpose why an innerclass
@@ -75,20 +76,42 @@ public abstract class AbstractTagStore<E> {
     }
 
 
-    public void deleteTag(String tag) {
-        this.store.deleteLeft(tag);
+    public boolean deleteTag(String tag) {
+        return this.store.deleteLeft(tag);
     }
 
-    public void deleteItem(E item) {
-        this.store
+    public boolean deleteItem(E item) {
+        return this.store
             .deleteRight(new TagGenericWrapper(item)); 
     }
 
-    /* TODO replace tag with new tag */
-    /* TODO replace item with new item */
-    /* TODO delete a tag-item relation */ 
-    /* TODO query all tags an item has */
-    /* TODO query all items a tag has */
+    public boolean deletePair(String tag, E item) {
+        return this.store
+            .deleteRelation(tag, new TagGenericWrapper(item)); 
+    }
+    
+    public boolean updateItem(E oldItem, E updatedItem) {
+        return this.store
+            .updateRight(new TagGenericWrapper(oldItem), 
+                    new TagGenericWrapper(updatedItem));
+    }
+
+    public boolean updateTag(String oldTag, String updatedTag) {
+        return this.store
+            .updateLeft(oldTag, updatedTag);
+    }
+
+    public Stream<E> queryByTag(String tag) {
+        return this.store
+            .queryByLeftKey(tag)
+            .map(x -> x.getContained());
+    }
+
+    public Stream<String> queryByItem(E item) {
+        return this.store
+            .queryByRightKey(new TagGenericWrapper(item));
+    }
+
     // note for this one, remember to convert from 
     // the wrapper class to the containedItem
     /* TODO more unit tests for everything besides add*/

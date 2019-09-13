@@ -8,6 +8,7 @@ import duke.command.ListCommand;
 import duke.command.DeleteCommand;
 import duke.command.AddCommand;
 import duke.command.InvalidCommand;
+import duke.command.FindCommand;
 
 public class Parser {
 

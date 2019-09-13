@@ -42,7 +42,7 @@ public class Storage {
             try {
                 switch (line.charAt(0)) {
                     case 'T':
-                        tasks.add(new Todo(lineSplit[1]));
+                        tasks.add(new Todo(lineSplit[2]));
                         break;
                     case 'D':
                         tasks.add(new Deadline(lineSplit[2], lineSplit[3]));

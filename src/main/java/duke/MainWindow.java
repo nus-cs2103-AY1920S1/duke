@@ -59,7 +59,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void handlePrintGreeting() {
         String output =  Ui.showGreeting();
-        System.out.println(output);
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(output, dukeImage)
         );

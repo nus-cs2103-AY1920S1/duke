@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="376.0" prefWidth="819.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="288.0" prefWidth="819.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ScrollPane prefHeight="323.0" prefWidth="535.0">
         <content>
@@ -32,13 +32,13 @@
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </HBox.margin>
          <center>
-            <ImageView fx:id="displayPicture" fitHeight="322.0" fitWidth="233.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="displayPicture" fitHeight="232.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true" />
          </center>
          <opaqueInsets>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </opaqueInsets>
          <bottom>
-            <TextField editable="false" text="DUKE" BorderPane.alignment="CENTER">
+            <TextField alignment="CENTER" editable="false" text="DIS DUKE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="AppleGothic Regular" size="13.0" />
                </font>

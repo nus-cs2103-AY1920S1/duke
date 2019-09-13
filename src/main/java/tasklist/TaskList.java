@@ -109,4 +109,8 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public void addCashFlow(int tasknum, String sourceDescription , double value , LocalDateTime dateDue){
+        tasks.get(tasknum).addCashFlow(sourceDescription, value, dateDue);
+    }
+
 }

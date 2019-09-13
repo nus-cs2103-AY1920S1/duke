@@ -1,5 +1,6 @@
 package ui;
 
+import financedata.CashFlow;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,56 +8,51 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
-import tasklist.Task;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class TaskView extends TableView<Task> {
-
+public class TaskCashFlows extends TableView {
     @FXML
-    private TableView<Task> taskView;
+    private TableView<CashFlow> cashFlowTableView;
     @FXML
-    private TableColumn<Task, String> taskTypeCol;
+    private TableColumn<CashFlow, String> descriptionCol;
     @FXML
-    private TableColumn<Task, Boolean> statusCol;
+    private TableColumn<CashFlow, Double> valueCol;
     @FXML
-    private TableColumn<Task, String> descriptionCol;
+    private TableColumn<CashFlow, LocalDateTime> dateDueCol;
     @FXML
-    private TableColumn<Task, LocalDateTime> dateDueCol;
+    private TableColumn<CashFlow, LocalDateTime> dateCreatedCol;
     private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
 
-
-    TaskView(ObservableList<Task> tasks){
+    public TaskCashFlows() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(NewGUI.class.getResource("/view/TaskView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(NewGUI.class.getResource("/view/TaskCashFlows.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        taskView.setItems(tasks);
-        taskTypeCol.setCellValueFactory(new PropertyValueFactory<>("taskType"));
-        statusCol.setCellValueFactory(new PropertyValueFactory<>("isDone"));
-        statusCol.setCellFactory(tc -> new CheckBoxTableCell<>());
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        //cashFlowTableView.setItems(cashFlows);
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("sourceDescription"));
+        valueCol.setCellValueFactory(new PropertyValueFactory<>("value"));
         dateDueCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
         dateDueCol.setCellFactory(new ColumnFormatter<>(outputFormat));
+        dateCreatedCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
+        dateCreatedCol.setCellFactory(new ColumnFormatter<>(outputFormat));
     }
 
-    TableView<Task> getTable(){
-        return taskView;
+    public TableView<CashFlow> getCashFlowTableView(){
+        return cashFlowTableView;
     }
 
-    void setTable(ObservableList<Task> tasks){
-        taskView.setItems(tasks);
+    public void setCashFlowTableView(ObservableList<CashFlow> cashFlows){
+        cashFlowTableView.setItems(cashFlows);
     }
 
     private static class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
@@ -85,8 +81,7 @@ public class TaskView extends TableView<Task> {
             };
         }
     }
-
-
 }
+
 
 

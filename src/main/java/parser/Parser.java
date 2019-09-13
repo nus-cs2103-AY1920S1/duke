@@ -2,6 +2,8 @@ package parser;
 
 import ui.TextUi;
 import tasklist.TaskList;
+
+import javax.crypto.spec.PSource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,10 +23,16 @@ public class Parser {
     private boolean isSafe = true;
     private TaskList scheduler;
     private TextUi ui;
-    public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\w+)"
+    private String sourceDescription;
+    private Integer tasknum;
+    private Double value;
+    public static final Pattern COMMAND_FORMAT= Pattern.compile("(?<commandWord>\\w+)"
             + "\\s*(?<completionStatus>(\\[[01]\\])?)"
-            + "\\s*(?<description>([\\w\\s\\d]+)?)"
+            + "\\s*(?<description>([\\w\\s\\d{}]+)?)"
             + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
+    public static final Pattern CASH_FORMAT= Pattern.compile("\\{(?<task>[0-9.]+)\\}"
+            + "\\s*(?<sourceDescription>([\\w\\s\\d]+)?)"
+            + "\\s*\\{(?<value>[0-9.]+)\\}");
 
     public Parser() {
         ui = new TextUi();
@@ -50,8 +58,16 @@ public class Parser {
         }
     }
 
-    public void parseCashflow(String Full){
-
+    public void splitCashCommand(String cashCommand){
+        Matcher matcher = CASH_FORMAT.matcher(cashCommand);
+        if (matcher.find()){
+            tasknum = Integer.parseInt(matcher.group("task"));
+            sourceDescription = matcher.group("sourceDescription");
+            value = Double.parseDouble(matcher.group("value"));
+        }else{
+            ui.printErrorMsg2();
+            isSafe = false;
+        }
     }
 
     public boolean isSafe() {
@@ -95,6 +111,9 @@ public class Parser {
             break;
         case "find":
             scheduler.findTasks(description);
+            break;
+        case "addcashflow":
+            scheduler.addCashFlow(tasknum, sourceDescription, value, date);
             break;
         default:
             ui.printErrorMsg1();

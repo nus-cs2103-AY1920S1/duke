@@ -404,7 +404,7 @@ public class DataParser {
      * @return True if the input starts with "event".
      */
     public boolean shouldAddEventTask() {
-        return input.split(" ")[0].equals("evemt");
+        return input.split(" ")[0].equals("event");
     }
 
     /**

@@ -66,8 +66,10 @@ public class Constant {
     public static final String TO_DO_TYPE_CODE = "T";
     public static final String USER_IMAGE_PATH = "/images/User.png";
     public static final String HELP_MESSAGE_LIST = "◇ list : View the list of tasks";
-    public static final String HELP_MESSAGE_DEADLINE = "◇ deadline <description> /by <date> : Add deadline to the list";
-    public static final String HELP_MESSAGE_EVENT = "◇ event <description> /at <date> : Add event to the list";
+    public static final String HELP_MESSAGE_DEADLINE = "◇ deadline <description> /by <deadline> : "
+            + "Add deadline to the list";
+    public static final String HELP_MESSAGE_EVENT = "◇ event <description> /at <date and time> : "
+            + "Add event to the list";
     public static final String HELP_MESSAGE_TODO = "◇ todo <description> : Add todo to the list";
     public static final String HELP_MESSAGE_DONE = "◇ done <task index> : Mark the task as done";
     public static final String HELP_MESSAGE_DELETE = "◇ delete <task index> : Delete the task from the list";

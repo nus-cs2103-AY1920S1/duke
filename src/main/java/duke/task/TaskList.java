@@ -86,7 +86,7 @@ public class TaskList {
     public String toString() {
         StringBuilder tasksString = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            tasksString.append(String.format("%d.%s", i + 1, tasks.get(i)));
+            tasksString.append(String.format("%d. %s", i + 1, tasks.get(i)));
             if (i != tasks.size() - 1) {
                 tasksString.append("\n");
             }

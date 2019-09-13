@@ -86,7 +86,7 @@ public class Ui {
      */
     public String getTaskDeletedMessage(TaskList tasks, Task task) {
         return String.format(
-                "Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.",
+                "Noted. I've removed this task:\n  %s\nNow you have %d task(s) in your list.",
                 task, tasks.size()
         );
     }
@@ -99,7 +99,7 @@ public class Ui {
      */
     public String getTaskAddedMessage(TaskList tasks, Task task) {
         return String.format(
-                "Got it. I've added this task:\n  %s\nNow you have %d task(s) in the list.",
+                "Got it. I've added this task:\n  %s\nNow you have %d task(s) in your list.",
                 task, tasks.size()
         );
     }
@@ -141,6 +141,6 @@ public class Ui {
      * @return The history of commands with information about its ordering, all as a String.
      */
     public String getHistoryMessage(String history) {
-        return String.format("Here is your command history from oldest to newest:\n\n%s", history);
+        return String.format("Here is your history of changes from oldest to newest:\n\n%s", history);
     }
 }

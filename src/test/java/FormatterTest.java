@@ -13,6 +13,8 @@ public class FormatterTest {
         String expected = FORMATTER_BORDER
                 + "  Hello! I'm Jermi\n"
                 + "  What can I do for you?\n"
+                + "  \n"
+                + "  Type 'help' to view the list of commands.\n"
                 + FORMATTER_BORDER;
 
         assertEquals(expected,

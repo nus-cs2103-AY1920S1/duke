@@ -1,6 +1,6 @@
 package jermi.command;
 
-import static jermi.misc.Constant.PARSER_EXIT;
+import static jermi.misc.Constant.EXIT_COMMAND;
 
 import java.util.Objects;
 
@@ -51,6 +51,6 @@ public class ExitCommand extends Command {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(PARSER_EXIT);
+        return Objects.hashCode(EXIT_COMMAND);
     }
 }

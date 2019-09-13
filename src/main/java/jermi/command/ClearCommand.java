@@ -1,7 +1,7 @@
 package jermi.command;
 
 import static jermi.misc.Constant.COMMAND_CLEAR_MESSAGE;
-import static jermi.misc.Constant.PARSER_CLEAR;
+import static jermi.misc.Constant.CLEAR_COMMAND;
 
 import java.util.Objects;
 
@@ -47,6 +47,6 @@ public class ClearCommand extends Command {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(PARSER_CLEAR);
+        return Objects.hashCode(CLEAR_COMMAND);
     }
 }

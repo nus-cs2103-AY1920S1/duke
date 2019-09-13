@@ -18,6 +18,7 @@ public class Constant {
     public static final String COMMAND_SINGULAR_NOUN = "";
     public static final String COMMAND_TASK_FORMAT = "  %s";
     public static final String COMMAND_TASK_FORMAT_WITH_INDEX = "%d.%s";
+    public static final String COMMAND_HELP_MESSAGE = "Here is the list of commands:";
     public static final String DATA_PATH = "data/jermi.txt";
     public static final String DEADLINE_STRING_REPRESENTATION = "%s (by: %s)";
     public static final String DEADLINE_TYPE_CODE = "D";
@@ -38,17 +39,20 @@ public class Constant {
     public static final String FORMATTER_MESSAGE_FORMAT = "  %s\n";
     public static final String FORMATTER_WELCOME_MESSAGE_LINE_1 = "Hello! I'm Jermi";
     public static final String FORMATTER_WELCOME_MESSAGE_LINE_2 = "What can I do for you?";
+    public static final String FORMATTER_ADD_BLANK_LINE = "";
+    public static final String FORMATTER_WELCOME_MESSAGE_HELP = "Type 'help' to view the list of commands.";
     public static final String JERMI_IMAGE_PATH = "/images/Jermi.png";
     public static final String MAIN_WINDOW_FXML_PATH = "/view/MainWindow.fxml";
-    public static final String PARSER_CLEAR = "clear";
-    public static final String PARSER_DEADLINE = "deadline";
-    public static final String PARSER_DELETE = "delete";
-    public static final String PARSER_DONE = "done";
-    public static final String PARSER_EVENT = "event";
-    public static final String PARSER_EXIT = "bye";
-    public static final String PARSER_FIND = "find";
-    public static final String PARSER_LIST = "list";
-    public static final String PARSER_TODO = "todo";
+    public static final String CLEAR_COMMAND = "clear";
+    public static final String DEADLINE_COMMAND = "deadline";
+    public static final String DELETE_COMMAND = "delete";
+    public static final String DONE_COMMAND = "done";
+    public static final String EVENT_COMMAND = "event";
+    public static final String EXIT_COMMAND = "bye";
+    public static final String FIND_COMMAND = "find";
+    public static final String LIST_COMMAND = "list";
+    public static final String TODO_COMMAND = "todo";
+    public static final String HELP_COMMAND = "help";
     public static final String STORAGE_SAVE_FORMAT_DELIMITER = "\\|";
     public static final String TASK_DONE_ICON = "✔";
     public static final String TASK_DONE_STRING_REPRESENTATION = "1";
@@ -61,6 +65,16 @@ public class Constant {
     public static final String TASK_UNDONE_STRING_REPRESENTATION = "0";
     public static final String TO_DO_TYPE_CODE = "T";
     public static final String USER_IMAGE_PATH = "/images/User.png";
+    public static final String HELP_MESSAGE_LIST = "◇ list : View the list of tasks";
+    public static final String HELP_MESSAGE_DEADLINE = "◇ deadline <description> /by <date> : Add deadline to the list";
+    public static final String HELP_MESSAGE_EVENT = "◇ event <description> /at <date> : Add event to the list";
+    public static final String HELP_MESSAGE_TODO = "◇ todo <description> : Add todo to the list";
+    public static final String HELP_MESSAGE_DONE = "◇ done <task index> : Mark the task as done";
+    public static final String HELP_MESSAGE_DELETE = "◇ delete <task index> : Delete the task from the list";
+    public static final String HELP_MESSAGE_FIND = "◇ find <keyword 1> <(optional) keyword 2> ... : "
+            + "Find all tasks that matches any of the keywords";
+    public static final String HELP_MESSAGE_CLEAR = "◇ clear : Delete all tasks from the list";
+    public static final String HELP_MESSAGE_EXIT = "◇ bye : Exit the program";
 
     public static final int COMMAND_ADD_ACTIVITY_DATE_TIME_SPLIT_LIMIT = 2;
     public static final int COMMAND_ADD_ACTIVITY_INDEX = 0;

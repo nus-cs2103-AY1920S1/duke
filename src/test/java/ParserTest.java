@@ -14,6 +14,7 @@ import jermi.command.DeleteCommand;
 import jermi.command.DoneCommand;
 import jermi.command.ExitCommand;
 import jermi.command.FindCommand;
+import jermi.command.HelpCommand;
 import jermi.command.ListCommand;
 import jermi.component.Parser;
 import jermi.exception.EmptyDescriptionException;
@@ -34,7 +35,8 @@ public class ParserTest {
                     "find book meeting",
                     "list",
                     "bye",
-                    "clear"};
+                    "clear",
+                    "help"};
             Command[] expectedCommands = {new AddCommand(TaskType.TO_DO, "read book"),
                     new AddCommand(TaskType.EVENT, "meeting /at 28/11/2019"),
                     new AddCommand(TaskType.DEADLINE, "homework /by 29 Aug"),
@@ -43,7 +45,8 @@ public class ParserTest {
                     new FindCommand("book meeting"),
                     new ListCommand(),
                     new ExitCommand(),
-                    new ClearCommand()};
+                    new ClearCommand(),
+                    new HelpCommand()};
 
             assertEquals(expectedCommands[0], parser.parse(FormatterStub.readCommand(userInputs[0]),
                     FormatterStub.readDetails(userInputs[0])));
@@ -65,6 +68,8 @@ public class ParserTest {
                     FormatterStub.readDetails(userInputs[7])));
             assertEquals(expectedCommands[8], parser.parse(FormatterStub.readCommand(userInputs[8]),
                     FormatterStub.readDetails(userInputs[8])));
+            assertEquals(expectedCommands[9], parser.parse(FormatterStub.readCommand(userInputs[9]),
+                    FormatterStub.readDetails(userInputs[9])));
 
         } catch (JermiException e) {
             e.printStackTrace();
@@ -79,6 +84,10 @@ public class ParserTest {
                 "done",
                 "delete",
                 "find",
+                "list",
+                "bye",
+                "clear",
+                "help"
         };
 
         int expected = 6;

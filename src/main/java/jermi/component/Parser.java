@@ -1,14 +1,15 @@
 package jermi.component;
 
-import static jermi.misc.Constant.PARSER_CLEAR;
-import static jermi.misc.Constant.PARSER_DEADLINE;
-import static jermi.misc.Constant.PARSER_DELETE;
-import static jermi.misc.Constant.PARSER_DONE;
-import static jermi.misc.Constant.PARSER_EVENT;
-import static jermi.misc.Constant.PARSER_EXIT;
-import static jermi.misc.Constant.PARSER_FIND;
-import static jermi.misc.Constant.PARSER_LIST;
-import static jermi.misc.Constant.PARSER_TODO;
+import static jermi.misc.Constant.CLEAR_COMMAND;
+import static jermi.misc.Constant.DEADLINE_COMMAND;
+import static jermi.misc.Constant.DELETE_COMMAND;
+import static jermi.misc.Constant.DONE_COMMAND;
+import static jermi.misc.Constant.EVENT_COMMAND;
+import static jermi.misc.Constant.EXIT_COMMAND;
+import static jermi.misc.Constant.FIND_COMMAND;
+import static jermi.misc.Constant.HELP_COMMAND;
+import static jermi.misc.Constant.LIST_COMMAND;
+import static jermi.misc.Constant.TODO_COMMAND;
 
 import jermi.command.AddCommand;
 import jermi.command.ClearCommand;
@@ -17,6 +18,7 @@ import jermi.command.DeleteCommand;
 import jermi.command.DoneCommand;
 import jermi.command.ExitCommand;
 import jermi.command.FindCommand;
+import jermi.command.HelpCommand;
 import jermi.command.ListCommand;
 import jermi.exception.EmptyDescriptionException;
 import jermi.exception.InvalidCommandException;
@@ -38,46 +40,49 @@ public class Parser {
     public Command parse(String inputCommand, String inputDetails) throws JermiException {
         Command command = null;
         switch (inputCommand) {
-        case PARSER_LIST:
+        case LIST_COMMAND:
             command = new ListCommand();
             break;
-        case PARSER_EXIT:
+        case EXIT_COMMAND:
             command = new ExitCommand();
             break;
-        case PARSER_CLEAR:
+        case CLEAR_COMMAND:
             command = new ClearCommand();
             break;
-        case PARSER_TODO:
+        case HELP_COMMAND:
+            command = new HelpCommand();
+            break;
+        case TODO_COMMAND:
             //Fallthrough
-        case PARSER_DEADLINE:
+        case DEADLINE_COMMAND:
             //Fallthrough
-        case PARSER_EVENT:
+        case EVENT_COMMAND:
             //Fallthrough
-        case PARSER_DONE:
+        case DONE_COMMAND:
             //Fallthrough
-        case PARSER_DELETE:
+        case DELETE_COMMAND:
             //Fallthrough
-        case PARSER_FIND:
+        case FIND_COMMAND:
             if (inputDetails.isEmpty()) {
                 throw new EmptyDescriptionException(inputCommand);
             }
             switch (inputCommand) {
-            case PARSER_TODO:
+            case TODO_COMMAND:
                 command = new AddCommand(TaskType.TO_DO, inputDetails);
                 break;
-            case PARSER_DEADLINE:
+            case DEADLINE_COMMAND:
                 command = new AddCommand(TaskType.DEADLINE, inputDetails);
                 break;
-            case PARSER_EVENT:
+            case EVENT_COMMAND:
                 command = new AddCommand(TaskType.EVENT, inputDetails);
                 break;
-            case PARSER_DONE:
+            case DONE_COMMAND:
                 command = new DoneCommand(inputDetails);
                 break;
-            case PARSER_DELETE:
+            case DELETE_COMMAND:
                 command = new DeleteCommand(inputDetails);
                 break;
-            case PARSER_FIND:
+            case FIND_COMMAND:
                 command = new FindCommand(inputDetails);
                 break;
             default:

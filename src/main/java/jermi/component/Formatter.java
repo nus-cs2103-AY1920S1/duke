@@ -8,6 +8,8 @@ import static jermi.misc.Constant.FORMATTER_DEFAULT_DETAILS;
 import static jermi.misc.Constant.FORMATTER_DETAILS_INDEX;
 import static jermi.misc.Constant.FORMATTER_EXIT_MESSAGE;
 import static jermi.misc.Constant.FORMATTER_MESSAGE_FORMAT;
+import static jermi.misc.Constant.FORMATTER_ADD_BLANK_LINE;
+import static jermi.misc.Constant.FORMATTER_WELCOME_MESSAGE_HELP;
 import static jermi.misc.Constant.FORMATTER_WELCOME_MESSAGE_LINE_1;
 import static jermi.misc.Constant.FORMATTER_WELCOME_MESSAGE_LINE_2;
 
@@ -49,7 +51,10 @@ public class Formatter {
      * @return Welcome message.
      */
     public String greet() {
-        return this.echo(FORMATTER_WELCOME_MESSAGE_LINE_1, FORMATTER_WELCOME_MESSAGE_LINE_2);
+        return this.echo(FORMATTER_WELCOME_MESSAGE_LINE_1,
+                FORMATTER_WELCOME_MESSAGE_LINE_2,
+                FORMATTER_ADD_BLANK_LINE,
+                FORMATTER_WELCOME_MESSAGE_HELP);
     }
 
     /**

@@ -88,7 +88,7 @@ public class Parser {
 
             return ui.showTaskAdded(newDeadline, taskList);
 
-        } else {
+        } else  if (taskType.equals("event")) {
             String[] taskDescArr = taskDesc.split(" /");
 
             Task newEvent = new Event(taskDescArr[0], taskDescArr[1]);
@@ -96,6 +96,9 @@ public class Parser {
             taskList.addTask(newEvent);
 
             return ui.showTaskAdded(newEvent, taskList);
+        } else {
+            assert false;
+            return "assert testing"; //Returning a string since method must return string
         }
     }
 

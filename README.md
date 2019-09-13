@@ -1,47 +1,39 @@
-# User Guide
+# Setting up
 
-##1. Introduction
-Duke is a product for those who prefer to have a simple interface to note down their schedule.
-Duke is optimised for those who prefer to work with a Command Line Interface(CLI) while still having a basic GUI.
+**Prerequisites**
 
-##2. Quick Start
-1. Ensure that you have Java 11 or above installed in your Computer.
-1. Download the latest duke.jar [here!](https://github.com/JunHongT/duke)
-1. Copy the file to the folder you want to use as the home folder for your Duke.
-1. Double-click the file to start the app. The GUI should appear in a few seconds.
-![Image of Duke startup](/Users/teojunhong/JavaProject/2103T/duke/docs/Startup.png)
-1.Type the commands in the text bar and press send to execute it.
-1. Some example of the commands are:
-    * list : List all saved task
-    * todo : Add a task 
-    * deadline : Add a task with a deadline of date and time
-    * event : Add a task with date and duration
-    * delete : Delete a task
-    * done : Mark a task as done
-    * bye : exit program
+* JDK 11
+* Recommended: IntelliJ IDE
+* Fork this repo to your GitHub account and clone the fork to your computer
 
-##3. Features 
-### 3.1 Adding a Task
-Adding a task to Duke.
-#### 3.1.1 Todo Task
-Format : `todo {description}`
-#### 3.1.2 Deadline Task
-Format : `deadline {description} /by {dd/mm/yyyy hh:mm}`
-#### 3.1.3 Event Task
-Format : `event {description} /at {dd/mm/yyyy hh:mm - hh:mm}`
-###3.2 List
-Show a list of all tasks added by user.
-Format : `list`
-###3.3 Delete
-Delete a task that is saved in Duke.
-Format : `delete {index of task}`
-###3.4 Done
-Mark a task as done. Default value for task is undone.
-Format : `done {index of task}`
-###3.5 Find
-Display all task that contained search term.
-Format : `fine {search term}`
-###3.6 Bye
-Exiting from the program and save added task to local file.
-Format : `bye`
+**Importing the project into IntelliJ**
 
+1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
+1. Set up the correct JDK version.
+   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
+   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
+   * Click `OK`.
+1. Click `Import Project`.
+1. Locate the project directory and click `OK`.
+1. Select `Create project from existing sources` and click `Next`.
+1. Rename the project if you want. Click `Next`.
+1. Ensure that your src folder is checked. Keep clicking `Next`.
+1. Click `Finish`.
+
+# Tutorials 
+
+Duke Increment | Tutorial
+---------------|---------------
+`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
+`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
+`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+
+[fx1]: <tutorials/javaFxTutorialPart1.md>
+[fx2]: <tutorials/javaFxTutorialPart2.md>
+[fx3]: <tutorials/javaFxTutorialPart3.md>
+[fx4]: <tutorials/javaFxTutorialPart4.md>
+
+# Feedback, Bug Reports
+
+* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
+* We welcome pull requests too.

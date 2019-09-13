@@ -18,23 +18,23 @@ public class Task {
     }
 
     public void setDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     String getStatusIcon() {
-        return (this.isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
     int getStatus() {
-        return (this.isDone ? 1 : 0);
+        return (isDone ? 1 : 0);
     }
 
     public String store() {
-        return getStatus() + "|" + this.description;
+        return getStatus() + "|" + description;
     }
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

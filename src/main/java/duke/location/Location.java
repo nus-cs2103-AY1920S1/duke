@@ -1,13 +1,13 @@
 package duke.location;
 
 public class Location {
+    private static LocationList locations = new LocationList();
+
     private String name;
 
-    public static LocationList getLocations() {
+    public static LocationList getList() {
         return locations;
     }
-
-    private static LocationList locations = new LocationList();
 
     public Location(String name) {
         this.name = name;
@@ -16,5 +16,9 @@ public class Location {
     @Override
     public String toString() {
         return name;
+    }
+
+    public String store() {
+        return "P|" + name;
     }
 }

@@ -1,10 +1,10 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.ExitCommand;
 import duke.io.Parser;
 import duke.io.Storage;
 import duke.io.Ui;
+import duke.location.Location;
 import duke.task.TaskList;
 
 import java.text.ParseException;
@@ -32,34 +32,18 @@ public class Duke {
         ui.out("What can I do for you?");
     }
 
-    public String getOutput() {
-        return ui.getDukeOut().toString();
+    Duke(String taskFile, String placeFile) {
+        assert taskFile != null : "Empty file path";
+        assert placeFile != null : "Empty file path";
+        ui = new Ui();
+        storage = new Storage(taskFile, placeFile);
+        storage.loadPlaces(ui);
+        taskList = storage.loadTasks(ui);
+        ui.out("What can I do for you?");
     }
 
-    /**
-     * Runs the duke To-do Application.
-     */
-    @Deprecated
-    public void run() {
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.read();
-                Command command = Parser.parse(input);
-                command.execute(taskList, ui, storage);
-                isExit = (command instanceof ExitCommand);
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                ui.out("The details of an Event/Deadline cannot be empty.");
-            } catch (UnsupportedOperationException ex) {
-                ui.out("I'm sorry, but I don't know what that means.");
-            } catch (NumberFormatException ex) {
-                ui.out("Please only complete/delete tasks on the list.");
-            } catch (ParseException ex) {
-                ui.out("Please format date/time as 'dd-MM-yyyy HHmm'.");
-            }
-        }
-        ui.close();
-        storage.writeTasks(taskList);
+    public String getOutput() {
+        return ui.getDukeOut().toString();
     }
 
     /**
@@ -87,5 +71,6 @@ public class Duke {
 
     public void close() {
         storage.writeTasks(taskList);
+        storage.writePlaces();
     }
 }

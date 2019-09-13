@@ -1,5 +1,7 @@
 package duke.io;
 
+import duke.location.Location;
+import duke.location.LocationList;
 import duke.task.TaskList;
 
 import java.io.File;
@@ -16,11 +18,45 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
+    private String placePath;
     private File file;
+    private File places;
 
     public Storage(String filePath) {
         this.filePath = filePath;
         file = new File(filePath);
+    }
+
+    /**
+     * Overloaded constructor for place data.
+     *
+     * @param filePath file path for duke task data
+     * @param placePath file path for places data
+     */
+    public Storage(String filePath, String placePath) {
+        this.filePath = filePath;
+        this.placePath = placePath;
+        file = new File(filePath);
+        places = new File(placePath);
+    }
+
+    /**
+     * Loads places data from save file.
+     *
+     * @param ui User interface for output.
+     */
+    public void loadPlaces(Ui ui) {
+        try {
+            Scanner scanner = new Scanner(places);
+            while (scanner.hasNext()) {
+                String[] code = scanner.nextLine().split("\\|");
+                Location.getList().add(Parser.initPlace(code));
+            }
+            scanner.close();
+            ui.list(Location.getList());
+        } catch (FileNotFoundException ex) {
+            ui.out("You do not have any saved places.");
+        }
     }
 
     /**
@@ -56,22 +92,43 @@ public class Storage {
         try {
             if (taskList.isEmpty() && file.exists()) {
                 Files.delete(Paths.get(filePath));
-            } else if (!taskList.isEmpty()) {
-                StringBuilder allTasks = new StringBuilder();
-                for (duke.task.Task task : taskList) {
-                    allTasks.append(task.store()).append(System.lineSeparator());
-                }
-                if (!file.exists()) {
-                    if (!file.getParentFile().mkdirs()) {
-                        if (!file.createNewFile()) {
-                            throw new IOException("Error creating file");
-                        }
-                    }
-                }
-                FileWriter fileWriter = new FileWriter(file);
-                fileWriter.write(allTasks.toString());
-                fileWriter.close();
+                return;
             }
+            StringBuilder allTasks = new StringBuilder();
+            for (duke.task.Task task : taskList) {
+                allTasks.append(task.store()).append(System.lineSeparator());
+            }
+            if (!file.exists() && !file.getParentFile().mkdirs() && !file.createNewFile()) {
+                throw new IOException("Error creating file");
+            }
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(allTasks.toString());
+            fileWriter.close();
+        } catch (IOException ex) {
+            System.out.println("Something went wrong: " + ex.getMessage());
+        }
+    }
+
+    /**
+     * Stores places data.
+     */
+    public void writePlaces() {
+        LocationList list = Location.getList();
+        try {
+            if (list.isEmpty() && places.exists()) {
+                Files.delete(Paths.get(placePath));
+                return;
+            }
+            StringBuilder allTasks = new StringBuilder();
+            for (Location location : list) {
+                allTasks.append(location.store()).append(System.lineSeparator());
+            }
+            if (!places.exists() && !places.getParentFile().mkdirs() && !places.createNewFile()) {
+                throw new IOException("Error creating file");
+            }
+            FileWriter fileWriter = new FileWriter(places);
+            fileWriter.write(allTasks.toString());
+            fileWriter.close();
         } catch (IOException ex) {
             System.out.println("Something went wrong: " + ex.getMessage());
         }

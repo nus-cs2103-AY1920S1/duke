@@ -6,8 +6,6 @@ import duke.location.Location;
 import duke.location.LocationList;
 import duke.task.TaskList;
 
-import java.text.ParseException;
-
 public class PlaceCommand extends Command {
     private String input;
 
@@ -16,8 +14,8 @@ public class PlaceCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ParseException {
-        LocationList locations = Location.getLocations();
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        LocationList locations = Location.getList();
         locations.add(new Location(input));
         ui.out("Got it. I've added this place:");
         ui.out(locations.get(locations.size() - 1).toString());

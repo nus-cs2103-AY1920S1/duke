@@ -10,6 +10,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.PlaceCommand;
+import duke.location.Location;
 import duke.task.Deadline;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -119,5 +120,12 @@ public class Parser {
         default:
             return null;
         }
+    }
+
+    static Location initPlace(String[] code) {
+        if ("P".equals(code[0])) {
+            return new Location(code[1]);
+        }
+        return null;
     }
 }

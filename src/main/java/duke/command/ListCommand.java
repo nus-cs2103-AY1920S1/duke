@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (input.equals("places")) {
-            ui.list(Location.getLocations());
+            ui.list(Location.getList());
         } else {
             ui.list(taskList);
         }

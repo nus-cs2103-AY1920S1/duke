@@ -1,35 +1,19 @@
 package duke.io;
 
-import duke.location.LocationList;
-import duke.task.TaskList;
-
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * User Interface for Duke.
  */
 public class Ui {
-    private Scanner scanner;
-
     private StringBuilder dukeOut;
 
     /**
      * Constructor creates new scanner to read System-in.
      */
     public Ui() {
-        scanner = new Scanner(System.in);
         dukeOut = new StringBuilder();
         out("Hello! I'm Duke");
-    }
-
-    @Deprecated
-    public String read() {
-        return scanner.nextLine();
-    }
-
-    @Deprecated
-    public void close() {
-        scanner.close();
     }
 
     public void out(String output) {
@@ -48,32 +32,16 @@ public class Ui {
     /**
      * Prints out list of tasks.
      *
-     * @param taskList List of tasks
+     * @param list List of items
      */
-    public void list(TaskList taskList) {
-        if (taskList.size() == 0) {
+    public void list(ArrayList list) {
+        if (list.size() == 0) {
             out("List is empty!");
-        } else {
-            out("Here are the tasks in your list:");
-            for (int i = 0; i < taskList.size(); i++) {
-                out((i + 1) + "." + taskList.get(i));
-            }
+            return;
         }
-    }
-
-    /**
-     * Prints out list of locations.
-     *
-     * @param placeList List of locations
-     */
-    public void list(LocationList placeList) {
-        if (placeList.size() == 0) {
-            out("List is empty!");
-        } else {
-            out("Here are the tasks in your list:");
-            for (int i = 0; i < placeList.size(); i++) {
-                out((i + 1) + "." + placeList.get(i));
-            }
+        out("Here are the tasks in your list:");
+        for (int i = 0; i < list.size(); i++) {
+            out((i + 1) + "." + list.get(i));
         }
     }
 }

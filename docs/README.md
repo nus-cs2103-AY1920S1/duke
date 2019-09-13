@@ -44,3 +44,6 @@ Format : `fine {search term}`
 Exiting from the program and save added task to local file.
 Format : `bye`
 
+## Additional Information
+1. Type `hello` to receive a greeting from Duke.
+1. Added tasks will only be saved if program is exited by `bye` commands

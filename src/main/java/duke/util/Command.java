@@ -15,7 +15,7 @@ public class Command {
     private static final int NOTE = 6;
     private static final int DELETE_NOTE = 7;
     private static final int COMMANDS = -1;
-    private static final String list =
+    private static final String COMMANDS_LIST =
             "1) list: view your Todo list\n"
                     + "2) done {task_number}: mark a task as done\n"
                     + "3) delete {task_number}: delete a task\n"
@@ -80,7 +80,7 @@ public class Command {
             result = lists.getNotes().registerNewNote(inputParts[1]);
             return result;
         case COMMANDS:
-            return list;
+            return COMMANDS_LIST;
         default:
             throw new DukeException("Invalid command");
         }

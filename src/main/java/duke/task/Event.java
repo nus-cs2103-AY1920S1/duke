@@ -45,8 +45,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String result = "[E][";
-        result = this.completed ? result + "\u2713" + "]" : result + "\u2718" + "]";
-        result += " " + this.name;
+        result += super.toString();
         result += " (at: " + this.date + ")";
         return result;
     }

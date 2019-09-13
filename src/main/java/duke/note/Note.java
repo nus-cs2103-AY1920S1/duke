@@ -1,7 +1,7 @@
 package duke.note;
 
 /**
- * Note Class.
+ * Note Class for user to store text information.
  */
 public class Note {
     private String desc;

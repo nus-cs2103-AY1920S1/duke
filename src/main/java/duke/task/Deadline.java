@@ -44,8 +44,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String result = "[D][";
-        result = this.completed ? result + "\u2713" + "]" : result + "\u2718" + "]";
-        result += " " + this.name;
+        result += super.toString();
         result += " (by: " + this.date + ")";
         return result;
     }

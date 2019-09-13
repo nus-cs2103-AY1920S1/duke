@@ -86,9 +86,14 @@ public class TaskList {
         index--;
         Task t = taskList.get(index);
         taskList.remove(index);
+        count -= 1;
+        String result = generateDeleteItemResponse(t);
+        return result;
+    }
+
+    private String generateDeleteItemResponse(Task t) {
         String result = "Noted. I've removed this task:\n";
         result += t + "\n";
-        count -= 1;
         if (count == 1) {
             result += "Now you have 1 task in the list";
         } else {
@@ -127,48 +132,79 @@ public class TaskList {
      * @throws DukeException if description of task is empty or if format is incorrect
      */
     public Task addToList(String s, String type) throws DukeException {
-        String trimmed = s.replaceAll("^\\s+", "");
-        if (trimmed.equals("")) {
-            throw new DukeException("Description cannot be empty!");
-        }
-        if (type.equals("todo")) {
+        errorIfDescriptionIsEmpty(removeWhitespaces(s));
+        switch (type) {
+        case "todo":
             taskList.add(new Todo(s));
-        } else if (type.equals("deadline")) {
-            String[] parts = s.split("\\/" + "by");
-            if (parts.length < 2) {
-                String message = "Date required!\n";
-                message += "Format: deadline {task_name} /by {date}";
-                throw new DukeException(message);
-            } else if (parts.length != 2) {
-                String message = "Format: deadline {task_name} /by {date}";
-                throw new DukeException(message);
-            }
-            taskList.add(new Deadline(
-                    parts[0].substring(0, parts[0].length() - 1),
-                    createDateAndTime(parts[1].substring(1))
-            ));
-        } else if (type.equals("event")) {
-            String[] parts = s.split("\\/" + "at");
-            if (parts.length < 2) {
-                String message = "Date required!\n";
-                message += "Format: event {task_name} /at {date}";
-                throw new DukeException(message);
-            } else if (parts.length != 2) {
-                String message = "Format: event {task_name} /at {date}";
-                throw new DukeException(message);
-            }
-            taskList.add(new Event(
-                    parts[0].substring(0, parts[0].length() - 1),
-                    createDateAndTime(parts[1].substring(1))
-            ));
+            break;
+        case "deadline":
+            checkDeadlineFormat(s);
+            this.addDeadlineToList(s);
+            break;
+        case "event":
+            checkEventFormat(s);
+            this.addEventToList(s);
+            break;
+        default:
+            throw new DukeException("Invalid task!");
         }
-        assert type.equals("todo") || type.equals("deadline") || type.equals("event") : "Invalid Task";
         count += 1;
         return taskList.get(count - 1);
     }
 
-    /**
-     * Creates fixed date/time format from given string.
+    private String removeWhitespaces(String s) {
+        String trimmed = s.replaceAll("^\\s+", "");
+        return trimmed;
+    }
+
+    static void errorIfDescriptionIsEmpty(String desc) throws DukeException {
+        if (desc.equals("")) {
+            throw new DukeException("Description cannot be empty!");
+        }
+    }
+
+    static void checkDeadlineFormat(String desc) throws DukeException {
+        String[] parts = desc.split("\\/" + "by");
+        if (parts.length < 2) {
+            String message = "Date required!\n";
+            message += "Format: deadline {task_name} /by {date}";
+            throw new DukeException(message);
+        } else if (parts.length != 2) {
+            String message = "Format: deadline {task_name} /by {date}";
+            throw new DukeException(message);
+        }
+    }
+
+    private void addDeadlineToList(String desc) {
+        String[] parts = desc.split("\\/" + "by");
+        taskList.add(new Deadline(
+                parts[0].substring(0, parts[0].length() - 1),
+                createDateAndTime(parts[1].substring(1))
+        ));
+    }
+
+    static void checkEventFormat(String desc) throws DukeException {
+        String[] parts = desc.split("\\/" + "at");
+        if (parts.length < 2) {
+            String message = "Date required!\n";
+            message += "Format: event {task_name} /at {date}";
+            throw new DukeException(message);
+        } else if (parts.length != 2) {
+            String message = "Format: event {task_name} /at {date}";
+            throw new DukeException(message);
+        }
+    }
+
+    private void addEventToList(String desc) {
+        String[] parts = desc.split("\\/" + "by");
+        taskList.add(new Event(
+                parts[0].substring(0, parts[0].length() - 1),
+                createDateAndTime(parts[1].substring(1))
+        ));
+    }
+
+        /**
+         * Creates fixed date/time format from given string.
      * @param s string to be interpreted as date/time format
      * @return string in the fixed format
      */

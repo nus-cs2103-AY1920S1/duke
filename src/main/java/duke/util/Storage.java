@@ -76,9 +76,6 @@ public class Storage {
                 notesList.add(new Note(line));
             }
         }
-        System.out.println("hihihi");
-        System.out.println(taskList);
-        System.out.println(notesList);
         return new ListManager(new TaskList(taskList), new NoteList(notesList));
     }
 

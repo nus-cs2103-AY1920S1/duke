@@ -4,7 +4,7 @@ package duke.task;
  * Task class.
  */
 public abstract class Task {
-    protected boolean completed;
+    protected boolean isCompleted;
     protected String name;
 
     /**
@@ -13,17 +13,17 @@ public abstract class Task {
      */
     public Task(String n) {
         this.name = n;
-        completed = false;
+        isCompleted = false;
     }
   
     /**
      * Constructor for Task object when loading from history.
      * @param n name of task
-     * @param completed indicates if task is completed
+     * @param isCompleted indicates if task is completed
      */
-    public Task(String n, boolean completed) {
+    public Task(String n, boolean isCompleted) {
         this.name = n;
-        this.completed = completed;
+        this.isCompleted = isCompleted;
     }
 
     /**
@@ -31,7 +31,7 @@ public abstract class Task {
      * @return true if task is completed, false otherwise
      */
     public boolean isCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
@@ -46,12 +46,17 @@ public abstract class Task {
      * Completes the task.
      */
     public boolean complete() {
-        if (this.completed) {
+        if (this.isCompleted) {
             return false;
         }
-        this.completed = true;
+        this.isCompleted = true;
         return true;
     }
 
-    public abstract String toString();
+    public String toString() {
+        String result = "";
+        result = this.isCompleted ? result + "\u2713" + "]" : result + "\u2718" + "]";
+        result += " " + this.name;
+        return result;
+    }
 }

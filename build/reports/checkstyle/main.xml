@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.23">
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Deadline.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/DialogBox.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Duke.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Event.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Launcher.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Parser.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Storage.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Task.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Todo.java">
+</file>
+<file name="/Users/teojunhong/JavaProject/2103T/duke/src/main/java/Ui.java">
+</file>
+</checkstyle>

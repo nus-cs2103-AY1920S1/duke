@@ -14,7 +14,7 @@ public class Ui {
      * Prints welcome message when application starts up.
      */
     public void showWelcome() {
-        System.out.println("Hello! I'm Tony\nWhat can I do for you?");
+        System.out.println("This is Donna from Suits.\nWhat can I do for you?");
     }
 
     /**

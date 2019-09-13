@@ -41,8 +41,8 @@ public class DialogBox extends HBox {
     /**
      * Constructor for the dialogBox.
      * 
-     * @param text The text to be displayed - Which can be the user or Duke.
-     * @param img The image to be displayed - Which can be the user or Duke.
+     * @param text The text to be displayed - Which can be the user or Rori.
+     * @param img The image to be displayed - Which can be the user or Rori.
      */
     private DialogBox(String text, Image img, boolean isUser) {
         this.isUser = isUser;
@@ -99,13 +99,13 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Returns DialogBox containing Duke's text and image.
+     * Returns DialogBox containing Rori's text and image.
      * 
-     * @param text Duke's Text
-     * @param img Duke's Image
-     * @return DialogBox containing Duke's text and image
+     * @param text Rori's Text
+     * @param img Rori's Image
+     * @return DialogBox containing Rori's text and image
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getRoriDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img, false);
         db.flip();
         return db;

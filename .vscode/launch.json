@@ -12,10 +12,10 @@
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-Duke<duke>",
+            "name": "Debug (Launch)-Duke<rori>",
             "request": "launch",
             "mainClass": "Duke",
-            "projectName": "duke"
+            "projectName": "rori"
         }
     ]
 }

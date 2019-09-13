@@ -4,7 +4,7 @@ import javafx.application.Platform;
  * Represents a manager to manage all of the different classes, and act's as the
  * initialization stage of the program.
  */
-class DukeManager {
+class RoriManager {
     private Ui uiManager;
     private Storage storeManager;
     private Parser parseManager;
@@ -13,10 +13,10 @@ class DukeManager {
     private boolean firstTime;
     
     /**
-     * Constructor for DukeManager, which instantiates several other classes as well.
+     * Constructor for RoriManager, which instantiates several other classes as well.
      * 
      */
-    public DukeManager() throws DukeException {
+    public RoriManager() throws RoriException {
         this.uiManager = new Ui();
         this.storeManager = new Storage("Tasks.sav");
         this.parseManager = new Parser();
@@ -25,17 +25,17 @@ class DukeManager {
 
     /**
      * Returns a String that is going to be output to the user, and the given input results
-     * in an ExitCommand, it will close the Duke program.
+     * in an ExitCommand, it will close the Rori program.
      * 
-     * <p>runDuke is for 1 iteration/command and is used only in javaFx.
-     * For the console version, please check initializeDuke()
+     * <p>runRori is for 1 iteration/command and is used only in javaFx.
+     * For the console version, please check initializeRori()
      * 
      * @param input The user's input.
-     * @param duke The instance of duke program.
+     * @param rori The instance of rori program.
      * @return a String going to be output to the user.
-     * @throws DukeException When there is an error in one fo the commands.
+     * @throws RoriException When there is an error in one fo the commands.
      */
-    public String runDuke(String input) throws DukeException {
+    public String runRori(String input) throws RoriException {
         Command command = parseManager.parseToCommand(input);
         assert command != null : "Command is invalid";
         command.execute(this.uiManager, this.taskList, this.storeManager);
@@ -63,10 +63,16 @@ class DukeManager {
         return uiManager.printWantTutorial();
     }
 
+    /**
+     * Returns a String containing whether the user want's the tutorial.
+     * 
+     * @param input The user's response
+     * @return a String containing whether the user want's the tutorial.
+     */
     public String getTutorialResponse(String input) {
         try {
             return parseManager.parseTutorialResponse(input, this, this.uiManager);    
-        } catch (DukeException e) {
+        } catch (RoriException e) {
             return e.getMessage();   
         }
     }

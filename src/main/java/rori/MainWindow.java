@@ -19,11 +19,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
-    private DukeManager dukeManager;
+    private Rori rori;
+    private RoriManager roriManager;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+    private Image roriImage = new Image(this.getClass().getResourceAsStream("/images/Rori.png"));
 
     private boolean isInTutorial;
 
@@ -32,13 +32,13 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
-        dukeManager = this.duke.getDukeManager();
+    public void setRori(Rori d) {
+        rori = d;
+        roriManager = this.rori.getRoriManager();
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply 
+     * Creates two dialog boxes, one echoing user input and the other containing Rori's reply 
      * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -46,14 +46,14 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = null;
         if (isInTutorial) {
-            response = dukeManager.getTutorialResponse(input);
+            response = roriManager.getTutorialResponse(input);
             isInTutorial = false;
         } else {
-            response = duke.getResponse(input);
+            response = rori.getResponse(input);
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getRoriDialog(response, roriImage)
         );
         userInput.clear();
     }
@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
      */
     public void welcomeMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(this.dukeManager.welcomeMessage(), dukeImage)
+                DialogBox.getRoriDialog(this.roriManager.welcomeMessage(), roriImage)
         );
     }
 
@@ -72,7 +72,7 @@ public class MainWindow extends AnchorPane {
      */
     public void tutorialMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(this.dukeManager.getTutorial(), dukeImage)
+                DialogBox.getRoriDialog(this.roriManager.getTutorial(), roriImage)
         );
         isInTutorial = true;
     }

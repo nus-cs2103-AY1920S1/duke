@@ -15,14 +15,14 @@ class Parser {
      * E.g. of 1-word String: list, bye, help.
      * E.g. of 2-or-more-word String, todo, deadline, event, done, delete.
      * The user's input is split into 2 parts, and if it is only 1-word String, 
-     * If the user inputs something that is not of the correct Input type, a DukeException is thrown.
+     * If the user inputs something that is not of the correct Input type, a RoriException is thrown.
      * 
      * @param input String inputted by the user to be parsed into a Command
-     * @return A Command that is executed by DukeManager
-     * @throws DukeException When the user Inputs something unreadable by the program.
+     * @return A Command that is executed by RoriManager
+     * @throws RoriException When the user Inputs something unreadable by the program.
      * @see Command#execute(Ui, TaskList, Storage)
      */
-    public Command parseToCommand(String input) throws DukeException {
+    public Command parseToCommand(String input) throws RoriException {
         String[] inputArr = input.split(" ", 2);
         Action action = getAction(inputArr[0]);
         assert inputArr.length == 1 || inputArr.length == 2 : "inputArr length is wrong length"; 
@@ -55,12 +55,14 @@ class Parser {
                 return new DeleteCommand(parseToNumber(inputArr[1], "Delete"));
             case FIND :
                 return new FindCommand(inputArr[1]);
+            case HELP :
+                return new HelpCommand(getAction(inputArr[1]));
             default :
-                throw new DukeException("Oof. I apologize, but I do not understand.");
+                throw new RoriException("Oof. I apologize, but I do not understand.");
             }
         } else {
             // Not suppose to happen
-            throw new DukeException("Oof. I apologize, but I do not understand.");
+            throw new RoriException("Oof. I apologize, but I do not understand.");
         }
     } 
 
@@ -69,9 +71,9 @@ class Parser {
      * 
      * @param action The first word that is input by the user
      * @return An Action enum
-     * @throws DukeException When the single word String is not of the stipulated cases
+     * @throws RoriException When the single word String is not of the stipulated cases
      */
-    private Action getAction(String action) throws DukeException {
+    private Action getAction(String action) throws RoriException {
         assert !action.equals("") : "Empty String was obtained";
         switch (action.toLowerCase()) {
         case "list" :
@@ -95,7 +97,7 @@ class Parser {
         case "tutorial" :
             return Action.TUTORIAL;
         default :
-            throw new DukeException("Oof. I apologize, but no such command exists.");
+            throw new RoriException("Oof. I apologize, but no such command exists.");
         }
     }
     
@@ -105,13 +107,13 @@ class Parser {
      * @param taskNumber The number given by the user that is parsed into the respective task.
      * @param action The first word that is input by the user.
      * @return An Integer that is, taskNumber that is pased.
-     * @throws DukeException When there is no number behind the action.
+     * @throws RoriException When there is no number behind the action.
      */
-    private Integer parseToNumber(String taskNumber, String action) throws DukeException {
+    private Integer parseToNumber(String taskNumber, String action) throws RoriException {
         try {
             return Integer.parseInt(taskNumber);
         } catch (Exception e) {
-            throw new DukeException("Oof. " + action + " requires a number behind.");
+            throw new RoriException("Oof. " + action + " requires a number behind.");
         }
     }
 
@@ -122,9 +124,9 @@ class Parser {
      * @param taskString The String given by the user without the Action/Command.
      * @param action The given Action by the user to decipher which task to return.
      * @return a Time-limited Task.
-     * @throws DukeException When the format of the input is wrong.
+     * @throws RoriException When the format of the input is wrong.
      */
-    private Task createTimedTask(String taskString, Action action) throws DukeException {
+    private Task createTimedTask(String taskString, Action action) throws RoriException {
         String[] taskArr = null;
         switch (action) {
         case DEADLINE :
@@ -134,13 +136,13 @@ class Parser {
             taskArr = taskString.split(" /at ", 2);
             break;
         default :
-            throw new DukeException("Creating a time-limited task when not supposed to.");
+            throw new RoriException("Creating a time-limited task when not supposed to.");
         }
 
         if (taskArr.length == 2) {
             return checkTimedTask(taskArr, action);
         } else {
-            throw new DukeException("Oof. There seems to be an error with your format.\n" 
+            throw new RoriException("Oof. There seems to be an error with your format.\n" 
             + "Please type \'help\' for more information.");
         }
     }
@@ -153,9 +155,9 @@ class Parser {
      * @param taskArr The task containing the task itself, and the date
      * @param action The given Action by the user to decipher which task to return.
      * @return A time-limited Task.
-     * @throws DukeException When creating a time-limited task when not supposed to.
+     * @throws RoriException When creating a time-limited task when not supposed to.
      */
-    private Task checkTimedTask(String[] taskArr, Action action) throws DukeException {
+    private Task checkTimedTask(String[] taskArr, Action action) throws RoriException {
         Pair<LocalDate, LocalTime> pair = obtainDateTime(taskArr[1]);
         switch (action) {
         case DEADLINE :
@@ -163,7 +165,7 @@ class Parser {
         case EVENT :
             return new Event(taskArr[0], pair.getKey(), pair.getValue());
         default :
-            throw new DukeException("Oof. Creating a time-limited task when not supposed to.");
+            throw new RoriException("Oof. Creating a time-limited task when not supposed to.");
         }
     }
 
@@ -174,9 +176,9 @@ class Parser {
      * 
      * @param dateTime The time and date to be parsed.
      * @return A Pair which contains the Date and Time, either can be null, not both.
-     * @throws DukeException When there is an error parsing the date, time or both.
+     * @throws RoriException When there is an error parsing the date, time or both.
      */
-    private Pair<LocalDate, LocalTime> obtainDateTime(String dateTime) throws DukeException {
+    private Pair<LocalDate, LocalTime> obtainDateTime(String dateTime) throws RoriException {
         String[] dateTimeArr = dateTime.split(" ", 2);
         LocalDate date = null;
         LocalTime time = null;
@@ -190,7 +192,7 @@ class Parser {
             } catch (Exception error) {
                 System.out.println(dateTimeArr[0]);
                 System.out.println(dateTimeArr[1]);
-                throw new DukeException("Oof. Unable to parse both time and date.\n" 
+                throw new RoriException("Oof. Unable to parse both time and date.\n" 
                         + "Please use \'help\' for the formatting of time and date");
             }
         } else if (dateTimeArr.length == 1) {
@@ -202,12 +204,12 @@ class Parser {
                     // Parse time only
                     time = LocalTime.parse(dateTimeArr[0], Task.TIME_FORMATTER);
                 } catch (Exception errorAgain) {
-                    throw new DukeException("Oof. Unable to parse both time and date.\n" 
+                    throw new RoriException("Oof. Unable to parse both time and date.\n" 
                         + "Please use \'help\' for the formatting of time and date");
                 }
             }
         } else {
-            throw new DukeException("Oof. There seems to be a formatting issue.\n" 
+            throw new RoriException("Oof. There seems to be a formatting issue.\n" 
                     + "Please use \'help\' for the formatting of time and date");
         }
 
@@ -217,9 +219,9 @@ class Parser {
     /**
      * Returns a tutorial command containing templates for todo, deadline and event.
      * @return a tutorial command
-     * @throws DukeException When gettign error creating the tasks.
+     * @throws RoriException When gettign error creating the tasks.
      */
-    private TutorialCommand createTutorialCommand() throws DukeException {
+    private TutorialCommand createTutorialCommand() throws RoriException {
         Command addTodo = parseToCommand("todo This is a Todo.");
         Command addDeadline = parseToCommand("deadline This is a Deadline. /by 12/09/2019 10:10");
         Command addEvent = parseToCommand("event This is an Event. /at 12/09/2019");
@@ -227,18 +229,18 @@ class Parser {
     }
 
     /**
-     * Returns a String containing the response of duke for whether the user wants a tutorial.
+     * Returns a String containing the response of rori for whether the user wants a tutorial.
      * @param input The user's input
-     * @return a String of duke's response.
+     * @return a String of rori's response.
      */
     public String parseTutorialResponse(
-            String input, DukeManager dukeManager, Ui uiManager) throws DukeException {
+            String input, RoriManager roriManager, Ui uiManager) throws RoriException {
         if (input.toLowerCase().equals("yes")) {
-            return dukeManager.runDuke("tutorial");
+            return roriManager.runRori("tutorial");
         } else if (input.toLowerCase().equals("no")) {
             return uiManager.printNoTutorial();
         } else {
-            throw new DukeException("Oof. I do not understand. If you need help, type \'help\'.");
+            throw new RoriException("Oof. I do not understand. If you need help, type \'help\'.");
         }
     }
 
@@ -246,22 +248,22 @@ class Parser {
      * Throws an Input Exception when a 2-or-more-Words String has only the word itself.
      * 
      * @param action The input Command/Action
-     * @throws DukeException As the description of a 2-or-more-Words String is only 1-word.
+     * @throws RoriException As the description of a 2-or-more-Words String is only 1-word.
      */
-    private void throwInputError(Action action) throws DukeException {
+    private void throwInputError(Action action) throws RoriException {
         switch (action) {
         case TODO :
-            throw new DukeException("Oof. The description of a todo cannot be empty.");
+            throw new RoriException("Oof. The description of a todo cannot be empty.");
         case DEADLINE :
-            throw new DukeException("Oof. The description of a deadline cannot be empty.");
+            throw new RoriException("Oof. The description of a deadline cannot be empty.");
         case EVENT :
-            throw new DukeException("Oof. The description of a event cannot be empty."); 
+            throw new RoriException("Oof. The description of a event cannot be empty."); 
         case DONE :
-            throw new DukeException("Oof. The description of a done cannot be empty.");
+            throw new RoriException("Oof. The description of a done cannot be empty.");
         case DELETE :
-            throw new DukeException("Oof. The description of a delete cannot be empty.");
+            throw new RoriException("Oof. The description of a delete cannot be empty.");
         default :
-            throw new DukeException("Oof. I apologize but I don't understand.");
+            throw new RoriException("Oof. I apologize but I don't understand.");
         }
     }
 

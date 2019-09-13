@@ -1,13 +1,13 @@
 /**
  * Represents an Exception that is solely for this program.
  */
-class DukeException extends Exception {
+class RoriException extends Exception {
     /**
-     * Constructor for DukeException.
+     * Constructor for RoriException.
      * 
      * @param message Message of the error.
      */
-    public DukeException(String message) {
+    public RoriException(String message) {
         super(message);
     }
 }

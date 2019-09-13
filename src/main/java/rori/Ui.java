@@ -50,7 +50,7 @@ class Ui {
     }
 
     /**
-     * Clears the output of the duke program. Used mainly in tutorial.
+     * Clears the output of the rori program. Used mainly in tutorial.
      */
     public void clear() {
         this.output.setLength(0);
@@ -64,12 +64,12 @@ class Ui {
     }
 
     /**
-     * Appends the welcome message at the initialization of the Duke program.
+     * Appends the welcome message at the initialization of the Rori program.
      * 
-     * @see DukeManager#initializeDuke()
+     * @see RoriManager#initializeRori()
      */
     public String printWelcome() {
-        String welcome = ("Hello, I am Duke.\n" 
+        String welcome = ("Hello, I am Rori.\n" 
                 + "If you need help, type \'help\' anytime.\n"
                 + "What can I do for you?\n");
         return welcome;
@@ -103,7 +103,7 @@ class Ui {
     /**
      * Appends to indicate user they have something to input.
      * 
-     * @see DukeManager#initializeDuke()
+     * @see RoriManager#initializeRori()
      */
     public void printWhatToDo() {
         this.output.append("What would you like to do?\n");
@@ -155,7 +155,7 @@ class Ui {
     }
 
     /**
-     * Appends that Duke is currently searching the tasks for the String.
+     * Appends that Rori is currently searching the tasks for the String.
      * @param findString The String the user is searching for
      */
     public void printFinding(String findString) {
@@ -208,34 +208,61 @@ class Ui {
      */
     public void printHelp() {
         assert isEmpty() : "About to print items before help page.";
-        this.output.append("Hello this is Duke's help page.\n");
-        this.output.append("There are 8 main features excluding help and tutorial\n");
-        
-        this.output.append("1. \'list\': Prints your current tasks.\n");
-        
-        this.output.append("2. \'todo myTask\' Keeps track of a to-do\n");
-        
-        this.output.append("3. \'deadline myTask /by myDate\' Records a deadline\n");
-        this.output.append("Format of myDate can be in date, time or both: \n");
-        this.output.append("DD/MM/YYYY HH:mm\n");
-        this.output.append("DD/MM/YYYY\n");
-        this.output.append("hh:mm\n");
-
-        this.output.append("4. \'event myTask /at myDate\' to Records an event.\n");
-        this.output.append("Format of myDate can be in date, time or both: \n");
-        this.output.append("DD/MM/YYYY HH:mm\n");
-        this.output.append("DD/MM/YYYY\n");
-        this.output.append("hh:mm\n");
-        
-        this.output.append("5. \'done number\' Complete a task of the respective number.\n");
-
-        this.output.append("6. \'delete number\' Removes a task of the respective number.\n");
-        
-        this.output.append("7. \'find myWord\' Finds myWord in all of the Tasks\n");
-        
-        this.output.append("8. \'bye\' to exit. What else?\n");
-
+        this.output.append("Hello this is Rori's help page.\n");
+        this.output.append("There are 8 main commands excluding help and tutorial\n");
+        this.output.append("1. list\n2. todo\n3. deadline\n4. event\n"
+                + "5. done\n6. delete\n7. find\n8. bye\n");
+        this.output.append("Type \'help myCommand\' to see the different features for each command!\n");
         this.output.append("And if you ever need an example, type \'tutorial\' for one!\n");
+    }
+
+    /**
+     * Appends the given help to the user of the user's choice.
+     * 
+     * @param action The action which the user used
+     * @throws RoriException If the given method is not available.
+     */
+    public void printActionHelp(Action action) throws RoriException {
+        switch (action) {
+        case LIST :
+            this.output.append("\'list\': Prints your current tasks.\n");
+            break;
+        case TODO :
+            this.output.append("\'todo myTask\' Keeps track of a to-do\n");
+            break;
+        case DEADLINE :
+            this.output.append("\'deadline myTask /by myDate\' Records a deadline\n");
+            this.output.append("Format of myDate can be in date, time or both: \n");
+            this.output.append("DD/MM/YYYY HH:mm\n");
+            this.output.append("DD/MM/YYYY\n");
+            this.output.append("hh:mm\n");
+            break;
+        case EVENT :
+            this.output.append("\'event myTask /at myDate\' to Records an event.\n");
+            this.output.append("Format of myDate can be in date, time or both: \n");
+            this.output.append("DD/MM/YYYY HH:mm\n");
+            this.output.append("DD/MM/YYYY\n");
+            this.output.append("hh:mm\n");
+            break;
+        case DONE :
+            this.output.append("\'done number\' Complete a task of the respective number.\n");
+            break;
+        case DELETE :
+            this.output.append("\'delete number\' Removes a task of the respective number.\n");
+            break;
+        case FIND :
+            this.output.append("\'find myWord\' Finds myWord in all of the Tasks\n");
+            break;
+        case EXIT :
+            this.output.append("\'bye\' to exit. What else?\n");
+            break;
+        case TUTORIAL :
+            this.output.append("\'tutorial\' to give you 3 examples into your save file.");
+            break;
+        default :
+            throw new RoriException("Oof. For the list of commands, type \'help\'.");
+            
+        }
     }
 
     /**

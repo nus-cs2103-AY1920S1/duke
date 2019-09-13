@@ -7,15 +7,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Rori using FXML.
  */
 public class Main extends Application {
-    private Duke duke;
-    private DukeManager dukeManager;
+    private Rori rori;
+    private RoriManager roriManager;
 
     public Main() throws Exception {
-        duke = new Duke();
-        dukeManager = duke.getDukeManager();
+        rori = new Rori();
+        roriManager = rori.getRoriManager();
     }
 
     @Override
@@ -25,17 +25,17 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setRori(rori);
             stage.show();
-            beginDukeMessages(fxmlLoader);
+            beginRoriMessages(fxmlLoader);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void beginDukeMessages(FXMLLoader fxmlLoader) {
+    private void beginRoriMessages(FXMLLoader fxmlLoader) {
         fxmlLoader.<MainWindow>getController().welcomeMessage();
-        if (this.dukeManager.getFirstTime()) {
+        if (this.roriManager.getFirstTime()) {
             fxmlLoader.<MainWindow>getController().tutorialMessage();
         }
     }

@@ -15,11 +15,11 @@ class AddCommand implements Command {
      * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file.
-     * @throws DukeException When there is an error serializing.
+     * @throws RoriException When there is an error serializing.
      * @see Command#execute(Ui, TaskList, Storage)
      */
     @Override
-    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
+    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws RoriException {
         assert this.task != null;
         taskList.addTask(this.task);
         uiManager.printAddTask(task, taskList.listSize());

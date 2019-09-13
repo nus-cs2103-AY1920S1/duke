@@ -1,10 +1,10 @@
 /**
- * Represents a command created by the Parser and executed by DukeManager.
+ * Represents a command created by the Parser and executed by RoriManager.
  */
 interface Command {
     /**
      * Executes a certain command or action that is read by the Parser and is called
-     * in the DukeManager class.
+     * in the RoriManager class.
      * 
      * <p>There is 6 different classes which implements this class.
      * AddCommand, DoneCommand, DeleteCommand, ListCommand, FindCommand, HelpCommand, ExitCommand
@@ -13,7 +13,7 @@ interface Command {
      * @param uiManager Ui System which scans and print for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file.
-     * @throws DukeException When a DukeException occurs
+     * @throws RoriException When a RoriException occurs
      */
-    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException;
+    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws RoriException;
 }

@@ -12,7 +12,7 @@ class ListCommand implements Command {
      * @see Command#execute(Ui, TaskList, Storage)
      */
     @Override
-    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
+    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws RoriException {
         if (taskList.listSize() == 0) {
             uiManager.printEmptyList();
         } else {

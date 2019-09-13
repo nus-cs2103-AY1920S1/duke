@@ -15,9 +15,9 @@ class Deadline extends Task {
      * 
      * @param task A String of the user's inputted task.
      * @param dateTime A String of the user's inputted date, time, or both.
-     * @throws DukeException When the user inputs a illegitamate date, time, both or wrong format.
+     * @throws RoriException When the user inputs a illegitamate date, time, both or wrong format.
      */
-    public Deadline(String task, LocalDate date, LocalTime time) throws DukeException {
+    public Deadline(String task, LocalDate date, LocalTime time) throws RoriException {
         super(task);
         assert date != null || time != null : "Both date and time are null";
         this.date = date;

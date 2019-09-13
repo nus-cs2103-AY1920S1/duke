@@ -25,7 +25,7 @@ class DoneCommand implements Command {
      * @see Command#execute(Ui, TaskList, Storage)
      */
     @Override
-    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
+    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws RoriException {
         assert this.taskNumber != null : "taskNumber not found";
         Task task = taskList.getTask(this.taskNumber - 1);
         if (task.hasCompleted()) {

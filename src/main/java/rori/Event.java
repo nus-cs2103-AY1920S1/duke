@@ -14,9 +14,9 @@ class Event extends Task {
      * @param task A String of the user's inputted task.
      * @param date The date of the event - can be null
      * @param time The time of the event - can be null;
-     * @throws DukeException When the user inputs a illegitamate date, time, both or wrong format.
+     * @throws RoriException When the user inputs a illegitamate date, time, both or wrong format.
      */
-    public Event(String task, LocalDate date, LocalTime time) throws DukeException {
+    public Event(String task, LocalDate date, LocalTime time) throws RoriException {
         super(task);
         assert date != null || time != null : "Both date and time are null";
         this.date = date;

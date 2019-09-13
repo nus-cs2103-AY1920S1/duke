@@ -36,13 +36,13 @@ class TaskList implements Serializable {
      * 
      * @param index The index of the task to be deleted
      * @return The task that is deleted
-     * @throws DukeException When failing to delete a task due to out-of-bound error.
+     * @throws RoriException When failing to delete a task due to out-of-bound error.
      */
-    public Task deleteTask(int index) throws DukeException {
+    public Task deleteTask(int index) throws RoriException {
         try {
             return this.taskList.remove(index);
         } catch (Exception e) {
-            throw new DukeException("Oof. The given task number is not found.");
+            throw new RoriException("Oof. The given task number is not found.");
         }
     }
 
@@ -60,13 +60,13 @@ class TaskList implements Serializable {
      * 
      * @param index The index of the task to be retrieve
      * @return The task from the task list of the given index
-     * @throws DukeException When the Task index is not found
+     * @throws RoriException When the Task index is not found
      */
-    public Task getTask(int index) throws DukeException {
+    public Task getTask(int index) throws RoriException {
         try {
             return this.taskList.get(index);
         } catch (Exception e) {
-            throw new DukeException("Oof. The given task number is not found.");
+            throw new RoriException("Oof. The given task number is not found.");
         }
     }
 

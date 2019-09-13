@@ -19,11 +19,11 @@ class FindCommand implements Command {
      * @param uiManager Ui System which scans and prints for the User.
      * @param taskList TaskList, an ArrayList which stores Tasks.
      * @param storeManager Storage to serialize the TaskList into a Tasks.sav file. - Not in use
-     * @throws DukeException When failing to get the task.
+     * @throws RoriException When failing to get the task.
      * @see Command#execute(Ui, TaskList, Storage)
      */
     @Override
-    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws DukeException {
+    public void execute(Ui uiManager, TaskList taskList, Storage storeManager) throws RoriException {
         assert this.findString != null : "findString is invalid";
         int index = 1;
         uiManager.printFinding(this.findString);

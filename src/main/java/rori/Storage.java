@@ -17,7 +17,7 @@ class Storage {
     /**
      * Constructor for Storage. 
      * 
-     * <p>In the DukeManager, the filepath is given "Tasks.sav"
+     * <p>In the RoriManager, the filepath is given "Tasks.sav"
      * 
      * @param filePath Indicates the path of the file to be stored at.
      */
@@ -29,9 +29,9 @@ class Storage {
      * Serializes the Task List so it can be used again the file is opened.
      * 
      * @param taskList TaskList, an ArrayList which stores Tasks, is being serialized
-     * @throws DukeException When there is an error serializing the file.
+     * @throws RoriException When there is an error serializing the file.
      */
-    public void store(TaskList taskList) throws DukeException {
+    public void store(TaskList taskList) throws RoriException {
         assert this.tasks != null : "tasks file is invalid";
         try {
             FileOutputStream fileOut = new FileOutputStream(this.tasks.getPath());
@@ -40,25 +40,25 @@ class Storage {
             out.close();
             fileOut.close();
         } catch (IOException error) {
-            throw new DukeException("Oof. Unable to serialize the list to Tasks.sav. " 
+            throw new RoriException("Oof. Unable to serialize the list to Tasks.sav. " 
                     + "If there is already a Tasks.sav, please delete it.");
         }
     }
 
     /**
      * Returns a Tasklist that is deserialized from the file.
-     * However, if the file is corrupted, it will throw a DukeException error.
+     * However, if the file is corrupted, it will throw a RoriException error.
      * 
      * @return a Tasklist that is deserialized from the  file.
-     * @throws DukeException When the file is corrupted
+     * @throws RoriException When the file is corrupted
      */
-    public TaskList retrieve(DukeManager dukeManager) throws DukeException {
+    public TaskList retrieve(RoriManager roriManager) throws RoriException {
         assert this.tasks != null : "tasks file is invalid";
         if (!this.tasks.exists()) {
-            dukeManager.setFirstTime(true);
+            roriManager.setFirstTime(true);
             return createNewTaskList();
         } else {
-            dukeManager.setFirstTime(false);
+            roriManager.setFirstTime(false);
             return deserializeOldTaskList();
         }
     }
@@ -67,13 +67,13 @@ class Storage {
      * Returns an empty TaskList and creates a savefile for it.
      * 
      * @return an empty TaskList.
-     * @throws DukeException When failing to create a save file.
+     * @throws RoriException When failing to create a save file.
      */
-    private TaskList createNewTaskList() throws DukeException {
+    private TaskList createNewTaskList() throws RoriException {
         try {
             this.tasks.createNewFile();
         } catch (Exception e) {
-            throw new DukeException("Oof. Unable to create new sav file.");
+            throw new RoriException("Oof. Unable to create new sav file.");
         }
         TaskList taskList = new TaskList();
         store(taskList);
@@ -84,9 +84,9 @@ class Storage {
      * Returns a TaskList that was previously saved by deserializing the save file.
      * 
      * @return a previously saved TaskList.
-     * @throws DukeException When the save file is corrupted
+     * @throws RoriException When the save file is corrupted
      */
-    private TaskList deserializeOldTaskList() throws DukeException {
+    private TaskList deserializeOldTaskList() throws RoriException {
         try {
             // If the Tasks file exist
             FileInputStream fileIn = new FileInputStream(tasks.getPath());
@@ -111,18 +111,18 @@ class Storage {
     /**
      * Creates a new save file, and throw an error to ask user to restart the game.
      * 
-     * @throws DukeException When failing to create a save file.
+     * @throws RoriException When failing to create a save file.
      */
-    private void corruptedSaveFile() throws DukeException {
+    private void corruptedSaveFile() throws RoriException {
         // If the Tasks file is corrupted
         try {
             tasks.createNewFile();
         } catch (IOException error) {
-            throw new DukeException("Oof. Unable to create new sav file.");
+            throw new RoriException("Oof. Unable to create new sav file.");
         }
         TaskList taskList = new TaskList();
         store(taskList);
-        throw new DukeException("Oof. Corrupted save file. "
+        throw new RoriException("Oof. Corrupted save file. "
                 + "I have rewrote the old save file with a new one. "
                 + "Please restart me again.");
     }

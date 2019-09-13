@@ -22,6 +22,8 @@ public class Parser {
             return new DeleteCommand();
         } else if (fullCommand.contains("todo") || fullCommand.contains("deadline") || fullCommand.contains("event")) {
             return new AddCommand();
+        } else if (fullCommand.contains("find")) {
+            return new FindCommand();
         }
         return new InvalidCommand();
     }

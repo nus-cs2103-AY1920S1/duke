@@ -1,7 +1,11 @@
 package seedu.duke.core;
 
 import seedu.duke.exception.DukeException;
-import seedu.duke.model.*;
+import seedu.duke.model.Cmd;
+import seedu.duke.model.CmdDelete;
+import seedu.duke.model.CmdDone;
+import seedu.duke.model.CmdList;
+import seedu.duke.model.CmdUpdate;
 import seedu.duke.model.dto.Task;
 
 import java.io.IOException;

@@ -3,9 +3,12 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.ui.MainWindow;
 import duke.ui.MessageHandler;
 import duke.utilities.Parser;
 import duke.utilities.Storage;
+
+import java.util.logging.Logger;
 
 /**
  * Driver class for Duke operations.

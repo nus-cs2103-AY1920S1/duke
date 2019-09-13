@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.Launcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.logging.Logger;
 
 
 /**
@@ -77,6 +79,7 @@ public class DialogBox extends HBox {
      * @return A <code>DialogBox</code> object with the duke's response and avatar
      */
     public static DialogBox getDukeDialog(String text, Image img) {
+
         var db = new DialogBox(text, img);
         db.flip();
         return db;

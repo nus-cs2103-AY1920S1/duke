@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Helper class for displaying user interface messages.
@@ -62,7 +63,6 @@ public class MessageHandler {
             } catch (IOException ioe) {
                 message += "\t File creation was not successful. \n";
                 message += "\t Exiting system.";
-                System.exit(-1);
             }
 
         }

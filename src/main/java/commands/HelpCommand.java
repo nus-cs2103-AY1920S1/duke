@@ -10,9 +10,12 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * This method is used to generate error message.
+     * This method is used to generate the help page for new users.
      *
-     * @return duke's response after error
+     * @param tasks   the TaskList object to be used in this command
+     * @param ui      the Ui object to be used in this command
+     * @param storage the Storage object to be used in this command
+     * @return duke opens the help file.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return new Storage("C:\\duke\\src\\main\\java\\data\\help.txt").accessHelp();

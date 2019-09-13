@@ -1,6 +1,5 @@
 package tasks;
 
-import java.text.ParseException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,8 +26,6 @@ public class Deadline extends Task {
 
     /**
      * This method is used to return the task list.
-     *
-     * @return date
      */
 
     public void getDate() {
@@ -37,10 +34,11 @@ public class Deadline extends Task {
         LocalDate d1 = LocalDate.parse(dateArray[0],formatter);
         date1 = d1.atTime(Integer.parseInt(dateArray[1]) / 100, Integer.parseInt(dateArray[1]) % 100);
     }
+
     @Override
     public void postpone(int daysToPostpone, int hoursToPostpone, int minutesToPostpone) {
-        date1 = date1.plus(Duration.ofDays(daysToPostpone)).
-                plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
+        date1 = date1.plus(Duration.ofDays(daysToPostpone))
+                .plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
     }
 
     @Override

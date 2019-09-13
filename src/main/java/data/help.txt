@@ -1,26 +1,14 @@
 List of commands with format:
 1. add
     todo [task name]
-    event [task name] [date and time with format dd/mm/yyyy] [start time: hhmm] [end time: hhmm]
+    event [task name] [date/time: dd/mm/yyyy] [start time: hhmm] [end time: hhmm]
     deadline [task name] [dd/mm/yyyy] [hhmm]
     Example: event party 01/01/2011 0800 1900
-
-2. delete [task number]
-    Example: delete 2
-
+2. delete [task number]     Example: delete 2
 3. done [task number]
-
 4. find [keyword]
-
 5. list
-
 6. postpone [task number]
-
-7. note [task number] [command]
-    note [task number] [notes]
-    note [task number] clear
-    note [task number] show
-
-8. bye
-    Exits the app.
+7. note [task number] [notes to add] *notes cannot be deleted!
+8. bye Exits the app.
 

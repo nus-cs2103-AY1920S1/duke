@@ -58,7 +58,10 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * This method returns a DialogBox for duke.
+     * Creates a new dialog box for duke.
+     * @param text text response by duke
+     * @param img image for duke
+     * @return DialogBox for duke
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

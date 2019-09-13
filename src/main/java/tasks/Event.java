@@ -13,8 +13,9 @@ public class Event extends Task {
 
     /**
      * This is a constructor for tasks.Deadline.
+     *
      * @param description description of task
-     * @param at start and end time of event
+     * @param at          start and end time of event
      */
 
     public Event(String description, String at) {
@@ -28,24 +29,24 @@ public class Event extends Task {
     /**
      * This method is used to generate the date of start and end
      * of the event as a LocalDateTime object.
-     *
      */
     public void getDate() {
         String[] dateArray = at.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate d1 = LocalDate.parse(dateArray[0],formatter);
-        LocalDate d2 = LocalDate.parse(dateArray[0],formatter);
+        LocalDate d1 = LocalDate.parse(dateArray[0], formatter);
+        LocalDate d2 = LocalDate.parse(dateArray[0], formatter);
         date1 = d1.atTime(Integer.parseInt(dateArray[1]) / 100, Integer.parseInt(dateArray[1]) % 100);
         date2 = d2.atTime(Integer.parseInt(dateArray[2]) / 100, Integer.parseInt(dateArray[2]) % 100);
     }
+
     @Override
     public void postpone(int daysToPostpone,
                          int hoursToPostpone, int minutesToPostpone) {
 
-        date1 = date1.plus(Duration.ofDays(daysToPostpone)).
-                plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
-        date2 = date2.plus(Duration.ofDays(daysToPostpone)).
-                plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
+        date1 = date1.plus(Duration.ofDays(daysToPostpone))
+                .plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
+        date2 = date2.plus(Duration.ofDays(daysToPostpone))
+                .plus(Duration.ofHours(hoursToPostpone)).plus(Duration.ofMinutes(minutesToPostpone));
 
         assert date1 != null;
         assert date2 != null;
@@ -53,6 +54,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + date1 + " to "+ date2 + ")" + super.getNotes();
+        return "[E]" + super.toString() + " (from: " + date1 + " to " + date2 + ")" + super.getNotes();
     }
 }

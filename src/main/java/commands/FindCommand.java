@@ -7,7 +7,7 @@ import tasks.Task;
 
 public class FindCommand extends Command {
     String keyword;
-    boolean foundAny = false;
+    boolean hasFound = false;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -17,19 +17,22 @@ public class FindCommand extends Command {
      * This method is used to find all related tasks given
      * a keyword from user input.
      *
+     * @param tasks   the TaskList object to be used in this command
+     * @param ui      the Ui object to be used in this command
+     * @param storage the Storage object to be used in this command
      * @return duke response after finding
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         assert keyword != null;
         String output = ui.print("Here are the matching tasks in your list:");
-        assert tasks.getList()!= null;
+        assert tasks.getList() != null;
         for (Task t : tasks.getList()) {
             if (t.toString().contains(keyword)) {
                 output += ("\n" + ui.print(t.toString()));
-                foundAny = true;
+                hasFound = true;
             }
         }
-        if (!foundAny) {
+        if (!hasFound) {
             return "Sorry, keyword not found!";
         }
 

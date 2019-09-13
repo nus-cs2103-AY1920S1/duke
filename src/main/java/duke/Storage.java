@@ -18,6 +18,11 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * This method is used to read the content of a help file.
+     *
+     * @return the help file's content as a String
+     */
     public String accessHelp() {
         Scanner sc = null;
         try {
@@ -28,10 +33,11 @@ public class Storage {
         String output = "";
         assert sc != null;
         while (sc.hasNextLine()) {
-             output += (sc.nextLine() + "\n");
+            output += (sc.nextLine() + "\n");
         }
         return output;
     }
+
     /**
      * This method is used to load the task list from disk.
      *
@@ -39,7 +45,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
-        Scanner sc1 =  new Scanner(file);
+        Scanner sc1 = new Scanner(file);
 
         while (sc1.hasNextLine()) {
             String[] oldList = sc1.nextLine().split(" // ");
@@ -75,7 +81,7 @@ public class Storage {
                 Task t = list.get(i - 1);
                 if (t.getSymbol().equals("T")) {
                     out.println(t.getSymbol() + " // " + (t.isDone() ? 1 : 0) + " // " + t.getDescription()
-                    + t.getNotes());
+                            + t.getNotes());
                 } else {
                     assert (t.getSymbol().equals("D") || t.getSymbol().equals("E"));
                     out.println(t.getSymbol() + " // " + (t.isDone() ? 1 : 0) + " // " + t.getDescription()

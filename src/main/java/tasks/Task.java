@@ -1,6 +1,5 @@
 package tasks;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Task {
@@ -9,6 +8,11 @@ public class Task {
     String symbol;
     private boolean hasNotes = false;
     ArrayList<String> noteList;
+
+    /**
+     * This is a constructor for Task.
+     * @param description description of task
+     */
 
     public Task(String description) {
         noteList = new ArrayList<>();
@@ -64,24 +68,35 @@ public class Task {
     /**
      * This method is used to mark a task as done.
      */
+
     public void markAsDone() {
         assert !isDone;
         isDone = true;
     }
 
+    /**
+     * Adds notes to a task.
+     * @param notes notes to add to task
+     */
     public void addNotes(String notes) {
         noteList.add(notes);
         hasNotes = true;
     }
 
 
-    public void postpone(int daysToPostpone, int hoursToPostpone, int minutesToPostpone) {};
+    public void postpone(int daysToPostpone, int hoursToPostpone, int minutesToPostpone) {
+
+    }
 
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Gets the notes written by user.
+     * @return notes in string format
+     */
     public String getNotes() {
         if (!hasNotes) {
             return "";

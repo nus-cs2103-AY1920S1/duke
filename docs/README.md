@@ -6,13 +6,13 @@
 Add Tasks to the current List of Duke.
 
     1. Todo Tasks
-	a. Consist of Description of Task only.
+        ...a. Consist of Description of Task only.
     2. Deadline Tasks
-	a. Consist of Description of Task.
-	b. Consist of Time whereby Task must be done by.
+        ...a. Consist of Description of Task.
+	...b. Consist of Time whereby Task must be done by.
     3. Event Tasks
-	a. Consist of Description of Task
-	b. Consist of Time whereby Task occurs at.
+	...a. Consist of Description of Task
+	...b. Consist of Time whereby Task occurs at.
 
 ### Feature 2
 Set Tasks as Done in Duke.
@@ -38,11 +38,13 @@ Adds the corresponding Task to the List in Duke.
 Example of usage: 
 
 `todo borrow book`
+
 `deadline return book /by 19/8/2019 1800`
 
 Expected outcome:
 
 `Adds a Todo Task to Duke that is represented as [T][X] borrow book`
+
 `Adds a Deadline Task to Duke that is represented as [D][X] return book (by: 19th of August 2019, 6:00pm)
 
 ### `done`

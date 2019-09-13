@@ -19,6 +19,11 @@ public class TaskList implements Serializable {
     this.recurringTasks = new HashSet<>();
   }
 
+  /**
+   * Adds a Task to the TaskList.
+   *
+   * @param task the task to add
+   */
   public void add(Task task) {
     this.tasks.add(task);
     if (task instanceof RecurringTask) {
@@ -29,18 +34,29 @@ public class TaskList implements Serializable {
     }
   }
 
-  public void remove(int i) {
+  /**
+   * Removes a Task from the TaskList.
+   *
+   * @param i index of the task in the tasklist
+   */
+  void remove(int i) {
     Task task = this.tasks.remove(i);
     if (task instanceof RecurringTask) {
       this.recurringTasks.remove(task);
     }
   }
 
+  /**
+   * Gets a Task from the TaskList.
+   *
+   * @param i index of the task in the tasklist
+   * @return the Task
+   */
   public Task get(int i) {
     return this.tasks.get(i);
   }
 
-  public Task getUnsafe(int i) throws InvalidIndexException {
+  Task getUnsafe(int i) throws InvalidIndexException {
     try {
       // Get task from tasks
       return this.tasks.get(i);
@@ -49,8 +65,7 @@ public class TaskList implements Serializable {
     }
   }
 
-  public void updateRecurringTasks() {
-    System.out.println(this.recurringTasks);
+  void updateRecurringTasks() {
     for (RecurringTask task : new HashSet<>(this.recurringTasks)) {
       RecurringTask current = task;
       while (current.isDone() || current.isOverDue()) {

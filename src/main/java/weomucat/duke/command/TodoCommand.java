@@ -21,7 +21,8 @@ public class TodoCommand extends Command<AddTaskCommandListener> {
   }
 
   @Override
-  public void setParameters(String body, HashMap<String, String> parameters) throws InvalidParameterException {
+  public void setParameters(String body, HashMap<String, String> parameters)
+      throws InvalidParameterException {
     this.task = TodoTask.create(body);
   }
 

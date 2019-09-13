@@ -70,6 +70,12 @@ public class DateRange implements Serializable {
         Date.format(to, pattern));
   }
 
+  /**
+   * Adds a duration to this DateRange.
+   *
+   * @param duration the duration to add
+   * @return new DateRange instance
+   */
   public DateRange plus(Duration duration) {
     Date from = this.from.plus(duration);
     Date to = this.to.plus(duration);

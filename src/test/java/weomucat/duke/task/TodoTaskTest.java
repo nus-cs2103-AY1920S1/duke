@@ -10,7 +10,7 @@ public class TodoTaskTest {
 
   @Test
   public void descriptionShouldNotBeEmptyString() {
-    assertThrows(InvalidParameterException.class, () -> new TodoTask(""), formatMessage(""));
+    assertThrows(InvalidParameterException.class, () -> TodoTask.create(""), formatMessage(""));
   }
 
   @Test
@@ -18,7 +18,7 @@ public class TodoTaskTest {
     String[] descriptions = {"one", "one two", "one two three"};
 
     for (String description : descriptions) {
-      assertDoesNotThrow(() -> new TodoTask(description), formatMessage(description));
+      assertDoesNotThrow(() -> TodoTask.create(description), formatMessage(description));
     }
   }
 

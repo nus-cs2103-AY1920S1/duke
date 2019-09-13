@@ -1,3 +1,5 @@
+package Exceptions;
+
 /**
  * Exception class for incorrect date format
  */

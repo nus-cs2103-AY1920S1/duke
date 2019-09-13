@@ -1,3 +1,9 @@
+package Command;
+
+import Utilities.Storage;
+import Utilities.TaskList;
+import Utilities.Ui;
+
 public class ByeCommand extends Command {
     public ByeCommand(String command) {
         super(command);

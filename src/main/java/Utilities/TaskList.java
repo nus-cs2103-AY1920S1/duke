@@ -1,3 +1,7 @@
+package Utilities;
+
+import Task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -23,15 +27,6 @@ public class TaskList {
     public TaskList(){
         this.list = new ArrayList<>();
     }
-
-    /*/**
-     * prints the tasks on the list in the format of list required
-     */
-    /*public void printForList(){
-        for (int i=1; i<=list.size(); i++) {
-            System.out.println(i + ". " + list.get(i-1).printer());
-        }
-    }*/
 
     /**
      * outputs the tasks on the list in the format for hard drive output
@@ -90,16 +85,16 @@ public class TaskList {
 
     /**
      * adds a new task to the list
-     * @param newTask is the Task to add
+     * @param newTask is the Task.Task to add
      */
     public void add(Task newTask){
         list.add(newTask);
     }
 
     /**
-     * to retrieve the Task
+     * to retrieve the Task.Task
      * @param x is the digit of the task in the list
-     * @return the Task
+     * @return the Task.Task
      */
     public Task get(int x){
         return list.get(x);

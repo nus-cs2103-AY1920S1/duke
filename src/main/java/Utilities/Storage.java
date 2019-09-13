@@ -1,3 +1,12 @@
+package Utilities;
+
+//import javafx.concurrent.Task;
+
+import Task.Deadline;
+import Task.Event;
+import Task.Task;
+import Task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -6,7 +15,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
- * Storage enables data to be retrieved and stored in the text file
+ * Utilities.Storage enables data to be retrieved and stored in the text file
  */
 public class Storage {
 
@@ -25,7 +34,7 @@ public class Storage {
 
     /**
      * to load the list from output
-     * @return ArrayList of tasks to create TaskList
+     * @return ArrayList of tasks to create Utilities.TaskList
      * @throws Exception in case BufferedReader is unable to read the filename
      */
     public ArrayList<Task> load() throws Exception  {
@@ -62,7 +71,7 @@ public class Storage {
     }
 
     /**
-     * empties out the output if required, but not the TaskList
+     * empties out the output if required, but not the Utilities.TaskList
      * @throws FileNotFoundException in case the filename is not found
      */
     public void emptyOutput() throws FileNotFoundException {

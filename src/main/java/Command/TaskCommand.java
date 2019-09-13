@@ -1,3 +1,13 @@
+package Command;
+
+import Exceptions.DukeException;
+import Task.Deadline;
+import Task.Event;
+import Task.ToDo;
+import Utilities.Storage;
+import Utilities.TaskList;
+import Utilities.Ui;
+
 public class TaskCommand extends Command {
     public TaskCommand(String command) {
         super(command);

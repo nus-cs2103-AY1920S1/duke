@@ -1,3 +1,9 @@
+package Command;
+
+import Utilities.Storage;
+import Utilities.TaskList;
+import Utilities.Ui;
+
 public abstract class Command {
     protected String command;
 

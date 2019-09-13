@@ -1,3 +1,9 @@
+package Task;
+
+import Exceptions.DukeException;
+import Utilities.Storage;
+import Utilities.TaskList;
+
 /**
  * contains actions for the todo task
  */
@@ -40,13 +46,13 @@ public class ToDo extends Task {
     }
 
     /**
-     * read user input as convert it into a Task
+     * read user input as convert it into a Task.Task
      * @param command is the user input string
-     * @return a Task (ToDo) object
+     * @return a Task.Task (Task.ToDo) object
      */
     public static Task outputAsToDo(String command){
         String[]segments = command.split("\\|");
-        ToDo newTask = new ToDo(segments[2]);
+        ToDo newTask = new ToDo(segments[2].trim());
 
         if (segments[1].equals(" 1 ")) {
             newTask.taskDone();
@@ -56,11 +62,11 @@ public class ToDo extends Task {
     }
 
     /**
-     * Creates a new ToDo task
+     * Creates a new Task.ToDo task
      * @param command is the user string input to be processed
      * @throws Exception in case user inputs in an incorrect format
      */
-    public static void createTodo(String command, TaskList tasks, Storage storage) throws DukeException{
+    public static void createTodo(String command, TaskList tasks, Storage storage) throws DukeException {
         String[]splitWords = command.trim().split("\\s",2);
         String midCommand = splitWords[1].trim();
 

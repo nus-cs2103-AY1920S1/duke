@@ -8,6 +8,8 @@ package duke.command;
  */
 public class ListCommand extends Command {
 
+    public static final String KEYWORD = "list";
+
     /**
      * Prints out a string representation of TaskList object to the
      * screen for the user to view.

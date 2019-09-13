@@ -10,8 +10,10 @@ import duke.exception.DukeException;
  * @see Command
  */
 public class SaveCommand extends Command {
-    private String filePath;
 
+    public static final String KEYWORD = "save";
+
+    private String filePath;
 
     /**
      * Returns a SaveCommand object that will attempt to change the current

@@ -10,6 +10,8 @@ import duke.task.Todo;
  */
 public class TodoCommand extends NewTaskCommand {
 
+    public static final String KEYWORD = "todo";
+
     /**
      * Returns a TodoCommand object that can be executed to
      * create a Todo object and add it to the current TaskList.

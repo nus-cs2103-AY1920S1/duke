@@ -8,6 +8,9 @@ import duke.task.TaskList;
  * @see Command
  */
 public class FindCommand extends Command {
+
+    public static final String KEYWORD = "find";
+
     private String searchWord;
 
     /**

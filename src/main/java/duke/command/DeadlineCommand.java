@@ -11,6 +11,8 @@ import duke.task.Deadline;
  */
 public class DeadlineCommand extends NewTaskCommand {
 
+    public static final String KEYWORD = "deadline";
+
     /**
      * Returns a DeadlineCommand object that can be executed to
      * create a Deadline object and add it to the current TaskList.

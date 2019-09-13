@@ -11,6 +11,8 @@ import duke.task.Event;
  */
 public class EventCommand extends NewTaskCommand {
 
+    public static final String KEYWORD = "event";
+
 
     /**
      * Returns an EventCommand object that can be executed to

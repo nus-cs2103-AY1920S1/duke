@@ -10,6 +10,9 @@ import duke.task.Task;
  * @see Command
  */
 public class DoneCommand extends Command {
+
+    public static final String KEYWORD = "done";
+
     private int taskId;
 
     /**

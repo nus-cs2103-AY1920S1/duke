@@ -8,6 +8,9 @@ import duke.task.Task;
  * the stored list in Duke.
  */
 public class DeleteCommand extends Command {
+
+    public static final String KEYWORD = "delete";
+
     private int taskId;
 
     /**

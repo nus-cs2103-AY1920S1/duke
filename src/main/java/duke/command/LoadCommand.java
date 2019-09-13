@@ -13,8 +13,10 @@ import duke.task.TaskList;
  * @see SaveCommand
  */
 public class LoadCommand extends Command {
-    private String filePath;
 
+    public static final String KEYWORD = "load";
+
+    private String filePath;
 
     /**
      * Returns a LoadCommand object.

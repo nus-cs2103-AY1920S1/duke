@@ -8,6 +8,8 @@ import duke.exception.DukeShutDownException;
  */
 public class ByeCommand extends Command {
 
+    public static final String KEYWORD = "bye";
+
     /**
      * Throws a DukeShutDownException, which should be handled by the
      * main Duke program as it sees fit.

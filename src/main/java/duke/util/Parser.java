@@ -34,25 +34,25 @@ public class Parser {
         String command = parameters[0];
 
         switch (command) {
-        case "list":
+        case ListCommand.KEYWORD:
             return new ListCommand();
-        case "bye":
+        case ByeCommand.KEYWORD:
             return new ByeCommand();
-        case "done":
+        case DoneCommand.KEYWORD:
             return Parser.parseDoneCommand(parameters);
-        case "delete":
+        case DeleteCommand.KEYWORD:
             return Parser.parseDeleteCommand(parameters);
-        case "todo":
+        case TodoCommand.KEYWORD:
             return Parser.parseTodoCommand(parameters);
-        case "event":
+        case EventCommand.KEYWORD:
             return Parser.parseEventCommand(parameters);
-        case "deadline":
+        case DeadlineCommand.KEYWORD:
             return Parser.parseDeadlineCommand(parameters);
-        case "find":
+        case FindCommand.KEYWORD:
             return Parser.parseFindCommand(parameters);
-        case "load":
+        case LoadCommand.KEYWORD:
             return Parser.parseLoadCommand(parameters);
-        case "save":
+        case SaveCommand.KEYWORD:
             return Parser.parseSaveCommand(parameters);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, "

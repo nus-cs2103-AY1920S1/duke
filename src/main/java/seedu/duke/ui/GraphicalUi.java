@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.statistic.Statistic;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -12,10 +13,14 @@ import seedu.duke.tasklist.TaskList;
  * Unnecessary underscores and spaces have been removed from the CLI's implementation.
  */
 public class GraphicalUi extends Ui {
+    private Boolean isCommandLineInterface;
+    private Boolean isGraphicalUserInterface;
     /**
      * Default constructor.
      */
     public GraphicalUi(){
+        isCommandLineInterface = false;
+        isGraphicalUserInterface = true;
     }
 
     /**
@@ -163,4 +168,48 @@ public class GraphicalUi extends Ui {
                 + numOfTaskRemaining + " tasks in the list.\n";
         return output;
     }
+
+    public String getAllStatSequence(Statistic stat) {
+        String output = "Listing all statistics:"
+                + "Total Commands Executed:    " + stat.getTotalCommandsExecuted()
+                + "Total Tasks Deleted:        " + stat.getTotalTasksDeleted()
+                + "Total To-Dos Completed:     " + stat.getTotalTodosCompleted()
+                + "Total Deadlines Completed:  " + stat.getTotalDeadlinesCompleted()
+                + "Total Events Completed:     " + stat.getTotalEventsCompleted()
+                + "\n";
+        return output;
+    }
+
+    public String getResetStatSequence(Statistic stat) {
+        String output = "All statistics have been reset\n";
+        output += getAllStatSequence(stat);
+        return output;
+    }
+
+
+    public String getCompletedEventStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int eventsCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
+        if (eventsCompleted == 0){
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+
+
+        String output = "\nEvents completed today: "
+                + eventsCompleted
+                + "\n" + encouragement + "\n";
+        return output;
+    }
+
+    public Boolean isCommandLineInterface() {
+        return this.isCommandLineInterface;
+    }
+
+    public Boolean isGraphicalUserInterface() {
+        return this.isGraphicalUserInterface;
+    }
+
+
 }

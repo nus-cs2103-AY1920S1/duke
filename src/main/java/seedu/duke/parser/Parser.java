@@ -1,15 +1,12 @@
 package seedu.duke.parser;
 
+import seedu.duke.command.*;
+import seedu.duke.ui.Ui;
+
 /**
  * Parser class helps to parse the user string.
  */
 public class Parser {
-
-    /**
-     * Default constructor of the Parser class.
-     */
-    public Parser(){
-    }
 
     /**
      * Returns the first word of the string fullCommand.
@@ -19,6 +16,10 @@ public class Parser {
     public static String parseCommand(String fullCommand) {
         return (fullCommand.split(" ")[0]);
 
+    }
+
+    public static String parseStatCommand(String fullCommand) {
+        return (fullCommand.split(" ")[1]);
     }
 
     /**
@@ -88,5 +89,99 @@ public class Parser {
     public static String getFindTask(String fullCommand) {
         return (fullCommand.substring(5));
 
+    }
+
+    public static Command getCommand(String fullCommand, Ui ui) {
+        String taskType = parseCommand(fullCommand);
+
+        // Initialize commannd with UnknownCommand
+        Command command = new UnknownCommand();
+
+        switch(taskType) {
+
+        case ("list"):
+
+            command = new ListCommand();
+            break;
+
+        case ("done"):
+
+            command = new DoneCommand();
+            break;
+
+        case("todo"):
+
+            command = new TodoCommand();
+            break;
+
+        case("deadline"):
+
+            command = new DeadlineCommand();
+            break;
+
+        case("event"):
+
+            command = new EventCommand();
+            break;
+
+        case("delete"):
+
+            command = new DeleteCommand();
+            break;
+
+        case("find"):
+
+            command = new FindCommand();
+            break;
+
+        case("bye"):
+
+            if (ui.isCommandLineInterface()) {
+                command = new ByeCommandCli();
+            } else if (ui.isGraphicalUserInterface()){
+                command = new ByeCommandGui();
+            } else {
+                command = new UnknownCommand();
+            }
+
+            break;
+
+        case("stats"):
+
+            String statCommandType = Parser.parseStatCommand(fullCommand);
+
+            switch(statCommandType) {
+
+            case ("all"):
+
+                command = new StatsAllCommand();
+                break;
+
+            case ("reset"):
+
+                command = new StatsResetCommand();
+                break;
+
+            case("event"):
+
+                command = new StatsEventCommand();
+                break;
+
+            default:
+
+                command = new UnknownCommand();
+                break;
+            }
+
+            break;
+
+        default:
+
+            command = new UnknownCommand();
+            break;
+
+        }
+
+        return command;
     }
 }

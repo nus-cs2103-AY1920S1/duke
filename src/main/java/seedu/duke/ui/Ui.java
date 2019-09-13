@@ -1,7 +1,6 @@
 package seedu.duke.ui;
 
-import seedu.duke.DukeException;
-
+import seedu.duke.statistic.Statistic;
 import seedu.duke.task.Event;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Task;
@@ -86,5 +85,15 @@ public abstract class Ui {
      * @return String.
      */
     public abstract String getDoneSequence(TaskList tasks, int taskNum);
+
+    public abstract String getResetStatSequence(Statistic stats);
+
+    public abstract String getAllStatSequence(Statistic stats);
+
+    public abstract String getCompletedEventStatSequence(Statistic stat, TaskList tasks);
+
+    public abstract Boolean isCommandLineInterface();
+
+    public abstract Boolean isGraphicalUserInterface();
 
 }

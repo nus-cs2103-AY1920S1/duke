@@ -1,7 +1,7 @@
 package seedu.duke.task;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import seedu.duke.statistic.Statistic;
 
 /**
  * Task class represents a Task created by the user.
@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
  * Attribute isDone holds the status of completion of a task.
  * Attribute possibleTaskTypes is an enumerated list of the possible task types ie DEFAULT, DEADLINE, EVENT, TODO.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected PossibleTaskTypes taskType;
-    protected LocalDate createdDate;
-    protected LocalDate lastModified;
+    protected LocalDateTime createDateTime;
+    protected LocalDateTime lastModifiedDateTime;
 
 
     /**
@@ -28,8 +28,8 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.taskType = PossibleTaskTypes.DEFAULT;
-        this.createdDate = LocalDate.now();
-        this.lastModified = LocalDate.now();
+        this.createDateTime = LocalDateTime.now();
+        this.lastModifiedDateTime = LocalDateTime.now();
     }
 
     /**
@@ -38,12 +38,12 @@ public class Task {
      * @param description Description String of the task.
      * @param isDone Boolean status of the task.
      */
-    public Task(String description, Boolean isDone, LocalDate createdDate, LocalDate lastModified) {
+    public Task(String description, Boolean isDone, LocalDateTime createDateTime, LocalDateTime lastModified) {
         this.description = description;
         this.isDone = isDone;
         this.taskType = PossibleTaskTypes.DEFAULT;
-        this.createdDate = createdDate;
-        this.lastModified = lastModified;
+        this.createDateTime = createDateTime;
+        this.lastModifiedDateTime = lastModified;
     }
 
     /**
@@ -75,7 +75,7 @@ public class Task {
     /**
      * Setter function for setting a Task isDone from false to true.
      */
-    public void setDone() {
+    public void setDone(Statistic stats) {
         if (!this.isDone) {
             this.isDone = true;
             updateLastModified();
@@ -160,16 +160,19 @@ public class Task {
         return this.isDone;
     }
 
-    public LocalDate getCreatedDate() {
-        return this.createdDate;
+    public LocalDateTime getCreateDateTime() {
+        return this.createDateTime;
     }
 
-    public LocalDate getLastModifiedDate() {
-        return this.lastModified;
+    public LocalDateTime getLastModifiedDateTime() {
+        return this.lastModifiedDateTime;
     }
 
     public void updateLastModified(){
-        this.lastModified = LocalDate.now();
+
+        this.lastModifiedDateTime = LocalDateTime.now();
     }
+
+    public abstract char getTaskType();
 }
 

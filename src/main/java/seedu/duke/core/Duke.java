@@ -1,6 +1,10 @@
-package seedu.duke;
+package seedu.duke.core;
 
+import seedu.duke.command.ByeCommandCli;
+import seedu.duke.command.Command;
+import seedu.duke.command.UnknownCommand;
 import seedu.duke.parser.Parser;
+import seedu.duke.statistic.Statistic;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
@@ -29,8 +33,10 @@ import javafx.scene.Scene;
  */
 public class Duke {
 
-    private Storage tasksStorage;
+    private Storage taskStorage;
+    private Storage statStorage;
     private TaskList tasks;
+    private Statistic stats;
     private CommandLineUi cli;
     private GraphicalUi gui;
 
@@ -43,15 +49,19 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/117.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/commando.jpg"));
 
+    private String taskFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
+    private String statFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
+
     /**
-     * Default constructor to support seedu.duke.Launcher of javaFX.
+     * Default constructor to support seedu.duke.core.Launcher of javaFX.
      */
     public Duke() {
-        String tasksFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
+        taskStorage = new Storage(taskFilePath);
+        statStorage = new Storage(statFilePath);
+
         gui = new GraphicalUi();
         cli = new CommandLineUi();
-        tasksStorage = new Storage(tasksFilePath);
-        String statsFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
+
     }
 
     /**
@@ -63,7 +73,8 @@ public class Duke {
     public Duke(String filePath) {
         gui = new GraphicalUi();
         cli = new CommandLineUi();
-        tasksStorage = new Storage(filePath);
+        taskStorage = new Storage(filePath);
+        statStorage = new Storage(this.statFilePath);
     }
 
     /**
@@ -108,7 +119,11 @@ public class Duke {
 
         try {
             // Loads the data from txt file to the TaskList object, tasks.
-            tasks = new TaskList(this.tasksStorage.loadTasks());
+            tasks = new TaskList(this.taskStorage.loadTasks());
+
+            // Loads the stats from txt file to the Statistic object, stats
+            stats = new Statistic(this.statStorage.loadStats());
+
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (DukeException e){
@@ -118,10 +133,16 @@ public class Duke {
         String output = "";
         try {
             output = executeTasksGui(input);
-            this.tasksStorage.clearFileBeforeSaving();
+
+            // Saves tasks to txt file before returning output to GUI.
+            this.taskStorage.clearTaskFileBeforeSaving();
             for (int i = 0; i < this.tasks.getSize(); i++) {
-                this.tasksStorage.writeToFile(this.tasks.getTask(i).toSaveString());
+                this.taskStorage.writeToTaskFile(this.tasks.getTask(i).toSaveString());
             }
+
+            // Saves stats file before returning output to GUI.
+            statStorage.saveStatFile(stats);
+
             return output;
         } catch (DukeException e) {
             DukeErrorInterface dei = (e1) -> e1.getMessage();
@@ -135,11 +156,15 @@ public class Duke {
      * Executes the Duke Command Line Interface.
      */
     public void run() {
+        Boolean isCommandLineInterface = true;
         System.out.println(cli.getWelcomeString());
-        Boolean isBye = false;
+        // Boolean isBye = false;
         try {
             // Loads the data from txt file to the TaskList object, tasks.
-            tasks = new TaskList(this.tasksStorage.loadTasks());
+            tasks = new TaskList(this.taskStorage.loadTasks());
+
+            // Loads the stats data from txt file.
+            stats = new Statistic(this.statStorage.loadStats());
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (DukeException e){
@@ -147,8 +172,27 @@ public class Duke {
         }
         // Creates scanner object to handle input.
         Scanner in = new Scanner(System.in);
-        String fullCommand = in.nextLine().trim();
+        //String fullCommand = in.nextLine().trim();
+        String fullCommand = "";
+        Command command = new UnknownCommand();
 
+
+        while ( command instanceof ByeCommandCli == false) {
+            String outputString = "";
+            fullCommand = in.nextLine().trim();
+            try {
+                command = Parser.getCommand(fullCommand, cli);
+                outputString = command.execute(fullCommand, cli, tasks, taskStorage, stats, statStorage);
+            } catch (IOException e) {
+                outputString = e.getMessage();
+            } catch (DukeException e) {
+                outputString = e.getMessage();
+            }
+            System.out.println(outputString);
+            //fullCommand = in.nextLine().trim();
+        }
+
+        /*
         while (!isBye) {
             try {
                 isBye = executeTasksCli(fullCommand);
@@ -167,6 +211,8 @@ public class Duke {
             }
             fullCommand = in.nextLine().trim();
         }
+
+         */
     }
 
     /**
@@ -178,9 +224,13 @@ public class Duke {
      * @throws IOException To catch file error when interacting with Storage class.
      */
     public Boolean executeTasksCli(String fullCommand) throws DukeException, IOException {
+
+        /*
+        // parseCommand will return the first word of fullCommand
         String taskType = Parser.parseCommand(fullCommand);
 
-        switch(taskType){
+        switch(taskType) {
+
         case ("list"):
             System.out.println(listRoutine(cli, tasks));
             break;
@@ -203,13 +253,33 @@ public class Duke {
             System.out.println(findRoutine(cli, tasks, fullCommand));
             break;
         case("bye"):
-            System.out.println(byeRoutineCli(cli, tasks, tasksStorage));
+            System.out.println(byeRoutineCli(cli, tasks, taskStorage, stats, statStorage));
             return true;
+        case("stats"):
+            String statCommandType = Parser.parseStatCommand(fullCommand);
+            switch(statCommandType){
+            case ("all"):
+                System.out.println(getAllStatsRoutine(cli, stats));
+                break;
+            case ("reset"):
+                System.out.println(resetStatsRoutine(cli, stats));
+                break;
+            case ("event"):
+                System.out.println(completedEventStatsRoutine(cli, stats, tasks));
+                break;
+            default:
+                unknownCommandRoutine();
+            }
+            break;
+
         default:
             unknownCommandRoutine();
             return false;
         }
         return false;
+
+         */
+        return true;
     }
 
     /**
@@ -223,7 +293,7 @@ public class Duke {
     public String executeTasksGui(String fullCommand) throws DukeException, IOException {
         String taskType = Parser.parseCommand(fullCommand);
 
-        switch(taskType){
+        switch (taskType){
         case ("list"):
             return listRoutine(gui, tasks);
         case ("done"):
@@ -255,6 +325,11 @@ public class Duke {
         throw new DukeException(":-( OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    public String completedEventStatsRoutine(Ui ui, Statistic stats, TaskList tasks) {
+        stats.incrementTotalCommandsExecuted();
+        return ui.getCompletedEventStatSequence(stats,tasks );
+    }
+
     /**
      * Executes and returns the String for the LIST command.
      *
@@ -263,6 +338,7 @@ public class Duke {
      * @return String that needs to be printed to the user after LIST command.
      */
     public String listRoutine(Ui ui, TaskList tasks) {
+        stats.incrementTotalCommandsExecuted();
         return ui.getListSequence(tasks);
     }
 
@@ -270,20 +346,21 @@ public class Duke {
      * Executes and returns the String for BYE command for CLI.
      * For CLI, txt file is saved during BYE command.
      *
-     * @param ui Ui object.
-     * @param tasks TaskList object.
-     * @param storage Storage object of the txt file.
-     * @return Bye string sequence.
-     * @throws IOException Exception threw when reading the file.
+     *
      */
-    public String byeRoutineCli(Ui ui, TaskList tasks, Storage storage) throws IOException {
-        storage.clearFileBeforeSaving();
-        // Clear the txt file and adds headers.
+    public String byeRoutineCli(Ui ui, TaskList tasks, Storage taskStorage, Statistic stat, Storage statStorage) throws IOException {
+        stats.incrementTotalCommandsExecuted();
+        // Clear the tasks txt file and adds headers.
+        taskStorage.clearTaskFileBeforeSaving();
 
         // Saves the task list to the file, following the pre-defined format.
         for (int i = 0; i < tasks.getSize(); i++) {
-            storage.writeToFile(tasks.getTask(i).toSaveString());
+            taskStorage.writeToTaskFile(tasks.getTask(i).toSaveString());
         }
+
+        // Saves the stats data to the stats file.
+        statStorage.saveStatFile(stat);
+
         return ui.getByeSequence();
     }
 
@@ -296,6 +373,7 @@ public class Duke {
      * @return Bye string sequence
      */
     public String byeRoutineGui(Ui ui, TaskList tasks) {
+        stats.incrementTotalCommandsExecuted();
         // For GUI, txt file is always saved after each change
         return (ui.getByeSequence());
     }
@@ -309,6 +387,7 @@ public class Duke {
      * @return Find string sequence.
      */
     public String findRoutine(Ui ui, TaskList tasks, String fullCommand) {
+        stats.incrementTotalCommandsExecuted();
         // Parser will parse the command and obtain the searchString.
         // findSimilarTasks will return a TaskList containing only matching tasks.
         TaskList similarTasks = tasks.findSimilarTasks(Parser.getFindTask(fullCommand));
@@ -325,6 +404,7 @@ public class Duke {
      * @throws DukeException Duke exception to handle invalid task index.
      */
     public String deleteRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
+        stats.incrementTotalCommandsExecuted();
         int taskNum = Parser.getDeletedTaskNum(fullCommand);
 
         // taskList index (starts from 0) differs from taskNum (starts from 1) by 1.
@@ -337,6 +417,9 @@ public class Duke {
 
         Task taskToDelete = tasks.getTask(taskNum);
         tasks.deleteTask(taskNum);
+
+        stats.incrementTotalTasksDeleted();
+
         return ui.getDeleteSequence(tasks, taskToDelete);
     }
 
@@ -350,6 +433,7 @@ public class Duke {
      * @throws DukeException Handles the error case when there is no description or location.
      */
     public String eventRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
+        stats.incrementTotalCommandsExecuted();
         if ((fullCommand.length() < 6)) {
             // Input is only "event".
 
@@ -381,6 +465,7 @@ public class Duke {
      * @throws DukeException To handle the case when description or time period is empty.
      */
     public String deadlineRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
+        stats.incrementTotalCommandsExecuted();
         if ((fullCommand.length() < 9)) {
 
             // fullCommand contains only the string "deadline".
@@ -417,6 +502,7 @@ public class Duke {
      * @throws DukeException Handles the case when description is empty.
      */
     public String todoRoutine(Ui ui, TaskList tasks, String fullCommand) throws DukeException {
+        stats.incrementTotalCommandsExecuted();
         if (fullCommand.length() < 5) {
             // fullCommand contains only the string "todo".
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -440,12 +526,14 @@ public class Duke {
      * @return Done string sequence.
      */
     public String doneRoutine(Ui ui, TaskList tasks, String fullCommand) {
+        stats.incrementTotalCommandsExecuted();
+
         int taskNum = Parser.getFinishedTaskNum(fullCommand);
 
         // taskList index (starts from 0) differs from taskNum (starts from 1) by 1,
         taskNum--;
 
-        tasks.getTask(taskNum).setDone();
+        tasks.getTask(taskNum).setDone(stats);
 
         return ui.getDoneSequence(tasks, taskNum);
     }
@@ -459,6 +547,15 @@ public class Duke {
         new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
     }
 
+    public String resetStatsRoutine(Ui ui, Statistic stats) {
+        stats.resetStats();
+        return ui.getResetStatSequence(stats);
+    }
+
+    public String getAllStatsRoutine(Ui ui, Statistic stats) {
+        stats.incrementTotalCommandsExecuted();
+        return ui.getAllStatSequence(stats);
+    }
 
     /**
      * possibleTasks  is an enumeration of the constant, pre-defined, recognizable commands.

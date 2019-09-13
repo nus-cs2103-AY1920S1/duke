@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.statistic.Statistic;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
@@ -11,11 +12,14 @@ import seedu.duke.tasklist.TaskList;
  */
 public class CommandLineUi extends Ui {
     private static final String underscore = "    ____________________________________________________________" + "\n";
-
+    private Boolean isCommandLineInterface;
+    private Boolean isGraphicalUserInterface;
     /**
      * Default constructor.
      */
     public CommandLineUi(){
+        isCommandLineInterface = true;
+        isGraphicalUserInterface = false;
     }
 
     /**
@@ -155,5 +159,44 @@ public class CommandLineUi extends Ui {
         String output = "\n     Now you have "
                 + numOfTaskRemaining + " tasks in the list.\n" + underscore;
         return output;
+    }
+
+    public String getAllStatSequence(Statistic stat) {
+        String output = "\n     Listing all statistics:"
+                + "\n     Total Commands Executed:    " + stat.getTotalCommandsExecuted()
+                + "\n     Total Tasks Deleted:        " + stat.getTotalTasksDeleted()
+                + "\n     Total To-Dos Completed:     " + stat.getTotalTodosCompleted()
+                + "\n     Total Deadlines Completed:  " + stat.getTotalDeadlinesCompleted()
+                + "\n     Total Events Completed:     " + stat.getTotalEventsCompleted()
+                + "\n" + underscore;
+        return output;
+    }
+
+    public String getResetStatSequence(Statistic stat) {
+        String output = "\n     All statistics have been reset";
+        output += getAllStatSequence(stat);
+        return output;
+    }
+
+    public String getCompletedEventStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int eventsCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
+        if (eventsCompleted == 0){
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\n     Events completed today: "
+                + stat.getCompletedEventsFromOneDayAgo(tasks)
+                + "\n     " + encouragement + "\n" + underscore;
+        return output;
+    }
+
+    public Boolean isCommandLineInterface() {
+        return this.isCommandLineInterface;
+    }
+
+    public Boolean isGraphicalUserInterface() {
+        return this.isGraphicalUserInterface;
     }
 }

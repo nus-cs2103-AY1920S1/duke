@@ -31,13 +31,13 @@ public class Todo extends TaskList {
 
     /**
      * <p>
-     *     to-do toString to print out to-do tasks
+     *     to-do toString to print out to-do tasks.
      * </p>
      * @return to-do task information
      */
     @Override
     public String toString() {
-        return  Integer.toString(getTaskNumber()) + ".[T]" +
-                getTaskCheck() + " " + getTaskName();
+        return  Integer.toString(getTaskNumber()) + ".[T]"
+                + getTaskCheck() + " " + getTaskName();
     }
 }

@@ -47,9 +47,23 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a DialogBox of user's dialog.
+     * @param text dialog
+     * @param img image of user
+     * @return DialogBox
+     */
+
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
+
+    /**
+     * Creates a DialogBox of duke's dialog.
+     * @param text dialog
+     * @param img image of duke
+     * @return DialogBox
+     */
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);

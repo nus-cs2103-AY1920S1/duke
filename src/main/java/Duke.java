@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Duke extends Application{
+public class Duke extends Application {
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -32,27 +32,9 @@ public class Duke extends Application{
     static ArrayList<TaskList> array = new ArrayList<>();
     static int num = 1;
 
-    /*public static void main(String[] args) {
-        /*String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
-
-        Scanner sc = new Scanner(System.in);
-        ArrayList<TaskList> array = new ArrayList<>();
-        Ui ui = new Ui();
-        int num = 1;
-
-        ui.run(sc, array, num);
-
-    }*/
-
     @Override
 
-    public void start(Stage stage) throws DukeExceptions{
+    public void start(Stage stage) throws DukeExceptions {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -98,14 +80,14 @@ public class Duke extends Application{
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            try{
+            try {
                 handleUserInput();
-            } catch(DukeExceptions d) {
+            } catch (DukeExceptions d) {
                 new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
@@ -114,7 +96,7 @@ public class Duke extends Application{
         userInput.setOnAction((event) -> {
             try {
                 handleUserInput();
-            } catch(DukeExceptions d) {
+            } catch (DukeExceptions d) {
                 new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
@@ -143,7 +125,7 @@ public class Duke extends Application{
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() throws DukeExceptions{
+    private void handleUserInput() throws DukeExceptions {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
@@ -157,12 +139,13 @@ public class Duke extends Application{
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) throws DukeExceptions{
+    public String getResponse(String input) throws DukeExceptions {
         Ui ui = new Ui(array, num);
-        if(input.equals("bye")) {
+        if (input.equals("bye")) {
             System.exit(0);
-        } else if (input.contains("todo") || input.contains("event") ||
-                    input.contains("deadline")) {
+        } else if (input.contains("todo")
+                || input.contains("event")
+                || input.contains("deadline")) {
             String wordOut = ui.run(input, array, num);
             num++;
             return wordOut;

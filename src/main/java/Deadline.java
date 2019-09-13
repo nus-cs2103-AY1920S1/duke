@@ -8,7 +8,7 @@ public class Deadline extends TaskList {
 
     /**
      * <p>
-     *     This is the Deadline constructor
+     *     This is the Deadline constructor.
      * </p>
      * @param taskNumber task number
      * @param taskCheck task status
@@ -25,7 +25,7 @@ public class Deadline extends TaskList {
 
     /**
      * <p>
-     *     getAB is used to retrieve due date
+     *     getAB is used to retrieve due date.
      * </p>
      * @return due date
      */
@@ -35,7 +35,7 @@ public class Deadline extends TaskList {
 
     /**
      * <p>
-     *     Deadline toString to print out Deadline tasks
+     *     Deadline toString to print out Deadline tasks.
      * </p>
      * @return Deadline task information
      */

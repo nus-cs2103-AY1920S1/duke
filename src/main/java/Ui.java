@@ -3,6 +3,7 @@
  */
 
 import java.util.ArrayList;
+
 public class Ui {
 
     static ArrayList<TaskList> array;
@@ -23,14 +24,14 @@ public class Ui {
      * @return response from Duke
      */
   
-    public String run(String input, ArrayList<TaskList> array, int num) throws DukeExceptions{
+    public String run(String input, ArrayList<TaskList> array, int num) throws DukeExceptions {
         Parser p = new Parser(array, num);
         String output = "";
-        if  (!input.equals("bye") && !input.equals("list") &&
-                !input.contains("done") && !input.contains("todo") &&
-                !input.contains("event") && !input.contains("deadline") &&
-                !input.contains("delete") && !(input.contains("find")) &&
-                !input.contains("stats") && !input.contains("reset")){
+        if  (!input.equals("bye") && !input.equals("list")
+                && !input.contains("done") && !input.contains("todo")
+                && !input.contains("event") && !input.contains("deadline")
+                && !input.contains("delete") && !(input.contains("find"))
+                && !input.contains("stats") && !input.contains("reset")) {
 
             assert !input.equals("bye") : "I do not know what this means.";
             assert !input.equals("list") : "I do not know what this means.";
@@ -46,8 +47,8 @@ public class Ui {
             output = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
             throw new DukeExceptions("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } else if (input.equals("todo") || input.equals("event") ||
-                input.equals("deadline") || input.equals("find")) {
+        } else if (input.equals("todo") || input.equals("event")
+                || input.equals("deadline") || input.equals("find")) {
 
             assert input.equals("todo") : "Needs more information";
             assert input.equals("event") : "Needs more information";
@@ -93,7 +94,7 @@ public class Ui {
             return p.callFind(input, array);
         } else if (input.equals("stats")) {
             return Statistics.getStats();
-        } else if(input.equals("reset")) {
+        } else if (input.equals("reset")) {
             Statistics.resetStats();
             Statistics stats = new Statistics();
             stats.addRecords(stats);

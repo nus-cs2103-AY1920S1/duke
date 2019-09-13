@@ -15,7 +15,7 @@ public class Event extends TaskList {
 
     /**
      * <p>
-     *     getAB is used to retrieve event date
+     *     getAB is used to retrieve event date.
      * </p>
      * @return event date
      */
@@ -26,13 +26,13 @@ public class Event extends TaskList {
 
     /**
      * <p>
-     *     Event toString to print out event tasks
+     *     Event toString to print out event tasks.
      * </p>
      * @return Event task information
      */
     @Override
     public String toString() {
-        return Integer.toString(getTaskNumber()) + ".[E]" + 
-          getTaskCheck() + getTaskName() + "at " + at;
+        return Integer.toString(getTaskNumber()) + ".[E]"
+                + getTaskCheck() + getTaskName() + "at " + at;
     }
 }

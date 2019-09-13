@@ -22,9 +22,9 @@ public class Statistics {
      */
 
     public void openFile() {
-        try{
+        try {
             statsFile = new Formatter("stats.txt");
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("you have an error");
         }
     }
@@ -82,11 +82,11 @@ public class Statistics {
      */
 
     static String getStats() {
-        return "Since " + dateStart + "\n" +
-                "You have done: " + "\n" +
-                todoDone + " Todo tasks" + "\n" +
-                eventDone + " Event tasks" + "\n" +
-                deadlineDone + " Deadline tasks";
+        return "Since " + dateStart + "\n"
+                + "You have done: " + "\n"
+                + todoDone + " Todo tasks" + "\n"
+                + eventDone + " Event tasks" + "\n"
+                + deadlineDone + " Deadline tasks";
     }
 
     /**
@@ -97,11 +97,11 @@ public class Statistics {
 
     public void addRecords(Statistics s) {
         s.openFile();
-        StringBuilder sB = new StringBuilder();
-        sB.append(dateStart);
-        sB.append("\n");
-        sB.append(getStats());
-        statsFile.format(sB.toString());
+        StringBuilder addString = new StringBuilder();
+        addString.append(dateStart);
+        addString.append("\n");
+        addString.append(getStats());
+        statsFile.format(addString.toString());
         statsFile.close();
     }
 

@@ -11,10 +11,10 @@ abstract class TaskList {
     private String taskName;
     private String type;
 
-    public TaskList(int i, String tC, String tN, String t) {
+    public TaskList(int i, String check, String name, String t) {
         taskNumber = i;
-        taskCheck = tC;
-        taskName = tN;
+        taskCheck = check;
+        taskName = name;
         type = t;
     }
 
@@ -23,7 +23,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     getTaskNumber is used to retrieve the task number
+     *     getTaskNumber is used to retrieve the task number.
      * </p>
      * @return the task number
      */
@@ -36,7 +36,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     getTaskCheck is used to check if the task is done or not
+     *     getTaskCheck is used to check if the task is done or not.
      * </p>
      * @return status of the task
      */
@@ -47,7 +47,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     getTaskName is used to retrieve the name of the task
+     *     getTaskName is used to retrieve the name of the task.
      * </p>
      * @return task's name
      */
@@ -60,7 +60,7 @@ abstract class TaskList {
   
     /**
      * <p>
-     *     getTyoe is used to retrieve the type of task given
+     *     getTyoe is used to retrieve the type of task given.
      * </p>
      * @return task's type
      */
@@ -71,7 +71,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     changeTaskCheck is used to mark the task as complete
+     *     changeTaskCheck is used to mark the task as complete.
      * </p>
      */
 
@@ -82,7 +82,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     printList is used to print out all the task in the list
+     *     printList is used to print out all the task in the list.
      * </p>
      * @param a the list of task
      */
@@ -98,7 +98,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     markAsDone is used to mark the given task as completed
+     *     markAsDone is used to mark the given task as completed.
      * </p>
      * @param i the completed task's number
      * @param a the list of task
@@ -111,7 +111,7 @@ abstract class TaskList {
         String currentTask = t.getTaskName();
         String getType = t.getType();
         TaskList doneTask;
-        if(getType.equals("todo")) {
+        if (getType.equals("todo")) {
             doneTask = new Todo(i, "[✓]", currentTask,
                     getType);
             a.set(i - 1, doneTask);
@@ -135,7 +135,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     addList adds the new task into the list and saves the list into a text file
+     *     addList adds the new task into the list and saves the list into a text file.
      * </p>
      * @param t the newly created TaskList object
      * @param a the list of task
@@ -145,8 +145,8 @@ abstract class TaskList {
     String addList(TaskList t, ArrayList<TaskList> a, int n) {
         String out = "Got it. I've added this task:";
         a.add(t);
-        out = out + "\n" + t + "\n" + "Now you have " + Integer.toString(n) +
-                " tasks in the list.";
+        out = out + "\n" + t + "\n" + "Now you have " + Integer.toString(n)
+                + " tasks in the list.";
 
         return out;
     }
@@ -154,7 +154,7 @@ abstract class TaskList {
 
     /**
      * <p>
-     *     deleteTask removes the task from the list
+     *     deleteTask removes the task from the list.
      * </p>
      * @param t TaskList object that is to be removed
      * @param a the list of task
@@ -164,14 +164,14 @@ abstract class TaskList {
         int taskNumber = t.getTaskNumber();
         a.remove(taskNumber - 1);
 
-        return "Noted. I've removed this task: " + "\n" + t + "\n" +
-                "Now you have " + Integer.toString(a.size()) +
-                " tasks in the list.";
+        return "Noted. I've removed this task: " + "\n" + t + "\n"
+                + "Now you have " + Integer.toString(a.size())
+                + " tasks in the list.";
     }
 
     /**
      * <p>
-     *     toString method to print TaskList object
+     *     toString method to print TaskList object.
      * </p>
      * @return task information
      */

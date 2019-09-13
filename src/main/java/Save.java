@@ -1,6 +1,6 @@
 /**
  * This is the Save class. It is used to save the information from the list into a text
- * file
+ * file.
  * @author Hua Lun
  */
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 
 public class Save {
-    private Formatter x;
+    private Formatter saveFile;
 
     /**
      * <p>
@@ -17,10 +17,9 @@ public class Save {
      */
 
     public void openFile() {
-        try{
-            x = new Formatter("text.txt");
-        }
-        catch (Exception e) {
+        try {
+            saveFile = new Formatter("text.txt");
+        } catch (Exception e) {
             System.out.println("you have an error");
         }
     }
@@ -33,27 +32,27 @@ public class Save {
      */
 
     public void addRecords(ArrayList<TaskList> a) {
-        StringBuilder sB = new StringBuilder();
-        for(TaskList t : a ) {
-            sB.append(t);
-            sB.append("\n");
+        StringBuilder addString = new StringBuilder();
+        for (TaskList t : a) {
+            addString.append(t);
+            addString.append("\n");
         }
-        sB.trimToSize();
-        x.format(sB.toString());
+        addString.trimToSize();
+        saveFile.format(addString.toString());
     }
 
     /**
      * <p>
-     *     closeFile closes the text file after addRecords is complete
+     *     closeFile closes the text file after addRecords is complete.
      * </p>
      */
 
     public void closeFile() {
-        x .close();
+        saveFile.close();
     }
 
     /**
-     * saveFile opens the file, adds the list of tasks into the text file and closes it
+     * saveFile opens the file, adds the list of tasks into the text file and closes it.
      * @param s Save object
      * @param a list of task
      */

@@ -71,6 +71,8 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
         sb.append(BORDER + "\n");
         sb.append("Invalid Event's arguments \n");
+        sb.append("Please follow the format below: \n");
+        sb.append("event {description} /at {dd/mm/yyyy hh:mm - hh:mm}\n");
         sb.append(BORDER + "\n");
         String eventMessage = sb.toString();
         System.out.println(eventMessage);
@@ -86,6 +88,8 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
         sb.append(BORDER + "\n");
         sb.append("Invalid Deadline's arguments \n");
+        sb.append("Please follow the format below: \n");
+        sb.append("deadline {description} /by {dd/mm/yyyy hh:mm}\n");
         sb.append(BORDER + "\n");
         String deadlineMessage = sb.toString();
         System.out.println(deadlineMessage);

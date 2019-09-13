@@ -20,8 +20,8 @@ public class Duke extends Application {
     private Ui user;
     private Parser parse;
     private Storage store;
-    private Image dukeUser = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image dukeServer = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private Image dukeServer= new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeUser = new Image(this.getClass().getResourceAsStream("/images/Speaker.png"));
 
     /**
      * Constructor for Duke class.

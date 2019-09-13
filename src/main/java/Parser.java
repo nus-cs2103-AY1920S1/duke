@@ -4,7 +4,7 @@ public class Parser {
     private static Storage storageManager = new Storage("task.txt");
 
     /**
-     * understands and responds to a command.
+     * Checks if a command is valid  and responds to a command.
      *
      * @param input a command for Duke
      *

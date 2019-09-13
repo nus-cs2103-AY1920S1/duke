@@ -16,13 +16,11 @@ public class Deadline extends Task {
     public Deadline(String taskName, String deadLine) {
         super(taskName);
         this.deadLine = deadLine;
-
         interpretDeadLine();
-
     }
 
     /**
-     * returns the message comprising [D], name of the task of the deadline object and its deadline,
+     * Returns the message comprising [D], name of the task of the deadline object and its deadline,
      * together with the a symbol representing if a deadline object is completed or not.
      * [D] represents that our object is a deadline object.
      *
@@ -39,7 +37,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * interprets deadline of Deadline object.
+     * Interprets deadline of Deadline object.
      *eg 2/12/2019 becomes 2 December 2019
      *and 1830 becomes 0630 pm
      */
@@ -48,13 +46,12 @@ public class Deadline extends Task {
         String[] words = deadLine.split(" ");
         String date = words[0];
         String time = words[1];
-
         convertDateFormat(date);
         convertTimeFormat(time);
     }
 
     /**
-     * converts and sets interpretedDate attribute to a newly formatted date. i.e in d MMMM yyyy format.
+     * Converts and sets interpretedDate attribute to a newly formatted date. i.e in d MMMM yyyy format.
      *
      * @param date date in old format for a given Deadline object. i.e time is in d/MM/yyyy format.
      *
@@ -70,7 +67,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * converts and sets interpretedTime as a newly formatted time. i.e in hhmm a format.
+     * Converts and sets interpretedTime as a newly formatted time. i.e in hhmm a format.
      *
      * @param oldTime time in old format for a given Deadline object. i.e time is in HHmm format.
      *
@@ -85,7 +82,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * returns a message by Duke, when Duke has added a Deadline object.
+     * Returns a message by Duke, when Duke has added a Deadline object.
      *
      * @param size Number of tasks managed by Duke after we have added a Deadline object.
      *

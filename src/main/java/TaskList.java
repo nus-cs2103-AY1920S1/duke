@@ -1,27 +1,28 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TaskList {
-
     private ArrayList<Task> taskList = new ArrayList<Task>();
+    private static final String HEADER = "Here are the tasks in your list: \n";
 
     /**
-     * gets details for all available task when the list command is invoked.
+     * Gets details for all available task, in sorted order, when the list command is invoked.
      */
     public String getTaskList() {
-        String message = "Here are the tasks in your list: \n";
+        // sort according to alphabetical order
+        Collections.sort(taskList, new TaskComparator());
         String tasks = "";
-
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             int count = i + 1;
             tasks = tasks + count + "." + task.toString() + "\n";
 
         }
-        return message + tasks;
+        return HEADER + tasks;
     }
 
     /**
-     * returns details for all available task when the list command is invoked.
+     * Returns details for all available task when the list command is invoked.
      */
     public String getTasksData() {
         String message = "";
@@ -35,8 +36,8 @@ public class TaskList {
     }
 
     /**
-     * marks a task as done and prints message that a task is marked as done.
-     * returns message associated with a task marked as completed.
+     * Marks a task as done and prints message that a task is marked as done.
+     * Returns message associated with a task marked as completed.
      *
      * @param taskIndex position of a task in the taskList Arraylist
      *
@@ -63,8 +64,8 @@ public class TaskList {
     }
 
     /**
-     * deletes a task from taskList Arraylist and prints message that a task is deleted.
-     * returns a string which indicates a task has been deleted.
+     * Deletes a task from taskList Arraylist and prints message that a task is deleted.
+     * Returns a string which indicates a task has been deleted.
      *
      * @param taskIndex position of a task in the taskList Arraylist
      *
@@ -94,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * creates and adds a deadline object into taskList Arraylist and prints a message related to the object's creation.
+     * Creates and adds a deadline object into taskList Arraylist and prints a message related to the object's creation.
      *
      * @param input information in the form of: return book /by 2/12/2019 1800 (an example)
      *
@@ -107,7 +108,7 @@ public class TaskList {
     }
 
     /**
-     * creates and adds an event object and prints a message related to its creation.
+     * Creates and adds an event object and prints a message related to its creation.
      *
      * @param input information in the form of: proj-meeting /at 13/10/2019 6-8pm (an example)
      *
@@ -120,7 +121,7 @@ public class TaskList {
     }
 
     /**
-     * creates and adds a todo object to taskList Arraylist and prints a message related to the object's creation.
+     * Creates and adds a todo object to taskList Arraylist and prints a message related to the object's creation.
      *
      * @param input information in the form of: proj-meeting (an example)
      *
@@ -130,5 +131,6 @@ public class TaskList {
         taskList.add(td);
         return td.addedTodoMsg(taskList.size());
     }
-    
+
+
 }

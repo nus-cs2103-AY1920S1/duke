@@ -10,7 +10,7 @@ public class Todo extends Task {
     }
 
     /**
-     * returns the message comprising [T], name of the task of the Todo object,
+     * Returns the message comprising [T], name of the task of the Todo object,
      * together with the a symbol representing if a Todo object is completed or not.
      * [T] represents that our object is a Todo object.
      *
@@ -29,7 +29,7 @@ public class Todo extends Task {
     }
 
     /**
-     * returns a message by Duke, when Duke has added a Todo object.
+     * Returns a message by Duke, when Duke has added a Todo object.
      *
      * @param size Number of tasks managed by Duke after we have added a Todo object.
      *
@@ -45,6 +45,7 @@ public class Todo extends Task {
         }
         return msg + " Now you have " + size + end;
     }
+
 
 }
 

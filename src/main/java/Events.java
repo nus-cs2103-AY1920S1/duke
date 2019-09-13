@@ -19,7 +19,7 @@ public class Events extends Task {
     }
 
     /**
-     * returns the message comprising [E], name of the task of the Events object and its date and start to end time,
+     * Returns the message comprising [E], name of the task of the Events object and its date and start to end time,
      * together with the a symbol representing if an Events object is completed or not.
      * [E] represents that our object is a Events object.
      *
@@ -36,7 +36,7 @@ public class Events extends Task {
     }
 
     /**
-     * interprets date of Events object from timeDate attribute.
+     * Interprets date of Events object from timeDate attribute.
      *eg 2/12/2019 becomes 2 December 2019
      *2-4pm stays the same
      */
@@ -52,7 +52,7 @@ public class Events extends Task {
     }
 
     /**
-     * converts an old date format into a newly formatted date. i.e a date in d/MM/yyyy format to d MMMM yyyy format
+     * Converts an old date format into a newly formatted date. i.e a date in d/MM/yyyy format to d MMMM yyyy format
      * sets interpretedDate attribute into a newly formatted date.
      *
      * @param date date for an Events object
@@ -68,7 +68,7 @@ public class Events extends Task {
     }
 
     /**
-     * returns a message by Duke, when Duke has added an Events object.
+     * Returns a message by Duke, when Duke has added an Events object.
      *
      * @param size Number of tasks managed by Duke after we have added an Events object.
      *

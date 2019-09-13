@@ -1,19 +1,14 @@
 package ui;
 
 import core.Duke;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
-import tasklist.Task;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
 
 public class NewGUI extends VBox {
     @FXML
@@ -29,12 +24,16 @@ public class NewGUI extends VBox {
     private ImageView userImage;
     @FXML
     private ImageView systemImage;
-    private TaskView generateTable;
+    @FXML
+    private Integer task;
+    private TaskView taskView;
+    private TaskCashFlows taskCashFlows;
 
     public void setDuke(Duke d) {
         duke = d;
-        generateTable = new TaskView(duke.getAllTasks());
-        tableArea.getChildren().addAll(generateTable.getTable());
+        taskView = new TaskView(duke.getAllTasks());
+        taskCashFlows = new TaskCashFlows();
+        tableArea.getChildren().addAll(taskView.getTable());
     }
 
     @FXML
@@ -47,9 +46,23 @@ public class NewGUI extends VBox {
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        if (input.contains("list")){
+            String[] split = input.split(" ");
+            tableArea.getChildren().clear();
+            if (split[1].contains("cash")) {
+                task = 
+                taskCashFlows.setCashFlowTableView(duke.getAllTasks().get(Integer.parseInt(split[2])).getCashFlows());
+                tableArea.getChildren().addAll(taskCashFlows.getCashFlowTableView());
+            }else{
+                taskView.setTable(duke.getAllTasks());
+                tableArea.getChildren().addAll(taskView.getTable());
+            }
+        }else{
+            taskView
+        }
         systemOutput.setText(response);
         userInput.clear();
-        generateTable.setTable(duke.getAllTasks());
+
 
     }
 

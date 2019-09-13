@@ -29,7 +29,7 @@ public class TaskCashFlows extends TableView {
     private TableColumn<CashFlow, LocalDateTime> dateCreatedCol;
     private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
 
-    public TaskCashFlows(ObservableList<CashFlow> cashFlows) {
+    public TaskCashFlows() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(NewGUI.class.getResource("/view/TaskCashFlows.fxml"));
             fxmlLoader.setController(this);
@@ -38,7 +38,7 @@ public class TaskCashFlows extends TableView {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        cashFlowTableView.setItems(cashFlows);
+        //cashFlowTableView.setItems(cashFlows);
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("sourceDescription"));
         valueCol.setCellValueFactory(new PropertyValueFactory<>("value"));
         dateDueCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
@@ -47,7 +47,13 @@ public class TaskCashFlows extends TableView {
         dateCreatedCol.setCellFactory(new ColumnFormatter<>(outputFormat));
     }
 
-    public TableView<CashFlow>
+    public TableView<CashFlow> getCashFlowTableView(){
+        return cashFlowTableView;
+    }
+
+    public void setCashFlowTableView(ObservableList<CashFlow> cashFlows){
+        cashFlowTableView.setItems(cashFlows);
+    }
 
     private static class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
 

@@ -72,6 +72,6 @@ public class Duke extends Application {
     }
 
     public String welcomeMessage() {
-         return "Hello! I'm Duke\nWhat can I do for you?";
+         return "Hello! I'm Tony\nWhat can I do for you?";
     }
 }

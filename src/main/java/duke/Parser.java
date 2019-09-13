@@ -19,7 +19,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String s = fullCommand.trim();
         String[] input = s.split(" ");
-        String description, date, number;
+        String description, date, number, keyWord;
 
         int num;
         switch (input[0]) {
@@ -52,6 +52,8 @@ public class Parser {
             return new DoneCommand(num);
         case "list":
             return new ListCommand();
+        case "find":
+            return new FindCommand(s.substring(5));
         case "bye":
             return new ExitCommand();
         default:

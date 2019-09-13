@@ -49,7 +49,7 @@ public class TaskList {
         return t;
     }
 
-    //@@Adapted from author: CarbonGrid (not sure why todo tasks do not give "\n"
+    //@@Adapted from author: CarbonGrid
     public String toUiString() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         int i = 1;
@@ -66,6 +66,25 @@ public class TaskList {
         }
         return sb.toString();
     }
-    //@@author
 
+
+    public String findKeyWordInList (String keyWord) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        int i = 1;
+        Iterator<Task> it = ls.iterator();
+        String temp;
+        while (it.hasNext()) {
+            temp = it.next().toString();
+            if (temp.contains(keyWord)) {
+                sb.append("      ")
+                        .append(i++)
+                        .append(".");
+                temp = temp.replaceAll("\n", "");
+                sb.append(temp);
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+    //@@author
 }

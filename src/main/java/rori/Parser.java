@@ -58,11 +58,13 @@ class Parser {
             case HELP :
                 return new HelpCommand(getAction(inputArr[1]));
             default :
-                throw new RoriException("Oof. I apologize, but I do not understand.");
+                throw new RoriException("Oi, Baka. What is that supposed to mean?"
+                        + "Type \'help\' you baka.");
             }
         } else {
             // Not suppose to happen
-            throw new RoriException("Oof. I apologize, but I do not understand.");
+            throw new RoriException("Oi, Baka. What is that supposed to mean."
+                    + "Type \'help\' you baka.");
         }
     } 
 
@@ -97,7 +99,7 @@ class Parser {
         case "tutorial" :
             return Action.TUTORIAL;
         default :
-            throw new RoriException("Oof. I apologize, but no such command exists.");
+            throw new RoriException("No such command exist you baka!");
         }
     }
     
@@ -113,7 +115,7 @@ class Parser {
         try {
             return Integer.parseInt(taskNumber);
         } catch (Exception e) {
-            throw new RoriException("Oof. " + action + " requires a number behind.");
+            throw new RoriException(action + " requires a number behind you dum dum.");
         }
     }
 
@@ -136,14 +138,15 @@ class Parser {
             taskArr = taskString.split(" /at ", 2);
             break;
         default :
-            throw new RoriException("Creating a time-limited task when not supposed to.");
+            assert false : "Not suppose to reach here";
+            throw new RoriException("Why did I create a time-limited task?");
         }
 
         if (taskArr.length == 2) {
             return checkTimedTask(taskArr, action);
         } else {
-            throw new RoriException("Oof. There seems to be an error with your format.\n" 
-            + "Please type \'help\' for more information.");
+            throw new RoriException("Are you baka? Why is your format all wrong!.\n" 
+                    + "Type \'help\' for formatting you baka.");
         }
     }
 
@@ -165,7 +168,8 @@ class Parser {
         case EVENT :
             return new Event(taskArr[0], pair.getKey(), pair.getValue());
         default :
-            throw new RoriException("Oof. Creating a time-limited task when not supposed to.");
+            assert false : "Not supposed to reach here";
+            throw new RoriException("Why did I create a time-limited task?");
         }
     }
 
@@ -192,8 +196,8 @@ class Parser {
             } catch (Exception error) {
                 System.out.println(dateTimeArr[0]);
                 System.out.println(dateTimeArr[1]);
-                throw new RoriException("Oof. Unable to parse both time and date.\n" 
-                        + "Please use \'help\' for the formatting of time and date");
+                throw new RoriException("!!? You think I can parse this nonsense?\n" 
+                        + "Type \'help\' for formatting you baka");
             }
         } else if (dateTimeArr.length == 1) {
             try {
@@ -204,13 +208,13 @@ class Parser {
                     // Parse time only
                     time = LocalTime.parse(dateTimeArr[0], Task.TIME_FORMATTER);
                 } catch (Exception errorAgain) {
-                    throw new RoriException("Oof. Unable to parse both time and date.\n" 
-                        + "Please use \'help\' for the formatting of time and date");
+                    throw new RoriException("!!? You think I can parse this nonsense?\n" 
+                            + "Type \'help\' for formatting you baka");
                 }
             }
         } else {
-            throw new RoriException("Oof. There seems to be a formatting issue.\n" 
-                    + "Please use \'help\' for the formatting of time and date");
+            throw new RoriException("!!? You think I can parse this nonsense?\n" 
+                    + "Type \'help\' for formatting you baka");
         }
 
         return new Pair<LocalDate,LocalTime>(date, time);
@@ -233,14 +237,14 @@ class Parser {
      * @param input The user's input
      * @return a String of rori's response.
      */
-    public String parseTutorialResponse(
-            String input, RoriManager roriManager, Ui uiManager) throws RoriException {
+    public String parseTutorialResponse(String input, Rori rori, Ui uiManager) throws RoriException {
         if (input.toLowerCase().equals("yes")) {
-            return roriManager.runRori("tutorial");
+            return rori.runRori("tutorial");
         } else if (input.toLowerCase().equals("no")) {
             return uiManager.printNoTutorial();
         } else {
-            throw new RoriException("Oof. I do not understand. If you need help, type \'help\'.");
+            throw new RoriException("Oi, Baka. What is that supposed to mean"
+                    + "Type \'help\' you baka.");
         }
     }
 
@@ -253,17 +257,18 @@ class Parser {
     private void throwInputError(Action action) throws RoriException {
         switch (action) {
         case TODO :
-            throw new RoriException("Oof. The description of a todo cannot be empty.");
+            throw new RoriException("O-o-oi. The description of a \'todo\' cannot be empty you baka!");
         case DEADLINE :
-            throw new RoriException("Oof. The description of a deadline cannot be empty.");
+            throw new RoriException("O-o-oi. The description of a \'deadline\' cannot be empty you baka!");
         case EVENT :
-            throw new RoriException("Oof. The description of a event cannot be empty."); 
+            throw new RoriException("O-o-oi. The description of an \'event\' cannot be empty you baka!"); 
         case DONE :
-            throw new RoriException("Oof. The description of a done cannot be empty.");
+            throw new RoriException("O-o-oi. You know that \'done\' needs a number behind, right?");
         case DELETE :
-            throw new RoriException("Oof. The description of a delete cannot be empty.");
+            throw new RoriException("O-o-oi. You know that \'delete\' needs a number behind, right?");
         default :
-            throw new RoriException("Oof. I apologize but I don't understand.");
+            throw new RoriException("Oi, Baka. What is that supposed to mean"
+                    + "Type \'help\' you baka.");
         }
     }
 

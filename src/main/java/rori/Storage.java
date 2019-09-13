@@ -40,8 +40,8 @@ class Storage {
             out.close();
             fileOut.close();
         } catch (IOException error) {
-            throw new RoriException("Oof. Unable to serialize the list to Tasks.sav. " 
-                    + "If there is already a Tasks.sav, please delete it.");
+            throw new RoriException("Hmmpf. I cannot serialize the list to Tasks.sav. " 
+                    + "If there is already a Tasks.sav, delete it.");
         }
     }
 
@@ -52,13 +52,13 @@ class Storage {
      * @return a Tasklist that is deserialized from the  file.
      * @throws RoriException When the file is corrupted
      */
-    public TaskList retrieve(RoriManager roriManager) throws RoriException {
+    public TaskList retrieve(Rori rori) throws RoriException {
         assert this.tasks != null : "tasks file is invalid";
         if (!this.tasks.exists()) {
-            roriManager.setFirstTime(true);
+            rori.setFirstTime(true);
             return createNewTaskList();
         } else {
-            roriManager.setFirstTime(false);
+            rori.setFirstTime(false);
             return deserializeOldTaskList();
         }
     }
@@ -73,7 +73,7 @@ class Storage {
         try {
             this.tasks.createNewFile();
         } catch (Exception e) {
-            throw new RoriException("Oof. Unable to create new sav file.");
+            throw new RoriException("What is with this sav file! I can't create it!");
         }
         TaskList taskList = new TaskList();
         store(taskList);
@@ -118,13 +118,13 @@ class Storage {
         try {
             tasks.createNewFile();
         } catch (IOException error) {
-            throw new RoriException("Oof. Unable to create new sav file.");
+            throw new RoriException("What is with this sav file! I can't create it!");
         }
         TaskList taskList = new TaskList();
         store(taskList);
-        throw new RoriException("Oof. Corrupted save file. "
-                + "I have rewrote the old save file with a new one. "
-                + "Please restart me again.");
+        throw new RoriException("Hnng. It's a corrupted save file! \n"
+                + "Hmmpf. I have rewrote the old save file with a new one. "
+                + "Startup me again!");
     }
 
 }

@@ -260,7 +260,9 @@ class Ui {
             this.output.append("\'tutorial\' to give you 3 examples into your save file.");
             break;
         default :
-            throw new RoriException("Oof. For the list of commands, type \'help\'.");
+            assert false : "Not supposed to happen, Action was obtained from parser";
+            throw new RoriException("Hnng!!!!\n" 
+                    + "How am I suppose to help you when I don't even know what you typed!");
             
         }
     }

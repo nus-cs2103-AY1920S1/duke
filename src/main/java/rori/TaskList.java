@@ -42,7 +42,8 @@ class TaskList implements Serializable {
         try {
             return this.taskList.remove(index);
         } catch (Exception e) {
-            throw new RoriException("Oof. The given task number is not found.");
+            throw new RoriException("Oi. I cannot find a task with this number.\n"
+                    + "Can you give me a proper number instead you baka?");
         }
     }
 
@@ -66,7 +67,8 @@ class TaskList implements Serializable {
         try {
             return this.taskList.get(index);
         } catch (Exception e) {
-            throw new RoriException("Oof. The given task number is not found.");
+            throw new RoriException("Oi. I cannot find a task with this number.\n"
+                    + "Can you give me a proper number instead you baka?");
         }
     }
 

@@ -12,11 +12,9 @@ import javafx.scene.image.Image;
  */
 public class Main extends Application {
     private Rori rori;
-    private RoriManager roriManager;
 
     public Main() throws Exception {
         rori = new Rori();
-        roriManager = rori.getRoriManager();
     }
 
     @Override
@@ -38,7 +36,7 @@ public class Main extends Application {
 
     private void beginRoriMessages(FXMLLoader fxmlLoader) {
         fxmlLoader.<MainWindow>getController().welcomeMessage();
-        if (this.roriManager.getFirstTime()) {
+        if (this.rori.getFirstTime()) {
             fxmlLoader.<MainWindow>getController().tutorialMessage();
         }
     }

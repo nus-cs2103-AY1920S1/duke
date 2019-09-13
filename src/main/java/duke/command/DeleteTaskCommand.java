@@ -43,7 +43,8 @@ public class DeleteTaskCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Deletes a task from the list: \ndelete <tasknumber>\n";
+        String helper = "Deletes a task from the list: \n"
+                + "Usage: delete (index)";
         return helper;
     }
 }

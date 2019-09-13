@@ -46,7 +46,8 @@ public class AddEventTaskCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Adds an event task: \nevent <taskname> /at <DD/MM/YYYY> <hhmm>\n";
+        String helper = "Adds an event task: \n"
+            + "Usage: event (taskname) /at (date) (time)";
         return helper;
     }
 

@@ -43,7 +43,8 @@ public class AddToDoTaskCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Adds a todo task: \ntodo <taskname>\n";
+        String helper = "Adds a todo task: \n"
+            + "Usgae: todo (taskname)";
         return helper;
     }
 

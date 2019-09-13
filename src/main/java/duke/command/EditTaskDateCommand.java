@@ -42,7 +42,8 @@ public class EditTaskDateCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Edits a Task Date: \nedit date <tasknumber> <DD/MM/YYYY> <hhmm>\n";
+        String helper = "Edits a Task Date: \n"
+            + "Usage: edit date (index) (date) (time)";
         return helper;
     }
 }

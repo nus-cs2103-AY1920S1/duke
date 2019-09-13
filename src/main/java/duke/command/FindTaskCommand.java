@@ -42,7 +42,8 @@ public class FindTaskCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Finds tasks with a keyword\nfind <keyword>\n";
+        String helper = "Finds tasks with a keyword\n"
+            + "Usage: find <keyword>";
         return helper;
     }
 }

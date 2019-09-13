@@ -43,7 +43,8 @@ public class FindTaggedTaskCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Find Tasks with a tag: \nfindTag <tag>\n";
+        String helper = "Find Tasks with a tag: \n"
+                + "Usage: findTag (tag)";
         return helper;
     }
 }

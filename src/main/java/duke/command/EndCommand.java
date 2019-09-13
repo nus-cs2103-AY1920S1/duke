@@ -39,7 +39,8 @@ public class EndCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Ends the program: \nbye\n";
+        String helper = "Ends the program: \n"
+            + "Usage: bye";
         return helper;
     }
 }

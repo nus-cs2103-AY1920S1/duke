@@ -39,7 +39,8 @@ public class ListCommandsCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "List all commands: \nhelp\n";
+        String helper = "List all commands: \n"
+            + "Usage: help";
         return helper;
     }
 }

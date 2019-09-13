@@ -42,7 +42,8 @@ public class CompleteTaskCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Completes a Task: \ndone <tasknumber>\n";
+        String helper = "Completes a Task: \n"
+            + "Usage: done (index)";
         return helper;
     }
 

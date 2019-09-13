@@ -164,7 +164,7 @@ public class Ui {
         ArrayList<Command> commands = Command.getAllCommands();
         append("Here are the list of commands available: ");
         for (int i = 0; i < commands.size(); i++) {
-            append(commands.get(i).toString());
+            append((i + 1) + ": "  + commands.get(i).toString());
         }
     }
 }

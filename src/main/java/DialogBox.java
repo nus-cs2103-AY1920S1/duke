@@ -59,7 +59,8 @@ public class DialogBox extends HBox {
      * @return A dialog box with the specific string and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db =  new DialogBox(text, img);
+        return db;
     }
 
     /**
@@ -69,7 +70,7 @@ public class DialogBox extends HBox {
      * @return A dialog box with the specific string and image.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }

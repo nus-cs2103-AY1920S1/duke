@@ -42,7 +42,8 @@ public class EditTaskNameCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Edits a Task Name: \nedit name <tasknumber> <newtaskname>\n";
+        String helper = "Edits a Task Name: \n"
+            + "Usage: edit name (index) (taskname)";
         return helper;
     }
 }

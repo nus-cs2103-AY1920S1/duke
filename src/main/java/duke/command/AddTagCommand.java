@@ -46,7 +46,8 @@ public class AddTagCommand extends Command {
      * @return a String representation for user guidance.
      */
     public String toString() {
-        String helper = "Adds a tag to a task: \ntag <tasknumber> <tag>\n";
+        String helper = "Adds a tag to a task: \n"
+            + "Usage: tag (index) <tag>";
         return helper;
     }
 

@@ -127,7 +127,7 @@ class Parser {
                         throw new Exception();
                     } ui.setToSort(taskList.getTaskList(), input);
                 } catch (Exception e) {
-                    throw new DukeException("OOPS!!! Your input format is wrong. Use: sortby [type of sort]");
+                    throw new DukeException("☹ OOPS!!! Your input format is wrong. Use: sortby (type of sort)");
                 }
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -6,13 +6,13 @@
 Add Tasks to the current List of Duke.
 
     1. Todo Tasks
-        ...a. Consist of Description of Task only.
+        a. Consist of Description of Task only.
     2. Deadline Tasks
-        ...a. Consist of Description of Task.
-	...b. Consist of Time whereby Task must be done by.
+        a. Consist of Description of Task.
+	b. Consist of Time whereby Task must be done by.
     3. Event Tasks
-	...a. Consist of Description of Task
-	...b. Consist of Time whereby Task occurs at.
+	a. Consist of Description of Task
+	b. Consist of Time whereby Task occurs at.
 
 ### Feature 2
 Set Tasks as Done in Duke.

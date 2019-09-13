@@ -31,7 +31,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Please include the data folder in the same directory "
+                DialogBox.getDukeDialog("Please include the data folder with the "
+                        + "tasks.txt file in the same directory "
                         + "as this jar file for storage processing!", dukeImage),
                 DialogBox.getDukeDialog("Hello! Martin here!\nWhat can I do?", dukeImage)
         );
@@ -65,7 +66,8 @@ public class MainWindow extends AnchorPane {
             } else {
                 dialogContainer.getChildren().addAll(
                         DialogBox.getUserDialog(in, userImage),
-                        DialogBox.getDukeDialog("Please include the data folder in the same directory "
+                        DialogBox.getDukeDialog("Please include the data folder with the "
+                                + "tasks.txt file in the same directory "
                                 + "as this jar file for storage processing!", dukeImage),
                         DialogBox.getDukeDialog(out, dukeImage)
                 );

@@ -40,7 +40,8 @@ you would need to set up before proceeding with usage.
 
 2) Create a folder called `data` in the same directory in which 
 you save the jar file for the application for data storage
-and processing. 
+and processing. <br/> Do also make sure that there is a `tasks.txt`
+Text Document file inside the folder!
 
 ![Storage Prerequisite](Storage%20Prerequisite.png)
 

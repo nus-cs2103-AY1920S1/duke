@@ -15,12 +15,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.duke.core.DialogBox;
 import seedu.duke.core.DukeController;
+import seedu.duke.core.Parser;
 import seedu.duke.core.Storage;
 import seedu.duke.core.Ui;
-import seedu.duke.core.Parser;
 import seedu.duke.model.dto.Task;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
@@ -28,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 //Proper JavaFX implementation needed.
 public class Duke extends Application {
-    private static String DIRECTORY_PATH = "D:/project/CS2103T/duke/data";
+    private static String DIRECTORY_PATH = "data";
     private static String FILEPATH = DIRECTORY_PATH + "/duke.txt";
 
     private ScrollPane scrollPane = new ScrollPane();
@@ -40,64 +39,25 @@ public class Duke extends Application {
             .getResourceAsStream("/images/duke.jpg"));
     private Image user = new Image(this.getClass()
             .getResourceAsStream("/images/cat_user.jpg"));
-
-    private void run() throws IOException, ParseException {
-
-    }
-
-    public static void main(String[] args) throws IOException, ParseException {
-        new Duke().run();
-    }
+    private DukeController dukeController = new DukeController();
+    private Ui ui = new Ui();
+    private Parser parser = new Parser();
+    private Storage storage = new Storage();
 
     @Override
     public void start(Stage stage) throws IOException, ParseException {
+        storage.initFile();
+        List<Task> list = storage.loadTask(FILEPATH);
 
-        Storage storage = new Storage();
-        File file = storage.initFile();
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        mainLayout.setPrefSize(500.0, 600.0);
-
+        AnchorPane mainLayout = initMainLayout();
         stage = initStage(stage);
         scrollPane = initScrollPane(scrollPane);
         initAnchorPane();
 
-        //Step 3. Add functionality to handle user input.
-        DukeController controller = new DukeController();
-        Ui ui = new Ui();
-        Parser parser = new Parser();
-        List<Task> list = storage.loadTask(FILEPATH);
+        activateSendButtonEvent(dukeController, ui, list, storage, parser);
+        activateUserInputAction(dukeController, ui, list, storage, parser);
 
-        //Add welcome dialog in the beginning of the app.
-        Label welcomeMsg = ui.showWelcome();
-        dialogContainer.getChildren().add(welcomeMsg);
-
-        sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput(controller, ui, list, storage, parser);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        userInput.setOnAction((event) -> {
-            try {
-                boolean isTerminate = handleUserInput(controller, ui, list, storage, parser);
-                if (isTerminate) {
-                    assert isTerminate = true;
-                    //delay time for 1 second
-                    TimeUnit.SECONDS.sleep(1);
-
-                    //closes the window
-                    Platform.exit();
-                }
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        });
         Scene scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
     }
@@ -141,6 +101,14 @@ public class Duke extends Application {
         return stage;
     }
 
+    private AnchorPane initMainLayout() {
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.setPrefSize(500.0, 600.0);
+
+        return mainLayout;
+    }
+
     private ScrollPane initScrollPane(ScrollPane scrollPane) {
         scrollPane.setContent(dialogContainer);
         scrollPane.setPrefSize(495, 568.0);
@@ -153,6 +121,7 @@ public class Duke extends Application {
     }
 
     private void initAnchorPane() {
+        dialogContainer.getChildren().add(ui.showWelcome());
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.heightProperty()
                 .addListener((observable) -> scrollPane.setVvalue(1.0));
@@ -164,6 +133,36 @@ public class Duke extends Application {
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
+
+    private void activateUserInputAction(DukeController controller, Ui ui,
+                                    List<Task> list, Storage storage, Parser parser) {
+        userInput.setOnAction((event) -> {
+            try {
+                boolean isTerminate = handleUserInput(controller, ui, list, storage, parser);
+                if (isTerminate) {
+                    assert isTerminate = true;
+                    //delay time for 1 second
+                    TimeUnit.SECONDS.sleep(1);
+
+                    //closes the window
+                    Platform.exit();
+                }
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void activateSendButtonEvent(DukeController controller, Ui ui,
+                                         List<Task> list, Storage storage, Parser parser) {
+        sendButton.setOnMouseClicked((event) -> {
+            try {
+                handleUserInput(controller, ui, list, storage, parser);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
 

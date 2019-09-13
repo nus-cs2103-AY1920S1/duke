@@ -8,6 +8,9 @@ import duke.task.Task;
  * the stored list in Duke.
  */
 public class DeleteCommand extends Command {
+
+    public static final String KEYWORD = "delete";
+
     private int taskId;
 
     /**
@@ -23,6 +26,7 @@ public class DeleteCommand extends Command {
      * Deletes the Task object specified by the input taskId supplied during
      * initialization.
      *
+     * @return result feedback of the command to be printed to the user
      * @throws DukeException if taskIndex is out of bounds or refers to the index
      *                       of a non-existent Task
      */

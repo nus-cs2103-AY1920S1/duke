@@ -36,7 +36,7 @@ public class DateTime implements Serializable {
             throw new DukeException("I couldn't decipher the date and time"
                     + " that you gave me...\n"
                     + "Please write it in <dd/mm/yyyy HHmm> format for me to"
-                    + "\nunderstand!");
+                    + "\nunderstand!", e);
         }
     }
 
@@ -48,7 +48,7 @@ public class DateTime implements Serializable {
 
     /**
      * Returns the date and time in a standardized format
-     * of "ddth MMM yyyy", eg. 17th FEB 1996.
+     * of "dd MMM yyyy", eg. 17 FEB 1996.
      *
      * @return string representation of DateTime object
      */

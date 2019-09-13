@@ -4,7 +4,6 @@ import duke.Duke;
 import duke.exception.DukeShutDownException;
 import duke.util.Ui;
 
-import duke.view.DialogBox;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -24,6 +23,8 @@ import java.util.TimerTask;
  * and defines the behaviour for on-screen GUI elements via fxml.
  */
 public class MainWindow extends AnchorPane {
+    private static final int SHUTDOWN_DELAY = 1750;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -34,10 +35,12 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes the main window elements and displays the greeting message from Duke.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -65,6 +68,8 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    // closes duke gracefully. should only be called when a shutdown signal
+    // is received from the ByeCommand.
     private void closeWindowAndExit() {
         new Timer().schedule(new TimerTask() {
             @Override
@@ -72,22 +77,22 @@ public class MainWindow extends AnchorPane {
                 Platform.exit();
                 System.exit(0);
             }
-        }, 1500);
+        }, SHUTDOWN_DELAY);
     }
 
     // given a string with multiple lines (identified by terminating newlines),
     // returns an ArrayList object with each entry
     // containing a maximum of n lines from the original string.
-    private ArrayList<String> splitEveryNthLine(String response, int n) {
-        String[] splitStr = response.split("\n");
+    private ArrayList<String> splitEveryNthLine(String text, int n) {
+        String[] splitStr = text.split("\n");
         StringBuilder sb = new StringBuilder();
         ArrayList<String> returnList = new ArrayList<>();
 
-        for (int i = 0; i < splitStr.length; i++) {
+        for (int i = 0; i < splitStr.length; i++) { // for every line in string
             sb.append(splitStr[i]);
             sb.append("\n");
-            if ((i + 1) % n == 0 || i + 1 == splitStr.length) {
-                returnList.add(sb.toString());
+            if ((i + 1) % n == 0 || i + 1 == splitStr.length) { // if every nth line OR end of string,
+                returnList.add(sb.toString()); // append to the list as a separate entry
                 sb.setLength(0);
             }
         }
@@ -110,6 +115,7 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    // publishes user response to the chat window.
     private void publishUserInput(String input) {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         userInput.clear();

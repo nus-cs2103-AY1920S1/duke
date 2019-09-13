@@ -115,6 +115,14 @@ public class TaskList implements Serializable {
         return new TaskList(resultList);
     }
 
+    /**
+     * Replaces the current list of tasks in the TaskList object with
+     * a list of tasks from another TaskList object. Note that this
+     * is implemented as a shallow copy operation (internally, only the
+     * references are copied over)
+     *
+     * @param newList the TaskList object to be copied over to this object
+     */
     public void replaceWith(TaskList newList) {
         this.tasks = newList.tasks;
     }

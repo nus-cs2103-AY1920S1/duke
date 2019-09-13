@@ -15,7 +15,8 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/\\__,_|_|\\_\\___|\n"
             + "Hello! I'm Duke. What can I do for you?";
-    public static final String GOODBYE  = "Bye. Hope to see you again soon!";
+    public static final String GOODBYE  = "Bye. Hope to see you again soon!\n"
+            + "Hang on while I close this window for you...";
     public static final String LOADING_ERROR = "I couldn't find a saved task list...\n"
             + "Let me start up a brand new list!";
 

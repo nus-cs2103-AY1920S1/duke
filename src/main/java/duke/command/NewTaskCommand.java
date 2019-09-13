@@ -25,6 +25,7 @@ public abstract class NewTaskCommand extends Command {
     /**
      * Adds the specified task to the current TaskList object.
      *
+     * @return result feedback of the command to be printed to the user
      * @throws DukeException if list could not be saved to the hard disk
      *                       after addition.
      */

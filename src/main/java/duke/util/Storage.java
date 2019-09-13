@@ -3,7 +3,6 @@ package duke.util;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-import java.io.FileNotFoundException;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -22,7 +21,6 @@ import java.io.FileWriter;
  */
 public class Storage {
     // CLASS ATTRIBUTES
-
     // search for a config file which contains a path to the task list that duke should startup with
     private static final String CONFIG_PATH = "./config/config.txt";
     // the default path to be used if no config file is found
@@ -70,12 +68,12 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("I'm so sorry! I had trouble sync-ing the task list"
                     + "to the disk!\n"
-                    + "Any changes might not be saved ):");
+                    + "Any changes might not be saved ):", e);
         } catch (ClassNotFoundException e) {
             throw new DukeException("I'm sorry, I couldn't decipher the saved list at:\n"
                     + this.file.getPath() + "\n"
                     + "It seems to be missing or corrupted...\n"
-                    + "I will have to start a new list!");
+                    + "I will have to start a new list!", e);
         }
         return list;
     }
@@ -101,10 +99,19 @@ public class Storage {
             throw new DukeException("I'm so sorry! I had trouble saving the task list"
                     + "to the following path:\n"
                     + this.file.getPath() + "\n"
-                    + "Any changes might not be saved ):");
+                    + "Any changes might not be saved ):", e);
         }
     }
 
+    /**
+     * Updates the duke config file with the last altered/used save path location. Upon the next
+     * startup, duke will read from the config file to automatically load the task list
+     * that was being used most recently.
+     *
+     * @throws DukeException if unable to create/write to config file (eg. due to permissions)
+     * @see Storage#saveToDisk(TaskList)
+     * @see Storage#loadFromDisk()
+     */
     private void updateStartupConfig() throws DukeException {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(CONFIG_PATH));
@@ -113,14 +120,29 @@ public class Storage {
             writer.close();
         } catch (IOException e) {
             throw new DukeException("I couldn't change my config file in '/config/config.txt'!\n"
-                    + "Did you restrict the write permissions to my own file?!");
+                    + "Did you restrict the write permissions to my own file?!", e);
         }
     }
 
+    /**
+     * Returns the save path location of the current TaskList object on the disk.
+     *
+     * @return String representation of the saved file path
+     */
     public String getSavePath() {
         return this.file.getPath();
     }
 
+    /**
+     * Changes the file that the current TaskList object is to be serialized to on disk.
+     * Note that the actual saving of the TaskList object does not take place here, and will
+     * be left to the implementation of the various data manipulation Command sub-classes.
+     *
+     * @param newPath the new save path to be saved to
+     * @return the previous save path of the current TaskList object
+     * @see duke.command.SaveCommand
+     * @see duke.command.LoadCommand
+     */
     public String changeSavePath(String newPath) {
         String previousPath = this.file.getPath();
         this.file = new File(newPath);

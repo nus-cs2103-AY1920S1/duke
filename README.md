@@ -6,6 +6,9 @@
 * Duke is a basic Command Line Interface (CLI) application written in JAVA, following the OOP paradigm, and supplied with a basic GUI.
 * Duke can manage a list of tasks such as to-dos, events, and deadlines with nine recognised commands tabulated below. Simply enter the command in the specified format and let Duke do the rest!
 
+**Getting Duke**
+Simply download the v0.2 jar release to get started.
+
 # Using Duke 
 
 Command | What Duke does | CLI entry format

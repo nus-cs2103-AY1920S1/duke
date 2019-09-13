@@ -28,6 +28,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        showWelcomeMessage();
     }
 
     public void setDuke(Duke d) {
@@ -54,5 +55,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void quitTheApp(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    @FXML
+    public void showWelcomeMessage() {
+        String input = "Hi! Welcome to Radomir!\n";
+        input += "Type 'help' to get the list of commands available.";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(input, dukeImage)
+        );
     }
 }

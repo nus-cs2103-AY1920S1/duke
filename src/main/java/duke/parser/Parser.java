@@ -1,15 +1,6 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.AddTodoCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddDeadlineCommand;
-import duke.command.ByeCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.ErrorCommand;
-import duke.command.FindCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 /**
@@ -52,6 +43,8 @@ public class Parser {
             return new DeleteCommand(constructedString);
         case "find" :
             return new FindCommand(constructedString);
+        case "help" :
+            return new HelpCommand(constructedString);
         default:
             return new ErrorCommand("OOPS!! I'm sorry, but I don't know what that means :-(");
         }

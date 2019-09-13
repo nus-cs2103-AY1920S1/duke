@@ -36,7 +36,8 @@ public class EventTask extends RecurringTask {
    * @param at          date range(s) of the event
    * @throws InvalidParameterException if the description is empty or at is empty
    */
-  public static EventTask create(String description, Collection<DateRange> at) throws InvalidParameterException {
+  public static EventTask create(String description, Collection<DateRange> at)
+      throws InvalidParameterException {
     if (description.equals("")) {
       throw new InvalidParameterException("The description of an event cannot be empty.");
     }

@@ -87,7 +87,7 @@ public class Date implements Comparable<Date>, Serializable {
   }
 
   /**
-   * Returns a new Date instance with Duration added to the current Date.
+   * Adds a Duration to the current Date.
    *
    * @param duration the duration to add
    * @return new Date instance

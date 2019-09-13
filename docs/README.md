@@ -45,7 +45,7 @@ Expected outcome:
 
 `Adds a Todo Task to Duke that is represented as [T][X] borrow book`
 
-`Adds a Deadline Task to Duke that is represented as [D][X] return book (by: 19th of August 2019, 6:00pm)
+`Adds a Deadline Task to Duke that is represented as [D][X] return book (by: 19th of August 2019, 6:00pm)`
 
 ### `done`
 

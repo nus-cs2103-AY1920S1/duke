@@ -9,6 +9,9 @@ public class Ui {
         System.out.println("Cannot find existing List. Creating new List...");
     }
 
+    /**
+     * Prints welcome message.
+     */
     public void showWelcome() {
         System.out.println("    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
@@ -34,7 +37,7 @@ public class Ui {
     }
 
     /**
-     * Prints out string
+     * Prints out input string.
      * @param temp string to be printed out
      */
     public void show(String temp) {

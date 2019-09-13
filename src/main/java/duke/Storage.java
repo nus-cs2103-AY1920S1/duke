@@ -1,6 +1,7 @@
 package duke;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +18,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads and the text in the specified file. Parses the String to store
+     * as different types of tasks
+     * @return ArrayList of tasks
+     * @throws IOException if file cannot be opened
+     * @throws DateTimeParseDukeException if date time of string is in invalid format
+     */
     public ArrayList<Task> load() throws IOException, DateTimeParseDukeException {
         ArrayList<Task> taskList = new ArrayList<Task>();
 

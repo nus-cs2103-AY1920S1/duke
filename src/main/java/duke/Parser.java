@@ -1,6 +1,13 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ExitCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.Command;
+
 import duke.exception.DukeException;
 import duke.exception.EmptyDateTimeDukeException;
 import duke.exception.UnknownInputException;
@@ -19,7 +26,9 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String s = fullCommand.trim();
         String[] input = s.split(" ");
-        String description, date, number, keyWord;
+        String description;
+        String date;
+        String number;
 
         int num;
         switch (input[0]) {

@@ -13,7 +13,6 @@ public class AddCommand extends Command {
     }
 
     /**
-     *
      * (Self-Review: Java passes non-primitive types as call-by-reference.
      * Before this, a Command object is instantiated. Next, execute method takes in
      * Duke's 3 objects and adds this 'held' task in this Command object to its Arraylist

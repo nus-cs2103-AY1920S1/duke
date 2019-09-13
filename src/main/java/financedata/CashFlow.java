@@ -2,24 +2,33 @@ package financedata;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDateTime;
 
 public class CashFlow {
-    private String sourceName;
+    private SimpleStringProperty sourceDescription;
     private SimpleDoubleProperty value;
     private SimpleObjectProperty<LocalDateTime> dateCreated;
     private SimpleObjectProperty<LocalDateTime> dateDue;
 
-    public CashFlow(String sourceName, Double value, LocalDateTime dateDue){
-        this.sourceName = sourceName;
+    public CashFlow(String sourceDescription, Double value, LocalDateTime dateDue){
+        this.sourceDescription = new SimpleStringProperty(sourceDescription);
         this.value = new SimpleDoubleProperty(value);
         dateCreated = new SimpleObjectProperty<>(LocalDateTime.now());
-        this.dateCreated = new SimpleObjectProperty<>(dateDue);
+        this.dateDue = new SimpleObjectProperty<>(dateDue);
     }
 
-    public String getSourceName() {
-        return sourceName;
+    public String getSourceDescription() {
+        return sourceDescription.get();
+    }
+
+    public SimpleStringProperty sourceDescriptionProperty() {
+        return sourceDescription;
+    }
+
+    public void setSourceDescription(String sourceDescription) {
+        this.sourceDescription.set(sourceDescription);
     }
 
     public double getValue() {

@@ -45,7 +45,7 @@ Example of usage:
 'todo Borrow books'
 
 Expected outcome: 
-![Outcome of command 'todo'](/docs/Todo.png)
+![Outcome of command 'todo'](Todo.png)
 
 
 ### `deadline` - Adds a DEADLINE task to the chatbot's tasklist

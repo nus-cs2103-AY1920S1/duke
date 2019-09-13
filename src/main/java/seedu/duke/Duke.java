@@ -47,16 +47,15 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) throws IOException, ParseException {
         storage.initFile();
-        List<Task> list = storage.loadTask(FILEPATH);
-
-        AnchorPane mainLayout = initMainLayout();
         stage = initStage(stage);
         scrollPane = initScrollPane(scrollPane);
         initAnchorPane();
 
+        List<Task> list = storage.loadTask(FILEPATH);
         activateSendButtonEvent(dukeController, ui, list, storage, parser);
         activateUserInputAction(dukeController, ui, list, storage, parser);
 
+        AnchorPane mainLayout = initMainLayout();
         Scene scene = new Scene(mainLayout);
         stage.setScene(scene);
         stage.show();

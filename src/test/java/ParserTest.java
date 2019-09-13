@@ -16,6 +16,7 @@ import jermi.command.ExitCommand;
 import jermi.command.FindCommand;
 import jermi.command.ListCommand;
 import jermi.component.Parser;
+import jermi.exception.EmptyDescriptionException;
 import jermi.exception.JermiException;
 import jermi.misc.TaskType;
 
@@ -70,17 +71,43 @@ public class ParserTest {
         }
     }
 
+    @Test
+    public void parse_emptyDescription_emptyDescriptionException() {
+        String[] userInputs = {"todo",
+                "event",
+                "deadline",
+                "done",
+                "delete",
+                "find",
+        };
+
+        int expected = 6;
+        int numEmptyDescriptionExceptionThrown = 0;
+        for (String input : userInputs) {
+            try {
+                parser.parse(FormatterStub.readCommand(input), FormatterStub.readDetails(input));
+            } catch (JermiException e) {
+                if (e instanceof EmptyDescriptionException) {
+                    numEmptyDescriptionExceptionThrown += 1;
+                }
+            }
+        }
+
+        assertEquals(expected, numEmptyDescriptionExceptionThrown);
+    }
+
+
     /**
      * A stub class to read user input and return input command and input details.
      */
-    private static class FormatterStub {
+    static class FormatterStub {
         /**
          * Reads the entire user input and returns the input command.
          *
          * @param input User input.
          * @return Input command.
          */
-        private static String readCommand(String input) {
+        static String readCommand(String input) {
             return input.split(FORMATTER_COMMAND_DETAILS_DELIMITER,
                     FORMATTER_COMMAND_DETAILS_SPLIT_LIMIT)[FORMATTER_COMMAND_INDEX];
         }
@@ -91,7 +118,7 @@ public class ParserTest {
          * @param input User input.
          * @return Input details.
          */
-        private static String readDetails(String input) {
+        static String readDetails(String input) {
             try {
                 return input.split(FORMATTER_COMMAND_DETAILS_DELIMITER,
                         FORMATTER_COMMAND_DETAILS_SPLIT_LIMIT)[FORMATTER_DETAILS_INDEX];

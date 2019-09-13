@@ -10,6 +10,10 @@ import seedu.duke.ui.Ui;
 
 public class EventCommand extends Command {
 
+    public EventCommand() {
+
+    }
+
     public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stats,
                           Storage statStorage) throws DukeException {
 

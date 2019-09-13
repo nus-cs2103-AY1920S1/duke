@@ -1,5 +1,8 @@
 package seedu.duke.core;
 
+import seedu.duke.command.ByeCommandCli;
+import seedu.duke.command.Command;
+import seedu.duke.command.UnknownCommand;
 import seedu.duke.parser.Parser;
 import seedu.duke.statistic.Statistic;
 import seedu.duke.storage.Storage;
@@ -153,8 +156,9 @@ public class Duke {
      * Executes the Duke Command Line Interface.
      */
     public void run() {
+        Boolean isCommandLineInterface = true;
         System.out.println(cli.getWelcomeString());
-        Boolean isBye = false;
+        // Boolean isBye = false;
         try {
             // Loads the data from txt file to the TaskList object, tasks.
             tasks = new TaskList(this.taskStorage.loadTasks());
@@ -168,8 +172,27 @@ public class Duke {
         }
         // Creates scanner object to handle input.
         Scanner in = new Scanner(System.in);
-        String fullCommand = in.nextLine().trim();
+        //String fullCommand = in.nextLine().trim();
+        String fullCommand = "";
+        Command command = new UnknownCommand();
 
+
+        while ( command instanceof ByeCommandCli == false) {
+            String outputString = "";
+            fullCommand = in.nextLine().trim();
+            try {
+                command = Parser.getCommand(fullCommand, cli);
+                outputString = command.execute(fullCommand, cli, tasks, taskStorage, stats, statStorage);
+            } catch (IOException e) {
+                outputString = e.getMessage();
+            } catch (DukeException e) {
+                outputString = e.getMessage();
+            }
+            System.out.println(outputString);
+            //fullCommand = in.nextLine().trim();
+        }
+
+        /*
         while (!isBye) {
             try {
                 isBye = executeTasksCli(fullCommand);
@@ -188,6 +211,8 @@ public class Duke {
             }
             fullCommand = in.nextLine().trim();
         }
+
+         */
     }
 
     /**
@@ -199,10 +224,12 @@ public class Duke {
      * @throws IOException To catch file error when interacting with Storage class.
      */
     public Boolean executeTasksCli(String fullCommand) throws DukeException, IOException {
+
+        /*
         // parseCommand will return the first word of fullCommand
         String taskType = Parser.parseCommand(fullCommand);
 
-        switch(taskType){
+        switch(taskType) {
 
         case ("list"):
             System.out.println(listRoutine(cli, tasks));
@@ -250,6 +277,9 @@ public class Duke {
             return false;
         }
         return false;
+
+         */
+        return true;
     }
 
     /**

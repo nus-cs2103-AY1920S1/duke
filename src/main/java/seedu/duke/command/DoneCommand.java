@@ -8,6 +8,10 @@ import seedu.duke.ui.Ui;
 
 public class DoneCommand extends Command {
 
+    public DoneCommand() {
+
+    }
+
     public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stats,
                           Storage statStorage) {
 

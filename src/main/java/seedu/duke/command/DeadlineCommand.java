@@ -5,11 +5,14 @@ import seedu.duke.parser.Parser;
 import seedu.duke.statistic.Statistic;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.Deadline;
-import seedu.duke.task.Task;
 import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
 public class DeadlineCommand extends Command {
+
+    public DeadlineCommand() {
+
+    }
 
     public String execute (String fullCommand, Ui ui, TaskList tasks, Storage taskStorage,
                            Statistic stats, Storage statStorage) throws DukeException {

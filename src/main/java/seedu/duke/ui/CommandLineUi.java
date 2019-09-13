@@ -12,11 +12,14 @@ import seedu.duke.tasklist.TaskList;
  */
 public class CommandLineUi extends Ui {
     private static final String underscore = "    ____________________________________________________________" + "\n";
-
+    private Boolean isCommandLineInterface;
+    private Boolean isGraphicalUserInterface;
     /**
      * Default constructor.
      */
     public CommandLineUi(){
+        isCommandLineInterface = true;
+        isGraphicalUserInterface = false;
     }
 
     /**
@@ -187,5 +190,13 @@ public class CommandLineUi extends Ui {
                 + stat.getCompletedEventsFromOneDayAgo(tasks)
                 + "\n     " + encouragement + "\n" + underscore;
         return output;
+    }
+
+    public Boolean isCommandLineInterface() {
+        return this.isCommandLineInterface;
+    }
+
+    public Boolean isGraphicalUserInterface() {
+        return this.isGraphicalUserInterface;
     }
 }

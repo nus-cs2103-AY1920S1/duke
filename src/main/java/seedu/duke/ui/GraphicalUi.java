@@ -13,10 +13,14 @@ import seedu.duke.tasklist.TaskList;
  * Unnecessary underscores and spaces have been removed from the CLI's implementation.
  */
 public class GraphicalUi extends Ui {
+    private Boolean isCommandLineInterface;
+    private Boolean isGraphicalUserInterface;
     /**
      * Default constructor.
      */
     public GraphicalUi(){
+        isCommandLineInterface = false;
+        isGraphicalUserInterface = true;
     }
 
     /**
@@ -197,6 +201,14 @@ public class GraphicalUi extends Ui {
                 + eventsCompleted
                 + "\n" + encouragement + "\n";
         return output;
+    }
+
+    public Boolean isCommandLineInterface() {
+        return this.isCommandLineInterface;
+    }
+
+    public Boolean isGraphicalUserInterface() {
+        return this.isGraphicalUserInterface;
     }
 
 

@@ -92,4 +92,8 @@ public abstract class Ui {
 
     public abstract String getCompletedEventStatSequence(Statistic stat, TaskList tasks);
 
+    public abstract Boolean isCommandLineInterface();
+
+    public abstract Boolean isGraphicalUserInterface();
+
 }

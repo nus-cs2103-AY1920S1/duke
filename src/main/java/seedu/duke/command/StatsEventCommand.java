@@ -5,7 +5,11 @@ import seedu.duke.storage.Storage;
 import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
-public class StatsEventCommand extends Command{
+public class StatsEventCommand extends Command {
+
+    public StatsEventCommand() {
+
+    }
 
     public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stats,
                           Storage statStorage) {

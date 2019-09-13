@@ -9,6 +9,10 @@ import seedu.duke.ui.Ui;
 
 public class StatsResetCommand extends Command {
 
+    public StatsResetCommand() {
+
+    }
+
     public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stats,
                           Storage statStorage) {
 

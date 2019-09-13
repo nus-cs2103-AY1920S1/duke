@@ -9,6 +9,10 @@ import java.io.IOException;
 
 public class ByeCommandCli extends Command {
 
+    public ByeCommandCli() {
+
+    }
+
     public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stats,
                           Storage statStorage) throws IOException {
 

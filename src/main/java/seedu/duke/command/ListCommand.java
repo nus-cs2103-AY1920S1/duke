@@ -7,6 +7,10 @@ import seedu.duke.ui.Ui;
 
 public class ListCommand extends Command {
 
+    public ListCommand() {
+
+    }
+
     public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stats,
                           Storage statStorage) {
 

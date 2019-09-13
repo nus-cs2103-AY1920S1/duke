@@ -1,8 +1,12 @@
-public class ConvertDateTime {
-    public String str;
+package duke;
 
-    ///////////////// constructor ////////////////////////////
-    public ConvertDateTime(String timeframe){
+public class ConvertDateTime {
+
+    public ConvertDateTime(){
+
+    }
+
+    public String Convert(String timeframe){
 
         int in = timeframe.indexOf('/');                           //find first instance of '/'
         int day = Integer.parseInt(timeframe.substring(0, in));    //sift out day
@@ -85,7 +89,7 @@ public class ConvertDateTime {
         else
             converted_min = "";
 
-        this.str = converted_day + " of " + converted_month + " " + year + ", " + converted_hr + converted_min + period ;
+        return converted_day + " of " + converted_month + " " + year + ", " + converted_hr + converted_min + period ;
     }
 
 }

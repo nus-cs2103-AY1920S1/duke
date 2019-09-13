@@ -1,3 +1,7 @@
+package duke;
+
+import duke.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,20 +16,20 @@ public class Ui{
     }
 
     ///////////// print method for list ///////////////////
-    void print_list(int printType, int i, ArrayList<Task> taskList){
+    public void print_list(int printType, int i, ArrayList<Task> taskList){
         if(printType==1)
         System.out.println("Here are the tasks in your list:");
         if(printType==2)
             System.out.println((i + 1) + "." + "[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description);
         if(printType==3)
-            System.out.println((i + 1) + "." + "[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description + " (" + taskList.get(i).timeframe + ")");
+            System.out.println((i + 1) + "." + "[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description + " (" + taskList.get(i).get_TimeFrame() + ")");
     }
 
     ///////////// print method for delete //////////////////
     void print_delete(String instruct, int no_of_task, Task t){
          if(instruct.contains("Delete")){
              System.out.println("Noted. I've removed this task:");
-             System.out.println("  [" + t.type + "][" + t.status + "] " + t.description + " (" + t.timeframe + ")");
+             System.out.println("  [" + t.type + "][" + t.status + "] " + t.description + " (" + t.get_TimeFrame() + ")");
              System.out.println("Now you have " + no_of_task + " tasks in the list.");
          }
     }
@@ -37,12 +41,12 @@ public class Ui{
              System.out.println("Here are the matching tasks in your list: ");
          }
          else{
-             System.out.println(num + ".[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description + " " + taskList.get(i).timeframe);
+             System.out.println(num + ".[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description + " " + taskList.get(i).get_TimeFrame());
          }
     }
 
     ///////////// print method for To Do //////////////////
-    void print_toDo(String description, int no_of_task){
+    public void print_toDo(String description, int no_of_task){
         System.out.println("Got it. I've added this task:");
         System.out.println("  [ ][ ]" + description);
         System.out.println("Now you have " + no_of_task + " tasks in the list.");
@@ -51,6 +55,12 @@ public class Ui{
     /////////////// print method for bye /////////////////
     void print_bye(){
         System.out.println("Bye. Hope to see you again.");
+    }
+
+    public void print_deadline(String sub, String timeFrame, int no_of_task){
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  [ ][ ] " + sub + " (" + timeFrame + ")");
+        System.out.println("Now you have " + no_of_task + " tasks in the list.");
     }
 
 

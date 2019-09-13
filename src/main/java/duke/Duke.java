@@ -1,21 +1,15 @@
-import org.w3c.dom.html.HTMLImageElement;
+package duke;
 
-import java.io.*;
+import duke.Command.Command;
+
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.io.FileWriter;
 import java.io.IOException;
-import javafx.application.Application;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
 
 public class Duke{
 
@@ -26,14 +20,20 @@ public class Duke{
     private Scene scene;
     private Storage storage;
     private Ui ui;
+    private TaskList tasks;
 
-    /////////////////////////////// Duke constructors  /////////////////////////////////////////////
+    /////////////////////////////// duke.Duke constructors  /////////////////////////////////////////////
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-    }
-    public Duke() {
-        this("src/main/java/Duke.txt");
+        tasks = new TaskList(storage.load());
+        /*try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }*/
     }
 
 
@@ -44,45 +44,17 @@ public class Duke{
         int no_of_task;
         ArrayList<Task> taskList;
 
-        taskList = storage.load();            //load file onto arraylist
-        no_of_task = storage.get_no_task();   //get number of tasks
 
-        while(true) {
+        boolean isExit = false;
+
+        while(!isExit) {
             userInput = ui.read();                 //read user input
-            Parser p = new Parser();
-            p.Parse(userInput, no_of_task, taskList, storage);
+            Command c = Parser.parse(userInput);
+            c.execute(tasks, ui, storage);
+            isExit = c.isExit();
 
-                    if (userInput.contains("done")) {
-                        String taskNumber = userInput.substring(5);
 
-                        //iterate through the tasks Arraylist until task is found
-                        for (int i = 1; i <= taskList.size(); i++) {
-                            if (i == (Integer.parseInt(taskNumber))) {
-                                System.out.println("Nice! I've marked this task as done: ");
-                                System.out.println("  [" + "\u2713" + "] " + taskList.get(i - 1).description);
-                                taskList.get(i - 1).changeStatus(1);
-                                System.out.println("New status: " + taskList.get(i - 1).status);
-                                Storage.AutoSave(taskList, no_of_task);
-                            }
-                        }
-                    } else {
-                        if (userInput.contains("deadline")) {
-                            int index = 0;
-                            index = userInput.indexOf('/'); //iterate through the input to find the '/' char
-
-                            String timeFrame = userInput.substring(index + 1);
-                            String temp = timeFrame.substring(3);
-                            String sub = userInput.substring(9, index - 1);
-
-                            ConvertDateTime new_timeFrame = new ConvertDateTime(temp);
-                            Task t = new Task(sub, 'D', 0, new_timeFrame.str);
-                            taskList.add(t);
-                            no_of_task++;
-                            storage.AutoSave(taskList, no_of_task);
-                            System.out.println("Got it. I've added this task:");
-                            System.out.println("  [ ][ ] " + sub + " (" + timeFrame + ")");
-                            System.out.println("Now you have " + no_of_task + " tasks in the list.");
-                        } else {
+                    /*
                             if (userInput.contains("event")) {
                                 int index = 0;
                                 index = userInput.indexOf('/');   //iterate through the input to find the '/' char
@@ -116,7 +88,7 @@ public class Duke{
                                         ui.print_find(num, taskList, 0, 1);
                                         //System.out.println("Here are the matching tasks in your list: ");
 
-                                        //Iterate the Task ArrayList to get the tasks
+                                        //Iterate the duke.Task ArrayList to get the tasks
                                         for (int i = 0; i < taskList.size(); i++){
                                             if((taskList.get(i).description).contains(keyword)) {    //if task description contains the keyword
                                                 num++ ;
@@ -128,20 +100,13 @@ public class Duke{
                                     else
                                         System.out.println("OOPS!! I'm sorry, but I don't know what that means.");
                                 }
-                            }
+                            }*/
                         }
                     }
 
 
-            ////////////////////end of event handling ///////////////////////////////
-
-        }
-        //////////////////////// end of while(true)  ////////////////////////////////
-    }
-    //////////////////////////// end of run() method   //////////////////////////////
 
 
-    //////////////////////////////////////////////////////////////////////////////////////
         public static void main(String[] args) throws IOException {
 
              String logo = " ____        _        \n"
@@ -152,7 +117,7 @@ public class Duke{
             System.out.println("Hello from\n" + logo);
             System.out.println("What can i do for you?\n");
 
-            new Duke().run();
+            new Duke("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt").run();
         }
 
         public static String getResponse(String input){

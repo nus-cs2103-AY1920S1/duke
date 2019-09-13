@@ -1,6 +1,7 @@
 import java.text.ParseException;
         import java.text.SimpleDateFormat;
         import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Deals with making sense of the user command
@@ -116,6 +117,17 @@ class Parser {
                     break;
                 } catch (Exception e) {
                     throw new DukeException("☹ OOPS!!! Wrong format. Use: delete (task number)");
+                }
+            case "sortby":
+                try {
+                    String sortType = input.substring(6).trim();
+                    if (sortType.equals("event")) {
+                        Collections.sort(taskList.getTaskList(), new EventSort());
+                    } else {
+                        throw new Exception();
+                    } ui.setToSort(taskList.getTaskList(), input);
+                } catch (Exception e) {
+                    throw new DukeException("OOPS!!! Your input format is wrong. Use: sortby [type of sort]");
                 }
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

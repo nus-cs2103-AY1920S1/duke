@@ -70,4 +70,12 @@ public class Ui {
         }
     }
 
+    void setToSort(ArrayList<Task> taskList, String sortType) {
+        output = "The list have been sorted according to: " + sortType + "\n    ";
+        for (int i = 0; i < taskList.size(); i++) {
+            int taskNum = i + 1;
+            output += taskNum + "." + taskList.get(i) + "\n    ";
+        }
+    }
+
 }

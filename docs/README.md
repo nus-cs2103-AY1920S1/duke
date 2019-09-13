@@ -9,7 +9,7 @@ Duke is optimised for those who prefer to work with a Command Line Interface(CLI
 1. Download the latest duke.jar [here!](https://github.com/JunHongT/duke)
 1. Copy the file to the folder you want to use as the home folder for your Duke.
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
-![Image of Duke startup](docs/Startup.png)
+![Image of Duke startup](https://github.com/JunHongT/duke/tree/master/docs/Startup.png)
 1. Some example of the commands are:
     * list : List all saved task
     * todo : Add a task 

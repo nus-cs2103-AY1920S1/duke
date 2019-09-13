@@ -10,7 +10,16 @@ public class Ui{
          userInput = scanner.nextLine();
          return userInput;
     }
-    ////////////   End of READ method   ///////////////
+
+    ///////////// print method for list ///////////////////
+    void print_list(int printType, int i, ArrayList<Task> taskList){
+        if(printType==1)
+        System.out.println("Here are the tasks in your list:");
+        if(printType==2)
+            System.out.println((i + 1) + "." + "[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description);
+        if(printType==3)
+            System.out.println((i + 1) + "." + "[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description + " (" + taskList.get(i).timeframe + ")");
+    }
 
     ///////////// print method for delete //////////////////
     void print_delete(String instruct, int no_of_task, Task t){
@@ -20,7 +29,7 @@ public class Ui{
              System.out.println("Now you have " + no_of_task + " tasks in the list.");
          }
     }
-    ////////////// End of "delete" print method //////////////
+
 
     ///////////////  print method for find  /////////////////
     void print_find(int num, ArrayList<Task> taskList, int i, int n){
@@ -31,6 +40,25 @@ public class Ui{
              System.out.println(num + ".[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description + " " + taskList.get(i).timeframe);
          }
     }
-    /////////////// End of "find" print method /////////////
+
+    ///////////// print method for To Do //////////////////
+    void print_toDo(String description, int no_of_task){
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  [ ][ ]" + description);
+        System.out.println("Now you have " + no_of_task + " tasks in the list.");
+    }
+
+    /////////////// print method for bye /////////////////
+    void print_bye(){
+        System.out.println("Bye. Hope to see you again.");
+    }
+
+
+    ////////////// for empty descriptions ////////////////
+    void cannotBeEmpty(){
+         System.out.println("OOPS!! The description cannot be empty.");
+    }
+
+
 }
 

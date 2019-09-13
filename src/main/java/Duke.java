@@ -25,66 +25,33 @@ public class Duke{
     private Button sendButton;
     private Scene scene;
     private Storage storage;
-    //private TaskList tasks;
     private Ui ui;
 
-    /////////////////////////////// Duke constructors  ///////////////////////////////////////////////////
+    /////////////////////////////// Duke constructors  /////////////////////////////////////////////
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-
     }
     public Duke() {
         this("src/main/java/Duke.txt");
     }
 
-    /////////////////////////////// End of Duke constructor //////////////////////////////////////////
-
 
     //////////////////////////////////// start of run //////////////////////////////////////////////
+
     public void run() throws IOException {
         String userInput;
         int no_of_task;
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        ArrayList<Task> taskList;
 
         taskList = storage.load();            //load file onto arraylist
         no_of_task = storage.get_no_task();   //get number of tasks
 
         while(true) {
             userInput = ui.read();                 //read user input
-            //////////////////////////
-            if (userInput.equals("bye")) {
-                System.out.println("Bye. Hope to see you again.");
-                break;
-            }
+            Parser p = new Parser();
+            p.Parse(userInput, no_of_task, taskList, storage);
 
-
-            if (userInput.contains("todo")) {
-                no_of_task++;
-                String sub = userInput.substring(5);        //get task description
-                if (sub.isEmpty()) {
-                    System.out.println("OOPS!! The description of a todo cannot be empty.");
-                } else {
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println("  [ ][ ]" + sub);
-                    System.out.println("Now you have " + no_of_task + " tasks in the list.");
-                    Task t = new Task(sub, 'T', 0, "");
-                    taskList.add(t);
-                    storage.AutoSave(taskList, no_of_task);
-                }
-            } else {
-
-                if (userInput.equals("list")) {
-                    System.out.println("Here are the tasks in your list:");
-
-                    for (int i = 0; i < no_of_task; i++) {
-                        if((taskList.get(i).timeframe).equals("")){
-                            System.out.println((i + 1) + "." + "[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description);
-                        }
-                        else
-                            System.out.println((i + 1) + "." + "[" + taskList.get(i).type + "][" + taskList.get(i).status + "] " + taskList.get(i).description + " (" + taskList.get(i).timeframe + ")");
-                    }
-                } else {
                     if (userInput.contains("done")) {
                         String taskNumber = userInput.substring(5);
 
@@ -164,8 +131,8 @@ public class Duke{
                             }
                         }
                     }
-                }
-            }
+
+
             ////////////////////end of event handling ///////////////////////////////
 
         }
@@ -176,7 +143,8 @@ public class Duke{
 
     //////////////////////////////////////////////////////////////////////////////////////
         public static void main(String[] args) throws IOException {
-            String logo = " ____        _        \n"
+
+             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"

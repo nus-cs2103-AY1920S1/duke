@@ -3,6 +3,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'application'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
 }
 
 group 'seedu.duke'
@@ -35,4 +36,8 @@ shadowJar {
     archiveVersion = "0.1.5"
     archiveClassifier = null
     archiveAppendix = null
+}
+
+checkstyle {
+    toolVersion = '8.23'
 }

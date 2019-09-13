@@ -13,11 +13,11 @@ import java.util.List;
 
 public class CmdUpdate extends Cmd {
     /**
-     *
-     * @param taskList
-     * @param input
-     * @param storage
-     * @throws DukeException
+     * Update command action that performs updating the task in the task list.
+     * @param taskList list of tasks (Array List).
+     * @param input raw user input after the command action word 'update'.
+     * @param storage Storage unit which handles saving and loading the task list from duke.txt.
+     * @throws DukeException handles catching empty description/time.
      */
     public CmdUpdate(List<Task> taskList, String input, Storage storage)
             throws DukeException {
@@ -77,8 +77,8 @@ public class CmdUpdate extends Cmd {
             String updatedTime = descAndTime[1];
             taskList.set(index, new Event(updatedDescription, updatedTime));
         } else {
-            throw new DukeException("You entered empty update fields.. " +
-                    "please enter description/time to update!");
+            throw new DukeException("You entered empty update fields.. "
+                    + "please enter description/time to update!");
         }
         return taskList;
     }
@@ -98,8 +98,8 @@ public class CmdUpdate extends Cmd {
             String time = descAndTime[1];
             taskList.set(index, new Deadline(description, time));
         } else {
-            throw new DukeException("You entered empty update fields.. " +
-                    "please enter description/time to update!");
+            throw new DukeException("You entered empty update fields.. "
+                    + "please enter description/time to update!");
         }
         return taskList;
     }

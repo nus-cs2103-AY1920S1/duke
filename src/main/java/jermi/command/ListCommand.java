@@ -11,6 +11,8 @@ import jermi.component.Formatter;
 import jermi.component.Storage;
 import jermi.component.TaskList;
 import jermi.exception.JermiException;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -39,9 +41,12 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Formatter formatter, Storage storage) throws JermiException {
-        List<String> formattedTasksInString = IntStream.rangeClosed(TASK_LIST_START_INDEX, taskList.getSize())
-                .mapToObj(index -> String.format(COMMAND_TASK_FORMAT_WITH_INDEX, index, taskList.getTask(index)))
-                .collect(Collectors.toList());
+        List<String> formattedTasksInString = new ArrayList<>();
+        int bound = taskList.getSize();
+        for (int index = TASK_LIST_START_INDEX; index <= bound; index++) {
+            String format = String.format(COMMAND_TASK_FORMAT_WITH_INDEX, index, taskList.getTask(index));
+            formattedTasksInString.add(format);
+        }
 
         formattedTasksInString.add(INSERT_MESSAGE_INDEX, COMMAND_LIST_MESSAGE);
         return formatter.echo(formattedTasksInString.toArray(new String[DUMMY_ARRAY_SIZE]));

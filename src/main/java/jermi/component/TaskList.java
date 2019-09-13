@@ -2,6 +2,8 @@ package jermi.component;
 
 import static jermi.misc.Constant.TASK_LIST_START_INDEX;
 
+import jermi.exception.InvalidIndexException;
+import jermi.exception.JermiException;
 import jermi.task.Task;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,8 +57,12 @@ public class TaskList {
      * @param index Index (starting from 1) of task.
      * @return Task of the specified index.
      */
-    public Task getTask(int index) {
-        return this.list.get(index - TASK_LIST_START_INDEX);
+    public Task getTask(int index) throws JermiException {
+        try {
+            return this.list.get(index - TASK_LIST_START_INDEX);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException();
+        }
     }
 
     /**
@@ -64,8 +70,13 @@ public class TaskList {
      *
      * @param index Index (starting from 1) of task.
      */
-    public void remove(int index) {
-        this.list.remove(index - TASK_LIST_START_INDEX);
+    public void remove(int index) throws JermiException {
+        try {
+            this.list.remove(index - TASK_LIST_START_INDEX);
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidIndexException();
+        }
+
     }
 
     /**

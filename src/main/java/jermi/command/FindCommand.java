@@ -14,7 +14,6 @@ import jermi.exception.JermiException;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -80,6 +79,6 @@ public class FindCommand extends Command {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.keywords);
+        return Arrays.hashCode(this.keywords);
     }
 }

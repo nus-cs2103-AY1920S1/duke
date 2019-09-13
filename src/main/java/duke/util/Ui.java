@@ -33,8 +33,9 @@ public class Ui {
 
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
-        if (sc.hasNext())
+        if (sc.hasNext()) {
             return sc.nextLine();
+        }
         return "bye";
     }
 }

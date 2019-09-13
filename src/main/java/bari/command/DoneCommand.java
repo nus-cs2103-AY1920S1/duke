@@ -1,7 +1,7 @@
-package puke.command;
+package bari.command;
 
-import puke.storage.Storage;
-import puke.task.TaskList;
+import bari.storage.Storage;
+import bari.task.TaskList;
 
 /**
  * Class representing a command to mark an item in the task list as done.

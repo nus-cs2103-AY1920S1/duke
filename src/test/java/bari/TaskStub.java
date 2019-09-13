@@ -1,6 +1,6 @@
-package puke;
+package bari;
 
-import puke.task.Task;
+import bari.task.Task;
 
 class TaskStub extends Task {
     TaskStub() {

@@ -1,7 +1,7 @@
-package puke;
+package bari;
 
-import puke.command.ResponseStrings;
-import puke.task.TaskList;
+import bari.command.ResponseStrings;
+import bari.task.TaskList;
 
 public class ResponseStringsStub extends ResponseStrings {
     @Override

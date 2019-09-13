@@ -1,4 +1,4 @@
-package puke.task;
+package bari.task;
 
 /**
  * A generic task, which can be marked as done.

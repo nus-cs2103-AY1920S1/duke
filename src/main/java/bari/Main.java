@@ -1,4 +1,4 @@
-package puke;
+package bari;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -8,10 +8,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Bari using FXML.
  */
 public class Main extends Application {
-    private Puke puke = new Puke();
+    private Bari bari = new Bari();
 
     @Override
     public void start(Stage stage) {
@@ -20,8 +20,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Puke");
-            fxmlLoader.<MainWindow>getController().setPuke(puke);
+            stage.setTitle("Bari");
+            fxmlLoader.<MainWindow>getController().setBari(bari);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

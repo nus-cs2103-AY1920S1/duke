@@ -1,17 +1,17 @@
-package puke;
+package bari;
 
-import puke.command.AddCommand;
-import puke.command.Command;
-import puke.command.DeleteCommand;
-import puke.task.Deadline;
-import puke.task.Event;
-import puke.task.TaskList;
-import puke.task.Todo;
+import bari.command.AddCommand;
+import bari.command.Command;
+import bari.command.DeleteCommand;
+import bari.task.Deadline;
+import bari.task.Event;
+import bari.task.TaskList;
+import bari.task.Todo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class PukeTest {
+class BariTest {
     @Test
     void testTask() {
         Todo t1 = Todo.parse("dig a trench from the fence to lunchtime");

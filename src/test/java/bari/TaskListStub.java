@@ -1,7 +1,7 @@
-package puke;
+package bari;
 
-import puke.task.Task;
-import puke.task.TaskList;
+import bari.task.Task;
+import bari.task.TaskList;
 
 public class TaskListStub extends TaskList {
     private boolean isEmpty = true;

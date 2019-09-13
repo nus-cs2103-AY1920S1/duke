@@ -1,4 +1,4 @@
-package puke;
+package bari;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,32 +23,32 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Puke puke;
+    private Bari bari;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image pukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image bariImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setPuke(Puke d) {
-        puke = d;
+    public void setBari(Bari d) {
+        bari = d;
     }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other
-     * containing Puke's reply and then appends them to the dialog container.
+     * containing Bari's reply and then appends them to the dialog container.
      * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = puke.getResponse(input);
+        String response = bari.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, pukeImage)
+                DialogBox.getBariDialog(response, bariImage)
         );
         userInput.clear();
         // This response is only produced by an ExitCommand

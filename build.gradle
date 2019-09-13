@@ -6,7 +6,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
-group "puke"
+group "bari"
 version "0.9.5"
 
 repositories {
@@ -27,14 +27,14 @@ javafx {
 }
 
 shadowJar {
-    archiveBaseName = "puke"
+    archiveBaseName = "bari"
     archiveVersion = "0.9.5"
     archiveClassifier = null
     archiveAppendix = null
 }
 
 application {
-    mainClassName = "puke.Main"
+    mainClassName = "bari.Main"
 }
 
 test {

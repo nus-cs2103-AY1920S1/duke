@@ -1,4 +1,4 @@
-package puke.task;
+package bari.task;
 
 /**
  * Class representing a task to be done, but not at any particular time.

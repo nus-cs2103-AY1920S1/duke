@@ -1,9 +1,9 @@
-package puke;
+package bari;
 
-import puke.command.Command;
-import puke.command.ResponseStrings;
-import puke.storage.Storage;
-import puke.task.TaskList;
+import bari.command.Command;
+import bari.command.ResponseStrings;
+import bari.storage.Storage;
+import bari.task.TaskList;
 import java.io.FileNotFoundException;
 
 import javafx.application.Application;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * The main logical class, responsible for initialisation of data structures
  * and passing arguments to them for processing.
  */
-public class Puke extends Application {
+public class Bari extends Application {
     private TaskList tasks;
     private Storage storage;
 
@@ -27,7 +27,7 @@ public class Puke extends Application {
         }
     }
 
-    Puke() {
+    Bari() {
         try {
             storage = new Storage("tasks.txt");
             tasks = new TaskList(storage.read());

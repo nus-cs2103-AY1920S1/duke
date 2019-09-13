@@ -1,10 +1,10 @@
-package puke.command;
+package bari.command;
 
-import puke.storage.Storage;
-import puke.task.TaskList;
+import bari.storage.Storage;
+import bari.task.TaskList;
 
 /**
- * Class representing a command to exit Duke.
+ * Class representing a command to exit the program.
  */
 public class ExitCommand extends Command {
     /**

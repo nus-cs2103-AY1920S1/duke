@@ -1,8 +1,8 @@
-package puke.command;
+package bari.command;
 
-import puke.storage.Storage;
-import puke.task.Task;
-import puke.task.TaskList;
+import bari.storage.Storage;
+import bari.task.Task;
+import bari.task.TaskList;
 
 /**
  * Class representing a command to add a new task.

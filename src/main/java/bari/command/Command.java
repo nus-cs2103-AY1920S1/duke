@@ -1,10 +1,10 @@
-package puke.command;
+package bari.command;
 
-import puke.storage.Storage;
-import puke.task.Deadline;
-import puke.task.Event;
-import puke.task.TaskList;
-import puke.task.Todo;
+import bari.storage.Storage;
+import bari.task.Deadline;
+import bari.task.Event;
+import bari.task.TaskList;
+import bari.task.Todo;
 
 /**
  * Abstract class representing individual commands.

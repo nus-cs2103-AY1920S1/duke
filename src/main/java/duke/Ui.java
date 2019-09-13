@@ -33,6 +33,10 @@ public class Ui {
         System.out.println("    ____________________________________________________________");
     }
 
+    /**
+     * Prints out string
+     * @param temp string to be printed out
+     */
     public void show(String temp) {
         System.out.println("     " + temp);
     }

@@ -6,20 +6,20 @@ import duke.exception.EmptyDateTimeDukeException;
 import duke.exception.UnknownInputException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.ToDo;
 
 public class Parser {
 
     /**
-     * (Review:
-     * @param fullCommand
-     * @return object of a particular childClass of Command
+     * Parses user input string and returns requested command.
+     * @param fullCommand expects specific format for string
+     * @return child class of Command object, corresponding to parsed string
+     * @throws DukeException if command is not of expected format
      */
     public static Command parse(String fullCommand) throws DukeException {
         String s = fullCommand.trim();
         String[] input = s.split(" ");
-        String description, date, number;
+        String description, date, number, keyWord;
 
         int num;
         switch (input[0]) {
@@ -52,6 +52,8 @@ public class Parser {
             return new DoneCommand(num);
         case "list":
             return new ListCommand();
+        case "find":
+            return new FindCommand(s.substring(5));
         case "bye":
             return new ExitCommand();
         default:

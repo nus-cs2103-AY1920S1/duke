@@ -21,7 +21,7 @@ public class TaskList {
 
     /**
      * Deleted task is return to DeleteCommand for printing purposes.
-     * @param index
+     * @param index task to be deleted
      * @return task in ArrayList ls that was removed.
      */
     //@@author CarbonGrid
@@ -34,6 +34,10 @@ public class TaskList {
         return ls.size();
     }
 
+    /**
+     * Generates string for all current tasks. To be consumed by duke.Storage
+     * @return String of tasks
+     */
     String generateListForFile() {
         StringBuilder sb = new StringBuilder();
         for (Task task : ls) {
@@ -43,13 +47,22 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Sets done indicator of task from 0 to 1
+     * @param index int value indicating which task to be changed
+     * @return Task that was changed. To allow for printing purposes
+     */
     public Task setDone(int index) {
         Task t = ls.get(index - 1);
         t.markIsDone();
         return t;
     }
 
-    //@@Adapted from author: CarbonGrid (not sure why todo tasks do not give "\n"
+    //@@Adapted from author: CarbonGrid
+    /**
+     * Returns Changes task class attributes into String format
+     * @return String of task attributes
+     */
     public String toUiString() {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         int i = 1;
@@ -66,6 +79,25 @@ public class TaskList {
         }
         return sb.toString();
     }
-    //@@author
 
+
+    public String findKeyWordInList (String keyWord) {
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        int i = 1;
+        Iterator<Task> it = ls.iterator();
+        String temp;
+        while (it.hasNext()) {
+            temp = it.next().toString();
+            if (temp.contains(keyWord)) {
+                sb.append("      ")
+                        .append(i++)
+                        .append(".");
+                temp = temp.replaceAll("\n", "");
+                sb.append(temp);
+                sb.append("\n");
+            }
+        }
+        return sb.toString();
+    }
+    //@@author
 }

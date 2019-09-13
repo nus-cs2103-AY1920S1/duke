@@ -11,6 +11,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Starts Duke with specified filepath to saved list
+     * @param filePath filepath to read and write list
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main loop of Duke. Ends if user inputs 'bye', otherwise continues.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

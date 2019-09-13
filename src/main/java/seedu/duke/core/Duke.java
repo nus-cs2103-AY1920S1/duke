@@ -117,6 +117,10 @@ public class Duke {
         try {
             // Loads the data from txt file to the TaskList object, tasks.
             tasks = new TaskList(this.taskStorage.loadTasks());
+
+            // Loads the stats from txt file to the Statistic object, stats
+            stats = new Statistic(this.statStorage.loadStats());
+
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (DukeException e){
@@ -132,6 +136,10 @@ public class Duke {
             for (int i = 0; i < this.tasks.getSize(); i++) {
                 this.taskStorage.writeToTaskFile(this.tasks.getTask(i).toSaveString());
             }
+
+            // Saves stats file before returning output to GUI.
+            statStorage.saveStatFile(stats);
+
             return output;
         } catch (DukeException e) {
             DukeErrorInterface dei = (e1) -> e1.getMessage();
@@ -255,7 +263,7 @@ public class Duke {
     public String executeTasksGui(String fullCommand) throws DukeException, IOException {
         String taskType = Parser.parseCommand(fullCommand);
 
-        switch(taskType){
+        switch (taskType){
         case ("list"):
             return listRoutine(gui, tasks);
         case ("done"):

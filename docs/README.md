@@ -36,11 +36,13 @@ you would need to set up before proceeding with usage.
     
 
 ## Prerequisites
-1) Have java installed in your computer. 
+1) Have Java installed on your computer. 
 
 2) Create a folder called `data` in the same directory in which 
 you save the jar file for the application for data storage
 and processing. 
+
+![Storage Prerequisite](Storage%20Prerequisite.png)
 
 ## Features 
 

@@ -21,7 +21,7 @@ public class TaskList {
 
     /**
      * Deleted task is return to DeleteCommand for printing purposes.
-     * @param index
+     * @param index task to be deleted
      * @return task in ArrayList ls that was removed.
      */
     //@@author CarbonGrid

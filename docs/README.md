@@ -1,5 +1,19 @@
-# User Guide KerDUKEmit
-KerDUKEmit is a Task tracker CLI app that gives you a to-do list.
+# User Guide DIS DUKE
+
+Table of contents
+-   Introduction
+-   Features
+-   Usage guide
+    -   List Task
+    -   Create Task
+    -   Delete Task
+    -   Mark Task as Done
+    -   Find Task
+    -   Edit Task
+    -   Exit Application
+
+## Introduction 
+KerDUKEmit is a Task tracker CLI app that gives you a to-do list. This app is optimised for those who prefer to work with a command line interface (CLI).
 
 ## Features 
 

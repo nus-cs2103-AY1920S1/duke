@@ -33,6 +33,7 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /*Overloaded method to call DialogBoxUser.fxml instead of creating a separate constructor class*/
     private DialogBox(String text, Image img, Boolean extraVar) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBoxUser.fxml"));

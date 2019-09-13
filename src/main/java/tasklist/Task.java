@@ -69,6 +69,21 @@ public abstract class Task {
      */
     public abstract String encodeForStorage();
 
+    public void addCashFlow (String sourceName , Double value, LocalDateTime dateDue){
+        cashFlows.add(new CashFlow(sourceName, value, dateDue));
+    }
+
+    public void deleteCashFlow (String cashFlowToRemove){
+        if (cashFlowToRemove.contains("all")){
+            cashFlows.clear();
+            //ui.printRemovedTask("All tasks", tasks.size()+1);
+        }else {
+            int taskTodDelete = Integer.parseInt(cashFlowToRemove);
+            //ui.printRemovedTask(tasks.get(taskTodDelete - 1).getOverallStatus(), tasks.size());
+            cashFlows.remove(taskTodDelete - 1);
+        }
+    }
+
 
     public String getTaskType() {
         return taskType.get();

@@ -50,7 +50,9 @@ public class Parser {
         }
     }
 
-    public void parseFina
+    public void parseCashflow(String Full){
+
+    }
 
     public boolean isSafe() {
         return isSafe;

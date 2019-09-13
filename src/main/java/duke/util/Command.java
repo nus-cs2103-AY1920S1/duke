@@ -33,6 +33,7 @@ public class Command {
 
     /**
      * Constructor for Command object.
+     *
      * @param inputParts user input split into words, represented as an array
      * @param command enum to determine which command it is
      */
@@ -43,6 +44,7 @@ public class Command {
 
     /**
      * Executes command.
+     *
      * @param storage Storage object for saving/retrieving task list
      * @param ui Ui object to return duke's responses as strings
      * @param lists Lists of tasks and notes

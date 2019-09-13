@@ -1,12 +1,14 @@
 package duke.util;
 
 import duke.note.Note;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,6 +24,7 @@ public class Storage {
 
     /**
      * Constructor for Storage object.
+     *
      * @param path path to save/read history relative to current directory
      */
     public Storage(String path) {
@@ -29,8 +32,9 @@ public class Storage {
     }
 
     /**
-     * Retrieves history of tasklist.
-     * @return History of tasklist if present
+     * Retrieves history of TaskList.
+     *
+     * @return History of TaskList if present
      * @throws IOException if there are errors reading the file
      */
     public ListManager retrieveHistory() throws IOException, DukeException {
@@ -42,6 +46,7 @@ public class Storage {
 
     /**
      * Returns a list of Tasks.
+     *
      * @param lines List of lines read from .txt.file
      * @return list of Task objects
      * @throws DukeException when history is corrupted
@@ -81,6 +86,7 @@ public class Storage {
 
     /**
      * Saves the history before closing the app.
+     *
      * @param lists lists to be saved as a .txt file
      * @throws IOException if there are errors writing to the file
      */
@@ -122,8 +128,9 @@ public class Storage {
     }
 
     /**
-     * Checks if tasklist history exists.
-     * @return true if tasklist history exists, false otherwise
+     * Checks if TaskList history exists.
+     *
+     * @return true if TaskList history exists, false otherwise
      */
     public boolean historyExists() {
         Path filePath = Paths.get(path);
@@ -132,6 +139,7 @@ public class Storage {
 
     /**
      * Creates a new .txt file to write history to.
+     *
      * @throws IOException if there are errors creating the file
      */
     public void createFile() throws IOException {

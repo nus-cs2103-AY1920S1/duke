@@ -8,6 +8,7 @@ public class Note {
 
     /**
      * Constructor for Note class.
+     *
      * @param desc description of note
      */
     public Note(String desc) {
@@ -16,6 +17,7 @@ public class Note {
 
     /**
      * Returns the description of a note.
+     *
      * @return description of the note
      */
     public String getDesc() {
@@ -24,6 +26,7 @@ public class Note {
 
     /**
      * Returns the string representation of a note.
+     *
      * @return String representation of the note
      */
     @Override

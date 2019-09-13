@@ -16,6 +16,7 @@ public class Main extends Application {
 
     /**
      * Starts the GUI.
+     *
      * @param stage JavaFx object
      */
     @Override

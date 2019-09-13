@@ -23,6 +23,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList object.
+     *
      * @param taskList List of tasks
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -32,6 +33,7 @@ public class TaskList {
 
     /**
      * Returns the tasklist.
+     *
      * @return list of tasks
      */
     public ArrayList<Task> getTaskAsArrayList() {
@@ -53,6 +55,7 @@ public class TaskList {
 
     /**
      * Marks the task item as complete in the list.
+     *
      * @param index Index of task in the list
      * @throws DukeException if invalid task number is passed to this method
      */
@@ -75,6 +78,7 @@ public class TaskList {
 
     /**
      * Deletes a task item from the list.
+     *
      * @param index Index of task in the list
      * @return String representation of deleted task
      * @throws DukeException if invalid task number is passed to this method
@@ -104,6 +108,7 @@ public class TaskList {
 
     /**
      * Creates a new task from a given input.
+     *
      * @param inputParts An array of <code>String</code> split into type of task, name of task and date (if required)
      * @throws DukeException if command is invalid
      */
@@ -115,6 +120,7 @@ public class TaskList {
 
     /**
      * Checks if a given command is valid.
+     *
      * @param type Type of command
      * @throws DukeException if command is invalid
      */
@@ -126,6 +132,7 @@ public class TaskList {
 
     /**
      * Adds a task item to the tasklist.
+     *
      * @param s name of task
      * @param type type of task
      * @return Task object to be appended to the tasklist
@@ -203,8 +210,9 @@ public class TaskList {
         ));
     }
 
-        /**
-         * Creates fixed date/time format from given string.
+    /**
+     * Creates fixed date/time format from given string.
+     *
      * @param s string to be interpreted as date/time format
      * @return string in the fixed format
      */
@@ -224,6 +232,7 @@ public class TaskList {
 
     /**
      * Checks if the input time is in 24 hour format.
+     *
      * @param time input time
      * @return true if time is 24 hour format, false otherwise
      */
@@ -233,6 +242,7 @@ public class TaskList {
 
     /**
      * Creates a fixed time format.
+     *
      * @param time input time
      * @return fixed time format as a <code>String</code>
      */
@@ -249,6 +259,7 @@ public class TaskList {
 
     /**
      * Creates a fixed date format.
+     *
      * @param date input time
      * @return fixed date format as a <code>String</code>
      */
@@ -298,6 +309,7 @@ public class TaskList {
 
     /**
      * Checks if a given string is an integer.
+     *
      * @param n input string
      * @return true if given string is an integer, false otherwise
      */
@@ -312,6 +324,7 @@ public class TaskList {
 
     /**
      * Echos the task in a fixed format.
+     *
      * @param t Task object
      */
     public String echo(Task t) {
@@ -327,6 +340,7 @@ public class TaskList {
 
     /**
      * Returns a list of results from a given search query.
+     *
      * @param name Search query
      * @return String of all tasks containing the search query
      */

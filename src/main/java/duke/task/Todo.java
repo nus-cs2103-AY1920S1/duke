@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for Todo Object.
+     *
      * @param name task
      */
     public Todo(String name) {
@@ -14,7 +15,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Cosntructor for Todo object when loading from history.
+     * Constructor for Todo object when loading from history.
+     *
      * @param name name of task
      * @param completed indicates if task is completed
      */
@@ -24,6 +26,7 @@ public class Todo extends Task {
 
     /**
      * Returns string representation of Todo object.
+     *
      * @return String representation of Todo object
      */
     @Override

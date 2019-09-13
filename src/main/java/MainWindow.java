@@ -56,6 +56,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Sets duke for MainWindow.
+     *
      * @param d Duke object
      */
     public void setDuke(Duke d) {
@@ -64,6 +65,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Sets loader for MainWindow.
+     *
      * @param l Loader object
      */
     public void setLoader(FXMLLoader l) {

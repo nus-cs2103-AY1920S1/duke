@@ -41,6 +41,7 @@ public class Duke {
 
     /**
      * Returns the duke's response to a user input.
+     *
      * @param input User input
      * @return Message to be displayed
      */
@@ -59,6 +60,7 @@ public class Duke {
 
     /**
      * Returns the message to be displayed when an invalid command is received.
+     *
      * @param errorMessage Description of error message
      * @return String of entire error message
      */

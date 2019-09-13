@@ -4,6 +4,7 @@ package duke.util;
  * Ui class to print display items.
  */
 public class Ui {
+
     /**
      * Prints welcome message.
      */

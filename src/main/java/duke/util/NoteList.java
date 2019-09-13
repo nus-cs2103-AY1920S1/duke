@@ -13,7 +13,7 @@ public class NoteList {
     private int count;
 
     /**
-     * Constructor for empty notelist.
+     * Constructor for empty NoteList.
      */
     public NoteList() {
         this.notes = new ArrayList<>();
@@ -21,7 +21,8 @@ public class NoteList {
     }
 
     /**
-     * Constructor for notelist when creating it from history.
+     * Constructor for NoteList when creating it from history.
+     *
      * @param notes list of notes from history
      */
     public NoteList(ArrayList<Note> notes) {
@@ -30,7 +31,8 @@ public class NoteList {
     }
 
     /**
-     * Registers a new note in the notelist.
+     * Registers a new note in the NoteList.
+     *
      * @param desc Description of new note
      * @return String representation of new note
      */
@@ -40,7 +42,8 @@ public class NoteList {
     }
 
     /**
-     * Deletes a note from the notelist.
+     * Deletes a note from the NoteList.
+     *
      * @param index index of note to be deleted
      * @return String representation of deleted note
      * @throws DukeException when note number is invalid
@@ -65,6 +68,7 @@ public class NoteList {
 
     /**
      * Returns an <code>ArrayList</code> of notes.
+     *
      * @return ArrayList of notes
      */
     public ArrayList<Note> getNotesAsArrayList() {
@@ -72,9 +76,10 @@ public class NoteList {
     }
 
     /**
-     * Adds note to the notelist.
+     * Adds note to the NoteList.
+     *
      * @param desc Description of note
-     * @return Note object that is added to the notelist
+     * @return Note object that is added to the NoteList
      */
     public Note addToList(String desc) {
         Note n = new Note(desc);
@@ -84,8 +89,9 @@ public class NoteList {
     }
 
     /**
-     * Returns the string representation of the notelist.
-     * @return String representation of notelist
+     * Returns the string representation of the NoteList.
+     *
+     * @return String representation of NoteList
      */
     public String getListAsString() {
         if (count == 0) {
@@ -99,6 +105,7 @@ public class NoteList {
 
     /**
      * Echos the note in a fixed format.
+     *
      * @param n Note object
      */
     public String echo(Note n) {

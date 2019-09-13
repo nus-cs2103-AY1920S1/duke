@@ -9,6 +9,7 @@ public abstract class Task {
 
     /**
      * Constructor for Task object.
+     *
      * @param n name of task
      */
     public Task(String n) {
@@ -18,6 +19,7 @@ public abstract class Task {
   
     /**
      * Constructor for Task object when loading from history.
+     *
      * @param n name of task
      * @param isCompleted indicates if task is completed
      */
@@ -28,6 +30,7 @@ public abstract class Task {
 
     /**
      * Checks if a task is completed.
+     *
      * @return true if task is completed, false otherwise
      */
     public boolean isCompleted() {
@@ -36,6 +39,7 @@ public abstract class Task {
 
     /**
      * Returns name of task.
+     *
      * @return name of task
      */
     public String getName() {
@@ -53,9 +57,14 @@ public abstract class Task {
         return true;
     }
 
+    /**
+     * Returns a string representation of a Task.
+     *
+     * @return String representation of a Task
+     */
     public String toString() {
         String result = "";
-        result = this.isCompleted ? result + "\u2713" + "]" : result + "\u2718" + "]";
+        result = this.isCompleted ? result + "O" + "]" : result + "X" + "]";
         result += " " + this.name;
         return result;
     }

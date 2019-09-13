@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline object.
+     *
      * @param n name of task
      * @param date date of task
      */
@@ -20,6 +21,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline object when loading from history.
+     *
      * @param n name of task
      * @param date date of task
      * @param completed indicates if task is completed
@@ -31,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Returns date of task.
+     *
      * @return date of task
      */
     public String getDate() {
@@ -39,6 +42,7 @@ public class Deadline extends Task {
 
     /**
      * Returns string representation of Deadline object.
+     *
      * @return String representation of Deadline object
      */
     @Override

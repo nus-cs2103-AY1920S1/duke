@@ -9,6 +9,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event object.
+     *
      * @param n name of event
      * @param date date of event
      */
@@ -20,6 +21,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event object when loading history.
+     *
      * @param n name of event
      * @param date date of event
      * @param completed true if event is already completed, false otherwise
@@ -31,6 +33,7 @@ public class Event extends Task {
 
     /**
      * Returns date of event.
+     *
      * @return String of date
      */
     public String getDate() {
@@ -40,6 +43,7 @@ public class Event extends Task {
 
     /**
      * Returns string representation of Event object.
+     *
      * @return String representation of Event object
      */
     @Override

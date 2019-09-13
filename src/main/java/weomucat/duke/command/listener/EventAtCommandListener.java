@@ -6,7 +6,7 @@ import weomucat.duke.exception.DukeException;
  * When EventAtCommand is run, this listener will be notified.
  */
 @FunctionalInterface
-public interface EventAtCommandListener {
+public interface EventAtCommandListener extends CommandListener {
 
   /**
    * When EventAtCommand is run, this method will be called.

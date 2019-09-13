@@ -19,7 +19,7 @@ import javafx.scene.text.TextFlow;
 class MessageBox extends HBox {
 
   private static final String FONT_NAME = "Monospaced";
-  private static final int FONT_SIZE = 14;
+  private static final int FONT_SIZE = 16;
   private static final FontWeight FONT_WEIGHT = FontWeight.BOLD;
 
   private static final String DEFAULT_TEXT = "";

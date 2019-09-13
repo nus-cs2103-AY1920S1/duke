@@ -1,55 +1,63 @@
 package weomucat.duke.command;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.date.DateRange;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.parser.DurationParser;
 import weomucat.duke.task.EventTask;
-import weomucat.duke.task.Task;
 
-public abstract class EventCommand implements Command {
+public class EventCommand extends Command<AddTaskCommandListener> {
 
+  private static final String PARAMETER_AT = "/at";
   private static final String DATE_RANGE_DELIMITER = "\\|";
+  private static final String PARAMETER_EVERY = "/every";
 
-  private String description;
-  private Collection<DateRange> at;
+  private EventTask task;
+
+  public EventCommand(Collection<AddTaskCommandListener> listeners) {
+    super(listeners);
+  }
 
   @Override
   public String[] getParameterOptions() {
-    return new String[] {PARAMETER_AT};
+    return new String[] {PARAMETER_AT, PARAMETER_EVERY};
   }
 
   @Override
   public void setParameters(String body, HashMap<String, String> parameters)
       throws InvalidParameterException {
-    this.description = body;
+    if (body.equals("")) {
+      throw new InvalidParameterException("The description of an event cannot be empty.");
+    }
 
-    String at = parameters.get(PARAMETER_AT);
-    if (at.equals("")) {
+    String parameterAt = parameters.get(PARAMETER_AT);
+    if (parameterAt == null || parameterAt.equals("")) {
       throw new InvalidParameterException("The date range of an event cannot be empty.");
     }
 
-    this.at = new ArrayList<>();
+    Collection<DateRange> at = new ArrayList<>();
 
-    String[] ranges = at.split(DATE_RANGE_DELIMITER);
+    String[] ranges = parameterAt.split(DATE_RANGE_DELIMITER);
     for (String range : ranges) {
-      this.at.add(DateRange.parse(range));
+      at.add(DateRange.parse(range));
+    }
+
+    this.task = EventTask.create(body, at);
+
+    String parameterEvery = parameters.get(PARAMETER_EVERY);
+    if (parameterEvery != null) {
+      Duration every = new DurationParser(parameterEvery).parse();
+      this.task.setRecurrence(every);
     }
   }
 
   @Override
   public void run() throws DukeException {
-    EventTask task = new EventTask(this.description, this.at);
-    updateListeners(task);
+    forEachListener(listener -> listener.addTaskCommandUpdate(task));
   }
-
-  /**
-   * Listeners to update when this Command is run.
-   *
-   * @param task event task this Command produces
-   * @throws DukeException If there is anything wrong with processing.
-   */
-  public abstract void updateListeners(Task task) throws DukeException;
 }

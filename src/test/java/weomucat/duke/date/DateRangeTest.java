@@ -2,19 +2,17 @@ package weomucat.duke.date;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
 import org.junit.jupiter.api.Test;
-import weomucat.duke.date.Date;
-import weomucat.duke.date.DateRange;
 import weomucat.duke.exception.InvalidParameterException;
 
 public class DateRangeTest {
 
   @Test
   public void fromDateShouldNotBeAfterToDate() {
-    Date from = new Date(LocalDateTime.now().plusMinutes(1));
-    Date to = new Date(LocalDateTime.now());
-    assertThrows(InvalidParameterException.class, () -> new DateRange(from, to),
+    Date from = Date.now().plus(Duration.ofMinutes(1));
+    Date to = Date.now();
+    assertThrows(InvalidParameterException.class, () -> DateRange.create(from, to),
         formatMessage(from, to));
   }
 

@@ -153,7 +153,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     // Set task to done
     task.setDone(true);
 
-    this.tasks.populateRecurringTasks();
+    this.tasks.updateRecurringTasks();
 
     // Update ModifyTaskListeners
     modifyTaskUpdate(new Message("Nice! I've marked this task as done:"), task);
@@ -195,11 +195,25 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
   }
 
   /**
-   * Notify listeners to list tasks.
+   * Notify listeners to list ongoing tasks.
+   * Ongoing: Tasks that are not done & is not due yet.
    */
-  void listTasks() {
-    listFilteredTasks(task -> !task.isDone(), new Message("Here are the undone tasks in your list:"));
-    listFilteredTasks(Task::isDone, new Message("Here are the done tasks:"));
+  void listOngoingTasks() {
+    this.tasks.updateRecurringTasks();
+    listFilteredTasks(task -> !task.isDone() && !task.isOverDue(),
+        new Message("Here are your ongoing tasks:"));
+  }
+
+  /**
+   * Notify listeners to list all tasks.
+   */
+  private void listAllTasks() {
+    this.tasks.updateRecurringTasks();
+    listFilteredTasks(task -> !task.isDone() && task.isOverDue(),
+        new Message("Here are your overdue tasks:"));
+    listFilteredTasks(task -> !task.isDone() && !task.isOverDue(),
+        new Message("Here are your ongoing tasks:"));
+    listFilteredTasks(Task::isDone, new Message("Here are your done tasks:"));
   }
 
   /**
@@ -281,8 +295,12 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
   }
 
   @Override
-  public void listTaskCommandUpdate() {
-    listTasks();
+  public void listTaskCommandUpdate(boolean all) {
+    if (all) {
+      listAllTasks();
+    } else {
+      listOngoingTasks();
+    }
   }
 
   @Override

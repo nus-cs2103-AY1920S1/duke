@@ -3,7 +3,7 @@ package weomucat.duke.task;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.time.LocalDateTime;
+import java.time.Duration;
 import java.util.Collections;
 import org.junit.jupiter.api.Test;
 import weomucat.duke.date.Date;
@@ -14,12 +14,11 @@ public class EventTaskTest {
 
   @Test
   public void descriptionShouldNotBeEmptyString() {
-    DateRange at = assertDoesNotThrow(() -> new DateRange(
-        new Date(LocalDateTime.now().minusMinutes(1)),
-        new Date(LocalDateTime.now())));
+    DateRange at = assertDoesNotThrow(() -> DateRange.create(Date.now(),
+        Date.now().plus(Duration.ofMinutes(1))));
 
     assertThrows(InvalidParameterException.class,
-        () -> new EventTask("", Collections.singleton(at)),
+        () -> EventTask.create("", Collections.singleton(at)),
         formatMessage("", at));
   }
 
@@ -28,11 +27,10 @@ public class EventTaskTest {
     String[] descriptions = {"one", "one two", "one two three"};
 
     for (String description : descriptions) {
-      DateRange at = assertDoesNotThrow(() -> new DateRange(
-          new Date(LocalDateTime.now().minusMinutes(1)),
-          new Date(LocalDateTime.now())));
+      DateRange at = assertDoesNotThrow(() -> DateRange.create(Date.now(),
+          Date.now().plus(Duration.ofMinutes(1))));
 
-      assertDoesNotThrow(() -> new EventTask(description, Collections.singleton(at)),
+      assertDoesNotThrow(() -> EventTask.create(description, Collections.singleton(at)),
           formatMessage(description, at));
     }
   }

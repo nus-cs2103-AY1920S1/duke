@@ -7,7 +7,7 @@ import weomucat.duke.task.Task;
  * When AddTaskCommand is run, this listener will be notified.
  */
 @FunctionalInterface
-public interface AddTaskCommandListener {
+public interface AddTaskCommandListener extends CommandListener {
 
   /**
    * When AddTaskCommand is run, this method will be called.

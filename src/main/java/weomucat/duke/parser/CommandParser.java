@@ -72,11 +72,6 @@ public class CommandParser {
     HashSet<String> lookup = new HashSet<>(Arrays.asList(parameters));
     HashMap<String, String> result = new HashMap<>();
 
-    // Initialize result parameters to empty string.
-    for (String p : lookup) {
-      result.put(p, "");
-    }
-
     LinkedList<String> parameter = new LinkedList<>();
 
     while (!tokens.isEmpty()) {

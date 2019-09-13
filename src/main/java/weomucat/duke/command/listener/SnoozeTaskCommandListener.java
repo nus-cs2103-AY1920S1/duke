@@ -7,7 +7,7 @@ import weomucat.duke.exception.DukeException;
  * When SnoozeTaskCommand is run, this listener will be notified.
  */
 @FunctionalInterface
-public interface SnoozeTaskCommandListener {
+public interface SnoozeTaskCommandListener extends CommandListener {
 
   /**
    * When SnoozeTaskCommand is run, this method will be called.

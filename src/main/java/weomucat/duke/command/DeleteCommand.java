@@ -1,13 +1,19 @@
 package weomucat.duke.command;
 
+import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.DeleteTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidParameterException;
 import weomucat.duke.parser.NumberParser;
 
-public abstract class DeleteCommand implements Command {
+public class DeleteCommand extends Command<DeleteTaskCommandListener> {
 
   private int index;
+
+  public DeleteCommand(Collection<DeleteTaskCommandListener> listeners) {
+    super(listeners);
+  }
 
   @Override
   public String[] getParameterOptions() {
@@ -24,14 +30,6 @@ public abstract class DeleteCommand implements Command {
 
   @Override
   public void run() throws DukeException {
-    updateListeners(this.index);
+    forEachListener(listener -> listener.deleteTaskCommandUpdate(this.index));
   }
-
-  /**
-   * Listeners to update when this Command is run.
-   *
-   * @param i index of task to delete
-   * @throws DukeException If there is anything wrong with processing.
-   */
-  public abstract void updateListeners(int i) throws DukeException;
 }

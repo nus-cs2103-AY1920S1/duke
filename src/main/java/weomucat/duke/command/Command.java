@@ -1,22 +1,35 @@
 package weomucat.duke.command;
 
+import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.CommandListener;
+import weomucat.duke.command.listener.CommandListenerConsumer;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.parser.CommandParser;
 
 /**
  * A Command takes in certain parameters, then performs a set of instructions.
+ *
+ * @param <E> command listeners that this command should update when run
  */
-public interface Command {
+public abstract class Command<E extends CommandListener> {
 
-  String PARAMETER_AT = "/at";
-  String PARAMETER_BY = "/by";
-  String PARAMETER_EVERY = "/every";
+  private Collection<E> listeners;
+
+  public Command(Collection<E> listeners) {
+    this.listeners = listeners;
+  }
+
+  void forEachListener(CommandListenerConsumer<E> consumer) throws DukeException {
+    for (E listener : this.listeners) {
+      consumer.accept(listener);
+    }
+  }
 
   /**
    * The parameters that this Command takes in.
    */
-  String[] getParameterOptions();
+  public abstract String[] getParameterOptions();
 
   /**
    * Sets the parameter of this Command to those from user input.
@@ -25,12 +38,13 @@ public interface Command {
    * @param parameters the parameters from user input
    * @throws DukeException If any parameter given is wrong.
    */
-  void setParameters(String body, HashMap<String, String> parameters) throws DukeException;
+  public abstract void setParameters(String body, HashMap<String, String> parameters)
+      throws DukeException;
 
   /**
    * Perform some instructions.
    *
    * @throws DukeException If there is anything wrong with processing.
    */
-  void run() throws DukeException;
+  public abstract void run() throws DukeException;
 }

@@ -1,13 +1,19 @@
 package weomucat.duke.command;
 
+import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.DoneTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidParameterException;
 import weomucat.duke.parser.NumberParser;
 
-public abstract class DoneCommand implements Command {
+public class DoneCommand extends Command<DoneTaskCommandListener> {
 
   private int index;
+
+  public DoneCommand(Collection<DoneTaskCommandListener> listeners) {
+    super(listeners);
+  }
 
   @Override
   public String[] getParameterOptions() {
@@ -24,14 +30,6 @@ public abstract class DoneCommand implements Command {
 
   @Override
   public void run() throws DukeException {
-    updateListeners(this.index);
+    forEachListener(listener -> listener.doneTaskCommandUpdate(this.index));
   }
-
-  /**
-   * Listeners to update when this Command is run.
-   *
-   * @param i index of task to mark as done
-   * @throws DukeException If there is anything wrong with processing.
-   */
-  public abstract void updateListeners(int i) throws DukeException;
 }

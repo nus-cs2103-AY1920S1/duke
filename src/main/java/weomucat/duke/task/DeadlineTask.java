@@ -9,10 +9,16 @@ import weomucat.duke.ui.Message;
 /**
  * A deadline is a special task that has a due date.
  */
-public class DeadlineTask extends Task implements SnoozableTask {
+public class DeadlineTask extends RecurringTask implements SnoozableTask {
 
   private Date by;
   private Duration every;
+
+  private DeadlineTask(String description, Date by, Duration every) {
+    super(description);
+    this.by = by;
+    this.every = every;
+  }
 
   /**
    * Creates a DeadlineTask.
@@ -21,42 +27,26 @@ public class DeadlineTask extends Task implements SnoozableTask {
    * @param by          date due
    * @throws InvalidParameterException if the description is empty
    */
-  public DeadlineTask(String description, Date by) throws InvalidParameterException {
-    super(description);
+  public static DeadlineTask create(String description, Date by) throws InvalidParameterException {
     if (description.equals("")) {
       throw new InvalidParameterException("The description of a deadline cannot be empty.");
     }
-
-    this.by = by;
+    return new DeadlineTask(description, by, null);
   }
 
-  private DeadlineTask(String description, Date by, Duration every) {
-    super(description);
-    this.by = by;
-    this.every = every;
-  }
-
-  public DeadlineTask setEvery(Duration duration) {
+  @Override
+  public void setRecurrence(Duration duration) {
     this.every = duration;
-    return this;
   }
 
-  public boolean isAfter(DeadlineTask deadlineTask) {
-    return this.by.isAfter(deadlineTask.by);
-  }
-
-  public DeadlineTask getNextRecurrence() {
+  @Override
+  public RecurringTask getNextRecurrence() {
     if (this.every == null) {
       return null;
     }
 
     Date by = this.by.plus(this.every);
     return new DeadlineTask(getDescription(), by, this.every);
-  }
-
-  @Override
-  public void snooze(Duration duration) {
-    this.by = this.by.plus(duration);
   }
 
   @Override
@@ -75,7 +65,22 @@ public class DeadlineTask extends Task implements SnoozableTask {
   }
 
   @Override
+  boolean isOverDue() {
+    return this.by.compareTo(Date.now()) < 0;
+  }
+
+  @Override
   public String toString() {
     return String.format("[D]%s", super.toString());
+  }
+
+  @Override
+  public int compareTo(Date date) {
+    return this.by.compareTo(date);
+  }
+
+  @Override
+  public void snooze(Duration duration) {
+    this.by = this.by.plus(duration);
   }
 }

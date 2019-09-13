@@ -2,3 +2,7 @@ language: java
 
 before_install:
  - chmod +x gradlew
+ 
+script:
+ # By default Travis-ci executes './gradlew build connectedCheck' if no 'script:' section found.
+ - ./gradlew buil

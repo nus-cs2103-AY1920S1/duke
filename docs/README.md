@@ -133,7 +133,7 @@ Expected outcome: <br>
 ![Bye](Bye.gif)
 
 ## 4. FAQ
-**Q**: How do I transfer my data to another Computer?
+**Q**: How do I transfer my data to another Computer? <br>
 **A**: Install the application in the other Computer and
 overwrite the empty `PATH_TO_YOUR_DUKE_INSTALLATION\data\duke.txt`
 data file it creates with the file that contains your previous Duke

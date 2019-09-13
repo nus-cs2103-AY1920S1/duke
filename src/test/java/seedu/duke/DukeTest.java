@@ -25,6 +25,7 @@ public class DukeTest {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
+
     @Test
     public void dummyTest() {
         assertEquals(2,2);

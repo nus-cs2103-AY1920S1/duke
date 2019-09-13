@@ -27,10 +27,10 @@ public class ParserTest {
 
     @Test
     public void test1() {
-       try {
-           assertEquals("[D][\u2718] abc (by: 24 August 2019 6.00 PM)",
-                   Parser.readInFileLine("D | 0 | abc | 24/08/2019 1800").toString());
-       } catch (Exception e) {
+        try {
+            assertEquals("[D][NOT DONE] abc (by: 24 August 2019 6.00 PM)",
+                    Parser.readInFileLine("D | 0 | abc | 24/08/2019 1800").toString());
+        } catch (Exception e) {
             assertEquals(1,2);
         }
     }
@@ -38,7 +38,7 @@ public class ParserTest {
     @Test
     public void test2() {
         try {
-            assertEquals("[D][\u2713] abc (by: 24 August 2019 6.00 PM)",
+            assertEquals("[D][DONE] abc (by: 24 August 2019 6.00 PM)",
                     (Parser.readInFileLine("D | 1 | abc | 24/08/2019 1800")).toString());
         } catch (Exception e) {
             assertEquals(1,2);
@@ -57,33 +57,33 @@ public class ParserTest {
 
     @Test
     public void test5() {
-        assertEquals(true, Parser.isTodo("todo efreb"));
+        assertEquals(true, Parser.isTodoCommand("todo efreb"));
     }
 
     @Test
     public void test6() {
-        assertEquals(true, Parser.isTodo("todo"));
+        assertEquals(true, Parser.isTodoCommand("todo"));
     }
 
     @Test
     public void test7() {
-        assertEquals(true, Parser.isEvent("event efreb"));
+        assertEquals(true, Parser.isEventCommand("event efreb"));
     }
 
     @Test
     public void test8() {
-        assertEquals(true, Parser.isEvent("event"));
+        assertEquals(true, Parser.isEventCommand("event"));
     }
 
     @Test
     public void test9() {
-        assertEquals("[T][\u2718] abcd", Parser.createTodo("todo abcd").toString());
+        assertEquals("[T][NOT DONE] abcd", Parser.createTodo("todo abcd").toString());
     }
 
     @Test
     public void test10() {
         try {
-            assertEquals("[E][\u2718] efgh (at: 24 August 2019 4.00 PM)",
+            assertEquals("[E][NOT DONE] efgh (at: 24 August 2019 4.00 PM)",
                     Parser.createEvent("event efgh /at 24/08/2019 1600").toString());
         } catch (Exception e) {
             System.out.println("failed test");
@@ -93,7 +93,7 @@ public class ParserTest {
     @Test
     public void test11() {
         try {
-            assertEquals("[E][\u2718] help (at: 30 August 2019 4.00 PM)",
+            assertEquals("[E][NOT DONE] help (at: 30 August 2019 4.00 PM)",
                     Parser.createEvent("event help /at 30/08/2019 1600").toString());
         } catch (Exception e) {
             System.out.println("failed test");
@@ -102,18 +102,18 @@ public class ParserTest {
 
     @Test
     public void test12() {
-        assertEquals(true, Parser.isDeadline("deadline"));
+        assertEquals(true, Parser.isDeadlineCommand("deadline"));
     }
 
     @Test
     public void test13() {
-        assertEquals(true, Parser.isDeadline("deadline vfrfwre brv"));
+        assertEquals(true, Parser.isDeadlineCommand("deadline vfrfwre brv"));
     }
 
     @Test
     public void test14() {
         try {
-            assertEquals("[D][\u2718] help (by: 30 August 2019 4.00 PM)",
+            assertEquals("[D][NOT DONE] help (by: 30 August 2019 4.00 PM)",
                     Parser.createDeadline("deadline help /by 30/08/2019 1600")
                             .toString());
         } catch (Exception e) {
@@ -217,7 +217,7 @@ public class ParserTest {
         try {
             Parser.parse("wbfwf", ui);
         } catch (DukeException e) {
-            assertEquals("\u2639 OOPS!!! I'm sorry but I don't know what that means :-(\n", e.toString());
+            assertEquals("OOPS!!! I'm sorry but I don't know what that means :-(\n", e.toString());
         } catch (Exception e) {
             assertEquals(2, 3);
         }
@@ -229,7 +229,7 @@ public class ParserTest {
         try {
             Parser.parse("wbf", ui);
         } catch (DukeException e) {
-            assertEquals("\u2639 OOPS!!! I'm sorry but I don't know what that means :-(\n", e.toString());
+            assertEquals("OOPS!!! I'm sorry but I don't know what that means :-(\n", e.toString());
         } catch (Exception e) {
             assertEquals(2, 3);
         }
@@ -243,7 +243,7 @@ public class ParserTest {
         } catch (Exception e) {
             ui.showParseError();
         }
-        assertEquals("? OOPS!!! Please input the date in dd/mm/yyyy and time in 24hr format " +
-                "or 12hr format as HHmm or H.mmAM or H.mmPM, separated by a space.\n\r\n", outContent.toString());
+        assertEquals("OOPS!!! Please input the date in dd/mm/yyyy and time in 24hr format "
+                + "or 12hr format as HHmm or H.mmAM or H.mmPM, separated by a space.\n\r\n", outContent.toString());
     }
 }

@@ -24,17 +24,19 @@ public class FindCommandTest {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
+
     @Test
     public void test1() {
         FindCommand find = new FindCommand("find e");
         StorageStub st = new StorageStub("dummy");
-        TaskList tl = new TaskList(st.load());
+        TaskList tl = new TaskList(st.loadTaskFile());
+        ExpenseList el = new ExpenseList(st.loadExpenseFile());
         Ui ui = new Ui();
 
         try {
-            find.execute(tl, ui, st);
-            assertEquals( "Here are the matching tasks in your list:\r\n"
-                    + "1. [T][?] def\r\n\r\n", outContent.toString());
+            find.execute(tl, el, ui, st, st);
+            assertEquals("Here are the matching tasks in your list:\r\n"
+                    + "1. [T][NOT DONE] def\r\n\r\n", outContent.toString());
         } catch (Exception e) {
             assertEquals(2, 3);
         }

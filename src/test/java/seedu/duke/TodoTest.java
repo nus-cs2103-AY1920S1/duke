@@ -8,14 +8,14 @@ public class TodoTest {
     @Test
     public void test1() {
         Todo td = new Todo("abc");
-        assertEquals("[T][\u2718] abc", td.toString());
+        assertEquals("[T][NOT DONE] abc", td.toString());
     }
 
     @Test
     public void test2() {
         Todo td = new Todo("abc");
         td.markAsDone();
-        assertEquals("[T][\u2713] abc", td.toString());
+        assertEquals("[T][DONE] abc", td.toString());
     }
 
     @Test

@@ -15,7 +15,7 @@ public class DeadlineTest {
             Date date = dateFormat.parse("24/08/2019");
             Date time = timeFormat.parse("1800");
             Deadline dl = new Deadline("abc", date, time);
-            assertEquals("[D][\u2718] abc (by: 24 August 2019 6.00 PM)", dl.toString());
+            assertEquals("[D][NOT DONE] abc (by: 24 August 2019 6.00 PM)", dl.toString());
         } catch (Exception e) {
             System.out.println("failed test");
         }
@@ -30,7 +30,7 @@ public class DeadlineTest {
             Date time = timeFormat.parse("1800");
             Deadline dl = new Deadline("abc", date, time);
             dl.markAsDone();
-            assertEquals("[D][\u2713] abc (by: 24 August 2019 6.00 PM)", dl.toString());
+            assertEquals("[D][DONE] abc (by: 24 August 2019 6.00 PM)", dl.toString());
         } catch (Exception e) {
             System.out.println("failed test");
         }

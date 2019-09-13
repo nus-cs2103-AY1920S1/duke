@@ -37,11 +37,11 @@ public class UiTest {
 
     @Test
     public void test2() {
-        Ui ui = new Ui();
         TaskList tl = new TaskList();
         tl.add(new Todo("abc"));
         tl.add(new Todo("afewhb"));
         tl.add(new Todo("ecbe"));
+        Ui ui = new Ui();
         ui.printNoOfTaskInList(tl);
         assertEquals("Now you have 3 tasks in the list.\n\r\n", outContent.toString());
     }
@@ -51,9 +51,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeleteCommand("delete     ", tl);
-        } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! Please input the task number you would like to delete.\n",
+            Parser.checkErrorForDeleteCommand("delete     ", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please input the task number you would like to delete.\n",
                     e.toString());
         }
     }
@@ -63,9 +63,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeleteCommand("delete", tl);
-        } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! Please input the task number you would like to delete.\n",
+            Parser.checkErrorForDeleteCommand("delete", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please input the task number you would like to delete.\n",
                     e.toString());
         }
     }
@@ -75,9 +75,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeleteCommand("delete 3", tl);
-        } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! You do not have any tasks in your list.\n", e.toString());
+            Parser.checkErrorForDeleteCommand("delete 3", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! You do not have any tasks in your list.\n", e.toString());
         }
     }
 
@@ -85,11 +85,11 @@ public class UiTest {
     public void test6() {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
-        tl.add(new Todo("edcbe")) ;
+        tl.add(new Todo("edcbe"));
         try {
-            ui.checkErrorForDeleteCommand("delete 3", tl);
-        } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! You do not have that task in your list. "
+            Parser.checkErrorForDeleteCommand("delete 3", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! You do not have that task in your list. "
                     + "Call 'list' to see all your tasks :-)\n",  e.toString());
         }
     }
@@ -99,9 +99,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeadlineCommand("deadline    ", tl);
-        } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! The description of deadline cannot be empty.\n", e.toString());
+            Parser.checkErrorForDeadlineCommand("deadline    ", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! The description of deadline cannot be empty.\n", e.toString());
         }
     }
 
@@ -110,9 +110,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeadlineCommand("deadline   ", tl);
-        } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! The description of deadline cannot be empty.\n", e.toString());
+            Parser.checkErrorForDeadlineCommand("deadline   ", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! The description of deadline cannot be empty.\n", e.toString());
         }
     }
 
@@ -121,9 +121,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeadlineCommand("deadlinesubmitwork", tl);
-        } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! Please input a whitespace between the command 'deadline' "
+            Parser.checkErrorForDeadlineCommand("deadlinesubmitwork", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please input a whitespace between the command 'deadline' "
                     + "and your task description for me to keep track of it correctly :-)\n", e.toString());
         }
     }
@@ -133,9 +133,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeadlineCommand("deadline submit work /bycwpmc", tl);
-        } catch (DukeException e ) {
-            assertEquals("\u2639 OOPS!!! Please input a whitespace before and after '/by' for me to "
+            Parser.checkErrorForDeadlineCommand("deadline submit work /bycwpmc", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please input a whitespace before and after '/by' for me to "
                     + "keep track of the date/time correctly :-)\n",  e.toString());
         }
     }
@@ -145,10 +145,10 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeadlineCommand("deadline submit work", tl);
-        } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! You would need to schedule a date/time for this "+
-                    "deadline using '/by'.\n",  e.toString());
+            Parser.checkErrorForDeadlineCommand("deadline submit work", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! You would need to schedule a date/time for this "
+                    + "deadline using '/by'.\n",  e.toString());
         }
     }
 
@@ -157,9 +157,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeadlineCommand("deadline /by 13/09/2019 1600", tl);
-        } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! The description of deadline cannot be empty.\n",  e.toString());
+            Parser.checkErrorForDeadlineCommand("deadline /by 13/09/2019 1600", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! The description of deadline cannot be empty.\n",  e.toString());
         }
     }
 
@@ -168,10 +168,10 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkErrorForDeadlineCommand("deadline awfbwe /at 13/09/2019 1600", tl);
-        } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! You would need to schedule a date/time for this " +
-                    "deadline using '/by'.\n",  e.toString());
+            Parser.checkErrorForDeadlineCommand("deadline awfbwe /at 13/09/2019 1600", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! You would need to schedule a date/time for this "
+                    + "deadline using '/by'.\n",  e.toString());
         }
     }
 
@@ -180,10 +180,10 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkMarkDoneError("done 3", tl);
-        } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! You do not have that task in your list. " +
-                    "Call 'list' to see all your tasks :-)\n",  e.toString());
+            Parser.checkMarkDoneError("done 3", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! You do not have that task in your list. "
+                    + "Call 'list' to see all your tasks :-)\n",  e.toString());
         }
     }
 
@@ -192,9 +192,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkMarkDoneError("done", tl);
-        } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! Please input the task number you would like to mark as done.\n",
+            Parser.checkMarkDoneError("done", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please input the task number you would like to mark as done.\n",
                     e.toString());
         }
     }
@@ -204,9 +204,9 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         try {
-            ui.checkMarkDoneError("done     ", tl);
-        } catch (DukeException e ) {
-            assertEquals( "\u2639 OOPS!!! Please input the task number you would like to mark as done.\n",
+            Parser.checkMarkDoneError("done     ", tl, ui);
+        } catch (DukeException e) {
+            assertEquals("OOPS!!! Please input the task number you would like to mark as done.\n",
                     e.toString());
         }
     }

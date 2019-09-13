@@ -34,7 +34,7 @@ public class Ui {
     }
 
     public void showHelp() {
-        System.out.println("Let me help you out! Here are all the commands you can enter:");
+        System.out.println("Sure, let me help you out. Here are all the commands you can enter:");
         System.out.println("bye - terminates the application");
         System.out.println("list - displays all tasks in the task list");
         System.out.println("delete 'n' - deletes the nth task in the task list. Note that n is a positive integer.");
@@ -47,7 +47,7 @@ public class Ui {
 
     public String showHelpForGui() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Let me help you out! Here are all the commands you can enter:\n\n");
+        sb.append("Sure, let me help you out. Here are all the commands you can enter:\n\n");
         sb.append("bye - terminates the application\n");
         sb.append("list - displays all tasks in the task list\n");
         sb.append("delete 'n' - deletes the nth task in the task list. Note that n is a positive integer.\n");

@@ -26,6 +26,11 @@ public class AddTodoCommand extends Command {
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
         this.taskList = listOfTasks;
+        try {
+            assert !getMessage().isEmpty();
+        } catch (AssertionError error) {
+            errorMessage = "Description of a todo cannot be empty!";
+        }
         if (getMessage().isEmpty()) {
             errorMessage = "Description of a todo cannot be empty!";
             return;

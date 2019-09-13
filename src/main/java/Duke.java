@@ -1,5 +1,4 @@
 import duke.command.Command;
-import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -8,7 +7,6 @@ import java.io.FileNotFoundException;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.image.Image;
 
 /**
  * The main class of the program.

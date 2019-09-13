@@ -31,8 +31,12 @@ public abstract class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
 
-    //"T | 1 | description | Time" -> "description | Time"
-
+    /**
+     * Parses a string taken from saved data, and return Task of corresponding type. T/D/E
+     * @param savedTask String in format of "T | 1 | description | Time"
+     * @return Task duke.task.Deadline/Event/ToDo
+     * @throws DateTimeParseDukeException
+     */
     public static Task parseFileTask(String savedTask) throws DateTimeParseDukeException {
         Task t = null;
         savedTask = savedTask.trim();
@@ -58,7 +62,6 @@ public abstract class Task {
             t = new Deadline(description,dateTime);
             break;
         default:
-            //exception
             break;
         }
 

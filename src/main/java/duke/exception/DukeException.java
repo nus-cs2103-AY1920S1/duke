@@ -1,3 +1,5 @@
+package duke.exception;
+
 /**
  * DukeException representing Exceptions that arise due to user input in Duke UI
  */

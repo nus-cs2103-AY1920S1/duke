@@ -1,3 +1,8 @@
+package duke.command;
+
+import duke.util.Storage;
+import duke.util.TaskList;
+
 /**
  * Represents a command to find tasks according to a keyword.
  */

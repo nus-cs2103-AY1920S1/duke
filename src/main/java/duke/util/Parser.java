@@ -1,3 +1,16 @@
+package duke.util;
+
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+
 import java.time.LocalDateTime;
 
 /**
@@ -33,7 +46,7 @@ public class Parser {
      * @return Command object (e.g AddCommand, DoneCommand, DeleteCommand) based on the user command
      * @throws DukeException If user input is not recognised as a valid command.
      */
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws DukeException {
             String arr[] = input.split(" ", 2);
             String command = arr[0];
             Command resultCommand;

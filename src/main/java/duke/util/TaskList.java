@@ -1,3 +1,7 @@
+package duke.util;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +36,7 @@ public class TaskList {
      *
      * @throws DukeException If the task list is empty.
      */
-    public String list() throws DukeException{
+    public String list() throws DukeException {
         if (list.size() == 1) {
             throw new DukeException("OOPS!!! You have no tasks to be displayed.");
         } else {

@@ -63,4 +63,12 @@ public class Duke {
         new Duke("." + File.separator + "duke.txt").run();
     }
 
+    public static void varargs(String... args) {
+        for (String s : args) {
+            System.out.println(s);
+        }
+        System.out.println("Wow, do I get a prize? #objectivestotallymet #totallylearning");
+
+    }
+
 }

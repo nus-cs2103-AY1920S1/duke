@@ -6,7 +6,7 @@ plugins {
 }
 
 checkstyle {
-    toolVersion = '8.24'
+    toolVersion = '8.23'
 }
 
 shadowJar {

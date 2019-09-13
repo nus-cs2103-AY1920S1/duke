@@ -25,8 +25,9 @@ public class AddCommand extends Command {
                     tasks.add(new Todo(addTextDescription));
                 }
             } else if (command.contains("deadline")) {
-                if (command.lastIndexOf("/by") == -1)
+                if (command.lastIndexOf("/by") == -1) {
                     throw new DukeException("Error [AddCommand] 0x0000007: You are missing information.");
+                }
                 addTextDescription = command.substring(9, command.lastIndexOf("/by")).trim();
                 addTextPeriod = command.substring(command.lastIndexOf("/by ") + 3).trim();
                 if (addTextDescription.length() == 0 || addTextPeriod.length() == 0) {
@@ -35,8 +36,9 @@ public class AddCommand extends Command {
                     tasks.add(new Deadline(addTextDescription, addTextPeriod));
                 }
             } else if (command.contains("event")) {
-                if (command.lastIndexOf("/at") == -1)
+                if (command.lastIndexOf("/at") == -1) {
                     throw new DukeException("Error [AddCommand] 0x0000009: You are missing information.");
+                }
                 addTextDescription = command.substring(6, command.lastIndexOf("/at")).trim();
                 addTextPeriod = command.substring(command.lastIndexOf("/at ") + 3).trim();
                 if (addTextDescription.length() == 0 || addTextPeriod.length() == 0) {

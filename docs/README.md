@@ -54,7 +54,7 @@ Example of usage:
 'deadline Submit CS2100 report /by 02/12/2019 1900'
 
 Expected outcome: 
-![Outcome of command 'deadline'](/docs/Deadline.png)
+![Outcome of command 'deadline'](Deadline.png)
 
 
 ### `event` - Adds an EVENT task to the chatbot's tasklist

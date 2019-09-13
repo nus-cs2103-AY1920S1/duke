@@ -43,6 +43,7 @@ public class DateTime implements Serializable {
     // private constructor called by the static parser method DateTime.parseString()
     // returns a DateTime object.
     private DateTime(Date dateTime) {
+        assert (dateTime != null); // static method always return a valid datetime
         this.dateTime = dateTime;
     }
 

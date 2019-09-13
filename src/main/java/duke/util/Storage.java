@@ -130,6 +130,7 @@ public class Storage {
      * @return String representation of the saved file path
      */
     public String getSavePath() {
+        assert (this.file != null);
         return this.file.getPath();
     }
 
@@ -144,6 +145,7 @@ public class Storage {
      * @see duke.command.LoadCommand
      */
     public String changeSavePath(String newPath) {
+        assert (this.file != null);
         String previousPath = this.file.getPath();
         this.file = new File(newPath);
         return previousPath;

@@ -1,4 +1,4 @@
-# Duke - User Guide
+# User Guide
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)  
@@ -18,9 +18,10 @@
       * 3.7.7 [Deleting an entire archive](#377-deleting-an-entire-archive) : `archive deleteall`
       * 3.7.8 [Unarchive a task](#378-unarchive-a-task) : `archive revert`   
       
-   3.8. [Exiting the program](#38-exiting-the-program) : `bye`
+   3.8. [Exiting the program](#38-exiting-the-program) : `bye`  
+   
 ## 1. Introduction
-Duke is a Personal Assistant Chatbot that helps users to keep track of various tasks.
+Duke is a Personal Assistant Chatbot that helps users to keep track of various tasks.  
 
 ## 2. Quick Start
 1. Ensure you have Java `11` or above installed on your computer.
@@ -28,8 +29,10 @@ Duke is a Personal Assistant Chatbot that helps users to keep track of various t
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Create a folder named `data` in the home folder as well and create two text files in `data` named `tasks.txt` and `archives.txt`.
  These files will store saved tasks and archives.  
-5. Double-click the file to start the app. The GUI should appear in a few seconds.  
+5. Double-click the file to start the app. The GUI should appear in a few seconds. 
+ 
 ![Image of Duke GUI](https://github.com/Davidcwh/duke/blob/master/docs/Ui.png.PNG?raw=true)
+
 6. Type the command in the command box and press `Enter` or click the `send` button to execute it.  
 e.g. typing `help` and pressing `Enter` will display the list of commands available.
 7. Some example commands you can try:
@@ -37,7 +40,8 @@ e.g. typing `help` and pressing `Enter` will display the list of commands availa
    * `event david's birthday party /at 13/02/2019 1800` : adds an `event` task named `david's birthday party` to list of tasks.
    * `delete 3` : deletes the 3rd task shown in the current list of tasks.
    * `bye` : exits the app.
-8. Refer to [Section 3, "Features"](#3-features) for details of each command.
+8. Refer to [Section 3, "Features"](#3-features) for details of each command.  
+
 ## 3. Features 
 
 ### 3.1 Viewing help 

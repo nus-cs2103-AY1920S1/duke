@@ -53,10 +53,6 @@ public class TaskList implements Serializable {
    * @return the Task
    */
   public Task get(int i) {
-    return this.tasks.get(i);
-  }
-
-  Task getUnsafe(int i) throws InvalidIndexException {
     try {
       // Get task from tasks
       return this.tasks.get(i);
@@ -70,7 +66,7 @@ public class TaskList implements Serializable {
       RecurringTask current = task;
       while (current.isDone() || current.isOverDue()) {
         RecurringTask next = current.getNextRecurrence();
-        current.setRecurrence(null);
+        current.removeRecurrence();
         this.tasks.add(next);
 
         current = next;

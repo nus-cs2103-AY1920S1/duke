@@ -32,7 +32,7 @@ public class Duke {
    *
    * @param taskListPath Relative path of taskList database.
    */
-  public Duke(String taskListPath) {
+  private Duke(String taskListPath) {
     assert taskListPath != null;
 
     this.controller = new Controller();

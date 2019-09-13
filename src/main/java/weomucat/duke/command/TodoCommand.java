@@ -1,33 +1,29 @@
 package weomucat.duke.command;
 
 import java.util.Collection;
-import java.util.HashMap;
 import weomucat.duke.command.listener.AddTaskCommandListener;
+import weomucat.duke.command.parameter.ParameterOptions;
+import weomucat.duke.command.parameter.StringParameter;
 import weomucat.duke.exception.DukeException;
-import weomucat.duke.exception.InvalidParameterException;
 import weomucat.duke.task.TodoTask;
 
 public class TodoCommand extends Command<AddTaskCommandListener> {
 
-  private TodoTask task;
+  private StringParameter description;
 
   public TodoCommand(Collection<AddTaskCommandListener> listeners) {
     super(listeners);
   }
 
   @Override
-  public String[] getParameterOptions() {
-    return new String[0];
-  }
-
-  @Override
-  public void setParameters(String body, HashMap<String, String> parameters)
-      throws InvalidParameterException {
-    this.task = TodoTask.create(body);
+  public ParameterOptions getParameterOptions() {
+    this.description = new StringParameter("Todo Description", true);
+    return new ParameterOptions(this.description);
   }
 
   @Override
   public void run() throws DukeException {
-    forEachListener(listener -> listener.addTaskCommandUpdate(this.task));
+    forEachListener(listener -> listener.addTaskCommandUpdate(new TodoTask(
+        this.description.value())));
   }
 }

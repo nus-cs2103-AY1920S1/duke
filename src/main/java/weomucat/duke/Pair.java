@@ -9,11 +9,11 @@ public class Pair<K extends Comparable<K>, V> implements Comparable<Pair<K, V>> 
     this.value = value;
   }
 
-  public K getKey() {
+  public K key() {
     return key;
   }
 
-  public V getValue() {
+  public V value() {
     return value;
   }
 

@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
+import weomucat.duke.command.parameter.Parameter;
+import weomucat.duke.command.parameter.ParameterOptions;
+import weomucat.duke.exception.InvalidParameterException;
 
 /**
  * A CommandParser is responsible for deciphering user input into:
@@ -13,8 +17,10 @@ import java.util.LinkedList;
  */
 public class CommandParser {
 
+  // Split and join with whitespace.
+  private static final String DELIMITER = " ";
+
   private String command;
-  private String body;
   private String[] tokens;
 
   /**
@@ -25,12 +31,10 @@ public class CommandParser {
   public CommandParser(String input) {
     assert input != null;
 
-    // Split input by whitespace.
-    this.tokens = input.trim().split(" ");
+    this.tokens = input.trim().split(DELIMITER);
 
     LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));
     this.command = tokens.pollFirst();
-    this.body = String.join(" ", tokens).trim();
   }
 
   /**
@@ -43,43 +47,33 @@ public class CommandParser {
   }
 
   /**
-   * Get the body from user input.
-   * If Command expects parameters, run this after parseParameters.
+   * Parse userInput from a list of parameter options.
+   * Each parameter option will parse parameterized user input.
    *
-   * @return Deciphered body
+   * @param parameterOptions list of parameter options
    */
-  public String getBody() {
-    return body;
-  }
-
-  /**
-   * Parse a list of parameters which a Command expects.
-   * Given parameters are trimmed.
-   * Empty parameters are returned as an empty string.
-   *
-   * @param parameters The list of parameters
-   * @return A HashMap of (parameter name, parameter value)
-   */
-  public HashMap<String, String> parseParameters(String... parameters) {
-    assert parameters != null;
+  public void parse(ParameterOptions parameterOptions) throws InvalidParameterException {
+    if (parameterOptions == null) {
+      return;
+    }
 
     LinkedList<String> tokens = new LinkedList<>(Arrays.asList(this.tokens));
 
     // Remove command from tokens.
     tokens.pollFirst();
 
-    // Put parameters into a HashSet for O(1) lookup.
-    HashSet<String> lookup = new HashSet<>(Arrays.asList(parameters));
+    // Put parameter strings into a HashSet for O(1) lookup.
+    HashSet<String> lookup = new HashSet<>(parameterOptions.keySet());
+
+    // Split user input into individual parameterized strings and put into result.
     HashMap<String, String> result = new HashMap<>();
-
     LinkedList<String> parameter = new LinkedList<>();
-
     while (!tokens.isEmpty()) {
       String token = tokens.pollLast();
 
       // If token is a parameter, put parameter in result.
       if (lookup.contains(token)) {
-        result.put(token, String.join(" ", parameter).trim());
+        result.put(token, String.join(DELIMITER, parameter).trim());
 
         // Clear for next parameter.
         parameter.clear();
@@ -89,8 +83,15 @@ public class CommandParser {
       }
     }
 
-    // Last parameter is body.
-    this.body = String.join(" ", parameter).trim();
-    return result;
+    Parameter defaultParameter = parameterOptions.getDefaultParameter();
+    if (defaultParameter != null) {
+      // Last parameterized string is body.
+      defaultParameter.parse(String.join(DELIMITER, parameter).trim());
+    }
+
+    // For each parameter option, parse parameterized strings.
+    for (Map.Entry<String, Parameter> p : parameterOptions.entrySet()) {
+      p.getValue().parse(result.get(p.getKey()));
+    }
   }
 }

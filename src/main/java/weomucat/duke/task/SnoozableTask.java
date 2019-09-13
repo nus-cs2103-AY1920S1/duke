@@ -2,6 +2,6 @@ package weomucat.duke.task;
 
 import java.time.Duration;
 
-public interface SnoozableTask {
+interface SnoozableTask {
   void snooze(Duration duration);
 }

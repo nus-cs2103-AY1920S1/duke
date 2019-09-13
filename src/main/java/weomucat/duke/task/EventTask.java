@@ -6,7 +6,6 @@ import java.util.Collection;
 import weomucat.duke.date.Date;
 import weomucat.duke.date.DateRange;
 import weomucat.duke.exception.InvalidIndexException;
-import weomucat.duke.exception.InvalidParameterException;
 import weomucat.duke.ui.Message;
 
 /**
@@ -15,11 +14,20 @@ import weomucat.duke.ui.Message;
  */
 public class EventTask extends RecurringTask {
 
+  private static final String DATE_RANGE_DELIMITER = "\\|";
+
   private DateRange at;
   private ArrayList<DateRange> atSlots;
   private Duration every;
 
-  private EventTask(String description, Collection<DateRange> at, Duration every) {
+  /**
+   * Creates an EventTask.
+   *
+   * @param description a description of the event
+   * @param at          date range(s) of the event
+   * @param every       optional. recurring task interval
+   */
+  public EventTask(String description, Collection<DateRange> at, Duration every) {
     super(description);
 
     this.atSlots = new ArrayList<>(at);
@@ -27,26 +35,6 @@ public class EventTask extends RecurringTask {
       this.at = this.atSlots.get(0);
     }
     this.every = every;
-  }
-
-  /**
-   * Creates an EventTask.
-   *
-   * @param description a description of the event
-   * @param at          date range(s) of the event
-   * @throws InvalidParameterException if the description is empty or at is empty
-   */
-  public static EventTask create(String description, Collection<DateRange> at)
-      throws InvalidParameterException {
-    if (description.equals("")) {
-      throw new InvalidParameterException("The description of an event cannot be empty.");
-    }
-
-    if (at.size() == 0) {
-      throw new InvalidParameterException("The date range(s) of an event cannot be empty.");
-    }
-
-    return new EventTask(description, at, null);
   }
 
   /**
@@ -64,8 +52,8 @@ public class EventTask extends RecurringTask {
   }
 
   @Override
-  public void setRecurrence(Duration duration) {
-    this.every = duration;
+  public void removeRecurrence() {
+    this.every = null;
   }
 
   @Override

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import weomucat.duke.command.listener.ByeCommandListener;
 import weomucat.duke.exception.DukeException;
+import weomucat.duke.exception.DukeRuntimeException;
 import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
 import weomucat.duke.task.listener.ListTaskListener;
@@ -81,7 +82,7 @@ public class UiManager implements ByeCommandListener,
             listener.userInputUpdate(userInput);
           }
         }
-      } catch (DukeException e) {
+      } catch (DukeException | DukeRuntimeException e) {
         displayError(new Message("☹ OOPS!!! " + e.getMessage()));
       } catch (InterruptedException e) {
         e.printStackTrace();

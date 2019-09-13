@@ -128,7 +128,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   void deleteTask(int i) throws DukeException {
-    Task task = this.tasks.getUnsafe(i);
+    Task task = this.tasks.get(i);
 
     // Remove task
     this.tasks.remove(i);
@@ -148,7 +148,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   void doneTask(int i) throws DukeException {
-    Task task = this.tasks.getUnsafe(i);
+    Task task = this.tasks.get(i);
 
     // Set task to done
     task.setDone(true);
@@ -167,7 +167,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   private void eventAt(int taskIndex, int atIndex) throws DukeException {
-    Task task = this.tasks.getUnsafe(taskIndex);
+    Task task = this.tasks.get(taskIndex);
 
     if (!(task instanceof EventTask)) {
       throw new InvalidIndexException("The task selected is not an event.");
@@ -224,7 +224,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
   private void snoozeTask(int taskIndex, Duration duration) throws DukeException {
-    Task task = this.tasks.getUnsafe(taskIndex);
+    Task task = this.tasks.get(taskIndex);
 
     if (!(task instanceof SnoozableTask)) {
       throw new InvalidIndexException("The task selected cannot be snoozed!");

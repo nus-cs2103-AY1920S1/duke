@@ -37,30 +37,6 @@ public class Date implements Comparable<Date>, Serializable {
   }
 
   /**
-   * Formats a LocalDateTime using a pattern.
-   *
-   * @param date    the LocalDateTime to format
-   * @param pattern the pattern to use
-   * @return a formatted datetime string
-   */
-  public static String format(LocalDateTime date, String pattern) {
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
-    return date.format(dateTimeFormatter);
-  }
-
-  /**
-   * Formats a ZonedDateTime using a pattern.
-   *
-   * @param date    the ZonedDateTime to format
-   * @param pattern the pattern to use
-   * @return a formatted datetime string
-   */
-  public static String format(ZonedDateTime date, String pattern) {
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
-    return date.format(dateTimeFormatter);
-  }
-
-  /**
    * Creates a Date object that represents the current date.
    *
    * @return the current date
@@ -99,7 +75,8 @@ public class Date implements Comparable<Date>, Serializable {
   @Override
   public String toString() {
     // Format the ZonedDateTime object into a pretty datetime string.
-    return Date.format(this.date, DATE_FORMAT_PATTERN);
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
+    return this.date.format(dateTimeFormatter);
   }
 
   @Override

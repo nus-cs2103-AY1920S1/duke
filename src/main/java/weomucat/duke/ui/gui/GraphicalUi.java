@@ -102,7 +102,7 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
     Platform.runLater(() -> this.root.addMessage(new DukeErrorMessage(message)));
   }
 
-  public void displayTaskMessage(Message message) {
+  private void displayTaskMessage(Message message) {
     Platform.runLater(() -> this.root.addMessage(new DukeTaskMessage(message)));
   }
 
@@ -127,11 +127,11 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
     displayMessage(message);
     for (Pair<Integer, Task> pair : tasks) {
       // Get task from tasks
-      Task task = pair.getValue();
+      Task task = pair.value();
 
       // Format task with no. in front
       Message m = task.toMessage();
-      String title = String.format("%d. %s", pair.getKey(), m.getTitle());
+      String title = String.format("%d. %s", pair.key(), m.getTitle());
       displayTaskMessage(m.setTitle(title));
     }
   }

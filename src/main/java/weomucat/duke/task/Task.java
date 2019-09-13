@@ -2,6 +2,7 @@ package weomucat.duke.task;
 
 import java.io.Serializable;
 import weomucat.duke.date.Date;
+import weomucat.duke.exception.DukeRuntimeException;
 import weomucat.duke.ui.Message;
 
 /**
@@ -14,11 +15,16 @@ public abstract class Task implements Comparable<Date>, Serializable {
 
   /**
    * Creates a task with a description.
+   * Task description should not be empty.
    *
    * @param description a description of the task
    */
-  public Task(String description) {
+  Task(String description) {
     assert description != null;
+
+    if (description.equals("")) {
+      throw new DukeRuntimeException("Task description should not be empty.");
+    }
 
     this.description = description;
   }

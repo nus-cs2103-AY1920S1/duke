@@ -4,21 +4,21 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.exception.DukeRuntimeException;
 
-public class TodoTaskTest {
+class TodoTaskTest {
 
   @Test
-  public void descriptionShouldNotBeEmptyString() {
-    assertThrows(InvalidParameterException.class, () -> TodoTask.create(""), formatMessage(""));
+  void descriptionShouldNotBeEmptyString() {
+    assertThrows(DukeRuntimeException.class, () -> new TodoTask(""), formatMessage(""));
   }
 
   @Test
-  public void validUsage() {
+  void validUsage() {
     String[] descriptions = {"one", "one two", "one two three"};
 
     for (String description : descriptions) {
-      assertDoesNotThrow(() -> TodoTask.create(description), formatMessage(description));
+      assertDoesNotThrow(() -> new TodoTask(description), formatMessage(description));
     }
   }
 

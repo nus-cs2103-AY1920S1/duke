@@ -3,7 +3,6 @@ package weomucat.duke.task;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import weomucat.duke.Pair;
@@ -12,10 +11,10 @@ import weomucat.duke.task.listener.StubListTaskListener;
 import weomucat.duke.task.listener.StubModifyTaskListener;
 import weomucat.duke.task.listener.StubTaskListSizeListener;
 
-public class TaskManagerTest {
+class TaskManagerTest {
 
   @Test
-  public void deleteTaskShouldNotBeInvalidIndex() {
+  void deleteTaskShouldNotBeInvalidIndex() {
     TaskManager taskManager = new TaskManager();
     assertThrows(InvalidIndexException.class, () -> taskManager.deleteTask(0));
 
@@ -33,7 +32,7 @@ public class TaskManagerTest {
   }
 
   @Test
-  public void doneTaskShouldNotBeInvalidIndex() {
+  void doneTaskShouldNotBeInvalidIndex() {
     TaskManager taskManager = new TaskManager();
     assertThrows(InvalidIndexException.class, () -> taskManager.doneTask(0));
 
@@ -51,7 +50,7 @@ public class TaskManagerTest {
   }
 
   @Test
-  public void validAddUsage() {
+  void validAddUsage() {
     final StubTask taskOne = new StubTask("one");
     final StubTask taskTwo = new StubTask("two");
     final StubTask taskThree = new StubTask("three");
@@ -82,11 +81,11 @@ public class TaskManagerTest {
     assertEquals(taskTwo, modifyTaskListener.getTask());
     taskManager.listOngoingTasks();
     Pair<Integer, Task> pair = listTaskListener.getTasks().get(0);
-    assertEquals(1, pair.getKey());
-    assertEquals(taskOne, pair.getValue());
+    assertEquals(1, pair.key());
+    assertEquals(taskOne, pair.value());
     pair = listTaskListener.getTasks().get(1);
-    assertEquals(2, pair.getKey());
-    assertEquals(taskTwo, pair.getValue());
+    assertEquals(2, pair.key());
+    assertEquals(taskTwo, pair.value());
 
     // Expect 3 tasks.
     assertDoesNotThrow(() -> taskManager.addTask(taskThree));
@@ -96,18 +95,18 @@ public class TaskManagerTest {
     assertEquals(taskThree, modifyTaskListener.getTask());
     taskManager.listOngoingTasks();
     pair = listTaskListener.getTasks().get(0);
-    assertEquals(1, pair.getKey());
-    assertEquals(taskOne, pair.getValue());
+    assertEquals(1, pair.key());
+    assertEquals(taskOne, pair.value());
     pair = listTaskListener.getTasks().get(1);
-    assertEquals(2, pair.getKey());
-    assertEquals(taskTwo, pair.getValue());
+    assertEquals(2, pair.key());
+    assertEquals(taskTwo, pair.value());
     pair = listTaskListener.getTasks().get(2);
-    assertEquals(3, pair.getKey());
-    assertEquals(taskThree, pair.getValue());
+    assertEquals(3, pair.key());
+    assertEquals(taskThree, pair.value());
   }
 
   @Test
-  public void validDeleteUsage() {
+  void validDeleteUsage() {
     final StubTask taskOne = new StubTask("one");
     final StubTask taskTwo = new StubTask("two");
     final StubTask taskThree = new StubTask("three");
@@ -136,11 +135,11 @@ public class TaskManagerTest {
     assertEquals(taskOne, modifyTaskListener.getTask());
     taskManager.listOngoingTasks();
     Pair<Integer, Task> pair = listTaskListener.getTasks().get(0);
-    assertEquals(1, pair.getKey());
-    assertEquals(taskTwo, pair.getValue());
+    assertEquals(1, pair.key());
+    assertEquals(taskTwo, pair.value());
     pair = listTaskListener.getTasks().get(1);
-    assertEquals(2, pair.getKey());
-    assertEquals(taskThree, pair.getValue());
+    assertEquals(2, pair.key());
+    assertEquals(taskThree, pair.value());
 
     // Expect 1 task.
     assertDoesNotThrow(() -> taskManager.deleteTask(0));
@@ -150,8 +149,8 @@ public class TaskManagerTest {
     assertEquals(taskTwo, modifyTaskListener.getTask());
     taskManager.listOngoingTasks();
     pair = listTaskListener.getTasks().get(0);
-    assertEquals(1, pair.getKey());
-    assertEquals(taskThree, pair.getValue());
+    assertEquals(1, pair.key());
+    assertEquals(taskThree, pair.value());
 
     // Expect 0 tasks.
     assertDoesNotThrow(() -> taskManager.deleteTask(0));
@@ -162,7 +161,7 @@ public class TaskManagerTest {
   }
 
   @Test
-  public void validFindUsage() {
+  void validFindUsage() {
     final StubTask taskOne = new StubTask("one");
     final StubTask taskTwo = new StubTask("two");
     final StubTask taskThree = new StubTask("three");
@@ -182,46 +181,46 @@ public class TaskManagerTest {
     // Empty string should return all tasks.
     taskManager.findTask("");
     Pair<Integer, Task> pair = listTaskListener.getTasks().get(0);
-    assertEquals(1, pair.getKey());
-    assertEquals(taskOne, pair.getValue());
+    assertEquals(1, pair.key());
+    assertEquals(taskOne, pair.value());
     pair = listTaskListener.getTasks().get(1);
-    assertEquals(2, pair.getKey());
-    assertEquals(taskTwo, pair.getValue());
+    assertEquals(2, pair.key());
+    assertEquals(taskTwo, pair.value());
     pair = listTaskListener.getTasks().get(2);
-    assertEquals(3, pair.getKey());
-    assertEquals(taskThree, pair.getValue());
+    assertEquals(3, pair.key());
+    assertEquals(taskThree, pair.value());
 
     // Character should return tasks with that character.
     taskManager.findTask("o");
     pair = listTaskListener.getTasks().get(0);
-    assertEquals(1, pair.getKey());
-    assertEquals(taskOne, pair.getValue());
+    assertEquals(1, pair.key());
+    assertEquals(taskOne, pair.value());
     pair = listTaskListener.getTasks().get(1);
-    assertEquals(2, pair.getKey());
-    assertEquals(taskTwo, pair.getValue());
+    assertEquals(2, pair.key());
+    assertEquals(taskTwo, pair.value());
 
     taskManager.findTask("t");
     pair = listTaskListener.getTasks().get(0);
-    assertEquals(2, pair.getKey());
-    assertEquals(taskTwo, pair.getValue());
+    assertEquals(2, pair.key());
+    assertEquals(taskTwo, pair.value());
     pair = listTaskListener.getTasks().get(1);
-    assertEquals(3, pair.getKey());
-    assertEquals(taskThree, pair.getValue());
+    assertEquals(3, pair.key());
+    assertEquals(taskThree, pair.value());
 
     // Should be case insensitive.
     taskManager.findTask("One");
     pair = listTaskListener.getTasks().get(0);
-    assertEquals(1, pair.getKey());
-    assertEquals(taskOne, pair.getValue());
+    assertEquals(1, pair.key());
+    assertEquals(taskOne, pair.value());
 
     taskManager.findTask("tWo");
     pair = listTaskListener.getTasks().get(0);
-    assertEquals(2, pair.getKey());
-    assertEquals(taskTwo, pair.getValue());
+    assertEquals(2, pair.key());
+    assertEquals(taskTwo, pair.value());
 
     taskManager.findTask("thREE");
     pair = listTaskListener.getTasks().get(0);
-    assertEquals(3, pair.getKey());
-    assertEquals(taskThree, pair.getValue());
+    assertEquals(3, pair.key());
+    assertEquals(taskThree, pair.value());
   }
 }

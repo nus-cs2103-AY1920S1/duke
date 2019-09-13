@@ -1,11 +1,10 @@
 package weomucat.duke.command;
 
 import java.util.Collection;
-import java.util.HashMap;
 import weomucat.duke.command.listener.CommandListener;
 import weomucat.duke.command.listener.CommandListenerConsumer;
+import weomucat.duke.command.parameter.ParameterOptions;
 import weomucat.duke.exception.DukeException;
-import weomucat.duke.parser.CommandParser;
 
 /**
  * A Command takes in certain parameters, then performs a set of instructions.
@@ -16,7 +15,7 @@ public abstract class Command<E extends CommandListener> {
 
   private Collection<E> listeners;
 
-  public Command(Collection<E> listeners) {
+  Command(Collection<E> listeners) {
     this.listeners = listeners;
   }
 
@@ -27,19 +26,11 @@ public abstract class Command<E extends CommandListener> {
   }
 
   /**
-   * The parameters that this Command takes in.
-   */
-  public abstract String[] getParameterOptions();
-
-  /**
-   * Sets the parameter of this Command to those from user input.
+   * Gets the parameter options of this Command.
    *
-   * @param body       the body from user input. See {@link CommandParser}
-   * @param parameters the parameters from user input
-   * @throws DukeException If any parameter given is wrong.
+   * @return the parameter options
    */
-  public abstract void setParameters(String body, HashMap<String, String> parameters)
-      throws DukeException;
+  public abstract ParameterOptions getParameterOptions();
 
   /**
    * Perform some instructions.

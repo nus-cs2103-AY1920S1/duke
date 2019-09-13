@@ -116,11 +116,11 @@ public class CommandLineUi implements Ui {
     displayMessage(message);
     for (Pair<Integer, Task> pair : tasks) {
       // Get task from tasks
-      Task task = pair.getValue();
+      Task task = pair.value();
 
       // Format task with no. in front
       Message m = task.toMessage();
-      String title = String.format("%d. %s", pair.getKey(), m.getTitle());
+      String title = String.format("%d. %s", pair.key(), m.getTitle());
       displayMessage(m.setTitle(title));
     }
   }

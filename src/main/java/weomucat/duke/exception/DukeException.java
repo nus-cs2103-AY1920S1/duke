@@ -6,11 +6,11 @@ package weomucat.duke.exception;
 public class DukeException extends Exception {
 
   /**
-   * Default constructor.
+   * Creates a DukeException.
    *
    * @param message error message to display
    */
-  public DukeException(String message) {
+  DukeException(String message) {
     super(message);
   }
 }

@@ -6,10 +6,10 @@ import java.time.Duration;
 import org.junit.jupiter.api.Test;
 import weomucat.duke.exception.InvalidParameterException;
 
-public class DateRangeTest {
+class DateRangeTest {
 
   @Test
-  public void fromDateShouldNotBeAfterToDate() {
+  void fromDateShouldNotBeAfterToDate() {
     Date from = Date.now().plus(Duration.ofMinutes(1));
     Date to = Date.now();
     assertThrows(InvalidParameterException.class, () -> DateRange.create(from, to),

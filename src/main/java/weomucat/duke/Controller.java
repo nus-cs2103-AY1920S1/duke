@@ -22,6 +22,7 @@ import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.command.listener.SnoozeTaskCommandListener;
+import weomucat.duke.command.parameter.ParameterOptions;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.UnknownCommandException;
 import weomucat.duke.parser.CommandParser;
@@ -170,10 +171,10 @@ public class Controller implements UserInputListener {
     assert userInput != null;
 
     // Initialize parser for this line of user input.
-    CommandParser parser = new CommandParser(userInput);
+    CommandParser commandParser = new CommandParser(userInput);
 
     // Get the command of the user input.
-    String commandString = parser.getCommand();
+    String commandString = commandParser.getCommand();
 
     // Resolve the string command to a Supplier<Command> object.
     Supplier<Command> supplier = commands.get(commandString);
@@ -186,14 +187,11 @@ public class Controller implements UserInputListener {
     // Get command from supplier.
     Command<?> command = supplier.get();
 
-    // Get what parameters the command accepts.
-    String[] parameterOptions = command.getParameterOptions();
+    // Get the parameter options of the command.
+    ParameterOptions options = command.getParameterOptions();
 
-    // Parse the parameters from user input.
-    HashMap<String, String> parameters = parser.parseParameters(parameterOptions);
-
-    // Set the parameters to the Command object.
-    command.setParameters(parser.getBody(), parameters);
+    // Parse userInput and set the parameters.
+    commandParser.parse(options);
 
     // Finally, run the command.
     command.run();

@@ -5,24 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import weomucat.duke.date.Date;
-import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.exception.DukeRuntimeException;
 
-public class DeadlineTaskTest {
+class DeadlineTaskTest {
 
   @Test
-  public void descriptionShouldNotBeEmptyString() {
+  void descriptionShouldNotBeEmptyString() {
     Date by = Date.now();
-    assertThrows(InvalidParameterException.class, () -> DeadlineTask.create("", by),
+    assertThrows(DukeRuntimeException.class, () -> new DeadlineTask("", by, null),
         formatMessage("", by.toString()));
   }
 
   @Test
-  public void validUsage() {
+  void validUsage() {
     String[] descriptions = {"one", "one two", "one two three"};
 
     for (String description : descriptions) {
       Date by = Date.now();
-      assertDoesNotThrow(() -> DeadlineTask.create(description, by),
+      assertDoesNotThrow(() -> new DeadlineTask(description, by, null),
           formatMessage(description, by.toString()));
     }
   }

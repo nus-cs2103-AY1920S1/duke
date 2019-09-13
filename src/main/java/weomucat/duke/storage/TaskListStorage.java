@@ -22,7 +22,7 @@ public class TaskListStorage extends Storage<TaskList> implements SaveTaskListLi
   }
 
   @Override
-  public void save(TaskList tasks) throws StorageException {
+  void save(TaskList tasks) throws StorageException {
     try {
       FileOutputStream fileOutputStream = new FileOutputStream(this.path);
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);

@@ -1,7 +1,6 @@
 package weomucat.duke.task;
 
 import weomucat.duke.date.Date;
-import weomucat.duke.exception.InvalidParameterException;
 import weomucat.duke.ui.Message;
 
 /**
@@ -9,22 +8,13 @@ import weomucat.duke.ui.Message;
  */
 public class TodoTask extends Task {
 
-  private TodoTask(String description) {
-    super(description);
-  }
-
   /**
    * Creates a TodoTask.
    *
    * @param description a description of the todo
-   * @throws InvalidParameterException if the description is empty.
    */
-  public static TodoTask create(String description) throws InvalidParameterException {
-    if (description.equals("")) {
-      throw new InvalidParameterException("The description of a todo cannot be empty.");
-    }
-
-    return new TodoTask(description);
+  public TodoTask(String description) {
+    super(description);
   }
 
   @Override

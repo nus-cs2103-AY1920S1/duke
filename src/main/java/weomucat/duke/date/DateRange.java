@@ -4,7 +4,6 @@ import static weomucat.duke.date.Date.DATE_PARSE_PATTERN;
 
 import java.io.Serializable;
 import java.time.Duration;
-import java.time.LocalDateTime;
 import weomucat.duke.exception.InvalidParameterException;
 
 /**
@@ -55,19 +54,6 @@ public class DateRange implements Serializable {
     Date from = Date.parse(dates[0]);
     Date to = Date.parse(dates[1]);
     return new DateRange(from, to);
-  }
-
-  /**
-   * Formats two LocalDateTimes using a pattern.
-   *
-   * @param from    the start of the date range
-   * @param to      the end of the date range
-   * @param pattern the pattern to use
-   * @return a formatted datetime string
-   */
-  public static String format(LocalDateTime from, LocalDateTime to, String pattern) {
-    return String.format("%s %s %s", Date.format(from, pattern), DELIMITER,
-        Date.format(to, pattern));
   }
 
   /**

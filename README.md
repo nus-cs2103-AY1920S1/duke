@@ -24,6 +24,11 @@ Command | What Duke does | CLI entry format
 `todo` | adds a todo type task to the task list | `todo <description>`
 `undo` | undos the last add/delete/done command in this session | `undo`
 
+**Product Screenshot**
+
+![alt text](https://github.com/atharvjoshi/duke/blob/master/docs/Ui.png.PNG)
+
+
 # Acknowledgements
 The project was built on code supplied by the CS2103 Teaching Department. Some parts of the code were reused from the JavaFX tutorials written by the CS2103 Teaching Department. The inspiration for the `undo` functionality came from a description of the OOP Command pattern by Matt Berther. 
 

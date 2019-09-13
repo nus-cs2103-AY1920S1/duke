@@ -1,39 +1,28 @@
-# Setting up
+# atharvjoshi's Duke
 
-**Prerequisites**
+**What**
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+* Duke was built as part of a module on Software Engineering I read at the National University of Singapore as part of my minor in Computer Science. 
+* Duke is a basic Command Line Interface (CLI) application written in JAVA, following the OOP paradigm, and supplied with a basic GUI.
+* Duke can manage a list of tasks such as to-dos, events, and deadlines with nine recognised commands tabulated below. Simply enter the command in the specified format and let Duke do the rest!
 
-**Importing the project into IntelliJ**
+# Using Duke 
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+Command | What Duke does | CLI entry format
+---------------|---------------|---------------
+`bye` | exits the application | `bye`
+`deadline` | adds a deadline type task to the task list | `deadline <description> /by <dd/mm/yyyy> <hhmm>`
+`delete` | deletes task with specified index | `delete <one-indexed positive integer>`
+`done` | marks task with specified index as done | `done <one-indexed positive integer>`
+`event` | adds an event type task to the task list | `event <description> /at <dd/mm/yyyy> <hhmm>`
+`find` | finds a task corresponding to specified keywords | `find <keyword(s)>`
+`list` | prints the task list | `list`
+`todo` | adds a todo type task to the task list | `todo <description>`
+`undo` | undos the last add/delete/done command in this session | `undo`
 
-# Tutorials 
-
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
-
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+# Acknowledgements
+The project was built on code supplied by the CS2103 Teaching Department. Some parts of the code were reused from the JavaFX tutorials written by the CS2103 Teaching Department. The inspiration for the `undo` functionality came from a description of the OOP Command pattern by Matt Berther. 
 
 # Feedback, Bug Reports
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+* If you have feedback or bug reports, please write to me at github.com/atharvjoshi

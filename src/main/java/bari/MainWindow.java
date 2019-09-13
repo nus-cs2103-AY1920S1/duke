@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Bari bari;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image bariImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image bariImage = new Image(this.getClass().getResourceAsStream("/images/bari.png"));
 
     @FXML
     public void initialize() {

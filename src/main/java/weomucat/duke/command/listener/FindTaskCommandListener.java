@@ -4,7 +4,7 @@ package weomucat.duke.command.listener;
  * When FindTaskCommand is run, this listener will be notified.
  */
 @FunctionalInterface
-public interface FindTaskCommandListener {
+public interface FindTaskCommandListener extends CommandListener {
 
   /**
    * When FindTaskCommand is run, this method will be called.

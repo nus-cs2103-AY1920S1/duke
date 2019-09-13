@@ -1,29 +1,32 @@
 package weomucat.duke.command;
 
+import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.exception.DukeException;
 
-public abstract class ListCommand implements Command {
+public class ListCommand extends Command<ListTaskCommandListener> {
+
+  private static final String PARAMETER_ALL = "/all";
+
+  private boolean all;
+
+  public ListCommand(Collection<ListTaskCommandListener> listeners) {
+    super(listeners);
+  }
 
   @Override
   public String[] getParameterOptions() {
-    return new String[0];
+    return new String[] {PARAMETER_ALL};
   }
 
   @Override
   public void setParameters(String body, HashMap<String, String> parameters) {
-
+    this.all = parameters.get(PARAMETER_ALL) != null;
   }
 
   @Override
   public void run() throws DukeException {
-    updateListeners();
+    forEachListener(listener -> listener.listTaskCommandUpdate(this.all));
   }
-
-  /**
-   * Listeners to update when this Command is run.
-   *
-   * @throws DukeException If there is anything wrong with processing.
-   */
-  public abstract void updateListeners() throws DukeException;
 }

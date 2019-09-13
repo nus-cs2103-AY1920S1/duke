@@ -1,19 +1,25 @@
 package weomucat.duke.command;
 
 import java.time.Duration;
+import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.date.Date;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidParameterException;
 import weomucat.duke.parser.DurationParser;
 import weomucat.duke.task.DeadlineTask;
-import weomucat.duke.task.Task;
 
-public abstract class DeadlineCommand implements Command {
+public class DeadlineCommand extends Command<AddTaskCommandListener> {
 
-  private String description;
-  private Date by;
-  private Duration every;
+  private static final String PARAMETER_BY = "/by";
+  private static final String PARAMETER_EVERY = "/every";
+
+  private DeadlineTask task;
+
+  public DeadlineCommand(Collection<AddTaskCommandListener> listeners) {
+    super(listeners);
+  }
 
   @Override
   public String[] getParameterOptions() {
@@ -23,32 +29,27 @@ public abstract class DeadlineCommand implements Command {
   @Override
   public void setParameters(String body, HashMap<String, String> parameters)
       throws InvalidParameterException {
-    this.description = body;
+    if (body.equals("")) {
+      throw new InvalidParameterException("The description of a deadline cannot be empty.");
+    }
 
-    String by = parameters.get(PARAMETER_BY);
-    if (by.equals("")) {
+    String parameterBy = parameters.get(PARAMETER_BY);
+    if (parameterBy == null || parameterBy.equals("")) {
       throw new InvalidParameterException("The due date of a deadline cannot be empty.");
     }
-    this.by = Date.parse(by);
+    Date by = Date.parse(parameterBy);
 
-    String every = parameters.get(PARAMETER_EVERY);
-    if (!every.equals("")) {
-      this.every = new DurationParser(every).parse();
+    this.task = DeadlineTask.create(body, by);
+
+    String parameterEvery = parameters.get(PARAMETER_EVERY);
+    if (parameterEvery != null) {
+      Duration every = new DurationParser(parameterEvery).parse();
+      this.task.setRecurrence(every);
     }
   }
 
   @Override
   public void run() throws DukeException {
-    DeadlineTask task = new DeadlineTask(this.description, this.by)
-        .setEvery(every);
-    updateListeners(task);
+    forEachListener(listener -> listener.addTaskCommandUpdate(this.task));
   }
-
-  /**
-   * Listeners to update when this Command is run.
-   *
-   * @param task deadline task this Command produces
-   * @throws DukeException If there is anything wrong with processing.
-   */
-  public abstract void updateListeners(Task task) throws DukeException;
 }

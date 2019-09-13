@@ -6,7 +6,7 @@ import weomucat.duke.exception.DukeException;
  * When DoneTaskCommand is run, this listener will be notified.
  */
 @FunctionalInterface
-public interface DoneTaskCommandListener {
+public interface DoneTaskCommandListener extends CommandListener {
 
   /**
    * When DoneTaskCommand is run, this method will be called.

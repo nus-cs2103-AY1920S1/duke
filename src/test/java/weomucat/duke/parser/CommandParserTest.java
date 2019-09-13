@@ -1,10 +1,10 @@
 package weomucat.duke.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;
-import weomucat.duke.parser.CommandParser;
 
 public class CommandParserTest {
 
@@ -36,9 +36,26 @@ public class CommandParserTest {
   }
 
   @Test
+  public void parametersShouldBeNull() {
+    String[] tests = {
+        "event", " event ", "  event  ", "   event   "
+    };
+
+    for (String test : tests) {
+      CommandParser parser = new CommandParser(test);
+      String command = parser.getCommand();
+      HashMap<String, String> parameters = parser.parseParameters("/from", "/to");
+
+      assertEquals("event", command, formatMessage(test));
+      assertEquals("", parser.getBody(), formatMessage(test));
+      assertNull(parameters.get("/from"), formatMessage(test));
+      assertNull(parameters.get("/to"), formatMessage(test));
+    }
+  }
+
+  @Test
   public void parametersShouldBeEmptyString() {
     String[] tests = {
-        "event", " event ", "  event  ", "   event   ",
         "event /from /to", " event /from /to ", "  event  /from  /to  ", "   event   /from   /to   "
     };
 

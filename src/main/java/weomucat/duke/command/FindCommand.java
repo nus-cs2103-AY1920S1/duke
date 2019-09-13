@@ -1,10 +1,17 @@
 package weomucat.duke.command;
 
+import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.FindTaskCommandListener;
+import weomucat.duke.exception.DukeException;
 
-public abstract class FindCommand implements Command {
+public class FindCommand extends Command<FindTaskCommandListener> {
 
   private String keyword;
+
+  public FindCommand(Collection<FindTaskCommandListener> listeners) {
+    super(listeners);
+  }
 
   @Override
   public String[] getParameterOptions() {
@@ -17,14 +24,7 @@ public abstract class FindCommand implements Command {
   }
 
   @Override
-  public void run() {
-    updateListeners(keyword);
+  public void run() throws DukeException {
+    forEachListener(listener -> listener.findTaskCommandUpdate(keyword));
   }
-
-  /**
-   * Listeners to update when this Command is run.
-   *
-   * @param keyword search string to look for in tasks
-   */
-  public abstract void updateListeners(String keyword);
 }

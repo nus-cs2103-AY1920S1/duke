@@ -1,20 +1,19 @@
 package weomucat.duke.task;
 
 import java.io.Serializable;
-import java.util.UUID;
+import weomucat.duke.date.Date;
 import weomucat.duke.ui.Message;
 
 /**
  * A Task is something the user has to do. By default, a Task is not done.
  */
-public abstract class Task implements Serializable {
+public abstract class Task implements Comparable<Date>, Serializable {
 
   private String description;
-  private UUID uuid;
   private boolean done;
 
   /**
-   * Default constructor.
+   * Creates a task with a description.
    *
    * @param description a description of the task
    */
@@ -22,7 +21,6 @@ public abstract class Task implements Serializable {
     assert description != null;
 
     this.description = description;
-    this.uuid = UUID.randomUUID();
   }
 
   /**
@@ -47,15 +45,9 @@ public abstract class Task implements Serializable {
     this.done = done;
   }
 
-  public UUID getUuid() {
-    return uuid;
-  }
-
-  public void setUuid(UUID uuid) {
-    this.uuid = uuid;
-  }
-
   public abstract Message toMessage();
+
+  abstract boolean isOverDue();
 
   @Override
   public String toString() {

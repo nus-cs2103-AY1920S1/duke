@@ -3,6 +3,7 @@ package weomucat.duke.date;
 import static weomucat.duke.date.Date.DATE_PARSE_PATTERN;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import weomucat.duke.exception.InvalidParameterException;
 
@@ -20,6 +21,11 @@ public class DateRange implements Serializable {
   private Date from;
   private Date to;
 
+  private DateRange(Date from, Date to) {
+    this.from = from;
+    this.to = to;
+  }
+
   /**
    * Creates a DateRange from two Dates.
    *
@@ -27,13 +33,11 @@ public class DateRange implements Serializable {
    * @param to   end Date
    * @throws InvalidParameterException if start date is after end date
    */
-  public DateRange(Date from, Date to) throws InvalidParameterException {
-    this.from = from;
-    this.to = to;
-
-    if (this.from.isAfter(this.to)) {
+  public static DateRange create(Date from, Date to) throws InvalidParameterException {
+    if (from.compareTo(to) >= 0) {
       throw new InvalidParameterException("The start date must come before the end date.");
     }
+    return new DateRange(from, to);
   }
 
   /**
@@ -64,6 +68,20 @@ public class DateRange implements Serializable {
   public static String format(LocalDateTime from, LocalDateTime to, String pattern) {
     return String.format("%s %s %s", Date.format(from, pattern), DELIMITER,
         Date.format(to, pattern));
+  }
+
+  public DateRange plus(Duration duration) {
+    Date from = this.from.plus(duration);
+    Date to = this.to.plus(duration);
+    return new DateRange(from, to);
+  }
+
+  public Date getFrom() {
+    return from;
+  }
+
+  public Date getTo() {
+    return to;
   }
 
   @Override

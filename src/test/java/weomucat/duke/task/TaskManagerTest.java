@@ -80,7 +80,7 @@ public class TaskManagerTest {
 
     // Validate that the tasks are correct
     assertEquals(taskTwo, modifyTaskListener.getTask());
-    taskManager.listTasks();
+    taskManager.listOngoingTasks();
     Pair<Integer, Task> pair = listTaskListener.getTasks().get(0);
     assertEquals(1, pair.getKey());
     assertEquals(taskOne, pair.getValue());
@@ -94,7 +94,7 @@ public class TaskManagerTest {
 
     // Validate that the tasks are correct
     assertEquals(taskThree, modifyTaskListener.getTask());
-    taskManager.listTasks();
+    taskManager.listOngoingTasks();
     pair = listTaskListener.getTasks().get(0);
     assertEquals(1, pair.getKey());
     assertEquals(taskOne, pair.getValue());
@@ -134,7 +134,7 @@ public class TaskManagerTest {
 
     // Validate that the tasks are correct
     assertEquals(taskOne, modifyTaskListener.getTask());
-    taskManager.listTasks();
+    taskManager.listOngoingTasks();
     Pair<Integer, Task> pair = listTaskListener.getTasks().get(0);
     assertEquals(1, pair.getKey());
     assertEquals(taskTwo, pair.getValue());
@@ -148,7 +148,7 @@ public class TaskManagerTest {
 
     // Validate that the tasks are correct
     assertEquals(taskTwo, modifyTaskListener.getTask());
-    taskManager.listTasks();
+    taskManager.listOngoingTasks();
     pair = listTaskListener.getTasks().get(0);
     assertEquals(1, pair.getKey());
     assertEquals(taskThree, pair.getValue());

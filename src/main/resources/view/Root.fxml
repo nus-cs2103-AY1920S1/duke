@@ -43,7 +43,7 @@
          <children>
             <TextField fx:id="userInput" minHeight="60.0" onAction="#userInputOnAction" onKeyPressed="#userInputKeyPressed" promptText="Message" style="-fx-text-box-border: transparent; -fx-background-color: #ffffff; -fx-background-radius: 0;" HBox.hgrow="ALWAYS">
                <font>
-                  <Font name="Monospaced Bold" size="14.0" />
+                  <Font name="Monospaced Bold" size="16.0" />
                </font>
                <padding>
                   <Insets left="20.0" />

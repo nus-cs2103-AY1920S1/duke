@@ -1,37 +1,39 @@
 package weomucat.duke.task;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.HashSet;
 import weomucat.duke.exception.InvalidIndexException;
 
 /**
  * A TaskList contains Tasks.
  * Stores the state of Tasks and can be saved.
  */
-public class TaskList {
+public class TaskList implements Serializable {
 
   private ArrayList<Task> tasks;
-  private HashMap<UUID, DeadlineTask> recurringTasks;
+  private HashSet<RecurringTask> recurringTasks;
 
   public TaskList() {
     this.tasks = new ArrayList<>();
-    this.recurringTasks = new HashMap<>();
+    this.recurringTasks = new HashSet<>();
   }
 
   public void add(Task task) {
     this.tasks.add(task);
-
-    if (task instanceof DeadlineTask) {
-      DeadlineTask t = (DeadlineTask) task;
-      this.recurringTasks.put(t.getUuid(), t);
+    if (task instanceof RecurringTask) {
+      RecurringTask recurringTask = (RecurringTask) task;
+      if (recurringTask.getNextRecurrence() != null) {
+        this.recurringTasks.add(recurringTask);
+      }
     }
   }
 
   public void remove(int i) {
-    this.tasks.remove(i);
+    Task task = this.tasks.remove(i);
+    if (task instanceof RecurringTask) {
+      this.recurringTasks.remove(task);
+    }
   }
 
   public Task get(int i) {
@@ -47,14 +49,20 @@ public class TaskList {
     }
   }
 
-  public void populateRecurringTasks() {
-    for (Map.Entry<UUID, DeadlineTask> entry : this.recurringTasks.entrySet()) {
-      DeadlineTask next = entry.getValue();
-      while (!next.isAfter(LocalDateTime.now())) {
-        next = next.getNextRecurrence();
-        tasks.add(next);
+  public void updateRecurringTasks() {
+    System.out.println(this.recurringTasks);
+    for (RecurringTask task : new HashSet<>(this.recurringTasks)) {
+      RecurringTask current = task;
+      while (current.isDone() || current.isOverDue()) {
+        RecurringTask next = current.getNextRecurrence();
+        current.setRecurrence(null);
+        this.tasks.add(next);
+
+        current = next;
       }
-      this.recurringTasks.put(entry.getKey(), next);
+
+      this.recurringTasks.remove(task);
+      this.recurringTasks.add(current);
     }
   }
 

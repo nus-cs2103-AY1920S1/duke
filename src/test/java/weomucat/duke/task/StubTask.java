@@ -1,5 +1,6 @@
 package weomucat.duke.task;
 
+import weomucat.duke.date.Date;
 import weomucat.duke.ui.Message;
 
 public class StubTask extends Task {
@@ -11,5 +12,15 @@ public class StubTask extends Task {
   @Override
   public Message toMessage() {
     return null;
+  }
+
+  @Override
+  boolean isOverDue() {
+    return false;
+  }
+
+  @Override
+  public int compareTo(Date date) {
+    return 0;
   }
 }

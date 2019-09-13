@@ -1,14 +1,22 @@
 package weomucat.duke.command;
 
+import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidParameterException;
 import weomucat.duke.parser.NumberParser;
 
-public abstract class EventAtCommand implements Command {
+public class EventAtCommand extends Command<EventAtCommandListener> {
+
+  private static final String PARAMETER_AT = "/at";
 
   private int taskIndex;
   private int atIndex;
+
+  public EventAtCommand(Collection<EventAtCommandListener> listeners) {
+    super(listeners);
+  }
 
   @Override
   public String[] getParameterOptions() {
@@ -23,7 +31,7 @@ public abstract class EventAtCommand implements Command {
     this.taskIndex = new NumberParser(body).parse("The task index is not a valid number.") - 1;
 
     String at = parameters.get(PARAMETER_AT);
-    if (at.equals("")) {
+    if (at == null || at.equals("")) {
       throw new InvalidParameterException("The schedule index cannot be empty!");
     }
     this.atIndex = new NumberParser(at).parse("The schedule index is not a valid number.") - 1;
@@ -31,15 +39,6 @@ public abstract class EventAtCommand implements Command {
 
   @Override
   public void run() throws DukeException {
-    updateListeners(taskIndex, atIndex);
+    forEachListener(listener -> listener.eventAtCommandUpdate(taskIndex, atIndex));
   }
-
-  /**
-   * Listeners to update when this Command is run.
-   *
-   * @param taskIndex the index of the event in the task list
-   * @param atIndex   the index of the schedule in the tentative schedule list
-   * @throws DukeException If there is anything wrong with processing.
-   */
-  public abstract void updateListeners(int taskIndex, int atIndex) throws DukeException;
 }

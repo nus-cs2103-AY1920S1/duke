@@ -6,7 +6,7 @@ import weomucat.duke.exception.DukeException;
  * When DeleteTaskCommand is run, this listener will be notified.
  */
 @FunctionalInterface
-public interface DeleteTaskCommandListener {
+public interface DeleteTaskCommandListener extends CommandListener {
 
   /**
    * When AddTaskCommand is run, this method will be called.

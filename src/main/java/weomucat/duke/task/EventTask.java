@@ -1,7 +1,9 @@
 package weomucat.duke.task;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
+import weomucat.duke.date.Date;
 import weomucat.duke.date.DateRange;
 import weomucat.duke.exception.InvalidIndexException;
 import weomucat.duke.exception.InvalidParameterException;
@@ -11,20 +13,30 @@ import weomucat.duke.ui.Message;
  * An event is a special task that has a date range.
  * It can also have tentative schedules (date ranges).
  */
-public class EventTask extends Task {
+public class EventTask extends RecurringTask {
 
   private DateRange at;
   private ArrayList<DateRange> atSlots;
+  private Duration every;
+
+  private EventTask(String description, Collection<DateRange> at, Duration every) {
+    super(description);
+
+    this.atSlots = new ArrayList<>(at);
+    if (this.atSlots.size() == 1) {
+      this.at = this.atSlots.get(0);
+    }
+    this.every = every;
+  }
 
   /**
-   * Default constructor.
+   * Creates an EventTask.
    *
    * @param description a description of the event
    * @param at          date range(s) of the event
    * @throws InvalidParameterException if the description is empty or at is empty
    */
-  public EventTask(String description, Collection<DateRange> at) throws InvalidParameterException {
-    super(description);
+  public static EventTask create(String description, Collection<DateRange> at) throws InvalidParameterException {
     if (description.equals("")) {
       throw new InvalidParameterException("The description of an event cannot be empty.");
     }
@@ -33,10 +45,7 @@ public class EventTask extends Task {
       throw new InvalidParameterException("The date range(s) of an event cannot be empty.");
     }
 
-    this.atSlots = new ArrayList<>(at);
-    if (this.atSlots.size() == 1) {
-      this.at = this.atSlots.get(0);
-    }
+    return new EventTask(description, at, null);
   }
 
   /**
@@ -54,12 +63,35 @@ public class EventTask extends Task {
   }
 
   @Override
+  public void setRecurrence(Duration duration) {
+    this.every = duration;
+  }
+
+  @Override
+  public RecurringTask getNextRecurrence() {
+    if (this.every == null) {
+      return null;
+    }
+
+    ArrayList<DateRange> at = new ArrayList<>();
+    for (DateRange slot : this.atSlots) {
+      at.add(slot.plus(this.every));
+    }
+    return new EventTask(getDescription(), at, this.every);
+  }
+
+  @Override
   public Message toMessage() {
     ArrayList<String> out = new ArrayList<>();
 
     if (this.at != null) {
       out.add("===== AT =====");
       out.add(this.at.toString());
+    }
+
+    if (this.every != null) {
+      out.add("===== RECURRENCE =====");
+      out.add(this.every.toString());
     }
 
     if (this.atSlots.size() > 1) {
@@ -77,7 +109,17 @@ public class EventTask extends Task {
   }
 
   @Override
+  boolean isOverDue() {
+    return this.at.getTo().compareTo(Date.now()) < 0;
+  }
+
+  @Override
   public String toString() {
     return String.format("[E]%s", super.toString());
+  }
+
+  @Override
+  public int compareTo(Date date) {
+    return this.at.getFrom().compareTo(date);
   }
 }

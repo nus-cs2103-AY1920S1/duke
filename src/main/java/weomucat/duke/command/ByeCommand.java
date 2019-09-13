@@ -1,8 +1,15 @@
 package weomucat.duke.command;
 
+import java.util.Collection;
 import java.util.HashMap;
+import weomucat.duke.command.listener.ByeCommandListener;
+import weomucat.duke.exception.DukeException;
 
-public abstract class ByeCommand implements Command {
+public class ByeCommand extends Command<ByeCommandListener> {
+
+  public ByeCommand(Collection<ByeCommandListener> listeners) {
+    super(listeners);
+  }
 
   @Override
   public String[] getParameterOptions() {
@@ -15,12 +22,7 @@ public abstract class ByeCommand implements Command {
   }
 
   @Override
-  public void run() {
-    updateListeners();
+  public void run() throws DukeException {
+    forEachListener(ByeCommandListener::byeCommandUpdate);
   }
-
-  /**
-   * Listeners to update when this Command is run.
-   */
-  public abstract void updateListeners();
 }

@@ -57,36 +57,11 @@ public class Duke extends Application {
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        scrollPane.setContent(dialogContainer);
-
-        stage.setTitle("seedu.duke.Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
         mainLayout.setPrefSize(500.0, 600.0);
 
-        scrollPane.setPrefSize(495, 568.0);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.heightProperty()
-                .addListener((observable) -> scrollPane.setVvalue(1.0));
-        userInput.setPrefWidth(425.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        stage = initStage(stage);
+        scrollPane = initScrollPane(scrollPane);
+        initAnchorPane();
 
         //Step 3. Add functionality to handle user input.
         DukeController controller = new DukeController();
@@ -155,6 +130,40 @@ public class Duke extends Application {
                                List<Task> list, Storage storage, Parser parser)
         throws IOException {
         return controller.executeFx(ui, list, storage, parser, input);
+    }
+
+    private Stage initStage(Stage stage) {
+        stage.setTitle("seedu.duke.Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        return stage;
+    }
+
+    private ScrollPane initScrollPane(ScrollPane scrollPane) {
+        scrollPane.setContent(dialogContainer);
+        scrollPane.setPrefSize(495, 568.0);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+        return scrollPane;
+    }
+
+    private void initAnchorPane() {
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty()
+                .addListener((observable) -> scrollPane.setVvalue(1.0));
+        userInput.setPrefWidth(425.0);
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 }
 

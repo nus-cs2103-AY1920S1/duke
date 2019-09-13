@@ -25,7 +25,8 @@ public class TagParser {
             return true;
         }
 
-        return false;
+        int index = Integer.parseInt(ind);
+        return (index < 1 || index > TaskList.getNumberOfTasks());
     }
 
     /**
@@ -60,12 +61,12 @@ public class TagParser {
     public void createTag(String[] tagData) throws InvalidTagException, InvalidTaskIndexException {
         if (isIndexNotGiven(tagData)) {
             throw new InvalidTagException("Please key in an index!");
+        } else if (isInvalidIndexGiven(tagData[0])) {
+            throw new InvalidTagException("Please key in a valid index!");
         } else if (isTagNotGiven(tagData)) {
             throw new InvalidTagException("Please key in a tag!");
         } else if (isValidTagGiven(tagData)) {
             throw new InvalidTagException("Please key in only one tag!");
-        } else if (isInvalidIndexGiven(tagData[0])) {
-            throw new InvalidTagException("Please key in a valid index!");
         } else {
             this.index = Integer.parseInt(tagData[0]) - 1;
             if (isIndexOutOfBounds()) {

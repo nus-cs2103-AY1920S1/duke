@@ -25,6 +25,7 @@ import duke.exception.InvalidTagException;
 import duke.exception.InvalidTaskIndexException;
 import duke.exception.InvalidToDoException;
 import duke.exception.UnknownCommandException;
+import duke.task.TaskList;
 
 /**
  * Represents a Data Parser to parse in all user input provided.
@@ -271,7 +272,8 @@ public class DataParser {
             return true;
         }
 
-        return false;
+        int index = Integer.parseInt(data.split(" ")[0]);
+        return (index < 1 || index > TaskList.getNumberOfTasks());
     }
 
     /**

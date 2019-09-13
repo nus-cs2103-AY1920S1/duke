@@ -6,6 +6,35 @@ Welcome to Duke: Martin's Todo Helper!
 To help you understand this application, there a few things 
 you would need to set up before proceeding with usage. 
 
+## Contents Page 
+
+* [Prerequisites](#prerequisites)
+* [Features](#features)
+    * [Feature 1: Adding of Tasks](#feature-1-adding-of-tasks)
+    * [Feature 2: Editing of Tasks](#feature-2-editing-of-tasks)
+    * [Feature 3: Completion of Tasks](#feature-3-completion-of-tasks)
+    * [Feature 4: Deletion of Tasks](#feature-4-deletion-of-tasks)
+    * [Feature 5: Tagging of Tasks](#feature-5-tagging-of-tasks)
+    * [Feature 6: Searching of Tasks](#feature-6-searching-of-tasks)
+    * [Feature 7: Listing of Tasks](#feature-7-listing-of-tasks)
+    * [Feature 8: Listing of Commands](#feature-8-listing-of-commands)
+    * [Feature 9: Loading and Saving of Tasks](#feature-9-loading-and-saving-of-tasks)
+* [Commands](#usage)
+    * [bye](#bye---indicate-the-exit-of-the-application)
+    * [deadline](#deadline---creates-a-new-deadline-task)
+    * [delete](#delete---deletes-a-task-from-the-list-of-tasks)
+    * [done](#done---marks-a-task-as-done)
+    * [edit date](#edit-name---edits-the-name-of-the-task)
+    * [edit name](#edit-name---edits-the-name-of-the-task)
+    * [event](#event---creates-a-new-event-task)
+    * [find](#find---finds-tasks-containing-keywords)
+    * [findTag](#findtag---finds-tasks-containing-the-tag)
+    * [help](#help---provides-the-list-of-commands)
+    * [list](#list---provides-the-list-of-tasks)
+    * [tag](#tag---gives-a-tag-to-a-task)
+    * [todo](#todo---creates-a-new-todo-task)
+    
+
 ## Prerequisites
 1) Have java installed in your computer. 
 
@@ -24,10 +53,10 @@ You are allowed to create the following types of tasks.
 2) Deadline Tasks with a name and a specified deadline (time).
 3) Event Tasks with a name and a specified time.
 
-### Feature 2: Editing of Tasks.
+### Feature 2: Editing of Tasks. 
 You are allowed to edit the following: 
 1) The name of the task
-2) The time of the task. (Only applies to deadline and event tasks)
+2) The date and time of the task. (Only applies to deadline and event tasks)
 
 ### Feature 3: Completion of Tasks. 
 You are allowed to mark tasks as done. 
@@ -78,7 +107,7 @@ Expected outcome:
 After providing the task name and deadline date and time, 
 a new deadline task will be created. 
 
-Date must be in the format of `dd/mm/yyyy`<br>
+Date must be in the format of `dd/mm/yyyy`<br/>
 Time must be in format of `hhmm`
 
 Example of usage: 
@@ -121,6 +150,24 @@ Expected outcome:
 
 `Marks the specified task as done`
 
+### `edit date` - Edits the date of the task.
+
+After providing the index and the new date, 
+the specified task will have its date changed.  
+
+The task number is `1-indexed`, so the first task has 
+the index of 1.
+Date must be in the format of `dd/mm/yyyy`<br/>
+Time must be in format of `hhmm`
+
+Example of usage: 
+
+`edit date (index) (date) (time`
+
+Expected outcome:
+
+`Edits the date and time of the task at the specified index`
+
 ### `edit name` - Edits the name of the task.
 
 After providing the index and the new name, 
@@ -135,14 +182,14 @@ Example of usage:
 
 Expected outcome:
 
-`Edits the the date and time of the task at the specified index`
+`Edits the name of the task at the specified index`
 
 ### `event` - Creates a new event task. 
 
 After providing the task name and event date and time, 
 a new event task will be created. 
 
-Date must be in the format of `dd/mm/yyyy`<br>
+Date must be in the format of `dd/mm/yyyy`<br/>
 Time must be in format of `hhmm`
 
 Example of usage: 
@@ -231,3 +278,5 @@ Example of usage:
 Expected outcome:
 
 `Create a new todo task based on the given name`
+
+[Back to Top](#user-guide)

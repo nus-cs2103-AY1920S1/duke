@@ -5,12 +5,20 @@ import util.DateTime;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Class to encapsulate start and end time of tasks.
+ */
 public class TimeFrame implements Serializable {
     private static final long serialVersionUID = 6529685098267111111L;
 
     private LocalDateTime start;
     private LocalDateTime end;
 
+    /**
+     * Constructor for TimeFrame.
+     * @param start start of task
+     * @param end end of task
+     */
     public TimeFrame(LocalDateTime start, LocalDateTime end) {
         this.start = start;
         this.end = end;
@@ -24,6 +32,10 @@ public class TimeFrame implements Serializable {
         return end;
     }
 
+    /**
+     * Returns description of time frame as pretty display output.
+     * @return description of time frame
+     */
     public String getDescription() {
         if (start == null && end == null) {
             // task has no timeframe

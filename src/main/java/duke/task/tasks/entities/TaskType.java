@@ -9,6 +9,9 @@ import duke.task.tasks.ToDo;
 
 import java.io.Serializable;
 
+/**
+ * Enum encapsulating different user tasks and its character code.
+ */
 public enum TaskType implements Serializable {
     TODO("todo", 'T', ToDo.class),
     EVENT("event", 'E', Event.class),

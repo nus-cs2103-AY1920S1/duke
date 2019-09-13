@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Command line input channel.
+ */
 public class ClInput implements InputHandler {
     private boolean isActive;
     private Scanner scanner;
@@ -35,6 +38,10 @@ public class ClInput implements InputHandler {
         listeners = new ArrayList<>();
     }
 
+    /**
+     * Returns instance of ClInput.
+     * @return ClInput instance
+     */
     public static ClInput getInstance() {
         if (singleton == null) {
             singleton = new ClInput();

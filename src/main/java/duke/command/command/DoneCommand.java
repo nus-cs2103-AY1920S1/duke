@@ -9,16 +9,19 @@ import error.ui.UiException;
 
 import java.util.Optional;
 
-/***
- * <p>
+/**
  * Command to mark tasks as done.
- * </p>
  */
 public class DoneCommand extends Command {
     private int completedTaskIndex;
     private Optional<Task> done;
     private static final String INVALID_INDEX_MESSAGE = "☹ OOPS!!! PLease enter a valid index! :-(";
 
+    /**
+     * Constructor for DoneCommand.
+     * @param doneIndex index of task to be marked as done
+     * @throws CommandCreationException if index argument is invalid
+     */
     public DoneCommand(String doneIndex) throws CommandCreationException {
         super(CommandType.DONE);
         try {
@@ -28,17 +31,18 @@ public class DoneCommand extends Command {
         }
     }
 
-    /***
-     * <p>
-     * Sets duke.task to done.
-     * </p>
-     * @return new ListenCommand.
+    /**
+     * Sets task to done.
      */
     @Override
     public void execute() throws UiException {
         done = tasksController.setTaskToDone(completedTaskIndex);
     }
 
+    /**
+     * Returns UndoAction to unmark task as done.
+     * @return empty if task was not successfully marked
+     */
     @Override
     public Optional<UndoAction> getUndoAction() {
         if (done.isEmpty()) {

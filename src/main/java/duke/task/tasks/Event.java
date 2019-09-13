@@ -7,10 +7,8 @@ import error.task.TaskCreationException;
 
 import java.time.LocalDateTime;
 
-/***
- * <p>
+/**
  * Task that needs to be done at a specified time.
- * </p>
  */
 public class Event extends Task {
     public Event(String details, LocalDateTime at, Boolean isDone, Boolean isRecurring) {

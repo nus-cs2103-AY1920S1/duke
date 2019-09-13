@@ -9,12 +9,20 @@ import error.ui.UiException;
 
 import java.util.Optional;
 
+/**
+ * Command to delete a task.
+ */
 public class DeleteCommand extends Command {
     private int deletedTaskIndex;
     private Optional<Task> deleted;
 
     private static final String INVALID_INDEX_MESSAGE = "☹ OOPS!!! PLease enter a valid index! :-(";
 
+    /**
+     * Constructor for DeleteCommand.
+     * @param argument index of task to be deleted
+     * @throws CommandCreationException if arguments are invalid
+     */
     public DeleteCommand(String argument) throws CommandCreationException {
         super(CommandType.DELETE);
 
@@ -25,11 +33,19 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Attempts to delete the task.
+     * @throws UiException if ui fails unexpectedly
+     */
     @Override
     public void execute() throws UiException {
         this.deleted = tasksController.deleteTask(deletedTaskIndex);
     }
 
+    /**
+     * Returns UndoAction to add back the task if task was successfully deleted.
+     * @return empty if task was not deleted successfully
+     */
     @Override
     public Optional<UndoAction> getUndoAction() {
         if (deleted.isEmpty()) {

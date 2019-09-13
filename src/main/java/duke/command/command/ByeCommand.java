@@ -8,14 +8,17 @@ import error.ui.UiException;
 
 import java.util.Optional;
 
-/***
- * <p>
+/**
  * Command to exit the application.
- * </p>
  */
 public class ByeCommand extends Command {
     private static final String INVALID_ARGUMENT_MESSAGE = "☹ OOPS!!! Bye command doesn't accept arguments! :-(";
 
+    /**
+     * Constructor for ByeCommand.
+     * @param s mandatory argument for command constructors
+     * @throws CommandCreationException if argument is not empty
+     */
     public ByeCommand(String s) throws CommandCreationException {
         super(CommandType.BYE);
         if (!s.equals("")) {
@@ -23,11 +26,19 @@ public class ByeCommand extends Command {
         }
     }
 
+    /**
+     * Closes ui interface.
+     * @throws UiException if ui fails unexpectedly
+     */
     @Override
     public void execute() throws UiException {
         ui.exit();
     }
 
+    /**
+     * Always returns empty optional.
+     * @return empty optional
+     */
     @Override
     public Optional<UndoAction> getUndoAction() {
         return Optional.empty();

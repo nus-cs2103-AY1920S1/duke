@@ -3,10 +3,18 @@ package storage;
 import duke.task.Task;
 import error.storage.StorageException;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Storage that reads and writes tasks to a byte file in local system memory.
+ */
 public class FileSystemStorage implements Storage {
     private String storageFilePath;
 
@@ -14,6 +22,12 @@ public class FileSystemStorage implements Storage {
         this.storageFilePath = storageFilePath;
     }
 
+    /**
+     * Returns an instance of a FileSystemStorage that reads and writes to a file path.
+     * @param storageFilePath file path to read and write tasks
+     * @return FileSystemStorage instance
+     * @throws StorageException if unable to read file path
+     */
     public static FileSystemStorage getInstance(String storageFilePath) throws StorageException {
         FileSystemStorage storage = new FileSystemStorage(storageFilePath);
         storage.setup();
@@ -44,6 +58,11 @@ public class FileSystemStorage implements Storage {
         return new File(filePath).exists();
     }
 
+    /**
+     * Gets stored tasks.
+     * @return list of tasks
+     * @throws StorageException if unable to read from file path
+     */
     @SuppressWarnings("unchecked")
     @Override
     public List<Task> getTasks() throws StorageException {
@@ -62,6 +81,11 @@ public class FileSystemStorage implements Storage {
         }
     }
 
+    /**
+     * Writes tasks to storage file.
+     * @param tasks list of task to be written
+     * @throws StorageException if unable to write to file path
+     */
     @Override
     public void writeTasks(List<Task> tasks) throws StorageException {
         try {

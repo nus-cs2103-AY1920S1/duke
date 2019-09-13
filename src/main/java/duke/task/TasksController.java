@@ -5,23 +5,25 @@ import error.ui.UiException;
 import storage.Storage;
 import ui.UiController;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-/***
- * <p>
- * Controller class that operates on user's duke.task data.
- * </p>
- */
+/**
+ * Controller class that operates on user's task data.
+ * */
 public class TasksController {
     private Storage storage;
     private TasksView view;
     private UiController ui;
 
-    /***
-     * <p>
+    /**
      * TaskListController constructor.
-     * </p>
+     * @param ui ui interface for I/O
+     * @param storage storage to read and write files
      */
     private TasksController(Storage storage, UiController ui) {
         this.storage = storage;
@@ -33,10 +35,8 @@ public class TasksController {
         return new TasksController(storage, ui);
     }
 
-    /***
-     * <p>
+    /**
      * Gets tasks.
-     * </p>
      * @return list of tasks.
      */
     public List<Task> getTasks() throws UiException {
@@ -48,11 +48,9 @@ public class TasksController {
         }
     }
 
-    /***
-     * <p>
+    /**
      * Adds tasks and prints corresponding feedback.
-     * </p>
-     * @param task duke.task to be added.
+     * @param task task to be added.
      */
     public void addTask(Task task, boolean displayMessage) throws UiException {
         try {
@@ -71,11 +69,9 @@ public class TasksController {
         }
     }
 
-    /***
-     * <p>
+    /**
      * Sets a duke.task to done and prints corresponding feedback.
-     * </p>
-     * @param index index of duke.task to be set to done.
+     * @param index index of task to be set to done.
      */
     public Optional<Task> setTaskToDone(int index) throws UiException {
         try {
@@ -98,10 +94,8 @@ public class TasksController {
         }
     }
 
-    /***
-     * <p>
+    /**
      * Prints all tasks.
-     * </p>
      */
     public void displayAllTasks() throws UiException {
         try {
@@ -112,11 +106,9 @@ public class TasksController {
         }
     }
 
-    /***
-     * <p>
-     * Deletes a duke.task and prints corresponding feedback.
-     * </p>
-     * @param index index of duke.task to be deleted.
+    /**
+     * Deletes a task and prints corresponding feedback.
+     * @param index index of task to be deleted.
      */
     public Optional<Task> deleteTask(int index) throws UiException {
         try {
@@ -142,10 +134,8 @@ public class TasksController {
         }
     }
 
-    /***
-     * <p>
+    /**
      * Finds tasks containing a substring and prints corresponding feedback.
-     * </p>
      * @param parameter substring to be searched.
      */
     public void findTasks(String parameter) throws UiException {
@@ -162,7 +152,14 @@ public class TasksController {
         }
     }
 
-    public void deleteTaskByUuid (UUID uuid, boolean printMessage) throws UiException, NoSuchElementException {
+    /**
+     * Delete a task by its uuid.
+     * @param uuid uuid of task
+     * @param printMessage toggles printing of action
+     * @throws UiException if ui fails unexpectedly
+     * @throws NoSuchElementException if uuid does not exist
+     */
+    public void deleteTaskByUuid(UUID uuid, boolean printMessage) throws UiException, NoSuchElementException {
         try {
             List<Task> tasks = storage.getTasks();
 
@@ -183,6 +180,12 @@ public class TasksController {
         }
     }
 
+    /**
+     * Sets a task to undone by its uuid.
+     * @param uuid uuid of task
+     * @throws UiException if ui fails unexpectedly
+     * @throws NoSuchElementException if uuid does not exist
+     */
     public void setTaskToUndoneByUuid(UUID uuid) throws UiException, NoSuchElementException {
         try {
             List<Task> tasks = storage.getTasks();

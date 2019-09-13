@@ -8,10 +8,8 @@ import error.ui.UiException;
 
 import java.util.Optional;
 
-/***
- * <p>
+/**
  * Command to find tasks.
- * </p>
  */
 public class FindCommand extends Command {
     private String searchParameter;
@@ -21,17 +19,18 @@ public class FindCommand extends Command {
         searchParameter = arguments;
     }
 
-    /***
-     * <p>
-     * Search for duke.task.
-     * </p>
-     * @return new ListenCommand.
+    /**
+     * Search for task.
      */
     @Override
     public void execute() throws UiException {
         tasksController.findTasks(searchParameter);
     }
 
+    /**
+     * Always returns empty.
+     * @return empty optional
+     */
     @Override
     public Optional<UndoAction> getUndoAction() {
         return Optional.empty();

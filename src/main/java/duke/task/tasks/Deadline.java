@@ -7,10 +7,8 @@ import error.task.TaskCreationException;
 
 import java.time.LocalDateTime;
 
-/***
- * <p>
- * Task that needs to be completed by a specified date.
- * </p>
+/**
+ * Task that needs to be completed by a specified time.
  */
 public class Deadline extends Task {
     public Deadline(String details, LocalDateTime by, Boolean isDone, Boolean isRecurring) {

@@ -6,16 +6,12 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/***
- * <p>
+/**
  * Utility class to handle date and time.
- * </p>
  */
 public class DateTime {
-    /***
-     * <p>
+    /**
      * Parses a string into a LocalDateTime object. E.g. 24/02/2022 0315.
-     * </p>
      * @param dateTimeString string to be parsed, must be in the form dd/mm/yyyy HHmm.
      * @return LocalDateTime.
      * @throws UnknownDateTimeException if date and time is not in the correct format.
@@ -53,10 +49,8 @@ public class DateTime {
         }
     }
 
-    /***
-     * <p>
+    /**
      * Formats LocalDateTime object into string.
-     * </p>
      * @param dateTime LocalDateTime to be formatted.
      * @return formatted string.
      */

@@ -14,6 +14,9 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
+/**
+ * Dialog box for JavaFx ui.
+ */
 public class FxDialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -44,10 +47,22 @@ public class FxDialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns dialog box flushed to the left.
+     * @param text text to be displayed in dialog box
+     * @param img image for dialog box
+     * @return dialog box instance
+     */
     public static FxDialogBox getUserDialog(String text, Image img) {
         return new FxDialogBox(text, img);
     }
 
+    /**
+     * Returns dialog box flushed to the right.
+     * @param text text to be displayed in dialog box
+     * @param img image for dialog box
+     * @return dialog box instance
+     */
     public static FxDialogBox getDukeDialog(String text, Image img) {
         FxDialogBox db = new FxDialogBox(text, img);
         db.flip();

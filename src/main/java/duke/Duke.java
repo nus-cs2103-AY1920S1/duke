@@ -12,16 +12,18 @@ import ui.output.OutputHandler;
 
 import java.util.Optional;
 
-/***
- * <p>
- * Main driver class for duke.Duke program.
- * </p>
+/**
+ * Main driver class for Duke task manager program.
  */
 
 public class Duke implements UiActivity {
     private UiController ui;
     private CommandFactory commandFactory;
 
+    /**
+     * Program entry point.
+     * @param args program arguments
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
 
@@ -46,12 +48,19 @@ public class Duke implements UiActivity {
         duke.run();
     }
 
+    /**
+     * Starts the program.
+     */
     public void run() {
         System.out.println("Program starting...");
 
         ui.initializeUi();
     }
 
+    /**
+     * Configures the main driver with a set of customizable options.
+     * @param options the program's runtime options
+     */
     public void configure(Options options) {
         // Initialize UI component
         InputHandler input = options.getInput();
@@ -67,6 +76,10 @@ public class Duke implements UiActivity {
         commandFactory = new CommandFactory(tasks, ui);
     }
 
+    /**
+     * Parse input and execute corresponding command.
+     * @param input user input
+     */
     @Override
     public void onInputReceived(String input) {
         try {
@@ -82,6 +95,9 @@ public class Duke implements UiActivity {
         }
     }
 
+    /**
+     * Closes the program.
+     */
     @Override
     public void stopActivity() {
         System.exit(0);

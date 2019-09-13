@@ -1,7 +1,10 @@
 package duke.command.factory;
 
-import duke.command.*;
-import duke.command.command.*;
+import duke.command.Command;
+import duke.command.CommandProducer;
+import duke.command.CommandType;
+import duke.command.UndoAction;
+import duke.command.command.AddCommand;
 import duke.task.Task;
 import duke.task.TasksController;
 import duke.task.factory.TaskFactory;
@@ -15,10 +18,8 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.Stack;
 
-/***
- * <p>
- * Command to listen and parse user input.
- * </p>
+/**
+ * Factory for command instances.
  */
 public class CommandFactory {
     private TasksController tasksController;
@@ -28,11 +29,10 @@ public class CommandFactory {
 
     private static final String UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
-    /***
-     * <p>
+    /**
      * ListenCommand constructor.
-     * </p>
-     * @param tasksController controller for duke.task list on which commands are executed.
+     * @param tasksController controller to execute task operations
+     * @param ui ui interface for I/O
      */
     public CommandFactory(TasksController tasksController, UiController ui) {
         this.tasksController = tasksController;
@@ -41,10 +41,8 @@ public class CommandFactory {
         this.history = new Stack<>();
     }
 
-    /***
-     * <p>
+    /**
      * Reads and parse user input.
-     * </p>
      * @return corresponding commands.
      */
     public Optional<Command> parse(String input) throws UiException {
@@ -92,7 +90,7 @@ public class CommandFactory {
 
         while (!history.isEmpty()) {
             Command prevCommand = history.pop();
-            if(prevCommand.getUndoAction().isPresent()) {
+            if (prevCommand.getUndoAction().isPresent()) {
                 nextUndo = prevCommand.getUndoAction().get();
                 break;
             }

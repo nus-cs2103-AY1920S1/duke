@@ -10,12 +10,21 @@ import ui.fx.FxMain;
 import ui.input.InputHandler;
 import ui.output.OutputHandler;
 
+/**
+ * Factory to generate duke runtime options.
+ */
 public class OptionsFactory {
 
     private static String getDefaultStorageFilePath() {
         return System.getProperty("user.home") + "/bin/duke.txt";
     }
 
+    /**
+     * Generates options based on custom parameters.
+     * @param guiEnabled to enable JavaFx gui
+     * @param persistentDataEnabled to enable changes to be stored in local memory
+     * @return
+     */
     public static Options select(boolean guiEnabled, boolean persistentDataEnabled) {
         InputHandler input = null;
         OutputHandler output = null;

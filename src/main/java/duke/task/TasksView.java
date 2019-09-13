@@ -6,17 +6,14 @@ import util.OutputBuilder;
 
 import java.util.List;
 
-/***
- * <p>
- * View in charge of printing all task related information and output.
- * </p>
+/**
+ * Class in charge of printing all task related information and output.
  */
 public class TasksView {
-    /***
-     * <p>
+    /**
      * Prints tasks.
-     * </p>
      * @param tasks list of tasks to be printed.
+     * @param ui ui to print output
      */
     public void displayAllTasks(List<Task> tasks, UiController ui) throws UiException {
         OutputBuilder builder = new OutputBuilder();
@@ -28,11 +25,10 @@ public class TasksView {
         ui.displayOutput(output);
     }
 
-    /***
-     * <p>
+    /**
      * Prints matching tasks.
-     * </p>
      * @param tasks list of matching tasks to be printed.
+     * @param ui ui to print output
      */
     public void displaySearchResults(List<Task> tasks, UiController ui) throws UiException {
         OutputBuilder builder = new OutputBuilder();
@@ -44,12 +40,11 @@ public class TasksView {
     }
 
 
-    /***
-     * <p>
+    /**
      * Prints feedback and task's descriptor message when task is added.
-     * </p>
      * @param task task to be added.
      * @param tasksLength current task list length.
+     * @param ui ui to print output
      */
     public void displayNewTask(Task task, int tasksLength, UiController ui) throws UiException {
         OutputBuilder builder = new OutputBuilder();
@@ -64,11 +59,10 @@ public class TasksView {
         ui.displayOutput(output);
     }
 
-    /***
-     * <p>
+    /**
      * Prints feedback and task's descriptor message when task is marked as done.
-     * </p>
      * @param task task to be marked as done
+     * @param ui ui to print output
      */
     public void displayTaskDone(Task task, UiController ui) throws UiException {
         OutputBuilder builder = new OutputBuilder();
@@ -81,12 +75,11 @@ public class TasksView {
         ui.displayOutput(output);
     }
 
-    /***
-     * <p>
+    /**
      * Prints feedback and task's descriptor message when task is deleted.
-     * </p>
      * @param task task to be deleted.
      * @param tasksLength length of task list after deletion.
+     * @param ui ui to print
      */
     public void displayTaskDeleted(Task task, int tasksLength, UiController ui) throws UiException {
         OutputBuilder builder = new OutputBuilder();
@@ -101,6 +94,11 @@ public class TasksView {
         ui.displayOutput(output);
     }
 
+    /**
+     * Prints feedback and task's descriptor message when task is marked as undone.
+     * @param task task to be marked as undone
+     * @param ui to print output
+     */
     public void displayTaskUndone(Task task, UiController ui) throws UiException {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Noted. I've unmarked this task as undone:")

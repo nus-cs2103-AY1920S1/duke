@@ -17,6 +17,9 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Factory to produce tasks.
+ */
 public class TaskFactory {
     private final String dateTimeRegex =
             "(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})\\s([0-9]{4}))";
@@ -25,6 +28,12 @@ public class TaskFactory {
     private static final String UNKNOWN_ERROR_MESSAGE = "☹ OOPS!!! Something went wrong while creating your task! :-(";
     private static final String EMPTY_DETAILS_ERROR_MESSAGE = "☹ OOPS!!! Your task description cannot be empty! :-(";
 
+    /**
+     * Parses user input to create corresponding task.
+     * @param input user input
+     * @return optional of task
+     * @throws TaskCreationException if arguments are invalid
+     */
     public Optional<Task> getTask(String input) throws TaskCreationException {
         // gets first word of input
         String keyword = CommandUtils.getCommand(input);

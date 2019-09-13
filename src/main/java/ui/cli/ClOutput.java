@@ -2,12 +2,21 @@ package ui.cli;
 
 import ui.output.OutputHandler;
 
+/**
+ * Command line output channel.
+ */
 public class ClOutput implements OutputHandler {
     private static String HORIZONTAL_DIVIDER = "    ____________________________________________________________\n";
     private static ClOutput singleton;
 
-    private ClOutput() {}
+    private ClOutput() {
 
+    }
+
+    /**
+     * Returns an instance of ClOutput.
+     * @return ClOutput instance
+     */
     public static ClOutput getInstance() {
         if (singleton == null) {
             singleton = new ClOutput();

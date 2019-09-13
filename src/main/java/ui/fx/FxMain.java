@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Main driver for JavaFx ui.
+ */
 public class FxMain extends Application implements InputHandler, OutputHandler {
     private static boolean isStarted = false;
     private static FxMain singleton = new FxMain();

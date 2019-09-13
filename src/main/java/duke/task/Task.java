@@ -6,11 +6,8 @@ import duke.task.tasks.entities.TimeFrame;
 import java.io.Serializable;
 import java.util.UUID;
 
-/***
- * <p>
- * Task interface to create new duke.task types.
- * Serializable to be written to storage.
- * </p>
+/**
+ * Serializable abstract task.
  */
 public abstract class Task implements Serializable {
     private static final long serialVersionUID = 6529685098267757690L;
@@ -22,6 +19,14 @@ public abstract class Task implements Serializable {
     private boolean isDone;
     private final boolean isRecurring;
 
+    /**
+     * Task constructor.
+     * @param type corresponding task type
+     * @param details task details
+     * @param timeFrame time frame representing start and end of task
+     * @param isDone is task completed
+     * @param isRecurring is task recurring
+     */
     public Task(TaskType type, String details, TimeFrame timeFrame, Boolean isDone, Boolean isRecurring) {
         if (type.task != getClass()) {
             System.out.println("FATAL: TaskType does not correspond to Task.");
@@ -65,6 +70,10 @@ public abstract class Task implements Serializable {
         return details;
     }
 
+    /**
+     * Gets pretty task description of the task properties.
+     * @return description of task
+     */
     public final String getDescription() {
         String description = String.format("[%s][%s] %s",
                 type.code,

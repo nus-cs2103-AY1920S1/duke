@@ -24,12 +24,13 @@ public class TutorialCommand extends Command {
      * @param expenseStorage Storage that load/write or append to data file after updating expenses.
      * @return
      */
-    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage, Storage expenseStorage) {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
+                          Storage expenseStorage, Storage incomeStorage) {
         return "tutorial";
     }
 
     /**
-     * Returns the boolean false to not exit duke.
+     * Returns the boolean false to not exit.
      *
      * @return false to not exit duke.
      */

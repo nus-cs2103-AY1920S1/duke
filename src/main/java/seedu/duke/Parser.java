@@ -14,7 +14,7 @@ public class Parser {
     protected static SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected static SimpleDateFormat timeFormat = new SimpleDateFormat("HHmm");
     protected static SimpleDateFormat dashDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-    protected static SimpleDateFormat twelveHrTimeFormat = new SimpleDateFormat("K.mmaa");
+    protected static SimpleDateFormat twelveHrTimeFormat = new SimpleDateFormat("h.mm aa");
     private static final int CHAR_LENGTH_OF_EVENT = 5;
     private static final int CHAR_LENGTH_OF_DEADLINE = 8;
     private static final int CHAR_LENGTH_OF_TODO = 4;
@@ -189,7 +189,7 @@ public class Parser {
      * @throws ParseException If the date or time input of the user is incorrect.
      */
     public static Deadline createDeadline(String command) throws ParseException {
-        assert command.contains("/by") : "deadline command invalid";
+        //assert command.contains("/by") : "deadline command invalid";
         String[] arr = command.split(" /by ", 2);
         String[] dateTimeArr = (arr[1]).split(" ", 2);
         Date date;
@@ -253,6 +253,8 @@ public class Parser {
             return new ByeCommand(command);
         } else if (Parser.isHelpCommand(command)) {
             return new HelpCommand();
+        } else if (Parser.isDeleteAllCommand(command)) {
+            return new DeleteAllCommand();
         } else if (Parser.isDeleteExpenseCommand(command)) {
             return new DeleteExpenseCommand(command);
         } else if (Parser.isDeleteCommand(command)) {
@@ -275,11 +277,39 @@ public class Parser {
             return new EListCommand(command);
         } else if (Parser.isTutorialCommand(command)) {
             return new TutorialCommand();
+        } else if (Parser.isIncomeCommand(command)) {
+            return new IncomeCommand(command);
         } else {
             throw new DukeException(ui.noSuchCommand());
         }
     }
 
+    /**
+     * Indentifies if command is intended to be income command.
+     *
+     * @param command User input.
+     * @return Boolean whether the command is income command.
+     */
+    public static boolean isIncomeCommand(String command) {
+        return command.length() >= 6 && command.contains("income");
+    }
+
+    /**
+     * Identifies if command is intended to be a delete all command.
+     *
+     * @param command String user input
+     * @return Boolean if command is delete all command.
+     */
+    public static boolean isDeleteAllCommand(String command) {
+        return command.equals("delete all");
+    }
+
+    /**
+     * Identifies if the command is intended to be a tutorial command.
+     *
+     * @param command String of command user input.
+     * @return Boolean if command is tutorial command.
+     */
     public static boolean isTutorialCommand(String command) {
         return command.equals("tutorial");
     }
@@ -498,8 +528,15 @@ public class Parser {
      */
     public static Expense createExpense(String command) {
         String[] arr = command.split(" ");
-        double amount = Double.parseDouble(arr[2]);
-        Expense e = new Expense(arr[1], amount);
+        int arrSize = arr.length;
+        double amount = Double.parseDouble(arr[arrSize - 1]);
+        String description = arr[1];
+        if (arrSize > 3) {
+            for (int i = 2; i < arrSize - 2; i++) {
+                description = description + " " + arr[i];
+            }
+        }
+        Expense e = new Expense(description, amount);
         return e;
     }
 
@@ -619,6 +656,42 @@ public class Parser {
         } else if (curr > expenses.size()) {
             //check if index is within list size or throw exception
             throw new DukeException(ui.showNoSuchExpense());
+        }
+    }
+
+    /**
+     * Returns double value of income and checks for wrong number format input.
+     *
+     * @param command String of user command
+     * @return Double value of income
+     * @throws DukeException If wrong user input for income
+     */
+    public static double parseAndCheckErrorsForIncome(String command) throws DukeException {
+        try {
+            double income = Double.valueOf(command.substring(7));
+            return income;
+        } catch (NumberFormatException e) {
+            Ui ui = new Ui();
+            throw new DukeException(ui.showWrongIncomeInput());
+        }
+    }
+
+    /**
+     * Checks error for user input for income command.
+     *
+     * @param command User input.
+     * @throws DukeException If there is wrong user input format.
+     */
+    public static void checkNoIncomeInputError(String command) throws DukeException {
+        Ui ui = new Ui();
+        if (command.length() == 6) {
+            throw new DukeException(ui.showNoIncomeInput());
+        } else if (command.contains("income") && !command.contains(" ")) {
+            throw new DukeException(ui.showNoWhitespaceForIncome());
+        }
+        String res = command.replace(" ", "");
+        if (res.length() == 6) {
+            throw new DukeException(ui.showNoIncomeInput());
         }
     }
 }

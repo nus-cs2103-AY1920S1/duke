@@ -18,7 +18,7 @@ public class Ui {
      * @return String of the welcome message.
      */
     public String showIntro() {
-        String greeting = "Hello! I'm Duke\n"
+        String greeting = "Hello! I'm Duke Bunny.\n"
                 + "What can I do for you?\n"
                 + "Enter 'help' if you need a summary of all the commands.\n"
                 + "Enter 'tutorial' if you need a tutorial on the commands.\n";
@@ -61,8 +61,10 @@ public class Ui {
      */
     public String printNoOfTaskInList(TaskList tasks) {
         String statusOfList;
-        if (tasks.size() == 1) {
-            statusOfList = "Now you have 1 task in the list.\n";
+        if (tasks.size() <= 1) {
+            statusOfList = "Now you have "
+                    + tasks.size()
+                    + " task in the list.\n";
         } else {
             statusOfList = "Now you have "
                     + tasks.size()
@@ -167,7 +169,7 @@ public class Ui {
      * @return String of message.
      */
     public String showNoTaskNumber() {
-        String error = "OOPS!!! Please input the task number you would like to mark as done.\n";
+        String error = "OOPS!!! Please input the task number.\n";
         return error;
     }
 
@@ -226,14 +228,14 @@ public class Ui {
      */
     public String showNoDate(String taskType) {
         if (taskType.equals("event")) {
-            String error = "OOPS!!! You would need to schedule a date and time duration for"
-                    + "this "
+            String error = "OOPS!!! You would need to schedule a date and time for"
+                    + " this "
                     + taskType
                     + " using '/at'.\n";
             return error;
         } else if (taskType.equals("deadline")) {
-            String error = "OOPS!!! You would need to schedule a date and time duration for"
-                    + "this "
+            String error = "OOPS!!! You would need to schedule a date and time for"
+                    + " this "
                     + taskType
                     + " using '/by'.\n";
             return error;
@@ -290,19 +292,29 @@ public class Ui {
      */
     public String printNoOfExpenseInList(ExpenseList expenses) {
         String statusOfList;
-        if (expenses.size() == 1) {
-            statusOfList = "Now you have 1 expense in the list.\n";
+        if (expenses.size() <= 1) {
+            statusOfList = "Now you have "
+                    + expenses.size()
+                    + " expense in the list.\n";
         } else {
             statusOfList = "Now you have " + expenses.size() + " expenses in the list.\n";
         }
-        //todo adding of expenses
-        double sum = 0;
-        for (int i = 0; i < expenses.size(); i++) {
-            sum = sum + expenses.get(i).getAmount();
-        }
         String totalAmount = "The total expenditure is now: "
-                + sum
+                + expenses.getSum()
                 + "\n";
+        if (expenses.isThereInputtedIncome()) {
+            String leftover;
+            if (expenses.isOverspent()) {
+                leftover = "The amount you have overspent:\n"
+                        + expenses.getIncomeLeft()
+                        + "\n";
+            } else {
+                leftover = "The amount of income left:\n"
+                        + expenses.getIncomeLeft()
+                        + "\n";
+            }
+            return statusOfList + totalAmount + leftover;
+        }
         return statusOfList + totalAmount;
     }
 
@@ -325,6 +337,19 @@ public class Ui {
         String totalAmount = "Total expenditure: "
                 + sum
                 + "\n";
+        if (expenses.isThereInputtedIncome()) {
+            String leftover;
+            if (expenses.isOverspent()) {
+                leftover = "The amount you have overspent:\n"
+                        + expenses.getIncomeLeft()
+                        + "\n";
+            } else {
+                leftover = "The amount of income left:\n"
+                        + expenses.getIncomeLeft()
+                        + "\n";
+            }
+            return listMsg + totalAmount + leftover;
+        }
         return listMsg + totalAmount;
     }
 
@@ -389,6 +414,37 @@ public class Ui {
     public String showNoSuchExpense() {
         String error = "OOPS!!! You do not have that expense in your list. "
                 + "Call 'list' to see all your tasks :-)\n";
+        return error;
+    }
+
+    /**
+     * Returns error message of wrong income inputted.
+     *
+     * @return String of message.
+     */
+    public String showWrongIncomeInput() {
+        String error = "OOPS!!! You need to input a valid income amount.";
+        return error;
+    }
+
+    /**
+     * Returns error message of no income inputted.
+     *
+     * @return String of message.
+     */
+    public String showNoIncomeInput() {
+        String error = "OOPS!!! You need to input an income amount.";
+        return error;
+    }
+
+    /**
+     * Returns error message of wrong whitespace format for user input.
+     *
+     * @return String of message.
+     */
+    public String showNoWhitespaceForIncome() {
+        String error = "OOPS!!! You need to input a valid income amount by having a space between 'income'"
+                + " and your input amount.";
         return error;
     }
 }

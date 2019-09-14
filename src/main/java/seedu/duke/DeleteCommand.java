@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command by checking exceptions.
+     * Executes the command and checks exceptions.
      * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      * @throws Exception If there is problems with Parser reading in file line.
      */
     public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
-                          Storage expenseStorage) throws Exception {
+                          Storage expenseStorage,  Storage incomeStorage) throws Exception {
         Parser.checkErrorForDeleteCommand(command, tasks, ui);
         int curr = Parser.taskToDelete(command);
         assert curr > 0 : "Task num is not valid";
@@ -43,20 +43,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Acts as a dummy execute for child of a <code>Command</code>
-     * This is used for a expense command.
-     *
-     * @param expenses TaskList currently.
-     * @param ui Ui initialized in <code>Duke</code> to interact with user.
-     * @param storage Storage to write/load/append to data file after updating tasks.
-     * @return String of goodbye message.
-     */
-    public String execute(ExpenseList expenses, Ui ui, Storage storage) throws Exception {
-        return null;
-    }
-
-    /**
-     * Returns false to continue Duke.
+     * Returns false to not exit.
      *
      * @return False
      */

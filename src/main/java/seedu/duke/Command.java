@@ -12,7 +12,7 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command by checking exceptions.
+     * Executes the command and checks exceptions.
      * Also, prints out what has been done.
      *
      * @param tasks  TaskList of all tasks currently.
@@ -26,10 +26,10 @@ public abstract class Command {
      * @throws Exception If there is problems with Parser reading in file line.
      */
     public abstract String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
-                                   Storage expenseStorage) throws Exception;
+                                   Storage expenseStorage, Storage incomeStorage) throws Exception;
 
     /**
-     * Returns if duke should end.
+     * Returns if should exit.
      *
      * @return Boolean if duke should end.
      */

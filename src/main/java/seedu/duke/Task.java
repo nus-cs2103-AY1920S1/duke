@@ -36,13 +36,17 @@ public class Task {
     }
 
     /**
-     * Retrieves the status icon of cross or tick of the task.
+     * Retrieves the status of DONE or NOT DONE of the task.
      * Tick for a task that is done and cross for a undone task.
      *
-     * @return String status icon of task.
+     * @return String status of task.
      */
     public String getStatusIcon() {
-        return (isDone ? "DONE" : "NOT DONE");
+        int asciiTick = 0x2713;
+        int asciiCross = 0x2718;
+        String tick = Character.toString((char)asciiTick);
+        String cross = Character.toString((char) asciiCross);
+        return (isDone ? tick : cross);
     }
 
     /**

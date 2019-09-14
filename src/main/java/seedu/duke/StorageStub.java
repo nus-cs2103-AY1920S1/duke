@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import javax.swing.text.DefaultStyledDocument;
 import java.util.ArrayList;
 
 public class StorageStub extends Storage {
@@ -22,6 +21,11 @@ public class StorageStub extends Storage {
         arr.add(new Expense("ghi", 120));
         arr.add(new Expense("jkl", 130));
         return arr;
+    }
+
+    @Override
+    public double loadIncomeFile() {
+        return 0.0;
     }
 
 }

@@ -18,7 +18,7 @@ public class MarkDoneCommand extends Command {
 
 
     /**
-     * Executes the command by checking exceptions.
+     * Executes the command and checks exceptions.
      * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
@@ -31,8 +31,8 @@ public class MarkDoneCommand extends Command {
      * @throws java.io.IOException If there is problems reading/writing or appending to file.
      * @throws Exception If there is problems with Parser reading in file line.
      */
-    public String execute(TaskList tasks, ExpenseList expenses, Ui ui,
-                          Storage taskStorage, Storage expenseStorage) throws Exception {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
+                          Storage expenseStorage, Storage incomeStorage) throws Exception {
         Parser.checkMarkDoneError(command, tasks, ui);
         int curr = Parser.taskToMarkDone(command);
         tasks.get(curr - 1).markAsDone();
@@ -42,7 +42,7 @@ public class MarkDoneCommand extends Command {
     }
 
     /**
-     * Returns false to continue Duke.
+     * Returns false to not exit.
      *
      * @return False
      */
@@ -50,6 +50,11 @@ public class MarkDoneCommand extends Command {
         return false;
     }
 
+    /**
+     * Returns type of command.
+     *
+     * @return Type.
+     */
     @Override
     public String toString() {
         //for testing purposes

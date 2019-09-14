@@ -42,7 +42,7 @@ public class TutorialScene {
     public void initialize() {
         layout.getChildren().add(DialogBox.getDukeDialog("For the tutorial, \n"
                 + "To learn more about the task managing commands, enter 'tasks'\n"
-                + "To learn more about the expense tracking commands, enter 'expenses'\n "
+                + "To learn more about the expense tracking commands, enter 'expenses'\n"
                 + "To return to the actual chat bot, enter 'back' anytime.\n", dukeImage));
         helpContainer.vvalueProperty().bind(layout.heightProperty());
     }
@@ -67,6 +67,13 @@ public class TutorialScene {
             replyAndNextDialog(userInput, "To delete the task at index 1 which is todo homework, \n"
                     + "type 'delete 1'");
         } else if (userInput.contains("delete e2")) {
+            replyAndNextDialog(userInput, "I can help you budget too! You can see how much you overspent "
+                    + "or have left from your income every time you add a new expense or call to see the expense list."
+                    + "\nTo input an income of 1800,\ntype 'income 1800'");
+        } else if (userInput.contains("income ")) {
+            replyAndNextDialog(userInput,"To delete all expenses when you get your income,"
+                    + "\ntype 'delete all'\nThis only works for expenses not tasks :-)");
+        } else if (userInput.contains("delete all")) {
             replyAndNextDialog(userInput,"To bid goodbye to Duke,\ntype 'bye'");
         } else if (userInput.contains("find")) {
             replyAndNextDialog(userInput, "To mark meeting event as done, \ntype 'done 1");

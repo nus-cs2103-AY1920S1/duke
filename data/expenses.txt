@@ -1,5 +1,0 @@
-food: 120.0
-transportation: 55.0
-drinks: 20.0
-books: 55.5
-bike: 120.0

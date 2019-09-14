@@ -7,6 +7,11 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EventTest {
+    int asciiTick = 0x2713;
+    int asciiCross = 0x2718;
+    String tick = Character.toString((char)asciiTick);
+    String cross = Character.toString((char) asciiCross);
+
     @Test
     public void test1() {
         try {
@@ -15,7 +20,7 @@ public class EventTest {
             Date date = dateFormat.parse("24/08/2019");
             Date time = timeFormat.parse("1800");
             Event event = new Event("abc", date, time);
-            assertEquals("[E][NOT DONE] abc (at: 24 August 2019 6.00 PM)", event.toString());
+            assertEquals("[E][" + cross + "] abc (at: 24 Aug 2019 6.00 PM)", event.toString());
         } catch (Exception e) {
             System.out.println("failed test");
         }
@@ -30,7 +35,7 @@ public class EventTest {
             Date time = timeFormat.parse("1800");
             Event event = new Event("abc", date, time);
             event.markAsDone();
-            assertEquals("[E][DONE] abc (at: 24 August 2019 6.00 PM)", event.toString());
+            assertEquals("[E][" + tick + "] abc (at: 24 Aug 2019 6.00 PM)", event.toString());
         } catch (Exception e) {
             System.out.println("failed test");
         }

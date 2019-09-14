@@ -1,4 +1,5 @@
-D | 0 | studyFor2101 | 09/09/2019 2359
 T | 0 | homework
-E | 0 | cs2103tMeeting | 09/09/2019 1000
-T | 0 | homework
+D | 0 | return book | 12/10/2019 1200
+D | 0 | assignment | 02/10/2019 1230
+E | 0 | CS2101 meeting | 20/09/2019 1200
+E | 0 | ccr | 21/09/2019 1200

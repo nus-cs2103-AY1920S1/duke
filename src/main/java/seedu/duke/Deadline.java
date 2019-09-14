@@ -9,8 +9,8 @@ import java.util.Date;
  * object can take in a description, date and time to complete the task by.
  */
 public class Deadline extends Task {
-    protected DateFormat outDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
-    protected DateFormat outTimeFormat = new SimpleDateFormat("K.mm aa");
+    protected DateFormat outDateFormat = new SimpleDateFormat("dd MMM yyyy");
+    protected DateFormat outTimeFormat = new SimpleDateFormat("h.mm aa");
     protected SimpleDateFormat fileDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected SimpleDateFormat fileTimeFormat = new SimpleDateFormat("HHmm");
     protected Date date;
@@ -48,7 +48,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns string representation of the deadline task.
+     * Formats and returns string representation of the deadline task.
      *
      * @return String with the type of [task] [tick or cross] description (by:date time).
      */
@@ -59,8 +59,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns string representation of the deadline task with its description, date and time
-     * to write into the data file.
+     * Formats string representation of the deadline task with its description, date and time.
      *
      * @return String with the type of task | boolean of whether done | description | date time.
      */

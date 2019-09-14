@@ -17,7 +17,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the command by checking exceptions.
+     * Executes the command and checks exceptions.
      * Also, prints out what has been done.
      *
      * @param tasks  TaskList of all tasks currently.
@@ -31,7 +31,7 @@ public class DeadlineCommand extends Command {
      * @throws Exception If there is problems with Parser reading in file line.
      */
     public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
-                          Storage expenseStorage) throws Exception {
+                          Storage expenseStorage, Storage incomeStorage) throws Exception {
         Parser.checkErrorForDeadlineCommand(command, tasks, ui);
         tasks.add(Parser.createDeadline(command));
         if (tasks.size() > 1) {
@@ -47,7 +47,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Returns false to continue Duke.
+     * Returns false to not exit.
      *
      * @return False
      */

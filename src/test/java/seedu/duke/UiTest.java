@@ -31,8 +31,7 @@ public class UiTest {
         Ui ui = new Ui();
         TaskList tl = new TaskList();
         tl.add(new Todo("abc"));
-        ui.printNoOfTaskInList(tl);
-        assertEquals("Now you have 1 task in the list.\n\r\n", outContent.toString());
+        assertEquals("Now you have 1 task in the list.\n", ui.printNoOfTaskInList(tl));
     }
 
     @Test
@@ -42,8 +41,7 @@ public class UiTest {
         tl.add(new Todo("afewhb"));
         tl.add(new Todo("ecbe"));
         Ui ui = new Ui();
-        ui.printNoOfTaskInList(tl);
-        assertEquals("Now you have 3 tasks in the list.\n\r\n", outContent.toString());
+        assertEquals("Now you have 3 tasks in the list.\n", ui.printNoOfTaskInList(tl));
     }
 
     @Test
@@ -53,7 +51,7 @@ public class UiTest {
         try {
             Parser.checkErrorForDeleteCommand("delete     ", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! Please input the task number you would like to delete.\n",
+            assertEquals("OOPS!!! Please input the task number.\n",
                     e.toString());
         }
     }
@@ -65,7 +63,7 @@ public class UiTest {
         try {
             Parser.checkErrorForDeleteCommand("delete", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! Please input the task number you would like to delete.\n",
+            assertEquals("OOPS!!! Please input the task number.\n",
                     e.toString());
         }
     }
@@ -101,7 +99,7 @@ public class UiTest {
         try {
             Parser.checkErrorForDeadlineCommand("deadline    ", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The description of deadline cannot be empty.\n", e.toString());
+            assertEquals("OOPS!!! The description of 'deadline' cannot be empty.\n", e.toString());
         }
     }
 
@@ -112,7 +110,7 @@ public class UiTest {
         try {
             Parser.checkErrorForDeadlineCommand("deadline   ", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The description of deadline cannot be empty.\n", e.toString());
+            assertEquals("OOPS!!! The description of 'deadline' cannot be empty.\n", e.toString());
         }
     }
 
@@ -147,7 +145,7 @@ public class UiTest {
         try {
             Parser.checkErrorForDeadlineCommand("deadline submit work", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! You would need to schedule a date/time for this "
+            assertEquals("OOPS!!! You would need to schedule a date and time for this "
                     + "deadline using '/by'.\n",  e.toString());
         }
     }
@@ -159,7 +157,7 @@ public class UiTest {
         try {
             Parser.checkErrorForDeadlineCommand("deadline /by 13/09/2019 1600", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The description of deadline cannot be empty.\n",  e.toString());
+            assertEquals("OOPS!!! The description of 'deadline' cannot be empty.\n",  e.toString());
         }
     }
 
@@ -170,7 +168,7 @@ public class UiTest {
         try {
             Parser.checkErrorForDeadlineCommand("deadline awfbwe /at 13/09/2019 1600", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! You would need to schedule a date/time for this "
+            assertEquals("OOPS!!! You would need to schedule a date and time for this "
                     + "deadline using '/by'.\n",  e.toString());
         }
     }
@@ -194,7 +192,7 @@ public class UiTest {
         try {
             Parser.checkMarkDoneError("done", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! Please input the task number you would like to mark as done.\n",
+            assertEquals("OOPS!!! Please input the task number.\n",
                     e.toString());
         }
     }
@@ -206,7 +204,7 @@ public class UiTest {
         try {
             Parser.checkMarkDoneError("done     ", tl, ui);
         } catch (DukeException e) {
-            assertEquals("OOPS!!! Please input the task number you would like to mark as done.\n",
+            assertEquals("OOPS!!! Please input the task number.\n",
                     e.toString());
         }
     }

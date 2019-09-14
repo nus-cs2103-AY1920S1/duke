@@ -9,8 +9,8 @@ import java.util.Date;
  * can take in a description, date and time which it is at.
  */
 public class Event extends Task {
-    protected DateFormat outDateFormat = new SimpleDateFormat("dd MMMMM yyyy");
-    protected DateFormat outTimeFormat = new SimpleDateFormat("K.mm aa");
+    protected DateFormat outDateFormat = new SimpleDateFormat("dd MMM yyyy");
+    protected SimpleDateFormat outTimeFormat = new SimpleDateFormat("h.mm aa");
     protected SimpleDateFormat fileDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     protected SimpleDateFormat fileTimeFormat = new SimpleDateFormat("HHmm");
     protected Date date;
@@ -49,7 +49,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns string representation of the event task with its description, date and time.
+     * Formats and returns string representation of the event task with its description, date and time.
      *
      * @return String with the type of [task] [tick or cross] description (at:date time).
      */
@@ -60,8 +60,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns string representation of the event task with its description, date and time
-     * to write into the data file.
+     * Formats string representation of the event task with its description, date and time.
      *
      * @return String with the type of task | boolean of whether done | description | date time.
      */

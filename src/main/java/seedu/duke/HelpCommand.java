@@ -10,7 +10,7 @@ public class HelpCommand extends Command {
     }
 
     /**
-     * Executes the command by checking exceptions.
+     * Executes the command.
      * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
@@ -20,7 +20,8 @@ public class HelpCommand extends Command {
      * @param taskStorage Storage that load/write or append to data file after updating tasks.
      * @param expenseStorage Storage that load/write or append to data file after updating expenses.
      */
-    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage, Storage expenseStorage) {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
+                          Storage expenseStorage, Storage incomeStorage) {
         String instructions = "Let me teach you how to use me:\n\n"
                 + "FOR TASK MANAGING:\n"
                 + "1. To add a todo to your list: enter 'todo [description]'\n"
@@ -35,12 +36,14 @@ public class HelpCommand extends Command {
                 + "1. To add expense to expense list: enter 'expense [description] "
                 + "[cost]'\n"
                 + "2. To see all expenses: enter 'elist'\n"
-                + "3. To delete expense from expense list: enter 'delete e[index]'\n";
+                + "3. To delete expense from expense list: enter 'delete e[index]'\n"
+                + "4. To delete all expenses: enter 'delete all'\n"
+                + "5. To input income: enter 'income [amount]'\n";
         return instructions;
     }
 
     /**
-     * Returns false to continue Duke.
+     * Returns false to not exit.
      *
      * @return False
      */

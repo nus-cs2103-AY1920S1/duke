@@ -93,7 +93,7 @@ public class Storage {
     }
 
     /**
-     * Loads data file information into expense list.
+     * Loads data file information into array list.
      *
      * @return Expense list.
      * @throws Exception If file cannot be read in.
@@ -130,5 +130,46 @@ public class Storage {
         }
         fw.write(textFileMsg);
         fw.close();
+    }
+
+    /**
+     * Removes file and its content.
+     *
+     * @throws IOException If cannot close filepath
+     */
+    public void removeFile() throws IOException {
+        new FileWriter(filepath, false).close();
+    }
+
+    /**
+     * Writes the income into existing data file.
+     *
+     * @throws IOException If file cannot be written into thrown by <code>FileWriter</code>.
+     */
+    public void writeIncomeFile(double income) throws IOException {
+        FileWriter fw = new FileWriter(this.filepath);
+        String textFileMsg = "" + income;
+        fw.write(textFileMsg);
+        fw.close();
+    }
+
+    /**
+     * Returns data file income.
+     *
+     * @return Expense list.
+     * @throws Exception If file cannot be read in.
+     */
+    public double loadIncomeFile() throws Exception {
+        ArrayList<Expense> expenses = new ArrayList<>();
+        File f = new File(filepath);
+        f.getParentFile().mkdirs();
+        f.createNewFile();
+        BufferedReader bfr = new BufferedReader(new FileReader(f));
+        String line = null;
+        double t = 0.0;
+        while ((line = bfr.readLine()) != null) {
+            t = Double.parseDouble(line);
+        }
+        return t;
     }
 }

@@ -26,7 +26,7 @@ public class FindCommand extends Command {
 
 
     /**
-     * Executes the command by checking exceptions.
+     * Executes the command and checks exceptions.
      * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
@@ -37,41 +37,18 @@ public class FindCommand extends Command {
      * @param expenseStorage Storage that load/write or append to data file after updating expenses.
      * @throws DukeException  If there is incorrect user input format.
      */
-    public String execute(TaskList tasks, ExpenseList expenses, Ui ui,
-                          Storage taskStorage, Storage expenseStorage) throws DukeException {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
+                          Storage expenseStorage, Storage incomeStorage) throws DukeException {
         Parser.checkErrorForFindCommand(command, ui);
         String keyword = Parser.getKeyword(command);
         for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i) instanceof Event) {
-                Event event = (Event) tasks.get(i);
-                if (event.getDescription().contains(keyword)) {
-                    matchList.add(event);
-                } else if (outDateFormat.format(event.getDate()).contains(keyword)) {
-                    matchList.add(event);
-                } else if (outTimeFormat.format(event.getTime()).contains(keyword)) {
-                    matchList.add(event);
-                }
-            } else if (tasks.get(i) instanceof Todo) {
-                Todo td = (Todo) tasks.get(i);
-                if (td.getDescription().contains(keyword)) {
-                    matchList.add(td);
-                }
-            } else if (tasks.get(i) instanceof Deadline) {
-                Deadline dl = (Deadline) tasks.get(i);
-                if (dl.getDescription().contains(keyword)) {
-                    matchList.add(dl);
-                } else if (outDateFormat.format(dl.getDate()).contains(keyword)) {
-                    matchList.add(dl);
-                } else if (outTimeFormat.format(dl.getTime()).contains(keyword)) {
-                    matchList.add(dl);
-                }
-            }
+            addTaskInListIfMatch(tasks, keyword, i);
         }
         return ui.printAllMatchingTasks(matchList);
     }
 
     /**
-     * Returns tasklist of all tasks currently that match the keyword.
+     * Returns tasklist of all tasks that match the keyword.
      *
      * @return TaskList of all tasks matching keyword
      */
@@ -80,11 +57,38 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns false to continue Duke.
+     * Returns false to not exit.
      *
      * @return False
      */
     public boolean isExit() {
         return false;
+    }
+
+    private void addTaskInListIfMatch(TaskList tasks, String keyword, int index) {
+        if (tasks.get(index) instanceof Event) {
+            Event event = (Event) tasks.get(index);
+            if (event.getDescription().contains(keyword)) {
+                matchList.add(event);
+            } else if (outDateFormat.format(event.getDate()).contains(keyword)) {
+                matchList.add(event);
+            } else if (outTimeFormat.format(event.getTime()).contains(keyword)) {
+                matchList.add(event);
+            }
+        } else if (tasks.get(index) instanceof Todo) {
+            Todo td = (Todo) tasks.get(index);
+            if (td.getDescription().contains(keyword)) {
+                matchList.add(td);
+            }
+        } else if (tasks.get(index) instanceof Deadline) {
+            Deadline dl = (Deadline) tasks.get(index);
+            if (dl.getDescription().contains(keyword)) {
+                matchList.add(dl);
+            } else if (outDateFormat.format(dl.getDate()).contains(keyword)) {
+                matchList.add(dl);
+            } else if (outTimeFormat.format(dl.getTime()).contains(keyword)) {
+                matchList.add(dl);
+            }
+        }
     }
 }

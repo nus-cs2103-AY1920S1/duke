@@ -29,6 +29,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image titleLogo = new Image(this.getClass().getResourceAsStream("/images/TitleLogo.png"));
     private Stage stage;
     private Scene scene;
     private Duke tutorialDuke;
@@ -78,10 +79,20 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Sets the stage for MainWindow.
+     *
+     * @param stage Stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Sets a scene for a stage.
+     *
+     * @param scene Scene
+     */
     public void setMainScene(Scene scene) {
         this.scene = scene;
     }
@@ -94,7 +105,8 @@ public class MainWindow extends AnchorPane {
             stage.setScene(scene);
             fxmlLoader.<TutorialScene>getController().setStage(stage);
             fxmlLoader.<TutorialScene>getController().setScene(this.scene);
-            stage.setTitle("DUKE PROJECT");
+            stage.getIcons().add(titleLogo);
+            stage.setTitle("DUKE BUNNY");
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

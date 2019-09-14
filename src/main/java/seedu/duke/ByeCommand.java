@@ -27,13 +27,14 @@ public class ByeCommand extends Command {
      * @param expenseStorage Storage to write/load/append to data file aftering updating expenses.
      * @return String of goodbye message.
      */
-    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage, Storage expenseStorage) {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
+                          Storage expenseStorage, Storage incomeStorage) {
         this.ui = ui;
         return ui.printGoodbyeMsg();
     }
 
     /**
-     * Returns true to end Duke.
+     * Returns true to exit.
      * Prints goodbye message before returning.
      *
      * @return True to end Duke

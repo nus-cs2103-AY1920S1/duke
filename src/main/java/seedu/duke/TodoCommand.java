@@ -18,7 +18,7 @@ public class TodoCommand extends Command {
 
 
     /**
-     * Executes the command by checking exceptions.
+     * Executes the command and checks exceptions.
      * Also, prints out what has been done
      *
      * @param tasks  TaskList of all tasks currently.
@@ -31,8 +31,8 @@ public class TodoCommand extends Command {
      * @throws java.io.IOException If there is problems reading/writing or appending to file.
      * @throws Exception If there is problems with Parser reading in file line.
      */
-    public String execute(TaskList tasks, ExpenseList expenses, Ui ui,
-                          Storage taskStorage, Storage expenseStorage) throws Exception {
+    public String execute(TaskList tasks, ExpenseList expenses, Ui ui, Storage taskStorage,
+                          Storage expenseStorage, Storage incomeStorage) throws Exception {
         Parser.checkErrorForTodoCommand(command, tasks, ui);
         tasks.add(Parser.createTodo(command));
         assert tasks.size() > 0 : "tasks size invalid";
@@ -47,7 +47,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Returns false to continue Duke.
+     * Returns false to not exit.
      *
      * @return False
      */

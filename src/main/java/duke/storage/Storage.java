@@ -7,10 +7,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -169,23 +170,26 @@ public class Storage {
      */
     public void saveData(List<Task> taskList) throws IOException {
         assert taskList != null;
-
         StringBuilder myStringBuilder = new StringBuilder();
-        for (Task task : taskList) {
-            if (task instanceof Todo) {
-                myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                        .append(task.getName()).append("\n");
-            } else if (task instanceof Event) {
-                myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                        .append(task.getName()).append(" | ").append(((Event) task).getTiming()).append("\n");
-            } else if (task instanceof Deadline) {
-                myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                        .append(task.getName()).append(" | ").append(((Deadline) task).getFormattedDateTime())
-                        .append("\n");
+        if (!taskList.isEmpty()) {
+            for (Task task : taskList) {
+                if (task instanceof Todo) {
+                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
+                            .append(task.getName()).append("\n");
+                } else if (task instanceof Event) {
+                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
+                            .append(task.getName()).append(" | ").append(((Event) task).getTiming()).append("\n");
+                } else if (task instanceof Deadline) {
+                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
+                            .append(task.getName()).append(" | ").append(((Deadline) task).getFormattedDateTime())
+                            .append("\n");
+                }
             }
+            myStringBuilder.deleteCharAt(myStringBuilder.length() - 1);
+            writeToFile(myStringBuilder.toString());
+        } else {
+            writeToFile(myStringBuilder.toString());
         }
-        myStringBuilder.deleteCharAt(myStringBuilder.length() - 1);
-        writeToFile(myStringBuilder.toString());
     }
 
     /**
@@ -195,8 +199,14 @@ public class Storage {
      * @throws IOException if file cannot be opened.
      */
     public void writeToFile(String linesToWrite) throws IOException {
+        File dir = new File("data");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
         bufferedWriter.append(linesToWrite);
         bufferedWriter.close();
+
     }
 }

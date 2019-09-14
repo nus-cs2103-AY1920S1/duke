@@ -2,6 +2,11 @@ public class AddCommand extends Command {
 
     private Task newTaskToBeAdded;
 
+    /**
+     * Constructs a Command to add Task to TaskList.
+     *
+     * @param newTaskToBeAdded is the task that will be added into TaskList
+     */
     public AddCommand(Task newTaskToBeAdded) {
         this.newTaskToBeAdded = newTaskToBeAdded;
     }
@@ -12,10 +17,11 @@ public class AddCommand extends Command {
     }
 
     /**
-     * execute() will add newTask to the TaskList.
-     * @param tasks is the TaskList
-     * @param ui is the Ui
-     * @param storage is the Storage
+     * Executes an AddCommand given TaskList, UI, Storage.
+     *
+     * @param tasks the TaskList.
+     * @param ui the UI.
+     * @param storage the file storage.
      */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {

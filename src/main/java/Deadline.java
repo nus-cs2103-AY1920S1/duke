@@ -9,11 +9,12 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
-    /** Deadline constructor.
+    /**
+     * Constructs a Deadline with description, date, time.
      *
-     * @param description is the description of the Task
-     * @param date is the date of Task
-     * @param time is the time of Task
+     * @param description of the Task.
+     * @param date the date that the Deadline needs to be completed by.
+     * @param time the time that the Deadline needs to be completed by.
      */
     public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
@@ -22,10 +23,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * genDeadlineTask() will convert input cmd into Deadline Task.
+     * Factory method to construct Deadline given the user input.
      *
-     * @param cmd is the string input by user
-     * @return Deadline Task
+     * @param cmd the string input by user.
+     * @return Deadline object.
      */
     public static Deadline genDeadlineTask(String cmd) {
         try {
@@ -50,6 +51,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Stringifies the Deadline in the format specified when writing to storage file.
+     *
+     * @return string that is to be written to storage file.
+     */
     @Override
     public String toDataFormat() {
         return "D | " + super.toDataFormat() + " | " + date.format(DateTimeFormatter.ofPattern("d/MM/yyyy"))

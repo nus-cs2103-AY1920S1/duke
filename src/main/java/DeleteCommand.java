@@ -2,6 +2,11 @@ public class DeleteCommand extends Command {
 
     private int idxToBeRemoved;
 
+    /**
+     * Constructs a Command to delete a specific Task from TaskList.
+     *
+     * @param idxToBeRemoved the index of the Task to be removed.
+     */
     public DeleteCommand(int idxToBeRemoved) {
         this.idxToBeRemoved = idxToBeRemoved;
     }
@@ -12,15 +17,21 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * execute() will remove Task from TaskList.
-     * @param tasks is the TaskList
-     * @param ui is the Ui
-     * @param storage is the Storage
+     * Executes an DeleteCommand given TaskList, UI, Storage.
+     *
+     * @param tasks the TaskList.
+     * @param ui the UI.
+     * @param storage the file storage.
      */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task taskToBeRemoved = tasks.getTask(idxToBeRemoved);
-        tasks.removeTask(taskToBeRemoved);
-        ui.printDelete(taskToBeRemoved, tasks.getSize());
+        try {
+            Task taskToBeRemoved = tasks.getTask(idxToBeRemoved);
+            tasks.removeTask(taskToBeRemoved);
+            ui.printDelete(taskToBeRemoved, tasks.getSize());
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeIllegalArgumentException("Invalid input. Please input a valid number between 1 and "
+                    + tasks.getSize());
+        }
     }
 }

@@ -3,11 +3,13 @@ import java.util.InputMismatchException;
 public class Parser {
 
     /**
-     * parse method will parse command string and return the correct Command.
-     * @param command is the user input
-     * @return will return the correct command
+     * Parses user input into Command object.
+     *
+     * @param command the input command from user.
+     * @return the Command object parsed from user input command.
+     * @throws DukeIllegalArgumentException if user input command does not meet specified format.
      */
-    public static Command parse(String command, int maxTaskSize) throws DukeIllegalArgumentException {
+    public static Command parse(String command) throws DukeIllegalArgumentException {
         if (command.isBlank()) {
             throw new DukeIllegalArgumentException("User input cannot be empty.");
         }
@@ -25,18 +27,10 @@ public class Parser {
 
             } else if (keyword.equalsIgnoreCase("done")) {
                 int idxToMarkAsDone = Integer.parseInt(cmdList[1]) - 1;
-                if (idxToMarkAsDone >= maxTaskSize) {
-                    throw new DukeIllegalArgumentException("Invalid input. Please input a valid number between 1 and "
-                            + maxTaskSize);
-                }
                 return new DoneCommand(idxToMarkAsDone);
 
             } else if (keyword.equalsIgnoreCase("delete")) {
                 int idxToBeRemoved = Integer.parseInt(cmdList[1]) - 1;
-                if (idxToBeRemoved >= maxTaskSize) {
-                    throw new DukeIllegalArgumentException("Invalid input. Please input a valid number between 1 and "
-                            + maxTaskSize);
-                }
                 return new DeleteCommand(idxToBeRemoved);
 
             } else { //it will be an AddCommand or an invalid command
@@ -53,11 +47,12 @@ public class Parser {
     }
 
     /**
-     * handleNewTask() will create appropriate Task based on keyword.
-     * @param keyword is the different Tasks
-     * @param cmd is the full command String
-     * @return the appropriate Task
-     * @throws InputMismatchException when user does not type correct input
+     * Creates appropriate Task based on given keyword and user input command.
+     *
+     * @param keyword is the type of Task specified.
+     * @param cmd is the original user input command.
+     * @return the Task object based on keyword.
+     * @throws DukeIllegalArgumentException if user input does not match any Task keywords.
      */
     private static Task handleNewTask(String keyword, String cmd) throws DukeIllegalArgumentException {
         if (keyword.equalsIgnoreCase("deadline")) {

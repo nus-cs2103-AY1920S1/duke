@@ -2,14 +2,33 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
+    private MainWindow window;
     private Scanner sc;
 
+    /**
+     * Constructs a Ui object to print Duke responses out in the command line interface.
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
 
     /**
-     * printLine() will print the separator lline from input and output.
+     * Constructs a Ui object to output Duke responses out in the graphic user interface.
+     */
+    public Ui(MainWindow window) {
+        this.window = window;
+    }
+
+    /**
+     * Passes response message to controller to be printed in graphic user interface.
+     * @param message
+     */
+    public void printInGui(String message) {
+        window.handleDukeResponse(message);
+    }
+
+    /**
+     * Prints line that separates user input command from duke responses.
      */
     public void printLine() {
         String line = "____________________________________________________________";
@@ -17,72 +36,73 @@ public class Ui {
     }
 
     /**
-     * printWelcome() will print the welcome message from Duke.
+     * Prints welcome message when Duke is initialised.
      */
     public void printWelcome() {
-        printLine();
-        System.out.println("Hello, I'm Duke");
-        System.out.println("What can I do for you?");
-        printLine();
+        printInGui("Hello, I'm Duke\nWhat can I do for you?");
     }
 
+
     /**
-     * printGoodbye() will print the goodbye message from Duke.
+     * Prints goodbye message when Duke is closed.
      */
     public void printGoodbye() {
-        printLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printLine();
+        printInGui("Bye. Hope to see you again soon!");
     }
 
     /**
-     * printList() will print out all tasks from Duke.
-     * @param tasks is the list of tasks
+     * Prints out the list of Tasks in ArrayList tasks.
+     * @param tasks the ArrayList of tasks Duke is currently storing for user.
      */
     public void printList(ArrayList<Task> tasks) {
-        System.out.println("Here are the tasks in your list:");
+        StringBuilder sb  = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + "." + tasks.get(i - 1));
+            sb.append(i + "." + tasks.get(i - 1) + "\n");
         }
+
+        printInGui(sb.toString());
     }
 
     /**
-     * printDone() will print the message after a task is completed.
-     * @param taskToMarkAsDone is the task Object
+     * Prints the Task that is done by the user.
+     * @param taskToMarkAsDone the Task that had been done by user.
      */
     public void printDone(Task taskToMarkAsDone) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.print("  ");
-        System.out.println(taskToMarkAsDone);
+        StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:\n");
+        sb.append("  " + taskToMarkAsDone);
+
+        printInGui(sb.toString());
     }
 
     /**
-     * printDelete will print the message after task is deleted by Duke.
-     * @param taskToBeRemoved is the task Object reference
-     * @param numberOfTasks number of tasks in the list
+     * Prints the Task that is deleted by the user as well as the number of tasks currently
+     * @param taskToBeRemoved the Task that is to be deleted.
+     * @param numberOfTasks the remaining number of Tasks in the ArrayList tasks.
      */
     public void printDelete(Task taskToBeRemoved, int numberOfTasks) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.print("  ");
-        System.out.println(taskToBeRemoved);
-        System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
+        StringBuilder sb = new StringBuilder("Noted. I've removed this task:");
+        sb.append("  " + taskToBeRemoved + "\n");
+        sb.append("Now you have " + numberOfTasks + " tasks in the list.");
+
+        printInGui(sb.toString());
     }
 
     /**
-     * printAdd will print the message after new Task has been added.
-     * @param newTaskToBeAdded is the Task Object reference
-     * @param numberOfTasks number of tasks in the list
+     * Prints the Task that has been added to ArrayList tasks as well as the number of tasks currently.
+     * @param newTaskToBeAdded the Task to be added to ArrayList tasks.
+     * @param numberOfTasks the updated number of Tasks in the ArrayList tasks.
      */
     public void printAdd(Task newTaskToBeAdded, int numberOfTasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.print("  ");
-        System.out.println(newTaskToBeAdded);
-        System.out.println("Now you have " + numberOfTasks + " tasks in the list.");
+        StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
+        sb.append("  " + newTaskToBeAdded);
+        sb.append("Now you have " + numberOfTasks + " tasks in the list.");
+
+        printInGui(sb.toString());
     }
 
     /**
-     * readCommand() will scan next line of user input command.
-     * @return the command
+     * Reads the user input command.
+     * @return the user input command
      */
     public String readCommand() {
         String command = sc.nextLine();
@@ -90,21 +110,21 @@ public class Ui {
     }
 
     /**
-     * printError() will print the error message from exception.
-     * @param e is the Exception object reference
+     * Prints the error message from the exception.
+     * @param e the exception that is thrown from lower level methods to Duke.
      */
     public void printError(Exception e) {
-        System.out.println("☹ OOPS!!! " + e.getMessage());
+        printInGui("☹ OOPS!!! " + e.getMessage());
     }
 
     /**
-     * printMatches() will print all tasks that match given keyword.
-     * @param matchingTasks ArrayList of matching Tasks
+     * Prints the Tasks that match the user input keyword.
+     * @param matchingTasks the ArrayList of matching Tasks.
      */
     public void printMatches(ArrayList<Task> matchingTasks) {
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 1; i <= matchingTasks.size(); i++) {
-            System.out.println(i + "." + matchingTasks.get(i - 1));
+            sb.append(i + "." + matchingTasks.get(i - 1));
         }
     }
 

@@ -7,8 +7,9 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Task Constructor.
-     * @param description is the task description
+     * Constructs a Task with description.
+     *
+     * @param description of the Task.
      */
     public Task(String description) {
         this.description = description;
@@ -24,10 +25,10 @@ public class Task {
     }
 
     /**
-     * genTaskFromData() will generate different Task based on given input from file data.
+     * Generates the appropriate Task object based on given input from the storage file.
      *
-     * @param s is the input String from file data
-     * @return identified task
+     * @param s the line of String being read from the storage file.
+     * @return the Task object based on input.
      */
     public static Task genTaskFromData(String s) {
         Task t;
@@ -54,6 +55,11 @@ public class Task {
         return t;
     }
 
+    /**
+     * Stringifies the Task in the format specified when writing to storage file.
+     *
+     * @return string that is to be written to storage file.
+     */
     public String toDataFormat() {
         return (isDone ? "1"
                 : "0") + " | " + this.description;

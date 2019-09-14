@@ -10,16 +10,19 @@ public class Storage {
     String filePath;
 
     /**
-     * Storage constructor.
-     * @param filePath is the data file path
+     * Constructs Storage object to read anf write to storage file given.
+     *
+     * @param filePath the file path to the storage file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * load() will read the data file.
-     * @return will return an ArrayList of Task after reading data file
+     * Reads the storage file and loads the TaskList.
+     *
+     * @return the TaskList after reading storage file.
+     * @throws FileNotFoundException if the file does not exist.
      */
     public ArrayList<Task> load() {
         try {
@@ -32,15 +35,17 @@ public class Storage {
             }
             return arrOfTasks;
         } catch (IOException e) {
+            e.printStackTrace();
             return null;
         }
     }
 
     /**
-     * createOrRetrieve will create the data file if not exist, or retrieve the existing file.
-     * @param filePath is the path of the data file
-     * @return will return a File object ref to the data file
-     * @throws IOException if cannot be created
+     * Creates the storage file if does not exist. Retrieves file otherwise.
+     *
+     * @param filePath the path of the storage file.
+     * @return the File Object of the storage file.
+     * @throws IOException if cannot be created.
      */
     private static File createOrRetrieve(String filePath) throws IOException {
         File file = new File(filePath);
@@ -52,9 +57,10 @@ public class Storage {
     }
 
     /**
-     * readFile() will read from data file.
-     * @param file is the File object reference
-     * @return a List of Task objects after reading from data file
+     * Reads the data that is stored in the given storage file.
+     *
+     * @param file the File object of the storage file.
+     * @return  ArrayList of Task objects after reading from data file.
      */
     private static ArrayList<String> readFile(File file) {
         ArrayList<String> stringOfTasks = new ArrayList<String>();
@@ -74,8 +80,9 @@ public class Storage {
     }
 
     /**
-     * save() will save all Task from TaskArrayList into data file.
-     * @param taskArrayList is the list of Tasks from duke
+     * Saves and writes all Task from TaskArrayList into storage file in the required data format.
+     *
+     * @param taskArrayList the list of Tasks from duke
      */
     public void save(ArrayList<Task> taskArrayList) {
         File file = new File("./data/duke.txt");

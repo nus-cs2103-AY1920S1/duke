@@ -6,10 +6,11 @@ public class ListCommand extends Command {
     }
 
     /**
-     * execute() will print out all Tasks in TaskList.
-     * @param tasks is the TaskList
-     * @param ui is the Ui
-     * @param storage is the Storage
+     * Executes an ListCommand given TaskList, UI, Storage.
+     *
+     * @param tasks the TaskList.
+     * @param ui the UI.
+     * @param storage the file storage.
      */
     @Override
     void execute(TaskList tasks, Ui ui, Storage storage) {

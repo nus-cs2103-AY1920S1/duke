@@ -7,11 +7,12 @@ public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
-    /** Event constructor.
+    /**
+     * Constructs an Event with description, date, time.
      *
-     * @param description is the description of the Task
-     * @param date is the date of Task
-     * @param time is the time of Task
+     * @param description of the Event.
+     * @param date the date that the Event happens at.
+     * @param time the time that the Event happens at.
      */
     public Event(String description, LocalDate date, LocalTime time) {
         super(description);
@@ -20,10 +21,10 @@ public class Event extends Task {
     }
 
     /**
-     * genEventTask() will convert input cmd into Event Task.
+     * Factory method to construct Deadline given the user input.
      *
-     * @param cmd is the string input by user
-     * @return Event Task
+     * @param cmd the string input by user.
+     * @return Event object.
      */
     public static Event genEventTask(String cmd) {
         try {
@@ -49,6 +50,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Stringifies the Event in the format specified when writing to storage file.
+     *
+     * @return string that is to be written to storage file.
+     */
     @Override
     public String toDataFormat() {
         return "E | " + super.toDataFormat() + " | " + date.format(DateTimeFormatter.ofPattern("d/MM/yyyy"))

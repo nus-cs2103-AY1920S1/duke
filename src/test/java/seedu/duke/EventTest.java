@@ -3,10 +3,10 @@ package seedu.duke;
 import seedu.duke.task.Event;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * EventTest is used to test the methods in Event Class
+ * EventTest is used to test the methods in Event Class.
  */
 public class EventTest {
 

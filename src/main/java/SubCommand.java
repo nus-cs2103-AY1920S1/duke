@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +17,7 @@ public class SubCommand extends AddCommand {
         this.subDescription = subDescription;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException, ParseException {
         Task newTask;
         switch (command) {
         case "deadline":

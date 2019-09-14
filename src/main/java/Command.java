@@ -15,7 +15,7 @@ public class Command {
 
     public Command(String commandWord) {
         this.command = commandWord;
-        this.toContinueProgram = !commandWord.equals("bye");
+        this.toContinueProgram = !(commandWord.equals("bye"));
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {

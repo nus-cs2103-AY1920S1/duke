@@ -69,15 +69,17 @@ public class Ui {
     }
 
     public void showListCommandResponse(ArrayList<Task> taskArr) {
-        String response = joinWithNewLines("Here are the tasks in your list:",
-                listOfTasksMessage(taskArr));
+        ArrayList<String> output = listOfTasksMessage(taskArr);
+        output.add(0, "Here are the tasks in your list:");
+        String response = joinWithNewLines(output);
         showMessage(response);
     }
 
     public void showFindKeywordResponse(ArrayList<Task> taskArr) {
-        String message = joinWithNewLines("Here are the matching tasks in your list:",
-                listOfTasksMessage(taskArr));
-        showMessage(message);
+        ArrayList<String> output = listOfTasksMessage(taskArr);
+        output.add(0, "Here are the matching tasks in your list:");
+        String response = joinWithNewLines(output);
+        showMessage(response);
     }
 
     /**
@@ -91,11 +93,11 @@ public class Ui {
      * @param taskArr ArrayList of Task objects
      * @return Message in a single string
      */
-    private String listOfTasksMessage(ArrayList<Task> taskArr) {
-        String output = "";
+    private ArrayList<String> listOfTasksMessage(ArrayList<Task> taskArr) {
+        ArrayList<String> output = new ArrayList<String>();
+        int numTasks = taskArr.size();
         for (Task task : taskArr) {
-            int taskIdx = taskArr.indexOf(task)+1;
-            output += indentMessage(taskIdx + "." +
+            output.add((taskArr.indexOf(task) + 1) + ". " +
                     task.toString());
         }
         return output;
@@ -126,6 +128,21 @@ public class Ui {
         for (String line : message) {
             // Add new line if not last sentence in message
             if (numLines != message.length) {
+                output += indentMessage(line + "\n");
+                numLines++;
+            } else {
+                output += indentMessage(line);
+            }
+        }
+        return output;
+    }
+
+    private String joinWithNewLines(ArrayList<String> message) {
+        String output = "";
+        int numLines = 1;
+        for (String line : message) {
+            // Add new line if not last sentence in message
+            if (numLines != message.size()) {
                 output += indentMessage(line + "\n");
                 numLines++;
             } else {

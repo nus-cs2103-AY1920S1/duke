@@ -1,4 +1,6 @@
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
@@ -29,8 +31,8 @@ public class Duke extends Application {
     public void showChatScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("ChatScreen.fxml"));
-            AnchorPane mainWindow = (AnchorPane) loader.load();
+            InputStream fxmlStream = new FileInputStream("src/main/java/ChatScreen.fxml");
+            AnchorPane mainWindow = (AnchorPane) loader.load(fxmlStream);
 
             ChatScreenController controller = loader.getController();
             controller.setMain(this);

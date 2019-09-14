@@ -111,11 +111,13 @@ public class Parser {
         boolean isDeleteCommand = fw.equals("delete");
         boolean isUpdateCommand = fw.equals("update");
 
-        if ((isDoneCommand || isDeleteCommand || isUpdateCommand) && words.length < 2) {
+        if ((isDoneCommand || isDeleteCommand || isUpdateCommand)) {
+            if (words.length < 2) {
             throw new DukeException(" \u2639  OOPS!!! The task number of the \"" + fw + "\" command cannot be empty.");
-        }
-        if ((isDoneCommand || isDeleteCommand || isUpdateCommand) && !isValidTaskId(words[1])) {
-            throw new DukeException(" \u2639  OOPS!!! The task does not exist :-(");
+            }
+            if (!isValidTaskId(words[1])) {
+                throw new DukeException(" \u2639  OOPS!!! The task does not exist :-(");
+            }
         }
         if (isUpdateCommand && words.length < 4) {
             throw new DukeException(" \u2639  OOPS!!! The \"update\" command is missing further details. "

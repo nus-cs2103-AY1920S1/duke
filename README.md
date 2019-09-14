@@ -30,22 +30,22 @@ She is able to save everything so when you close the app, your data is not lost.
 
 #### General Commands
 - To get a quick summary of all commands in one glance, you can send:
-```
-help
-```
+	```
+	help
+	```
 
 
 - To get a hands-on short tutorial of all commands, you can send:
-```
-tutorial
-```
+	```
+	tutorial
+	```
 Just follow through the instructions and it will help you learn the commands of Duke Bunny very quickly.
 
 
 - To bid Duke Bunny goodbye, you can send:
-```
-bye
-```
+	```
+	bye
+	```
 This is optional because the data will be saved whenever any command is made. 
 Thus, do not fret if you close Duke Bunny without doing this.
 
@@ -113,8 +113,8 @@ To find if you have the task in the list by a single keyword like *lab*, send:
 	```
 	find lab
 	```
-	All matching tasks will be presented.
-	You can also find tasks by the date. 
+All matching tasks will be presented.
+You can also find tasks by the date. 
 
 To find a task with the date *21/09/2019*, send:
 	```
@@ -137,7 +137,7 @@ To input an income of *$1800* to see how much income is left or how much is over
 	```
 	income 1800
 	```
-	Everytime you do this command, the previous income will be **overwritten**.
+Everytime you do this command, the previous income will be **overwritten**.
 
 
 #### See Expense List

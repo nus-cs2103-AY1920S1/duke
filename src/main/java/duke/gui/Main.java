@@ -18,6 +18,7 @@ public class Main extends Application {
         MainWindow mainWindow = new MainWindow(duke);
         Scene scene = new Scene(mainWindow);
         stage.setScene(scene);
+        stage.setTitle("Duke");
         stage.show();
     }
 }

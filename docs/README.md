@@ -28,12 +28,11 @@ it will be automatically added to your task list.
 
 Example of usage: 
 
-`todo Watch YouTube`
+`todo Buy Nike's shoes`
 
 Expected outcome:
 
-![Image of Todo Outcome]
-(https://github.com/zhixianggg/duke/blob/master/docs/images/ug-todo.png)
+![Image of Todo Outcome](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-todo.png)
 
 ### 2. `event` - Add a new event task
 
@@ -41,7 +40,7 @@ Expected outcome:
 
 Example:
 
-`event JJ Lin's Concert /at 12 Dec 2019 1900`
+`event JJ Lin's concert /at 12 Dec 2019 1900`
 
 Expected outcome:
 
@@ -61,7 +60,7 @@ Expected outcome:
 
 Example:
 
-`done 1`
+`done 9`
 
 Expected outcome:
 
@@ -98,7 +97,7 @@ Set priority of task according to 1/2/3/4.
 
 Example:
 
-`priority 1 2`
+`priority 3 1`
 
 Expected outcome:
 
@@ -108,7 +107,7 @@ Expected outcome:
 
 Example:
 
-`delete 1`
+`delete 3`
 
 Expected outcome:
 

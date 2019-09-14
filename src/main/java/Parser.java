@@ -10,11 +10,12 @@ public class Parser {
     /**
      * Attempts to find within the user input, a Command that takes in one parameter.
      *
-     * @param action The action keyword from the user input.
+     * @param parameters The description of the action from the user input.
      * @return An Optional Command that contains a Command if a command was found; otherwise it is empty.
      * @throws DukeException If the action keyword is invalid.
      */
-    private static Optional<Command> findOneParameterCommand(String action) throws DukeException {
+    private static Optional<Command> findOneParameterCommand(String[] parameters) throws DukeException {
+        String action = parameters[0];
         Optional<Command> command;
         List<String> validActions = Arrays.asList(
                 "bye", "list", "done", "delete", "find", "todo", "deadline", "event");
@@ -45,13 +46,13 @@ public class Parser {
      */
     private static Optional<Command> findTwoParameterCommand(String[] parameters) throws DukeException {
         String action = parameters[0];
+        Optional<Command> command;
 
         if (parameters.length == 1) {
             throw new EmptyDescriptionException("OOPS!!! The description of a " +
                     action + " command cannot be empty.");
         }
 
-        Optional<Command> command;
         switch (action) {
         case "done":
             command = Optional.of(new MarkAsDoneCommand(Integer.parseInt(parameters[1]) - 1));
@@ -113,11 +114,11 @@ public class Parser {
      * @return A Command that varies based on the user input.
      * @throws DukeException If the user input is invalid.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    static Command parse(String fullCommand) throws DukeException {
         String[] parameters = fullCommand.split(" ", 2);
         assert parameters.length > 0 : "There must be at least 1 potential parameter in the input.";
 
-        Optional<Command> command = Parser.findOneParameterCommand(parameters[0]);
+        Optional<Command> command = Parser.findOneParameterCommand(parameters);
         if (command.isEmpty()) {
             command = Parser.findTwoParameterCommand(parameters);
             if (command.isEmpty()) {

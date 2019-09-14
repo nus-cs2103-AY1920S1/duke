@@ -1,7 +1,7 @@
 /**
  * A Command to print the task list.
  */
-public class PrintListCommand extends Command {
+class PrintListCommand extends Command {
 
     /**
      * Executes the command to print the task list.
@@ -11,7 +11,7 @@ public class PrintListCommand extends Command {
      * @param storage The storage that handles saving and loading the task list.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    String execute(TaskList tasks, Storage storage) {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i <= tasks.size(); i++) {
             sb.append(String.format("%d. %s\n", i, tasks.get(i - 1)));
@@ -19,13 +19,4 @@ public class PrintListCommand extends Command {
         return sb.toString().trim();
     }
 
-    /**
-     * Returns a boolean value signalling whether the program should exit.
-     *
-     * @return A boolean value indicating whether the program should exit.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

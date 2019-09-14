@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    public void startProgram() {
+    void startProgram() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.showWelcome(), dukeImage)
         );
@@ -41,11 +41,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(duke.fetchTaskList(), dukeImage)
         );
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.fetchReminders(), dukeImage)
+                DialogBox.getDukeDialog(duke.showReminders(), dukeImage)
         );
     }
 
-    public void setDuke(Duke d) {
+    void setDuke(Duke d) {
         duke = d;
     }
 
@@ -66,4 +66,5 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
         }
     }
+
 }

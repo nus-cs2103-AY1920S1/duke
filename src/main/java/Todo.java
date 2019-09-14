@@ -1,6 +1,6 @@
 public class Todo extends Task {
-    public Todo(String s) {
-        super(s);
+    Todo(String taskDescription) {
+        super(taskDescription);
     }
 
     /**
@@ -10,6 +10,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", (isDone ? "Complete" : "Incomplete"), taskDescription);
+        return String.format("[T][%s] %s", (isDone ? "\u2713" : "\u2717"), taskDescription);
     }
+
 }

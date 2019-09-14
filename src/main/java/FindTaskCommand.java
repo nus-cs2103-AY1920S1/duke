@@ -3,10 +3,10 @@ import java.util.List;
 /**
  * A Command to find tasks from the task list based on a keyword.
  */
-public class FindTaskCommand extends Command {
+class FindTaskCommand extends Command {
     private String keyword;
 
-    public FindTaskCommand(String keyword) {
+    FindTaskCommand(String keyword) {
         this.keyword = keyword;
     }
 
@@ -18,9 +18,9 @@ public class FindTaskCommand extends Command {
      * @param storage The storage that handles saving and loading the task list.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    String execute(TaskList tasks, Storage storage) {
         List<Task> matchedTasks = tasks.getMatchedTasks(keyword);
-        if (matchedTasks.size() == 0) {
+        if (matchedTasks.isEmpty()) {
             return "There are no tasks in your list matching your keyword!";
         } else {
             StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
@@ -31,13 +31,4 @@ public class FindTaskCommand extends Command {
         }
     }
 
-    /**
-     * Returns a boolean value signalling whether the program should exit.
-     *
-     * @return A boolean value indicating whether the program should exit.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

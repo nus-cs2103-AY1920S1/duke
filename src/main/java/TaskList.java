@@ -18,7 +18,7 @@ public class TaskList implements Serializable {
      *
      * @return The number of tasks present in the task list.
      */
-    public int size() {
+    int size() {
         return taskList.size();
     }
 
@@ -28,7 +28,7 @@ public class TaskList implements Serializable {
      * @param index The target index.
      * @return The task present in the specific index of the task list.
      */
-    public Task get(int index) {
+    Task get(int index) {
         return taskList.get(index);
     }
 
@@ -37,11 +37,11 @@ public class TaskList implements Serializable {
      *
      * @param index The target index.
      */
-    public void markTaskAsDone(int index) throws OutOfBoundsDeletionException {
+    void markTaskAsDone(int index) throws OutOfBoundsDeletionException {
         try {
             taskList.get(index).markAsDone();
         } catch (IndexOutOfBoundsException e) {
-            throw new OutOfBoundsDeletionException("No task with index number " + (index + 1) + " on your tasklist!");
+            throw new OutOfBoundsDeletionException("No task with index number " + (index + 1) + " on your task list!");
         }
     }
 
@@ -52,11 +52,11 @@ public class TaskList implements Serializable {
      * @return The deleted task.
      * @throws OutOfBoundsDeletionException If the target index is not present in the task list.
      */
-    public Task deleteTask(int index) throws OutOfBoundsDeletionException {
+    Task deleteTask(int index) throws OutOfBoundsDeletionException {
         try {
             return taskList.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new OutOfBoundsDeletionException("No task with index number " + (index + 1) + " on your tasklist!");
+            throw new OutOfBoundsDeletionException("No task with index number " + (index + 1) + " on your task list!");
         }
     }
 
@@ -65,11 +65,11 @@ public class TaskList implements Serializable {
      *
      * @param newTask The new task to be added.
      */
-    public void addTask(Task newTask) {
+    void addTask(Task newTask) {
         taskList.add(newTask);
     }
 
-    public List<Task> getMatchedTasks(String keyword) {
+    List<Task> getMatchedTasks(String keyword) {
         List<Task> matchedTasks = new ArrayList<>();
         for (Task task: taskList) {
             if (task.toString().contains(keyword)) {
@@ -79,7 +79,7 @@ public class TaskList implements Serializable {
         return matchedTasks;
     }
 
-    public String getReminders() {
+    String getReminders() {
         StringBuilder sb = new StringBuilder();
         if (reminders.isEmpty()) {
             sb.append("There are no reminders right now!");
@@ -92,12 +92,11 @@ public class TaskList implements Serializable {
         return sb.toString();
     }
 
-    public void createReminders() {
+    void createReminders() {
         for (Task task : taskList) {
             Optional<Reminder> potentialReminder = Reminder.createReminderIfValid(task);
-            if (potentialReminder.isPresent()) {
-                reminders.add(potentialReminder.get());
-            }
+            potentialReminder.ifPresent(reminder -> reminders.add(reminder));
         }
     }
+
 }

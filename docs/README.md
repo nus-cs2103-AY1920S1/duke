@@ -150,6 +150,6 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-bye.png" width = "512" height = "734" />
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-bye.png" width = "362" height = "205" />
 
 

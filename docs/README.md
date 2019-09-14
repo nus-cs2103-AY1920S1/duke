@@ -10,6 +10,9 @@
 - When you're done with a task, check it off by using the [`done`](#done---mark-a-task-as-done) command.
 - If you've made a mistake when entering a task or just want to keep your list short, use the [`delete`](#delete---delete-a-task) command to remove tasks off your list.
 
+### Auto Save
+Every time you add or remove a task, Duke automatically saves your list. No need for you to press `Control+S` every few seconds!
+
 ### Flexible Search
 Duke lets you search through your tasks with as few or as many criteria as you want by using the [`find`](#find---find-a-task) command. See [`how to specify the criteria here`](#find---find-a-task).
 
@@ -111,9 +114,9 @@ Finds a task from your list based on any number of criteria, listed below. You c
 |-----------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------|
 | <code>/isdone (yes&#124;no)</code>                  | Finds tasks for whether is is done or not                              | `find /isdone yes` or `find /isdone no`                          |
 | <code>/type (todo&#124;event&#124;deadline)</code>  | Finds tasks by the specific given type                                 | `find /type todo` or `find /type event` or `find /type deadline` |
-| `/before $datetime`                                 | Finds Deadline and Event tasks that are before the given date/datetime | `find /before 30/9/2019` or `find /before 23/9/2019 1600`        |
-| `/on $datetime`                                     | Finds Deadline and Event tasks that are on the given date/datetime     | `find /on 23/9/2019` or `find /on 23/9/2019 1400`                |
-| `/after $datetime`                                  | Finds Deadline and Event tasks that are after the given date/datetime  | `find /after 22/9/2019` or `find /after 23/9/2019 1100`          |
+| `/before {datetime}`                                | Finds Deadline and Event tasks that are before the given date/datetime | `find /before 30/9/2019` or `find /before 23/9/2019 1600`        |
+| `/on {datetime}`                                    | Finds Deadline and Event tasks that are on the given date/datetime     | `find /on 23/9/2019` or `find /on 23/9/2019 1400`                |
+| `/after {datetime}`                                 | Finds Deadline and Event tasks that are after the given date/datetime  | `find /after 22/9/2019` or `find /after 23/9/2019 1100`          |
 | Any other words                                     | Finds tasks with a description that contains the given words           | `find sports`                                                    |
 
 

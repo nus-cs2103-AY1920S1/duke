@@ -32,7 +32,7 @@ public class Messages {
     public static final String INVALID_SIZE_EXCEPTION = COMMAND_INDENTATION
             + "OOPS!!! Invalid task number";
     public static final String DATETIME_PARSE_EXCEPTION = COMMAND_INDENTATION
-            + "The description of /by must be in the correct format (dd/MM/yyyy HHmm). E.g. 2/12/2019 1800";
+            + "The description of /by must be in the correct format (dd/MM/yyyy HHmm). E.g. 02/12/2019 1800";
 
     public static final String NO_COMMAND_TO_UNDO = COMMAND_INDENTATION + "No more commands to undo";
     public static final String UNDO_FAILED_MESSAGE = COMMAND_INDENTATION + "Undo fails to run";

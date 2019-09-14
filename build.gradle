@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'application'
-
+    id 'checkstyle'
 }
 
 group 'seedu.duke'
@@ -11,6 +11,11 @@ version '0.1.0'
 repositories {
     mavenCentral()
 }
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
 
 application {
     // Change this to your main class.

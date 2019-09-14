@@ -127,7 +127,9 @@ Now you have 7 tasks in the list.
 
 Example of Usage:
 
-`list`
+```
+list
+```
 
 Expected outcome:
 
@@ -148,7 +150,9 @@ Here are the tasks in your list:
 
 Example of Usage:
 
-`done 2`
+```
+done 2
+```
 
 Expected outcome:
 
@@ -163,7 +167,9 @@ Nice. I've marked this task as done!
 
 Example of usage:
 
-`delete 4`
+```
+delete 4
+```
 
 Expected outcoem:
 
@@ -179,7 +185,9 @@ Now you have 6 task in the list.
 
 Example of usage:
 
-`find Attend`
+```
+find Attend
+```
 
 Expected outcome:
 
@@ -200,9 +208,10 @@ Finding for `Attend` now...
 
 Example of usage:
 
-`help`
-`help todo`
-
+```
+help
+help todo
+```
 
 Expected outcome:
 
@@ -234,11 +243,14 @@ Example outcome - Assuming user enters for first time:
 It seems it is your first time here.
 Would you like a tutorial for this?
 Type 'Yes' or 'No'.
+```
 
 Example output:
 
-`yes`
-`list`
+```
+yes
+list
+```
 
 Expected outcome:
 
@@ -247,6 +259,7 @@ I've added a temporary save file first.
 Try typing 'list' to get started.
 And if you ever need help, type 'help'!
 ```
+
 ```
 Here are the tasks in your list:
 1. [T][X] This is a Todo.

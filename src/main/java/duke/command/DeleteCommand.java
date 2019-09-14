@@ -7,6 +7,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 public class DeleteCommand extends TaskCommand {
+    private static final String outputRemoveTask = "Noted. I've removed this task:\n";
     private int number;
 
     /**
@@ -35,13 +36,13 @@ public class DeleteCommand extends TaskCommand {
      * @param storage  load and save duke.tasks
      * @throws DukeException when command is invalid
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        StringBuilder sb = new StringBuilder("Noted. I've removed this task:");
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        StringBuilder sb = new StringBuilder(outputRemoveTask);
         if (number > taskList.getSize()) {
-            throw new DukeException("It's an invalid task");
+            throw new DukeException(outputInvalidTask);
         }
         Task deletedTask = taskList.deleteTask(number);
-        sb.append("\n" + deletedTask);
-        ui.print(sb.toString());
+        sb.append(deletedTask + "\n");
+        return ui.print(sb.toString());
     }
 }

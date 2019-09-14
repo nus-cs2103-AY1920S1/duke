@@ -7,6 +7,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 public class DoneCommand extends TaskCommand {
+    private static final String outputDoTask = "Nice! I've marked this task as done:\n";
     private int number;
 
     public DoneCommand(int number) {
@@ -25,13 +26,13 @@ public class DoneCommand extends TaskCommand {
      * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when the task doesn't exist
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        StringBuilder sb = new StringBuilder("Nice! I've marked this task as done:");
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        StringBuilder sb = new StringBuilder(outputDoTask);
         if (number > taskList.getSize()) {
-            throw new DukeException("It's an invalid task");
+            throw new DukeException(outputInvalidTask);
         }
         Task doneTask = taskList.markDone(number);
-        sb.append("\n" + doneTask);
-        ui.print(sb.toString());
+        sb.append(doneTask+"\n");
+        return ui.print(sb.toString());
     }
 }

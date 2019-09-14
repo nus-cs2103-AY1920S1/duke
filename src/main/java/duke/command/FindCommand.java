@@ -9,6 +9,7 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 
 public class FindCommand extends TaskCommand {
+    private static final String outputFindTask = "Here are the matching tasks in your list:\n";
     private String str;
 
     public FindCommand(String str) {
@@ -32,17 +33,17 @@ public class FindCommand extends TaskCommand {
      * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when the command is invalid
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> findList = new ArrayList<>();
         for (Task task : taskList.getList()) {
             if (task.getDescription().contains(str)) {
                 findList.add(task);
             }
         }
-        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder(outputFindTask);
         for (int i = 0; i < findList.size(); i++) {
-            sb.append("\n" + (i + 1) + "." + taskList.getTask(i + 1));
+            sb.append((i + 1) + "." + taskList.getTask(i + 1) + "\n");
         }
-        ui.print(sb.toString());
+        return ui.print(sb.toString());
     }
 }

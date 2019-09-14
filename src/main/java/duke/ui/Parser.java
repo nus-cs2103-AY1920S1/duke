@@ -18,6 +18,16 @@ import duke.tasks.Todo;
 import java.util.Arrays;
 
 public class Parser {
+    private static final String outputEmptyInput = "Your input cannot be empty.\n";
+    private static final String outputInvalidInput = "I'm sorry, but I don't know what that means :-(\n";
+    private static final String outputEmptyDoneDescription = "The description of a done cannot be empty.\n";
+    private static final String outputEmptyDeleteDescription = "The description of a delete cannot be empty.\n";
+    private static final String outputEmptyTodoDescription = "The description of a todo cannot be empty.\n";
+    private static final String outputEmptyDeadlineDescription = "The description of a deadline cannot be empty.\n";
+    private static final String outputEmptyDeadlineTime = "Please provide a time for your deadline task\n";
+    private static final String outputEmptyEventDescription = "The description of a event cannot be empty.\n";
+    private static final String outputEmptyEventTime = "Please provide a time for your event task\n";
+    private static final String outputEmptyFind = "Please provide the string you want to search in the tasks\n";
     /**
      * parses the command string and create according type of command.
      *
@@ -30,7 +40,7 @@ public class Parser {
         if (fullCommand.equals("bye")) {
             return new ExitCommand();
         } else if (parts.length == 0) {
-            throw new DukeException("Your input cannot be empty.");
+            throw new DukeException(outputEmptyInput);
         }
 
         switch (parts[0]) {
@@ -49,7 +59,7 @@ public class Parser {
         case "find":
             return parseFind(parts);
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(outputInvalidInput);
         }
     }
 
@@ -59,7 +69,7 @@ public class Parser {
 
     private static TaskCommand parseDone(String[] parts) throws DukeException {
         if (parts.length == 1) {
-            throw new DukeException("The description of a done cannot be empty.");
+            throw new DukeException(outputEmptyDoneDescription);
         }
         int number = Integer.parseInt(parts[1]);
         return new DoneCommand(number);
@@ -67,7 +77,7 @@ public class Parser {
 
     private static TaskCommand parseDelete(String[] parts) throws DukeException {
         if (parts.length == 1) {
-            throw new DukeException("The description of a delete cannot be empty.");
+            throw new DukeException(outputEmptyDeleteDescription);
         }
         int number = Integer.parseInt(parts[1]);
         return new DeleteCommand(number);
@@ -75,7 +85,7 @@ public class Parser {
 
     private static TaskCommand parseTodo(String[] parts) throws DukeException {
         if (parts.length == 1) {
-            throw new DukeException("The description of a todo cannot be empty.");
+            throw new DukeException(outputEmptyTodoDescription);
         }
         String description = parts[1];
         PersonList list = parsePersonList(Arrays.copyOfRange(parts, 2, parts.length));
@@ -85,9 +95,9 @@ public class Parser {
 
     private static TaskCommand parseDeadline(String[] parts) throws DukeException {
         if (parts.length == 1) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new DukeException(outputEmptyDeadlineDescription);
         } else if (parts.length <= 2) {
-            throw new DukeException("Please provide a time for your deadline task");
+            throw new DukeException(outputEmptyDeadlineTime);
         }
         String description = parts[1];
         String date = parts[2];
@@ -98,9 +108,9 @@ public class Parser {
 
     private static TaskCommand parseEvent(String[] parts) throws DukeException {
         if (parts.length == 1) {
-            throw new DukeException("The description of a deadline cannot be empty.");
+            throw new DukeException(outputEmptyEventDescription);
         } else if (parts.length <= 2) {
-            throw new DukeException("Please provide a time for your deadline task");
+            throw new DukeException(outputEmptyEventTime);
         }
         String description = parts[1];
         String date = parts[2];
@@ -111,7 +121,7 @@ public class Parser {
 
     private static TaskCommand parseFind(String[] parts) throws DukeException {
         if (parts.length == 1) {
-            throw new DukeException("Please provide the string you want to search in the duke.tasks");
+            throw new DukeException(outputEmptyFind);
         }
         String description = parts[1];
         return new FindCommand(description);

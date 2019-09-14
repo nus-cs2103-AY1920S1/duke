@@ -6,6 +6,8 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 public class ListCommand extends TaskCommand {
+    private static final String outputListTask = "Here are the tasks in your list:\n";
+
     public boolean isExit() {
         return false;
     }
@@ -18,11 +20,11 @@ public class ListCommand extends TaskCommand {
      * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when execution encounters problem
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        StringBuilder sb = new StringBuilder(outputListTask);
         for (int i = 0; i < taskList.getSize(); i++) {
-            sb.append("\n" + (i + 1) + "." + taskList.getTask(i + 1));
+            sb.append((i + 1) + "." + taskList.getTask(i + 1) + "\n");
         }
-        ui.print(sb.toString());
+        return ui.print(sb.toString());
     }
 }

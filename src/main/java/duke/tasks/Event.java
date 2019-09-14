@@ -4,10 +4,6 @@ import duke.person.PersonList;
 
 public class Event extends Task {
     protected String at;
-    protected String year;
-    protected String month;
-    protected String day;
-    protected String time;
 
     /**
      * creates an event task.
@@ -18,7 +14,6 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         this.at = at;
-        parseAt(at);
     }
 
     /**
@@ -31,15 +26,6 @@ public class Event extends Task {
     public Event(String description, String at, PersonList list) {
         super(description, list);
         this.at = at;
-        parseAt(at);
-    }
-
-    private void parseAt(String str) {
-        String[] splits = str.split("[/ ]");
-        day = splits[0];
-        month = splits[1];
-        year = splits[2];
-        time = splits[3];
     }
 
     public String getAt() {

@@ -17,6 +17,7 @@ import java.util.Scanner;
 
 public class Storage {
     private String filePath;
+    private static final String outputNoSave = "Tasks are not able to be saved into .txt file.";
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -87,7 +88,7 @@ public class Storage {
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Tasks are not able to be saved into .txt file.");
+            throw new DukeException(outputNoSave);
         }
     }
 

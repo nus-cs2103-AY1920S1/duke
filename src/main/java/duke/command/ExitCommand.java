@@ -6,6 +6,7 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 public class ExitCommand extends TaskCommand {
+    private static String bye = "Bye. Hope to see you again soon!\n";
     public boolean isExit() {
         return true;
     }
@@ -18,8 +19,8 @@ public class ExitCommand extends TaskCommand {
      * @param storage  in charge of loading and saving the tasks
      * @throws DukeException when execution encounters problem
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.save(taskList.getList());
-        ui.print("Bye. Hope to see you again soon!");
+        return ui.print(bye);
     }
 }

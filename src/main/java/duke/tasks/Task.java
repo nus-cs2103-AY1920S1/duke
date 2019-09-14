@@ -3,6 +3,7 @@ package duke.tasks;
 import duke.person.PersonList;
 
 public class Task {
+    private static final String outputTask = "This is a task";
     private String description;
     private boolean isDone;
     private PersonList personList;
@@ -53,7 +54,7 @@ public class Task {
     }
 
     public String writer() {
-        return "This is a task";
+        return outputTask;
     }
 
     public PersonList getPersonList() {

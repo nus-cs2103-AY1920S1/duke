@@ -7,6 +7,7 @@ import duke.ui.Ui;
 
 
 public abstract class TaskCommand {
+    protected static final String outputInvalidTask = "It's an invalid task";
     /**
      * Tells whether the duke.command is exit duke.command.
      *
@@ -22,5 +23,5 @@ public abstract class TaskCommand {
      * @param storage  in charge of loading and saving the duke.tasks
      * @throws DukeException when the duke.command is invalid
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 }

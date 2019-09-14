@@ -7,6 +7,10 @@ import duke.tasks.TaskList;
 import duke.ui.Ui;
 
 public class AddCommand extends TaskCommand {
+    private static final String outputNoTask = "No task to be added to the list\n";
+    private static final String outputAddTask = "Got it. I've added this task:\n";
+    private static final String outputStringPre = "Now you have ";
+    private static final String outputStringPost = " tasks in the list.\n";
     private Task task;
 
     /**
@@ -35,14 +39,14 @@ public class AddCommand extends TaskCommand {
      * @param storage  in charge of loading and saving the duke.tasks
      * @throws DukeException when the duke.command is invalid
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (task == null) {
-            throw new DukeException("No task to be added to the list");
+            throw new DukeException(outputNoTask);
         }
         taskList.addTask(task);
-        StringBuilder sb = new StringBuilder("Got it. I've added this task:");
-        sb.append("\n  " + task);
-        sb.append("\nNow you have " + taskList.getSize() + " tasks in the list.");
-        ui.print(sb.toString());
+        StringBuilder sb = new StringBuilder(outputAddTask);
+        sb.append(task+"\n");
+        sb.append(outputStringPre + taskList.getSize() + outputStringPost);
+        return ui.print(sb.toString());
     }
 }

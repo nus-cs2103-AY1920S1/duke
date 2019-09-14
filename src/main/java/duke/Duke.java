@@ -8,10 +8,7 @@ import duke.tasks.TaskList;
 import duke.ui.Parser;
 import duke.ui.Ui;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-
-public class Duke extends Application {
+public class Duke {
     private TaskList tasks;
     private Storage storage;
     private Ui ui;
@@ -51,25 +48,36 @@ public class Duke extends Application {
      * Runs process of Duke.
      */
     public void run() {
-        ui.showWelcome();
+        String greeting = ui.showWelcome();
         boolean isExit = false;
+        System.out.println(greeting);
+//        try {
+//            String fullCommand = ui.readCommand();
+//            ui.showLine();
+//            TaskCommand c = Parser.parse(fullCommand);
+//            c.execute(tasks, ui, storage);
+//            isExit = c.isExit();
+//        } catch (DukeException e) {
+//            ui.showError(e.getMessage());
+//        } finally {
+//            ui.showLine();
+//        }
+
         while (!isExit) {
+            String output = "";
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine();
+                output = output.concat(ui.showLine());
                 TaskCommand c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                output = output.concat(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                output = output.concat(ui.showError(e.getMessage()));
             } finally {
-                ui.showLine();
+                output = output.concat(ui.showLine());
             }
+            System.out.print(output);
         }
-    }
-
-    @Override
-    public void start(Stage stage) {
     }
 
     /**
@@ -77,6 +85,6 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "duke.Duke heard: " + input;
+        return "Duke heard: " + input;
     }
 }

@@ -22,7 +22,6 @@ public class Storage {
      * Reads the storage file and loads the TaskList.
      *
      * @return the TaskList after reading storage file.
-     * @throws FileNotFoundException if the file does not exist.
      */
     public ArrayList<Task> load() {
         try {

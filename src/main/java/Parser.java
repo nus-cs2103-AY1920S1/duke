@@ -82,6 +82,8 @@ public class Parser {
         String action = parameters[0];
         Command command;
 
+        assert parameters.length > 1 : "Number of parameters must be more than 1.";
+
         switch (action) {
         case "deadline":
             String[] description;
@@ -113,6 +115,8 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] parameters = fullCommand.split(" ", 2);
+        assert parameters.length > 0 : "There must be at least 1 potential parameter in the input.";
+
         Optional<Command> command = Parser.findOneParameterCommand(parameters[0]);
         if (command.isEmpty()) {
             command = Parser.findTwoParameterCommand(parameters);

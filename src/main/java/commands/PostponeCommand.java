@@ -13,6 +13,13 @@ public class PostponeCommand extends Command {
     Integer hoursToPostpone;
     Integer minutesToPostpone;
 
+    /**
+     * Constructor for a postpone command.
+     * @param taskNumToPostpone the task number
+     * @param daysToPostpone days
+     * @param hoursToPostpone hours to postpone
+     * @param minutesToPostpone minutes to postpone
+     */
     public PostponeCommand(String taskNumToPostpone, String daysToPostpone,
                            String hoursToPostpone, String minutesToPostpone) {
         this.taskNumToPostpone = Integer.parseInt(taskNumToPostpone);
@@ -28,7 +35,7 @@ public class PostponeCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            assert tasks.getList()!= null;
+            assert tasks.getList() != null;
             Task t = tasks.getTask(taskNumToPostpone);
             if (t.getSymbol().equals("E")) {
                 Event event = (Event) t;
@@ -45,11 +52,11 @@ public class PostponeCommand extends Command {
                 return ui.print("Todo task cannot be postponed!");
             }
 
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return "Invalid task number :(";
         } catch (Exception e) {
-            return e.toString() + "\nInput format should be: postpone taskNumber days hrs mins :) \n " +
-                    "Example: postpone 1 0 4 0 will postpone task 1 by 4 hours.";
+            return e.toString() + "\nInput format should be: postpone taskNumber days hrs mins :) \n "
+                    + "Example: postpone 1 0 4 0 will postpone task 1 by 4 hours.";
         }
 
     }

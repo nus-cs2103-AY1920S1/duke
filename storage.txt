@@ -1,0 +1,4 @@
+T|+|attend funeral
+T|+|attend 2103 tutorial
+T|-|attend lesson
+D|+|finish homework|20/10/2019 2100

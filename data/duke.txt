@@ -1,1 +1,3 @@
-E | 0 | something | 23rd of April 2019, 6pm-7pm
+E | 0 | 2103 meeting | 13th of September 2019, 9am-10.30am
+D | 0 | submit SEP application | 20th of September 2019, 11.59pm
+D | 0 | submit 2100 assignment | 20th of September 2019, 3pm

@@ -1,0 +1,44 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Got it. I've added this task:
+	[T][n] run bakery
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+	[T][n] clean phone
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+	[T][n] change mouse
+Now you have 3 tasks in the list.
+Got it. I've added this task:
+	[D][n] submit this thingy (by: thursday next week)
+Now you have 4 tasks in the list.
+Got it. I've added this task:
+	[D][n] do 2012 notes (by: monday)
+Now you have 5 tasks in the list.
+Got it. I've added this task:
+	[E][n] orbital splashdown (at: aug 28th)
+Now you have 6 tasks in the list.
+Here are the tasks in your list:
+1. [T][n] run bakery
+2. [T][n] clean phone
+3. [T][n] change mouse
+4. [D][n] submit this thingy (by: thursday next week)
+5. [D][n] do 2012 notes (by: monday)
+6. [E][n] orbital splashdown (at: aug 28th)
+Got it. I've added this task:
+	[T][n] orbital poster
+Now you have 7 tasks in the list.
+Here are the tasks in your list:
+1. [T][n] run bakery
+2. [T][n] clean phone
+3. [T][n] change mouse
+4. [D][n] submit this thingy (by: thursday next week)
+5. [D][n] do 2012 notes (by: monday)
+6. [E][n] orbital splashdown (at: aug 28th)
+7. [T][n] orbital poster
+Bye. Hope to see you again soon!

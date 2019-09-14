@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TodoTaskTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-09-07T10:16:40" hostname="arcw" time="0.017">
+  <properties/>
+  <testcase name="testStringForm_aBunchOfStrings_shouldMatch()" classname="TodoTaskTest" time="0.017"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

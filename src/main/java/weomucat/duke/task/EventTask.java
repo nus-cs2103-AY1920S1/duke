@@ -1,10 +1,10 @@
 package weomucat.duke.task;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import weomucat.duke.date.Date;
 import weomucat.duke.date.DateRange;
+import weomucat.duke.date.Interval;
 import weomucat.duke.exception.InvalidIndexException;
 import weomucat.duke.ui.Message;
 
@@ -18,7 +18,7 @@ public class EventTask extends RecurringTask {
 
   private DateRange at;
   private ArrayList<DateRange> atSlots;
-  private Duration every;
+  private Interval every;
 
   /**
    * Creates an EventTask.
@@ -27,7 +27,7 @@ public class EventTask extends RecurringTask {
    * @param at          date range(s) of the event
    * @param every       optional. recurring task interval
    */
-  public EventTask(String description, Collection<DateRange> at, Duration every) {
+  public EventTask(String description, Collection<DateRange> at, Interval every) {
     super(description);
 
     this.atSlots = new ArrayList<>(at);

@@ -21,7 +21,7 @@ public abstract class Parameter<T> {
    * @param required     whether the parameter is required or optional
    * @param initialValue the initial value of the parameter before parsing
    */
-  Parameter(String description, boolean required, T initialValue) {
+  public Parameter(String description, boolean required, T initialValue) {
     this.description = description;
     this.required = required;
     this.value = initialValue;

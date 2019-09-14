@@ -2,7 +2,6 @@ package weomucat.duke.task;
 
 import static weomucat.duke.Duke.LOCALE;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 import weomucat.duke.Pair;
@@ -13,6 +12,7 @@ import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.command.listener.SnoozeTaskCommandListener;
+import weomucat.duke.date.Interval;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidIndexException;
 import weomucat.duke.exception.StorageException;
@@ -220,10 +220,10 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
    * Snoozes a task by a certain duration.
    *
    * @param taskIndex the index of the task in the task list
-   * @param duration  the duration to snooze a task
+   * @param interval  the duration to snooze a task
    * @throws DukeException If the index is invalid or any listeners throw a DukeException.
    */
-  private void snoozeTask(int taskIndex, Duration duration) throws DukeException {
+  private void snoozeTask(int taskIndex, Interval interval) throws DukeException {
     Task task = this.tasks.get(taskIndex);
 
     if (!(task instanceof SnoozableTask)) {
@@ -231,7 +231,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     }
 
     SnoozableTask snoozableTask = (SnoozableTask) task;
-    snoozableTask.snooze(duration);
+    snoozableTask.snooze(interval);
 
     // Update ModifyTaskListeners
     modifyTaskUpdate(new Message("Got it. I've snoozed this task:"), task);
@@ -304,7 +304,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
   }
 
   @Override
-  public void snoozeTaskCommandUpdate(int taskIndex, Duration duration) throws DukeException {
-    snoozeTask(taskIndex, duration);
+  public void snoozeTaskCommandUpdate(int taskIndex, Interval interval) throws DukeException {
+    snoozeTask(taskIndex, interval);
   }
 }

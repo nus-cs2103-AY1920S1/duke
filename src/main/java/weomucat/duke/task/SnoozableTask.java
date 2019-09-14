@@ -1,7 +1,7 @@
 package weomucat.duke.task;
 
-import java.time.Duration;
+import weomucat.duke.date.Interval;
 
 interface SnoozableTask {
-  void snooze(Duration duration);
+  void snooze(Interval interval);
 }

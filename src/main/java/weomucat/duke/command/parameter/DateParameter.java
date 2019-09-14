@@ -2,6 +2,7 @@ package weomucat.duke.command.parameter;
 
 import weomucat.duke.date.Date;
 import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.parser.DateParser;
 
 public class DateParameter extends Parameter<Date> {
 
@@ -11,6 +12,6 @@ public class DateParameter extends Parameter<Date> {
 
   @Override
   Date parseLogic(String userInput) throws InvalidParameterException {
-    return Date.parse(userInput);
+    return new DateParser(userInput).parse();
   }
 }

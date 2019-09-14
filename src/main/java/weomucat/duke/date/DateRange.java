@@ -1,70 +1,41 @@
 package weomucat.duke.date;
 
-import static weomucat.duke.date.Date.DATE_PARSE_PATTERN;
+import static weomucat.duke.parser.DateRangeParser.DATE_RANGE_DELIMITER;
 
 import java.io.Serializable;
-import java.time.Duration;
-import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.exception.DukeRuntimeException;
 
 /**
  * A DateRange is a span of time between two Dates.
  */
 public class DateRange implements Serializable {
 
-  private static final String DELIMITER = "-";
-
-  private static final String PARSE_ERROR_MESSAGE =
-      String.format("Not enough dates in date range. Please enter in '%s %s %s' format.",
-          DATE_PARSE_PATTERN, DELIMITER, DATE_PARSE_PATTERN);
-
   private Date from;
   private Date to;
-
-  private DateRange(Date from, Date to) {
-    this.from = from;
-    this.to = to;
-  }
 
   /**
    * Creates a DateRange from two Dates.
    *
    * @param from start Date
    * @param to   end Date
-   * @throws InvalidParameterException if start date is after end date
    */
-  public static DateRange create(Date from, Date to) throws InvalidParameterException {
+  public DateRange(Date from, Date to) {
     if (from.compareTo(to) >= 0) {
-      throw new InvalidParameterException("The start date must come before the end date.");
+      throw new DukeRuntimeException("The start date must come before the end date.");
     }
-    return new DateRange(from, to);
-  }
-
-  /**
-   * Creates a DateRange object from two datetime strings separated by a delimiter.
-   *
-   * @param range two datetime strings separated by a delimiter
-   * @throws InvalidParameterException thrown if range is invalid
-   */
-  public static DateRange parse(String range) throws InvalidParameterException {
-    String[] dates = range.split(DELIMITER);
-    if (dates.length < 2) {
-      throw new InvalidParameterException(PARSE_ERROR_MESSAGE);
-    }
-
-    Date from = Date.parse(dates[0]);
-    Date to = Date.parse(dates[1]);
-    return new DateRange(from, to);
+    this.from = from;
+    this.to = to;
   }
 
   /**
    * Adds a duration to this DateRange.
    *
-   * @param duration the duration to add
+   * @param interval the duration to add
    * @return new DateRange instance
    */
-  public DateRange plus(Duration duration) {
-    Date from = this.from.plus(duration);
-    Date to = this.to.plus(duration);
+  public DateRange plus(Interval interval) {
+    Date from = this.from.plus(interval);
+    Date to = this.to.plus(interval);
     return new DateRange(from, to);
   }
 
@@ -74,6 +45,16 @@ public class DateRange implements Serializable {
 
   public Date getTo() {
     return to;
+  }
+
+  /**
+   * Converts the Date Range to a string which is ISO-8601 compliant.
+   *
+   * @return an ISO-8601 compliant string
+   */
+  public String toIso8601() {
+    return String.format("%s%s%s", this.from.toIso8601(), DATE_RANGE_DELIMITER,
+        this.to.toIso8601());
   }
 
   @Override

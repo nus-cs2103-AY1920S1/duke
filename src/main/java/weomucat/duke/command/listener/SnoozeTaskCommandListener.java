@@ -1,6 +1,6 @@
 package weomucat.duke.command.listener;
 
-import java.time.Duration;
+import weomucat.duke.date.Interval;
 import weomucat.duke.exception.DukeException;
 
 /**
@@ -13,7 +13,7 @@ public interface SnoozeTaskCommandListener extends CommandListener {
    * When SnoozeTaskCommand is run, this method will be called.
    *
    * @param taskIndex the index of the task to snooze
-   * @param duration  the duration to snooze the task for
+   * @param interval  the duration to snooze the task for
    */
-  void snoozeTaskCommandUpdate(int taskIndex, Duration duration) throws DukeException;
+  void snoozeTaskCommandUpdate(int taskIndex, Interval interval) throws DukeException;
 }

@@ -3,7 +3,7 @@ package weomucat.duke.command;
 import java.util.Collection;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.parameter.DateParameter;
-import weomucat.duke.command.parameter.DurationParameter;
+import weomucat.duke.command.parameter.IntervalParameter;
 import weomucat.duke.command.parameter.ParameterOptions;
 import weomucat.duke.command.parameter.StringParameter;
 import weomucat.duke.exception.DukeException;
@@ -16,7 +16,7 @@ public class DeadlineCommand extends Command<AddTaskCommandListener> {
 
   private StringParameter description;
   private DateParameter dueDate;
-  private DurationParameter recurrence;
+  private IntervalParameter recurrence;
 
   public DeadlineCommand(Collection<AddTaskCommandListener> listeners) {
     super(listeners);
@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command<AddTaskCommandListener> {
   public ParameterOptions getParameterOptions() {
     this.description = new StringParameter("Deadline Description", true);
     this.dueDate = new DateParameter("Deadline Due Date", true);
-    this.recurrence = new DurationParameter("Deadline Recurrence Duration", false);
+    this.recurrence = new IntervalParameter("Deadline Recurrence Interval", false);
     return new ParameterOptions(this.description)
         .put(PARAMETER_BY, this.dueDate)
         .put(PARAMETER_EVERY, this.recurrence);

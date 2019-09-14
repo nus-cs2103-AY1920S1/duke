@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 import weomucat.duke.command.parameter.ParameterOptions;
-import weomucat.duke.command.parameter.StringParameter;
+import weomucat.duke.command.parameter.StubParameter;
 
 class CommandParserTest {
 
@@ -47,9 +47,9 @@ class CommandParserTest {
       CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
 
-      StringParameter body = new StringParameter("", false);
-      StringParameter from = new StringParameter("", false);
-      StringParameter to = new StringParameter("", false);
+      StubParameter body = new StubParameter();
+      StubParameter from = new StubParameter();
+      StubParameter to = new StubParameter();
       assertDoesNotThrow(() -> parser.parse(new ParameterOptions(body)
           .put("/from", from)
           .put("/to", to)));
@@ -71,9 +71,9 @@ class CommandParserTest {
       CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
 
-      StringParameter body = new StringParameter("Body", false);
-      StringParameter from = new StringParameter("From", false);
-      StringParameter to = new StringParameter("To", false);
+      StubParameter body = new StubParameter();
+      StubParameter from = new StubParameter();
+      StubParameter to = new StubParameter();
       assertDoesNotThrow(() -> parser.parse(new ParameterOptions(body)
           .put("/from", from)
           .put("/to", to)));
@@ -96,9 +96,9 @@ class CommandParserTest {
       CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
 
-      StringParameter body = new StringParameter("", true);
-      StringParameter from = new StringParameter("", true);
-      StringParameter to = new StringParameter("", true);
+      StubParameter body = new StubParameter();
+      StubParameter from = new StubParameter();
+      StubParameter to = new StubParameter();
       assertDoesNotThrow(() -> parser.parse(new ParameterOptions(body)
           .put("/from", from)
           .put("/to", to)));
@@ -123,9 +123,9 @@ class CommandParserTest {
       CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
 
-      StringParameter body = new StringParameter("", true);
-      StringParameter from = new StringParameter("", true);
-      StringParameter to = new StringParameter("", true);
+      StubParameter body = new StubParameter();
+      StubParameter from = new StubParameter();
+      StubParameter to = new StubParameter();
       assertDoesNotThrow(() -> parser.parse(new ParameterOptions(body)
           .put("/from", from)
           .put("/to", to)));
@@ -150,9 +150,9 @@ class CommandParserTest {
       CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
 
-      StringParameter body = new StringParameter("", true);
-      StringParameter from = new StringParameter("", true);
-      StringParameter to = new StringParameter("", true);
+      StubParameter body = new StubParameter();
+      StubParameter from = new StubParameter();
+      StubParameter to = new StubParameter();
       assertDoesNotThrow(() -> parser.parse(new ParameterOptions(body)
           .put("/from", from)
           .put("/to", to)));
@@ -176,10 +176,10 @@ class CommandParserTest {
       CommandParser parser = new CommandParser(test);
       String command = parser.getCommand();
 
-      StringParameter body = new StringParameter("", true);
-      StringParameter a = new StringParameter("", true);
-      StringParameter b = new StringParameter("", true);
-      StringParameter c = new StringParameter("", true);
+      StubParameter body = new StubParameter();
+      StubParameter a = new StubParameter();
+      StubParameter b = new StubParameter();
+      StubParameter c = new StubParameter();
       assertDoesNotThrow(() -> parser.parse(new ParameterOptions(body)
           .put("/a", a)
           .put("/b", b)

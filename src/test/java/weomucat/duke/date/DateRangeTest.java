@@ -1,19 +1,29 @@
 package weomucat.duke.date;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.time.Duration;
 import org.junit.jupiter.api.Test;
-import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.exception.DukeRuntimeException;
+import weomucat.duke.random.RandomDate;
 
 class DateRangeTest {
 
+  private static final int RANDOM_TESTS = 5;
+
   @Test
   void fromDateShouldNotBeAfterToDate() {
-    Date from = Date.now().plus(Duration.ofMinutes(1));
-    Date to = Date.now();
-    assertThrows(InvalidParameterException.class, () -> DateRange.create(from, to),
-        formatMessage(from, to));
+    for (int i = 0; i < RANDOM_TESTS; i++) {
+      Date from = RandomDate.generate();
+      Date to = RandomDate.generate();
+      if (from.compareTo(to) < 0) {
+        assertDoesNotThrow(() -> new DateRange(from, to),
+            formatMessage(from, to));
+      } else {
+        assertThrows(DukeRuntimeException.class, () -> new DateRange(from, to),
+            formatMessage(from, to));
+      }
+    }
   }
 
   private String formatMessage(Date from, Date to) {

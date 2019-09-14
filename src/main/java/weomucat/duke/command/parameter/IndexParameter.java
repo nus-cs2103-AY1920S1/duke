@@ -1,6 +1,7 @@
 package weomucat.duke.command.parameter;
 
 import weomucat.duke.exception.InvalidParameterException;
+import weomucat.duke.parser.IntegerParser;
 
 public class IndexParameter extends Parameter<Integer> {
 
@@ -10,11 +11,6 @@ public class IndexParameter extends Parameter<Integer> {
 
   @Override
   Integer parseLogic(String userInput) throws InvalidParameterException {
-    try {
-      return Integer.parseInt(userInput) - 1;
-    } catch (NumberFormatException e) {
-      throw new InvalidParameterException(
-          String.format("The %s is not a valid number.", getDescription()));
-    }
+    return new IntegerParser(userInput).parse() - 1;
   }
 }

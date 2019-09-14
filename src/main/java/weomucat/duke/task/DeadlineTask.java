@@ -1,8 +1,8 @@
 package weomucat.duke.task;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import weomucat.duke.date.Date;
+import weomucat.duke.date.Interval;
 import weomucat.duke.ui.Message;
 
 /**
@@ -11,7 +11,7 @@ import weomucat.duke.ui.Message;
 public class DeadlineTask extends RecurringTask implements SnoozableTask {
 
   private Date by;
-  private Duration every;
+  private Interval every;
 
   /**
    * Creates a DeadlineTask.
@@ -20,7 +20,7 @@ public class DeadlineTask extends RecurringTask implements SnoozableTask {
    * @param by          due date
    * @param every       optional. recurring task interval
    */
-  public DeadlineTask(String description, Date by, Duration every) {
+  public DeadlineTask(String description, Date by, Interval every) {
     super(description);
     this.by = by;
     this.every = every;
@@ -72,7 +72,7 @@ public class DeadlineTask extends RecurringTask implements SnoozableTask {
   }
 
   @Override
-  public void snooze(Duration duration) {
-    this.by = this.by.plus(duration);
+  public void snooze(Interval interval) {
+    this.by = this.by.plus(interval);
   }
 }

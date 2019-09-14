@@ -3,23 +3,24 @@ package weomucat.duke.task;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.time.Duration;
 import java.util.Collections;
 import org.junit.jupiter.api.Test;
-import weomucat.duke.date.Date;
 import weomucat.duke.date.DateRange;
 import weomucat.duke.exception.DukeRuntimeException;
+import weomucat.duke.random.RandomDateRange;
 
 class EventTaskTest {
 
+  private static final int RANDOM_TESTS = 5;
+
   @Test
   void descriptionShouldNotBeEmptyString() {
-    DateRange at = assertDoesNotThrow(() -> DateRange.create(Date.now(),
-        Date.now().plus(Duration.ofMinutes(1))));
-
-    assertThrows(DukeRuntimeException.class,
-        () -> new EventTask("", Collections.singleton(at), null),
-        formatMessage("", at));
+    for (int i = 0; i < RANDOM_TESTS; i++) {
+      DateRange dateRange = RandomDateRange.generate();
+      assertThrows(DukeRuntimeException.class,
+          () -> new EventTask("", Collections.singleton(dateRange), null),
+          formatMessage("", dateRange));
+    }
   }
 
   @Test
@@ -27,11 +28,10 @@ class EventTaskTest {
     String[] descriptions = {"one", "one two", "one two three"};
 
     for (String description : descriptions) {
-      DateRange at = assertDoesNotThrow(() -> DateRange.create(Date.now(),
-          Date.now().plus(Duration.ofMinutes(1))));
-
-      assertDoesNotThrow(() -> new EventTask(description, Collections.singleton(at), null),
-          formatMessage(description, at));
+      DateRange dateRange = RandomDateRange.generate();
+      assertDoesNotThrow(() ->
+              new EventTask(description, Collections.singleton(dateRange), null),
+          formatMessage(description, dateRange));
     }
   }
 

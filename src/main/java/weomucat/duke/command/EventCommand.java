@@ -3,7 +3,7 @@ package weomucat.duke.command;
 import java.util.Collection;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.parameter.DateRangesParameter;
-import weomucat.duke.command.parameter.DurationParameter;
+import weomucat.duke.command.parameter.IntervalParameter;
 import weomucat.duke.command.parameter.ParameterOptions;
 import weomucat.duke.command.parameter.StringParameter;
 import weomucat.duke.exception.DukeException;
@@ -16,7 +16,7 @@ public class EventCommand extends Command<AddTaskCommandListener> {
 
   private StringParameter description;
   private DateRangesParameter dateRanges;
-  private DurationParameter recurrence;
+  private IntervalParameter recurrence;
 
   public EventCommand(Collection<AddTaskCommandListener> listeners) {
     super(listeners);
@@ -26,7 +26,7 @@ public class EventCommand extends Command<AddTaskCommandListener> {
   public ParameterOptions getParameterOptions() {
     this.description = new StringParameter("Event Description", true);
     this.dateRanges = new DateRangesParameter("Event Date Range(s)", true);
-    this.recurrence = new DurationParameter("Event Recurrence Duration", false);
+    this.recurrence = new IntervalParameter("Event Recurrence Interval", false);
     return new ParameterOptions(this.description)
         .put(PARAMETER_AT, this.dateRanges)
         .put(PARAMETER_EVERY, this.recurrence);

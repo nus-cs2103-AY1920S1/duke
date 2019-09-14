@@ -62,12 +62,28 @@ public class Task implements Taggable {
         allTags.add(tag);
     }
 
+    /**
+     * Get a string of all tags of this Task.
+     * @return String of all tags
+     */
     public String getAllTags() {
         String tags = "";
         for (String tag : allTags) {
-            tags += tag;
+            tags += tag + " ";
         }
         return tags;
+    }
+
+    /**
+     * Get a formatted String of all tags if tags are present.
+     * @return A formatted string of all tags if tags are present, an empty string otherwise.
+     */
+    protected String formatTags() {
+        if (!allTags.isEmpty()) {
+            return (" (tags: " + getAllTags() + ")");
+        } else {
+            return "";
+        }
     }
 
     @Override

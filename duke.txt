@@ -1,3 +1,5 @@
-[E][+] wash dishes(at: 2pm) (tags:  )
-[D][+] change clothes(by: 23 Sep 2019, 18:00 PM) (tags:  )
-[E][ ] poop (at: 3pm ) (tags: dirty)
+[D][+] change clothes (by: 23 Sep 2019, 18:00 PM)
+[E][ ] wash dishes (at: 2pm)
+[T][+] poop (tags: dirty )
+[E][ ] refresh (at: 3pm ) (tags: fresh )
+[T][ ] scream  (tags: crazy )

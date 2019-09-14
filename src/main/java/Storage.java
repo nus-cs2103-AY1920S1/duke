@@ -62,6 +62,7 @@ public class Storage {
         char[] detailsArray = details.toCharArray();
         String type = "" + detailsArray[1];
         String desc = line.substring(7);
+        System.out.println("desc: " + desc); //DELETE
 
         String tag = "";
         boolean hasTags = false;
@@ -70,11 +71,10 @@ public class Storage {
         // if there are tags, reprocess string and add them to task
         if (desc.contains("tags")) {
             hasTags = true;
-            desc = desc.replace("(", "");
-            desc = desc.replace(")", "");
             String[] processed = desc.split("tags:");
             desc = processed[0];
-            tag = processed[1];
+            desc = desc.substring(0, desc.length() - 2).trim();
+            tag = processed[1].replace(")", "").trim();
         }
 
         if (type.equals("T")) {

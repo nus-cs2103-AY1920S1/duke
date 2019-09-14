@@ -42,6 +42,7 @@ public class GuiWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        addLabelToDialogBox(">>>" + input + "\n");
         duke.getResponse(input);
         userInput.clear();
     }

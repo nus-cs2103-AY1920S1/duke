@@ -27,6 +27,7 @@ public class CmdUx {
             sb.append("    " + line + "\n");
         }
         sb.append(horizontalBar + "\n");
+        sb.append("\n");
         guiWindow.addLabelToDialogBox(sb.toString());
     }
 

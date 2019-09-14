@@ -35,7 +35,12 @@ public class FindCommand extends Command {
         for (int i = 0; i < taskList.size(); i++) {
             Task currTask = taskList.get(i);
             assert currTask != null;
-            if (currTask.toString().toLowerCase().contains(keyword.toLowerCase())) {
+            boolean hasKeyword =  currTask.toString().toLowerCase().contains(keyword.toLowerCase());
+            boolean hasDateLike = currTask.toDelimitedString()
+                    .replaceAll("\\D+","")
+                    .contains(keyword.replaceAll("\\D+",""))
+                    && !keyword.replaceAll("\\D+","").isEmpty();
+            if (hasKeyword | hasDateLike) {
                 searchResult.add(i);
             }
         }

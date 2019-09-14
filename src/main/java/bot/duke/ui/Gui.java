@@ -16,6 +16,7 @@ public class Gui extends Application {
 
     private Duke duke = new Duke("data/duke.txt");
 
+    private static final String WINDOW_TITLE = "Duke, The Handsome Bot ~ by Krusagiz ~";
     @Override
     public void start(Stage stage) {
         try {
@@ -23,7 +24,7 @@ public class Gui extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke, The Handsome Bot");
+            stage.setTitle(WINDOW_TITLE);
             fxmlLoader.<GuiWindow>getController().setDuke(duke);
             stage.show();
 

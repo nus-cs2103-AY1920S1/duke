@@ -29,7 +29,6 @@ public class Ui {
         CmdUx.print("\n".repeat(23));
         CmdUx.print("\nHello from\n" + LOGO);
         CmdUx.printHBars(WELCOME_MSG);
-        CmdUx.print("\n");
     }
 
     /**
@@ -71,10 +70,16 @@ public class Ui {
      */
     public static void listSearchResults(ArrayList<Task> tasks, ArrayList<Integer> searchResults) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Here are the matching tasks in your list:\n");
-        for (Integer index : searchResults) {
-            sb.append(index + "." + tasks.get(index).toString() + "\n");
+        if (searchResults.size() > 0 ) {
+            sb.append("Here are the matching tasks in your list:\n");
+            for (Integer index : searchResults) {
+                sb.append(index + "." + tasks.get(index).toString() + "\n");
+            }
+        } else {
+            sb.append("There are no matching tasks in your list! X_X \n"
+                    + "Try again with another search term!");
         }
+
         CmdUx.printHBars(sb.toString());
     }
 

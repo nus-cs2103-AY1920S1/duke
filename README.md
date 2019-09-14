@@ -129,7 +129,8 @@ when it was inputted with the oldest on top and newest below.
 	
 
 #### Mark Task as Done
-Duke Bunny can help you to mark tasks as done.
+Duke Bunny can help you to mark tasks as done.He will reply you if he successfully did so. 
+If there is incorrect user input format, he will also reply with what went wrong.
 The data will be saved once the command is made.
 
 - To mark task at index 2 of list as done, send:
@@ -145,6 +146,8 @@ The data will be saved once the command is made.
 	
 #### Delete Tasks
 Duke Bunny can help you to delete the tasks that you no longer need to keep track of.
+He will reply you if he successfully did so and the number of tasks in the list. 
+If there is incorrect user input format, he will also reply with what went wrong.
 The data will be saved once the command is made.
 
 - To delete task at index 2 of list, send:
@@ -192,6 +195,7 @@ This section will show you the commands for the expenses managing functions of D
 Duke Bunny can help you add expenses into the expense list. 
 If an income is already inputted, he will calculate how much of the income is left or how much is overspent.
 He will also show the total expenditure.
+If there is incorrect user input format, he will also reply with what went wrong.
 The data will be saved once the command is made.
 
 - To add an expense where *$220* was spent on buying a *Bike* and the income I previously inputted is *$1800*, send:
@@ -213,6 +217,7 @@ The data will be saved once the command is made.
 Duke Bunny can help to calculate how much is overspent or left of your income if you choose to input it.
 The data will be saved once the command is made.
 Everytime you do this command, the previous income will be **overwritten**.
+If there is incorrect user input format, he will also reply with what went wrong.
 
 - To input an income of *$1800* to see how much income is left or how much is overspent, send:
 	`income 1800`
@@ -249,6 +254,8 @@ He also shows the total expenditure and income left or amount of money overspent
 	
 #### Delete Expenses
 Duke Bunny can help you to delete specific expenses that you no longer need to keep track of.
+The data will be saved once the command is made.
+If there is incorrect user input format, he will also reply with what went wrong.
 
 - To delete an expense at index 2 of the list, send:
 	`delete e2`

@@ -34,7 +34,7 @@ Usage:
 
 Expected outcome:
 
-`list of functions and purpose`
+A list of functions and their purposes is displayed.
 
 ### <a name="list"></a> Feature 2: Display List
 List tasks that are on the todo list.
@@ -45,7 +45,7 @@ Usage:
 
 Expected outcome:
 
-`Here are the tasks in your list: ...`
+The application displays a list of the tasks you have recorded.
 
 ### <a name="task"></a> Feature 3: Adding tasks
 Add different types of tasks to be cleared (e.g. todo, event, deadline).
@@ -58,7 +58,7 @@ Usage:
 
 Expected outcome:
 
-Task is added to list.
+The task (todo, event or deadline) is added to the list.
 
 ### <a name="delete"></a>Feature 4: Task deletion
 Delete tasks by index
@@ -69,12 +69,12 @@ Usage:
 
 Expected outcome:
 
-Task is removed from list.
+The task is removed from the list.
 
 Alternatively, you can also use `clear` to delete all tasks from the list.
 
 ### <a name="done"></a>Feature 5: Find tasks
-Find tasks by keywords. Any task that contains said keyword will appear.
+Find tasks by search phrase. Any task that contains said search phrase will appear.
 
 Usage:
 
@@ -82,7 +82,7 @@ Usage:
 
 Expected outcome:
 
-Tasks that contain the keyword will be listed.
+All tasks that contain the search phrase will be listed.
 
 ### <a name="done"></a>Feature 6: Mark Task as done
 Mark tasks by index
@@ -93,7 +93,7 @@ Usage:
 
 Expected outcome:
 
-Task is marked as done.
+The task correlating to the index is marked as done.
 
 ### <a name="autosave"></a>Feature 7: Saving
 All tasks are automatically saved whenever a task is added or modified.

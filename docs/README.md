@@ -1,14 +1,14 @@
 # User Guide
 
-![alt text](http://github.com/crazoter/duke/blob/master/docs/Ui.png "Image of Ui").
+![alt text](https://raw.githubusercontent.com/crazoter/duke/master/docs/Ui.png "Image of Ui").
 
-Download the latest release [here](http://github.com/crazoter/duke/releases).
+Download the latest release [here](https://github.com/crazoter/duke/releases).
 
-### Features
+## Features
 
 ### Manage todos, events and deadlines
-* With Duke, you can add different types of tasks your list  using [`todo`](#task), [`deadline`](#task) or [`event`](#task).
-* You can also view your list of tasks by using the `list` command.
+* With Duke, you can add different types of tasks your list using [`todo`](#task), [`deadline`](#task) or [`event`](#task) (These commands are hyperlinks, click them to jump to their usage below).
+* You can also view your list of tasks by using the [`list`](#list) command.
 * You can mark a task as done using [`done`](#done), or [`delete`](#delete) to remove tasks, or [`clear`](#clear) to remove all tasks.
 * You can also look for relevant tasks using the [`find`](#find) command.
 
@@ -23,6 +23,9 @@ Download the latest release [here](http://github.com/crazoter/duke/releases).
 
 ### Get help from the app
 * The app contains the [help](#help) command to help you get acquainted with the commands.
+
+
+## User Manual
 
 ### <a name="help"></a> Feature 1: Display Help
 Shows list of functions and purpose.
@@ -91,7 +94,6 @@ Usage:
 Expected outcome:
 
 Task is marked as done.
-
 
 ### <a name="autosave"></a>Feature 7: Saving
 All tasks are automatically saved whenever a task is added or modified.

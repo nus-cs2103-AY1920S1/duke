@@ -13,6 +13,9 @@ delete each task, find a keyword, tag a task and find a tag.
 The specifics of each feature will be elaborated 
 below.
 
+## What the app looks like
+![Screenshot of the app](Ui.png)
+
 ## Tasks 
 ### 1  - Todo tasks
 The user can add a simple to do task to the program.

@@ -1,3 +1,5 @@
+package softeng.tasks;
+
 /**
  * Represents a task. A <code>Task</code> object corresponds to a thing we need to note down
  * e.g. toDo return book

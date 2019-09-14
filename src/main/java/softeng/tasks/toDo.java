@@ -1,3 +1,5 @@
+package softeng.tasks;
+
 /**
  * Represents some task to do.
  */

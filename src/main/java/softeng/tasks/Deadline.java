@@ -1,4 +1,7 @@
+package softeng.tasks;
+
 import java.util.Objects;
+import softeng.date.Date;
 
 /**
  * Represents a Deadline task. A <code>Deadline</code> object corresponds to the
@@ -31,6 +34,6 @@ public class Deadline extends Task{
     @Override
     public String toSave() {
         String done = isDone ? "1 | " : "0 | ";
-        return "T | " + done + description + " | " + by;
+        return "D | " + done + description + " | " + by;
     }
 }

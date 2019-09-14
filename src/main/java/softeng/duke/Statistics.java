@@ -1,3 +1,9 @@
+package softeng.duke;
+
+import softeng.tasks.Task;
+import softeng.tasks.Deadline;
+import softeng.tasks.toDo;
+import softeng.tasks.Event;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,7 +18,7 @@ public class Statistics {
 
     public Statistics() {
         tasksDone = new LinkedList<>();
-        Path file = Paths.get("stats.txt");
+        Path file = Paths.get("../../stats.txt");
         try {
             Scanner fileSc = new Scanner(file).useDelimiter("\\||\\n");
             while (fileSc.hasNext()) {
@@ -53,7 +59,7 @@ public class Statistics {
         for (Task t : tasksDone) {
             lines.add(t.toSave());
         }
-        Path file = Paths.get("stats.txt");
+        Path file = Paths.get("../../stats.txt");
         try {
             Files.write(file, lines, StandardCharsets.UTF_8);
         } catch (IOException ex) {

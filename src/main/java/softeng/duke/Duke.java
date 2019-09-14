@@ -1,4 +1,8 @@
-import java.util.Scanner;
+package softeng.duke;
+
+import softeng.tasks.TaskList;
+import softeng.dukeExceptions.DukeException;
+import softeng.gui.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -11,7 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-//import javafx.event.EventTarget;
+
 
 /**
  * Represents a chat bot that manages your daily tasks.
@@ -38,7 +42,7 @@ public class Duke extends Application {
     }*/
     public Duke() {
         ui = new Ui();
-        storage = new Storage("save.txt");
+        storage = new Storage("../../save.txt");
         tasks = new TaskList(storage.load());
         parser = new Parser();
         stats = new Statistics();

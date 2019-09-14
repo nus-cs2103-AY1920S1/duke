@@ -1,3 +1,5 @@
+package softeng.duke;
+
 /**
  * Representing the user interface of the Duke chat bot.
  */

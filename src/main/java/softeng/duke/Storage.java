@@ -1,3 +1,10 @@
+package softeng.duke;
+
+import softeng.tasks.Task;
+import softeng.tasks.TaskList;
+import softeng.tasks.Deadline;
+import softeng.tasks.toDo;
+import softeng.tasks.Event;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;

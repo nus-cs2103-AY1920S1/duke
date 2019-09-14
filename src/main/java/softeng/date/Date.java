@@ -1,3 +1,4 @@
+package softeng.date;
 /**
  *  Represents a timing on a specific date. A <code>Date</code> object corresponds
  *  to a date and a time. e.g.<code>27/08/2019 1800</code>

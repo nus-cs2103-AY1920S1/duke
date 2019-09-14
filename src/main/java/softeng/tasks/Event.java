@@ -1,4 +1,7 @@
+package softeng.tasks;
+
 import java.util.Objects;
+import softeng.date.Date;
 
 public class Event extends Task{
     protected String at;

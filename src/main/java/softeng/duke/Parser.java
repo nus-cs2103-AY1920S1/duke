@@ -1,3 +1,7 @@
+package softeng.duke;
+
+import softeng.tasks.TaskList;
+import softeng.dukeExceptions.DukeException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 /**

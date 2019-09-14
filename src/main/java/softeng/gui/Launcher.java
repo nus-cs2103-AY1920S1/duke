@@ -1,4 +1,7 @@
+package softeng.gui;
+
 import javafx.application.Application;
+import softeng.duke.Duke;
 
 /**
  * A launcher class to workaround classpath issues.

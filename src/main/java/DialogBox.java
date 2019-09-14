@@ -1,4 +1,4 @@
-import java.awt.*;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -12,8 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -38,13 +38,14 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String fontCssLayout = "-fx-font-size: 14px;\n";
+        vbox.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
+        vbox.setBorder(new Border(new BorderStroke(Color.GRAY,
+                BorderStrokeStyle.SOLID,
+                null, new BorderWidths(3))));
+        String fontCssLayout = "-fx-text-fill: white; -fx-font-size: 14px;\n";
         dialog.setStyle(fontCssLayout);
         dialog.setText(text);
-        Circle clip = new Circle(38, 38, 38);
         displayPicture.setImage(img);
-        displayPicture.setClip(clip);
     }
 
 

@@ -15,14 +15,8 @@ public class Ui {
      * Displays welcome message
      */
     public String showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
 
-
-        return logo + "Hello I'm Duke\n" + "What can I do for you?\n";
+        return "Hello I'm Duke. What can I do for you?\n";
     }
 
     /**

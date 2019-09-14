@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -16,18 +16,18 @@ public class Duke {
         List<Task> tasks = new ArrayList<>();
         while (true) {
             String line = scanner.nextLine().toLowerCase();
-            if (line.equals("bye")) {
+            if (line.length() >= 3 && line.substring(0, 3).equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
 
-            } else if (line.equals("list")) {
+            } else if (line.length() >= 4 && line.substring(0, 4).equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i < tasks.size() + 1; i++) {
                     Task currentTask = tasks.get(i - 1);
                     System.out.println(String.format(i + "." + currentTask.toString(), currentTask.getStatusIcon()));
                 }
 
-            } else if (line.contains("delete")) {
+            } else if (line.length() >= 6 && line.substring(0, 6).equals("delete")) {
                 int taskIndex = Integer.parseInt(line.replaceAll("\\D+","")) - 1;
                 Task currentTask = tasks.get(taskIndex);
                 System.out.println("Noted. I've removed this task:");
@@ -35,7 +35,7 @@ public class Duke {
                 tasks.remove(taskIndex);
                 System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
 
-            } else if (line.contains("done")) {
+            } else if (line.length() >= 4 && line.substring(0, 4).equals("done")) {
                 int taskIndex = Integer.parseInt(line.replaceAll("\\D+","")) - 1;
                 Task currentTask = tasks.get(taskIndex);
                 currentTask.setIsDone(); // set current task to done (opposite of current state of isDone)
@@ -43,32 +43,55 @@ public class Duke {
                 System.out.println(String.format(currentTask.toString(), currentTask.getStatusIcon()));
 
             } else {
-                Task newTask;
-                if (line.contains("todo")) { // task is a todo
+                Task newTask = null;
+                if (line.length() >= 4 && line.substring(0, 4).equals("todo")) { // task is a todo
                     String newLine = line.substring(4);
-                    newTask = new ToDo(newLine);
 
-                } else if (line.contains("deadline")) { // task is a deadline
+                    // if description is empty, throw exception
+                    if (newLine.length() == 0) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    } else {
+                        newTask = new ToDo(newLine);
+                        informUserOfUpdate(tasks, newTask);
+                    }
+
+                } else if (line.length() >= 8 && line.substring(0, 8).equals("deadline")) { // task is a deadline
                     int index = line.indexOf("/by "); // index of end of '\by ', which is ' '
-                    String description = line.substring(8, index - 1); // from ' ' after 'deadline' to ' ' before '/by'
-                    String by = line.substring(index + 4, line.length()); // from ' ' after '\by' to end of input
-                    newTask = new Deadline(description, by);
 
-                } else if (line.contains("event")){ // task is an event
+                    // if no '/by' or no description or no deadline date, throw exception
+                    if (index == -1 || line.substring(8, index).length() == 0 || line.substring(index + 3).length() == 0 ) {
+                        throw new DukeException("☹ OOPS!!! Please specify a [description of deadline] /by [date of deadline].");
+                    } else {
+                        String description = line.substring(8, index - 1); // from ' ' after 'deadline' to ' ' before '/by'
+                        String by = line.substring(index + 4, line.length()); // from ' ' after '\by' to end of input
+                        newTask = new Deadline(description, by);
+                        informUserOfUpdate(tasks, newTask);
+                    }
+
+                } else if (line.length() >= 5 && line.substring(0, 5).equals("event")){ // task is an event
                     int index = line.indexOf("/at ");
-                    String description = line.substring(5, index - 1); // from ' ' after 'event' to ' ' before '/at'
-                    String at = line.substring(index + 4, line.length()); // from ' ' after '\at' to end of input
-                    newTask = new Event(description, at);
+                    if (index == -1 || line.substring(5, index).length() == 0 || line.substring(index + 3).length() == 0) {
+                        throw new DukeException("☹ OOPS!!! Please specify a [description of event] /at [date of event]");
+                    } else {
+                        String description = line.substring(5, index - 1); // from ' ' after 'event' to ' ' before '/at'
+                        String at = line.substring(index + 4, line.length()); // from ' ' after '\at' to end of input
+                        newTask = new Event(description, at);
+                        informUserOfUpdate(tasks, newTask);
+                    }
 
-                } else { // normal statement
-                    newTask = new Task(line);
+                } else {
+                    // invalid input
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-
-                tasks.add(newTask);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(newTask.toString());
-                System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
             }
         }
+        scanner.close();
+    }
+    
+    public static void informUserOfUpdate(List<Task> tasks, Task newTask) {
+        tasks.add(newTask);
+        System.out.println("Got it. I've added this task:");
+        System.out.println(newTask.toString());
+        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
     }
 }

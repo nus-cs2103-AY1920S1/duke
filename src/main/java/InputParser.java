@@ -20,7 +20,7 @@ public class InputParser {
     }
 
     /**
-     * Used to determine which method from the {@link TaskListModifier} class to call
+     * Determines which method from the {@link TaskListModifier} class to call
      * depending on the first word from the input.
      *
      * @param input  The input from the user.

@@ -5,18 +5,10 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents the event task given by the user.
  */
-public class Event extends Task {
-    private LocalDateTime at;
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+public class Event extends TimedTask {
 
     public Event(String s, String at) throws DukeException {
-        super(s);
-        try {
-            this.at = LocalDateTime.parse(at, dateTimeFormatter);
-        } catch (DateTimeParseException e) {
-            throw new InvalidTimeException("You formatted your time incorrectly! " +
-                    "Please format it this way: dd/mm/yyyy hh:mm");
-        }
+        super(s, at);
     }
 
     /**
@@ -27,6 +19,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", (isDone ? "Complete" : "Incomplete"),
-                taskDescription, at.format(dateTimeFormatter));
+                taskDescription, super.timestamp.format(super.dateTimeFormatter));
     }
 }

@@ -42,7 +42,7 @@ public class EventCommand extends Command {
             ui.showEventCommand(tasks);
         } catch (ParseException | IndexOutOfBoundsException e) {
             ui.showLoadingError("Please enter a valid date according to dd/MM/yyyy HHmm pattern."
-                    + " Time is in 24-hour format. E.g 11:30pm is 2330.");
+                    + " Time is in 24-hour format. E.g 11:30pm is 2330 and 12:30am is 0030.");
         }
     }
 }

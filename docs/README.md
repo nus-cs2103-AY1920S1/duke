@@ -12,12 +12,19 @@ Duke also utilises of local storage, remembering your tasks even after the appli
 
 ## <a name="screenshots"></a>ScreenShots
 
+- Adding Tasks
 ![adding-tasks](images/adding-tasks.png)
+- Viewing Tasks
 ![viewing-tasks](images/viewing-tasks.png)
+- Doing Tasks
 ![doing-tasks](images/doing-tasks.png)
+- Finding Tasks
 ![finding-tasks](images/finding-tasks.png)
+- Deleting Tasks
 ![deleting-tasks](images/deleting-tasks.png)
+- Invalid Commands
 ![invalid-commands](images/invalid-commands.png)
+- Tell Duke Bye
 ![bye-commands](images/bye-commands.png)
 
 ## <a name="features"></a>Features 

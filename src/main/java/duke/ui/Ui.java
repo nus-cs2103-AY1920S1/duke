@@ -55,32 +55,24 @@ public abstract class Ui {
         showMessage("Bye. Hope to see you again soon!");
     }
 
-    public void showTask(Task task) {
-        showMessage("  " + task);
-    }
-
     public void showTaskDone(Task task) {
-        showMessage("Nice! I've marked this task as done:");
-        showTask(task);
+        showMessage("Nice! I've marked this task as done:\n  " + task);
     }
 
-    public void showTaskAdded(Task task) {
-        showMessage("Got it. I've added this task:");
-        showTask(task);
+    public void showTaskAdded(Task task, int numTasks) {
+        showMessage("Got it. I've added this task:\n  " + task + "\n" + numTasksMessage(numTasks));
     }
 
-    public void showTaskDeleted(Task task) {
-        showMessage("Noted. I've removed this task:");
-        showTask(task);
+    public void showTaskDeleted(Task task, int numTasks) {
+        showMessage("Noted. I've removed this task:\n  " + task + "\n" + numTasksMessage(numTasks));
     }
 
     public void showTaskEdited(Task task) {
-        showMessage("Got it. I've edited this task:");
-        showTask(task);
+        showMessage("Got it. I've edited this task:\n  " + task);
     }
 
-    public void showNumTasks(int num) {
-        showMessage("Now you have " + num + " task" + (num == 1 ? "" : "s") + " in the list.");
+    public String numTasksMessage(int num) {
+        return "Now you have " + num + " task" + (num == 1 ? "" : "s") + " in the list.";
     }
 
     /**

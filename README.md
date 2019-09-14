@@ -33,19 +33,20 @@ She is able to save everything so when you close the app, your data is not lost.
 ```
 help
 ```
-
-To get a hands-on short tutorial of all commands, you can send:
+---
+- To get a hands-on short tutorial of all commands, you can send:
 ```
 tutorial
 ```
 Just follow through the instructions and it will help you learn the commands of Duke Bunny very quickly.
-
+---
 - To bid Duke Bunny goodbye, you can send:
 ```
 bye
 ```
 This is optional because the data will be saved whenever any command is made. 
 Thus, do not fret if you close Duke Bunny without doing this.
+---
 
 ### Task Managing
 This section will show you the commands for the task managing functions of Duke Bunny
@@ -62,7 +63,7 @@ Tasks that has a time and date as its deadline.
 - To add a Todo Task called *return book*, send:
 	```
 	todo return book
-	```
+---	```
 - To add an Event called *lab meeting* which would be held on *21 September 2019* at *12PM*, send:
 	```
 	event lab meeting /at 21/09/2019 1200
@@ -71,6 +72,7 @@ Tasks that has a time and date as its deadline.
 	```
 	event lab meeting /at 21/09/2019 12.00 PM
 	```
+---
 - To add a Task with a Deadline called *German Assignment* to be done by *21 September 2019* at *10.30AM*, send:
 	```
 	deadline german assignment /by 21/09/2019 1000
@@ -79,6 +81,7 @@ Tasks that has a time and date as its deadline.
 	```
 	deadline german assignment /by 21/09/2019 10.00 AM
 	```
+---
 #### See Task List
 To see the list of tasks, send:
 ```

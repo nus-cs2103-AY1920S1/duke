@@ -4,44 +4,23 @@
 Duke is your friendly chatbot which helps to keep track of your daily tasks! It's a To-Do List where you can add and 
 modify your tasks.
 
-**User Commands**
+## Features 
+
+1. Add Task - Add new tasks into your list to keep track of them.
+1. Delete Task - Delete old tasks that you have completed or no longer have use for.
+1. Modify Task - Update details of tasks.
+1. Find Task - Filters the list of tasks based on a keyword.
+1. Complete Task - Marks the task as completed.
+1. List Task - Lists the tasks you have.
+## List of commands
 
 * `list` : Displays information about your tasks.
 * `bye` : Quits Duke.
-* `add` : Adds a new task into your list.
-    * To-Do's : `add todo <Description>`
-    * Deadlines : `add deadline <Description> 
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
-
-**Importing the project into IntelliJ**
-
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
-
-# Tutorials 
-
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
-
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
-
-# Feedback, Bug Reports
-
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+* `todo <Description>` : Adds a To-Do into your list.
+* `deadline <Description> /by <Time>` : Adds a Deadline into your list. Deadlines must have time of format of format `Year(yyyy)/Month(mm)/Date(dd) Hour(hh)Minute(mm)`, eg 2019-09-14 1800
+* `event <Description> /at <Time>` : Adds an Event into your list. Events must have time of format of format `Year(yyyy)/Month(mm)/Date(dd) Hour(hh)Minute(mm)`, eg 2019-09-14 1800
+* `find <Keyword>` : Filters list by `Keyword`.
+* `done <Number in the list>` : Mark the task at `Number` in the list as done.
+* `delete <Number in the list>` : Deletes the task at `Number` from the list.
+* `update <Number in the list> descrip <New Description>` : Updates the task at `Number`'s Description.
+* `update <Number in the list> time <New Description>` : Updates the task at `Number`'s Time.

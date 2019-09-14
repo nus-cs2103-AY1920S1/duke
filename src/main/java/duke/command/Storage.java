@@ -70,10 +70,10 @@ public class Storage {
     public void parseTextToTask(String taskText, ArrayList<Task> list) throws ParseException {
         if (taskText.substring(0, 1).equals("T")) {
             Task task = new Todo(taskText.substring(8));
-            if (taskText.substring(3,4).equals("1")) {
+            if (taskText.substring(4,5).equals("1")) {
                 task.markAsDone();
             }
-            this.list.add(task);
+            list.add(task);
         } else if (taskText.substring(0, 1).equals("D")) {
             String descriptionAndTime = taskText.substring(8);
             int index = descriptionAndTime.indexOf('|');
@@ -83,7 +83,7 @@ public class Storage {
             if (taskText.substring(4,5).equals("1")) {
                 task.markAsDone();
             }
-            this.list.add(task);
+            list.add(task);
         } else if (taskText.substring(0, 1).equals("E")) {
             String descriptionAndTime = taskText.substring(8);
             int index = descriptionAndTime.indexOf('|');
@@ -93,7 +93,7 @@ public class Storage {
             if (taskText.substring(4,5).equals("1")) {
                 task.markAsDone();
             }
-            this.list.add(task);
+            list.add(task);
         }
     }
 
@@ -140,4 +140,5 @@ public class Storage {
         writer.write(text);
         writer.close();
     }
+
 }

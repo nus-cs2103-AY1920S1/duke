@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.stream.Stream;
+
 /**
  * Represents a Task that contains the fields description that describes the
  * task, isDone that indicates if a task has been done and typeOfTask that
@@ -26,7 +28,7 @@ public class Task {
      * @return string of a check or cross mark.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (this.isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -60,4 +62,5 @@ public class Task {
     public String getTypeOfTask() {
         return this.typeOfTask;
     }
+
 }

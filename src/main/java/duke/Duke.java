@@ -45,14 +45,15 @@ public class Duke<x> extends Application {
      * @param filePath The path of the file from which the file is loaded.
      */
     public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
+            this.storage.setList(taskList);
         } catch (DukeException e) {
             ui.showLoadingError();
             taskList = new TaskList();
-            storage.setList(taskList);
+            this.storage.setList(taskList);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

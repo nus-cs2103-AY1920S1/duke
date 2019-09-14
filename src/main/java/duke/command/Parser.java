@@ -3,6 +3,8 @@ package duke.command;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import duke.Duke;
 import duke.command.TaskList;
@@ -73,7 +75,8 @@ public class Parser {
         } else if (firstWord.equals("bye")) {
             ui.printByeMessage();
         } else if (firstWord.equals("find")) {
-            String message = processFind(input, this.taskList, this.storage);
+            String item = input.split(" ")[1];
+            String message = processFindWithStream(item, this.taskList, this.storage);
             return message;
         } else {
             throw new DukeException("OOPS!!! I'm sorry, but i don't know what that means :-(");
@@ -146,6 +149,24 @@ public class Parser {
             String description = list.get(i).getDescription();
             boolean isPresent = description.matches(item);
             if (isPresent) {
+                message = message + list.get(i).toString() + "\n";
+            }
+        }
+        if (message.equals("")) {
+            throw new DukeException ("Sorry we cannot find the task :(");
+        }
+        return message;
+    }
+
+    public String processFindWithStream(String input, TaskList taskList, Storage storage) throws DukeException{
+        ArrayList<Task> list = taskList.getList();
+        String message = "";
+        for (int i = 0; i < list.size(); i++) {
+            String[] description = list.get(i).getDescription().split(" ");
+            Stream<String> stream = Arrays.stream(description);
+            long isFound = stream.filter(x -> x.equals(input))
+                    .count();
+            if (isFound > 0) {
                 message = message + list.get(i).toString() + "\n";
             }
         }

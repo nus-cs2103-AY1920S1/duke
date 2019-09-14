@@ -28,6 +28,10 @@ She can let you input your income and input your expenses.
 Then, she can help you calculate how much you have left to spend or how much is overspent.
 She is able to save everything so when you close the app, your data is not lost.
 
+Here is how it looks like in-action:
+![Image of Duke Bunny](https://github.com/kangyeelim/duke/blob/master/docs/Ui.png)
+
+
 #### General Commands
 - To get a quick summary of all commands in one glance, you can send:
 	`help`

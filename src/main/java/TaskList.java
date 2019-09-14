@@ -1,16 +1,19 @@
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class TaskList {
 
-    private ArrayList<Task> taskArr = taskArr = new ArrayList<>();
+    private ArrayList<Task> taskArr = new ArrayList<>();
+    private HashSet<String> taskSet = new HashSet<>();
 
     public void TaskList() {
     }
     public ArrayList<Task> getList() {
         return taskArr;
     }
-    public ToDo addTodo(String taskInfo, int isDone) throws ParseException {
+
+    public ToDo addTodo(String taskInfo, int isDone) throws ParseException, DukeException {
         // TODO add DukeException for this
         /**
          *  creates new To Do, add to tasklist
@@ -21,14 +24,18 @@ public class TaskList {
          *  @return none
          *  @throws DukeException if taskInfo is empty
          */
+        if (taskSet.contains(taskInfo)) {
+            throw new DukeException("Comrade, you already have this task!");
+        }
         ToDo newToDo = new ToDo(taskInfo,"T","");
+        taskSet.add(taskInfo);
         if (isDone == 1) {
             newToDo.markDone();
         }
         taskArr.add(newToDo);
         return newToDo;
     }
-    public Deadline addDeadline(String taskInfo, String by,int isDone) throws ParseException {
+    public Deadline addDeadline(String taskInfo, String by,int isDone) throws ParseException, DukeException {
         // TODO add DukeException for this
         /**
          *  creates new Deadline, add to tasklist
@@ -39,14 +46,18 @@ public class TaskList {
          *  @return none
          *  @throws DukeException if taskInfo is empty
          */
+        if (taskSet.contains(taskInfo)) {
+            throw new DukeException("Comrade, you already have this task!");
+        }
         Deadline newDeadline = new Deadline(taskInfo,"D",by);
         if (isDone == 1) {
             newDeadline.markDone();
         }
+        taskSet.add(taskInfo);
         taskArr.add(newDeadline);
         return newDeadline;
     }
-    public Event addEvent(String taskInfo, String by, int isDone) throws ParseException {
+    public Event addEvent(String taskInfo, String by, int isDone) throws ParseException, DukeException {
         // TODO add DukeException for this
         /**
          *  creates new event, add to tasklist
@@ -57,7 +68,11 @@ public class TaskList {
          *  @return none
          *  @throws DukeException if taskInfo is empty
          */
+        if (taskSet.contains(taskInfo)) {
+            throw new DukeException("Comrade, you already have this task!");
+        }
         Event newEvent = new Event(taskInfo,"E",by);
+        taskSet.add(taskInfo);
         if (isDone == 1) {
             newEvent.markDone();
         }
@@ -75,7 +90,10 @@ public class TaskList {
          *  @return none
          */
         Task doneTask = taskArr.get(taskNum-1);
+        String taskToRemove = doneTask.getTaskInfo();
+        taskSet.remove(taskToRemove);
         taskArr.remove(taskNum-1);
+
         return doneTask;
     }
     public Task done(int t) {

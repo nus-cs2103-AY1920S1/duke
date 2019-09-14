@@ -19,7 +19,7 @@ public class Ui {
          * @params none
          *  @return none
          */
-        return "Hello, I'm Duke\nWhat can I do for you?";
+        return "Greetings, Comrade.";
     }
     public String markDone(Task doneTask) {
         /**
@@ -28,7 +28,7 @@ public class Ui {
          * @params Task doneTask that is completed
          *  @return String
          */
-        return "Nice! I've marked this task as done:\n"+doneTask.printTask();
+        return "Glorious day, Comrade, you have finished another chore!:\n"+doneTask.printTask();
     }
     public String addTask(Task task) {
         /**
@@ -38,8 +38,8 @@ public class Ui {
          * @params Task task to be added
          *  @return none
          */
-        return("Got it. I've added this task:\n"+" " + task.printTask() + "\n" +
-                "Now you have " + tasks.getList().size() + " tasks in the list.\n");
+        return("Da. Your task has been recorded:\n"+" " + task.printTask() + "\n" +
+                "You have " + tasks.getList().size() + " chores left, Comrade.\n");
     }
     public String delTask(Task task) {
         /**
@@ -48,8 +48,8 @@ public class Ui {
          * @params Task task to be deleted
          *  @return none
          */
-        return "Noted. I've removed this task: \n"+" " + task.printTask() +
-                "Now you have " + tasks.getList().size() + " tasks in the list.\n";
+        return "Yes Comrade, I've removed your task: \n"+" " + task.printTask() +
+                "You have " + tasks.getList().size() + " tasks left, Comrade.\n";
     }
     public String goodBye() {
         /**
@@ -60,7 +60,7 @@ public class Ui {
          * @returns none
          */
         storage.saveToTextFile();
-        return "Bye. Hope to see you again soon!\n";
+        return "Goodbye Comrade, go forth and bring glory to the Soviet Union!\n";
     }
     public String list() {
         ArrayList<Task> taskArr = tasks.getList();
@@ -73,7 +73,7 @@ public class Ui {
          * @params none
          *  @return none
          */
-        String mainString = "Here are the tasks in your list:\n";
+        String mainString = "Here are your chores, Comrade:\n";
 
         for (int i = 0; i < taskArr.size(); i++) {
             // printInt to put number for printing
@@ -94,7 +94,7 @@ public class Ui {
          * @params keyword to search
          * @return none
          */
-        String matchingString = "Here are the matching tasks in your list:\n";
+        String matchingString = "Here are the tasks that match your description, Comrade:\n";
         ArrayList<Task> matchingTasks = tasks.findTasks(keyWord);
         int taskCount = 1;
         for (Task match: matchingTasks) {

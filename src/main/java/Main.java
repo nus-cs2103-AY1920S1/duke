@@ -18,6 +18,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Soviet Comrade");
             fxmlLoader.<MainWindow>getController().setDuke(dukeBot);
             stage.show();
         } catch (IOException e) {

@@ -22,7 +22,7 @@ public class Parser {
                 throw new DukeException("Comrade? You did not finish your sentence!");
             }
             String next = sc.next();
-            nextCommand = "";
+            nextCommand = next;
             while (sc.hasNext()) {
                 if (next.equals("/at") || next.equals("/by")) {
                     break;

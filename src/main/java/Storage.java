@@ -27,7 +27,7 @@ public class Storage {
         this.path = path;
         tasks = currTasks;
     }
-    public void initStorage() {
+    public void initStorage() throws IOException, ParseException, DukeException {
         /**
          *  reads text file from path saved
          *  this is the reading method, it calls
@@ -40,25 +40,16 @@ public class Storage {
          * @returns none
          */
         String line = "";
-        try {
-            // FileReader reads text files in the default encoding.
-            FileReader fileReader = new FileReader(path);
-            // always need to wrap file reader in buffer reader
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while((line = bufferedReader.readLine()) != null) {
-                loadTask(line);
-            }
-            // close file
-            bufferedReader.close();
-        } catch(ParseException ex) {
-            System.out.println("wtf dude");
-        } catch(FileNotFoundException ex) {
-            System.out.println("I can't see");
-        } catch(IOException ex) {
-            System.out.println("That sign will stop me, cos I can't read!");
+        // FileReader reads text files in the default encoding.
+        FileReader fileReader = new FileReader(path);
+        // always need to wrap file reader in buffer reader
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        while((line = bufferedReader.readLine()) != null) {
+            loadTask(line);
         }
+        bufferedReader.close();
     }
-    public void loadTask(String task) throws ParseException {
+    public void loadTask(String task) throws ParseException, DukeException {
         /**
          *   string task is a line loaded from text file
          *   line is unparsed, use scanner to parse it
@@ -67,7 +58,6 @@ public class Storage {
          *   @params String task: line of un-parsed task
          *   @returns none
          */
-        // TODO Make parser class
         ArrayList<Task> taskArr = tasks.getList();
         // converts tasks in string from storage to taskarr
         if (task.equals("")) {
@@ -77,6 +67,7 @@ public class Storage {
         String type = splitTask[0];
         int isDone = Integer.parseInt(splitTask[1]);
         String mainInfo = splitTask[2];
+
         if (type.equals("D")) {
             // take up empty input
             String by = splitTask[3];

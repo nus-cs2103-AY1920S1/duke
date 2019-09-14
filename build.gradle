@@ -33,9 +33,5 @@ javafx {
 }
 application {
     // Change this to your main class.
-    mainClassName = "Main"
-}
-
-run {
-    standardInput = System.in
+    mainClassName = "Launcher"
 }

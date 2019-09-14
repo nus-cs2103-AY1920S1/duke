@@ -144,41 +144,31 @@ public class Parser {
     }
     
     public static Command parse(String input) throws DukeException {
-        Command command;
         String instruction = Parser.parseInstruction(input);
         switch (instruction) {
         case "bye":
-            command = new ByeCommand();
             Duke.isExitRunLoop = true;
-            break;
+            return new ByeCommand();
         case "list":
-            command = new ListCommand();
-            break;
+            return new ListCommand();
         case "done":
-            command = new DoneCommand(Parser.parseIndex(input));
-            break;
+            return new DoneCommand(Parser.parseIndex(input));
         case "delete":
-            command = new DeleteCommand(Parser.parseIndex(input));
-            break;
+            return new DeleteCommand(Parser.parseIndex(input));
         case "find":
-            command = new FindCommand(Parser.parseSearchPhrase(input));
-            break;
+            return new FindCommand(Parser.parseSearchPhrase(input));
         case "todo":
-            command = new ToDoCommand(Parser.parseToDoDescription(input));
-            break;
+            return new ToDoCommand(Parser.parseToDoDescription(input));
         case "deadline":
             String deadlineTaskContent = Parser.parseNonToDoContent(input);
-            command = new DeadlineCommand(Parser.parseNonToDoDescription(deadlineTaskContent),
+            return new DeadlineCommand(Parser.parseNonToDoDescription(deadlineTaskContent),
                     Parser.parseNonToDoTime(deadlineTaskContent));
-            break;
         case "event":
             String eventTaskContent = Parser.parseNonToDoContent(input);
-            command = new EventCommand(Parser.parseNonToDoDescription(eventTaskContent),
+            return new EventCommand(Parser.parseNonToDoDescription(eventTaskContent),
                     Parser.parseNonToDoTime(eventTaskContent));
-            break;
         default:
             throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        return command;
     }
 }

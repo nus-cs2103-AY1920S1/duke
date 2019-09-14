@@ -21,10 +21,6 @@ public class ListCommand extends Command {
         if (taskList.getSize() == 0) {
             throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
         }
-        String response = "Here are the tasks in your list:";
-        for (int i = 0; i < taskList.getSize(); i++) {
-            response = response.concat("\n" + (i + 1) + ". " + taskList.getTask(i));
-        }
-        return response;
+        return ui.showList(taskList);
     }
 }

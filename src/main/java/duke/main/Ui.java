@@ -60,6 +60,14 @@ public class Ui {
     public String showBye() {
         return "Bye. Hope to see you again soon!";
     }
+    
+    public String showList(TaskList taskList) {
+        String response = "Here are the tasks in your list:";
+        for (int i = 0; i < taskList.getSize(); i++) {
+            response = response.concat("\n" + (i + 1) + ". " + taskList.getTask(i));
+        }
+        return response;
+    }
 
     public String showAfterAddingTask(Task currentTask, int currentSize) {
         return "Got it. I've added this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize

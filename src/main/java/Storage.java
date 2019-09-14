@@ -76,22 +76,23 @@ public class Storage {
             tag = processed[1].replace(")", "").trim();
         }
 
-        if (type.equals("T")) {
-            newTask = new ToDo(desc);
-        }
-
-        if (type.equals("D")) {
-            String[] dd = desc.split("by:");
-            String deadline = dd[1].substring(0, dd[1].length() - 1);
-            String description = dd[0].substring(0, dd[0].length() - 1);
-            newTask = new Deadline(description, deadline);
-        }
-
-        if (type.equals("E")) {
-            String[] dd = desc.split("at:");
-            String deadline = dd[1].substring(0, dd[1].length() - 1);
-            String description = dd[0].substring(0, dd[0].length() - 1);
-            newTask = new Event(description, deadline);
+        // Create the appropriate new Task.
+        switch (type) {
+            case("T"):
+                newTask = new ToDo(desc);
+                break;
+            case("D"):
+                String[] dd = desc.split("by:");
+                String deadline = dd[1].substring(0, dd[1].length() - 1);
+                String description = dd[0].substring(0, dd[0].length() - 1);
+                newTask = new Deadline(description, deadline);
+                break;
+            case("E"):
+                String[] edd = desc.split("at:");
+                String eventTime = edd[1].substring(0, edd[1].length() - 1);
+                String eventDescription = edd[0].substring(0, edd[0].length() - 1);
+                newTask = new Event(eventDescription, eventTime);
+                break;
         }
 
         // Read from line to see if task should be marked as done
@@ -102,6 +103,7 @@ public class Storage {
             newTask.quietMarkAsDone();
         }
 
+        // If tags are present, add the whole string of tags. Would have to change this if each tag is an object.
         if (hasTags) {
             newTask.addTag(tag);
         }

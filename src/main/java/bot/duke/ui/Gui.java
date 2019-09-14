@@ -2,13 +2,12 @@ package bot.duke.ui;
 
 import java.io.IOException;
 
+import bot.duke.Duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import bot.duke.Duke;
 
 /**
  * A GUI for duke using FXML.

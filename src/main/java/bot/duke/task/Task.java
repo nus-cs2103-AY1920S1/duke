@@ -1,5 +1,7 @@
 package bot.duke.task;
 
+import java.text.SimpleDateFormat;
+
 import bot.duke.ui.Checkbox;
 
 /**
@@ -7,6 +9,8 @@ import bot.duke.ui.Checkbox;
  * One Task object per task.
  */
 public class Task {
+
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     /** Name of the Task. */
     private String taskName;

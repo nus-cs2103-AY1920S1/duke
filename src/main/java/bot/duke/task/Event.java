@@ -2,8 +2,6 @@ package bot.duke.task;
 
 import java.util.Date;
 
-import bot.duke.command.Command;
-
 public class Event extends Task {
 
     /** Starting Time(with date) of event. */
@@ -33,8 +31,8 @@ public class Event extends Task {
     @Override
     public String getTaskName() {
         return super.getTaskName()
-                + " (at: " + Command.DATE_FORMAT.format(eventTimeFrom) + " - "
-                + Command.DATE_FORMAT.format(eventTimeTo) + ")";
+                + " (at: " + Task.DATE_FORMAT.format(eventTimeFrom) + " - "
+                + Task.DATE_FORMAT.format(eventTimeTo) + ")";
     }
 
     /**
@@ -56,7 +54,7 @@ public class Event extends Task {
     public String toDelimitedString() {
         return String.format("%c | %c | %s | %s | %s",
                 this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(),
-                Command.DATE_FORMAT.format(this.eventTimeFrom), Command.DATE_FORMAT.format(this.eventTimeTo));
+                Task.DATE_FORMAT.format(this.eventTimeFrom), Task.DATE_FORMAT.format(this.eventTimeTo));
     }
 
 }

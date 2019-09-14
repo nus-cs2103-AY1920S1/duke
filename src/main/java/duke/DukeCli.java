@@ -15,7 +15,7 @@ import java.io.IOException;
 public class DukeCli {
     private TaskList taskList;
     private Clui clui;
-    private Storage storage = new Storage(new File("data/tasks.txt"));
+    private Storage storage = new Storage(new File("data/tasks.txt"), new File("data/archive"));
 
     /**
      * Main function for Duke CLI application.
@@ -26,7 +26,7 @@ public class DukeCli {
 
         /** Try to load data */
         try {
-            taskList.loadData(storage.getTaskList());
+            taskList.loadData(storage.getCurrentTasks());
             clui.echoMessage("    *** EXISTING FILE LOADED ***");
         } catch (FileNotFoundException e) {
             clui.echoMessage("    *** NO EXISTING FILE FOUND ***");

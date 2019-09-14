@@ -16,6 +16,14 @@ public class TaskList {
     }
 
     /**
+     * Overloaded class constructor for existing lists of Tasks.
+     */
+    public TaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+
+    /**
      * Load data from input list of Tasks.
      * @param loadedTaskList Starting list of Tasks
      */
@@ -33,7 +41,10 @@ public class TaskList {
     /**
      * Clear list of Tasks.
      */
-    public void clearList() { taskList.clear(); }
+    public void clearList() {
+        taskList.clear();
+    }
+
     /**
      * Return number of Tasks.
      */

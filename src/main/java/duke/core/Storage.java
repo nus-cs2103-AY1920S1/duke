@@ -14,13 +14,15 @@ import java.util.Scanner;
 
 public class Storage {
     private File taskFile;
+    private File archiveFolder;
 
     /**
      * Class constructor.
      * @param file File instance to be used for storage
      */
-    public Storage(File file) {
+    public Storage(File file, File archiveFolder) {
         this.taskFile = file;
+        this.archiveFolder = archiveFolder;
     }
 
     /**
@@ -62,10 +64,14 @@ public class Storage {
         }
     }
 
-    public boolean archiveTaskList(TaskList list) {
+    /**
+     * Archive existing TaskList, .txt file will be created.
+     * @param list Existing TaskList.
+     */
+    public boolean archiveTaskList(TaskList list, String archiveName) {
         try {
             String textToAdd = "";
-            String archiveFilePath = "data/archive/" + Instant.now().toEpochMilli() + ".txt";
+            String archiveFilePath = "data/archive/" + archiveName + ".txt";
             new File(archiveFilePath).createNewFile();
             FileWriter fw = new FileWriter(archiveFilePath);
             for (Task t : list.getTasks()) {
@@ -73,14 +79,34 @@ public class Storage {
             }
             fw.write(textToAdd);
             fw.close();
-            if(taskFile.delete()) {
+            if (taskFile.delete()) {
                 createFile();
             }
             return true;
         } catch (IOException e) {
-            System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    /**
+     * Return a list of existing archive names.
+     */
+    public List<String> getArchivedTaskLists() {
+        File[] listOfArchives = archiveFolder.listFiles();
+        List<String> archiveNames = new ArrayList<>();
+        for (File archive : listOfArchives) {
+            archiveNames.add(archive.getName());
+        }
+        return archiveNames;
+    }
+
+    /**
+     * Retrieve archive.
+     */
+    public List<Task> retrieveArchivedTaskList(String archiveName) throws DukeException, IOException {
+        String archiveFilePath = "data/archive/" + archiveName + ".txt";
+        List<Task> archive = getTaskList(new File(archiveFilePath));
+        return archive;
     }
 
     /**
@@ -88,13 +114,22 @@ public class Storage {
      * @throws FileNotFoundException File not found exception
      * @throws DukeException Duke exception
      */
-    public List<Task> getTaskList() throws FileNotFoundException, DukeException {
+    public List<Task> getTaskList(File file) throws FileNotFoundException, DukeException {
         List<Task> taskList = new ArrayList<Task>();
-        Scanner s = new Scanner(taskFile); // create a Scanner using the File as the source
+        Scanner s = new Scanner(file); // create a Scanner using the File as the source
         while (s.hasNextLine()) {
             Task t = Task.deserialize(s.nextLine());
             taskList.add(t);
         }
         return taskList;
+    }
+
+    /**
+     * Returns current tasks.
+     * @throws FileNotFoundException File not found exception
+     * @throws DukeException Duke exception
+     */
+    public List<Task> getCurrentTasks() throws FileNotFoundException, DukeException {
+        return getTaskList(taskFile);
     }
 }

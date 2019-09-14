@@ -13,7 +13,6 @@ public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
-    private Image duke = new Image(this.getClass().getResourceAsStream("../../images/avatar_placeholder.png"));
 
     /**
      * Dialog box for chat component.

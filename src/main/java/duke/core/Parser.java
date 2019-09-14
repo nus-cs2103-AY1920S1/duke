@@ -50,7 +50,15 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "archive":
-            return new ArchiveCommand();
+            if (splitCommand.length == 1 || splitCommand[1].trim().equals("")) {
+                throw new DukeException("usage: <archive> <archive_name>");
+            }
+            return new ArchiveCommand(splitCommand[1]);
+        case "retrieve":
+            if (splitCommand.length == 1) {
+                throw new DukeException("usage: <retrieve> <archive_name>");
+            }
+            return new RetrieveCommand(splitCommand[1]);
         case "list":
             return new ListCommand();
         case "find":
@@ -61,25 +69,25 @@ public class Parser {
             return new DeleteCommand(Integer.parseInt(splitCommand[1].trim()));
         case "todo":
             if (splitCommand.length == 1) {
-                throw new DukeException("The description of a deadline cannot be empty.");
+                throw new DukeException("usage: todo <todo_task>");
             }
             return new AddCommand(new Todo(splitCommand[1].trim()));
         case "deadline":
             if (splitCommand.length == 1) {
-                throw new DukeException("The description of a deadline cannot be empty.");
+                throw new DukeException("usage: deadline <deadline_task> /by <deadline>");
             }
             String[] parsedDeadline = splitCommand[1].split(" \\/by ");
             if (parsedDeadline.length == 1) {
-                throw new DukeException("Deadline is missing a deadline");
+                throw new DukeException("usage: deadline <deadline_task> /by <deadline>");
             }
             return new AddCommand(new Deadline(parsedDeadline[0], Parser.parseDateTime(parsedDeadline[1].trim())));
         case "event":
             if (splitCommand.length == 1) {
-                throw new DukeException("The description of an event cannot be empty.");
+                throw new DukeException("usage: event <event_name> /at <event_location>");
             }
             String[] parsedEvent = splitCommand[1].split(" \\/at ");
             if (parsedEvent.length == 1) {
-                throw new DukeException("Event is missing a location");
+                throw new DukeException("usage: event <event_name> /at <event_location>");
             }
             return new AddCommand(new Event(parsedEvent[0], Parser.parseDateTime(parsedEvent[1].trim())));
         default:

@@ -11,12 +11,15 @@ import javafx.scene.layout.VBox;
 import java.util.List;
 
 public class Gui extends VBox implements UiInterface {
-    private Image duke = new Image(this.getClass().getResourceAsStream("../../images/avatar_placeholder.png"));
-    private Image user = new Image(this.getClass().getResourceAsStream("../../images/avatar_placeholder.png"));
+    private Image avatar;
+
+    public Gui(Image avatar) {
+        this.avatar = avatar;
+    }
 
     public void sendDukeMessage(String dukeMessage) {
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(dukeMessage, duke));
+                DialogBox.getDukeDialog(dukeMessage, avatar));
     }
 
     /**
@@ -29,7 +32,7 @@ public class Gui extends VBox implements UiInterface {
                             + "_____________________________________________________\n"
                             + "     Hello! I'm Duke\n"
                             + "     What can I do for you?\n"
-                            + "_____________________________________________________", duke
+                            + "_____________________________________________________", avatar
                     ));
         } else {
             this.getChildren().addAll(
@@ -38,7 +41,7 @@ public class Gui extends VBox implements UiInterface {
                                     + " _____________________________________________________\n"
                                     + "     Hello! I'm Duke\n"
                                     + "     What can I do for you?\n"
-                                    + " _____________________________________________________", duke));
+                                    + " _____________________________________________________", avatar));
 
         }
     }
@@ -47,11 +50,11 @@ public class Gui extends VBox implements UiInterface {
      * Echo TaskList to user.
      * @param taskList TaskList to be echoed
      */
-    public void echoList(TaskList taskList) {
+    public void echoList(TaskList taskList, List<String> archives) {
         String output = "";
         output += "_____________________________________________________\n";
         if (taskList.getSize() == 0) {
-            output += "     *** List is Empty ***     \n";
+            output += "     *** No existing tasks ***     \n";
         } else {
             output += "     Here are the tasks in your list: \n";
             for (int i = 0; i < taskList.getSize(); i++) {
@@ -60,8 +63,17 @@ public class Gui extends VBox implements UiInterface {
             }
         }
         output += "_____________________________________________________";
+        if (archives.size() == 0) {
+            output += "     *** No existing archives ***     \n";
+        } else {
+            output += "     Here are the existing archives: \n";
+            for (String archive : archives)
+                output += "     " + archive;
+            output += "\n";
+        }
+        output += "_____________________________________________________";
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(output, duke));
+                DialogBox.getDukeDialog(output, avatar));
     }
 
     /**
@@ -82,7 +94,7 @@ public class Gui extends VBox implements UiInterface {
         }
         output += "_____________________________________________________";
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(output, duke));
+                DialogBox.getDukeDialog(output, avatar));
     }
 
     /**
@@ -96,7 +108,7 @@ public class Gui extends VBox implements UiInterface {
                         + "     Got it. I've added this task: \n"
                         + String.format("       %s \n", taskToAdd.toString())
                         + String.format("     Now you have %d tasks in the list.\n", taskListSize)
-                        + "_____________________________________________________", duke));
+                        + "_____________________________________________________", avatar));
     }
 
     /**
@@ -109,7 +121,7 @@ public class Gui extends VBox implements UiInterface {
                                 + "     Nice! I've marked this task as done: \n"
                                 + "       %s\n"
                                 + "_____________________________________________________",
-                        taskToComplete.toString()), duke));
+                        taskToComplete.toString()), avatar));
     }
 
     /**
@@ -124,7 +136,7 @@ public class Gui extends VBox implements UiInterface {
                                 + "       %s\n"
                                 + "     Now you have %d tasks in the list.\n"
                                 + "_____________________________________________________",
-                        taskToDelete.toString(), taskListSize), duke));
+                        taskToDelete.toString(), taskListSize), avatar));
     }
 
     /**
@@ -133,7 +145,7 @@ public class Gui extends VBox implements UiInterface {
      */
     public void echoException(Exception e) {
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(e.getMessage(), duke));
+                DialogBox.getDukeDialog(e.getMessage(), avatar));
     }
 
     /**
@@ -146,7 +158,7 @@ public class Gui extends VBox implements UiInterface {
         output += String.format("     *** %s ***     \n", msg);
         output += "_____________________________________________________";
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(output, duke));
+                DialogBox.getDukeDialog(output, avatar));
     }
 
     /**
@@ -157,6 +169,6 @@ public class Gui extends VBox implements UiInterface {
                 DialogBox.getDukeDialog(
                         "_____________________________________________________\n"
                                 + "     Bye. Hope to see you again soon!\n"
-                                + "_____________________________________________________", duke));
+                                + "_____________________________________________________", avatar));
     }
 }

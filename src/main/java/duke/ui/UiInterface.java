@@ -6,7 +6,7 @@ import duke.tasks.Task;
 import java.util.List;
 
 public interface UiInterface {
-    void echoList(TaskList taskList);
+    void echoList(TaskList taskList, List<String> archives);
 
     void echoMatchingTasks(List<Task> matchingTasks);
 

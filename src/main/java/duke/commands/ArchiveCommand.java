@@ -6,12 +6,14 @@ import duke.exceptions.DukeException;
 import duke.ui.UiInterface;
 
 public class ArchiveCommand extends Command {
+    private String archiveName;
 
     /**
      * Class constructor.
      */
-    public ArchiveCommand() {
+    public ArchiveCommand(String archiveName) {
         super(false);
+        this.archiveName = archiveName;
     }
 
     /**
@@ -22,12 +24,11 @@ public class ArchiveCommand extends Command {
      */
     @Override
     public void execute(Storage storage, TaskList tasks, UiInterface ui) {
-        if(storage.archiveTaskList(tasks)) {
+        if (storage.archiveTaskList(tasks, archiveName)) {
             tasks.clearList();
-            ui.echoMessage("Archiving Completed");
-        }
-        else {
-            ui.echoException(new DukeException("Archiving Failed"));
+            ui.echoMessage("ARCHIVING COMPLETE");
+        } else {
+            ui.echoException(new DukeException("Failed to archive tasks"));
         }
     }
 }

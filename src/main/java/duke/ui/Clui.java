@@ -36,7 +36,7 @@ public class Clui implements UiInterface {
      * Echo TaskList to user.
      * @param taskList TaskList to be echoed
      */
-    public void echoList(TaskList taskList) {
+    public void echoList(TaskList taskList, List<String> archives) {
         System.out.println("    ____________________________________________________________");
         if (taskList.getSize() == 0) {
             System.out.println("     *** List is Empty ***");
@@ -46,6 +46,14 @@ public class Clui implements UiInterface {
                 System.out.println(String.format("     %d.%s",
                         i + 1, taskList.getTask(i).toString()));
             }
+        }
+        System.out.println("    ____________________________________________________________");
+        if (archives.size() == 0) {
+            System.out.println("     *** No existing archives ***     \n");
+        } else {
+            System.out.println("     Here are the existing archives: \n");
+            for (String archive : archives)
+                System.out.print("     " + archive);
         }
         System.out.println("    ____________________________________________________________");
     }

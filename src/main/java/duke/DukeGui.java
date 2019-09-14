@@ -33,7 +33,7 @@ public class DukeGui extends Application {
     private TextField userTextField;
     private Button sendButton;
     private Scene scene;
-    private Image user;
+    private Image avatar;
     private TaskList taskList;
     private Storage storage;
 
@@ -41,10 +41,10 @@ public class DukeGui extends Application {
     public void start(Stage primaryStage) {
 
         /** Setup **/
-        user = new Image(this.getClass().getResourceAsStream("../images/avatar_placeholder.png"));
-        storage = new Storage(new File("data/tasks.txt"));
+        avatar = new Image(this.getClass().getResourceAsStream("/images/avatar_placeholder.png"));
+        storage = new Storage(new File("data/tasks.txt"), new File("data/archive"));
         scrollPane = new ScrollPane();
-        gui = new Gui();
+        gui = new Gui(avatar);
         scrollPane.setContent(gui);
         userTextField = new TextField();
         sendButton = new Button("Send");
@@ -96,7 +96,7 @@ public class DukeGui extends Application {
 
         /** Try to load data */
         try {
-            taskList.loadData(storage.getTaskList());
+            taskList.loadData(storage.getCurrentTasks());
             gui.greet(true);
         } catch (FileNotFoundException e) {
             gui.greet(false);
@@ -116,7 +116,7 @@ public class DukeGui extends Application {
      */
     public void handleUserInput(String userInput) {
         gui.getChildren().addAll(
-                DialogBox.getUserDialog(userInput, user)
+                DialogBox.getUserDialog(userInput, avatar)
         );
         getResponse(userInput);
         userTextField.clear();

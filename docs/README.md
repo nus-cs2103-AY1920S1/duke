@@ -118,7 +118,7 @@ when it was inputted with the oldest on top and newest below.
 - To see the list of tasks, send:
 	`list`
 
--Expected outcome:
+- Expected outcome:
 
 	```
 	Here are the tasks in your list:

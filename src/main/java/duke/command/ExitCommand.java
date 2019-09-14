@@ -18,10 +18,10 @@ public class ExitCommand extends Command {
      */
     public String execute(Ui ui, Storage storage, TaskList taskList) {
         new Timer().schedule(new TimerTask() {
-                public void run() {
-                    System.exit(0); // Exit the application
-                }
-            }, new Date(System.currentTimeMillis() + 800)); // Set the delay to 800ms
+            public void run() {
+                System.exit(0); // Exit the application
+            }
+        }, new Date(System.currentTimeMillis() + 800)); // Set the delay to 800ms
         return "Bye. Hope to see you again soon!";
     }
 }

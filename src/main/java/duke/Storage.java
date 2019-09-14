@@ -90,7 +90,7 @@ public class Storage {
     }
 
     // Processes the input string provided from the text file
-    private ArrayList<Task> processInput(String[] input, ArrayList<Task> storage){
+    private ArrayList<Task> processInput(String[] input, ArrayList<Task> storage) {
         switch (input[0]) {
         case "T":
             Todo todo = new Todo(input[2]);

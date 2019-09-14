@@ -12,14 +12,14 @@ import java.util.ArrayList;
 class TaskListTest {
 
     @Test
-    void getTaskList() {
+    void getTaskList_emptyTaskList_emptyTaskListReturned() {
         ArrayList<Task> tasks = new ArrayList<>();
         TaskList taskList = new TaskList(tasks);
         assertEquals(new ArrayList<Task>(), taskList.getTaskList());
     }
 
     @Test
-    void add() {
+    void add_taskListWithOneTask_similarTaskReturned() {
         ArrayList<Task> tasks = new ArrayList<>();
         TaskList taskList = new TaskList(tasks);
 
@@ -28,7 +28,7 @@ class TaskListTest {
     }
 
     @Test
-    void delete() {
+    void delete_taskListWithOneTask_deletedTaskDescriptionReturned() {
         ArrayList<Task> tasks = new ArrayList<>();
         TaskMock taskMock = new TaskMock("");
         tasks.add(taskMock);
@@ -39,7 +39,7 @@ class TaskListTest {
     }
 
     @Test
-    void done() {
+    void done_taskListWithOneTask_checkedTaskDescriptionReturned() {
         ArrayList<Task> tasks = new ArrayList<>();
         TaskMock taskMock = new TaskMock("");
         tasks.add(taskMock);
@@ -50,7 +50,7 @@ class TaskListTest {
     }
 
     @Test
-    void list() {
+    void list_taskListWithOneTask_tasksStringsReturned() {
         ArrayList<Task> tasks = new ArrayList<>();
         TaskMock taskMock = new TaskMock("");
         tasks.add(taskMock);

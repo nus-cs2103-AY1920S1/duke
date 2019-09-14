@@ -14,7 +14,9 @@ public class Ui {
      * @return Greeting message.
      */
     public static String getGreeting() {
-        return "Hello! I'm John your task assistant.\nHow may i help you?\nHint: Type 'help' to access all valid commands ";
+        return "Hello! I'm John your task assistant.\n"
+            + "How may i help you?"
+            + "\nHint: Type 'help' to access all valid commands ";
     }
 
     /**

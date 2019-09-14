@@ -25,14 +25,14 @@ public class Duke {
      *
      * @return Upcoming tasks.
      */
-    public String upcomingTasks(){
+    public String upcomingTasks() {
         return taskList.upcomingTasks();
     }
 
     /**
      * Loads the task list to be based on the stored data when UI has initialised.
      */
-    public void onUIReady(){
+    public void onUiReady() {
         taskList = new TaskList(storage.load());
     }
 

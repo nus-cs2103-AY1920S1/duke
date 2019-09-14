@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TaskList {
@@ -53,7 +52,7 @@ public class TaskList {
                     date = ((Event) task).getDate();
                 }
 
-                if(date != null){
+                if (date != null) {
                     long days = Duration.between(LocalDateTime.now(), date).getSeconds() / 86400;
                     if (days <= 7 && days >= 0) {
                         return true;
@@ -63,10 +62,9 @@ public class TaskList {
             })
             .mapToObj(i -> {
                 Task task = tasks.get(i);
-                if(i == 0){
+                if (i == 0) {
                     return (i + 1) + ". " + task.toString();
-                }
-                else{
+                } else {
                     return "\n" + (i + 1) + ". " + task.toString();
                 }
             })

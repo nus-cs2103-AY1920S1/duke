@@ -24,7 +24,7 @@ public class Main extends Application {
             stage.setTitle("John");
 
             DukeException.mw = fxmlLoader.<MainWindow>getController();
-            duke.onUIReady();
+            duke.onUiReady();
             fxmlLoader.<MainWindow>getController().setDuke(duke);
 
             stage.show();

@@ -32,6 +32,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        // Setting initial constraints of dialog box
         dialog.setMinSize(Label.USE_COMPUTED_SIZE, Label.USE_PREF_SIZE);
         dialog.setText(text);
         displayPicture.setImage(img);

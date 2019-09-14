@@ -51,14 +51,14 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Tries to load an TaskList from the specified file path, and displays the Response from the attemp.
+     * Tries to load an TaskList from the save file with the specified name, and displays the Response from the attemp.
      *
-     * @param filePath The file path from which to try to load a TaskList from
+     * @param fileName The file from which to try to load a TaskList from
      */
-    void loadExistingTaskList(String filePath) {
-        assert filePath != null;
+    void loadExistingTaskList(String fileName) {
+        assert fileName != null;
 
-        Response response = duke.setUp(filePath);
+        Response response = duke.loadSaveFile(fileName);
         if (!response.wasCausedByError()) {
             display(DialogBox.getDukeNormalDialog(response.toString(), dukeImage));
         } else {

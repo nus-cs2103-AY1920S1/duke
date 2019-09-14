@@ -1,10 +1,8 @@
 package duke.ui;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.io.FileWriter;
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,19 +18,14 @@ public class DukeTest {
     void setUpDuke() {
         duke = new Duke();
         duke.greet();
-        duke.setUp("test/resources/save/DukeTestSave01.txt");
+        duke.loadSaveFile("DukeTestSave01");
     }
 
-    @BeforeEach
-    void clearTestTaskList() {
-        try {
-            FileWriter temp = new FileWriter("src/test/resources/save/DukeTestSave01.txt");
-            temp.write("0");
-            temp.close();
-        } catch (IOException exception) {
-            exception.printStackTrace();
+    @AfterEach()
+    void clearTasks() {
+        while (!duke.getResponse("delete 1").wasCausedByError()) {
+            continue;
         }
-
     }
 
     /**

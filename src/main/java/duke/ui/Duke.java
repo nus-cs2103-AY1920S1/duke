@@ -45,24 +45,24 @@ public class Duke {
     }
 
     /**
-     * Returns the Response from Duke from to attempting to load a TaskList from the specified path.
+     * Returns the Response from Duke from to attempting to load a TaskList from a save file with the given name.
      *
-     * @param taskListPath The file path of TaskList's save file
-     * @return The Response from Duke from to attempting to load a TaskList from the specified path.
+     * @param saveFileName The file name of the TaskList's save file
+     * @return The Response from Duke from to attempting to load a TaskList from a save file with the given name.
      *
      */
-    public Response setUp(String taskListPath) {
-        assert taskListPath != null;
-        storage = new Storage(taskListPath);
+    public Response loadSaveFile(String saveFileName) {
+        assert saveFileName != null;
+        storage = new Storage(saveFileName);
         Response response;
         try {
             taskList = storage.loadTaskList();
             // task list successfully loaded
             response = Response.fromString(
-                    String.format("Your TaskList was successfully loaded from:\n%s", taskListPath),
+                    String.format("Your TaskList was successfully loaded from:\n%s", saveFileName),
                     isActive);
         } catch (DukeException dukeException0) {
-            taskList = new duke.tasklist.TaskList();
+            taskList = new TaskList();
             // try write to the path
             try {
                 storage.save(taskList);

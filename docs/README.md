@@ -12,7 +12,7 @@ The name Duke was chosen in honor of Duke, the Java Mascot. **While Duke has a G
 1. Copy the file to the folder you want to use as the home folder Duke.
 2. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-![Image of Duke start screen](https://github.com/TanZhanMing/duke/blob/master/docs/UGpic1.PNG)
+![Image of Duke start screen](https://raw.githubusercontent.com/TanZhanMing/duke/master/docs/UGpic1.PNG)
 
 3.Type the command in the command box and press `Enter` or click `Send` to execute it.
 
@@ -32,4 +32,4 @@ Creates a basic 'To-Do' task
 
 #### Example: todo finish JUnit testing
 
-![Image of Duke start screen](https://github.com/TanZhanMing/duke/blob/master/docs/UGpic2.PNG)
+![Image of Duke start screen](https://raw.githubusercontent.com/TanZhanMing/duke/master/docs/UGpic2.PNG)

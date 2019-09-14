@@ -1,6 +1,8 @@
 package core;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import storage.JsonParser;
 import tasklist.Task;
 import ui.TextUi;
 import storage.Storage;
@@ -19,12 +21,15 @@ public class Duke{
     private Storage saveFile;
     private TextUi textui;
     private TaskList tasks;
+    private JsonParser jsonParser;
 
 
     public Duke() throws IOException {
-        saveFile = new Storage("tasklist.txt");
+        //saveFile = new Storage("tasklist.txt");
         textui = new TextUi();
-        tasks = new TaskList(saveFile.loadData());
+        //tasks = new TaskList(saveFile.loadData());
+        jsonParser = new JsonParser("SaveFile.json");
+        tasks = jsonParser.readData();
     }
 
     public Duke(String filepath) throws IOException {
@@ -37,13 +42,18 @@ public class Duke{
         Parser parser = new Parser();
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        tasks.setTasks(saveFile.loadData());
+        //tasks.setTasks(saveFile.loadData());
+        tasks = jsonParser.readData();
         parser.parseTasks(input, tasks,false);
-        saveFile.storeData(tasks.getTasks());
+        //saveFile.storeData(tasks.getTasks());
+        /**
+         * testing json
+         */
+        jsonParser.storeData(tasks);
         return outContent.toString();
     }
 
     public ObservableList<Task> getAllTasks() {
-        return tasks.getTasks();
+        return FXCollections.observableArrayList(tasks.getTasks());
     }
 }

@@ -1,0 +1,39 @@
+{
+  "tasks" : [ {
+    "type" : "Todo",
+    "description" : "test",
+    "isDone" : false,
+    "dateDue" : null,
+    "taskType" : "Todo",
+    "cashFlows" : [ ]
+  }, {
+    "type" : "Deadline",
+    "description" : "test",
+    "dateDue" : "02-02-2020 02:00",
+    "taskType" : "Deadline",
+    "isDone" : false,
+    "cashFlows" : [ {
+      "sourceDescription" : "asdas ",
+      "value" : 20.0,
+      "dateDue" : null,
+      "dateCreated" : null
+    }, {
+      "sourceDescription" : "test ",
+      "value" : 20.02,
+      "dateDue" : "09-05-2011 09:00",
+      "dateCreated" : "09-05-2011 09:00"
+    } ]
+  }, {
+    "type" : "Todo",
+    "description" : "test 2",
+    "isDone" : false,
+    "dateDue" : null,
+    "taskType" : "Todo",
+    "cashFlows" : [ {
+      "sourceDescription" : "asdasd ",
+      "value" : 20.33,
+      "dateDue" : "02-02-2011 20:00",
+      "dateCreated" : "02-02-2011 20:00"
+    } ]
+  } ]
+}

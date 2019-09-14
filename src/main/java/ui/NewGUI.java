@@ -50,7 +50,7 @@ public class NewGUI extends VBox {
             String[] split = input.split(" ");
             tableArea.getChildren().clear();
             if (split.length != 1) {
-                task = Integer.parseInt(split[2]);
+                task = Integer.parseInt(split[2])-1;
                 //taskCashFlows.setCashFlowTableView(duke.getAllTasks().get(task).getCashFlows());
                 tableArea.getChildren().addAll(taskCashFlows.getCashFlowTableView());
             }else{

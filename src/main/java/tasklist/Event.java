@@ -1,5 +1,7 @@
 package tasklist;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDateTime;
@@ -12,8 +14,14 @@ public class Event extends Task {
 
     protected String at;
 
-    public Event(String name, boolean completionStatus, LocalDateTime date) {
+/*    public Event(String name, boolean completionStatus, LocalDateTime date) {
         super(name, completionStatus,date);
+        taskType = new SimpleStringProperty("Event");
+    }*/
+
+    @JsonCreator
+    public Event(@JsonProperty("description") String description,@JsonProperty("isDOne") boolean completionStatus, @JsonProperty("dateDue") LocalDateTime date) {
+        super(description, completionStatus,date);
         taskType = new SimpleStringProperty("Event");
     }
 

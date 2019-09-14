@@ -5,22 +5,23 @@ import javafx.collections.ObservableList;
 import ui.TextUi;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Represents an entire tasklist and contains methods to edit and display the list.
  */
 public class TaskList {
 
-    protected ObservableList<Task> tasks;
+    protected ArrayList<Task> tasks;
     private TextUi ui;
 
     public TaskList() {
-        tasks = FXCollections.observableArrayList();
+        tasks = new ArrayList<Task>();
         ui = new TextUi();
     }
 
 
-    public TaskList(ObservableList<Task> loadedList) {
+    public TaskList(ArrayList<Task> loadedList) {
         tasks = loadedList;
         ui = new TextUi();
     }
@@ -59,7 +60,7 @@ public class TaskList {
     public void addTask(String taskType, String description, boolean completionStatus, LocalDateTime date) {
         switch (taskType) {
         case "todo":
-            tasks.add(new Todo(description,completionStatus));
+            tasks.add(new Todo(description,completionStatus,date));
             break;
         case "deadline":
             tasks.add(new Deadline(description, completionStatus, date));
@@ -87,7 +88,7 @@ public class TaskList {
         }
     }
 
-    public ObservableList<Task> getTasks() {
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
 
@@ -105,7 +106,7 @@ public class TaskList {
         ui.printFoundTasks(foundtasks);
     }
 
-    public void setTasks(ObservableList<Task> tasks) {
+    public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 

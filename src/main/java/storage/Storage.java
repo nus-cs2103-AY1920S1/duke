@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Stores and loads files from a user specified file path.
@@ -31,7 +32,7 @@ public class Storage {
      * @throws IOException if the filepath specified is invalid
      */
 
-    public void storeData(ObservableList<Task> toStore) throws IOException {
+    public void storeData(ArrayList<Task> toStore) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         StringBuilder fullList = new StringBuilder();
         for (Task task : toStore) {
@@ -47,7 +48,7 @@ public class Storage {
      * @throws IOException if the the file path is invalid
      */
 
-    public ObservableList<Task> loadData() throws IOException {
+    public ArrayList<Task> loadData() throws IOException {
         FileReader reader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(reader);
         TaskList storedData = new TaskList();

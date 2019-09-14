@@ -1,5 +1,11 @@
 package tasklist;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import financedata.CashFlow;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -9,9 +15,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ui.TextUi;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
+
+@JsonTypeInfo(use = Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @Type(value = Todo.class, name = "Todo"),
+        @Type(value = Deadline.class, name = "Deadline"),
+        @Type(value = Event.class, name = "Event"),
+})
 /**
  * Abstract class for all tasks.
  * gurantees that all important methods are implemented
@@ -21,8 +38,9 @@ public abstract class Task {
     protected SimpleStringProperty taskType;
     protected SimpleStringProperty description;
     protected SimpleBooleanProperty isDone;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
     protected ObjectProperty<LocalDateTime> dateDue;
-    protected ObservableList<CashFlow> cashFlows = FXCollections.observableArrayList();
+    protected ArrayList<CashFlow> cashFlows = new ArrayList<>();
     protected TextUi ui = new TextUi();
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
@@ -47,6 +65,7 @@ public abstract class Task {
      * Returns the current status of the task.
      * @return returns either a tick or cross according to the completion status
      */
+    @JsonIgnore
     public String getCurrentStatus() {
         return ((isDone.getValue() ? "[✓] " : "[✗] ")); //return tick or X symbols
     }
@@ -56,6 +75,7 @@ public abstract class Task {
      * to be implemented according to task type.
      * @return the overall status in a assignment correct format
      */
+    @JsonIgnore
     public abstract String getOverallStatus();
 
     /**
@@ -70,6 +90,7 @@ public abstract class Task {
      * to be implemented according to task type.
      * @return a string that contains the details of the task in a format the parser can read
      */
+    @JsonIgnore
     public abstract String encodeForStorage();
 
     public void addCashFlow(String sourceDescription, Double value,LocalDateTime dateDue){
@@ -137,10 +158,10 @@ public abstract class Task {
     }
 
     public ObservableList<CashFlow> getCashFlows() {
-        return cashFlows;
+        return FXCollections.observableArrayList(cashFlows);
     }
 
-    public void setCashFlows(ObservableList<CashFlow> cashFlows) {
+/*    public void setCashFlows(ObservableList<CashFlow> cashFlows) {
         this.cashFlows = cashFlows;
-    }
+    }*/
 }

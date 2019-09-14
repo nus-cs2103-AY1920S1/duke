@@ -1,5 +1,8 @@
 package financedata;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -9,13 +12,23 @@ import java.time.LocalDateTime;
 public class CashFlow {
     private SimpleStringProperty sourceDescription;
     private SimpleDoubleProperty value;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
     private SimpleObjectProperty<LocalDateTime> dateCreated;
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
     private SimpleObjectProperty<LocalDateTime> dateDue;
 
-    public CashFlow(String sourceDescription, Double value, LocalDateTime dateDue){
+/*    public CashFlow(String sourceDescription, Double value, LocalDateTime dateDue){
         this.sourceDescription = new SimpleStringProperty(sourceDescription);
         this.value = new SimpleDoubleProperty(value);
         this.dateCreated = new SimpleObjectProperty<>(dateDue);
+        this.dateDue = new SimpleObjectProperty<>(dateDue);
+    }*/
+
+    @JsonCreator
+    public CashFlow(@JsonProperty("sourceDescription") String sourceDescription, @JsonProperty("value") Double value, @JsonProperty("dateDue") LocalDateTime dateDue){
+        this.sourceDescription = new SimpleStringProperty(sourceDescription);
+        this.value = new SimpleDoubleProperty(value);
+        this.dateCreated = new SimpleObjectProperty<>(LocalDateTime.now());
         this.dateDue = new SimpleObjectProperty<>(dateDue);
     }
 

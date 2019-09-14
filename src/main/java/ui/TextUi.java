@@ -2,6 +2,8 @@ package ui;
 
 import javafx.collections.ObservableList;
 import tasklist.Task;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -37,7 +39,7 @@ public class TextUi {
      * prints out the entire list.
      * @param taskList is the linkedlist containing the tasks to be printed
      */
-    public void printTaskList(ObservableList<Task> taskList) {
+    public void printTaskList(ArrayList<Task> taskList) {
         int i = 0;
         System.out.println(DIVIDER + "\n"
                 + "     Here are the tasks in your list:");

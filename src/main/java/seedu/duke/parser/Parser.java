@@ -1,6 +1,20 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.*;
+import seedu.duke.command.UnknownCommand;
+import seedu.duke.command.ByeCommandCli;
+import seedu.duke.command.TodoCommand;
+import seedu.duke.command.StatsResetCommand;
+import seedu.duke.command.StatsAllCommand;
+import seedu.duke.command.StatsEventCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DeadlineCommand;
+import seedu.duke.command.ByeCommandGui;
+import seedu.duke.command.Command;
+import seedu.duke.command.DoneCommand;
+import seedu.duke.command.EventCommand;
+import seedu.duke.command.FindCommand;
+import seedu.duke.command.ListCommand;
+
 import seedu.duke.ui.Ui;
 
 /**
@@ -18,6 +32,12 @@ public class Parser {
 
     }
 
+    /**
+     * Returns the 2nd word for a command starting with "stats".
+     *
+     * @param fullCommand Input string from User.
+     * @return Second word of user string.
+     */
     public static String parseStatCommand(String fullCommand) {
         return (fullCommand.split(" ")[1]);
     }
@@ -86,18 +106,31 @@ public class Parser {
         return (Integer.parseInt(fullCommand.substring(7)));
     }
 
+    /**
+     * Returns the task to find for "find" command.
+     *
+     * @param fullCommand Input of the user, read from Scanner object.
+     * @return Task to find.
+     */
     public static String getFindTask(String fullCommand) {
         return (fullCommand.substring(5));
 
     }
 
+    /**
+     * Creates the command depending on the user string.
+     *
+     * @param fullCommand Input user String.
+     * @param ui User Interface object.
+     * @return Command object.
+     */
     public static Command getCommand(String fullCommand, Ui ui) {
         String taskType = parseCommand(fullCommand);
 
         // Initialize commannd with UnknownCommand
         Command command = new UnknownCommand();
 
-        switch(taskType) {
+        switch (taskType) {
 
         case ("list"):
 
@@ -138,7 +171,7 @@ public class Parser {
 
             if (ui.isCommandLineInterface()) {
                 command = new ByeCommandCli();
-            } else if (ui.isGraphicalUserInterface()){
+            } else if (ui.isGraphicalUserInterface()) {
                 command = new ByeCommandGui();
             } else {
                 command = new UnknownCommand();
@@ -150,7 +183,7 @@ public class Parser {
 
             String statCommandType = Parser.parseStatCommand(fullCommand);
 
-            switch(statCommandType) {
+            switch (statCommandType) {
 
             case ("all"):
 

@@ -14,10 +14,11 @@ public class CommandLineUi extends Ui {
     private static final String underscore = "    ____________________________________________________________" + "\n";
     private Boolean isCommandLineInterface;
     private Boolean isGraphicalUserInterface;
+
     /**
      * Default constructor.
      */
-    public CommandLineUi(){
+    public CommandLineUi() {
         isCommandLineInterface = true;
         isGraphicalUserInterface = false;
     }
@@ -46,7 +47,7 @@ public class CommandLineUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param taskNum Integer index of the task which has been selected as "done".
-     * @return
+     * @return String.
      */
     public String getDoneSequence(TaskList tasks, int taskNum) {
         String output = underscore + "     Nice! I've marked this task as done:\n"
@@ -60,7 +61,7 @@ public class CommandLineUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param newTodo Todo class, which has been newly created.
-     * @return
+     * @return String.
      */
     public String getTodoSequence(TaskList tasks, Todo newTodo) {
         String output = underscore + "     Got it. I've added this task:\n       "
@@ -74,7 +75,7 @@ public class CommandLineUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param newDeadline Deadline class, which has been newly created.
-     * @return String
+     * @return String.
      */
     public String getDeadlineSequence(TaskList tasks, Deadline newDeadline) {
         String output = underscore + "     Got it. I've added this task:\n       "
@@ -104,8 +105,8 @@ public class CommandLineUi extends Ui {
      */
     public String getDeleteSequence(TaskList tasks, Task taskToDelete) {
         String output = underscore + "     Noted. I've removed this task.\n       "
-                        + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
-       return output;
+                + taskToDelete.toString() + getTasksRemainingSequence(tasks.getSize());
+        return output;
     }
 
 
@@ -153,7 +154,7 @@ public class CommandLineUi extends Ui {
      * Returns the tasks remaining in the list.
      *
      * @param numOfTaskRemaining TaskList object.
-     * @return String
+     * @return String.
      */
     public String getTasksRemainingSequence(int numOfTaskRemaining) {
         String output = "\n     Now you have "
@@ -161,6 +162,12 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
+    /**
+     * Returns all statistics.
+     *
+     * @param stat Statistic.
+     * @return String.
+     */
     public String getAllStatSequence(Statistic stat) {
         String output = "\n     Listing all statistics:"
                 + "\n     Total Commands Executed:    " + stat.getTotalCommandsExecuted()
@@ -172,16 +179,29 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
+    /**
+     * Returns reset stat sequence.
+     *
+     * @param stat Statistic object.
+     * @return String.
+     */
     public String getResetStatSequence(Statistic stat) {
         String output = "\n     All statistics have been reset";
         output += getAllStatSequence(stat);
         return output;
     }
 
+    /**
+     * Returns completed events sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
     public String getCompletedEventStatSequence(Statistic stat, TaskList tasks) {
         String encouragement = "";
         int eventsCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
-        if (eventsCompleted == 0){
+        if (eventsCompleted == 0) {
             encouragement = "You can do better! :)";
         } else {
             encouragement = "Well Done!";
@@ -192,11 +212,30 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
+    /**
+     * Returns IsCommandLineInterface.
+     *
+     * @return Boolean.
+     */
     public Boolean isCommandLineInterface() {
         return this.isCommandLineInterface;
     }
 
+    /**
+     * Returns isGUI.
+     *
+     * @return Boolean.
+     */
     public Boolean isGraphicalUserInterface() {
         return this.isGraphicalUserInterface;
+    }
+
+    /**
+     * Prints the String to the Command Line.
+     *
+     * @param output String to be printed.
+     */
+    public void printToCommandLine(String output) {
+        System.out.println(output);
     }
 }

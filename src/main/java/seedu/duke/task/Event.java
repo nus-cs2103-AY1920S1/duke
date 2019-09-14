@@ -29,7 +29,9 @@ public class Event extends Task {
      *
      * @param description Description String of the task.
      * @param location Location String of the task.
-     * @param isDone isDone status of the task.
+     * @param isDone isDone Boolean status of the task.
+     * @param createDateTime LocalDateTime object.
+     * @param lastModifiedDateTime LocalDateTime object.
      */
     public Event(String description, String location, Boolean isDone, LocalDateTime createDateTime,
                  LocalDateTime lastModifiedDateTime) {
@@ -61,21 +63,36 @@ public class Event extends Task {
     @Override
     public String toSaveString() {
         assert !this.location.isEmpty() : "Empty location should be handled by Duke Exception during input";
-        return ("E" + super.toSaveString() + " | " + this.getLocation() + " | " + this.getCreateDateTime().toString()
-        + " | " + this.getLastModifiedDateTime().toString());
+        return ("E" + super.toSaveString() + " | " + this.getLocation() + " | "
+                + this.getCreateDateTime().toString() + " | " + this.getLastModifiedDateTime().toString());
     }
 
+    /**
+     * Getter function for the string Location.
+     *
+     * @return String location.
+     */
     public String getLocation() {
         return this.location;
     }
 
+    /**
+     * Setter function for Boolean isDone.
+     *
+     * @param stats Statistic object.
+     */
     @Override
     public void setDone(Statistic stats) {
         super.setDone(stats);
         stats.incrementTotalEventsCompleted();
     }
 
-    public char getTaskType(){
+    /**
+     * Getter function for taskType.
+     *
+     * @return Character taskType.
+     */
+    public char getTaskType() {
         return 'E';
     }
 

@@ -5,9 +5,10 @@ package seedu.duke.core;
  */
 public interface DukeErrorInterface {
     /**
-     * Returns the error String prompt.
+     * Abstract method to get the loading error String.
      *
      * @param e DukeException object, which is a subclass of the Exception class.
+     * @return String.
      */
     public abstract String getLoadingError(DukeException e);
 }

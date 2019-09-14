@@ -40,6 +40,8 @@ public class Deadline extends Task {
      * @param description Description String of the task.
      * @param dueDateTime dateTime String of the task.
      * @param isDone isDone Boolean status of the task.
+     * @param createDateTime LocalDateTime object.
+     * @param lastModifiedDateTime LocalDateTime object.
      */
     public Deadline(String description, String dueDateTime, Boolean isDone, LocalDateTime createDateTime,
                     LocalDateTime lastModifiedDateTime) {
@@ -67,7 +69,12 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + dueDateTime + ")";
     }
 
-    public String getDueDateTime(){
+    /**
+     * Getter function for dueDateTime String.
+     *
+     * @return dueDateTime String.
+     */
+    public String getDueDateTime() {
         return this.dueDateTime;
     }
 
@@ -81,8 +88,8 @@ public class Deadline extends Task {
     @Override
     public String toSaveString() {
 
-        return ("D" + super.toSaveString() + " | " + this.getDueDateTime() + " | " + this.getCreateDateTime().toString()
-        + " | " + this.getLastModifiedDateTime().toString());
+        return ("D" + super.toSaveString() + " | " + this.getDueDateTime() + " | "
+                + this.getCreateDateTime().toString() + " | " + this.getLastModifiedDateTime().toString());
     }
 
     /**
@@ -157,13 +164,24 @@ public class Deadline extends Task {
         return (day + dayString + " of " + monthString + " " + year + ", " + hourString + minuteString + amOrpm);
     }
 
+    /**
+     * Set the task done.
+     *
+     * @param stats Statistic object.
+     */
     @Override
     public void setDone(Statistic stats) {
         super.setDone(stats);
         stats.incrementTotalEventsCompleted();
     }
 
-    public char getTaskType(){
+    /**
+     * Getter function for the taskType, "E".
+     *
+     * @return Char taskType.
+     */
+    public char getTaskType() {
         return 'D';
     }
+
 }

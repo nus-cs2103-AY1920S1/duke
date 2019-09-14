@@ -86,14 +86,43 @@ public abstract class Ui {
      */
     public abstract String getDoneSequence(TaskList tasks, int taskNum);
 
+    /**
+     * Returns reset stats sequence for reset stats command.
+     *
+     * @param stats Statistic object.
+     * @return String.
+     */
     public abstract String getResetStatSequence(Statistic stats);
 
+    /**
+     * Returns string sequence for "all stats" command.
+     *
+     * @param stats Statistic object.
+     * @return String.
+     */
     public abstract String getAllStatSequence(Statistic stats);
 
+    /**
+     * Returns string sequence for "stats event" command.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
     public abstract String getCompletedEventStatSequence(Statistic stat, TaskList tasks);
 
+    /**
+     * Returns true for Command Line Interface.
+     *
+     * @return Boolean.
+     */
     public abstract Boolean isCommandLineInterface();
 
+    /**
+     * Returns true for Graphical User Interface.
+     *
+     * @return Boolean.
+     */
     public abstract Boolean isGraphicalUserInterface();
 
 }

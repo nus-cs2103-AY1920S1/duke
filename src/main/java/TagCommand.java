@@ -2,17 +2,14 @@
  * Tag command is used tag the task.
  */
 public class TagCommand extends Command {
-    private String taskName;
-
     /**
      * Constructor for TagCommand class.
      * 
-     * @param command takes in the raw commmand
+     * @param rawCommand takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public TagCommand(String command, String taskName, TaskList taskList ){
-        super(command, taskList);
-        this.taskName = taskName;
+    public TagCommand(String rawCommand, TaskList taskList ){
+        super(rawCommand, taskList);
     }
 
     /**
@@ -22,6 +19,11 @@ public class TagCommand extends Command {
      */
     @Override
     public String processCommand() throws DukeException{
+        if (rawCommand.split(" ").length < 2){
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the description of a task cannot be empty."); 
+
+        }
+        String taskName = rawCommand.split(" ", 2) [1];
         String [] tagCommandArray = taskName.split(" ");
         String userInputIndex = tagCommandArray[0] ;
 

@@ -1,9 +1,9 @@
-import java.util.ArrayList; 
+import java.util.ArrayList;
 /**
  * Represents a specific type of task - Tasks that are events
  *
  */
-class Task{
+public class Task{
 
     protected boolean status;
     protected String message;

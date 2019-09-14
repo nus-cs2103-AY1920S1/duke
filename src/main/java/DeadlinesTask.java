@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
  * Represents a specific type of task - Tasks with deadlines.
  *
  */
-class DeadlinesTask extends Task{
+public class DeadlinesTask extends Task{
     
     LocalDateTime endingDateTime;
 

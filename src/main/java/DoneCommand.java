@@ -6,11 +6,11 @@ public class DoneCommand extends Command {
     /**
      * Constructor for DoneCommand class.
      * 
-     * @param command takes in the raw commmand
+     * @param rawCommand takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public DoneCommand(String command, TaskList taskList ){
-        super(command, taskList);
+    public DoneCommand(String rawCommand, TaskList taskList ){
+        super(rawCommand, taskList);
     }
 
     /**
@@ -20,12 +20,16 @@ public class DoneCommand extends Command {
      */
     @Override
     public String processCommand() throws DukeException{
-        String userIndex = super.command.split(" ", 2)[1];
+        if (rawCommand.split(" ").length < 2){
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the description of a task cannot be empty."); 
+
+        }
+        String userIndex = super.rawCommand.split(" ", 2)[1];
         
         if (containsNonNumber(userIndex)){
             throw new DukeException("☹ OOPS!!! You have chosen an invalid task number!");
         }else {
-            String stringFromUser = super.command.replaceAll("\\D+","");
+            String stringFromUser = super.rawCommand.replaceAll("\\D+","");
             Integer indexFromUser = Integer.parseInt(stringFromUser);
 
             if(indexFromUser > taskList.size() -1 || indexFromUser < 1 ){
@@ -37,6 +41,12 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Method to check whether user input contains any invalid string for donecommand.
+     * 
+     * @param userIndex
+     * @return boolean depending on whether it contains an invalid done string.
+     */
     public boolean containsNonNumber(String userIndex){
         if(userIndex.matches(".*[a-zA-Z]+.*") || userIndex.contains("-")){
             return true; 

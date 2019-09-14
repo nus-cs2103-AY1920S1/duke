@@ -4,18 +4,14 @@ import java.time.format.DateTimeParseException;
  * Deadline command is used to create DeadLine tasks.
  */
 public class DeadLineCommand extends Command {
-
-    private String taskName; 
-
     /**
      * Constructor for DeadLineCommand class.
      * 
-     * @param command takes in the raw commmand
+     * @param rawCommand takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public DeadLineCommand(String command, String taskName, TaskList taskList ){
-        super(command, taskList);
-        this.taskName = taskName;
+    public DeadLineCommand(String rawCommand, TaskList taskList ){
+        super(rawCommand, taskList);
     }
 
     /**
@@ -26,7 +22,13 @@ public class DeadLineCommand extends Command {
      */
     @Override
     public String processCommand() throws DukeException{
-        String [] deadlineArray = super.command.split("/by ");
+        if (rawCommand.split(" ").length < 2){
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the description of a task cannot be empty."); 
+
+        }
+        String taskName = rawCommand.split(" ", 2) [1];
+        String [] deadlineArray = super.rawCommand.split("/by ");
+        
         if(deadlineArray.length < 2){
             throw new DukeException("☹ OOPS!!! The date of a deadline cannot be empty."); 
         }

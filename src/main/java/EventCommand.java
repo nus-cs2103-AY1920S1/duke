@@ -1,21 +1,17 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-
 /**
  * Event command is used to create Event tasks.
  */
 public class EventCommand extends Command {
-
-    private String taskName; 
     /**
      * Constructor for EventCommand class.
      * 
-     * @param command takes in the raw commmand
+     * @param rawCommand takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public EventCommand(String command, String taskName,TaskList taskList ){
-        super(command, taskList);
-        this.taskName = taskName;
+    public EventCommand(String rawCommand,TaskList taskList ){
+        super(rawCommand, taskList);
     }
 
     /**
@@ -26,7 +22,13 @@ public class EventCommand extends Command {
      */
     @Override
     public String processCommand() throws DukeException{
-        String [] deadlineArray1 = super.command.split("/");
+        if (rawCommand.split(" ").length < 2){
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the description of a task cannot be empty."); 
+
+        }
+
+        String taskName = rawCommand.split(" ", 2) [1];
+        String [] deadlineArray1 = super.rawCommand.split("/");
         if(deadlineArray1.length < 2){
             throw new DukeException("☹ OOPS!!! The date of an event cannot be empty."); 
         }
@@ -37,7 +39,6 @@ public class EventCommand extends Command {
         try{
             LocalDateTime startingDateTime = LocalDateTime.parse(startingDateTimeString);
             LocalDateTime endingDateTime = LocalDateTime.parse(endingDateTimeString);
-    
             EventsTask newTask2 = new EventsTask (false, newTaskName1, startingDateTime, endingDateTime);
             String toPrint2 = taskList.add(newTask2);
             return toPrint2;

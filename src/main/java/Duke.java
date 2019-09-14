@@ -7,6 +7,7 @@ public class Duke  {
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
+    private UI ui;
 
     /**
      * The constructor initiates the storage, tasklist and parser objects.
@@ -15,7 +16,8 @@ public class Duke  {
         this.filepath = "../resources/data/duke.txt";
         this.storage = new Storage(filepath);
         this.taskList = storage.loadStorage();
-        this.parser = new Parser(storage, taskList);
+        this.ui = new UI();
+        this.parser = new Parser(storage, taskList, ui);
     }
 
     /**

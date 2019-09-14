@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 /**
  * This task represents all the tasks stored by the user.
  */

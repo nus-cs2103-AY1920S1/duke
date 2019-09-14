@@ -2,7 +2,7 @@
  * Represents a specific type of task - Tasks that are to-do
  *
  */
-class ToDoTask extends Task{
+public class ToDoTask extends Task{
     
     /**
      * Constructor for ToDoTask class

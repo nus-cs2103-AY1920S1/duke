@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 /**
  * Find command is used to create find tasks.
  */
@@ -8,11 +7,11 @@ public class FindCommand extends Command {
     /**
      * Constructor for FindCommand class.
      * 
-     * @param command takes in the raw commmand
+     * @param rawCommand takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public FindCommand(String command, TaskList taskList ){
-        super(command, taskList);
+    public FindCommand(String rawCommand, TaskList taskList ){
+        super(rawCommand, taskList);
     }
 
     /**
@@ -21,8 +20,14 @@ public class FindCommand extends Command {
      * @return a string containing the procesedCommand
      */
     @Override
-    public String processCommand(){
-        return super.command;
+    public String processCommand() throws DukeException{
+        if (rawCommand.split(" ").length < 2){
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the description of a task cannot be empty."); 
+
+        }
+        String taskName = rawCommand.split(" ", 2) [1];
+
+        return taskName;
     }
 
     /**

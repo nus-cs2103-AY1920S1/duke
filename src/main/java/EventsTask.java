@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
  * Represents a specific type of task - Tasks that are events
  *
  */
-class EventsTask extends Task{
+public class EventsTask extends Task{
 
     LocalDateTime startingDateTime ; 
     LocalDateTime endingDateTime;

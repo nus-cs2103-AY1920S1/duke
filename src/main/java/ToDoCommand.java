@@ -2,17 +2,14 @@
  * ToDo command is used to create ToDo tasks.
  */
 public class ToDoCommand extends Command {
-    private String taskName;
-
     /**
      * Constructor for ToDoCommand class.
      * 
-     * @param command takes in the raw commmand
+     * @param rawCommand takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public ToDoCommand(String command, String taskName, TaskList taskList ){
-        super(command, taskList);
-        this.taskName = taskName;
+    public ToDoCommand(String rawCommand, TaskList taskList ){
+        super(rawCommand, taskList);
     }
 
     /**
@@ -21,8 +18,12 @@ public class ToDoCommand extends Command {
      * @return a string containing the procesedCommand
      */
     @Override
-    public String processCommand(){
-        // refactor this?
+    public String processCommand() throws DukeException{
+        if (rawCommand.split(" ").length < 2){
+            throw new DukeException("☹ OOPS!!! I'm sorry, but the description of a task cannot be empty."); 
+
+        }
+        String taskName = rawCommand.split(" ", 2) [1];
         return taskName;
     }
 

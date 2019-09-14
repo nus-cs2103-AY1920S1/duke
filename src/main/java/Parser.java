@@ -6,11 +6,12 @@ public class Parser{
     
     private Storage storage;
     private TaskList taskList;
+    private UI ui;
 
-    public Parser(Storage storage, TaskList taskList){
+    public Parser(Storage storage, TaskList taskList, UI ui){
         this.storage = storage;
         this.taskList = taskList;
-
+        this.ui = ui;
     }
 
     /**
@@ -22,73 +23,66 @@ public class Parser{
      * @return a string that corresponds to the command given
      * @throws DukeException 
      */
-    public String parse (String line) throws DukeException{
-        switch (line){
+    public String parse (String userInput) throws DukeException{
+        String inputKeyWord = userInput.split(" ")[0];
+        
+        switch (inputKeyWord){
             case "bye":
-                return new Response( "Bye. Hope to see you again soon!").toString();
+                return ui.returnReponse("Bye. Hope to see you again soon!");
             
             case "list":
-                return new Response(taskList.toString()).toString(); 
+                return ui.returnReponse(taskList.toString()); 
+
+            case "done" :
+                Command doneCommand = new DoneCommand(userInput, taskList);
+                String processedDoneCommand = doneCommand.processCommand();
+                String doneResponse = doneCommand.execute(processedDoneCommand);
+                storage.save();
+                return ui.returnReponse(doneResponse);
+
+            case "todo" :
+                Command toDoCommand = new ToDoCommand(userInput, taskList);
+                String processedtoDoCommand = toDoCommand.processCommand();
+                String toDoResponse = toDoCommand.execute(processedtoDoCommand);
+                storage.save();
+                return ui.returnReponse(toDoResponse);
+
+            case "deadline" :
+                Command deadLineCommand = new DeadLineCommand(userInput, taskList);
+                String processeddeadLineCommand = deadLineCommand.processCommand();
+                String deadlineResponse = deadLineCommand.execute(processeddeadLineCommand);
+                storage.save();
+                return ui.returnReponse(deadlineResponse);
+                
+            case "event" :
+                Command eventCommand = new EventCommand(userInput, taskList);
+                String processedeventCommand = eventCommand.processCommand();
+                String eventResponse = eventCommand.execute(processedeventCommand);
+                storage.save();
+                return ui.returnReponse(eventResponse);
+    
+            case "find" :
+                Command findCommand = new FindCommand(userInput, taskList);
+                String processedCommand = findCommand.processCommand();
+                String response = findCommand.execute(processedCommand);
+                return ui.returnReponse(response);
+                
+            case "delete" :
+                Command deleteCommand = new DeleteCommand(userInput, taskList);
+                String processedDeleteCommand = deleteCommand.processCommand();
+                String deleteResponse = deleteCommand.execute(processedDeleteCommand);
+                storage.save();
+                return ui.returnReponse(deleteResponse);
+                
+            case "tag":
+                Command TagCommand = new TagCommand(userInput, taskList);
+                String processedTagCommand = TagCommand.processCommand();
+                String tagResponse = TagCommand.execute(processedTagCommand);
+                return ui.returnReponse(tagResponse);
 
             default:
-                String inputnoun = line.split(" ")[0];
-                if (line.split(" ").length < 2){
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but the description of a task cannot be empty."); 
-
-                }
-                String taskName = line.split(" ", 2) [1];
-
-                switch (inputnoun){    
-                    case "done" :
-                        Command doneCommand = new DoneCommand(line, taskList);
-                        String processedDoneCommand = doneCommand.processCommand();
-                        String doneResponse = doneCommand.execute(processedDoneCommand);
-                        storage.save();
-                        return new Response(doneResponse).toString();
-
-                    case "todo" :
-                        Command toDoCommand = new ToDoCommand(line, taskName, taskList);
-                        String processedtoDoCommand = toDoCommand.processCommand();
-                        String toDoResponse = toDoCommand.execute(processedtoDoCommand);
-                        storage.save();
-                        return new Response(toDoResponse).toString();
-
-                    case "deadline" :
-                        Command deadLineCommand = new DeadLineCommand(line, taskName, taskList);
-                        String processeddeadLineCommand = deadLineCommand.processCommand();
-                        String deadlineResponse = deadLineCommand.execute(processeddeadLineCommand);
-                        storage.save();
-                        return new Response(deadlineResponse).toString();
-                        
-                    case "event" :
-                        Command eventCommand = new EventCommand(line, taskName, taskList);
-                        String processedeventCommand = eventCommand.processCommand();
-                        String eventResponse = eventCommand.execute(processedeventCommand);
-                        storage.save();
-                        return new Response(eventResponse).toString();
-          
-                    case "find" :
-                        Command findCommand = new FindCommand(taskName, taskList);
-                        String processedCommand = findCommand.processCommand();
-                        String response = findCommand.execute(processedCommand);
-                        return new Response(response).toString();
-                        
-                    case "delete" :
-                        Command deleteCommand = new DeleteCommand(line, taskName, taskList);
-                        String processedDeleteCommand = deleteCommand.processCommand();
-                        String deleteResponse = deleteCommand.execute(processedDeleteCommand);
-                        storage.save();
-                        return new Response(deleteResponse).toString();
-                        
-                    case "tag":
-                        Command TagCommand = new TagCommand(line, taskName, taskList);
-                        String processedTagCommand = TagCommand.processCommand();
-                        String tagResponse = TagCommand.execute(processedTagCommand);
-                        return new Response(tagResponse).toString();
-
-                    default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); 
-            }
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("); 
+            
         }
     }
 }

@@ -2,7 +2,7 @@
  * The parent class of other command classes.
  */
 public class Command{
-    protected String command;
+    protected String rawCommand;
     protected TaskList taskList;
 
     /**
@@ -11,8 +11,8 @@ public class Command{
      * @param command takes in the raw commmand
      * @param taskList taskList is used to store tasks
      */
-    public Command (String command, TaskList taskList){
-        this.command = command;
+    public Command (String rawCommand, TaskList taskList){
+        this.rawCommand = rawCommand;
         this.taskList = taskList;
     }
     

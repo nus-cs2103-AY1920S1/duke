@@ -1,8 +1,17 @@
+import duke.tasks.EventsTask;
+
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+/**
+ *  * A test used to test the events task class.
+ */
 public class EventsTaskTest {
+
+    /**
+     * Tests the ToStringFormat of the eventstask class. This ensures that the task is output 
+     * per the specified formats.
+     */
     @Test
     public void testToStringFormat() {
         LocalDateTime startingTimeStub = LocalDateTime.parse("2019-01-20T06:30:00");
@@ -12,7 +21,11 @@ public class EventsTaskTest {
         new EventsTask(true, "project meeting",startingTimeStub, endingTimeStub).toString());
     }
 
-
+    /**
+     *  Tests the toFileFormat method of the eventstask class. This ensures that the task is
+     *  saved in a proper format when being stored.
+     * 
+     */
     @Test
     public void testToFileFormat() {
         LocalDateTime startingTimeStub = LocalDateTime.parse("2019-01-20T06:30:01");

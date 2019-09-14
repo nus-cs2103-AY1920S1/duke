@@ -7,26 +7,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a text
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    @FXML
-    private Label dialog;
 
     @FXML
-    private ImageView displayPicture;
+    private Text dialog = new Text();
+
+    @FXML
+    private ImageView displayPicture = new ImageView();
 
     private Ui ui = new Ui();
 
     private DialogBox(String text, Image img) {
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -51,11 +54,14 @@ public class DialogBox extends HBox {
     }
 
     static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setTextAlignment(TextAlignment.RIGHT);
+        return db;
     }
 
     static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setTextAlignment(TextAlignment.LEFT);
         db.flip();
         return db;
     }

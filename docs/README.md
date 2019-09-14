@@ -1,16 +1,16 @@
-# User Guide
+# A User Guide for Duke
 
-![alt text](https://raw.githubusercontent.com/crazoter/duke/master/docs/Ui.png "Image of Ui").
+<img src="https://raw.githubusercontent.com/crazoter/duke/master/docs/Ui.png" alt="image of ui" width="200"/>
 
 Download the latest release [here](https://github.com/crazoter/duke/releases).
 
 ## Features
 
 ### Manage todos, events and deadlines
-* With Duke, you can add different types of tasks your list using [`todo`](#task), [`deadline`](#task) or [`event`](#task) (These commands are hyperlinks, click them to jump to their usage below).
-* You can also view your list of tasks by using the [`list`](#list) command.
-* You can mark a task as done using [`done`](#done), or [`delete`](#delete) to remove tasks, or [`clear`](#clear) to remove all tasks.
-* You can also look for relevant tasks using the [`find`](#find) command.
+* With Duke, you can add different types of tasks your list using [todo](#task), [deadline](#task) or [event](#task) commands.
+* You can also view your list of tasks by using the [list](#list) command.
+* You can mark a task as done using [done](#done), or [delete](#delete) to remove tasks, or [clear](#clear) to remove all tasks.
+* You can also look for relevant tasks using the [find](#find) command.
 
 ### Auto-saves after every change
 * All your changes are [automatically saved](#autosave). These changes persist even after you shut down the application.

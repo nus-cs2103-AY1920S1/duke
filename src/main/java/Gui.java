@@ -2,6 +2,7 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -24,8 +25,9 @@ public class Gui extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setTitle("Duke: Your Virtual Assistant");
+            stage.setTitle("Duke: Your Task Assistant");
             stage.setScene(scene);
+            stage.getIcons().add(new Image(Gui.class.getResourceAsStream("/images/dukeIcon.png")));
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

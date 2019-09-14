@@ -28,6 +28,8 @@ public class Parser {
             return new AddEventCommand();
         case "deadline":
             return new AddDeadlineCommand();
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException("Invalid Command");
         }

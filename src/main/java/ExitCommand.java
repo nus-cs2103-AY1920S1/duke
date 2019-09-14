@@ -1,5 +1,3 @@
-import javafx.application.Platform;
-
 /**
  * Represents the Command for exiting the Duke Chatbot.
  * A sub-class of Command.

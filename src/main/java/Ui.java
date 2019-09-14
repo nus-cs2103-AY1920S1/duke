@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Handles the printing of Duke messages.
@@ -7,12 +9,14 @@ public class Ui {
 
     final String lineSpace = "_______________________________\n";
     private Scanner sc;
+    final String helpFilePath;
 
     /**
      * Default Constructor to initialise Scanner object for user input.
      */
     public Ui() {
         sc = new Scanner(System.in);
+        helpFilePath = "src/main/data/help.txt";
     }
 
     /**
@@ -21,14 +25,16 @@ public class Ui {
      * @return welcome message
      */
     public String showWelcome() {
+        /*
         final String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        final String startMessage = "Hello! I'm Duke\nWhat can I do for you?\n";
-        String welcomeMessage = startMessage;
-        return welcomeMessage;
+         */
+        final String startMessage = "Hello! I'm Duke, Your Task Assistant.\n"
+                + "What can I do for you?\n" + "If you need help, type help in the field.";
+        return startMessage;
     }
 
     /**
@@ -87,6 +93,25 @@ public class Ui {
         String message = "Noted. I've removed this task:\n" + task
                 + "\nNow you have " + listSize + " tasks in the list.";
         return message;
+    }
+
+    /**
+     * Prints a help message that lists the available commands the user is able
+     * to type. Message is read from a text file in /data folder.
+     *
+     * @return Help Message
+     * @throws DukeException If file is unable to be read
+     */
+    public String showHelp() throws DukeException {
+        try {
+            File f = new File(helpFilePath);
+            Scanner sc = new Scanner(f);
+            String helpMessage = sc.useDelimiter("\\A").next();
+            sc.close();
+            return helpMessage;
+        } catch (FileNotFoundException e) {
+            throw new DukeException("Failed to load help text file");
+        }
     }
 
 

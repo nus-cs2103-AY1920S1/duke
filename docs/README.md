@@ -32,7 +32,7 @@ Example of usage:
 
 Expected outcome:
 
-![Image of Todo Outcome](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-todo.png)
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-todo.png)
 
 ### 2. `event` - Add a new event task
 
@@ -44,6 +44,11 @@ Example:
 
 Expected outcome:
 
+
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-event.png)
+
+
+
 ### 3. `deadline` - Add a new deadline task
 
 `deadline {taskName} /by {d MMM yyyy HHmm}`
@@ -53,6 +58,10 @@ Example:
 `deadline Online Quiz /by 10 Oct 2019 2359`
 
 Expected outcome:
+
+
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-deadline.png)
+
 
 ### 4. `done` - Mark a task as done 
 
@@ -64,6 +73,10 @@ Example:
 
 Expected outcome:
 
+
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-done.png)
+
+
 ### 5. `list` - View your current list
 
 Example:
@@ -71,6 +84,10 @@ Example:
 `list`
 
 Expected outcome:
+
+
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-list.png)
+
 
 ### 6. `find` - Search list
 
@@ -83,6 +100,10 @@ Example:
 `find concert`
 
 Expected outcome:
+
+
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-find.png)
+
 
 
 ### 7. `priority` - Set priority
@@ -101,6 +122,10 @@ Example:
 
 Expected outcome:
 
+
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-priority.png)
+
+
 ### 8. `delete` - Delete task
 
 `delete {task_number}`
@@ -111,6 +136,10 @@ Example:
 
 Expected outcome:
 
+
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-delete.png)
+
+
 ### 9. `bye` - Exit
 
 Example:
@@ -118,4 +147,8 @@ Example:
 `exit`
 
 Expected outcome:
+
+
+![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-bye.png)
+
 

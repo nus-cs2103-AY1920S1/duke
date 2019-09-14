@@ -68,8 +68,8 @@ public class Storage {
 
   public static void AutoSave(TaskList tasks, int no_of_task) throws IOException {
       System.out.println("System performing autosave");
-      WriteFile data = new WriteFile("src/main/java/duke.Duke.txt");
-      WriteFile data_append = new WriteFile("src/main/java/duke.Duke.txt", true);
+      WriteFile data = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt");
+      WriteFile data_append = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt", true);
 
       for (int i = 0; i < no_of_task; i++) {
           if(i>0){

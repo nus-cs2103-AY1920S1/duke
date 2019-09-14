@@ -6,11 +6,11 @@ public class ConvertDateTime {
 
     }
 
-    public String Convert(String timeframe){
+    public String Convert(String timeFrame){
 
-        int in = timeframe.indexOf('/');                           //find first instance of '/'
-        int day = Integer.parseInt(timeframe.substring(0, in));    //sift out day
-        String sub1 = timeframe.substring(in+1);                   //substring: month onwards
+        int in = timeFrame.indexOf('/');                           //find first instance of '/'
+        int day = Integer.parseInt(timeFrame.substring(0, in));    //sift out day
+        String sub1 = timeFrame.substring(in+1);                   //substring: month onwards
         int in2 = sub1.indexOf('/');
         int month =  Integer.parseInt(sub1.substring(0, in2));     //sift out month
         String sub2 = sub1.substring(in2+1);                       //substring: year onwards

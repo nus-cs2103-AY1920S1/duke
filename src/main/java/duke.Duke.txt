@@ -4,5 +4,5 @@ E | 0 | project meeting      | Aug 6th 2-4pm
 T | 1 | join sports club
 D | 0 | return book     | 2nd of December 2019, 6pm
 D | 0 | return hat   | 12th of December 2020, 7pm
-D | 0 | return book | Sunday
-E | 0 | proj meet | Mon 2-4pm
+T | 0 | borrow
+E | 0 | b | a

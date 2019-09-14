@@ -17,8 +17,16 @@ public class DeadlineCommand {
         String temp = timeFrame.substring(3);                    // "Sunday ..."   OR   "11/02/2019 ..."
         String sub = msg.substring(0, index - 1);               //to get description. eg return book
 
+        System.out.println(temp.charAt(0));
+        if(Character.isDigit(temp.charAt(0))){                  // DEBUGGING ONLY
+            System.out.println("change format");
+        }
+        else{
 
-        if(Character.isDigit(msg.charAt(0))) {                  //if "11/02/2019" format then convert, else do nth.
+            System.out.println("no change in format required");
+        }
+
+        if(Character.isDigit(temp.charAt(0))) {                  //if "11/02/2019" format then convert, else do nth.
             ConvertDateTime c = new ConvertDateTime();
             new_timeFrame = c.Convert(temp);
         }

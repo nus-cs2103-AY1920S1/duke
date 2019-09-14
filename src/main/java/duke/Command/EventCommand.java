@@ -19,7 +19,7 @@ public class EventCommand {
         String temp = timeFrame.substring(3);            //temp = day & date ONLY
         String sub = msg.substring(0, index - 1);        //sub = description ONLY
 
-        if(Character.isDigit(msg.charAt(0))) {                  //if "11/02/2019" format then convert, else do nth.
+        if(Character.isDigit(temp.charAt(0))) {                  //if "11/02/2019" format then convert, else do nth.
             ConvertDateTime c = new ConvertDateTime();
             new_timeFrame = c.Convert(temp);
         }

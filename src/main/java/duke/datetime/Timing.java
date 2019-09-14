@@ -44,7 +44,7 @@ public class Timing {
     public String toString() {
         String toReturn = (hour == 0 || hour == 12) ? "12" : hour % 12 + "";
         if (minute != 0) {
-            toReturn = toReturn + "." + minute;
+            toReturn = toReturn + "." + String.format("%02d",minute);
         }
         String meridiem = meridiemFlag ? "pm" : "am";
         return toReturn + meridiem;

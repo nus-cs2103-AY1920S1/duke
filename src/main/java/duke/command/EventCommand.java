@@ -34,6 +34,7 @@ public class EventCommand extends Command {
      */
     public Response execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(newTask);
+        storage.setChangedTrue();
         return ui.getGotItAddedResponse(newTask);
     }
 

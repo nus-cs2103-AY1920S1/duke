@@ -1,0 +1,55 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+group 'duke'
+version '0.2'
+
+application {
+    mainClassName = "Launcher"
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+checkstyle {
+    toolVersion = '8.23'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "v0.2"
+    archiveClassifier = null
+    archiveAppendix = null
+}
+
+run{
+    standardInput = System.in
+    enableAssertions = true
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}

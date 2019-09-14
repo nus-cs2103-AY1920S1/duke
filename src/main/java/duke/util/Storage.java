@@ -50,13 +50,13 @@ public class Storage {
             String type = arr[0];
             switch (type) {
                 case "T":
-                    fileContent.add(new Task(arr[0], arr[1], arr[2]));
+                    fileContent.add(new Task(arr[0], arr[1], arr[2], arr[3]));
                     break;
                 case "D":
-                    fileContent.add(new Deadline(arr[0], arr[1], arr[2], Parser.formatDate(arr[3])));
+                    fileContent.add(new Deadline(arr[0], arr[1], arr[2], arr[4], Parser.formatDate(arr[3])));
                     break;
                 case "E":
-                    fileContent.add(new Event(arr[0], arr[1], arr[2], Parser.formatDate(arr[3])));
+                    fileContent.add(new Event(arr[0], arr[1], arr[2], arr[4], Parser.formatDate(arr[3])));
                     break;
             }
         }

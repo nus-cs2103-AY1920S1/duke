@@ -19,6 +19,8 @@ public class Task {
     protected boolean isDone;
     /** Type of the task: Todo, Deadline or Event */
     protected String type;
+    /** Priority of the task: High, Medium or Low */
+    protected String priority;
 
     /**
      * Creates a task object that stores the type of task it is, i.e todos, deadlines or events and its description.
@@ -41,13 +43,18 @@ public class Task {
      * @param isDone Boolean representing whether the task is done.
      * @param name Description of the task.
      */
-    public Task(String type, String isDone, String name) {
+    public Task(String type, String isDone, String name, String priority) {
         this.type = type;
         this.name = name;
         if (isDone.equals("1")) {
             this.isDone = true;
         } else {
             this.isDone = false;
+        }
+        if (priority.equals("none")) {
+            this.priority = null;
+        } else {
+            this.priority = priority;
         }
     }
 
@@ -71,13 +78,19 @@ public class Task {
         return String.format("Nice! I've marked this task as done:\n  [%s] %s", "v", name);
     }
 
+    public String setPriority(String priority) {
+        this.priority = priority;
+        return String.format("I've set the priority of this task:\n [%s][%s] %s <Priority: %s>",
+                type ,isDone ? "v" : "x", name, priority);
+    }
     /**
      * Returns a formatted string representing the state of the task to be stored in a data file.
      *
      * @return String formatted for storing in a file.
      */
     public String fileFormat() {
-        return String.format("%s | %s | %s\n", type, isDone ? "1" : "0", name);
+        return String.format("%s | %s | %s | %s\n",
+                type, isDone ? "1" : "0", name, priority == null ? "none" : priority);
     }
 
     /**
@@ -86,6 +99,7 @@ public class Task {
      * @return String in the format for the list command.
      */
     public String toString() {
-        return String.format("[%s][%s] %s", type, isDone ? "v" : "x", name);
+        return String.format("[%s][%s] %s %s",
+                type, isDone ? "v" : "x", name, priority == null ? "" : "<Priority: " + priority + ">");
     }
 }

@@ -112,4 +112,12 @@ public class TaskList {
         }
         return result;
     }
+
+    public String setPriority(int taskNumber, String priority) throws DukeException {
+        if (taskNumber >= list.size() || taskNumber < 1) {
+            throw new DukeException("This task does not exist.");
+        } else {
+            return list.get(taskNumber).setPriority(priority);
+        }
+    }
 }

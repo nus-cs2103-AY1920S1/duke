@@ -1,11 +1,6 @@
 package duke.util;
 
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -109,6 +104,23 @@ public class Parser {
                 } else {
                     String phraseToFind = arr[1];
                     resultCommand = new FindCommand(phraseToFind);
+                }
+                break;
+            case "priority":
+                if (arr.length == 1) {
+                    throw new DukeException("OOPS!!! Please enter the task number that I should set a priority for!");
+                } else {
+                    String priority[] = arr[1].split(" ", 2);
+                    if (priority.length == 1) {
+                        throw new DukeException("OOPS!! Please enter priority as \"high\", \"medium\" or \"low\"");
+                    }
+                    boolean isValid = priority[1].equals("high")
+                            || priority[1].equals("medium")
+                            || priority[1].equals("low");
+                    if (!isValid) {
+                        throw new DukeException("OOPS!! Please enter priority as \"high\", \"medium\" or \"low\"");
+                    }
+                    resultCommand = new PriorityCommand(Integer.parseInt(priority[0]), priority[1]);
                 }
                 break;
             default:

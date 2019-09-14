@@ -34,8 +34,8 @@ public class Event extends Task {
      * @param name Description of the event.
      * @param date LocalDateTime object representing date and time of occurrence of the event.
      */
-    public Event(String type, String done, String name, LocalDateTime date) {
-        super(type, done, name);
+    public Event(String type, String done, String name, String priority, LocalDateTime date) {
+        super(type, done, name, priority);
         this.date = date;
     }
 
@@ -46,7 +46,8 @@ public class Event extends Task {
      */
     @Override
     public String fileFormat() {
-        return String.format("%s | %s | %s | %s\n", type, isDone ? "1" : "0", name, FILE_DATE_TIME.format(date).toString());
+        return String.format("%s | %s | %s | %s | %s\n",
+                type, isDone ? "1" : "0", name, FILE_DATE_TIME.format(date).toString(), priority == null ? "none" : priority);
 
     }
 
@@ -57,7 +58,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s(at: %s)", isDone ? "v" : "x", name, DATE_TIME.format(date).toString());
+        return String.format("[E][%s] %s (at: %s) %s",
+                isDone ? "v" : "x", name, DATE_TIME.format(date).toString(), priority == null ? "" : "<Priority: " + priority + ">");
 
     }
 }

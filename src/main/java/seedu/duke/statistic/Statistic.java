@@ -1,7 +1,5 @@
 package seedu.duke.statistic;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 import seedu.duke.task.Task;
 import seedu.duke.tasklist.TaskList;
 
@@ -9,8 +7,7 @@ import java.time.LocalDateTime;
 import java.util.TreeMap;
 
 /**
- * This class serves to store statistics on the user.
- * This class reads a txt file, called "stats.txt" during initialization.
+ * This class serves to store statistics of the user.
  */
 public class Statistic {
     protected int totalCommandsExecuted;
@@ -20,7 +17,7 @@ public class Statistic {
     protected int totalEventsCompleted;
 
     /**
-     * Default constructor.
+     * Default constructor. Reads a TreeMap, obtained from Storage.
      */
     public Statistic (TreeMap<String, Integer> map) {
          totalCommandsExecuted = map.get("totalCommandsExecuted");
@@ -30,6 +27,9 @@ public class Statistic {
          totalEventsCompleted = map.get("totalEventsCompleted");
     }
 
+    /**
+     * Resets all the attributes to 0.
+     */
     public void resetStats(){
         totalCommandsExecuted = 0;
         totalTasksDeleted = 0;
@@ -38,10 +38,24 @@ public class Statistic {
         totalEventsCompleted = 0;
     }
 
+    /**
+     * Returns the no. of events completed between now and one day ago.
+     *
+     * @param tasks TaskList object.
+     * @return Int no. of events completed between now and one day ago.
+     */
     public int getCompletedEventsFromOneDayAgo(TaskList tasks){
         return getSpecifiedCompletedTasksFromVariableDaysAgo(tasks, 'E', 1);
     }
 
+    /**
+     * Returns the no. of events completed between now and any number of days ago.
+     *
+     * @param tasks TaskList object.
+     * @param taskType Character representing task type.
+     * @param daysAgo Int number of days ago.
+     * @return Number of tasks completed within the specified time frame.
+     */
     public int getSpecifiedCompletedTasksFromVariableDaysAgo(TaskList tasks, char taskType, int daysAgo){
         int count = 0;
         for (Task t : tasks.getArrayList()){
@@ -59,42 +73,82 @@ public class Statistic {
         return count;
     }
 
+    /**
+     * Increments total Commands Executed.
+     */
     public void incrementTotalCommandsExecuted() {
         totalCommandsExecuted += 1;
     }
 
+    /**
+     * Increments Total Tasks Deleted.
+     */
     public void incrementTotalTasksDeleted() {
         totalTasksDeleted += 1;
     }
 
+    /**
+     * Increments Total todos Completed.
+     */
     public void incrementTotalTodosCompleted() {
         totalTodosCompleted += 1;
     }
 
+    /**
+     * Increments total Deadlines Completed.
+     */
     public void incrementTotalDeadlinesCompleted() {
         totalDeadlinesCompleted += 1;
     }
 
+    /**
+     * Increments Total Events Completed.
+     */
     public void incrementTotalEventsCompleted() {
         totalEventsCompleted += 1;
     }
 
+    /**
+     * Getter function for total commands executed.
+     *
+     * @return Total commands executed.
+     */
     public int getTotalCommandsExecuted() {
         return totalCommandsExecuted;
     }
 
+    /**
+     * Getter function for total tasks deleted.
+     *
+     * @return Total tasks deleted.
+     */
     public int getTotalTasksDeleted() {
         return totalTasksDeleted;
     }
 
+    /**
+     * Getter function for total todos completed.
+     *
+     * @return Total todos completed.
+     */
     public int getTotalTodosCompleted() {
         return totalTodosCompleted;
     }
 
+    /**
+     * Getter function for total deadlines completed.
+     *
+     * @return Total deadlines completed.
+     */
     public int getTotalDeadlinesCompleted() {
         return totalDeadlinesCompleted;
     }
 
+    /**
+     * Getter function for total events completed.
+     *
+     * @return Total events completed.
+     */
     public int getTotalEventsCompleted() {
         return totalEventsCompleted;
     }

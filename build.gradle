@@ -34,7 +34,7 @@ shadowJar {
 }
 
 application {
-    mainClassName = "bari.Main"
+    mainClassName = "bari.Launcher"
 }
 
 test {

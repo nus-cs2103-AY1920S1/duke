@@ -24,16 +24,16 @@
 	
 
 	
-## 1. Duke <a name="Duke"></a>
+# 1. Duke <a name="Duke"></a>
 Duke is a task tracker desktop application which allows user to manage their own tasks. It uses Command-Line Interface (CLI), so user can perform operations by typing the commands into the textfield. 
 
 ![Duke](Ui.png)
 
-## 2. Features <a name="Features"></a>
+# 2. Features <a name="Features"></a>
 Command Format
 * Words within <> are to be supplied by the user. For example, `todo <task>`, `<task>` requires user to filled in their own task. 
 
-### 2.1. Adds todo task: `todo` <a name="Todo"></a>
+## 2.1. Adds todo task: `todo` <a name="Todo"></a>
 Format: `todo <task>`
 
 Example of usage: <br />
@@ -42,7 +42,7 @@ Example of usage: <br />
 Expected outcome: <br />
 ![Todo command](todo.PNG)
 
-### 2.2. Adds deadline task: `deadline` <a name="Deadline"></a>
+## 2.2. Adds deadline task: `deadline` <a name="Deadline"></a>
 Format: `deadline <task> /by <date>`
 
 NOTE: `<date>` must be in the format of dd/MM/yyyy HHmm. Example: 02/12/2019 1800
@@ -53,7 +53,7 @@ Example of usage: <br />
 Expected outcome: <br />
 ![Deadline command](deadline.PNG)
 
-### 2.3. Adds event task: `event` <a name="Event"></a>
+## 2.3. Adds event task: `event` <a name="Event"></a>
 Format: `event <task> /at <location>`
 
 Example of usage: <br />
@@ -62,7 +62,7 @@ Example of usage: <br />
 Expected outcome: <br />
 ![Event command](event.PNG)
 
-### 2.4. Mark task as complete: `done` <a name="Done"></a>
+## 2.4. Mark task as complete: `done` <a name="Done"></a>
 Format: `done <index>`
 
 NOTE: `<index>` must be a valid task list item.
@@ -73,7 +73,7 @@ Example of usage: <br />
 Expected outcome: <br />
 ![Done command](done.PNG)
 
-### 2.5. Finds task: `find` <a name="Find"></a>
+## 2.5. Finds task: `find` <a name="Find"></a>
 Show task that contains at least one of the user specified words. <br />
 Format: `find <words to search>`
 
@@ -83,7 +83,7 @@ Example of usage: <br />
 Expected outcome: <br />
 ![Find command](find.PNG)
 
-### 2.6. Delete task: `delete` <a name="Delete"></a>
+## 2.6. Delete task: `delete` <a name="Delete"></a>
 Format: `delete <index>`
 
 NOTE: `<index>` must be a valid task list item.
@@ -94,16 +94,16 @@ Example of usage: <br />
 Expected outcome: <br />
 ![Delete command](delete.PNG)
 
-### 2.7. Undo your previous command: `undo` <a name="Undo"></a>
+## 2.7. Undo your previous command: `undo` <a name="Undo"></a>
 Format: `undo`
 
-### 2.8. List all task items: `list` <a name="List"></a>
+## 2.8. List all task items: `list` <a name="List"></a>
 Format: `list`
 
-### 2.9. Exit the program: `bye` <a name="Bye"></a>
+## 2.9. Exit the program: `bye` <a name="Bye"></a>
 Format: `bye`
 
-## 3. Command summary <a name="summary"></a>
+# 3. Command summary <a name="summary"></a>
 * **Todo**: `todo <task>` <br />
 Example: `todo create user stories` 
 * **Deadline**: `deadline <task> /by <date>` <br />

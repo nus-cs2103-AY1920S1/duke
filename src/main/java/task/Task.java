@@ -2,6 +2,11 @@ package task;
 
 import priority.Priority;
 
+/**
+ * The Task class defines the requirement of a Task.
+ * 
+ * @author Joel Loong
+ */
 public class Task {
 
     protected String description;

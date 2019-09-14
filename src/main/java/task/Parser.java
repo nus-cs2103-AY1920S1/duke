@@ -8,6 +8,11 @@ import command.ExitCommand;
 import command.ListCommand;
 import command.FindCommand;
 
+/**
+ * The Parser class defines the behaviour of a parser.
+ * 
+ * @author Joel Loong
+ */
 public class Parser {
 
     /**

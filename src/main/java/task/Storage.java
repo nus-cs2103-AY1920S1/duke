@@ -7,6 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage class defines the behaviour of a storage.
+ * 
+ * @author Joel Loong
+ */
 public class Storage {
 
     private static final String FILE_PATH = "src/main/java/data/duke.txt";

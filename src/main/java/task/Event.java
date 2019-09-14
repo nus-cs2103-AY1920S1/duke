@@ -4,10 +4,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The Event class defines the requirement of an event.
+ * 
+ * @author Joel Loong
+ */
 public class Event extends Task {
 
     protected String at;
     protected Date date;
+    protected String endTime;
+    protected final SimpleDateFormat startFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
     /**
      * Use this constructor when reading input from user.
@@ -35,8 +42,6 @@ public class Event extends Task {
     }
 
     private Date formatDate() {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-
         String[] atSplit = at.split(" ");
         String atSplitDate = atSplit[0];
         String atSplitTime = atSplit[1];
@@ -61,17 +66,18 @@ public class Event extends Task {
 
         String endTimeHour = endTime.substring(0, 2);
         String endTimeMinute = endTime.substring(2);
+        this.endTime = endTimeHour + ":" + endTimeMinute;
 
-        Date date = new Date();
+        Date startDate = new Date();
         String dateString = day + "-" + month + "-" + year;
         String timeString = startTimeHour + ":" + startTimeMinute;
         try {
-            date = format.parse(dateString + " " + timeString);
+            startDate = startFormat.parse(dateString + " " + timeString);
         } catch (ParseException e) {
             System.err.println(e.getMessage());
         }
 
-        return date;
+        return startDate;
     }
 
     public String getTime() {
@@ -80,6 +86,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + date + ") " + super.priority;
+        return "[E]" + super.toString() + " (at: " + startFormat.format(date) + " - " + this.endTime + ") "
+                + super.priority;
     }
 }

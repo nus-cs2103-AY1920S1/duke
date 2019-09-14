@@ -3,6 +3,11 @@ package command;
 import task.DukeException;
 import task.TaskList;
 
+/**
+ * The DeleteCommand class defines the behaviour of a delete command.
+ * 
+ * @author Joel Loong
+ */
 public class DeleteCommand extends Command {
     private final String textInput;
 

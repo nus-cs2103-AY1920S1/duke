@@ -4,10 +4,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The Deadline class defines the requirement of a deadline.
+ * 
+ * @author Joel Loong
+ */
 public class Deadline extends Task {
 
     protected String by;
     protected Date date;
+    protected final SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     /**
      * Use this constructor when reading input from user.
@@ -35,8 +41,6 @@ public class Deadline extends Task {
     }
 
     private Date formatDate() {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-
         String[] bySplit = by.split("/");
         String day = bySplit[0];
         String month = bySplit[1];
@@ -65,6 +69,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + date + ") " + super.priority;
+        return "[D]" + super.toString() + " (by: " + format.format(date) + ") " + super.priority;
     }
 }

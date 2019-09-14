@@ -6,6 +6,11 @@ import task.Event;
 import task.Deadline;
 import task.TaskList;
 
+/**
+ * The AddCommand class defines the behaviour of an add command.
+ * 
+ * @author Joel Loong
+ */
 public class AddCommand extends Command {
     private final String textInput;
 

@@ -3,6 +3,11 @@ package command;
 import task.DukeException;
 import task.TaskList;
 
+/**
+ * The FindCommand class defines the behaviour of a find command.
+ * 
+ * @author Joel Loong
+ */
 public class FindCommand extends Command {
     private final String textInput;
 

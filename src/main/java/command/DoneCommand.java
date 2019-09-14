@@ -3,6 +3,11 @@ package command;
 import task.DukeException;
 import task.TaskList;
 
+/**
+ * The DoneCommand class defines the behaviour of a done command.
+ * 
+ * @author Joel Loong
+ */
 public class DoneCommand extends Command {
     private final String textInput;
 

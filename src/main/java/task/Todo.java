@@ -1,5 +1,10 @@
 package task;
 
+/**
+ * The Todo class defines the requirement of a todo.
+ * 
+ * @author Joel Loong
+ */
 public class Todo extends Task {
 
     public Todo(String description, int priority) {

@@ -3,6 +3,11 @@ package task;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The TaskList class defines the behaviour of a task list.
+ * 
+ * @author Joel Loong
+ */
 public class TaskList {
 
     private static ArrayList<Task> task;

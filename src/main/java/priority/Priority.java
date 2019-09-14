@@ -1,5 +1,10 @@
 package priority;
 
+/**
+ * The Priority enumeration defines the behaviour of a priority.
+ * 
+ * @author Joel Loong
+ */
 public enum Priority {
     HIGH(1), MEDIUM(2), LOW(3);
 

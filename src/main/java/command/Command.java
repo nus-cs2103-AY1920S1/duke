@@ -2,6 +2,11 @@ package command;
 
 import task.TaskList;
 
+/**
+ * The Command abstract class defines the behaviour of commands that extends it.
+ * 
+ * @author Joel Loong
+ */
 public abstract class Command {
     public abstract String execute();
 

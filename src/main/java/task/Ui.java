@@ -4,6 +4,11 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The Ui class defines the behaviour of a user interface.
+ * 
+ * @author Joel Loong
+ */
 public class Ui {
 
     public static String startOfInteractions() {

@@ -5,6 +5,11 @@ package duke;
  * and saving tasks in the file.
  */
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -69,7 +74,7 @@ public class Storage {
     /**
      * Saves the tasks in the list whenever there is any change.
      */
-    void updateFile(TaskList tasks) throws IOException {
+    public void updateFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task task : tasks.getTaskList()) {
             fw.write(task.storageFormat() + "\n");

@@ -33,11 +33,11 @@ public class Parser {
      * Returns the index of the targeted task when there is a Done/Delete command.
      * @return integer of the task index.
      */
-    int getIndex() {
+    public int getIndex() {
         return Integer.parseInt(part[1]);
     }
 
-    String getKeyword() {
+    public String getKeyword() {
         return fullCommand.substring(fullCommand.indexOf(" ") + 1);
     }
 
@@ -45,7 +45,7 @@ public class Parser {
      * Returns the activity name of a Todo task.
      * @return String of activity name of a Todo task.
      */
-    String getActivityNameWithoutTime() {
+    public String getActivityNameWithoutTime() {
         return fullCommand.substring(fullCommand.indexOf(" ") + 1);
     }
 
@@ -53,7 +53,7 @@ public class Parser {
      * Returns the activity name of a Deadline or Event task.
      * @return String of activity name of a Deadine or Event task.
      */
-    String getActivityNameWithTime() {
+    public String getActivityNameWithTime() {
         return fullCommand.substring(fullCommand.indexOf(" ") + 1,
                 fullCommand.indexOf("/"));
     }
@@ -62,7 +62,7 @@ public class Parser {
      * Returns the deadline in a "deadline" command.
      * @return String of deadline.
      */
-    String getDeadline() {
+    public String getDeadline() {
         String[] deadline = fullCommand.split("by");
         return deadline[1];
     }
@@ -71,7 +71,7 @@ public class Parser {
      * Returns the time of a Event task in a "event" command.
      * @return String of time of a Event task.
      */
-    String getTime() {
+    public String getTime() {
         String[] time = fullCommand.split("at");
         return time[1];
     }

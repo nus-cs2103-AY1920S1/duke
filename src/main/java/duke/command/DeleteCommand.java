@@ -1,32 +1,36 @@
-package duke;
+package duke.command;
 
 /**
- * Encapsulates a EventCommand object in charge of adding a event task into the task list.
+ * Encapsulates a DeleteCommand object in charge of deleting the target task from the list.
  */
+
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
 
 import java.io.IOException;
 
-public class EventCommand extends Command {
+public class DeleteCommand extends Command {
 
     /**
      * The constructor is inherited from Command class.
      * @param fullCommand String of valid, full command input
      */
-    public EventCommand (String fullCommand) {
+    public DeleteCommand (String fullCommand) {
         super(fullCommand);
     }
 
     @Override
+    public
     /**
-     * Adds a event task into the taskList and updates file in storage.
+     * Deletes the task with given index from the list and updates the storage file.
      * @param tasks TaskList object containing a list of existing tasks.
      * @param storage
      * @throws IOException
      */
     String execute(TaskList tasks, Storage storage) throws IOException {
         Parser parser = new Parser(fullCommand);
-        String message = tasks.addEvent(parser.getActivityNameWithTime(),
-        parser.getTime(), false);
+        String message = tasks.deleteTask(parser.getIndex());
         storage.updateFile(tasks);
         return message;
     }

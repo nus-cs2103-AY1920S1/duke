@@ -1,11 +1,13 @@
-package duke;
+package duke.task;
+
+import duke.Task;
 
 /**
  * Encapsulates a Todo object that inherits from Task class and
  * stores task name and status.
  */
 
-class Todo extends Task {
+public class Todo extends Task {
 
     /**
      * The constructor is inherited from Task class.

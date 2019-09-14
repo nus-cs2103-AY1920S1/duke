@@ -5,6 +5,11 @@ package duke;
  * and has operations to add/delete/done tasks in the list.
  */
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -33,7 +38,7 @@ public class TaskList {
     /**
      * Prints out the tasks in the list currently.
      */
-    String showTasks() {
+    public String showTasks() {
         String message = "Here are the tasks in your list: \n";
         for (int i = 0; i < list.size(); i++) {
             message += (i + 1) + ". " + list.get(i) + "\n";
@@ -44,7 +49,7 @@ public class TaskList {
     /**
      * Prints out the tasks with keyword in the list currently.
      */
-    String findTask(String keyword) {
+    public String findTask(String keyword) {
         String message = "Here are the matching tasks in your list: \n";
         int i = 0;
         for (Task task : list) {
@@ -70,7 +75,7 @@ public class TaskList {
      * @param activityName String of take name.
      * @param isDone true if the task is done, or false otherwise.
      */
-    String addTodo(String activityName, boolean isDone) {
+    public String addTodo(String activityName, boolean isDone) {
         Task newTask = new Todo(activityName,isDone);
         list.add(newTask);
         return getMessage(newTask);
@@ -82,7 +87,7 @@ public class TaskList {
      * @param deadline String of deadline time.
      * @param isDone true if the task is done, or false otherwise.
      */
-    String addDeadline(String activityName, String deadline, boolean isDone) {
+    public String addDeadline(String activityName, String deadline, boolean isDone) {
         Task newTask = new Deadline(activityName, isDone, deadline);
         list.add(newTask);
         return getMessage(newTask);
@@ -94,7 +99,7 @@ public class TaskList {
      * @param time String of activity time.
      * @param isDone true if the task is done, or false otherwise.
      */
-    String addEvent(String activityName, String time, boolean isDone) {
+    public String addEvent(String activityName, String time, boolean isDone) {
         Task newTask = new Event(activityName,isDone, time);
         list.add(newTask);
         return getMessage(newTask);
@@ -104,7 +109,7 @@ public class TaskList {
      * Marks the task of the specified index to "done".
      * @param idx integer that represents the index of the task in the command.
      */
-    String doneTask(int idx) {
+    public String doneTask(int idx) {
         assert idx >=1 && idx <= list.size() : "Invalid index input";
         list.get(idx - 1).markAsDone();
         return "Nice! I've marked this task as done: \n  "
@@ -115,7 +120,7 @@ public class TaskList {
      * Deletes the task in the command from the task list.
      * @param idx integer that represents the index of the task in the command.
      */
-    String deleteTask(int idx) {
+    public String deleteTask(int idx) {
         assert idx >=1 && idx <= list.size() : "Invalid index input";
         Task removed = list.remove(idx - 1);
         return "Noted. I've removed this task: \n  " + removed

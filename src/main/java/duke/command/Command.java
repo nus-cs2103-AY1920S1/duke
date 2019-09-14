@@ -1,8 +1,11 @@
-package duke;
+package duke.command;
 
 /**
  * Encapsulates a Command object that is able to represent different types of command.
  */
+
+import duke.Storage;
+import duke.TaskList;
 
 import java.io.IOException;
 
@@ -24,7 +27,7 @@ public class Command {
      * @param storage
      * @throws IOException
      */
-    String execute(TaskList tasks, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         return "";
     }
 }

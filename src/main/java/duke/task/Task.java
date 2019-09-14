@@ -1,10 +1,10 @@
-package duke;
+package duke.task;
 
 /**
  * Encapsulates a Task object which stores activity name, status (done or not done).
  */
 
-class Task {
+public class Task {
 
     /** 2 attribute.
      * tasName represents the String of task name.
@@ -27,7 +27,7 @@ class Task {
     /**
      * Changes the status of the task when a "done" command is executed.
      */
-    void markAsDone() {
+    public void markAsDone() {
         isDone = true;
     }
 

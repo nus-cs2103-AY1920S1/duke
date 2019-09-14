@@ -1,4 +1,8 @@
-package duke;
+package duke.command;
+
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
 
 /**
  * Encapsulates a FindCommand object in charge of finding tasks which contains the keyword
@@ -16,6 +20,7 @@ public class FindCommand extends Command {
     }
 
     @Override
+    public
     /**
      * Lists tasks that contains the keyword in the tasks list.
      * @param tasks TaskList object containing a list of existing tasks.

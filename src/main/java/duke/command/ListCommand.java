@@ -1,4 +1,7 @@
-package duke;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
 
 /**
  * Encapsulates a ListCommand object in charge of listing existing tasks in the list.
@@ -15,6 +18,7 @@ public class ListCommand extends Command {
     }
 
     @Override
+    public
     /**
      * Lists existing tasks in the tasks list.
      * @param tasks TaskList object containing a list of existing tasks.

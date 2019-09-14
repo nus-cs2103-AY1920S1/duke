@@ -5,6 +5,8 @@ package duke;
  * status when it is done, and delete the tast according to the command.
  */
 
+import duke.command.Command;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;

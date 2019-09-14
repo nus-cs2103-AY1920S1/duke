@@ -49,6 +49,9 @@ public class MainWindow extends AnchorPane {
         this.duke = duke;
     }
 
+    /**
+     * Upon initializing the controller, add initial dialog for duke.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

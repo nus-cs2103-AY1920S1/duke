@@ -7,7 +7,7 @@ package bot.duke.ui;
 
 public class CmdUx {
 
-    private static GuiWindow guiWindow;
+    private static GuiWindow guiWindow = null;
 
     public static void setGuiWindow(GuiWindow currGuiWindow) {
         guiWindow = currGuiWindow;

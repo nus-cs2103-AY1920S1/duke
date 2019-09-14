@@ -22,11 +22,18 @@ public class Ui {
 
     static final Scanner SCANNER = new Scanner(System.in);
 
+    static String preLaunchMsg = "";
+
+    public static void addPreLaunchMsg(String msg) {
+        preLaunchMsg = preLaunchMsg + msg;
+    }
     /**
      * Prints the Welcome message.
      */
     public static void printWelcomeMsg() {
-        CmdUx.print("\n".repeat(23));
+        final int WELCOME_PREPEND_SPACING_COUNT = 23;
+        CmdUx.printHBars(preLaunchMsg);
+        CmdUx.print("\n".repeat(WELCOME_PREPEND_SPACING_COUNT));
         CmdUx.print("\nHello from\n" + LOGO);
         CmdUx.printHBars(WELCOME_MSG);
     }
@@ -70,7 +77,7 @@ public class Ui {
      */
     public static void listSearchResults(ArrayList<Task> tasks, ArrayList<Integer> searchResults) {
         StringBuilder sb = new StringBuilder();
-        if (searchResults.size() > 0 ) {
+        if (searchResults.size() > 0) {
             sb.append("Here are the matching tasks in your list:\n");
             for (Integer index : searchResults) {
                 sb.append(index + "." + tasks.get(index).toString() + "\n");

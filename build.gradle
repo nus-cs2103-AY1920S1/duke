@@ -18,8 +18,9 @@ application {
 }
 
 shadowJar {
+    mainClassName = "bot.duke.Duke"
     archiveBaseName = "duke"
-    archiveVersion = "0.2.69"
+    archiveVersion = "1.0.69"
     archiveClassifier = null
     archiveAppendix = null
 }

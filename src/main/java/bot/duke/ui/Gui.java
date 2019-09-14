@@ -14,9 +14,17 @@ import javafx.stage.Stage;
  */
 public class Gui extends Application {
 
-    private Duke duke = new Duke("data/duke.txt");
+    private Duke duke;
 
     private static final String WINDOW_TITLE = "Duke, The Handsome Bot ~ by Krusagiz ~";
+
+    /**
+     * Constructs the Gui Object.
+     * Explicitly added to fix initialisation issues
+     */
+    public Gui() {
+    }
+
     @Override
     public void start(Stage stage) {
         try {
@@ -25,9 +33,9 @@ public class Gui extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle(WINDOW_TITLE);
+            duke = new Duke("data/duke.txt");
             fxmlLoader.<GuiWindow>getController().setDuke(duke);
             stage.show();
-
             Ui.printWelcomeMsg();
         } catch (IOException e) {
             e.printStackTrace();

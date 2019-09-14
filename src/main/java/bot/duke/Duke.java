@@ -40,12 +40,13 @@ public class Duke {
 
         try {
             tasks = new TaskList(storage.load());
+            ui.addPreLaunchMsg("STARTUP: File at " + filePath + " loaded successfully, populating Tasks. \n");
         } catch (FileNotFoundException fnfe) {
             tasks = new TaskList();
-            ui.exposeError("File not found at " + filePath + ", starting with a clean slate.");
+            ui.addPreLaunchMsg("STARTUP: File not found at " + filePath + ", starting with a clean slate. \n");
         } catch (IOException | ParseException e) {
             tasks = new TaskList();
-            ui.exposeError("Unable to read file at " + filePath + ", starting with a clean slade");
+            ui.addPreLaunchMsg("STARTUP: Unable to read file at " + filePath + ", starting with a clean slade\n");
         }
 
     }
@@ -54,6 +55,7 @@ public class Duke {
      * Runs the logic of Duke.
      * Deprecated due to GUI, kept around for contingencies
      */
+    /*
     public void run() {
 
         this.ui.printWelcomeMsg();
@@ -71,13 +73,14 @@ public class Duke {
             }
         }
     }
-
+    */
     /**
      * Starts the Duke instance.
      *
      * @param args Command line arguments
      */
     public static void main(String[] args) {
+        Gui gui = new Gui();
         Application.launch(Gui.class, args);
         //Duke dukeInstance = new Duke("data/duke.txt");
         //dukeInstance.run();

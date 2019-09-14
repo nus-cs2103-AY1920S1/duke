@@ -27,12 +27,12 @@ public class GuiWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        CmdUx.setGuiWindow(this);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
     public void setDuke(Duke d) {
         duke = d;
-        CmdUx.setGuiWindow(this);
     }
 
     /**

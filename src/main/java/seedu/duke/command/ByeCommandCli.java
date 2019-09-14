@@ -8,7 +8,7 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 /**
- * Represents the Bye Command for Duke's CLI.
+ * Represents the "bye" Command for Duke's CLI.
  */
 public class ByeCommandCli extends Command {
 

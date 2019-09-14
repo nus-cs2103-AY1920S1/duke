@@ -6,7 +6,7 @@ import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
 /**
- * Represents the Bye Command for Duke's GUI.
+ * Represents the "bye" Command for Duke's GUI.
  */
 public class ByeCommandGui extends Command {
 

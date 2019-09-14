@@ -9,7 +9,7 @@ import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
 /**
- * Represents the Deadline command.
+ * Represents the "deadline" command.
  */
 public class DeadlineCommand extends Command {
 
@@ -39,6 +39,19 @@ public class DeadlineCommand extends Command {
 
         checkForInvalidInput(fullCommand);
 
+        Deadline newDeadline = newDeadline(fullCommand);
+
+        tasks.addTask(newDeadline);
+
+        return ui.getDeadlineSequence(tasks, newDeadline);
+    }
+
+    /**
+     * Creates new Deadline object from User string.
+     *
+     * @param fullCommand Full String command entered by the User.
+     */
+    public Deadline newDeadline(String fullCommand) {
         String description = Parser.getDeadlineDescription(fullCommand);
         String extraDescription = Parser.getDeadlineDateTime(fullCommand);
 
@@ -47,9 +60,7 @@ public class DeadlineCommand extends Command {
 
         Deadline newDeadline = new Deadline(description, extraDescription);
 
-        tasks.addTask(newDeadline);
-
-        return ui.getDeadlineSequence(tasks, newDeadline);
+        return newDeadline;
     }
 
     /**

@@ -1,34 +1,43 @@
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents the task given by the user.
+ * Represents the timed task given by the user.
  */
-public abstract class TimedTask extends Task {
-    protected LocalDateTime timestamp;
-    protected static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+abstract class TimedTask extends Task {
+    LocalDateTime timestamp;
+    static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-    public TimedTask(String s, String rawTimestamp) throws DukeException {
-        super(s);
+    TimedTask(String taskDescription, String rawTimestamp) throws DukeException {
+        super(taskDescription);
         try {
-            this.timestamp = LocalDateTime.parse(rawTimestamp, dateTimeFormatter);
+            timestamp = LocalDateTime.parse(rawTimestamp, dateTimeFormatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidTimeException("You formatted your time incorrectly! " +
-                "Please format it this way: dd/mm/yyyy hh:mm");
+            throw new InvalidTimeException("You formatted your time incorrectly! "
+                + "Please format it this way: dd/mm/yyyy hh:mm");
         }
     }
 
     @Override
-    public boolean isTimed() {
+    boolean isTimed() {
         return true;
     }
 
-    public LocalDateTime getTimestamp() {
+    /**
+     * Gets the timestamp of the timed task.
+     * @return The timestamp of the timed task.
+     */
+    LocalDateTime getTimestamp() {
         return timestamp;
     }
 
+    /**
+     * Formats the timed task such that it can be outputted in a readable form for the user.
+     *
+     * @return The description of the timed task.
+     */
     @Override
     public abstract String toString();
+
 }

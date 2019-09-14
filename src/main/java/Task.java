@@ -3,27 +3,36 @@ import java.io.Serializable;
 /**
  * Represents the task given by the user.
  */
-public abstract class Task implements Serializable {
-    protected String taskDescription;
-    protected boolean isDone;
+abstract class Task implements Serializable {
+    String taskDescription;
+    boolean isDone;
 
-    public Task(String s) {
-        taskDescription = s;
+    Task(String taskDescription) {
+        this.taskDescription = taskDescription;
         isDone = false;
     }
 
     /**
      * Marks this task as complete.
      */
-    public void markAsDone() {
+    void markAsDone() {
         isDone = true;
     }
 
-    public boolean isTimed() {
+    /**
+     * Check if the task is a timed task.
+     *
+     * @return A boolean value for whether the task is a timed task.
+     */
+    boolean isTimed() {
         return false;
     }
 
-    public String getTaskDescription() {
+    /**
+     * Gets the description of the task.
+     * @return The task description.
+     */
+    String getTaskDescription() {
         return taskDescription;
     }
 
@@ -34,4 +43,5 @@ public abstract class Task implements Serializable {
      */
     @Override
     public abstract String toString();
+
 }

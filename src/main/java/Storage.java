@@ -7,10 +7,10 @@ import java.io.ObjectInputStream;
 /**
  * Manages the writing and reading of the task list to and from the hard drive.
  */
-public class Storage {
+class Storage {
     private String filePath;
 
-    public Storage(String filePath) {
+    Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -21,7 +21,7 @@ public class Storage {
      * @throws IOException If the I/O operation fails.
      * @throws ClassNotFoundException If the class is not found during runtime.
      */
-    public TaskList load() throws IOException, ClassNotFoundException {
+    TaskList load() throws IOException, ClassNotFoundException {
         FileInputStream fis = new FileInputStream(filePath);
         ObjectInputStream ois = new ObjectInputStream(fis);
         TaskList tasks = (TaskList) ois.readObject();
@@ -35,10 +35,11 @@ public class Storage {
      * @param tasks The task list to be written to the hard drive.
      * @throws IOException If the I/O operation fails.
      */
-    public void update(TaskList tasks) throws IOException {
+    void update(TaskList tasks) throws IOException {
         FileOutputStream fos = new FileOutputStream(filePath);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(tasks);
         oos.close();
     }
+
 }

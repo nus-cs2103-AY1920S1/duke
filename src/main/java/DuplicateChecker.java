@@ -1,15 +1,30 @@
 import java.util.ArrayList;
 
+/**
+ * The class used to check for duplicate tasks within the taskList
+ */
+
 class DuplicateChecker {
 
     private ArrayList<Task> taskList;
     private Ui ui = new Ui();
 
-    DuplicateChecker(){}
 
+    /**
+     * The constructor for the DuplicateChecker class.
+     * @param taskList  Used to store task object information.
+     */
+    
     DuplicateChecker(ArrayList<Task> taskList){
         this.taskList = taskList;
     }
+
+    /**
+     * Checks for duplicates in the description of tasks and warns the user if present.
+     *
+     * @param task  The new task given by the user.
+     * @return true or false depending if there is a duplicate
+     */
 
     boolean checkDuplicate (Task task){
 
@@ -20,6 +35,7 @@ class DuplicateChecker {
                 return true;
             }
         }
+
         return false;
     }
 }

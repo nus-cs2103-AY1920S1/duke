@@ -12,7 +12,7 @@ class InputSplitter {
     }
 
     /**
-     * Returns a String array containing the split input.
+     * Returns a String array to {@link InputParser} containing the split input.
      * @param type Output changes based on what tye of task in parsed in
      */
 

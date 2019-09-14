@@ -9,9 +9,9 @@ Bunny Duke is a tasks and expenses manager chat bot.
 	1. [Types of Tasks](#types-of-tasks) 
 	1. [Add Tasks](#add-tasks) 
 	1. [See Task List](#see-task-list)
-	1. [Mark Task as Done ]
-	1. [Delete Tasks]
-	1. [Find Task by Keyword]
+	1. [Mark Task as Done](#mark-tasks-as-done)
+	1. [Delete Tasks](#delete-tasks)
+	1. [Find Task by Keyword](#find-task-by-keyword)
 1. [Expenses Managing](#expenses-managing)
 	1. [Add Expenses](#add-expenses)
 	1. [Input Income](#input-income)

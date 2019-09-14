@@ -30,16 +30,9 @@ public class Duke {
 
 	public String getResponse(String input) {
 		String userOutput = "";
-		try {
-			userOutput = userCommand.evaluate(input);
+		userOutput = userCommand.evaluate(input);
+		return userOutput;
 
-		} catch (DukeInvalidArgumentException e) {
-			userOutput = ui.BORDER + "\n" + e + "\n" + ui.BORDER;
-		} catch (DukeException e) {
-			userOutput = ui.BORDER + "\n" + e + "\n" + ui.BORDER;
-		} finally {
-			return userOutput;
-		}
 	}
 
 }

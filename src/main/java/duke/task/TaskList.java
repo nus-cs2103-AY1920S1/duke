@@ -110,4 +110,16 @@ public class TaskList {
         assert taskList != null;
         return taskList;
     }
+
+    public Task tagTask (int taskNumber, String tag) throws TaskDoesNotExistException {
+        if (taskNumber > taskList.size()) {
+            throw new TaskDoesNotExistException("Task not found");
+        }
+
+
+        Task task = taskList.get(taskNumber - 1);
+        task.tag = "#" + tag;
+
+        return task;
+    }
 }

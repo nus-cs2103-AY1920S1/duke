@@ -33,8 +33,18 @@ public class CreateTodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, MessageHandler messageHandler, Storage storage) throws DukeException {
-        String todoText = commandInformation;
-        Task t = new Todo(todoText);
+        String todo = this.commandInformation;
+        String[] todoParts = todo.split(" # ");
+
+        assert todoParts.length >= 1;
+
+        String todoText = todoParts[0];
+        String tag = "#";
+        if (todoParts.length == 2) {
+            tag += todoParts[1].replaceAll(" ", "");
+        }
+
+        Task t = new Todo(todoText, false, tag);
         tasks.addTask(t);
         String response = messageHandler.addTaskConfirmationMessage(t);
 

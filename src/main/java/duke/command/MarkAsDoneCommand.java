@@ -34,6 +34,7 @@ public class MarkAsDoneCommand extends Command {
             throws TaskDoesNotExistException {
         int taskNumber = Integer.parseInt(commandInformation);
         Task t = tasks.markTaskAsCompleted(taskNumber);
+        assert t.getCompletionStatus();
         storage.writeToTasksFile(tasks);
 
         return messageHandler.printMarkTaskAsCompletedMessage(t);

@@ -1,14 +1,6 @@
 package duke.utilities;
 
-import duke.command.Command;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.MarkAsDoneCommand;
-import duke.command.DeleteTaskCommand;
-import duke.command.CreateTodoCommand;
-import duke.command.CreateDeadlineCommand;
-import duke.command.CreateEventCommand;
-import duke.command.FindTaskCommand;
+import duke.command.*;
 import duke.exception.InvalidCommandException;
 
 
@@ -45,6 +37,8 @@ public class Parser {
             return new CreateEventCommand(commandInformation);
         case "find":
             return new FindTaskCommand(commandInformation);
+        case "tag":
+            return new AddTagCommand(commandInformation);
         default:
             throw new InvalidCommandException("I'm sorry, but I don't know what that means");
         }

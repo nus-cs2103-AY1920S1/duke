@@ -37,14 +37,23 @@ public class CreateEventCommand extends Command {
     @Override
     public String execute(TaskList tasks, MessageHandler messageHandler, Storage storage) throws DukeException {
         String event = this.commandInformation;
-        String[] eventParts = event.split(" /at ");
+        String[] eventParts = event.split(" /at | #");
+
+        assert eventParts.length >= 2;
+
         String eventText = eventParts[0];
         String at = eventParts[1];
+
+        String tag = "#";
+        if (eventParts.length == 3) {
+            tag += eventParts[2].replaceAll(" ", "");
+        }
+
         String response;
 
         try {
-            Task t = new Event(eventText, at);
-            tasks.addTask(new Event(eventText, at));
+            Task t = new Event(eventText, at, false, tag);
+            tasks.addTask(t);
             response = messageHandler.addTaskConfirmationMessage(t);
         } catch (DateTimeParseException error) {
             response = error.getMessage() + ". Please enter date in this format DD/MM/YYYY HHMM - DD/MM/YYYY HHMM";

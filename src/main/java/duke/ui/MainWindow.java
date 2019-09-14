@@ -5,6 +5,7 @@ import duke.Launcher;
 import duke.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -37,12 +38,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String hiMessage = duke.hiMessage();
-
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(hiMessage, dukeImage));
-
     }
 
 

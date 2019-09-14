@@ -7,30 +7,15 @@ package duke.task;
 public class Todo extends Task {
 
     /**
-     * Default constructor for Todo class.
-     *
-     * @param taskName A String which represents the taskName
-     *                 e.g., <code>todo borrow books</code>
-     *                 where the taskName is "borrow books"
-     */
-
-    public Todo(String taskName) {
-        super(taskName);
-        this.taskType = TypeOfTask.TODO;
-        this.details = "";
-    }
-
-
-    /**
-     * Alternative constructor for Todo class.
+     * Constructor for Todo class.
      *
      * @param taskName    A String which represents the taskName
      *                    e.g., <code>todo borrow books</code>
      *                    where the taskName is "borrow books"
      * @param isCompleted A boolean indicating if the task is completed
      */
-    public Todo(String taskName, boolean isCompleted) {
-        super(taskName, isCompleted);
+    public Todo(String taskName, boolean isCompleted, String tag) {
+        super(taskName, isCompleted, tag);
         this.taskType = TypeOfTask.TODO;
         this.details = "";
     }

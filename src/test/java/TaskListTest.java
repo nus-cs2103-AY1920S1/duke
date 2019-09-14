@@ -20,8 +20,8 @@ public class TaskListTest {
     public void setUpTaskListObject() {
         tasks = new TaskList();
         try {
-            tasks.addTask(new Todo("borrow books"));
-            tasks.addTask(new Event("project meeting", "28/08/2019 18:00 - 28/08/2019 20:30"));
+            tasks.addTask(new Todo("borrow books", false, "#"));
+            tasks.addTask(new Event("project meeting", "28/08/2019 1800 - 28/08/2019 2030", false, "#"));
         } catch (Exception e) {
             System.out.println("Adding tasks, setup step should be successful. " + e.getMessage());
             fail();

@@ -1,8 +1,8 @@
 package bot.duke.ui;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+import org.junit.jupiter.api.Test;
 
 public class UiTest {
     @Test

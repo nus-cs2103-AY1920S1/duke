@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
-import javafx.application.Application;
-
 import bot.duke.command.Command;
 import bot.duke.command.Parser;
 import bot.duke.exception.DukeException;
@@ -13,6 +11,7 @@ import bot.duke.storage.Storage;
 import bot.duke.task.TaskList;
 import bot.duke.ui.Gui;
 import bot.duke.ui.Ui;
+import javafx.application.Application;
 
 /**
  * Drives the duke.Duke bot.

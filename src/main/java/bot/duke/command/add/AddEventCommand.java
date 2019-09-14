@@ -7,6 +7,7 @@ import bot.duke.command.Command;
 import bot.duke.exception.DukeEventException;
 import bot.duke.storage.Storage;
 import bot.duke.task.Event;
+import bot.duke.task.Task;
 import bot.duke.task.TaskList;
 import bot.duke.ui.Ui;
 
@@ -41,8 +42,8 @@ public class AddEventCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            Date datetimeFromDate = super.DATE_FORMAT.parse(datetimeFrom);
-            Date datetimeToDate = super.DATE_FORMAT.parse(datetimeTo);
+            Date datetimeFromDate = Task.DATE_FORMAT.parse(datetimeFrom);
+            Date datetimeToDate = Task.DATE_FORMAT.parse(datetimeTo);
             Event newEvent = new Event(detail, datetimeFromDate, datetimeToDate);
             assert newEvent != null;
             tasks.add(newEvent);

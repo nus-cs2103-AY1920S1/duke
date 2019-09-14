@@ -1,13 +1,12 @@
 package bot.duke.command.flow;
 
-import bot.duke.storage.Storage;
-import bot.duke.ui.Ui;
-import duke.storage.Storage;
-import duke.task.TaskList;
-import duke.ui.Ui;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import bot.duke.storage.Storage;
+import bot.duke.ui.Ui;
+import duke.task.TaskList;
 
 public class ExitCommandTest {
 

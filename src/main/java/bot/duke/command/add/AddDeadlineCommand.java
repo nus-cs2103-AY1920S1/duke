@@ -7,6 +7,7 @@ import bot.duke.command.Command;
 import bot.duke.exception.DukeDeadlineException;
 import bot.duke.storage.Storage;
 import bot.duke.task.Deadline;
+import bot.duke.task.Task;
 import bot.duke.task.TaskList;
 import bot.duke.ui.Ui;
 
@@ -38,7 +39,7 @@ public class AddDeadlineCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            Date datetimeDate = super.DATE_FORMAT.parse(datetime);
+            Date datetimeDate = Task.DATE_FORMAT.parse(datetime);
             Deadline newDeadline = new Deadline(detail, datetimeDate);
             assert newDeadline != null;
             tasks.add(newDeadline);

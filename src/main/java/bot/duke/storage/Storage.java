@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import bot.duke.command.Command;
 import bot.duke.task.Deadline;
 import bot.duke.task.Event;
 import bot.duke.task.Task;
@@ -75,13 +74,13 @@ public class Storage {
                 break;
             case "D":
                 Deadline newDeadline = new Deadline(lineSplit[2],
-                        Command.DATE_FORMAT.parse(lineSplit[3]));
+                        Task.DATE_FORMAT.parse(lineSplit[3]));
                 newDeadline.setDone(lineSplit[1].equals("T"));
                 tasks.add(newDeadline);
                 break;
             case "E":
                 Event newEvent = new Event(lineSplit[2],
-                        Command.DATE_FORMAT.parse(lineSplit[3]), Command.DATE_FORMAT.parse(lineSplit[4]));
+                        Task.DATE_FORMAT.parse(lineSplit[3]), Task.DATE_FORMAT.parse(lineSplit[4]));
                 newEvent.setDone(lineSplit[1].equals("T"));
                 tasks.add(newEvent);
                 break;

@@ -2,8 +2,6 @@ package bot.duke.task;
 
 import java.util.Date;
 
-import bot.duke.command.Command;
-
 public class Deadline extends Task {
 
     /** Deadline Time(with date). */
@@ -28,7 +26,7 @@ public class Deadline extends Task {
     @Override
     public String getTaskName() {
         return super.getTaskName()
-                + " (by: " + Command.DATE_FORMAT.format(deadlineTime) + ")";
+                + " (by: " + Task.DATE_FORMAT.format(deadlineTime) + ")";
     }
 
     /**
@@ -50,6 +48,6 @@ public class Deadline extends Task {
     @Override
     public String toDelimitedString() {
         return String.format("%c | %c | %s | %s", this.getRepLetter(), this.isDone() ? 'T' : 'F', super.getTaskName(),
-                Command.DATE_FORMAT.format(this.deadlineTime));
+                Task.DATE_FORMAT.format(this.deadlineTime));
     }
 }

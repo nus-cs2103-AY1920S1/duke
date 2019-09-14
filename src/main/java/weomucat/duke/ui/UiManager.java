@@ -1,12 +1,8 @@
 package weomucat.duke.ui;
 
-import static weomucat.duke.Duke.THREAD_POLL_SLEEP_DURATION;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import weomucat.duke.command.listener.ByeCommandListener;
-import weomucat.duke.exception.DukeException;
-import weomucat.duke.exception.DukeRuntimeException;
+import weomucat.duke.command.listener.DisplayCommandListener;
 import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
 import weomucat.duke.task.listener.ListTaskListener;
@@ -19,15 +15,12 @@ import weomucat.duke.ui.listener.UserInputListener;
  * Whenever any user input is received from any ui, all ui listeners will be notified.
  * Whenever a task update is received, all uis will be notified.
  */
-public class UiManager implements ByeCommandListener,
+public class UiManager implements ByeCommandListener, DisplayCommandListener,
     ListTaskListener, ModifyTaskListener, TaskListSizeListener,
     UserInputListener {
 
   private ArrayList<Ui> uis;
   private ArrayList<UserInputListener> userInputListeners;
-  private LinkedList<String> userInputQueue;
-
-  private boolean running;
 
   /**
    * Default constructor.
@@ -35,8 +28,6 @@ public class UiManager implements ByeCommandListener,
   public UiManager() {
     this.uis = new ArrayList<>();
     this.userInputListeners = new ArrayList<>();
-    this.userInputQueue = new LinkedList<>();
-    this.running = true;
   }
 
   /**
@@ -70,42 +61,16 @@ public class UiManager implements ByeCommandListener,
       // This is to allow the main thread to continue.
       new Thread(ui::acceptUserInput).start();
     }
-
-    // Main loop to get user input.
-    while (this.running) {
-      try {
-        if (userInputQueue.isEmpty()) {
-          Thread.sleep(THREAD_POLL_SLEEP_DURATION);
-        } else {
-          String userInput = userInputQueue.pollFirst();
-          for (UserInputListener listener : this.userInputListeners) {
-            listener.userInputUpdate(userInput);
-          }
-        }
-      } catch (DukeException | DukeRuntimeException e) {
-        displayError(new Message("☹ OOPS!!! " + e.getMessage()));
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
   }
 
-  /**
-   * Displays a nice message to the user.
-   *
-   * @param message message to display
-   */
+  @Override
   public void displayMessage(Message message) {
     for (Ui ui : this.uis) {
       ui.displayMessage(message);
     }
   }
 
-  /**
-   * Displays an error message to the user.
-   *
-   * @param message error message to display
-   */
+  @Override
   public void displayError(Message message) {
     for (Ui ui : this.uis) {
       ui.displayError(message);
@@ -114,8 +79,6 @@ public class UiManager implements ByeCommandListener,
 
   @Override
   public void byeCommandUpdate() {
-    this.running = false;
-
     // Farewell user
     displayMessage(new Message("Bye. Hope to see you again soon!"));
 
@@ -146,14 +109,9 @@ public class UiManager implements ByeCommandListener,
   }
 
   @Override
-  public void byeUpdate() throws DukeException {
-    for (UserInputListener listener : this.userInputListeners) {
-      listener.byeUpdate();
-    }
-  }
-
-  @Override
   public void userInputUpdate(String userInput) {
-    userInputQueue.addLast(userInput);
+    for (UserInputListener listener : this.userInputListeners) {
+      listener.userInputUpdate(userInput);
+    }
   }
 }

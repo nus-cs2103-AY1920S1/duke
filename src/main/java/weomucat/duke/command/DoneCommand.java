@@ -1,18 +1,13 @@
 package weomucat.duke.command;
 
-import java.util.Collection;
+import weomucat.duke.DukeConsumer;
 import weomucat.duke.command.listener.DoneTaskCommandListener;
 import weomucat.duke.command.parameter.IndexParameter;
 import weomucat.duke.command.parameter.ParameterOptions;
-import weomucat.duke.exception.DukeException;
 
 public class DoneCommand extends Command<DoneTaskCommandListener> {
 
   private IndexParameter doneIndex;
-
-  public DoneCommand(Collection<DoneTaskCommandListener> listeners) {
-    super(listeners);
-  }
 
   @Override
   public ParameterOptions getParameterOptions() {
@@ -21,7 +16,12 @@ public class DoneCommand extends Command<DoneTaskCommandListener> {
   }
 
   @Override
-  public void run() throws DukeException {
-    forEachListener(listener -> listener.doneTaskCommandUpdate(this.doneIndex.value()));
+  Class<DoneTaskCommandListener> getListenersClass() {
+    return DoneTaskCommandListener.class;
+  }
+
+  @Override
+  DukeConsumer<DoneTaskCommandListener> getListenerConsumer() {
+    return listener -> listener.doneTaskCommandUpdate(this.doneIndex.value());
   }
 }

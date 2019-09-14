@@ -1,12 +1,11 @@
 package weomucat.duke.command;
 
-import java.util.Collection;
+import weomucat.duke.DukeConsumer;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.parameter.DateParameter;
 import weomucat.duke.command.parameter.IntervalParameter;
 import weomucat.duke.command.parameter.ParameterOptions;
 import weomucat.duke.command.parameter.StringParameter;
-import weomucat.duke.exception.DukeException;
 import weomucat.duke.task.DeadlineTask;
 
 public class DeadlineCommand extends Command<AddTaskCommandListener> {
@@ -17,10 +16,6 @@ public class DeadlineCommand extends Command<AddTaskCommandListener> {
   private StringParameter description;
   private DateParameter dueDate;
   private IntervalParameter recurrence;
-
-  public DeadlineCommand(Collection<AddTaskCommandListener> listeners) {
-    super(listeners);
-  }
 
   @Override
   public ParameterOptions getParameterOptions() {
@@ -33,10 +28,15 @@ public class DeadlineCommand extends Command<AddTaskCommandListener> {
   }
 
   @Override
-  public void run() throws DukeException {
-    forEachListener(listener -> listener.addTaskCommandUpdate(new DeadlineTask(
+  public Class<AddTaskCommandListener> getListenersClass() {
+    return AddTaskCommandListener.class;
+  }
+
+  @Override
+  DukeConsumer<AddTaskCommandListener> getListenerConsumer() {
+    return listener -> listener.addTaskCommandUpdate(new DeadlineTask(
         this.description.value(),
         this.dueDate.value(),
-        this.recurrence.value())));
+        this.recurrence.value()));
   }
 }

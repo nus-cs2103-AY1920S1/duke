@@ -1,11 +1,10 @@
 package weomucat.duke.command;
 
-import java.util.Collection;
+import weomucat.duke.DukeConsumer;
 import weomucat.duke.command.listener.SnoozeTaskCommandListener;
 import weomucat.duke.command.parameter.IndexParameter;
 import weomucat.duke.command.parameter.IntervalParameter;
 import weomucat.duke.command.parameter.ParameterOptions;
-import weomucat.duke.exception.DukeException;
 
 public class SnoozeCommand extends Command<SnoozeTaskCommandListener> {
 
@@ -13,10 +12,6 @@ public class SnoozeCommand extends Command<SnoozeTaskCommandListener> {
 
   private IndexParameter taskIndex;
   private IntervalParameter duration;
-
-  public SnoozeCommand(Collection<SnoozeTaskCommandListener> listeners) {
-    super(listeners);
-  }
 
   @Override
   public ParameterOptions getParameterOptions() {
@@ -27,9 +22,14 @@ public class SnoozeCommand extends Command<SnoozeTaskCommandListener> {
   }
 
   @Override
-  public void run() throws DukeException {
-    forEachListener(listener -> listener.snoozeTaskCommandUpdate(
+  Class<SnoozeTaskCommandListener> getListenersClass() {
+    return SnoozeTaskCommandListener.class;
+  }
+
+  @Override
+  DukeConsumer<SnoozeTaskCommandListener> getListenerConsumer() {
+    return listener -> listener.snoozeTaskCommandUpdate(
         this.taskIndex.value(),
-        this.duration.value()));
+        this.duration.value());
   }
 }

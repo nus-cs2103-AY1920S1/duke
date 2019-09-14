@@ -1,10 +1,9 @@
 package weomucat.duke.command;
 
-import java.util.Collection;
+import weomucat.duke.DukeConsumer;
 import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.command.parameter.IndexParameter;
 import weomucat.duke.command.parameter.ParameterOptions;
-import weomucat.duke.exception.DukeException;
 
 public class EventAtCommand extends Command<EventAtCommandListener> {
 
@@ -12,10 +11,6 @@ public class EventAtCommand extends Command<EventAtCommandListener> {
 
   private IndexParameter taskIndex;
   private IndexParameter scheduleIndex;
-
-  public EventAtCommand(Collection<EventAtCommandListener> listeners) {
-    super(listeners);
-  }
 
   @Override
   public ParameterOptions getParameterOptions() {
@@ -26,8 +21,13 @@ public class EventAtCommand extends Command<EventAtCommandListener> {
   }
 
   @Override
-  public void run() throws DukeException {
-    forEachListener(listener -> listener.eventAtCommandUpdate(this.taskIndex.value(),
-        this.scheduleIndex.value()));
+  Class<EventAtCommandListener> getListenersClass() {
+    return EventAtCommandListener.class;
+  }
+
+  @Override
+  DukeConsumer<EventAtCommandListener> getListenerConsumer() {
+    return listener -> listener.eventAtCommandUpdate(this.taskIndex.value(),
+        this.scheduleIndex.value());
   }
 }

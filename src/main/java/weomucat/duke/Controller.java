@@ -1,12 +1,15 @@
 package weomucat.duke;
 
-import java.util.ArrayList;
+import static weomucat.duke.Duke.THREAD_POLL_SLEEP_DURATION;
+
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.function.Supplier;
 import weomucat.duke.command.ByeCommand;
 import weomucat.duke.command.Command;
 import weomucat.duke.command.DeadlineCommand;
 import weomucat.duke.command.DeleteCommand;
+import weomucat.duke.command.DisplayErrorCommand;
 import weomucat.duke.command.DoneCommand;
 import weomucat.duke.command.EventAtCommand;
 import weomucat.duke.command.EventCommand;
@@ -14,25 +17,21 @@ import weomucat.duke.command.FindCommand;
 import weomucat.duke.command.ListCommand;
 import weomucat.duke.command.SnoozeCommand;
 import weomucat.duke.command.TodoCommand;
-import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.ByeCommandListener;
-import weomucat.duke.command.listener.DeleteTaskCommandListener;
-import weomucat.duke.command.listener.DoneTaskCommandListener;
-import weomucat.duke.command.listener.EventAtCommandListener;
-import weomucat.duke.command.listener.FindTaskCommandListener;
-import weomucat.duke.command.listener.ListTaskCommandListener;
-import weomucat.duke.command.listener.SnoozeTaskCommandListener;
+import weomucat.duke.command.listener.CommandListener;
 import weomucat.duke.command.parameter.ParameterOptions;
 import weomucat.duke.exception.DukeException;
+import weomucat.duke.exception.DukeRuntimeException;
 import weomucat.duke.exception.UnknownCommandException;
 import weomucat.duke.parser.CommandParser;
+import weomucat.duke.ui.Message;
 import weomucat.duke.ui.listener.UserInputListener;
 
 /**
  * https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
  * A Controller accepts user input and converts it to commands for the model or view.
  */
-public class Controller implements UserInputListener {
+public class Controller implements ByeCommandListener, UserInputListener {
 
   private static final String COMMAND_DEADLINE = "deadline";
   private static final String COMMAND_EVENT = "event";
@@ -46,154 +45,113 @@ public class Controller implements UserInputListener {
   private static final String COMMAND_BYE = "bye";
 
   private HashMap<String, Supplier<Command>> commands;
-  private ArrayList<AddTaskCommandListener> addTaskCommandListeners;
-  private ArrayList<DeleteTaskCommandListener> deleteTaskCommandListeners;
-  private ArrayList<DoneTaskCommandListener> doneTaskCommandListeners;
-  private ArrayList<EventAtCommandListener> eventAtCommandListeners;
-  private ArrayList<FindTaskCommandListener> findTaskCommandListeners;
-  private ArrayList<ListTaskCommandListener> listTaskCommandListeners;
-  private ArrayList<SnoozeTaskCommandListener> snoozeTaskCommandListeners;
-  private ArrayList<ByeCommandListener> byeCommandListeners;
+
+  private HeterogeneousContainers<CommandListener> commandListeners;
+
+  private boolean running;
+  private LinkedList<String> userInputQueue;
+  private LinkedList<Command<?>> commandQueue;
 
   /**
    * Default constructor.
    */
   public Controller() {
-    this.addTaskCommandListeners = new ArrayList<>();
-    this.deleteTaskCommandListeners = new ArrayList<>();
-    this.doneTaskCommandListeners = new ArrayList<>();
-    this.eventAtCommandListeners = new ArrayList<>();
-    this.findTaskCommandListeners = new ArrayList<>();
-    this.listTaskCommandListeners = new ArrayList<>();
-    this.snoozeTaskCommandListeners = new ArrayList<>();
-    this.byeCommandListeners = new ArrayList<>();
-
     this.commands = new HashMap<>();
-    this.commands.put(COMMAND_DEADLINE, () -> new DeadlineCommand(this.addTaskCommandListeners));
-    this.commands.put(COMMAND_EVENT, () -> new EventCommand(this.addTaskCommandListeners));
-    this.commands.put(COMMAND_TODO, () -> new TodoCommand(this.addTaskCommandListeners));
-    this.commands.put(COMMAND_DELETE, () -> new DeleteCommand(this.deleteTaskCommandListeners));
-    this.commands.put(COMMAND_DONE, () -> new DoneCommand(this.doneTaskCommandListeners));
-    this.commands.put(COMMAND_EVENT_AT, () -> new EventAtCommand(this.eventAtCommandListeners));
-    this.commands.put(COMMAND_FIND, () -> new FindCommand(this.findTaskCommandListeners));
-    this.commands.put(COMMAND_LIST, () -> new ListCommand(this.listTaskCommandListeners));
-    this.commands.put(COMMAND_SNOOZE, () -> new SnoozeCommand(this.snoozeTaskCommandListeners));
-    this.commands.put(COMMAND_BYE, () -> new ByeCommand(this.byeCommandListeners));
+    this.commands.put(COMMAND_DEADLINE, DeadlineCommand::new);
+    this.commands.put(COMMAND_EVENT, EventCommand::new);
+    this.commands.put(COMMAND_TODO, TodoCommand::new);
+    this.commands.put(COMMAND_DELETE, DeleteCommand::new);
+    this.commands.put(COMMAND_DONE, DoneCommand::new);
+    this.commands.put(COMMAND_EVENT_AT, EventAtCommand::new);
+    this.commands.put(COMMAND_FIND, FindCommand::new);
+    this.commands.put(COMMAND_LIST, ListCommand::new);
+    this.commands.put(COMMAND_SNOOZE, SnoozeCommand::new);
+    this.commands.put(COMMAND_BYE, ByeCommand::new);
+
+    this.commandListeners = new HeterogeneousContainers<>();
+
+    this.userInputQueue = new LinkedList<>();
+    this.commandQueue = new LinkedList<>();
+
+    // Add self to bye listener to stop running.
+    this.commandListeners.add(ByeCommandListener.class, this);
   }
 
   /**
-   * Adds a AddTaskCommandListener.
-   * When a AddTaskCommand is received, this listener will be notified.
+   * Adds a CommandListener to an ArrayList of CommandListeners.
+   * When a Command is received, all listeners in the ArrayList will be notified.
    *
-   * @param listener AddTaskCommand listener
+   * @param c        class of CommandListeners
+   * @param listener CommandListener
    */
-  void newAddTaskCommandListener(AddTaskCommandListener listener) {
-    this.addTaskCommandListeners.add(listener);
-  }
-
-  /**
-   * Adds a DeleteTaskCommandListener.
-   * When a DeleteTaskCommand is received, this listener will be notified.
-   *
-   * @param listener DeleteTaskCommand listener
-   */
-  void newDeleteTaskCommandListener(DeleteTaskCommandListener listener) {
-    this.deleteTaskCommandListeners.add(listener);
-  }
-
-  /**
-   * Adds a DoneTaskCommandListener.
-   * When a DoneTaskCommand is received, this listener will be notified.
-   *
-   * @param listener DoneTaskCommand listener
-   */
-  void newDoneTaskCommandListener(DoneTaskCommandListener listener) {
-    this.doneTaskCommandListeners.add(listener);
-  }
-
-  /**
-   * Adds a EventAtCommandListener to the Controller.
-   * When a FindTaskCommand is received, this listener will be notified.
-   *
-   * @param listener EventAtCommand listener
-   */
-  void newEventAtCommandListener(EventAtCommandListener listener) {
-    this.eventAtCommandListeners.add(listener);
-  }
-
-  /**
-   * Adds a FindTaskCommandListener to the Controller.
-   * When a FindTaskCommand is received, this listener will be notified.
-   *
-   * @param listener FindTaskCommand listener
-   */
-  void newFindTaskCommandListener(FindTaskCommandListener listener) {
-    this.findTaskCommandListeners.add(listener);
-  }
-
-  /**
-   * Adds a ListTaskCommandListener to the Controller.
-   * When a ListTaskCommand is received, this listener will be notified.
-   *
-   * @param listener ListTaskCommand listener
-   */
-  void newListTaskCommandListener(ListTaskCommandListener listener) {
-    this.listTaskCommandListeners.add(listener);
-  }
-
-  /**
-   * Adds a SnoozeTaskCommandListener to the Controller.
-   * When a SnoozeTaskCommand is received, this listener will be notified.
-   *
-   * @param listener SnoozeTaskCommand listener
-   */
-  void newSnoozeTaskCommandListener(SnoozeTaskCommandListener listener) {
-    this.snoozeTaskCommandListeners.add(listener);
-  }
-
-  /**
-   * Adds a ByeCommandListener to the Controller.
-   * When a ByeCommand is received, this listener will be notified.
-   *
-   * @param listener ByeCommand listener
-   */
-  void newByeCommandListener(ByeCommandListener listener) {
-    this.byeCommandListeners.add(listener);
+  <T extends CommandListener> void addListener(Class<T> c, T listener) {
+    this.commandListeners.add(c, listener);
   }
 
   @Override
-  public void byeUpdate() throws DukeException {
-    commands.get(COMMAND_BYE).get().run();
+  public void byeCommandUpdate() {
+    this.running = false;
   }
 
   @Override
-  public void userInputUpdate(String userInput) throws DukeException {
-    assert userInput != null;
+  public void userInputUpdate(String userInput) {
+    this.userInputQueue.addLast(userInput);
+  }
 
-    // Initialize parser for this line of user input.
-    CommandParser commandParser = new CommandParser(userInput);
+  void addCommand(Command<?> command) {
+    this.commandQueue.addLast(command);
+  }
 
-    // Get the command of the user input.
-    String commandString = commandParser.getCommand();
+  /**
+   * Block main thread to query for commands & user input.
+   */
+  public void run() {
+    this.running = true;
 
-    // Resolve the string command to a Supplier<Command> object.
-    Supplier<Command> supplier = commands.get(commandString);
+    // Main loop to get user input.
+    while (this.running) {
+      try {
+        if (!this.commandQueue.isEmpty()) {
+          Command<?> command = this.commandQueue.removeFirst();
 
-    // Command not known, throw an exception.
-    if (supplier == null) {
-      throw new UnknownCommandException();
+          // Finally, run the command.
+          command.run(this.commandListeners);
+        } else if (!this.userInputQueue.isEmpty()) {
+          String userInput = this.userInputQueue.removeFirst();
+
+          // Initialize parser for this line of user input.
+          CommandParser commandParser = new CommandParser(userInput);
+
+          // Get the command of the user input.
+          String commandString = commandParser.getCommand();
+
+          // Resolve the string command to a Supplier<Command> object.
+          Supplier<Command> supplier = commands.get(commandString);
+
+          // Command not known, throw an exception.
+          if (supplier == null) {
+            throw new UnknownCommandException();
+          }
+
+          // Get command from supplier.
+          Command<?> command = supplier.get();
+
+          // Get the parameter options of the command.
+          ParameterOptions options = command.getParameterOptions();
+
+          // Parse userInput and set the parameters.
+          commandParser.parse(options);
+
+          // Add command to queue.
+          this.commandQueue.addLast(command);
+        } else {
+          Thread.sleep(THREAD_POLL_SLEEP_DURATION);
+        }
+      } catch (DukeException | DukeRuntimeException e) {
+        this.addCommand(new DisplayErrorCommand(new Message("☹ OOPS!!! " + e.getMessage())));
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     }
-
-    // Get command from supplier.
-    Command<?> command = supplier.get();
-
-    // Get the parameter options of the command.
-    ParameterOptions options = command.getParameterOptions();
-
-    // Parse userInput and set the parameters.
-    commandParser.parse(options);
-
-    // Finally, run the command.
-    command.run();
   }
 }

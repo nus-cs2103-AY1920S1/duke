@@ -16,9 +16,9 @@ import weomucat.duke.date.Interval;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidIndexException;
 import weomucat.duke.exception.StorageException;
+import weomucat.duke.storage.TaskListStorage;
 import weomucat.duke.task.listener.ListTaskListener;
 import weomucat.duke.task.listener.ModifyTaskListener;
-import weomucat.duke.task.listener.SaveTaskListListener;
 import weomucat.duke.task.listener.TaskListSizeListener;
 import weomucat.duke.ui.Message;
 
@@ -38,30 +38,18 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
   private ArrayList<ListTaskListener> listTaskListeners;
   private ArrayList<ModifyTaskListener> modifyTaskListeners;
   private ArrayList<TaskListSizeListener> taskListSizeListeners;
-  private ArrayList<SaveTaskListListener> saveTaskListListeners;
+  private ArrayList<TaskListStorage> taskListStorages;
 
-  public TaskManager() {
-    this.tasks = new TaskList();
-    init();
-  }
 
   /**
-   * Creates a TaskManager from an existing TaskList.
-   *
-   * @param tasks an existing list of tasks
+   * Creates a TaskManager.
    */
-  public TaskManager(TaskList tasks) {
-    assert tasks != null;
-
-    this.tasks = tasks;
-    init();
-  }
-
-  private void init() {
+  public TaskManager() {
+    this.tasks = new TaskList();
     this.listTaskListeners = new ArrayList<>();
     this.modifyTaskListeners = new ArrayList<>();
     this.taskListSizeListeners = new ArrayList<>();
-    this.saveTaskListListeners = new ArrayList<>();
+    this.taskListStorages = new ArrayList<>();
   }
 
   /**
@@ -95,13 +83,22 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
   }
 
   /**
-   * Adds a SaveTaskListListener.
-   * Whenever the task list needs to be saved, this listener will be notified.
+   * Adds a TaskListStorage.
+   * Whenever the task list needs to be loaded/saved, this storage will be called.
    *
-   * @param listener saveTaskList listener
+   * @param storage a task list storage
    */
-  public void newSaveTaskListListener(SaveTaskListListener listener) {
-    this.saveTaskListListeners.add(listener);
+  public void newTaskListStorage(TaskListStorage storage) {
+    this.taskListStorages.add(storage);
+  }
+
+  /**
+   * Loads tasks from a task list storage.
+   */
+  public void load() throws StorageException {
+    for (TaskListStorage storage : this.taskListStorages) {
+      this.tasks = storage.load();
+    }
   }
 
   /**
@@ -264,8 +261,8 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
       listener.modifyTaskUpdate(message, task);
     }
 
-    for (SaveTaskListListener listener : this.saveTaskListListeners) {
-      listener.saveTaskListUpdate(this.tasks);
+    for (TaskListStorage storage : this.taskListStorages) {
+      storage.save(this.tasks);
     }
   }
 

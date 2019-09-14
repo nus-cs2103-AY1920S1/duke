@@ -1,7 +1,17 @@
 package weomucat.duke;
 
 import java.util.Locale;
-import weomucat.duke.exception.StorageException;
+import weomucat.duke.command.DisplayMessageCommand;
+import weomucat.duke.command.LoadTasksCommand;
+import weomucat.duke.command.listener.AddTaskCommandListener;
+import weomucat.duke.command.listener.ByeCommandListener;
+import weomucat.duke.command.listener.DeleteTaskCommandListener;
+import weomucat.duke.command.listener.DisplayCommandListener;
+import weomucat.duke.command.listener.DoneTaskCommandListener;
+import weomucat.duke.command.listener.EventAtCommandListener;
+import weomucat.duke.command.listener.FindTaskCommandListener;
+import weomucat.duke.command.listener.ListTaskCommandListener;
+import weomucat.duke.command.listener.SnoozeTaskCommandListener;
 import weomucat.duke.storage.TaskListStorage;
 import weomucat.duke.task.TaskManager;
 import weomucat.duke.ui.Message;
@@ -53,44 +63,42 @@ public class Duke {
     this.uiManager.addUi(new CommandLineUi());
     this.uiManager.addUi(graphicalUi);
 
-    // Try to initialize TaskList from disk if database exists.
-    if (this.storage.exists()) {
-      try {
-        this.taskManager = new TaskManager(this.storage.load());
-        this.uiManager.displayMessage(new Message("Loaded tasks from disk."));
-      } catch (StorageException e) {
-        this.uiManager.displayError(new Message(e.getMessage()));
-      }
-    }
-
     // Set up event listeners
     this.uiManager.newUserInputListener(this.controller);
 
-    this.controller.newAddTaskCommandListener(this.taskManager);
-    this.controller.newDeleteTaskCommandListener(this.taskManager);
-    this.controller.newDoneTaskCommandListener(this.taskManager);
-    this.controller.newEventAtCommandListener(this.taskManager);
-    this.controller.newFindTaskCommandListener(this.taskManager);
-    this.controller.newListTaskCommandListener(this.taskManager);
-    this.controller.newSnoozeTaskCommandListener(this.taskManager);
-    this.controller.newByeCommandListener(this.uiManager);
+    this.controller.addListener(AddTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(DeleteTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(DoneTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(EventAtCommandListener.class, this.taskManager);
+    this.controller.addListener(FindTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(ListTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(SnoozeTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(ByeCommandListener.class, this.uiManager);
+    this.controller.addListener(DisplayCommandListener.class, this.uiManager);
 
-    this.taskManager.newSaveTaskListListener(this.storage);
-
+    this.taskManager.newTaskListStorage(this.storage);
     this.taskManager.newModifyTaskListener(this.uiManager);
     this.taskManager.newTaskListSizeListener(this.uiManager);
     this.taskManager.newListTaskListener(this.uiManager);
 
+    // Tell uis to start accepting user input.
+    this.uiManager.acceptUserInput();
+
     // Greet user
-    this.uiManager.displayMessage(new Message(
+    this.controller.addCommand(new DisplayMessageCommand(new Message(
         " ____        _        ",
         "|  _ \\ _   _| | _____ ",
         "| | | | | | | |/ / _ \\",
         "| |_| | |_| |   <  __/",
-        "|____/ \\__,_|_|\\_\\___|"));
-    this.uiManager.displayMessage(new Message("Hello! I'm Duke!", "What can I do for you?"));
+        "|____/ \\__,_|_|\\_\\___|")));
 
-    // Tell uis to start listening for user input.
-    this.uiManager.acceptUserInput();
+    // Load tasks
+    this.controller.addCommand(new LoadTasksCommand());
+
+    this.controller.addCommand(new DisplayMessageCommand(
+        new Message("Hello! I'm Duke!", "What can I do for you?")));
+
+    // Block main thread to query for user input & commands.
+    this.controller.run();
   }
 }

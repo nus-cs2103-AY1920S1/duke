@@ -1,8 +1,9 @@
 package weomucat.duke.command;
 
 import java.util.Collection;
+import weomucat.duke.DukeConsumer;
+import weomucat.duke.HeterogeneousContainers;
 import weomucat.duke.command.listener.CommandListener;
-import weomucat.duke.command.listener.CommandListenerConsumer;
 import weomucat.duke.command.parameter.ParameterOptions;
 import weomucat.duke.exception.DukeException;
 
@@ -13,18 +14,6 @@ import weomucat.duke.exception.DukeException;
  */
 public abstract class Command<E extends CommandListener> {
 
-  private Collection<E> listeners;
-
-  Command(Collection<E> listeners) {
-    this.listeners = listeners;
-  }
-
-  void forEachListener(CommandListenerConsumer<E> consumer) throws DukeException {
-    for (E listener : this.listeners) {
-      consumer.accept(listener);
-    }
-  }
-
   /**
    * Gets the parameter options of this Command.
    *
@@ -32,10 +21,22 @@ public abstract class Command<E extends CommandListener> {
    */
   public abstract ParameterOptions getParameterOptions();
 
+  abstract Class<E> getListenersClass();
+
+  abstract DukeConsumer<E> getListenerConsumer();
+
   /**
-   * Perform some instructions.
+   * Update listeners defined in getListenersClass().
    *
    * @throws DukeException If there is anything wrong with processing.
    */
-  public abstract void run() throws DukeException;
+  public void run(HeterogeneousContainers<CommandListener> classListeners) throws DukeException {
+    Class<E> c = getListenersClass();
+
+    // Get listeners from containers.
+    Collection<E> listeners = classListeners.get(c);
+    for (E listener : listeners) {
+      getListenerConsumer().accept(listener);
+    }
+  }
 }

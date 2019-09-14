@@ -11,18 +11,17 @@ import weomucat.duke.task.TaskList;
 import weomucat.duke.task.listener.SaveTaskListListener;
 
 /**
- * TaskListStorage is responsible for serializing TaskListTasks and deserializing TaskListTasks,
- * before saving to disk and loading from disk respectively.
+ * TaskListStorage is responsible for serializing and deserializing a TaskList,
+ * before saving and loading from disk respectively.
  */
-public class TaskListStorage extends Storage<TaskList> implements SaveTaskListListener {
+public class TaskListStorage extends Storage<TaskList> {
 
-  // TODO: Saving with JSON
   public TaskListStorage(String path) {
     super(path);
   }
 
   @Override
-  void save(TaskList tasks) throws StorageException {
+  public void save(TaskList tasks) throws StorageException {
     try {
       FileOutputStream fileOutputStream = new FileOutputStream(this.path);
       ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -57,12 +56,7 @@ public class TaskListStorage extends Storage<TaskList> implements SaveTaskListLi
     } catch (ClassNotFoundException | ClassCastException e) {
       throw new StorageException("I do not know how to deserialize this file.");
     } catch (IOException e) {
-      throw new StorageException("An I/O error occurred.");
+      throw new StorageException("I could not load.");
     }
-  }
-
-  @Override
-  public void saveTaskListUpdate(TaskList tasks) throws StorageException {
-    save(tasks);
   }
 }

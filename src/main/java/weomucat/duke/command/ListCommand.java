@@ -1,20 +1,15 @@
 package weomucat.duke.command;
 
-import java.util.Collection;
+import weomucat.duke.DukeConsumer;
 import weomucat.duke.command.listener.ListTaskCommandListener;
 import weomucat.duke.command.parameter.FlagParameter;
 import weomucat.duke.command.parameter.ParameterOptions;
-import weomucat.duke.exception.DukeException;
 
 public class ListCommand extends Command<ListTaskCommandListener> {
 
   private static final String PARAMETER_ALL = "/all";
 
   private FlagParameter all;
-
-  public ListCommand(Collection<ListTaskCommandListener> listeners) {
-    super(listeners);
-  }
 
   @Override
   public ParameterOptions getParameterOptions() {
@@ -24,7 +19,12 @@ public class ListCommand extends Command<ListTaskCommandListener> {
   }
 
   @Override
-  public void run() throws DukeException {
-    forEachListener(listener -> listener.listTaskCommandUpdate(this.all.value()));
+  Class<ListTaskCommandListener> getListenersClass() {
+    return ListTaskCommandListener.class;
+  }
+
+  @Override
+  DukeConsumer<ListTaskCommandListener> getListenerConsumer() {
+    return listener -> listener.listTaskCommandUpdate(this.all.value());
   }
 }

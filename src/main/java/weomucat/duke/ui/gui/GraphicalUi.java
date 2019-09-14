@@ -9,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import weomucat.duke.Pair;
-import weomucat.duke.exception.DukeException;
 import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
 import weomucat.duke.ui.Message;
@@ -75,11 +74,13 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   @Override
   public void stop() throws Exception {
     super.stop();
+    /*
     if (this.running) {
       for (UserInputListener listener : this.userInputListeners) {
         listener.byeUpdate();
       }
     }
+     */
   }
 
   @Override
@@ -118,11 +119,6 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   }
 
   @Override
-  public void byeUpdate() {
-
-  }
-
-  @Override
   public void listTaskUpdate(Message message, NumberedTaskList tasks) {
     displayMessage(message);
     for (Pair<Integer, Task> pair : tasks) {
@@ -149,7 +145,7 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   }
 
   @Override
-  public void userInputUpdate(String userInput) throws DukeException {
+  public void userInputUpdate(String userInput) {
     for (UserInputListener listener : this.userInputListeners) {
       listener.userInputUpdate(userInput);
     }

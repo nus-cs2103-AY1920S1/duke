@@ -32,6 +32,9 @@ Example of usage:
 
 Expected outcome:
 
+![Image of Todo Outcome]
+(https://github.com/zhixianggg/duke/blob/master/docs/images/ug-todo.png)
+
 ### 2. `event` - Add a new event task
 
 `event {taskName} /at {d MMM yyyy HHmm}`
@@ -99,7 +102,7 @@ Example:
 
 Expected outcome:
 
-###8. `delete` - Delete task
+### 8. `delete` - Delete task
 
 `delete {task_number}`
 
@@ -109,7 +112,7 @@ Example:
 
 Expected outcome:
 
-###9. `bye` - Exit
+### 9. `bye` - Exit
 
 Example:
 

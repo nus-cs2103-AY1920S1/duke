@@ -1,13 +1,14 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Stores the tasks of the user.
  */
 public class TaskList implements Serializable {
     private List<Task> taskList;
-
+    private List<Reminder> reminders = new ArrayList<>();
     public TaskList() {
         taskList = new ArrayList<>();
     }
@@ -76,5 +77,27 @@ public class TaskList implements Serializable {
             }
         }
         return matchedTasks;
+    }
+
+    public String getReminders() {
+        StringBuilder sb = new StringBuilder();
+        if (reminders.isEmpty()) {
+            sb.append("There are no reminders right now!");
+        } else {
+            sb.append("Here are your upcoming tasks: ");
+            for (Reminder reminder : reminders) {
+                sb.append("\n" + reminder.toString());
+            }
+        }
+        return sb.toString();
+    }
+
+    public void createReminders() {
+        for (Task task : taskList) {
+            Optional<Reminder> potentialReminder = Reminder.createReminderIfValid(task);
+            if (potentialReminder.isPresent()) {
+                reminders.add(potentialReminder.get());
+            }
+        }
     }
 }

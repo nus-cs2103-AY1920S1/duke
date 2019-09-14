@@ -174,14 +174,16 @@ public class Storage {
         if (!taskList.isEmpty()) {
             for (Task task : taskList) {
                 if (task instanceof Todo) {
-                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                            .append(task.getName()).append("\n");
+                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0)
+                            .append(" | ").append(task.getName()).append("\n");
                 } else if (task instanceof Event) {
-                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                            .append(task.getName()).append(" | ").append(((Event) task).getTiming()).append("\n");
+                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0)
+                            .append(" | ").append(task.getName()).append(" | ").append(((Event) task).getTiming())
+                            .append("\n");
                 } else if (task instanceof Deadline) {
-                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0).append(" | ")
-                            .append(task.getName()).append(" | ").append(((Deadline) task).getFormattedDateTime())
+                    myStringBuilder.append(task.getShortForm()).append(" | ").append(task.getStatus() ? 1 : 0)
+                            .append(" | ").append(task.getName()).append(" | ")
+                            .append(((Deadline) task).getFormattedDateTime())
                             .append("\n");
                 }
             }

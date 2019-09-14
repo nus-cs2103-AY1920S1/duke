@@ -1,8 +1,16 @@
-# Setting up
+# User Guide
 
-**Prerequisites**
+### What is Duke?
+Duke is your friendly chatbot which helps to keep track of your daily tasks! It's a To-Do List where you can add and 
+modify your tasks.
 
-* JDK 11
+**User Commands**
+
+* `list` : Displays information about your tasks.
+* `bye` : Quits Duke.
+* `add` : Adds a new task into your list.
+    * To-Do's : `add todo <Description>`
+    * Deadlines : `add deadline <Description> 
 * Recommended: IntelliJ IDE
 * Fork this repo to your GitHub account and clone the fork to your computer
 

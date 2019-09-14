@@ -53,7 +53,9 @@ public class TaskList {
             Task t = taskArray.get(i);
             String[] taskSplit = t.getDescription().split(" ");
             for (int j = 0; j < taskSplit.length; j++) {
-                if (taskSplit[j].equalsIgnoreCase(inputString)) {
+                String toCheck = taskSplit[j];
+                System.out.println(toCheck);
+                if (toCheck.equalsIgnoreCase(inputString)) {
                     returnedTaskList.add(t);
                 }
             }

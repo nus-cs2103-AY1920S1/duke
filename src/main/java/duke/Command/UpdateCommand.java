@@ -8,6 +8,7 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Timeable;
 import duke.task.Task;
 import java.time.LocalDateTime;
 
@@ -64,7 +65,7 @@ public class UpdateCommand extends Command {
                 throw new DukeException("ToDos do not have time!");
             }
             LocalDateTime ldt = DateTimeHelper.formatInput(updateDetails[1]);
-            taskToUpdate.updateTime(ldt);
+            ((Timeable) taskToUpdate).updateTime(ldt);
             break;
         default:
             throw new DukeException("OOPS!!! Please specify if you want to modify the description or time");

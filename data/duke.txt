@@ -1,9 +1,2 @@
 [T]|false|borrow book
-[T]|false|borrow book
-[T]|false|borrow book
-[T]|false|borrow book
-[T]|false|borrow book
-[T]|false|sleep
-[T]|false|slslsp
-[E]|false|find|2019-09-09 1900
-[T]|false|borro wobok
+[D]|false|hello world|2019-09-09 0900

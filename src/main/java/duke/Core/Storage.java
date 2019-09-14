@@ -3,11 +3,11 @@ package duke.core;
 import duke.helper.DateTimeHelper;
 import duke.helper.DukeException;
 import duke.task.Task;
+import duke.task.Timeable;
 import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -55,7 +55,11 @@ public class Storage {
         StringBuffer toWrite = new StringBuffer("");
         for (int i = 0; i < taskEntered.size(); i++) {
             Task t = taskEntered.get(i);
-            String appendedString = t.getType() + "|" + t.getIsDone() + "|" + t.getDescription() + "\n";
+            String appendedString = t.getType() + "|" + t.getIsDone() + "|" + t.getDescription();
+            if (t instanceof Timeable) {
+                appendedString = appendedString + "|" + ((Timeable) t).getTime();
+            }
+            appendedString = appendedString + "\n";
             toWrite.append(appendedString);
         }
         return toWrite.toString();

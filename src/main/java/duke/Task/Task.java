@@ -1,7 +1,5 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -45,10 +43,6 @@ public abstract class Task {
         return (isDone ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]"); //return tick or X symbols
     }
 
-    public void updateTime(LocalDateTime updtTime) {
-        return;
-    }
-
     /**
      * Called to provide description of event.
      *
@@ -61,7 +55,5 @@ public abstract class Task {
     public abstract String getType();
 
     public abstract String getDescription();
-
-//    public abstract void updateTime(LocalDateTime ldt);
 
 }

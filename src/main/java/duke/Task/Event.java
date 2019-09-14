@@ -3,7 +3,7 @@ package duke.task;
 import duke.helper.DateTimeHelper;
 import java.time.LocalDateTime;
 
-public class Event extends Task {
+public class Event extends Task implements Timeable {
 
     private static final String TASK_TYPE = "[E]";
     protected LocalDateTime eventTime;
@@ -19,7 +19,6 @@ public class Event extends Task {
         this.eventTime = eventTime;
     }
 
-    @Override
     public void updateTime(LocalDateTime updtTime) {
         this.eventTime = updtTime;
     }
@@ -34,12 +33,21 @@ public class Event extends Task {
     }
 
     /**
-     * Abstract method implemented from parent Task.
+     * Returns a string based on the event description.
      *
      * @return the description of the task to be placed into Storage class.
      */
     public String getDescription() {
-        return this.description + "|" + DateTimeHelper.formatOutput(this.eventTime);
+        return this.description;
+    }
+
+    /**
+     * Returns a string based on the formatted LocalDateTime time.
+     *
+     * @return the time of the task.
+     */
+    public String getTime() {
+        return DateTimeHelper.formatOutput(this.eventTime);
     }
 
     /**

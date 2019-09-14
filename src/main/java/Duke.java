@@ -29,6 +29,9 @@ public class Duke {
     private Parser parser;
     private Exiter exiter;
 
+    /**
+     * Constructor method. This will initialize the other classes that Duke requires to operate.
+     */
     public Duke() {
         this.ui = new Ui();
         this.dateParser = new DateParser(DATE_FORMAT);
@@ -39,10 +42,16 @@ public class Duke {
         this.taskList = storage.readDataFile();
     }
 
+    /**
+     * Instructs the associated Ui object to print a greeting.
+     */
     public String printGreeting() {
         return this.ui.printGreeting();
     }
     
+    /**
+     * Runs the Duke instance.
+     */
     public void run() {
 
         printGreeting();
@@ -56,8 +65,9 @@ public class Duke {
         }
     }
 
-    // Processes a single line of input by identifying the command that was given, then delegating it
-    // to a subfunction to handle the command call.
+    /** Processes a single line of input by identifying the command that was given, then delegating it
+     *  to a subfunction to handle the command call.
+     */
     public String processInputLine(String line) {
 
         try {

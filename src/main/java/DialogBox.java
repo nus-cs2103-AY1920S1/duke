@@ -20,8 +20,8 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
 
     private static final String STYLE_DIALOG_DUKE = 
-        "-fx-background-color: PALETURQUOISE;" +
-        "-fx-font-weight: BOLD;";
+        "-fx-background-color: PALETURQUOISE;"
+        + "-fx-font-weight: BOLD;";
 
     @FXML
     private Label dialog;
@@ -52,11 +52,17 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets a dialog box used by the user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         return db;
     }
 
+    /**
+     * Gets a dialog box used by Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

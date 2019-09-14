@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -25,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage;
     private Image dukeImage;
 
+    /**
+     * Initializes the main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -33,6 +37,9 @@ public class MainWindow extends AnchorPane {
         dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     }
 
+    /**
+     * Sets the Duke implementation that controls this window.
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(

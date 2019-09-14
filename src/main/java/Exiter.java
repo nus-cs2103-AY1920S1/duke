@@ -3,6 +3,9 @@ import java.util.TimerTask;
 
 public class Exiter {
 
+    /**
+     * Shuts down the program after a specified duration (in milliseconds).
+     */
     public void exitAfter(int ms) {
         assert ms >= 0 : "exitAfter was passed a negative argument";
         

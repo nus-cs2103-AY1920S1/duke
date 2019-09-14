@@ -22,11 +22,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String date = formatDate(by);
-        if (getIsCorrectFormat()) {
-            return "[D]" + super.toString() + description + " (by: " + date + ")";
-        } else {
-            return "Invalid date format!";
-        }
+        return "[D]" + super.toString() + " " + description + " (by: " + by + ")";
     }
 }

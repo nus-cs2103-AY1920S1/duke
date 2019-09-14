@@ -132,6 +132,7 @@ public class Storage {
                     break;
                 }
             }
+            Ui.printLine();
             Ui.printIndent();
             System.out.println("Your file has been loaded! :)");
             tempList = new ArrayList<Task>(taskList);

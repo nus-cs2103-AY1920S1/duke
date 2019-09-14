@@ -1,15 +1,26 @@
+import java.io.IOException;
+
 public class Command {
 
-    private String action;
-    private String task;
+    protected String action;
+    protected String variable;
+    private static boolean canExit = false;
 
-    public Command(action, task) {
+    public Command(String action) {
         this.action = action;
-        this.task = task;
     }
 
-    public String nextCommand(String input) {
-        String text = input;
-        switch ()
+    public Command(String action, String variable) {
+        this.action = action;
+        this.variable = variable;
+    }
+
+    public boolean shouldExit() {
+        return canExit;
+    }
+
+    public boolean exitSwitch() { return canExit = !canExit; }
+
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
     }
 }

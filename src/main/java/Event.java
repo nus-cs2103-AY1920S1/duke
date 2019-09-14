@@ -23,11 +23,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String date = formatDate(when);
-        if (getIsCorrectFormat()) {
-            return "[E]" + super.toString() + description + " (at: " + date + ")";
-        } else {
-            return "Invalid date format!";
-        }
+        return "[E]" + super.toString() + " " + description + " (at: " + when + ")";
     }
 }

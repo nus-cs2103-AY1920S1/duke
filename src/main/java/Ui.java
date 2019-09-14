@@ -43,80 +43,10 @@ public class Ui {
                 + "    Delete \n" + "        Eg. delete __(number)__ or delete all\n"
                 + "    Done \n" + "        Eg. done __(number)__\n"
                 + "    Find \n" + "        Eg. find __(keyword)__\n"
-                + "    List \n");
+                + "    List \n" + "    Bye\n");
         printIndent();
         System.out.println("Ill be adding in more features soon! Please be patient! :)");
         printLine();
-    }
-
-    /**
-     * Scans the input from the user and does the respective
-     * command based on the input. Prints out error messages as well.
-     */
-    public void nextCommand() {
-        while (scan.hasNext()) {
-            try {
-                String text = scan.nextLine().trim();
-                if (text.equals("bye")) {
-                    Ui.printBye();
-                    break;
-                } else if (text.equals("list")) {
-                    printList();
-                } else if (text.equals("delete all")) {
-                    listTask.deleteAllCommand(text);
-                } else if (text.contains(" ")) {
-                    String[] splittedText = text.split(" ");
-                    if (splittedText[0].equals("done")) {
-                        int num = text.indexOf(" ");
-                        int taskNumber = Integer.parseInt(text.substring(num + 1, num + 2));
-                        if (taskNumber > 0 && taskNumber <= TaskList.listOfTasks.size()) {
-                            printDone(taskNumber);
-                        } else {
-                            throw new DukeException("☹ OOPS!!! There is no such task "
-                                    + "number in your list of tasks!! Please enter a valid number!");
-                        }
-                    } else if (splittedText[0].equals("delete")) {
-                        listTask.deleteCommand(text);
-                    } else if (splittedText[0].equals("find")) {
-                        ArrayList<String> strList = findCommand(splittedText[1]);
-                        printKeywordList(strList);
-                    } else {
-                        if (splittedText[0].equals("todo")) {
-                            listTask.toDoCommand(text);
-                        } else if (splittedText[0].equals("deadline")
-                                && text.contains("/") && text.contains("by")) {
-                            listTask.deadlineCommand(text);
-                        } else if (splittedText[0].equals("event")
-                                && text.contains("/") && text.contains("at")) {
-                            listTask.eventCommand(text);
-                        } else {
-                            printLine();
-                            printIndent();
-                            throw new DukeException("☹ OOPSY DAISY!!! Please follow the correct format! :<");
-                        }
-                    }
-                } else {
-                    printLine();
-                    printIndent();
-                    switch (text) {
-                    case "todo":
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty. "
-                                + "It must be in proper format (i.e. todo clean table).");
-                    case "deadline":
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty. "
-                                + "It must be in proper format (i.e. deadline return book /by 23 Aug).");
-                    case "event":
-                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty. "
-                                + "It must be in proper format (i.e. event Don's birthday /at 15 Jan 3pm).");
-                    default:
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-                }
-            } catch (DukeException | IOException e) {
-                System.out.println(e);
-                printLine();
-            }
-        }
     }
 
     /**
@@ -139,14 +69,24 @@ public class Ui {
     }
 
     /**
+     * Prints a statement informing the user that the bot
+     * has added the task into the list.
+     */
+    public String printGI() {
+        Ui.printIndent();
+        return "Got it. I've added this task:";
+    }
+
+    /**
      * Ends the chat bot.
      */
-    static String printBye() {
-        printLine();
+    public void printBye() {
         printIndent();
-        //System.out.println("Bye. Hope to see you again soon!");
-        return "Bye. Hope to see you again soon!";
-        //printLine();
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public String readCommand() {
+        return scan.nextLine();
     }
 
     /**
@@ -176,11 +116,31 @@ public class Ui {
     }
 
     /**
+     * Prints a statement to tell the user that the task has been removed.
+     */
+    public String printRemove() {
+        Ui.printIndent();
+        return "Noted. I've removed this task.";
+    }
+
+    /**
+     * Prints the number of tasks in the list.
+     *
+     * @throws IOException If the named file exists but is a directory rather than a regular file,
+     *     does not exist but cannot be created, or cannot be opened for any other reason.
+     */
+    public static String printNumOfTasks() throws IOException {
+        Ui.printIndent();
+        return "Now you have " + Ui.getNumOfTasks() + " tasks in the list.";
+        //Ui.printLine();
+    }
+
+    /**
      * Prints the list of tasks that has been added by the user.
      *
      * @throws FileNotFoundException if there is no such file that contains the tasks.
      */
-    static String printList() throws FileNotFoundException {
+    static String printList() throws FileNotFoundException { //WHY NEVER USEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
         printLine();
         printIndent();
         if (TaskList.listOfTasks.isEmpty()) {
@@ -197,7 +157,6 @@ public class Ui {
             }
             return "";
         }
-        //printLine();
     }
 
     /**
@@ -224,59 +183,7 @@ public class Ui {
         System.out.println("Nothing in file!");
     }
 
-    /**
-     * Method to find the keyword searched
-     * by the user.
-     *
-     * @param wordToFind Keyword entered by user.
-     * @return Returns an array list of tasks that contains the keyword.
-     * @throws IOException If the named file exists
-     *     but is a directory rather than a regular file,
-     *     does not exist but cannot be created, or
-     *     cannot be opened for any other reason.
-     * @throws DukeException This will be thrown out if there
-     *     is no matching words to the key word searched
-     *     by the user in all the tasks.
-     */
-    public ArrayList<String> findCommand(String wordToFind) throws IOException, DukeException {
-        File f = new File(Storage.file);
-        Scanner sc = new Scanner(f);
-        ArrayList<String> tempList = new ArrayList<>();
-        if (Storage.countLines(Storage.file) == 0) {
-            printIndent();
-            throw new DukeException("No such word is found in any of the tasks.");
-        } else {
-            int num = 1;
-            while (sc.hasNext()) {
-                String text = sc.nextLine();
-                if (text.contains(wordToFind)) {
-                    String task = num + "." + text;
-                    tempList.add(task);
-                    num++;
-                }
-            }
-        }
-        System.out.println("5");
-        return tempList;
-    }
-
-    /**
-     * Prints the Start of the message that prints
-     * out the list of tasks that matches the keyword
-     * inputted by the user.
-     *
-     * @param list Prints out the array list of tasks
-     *             that contains the keyword.
-     */
-    public String printKeywordList(ArrayList<String> list) {
-        printLine();
-        printIndent();
-        System.out.println("Here are the matching tasks in your list!");
-        for (String str : list) {
-            printIndent();
-            System.out.println(str);
-        }
-        printLine();
-        return "";
+    public void showError(String error) {
+        System.out.println(error);
     }
 }

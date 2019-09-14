@@ -46,28 +46,6 @@ public class Task {
     }
 
     /**
-     * Prints a statement informing the user that the bot
-     * has added the task into the list.
-     */
-    public String printGI() {
-        Ui.printLine();
-        Ui.printIndent();
-        return "Got it. I've added this task:";
-    }
-
-    /**
-     * Prints the number of tasks in the list.
-     *
-     * @throws IOException If the named file exists but is a directory rather than a regular file,
-     *     does not exist but cannot be created, or cannot be opened for any other reason.
-     */
-    public String printNumOfTasks() throws IOException {
-        Ui.printIndent();
-        return "Now you have " + Ui.getNumOfTasks() + " tasks in the list.";
-        //Ui.printLine();
-    }
-
-    /**
      * Method to get the String for whether
      * the task is done or not.
      *
@@ -77,55 +55,5 @@ public class Task {
         return "[" + getStatusIcon() + "]";
     }
 
-    /**
-     * Prints a statement to tell the user that the task has been removed.
-     */
-    public String printRemove() {
-        Ui.printLine();
-        Ui.printIndent();
-        return "Noted. I've removed this task.";
-    }
 
-    /**
-     * Method to format the date into the appropriate format.
-     * For example, 10/02/2012 1800 to 10th of February 2012, 6:00 pm.
-     *
-     * @param date Takes in a valid date to format it.
-     * @return Returns the correctly formatted date with the
-     *     appropriate strings.
-     */
-    public String formatDate(String date) {
-        String formatted = date;
-        if (!date.contains(")")) {
-            try {
-                Date d = new SimpleDateFormat("dd/MM/yyyy hhmm").parse(date);
-                String day = new SimpleDateFormat("dd").format(d);
-                String month = new SimpleDateFormat("MMMMMMMMMMMMMMM").format(d);
-                String year = new SimpleDateFormat("yyyy").format(d);
-                String time = new SimpleDateFormat("h:mm a").format(d).toLowerCase();
-                String endOfDate;
-                int dayInteger = Integer.parseInt(day);
-
-                if (dayInteger % 10 == 1 && dayInteger != 11) {
-                    endOfDate = "st";
-                } else if (dayInteger % 10 == 2 && dayInteger != 12) {
-                    endOfDate = "nd";
-                } else if (dayInteger % 10 == 3 && dayInteger != 13) {
-                    endOfDate = "rd";
-                } else {
-                    endOfDate = "th";
-                }
-                isCorrectFormat = true;
-                formatted = dayInteger + endOfDate + " of " + month + " " + year + ", " + time;
-            } catch (ParseException e) {
-                Ui.printIndent();
-                System.out.println(e.getMessage());
-                Ui.printIndent();
-                System.out.println("That is the wrong date format! >:-(");
-            }
-        } else {
-            isCorrectFormat = true;
-        }
-        return formatted;
-    }
 }

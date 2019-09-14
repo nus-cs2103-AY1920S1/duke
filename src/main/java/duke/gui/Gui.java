@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 
@@ -45,8 +46,7 @@ public class Gui extends Application {
             fxmlLoader.<MainWindow>getController().activateDuke();
 
             // tries to load task list, and display message/error
-            assert new File("src/main/resources/save/DukeSave01.txt").exists();
-            fxmlLoader.<MainWindow>getController().loadExistingTaskList("main/resources/save/DukeSave01.txt");
+            fxmlLoader.<MainWindow>getController().loadExistingTaskList("DukeSave01");
 
             // show the goodbye message as a popup that needs to be clicked to close duke
             fxmlLoader.<MainWindow>getController().dukeActivityStatus.addListener((observable, oldValue, newValue) -> {
@@ -63,7 +63,7 @@ public class Gui extends Application {
     private void showGoodbyePopup(Stage stage) {
         assert new File("src/main/resources/images/fatCat.png").exists() : "fatCat.png does not exist";
         DialogBox box = DialogBox.getDukeNormalDialog(
-                "GoodBye! Hope to see you again!\n>>CLICK TO EXIT<<",
+                "GoodBye! Hope to see you again!\n\nCLICK ME or PRESS ENTER",
                 new Image(Gui.class.getResourceAsStream("/images/fatCat.png")));
 
         Scene sc = new javafx.scene.Scene(box);
@@ -73,10 +73,16 @@ public class Gui extends Application {
         goodbyePopup.initOwner(stage);
         goodbyePopup.initModality(Modality.APPLICATION_MODAL);
         goodbyePopup.initStyle(StageStyle.TRANSPARENT);
-        box.setOnMouseClicked((event) -> Platform.exit());
+        box.setOnMouseClicked(event -> Platform.exit());
+        sc.setOnKeyPressed(keyEvent -> {
+            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+                Platform.exit();
+            }
+        });
 
         stage.close();
         goodbyePopup.show();
+
     }
 
 }

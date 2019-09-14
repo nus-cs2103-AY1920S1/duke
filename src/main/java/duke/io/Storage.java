@@ -9,10 +9,12 @@ import duke.tasklist.Task;
 import duke.tasklist.TaskList;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.util.regex.Pattern;
 
 
 /**
@@ -20,22 +22,41 @@ import java.io.FileNotFoundException;
  * in between sessions.
  */
 public class Storage {
-    private String filePath;
-    
+
     private static final String DEADLINE_FLAG = "D";
     private static final String EVENT_FLAG = "E";
     private static final String TODO_FLAG = "T";
     private static final String COMPLETE = "1";
     private static final String INCOMPLETE = "0";
-    
+
+    private File saveFile;
+
     /**
-     * Constructs an instance of the file handler for a specified file path.
+     * Constructs a file reader-writer to load/save a TaskList.
      *
-     * @param path The path to the file from the src/ directory
+     * @param saveFileName The name of the save file for the Task List
      */
-    public Storage(String path) {
-        assert path != null;
-        filePath = "src/".concat(path);
+    public Storage(String saveFileName) {
+        assert saveFileName != null;
+        assert Pattern.matches("[a-zA-Z0-9._-]+", saveFileName);
+
+        String parentDirectoryPath =
+                new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath()).getParent();
+        String storageName = saveFileName + ".txt";
+        saveFile = new File(parentDirectoryPath + "/DukeSaveFiles/" + storageName);
+
+        saveFile.getParentFile().mkdir();
+        try {
+            if (saveFile.createNewFile()) {
+                new FileWriter(saveFile).append("0").flush();
+            }
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        if (!saveFile.isFile()) {
+            System.err.println("ERROR: cannot make file");
+        }
+
     }
 
     /**
@@ -90,41 +111,40 @@ public class Storage {
     }
 
     /**
-     * Returns the TaskList read from the file at the file path specified during initialization
-     * of the Storage instance.
+     * Returns the TaskList read from the save file.
      *
      * @return The TaskList read from data stored in the file
      * @throws DukeException Exception thrown when error occurs when trying to recreate the task list
      */
     public TaskList loadTaskList() throws DukeException {
-        // read file path
-        BufferedReader file;
         try {
-            file = new BufferedReader(new FileReader(filePath));
+            BufferedReader bufferedFileReader = new BufferedReader(new FileReader(saveFile));
 
             // populate tasklist
             TaskList taskList = new TaskList();
 
-            for (int tasksExpected = Integer.parseInt(file.readLine()); tasksExpected > 0; tasksExpected--) {
-                switch (file.readLine()) {
+            for (int tasksRemaining = Integer.parseInt(bufferedFileReader.readLine());
+                 tasksRemaining > 0; tasksRemaining--) {
+
+                switch (bufferedFileReader.readLine()) {
                 case DEADLINE_FLAG:
-                    taskList.add(readAsDeadline(file));
+                    taskList.add(readAsDeadline(bufferedFileReader));
                     break;
                 case EVENT_FLAG:
-                    taskList.add(readAsEvent(file));
+                    taskList.add(readAsEvent(bufferedFileReader));
                     break;
                 case TODO_FLAG:
-                    taskList.add(readAsToDo(file));
+                    taskList.add(readAsToDo(bufferedFileReader));
                     break;
                 default:
-                    throw new DukeCorruptFileException(filePath);
+                    throw new DukeCorruptFileException(saveFile);
                 }
             }
             return taskList;
         } catch (FileNotFoundException exception) {
-            throw new DukeInvalidFilePathException(filePath);
+            throw new DukeInvalidFilePathException(saveFile.getAbsolutePath());
         } catch (IOException | NumberFormatException exception) {
-            throw new DukeCorruptFileException(filePath);
+            throw new DukeCorruptFileException(saveFile);
         }
     }
 
@@ -147,41 +167,41 @@ public class Storage {
     }
 
     /**
-     * Writes/Saves the TaskList into the file path specified during initialization of the Storage instance.
+     * Writes/Saves the TaskList into the save file.
      *
-     * @param taskList The TaskList to be saved at the file path
+     * @param taskList The TaskList to be saved in the file
      * @throws DukeException when error occurs while trying to save the TaskList
      */
     public void save(TaskList taskList) throws DukeException {
-        assert taskList != null;
-        FileWriter file;
+        assert taskList != null : "tasklist is null";
+        FileWriter fileWriter;
         try {
-            file = new FileWriter(filePath);
+            fileWriter = new FileWriter(saveFile);
 
             // list size
-            file.append(Integer.toString(taskList.size()));
-            file.append(System.lineSeparator());
+            fileWriter.append(Integer.toString(taskList.size()));
+            fileWriter.append(System.lineSeparator());
 
             // per task in list
             for (Task task : taskList.list()) {
                 switch (task.getClass().getSimpleName()) {
                 case "ToDo":
-                    writeFromToDo((ToDo) task, file);
+                    writeFromToDo((ToDo) task, fileWriter);
                     break;
                 case "Event":
-                    writeFromEvent((Event) task, file);
+                    writeFromEvent((Event) task, fileWriter);
                     break;
                 case "Deadline":
-                    writeFromDeadline((Deadline) task, file);
+                    writeFromDeadline((Deadline) task, fileWriter);
                     break;
                 default:
                     break;
                 }
             }
 
-            file.close();
+            fileWriter.close();
         } catch (FileNotFoundException exception) {
-            throw new DukeInvalidFilePathException(filePath);
+            throw new DukeInvalidFilePathException(saveFile.getAbsolutePath());
         } catch (IOException exception) {
             // FileNotFoundException should the only exception, if it is not then:
             System.err.println(exception.getMessage());

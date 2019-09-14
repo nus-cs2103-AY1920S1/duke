@@ -23,14 +23,13 @@ Tasks that you have yet to complete but do not have a time restriction on. (e.g.
 <a name="deadline"></a>`Deadline`  
 Tasks that you have yet to complete but must do so within a certain date and time (e.g. submission of assignments).  
 
-<a name="event"></a>`Event`
+<a name="event"></a>`Event`  
 Tasks that you have to be available for during a certain date and time (e.g. driving test, project meetings).  
 
 ### 2. Avoid clashes in events
 When you add a new event to Duke, Duke will help you check through all your previously entered events to ensure that 
 there is no clash in timing with the newly added event. In the event that there is a clash, Duke will prompt you with
-the existing event that clashes with the new event.  
-Since you might have many commitments, Duke helps you ensure that you do not double book yourself to different 
+the existing event that clashes with the new event. Since you might have many commitments, Duke helps you ensure that you do not double book yourself to different 
 commitments at the same time and save you the stress of having to choose in the last minute.
 
 The command for this feature is [`event`](#event-usage).
@@ -51,8 +50,7 @@ The command for this feature is [`list`](#list-usage).
 
 ### 5. Saves tasks on local storage
 Duke stores all entered tasks onto local storage so that these tasks will not disappear even after you close the 
-chatbot and return at a later time.   
-This also means you do not need to keep Duke running to save your tasks.
+chatbot and return at a later time. This also means you do not need to keep Duke running to save your tasks.
 
 
 ## <a name="commands"></a>Commands
@@ -73,7 +71,7 @@ The format for adding a ToDo task is `todo <todo description>`.
 - `<todo description>` contains information about the ToDo 
     - e.g. borrow library books
  
-Example
+Example:
 ```
 //input command
 todo borrow library books
@@ -97,7 +95,7 @@ date formats)
 - `<24h time>` is the time of the deadline 
     - e.g. 1800
 
-Example
+Example:
 ```
 //input command
 deadline return library books /by 12/12/2019 1800
@@ -123,7 +121,7 @@ date formats)
 - `<24h time start>-<24h time end>` is the start time of the event 
     - e.g. 1900-2000
 
-Example (without clashes)
+Example (without clashes):
 ```
 //input command
 event driving test /at 17/9/2019 1900-2000
@@ -136,7 +134,7 @@ event driving test /at 17/9/2019 1900-2000
     _________________________________________________________________________
 ```
 
-Example (with clashes)
+Example (with clashes):
 ```
 //input command
 event meeting /at 17/9/2019 1930-2100
@@ -152,7 +150,7 @@ event meeting /at 17/9/2019 1930-2100
 Lists all tasks that are currently stored by Duke.  
 The format for listing all tasks is `list`.
 
-Example  
+Example:  
 Suppose the above mentioned example commands have been keyed.
 ```
 //input command
@@ -175,7 +173,7 @@ The format for marking a task as done is `done <task number>`.
 - `<task number>` specifies the task that is to be marked done (the index follows that of the list stored by Duke, which
 the user can view using [`list`](#list-usage))
 
-Example  
+Example:  
 Suppose the current list of tasks stored followed that showed in `list`.
 ```
 //input command
@@ -206,7 +204,7 @@ The format for marking a task as done is `delete <task number>`.
 - `<task number>` specifies the task that is to be deleted (the index follows that of the list stored by Duke, which
 the user can view using [`list`](#list-usage))
 
-Example
+Example:
 ```
 //input command
 delete 2
@@ -231,12 +229,12 @@ list
 
 
 ### <a name="find-usage"></a>`find` - Searches for tasks
-Searches for tasks in the list that match the keyword input by the user. 
-If there are no matching tasks with the input word, the user will be prompted as such. 
+Searches for tasks in the list that match the keyword input by the user.   
+If there are no matching tasks with the input word, the user will be prompted as such.   
 The format for searching tasks through a keyword is `find <word or phrase>`.  
 - `<word or phrase>` will be used for Duke to search through the existing list for matching tasks
 
-Example (with existing matches) 
+Example (with existing matches):  
 Suppose the current list of tasks stored followed that showed in `list`.
 ```
 //input command
@@ -250,7 +248,7 @@ find books
     _________________________________________________________________________
 ```
 
-Example (without existing matches) 
+Example (without existing matches):  
 Suppose the current list of tasks stored followed that showed in `list`.
 ```
 //input command
@@ -266,7 +264,7 @@ find car
 Tells Duke bye.  
 The format to tell Duke bye is `bye`.
 
-Example
+Example:
 ```
 //input command
 bye

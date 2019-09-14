@@ -28,7 +28,9 @@ public class Parser {
      */
     public static LocalDateTime formatDate(String date) {
         String[] splitDateTime = date.split(" ", 2);
+        assert splitDateTime.length == 2 : "Input needs to have both date and time";
         String[] splitDate = splitDateTime[0].split("/", 3);
+        assert splitDate.length == 3: "Input should be in the format of DD/MM/YYYY";
         System.out.println(splitDate[0]);
         LocalDateTime local = LocalDateTime.of(
                 Integer.parseInt(splitDate[2]),  Integer.parseInt(splitDate[1]),  Integer.parseInt(splitDate[0]),

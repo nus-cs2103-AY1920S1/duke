@@ -42,6 +42,7 @@ public class Storage {
         } catch (IOException ex) {
             System.out.println(ex);
         }
+        assert file.exists() == true : "The data file does not exist";
         Scanner fileScan = new Scanner(file);
         while (fileScan.hasNext()) {
             String fileLine = fileScan.nextLine();
@@ -71,6 +72,7 @@ public class Storage {
      * @throws IOException If the writing operation to the data file failed.
      */
     public void save(TaskList tasks) throws IOException {
+        assert filePath != null: "File path cannot be empty";
         BufferedWriter fw = new BufferedWriter(new FileWriter(filePath));
         ArrayList<Task> list = tasks.getList();
         for (int i = 1; i < list.size(); i++) {

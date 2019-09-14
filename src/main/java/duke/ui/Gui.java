@@ -3,9 +3,7 @@ package duke.ui;
 import duke.core.TaskList;
 import duke.gui.DialogBox;
 import duke.tasks.Task;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -67,8 +65,9 @@ public class Gui extends VBox implements UiInterface {
             output += "     *** No existing archives ***     \n";
         } else {
             output += "     Here are the existing archives: \n";
-            for (String archive : archives)
+            for (String archive : archives) {
                 output += "     " + archive;
+            }
             output += "\n";
         }
         output += "_____________________________________________________";

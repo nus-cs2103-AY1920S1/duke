@@ -52,8 +52,9 @@ public class Clui implements UiInterface {
             System.out.println("     *** No existing archives ***     \n");
         } else {
             System.out.println("     Here are the existing archives: \n");
-            for (String archive : archives)
+            for (String archive : archives) {
                 System.out.print("     " + archive);
+            }
         }
         System.out.println("    ____________________________________________________________");
     }
@@ -141,6 +142,7 @@ public class Clui implements UiInterface {
      * Show exit message to user.
      */
     public void exit() {
+        sc.close();
         System.out.println("    ____________________________________________________________\n"
                 + "     Bye. Hope to see you again soon!\n"
                 + "    ____________________________________________________________");

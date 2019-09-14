@@ -61,6 +61,10 @@ public class Parser {
             return new RetrieveCommand(splitCommand[1]);
         case "list":
             return new ListCommand();
+        case "clear":
+            return new ClearCommand();
+        case "empty":
+            return new EmptyCommand();
         case "find":
             return new FindCommand(splitCommand[1].trim());
         case "done":

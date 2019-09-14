@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -101,6 +100,21 @@ public class Storage {
     }
 
     /**
+     * Empty archives.
+     */
+    public boolean emptyArchives() {
+        boolean isSuccessful = true;
+        File[] listOfArchives = archiveFolder.listFiles();
+        for (File archive : listOfArchives) {
+            if (!archive.delete()) {
+                isSuccessful = false;
+                System.out.println(isSuccessful);
+            }
+        }
+        return isSuccessful;
+    }
+
+    /**
      * Retrieve archive.
      */
     public List<Task> retrieveArchivedTaskList(String archiveName) throws DukeException, IOException {
@@ -121,6 +135,7 @@ public class Storage {
             Task t = Task.deserialize(s.nextLine());
             taskList.add(t);
         }
+        s.close();
         return taskList;
     }
 

@@ -1,6 +1,18 @@
+package duke.logic;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.TaskWithOrder;
+import duke.tasks.Todo;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+
+import duke.trivia.QuestionList;
+import duke.trivia.TriviaQuestion;
 
 public class Parser {
     public Ui ui = new Ui();

@@ -1,3 +1,5 @@
+package duke.gui;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +31,7 @@ public class DialogLineController extends HBox {
     }
     private DialogLineController(String text, Image img) {
         try {
-            InputStream fxmlStream = new FileInputStream("src/main/java/DialogLine.fxml");
+            InputStream fxmlStream = new FileInputStream("src/main/java/duke/views/DialogLine.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);

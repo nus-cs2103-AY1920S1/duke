@@ -1,7 +1,11 @@
+package duke.logic;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.tasks.TaskList;
+import duke.trivia.QuestionList;
 /**
  * Checks all the possible errors that can occur during entry of command and
  * throws DukeException with message

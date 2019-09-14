@@ -1,3 +1,5 @@
+package duke.tasks;
+
 /**
  * task class to manage the functions of tasks that are common across all types
  */

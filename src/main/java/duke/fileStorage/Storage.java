@@ -1,3 +1,5 @@
+package duke.fileStorage;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -5,6 +7,14 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import duke.tasks.TaskList;
+import duke.tasks.Todo;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.trivia.QuestionList;
+import duke.trivia.TriviaQuestion;
 /**
  * Storage class deals with file input/output
  */

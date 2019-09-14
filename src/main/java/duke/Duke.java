@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +11,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import duke.logic.Parser;
+import duke.tasks.TaskList;
+import duke.trivia.QuestionList;
+import duke.fileStorage.Storage;
+import duke.gui.ChatScreenController;
 
 /**
  * main class, calls functions and other classes as needed
@@ -31,7 +39,7 @@ public class Duke extends Application {
     public void showChatScreen() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            InputStream fxmlStream = new FileInputStream("src/main/java/ChatScreen.fxml");
+            InputStream fxmlStream = new FileInputStream("src/main/java/duke/views/ChatScreen.fxml");
             AnchorPane mainWindow = (AnchorPane) loader.load(fxmlStream);
 
             ChatScreenController controller = loader.getController();

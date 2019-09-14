@@ -1,3 +1,5 @@
+package duke.gui;
+
 import java.io.File;
 
 import javafx.application.Platform;
@@ -9,6 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import duke.fileStorage.Storage;
+import duke.tasks.TaskList;
+import duke.trivia.QuestionList;
+import duke.logic.Ui;
+import duke.Duke;
 
 public class ChatScreenController extends AnchorPane {
     @FXML
@@ -25,8 +33,8 @@ public class ChatScreenController extends AnchorPane {
     Storage s = new Storage();
     TaskList list = new TaskList();
     QuestionList qList = new QuestionList();
-    File dukeFile = new File("src/main/java/images/Duke.png");
-    File userFile = new File("src/main/java/images/User.png");
+    File dukeFile = new File("src/main/java/duke/images/Duke.png");
+    File userFile = new File("src/main/java/duke/images/User.png");
     public Image dukeIm = new Image(dukeFile.toURI().toString());
     public Image userIm = new Image(userFile.toURI().toString());
     

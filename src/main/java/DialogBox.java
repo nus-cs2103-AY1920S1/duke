@@ -18,6 +18,11 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    private static final String STYLE_DIALOG_DUKE = 
+        "-fx-background-color: PALETURQUOISE;" +
+        "-fx-font-weight: BOLD;";
+
     @FXML
     private Label dialog;
     @FXML
@@ -48,12 +53,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setStyle(STYLE_DIALOG_DUKE);
         return db;
     }
 }

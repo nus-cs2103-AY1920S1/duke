@@ -30,17 +30,17 @@ She is able to save everything so when you close the app, your data is not lost.
 
 #### General Commands
 - To get a quick summary of all commands in one glance, you can send:
-	`<help>`
+	`help`
 
 
 - To get a hands-on short tutorial of all commands, you can send:
-	`<tutorial>`
+	`tutorial`
 
 Just follow through the instructions and it will help you learn the commands of Duke Bunny very quickly.
 
 
 - To bid Duke Bunny goodbye, you can send:
-	`<bye>`
+	`bye`
 
 This is optional because the data will be saved whenever any command is made. 
 Thus, do not fret if you close Duke Bunny without doing this.

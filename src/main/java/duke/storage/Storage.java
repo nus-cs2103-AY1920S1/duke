@@ -76,15 +76,31 @@ public class Storage {
     }
 
     /**
-     * Loads the task list from the previous session form the hard disk, if any.
+     * Converts the contents of .txt file into a String.
      *
-     * @return ArrayList of task that has been loaded from previous session.
-     * @throws FileNotFoundException If there was no previous session.
+     * @return .txt file as a String.
+     * @throws FileNotFoundException If .txt file cannot be found.
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    private String convertFileToString() throws FileNotFoundException {
         File f = new File(filePath);
         Scanner sc = new Scanner(f);
+        StringBuilder sb = new StringBuilder();
+        while (sc.hasNextLine()) {
+            sb.append(sc.nextLine() + "\n");
+        }
+        sc.close();
+        return sb.toString();
+    }
+
+    /**
+     * Creates a task list based on the string of tasks given.
+     *
+     * @param tasks Tasks given with their type, description, completion status and date (if applicable).
+     * @return Populated list of tasks.
+     */
+    private ArrayList<Task> loadTasks(String tasks) {
         ArrayList<Task> loadedTaskList = new ArrayList<>();
+        Scanner sc = new Scanner(tasks);
         while (sc.hasNextLine()) {
             String currTask = sc.nextLine();
             if (currTask.charAt(0) == 'T') {
@@ -99,6 +115,17 @@ public class Storage {
         }
         sc.close();
         return loadedTaskList;
+
+    }
+
+    /**
+     * Loads the task list from the previous session form the hard disk, if any.
+     *
+     * @return ArrayList of task that has been loaded from previous session.
+     * @throws FileNotFoundException If there was no previous session.
+     */
+    public ArrayList<Task> load() throws FileNotFoundException {
+        return loadTasks(convertFileToString());
     }
 
     /**

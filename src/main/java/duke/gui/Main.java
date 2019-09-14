@@ -8,6 +8,7 @@ import javafx.application.Application;
 
 /**
  * A GUI for Duke using FXML.
+ * Refer to https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart4.md
  */
 public class Main extends Application {
 

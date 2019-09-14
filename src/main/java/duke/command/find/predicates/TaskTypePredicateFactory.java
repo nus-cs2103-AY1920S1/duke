@@ -56,8 +56,6 @@ public class TaskTypePredicateFactory implements FindTaskCleanableCommandPredica
             throw new UnknownCommandException(errorMessage.toString());
         }
 
-        return (task -> {
-            return desiredTaskType.isInstance(task);
-        });
+        return desiredTaskType::isInstance;
     }
 }

@@ -29,7 +29,7 @@ class TaskDoneStatePredicateFactory implements FindTaskCleanableCommandPredicate
             ));
         }
 
-        final boolean desiredDoneState = m.group("argument").equals("yes");
+        final boolean desiredDoneState = commandArgument.equals("yes");
 
         return (task) -> {
             return task.isDone() == desiredDoneState;

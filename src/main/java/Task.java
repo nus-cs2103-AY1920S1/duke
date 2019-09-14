@@ -5,8 +5,7 @@ import java.time.format.DateTimeParseException;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected static final DateTimeFormatter dtf = 
-        DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
+    protected static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
 
     public Task(boolean done, String description) {
         this.description = description;
@@ -16,6 +15,10 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    public Task() {
+        this("");
     }
 
     public Task markAsDone() {
@@ -28,7 +31,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718"); // return tick or X symbols
     }
 
     public String toString() {

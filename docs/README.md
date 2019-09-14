@@ -9,7 +9,7 @@ Duke makes use of local storage so that previously entered tasks will be remembe
 - [<b>Usage</b>](#usage)
 
 ## <a name="features"></a>Features 
-###1. Keep track of various types of tasks
+### 1. Keep track of various types of tasks
 Duke manages and helps you keep track of your tasks which can be either [ToDos](#todo), [Deadlines](#deadline), or 
 [Events](#event).  
 Each task will contain a text description. In addition, [Deadlines](#deadline) and [Events](#event) will also contain
@@ -26,7 +26,7 @@ Tasks that you have yet to complete but must do so within a certain date and tim
 <a name="event"></a>`Event`
 Tasks that you have to be available for during a certain date and time (e.g. driving test, project meetings).  
 
-###2. Avoid clashes in events
+### 2. Avoid clashes in events
 When you add a new event to Duke, Duke will help you check through all your previously entered events to ensure that 
 there is no clash in timing with the newly added event. In the event that there is a clash, Duke will prompt you with
 the existing event that clashes with the new event.  
@@ -35,28 +35,28 @@ commitments at the same time and save you the stress of having to choose in the 
 
 The command for this feature is [`event`](#event-usage).
 
-###3. Search through saved tasks
+### 3. Search through saved tasks
 Duke allows you to search through your saved tasks by looking up matching texts with the keyword that you have entered.
 This allows you to filter through your tasks of interests instead of having to scroll through the entire list just to
 find what you are looking for.
 
 The command for this feature is [`find`](#find-usage).
 
-###4. View all your tasks 
+### 4. View all your tasks 
 Duke allows you to view all the tasks that you have added previously before in a list containing all necessary details, 
 such as the type of task, the description, and the date and time (if applicable). The clean organisation of information
 is pleasing to read and easy to understand.
 
 The command for this feature is [`list`](#list-usage).
 
-###5. Saves tasks on local storage
+### 5. Saves tasks on local storage
 Duke stores all entered tasks onto local storage so that these tasks will not disappear even after you close the 
 chatbot and return at a later time.   
 This also means you do not need to keep Duke running to save your tasks.
 
 
-##<a name="commands"></a>Commands
-###List of commands
+## <a name="commands"></a>Commands
+### List of commands
 - [`todo <todo description>`](#todo-usage)
 - [`deadline <deadline description> /by <dd/mm/yyyy> <24h time>`](#deadline-usage)
 - [`event <event description> /at <dd/mm/yyyy> <24h time start>-<24h time end>`](#event-usage)
@@ -66,8 +66,8 @@ This also means you do not need to keep Duke running to save your tasks.
 - [`find <keyword>`](#find-usage)
 - [`bye`](#bye-usage)
 
-##<a name="usage"></a>Usage
-###<a name="todo-usage"></a>`todo` - Adds a ToDo task to Duke
+## <a name="usage"></a>Usage
+### <a name="todo-usage"></a>`todo` - Adds a ToDo task to Duke
 Adds a ToDo task into the list of tasks for Duke to track.  
 The format for adding a ToDo task is `todo <todo description>`.  
 - `<todo description>` contains information about the ToDo 
@@ -86,7 +86,7 @@ todo borrow library books
     _________________________________________________________________________
 ```
 
-###<a name="deadline-usage"></a>`deadline` - Adds a Deadline task to Duke
+### <a name="deadline-usage"></a>`deadline` - Adds a Deadline task to Duke
 Adds a Deadline task into the ist of tasks for Duke to track.  
 The format for adding a Deadline task is `deadline <deadline description> /by <dd/mm/yyyy> <24h time>`.
 - `<deadline description>` contains information about the deadline
@@ -110,7 +110,7 @@ deadline return library books /by 12/12/2019 1800
     _________________________________________________________________________
 ```
 
-###<a name="event-usage"></a>`event` - Adds a Event task to Duke
+### <a name="event-usage"></a>`event` - Adds a Event task to Duke
 Adds an Event task into the list of tasks for Duke to track.  
 If there are clashes between an existing event and the newly input event, the user will be prompted of the clashing 
 event.  
@@ -148,7 +148,7 @@ event meeting /at 17/9/2019 1930-2100
     _________________________________________________________________________
 ```
 
-###<a name="list-usage"></a>`list` - Lists all stored tasks
+### <a name="list-usage"></a>`list` - Lists all stored tasks
 Lists all tasks that are currently stored by Duke.  
 The format for listing all tasks is `list`.
 
@@ -167,7 +167,7 @@ list
     _________________________________________________________________________
 ```
 
-###<a name="done-usage"></a>`done` - Marks task as done
+### <a name="done-usage"></a>`done` - Marks task as done
 Marks a specified task as done.  
 Tasks that are not done will be marked with a `X`, while tasks that are completed will be marked with a `Y`.  
 If the task number does not exist, the user will be prompted as such.  
@@ -199,7 +199,7 @@ list
     _________________________________________________________________________
 ```
 
-###<a name="delete-usage"></a>`delete` - Deletes a task
+### <a name="delete-usage"></a>`delete` - Deletes a task
 Deletes a specific task from the list stored by Duke.  
 If the task number does not exist, the user will be prompted as such.
 The format for marking a task as done is `delete <task number>`.  
@@ -230,7 +230,7 @@ list
 ```
 
 
-###<a name="find-usage"></a>`find` - Searches for tasks
+### <a name="find-usage"></a>`find` - Searches for tasks
 Searches for tasks in the list that match the keyword input by the user. 
 If there are no matching tasks with the input word, the user will be prompted as such. 
 The format for searching tasks through a keyword is `find <word or phrase>`.  
@@ -262,7 +262,7 @@ find car
     _________________________________________________________________________
 ```
 
-###<a name="bye-usage"></a>`bye` - Tells Duke bye
+### <a name="bye-usage"></a>`bye` - Tells Duke bye
 Tells Duke bye.  
 The format to tell Duke bye is `bye`.
 

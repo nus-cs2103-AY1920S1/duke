@@ -57,94 +57,67 @@ Tasks that has a time and date to attend to it.
 Tasks that has a time and date as its deadline.
 
 #### Add Tasks
- To add a Todo Task called *return book*, send:
-	```
-	todo return book
-	```
+- To add a Todo Task called *return book*, send:
+	`todo return book`
 	
 	
-To add an Event called *lab meeting* which would be held on *21 September 2019* at *12PM*, send:
-	```
-	event lab meeting /at 21/09/2019 1200
-	```
+- To add an Event called *lab meeting* which would be held on *21 September 2019* at *12PM*, send:
+	`event lab meeting /at 21/09/2019 1200`
 	or
-	```
-	event lab meeting /at 21/09/2019 12.00 PM
-	```
+	`event lab meeting /at 21/09/2019 12.00 PM`
 
 
-To add a Task with a Deadline called *German Assignment* to be done by *21 September 2019* at *10.30AM*, send:
-	```
-	deadline german assignment /by 21/09/2019 1000
-	```
+- To add a Task with a Deadline called *German Assignment* to be done by *21 September 2019* at *10.30AM*, send:
+	`deadline german assignment /by 21/09/2019 1000`
 	or
-	```
-	deadline german assignment /by 21/09/2019 10.00 AM
-	```
+	`deadline german assignment /by 21/09/2019 10.00 AM`
 
 #### See Task List
-To see the list of tasks, send:
-	```
-	list
-	```
+- To see the list of tasks, send:
+	`list`
 
 
 #### Mark Task as Done
-To mark task at index 2 of list as done, send:
-	```
-	done 2
-	```
+- To mark task at index 2 of list as done, send:
+	`done 2`
 
 
 #### Delete Tasks
-To delete task at index 2 of list, send:
-	```
-	delete 2
-	```
+- To delete task at index 2 of list, send:
+	`delete 2`
 
 
 #### Find Task by Keyword
-To find if you have the task in the list by a single keyword like *lab*, send:
-	```
-	find lab
-	```
+- To find if you have the task in the list by a single keyword like *lab*, send:
+	`find lab`
 
 All matching tasks will be presented.
 You can also find tasks by the date. 
 
-To find a task with the date *21/09/2019*, send:
-	```
-	find 21/09/2019
-	```
+- To find a task with the date *21/09/2019*, send:
+	`find 21/09/2019`
 
 
 ## Expenses Managing
 This section will show you the commands for the expenses managing functions of Duke Bunny.
 
 #### Add Expenses
-To add an expense where *$220* was spent on buying a *Bike*, send:
-	```
-	expense bike 220
-	```
+- To add an expense where *$220* was spent on buying a *Bike*, send:
+	`expense bike 220`
 
 
 #### Input Income
-To input an income of *$1800* to see how much income is left or how much is overspent, send:
-	```
-	income 1800
-	```
+- To input an income of *$1800* to see how much income is left or how much is overspent, send:
+	`income 1800`
+	
 Everytime you do this command, the previous income will be **overwritten**.
 
 
 #### See Expense List
-To see all expenses in the list, send
-	```
-	elist
-	```
+- To see all expenses in the list, send
+	`elist`
 
 
 #### Delete Expenses
-To delete an expense at index 2 of the list, send:
-	```
-	delete e2
-	```
+- To delete an expense at index 2 of the list, send:
+	`delete e2`

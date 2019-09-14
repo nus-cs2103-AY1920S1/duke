@@ -29,13 +29,13 @@ Then, she can help you calculate how much you have left to spend or how much is 
 She is able to save everything so when you close the app, your data is not lost.
 
 #### General Commands
-To get a quick summary of all commands in one glance, you can send:
+- To get a quick summary of all commands in one glance, you can send:
 	```
 	help
 	```
 
 
-To get a hands-on short tutorial of all commands, you can send:
+- To get a hands-on short tutorial of all commands, you can send:
 	```
 	tutorial
 	```
@@ -43,7 +43,7 @@ To get a hands-on short tutorial of all commands, you can send:
 Just follow through the instructions and it will help you learn the commands of Duke Bunny very quickly.
 
 
-To bid Duke Bunny goodbye, you can send:
+- To bid Duke Bunny goodbye, you can send:
 	```
 	bye
 	```

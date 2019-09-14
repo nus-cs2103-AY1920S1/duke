@@ -5,6 +5,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ui.TextUi;
 
@@ -21,7 +22,7 @@ public abstract class Task {
     protected SimpleStringProperty description;
     protected SimpleBooleanProperty isDone;
     protected ObjectProperty<LocalDateTime> dateDue;
-    protected ObservableList<CashFlow> cashFlows;
+    protected ObservableList<CashFlow> cashFlows = FXCollections.observableArrayList();
     protected TextUi ui = new TextUi();
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
@@ -71,8 +72,9 @@ public abstract class Task {
      */
     public abstract String encodeForStorage();
 
-    public void addCashFlow(String sourceName, Double value,LocalDateTime dateDue){
-        cashFlows.add(new CashFlow(sourceName, value, dateDue));
+    public void addCashFlow(String sourceDescription, Double value,LocalDateTime dateDue){
+        cashFlows.add(new CashFlow(sourceDescription, value, dateDue));
+        System.out.println(cashFlows.size());
     }
 
     public void removeCashFlow(String cashFlowToRemove){

@@ -49,16 +49,18 @@ public class NewGUI extends VBox {
         if (input.contains("list")){
             String[] split = input.split(" ");
             tableArea.getChildren().clear();
-            if (split[1].contains("cash")) {
-                task = 
-                taskCashFlows.setCashFlowTableView(duke.getAllTasks().get(Integer.parseInt(split[2])).getCashFlows());
+            if (split.length != 1) {
+                task = Integer.parseInt(split[2]);
+                //taskCashFlows.setCashFlowTableView(duke.getAllTasks().get(task).getCashFlows());
                 tableArea.getChildren().addAll(taskCashFlows.getCashFlowTableView());
             }else{
-                taskView.setTable(duke.getAllTasks());
+                //taskView.setTable(duke.getAllTasks());
                 tableArea.getChildren().addAll(taskView.getTable());
             }
-        }else{
-            taskView
+        }
+        taskView.setItems(duke.getAllTasks());
+        if(task != null) {
+            taskCashFlows.setCashFlowTableView(duke.getAllTasks().get(task).getCashFlows());
         }
         systemOutput.setText(response);
         userInput.clear();

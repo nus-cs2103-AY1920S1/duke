@@ -15,7 +15,7 @@ public class CashFlow {
     public CashFlow(String sourceDescription, Double value, LocalDateTime dateDue){
         this.sourceDescription = new SimpleStringProperty(sourceDescription);
         this.value = new SimpleDoubleProperty(value);
-        dateCreated = new SimpleObjectProperty<>(LocalDateTime.now());
+        this.dateCreated = new SimpleObjectProperty<>(dateDue);
         this.dateDue = new SimpleObjectProperty<>(dateDue);
     }
 

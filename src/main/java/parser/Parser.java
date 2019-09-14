@@ -28,7 +28,7 @@ public class Parser {
     private Double value;
     public static final Pattern COMMAND_FORMAT= Pattern.compile("(?<commandWord>\\w+)"
             + "\\s*(?<completionStatus>(\\[[01]\\])?)"
-            + "\\s*(?<description>([\\w\\s\\d{}]+)?)"
+            + "\\s*(?<description>([\\w\\s\\d{}.]+)?)"
             + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
     public static final Pattern CASH_FORMAT= Pattern.compile("\\{(?<task>[0-9.]+)\\}"
             + "\\s*(?<sourceDescription>([\\w\\s\\d]+)?)"
@@ -113,7 +113,9 @@ public class Parser {
             scheduler.findTasks(description);
             break;
         case "addcashflow":
+            splitCashCommand(description);
             scheduler.addCashFlow(tasknum, sourceDescription, value, date);
+            System.out.println("added");
             break;
         default:
             ui.printErrorMsg1();

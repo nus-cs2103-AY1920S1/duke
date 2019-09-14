@@ -3,11 +3,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 
-<TableView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<fx:root fx:id="cashFlowTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="TableView" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columns>
-    <TableColumn prefWidth="180.0" text="Description" />
-    <TableColumn minWidth="0.0" prefWidth="136.0" text="Value" />
-      <TableColumn minWidth="0.0" prefWidth="157.0" text="Date Due" />
-      <TableColumn prefWidth="126.0" text="Date Created" />
+    <TableColumn fx:id="descriptionCol" prefWidth="180.0" text="Description" />
+    <TableColumn fx:id="valueCol" minWidth="0.0" prefWidth="136.0" text="Value" />
+      <TableColumn fx:id="dateDueCol" minWidth="0.0" prefWidth="157.0" text="Date Due" />
+      <TableColumn fx:id="dateCreatedCol" prefWidth="126.0" text="Date Created" />
   </columns>
-</TableView>
+</fx:root>

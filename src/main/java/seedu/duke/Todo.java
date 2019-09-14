@@ -10,6 +10,7 @@ import java.util.Date;
 public class Todo extends Task {
 
     private Date dateTime = null;
+    static int numTodo = 0;
 
     /**
      * Constructor of a Todo class.
@@ -18,6 +19,7 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+        numTodo++;
     }
 
     /**

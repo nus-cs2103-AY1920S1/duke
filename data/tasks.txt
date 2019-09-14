@@ -7,4 +7,4 @@ E | 1 | water festival | 06/02/1998 1441 | 2019-09-14T20:28
 D | 1 | music homework | 09/01/1994 2333 | 2019-09-14T20:28
 T | 0 | art painting
 E | 1 | sports day | 05/05/2011 1832 | 2019-09-15T00:05
-T | 0 | drawing
+T | 1 | drawing | 2019-09-15T00:56

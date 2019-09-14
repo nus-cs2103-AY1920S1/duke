@@ -10,6 +10,7 @@ import java.util.Date;
 public class Deadline extends Task {
 
     private Date dateTime;
+    static int numDeadline = 0;
 
     /**
      * Constructor of Deadline task.
@@ -20,6 +21,7 @@ public class Deadline extends Task {
     public Deadline(String description, Date dateTime) {
         super(description);
         this.dateTime = dateTime;
+        numDeadline++;
     }
 
     /**

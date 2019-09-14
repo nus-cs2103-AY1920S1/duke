@@ -43,20 +43,18 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task from the list of tasks using index.
-     *
-     * @param index the index of the task to be deleted
-     */
-    public void deleteTask(int index) {
-        taskList.remove(index);
-    }
-
-    /**
      * Deletes the task from the list of tasks directly.
      *
      * @param t the task to be deleted
      */
     public void deleteTask(Task t) {
+        if (t instanceof Todo) {
+            Todo.numTodo--;
+        } else if (t instanceof Event) {
+            Event.numEvent--;
+        } else if (t instanceof Deadline) {
+            Deadline.numDeadline--;
+        }
         taskList.remove(t);
     }
 
@@ -114,12 +112,14 @@ public class TaskList {
         for (Task t: taskList) {
             if (t.isDone) {
                 numTaskDone++;
-                if (doneLastweek(t)) {
-                    numDonePastWeek++;
-                } else if (doneLastMonth(t)) {
-                    numDonePastMonth++;
-                } else if (doneLastYear(t)) {
+                if (doneLastYear(t)) {
                     numDonePastYear++;
+                }
+                if (doneLastMonth(t)) {
+                    numDonePastMonth++;
+                }
+                if (doneLastWeek(t)) {
+                    numDonePastWeek++;
                 }
             }
         }
@@ -141,9 +141,9 @@ public class TaskList {
      * @param t the task to check
      * @return true if the task was done last week. Else, return false
      */
-    public static boolean doneLastweek(Task t) {
+    public static boolean doneLastWeek(Task t) {
         Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
-        return (duration.toMinutes() <= 2);
+        return (duration.toDays() <= 7);
     }
 
     /**

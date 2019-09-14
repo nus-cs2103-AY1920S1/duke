@@ -11,7 +11,7 @@ public class Task implements Comparable<Task> {
     private boolean isDone;
 
     private static final String TICK = "v";
-    private static final String CROSS = "×";
+    private static final String CROSS = "x";
 
     /**
      * Constructs a unspecified and unfinished Task object.

@@ -53,7 +53,7 @@ public class Duke {
             String fullCommand = mw.getInput();
             Command c = Parser.parse(fullCommand);
             if (c.isExit()) {
-                // exit
+
                 System.exit(0);
             }
             c.execute(sheet, ui, storage);

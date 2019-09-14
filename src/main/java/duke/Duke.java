@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.ui.Main;
+import java.util.ArrayList;
 import javafx.application.Application;
 
 public class Duke {
@@ -16,7 +17,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage("data/duke.txt");
-        taskList = new TaskList(storage.load());
+        taskList = new TaskList(new ArrayList<>());
     }
 
     /**
@@ -26,6 +27,13 @@ public class Duke {
      */
     public String upcomingTasks(){
         return taskList.upcomingTasks();
+    }
+
+    /**
+     * Loads the task list to be based on the stored data when UI has initialised.
+     */
+    public void onUIReady(){
+        taskList = new TaskList(storage.load());
     }
 
     /**

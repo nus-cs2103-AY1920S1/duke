@@ -32,8 +32,9 @@ public class Storage {
      */
     public void save(ArrayList<Task> tasks) {
         try {
-            String path = this.filePath;
-            FileWriter fw = new FileWriter(path);
+            File file = new File(this.filePath);
+            file.getParentFile().mkdirs();
+            FileWriter fw = new FileWriter(file);
 
             String text = "";
             for (int i = 0; i < tasks.size(); i++) {
@@ -72,9 +73,9 @@ public class Storage {
     public ArrayList<Task> load() {
         ArrayList<Task> storage = new ArrayList<>();
         try {
-            String path = this.filePath;
-            File f = new File(path); // create a File for the given file path
-            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+            File file = new File(this.filePath); // create a File for the given file path
+            file.getParentFile().mkdirs();
+            Scanner s = new Scanner(file); // create a Scanner using the File as the source
             while (s.hasNext()) {
                 String[] input = s.nextLine().split("[|]");
                 processInput(input, storage);

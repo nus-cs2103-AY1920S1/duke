@@ -49,6 +49,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = null;
+        boolean hasError = false;
         if (isInTutorial) {
             response = rori.getTutorialResponse(input);
             isInTutorial = false;
@@ -57,16 +58,15 @@ public class MainWindow extends AnchorPane {
             try {
                 response = rori.getResponse(input);
                 roriImage = nomralRoriImage;
-                roriShadowColor = Color.DODGERBLUE;
             } catch (RoriException error) {
                 response = error.getMessage();
                 roriImage = angryRoriImage;
-                roriShadowColor = Color.CRIMSON;
+                hasError = true;
             }
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getRoriDialog(response, roriImage, roriShadowColor)
+                DialogBox.getRoriDialog(response, roriImage, hasError)
         );
         userInput.clear();
     }
@@ -76,7 +76,7 @@ public class MainWindow extends AnchorPane {
      */
     public void welcomeMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getRoriDialog(this.rori.welcomeMessage(), roriImage, Color.DODGERBLUE)
+                DialogBox.getRoriDialog(this.rori.welcomeMessage(), roriImage, false)
         );
     }
 
@@ -85,7 +85,7 @@ public class MainWindow extends AnchorPane {
      */
     public void tutorialMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getRoriDialog(this.rori.getTutorial(), roriImage, Color.DODGERBLUE)
+                DialogBox.getRoriDialog(this.rori.getTutorial(), roriImage, false)
         );
         isInTutorial = true;
     }

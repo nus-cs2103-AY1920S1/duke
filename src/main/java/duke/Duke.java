@@ -30,6 +30,15 @@ public class Duke {
 
     public void setupGuiUi(VBox dialogContainer) {
         ui = new GuiUi(dialogContainer);
+        ui.showWelcome();
+    }
+
+    public void saveTasks() {
+        try {
+            storage.save(tasks.dump());
+        } catch (DukeException e) {
+            ui.showSavingError();
+        }
     }
 
     /**
@@ -43,11 +52,7 @@ public class Duke {
             String fullCommand = ui.readCommand();
             isExit = respond(fullCommand);
         }
-        try {
-            storage.save(tasks.dump());
-        } catch (DukeException e) {
-            ui.showSavingError();
-        }
+        saveTasks();
     }
 
     /**

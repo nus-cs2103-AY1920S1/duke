@@ -48,8 +48,7 @@ public abstract class Ui {
     }
 
     public void showWelcome() {
-        showMessage("Hello! I'm Duke");
-        showMessage("What can I do for you?");
+        showMessage("Hello! I'm Duke\nWhat can I do for you?");
     }
 
     public void showGoodbye() {

@@ -42,6 +42,11 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         userInput.clear();
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input));
-        duke.respond(input);
+        boolean isExit = duke.respond(input);
+        if (isExit) {
+            duke.saveTasks();
+            System.exit(0);
+            // do nothing
+        }
     }
 }

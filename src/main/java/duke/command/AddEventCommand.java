@@ -18,6 +18,7 @@ public class AddEventCommand extends TextBasedCommand {
 
     /**
      * Create event command (extended from text based command).
+     *
      * @param line line of user input
      * @throws DukeException generic error with message
      */

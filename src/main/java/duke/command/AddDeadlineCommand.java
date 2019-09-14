@@ -19,6 +19,7 @@ public class AddDeadlineCommand extends TextBasedCommand {
 
     /**
      * Add a deadline command (extended from text based command).
+     *
      * @param line line of input
      * @throws DukeException generic error with message
      */

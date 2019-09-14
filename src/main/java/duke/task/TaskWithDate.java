@@ -26,6 +26,7 @@ public abstract class TaskWithDate extends Task {
 
     /**
      * The current format of input for a task with date is to add a /at or /on. This extracts the data from that format.
+     *
      * @param line Line of input
      * @param delimiter delimiter provided [" /at " or " /on "]
      * @return
@@ -36,6 +37,7 @@ public abstract class TaskWithDate extends Task {
 
     /**
      * Verify that the data is correct before creating a task with data.
+     *
      * @param data the data as extracted from extractDataFromLine
      * @param taskName Name of the task e.g. event or deadline
      * @return

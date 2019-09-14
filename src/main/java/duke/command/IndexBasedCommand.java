@@ -10,6 +10,7 @@ public abstract class IndexBasedCommand extends Command {
 
     /**
      * Create Index based command (e.g. done 1).
+     *
      * @param line line of input by user
      * @throws IndexOutOfBoundsException index out of bounds exception which may occur
      * @throws NumberFormatException may occur when parsing int from the string arr after splitting line

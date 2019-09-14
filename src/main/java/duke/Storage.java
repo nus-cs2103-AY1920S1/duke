@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Load from save file (txt file in hard disk) (path currently hardcoded).
+     *
      * @param ui ui object
      * @return list of tasks
      * @throws IOException IO exception
@@ -52,6 +53,7 @@ public class Storage {
 
     /**
      * Process line(s) obtained from loadFromSaveFile.
+     *
      * @param taskList List of tasks
      * @param ui  ui object
      * @param line String, a line from the save text file
@@ -69,6 +71,7 @@ public class Storage {
 
     /**
      * Save task list to txt file in hard disk (path currently hardcoded).
+     *
      * @param taskList List of tasks
      * @throws DukeException generic exception with error message
      */

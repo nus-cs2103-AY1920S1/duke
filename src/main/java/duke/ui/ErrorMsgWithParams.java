@@ -20,6 +20,7 @@ public enum ErrorMsgWithParams {
      * Returns description of error message (with parameters embedded inside).
      * CAUTION: Please pay attention to the PARAM_PLACEHOLDER used as this function
      * does not account for this placeholder in the parameter provided.
+     *
      * @param parameters parameters to replace the PARAM_PLACEHOLDER
      * @return error message
      */

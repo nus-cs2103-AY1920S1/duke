@@ -11,6 +11,7 @@ public class FindCommand extends TextBasedCommand {
 
     /**
      * Find command for finding a particular string in tasks in the task list.
+     *
      * @param line entire line of input by user.
      * @throws DukeException generic exception with error message
      */

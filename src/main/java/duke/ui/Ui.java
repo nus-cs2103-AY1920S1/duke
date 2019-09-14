@@ -178,9 +178,9 @@ public class Ui {
      *
      * @return Response to be sent to the GUI.
      */
-    public Response getLoadingErrorResponse() {
+    public Response getLoadingErrorResponse(String filePath) {
         return new Response("Error loading from specified file path,"
-                + " initializing empty list of tasks...");
+                + " initializing empty list of tasks... at " + filePath);
     }
 
     /**

@@ -1,9 +1,7 @@
 package duke.storage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+
 import duke.dukeexception.DukeException;
 
 public class MetaData {
@@ -15,6 +13,12 @@ public class MetaData {
 
     public void writeMetaData(String newLastOpenedFilePath) throws DukeException {
         try {
+            File tempFile = new File(metaDataPath);
+            if(!tempFile.exists()) {
+                tempFile.getParentFile().mkdirs();
+                tempFile.createNewFile();
+            }
+
             FileWriter fw = new FileWriter(metaDataPath);
             String linetoWrite = "lastOpened|" + newLastOpenedFilePath;
             fw.write(linetoWrite + System.lineSeparator());
@@ -26,6 +30,12 @@ public class MetaData {
 
     public String readMetaData() throws DukeException {
         try {
+            File tempFile = new File(metaDataPath);
+            if(!tempFile.exists()) {
+                tempFile.getParentFile().mkdirs();
+                tempFile.createNewFile();
+            }
+
             BufferedReader fileInputStream = new BufferedReader(new FileReader(metaDataPath));
             String fileData = fileInputStream.readLine();
             return fileData;

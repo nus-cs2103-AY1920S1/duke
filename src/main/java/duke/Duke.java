@@ -9,6 +9,9 @@ import duke.task.TaskList;
 import duke.ui.Response;
 import duke.ui.Ui;
 
+import java.io.File;
+import java.io.IOException;
+
 import static duke.dukeexception.DukeException.*;
 
 /**
@@ -41,7 +44,6 @@ public class Duke {
 
     public Response setStorageByFilePath(String filePath) {
         this.storage = new Storage(filePath);
-        System.out.println(filePath);
         try {
             this.taskList = new TaskList(storage.load());
             this.metaData.writeMetaData(filePath);
@@ -49,8 +51,25 @@ public class Duke {
         } catch (DukeException e) {
             if(e.getMessage().equals(LOADING_ERROR)) {
                 this.taskList = new TaskList();
+                createNewDataFilePath(filePath);
             }
-            return ui.getLoadingErrorResponse();
+            return ui.getLoadingErrorResponse(filePath);
+        }
+    }
+
+    private void createNewDataFilePath(String filePath) {
+        File tempFile = new File(filePath);
+
+        try {
+            if (!tempFile.exists()) {
+                tempFile.getParentFile().mkdirs();
+                tempFile.createNewFile();
+            }
+            this.metaData.writeMetaData(filePath);
+        } catch (IOException e) {
+            ui.getErrorResponse("Error initializing new file " + filePath);
+        } catch (DukeException de) {
+            ui.getErrorResponse("Error writing .metadata");
         }
     }
 

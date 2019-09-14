@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TaskList {
 
@@ -41,33 +43,35 @@ public class TaskList {
     public String upcomingTasks() {
         String description = "Upcoming tasks within the week:\n";
 
-        int counter = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if (task instanceof Deadline) {
-                LocalDateTime date = ((Deadline) task).getDate();
-                long days = Duration.between(LocalDateTime.now(), date).getSeconds() / 86400;
-                if (days <= 7 && days >= 0) {
-                    counter += 1;
-                    description += counter + ". " + task.toString();
+        description += IntStream.range(0, tasks.size())
+            .filter(i -> {
+                Task task = tasks.get(i);
+                LocalDateTime date = null;
+                if (task instanceof Deadline) {
+                    date = ((Deadline) task).getDate();
+                } else if (task instanceof Event) {
+                    date = ((Event) task).getDate();
+                }
 
-                    if ((i + 1) != tasks.size()) {
-                        description += "\n";
+                if(date != null){
+                    long days = Duration.between(LocalDateTime.now(), date).getSeconds() / 86400;
+                    if (days <= 7 && days >= 0) {
+                        return true;
                     }
                 }
-            } else if (task instanceof Event) {
-                LocalDateTime date = ((Event) task).getDate();
-                long days = Duration.between(LocalDateTime.now(), date).getSeconds() / 86400;
-                if (days <= 7 && days >= 0) {
-                    counter += 1;
-                    description += counter + ". " + task.toString();
-
-                    if ((i + 1) != tasks.size()) {
-                        description += "\n";
-                    }
+                return false;
+            })
+            .mapToObj(i -> {
+                Task task = tasks.get(i);
+                if(i == 0){
+                    return (i + 1) + ". " + task.toString();
                 }
-            }
-        }
+                else{
+                    return "\n" + (i + 1) + ". " + task.toString();
+                }
+            })
+            .reduce("", String::concat);
+
         return description;
     }
 

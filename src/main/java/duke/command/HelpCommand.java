@@ -22,11 +22,13 @@ public class HelpCommand extends Command {
             "-\n"+
             ": event [description] /at [date in DD/MM/YYYY HH:mm format]\n" +
             "-\n"+
-            ": done [task no.] - Task no. from list command\n" +
+            ": done [task no.] - Task no. from list/upcoming command\n" +
             "-\n"+
-            ": delete [task no.] - Task no. from list command\n" +
+            ": delete [task no.] - Task no. from list/upcoming command\n" +
             "-\n"+
             ": list - Lists the current tasks\n" +
+            "-\n"+
+            ": upcoming - Lists the upcoming tasks\n" +
             "-\n"+
             ": find [description] - Find a task\n" +
             "-\n"+

@@ -32,7 +32,7 @@ public class HelpCommand extends Command {
             "-\n"+
             ": help - Access the command page\n" +
             "-\n"+
-            ": bye - exits the program";
+            ": bye - Exits the program";
 
         return helpDesc;
     }

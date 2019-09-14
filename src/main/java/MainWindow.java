@@ -57,7 +57,7 @@ public class MainWindow extends AnchorPane {
 
         Ui ui = new Ui();
         if (response.equals(ui.goodByeMsg)){
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(1);
             System.exit(0);
         }
     }

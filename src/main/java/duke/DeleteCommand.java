@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index > tasks.getListSize()) {
-            throw new DukeException("OOPS!!! duke.Task not found.");
+            throw new DukeException("OOPS!!! Task not found.");
         }
         int oldListSize = tasks.getListSize();
         Task task = tasks.getTask(index);

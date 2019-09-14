@@ -15,44 +15,48 @@ boolean isExit;
         this.isExit = false;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage store) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage store) throws IOException {
+        String output = "";
 
         switch (this.type) {
             case 0:                           //bye
                 this.isExit = true;
+                ByeCommand b = new ByeCommand();
+                output = b.Bye(ui);
                 break;
             case 1:                           //to do
                 ToDoCommand d = new ToDoCommand();
-                d.toDo(tasks, ui, store, this.msg);
+                output = d.toDo(tasks, ui, store, this.msg);
                 break;
             case 2:
                 ListCommand l = new ListCommand();   //list
-                l.list(tasks, ui);
+                output = l.list(tasks, ui);
                 break;
             case 3:                                 //deadline
                 DeadlineCommand dead = new DeadlineCommand();
-                dead.Deadline(tasks, ui, store, this.msg);
+                output = dead.Deadline(tasks, ui, store, this.msg);
                 break;
             case 4:                                //event
                 EventCommand ev = new EventCommand();
-                ev.Event(tasks, ui, store, this.msg);
+                output = ev.Event(tasks, ui, store, this.msg);
                 break;
             case 5:                                //find
                 FindCommand find = new FindCommand();
-                find.Find(tasks, ui, this.msg);
+                output = find.Find(tasks, ui, this.msg);
                 break;
             case 6:                                //done
                 DoneCommand done = new DoneCommand();
-                done.Done(tasks, this.msg);
+                output = done.Done(tasks, this.msg, ui);
                 break;
             case 7:                                //delete
                 DeleteCommand del = new DeleteCommand();
-                del.Delete(tasks, ui, store, this.msg);
+                output = del.Delete(tasks, ui, store, this.msg);
                 break;
             default:
                 FalseCommand fal = new FalseCommand();
-                fal.False(ui);
+                output = fal.False(ui);
         }
+        return output;
     }
 
     public boolean isExit(){

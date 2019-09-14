@@ -41,8 +41,6 @@ public class Duke{
 
     public void run() throws IOException {
         String userInput;
-        int no_of_task;
-        ArrayList<Task> taskList;
 
         boolean isExit = false;
 
@@ -52,11 +50,8 @@ public class Duke{
             c.execute(tasks, ui, storage);
             isExit = c.isExit();
 
-
-
         }
     }
-    
 
         public static void main(String[] args) throws IOException {
 
@@ -71,8 +66,12 @@ public class Duke{
             new Duke("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt").run();
         }
 
-        public static String getResponse(String input){
-        return "hi";
+        public String getResponse(String input) throws IOException {
+
+            Command c = Parser.parse(input);
+            String final_Output = c.execute(tasks, ui, storage);
+
+        return final_Output;
         }
 
 

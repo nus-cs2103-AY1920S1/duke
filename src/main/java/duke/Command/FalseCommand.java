@@ -7,8 +7,9 @@ public class FalseCommand {
 
     }
 
-    public void False(Ui ui){
-        ui.print_false();
+    public String False(Ui ui){
+        String output = ui.print_false();
+        return output;
     }
 
 }

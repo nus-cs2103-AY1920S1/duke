@@ -10,7 +10,7 @@ public class EventCommand {
 
     }
 
-    public void Event(TaskList tasks, Ui ui, Storage store, String msg) throws IOException {
+    public String Event(TaskList tasks, Ui ui, Storage store, String msg) throws IOException {
         String new_timeFrame;
         int index = 0;
         index = msg.indexOf('/');   //iterate through the description portion to find the '/' char
@@ -30,6 +30,7 @@ public class EventCommand {
         Task t = new Task(sub, 'E', 0, new_timeFrame);
         tasks.add(t);
         store.AutoSave(tasks, tasks.get_NoOfTasks());
-        ui.print_event(sub, new_timeFrame,  tasks.get_NoOfTasks());
+        String output = ui.print_event(sub, new_timeFrame,  tasks.get_NoOfTasks());
+        return output;
     }
 }

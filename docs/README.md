@@ -32,7 +32,8 @@ Example of usage:
 
 Expected outcome:
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-todo.png)
+<img src="https://github.com/zhixianggg/duke/blob/master/docs/images/ug-todo.png" width= "512" height= "734" />
+
 
 ### 2. `event` - Add a new event task
 
@@ -45,7 +46,7 @@ Example:
 Expected outcome:
 
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-event.png)
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-event.png" width = "512" height = "734"/ >
 
 
 
@@ -60,7 +61,7 @@ Example:
 Expected outcome:
 
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-deadline.png)
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-deadline.png" width = "512" height = "734" />
 
 
 ### 4. `done` - Mark a task as done 
@@ -74,7 +75,7 @@ Example:
 Expected outcome:
 
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-done.png)
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-done.png" width = "512" height = "734" />
 
 
 ### 5. `list` - View your current list
@@ -86,7 +87,7 @@ Example:
 Expected outcome:
 
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-list.png)
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-list.png" width = "512" height = "734" />
 
 
 ### 6. `find` - Search list
@@ -102,7 +103,7 @@ Example:
 Expected outcome:
 
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-find.png)
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-find.png" width = "512" height = "734" />
 
 
 
@@ -123,7 +124,7 @@ Example:
 Expected outcome:
 
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-priority.png)
+<img src ="https://github.com/zhixianggg/duke/blob/master/docs/images/ug-priority.png" width = "512" height = "734" />
 
 
 ### 8. `delete` - Delete task
@@ -137,7 +138,7 @@ Example:
 Expected outcome:
 
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-delete.png)
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-delete.png" width = "512" height = "734" />
 
 
 ### 9. `bye` - Exit
@@ -149,6 +150,6 @@ Example:
 Expected outcome:
 
 
-![Image](https://github.com/zhixianggg/duke/blob/master/docs/images/ug-bye.png)
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-bye.png" width = "512" height = "734" />
 
 

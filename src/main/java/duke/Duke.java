@@ -33,6 +33,9 @@ public class Duke {
         ui.showWelcome();
     }
 
+    /**
+     * Saves your tasks into storage.
+     */
     public void saveTasks() {
         try {
             storage.save(tasks.dump());

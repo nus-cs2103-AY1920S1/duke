@@ -24,7 +24,6 @@ public abstract class AddCommand extends Command {
      */
     public void executeAddTask(TaskList tasks, Ui ui, Task task) {
         tasks.addTask(task);
-        ui.showTaskAdded(task);
-        ui.showNumTasks(tasks.getNumTasks());
+        ui.showTaskAdded(task, tasks.getNumTasks());
     }
 }

@@ -1,5 +1,7 @@
 T | 0 | homework
-D | 0 | return book | 12/10/2019 1200
+D | 1 | return book | 12/10/2019 1200
 D | 0 | assignment | 02/10/2019 1230
-E | 0 | CS2101 meeting | 20/09/2019 1200
+E | 1 | CS2101 meeting | 20/09/2019 1200
 E | 0 | ccr | 21/09/2019 1200
+T | 0 | return book
+E | 0 | lab meeting | 21/09/2019 1200

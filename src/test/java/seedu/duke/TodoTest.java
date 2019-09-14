@@ -3,6 +3,8 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.task.Todo;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -23,7 +25,12 @@ public class TodoTest {
      */
     @Test
     void saveStringOutput_stringDescription_correctSavedString() {
-        assertEquals("T | 0 | description", new Todo("description").toSaveString());
+        String expected = "";
+        expected = "T | 0 | desc |  dummyExtraDescriptionForTodo | 2019-09-14T23:30:31.894880900 " +
+                "| 2019-09-14T23:30:31.894880900";
+        LocalDateTime fakeTime = LocalDateTime.parse("2019-09-14T23:30:31.894880900");
+        Todo newTodo = new Todo("desc", false, fakeTime, fakeTime);
+        assertEquals(expected, newTodo.toSaveString());
     }
 
 }

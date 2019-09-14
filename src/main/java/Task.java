@@ -33,6 +33,7 @@ public class Task {
     public static Task genTaskFromData(String s) {
         Task t;
         String[] cmdList = s.split("\\|");
+        assert cmdList.length > 0 : "Blank data loaded into storage file";
         String keyword = cmdList[0].trim();
         Boolean isDone = Boolean.valueOf(cmdList[1].trim());
         String description = cmdList[2].trim();
@@ -45,7 +46,8 @@ public class Task {
             LocalTime time = LocalTime.parse(dateTime[1].trim(), DateTimeFormatter.ofPattern("HHmm"));
             if (keyword.equalsIgnoreCase("D")) {
                 t = new Deadline(description, date, time);
-            } else { //(keyword.equalsIgnoreCase("E"))
+            } else { // can only be (keyword.equalsIgnoreCase("E"))
+                assert (keyword.equalsIgnoreCase("E")) : "Wrongly formatted data was stored into storage file";
                 t = new Event(description, date, time);
             }
         }

@@ -21,9 +21,10 @@ public class Ui {
 
     /**
      * Passes response message to controller to be printed in graphic user interface.
-     * @param message
+     * @param message the response message from Duke.
      */
     public void printInGui(String message) {
+        assert message.length() > 0 : "Duke reponse error";
         window.handleDukeResponse(message);
     }
 
@@ -75,7 +76,7 @@ public class Ui {
     }
 
     /**
-     * Prints the Task that is deleted by the user as well as the number of tasks currently
+     * Prints the Task that is deleted by the user as well as the number of tasks currently.
      * @param taskToBeRemoved the Task that is to be deleted.
      * @param numberOfTasks the remaining number of Tasks in the ArrayList tasks.
      */

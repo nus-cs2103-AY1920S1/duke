@@ -22,11 +22,11 @@ public class Storage {
      * Reads the storage file and loads the TaskList.
      *
      * @return the TaskList after reading storage file.
-     * @throws FileNotFoundException if the file does not exist.
      */
     public ArrayList<Task> load() {
         try {
             File dataFile = createOrRetrieve(filePath);
+            assert dataFile != null : "Error from creating or retrieving file.";
             ArrayList<String> stringOfTasks = readFile(dataFile);
             ArrayList<Task> arrOfTasks = new ArrayList<>();
             for (String s : stringOfTasks) {
@@ -53,6 +53,7 @@ public class Storage {
             file.getParentFile().mkdirs();
             FileWriter writer = new FileWriter(file);
         }
+        assert file != null : "Error from creating or retrieving file.";
         return file;
     }
 

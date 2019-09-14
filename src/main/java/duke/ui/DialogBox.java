@@ -1,6 +1,5 @@
 package duke.ui;
 
-import duke.Launcher;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,10 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.logging.Logger;
 
 
 /**
@@ -46,6 +45,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+
     }
 
     /**
@@ -79,9 +79,9 @@ public class DialogBox extends HBox {
      * @return A <code>DialogBox</code> object with the duke's response and avatar
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setPrefSize(Label.USE_COMPUTED_SIZE, Label.USE_COMPUTED_SIZE);
         return db;
     }
 }

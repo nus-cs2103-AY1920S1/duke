@@ -63,6 +63,7 @@ public class MessageHandler {
             } catch (IOException ioe) {
                 message += "\t File creation was not successful. \n";
                 message += "\t Exiting system.";
+                return message;
             }
 
         }
@@ -84,11 +85,10 @@ public class MessageHandler {
     public String addTaskConfirmationMessage(Task task) {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
         List<Task> list = tasks.getList();
-        String message = "Got it. I've added this task: \n"
+        return "Got it. I've added this task: \n"
                 + "\t  " + task.toString() + "\n"
                 + "Now you have " + list.size() + " " + pluralOrNot + " in the list";
 
-        return message;
     }
 
     /**
@@ -122,7 +122,7 @@ public class MessageHandler {
      */
     public String printMarkTaskAsCompletedMessage(Task task) {
         return "Nice! I've marked this task as done: \n"
-                + "\t  [T] " + task.getTaskName() + " " + task.getDetails();
+                + "\t  " + task.toString() + "\n";
     }
 
     /**
@@ -133,13 +133,8 @@ public class MessageHandler {
      */
     public String taskDeletedConfirmationMessage(Task task) {
         String pluralOrNot = taskList.size() == 1 ? "task" : "tasks";
-        // getting 'T' or 'F'
-        char isCompleted = ((Boolean) task.getCompletionStatus()).toString().toUpperCase().charAt(0);
-
-        assert isCompleted == 'T' || isCompleted == 'F';
-
         return "I've removed this task: \n"
-                + "\t  [" + isCompleted + "]" + task.getTaskName() + " " + task.getDetails() + "\n"
+                + "\t  " + task.toString() + "\n"
                 + "Now you have " + taskList.size() + " " + pluralOrNot + " in the list";
     }
 
@@ -164,5 +159,10 @@ public class MessageHandler {
 
         assert !results.isEmpty();
         return results;
+    }
+
+    public String tagAddedConfirmationMessage(Task task) {
+        return "I've tagged this task: \n"
+                + "\t  " + task.toString() + "\n";
     }
 }

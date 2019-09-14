@@ -82,29 +82,34 @@ public class Storage {
      */
     private Task convertFileLineToTask(String fileLine)
             throws InvalidCommandException, DateTimeParseException {
-        String[] parts = fileLine.split(" \\| ");
 
+        String[] parts = fileLine.split("\\|");
         String taskType = parts[0].toUpperCase();
-        boolean isCompleted = parts[1].equals("T");
+        boolean isCompleted = parts[1].equals("Y");
         String taskString = parts[2];
+        String tag = parts[3];
+
+        assert tag.startsWith("#"); // wow this assertion saved my life
 
         switch (taskType) {
         case "TODO":
-            return new Todo(taskString, isCompleted);
+            return new Todo(taskString, isCompleted, tag);
         case "DEADLINE":
             String[] deadlineParts = taskString.split(" \\(by: ");
             String deadlineText = deadlineParts[0];
             String by = deadlineParts[1].replace(")", "");
-            assert !by.contains(")");
 
-            return new Deadline(deadlineText, by, isCompleted);
+            // assert by is in dd/MM/yyyy HH:mm format
+            assert by.matches("\\d{2}/\\d{2}/\\d{4} \\d{2}\\d{2}");
+
+            return new Deadline(deadlineText, by, isCompleted, tag);
         case "EVENT":
             String[] eventParts = taskString.split(" \\(at: ");
             String eventText = eventParts[0];
             String at = eventParts[1].replace(")", "");
 
             assert !at.contains(")");
-            return new Event(eventText, at, isCompleted);
+            return new Event(eventText, at, isCompleted, tag);
         default:
             throw new InvalidCommandException(
                     "There were some commands that I didn't recognize in your tasks file");

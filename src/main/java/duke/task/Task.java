@@ -6,34 +6,27 @@ package duke.task;
  */
 public abstract class Task {
     protected String taskName;
-    protected boolean isCompleted;
-    protected String details;
-    protected TypeOfTask taskType;
+    boolean isCompleted;
+    String details;
+    TypeOfTask taskType;
+    String tag;
+
 
     /**
-     * Default constructor for Task class.
+     * Constructor for Task class.
      *
-     * @param taskName A String which represents the taskName
-     *                 e.g., <code>todo borrow books</code>
-     *                 where the taskName is "borrow books"
-     */
-    public Task(String taskName) {
-        this.taskName = taskName;
-        this.isCompleted = false;
-    }
-
-    /**
-     * Alternative constructor for Task class.
-     *
-     * @param taskName    Information about the task
-     *                    e.g., <code>todo borrow books</code>
+     * @param taskName    Information about the task e.g., <code>todo borrow books</code>
      *                    where the taskInformation is "borrow books"
      * @param isCompleted A boolean indicating if the task is completed
      */
-    public Task(String taskName, boolean isCompleted) {
+    public Task(String taskName, boolean isCompleted, String tag) {
         this.taskName = taskName;
         this.isCompleted = isCompleted;
+        this.tag = tag;
     }
+
+
+
 
     /**
      * Converts task to <code>String</code> that will be scanned into preset task.txt file.
@@ -44,8 +37,12 @@ public abstract class Task {
         char isCompleted = this.isCompleted ? 'Y' : 'N';
 
         String taskType = this.taskType.toString();
-        String result = taskType + " | " + isCompleted + " | " + this.taskName + " " + this.details;
-        return result.stripTrailing();
+        // todo1 + " " + "" => todo1
+        String taskNameAndDetails = (taskName + " " + details).stripTrailing();
+        String result = String.format("%s|%c|%s|%s", taskType, isCompleted, taskNameAndDetails, this.tag);
+
+//      String result = taskType + " | " + isCompleted + " | " + this.taskName + " " + this.details + " | " + ;
+        return result;
     }
 
     /**
@@ -85,8 +82,9 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        char symbol = this.isCompleted ? 'Y' : 'N';
-        String result = "[" + taskType + "][" + symbol + "] " + taskName + " " + details;
+        char isCompletedsymbol = this.isCompleted ? 'Y' : 'N';
+        String taskNameAndDetails = (taskName + " " + details).stripTrailing();
+        String result = "[" + taskType + "][" + isCompletedsymbol + "] " + taskNameAndDetails + " " + "[" + tag + "]";
         return result.stripTrailing();
     }
 }

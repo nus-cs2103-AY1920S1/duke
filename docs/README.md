@@ -77,6 +77,11 @@ Example of usage:
 Example of usage:
 `upcoming`
 
+`help` - Show all commands
+
+Example of usage:
+`help`
+
 `bye` - Exit the application.
 
 Example of usage:

@@ -48,14 +48,14 @@ public class Storage{
             switch (task.getType()) {
                 case TODO:
                     fw.write(Task.getTaskID(task) + " / " +
-                            "tasks.ToDo" + " / " +
+                            "ToDo" + " / " +
                             task.getStatusIcon() + " / " +
                             task.getDescription() +
                             System.lineSeparator());
                     break;
                 case DEADLINE:
                     fw.write(Task.getTaskID(task) + " / " +
-                            "tasks.Deadline" + " / " +
+                            "Deadline" + " / " +
                             task.getStatusIcon() + " / " +
                             task.getDescription() + " / " +
                             ((Deadline) task).getTime() +
@@ -63,7 +63,7 @@ public class Storage{
                     break;
                 case EVENT:
                     fw.write(Task.getTaskID(task) + " / " +
-                            "tasks.Event" + " / " +
+                            "Event" + " / " +
                             task.getStatusIcon() + " / " +
                             task.getDescription() + " / " +
                             ((Event) task).getTime() +

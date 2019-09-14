@@ -1,12 +1,8 @@
 package duke.commands;
 
 import java.io.IOException;
-import java.util.List;
-
 import duke.errors.DukeException;
-import duke.errors.DukeExceptionType;
 
-import duke.core.Parser;
 import duke.core.TaskList;
 import duke.core.Ui;
 
@@ -17,26 +13,9 @@ public abstract class Command {
         return commandType;
     }
 
-    public abstract void execute(TaskList taskList, Ui ui) throws DukeException, IOException ;
+    public abstract void execute(TaskList taskList, Ui ui) throws DukeException, IOException;
 
-    public static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
-        List<String> validCommands = List.of("todo", "deadline", "event");
-
-        if (!validCommands.contains(tokens[0])) {
-            throw new DukeException("commands.Command doesn't exist", DukeExceptionType.INVALIDCOMMAND);
-        }
-        Parser.checkValidLength(tokens);
-
-        if (tokens[0].equals("todo")) {
-            return new AddToDoCommand(tokens);
-        } else if (tokens[0].equals("deadline")) {
-            return AddDeadlineCommand.addDeadlineIfValid(tokens);
-        } else if (tokens[0].equals("event")) {
-            return AddEventCommand.addEventIfValid(tokens);
-        } else {
-            return new NullCommand();
-        }
-    }
 }
+
 
 

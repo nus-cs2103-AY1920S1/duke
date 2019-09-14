@@ -40,7 +40,7 @@ public class DoneCommand extends Command{
             Task task = taskList.getTaskAt(index+1);
             boolean isDoneBefore = task.setDone();
             if (isDoneBefore) {
-                throw new IllegalArgumentException("core.tasks.Task has already been done");
+                throw new IllegalArgumentException("Task has already been done");
             }
             taskList.setDoneInList(this.index+1);
 

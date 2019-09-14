@@ -1,7 +1,6 @@
 package duke.commands;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 
 import duke.core.TaskList;
@@ -13,28 +12,23 @@ import duke.tasks.Event;
 
 public class AddEventCommand extends Command{
 
-    String [] tokens;
 
-    public AddEventCommand(String [] tokens) {
-        this.tokens = tokens;
+
+    private String description;
+    private String time;
+
+    public AddEventCommand(String description, String time) {
+        this.description = description;
+        this.time = time;
         this.commandType = CommandType.ADDEVENT;
-    }
-
-    public static AddEventCommand addEventIfValid(String [] tokens) {
-        if (!Arrays.asList(tokens).contains("/at")) {
-            throw new IllegalArgumentException("Missing deadline");
-        } else {
-            return new AddEventCommand(tokens);
-        }
     }
 
 
     public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
-        Event task = Event.createEvent(tokens);
+        Event task = new Event(this.description,this.time);
         taskList.addToList(task);
         ui.printInput(task, taskList);
     }
-
 
 
 }

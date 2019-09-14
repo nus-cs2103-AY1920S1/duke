@@ -40,6 +40,8 @@ public class Deadline extends Task {
      * @param description Description String of the task.
      * @param dueDateTime dateTime String of the task.
      * @param isDone isDone Boolean status of the task.
+     * @param createDateTime LocalDateTime object.
+     * @param lastModifiedDateTime LocalDateTime object.
      */
     public Deadline(String description, String dueDateTime, Boolean isDone, LocalDateTime createDateTime,
                     LocalDateTime lastModifiedDateTime) {
@@ -72,7 +74,7 @@ public class Deadline extends Task {
      *
      * @return dueDateTime String.
      */
-    public String getDueDateTime(){
+    public String getDueDateTime() {
         return this.dueDateTime;
     }
 
@@ -86,8 +88,8 @@ public class Deadline extends Task {
     @Override
     public String toSaveString() {
 
-        return ("D" + super.toSaveString() + " | " + this.getDueDateTime() + " | " + this.getCreateDateTime().toString()
-        + " | " + this.getLastModifiedDateTime().toString());
+        return ("D" + super.toSaveString() + " | " + this.getDueDateTime() + " | "
+                + this.getCreateDateTime().toString() + " | " + this.getLastModifiedDateTime().toString());
     }
 
     /**
@@ -178,7 +180,7 @@ public class Deadline extends Task {
      *
      * @return Char taskType.
      */
-    public char getTaskType(){
+    public char getTaskType() {
         return 'D';
     }
 

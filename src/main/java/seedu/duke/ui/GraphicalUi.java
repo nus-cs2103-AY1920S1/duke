@@ -15,10 +15,11 @@ import seedu.duke.tasklist.TaskList;
 public class GraphicalUi extends Ui {
     private Boolean isCommandLineInterface;
     private Boolean isGraphicalUserInterface;
+
     /**
      * Default constructor.
      */
-    public GraphicalUi(){
+    public GraphicalUi() {
         isCommandLineInterface = false;
         isGraphicalUserInterface = true;
     }
@@ -45,7 +46,7 @@ public class GraphicalUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param taskNum Integer index of the task which has been selected as "done".
-     * @return
+     * @return String.
      */
     public String getDoneSequence(TaskList tasks, int taskNum) {
         String output = "Nice! I've marked this task as done:\n"
@@ -61,7 +62,7 @@ public class GraphicalUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param newTodo Todo class, which has been newly created.
-     * @return
+     * @return String.
      */
     public String getTodoSequence(TaskList tasks, Todo newTodo) {
         String output = "Got it. I've added this task:\n"
@@ -76,7 +77,7 @@ public class GraphicalUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param newDeadline Deadline class, which has been newly created.
-     * @return String
+     * @return String.
      */
     public String getDeadlineSequence(TaskList tasks, Deadline newDeadline) {
         String output = "Got it. I've added this task:\n"
@@ -106,7 +107,7 @@ public class GraphicalUi extends Ui {
      *
      * @param tasks TaskList class, which contains a list of Task objects.
      * @param taskToDelete Task class, which will be deleted from the list.
-     * @return String
+     * @return String.
      */
     public String getDeleteSequence(TaskList tasks, Task taskToDelete) {
         String output = "Noted. I've removed this task.\n"
@@ -208,7 +209,7 @@ public class GraphicalUi extends Ui {
     public String getCompletedEventStatSequence(Statistic stat, TaskList tasks) {
         String encouragement = "";
         int eventsCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
-        if (eventsCompleted == 0){
+        if (eventsCompleted == 0) {
             encouragement = "You can do better! :)";
         } else {
             encouragement = "Well Done!";

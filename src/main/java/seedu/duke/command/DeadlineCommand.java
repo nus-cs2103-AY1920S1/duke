@@ -30,9 +30,9 @@ public class DeadlineCommand extends Command {
      * @param stats Statistic object.
      * @param statStorage Storage object for stats.
      * @return String sequence to be printed to the User.
-     * @throws DukeException
+     * @throws DukeException Custom error.
      */
-    public String execute (String fullCommand, Ui ui, TaskList tasks, Storage taskStorage,
+    public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage,
                            Statistic stats, Storage statStorage) throws DukeException {
 
         stats.incrementTotalCommandsExecuted();
@@ -49,7 +49,8 @@ public class DeadlineCommand extends Command {
     /**
      * Creates new Deadline object from User string.
      *
-     * @param fullCommand Full String command entered by the User.
+     * @param fullCommand fullCommand Full String command entered by the User.
+     * @return Deadline object,
      */
     public Deadline newDeadline(String fullCommand) {
         String description = Parser.getDeadlineDescription(fullCommand);

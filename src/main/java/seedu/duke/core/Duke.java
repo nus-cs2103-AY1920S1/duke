@@ -8,7 +8,8 @@ import seedu.duke.statistic.Statistic;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.Task;
 import seedu.duke.tasklist.TaskList;
-import seedu.duke.ui.*;
+import seedu.duke.ui.GraphicalUi;
+import seedu.duke.ui.CommandLineUi;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -75,7 +76,7 @@ public class Duke {
             System.out.println(e.getMessage());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-        } catch (IOException e ) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
@@ -112,7 +113,7 @@ public class Duke {
         getCli().printToCommandLine(welcomeString);
 
         try {
-           loadSavedDate();
+            loadSavedDate();
         } catch (FileNotFoundException e) {
             getCli().printToCommandLine(e.getMessage());
         } catch (DukeException e) {
@@ -125,7 +126,7 @@ public class Duke {
         String fullCommand = "";
         Command command = new UnknownCommand();
 
-        while ( command instanceof ByeCommandCli == false) {
+        while (command instanceof ByeCommandCli == false) {
             String outputString = "";
             fullCommand = in.nextLine().trim();
             try {
@@ -148,7 +149,7 @@ public class Duke {
      *
      * @param args Main entry point.
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
     }
 

@@ -18,19 +18,22 @@ public class Statistic {
 
     /**
      * Default constructor. Reads a TreeMap, obtained from Storage.
+     *
+     * @param map Treemap mapping String to Integer.
      */
-    public Statistic (TreeMap<String, Integer> map) {
-         totalCommandsExecuted = map.get("totalCommandsExecuted");
-         totalTasksDeleted = map.get("totalTasksDeleted");
-         totalTodosCompleted = map.get("totalTodosCompleted");
-         totalDeadlinesCompleted = map.get("totalDeadlinesCompleted");
-         totalEventsCompleted = map.get("totalEventsCompleted");
+    public Statistic(TreeMap<String, Integer> map) {
+
+        totalCommandsExecuted = map.get("totalCommandsExecuted");
+        totalTasksDeleted = map.get("totalTasksDeleted");
+        totalTodosCompleted = map.get("totalTodosCompleted");
+        totalDeadlinesCompleted = map.get("totalDeadlinesCompleted");
+        totalEventsCompleted = map.get("totalEventsCompleted");
     }
 
     /**
      * Resets all the attributes to 0.
      */
-    public void resetStats(){
+    public void resetStats() {
         totalCommandsExecuted = 0;
         totalTasksDeleted = 0;
         totalTodosCompleted = 0;
@@ -44,7 +47,7 @@ public class Statistic {
      * @param tasks TaskList object.
      * @return Int no. of events completed between now and one day ago.
      */
-    public int getCompletedEventsFromOneDayAgo(TaskList tasks){
+    public int getCompletedEventsFromOneDayAgo(TaskList tasks) {
         return getSpecifiedCompletedTasksFromVariableDaysAgo(tasks, 'E', 1);
     }
 
@@ -56,15 +59,15 @@ public class Statistic {
      * @param daysAgo Int number of days ago.
      * @return Number of tasks completed within the specified time frame.
      */
-    public int getSpecifiedCompletedTasksFromVariableDaysAgo(TaskList tasks, char taskType, int daysAgo){
+    public int getSpecifiedCompletedTasksFromVariableDaysAgo(TaskList tasks, char taskType, int daysAgo) {
         int count = 0;
-        for (Task t : tasks.getArrayList()){
-            if ( (t.getTaskType() == taskType) && (t.isDone())){
+        for (Task t : tasks.getArrayList()) {
+            if ((t.getTaskType() == taskType) && (t.isDone())) {
                 LocalDateTime taskModifiedDateTime = t.getLastModifiedDateTime();
                 LocalDateTime currentDateTime = LocalDateTime.now();
 
                 // If lastModifiedDate is greater than yesterday, increment count
-                if (taskModifiedDateTime.compareTo(currentDateTime.minusDays(daysAgo)) > 0){
+                if (taskModifiedDateTime.compareTo(currentDateTime.minusDays(daysAgo)) > 0) {
                     count += 1;
                 }
 

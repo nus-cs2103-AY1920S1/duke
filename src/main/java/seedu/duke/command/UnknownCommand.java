@@ -25,7 +25,7 @@ public class UnknownCommand extends Command {
      * @param ui User Interface object.
      * @param tasks TaskList object.
      * @param taskStorage Storage object for tasks.
-     * @param stat
+     * @param stat Statistic object.
      * @param statStorage Storage object for stats.
      * @return String sequence to be printed to the User.
      * @throws DukeException Thrown due to completely unrecognizable command from User.

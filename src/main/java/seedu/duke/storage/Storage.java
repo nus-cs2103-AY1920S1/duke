@@ -100,7 +100,8 @@ public class Storage {
     public void clearTaskFileBeforeSaving() throws IOException {
         // Overwrites text file and adds headers before saving tasks
         FileWriter fw = new FileWriter(this.getFilePath(), false);
-        fw.write("event type | isDone | description | extra description | dateCreated | lastModified" + System.lineSeparator());
+        fw.write("event type | isDone | description | extra description | dateCreated | lastModified"
+                + System.lineSeparator());
         fw.close();
     }
 
@@ -119,6 +120,7 @@ public class Storage {
      *
      * @return ArrayList(Task) parsed from text file.
      * @throws FileNotFoundException An FilenotFoundException may occur when if filePath is invalid.
+     * @throws DukeException Custom error.
      */
     public ArrayList<Task> loadTasks() throws FileNotFoundException, DukeException {
         // Initialises variables to handle the txt input file.
@@ -146,7 +148,7 @@ public class Storage {
                 // If condition to avoid reading in the header.
                 String taskType = words[0].trim();
 
-                switch (taskType){
+                switch (taskType) {
                 case "T":
                     // Create a Todo class.
 
@@ -178,8 +180,8 @@ public class Storage {
                     createDateTime = words[4].trim();
                     lastModifiedDateTime = words[5].trim();
 
-                    Event newEvent = new Event(description, extraDescription, isDone, LocalDateTime.parse(createDateTime),
-                            LocalDateTime.parse(lastModifiedDateTime));
+                    Event newEvent = new Event(description, extraDescription, isDone,
+                            LocalDateTime.parse(createDateTime), LocalDateTime.parse(lastModifiedDateTime));
                     tasks.add(newEvent);
                     break;
 
@@ -202,8 +204,7 @@ public class Storage {
                     break;
 
                 default:
-
-                        throw new DukeException("Unable to read from saved file");
+                    throw new DukeException("Unable to read from saved file");
                 }
             }
         }

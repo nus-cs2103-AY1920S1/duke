@@ -20,7 +20,7 @@ public abstract class Task {
     /**
      * Returns a Task object after initializing with the String description.
      * By default, isDone is set to false.
-     * Deafult constructor when creating from scratch.
+     * Default constructor when creating from scratch.
      *
      * @param description Description String of the task.
      */
@@ -37,6 +37,8 @@ public abstract class Task {
      *
      * @param description Description String of the task.
      * @param isDone Boolean status of the task.
+     * @param createDateTime LocalDateTime object.
+     * @param lastModified LocalDateTime object.
      */
     public Task(String description, Boolean isDone, LocalDateTime createDateTime, LocalDateTime lastModified) {
         this.description = description;
@@ -74,6 +76,8 @@ public abstract class Task {
 
     /**
      * Setter function for setting a Task isDone from false to true.
+     *
+     * @param stats Statistic object.
      */
     public void setDone(Statistic stats) {
         if (!this.isDone) {
@@ -181,7 +185,7 @@ public abstract class Task {
     /**
      * Updates lastModifiedDateTime.
      */
-    public void updateLastModified(){
+    public void updateLastModified() {
 
         this.lastModifiedDateTime = LocalDateTime.now();
     }

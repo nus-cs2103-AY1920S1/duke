@@ -52,7 +52,7 @@ public class ByeCommandCli extends Command {
      * @throws IOException Thrown when writing data to file.
      */
     public void saveData(TaskList tasks, Storage taskStorage, Statistic stats,
-                         Storage statStorage ) throws IOException {
+                         Storage statStorage) throws IOException {
 
         taskStorage.clearTaskFileBeforeSaving();
 

@@ -24,8 +24,11 @@ public class Todo extends Task {
      *
      * @param description Description String ot the task.
      * @param isDone isDone status of the task.
+     * @param dateCreateDateTime LocalDateTime object.
+     * @param lastModifiedDateTime LocalDateTime object.
      */
-    public Todo(String description, Boolean isDone, LocalDateTime dateCreateDateTime, LocalDateTime lastModifiedDateTime) {
+    public Todo(String description, Boolean isDone, LocalDateTime dateCreateDateTime,
+                LocalDateTime lastModifiedDateTime) {
 
         super(description, isDone, dateCreateDateTime, lastModifiedDateTime);
     }
@@ -53,7 +56,7 @@ public class Todo extends Task {
     @Override
     public String toSaveString() {
         return ("T" + super.toSaveString() + " | " + " dummyExtraDescriptionForTodo"
-        + " | " + this.getCreateDateTime().toString() + " | " + this.getLastModifiedDateTime().toString());
+                + " | " + this.getCreateDateTime().toString() + " | " + this.getLastModifiedDateTime().toString());
     }
 
     /**
@@ -61,7 +64,7 @@ public class Todo extends Task {
      * @param stats Statistic object.
      */
     @Override
-    public void setDone(Statistic stats){
+    public void setDone(Statistic stats) {
         super.setDone(stats);
         stats.incrementTotalTodosCompleted();
     }
@@ -71,7 +74,7 @@ public class Todo extends Task {
      *
      * @return Char representing the taskType.
      */
-    public char getTaskType(){
+    public char getTaskType() {
         return 'T';
     }
 }

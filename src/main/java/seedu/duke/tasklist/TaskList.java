@@ -79,14 +79,14 @@ public class TaskList {
     public TaskList findSimilarTasks(String searchTerm) {
 
         ArrayList<Task> listOfTasks = this.getArrayList();
-        List<Task> T = listOfTasks.stream()
+        List<Task> t = listOfTasks.stream()
                 .filter(o -> o.getTaskName().contains(searchTerm))
                 .collect(Collectors.toList());
 
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
 
-        Iterator iter = T.iterator();
-        while(iter.hasNext()) {
+        Iterator iter = t.iterator();
+        while (iter.hasNext()) {
             matchingTasks.add((Task) iter.next());
         }
         return new TaskList(matchingTasks);

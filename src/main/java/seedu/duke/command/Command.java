@@ -22,8 +22,8 @@ public abstract class Command {
      * @param stats Statistic object.
      * @param statStorage Storage object for stats.
      * @return String sequence to be printed to the User.
-     * @throws DukeException
-     * @throws IOException
+     * @throws DukeException Custom error.
+     * @throws IOException IOException error.
      */
     public abstract String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stats,
                                    Storage statStorage) throws DukeException, IOException;

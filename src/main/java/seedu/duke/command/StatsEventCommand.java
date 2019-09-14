@@ -6,7 +6,7 @@ import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
 /**
- * Represents the "stats event" command,
+ * Represents the "stats event" command.
  */
 public class StatsEventCommand extends Command {
 

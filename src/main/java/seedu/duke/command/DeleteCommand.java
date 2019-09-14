@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
      * @param stats Statistic object.
      * @param statStorage Storage object for stats.
      * @return String sequence to be printed to the User.
-     * @throws DukeException
+     * @throws DukeException Custom error.
      */
     public String execute(String fullCommand, Ui ui, TaskList tasks, Storage taskStorage, Statistic stats,
                           Storage statStorage) throws DukeException {

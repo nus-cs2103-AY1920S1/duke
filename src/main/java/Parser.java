@@ -143,7 +143,7 @@ public class Parser {
 				}
 
 				int taskIndex = Integer.parseInt(taskDelete[1]);
-				assert taskIndex == 0 : storedText.append("0 is a wrong input");
+				assert taskIndex != 0 : storedText.append("0 is a wrong input");
 				String removedTask = tasks.getTask(taskIndex - 1).toString();
 				tasks.deleteTask(taskIndex - 1);
 				storedText.append(ui.BORDER + "\nNoted. I've removed this task:\n");

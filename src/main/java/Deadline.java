@@ -24,7 +24,6 @@ public class Deadline extends Task {
 		}
 
 		String[] deadLineDate = input.substring(9).split(" /by ");
-		assert deadLineDate.length == 2 : "Wrong input";
 		if (deadLineDate.length != 2) {
 			throw new DukeInvalidArgumentException(Ui.DEADLINE_FORMAT,
 			                                       input);

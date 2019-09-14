@@ -42,9 +42,9 @@ public class Deadline extends Task {
     @Override
     public String taskInfo() {
         if (isFinished()) {
-            return "[D]" + "[\u2713] " + getName() + " (by: " + myFormat.format(deathTime) + ")";
+            return "[D]" + "[\u2713] " + getName() + " (by: \n  " + myFormat.format(deathTime) + ")";
         } else {
-            return "[D]" + "[\u2715] " + getName() + " (by: " + myFormat.format(deathTime) + ")";
+            return "[D]" + "[\u2715] " + getName() + " (by: \n  " + myFormat.format(deathTime) + ")";
         }
     }
 

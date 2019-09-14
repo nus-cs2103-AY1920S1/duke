@@ -47,9 +47,9 @@ To bid Duke Bunny goodbye, you can send:
 	```
 	bye
 	```
+
 This is optional because the data will be saved whenever any command is made. 
 Thus, do not fret if you close Duke Bunny without doing this.
----
 
 ## Task Managing
 This section will show you the commands for the task managing functions of Duke Bunny.
@@ -114,6 +114,7 @@ To find if you have the task in the list by a single keyword like *lab*, send:
 	```
 	find lab
 	```
+
 All matching tasks will be presented.
 You can also find tasks by the date. 
 
@@ -121,7 +122,7 @@ To find a task with the date *21/09/2019*, send:
 	```
 	find 21/09/2019
 	```
----
+
 
 ## Expenses Managing
 This section will show you the commands for the expenses managing functions of Duke Bunny.
@@ -153,4 +154,3 @@ To delete an expense at index 2 of the list, send:
 	```
 	delete e2
 	```
----

@@ -29,7 +29,7 @@ public class TodoTaskTest {
         task.complete();
         
         assertEquals(
-            "[T][V][] Go fly a kite",
+            "[T][V] Go fly a kite",
             task.toString()
         );
     }

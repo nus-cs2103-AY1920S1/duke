@@ -52,7 +52,7 @@ public class MainWindow extends AnchorPane {
      * Generate Duke greetings upon start.
      */
     public void greet() {
-        String greetings = duke.showWelcome();
+        String greetings = duke.executeWelcome();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetings, dukeImage));
         String showList = duke.showList(); // delete later
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(showList, dukeImage)); // delete later

@@ -1,4 +1,4 @@
 [D][+] change clothes (by: 23 Sep 2019, 18:00 PM)
-[E][ ] refresh (at: 3pm ) (tags: fresh )
 [T][ ] breathe (tags: fresh  clean  healthy )
 [D][ ] poop (by: 02 Feb 2012, 18:00 PM) (tags: dirty  water  refresh )
+[E][ ] cry (at: night ) (tags: sad  sobs )

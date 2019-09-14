@@ -44,7 +44,7 @@ public class Duke {
      * Generate Duke's welcome message.
      * @return a string representing the welcome message.
      */
-    public String showWelcome() {
+    public String executeWelcome() {
         String s1 = ui.showWelcome();
         String s2 = "Here is the list of tasks from where you've left off: ";
         String s3 = ui.showList(taskList);

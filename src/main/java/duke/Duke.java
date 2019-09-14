@@ -16,7 +16,6 @@ public class Duke {
     /**
      * Private instances for the back end.
      */
-    private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
@@ -25,21 +24,20 @@ public class Duke {
      * It initializes the storage class, user end.
      * The previously saved task list will be reloaded through the storage class and used to initialize the task list.
      */
-    public Duke() {
+    Duke() {
         ui = new Ui();
-        storage = new Storage();
         try {
-            tasks = new TaskList(storage.reload("taskfile.txt"));
-        } catch (IOException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        } catch (DukeException e) {
-            ui.showLoadingError();
+            tasks = new TaskList(Storage.reload("taskfile.txt"));
+        } catch (Exception e) {
             tasks = new TaskList();
         }
     }
 
-    public String getResponse(String input) {
+    String showWelcome() {
+        return ui.showWelcome();
+    }
+
+    String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui);

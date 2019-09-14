@@ -14,7 +14,6 @@ class DeleteTaskCommand extends Command {
      * Executes the command to delete a task from the task list.
      *
      * @param tasks The task list.
-     * @param ui The ui that handles user output.
      * @param storage The storage that handles saving and loading the task list.
      * @throws IOException If the I/O operation fails.
      * @throws DukeException If the user input is invalid.

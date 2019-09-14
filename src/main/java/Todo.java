@@ -1,4 +1,8 @@
-public class Todo extends Task {
+/**
+ * Represents the todo task given by the user.
+ */
+class Todo extends Task {
+
     Todo(String taskDescription) {
         super(taskDescription);
     }

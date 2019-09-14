@@ -14,7 +14,6 @@ class FindTaskCommand extends Command {
      * Executes the command to find tasks from the task list based on a keyword.
      *
      * @param tasks The task list.
-     * @param ui The ui that handles user output.
      * @param storage The storage that handles saving and loading the task list.
      */
     @Override

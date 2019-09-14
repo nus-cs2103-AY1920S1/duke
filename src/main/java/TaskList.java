@@ -9,6 +9,7 @@ import java.util.Optional;
 public class TaskList implements Serializable {
     private List<Task> taskList;
     private List<Reminder> reminders = new ArrayList<>();
+
     public TaskList() {
         taskList = new ArrayList<>();
     }
@@ -69,6 +70,12 @@ public class TaskList implements Serializable {
         taskList.add(newTask);
     }
 
+    /**
+     * Gets all tasks that have descriptions containing the keyword the user has inputted.
+     *
+     * @param keyword The word or phrase that the user has inputted.
+     * @return The list of matched tasks.
+     */
     List<Task> getMatchedTasks(String keyword) {
         List<Task> matchedTasks = new ArrayList<>();
         for (Task task: taskList) {
@@ -79,6 +86,11 @@ public class TaskList implements Serializable {
         return matchedTasks;
     }
 
+    /**
+     * Gets reminders of the user's upcoming tasks for the user.
+     *
+     * @return A message containing all reminders for the user's upcoming tasks.
+     */
     String getReminders() {
         StringBuilder sb = new StringBuilder();
         if (reminders.isEmpty()) {
@@ -92,6 +104,9 @@ public class TaskList implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * Creates reminders of the user's upcoming tasks.
+     */
     void createReminders() {
         for (Task task : taskList) {
             Optional<Reminder> potentialReminder = Reminder.createReminderIfValid(task);

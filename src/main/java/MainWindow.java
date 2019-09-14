@@ -27,11 +27,17 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
+    /**
+     * Initialises the scrolling panel and dialog box.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Shows the initial messages of the Duke program when it first launches.
+     */
     @FXML
     void startProgram() {
         dialogContainer.getChildren().addAll(

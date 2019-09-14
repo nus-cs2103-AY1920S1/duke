@@ -1,7 +1,3 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents the deadline task given by the user.
  */
@@ -12,14 +8,14 @@ class Deadline extends TimedTask {
     }
 
     /**
-     * Formats the task such that it can be outputted in a readable form for the user.
+     * Formats the timed task such that it can be outputted in a readable form for the user.
      *
-     * @return The description of the task.
+     * @return The description of the timed task.
      */
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", (isDone ? "\u2713" : "\u2717"),
-                super.taskDescription, super.timestamp.format(super.dateTimeFormatter));
+                super.taskDescription, super.timestamp.format(TimedTask.dateTimeFormatter));
     }
 
 }

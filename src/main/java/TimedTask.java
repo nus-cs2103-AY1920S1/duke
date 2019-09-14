@@ -3,7 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents the task given by the user.
+ * Represents the timed task given by the user.
  */
 abstract class TimedTask extends Task {
     LocalDateTime timestamp;
@@ -14,8 +14,8 @@ abstract class TimedTask extends Task {
         try {
             timestamp = LocalDateTime.parse(rawTimestamp, dateTimeFormatter);
         } catch (DateTimeParseException e) {
-            throw new InvalidTimeException("You formatted your time incorrectly! " +
-                "Please format it this way: dd/mm/yyyy hh:mm");
+            throw new InvalidTimeException("You formatted your time incorrectly! "
+                + "Please format it this way: dd/mm/yyyy hh:mm");
         }
     }
 
@@ -24,10 +24,19 @@ abstract class TimedTask extends Task {
         return true;
     }
 
+    /**
+     * Gets the timestamp of the timed task.
+     * @return The timestamp of the timed task.
+     */
     LocalDateTime getTimestamp() {
         return timestamp;
     }
 
+    /**
+     * Formats the timed task such that it can be outputted in a readable form for the user.
+     *
+     * @return The description of the timed task.
+     */
     @Override
     public abstract String toString();
 

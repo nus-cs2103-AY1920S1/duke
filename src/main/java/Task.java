@@ -19,10 +19,19 @@ abstract class Task implements Serializable {
         isDone = true;
     }
 
+    /**
+     * Check if the task is a timed task.
+     *
+     * @return A boolean value for whether the task is a timed task.
+     */
     boolean isTimed() {
         return false;
     }
 
+    /**
+     * Gets the description of the task.
+     * @return The task description.
+     */
     String getTaskDescription() {
         return taskDescription;
     }

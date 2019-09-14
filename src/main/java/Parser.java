@@ -10,7 +10,7 @@ public class Parser {
     /**
      * Attempts to find within the user input, a Command that takes in one parameter.
      *
-     * @param parameters The description of the action from the user input.
+     * @param parameters The potential parameters from the user input.
      * @return An Optional Command that contains a Command if a command was found; otherwise it is empty.
      * @throws DukeException If the action keyword is invalid.
      */
@@ -40,7 +40,7 @@ public class Parser {
     /**
      * Attempts to find within the user input, a Command that takes in two parameters.
      *
-     * @param parameters The description of the action from the user input.
+     * @param parameters The potential parameters from the user input.
      * @return An Optional Command that contains a Command if a command was found; otherwise it is empty.
      * @throws DukeException If the parameters are invalid.
      */
@@ -49,8 +49,8 @@ public class Parser {
         Optional<Command> command;
 
         if (parameters.length == 1) {
-            throw new EmptyDescriptionException("OOPS!!! The description of a " +
-                    action + " command cannot be empty.");
+            throw new EmptyDescriptionException("OOPS!!! The description of a "
+                    + action + " command cannot be empty.");
         }
 
         switch (action) {
@@ -75,7 +75,7 @@ public class Parser {
     /**
      * Attempts to find within the user input, a Command that takes in three parameters.
      *
-     * @param parameters The description of the action from the user input.
+     * @param parameters The potential parameters from the user input.
      * @return A Command that takes in three parameters.
      * @throws DukeException If the parameters are invalid.
      */
@@ -110,12 +110,12 @@ public class Parser {
     /**
      * Parses the user command.
      *
-     * @param fullCommand The raw input given by the user.
+     * @param userInput The raw input given by the user.
      * @return A Command that varies based on the user input.
      * @throws DukeException If the user input is invalid.
      */
-    static Command parse(String fullCommand) throws DukeException {
-        String[] parameters = fullCommand.split(" ", 2);
+    static Command parse(String userInput) throws DukeException {
+        String[] parameters = userInput.split(" ", 2);
         assert parameters.length > 0 : "There must be at least 1 potential parameter in the input.";
 
         Optional<Command> command = Parser.findOneParameterCommand(parameters);

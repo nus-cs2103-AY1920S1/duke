@@ -79,7 +79,7 @@ public class TaskList implements Serializable {
     List<Task> getMatchedTasks(String keyword) {
         List<Task> matchedTasks = new ArrayList<>();
         for (Task task: taskList) {
-            if (task.toString().contains(keyword)) {
+            if (task.getTaskDescription().contains(keyword)) {
                 matchedTasks.add(task);
             }
         }

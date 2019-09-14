@@ -8,7 +8,7 @@ enum TaskPriority {
 
     private final int value;
 
-    private TaskPriority(int value) {
+    TaskPriority(int value) {
         this.value = value;
     }
 

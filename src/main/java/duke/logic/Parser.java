@@ -123,7 +123,6 @@ public class Parser {
         for (String str: months) {
             if (str.equals(month)) {
                 return true;
-
             }
         }
         return false;

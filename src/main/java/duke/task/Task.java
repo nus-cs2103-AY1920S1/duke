@@ -24,9 +24,9 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s][%s][%d] %s ",
-                this.getType(), isDone ? "T" : "F",
-                getPriorityValue(), taskName);
+        return String.format("[%s][%s] %s (%s)",
+                this.getType(), isDone ? "1" : "0",
+                taskName, getPriorityString());
     }
 
     public int getPriorityValue() {

@@ -6,10 +6,6 @@ import seedu.duke.command.UnknownCommand;
 import seedu.duke.parser.Parser;
 import seedu.duke.statistic.Statistic;
 import seedu.duke.storage.Storage;
-import seedu.duke.task.Deadline;
-import seedu.duke.task.Event;
-import seedu.duke.task.Task;
-import seedu.duke.task.Todo;
 import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.*;
 
@@ -18,7 +14,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -35,16 +30,12 @@ public class Duke {
 
     private Storage taskStorage;
     private Storage statStorage;
+
     private TaskList tasks;
     private Statistic stats;
+
     private CommandLineUi cli;
     private GraphicalUi gui;
-
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/117.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/commando.jpg"));
@@ -61,7 +52,6 @@ public class Duke {
 
         gui = new GraphicalUi();
         cli = new CommandLineUi();
-
     }
 
     /**
@@ -71,12 +61,12 @@ public class Duke {
      *                 Eg "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
      */
     public Duke(String filePath) {
-        gui = new GraphicalUi();
-        cli = new CommandLineUi();
         taskStorage = new Storage(filePath);
         statStorage = new Storage(this.statFilePath);
-    }
 
+        gui = new GraphicalUi();
+        cli = new CommandLineUi();
+    }
 
     /**
      * Returns the response for the user input.
@@ -88,15 +78,14 @@ public class Duke {
     public String getResponse(String input) {
 
         try {
-            // Loads the data from txt file to the TaskList object, tasks.
-            tasks = new TaskList(this.taskStorage.loadTasks());
 
-            // Loads the stats from txt file to the Statistic object, stats
-            stats = new Statistic(this.statStorage.loadStats());
+            loadSavedDate();;
 
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        } catch (DukeException e){
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e ) {
             System.out.println(e.getMessage());
         }
 
@@ -139,19 +128,17 @@ public class Duke {
         System.out.println(cli.getWelcomeString());
 
         try {
-            // Loads the data from txt file to the TaskList object, tasks.
-            tasks = new TaskList(this.taskStorage.loadTasks());
-
-            // Loads the stats data from txt file.
-            stats = new Statistic(this.statStorage.loadStats());
+           loadSavedDate();;
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-        } catch (DukeException e){
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        // Creates scanner object to handle input.
+        
+
         Scanner in = new Scanner(System.in);
-        //String fullCommand = in.nextLine().trim();
         String fullCommand = "";
         Command command = new UnknownCommand();
 
@@ -179,6 +166,22 @@ public class Duke {
      */
     public static void main(String args[]) {
         new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
+    }
+
+    public void loadSavedDate() throws IOException, DukeException {
+        // Loads the data from txt file to the TaskList object, tasks.
+        this.tasks = new TaskList(getTaskStorage().loadTasks());
+
+        // Loads the stats data from txt file.
+        this.stats = new Statistic(getStatStorage().loadStats());
+    }
+
+    public Storage getTaskStorage() {
+        return this.taskStorage;
+    }
+
+    public Storage getStatStorage() {
+        return this.statStorage;
     }
 
 }

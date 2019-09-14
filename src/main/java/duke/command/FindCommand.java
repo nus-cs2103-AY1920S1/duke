@@ -8,6 +8,7 @@ import duke.ui.Ui;
 
 public class FindCommand extends TextBasedCommand {
     public static final String COMMAND = "find";
+    public static final String LINE_DESCRIPTOR = "search phrase";
 
     /**
      * Find command for finding a particular string in tasks in the task list.
@@ -16,7 +17,7 @@ public class FindCommand extends TextBasedCommand {
      * @throws DukeException generic exception with error message
      */
     public FindCommand(String line) throws DukeException {
-        super(line, COMMAND);
+        super(line, COMMAND, LINE_DESCRIPTOR);
     }
 
     @Override

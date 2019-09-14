@@ -35,6 +35,7 @@ public class AutoCompleteVBox extends VBox {
         autoCompleteNodeLinkedList.add(new AutoCompleteNode("list", "list"));
         autoCompleteNodeLinkedList.add(new AutoCompleteNode("help", "help"));
         autoCompleteNodeLinkedList.add(new AutoCompleteNode("clear", "clear"));
+        autoCompleteNodeLinkedList.add(new AutoCompleteNode("find ", "find {search phrase}"));
         autoCompleteNodeLinkedList.add(new AutoCompleteNode("done ", "done {index}"));
         autoCompleteNodeLinkedList.add(new AutoCompleteNode("delete ", "delete {index}"));
         autoCompleteNodeLinkedList.add(new AutoCompleteNode("todo ", "todo {description}"));

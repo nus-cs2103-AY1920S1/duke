@@ -12,16 +12,21 @@ public abstract class TextBasedCommand extends Command {
      *
      * @param line entire input line by user
      * @param command extracted command
+     * @param lineDescriptor name of the description e.g. "description" or "search phrase"
      * @throws DukeException generic exception with error message
      */
-    public TextBasedCommand(String line, String command) throws DukeException {
+    public TextBasedCommand(String line, String command, String lineDescriptor) throws DukeException {
         this.line = line;
         if (!line.contains(" ")) {
-            throw new DukeException(ErrorMsgWithParams.EMPTY_DESCRIPT, command);
+            if (this instanceof FindCommand) {
+                throw new DukeException(ErrorMsgWithParams.EMPTY_DESCRIPT, command, lineDescriptor);
+            } else {
+                throw new DukeException(ErrorMsgWithParams.EMPTY_DESCRIPT, command,  lineDescriptor);
+            }
         }
         remainingLine = line.replaceFirst(command + " ","");
         if (remainingLine.length() <= 0) {
-            throw new DukeException(ErrorMsgWithParams.EMPTY_DESCRIPT, command);
+            throw new DukeException(ErrorMsgWithParams.EMPTY_DESCRIPT, command,  lineDescriptor);
         }
     }
 }

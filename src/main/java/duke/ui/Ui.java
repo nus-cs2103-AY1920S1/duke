@@ -48,11 +48,12 @@ public class Ui {
      */
     public void printHelp() {
         println("Here is the list of instructions: "
-                + "\nlist (list all items)"
+                + "\nlist (list all tasks)"
+                + "\nfind (find tasks by search phrase)"
                 + "\nbye (exit program)"
-                + "\ndone (mark an item as done by index)"
-                + "\ndelete (delete all items by index)"
-                + "\nclear (remove all items from list)"
+                + "\ndone (mark an task as done by index)"
+                + "\ndelete (delete all tasks by index)"
+                + "\nclear (remove all tasks from list)"
                 + "\ntodo (add a todo to the list)"
                 + "\nevent (add an event to the list)"
                 + "\ndeadline (add a deadline to the list)");
@@ -62,7 +63,7 @@ public class Ui {
      * Prints bye.
      */
     public void printBye() {
-        println("Bye. Hope to see you again soon! (Program will exit in 3 seconds).");
+        println("Bye. Hope to see you again soon!");
     }
 
     /**

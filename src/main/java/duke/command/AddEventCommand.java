@@ -23,7 +23,7 @@ public class AddEventCommand extends TextBasedCommand {
      * @throws DukeException generic error with message
      */
     public AddEventCommand(String line) throws DukeException {
-        super(line, COMMAND);
+        super(line, COMMAND, AddTodoCommand.LINE_DESCRIPTOR);
     }
 
     @Override

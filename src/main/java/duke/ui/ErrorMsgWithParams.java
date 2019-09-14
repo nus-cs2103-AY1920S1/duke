@@ -1,7 +1,7 @@
 package duke.ui;
 
 public enum ErrorMsgWithParams {
-    EMPTY_DESCRIPT(Constants.PARAM_PLACEHOLDER + " cannot have an empty description"),
+    EMPTY_DESCRIPT(Constants.PARAM_PLACEHOLDER + " cannot have an empty " + Constants.PARAM_PLACEHOLDER + "."),
     EMPTY_DESCRIPT_AND_OR_DATE("The description and date of a " + Constants.PARAM_PLACEHOLDER + " cannot be empty."),
     BAD_DATE_FORMAT_WITH_PARAMS(Constants.PARAM_PLACEHOLDER + " is ill formatted. Example: "
             + Constants.PARAM_PLACEHOLDER + " return book /by 2/12/2019 1800");
@@ -31,9 +31,8 @@ public enum ErrorMsgWithParams {
                 parameterizedDescription = parameterizedDescription
                         .replaceFirst(Constants.PARAM_PLACEHOLDER, parameter);
             }
-            return parameterizedDescription;
         }
 
-        return description;
+        return parameterizedDescription;
     }
 }

@@ -100,7 +100,7 @@ class DukeTest {
         populateDukeTasklistWithSamples(duke);
         String response;
         response = duke.getResponse("find ");
-        assertEquals(response, Unicode.SAD_FACE + "OOPS!!! find cannot have an empty description\n");
+        assertEquals(response, Unicode.SAD_FACE + "OOPS!!! find cannot have an empty search phrase.\n");
         response = duke.getResponse("find ooof");
         assertEquals(response, "_________________________________________\n"
                 + "Here are the matching tasks in your list:\n"
@@ -144,7 +144,7 @@ class DukeTest {
     void addSampleTodosToTasklist(Duke duke) {
         String response;
         response = duke.getResponse("todo");
-        assertEquals(response, Unicode.SAD_FACE + "OOPS!!! todo cannot have an empty description\n");
+        assertEquals(response, Unicode.SAD_FACE + "OOPS!!! todo cannot have an empty description.\n");
         response = duke.getResponse("todo /at");
         assertEquals(response, "Got it. I've added this task: \n"
                 + "  [T][" + Unicode.CROSS + "] /at\n"
@@ -204,7 +204,7 @@ class DukeTest {
     void clearAndCheckTasklistIsEmpty(Duke duke) {
         String response;
         response = duke.getResponse("clear");
-        assertEquals(response, "Emptied task list\n");
+        assertEquals(response, "Emptied task list.\n");
         response = duke.getResponse("list");
         assertEquals(response, "There are no tasks in your list.\n");
     }

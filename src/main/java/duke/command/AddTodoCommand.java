@@ -9,6 +9,7 @@ import duke.task.Todo;
 
 public class AddTodoCommand extends TextBasedCommand {
     public static final String COMMAND = "todo";
+    public static final String LINE_DESCRIPTOR = "description";
 
     /**
      * Create todo command (extended from text based command).
@@ -17,7 +18,7 @@ public class AddTodoCommand extends TextBasedCommand {
      * @throws DukeException generic error with message
      */
     public AddTodoCommand(String line) throws DukeException {
-        super(line, COMMAND);
+        super(line, COMMAND, LINE_DESCRIPTOR);
     }
 
     @Override

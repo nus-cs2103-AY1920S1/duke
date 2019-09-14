@@ -18,6 +18,12 @@ public class Parser {
 
     }
 
+    /**
+     * Returns the 2nd word for a command starting with "stats".
+     *
+     * @param fullCommand Input string from User.
+     * @return Second word of user string.
+     */
     public static String parseStatCommand(String fullCommand) {
         return (fullCommand.split(" ")[1]);
     }
@@ -86,11 +92,24 @@ public class Parser {
         return (Integer.parseInt(fullCommand.substring(7)));
     }
 
+    /**
+     * Returns the task to find for "find" command.
+     *
+     * @param fullCommand Input of the user, read from Scanner object.
+     * @return Task to find.
+     */
     public static String getFindTask(String fullCommand) {
         return (fullCommand.substring(5));
 
     }
 
+    /**
+     * Creates the command depending on the user string.
+     *
+     * @param fullCommand Input user String.
+     * @param ui User Interface object.
+     * @return Command object.
+     */
     public static Command getCommand(String fullCommand, Ui ui) {
         String taskType = parseCommand(fullCommand);
 

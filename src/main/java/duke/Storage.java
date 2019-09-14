@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import tasks.Task;
@@ -39,36 +40,43 @@ public class Storage {
     }
 
     /**
-     * This method is used to load the task list from disk.
+     * Creates the task object from String array and adds it to the ArrayList list.
+     *
+     */
+    public void loadTask(ArrayList<Task> list, String[] oldList, Task t) {
+        switch (oldList[0].trim()) {
+        case "T":
+            t = new Todo(oldList[2].trim());
+            break;
+        case "D":
+            t = new Deadline(oldList[2].trim(), oldList[3].trim());
+            break;
+        default:
+            t = new Event(oldList[2].trim(), oldList[3].trim());
+            break;
+        }
+        if (oldList[1].trim().equals("1")) {
+            t.markAsDone();
+        }
+        list.add(t);
+    }
+    /**
+     * Loads the task list from disk.
      *
      * @return list of tasks
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
         Scanner sc1 = new Scanner(file);
-
         while (sc1.hasNextLine()) {
             String[] oldList = sc1.nextLine().split(" // ");
-            if (oldList.length < 2) {
-                break;
-            }
-            Task t;
-            if (oldList[0].trim().equals("T")) {
-                t = new Todo(oldList[2].trim());
-            } else {
-                if (oldList[0].trim().equals("D")) {
-                    t = new Deadline(oldList[2].trim(), oldList[3].trim());
-                } else {
-                    t = new Event(oldList[2].trim(), oldList[3].trim());
-                }
-            }
-            if (oldList[1].trim().equals("1")) {
-                t.markAsDone();
-            }
-            list.add(t);
+            Task t = null;
+            loadTask(list, oldList, t);
+
         }
         return list;
     }
+
 
     /**
      * This method is used to update current items in the list.
@@ -76,6 +84,7 @@ public class Storage {
      * @param list the current task list
      */
     public void updateList(ArrayList<Task> list) {
+        Collections.sort(list);
         try (PrintWriter out = new PrintWriter(file)) {
             for (int i = 1; i <= list.size(); i++) {
                 Task t = list.get(i - 1);

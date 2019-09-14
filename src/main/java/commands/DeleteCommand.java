@@ -22,9 +22,9 @@ public class DeleteCommand extends Command {
      * @return duke response after deletion
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task t = null;
+        Task t;
         try {
-            tasks.deleteTask(taskNumToDelete);
+            t = tasks.deleteTask(taskNumToDelete);
             assert tasks.getList() != null;
             storage.updateList(tasks.getList());
 

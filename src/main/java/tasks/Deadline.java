@@ -25,14 +25,29 @@ public class Deadline extends Task {
     }
 
     /**
-     * This method is used to return the task list.
+     * Parses the date string in task and creates a LocalDateTime object
      */
 
     public void getDate() {
-        String[] dateArray = by.split(" ");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate d1 = LocalDate.parse(dateArray[0],formatter);
-        date1 = d1.atTime(Integer.parseInt(dateArray[1]) / 100, Integer.parseInt(dateArray[1]) % 100);
+        if (!by.contains(" ")) {
+            LocalDate d1 = LocalDate.parse(by, formatter);
+            date1 = d1.atTime(23, 59);
+        } else {
+            String[] dateArray = by.split(" ");
+            LocalDate d1 = LocalDate.parse(dateArray[0], formatter);
+            date1 = d1.atTime(Integer.parseInt(dateArray[1]) / 100, Integer.parseInt(dateArray[1]) % 100);
+        }
+    }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return date1;
+    }
+
+    @Override
+    public String getExtraInfo() {
+        return by;
     }
 
     @Override

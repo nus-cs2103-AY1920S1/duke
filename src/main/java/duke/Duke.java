@@ -1,10 +1,11 @@
 package duke;
 
 import java.io.FileNotFoundException;
+import duke.MainWindow;
 
 /**
  * The Duke program implements an application that
- * acts like a digital notebook for the user.
+ * acts like a task scheduler for the user.
  *
  * @author Calvin
  * @version 1.0
@@ -18,9 +19,7 @@ public class Duke {
     private Ui ui;
 
     public Duke() {
-
     }
-
     /**
      * This constructor takes in the filePath and initiates the necessary
      * classes required.
@@ -36,10 +35,15 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
     public static void main(String[] args) {
     }
 
+    /**
+     * Parses user input and executes the respective commands.
+     *
+     * @param input
+     * @return duke's response after parsing user command
+     */
     String getResponse(String input) {
         if (input.equals("bye")) {
             System.exit(0);
@@ -47,9 +51,7 @@ public class Duke {
         } else {
             Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
             return Parser.parse(input).execute(duke.tasks, duke.ui, duke.storage);
-
         }
-
     }
 }
 

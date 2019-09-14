@@ -57,14 +57,17 @@ public class Parser {
             default:
                 Task t;
                 switch (input[0]) {
+                case "t":
                 case "todo":
                     t = new Todo(input[1].trim());
                     break;
+                case "d":
                 case "deadline": {
                     String[] str = input[1].trim().split("/", 2);
                     t = new Deadline(str[0], str[1].substring(3).trim());
                     break;
                 }
+                case "e":
                 case "event": {
                     String[] str = input[1].trim().split("/", 2);
                     t = new Event(str[0], str[1].substring(3).trim());
@@ -80,9 +83,9 @@ public class Parser {
         } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
-            return new ErrorCommand("Wrong input format!");
+            return new ErrorCommand("Wrong input format!\n Input [help] for more support.");
         } catch (Exception e) {
-            return new ErrorCommand("Me no understand!");
+            return new ErrorCommand("Me no understand!\n Input [help] for more support.");
         }
 
     }

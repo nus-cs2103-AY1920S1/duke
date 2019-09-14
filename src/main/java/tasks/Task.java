@@ -1,8 +1,9 @@
 package tasks;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Task {
+public abstract class Task implements Comparable<Task> {
     private String description;
     private boolean isDone;
     String symbol;
@@ -38,6 +39,8 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public abstract LocalDateTime getDateTime();
+
     /**
      * This method is used return description of a task.
      *
@@ -53,18 +56,8 @@ public class Task {
      *
      * @return String extra information
      */
-    public String getExtraInfo() {
-        if (symbol.equals("T")) {
-            return "";
-        } else if (symbol.equals("E")) {
-            Event t = (Event) this;
-            return t.at;
-        } else {
-            assert symbol.equals("D");
-            Deadline t = (Deadline) this;
-            return t.by;
-        }
-    }
+    public abstract String getExtraInfo();
+
     /**
      * This method is used to mark a task as done.
      */
@@ -84,9 +77,7 @@ public class Task {
     }
 
 
-    public void postpone(int daysToPostpone, int hoursToPostpone, int minutesToPostpone) {
-
-    }
+    public abstract void postpone(int daysToPostpone, int hoursToPostpone, int minutesToPostpone);
 
     @Override
     public String toString() {
@@ -106,6 +97,22 @@ public class Task {
             output += (" #" + note);
         }
         return output;
+    }
+
+    public int compareTo(Task other) {
+        if (getSymbol() == "T") {
+            if (other.symbol == "T") {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            if (other.getSymbol() == "T") {
+                return -1;
+            } else {
+                return getDateTime().compareTo(other.getDateTime());
+            }
+        }
     }
 }
 

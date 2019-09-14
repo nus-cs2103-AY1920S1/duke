@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
 import tasks.Task;
 
 public class TaskList {
@@ -14,7 +16,7 @@ public class TaskList {
     }
 
     public TaskList() {
-        this.list = new ArrayList<Task>();
+        this.list = new ArrayList<>();
     }
 
     /**
@@ -23,9 +25,13 @@ public class TaskList {
      * @return the task list
      */
     public ArrayList<Task> getList() {
+        //list.sort();
         return list;
     }
 
+    public void sort() {
+        Collections.sort(list);
+    }
 
     /**
      * This method is used to add a task to the list.

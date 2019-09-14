@@ -40,6 +40,16 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDateTime getDateTime() {
+        return date1;
+    }
+
+    @Override
+    public String getExtraInfo() {
+        return at;
+    }
+
+    @Override
     public void postpone(int daysToPostpone,
                          int hoursToPostpone, int minutesToPostpone) {
 

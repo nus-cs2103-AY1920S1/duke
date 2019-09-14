@@ -1,14 +1,10 @@
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents the event task given by the user.
  */
-public class Event extends TimedTask {
+class Event extends TimedTask {
 
-    public Event(String s, String at) throws DukeException {
-        super(s, at);
+    Event(String taskDescription, String timestamp) throws DukeException {
+        super(taskDescription, timestamp);
     }
 
     /**
@@ -18,7 +14,8 @@ public class Event extends TimedTask {
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", (isDone ? "Complete" : "Incomplete"),
-                taskDescription, super.timestamp.format(super.dateTimeFormatter));
+        return String.format("[E][%s] %s (at: %s)", (isDone ? "\u2713" : "\u2717"),
+                super.taskDescription, super.timestamp.format(TimedTask.dateTimeFormatter));
     }
+
 }

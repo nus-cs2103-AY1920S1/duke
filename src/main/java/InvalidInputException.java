@@ -1,9 +1,10 @@
 /**
  * A DukeException for when the user inputs an invalid command.
  */
-public class InvalidInputException extends DukeException {
+class InvalidInputException extends DukeException {
 
-    public InvalidInputException(String msg) {
+    InvalidInputException(String msg) {
         super(msg);
     }
+
 }

@@ -11,6 +11,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /**
+     * Initialises the stage for Duke.
+     *
+     * @param stage The stage to set the scene in.
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -26,4 +31,5 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
 }

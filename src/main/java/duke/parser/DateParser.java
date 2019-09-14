@@ -1,10 +1,10 @@
 package duke.parser;
 
-import duke.exception.InvalidDateInputException;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import duke.exception.InvalidDateInputException;
 
 /**
  * Represents a Date Parser to parse in all String data given into a form readable by the user.
@@ -12,11 +12,8 @@ import java.util.Date;
 public class DateParser {
 
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hhmm");
-    private Date inputParser;
     private String input;
     private Calendar calendar = Calendar.getInstance();
-    private DateChecker dateChecker;
-    private TimeChecker timeChecker;
 
     /**
      * Reads the input and stores it in the parser.
@@ -69,7 +66,7 @@ public class DateParser {
     private void checkDateData(String[] dateData) throws InvalidDateInputException {
         InvalidDateInputException error = new InvalidDateInputException("Please key in a valid date in the format:\n "
                 + "dd/MM/yyyy");
-        dateChecker = new DateChecker(dateData);
+        DateChecker dateChecker = new DateChecker(dateData);
         if (dateChecker.containsInvalidDate()) {
             throw error;
         }
@@ -85,7 +82,7 @@ public class DateParser {
         InvalidDateInputException error = new InvalidDateInputException("Please key in "
                 + "a valid time in the format:\n "
                 + "hhmm");
-        timeChecker = new TimeChecker(time);
+        TimeChecker timeChecker = new TimeChecker(time);
         if (timeChecker.containsInvalidTime()) {
             throw error;
         }
@@ -139,7 +136,7 @@ public class DateParser {
         checkDateTime();
 
         try {
-            inputParser = formatter.parse(input);
+            Date inputParser = formatter.parse(input);
             calendar.setTime(inputParser);
             int year = calendar.get(Calendar.YEAR);
             String month = monthToString(calendar.get(Calendar.MONTH));

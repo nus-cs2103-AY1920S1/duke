@@ -1,11 +1,12 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 import duke.exception.InvalidDateInputException;
 import duke.exception.InvalidEditTaskException;
 import duke.exception.InvalidTaskIndexException;
-import duke.tag.Tag;
 import duke.parser.DateParser;
-import java.util.ArrayList;
+import duke.tag.Tag;
 
 /**
  * A Class that represents a list of all completed and uncompleted Tasks.
@@ -34,7 +35,7 @@ public class TaskList {
      * @param tasks The loaded list of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+        this.tasks = new ArrayList<>(tasks);
     }
 
     public static boolean hasHitTaskLimit() {

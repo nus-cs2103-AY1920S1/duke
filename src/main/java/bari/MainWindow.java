@@ -37,6 +37,17 @@ public class MainWindow extends AnchorPane {
         bari = d;
     }
 
+    private void exitApplication() {
+        // Wait for 0.5 seconds and exit
+        Timer tm = new Timer();
+        tm.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, 500);
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other
      * containing Bari's reply and then appends them to the dialog container.
@@ -53,14 +64,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         // This response is only produced by an ExitCommand
         if (response.equals("Bye!")) {
-            // Wait for 0.5 seconds and exit
-            Timer tm = new Timer();
-            tm.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    System.exit(0);
-                }
-            }, 500);
+            exitApplication();
         }
     }
 }

@@ -7,7 +7,7 @@ plugins {
 }
 
 group "bari"
-version "0.9.5"
+version "1.0.0"
 
 repositories {
     mavenCentral()
@@ -28,7 +28,7 @@ javafx {
 
 shadowJar {
     archiveBaseName = "bari"
-    archiveVersion = "0.9.5"
+    archiveVersion = "1.0.0"
     archiveClassifier = null
     archiveAppendix = null
 }

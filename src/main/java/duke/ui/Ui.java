@@ -73,14 +73,6 @@ public class Ui {
         System.out.print(INDENT + "Noted. I've removed this task:\n" + INDENT + " " + removed + "\n");
     }
 
-    /**
-     * Displays a no result found message for search.
-     */
-    public void showNotFound() {
-        mw.displayMsg("Hummm, nothing has been found.\n");
-        System.out.print(INDENT + "Hummm, nothing has been found.\n");
-    }
-
     public void showError(String message) {
         mw.displayMsg(message + "\n");
         System.out.print(INDENT + message + "\n");
@@ -108,17 +100,6 @@ public class Ui {
     public void showClearList() {
         mw.displayMsg("Great! I've removed all your tasks!\n");
         System.out.print(INDENT + "Great! I've removed all your tasks!\n");
-    }
-
-    /**
-     * Displays the task.
-     *
-     * @param index Index of the task in the task list.
-     * @param task  Task to be displayed.
-     */
-    public void showTask(int index, String task) {
-        mw.displayMsg(" " + index + ". " + task + "\n");
-        System.out.print(INDENT + " " + index + ". " + task + "\n");
     }
 
     /**

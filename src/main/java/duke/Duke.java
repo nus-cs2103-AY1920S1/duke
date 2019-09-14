@@ -44,9 +44,8 @@ public class Duke {
     /**
      * Starts the Duke programme.
      *
-     * @param input User input String.
      */
-    void start(String input) {
+    void start() {
 
         try {
             assert mw != null;

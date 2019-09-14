@@ -87,7 +87,7 @@ public class Sheet {
         StringBuilder sb = new StringBuilder("");
 
         for (int i = 0; i < numOfTask; i++) {
-            sb.append((" " + (i + 1) + ". " + tasks.get(i).toString().trim() + "\n"));
+            sb.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString().trim()).append("\n");
         }
         return sb.toString();
     }
@@ -112,7 +112,7 @@ public class Sheet {
                 j++;
                 continue;
             }
-            sb.append((" " + (i + 1) + ". " + sortedList.get(j).toString().trim() + "\n"));
+            sb.append(" ").append(i + 1).append(". ").append(sortedList.get(j).toString().trim()).append("\n");
             j++;
             i++;
         }
@@ -144,7 +144,7 @@ public class Sheet {
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 count++;
-                sb.append((" " + count + ". " + tasks.get(count).toString().trim() + "\n"));
+                sb.append(" ").append(count).append(". ").append(tasks.get(count).toString().trim()).append("\n");
             }
         }
         if (count == 0) {
@@ -160,11 +160,11 @@ public class Sheet {
      */
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (int i = 0; i < numOfTask; i++) {
-            output += (i + 1) + ". " + tasks.get(i).toString();
+            output.append(i + 1).append(". ").append(tasks.get(i).toString());
         }
-        return output.trim();
+        return output.toString().trim();
     }
 
 }

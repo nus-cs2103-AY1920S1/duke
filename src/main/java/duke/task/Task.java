@@ -91,7 +91,7 @@ public class Task implements Comparable<Task> {
      *
      * @return String symbol of the status of task.
      */
-    public String getStatusIcon() {
+    String getStatusIcon() {
         return (isDone ? TICK : CROSS); //return tick or X symbols
     }
 

@@ -18,6 +18,17 @@ import duke.command.IllegalCommand;
  */
 public class Parser {
 
+    private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_BYE = "bye";
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_DELETE = "delete";
+    private static final String COMMAND_DONE = "done";
+    private static final String COMMAND_TODO = "todo";
+    private static final String COMMAND_DEADLINE = "deadline";
+    private static final String COMMAND_EVENT = "event";
+    private static final String COMMAND_HI = "hi";
+    private static final String COMMAND_CLEAR = "clear";
+
     /**
      * Parses the user input String into executable commands.
      *
@@ -29,25 +40,25 @@ public class Parser {
         String command = cmds[0];
         String detail = concatCommand(cmds);
         switch (command) {
-        case "bye":
+        case COMMAND_BYE:
             return new CommandExit(detail);
-        case "list":
+        case COMMAND_LIST:
             return new CommandList(detail);
-        case "delete":
+        case COMMAND_DELETE:
             return new CommandDelete(detail);
-        case "done":
+        case COMMAND_DONE:
             return new CommandDone(detail);
-        case "todo":
+        case COMMAND_TODO:
             return new CommandTodo(detail);
-        case "deadline":
+        case COMMAND_DEADLINE:
             return new CommandDeadline(detail);
-        case "event":
+        case COMMAND_EVENT:
             return new CommandEvent(detail);
-        case "find":
+        case COMMAND_FIND:
             return new CommandFind(detail);
-        case "hi":
+        case COMMAND_HI:
             return new CommandHi(detail);
-        case "clear":
+        case COMMAND_CLEAR:
             return new CommandClear(detail);
         default:
             return new IllegalCommand(detail);
@@ -56,9 +67,9 @@ public class Parser {
 
     private static String concatCommand(String[] strs) {
         assert strs != null;
-        StringBuffer output = new StringBuffer("");
+        StringBuilder output = new StringBuilder("");
         for (int i = 1; i < strs.length; i++) {
-            output.append(strs[i] + " ");
+            output.append(strs[i]).append(" ");
         }
         return output.toString().trim();
     }

@@ -3,6 +3,7 @@ package seedu.duke;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -14,6 +15,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private Duke duke = new Duke();
+    private Image chatBotImage = new Image(this.getClass().getResourceAsStream("/images/ChatBot_Image.jpg"));
 
     /**
      * Loads MainWindow FXML file and create the JavaFX GUI components the file declares.
@@ -28,8 +30,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke ChatBot");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setStage(stage);
+            fxmlLoader.<MainWindow>getController().setMainScene(scene);
+            stage.setTitle("Duke ChatBot");
+            stage.getIcons().add(chatBotImage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

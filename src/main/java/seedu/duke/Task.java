@@ -33,6 +33,7 @@ public class Task implements Comparable<Task> {
         this.description = description;
         isDone = false;
         doneIcon = 0;
+        TaskList.numTaskNotDone++;
     }
 
     /**

@@ -1,6 +1,9 @@
 package seedu.duke;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -16,7 +19,9 @@ import java.io.IOException;
  */
 public class MainWindow extends AnchorPane {
 
-    Stage window;
+    private static Stage window;
+    private Scene scene;
+
 
     @FXML
     private ScrollPane scrollPane;
@@ -29,8 +34,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/scenery3.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/scenery2.jpeg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImage.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeImage.png"));
+    private Image chatBotImage = new Image(this.getClass().getResourceAsStream("/images/ChatBot_Image.jpg"));
 
     /**
      * Binds the scroll pane to the dialogContainer so as to set up the main layout.
@@ -39,9 +45,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         assert dukeImage != null : "dukeImage cannot be null";
+        Ui ui = new Ui();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! I'm Duke\n"
-                + "What can I do for you?", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(ui.greet(), dukeImage));
     }
 
     /**
@@ -54,6 +60,24 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Sets the variable window.
+     *
+     * @param s the variable stage to be used
+     */
+    public void setStage(Stage s) {
+        window = s;
+    }
+
+    /**
+     * Sets the variable scene.
+     *
+     * @param s the variable scene to be used
+     */
+    public void setMainScene(Scene s) {
+        scene = s;
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -61,10 +85,35 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        if (input.equalsIgnoreCase("show stats")) {
+            showStatsScene();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }
+
+    /**
+     * Switches the scene to show bar chart containing the statistics.
+     */
+    public void showStatsScene() {
+        try {
+            TaskList.calculateStats();
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/StatisticsScene.fxml"));
+            BarChart chart = fxmlLoader.load();
+            Scene scene = new Scene(chart);
+            window.setScene(scene);
+            fxmlLoader.<StatisticsController>getController().setStage(window);
+            fxmlLoader.<StatisticsController>getController().setScene(scene);
+            window.getIcons().add(chatBotImage);
+            window.setTitle("Duke ChatBot");
+            window.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

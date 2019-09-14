@@ -25,11 +25,12 @@ public class StatisticsCommand extends Command {
      * @throws IOException on input error
      */
     @Override
-    public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         list.calculateStats();
-        String output = ui.showStatsMsg() + "Number of Tasks Done: " + list.getNumTaskDone() + "\n"
-                + "Number of Tasks Not Done: " + list.getNumTaskNotDone() + "\n"
-                + "Number of Tasks Done Past Week: " + list.getNumDonePastWeek() + "\n";
+        String output = ui.showStatsMsg() + "Number of Tasks Done: " + list.numTaskDone + "\n"
+                + "Number of Tasks Not Done: " + list.numTaskNotDone + "\n"
+                + "Number of Tasks Done Past Week: " + list.numDonePastWeek + "\n";
+        list.resetStats();
         return output;
     }
 

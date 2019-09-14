@@ -21,6 +21,7 @@ import java.util.Collections;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
     @FXML
@@ -44,7 +45,7 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(35, 45, 40));
+        displayPicture.setClip(new Circle(40, 40, 60));
     }
 
     /**

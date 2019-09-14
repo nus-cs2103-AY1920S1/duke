@@ -173,9 +173,9 @@ public class GraphicalUi extends Ui {
         String output = "Listing all statistics:"
                 + "\nTotal Commands Executed:    " + stat.getTotalCommandsExecuted()
                 + "\nTotal Tasks Deleted:                " + stat.getTotalTasksDeleted()
-                + "\nTotal To-Dos Completed:       " + stat.getTotalTodosCompleted()
-                + "\nTotal Deadlines Completed:   " + stat.getTotalDeadlinesCompleted()
-                + "\nTotal Events Completed:        " + stat.getTotalEventsCompleted()
+                + "\nTotal To-Dos Completed:        " + stat.getTotalTodosCompleted()
+                + "\nTotal Deadlines Completed:    " + stat.getTotalDeadlinesCompleted()
+                + "\nTotal Events Completed:         " + stat.getTotalEventsCompleted()
                 + "\n";
         return output;
     }

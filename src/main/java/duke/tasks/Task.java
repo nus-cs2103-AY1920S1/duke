@@ -45,7 +45,7 @@ public abstract class Task {
      * This method returns the name of the task. Only be passed around inside the package.
      * @return The name of the task.
      */
-    protected String getName() {
+    String getName() {
         return taskName;
     }
 
@@ -67,9 +67,9 @@ public abstract class Task {
 
     /**
      * Show if the task is finished or not. Only be passed around inside the package.
-     * @return
+     * @return whether the task is finished.
      */
-    protected boolean isFinished() {
+    boolean isFinished() {
         return finished;
     }
 }

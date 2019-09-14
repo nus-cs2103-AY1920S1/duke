@@ -16,22 +16,18 @@ public class DeleteCommand extends Command {
      */
     private int position;
 
-    /**
-     * Constructor of the class, nothing special.
-     *
-     * @param position The position of the task to delete.
-     */
     public DeleteCommand(int position) {
         this.position = position;
     }
 
     /**
-     * This method deletes the task at the given position in the target task list and let the target
-     * user end print out command message.
+     * Call the task list to delete the corresponding task.
+     * Call the user interface to generate command execution message as a string.
      *
-     * @param tl The task list to accept the command.
-     * @param ui The user interface to print command information.
-     * @throws DukeException If the position is out of bound of the task list.
+     * @param tl The target task list to accept the command.
+     * @param ui The target user interface to generate the command information as a String.
+     * @return The task message of the deleted task.
+     * @throws DukeException when position exceeds the length of the task list.
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {

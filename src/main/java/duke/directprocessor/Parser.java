@@ -1,233 +1,131 @@
 package duke.directprocessor;
 
 import duke.KeyWord;
-import duke.commands.*;
 import duke.DukeException;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FakeCommand;
+import duke.commands.FindCommand;
+import duke.commands.FinishCommand;
+import duke.commands.ListCommand;
+import duke.commands.SlotCommand;
+import duke.commands.SpecifyCommand;
 import duke.tasks.TaskType;
 
 /**
  * This is a class that recognizes the user's input and calls the corresponding command.
  * It only recognizes the first word of the user input and key words like "/at", "/by".
- * All of its methods are static, so there is no necessity to initialize one.
+ * All of its methods are static, so there is no necessity to initialize this class.
  */
 public class Parser {
 
     /**
-     * It recognizes the user input and call the corresponding commands.
+     * This method recognizes the user input and generate the corresponding commands.
      *
      * @param s The user's input as a string.
      * @return The recognized command.
-     * @throws DukeException If the command is incomplete.
+     * @throws DukeException If the command is invalid.
      */
     public static Command parse(String s) throws DukeException {
-        String[] splitInput = splitInput(s);
+        String[] splitInput = s.split(" ", 2);
+        if (splitInput.length == 0) {
+            throw new DukeException("The command cannot be empty.");
+        }
         KeyWord keyWord = KeyWord.valueOf(splitInput[0].toUpperCase());
-        switch (keyWord) {
-            case LIST: return listCommand();
-            case BYE: return exitCommand();
-            case TODO: return todoCommand(splitInput);
-            case EVENT: return eventCommand(splitInput);
-            case DEADLINE: return deadlineCommand(splitInput);
-            case DONE: return finishCommand(splitInput);
-            case DELETE: return deleteCommand(splitInput);
-            case FIND: return findCommand(splitInput);
-            case SLOT: return slotCommand(splitInput);
-            case SPECIFY: return specifyCommand(splitInput);
-            default: return fakeCommand();
+        try {
+            switch (keyWord) {
+                case LIST: return listCommand();
+                case BYE: return exitCommand();
+                case TODO: return todoCommand(splitInput[1]);
+                case EVENT: return eventCommand(splitInput[1]);
+                case DEADLINE: return deadlineCommand(splitInput[1]);
+                case DONE: return finishCommand(splitInput[1]);
+                case DELETE: return deleteCommand(splitInput[1]);
+                case FIND: return findCommand(splitInput[1]);
+                case SLOT: return slotCommand(splitInput[1]);
+                case SPECIFY: return specifyCommand(splitInput[1]);
+                default: return fakeCommand();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("This keyword requires further specification.");
         }
     }
 
-    /**
-     * The assistance method to return a list command.
-     *
-     * @return A new ListCommand.
-     */
     private static Command listCommand() {
         return new ListCommand();
     }
 
-    /**
-     * The assistance method to return an exit command.
-     *
-     * @return A new ExitCommand.
-     */
     private static Command exitCommand() {
         return new ExitCommand();
     }
 
-    /**
-     * The assistance method to return a todo command.
-     *
-     * @param splitInput The user input split by white space.
-     * @return A new TodoCommand.
-     */
-    private static Command todoCommand(String[] splitInput) {
-        String taskName = "";
-        for (int i = 1; i < splitInput.length; i++) {
-            taskName = taskName + splitInput[i];
-            if (i != splitInput.length - 1) {
-                taskName = taskName + " ";
-            }
-        }
+    private static Command todoCommand(String taskName) {
         return new AddCommand(TaskType.T, taskName);
     }
 
-    /**
-     * The assistance method to return a event command.
-     *
-     * @param splitInput The user input split by white space.
-     * @return A new EventCommand.
-     */
-    private static Command eventCommand(String[] splitInput) {
-        String taskName = "";
-        String taskTime = "";
-        int timeStartFrom = 0;
-        for (int i = 1; i < splitInput.length; i++) {
-            if (splitInput[i].equals("/at")) {
-                timeStartFrom = i + 1;
-                break;
-            }
-            if (i != 1) {
-                taskName = taskName + " ";
-            }
-            taskName = taskName + splitInput[i];
+    private static Command eventCommand(String eventInfo) throws DukeException {
+        String[] nameAndTime = eventInfo.split(" /at ");
+        if (nameAndTime.length == 1) {
+            throw new DukeException("Please indicate the event time.");
         }
-        if (timeStartFrom != 0) {
-            for (int i = timeStartFrom; i < splitInput.length; i++) {
-                taskTime = taskTime + splitInput[i];
-                if (i != splitInput.length - 1) {
-                    taskTime = taskTime + " ";
-                }
-            }
+        if (nameAndTime.length > 2) {
+            throw new DukeException("Please do not indicate multiple event times.");
         }
-        return new AddCommand(TaskType.E, taskName, taskTime);
+        String eventName = nameAndTime[0];
+        String eventTime = nameAndTime[1];
+        return new AddCommand(TaskType.E, eventName, eventTime);
     }
 
-    /**
-     * The assistance method to return a deadline command.
-     *
-     * @param splitInput The user input split by white space.
-     * @return A new DeadlineCommand.
-     */
-    private static Command deadlineCommand(String[] splitInput) {
-        String taskName = "";
-        String taskTime = "";
-        int timeStartFrom = 0;
-        for (int i = 1; i < splitInput.length; i++) {
-            if (splitInput[i].equals("/by")) {
-                timeStartFrom = i + 1;
-                break;
-            }
-            if (i != 1) {
-                taskName = taskName + " ";
-            }
-            taskName = taskName + splitInput[i];
+    private static Command deadlineCommand(String deadlineInfo) throws DukeException{
+        String[] nameAndTime = deadlineInfo.split(" /by ");
+        if (nameAndTime.length == 1) {
+            throw new DukeException("Please specify the deadline of the task.");
         }
-        if (timeStartFrom != 0) {
-            for (int i = timeStartFrom; i < splitInput.length; i++) {
-                taskTime = taskTime + splitInput[i];
-                if (i != splitInput.length - 1) {
-                    taskTime = taskTime + " ";
-                }
-            }
+        if (nameAndTime.length > 2) {
+            throw new DukeException("Please do not specify multiple deadlines.");
         }
-        return new AddCommand(TaskType.D, taskName, taskTime);
+        String deadlineName = nameAndTime[0];
+        String deadlineTime = nameAndTime[1];
+        return new AddCommand(TaskType.D, deadlineName, deadlineTime);
     }
 
-    /**
-     * The assistance method to return a finish command.
-     *
-     * @param splitInput The user input split by white space.
-     * @return A new FinishCommand.
-     * @throws DukeException If the index of the finished task is not specified.
-     */
-    private static Command finishCommand(String[] splitInput) throws DukeException{
+    private static Command finishCommand(String finishPosition) {
+        return new FinishCommand(Integer.parseInt(finishPosition));
+    }
+
+    private static Command deleteCommand(String deletePos) {
+        return new DeleteCommand(Integer.parseInt(deletePos));
+    }
+
+    private static Command findCommand(String targetString) {
+        return new FindCommand(targetString);
+    }
+
+    private static Command slotCommand(String slotInfo) throws DukeException {
+        String[] splitSlotInfo = slotInfo.split(" ", 2);
         try {
-            return new FinishCommand(Integer.parseInt(splitInput[1]));
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Please specify which task is finished by its order in the task list.");
-        }
-    }
-
-    /**
-     * The assistance method to return a delete command.
-     *
-     * @param splitInput The user input split by white space.
-     * @return A new DeleteCommand.
-     * @throws DukeException if the index of the task to delete is not specified.
-     */
-    private static Command deleteCommand(String[] splitInput) throws DukeException{
-        try {
-            return new DeleteCommand(Integer.parseInt(splitInput[1]));
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Please specify which task needs to be deleted by its order in the task list.");
-        }
-    }
-
-    /**
-     * The assistance method to return a find command.
-     *
-     * @param splitInput The user input split by white space.
-     * @return A new FindCommand.
-     */
-    private static Command findCommand(String[] splitInput) {
-        String target = "";
-        for (int i = 1; i < splitInput.length; i++) {
-            target = target + splitInput[i];
-            if (i != splitInput.length - 1) {
-                target = target + " ";
-            }
-        }
-        return new FindCommand(target);
-    }
-
-    /**
-     * The assistance method to return a slot command.
-     *
-     * @param splitInput The user input split by white space.
-     * @return A new SlotCommand
-     * @throws DukeException If the index of the task to modify is not specified.
-     */
-    private static Command slotCommand(String[] splitInput) throws DukeException {
-        try {
-            String newSlot = "";
-            for (int i = 2; i < splitInput.length; i++) {
-                newSlot = newSlot + splitInput[i] + " ";
-            }
-            return new SlotCommand(Integer.parseInt(splitInput[1]), newSlot);
+            int slotPosition = Integer.parseInt(splitSlotInfo[0]);
+            String newSlot = splitSlotInfo[1];
+            return new SlotCommand(slotPosition, newSlot);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please specify which event do you want to add a new slot.");
         }
     }
 
-    private static Command specifyCommand(String[] splitInput) throws DukeException {
+    private static Command specifyCommand(String specifyInfo) throws DukeException {
+        String[] splitSpecifyInfo = specifyInfo.split(" ", 2);
         try {
-            String specifiedSlot = "";
-            for (int i = 2; i < splitInput.length; i++) {
-                specifiedSlot = specifiedSlot + splitInput[i] + " ";
-            }
-            return new SpecifyCommand(Integer.parseInt(splitInput[1]), specifiedSlot);
+            int specifyPosition = Integer.parseInt(splitSpecifyInfo[0]);
+            String specifiedSlot = splitSpecifyInfo[1];
+            return new SpecifyCommand(specifyPosition, specifiedSlot);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please specify which event do you want to specify the slot.");
         }
     }
 
-    /**
-     * The assistance method to return a fake command.
-     *
-     * @return A new FakeCommand.
-     */
     private static Command fakeCommand() {
         return new FakeCommand();
-    }
-
-    /**
-     * This method helps breaks the user's input by white spaces.
-     *
-     * @param s The user input as a string.
-     * @return The split user input.
-     */
-    private static String[] splitInput(String s) {
-        return s.split(" ");
     }
 }

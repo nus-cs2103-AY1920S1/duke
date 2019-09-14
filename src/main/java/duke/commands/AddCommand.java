@@ -17,8 +17,8 @@ public class AddCommand extends Command {
     /**
      * This constructor is called  when the new task is a todo task.
      *
-     * @param taskType This parameter must be "T", to show that task type is Todo.
-     * @param taskName The task name.
+     * @param taskType The type of the task, in this case it is TaskType.T.
+     * @param taskName The task name as a string.
      */
     public AddCommand(TaskType taskType, String taskName) {
         this.taskName = taskName;
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     /**
      * This is constructor is called when the new task s an event or deadline task.
      *
-     * @param taskType This parameter should be "E" or "D", to show whether it is an event or a deadline task.
+     * @param taskType The type of the task, in this case, it is either TaskType.E or TaskType.D.
      * @param taskName The task name.
      * @param taskTime The time of the task, should be in the form "dd/MM/yyyy HH:mm:ss"
      *                 to avoid exception while execute method.
@@ -40,11 +40,13 @@ public class AddCommand extends Command {
     }
 
     /**
-     * This method adds the target task into the task list.
+     * Call the task list to add the new task.
+     * Call the user interface to generate command execution message as a string.
      *
-     * @param tl The target task list to accept execution, it should not be null.
-     * @param ui The target user interface to print command information, it should not be null.
-     * @throws DukeException If the taskName is empty or the taskTime is not in form "dd/MM/yyyy HH:mm:ss".
+     * @param tl The target task list to accept the command.
+     * @param ui The target user interface to generate the command information as a String.
+     * @return The task message of the newly added task.
+     * @throws DukeException when the input task type, task name or task time is invalid.
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {

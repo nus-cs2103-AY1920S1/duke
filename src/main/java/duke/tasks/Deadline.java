@@ -8,14 +8,13 @@ import java.util.Date;
 
 /**
  * The deadline subclass of the Task superclass. They have a instance deathTime which is the due time.
- *
- * @Extends duke.tasks.Task
  */
 public class Deadline extends Task {
 
     /** The deadline of the task. */
     private Date deathTime;
-    SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+    private SimpleDateFormat myFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     /**
      * Constructor of the class. The deadline is taken as a string and transformed using a date format.
@@ -42,13 +41,11 @@ public class Deadline extends Task {
      */
     @Override
     public String taskInfo() {
-        String indicator;
         if (isFinished()) {
-            indicator = "[\u2713] ";
+            return "[D]" + "[\u2713] " + getName() + " (by: " + myFormat.format(deathTime) + ")";
         } else {
-            indicator = "[\u2715] ";
+            return "[D]" + "[\u2715] " + getName() + " (by: " + myFormat.format(deathTime) + ")";
         }
-        return "[D]" + indicator + getName() + " (by: " + myFormat.format(deathTime) + ")";
     }
 
     /**

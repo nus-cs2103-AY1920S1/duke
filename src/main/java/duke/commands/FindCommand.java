@@ -11,22 +11,18 @@ public class FindCommand extends Command {
 
     private String target;
 
-    /**
-     * Constructor of the class, nothing special.
-     *
-     * @param target The target string to look for in the task names.
-     */
     public FindCommand(String target) {
         this.target = target;
     }
 
     /**
-     * The override method execute from the superclass Command.
-     * It gets the string array list from the target tl and let the target ui to print it out.
+     * Call the task list to look for tasks with the given target string fractions in the task name.
+     * Call the user interface to
      *
-     * @param tl The target task list to accept execution.
-     * @param ui The target user end to print command information.
-     * @throws DukeException If the target string is empty.
+     * @param tl The target task list to accept the command.
+     * @param ui The target user interface to generate the command information as a String.
+     * @return The tasks we are looking for as an arranged string.
+     * @throws DukeException if the target string fraction is empty, which is "".
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {

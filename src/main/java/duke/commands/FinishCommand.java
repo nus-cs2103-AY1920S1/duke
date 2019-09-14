@@ -12,22 +12,18 @@ public class FinishCommand extends Command {
     /** The position of the task to be set as finish. */
     private int position;
 
-    /**
-     * The constructor of the class, nothing special.
-     *
-     * @param position The position of the task to delete.
-     */
     public FinishCommand(int position) {
         this.position = position;
     }
 
     /**
-     * This method set the target task in the target task list as finished and let the target user end to
-     * print out command message.
+     * Call the task list to set the corresponding task as done.
+     * Call the user interface to generate command execution message as a string.
      *
-     * @param tl The target task list to accept execution.
-     * @param ui The target user interface to print command information.
-     * @throws DukeException If the position is out of bound of the task list.
+     * @param tl The target task list to accept the command.
+     * @param ui The target user interface to generate the command information as a String.
+     * @return The message about the task is finished through string.
+     * @throws DukeException if position exceeds the length of the task list.
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {

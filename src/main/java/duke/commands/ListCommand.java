@@ -8,18 +8,17 @@ import duke.directprocessor.Ui;
  */
 public class ListCommand extends Command {
 
-    /**
-     * Constructor of the class, nothing special.
-     */
     public ListCommand() {
 
     }
 
     /**
-     * This method gets the string array list from the target tl and let the target ui to print it out.
+     * Call the task list to list out every task information in it.
+     * Call the user interface to process the task information and return them as a string.
      *
-     * @param tl The target task list to accept execution.
-     * @param ui The target user end to print command information.
+     * @param tl The target task list to accept the command.
+     * @param ui The target user interface to generate the command information as a String.
+     * @return The list of task information in a string.
      */
     @Override
     public String execute(TaskList tl, Ui ui) {

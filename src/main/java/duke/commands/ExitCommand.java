@@ -10,20 +10,18 @@ import java.io.IOException;
  */
 public class ExitCommand extends Command {
 
-    /**
-     * Constructor of the class, nothing special.
-     */
     public ExitCommand() {
 
     }
 
     /**
-     * This method calls the target task list to save itself to a file and let the target user end
-     * to print out goodbye message to the user.
+     * Call the task list to save the new modification into the task file.
+     * Call the user interface to generate a goodbye message as a String.
      *
-     * @param tl The target task list to accept execution.
-     * @param ui The target user end to print command information.
-     * @throws DukeException If IOException occurs in the saving process.
+     * @param tl The target task list to accept the command.
+     * @param ui The target user interface to generate the command information as a String.
+     * @return The goodbye message.
+     * @throws DukeException when an IOException is raised while rewriting the task file.
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {

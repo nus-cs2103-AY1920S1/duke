@@ -10,22 +10,24 @@ import duke.tasks.Task;
  */
 public class SlotCommand extends Command {
 
+    /**
+     * The position of the event task to be added with new slot.
+     */
     private int position;
-    private String newSlot;
 
     /**
-     * The constructor of the command, nothing special.
-     *
-     * @param position The position of the target event in the task list.
-     * @param newSlot The new slot to be added to the target event.
+     * The new slot to be added to the event task in the form of a string.
      */
+    private String newSlot;
+
     public SlotCommand(int position, String newSlot) {
         this.position = position;
         this.newSlot = newSlot;
     }
 
     /**
-     * This method adds a new possible slot to the target event.
+     * Call the task list to add new slot to the corresponding event task.
+     * Call the user interface to generate command execution message as a string.
      *
      * @param tl The target task list to accept execution.
      * @param ui The target user end to print command information.
@@ -39,7 +41,7 @@ public class SlotCommand extends Command {
     }
 
     /**
-     * determines whether this command is an exit command or not.
+     * Determines whether this command is an exit command or not.
      *
      * @return boolean false
      */

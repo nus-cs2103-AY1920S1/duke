@@ -10,19 +10,17 @@ import duke.DukeException;
  */
 public class FakeCommand extends Command {
 
-    /**
-     * Constructor of the class, nothing special.
-     */
     public FakeCommand() {
 
     }
 
     /**
-     * This method directly throw out an DukeException to tell the user that this command is invalid.
+     * This method directly throws out an DukeException to tell the system that this command is invalid.
      *
-     * @param tl The target task list to accept execution.
-     * @param ui The target user end to print command information.
-     * @throws DukeException Throw it anyway since the command is invalid.
+     * @param tl The target task list to accept the command.
+     * @param ui The target user interface to generate the command information as a String.
+     * @return Since the command is itself invalid, nothing can actually be returned.
+     * @throws DukeException every time this method runs.
      */
     @Override
     public String execute(TaskList tl, Ui ui) throws DukeException {

@@ -21,12 +21,17 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    static final String NAME_USER = "User";
+    static final String NAME_DUKE = "Duke";
+
     @FXML
     private Label dialog;
     @FXML
+    private Label usernameLabel;
+    @FXML
     private Circle displayPictureCircle;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String username) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -37,6 +42,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        usernameLabel.setText(username);
         ImagePattern pattern = new ImagePattern(img);
         displayPictureCircle.setFill(pattern);
         //displayPicture.setImage(img);
@@ -54,6 +60,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        setStyle("-fx-background-color: pink;");
     }
 
     /**
@@ -64,7 +71,7 @@ public class DialogBox extends HBox {
      * @return DialogBox user dialog
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, NAME_USER);
     }
 
     /**
@@ -75,7 +82,7 @@ public class DialogBox extends HBox {
      * @return DialogBox duke dialog
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, NAME_DUKE);
         db.flip();
         return db;
     }

@@ -3,18 +3,24 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true">
+        <Label fx:id="dialog" text="Label" wrapText="true" HBox.hgrow="ALWAYS">
          <HBox.margin>
             <Insets top="4.0" />
          </HBox.margin></Label>
-      <Circle fx:id="displayPictureCircle" fill="DODGERBLUE" radius="49.0" stroke="BLACK" strokeType="INSIDE">
-         <HBox.margin>
+      <VBox>
+         <children>
+            <Circle fx:id="displayPictureCircle" fill="DODGERBLUE" radius="49.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="98.0" text="Label" textAlignment="CENTER" />
+         </children>
+         <padding>
             <Insets left="6.0" right="6.0" />
-         </HBox.margin></Circle>
+         </padding>
+      </VBox>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

@@ -3,6 +3,7 @@ package duke.gui.controllers;
 import duke.Duke;
 import duke.gui.AutoCompleteVBox;
 import duke.gui.DialogType;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -45,29 +46,17 @@ public class MainWindow extends AnchorPane {
      * @param duke duke object to be linked together with this GUI object
      */
     public MainWindow(Duke duke) {
-        this();
         this.duke = duke;
-
-        //Add initial dialog from duke
-        String initGreeting = duke.initAndGreet();
-        addDialog(DialogType.DUKE, initGreeting);
-    }
-
-    protected MainWindow() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         initializeAutoCompleteListeners();
+
+        //Add initial dialog from duke
+        String initGreeting = duke.initAndGreet();
+        addDialog(DialogType.DUKE, initGreeting);
     }
 
     /**
@@ -115,8 +104,7 @@ public class MainWindow extends AnchorPane {
             userInput.clear();
 
             if (!duke.isRunning()) {
-                Stage stage = (Stage) getScene().getWindow();
-                stage.close();
+                Platform.exit();
             }
         }
     }

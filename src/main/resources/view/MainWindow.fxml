@@ -8,16 +8,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import duke.gui.controllers.MainWindow?>
-<!--type="duke.gui.controllers.MainWindow"-->
-
-<fx:root type="duke.gui.controllers.MainWindow" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" prefHeight="564.0" prefWidth="400.0" vvalue="1.0">
+                <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" prefHeight="564.0" prefWidth="400.0" vvalue="1.0" VBox.vgrow="ALWAYS">
                     <content>
-                        <VBox fx:id="dialogContainer" maxHeight="1.7976931348623157E308" prefWidth="388.0" />
+                        <VBox fx:id="dialogContainer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
                     </content>
                 </ScrollPane>
                 <AutoCompleteVBox fx:id="autoCompleteVBox" alignment="BOTTOM_CENTER" prefHeight="0.0" prefWidth="100.0" style="-fx-background-color: white; -fx-border-width: 1;" />
@@ -30,5 +27,4 @@
             </children>
         </HBox>
     </children>
-</fx:root>
-
+</AnchorPane>

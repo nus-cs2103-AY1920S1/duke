@@ -105,6 +105,7 @@ public class TaskList {
      * @param idx integer that represents the index of the task in the command.
      */
     String doneTask(int idx) {
+        assert idx >=1 && idx <= list.size() : "Invalid index input";
         list.get(idx - 1).markAsDone();
         return "Nice! I've marked this task as done: \n  "
                 + list.get(idx - 1);
@@ -115,6 +116,7 @@ public class TaskList {
      * @param idx integer that represents the index of the task in the command.
      */
     String deleteTask(int idx) {
+        assert idx >=1 && idx <= list.size() : "Invalid index input";
         Task removed = list.remove(idx - 1);
         return "Noted. I've removed this task: \n  " + removed
                 + "\nNow you have " + list.size() + " tasks in the list.";

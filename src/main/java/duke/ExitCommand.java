@@ -13,6 +13,7 @@ public class ExitCommand extends Command {
      * @param tasks Contains the task list .
      * @param ui Deals with interactions with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
+     * @return String exit message to be printed by UI.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.closeScanner();
@@ -33,11 +34,11 @@ public class ExitCommand extends Command {
      * Returns true if two instances of ExitCommand are equal.
      * Otherwise, returns false.
      *
-     * @param o  An object.
+     * @param object  An object.
      * @return boolean.
      */
     @Override
-    public boolean equals(Object o) {
-        return o instanceof ExitCommand;
+    public boolean equals(Object object) {
+        return object instanceof ExitCommand;
     }
 }

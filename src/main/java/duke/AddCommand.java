@@ -19,6 +19,7 @@ public class AddCommand extends Command {
      * @param tasks Contains the task list .
      * @param ui Deals with interactions with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
+     * @return String add message to be printed by UI.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -48,13 +49,13 @@ public class AddCommand extends Command {
      * Returns true if two instances of AddCommand are equal.
      * Otherwise, returns false.
      *
-     * @param o  An object.
+     * @param object  An object.
      * @return boolean.
      */
     @Override
-    public boolean equals(Object o) {
-        if (o instanceof AddCommand) {
-            AddCommand addCommand = (AddCommand) o;
+    public boolean equals(Object object) {
+        if (object instanceof AddCommand) {
+            AddCommand addCommand = (AddCommand) object;
             return this.task.equals(addCommand.task);
         }
         return false;

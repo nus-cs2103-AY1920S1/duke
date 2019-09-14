@@ -10,10 +10,10 @@ import java.text.SimpleDateFormat;
  */
 public class Deadline extends Task {
     private Date date;
+    final static String DEADLINE_TYPE = "D";
 
     public Deadline(String description) {
         super(description);
-        this.type = "D";
     }
 
     /**
@@ -33,20 +33,20 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.type + "][" + this.getStatusIcon() + "] " + this.description + this.date + getTags();
+        return "[" + DEADLINE_TYPE + "][" + this.getStatusIcon() + "] " + this.description + this.date + getTags();
     }
 
     /**
      * Returns true if two instances of Deadline are equal.
      * Otherwise, returns false.
      *
-     * @param o  An object.
+     * @param object  An object.
      * @return boolean.
      */
     @Override
-    public boolean equals(Object o) {
-        if (o instanceof Deadline) {
-            Deadline deadline = (Deadline) o;
+    public boolean equals(Object object) {
+        if (object instanceof Deadline) {
+            Deadline deadline = (Deadline) object;
             return deadline.toString().equals(this.toString());
         }
         return false;

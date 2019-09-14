@@ -10,10 +10,10 @@ import java.text.SimpleDateFormat;
  */
 public class Event extends Task {
     private Date date;
+    final static String EVENT_TYPE = "E";
 
     public Event(String description) {
         super(description);
-        this.type = "E";
     }
 
     /**
@@ -33,20 +33,20 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.type + "][" + this.getStatusIcon() + "] " + this.description + this.date + getTags();
+        return "[" + EVENT_TYPE + "][" + this.getStatusIcon() + "] " + this.description + this.date + getTags();
     }
 
     /**
      * Returns true if two instances of Event are equal.
      * Otherwise, returns false.
      *
-     * @param o  An object.
+     * @param object  An object.
      * @return boolean.
      */
     @Override
-    public boolean equals(Object o) {
-        if (o instanceof Event) {
-            Event event = (Event) o;
+    public boolean equals(Object object) {
+        if (object instanceof Event) {
+            Event event = (Event) object;
             return this.toString().equals(event.toString());
         }
         return false;

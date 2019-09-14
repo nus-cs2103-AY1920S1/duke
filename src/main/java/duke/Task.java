@@ -35,10 +35,18 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Adds a tag to this task.
+     */
     void addTag(String tag) {
         tags.add(tag);
     }
 
+    /**
+     * Returns string containing all tags of this task.
+     *
+     * @return String containing all tags of this task.
+     */
     String getTags() {
         StringBuilder sb = new StringBuilder();
         for (String tag: tags) {

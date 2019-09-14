@@ -14,6 +14,7 @@ public class ListCommand extends Command {
      * @param tasks Contains the task list .
      * @param ui Deals with interactions with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
+     * @return String list message to be printed by UI.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -42,11 +43,11 @@ public class ListCommand extends Command {
      * Returns true if two instances of ListCommand are equal.
      * Otherwise, returns false.
      *
-     * @param o  An object.
+     * @param object  An object.
      * @return boolean.
      */
     @Override
-    public boolean equals(Object o) {
-        return o instanceof ListCommand;
+    public boolean equals(Object object) {
+        return object instanceof ListCommand;
     }
 }

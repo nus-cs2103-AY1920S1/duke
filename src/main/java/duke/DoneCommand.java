@@ -21,6 +21,7 @@ public class DoneCommand extends Command {
      * @param tasks Contains the task list .
      * @param ui Deals with interactions with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
+     * @return String done message to be printed by UI.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index > tasks.getListSize()) {
@@ -51,13 +52,13 @@ public class DoneCommand extends Command {
      * Returns true if two instances of DoneCommand are equal.
      * Otherwise, returns false.
      *
-     * @param o  An object.
+     * @param object  An object.
      * @return boolean.
      */
     @Override
-    public boolean equals(Object o) {
-        if (o instanceof DoneCommand) {
-            DoneCommand doneCommand = (DoneCommand) o;
+    public boolean equals(Object object) {
+        if (object instanceof DoneCommand) {
+            DoneCommand doneCommand = (DoneCommand) object;
             return this.index == doneCommand.index;
         }
         return false;

@@ -5,9 +5,10 @@ package duke;
  * a task to be done.
  */
 public class Todo extends Task {
+    final static String TODO_TYPE = "T";
+
     public Todo(String description) {
         super(description);
-        this.type = "T";
     }
 
     /**
@@ -16,20 +17,20 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.type + "][" + this.getStatusIcon() + "] " + this.description + getTags();
+        return "[" + TODO_TYPE + "][" + this.getStatusIcon() + "] " + this.description + getTags();
     }
 
     /**
      * Returns true if two instances of Todo are equal.
      * Otherwise, returns false.
      *
-     * @param o  An object.
+     * @param object  An object.
      * @return boolean.
      */
     @Override
-    public boolean equals(Object o) {
-        if (o instanceof Todo) {
-            Todo todo = (Todo) o;
+    public boolean equals(Object object) {
+        if (object instanceof Todo) {
+            Todo todo = (Todo) object;
             return this.description.equals(todo.description);
         }
         return false;

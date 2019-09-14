@@ -1,3 +1,3 @@
-[T][✓] read book#fun
-[D][✘] return book Thu Jul 07 07:07:00 SGT 7nullnull
-[E][✘] project meeting Sun Jun 06 06:06:00 SGT 6null#important
+[T][✓] read book #fun
+[D][✘] return book Sun Jun 06 06:06:00 SGT 6
+[E][✘] project meeting Thu Jul 07 07:07:00 SGT 7

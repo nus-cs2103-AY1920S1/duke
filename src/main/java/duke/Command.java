@@ -14,6 +14,7 @@ public abstract class Command {
      * @param tasks Contains the task list .
      * @param ui Deals with interactions with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
+     * @return String message to be printed by UI.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 

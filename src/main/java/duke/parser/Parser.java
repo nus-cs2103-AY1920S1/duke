@@ -8,7 +8,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 
-import duke.exception.DukeException;
+import duke.exceptions.DukeException;
 
 /**
  * Represents parsing and decomposing string commands into Command types.

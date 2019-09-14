@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #fdf6e3;
 }
 
 .button {
@@ -7,15 +7,15 @@
     -fx-border-color: #e2e2e2;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-background-color: #859900;
+    -fx-font-family: "Consolas", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: #fdf6e3;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: derive(#859900, -20%);
 }
 
 .button:pressed, .button:default:hover:pressed {
@@ -47,21 +47,23 @@
 }
 
 .text-field {
-     -fx-background-color: derive(#1d1d1d, 15%);
+    -fx-background-color: #eee8d5;
+    -fx-border-color: #586e75;
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #d8d8d8;
+    -fx-font-family: "Consolas";
+    -fx-text-fill: #268bd2;
+    -fx-prompt-text-fill: #268bd2;
 }
 
 .text-box {
     -fx-font-size: 12pt;
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #d8d8d8;
+    -fx-font-family: "Consolas";
+    -fx-text-fill: #657b83;
     -fx-border-right: 10px;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: #eee8d5;
+     -fx-border-color: #586e75;
      -fx-border-top-width: 1px;
 }

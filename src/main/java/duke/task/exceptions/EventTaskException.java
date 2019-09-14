@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.task.exceptions;
 
 /**
  * Custom Event Task Exception.

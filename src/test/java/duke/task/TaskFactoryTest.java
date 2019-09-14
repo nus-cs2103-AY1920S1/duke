@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.exception.TaskException;
+import duke.task.exceptions.TaskException;
 
 import org.junit.jupiter.api.Test;
 

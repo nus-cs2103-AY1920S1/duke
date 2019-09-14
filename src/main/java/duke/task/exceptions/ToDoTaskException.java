@@ -1,4 +1,6 @@
-package duke.exception;
+package duke.task.exceptions;
+
+import duke.task.exceptions.TaskException;
 
 /**
  * Custom ToDo Task Exception.

@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.exception.TaskException;
-import duke.exception.ToDoTaskException;
-import duke.exception.DeadlineTaskException;
-import duke.exception.EventTaskException;
-import duke.exception.InvalidDateTimeException;
+import duke.task.exceptions.TaskException;
+import duke.task.exceptions.ToDoTaskException;
+import duke.task.exceptions.DeadlineTaskException;
+import duke.task.exceptions.EventTaskException;
+import duke.parser.exceptions.InvalidDateTimeException;
 
 /**
  * Represents a TaskFactory.

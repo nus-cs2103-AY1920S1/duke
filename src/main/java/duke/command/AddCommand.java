@@ -5,7 +5,7 @@ import duke.task.TaskFactory;
 import duke.task.Task;
 import duke.ui.Ui;
 import duke.storage.Storage;
-import duke.exception.TaskException;
+import duke.task.exceptions.TaskException;
 
 /**
  * Represents an Add Command.

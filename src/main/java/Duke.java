@@ -3,7 +3,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.command.Command;
 import duke.parser.Parser;
-import duke.exception.DukeException;
+import duke.exceptions.DukeException;
 
 /**
  * Duke Class.

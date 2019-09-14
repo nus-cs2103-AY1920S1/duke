@@ -1,4 +1,4 @@
-package duke.exception;
+package duke.parser.exceptions;
 
 /**
  * Custom Invalid DateTime Exception.

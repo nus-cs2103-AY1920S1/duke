@@ -1,4 +1,6 @@
-package duke.exception;
+package duke.task.exceptions;
+
+import duke.exceptions.DukeException;
 
 /**
  * Custom Task Exception.

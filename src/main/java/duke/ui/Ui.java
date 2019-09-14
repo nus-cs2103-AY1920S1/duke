@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import duke.task.TaskList;
-import duke.exception.DukeException;
+import duke.exceptions.DukeException;
 
 /**
  * Represents interactions with user via CLI.

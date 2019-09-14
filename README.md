@@ -27,8 +27,8 @@ She can let you input your income and input your expenses.
 Then, she can help you calculate how much you have left to spend or how much is overspent.
 She is able to save everything so when you close the app, your data is not lost.
 
-1. ** General Commands**
-*To get a quick summary of all commands in one glance, you can send:
+1. **General Commands**
+- To get a quick summary of all commands in one glance, you can send:
 ```
 help
 ```
@@ -39,7 +39,7 @@ tutorial
 ```
 Just follow through the instructions and it will help you learn the commands of Duke Bunny very quickly.
 
-*To bid Duke Bunny goodbye, you can send:
+- To bid Duke Bunny goodbye, you can send:
 ```
 bye
 ```
@@ -50,11 +50,11 @@ Thus, do not fret if you close Duke Bunny without doing this.
 This section will show you the commands for the task managing functions of Duke Bunny
 
 1. **Types of Tasks**
-*Todo:
+- Todo:
 Tasks that do not have a time or date. 
-*Event:
+- Event:
 Tasks that has a time and date to attend to it.
-*Deadline:
+- Deadline:
 Tasks that has a time and date as its deadline.
 
 1. **Add Task**

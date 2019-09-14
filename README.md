@@ -4,15 +4,15 @@ Bunny Duke is a tasks and expenses manager chat bot.
 ## Table of Contents
 
 1. [Introduction](#introduction)
-	1. [General Commands](#general-commands)
-1. [Tasks Managing](#tasks-managing)
+1. [General Commands](#general-commands)
+1. [Tasks Managing Commands](#tasks-managing-commands)
 	1. [Types of Tasks](#types-of-tasks) 
 	1. [Add Tasks](#add-tasks) 
 	1. [See Task List](#see-task-list)
 	1. [Mark Task as Done](#mark-tasks-as-done)
 	1. [Delete Tasks](#delete-tasks)
 	1. [Find Task by Keyword](#find-task-by-keyword)
-1. [Expenses Managing](#expenses-managing)
+1. [Expenses Managing Commands](#expenses-managing-commands)
 	1. [Add Expenses](#add-expenses)
 	1. [Input Income](#input-income)
 	1. [See Expense List](#see-expense-list)
@@ -33,7 +33,8 @@ Here is how it looks like in-action:
 ![Image of Duke Bunny](https://github.com/kangyeelim/duke/blob/master/docs/Ui.png)
 
 
-#### General Commands
+
+## General Commands
 - To get a quick summary of all commands in one glance, you can send:
 	`help`
 
@@ -50,16 +51,16 @@ Just follow through the instructions and it will help you learn the commands of 
 This is optional because the data will be saved whenever any command is made. 
 Thus, do not fret if you close Duke Bunny without doing this.
 
-## Task Managing
+## Task Managing Commands
 This section will show you the commands for the task managing functions of Duke Bunny.
 
 #### Types of Tasks
 - Todo:
 Tasks that do not have a time or date. 
 - Event:
-Tasks that has a time and date to attend to it.
+Tasks that have a time and date to attend to it.
 - Deadline:
-Tasks that has a time and date as its deadline.
+Tasks that have a time and date as its deadline.
 
 #### Add Tasks
 - To add a Todo Task called *return book*, send:
@@ -103,7 +104,7 @@ You can also find tasks by the date.
 	`find 21/09/2019`
 
 
-## Expenses Managing
+## Expenses Managing Commands
 This section will show you the commands for the expenses managing functions of Duke Bunny.
 
 #### Add Expenses

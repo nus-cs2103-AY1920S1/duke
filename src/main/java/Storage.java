@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
@@ -28,7 +29,15 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-
+        try {
+            File f = new File(fileName);
+            if (!f.exists()) {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            }
+        } catch (IOException e) {
+            e.getMessage();
+        }
         try {
             FileReader reader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -45,7 +54,11 @@ public class Storage {
                     String[] ssArr = ss.split(" ");
 
                     DateTimeHandler dateTimeHandler = new DateTimeHandler(ssArr);
-                    dateTimeHandler.parseDateTimeFromStorage();
+                    try {
+                        dateTimeHandler.parseDateTimeFromStorage();
+                    } catch (ParseException e) {
+                        e.getMessage();
+                    }
                     Date date = dateTimeHandler.getDate();
                     LocalTime time = dateTimeHandler.getTime();
 
@@ -64,9 +77,7 @@ public class Storage {
             }
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
         return tasks;

@@ -14,7 +14,7 @@
 Every time you add or remove a task, Duke automatically saves your list. No need for you to press `Control+S` every few seconds!
 
 ### Flexible Search
-Duke lets you search through your tasks with as few or as many criteria as you want by using the [`find`](#find---find-a-task) command. See [`how to specify the criteria here`](#find---find-a-task).
+Duke lets you search through your tasks with as few or as many criteria as you want by using the [`find`](#find---find-a-task) command. See [how to specify the criteria here](#find---find-a-task).
 
 ### Fully Usable with Just a Keyboard
 Once Duke starts, you can just start entering commands and when you're done with Duke, just close it by entering the [`bye`](#bye---exits-duke) command. All done without using a mouse.

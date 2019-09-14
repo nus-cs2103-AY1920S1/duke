@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
  * Represents Tasks.
  * Tasks could be ToDos, Deadlines, Events.
  */
-abstract public class Task {
+public abstract class Task {
     /** Total tasks created. */
     private static int totalTasks = 0;
     /** Whether task is done. */

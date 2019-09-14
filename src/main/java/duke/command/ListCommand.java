@@ -1,6 +1,6 @@
-package command;
+package duke.command;
 
-import task.Ui;
+import duke.task.Ui;
 
 /**
  * The ListCommand class defines the behaviour of a list command.

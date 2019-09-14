@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * The Todo class defines the requirement of a todo.

@@ -1,7 +1,7 @@
-package command;
+package duke.command;
 
-import task.DukeException;
-import task.TaskList;
+import duke.task.DukeException;
+import duke.task.TaskList;
 
 /**
  * The DoneCommand class defines the behaviour of a done command.

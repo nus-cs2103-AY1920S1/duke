@@ -1,6 +1,6 @@
-package task;
+package duke.task;
 
-import priority.Priority;
+import duke.priority.Priority;
 
 /**
  * The Task class defines the requirement of a Task.

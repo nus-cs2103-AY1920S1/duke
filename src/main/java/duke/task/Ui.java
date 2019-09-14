@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.util.Scanner;
 import java.util.List;
@@ -47,6 +47,11 @@ public class Ui {
         String output = "";
         ArrayList<Task> task = TaskList.getTasks();
         int counter = TaskList.getCounter();
+
+        if (counter == 0) {
+            return "There is no task yet.";
+        }
+
         String isPlural = counter == 1 ? "is" : "are";
         String taskIfPlural = counter == 1 ? "task" : "tasks";
         output += "Hai! Here " + isPlural + " the " + taskIfPlural + " in your list:\n";
@@ -110,6 +115,11 @@ public class Ui {
     public static String printFoundTask(List<Task> foundTasks) {
         String output = "";
         int counter = foundTasks.size();
+
+        if (counter == 0) {
+            return "Gomennasai! No task description matches your keyword.";
+        }
+
         String isPlural = counter == 1 ? "is" : "are";
         String taskIfPlural = counter == 1 ? "task" : "tasks";
         output += "Hai! Here " + isPlural + " the matching " + taskIfPlural + " in your list:\n";

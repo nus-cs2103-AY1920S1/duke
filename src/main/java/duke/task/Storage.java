@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,27 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private static final String FILE_PATH = "src/main/java/data/duke.txt";
+    private static final String FILE_PATH = "src/main/java/duke/data/duke.txt";
+    private final File file;
+
+    public Storage() {
+        this.file = createFile();
+    }
+
+    private File createFile() {
+        File file = new File(Storage.FILE_PATH);
+
+        if (!file.exists()) {
+            file = new File("duke.txt");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        return file;
+    }
 
     /**
      * Reads data from data file.
@@ -23,9 +43,8 @@ public class Storage {
      * @throws FileNotFoundException Occurs when path of file is invalid.
      */
     public TaskList readData() throws FileNotFoundException {
-        File f = new File(Storage.FILE_PATH);
-        assert f != null : "File is null";
-        Scanner sc = new Scanner(f);
+        assert this.file != null : "File is null";
+        Scanner sc = new Scanner(this.file);
         ArrayList<Task> task = new ArrayList<>();
 
         while (sc.hasNext()) {
@@ -65,7 +84,7 @@ public class Storage {
      */
     public void writeData() throws IOException {
         ArrayList<Task> task = TaskList.getTasks();
-        FileWriter fw = new FileWriter(Storage.FILE_PATH);
+        FileWriter fw = new FileWriter(this.file);
         assert fw != null : "FileWriter is null";
         String stringToWrite = "";
         int counter = task.size();

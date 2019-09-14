@@ -1,6 +1,6 @@
-package command;
+package duke.command;
 
-import task.TaskList;
+import duke.task.TaskList;
 
 /**
  * The Command abstract class defines the behaviour of commands that extends it.

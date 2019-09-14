@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 
-import task.Todo;
-import task.Deadline;
+import duke.task.Todo;
+import duke.task.Deadline;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

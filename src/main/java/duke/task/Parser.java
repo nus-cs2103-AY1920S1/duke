@@ -1,12 +1,13 @@
-package task;
+package duke.task;
 
-import command.AddCommand;
-import command.Command;
-import command.DeleteCommand;
-import command.DoneCommand;
-import command.ExitCommand;
-import command.ListCommand;
-import command.FindCommand;
+import java.io.IOException;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.FindCommand;
 
 /**
  * The Parser class defines the behaviour of a parser.
@@ -14,6 +15,11 @@ import command.FindCommand;
  * @author Joel Loong
  */
 public class Parser {
+    private static Storage storage;
+
+    public Parser(Storage storage) {
+        Parser.storage = storage;
+    }
 
     /**
      * Parse the inputs from the user.
@@ -24,8 +30,13 @@ public class Parser {
     public static String parse(String textInput) {
         try {
             Command command = parseCommands(textInput);
+            if (command.isExit()) {
+                storage.writeData();
+            }
             return command.execute();
         } catch (DukeException e) {
+            return Ui.printException(e);
+        } catch (IOException e) {
             return Ui.printException(e);
         }
     }

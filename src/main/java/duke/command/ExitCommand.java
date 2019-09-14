@@ -1,6 +1,6 @@
-package command;
+package duke.command;
 
-import task.Ui;
+import duke.task.Ui;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -10,10 +10,6 @@ import java.util.TimerTask;
  * @author Joel Loong
  */
 public class ExitCommand extends Command {
-    public ExitCommand() {
-
-    }
-
     /**
      * Closes the GUI after 1000 milliseconds.
      */

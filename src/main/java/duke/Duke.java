@@ -1,15 +1,19 @@
+package duke;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import task.Parser;
-import task.Storage;
-import task.Ui;
+import duke.task.Parser;
+import duke.task.Storage;
+import duke.task.Ui;
 
 public class Duke {
     private Storage storage;
+    private Parser parser;
 
     public Duke() {
-        storage = new Storage();
+        this.storage = new Storage();
+        this.parser = new Parser(this.storage);
     }
 
     /**

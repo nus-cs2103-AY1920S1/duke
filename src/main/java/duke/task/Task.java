@@ -12,6 +12,7 @@ public class Task {
      */
     String taskName;
     boolean isDone;
+    boolean isDeleted;
 
     /**
      * The constructor takes in a String of taskName and a boolean variable
@@ -22,6 +23,7 @@ public class Task {
     Task(String taskName, boolean done) {
         this.taskName = taskName;
         this.isDone = done;
+        isDeleted = false;
     }
 
     /**
@@ -29,6 +31,14 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public void markAsDeleted() {
+        isDeleted = true;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
     @Override

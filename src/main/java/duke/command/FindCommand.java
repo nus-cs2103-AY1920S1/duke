@@ -20,13 +20,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public
     /**
      * Lists tasks that contains the keyword in the tasks list.
      * @param tasks TaskList object containing a list of existing tasks.
      * @param storage
      */
-    String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Parser parser = new Parser(fullCommand);
         return tasks.findTask(parser.getKeyword());
     }

@@ -112,19 +112,24 @@ public class TaskList {
     public String doneTask(int idx) {
         assert idx >=1 && idx <= list.size() : "Invalid index input";
         list.get(idx - 1).markAsDone();
-        return "Nice! I've marked this task as done: \n  "
-                + list.get(idx - 1);
+        return list.get(idx - 1).toString();
     }
 
     /**
      * Deletes the task in the command from the task list.
-     * @param idx integer that represents the index of the task in the command.
+     * @param indices integer that represents the index of the task in the command.
      */
-    public String deleteTask(int idx) {
-        assert idx >=1 && idx <= list.size() : "Invalid index input";
-        Task removed = list.remove(idx - 1);
-        return "Noted. I've removed this task: \n  " + removed
-                + "\nNow you have " + list.size() + " tasks in the list.";
+    public String deleteTask(int[] indices) {
+        String message = "Noted. I've removed the task(s): \n  ";
+        ArrayList<Task> toRemove = new ArrayList<>();
+        for (int i : indices) {
+            list.get(i - 1).markAsDeleted();
+            toRemove.add(list.get(i - 1));
+            message += list.get(i - 1).toString();
+            message += "\n  ";
+        }
+        list.removeAll(toRemove);
+        return message + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
     /**

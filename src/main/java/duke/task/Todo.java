@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.Task;
-
 /**
  * Encapsulates a Todo object that inherits from Task class and
  * stores task name and status.

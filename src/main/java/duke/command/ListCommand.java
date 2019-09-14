@@ -18,13 +18,12 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public
     /**
      * Lists existing tasks in the tasks list.
      * @param tasks TaskList object containing a list of existing tasks.
      * @param storage
      */
-    String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         return tasks.showTasks();
     }
 }

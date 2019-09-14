@@ -21,14 +21,13 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public
     /**
      * Adds a event task into the taskList and updates file in storage.
      * @param tasks TaskList object containing a list of existing tasks.
      * @param storage
      * @throws IOException
      */
-    String execute(TaskList tasks, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Storage storage) throws IOException {
         Parser parser = new Parser(fullCommand);
         String message = tasks.addEvent(parser.getActivityNameWithTime(),
         parser.getTime(), false);

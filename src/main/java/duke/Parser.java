@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Encapsulates a Parser object to deals with making sense of the user command.
  */
@@ -33,8 +36,25 @@ public class Parser {
      * Returns the index of the targeted task when there is a Done/Delete command.
      * @return integer of the task index.
      */
-    public int getIndex() {
-        return Integer.parseInt(part[1]);
+    public int[] getIndices() {
+        if (part[1].contains("-")) {
+            String[] range = part[1].split("-");
+            int start = Integer.parseInt(range[0]);
+            int end = Integer.parseInt(range[1]);
+            int[] indices = new int[end - start + 1];
+            for (int i = start; i <= end; i++) {
+                indices[i - start] = i;
+            }
+            return indices;
+        } else {
+            String[] range = fullCommand.split("[, ]");
+            int[] indices = Arrays.stream(range)
+                                .filter(s -> !s.equals("") && !s.equals("delete") && !s.equals("done"))
+                                .mapToInt(Integer::parseInt)
+                                .toArray();
+            //int[] indices = Arrays.stream(range).mapToInt(Integer::parseInt).toArray();
+            return indices;
+        }
     }
 
     public String getKeyword() {
@@ -95,24 +115,9 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! You need to enter a keyword to search");
             }
             break;
-        case "todo":
-            // check whether task description is empty.
+        case "todo": case "deadline": case "event":
             if (part.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of a todo "
-                        + "cannot be empty.");
-            }
-            break;
-        case "deadline":
-            // check whether task description is empty.
-            if (part.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline "
-                        + "cannot be empty.");
-            }
-            break;
-        case "event":
-            // check whether task description is empty.
-            if (part.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of an event "
+                throw new DukeException("☹ OOPS!!! The description of a(n)" + getCommandType()
                         + "cannot be empty.");
             }
             break;

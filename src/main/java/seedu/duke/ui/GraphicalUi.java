@@ -171,11 +171,11 @@ public class GraphicalUi extends Ui {
 
     public String getAllStatSequence(Statistic stat) {
         String output = "Listing all statistics:"
-                + "Total Commands Executed:    " + stat.getTotalCommandsExecuted()
-                + "Total Tasks Deleted:        " + stat.getTotalTasksDeleted()
-                + "Total To-Dos Completed:     " + stat.getTotalTodosCompleted()
-                + "Total Deadlines Completed:  " + stat.getTotalDeadlinesCompleted()
-                + "Total Events Completed:     " + stat.getTotalEventsCompleted()
+                + "\nTotal Commands Executed:    " + stat.getTotalCommandsExecuted()
+                + "\nTotal Tasks Deleted:                " + stat.getTotalTasksDeleted()
+                + "\nTotal To-Dos Completed:       " + stat.getTotalTodosCompleted()
+                + "\nTotal Deadlines Completed:   " + stat.getTotalDeadlinesCompleted()
+                + "\nTotal Events Completed:        " + stat.getTotalEventsCompleted()
                 + "\n";
         return output;
     }

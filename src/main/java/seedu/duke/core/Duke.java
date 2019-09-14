@@ -6,12 +6,15 @@ import seedu.duke.command.UnknownCommand;
 import seedu.duke.parser.Parser;
 import seedu.duke.statistic.Statistic;
 import seedu.duke.storage.Storage;
+import seedu.duke.task.Task;
 import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -136,7 +139,7 @@ public class Duke {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        
+
 
         Scanner in = new Scanner(System.in);
         String fullCommand = "";
@@ -169,11 +172,11 @@ public class Duke {
     }
 
     public void loadSavedDate() throws IOException, DukeException {
-        // Loads the data from txt file to the TaskList object, tasks.
-        this.tasks = new TaskList(getTaskStorage().loadTasks());
+        ArrayList<Task> retrievedTasksData = getTaskStorage().loadTasks();
+        setTasks(retrievedTasksData);
 
-        // Loads the stats data from txt file.
-        this.stats = new Statistic(getStatStorage().loadStats());
+        TreeMap<String, Integer> retrievedStatsData = getStatStorage().loadStats();
+        setStats(retrievedStatsData);
     }
 
     public Storage getTaskStorage() {
@@ -182,6 +185,14 @@ public class Duke {
 
     public Storage getStatStorage() {
         return this.statStorage;
+    }
+
+    public void setTasks(ArrayList<Task> taskArrayList) {
+        this.tasks = new TaskList(taskArrayList);
+    }
+
+    public void setStats(TreeMap<String, Integer> map) {
+        this.stats = new Statistic(map);
     }
 
 }

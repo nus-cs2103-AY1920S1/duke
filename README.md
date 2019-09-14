@@ -120,7 +120,7 @@ If there is incorrect user input format, he will also reply with what went wrong
 
 	`Here are the tasks in your list:`
 	
-	`1. [T][:x:] return book`
+	`1. [T][`:x:`] return book`
 	
 	`2. [E][:x:] lab meeting (at: 21 Sep 2019 12.00 PM)`
 	

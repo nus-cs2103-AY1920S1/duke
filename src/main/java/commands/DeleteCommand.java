@@ -41,19 +41,20 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         if (commandArr.length <= 1) {
-            throw new DukeException("\u2639 A task number has to be specified.");
+            throw new DukeException(ui.getMissingTaskNumMsg());
         }
         int delTaskIndex;
-        delTaskIndex = Integer.parseInt(commandArr[1]) - 1;
+        try {
+            delTaskIndex = Integer.parseInt(commandArr[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException(ui.getInvalidNumFormatMsg());
+        }
         assert delTaskIndex >= 0 : "delTaskIndex must be non-negative";
         if (Command.checkValidTaskNumber(delTaskIndex, taskLst)) {
             Task deletedTask = taskLst.remove(delTaskIndex);
-            return String.format("Noted. I've removed this task:\n"
-                            + "%s\nNow you have %d tasks in the list.", deletedTask, taskLst.size());
+            return ui.getSuccessfulDeleteMsg(deletedTask, taskLst);
         } else {
-            String msg = String.format("\u2639 You have entered an invalid task number!" +
-                    " Please enter a number from between 1 to %d", taskLst.size());
-            throw new DukeException(msg);
+            throw new DukeException(ui.getInvalidTaskNumMsg(taskLst));
         }
     }
 

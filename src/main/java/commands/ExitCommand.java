@@ -33,13 +33,7 @@ public class ExitCommand extends Command {
      * @return String output reply from Duke.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        // Save the new task list to the hard disk
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            ui.showSavingError(e.getMessage());
-        }
-        return "Bye. Hope to see you again soon!";
+        return ui.getExitMsg();
     }
 
 }

@@ -2,6 +2,7 @@ package commands;
 
 import java.time.LocalDateTime;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.Parser;
@@ -48,49 +49,55 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         if (commandArr[0].equals("todo")) {
-            // Add a ToDo task
             if (commandArr.length <= 1) {
-                throw new DukeException("\u2639 OOPS!!! "
-                        + "The description of a todo cannot be empty.");
+                // the user did not provide a description for the task
+                throw new DukeException(ui.getEmptyDescriptionMsg());
             }
+            // Add a ToDo task
             taskLst.add(new ToDo(commandArr[1], false));
         } else if (commandArr[0].equals("deadline") || commandArr[0].equals("event")) {
+            if (commandArr.length <= 1) {
+                // the user did not provide a description for the task
+                throw new DukeException(ui.getEmptyDescriptionMsg());
+            }
             String[] fullCommand;
             if (commandArr[0].equals("deadline")) {
-                fullCommand = commandArr[1].split(" /by ");
+                if (commandArr[1].contains("/by ")) {
+                    fullCommand = commandArr[1].split(" /by ");
+                } else {
+                    // if command is of invalid format: does not contain " /by "
+                    throw new DukeException(ui.getInvalidDeadlineCmdMsg());
+                }
             } else { // if command equals "event"
-                fullCommand = commandArr[1].split(" /at ");
+                if (commandArr[1].contains("/at ")) {
+                    fullCommand = commandArr[1].split(" /at ");
+                } else {
+                    // if command is of invalid format: does not contain " /at "
+                    throw new DukeException(ui.getInvalidEventCmdMsg());
+                }
             }
             if (fullCommand.length <= 1) {
-                String msg = "\u2639 Either the description of " + (commandArr[0].equals("deadline")
-                        ? "a deadline " : "an event ") + "or its date-time is not provided.";
-                throw new DukeException(msg);
+                // Either the description or the date-time is not provided by user
+                throw new DukeException(ui.getMissingArgumentsMsg(commandArr[0]));
             }
             String description = fullCommand[0];
             String userDateTimeString = fullCommand[1];
-            LocalDateTime localDateTime = Parser.parseDateTime(userDateTimeString);
-            if (localDateTime == null) {
-                String dateInstruction = "Example date formats allowed: 07101997, 07/10/1997, " +
-                        "07 10 1997, 7 October 1997.\n";
-                String timeInstruction = "Example time formats allowed: 8:39AM, 0839.\n";
-                String dtInstruction = "Example date-times allowed: 07/10/1997 0839, 7 October 8:39AM.";
-                String msg = "\u2639 You have entered an invalid date-time format!\n"
-                        + dateInstruction + timeInstruction + dtInstruction;
-                throw new DukeException(msg);
-            }
-            if (commandArr[0].equals("deadline")) {
-                taskLst.add(new Deadline(description, localDateTime, false));
-            } else { // if command equals "event"
-                taskLst.add(new Event(description, localDateTime, false));
+            try {
+                LocalDateTime localDateTime = Parser.parseDateTime(userDateTimeString);
+                if (commandArr[0].equals("deadline")) {
+                    taskLst.add(new Deadline(description, localDateTime, false));
+                } else { // if command equals "event"
+                    taskLst.add(new Event(description, localDateTime, false));
+                }
+            } catch (DateTimeParseException e) {
+                // The user specified an invalid date-time format
+                throw new DukeException(ui.getInvalidDateTimeFormatMsg());
             }
         } else {
             // Invalid command being supplied by the user
-            throw new DukeException("\u2639 OOPS!!! I'm sorry, "
-                    + "but I don't know what that means :-(");
+            throw new DukeException(ui.getInvalidCommandMsg());
         }
-        return String.format("Got it. I've added this task:\n       %s\n"
-                        + "Now you have %d tasks in the list.",
-            taskLst.get(taskLst.size() - 1), taskLst.size());
+        return ui.getSuccessfulAddMsg(taskLst);
     }
 
 }

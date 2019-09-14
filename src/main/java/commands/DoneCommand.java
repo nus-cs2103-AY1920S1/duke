@@ -41,20 +41,23 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         if (commandArr.length <= 1) {
-            throw new DukeException("\u2639 A task number has to be specified.");
+            throw new DukeException(ui.getMissingTaskNumMsg());
         }
-        int taskDoneIndex = Integer.parseInt(commandArr[1]) - 1;
+        int taskDoneIndex;
+        try {
+            taskDoneIndex = Integer.parseInt(commandArr[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException(ui.getInvalidNumFormatMsg());
+        }
         assert taskDoneIndex >= 0 : "taskDoneIndex must be non-negative";
         if (Command.checkValidTaskNumber(taskDoneIndex, taskLst)) {
             taskLst.get(taskDoneIndex).setDone();
-            return String.format("Nice! I've marked this task as done:\n%s",
-                    taskLst.get(taskDoneIndex));
+            return ui.getSuccessfulDoneMsg(taskDoneIndex, taskLst);
         } else {
-            String msg = String.format("\u2639 You have entered an invalid task number!" +
-                    " Please enter a number from between 1 to %d", taskLst.size());
-            throw new DukeException(msg);
+            throw new DukeException(ui.getInvalidTaskNumMsg(taskLst));
         }
 
     }
 
 }
+

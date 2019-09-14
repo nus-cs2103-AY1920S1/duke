@@ -22,7 +22,7 @@
 }
 
 #dialogContainer {
-    -fx-background-color: linear-gradient(to bottom, #D6FFFE, #DDFFFE, #D6FFFE);
+    -fx-background-color: linear-gradient(to bottom, #A2DFF9, #B2E4FA, #A2DFF9);
     -fx-background-insets: 0, 1;
 }
 

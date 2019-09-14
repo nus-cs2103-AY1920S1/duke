@@ -32,7 +32,17 @@ public class DialogBox extends HBox {
     @FXML
     private Circle displayPicture;
 
-    private DialogBox(String text, Image img, String color, Paint textFill) {
+    /**
+     * Constructor of the DialogBox that takes in
+     * the text for the Label, a Paint value specifying the text colour,
+     * a String value specifying the background colour of the Label, and an Image.
+     *
+     * @param text the text of the Label.
+     * @param textFill a Paint value that determines the text fill.
+     * @param backgroundColor the background color of the Label.
+     * @param img the user's or Duke's profile picture.
+     */
+    private DialogBox(String text, Paint textFill, String backgroundColor, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -43,25 +53,19 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         dialog.setTextFill(textFill);
-        dialog.setStyle("-fx-background-color:" + color + "; -fx-background-radius: 20");
+        dialog.setStyle("-fx-background-color:" + backgroundColor + "; -fx-background-radius: 20");
         getCircleImg(img, displayPicture);
-//        displayPicture.setImage(img);
-//        // Set the height and width of the pictures
-//        displayPicture.setFitWidth(80.0);
-//        displayPicture.setFitHeight(80.0);
-//        // Make the user's and Duke's profile pictures appear as circles
-//        displayPicture.setClip(new Circle(40.0, 40.0, 40.0, Paint.valueOf("white")));
     }
 
     /**
-     * Returns a DialogBox representing the user input.
+     * Returns a DialogBox representing the User input.
      *
      * @param text the user input.
      * @param img user's profile image.
      * @return DialogBox for user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, "#94EFD1", Color.BLACK);
+        return new DialogBox(text, Color.BLACK, "white", img);
     }
 
     /**
@@ -72,7 +76,7 @@ public class DialogBox extends HBox {
      * @return DialogBox for Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, "#216168", Color.WHITE);
+        var db = new DialogBox(text, Color.WHITE, "#216168", img);
         db.flip();
         return db;
     }

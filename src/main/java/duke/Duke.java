@@ -61,14 +61,13 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
-            ui.showLoadingError(e.getMessage());
             tasks = new TaskList();
         }
     }
 
     /**
-     * The driver method where the logic of the Duke
-     * program is written: parsing of user input, instantiating
+     * Returns a String containing Duke's response to the user command.
+     * This method handles the parsing of user input, instantiating
      * the appropriate Command class and then executing the corresponding
      * set of actions associated with that command.
      *
@@ -77,20 +76,17 @@ public class Duke {
      */
     public String getResponse(String fullCommand) {
         String reply;
-        boolean isExit = false;
         try {
             Command c = Parser.parse(fullCommand);
             reply = c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            reply = e.getMessage();
+            return e.getMessage();
         }
         // Save the new task list to the hard disk
-        if (isExit) {
-            try {
-                storage.save(tasks);
-            } catch (IOException e) {
-                ui.showSavingError(e.getMessage());
-            }
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            return e.getMessage();
         }
         assert !reply.isEmpty() : "Reply should not be empty";
         return reply;

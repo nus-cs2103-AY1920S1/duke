@@ -14,7 +14,7 @@ import exceptions.DukeException;
  * Command is the abstract base class for all types of commands that
  * can be given from user input. Concrete command classes that extend
  * from Command include: ListCommand, ExitCommand, AddCommand, DoneCommand
- * and DeleteCommand. Command objects contain an execute method that will
+ * DeleteCommand and FindCommand. Command objects contain an execute method that will
  * carry out the appropriate actions based on the specific type of command given.
  */
 public abstract class Command {
@@ -44,8 +44,6 @@ public abstract class Command {
      * @return String output reply from Duke.
      * @throws DukeException  If there is invalid input.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return "execute Command";
-    }
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }

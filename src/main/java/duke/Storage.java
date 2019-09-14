@@ -3,14 +3,18 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import tasks.Task;
 import tasks.ToDo;
 import tasks.Deadline;
 import tasks.Event;
+
 import exceptions.DukeException;
 
 /**
@@ -33,7 +37,7 @@ public class Storage {
     }
 
     /**
-     * Returns an ArrayList of Tasks that have been read
+     * Returns an ArrayList of Tasks after reading
      * from the file specified by the file path.
      *
      * @return Arraylist of Tasks.

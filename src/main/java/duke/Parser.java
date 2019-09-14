@@ -27,7 +27,7 @@ public class Parser {
      * FindCommand, ExitCommand and ListCommand.
      * The type of Command object returned is based on the user input:
      * add [description] [datetime] (datetime only required for Event and Deadline Tasks),
-     * delete [task number], done [task number], find [keyword],
+     * delete [task number], done [task number], find [keywords],
      * exit, and list commands respectively.
      *
      * @param fullCommand the line of user input.
@@ -57,7 +57,15 @@ public class Parser {
         }
     }
 
-    public static LocalDateTime parseDateTime(String dateTime) {
+    /**
+     * Return a LocalDateTime object representing the time
+     * an Event or Deadline takes place.
+     *
+     * @param dateTime String supplied by user representing date-time of a task.
+     * @return LocalDateTime object representing the time an Event or Deadline takes place.
+     * @throws DateTimeParseException invalid date-time format supplied by the user.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws DateTimeParseException {
         LocalDateTime localDateTime;
 
         // Try parsing for different date time formats
@@ -128,15 +136,8 @@ public class Parser {
         }
 
         // Parse for format of type: 7 October 1997 8:39PM
-        try {
-            localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d LLLL yyyy h:mma"));
-            return localDateTime;
-        } catch (DateTimeParseException ignored) {
-            // Ignore the exception because date time keyed in by user
-            // could be considered valid by subsequent parses
-        }
-
-        return null;
+        localDateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("d LLLL yyyy h:mma"));
+        return localDateTime;
     }
 
 }

@@ -33,7 +33,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            ui.showLoadingError(e.getMessage());
+            ui.showLoadingError("Could not find existing task list. Creating new one...");
             tasks = new TaskList();
         }
     }

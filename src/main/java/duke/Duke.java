@@ -45,24 +45,12 @@ public class Duke {
     }
 
     /**
-     * Runs process of Duke.
+     * Runs duke from intellij console.
      */
     public void run() {
         String greeting = ui.showWelcome();
         boolean isExit = false;
         System.out.println(greeting);
-//        try {
-//            String fullCommand = ui.readCommand();
-//            ui.showLine();
-//            TaskCommand c = Parser.parse(fullCommand);
-//            c.execute(tasks, ui, storage);
-//            isExit = c.isExit();
-//        } catch (DukeException e) {
-//            ui.showError(e.getMessage());
-//        } finally {
-//            ui.showLine();
-//        }
-
         while (!isExit) {
             String output = "";
             try {
@@ -81,10 +69,30 @@ public class Duke {
     }
 
     /**
+     * Runs process of Duke from GUI.
+     */
+    public String run(String fullCommand) {
+        String output = "";
+
+        try {
+            output = output.concat(ui.showLine());
+            TaskCommand c = Parser.parse(fullCommand);
+            output = output.concat(c.execute(tasks, ui, storage));
+        } catch (DukeException e) {
+            output = output.concat(ui.showError(e.getMessage()));
+        } finally {
+            output = output.concat(ui.showLine());
+        }
+
+        return output;
+    }
+
+    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        //return "Duke heard: " + input;
+        return run(input);
     }
 }

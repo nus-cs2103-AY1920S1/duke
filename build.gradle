@@ -15,6 +15,9 @@ plugins {
     
     // For JavaFX
     id 'org.openjfx.javafxplugin' version '0.0.7'
+
+    //For creating a .jar file with JavaFx
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 repositories {
@@ -59,4 +62,20 @@ test {
 javafx { // For JavaFX
     version = "11.0.2"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+jar {
+  manifest {
+    attributes(
+      'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+      'Main-Class': 'Launcher'
+    )
+  }
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveVersion = "0.1.3"
+    archiveClassifier = null
+    archiveAppendix = null
 }

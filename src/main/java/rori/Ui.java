@@ -96,7 +96,7 @@ class Ui {
      */
     public void printTutorial() {
         this.output.append("I've added a temporary save file first.\n");
-        this.output.append("Try typing \'list\' to get started.");
+        this.output.append("Try typing \'list\' to get started.\n");
         this.output.append("And if you ever need help, type \'help\'!\n");
     }
 

@@ -23,8 +23,8 @@ import javafx.scene.paint.ImagePattern;
  * face and a label containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    private static final double X_TRANSFORM_LABEL = 25;
-    private static final double X_TRANSFORM_IMAGE = 18;
+    private static final double X_TRANSFORM_LABEL = 30;
+    private static final double X_TRANSFORM_IMAGE = 20;
 
     public static double transformSize = 0;
 

@@ -1,5 +1,6 @@
 package duke.tasklist;
 
+import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -66,6 +67,33 @@ public class TaskList {
         }
 
         return "Now you have " + tasks.size() + " tasks in the list.";
+    }
+
+    /**
+     * Replaces this task list with an older version of the task list.
+     *
+     * @param olderTaskList Task list that is replacing this current task list.
+     */
+    private void replaceTaskList(ArrayList<Task> olderTaskList) {
+        tasks.clear();
+        for (Task olderTasks : olderTaskList) {
+            tasks.add(olderTasks);
+        }
+    }
+
+    /**
+     * Reverts the task list to an older version and shows the user the reverted version.
+     *
+     * @param storage Where the task list in String can be converted to an ArrayList of tasks.
+     * @param olderTaskListInString Older version of the task list in String format.
+     * @return Response to user.
+     */
+    public String undoCommand(Storage storage, String olderTaskListInString) {
+        ArrayList<Task> olderTaskList = storage.loadTasks(olderTaskListInString);
+        replaceTaskList(olderTaskList);
+        StringBuilder sb = new StringBuilder("Ctrl + Z activated!\n" + "Here is your list now:\n");
+        sb.append(printNumberedTasks(tasks));
+        return sb.toString();
     }
 
     /**

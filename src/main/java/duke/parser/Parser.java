@@ -52,6 +52,8 @@ public class Parser {
             return UpdateCommand.process(currArray);
         case "schedule":
             return ScheduleCommand.process(currArray);
+        case "undo":
+            return new UndoCommand();
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

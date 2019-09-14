@@ -49,11 +49,13 @@ public class CompleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
+        UndoCommand.saveVersion(storage.getSavedListString(tasks));
         StringBuilder sb = new StringBuilder();
         try {
             sb.append(tasks.completeTask(taskNumber));
         } catch (IndexOutOfBoundsException e) {
             sb.append("OOPS!!! Your specified task number is out of range.");
+            UndoCommand.removeRecentSavedVersion();
         }
         try {
             storage.store(tasks);

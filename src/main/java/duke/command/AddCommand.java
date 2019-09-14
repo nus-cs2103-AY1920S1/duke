@@ -28,6 +28,7 @@ public class AddCommand extends Command {
      * @param storage Storage to be updated with the new task.
      */
     public String execute(TaskList tasks, Storage storage) {
+        UndoCommand.saveVersion(storage.getSavedListString(tasks));
         String response = tasks.addTask(task);
         assert(!response.isEmpty());
         try {

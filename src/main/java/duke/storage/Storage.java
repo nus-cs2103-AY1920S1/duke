@@ -98,7 +98,7 @@ public class Storage {
      * @param tasks Tasks given with their type, description, completion status and date (if applicable).
      * @return Populated list of tasks.
      */
-    private ArrayList<Task> loadTasks(String tasks) {
+    public ArrayList<Task> loadTasks(String tasks) {
         ArrayList<Task> loadedTaskList = new ArrayList<>();
         Scanner sc = new Scanner(tasks);
         while (sc.hasNextLine()) {

@@ -58,6 +58,7 @@ public class UpdateCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
+        UndoCommand.saveVersion(storage.getSavedListString(tasks));
         String response = tasks.updateDescription(taskNumber, newDescription);
         try {
             storage.store(tasks);

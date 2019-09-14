@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 public class TagStoreAlpha extends AbstractTagStore<TaskInterface>
     implements AddTagObserver, QueryTagObserver, 
     QueryTaskObserver, DeletePairObserver, DeleteTaskObserver,
-    DeleteTagObserver, UpdateTagObserver, UpdateTaskObserver {
+    DeleteTagObserver, UpdateTagObserver, UpdateTaskObserver,
+    QueryAllTagsObserver {
 
     /* before use, please register with TagCommandPost */
     // UI registers here for UItaskfeedback, UItagfeedback, UIpairfeedback, UIquery
@@ -116,6 +117,16 @@ public class TagStoreAlpha extends AbstractTagStore<TaskInterface>
         String msg = "task";
         Stream<String> stream = super.queryByItem(task); 
         notifyQueryFeedbackObservers(task, stream, msg); 
+    }
+
+    public void queryAllTagsUpdate() {
+        Stream<String> stream = super.queryAllTags();
+        notifyQueryFeedbackObservers("all (view only)", 
+            stream, "all tags");
+        //String all = super.queryAllTags();
+        //List<String> xs = new ArrayList<>();
+        //xs.add(all);
+        //notifyQueryFeedbackObservers("all", xs.stream(), "all");
     }
 
     public void deletePairUpdate(String tag, TaskInterface task) {

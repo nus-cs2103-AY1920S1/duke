@@ -40,21 +40,37 @@ public class GenericBiMap<L,R> {
     }
 
 
-    // Test feature only
-    public String queryAll() {
-        StringBuilder sb = new StringBuilder();
+    //// Test feature only
+    //public String queryAll() {
+    //    StringBuilder sb = new StringBuilder();
+    //    List<L> tagList = rightKeyStore.keySet()
+    //        .stream().collect(Collectors.toList());
+
+    //    for (L tag : tagList) {
+    //        sb.append(tag + ":\n");
+    //        queryByLeftKey(tag).forEach(x -> sb.append(x + "\n"));
+    //        sb.append("\n");
+    //    }
+    //    return sb.toString();
+
+    //}
+
+
+    public Stream<String> queryAll() {
+        List<String> out = new ArrayList<>();
         List<L> tagList = rightKeyStore.keySet()
             .stream().collect(Collectors.toList());
 
         for (L tag : tagList) {
+            StringBuilder sb = new StringBuilder();
             sb.append(tag + ":\n");
             queryByLeftKey(tag).forEach(x -> sb.append(x + "\n"));
             sb.append("\n");
+            out.add(sb.toString());
         }
-        return sb.toString();
+        return out.stream(); //sb.toString();
 
     }
-
     /**
      * Return Stream of hits if string tag can be found in store
      */

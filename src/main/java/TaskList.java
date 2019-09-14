@@ -9,10 +9,16 @@ import java.util.stream.Collectors;
  */
 class TaskList implements TaskModelInterface, PrimaryStoreInterface<TaskInterface> {
     private List<TaskObserver> observers;
+    private List<UpdateTaskCommandObserver> 
+        updateTaskCommandObservers;
+    private List<DeleteTaskCommandObserver> 
+        deleteTaskCommandObservers;
     private List<TaskInterface> taskList;
 
     public TaskList() {
         this.observers = new ArrayList<>();
+        this.updateTaskCommandObservers = new ArrayList<>();
+        this.deleteTaskCommandObservers = new ArrayList<>();
         this.taskList = new ArrayList<>();
     }
 
@@ -36,6 +42,32 @@ class TaskList implements TaskModelInterface, PrimaryStoreInterface<TaskInterfac
      */
     public void registerObserver(TaskObserver observer) {
         this.observers.add(observer);
+    }
+
+    public void registerUpdateTaskCommandObserver
+        (UpdateTaskCommandObserver observer) {
+        this.updateTaskCommandObservers.add(observer);
+    }
+
+    public void registerDeleteTaskCommandObserver
+        (DeleteTaskCommandObserver observer) {
+        this.deleteTaskCommandObservers.add(observer);
+    }
+
+    public void notifyUpdateTaskCommandObservers(
+        TaskInterface oldTask, TaskInterface updatedTask) {
+        for (UpdateTaskCommandObserver o : 
+            this.updateTaskCommandObservers) {
+            o.updateTaskCommandUpdate(oldTask, updatedTask);
+        }
+    }
+
+    public void notifyDeleteTaskCommandObservers(
+        TaskInterface task) {
+        for (DeleteTaskCommandObserver o : 
+            this.deleteTaskCommandObservers) {
+            o.deleteTaskCommandUpdate(task);
+        }
     }
 
     public void removeObserver(TaskObserver observer){
@@ -80,6 +112,8 @@ class TaskList implements TaskModelInterface, PrimaryStoreInterface<TaskInterfac
         TaskInterface pendingTask = this.taskList.get(indexNum);
         TaskInterface doneTask = pendingTask.completeTask();
         this.taskList.set(indexNum, doneTask);
+        this.notifyUpdateTaskCommandObservers(pendingTask, 
+            doneTask);
         this.notifyObservers();
         return doneTask;
     }
@@ -94,6 +128,7 @@ class TaskList implements TaskModelInterface, PrimaryStoreInterface<TaskInterfac
         int indexNum = refNum - 1;
         TaskInterface deletedTask = 
             this.taskList.remove(indexNum);
+        this.notifyDeleteTaskCommandObservers(deletedTask);
         this.notifyObservers();
         return deletedTask;
     }

@@ -173,7 +173,8 @@ public class Main extends Application {
 
         // starting OWO
 
-        TaskModelInterface model = new TaskList();
+        TaskList model = new TaskList();
+        //TaskModelInterface model = new TaskList();
         StorageInterface storage = new Storage(model);
         ControllerInterface friday = new Parser(model);
         this.bridge = ((Parser) friday).getBridge();
@@ -182,11 +183,14 @@ public class Main extends Application {
 
         //tag stuff
         TagCommandPostAlpha tagcommand = new TagCommandPostAlpha((PrimaryStoreInterface) model);
+        model.registerUpdateTaskCommandObserver(tagcommand);
+        model.registerDeleteTaskCommandObserver(tagcommand);
         ((Parser) friday).registerTagCommandObserver(tagcommand);
         TagStoreAlpha tagstore = new TagStoreAlpha();
         tagcommand.registerAddTagObserver(tagstore);
         tagcommand.registerQueryTagObserver(tagstore);
         tagcommand.registerQueryTaskObserver(tagstore);
+        tagcommand.registerQueryAllTagsObserver(tagstore);
         tagcommand.registerDeleteTagObserver(tagstore);
         tagcommand.registerDeleteTaskObserver(tagstore);
         tagcommand.registerDeletePairObserver(tagstore);

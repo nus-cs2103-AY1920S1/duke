@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
-public class TagCommandPostAlpha implements TagCommandObserver {
+public class TagCommandPostAlpha implements TagCommandObserver, 
+    UpdateTaskCommandObserver, DeleteTaskCommandObserver {
     //implement UIObserver 
     /* before use: 
     * 1. new TaskList
@@ -26,6 +27,7 @@ public class TagCommandPostAlpha implements TagCommandObserver {
     private List<DeletePairObserver> deletePairObservers;
     private List<UpdateTagObserver> updateTagObservers;
     private List<UpdateTaskObserver> updateTaskObservers;
+    private List<QueryAllTagsObserver> queryAllTagsObservers;
 
     public TagCommandPostAlpha(PrimaryStoreInterface<TaskInterface> tasklist)  {//AbstractTagStore<TaskInterface> store) {
         //this.store = store;
@@ -43,6 +45,7 @@ public class TagCommandPostAlpha implements TagCommandObserver {
         this.deletePairObservers = new ArrayList<>();
         this.updateTagObservers = new ArrayList<>();
         this.updateTaskObservers = new ArrayList<>();
+        this.queryAllTagsObservers = new ArrayList<>();
     }
 
     public void registerAddTagObserver(AddTagObserver o) {
@@ -77,7 +80,12 @@ public class TagCommandPostAlpha implements TagCommandObserver {
         this.deletePairObservers.add(o); 
     }
 
-    public void notifyAddTag(String tag, int taskId) {
+    public void registerQueryAllTagsObserver(
+        QueryAllTagsObserver o) {
+        this.queryAllTagsObservers.add(o); 
+    }
+
+    private void notifyAddTag(String tag, int taskId) {
         TaskInterface task = this.tasklist.getItem(taskId);
         for (AddTagObserver obs : addTagObservers) {
             obs.addTagUpdate(tag, task);
@@ -90,45 +98,46 @@ public class TagCommandPostAlpha implements TagCommandObserver {
     //    }
     //}
 
-    public void notifyDeleteTag(String tag) {
+    private void notifyDeleteTag(String tag) {
         for (DeleteTagObserver obs : deleteTagObservers) {
             obs.deleteTagUpdate(tag);
         }
     }
     
-    public void notifyDeleteTask(int taskId) {
+    private void notifyDeleteTask(int taskId) {
         TaskInterface task = this.tasklist.getItem(taskId);
         for (DeleteTaskObserver obs : deleteTaskObservers) {
             obs.deleteTaskUpdate(task);
         }
     }
-    //public void notifyDeleteTask(TaskInterface task) {
-    //    for (DeleteTaskObserver obs : deleteTaskObservers) {
-    //        obs.deleteTaskUpdate(task);
-    //    }
-    //}
 
-    public void notifyQueryTag(String tag) {
+    private void notifyDeleteTask(TaskInterface task) {
+        for (DeleteTaskObserver obs : deleteTaskObservers) {
+            obs.deleteTaskUpdate(task);
+        }
+    }
+
+    private void notifyQueryTag(String tag) {
         for (QueryTagObserver obs : queryTagObservers) {
             obs.queryTagUpdate(tag);
         }
     }
 
-    public void notifyQueryTask(int taskId) {
+    private void notifyQueryTask(int taskId) {
         TaskInterface task = this.tasklist.getItem(taskId);
         for (QueryTaskObserver obs : queryTaskObservers) {
             obs.queryTaskUpdate(task);
         }
     }
 
-    public void notifyUpdateTag(String oldTag, 
+    private void notifyUpdateTag(String oldTag, 
         String updatedTag) {
         for (UpdateTagObserver obs : updateTagObservers) {
             obs.updateTagUpdate(oldTag, updatedTag);
         }
     }
 
-    public void notifyUpdateTask(TaskInterface oldTask, 
+    private void notifyUpdateTask(TaskInterface oldTask, 
         TaskInterface updatedTask) {
         for (UpdateTaskObserver obs : updateTaskObservers) {
             obs.updateTaskUpdate(oldTask, updatedTask);
@@ -141,10 +150,16 @@ public class TagCommandPostAlpha implements TagCommandObserver {
     //    }
     //}
 
-    public void notifyDeletePair(String tag, int taskId) {
+    private void notifyDeletePair(String tag, int taskId) {
         TaskInterface task = this.tasklist.getItem(taskId);
         for (DeletePairObserver obs : deletePairObservers) {
             obs.deletePairUpdate(tag, task);
+        }
+    }
+
+    private void notifyQueryAllTags() {
+        for (QueryAllTagsObserver obs : queryAllTagsObservers) {
+            obs.queryAllTagsUpdate();
         }
     }
     //public void notifyDeletePair(String tag, TaskInterface task) {
@@ -153,6 +168,15 @@ public class TagCommandPostAlpha implements TagCommandObserver {
     //    }
     //}
 
+    public void updateTaskCommandUpdate(TaskInterface oldTask,
+        TaskInterface updatedTask) {
+        notifyUpdateTask(oldTask, updatedTask);
+    }
+
+    public void deleteTaskCommandUpdate(TaskInterface task) {
+        notifyDeleteTask(task);
+    }
+
     public void tagCommandUpdate(String command) {
         //parse logic on which of the notifies to call
         String[] cmds = command.trim().split(" ");
@@ -160,9 +184,9 @@ public class TagCommandPostAlpha implements TagCommandObserver {
         //String body = cmds[2];
 
         System.out.println("cmdread <<<<");
-        System.out.println("cmds0: " + cmds[0]);
-        System.out.println("cmds1: " + cmds[1]);
-        System.out.println("cmds2: " + cmds[2]);
+        //System.out.println("cmds0: " + cmds[0]);
+        //System.out.println("cmds1: " + cmds[1]);
+        //System.out.println("cmds2: " + cmds[2]);
         //System.out.println("cmds3: " + cmds[3]);
 
 
@@ -196,6 +220,9 @@ public class TagCommandPostAlpha implements TagCommandObserver {
         } else if 
             (cmds[1].toUpperCase().equals("UPDATETAG")) {
             notifyUpdateTag(cmds[2], cmds[3]);
+        } else if 
+            (cmds[1].toUpperCase().equals("ALL")) {
+            notifyQueryAllTags();
         } else {
             /* TODO */
             //deletetask, donetask

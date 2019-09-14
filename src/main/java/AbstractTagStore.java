@@ -34,6 +34,11 @@ public abstract class AbstractTagStore<E> {
         }
 
         @Override
+        public String toString() {
+            return this.contains.toString();
+        }
+
+        @Override
         public boolean equals(Object obj) {
             if (this == obj) {
                 return true;
@@ -110,6 +115,10 @@ public abstract class AbstractTagStore<E> {
     public Stream<String> queryByItem(E item) {
         return this.store
             .queryByRightKey(new TagGenericWrapper(item));
+    }
+
+    public Stream<String> queryAllTags() {
+        return this.store.queryAll();
     }
 
     // note for this one, remember to convert from 

@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * The DukeException class defines the behaviour of a DukeException.

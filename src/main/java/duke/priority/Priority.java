@@ -1,4 +1,4 @@
-package priority;
+package duke.priority;
 
 /**
  * The Priority enumeration defines the behaviour of a priority.

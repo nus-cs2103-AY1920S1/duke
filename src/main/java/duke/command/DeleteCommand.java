@@ -1,7 +1,7 @@
-package command;
+package duke.command;
 
-import task.DukeException;
-import task.TaskList;
+import duke.task.DukeException;
+import duke.task.TaskList;
 
 /**
  * The DeleteCommand class defines the behaviour of a delete command.

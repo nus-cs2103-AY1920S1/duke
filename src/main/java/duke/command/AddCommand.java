@@ -1,10 +1,10 @@
-package command;
+package duke.command;
 
-import task.DukeException;
-import task.Todo;
-import task.Event;
-import task.Deadline;
-import task.TaskList;
+import duke.task.DukeException;
+import duke.task.Todo;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.TaskList;
 
 /**
  * The AddCommand class defines the behaviour of an add command.

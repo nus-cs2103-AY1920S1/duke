@@ -22,27 +22,6 @@ public class Ui {
     }
 
     /**
-     * Takes input from the user line by line and process the input
-     * using the Parser object given in the parameter.
-     * @param parser Parser object that is responsible for executing
-     *               the user input.
-     */
-    public void run(Parser parser) {
-        String input = sc.nextLine();
-        while (!input.equals("bye")) {
-            try {
-                parser.parseLineInput(input);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-            input = sc.nextLine();
-        }
-        printByeMessage();
-    }
-
-    /**
      * prints the message when a task is done.
      * @param task task that has just been marked as done.
      * @return

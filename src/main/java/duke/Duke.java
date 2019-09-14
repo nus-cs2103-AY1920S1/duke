@@ -69,7 +69,6 @@ public class Duke<x> extends Application {
     public void run() {
         Parser parser = new Parser(this.taskList, this.ui, this.storage);
         ui.printWelcomeMessage();
-        ui.run(parser);
     }
 
     @Override

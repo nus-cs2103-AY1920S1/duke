@@ -16,14 +16,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-import javafx.scene.Scene;
-
-
 /**
  * Project Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
  * storage attribute is a Storage object, which helps read and write data to the text file
@@ -40,14 +32,11 @@ public class Duke {
     private CommandLineUi cli;
     private GraphicalUi gui;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/117.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/commando.jpg"));
-
     private String taskFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt";
     private String statFilePath = "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\stats.txt";
 
     /**
-     * Default constructor to support seedu.duke.core.Launcher of javaFX.
+     * Default constructor to support Duke GUI.
      */
     public Duke() {
         taskStorage = new Storage(taskFilePath);
@@ -58,7 +47,7 @@ public class Duke {
     }
 
     /**
-     * Instantiates a Duke object with filePath.
+     * Constructor to support Duke CLI.
      *
      * @param filePath absolute filepath of the where the text file is stored.
      *                 Eg "C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt".
@@ -81,9 +70,7 @@ public class Duke {
     public String getResponse(String input) {
 
         try {
-
-            loadSavedDate();;
-
+            loadSavedDate();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (DukeException e) {
@@ -97,18 +84,11 @@ public class Duke {
 
         try {
 
-            command = Parser.getCommand(input, gui);
-            outputString = command.execute(input, gui, tasks, taskStorage, stats, statStorage);
+            command = Parser.getCommand(input, getGui());
+            outputString = command.execute(input, getGui(), getTasks(), getTaskStorage(),
+                    getStats(), getStatStorage());
 
-            // Saves tasks to txt file before returning output to GUI.
-            this.taskStorage.clearTaskFileBeforeSaving();
-            for (int i = 0; i < this.tasks.getSize(); i++) {
-                this.taskStorage.writeToTaskFile(this.tasks.getTask(i).toSaveString());
-            }
-
-            // Saves stats file before returning output.
-            statStorage.saveStatFile(stats);
-
+            saveData();
 
         } catch (DukeException e) {
 
@@ -128,38 +108,39 @@ public class Duke {
      * Executes the Duke Command Line Interface.
      */
     public void run() {
-        System.out.println(cli.getWelcomeString());
+        String welcomeString = getCli().getWelcomeString();
+        getCli().printToCommandLine(welcomeString);
 
         try {
-           loadSavedDate();;
+           loadSavedDate();
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            getCli().printToCommandLine(e.getMessage());
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            getCli().printToCommandLine(e.getMessage());
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            getCli().printToCommandLine(e.getMessage());
         }
-
 
         Scanner in = new Scanner(System.in);
         String fullCommand = "";
         Command command = new UnknownCommand();
 
-
         while ( command instanceof ByeCommandCli == false) {
             String outputString = "";
             fullCommand = in.nextLine().trim();
             try {
-                command = Parser.getCommand(fullCommand, cli);
-                outputString = command.execute(fullCommand, cli, tasks, taskStorage, stats, statStorage);
+
+                command = Parser.getCommand(fullCommand, getCli());
+                outputString = command.execute(fullCommand, getCli(), getTasks(), getTaskStorage(),
+                        getStats(), getStatStorage());
+
             } catch (IOException e) {
                 outputString = e.getMessage();
             } catch (DukeException e) {
                 outputString = e.getMessage();
             }
-            System.out.println(outputString);
+            getCli().printToCommandLine(outputString);
         }
-
     }
 
     /**
@@ -171,6 +152,12 @@ public class Duke {
         new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt").run();
     }
 
+    /**
+     * Load saved data of tasks and stats.
+     *
+     * @throws IOException Thrown due to error in reading/writing of txt file.
+     * @throws DukeException Custom error thrown.
+     */
     public void loadSavedDate() throws IOException, DukeException {
         ArrayList<Task> retrievedTasksData = getTaskStorage().loadTasks();
         setTasks(retrievedTasksData);
@@ -179,22 +166,93 @@ public class Duke {
         setStats(retrievedStatsData);
     }
 
-    public Storage getTaskStorage() {
-        return this.taskStorage;
+    /**
+     * Save the TaskList and Statistic objects to file.
+     *
+     * @throws IOException Thrown due to error in reading/writing of txt file.
+     */
+    public void saveData() throws IOException {
+        getTaskStorage().clearTaskFileBeforeSaving();
+
+        for (int i = 0; i < getTasks().getSize(); i++) {
+            String saveString = getTasks().getTask(i).toSaveString();
+            getTaskStorage().writeToTaskFile(saveString);
+        }
+
+        getStatStorage().saveStatFile(getStats());
     }
 
-    public Storage getStatStorage() {
-        return this.statStorage;
-    }
-
+    /**
+     * Setter function for TaskList attribute.
+     *
+     * @param taskArrayList ArrayList of Tasks.
+     */
     public void setTasks(ArrayList<Task> taskArrayList) {
         this.tasks = new TaskList(taskArrayList);
     }
 
+    /**
+     * Setter function for Statistic attribute.
+     *
+     * @param map Tree map mapping String to Integer.
+     */
     public void setStats(TreeMap<String, Integer> map) {
         this.stats = new Statistic(map);
     }
 
+    /**
+     * Getter function for task storage object.
+     *
+     * @return Task Storage object.
+     */
+    public Storage getTaskStorage() {
+        return this.taskStorage;
+    }
+
+    /**
+     * Getter function for stats storage object.
+     *
+     * @return Stat storage object.
+     */
+    public Storage getStatStorage() {
+        return this.statStorage;
+    }
+
+    /**
+     * Getter function for Statistic object.
+     *
+     * @return Statistic object.
+     */
+    public Statistic getStats() {
+        return stats;
+    }
+
+    /**
+     * Getter function for TaskList object.
+     *
+     * @return TaskList object.
+     */
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Getter function for Command Line UI object.
+     *
+     * @return Command Line UI object.
+     */
+    public CommandLineUi getCli() {
+        return cli;
+    }
+
+    /**
+     * Getter function for Graphical UI object.
+     *
+     * @return Graphical UI object.
+     */
+    public GraphicalUi getGui() {
+        return gui;
+    }
 }
 
 

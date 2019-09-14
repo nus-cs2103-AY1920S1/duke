@@ -14,7 +14,7 @@ public class Ui {
      * @return Greeting message.
      */
     public static String getGreeting() {
-        return "Hello! I'm Duke\nWhat can i do for you?";
+        return "Hello! I'm Duke\nWhat can i do for you?\nHint: Type 'help' to access all valid commands ";
     }
 
     /**

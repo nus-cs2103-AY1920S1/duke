@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.EmptyCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.UpcomingCommand;
 import duke.task.TaskEnum;
@@ -33,6 +34,8 @@ public class Parser {
             return new ListCommand();
         } else if (input.equals("upcoming")) { // List items
             return new UpcomingCommand();
+        } else if (input.equals("help")) { // List items
+            return new HelpCommand();
         } else if (input.equals("bye")) { // Exit application
             return new ExitCommand();
         } else { // Invalid command

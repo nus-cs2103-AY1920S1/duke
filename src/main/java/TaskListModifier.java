@@ -29,6 +29,9 @@ public class TaskListModifier {
             ui.addTask(taskList);
             FileWriting.writeToFile(taskList);
         }
+
+        assert (duplicateChecker.checkDuplicate(t)): "Somehow a non-duplicate entry made it through.";
+
     }
 
     /**

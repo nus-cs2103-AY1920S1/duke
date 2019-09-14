@@ -62,7 +62,6 @@ public class Storage {
         char[] detailsArray = details.toCharArray();
         String type = "" + detailsArray[1];
         String desc = line.substring(7);
-        System.out.println("desc: " + desc); //DELETE
 
         String tag = "";
         boolean hasTags = false;

@@ -1,5 +1,4 @@
 [D][+] change clothes (by: 23 Sep 2019, 18:00 PM)
-[E][ ] wash dishes (at: 2pm)
-[T][+] poop (tags: dirty )
 [E][ ] refresh (at: 3pm ) (tags: fresh )
-[T][ ] scream  (tags: crazy )
+[T][ ] breathe (tags: fresh  clean  healthy )
+[D][ ] poop (by: 02 Feb 2012, 18:00 PM) (tags: dirty  water  refresh )

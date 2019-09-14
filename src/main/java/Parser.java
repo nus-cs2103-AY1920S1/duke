@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  * Reads and processes the commands given to Duke and returns the appropriate action.
@@ -70,13 +71,18 @@ public class Parser {
             String type = task.substring(0, task.indexOf(' '));
             String taskDescription = task.substring(task.indexOf(' ') + 1);
             boolean hasTags = false;
-            String tag = "";
+            ArrayList<String> tags = new ArrayList<>();
 
             if (taskDescription.contains("#")) {
                 hasTags = true;
                 String[] processed = taskDescription.split("#");
                 taskDescription = processed[0];
-                tag = processed[1];
+
+                // Add all tags
+                for (int i = 1; i < processed.length; i++) {
+                    String tag = processed[i];
+                    tags.add(tag);
+                }
             }
 
             Task newTask = new Task("dummy");
@@ -113,7 +119,9 @@ public class Parser {
             }
 
             if (hasTags) {
-                newTask.addTag(tag);
+                for (String tag : tags) {
+                    newTask.addTag(tag);
+                }
             }
 
             return newTask;

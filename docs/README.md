@@ -80,12 +80,12 @@ Example of usage:
 
 ## FAQ
 
-####1. IDE underlining syntax in red stating “Cannot access javafx.event.eventTarget”
+#### 1. IDE underlining syntax in red stating “Cannot access javafx.event.eventTarget”
 
 ![Image of John task assistant](Faq1.png)
 
 Solution: Navigate to the module settings either by ‘right clicking the Project > Open Module settings’ or ‘File > Project Structure’ and select ‘Modules’. Remove the main and test module by selecting the module and clicking on the ‘Minus’ button on the top.
 
-####2. @FXML annotation highlighted in red
+#### 2. @FXML annotation highlighted in red
 
 Solution: Select ‘Alt + Enter/Option + Enter’ and select ‘import org.gradle….’

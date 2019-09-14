@@ -10,7 +10,7 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String greeting = "Hello! I'm Duke\nWhat can I do for you?\n";
     private static final String loadError = "This is your first time using Duke, no history loaded.\n";
-    private static final String line = "____________________________________________________________\n";
+    private static final String line = "__________________________________________________\n";
     private Scanner sc;
 
     public Ui() {

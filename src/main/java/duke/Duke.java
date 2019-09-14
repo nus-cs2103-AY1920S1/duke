@@ -30,6 +30,7 @@ public class Duke {
 
     /**
      * Creates an instance of Duke which runs the program.
+     *
      * @param saveFilePath Save file path to be used for saving / loading tasks
      */
     public Duke(String saveFilePath) {
@@ -66,6 +67,7 @@ public class Duke {
 
     /**
      * Initialize duke and return initial greeting (for GUI implementation).
+     *
      * @return greeting
      */
     public String initAndGreet() {

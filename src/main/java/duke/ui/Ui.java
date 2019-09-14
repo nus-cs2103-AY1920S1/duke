@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Read line using private scanner.
+     *
      * @return line input by user
      */
     public String readLine() {
@@ -81,6 +82,7 @@ public class Ui {
 
     /**
      * Prints line if ui is isEnabled.
+     *
      * @param line line to be printed
      */
     public void println(String line) {
@@ -92,6 +94,7 @@ public class Ui {
 
     /**
      * Print error if errorLogsEnabled.
+     *
      * @param e DukeException error
      */
     public void printError(DukeException e) {
@@ -113,6 +116,7 @@ public class Ui {
 
     /**
      * Whenever UI "prints" something it puts it into the outputBuffer (StringBuilder). This also resets the buffer.
+     *
      * @return string ui output
      */
     public String flushBuffer() {

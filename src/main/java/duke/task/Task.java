@@ -44,6 +44,7 @@ public abstract class Task {
 
     /**
      * Validate the input from the user.
+     *
      * @param description Description of the task
      * @param taskName Name of the task e.g. event or deadline
      * @return
@@ -62,6 +63,7 @@ public abstract class Task {
 
     /**
      * Gets the task name, used by storage to identify tasks.
+     *
      * @return String denoting task name e.g. todo, event, deadline. In low caps;
      */
     public abstract String getTaskName();

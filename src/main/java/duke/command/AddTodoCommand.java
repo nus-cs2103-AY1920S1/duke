@@ -12,6 +12,7 @@ public class AddTodoCommand extends TextBasedCommand {
 
     /**
      * Create todo command (extended from text based command).
+     *
      * @param line line of user input
      * @throws DukeException generic error with message
      */

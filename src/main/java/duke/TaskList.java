@@ -67,6 +67,7 @@ public class TaskList extends ArrayList<Task> {
 
     /**
      * Insert a new task into the task list.
+     *
      * @param ui ui object
      * @param taskToInsert task to insert
      * @throws DukeException generic exception with error message

@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates a mainwindow GUI object which will be added into a stage in Main.class.
+     *
      * @param duke duke object to be linked together with this GUI object
      */
     public MainWindow(Duke duke) {
@@ -81,6 +82,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Add a dialog box.
+     *
      * @param type type of dialog (enum)
      * @param text Text to add
      */

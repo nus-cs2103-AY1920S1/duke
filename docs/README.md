@@ -5,8 +5,12 @@ Duke is a **Personal Assistant Chatbot** that helps a person organise a list of 
 The name Duke was chosen in honor of Duke, the Java Mascot. **While Duke has a Graphical User Interface (GUI), its main for of input Command Line Interface (CLI) based**, thus favoring people who can type fast.
 
 ## Pre-requisites
-1. Ensure you have Java 11 or above installed in your Computer. You can do so at the [java website] (https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
-2. Download the latest Duke.jar [here] (https://github.com/TanZhanMing/duke/releases)
+1. Ensure you have Java 11 or above installed in your Computer. You can do so at the [java website](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
+2. Download the latest Duke.jar [here](https://github.com/TanZhanMing/duke/releases)
+3. Copy the file to the folder you want to use as the home folder Duke.
+4. Double-click the file to start the app. The GUI should appear in a few seconds.
+
+![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
 
 ## Features 
 

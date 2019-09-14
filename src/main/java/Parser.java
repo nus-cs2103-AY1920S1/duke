@@ -14,7 +14,7 @@ public class Parser {
      * Reads and react to user command
      * @param tasks Current task list.
      */
-    public String parse(TaskList tasks, String input, Storage storage) {
+    public String parse(TaskList tasks, String input, Storage storage, Statistics stats) {
         String cmd = input;
         Scanner cmdSc = new Scanner(cmd);
         try {
@@ -52,6 +52,9 @@ public class Parser {
                 case "list":
                     return tasks.list();
                     //break;
+
+                case "listdone":
+                    return stats.listDone();
                 //deadline
                 case "deadline":
                     try {
@@ -89,8 +92,9 @@ public class Parser {
                 //done
                 case "done":
                     try {
-                        String done = tasks.done(Integer.parseInt(cmdSc.next()) - 1);
+                        String done = tasks.done(Integer.parseInt(cmdSc.next()) - 1, stats);
                         storage.save(tasks);
+                        stats.save();
                         return done;
                     } catch (NoSuchElementException exp) {
                         return "You didn't enter what task you have done!";
@@ -107,7 +111,7 @@ public class Parser {
 
                 default:
                     try {
-                        throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                        throw new DukeException("I'm sorry, but I don't know what " + input + " means :-(");
                     } catch (DukeException exp) {
                         return "OOPS!!!" + exp.getMessage();
                     }

@@ -83,8 +83,9 @@ public class TaskList {
      * Marks a specific task as done
      * @param index Index of the task to be marked as done in the task list.
      */
-    public String done(int index) {
+    public String done(int index, Statistics stats) {
         Task itemDone = taskList.get(index);
+        stats.addToDone(itemDone);
         itemDone.mardAsDone();
         return "Nice! I've marked this task as done:\n  " + itemDone;
     }

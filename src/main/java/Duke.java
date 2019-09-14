@@ -28,6 +28,7 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
     private Parser parser;
+    private Statistics stats;
 
     /*public Duke(String filePath) {
         ui = new Ui();
@@ -40,6 +41,7 @@ public class Duke extends Application {
         storage = new Storage("save.txt");
         tasks = new TaskList(storage.load());
         parser = new Parser();
+        stats = new Statistics();
     }
     public static void main(String[] args) throws DukeException{
         new Duke()/*.run()*/;
@@ -147,7 +149,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return parser.parse(tasks, input, storage);
+        return parser.parse(tasks, input, storage, stats);
     }
 
 }

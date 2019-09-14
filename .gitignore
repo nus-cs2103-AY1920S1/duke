@@ -14,9 +14,6 @@ src/main/resources/docs/
 *.iml
 bin/
 
-#data
-/data/
-
 # Junit test
 src/test/java/DukeTest.java
 

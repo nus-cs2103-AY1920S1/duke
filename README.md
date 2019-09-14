@@ -78,12 +78,12 @@ If there is incorrect user input format, he will also reply with what went wrong
 	`todo return book`
 - Expected outcome:
 
-	`Got it. I've added this task:'
-
-	`[T][:x:] return book`
-	
-	`Now you have 1 task in the list.`
-	
+	```
+	Got it. I've added this task:
+	[T][x] return book
+	Now you have 1 task in the list.
+	```
+	:x:
 - To add an Event called *lab meeting* which would be held on *21 September 2019* at *12PM*, send:
 	`event lab meeting /at 21/09/2019 1200`
 	or

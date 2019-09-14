@@ -7,7 +7,6 @@ import duke.model.Todo;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -187,8 +186,12 @@ public class Storage {
      * @param tasks List of Tasks to store in the file.
      */
     public static void serializeToFile(Path file, Iterable<Task> tasks) {
-        try (final Writer output = Files.newBufferedWriter(file)) {
-            output.write(serialize(tasks));
+        try {
+            if (file.getParent() != null) {
+                Files.createDirectories(file.getParent());
+            }
+
+            Files.writeString(file, serialize(tasks));
         } catch (IOException exc) {
             throw new FileIoException(String.format("Unable to save tasks to file: %s", file.toString()), exc);
         }

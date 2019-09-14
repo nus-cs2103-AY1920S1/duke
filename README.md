@@ -39,6 +39,7 @@ To get a hands-on short tutorial of all commands, you can send:
 	```
 	tutorial
 	```
+
 Just follow through the instructions and it will help you learn the commands of Duke Bunny very quickly.
 
 
@@ -48,9 +49,9 @@ To bid Duke Bunny goodbye, you can send:
 	```
 This is optional because the data will be saved whenever any command is made. 
 Thus, do not fret if you close Duke Bunny without doing this.
+---
 
-
-### Task Managing
+## Task Managing
 This section will show you the commands for the task managing functions of Duke Bunny.
 
 #### Types of Tasks
@@ -120,9 +121,9 @@ To find a task with the date *21/09/2019*, send:
 	```
 	find 21/09/2019
 	```
+---
 
-
-### Expenses Managing
+## Expenses Managing
 This section will show you the commands for the expenses managing functions of Duke Bunny.
 
 #### Add Expenses
@@ -152,3 +153,4 @@ To delete an expense at index 2 of the list, send:
 	```
 	delete e2
 	```
+---

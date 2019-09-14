@@ -129,7 +129,7 @@ public class TaskList {
     /**
      * Resets the statistics to initial values of 0.
      */
-    public void resetStats() {
+    public static void resetStats() {
         numTaskDone = 0;
         numTaskNotDone = 0;
         numDonePastWeek = 0;

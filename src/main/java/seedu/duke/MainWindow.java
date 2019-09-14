@@ -111,6 +111,7 @@ public class MainWindow extends AnchorPane {
             window.getIcons().add(chatBotImage);
             window.setTitle("Duke ChatBot");
             window.show();
+            TaskList.resetStats();
         } catch (Exception e) {
             e.printStackTrace();
         }

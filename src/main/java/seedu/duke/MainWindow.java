@@ -98,6 +98,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Switches the scene to show bar chart containing the statistics.
      */
+    @FXML
     public void showStatsScene() {
         try {
             TaskList.calculateStats();
@@ -114,6 +115,5 @@ public class MainWindow extends AnchorPane {
             e.printStackTrace();
         }
     }
-
 
 }

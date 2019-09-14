@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import javafx.fxml.FXML;
+
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -17,10 +18,12 @@ public class StatisticsController {
     private BarChart<?, ?> taskChart;
 
     @FXML
+
     CategoryAxis xaxis = new CategoryAxis();
 
     @FXML
     NumberAxis yaxis = new NumberAxis();
+
 
     /**
      * Sets the stage.
@@ -45,6 +48,7 @@ public class StatisticsController {
      */
     @FXML
     public void initialize() {
+
         XYChart.Series set1 = new XYChart.Series<>();
 
         set1.getData().add(new XYChart.Data("Done", TaskList.numTaskDone));
@@ -55,4 +59,5 @@ public class StatisticsController {
 
         taskChart.getData().addAll(set1);
     }
+
 }

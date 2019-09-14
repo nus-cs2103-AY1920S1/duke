@@ -4,6 +4,14 @@ Duke is a offline java application that helps you track and manage various tasks
 Tasks that you can track are `ToDos`, `Deadlines` and `Events`.  
 Duke also utilises of local storage, remembering your tasks even after the application has been closed.  
 
+## Overview
+- [<b>ScreenShots</b>](#screenshots)
+- [<b>Features</b>](#features)
+- [<b>Commands</b>](#commands)
+- [<b>Usage</b>](#usage)
+
+## <a name="screenshots"></a>ScreenShots
+
 ![adding-tasks](images/adding-tasks.png)
 ![viewing-tasks](images/viewing-tasks.png)
 ![doing-tasks](images/doing-tasks.png)
@@ -11,11 +19,6 @@ Duke also utilises of local storage, remembering your tasks even after the appli
 ![deleting-tasks](images/deleting-tasks.png)
 ![invalid-commands](images/invalid-commands.png)
 ![bye-commands](images/bye-commands.png)
-
-## Overview
-- [<b>Features</b>](#features)
-- [<b>Commands</b>](#commands)
-- [<b>Usage</b>](#usage)
 
 ## <a name="features"></a>Features 
 

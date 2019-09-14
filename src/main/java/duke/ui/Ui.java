@@ -47,16 +47,22 @@ public class Ui {
      * Prints help.
      */
     public void printHelp() {
-        println("Here is the list of instructions: list, bye, done {index}, "
-                + "delete {index}, clear, todo {description}, event {description} /at "
-                + "{date}, deadline {description} /by {date}");
+        println("Here is the list of instructions: "
+                + "\nlist (list all items)"
+                + "\nbye (exit program)"
+                + "\ndone (mark an item as done by index)"
+                + "\ndelete (delete all items by index)"
+                + "\nclear (remove all items from list)"
+                + "\ntodo (add a todo to the list)"
+                + "\nevent (add an event to the list)"
+                + "\ndeadline (add a deadline to the list)");
     }
 
     /**
      * Prints bye.
      */
     public void printBye() {
-        println("Bye. Hope to see you again soon!");
+        println("Bye. Hope to see you again soon! (Program will exit in 3 seconds).");
     }
 
     /**

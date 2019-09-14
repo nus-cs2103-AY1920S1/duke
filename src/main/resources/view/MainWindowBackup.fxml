@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import duke.gui.AutoCompleteVBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!--<?import duke.gui.controllers.MainWindow?>-->
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+                <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" prefHeight="564.0" prefWidth="400.0" vvalue="1.0">
+                    <content>
+                        <VBox fx:id="dialogContainer" maxHeight="1.7976931348623157E308" prefWidth="388.0" />
+                    </content>
+                </ScrollPane>
+              <AutoCompleteVBox fx:id="autoCompleteVBox" alignment="BOTTOM_CENTER" prefHeight="0.0" prefWidth="100.0" style="-fx-background-color: white; -fx-border-width: 1;" />
+         </children>
+      </VBox>
+          <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+              <children>
+                  <TextField fx:id="userInput" maxWidth="1.7976931348623157E308" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" HBox.hgrow="ALWAYS" />
+                  <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
+              </children>
+          </HBox>
+    </children>
+</AnchorPane>

@@ -1,6 +1,7 @@
 package duke.gui.controllers;
 
 import duke.Duke;
+import duke.gui.AutoCompleteVBox;
 import duke.gui.DialogType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,10 +9,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -21,6 +27,8 @@ public class MainWindow extends AnchorPane {
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
+    @FXML
+    private AutoCompleteVBox autoCompleteVBox;
     @FXML
     private TextField userInput;
     @FXML
@@ -59,6 +67,29 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        initializeAutoCompleteListeners();
+    }
+
+    /**
+     * Setup auto complete listeners for auto complete vbox display.
+     */
+    public void initializeAutoCompleteListeners() {
+        userInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            autoCompleteVBox.updateList(newValue);
+        });
+
+        userInput.setOnKeyPressed(e -> {
+            if (autoCompleteVBox.isActive()) {
+                if (e.getCode() == KeyCode.UP) {
+                    autoCompleteVBox.upButtonPressed();
+                } else if (e.getCode() == KeyCode.DOWN) {
+                    autoCompleteVBox.downButtonPressed();
+                } else if (e.getCode() == KeyCode.RIGHT) {
+                    userInput.setText(autoCompleteVBox.requestAutoCompleteResult());
+                    userInput.positionCaret(userInput.getText().length());
+                }
+            }
+        });
     }
 
     public void setDuke(Duke d) {
@@ -71,13 +102,23 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+        if (autoCompleteVBox.isActive()) {
+            userInput.setText(autoCompleteVBox.requestAutoCompleteResult());
+            userInput.positionCaret(userInput.getText().length());
+        } else {
+            String input = userInput.getText();
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+
+            if (!duke.isRunning()) {
+                Stage stage = (Stage) getScene().getWindow();
+                stage.close();
+            }
+        }
     }
 
     /**

@@ -153,7 +153,7 @@ public class CommandLineUi extends Ui {
      * Returns the tasks remaining in the list.
      *
      * @param numOfTaskRemaining TaskList object.
-     * @return String
+     * @return String.
      */
     public String getTasksRemainingSequence(int numOfTaskRemaining) {
         String output = "\n     Now you have "
@@ -161,6 +161,12 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
+    /**
+     * Returns all statistics.
+     *
+     * @param stat Statistic.
+     * @return String.
+     */
     public String getAllStatSequence(Statistic stat) {
         String output = "\n     Listing all statistics:"
                 + "\n     Total Commands Executed:    " + stat.getTotalCommandsExecuted()
@@ -172,12 +178,25 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
+    /**
+     * Returns reset stat sequence.
+     *
+     * @param stat Statistic object.
+     * @return String.
+     */
     public String getResetStatSequence(Statistic stat) {
         String output = "\n     All statistics have been reset";
         output += getAllStatSequence(stat);
         return output;
     }
 
+    /**
+     * Returns completed events sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
     public String getCompletedEventStatSequence(Statistic stat, TaskList tasks) {
         String encouragement = "";
         int eventsCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
@@ -192,14 +211,29 @@ public class CommandLineUi extends Ui {
         return output;
     }
 
+    /**
+     * Returns IsCommandLineInterface.
+     *
+     * @return Boolean.
+     */
     public Boolean isCommandLineInterface() {
         return this.isCommandLineInterface;
     }
 
+    /**
+     * Returns isGUI.
+     *
+     * @return Boolean.
+     */
     public Boolean isGraphicalUserInterface() {
         return this.isGraphicalUserInterface;
     }
 
+    /**
+     * Prints the String to the Command Line.
+     *
+     * @param output String to be printed.
+     */
     public void printToCommandLine(String output) {
         System.out.println(output);
     }

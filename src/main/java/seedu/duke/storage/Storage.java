@@ -72,6 +72,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Saves the Statistic object to the txt file.
+     *
+     * @param stat Statistics object.
+     * @throws IOException Error thrown in writing the file.
+     */
     public void saveStatFile(Statistic stat) throws IOException {
         clearStatFileBeforeSaving();
 
@@ -204,6 +210,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Creates a tree map from the txt file.
+     *
+     * @return Tree Mapping of String to Integer.
+     * @throws FileNotFoundException Thrown when file not found.
+     */
     public TreeMap<String, Integer> loadStats() throws FileNotFoundException {
         ArrayList<String> inputsFromFile = new ArrayList<>();
 

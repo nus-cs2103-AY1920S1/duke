@@ -56,12 +56,21 @@ public class Todo extends Task {
         + " | " + this.getCreateDateTime().toString() + " | " + this.getLastModifiedDateTime().toString());
     }
 
+    /**
+     * Setter function for isDone Boolean var.
+     * @param stats Statistic object.
+     */
     @Override
     public void setDone(Statistic stats){
         super.setDone(stats);
         stats.incrementTotalTodosCompleted();
     }
 
+    /**
+     * Returns the char type.
+     *
+     * @return Char representing the taskType.
+     */
     public char getTaskType(){
         return 'T';
     }

@@ -67,6 +67,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + dueDateTime + ")";
     }
 
+    /**
+     * Getter function for dueDateTime String.
+     *
+     * @return dueDateTime String.
+     */
     public String getDueDateTime(){
         return this.dueDateTime;
     }
@@ -157,13 +162,24 @@ public class Deadline extends Task {
         return (day + dayString + " of " + monthString + " " + year + ", " + hourString + minuteString + amOrpm);
     }
 
+    /**
+     * Set the task done.
+     *
+     * @param stats Statistic object.
+     */
     @Override
     public void setDone(Statistic stats) {
         super.setDone(stats);
         stats.incrementTotalEventsCompleted();
     }
 
+    /**
+     * Getter function for the taskType, "E".
+     *
+     * @return Char taskType.
+     */
     public char getTaskType(){
         return 'D';
     }
+
 }

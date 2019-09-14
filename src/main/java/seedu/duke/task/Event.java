@@ -65,16 +65,31 @@ public class Event extends Task {
         + " | " + this.getLastModifiedDateTime().toString());
     }
 
+    /**
+     * Getter function for the string Location.
+     *
+     * @return String location.
+     */
     public String getLocation() {
         return this.location;
     }
 
+    /**
+     * Setter function for Boolean isDone.
+     *
+     * @param stats Statistic object.
+     */
     @Override
     public void setDone(Statistic stats) {
         super.setDone(stats);
         stats.incrementTotalEventsCompleted();
     }
 
+    /**
+     * Getter function for taskType.
+     *
+     * @return Character taskType.
+     */
     public char getTaskType(){
         return 'E';
     }

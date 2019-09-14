@@ -160,19 +160,37 @@ public abstract class Task {
         return this.isDone;
     }
 
+    /**
+     * Getter function for createDateTime.
+     *
+     * @return Returns createDAteTime.
+     */
     public LocalDateTime getCreateDateTime() {
         return this.createDateTime;
     }
 
+    /**
+     * Getter function for lastModifiedDateTime.
+     *
+     * @return lastModifiedDateTime.
+     */
     public LocalDateTime getLastModifiedDateTime() {
         return this.lastModifiedDateTime;
     }
 
+    /**
+     * Updates lastModifiedDateTime.
+     */
     public void updateLastModified(){
 
         this.lastModifiedDateTime = LocalDateTime.now();
     }
 
+    /**
+     * Returns the char type.
+     *
+     * @return Char representing the taskType.
+     */
     public abstract char getTaskType();
 }
 

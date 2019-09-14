@@ -159,7 +159,8 @@ The data will be saved once the command is made.
 	```
 
 #### Find Task by Keyword
-Duke Bunny can help you find tasks that match a single word keyword.
+Duke Bunny can help you find tasks that match a single word keyword. 
+All matching tasks will be presented.
 
 - To find if you have the task in the list by a single keyword like *lab*, send:
 	`find assignment`
@@ -171,7 +172,6 @@ Duke Bunny can help you find tasks that match a single word keyword.
 	1.[D][✗] german assignment (by: 21 Sep 2019 10.00 AM)
 	```
 
-All matching tasks will be presented.
 You can also find tasks by the date. 
 
 - To find a task with the date *21/09/2019*, send:
@@ -249,7 +249,6 @@ He also shows the total expenditure and income left or amount of money overspent
 	
 #### Delete Expenses
 Duke Bunny can help you to delete specific expenses that you no longer need to keep track of.
-He can also help you to delete all expenses if you want to start anew when your monthly income has been received.
 
 - To delete an expense at index 2 of the list, send:
 	`delete e2`
@@ -264,6 +263,9 @@ He can also help you to delete all expenses if you want to start anew when your 
 	The amount of income left:
 	1480.0
 	```
+	
+	
+You can delete all expenses if you want to start anew when your monthly income has been received.
 	
 - To delete all expenses, send:
 	`delete all`

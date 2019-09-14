@@ -14,6 +14,7 @@ public class Parser {
             throw new DukeIllegalArgumentException("User input cannot be empty.");
         }
         try {
+            assert command.length() != 0 : "user input command is blank";
             String[] cmdList = command.split(" ");
             String keyword = cmdList[0];
             switch (keyword.toLowerCase()) {

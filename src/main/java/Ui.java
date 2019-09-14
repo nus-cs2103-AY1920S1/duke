@@ -21,9 +21,11 @@ public class Ui {
 
     /**
      * Passes response message to controller to be printed in graphic user interface.
-     * @param message the response from Duke.
+     *
+     * @param message the response message from Duke.
      */
     public void printInGui(String message) {
+        assert message.length() > 0 : "Duke reponse error";
         window.handleDukeResponse(message);
     }
 

@@ -29,6 +29,7 @@ Then, she can help you calculate how much you have left to spend or how much is 
 She is able to save everything so when you close the app, your data is not lost.
 
 Here is how it looks like in-action:
+
 ![Image of Duke Bunny](https://github.com/kangyeelim/duke/blob/master/docs/Ui.png)
 
 

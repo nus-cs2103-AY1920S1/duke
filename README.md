@@ -120,6 +120,7 @@ when it was inputted with the oldest on top and newest below.
 
 -Expected outcome:
 
+
 	```
 	Here are the tasks in your list:
 	1. [T][✗] return book

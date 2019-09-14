@@ -199,4 +199,8 @@ public class CommandLineUi extends Ui {
     public Boolean isGraphicalUserInterface() {
         return this.isGraphicalUserInterface;
     }
+
+    public void printToCommandLine(String output) {
+        System.out.println(output);
+    }
 }

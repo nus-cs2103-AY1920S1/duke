@@ -77,35 +77,6 @@ public class Duke {
         statStorage = new Storage(this.statFilePath);
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        String input = userInput.getText();
-        String response = getResponse(input);
-        dialogContainer.getChildren().addAll(
-                // new DialogBox(userText, new ImageView(user)),
-                // new DialogBox(dukeText, new ImageView(duke))
-                DialogBox.getUserDialog(input, user),
-                DialogBox.getDukeDialog(response, duke)
-        );
-        userInput.clear();
-    }
 
     /**
      * Returns the response for the user input.

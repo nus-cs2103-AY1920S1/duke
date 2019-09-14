@@ -17,7 +17,7 @@ public abstract class Task implements Serializable {
     /**
      * DateTimeFormatter meant for duke.ui.Ui output.
      */
-    protected static DateTimeFormatter outDTF = DateTimeFormatter.ofPattern("MMMM d y, K:mm a");
+    protected static DateTimeFormatter outDTF = DateTimeFormatter.ofPattern("MMMM d y, h:mm a");
 
 
     /**
@@ -52,8 +52,7 @@ public abstract class Task implements Serializable {
     protected static DateTimeFormatter inDateTimeFormat() {
         LocalDateTime dt = LocalDateTime.now();
         return new DateTimeFormatterBuilder().parseCaseInsensitive()
-            .appendPattern("[MMMM][MMM][ ][/][d][ ][/][MMMM][MMM][M][ ][/][yyyy][ "
-                + "]['T'][HH[':']mm]")
+            .appendPattern("[MMMM][MMM][ ][/][yyyy][ ][/][d][ ][/][MMMM][MMM][M][ ][/][yyyy][ ]['T'][HH[':']mm]")
             .parseDefaulting(ChronoField.HOUR_OF_DAY, dt.getHour())
             .parseDefaulting(ChronoField.MINUTE_OF_HOUR, dt.getMinute())
             .parseDefaulting(ChronoField.YEAR_OF_ERA, dt.getYear())

@@ -55,7 +55,7 @@ public class DukeTest {
         assertDoesNotThrow(() -> Parser.parse("event golf /at 2 December"));
         assertDoesNotThrow(() -> Parser.parse("event bowling /at 2/12 T2019"));
         assertDoesNotThrow(() -> Parser.parse("  deadline D1 project assignment   /by t2019 "));
-        assertThrows(DateTimeParseDukeException.class, () -> Parser.parse("event running /at 2019"));
+        assertThrows(DateTimeParseDukeException.class, () -> Parser.parse("event running /at 20195"));
         assertThrows(LoadFileFailDukeException.class, () -> new Storage("doesNotExist.txt").load());
     }
 

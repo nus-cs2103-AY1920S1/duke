@@ -1,5 +1,5 @@
 # [CarbonGrid/duke](https://github.com/CarbonGrid/duke) [![Build Status](https://travis-ci.com/CarbonGrid/duke.svg?branch=master)](https://travis-ci.com/CarbonGrid/duke)
-
+## [Go to User Guide](https://carbongrid.github.io/duke/)
 ## Setting up
 
 **Prerequisites**

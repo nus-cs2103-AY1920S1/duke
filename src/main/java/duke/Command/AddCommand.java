@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      * Reads and creates new ToDo, Event or Deadline based on the parsed input.
      *
      * @param tasks Array of Tasks.
-     * @param ui Ui for printing output.
+     * @param ui Ui for printing output. q
      * @param storage Storage to update textfile.
      * @return feedback message to update user.
      * @throws DukeException for incorrect user input.

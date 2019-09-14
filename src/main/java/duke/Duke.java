@@ -49,6 +49,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            //no empty string input
+//            assert input != "";
             Command c = Parser.parse(input);
             return c.execute(tasks, userIF, storage);
         } catch (DukeException e) {

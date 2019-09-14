@@ -7,6 +7,7 @@ import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -80,29 +81,39 @@ public class Storage {
             Scanner s = new Scanner(taskStorage); // create a Scanner using the File as the source
             ArrayList<Task> retrievedTask = new ArrayList<Task>();
             while (s.hasNext()) {
-                //note that | is known as || in java
-                String[] inputsplit = s.nextLine().split("\\|");
-                String taskType = inputsplit[0];
-                Task t;
-                if (taskType.equalsIgnoreCase("[T]")) {
-                    t = new ToDo(inputsplit[2]);
-                } else if (taskType.equalsIgnoreCase("[D]")) {
-                    LocalDateTime ldt = DateTimeHelper.formatInput(inputsplit[3]);
-                    t = new Deadline(inputsplit[2], ldt);
-                } else {
-                    assert taskType.equalsIgnoreCase("[E]") : "Error in save file";
-                    LocalDateTime ldt = DateTimeHelper.formatInput(inputsplit[3]);
-                    t = new Event(inputsplit[2], ldt);
-                }
-                this.checkIfDone(t,inputsplit[1]);
-                retrievedTask.add(t);
+                Task taskToAdd = this.outputTaskDetails(s.nextLine());
+                retrievedTask.add(taskToAdd);
             }
             return retrievedTask;
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new DukeException("OOPS!!! I'm sorry, but file not found :-(");
         }
     }
 
+    private Task outputTaskDetails(String taskDetails) throws DukeException{
+        //note that | is known as || in java
+        String[] inputsplit = taskDetails.split("\\|");
+        String taskType = inputsplit[0];
+        Task taskToAdd;
+        LocalDateTime ldt;
+        switch (taskType) {
+        case "[T]":
+            taskToAdd = new ToDo(inputsplit[2]);
+            break;
+        case "[D]":
+            ldt = DateTimeHelper.formatInput(inputsplit[3]);
+            taskToAdd = new Deadline(inputsplit[2], ldt);
+            break;
+        case "[E]":
+            ldt = DateTimeHelper.formatInput(inputsplit[3]);
+            taskToAdd = new Event(inputsplit[2], ldt);
+            break;
+        default:
+            throw new DukeException("OOPS! Error in save file!");
+        }
+        this.checkIfDone(taskToAdd,inputsplit[1]);
+        return taskToAdd;
+    }
     /**
      * Checks if the task is done by calling markIsDone();
      * Called by outputFileContents and checks the string which is retrieved from duke.txt if the task is Done.

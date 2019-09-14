@@ -20,6 +20,7 @@ class DuplicateChecker {
                 return true;
             }
         }
+
         return false;
     }
 }

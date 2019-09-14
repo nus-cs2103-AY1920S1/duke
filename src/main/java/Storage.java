@@ -44,6 +44,7 @@ public class Storage {
      */
 
     public Tasklist getTasks() {
+        assert tasklist != null : "tasklist cannot be null";
         return tasklist;
     }
 

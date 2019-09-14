@@ -138,6 +138,7 @@ public class GuiParser {
                     String dnumber = ls[1];
                     int dnum = Integer.parseInt(dnumber);
                     String out = "Noted. I've removed this task:";
+                    assert tasklist != null : "tasklist cannot be empty";
                     out = out + "\n" + tasklist.returnTasks().get(dnum-1);
                     tasklist.delete(dnum-1);
                     count--;

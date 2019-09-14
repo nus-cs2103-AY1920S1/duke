@@ -1,9 +1,9 @@
-T | 0 | exercise
-E | 1 | music festival | 06/03/1993 1852 | 2019-09-11T23:17
+T | 1 | exercise | 2019-09-14T21:52
+E | 1 | music festival | 06/03/1993 1852 | 2019-09-14T21:52
 D | 0 | proj | 05/06/1998 0233
-E | 0 | art fest | 05/05/1993 1713
+E | 1 | art fest | 05/05/1993 1713 | 2019-09-14T20:25
 D | 1 | quest9 | 04/08/1995 1032 | 2019-09-11T23:11
 T | 0 | jogging
-E | 0 | water festival | 06/02/1998 1441
-D | 0 | music homework | 09/01/1994 2333
+E | 1 | water festival | 06/02/1998 1441 | 2019-09-14T20:28
+D | 1 | music homework | 09/01/1994 2333 | 2019-09-14T20:28
 T | 0 | art painting

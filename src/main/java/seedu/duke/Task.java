@@ -33,6 +33,7 @@ public class Task implements Comparable<Task> {
         this.description = description;
         isDone = false;
         doneIcon = 0;
+        TaskList.numTaskNotDone++;
     }
 
     /**
@@ -51,6 +52,19 @@ public class Task implements Comparable<Task> {
     public void markAsDone() {
         this.isDone = true;
         this.doneIcon = 1;
+
+ /*       if (this.isDone) {
+            TaskList.numTaskDone++;
+            if (TaskList.doneLastweek(this)) {
+                TaskList.numDonePastWeek++;
+            } else if (TaskList.doneLastMonth(this)) {
+                TaskList.numDonePastMonth++;
+            }
+            if (TaskList.doneLastYear(this)) {
+                TaskList.numDonePastYear++;
+            }
+        }
+        TaskList.numTaskNotDone = TaskList.getSize() - TaskList.numTaskDone;   */
     }
 
     /**

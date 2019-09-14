@@ -11,15 +11,17 @@ import java.util.Collections;
 public class TaskList {
 
     private static ArrayList<Task> taskList;
-    private int numTaskDone = 0;
-    private int numTaskNotDone = 0;
-    private int numDonePastWeek = 0;
+    static int numTaskDone = 0;
+    static int numTaskNotDone = 0;
+    static int numDonePastWeek = 0;
+    static int numDonePastMonth = 0;
+    static int numDonePastYear = 0;
 
     /**
      * Constructor of the Tasklist class.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();;
+        this.taskList = new ArrayList<>();
     }
 
     /**
@@ -74,7 +76,7 @@ public class TaskList {
      *
      * @return the size of the list of tasks
      */
-    public int getSize() {
+    public static int getSize() {
         return taskList.size();
     }
 
@@ -108,43 +110,62 @@ public class TaskList {
     /**
      * Calculate the statistics including the number of tasks done and those yet to be done.
      */
-    public void calculateStats() {
-        for (Task t: this.taskList) {
+    public static void calculateStats() {
+        for (Task t: taskList) {
             if (t.isDone) {
-                this.numTaskDone++;
-                Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
-                if (duration.toDays() <= 7) {
+                numTaskDone++;
+                if (doneLastweek(t)) {
                     numDonePastWeek++;
+                } else if (doneLastMonth(t)) {
+                    numDonePastMonth++;
+                } else if (doneLastYear(t)) {
+                    numDonePastYear++;
                 }
             }
         }
-        numTaskNotDone = this.getSize() - numTaskDone;
+        numTaskNotDone = getSize() - numTaskDone;
     }
 
     /**
-     * Return number of tasks done.
-     *
-     * @return the number of tasks done
+     * Resets the statistics to initial values of 0.
      */
-    public int getNumTaskDone() {
-        return numTaskDone;
+    public void resetStats() {
+        numTaskDone = 0;
+        numTaskNotDone = 0;
+        numDonePastWeek = 0;
     }
 
     /**
-     * Return number of tasks not done.
+     * Returns true if the task was done last week.
      *
-     * @return the number of tasks not done
+     * @param t the task to check
+     * @return true if the task was done last week. Else, return false
      */
-    public int getNumTaskNotDone() {
-        return numTaskNotDone;
+    public static boolean doneLastweek(Task t) {
+        Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
+        return (duration.toMinutes() <= 2);
     }
 
     /**
-     * Return number of tasks done in the past week.
+     * Returns true if the task was done within the last month.
      *
-     * @return the number of tasks done in the past week
+     * @param t the task to check
+     * @return true if the task was done last month. Else, return false
      */
-    public int getNumDonePastWeek() {
-        return numDonePastWeek;
+    public static boolean doneLastMonth(Task t) {
+        Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
+        return (duration.toDays() <= 30);
     }
+
+    /**
+     * Returns true if the task was done within last year.
+     *
+     * @param t the task to check
+     * @return true if the task was done last year. Else, return false
+     */
+    public static boolean doneLastYear(Task t) {
+        Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
+        return (duration.toDays() <= 365);
+    }
+
 }

@@ -11,11 +11,13 @@ public class UI {
 
     protected boolean isRunning;
     Scanner sc = new Scanner(System.in);
+    protected String response = "";
 
     /**
      * Creates a execution.UI object.
      */
     public UI() {
+
         this.isRunning = true;
     }
 
@@ -30,6 +32,7 @@ public class UI {
                 + "|____/ \\__,_|_|\\_\\___|\n";
 
         System.out.println("Hello I'm\n" + logo + "\nWhat can I do for you?");
+        this.response = ("Hello I'm\n" + logo + "\nWhat can I do for you?");
     }
 
     /**
@@ -38,6 +41,7 @@ public class UI {
     public void exit() {
 
         System.out.println("Bye. Hope to see you again soon!");
+        this.response = "Bye. Hope to see you again soon!";
         this.isRunning = false;
 
     }
@@ -45,24 +49,36 @@ public class UI {
     public void displayAddingOfTask(Task task, int size) {
         System.out.println(" Noted. I've added this task:\n" + task + "\nNow you have "
                 + size + " tasks in the list.");
+        this.response = " Noted. I've added this task:\n" + task + "\nNow you have "
+                + size + " tasks in the list.";
     }
 
     public void displayDeletedTask(Task task, int size) {
         System.out.println(" Noted. I've removed this task:\n" + task + "\nNow you have "
                 + size + " tasks in the list.");
+        this.response = " Noted. I've removed this task:\n" + task + "\nNow you have "
+                + size + " tasks in the list.";
     }
 
     public void displayDone(Task task) {
         System.out.println(" Nice! I've marked this task as done:\n" + task);
+        this.response = " Nice! I've marked this task as done:\n" + task;
+    }
+
+    public void displayError(Exception e) {
+        setResponse(e.getMessage());
     }
 
     public void listTasks(TaskList taskList) {
         if (taskList.getList().isEmpty()) {
             System.out.println(" No tasks to be found.");
+            this.response = " No tasks to be found.";
         } else {
             System.out.println("Here are the tasks in your list\n");
+            this.response = "Here are the tasks in your list\n";
             for (int i = 0; i < taskList.getSize(); i++) {
                 System.out.println((i + 1) + ". " + taskList.getList().get(i) + "\n") ;
+                this.response += (i + 1) + ". " + taskList.getList().get(i) + "\n" ;
             }
         }
     }
@@ -72,14 +88,25 @@ public class UI {
      * @return the string that the user entered.
      */
     public String promptEntry() {
+
         return sc.nextLine();
     }
 
     public boolean isRunning() {
+
         return this.isRunning;
     }
 
+    public void setResponse(String response) {
 
+        this.response = response;
+
+    }
+
+    public String getResponse() {
+
+        return this.response;
+    }
 
 
 

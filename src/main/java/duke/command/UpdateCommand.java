@@ -58,13 +58,17 @@ public class UpdateCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        UndoCommand.saveVersion(storage.getSavedListString(tasks));
-        String response = tasks.updateDescription(taskNumber, newDescription);
+        StringBuilder sb = new StringBuilder();
+        try {
+            sb.append(tasks.updateDescription(taskNumber, newDescription));
+        } catch (IndexOutOfBoundsException e) {
+            return "OOPS!!! Your specified task number is out of range.";
+        }
         try {
             storage.store(tasks);
         } catch (IOException e) {
-            response += "OOPS!!! " + e.getMessage();
+            sb.append("OOPS!!! " + e.getMessage());
         }
-        return response;
+        return sb.toString();
     }
 }

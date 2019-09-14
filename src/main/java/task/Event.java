@@ -49,7 +49,7 @@ public class Event extends Task {
         String[] dateSplit = atSplitDate.split("/");
         String day = dateSplit[0];
         String month = dateSplit[1];
-        String year = dateSplit[2];
+        final String year = dateSplit[2];
         if (day.length() == 1) {
             day = "0" + day;
         }

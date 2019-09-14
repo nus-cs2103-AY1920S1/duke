@@ -26,17 +26,15 @@ public class Ui{
     }
 
     ///////////// print method for delete //////////////////
-    void print_delete(String instruct, int no_of_task, Task t){
-         if(instruct.contains("Delete")){
+    public void print_delete(int no_of_task, Task t){
              System.out.println("Noted. I've removed this task:");
              System.out.println("  [" + t.type + "][" + t.status + "] " + t.description + " (" + t.get_TimeFrame() + ")");
              System.out.println("Now you have " + no_of_task + " tasks in the list.");
-         }
     }
 
 
     ///////////////  print method for find  /////////////////
-    void print_find(int num, ArrayList<Task> taskList, int i, int n){
+    public void print_find(int num, ArrayList<Task> taskList, int i, int n){
          if(n==1){
              System.out.println("Here are the matching tasks in your list: ");
          }
@@ -63,12 +61,25 @@ public class Ui{
         System.out.println("Now you have " + no_of_task + " tasks in the list.");
     }
 
+    public void print_event(String sub, String timeFrame, int no_of_task){
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  [ ][ ] " + sub + " (" + timeFrame + ")");
+        System.out.println("Now you have " + no_of_task + " tasks in the list.");
+    }
+
+    public void print_find(int num, Task task){
+        System.out.println(num + ".[" + task.get_Type() + "][" + task.get_Status() + "] " + task.get_Description() + " " + task.get_TimeFrame());
+
+    }
+
+    public void print_false(){
+        System.out.println("OOPS!! I'm sorry, but I don't know what that means.");
+    }
 
     ////////////// for empty descriptions ////////////////
     void cannotBeEmpty(){
          System.out.println("OOPS!! The description cannot be empty.");
     }
-
 
 }
 

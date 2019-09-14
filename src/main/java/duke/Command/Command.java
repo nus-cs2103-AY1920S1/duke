@@ -1,49 +1,58 @@
 package duke.Command;
 import duke.Storage;
-import duke.Task;
 import duke.TaskList;
 import duke.Ui;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Command {
 int type;
 String msg;
-boolean isExit = false;
+boolean isExit;
 
     public Command(int type, String msg){
         this.type = type;
         this.msg = msg;
+        this.isExit = false;
     }
 
     public void execute(TaskList tasks, Ui ui, Storage store) throws IOException {
-       if(this.type == 0)                       //bye
-           this.isExit = true;
-       if(this.type == 1) {                     //to do
-           ToDoCommand d = new ToDoCommand();
-           d.toDo(tasks, ui, store, this.msg);
-       }
-        if(this.type == 2) {                      //list
-            ListCommand d = new ListCommand();
-            d.list(tasks, ui);
-        }
 
-        if(this.type == 3) {                      //deadline
-            DeadlineCommand d = new DeadlineCommand();
-            d.Deadline(tasks, ui, store, this.msg);
+        switch (this.type) {
+            case 0:                           //bye
+                this.isExit = true;
+                break;
+            case 1:                           //to do
+                ToDoCommand d = new ToDoCommand();
+                d.toDo(tasks, ui, store, this.msg);
+                break;
+            case 2:
+                ListCommand l = new ListCommand();   //list
+                l.list(tasks, ui);
+                break;
+            case 3:                                 //deadline
+                DeadlineCommand dead = new DeadlineCommand();
+                dead.Deadline(tasks, ui, store, this.msg);
+                break;
+            case 4:                                //event
+                EventCommand ev = new EventCommand();
+                ev.Event(tasks, ui, store, this.msg);
+                break;
+            case 5:                                //find
+                FindCommand find = new FindCommand();
+                find.Find(tasks, ui, this.msg);
+                break;
+            case 6:                                //done
+                DoneCommand done = new DoneCommand();
+                done.Done(tasks, this.msg);
+                break;
+            case 7:                                //delete
+                DeleteCommand del = new DeleteCommand();
+                del.Delete(tasks, ui, store, this.msg);
+                break;
+            default:
+                FalseCommand fal = new FalseCommand();
+                fal.False(ui);
         }
-        if(this.type == 4)
-            new EventCommand();                 //event
-        if(this.type == 5)                      //find
-            new FindCommand();
-
-        if(this.type == 6) {                    //done
-            DoneCommand d = new DoneCommand();
-            d.Done(tasks, this.msg);
-        }
-        if(this.type == 7)                      //delete
-            new DeleteCommand();
     }
 
     public boolean isExit(){

@@ -89,7 +89,7 @@ public class ConvertDateTime {
         else
             converted_min = "";
 
-        return converted_day + " of " + converted_month + " " + year + ", " + converted_hr + converted_min + period ;
+        return (converted_day + " of " + converted_month + " " + year + ", " + converted_hr + converted_min + period) ;
     }
 
 }

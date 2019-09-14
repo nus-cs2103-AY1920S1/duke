@@ -13,6 +13,10 @@ public class Task {
         this.timeFrame = time;
     }
 
+    public char get_Type(){
+        return type;
+    }
+
     public int get_Status(){
         return status;
     }

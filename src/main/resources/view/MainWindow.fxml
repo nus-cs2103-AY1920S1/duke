@@ -5,16 +5,35 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import duke.gui.controllers.MainWindow?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" type="duke.gui.controllers.MainWindow">
+<?import javafx.scene.layout.HBox?>
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" type="duke.gui.controllers.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
-            <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
-            </content>
-        </ScrollPane>
+        <GridPane maxHeight="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="562.6666259765625" minHeight="10.0" prefHeight="562.6666259765625" vgrow="SOMETIMES" />
+                <RowConstraints fillHeight="false" maxHeight="43.0" minHeight="43.0" prefHeight="37.3333740234375" vgrow="NEVER" />
+            </rowConstraints>
+            <children>
+                <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" prefHeight="564.0" prefWidth="400.0" vvalue="1.0" GridPane.vgrow="ALWAYS">
+                    <content>
+                        <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
+                    </content>
+                </ScrollPane>
+                <HBox alignment="BOTTOM_CENTER" maxHeight="43.0" prefHeight="43.0" prefWidth="400.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                    <children>
+                        <TextField fx:id="userInput" maxWidth="1.7976931348623157E308" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
+                    </children>
+                </HBox>
+            </children>
+        </GridPane>
     </children>
 </fx:root>

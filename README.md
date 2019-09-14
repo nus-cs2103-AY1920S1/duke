@@ -58,11 +58,11 @@ Tasks that has a time and date to attend to it.
 Tasks that has a time and date as its deadline.
 
 1. **Add Task**
-*To add a Todo Task called *return book*, send:
+- To add a Todo Task called *return book*, send:
 	```
 	todo return book
 	```
-*To add an Event called *lab meeting* which would be held on *21 September 2019* at *12PM*, send:
+- To add an Event called *lab meeting* which would be held on *21 September 2019* at *12PM*, send:
 	```
 	event lab meeting /at 21/09/2019 1200
 	```
@@ -70,7 +70,7 @@ Tasks that has a time and date as its deadline.
 	```
 	event lab meeting /at 21/09/2019 12.00 PM
 	```
-*To add a Task with a Deadline called *German Assignment* to be done by *21 September 2019* at *10.30AM*, send:
+- To add a Task with a Deadline called *German Assignment* to be done by *21 September 2019* at *10.30AM*, send:
 	```
 	deadline german assignment /by 21/09/2019 1000
 	```

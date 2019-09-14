@@ -1,4 +1,7 @@
+package utils;
+
 import java.text.ParseException;
+import exceptions.DukeException;
 
 public class Parser {
     private Storage storage;

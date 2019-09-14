@@ -1,3 +1,5 @@
+package utils;
+
 public class Ui{
     public Ui(){
         logo();

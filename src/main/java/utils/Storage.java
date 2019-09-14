@@ -1,3 +1,5 @@
+package utils;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -6,13 +8,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
 public class Storage {
-    private String fileLocation;
     private File file;
-    
-    public Storage(String fileLocation){
-        this.fileLocation = fileLocation;
-        this.file = new File(fileLocation);
+    private String fileLocation;
+    public Storage(String fileloc){
+        String newFileLoc = "./" + fileloc;
+        this.fileLocation = newFileLoc;
+        this.file = new File(newFileLoc);
     }
 
     //reading from saved state
@@ -66,7 +71,7 @@ public class Storage {
     }
     public void saveFile(TaskList tasks){
         try {
-            FileWriter fw = new FileWriter("data/duke.txt");
+            FileWriter fw = new FileWriter(fileLocation);
             String total = "";
             for (int i = 0; i < tasks.size(); i ++) {
                 String current = tasks.get(i).getStorageString();

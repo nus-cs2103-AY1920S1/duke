@@ -1,3 +1,7 @@
+package tasks;
+import utils.DateTime;
+import utils.Task;
+
 public class Deadline extends Task {
     protected DateTime by;
     public Deadline(String taskName, DateTime by) {

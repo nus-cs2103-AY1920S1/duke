@@ -1,10 +1,19 @@
 import java.util.Scanner;
+import utils.Storage;
+import utils.TaskList;
+import utils.Ui;
+import utils.Parser;
+import exceptions.DukeException;;
 
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * @param filepath
+     * class constructor
+     */
     public Duke(String filepath){
         ui = new Ui();
         storage = new Storage(filepath);

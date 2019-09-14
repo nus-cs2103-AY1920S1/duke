@@ -1,4 +1,9 @@
+package utils;
+
 import java.util.ArrayList;
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Todo;
 
 public class TaskList {
     private ArrayList<Task> tasks;

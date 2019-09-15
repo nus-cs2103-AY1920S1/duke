@@ -27,7 +27,17 @@ public class Deadline extends Task {
     String getStoredForm() {
         String name = this.getDescription();
         int status = this.isDone()? 1 : 0;
-        return "D " + status + " " + name + " " + this.by + "\n";
+        return "D " + status + " " + name + " " + Duke.formatter.format(by) + "\n";
+    }
+
+    /**
+     * postpone time of the event.
+     *
+     * @param time is when the task is postponed to.
+     */
+    @Override
+    void postpone(String time) throws ParseException {
+        this.by = Duke.formatter.parse(time);
     }
 
     @Override

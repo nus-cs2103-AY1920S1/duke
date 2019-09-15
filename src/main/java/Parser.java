@@ -31,6 +31,18 @@ class Parser {
             return new DeleteCommand(index);
         }
 
+        case "postpone": {
+            if (!sc.hasNextInt()) {
+                throw new NoTaskException();
+            }
+            int index = sc.nextInt() - 1;
+            if (!sc.hasNext()) {
+                throw new NoDateException("postponement");
+            }
+            String date = sc.nextLine().trim();
+            return new PostponeCommand(index, date);
+        }
+
         case "find":
             if (!sc.hasNext()) {
                 throw new NoTaskException();

@@ -30,7 +30,17 @@ public class Event extends Task {
     String getStoredForm() {
         String name = this.getDescription();
         int status = this.isDone()? 1 : 0;
-        return "E " + status + " " + name + " " + this.at + "\n";
+        return "E " + status + " " + name + " " + Duke.formatter.format(at) + "\n";
+    }
+
+    /**
+     * postpone time of the event.
+     *
+     * @param time is when the task is postponed to.
+     */
+    @Override
+    void postpone(String time) throws ParseException {
+        this.at = Duke.formatter.parse(time);
     }
 
     @Override

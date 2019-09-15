@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.text.ParseException;
 
 abstract class Command {
 
@@ -10,7 +11,7 @@ abstract class Command {
      * @throws DukeException when input is different from required.
      * @throws IOException when input is different from required.
      */
-    abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
+    abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException, ParseException;
 
     /**
      * whether is it an exit command
@@ -57,7 +58,7 @@ class DeleteCommand extends Command {
      * @param index to know which position to delete.
      */
     DeleteCommand(int index) {
-        assert index >= 0 : "index of task cannot be negative";
+        assert index > 0 : "index of task cannot be negative";
         this.index = index;
     }
 
@@ -117,7 +118,7 @@ class DoneCommand extends Command {
     private int index;
 
     DoneCommand(int index) {
-        assert index >= 0 : "index of task cannot be negative";
+        assert index > 0 : "index of task cannot be negative";
         this.index = index;
     }
 
@@ -158,5 +159,40 @@ class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return "     Here are the matching tasks in your list:" +
         tasks.printListWithKeyword(keyword);
+    }
+}
+
+class PostponeCommand extends Command {
+    private int index;
+    private String time;
+
+    /**
+     * constructor.
+     * @param index for the task to postpone to.
+     * @param time for the task to postpone to.
+     */
+    PostponeCommand(int index, String time) {
+        assert index > 0 : "index of task cannot be negative";
+        this.index = index;
+    }
+
+    /**
+     * postpone the task.
+     * @param tasks   is the list of tasks.
+     * @param ui      is the UI class.
+     * @param storage is the Storage class.
+     * @throws DukeException when input is different from required.
+     * @throws IOException   when input is different from required.
+     */
+    @Override
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException, ParseException {
+        if (index >= tasks.getSize()) {
+            throw new NoTaskException();
+        }
+        Task t = tasks.getTask(index);
+        t.postpone(time);
+        storage.save();
+        return "     Noted. I've postponed this task:\n" +
+                "       " + t;
     }
 }

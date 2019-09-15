@@ -53,3 +53,9 @@ class NoTaskException extends DukeException {
         return " ☹ OOPS!!! The task does not exist.";
     }
 }
+
+class NoPostponeException extends DukeException {
+    public String toString() {
+        return " ☹ OOPS!!! The task has no date and cannot be postponed.";
+    }
+}

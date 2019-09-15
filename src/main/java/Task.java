@@ -1,3 +1,5 @@
+import java.text.ParseException;
+
 public abstract class Task {
 
     private String description;
@@ -12,7 +14,17 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    /**
+     * get the stored form to store in file.
+     * @return the string representation of stored form of task in file.
+     */
     abstract String getStoredForm();
+
+    /**
+     * postpone time of the event.
+     * @param time is when the task is postponed to.
+     */
+    abstract void postpone(String time) throws ParseException, NoPostponeException;
 
     /**
      * return a symbol showing when the task is done or not.

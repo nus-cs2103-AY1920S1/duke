@@ -15,6 +15,16 @@ public class Todo extends Task {
         return "T " + status + " " + name + "\n";
     }
 
+    /**
+     * postpone time of the event.
+     *
+     * @param time is when the task is postponed to.
+     */
+    @Override
+    void postpone(String time) throws NoPostponeException {
+        throw new NoPostponeException();
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

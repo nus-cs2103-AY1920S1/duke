@@ -3,12 +3,14 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.HashSet;
 
 import duke.command.TaskList;
 import duke.command.Ui;
 import duke.command.Parser;
 import duke.command.Storage;
 import duke.DukeException;
+import duke.task.Task;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -31,6 +33,7 @@ public class Duke<x> extends Application {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
+    private HashSet<Task> set;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -49,6 +52,7 @@ public class Duke<x> extends Application {
         this.storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
+            this.set = this.storage.getSet();
             this.storage.setList(taskList);
         } catch (DukeException e) {
             ui.showLoadingError();
@@ -68,7 +72,7 @@ public class Duke<x> extends Application {
      * Runs the Duke programme.
      */
     public void run() {
-        Parser parser = new Parser(this.taskList, this.ui, this.storage);
+        Parser parser = new Parser(this.taskList, this.ui, this.storage, this.set);
         ui.printWelcomeMessage();
     }
 
@@ -170,6 +174,10 @@ public class Duke<x> extends Application {
         return this.storage;
     }
 
+    private HashSet<Task> getSet() {
+        return this.set;
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
@@ -183,7 +191,8 @@ public class Duke<x> extends Application {
         TaskList y = duke.getTaskList();
         assert y != null : "TaskList should not point to null pointer";
 
-        Parser parser = new Parser(duke.getTaskList(), duke.getUi(), duke.getStorage());
+        Parser parser = new Parser(duke.getTaskList(), duke.getUi(), duke.getStorage(), duke.getSet());
+
         try {
             response = parser.parseLineInput(input);
             assert !response.equals("") : "Response should not be empty";

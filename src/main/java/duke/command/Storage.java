@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 import duke.command.TaskList;
 import duke.task.Task;
@@ -19,6 +20,7 @@ public class Storage {
     private File file;
     TaskList taskList;
     ArrayList<Task> list;
+    HashSet<Task> set = new HashSet<Task>();
 
     /**
      * Constructs a storage object that takes in the file path as parameter.
@@ -69,32 +71,64 @@ public class Storage {
      */
     public void parseTextToTask(String taskText, ArrayList<Task> list) throws ParseException {
         if (taskText.substring(0, 1).equals("T")) {
-            Task task = new Todo(taskText.substring(8));
-            if (taskText.substring(4,5).equals("1")) {
-                task.markAsDone();
-            }
-            list.add(task);
+            parseTextToTaskTodo(taskText, list);
         } else if (taskText.substring(0, 1).equals("D")) {
-            String descriptionAndTime = taskText.substring(8);
-            int index = descriptionAndTime.indexOf('|');
-            String description = descriptionAndTime.substring(0, index - 1);
-            String time = descriptionAndTime.substring(index + 2);
-            Task task = new Deadline(description, time);
-            if (taskText.substring(4,5).equals("1")) {
-                task.markAsDone();
-            }
-            list.add(task);
+            parseTextToTaskDeadline(taskText, list);
         } else if (taskText.substring(0, 1).equals("E")) {
-            String descriptionAndTime = taskText.substring(8);
-            int index = descriptionAndTime.indexOf('|');
-            String description = descriptionAndTime.substring(0, index - 1);
-            String time = descriptionAndTime.substring(index + 2);
-            Task task = new Event(description, time);
-            if (taskText.substring(4,5).equals("1")) {
-                task.markAsDone();
-            }
-            list.add(task);
+            parseTextToTaskEvent(taskText, list);
         }
+    }
+
+    /**
+     * Parse the Text from the File to the Deadline Task objects and add it to the list of Task.
+     * @param taskText the Line from the text to be parsed into Task object.
+     * @param list The list to which the resulting parsed text wish to be added.
+     * @throws ParseException if format of the text does not fit the expected format.
+     */
+    public void parseTextToTaskDeadline(String taskText, ArrayList<Task> list) throws ParseException {
+        String descriptionAndTime = taskText.substring(8);
+        int index = descriptionAndTime.indexOf('|');
+        String description = descriptionAndTime.substring(0, index - 1);
+        String time = descriptionAndTime.substring(index + 2);
+        Task task = new Deadline(description, time);
+        if (taskText.substring(4,5).equals("1")) {
+            task.markAsDone();
+        }
+        list.add(task);
+        this.set.add(task);
+    }
+
+    /**
+     * Parse the Text from the File to the Todo Task objects and add it to the list of Task.
+     * @param taskText the Line from the text to be parsed into Task object.
+     * @param list The list to which the resulting parsed text wish to be added.
+     */
+    public void parseTextToTaskTodo(String taskText, ArrayList<Task> list) {
+        Task task = new Todo(taskText.substring(8));
+        if (taskText.substring(4,5).equals("1")) {
+            task.markAsDone();
+        }
+        list.add(task);
+        this.set.add(task);
+    }
+
+    /**
+     * Parse the Text from the File to the Event Task objects and add it to the list of Task.
+     * @param taskText the Line from the text to be parsed into Task object.
+     * @param list The list to which the resulting parsed text wish to be added.
+     * @throws ParseException if format of the text does not fit the expected format.
+     */
+    public void parseTextToTaskEvent(String taskText, ArrayList<Task> list) throws ParseException {
+        String descriptionAndTime = taskText.substring(8);
+        int index = descriptionAndTime.indexOf('|');
+        String description = descriptionAndTime.substring(0, index - 1);
+        String time = descriptionAndTime.substring(index + 2);
+        Task task = new Event(description, time);
+        if (taskText.substring(4,5).equals("1")) {
+            task.markAsDone();
+        }
+        list.add(task);
+        this.set.add(task);
     }
 
     /**
@@ -139,6 +173,14 @@ public class Storage {
         }
         writer.write(text);
         writer.close();
+    }
+
+    /**
+     * Gets HashSet<Task> that contains all the current task.
+     * @return HashSet<TasK> that contains all the current task.
+     */
+    public HashSet<Task> getSet() {
+        return this.set;
     }
 
 }

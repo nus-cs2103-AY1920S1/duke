@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
+import java.util.HashSet;
 
 import duke.Duke;
 import duke.command.TaskList;
@@ -28,6 +29,7 @@ public class Parser {
     private TaskList taskList;
     private Ui ui;
     private Storage storage;
+    private HashSet<Task> set;
 
     /**
      * Constructs parser object that takes in TaskList,
@@ -38,10 +40,11 @@ public class Parser {
      * @param storage Storage that loads and updates files when tasks are
      *                deleted or added to the list.
      */
-    public Parser(TaskList taskList, Ui ui, Storage storage) {
+    public Parser(TaskList taskList, Ui ui, Storage storage, HashSet<Task> set) {
         this.taskList = taskList;
         this.ui = ui;
         this.storage = storage;
+        this.set = set;
     }
 
     /**
@@ -61,16 +64,16 @@ public class Parser {
             String message = processTaskDone(input, this.taskList, this.storage);
             return message;
         } else if (firstWord.equals("todo")) {
-            String message = processTaskTodo(input, this.taskList, this.storage);
+            String message = processTaskTodo(input, this.taskList, this.storage, this.set);
             return message;
         } else if (firstWord.equals("deadline")) {
-            String message = processTaskDeadline(input, this.taskList, this.storage);
+            String message = processTaskDeadline(input, this.taskList, this.storage, this.set);
             return message;
         } else if (firstWord.equals("event")) {
-            String message = processTaskEvent(input, this.taskList, this.storage);
+            String message = processTaskEvent(input, this.taskList, this.storage, this.set);
             return message;
         } else if (firstWord.equals("delete")) {
-            String message = processDeleteTask(input, this.taskList, this.storage);
+            String message = processDeleteTask(input, this.taskList, this.storage, this.set);
             return message;
         } else if (firstWord.equals("bye")) {
             ui.printByeMessage();
@@ -92,48 +95,64 @@ public class Parser {
         return ui.printTaskDone(currTask);
     }
 
-    public String processTaskTodo(String input, TaskList taskList, Storage storage) throws DukeException, IOException {
+    public String processTaskTodo(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws DukeException, IOException {
         if (input.length() == 4) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else {
             Task toDoTask = new Todo(input.substring(5));
-            taskList.addTask(toDoTask);
-            storage.appendToFile(toDoTask);
-            return ui.printToDoTask(toDoTask, this.taskList.getList());
+            if (set.contains(toDoTask)) {
+                return "Task has been added to the list";
+            } else {
+                taskList.addTask(toDoTask);
+                storage.appendToFile(toDoTask);
+                set.add(toDoTask);
+                return ui.printToDoTask(toDoTask, this.taskList.getList());
+            }
         }
     }
 
-    public String processTaskDeadline(String input, TaskList taskList, Storage storage) throws DukeException, ParseException, IOException {
+    public String processTaskDeadline(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws DukeException, ParseException, IOException {
         if (input.length() == 8) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else {
             String time = input.split("/by", 2)[1];
             String description = input.split(" /by", 2)[0];
             Task deadlineTask = new Deadline(description, time);
-            taskList.addTask(deadlineTask);
-            storage.appendToFile(deadlineTask);
-            return ui.printDeadlineTask(deadlineTask, this.taskList.getList());
+            if (set.contains(deadlineTask)) {
+                return "Task has been added to the list";
+            } else {
+                taskList.addTask(deadlineTask);
+                storage.appendToFile(deadlineTask);
+                set.add(deadlineTask);
+                return ui.printDeadlineTask(deadlineTask, this.taskList.getList());
+            }
         }
     }
 
-    public String processTaskEvent(String input, TaskList taskList, Storage storage) throws DukeException, ParseException, IOException {
+    public String processTaskEvent(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws DukeException, ParseException, IOException {
         if (input.length() == 5) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty");
         } else {
             String time = input.split("/at", 2)[1];
             String description = input.split(" /at", 2)[0];
             Task eventTask = new Event(description, time);
-            taskList.addTask(eventTask);
-            storage.appendToFile(eventTask);
-            return ui.printEventtTask(eventTask, this.taskList.getList());
+            if (set.contains(eventTask)) {
+                return "Task has been added to the list";
+            } else {
+                taskList.addTask(eventTask);
+                storage.appendToFile(eventTask);
+                set.add(eventTask);
+                return ui.printEventtTask(eventTask, this.taskList.getList());
+            }
         }
     }
 
-    public String processDeleteTask(String input, TaskList taskList, Storage storage) throws IOException {
+    public String processDeleteTask(String input, TaskList taskList, Storage storage, HashSet<Task> set) throws IOException {
         Integer index = Integer.valueOf(input.substring(7));
         Task deletedTask = taskList.getTask(index - 1);
         int sizeBeforeDeletion = taskList.getList().size();
         taskList.deleteTask((int) index - 1);
+        set.remove(deletedTask);
         int sizeAfterDeletion = taskList.getList().size();
         storage.updateFile();
         int diffInSize = sizeBeforeDeletion - sizeAfterDeletion;
@@ -174,5 +193,6 @@ public class Parser {
             throw new DukeException ("Sorry we cannot find the task :(");
         }
         return message;
+
     }
 }

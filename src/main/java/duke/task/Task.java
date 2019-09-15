@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
@@ -63,4 +64,15 @@ public class Task {
         return this.typeOfTask;
     }
 
+    public boolean equals(Object o) {
+        if (!(o instanceof Task)) {
+            return false;
+        }
+        Task task = (Task) o;
+        return task.getDescription().equals(this.description);
+    }
+
+    public int hashCode() {
+        return Objects.hash(this.description);
+    }
 }

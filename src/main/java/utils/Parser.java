@@ -1,27 +1,30 @@
 package utils;
 
 import commands.Command;
-import commands.ListCommand;
-import commands.AddCommand;
-import commands.DeleteCommand;
-import commands.ExitCommand;
 import commands.DoneCommand;
+import commands.ListCommand;
 import commands.FindCommand;
+import commands.ExitCommand;
+import commands.DeleteCommand;
+import commands.UndoCommand;
+import commands.AddCommand;
 
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
 import exceptions.DukeException;
 
+import java.util.Stack;
+
 import java.text.ParseException;
 
 public class Parser {
 
     private static final String ERROR_EMPTY_INPUT = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    private static final String ERROR_DATE_FORMAT = "Please enter the date in the format dd-MMM-yyyy HH:mm";
     private static final String ERROR_INPUT_FORMAT = "Please check the format of your input!";
     private static final String ERROR_TODO = "☹ OOPS!!! The description of a " + "todo" + " cannot be empty.";
     private static final String ERROR_TIME_EMPTY = "Please input the time as well!";
+    private static Stack<Command> recentCommands = new Stack<>();
 
     /**
      * Parses user input into command for execution, and creates the
@@ -83,17 +86,25 @@ public class Parser {
                 c = new FindCommand(keyword);
                 break;
 
+            case "undo":
+                if (!recentCommands.empty()) {
+                    c = new UndoCommand(recentCommands.pop());
+                    break;
+                } else {
+                    throw new DukeException("No actions to undo!");
+                }
             case "bye":
                 c = new ExitCommand();
                 break;
+
             default:
                 throw new DukeException(ERROR_EMPTY_INPUT);
             }
-        } catch (ParseException e) {
-            throw new DukeException(ERROR_DATE_FORMAT);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ERROR_INPUT_FORMAT);
         }
+
+        recentCommands.push(c);
         return c;
 
     }

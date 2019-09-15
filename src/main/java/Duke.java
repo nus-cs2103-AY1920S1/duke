@@ -5,7 +5,7 @@ import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
 
-import java.util.Scanner;
+import java.text.ParseException;
 
 public class Duke {
     private Storage storage;
@@ -40,7 +40,6 @@ public class Duke {
             c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            e.printStackTrace();
             return ui.showErrors(e.getMessage());
         }
     }

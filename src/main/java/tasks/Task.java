@@ -1,5 +1,9 @@
 package tasks;
 
+import exceptions.DukeException;
+
+import java.text.ParseException;
+
 public class Task {
     String name;
     boolean isDone;
@@ -14,12 +18,8 @@ public class Task {
         this.isDone = false;
     }
 
-    /**
-     * Mark the task as complete.
-     *
-     */
-    public void markAsDone() {
-        this.isDone = true;
+    public Task markAsDone() throws DukeException {
+        return null;
     }
 
     public String printForStorage() {

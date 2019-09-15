@@ -6,7 +6,6 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
 
-import java.text.ParseException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -52,38 +51,33 @@ public class Storage {
 
         // parse input and create tasks
         while (sc.hasNextLine()) {
-            try {
-                String line = sc.nextLine();
+            String line = sc.nextLine();
 
-                // since task details are separated by | when saved
-                // refer to printForStorage method in Task component
-                String[] savedTask = line.split("\\|");
+            // since task details are separated by | when saved
+            // refer to printForStorage method in Task component
+            String[] savedTask = line.split("\\|");
 
-                for (int i = 0; i < savedTask.length; i++) {
-                    savedTask[i] = savedTask[i].trim();
-                }
+            for (int i = 0; i < savedTask.length; i++) {
+                savedTask[i] = savedTask[i].trim();
+            }
 
-                String taskType = savedTask[0];
+            String taskType = savedTask[0];
 
-                switch (taskType) {
-                case "T":
-                    createAndAddTodo(savedTask);
-                    break;
+            switch (taskType) {
+            case "T":
+                createAndAddTodo(savedTask);
+                break;
 
-                case "D":
-                    createAndAddDeadline(savedTask);
-                    break;
+            case "D":
+                createAndAddDeadline(savedTask);
+                break;
 
-                case "E":
-                    createAndAddEvent(savedTask);
-                    break;
+            case "E":
+                createAndAddEvent(savedTask);
+                break;
 
-                default:
-                    break;
-                }
-            } catch (ParseException e) {
-                throw new DukeException("Format of date or time in tasks "
-                        + "saved in file is invalid!");
+            default:
+                break;
             }
         }
         sc.close();
@@ -96,12 +90,12 @@ public class Storage {
      *
      * @param taskDetails an array containing details of the task
      */
-    private void createAndAddTodo(String[] taskDetails) {
+    private void createAndAddTodo(String[] taskDetails) throws DukeException {
         String done = taskDetails[1];
         String name = taskDetails[2];
         Task todo = new Todo(name);
         if (done.equals("1")) {
-            todo.markAsDone();
+            todo = todo.markAsDone();
         }
         tasks.add(todo);
     }
@@ -112,13 +106,13 @@ public class Storage {
      *
      * @param taskDetails an array containing details of the task
      */
-    private void createAndAddDeadline(String[] taskDetails) throws ParseException, DukeException {
+    private void createAndAddDeadline(String[] taskDetails) throws DukeException {
         String done = taskDetails[1];
         String name = taskDetails[2];
         String time = taskDetails[3];
         Task deadline = new Deadline(name, new StringToDate(time));
         if (done.equals("1")) {
-            deadline.markAsDone();
+            deadline = deadline.markAsDone();
         }
         tasks.add(deadline);
     }
@@ -129,13 +123,13 @@ public class Storage {
      *
      * @param taskDetails an array containing details of the task
      */
-    private void createAndAddEvent(String[] taskDetails) throws ParseException, DukeException {
+    private void createAndAddEvent(String[] taskDetails) throws DukeException {
         String done = taskDetails[1];
         String name = taskDetails[2];
         String time = taskDetails[3];
         Task event = new Event(name, new StringToDate(time));
         if (done.equals("1")) {
-            event.markAsDone();
+            event = event.markAsDone();
         }
         tasks.add(event);
     }
@@ -145,7 +139,7 @@ public class Storage {
      *
      * @throws DukeException in case of error writing to file
      */
-    public void writeToFile() throws DukeException {
+    public void writeToFile(TaskList taskList) throws DukeException {
         FileWriter fw = null;
         try {
             fw = new FileWriter(filePath);
@@ -154,9 +148,9 @@ public class Storage {
         }
         try {
             assert fw != null : "Error writing to file, file writer not initialised!";
-            for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.get(i);
-                if (i != tasks.size() - 1) {
+            for (int i = 0; i < taskList.getSize(); i++) {
+                Task task = taskList.getTask(i);
+                if (i != taskList.getSize() - 1) {
                     fw.write(task.printForStorage() + "\n");
                 } else {
                     fw.write(task.printForStorage());

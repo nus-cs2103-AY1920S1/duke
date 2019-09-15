@@ -6,6 +6,8 @@ import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
 
+import java.text.ParseException;
+
 public class DoneCommand extends Command {
     private int taskId;
 
@@ -35,9 +37,9 @@ public class DoneCommand extends Command {
         if (taskId > tasks.getSize()) {
             throw new DukeException("Please choose a task within the list");
         } else {
+            tasks.markTaskAsDone(taskId);
             Task doneTask = tasks.getTask(taskId - 1);
-            doneTask.markAsDone();
-            storage.writeToFile();
+            storage.writeToFile(tasks);
             str = "Nice! I've marked this task as done:\n" + " " + doneTask.toString();
             return str;
         }

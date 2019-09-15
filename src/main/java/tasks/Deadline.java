@@ -1,5 +1,6 @@
 package tasks;
 
+import exceptions.DukeException;
 import utils.StringToDate;
 
 public class Deadline extends Task {
@@ -14,6 +15,17 @@ public class Deadline extends Task {
     public Deadline(String name, StringToDate time) {
         super(name);
         this.time = time;
+    }
+
+    /**
+     * Mark the task as complete.
+     *
+     */
+    @Override
+    public Task markAsDone() throws DukeException {
+        Deadline doneTask = new Deadline(this.name, new StringToDate(this.time.getRawDate()));
+        doneTask.isDone = true;
+        return doneTask;
     }
 
     /**

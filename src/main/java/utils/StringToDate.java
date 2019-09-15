@@ -8,6 +8,9 @@ import java.util.Date;
 
 public class StringToDate {
     private Date date;
+    private String rawDate;
+    private static final String ERROR_DATE_FORMAT = "Please enter the date in the format dd-MMM-yyyy HH:mm";
+    private static final String ERROR_INVALID_DATES = "Values entered for the date may be incorrect!";
 
     /**
      * Create a new date time in the required format.
@@ -16,17 +19,26 @@ public class StringToDate {
      * @param rawDate date time inputted by user
      * @throws ParseException in case date time is in invalid format
      */
-    public StringToDate(String rawDate) throws ParseException, DukeException {
+    public StringToDate(String rawDate) throws DukeException {
 
         boolean isAcceptableDate = checkDateValues(rawDate);
 
         if (isAcceptableDate) {
+            this.rawDate = rawDate;
             String dateFormat = "dd-MM-yyyy HH:mm";
             SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
-            this.date = formatter.parse(rawDate);
+            try {
+                this.date = formatter.parse(rawDate);
+            } catch (ParseException e) {
+                throw new DukeException(ERROR_DATE_FORMAT);
+            }
         } else {
-            throw new DukeException("Values entered for the date may be incorrect!");
+            throw new DukeException(ERROR_INVALID_DATES);
         }
+    }
+
+    public String getRawDate() {
+       return this.rawDate;
     }
 
 

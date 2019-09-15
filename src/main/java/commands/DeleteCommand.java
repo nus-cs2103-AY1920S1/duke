@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("Please choose a task within the list");
         } else {
             Task toDelete = tasks.deleteTask(taskId - 1);
-            storage.writeToFile();
+            storage.writeToFile(tasks);
             str = "Noted. I've removed this task:\n" + " " + toDelete.toString() + "\nNow you have " + tasks.getSize()
                     + " tasks in the list.";
             return str;

@@ -4,3 +4,6 @@ os: osx
 jdk: oraclejdk11
 script:
   - "./gradlew shadowJar"
+  - "./gradlew test"
+  - "./gradlew check"
+  - "./gradlew run"

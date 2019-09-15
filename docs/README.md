@@ -4,11 +4,7 @@ Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a cas
 
 ## Features 
 
-### 
-
-
-
-
+Duke allows users to track three types of task - To Do, Deadline and Events. In addition, there are also various utility functions to allow the user to manage his/her task list. These functions include list, delete, done, bye, help, find.
 
 ## Usage
 

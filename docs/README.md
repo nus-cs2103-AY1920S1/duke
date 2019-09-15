@@ -228,7 +228,7 @@ delete 1
 // response
     ____________________________________________________________
      Noted. I've removed this task:
-       [T][N] Revise CS2103% Lecture Notes on UML
+       [T][N] Revise CS2103T Lecture Notes on UML
      Now you have 2 tasks in the list.
     ____________________________________________________________
 

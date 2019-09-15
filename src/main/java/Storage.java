@@ -19,6 +19,7 @@ public class Storage {
     /**
      * Writes data to the file when user exits.
       * @param content the information to be updated
+     *  @param  filePath file where data is to be stored
      * @throws IOException if file not found, insufficient disk space and other failed input output operations.
      */
     public void writeFile(String content,String filePath) throws IOException {

@@ -134,7 +134,7 @@ public class TaskList {
             int first = eventDetails.indexOf('/');
             String desc = eventDetails.substring(0, first - 1);
             String on = eventDetails.substring(first + 4);
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH mm");
             Date at = df.parse(on);
             Task t1 = new Event(desc, at, false);
             this.add(t1);

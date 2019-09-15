@@ -32,13 +32,13 @@ public class Parser {
             }
         } else if (userInput.contains("[E]")) {
             int start = userInput.indexOf('(');
-            String e = userInput.substring(7, start - 1);
-            String dl = userInput.substring(start + 5, start + 27);
-            Date at = df.parse(dl);
+            String event = userInput.substring(7, start - 1);
+            String date = userInput.substring(start + 5, start + 27);
+            Date at = df.parse(date);
             if (userInput.contains("[" + "1" + "]")) {
-                tasks.add(new Event(e, at, true));
+                tasks.add(new Event(event, at, true));
             } else {
-                tasks.add(new Event(e, at));
+                tasks.add(new Event(event, at));
             }
         } else {
             int sl = userInput.indexOf('(');

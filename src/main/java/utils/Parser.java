@@ -173,8 +173,6 @@ public class Parser {
     public String[] parseSortInfo() {
         String keyword = arguments.trim();
         String[] sortInfo = parseRawInput(keyword);
-        System.out.println(sortInfo[0]);
-        System.out.println(sortInfo[1]);
         return sortInfo;
     }
 

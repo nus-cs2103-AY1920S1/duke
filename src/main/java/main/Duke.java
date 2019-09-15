@@ -2,19 +2,24 @@ package main;
 
 import command.Command;
 import command.CommandCentre;
+import exception.InvalidArgumentException;
 import task.Task;
 import task.TaskList;
 import utils.Parser;
 import utils.Storage;
 import utils.Ui;
 
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 public class Duke {
 
-    private static final String ROOT = "D:\\Gary\\Uni\\NUS\\1920SEM1\\CS2103T\\Practices\\duke";
-    private static final String STORAGE_PATH = "\\data\\duke.txt";
+//    private static final String ROOT = "D:\\Gary\\Uni\\NUS\\1920SEM1\\CS2103T\\Practices\\duke";
+    private static final String ROOT = Paths.get(System.getProperty("user.dir")).getRoot().toString();
+    private static final String STORAGE_PATH = "\\duke.txt";
+    private static final Logger LOGGER = Logger.getLogger(Duke.class.getName());
     public static final String EXIT_MESSAGE = "main.Duke.EXIT_MESSAGE";
     private static final boolean RESET_TASK_LIST = false;
 
@@ -33,6 +38,7 @@ public class Duke {
      */
     public Duke() {
         taskList = TaskList.newInstance();
+        LOGGER.info("Storage directory: "+ ROOT);
         storage = new Storage(ROOT + STORAGE_PATH);
         ui = new Ui();
         commandCentre = new CommandCentre();
@@ -100,7 +106,13 @@ public class Duke {
         commandCentre.register("done", () -> {
             Integer idx = parser.parseTaskIdx();
             if (idx != null) {
-                taskList.markAsDone(idx);
+                try {
+                    taskList.markAsDone(idx);
+                } catch (InvalidArgumentException e) {
+                    ui.appendMessage(e.getMessage());
+                    return;
+                }
+
                 storage.updateData();
                 ui.printMarkedAsDoneMessage(taskList.get(idx));
 

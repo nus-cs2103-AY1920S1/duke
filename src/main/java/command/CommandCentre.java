@@ -1,11 +1,8 @@
 package command;
 
-import exception.InvalidCommandException;
-import task.Task;
 import utils.Ui;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Stack;
 
 public class CommandCentre {
@@ -48,7 +45,6 @@ public class CommandCentre {
      * Executes the command given by the command name.
      *
      * @param commandName The name of the command to be executed.
-     * @return boolean Whether the command is valid or not.
      */
     public void execute(String commandName) {
         Command command = commands.get(commandName);

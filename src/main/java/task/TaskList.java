@@ -1,5 +1,7 @@
 package task;
 
+import exception.InvalidArgumentException;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -124,7 +126,11 @@ public class TaskList {
      *
      * @param idx The index of the task in task list.
      */
-    public void markAsDone(int idx) {
+    public void markAsDone(int idx) throws InvalidArgumentException {
+        if (tasks.get(idx).getStatus() == Task.DONE) {
+            throw new InvalidArgumentException(
+                    String.format("Task %d is already done.", idx + 1));
+        }
         tasks.get(idx).setDone();
     }
 
@@ -134,6 +140,10 @@ public class TaskList {
      * @param idx The index of the task in task list.
      */
     public void markAsNotDone(int idx) {
+        if (tasks.get(idx).getStatus() == Task.NOT_DONE) {
+            throw new InvalidArgumentException(
+                    String.format("Task %d is already not done.", idx + 1));
+        }
         tasks.get(idx).setNotDone();
     }
 

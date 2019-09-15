@@ -27,7 +27,7 @@ shadowJar {
 
 application {
     // Change this to your main class.
-    mainClassName = "main.Duke"
+    mainClassName = "controller.Launcher"
 }
 
 dependencies {

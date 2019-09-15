@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for duke.command.DeleteCommand.
      *
-     * @param commandSplitBySpaces
+     * @param commandSplitBySpaces String representation of the user input
      */
     public DeleteCommand(String[] commandSplitBySpaces) {
         super(commandSplitBySpaces);
@@ -29,9 +29,9 @@ public class DeleteCommand extends Command {
     /**
      * Executes the command by using the three arguments provided.
      *
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param taskList taskList used to store tasks
+     * @param ui User Interface
+     * @param storage Storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -58,7 +58,7 @@ public class DeleteCommand extends Command {
         }
     }
 
-    public Integer[] convertToInteger(String[] stringArr) {
+    private Integer[] convertToInteger(String[] stringArr) {
         Integer[] index = new Integer[stringArr.length];
         for (int i = 0; i < stringArr.length; i++) {
             index[i] = Integer.parseInt(stringArr[i]);

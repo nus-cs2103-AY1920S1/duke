@@ -10,7 +10,7 @@ import duke.Ui;
 
 public class ByeCommand extends Command {
     /**
-     * Constructor for duke.command.ByeCommand
+     * Constructor for duke.command.ByeCommand.
      *
      * @param commandSplitBySpaces String representation of the user input
      */
@@ -19,11 +19,11 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Executes the command by using the three arguments provided
+     * Executes the command by using the three arguments provided.
      *
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param taskList taskList used to store tasks.
+     * @param ui User Interface
+     * @param storage Storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

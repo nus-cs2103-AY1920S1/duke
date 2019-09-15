@@ -29,9 +29,9 @@ public class DoneCommand extends Command {
     /**
      * Executes the command by using the three arguments provided.
      *
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param taskList taskList used to store tasks
+     * @param ui User Interface
+     * @param storage Storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -55,7 +55,13 @@ public class DoneCommand extends Command {
         }
     }
 
-    public Integer[] convertToInteger(String[] stringArr) {
+    /**
+     * Converts a string array to an Integer array.
+     *
+     * @param stringArr String representative of the array
+     * @return Integer representative of the string array
+     */
+    private Integer[] convertToInteger(String[] stringArr) {
         Integer[] index = new Integer[stringArr.length];
         for (int i = 0; i < stringArr.length; i++) {
             index[i] = Integer.parseInt(stringArr[i]);

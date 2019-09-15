@@ -21,7 +21,7 @@ public class Ui {
     /**
      * Returns the number of tasks in the taskList.
      *
-     * @param taskList
+     * @param taskList taskList used to store tasks
      */
     public String printNumberOfTasks(TaskList taskList) {
         return ("Now you have " + taskList.getTasks().size()
@@ -38,9 +38,9 @@ public class Ui {
     }
 
     /**
-     * Returns the String representation of all the tasks in taskList
+     * Returns the String representation of all the tasks in taskList.
      *
-     * @param taskList
+     * @param taskList taskList used to store tasks
      */
     public String printTaskList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
@@ -55,7 +55,7 @@ public class Ui {
 
     /**
      * String representation of the error message.
-     * @param error
+     * @param error exception to be caught
      */
     public String printErrorMessage(String error) {
         return "Oops!!! " + error + "\n";
@@ -104,7 +104,7 @@ public class Ui {
     }
 
     /**
-     * String representation of the loading message error
+     * String representation of the loading message error.
      */
     public String showLoadingError() {
         return ("Error, file not found") + "\n";

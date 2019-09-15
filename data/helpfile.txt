@@ -1,5 +1,4 @@
 This is Duke's support of cli commands:
-Help2 to see next page>>
 
 list
 -Lists out all your tasks

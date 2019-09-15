@@ -14,30 +14,30 @@ import java.util.ArrayList;
  * @see Task
  */
 public class FindCommand extends Command {
-    private String KeywordToFind;
+    private String keywordToFind;
 
     /**
-     * Constructor for duke.command.FindCommand
+     * Constructor for duke.command.FindCommand.
      *
      * @param commandSplitBySpaces String representation of the user input
      */
     public FindCommand(String[] commandSplitBySpaces) {
         super(commandSplitBySpaces);
-        KeywordToFind = commandSplitBySpaces[1];
+        keywordToFind = commandSplitBySpaces[1];
     }
 
     /**
-     * Executes the command by using the three arguments provided
+     * Executes the command by using the three arguments provided.
      *
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param taskList taskList used to store tasks
+     * @param ui User Interface
+     * @param storage Storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task t : taskList.getTasks()) {
-            if (t.getDescription().contains(KeywordToFind)) {
+            if (t.getDescription().contains(keywordToFind)) {
                 tasks.add(t);
             }
         }

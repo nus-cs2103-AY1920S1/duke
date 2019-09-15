@@ -19,11 +19,10 @@ import duke.Ui;
  */
 
 public abstract class Command {
-    String stringCommand;
     String[] commandSplitBySpaces;
 
     /**
-     * Constructor for all commands
+     * Constructor for all commands.
      *
      * @param commandSplitBySpaces String representation of the user input
      */
@@ -35,9 +34,9 @@ public abstract class Command {
      * Executes the command by using the three arguments provided and
      * Returns the String to be written.
      *
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param taskList taskList used to store tasks
+     * @param ui User Interface
+     * @param storage Storage
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 

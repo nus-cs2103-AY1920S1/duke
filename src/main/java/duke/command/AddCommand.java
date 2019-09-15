@@ -40,11 +40,11 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the command by using the three arguments provided
+     * Executes the command by using the three arguments provided.
      *
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param taskList taskList used to store tasks
+     * @param ui User Interface
+     * @param storage Storage
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

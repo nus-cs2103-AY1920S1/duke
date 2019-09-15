@@ -11,9 +11,9 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructor for duke.task.Deadline
+     * Constructor for duke.task.Deadline.
      *
-     * @param description
+     * @param description description of the deadline
      * @param by          time in the format of dd/MM/yyyy HHmm
      */
     public Deadline(String description, String by) {
@@ -22,9 +22,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Another constructor for duke.task.Deadline
+     * Another constructor for duke.task.Deadline.
      *
-     * @param description
+     * @param description description of the deadline
      * @param by          time in the format of dd/MM/yyyy HHmm
      * @param isDone      boolean value on whether it is done or not
      */
@@ -44,6 +44,8 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns the String representation of Deadline object.
+     *
      * @return String that would be written into data file
      */
     @Override

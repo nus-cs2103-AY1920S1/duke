@@ -46,6 +46,11 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+
+
+    /**
+     * Greets the user when Dukebot is initialised.
+     */
     public void dukeGreet() {
         String input = duke.greeting();
         dialogContainer.getChildren().addAll(

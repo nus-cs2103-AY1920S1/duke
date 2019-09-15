@@ -8,9 +8,9 @@ package duke.task;
 
 public class Todo extends Task {
     /**
-     * Constructor for duke.task.Todo
+     * Constructor for duke.task.Todo.
      *
-     * @param description
+     * @param description String representation of the user input
      */
     public Todo(String description) {
         super(description);
@@ -19,7 +19,7 @@ public class Todo extends Task {
     /**
      * Another constructor for duke.task.Todo
      *
-     * @param description
+     * @param description String representation of the description of Todo
      * @param isDone      boolean value on whether it is done or not
      */
     public Todo(String description, boolean isDone) {
@@ -37,6 +37,8 @@ public class Todo extends Task {
     }
 
     /**
+     * Returns the String representation of Event object.
+     *
      * @return String representation that would be written into data file
      */
     @Override

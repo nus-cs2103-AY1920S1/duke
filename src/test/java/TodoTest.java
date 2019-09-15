@@ -5,12 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TodoTest {
     @Test
-    public void toStringTodoTest(){
+    public void toStringTodoTest() {
         assertEquals("[T][-] Help me", new Todo("Help me").toString());
     }
 
     @Test
-    public void toDataStringTodoTest(){
+    public void toDataStringTodoTest() {
         assertEquals("T | 0 | Help me", new Todo("Help me").toDataString());
     }
 }

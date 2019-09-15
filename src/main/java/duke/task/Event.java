@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a type of duke.task.Task object with a fixed time format.
@@ -13,9 +12,9 @@ public class Event extends Task {
     protected LocalDateTime at;
 
     /**
-     * Constructor for event
+     * Constructor for event.
      *
-     * @param description
+     * @param description String representation of the description of event
      * @param at          time in the format of dd/MM/yyyy HHmm
      */
     public Event(String description, String at) throws DateTimeException {
@@ -27,9 +26,9 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor for event
+     * Constructor for event.
      *
-     * @param description
+     * @param description String representation of the description of event
      * @param at          time in the format of dd/MM/yyyy HHmm
      * @param isDone      boolean value on whether it is done or not
      */
@@ -49,6 +48,8 @@ public class Event extends Task {
     }
 
     /**
+     * Returns the String representation of Event object.
+     *
      * @return String representation that would be written into data file
      */
     @Override

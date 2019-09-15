@@ -80,6 +80,8 @@ public class Task {
     }
 
     /**
+     * Returns the String representation of Deadline object.
+     *
      * @return String that would be written into data file
      */
     public String toDataString() {

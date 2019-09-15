@@ -18,7 +18,7 @@ import java.util.InputMismatchException;
  * @see Command
  */
 public class Parser {
-    String stringCommand;
+    static String stringCommand;
 
     /**
      * Default constructor for duke.Parser.
@@ -29,12 +29,12 @@ public class Parser {
     /**
      * Converts a string given by user into actual command to be executed.
      *
-     * @param stringCommand String representation of the user input
+     * @param stringCommandParser String representation of the user input
      * @return duke.command.Command which would be executed
      * @throws InputMismatchException duke.command.Command is not recognised
      */
-    public Command parse(String stringCommand) throws InputMismatchException, DateTimeException {
-        this.stringCommand = stringCommand;
+    public static Command parse(String stringCommandParser) throws InputMismatchException, DateTimeException {
+        stringCommand = stringCommandParser;
 
         String[] commandSplitBySpaces = stringCommand.split(" ");
 
@@ -58,42 +58,42 @@ public class Parser {
         }
     }
 
-    private Command createListCommand(String[] commandSplitBySpaces) throws InputMismatchException {
+    private static Command createListCommand(String[] commandSplitBySpaces) throws InputMismatchException {
         if (commandSplitBySpaces.length != 1) {
             throw new InputMismatchException("I'm sorry, are you trying to call \"list\"?");
         }
         return new ListCommand(commandSplitBySpaces);
     }
 
-    private Command createByeCommand(String[] commandSplitBySpaces) throws InputMismatchException {
+    private static Command createByeCommand(String[] commandSplitBySpaces) throws InputMismatchException {
         if (commandSplitBySpaces.length != 1) {
             throw new InputMismatchException("I'm sorry, are you trying to call \"bye\"?");
         }
         return new ByeCommand(commandSplitBySpaces);
     }
 
-    private Command createDoneCommand(String[] commandSplitBySpaces) throws InputMismatchException {
+    private static Command createDoneCommand(String[] commandSplitBySpaces) throws InputMismatchException {
         if (commandSplitBySpaces.length != 2) {
             throw new InputMismatchException("I'm sorry, are you trying to call \"done\\space\\number,...\" ?");
         }
         return new DoneCommand(commandSplitBySpaces);
     }
 
-    private Command createDeleteCommand(String[] commandSplitBySpaces) throws InputMismatchException {
+    private static Command createDeleteCommand(String[] commandSplitBySpaces) throws InputMismatchException {
         if (commandSplitBySpaces.length != 2) {
             throw new InputMismatchException("I'm sorry, are you trying to call \"delete \\number\" ?");
         }
         return new DeleteCommand(commandSplitBySpaces);
     }
 
-    private Command createFindCommand(String[] commandSplitBySpaces) throws InputMismatchException {
+    private static Command createFindCommand(String[] commandSplitBySpaces) throws InputMismatchException {
         if (commandSplitBySpaces.length != 2) {
             throw new InputMismatchException("I'm sorry, are you trying to call \"find \\number\" ?");
         }
         return new FindCommand(commandSplitBySpaces);
     }
 
-    private Command createAddCommand(String[] commandSplitBySpaces) throws InputMismatchException {
+    private static Command createAddCommand(String[] commandSplitBySpaces) throws InputMismatchException {
         if (commandSplitBySpaces.length == 1) {
             throw new InputMismatchException("The description cannot be empty");
         }

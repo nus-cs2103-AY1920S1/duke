@@ -55,7 +55,7 @@ public class Duke {
         //boolean isTestForAssertion = true;
         //assert isTestForAssertion = false;
         try {
-            Command command = new Parser().parse(input);
+            Command command = Parser.parse(input);
             assert command != null;
             output = command.execute(taskList, ui, storage);
         } catch (InputMismatchException | IllegalArgumentException

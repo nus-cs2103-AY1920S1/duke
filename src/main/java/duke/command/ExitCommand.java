@@ -7,6 +7,7 @@ import duke.ui.Ui;
 
 public class ExitCommand extends TaskCommand {
     private static String bye = "Bye. Hope to see you again soon!\n";
+
     public boolean isExit() {
         return true;
     }

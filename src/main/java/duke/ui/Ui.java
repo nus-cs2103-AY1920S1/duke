@@ -65,12 +65,6 @@ public class Ui {
      * @param str message to be printed
      */
     public String print(String str) {
-//        String[] lines = str.split("\n");
-//        StringBuilder sb = new StringBuilder();
-//        for (String line : lines) {
-//            sb.append("\n     " + line);
-//        }
-//        return sb.toString();
         return str;
     }
 

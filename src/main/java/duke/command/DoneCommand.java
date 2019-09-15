@@ -32,7 +32,7 @@ public class DoneCommand extends TaskCommand {
             throw new DukeException(outputInvalidTask);
         }
         Task doneTask = taskList.markDone(number);
-        sb.append(doneTask+"\n");
+        sb.append(doneTask + "\n");
         return ui.print(sb.toString());
     }
 }

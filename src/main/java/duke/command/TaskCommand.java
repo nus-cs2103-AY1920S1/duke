@@ -8,6 +8,7 @@ import duke.ui.Ui;
 
 public abstract class TaskCommand {
     protected static final String outputInvalidTask = "It's an invalid task";
+
     /**
      * Tells whether the duke.command is exit duke.command.
      *

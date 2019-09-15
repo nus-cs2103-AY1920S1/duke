@@ -45,7 +45,7 @@ public class AddCommand extends TaskCommand {
         }
         taskList.addTask(task);
         StringBuilder sb = new StringBuilder(outputAddTask);
-        sb.append(task+"\n");
+        sb.append(task + "\n");
         sb.append(outputStringPre + taskList.getSize() + outputStringPost);
         return ui.print(sb.toString());
     }

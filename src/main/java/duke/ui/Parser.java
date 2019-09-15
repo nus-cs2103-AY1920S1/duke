@@ -28,6 +28,7 @@ public class Parser {
     private static final String outputEmptyEventDescription = "The description of a event cannot be empty.\n";
     private static final String outputEmptyEventTime = "Please provide a time for your event task\n";
     private static final String outputEmptyFind = "Please provide the string you want to search in the tasks\n";
+
     /**
      * parses the command string and create according type of command.
      *

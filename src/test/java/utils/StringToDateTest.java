@@ -1,5 +1,6 @@
 package utils;
 
+import exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
@@ -17,7 +18,7 @@ class StringToDateTest {
     }
 
     @Test
-    void toString_string_formattedDateOutput() throws ParseException {
+    void toString_string_formattedDateOutput() throws ParseException, DukeException {
         assertEquals("10-10-2019 18:00", new StringToDate("10-10-2019 18:00").toString());
     }
 

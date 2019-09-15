@@ -1,5 +1,6 @@
 package utils;
 
+import exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
 import tasks.Deadline;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TaskListTest {
     private Task[] taskArr;
 
-    TaskListTest() throws ParseException {
+    TaskListTest() throws ParseException, DukeException {
         this.taskArr = new Task[]{new Todo("descriptionOne"), new Deadline("descriptionTwo",
                 new StringToDate("10-10-2019 18:00")), new Event("descriptionThree",
                 new StringToDate("10-10-2019 18:00"))};

@@ -1,5 +1,6 @@
 package tasks;
 
+import exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 import utils.StringToDate;
 
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EventTest {
     private Event event;
 
-    EventTest() throws ParseException {
+    EventTest() throws ParseException, DukeException {
         event = new Event("description", new StringToDate("10-10-2019 18:00"));
     }
 

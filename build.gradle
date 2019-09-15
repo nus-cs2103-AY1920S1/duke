@@ -15,8 +15,8 @@ checkstyle {
     toolVersion = '8.1'
 }
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
+    archiveBaseName = "SovietComrade"
+    archiveVersion = "0.2"
     archiveClassifier = null
     archiveAppendix = null
 }

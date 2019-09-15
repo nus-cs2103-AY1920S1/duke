@@ -125,6 +125,9 @@ public class TaskList {
                     + currentNumOfTasks + " chores now.");
         }
         Task doneTask = taskArr.get(taskNum-1);
+        if (doneTask.isDone) {
+            throw new DukeException("Comrade, that task is already done!");
+        }
         doneTask.markDone();
         return doneTask;
     }

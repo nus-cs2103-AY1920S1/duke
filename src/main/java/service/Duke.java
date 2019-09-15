@@ -35,6 +35,7 @@ public class Duke {
                 Platform.exit();
             }
 
+            System.out.println(ui.encase(response));
             return ui.encase(response);
 
         } catch (DukeException e) {

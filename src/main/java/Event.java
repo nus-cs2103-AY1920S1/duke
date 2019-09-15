@@ -4,6 +4,7 @@ import java.util.Date;
 
 /**
  * Inherits from the Task class and contains information about the Event tasks.
+ *
  */
 public class Event extends Task {
 
@@ -11,6 +12,7 @@ public class Event extends Task {
 
     /**
      * Creates a event task with description, event time and status (done or not done) .
+     *
      * @param description the description of the task.
      * @param on time of the event.
      * @param b status of the event.

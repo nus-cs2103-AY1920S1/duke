@@ -1,5 +1,6 @@
 /**
  * Inherits from the Task class and contains information about the Deadline tasks.
+ *
  */
 public class Deadline extends Task {
     private String byDate;

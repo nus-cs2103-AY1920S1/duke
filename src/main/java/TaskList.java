@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 /**
  * Contains the methods to execute user's commands and store the information while the program runs.
+ *
  */
 public class TaskList {
 
@@ -28,6 +29,7 @@ public class TaskList {
 
     /**
      * Prints the addition of a task and number of tasks in the list after addition.
+     *
      */
     protected String addMessage() {
 
@@ -95,7 +97,14 @@ public class TaskList {
         }
     }
 
-    protected String archiveTask(int number, Storage storage) throws IOException {
+    /**
+     * Deletes a certain task in the list and stores it in a different file for future reference.
+     *
+     * @param number the position of the task in the list
+     * @return the details of the task archived
+     * @throws IOException if the file to which data must be written to cannot be found
+     */
+    protected String archiveTask(int number) throws IOException {
         String showUser = "Got it, I've archived task " + number + " .\n";
         showUser = showUser + taskList.get(number - 1).toString() + "\n";
         FileWriter storeArchivedTask = new FileWriter("data/DukeArchive.txt",true);
@@ -108,6 +117,7 @@ public class TaskList {
 
     /**
      *Prints all the tasks in the list.
+     *
      */
     protected String getList() {
         String list = "Here are the tasks in your list: \n";
@@ -165,9 +175,9 @@ public class TaskList {
     }
 
     /**
-     *Reads and processes the ToDo task given by the user.
+     *Reads and processes the To Do task given by the user.
      *
-     * @param todoDetails The information regarding the todo task.
+     * @param todoDetails The information regarding the to do task.
      */
     protected String readTodo(String todoDetails) {
         String output = "";
@@ -180,6 +190,15 @@ public class TaskList {
         }
         return output;
     }
+
+    /**
+     * Reads data from the specified file.
+     *
+     * @param userData the file where user data is stored
+     * @param parser parser object to process commands
+     * @throws FileNotFoundException if the file specified in userData cannot be found
+     * @throws ParseException if the date in the Event tasks cannot be parsed by Duke.
+     */
     public void readDataFromFile(File userData, Parser parser) throws FileNotFoundException, ParseException {
         Scanner loadData = new Scanner(userData);
         while (loadData.hasNextLine()) {

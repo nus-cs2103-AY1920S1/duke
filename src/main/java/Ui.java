@@ -1,5 +1,6 @@
 /**
  * Contains methods to interact with the user.
+ *
  */
 public class Ui {
     public Ui() {
@@ -8,10 +9,10 @@ public class Ui {
 
     /**
      * Prints a hello message at the beginning of the program.
+     *
      */
     public String greet() {
         return "Hello! I'm Duke\n" + "What can I do for you?\n";
-
     }
 
     /**

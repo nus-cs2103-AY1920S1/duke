@@ -3,6 +3,7 @@ import java.io.IOException;
 
 /**
  * Contains the method to update data to the file when the user exits.
+ *
  */
 public class Storage {
 
@@ -10,6 +11,7 @@ public class Storage {
 
     /**
      * Creates a storage object with a specified file path.
+     *
       * @param filePath the absolute path of the file which stores user data
      */
     public Storage(String filePath) {
@@ -18,6 +20,7 @@ public class Storage {
 
     /**
      * Writes data to the file when user exits.
+     *
       * @param content the information to be updated
      *  @param  filePath file where data is to be stored
      * @throws IOException if file not found, insufficient disk space and other failed input output operations.

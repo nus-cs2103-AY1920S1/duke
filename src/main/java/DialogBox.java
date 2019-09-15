@@ -1,3 +1,7 @@
+/**
+ * Contains information related to JavaFX dialog box.
+ *
+ */
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

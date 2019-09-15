@@ -24,8 +24,11 @@ public class Parser {
     public void readTask(String userInput, TaskList tasks) throws ParseException {
         DateFormat df = new SimpleDateFormat("E, MMM dd yyyy HH:mm");
         assert userInput.length() > 0 : "Enter something";
+        //T stands for to do type of tasks, E stands for event and D stands for deadline tasks.
         if (userInput.contains("[T]")) {
+            //verify the status of the task before loading into task list.
             if (userInput.contains("[" + "1" + "]")) {
+             //if task is already done, instantiate with true
                 tasks.add(new ToDo(userInput.substring(7), true));
             } else {
                 tasks.add(new ToDo(userInput.substring(7)));
@@ -33,6 +36,7 @@ public class Parser {
         } else if (userInput.contains("[E]")) {
             int start = userInput.indexOf('(');
             String event = userInput.substring(7, start - 1);
+            //every event task is associated with a date and time.
             String date = userInput.substring(start + 5, start + 27);
             Date at = df.parse(date);
             if (userInput.contains("[" + "1" + "]")) {
@@ -91,7 +95,7 @@ public class Parser {
             output = list.find(requiredWord);
         } else if (command.startsWith("archive")) {
             int taskToBeArchived = Integer.parseInt(command.substring(8));
-            output = list.archiveTask(taskToBeArchived,storage);
+            output = list.archiveTask(taskToBeArchived);
         } else {
             output = (" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.Scanner;
 import javafx.scene.control.Label;
@@ -42,9 +41,9 @@ public class Duke extends Application {
         list = new TaskList();
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage("C:/Users/sairo/OneDrive/Desktop/Duke/data/Duke.txt");
+        storage = new Storage("data/Duke.txt");
         // file contains user data
-        File file = new File("C:/Users/sairo/OneDrive/Desktop/Duke/data/Duke.txt");
+        File file = new File("data/Duke.txt");
         //read and load the existing data into the task list.
         list.readDataFromFile(file,parser);
 

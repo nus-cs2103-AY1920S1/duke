@@ -51,20 +51,7 @@ public class UpdateCommand extends Command {
                 if (updatingTask instanceof Todo) {
                     throw new DukeException("");
                 } else {
-                    String originalTime;
-                    LocalDateTime inputDateU = Parser.convertToDate(inputSplitUpdateValue[1], Parser.dateFormats);
-                    String inputDateStrU = inputDateU == null ? inputSplitUpdateValue[1]
-                            : inputDateU.format(Parser.OUTPUT_FORMAT);
-                    if (updatingTask instanceof Deadline) {
-                        originalTime = ((Deadline) updatingTask).getEndTime();
-                        ((Deadline) updatingTask).setEndTime(inputDateStrU);
-                    } else {
-                        assert updatingTask instanceof Event;
-                        originalTime = ((Event) updatingTask).getEventPeriod();
-                        ((Event) updatingTask).setEventPeriod(inputDateStrU);
-                    }
-                    ui.printUpdateNotification(updatingTask.toString(), "time", originalTime);
-                    storage.overwriteFile(tasks.toArrayList());
+                    updateTimeForValidTasks(tasks, ui, storage, updatingTask, inputSplitUpdateValue);
                 }
                 break;
             default:
@@ -77,5 +64,23 @@ public class UpdateCommand extends Command {
                     + "-update field: Field \"desc\" for all tasks, or \"time\" for deadline and event only.\n\n"
                     + "-update value: Value to update field to.");
         }
+    }
+
+    private void updateTimeForValidTasks(TaskList tasks, Ui ui, Storage storage, Task updatingTask,
+                                         String[] inputSplitUpdateValue) {
+        String originalTime;
+        LocalDateTime inputDateU = Parser.convertToDate(inputSplitUpdateValue[1], Parser.dateFormats);
+        String inputDateStrU = inputDateU == null ? inputSplitUpdateValue[1]
+                : inputDateU.format(Parser.OUTPUT_FORMAT);
+        if (updatingTask instanceof Deadline) {
+            originalTime = ((Deadline) updatingTask).getEndTime();
+            ((Deadline) updatingTask).setEndTime(inputDateStrU);
+        } else {
+            assert updatingTask instanceof Event;
+            originalTime = ((Event) updatingTask).getEventPeriod();
+            ((Event) updatingTask).setEventPeriod(inputDateStrU);
+        }
+        ui.printUpdateNotification(updatingTask.toString(), "time", originalTime);
+        storage.overwriteFile(tasks.toArrayList());
     }
 }

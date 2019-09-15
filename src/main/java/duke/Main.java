@@ -15,6 +15,7 @@ public class Main extends Application {
        stage.setScene(scene);
        ap.setDuke(duke);
        ap.showWelcome();
+       stage.setTitle("Duke Trump");
        stage.show();
     }
 }

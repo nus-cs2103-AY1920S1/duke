@@ -1,6 +1,7 @@
-package seedu.duke.commands;
+package seedu.duke.commands.base;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.tasks.Task;
 import seedu.duke.util.Storage;
 import seedu.duke.util.TaskList;
 import seedu.duke.util.UI;
@@ -8,24 +9,24 @@ import seedu.duke.util.UI;
 import java.io.IOException;
 
 /**
- * Command to set task in TaskList to done.
+ * Command to delete from the TaskList class.
  */
-public class DoneCommand extends Command {
+public class DeleteCommand extends Command {
 
     private int entry;
 
     /**
-     * Constructor to provide the entry number to set done.
+     * Constructor to provide the entry number to delete.
      *
-     * @param entry Entry number of the TaskList to set done.
+     * @param entry Entry number of the TaskList to delete.
      */
-    public DoneCommand(int entry) {
+    public DeleteCommand(int entry) {
         this.entry = entry;
     }
 
     /**
-     * Marks the task as done, informs the user that the task has been set as done and then writes
-     * the new change to the text file.
+     * Informs the user that the task is going to be deleted, actually delete the task from TaskList,
+     * then writes the new change to the text file.
      *
      * @param tasks TaskList of tasks to delete from.
      * @param ui UI to inform the user of deletion.
@@ -34,14 +35,14 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        tasks.markAsDone(entry);
+        Task toDelete = tasks.getTask(entry);
+        tasks.deleteFromList(entry);
         try {
             storage.writeToFile(tasks);
         } catch (IOException ex) {
             throw new DukeException("OOPS!!! I cannot read your file! :(");
         }
 
-        return ui.showDone(tasks.getTask(entry));
+        return ui.operateTask(toDelete, tasks, false);
     }
-
 }

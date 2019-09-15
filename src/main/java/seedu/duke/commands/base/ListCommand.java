@@ -1,4 +1,4 @@
-package seedu.duke.commands;
+package seedu.duke.commands.base;
 
 import seedu.duke.util.Storage;
 import seedu.duke.util.TaskList;

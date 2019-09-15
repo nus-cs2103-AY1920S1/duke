@@ -1,5 +1,6 @@
-package seedu.duke.commands;
+package seedu.duke.commands.base;
 
+import seedu.duke.commands.MasterCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.util.Storage;
 import seedu.duke.util.TaskList;
@@ -8,7 +9,7 @@ import seedu.duke.util.UI;
 /**
  * Abstract class to serve as the parent class for all other commands.
  */
-public abstract class Command {
+public abstract class Command extends MasterCommand {
 
     /**
      * Executes the command as defined in the children classes.

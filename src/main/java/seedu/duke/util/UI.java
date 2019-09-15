@@ -1,7 +1,10 @@
 package seedu.duke.util;
 
 import seedu.duke.tasks.Task;
+import seedu.duke.trivia.QuestionAnswer;
+import seedu.duke.trivia.Trivia;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UI {
@@ -21,6 +24,11 @@ public class UI {
     private static final String TASK_WRAPPER_LOWER = " tasks in the list.\n";
     private static final String FOUND = "Here are the matching tasks in your list:\n";
     private static final String NOT_FOUND = "OOPS!!! There weren't any matching tasks in your list!\n";
+    private static final String TRIVIA_QUESTION_ADDED = "Ho, I see you have added a question:\n";
+    private static final String ERROR_CANNOT_LOAD_TRIVIA = "It's time to start from a clean slate. THE WORLD!!!";
+    private static final String TRIVIA_START = "Answer my questions, filthy Joestar.";
+    private static final String TRIVIA_ANSWER_ADDED = "Hm, so that is the answer to this question:\n";
+    private static final String TRIVIA_EXIT = "No, this cannot be, I AM DIOOOOOOOO!!!";
 
     /**
      * Prints out a welcome message.
@@ -67,7 +75,7 @@ public class UI {
             return TASK_WRAPPER_UPPER + task + "\n" + NOW_YOU_HAVE + taskList.getTaskListSize()
                     + TASK_WRAPPER_LOWER;
         } else {
-            return TASK_WRAPPER_UPPER_DELETE + task + "\n" + NOW_YOU_HAVE + (taskList.getTaskListSize() - 1)
+            return TASK_WRAPPER_UPPER_DELETE + task + "\n" + NOW_YOU_HAVE + taskList.getTaskListSize()
                     + TASK_WRAPPER_LOWER;
         }
     }
@@ -100,5 +108,42 @@ public class UI {
      */
     public String bye() {
         return BYE;
+    }
+
+    public String startTrivia() {
+        return TRIVIA_START;
+    }
+
+    /**
+     * Prints out and error if trivia cannot be loaded.
+     */
+    public String cannotLoadTrivia() {
+        return ERROR_CANNOT_LOAD_TRIVIA;
+    }
+
+    /**
+     * Displays the answer that was added to the trivia.
+     *
+     * @return Message informing user that answer has been added.
+     */
+    public String questionAdded(String question) {
+        return TRIVIA_QUESTION_ADDED + question;
+    }
+
+    public String answerAdded(String answer, String question) {
+        return answer + "\n" + TRIVIA_ANSWER_ADDED + question;
+    }
+
+    public String viewAllTrivia (Trivia trivia) {
+        ArrayList<QuestionAnswer> questionBank = trivia.getQuestionBank();
+        String temp = "So this is all you have so far:\n";
+        for (QuestionAnswer qa: questionBank) {
+            temp = temp + qa.getQuestion() + "\n\n" + qa.getAnswers() + "\n";
+        }
+        return temp;
+    }
+
+    public String exitTrivia() {
+        return TRIVIA_EXIT;
     }
 }

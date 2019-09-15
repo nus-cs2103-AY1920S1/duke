@@ -1,15 +1,17 @@
 package seedu.duke.util;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import seedu.duke.Duke;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.TriviaException;
 import seedu.duke.tasks.Deadline;
 import seedu.duke.tasks.Event;
 import seedu.duke.tasks.Task;
 import seedu.duke.tasks.Todo;
+import seedu.duke.trivia.Trivia;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,16 +21,19 @@ import java.util.Scanner;
 public class Storage {
     private ArrayList<Task> taskList = new ArrayList<Task>();
     private File file;
+    private File trivia;
     private Scanner fileReader;
+    private FileReader triviaReader;
     private FileWriter writer;
+    private Gson gson;
 
     /**
-     * Constructor to handle saving and loading takes in a path to create the file to operate on.
-     *
-     * @param savedPath Path of the text file in local storage.
+     * Constructor to handle saving and loading.
      */
-    public Storage(String savedPath) {
-        file = new File(savedPath);
+    public Storage(String list, String trivia) {
+        gson = new Gson();
+        file = new File(list);
+        this.trivia = new File(trivia);
     }
 
     /**
@@ -37,7 +42,7 @@ public class Storage {
      * @return Returns the ArrayList for use in the TaskList class.
      * @throws DukeException Throws if there is no file.
      */
-    public ArrayList<Task> loadFromFile() throws DukeException {
+    public ArrayList<Task> loadList() throws DukeException {
         try {
             fileReader = new Scanner(file);
             while (fileReader.hasNext()) {
@@ -60,6 +65,20 @@ public class Storage {
             throw new DukeException("YOoooUR fILe haS BeEN cORRupTEd.");
         } catch (FileNotFoundException ex) {
             throw new DukeException();
+        }
+    }
+
+    public Trivia loadTrivia() throws TriviaException {
+        try {
+            triviaReader = new FileReader(trivia);
+            Trivia returnTrivia = gson.fromJson(triviaReader, Trivia.class);
+            if (returnTrivia == null) {
+                return new Trivia();
+            } else {
+                return returnTrivia;
+            }
+        } catch (IOException ex) {
+            throw new TriviaException();
         }
     }
 
@@ -186,6 +205,17 @@ public class Storage {
             throw new IOException();
         }
         writer.close();
+    }
+
+    public void writeTrivia(Trivia triviaToWrite) throws TriviaException {
+        try {
+            String json = gson.toJson(triviaToWrite);
+            writer = new FileWriter(trivia);
+            writer.write(json);
+            writer.close();
+        } catch (IOException ex) {
+            throw new TriviaException();
+        }
     }
 
 }

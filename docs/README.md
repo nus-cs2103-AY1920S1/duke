@@ -89,7 +89,9 @@ Should there be any other issues faced with Duke, feel free to contact the devel
 Should there be any other issues with Duke, feel free to enter the `help` command to get a list of commands that Duke support. Also, typing `morehelp` will give a more detailed explanation on how to use Duke.
 <br>
 <br>
+
 ---
+
 ## <a id="4">4. Feedback and Contact us</a>
 ### <a id="4.1">4.1 Contact us</a>
 Thank you for using Duke. Feel free to drop the developer a feedback in order to improve Duke further! I can be connected through the following channels:
@@ -104,6 +106,7 @@ Thank you for using Duke. Feel free to drop the developer a feedback in order to
 <marquee class="GeneratedMarquee" direction="right" scrollamount="5" behavior="alternate" fontFamily="comic sans">
 	Thank you for using Duke! Hope that he is of good use to you! :)
 </marquee>
+
 ```
  ________  ___  ___  ___  __    _______      
 |\   ___ \|\  \|\  \|\  \|\  \ |\  ___ \     

@@ -1,6 +1,13 @@
 package duke.parse;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.SearchCommand;
+import duke.command.DoneCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyToDoDescriptionException;
 import duke.exception.UnknownCommandException;

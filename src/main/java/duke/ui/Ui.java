@@ -23,7 +23,7 @@ public class Ui {
     }
 
     /**
-     * Prints a message when a task is deleted
+     * Prints a message when a task is deleted.
      */
     public String showDeleteMessage() {
         return "Noted. I've removed this task: \n";

@@ -25,10 +25,16 @@ public class Deadline extends Task {
         this.description = description;
     }
 
+    /**
+     * Updates a a particular task.
+     * @param updatedContents String specifying contents to be updated with
+     */
     public void update(String updatedContents) {
         String[] taskContentsList = updatedContents.split(" /by ");
-        setDescription(taskContentsList[0]);
-        setDeadline(taskContentsList[1]);
+        String description = taskContentsList[0];
+        String deadline = taskContentsList[1];
+        setDescription(description);
+        setDeadline(deadline);
     }
 
     @Override

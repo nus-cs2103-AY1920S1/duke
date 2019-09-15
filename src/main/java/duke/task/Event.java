@@ -21,10 +21,14 @@ public class Event extends Task {
         this.at = new DateTime(at);
     }
 
-    public void setDescription (String description) {
+    public void setDescription(String description) {
         this.description  = description;
     }
 
+    /**
+     * Updates a particular task.
+     * @param updatedContents String specifying contents to be updated with
+     */
     public void update(String updatedContents) {
         String[] taskContentsList = updatedContents.split(" /at ");
         setDescription(taskContentsList[0]);

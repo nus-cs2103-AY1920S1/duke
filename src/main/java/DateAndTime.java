@@ -42,7 +42,7 @@ public class DateAndTime {
 	 * @param time Time of the deadline or event.
 	 * @return Formatted time.
 	 */
-	public String formatTime(String time) {
+	public static String formatTime(String time) {
 		boolean isString = false;
 		String formattedTime = "";
 		try {
@@ -225,4 +225,5 @@ public class DateAndTime {
 		}
 		return formatDeadline;
 	}
+
 }

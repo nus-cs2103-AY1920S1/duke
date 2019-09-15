@@ -63,6 +63,10 @@ public class Parser {
 				String deletedTask = taskToDelete.execute(tasks, wf);
 				storedText.append(deletedTask);
 
+			} else if (input.startsWith("stats")) {
+				Command taskStats = new StatisticsCommand();
+				String stats = taskStats.execute(tasks, wf);
+				storedText.append(stats);
 			} else {
 				throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 			}

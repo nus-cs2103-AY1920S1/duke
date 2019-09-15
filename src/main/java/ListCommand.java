@@ -3,6 +3,7 @@ public class ListCommand extends Command{
 	private String input;
 
 	public ListCommand(String input) {
+
 		this.input = input;
 	}
 

@@ -1,10 +1,12 @@
 # User Guide
 
+Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a case insensitve CLI application.
+
 ## Features 
 
 ### 
 
-Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a case insensitve CLI application.
+
 
 
 
@@ -77,4 +79,31 @@ Got it. I've added this task:
   [T] Homework
 Now you have 5 tasks in the list.
 ```
+
+### `event` - Adds an Event to the task list.
+
+The user can add an Event to the task list to track any event that he/she may have in his/her schedule. The event requires a date and time to be furnished with the event description.
+
+Example of usage: 
+`event Birthday celebration /at 12/10/2019 1503`
+Example of expected outcome:
+```
+Got it. I've added this task:
+  [E] Birthday celebration
+Now you have 5 tasks in the list.
+```
+
+### `deadline` - Adds an task with deadline to the task list.
+
+The user can add a task with a deadline to the task list to track any deadlines he/she has. The deadline requires a date and time to be furnished with the deadline task description.
+
+Example of usage: 
+`deadline CS2103 IP /by 12/10/2019 1503`
+Example of expected outcome:
+```
+Got it. I've added this task:
+  [D] CS2103 IP
+Now you have 5 tasks in the list.
+```
+
 

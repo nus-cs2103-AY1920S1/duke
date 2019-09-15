@@ -23,7 +23,8 @@ public abstract class Command {
         this.inputSplit = inputSplit;
     }
 
-    public Command() {}
+    public Command() {
+    }
 
     public Command(String[] inputSplit) {
         this.inputSplit = inputSplit;

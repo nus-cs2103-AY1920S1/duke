@@ -81,7 +81,7 @@ public class Parser {
         case "delete":
             return new DeleteCommand(inputSplit);
         case "find":
-            return new FindCommand(userInput.replaceFirst("find ", ""));
+            return new FindCommand(inputSplit, userInput.replaceFirst("find ", ""));
         case "update":
             return new UpdateCommand(filePath, userInput, inputSplit);
         default:

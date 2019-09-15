@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.helper.Storage;
 import duke.helper.Ui;
 import duke.task.Task;
@@ -15,13 +16,16 @@ import java.util.stream.Collectors;
 public class FindCommand extends Command {
     private String keyword;
 
-    public FindCommand(String keyword) {
-        super();
+    public FindCommand(String[] inputSplit, String keyword) {
+        super(inputSplit);
         this.keyword = keyword;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (inputSplit.length == 1) {
+            throw new DukeException(":( OOPS!!! Please provide a keyword to find.");
+        }
         ArrayList<Task> taskArrayList = tasks.toArrayList();
         List<Task> temp =
                 taskArrayList.parallelStream()

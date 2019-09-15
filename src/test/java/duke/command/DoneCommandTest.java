@@ -10,7 +10,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DoneCommandTest {
@@ -20,30 +19,12 @@ public class DoneCommandTest {
     public void executeDone_noTaskNumber_exceptionThrown() {
         try {
             System.setOut(new PrintStream(outContent));
-            new DoneCommand("", new String[]{"done"})
+            new DoneCommand(new String[]{"done"})
                     .execute(new TaskList(), new Ui(null, null), new Storage("", null));
             fail();
         } catch (DukeException de) {
             String correctExpected = ":( OOPS!!! Please specify number of a single task to mark as done.\n";
             assertEquals(correctExpected, de.getMessage());
         }
-    }
-
-    @Test
-    public void executeDone_intBeyondList_exceptionThrown() {
-        try {
-            System.setOut(new PrintStream(outContent));
-            new DoneCommand("", new String[]{"done", "100"})
-                    .execute(new TaskList(), new Ui(null, null), new Storage("", null));
-            fail();
-        } catch (DukeException de) {
-            String correctExpected = ":( OOPS!!! Please specify valid task number.\n";
-            assertEquals(correctExpected, de.getMessage());
-        }
-    }
-
-    @Test
-    public void testIsExitValue() {
-        assertFalse(new DoneCommand("", null).isExit());
     }
 }

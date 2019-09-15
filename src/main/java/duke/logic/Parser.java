@@ -50,7 +50,7 @@ public class Parser {
             } else if (command.startsWith("list")) {
                 message = ui.list(list);
             } else if (command.startsWith("done")) {
-                list.get(Integer.parseInt(command.split(" ")[1]) - 1).setAsDone();
+                list.get(Integer.parseInt(command.split(" ")[1])).setAsDone();
                 message = ui.done(list, Integer.parseInt(command.split(" ")[1]));
             } else if (command.startsWith("find")) {
                 ArrayList<TaskWithOrder> matchingTasks = list.search(command.split(" ")[1]);

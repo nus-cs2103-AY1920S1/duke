@@ -46,6 +46,8 @@ public class Event extends Task {
         super(taskType, taskDescription, isDone);
 
         try {
+            System.out.println(givenTime);
+
             df = new SimpleDateFormat("dd/mm/yyyy Hm");
             this.givenTime = df.parse(givenTime, new ParsePosition(0));
 

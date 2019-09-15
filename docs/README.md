@@ -3,6 +3,7 @@
 0. Ensure that you have Java on your system.
 1. Download `jar` file from release.
 2. Execute `jar` file. GUI should appear in a few seconds
+![Image of UI](/docs/Ui.png)
 3. Type in commands and press `enter` on the keyboard or the "Send" button to execute them.
 
 ## Features 

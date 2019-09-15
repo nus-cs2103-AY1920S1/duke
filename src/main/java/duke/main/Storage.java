@@ -43,6 +43,9 @@ public class Storage {
         ArrayList<Task> returnTaskList = new ArrayList<>(100);
         File file = new File(filePath);
         file.createNewFile();
+    
+        assert new File(filePath).exists();
+        
         List<String> savedList = Files.readAllLines(file.toPath());
         for (String line : savedList) {
             String[] lineElements = Parser.parseStoredLine(line);

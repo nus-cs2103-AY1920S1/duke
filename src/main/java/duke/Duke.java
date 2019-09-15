@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 /**
  * Represents a Duke object. A <code>Duke</code> object corresponds to
@@ -184,6 +183,6 @@ public class Duke extends Application {
      * Creates new Duke object.
      */
     public static void main(String[] args) {
-        new Duke("/Users/Bernice/Desktop/CS2103T/duke/duke.txt").run();
+        new Duke("duke.txt").run();
     }
 }

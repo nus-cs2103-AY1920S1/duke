@@ -29,17 +29,17 @@
     Expected outcome:
     ```
     Got it. I've added this task:
-      [T][ ] buy food
+      [T][✘] buy food
     Now you have 1 tasks in the list.
     ```
     ```
     Got it. I've added this task:
-      [D][ ] assignment (by: 29th Sep 2019, 11.59pm) 
+      [D][✘] assignment (by: 29th Sep 2019, 11.59pm) 
     Now you have 2 tasks in the list.
     ```
     ```
     Got it. I've added this task:
-      [E][ ] anniversary (at: 31st Dec 2019, 12.00am)
+      [E][✘] anniversary (at: 31st Dec 2019, 12.00am)
     Now you have 3 tasks in the list.
     ```
   
@@ -53,7 +53,7 @@
   Expected outcome:
   ```
   Noted. I've removed this task:
-    [T][ ] buy food
+    [T][✘] buy food
   Now you have 2 tasks in the list.
   ```
 
@@ -67,7 +67,7 @@
   Expected outcome:
   ```
   Nice! I've marked this task as done:
-    [D][x] assignment (by: 29th Sep 2019, 11.59pm) 
+    [D][✔] assignment (by: 29th Sep 2019, 11.59pm) 
   ```
 
 ### `List` 
@@ -80,8 +80,8 @@
   Expected outcome:
   ```
   Here are the tasks in your list:
-    1. [D][x] assignment (by: 29th Sep 2019, 11.59pm) 
-    2. [E][ ] anniversary (at: 31st Dec 2019, 12.00am)
+    1. [D][✔] assignment (by: 29th Sep 2019, 11.59pm) 
+    2. [E][✘] anniversary (at: 31st Dec 2019, 12.00am)
   ```
   
 ### `Find` 
@@ -94,7 +94,7 @@
   Expected outcome:
   ```
   Here are the matching tasks:
-    2. [E][ ] anniversary (at: 31st Dec 2019, 12.00am)
+    2. [E][✘] anniversary (at: 31st Dec 2019, 12.00am)
   ```
 
 ### `Bye` 

@@ -4,7 +4,7 @@
 
 ## Usage
 
-You can start up **Rori** by running up Rori.jar file, or subsequently you could clone the repo and run on the root folder using:
+You can start up **Rori** by running up Rori.jar file found in ./build/libs/Rori-1.0.3.jar, or subsequently you could clone the repo and run on the root folder using:
 ```
 gradlew run
 ```

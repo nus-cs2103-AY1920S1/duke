@@ -6,7 +6,7 @@
 3. Type in commands and press `enter` on the keyboard or the "Send" button to execute them.
 
 ## Screenshot
-![Image of UI](/docs/Ui.png)
+![Image of UI](https://github.com/dingyuchen/duke/blob/master/docs/Ui.png)
 
 ## Features 
 

@@ -46,7 +46,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String welcomeLine = logo + "\nHello! I'm Duke\nWhat can I do for you?\n";
+        String welcomeLine = logo + "\nHello! I'm DUDE!\nWhat can I do for you?\n";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeLine, duke));
     }
 

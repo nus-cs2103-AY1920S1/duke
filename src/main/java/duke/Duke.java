@@ -115,7 +115,7 @@ public class Duke extends Application {
 
     private void createStage(Stage primaryStage, AnchorPane mainLayout) {
         scene = new Scene(mainLayout);
-        primaryStage.setTitle("Duke");
+        primaryStage.setTitle("DUDE");
         primaryStage.setResizable(false);
         primaryStage.setMinHeight(600.0);
         primaryStage.setMinWidth(400.0);

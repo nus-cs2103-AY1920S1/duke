@@ -4,6 +4,7 @@
 
 ### 
 
+Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a case insensitve CLI application.
 
 
 
@@ -45,8 +46,35 @@ Here are the tasks in your list:
 
 ### `help` - Show help page to assist user in commands available
 
-
+Shows the various commands that the Duke chat bot uses in the application. 
 
 Example of usage: 
-
 `help`
+Example of expected outcome:
+```
+Welcome to help page!
+Here are some commands you can use:
+list, todo, event, deadline, done, delete, find, bye
+```
+The user can further check the syntax required of each command to use it, by supplying the command interested.
+
+Example of usage: 
+`help done`
+Example of expected outcome:
+```
+Here is what I found!
+delete <task number>
+```
+### `todo` - Adds a To Do task to the task list.
+
+The user can add a To Do task that has no deadline to the task list.
+
+Example of usage: 
+`todo Homework`
+Example of expected outcome:
+```
+Got it. I've added this task:
+  [T] Homework
+Now you have 5 tasks in the list.
+```
+

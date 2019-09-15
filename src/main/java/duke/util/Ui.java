@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class Ui {
 
     private Scanner sc = new Scanner(System.in);
+    static final String TAB = "     ";
     private static final String LINE = "    ____________________________________________________________";
 
     /**
@@ -36,7 +37,7 @@ public class Ui {
      * @param e error message when caught
      */
     public void showError(String e) {
-        System.err.println(e);
+        System.err.println(TAB + e);
     }
 
     /**
@@ -62,7 +63,8 @@ public class Ui {
      * @param numOfTasks number of tasks left on the list
      */
     String showDeleted(Task task, int numOfTasks) {
-       return "     Noted. I've removed this task: \n       " + task
+        return TAB +
+                "Noted. I've removed this task: \n       " + task
                         + "\n     Now you have " + numOfTasks + " tasks in the list.";
     }
 
@@ -98,7 +100,7 @@ public class Ui {
      * @param numOfTasks current number of tasks
      */
     String showAdded(Task task, int numOfTasks) {
-        return "     Got it. I've added this task: \n       " + task
+        return TAB + "Got it. I've added this task: \n       " + task
                 + "\n     Now you have " + numOfTasks + " tasks in the list.";
     }
 
@@ -108,6 +110,6 @@ public class Ui {
      * @param task task marked as done
      */
     String showDone(Task task) {
-        return "     Nice! I've marked this task as done: \n       " + task;
+        return TAB + "Nice! I've marked this task as done: \n       " + task;
     }
 }

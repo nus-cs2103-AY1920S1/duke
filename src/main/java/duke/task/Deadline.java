@@ -1,7 +1,10 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a deadline task.
@@ -17,12 +20,14 @@ public class Deadline extends Task {
      * @param description description of the task
      * @param by deadline of the task
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         this.by = by;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             time = LocalDateTime.parse(by, formatter);
+        } catch (IllegalArgumentException | DateTimeParseException e) {
+            throw new DukeException(e.getMessage());
         } catch (Exception err) {
             System.err.println(err.getMessage());
         }

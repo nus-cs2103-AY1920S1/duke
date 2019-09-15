@@ -6,7 +6,6 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 import duke.util.Parser;
-import javafx.scene.layout.AnchorPane;
 
 /**
  * This is the main class of the program.
@@ -41,7 +40,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();

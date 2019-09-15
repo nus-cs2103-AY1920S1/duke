@@ -58,17 +58,22 @@ public class Storage {
      * @throws DukeException if file is not found
      */
     void writeToFile(ArrayList<Task> taskList) throws DukeException {
-        StringBuilder toSave = new StringBuilder();
-        for (Task task : taskList) {
-            toSave.append(task.saveData().append("\n"));
-        }
+        String toSave = convertToString(taskList);
         try {
             FileWriter fw = new FileWriter(filepath);
-            fw.write(toSave.toString());
+            fw.write(toSave);
             fw.close();
         } catch (IOException e) {
             throw new DukeException("    File path not defined!");
         }
+    }
+
+    private String convertToString(ArrayList<Task> taskList) {
+        StringBuilder toSave = new StringBuilder();
+        for (Task task : taskList) {
+            toSave.append(task.saveData().append("\n"));
+        }
+        return toSave.toString();
     }
 
     /**

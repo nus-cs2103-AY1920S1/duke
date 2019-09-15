@@ -16,48 +16,76 @@ public class Parser {
      * @throws DukeException if the command is invalid
      */
     public static Command parse(String fullCommand) throws DukeException {
-        assert fullCommand.isEmpty() : "Please enter something!";
+        assert !fullCommand.isEmpty() : "Please enter something!";
         String[] commandWords = fullCommand.split(" ");
         String action = commandWords[0];
         try {
             switch (action) {
             case "done":
-                int doneItemNo = Integer.parseInt(commandWords[1]);
-                return new DoneCommand(doneItemNo);
+                return processDone(commandWords);
             case "delete":
-                int deletedItemNo = Integer.parseInt(commandWords[1]);
-                return new DeleteCommand(deletedItemNo);
+                return processDelete(commandWords);
             case "list":
                 return new ListCommand();
             case "bye":
                 return new ExitCommand();
             case "event":
-                String[] eventComponents = fullCommand.substring(6).split(" /at ");
-                String eventDescription = eventComponents[0];
-                String eventTime = eventComponents[1];
-                return new AddCommand(action, eventDescription, eventTime);
+                return processEvent(fullCommand, action);
             case "todo":
-                String todoDescription = fullCommand.substring(5);
-                return new AddCommand(todoDescription);
+                return processTodo(fullCommand);
             case "deadline":
-                String[] deadlineComponents = fullCommand.substring(9).split(" /by ");
-                String deadlineDescription = deadlineComponents[0];
-                String deadlineTime = deadlineComponents[1];
-                return new AddCommand(action, deadlineDescription, deadlineTime);
+                return processDeadline(fullCommand, action);
             case "find":
                 String taskToBeFound = fullCommand.substring(5);
                 return new FindCommand(taskToBeFound);
             case "sort":
                 return new SortCommand();
             default:
-                throw new DukeException("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(Ui.TAB + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("     Please enter the description!");
+            throw new DukeException(Ui.TAB + "Please enter the description!");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("     Please enter the time/date!!");
+            throw new DukeException(Ui.TAB + "Please enter the time/date!!");
         } catch (Exception e) {
+            throw new DukeException(Ui.TAB + e.getMessage());
+        }
+    }
+
+    private static Command processEvent(String fullCommand, String action) throws DukeException {
+        String[] eventComponents = fullCommand.substring(6).split(" /at ");
+        String eventDescription = eventComponents[0];
+        String eventTime = eventComponents[1];
+        return new AddCommand(action, eventDescription, eventTime);
+    }
+
+    private static Command processDeadline(String fullCommand, String action) throws DukeException {
+        String[] deadlineComponents = fullCommand.substring(9).split(" /by ");
+        String deadlineDescription = deadlineComponents[0];
+        String deadlineTime = deadlineComponents[1];
+        return new AddCommand(action, deadlineDescription, deadlineTime);
+    }
+
+    private static Command processTodo(String fullCommand) {
+        String todoDescription = fullCommand.substring(5);
+        return new AddCommand(todoDescription);
+    }
+
+    private static Command processDone(String[] commandWords) throws DukeException {
+        try {
+            int doneItemNo = Integer.parseInt(commandWords[1]);
+            return new DoneCommand(doneItemNo);
+        } catch (NumberFormatException e) {
             throw new DukeException(e.getMessage());
+        }
+    }
+
+    private static Command processDelete(String[] commandWords) throws DukeException {
+        try {
+            int deletedItemNo = Integer.parseInt(commandWords[1]);
+            return new DeleteCommand(deletedItemNo);
+        } catch (NumberFormatException e) {
+            throw new DukeException((e.getMessage()));
         }
     }
 }

@@ -19,7 +19,7 @@ public class CmdUx {
      * @param str The message
      */
     public static void printHBars(String str) {
-        String horizontalBar = "    _______________________________________________________________________";
+        String horizontalBar = "    __________________________________________________________________________________";
         String[] strSplit = str.split("\n");
         StringBuilder sb = new StringBuilder();
         sb.append(horizontalBar + "\n");

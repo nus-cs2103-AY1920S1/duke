@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 
 public class Duke {
 
-//    private static final String ROOT = "D:\\Gary\\Uni\\NUS\\1920SEM1\\CS2103T\\Practices\\duke";
     private static final String ROOT = Paths.get(System.getProperty("user.dir")).getRoot().toString();
     private static final String STORAGE_PATH = "\\duke.txt";
     private static final Logger LOGGER = Logger.getLogger(Duke.class.getName());

@@ -74,7 +74,7 @@ Creates a deadline.
 
 **Expected outcome:**
 
-A new deadline called `description` is created and has a due date by `date`.
+A new deadline called `description` is created and has a due date by `date`. The date format is `dd/MM/YYYY HHmm`.
 
 ---
 
@@ -88,7 +88,7 @@ Creates an event.
 
 **Expected outcome:**
 
-A new event called `description` is created and is set at `date`.
+A new event called `description` is created and is set at `date`. The date format is `dd/MM/YYYY HHmm`.
 
 ---
 

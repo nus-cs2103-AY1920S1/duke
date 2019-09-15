@@ -19,6 +19,7 @@ public class Parser {
      */
     public void parse() {   //cannot use "|" as a replacement
         String temp = this.inputString.replaceFirst(" ", ":");
+        System.out.println(temp);
         String[] tempArr = temp.split(":");
         command = (String) Array.get(tempArr, 0);
         if (tempArr.length > 1) {  //account for the fact that commands like "list" do not have duke.task details

@@ -4,8 +4,10 @@ import duke.command.Command;
 import duke.command.CommandType;
 import duke.command.UndoAction;
 import duke.task.Task;
+import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
+import ui.UiController;
 
 import java.util.Optional;
 
@@ -23,8 +25,8 @@ public class DeleteCommand extends Command {
      * @param argument index of task to be deleted
      * @throws CommandCreationException if arguments are invalid
      */
-    public DeleteCommand(String argument) throws CommandCreationException {
-        super(CommandType.DELETE);
+    public DeleteCommand(String argument, UiController ui, TasksController tasksController) throws CommandCreationException {
+        super(null, ui, tasksController);
 
         try {
             deletedTaskIndex = Integer.parseInt(argument) - 1;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Arguments {
+public class TaskArguments {
 
     private final String dateTimeRegex =
             "(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})\\s?([0-9]{4}))";
@@ -20,7 +20,7 @@ public class Arguments {
 
     private String arguments;
 
-    protected Arguments(String arguments) {
+    protected TaskArguments(String arguments) {
         this.arguments = arguments;
     }
 

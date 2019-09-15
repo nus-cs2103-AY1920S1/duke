@@ -3,8 +3,10 @@ package duke.command.command;
 import duke.command.Command;
 import duke.command.CommandType;
 import duke.command.UndoAction;
+import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
+import ui.UiController;
 
 import java.util.Optional;
 
@@ -14,8 +16,8 @@ import java.util.Optional;
 public class FindCommand extends Command {
     private String searchParameter;
 
-    public FindCommand(String arguments) throws CommandCreationException {
-        super(CommandType.FIND);
+    public FindCommand(String arguments, UiController ui, TasksController tasksController) throws CommandCreationException {
+        super(CommandType.FIND, ui, tasksController);
         searchParameter = arguments;
     }
 

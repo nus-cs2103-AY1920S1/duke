@@ -5,9 +5,8 @@ import duke.task.tasks.entities.TaskType;
 import error.command.DateTimeExtractionException;
 import error.task.TaskCreationException;
 import error.datetime.UnknownDateTimeException;
-import util.command.Arguments;
+import util.command.TaskArguments;
 import util.command.CommandUtils;
-import util.DateTime;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -16,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Factory to produce tasks.
@@ -37,7 +34,7 @@ public class TaskFactory {
      */
     public Optional<Task> getTask(String input) throws TaskCreationException {
         // gets first word of input
-        String keyword = CommandUtils.getCommand(input);
+        String keyword = input.split(" ", 2)[0];
 
         // scans task types to find corresponding keyword
         Optional<TaskType> taskTypeOptional = Arrays.stream(TaskType.values())
@@ -83,7 +80,7 @@ public class TaskFactory {
      */
     private List<Object> getArguments(String input, int numDates) throws TaskCreationException {
         // gets arguments
-        Arguments arguments = CommandUtils.getArguments(input);
+        TaskArguments arguments = CommandUtils.getTaskArguments(input);
 
         List<Object> argsList = new ArrayList<>();
 

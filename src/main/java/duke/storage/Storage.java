@@ -35,11 +35,12 @@ public class Storage {
     }
 
     /**
-     * Gets the current task list in the database if any.
+     * Gets the current task list in the database if any, else create a new text file.
      *
-     * @return Returns a list of tasks.
+     * @return The list of tasks.
+     * @throws IOException If an I/O error is incurred.
      */
-    public List<Task> load() {
+    public List<Task> load() throws IOException {
         File file = new File(filePath);
         List<Task> list = new LinkedList<>();
 
@@ -65,7 +66,8 @@ public class Storage {
                 list.add(task);
             }
         } catch (FileNotFoundException e) {
-            throw new DukeException("Data file does not exist.");
+            file.getParentFile().mkdir();
+            file.createNewFile();
         }
         return list;
     }

@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 
 import duke.storage.Storage;
@@ -29,7 +31,7 @@ public class Duke {
         storage = new Storage(filePath, ui);
         try {
             taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (IOException e) {
             taskList = new TaskList();
         }
     }

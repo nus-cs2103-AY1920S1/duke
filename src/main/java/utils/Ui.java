@@ -1,5 +1,7 @@
 package utils;
-
+/**
+ * Ui class handles everything to do with printing to console and formatting strings
+ */
 public class Ui{
     public Ui(){
         logo();
@@ -36,9 +38,7 @@ public class Ui{
     public void printTab(String str){
         print("    " + str);
     }
-    public void showLoadingError(){
-
-    }
+    
     public void bye(){
         System.out.println(addDoubleLine("     Bye. Hope to see you again soon!"));
     }

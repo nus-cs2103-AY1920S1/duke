@@ -7,7 +7,15 @@ import java.util.Date;
 public class DateTime{
     protected String input;
     protected Date date;
-
+    /**
+     * 
+     * @param input
+     * @throws ParseException
+     * 
+     * changes the datetime string input to a simpledateformat object
+     * centralised so that can be standardized accross tasks
+     * 
+     */
     public DateTime(String input) throws ParseException {
         String dateFormat = "dd-MM-yyyy HH:mm";
         SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);

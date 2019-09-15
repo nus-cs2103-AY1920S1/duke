@@ -19,7 +19,13 @@ public class Storage {
         this.file = new File(fileloc);
     }
 
-    //reading from saved state
+    /**
+     * 
+     * @return
+     * called when duke is initialised,
+     * reads the file and re-adds the tasks back into a new arraylist to be
+     */
+
     public ArrayList<Task> load(){
         ArrayList<Task> tasks = new ArrayList<>();
         try{
@@ -68,6 +74,12 @@ public class Storage {
         }		     
         return tasks;
     }
+    /**
+     * 
+     * @param tasks
+     * writes the tasks inside the tasklist into the txtfile
+     */
+    
     public void saveFile(TaskList tasks){
         try {
             FileWriter fw = new FileWriter(fileLocation);

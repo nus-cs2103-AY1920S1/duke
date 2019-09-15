@@ -5,21 +5,25 @@ import utils.Ui;
 import utils.Parser;
 import exceptions.DukeException;;
 
+/**
+ * this class is the main class of the application, it initializes the main components 
+ * and passes them as references to the others.
+ */
+
 public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    /**
-     * @param filepath
-     * class constructor
-     */
     public Duke(String filepath){
         ui = new Ui();
         storage = new Storage(filepath);
         tasks = new TaskList(storage.load(), ui);
     }
     
+    /**
+     * runs every command-line command through the parser method 
+     */
     
     public void run(){
         Scanner sc = new Scanner(System.in);

@@ -13,7 +13,13 @@ public class Parser {
         this.ui = ui;
         this.storage = storage;
     }
-
+    /**
+     * 
+     * @param str
+     * @throws DukeException
+     * takes user input and makes corresponding task object to be put inside tasklist 
+     * error handling done through DukeException
+     */
     public void parse(String str) throws DukeException{
         try{
             String[] splited = str.split(" ");

@@ -5,11 +5,13 @@ import java.io.IOException;
 import duke.ui.MainWindow;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+
 import javafx.stage.Stage;
 
 /**
@@ -28,9 +30,15 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().showWelcomeMessage();
+            stage.setTitle("Duke");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void exit() {
+        Platform.exit();
+        System.exit(0);
     }
 }

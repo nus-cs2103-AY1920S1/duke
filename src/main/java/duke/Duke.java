@@ -40,7 +40,7 @@ public class Duke {
      * Returns the welcome message and gets Ui to show the current tasks in the list.
      */
     public String getWelcomeMessage() {
-        return ui.showWelcome(taskList.getTasks());
+        return ui.showWelcome();
     }
 
     /**

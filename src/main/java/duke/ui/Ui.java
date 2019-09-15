@@ -20,15 +20,6 @@ public class Ui {
     }
 
     /**
-     * Reads the user input and returns it.
-     *
-     * @return The user command.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
      * Returns error message.
      *
      * @param error Error message to be reflected to the user.
@@ -38,23 +29,11 @@ public class Ui {
     }
 
     /**
-     * Returns the welcome message and the existing tasks if any.
-     *
-     * @param tasks The existing task list in the database.
+     * Returns the welcome message.
      */
-    public String showWelcome(List<Task> tasks) {
+    public String showWelcome() {
         sb = new StringBuilder();
-        sb.append("Hello! I'm Duke\n" + "What can I do for you?\n");
-
-        try {
-            if (!tasks.isEmpty()) {
-                sb.append(printTasks(tasks));
-            } else {
-                sb.append("There are no tasks in the list right now.\n");
-            }
-        } catch (DukeException e) {
-            sb.append(showError(e.getMessage()));
-        }
+        sb.append("Hello! I'm Duke\n" + "What can I do for you? :)\n");
         return sb.toString();
     }
 
@@ -82,7 +61,7 @@ public class Ui {
         int taskCounter = 0;
         for (Task task: tasks) {
             taskCounter++;
-            sb.append("  " + taskCounter + "." + task + "\n");
+            sb.append("  " + taskCounter + ". " + task + "\n");
         }
         return sb.toString();
     }

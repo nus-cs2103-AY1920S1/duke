@@ -9,7 +9,7 @@ Have fun!
 ## Quick Start
 1. Ensure you have Java 11 or above installed in your Computer.  
 
-1. Download the latest dukebot.jar at https://github.com/calvincxz/duke/releases/tag/v1.2
+1. Download the latest dukebot.jar at [here](https://github.com/calvincxz/duke/releases/tag/v1.2)
 
 ## Features 
 

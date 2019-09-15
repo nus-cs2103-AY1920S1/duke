@@ -18,7 +18,7 @@ public class Command {
     private static final String COMMANDS_LIST =
             "1) list: view your Todo list\n"
                     + "2) done {task_number}: mark a task as done\n"
-                    + "3) delete {task_number}: delete a task\n"
+                    + "3) delete task {task_number}: delete a task\n"
                     + "4) find {query}: find tasks containing {query}\n\n"
                     + "          ---Task Commands---\n\n"
                     + "5) todo {task_name}\n"

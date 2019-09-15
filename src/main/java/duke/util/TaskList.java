@@ -247,8 +247,8 @@ class TaskList {
 
     private String createFixedDateFormat(String day, String month, String year) {
         String[] months = {"", "Jan", "Feb", "Mar",
-                "Apr", "May", "Jun", "Jul", "Aug",
-                "Sep", "Oct", "Nov", "Dec"
+            "Apr", "May", "Jun", "Jul", "Aug",
+            "Sep", "Oct", "Nov", "Dec"
         };
         return day + " " + months[Integer.parseInt(month)] + " " + year;
     }
@@ -305,6 +305,7 @@ class TaskList {
             throw new DukeException("Wrong number of arguments for date");
         }
     }
+
     private void isAllIntegers(String[] parts) throws DukeException {
         for (String part : parts) {
             if (!isInteger(part)) {

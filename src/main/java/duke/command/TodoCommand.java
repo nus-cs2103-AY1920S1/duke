@@ -3,6 +3,8 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.component.TaskList;
 import duke.database.Storage;
+import duke.function.CheckDuplicate;
+import duke.task.Task;
 import duke.task.Todo;
 
 /**
@@ -45,9 +47,17 @@ public class TodoCommand extends Command {
         if (data.isEmpty()) {
             throw new DukeException("OOPS !!! " + "The description of a todo cannot be empty.");
         }
+
         StringBuilder reply = new StringBuilder();
 
-        tasks.getTask().add(new Todo(data));
+        Todo todo = new Todo(data);
+        CheckDuplicate check = new CheckDuplicate(todo, tasks);
+
+        if (check.addTodo()) {
+            tasks.getTask().add(todo);
+        } else {
+            throw new DukeException("OOPS !!! " + "Duplicate Task Detected.");
+        }
 
         reply.append("Got it. I've added this task: ");
         reply.append("\n");

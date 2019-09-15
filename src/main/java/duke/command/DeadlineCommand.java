@@ -4,7 +4,9 @@ import duke.date.DateFormatter;
 import duke.exception.DukeException;
 import duke.component.TaskList;
 import duke.database.Storage;
+import duke.function.CheckDuplicate;
 import duke.task.Deadline;
+import duke.task.Task;
 
 /**
  * This Deadline Command class get the input of the task description
@@ -60,7 +62,17 @@ public class DeadlineCommand extends Command {
         String timeline = result[1].trim();
 
         DateFormatter formattedDate = new DateFormatter(timeline);
-        tasks.getTask().add(new Deadline(achieve, formattedDate.getTime()));
+
+        Deadline deadline = new Deadline(achieve, formattedDate.getTime());
+
+        CheckDuplicate check = new CheckDuplicate(deadline, tasks);
+
+        if (check.addDeadline()) {
+            deadline.setTime(formattedDate.getTime());
+            tasks.getTask().add(deadline);
+        } else {
+            throw new DukeException("OOPS !!! " + "Duplicate Task Detected.");
+        }
 
         reply.append("Got it. I've added this task: ");
         reply.append("\n");

@@ -17,7 +17,16 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
+        super.time = at;
         this.at = at;
+    }
+
+    /**
+     * Get time of event.
+     * @return String of event time.
+     */
+    public String getAt() {
+        return at;
     }
 
     /**

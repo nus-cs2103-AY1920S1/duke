@@ -6,6 +6,8 @@ again!
 Complete the following set up before 
 running this application in your computer.
 
+![User Interface](Ui.png)
+
 ## Prerequisites
 1. Java SE Development Kit 11
 

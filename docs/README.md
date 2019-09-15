@@ -1,3 +1,6 @@
+# Doggo
+![GitHub Logo](Ui.png)
+
 # User Guide
 Ever wanted a dog? Doggo is a virtual dog that does things for you at your command!
 You dont even need to feed it or provide a home for it. He provides unconditionally.
@@ -21,8 +24,6 @@ You dont even need to feed it or provide a home for it. He provides unconditiona
 ## Usage
 
 ### `meow` - Ask doggo what he can do for you.
-
-Doggo teaches you a list a of valid commands.
 
 Example of usage: 
 
@@ -67,7 +68,7 @@ Expected outcome:
 ![GitHub Logo](../assets/event.png)
 <hr>
 
-### `list` - Doggo list your task for you.
+### `list` - Doggo lists your task for you.
 
 Example of usage: 
 
@@ -120,10 +121,3 @@ Example of usage:
 Expected outcome:
 
 ![GitHub Logo](../assets/bye.png)
-![GitHub Logo](/assets/bye.png)
-Format: ![Alt Text](https://github.com/chrischenhui/duke/blob/master/images/done.png)
-Format: ![Alt Text](https://www.google.com)
-Format: ![Alt Text](www.google.com)
-Format: ![Alt Text](https://google.com)
-Format: ![Alt Text](google.com)
-<hr>

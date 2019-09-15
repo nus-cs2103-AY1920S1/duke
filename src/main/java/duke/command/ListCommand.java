@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.exception.EmptyTaskListException;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
@@ -18,9 +17,6 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (taskList.getSize() == 0) {
-            throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
-        }
         return ui.showList(taskList);
     }
 }

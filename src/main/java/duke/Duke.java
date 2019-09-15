@@ -68,13 +68,7 @@ public class Duke {
     private void run() {
         ui.print(ui.showHello());
         while (!Duke.isExitRunLoop) {
-            try {
-                String input = ui.getNextLine();
-                Command command = Parser.parse(input);
-                ui.print(command.execute(taskList, ui, storage));
-            } catch (DukeException | IOException e) {
-                ui.print(ui.showError(e));
-            }
+            ui.print(getResponse(ui.getNextLine()));
         }
     }
     

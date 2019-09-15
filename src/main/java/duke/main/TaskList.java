@@ -59,10 +59,18 @@ public class TaskList {
      * @param currentTask The Task object to be added.
      */
     public void addTask(Task currentTask) {
+        int currentSize = this.getSize();
         taskList.add(currentTask);
+        
+        assert (this.getSize() - currentSize == 1);
     }
     
     public Task deleteTask(int index) {
-        return this.taskList.remove(index);
+        int currentSize = this.getSize();
+        Task currentTask = taskList.remove(index);
+        
+        assert (currentSize - this.getSize() == 1);
+        
+        return currentTask;
     }
 }

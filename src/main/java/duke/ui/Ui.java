@@ -15,14 +15,23 @@ public class Ui {
 
     }
 
+    /**
+     * Prints a message when a task is marked as done.
+     */
     public String showDoneMessage() {
         return "Nice! I've marked this task as done: \n";
     }
 
+    /**
+     * Prints a message when a task is deleted
+     */
     public String showDeleteMessage() {
         return "Noted. I've removed this task: \n";
     }
 
+    /**
+     * Prints a message when a task is updated.
+     */
     public String showUpdateMessage() {
         return "The following task is updated: \n";
     }

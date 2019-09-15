@@ -30,7 +30,9 @@ public class Main extends Application {
         }
     }
 
-
+    /**
+     * Shuts down the application safely.
+     */
     public static void stopApplication() {
         Platform.exit();
         System.exit(0);

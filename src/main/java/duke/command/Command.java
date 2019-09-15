@@ -5,6 +5,9 @@ import duke.task.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * A base class for Commands that other specific commands inherit from.
+ */
 public abstract class Command {
     protected String message = "";
     protected boolean isExit;

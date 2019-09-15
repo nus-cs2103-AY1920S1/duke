@@ -286,7 +286,8 @@ Here are the tasks in your list:
 3. [E][X] This is an Event. (at: 12/09/2019) 
 ```
 
-![tutorial](/docs/tutorial.png?raw=true "How to tutorial")
+![tutorial](https://raw.github.com/Kyzure/duke/blob/master/docs/tutorial.png)
+
 
 ## Authors
 

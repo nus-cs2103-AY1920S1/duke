@@ -190,6 +190,7 @@ To execute the same command to multiple tasks at once, add `, ` between the inde
 :exclamation: This only applies to `done`, `delete`, `find` commands.
 
 <br> 
+<br> 
 
 ## **Viewing of Statistics** <a name="stats"></a>
 
@@ -198,12 +199,14 @@ To view an overview of the tasks done over time, there are two ways:
 1. Click on the **Show Statistics** button on the top of the application as shown below.
 <img src="https://github.com/EvonDong/duke/blob/master/docs/showStats1.png" width="480">
 
+<br>
 
 2. Key in `show stats` in the command line: `show stats`
 
 This is an example of an expected chart:  
     <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="480">
 
+<br>
 <br>
 
 ## **Glossary** <a name="glossary"></a>

@@ -11,17 +11,17 @@ You dont even need to feed it or provide a home for it. He provides unconditiona
 1. Help
     1. [`meow`](#meow)
 1. Add task
-   1. [`todo`](#markdown-header-todo)
-   1. [`deadline`](#markdown-header3-deadline)
-   1. [`event`](#markdown-header-event)
+   1. [`todo`](#todo)
+   1. [`deadline`](#deadline)
+   1. [`event`](#event)
 1. Show task
-   1. [`list`](#markdown-header-list)
-   1. [`find`](#markdown-header-find)
+   1. [`list`](#list)
+   1. [`find`](#find)
 1. Update task
-    1. [`done`](#markdown-header-done)
-    1. [`delete`](#markdown-header-delete)
+    1. [`done`](#done)
+    1. [`delete`](#delete)
 1. Quit
-    1. [`bye`](#markdown-header-bye)
+    1. [`bye`](#bye)
 
 <hr>
 
@@ -30,7 +30,9 @@ You dont even need to feed it or provide a home for it. He provides unconditiona
 ### meow
 Ask doggo what he can do for you.
 
-Example of usage: `meow`
+Example of usage: 
+
+`meow`
 
 Expected outcome:
 
@@ -41,7 +43,9 @@ Expected outcome:
 ### todo
 Tell Doggo your troubles.
 
-Example of usage: `todo (description)`
+Example of usage: 
+
+`todo (description)`
 
 Expected outcome:
 
@@ -52,7 +56,9 @@ Expected outcome:
 ### deadline
 Tell Doggo your worries.
 
-Example of usage: `deadline (description) /by (MM/dd/yy HH:mm)`
+Example of usage: 
+
+`deadline (description) /by (MM/dd/yy HH:mm)`
 
 Expected outcome:
 
@@ -63,7 +69,9 @@ Expected outcome:
 ### event
 Tell Doggo your schedule.
 
-Example of usage: `event (description) /at (MM/dd/yy HH:mm)`
+Example of usage: 
+
+`event (description) /at (MM/dd/yy HH:mm)`
 
 Expected outcome:
 
@@ -74,7 +82,9 @@ Expected outcome:
 ### list
 Doggo lists your task for you.
 
-Example of usage: `list`
+Example of usage: 
+
+`list`
 
 Expected outcome:
 
@@ -85,7 +95,9 @@ Expected outcome:
 ### find
 Doggo fetches your tasks.
 
-Example of usage: `find (description)`
+Example of usage: 
+
+`find (description)`
 
 Expected outcome:
 
@@ -96,7 +108,9 @@ Expected outcome:
 ### done
 Doggo notes your completed worries.
 
-Example of usage: `done (number in the list)`
+Example of usage: 
+
+`done (number in the list)`
 
 Expected outcome:
 
@@ -107,7 +121,9 @@ Expected outcome:
 ### delete
 Doggo clears your trouble.
 
-Example of usage: `delete (number in the list)`
+Example of usage: 
+
+`delete (number in the list)`
 
 Expected outcome:
 
@@ -115,10 +131,12 @@ Expected outcome:
 
 <hr>
 
-### bye {#bye}
+### bye
 Doggo needs his afternoon nap.
 
-Example of usage: `bye`
+Example of usage: 
+
+`bye`
 
 Expected outcome:
 

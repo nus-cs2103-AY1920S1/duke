@@ -4,6 +4,9 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Creates a HelpCommand. Returns a list of commands.
+ */
 public class HelpCommand extends Command {
     public HelpCommand() {
     }

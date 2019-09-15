@@ -109,9 +109,9 @@ public class Ui {
      * @return Found tasks.
      */
     public String showFoundTask(ArrayList<Task> foundTaskList) {
-        String message = "Here are the matching tasks in your list:";
+        String message = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < foundTaskList.size(); i++) {
-            message += i + 1 + "." + foundTaskList.get(i);
+            message += i + 1 + "." + foundTaskList.get(i) + "\n";
         }
         return message;
     }

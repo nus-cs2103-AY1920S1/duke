@@ -113,7 +113,7 @@ public class Parser {
                 c = new AddCommand(task);
                 break;
             } catch (Exception e) {
-                throw new DukeException("Please input a date in this format : dd/MM/yy HH:mm");
+                throw new DukeException("Please input a date in this format : MM/dd/yy HH:mm");
             }
 
         case "event":
@@ -132,7 +132,7 @@ public class Parser {
                 c = new AddCommand(task);
                 break;
             } catch (Exception e) {
-                throw new DukeException("Please input a date in this format : dd/MM/yy HH:mm");
+                throw new DukeException("Please input a date in this format : MM/dd/yy HH:mm");
             }
 
         case "bye":

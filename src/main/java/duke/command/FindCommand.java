@@ -14,6 +14,7 @@ public class FindCommand extends Command {
         try {
             String target = command.substring(5);
             ArrayList<Task> foundList = new ArrayList<>();
+            
             for (Task t : tasks.getList()) {
                 if (t.toString().contains(target)) {
                     foundList.add(t);

@@ -1,7 +1,9 @@
 package duke.command;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import duke.task.Task;
 import duke.DukeException;
@@ -102,6 +104,36 @@ public class Ui {
         return message;
     }
 
+    public static int taskNumber = 1;
+
+    public String printListUsingStream(ArrayList<Task> list) {
+        String message;
+        if (list.size() == 0) {
+            message = "Nothing added yet";
+        } else {
+            Stream<Task> stream = list.stream();
+            message = "Here are the tasks in your list";
+            Optional<String> result = stream.map(task -> task.toString())
+                    .reduce((t1, t2) -> {
+                        if (t1.substring(0, 1).equals("1")) {
+                            String m1 = t1;
+                            String m2 = Ui.taskNumber + "." + t2;
+                            Ui.taskNumber++;
+                            return m1 + "\n" + m2;
+                        } else {
+                            String m1 = Ui.taskNumber + "." + t1;
+                            Ui.taskNumber++;
+                            String m2 = Ui.taskNumber + "." + t2;
+                            Ui.taskNumber++;
+                            return m1 + "\n" + m2;
+                        }
+                    });
+            Ui.taskNumber = 1;
+            message = message + "\n" + result.get();
+        }
+        return message;
+    }
+
     /**
      * prints a "bye" message when the programme terminates.
      */
@@ -125,3 +157,5 @@ public class Ui {
         return message;
     }
 }
+
+

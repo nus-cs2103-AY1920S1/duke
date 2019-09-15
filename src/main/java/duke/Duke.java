@@ -190,6 +190,8 @@ public class Duke<x> extends Application {
         assert x != null : "storage should not point to null pointer";
         TaskList y = duke.getTaskList();
         assert y != null : "TaskList should not point to null pointer";
+        Ui z = duke.getUi();
+        assert z != null : "Ui should not point to null pointer";
 
         Parser parser = new Parser(duke.getTaskList(), duke.getUi(), duke.getStorage(), duke.getSet());
 

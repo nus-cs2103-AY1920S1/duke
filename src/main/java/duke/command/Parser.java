@@ -59,7 +59,7 @@ public class Parser {
         if (firstWord.equals("bye")) {
             return new String("Bye. Hope to see you again soon!");
         } else if (firstWord.equals("list")) {
-            return ui.printList(this.taskList.getList());
+            return ui.printListUsingStream(this.taskList.getList());
         } else if (firstWord.equals("done")) {
             String message = processTaskDone(input, this.taskList, this.storage);
             return message;
@@ -115,8 +115,8 @@ public class Parser {
         if (input.length() == 8) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         } else {
-            String time = input.split("/by", 2)[1];
-            String description = input.split(" /by", 2)[0];
+            String time = input.split("/by", 2)[1].substring(1);
+            String description = input.split(" /by", 2)[0].substring(9);
             Task deadlineTask = new Deadline(description, time);
             if (set.contains(deadlineTask)) {
                 return "Task has been added to the list";
@@ -133,8 +133,8 @@ public class Parser {
         if (input.length() == 5) {
             throw new DukeException("OOPS!!! The description of an event cannot be empty");
         } else {
-            String time = input.split("/at", 2)[1];
-            String description = input.split(" /at", 2)[0];
+            String time = input.split("/at", 2)[1].substring(1);
+            String description = input.split(" /at", 2)[0].substring(6);
             Task eventTask = new Event(description, time);
             if (set.contains(eventTask)) {
                 return "Task has been added to the list";
@@ -156,7 +156,7 @@ public class Parser {
         int sizeAfterDeletion = taskList.getList().size();
         storage.updateFile();
         int diffInSize = sizeBeforeDeletion - sizeAfterDeletion;
-        assert diffInSize == 1: "Task not deleted";
+        assert diffInSize == 1: "List should have at least 1 element or task should be deleted";
         return ui.printDeleteTask(deletedTask, this.taskList.getList());
     }
 
@@ -180,6 +180,8 @@ public class Parser {
     public String processFindWithStream(String input, TaskList taskList, Storage storage) throws DukeException{
         ArrayList<Task> list = taskList.getList();
         String message = "";
+        assert list != null : "List should not point to null pointer";
+
         for (int i = 0; i < list.size(); i++) {
             String[] description = list.get(i).getDescription().split(" ");
             Stream<String> stream = Arrays.stream(description);

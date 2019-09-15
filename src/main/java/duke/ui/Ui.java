@@ -132,6 +132,17 @@ public class Ui {
         return str.toString();
     }
 
+    public String showEdit(Task task, int listSize, int order) {
+        StringBuilder str = new StringBuilder();
+        str.append("Got it. I've edit this task:");
+        str.append(System.lineSeparator());
+        str.append(String.format("  %d. %s",  order, task.toString()));
+        str.append(System.lineSeparator());
+        str.append(String.format("Now you have %d tasks in the list.", listSize));
+
+        return str.toString();
+    }
+
     /**
      * Prints find message.
      *

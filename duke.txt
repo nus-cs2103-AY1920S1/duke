@@ -1,3 +1,4 @@
 E | 0 | swim in pool | westcoast
-E | 0 | eat | 03/05/2020 1800
+T | 0 | sleep
 D | 0 | eee | 02/03/2000 2000
+E | 0 | swim | summer

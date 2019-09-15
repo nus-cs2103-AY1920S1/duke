@@ -6,11 +6,6 @@ Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a cas
 
 Duke allows users to track three types of task - To Do, Deadline and Events. In addition, there are also various utility functions to allow the user to manage his/her task list. These functions include `list`, `delete`, `done`, `bye`, `help`, `find`.
 
-## Usage
-
-### `list` - List out all tasks 
-
-A list of all the To Do, Deadline and Events are shown to the user.
 For all To Do, Deadline and Events, a task description is shown in chronological order in which they were added. The classification of the To Do, Deadline and Events are denoted by a task icon, as shown in table below.
 
 Task | Task icon
@@ -25,6 +20,13 @@ Completion Status | Completion icon
 ------------ | -------------
 Completed | Y
 Incomplete | N
+
+
+## Usage
+
+### `list` - List out all tasks 
+
+A list of all the To Do, Deadline and Events are shown to the user.
 
 For Deadlines, the date and time in which the task is due is included in the same line after the task description.
 For Events, the date and time in which the task is happening is included in the same line after the task description.

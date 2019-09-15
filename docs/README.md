@@ -86,7 +86,7 @@ To key in a `deadline` task: `deadline` [_description of task_] /by [_dd/MM/yyyy
 
 #### **Event Task**
 
-To key in a `event` task: `event` [_description of task_] /at [_dd/MM/yyyy_] [_HHmm_]
+To key in an `event` task: `event` [_description of task_] /at [_dd/MM/yyyy_] [_HHmm_]
     
     Example of usage: event music festival /at 6/4/2022 0123
     Expected Outcome: Got it. Ive added this task:
@@ -102,7 +102,7 @@ To key in a `event` task: `event` [_description of task_] /at [_dd/MM/yyyy_] [_H
 
 ### **Listing Tasks** <a name="list"></a>
 
-To `list` all task recorded: `list`
+To `list` all tasks recorded: `list`
 
     Example of usage: list
     Expected Outcome: Here are the tasks in your list:
@@ -113,12 +113,11 @@ To `list` all task recorded: `list`
 
 ### **Handling of Tasks** <a name="handle"></a>
 This section contains the commands to be keyed in to handle tasks.
-
 To execute the following commands, `list` out the list of tasks as shown in the [previous section](#list) and note the index of the task to operate on.
 
 1. **Done Command**
 
-To mark the task as `done`: `done` [index of the task in the list]
+To mark the task as `done`: `done` [_index of the task in the list_]
 
     Example of usage: done 1
     Expected Outcome: Nice! I've marked this task as done:
@@ -127,7 +126,7 @@ To mark the task as `done`: `done` [index of the task in the list]
 
 2. **Delete Command**
 
-To `delete` the task: `delete` [index of the task in the list]
+To `delete` the task: `delete` [_index of the task in the list_]
 
     Example of usage: delete 1
     Expected Outcome: Noted. I've removed this task:
@@ -135,19 +134,9 @@ To `delete` the task: `delete` [index of the task in the list]
                       Now you have 2 tasks in the list.
 
 
-
-
-:exclamation: To execute the same command to multiple tasks at once, add `, ` between the indexes of the tasks.
-    
-    Example of usage: delete 1
-    Expected Outcome: Noted. I've removed this task:
-                    [T][✓] music homework
-                    Now you have 2 tasks in the list.
-
-
 ### **Finding of Tasks** <a name="find"></a>
 
-To `find` tasks using a keyword: `find` [keyword]
+To `find` tasks using a keyword: `find` [_keyword_]
 
     Example of usage: find music
     Expected Outcome: Here are the matching task in your list:
@@ -157,6 +146,7 @@ To `find` tasks using a keyword: `find` [keyword]
 
 :exclamation: The keyword must only consists of one word.
 
+<br>
 
 ### **Sorting of Tasks** <a name="sort"></a>
 
@@ -170,6 +160,18 @@ To `sort` tasks according to the dates and times in a chronological order: `sort
 
 :exclamation: If the list contains `deadline` or `event` task, it will take priority over a `todo` task as it is assumed that a `todo` task is of lower priority.  
 :exclamation: If two `deadline` or `event` tasks have the same timestamp, the tasks would be sorted according to their descriptions in a alphabetical order. The rule also applies for `todo` task.  
+
+
+
+
+
+:exclamation: To execute the same command to multiple tasks at once, add `, ` between the indexes of the tasks.
+
+Example of usage: delete 1
+Expected Outcome: Noted. I've removed this task:
+[T][✓] music homework
+Now you have 2 tasks in the list.
+
 
 
 ## **Viewing of Statistics** <a name="stats"></a>

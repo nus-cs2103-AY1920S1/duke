@@ -5,3 +5,4 @@ T | 1 | join sports club
 D | 0 | return book     | 2nd of December 2019, 6pm
 D | 0 | return hat   | 12th of December 2020, 7pm
 T | 0 | borrow
+E | 0 | b | a

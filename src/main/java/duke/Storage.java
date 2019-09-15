@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,7 +23,7 @@ public class Storage {
         String des;
         String time;
         String strCurrentLine;
-        String des_time;    //a substring for Task description onwards
+        String des_time;    //a substring for duke.Task description onwards
         objReader = new BufferedReader(new FileReader(filePath));
 
 
@@ -39,13 +41,7 @@ public class Storage {
             }
             Task t = new Task(des, type, status, time);
             taskList.add(t);
-            no_of_task++;
 
-                /* System.out.println(strCurrentLine);              //checking purpose only//
-                System.out.println("Type: "+type);
-                System.out.println("Status: "+status);
-                System.out.println("Des: "+des);
-                System.out.println("Time: "+time); */
         }
     }
         catch(
@@ -70,31 +66,27 @@ public class Storage {
 
   ////////////////////////////////// SAVE FILE Method ///////////////////////////////////////////////////////
 
-  static void AutoSave(ArrayList<Task> taskList, int no_of_task) throws IOException {
+  public static void AutoSave(TaskList tasks, int no_of_task) throws IOException {
       System.out.println("System performing autosave");
-      WriteFile data = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\DukesDiary.txt");
-      WriteFile data_append = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\DukesDiary.txt", true);
+      WriteFile data = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt");
+      WriteFile data_append = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt", true);
 
       for (int i = 0; i < no_of_task; i++) {
           if(i>0){
-              if(taskList.get(i).type == 'T')
-                  data_append.writeToFile(taskList.get(i).type + " | " + taskList.get(i).status + " | " + taskList.get(i).description);
+              if(tasks.taskList.get(i).type == 'T')
+                  data_append.writeToFile(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description);
               else
-                  data_append.writeToFile(taskList.get(i).type + " | " + taskList.get(i).status + " | " + taskList.get(i).description + " | " + taskList.get(i).timeframe);
+                  data_append.writeToFile(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + " | " + tasks.taskList.get(i).get_TimeFrame());
           }
           else{
-              if(taskList.get(i).type == 'T')
-                  data.writeToFile(taskList.get(i).type + " | " + taskList.get(i).status + " | " + taskList.get(i).description);
+              if(tasks.taskList.get(i).type == 'T')
+                  data.writeToFile(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description);
               else
-                  data.writeToFile(taskList.get(i).type + " | " + taskList.get(i).status + " | " + taskList.get(i).description + " | " + taskList.get(i).timeframe);
+                  data.writeToFile(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + " | " + tasks.taskList.get(i).get_TimeFrame());
           }
       }
 
   }
  ////////////////////////////////////////  End of SAVE FILE Method  ///////////////////////////////////////////
-
-  int get_no_task(){
-        return no_of_task;
-    }
 
 }

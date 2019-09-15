@@ -35,7 +35,7 @@ You can get them [here](https://www.oracle.com/technetwork/java/javase/downloads
 5. Enter commands (case-sensitive) into the text box and press `Enter`. Alternatively, press the can press `Send` button to execute the command.
     - Some sample commands:
         - `list`: lists all of your tasks
-        - `todo TODO_DESCRIPTION`: adds a Todo task with the description *TODO_DESCRIPTION* to Duke
+        - `todo <TODO_DESCRIPTION>`: adds a Todo task with the description *TODO_DESCRIPTION* to Duke
         - `bye`: Exits and saves your data.
 6. *Repeat* Step 5 until you feel good.
 7. Use the `bye` command to prepare to exit and print the farewell message. 

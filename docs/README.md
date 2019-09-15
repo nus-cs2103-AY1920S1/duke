@@ -69,7 +69,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-![todo](/docs/todo.png?raw=true "How to todo")
+![todo](https://raw.github.com/Kyzure/duke/master/docs/todo.png")
 
 ### `deadline` - Displays list of Tasks
 
@@ -99,7 +99,7 @@ Got it. I've added this task:
 Now you have 4 tasks in the list.
 ```
 
-![deadline](/docs/deadline.png?raw=true "How to deadline")
+![deadline](https://raw.github.com/Kyzure/duke/master/docs/deadline.png)
 
 ### `event` - Displays list of Tasks
 
@@ -128,7 +128,7 @@ Got it. I've added this task:
   [E][X] Attend Secret Society Meeting (at: 01:01)
 Now you have 7 tasks in the list.
 ```
-![event](/docs/event.png?raw=true "How to event")
+![event](https://raw.github.com/Kyzure/duke/master/docs/event.png)
 
 ### `list` - Display list of Tasks
 
@@ -153,7 +153,7 @@ Here are the tasks in your list:
 7. [E][X] Attend Secret Society Meeting (at 01:01)
 ```
 
-![list](/docs/list.png?raw=true "How to list")
+![list](https://raw.github.com/Kyzure/duke/master/docs/list.png)
 
 ### `done` - Completes a Task
 
@@ -172,7 +172,7 @@ Nice. I've marked this task as done!
   [D][O] Finish English Assignments (by: 11/11/2011 11:11)
 ```
 
-![done](/docs/done.png?raw=true "How to done")
+![done](https://raw.github.com/Kyzure/duke/master/docs/done.png)
 
 ### `delete` - Deletes a Task
 
@@ -192,7 +192,7 @@ Noted. I've removed this task:
 Now you have 6 task in the list.
 ```
 
-![delete](/docs/delete.png?raw=true "How to delete")
+![delete](https://raw.github.com/Kyzure/duke/master/docs/delete.png)
 
 ### `find` -  Finds a Task
 
@@ -213,7 +213,7 @@ Finding for `Attend` now...
 3. [E][X] Attend Secret Society Meeting (at 01:01)
 ```
 
-![find](/docs/find.png?raw=true "How to find")
+![find](https://raw.github.com/Kyzure/duke/master/docs/find.png)
 
 ### `bye` - Exits the program
 
@@ -251,7 +251,8 @@ And if you ever need an example, type `tutorial` for one!
 'todo myTask' Keeps track of a to-do.
 ```
 
-![help](/docs/help.png?raw=true "How to help")
+![help](https://raw.github.com/Kyzure/duke/master/docs/help.png)
+
 
 ### `tutorial` - Provide an example into the current save file
 

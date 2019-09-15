@@ -6,6 +6,7 @@ import ui.Ui;
 import util.Storage;
 import util.TodoList;
 import util.Parser;
+import util.exception.DukeException;
 
 public class Duke {
     private TodoList tasks;
@@ -25,11 +26,22 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        Command c = Parser.parse(input);
-        if(c.isExit()) {
-            Platform.exit();
+        Command c;
+        try {
+            c = Parser.parse(input);
+            String response = c.run(tasks, storage);
+
+            if(c.isExit()) {
+                Platform.exit();
+            }
+
+            System.out.println(ui.encase(response));
+            return ui.encase(response);
+
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-        return ui.encase(c.run(tasks, storage));
+
     }
 
     public String welcome() {

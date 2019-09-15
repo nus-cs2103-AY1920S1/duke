@@ -4,9 +4,6 @@ import task.Task;
 import util.Storage;
 import util.TodoList;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 public class UpdateCommand extends Command {
     private int index;
     private Task newTask;

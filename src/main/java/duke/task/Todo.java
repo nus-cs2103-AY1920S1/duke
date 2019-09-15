@@ -1,3 +1,4 @@
+package duke.task;
 /**
  * Represents Todo object, subclass of Task
  */
@@ -6,7 +7,7 @@ public class Todo extends Task {
         super(description);
     }
 
-    protected String toFileString(){
+    public String toFileString(){
         StringBuilder fileString = new StringBuilder();
         fileString.append("T | 0 | " + description + "\n" );
         return fileString.toString();

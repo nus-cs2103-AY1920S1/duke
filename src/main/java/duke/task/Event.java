@@ -1,6 +1,8 @@
+package duke.task;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-
+import duke.execution.DukeException;
 /**
  * Represents an Event object, subclass of Task
  */
@@ -38,7 +40,7 @@ public class Event extends Task {
         }
     }
 
-    protected String toFileString(){
+    public String toFileString(){
         StringBuilder fileString = new StringBuilder();
         fileString.append("E | 0 | " + description + " | ");
         fileString.append(datetimeToString() + "\n");

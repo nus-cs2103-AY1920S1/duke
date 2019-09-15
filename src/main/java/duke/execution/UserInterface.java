@@ -1,4 +1,7 @@
+package duke.execution;
+
 import java.util.Scanner;
+import duke.task.Task;
 
 /**
  * UserInterface class of Duke.
@@ -26,7 +29,7 @@ public class UserInterface {
     /**
      * Prints welcome message
      */
-    protected void printWelcome(){
+    public void printWelcome(){
         String logo = "\n" +
                 " ______       ___    _ .--.   .--.      .-''-.   \n" +
                 "|    _ `''. .'   |  | ||  | _/  /     .'_ _   \\  \n" +
@@ -41,29 +44,41 @@ public class UserInterface {
         System.out.println("Hewwo from" + logo);
     }
 
+    public String printWelcomeGui(){
+        return "Hewwo from Duke (◕ω◕✿)\n";
+    }
+
     /**
      * Prints message when task is successfully added
      * @param task task added
      * @param listSize current number of tasks
      */
-    protected void printAdd(Task task, int listSize){
+    private String generateAddMessage(Task task, int listSize){
         StringBuilder outputMessage = new StringBuilder("Task added:\n");
         outputMessage.append("    " + task);
         outputMessage.append("\n  There are " + listSize + " tasks in the list.");
-        this.print(outputMessage.toString());
+        return outputMessage.toString();
+    }
+
+    public void printAdd(Task task, int listSize){
+        this.print(generateAddMessage(task, listSize));
+    }
+
+    public String printAddGui(Task task, int listSize){
+        return generateAddMessage(task, listSize);
     }
 
     /**
      * Print load save file message
      */
-    protected void printLoadSave(){
+    public void printLoadSave(){
         this.print("Save file loaded successfully");
     }
 
     /**
      * Print new file message
      */
-    protected void printNewFile(){
+    public void printNewFile(){
         this.print("New save file created");
     }
 
@@ -71,8 +86,12 @@ public class UserInterface {
      * Print file set to done message
      * @param task
      */
-    protected void printDone(Task task){
+    public void printDone(Task task){
         this.print("The following task has been marked as done:\n    " + task);
+    }
+
+    public String printDoneGui(Task task){
+        return "The following task has been marked as done:\n    " + task;
     }
 
     /**
@@ -80,48 +99,65 @@ public class UserInterface {
      * @param task deleted task
      * @param listSize number of tasks left
      */
-    protected void printDelete(Task task, int listSize){
+    private String generateDeleteMessage(Task task, int listSize){
         StringBuilder outputMessage = new StringBuilder("Following task removed:\n    " + task);
         outputMessage.append("\n  " + listSize + " tasks left in the list");
-        this.print(outputMessage.toString());
+        return outputMessage.toString();
+    }
+    public void printDelete(Task task, int listSize){
+        this.print(generateDeleteMessage(task, listSize));
+    }
+
+    public String printDeleteGui(Task task, int listSize){
+        return generateDeleteMessage(task, listSize);
     }
 
     /**
      * Prints error message
      * @param message error details
      */
-    protected void printError(String message){
+    public void printError(String message){
         this.print("Error: " + message);
+    }
+
+    public String printErrorGui(String message){
+        return "Error: " + message;
     }
 
     /**
      * Prints list
      * @param list the list
      */
-    protected void printList(String list){
+    public void printList(String list){
         this.print("List:" + list);
     }
+
+    public String printListGui(String list){ return "List:" + list; }
 
     /**
      * Prints list of tasks that match keyword given by user
      * @param list list of tasks
      */
-    protected void printFind(String list){
+    public void printFind(String list){
         this.print("Matching tasks:" + list);
+    }
+
+    public String printFindGui(String list){
+        return "Matching tasks:" + list;
     }
 
     /**
      * Reads and return next command input from user
      * @return next user command
      */
-    protected String readLine(){
+    public String readLine(){
         return sc.nextLine();
     }
 
     /**
      * Prints exit message
      */
-    protected void printExit(){
+    public void printExit(){
         this.print("Goodbye. Hope to see you again UwU");
     }
 }

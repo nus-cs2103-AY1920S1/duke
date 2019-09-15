@@ -1,13 +1,15 @@
+package duke.task;
+
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-
+import duke.execution.DukeException;
 /**
  * Represents Deadline object, subclass of Task
  */
 public class Deadline extends Task {
     private LocalDateTime deadline; //   DD/MM/YYYY
 
-    protected Deadline(String description, String deadline) throws DukeException{
+    public Deadline(String description, String deadline) throws DukeException{
         super(description);
         this.setDateTime(deadline);
     }
@@ -36,7 +38,7 @@ public class Deadline extends Task {
         }
     }
 
-    protected String toFileString(){
+    public String toFileString(){
         StringBuilder fileString = new StringBuilder();
         fileString.append("D | 0 | " + description + " | ");
         fileString.append(datetimeToString() + "\n");

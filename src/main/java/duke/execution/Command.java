@@ -1,14 +1,17 @@
+package duke.execution;
+
+import duke.task.Task;
 /**
  * Command class of Duke.
  * Represents a command that the program executes depending on user input.
  */
 public class Command {
     String[] info;
-    boolean isAdd;
-    boolean isDelete;
-    boolean isDone;
-    boolean isFind;
-    boolean isExit = false;
+    private boolean isAdd;
+    private boolean isDelete;
+    private boolean isDone;
+    private boolean isFind;
+    private boolean isExit = false;
 
     /**
      * Constructor that contains information from the user input
@@ -32,7 +35,7 @@ public class Command {
      * @param fileManager FileManager of the Duke instance
      * @throws DukeException
      */
-    protected void execute(TaskManager tasks, UserInterface ui, FileManager fileManager) throws DukeException{
+    public void execute(TaskManager tasks, UserInterface ui, FileManager fileManager) throws DukeException{
         if(isAdd){
             Task task = tasks.addNewTask(info);
             fileManager.saveToFile(task);
@@ -57,6 +60,35 @@ public class Command {
         }else if(info[0].equals("bye")){
             this.isExit = true;
         }
+    }
+
+    public String executeGui(TaskManager tasks, UserInterface ui, FileManager fileManager) throws DukeException{
+        if(isAdd){
+            Task task = tasks.addNewTask(info);
+            fileManager.saveToFile(task);
+            return ui.printAddGui(task, tasks.getSize());
+        }else if(isDelete){
+            Task task = tasks.delete(info[1]);
+            fileManager.fileDelete(Integer.parseInt(info[1]) - 1);
+            return ui.printDeleteGui(task, tasks.getSize());
+        }else if(isDone){
+            Task task = tasks.done(info[1]);
+            fileManager.fileSetDone(Integer.parseInt(info[1]) - 1);
+            return ui.printDoneGui(task);
+        }else if(isFind){
+            String foundList = tasks.findMatch(info[1]);
+            return ui.printFindGui(foundList);
+        }
+        if(info[0].equals("list")){
+            return ui.printListGui(tasks.generateList());
+        }else if(info[0].equals("bye")){
+            this.isExit = true;
+        }
+        return "Command not recognized?";
+    }
+
+    public boolean isExit(){
+        return this.isExit;
     }
 
 }

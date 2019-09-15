@@ -1,3 +1,5 @@
+package duke.execution;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
+import duke.task.*;
 
 /**
  * FileManager class of Duke.
@@ -26,7 +29,7 @@ public class FileManager {
      * @return boolean value to inform user if there is an existing save file
      * @throws DukeException if save file is corrupted/cannot be found
      */
-    protected boolean initialize(String pathname, TaskManager tasks) throws DukeException{
+    public boolean initialize(String pathname, TaskManager tasks) throws DukeException{
         saveList=new File(pathname);
         boolean isNew;
         try {

@@ -1,8 +1,9 @@
+package duke.task;
 /**
  * Represents a task in a checklist
  */
 public abstract class Task {
-    protected String description;
+    public String description;
     protected boolean isDone;
 
     /**
@@ -30,7 +31,7 @@ public abstract class Task {
      * Returns Task object description in a specific format for writing to save file
      * @return Task object full description for save file
      */
-    protected abstract String toFileString();
+    public abstract String toFileString();
 
     /**
      * Returns Task object description in a specific format for printing

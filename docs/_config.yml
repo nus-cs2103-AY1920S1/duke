@@ -1,2 +1,6 @@
 theme: jekyll-theme-architect
-source: /duke
+defaults:
+  - scope:
+      path: "assets"
+      values:
+        image: true

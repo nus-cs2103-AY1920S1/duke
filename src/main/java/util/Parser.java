@@ -1,6 +1,7 @@
 package util;
 
 import command.*;
+import service.Duke;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -16,6 +17,7 @@ import java.util.HashSet;
 public class Parser {
     private static HashSet<String> keywords;
     private static SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    private static final String INVALID_COMMAND = "对不起， 我听不懂☹";
 
     static {
         keywords = new HashSet<>();
@@ -37,7 +39,7 @@ public class Parser {
 
     private static Command parse(String[] args) throws DukeException {
         if (!keywords.contains(args[0])) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(INVALID_COMMAND);
         }
 
         assert keywords.contains(args[0]);
@@ -98,6 +100,9 @@ public class Parser {
                 }
 
                 String[] dates = details[1].trim().split("-");
+                if (dates.length < 2) {
+                    throw new DukeException("OOPS!!! Events must have a start and end date.");
+                }
                 Date startPeriod = formatter.parse(dates[0].trim());
                 Date endPeriod = formatter.parse(dates[1].trim());
                 return new Event(details[0].trim(), startPeriod, endPeriod);
@@ -105,7 +110,7 @@ public class Parser {
             default:
             }
         } catch (ParseException e) {
-            throw new DukeException("Dates must have proper format!");
+            throw new DukeException("Dates must follow dd/MM/yyyy HHmm format!");
         }
         return null;
     }

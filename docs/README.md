@@ -99,6 +99,8 @@ Got it. I've added this task:
 Now you have 4 tasks in the list.
 ```
 
+![deadline](/docs/deadline.png?raw=true "How to deadline")
+
 ### `event` - Displays list of Tasks
 
 `event` adds an incomplete to-do to your list of tasks. It requires an two additional arguments after the word `event`, e.g. `event myTask /at 11/11/2011 11:11`.
@@ -126,6 +128,7 @@ Got it. I've added this task:
   [E][X] Attend Secret Society Meeting (at: 01:01)
 Now you have 7 tasks in the list.
 ```
+![event](/docs/event.png?raw=true "How to event")
 
 ### `list` - Display list of Tasks
 
@@ -150,6 +153,8 @@ Here are the tasks in your list:
 7. [E][X] Attend Secret Society Meeting (at 01:01)
 ```
 
+![list](/docs/list.png?raw=true "How to list")
+
 ### `done` - Completes a Task
 
 `done` marks a task of the given number as complete. It requries an additional argumenet after the word `done` e.g. `done myNumber` where myNumber is any number as long as it exists in the list.
@@ -166,6 +171,8 @@ Expected outcome:
 Nice. I've marked this task as done!
   [D][O] Finish English Assignments (by: 11/11/2011 11:11)
 ```
+
+![done](/docs/done.png?raw=true "How to done")
 
 ### `delete` - Deletes a Task
 
@@ -185,6 +192,8 @@ Noted. I've removed this task:
 Now you have 6 task in the list.
 ```
 
+![delete](/docs/delete.png?raw=true "How to delete")
+
 ### `find` -  Finds a Task
 
 `Find` finds a task with the given keyword from the list. It requires an ddition arguemnet e.g. `find myKeyword`, where myKeyword is any keyword of any task in the list.
@@ -203,6 +212,8 @@ Finding for `Attend` now...
 2. [E][X] Attend Tutorial (at: 01/01/2019)
 3. [E][X] Attend Secret Society Meeting (at 01:01)
 ```
+
+![find](/docs/find.png?raw=true "How to find")
 
 ### `bye` - Exits the program
 
@@ -240,6 +251,8 @@ And if you ever need an example, type `tutorial` for one!
 'todo myTask' Keeps track of a to-do.
 ```
 
+![help](/docs/help.png?raw=true "How to help")
+
 ### `tutorial` - Provide an example into the current save file
 
 `tutorial` is a feature that automatically happens when you run the program for the first time. It ask the user whether they want the tutorial and if so, provides 3 examples into the current task list. It also can be used any time.
@@ -272,6 +285,8 @@ Here are the tasks in your list:
 2. [D][X] This is a Deadline. (by: 12/09/2019 10:10)
 3. [E][X] This is an Event. (at: 12/09/2019) 
 ```
+
+![tutorial](/docs/tutorial.png?raw=true "How to tutorial")
 
 ## Authors
 

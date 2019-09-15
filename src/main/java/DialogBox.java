@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -35,7 +36,14 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setWrapText(true);
         displayPicture.setImage(img);
+
+        Rectangle rectangleClip = new Rectangle(99, 99);
+        rectangleClip.setArcHeight(20);
+        rectangleClip.setArcWidth(20);
+        displayPicture.setClip(rectangleClip);
+
         this.setMinHeight(Region.USE_PREF_SIZE);
     }
 

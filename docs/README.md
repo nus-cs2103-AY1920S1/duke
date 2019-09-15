@@ -1,7 +1,7 @@
 # User Guide
-1. [Introduction] (#1-introduction)
-2. [Setting Up] (#2-setting-up)
-3. [Features] (#3-features)
+1. [Introduction](#1-introduction)
+2. [Setting Up](#2-setting-up)
+3. [Features](#3-features)
     3.1. [Viewing list of commands](#31-viewing-list-of-commands) : `help`
     3.2. [Adding a new task](#32-adding-a-new-task) : `todo`, `event`, and `deadline`
     3.3. [Listing all tasks](#33-listing-all-tasks) : `list`

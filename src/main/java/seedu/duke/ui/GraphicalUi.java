@@ -261,4 +261,25 @@ public class GraphicalUi extends Ui {
                 + "\n" + encouragement + "\n";
         return output;
     }
+
+    /**
+     * Returns completed todo sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public String getCompletedTodoStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int todosCompleted = stat.getCompletedTodosFromOneDayAgo(tasks);
+        if (todosCompleted == 0) {
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\nDeadlines completed today: "
+                + todosCompleted
+                + "\n" + encouragement + "\n";
+        return output;
+    }
 }

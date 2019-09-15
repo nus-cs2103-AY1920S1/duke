@@ -192,6 +192,11 @@ public class Parser {
                 command = new StatsDeadlineCommand();
                 break;
 
+            case("todo"):
+
+                command = new StatsTodoCommand();
+                break;
+
             default:
 
                 command = new UnknownCommand();

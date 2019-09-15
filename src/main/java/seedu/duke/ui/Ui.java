@@ -135,4 +135,13 @@ public abstract class Ui {
      */
     public abstract String getCompletedDeadlineStatSequence(Statistic stat, TaskList tasks);
 
+    /**
+     * Returns string sequence for "stats todo" command.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public abstract String getCompletedTodoStatSequence(Statistic stat, TaskList tasks);
+
 }

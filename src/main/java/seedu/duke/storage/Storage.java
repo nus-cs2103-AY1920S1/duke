@@ -144,7 +144,7 @@ public class Storage {
 
             String[] words = input.split("\\|");
             Boolean isDone = false;
-            
+
             String taskType = words[0].trim();
 
             switch (taskType) {
@@ -266,6 +266,12 @@ public class Storage {
         return newEvent;
     }
 
+    /**
+     * Returns a new Deadline object from the String array read from file.
+     *
+     * @param words String array.
+     * @return Event object.
+     */
     public Deadline newDeadline(String[] words) {
         Boolean isDone = false;
         String description = "";

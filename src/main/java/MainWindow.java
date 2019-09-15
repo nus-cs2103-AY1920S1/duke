@@ -32,8 +32,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         //adding start up message
-        String message = "Hello! I'm Duke\n"
-                + "What can I do for you?";
+        String message = "Hello! I'm Duke!\n"
+                + "What can I do for you?\n"
+                + "Remember to type 'bye' to save before exiting!";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
     }
 

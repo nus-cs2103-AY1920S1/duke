@@ -30,17 +30,35 @@ public class WriteFile {
      *
      * @param taskArr List of tasks.
      */
-    public void writeTaskToFile(ArrayList<Task> taskArr) {
+    public void writeTaskToFile(ArrayList<Task> taskArr) throws DukeException {
         try {
             //create a new file or overwrite existing file
-            File newFile = new File(this.getPath());
-            FileWriter fw = new FileWriter(newFile);
+            File file = new File(this.getPath());
+            File targetFile = getTargetFile(file);
+            FileWriter fw = new FileWriter(targetFile);
             PrintWriter pw = new PrintWriter(fw);
             this.appendTaskToPrintWriter(pw, taskArr);
             pw.close();
         } catch (IOException err) {
             System.err.println(err);
         }
+    }
+
+    private File getTargetFile(File file) throws DukeException {
+        if (file.exists()) {
+            return file;
+        }
+
+        if (!file.getParentFile().mkdir()) {
+            throw new DukeException("Unable to create new directory to save task file.");
+        }
+
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("Unable to create new file.");
+        }
+        return file;
     }
 
     private void appendTaskToPrintWriter(PrintWriter pw, ArrayList<Task> taskArr) {

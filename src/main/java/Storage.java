@@ -40,7 +40,7 @@ public class Storage {
      *
      * @param tasks List of tasks.
      */
-    public void save(TaskList tasks) {
+    public void save(TaskList tasks) throws DukeException {
         assert this.getFilePath() != "" : "File path should not be empty!";
 
         WriteFile wf = new WriteFile(this.getFilePath());

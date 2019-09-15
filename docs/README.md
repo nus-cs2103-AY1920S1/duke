@@ -48,6 +48,10 @@ Format: `list`
 Tags a task with a specified keyword. A task can have any number of tags (including 0) +
 Format: `tag INDEX KEYWORD`
 
+### Finding tasks: `find`
+Finds tasks with a related keyword. +
+Format: `find book`
+
 ### Exiting Duke: `bye` 
 Exits Duke. +
 Format: `bye`

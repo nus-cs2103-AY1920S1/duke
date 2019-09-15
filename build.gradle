@@ -6,7 +6,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
-group '' // what to have here?
+group 'seedu.duke'
 version '0.1.0'
 
 repositories {
@@ -14,7 +14,7 @@ repositories {
 }
 
 application {
-    mainClassName = "Duke" // what to have here?
+    mainClassName = "Duke"
 }
 
 run {

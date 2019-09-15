@@ -29,7 +29,7 @@ import java.io.IOException;
  * A Duke object has a file with the list of tasks.
  * Tasks can be added, deleted and updated.
  */
-public class Duke extends Application {
+public class Duke {
     protected Storage storage;
     protected TaskList taskList;
     protected Ui ui;
@@ -184,6 +184,7 @@ public class Duke extends Application {
         sc.close();
     }
 
+    /*
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -255,11 +256,7 @@ public class Duke extends Application {
 
         userInput.setOnAction((event) -> {
             handleUserInput();
-        });
-    }
-
-    private void handleUserInput() {
-    }
+        });*/
 
     /**
      * Iteration 1:
@@ -267,28 +264,30 @@ public class Duke extends Application {
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
-    private Label getDialogLabel(String text) {
+    /*private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
         return textToAdd;
-    }
+    }*/
 
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void c() {
+    /*private void handleUserInput() {
         String userText = new String(userInput.getText());
         String dukeText = new String(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new Image(user)),
+                DialogBox.getDukeDialog(dukeText, new Image(duke))
         );
         userInput.clear();
-    }
+    }*/
+
+
 
     /**
      * You should have your own function to generate a response to user input.

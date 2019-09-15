@@ -11,9 +11,14 @@ import weomucat.duke.command.listener.DoneTaskCommandListener;
 import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
+import weomucat.duke.command.listener.LoadTasksCommandListener;
 import weomucat.duke.command.listener.SnoozeTaskCommandListener;
 import weomucat.duke.storage.TaskListStorage;
 import weomucat.duke.task.TaskManager;
+import weomucat.duke.task.listener.ListTaskListener;
+import weomucat.duke.task.listener.ModifyTaskListener;
+import weomucat.duke.task.listener.TaskListSizeListener;
+import weomucat.duke.task.listener.TaskListStorageListener;
 import weomucat.duke.ui.Message;
 import weomucat.duke.ui.UiManager;
 import weomucat.duke.ui.cli.CommandLineUi;
@@ -67,25 +72,26 @@ public class Duke {
     this.uiManager.newUserInputListener(this.controller);
 
     this.controller.addListener(AddTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(ByeCommandListener.class, this.uiManager);
     this.controller.addListener(DeleteTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(DisplayCommandListener.class, this.uiManager);
     this.controller.addListener(DoneTaskCommandListener.class, this.taskManager);
     this.controller.addListener(EventAtCommandListener.class, this.taskManager);
     this.controller.addListener(FindTaskCommandListener.class, this.taskManager);
     this.controller.addListener(ListTaskCommandListener.class, this.taskManager);
+    this.controller.addListener(LoadTasksCommandListener.class, this.taskManager);
     this.controller.addListener(SnoozeTaskCommandListener.class, this.taskManager);
-    this.controller.addListener(ByeCommandListener.class, this.uiManager);
-    this.controller.addListener(DisplayCommandListener.class, this.uiManager);
 
-    this.taskManager.newTaskListStorage(this.storage);
-    this.taskManager.newModifyTaskListener(this.uiManager);
-    this.taskManager.newTaskListSizeListener(this.uiManager);
-    this.taskManager.newListTaskListener(this.uiManager);
+    this.taskManager.addListener(ListTaskListener.class, this.uiManager);
+    this.taskManager.addListener(ModifyTaskListener.class, this.uiManager);
+    this.taskManager.addListener(TaskListSizeListener.class, this.uiManager);
+    this.taskManager.addListener(TaskListStorageListener.class, this.storage);
 
     // Tell uis to start accepting user input.
     this.uiManager.acceptUserInput();
 
     // Greet user
-    this.controller.addCommand(new DisplayMessageCommand(new Message(
+    this.controller.commandUpdate(new DisplayMessageCommand(new Message(
         " ____        _        ",
         "|  _ \\ _   _| | _____ ",
         "| | | | | | | |/ / _ \\",
@@ -93,9 +99,9 @@ public class Duke {
         "|____/ \\__,_|_|\\_\\___|")));
 
     // Load tasks
-    this.controller.addCommand(new LoadTasksCommand());
+    this.controller.commandUpdate(new LoadTasksCommand());
 
-    this.controller.addCommand(new DisplayMessageCommand(
+    this.controller.commandUpdate(new DisplayMessageCommand(
         new Message("Hello! I'm Duke!", "What can I do for you?")));
 
     // Block main thread to query for user input & commands.

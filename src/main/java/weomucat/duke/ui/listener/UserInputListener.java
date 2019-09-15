@@ -1,6 +1,6 @@
 package weomucat.duke.ui.listener;
 
-import weomucat.duke.exception.DukeException;
+import weomucat.duke.command.Command;
 
 /**
  * When user input is received, this listener will be notified.
@@ -13,4 +13,11 @@ public interface UserInputListener {
    * @param userInput user input
    */
   void userInputUpdate(String userInput);
+
+  /**
+   * When a command is received, this method will be called.
+   *
+   * @param command command
+   */
+  void commandUpdate(Command<?> command);
 }

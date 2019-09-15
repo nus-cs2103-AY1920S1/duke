@@ -13,7 +13,7 @@ public abstract class DisplayCommand extends Command<DisplayCommandListener> {
   }
 
   @Override
-  Class<DisplayCommandListener> getListenersClass() {
+  Class<DisplayCommandListener> getListenerClass() {
     return DisplayCommandListener.class;
   }
 

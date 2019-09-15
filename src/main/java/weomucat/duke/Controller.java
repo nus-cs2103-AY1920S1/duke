@@ -78,10 +78,10 @@ public class Controller implements ByeCommandListener, UserInputListener {
   }
 
   /**
-   * Adds a CommandListener to an ArrayList of CommandListeners.
-   * When a Command is received, all listeners in the ArrayList will be notified.
+   * Adds a CommandListener.
+   * When a Command is received, all listeners will be notified.
    *
-   * @param c        class of CommandListeners
+   * @param c        class of CommandListener
    * @param listener CommandListener
    */
   <T extends CommandListener> void addListener(Class<T> c, T listener) {
@@ -98,7 +98,8 @@ public class Controller implements ByeCommandListener, UserInputListener {
     this.userInputQueue.addLast(userInput);
   }
 
-  void addCommand(Command<?> command) {
+  @Override
+  public void commandUpdate(Command<?> command) {
     this.commandQueue.addLast(command);
   }
 
@@ -142,13 +143,15 @@ public class Controller implements ByeCommandListener, UserInputListener {
           // Parse userInput and set the parameters.
           commandParser.parse(options);
 
-          // Add command to queue.
-          this.commandQueue.addLast(command);
+          // Add command to back of queue.
+          commandUpdate(command);
         } else {
           Thread.sleep(THREAD_POLL_SLEEP_DURATION);
         }
       } catch (DukeException | DukeRuntimeException e) {
-        this.addCommand(new DisplayErrorCommand(new Message("☹ OOPS!!! " + e.getMessage())));
+        // Add error command to front of queue.
+        this.commandQueue.addFirst(
+            new DisplayErrorCommand(new Message("☹ OOPS!!! " + e.getMessage())));
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

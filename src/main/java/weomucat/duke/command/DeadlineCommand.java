@@ -28,7 +28,7 @@ public class DeadlineCommand extends Command<AddTaskCommandListener> {
   }
 
   @Override
-  public Class<AddTaskCommandListener> getListenersClass() {
+  public Class<AddTaskCommandListener> getListenerClass() {
     return AddTaskCommandListener.class;
   }
 

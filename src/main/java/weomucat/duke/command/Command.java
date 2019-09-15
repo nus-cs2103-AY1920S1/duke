@@ -1,6 +1,7 @@
 package weomucat.duke.command;
 
 import java.util.Collection;
+import java.util.function.Supplier;
 import weomucat.duke.DukeConsumer;
 import weomucat.duke.HeterogeneousContainers;
 import weomucat.duke.command.listener.CommandListener;
@@ -14,6 +15,9 @@ import weomucat.duke.exception.DukeException;
  */
 public abstract class Command<E extends CommandListener> {
 
+  private Supplier<Command<?>> runBefore;
+  private Supplier<Command<?>> runAfter;
+
   /**
    * Gets the parameter options of this Command.
    *
@@ -21,7 +25,7 @@ public abstract class Command<E extends CommandListener> {
    */
   public abstract ParameterOptions getParameterOptions();
 
-  abstract Class<E> getListenersClass();
+  abstract Class<E> getListenerClass();
 
   abstract DukeConsumer<E> getListenerConsumer();
 
@@ -31,12 +35,28 @@ public abstract class Command<E extends CommandListener> {
    * @throws DukeException If there is anything wrong with processing.
    */
   public void run(HeterogeneousContainers<CommandListener> classListeners) throws DukeException {
-    Class<E> c = getListenersClass();
+    if (runBefore != null) {
+      runBefore.get().run(classListeners);
+    }
+
+    Class<E> c = getListenerClass();
 
     // Get listeners from containers.
-    Collection<E> listeners = classListeners.get(c);
+    Collection<E> listeners = classListeners.getAll(c);
     for (E listener : listeners) {
       getListenerConsumer().accept(listener);
     }
+
+    if (runAfter != null) {
+      runAfter.get().run(classListeners);
+    }
+  }
+
+  void setRunBefore(Supplier<Command<?>> runBefore) {
+    this.runBefore = runBefore;
+  }
+
+  void setRunAfter(Supplier<Command<?>> runAfter) {
+    this.runAfter = runAfter;
   }
 }

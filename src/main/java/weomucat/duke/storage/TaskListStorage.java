@@ -8,13 +8,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import weomucat.duke.exception.StorageException;
 import weomucat.duke.task.TaskList;
-import weomucat.duke.task.listener.SaveTaskListListener;
+import weomucat.duke.task.listener.TaskListStorageListener;
 
 /**
  * TaskListStorage is responsible for serializing and deserializing a TaskList,
  * before saving and loading from disk respectively.
  */
-public class TaskListStorage extends Storage<TaskList> {
+public class TaskListStorage extends Storage<TaskList> implements TaskListStorageListener {
 
   public TaskListStorage(String path) {
     super(path);
@@ -31,15 +31,18 @@ public class TaskListStorage extends Storage<TaskList> {
 
       objectOutputStream.close();
       fileOutputStream.close();
-    } catch (FileNotFoundException e) {
-      throw new StorageException(String.format("I cannot create a file at '%s'", this.path));
     } catch (IOException e) {
-      throw new StorageException("An I/O error occurred.");
+      throw new StorageException(String.format("I could not save Tasks at '%s'.", this.path));
     }
   }
 
   @Override
   public TaskList load() throws StorageException {
+    // If storage does not exist.
+    if (!exists()) {
+      return new TaskList();
+    }
+
     try {
       FileInputStream fileInputStream = new FileInputStream(this.path);
       ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
@@ -52,11 +55,19 @@ public class TaskListStorage extends Storage<TaskList> {
 
       return tasks;
     } catch (FileNotFoundException e) {
-      throw new StorageException(String.format("I cannot read a file at '%s'", this.path));
-    } catch (ClassNotFoundException | ClassCastException e) {
-      throw new StorageException("I do not know how to deserialize this file.");
-    } catch (IOException e) {
-      throw new StorageException("I could not load.");
+      throw new StorageException(String.format("I could not read Tasks at '%s'.", this.path));
+    } catch (ClassNotFoundException | ClassCastException | IOException e) {
+      throw new StorageException(String.format("I could not load Tasks at '%s'.", this.path));
     }
+  }
+
+  @Override
+  public TaskList loadTaskListUpdate() throws StorageException {
+    return load();
+  }
+
+  @Override
+  public void saveTaskListUpdate(TaskList tasks) throws StorageException {
+    save(tasks);
   }
 }

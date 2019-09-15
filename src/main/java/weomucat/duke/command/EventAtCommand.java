@@ -21,7 +21,7 @@ public class EventAtCommand extends Command<EventAtCommandListener> {
   }
 
   @Override
-  Class<EventAtCommandListener> getListenersClass() {
+  Class<EventAtCommandListener> getListenerClass() {
     return EventAtCommandListener.class;
   }
 

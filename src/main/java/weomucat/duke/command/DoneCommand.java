@@ -16,7 +16,7 @@ public class DoneCommand extends Command<DoneTaskCommandListener> {
   }
 
   @Override
-  Class<DoneTaskCommandListener> getListenersClass() {
+  Class<DoneTaskCommandListener> getListenerClass() {
     return DoneTaskCommandListener.class;
   }
 

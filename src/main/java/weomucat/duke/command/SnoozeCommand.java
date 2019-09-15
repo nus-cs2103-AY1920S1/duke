@@ -22,7 +22,7 @@ public class SnoozeCommand extends Command<SnoozeTaskCommandListener> {
   }
 
   @Override
-  Class<SnoozeTaskCommandListener> getListenersClass() {
+  Class<SnoozeTaskCommandListener> getListenerClass() {
     return SnoozeTaskCommandListener.class;
   }
 

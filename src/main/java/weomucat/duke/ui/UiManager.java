@@ -1,6 +1,7 @@
 package weomucat.duke.ui;
 
 import java.util.ArrayList;
+import weomucat.duke.command.Command;
 import weomucat.duke.command.listener.ByeCommandListener;
 import weomucat.duke.command.listener.DisplayCommandListener;
 import weomucat.duke.task.NumberedTaskList;
@@ -112,6 +113,13 @@ public class UiManager implements ByeCommandListener, DisplayCommandListener,
   public void userInputUpdate(String userInput) {
     for (UserInputListener listener : this.userInputListeners) {
       listener.userInputUpdate(userInput);
+    }
+  }
+
+  @Override
+  public void commandUpdate(Command<?> command) {
+    for (UserInputListener listener : this.userInputListeners) {
+      listener.commandUpdate(command);
     }
   }
 }

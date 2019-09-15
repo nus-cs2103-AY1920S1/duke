@@ -7,9 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 import weomucat.duke.Pair;
 import weomucat.duke.exception.InvalidIndexException;
+import weomucat.duke.task.listener.ListTaskListener;
+import weomucat.duke.task.listener.ModifyTaskListener;
 import weomucat.duke.task.listener.StubListTaskListener;
 import weomucat.duke.task.listener.StubModifyTaskListener;
 import weomucat.duke.task.listener.StubTaskListSizeListener;
+import weomucat.duke.task.listener.TaskListSizeListener;
 
 class TaskManagerTest {
 
@@ -61,9 +64,9 @@ class TaskManagerTest {
     StubTaskListSizeListener taskListSizeListener = new StubTaskListSizeListener();
 
     // Initialize Listeners
-    taskManager.newListTaskListener(listTaskListener);
-    taskManager.newModifyTaskListener(modifyTaskListener);
-    taskManager.newTaskListSizeListener(taskListSizeListener);
+    taskManager.addListener(ListTaskListener.class, listTaskListener);
+    taskManager.addListener(ModifyTaskListener.class, modifyTaskListener);
+    taskManager.addListener(TaskListSizeListener.class, taskListSizeListener);
 
     /* Add Tasks */
     // Expect 1 task.
@@ -117,9 +120,9 @@ class TaskManagerTest {
     StubTaskListSizeListener taskListSizeListener = new StubTaskListSizeListener();
 
     // Initialize Listeners
-    taskManager.newListTaskListener(listTaskListener);
-    taskManager.newModifyTaskListener(modifyTaskListener);
-    taskManager.newTaskListSizeListener(taskListSizeListener);
+    taskManager.addListener(ListTaskListener.class, listTaskListener);
+    taskManager.addListener(ModifyTaskListener.class, modifyTaskListener);
+    taskManager.addListener(TaskListSizeListener.class, taskListSizeListener);
 
     /* Add Tasks */
     assertDoesNotThrow(() -> taskManager.addTask(taskOne));
@@ -170,7 +173,7 @@ class TaskManagerTest {
     StubListTaskListener listTaskListener = new StubListTaskListener();
 
     // Initialize Listeners
-    taskManager.newListTaskListener(listTaskListener);
+    taskManager.addListener(ListTaskListener.class, listTaskListener);
 
     /* Add Tasks */
     assertDoesNotThrow(() -> taskManager.addTask(taskOne));

@@ -12,7 +12,7 @@ public class ByeCommand extends Command<ByeCommandListener> {
   }
 
   @Override
-  Class<ByeCommandListener> getListenersClass() {
+  Class<ByeCommandListener> getListenerClass() {
     return ByeCommandListener.class;
   }
 

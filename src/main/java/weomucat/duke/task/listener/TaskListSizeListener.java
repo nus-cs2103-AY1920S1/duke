@@ -4,7 +4,7 @@ package weomucat.duke.task.listener;
  * When the size of a task list changes, this listener will be notified.
  */
 @FunctionalInterface
-public interface TaskListSizeListener {
+public interface TaskListSizeListener extends TaskListener {
 
   /**
    * When the size of a task list changes, this method will be called.

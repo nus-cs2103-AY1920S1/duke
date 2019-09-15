@@ -8,7 +8,7 @@ import weomucat.duke.ui.Message;
  * This includes creating and deleting of the task.
  */
 @FunctionalInterface
-public interface ModifyTaskListener {
+public interface ModifyTaskListener extends TaskListener {
 
   /**
    * When a task is modified, this method will be called.

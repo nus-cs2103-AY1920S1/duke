@@ -3,8 +3,13 @@ package weomucat.duke.command;
 import weomucat.duke.DukeConsumer;
 import weomucat.duke.command.listener.LoadTasksCommandListener;
 import weomucat.duke.command.parameter.ParameterOptions;
+import weomucat.duke.ui.Message;
 
 public class LoadTasksCommand extends Command<LoadTasksCommandListener> {
+
+  public LoadTasksCommand() {
+    setRunAfter(() -> new DisplayMessageCommand(new Message("Loaded Tasks!")));
+  }
 
   @Override
   public ParameterOptions getParameterOptions() {
@@ -12,7 +17,7 @@ public class LoadTasksCommand extends Command<LoadTasksCommandListener> {
   }
 
   @Override
-  Class<LoadTasksCommandListener> getListenersClass() {
+  Class<LoadTasksCommandListener> getListenerClass() {
     return LoadTasksCommandListener.class;
   }
 

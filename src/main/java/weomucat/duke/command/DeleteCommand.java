@@ -16,7 +16,7 @@ public class DeleteCommand extends Command<DeleteTaskCommandListener> {
   }
 
   @Override
-  Class<DeleteTaskCommandListener> getListenersClass() {
+  Class<DeleteTaskCommandListener> getListenerClass() {
     return DeleteTaskCommandListener.class;
   }
 

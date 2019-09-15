@@ -16,7 +16,7 @@ public class FindCommand extends Command<FindTaskCommandListener> {
   }
 
   @Override
-  Class<FindTaskCommandListener> getListenersClass() {
+  Class<FindTaskCommandListener> getListenerClass() {
     return FindTaskCommandListener.class;
   }
 

@@ -2,8 +2,8 @@ package weomucat.duke.task;
 
 import static weomucat.duke.Duke.LOCALE;
 
-import java.util.ArrayList;
 import java.util.function.Predicate;
+import weomucat.duke.HeterogeneousContainers;
 import weomucat.duke.Pair;
 import weomucat.duke.command.listener.AddTaskCommandListener;
 import weomucat.duke.command.listener.DeleteTaskCommandListener;
@@ -11,15 +11,17 @@ import weomucat.duke.command.listener.DoneTaskCommandListener;
 import weomucat.duke.command.listener.EventAtCommandListener;
 import weomucat.duke.command.listener.FindTaskCommandListener;
 import weomucat.duke.command.listener.ListTaskCommandListener;
+import weomucat.duke.command.listener.LoadTasksCommandListener;
 import weomucat.duke.command.listener.SnoozeTaskCommandListener;
 import weomucat.duke.date.Interval;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.InvalidIndexException;
 import weomucat.duke.exception.StorageException;
-import weomucat.duke.storage.TaskListStorage;
 import weomucat.duke.task.listener.ListTaskListener;
 import weomucat.duke.task.listener.ModifyTaskListener;
 import weomucat.duke.task.listener.TaskListSizeListener;
+import weomucat.duke.task.listener.TaskListStorageListener;
+import weomucat.duke.task.listener.TaskListener;
 import weomucat.duke.ui.Message;
 
 /**
@@ -32,73 +34,27 @@ import weomucat.duke.ui.Message;
  */
 public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandListener,
     DoneTaskCommandListener, EventAtCommandListener, FindTaskCommandListener,
-    ListTaskCommandListener, SnoozeTaskCommandListener {
+    ListTaskCommandListener, LoadTasksCommandListener, SnoozeTaskCommandListener {
 
   private TaskList tasks;
-  private ArrayList<ListTaskListener> listTaskListeners;
-  private ArrayList<ModifyTaskListener> modifyTaskListeners;
-  private ArrayList<TaskListSizeListener> taskListSizeListeners;
-  private ArrayList<TaskListStorage> taskListStorages;
-
+  private HeterogeneousContainers<TaskListener> taskListeners;
 
   /**
    * Creates a TaskManager.
    */
   public TaskManager() {
     this.tasks = new TaskList();
-    this.listTaskListeners = new ArrayList<>();
-    this.modifyTaskListeners = new ArrayList<>();
-    this.taskListSizeListeners = new ArrayList<>();
-    this.taskListStorages = new ArrayList<>();
+    this.taskListeners = new HeterogeneousContainers<>();
   }
 
   /**
-   * Adds a ListTaskListener.
-   * When listTask is called, this listener will be notified.
+   * Adds a TaskListener.
+   * During the relevant task event, this listener will be notified.
    *
-   * @param listener listTask listener
+   * @param listener task listener
    */
-  public void newListTaskListener(ListTaskListener listener) {
-    this.listTaskListeners.add(listener);
-  }
-
-  /**
-   * Adds a ModifyTaskListener.
-   * When any task is modified, this listener will be notified.
-   *
-   * @param listener modifyTask listener
-   */
-  public void newModifyTaskListener(ModifyTaskListener listener) {
-    this.modifyTaskListeners.add(listener);
-  }
-
-  /**
-   * Adds a TaskListSizeListener.
-   * When the size of the task list changes, this listener will be notified.
-   *
-   * @param listener taskListSize listener
-   */
-  public void newTaskListSizeListener(TaskListSizeListener listener) {
-    this.taskListSizeListeners.add(listener);
-  }
-
-  /**
-   * Adds a TaskListStorage.
-   * Whenever the task list needs to be loaded/saved, this storage will be called.
-   *
-   * @param storage a task list storage
-   */
-  public void newTaskListStorage(TaskListStorage storage) {
-    this.taskListStorages.add(storage);
-  }
-
-  /**
-   * Loads tasks from a task list storage.
-   */
-  public void load() throws StorageException {
-    for (TaskListStorage storage : this.taskListStorages) {
-      this.tasks = storage.load();
-    }
+  public <T extends TaskListener> void addListener(Class<T> c, T listener) {
+    this.taskListeners.add(c, listener);
   }
 
   /**
@@ -110,13 +66,9 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     // Add task to Tasks
     this.tasks.add(task);
 
-    // Update ModifyTaskListeners
+    // Update listeners
     modifyTaskUpdate(new Message("Got it. I've added this task:"), task);
-
-    // Update TaskListSizeListeners
-    for (TaskListSizeListener listener : this.taskListSizeListeners) {
-      listener.taskListSizeUpdate(this.tasks.size());
-    }
+    taskListSizeUpdate();
   }
 
   /**
@@ -130,13 +82,9 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     // Remove task
     this.tasks.remove(i);
 
-    // Update ModifyTaskListeners
+    // Update listeners
     modifyTaskUpdate(new Message("Noted. I've removed this task:"), task);
-
-    // Update TaskListSizeListeners
-    for (TaskListSizeListener listener : this.taskListSizeListeners) {
-      listener.taskListSizeUpdate(this.tasks.size());
-    }
+    taskListSizeUpdate();
   }
 
   /**
@@ -152,7 +100,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
 
     this.tasks.updateRecurringTasks();
 
-    // Update ModifyTaskListeners
+    // Update listeners
     modifyTaskUpdate(new Message("Nice! I've marked this task as done:"), task);
   }
 
@@ -173,7 +121,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     EventTask event = (EventTask) task;
     event.setAt(atIndex);
 
-    // Update ModifyTaskListeners
+    // Update listeners
     modifyTaskUpdate(new Message("Got it. I've set the schedule for this event:"), task);
   }
 
@@ -236,14 +184,12 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
 
   private NumberedTaskList filterTasks(Predicate<Task> predicate) {
     NumberedTaskList result = new NumberedTaskList();
-
     for (int i = 0; i < this.tasks.size(); i++) {
       Task task = this.tasks.get(i);
       if (predicate.test(task)) {
         result.add(new Pair<>(i + 1, task));
       }
     }
-
     return result;
   }
 
@@ -251,18 +197,25 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     NumberedTaskList filtered = filterTasks(predicate);
 
     // Update ListTaskListeners
-    for (ListTaskListener listener : this.listTaskListeners) {
-      listener.listTaskUpdate(message, filtered);
+    for (ListTaskListener storage : this.taskListeners.getAll(ListTaskListener.class)) {
+      storage.listTaskUpdate(message, filtered);
     }
   }
 
   private void modifyTaskUpdate(Message message, Task task) throws StorageException {
-    for (ModifyTaskListener listener : this.modifyTaskListeners) {
-      listener.modifyTaskUpdate(message, task);
+    for (ModifyTaskListener storage : this.taskListeners.getAll(ModifyTaskListener.class)) {
+      storage.modifyTaskUpdate(message, task);
     }
 
-    for (TaskListStorage storage : this.taskListStorages) {
-      storage.save(this.tasks);
+    for (TaskListStorageListener storage : this.taskListeners
+        .getAll(TaskListStorageListener.class)) {
+      storage.saveTaskListUpdate(this.tasks);
+    }
+  }
+
+  private void taskListSizeUpdate() {
+    for (TaskListSizeListener storage : this.taskListeners.getAll(TaskListSizeListener.class)) {
+      storage.taskListSizeUpdate(this.tasks.size());
     }
   }
 
@@ -297,6 +250,14 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
       listAllTasks();
     } else {
       listOngoingTasks();
+    }
+  }
+
+  @Override
+  public void loadTasksCommandUpdate() throws StorageException {
+    for (TaskListStorageListener storage : this.taskListeners
+        .getAll(TaskListStorageListener.class)) {
+      this.tasks = storage.loadTaskListUpdate();
     }
   }
 

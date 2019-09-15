@@ -6,8 +6,14 @@ import weomucat.duke.task.TaskList;
 /**
  * When the task list needs to be saved, this listener will be notified.
  */
-@FunctionalInterface
-public interface SaveTaskListListener {
+public interface TaskListStorageListener extends TaskListener {
+
+  /**
+   * When a task list needs to be loaded, this method will be called.
+   *
+   * @throws StorageException if an error occurred while loading
+   */
+  TaskList loadTaskListUpdate() throws StorageException;
 
   /**
    * When a task list needs to be saved, this method will be called.

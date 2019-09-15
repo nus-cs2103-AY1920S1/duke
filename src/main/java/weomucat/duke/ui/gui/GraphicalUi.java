@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import weomucat.duke.Pair;
+import weomucat.duke.command.ByeCommand;
+import weomucat.duke.command.Command;
 import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
 import weomucat.duke.ui.Message;
@@ -21,7 +23,7 @@ import weomucat.duke.ui.listener.UserInputListener;
 public class GraphicalUi extends Application implements Ui, UserInputListener {
 
   // Amount of time in milliseconds to sleep before closing the gui.
-  private static final int BYE_COMMAND_SLEEP = 1000;
+  private static final int BYE_COMMAND_SLEEP = 2000;
 
   // For getting this instance when started by JavaFx
   private static GraphicalUi instance;
@@ -74,13 +76,11 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   @Override
   public void stop() throws Exception {
     super.stop();
-    /*
     if (this.running) {
       for (UserInputListener listener : this.userInputListeners) {
-        listener.byeUpdate();
+        listener.commandUpdate(new ByeCommand());
       }
     }
-     */
   }
 
   @Override
@@ -148,6 +148,13 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
   public void userInputUpdate(String userInput) {
     for (UserInputListener listener : this.userInputListeners) {
       listener.userInputUpdate(userInput);
+    }
+  }
+
+  @Override
+  public void commandUpdate(Command<?> command) {
+    for (UserInputListener listener : this.userInputListeners) {
+      listener.commandUpdate(command);
     }
   }
 }

@@ -19,7 +19,7 @@ public class ListCommand extends Command<ListTaskCommandListener> {
   }
 
   @Override
-  Class<ListTaskCommandListener> getListenersClass() {
+  Class<ListTaskCommandListener> getListenerClass() {
     return ListTaskCommandListener.class;
   }
 

@@ -17,7 +17,7 @@ public class TodoCommand extends Command<AddTaskCommandListener> {
   }
 
   @Override
-  Class<AddTaskCommandListener> getListenersClass() {
+  Class<AddTaskCommandListener> getListenerClass() {
     return AddTaskCommandListener.class;
   }
 

@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * Custom implementation of heterogeneous containers.
  * See Effective Java 29: typesafe heterogeneous containers
- * I built on it such that it can store multiple objects of the same class.
+ * I built on it such that it can store multiple elements of the same class.
  *
  * @param <E> subclasses of E can be stored in the container
  */
@@ -20,27 +20,42 @@ public class HeterogeneousContainers<E> {
     this.containers.add(new HashMap<>());
   }
 
-  public <T extends E> void add(Class<T> c, T listener) {
+  /**
+   * Adds an element to the container.
+   * Associates this element by class type to be retrieved with get().
+   *
+   * @param type    class type of the element
+   * @param element the element
+   * @param <T>     type of the element
+   */
+  public <T extends E> void add(Class<T> type, T element) {
     for (HashMap<Class<?>, Object> container : this.containers) {
-      if (container.get(c) == null) {
-        container.put(c, listener);
+      if (container.get(type) == null) {
+        // Casting to ensure runtime type safety.
+        container.put(type, type.cast(element));
         return;
       }
     }
 
     // No free containers, append a new one.
     HashMap<Class<?>, Object> container = new HashMap<>();
-    container.put(c, listener);
+    container.put(type, element);
     this.containers.add(container);
   }
 
-  public <T extends E> Collection<T> get(Class<T> c) {
+  /**
+   * Gets all elements from the container associated with a class type.
+   *
+   * @param type class type of the element
+   * @param <T>  type of the element
+   */
+  public <T extends E> Collection<T> getAll(Class<T> type) {
     ArrayList<T> objects = new ArrayList<>();
     for (HashMap<Class<?>, Object> container : containers) {
-      if (container.get(c) == null) {
+      if (container.get(type) == null) {
         break;
       } else {
-        objects.add(c.cast(container.get(c)));
+        objects.add(type.cast(container.get(type)));
       }
     }
     return objects;

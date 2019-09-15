@@ -7,7 +7,7 @@ import weomucat.duke.ui.Message;
  * When tasks need to be listed, this listener will be notified.
  */
 @FunctionalInterface
-public interface ListTaskListener {
+public interface ListTaskListener extends TaskListener {
 
   /**
    * When tasks need to be listed, this method will be called.

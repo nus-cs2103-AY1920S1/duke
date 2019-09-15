@@ -1,10 +1,12 @@
 package utils;
 
 public class Ui{
+
     public Ui(){
         logo();
         greeting();
     }
+
     void logo(){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -30,15 +32,15 @@ public class Ui{
     public void printMsg(Task t, int size){
         System.out.println(addDoubleLine("     Got it. I've added this task: \n" + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list."));
     }
+
     public void print(String str){
         System.out.println(addDoubleLine(str));
     }
+
     public void printTab(String str){
         print("    " + str);
     }
-    public void showLoadingError(){
 
-    }
     public void bye(){
         System.out.println(addDoubleLine("     Bye. Hope to see you again soon!"));
     }

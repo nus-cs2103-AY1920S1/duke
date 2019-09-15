@@ -14,12 +14,16 @@ import tasks.Todo;
 public class Storage {
     private File file;
     private String fileLocation;
+
     public Storage(String fileloc){
         this.fileLocation = fileloc;
         this.file = new File(fileloc);
     }
 
-    //reading from saved state
+    /**
+     * loads the saved tasks from file into new arraylist to be used inside TaskList
+     */
+
     public ArrayList<Task> load(){
         ArrayList<Task> tasks = new ArrayList<>();
         try{
@@ -28,9 +32,11 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] splited = line.split("\\|");
+
                 for (int i = 0; i < splited.length; i++) {
                     splited[i] = splited[i].trim();
                 }
+
                 switch(splited[0]) {
                     case "T":
                         Task todo = new Todo(splited[2]);
@@ -68,6 +74,12 @@ public class Storage {
         }		     
         return tasks;
     }
+    /**
+     * 
+     * @param tasks
+     * takes tasks from tasklist and writes into txt file using tasks's own format
+     * 
+     */
     public void saveFile(TaskList tasks){
         try {
             FileWriter fw = new FileWriter(fileLocation);

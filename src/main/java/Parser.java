@@ -15,6 +15,7 @@ public class Parser {
         if (command.equals("done")) {
             try {
                 int num = sc.nextInt();
+                assert (num != 0);
                 tasks.taskDone(num-1);
                 System.out.println("IsDone?" + tasks.getList().get(num-1).getIsDone());
                 System.out.println("Nice! I've marked this task as done: \n" + tasks.taskPrint(num-1));
@@ -25,6 +26,7 @@ public class Parser {
         } else if(command.equals("delete")) {
             try {
                 int deleteNum = sc.nextInt();
+                assert (deleteNum != 0);
                 System.out.println("Noted. I've removed this task: ");
                 System.out.println(tasks.taskPrint(deleteNum -1));
                 System.out.println("Now you have " + (tasks.size() -1) + " tasks in the list. ");
@@ -39,6 +41,7 @@ public class Parser {
             try {
                 if (command.equals("todo")) {
                     String descToDo = sc.nextLine();
+                    assert !descToDo.isEmpty();
                     if (!descToDo.isEmpty()) {
                         tasks.add(new Todo(descToDo));
                         storage.append(tasks.getLast());
@@ -47,10 +50,13 @@ public class Parser {
                     }
                 } else if (command.equals("deadline")) {
                     String rem = sc.nextLine();
+                    assert !(rem == null);
                     if (!rem.isEmpty()) {
                         String[] descriptionNDate = rem.split("/by");
                         String description = descriptionNDate[0];
                         String by = descriptionNDate[1];
+                        assert !(description == null);
+                        assert !(by == null);
                         tasks.add(new Deadline(description, by));
                         storage.append(tasks.getLast());
                     } else {
@@ -58,10 +64,13 @@ public class Parser {
                     }
                 } else if (command.equals("event")) {
                     String remDetails = sc.nextLine();
+                    assert !(remDetails == null);
                     if (!remDetails.isEmpty()) {
                         String[] descriptionNAt = remDetails.split("/at");
                         String desc = descriptionNAt[0];
                         String at = descriptionNAt[1];
+                        assert !(desc == null);
+                        assert !(at == null);
                         tasks.add(new Event(desc, at));
                         storage.append(tasks.getLast());
                     } else {

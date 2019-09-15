@@ -3,15 +3,39 @@ Welcome to Duke: The Great Auto To-Do List.
 <br/> Now you can never forget your tasks ever
 again!
 
-Complete the following set up before 
-running this application in your computer.
+## Contents Page
 
+* [Prerequisites](#prerequisites)
+* [Features](#features)
+    * [Feature 1:  Add your Tasks into the To-Do List](#feature-1-add-your-tasks-into-the-to-do-list)
+    * [Feature 2: Deleting your Tasks](#feature-2-deleting-your-tasks)
+    * [Feature 3: Find your Tasks](#feature-3-find-your-tasks)
+    * [Feature 4: List your Tasks](#feature-4-list-your-tasks)
+    * [Feature 5: Save your Tasks into a TextFile](#feature-5-save-your-tasks-into-a-textfile)
+    * [Feature 6: Arrange Deadlines in order](#feature-6-arrange-deadlines-in-order)
+    * [Feature 7: Arrange Events in order](#feature-7-arrange-events-in-order)
+
+* [Usage Commands](#usage)
+    * [bye](#bye---exit-the-application)
+    * [deadline](#deadline---creates-a-new-deadline)
+    * [delete](#delete---delete-a-task)
+    * [done](#done---mark-a-task-as-done)
+    * [event](#event---creates-a-new-event)
+    * [find](#find---find-a-task-with-a-specific-keyword)
+    * [list](#list---lists-all-tasks-in-to-do-list)
+    * [todo](#todo---creates-a-new-todo-task)
+    * [sort](#sort---sorts-deadlineevent-in-chronological-order)
+    
+    
 ![User Interface](Ui.png)
 
 ## Prerequisites
+Complete the following set up before 
+running this application in your computer:
+
 1. Java SE Development Kit 11
 
-## Feature
+## Features
 Here are some features that you can expect from the Great To-Do List.
 
 ### Feature 1: Add your Tasks into the To-Do List
@@ -196,3 +220,5 @@ Followed by a list of all deadlines in ascending date
 order. 
 Note that these sorted tasks will now appear at the back
 of your tasks list.
+
+[Back to Top](#user-guide)

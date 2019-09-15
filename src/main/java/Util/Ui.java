@@ -71,4 +71,8 @@ public class Ui {
         System.out.println("☹ OOPS!!! This entry does not exist");
     }
 
+    public static void showErrorMsg(Exception error) {
+        System.out.println("☹ OOPS!!!" + error.toString());
+    }
+
 }

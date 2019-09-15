@@ -8,6 +8,16 @@ public class Deadline extends Task {
         this.ddl = ddl;
     }
 
+    public Deadline(int status, String desc, String ddl) {
+        super(desc);
+        this.ddl = ddl;
+        isDone = (status == 1);
+    }
+
+    public String getDdl() {
+        return ddl;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + "(by: " + ddl + ")";

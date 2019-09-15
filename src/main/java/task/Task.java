@@ -2,9 +2,9 @@ package task;
 
 public class Task {
     private String desc;
-    private Boolean isDone;
+    Boolean isDone;
 
-    public Task(String desc) {
+    Task(String desc) {
         this.desc = desc;
         this.isDone = false;
     }
@@ -13,8 +13,12 @@ public class Task {
         return this.desc;
     }
 
-    public String getStatus() {
+    private String getStatus() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public int getDone() {
+        return isDone ? 1 : 0;
     }
 
     public void markAsDone() {

@@ -3,11 +3,13 @@ package command;
 import task.TaskList;
 import util.Storage;
 
+import java.io.IOException;
+
 public abstract class Command {
-    protected boolean isExit;
+    boolean isExit;
     protected String command;
 
-    public Command() {
+    Command() {
         isExit = false;
     }
 
@@ -15,5 +17,5 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void executeCommand(TaskList taskList, Storage storage);
+    public abstract void executeCommand(TaskList taskList, Storage storage) throws IOException;
 }

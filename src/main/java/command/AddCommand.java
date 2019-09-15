@@ -10,7 +10,6 @@ import util.Ui;
 
 public class AddCommand extends Command {
 
-    private String desc = "";
     private String command;
 
     public AddCommand(String command) {
@@ -19,6 +18,7 @@ public class AddCommand extends Command {
 
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
+        String desc;
         if (command.startsWith(Instruction.TODO.toString())) {
             if (command.substring(4).isEmpty()) {
                 Ui.emptyTaskMsg(Instruction.TODO.toString());
@@ -33,7 +33,7 @@ public class AddCommand extends Command {
                 Ui.missingDeadlineMsg();
             } else {
                 int dateStartIndex = command.lastIndexOf("/by");
-                desc = command.substring(9, dateStartIndex);
+                desc = command.substring(9, dateStartIndex - 1);
                 String ddl = command.substring(dateStartIndex + 4);
                 taskList.addTask(new Deadline(desc, ddl));
             }
@@ -43,8 +43,8 @@ public class AddCommand extends Command {
             } else if (!command.contains("/at")) {
                 Ui.missingEventMsg();
             } else {
-                int dateStartIndex = command.indexOf("/at") + 4;
-                desc = command.substring(6, dateStartIndex);
+                int dateStartIndex = command.indexOf("/at");
+                desc = command.substring(6, dateStartIndex - 1);
                 String date = command.substring(dateStartIndex + 4);
                 taskList.addTask(new Event(desc, date));
             }

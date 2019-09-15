@@ -6,6 +6,11 @@ public class ToDo extends Task {
         super(desc);
     }
 
+    public ToDo(int status, String desc) {
+        super(desc);
+        isDone = (status == 1);
+    }
+
     @Override
     public String toString() {
         return "[T]" + super.toString();

@@ -1,5 +1,5 @@
 # Duke - User Guide
-![Image of Task Manager](Ui.png)
+![Image of Task Manager](Ui.PNG)
 
 ## Table of Content
 1. [Introduction](#introduction)

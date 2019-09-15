@@ -30,17 +30,7 @@ Example of usage:
 
 Expected outcome:
 
-`Wof wof! Doggo heard meowing!` <br>
-`Meow : Doggo sends help` <br>
-`Todo : Tell Doggo your trouble` <br>
-`Deadline : Tell Doggo your worries` <br>
-`Event : Tell Doggo your schedule` <br>
-`List : Doggo tells you your task` <br>
-`Find : Doggo fetches your tasks` <br>
-`Done : Doggo notes your completed worries` <br>
-`Delete : Doggo clears your trouble` <br>
-`Bye : Doggo needs his afternoon nap` <br>
-
+![GitHub Logo](../images/meow.png)
 <hr>
 
 ### `todo` - Tell Doggo your troubles.
@@ -130,4 +120,9 @@ Example of usage:
 Expected outcome:
 
 ![GitHub Logo](../images/bye.png)
+Format: ![Alt Text](https://github.com/chrischenhui/duke/blob/master/images/done.png)
+Format: ![Alt Text](https://www.google.com)
+Format: ![Alt Text](www.google.com)
+Format: ![Alt Text](https://google.com)
+Format: ![Alt Text](google.com)
 <hr>

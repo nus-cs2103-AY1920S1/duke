@@ -25,8 +25,8 @@ public class Ui {
 
     public static String showHelp() {
         String message = String.format("Hello! I'm Duke! You can use:%stodo <item>%sdeadline <item> /by <when>"
-                        + "%sevent <item> /at <when>%sfind <keyword>%sdone <number>%sdelete <number>", System.lineSeparator(), System.lineSeparator(),
-                System.lineSeparator(), System.lineSeparator(), System.lineSeparator(), System.lineSeparator());
+                        + "%sevent <item> /at <when>%sfind <keyword>%sdone <number>%sdelete <number>%sstats%sbye", System.lineSeparator(), System.lineSeparator(),
+                System.lineSeparator(), System.lineSeparator(), System.lineSeparator(), System.lineSeparator(), System.lineSeparator(), System.lineSeparator());
         return message;
     }
 

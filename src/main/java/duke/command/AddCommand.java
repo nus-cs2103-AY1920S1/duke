@@ -11,7 +11,7 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage, String command) {
-        String message = String.format("Command: %s%s", command, System.lineSeparator());
+        String message = "";
         try {
             String addTextDescription;
             String addTextPeriod;

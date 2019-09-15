@@ -19,6 +19,8 @@ public class Parser {
             return new FindCommand();
         } else if (fullCommand.contains("help")) {
             return new HelpCommand();
+        } else if (fullCommand.contains("stats")) {
+            return new StatsCommand();
         }
         return new InvalidCommand();
     }

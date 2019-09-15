@@ -10,11 +10,11 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage, String command) {
-        String message = String.format("Command: %s%s", command, System.lineSeparator());
+        String message = "";
         try {
             String target = command.substring(5);
             ArrayList<Task> foundList = new ArrayList<>();
-            
+
             for (Task t : tasks.getList()) {
                 if (t.toString().contains(target)) {
                     foundList.add(t);

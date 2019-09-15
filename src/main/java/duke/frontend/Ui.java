@@ -87,6 +87,8 @@ public class Ui {
                 for (Task ta : lst) {
                     response = response.concat(String.format("%d.%s\n", list.getTaskList().indexOf(ta) + 1, ta.toString()));
                 }
+            } else {
+                response = "There are no matching tasks in your Task List!";
             }
             return response;
         case "delete":

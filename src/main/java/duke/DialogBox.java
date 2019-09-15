@@ -2,46 +2,57 @@ package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
     private Label text;
-    private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-
+    public DialogBox(String message, Image theImage) {
+        text = new Label(message);
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        text.setStyle("-fx-background-radius: 10; -fx-background-color: #9FDB68;");
+        text.setPadding(new Insets(10));
 
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        Circle roundedPicture = new Circle(40);
+        roundedPicture.setFill(new ImagePattern(theImage));
+
+        FlowPane theFlowPane = new FlowPane();
+        theFlowPane.getChildren().addAll(text, roundedPicture);
+        theFlowPane.setAlignment(Pos.TOP_RIGHT);
+        FlowPane.setMargin(text, new Insets(0, 5, 0, 5));
+
+        getChildren().addAll(theFlowPane);
+        HBox.setMargin(theFlowPane, new Insets(10, 10, 0, 10));
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        for (Node node : tmp) {
+            if (node instanceof FlowPane) {
+                FlowPane theFlowPane = (FlowPane) node;
+                FXCollections.reverse(theFlowPane.getChildren());
+                theFlowPane.setAlignment(Pos.TOP_LEFT);
+            }
+        }
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String message, Image theImage) {
+        return new DialogBox(message, theImage);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String message, Image theImage) {
+        DialogBox db = new DialogBox(message, theImage);
         db.flip();
         return db;
     }
+
 }

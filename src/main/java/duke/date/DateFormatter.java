@@ -41,7 +41,7 @@ public class DateFormatter {
             date = df.parse(this.timeline);
             return outputformat.format(date);
         } catch (ParseException e) {
-            throw new DukeException("Invalid Data and Time Format");
+            throw new DukeException("Invalid Data and Time Format!!!");
         }
     }
 }

@@ -24,30 +24,35 @@ public class TaskList {
         return tasks.size();
     }
 
-    public void output() {
+    public String output() {
+        String taskString = "";
         for (int i = 1; i <= tasks.size(); i++) {
-            System.out.println(i + ". " + tasks.get(i - 1));
+            taskString += (i + ". " + tasks.get(i - 1)) + System.lineSeparator();
         }
+        return taskString;
     }
 
-    public void markDone(int index) {
+    public String markDone(int index) {
         tasks.get(index).done();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + tasks.get(index));
+        String message = String.format("Nice! I've marked this task as done:%s%s",
+                System.lineSeparator(), tasks.get(index));
+        return message;
     }
 
-    public void remove(int index) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println("  " + tasks.get(index));
+    public String remove(int index) {
+        String message = String.format("Noted. I've removed this task:%s%s%s",
+                System.lineSeparator(), tasks.get(index), System.lineSeparator());
         tasks.remove(index);
-        System.out.println("You now have " + getSize() + (getSize() == 1 ? "task" : " tasks") + " in the list.");
+        message += "You now have " + getSize() + (getSize() == 1 ? "task" : " tasks") + " in the list.";
+        return message;
     }
 
-    public void add(Task t) {
+    public String add(Task t) {
         tasks.add(t);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + t);
-        System.out.println("You now have " + getSize() + (getSize() == 1 ? "task" : " tasks") + " in the list.");
+        String message = String.format("Got it. I've added this task:%s%s%s",
+                System.lineSeparator(), t, System.lineSeparator());
+        message += "You now have " + getSize() + (getSize() == 1 ? "task" : " tasks") + " in the list.";
+        return message;
     }
 
 }

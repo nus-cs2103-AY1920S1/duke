@@ -6,52 +6,59 @@ import duke.task.Todo;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 import java.io.IOException;
 
 public class AddCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage, String command) throws IOException, DukeException {
+    public String execute(TaskList tasks, Storage storage, String command) throws IOException, DukeException {
+        String message = String.format("Command: %s%s", command, System.lineSeparator());
         try {
-            String addTextDescription = "";
-            String addTextPeriod = "";
+            String addTextDescription;
+            String addTextPeriod;
             if (command.contains("todo")) {
                 addTextDescription = command.substring(command.lastIndexOf("todo ") + 5);
                 if (addTextDescription.length() == 0) {
-                    throw new DukeException("Error [AddCommand] 0x0000006: The description of a todo cannot be empty.");
+                    throw new DukeException("Error [AddCommand] 0x0000006:" +
+                            System.lineSeparator() + "The description of a todo cannot be empty.");
                 } else {
-                    tasks.add(new Todo(addTextDescription));
+                    message += tasks.add(new Todo(addTextDescription));
                 }
             } else if (command.contains("deadline")) {
                 if (command.lastIndexOf("/by") == -1) {
-                    throw new DukeException("Error [AddCommand] 0x0000007: You are missing information.");
+                    throw new DukeException("Error [AddCommand] 0x0000007:" +
+                            System.lineSeparator() + "You are missing information.");
                 }
                 addTextDescription = command.substring(9, command.lastIndexOf("/by")).trim();
                 addTextPeriod = command.substring(command.lastIndexOf("/by ") + 3).trim();
                 if (addTextDescription.length() == 0 || addTextPeriod.length() == 0) {
-                    throw new DukeException("Error [AddCommand] 0x0000008: You are missing information.");
+                    throw new DukeException("Error [AddCommand] 0x0000008:" +
+                            System.lineSeparator() + "You are missing information.");
                 } else {
-                    tasks.add(new Deadline(addTextDescription, addTextPeriod));
+                    message += tasks.add(new Deadline(addTextDescription, addTextPeriod));
                 }
             } else if (command.contains("event")) {
                 if (command.lastIndexOf("/at") == -1) {
-                    throw new DukeException("Error [AddCommand] 0x0000009: You are missing information.");
+                    throw new DukeException("Error [AddCommand] 0x0000009:" +
+                            System.lineSeparator() + "You are missing information.");
                 }
                 addTextDescription = command.substring(6, command.lastIndexOf("/at")).trim();
                 addTextPeriod = command.substring(command.lastIndexOf("/at ") + 3).trim();
                 if (addTextDescription.length() == 0 || addTextPeriod.length() == 0) {
-                    throw new DukeException("Error [AddCommand] 0x0000010: You are missing information.");
+                    throw new DukeException("Error [AddCommand] 0x0000010:" +
+                            System.lineSeparator() + "You are missing information.");
                 } else {
-                    tasks.add(new Event(addTextDescription, addTextPeriod));
+                    message += tasks.add(new Event(addTextDescription, addTextPeriod));
                 }
             } else {
-                throw new DukeException("Error [AddCommand] 0x0000011: I'm sorry, but I don't know what that means.");
+                throw new DukeException("Error [AddCommand] 0x0000011:" +
+                        System.lineSeparator() + "I'm sorry, but I don't know what that means.");
             }
         } catch (DukeException ex) {
-            System.out.println(ex.getMessage());
+            return ex.getMessage();
         }
+        return message;
     }
 
 }

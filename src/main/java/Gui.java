@@ -25,7 +25,7 @@ public class Gui extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            stage.setTitle("Duke: Your Task Assistant");
+            stage.setTitle("Duke: Your Task Assistant Dog");
             stage.setScene(scene);
             stage.getIcons().add(new Image(Gui.class.getResourceAsStream("/images/dukeIcon.png")));
             fxmlLoader.<MainWindow>getController().setDuke(duke);

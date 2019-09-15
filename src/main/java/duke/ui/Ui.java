@@ -48,7 +48,7 @@ public class Ui {
 		StringBuilder addedTaskMessage = new StringBuilder("Got it. I've added this task: \n");
 		addedTaskMessage.append("\t[").append(firstAlphabet).append("] ");
 		addedTaskMessage.append(taskDescription).append("\n");
-		addedTaskMessage.append("Now you have ").append(numberOfItems).append(" in the list.\n");
+		addedTaskMessage.append("Now you have ").append(numberOfItems).append(" tasks in the list.\n");
 		return addedTaskMessage.toString();
 	}
 	

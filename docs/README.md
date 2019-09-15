@@ -50,7 +50,7 @@ Format: `tag INDEX KEYWORD`
 
 ### Finding tasks: `find`
 Finds tasks with a related keyword. +
-Format: `find book`
+Format: `find KEYWORD`
 
 ### Exiting Duke: `bye` 
 Exits Duke. +

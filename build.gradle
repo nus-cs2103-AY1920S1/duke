@@ -28,6 +28,10 @@ application {
     mainClassName = "Duke"
 }
 
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
 shadowJar {
     archiveBaseName = "duke"
     archiveVersion = "0.1.3"

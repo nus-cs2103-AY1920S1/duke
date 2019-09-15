@@ -1,9 +1,13 @@
 package Storage;
 
-import Model.*;
+import Model.Task;
+import Model.Tasklist;
+import Model.deadline;
+import Model.event;
+import Model.todo;
 
-import javax.lang.model.type.NullType;
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -15,6 +19,10 @@ public class Storage {
 
     public Storage(Path filePath) {
         this.filePath = filePath;
+    }
+
+    public Storage(){
+        this.filePath = null;
     }
 
     public Tasklist load(){

@@ -2,11 +2,15 @@ package duke.storage;
 
 import duke.exception.IoDukeException;
 import duke.task.Deadline;
+import duke.util.DateFormatter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Manages serialization of Deadline.
+ */
 public class DeadlineStorageSerializer {
     /**
      * Serializes a Deadline object.
@@ -20,7 +24,7 @@ public class DeadlineStorageSerializer {
         data.add(deadline.getType());
         data.add(Boolean.toString(deadline.getIsDone()));
         data.add(deadline.getDescription());
-        data.add(StorageSerializer.DATE_FORMAT.format(deadline.getBy()));
+        data.add(DateFormatter.format(deadline.getBy()));
 
         return String.join("|", data) + "\n";
     }
@@ -38,7 +42,7 @@ public class DeadlineStorageSerializer {
 
         boolean done = Boolean.parseBoolean(tokens[1]);
         String description = tokens[2];
-        Date by = StorageSerializer.DATE_FORMAT.parse(tokens[3]);
+        Date by = DateFormatter.parse(tokens[3]);
 
         return new Deadline(description, by, done);
     }

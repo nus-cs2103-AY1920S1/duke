@@ -5,6 +5,9 @@ import duke.task.Todo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages serialization of Todo.
+ */
 public class TodoStorageSerializer {
     /**
      * Serializes a Todo object.

@@ -7,9 +7,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import java.text.DateFormat;
+import duke.util.DateFormatter;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,9 +19,6 @@ import java.util.regex.Pattern;
 public class TaskParser {
     /** Generic syntax error message prefix. **/
     private static final String SYNTAX_PREFIX = "Syntax error.\nFormat: ";
-
-    /** Syntax for date. **/
-    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
 
     /** Syntax for deadline. **/
     private static final Pattern DEADLINE_PATTERN = Pattern.compile("deadline (.*) /by (.*)");
@@ -63,7 +59,7 @@ public class TaskParser {
             }
 
             try {
-                date = DATE_FORMAT.parse(matcher.group(2));
+                date = DateFormatter.parse(matcher.group(2));
             } catch (ParseException e) {
                 throw new InvalidInputDukeException(DEADLINE_SYNTAX_MSG);
             }
@@ -77,7 +73,7 @@ public class TaskParser {
             }
 
             try {
-                date = DATE_FORMAT.parse(matcher.group(2));
+                date = DateFormatter.parse(matcher.group(2));
             } catch (ParseException e) {
                 throw new InvalidInputDukeException(EVENT_SYNTAX_MSG);
             }

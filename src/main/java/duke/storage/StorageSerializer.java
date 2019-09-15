@@ -6,12 +6,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
+/**
+ * Manages serialization of data.
+ */
 public class StorageSerializer {
-    /** Date format used for serialization. **/
-    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
-
     /**
      * Serializes tasks and returns a readable, storage version of itself.
      *

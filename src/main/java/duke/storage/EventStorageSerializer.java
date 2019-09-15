@@ -2,11 +2,15 @@ package duke.storage;
 
 import duke.exception.IoDukeException;
 import duke.task.Event;
+import duke.util.DateFormatter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Manages serialization of Event.
+ */
 public class EventStorageSerializer {
     /**
      * Serializes an Event object.
@@ -20,7 +24,7 @@ public class EventStorageSerializer {
         data.add(event.getType());
         data.add(Boolean.toString(event.getIsDone()));
         data.add(event.getDescription());
-        data.add(StorageSerializer.DATE_FORMAT.format(event.getAt()));
+        data.add(DateFormatter.format(event.getAt()));
 
         return String.join("|", data) + "\n";
     }
@@ -38,7 +42,7 @@ public class EventStorageSerializer {
 
         boolean done = Boolean.parseBoolean(tokens[1]);
         String description = tokens[2];
-        Date at = StorageSerializer.DATE_FORMAT.parse(tokens[3]);
+        Date at = DateFormatter.parse(tokens[3]);
 
         return new Event(description, at, done);
     }

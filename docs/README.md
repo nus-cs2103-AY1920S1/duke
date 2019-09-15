@@ -38,8 +38,8 @@ Example of expected outcome:
 
 ```
 Here are the tasks in your list:
-1.[E][N] project meeting (by: 02/20/2019 1420)
-2.[D][N] return book (by: 02/20/2019 1420)
+1.[E][N] project meeting (by: 02/12/2019 1420)
+2.[D][N] return book (by: 02/12/2019 1420)
 3.[T][N] read book
 ```
 
@@ -49,4 +49,4 @@ Here are the tasks in your list:
 
 Example of usage: 
 
-`list`
+`help`

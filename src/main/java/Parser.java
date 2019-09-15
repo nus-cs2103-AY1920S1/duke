@@ -85,6 +85,8 @@ public class Parser {
                           ArrayList<TaskList> array) {
         String[] arr2 = word.split("/at");
         DateAndTime dateAndTime1 = new DateAndTime(arr2[1]);
+        dateAndTime1.convertDate();
+        dateAndTime1.convertTime();
         TaskList eventT = new Event(num, "[✗]", arr2[0], "event", dateAndTime1);
         return eventT.addList(eventT, array, num);
     }
@@ -104,6 +106,8 @@ public class Parser {
         String[] arr3 = word.split("/by");
         String[] list = arr3[1].split(" ");
         DateAndTime dateAndTime2 = new DateAndTime(arr3[1]);
+        dateAndTime2.convertTime();
+        dateAndTime2.convertDate();
         TaskList deadlineT = new Deadline(num, "[✗]", 
                                           arr3[0], "deadline", dateAndTime2);
         return deadlineT.addList(deadlineT, array, num);

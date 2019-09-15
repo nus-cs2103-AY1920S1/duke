@@ -113,7 +113,7 @@ public class DialogBox extends HBox {
 
         String[] lines = text.split("\\r?\\n");   
         for (String line : lines) {
-            if (line.length() >= 40) {
+            if (line.length() > 100) {
                 dialog.setPrefWidth(668.0);
                 break;
             } 

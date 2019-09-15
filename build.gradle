@@ -36,7 +36,7 @@ javafx {
 }
 
 shadowJar {
-    archiveBaseName = "Rori"
+    archiveBaseName = "rori"
     archiveVersion = "1.0.3"
     archiveClassifier = null
     archiveAppendix = null

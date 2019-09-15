@@ -4,7 +4,7 @@
 
 ## Usage
 
-You can start up **Rori** by running up Rori.jar file found in ./build/libs/Rori-1.0.3.jar, or subsequently you could clone the repo and run on the root folder using:
+You can start up **Rori** by running up the `rori-version.jar` file found in `./build/libs/rori-1.0.3.jar`, or subsequently you could clone the repo and run on the root folder using:
 ```
 gradlew run
 ```
@@ -12,6 +12,10 @@ gradlew run
 ### Prerequisite
 
 You would require JRE or JDK set up on your local machine to start up **Rori**.
+
+## Testing
+
+Use `gradlew test` to do JUnit testing on **Rori**
 
 ## Features 
 
@@ -64,6 +68,8 @@ Got it. I've added this task:
   [T][X] Buy a new fan
 Now you have 1 tasks in the list.
 ```
+
+![todo](/docs/todo.png?raw=true "How to todo")
 
 ### `deadline` - Displays list of Tasks
 

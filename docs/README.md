@@ -10,11 +10,11 @@
     
 2. [Features](#features)  
     2.1 [Types of Tasks](#types)  
-        2.1.1 [Adding of Tasks](#add)  
-    2.2 [Listing Tasks](#list)  
-    2.3 [Handling of Tasks](#handle)  
-    2.4 [Finding Tasks](#find)  
-    2.5 [Sorting Tasks](#sort)  
+    2.2 [Adding of Tasks](#add)  
+    2.3 [Listing Tasks](#list)  
+    2.4 [Handling of Tasks](#handle)  
+    2.5 [Finding Tasks](#find)  
+    2.6 [Sorting Tasks](#sort)  
 
 3. [Viewing of Statistics](#stats)  
     3.1 [Viewing of Statistics by Time](#time)  
@@ -32,9 +32,11 @@ Duke ChatBot is a task managing chat bot which allows users to input the tasks t
 This is what Duke ChatBot looks like:  
 <img src="https://github.com/EvonDong/duke/blob/master/docs/Ui.png" width="480">
 
+
 ### Who Should Use It <a name="who"></a>
 
 This application aims to be beginner friendly and is intended for users who wants to keep track of the list of tasks to do and enhance their productivity.
+
 
 ### Typographical Conventions <a name="how"></a>
 
@@ -58,7 +60,7 @@ This application stores 3 different types of tasks:
     
 `event`               An Event task represents an event to attend at a certain date and time.
 
-#### Adding of Tasks <a name="add"></a>
+### Adding of Tasks <a name="add"></a>
 This section contains the commands to be keyed in to add different type of task.
 
 ##### Todo Task

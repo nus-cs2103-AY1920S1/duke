@@ -8,7 +8,7 @@ import duke.storage.Storage;
 /**
  * Command to remove tasks from the task list.
  */
-public class RemoveCommand extends Command {
+public class DeleteCommand extends Command {
 
     private int taskNumber;
 
@@ -18,7 +18,7 @@ public class RemoveCommand extends Command {
      * @param command Contains the index of the task to be removed.
      * @throws NumberFormatException If index of task to be removed is not a number.
      */
-    public RemoveCommand(String command) throws NumberFormatException {
+    public DeleteCommand(String command) throws NumberFormatException {
         try {
             this.taskNumber = Integer.parseInt(command);
         } catch (NumberFormatException e) {
@@ -33,11 +33,11 @@ public class RemoveCommand extends Command {
      * @return RemoveCommand object to be created.
      * @throws DukeException If no index is given.
      */
-    public static RemoveCommand process(String[] fullCommand) throws DukeException {
+    public static DeleteCommand process(String[] fullCommand) throws DukeException {
         if (fullCommand.length == 1) {
             throw new DukeException("OOPS!!! Please specify the index of the task to be removed.");
         }
-        return new RemoveCommand(fullCommand[1]);
+        return new DeleteCommand(fullCommand[1]);
     }
 
     /**
@@ -51,7 +51,7 @@ public class RemoveCommand extends Command {
         UndoCommand.saveVersion(storage.getSavedListString(tasks));
         StringBuilder sb = new StringBuilder();
         try {
-            sb.append(tasks.removeTask(taskNumber));
+            sb.append(tasks.deleteTask(taskNumber));
         } catch (IndexOutOfBoundsException e) {
             sb.append("OOPS!!! Your specified task number is out of range.");
             UndoCommand.removeRecentSavedVersion();

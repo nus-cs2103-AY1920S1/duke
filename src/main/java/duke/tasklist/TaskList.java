@@ -149,7 +149,7 @@ public class TaskList {
      *
      * @param taskNumber Index of the task to be removed.
      */
-    public String removeTask(int taskNumber) {
+    public String deleteTask(int taskNumber) {
         String taskDescription = tasks.get(taskNumber - 1).toString();
         tasks.remove(taskNumber - 1);
         return "Noted. I've removed this task:\n" + taskDescription + "\n" + getListSize();

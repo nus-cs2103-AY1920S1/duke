@@ -1,5 +1,6 @@
 package duke.calendar;
 
+;
 import duke.exception.InvalidTimeException;
 
 /**
@@ -32,14 +33,14 @@ public class Time {
         }
         boolean isIncorrectFormat = unprocessedTime.length() != 4;
         if (isIncorrectFormat) {
-            throw new InvalidTimeException("☹ OOPS!!! Please input a valid time e.g. 1800.");
+            throw new InvalidTimeException("OOPS!!! Please input a valid time e.g. 1800.");
         }
         int time = Integer.parseInt(unprocessedTime);
         int hour = time / 100;
         int minute = time % 100;
         boolean isInvalidTime = hour > 23 || minute > 59;
         if (isInvalidTime) {
-            throw new InvalidTimeException("☹ OOPS!!! Please input a valid time.");
+            throw new InvalidTimeException("OOPS!!! Please input a valid time.");
         }
         boolean isPastNoon = hour > 11;
         if (isPastNoon) {

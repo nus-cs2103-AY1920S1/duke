@@ -1,5 +1,6 @@
 package duke.command;
 
+;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -63,7 +64,7 @@ public class AddEventCommand extends Command {
             throw new MissingDescriptionException("event");
         }
         if (scheduleTimeIsEmpty) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The description of an event requires a task and/or"
+            throw new InsufficientDetailsException("OOPS!!! The description of an event requires a task and/or"
                     + "a scheduled time");
         }
         addEvent(tasks, ui, storage, detailsSplit, tags);
@@ -89,7 +90,7 @@ public class AddEventCommand extends Command {
         String startDetails = getStartDetails(timings);
         boolean noStartDetails = startDetails.length() == 0;
         if (noStartDetails) {
-            throw new InsufficientDetailsException("☹ OOPS!!! Please input a start date/time.");
+            throw new InsufficientDetailsException("OOPS!!! Please input a start date/time.");
         }
         String endDetails = getEndDetails(timings);
         Date eventStartDate = createStartDate(startDetails);

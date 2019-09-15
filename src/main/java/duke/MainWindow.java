@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.UnsupportedEncodingException;
+
 import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -43,7 +45,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws UnsupportedEncodingException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

@@ -1,5 +1,6 @@
 package duke.calendar;
 
+;
 import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ public class DateTest {
             Date date = new Date("2/13/2019");
             fail();
         } catch (Exception e) {
-            assertEquals("☹ OOPS!!! Please input a valid month.", e.getMessage());
+            assertEquals("OOPS!!! Please input a valid month.", e.getMessage());
         }
     }
 
@@ -30,7 +31,7 @@ public class DateTest {
             Date date = new Date("29/2/2019");
             fail();
         } catch (Exception e) {
-            assertEquals("☹ OOPS!!! Please input a valid day.", e.getMessage());
+            assertEquals(Emoji.getSadFace() + "OOPS!!! Please input a valid day.", e.getMessage());
         }
     }
 
@@ -40,7 +41,7 @@ public class DateTest {
             Date date = new Date("2/2019");
             fail();
         } catch (Exception e) {
-            assertEquals("☹ OOPS!!! Please specify the date"
+            assertEquals("OOPS!!! Please specify the date"
                     + " in the format date/month/year e.g. 2/12/2019.", e.getMessage());
         }
     }

@@ -61,7 +61,7 @@ public class ParserTest {
             Parser.parse("blah");
             fail();
         } catch (Exception e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means :-(", e.getMessage());
         }
     }
 }

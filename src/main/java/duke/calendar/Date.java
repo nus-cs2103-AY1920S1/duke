@@ -1,5 +1,6 @@
 package duke.calendar;
 
+;
 import duke.exception.InvalidDateException;
 
 import java.time.Month;
@@ -37,7 +38,7 @@ public class Date {
         String[] dateSplit = unprocessedDate.split("/");
         boolean isWrongFormat = dateSplit.length > 3 || dateSplit.length < 3;
         if (isWrongFormat) {
-            throw new InvalidDateException("☹ OOPS!!! Please specify the date"
+            throw new InvalidDateException("OOPS!!! Please specify the date"
                     + " in the format date/month/year e.g. 2/12/2019.");
         }
         processMonth(dateSplit);
@@ -48,7 +49,7 @@ public class Date {
     private void processMonth(String[] dateSplit) throws InvalidDateException {
         int monthNumber = Integer.parseInt(dateSplit[1]);
         if (isInvalidMonth(monthNumber)) {
-            throw new InvalidDateException("☹ OOPS!!! Please input a valid month.");
+            throw new InvalidDateException("OOPS!!! Please input a valid month.");
         }
         this.month = Month.of(monthNumber);
     }
@@ -62,7 +63,7 @@ public class Date {
         int monthNumber = Integer.parseInt(dateSplit[1]);
         int year = Integer.parseInt(dateSplit[2]);
         if (isInvalidDay(inputDay, monthNumber, year)) {
-            throw new InvalidDateException("☹ OOPS!!! Please input a valid day.");
+            throw new InvalidDateException("OOPS!!! Please input a valid day.");
         }
         this.day = inputDay;
 

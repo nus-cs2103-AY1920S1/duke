@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Represents a personal assistant chatbot that keeps track of tasks.
@@ -19,11 +20,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
     /**
      * Constructor for <code>Duke</code>.
@@ -69,9 +65,9 @@ public class Duke {
      * @param input Input by user.
      * @return Duke's response.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws UnsupportedEncodingException {
         ByteArrayOutputStream message = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(message);
+        PrintStream ps = new PrintStream(message, true, "UTF-8");
         final PrintStream old = System.out;
         System.setOut(ps);
         generateResponse(input);

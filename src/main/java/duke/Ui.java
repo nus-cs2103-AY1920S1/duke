@@ -33,7 +33,7 @@ public class Ui {
      * Prints a line in the console.
      */
     public void drawLine() {
-        System.out.println("-----------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------");
     }
 
     /**
@@ -115,7 +115,7 @@ public class Ui {
      * Prints the error when the information in storage could not be loaded.
      */
     public void showLoadingError() {
-        printMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        printMessage("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
@@ -125,7 +125,7 @@ public class Ui {
      */
     public void printTasksMatchingTag(String tag, ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
-            printMessage("OOPS!!! There are no tasks that are #" + tag);
+            printMessage("There are no tasks that are #" + tag);
         } else {
             printMessage("These tasks are #" + tag + "!");
             for (int i = 0; i < tasks.size(); i++) {

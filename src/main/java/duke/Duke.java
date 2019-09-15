@@ -34,6 +34,10 @@ public class Duke {
      * Main loop of Duke. Ends if user inputs 'bye', otherwise continues.
      */
     public void run() {
+        assert ui != null;
+        assert storage != null;
+        assert tasks != null;
+
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -70,6 +74,9 @@ public class Duke {
      * @return str Result of parsing
      */
     public String getResponse(String input) {
+        assert input != null;
+        assert ui instanceof MainUi;
+
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);

@@ -3,6 +3,8 @@
 
 ## About
 
+<p style="text-align:center;"><img src="Ui.png" alt="Ui"></p>
+
 PikaDuke is a simple task tracker that helps users to keep track of
 their todo tasks, events and deadlines.
 

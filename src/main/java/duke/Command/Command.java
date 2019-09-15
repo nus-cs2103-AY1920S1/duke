@@ -1,4 +1,5 @@
 package duke.Command;
+import duke.Flashcard.FlashcardList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -16,7 +17,7 @@ boolean isExit;
         this.isExit = false;
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage store) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage store, FlashcardList flashcardList) throws IOException {
         String output = "";
 
         switch (this.type) {
@@ -52,6 +53,22 @@ boolean isExit;
             case 7:                                //delete
                 DeleteCommand del = new DeleteCommand();
                 output = del.Delete(tasks, ui, store, this.msg);
+                break;
+            case 8:                                  //Create_Flashcard
+                CreateFlashcardCommand cfc = new CreateFlashcardCommand();
+                output = cfc.CreateFlashcard(ui, flashcardList, this.msg);
+                break;
+            case 9:                                 //Create_Card
+                CreateCardCommand ccc = new CreateCardCommand();
+                output = ccc.CreateCard(ui, flashcardList, this.msg);
+                break;
+            case 10:                                //List_Qns
+                ListQnsCommand lqc = new ListQnsCommand();
+                output = lqc.ListQns(ui, flashcardList, this.msg);
+                break;
+            case 11:                                //List_Ans
+                ListAnsCommand lac = new ListAnsCommand();
+                output = lac.ListAns(ui, flashcardList, this.msg);
                 break;
             default:
                 FalseCommand fal = new FalseCommand();

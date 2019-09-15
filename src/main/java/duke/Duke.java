@@ -5,6 +5,7 @@ import duke.Command.Command;
 import java.util.ArrayList;
 import java.io.IOException;
 
+import duke.Flashcard.FlashcardList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -21,6 +22,7 @@ public class Duke{
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
+    private FlashcardList flashcards;
 
     /////////////////////////////// duke.Duke constructors  /////////////////////////////////////////////
 
@@ -28,6 +30,7 @@ public class Duke{
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
+
         /*try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -47,7 +50,7 @@ public class Duke{
         while(!isExit) {
             userInput = ui.read();                 //read user input
             Command c = Parser.parse(userInput);
-            c.execute(tasks, ui, storage);
+            c.execute(tasks, ui, storage, flashcards);
             isExit = c.isExit();
 
         }
@@ -67,9 +70,9 @@ public class Duke{
         }
 
         public String getResponse(String input) throws IOException {
-
+            flashcards = new FlashcardList();
             Command c = Parser.parse(input);
-            String final_Output = c.execute(tasks, ui, storage);
+            String final_Output = c.execute(tasks, ui, storage, flashcards);
 
         return final_Output;
         }

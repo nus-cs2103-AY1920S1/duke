@@ -38,8 +38,20 @@ public class Parser{
             case "delete":
                 c =  new Command(7, arr[1]);
                 break;
-            default:
+            case "Create_Flashcard":
                 c =  new Command(8, arr[1]);
+                break;
+            case "Create_Card":
+                c =  new Command(9, arr[1]);
+                break;
+            case "List_Qns":
+                c =  new Command(10, arr[1]);
+                break;
+            case "List_Ans":
+                c =  new Command(11, arr[1]);
+                break;
+            default:
+                c =  new Command(12, arr[1]);
 
         }
         return c;

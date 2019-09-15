@@ -48,9 +48,9 @@ public class Ui {
      * @return Welcome message
      */
     public static String getWelcomeMessage() {
-        return "Hello! I'm Duke."
+        return "Hello, I am D O K E."
                 + System.lineSeparator()
-                + "What can I do for you?";
+                + "How can I help you?";
     }
 
     /**
@@ -59,7 +59,7 @@ public class Ui {
      * @return Generic loading error message
      */
     public static String getLoadingError() {
-        return "The save file doesn't seem to be there or is incorrect!"
+        return "The save file doesn't seem to be there or is formatted incorrectly!"
                 + System.lineSeparator()
                 + "Let's start afresh.";
     }

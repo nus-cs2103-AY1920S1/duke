@@ -1,0 +1,9 @@
+#duke {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dbdbdb;
+}
+
+#user {
+    -fx-background-color: #efefef;
+    -fx-border-color: transparent;
+}

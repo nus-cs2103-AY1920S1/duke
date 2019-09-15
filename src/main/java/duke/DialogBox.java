@@ -6,17 +6,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -26,19 +21,11 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label userName;
-    @FXML
     private Label message;
     @FXML
     private ImageView displayPicture;
 
-    private static final Background BG_ORANGE = new Background(
-            new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY));
-
-    private static final Background BG_LIGHTGRAY = new Background(
-            new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY));
-
-    private DialogBox(String user, String text, Image img) {
+    private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class
                     .getResource("/view/DialogBox.fxml"));
@@ -49,10 +36,9 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        userName.setText(user);
         message.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 50, 45));
+        displayPicture.setClip(new Circle(45, 45, 50));
     }
 
     /**
@@ -69,12 +55,12 @@ public class DialogBox extends HBox {
      * Gets the user dialog.
      *
      * @param text Text for the user dialog
-     * @param img Image for the user dialog
      * @return The user dialog
      */
-    public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox("You", text, img);
-        db.setBackground(BG_LIGHTGRAY);
+    public static DialogBox getUserDialog(String text) {
+        var db = new DialogBox(text, null);
+        db.message.setId("user");
+        db.getChildren().remove(db.displayPicture);
         return db;
     }
 
@@ -86,9 +72,9 @@ public class DialogBox extends HBox {
      * @return Instance of a dialog box for Duke
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox("Duke", text, img);
+        var db = new DialogBox(text, img);
         db.flip();
-        db.setBackground(BG_ORANGE);
+        db.message.setId("duke");
         return db;
     }
 }

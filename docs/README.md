@@ -173,7 +173,7 @@ To `sort` tasks according to the dates and times in a increasing order: `sort`
 
 To view an overview of the tasks done over time, there are two ways:
 
-1. Click on the **Show Statistics** button on the top of the application as shown in ![Fig 2](/docs/showStats.png) below.
+1. Click on the **Show Statistics** button on the top of the application as shown in ![Fig 2](/docs/showStats1.png) below.
 
 2. Key in `show stats` in the command line: `show stats`
 

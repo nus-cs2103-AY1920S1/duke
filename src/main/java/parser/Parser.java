@@ -1,15 +1,16 @@
 package parser;
 
+import command.ByeCommand;
 import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
 import command.DoneCommand;
+import command.EventCommand;
+import command.FindCommand;
+import command.InvalidCommand;
 import command.ListCommand;
 import command.ToDoCommand;
-import command.DeadlineCommand;
-import command.EventCommand;
-import command.DeleteCommand;
-import command.ByeCommand;
-import command.InvalidCommand;
-import command.FindCommand;
+import command.UndoCommand;
 
 /**
  * Parser to understand user inputs.
@@ -42,6 +43,8 @@ public class Parser {
             return new ByeCommand();
         case "find":
             return new FindCommand(input);
+        case "undo":
+            return new UndoCommand();
         default:
             return new InvalidCommand();
         }

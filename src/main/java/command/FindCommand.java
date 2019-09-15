@@ -33,7 +33,7 @@ public class FindCommand extends Command {
         } else {
             String output = "";
             ArrayList<Task> resultList = new ArrayList<Task>();
-            for (Task task : tasks.getTaskList()) {
+            for (Task task : tasks.getList()) {
                 String[] result = task.toString().split(" ");
                 for (String s : result) {
                     if (s.equals(input[1])) {

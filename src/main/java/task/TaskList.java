@@ -47,8 +47,17 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public ArrayList<Task> getTaskList() {
+    public ArrayList<Task> getList() {
         return this.tasks;
+    }
+
+    /**
+     * Undo to the previous task list state.
+     * @param taskList previous task list.
+     * @see UndoStack
+     */
+    public void undo(TaskList taskList) {
+        this.tasks = taskList.getList();
     }
 
 }

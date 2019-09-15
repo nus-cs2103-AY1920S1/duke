@@ -5,6 +5,7 @@ import storage.Storage;
 import task.Task;
 import task.TaskList;
 import task.ToDo;
+import task.UndoStack;
 import ui.Ui;
 
 /**
@@ -31,13 +32,14 @@ public class ToDoCommand extends Command {
         if (input.length <= 1) {
             throw new ToDoException();
         } else {
-            String output = "";
             String description = input[1];
             for (int i = 2; i < input.length; i++) {
                 description += " " + input[i];
             }
             Task newToDoTask = new ToDo(description);
+            UndoStack.add(tasks); //Add to previous task to UndoStack
             tasks.addTask(newToDoTask);
+            String output = "";
             output += "Got it. I've added this task:\n";
             output += "  " + newToDoTask + "\n";
             output += taskListInformation(tasks);

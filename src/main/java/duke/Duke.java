@@ -6,6 +6,7 @@ import parser.Parser;
 import storage.FakeStorage;
 import storage.Storage;
 import task.TaskList;
+import task.UndoStack;
 import ui.Ui;
 
 /**
@@ -40,6 +41,8 @@ public class Duke {
             System.out.println(ui.showLoadingError());
             tasks = new TaskList();
         }
+
+        UndoStack.initialize();
     }
 
     /**

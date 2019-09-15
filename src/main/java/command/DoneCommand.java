@@ -4,6 +4,7 @@ import exception.DoneException;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
+import task.UndoStack;
 import ui.Ui;
 
 /**
@@ -33,10 +34,11 @@ public class DoneCommand extends Command {
             int taskToBeDone = Integer.parseInt(input[1]);
             if (tasks.getSize() < taskToBeDone) {
                 throw new DoneException("OOPS!!! There is no such task in your list!\n"
-                        + "Current number of tasks = " + tasks.getTaskList().size());
+                        + "Current number of tasks = " + tasks.getSize());
             } else {
                 String output = "";
                 Task task = tasks.getTask(taskToBeDone - 1);
+                UndoStack.add(tasks); //Add to previous task to UndoStack
                 if (task.isDone()) {
                     output += "Hey! I've already marked this task as done :)\n";
                     output += "  " + task + "\n";

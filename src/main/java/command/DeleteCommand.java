@@ -4,6 +4,7 @@ import exception.DeleteException;
 import storage.Storage;
 import task.Task;
 import task.TaskList;
+import task.UndoStack;
 import ui.Ui;
 
 /**
@@ -33,8 +34,9 @@ public class DeleteCommand extends Command {
             int taskToDelete = Integer.parseInt(input[1]);
             if (tasks.getSize() < taskToDelete) { //check if it's a valid delete
                 throw new DeleteException("OOPS!!! There is no such task in your list!"
-                        + "Current number of tasks = " + tasks.getTaskList().size());
+                        + "Current number of tasks = " + tasks.getSize());
             } else {
+                UndoStack.add(tasks); //Add to previous task to UndoStack
                 String output = "";
                 Task task = tasks.deleteTask(taskToDelete - 1);
                 output += "Noted I've removed this task:\n";

@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = "";
         output += "Here are the tasks in your list:\n";
-        output += iterateTaskList(tasks.getTaskList());
+        output += iterateTaskList(tasks.getList());
 
         assert !output.equals("") : "Output should not be empty";
 

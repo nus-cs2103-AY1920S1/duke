@@ -88,7 +88,7 @@ public class Storage {
             PrintWriter pw = new PrintWriter(filepath);
             pw.close();
             PrintWriter pw2 = new PrintWriter(filepath);
-            for (Task task : tasks.getTaskList()) {
+            for (Task task : tasks.getList()) {
                 pw2.println(task.toDataBase());
             }
             pw2.close();

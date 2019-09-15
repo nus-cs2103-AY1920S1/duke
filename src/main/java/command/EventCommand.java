@@ -6,6 +6,7 @@ import storage.Storage;
 import task.Event;
 import task.Task;
 import task.TaskList;
+import task.UndoStack;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -34,14 +35,15 @@ public class EventCommand extends Command {
                     + "Make sure to type </at> and state the datetime in 'dd/M/yyyy hh:mm' format!");
         } else {
             try {
-                String output = "";
                 String description = input[1];
                 for (int i = 2; i < input.length - 3; i++) {
                     description += " " + input[i];
                 }
                 String time = input[input.length - 2] + " " + input[input.length - 1];
                 Task newEventTask = new Event(description, time);
+                UndoStack.add(tasks); //Add to previous task to UndoStack
                 tasks.addTask(newEventTask);
+                String output = "";
                 output += "Got it. I've added this task:\n";
                 output += "  " + newEventTask + "\n";
                 output += taskListInformation(tasks);

@@ -63,7 +63,7 @@ This application stores 3 different types of tasks:
 ### Adding of Tasks <a name="add"></a>
 This section contains the commands to be keyed in to add different type of task.
 
-##### Todo Task
+#### Todo Task
 
 To key in a `todo` task: `todo` [description of task]
     
@@ -73,7 +73,7 @@ To key in a `todo` task: `todo` [description of task]
                       Now you have 1 task in the list.
                        
 
-##### Deadline Task
+#### Deadline Task
 
 To key in a `deadline` task: `deadline` [description of task] /by [date in the format of dd/MM/yyyy] [time in the format of HHmm]
     
@@ -84,7 +84,7 @@ To key in a `deadline` task: `deadline` [description of task] /by [date in the f
     
 :exclamation: /`by` must be included in the command.
 
-##### Event Task
+#### Event Task
 
 To key in a `event` task: `event` [description of task] /at [date in the format of dd/MM/yyyy] [time in the format of HHmm]
     

@@ -2,7 +2,7 @@
 ![GitHub Logo](Ui.png)
 
 # User Guide
-Ever wanted a dog? Doggo is a virtual dog that does things for you at your command!
+Ever wanted a dog? Doggo is a virtual dog that does things for you at your command! <br>
 You dont even need to feed it or provide a home for it. He provides unconditionally.
  
 ## Features 
@@ -31,7 +31,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/meow.png)
+![GitHub Logo](images/meow.png)
 <hr>
 
 ### `todo` - Tell Doggo your troubles.
@@ -42,7 +42,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/todo.png)
+![GitHub Logo](images/todo.png)
 
 <hr>
 
@@ -54,7 +54,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/deadline.png)
+![GitHub Logo](images/deadline.png)
 <hr>
 
 ### `event` - Tell Doggo your schedule.
@@ -65,7 +65,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/event.png)
+![GitHub Logo](images/event.png)
 <hr>
 
 ### `list` - Doggo lists your task for you.
@@ -76,7 +76,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/list.png)
+![GitHub Logo](images/list.png)
 <hr>
 
 ### `find` - Doggo fetches your tasks.
@@ -87,7 +87,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/find.png)
+![GitHub Logo](images/find.png)
 <hr>
 
 ### `done` - Doggo notes your completed worries.
@@ -98,7 +98,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/done.png)
+![GitHub Logo](images/done.png)
 <hr>
 
 ### `delete` - Doggo clears your trouble.
@@ -109,7 +109,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/delete.png)
+![GitHub Logo](images/delete.png)
 <hr>
 
 ### `bye` - Doggo needs his afternoon nap.
@@ -120,4 +120,4 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](../assets/bye.png)
+![GitHub Logo](images/bye.png)

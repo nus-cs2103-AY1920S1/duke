@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.io.Storage;
 import duke.io.Ui;
-import duke.location.Location;
+import duke.place.Place;
 import duke.task.TaskList;
 
 /**
@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         if (input.equals("places")) {
-            ui.list(Location.getList());
+            ui.list(Place.getList());
         } else {
             ui.list(taskList);
         }

@@ -1,15 +1,15 @@
-package duke.location;
+package duke.place;
 
-public class Location {
-    private static LocationList locations = new LocationList();
+public class Place {
+    private static PlaceList locations = new PlaceList();
 
     private String name;
 
-    public static LocationList getList() {
+    public static PlaceList getList() {
         return locations;
     }
 
-    public Location(String name) {
+    public Place(String name) {
         this.name = name;
     }
 

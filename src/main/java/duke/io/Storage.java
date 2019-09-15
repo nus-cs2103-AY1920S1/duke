@@ -1,7 +1,7 @@
 package duke.io;
 
-import duke.location.Location;
-import duke.location.LocationList;
+import duke.place.Place;
+import duke.place.PlaceList;
 import duke.task.TaskList;
 
 import java.io.File;
@@ -50,10 +50,9 @@ public class Storage {
             Scanner scanner = new Scanner(places);
             while (scanner.hasNext()) {
                 String[] code = scanner.nextLine().split("\\|");
-                Location.getList().add(Parser.initPlace(code));
+                Place.getList().add(Parser.initPlace(code));
             }
             scanner.close();
-            ui.list(Location.getList());
         } catch (FileNotFoundException ex) {
             ui.out("You do not have any saved places.");
         }
@@ -113,15 +112,15 @@ public class Storage {
      * Stores places data.
      */
     public void writePlaces() {
-        LocationList list = Location.getList();
+        PlaceList list = Place.getList();
         try {
             if (list.isEmpty() && places.exists()) {
                 Files.delete(Paths.get(placePath));
                 return;
             }
             StringBuilder allTasks = new StringBuilder();
-            for (Location location : list) {
-                allTasks.append(location.store()).append(System.lineSeparator());
+            for (Place place : list) {
+                allTasks.append(place.store()).append(System.lineSeparator());
             }
             if (!places.exists() && !places.getParentFile().mkdirs() && !places.createNewFile()) {
                 throw new IOException("Error creating file");

@@ -10,7 +10,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.command.PlaceCommand;
-import duke.location.Location;
+import duke.place.Place;
 import duke.task.Deadline;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -33,9 +33,9 @@ public class Parser {
      * @throws ArrayIndexOutOfBoundsException If Event/Deadline details left blank.
      */
     public static Command parse(String input) throws UnsupportedOperationException, ArrayIndexOutOfBoundsException {
-        String command = input.split(" ")[0];
+        String command = input.split(" ")[0].toLowerCase();
         input = input.replace(command, "").trim();
-        switch (command.toLowerCase()) {
+        switch (command) {
         case "bye":
             return new ExitCommand();
         case "done":
@@ -122,9 +122,9 @@ public class Parser {
         }
     }
 
-    static Location initPlace(String[] code) {
+    static Place initPlace(String[] code) {
         if ("P".equals(code[0])) {
-            return new Location(code[1]);
+            return new Place(code[1]);
         }
         return null;
     }

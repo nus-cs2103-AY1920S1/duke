@@ -39,7 +39,7 @@ public class Ui {
             out("List is empty!");
             return;
         }
-        out("Here are the tasks in your list:");
+        out("Here are the items in your list:");
         for (int i = 0; i < list.size(); i++) {
             out((i + 1) + "." + list.get(i));
         }

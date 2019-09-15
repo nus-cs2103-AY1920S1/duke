@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.io.Parser;
 import duke.io.Storage;
 import duke.io.Ui;
-import duke.location.Location;
 import duke.task.TaskList;
 
 import java.text.ParseException;
@@ -20,18 +19,11 @@ public class Duke {
     private TaskList taskList;
 
     /**
-     * Constructor creates ui, storage, and taskList.
+     * Constructs duke object.
      *
-     * @param filePath Path for duke data file.
+     * @param taskFile  Path of data file for tasks.
+     * @param placeFile Path of data file for places.
      */
-    Duke(String filePath) {
-        assert filePath != null : "Empty file path";
-        ui = new Ui();
-        storage = new Storage(filePath);
-        taskList = storage.loadTasks(ui);
-        ui.out("What can I do for you?");
-    }
-
     Duke(String taskFile, String placeFile) {
         assert taskFile != null : "Empty file path";
         assert placeFile != null : "Empty file path";

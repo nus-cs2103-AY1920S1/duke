@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.io.Storage;
 import duke.io.Ui;
-import duke.location.Location;
-import duke.location.LocationList;
+import duke.place.Place;
+import duke.place.PlaceList;
 import duke.task.TaskList;
 
 public class PlaceCommand extends Command {
@@ -15,8 +15,8 @@ public class PlaceCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        LocationList locations = Location.getList();
-        locations.add(new Location(input));
+        PlaceList locations = Place.getList();
+        locations.add(new Place(input));
         ui.out("Got it. I've added this place:");
         ui.out(locations.get(locations.size() - 1).toString());
         ui.out("Now you have " + locations.size() + " places in the list.");

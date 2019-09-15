@@ -1,5 +1,4 @@
 # User Guide
-# User Guide
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)  

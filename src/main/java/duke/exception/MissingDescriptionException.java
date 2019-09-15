@@ -1,5 +1,7 @@
 package duke.exception;
 
+;
+
 public class MissingDescriptionException extends DukeException {
 
     /**
@@ -8,6 +10,6 @@ public class MissingDescriptionException extends DukeException {
      * @param taskType Type of task.
      */
     public MissingDescriptionException(String taskType) {
-        super("☹ OOPS!!! The description of a " + taskType + " cannot be empty.");
+        super("OOPS!!! The description of a " + taskType + " cannot be empty.");
     }
 }

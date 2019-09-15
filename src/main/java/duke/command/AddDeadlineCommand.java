@@ -1,5 +1,6 @@
 package duke.command;
 
+;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -61,7 +62,7 @@ public class AddDeadlineCommand extends Command {
             throw new MissingDescriptionException("deadline");
         }
         if (hasInsufficientDetails) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The description of a deadline"
+            throw new InsufficientDetailsException("OOPS!!! The description of a deadline"
                     + " requires a task and/or a due date");
         }
         addDeadline(tasks, ui, storage, detailsSplit, tags);

@@ -83,7 +83,7 @@ public class Event extends Task {
             } else if (endTime.toString().equals("")) {
                 output.append(" to " + endDate.toString() + ")");
             } else {
-                output.append(" to " + endDate.toString() + " " + endTime.toString());
+                output.append(" to " + endDate.toString() + ", " + endTime.toString());
             }
         }
         return output.toString();

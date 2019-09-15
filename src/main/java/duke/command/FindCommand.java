@@ -41,10 +41,10 @@ public class FindCommand extends Command {
     }
 
     private void printMatching(TaskList tasks, Ui ui) {
-        ui.printMessage("\t Here are the matching tasks in your list: ");
+        ui.printMessage("Here are the matching tasks in your list: ");
         for (int i = 0; i < tasks.getListSize(); i++) {
             if (tasks.getTask(i).getDescription().contains(details)) {
-                ui.printMessage("\t " + (i + 1) + ". " + tasks.getTask(i));
+                ui.printMessage((i + 1) + ". " + tasks.getTask(i));
             }
         }
     }

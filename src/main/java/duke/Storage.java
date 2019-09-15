@@ -56,12 +56,12 @@ public class Storage {
                 } else if (type.equals("E")) {
                     loadEvent(tasks, information, isDone, description);
                 } else {
-                    throw new StorageException("☹ OOPS!!! Something must have gone wrong during storage.");
+                    throw new StorageException("OOPS!!! Something must have gone wrong during storage.");
                 }
             }
             return tasks;
         } catch (FileNotFoundException | InvalidDateException | InvalidTimeException exception) {
-            throw new StorageException("☹ OOPS!!! Something must have gone wrong during storage.");
+            throw new StorageException("OOPS!!! Something must have gone wrong during storage.");
         }
     }
 
@@ -170,7 +170,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException exception) {
-            throw new StorageException("☹ OOPS!!! Something went wrong :" + exception.getMessage());
+            throw new StorageException("OOPS!!! Something went wrong :" + exception.getMessage());
         }
     }
 

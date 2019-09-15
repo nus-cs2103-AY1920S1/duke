@@ -50,7 +50,7 @@ public class Storage {
         String data = "";
 
         // If the file does not exist, create sa new text file.
-        if (f.exists() == false) {
+        if (!f.exists()) {
             try {
                 Files.write(Paths.get(filepath), data.getBytes());
             } catch (IOException e) {

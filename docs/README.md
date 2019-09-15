@@ -21,7 +21,7 @@ Duke is a Personal Assistant Chatbot that aids users in keeping track of various
 Your tasks will be stored and loaded from there.
 5. Double-click on the `duke-0.2.jar` to start the app. The GUI should appear in a few seconds.
 
-![Screenshot of Duke GUI]()
+![Screenshot of Duke GUI](https://github.com/bruceskellator/duke/blob/master/docs/Ui.png)
 
 6. Once the app has started, key in a valid command and hit `enter`.
 Alternatively, you can click the `send` button to execute it.
@@ -43,8 +43,8 @@ A task can be one of three types: a `todo`, `deadline` or `event` task.
 
 Format: 
 `todo [description]` 
-`deadline [description] /by [date-time] 
-`event [description] /at [date-time]
+`deadline [description] /by [date-time]` 
+`event [description] /at [date-time]`
 
 For a `todo` task, only a description is needed but for `deadline` and `event`
 tasks, both a **description** is needed as well as a **date-time** value, and these
@@ -84,7 +84,7 @@ Example:
 * `done 3`
 Marks the 3rd task in the list as done.
 
-## 3.5 Deleting a task
+### 3.5 Deleting a task
 Removes the task with the specified task-number from the current list.
 This command has similar syntax as the `done` command.
 
@@ -94,7 +94,7 @@ Example:
 * `delete 4`
 Deletes the 4th task in the list.
 
-## 3.6 Searching for a task by keyword(s)
+### 3.6 Searching for a task by keyword(s)
 Finds and displays tasks whose description contains the given keyword(s)
 Multiple keywords may be specified, delimited by a **single** space.
 
@@ -109,7 +109,7 @@ Finds task with description `help guild register for the boss event`
 
 Format: `find [keywords delimited by a single space]`
 
-## 3.7 Exiting the program
+### 3.7 Exiting the program
 Displays the exit message and closes the program.
 
 Format: `bye`

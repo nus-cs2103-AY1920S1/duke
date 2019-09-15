@@ -1,4 +1,1 @@
-T | ✓ | borrow books
-E | ✓ | bizit meeting | Tuesday 6:30pm
-T | ✘ | read books
-T | ✓ | return books
+T | ✘ | Duke Testing

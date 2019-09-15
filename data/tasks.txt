@@ -1,5 +1,5 @@
 T | 1 | art painting | 2019-09-15T21:57
-D | 1 | music project | 06/02/2011 0132 | 2019-09-15T01:55
+D | 1 | music project | 06/02/2011 0132 | 2019-09-15T22:37
 E | 1 | art festival | 06/05/2011 0242 | 2019-09-15T20:09
 D | 0 | art assignment | 06/02/2012 1342
 T | 1 | workout | 2019-09-15T21:57
@@ -7,3 +7,4 @@ T | 1 | travel | 2019-09-15T20:04
 D | 0 | math project | 06/04/2022 0123
 E | 1 | music festival | 06/04/2022 0123 | 2019-09-15T20:09
 D | 0 | music project | 06/04/2022 0123
+T | 1 | exercising | 2019-09-15T22:37

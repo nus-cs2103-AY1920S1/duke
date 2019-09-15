@@ -10,7 +10,6 @@ import java.util.Date;
 public class Event extends Task {
 
     private Date dateTime;
-    static int numEvent = 0;
 
     /**
      * Constructor for Event class.
@@ -21,7 +20,6 @@ public class Event extends Task {
     public Event(String description, Date dateTime) {
         super(description);
         this.dateTime = dateTime;
-        numEvent++;
     }
 
     /**

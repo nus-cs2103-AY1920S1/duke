@@ -51,9 +51,9 @@ public class StatisticsController {
 
         XYChart.Series set1 = new XYChart.Series<>();
 
-        set1.getData().add(new XYChart.Data("Todo", Todo.numTodo));
-        set1.getData().add(new XYChart.Data("Event", Event.numEvent));
-        set1.getData().add(new XYChart.Data("Deadline", Deadline.numDeadline));
+        set1.getData().add(new XYChart.Data("Todo", TaskList.numTodo));
+        set1.getData().add(new XYChart.Data("Event", TaskList.numEvent));
+        set1.getData().add(new XYChart.Data("Deadline", TaskList.numDeadline));
         set1.getData().add(new XYChart.Data("Done", TaskList.numTaskDone));
         set1.getData().add(new XYChart.Data("Not Done", TaskList.numTaskNotDone));
         set1.getData().add(new XYChart.Data("Done Last Week", TaskList.numDonePastWeek));

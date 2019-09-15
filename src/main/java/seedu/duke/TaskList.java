@@ -16,6 +16,9 @@ public class TaskList {
     static int numDonePastWeek = 0;
     static int numDonePastMonth = 0;
     static int numDonePastYear = 0;
+    static int numTodo = 0;
+    static int numEvent = 0;
+    static int numDeadline = 0;
 
     /**
      * Constructor of the Tasklist class.
@@ -48,13 +51,6 @@ public class TaskList {
      * @param t the task to be deleted
      */
     public void deleteTask(Task t) {
-        if (t instanceof Todo) {
-            Todo.numTodo--;
-        } else if (t instanceof Event) {
-            Event.numEvent--;
-        } else if (t instanceof Deadline) {
-            Deadline.numDeadline--;
-        }
         taskList.remove(t);
     }
 
@@ -110,6 +106,14 @@ public class TaskList {
      */
     public static void calculateStats() {
         for (Task t: taskList) {
+            if (t instanceof Todo) {
+                numTodo++;
+            } else if (t instanceof Event) {
+                numEvent++;
+            } else if (t instanceof Deadline) {
+                numDeadline++;
+            }
+
             if (t.isDone) {
                 numTaskDone++;
                 if (doneLastYear(t)) {
@@ -133,6 +137,11 @@ public class TaskList {
         numTaskDone = 0;
         numTaskNotDone = 0;
         numDonePastWeek = 0;
+        numDonePastMonth = 0;
+        numDonePastYear = 0;
+        numTodo = 0;
+        numEvent = 0;
+        numDeadline = 0;
     }
 
     /**
@@ -143,7 +152,7 @@ public class TaskList {
      */
     public static boolean doneLastWeek(Task t) {
         Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
-        return (duration.toMinutes() <= 7);
+        return (duration.toDays() <= 7);
     }
 
     /**

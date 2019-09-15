@@ -41,7 +41,7 @@ This document uses the following typographical conventions:
 
     `sort`  A grey highlight (called a mark-up) indicates that this is a command that can be type into the command line and executed by the application.
     
-    :exclamation:   An exclamation sign indicates important information
+:exclamation:   An exclamation sign indicates important information
 
 
 ## **Features** <a name="features"></a>
@@ -79,7 +79,7 @@ This section contains the commands to be keyed in to add different type of task.
                        [D][✗] math project (by: 6/4/2022 01.23AM)
                        Now you have 1 task in the list.`
     
-    :exclamation: `by` must be included in the command.
+:exclamation: `by` must be included in the command.
 
 ##### Todo Task
 
@@ -90,7 +90,7 @@ This section contains the commands to be keyed in to add different type of task.
                        [E][✗] music festival (at: 6/4/2022 01.23AM)
                        Now you have 1 task in the list.`
 
-    :exclamation: `at` must be included in the command.
+:exclamation: `at` must be included in the command.
     
     
 :exclamation: Both Deadline and Todo task must include a valid timestamp in [dd/MM/yyyy] [HHmm] format. 

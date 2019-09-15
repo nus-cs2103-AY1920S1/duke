@@ -2,6 +2,7 @@ package cs2103t.duke.task;
 
 /**
  * Represents tasks, each with 3 main attributes: task type, description, whether it is completed.
+ * A task can have up to 1 note.
  */
 public abstract class Task {
     /** Tick symbol. */
@@ -12,9 +13,15 @@ public abstract class Task {
     /** Description of task. */
     protected String description;
     /** Whether task is completed. */
-    protected boolean completed;
+    protected boolean isCompleted;
     /** Task type of task. */
     protected TaskType taskType;
+    /** Notes of task. */
+    protected Note note;
+    /** Whether task has notes. */
+    protected boolean hasNotes = false;
+    /** Id of notes in Notes list. */
+    protected int noteId;
 
     //getter mtds
     /**
@@ -30,7 +37,7 @@ public abstract class Task {
      * @return true if completed, false otherwise.
      */
     public boolean isCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
@@ -41,23 +48,75 @@ public abstract class Task {
         return this.taskType;
     }
 
+    /**
+     * Gets task notes.
+     * @return notes of task.
+     */
+    public Note getNotes() {
+        assert this.hasNotes : "No notes available to be retrieved";
+        return this.note;
+    }
+
+    /**
+     * Gets whether task has notes.
+     * @return true if task has notes, false otherwise.
+     */
+    public boolean hasNotes() {
+        return this.hasNotes;
+    }
+
+    /**
+     * Gets id of notes in Notes list.
+     * @return note id.
+     */
+    public int getNoteId() {
+        return this.noteId;
+    }
+
     //setter mtds
 
     /**
      * Sets task to completed.
      */
     public void setCompleted() {
-        this.completed = true;
+        this.isCompleted = true;
+    }
+
+    /**
+     * Sets notes and id of notes of task.
+     * @param note notes to set for task.
+     * @param id id of said notes in list of notes.
+     */
+    public void setNotes(Note note, int id) {
+        this.note = note;
+        this.hasNotes = true;
+        this.noteId = id;
+    }
+
+    /**
+     * Sets notes id.
+     * @param id id of notes.
+     */
+    public void setNoteId(int id) {
+        this.noteId = id;
+    }
+
+    /**
+     * Sets notes to null.
+     */
+    public void deleteNotes() {
+        this.note = null;
+        this.hasNotes = false;
     }
 
     @Override
     public String toString() {
         String checked;
-        if (this.completed) {
+        if (this.isCompleted) {
             checked = TICK;
         } else {
             checked = CROSS;
         }
-        return String.format("[%s][%s] %s", this.taskType, checked, this.description);
+        return String.format("[%s][%s] %s || notes(if any): %s", this.taskType, checked, this.description, this.note);
     }
 }

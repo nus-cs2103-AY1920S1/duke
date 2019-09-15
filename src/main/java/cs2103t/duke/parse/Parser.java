@@ -1,12 +1,6 @@
 package cs2103t.duke.parse;
 
-import cs2103t.duke.command.AddCommand;
-import cs2103t.duke.command.Command;
-import cs2103t.duke.command.DeleteCommand;
-import cs2103t.duke.command.DoneCommand;
-import cs2103t.duke.command.ExitCommand;
-import cs2103t.duke.command.FindCommand;
-import cs2103t.duke.command.ListCommand;
+import cs2103t.duke.command.*;
 import cs2103t.duke.exception.DukeException;
 import cs2103t.duke.exception.InvalidIdException;
 import cs2103t.duke.exception.InvalidKeywordException;
@@ -100,6 +94,12 @@ public class Parser {
             break;
         case FIND:
             cmd = new FindCommand(d);
+            break;
+        case GETGENERALNOTES:
+            cmd = new ListGeneralNotesCommand();
+            break;
+        case SETNOTES:
+            cmd = new AddNotesCommand(d);
             break;
         case T: //fallthrough
         case D: //fallthrough

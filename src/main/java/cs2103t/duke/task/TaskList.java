@@ -49,6 +49,15 @@ public class TaskList {
     }
 
     /**
+     * Gets task at id.
+     * @param id 0-based position of task in list of tasks
+     * @return task at that id
+     */
+    public Task retrieveTask(int id) {
+        return this.taskList.get(id);
+    }
+
+    /**
      * Prints out the list of tasks.
      * @param ui ui in charge of printing.
      */
@@ -154,4 +163,5 @@ public class TaskList {
     private boolean containsKeyword(Task t, String kw) {
         return t.toString().contains(kw);
     }
+
 }

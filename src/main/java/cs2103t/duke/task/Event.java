@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     private Event(String descr, boolean completed) throws IncorrectTaskFormatException {
-        super.completed = completed;
+        super.isCompleted = completed;
         super.taskType = TaskType.E;
 
         setupDetails(descr);

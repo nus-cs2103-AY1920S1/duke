@@ -10,7 +10,7 @@
     
 2. [Features](#features)  
     2.1 [Types of Tasks](#types)  
-        2.1.1 [Adding of Tasks](#add)  
+            2.1.1 [Adding of Tasks](#add)  
     2.2 [Listing Tasks](#list)  
     2.3 [Handling of Tasks](#handle)  
     2.4 [Finding Tasks](#find)  

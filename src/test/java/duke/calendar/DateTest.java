@@ -31,7 +31,7 @@ public class DateTest {
             Date date = new Date("29/2/2019");
             fail();
         } catch (Exception e) {
-            assertEquals(Emoji.getSadFace() + "OOPS!!! Please input a valid day.", e.getMessage());
+            assertEquals("OOPS!!! Please input a valid day.", e.getMessage());
         }
     }
 

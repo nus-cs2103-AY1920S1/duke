@@ -180,9 +180,8 @@ To view an overview of the tasks done over time, there are two ways:
 
 2. Key in `show stats` in the command line: `show stats`
 
-        Example of usage: sort  
-        Expected Outcome:
-        <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="480">
+This is an example of an expected chart:  
+    <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="480">
 
 
 ## **Glossary** <a name="glossary"></a>

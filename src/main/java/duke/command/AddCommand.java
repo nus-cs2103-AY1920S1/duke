@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 
 public class AddCommand extends Command {
@@ -19,14 +19,13 @@ public class AddCommand extends Command {
      * Duke's 3 objects and adds this 'held' task in this Command object to its Arraylist
      * Garage collection of this Command object is done later.)
      * @param tasks   duke.TaskList
-     * @param ui      duke.Ui
+     * @param ui      duke.ui.Ui
      * @param storage duke.Storage
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.task);
         storage.updateSaveFile(tasks);
-        ui.show("Got it. I've added this task:\n        " + task);
-        ui.show("Now you have " + tasks.size() + " tasks in the list.");
+        ui.show("Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.");
     }
 }
 

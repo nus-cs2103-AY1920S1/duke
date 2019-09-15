@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 import duke.task.Task;
 
 public class DoneCommand extends Command {
@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
      * Sets done indicator of task in TaskList from 0 to 1. Updates save file with new list
      * Prints out new list
      * @param tasks   duke.TaskList
-     * @param ui      duke.Ui
+     * @param ui      duke.ui.Ui
      * @param storage duke.Storage
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {

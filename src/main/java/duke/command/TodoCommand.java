@@ -4,6 +4,7 @@ import duke.exception.DukeExecutionException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Ui;
 
 public class TodoCommand extends AddTaskCommand {
     public TodoCommand(final String description) {
@@ -11,8 +12,8 @@ public class TodoCommand extends AddTaskCommand {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws DukeExecutionException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
         check(tasks);
-        return addTask(new Todo(this.description), tasks, storage);
+        addTask(new Todo(this.description), tasks, ui, storage);
     }
 }

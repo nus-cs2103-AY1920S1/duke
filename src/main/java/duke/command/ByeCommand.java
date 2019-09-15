@@ -2,8 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import static duke.ui.Messages.BYE_MESSAGE;
+import duke.ui.Ui;
 
 public class ByeCommand extends Command {
     @Override
@@ -11,9 +10,12 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) {
-        CommandResult result = new CommandResult(BYE_MESSAGE);
-        result.setExit(true);
-        return result;
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.showBye();
+    }
+
+    @Override
+    public boolean shouldExit() {
+        return true;
     }
 }

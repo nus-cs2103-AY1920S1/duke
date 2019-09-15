@@ -7,6 +7,8 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+import static duke.ui.Messages.BYE_MESSAGE;
+
 /**
  * Command line interface of the Duke app.
  */
@@ -33,6 +35,17 @@ public class Cli implements Ui {
 
     public void showSeparator() {
         show(SEPARATOR);
+    }
+
+    /**
+     * Shows each line, preceded by a preset level of indentation.
+     *
+     * @param lines the lines to show
+     */
+    public void showIndented(final String... lines) {
+        for (final String line : lines) {
+            show(INDENTATION + line);
+        }
     }
 
     /**
@@ -66,17 +79,6 @@ public class Cli implements Ui {
     }
 
     /**
-     * Shows each line, preceded by a preset level of indentation.
-     *
-     * @param lines the lines to show
-     */
-    public void showIndented(final String... lines) {
-        for (final String line : lines) {
-            show(INDENTATION + line);
-        }
-    }
-
-    /**
      * Shows a welcome message.
      */
     @Override
@@ -87,6 +89,11 @@ public class Cli implements Ui {
         showMessage("What can I do for you?");
         showSeparator();
         showMessage("");
+    }
+
+    @Override
+    public void showBye() {
+        showMessage(BYE_MESSAGE);
     }
 
     /**

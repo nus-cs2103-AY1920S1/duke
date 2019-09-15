@@ -1,7 +1,6 @@
 package duke.cli;
 
 import duke.command.Command;
-import duke.command.CommandResult;
 import duke.exception.DukeException;
 import duke.exception.DukeStorageException;
 import duke.parser.Parser;
@@ -45,14 +44,8 @@ public final class DukeCli {
                 }
                 ui.showSeparator();
                 Command command = Parser.parse(input);
-                CommandResult result = command.execute(tasks, storage);
-                for (String message : result.getMessages()) {
-                    ui.showMessage(message);
-                }
-                for (String warning : result.getWarnings()) {
-                    ui.showWarning(warning);
-                }
-                if (result.isExit()) {
+                command.execute(tasks, ui, storage);
+                if (command.shouldExit()) {
                     break;
                 }
             } catch (DukeException e) {

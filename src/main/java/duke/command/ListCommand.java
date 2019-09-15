@@ -2,9 +2,7 @@ package duke.command;
 
 import duke.storage.Storage;
 import duke.task.TaskList;
-
-import static duke.ui.Messages.LIST_NO_TASKS;
-import static duke.ui.Messages.LIST_TASKS;
+import duke.ui.Ui;
 
 public class ListCommand extends Command {
     @Override
@@ -12,14 +10,12 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         check(tasks);
-        CommandResult result = new CommandResult();
         if (tasks.size() == 0) {
-            result.addMessages(LIST_NO_TASKS);
+            ui.listNoTasks();
         } else {
-            result.addMessages(String.format("%s%n%s", LIST_TASKS, tasks.toString()));
+            ui.listTasks(tasks);
         }
-        return result;
     }
 }

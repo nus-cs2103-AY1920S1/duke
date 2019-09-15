@@ -32,11 +32,11 @@ public class FindCommand extends Command {
      * @param storage Storage of tasks.txt files.
      */
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        String word = keyword.trim();
+        String word = keyword.trim().toLowerCase();
         ArrayList<Task> taskArr = tasks.getTaskArr();
         ArrayList<Task> filteredTasks = taskArr
                                             .stream()
-                                            .filter(task -> task.getDescription().contains(word))
+                                            .filter(task -> task.getDescription().toLowerCase().contains(word))
                                             .collect(Collectors.toCollection(ArrayList<Task>::new));
         if (filteredTasks.size() == 0) {
             throw new DukeException("Cannot find any tasks that match your keyword.");

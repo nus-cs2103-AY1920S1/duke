@@ -38,8 +38,8 @@ public class Ui {
          * @params Task task to be added
          *  @return none
          */
-        return("Da. Your task has been recorded:\n"+" " + task.printTask() + "\n" +
-                "You have " + tasks.getList().size() + " chores left, Comrade.\n");
+        return("Da. I have recorded your new chore:\n " + task.printTask() + "\n" +
+                "You have " + tasks.getList().size() + " chores now, Comrade.\n");
     }
     public String delTask(Task task) {
         /**
@@ -48,8 +48,9 @@ public class Ui {
          * @params Task task to be deleted
          *  @return none
          */
-        return "Yes Comrade, I've removed your task: \n"+" " + task.printTask() +
-                "You have " + tasks.getList().size() + " tasks left, Comrade.\n";
+        return "Yes Comrade, I've removed your chore: \n"+" " + task.printTask() +
+                "\nBut I hope you actually finished that chore. \n" +
+                "You have " + tasks.getList().size() + " chores left, Comrade.\n";
     }
     public String goodBye() {
         /**
@@ -73,6 +74,11 @@ public class Ui {
          * @params none
          *  @return none
          */
+        if (taskArr.size() == 0) {
+            return "You do not have any chores, Comrade. Add some with the commands: " +
+                    "event, deadline and todo. Hurry and add more chores! " +
+                    "Bring glory to the Soviet Union!";
+        }
         String mainString = "Here are your chores, Comrade:\n";
 
         for (int i = 0; i < taskArr.size(); i++) {
@@ -94,7 +100,7 @@ public class Ui {
          * @params keyword to search
          * @return none
          */
-        String matchingString = "Here are the tasks that match your description, Comrade:\n";
+        String matchingString = "Here are the chores that match your description, Comrade:\n";
         ArrayList<Task> matchingTasks = tasks.findTasks(keyWord);
         int taskCount = 1;
         for (Task match: matchingTasks) {

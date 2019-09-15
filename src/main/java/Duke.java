@@ -39,8 +39,14 @@ public class Duke {
         }
     }
     public String getResponse(String inputOrig) {
+        parser.scrubData();
         try {
-            if (inputOrig.equals("hey bb")) {
+            if (inputOrig.equals("vodka")) {
+                return "You better have a bottle to give me Comrade." +
+                        "Just look at the amount of chores I am helping you take note of!";
+            } else if (inputOrig.equals("my name jeff")) {
+                return "mai nam stahleen";
+            } else if (inputOrig.equals("hey bb")) {
                 return "Ay bb wan sum fuk";
             }
             /**
@@ -68,8 +74,9 @@ public class Duke {
                 Task newTask = taskList.addTodo(taskInfo,0);
                 return ui.addTask(newTask);
             } else if (command.equals("deadline")) { // deadline command
+                String actualTask = parser.getNextCommand();
                 String time = parser.getDoByDate();
-                Task newTask = taskList.addDeadline(command,time,0);
+                Task newTask = taskList.addDeadline(actualTask,time,0);
                 return ui.addTask(newTask);
             } else if (command.equals("event")) {   // event command
                 String actualTask = parser.getNextCommand();
@@ -95,7 +102,7 @@ public class Duke {
         } catch (DukeException ex) {
             return ex.getMessage();
         } catch (ParseException ex) {
-            return "Comrade, give a date in the format dd/mm/yy HHMM";
+            return "Comrade, give a proper date in the format dd/mm/yy HHMM";
         }
 
     }

@@ -14,7 +14,6 @@ public class TaskList {
     }
 
     public ToDo addTodo(String taskInfo, int isDone) throws ParseException, DukeException {
-        // TODO add DukeException for this
         /**
          *  creates new To Do, add to tasklist
          *  prints confirmation message
@@ -24,7 +23,10 @@ public class TaskList {
          *  @return none
          *  @throws DukeException if taskInfo is empty
          */
-        if (taskSet.contains(taskInfo)) {
+        if (taskInfo.equals("")) {
+            throw new DukeException("Comrade, you must still be hungover, " +
+                    "a task description cannot be empty!");
+        } else if (taskSet.contains(taskInfo)) {
             throw new DukeException("Comrade, you already have this task!");
         }
         ToDo newToDo = new ToDo(taskInfo,"T","");
@@ -36,7 +38,6 @@ public class TaskList {
         return newToDo;
     }
     public Deadline addDeadline(String taskInfo, String by,int isDone) throws ParseException, DukeException {
-        // TODO add DukeException for this
         /**
          *  creates new Deadline, add to tasklist
          *  prints confirmation message
@@ -46,7 +47,10 @@ public class TaskList {
          *  @return none
          *  @throws DukeException if taskInfo is empty
          */
-        if (taskSet.contains(taskInfo)) {
+        if (taskInfo.equals("")) {
+            throw new DukeException("Comrade, you must still be hungover, " +
+                    "a task description cannot be empty!");
+        } else if (taskSet.contains(taskInfo)) {
             throw new DukeException("Comrade, you already have this task!");
         }
         Deadline newDeadline = new Deadline(taskInfo,"D",by);
@@ -58,7 +62,6 @@ public class TaskList {
         return newDeadline;
     }
     public Event addEvent(String taskInfo, String by, int isDone) throws ParseException, DukeException {
-        // TODO add DukeException for this
         /**
          *  creates new event, add to tasklist
          *  prints confirmation message
@@ -68,7 +71,10 @@ public class TaskList {
          *  @return none
          *  @throws DukeException if taskInfo is empty
          */
-        if (taskSet.contains(taskInfo)) {
+        if (taskInfo.equals("")) {
+            throw new DukeException("Comrade, you must still be hungover, " +
+                    "a task description cannot be empty!");
+        } else if (taskSet.contains(taskInfo)) {
             throw new DukeException("Comrade, you already have this task!");
         }
         Event newEvent = new Event(taskInfo,"E",by);
@@ -79,7 +85,7 @@ public class TaskList {
         taskArr.add(newEvent);
         return newEvent;
     }
-    public Task delete(int taskNum) {
+    public Task delete(int taskNum) throws DukeException{
         /**
          *  helper function, deletes task
          *  based on number provided
@@ -88,7 +94,14 @@ public class TaskList {
          *  then prints number of remaining tasks
          * @param integer indicating task number to delete
          *  @return none
+         * @throws DukeException if integer given > than current size of array
          */
+        int currentNumOfTasks = taskArr.size();
+        if (taskNum > currentNumOfTasks) {
+            throw new DukeException("Comrade, don't flatter yourself." +
+                    " You don't have that many chores, you only have "
+                    + currentNumOfTasks + " chores now.");
+        }
         Task doneTask = taskArr.get(taskNum-1);
         String taskToRemove = doneTask.getTaskInfo();
         taskSet.remove(taskToRemove);
@@ -96,15 +109,22 @@ public class TaskList {
 
         return doneTask;
     }
-    public Task done(int t) {
+    public Task done(int taskNum) throws DukeException {
         /**
          *  helper function, marks tasks as done
          *  then prints confirmation,
          *  then prints the done task in formatted string
          *  (formatted string from task itself)
-         *  @return none
+         *  @return Task that is done, handed to UI for printing to GUI
+         *  @throws DukeException if integer given > than current size of array
          */
-        Task doneTask = taskArr.get(t-1);
+        int currentNumOfTasks = taskArr.size();
+        if (taskNum > currentNumOfTasks) {
+            throw new DukeException("Comrade, don't flatter yourself." +
+                    " You don't have that many chores, you only have "
+                    + currentNumOfTasks + " chores now.");
+        }
+        Task doneTask = taskArr.get(taskNum-1);
         doneTask.markDone();
         return doneTask;
     }

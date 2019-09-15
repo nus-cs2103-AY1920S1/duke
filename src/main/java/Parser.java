@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Parser {
     private String command;
-    private String nextCommand;
+    private String nextCommand = "";
     private String taskBy;
     private int taskNum;
     public void parse(String input) throws DukeException{
@@ -21,14 +21,12 @@ public class Parser {
             if (!sc.hasNext()) {
                 throw new DukeException("Comrade? You did not finish your sentence!");
             }
-            String next = sc.next();
-            nextCommand = next;
             while (sc.hasNext()) {
+                String next = sc.next();
                 if (next.equals("/at") || next.equals("/by")) {
                     break;
                 }
                 nextCommand += " " + next;
-                next = sc.next();
             }
             if (command.equals("deadline") || command.equals("event")) {
                 if (!sc.hasNext()) {

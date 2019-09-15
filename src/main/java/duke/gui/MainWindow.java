@@ -1,7 +1,6 @@
 package duke.gui;
 
 import duke.command.Command;
-import duke.command.CommandResult;
 import duke.exception.DukeException;
 import duke.exception.DukeStorageException;
 import duke.parser.Parser;
@@ -15,8 +14,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.ArrayList;
 
 public class MainWindow extends AnchorPane implements Ui {
     private final Storage storage = new Storage("duke.txt");
@@ -54,29 +51,14 @@ public class MainWindow extends AnchorPane implements Ui {
         addUserDialog(input);
         userInput.clear();
 
-        ArrayList<String> responses = new ArrayList<>();
-        ArrayList<String> warnings = new ArrayList<>();
-        ArrayList<String> errors = new ArrayList<>();
         try {
             Command command = Parser.parse(input);
-            CommandResult result = command.execute(tasks, storage);
-            if (result.isExit()) {
+            command.execute(tasks, this, storage);
+            if (command.shouldExit()) {
                 Platform.exit();
             }
-            responses.addAll(result.getMessages());
-            warnings.addAll(result.getWarnings());
         } catch (DukeException e) {
-            errors.add((e.getMessage()));
-        }
-
-        for (String response : responses) {
-            showMessage(response);
-        }
-        for (String warning : warnings) {
-            showWarning(warning);
-        }
-        for (String error : errors) {
-            showError(error);
+            showError((e.getMessage()));
         }
     }
 
@@ -106,5 +88,9 @@ public class MainWindow extends AnchorPane implements Ui {
     @Override
     public void showWelcome() {
         addDialogBox(DialogBox.getDukeDialog("Hello from Duke! What can I do for you?"));
+    }
+
+    @Override
+    public void showBye() {
     }
 }

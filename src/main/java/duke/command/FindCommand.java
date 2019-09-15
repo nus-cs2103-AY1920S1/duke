@@ -5,10 +5,9 @@ import duke.exception.DukeInvalidCommandException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 import static duke.ui.Messages.FIND_MISSING_QUERY;
-import static duke.ui.Messages.FIND_NO_TASKS;
-import static duke.ui.Messages.FIND_TASKS;
 
 public class FindCommand extends Command {
     private final String[] queries;
@@ -25,7 +24,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws DukeExecutionException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
         check(tasks);
 
         TaskList matches = new TaskList();
@@ -39,12 +38,10 @@ public class FindCommand extends Command {
             }
         }
 
-        CommandResult result = new CommandResult();
         if (matches.size() == 0) {
-            result.addMessages(FIND_NO_TASKS);
+            ui.findNoMatch();
         } else {
-            result.addMessages(String.format("%s%n%s", FIND_TASKS, matches.toString()));
+            ui.findMatches(matches);
         }
-        return result;
     }
 }

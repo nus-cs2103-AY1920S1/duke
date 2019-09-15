@@ -5,9 +5,7 @@ import duke.exception.DukeStorageException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import static duke.ui.Messages.TASKS_COUNT;
-import static duke.ui.Messages.TASK_DELETED;
+import duke.ui.Ui;
 
 public class DeleteCommand extends SingleTaskCommand {
     public DeleteCommand(final Integer taskNumber) {
@@ -15,20 +13,14 @@ public class DeleteCommand extends SingleTaskCommand {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws DukeExecutionException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeExecutionException {
         check(tasks);
-        CommandResult result = new CommandResult();
         Task task = tasks.deleteTask(this.taskNumber);
-        result.addMessages(
-            String.format("%s%n%s%n%s",
-                TASK_DELETED,
-                task.toString(),
-                String.format(TASKS_COUNT, tasks.size())));
+        ui.deleteTaskSuccess(task, tasks);
         try {
             storage.writeTasks(tasks);
         } catch (DukeStorageException e) {
-            result.addWarnings(e.getMessage());
+            ui.showWarning(e.getMessage());
         }
-        return result;
     }
 }

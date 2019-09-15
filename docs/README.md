@@ -10,7 +10,7 @@
     
 2. [Features](#features)  
     2.1 [Types of Tasks](#types)  
-            2.1.1 [Adding of Tasks](#add)  
+        2.1.1 [Adding of Tasks](#add)  
     2.2 [Listing Tasks](#list)  
     2.3 [Handling of Tasks](#handle)  
     2.4 [Finding Tasks](#find)  
@@ -65,9 +65,9 @@ This section contains the commands to be keyed in to add different type of task.
 
 To key in a `todo` task: `todo` [description of task]
     
-    Example of usage: todo math homework
+    Example of usage: todo music homework
     Expected Outcome: Got it. Ive added this task:
-                      [T][✗] math homework
+                      [T][✗] music homework
                       Now you have 1 task in the list.
                        
 
@@ -75,9 +75,9 @@ To key in a `todo` task: `todo` [description of task]
 
 To key in a `deadline` task: `deadline` [description of task] /by [date in the format of dd/MM/yyyy] [time in the format of HHmm]
     
-    Example of usage: deadline math project /by 6/4/2022 0123
+    Example of usage: deadline music project /by 6/4/2023 0123
     Expected Outcome: Got it. Ive added this task:
-                      [D][✗] math project (by: 6/4/2022 01.23AM)
+                      [D][✗] music project (by: 6/4/2023 01.23AM)
                       Now you have 2 tasks in the list.
     
 :exclamation: /`by` must be included in the command.
@@ -104,9 +104,9 @@ To `list` all task recorded: `list`
 
     Example of usage: list
     Expected Outcome: Here are the tasks in your list:
-                      [T][✗] math homework
-                      [D][✗] math project (by: 6/4/2022 01.23AM)
-                      [E][✗] music festival (at: 6/4/2022 01.23AM)
+                      1.[T][✗] music homework
+                      2.[D][✗] music project (by: 6/4/2023 01.23AM)
+                      3.[E][✗] music festival (at: 6/4/2022 01.23AM)
 
 
 ### Handling of Tasks <a name="handle"></a>
@@ -120,7 +120,7 @@ To mark the task as `done`: `done` [index of the task in the list]
 
     Example of usage: done 1
     Expected Outcome: Nice! I've marked this task as done:
-                      [T][✓] math homework
+                      [T][✓] music homework
 
 
 2. **Delete Command**
@@ -129,26 +129,64 @@ To `delete` the task: `delete` [index of the task in the list]
 
     Example of usage: delete 1
     Expected Outcome: Noted. I've removed this task:
-                      [T][✓] math homework
+                      [T][✓] music homework
                       Now you have 2 tasks in the list.
+
+
 
 
 :exclamation: To execute the same command to multiple tasks at once, add `, ` between the indexes of the tasks.
     
     Example of usage: delete 1
     Expected Outcome: Noted. I've removed this task:
-    [T][✓] math homework
-    Now you have 2 tasks in the list.
+                    [T][✓] music homework
+                    Now you have 2 tasks in the list.
 
 
+### Finding of Tasks <a name="find"></a>
+
+To `find` tasks using a keyword: `find` [keyword]
+
+    Example of usage: find music
+    Expected Outcome: Here are the matching task in your list:
+                      1.[D][✗] music project (by: 6/4/2023 01.23AM)
+                      2.[E][✗] music festival (at: 6/4/2022 01.23AM)
+ 
+
+:exclamation: The keyword must only consists of one word.
 
 
+### Sorting of Tasks <a name="sort"></a>
 
+To `sort` tasks according to the dates and times in a increasing order: `sort` 
+
+    Example of usage: sort
+    Expected Outcome: Here are the tasks in your list:
+                      1.[E][✗] music festival (at: 6/4/2022 01.23AM)
+                      2.[D][✗] music project (by: 6/4/2023 01.23AM)
+
+
+:exclamation: If the list contains `deadline` or `event` task, it will take priority over a `todo` task as it is assumed that a `todo` task is of lower priority.
 
 
 ## **Viewing of Statistics** <a name="stats"></a>
 
+To view an overview of the tasks done over time, there are two ways:
+
+1. Click on the **Show Statistics** button on the top of the application as shown in ![Fig 2](/docs/showStats) below.
+
+2. Key in `show stats` in the command line: `show stats`
+
+    Example of usage: sort
+    Expected Outcome: 
+
+
 ## **Glossary** <a name="glossary"></a>
+
+
+
+
+
 
 ### Feature 1 
 Description of feature.

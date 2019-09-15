@@ -5,3 +5,5 @@ D | 0 | art assignment | 06/02/2012 1342
 T | 1 | workout | 2019-09-15T01:55
 T | 0 | travel
 D | 0 | math project | 06/04/2022 0123
+E | 0 | music festival | 06/04/2022 0123
+D | 0 | music project | 06/04/2022 0123

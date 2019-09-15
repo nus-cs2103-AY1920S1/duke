@@ -1,8 +1,7 @@
-T | 1 | join sports club
-E | 0 | lunch | 02/02/2019 1400
-D | 1 | return book | 04/08/2019 1700
-D | 0 | homework | 04/05/2019 1700
-D | 1 | homework 2 | 04/05/2019 1700
-E | 1 | meeting | 07/09/2019 1430
-D | 1 | meeting | 08/09/2019 1800
-E | 1 | lunch | 15/06/2019 1500
+T | 1 | buy coffee
+D | 1 | assignment 1 | 18/09/2019 2359
+D | 0 | post lecture quiz | 19/09/2019 2359
+E | 0 | project meeting | 18/09/2019 1000
+E | 0 | consultation session | 17/09/2019 1400
+E | 0 | midterms | 4/10/2019 1200
+T | 0 | shop for snacks 

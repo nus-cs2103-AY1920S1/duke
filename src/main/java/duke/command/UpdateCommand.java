@@ -6,6 +6,10 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * UpdateCommands represents user commands to update a task.
+ */
+
 public class UpdateCommand extends Command {
     private String taskContents;
 

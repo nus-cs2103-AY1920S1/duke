@@ -35,7 +35,7 @@ public class Date implements Comparable<Date> {
         assert isNull == false : "A null raw date should not be processed.";
         String[] dateComponents = rawDate.split("/");
         if (dateComponents.length < 3) {
-            throw new InvalidDateException("☹ OOPS!!! Please specify a date in the "
+            throw new InvalidDateException("OOPS!!! Please specify a date in the "
                     + "form day/month/year. E.g. 2/12/2019");
         }
         assignYear(dateComponents[2]);
@@ -51,7 +51,7 @@ public class Date implements Comparable<Date> {
     private void assignMonth(String rawMonth) throws InvalidDateException {
         int inputMonthNum = Integer.parseInt(rawMonth);
         if (isInvalidMonth(inputMonthNum)) {
-            throw new InvalidDateException("☹ OOPS!!! Please specify a valid month.");
+            throw new InvalidDateException("OOPS!!! Please specify a valid month.");
         }
         this.month = Month.of(inputMonthNum);
     }
@@ -61,7 +61,7 @@ public class Date implements Comparable<Date> {
         int inputMonthNum = Integer.parseInt(rawMonth);
         int inputYear = Integer.parseInt(rawYear);
         if (isInvalidDay(inputDay, inputMonthNum, inputYear)) {
-            throw new InvalidDateException("☹ OOPS!!! Please specify a valid day.");
+            throw new InvalidDateException("OOPS!!! Please specify a valid day.");
         }
         day = inputDay;
     }

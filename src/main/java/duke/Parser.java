@@ -44,7 +44,7 @@ public class Parser {
         case "event":
             return event(commandDetails);
         default:
-            throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -59,7 +59,7 @@ public class Parser {
     private static Command delete(String commandDetails) throws InsufficientDetailsException {
         String[] commandSplit = commandDetails.split(" ");
         if (commandSplit.length < 2) {
-            throw new InsufficientDetailsException("☹ OOPS!!! Please specify a task to delete.");
+            throw new InsufficientDetailsException("OOPS!!! Please specify a task to delete.");
         }
         int index = Integer.parseInt(commandSplit[1]);
         return new DeleteCommand(index);
@@ -68,7 +68,7 @@ public class Parser {
     private static Command done(String commandDetails) throws InsufficientDetailsException {
         String[] commandSplit = commandDetails.split(" ");
         if (commandSplit.length < 2) {
-            throw new InsufficientDetailsException("☹ OOPS!!! Please specify the task that has been done.");
+            throw new InsufficientDetailsException("OOPS!!! Please specify the task that has been done.");
         }
         int index = Integer.parseInt(commandSplit[1]);
         return new DoneCommand(index);
@@ -77,7 +77,7 @@ public class Parser {
     private static Command find(String commandDetails) throws InsufficientDetailsException {
         String[] commandSplit = commandDetails.split(" ");
         if (commandSplit.length < 2) {
-            throw new InsufficientDetailsException("☹ OOPS!!! Please specify what you want to find.");
+            throw new InsufficientDetailsException("OOPS!!! Please specify what you want to find.");
         }
         return new FindCommand(commandSplit[1].trim());
     }
@@ -86,7 +86,7 @@ public class Parser {
         String taskDetailsString;
         taskDetailsString = commandDetails.replaceFirst("todo", "").trim();
         if (taskDetailsString.length() == 0) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new InsufficientDetailsException("OOPS!!! The description of a todo cannot be empty.");
         } else {
             return new AddTodoCommand(taskDetailsString);
         }

@@ -18,7 +18,7 @@ public class Ui {
      * Prints the welcome logo.
      */
     private void printLogo() {
-        String logo = " ___        _        \n"
+        String logo = " ___         _        \n"
                 + "|  _ \\ _  _| |    __ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  _/\n"

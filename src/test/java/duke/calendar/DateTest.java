@@ -21,7 +21,7 @@ public class DateTest {
             Date date = new Date("06/14/2019");
             fail();
         } catch (DukeException exception) {
-            assertEquals("☹ OOPS!!! Please specify a valid month.", exception.getMessage());
+            assertEquals("OOPS!!! Please specify a valid month.", exception.getMessage());
         }
     }
 
@@ -31,7 +31,7 @@ public class DateTest {
             Date date = new Date("31/11/2019");
             fail();
         } catch (DukeException exception) {
-            assertEquals("☹ OOPS!!! Please specify a valid day.", exception.getMessage());
+            assertEquals("OOPS!!! Please specify a valid day.", exception.getMessage());
         }
     }
 
@@ -41,7 +41,7 @@ public class DateTest {
             Date date = new Date("11/2019");
             fail();
         } catch (DukeException exception) {
-            assertEquals("☹ OOPS!!! Please specify a date in the form day/month/year. E.g. 2/12/2019",
+            assertEquals("OOPS!!! Please specify a date in the form day/month/year. E.g. 2/12/2019",
                     exception.getMessage());
         }
     }

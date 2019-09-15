@@ -43,7 +43,7 @@ public class Storage {
             Scanner scanner = new Scanner(new File(filePath));
             return getTasks(scanner);
         } catch (FileNotFoundException exception) {
-            throw new StorageException("☹ OOPS!!! Please specify a valid file path.");
+            throw new StorageException("OOPS!!! Please specify a valid file path.");
         }
     }
 
@@ -116,7 +116,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException exception) {
-            throw new StorageException("☹ OOPS!!! Something went wrong: " + exception.getMessage());
+            throw new StorageException("OOPS!!! Something went wrong: " + exception.getMessage());
         }
     }
 

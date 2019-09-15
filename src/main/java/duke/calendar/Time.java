@@ -33,7 +33,7 @@ public class Time implements Comparable<Time> {
         assert (isNull == false) : "A null raw time should not be processed.";
         if (isInvalidTime(rawTime)) {
             throw new InvalidTimeException(
-                "☹ OOPS!!! Please specify a valid time. "
+                "OOPS!!! Please specify a valid time. "
                     + "Also ensure that you have specified the time in 24-hour clock convention E.g. 1800 ");
         }
         assignHour();

@@ -10,30 +10,37 @@ import duke.ui.Ui;
  * by executing the Ui to show bye screen.
  */
 public class ByeCommand extends Command {
-
-    public ByeCommand(String command, Task pending) {
-        super(command, pending);
-    }
-
-    /**
-     * Shows Ui screen of bye.
-     *
-     * @param list    List containing all tasks.
-     * @param ui      Ui interface of duke.
-     * @param storage Storage interface.
-     */
-    @Override
-    public String execute(TaskList list, Ui ui, Storage storage) {
-        return ui.getBye();
-    }
-
-    /**
-     * Return boolean indicating if command is exit command.
-     *
-     * @return boolean flag indicating if is exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
+	
+	/**
+	 * Constructor to create a Bye command.
+	 *
+	 * @param command     String variable of the command.
+	 * @param pendingTask Task to add into the list.
+	 */
+	public ByeCommand(String command, Task pendingTask) {
+		super(command, pendingTask);
+	}
+	
+	/**
+	 * Shows Ui screen of bye.
+	 *
+	 * @param list    List containing all tasks.
+	 * @param ui      Ui interface of duke.
+	 * @param storage Storage interface.
+	 * @return String variable of message after command execution.
+	 */
+	@Override
+	public String execute(TaskList list, Ui ui, Storage storage) {
+		return ui.getBye();
+	}
+	
+	/**
+	 * Return boolean indicating if command is exit command.
+	 *
+	 * @return boolean flag indicating if is exit command.
+	 */
+	@Override
+	public boolean isExit() {
+		return true;
+	}
 }

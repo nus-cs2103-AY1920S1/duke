@@ -12,31 +12,37 @@ import java.util.ArrayList;
  * To obtain list of task to print, perform Ui task.
  */
 public class ListCommand extends Command {
-
-    public ListCommand(String command) {
-        super(command, new Task());
-    }
-
-    /**
-     * Obtain list of tasks to print, perform Ui display and save to hard disk.
-     *
-     * @param list    List containing all tasks.
-     * @param ui      Ui interface of duke.
-     * @param storage Storage interface.
-     */
-    @Override
-    public String execute(TaskList list, Ui ui, Storage storage) {
-        ArrayList<String> listToPrint = list.printList();
-        return ui.getList(listToPrint);
-    }
-
-    /**
-     * Return boolean indicating if command is exit command.
-     *
-     * @return boolean flag indicating if is exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
+	
+	/**
+	 * Constructor to create a list command.
+	 *
+	 * @param command String variable of the command.
+	 */
+	public ListCommand(String command) {
+		super(command, new Task());
+	}
+	
+	/**
+	 * Obtain list of tasks to print, perform Ui display and save to hard disk.
+	 *
+	 * @param list    List containing all tasks.
+	 * @param ui      Ui interface of duke.
+	 * @param storage Storage interface.
+	 * @return String variable of message after command execution.
+	 */
+	@Override
+	public String execute(TaskList list, Ui ui, Storage storage) {
+		ArrayList<String> listToPrint = list.printList();
+		return ui.getList(listToPrint);
+	}
+	
+	/**
+	 * Return boolean indicating if command is exit command.
+	 *
+	 * @return boolean flag indicating if is exit command.
+	 */
+	@Override
+	public boolean isExit() {
+		return false;
+	}
 }

@@ -74,4 +74,13 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return tasks;
     }
+
+    public Task editTask(int n, Task task) throws DukeException {
+        if (n > tasks.size()) {
+            throw new DukeException(" ☹ OOPS!!! Do not exist that task.");
+        }
+        tasks.set(n - 1, task);
+
+        return tasks.get(n - 1);
+    }
 }

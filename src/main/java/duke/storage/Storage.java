@@ -50,20 +50,21 @@ public class Storage {
         while (readFileScanner.hasNext()) {
             String[] todoTask = readFileScanner.nextLine().split(" \\| ");
             switch (todoTask[0]) {
-            case "T":
+                case "T":
                 Task task1 = new Todo(todoTask[2]);
                 if (todoTask[1].equals("1")) {
                     task1.markAsDone();
                 }
                 tasks.add(task1);
-                break;
+                 break;
                 case "D":
                     Date time = Parser.stringToDate(todoTask[3]);
                     Task task2 = new Deadline(todoTask[2], time);
                     if (todoTask[1].equals("1")) {
                         task2.markAsDone();
                     }
-
+                    tasks.add(task2);
+                break;
                 case "E":
                 Task task3 = new Event(todoTask[2], todoTask[3]);
                 if (todoTask[1].equals("1")) {

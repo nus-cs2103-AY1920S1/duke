@@ -37,34 +37,14 @@ public class Parser {
             int index = Character.getNumericValue(num);
             return new DeleteCommand(index);
         } else if (fullCommand.startsWith("todo")) {
-            if (fullCommand.trim().length() == 4) {
-                throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
-            }
-            String descrip = fullCommand.substring(5);
-            Task task = new Todo(descrip);
+            Task task = createTask("todo", fullCommand);
             return new AddCommand(task);
         } else if (fullCommand.startsWith("event")) {
-            if (fullCommand.trim().length() == 5) {
-                throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
-            }
-            String[] event = fullCommand.substring(6).split(" /at ");
-            if (event.length != 2) {
-                throw new DukeException(" ☹ OOPS!!! The description of a event is wrong.");
-            }
-            Task task = new Event(event[0], event[1]);
+            Task task = createTask("event", fullCommand);
             return new AddCommand(task);
         } else if (fullCommand.startsWith("deadline")) {
-            if (fullCommand.trim().length() == 8) {
-                throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
-            String[] event = fullCommand.substring(9).split(" /by ");
-            if (event.length != 2) {
-                throw new DukeException(" ☹ OOPS!!! The description of a event is wrong.");
-            }
-            Date actualTime = stringToDate(event[1]);
-            Task task = new Deadline(event[0], actualTime);
+            Task task = createTask("deadline", fullCommand);
             return new AddCommand(task);
-
         } else if (fullCommand.startsWith("find")) {
             String keyword = fullCommand.substring(5);
             return new FindCommand(keyword);
@@ -83,6 +63,41 @@ public class Parser {
         }
 
         return actualTime;
+    }
+
+    private static Task createTask(String type, String content) throws DukeException {
+        Task task;
+
+        if (type.equals("todo")) {
+            if (content.trim().length() == 4) {
+                throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            String descrip = content.substring(5);
+            task = new Todo(descrip);
+        } else if (type.equals("event")) {
+            if (content.trim().length() == 5) {
+                throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+            }
+            String[] event = content.substring(6).split(" /at ");
+            if (event.length != 2) {
+                throw new DukeException(" ☹ OOPS!!! The description of a event is wrong.");
+            }
+            task = new Event(event[0], event[1]);
+        } else if (type.equals("deadline")) {
+            if (content.trim().length() == 8) {
+                throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+            }
+            String[] event = content.substring(9).split(" /by ");
+            if (event.length != 2) {
+                throw new DukeException(" ☹ OOPS!!! The description of a deadline is wrong.");
+            }
+            Date actualTime = stringToDate(event[1]);
+            task = new Deadline(event[0], actualTime);
+        } else {
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        return task;
     }
 
 }

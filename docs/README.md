@@ -3,7 +3,7 @@
 
 ## **Table of Contents**
 
-    1. [Introduction](#UserGuide)
+    1. [Introduction](#Introduction)
         1.1 [What is Duke ChatBot](#what)
         1.2 [Who Should Use It](#who)
         1.3 [Typographical Conventions](#how)
@@ -40,6 +40,7 @@ This application aims to be beginner friendly and is intended for users who want
 This document uses the following typographical conventions:
 
 `sort`  A grey highlight (called a mark-up) indicates that this is a command that can be type into the command line and executed by the application.
+
 :exclamation:   An exclamation sign indicates important information
 
 

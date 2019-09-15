@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import weomucat.duke.date.Interval;
 import weomucat.duke.exception.InvalidParameterException;
 
-public class IntervalParser {
+public class IntervalParser implements Parser<Interval> {
 
   // 5 Days, 12 Hours, 30 Minutes
   private static final long EXAMPLE_INTERVAL = 477000;
@@ -15,12 +15,7 @@ public class IntervalParser {
     this.input = input;
   }
 
-  /**
-   * Parses user input into an Interval.
-   *
-   * @return an interval
-   * @throws InvalidParameterException if the input is not in iso-8601 format
-   */
+  @Override
   public Interval parse() throws InvalidParameterException {
     try {
       return new Interval(Duration.parse(this.input));

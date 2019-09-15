@@ -5,12 +5,17 @@ import weomucat.duke.parser.IntegerParser;
 
 public class IndexParameter extends Parameter<Integer> {
 
-  public IndexParameter(String name, boolean required) {
-    super(name, required, null);
+  public IndexParameter(String description, boolean required, String name) {
+    super(description, required, name);
   }
 
   @Override
-  Integer parseLogic(String userInput) throws InvalidParameterException {
-    return new IntegerParser(userInput).parse() - 1;
+  Integer parseLogic(String input) throws InvalidParameterException {
+    return new IntegerParser(input).parse() - 1;
+  }
+
+  @Override
+  public String type() {
+    return "Index";
   }
 }

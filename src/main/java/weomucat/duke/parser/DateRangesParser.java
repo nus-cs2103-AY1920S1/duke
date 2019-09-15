@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import weomucat.duke.date.DateRange;
 import weomucat.duke.exception.InvalidParameterException;
 
-public class DateRangesParser {
+public class DateRangesParser implements Parser<Collection<DateRange>> {
 
   public static final String DATE_RANGES_DELIMITER = "|";
 
@@ -16,11 +16,7 @@ public class DateRangesParser {
     this.input = input.trim();
   }
 
-  /**
-   * Creates a collection of DateRanges from date range strings separated by a delimiter.
-   *
-   * @throws InvalidParameterException thrown if input is invalid
-   */
+  @Override
   public Collection<DateRange> parse() throws InvalidParameterException {
     Collection<DateRange> result = new ArrayList<>();
 

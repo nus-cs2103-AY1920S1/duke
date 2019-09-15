@@ -8,15 +8,37 @@ import weomucat.duke.command.parameter.ParameterOptions;
 
 public class SnoozeCommand extends Command<SnoozeTaskCommandListener> {
 
+  private static final String KEYWORD = "snooze";
+  private static final String DESCRIPTION =
+      "Pushes back the due date of a deadline by a given duration.";
+
   private static final String PARAMETER_BY = "/by";
+
+  private static final String DEFAULT_PARAMETER_DESCRIPTION = "The index of the task to snooze.";
+  private static final String PARAMETER_BY_DESCRIPTION = "The duration to snooze the task.";
+
+  private static final String DEFAULT_PARAMETER_NAME = "task";
+  private static final String PARAMETER_BY_NAME = "duration";
 
   private IndexParameter taskIndex;
   private IntervalParameter duration;
 
   @Override
+  public String getKeyword() {
+    return KEYWORD;
+  }
+
+  @Override
+  String getDescription() {
+    return DESCRIPTION;
+  }
+
+  @Override
   public ParameterOptions getParameterOptions() {
-    this.taskIndex = new IndexParameter("Task Index", true);
-    this.duration = new IntervalParameter("Snooze Duration", true);
+    this.taskIndex = new IndexParameter(DEFAULT_PARAMETER_DESCRIPTION, true,
+        DEFAULT_PARAMETER_NAME);
+    this.duration = new IntervalParameter(PARAMETER_BY_DESCRIPTION, true,
+        PARAMETER_BY_NAME);
     return new ParameterOptions(this.taskIndex)
         .put(PARAMETER_BY, this.duration);
   }

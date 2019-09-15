@@ -13,6 +13,16 @@ public abstract class DisplayCommand extends Command<DisplayCommandListener> {
   }
 
   @Override
+  public String getKeyword() {
+    return null;
+  }
+
+  @Override
+  String getDescription() {
+    return null;
+  }
+
+  @Override
   Class<DisplayCommandListener> getListenerClass() {
     return DisplayCommandListener.class;
   }

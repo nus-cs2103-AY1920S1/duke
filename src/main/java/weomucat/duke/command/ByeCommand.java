@@ -6,6 +6,19 @@ import weomucat.duke.command.parameter.ParameterOptions;
 
 public class ByeCommand extends Command<ByeCommandListener> {
 
+  private static final String KEYWORD = "bye";
+  private static final String DESCRIPTION = "Exits Duke.";
+
+  @Override
+  public String getKeyword() {
+    return KEYWORD;
+  }
+
+  @Override
+  String getDescription() {
+    return DESCRIPTION;
+  }
+
   @Override
   public ParameterOptions getParameterOptions() {
     return null;

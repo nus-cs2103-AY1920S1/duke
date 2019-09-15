@@ -43,16 +43,14 @@ public class DeadlineTask extends RecurringTask implements SnoozableTask {
 
   @Override
   public Message toMessage() {
-    ArrayList<String> out = new ArrayList<>();
-    out.add("===== BY =====");
-    out.add(this.by.toString());
+    ArrayList<String> result = new ArrayList<>();
+    result.add(String.format("===== BY =====\n%s", this.by));
 
     if (this.every != null) {
-      out.add("===== RECURRENCE =====");
-      out.add(this.every.toString());
+      result.add(String.format("===== RECURRENCE =====\n%s", this.every));
     }
 
-    return new Message(out.toArray(new String[0]))
+    return new Message(String.join("\n\n", result))
         .setTitle(this.toString());
   }
 

@@ -7,12 +7,17 @@ import weomucat.duke.parser.DateRangesParser;
 
 public class DateRangesParameter extends Parameter<Collection<DateRange>> {
 
-  public DateRangesParameter(String name, boolean required) {
-    super(name, required, null);
+  public DateRangesParameter(String description, boolean required, String name) {
+    super(description, required, name);
   }
 
   @Override
-  Collection<DateRange> parseLogic(String userInput) throws InvalidParameterException {
-    return new DateRangesParser(userInput).parse();
+  Collection<DateRange> parseLogic(String input) throws InvalidParameterException {
+    return new DateRangesParser(input).parse();
+  }
+
+  @Override
+  public String type() {
+    return "ISO-8601 Date Range(s)";
   }
 }

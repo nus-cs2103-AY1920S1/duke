@@ -2,12 +2,17 @@ package weomucat.duke.command.parameter;
 
 public class StringParameter extends Parameter<String> {
 
-  public StringParameter(String name, boolean required) {
-    super(name, required, null);
+  public StringParameter(String description, boolean required, String name) {
+    super(description, required, name);
   }
 
   @Override
-  String parseLogic(String userInput) {
-    return userInput;
+  String parseLogic(String input) {
+    return input;
+  }
+
+  @Override
+  public String type() {
+    return "String";
   }
 }

@@ -8,16 +8,16 @@ import weomucat.duke.ui.Message;
 public interface DisplayCommandListener extends CommandListener {
 
   /**
-   * Displays a nice message to the user.
+   * Displays nice messages to the user.
    *
-   * @param message message to display
+   * @param messages messages to display
    */
-  void displayMessage(Message message);
+  void displayMessage(Message... messages);
 
   /**
-   * Displays an error message to the user.
+   * Displays error messages to the user.
    *
-   * @param message error message to display
+   * @param messages error messages to display
    */
-  void displayError(Message message);
+  void displayError(Message... messages);
 }

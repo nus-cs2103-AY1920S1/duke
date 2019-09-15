@@ -19,6 +19,15 @@ public abstract class Command<E extends CommandListener> {
   private Supplier<Command<?>> runAfter;
 
   /**
+   * Gets the keyword of this Command.
+   *
+   * @return the name
+   */
+  public abstract String getKeyword();
+
+  abstract String getDescription();
+
+  /**
    * Gets the parameter options of this Command.
    *
    * @return the parameter options

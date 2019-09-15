@@ -14,8 +14,6 @@ import weomucat.duke.ui.Message;
  */
 public class EventTask extends RecurringTask {
 
-  private static final String DATE_RANGE_DELIMITER = "\\|";
-
   private DateRange at;
   private ArrayList<DateRange> atSlots;
   private Interval every;
@@ -71,35 +69,39 @@ public class EventTask extends RecurringTask {
 
   @Override
   public Message toMessage() {
-    ArrayList<String> out = new ArrayList<>();
+    ArrayList<String> result = new ArrayList<>();
 
     if (this.at != null) {
-      out.add("===== AT =====");
-      out.add(this.at.toString());
+      result.add(String.format("===== AT =====\n%s", this.at));
     }
 
     if (this.every != null) {
-      out.add("===== RECURRENCE =====");
-      out.add(this.every.toString());
+      result.add(String.format("===== RECURRENCE =====\n%s", this.every));
     }
 
     if (this.atSlots.size() > 1) {
-      out.add("===== TENTATIVE SCHEDULES =====");
+      ArrayList<String> slots = new ArrayList<>();
+      slots.add("===== TENTATIVE SCHEDULES =====");
       for (int i = 0; i < this.atSlots.size(); i++) {
         DateRange range = this.atSlots.get(i);
 
         // Format date range with no. in front
-        out.add(String.format("%d. %s", i + 1, range));
+        slots.add(String.format("%d. %s", i + 1, range));
       }
+      result.add(String.join("\n", slots));
     }
 
-    return new Message(out.toArray(new String[0]))
+    return new Message(String.join("\n\n", result))
         .setTitle(this.toString());
   }
 
   @Override
   boolean isOverDue() {
-    return this.at.getTo().compareTo(Date.now()) < 0;
+    if (this.at == null) {
+      return false;
+    } else {
+      return this.at.getTo().compareTo(Date.now()) < 0;
+    }
   }
 
   @Override
@@ -109,6 +111,10 @@ public class EventTask extends RecurringTask {
 
   @Override
   public int compareTo(Date date) {
-    return this.at.getFrom().compareTo(date);
+    if (this.at == null) {
+      return 0;
+    } else {
+      return this.at.getFrom().compareTo(date);
+    }
   }
 }

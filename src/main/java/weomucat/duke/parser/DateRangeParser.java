@@ -5,22 +5,18 @@ import weomucat.duke.date.Date;
 import weomucat.duke.date.DateRange;
 import weomucat.duke.exception.InvalidParameterException;
 
-public class DateRangeParser {
+public class DateRangeParser implements Parser<DateRange> {
 
   public static final String DATE_RANGE_DELIMITER = " - ";
   private static final int EXAMPLE_SECONDS = 30 * 60;
 
   private String input;
 
-  public DateRangeParser(String input) {
+  DateRangeParser(String input) {
     this.input = input.trim();
   }
 
-  /**
-   * Creates a DateRange from two iso-8601 strings separated by a delimiter.
-   *
-   * @throws InvalidParameterException thrown if input is invalid
-   */
+  @Override
   public DateRange parse() throws InvalidParameterException {
     String[] dates = input.split(DATE_RANGE_DELIMITER);
     if (dates.length < 2) {

@@ -23,7 +23,7 @@ import weomucat.duke.ui.listener.UserInputListener;
 public class GraphicalUi extends Application implements Ui, UserInputListener {
 
   // Amount of time in milliseconds to sleep before closing the gui.
-  private static final int BYE_COMMAND_SLEEP = 2000;
+  private static final int BYE_COMMAND_SLEEP = 1000;
 
   // For getting this instance when started by JavaFx
   private static GraphicalUi instance;

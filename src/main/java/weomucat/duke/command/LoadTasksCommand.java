@@ -12,6 +12,16 @@ public class LoadTasksCommand extends Command<LoadTasksCommandListener> {
   }
 
   @Override
+  public String getKeyword() {
+    return null;
+  }
+
+  @Override
+  String getDescription() {
+    return null;
+  }
+
+  @Override
   public ParameterOptions getParameterOptions() {
     return null;
   }

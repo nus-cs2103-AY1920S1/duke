@@ -8,7 +8,10 @@ import java.time.format.DateTimeParseException;
 import weomucat.duke.date.Date;
 import weomucat.duke.exception.InvalidParameterException;
 
-public class DateParser {
+/**
+ * Parses user input into a Date.
+ */
+public class DateParser implements Parser<Date> {
 
   private static final DateTimeFormatter DATE_PARSER = ISO_DATE_TIME;
   private String input;
@@ -17,12 +20,7 @@ public class DateParser {
     this.input = input.trim();
   }
 
-  /**
-   * Parses user input into a Date.
-   *
-   * @return a date
-   * @throws InvalidParameterException if the input is not in iso-8601 format
-   */
+  @Override
   public Date parse() throws InvalidParameterException {
     try {
       // Add timezone information to parser.

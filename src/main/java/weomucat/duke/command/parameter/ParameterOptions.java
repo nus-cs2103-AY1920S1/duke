@@ -1,5 +1,6 @@
 package weomucat.duke.command.parameter;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
@@ -32,5 +33,9 @@ public class ParameterOptions {
 
   public Set<String> keySet() {
     return this.parameterHashMap.keySet();
+  }
+
+  public Collection<Parameter> values() {
+    return this.parameterHashMap.values();
   }
 }

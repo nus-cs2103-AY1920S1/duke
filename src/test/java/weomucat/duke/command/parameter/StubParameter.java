@@ -5,11 +5,16 @@ public class StubParameter extends Parameter<String> {
    * Creates a parameter option.
    */
   public StubParameter() {
-    super("Stub Parameter", false, null);
+    super("", false);
   }
 
   @Override
-  String parseLogic(String userInput) {
-    return userInput;
+  String parseLogic(String input) {
+    return input;
+  }
+
+  @Override
+  public String type() {
+    return null;
   }
 }

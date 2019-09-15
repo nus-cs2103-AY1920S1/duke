@@ -6,12 +6,17 @@ import weomucat.duke.parser.DateParser;
 
 public class DateParameter extends Parameter<Date> {
 
-  public DateParameter(String name, boolean required) {
-    super(name, required, null);
+  public DateParameter(String description, boolean required, String name) {
+    super(description, required, name);
   }
 
   @Override
-  Date parseLogic(String userInput) throws InvalidParameterException {
-    return new DateParser(userInput).parse();
+  Date parseLogic(String input) throws InvalidParameterException {
+    return new DateParser(input).parse();
+  }
+
+  @Override
+  public String type() {
+    return "ISO-8601 Date";
   }
 }

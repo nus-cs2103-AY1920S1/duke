@@ -8,11 +8,16 @@ public class MockParameter extends Parameter<String> {
    * @param required whether the parameter is required or optional
    */
   MockParameter(boolean required) {
-    super("Mock Parameter", required, null);
+    super("", required);
   }
 
   @Override
-  String parseLogic(String userInput) {
+  String parseLogic(String input) {
     return "";
+  }
+
+  @Override
+  public String type() {
+    return null;
   }
 }

@@ -65,16 +65,20 @@ public class UiManager implements ByeCommandListener, DisplayCommandListener,
   }
 
   @Override
-  public void displayMessage(Message message) {
+  public void displayMessage(Message... messages) {
     for (Ui ui : this.uis) {
-      ui.displayMessage(message);
+      for (Message message : messages) {
+        ui.displayMessage(message);
+      }
     }
   }
 
   @Override
-  public void displayError(Message message) {
+  public void displayError(Message... messages) {
     for (Ui ui : this.uis) {
-      ui.displayError(message);
+      for (Message message : messages) {
+        ui.displayError(message);
+      }
     }
   }
 

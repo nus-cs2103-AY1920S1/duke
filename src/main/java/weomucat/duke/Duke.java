@@ -102,7 +102,8 @@ public class Duke {
     this.controller.commandUpdate(new LoadTasksCommand());
 
     this.controller.commandUpdate(new DisplayMessageCommand(
-        new Message("Hello! I'm Duke!", "What can I do for you?")));
+        new Message("Hello! I'm Duke! What can I do for you?",
+            "Type 'help /all' to see all commands.")));
 
     // Block main thread to query for user input & commands.
     this.controller.run();

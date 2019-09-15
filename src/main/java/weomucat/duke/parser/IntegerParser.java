@@ -2,7 +2,7 @@ package weomucat.duke.parser;
 
 import weomucat.duke.exception.InvalidParameterException;
 
-public class IntegerParser {
+public class IntegerParser implements Parser<Integer> {
 
   private String input;
 
@@ -10,12 +10,7 @@ public class IntegerParser {
     this.input = input.trim();
   }
 
-  /**
-   * Parses user input into an integer.
-   *
-   * @return an integer
-   * @throws InvalidParameterException if the input is not an integer
-   */
+  @Override
   public Integer parse() throws InvalidParameterException {
     try {
       return Integer.parseInt(this.input);

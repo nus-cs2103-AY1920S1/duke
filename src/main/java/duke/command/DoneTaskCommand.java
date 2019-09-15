@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.*;
+import duke.ui.*;
+import duke.storage.*;
+import duke.exception.*;
+
 public class DoneTaskCommand extends Command {
 
     String itemIndex;

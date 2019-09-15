@@ -1,9 +1,18 @@
-public class AddTodoCommand extends Command{
+package duke.command;
 
-    String item;
+import duke.task.*;
+import duke.ui.*;
+import duke.storage.*;
+import duke.format.*;
 
-    public AddTodoCommand(String item) {
-        this.item = item;
+public class AddDeadlineCommand extends Command {
+
+    String task;
+    String deadline;
+
+    public AddDeadlineCommand(String task, String deadline) {
+        this.task = task;
+        this.deadline = deadline;
     }
 
     public boolean isTerminated() {
@@ -14,12 +23,12 @@ public class AddTodoCommand extends Command{
         if (tasklist.size() >= 100) {
             ui.sendMessage("You can add no more than 100 tasks!");
         } else {
-            tasklist.add(new Todo(item));
+            DateTime dateTime = new DateTime(deadline);
+            tasklist.add(new Deadline(task, dateTime.toString()));
             Task thing = tasklist.get(tasklist.size() - 1);
             ui.sendMessage("Got it. I've added this task: ");
             ui.sendMessage("  " + thing.toString());
             ui.sendMessage(String.format("Now you have %d tasks in the list.", tasklist.size()));
         }
     }
-
 }

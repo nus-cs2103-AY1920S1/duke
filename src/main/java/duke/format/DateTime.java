@@ -1,3 +1,5 @@
+package duke.format;
+
 public class DateTime {
 
     String dateTime;

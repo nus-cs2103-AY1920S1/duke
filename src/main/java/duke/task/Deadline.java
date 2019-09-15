@@ -1,3 +1,5 @@
+package duke.task;
+
 public class Deadline extends Task {
 
     // the Deadline subclass adds one field

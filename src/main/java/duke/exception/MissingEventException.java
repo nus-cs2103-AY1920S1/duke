@@ -1,3 +1,5 @@
+package duke.exception;
+
 public class MissingEventException extends DukeException {
 
     public String toString() {

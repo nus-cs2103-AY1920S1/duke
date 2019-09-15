@@ -1,3 +1,10 @@
+package duke.command;
+
+import duke.task.*;
+import duke.ui.*;
+import duke.storage.*;
+import duke.format.*;
+
 public class AddEventCommand extends Command {
 
     String task;

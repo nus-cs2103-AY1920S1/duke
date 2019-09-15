@@ -1,3 +1,9 @@
+package duke.command;
+
+import duke.task.*;
+import duke.ui.*;
+import duke.storage.*;
+
 public class SendTasksCommand extends Command{
 
     public boolean isTerminated() {

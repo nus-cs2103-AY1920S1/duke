@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputDukeException;
@@ -65,6 +66,8 @@ public class CommandParser {
         switch (tokens[0]) {
         case "bye":
             return new ExitCommand();
+        case "help":
+            return new HelpCommand();
         case "list":
             return new ListCommand();
         case "done":

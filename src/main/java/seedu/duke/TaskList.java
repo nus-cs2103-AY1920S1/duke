@@ -143,7 +143,7 @@ public class TaskList {
      */
     public static boolean doneLastWeek(Task t) {
         Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
-        return (duration.toDays() <= 7);
+        return (duration.toMinutes() <= 2);
     }
 
     /**
@@ -154,7 +154,7 @@ public class TaskList {
      */
     public static boolean doneLastMonth(Task t) {
         Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
-        return (duration.toDays() <= 30);
+        return (duration.toDays() <= 1);
     }
 
     /**
@@ -165,7 +165,7 @@ public class TaskList {
      */
     public static boolean doneLastYear(Task t) {
         Duration duration = Duration.between(t.getDoneDateTime(), LocalDateTime.now());
-        return (duration.toDays() <= 365);
+        return (duration.toDays() <= 7);
     }
 
 }

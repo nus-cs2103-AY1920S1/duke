@@ -40,7 +40,7 @@ This application aims to be beginner friendly and is intended for users who want
 
 This document uses the following typographical conventions:
 
-`sort`  A grey highlight (called a mark-up) indicates that this is a command that can be type into the command line and executed by the application.
+`sort`  A mark-up indicates that this is a command that can be type into the command line and executed by the application.
 
 :exclamation:   An exclamation sign indicates important information
 
@@ -158,7 +158,7 @@ To `find` tasks using a keyword: `find` [keyword]
 
 ### Sorting of Tasks <a name="sort"></a>
 
-To `sort` tasks according to the dates and times in a increasing order: `sort` 
+To `sort` tasks according to the dates and times in a chronological order: `sort` 
 
     Example of usage: sort
     Expected Outcome: Here are the tasks in your list:
@@ -166,22 +166,33 @@ To `sort` tasks according to the dates and times in a increasing order: `sort`
                       2.[D][✗] music project (by: 6/4/2023 01.23AM)
 
 
-:exclamation: If the list contains `deadline` or `event` task, it will take priority over a `todo` task as it is assumed that a `todo` task is of lower priority.
+:exclamation: If the list contains `deadline` or `event` task, it will take priority over a `todo` task as it is assumed that a `todo` task is of lower priority.  
+:exclamation: If two `deadline` or `event` tasks have the same timestamp, the tasks would be sorted according to their descriptions in a alphabetical order. The rule also applies for `todo` task.  
 
 
 ## **Viewing of Statistics** <a name="stats"></a>
 
 To view an overview of the tasks done over time, there are two ways:
 
-1. Click on the **Show Statistics** button on the top of the application as shown in ![Fig 2](/docs/showStats1.png) below.
+1. Click on the **Show Statistics** button on the top of the application as shown below.
+![Fig 2](/docs/ShowStats1.png) 
+
 
 2. Key in `show stats` in the command line: `show stats`
 
-    Example of usage: sort
-    Expected Outcome: 
+        Example of usage: sort  
+        Expected Outcome:
+    ![](/docs/BarChart.png)
 
 
 ## **Glossary** <a name="glossary"></a>
+
+Term | Description  
+------ | -----------  
+Command Line Interface | The horizontal pale yellow box on bottom left corner of the application
+Mark-up | A grey highlight over the words
+Timestamp | A sequence of characters or encoded information identifying when a certain event occurred, usually giving date and time of day
+
 
 
 

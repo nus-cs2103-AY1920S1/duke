@@ -5,27 +5,13 @@ Tasks that you can track are `ToDos`, `Deadlines` and `Events`.
 Duke also utilises of local storage, remembering your tasks even after the application has been closed.  
 
 ## Overview
-- [<b>ScreenShots</b>](#screenshots)
 - [<b>Features</b>](#features)
 - [<b>Commands</b>](#commands)
 - [<b>Usage</b>](#usage)
 
-## <a name="screenshots"></a>ScreenShots
-
-- Adding Tasks
-![adding-tasks](images/adding-tasks.png)
-- Viewing Tasks
-![viewing-tasks](images/viewing-tasks.png)
-- Doing Tasks
-![doing-tasks](images/doing-tasks.png)
-- Finding Tasks
-![finding-tasks](images/finding-tasks.png)
-- Deleting Tasks
-![deleting-tasks](images/deleting-tasks.png)
-- Invalid Commands
-![invalid-commands](images/invalid-commands.png)
-- Tell Duke Bye
-![bye-commands](images/bye-commands.png)
+![overview-1](images/overview-1.png)
+![overview-2](images/overview-2.png)
+![overview-3](images/overview-3.png)
 
 ## <a name="features"></a>Features 
 
@@ -110,15 +96,16 @@ The format for adding a todo is `todo <todo description>`.
 
 ```
 // user input
-todo Revise CS2103T Lecture Notes on Git Commands
+todo Revise CS2103T Lecture Notes on UML 
 
 // response
     ____________________________________________________________
      Got it. I've added this task:
-       [T][N] Revise CS2103T Lecture Notes on Git Commands
+       [T][N] Revise CS2103T Lecture Notes on UML
      Now you have 1 tasks in the list.
     ____________________________________________________________
 ```
+![todo-pic](images/todo-pic.png)
 
 ### <a name="deadline-usage"></a>`deadline` - Adds a deadline task to Duke
 Adds a deadline task for duke to track.  
@@ -141,6 +128,7 @@ deadline CS2102 Assignment 2 /by 14/9/2019 2359
      Now you have 1 tasks in the list.
     ____________________________________________________________
 ```
+![deadline-pic](images/deadline-pic.png)
 
 ### <a name="event-usage"></a>`event` - Adds an event task to Duke
 Adds a event task for duke to track.  
@@ -163,6 +151,7 @@ event CS2103T Finals /at 29/11/2019 0900
      Now you have 1 tasks in the list.
     ___________________________________________________________e
 ```
+![event-pic](images/event-pic.png)
 
 ### <a name="list-usage"></a>`list` - Lists out all tracked tasks
 Lists out all tasks being tracked by duke.  
@@ -172,7 +161,7 @@ The format for listing out all tasks is `list`.
 Suppose the following commands are keyed in sequence.  
 1. `event CS2103T Finals /at 29/11/2019 0900`
 2. `deadline CS2102 Assignment 2 /by 14/9/2019 2359`
-3. `todo Revise CS2103T Lecture Notes on Git Commands`
+3. `todo Revise CS2103T Lecture Notes on UML`
 
 ```
 // user input
@@ -181,11 +170,12 @@ list
 // response
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][N] Revise CS2103T Lecture Notes on Git Commands
+     1.[T][N] Revise CS2103T Lecture Notes on UML
      2.[D][N] CS2102 Assignment 2 (by: 14th of September 2019 11:59pm)
      3.[E][N] CS2103T Finals (at: 29th of November 2019, 9:00am)
     ___________________________________________________________e
 ```
+![list-pic](images/list-pic.png)
 
 ### <a name="done-usage"></a>`done` - Mark a task as done
 
@@ -197,7 +187,7 @@ The format for marking a task as done is `done <index>`.
 Suppose the following commands are keyed in sequence.  
 1. `event CS2103T Finals /at 29/11/2019 0900`
 2. `deadline CS2102 Assignment 2 /by 14/9/2019 2359`
-3. `todo Revise CS2103T Lecture Notes on Git Commands`
+3. `todo Revise CS2103T Lecture Notes on UML`
 
 ```
 // user input
@@ -206,7 +196,7 @@ done 1
 // response
     ____________________________________________________________
      Nice! I've marked this task as done:
-       [T][Y] Revise CS2103T Lecture Notes on Git Commands
+       [T][Y] Revise CS2103T Lecture Notes on UML
     ____________________________________________________________
 
 // user input
@@ -215,11 +205,12 @@ list
 // response
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][Y] Revise CS2103T Lecture Notes on Git Commands
+     1.[T][Y] Revise CS2103T Lecture Notes on UML 
      2.[D][N] CS2102 Assignment 2 (by: 14th of September 2019 11:59pm)
      3.[E][N] CS2103T Finals (at: 29th of November 2019, 9:00am)
     ____________________________________________________________
 ```
+![done-pic](images/done-pic.png)
 
 ### <a name="delete-usage"></a>`delete` - Deletes a task from Duke  
 The format for deleting a task is `delete <index>`.
@@ -228,7 +219,7 @@ The format for deleting a task is `delete <index>`.
 Suppose the following commands are keyed in sequence.  
 1. `event CS2103T Finals /at 29/11/2019 0900`
 2. `deadline CS2102 Assignment 2 /by 14/9/2019 2359`
-3. `todo Revise CS2103T Lecture Notes on Git Commands`
+3. `todo Revise CS2103T Lecture Notes on UML`
 
 ```
 // user input
@@ -237,7 +228,7 @@ delete 1
 // response
     ____________________________________________________________
      Noted. I've removed this task:
-       [T][N] Revise CS2103% Lecture Notes on Git Commands
+       [T][N] Revise CS2103% Lecture Notes on UML
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
@@ -251,6 +242,7 @@ list
      2.[E][N] CS2103T Finals (at: 29th of November 2019, 9:00am)
     ____________________________________________________________
 ```
+![delete-pic](images/delete-pic.png)
 
 ### <a name="find-usage"></a>`find` - Finds tasks matching a specific text
 Searches and retrieves tasks that match a certain text.  
@@ -260,7 +252,7 @@ The format for searching for tasks by a given matching text is `find <text match
 Suppose the following commands are keyed in sequence.  
 1. `event CS2103T Finals /at 29/11/2019 0900`
 2. `deadline CS2102 Assignment 2 /by 14/9/2019 2359`
-3. `todo Revise CS2103T Lecture Notes on Git Commands`
+3. `todo Revise CS2103T Lecture Notes on UML`
 
 ```
 // user input
@@ -269,7 +261,7 @@ find CS2103T
 // response
     ____________________________________________________________
      Here are the tasks in your list:
-     1.[T][N] Revise CS2103T Lecture Notes on Git Commands
+     1.[T][N] Revise CS2103T Lecture Notes on UML
      2.[E][N] CS2103T Finals (at: 29th of November 2019, 9:00am)
     ____________________________________________________________
 // user input
@@ -290,6 +282,8 @@ find CS3230
 
     ____________________________________________________________
 ```
+![find-pic-1](images/find-pic-1.png)
+![find-pic-2](images/find-pic-2.png)
 
 ### <a name="bye-usage"></a>`bye` - Tells Duke bye
 Tells Duke bye.  
@@ -304,3 +298,4 @@ bye
      Bye. Hope to see you again soon!
     ____________________________________________________________
 ```
+![bye-pic](images/bye-pic.png)

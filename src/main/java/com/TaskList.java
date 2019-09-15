@@ -33,7 +33,7 @@ public class TaskList {
      * @return Task that was added
      * @throws IOException
      */
-    public Task addTask(Task newTask) throws IOException {
+    public Task addTask(Task newTask) {
         taskArr.add(newTask);
         return newTask;
     }

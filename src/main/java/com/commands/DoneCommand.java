@@ -1,6 +1,12 @@
 package com.commands;
 
-import java.io.IOException;
+import com.TaskList;
+import com.tasks.Task;
+import com.util.Storage;
+import com.util.StaticStrings;
+
+import com.exceptions.DukeException;
+import com.exceptions.command.*;
 
 public class DoneCommand extends Command {
 
@@ -12,20 +18,18 @@ public class DoneCommand extends Command {
 
     /**
      * Marks a task done, saves changes in text file.
-     * @param taskList list of tasks
-     * @param ui
+     * @param taskList
      * @param storage
-     * @throws IOException
+     * @throws DukeException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
         // Checks if index of task to mark done is within range
         int numTasks = taskList.getNumTasks();
         if (numTasks == 0) {
-            throw new DukeException("You have no tasks to mark done!");
+            throw new DukeCommandException(StaticStrings.NO_TASKS_DONE);
         }
         if (doneIdx < 1 || doneIdx > numTasks) {
-            throw new DukeException("Please provide a positive integer that is " +
-                    numTasks + " and below.");
+            throw new DukeExecuteException(StaticStrings.NOT_IN_RANGE + numTasks);
         }
 
         Task doneTask = taskList.markTaskDone(doneIdx);

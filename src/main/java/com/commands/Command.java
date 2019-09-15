@@ -1,11 +1,9 @@
 package com.commands;
 
-import java.io.IOException;
-import java.text.ParseException;
-
-// TODO package classes together
-// TODO handle exceptions better
-// TODO remove unnecessary imports
+import com.TaskList;
+import com.util.Storage;
+import com.util.Ui;
+import com.exceptions.*;
 
 /**
  * Contains information given by user about command.
@@ -17,18 +15,20 @@ import java.text.ParseException;
 public class Command {
 
     protected String command; // e.g. list, done, bye, todo, deadline, event
-    protected boolean toContinueProgram; // Whether command causes program to exit or not
+    protected boolean continuesProgram;
+    protected Ui ui;
 
     public Command(String commandWord) {
         this.command = commandWord;
-        this.toContinueProgram = !(commandWord.equals("bye"));
+        continuesProgram = true;
+        ui = new Ui();
     }
 
-    public boolean toContinue() {
-        return toContinueProgram;
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
     }
 
-    public void execute(Duke duke) throws DukeException, IOException {
+    public boolean continuesProgram() {
+        return continuesProgram;
     }
 
     /**
@@ -36,7 +36,6 @@ public class Command {
      */
     public void print() {
         System.out.println("Command: " + command);
-        System.out.print("Does command terminate program?: " + !toContinueProgram);
     }
 
     /**
@@ -55,8 +54,7 @@ public class Command {
             return true;
         }
         Command c = (Command) o;
-        return command.equals(c.command) &&
-                toContinueProgram == c.toContinueProgram;
+        return command.equals(c.command);
     }
 
 }

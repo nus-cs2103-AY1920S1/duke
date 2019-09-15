@@ -8,7 +8,7 @@ public class DukeException extends Exception {
     private Ui ui;
 
     public DukeException(String message) {
-        super("OOPS! " + message);
+        super(message);
         ui = new Ui();
         this.message = ui.indentMessage(message);
     }

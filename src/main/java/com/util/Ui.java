@@ -2,6 +2,7 @@ package com.util;
 
 import com.tasks.*;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -35,11 +36,11 @@ public class Ui {
     ////////////////////
 
     public void showGreetings() {
-        showMessage(StaticStrings.GREETING);
+        showMessage(indentMessage(StaticStrings.GREETING));
     }
 
     public void showGoodbye() {
-        showMessage(StaticStrings.GOODBYE);
+        showMessage(indentMessage(StaticStrings.GOODBYE));
     }
 
     public void showAddTaskResponse(Task addedTask, ArrayList<Task> taskArr) {
@@ -136,8 +137,8 @@ public class Ui {
     }
 
     /**
-     * Sandwiches text between lines, prints it.
-     * @param message
+     * Sandwiches text between borders, prints it.
+     * @param message A string
      */
     public void showMessage(String message) {
         System.out.println(StaticStrings.BORDER);
@@ -145,10 +146,19 @@ public class Ui {
         System.out.println(StaticStrings.BORDER);
     }
 
+    /**
+     * Sandwiches lines of text between borders, prints it.
+     * Each line of text is a new line.
+     * @param message An arraylist where each element is a line in the message
+     */
     public void showMessage(ArrayList<String> message) {
-        System.out.println(StaticStrings.BORDER);
-        System.out.println(joinWithNewLines(message));
-        System.out.println(StaticStrings.BORDER);
+        showMessage(joinWithNewLines(message));
+    }
+
+    public void showMessage(String... message) {
+        // Convert String[] to ArrayList<String>
+        ArrayList<String> output = new ArrayList<String>(Arrays.asList(message));
+        showMessage(output);
     }
 
 }

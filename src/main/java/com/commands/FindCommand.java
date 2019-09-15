@@ -1,5 +1,10 @@
 package com.commands;
 
+import com.TaskList;
+import com.tasks.Task;
+import com.util.Storage;
+import com.util.StaticStrings;
+
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
@@ -14,9 +19,7 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
-    public void execute(Duke duke) {
-        TaskList taskList = duke.getTaskList();
-        Ui ui = duke.getUi();
+    public void execute(TaskList taskList, Storage storage) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (String keyword : keywords) {
             for (Task currTask : taskList.getTaskArr()) {
@@ -27,7 +30,7 @@ public class FindCommand extends Command {
             }
         }
         if (matchingTasks.size() == 0) {
-            ui.showMessage("No matching tasks!");
+            ui.showMessage(StaticStrings.NO_TASKS_MATCH);
         } else {
             ui.showFindKeywordResponse(matchingTasks);
         }

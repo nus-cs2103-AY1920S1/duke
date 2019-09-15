@@ -1,6 +1,13 @@
 package com.commands;
 
-import java.io.IOException;
+import com.TaskList;
+import com.util.Storage;
+
+import com.tasks.Task;
+import com.util.StaticStrings;
+
+import com.exceptions.DukeException;
+import com.exceptions.command.*;
 
 public class DeleteCommand extends Command {
 
@@ -10,25 +17,20 @@ public class DeleteCommand extends Command {
         this.deleteIdx = deleteTaskIdx;
     }
 
-    // TODO make better javadocs comments
     /**
      * Deletes task from list, saves changes in text file.
-     * @param duke
+     * @param taskList
+     * @param storage
      * @throws DukeException
-     * @throws IOException
      */
-    public void execute(Duke duke) throws DukeException, IOException {
-        TaskList taskList = duke.getTaskList();
-        Storage storage = duke.getStorage();
-        Ui ui = duke.getUi();
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
         // Checks if index of task to delete is within range
         int numTasks = taskList.getNumTasks();
         if (numTasks == 0) {
-            throw new DukeException("You have no tasks to delete!");
+            throw new DukeExecuteException(StaticStrings.NO_TASKS_DELETE);
         }
         if (deleteIdx < 1 || deleteIdx > numTasks) {
-            throw new DukeException("Please provide a positive integer that is " +
-                    numTasks + " and below.");
+            throw new DukeExecuteException(StaticStrings.NOT_IN_RANGE + numTasks);
         }
 
         Task deletedTask = taskList.deleteTask(deleteIdx);

@@ -1,6 +1,10 @@
 package com.commands;
 
-import java.io.IOException;
+import com.TaskList;
+import com.exceptions.DukeException;
+import com.util.Storage;
+import com.tasks.*;
+
 import java.util.ArrayList;
 
 public class ToDoCommand extends AddCommand {
@@ -11,14 +15,11 @@ public class ToDoCommand extends AddCommand {
 
     /**
      * Adds ToDo task to list, saves new list to text file.
-     * @param duke
-     * @throws IOException
+     * @param taskList
+     * @param storage
+     * @throws DukeException
      */
-    public void execute(Duke duke) throws IOException {
-        TaskList taskList = duke.getTaskList();
-        Storage storage = duke.getStorage();
-        Ui ui = duke.getUi();
-
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
         Task newTask = new ToDo(description);
         taskList.addTask(newTask);
         ArrayList<Task> taskArr = taskList.getTaskArr();

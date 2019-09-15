@@ -1,18 +1,17 @@
 package com.util;
 
-import com.commands.*;
 import com.tasks.*;
 import com.exceptions.*;
+import com.util.StaticStrings;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 /**
  * Class responsible for loading and saving tasks
@@ -41,7 +40,7 @@ public class Storage {
      * If no such file, returns an empty list.
      * @return List of tasks
      */
-    public ArrayList<Task> load() throws DukeException, ParseException, IOException {
+    public ArrayList<Task> load() throws DukeException {
         // If no such file, create one
         if (!doesFileExist) {
             ArrayList<Task> newTaskArr = new ArrayList<Task>();
@@ -77,7 +76,7 @@ public class Storage {
                     break;
                 default:
                     // No such task type as entered in text file
-                    throw new DukeStorageException("Whoops! Please check that the task types in the text file are only from this list [T, D, E].");
+                    throw new DukeStorageException(StaticStrings.ERROR_READ_FROM_FILE);
                 }
                 if (isTaskDone) {
                     currTask.markDone();
@@ -86,7 +85,7 @@ public class Storage {
             }
             return taskArr;
         } catch (FileNotFoundException e) {
-            throw new DukeStorageException("File not found at given file path. Error in creating new file there. :-(");
+            throw new DukeStorageException(StaticStrings.ERROR_FILE_NOT_FOUND);
         }
     }
 
@@ -95,26 +94,30 @@ public class Storage {
      * @param taskArr
      * @throws IOException
      */
-    public void save(ArrayList<Task> taskArr) throws IOException {
-        // Note: Overwrites file if currently exists
-        FileWriter fw = new FileWriter(filePath);
-        String STR_SEPARATOR = " | ";
-        for (Task currTask : taskArr) {
-            // If available, for tasks with subcommands
-            String subDescription = currTask.getTaskType().equals("T") ?
-                    "" : STR_SEPARATOR + currTask.getSubDescription();
-            // Format: D | 0 | return book | June 6th
-            fw.write(currTask.getTaskType() + STR_SEPARATOR +
-                    (currTask.isDone()? 1 : 0) + STR_SEPARATOR +
-                    currTask.getDescription() + STR_SEPARATOR +
-                    subDescription
-            );
-            // If not last task in data, append new line
-            int currTaskIdx = taskArr.indexOf(currTask);
-            if(currTaskIdx + 1 != taskArr.size()) {
-                fw.write("\n");
+    public void save(ArrayList<Task> taskArr) throws DukeException {
+        try {
+            // Note: Overwrites file if currently exists
+            FileWriter fw = new FileWriter(filePath);
+            for (Task currTask : taskArr) {
+                // If available, for tasks with subcommands
+                String subDescription = currTask.getTaskType().equals("T") ?
+                        "" : StaticStrings.STORAGE_SEPARATOR + currTask.getSubDescription();
+                // Format: D | 0 | return book | June 6th
+                fw.write(currTask.getTaskType() + StaticStrings.STORAGE_SEPARATOR +
+                        (currTask.isDone()? 1 : 0) + StaticStrings.STORAGE_SEPARATOR +
+                        currTask.getDescription() + StaticStrings.STORAGE_SEPARATOR +
+                        subDescription
+                );
+                // If not last task in data, append new line
+                int currTaskIdx = taskArr.indexOf(currTask);
+                if(currTaskIdx + 1 != taskArr.size()) {
+                    fw.write("\n");
+                }
             }
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeStorageException(StaticStrings.ERROR_SAVE_FROM_FILE);
         }
-        fw.close();
     }
+
 }

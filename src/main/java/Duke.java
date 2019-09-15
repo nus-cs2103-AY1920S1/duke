@@ -7,6 +7,13 @@ import com.util.Storage;
 import com.util.Parser;
 import com.util.Ui;
 
+// TODO make better javadocs comments
+// TODO handle exceptions better
+// TODO remove unnecessary imports
+// TODO order imports better
+// TODO use enumerations
+// TODO use logging in Storage load for onelinetextarray
+
 /**
  * A program named Duke.
  * Something like a Personal Assistant Chatbot that helps
@@ -20,24 +27,22 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    private boolean inProgram;
-
-    public Duke(String filePath) {
+    public Duke(String filePath) throws DukeException {
         storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
         parser = new Parser();
         ui = new Ui();
-
-        inProgram = true;
     }
 
     public void run() {
         ui.showGreetings();
-        while (inProgram) {
+        boolean doesProgramContinue = true;
+        while (doesProgramContinue) {
             try {
                 String userFullInput = ui.readUserInput();
                 Command c = parser.parse(userFullInput);
-                c.execute(this);
+                c.execute(this.getTaskList(), this.getStorage());
+                doesProgramContinue = c.continuesProgram();
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
             }
@@ -58,18 +63,6 @@ public class Duke {
 
     public Storage getStorage() {
         return storage;
-    }
-
-    public Ui getUi() {
-        return ui;
-    }
-
-    /////////////
-    // SETTERS //
-    ////////////
-
-    public void setExitProgram() {
-        inProgram = false;
     }
 
 }

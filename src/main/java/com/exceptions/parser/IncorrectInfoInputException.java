@@ -1,4 +1,6 @@
-package com.exceptions;
+package com.exceptions.parser;
+
+import com.exceptions.DukeException;
 
 /**
  * Thrown when incorrect usage of commands with subcommands

@@ -1,7 +1,8 @@
 package com.util;
 
 import com.commands.*;
-import com.exceptions.*;
+import com.exceptions.DukeException;
+import com.exceptions.parser.*;
 
 import java.awt.font.NumericShaper;
 import java.util.List;

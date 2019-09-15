@@ -1,8 +1,14 @@
 package com.commands;
 
-import java.io.IOException;
-import java.text.ParseException;
+import com.TaskList;
+import com.exceptions.DukeException;
+import com.tasks.*;
+import com.util.StaticStrings;
+import com.util.Storage;
+
 import java.util.ArrayList;
+
+import com.exceptions.command.*;
 
 /**
  * Commands which adds a task to list,
@@ -19,7 +25,7 @@ public class SubCommand extends AddCommand {
         this.subDescription = subDescription;
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException, ParseException {
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
         Task newTask;
         switch (command) {
         case "deadline":
@@ -29,7 +35,7 @@ public class SubCommand extends AddCommand {
             newTask = new Event(description, subDescription);
             break;
         default:
-            throw new DukeException("Something went wrong :-( No such command with subcommand!");
+            throw new DukeExecuteException(StaticStrings.NO_SUCH_COMMAND);
         }
 
         taskList.addTask(newTask);

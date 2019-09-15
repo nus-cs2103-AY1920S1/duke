@@ -1,8 +1,8 @@
 package com.commands;
 
-import
-
-import java.io.IOException;
+import com.TaskList;
+import com.exceptions.DukeException;
+import com.util.Storage;
 
 public class AddCommand extends Command {
 
@@ -22,7 +22,7 @@ public class AddCommand extends Command {
         this.hasSubCommand = hasSubCommand;
     }
 
-    public void execute(Duke duke) throws IOException {
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
     }
 
     public void print() {

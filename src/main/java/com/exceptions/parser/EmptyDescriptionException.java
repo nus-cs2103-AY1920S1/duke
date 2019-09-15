@@ -1,4 +1,6 @@
-package com.exceptions;
+package com.exceptions.parser;
+
+import com.exceptions.DukeException;
 
 //Empty description after command (todo, event, deadline, list, done)
 
@@ -6,7 +8,7 @@ package com.exceptions;
  * Thrown if Empty description after command
  * (e.g. todo, event, deadline, list, done)
  */
-public class EmptyDescriptionException extends DukeException {
+public class EmptyDescriptionException extends DukeParserException {
 
     public EmptyDescriptionException(String command) {
         super("The description of " +

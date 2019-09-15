@@ -1,6 +1,6 @@
 # User Guide
 
-##Introduction
+## Introduction
 The DukeBot is for those who prefer to use a desktop app for managing tasks. 
 More importantly, DukeBot is optimized for those who prefer to work with a Command 
 Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
@@ -67,8 +67,8 @@ Format: bye
 * None
 
 ## Command Summary
-* Add : `CODE NAME DATE [TIME]`   
-e.g. ` event party /at 01/01/2011 0800 1900`  
+* Add : `CODE NAME DATE [TIME]`  
+e.g. `event party /at 01/01/2011 0800 1900`   
 e.g. `t read book`
 
 * Delete : `delete INDEX`

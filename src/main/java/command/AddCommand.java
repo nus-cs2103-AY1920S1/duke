@@ -33,8 +33,8 @@ public class AddCommand extends Command {
                 Ui.missingDeadlineMsg();
             } else {
                 int dateStartIndex = command.lastIndexOf("/by");
-                desc = command.substring(9, dateStartIndex);
-                String ddl = command.substring(dateStartIndex + 4);
+                desc = command.substring(9, dateStartIndex - 1);
+                String ddl = convertDate(command.substring(dateStartIndex + 4));
                 taskList.addTask(new Deadline(desc, ddl));
             }
         } else if (command.startsWith(Instruction.EVENT.toString())) {
@@ -43,9 +43,9 @@ public class AddCommand extends Command {
             } else if (!command.contains("/at")) {
                 Ui.missingEventMsg();
             } else {
-                int dateStartIndex = command.indexOf("/at") + 4;
-                desc = command.substring(6, dateStartIndex);
-                String date = command.substring(dateStartIndex + 4);
+                int dateStartIndex = command.indexOf("/at");
+                desc = command.substring(6, dateStartIndex - 1);
+                String date = convertDate(command.substring(dateStartIndex + 4));
                 taskList.addTask(new Event(desc, date));
             }
         } else {

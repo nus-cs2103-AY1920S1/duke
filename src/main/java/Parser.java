@@ -1,6 +1,9 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Reads command and performs operations based on input or activity
+ */
 public class Parser {
 
     private Storage storage;

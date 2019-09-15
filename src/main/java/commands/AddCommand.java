@@ -36,6 +36,6 @@ public class AddCommand extends Command {
         int taskNum = tasks.getSize();
         String feedback = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + taskNum
                 + " tasks in the list.";
-        return ui.addBorder(feedback);
+        return feedback;
     }
 }

@@ -69,7 +69,7 @@ public class Ui {
      */
     public String welcomeMessage() {
 
-        return DUKE_STARTUP + "\n" + addBorder(DUKE_SAYS_HI);
+        return DUKE_STARTUP + "\n" + DUKE_SAYS_HI;
     }
 
     /**
@@ -77,7 +77,7 @@ public class Ui {
      *
      */
     public String exitMessage() {
-        return addBorder(EXIT_MESSAGE);
+        return EXIT_MESSAGE;
     }
 
     /**
@@ -97,7 +97,7 @@ public class Ui {
             }
         }
 
-        return addBorder(str.toString());
+        return str.toString();
     }
 
     /**
@@ -118,7 +118,7 @@ public class Ui {
             }
         }
 
-        return addBorder(str.toString());
+        return str.toString();
     }
 
     /**
@@ -127,6 +127,6 @@ public class Ui {
      * @param input String input.
      */
     public String showErrors(String input) {
-        return addBorder(input);
+        return input;
     }
 }

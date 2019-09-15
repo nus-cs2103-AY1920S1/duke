@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
             storage.writeToFile();
             str = "Noted. I've removed this task:\n" + " " + toDelete.toString() + "\nNow you have " + tasks.getSize()
                     + " tasks in the list.";
-            return ui.addBorder(str);
+            return str;
         }
     }
 }

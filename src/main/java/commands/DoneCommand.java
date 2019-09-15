@@ -39,7 +39,7 @@ public class DoneCommand extends Command {
             doneTask.markAsDone();
             storage.writeToFile();
             str = "Nice! I've marked this task as done:\n" + " " + doneTask.toString();
-            return ui.addBorder(str);
+            return str;
         }
     }
 }

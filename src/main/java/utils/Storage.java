@@ -49,9 +49,6 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("File cannot be created, please try again soon!");
         }
-        String name;
-        String time;
-        String done;
 
         // parse input and create tasks
         while (sc.hasNextLine()) {

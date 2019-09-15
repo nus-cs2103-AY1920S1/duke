@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="731.0" prefWidth="749.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="824.0" prefWidth="749.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainWindow">
    <children>
-      <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="636.0" prefWidth="749.0" vbarPolicy="ALWAYS" vvalue="1.0">
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" hvalue="1.0" prefHeight="731.0" prefWidth="749.0" vbarPolicy="ALWAYS" vvalue="1.0">
          <content>
-            <VBox fx:id="dialogContainer" prefHeight="635.0" prefWidth="737.0" />
+            <VBox fx:id="dialogContainer" prefHeight="733.0" prefWidth="737.0" />
          </content>
       </ScrollPane>
-      <HBox layoutY="636.0" prefHeight="95.0" prefWidth="749.0">
+      <HBox layoutY="731.0" prefHeight="95.0" prefWidth="749.0">
          <children>
             <TextField fx:id="userInput" onAction="#handleUserInput" prefHeight="95.0" prefWidth="593.0" promptText="Type Command">
                <font>

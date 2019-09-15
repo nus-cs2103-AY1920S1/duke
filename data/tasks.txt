@@ -1,4 +1,5 @@
 D|1|finish week5 project|06/09/2019 2359|Shuyuan(Student)123
 E|0|grab|Monday|Someone()N.A.|Anyone()N.A.
-E|1|sleep|now|Ziyuan(friend)666
-T|1|phone|mom()N.A.|dad()N.A.
+T|1|finish|Shuyuan()N.A.
+E|0|homework|today|Ziyuan()N.A.
+E|0|tasks|now|a()N.A.|b()N.A.|c()N.A.|d()N.A.

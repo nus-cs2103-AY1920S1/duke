@@ -9,7 +9,7 @@
    3.5. [Deleting a task](#35-deleting-a-task) : `delete`    
    3.6. [Searching for a task by keyword(s)](#36-searching-a-task-by-keyword) : `find`
    3.7. [Exiting the program](#37-exiting-the-program) : `bye`
-
+   
 ## 1. Introduction
 Duke is a Personal Assistant Chatbot that aids users in keeping track of various tasks.
 

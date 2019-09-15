@@ -23,10 +23,6 @@ public class UI {
         printReply(Messages.MESSAGE_WELCOME_MESSAGE);
     }
 
-    public String readCommand() {
-        return in.nextLine();
-    }
-
     public void showGoodByeMessage() {
         printReply(Messages.MESSAGE_GOODBYE_MESSAGE);
     }

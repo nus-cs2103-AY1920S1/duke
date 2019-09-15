@@ -155,10 +155,10 @@ public class TaskList {
      * @throws IOException When the file cannot be written
      */
     public void rewrite() throws IOException {
-        PrintWriter pw = new PrintWriter("taskfile.txt");
+        PrintWriter pw = new PrintWriter(".taskfile.txt");
         pw.close();
         BufferedWriter recorder = new BufferedWriter(
-                new FileWriter("taskfile.txt", true));
+                new FileWriter(".taskfile.txt", true));
         for (Task t : taskList) {
             recorder.write(t.recordInfo());
             recorder.write("\n");

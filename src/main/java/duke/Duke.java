@@ -27,7 +27,7 @@ public class Duke {
     Duke() {
         ui = new Ui();
         try {
-            tasks = new TaskList(Storage.reload("taskfile.txt"));
+            tasks = new TaskList(Storage.reload(".taskfile.txt"));
         } catch (Exception e) {
             tasks = new TaskList();
         }

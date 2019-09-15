@@ -1,9 +1,12 @@
 # User Guide
 
 ## Features 
+### GUI task manager
+Duke helps you keep track of your tasks. It offers CRUD operations for various types of tasks, such as to dos, events, and deadlines. 
 
-### Feature 1 
-
+### Saving / Loading from `.txt` 
+Every CRUD operation automatically saves your tasks in a `.txt` file. Duke loads your tasks from this `.txt` file on startup. <br />
+You need to specify the filepath of this `.txt` file yourself within Duke.
 
 ## Usage
 ### `todo` - Adds a To Do task
@@ -90,7 +93,7 @@ ____________________________________________________________
 
 Example of usage: 
 
-`done <index>` <br />
+`delete <index>` <br />
 `delete 3`
 
 Expected outcome:
@@ -120,3 +123,12 @@ Here are the matching tasks in your list:
 ____________________________________________________________
 ```
 
+### `bye` - Exits Duke
+
+Example of usage: 
+
+`bye`
+
+Expected outcome: <br />
+
+GUI closes

@@ -13,9 +13,9 @@ public class DoneCommandTest {
     public void doneTest() throws IOException, DukeException {
         TaskList testList = new TaskList();
         AddCommand testCommand = new AddCommand();
-        testCommand.execute(testList, null, null, "todo oop");
+        testCommand.execute(testList, null, "todo oop");
         DoneCommand doneCommand = new DoneCommand();
-        doneCommand.execute(testList, null, null, "done 1");
+        doneCommand.execute(testList, null, "done 1");
 
         assertEquals("[T][✓] oop", testList.getList().get(0).toString());
     }

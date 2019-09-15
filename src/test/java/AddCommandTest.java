@@ -9,19 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddCommandTest {
     @Test
-    public void addTodoTest() throws IOException, DukeException {
+    public void addTodoTest() {
         TaskList testList = new TaskList();
         AddCommand testCommand = new AddCommand();
-        testCommand.execute(testList, null, null, "todo oop");
+        testCommand.execute(testList, null, "todo oop");
 
         assertEquals("[T][✘] oop", testList.getList().get(0).toString());
     }
 
     @Test
-    public void addDeadlineTest() throws IOException, DukeException {
+    public void addDeadlineTest() {
         TaskList testList = new TaskList();
         AddCommand testCommand = new AddCommand();
-        testCommand.execute(testList, null, null, "deadline return book /by 2/12/2019 1800");
+        testCommand.execute(testList, null, "deadline return book /by 2/12/2019 1800");
 
         assertEquals("[D][✘] return book (by: 2/12/2019 1800)", testList.getList().get(0).toString());
     }

@@ -1,6 +1,6 @@
 # User Guide
 
-Welcome to Doke's User Guide. You'll find everything you need to know here.
+Welcome to Doke's User Guide. You'll find everything you need to know about Doke here.
 
 ## What is Doke?
 

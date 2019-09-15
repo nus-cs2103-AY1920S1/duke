@@ -1,4 +1,8 @@
+package duke.gui;
+
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
@@ -26,19 +30,20 @@ public class DialogLineController extends HBox {
     public DialogLineController(){
     }
     private DialogLineController(String text, Image img) {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DialogLine.fxml"));
-        fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
         try {
-            fxmlLoader.load();
+            InputStream fxmlStream = new FileInputStream("src/main/java/duke/views/DialogLine.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setRoot(this);
+            fxmlLoader.setController(this);
+            fxmlLoader.load(fxmlStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.setMinHeight(0);
         dialog.setVisible(true);
         displayPicture.setVisible(true);
         dialog.setText(text);
         displayPicture.setImage(img);
-        displayPicture.setFitHeight(this.getHeight());
         //System.out.println(dialog.getText() + displayPicture.getImage());
     }
 
@@ -56,15 +61,14 @@ public class DialogLineController extends HBox {
         var dl = new DialogLineController(text, img);
         dl.dialog.setFont(new Font("Consolas", 10));
         dl.setMinHeight(dl.dialog.getMinHeight());
-        dl.dialog.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-        //dl.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-
+        dl.displayPicture.setFitHeight(dl.getHeight());
         return dl;
     }
 
     public static DialogLineController getUserDialog(String text, Image img) {
         var dl = new DialogLineController(text, img);
         dl.setMinHeight(dl.dialog.getMinHeight());
+        dl.displayPicture.setFitHeight(dl.getHeight());
         dl.flip();
         return dl;
     }

@@ -1,3 +1,5 @@
+package duke.tasks;
+
 import java.util.ArrayList;
 
 /**
@@ -36,7 +38,7 @@ public class TaskList {
      * @return the task with the index i
      */
     public Task get(int i) {
-        return list.get(i);
+        return list.get(i-1);
     }
     /**
      * 

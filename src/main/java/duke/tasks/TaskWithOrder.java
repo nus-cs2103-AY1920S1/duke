@@ -1,4 +1,6 @@
-public class TaskWithOrder{
+package duke.tasks;
+
+public class TaskWithOrder {
     int order;
     Task t;
     public TaskWithOrder(int order, Task t){

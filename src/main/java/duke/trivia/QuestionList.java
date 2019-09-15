@@ -1,7 +1,9 @@
+package duke.trivia;
+
 import java.util.ArrayList;
 
 public class QuestionList{
-    ArrayList<TriviaQuestion> questions = new ArrayList<>();
+    public ArrayList<TriviaQuestion> questions = new ArrayList<>();
     public int current = 0;
     public boolean isAsking = false;
     public TriviaQuestion getCurrentQuestion(){

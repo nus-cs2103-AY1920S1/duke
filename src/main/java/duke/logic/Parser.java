@@ -1,6 +1,18 @@
+package duke.logic;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.TaskWithOrder;
+import duke.tasks.Todo;
+import duke.tasks.Event;
+import duke.tasks.Deadline;
+
+import duke.trivia.QuestionList;
+import duke.trivia.TriviaQuestion;
 
 public class Parser {
     public Ui ui = new Ui();
@@ -38,7 +50,7 @@ public class Parser {
             } else if (command.startsWith("list")) {
                 message = ui.list(list);
             } else if (command.startsWith("done")) {
-                list.get(Integer.parseInt(command.split(" ")[1]) - 1).setAsDone();
+                list.get(Integer.parseInt(command.split(" ")[1])).setAsDone();
                 message = ui.done(list, Integer.parseInt(command.split(" ")[1]));
             } else if (command.startsWith("find")) {
                 ArrayList<TaskWithOrder> matchingTasks = list.search(command.split(" ")[1]);

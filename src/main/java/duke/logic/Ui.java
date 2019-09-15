@@ -1,4 +1,12 @@
+package duke.logic;
+
 import java.util.ArrayList;
+
+import duke.tasks.Task;
+import duke.tasks.TaskList;
+import duke.tasks.TaskWithOrder;
+import duke.trivia.QuestionList;
+import duke.trivia.TriviaQuestion;
 
 /**
  * prints all the messages to console

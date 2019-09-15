@@ -1,3 +1,5 @@
+package duke.logic;
+
 /**
  * throws exception and prints out the message input
  */

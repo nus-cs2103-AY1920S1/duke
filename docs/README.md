@@ -109,6 +109,10 @@ Thank you for using Duke. Feel free to drop the developer a feedback in order to
 	Thank you for using Duke! Hope that he is of good use to you! :)
 </marquee>
 
+<marquee class="GeneratedMarquee" direction="right" scrollamount="10" behavior="alternate" fontFamily="comic sans">
+	Arigatou Gozaimasu! 🌚
+</marquee>
+
 ```
  ________  ___  ___  ___  __    _______      
 |\   ___ \|\  \|\  \|\  \|\  \ |\  ___ \     

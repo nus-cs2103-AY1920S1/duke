@@ -74,7 +74,7 @@ Format : `delete [TASKNUMBER]`
 
 Example: `delete 2` (Deletes the second task in the list)
 
-### 5. Find a task
+### 5. Find task
 
 Find a task among all the tasks by searching for a keyword.
 

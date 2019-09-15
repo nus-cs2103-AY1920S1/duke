@@ -14,13 +14,6 @@ public class TaskList {
             System.out.println(i + "." + list.get(i-1));
         }
     }
-    /*public String printForOutput() {
-        StringBuilder result = new StringBuilder();
-        for(int i = 1; i <= list.size(); i++) {
-            result.append(list.get(i-1).printToOutput().append("\n);
-        }
-        return result.toString();
-    }*/
 
     public void taskDone(int x) {
         list.get(x).markAsDone();

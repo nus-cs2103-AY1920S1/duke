@@ -10,7 +10,6 @@ public class Storage {
 
     public Storage() {
         this.filename = "../../../data/tasks.txt";
-        //PrintWriter writer = new PrintWriter(filename);
     }
     public ArrayList<Task> load() throws IOException {
         File file = new File(filename);
@@ -72,15 +71,4 @@ public class Storage {
         }
         bufferWriter.close();
     }
-    /*public void printToOutput(TaskList tasks) throws FileNotFoundException {
-        PrintStream outputTo = new PrintStream(filename);
-        outputTo.println(tasks.printForOutput());
-        outputTo.close();
-    }
-
-    public void emptyOutput() throws FileNotFoundException {
-        PrintStream outputTo = new PrintStream(filename);
-        outputTo.println("");
-        outputTo.close();
-    }*/
 }

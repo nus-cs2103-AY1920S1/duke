@@ -21,8 +21,36 @@ e.g. typing 'todo read book' and pressing 'Enter' will add the todo task read bo
 
 ## 3. Features 
 
-### Feature 1 
+### Adding a todo task: `todo`
+Adds a todo task. +
+Format: `todo read book`
 
+### Adding a deadline task: `deadline`
+Adds a deadline task. +
+Format: `deadline returm book /by 06/06/06 0606`
+
+### Adding an event task: `event`
+Adds an event task. + 
+Format: `event project meeting /at 07/07/07 0707`
+### Marking a task as done: `done` 
+Marks the specified task as done. +
+Format: `done 1`
+
+### Deleting a task: `delete`
+Deletes the specified task from Duke. +
+Format: `delete INDEX`
+
+### Listing all tasks: `list`
+Shows a list of all tasks in Duke. +
+Format: `list`
+
+### Tagging a task: `tag`
+Tags a task with a specified keyword. A task can have any number of tags (including 0) +
+Format: `tag 1 fun`
+
+### Exiting Duke: `bye` 
+Exits Duke. +
+Format: `bye`
 
 ## Usage
 

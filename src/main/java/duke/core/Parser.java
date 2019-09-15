@@ -125,6 +125,8 @@ public class Parser {
         boolean isDoneCommand = fw.equals("done");
         boolean isDeleteCommand = fw.equals("delete");
         boolean isUpdateCommand = fw.equals("update");
+        boolean isDeadlineCommand = fw.equals("deadline");
+        boolean isEventCommand = fw.equals("event");
 
         if ((isDoneCommand || isDeleteCommand || isUpdateCommand)) {
             if (words.length < 2) {
@@ -141,6 +143,12 @@ public class Parser {
         if (isUpdateCommand && !(words[2].equals("description") || words[2].equals("time"))) {
             throw new DukeException(" \u2639  OOPS!!! The attribute of an \"update\" command can only be"
                     + " \"description\" or \"time\".");
+        }
+        if (isDeadlineCommand && findIdx(words, "/by") == -1) {
+            throw new DukeException(" \u2639  OOPS!!! The time of a deadline cannot be empty.");
+        }
+        if (isEventCommand && findIdx(words, "/at") == -1) {
+            throw new DukeException(" \u2639  OOPS!!! The time of an event cannot be empty.");
         }
     }
 
@@ -179,17 +187,7 @@ public class Parser {
                 assert words[2].equals("time") : "Invalid attribute type for an update command";
                 return new UpdateCommand(Integer.parseInt(words[1]), words[2], formatDateTime(newValue));
             }
-        case "deadline":
-            if (findIdx(words, "/by") == -1) {
-                throw new DukeException(" \u2639  OOPS!!! The time of a deadline cannot be empty.");
-            }
-            // Fallthrough
-        case "event":
-            if (findIdx(words, "/at") == -1) {
-                throw new DukeException(" \u2639  OOPS!!! The time of an event cannot be empty.");
-            }
-            // Fallthrough
-        case "todo":
+        case "deadline": case "event": case "todo":
             if (words.length < 2) {
                 throw new DukeException(" \u2639  OOPS!!! The description of a task cannot be empty.");
             }

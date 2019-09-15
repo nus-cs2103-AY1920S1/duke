@@ -54,6 +54,7 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
         showResponse(Ui.showWelcome());
+        forcedLambda();
     }
 
 
@@ -138,4 +139,14 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, duke));
     }
 
+    private void forcedLambda() {
+        FuncInt lol = (x) -> System.out.println(x * x);
+        lol.magic(5);
+    }
+
+}
+
+interface FuncInt
+{
+    void magic(int x);
 }

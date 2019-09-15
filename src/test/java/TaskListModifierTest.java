@@ -22,16 +22,16 @@ public class TaskListModifierTest {
         String input1 = "todo finish JUnit testing";
         String input2 = "todo to-be-removed";
         String input3 = "random nonsense";
-        String input4 = "deadline finish Project /by 20/04/2019";
-        String input5 = "event game event /at 23-DEC-2020";
+        String input4 = "deadline finish Project /by 20/04/2019 10:00";
+        String input5 = "event game event /at 23-DEC-2020 0230";
         String input6 = "bye";
         String input7 = "deadline will never surface /by 22/11/2039";
         String input8 = "done 3";
         String input9 = "delete 5";
         String input10 = "delete 2";
         String expectedOutput1 = "[T][✘] finish JUnit testing";
-        String expectedOutput2 = "[D][✓] finish Project (by: Sat Apr 20 00:00:00 SGT 2019)";
-        String expectedOutput3 = "[E][✘] game event (at: Wed Dec 23 00:00:00 SGT 2020)";
+        String expectedOutput2 = "[D][✓] finish Project (by: Sat Apr 20 10:00:00 SGT 2019)";
+        String expectedOutput3 = "[E][✘] game event (at: Wed Dec 23 02:30:00 SGT 2020)";
 
         inputParser.determineAction(input1);
         inputParser.determineAction(input2);

@@ -21,8 +21,8 @@ public class FileReadingTest {
         modifyTaskListTest.modifyTest();
         FileReading.checkFileExists(taskList);
         String expectedOutput1 = "[T][✘] finish JUnit testing";
-        String expectedOutput2 = "[D][✓] finish Project (by: Sat Apr 20 00:00:00 SGT 2019)";
-        String expectedOutput3 = "[E][✘] game event (at: Wed Dec 23 00:00:00 SGT 2020)";
+        String expectedOutput2 = "[D][✓] finish Project (by: Sat Apr 20 10:00:00 SGT 2019)";
+        String expectedOutput3 = "[E][✘] game event (at: Wed Dec 23 02:30:00 SGT 2020)";
         assertEquals(expectedOutput1, taskList.get(0).toString());
         assertEquals(expectedOutput2, taskList.get(1).toString());
         assertEquals(expectedOutput3, taskList.get(2).toString());

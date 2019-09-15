@@ -13,24 +13,20 @@ public class EventCommand implements Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage) {
+    public String execute(Tasklist tasks, UI ui, Storage storage) {
+        String content = "";
         if(arguments == null){
-            ui.printData("OOPS!!! The description of a event cannot be empty.");
+            content = "OOPS!!! The description of a event cannot be empty.";
         } else {
             String[] sp = arguments.split(" /at ", 2);
 
             tasks.add(new event(sp[0], sp[1]));
 
-            String content = "";
-
-            content = content.concat("Got it. I've added this task:");
-            content = content.concat("[E][✗] " + sp[0] + " (at: " + sp[1] + ")");
-            content = content.concat("Now you have " + tasks.size() + " tasks in this list");
-
-            ui.printData(content);
+            content = content.concat("Got it. I've added this task:\n");
+            content = content.concat("[E][x] " + sp[0] + " (at: " + sp[1] + ")\n");
+            content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
         }
-
-
+        return content;
     }
 
     @Override

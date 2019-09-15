@@ -13,22 +13,20 @@ public class DeadlineCommand implements Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage) {
+    public String execute(Tasklist tasks, UI ui, Storage storage) {
+        String content = "";
         if(arguments == null) {
-            ui.printData("OOPS! The description of a deadline cannot be empty.\n");
+            content = "OOPS! The description of a deadline cannot be empty.\n";
         } else {
             String[] sp = arguments.split(" /by ", 2);
 
             tasks.add(new deadline(sp[0], sp[1]));
 
-            String content = "";
-
             content = content.concat("Got it. I've added this task:\n");
-            content = content.concat("[D][✗] " + sp[0] + " (by: " + sp[1] + ")\n");
+            content = content.concat("[D][x] " + sp[0] + " (by: " + sp[1] + ")\n");
             content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
-
-            ui.printData(content);
         }
+        return content;
     }
 
     @Override

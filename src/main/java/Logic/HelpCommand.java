@@ -10,7 +10,7 @@ public class HelpCommand implements Command{
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage) {
+    public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "list      Usage: list                                     Lists out and saves all tasks\n" +
                          "todo      Usage: todo <description>                       Adds a todo task\n" +
                          "event     Usage: event <description> /at <details>        adds an event task\n" +
@@ -20,7 +20,7 @@ public class HelpCommand implements Command{
                          "delete    Usage: delete <id>                              removes the task at id\n" +
                          "help      Usage: help                                     brings out the help menu\n" +
                          "bye       Usage: bye                                      Exits the program";
-        ui.printData(content);
+        return content;
     }
 
     @Override

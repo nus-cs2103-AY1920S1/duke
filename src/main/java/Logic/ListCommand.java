@@ -11,10 +11,11 @@ public class ListCommand implements Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage){
+    public String execute(Tasklist tasks, UI ui, Storage storage){
         int i;
 
         String content = "";
+        System.out.println(tasks.size());
 
         for(i = 0; i < tasks.size(); i++){
             content = content.concat((i + 1) + ". ");
@@ -28,10 +29,9 @@ public class ListCommand implements Command {
             }
             content = content.concat("\n");
         }
-
-        ui.printData(content);
         storage.save(tasks);
 
+        return content;
     }
 
     @Override

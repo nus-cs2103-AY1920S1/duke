@@ -13,7 +13,7 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage) {
+    public String execute(Tasklist tasks, UI ui, Storage storage) {
         int index = Integer.parseInt(arguments);
 
         String content = "";
@@ -29,7 +29,7 @@ public class DeleteCommand implements Command {
         tasks.remove(index - 1);
 
         content = content.concat("You now have " + tasks.size() + " tasks in this list\n");
-        ui.printData(content);
+        return content;
     }
 
     @Override

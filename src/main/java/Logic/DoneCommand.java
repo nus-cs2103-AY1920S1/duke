@@ -12,7 +12,7 @@ public class DoneCommand implements Command{
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage) {
+    public String execute(Tasklist tasks, UI ui, Storage storage) {
         int index = Integer.parseInt(arguments);
 
         tasks.get(index - 1).markAsDone();
@@ -20,7 +20,7 @@ public class DoneCommand implements Command{
         String content = "Nice! I've marked this task as done:\n" +
                 "[" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription() +"\n";
 
-        ui.printData(content);
+        return content;
     }
 
     @Override

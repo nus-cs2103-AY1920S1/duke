@@ -19,7 +19,7 @@ public abstract class Task {
 
     public char getIsDoneSymbol(){
         if(isDone){
-            return '✓';
+            return 'v';
         } else {
             return 'x';
         }

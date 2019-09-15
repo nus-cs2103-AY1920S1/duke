@@ -13,20 +13,18 @@ public class TodoCommand implements Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage) {
+    public String execute(Tasklist tasks, UI ui, Storage storage) {
+        String content = "";
         if(arguments == null){
-            ui.printData("OOPS! The description of a todo cannot be empty.\n");
+            content = "OOPS! The description of a todo cannot be empty.\n";
         } else {
             tasks.add(new todo(arguments));
 
-            String content = "";
-
             content = content.concat("Got it. I've added this task:\n");
-            content = content.concat("[T][✗] " + arguments +'\n');
+            content = content.concat("[T][x] " + arguments +'\n');
             content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
-
-            ui.printData(content);
         }
+        return content;
     }
 
     @Override

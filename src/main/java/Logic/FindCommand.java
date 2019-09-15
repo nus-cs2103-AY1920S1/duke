@@ -14,9 +14,10 @@ public class FindCommand implements Command{
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage) {
+    public String execute(Tasklist tasks, UI ui, Storage storage) {
+        String content = "";
         if(arguments == null){
-            ui.printData("OOPS!!! The description of a find cannot be empty.");
+            content = "OOPS!!! The description of a find cannot be empty.";
         } else {
             ArrayList<Integer> indexes = new ArrayList<Integer>();
             int i;
@@ -25,7 +26,6 @@ public class FindCommand implements Command{
                     indexes.add(i);
                 }
             }
-            String content = "";
             for(i = 0; i < indexes.size(); i++) {
                 content = content.concat((i + 1) + ". ");
                 content = content.concat("[" + tasks.get(indexes.get(i)).getSymbol() + "]");
@@ -38,8 +38,8 @@ public class FindCommand implements Command{
                 }
                 content = content.concat("\n");
             }
-            ui.printData(content);
         }
+        return content;
     }
 
     @Override

@@ -11,8 +11,9 @@ public class ExitCommand implements Command{
     }
 
     @Override
-    public void execute(Tasklist tasks, UI ui, Storage storage){
-        ui.printData("Bye. Hope to see you again soon!");
+    public String execute(Tasklist tasks, UI ui, Storage storage){
+        String content = "Bye. Hope to see you again soon!";
+        return content;
     }
 
     @Override

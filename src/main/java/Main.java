@@ -12,8 +12,11 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    public Main() throws Exception {
+    }
+
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws Exception {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

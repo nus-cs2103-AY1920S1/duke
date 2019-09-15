@@ -12,6 +12,9 @@ public class ByeCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
     }
+    public String executeAsString(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showConclusionFX();
+    }
 
     @Override
     public boolean isExit() {

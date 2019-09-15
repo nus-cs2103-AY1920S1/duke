@@ -13,6 +13,9 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.ListCommand(tasks);
     }
+    public String executeAsString(TaskList tasks, Ui ui, Storage storage) {
+        return ui.ListCommandFX(tasks);
+    }
 
     @Override
     public boolean isExit() {

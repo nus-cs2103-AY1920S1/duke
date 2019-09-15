@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
+    public void setDuke(Duke d) throws Exception {
         duke = d;
     }
 
@@ -45,5 +45,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals("Bye. Hope to see you again soon!")){
+            System.exit(0);
+        }
     }
 }

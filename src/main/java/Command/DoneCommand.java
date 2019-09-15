@@ -23,6 +23,19 @@ public class DoneCommand extends Command {
         }
     }
 
+    public String executeAsString(TaskList tasks, Ui ui, Storage storage) {
+        String[]splitWords = command.split(" ");
+
+        try {
+            int val = Integer.parseInt(splitWords[1]);
+            tasks.taskDone(val-1);
+            storage.updateFile(tasks);
+            return ui.doneMessageFX(val-1, tasks);
+        } catch (Exception e) {
+            return "Error, you have entered an invalid number";
+        }
+    }
+
     @Override
     public boolean isExit() {
         return false;

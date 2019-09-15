@@ -55,7 +55,16 @@ public class Duke /*extends Application*/{
     /**
      * Dummy constructor
      */
-    public Duke(){}
+    public Duke() throws Exception{
+        ui = new Ui();
+        storage = new Storage("DukeOutput.txt");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
 
 
     /**
@@ -83,7 +92,6 @@ public class Duke /*extends Application*/{
         ui.showConclusion();
         ui.showLine();
     }
-
 
 
     /**
@@ -179,8 +187,16 @@ public class Duke /*extends Application*/{
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) {
+        //return "Duke heard : " + input;
+            try {
+                Command c = Parser.parse(input);
+                return c.executeAsString(tasks, ui, storage);
+            } catch (DukeException e) {
+                return ui.showErrorFX(e.getMessage());
+            } catch (Exception e) {
+                return "fml";
+            }
     }
 
 

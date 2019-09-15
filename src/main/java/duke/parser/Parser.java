@@ -75,7 +75,14 @@ public class Parser {
 			boolean isCommandEvent = commandName.equals("EVENT");
 			
 			if (isCommandToDo) {
-				task = new ToDo(commandName.toUpperCase().charAt(0), input.substring("Todo".length()).trim(), false);
+				char firstCharOfCommand = commandName.toUpperCase().charAt(0);
+				String taskDescription = input.substring("Todo".length()).trim();
+				
+				// Empty task description
+				if(taskDescription.equals("")){
+					throw new IncorrectNumberOfArgumentsException();
+				}
+				task = new ToDo(firstCharOfCommand, taskDescription, false);
 				
 			} else if (isCommandDeadline) {
 				ArrayList<String> taskInfo = parseTaskInformationAndDate(input, commandName, "by ");

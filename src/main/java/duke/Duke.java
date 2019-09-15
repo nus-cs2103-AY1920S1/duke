@@ -73,20 +73,12 @@ public class Duke {
      * @param fullCommand String that user typed as text
      * @return String output reply from Duke
      */
-    public String getResponse(String fullCommand) {
+    public String getResponse(String fullCommand) throws DukeException, IOException {
         String reply;
-        try {
-            Command c = Parser.parse(fullCommand, this);
-            reply = c.execute(tasks, ui, storage);
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
+        Command c = Parser.parse(fullCommand, this);
+        reply = c.execute(tasks, ui, storage);
         // Save the new task list to the hard disk
-        try {
-            storage.save(tasks);
-        } catch (IOException e) {
-            return e.getMessage();
-        }
+        storage.save(tasks);
         assert !reply.isEmpty() : "Reply should not be empty";
         return reply;
     }

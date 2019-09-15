@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.DukeException;
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.BooleanBinding;
 
@@ -22,6 +23,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import javafx.util.Duration;
+
+import java.io.IOException;
 import java.util.function.Supplier;
 
 /**
@@ -102,11 +105,20 @@ public class MainWindow extends AnchorPane {
         if (input.replaceAll("\\s+", "").equals("")) {
 
         }
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        // Output a different coloured background Label as Duke's response
+        // should an error occur.
+        try {
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        } catch (IOException | DukeException e) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeErrorDialog(e.getMessage(), dukeImage)
+            );
+        }
         userInput.clear();
         if (duke.getShouldExitProgram()) {
             // Pause the program to show bye message before closing the program

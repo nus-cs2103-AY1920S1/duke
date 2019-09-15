@@ -82,6 +82,19 @@ public class DialogBox extends HBox {
     }
 
     /**
+     * Returns a DialogBox representing Duke's response when an error has occurred.
+     *
+     * @param text Duke's response.
+     * @param img Duke's profile image.
+     * @return DialogBox for Duke.
+     */
+    public static DialogBox getDukeErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, Color.WHITE, "#593984", img);
+        db.flip();
+        return db;
+    }
+
+    /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {

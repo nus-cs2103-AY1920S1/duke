@@ -27,7 +27,7 @@
 
 ### What is Duke ChatBot <a name="what"></a>
 
-Duke ChatBot is a task managing chat bot which allows users to input the tasks to do and manipulate them. It tracks tasks that are marked as done over a period of time and displays relevant statistics.
+Duke ChatBot is a task managing chat bot which allows users to input the tasks to do and organise them. It tracks tasks that are marked as done over a period of time and displays relevant statistics.
 
 This is what Duke ChatBot looks like:  
 <img src="https://github.com/EvonDong/duke/blob/master/docs/Ui.png" width="480">
@@ -40,9 +40,9 @@ This application aims to be beginner friendly and is intended for users who want
 
 This document uses the following typographical conventions:
 
-`sort`  A mark-up indicates that this is a command that can be type into the command line and executed by the application.
+`sort`       A mark-up indicates that this is a command that can be type into the command line and executed by the application.
 
-:exclamation:   An exclamation sign indicates important information
+:exclamation:          An exclamation sign indicates important information.
 
 
 ## **Features** <a name="features"></a>

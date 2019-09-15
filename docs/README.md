@@ -120,6 +120,7 @@ Example of usage:
 Expected outcome:
 
 ![GitHub Logo](../images/bye.png)
+![GitHub Logo](/images/bye.png)
 Format: ![Alt Text](https://github.com/chrischenhui/duke/blob/master/images/done.png)
 Format: ![Alt Text](https://www.google.com)
 Format: ![Alt Text](www.google.com)

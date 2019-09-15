@@ -53,98 +53,23 @@ public class GuiParser {
                 String[] ls = command.split(" ");
                 if (ls[0].equals("done")) {
                     String num = command.substring(5, 6);
-                    int res = Integer.parseInt(num);
-                    Task t = tasklist.get(res - 1);
-                    t.markAsDone();
-                    storage.saveFile(tasklist.returnTasks());
-                    return gui.done() + "\n" + t;
+                    return doneCommand(num);
                 } else if (ls[0].equals("todo")) {
                     String[] td = command.split(" ");
                     try {
-                        if (td.length == 1) {
-                            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        String com = td[1];
-                        if (td.length > 1) {
-                            for (int i = 2; i < td.length; i ++) {
-                                com = com + " " + td[i];
-                            }
-                        } else {
-
-                        }
-                        tasklist.addTodo(new Todo(com));
-                        String out = gui.taskadded();
-                        out = out + "\n" + tasklist.returnTasks().get(count);
-                        count++;
-                        out = out + "\n" + gui.listcount(count);
-                        storage.saveFile(tasklist.returnTasks());
-                        return out;
+                        return todoCommand(td);
                     } catch (DukeException e){
                         System.out.println(e);
                     }
                 } else if (ls[0].equals("event")) {
                     String[] eve = command.split(" ");
-                    String com = "";
-                    String eventdate = "";
-                    for (int i = 1; i < eve.length; i ++) {
-                        if (eve[i].equals("/at")) {
-                            eventdate = eve[i+1];
-                            for (int j = i+2; j < eve.length; j ++) {
-                                eventdate = eventdate + " " + eve[j];
-                            }
-                            break;
-                        } else {
-                            if (com == "") {
-                                com = eve[i];
-                            } else {
-                                com = com + " " + eve[i];
-                            }
-                        }
-                    }
-                    tasklist.addEvent(new Event(com, getDateTime(eventdate)));
-                    String out = gui.taskadded();
-                    out = out + "\n" + tasklist.returnTasks().get(count);
-                    count++;
-                    out = out + "\n" + gui.listcount(count);
-                    storage.saveFile(tasklist.returnTasks());
-                    return out;
+                    return eventCommand(eve);
                 } else if (ls[0].equals("deadline")) {
                     String[] eve = command.split(" ");
-                    String com = "";
-                    String deadline = "";
-                    for (int i = 1; i < eve.length; i ++) {
-                        if (eve[i].equals("/by")) {
-                            deadline = eve[i+1];
-                            for (int j = i+2; j < eve.length; j ++) {
-                                deadline = deadline + " " + eve[j];
-                            }
-                            break;
-                        } else {
-                            if (com == "") {
-                                com = eve[i];
-                            } else {
-                                com = com + " " + eve[i];
-                            }
-                        }
-                    }
-                    tasklist.addDeadline(new Deadline(com, getDateTime(deadline)));
-                    String out = gui.taskadded();
-                    out = out + "\n" + tasklist.returnTasks().get(count);
-                    count++;
-                    out = out + "\n" + gui.listcount(count);
-                    storage.saveFile(tasklist.returnTasks());
-                    return out;
+                    return deadlineCommand(eve);
                 } else if (ls[0].equals("delete")) {
                     String dnumber = ls[1];
-                    int dnum = Integer.parseInt(dnumber);
-                    String out = "Noted. I've removed this task:";
-                    assert tasklist != null : "tasklist cannot be empty";
-                    out = out + "\n" + tasklist.returnTasks().get(dnum-1);
-                    tasklist.delete(dnum-1);
-                    count--;
-                    out = out + "\n" + gui.listcount(count);
-                    storage.saveFile(tasklist.returnTasks());
-                    return out;
+                    return deleteCommand(dnumber);
                 } else if (ls[0].equals("find")) {
                     ArrayList<Task> temp = tasklist.find(ls[1]);
                     String out = gui.find();
@@ -195,5 +120,100 @@ public class GuiParser {
         }
         String output = days + " of " + dates + ", " + times;
         return output;
+    }
+
+    public String doneCommand(String num) throws IOException {
+        int res = Integer.parseInt(num);
+        Task t = tasklist.get(res - 1);
+        t.markAsDone();
+        storage.saveFile(tasklist.returnTasks());
+        return gui.done() + "\n" + t;
+    }
+
+    public String todoCommand(String[] td) throws IOException, DukeException {
+        if (td.length == 1) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        String com = td[1];
+        if (td.length > 1) {
+            for (int i = 2; i < td.length; i ++) {
+                com = com + " " + td[i];
+            }
+        } else {
+
+        }
+        tasklist.addTodo(new Todo(com));
+        String out = gui.taskadded();
+        out = out + "\n" + tasklist.returnTasks().get(count);
+        count++;
+        out = out + "\n" + gui.listcount(count);
+        storage.saveFile(tasklist.returnTasks());
+        return out;
+    }
+
+    public String eventCommand(String[] eve) throws IOException {
+        String com = "";
+        String eventdate = "";
+        for (int i = 1; i < eve.length; i ++) {
+            if (eve[i].equals("/at")) {
+                eventdate = eve[i+1];
+                for (int j = i+2; j < eve.length; j ++) {
+                    eventdate = eventdate + " " + eve[j];
+                }
+                break;
+            } else {
+                if (com == "") {
+                    com = eve[i];
+                } else {
+                    com = com + " " + eve[i];
+                }
+            }
+        }
+        tasklist.addEvent(new Event(com, getDateTime(eventdate)));
+        String out = gui.taskadded();
+        out = out + "\n" + tasklist.returnTasks().get(count);
+        count++;
+        out = out + "\n" + gui.listcount(count);
+        storage.saveFile(tasklist.returnTasks());
+        return out;
+    }
+
+    public String deadlineCommand(String[] eve) throws IOException {
+        String com = "";
+        String deadline = "";
+        for (int i = 1; i < eve.length; i ++) {
+            if (eve[i].equals("/by")) {
+                deadline = eve[i+1];
+                for (int j = i+2; j < eve.length; j ++) {
+                    deadline = deadline + " " + eve[j];
+                }
+                break;
+            } else {
+                if (com == "") {
+                    com = eve[i];
+                } else {
+                    com = com + " " + eve[i];
+                }
+            }
+        }
+        tasklist.addDeadline(new Deadline(com, getDateTime(deadline)));
+        String out = gui.taskadded();
+        out = out + "\n" + tasklist.returnTasks().get(count);
+        count++;
+        out = out + "\n" + gui.listcount(count);
+        storage.saveFile(tasklist.returnTasks());
+        return out;
+    }
+
+    public String deleteCommand(String dnumber) throws IOException {
+        int dnum = Integer.parseInt(dnumber);
+        String out = "Noted. I've removed this task:";
+        assert tasklist != null : "tasklist cannot be empty";
+        out = out + "\n" + tasklist.returnTasks().get(dnum-1);
+        tasklist.delete(dnum-1);
+        count--;
+        out = out + "\n" + gui.listcount(count);
+        storage.saveFile(tasklist.returnTasks());
+        return out;
     }
 }

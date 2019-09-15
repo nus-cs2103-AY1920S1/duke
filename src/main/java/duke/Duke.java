@@ -4,7 +4,6 @@ import commands.Command;
 
 import exceptions.DukeException;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -30,14 +29,14 @@ public class Duke {
     /**
      * boolean indicating whether the program should be exited.
      */
-    private static boolean shouldExitProgram = false;
+    private boolean shouldExitProgram = false;
 
     /**
      * Getter method for the boolean indicating whether program should be exited.
      *
      * @return boolean shouldExitProgram
      */
-    public static boolean getShouldExitProgram() {
+    public boolean getShouldExitProgram() {
         return shouldExitProgram;
     }
 
@@ -46,8 +45,8 @@ public class Duke {
      *
      * @param shouldExitProgram boolean
      */
-    public static void setShouldExitProgram(boolean shouldExitProgram) {
-        Duke.shouldExitProgram = shouldExitProgram;
+    public void setShouldExitProgram(boolean shouldExitProgram) {
+        this.shouldExitProgram = shouldExitProgram;
     }
 
     /**
@@ -55,9 +54,9 @@ public class Duke {
      * instantiates Ui, Storage and TaskList objects.
      */
     public Duke() {
-        String filePath = "." + File.separator + "data" + File.separator + "duke.txt";
+//        String filePath = "." + File.separator + "data" + File.separator + "duke.txt";
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
@@ -77,7 +76,7 @@ public class Duke {
     public String getResponse(String fullCommand) {
         String reply;
         try {
-            Command c = Parser.parse(fullCommand);
+            Command c = Parser.parse(fullCommand, this);
             reply = c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();

@@ -14,14 +14,14 @@ public class ExitCommand extends Command {
 
     /**
      * Constructor for ExitCommand.
-     * Boolean isExit is set to true because
+     * Boolean member of duke object shouldExitProgram is set to true because
      * program should be terminated after command is executed.
      *
      * @param commandArr String array containing the split text retrieved from user input.
      */
-    public ExitCommand(String[] commandArr) {
-        this.commandArr = commandArr;
-        Duke.setShouldExitProgram(true);
+    public ExitCommand(String[] commandArr, Duke duke) {
+        super(commandArr);
+        duke.setShouldExitProgram(true);
     }
 
     /**

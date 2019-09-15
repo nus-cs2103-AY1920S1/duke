@@ -23,6 +23,16 @@ public abstract class Command {
     String[] commandArr;
 
     /**
+     * Constructor for Command.
+     * Takes in an Array of Strings representing the full command given by the user.
+     *
+     * @param commandArr String array containing the split text retrieved from user input.
+     */
+    public Command(String[] commandArr) {
+        this.commandArr = commandArr;
+    }
+
+    /**
      * Returns true if the taskIndex the user provided corresponds
      * to an existing task in the taskLst, and false otherwise.
      * (taskIndex can assume values from 0 to size of taskLst - 1)
@@ -33,6 +43,15 @@ public abstract class Command {
      */
     static boolean checkValidTaskNumber(int taskIndex, ArrayList<Task> taskLst) {
         return taskIndex >= 0 && taskIndex < taskLst.size();
+    }
+
+    /**
+     * Returns String array containing the split text retrieved from user input.
+     *
+     * @return String array commandArr.
+     */
+    public String[] getCommandArr() {
+        return commandArr;
     }
 
     /**

@@ -34,11 +34,11 @@ public class Parser {
      * @return a Command object associated with user input.
      * @throws DukeException  If there is invalid input.
      */
-    public static Command parse(String fullCommand) throws DukeException {
+    public static Command parse(String fullCommand, Duke duke) throws DukeException {
         String[] commandArr = fullCommand.split(" ", 2);
         switch (commandArr[0]) {
         case "bye":
-            return new ExitCommand(commandArr);
+            return new ExitCommand(commandArr, duke);
         case "list":
             return new ListCommand(commandArr);
         case "delete":

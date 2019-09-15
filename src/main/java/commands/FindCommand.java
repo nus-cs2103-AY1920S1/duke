@@ -16,14 +16,13 @@ import tasks.Task;
 public class FindCommand extends Command {
 
     /**
-     *  Constructor for FindCommand.
-     *  Boolean isExit is set to false because
-     *  program should not terminate after command is executed.
+     * Constructor for FindCommand.
+     * Takes in an Array of Strings representing the full command given by the user.
      *
      * @param commandArr String array containing the split text retrieved from user input.
      */
     public FindCommand(String[] commandArr) {
-        this.commandArr = commandArr;
+        super(commandArr);
     }
 
     /**

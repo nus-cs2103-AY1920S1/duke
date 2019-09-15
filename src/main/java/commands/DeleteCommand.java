@@ -18,14 +18,13 @@ import tasks.Task;
 public class DeleteCommand extends Command {
 
     /**
-     *  Constructor for DeleteCommand.
-     *  Boolean isExit is set to false because
-     *  program should not terminate after command is executed.
+     * Constructor for DeleteCommand.
+     * Takes in an Array of Strings representing the full command given by the user.
      *
      * @param commandArr String array containing the split text retrieved from user input.
      */
     public DeleteCommand(String[] commandArr) {
-        this.commandArr = commandArr;
+        super(commandArr);
     }
 
     /**

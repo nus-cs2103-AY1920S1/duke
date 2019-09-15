@@ -26,13 +26,12 @@ public class AddCommand extends Command {
 
     /**
      * Constructor for AddCommand.
-     * Boolean isExit is set to false because
-     * program should not terminate after command is executed.
+     * Takes in an Array of Strings representing the full command given by the user.
      *
      * @param commandArr String array containing the split text retrieved from user input.
      */
     public AddCommand(String[] commandArr) {
-        this.commandArr = commandArr;
+        super(commandArr);
     }
 
     /**

@@ -8,13 +8,15 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
+
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
-//@@adapted from author: CarbonGrid for formatting
+
+    //@@adapted from author: CarbonGrid for formatting
     private StringBuilder tests = new StringBuilder().append("todo borrow book\n")
             .append("deadline to homework /by: 2019-12-12T10:10:00\n");
             /*.append("event watch movie /at: 2019-10-10T20:30:00\n")

@@ -1,6 +1,11 @@
 package duke.task;
 
 public class ToDo extends Task {
+
+    /**
+     * Instantiates a Task object of type Todo.
+     * @param description Str to describe deadline
+     */
     public ToDo(String description) {
         super(description);
     }

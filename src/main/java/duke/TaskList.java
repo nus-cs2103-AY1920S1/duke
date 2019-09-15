@@ -22,7 +22,7 @@ public class TaskList {
     /**
      * Deleted task is return to DeleteCommand for printing purposes.
      * @param index task to be deleted
-     * @return task in ArrayList ls that was removed.
+     * @return task in ArrayList ls that was removed
      */
     //@@author CarbonGrid
     public Task delete(int index) {
@@ -35,7 +35,7 @@ public class TaskList {
     }
 
     /**
-     * Generates string for all current tasks. To be consumed by duke.Storage
+     * Generates string for all current tasks. To be consumed by duke.Storage.
      * @return String of tasks
      */
     String generateListForFile() {
@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Sets done indicator of task from 0 to 1
+     * Sets done indicator of task from 0 to 1.
      * @param index int value indicating which task to be changed
      * @return Task that was changed. To allow for printing purposes
      */
@@ -60,7 +60,7 @@ public class TaskList {
 
     //@@Adapted from author: CarbonGrid
     /**
-     * Returns Changes task class attributes into String format
+     * Returns Changes task class attributes into String format.
      * @return String of task attributes
      */
     public String toUiString() {
@@ -80,8 +80,12 @@ public class TaskList {
         return sb.toString();
     }
 
-
-    public String findKeyWordInList (String keyWord) {
+    /**
+     * Finds the key word inside all tasks in duke.TaskList
+     * @param keyWord str to be found
+     * @return str to be printed
+     */
+    public String findKeyWordInList(String keyWord) {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         int i = 1;
         Iterator<Task> it = ls.iterator();

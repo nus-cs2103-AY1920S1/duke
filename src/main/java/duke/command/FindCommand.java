@@ -5,9 +5,10 @@ import duke.TaskList;
 import duke.Ui;
 
 public class FindCommand extends Command {
+
     public String keyWord;
 
-    public FindCommand (String keyWord) {
+    public FindCommand(String keyWord) {
         this.keyWord = keyWord.trim();
     }
 

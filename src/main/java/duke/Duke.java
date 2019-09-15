@@ -12,8 +12,8 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Starts Duke with specified filepath to saved list
-     * @param filePath filepath to read and write list
+     * Starts Duke with specified filepath to saved list.
+     * @param filePath filepath to read and write list.
      */
     public Duke(String filePath) {
         ui = new Ui();

@@ -6,7 +6,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
+
     protected LocalDateTime at;
+
+    /**
+     * Instantiates a Task object of type Event.
+     * @param description Str to describe deadline
+     * @param at Str, time of deadline
+     * @throws DateTimeParseDukeException when datetime is of invalid format
+     */
     public Event(String description, String at) throws DateTimeParseDukeException {
         super(description);
 
@@ -23,10 +31,6 @@ public class Event extends Task {
 
     public String getTaskTypeLetter() {
         return "E";
-    }
-
-    public String getDateTime() { //format?
-        return this.at.toString();
     }
 
     //@@author CarbonGrid

@@ -7,6 +7,13 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
+
+    /**
+     * Instantiates a Task object of type Deadline.
+     * @param description Str to describe deadline
+     * @param by Str, time of deadline
+     * @throws DateTimeParseDukeException when datetime is of invalid format
+     */
     public Deadline(String description, String by) throws DateTimeParseDukeException {
         super(description);
 

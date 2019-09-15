@@ -66,12 +66,6 @@ public class Parser {
         String output = "";
         assert command.length() > 0 : "Please enter something";
         if (command.equals("bye")) {
-            //update user data before exiting
-            String writeDataToFile = "";
-            for (Task t : list.taskList) {
-                writeDataToFile = writeDataToFile + t.toString() + "\n";
-            }
-            storage.writeFile(writeDataToFile,storage.filePath);
             output = ui.exit();
         } else if (command.equals("list")) {
             // returns all the tasks in the list.
@@ -101,6 +95,11 @@ public class Parser {
         } else {
             output = (" OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        String writeDataToFile = "";
+        for (Task t : list.taskList) {
+            writeDataToFile = writeDataToFile + t.toString() + "\n";
+        }
+        storage.writeFile(writeDataToFile,storage.filePath);
         return output;
     }
 }

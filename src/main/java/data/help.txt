@@ -1,11 +1,13 @@
-Duke arranges the tasks in chronological order, with Todos at the end.
+Duke arranges the tasks in chronological order, with Todo at the end.
 
 List of commands with format:
 1. add
-    todo [task name]
-    event [task name] /at [date/time: dd/mm/yyyy] [hhmm] [hhmm]
-    deadline [task name] /by [dd/mm/yyyy] ([hhmm] optional | default time:2359)
-    Example: event party /at 01/01/2011 0800 1900
+    todo TASK NAME
+    event TASK NAME  /at dd/mm/yyyy hhmm hhmm
+    deadline TASK NAME  /by dd/mm/yyyy *hhmm
+    e.g. event party /at 01/01/2011 0800 1900
+    e.g. deadline homework /by 01/01/2019
+    e.g. t read book
 2. delete [task number]   | E.g. delete 2
 3. done [task number]
 4. find [keyword]       | E.g. find D or find [D] for deadlines

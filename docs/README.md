@@ -1,20 +1,90 @@
 # User Guide
 
+##Introduction
+The DukeBot is for those who prefer to use a desktop app for managing tasks. 
+More importantly, DukeBot is optimized for those who prefer to work with a Command 
+Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).  
+Have fun!
+
+## Quick Start
+1. Ensure you have Java 11 or above installed in your Computer.  
+
+1. Download the latest dukebot.jar at https://github.com/calvincxz/duke/releases/tag/v1.2
+
 ## Features 
 
-### Feature 1 
-Description of feature.
+### 1. Viewing help
+Input "help" to view a simple guide to command formats.  
+Format: help
 
-## Usage
+### 2. Adding a task: t, d, e
+* Adds a task to the DukeBot.
+    * todo TASK NAME 
+    * event TASK NAME  /at dd/mm/yyyy hhmm hhmm  
+    * deadline TASK NAME  /by dd/mm/yyyy *hhmm
+* e.g. `event party /at 01/01/2011 0800 1900`
+* e.g. `t read book`
 
-### `Keyword` - Describe action
+### 3. Listing all tasks : list
+Shows a list of all tasks in the list.  
+Format: list
 
-Describe action and its outcome.
+### 4. Finding a task by keyword: find
+Finds tasks whose description on the list matches exactly that of the given keywords.  
+Format: find KEYWORD 
+* `find [D]  `  
+`Returns all Deadline tasks`
 
-Example of usage: 
+### 5. Deleting a task: delete
+Deletes the specified task from the list.  
+Format: delete INDEX
+* Deletes the tasks at the specified INDEX.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
 
-`keyword (optional arguments)`
+### 6. Marking a task as done: done  
+Marks the specified task in the list as done.  
+Format: done INDEX
+* Marks the tasks at the specified INDEX.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
 
-Expected outcome:
+### 7. Postponing a task: postpone  
+*Todos cannot be postponed.
 
-`outcome`
+* postpone the specified task in the list.  
+* Format: postpone INDEX DAYS HOURS MINUTES  
+
+### 8. Writing notes for a task: note  
+Appends the notes for a task at the end of the description with a #.  
+Format: note NOTES
+
+### 9. Exiting the program: bye  
+Exits the program.  
+Format: bye
+
+## FAQ
+* None
+
+## Command Summary
+* Add : `CODE NAME DATE [TIME]`   
+e.g. ` event party /at 01/01/2011 0800 1900`  
+e.g. `t read book`
+
+* Delete : `delete INDEX`
+e.g. `delete 3`
+
+* Done : `done INDEX`
+e.g. `done 3`
+
+* Postpone : `postpone INDEX DAY HOUR MINUTES`  
+e.g. `postpone 3 0 4 0`
+
+* Note: `note NOTES`  
+e.g. `note blahblahblah`
+
+* Find : `find KEYWORD`   
+e.g. `find [D]`
+* List : list
+* Help : help
+* Exit : bye

@@ -7,6 +7,7 @@ import tasks.Task;
 
 public class TaskList {
     ArrayList<Task> list;
+    int test = 2;
 
     /**
      * This is a constructor for duke.TaskList.
@@ -25,7 +26,6 @@ public class TaskList {
      * @return the task list
      */
     public ArrayList<Task> getList() {
-        //list.sort();
         return list;
     }
 
@@ -66,5 +66,19 @@ public class TaskList {
     public Task getTask(int taskNumToGet) {
         Task t = list.get(taskNumToGet - 1);
         return t;
+    }
+
+    public int getDoneTaskCount() {
+        int count = 0;
+        for (Task task : list) {
+            if (task.isDone()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public int getTotalTaskCount() {
+        return list.size();
     }
 }

@@ -7,12 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+
 
 /**
  * An example of a custom control using FXML.
@@ -23,12 +29,16 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
+    private Label progressNum;
+    @FXML
     private ImageView displayPicture;
+    @FXML
+    private ProgressBar progressBar;
 
     /**
      * Constructor for DialogBox.
-     * @param img the image for user and duke
-     * @param text textbox for user and duke
+     * @param img the image for dialog box
+     * @param text text for dialog box
      */
     private DialogBox(String text, Image img) {
         try {
@@ -55,6 +65,22 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
+    }
+
+    public static DialogBox getWelcomeDukeDialog(String text, Image img, int num1, int num2) {
+        String fraction = num1 + "/" + num2 + " tasks";
+        var db = new DialogBox(text, img);
+        db.flip();
+        ProgressBar progressBar = new ProgressBar(); //customises progress bar
+        db.getChildren().add(progressBar);
+        progressBar.setPrefSize(200,  30);
+        progressBar.setPadding(new Insets(0,0,0,50));
+        progressBar.setProgress(((double) num1/ (double) num2));
+        Text progressNum = new Text("    " + fraction + "\n    completed!"); //customises label beside progress bar
+        db.getChildren().add(progressNum);
+        progressNum.setFont(Font.font ("Verdana", 18));
+        progressNum.setFill(Color.RED);
+        return db;
     }
 
     /**

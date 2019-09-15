@@ -16,6 +16,8 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+import java.time.format.DateTimeParseException;
+
 public class Parser {
 
     /**
@@ -84,8 +86,10 @@ public class Parser {
             return new ErrorCommand(e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
             return new ErrorCommand("Wrong input format!\n Input [help] for more support.");
+        } catch (DateTimeParseException e) {
+            return new ErrorCommand("Wrong date/time format!\n Format should be dd/mm/yyyy hhmm");
         } catch (Exception e) {
-            return new ErrorCommand("Me no understand!\n Input [help] for more support.");
+            return new ErrorCommand("Me no understand!\n Input [help] for more support." + e.toString());
         }
 
     }

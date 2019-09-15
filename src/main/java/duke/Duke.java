@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.FileNotFoundException;
-import duke.MainWindow;
 
 /**
  * The Duke program implements an application that
@@ -14,9 +13,9 @@ import duke.MainWindow;
 
 public class Duke {
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
 
     public Duke() {
     }
@@ -49,8 +48,8 @@ public class Duke {
             System.exit(0);
             return null;
         } else {
-            Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
-            return Parser.parse(input).execute(duke.tasks, duke.ui, duke.storage);
+            //Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
+            return Parser.parse(input).execute(tasks, ui, storage);
         }
     }
 }

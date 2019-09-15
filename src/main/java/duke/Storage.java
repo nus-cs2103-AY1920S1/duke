@@ -43,7 +43,8 @@ public class Storage {
      * Creates the task object from String array and adds it to the ArrayList list.
      *
      */
-    public void loadTask(ArrayList<Task> list, String[] oldList, Task t) {
+    public void loadTask(ArrayList<Task> list, String[] oldList) {
+        Task t;
         switch (oldList[0].trim()) {
         case "T":
             t = new Todo(oldList[2].trim());
@@ -67,12 +68,10 @@ public class Storage {
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> list = new ArrayList<>();
-        Scanner sc1 = new Scanner(file);
-        while (sc1.hasNextLine()) {
-            String[] oldList = sc1.nextLine().split(" // ");
-            Task t = null;
-            loadTask(list, oldList, t);
-
+        Scanner scanner = new Scanner(file);
+        while (scanner.hasNextLine()) {
+            String[] oldList = scanner.nextLine().split(" // ");
+            loadTask(list, oldList);
         }
         return list;
     }

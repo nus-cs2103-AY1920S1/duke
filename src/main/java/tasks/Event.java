@@ -12,7 +12,7 @@ public class Event extends Task {
     LocalDateTime date2;
 
     /**
-     * This is a constructor for tasks.Deadline.
+     * This is a constructor for tasks.Event.
      *
      * @param description description of task
      * @param at          start and end time of event

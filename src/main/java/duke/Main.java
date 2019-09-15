@@ -1,9 +1,6 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +13,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("C:\\duke\\src\\main\\java\\data\\duke.txt");
 
     @Override
     public void start(Stage stage) {
@@ -26,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("DukeBot");
             stage.show();
 
         } catch (IOException e) {

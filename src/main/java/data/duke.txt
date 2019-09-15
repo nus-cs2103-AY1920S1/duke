@@ -1,8 +1,5 @@
-D // 0 // do duke // 09/11/2011
-E // 0 // party // 09/09/2019 1100 2200
-D // 0 //  // 11/11/2019
-D // 0 //  // 11/11/2111
-T // 0 // reabk #harry potter #chapter #page555 #maybeasdasodnadn asdnas
-T // 0 // aaaa
-T // 1 // aaaa
-T // 0 // aaaa
+D // 0 // duke IP // 14/09/2019
+D // 1 // upload duke jar // 20/09/2019
+D // 0 // duke TP // 09/10/2019
+T // 1 // read book #harry potter #chapter2
+T // 0 // revise UML diagrams

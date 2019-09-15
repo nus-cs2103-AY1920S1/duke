@@ -35,7 +35,6 @@ public class FindCommand extends Command {
         if (!hasFound) {
             return "Sorry, keyword not found!";
         }
-
         return output;
     }
 

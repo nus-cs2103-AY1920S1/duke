@@ -40,11 +40,10 @@ This application aims to be beginner friendly and is intended for users who want
 
 This document uses the following typographical conventions:
 
-</pre>
-`sort`        A mark-up indicates that this is a command that can be type into the command line and executed by the application.
+`sort`  | A mark-up indicates that this is a command that can be type into the command line and executed by the application.
 
-:exclamation:            An exclamation sign indicates important information.
-</pre>
+:exclamation:  | An exclamation sign indicates important information.
+
 
 ## **Features** <a name="features"></a>
 

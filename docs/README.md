@@ -35,7 +35,7 @@ __Table of contents__
 Welcome to Duke! Duke acts as your trusty online secretary where he helps you to keep track of all your key dates for all your important events. These tasks that you have can be classified into To Do, Events and Deadline tasks. There are also other features that Duke can do for your convenience. Get your very own Duke today!
 <br>
 
-### <a id="#1.2">1.2 Organization of READ.me</a>
+### <a id="1.2">1.2 Organization of READ.me</a>
 The user's manual consists of 4 sections: General Information, Getting Started, Special Instruction for Error Correction and Feedback and Contact us.
 <br>
 
@@ -45,7 +45,7 @@ The user's manual consists of 4 sections: General Information, Getting Started, 
 | Getting started			 |Instructions to installing Duke and the commands <br> available for Duke.|	
 | Special Instructions  |Highlights some of the possible issues users can <br> face while using Duke.| 
 |Feedback / Contact|Provide information to contact the creator of Duke|   
-<!--suppress ALL -->
+
 <br>
 
 ---
@@ -69,7 +69,9 @@ Here are the commands that are available for Duke.
 |help| -| Provides a list of commands that Duke<br> supports for the user.
 |morehelp| - |Links users to a help page for Duke.
 |bye|bb|Save the current list and close Duke.
+
 <br>
+
 ---
 
 ## <a id="3">3. Special Instruction for Error Correction</a>
@@ -119,8 +121,9 @@ Thank you for using Duke. Feel free to drop the developer a feedback in order to
 
 <style type="text/css" scoped>
 .GeneratedMarquee {
+font-size: 30;
 font-family:'Comic Sans MS';
-color:#330099;
+color:#FFFFFF;
 }
 
 

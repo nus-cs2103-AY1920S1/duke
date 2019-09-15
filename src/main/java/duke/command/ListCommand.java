@@ -26,9 +26,9 @@ public class ListCommand extends Command {
      * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMessage("\t Here are the tasks in your list: ");
+        ui.printMessage("Here are the tasks in your list: ");
         for (int i = 0; i < tasks.getListSize(); i++) {
-            ui.printMessage("\t " + (i + 1) + ". " + tasks.getTask(i));
+            ui.printMessage((i + 1) + ". " + tasks.getTask(i));
         }
     }
 

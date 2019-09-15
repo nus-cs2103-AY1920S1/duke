@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.FindTagCommand;
 import duke.command.ListCommand;
 import duke.command.TagCommand;
 import duke.exception.DukeException;
@@ -45,9 +46,16 @@ public class Parser {
             return find(userInput);
         } else if (userInput.startsWith("tag")) {
             return tag(userInput);
+        } else if (userInput.startsWith("#")) {
+            return findTag(userInput);
         } else {
             throw new InvalidInputException();
         }
+    }
+
+    private static Command findTag(String userInput) throws MissingDescriptionException {
+        String details = userInput.replaceFirst("#", "").trim();
+        return new FindTagCommand(details);
     }
 
     private static Command tag(String userInput) throws MissingDescriptionException {

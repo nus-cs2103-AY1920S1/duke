@@ -3,6 +3,7 @@ package duke;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,14 +17,15 @@ public class Ui {
      * Prints the Duke logo and greets the user for the first time the program is run.
      */
     public void greetUser() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+        String logo =
+                "      ___             _____       ______       _____\n"
+                + "   /            \\       /   ____|     |    ___    \\    |    ___|\n"
+                + "  /    /    \\    \\     |    |              |   |___|   /    |   |___ \n"
+                + " /    / __ \\    \\   |    |____     |    |      \\   \\    |   |___ \n"
+                + "/ _ /         \\ _ \\  \\______|   | _ |        \\_ \\  |_____|\n";
         System.out.println("Hello from\n" + logo);
         drawLine();
-        System.out.println("\tHello! I'm Duke\n\tWhat can I do for you?");
+        System.out.println("\tHello! I'm Pooh\n\tWhat can I do for you?");
         drawLine();
     }
 
@@ -31,14 +33,14 @@ public class Ui {
      * Prints a line in the console.
      */
     public void drawLine() {
-        System.out.println("\t----------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------");
     }
 
     /**
      * Prints the bye message when the user exits the program.
      */
     public void printExitMessage() {
-        printMessage("\t Bye. Hope to see you again soon!");
+        printMessage("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -70,7 +72,7 @@ public class Ui {
      */
     public void printException(DukeException exception) {
         String message = exception.getMessage();
-        System.out.println("\t " + message);
+        System.out.println(message);
     }
 
     /**
@@ -79,9 +81,9 @@ public class Ui {
      * @param numberOfTasks Number of tasks left in the list.
      */
     public void printDeleteMessage(Task task, int numberOfTasks) {
-        printMessage("\t Noted. I've removed this task: ");
-        printMessage("\t\t " + task);
-        printMessage("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
+        printMessage("Noted. I've removed this task: ");
+        printMessage("\t " + task);
+        printMessage("Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
     }
 
     /**
@@ -89,8 +91,8 @@ public class Ui {
      * @param task Task that has been marked as done.
      */
     public void printDoneMessage(Task task) {
-        printMessage("\t Nice! I've marked this task as done: ");
-        printMessage("\t\t " + task);
+        printMessage("Nice! I've marked this task as done: ");
+        printMessage("\t " + task);
     }
 
     /**
@@ -99,20 +101,37 @@ public class Ui {
      * @param numberOfTasks Number of tasks currently in the list.
      */
     public void printAddedMessage(Task task, int numberOfTasks) {
-        printMessage("\t Got it. I've added this task: ");
-        printMessage("\t\t " + task);
-        printMessage("\t Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
+        printMessage("Got it. I've added this task: ");
+        printMessage("\t " + task);
+        printMessage("Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
     }
 
     public void printTagMessage(Task task, String[] tags) {
-        printMessage("\t Got it. I have tagged this task: ");
-        printMessage("\t\t " + task);
+        printMessage("Got it. I have tagged this task: ");
+        printMessage("\t " + task);
     }
 
     /**
      * Prints the error when the information in storage could not be loaded.
      */
     public void showLoadingError() {
-        printMessage("\t ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        printMessage("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    /**
+     * Prints the tasks matching the input tag.
+     * @param tag Tag input by the user.
+     * @param tasks Tasks that match the tag.
+     */
+    public void printTasksMatchingTag(String tag, ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            printMessage("OOPS!!! There are no tasks that are #" + tag);
+        } else {
+            printMessage("These tasks are #" + tag + "!");
+            for (int i = 0; i < tasks.size(); i++) {
+                Task task = tasks.get(i);
+                printMessage("\t " + task);
+            }
+        }
     }
 }

@@ -8,6 +8,10 @@ import duke.exception.InvalidIndexException;
 import duke.exception.MissingDescriptionException;
 import duke.task.Task;
 
+/**
+ * Represents a <code>TagCommand</code>.
+ * A <code>TagCommand</code> corresponds to a command to tag a specific task.
+ */
 public class TagCommand extends Command {
     int index;
     String[] tags;
@@ -23,6 +27,14 @@ public class TagCommand extends Command {
         this.tags = tags;
     }
 
+    /**
+     * Tags a task at a specified index with an input tag.
+     * @param tasks Instance of <code>TaskList</code> which stores <code>Task</code> objects.
+     * @param ui Instance of <code>Ui</code> which handles user input and outputs.
+     * @param storage Instance of <code>Storage</code> which stores and loads information to and from the hard disk.
+     * @throws InvalidIndexException If the index is more than the size of the list.
+     * @throws MissingDescriptionException If no tag is specified.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException,
             MissingDescriptionException {

@@ -31,10 +31,6 @@ public abstract class Command {
     }
 
     protected void addTags(Task task, String tags) throws MissingDescriptionException {
-        boolean hasNoTag = tags.length() == 0;
-        if (hasNoTag) {
-            throw new MissingDescriptionException("tag");
-        }
         String[] individualTags = tags.split("#");
         for (int i = 0; i < individualTags.length; i++) {
             boolean isEmptyTag = individualTags[i].trim().length() == 0;

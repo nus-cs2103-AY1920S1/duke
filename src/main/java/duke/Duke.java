@@ -92,6 +92,21 @@ public class Duke {
         }
     }
 
+    /**
+     * Generates Duke's starting greeting.
+     * @return Duke's greeting.
+     */
+    public String generateWelcomeMessage() {
+        ByteArrayOutputStream message = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(message);
+        final PrintStream old = System.out;
+        System.setOut(ps);
+        ui.greetUser();
+        System.out.flush();
+        System.setOut(old);
+        return message.toString();
+    }
+
     public static void main(String[] args) {
         new Duke("C:\\Users\\Yi Yin\\Documents\\Year 2\\Semester 1\\CS2103\\duke\\data\\duke.txt").run();
     }

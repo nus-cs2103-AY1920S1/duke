@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.core.Storage;
 import duke.core.TaskList;
-import duke.exceptions.DukeException;
 import duke.ui.UiInterface;
 
 public class ClearCommand extends Command {
@@ -24,7 +23,7 @@ public class ClearCommand extends Command {
     public void execute(Storage storage, TaskList tasks, UiInterface ui) {
         /** Clear Tasks **/
         tasks.clearList();
-        ui.echoMessage("TASKS CLEARED");
+        ui.echoDukeMessage("TASKS CLEARED");
     }
 }
 

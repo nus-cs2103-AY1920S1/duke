@@ -6,6 +6,8 @@ import duke.tasks.Task;
 import java.util.List;
 
 public interface UiInterface {
+    void greet(boolean taskListExists, boolean storageInitialised);
+
     void echoList(TaskList taskList, List<String> archives);
 
     void echoMatchingTasks(List<Task> matchingTasks);
@@ -18,7 +20,7 @@ public interface UiInterface {
 
     void echoException(Exception e);
 
-    void echoMessage(String msg);
+    void echoDukeMessage(String msg);
 
     void exit();
 }

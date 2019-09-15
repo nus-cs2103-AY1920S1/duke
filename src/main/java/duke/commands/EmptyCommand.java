@@ -24,7 +24,7 @@ public class EmptyCommand extends Command {
     public void execute(Storage storage, TaskList tasks, UiInterface ui) {
         /** Empty Archives **/
         if (storage.emptyArchives()) {
-            ui.echoMessage("ARCHIVES EMPTIED");
+            ui.echoDukeMessage("ARCHIVES EMPTIED");
         } else {
             ui.echoException(new DukeException("Failed to empty archives"));
         }

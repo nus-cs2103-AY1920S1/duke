@@ -42,7 +42,7 @@ public class DukeGui extends Application {
 
         /** Setup **/
         avatar = new Image(this.getClass().getResourceAsStream("/images/avatar_placeholder.png"));
-        storage = new Storage(new File("data/tasks.txt"), new File("data/archive"));
+        storage = new Storage(new File("data"));
         scrollPane = new ScrollPane();
         gui = new Gui(avatar);
         scrollPane.setStyle("-fx-background: #303030");
@@ -94,21 +94,30 @@ public class DukeGui extends Application {
      */
     public void initialiseDuke() {
         taskList = new TaskList();
+        boolean taskFileExists = true;
+        boolean storageInitialised = true;
+
+        try {
+            storageInitialised = storage.initialise();
+        } catch (SecurityException e) {
+            gui.echoException(e);
+        }
 
         /** Try to load data */
         try {
             taskList.loadData(storage.getCurrentTasks());
-            gui.greet(true);
         } catch (FileNotFoundException e) {
-            gui.greet(false);
+            taskFileExists = false;
             try {
                 storage.createFile();
             } catch (IOException e2) {
-                gui.sendDukeMessage(e2.getMessage());
+                gui.echoException(e2);
             }
         } catch (DukeException e) {
-            gui.sendDukeMessage(e.getMessage());
+            gui.echoException(e);
         }
+
+        gui.greet(taskFileExists, storageInitialised);
     }
 
     /**
@@ -116,9 +125,7 @@ public class DukeGui extends Application {
      * @param userInput User input
      */
     public void handleUserInput(String userInput) {
-        gui.getChildren().addAll(
-                DialogBox.getUserDialog(userInput, avatar)
-        );
+        gui.echoUserMessage(userInput);
         getResponse(userInput);
         userTextField.clear();
     }

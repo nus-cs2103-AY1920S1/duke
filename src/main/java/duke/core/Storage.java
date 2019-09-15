@@ -13,15 +13,17 @@ import java.util.Scanner;
 
 public class Storage {
     private File taskFile;
-    private File archiveFolder;
+    private File dataFolder;
+    private File archivesFolder;
 
     /**
      * Class constructor.
      * @param file File instance to be used for storage
      */
-    public Storage(File file, File archiveFolder) {
-        this.taskFile = file;
-        this.archiveFolder = archiveFolder;
+    public Storage(File dataFolder) {
+        this.dataFolder = dataFolder;
+        this.taskFile = new File(dataFolder, "tasks.txt");
+        this.archivesFolder = new File(dataFolder, "archives");
     }
 
     /**
@@ -70,7 +72,7 @@ public class Storage {
     public boolean archiveTaskList(TaskList list, String archiveName) {
         try {
             String textToAdd = "";
-            String archiveFilePath = "data/archive/" + archiveName + ".txt";
+            String archiveFilePath = "data/archives/" + archiveName + ".txt";
             new File(archiveFilePath).createNewFile();
             FileWriter fw = new FileWriter(archiveFilePath);
             for (Task t : list.getTasks()) {
@@ -91,7 +93,7 @@ public class Storage {
      * Return a list of existing archive names.
      */
     public List<String> getArchivedTaskLists() {
-        File[] listOfArchives = archiveFolder.listFiles();
+        File[] listOfArchives = archivesFolder.listFiles();
         List<String> archiveNames = new ArrayList<>();
         for (File archive : listOfArchives) {
             archiveNames.add(archive.getName());
@@ -100,11 +102,27 @@ public class Storage {
     }
 
     /**
+     * Initialise storage folders.
+     */
+    public boolean initialise() throws SecurityException {
+        boolean hasBeenInitialised = true;
+        if (!dataFolder.exists()) {
+            dataFolder.mkdir();
+            hasBeenInitialised = false;
+        }
+        if (!archivesFolder.exists()) {
+            archivesFolder.mkdir();
+            hasBeenInitialised = false;
+        }
+        return hasBeenInitialised;
+    }
+
+    /**
      * Empty archives.
      */
     public boolean emptyArchives() {
         boolean isSuccessful = true;
-        File[] listOfArchives = archiveFolder.listFiles();
+        File[] listOfArchives = archivesFolder.listFiles();
         for (File archive : listOfArchives) {
             if (!archive.delete()) {
                 isSuccessful = false;
@@ -118,7 +136,7 @@ public class Storage {
      * Retrieve archive.
      */
     public List<Task> retrieveArchivedTaskList(String archiveName) throws DukeException, IOException {
-        String archiveFilePath = "data/archive/" + archiveName + ".txt";
+        String archiveFilePath = "data/archives/" + archiveName + ".txt";
         List<Task> archive = getTaskList(new File(archiveFilePath));
         return archive;
     }

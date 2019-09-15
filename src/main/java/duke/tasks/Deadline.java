@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDateTime parsedBy;
     protected String formattedBy;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a dd MMM");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM hh:mm a");
 
     /**
      * Class constructor.

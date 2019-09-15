@@ -15,7 +15,7 @@ import java.io.IOException;
 public class DukeCli {
     private TaskList taskList;
     private Clui clui;
-    private Storage storage = new Storage(new File("data/tasks.txt"), new File("data/archive"));
+    private Storage storage = new Storage(new File("data"));
 
     /**
      * Main function for Duke CLI application.
@@ -23,13 +23,20 @@ public class DukeCli {
     public void run() {
         clui = new Clui();
         taskList = new TaskList();
+        boolean taskFileExists = true;
+        boolean storageInitialised = true;
+
+        try {
+            storageInitialised = storage.initialise();
+        } catch (SecurityException e) {
+            clui.echoException(e);
+        }
 
         /** Try to load data */
         try {
             taskList.loadData(storage.getCurrentTasks());
-            clui.greet(true);
         } catch (FileNotFoundException e) {
-            clui.greet(false);
+            taskFileExists = false;
             try {
                 storage.createFile();
             } catch (IOException e2) {
@@ -38,6 +45,8 @@ public class DukeCli {
         } catch (DukeException e) {
             clui.echoException(e);
         }
+
+        clui.greet(taskFileExists, storageInitialised);
 
         /** Interaction with User */
         boolean isByeBye = false;

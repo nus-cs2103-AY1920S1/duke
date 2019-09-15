@@ -6,8 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected LocalDateTime parsedAt;
     protected String formattedAt;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm on dd/MM/YYYY");
-
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM hh:mm a");
 
     /**
      * Class constructor.

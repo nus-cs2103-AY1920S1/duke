@@ -20,7 +20,7 @@ public class Parser {
             try {
                 parsedDateTime = LocalDateTime.parse(dateTime);
             } catch (Exception e) {
-                throw new DukeException("Invalid DateTime!");
+                throw new DukeException("Deadline should be given in \"<DD/MM/YYYY> <HHMM>\" format");
             } finally {
                 String[] splitDateTime = dateTime.split(" ");
                 String[] splitDate = splitDateTime[0].split("\\/");
@@ -35,7 +35,7 @@ public class Parser {
 
             }
         } catch (Exception e) {
-            throw new DukeException("Invalid DateTime!");
+            throw new DukeException("Deadline should be given in \"<DD/MM/YYYY> <HHMM>\" format");
         }
     }
 

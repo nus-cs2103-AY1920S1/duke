@@ -26,7 +26,7 @@ public class ArchiveCommand extends Command {
     public void execute(Storage storage, TaskList tasks, UiInterface ui) {
         if (storage.archiveTaskList(tasks, archiveName)) {
             tasks.clearList();
-            ui.echoMessage("ARCHIVING COMPLETE");
+            ui.echoDukeMessage("ARCHIVING COMPLETE");
         } else {
             ui.echoException(new DukeException("Failed to archive tasks"));
         }

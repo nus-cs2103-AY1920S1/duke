@@ -15,33 +15,35 @@ public class Gui extends VBox implements UiInterface {
         this.avatar = avatar;
     }
 
-    public void sendDukeMessage(String dukeMessage) {
+    private void sendDukeMessage(String dukeMessage) {
         this.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeMessage, avatar));
+    }
+
+    private void sendUserMessage(String dukeMessage) {
+        this.getChildren().addAll(
+                DialogBox.getUserDialog(dukeMessage, avatar));
     }
 
     /**
      * Greet user.
      */
-    public void greet(boolean fileExists) {
-        if (fileExists) {
-            this.getChildren().addAll(
-                    DialogBox.getDukeDialog("    *** EXISTING FILE LOADED ***\n"
-                            + "-------------------------------------------\n"
-                            + "     Hello! I'm Duke\n"
-                            + "     What can I do for you?\n"
-                            + "-------------------------------------------", avatar
-                    ));
+    public void greet(boolean taskFileExists, boolean storageInitialised) {
+        String output = "";
+        if (taskFileExists) {
+            output += "    *** EXISTING FILE LOADED ***\n";
         } else {
-            this.getChildren().addAll(
-                    DialogBox.getDukeDialog(
-                            "    *** NO EXISTING FILE FOUND ***\n"
-                                    + "-------------------------------------------\n"
-                                    + "     Hello! I'm Duke\n"
-                                    + "     What can I do for you?\n"
-                                    + "-------------------------------------------", avatar));
-
+            output += "    *** NO EXISTING FILE FOUND ***\n";
         }
+        if (!storageInitialised) {
+            output += "    *** ARCHIVES FOLDER CREATED ***\n";
+        }
+        output += "-------------------------------------------\n"
+                + "     Hello! I'm Duke\n"
+                + "     What can I do for you?\n"
+                + "-------------------------------------------";
+
+        sendDukeMessage(output);
     }
 
     /**
@@ -71,8 +73,7 @@ public class Gui extends VBox implements UiInterface {
             output += "\n";
         }
         output += "-------------------------------------------";
-        this.getChildren().addAll(
-                DialogBox.getDukeDialog(output, avatar));
+        sendDukeMessage(output);
     }
 
     /**
@@ -92,8 +93,7 @@ public class Gui extends VBox implements UiInterface {
             }
         }
         output += "-------------------------------------------";
-        this.getChildren().addAll(
-                DialogBox.getDukeDialog(output, avatar));
+        sendDukeMessage(output);
     }
 
     /**
@@ -102,12 +102,12 @@ public class Gui extends VBox implements UiInterface {
      * @param taskListSize Numer of Tasks in list
      */
     public void echoAddedTask(Task taskToAdd, int taskListSize) {
-        this.getChildren().addAll(
-                DialogBox.getDukeDialog("-------------------------------------------\n"
+        String output = "-------------------------------------------\n"
                         + "     Got it. I've added this task: \n"
                         + String.format("       %s \n", taskToAdd.toString())
                         + String.format("     Now you have %d tasks in the list.\n", taskListSize)
-                        + "-------------------------------------------", avatar));
+                        + "-------------------------------------------";
+        sendDukeMessage(output);
     }
 
     /**
@@ -115,12 +115,12 @@ public class Gui extends VBox implements UiInterface {
      * @param taskToComplete Completed Task
      */
     public void echoCompletedTask(Task taskToComplete) {
-        this.getChildren().addAll(
-                DialogBox.getDukeDialog(String.format("-------------------------------------------\n"
+        String output = String.format("-------------------------------------------\n"
                                 + "     Nice! I've marked this task as done: \n"
                                 + "       %s\n"
                                 + "-------------------------------------------",
-                        taskToComplete.toString()), avatar));
+                        taskToComplete.toString());
+        sendDukeMessage(output);
     }
 
     /**
@@ -129,13 +129,13 @@ public class Gui extends VBox implements UiInterface {
      * @param taskListSize Number of remaining Tasks in TaskList
      */
     public void echoDeletedTask(Task taskToDelete, int taskListSize) {
-        this.getChildren().addAll(
-                DialogBox.getDukeDialog(String.format("-------------------------------------------\n"
+        String output = String.format("-------------------------------------------\n"
                                 + "     Noted. I've removed this task: \n"
                                 + "       %s\n"
                                 + "     Now you have %d tasks in the list.\n"
                                 + "-------------------------------------------",
-                        taskToDelete.toString(), taskListSize), avatar));
+                        taskToDelete.toString(), taskListSize);
+        sendDukeMessage(output);
     }
 
     /**
@@ -143,31 +143,36 @@ public class Gui extends VBox implements UiInterface {
      * @param e Exception to be echoed
      */
     public void echoException(Exception e) {
-        this.getChildren().addAll(
-                DialogBox.getDukeDialog(e.getMessage(), avatar));
+        sendDukeMessage(e.getMessage());
     }
 
     /**
-     * Echo message to user.
+     * Echo user message.
      * @param msg Message to be echoed
      */
-    public void echoMessage(String msg) {
+    public void echoUserMessage(String msg) {
+        sendUserMessage(msg);
+    }
+
+    /**
+     * Echo Duke message to user.
+     * @param msg Message to be echoed
+     */
+    public void echoDukeMessage(String msg) {
         String output = "";
         output += "-------------------------------------------\n";
         output += String.format("     *** %s ***     \n", msg);
         output += "-------------------------------------------";
-        this.getChildren().addAll(
-                DialogBox.getDukeDialog(output, avatar));
+        sendDukeMessage(output);
     }
 
     /**
      * Show exit message to user.
      */
     public void exit() {
-        this.getChildren().addAll(
-                DialogBox.getDukeDialog(
-                        "-------------------------------------------\n"
-                                + "     Bye. Hope to see you again soon!\n"
-                                + "-------------------------------------------", avatar));
+        String output = "-------------------------------------------\n"
+                + "     Bye. Hope to see you again soon!\n"
+                + "-------------------------------------------";
+        sendDukeMessage(output);
     }
 }

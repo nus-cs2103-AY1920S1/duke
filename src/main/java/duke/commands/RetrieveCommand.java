@@ -27,7 +27,7 @@ public class RetrieveCommand extends Command {
         try {
             TaskList retrievedTaskList = new TaskList(storage.retrieveArchivedTaskList(archiveName));
             tasks.loadData(retrievedTaskList.getTasks());
-            ui.echoMessage("RETRIEVED ARCHIVE");
+            ui.echoDukeMessage("RETRIEVED ARCHIVE");
         } catch (DukeException e) {
             ui.echoException(e);
         } catch (Exception e) {

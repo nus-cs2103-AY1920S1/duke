@@ -7,7 +7,7 @@ public class DukeException extends Exception {
      */
     public DukeException() {
         super("-------------------------------------------\n"
-                + " OOPS!!!\n I'm sorry, but I don't know what that means :-(\n"
+                + " OOPS!!!\n I'm sorry, but I don't know what that means\n :-(\n"
                 + "-------------------------------------------");
     }
 

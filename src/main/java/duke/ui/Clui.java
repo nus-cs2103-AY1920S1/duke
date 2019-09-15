@@ -18,21 +18,19 @@ public class Clui implements UiInterface {
     /**
      * Greet user.
      */
-    public void greet(boolean fileExists) {
-        if (fileExists) {
-            System.out.println("    *** EXISTING FILE LOADED ***\n"
-                    + "-------------------------------------------\n"
-                    + "     Hello! I'm Duke\n"
-                    + "     What can I do for you?\n"
-                    + "-------------------------------------------");
+    public void greet(boolean taskFileExists, boolean storageInitialised) {
+        if (taskFileExists) {
+            System.out.println("    *** EXISTING FILE LOADED ***");
         } else {
-            System.out.println("    *** NO EXISTING FILE FOUND ***\n"
-                    + "-------------------------------------------\n"
+            System.out.println("    *** NO EXISTING FILE FOUND ***");
+        }
+        if (!storageInitialised) {
+            System.out.println("    *** ARCHIVES FOLDER CREATED ***");
+        }
+        System.out.println("-------------------------------------------\n"
                     + "     Hello! I'm Duke\n"
                     + "     What can I do for you?\n"
                     + "-------------------------------------------");
-
-        }
     }
 
     /**
@@ -138,7 +136,7 @@ public class Clui implements UiInterface {
      * Echo message to user.
      * @param msg Message to be echoed
      */
-    public void echoMessage(String msg) {
+    public void echoDukeMessage(String msg) {
         System.out.println(String.format("-------------------------------------------\n"
                         + "     *** %s ***     \n"
                         + "-------------------------------------------",

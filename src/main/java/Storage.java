@@ -1,4 +1,10 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,7 +16,7 @@ import java.util.List;
  */
 
 public class Storage {
-    final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
+    static final SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
     private String filePath;
     private TaskList taskList;
 
@@ -45,7 +51,7 @@ public class Storage {
                 }
                 if (tokens.length == 4) {
                     try {
-                        date = DATE_FORMAT.parse(tokens[3]);
+                        date = dateFormat.parse(tokens[3]);
                     } catch (ParseException e) {
                         throw new DukeException("Please enter date in this format: 2/12/2019 1800");
                     }
@@ -94,7 +100,8 @@ public class Storage {
                     statusHolder = 1;
                 }
 
-                String store = String.format("%s | %d | %s", taskList.getTask(j).getType(), statusHolder, taskList.getTask(j).getDescription());
+                String store = String.format("%s | %d | %s", taskList.getTask(j).getType(),
+                    statusHolder, taskList.getTask(j).getDescription());
                 if (taskList.getTask(j) instanceof Deadline) {
                     store += " | " + ((Deadline) taskList.getTask(j)).getBy();
                 } else if (taskList.getTask(j) instanceof Event) {
@@ -115,7 +122,7 @@ public class Storage {
         }
     }
 
-    private TaskList sortTask() {
+    private void sortTask() {
         List<Task> taskListTodo = new ArrayList<>();
         List<Task> taskListDeadline = new ArrayList<>();
         List<Task> taskListEvent = new ArrayList<>();
@@ -145,7 +152,5 @@ public class Storage {
         taskListTodo.clear();
         taskListDeadline.clear();
         taskListEvent.clear();
-
-        return taskList;
     }
 }

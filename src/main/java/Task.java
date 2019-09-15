@@ -18,12 +18,12 @@ public abstract class Task {
     public abstract boolean getStatus();
 
     /**
-     * Returns a tick or cross based on have the task been done
+     * Returns a tick or cross based on have the task been done.
      *
      * @return tick or cross
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? "Done" : "Not Done");
     }
 
     public String getDescription() {

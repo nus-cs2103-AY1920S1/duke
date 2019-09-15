@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class TaskList {
-    final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d/M/yyyy HHmm");
+    static final SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
     private List<Task> taskList;
     private Ui ui;
 
@@ -44,7 +44,6 @@ public class TaskList {
      * @throws DukeException throws duke exception
      */
     public String addTask(String command) throws DukeException {
-        ui.horizontalLine();
         List<String> commandList = new ArrayList<>(Arrays.asList(command.split(" ")));
         String stringHolder = (commandList.remove(0));
         List<String> listHolder = new ArrayList<>(commandList);
@@ -53,8 +52,9 @@ public class TaskList {
             if (!stringHolder.isEmpty()) {
                 Task taskHolder = new ToDo(stringHolder, false);
                 taskList.add(taskHolder);
-                String holder = "Got it. I've added this task:\n" + "  [T][\u2718] " + stringHolder + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
-                return holder;
+                String stringBuilder = "Got it. I've added this task:\n" + "  [T][Not Done]" + stringHolder
+                    + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
+                return stringBuilder;
             } else {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
@@ -79,7 +79,8 @@ public class TaskList {
 
             Date dateHolder;
             try {
-                dateHolder = DATE_FORMAT.parse(date);
+                dateHolder = dateFormat.parse(date);
+
             } catch (ParseException e) {
                 throw new DukeException("Please enter date in this format: d/m/y HHmm");
             }
@@ -87,8 +88,9 @@ public class TaskList {
             Task taskHolder = new Deadline(stringHolder, dateHolder, false);
             taskList.add(taskHolder);
 
-            String holder = "Got it. I've added this task:\n" + "  [D][\u2718] " + stringHolder + " (by: " + date + ")" + "Now you have " + taskList.size() + " tasks in the list.";
-            return holder;
+            String stringBuilder = "Got it. I've added this task:\n" + "  [D][Not Done] " + stringHolder
+                + " (by: " + date + ")" + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
+            return stringBuilder;
         } else {
             stringHolder = commandList.remove(0);
             listHolder.remove(0);
@@ -110,7 +112,7 @@ public class TaskList {
 
             Date dateHolder;
             try {
-                dateHolder = DATE_FORMAT.parse(date);
+                dateHolder = dateFormat.parse(date);
             } catch (ParseException e) {
                 throw new DukeException("Please enter date in this format: 2/12/2019 1800");
             }
@@ -118,35 +120,46 @@ public class TaskList {
             Task taskHolder = new Event(stringHolder, dateHolder, false);
             taskList.add(taskHolder);
 
-            String holder = "Got it. I've added this task:\n" + "  [E][\u2718] " + stringHolder + " (at: " + date + ")" + "Now you have " + taskList.size() + " tasks in the list.";
-            return holder;
+            String stringBuilder = "Got it. I've added this task:\n" + "  [E][Not Done] " + stringHolder
+                +  " (at: " + date + ")" + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
+            return stringBuilder;
         }
     }
 
     /**
-     * Changes the status of the task from undone to done
+     * Changes the status of the task from undone to .
      *
      * @param index Index of the task
      */
     public String doneTask(int index) {
         index = index - 1;
         taskList.get(index).changeStatusTrue();
-        String holder = ui.horizontalLine() + "\nNice! I've marked this task as done:\n" + "  [" + taskList.get(index).getType() + "]" + "[" + taskList.get(index).getStatusIcon() + "] " + taskList.get(index).getDescription() + taskList.get(index).getDate() + "\n" + ui.horizontalLine() + "\n";
-        return holder;
+        String stringBuilder = "\nNice! I've marked this task as done:\n"
+            + "  [" + taskList.get(index).getType() + "]" + "[" + taskList.get(index).getStatusIcon() + "] "
+            + taskList.get(index).getDescription() + taskList.get(index).getDate() + "\n" + "\n";
+        return stringBuilder;
     }
 
     /**
-     * Deletes the task from the list
+     * Deletes the task from the list.
      *
      * @param index Index of the task
      */
     public String deleteTask(int index) {
         index = index - 1;
         Task taskHolder = taskList.remove(index);
-        String holder = ui.horizontalLine() + "\nNoted. I've removed this task:\n" + "  [" + taskHolder.getType() + "]" + "[" + taskHolder.getStatusIcon() + "] " + taskHolder.getDescription() + taskHolder.getDate() + "\n" + ui.horizontalLine() + "\n";
-        return holder;
+        String stringBuilder = "\nNoted. I've removed this task:\n"
+            + "  [" + taskHolder.getType() + "]" + "[" + taskHolder.getStatusIcon() + "] "
+            + taskHolder.getDescription() + taskHolder.getDate() + "\n" + "\n";
+        return stringBuilder;
     }
 
+    /**
+     * Finds the task from the list.
+     * @param taskList The list to look into
+     * @param findString The keyword to search for
+     * @return
+     */
     public List findTask(TaskList taskList, String findString) {
         List<Task> findList = new ArrayList<>();
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -158,6 +171,9 @@ public class TaskList {
         return findList;
     }
 
+    /**
+     * Clears the content for the list.
+     */
     public void clearTask() {
         int listSize = taskList.size();
         for (int i = 0; i < listSize; i++) {

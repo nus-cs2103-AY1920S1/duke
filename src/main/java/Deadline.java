@@ -28,8 +28,8 @@ public class Deadline extends Task {
     public String getDate() {
         SimpleDateFormat formatDayOfMonth = new SimpleDateFormat("d");
         int day = Integer.parseInt(formatDayOfMonth.format(by));
-        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("' of' MMMMM yyyy, Ka");
-        return " (by: " + suffixes[day] + (DATE_FORMAT.format(by)) + ")";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("' of' MMMMM yyyy, Ka");
+        return " (by: " + suffixes[day] + (dateFormat.format(by)) + ")";
     }
 
     @Override

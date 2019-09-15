@@ -3,8 +3,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Duke {
-    final static String FILE_LOCATION = System.getProperty("user.dir") + "/data/duke.txt";
-    final static List<String> availableCommands = Arrays.asList("bye", "list", "done", "todo", "event", "deadline", "delete", "find");
+    static final String FILE_LOCATION = System.getProperty("user.dir") + "/data/duke.txt";
+    static final List<String> availableCommands = Arrays.asList(
+        "bye", "list", "done", "todo", "event", "deadline", "delete", "find");
 
     private Ui ui;
     private Storage storage;
@@ -13,6 +14,10 @@ public class Duke {
 
     private Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Create an instance of duke.
+     * @param filePath The file load to save and load from
+     */
     public Duke(String filePath) {
         ui = new Ui();
         taskList = new TaskList(ui);
@@ -25,6 +30,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method that runs the program.
+     */
     public void run() {
         ui.greet();
 
@@ -34,9 +42,7 @@ public class Duke {
             try {
                 parser.parseCommand(ui, storage, command, taskList);
             } catch (DukeException e) {
-                ui.horizontalLine();
                 System.out.println(e.getMessage());
-                ui.horizontalLine();
                 System.out.println();
             }
         }

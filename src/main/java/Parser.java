@@ -1,11 +1,12 @@
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 /**
  * Used to parse commands that are given.
  */
 public class Parser {
-    private List<String> availableCommands;
+    private List availableCommands;
 
     public Parser(List availableCommands) {
         this.availableCommands = availableCommands;
@@ -25,35 +26,33 @@ public class Parser {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         } else if (command.equals("bye")) {
             return ui.exit();
-            //System.exit(0);
         } else if (command.equals("list")) {
-            String holder = ui.printList(taskList);
-            return holder;
+            return ui.printList(taskList);
         } else if (command.startsWith("done")) {
             assert command != null : "Task should not be null";
             String[] words = command.split("\\s");
             int index = Integer.parseInt(words[1]);
-            String holder = taskList.doneTask(index);
+            String stringBuilder = taskList.doneTask(index);
             storage.saveTask();
-            return holder;
+            return stringBuilder;
         } else if (command.startsWith("delete")) {
             assert command != null : "Task should not be null";
             String[] words = command.split("\\s");
             int index = Integer.parseInt(words[1]);
-            String holder = taskList.deleteTask(index);
+            String stringBuilder = taskList.deleteTask(index);
             storage.saveTask();
-            return holder;
+            return stringBuilder;
         } else if (command.startsWith("find")) {
-            List<Task> findList;
+            List findList;
             String[] words = command.split("\\s");
             String findString = words[1];
             findList = taskList.findTask(taskList, findString);
             return ui.printTaskList(findList);
         } else {
             assert command != null : "Task should not be null";
-            String holder = taskList.addTask(command);
+            String stringBuilder = taskList.addTask(command);
             storage.saveTask();
-            return holder;
+            return stringBuilder;
         }
     }
 }

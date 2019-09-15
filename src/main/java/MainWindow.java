@@ -30,6 +30,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Prints the greeting message when the program starts.
+     */
     public void printGreet() {
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(Ui.greet(), dukeImage)

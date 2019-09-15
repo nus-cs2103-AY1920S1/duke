@@ -26,7 +26,7 @@ public class UI {
      */
     public String getByeMessage() {
         String exitMessage = "Bye. Hope to see you again soon!";
-        return padMessage(exitMessage);
+        return exitMessage;
     }
 
     /**
@@ -39,7 +39,7 @@ public class UI {
         StringJoiner result = new StringJoiner("\n");
         result.add(doneMessage);
         result.add(taskMessage);
-        return padMessage(result.toString());
+        return result.toString();
     }
 
     /**
@@ -54,7 +54,7 @@ public class UI {
         result.add(deleteMessage);
         result.add(taskMessage);
         result.add(String.format("Now you have %d tasks in the list.", tasksSize));
-        return padMessage(result.toString());
+        return result.toString();
     }
 
     /**
@@ -69,7 +69,7 @@ public class UI {
         result.add(addedMessage);
         result.add(taskMessage);
         result.add(String.format("Now you have %d tasks in the list.", tasksSize));
-        return padMessage(result.toString());
+        return result.toString();
     }
 
     /**
@@ -77,9 +77,7 @@ public class UI {
      * @return illegal command message
      */
     public String getIllegalCommandMessage() {
-        String illegalCommandMessage = "____________________________________________________________\n"
-                + "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                + "____________________________________________________________";
+        String illegalCommandMessage = "\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(";
         return illegalCommandMessage;
     }
 
@@ -88,8 +86,8 @@ public class UI {
      * @return loading error
      */
     public String getLoadingError() {
-        String loadingError = "\u2639 OOPS!!! I'm sorry, but file was not loaded :-(\n";
-        return padMessage(loadingError);
+        String loadingError = "\u2639 OOPS!!! I'm sorry, but file was not loaded :-(";
+        return loadingError;
     }
 
     /**
@@ -97,7 +95,7 @@ public class UI {
      * @param message message
      */
     public void showMessage(String message) {
-        System.out.println(message);
+        System.out.println(padMessage(message));
     }
 
 
@@ -112,7 +110,7 @@ public class UI {
         StringJoiner result = new StringJoiner("\n");
         result.add(foundMessage);
         result.add(taskMessage);
-        return padMessage(result.toString());
+        return result.toString();
     }
 
     /**

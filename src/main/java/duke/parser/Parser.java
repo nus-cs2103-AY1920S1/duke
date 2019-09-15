@@ -18,6 +18,8 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Note;
 
+import duke.ui.UI;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,12 +29,8 @@ import java.util.Date;
  * Parser detects and reports any syntax errors.
  */
 public class Parser {
-    private static final String emptyToDoErrorMessage = "____________________________________________________________\n"
-            + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
-            + "____________________________________________________________";
-    private static final String emptyNoteErrorMessage = "____________________________________________________________\n"
-            + "\u2639 OOPS!!! The description of a Note cannot be empty.\n"
-            + "____________________________________________________________";
+    private static final String EMPTY_TODO_ERROR_MESSAGE = "\u2639 OOPS!!! The description of a todo cannot be empty.";
+    private static final String EMPTY_NOTE_ERROR_MESSAGE = "\u2639 OOPS!!! The description of a note cannot be empty.";
 
     /**
      * Parses full command string and outputs relevant command.
@@ -62,7 +60,7 @@ public class Parser {
             break;
         case "todo":
             if (arr.length != 2) {
-                throw new IllegalArgumentException(emptyToDoErrorMessage);
+                throw new IllegalArgumentException(EMPTY_TODO_ERROR_MESSAGE);
             }
 
             command = new ToDoCommand(new ToDo(arr[1]));
@@ -79,7 +77,7 @@ public class Parser {
             break;
         case "note":
             if (arr.length != 2) {
-                throw new IllegalArgumentException(emptyNoteErrorMessage);
+                throw new IllegalArgumentException(EMPTY_NOTE_ERROR_MESSAGE);
             }
 
             command = new NoteCommand(new Note(arr[1]));

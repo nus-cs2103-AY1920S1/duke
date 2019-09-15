@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      * @return All tasks
      */
     public String execute(TaskList tasks, UI ui, Storage storage) {
-        return ui.padMessage(tasks.getTasks());
+        return tasks.getTasks();
     }
 
     /**

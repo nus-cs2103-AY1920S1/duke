@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -94,6 +95,14 @@ public class TaskList {
         else {
             return "Here are the matching tasks in your list:\n" + relevant;
         }
+    }
+
+    protected String archiveTask(int number, Storage storage) throws IOException {
+        String showUser = "Got it, I've archived task " + number + " .\n";
+        showUser = showUser + taskList.get(number - 1).toString() + "\n";
+        storage.writeFile(taskList.get(number - 1).toString(),"data/DukeArchive.txt");
+        taskList.remove(number - 1);
+        return showUser;
     }
 
     /**

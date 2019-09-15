@@ -32,7 +32,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(this.task);
-        storage.writeToFile();
+        storage.writeToFile(tasks);
         int taskNum = tasks.getSize();
         String feedback = "Got it. I've added this task:\n" + task.toString() + "\nNow you have " + taskNum
                 + " tasks in the list.";

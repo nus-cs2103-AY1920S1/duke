@@ -1,6 +1,9 @@
 package tasks;
 
+import exceptions.DukeException;
 import utils.StringToDate;
+
+import java.text.ParseException;
 
 public class Event extends Task {
     private StringToDate time;
@@ -14,6 +17,16 @@ public class Event extends Task {
     public Event(String name, StringToDate time) {
         super(name);
         this.time = time;
+    }
+
+    /**
+     * Mark the task as complete.
+     *
+     */
+    public Task markAsDone() throws DukeException {
+        Event doneTask = new Event(this.name, new StringToDate(this.time.getRawDate()));
+        doneTask.isDone = true;
+        return doneTask;
     }
 
     /**

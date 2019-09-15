@@ -19,6 +19,7 @@ public class Deadline extends Task {
         try {
             if (isValidDateTimeFormat(by)) {
                 SimpleDateFormat displayFormat = new SimpleDateFormat("dd MMMM yyyy, hh:mm a");
+                // Note: SimpleDateFormat will also recognise dd/MM/yy (where yy A.D.)
                 SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
                 Date date = inputFormat.parse(by);
                 // Output: 2nd of December 2019, 6pm
@@ -26,7 +27,7 @@ public class Deadline extends Task {
                 this.subDescription = newBy;
             }
         } catch (ParseException e) {
-            new Ui().showMessage("Deadline Task \"by\" input was not of recognised format to convert. Input is left as is.",
+            new Ui().showMessage("Date not valid.",
                     "(Example: Recognised format \"2/12/2019 1800\"; converts to \"2nd of December 2019, 6pm\")");
         }
     }
@@ -41,7 +42,10 @@ public class Deadline extends Task {
     }
 
     public boolean containsKeyword(String keyword) {
-        return description.contains(keyword) || subDescription.contains(keyword);
+        String lcKeyword = keyword.toLowerCase();
+        String lcDescription = description.toLowerCase();
+        String lcSubDescription = subDescription.toLowerCase();
+        return lcDescription.contains(lcKeyword) || lcSubDescription.contains(lcKeyword);
     }
 
     /**

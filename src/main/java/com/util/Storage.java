@@ -92,7 +92,7 @@ public class Storage {
     /**
      * Saves given updated list of tasks to text file in hard disk.
      * @param taskArr
-     * @throws IOException
+     * @throws DukeException
      */
     public void save(ArrayList<Task> taskArr) throws DukeException {
         try {
@@ -101,7 +101,7 @@ public class Storage {
             for (Task currTask : taskArr) {
                 // If available, for tasks with subcommands
                 String subDescription = currTask.getTaskType().equals("T") ?
-                        "" : StaticStrings.STORAGE_SEPARATOR + currTask.getSubDescription();
+                        "" : currTask.getSubDescription();
                 // Format: D | 0 | return book | June 6th
                 fw.write(currTask.getTaskType() + StaticStrings.STORAGE_SEPARATOR +
                         (currTask.isDone()? 1 : 0) + StaticStrings.STORAGE_SEPARATOR +

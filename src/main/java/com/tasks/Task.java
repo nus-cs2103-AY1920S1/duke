@@ -28,7 +28,10 @@ public class Task {
     public String getDescription() {
         return description;
     }
-    public String getSubDescription() {return subDescription; }
+
+    public String getSubDescription() {
+        return subDescription;
+    }
 
     public void markDone() {
         isDone = true;
@@ -44,9 +47,10 @@ public class Task {
     // Mainly for use in saving data to hard disk
     public String getTaskType() { return "?"; }
 
-    // Returns true if description or subdescription contains keyword
-    // NOTE: case-sensitive!!!
+    // Returns true if description or subdescription contains keyword!
     public boolean containsKeyword(String keyword) {
-        return description.contains(keyword);
+        String lcKeyword = keyword.toLowerCase();
+        String lcDescription = description.toLowerCase();
+        return lcDescription.contains(lcKeyword);
     }
 }

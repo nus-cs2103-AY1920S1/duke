@@ -16,7 +16,10 @@ public class Event extends Task {
     }
 
     public boolean containsKeyword(String keyword) {
-        return description.contains(keyword) || subDescription.contains(keyword);
+        String lcKeyword = keyword.toLowerCase();
+        String lcDescription = description.toLowerCase();
+        String lcSubDescription = subDescription.toLowerCase();
+        return lcDescription.contains(lcKeyword) || lcSubDescription.contains(lcKeyword);
     }
 
 }

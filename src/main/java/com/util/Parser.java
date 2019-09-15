@@ -88,7 +88,7 @@ public class Parser {
         int firstSubCommandIdx = fullUserInputArr.indexOf(subCommand);
         int lastSubCommandIdx = fullUserInputArr.indexOf(subCommand);
 
-        boolean hasSubCommand = firstSubCommandIdx != 1;
+        boolean hasSubCommand = firstSubCommandIdx != -1;
         boolean hasMultipleSubCommands = firstSubCommandIdx != lastSubCommandIdx;
         // No "/by","/at" or multiple "/by"s, "/at"s provided
         if (!hasSubCommand || hasMultipleSubCommands) {
@@ -129,11 +129,11 @@ public class Parser {
         int numInputWords = fullUserInputArr.size();
         // Empty description, just "done" with no keyword
         if (numInputWords == 1) {
-            throw new DukeException("Please provide index of task in list to be marked done.");
+            throw new IncorrectInfoInputException(StaticStrings.NO_DONE_IDX_PROVIDED);
         }
         // More than one input after "done"
         if (numInputWords > 2) {
-            throw new DukeException("Please just put the index of task in list after \"done\" and nothing else.");
+            throw new IncorrectInfoInputException(StaticStrings.TOO_MANY_DONE_INPUT);
         }
         try {
             // Check if integer is provided, not characters
@@ -141,7 +141,7 @@ public class Parser {
             Command newCommand = new DoneCommand(doneIdx);
             return newCommand;
         } catch (NumberFormatException e) {
-            throw new DukeException("Please enter an integer after \"done\".");
+            throw new DukeException(StaticStrings.NON_INT_PROVIDED_DONE);
         }
     }
 
@@ -149,11 +149,11 @@ public class Parser {
         int numInputWords = fullUserInputArr.size();
         // Empty description, just "delete" with no keyword
         if (numInputWords == 1) {
-            throw new DukeException("Please provide index of task in list to be deleted.");
+            throw new DukeException(StaticStrings.NO_DELETE_IDX_PROVIDED);
         }
         // More than one input after "delete"
         if (numInputWords > 2) {
-            throw new DukeException("Please just put the index of task in list after \"delete\" and nothing else.");
+            throw new DukeException(StaticStrings.TOO_MANY_DELETE_INPUT);
         }
         try {
             // Check if integer is provided, not characters
@@ -161,7 +161,7 @@ public class Parser {
             Command newCommand = new DeleteCommand(deleteIdx);
             return newCommand;
         } catch (NumberFormatException e) {
-            throw new DukeException("Please enter an integer after \"delete\".");
+            throw new DukeException(StaticStrings.NON_INT_PROVIDED_DELETE);
         }
     }
 

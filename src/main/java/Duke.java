@@ -7,13 +7,6 @@ import com.util.Storage;
 import com.util.Parser;
 import com.util.Ui;
 
-// TODO make better javadocs comments
-// TODO handle exceptions better
-// TODO remove unnecessary imports
-// TODO order imports better
-// TODO use enumerations
-// TODO use logging in Storage load for onelinetextarray
-
 /**
  * A program named Duke.
  * Something like a Personal Assistant Chatbot that helps

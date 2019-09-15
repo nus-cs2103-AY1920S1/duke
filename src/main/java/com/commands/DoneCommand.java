@@ -31,10 +31,13 @@ public class DoneCommand extends Command {
         if (doneIdx < 1 || doneIdx > numTasks) {
             throw new DukeExecuteException(StaticStrings.NOT_IN_RANGE + numTasks);
         }
-
-        Task doneTask = taskList.markTaskDone(doneIdx);
-        storage.save(taskList.getTaskArr());
-        ui.showMarkTaskDoneResponse(doneTask);
+        try {
+            Task doneTask = taskList.markTaskDone(doneIdx);
+            storage.save(taskList.getTaskArr());
+            ui.showMarkTaskDoneResponse(doneTask);
+        } catch (DukeException e) {
+            ui.showMessage(e.getMessage());
+        }
     }
 
     public void print() {

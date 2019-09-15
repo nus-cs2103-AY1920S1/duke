@@ -18,6 +18,8 @@ public class StaticStrings {
     public static final String LIST_TASK = "Here are the tasks in your list:";
     public static final String MATCHING_TASK = "Here are the matching tasks in your list:";
 
+    public static final String TASK_ALREADY_DONE = "This task has already been marked done!";
+
     // Exception messages for Storage
 
     public static final String ERROR_FILE_NOT_FOUND = "File not found at given file path. Error in creating new file there. :-(";
@@ -33,5 +35,14 @@ public class StaticStrings {
     public static final String NOT_IN_RANGE = "Please give a number from 1 to ";
     public static final String NO_SUCH_COMMAND = "No such command with subcommand!";
 
+    // Exception messages for Storage
+
+    public static final String NO_DONE_IDX_PROVIDED = "Please provide index of task in list to be marked done.";
+    public static final String TOO_MANY_DONE_INPUT = "Please just put the index of task in list after \"done\" and nothing else.";
+    public static final String NON_INT_PROVIDED_DONE = "Please enter an integer after \"done\".";
+
+    public static final String NO_DELETE_IDX_PROVIDED = "Please provide index of task in list to be deleted.";
+    public static final String TOO_MANY_DELETE_INPUT = "Please just put the index of task in list after \"delete\" and nothing else.";
+    public static final String NON_INT_PROVIDED_DELETE = "Please enter an integer after \"delete\".";
 
 }

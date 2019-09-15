@@ -1,6 +1,8 @@
 package com;
 
+import com.exceptions.DukeException;
 import com.tasks.*;
+import com.util.StaticStrings;
 
 import java.io.IOException;
 
@@ -30,8 +32,7 @@ public class TaskList {
      * Adds new task to list.
      * Number of tasks in list increases by one.
      * @param newTask
-     * @return Task that was added
-     * @throws IOException
+     * @return
      */
     public Task addTask(Task newTask) {
         taskArr.add(newTask);
@@ -43,8 +44,11 @@ public class TaskList {
      * @param doneIdx
      * @return Task that was marked done
      */
-    public Task markTaskDone(int doneIdx) {
+    public Task markTaskDone(int doneIdx) throws DukeException {
         Task doneTask = taskArr.get(doneIdx-1);
+        if (doneTask.isDone()) {
+            throw new DukeException(StaticStrings.TASK_ALREADY_DONE);
+        }
         doneTask.markDone();
         return doneTask;
     }
@@ -65,7 +69,11 @@ public class TaskList {
     // HELPER METHODS //
     ///////////////////
 
-    public ArrayList<Task> getTaskArr() { return taskArr; }
-    public int getNumTasks() { return taskArr.size(); }
+    public ArrayList<Task> getTaskArr() {
+        return taskArr;
+    }
+    public int getNumTasks() {
+        return taskArr.size();
+    }
 
 }

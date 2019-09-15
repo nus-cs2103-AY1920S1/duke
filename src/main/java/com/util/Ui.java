@@ -80,6 +80,10 @@ public class Ui {
         showMessage(response);
     }
 
+    public void showNoTasksMatchingKeywordResponse() {
+        showMessage(indentMessage(StaticStrings.NO_TASKS_MATCH));
+    }
+
     /**
      * Ordered list of tasks in string.
      * Includes their index in list, done or not, description etc.

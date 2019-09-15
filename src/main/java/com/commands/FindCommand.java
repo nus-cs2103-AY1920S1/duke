@@ -30,7 +30,7 @@ public class FindCommand extends Command {
             }
         }
         if (matchingTasks.size() == 0) {
-            ui.showMessage(StaticStrings.NO_TASKS_MATCH);
+            ui.showNoTasksMatchingKeywordResponse();
         } else {
             ui.showFindKeywordResponse(matchingTasks);
         }

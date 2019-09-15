@@ -17,6 +17,7 @@ import java.util.List;
 
 public class Storage {
     static final SimpleDateFormat dateFormat = new SimpleDateFormat("d/M/yyyy HHmm");
+    static final SimpleDateFormat dateFormat2 = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
     private String filePath;
     private TaskList taskList;
 
@@ -51,7 +52,8 @@ public class Storage {
                 }
                 if (tokens.length == 4) {
                     try {
-                        date = dateFormat.parse(tokens[3]);
+                        date = dateFormat2.parse(tokens[3]);
+                        dateFormat.format(date);
                     } catch (ParseException e) {
                         throw new DukeException("Please enter date in this format: 2/12/2019 1800");
                     }

@@ -80,9 +80,8 @@ public class TaskList {
             Date dateHolder;
             try {
                 dateHolder = dateFormat.parse(date);
-
             } catch (ParseException e) {
-                throw new DukeException("Please enter date in this format: d/m/y HHmm");
+                throw new DukeException("Please enter date in this format: 2/12/2019 1800");
             }
 
             Task taskHolder = new Deadline(stringHolder, dateHolder, false);

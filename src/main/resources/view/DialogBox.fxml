@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="400.0" style="-fx-background-color: #23353b #23353b;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox fillHeight="true">
+         <children>
+            <Label fx:id="dialog" alignment="TOP_LEFT" maxWidth="285.0" textFill="#dbdbdb" wrapText="true">
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="TOP_CENTER" prefHeight="77.0" prefWidth="87.0" style="-fx-background-radius: 100;">
+         <children>
+            <Label fx:id="name" alignment="CENTER" prefHeight="27.0" prefWidth="119.0" text="Label" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+   </padding>
+</fx:root>

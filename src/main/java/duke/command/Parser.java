@@ -56,7 +56,7 @@ public class Parser {
         if (firstWord.equals("bye")) {
             return new String("Bye. Hope to see you again soon!");
         } else if (firstWord.equals("list")) {
-            return ui.printList(this.taskList.getList());
+            return ui.printListUsingStream(this.taskList.getList());
         } else if (firstWord.equals("done")) {
             String message = processTaskDone(input, this.taskList, this.storage);
             return message;

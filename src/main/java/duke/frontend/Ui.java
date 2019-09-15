@@ -71,6 +71,7 @@ public class Ui {
 
         switch (command) {
         case "done":
+            assert parseInt(cmd.substring(5)) > 0;
             if (cmd.length() <= 5 || parseInt(cmd.substring(5)) >= list.size() + 1) {
                 throw (new CompleteTaskException());
             }
@@ -92,6 +93,7 @@ public class Ui {
             }
             return response;
         case "delete":
+            assert parseInt(cmd.substring(7)) > 0;
             if (cmd.length() <= 7 || parseInt(cmd.substring(7)) >= list.size() + 1) {
                 throw (new DeleteTaskException());
             }

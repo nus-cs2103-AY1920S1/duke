@@ -1,4 +1,5 @@
 # User Guide
+![alt text](./Ui.png)
 
 ## Features 
 ### GUI task manager

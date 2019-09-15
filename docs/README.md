@@ -3,22 +3,22 @@
 
 ## **Table of Contents**
 
-    1. [Introduction](#Introduction)
-        1.1 [What is Duke ChatBot](#what)
-        1.2 [Who Should Use It](#who)
-        1.3 [Typographical Conventions](#how)
-        
-    2. [Features](#features)
-        2.1 Types of Tasks(#types)
-            2.1.1 Adding of Tasks(#add)
-            2.1.2 Handling of Tasks(#handle)
-        2.2 Finding Tasks(#find)
-        2.3 Sorting Tasks(#sort)
+1. [Introduction](#UserGuide)
+    1.1 [What is Duke ChatBot](#what)
+    1.2 [Who Should Use It](#who)
+    1.3 [Typographical Conventions](#how)
     
-    3. [Viewing of Statistics](#stats)
-        3.1 Viewing of Statistics by Time 
-        
-    4. [Glossary](#glossary)
+2. [Features](#features)
+    2.1 Types of Tasks(#types)
+        2.1.1 Adding of Tasks(#add)
+        2.1.2 Handling of Tasks(#handle)
+    2.2 Finding Tasks(#find)
+    2.3 Sorting Tasks(#sort)
+
+3. [Viewing of Statistics](#stats)
+    3.1 Viewing of Statistics by Time 
+    
+4. [Glossary](#glossary)
 
 
 ## **Introduction** <a name="UserGuide"></a>

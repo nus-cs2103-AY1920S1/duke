@@ -56,7 +56,6 @@ public class Duke extends Application {
         showResponse(Ui.showWelcome());
     }
 
-
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();

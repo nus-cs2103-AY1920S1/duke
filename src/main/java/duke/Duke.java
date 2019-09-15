@@ -31,7 +31,7 @@ public class Duke {
      * Constructor for Duke object.
      */
     public Duke() {
-        storage = new Storage("//Users//chowjiaying//Github//2103T-iP//duke//data//duke.txt");
+        storage = new Storage(System.getProperty("user.dir") + "//data//duke.txt");
         tasks = new TaskList(storage.load());
         ui = new Ui();
     }

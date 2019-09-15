@@ -1,20 +1,76 @@
 # User Guide
-
+## About Duke
+Duke is a personal task manager powered by keyboard inputs.
+![Duke's User Interface](Ui.png)
 ## Features 
-
-### Feature 1 
-Description of feature.
+- Add task
+- Mark task as done
+- Delete task
+- Sort tasks alphabetically
+- Add dates/time for events and deadlines
+- Save and load tasks whenever you open or exit the programme
 
 ## Usage
 
-### `Keyword` - Describe action
-
-Describe action and its outcome.
+### `todo` - adds a todo to list of tasks
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo homework`
 
 Expected outcome:
+![](Todo.png)
 
-`outcome`
+### `event` - adds an event to list of tasks
+
+Example of usage: 
+
+`event party /at 10/10/2019 2200`
+
+Expected outcome:
+![](Event.png)
+
+### `deadline` - adds a deadline to list of tasks
+
+Example of usage: 
+
+`deadline annotated bibliography /by 10/10/2019 2359`
+
+Expected outcome:
+![](Deadline.png)
+
+### `list` - displays the list of tasks
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+![](List.png)
+
+### `done` - marks a task as done
+
+Example of usage: 
+
+`done 1`
+
+Expected outcome:
+![](Done.png)
+
+### `delete` - displays the list of tasks
+
+Example of usage: 
+
+`delete 2`
+
+Expected outcome:
+![](Delete.png)
+
+### `sort` - sorts the list of tasks alphabetically
+
+Example of usage: 
+
+`sort`
+
+Expected outcome:
+![](Sort.png)

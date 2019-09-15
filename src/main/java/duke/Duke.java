@@ -35,8 +35,8 @@ public class Duke extends Application {
      */
     public Duke() {
         this.filePath = new File("").getAbsolutePath() + "/data/duke.txt";
-        ui = new Ui(null, userInput);
-        storage = new Storage(filePath, null);
+        ui = new Ui(userInput);
+        storage = new Storage(filePath);
         Parser.setFilePath(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -49,51 +49,19 @@ public class Duke extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Set up display window components
-        scrollPane = new ScrollPane();
-        scrollPane.setPrefSize(400, 560);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer = new VBox();
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        userInput.setPrefWidth(335.0);
-        userInput.setPrefHeight(35.0);
-
-        sendButton = new Button("Send");
-        sendButton.setPrefWidth(60.0);
-        sendButton.setPrefHeight(35.0);
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.setPrefSize(400.0, 600.0);
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
+        setupScrollPane();
+        setupDialogContainer();
+        setupInputTextField();
+        setupSendButton();
+        AnchorPane mainLayout = setupAnchorPaneLayout();
 
         // Create Stage
-        scene = new Scene(mainLayout);
-        primaryStage.setTitle("Duke");
-        primaryStage.setResizable(false);
-        primaryStage.setMinHeight(600.0);
-        primaryStage.setMinWidth(400.0);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        createStage(primaryStage, mainLayout);
 
         ui = new Ui(dialogContainer, userInput);
         storage = new Storage(filePath, dialogContainer);
         ui.showWelcome();
 
-        // Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -103,23 +71,69 @@ public class Duke extends Application {
         });
     }
 
+    private void setupScrollPane() {
+        scrollPane = new ScrollPane();
+        scrollPane.setPrefSize(400, 560);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+    }
+
+    private void setupDialogContainer() {
+        dialogContainer = new VBox();
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        scrollPane.setContent(dialogContainer);
+    }
+
+    private void setupInputTextField() {
+        userInput = new TextField();
+        userInput.setPrefWidth(335.0);
+        userInput.setPrefHeight(35.0);
+    }
+
+    private void setupSendButton() {
+        sendButton = new Button("Send");
+        sendButton.setPrefWidth(60.0);
+        sendButton.setPrefHeight(35.0);
+    }
+
+    private AnchorPane setupAnchorPaneLayout() {
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+        return mainLayout;
+    }
+
+    private void createStage(Stage primaryStage, AnchorPane mainLayout) {
+        scene = new Scene(mainLayout);
+        primaryStage.setTitle("Duke");
+        primaryStage.setResizable(false);
+        primaryStage.setMinHeight(600.0);
+        primaryStage.setMinWidth(400.0);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
     /**
      * Handles reading of input and input and producing of output.
      */
     private void handleUserInput() {
-        boolean isExit = false;
         try {
             String fullCommand = ui.readInput();
             ui.printUserInput();
             Command c = Parser.parse(fullCommand);
             c.execute(tasks, ui, storage);
-            isExit = c.isExit();
         } catch (DukeException de) {
             ui.printError(de.getMessage());
-        }
-        if (isExit) {
-            ui.printExitMessage();
-            ExitCommand.exit();
         }
     }
 }

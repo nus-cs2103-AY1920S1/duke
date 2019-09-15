@@ -14,14 +14,13 @@ public class ExitCommand extends Command {
         super(filePath, inputSplit);
     }
 
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-    }
-
     /**
      * Terminates the program.
      */
-    public static void exit() {
+    @Override
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.printExitMessage();
+
         // Thread.sleep() and Timeout.SECONDS.sleep() don't work as System shuts down without printing exit message.
         // Use ScheduledExecutorService to make System exit after a delay, after exit message is printed.
         ScheduledExecutorService exe = Executors.newSingleThreadScheduledExecutor();
@@ -30,10 +29,5 @@ public class ExitCommand extends Command {
         // schedule() takes Runnable, delay, unit
         exe.schedule(command, 2, TimeUnit.SECONDS);
         exe.shutdown();
-    }
-
-    @Override
-    public boolean isExit() {
-        return true;
     }
 }

@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 public class FindCommand extends Command {
     private String keyword;
 
-    public FindCommand(String filePath, String[] inputSplit, String keyword) {
-        super(filePath, inputSplit);
+    public FindCommand(String keyword) {
+        super();
         this.keyword = keyword;
     }
 

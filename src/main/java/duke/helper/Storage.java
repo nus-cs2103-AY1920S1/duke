@@ -26,11 +26,16 @@ public class Storage {
         this.dialogContainer = dialogContainer;
     }
 
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
     /**
      * Produces ArrayList of Tasks containing items listed in save file.
      *
      * @return ArrayList of Tasks from file.
      * @throws IOException If enclosing file directory or file itself does not exist.
+     * @throws NoSuchElementException If there is no description after type and isDone in save file.
      */
     public ArrayList<Task> load() throws IOException, NoSuchElementException {
         ArrayList<Task> tasks = new ArrayList<>();

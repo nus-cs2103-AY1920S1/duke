@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.helper.Storage;
 import duke.helper.Ui;
 import duke.task.TaskList;
@@ -22,9 +23,11 @@ public abstract class Command {
         this.inputSplit = inputSplit;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public Command() {}
 
-    public boolean isExit() {
-        return false;
+    public Command(String[] inputSplit) {
+        this.inputSplit = inputSplit;
     }
+
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }

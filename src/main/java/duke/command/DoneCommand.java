@@ -11,8 +11,8 @@ import duke.task.TaskList;
  */
 public class DoneCommand extends Command {
 
-    public DoneCommand(String filePath, String[] inputSplit) {
-        super(filePath, inputSplit);
+    public DoneCommand(String[] inputSplit) {
+        super(inputSplit);
     }
 
     /**
@@ -31,11 +31,7 @@ public class DoneCommand extends Command {
                 throw new DukeException(":( OOPS!!! Please specify number of a single task to mark as done.\n");
             }
             int specifiedDone = Integer.parseInt(inputSplit[1]); // throws NumberFormatException if not int
-            if (specifiedDone < 1 || specifiedDone > tasks.getSize()) {
-                // Exception if task number is beyond current number of tasks
-                throw new DukeException(":( OOPS!!! Please specify valid task number.\n");
-            }
-            Task doneTask = tasks.getElement(specifiedDone - 1);
+            Task doneTask = tasks.getElement(specifiedDone - 1); // throws IndexOutOfBoundsException if invalid
             doneTask.setDone();
             ui.printDoneNotification(doneTask.toString());
 
@@ -43,6 +39,8 @@ public class DoneCommand extends Command {
             storage.overwriteFile(tasks.toArrayList());
         } catch (NumberFormatException ne) {
             ui.printError(":( OOPS!!! Please specify task number as one integer only.\n");
+        } catch (IndexOutOfBoundsException ie) {
+            ui.printError(":( OOPS!!! Please specify valid task number.\n");
         }
     }
 }

@@ -33,6 +33,10 @@ public class Ui {
         this.userInput = userInput;
     }
 
+    public Ui(TextField userInput) {
+        this.userInput = userInput;
+    }
+
     /**
      * Displays welcome message.
      */

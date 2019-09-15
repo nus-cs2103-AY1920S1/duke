@@ -9,8 +9,8 @@ import duke.task.TaskList;
  */
 public class ListCommand extends Command {
 
-    public ListCommand(String filePath, String[] inputSplit) {
-        super(filePath, inputSplit);
+    public ListCommand() {
+        super();
     }
 
     @Override

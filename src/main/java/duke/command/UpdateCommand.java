@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * Updates an item in the list with new details.
  */
 public class UpdateCommand extends Command {
-    String userInput;
+    private String userInput;
 
     public UpdateCommand(String filePath, String userInput, String[] inputSplit) {
         super(filePath, inputSplit);
@@ -29,7 +29,6 @@ public class UpdateCommand extends Command {
      * @param tasks List of Tasks from which item is to be updated.
      * @param ui Ui class that handles printing to user interface.
      * @param storage Storage class that handles writing to save file on hard disk.
-     * @throws DukeException If command has invalid format for update.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
@@ -78,10 +77,5 @@ public class UpdateCommand extends Command {
                     + "-update field: Field \"desc\" for all tasks, or \"time\" for deadline and event only.\n\n"
                     + "-update value: Value to update field to.");
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return super.isExit();
     }
 }

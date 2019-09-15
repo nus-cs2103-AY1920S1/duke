@@ -67,9 +67,9 @@ public class Parser {
         String[] inputSplit = userInput.split(" ");
         switch (inputSplit[0]) {
         case "list":
-            return new ListCommand(filePath, null);
+            return new ListCommand();
         case "done":
-            return new DoneCommand(filePath, inputSplit);
+            return new DoneCommand(inputSplit);
         case "todo":
             return new AddCommand("todo", userInput, inputSplit, filePath);
         case "deadline":
@@ -79,9 +79,9 @@ public class Parser {
         case "clone":
             return new AddCommand("clone", userInput, inputSplit, filePath);
         case "delete":
-            return new DeleteCommand(filePath, inputSplit);
+            return new DeleteCommand(inputSplit);
         case "find":
-            return new FindCommand(filePath, null, userInput.replaceFirst("find ", ""));
+            return new FindCommand(userInput.replaceFirst("find ", ""));
         case "update":
             return new UpdateCommand(filePath, userInput, inputSplit);
         default:

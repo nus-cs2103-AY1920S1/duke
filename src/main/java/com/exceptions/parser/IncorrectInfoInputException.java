@@ -1,3 +1,7 @@
+package com.exceptions.parser;
+
+import com.exceptions.DukeException;
+
 /**
  * Thrown when incorrect usage of commands with subcommands
  * e.g. deadline with /by, event with /at

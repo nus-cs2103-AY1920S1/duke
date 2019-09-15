@@ -29,7 +29,7 @@ public class TaskList {
         try {
             return this.tasks.get(id - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! No such task exist!");
+            throw new DukeException("☹ OOPS!!! No such task exist !");
         }
     }
 

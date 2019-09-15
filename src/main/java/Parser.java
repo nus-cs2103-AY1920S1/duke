@@ -69,13 +69,13 @@ public class Parser {
             return new AddCommand(new Todo(command));
         } else if (command.startsWith(ADD_DEADLINE_COMMAND)) {
             if (!command.contains("/by ")) {
-                throw new DukeException("☹ OOPS!!! Please follow format e.g deadline return book /by Sunday");
+                throw new DukeException("☹ OOPS!!! Wrong format ! Please follow :\n deadline return book /by 15/09/19");
             } else {
                 return new AddCommand(new Deadline(formatTime(command)));
             }
         } else if (command.startsWith(ADD_EVENT_COMMAND)) {
             if (!command.contains("/at ")) {
-                throw new DukeException("☹ OOPS!!! Please follow format e.g event project meeting /at Mon 2-4pm");
+                throw new DukeException("☹ OOPS!!! Wrong format ! Please follow :\n event project meeting /at 15/09/19");
             } else {
                 return new AddCommand(new Event(formatTime(command)));
             }
@@ -91,14 +91,14 @@ public class Parser {
                 int id = Integer.parseInt(command.substring(5));
                 return new DoneCommand(id);
             } catch (NumberFormatException e) {
-                throw new DukeException("☹ OOPS!!! Invalid index provided!");
+                throw new DukeException("☹ OOPS!!! There is no such Task !");
             }
         } else if (command.startsWith(DELETE_COMMAND)) {
             try {
                 int id = Integer.parseInt(command.substring(7));
                 return new DeleteCommand(id);
             } catch  (NumberFormatException e) {
-                throw new DukeException("☹ OOPS!!! Invalid index provided!");
+                throw new DukeException("☹ OOPS!!! There is no such Task !");
             }
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -150,7 +150,7 @@ public class Parser {
             }
         }
         if (date == null) {
-            throw new DukeException("Time format not acceptable!");
+            throw new DukeException("Time format not acceptable! Please use dd/mm/yy format");
         } else {
             return fullCommand.toString();
         }

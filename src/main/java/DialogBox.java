@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -23,7 +24,7 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
     @FXML
@@ -38,14 +39,10 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        vbox.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
-        vbox.setBorder(new Border(new BorderStroke(Color.GRAY,
-                BorderStrokeStyle.SOLID,
-                null, new BorderWidths(3))));
-        String fontCssLayout = "-fx-text-fill: white; -fx-font-size: 14px;\n";
-        dialog.setStyle(fontCssLayout);
+        Circle clip = new Circle(20, 20, 20);
         dialog.setText(text);
         displayPicture.setImage(img);
+        displayPicture.setClip(clip);
     }
 
 

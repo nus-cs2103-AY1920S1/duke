@@ -4,6 +4,7 @@ import duke.TaskList;
 import duke.Ui;
 import java.io.IOException;
 
+
 public class Command {
 int type;
 String msg;

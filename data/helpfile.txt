@@ -1,4 +1,4 @@
-This is Duke's support of cli commands:
+This is duke.Duke's support of cli commands:
 
 list
 -Lists out all your tasks

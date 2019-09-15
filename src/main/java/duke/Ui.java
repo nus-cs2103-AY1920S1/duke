@@ -90,10 +90,10 @@ public class Ui {
     }
 
     /**
-     * String representation of greetings for Duke bot.
+     * String representation of greetings for duke.Duke bot.
      */
     public String greet() {
-        return ("Hello! I'm Duke\nWhat can I do for you?") + "\n";
+        return ("Hello! I'm duke.Duke\nWhat can I do for you?") + "\n";
     }
 
     /**

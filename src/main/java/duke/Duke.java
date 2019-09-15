@@ -1,3 +1,5 @@
+package duke;
+
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 
 
 /**
- * The Duke program implements an application that helps users to keep track of their tasks.
+ * The duke.Duke program implements an application that helps users to keep track of their tasks.
  *
  * @author hooncp
  */
@@ -48,7 +50,7 @@ public class Duke {
      * Returns the String representation of the output.
      *
      * @param input user input
-     * @return output from Duke
+     * @return output from duke.Duke
      */
     public String getResponse(String input) {
         String output = "";

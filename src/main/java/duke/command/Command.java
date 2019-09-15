@@ -41,7 +41,7 @@ public abstract class Command {
     public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      *
      * @return false
      */

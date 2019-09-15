@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Represents a command which shuts down Duke.
+ * Represents a command which shuts down duke.Duke.
  */
 
 public class ByeCommand extends Command {
@@ -32,7 +32,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Checks if Duke will end.
+     * Checks if duke.Duke will end.
      *
      * @return true
      */

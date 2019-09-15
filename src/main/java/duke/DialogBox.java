@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -53,20 +55,20 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a new DialogBox.
+     * Creates a new duke.DialogBox.
      * @param text String representation of user input
      * @param img Image of the user
-     * @return Instance of a DialogBox
+     * @return Instance of a duke.DialogBox
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
     /**
-     * Creates a new DialogBox.
+     * Creates a new duke.DialogBox.
      * @param text String representation of duke input
-     * @param img Image of the Duke
-     * @return Instance of a DialogBox
+     * @param img Image of the duke.Duke
+     * @return Instance of a duke.DialogBox
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);

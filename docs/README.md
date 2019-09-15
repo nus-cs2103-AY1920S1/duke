@@ -15,7 +15,7 @@ Duke is a Personal Assistant Chatbot that aids users in keeping track of various
 
 ## 2. Setting Up
 1. Ensure that you have Java `11` or above installed on your computer. 
-2. Download the latest `duke-0.2.jar` [here.]()
+2. Download the latest `duke-0.2.jar` [here.](https://github.com/bruceskellator/duke/releases/tag/A-Release)
 3. Copy the file to a folder. This will be the home folder for Duke.
 4. Create a folder named `data` in the home folder. Then, create a text file in `data` named `tasks.txt`. 
 Your tasks will be stored and loaded from there.

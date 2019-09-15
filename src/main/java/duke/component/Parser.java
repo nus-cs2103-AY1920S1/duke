@@ -26,7 +26,7 @@ public class Parser {
      * @throws DukeException If command enter is not valid.
      */
     public static Command parse(String line) throws DukeException {
-        assert (!line.isEmpty()) : "Input cannot be empty";
+        assert (!line.isEmpty()) : "Input are not allow to be empty";
         String command = "";
         String rest = "";
 

@@ -1,5 +1,6 @@
 # **Duke ChatBot User Guide** 
 
+<br>
 
 ## **Table of Contents**
 
@@ -15,6 +16,7 @@
     2.4 [Handling of Tasks](#handle)  
     2.5 [Finding Tasks](#find)  
     2.6 [Sorting Tasks](#sort)  
+    2.7 [Mass Operation of Tasks](#massOp)
 
 3. [Viewing of Statistics](#stats)  
     3.1 [Viewing of Statistics by Time](#time)  
@@ -160,7 +162,7 @@ To `find` tasks using a keyword: `find` [_keyword_]
 
 ### **Sorting of Tasks** <a name="sort"></a>
 
-To `sort` tasks according to the dates and times in a chronological order: `sort` 
+To `sort` tasks according to the dates and time in a chronological order: `sort` 
 
     Example of usage: sort
     Expected Outcome: Here are the tasks in your list:
@@ -168,22 +170,26 @@ To `sort` tasks according to the dates and times in a chronological order: `sort
                       2.[D][✗] music project (by: 6/4/2023 01.23AM)
 
 
-:exclamation: If the list contains `deadline` or `event` task, it will take priority over a `todo` task as it is assumed that a `todo` task is of lower priority.  
-:exclamation: If two `deadline` or `event` tasks have the same timestamp, the tasks would be sorted according to their descriptions in a alphabetical order. The rule also applies for `todo` task.  
+:exclamation: If the list contains a `deadline` or `event` task, it will take priority over a `todo` task as it is assumed that a `todo` task is of lower priority.  
+:exclamation: If two `deadline` or `event` tasks have the same timestamp, the tasks would be sorted according to their descriptions in a alphabetical order. The same rule also applies for `todo` task.  
 
 
 
 <br>
 
+### **Mass Operation of Tasks** <a name="massOp"></a>
 
-:exclamation: To execute the same command to multiple tasks at once, add `, ` between the indexes of the tasks.
+To execute the same command to multiple tasks at once, add `, ` between the indexes of the tasks.
 
-Example of usage: delete 1
-Expected Outcome: Noted. I've removed this task:
-[T][✓] music homework
-Now you have 2 tasks in the list.
+    Example of usage: delete 1, 2
+    Expected Outcome: Noted. I've removed these task:
+                      [T][✓] music homework
+                      [D][✗] music project (by: 6/4/2023 01.23AM)
+                      Now you have 1 task in the list.
 
+:exclamation: This only applies to `done`, `delete`, `find` commands.
 
+<br> 
 
 ## **Viewing of Statistics** <a name="stats"></a>
 

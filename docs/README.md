@@ -197,14 +197,14 @@ To execute the same command to multiple tasks at once, add `, ` between the inde
 To view an overview of the tasks done over time, there are two ways:
 
 1. Click on the **Show Statistics** button on the top of the application as shown below.
-<img src="https://github.com/EvonDong/duke/blob/master/docs/showStats1.png" width="480">
+<img src="https://github.com/EvonDong/duke/blob/master/docs/showStats1.png" width="350">
 
 <br>
 
 2. Key in `show stats` in the command line: `show stats`
 
 This is an example of an expected chart:  
-    <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="480">
+    <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="350">
 
 <br>
 <br>
@@ -220,22 +220,3 @@ Timestamp | A sequence of characters or encoded information identifying when a c
 
 
 
-
-
-
-### Feature 1 
-Description of feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`

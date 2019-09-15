@@ -110,6 +110,6 @@ Finds task with description `help guild register for the boss event`
 Format: `find [keywords delimited by a single space]`
 
 ## 3.7 Exiting the program
-Closes the program.
+Displays the exit message and closes the program.
 
 Format: `bye`

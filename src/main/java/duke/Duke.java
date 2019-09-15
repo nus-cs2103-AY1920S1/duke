@@ -6,7 +6,6 @@ import duke.task.Task;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -145,32 +144,17 @@ public class Duke extends Application { // handles all input and output
 
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
 //    /**
-//     * Iteration 2:
-//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-//     * the dialog container. Clears the user input after processing.
+//     * Iteration 1:
+//     * Creates a label with the specified text and adds it to the dialog container.
+//     * @param text String containing text to add
+//     * @return a label with the specified text that has word wrap enabled.
 //     */
-//    private void handleUserInput() {
-//        Label userText = new Label(userInput.getText());
-//        Label dukeText = new Label(getResponse(userInput.getText()));
-//        dialogContainer.getChildren().addAll(
-//                DialogBox.getUserDialog(userText, new ImageView(user)),
-//                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-//        );
-//        userInput.clear();
+//    private Label getDialogLabel(String text) {
+//        Label textToAdd = new Label(text);
+//        textToAdd.setWrapText(true);
+//
+//        return textToAdd;
 //    }
 
     /**
@@ -180,6 +164,4 @@ public class Duke extends Application { // handles all input and output
     String getResponse(String input) {
         return "Duke heard: " + input;
     }
-
-
 }

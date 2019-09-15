@@ -112,7 +112,7 @@ To `list` all task recorded: `list`
 ### Handling of Tasks <a name="handle"></a>
 This section contains the commands to be keyed in to handle tasks.
 
-To execute the following commands, 'list` out the list of tasks as shown in the [previous section](#list) and note the index of the task to operate on.
+To execute the following commands, `list` out the list of tasks as shown in the [previous section](#list) and note the index of the task to operate on.
 
 1. **Done Command**
 
@@ -173,7 +173,7 @@ To `sort` tasks according to the dates and times in a increasing order: `sort`
 
 To view an overview of the tasks done over time, there are two ways:
 
-1. Click on the **Show Statistics** button on the top of the application as shown in ![Fig 2](/docs/showStats) below.
+1. Click on the **Show Statistics** button on the top of the application as shown in ![Fig 2](/docs/showStats.png) below.
 
 2. Key in `show stats` in the command line: `show stats`
 

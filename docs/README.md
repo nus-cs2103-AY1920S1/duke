@@ -65,7 +65,7 @@ This section contains the commands to be keyed in to add different type of task.
 
 #### **Todo Task**
 
-To key in a `todo` task: `todo` [description of task]
+To key in a `todo` task: `todo` [_description of task_]
     
     Example of usage: todo music homework
     Expected Outcome: Got it. Ive added this task:
@@ -75,7 +75,7 @@ To key in a `todo` task: `todo` [description of task]
 
 #### **Deadline Task**
 
-To key in a `deadline` task: `deadline` [description of task] /by [date in the format of dd/MM/yyyy] [time in the format of HHmm]
+To key in a `deadline` task: `deadline` [_description of task_] /by [_dd/MM/yyyy_] [_HHmm_]
     
     Example of usage: deadline music project /by 6/4/2023 0123
     Expected Outcome: Got it. Ive added this task:
@@ -86,7 +86,7 @@ To key in a `deadline` task: `deadline` [description of task] /by [date in the f
 
 #### **Event Task**
 
-To key in a `event` task: `event` [description of task] /at [date in the format of dd/MM/yyyy] [time in the format of HHmm]
+To key in a `event` task: `event` [_description of task_] /at [_dd/MM/yyyy_] [_HHmm_]
     
     Example of usage: event music festival /at 6/4/2022 0123
     Expected Outcome: Got it. Ive added this task:
@@ -97,7 +97,7 @@ To key in a `event` task: `event` [description of task] /at [date in the format 
 :exclamation: `/at` must be included in the command.
     
     
-:exclamation: Both Deadline and Todo task must include a valid timestamp in [dd/MM/yyyy] [HHmm] format. 
+:exclamation: Both Deadline and Todo task must include a valid timestamp in [_dd/MM/yyyy_] [_HHmm_] format. 
 
 
 ### **Listing Tasks** <a name="list"></a>

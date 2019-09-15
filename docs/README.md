@@ -99,7 +99,7 @@ Got it. I've added this task:
 Now you have 4 tasks in the list.
 ```
 
-![deadline](https://raw.github.com/Kyzure/duke/master/docs/deadline.png)
+![deadline](https://raw.github.com/Kyzure/duke/master/docs/deadline.PNG)
 
 ### `event` - Displays list of Tasks
 

@@ -22,7 +22,7 @@
          </effect></TextField>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="666.0" prefWidth="496.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="640.0" prefWidth="493.0">
+                <VBox fx:id="dialogContainer" prefHeight="663.0" prefWidth="493.0">
                <children>
                   <ToolBar prefHeight="40.0" prefWidth="200.0">
                     <items>

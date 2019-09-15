@@ -166,7 +166,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your lsit:
+`Here are the matching tasks in your list:
 1. [T][:heavy_check_mark:] read book#fun
 2. [D][X] return book Tue Jun 06 06:06:00 SGT 2006`
 

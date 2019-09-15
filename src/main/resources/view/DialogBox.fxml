@@ -10,7 +10,7 @@
    <children>
       <Label fx:id="dialog" minHeight="-Infinity" stylesheets="@stylesheet.css" text="YOYOYO" wrapText="true">
          <font>
-            <Font name="Consolas" size="15.0" />
+            <Font name="Consolas" size="17.0" />
          </font>
          <opaqueInsets>
             <Insets />

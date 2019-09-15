@@ -81,8 +81,9 @@ public class Storage {
      * Parse the Text from the File to the Deadline Task objects and add it to the list of Task.
      * @param taskText the Line from the text to be parsed into Task object.
      * @param list The list to which the resulting parsed text wish to be added.
+     * @throws ParseException if format of the text does not fit the expected format.
      */
-    public void parseTextToTaskDeadline(String taskText, ArrayList<Task> list) {
+    public void parseTextToTaskDeadline(String taskText, ArrayList<Task> list) throws ParseException {
         String descriptionAndTime = taskText.substring(8);
         int index = descriptionAndTime.indexOf('|');
         String description = descriptionAndTime.substring(0, index - 1);
@@ -111,8 +112,9 @@ public class Storage {
      * Parse the Text from the File to the Event Task objects and add it to the list of Task.
      * @param taskText the Line from the text to be parsed into Task object.
      * @param list The list to which the resulting parsed text wish to be added.
+     * @throws ParseException if format of the text does not fit the expected format.
      */
-    public void parseTextToTaskEvent(String taskText, ArrayList<Task> list) {
+    public void parseTextToTaskEvent(String taskText, ArrayList<Task> list) throws ParseException {
         String descriptionAndTime = taskText.substring(8);
         int index = descriptionAndTime.indexOf('|');
         String description = descriptionAndTime.substring(0, index - 1);

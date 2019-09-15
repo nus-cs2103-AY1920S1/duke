@@ -21,6 +21,8 @@
     
 4. [Glossary](#glossary)  
 
+<br>
+<br>
 
 ## **Introduction** <a name="UserGuide"></a>
 
@@ -32,11 +34,13 @@ Duke ChatBot is a task managing chat bot which allows users to input the tasks t
 This is what Duke ChatBot looks like:  
 <img src="https://github.com/EvonDong/duke/blob/master/docs/Ui.png" width="480">
 
+<br>
 
 ### **Who Should Use It** <a name="who"></a>
 
 This application aims to be beginner friendly and is intended for users who wants to keep track of the list of tasks to do and enhance their productivity.
 
+<br>
 
 ### **Typographical Conventions** <a name="how"></a>
 
@@ -46,6 +50,8 @@ This document uses the following typographical conventions:
 
 :exclamation:  | An exclamation sign indicates important information.
 
+<br>
+<br>
 
 ## **Features** <a name="features"></a>
 
@@ -59,6 +65,7 @@ This application stores 3 different types of tasks:
     
 `event`               An Event task represents an event to attend at a certain date and time.
 
+<br>
 
 ### **Adding of Tasks** <a name="add"></a>
 This section contains the commands to be keyed in to add different type of task.
@@ -99,6 +106,7 @@ To key in an `event` task: `event` [_description of task_] /at [_dd/MM/yyyy_] [_
     
 :exclamation: Both Deadline and Todo task must include a valid timestamp in [_dd/MM/yyyy_] [_HHmm_] format. 
 
+<br>
 
 ### **Listing Tasks** <a name="list"></a>
 
@@ -110,6 +118,7 @@ To `list` all tasks recorded: `list`
                       2.[D][✗] music project (by: 6/4/2023 01.23AM)
                       3.[E][✗] music festival (at: 6/4/2022 01.23AM)
 
+<br>
 
 ### **Handling of Tasks** <a name="handle"></a>
 This section contains the commands to be keyed in to handle tasks.
@@ -133,6 +142,7 @@ To `delete` the task: `delete` [_index of the task in the list_]
                       [T][✓] music homework
                       Now you have 2 tasks in the list.
 
+<br>
 
 ### **Finding of Tasks** <a name="find"></a>
 
@@ -163,6 +173,7 @@ To `sort` tasks according to the dates and times in a chronological order: `sort
 
 
 
+<br>
 
 
 :exclamation: To execute the same command to multiple tasks at once, add `, ` between the indexes of the tasks.
@@ -187,6 +198,7 @@ To view an overview of the tasks done over time, there are two ways:
 This is an example of an expected chart:  
     <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="480">
 
+<br>
 
 ## **Glossary** <a name="glossary"></a>
 

@@ -69,7 +69,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-![todo](https://raw.github.com/Kyzure/duke/master/docs/todo.png")
+![todo](https://raw.github.com/Kyzure/duke/master/docs/todo.png)
 
 ### `deadline` - Displays list of Tasks
 
@@ -128,7 +128,7 @@ Got it. I've added this task:
   [E][X] Attend Secret Society Meeting (at: 01:01)
 Now you have 7 tasks in the list.
 ```
-![event](https://raw.github.com/Kyzure/duke/master/docs/event.png)
+![event](https://raw.github.com/Kyzure/duke/master/docs/event.PNG)
 
 ### `list` - Display list of Tasks
 

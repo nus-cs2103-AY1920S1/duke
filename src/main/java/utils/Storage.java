@@ -15,9 +15,8 @@ public class Storage {
     private File file;
     private String fileLocation;
     public Storage(String fileloc){
-        String newFileLoc = "./" + fileloc;
-        this.fileLocation = newFileLoc;
-        this.file = new File(newFileLoc);
+        this.fileLocation = fileloc;
+        this.file = new File(fileloc);
     }
 
     //reading from saved state

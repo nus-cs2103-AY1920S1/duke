@@ -35,6 +35,6 @@ public class Duke {
     }
     
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke("/Users/estherngo/Documents/elsa/2103/duke/src/main/java/data/duke.txt").run();
     }
 }

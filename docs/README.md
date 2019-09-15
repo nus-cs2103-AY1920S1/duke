@@ -25,7 +25,7 @@
 ## **Introduction** <a name="UserGuide"></a>
 
 
-### What is Duke ChatBot <a name="what"></a>
+### **What is Duke ChatBot** <a name="what"></a>
 
 Duke ChatBot is a task managing chat bot which allows users to input the tasks to do and organise them. It tracks tasks that are marked as done over a period of time and displays relevant statistics.
 
@@ -33,12 +33,12 @@ This is what Duke ChatBot looks like:
 <img src="https://github.com/EvonDong/duke/blob/master/docs/Ui.png" width="480">
 
 
-### Who Should Use It <a name="who"></a>
+### **Who Should Use It** <a name="who"></a>
 
 This application aims to be beginner friendly and is intended for users who wants to keep track of the list of tasks to do and enhance their productivity.
 
 
-### Typographical Conventions <a name="how"></a>
+### **Typographical Conventions** <a name="how"></a>
 
 This document uses the following typographical conventions:
 
@@ -50,7 +50,7 @@ This document uses the following typographical conventions:
 ## **Features** <a name="features"></a>
 
 
-### Types of Tasks <a name="types"></a>
+### **Types of Tasks** <a name="types"></a>
 This application stores 3 different types of tasks:
 
 `todo`                  A Todo task represents a task to be done without any time limit.
@@ -60,10 +60,10 @@ This application stores 3 different types of tasks:
 `event`               An Event task represents an event to attend at a certain date and time.
 
 
-### Adding of Tasks <a name="add"></a>
+### **Adding of Tasks** <a name="add"></a>
 This section contains the commands to be keyed in to add different type of task.
 
-#### Todo Task
+#### **Todo Task**
 
 To key in a `todo` task: `todo` [description of task]
     
@@ -73,7 +73,7 @@ To key in a `todo` task: `todo` [description of task]
                       Now you have 1 task in the list.
                        
 
-#### Deadline Task
+#### **Deadline Task**
 
 To key in a `deadline` task: `deadline` [description of task] /by [date in the format of dd/MM/yyyy] [time in the format of HHmm]
     
@@ -84,7 +84,7 @@ To key in a `deadline` task: `deadline` [description of task] /by [date in the f
     
 :exclamation: /`by` must be included in the command.
 
-#### Event Task
+#### **Event Task**
 
 To key in a `event` task: `event` [description of task] /at [date in the format of dd/MM/yyyy] [time in the format of HHmm]
     
@@ -100,7 +100,7 @@ To key in a `event` task: `event` [description of task] /at [date in the format 
 :exclamation: Both Deadline and Todo task must include a valid timestamp in [dd/MM/yyyy] [HHmm] format. 
 
 
-### Listing Tasks <a name="list"></a>
+### **Listing Tasks** <a name="list"></a>
 
 To `list` all task recorded: `list`
 
@@ -111,7 +111,7 @@ To `list` all task recorded: `list`
                       3.[E][✗] music festival (at: 6/4/2022 01.23AM)
 
 
-### Handling of Tasks <a name="handle"></a>
+### **Handling of Tasks** <a name="handle"></a>
 This section contains the commands to be keyed in to handle tasks.
 
 To execute the following commands, `list` out the list of tasks as shown in the [previous section](#list) and note the index of the task to operate on.
@@ -145,7 +145,7 @@ To `delete` the task: `delete` [index of the task in the list]
                     Now you have 2 tasks in the list.
 
 
-### Finding of Tasks <a name="find"></a>
+### **Finding of Tasks** <a name="find"></a>
 
 To `find` tasks using a keyword: `find` [keyword]
 
@@ -158,7 +158,7 @@ To `find` tasks using a keyword: `find` [keyword]
 :exclamation: The keyword must only consists of one word.
 
 
-### Sorting of Tasks <a name="sort"></a>
+### **Sorting of Tasks** <a name="sort"></a>
 
 To `sort` tasks according to the dates and times in a chronological order: `sort` 
 

@@ -1,11 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.support.InputChecker;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,11 +7,15 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
+
 /**
  * A generator which can generate Command objects based on the given user's input.
  */
 public class CommandGenerator {
-    private InputChecker inputChecker = new InputChecker();
 
     /**
      * Returns an AddCommand which adds a To Do object to Duke's tasksList.
@@ -30,7 +28,9 @@ public class CommandGenerator {
     public AddCommand getAddCommandForToDo(String input) throws DukeException {
         String topic = input.substring(4).trim();
 
-        if (!inputChecker.isValidToDo(topic)) {
+        boolean isInvalidInput = "".equals(topic);
+
+        if (isInvalidInput) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
@@ -49,7 +49,9 @@ public class CommandGenerator {
     public AddCommand getAddCommandForDeadline(String input) throws DukeException {
         String[] details = input.substring(8).trim().split("/by");
 
-        if (!inputChecker.isValidDeadline(details)) {
+        boolean isInvalidInput = isInSufficientDetails(details);
+
+        if (isInvalidInput) {
             throw new DukeException("The description and deadline of a deadline cannot be empty.");
         }
 
@@ -68,7 +70,9 @@ public class CommandGenerator {
     public AddCommand getAddCommandForEvent(String input) throws DukeException {
         String[] details = input.substring(5).trim().split("/at");
 
-        if (!inputChecker.isValidEvent(details)) {
+        boolean isInvalidInput = isInSufficientDetails(details);
+
+        if (isInvalidInput) {
             throw new DukeException("The description and date of an event cannot be empty.");
         }
 
@@ -245,5 +249,18 @@ public class CommandGenerator {
         }
 
         return datesFormatted;
+    }
+
+    /**
+     * Returns true if the given details of a Deadline or Event task is not sufficient.
+     *
+     * @param details details of a Deadline or Event task.
+     * @return true if the given details of a Deadline or Event task is not sufficient.
+     */
+    private boolean isInSufficientDetails(String[] details) {
+        boolean isEmptyTopic = details.length == 0 || "".equals(details[0].trim());
+        boolean isEmptyDate = details.length <= 1 || "".equals(details[1].trim());
+
+        return isEmptyTopic || isEmptyDate;
     }
 }

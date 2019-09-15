@@ -55,4 +55,8 @@ public class TaskList {
         this.tasks.add(t);
     }
 
+    public void replaceTask(int idxToReplace, Task newTaskToReplace) {
+        tasks.set(idxToReplace, newTaskToReplace);
+    }
+
 }

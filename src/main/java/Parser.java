@@ -36,6 +36,10 @@ public class Parser {
                 int idxToBeRemoved = Integer.parseInt(cmdList[1]) - 1;
                 return new DeleteCommand(idxToBeRemoved);
 
+            case "update":
+                int idxToUpdate = Integer.parseInt(cmdList[1]) - 1;
+                return new UpdateCommand(idxToUpdate, command.substring(9).trim());
+
             default:  //it will be an AddCommand or an invalid command
                 Task taskToBeAdded = handleNewTask(keyword, command);
                 return new AddCommand(taskToBeAdded);
@@ -56,7 +60,7 @@ public class Parser {
      * @return the Task object based on keyword.
      * @throws DukeIllegalArgumentException if user input does not match any Task keywords.
      */
-    private static Task handleNewTask(String keyword, String cmd) throws DukeIllegalArgumentException {
+    public static Task handleNewTask(String keyword, String cmd) throws DukeIllegalArgumentException {
 
         switch (keyword.toLowerCase()) {
         case "deadline":

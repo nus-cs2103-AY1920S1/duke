@@ -54,6 +54,7 @@ public class Ui {
 
     /**
      * Prints out the list of Tasks in ArrayList tasks.
+     *
      * @param tasks the ArrayList of tasks Duke is currently storing for user.
      */
     public void printList(ArrayList<Task> tasks) {
@@ -67,6 +68,7 @@ public class Ui {
 
     /**
      * Prints the Task that is done by the user.
+     *
      * @param taskToMarkAsDone the Task that had been done by user.
      */
     public void printDone(Task taskToMarkAsDone) {
@@ -78,6 +80,7 @@ public class Ui {
 
     /**
      * Prints the Task that is deleted by the user as well as the number of tasks currently.
+     *
      * @param taskToBeRemoved the Task that is to be deleted.
      * @param numberOfTasks the remaining number of Tasks in the ArrayList tasks.
      */
@@ -91,6 +94,7 @@ public class Ui {
 
     /**
      * Prints the Task that has been added to ArrayList tasks as well as the number of tasks currently.
+     *
      * @param newTaskToBeAdded the Task to be added to ArrayList tasks.
      * @param numberOfTasks the updated number of Tasks in the ArrayList tasks.
      */
@@ -104,6 +108,7 @@ public class Ui {
 
     /**
      * Reads the user input command.
+     *
      * @return the user input command
      */
     public String readCommand() {
@@ -113,6 +118,7 @@ public class Ui {
 
     /**
      * Prints the error message from the exception.
+     *
      * @param e the exception that is thrown from lower level methods to Duke.
      */
     public void printError(Exception e) {
@@ -121,6 +127,7 @@ public class Ui {
 
     /**
      * Prints the Tasks that match the user input keyword.
+     *
      * @param matchingTasks the ArrayList of matching Tasks.
      */
     public void printMatches(ArrayList<Task> matchingTasks) {
@@ -130,4 +137,19 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the Task that has been updated based on user input command.
+     *
+     * @param t the updated Task object base don user input command.
+     * @param tasks the TaskList currently stored in Duke.
+     */
+    public void printUpdatedTask(Task t, ArrayList<Task> tasks) {
+        StringBuilder sb = new StringBuilder("Got it. I've updated this task\n  " + t + "\n");
+        sb.append("Here are the tasks in your list:\n");
+        for (int i = 1; i <= tasks.size(); i++) {
+            sb.append(i + "." + tasks.get(i - 1) + "\n");
+        }
+
+        printInGui(sb.toString());
+    }
 }

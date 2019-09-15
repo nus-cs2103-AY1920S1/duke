@@ -53,6 +53,7 @@ public class Parser {
     }
 
     private static Command processEvent(String fullCommand, String action) throws DukeException {
+        assert fullCommand.length() > 6 : "incomplete command";
         String[] eventComponents = fullCommand.substring(6).split(" /at ");
         String eventDescription = eventComponents[0];
         String eventTime = eventComponents[1];
@@ -60,6 +61,7 @@ public class Parser {
     }
 
     private static Command processDeadline(String fullCommand, String action) throws DukeException {
+        assert fullCommand.length() > 9 : "incomplete command";
         String[] deadlineComponents = fullCommand.substring(9).split(" /by ");
         String deadlineDescription = deadlineComponents[0];
         String deadlineTime = deadlineComponents[1];
@@ -67,6 +69,7 @@ public class Parser {
     }
 
     private static Command processTodo(String fullCommand) {
+        assert fullCommand.length() > 5 : "incomplete command";
         String todoDescription = fullCommand.substring(5);
         return new AddCommand(todoDescription);
     }

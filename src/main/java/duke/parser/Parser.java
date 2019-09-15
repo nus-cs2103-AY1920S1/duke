@@ -28,10 +28,10 @@ import java.util.Date;
  */
 public class Parser {
     private static final String emptyToDoErrorMessage = "____________________________________________________________\n"
-            + "☹ OOPS!!! The description of a todo cannot be empty.\n"
+            + "\u2639 OOPS!!! The description of a todo cannot be empty.\n"
             + "____________________________________________________________";
     private static final String emptyNoteErrorMessage = "____________________________________________________________\n"
-            + "☹ OOPS!!! The description of a Note cannot be empty.\n"
+            + "\u2639 OOPS!!! The description of a Note cannot be empty.\n"
             + "____________________________________________________________";
 
     /**
@@ -113,7 +113,7 @@ public class Parser {
         Task t;
         SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss");
         char taskType = fullTask.charAt(3);
-        boolean done = (fullTask.charAt(6) + "").equals("✓");
+        boolean done = (fullTask.charAt(6) + "").equals("\u2713");
         String task;
         String dateString;
         Date date;

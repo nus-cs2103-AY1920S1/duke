@@ -2,13 +2,13 @@
 1. [Introduction](#1-introduction)
 2. [Setting Up](#2-setting-up)
 3. [Features](#3-features)
-    3.1. [Viewing list of commands](#31-viewing-list-of-commands) : `help`
-    3.2. [Adding a new task](#32-adding-a-new-task) : `todo`, `event`, and `deadline`
-    3.3. [Listing all tasks](#33-listing-all-tasks) : `list`
-    3.4. [Marking a task as done](#34-marking-a-task-as-done) : `done`
-    3.5. [Deleting a task](#35-deleting-a-task) : `delete`
-    3.6. [Searching for a task by keyword(s)](#36-finding-a-task) : `find`
-    3.7. [Exiting the program](#37-exiting-the-program) : `bye`
+   3.1. [Viewing list of commands](#31-viewing-list-of-commands) : `help`
+   3.2. [Adding a new task](#32-adding-a-new-task) : `todo`, `event`, and `deadline`
+   3.3. [Listing all tasks](#33-listing-all-tasks) : `list`
+   3.4. [Marking a task as done](#34-marking-a-task-as-done) : `done`
+   3.5. [Deleting a task](#35-deleting-a-task) : `delete`
+   3.6. [Searching for a task by keyword(s)](#36-finding-a-task) : `find`
+   3.7. [Exiting the program](#37-exiting-the-program) : `bye`
 
 ## 1. Introduction
 Duke is a Personal Assistant Chatbot that aids users in keeping track of various tasks.
@@ -21,7 +21,7 @@ Duke is a Personal Assistant Chatbot that aids users in keeping track of various
 Your tasks will be stored and loaded from there.
 5. Double-click on the `duke-0.2.jar` to start the app. The GUI should appear in a few seconds.
 
-![Screenshot of Duke GUI](https://github.com/bruceskellator/duke/blob/master/docs/Ui.png)
+![Screenshot of Duke GUI](https://github.com/bruceskellator/duke/blob/master/docs/Ui.png?raw=true)
 
 6. Once the app has started, key in a valid command and hit `enter`.
 Alternatively, you can click the `send` button to execute it.

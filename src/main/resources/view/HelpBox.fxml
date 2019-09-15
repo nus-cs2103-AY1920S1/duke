@@ -11,7 +11,7 @@
          <HBox.margin>
             <Insets left="5.0" right="5.0" top="5.0" />
          </HBox.margin></ImageView>
-      <Label fx:id="help" style="-fx-background-color: darkSlateGrey;" text="Label" textFill="WHITE" wrapText="true">
+      <Label fx:id="help" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: darkSlateGrey;" text="Label" textFill="WHITE" wrapText="true">
          <HBox.margin>
             <Insets top="5.0" />
          </HBox.margin>

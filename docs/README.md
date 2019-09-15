@@ -10,7 +10,7 @@
 
 Example of usage: 
 
-`todo <description>` \n
+`todo <description>`<br />
 `todo read book`
 
 Expected outcome:
@@ -26,7 +26,7 @@ ____________________________________________________________
 
 Example of usage: 
 
-`deadline <description> /by DD/MM/YYYY HHmm` \n
+`deadline <description> /by DD/MM/YYYY HHmm` <br />
 `deadline do homework /by 2/12/2019 1800`
 
 Expected outcome:
@@ -43,7 +43,7 @@ ____________________________________________________________
 
 Example of usage: 
 
-`event <description> /at DD/MM/YYYY HHmm` \n
+`event <description> /at DD/MM/YYYY HHmm` <br />
 `event project meeting /at 15/12/2019 1800`
 
 Expected outcome:
@@ -75,7 +75,7 @@ ____________________________________________________________
 
 Example of usage: 
 
-`done <index>`\n
+`done <index>` <br />
 `done 2`
 
 Expected outcome:
@@ -90,7 +90,7 @@ ____________________________________________________________
 
 Example of usage: 
 
-`done <index>`\n
+`done <index>` <br />
 `delete 3`
 
 Expected outcome:
@@ -108,7 +108,7 @@ ____________________________________________________________
 
 Example of usage: 
 
-`find <description>`\n
+`find <description>`<br />
 `find book`
 
 Expected outcome:

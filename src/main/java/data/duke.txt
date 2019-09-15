@@ -1,3 +1,3 @@
-E | true |  | 13-02-2019 06:34
-D | false |  | 12-11-2322 12:12
-T | false | dasfdasdsfasd
+D | false | homework due | 01-01-2019 15:34
+D | false | asdfasdf | 13-01-2019 12:12
+T | false | groceries

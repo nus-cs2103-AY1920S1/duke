@@ -12,6 +12,6 @@ public class Todo extends Task {
     }
     @Override
     public String getStorageString(){
-        return "T | " + super.isDone + " | " + taskName;
+        return "T | " + super.isDone + " | " + this.taskName;
     }
 }

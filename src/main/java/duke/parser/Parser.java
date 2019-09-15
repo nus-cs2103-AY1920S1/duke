@@ -210,7 +210,7 @@ public class Parser {
                 case "find": {
                     try {
                         findCheck(task);
-                        return new FindTaskCommand(command.substring(5).trim());
+                        return new FindTaskCommand(command.substring(5).trim().toLowerCase());
                     } catch (DukeException e) {
                         throw new DukeException(e.getMessage());
                     }

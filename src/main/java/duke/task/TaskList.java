@@ -87,7 +87,7 @@ public class TaskList {
         int numberOfTask = this.tasks.size();
         for (int i = 0; i < numberOfTask; i++) {
             Task task = this.tasks.get(i);
-            if (task.getDescription().contains(word)) {
+            if (task.getDescription().toLowerCase().contains(word)) {
                 tasksWithWord.add(task);
             }
         }

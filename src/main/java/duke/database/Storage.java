@@ -122,7 +122,7 @@ public class Storage {
 
         case "D":
             task = new Deadline(data[2].trim(), data[3].trim());
-
+            task.setTime(data[3].trim());
             try {
                 if (Integer.parseInt(data[1].trim()) == 1) {
                     task.markAsDone();
@@ -136,7 +136,7 @@ public class Storage {
 
         case "E":
             task = new Event(data[2].trim(), data[3].trim());
-
+            task.setTime(data[3].trim());
             try {
                 if (Integer.parseInt(data[1].trim()) == 1) {
                     task.markAsDone();
@@ -181,7 +181,7 @@ public class Storage {
                 save.append(type);
                 save.append(" | ");
 
-                if (temp.substring(1, 2).trim().equals("✓")) {
+                if (temp.substring(1, 2).trim().equals("\u2713")) {
                     save.append("1");
                 } else {
                     save.append("0");

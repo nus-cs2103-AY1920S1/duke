@@ -13,6 +13,8 @@ public class Task {
     /** The status of the task. */
     protected boolean isDone;
 
+    protected String time;
+
     /**
      * Constructor of Task class.
      * @param description of Task
@@ -20,6 +22,8 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.time = null;
+
     }
 
     /**
@@ -43,6 +47,14 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     /**

@@ -4,6 +4,7 @@ import duke.date.DateFormatter;
 import duke.exception.DukeException;
 import duke.component.TaskList;
 import duke.database.Storage;
+import duke.function.CheckDuplicate;
 import duke.task.Event;
 
 /**
@@ -64,7 +65,17 @@ public class EventCommand extends Command {
         String timeline = result[1].trim();
 
         DateFormatter formattedDate = new DateFormatter(timeline);
-        tasks.getTask().add(new Event(achieve, formattedDate.getTime()));
+
+        Event event = new Event(achieve, formattedDate.getTime());
+
+        CheckDuplicate check = new CheckDuplicate(event, tasks);
+
+        if (check.addEvent()) {
+            event.setTime(formattedDate.getTime());
+            tasks.getTask().add(event);
+        } else {
+            throw new DukeException("OOPS !!! " + "Duplicate Task Detected.");
+        }
 
         reply.append("Got it. I've added this task: ");
         reply.append("\n");

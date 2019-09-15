@@ -133,6 +133,7 @@ public class Storage {
 
         // Creates a scanner object to read the txt file from filePath.
         Scanner scanner = new Scanner(new File(getFilePath()));
+        scanner.nextLine(); // To avoid reading the first line of headers.
 
         while (scanner.hasNextLine()) {
             inputsFromFile.add(scanner.nextLine());
@@ -143,70 +144,32 @@ public class Storage {
 
             String[] words = input.split("\\|");
             Boolean isDone = false;
+            
+            String taskType = words[0].trim();
 
-            if (words[0].length() < 3) {
-                // If condition to avoid reading in the header.
-                String taskType = words[0].trim();
+            switch (taskType) {
+            case "T":
 
-                switch (taskType) {
-                case "T":
-                    // Create a Todo class.
+                Todo newTodo = newTodo(words);
+                tasks.add(newTodo);
+                break;
 
-                    if (words[1].contains("1")) {
-                        isDone = true;
-                    } else if (words[1].contains("0")) {
-                        isDone = false;
-                    }
-                    description = words[2].trim();
-                    createDateTime = words[4].trim();
-                    lastModifiedDateTime = words[5].trim();
+            case "E":
 
+                Event newEvent = newEvent(words);
+                tasks.add(newEvent);
+                break;
 
-                    Todo newTodo = new Todo(description, isDone, LocalDateTime.parse(createDateTime),
-                            LocalDateTime.parse(lastModifiedDateTime));
-                    tasks.add(newTodo);
-                    break;
+            case "D":
 
-                case "E":
-                    // Create an Event class.
+                Deadline newDeadline = newDeadline(words);
+                tasks.add(newDeadline);
+                break;
 
-                    if (words[1].contains("1")) {
-                        isDone = true;
-                    } else if (words[1].contains("0")) {
-                        isDone = false;
-                    }
-                    description = words[2].trim();
-                    extraDescription = words[3].trim();
-                    createDateTime = words[4].trim();
-                    lastModifiedDateTime = words[5].trim();
-
-                    Event newEvent = new Event(description, extraDescription, isDone,
-                            LocalDateTime.parse(createDateTime), LocalDateTime.parse(lastModifiedDateTime));
-                    tasks.add(newEvent);
-                    break;
-
-                case "D":
-                    // Create a Deadline class.
-
-                    if (words[1].contains("1")) {
-                        isDone = true;
-                    } else if (words[1].contains("0")) {
-                        isDone = false;
-                    }
-                    description = words[2].trim();
-                    extraDescription = words[3].trim();
-                    createDateTime = words[4].trim();
-                    lastModifiedDateTime = words[5].trim();
-
-                    Deadline newDeadline = new Deadline(description, extraDescription, isDone,
-                            LocalDateTime.parse(createDateTime), LocalDateTime.parse(lastModifiedDateTime));
-                    tasks.add(newDeadline);
-                    break;
-
-                default:
-                    throw new DukeException("Unable to read from saved file");
-                }
+            default:
+                throw new DukeException("Unable to read from saved file");
             }
+
         }
         return tasks;
     }
@@ -244,6 +207,86 @@ public class Storage {
      */
     public String getFilePath() {
         return this.filepath;
+    }
+
+    /**
+     * Returns a new To do object from the String array read from file.
+     *
+     * @param words String array.
+     * @return To do object.
+     */
+    public Todo newTodo(String[] words) {
+        Boolean isDone = false;
+        String description = "";
+        String createDateTime = "";
+        String lastModifiedDateTime = "";
+
+        if (words[1].contains("1")) {
+            isDone = true;
+        } else if (words[1].contains("0")) {
+            isDone = false;
+        }
+        description = words[2].trim();
+        createDateTime = words[4].trim();
+        lastModifiedDateTime = words[5].trim();
+
+
+        Todo newTodo = new Todo(description, isDone, LocalDateTime.parse(createDateTime),
+                LocalDateTime.parse(lastModifiedDateTime));
+
+        return newTodo;
+    }
+
+    /**
+     * Returns a new Event object from the String array read from file.
+     *
+     * @param words String array.
+     * @return Event object.
+     */
+    public Event newEvent(String[] words) {
+        Boolean isDone = false;
+        String description = "";
+        String extraDescription = "";
+        String createDateTime = "";
+        String lastModifiedDateTime = "";
+
+        if (words[1].contains("1")) {
+            isDone = true;
+        } else if (words[1].contains("0")) {
+            isDone = false;
+        }
+        description = words[2].trim();
+        extraDescription = words[3].trim();
+        createDateTime = words[4].trim();
+        lastModifiedDateTime = words[5].trim();
+
+        Event newEvent = new Event(description, extraDescription, isDone,
+                LocalDateTime.parse(createDateTime), LocalDateTime.parse(lastModifiedDateTime));
+
+        return newEvent;
+    }
+
+    public Deadline newDeadline(String[] words) {
+        Boolean isDone = false;
+        String description = "";
+        String extraDescription = "";
+        String createDateTime = "";
+        String lastModifiedDateTime = "";
+
+        if (words[1].contains("1")) {
+            isDone = true;
+        } else if (words[1].contains("0")) {
+            isDone = false;
+        }
+        description = words[2].trim();
+        extraDescription = words[3].trim();
+        createDateTime = words[4].trim();
+        lastModifiedDateTime = words[5].trim();
+
+        Deadline newDeadline = new Deadline(description, extraDescription, isDone,
+                LocalDateTime.parse(createDateTime), LocalDateTime.parse(lastModifiedDateTime));
+
+        return newDeadline;
     }
 
 }

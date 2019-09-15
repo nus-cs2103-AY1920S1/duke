@@ -175,14 +175,14 @@ To `sort` tasks according to the dates and times in a chronological order: `sort
 To view an overview of the tasks done over time, there are two ways:
 
 1. Click on the **Show Statistics** button on the top of the application as shown below.
-<img src="https://github.com/EvonDong/duke/blob/master/docs/ShowStats1.png" width="480">
+<img src="https://github.com/EvonDong/duke/blob/master/docs/showStats1.png" width="480">
 
 
 2. Key in `show stats` in the command line: `show stats`
 
         Example of usage: sort  
         Expected Outcome:
-   <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart.png" width="480">
+   <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="480">
 
 
 ## **Glossary** <a name="glossary"></a>

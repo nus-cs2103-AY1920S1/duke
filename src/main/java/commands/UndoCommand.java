@@ -15,7 +15,7 @@ public class UndoCommand extends Command {
      * @throws DukeException if previous command cannot be undone
      */
     public UndoCommand(Command commandToUndo) throws DukeException {
-        if (checkCommand()) {
+        if (checkCommand(commandToUndo)) {
             this.commandToUndo = commandToUndo;
         } else {
             throw new DukeException("Unable to undo this command");
@@ -28,10 +28,10 @@ public class UndoCommand extends Command {
      *
      * @return true if above conditions are met
      */
-    private boolean checkCommand() {
-        if (this.commandToUndo instanceof ListCommand
-            || this.commandToUndo instanceof FindCommand
-            || this.commandToUndo instanceof UndoCommand) {
+    private boolean checkCommand(Command commandToUndo) {
+        if (commandToUndo instanceof ListCommand
+            || commandToUndo instanceof FindCommand
+            || commandToUndo instanceof UndoCommand) {
             return false;
         }
         return true;

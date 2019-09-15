@@ -24,7 +24,7 @@ public class Ui {
 
     private static final String MATCHING_LIST_MESSAGE = "Here are the matching tasks in your list:\n";
 
-    private static final String UNDO_SUCCESS_MESSAGE = "Got it, last action was undone.\n";
+    private static final String UNDO_SUCCESS_MESSAGE = "Got it, last action was undone. Please do not press undo consecutively!\n";
 
     private final Scanner in;
 

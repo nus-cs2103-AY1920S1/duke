@@ -16,7 +16,6 @@ import exceptions.DukeException;
 
 import java.util.Stack;
 
-import java.text.ParseException;
 
 public class Parser {
 
@@ -55,16 +54,19 @@ public class Parser {
                     name += commandArr[i] + " ";
                 }
                 c = new AddCommand(new Todo(name.trim()));
+                recentCommands.push(c);
                 break;
 
             case "deadline":
                 keywords = splitCommands(commandArr, "/by", "deadline");
                 c = new AddCommand(new Deadline(keywords[0], new StringToDate(keywords[1])));
+                recentCommands.push(c);
                 break;
 
             case "event":
                 keywords = splitCommands(commandArr, "/at", "event");
                 c = new AddCommand(new Event(keywords[0], new StringToDate(keywords[1])));
+                recentCommands.push(c);
                 break;
 
             case "list":
@@ -74,11 +76,13 @@ public class Parser {
             case "done":
                 taskId = Integer.parseInt(commandArr[1]);
                 c = new DoneCommand(taskId);
+                recentCommands.push(c);
                 break;
 
             case "delete":
                 taskId = Integer.parseInt(commandArr[1]);
                 c = new DeleteCommand(taskId);
+                recentCommands.push(c);
                 break;
 
             case "find":
@@ -103,8 +107,7 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ERROR_INPUT_FORMAT);
         }
-
-        recentCommands.push(c);
+        System.out.println(recentCommands);
         return c;
 
     }

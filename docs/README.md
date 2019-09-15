@@ -118,4 +118,38 @@ Nice! I've marked this task as done:
   [D][Y] CS2103 IP (by: 12/10/2019 1123)
 ```
 
-### `done` - Sets a task as completed.
+### `delete` - Deletes a task in task list.
+
+The user can delete a specific task from the task list. The user needs to identify the task to be deleted with the task number, by checking the task list.
+
+Example of usage: 
+`delete 1`
+Example of expected outcome:
+```
+Noted. I've removed this task:
+  [E][N] CS2103 IP (by: 12/10/2019 1123)
+```
+
+### `find` - Finds all the task with the matching keyword in the task description.
+
+The user can find all the task entries in the task list, in which the task description contains the specified keyword. 
+
+Example of usage: 
+`find book`
+Example of expected outcome:
+```
+Here are the matching tasks in your list:
+  1.[D][N] return book (by: 12/10/2019 1123)
+  2.[Y][N] read book
+```
+
+### `bye` - To exit and stop Duke.
+
+To stop the session with Duke, the user can specify this command to end the session with Duke.
+
+Example of usage: 
+`bye`
+Example of expected outcome:
+```
+Bye. Hope to see you again soon!
+```

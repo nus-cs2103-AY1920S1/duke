@@ -1,9 +1,12 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     protected LocalDateTime parsedBy;
+    protected String formattedBy;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a dd MMM");
 
     /**
      * Class constructor.
@@ -13,6 +16,7 @@ public class Deadline extends Task {
     public Deadline(String description, LocalDateTime parsedBy) {
         super(description, TaskType.DEADLINE);
         this.parsedBy = parsedBy;
+        this.formattedBy = parsedBy.format(formatter);
     }
 
     /**
@@ -24,6 +28,7 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, LocalDateTime parsedBy) {
         super(description, isDone, TaskType.DEADLINE);
         this.parsedBy = parsedBy;
+        this.formattedBy = parsedBy.format(formatter);
     }
 
     /**
@@ -39,6 +44,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (by: " + parsedBy.toString() + ")";
+        return "[D]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (by: " + formattedBy + ")";
     }
 }

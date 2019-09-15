@@ -18,11 +18,21 @@ public class Clui implements UiInterface {
     /**
      * Greet user.
      */
-    public void greet() {
-        System.out.println("    ____________________________________________________________\n"
-                + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n"
-                + "    ____________________________________________________________");
+    public void greet(boolean fileExists) {
+        if (fileExists) {
+            System.out.println("    *** EXISTING FILE LOADED ***\n"
+                    + "-------------------------------------------\n"
+                    + "     Hello! I'm Duke\n"
+                    + "     What can I do for you?\n"
+                    + "-------------------------------------------");
+        } else {
+            System.out.println("    *** NO EXISTING FILE FOUND ***\n"
+                    + "-------------------------------------------\n"
+                    + "     Hello! I'm Duke\n"
+                    + "     What can I do for you?\n"
+                    + "-------------------------------------------");
+
+        }
     }
 
     /**
@@ -37,7 +47,7 @@ public class Clui implements UiInterface {
      * @param taskList TaskList to be echoed
      */
     public void echoList(TaskList taskList, List<String> archives) {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    -------------------------------------------");
         if (taskList.getSize() == 0) {
             System.out.println("     *** List is Empty ***");
         } else {
@@ -47,16 +57,16 @@ public class Clui implements UiInterface {
                         i + 1, taskList.getTask(i).toString()));
             }
         }
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    -------------------------------------------");
         if (archives.size() == 0) {
-            System.out.println("     *** No existing archives ***     \n");
+            System.out.println("     *** No existing archives ***");
         } else {
-            System.out.println("     Here are the existing archives: \n");
+            System.out.println("     Here are the existing archives:");
             for (String archive : archives) {
-                System.out.print("     " + archive);
+                System.out.println("     " + archive);
             }
         }
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    -------------------------------------------");
     }
 
     /**
@@ -64,7 +74,7 @@ public class Clui implements UiInterface {
      * @param matchingTasks Matching Tasks
      */
     public void echoMatchingTasks(List<Task> matchingTasks) {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    -------------------------------------------");
         if (matchingTasks.size() == 0) {
             System.out.println("     *** List is Empty ***");
         } else {
@@ -74,7 +84,7 @@ public class Clui implements UiInterface {
                         i + 1, matchingTasks.get(i).toString()));
             }
         }
-        System.out.println("    ____________________________________________________________");
+        System.out.println("    -------------------------------------------");
     }
 
     /**
@@ -83,11 +93,11 @@ public class Clui implements UiInterface {
      * @param taskListSize Number of Tasks in list
      */
     public void echoAddedTask(Task taskToAdd, int taskListSize) {
-        System.out.println("    ____________________________________________________________\n"
+        System.out.println("    -------------------------------------------\n"
                 + "     Got it. I've added this task: \n"
                 + String.format("       %s \n", taskToAdd.toString())
                 + String.format("     Now you have %d tasks in the list. \n", taskListSize)
-                + "    ____________________________________________________________");
+                + "    -------------------------------------------");
     }
 
     /**
@@ -95,10 +105,10 @@ public class Clui implements UiInterface {
      * @param taskToComplete Completed ask
      */
     public void echoCompletedTask(Task taskToComplete) {
-        System.out.println(String.format("    ____________________________________________________________\n"
+        System.out.println(String.format("    -------------------------------------------\n"
                         + "     Nice! I've marked this task as done: \n"
                         + "       %s\n"
-                        + "    ____________________________________________________________",
+                        + "    -------------------------------------------",
                 taskToComplete.toString()));
     }
 
@@ -108,11 +118,11 @@ public class Clui implements UiInterface {
      * @param taskListSize Number of remaining Tasks in TaskList
      */
     public void echoDeletedTask(Task taskToDelete, int taskListSize) {
-        System.out.println(String.format("    ____________________________________________________________\n"
+        System.out.println(String.format("    -------------------------------------------\n"
                         + "     Noted. I've removed this task: \n"
                         + "       %s\n"
                         + "     Now you have %d tasks in the list.\n"
-                        + "    ____________________________________________________________",
+                        + "    -------------------------------------------",
                 taskToDelete.toString(), taskListSize));
     }
 
@@ -121,10 +131,7 @@ public class Clui implements UiInterface {
      * @param e Exception to be echoed
      */
     public void echoException(Exception e) {
-        System.out.println(String.format("    ____________________________________________________________\n"
-                        + "       %s\n"
-                        + "    ____________________________________________________________",
-                e.getMessage()));
+        System.out.println(e.getMessage());
     }
 
     /**
@@ -132,9 +139,9 @@ public class Clui implements UiInterface {
      * @param msg Message to be echoed
      */
     public void echoMessage(String msg) {
-        System.out.println(String.format("    ____________________________________________________________\n"
-                        + "       %s\n"
-                        + "    ____________________________________________________________",
+        System.out.println(String.format("-------------------------------------------\n"
+                        + "     *** %s ***     \n"
+                        + "-------------------------------------------",
                 msg));
     }
 
@@ -143,8 +150,8 @@ public class Clui implements UiInterface {
      */
     public void exit() {
         sc.close();
-        System.out.println("    ____________________________________________________________\n"
+        System.out.println("    -------------------------------------------\n"
                 + "     Bye. Hope to see you again soon!\n"
-                + "    ____________________________________________________________");
+                + "    -------------------------------------------");
     }
 }

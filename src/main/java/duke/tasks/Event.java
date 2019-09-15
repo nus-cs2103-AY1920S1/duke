@@ -1,9 +1,13 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
     protected LocalDateTime parsedAt;
+    protected String formattedAt;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm on dd/MM/YYYY");
+
 
     /**
      * Class constructor.
@@ -13,6 +17,7 @@ public class Event extends Task {
     public Event(String description, LocalDateTime parsedAt) {
         super(description, TaskType.EVENT);
         this.parsedAt = parsedAt;
+        this.formattedAt = parsedAt.format(formatter);
     }
 
     /**
@@ -24,6 +29,7 @@ public class Event extends Task {
     public Event(String description, boolean isDone, LocalDateTime parsedAt) {
         super(description, isDone, TaskType.EVENT);
         this.parsedAt = parsedAt;
+        this.formattedAt = parsedAt.format(formatter);
     }
 
     /**
@@ -39,6 +45,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (at: " + parsedAt.toString() + ")";
+        return "[E]" + "[" + super.getStatusIcon() + "] " + super.toString() + " (at: " + formattedAt + ")";
     }
 }

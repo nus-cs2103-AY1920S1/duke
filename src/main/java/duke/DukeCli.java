@@ -27,9 +27,9 @@ public class DukeCli {
         /** Try to load data */
         try {
             taskList.loadData(storage.getCurrentTasks());
-            clui.echoMessage("    *** EXISTING FILE LOADED ***");
+            clui.greet(true);
         } catch (FileNotFoundException e) {
-            clui.echoMessage("    *** NO EXISTING FILE FOUND ***");
+            clui.greet(false);
             try {
                 storage.createFile();
             } catch (IOException e2) {
@@ -38,9 +38,6 @@ public class DukeCli {
         } catch (DukeException e) {
             clui.echoException(e);
         }
-
-        /** Greet User */
-        clui.greet();
 
         /** Interaction with User */
         boolean isByeBye = false;

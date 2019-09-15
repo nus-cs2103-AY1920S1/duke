@@ -6,9 +6,9 @@ public class DukeException extends Exception {
      * Default duke exception.
      */
     public DukeException() {
-        super("_____________________________________________________\n"
+        super("-------------------------------------------\n"
                 + " OOPS!!!\n I'm sorry, but I don't know what that means :-(\n"
-                + "_____________________________________________________");
+                + "-------------------------------------------");
     }
 
     /**
@@ -16,8 +16,8 @@ public class DukeException extends Exception {
      * @param errorMessage Custom error message
      */
     public DukeException(String errorMessage) {
-        super(String.format("_____________________________________________________\n"
+        super(String.format("-------------------------------------------\n"
                 + " OOPS!!!\n %s\n"
-                + "_____________________________________________________", errorMessage));
+                + "-------------------------------------------", errorMessage));
     }
 }

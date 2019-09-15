@@ -30,7 +30,7 @@ repositories {
 }
 
 application {
-    // Change this to your main class.
+    // Change this to your main class (Either DukeCliLauncher or DukeGuiLauncher).
     mainClassName = 'DukeGuiLauncher'
 }
 

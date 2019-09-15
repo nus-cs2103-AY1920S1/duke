@@ -26,20 +26,20 @@ public class Gui extends VBox implements UiInterface {
     public void greet(boolean fileExists) {
         if (fileExists) {
             this.getChildren().addAll(
-                    DialogBox.getDukeDialog("    *** EXISTING FILE LOADED ***    "
-                            + "_____________________________________________________\n"
+                    DialogBox.getDukeDialog("    *** EXISTING FILE LOADED ***\n"
+                            + "-------------------------------------------\n"
                             + "     Hello! I'm Duke\n"
                             + "     What can I do for you?\n"
-                            + "_____________________________________________________", avatar
+                            + "-------------------------------------------", avatar
                     ));
         } else {
             this.getChildren().addAll(
                     DialogBox.getDukeDialog(
-                            "    *** NO EXISTING FILE FOUND ***"
-                                    + " _____________________________________________________\n"
+                            "    *** NO EXISTING FILE FOUND ***\n"
+                                    + "-------------------------------------------\n"
                                     + "     Hello! I'm Duke\n"
                                     + "     What can I do for you?\n"
-                                    + " _____________________________________________________", avatar));
+                                    + "-------------------------------------------", avatar));
 
         }
     }
@@ -50,7 +50,7 @@ public class Gui extends VBox implements UiInterface {
      */
     public void echoList(TaskList taskList, List<String> archives) {
         String output = "";
-        output += "_____________________________________________________\n";
+        output += "-------------------------------------------\n";
         if (taskList.getSize() == 0) {
             output += "     *** No existing tasks ***     \n";
         } else {
@@ -60,7 +60,7 @@ public class Gui extends VBox implements UiInterface {
                         i + 1, taskList.getTask(i).toString());
             }
         }
-        output += "_____________________________________________________";
+        output += "-------------------------------------------\n";
         if (archives.size() == 0) {
             output += "     *** No existing archives ***     \n";
         } else {
@@ -70,7 +70,7 @@ public class Gui extends VBox implements UiInterface {
             }
             output += "\n";
         }
-        output += "_____________________________________________________";
+        output += "-------------------------------------------";
         this.getChildren().addAll(
                 DialogBox.getDukeDialog(output, avatar));
     }
@@ -81,7 +81,7 @@ public class Gui extends VBox implements UiInterface {
      */
     public void echoMatchingTasks(List<Task> matchingTasks) {
         String output = "";
-        output += "_____________________________________________________\n";
+        output += "-------------------------------------------\n";
         if (matchingTasks.size() == 0) {
             output += "     *** List is Empty ***     \n";
         } else {
@@ -91,7 +91,7 @@ public class Gui extends VBox implements UiInterface {
                         i + 1, matchingTasks.get(i).toString());
             }
         }
-        output += "_____________________________________________________";
+        output += "-------------------------------------------";
         this.getChildren().addAll(
                 DialogBox.getDukeDialog(output, avatar));
     }
@@ -103,11 +103,11 @@ public class Gui extends VBox implements UiInterface {
      */
     public void echoAddedTask(Task taskToAdd, int taskListSize) {
         this.getChildren().addAll(
-                DialogBox.getDukeDialog("_____________________________________________________\n"
+                DialogBox.getDukeDialog("-------------------------------------------\n"
                         + "     Got it. I've added this task: \n"
                         + String.format("       %s \n", taskToAdd.toString())
                         + String.format("     Now you have %d tasks in the list.\n", taskListSize)
-                        + "_____________________________________________________", avatar));
+                        + "-------------------------------------------", avatar));
     }
 
     /**
@@ -116,10 +116,10 @@ public class Gui extends VBox implements UiInterface {
      */
     public void echoCompletedTask(Task taskToComplete) {
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(String.format("_____________________________________________________\n"
+                DialogBox.getDukeDialog(String.format("-------------------------------------------\n"
                                 + "     Nice! I've marked this task as done: \n"
                                 + "       %s\n"
-                                + "_____________________________________________________",
+                                + "-------------------------------------------",
                         taskToComplete.toString()), avatar));
     }
 
@@ -130,11 +130,11 @@ public class Gui extends VBox implements UiInterface {
      */
     public void echoDeletedTask(Task taskToDelete, int taskListSize) {
         this.getChildren().addAll(
-                DialogBox.getDukeDialog(String.format("_____________________________________________________\n"
+                DialogBox.getDukeDialog(String.format("-------------------------------------------\n"
                                 + "     Noted. I've removed this task: \n"
                                 + "       %s\n"
                                 + "     Now you have %d tasks in the list.\n"
-                                + "_____________________________________________________",
+                                + "-------------------------------------------",
                         taskToDelete.toString(), taskListSize), avatar));
     }
 
@@ -153,9 +153,9 @@ public class Gui extends VBox implements UiInterface {
      */
     public void echoMessage(String msg) {
         String output = "";
-        output += "_____________________________________________________\n";
+        output += "-------------------------------------------\n";
         output += String.format("     *** %s ***     \n", msg);
-        output += "_____________________________________________________";
+        output += "-------------------------------------------";
         this.getChildren().addAll(
                 DialogBox.getDukeDialog(output, avatar));
     }
@@ -166,8 +166,8 @@ public class Gui extends VBox implements UiInterface {
     public void exit() {
         this.getChildren().addAll(
                 DialogBox.getDukeDialog(
-                        "_____________________________________________________\n"
+                        "-------------------------------------------\n"
                                 + "     Bye. Hope to see you again soon!\n"
-                                + "_____________________________________________________", avatar));
+                                + "-------------------------------------------", avatar));
     }
 }

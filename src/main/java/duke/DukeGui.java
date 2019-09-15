@@ -45,6 +45,7 @@ public class DukeGui extends Application {
         storage = new Storage(new File("data/tasks.txt"), new File("data/archive"));
         scrollPane = new ScrollPane();
         gui = new Gui(avatar);
+        scrollPane.setStyle("-fx-background: #303030");
         scrollPane.setContent(gui);
         userTextField = new TextField();
         sendButton = new Button("Send");

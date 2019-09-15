@@ -2,12 +2,13 @@ package duke.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 
 public class DialogBox extends HBox {
 
@@ -24,10 +25,14 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        displayPicture.setFitWidth(80.0);
+        displayPicture.setFitHeight(80.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
+        this.setStyle("-fx-padding: 10;" + "-fx-spacing: 10;" + "-fx-border-style: solid inside;"
+                + "-fx-border-width: 2;" + "-fx-border-radius: 5;" + "-fx-border-color: grey;" +
+                "-fx-background-color: #424242");
+        VBox.setMargin(this, new Insets(10, 10, 10, 10));
         this.getChildren().addAll(text, displayPicture);
     }
 

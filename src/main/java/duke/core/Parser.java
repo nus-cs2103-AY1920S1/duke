@@ -51,12 +51,12 @@ public class Parser {
             return new ExitCommand();
         case "archive":
             if (splitCommand.length == 1 || splitCommand[1].trim().equals("")) {
-                throw new DukeException("usage: <archive> <archive_name>");
+                throw new DukeException("usage: archive <archive_name>");
             }
             return new ArchiveCommand(splitCommand[1]);
         case "retrieve":
             if (splitCommand.length == 1) {
-                throw new DukeException("usage: <retrieve> <archive_name>");
+                throw new DukeException("usage: retrieve <archive_name>");
             }
             return new RetrieveCommand(splitCommand[1]);
         case "list":
@@ -66,13 +66,34 @@ public class Parser {
         case "empty":
             return new EmptyCommand();
         case "find":
+            if (splitCommand.length == 1 || splitCommand[1].trim().equals("")) {
+                throw new DukeException("usage: find <pattern>");
+            }
             return new FindCommand(splitCommand[1].trim());
         case "done":
-            return new DoneCommand(Integer.parseInt(splitCommand[1].trim()));
-        case "delete":
-            return new DeleteCommand(Integer.parseInt(splitCommand[1].trim()));
-        case "todo":
+            int doneIndex;
             if (splitCommand.length == 1) {
+                throw new DukeException("usage: done <task_number>");
+            }
+            try {
+                doneIndex = Integer.parseInt(splitCommand[1].trim());
+            } catch (NumberFormatException e) {
+                throw new DukeException("usage: done <task_number>");
+            }
+            return new DoneCommand(doneIndex);
+        case "delete":
+            int deleteIndex;
+            if (splitCommand.length == 1) {
+                throw new DukeException("usage: delete <task_number>");
+            }
+            try {
+                deleteIndex = Integer.parseInt(splitCommand[1].trim());
+            } catch (NumberFormatException e) {
+                throw new DukeException("usage: delete <task_number>");
+            }
+            return new DeleteCommand(deleteIndex);
+        case "todo":
+            if (splitCommand.length == 1 || splitCommand[1].trim().equals("")) {
                 throw new DukeException("usage: todo <todo_task>");
             }
             return new AddCommand(new Todo(splitCommand[1].trim()));

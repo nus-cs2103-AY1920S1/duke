@@ -2,6 +2,8 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.ui.MainUi;
+import duke.ui.Ui;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,4 +54,30 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }
+
+    //@@author CarbonGrid
+    public Duke usingMainUi() {
+        ui = new MainUi();
+
+        return this;
+    }
+    //@@author
+
+    /**
+     * (Event-Driven) Takes in GUI user input, parses the command,
+     *   then returns the duke response.
+     * @param input Command to be parsed by Duke
+     * @return str Result of parsing
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.show(e.getMessage());
+        } finally {
+            return ((MainUi) ui).getResponse();
+        }
+    }
 }
+

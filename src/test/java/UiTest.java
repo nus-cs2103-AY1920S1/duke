@@ -1,4 +1,4 @@
-import duke.Ui;
+import duke.ui.Ui;
 
 //@@author CarbonGrid
 public class UiTest extends Ui {

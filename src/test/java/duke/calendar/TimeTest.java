@@ -21,7 +21,7 @@ public class TimeTest {
             Time date = new Time("1861");
             fail();
         } catch (DukeException exception) {
-            assertEquals("☹ OOPS!!! Please specify a valid time. "
+            assertEquals("OOPS!!! Please specify a valid time. "
                     + "Also ensure that you have specified the time in 24-hour clock convention E.g. 1800 ",
                             exception.getMessage());
         }
@@ -33,7 +33,7 @@ public class TimeTest {
             Time date = new Time("2540");
             fail();
         } catch (DukeException exception) {
-            assertEquals("☹ OOPS!!! Please specify a valid time. "
+            assertEquals("OOPS!!! Please specify a valid time. "
                     + "Also ensure that you have specified the time in 24-hour clock convention E.g. 1800 ",
                             exception.getMessage());
         }

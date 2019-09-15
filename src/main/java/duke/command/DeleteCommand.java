@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDetailException {
         if (index > tasks.getSize()) {
-            throw new InvalidDetailException("☹ OOPS!!! There is no such task in the list to delete.");
+            throw new InvalidDetailException("OOPS!!! There is no such task in the list to delete.");
         }
         Task deletedTask = tasks.getTask(index - 1);
         int originalTaskSize = tasks.getSize();

@@ -33,7 +33,7 @@ public class AddTodoCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientDetailsException {
         if (details.length() == 0) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new InsufficientDetailsException("OOPS!!! The description of a todo cannot be empty.");
         }
         Todo todo = new Todo(details);
         tasks.addTask(todo);

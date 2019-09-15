@@ -39,10 +39,10 @@ public class AddDeadlineCommand extends Command {
         String[] taskDetails = getTaskDetails();
 
         if (details.length() == 0 || taskDetails[0].trim().length() == 0) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new InsufficientDetailsException("OOPS!!! The description of a deadline cannot be empty.");
         }
         if (taskDetails.length < 2 || taskDetails[1].trim().length() == 0) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The date/time of a deadline cannot be empty.");
+            throw new InsufficientDetailsException("OOPS!!! The date/time of a deadline cannot be empty.");
         }
 
         String[] taskSpecifics = getTaskSpecifics(taskDetails);

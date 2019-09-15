@@ -39,10 +39,10 @@ public class AddEventCommand extends Command {
         String[] taskDetails = getTaskDetails();
 
         if (details.length() == 0 || taskDetails[0].trim().length() == 0) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new InsufficientDetailsException("OOPS!!! The description of an event cannot be empty.");
         }
         if (taskDetails.length < 2 || taskDetails[1].trim().length() == 0) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The date/time of an event cannot be empty.");
+            throw new InsufficientDetailsException("OOPS!!! The date/time of an event cannot be empty.");
         }
 
         String taskDescription = getDescription(taskDetails);
@@ -73,7 +73,7 @@ public class AddEventCommand extends Command {
     private String[] getTaskSpecifics(String[] taskDetails) throws InsufficientDetailsException {
         String[] taskSpecifics = taskDetails[1].trim().split("/to");
         if (taskSpecifics[0].trim().length() == 0) {
-            throw new InsufficientDetailsException("☹ OOPS!!! The starting date/time of an event cannot be empty.");
+            throw new InsufficientDetailsException("OOPS!!! The starting date/time of an event cannot be empty.");
         }
         return taskSpecifics;
     }

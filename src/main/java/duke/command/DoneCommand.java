@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDetailException {
         if (index > tasks.getSize()) {
-            throw new InvalidDetailException("☹ OOPS!!! There is no such task in the list to mark as done.");
+            throw new InvalidDetailException("OOPS!!! There is no such task in the list to mark as done.");
         }
         Task doneTask = tasks.getTask(index - 1);
         doneTask.markAsDone();

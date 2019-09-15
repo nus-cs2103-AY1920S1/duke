@@ -18,12 +18,13 @@ public class ListCommand extends Command {
 
     /**
      * Calls the Ui object to show the list of tasks.
+     *
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showList(taskList);
     }
 }

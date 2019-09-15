@@ -1,11 +1,6 @@
 package duke.util;
 
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ListCommand;
-import duke.command.ExitCommand;
-import duke.command.AddCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 
 /**
@@ -18,9 +13,10 @@ public class Parser {
      *
      * @param fullCommand command from user input
      * @return a Command
-     * @throws DukeException if the command in invalid
+     * @throws DukeException if the command is invalid
      */
     public static Command parse(String fullCommand) throws DukeException {
+        assert !fullCommand.isEmpty() : "Please enter something!";
         String[] commandWords = fullCommand.split(" ");
         String action = commandWords[0];
         try {
@@ -39,6 +35,11 @@ public class Parser {
                 return processTodo(fullCommand);
             case "deadline":
                 return processDeadline(fullCommand, action);
+            case "find":
+                String taskToBeFound = fullCommand.substring(5);
+                return new FindCommand(taskToBeFound);
+            case "sort":
+                return new SortCommand();
             default:
                 throw new DukeException(Ui.TAB + "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

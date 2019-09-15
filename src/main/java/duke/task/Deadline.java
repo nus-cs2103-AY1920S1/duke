@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline Task.
+     *
      * @param description description of the task
      * @param by deadline of the task
      */
@@ -34,6 +35,7 @@ public class Deadline extends Task {
 
     /**
      * Converts the task into a StringBuilder object to be written into storage.
+     *
      * @return StringBuilder object for file writing.
      */
     @Override
@@ -43,6 +45,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of this task.
+     *
      * @return a string representation of this task
      */
     @Override

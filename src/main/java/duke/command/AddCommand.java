@@ -27,6 +27,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructs a new Command to add either a deadline or event.
+     *
      * @param action type of task - either deadline or event
      * @param description description of the task
      * @param time time of task
@@ -45,12 +46,13 @@ public class AddCommand extends Command {
 
     /**
      * Adds its assigned task to the task list.
+     *
      * @param taskList the list which the task will be added to
      * @param ui the ui object to print messages
      * @param storage storage object to write files to
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.add(task, ui);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.add(task, ui);
     }
 }

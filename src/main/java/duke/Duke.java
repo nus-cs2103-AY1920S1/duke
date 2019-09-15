@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Storage;
@@ -15,11 +17,11 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Initialises the Duke object.
-     * @param filePath path to the file for data loading and writing
+     * Initialises the duke.Duke object.
      */
-    private Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
+        String filePath = "data/tasks.txt";
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -32,7 +34,7 @@ public class Duke {
     /**
      * Runs the program.
      */
-    private void run() {
+    public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -50,11 +52,16 @@ public class Duke {
         }
     }
 
-    /**
-     * Creates a new instance of the Duke object.
-     * @param args args
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getResponse(String text) {
+        return processCommand(text);
+    }
+
+    private String processCommand(String text) {
+        try {
+            Command c = Parser.parse(text);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

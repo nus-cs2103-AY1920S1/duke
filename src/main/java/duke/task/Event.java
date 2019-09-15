@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event Task.
+     *
      * @param description description of the event
      * @param at time and date of the event
      */
@@ -29,6 +30,7 @@ public class Event extends Task {
 
     /**
      * Converts the task into a StringBuilder object to write into storage.
+     *
      * @return a StringBuilder object for file writing
      */
     @Override
@@ -38,6 +40,7 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of this task.
+     *
      * @return a string representation of this task
      */
     @Override

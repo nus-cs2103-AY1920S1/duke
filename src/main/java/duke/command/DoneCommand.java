@@ -13,6 +13,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs a done Command.
+     *
      * @param itemNo the index of the task to be indicated done according to the task list
      */
     public DoneCommand(int itemNo) {
@@ -22,12 +23,13 @@ public class DoneCommand extends Command {
 
     /**
      * Marks the task as done.
+     *
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.done(itemNo, ui);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.done(itemNo, ui);
     }
 }

@@ -4,6 +4,7 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Represents a list of tasks defined by the user.
@@ -29,15 +30,16 @@ public class TaskList {
 
     /**
      * Deletes a Task.
+     *
      * @param deletedItemNo index of the task
      * @param ui ui object to print messages
      * @throws DukeException if task is not found
      */
-    public void delete(int deletedItemNo, Ui ui) throws DukeException {
+    public String delete(int deletedItemNo, Ui ui) throws DukeException {
         try {
             Task itemRemoved = taskList.remove(deletedItemNo - 1);
             int numOfTask = taskList.size();
-            ui.showDeleted(itemRemoved, numOfTask);
+            return ui.showDeleted(itemRemoved, numOfTask);
         } catch (Exception e) {
             throw new DukeException("    No more tasks to delete!");
         }
@@ -45,28 +47,31 @@ public class TaskList {
 
     /**
      * Adds a Task.
+     *
      * @param task task object to be added
      * @param ui ui object to print messages
      */
-    public void add(Task task, Ui ui) {
+    public String add(Task task, Ui ui) {
         taskList.add(task);
         int numOfTask = taskList.size();
-        ui.showAdded(task, numOfTask);
+        return ui.showAdded(task, numOfTask);
     }
 
     /**
      * Marks the task as done.
+     *
      * @param itemNo index of the task to be marked
      * @param ui ui object to print messages
      */
-    public void done(int itemNo, Ui ui) {
+    public String done(int itemNo, Ui ui) {
         Task task = taskList.get(itemNo - 1);
         task.markAsDone();
-        ui.showDone(task);
+        return ui.showDone(task);
     }
 
     /**
      * Initiates writing of data into file.
+     *
      * @param storage storage object to write data into
      * @throws DukeException if file not found
      */
@@ -75,13 +80,38 @@ public class TaskList {
     }
 
     /**
+     * Finds the task(s) with matching descriptions.
+     *
+     * @param taskToBeFound search term
+     * @return TaskList object containing list of relevant search results
+     * @throws DukeException if task is not found
+     */
+    public TaskList find(String taskToBeFound) throws DukeException {
+        ArrayList<Task> searchResults = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getDescription().contains(taskToBeFound)) {
+                searchResults.add(task);
+            }
+        }
+        if (searchResults.isEmpty()) {
+            throw new DukeException("     File not found! :(");
+        }
+        return new TaskList(searchResults);
+    }
+
+    public String sortByDescription(Ui ui) {
+        taskList.sort(Comparator.comparing(Task::getDescription));
+        return "Sorted.\n" + ui.showList(this);
+    }
+
+    /**
      * Returns a string representation of the list of tasks.
+     *
      * @return a string representation of the list of tasks
      */
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append("     Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
             output.append("     ").append(i + 1).append(".").append(taskList.get(i)).append("\n");
         }

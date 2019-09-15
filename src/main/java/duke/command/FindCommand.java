@@ -6,32 +6,33 @@ import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
- * Represents a command to delete tasks from a task list.
+ * Represents a find Command.
  */
-public class DeleteCommand extends Command {
+public class FindCommand extends Command {
 
-    private int deletedItemNo;
+    private String taskToBeFound;
 
     /**
-     * Constructs a delete Command.
+     * Constructs a find Command.
      *
-     * @param deletedItemNo the index of the task to be deleted according to the list
+     * @param taskToBeFound search item
      */
-    public DeleteCommand(int deletedItemNo) {
+    public FindCommand(String taskToBeFound) {
         super(false);
-        this.deletedItemNo = deletedItemNo;
+        this.taskToBeFound = taskToBeFound;
     }
 
     /**
-     * Deletes the task from task list.
+     * Executes the find command.
      *
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written
-     * @throws DukeException if index or task is not found in the task list
+     * @throws DukeException if task is not found
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        return taskList.delete(deletedItemNo, ui);
+        TaskList searchResults = taskList.find(taskToBeFound);
+        return ui.showSearchResults(searchResults);
     }
 }

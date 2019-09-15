@@ -19,14 +19,15 @@ public class ExitCommand extends Command {
 
     /**
      * Updates the storage by writing data to it.
+     *
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written
      * @throws DukeException if file is not found
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showBye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.writeTo(storage);
+        return ui.showBye();
     }
 }

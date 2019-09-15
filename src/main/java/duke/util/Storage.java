@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Initialises a Storage object for file processes.
+     *
      * @param filepath path to the file for storage
      */
     public Storage(String filepath) {
@@ -32,6 +33,7 @@ public class Storage {
 
     /**
      * Loads data from the file.
+     *
      * @return ArrayList of Task objects
      * @throws DukeException if file is not found
      */
@@ -51,6 +53,7 @@ public class Storage {
 
     /**
      * Writes data to file.
+     *
      * @param taskList ArrayList of Task objects to be written
      * @throws DukeException if file is not found
      */
@@ -75,6 +78,7 @@ public class Storage {
 
     /**
      * Processes the string objects from the file.
+     *
      * @param task String representation of the task
      * @return a Task object representation of the task
      * @throws DukeException if the string format is not adhered to

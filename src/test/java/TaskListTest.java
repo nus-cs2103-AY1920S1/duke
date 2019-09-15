@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class TaskListTest {
 
     @Test
-    void deleteTask_noSuchTask_exception() {
+    void deleteTask_noSuchTask_exceptionThrown() {
         TaskList tl = new TaskList();
         try {
             tl.delete(1, new Ui());

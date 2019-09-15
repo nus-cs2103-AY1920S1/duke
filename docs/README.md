@@ -27,14 +27,14 @@ Format: `todo read book`
 
 ### Adding a deadline task: `deadline`
 Adds a deadline task. +
-Format: `deadline returm book /by 06/06/06 0606`
+Format: `deadline return book /by DD/MM/YYYY hhmm`
 
 ### Adding an event task: `event`
 Adds an event task. + 
-Format: `event project meeting /at 07/07/07 0707`
+Format: `event project meeting /at DD/MM/YYYY hhmm`
 ### Marking a task as done: `done` 
 Marks the specified task as done. +
-Format: `done 1`
+Format: `done INDEX`
 
 ### Deleting a task: `delete`
 Deletes the specified task from Duke. +
@@ -46,7 +46,7 @@ Format: `list`
 
 ### Tagging a task: `tag`
 Tags a task with a specified keyword. A task can have any number of tags (including 0) +
-Format: `tag 1 fun`
+Format: `tag INDEX KEYWORD`
 
 ### Exiting Duke: `bye` 
 Exits Duke. +

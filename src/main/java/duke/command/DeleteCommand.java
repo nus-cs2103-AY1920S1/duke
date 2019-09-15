@@ -28,6 +28,7 @@ public class DeleteCommand extends Command {
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written
+     * @return response from ui
      * @throws DukeException if index or task is not found in the task list
      */
     @Override

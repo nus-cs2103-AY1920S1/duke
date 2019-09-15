@@ -14,14 +14,13 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke;
-
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            stage.setTitle("Duke");
             AnchorPane ap = fxmlLoader.load();
-            duke = new Duke();
+            Duke duke = new Duke();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

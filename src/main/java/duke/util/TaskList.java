@@ -21,7 +21,7 @@ public class TaskList {
     }
 
     /**
-     * Constructs a TaskList with preloaded tasks.
+     * Constructs a TaskList with pre-loaded tasks.
      * @param taskList ArrayList of Task objects to be loaded
      */
     public TaskList(ArrayList<Task> taskList) {

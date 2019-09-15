@@ -23,6 +23,7 @@ public class ExitCommand extends Command {
      * @param taskList task list for the command to operate on
      * @param ui ui object to print messages according to the command
      * @param storage storage for the task list to be written
+     * @return response from ui
      * @throws DukeException if file is not found
      */
     @Override

@@ -50,6 +50,7 @@ public class AddCommand extends Command {
      * @param taskList the list which the task will be added to
      * @param ui the ui object to print messages
      * @param storage storage object to write files to
+     * @return response from ui
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

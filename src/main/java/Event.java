@@ -27,7 +27,7 @@ public class Event extends Task {
 			throw new DukeException(Ui.EMPTY_INPUT);
 		}
 		String[] eventDate = input.substring(6).split(" /at ");
-		assert false: "Testing Wrong input";
+		assert eventDate.length == 2: "Testing Wrong input";
 		if (eventDate.length != 2) {
 			throw new DukeInvalidArgumentException("OOPS!! Wrong format! Format: event [Task] /at [time]",
 			                                       input);

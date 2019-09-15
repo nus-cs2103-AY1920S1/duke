@@ -52,7 +52,9 @@ public class DateAndTime {
 			if (twelveMin > 59 || (twentyFourTime / 100) > 24) {
 				throw new DukeException("Wrong time");
 			}
-			if (twelveMin == 0) {
+			if (twentyFourTime == 0) {
+				formattedTime = 12 + "am";
+			} else if (twelveMin == 0) {
 				if (twentyFourTime < 1200) {
 					formattedTime = twelveHour + "am";
 				} else {
@@ -66,8 +68,13 @@ public class DateAndTime {
 				} else {
 					if (twelveHour == 0) {
 						twelveHour = 12;
+						formattedTime = twelveHour + ":" + twelveMin + "pm";
+					} else if (twentyFourTime < 1200) {
+						formattedTime = twelveHour + ":" + twelveMin + "am";
+					} else {
+						formattedTime = twelveHour + ":" + twelveMin + "pm";
 					}
-					formattedTime = twelveHour + ":" + twelveMin + "pm";
+
 				}
 			}
 		} catch (NumberFormatException e) {
@@ -191,7 +198,9 @@ public class DateAndTime {
 		for (int i = 0; i < timeAndDate.length; i++) {
 			String[] date = timeAndDate[i].split("/");
 			if (date.length == 3) {
-				if (i == 0) {
+				if (timeAndDate.length == 1) {
+					formatDeadline += DateTime.formatDate(timeAndDate[i]);
+				}else if (i == 0) {
 					formatDeadline += DateTime.formatDate(timeAndDate[i]) + ", ";
 				} else if (i == timeAndDate.length - 1) {
 					formatDeadline += DateTime.formatDate(timeAndDate[i]);
@@ -199,7 +208,9 @@ public class DateAndTime {
 					formatDeadline += DateTime.formatDate(timeAndDate[i]) + ", ";
 				}
 			} else if (timeAndDate[i].length() == 4) {
-				if (i == 0) {
+				if (timeAndDate.length == 1) {
+					formatDeadline += DateTime.formatTime(timeAndDate[i]);
+				}else if (i == 0) {
 					formatDeadline += DateTime.formatTime(timeAndDate[i]) + ", ";
 				} else if (i == timeAndDate.length - 1) {
 					formatDeadline += DateTime.formatTime(timeAndDate[i]);

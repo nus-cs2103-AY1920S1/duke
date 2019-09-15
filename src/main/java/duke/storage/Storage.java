@@ -44,7 +44,7 @@ public class Storage {
 
         while (s.hasNextLine()) {
             String i = s.nextLine();
-            System.out.println(i);
+            //System.out.println(i);
             listInput.add(i);
         }
 

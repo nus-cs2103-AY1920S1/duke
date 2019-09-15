@@ -38,6 +38,7 @@ public class HelpBox extends HBox {
         help.setText(text);
         help.setWrapText(true);
         helpPicture.setImage(img);
+        setAlignment(Pos.TOP_LEFT);
     }
 
     static HelpBox getHelpBox(String text, Image img) {

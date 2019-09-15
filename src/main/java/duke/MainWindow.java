@@ -1,6 +1,7 @@
 package duke;
 
 import duke.parser.IncorrectFileFormatException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -29,9 +30,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-        dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-        jigglypuff = new Image(this.getClass().getResourceAsStream("/images/jigglypuff.png"));
+        userImage = new Image(this.getClass().getResourceAsStream("/images/chatbot.png"));
+        dukeImage = new Image(this.getClass().getResourceAsStream("/images/robot.png"));
+        jigglypuff = new Image(this.getClass().getResourceAsStream("/images/avatar.png"));
     }
 
     public void setDuke(Duke d) {
@@ -71,7 +72,7 @@ public class MainWindow extends AnchorPane {
 
         if (input.toLowerCase().startsWith("help")) {
             String remainingInput = input.toLowerCase().replace("help", "").trim();
-            assert remainingInput.length() > 0 : "Value of string length of command interested is greater than 0";
+            assert remainingInput.length() >= 0 : "Value of string length of command interested is greater than 0";
 
             if (remainingInput.length() == 0) {
                 handleHelpPage();
@@ -95,8 +96,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private void handleHelpPage(String commandInterested) {
-        String helpLine1 = "Welcome to help page!\n";
-        String helpLine2 = "To use the command, please enter:\n";
+        String helpLine1 = "Here is what I found!\n";
 
         boolean isByeCommand = commandInterested.toLowerCase().equals("bye");
         boolean isFindCommand = commandInterested.toLowerCase().equals("find");
@@ -123,17 +123,20 @@ public class MainWindow extends AnchorPane {
             helpLine3 = commandInterested;
         }
 
-        dialogContainer.getChildren().addAll(new HelpBox(helpLine1 + helpLine2 + helpLine3, jigglypuff));
+        dialogContainer.getChildren().addAll(new HelpBox(helpLine1 + helpLine3, jigglypuff));
         userInput.clear();
     }
 
-    /*
+    /**
         Handles usual operations other than help page.
      */
     private void handleOperations(String input) {
         String response = duke.getDukeResponse(input);
 
+        //boolean isExit = duke.isExitRequest(input);
+
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage), DialogBox.getDukeDialog(response, dukeImage));
+        userInput.clear();
 
     }
 }

@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
 
+import duke.command.ByeCommand;
 import duke.command.CommandNotFoundException;
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.IncorrectNumberOfArgumentsException;
@@ -25,19 +26,10 @@ public class Duke {
 
     Duke() {
         filepath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt";
-        initializeDuke(filepath);
-    }
-
-    /**
-     * Constructor for class Duke.
-     *
-     * @param filePath String of file path to read.
-     */
-    private void initializeDuke(String filePath) {
         Parser.initialize();
-        storage = new Storage(filePath);
-        ui = new Ui();
-    }
+        storage = new Storage(filepath);
+        ui = new Ui();}
+
 
     void performDukeStartup() throws IncorrectFileFormatException, FileNotFoundException {
         try {
@@ -54,6 +46,24 @@ public class Duke {
         }
     }
 
+    public boolean isExitRequest(String input){
+        boolean isExit = false;
+        
+        Command c = null;
+        try{
+            c = Parser.parse(input);
+        } catch (CommandNotFoundException e) {
+            e.printStackTrace();
+        } catch (IncorrectNumberOfArgumentsException e) {
+            e.printStackTrace();
+        }
+
+        if(c instanceof ByeCommand){
+            isExit = true;
+        }
+        return isExit;
+    }
+    
     // Stub to reply to GUI
     String getDukeResponse(String input) {
         String output;

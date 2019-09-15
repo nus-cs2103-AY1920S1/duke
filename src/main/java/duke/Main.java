@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -21,6 +22,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+
+            Image icon = new Image(getClass().getResourceAsStream("/images/robot.png"));
+            stage.getIcons().add(icon);
+            stage.setTitle("Duke Helpbot");
+
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
 

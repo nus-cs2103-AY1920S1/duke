@@ -106,4 +106,16 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 ```
 
+### `done` - Sets a task as completed.
 
+The user can update the completion status of the task to done. The user needs to identify the task to be set as done with the task number, by checking the task list.
+
+Example of usage: 
+`done 4`
+Example of expected outcome:
+```
+Nice! I've marked this task as done:
+  [D][Y] CS2103 IP (by: 12/10/2019 1123)
+```
+
+### `done` - Sets a task as completed.

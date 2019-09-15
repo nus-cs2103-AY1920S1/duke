@@ -7,7 +7,7 @@
    3.3. [Listing all tasks](#33-listing-all-tasks) : `list`  
    3.4. [Marking a task as done](#34-marking-a-task-as-done) : `done`   
    3.5. [Deleting a task](#35-deleting-a-task) : `delete`    
-   3.6. [Searching for a task by keyword(s)](#36-searching-a-task-by-keyword) : `find`
+   3.6. [Searching for a task by keyword(s)](#36-searching-a-task-by-keyword) : `find` </br>
    3.7. [Exiting the program](#37-exiting-the-program) : `bye`
    
 ## 1. Introduction

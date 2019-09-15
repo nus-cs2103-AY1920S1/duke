@@ -1,9 +1,17 @@
 package duke.main;
 
 import duke.exception.EmptyTaskListException;
+import duke.note.Note;
 import duke.task.Task;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Scans input from the user and prints feedback to the user.
@@ -88,15 +96,38 @@ public class Ui {
                 + " tasks in the list.";
     }
     
+    public String showNoteList() {
+        try {
+            Stream<Path> walk = Files.walk(Paths.get(Note.FILE_BASE_PATH));
+            List<String> noteList = walk
+                    .map(x -> x.toString())
+                    .filter(f -> f.endsWith(".txt"))
+                    .map(x -> x.replace(Note.FILE_BASE_PATH, ""))
+                    .map(x -> x.replace(".txt", ""))
+                    .collect(Collectors.toList());
+            String response = "";
+            for (int i = 0; i < noteList.size(); i++) {
+                response = response.concat((i + 1) + ": " + noteList.get(i) + "\n");
+            }
+            if (response.isBlank()) {
+                return "You have no notes stored currently!";
+            } else {
+                return "Here are the note titles that you have:\n" + response;
+            }
+        } catch (IOException e) {
+            return this.showError(e);
+        }
+    }
+    
     public String showAfterWritingNote(String noteName) {
-        return "New note added with name: " + noteName;
+        return "New note added with name: '" + noteName + "'";
     }
     
     public String showAfterReadingNote(String noteName, String noteContents) {
-        return "Note name: " + noteName + "\nNote contents: \n" + noteContents;
+        return "Note name: '" + noteName + "'\nNote contents: \n" + noteContents;
     }
     
     public String showAfterDeletingNote(String noteName) {
-        return "Note deleted with name: " + noteName;
+        return "Note deleted with name: '" + noteName + "'";
     }
 }

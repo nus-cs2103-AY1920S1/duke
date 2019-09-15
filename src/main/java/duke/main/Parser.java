@@ -193,6 +193,8 @@ public class Parser {
             String noteContents = Parser.removeInstruction(input);
             String noteInstruction = Parser.parseInstruction(noteContents);
             switch (noteInstruction) {
+            case "list":
+                return new ListNoteCommand();
             case "write":
                 return new WriteNoteCommand(Parser.parseWriteNote(noteContents));
             case "read":

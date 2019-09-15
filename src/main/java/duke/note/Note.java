@@ -1,7 +1,7 @@
 package duke.note;
 
 public class Note {
-    private String fileBasePath = ".\\src\\main\\java\\duke\\note\\notes\\";
+    public static final String FILE_BASE_PATH = ".\\src\\main\\java\\duke\\note\\notes\\";
     private String filePath;
     private String noteContents;
     
@@ -15,7 +15,7 @@ public class Note {
     }
     
     String getFilePath() {
-        return this.fileBasePath + this.filePath + ".txt";
+        return Note.FILE_BASE_PATH + this.filePath + ".txt";
     }
     
     public String getFileName() {

@@ -204,6 +204,7 @@ To view an overview of the tasks done over time, there are two ways:
 2. Key in `show stats` in the command line: `show stats`
 
 This is an example of an expected chart:  
+<br>
     <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="350">
 
 <br>

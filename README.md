@@ -1,6 +1,6 @@
-Credits to:
-Robot and chatbot icon made by [Flat Icons][1] from www.flaticon.com
-Jigg;ypuff icon made by [Darius Dan][2]
+* Credits to:
+* Robot and chatbot icon made by [Flat Icons][1] from www.flaticon.com
+* Jigglypuff icon made by [Darius Dan][2]
 
 [1]:https://www.flaticon.com/authors/flat-icons 
 [2]:https://www.flaticon.com/authors/darius-dan

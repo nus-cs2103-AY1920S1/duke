@@ -10,3 +10,15 @@ application {
         standardInput = System.in
     }
 }
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+}
+
+test {
+    useJUnitPlatform();
+}

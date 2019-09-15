@@ -13,16 +13,15 @@ import duke.tasks.Task;
 
 public class DeleteCommand extends Command {
 
-    int index;
+    private int index;
 
-    public DeleteCommand(int index){
+    private DeleteCommand(int index){
         this.commandType = CommandType.DELETE;
         this.index = index;
     }
 
     public static DeleteCommand createDeleteIfValid(String [] tokens) throws DukeException {
         try {
-            Parser.checkValidLength(tokens);
             int index = Integer.parseInt(tokens[1])-1;
             return new DeleteCommand(index);
         } catch (NumberFormatException error) {
@@ -31,7 +30,6 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-
     public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
         try {
             Task task = taskList.getTaskAt(index+1);

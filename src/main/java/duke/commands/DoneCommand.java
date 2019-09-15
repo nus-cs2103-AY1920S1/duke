@@ -16,16 +16,15 @@ import duke.tasks.Task;
 
 public class DoneCommand extends Command{
 
-    int index;
+    private int index;
 
-    public DoneCommand(int index){
+    private DoneCommand(int index){
         this.commandType = CommandType.DONE;
         this.index = index;
     }
 
     public static DoneCommand createDoneIfValid(String [] tokens) throws DukeException {
         try {
-            Parser.checkValidLength(tokens);
             int index = Integer.parseInt(tokens[1])-1;
             return new DoneCommand(index);
         } catch (NumberFormatException error) {

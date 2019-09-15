@@ -20,10 +20,8 @@ import duke.errors.DukeExceptionType;
 public class Storage{
 
     private File file;
-    private String filePath;
 
     public Storage(String filePath){
-        this.filePath = filePath;
         this.file = new File(filePath);
     }
 

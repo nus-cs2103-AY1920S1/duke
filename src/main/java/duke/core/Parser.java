@@ -24,7 +24,7 @@ public class Parser {
 
     private static String[] responses = new String[]{"/by","/at"};
 
-    public static Command parse(String input) throws DukeException, IllegalArgumentException {
+    public static Command parseCommand(String input) throws DukeException, IllegalArgumentException {
         String[] tokens = input.split(" ");
         if (tokens[0].equals("bye")) {
             return new ExitCommand();
@@ -42,7 +42,7 @@ public class Parser {
         }
     }
 
-    public static void checkValidLength(String[] tokens) throws IllegalArgumentException {
+    private static void checkValidLength(String[] tokens) throws IllegalArgumentException {
         List<String> group1 = List.of("todo", "deadline", "event");
         List<String> group2 = List.of("done", "delete");
         if (tokens.length == 1 && group1.contains(tokens[0])) {
@@ -53,7 +53,7 @@ public class Parser {
     }
 
 
-    public static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
+    private static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
         List<String> validCommands = List.of("todo", "deadline", "event");
 
         if (!validCommands.contains(tokens[0])) {
@@ -83,9 +83,9 @@ public class Parser {
             int hour = dateAndTime.getHour();
             int minute = dateAndTime.getMinute();
 
-            StringBuffer dateTime = new StringBuffer();
+            StringBuilder dateTime = new StringBuilder();
 
-            dateTime.append(getIntegerOrdinal(day));
+            dateTime.append(getFormattedDay(day));
             dateTime.append(" of ");
             dateTime.append(month);
             dateTime.append(" ");
@@ -104,33 +104,32 @@ public class Parser {
 
             return dateTime.toString();
         } catch (DateTimeParseException exception) {
-            //put it as general mistake first
             throw new DukeException(dateTimeString + " is not in valid dd/MM/yyyy HHmm format.",
                     DukeExceptionType.GENERALMISTAKE);
         }
     }
 
-    private static String getIntegerOrdinal(int integer) {
-        int remainderHundred = integer % 100;
+    private static String getFormattedDay(int day) {
+        int remainderHundred = day % 100;
         if (remainderHundred > 9 && remainderHundred < 21) {
-            return integer + "th";
+            return day + "th";
         } else {
-            int remainderTen = integer % 10;
+            int remainderTen = day % 10;
             switch (remainderTen) {
                 case 1:
-                    return integer + "st";
+                    return day + "st";
                 case 2:
-                    return integer + "nd";
+                    return day + "nd";
                 case 3:
-                    return integer + "rd";
+                    return day + "rd";
                 default:
-                    return integer + "th";
+                    return day + "th";
             }
         }
     }
 
 
-    public static Command createDateCommandIfValid(String [] tokens, int mode) throws DukeException {
+    private static Command createDateCommandIfValid(String[] tokens, int mode) throws DukeException {
         List<String> lst = Arrays.asList(tokens);
         String key = responses[mode];
         if (!lst.contains(key)) {
@@ -144,6 +143,10 @@ public class Parser {
             String dateTimeString = tokens[index+1] + " " + tokens[index+2];
             String correctDate = Parser.parseDateTime(dateTimeString);
             StringBuilder builder = new StringBuilder();
+            if (index -1 <=0) {
+                throw new DukeException("Please input task description",
+                        DukeExceptionType.GENERALMISTAKE);
+            }
             for (int i = 1; i < index ; i++) {
                 String curr = tokens[i];
                 builder.append(curr);
@@ -160,7 +163,7 @@ public class Parser {
 
     }
 
-    public static Command createDateCommand(int mode,StringBuilder builder, String correctDate) {
+    private static Command createDateCommand(int mode, StringBuilder builder, String correctDate) {
         if (mode==0) {
             return new AddDeadlineCommand(builder.toString(),correctDate);
         } else {

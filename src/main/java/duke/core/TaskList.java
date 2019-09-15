@@ -9,7 +9,7 @@ import duke.tasks.Task;
 public class TaskList {
 
     private ArrayList<Task> taskList;
-    protected Storage storage;
+    private Storage storage;
 
     public TaskList(Storage storage){
         this.taskList = new ArrayList<>();
@@ -47,7 +47,7 @@ public class TaskList {
         this.storage.overwriteStorage(taskList);
     }
 
-    public int getSize(){
+    int getSize(){
         return this.taskList.size();
     }
 

@@ -29,7 +29,7 @@ public class Duke {
         while (ui.hasInputs()) {
             try {
                 String input = ui.readCommand();
-                Command command = Parser.parse(input);
+                Command command = Parser.parseCommand(input);
                 command.execute(taskList, this.ui);
                 if (command.getCommandType().equals(CommandType.EXIT)) {
                     break;

@@ -11,7 +11,7 @@ import duke.tasks.ToDo;
 
 public class AddToDoCommand extends Command{
 
-    String [] tokens;
+    private String [] tokens;
 
     public AddToDoCommand(String [] tokens) {
         this.tokens = tokens;

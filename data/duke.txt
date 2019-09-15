@@ -1,3 +1,0 @@
-1 / ToDo / ✓ / 1
-2 / Deadline / ✓ / 1 / 12th of DECEMBER 1212, 12:12pm
-3 / Deadline / ✘ / 1 2 3 4 5 / 12th of DECEMBER 1212, 12:12pm

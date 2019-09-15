@@ -51,8 +51,7 @@ Example of usage:
 
 Expected outcome:
 
-![GitHub Logo](/images/todo.png)
-Format: ![Alt Text](url)
+![GitHub Logo](../images/todo.png)
 
 <hr>
 
@@ -64,7 +63,7 @@ Example of usage:
 
 Expected outcome:
 
-add picture
+![GitHub Logo](../images/deadline.png)
 <hr>
 
 ### `event` - Tell Doggo your schedule.
@@ -75,7 +74,7 @@ Example of usage:
 
 Expected outcome:
 
-add picture
+![GitHub Logo](../images/event.png)
 <hr>
 
 ### `list` - Doggo list your task for you.
@@ -86,40 +85,40 @@ Example of usage:
 
 Expected outcome:
 
-add picture
+![GitHub Logo](../images/list.png)
 <hr>
 
 ### `find` - Doggo fetches your tasks.
 
 Example of usage: 
 
-`find`
+`find (description)`
 
 Expected outcome:
 
-add picture
+![GitHub Logo](../images/find.png)
 <hr>
 
 ### `done` - Doggo notes your completed worries.
 
 Example of usage: 
 
-`find`
+`done (number in the list)`
 
 Expected outcome:
 
-add picture
+![GitHub Logo](../images/done.png)
 <hr>
 
 ### `delete` - Doggo clears your trouble.
 
 Example of usage: 
 
-`find`
+`delete (number in the list)`
 
 Expected outcome:
 
-add picture
+![GitHub Logo](../images/delete.png)
 <hr>
 
 ### `bye` - Doggo needs his afternoon nap.
@@ -130,5 +129,5 @@ Example of usage:
 
 Expected outcome:
 
-add picture
+![GitHub Logo](../images/bye.png)
 <hr>

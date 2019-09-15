@@ -4,6 +4,7 @@ import duke.ui.Ui;
 
 import duke.exception.DukeException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class TaskList {
 
     /**
      * Constructor to create a TaskList object with an existing Task list.
-     *
      * @param tasks Existing tasks list in the database.
+     * @throws IOException If an I/O error is incurred.
      */
-    public TaskList(List<Task> tasks) {
+    public TaskList(List<Task> tasks) throws IOException {
         this.tasks = tasks;
     }
 

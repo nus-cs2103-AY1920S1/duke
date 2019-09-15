@@ -1,14 +1,6 @@
 package duke.util;
 
-
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.DeleteCommand;
-import duke.command.AddCommand;
-import duke.command.InvalidCommand;
-import duke.command.FindCommand;
+import duke.command.*;
 
 public class Parser {
 
@@ -25,6 +17,8 @@ public class Parser {
             return new AddCommand();
         } else if (fullCommand.contains("find")) {
             return new FindCommand();
+        } else if (fullCommand.contains("help")) {
+            return new HelpCommand();
         }
         return new InvalidCommand();
     }

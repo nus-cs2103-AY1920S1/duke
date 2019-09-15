@@ -39,7 +39,7 @@ This application aims to be beginner friendly and is intended for users who want
 
 This document uses the following typographical conventions:
 
-    `sort`  A grey highlight (called a mark-up) indicates that this is a command that can be type into the command line and executed by the application.
+`sort`  A grey highlight (called a mark-up) indicates that this is a command that can be type into the command line and executed by the application.
     
 :exclamation:   An exclamation sign indicates important information
 
@@ -51,11 +51,11 @@ This document uses the following typographical conventions:
 
 This application stores 3 different types of tasks:
 
-    `todo`  A Todo task represents a task to be done without any time limit.
+`todo`  A Todo task represents a task to be done without any time limit.
     
-    `deadline`  A Deadline task represents a task to be done by a certain date and time.
+`deadline`  A Deadline task represents a task to be done by a certain date and time.
     
-    `event` An Event task represents an event to attend at a certain date and time.
+`event` An Event task represents an event to attend at a certain date and time.
 
 #### Adding of Tasks <a name="add"></a>
 This section contains the commands to be keyed in to add different type of task.

@@ -40,7 +40,6 @@ This application aims to be beginner friendly and is intended for users who want
 This document uses the following typographical conventions:
 
 `sort`  A grey highlight (called a mark-up) indicates that this is a command that can be type into the command line and executed by the application.
-    
 :exclamation:   An exclamation sign indicates important information
 
 
@@ -51,44 +50,44 @@ This document uses the following typographical conventions:
 
 This application stores 3 different types of tasks:
 
-`todo`  A Todo task represents a task to be done without any time limit.
+`todo`                  A Todo task represents a task to be done without any time limit.
     
-`deadline`  A Deadline task represents a task to be done by a certain date and time.
+`deadline`         A Deadline task represents a task to be done by a certain date and time.
     
-`event` An Event task represents an event to attend at a certain date and time.
+`event`               An Event task represents an event to attend at a certain date and time.
 
 #### Adding of Tasks <a name="add"></a>
 This section contains the commands to be keyed in to add different type of task.
 
 ##### Todo Task
 
-    To key in a `todo` task: `todo` [description of task]
+To key in a `todo` task: `todo` [description of task]
     
-    Example of usage: `todo math homework`
-    Expected Outcome: `Got it. Ive added this task:
-                       [T][✗] math homework
-                       Now you have 1 task in the list.`
+    Example of usage: todo math homework
+    Expected Outcome: Got it. Ive added this task:
+                      [T][✗] math homework
+                      Now you have 1 task in the list.
                        
 
 ##### Deadline Task
 
-    To key in a `deadline` task: `deadline` [description of task] /by [date in the format of dd/MM/yyyy] [time in the format of HHmm]
+To key in a `deadline` task: `deadline` [description of task] /by [date in the format of dd/MM/yyyy] [time in the format of HHmm]
     
-    Example of usage: `deadline math project /by 6/4/2022 0123`
-    Expected Outcome: `Got it. Ive added this task:
-                       [D][✗] math project (by: 6/4/2022 01.23AM)
-                       Now you have 1 task in the list.`
+    Example of usage: deadline math project /by 6/4/2022 0123
+    Expected Outcome: Got it. Ive added this task:
+                      [D][✗] math project (by: 6/4/2022 01.23AM)
+                      Now you have 1 task in the list.
     
 :exclamation: `by` must be included in the command.
 
 ##### Todo Task
 
-    To key in a `event` task: `event` [description of task] /at [date in the format of dd/MM/yyyy] [time in the format of HHmm]
+To key in a `event` task: `event` [description of task] /at [date in the format of dd/MM/yyyy] [time in the format of HHmm]
     
-    Example of usage: `event music festival /at 6/4/2022 0123`
-    Expected Outcome: `Got it. Ive added this task:
-                       [E][✗] music festival (at: 6/4/2022 01.23AM)
-                       Now you have 1 task in the list.`
+    Example of usage: event music festival /at 6/4/2022 0123
+    Expected Outcome: Got it. Ive added this task:
+                      [E][✗] music festival (at: 6/4/2022 01.23AM)
+                      Now you have 1 task in the list.
 
 :exclamation: `at` must be included in the command.
     
@@ -102,7 +101,9 @@ This section contains the commands to be keyed in to handle tasks.
 There are two commands to manipulate the tasks: 
 
 ##### Done Command
-    To key in 
+
+To mark the task as done:
+
 
 
 ##### Delete Command

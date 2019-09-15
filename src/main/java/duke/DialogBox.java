@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -39,14 +38,8 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.setDialogBoxContent(text);
-        this.setDialogBoxImage(img);
-    }
-
-    private void setDialogBoxContent(String text) {
         dialog.setText(text);
-        Text t = new Text(text);
-        dialog.setMinHeight(t.getLayoutBounds().getHeight()); // +20 is for paddings
+        this.setDialogBoxImage(img);
     }
 
     private void setDialogBoxImage(Image img) {

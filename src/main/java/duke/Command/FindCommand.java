@@ -31,12 +31,9 @@ public class FindCommand extends Command {
         String[] inputsplit = this.inputCommand.split(" ");
         if (inputsplit.length <= 1) {
             throw new DukeException("OOPS!!! The description of a find Command cannot be empty.");
-        } else if (inputsplit.length > 2) {
-            throw new DukeException("OOPS!!! The find Command can only accept one keyword.");
-        } else {
-            ArrayList<Task> taskToFind = tasks.findTask(inputsplit[1].trim());
-            return ui.printFind(taskToFind);
         }
+        ArrayList<Task> taskToFind = tasks.findTask(inputsplit[1].trim());
+        return ui.printFind(taskToFind);
     }
 
 }

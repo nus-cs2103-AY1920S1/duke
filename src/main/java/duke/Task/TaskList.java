@@ -51,13 +51,9 @@ public class TaskList {
         ArrayList<Task> returnedTaskList = new ArrayList<Task>();
         for (int i = 0; i < taskArray.size(); i++) {
             Task t = taskArray.get(i);
-            String[] taskSplit = t.getDescription().split(" ");
-            for (int j = 0; j < taskSplit.length; j++) {
-                String toCheck = taskSplit[j];
-                System.out.println(toCheck);
-                if (toCheck.equalsIgnoreCase(inputString)) {
-                    returnedTaskList.add(t);
-                }
+            String toCheck = t.getDescription();
+            if (toCheck.contains(inputString)) {
+                returnedTaskList.add(t);
             }
         }
         return returnedTaskList;

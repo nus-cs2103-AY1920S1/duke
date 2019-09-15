@@ -1,2 +1,0 @@
-[T]|false|borrow book
-[D]|false|hello world|2019-09-09 0900

@@ -171,6 +171,8 @@ public class Parser {
         case "bye":
             Duke.isExitRunLoop = true;
             return new ByeCommand();
+        case "help":
+            return new HelpCommand();
         case "list":
             return new ListCommand();
         case "done":

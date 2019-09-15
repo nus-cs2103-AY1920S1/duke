@@ -21,6 +21,22 @@ public class Ui {
     
     private String byePhrase = "Bye. Hope to see you again soon!";
     
+    private String helpPhrase = "Welcome to Duke.\n\nThis is a program designed to manage tasks. Tasks are saved "
+            + "between program start-ups. After starting the program up, type in any of the following inputs to "
+            + "execute the command:\n\n--- 'help' : Shows this help page.\n--- 'bye' : Exits this program.\n"
+            + "--- 'todo <task description> : Adds a new ToDo task with description <task description>.\n"
+            + "--- 'deadline <task description> /by <task time>' : Adds a new Deadline task with description"
+            + "<task description> and time <task time>, which is inputted in DD/MM/YYYY HHMM format.\n"
+            + "--- 'event <task description> /at <task time>' : Adds a new Event task with description"
+            + "<task description> and time <task time>, which is inputted in DD/MM/YYYY HHMM format.\n"
+            + "--- 'done <task number>' : Marks the indicated task as done.\n--- 'delete <task number>' : Deletes the"
+            + " indicated task.\n--- 'list' : Lists all current Tasks.\n--- 'find <search phrase>' : Lists out all "
+            + "tasks that contain the search phrase <search phrase>.\n--- 'note write <note title> | <note contents>'"
+            + " : Creates a new note with name <note title> and contents <note contents>. Only works if there is "
+            + "no other note with the same name.\n--- 'note read <note title> : Shows the contents of the note with "
+            + "title <note title>, if there is one.\n--- 'note delete <note title> : Deletes the note with title "
+            + "<note title>, if there is one.\n--- 'note list' : Lists all current Notes.\n\n";
+    
     /**
      * Scanner object used for reading user input.
      */
@@ -72,6 +88,10 @@ public class Ui {
      */
     public String showBye() {
         return byePhrase;
+    }
+    
+    public String showHelp() {
+        return helpPhrase;
     }
     
     public String showList(TaskList taskList) throws EmptyTaskListException {

@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             } else {
                 int dateStartIndex = command.lastIndexOf("/by");
                 desc = command.substring(9, dateStartIndex - 1);
-                String ddl = command.substring(dateStartIndex + 4);
+                String ddl = convertDate(command.substring(dateStartIndex + 4));
                 taskList.addTask(new Deadline(desc, ddl));
             }
         } else if (command.startsWith(Instruction.EVENT.toString())) {
@@ -45,7 +45,7 @@ public class AddCommand extends Command {
             } else {
                 int dateStartIndex = command.indexOf("/at");
                 desc = command.substring(6, dateStartIndex - 1);
-                String date = command.substring(dateStartIndex + 4);
+                String date = convertDate(command.substring(dateStartIndex + 4));
                 taskList.addTask(new Event(desc, date));
             }
         } else {

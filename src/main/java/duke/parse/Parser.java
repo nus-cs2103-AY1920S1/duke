@@ -20,7 +20,7 @@ public class Parser {
     private static Command createToDoTask(String command) throws EmptyToDoDescriptionException {
         Task userTask;
         String task = command.replaceFirst("todo", "");
-        if (task.isEmpty()) {
+        if (task.isBlank()) {
             throw new EmptyToDoDescriptionException("The description of a todo cannot be empty. ");
         } else {
             //removes space in the beginning

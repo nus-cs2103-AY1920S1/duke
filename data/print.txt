@@ -1,4 +1,3 @@
-[E][N] project meeting (at: 02/12/2019 1800)
+[E][Y] project meeting (at: 02/12/2019 1800)
 [D][N] return book (by: 02/12/2019 1800)
 [T][N] read book
-[T][N] ewjfie

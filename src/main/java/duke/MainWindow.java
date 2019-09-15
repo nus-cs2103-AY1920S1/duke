@@ -114,6 +114,7 @@ public class MainWindow extends AnchorPane {
 		boolean isToDoCommand = commandInterested.toLowerCase().equals("todo");
 		boolean isDeadlineCommand = commandInterested.toLowerCase().equals("deadline");
 		boolean isEventCommand = commandInterested.toLowerCase().equals("event");
+		boolean isDoneCommand = commandInterested.toLowerCase().equals("done");
 		
 		String helpLine3 = "Sorry! Command not found!\n";
 		if (isToDoCommand) {
@@ -130,6 +131,8 @@ public class MainWindow extends AnchorPane {
 			helpLine3 = commandInterested + " <keyword>\n";
 		} else if (isByeCommand) {
 			helpLine3 = commandInterested;
+		} else if(isDoneCommand){
+			helpLine3 = commandInterested + " <task number>";
 		}
 		
 		dialogContainer.getChildren().addAll(new HelpBox(helpLine1 + helpLine3, jigglypuff));

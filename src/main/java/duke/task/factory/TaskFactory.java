@@ -2,9 +2,11 @@ package duke.task.factory;
 
 import duke.task.Task;
 import duke.task.tasks.entities.TaskType;
+import error.command.DateTimeExtractionException;
 import error.task.TaskCreationException;
 import error.datetime.UnknownDateTimeException;
-import util.CommandUtils;
+import util.command.Arguments;
+import util.command.CommandUtils;
 import util.DateTime;
 
 import java.lang.reflect.Constructor;
@@ -21,8 +23,6 @@ import java.util.regex.Pattern;
  * Factory to produce tasks.
  */
 public class TaskFactory {
-    private final String dateTimeRegex =
-            "(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})\\s([0-9]{4}))";
 
     private static final String INVALID_ARGUMENTS_ERROR_MESSAGE = "☹ OOPS!!! Your task arguments are invalid! :-(";
     private static final String UNKNOWN_ERROR_MESSAGE = "☹ OOPS!!! Something went wrong while creating your task! :-(";
@@ -30,6 +30,7 @@ public class TaskFactory {
 
     /**
      * Parses user input to create corresponding task.
+     *
      * @param input user input
      * @return optional of task
      * @throws TaskCreationException if arguments are invalid
@@ -39,22 +40,22 @@ public class TaskFactory {
         String keyword = CommandUtils.getCommand(input);
 
         // scans task types to find corresponding keyword
-        Optional<Class<? extends Task>> taskOptional = Arrays.stream(TaskType.values())
+        Optional<TaskType> taskTypeOptional = Arrays.stream(TaskType.values())
                 .filter(t -> t.keyword.equals(keyword))
-                .findFirst()
-                .map(t1 -> t1.task);
+                .findFirst();
 
-        if (taskOptional.isEmpty()) {
+        if (taskTypeOptional.isEmpty()) {
             return Optional.empty();
         }
 
         // get constructor and parameters type of particular task
-        Class<?> task = taskOptional.get();
+        Class<?> task = taskTypeOptional.get().task;
         Constructor<?> constructor = task.getConstructors()[0];
         Class<?>[] parameters = constructor.getParameterTypes();
 
         // parse arguments
-        List<Object> argsList = getArguments(input);
+        int numDates = taskTypeOptional.get().numDates;
+        List<Object> argsList = getArguments(input, numDates);
 
         // for now tasks are always not done and not recurring when created
         argsList.add(false);
@@ -73,53 +74,47 @@ public class TaskFactory {
         }
     }
 
-    private List<Object> getArguments(String input) throws TaskCreationException {
+    /**
+     * Gets list of arguments from user input
+     * @param input user input
+     * @param numDates number of dates arguments should contain
+     * @return list of argument objects
+     * @throws TaskCreationException if arguments are invalid
+     */
+    private List<Object> getArguments(String input, int numDates) throws TaskCreationException {
         // gets arguments
-        String arguments = CommandUtils.getArguments(input);
+        Arguments arguments = CommandUtils.getArguments(input);
 
         List<Object> argsList = new ArrayList<>();
 
         try {
-
             // get datetime arguments
-            List<LocalDateTime> times = extractLocalDateTime(arguments);
+            List<LocalDateTime> times = arguments.extractLocalDateTime(numDates);
             argsList.addAll(times);
 
             // get description
-            String description = arguments.replaceAll(dateTimeRegex, "").trim();
-            if (description.equals("")) {
+            if (arguments.isEmpty()) {
                 throw new TaskCreationException(EMPTY_DETAILS_ERROR_MESSAGE);
             }
 
+            String description = arguments.getArguments();
             argsList.add(description);
 
-        } catch (UnknownDateTimeException e) {
+        } catch (UnknownDateTimeException | DateTimeExtractionException e) {
             throw new TaskCreationException(INVALID_ARGUMENTS_ERROR_MESSAGE);
         }
 
         return argsList;
     }
 
-    private List<LocalDateTime> extractLocalDateTime(String arguments) throws UnknownDateTimeException {
-        Pattern pattern = Pattern.compile(dateTimeRegex);
-        Matcher matcher = pattern.matcher(arguments);
 
-        List<String> dateTimePatterns = new ArrayList<>();
-
-        // find all substrings that match regex pattern
-        while (matcher.find()) {
-            dateTimePatterns.add(matcher.group(1));
-        }
-
-        // cannot use streams because of checked exception :(
-        List<LocalDateTime> dateTimeArguments = new ArrayList<>();
-        for (String s : dateTimePatterns) {
-            dateTimeArguments.add(DateTime.parse(s));
-        }
-
-        return dateTimeArguments;
-    }
-
+    /**
+     * Reorders arguments list to match order of parameters in order to invoke constructor properly
+     * @param parameters array of parameters
+     * @param arguments list of arguments
+     * @return new argument array
+     * @throws TaskCreationException if arguments and parameters differ in length to begin with
+     */
     private Object[] reorderArgsList(Class<?>[] parameters, List<Object> arguments) throws TaskCreationException {
         // if arguments length and parameters length different, throw exception
         if (parameters.length != arguments.size()) {

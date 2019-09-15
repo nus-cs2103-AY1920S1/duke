@@ -12,7 +12,7 @@ import error.command.CommandCreationException;
 import error.task.TaskCreationException;
 import error.ui.UiException;
 import ui.UiController;
-import util.CommandUtils;
+import util.command.CommandUtils;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -123,7 +123,7 @@ public class CommandFactory {
 
     private Optional<Command> parseAsCommand(String input) throws CommandCreationException {
         String command = CommandUtils.getCommand(input);
-        String arguments = CommandUtils.getArguments(input);
+        String arguments = CommandUtils.getArguments(input).getArguments();
 
         Optional<CommandProducer> producerOptional = Arrays.stream(CommandType.values())
                 .filter(type -> type.keyword.equals(command))

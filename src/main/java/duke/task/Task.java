@@ -83,7 +83,7 @@ public abstract class Task implements Serializable {
         if (timeFrame.getDescription().equals("")) {
             return description;
         } else {
-            return String.format("%s, (%s)", description, timeFrame.getDescription());
+            return String.format("%s (%s)", description, timeFrame.getDescription());
         }
     }
 }

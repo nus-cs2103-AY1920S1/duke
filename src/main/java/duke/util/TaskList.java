@@ -12,12 +12,12 @@ import java.util.stream.IntStream;
 /**
  * TaskList class to store list of tasks.
  */
-public class TaskList {
+class TaskList {
     private ArrayList<Task> taskList;
     private int count;
 
-    public TaskList() {
-        this.taskList = new ArrayList<Task>();
+    TaskList() {
+        this.taskList = new ArrayList<>();
         count = 0;
     }
 
@@ -26,7 +26,7 @@ public class TaskList {
      *
      * @param taskList List of tasks
      */
-    public TaskList(ArrayList<Task> taskList) {
+    TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
         count = taskList.size();
     }
@@ -36,14 +36,14 @@ public class TaskList {
      *
      * @return list of tasks
      */
-    public ArrayList<Task> getTaskAsArrayList() {
+    ArrayList<Task> getTaskAsArrayList() {
         return this.taskList;
     }
 
     /**
      * Displays the tasklist.
      */
-    public String getListAsString() {
+    String getListAsString() {
         if (count == 0) {
             return "You have no tasks in your list!";
         }
@@ -59,13 +59,13 @@ public class TaskList {
      * @param index Index of task in the list
      * @throws DukeException if invalid task number is passed to this method
      */
-    public String markItemComplete(int index) throws DukeException {
+    String markItemComplete(int index) throws DukeException {
         if (index <= 0 || index > count) {
             throw new DukeException("Invalid task number!");
         }
         Task t = taskList.get(index - 1);
         boolean canComplete = t.complete();
-        String result = "";
+        String result;
         if (canComplete) {
             result = "Nice! I've marked this task as done:\n";
             result += t;
@@ -83,7 +83,7 @@ public class TaskList {
      * @return String representation of deleted task
      * @throws DukeException if invalid task number is passed to this method
      */
-    public String deleteItem(int index) throws DukeException {
+    String deleteItem(int index) throws DukeException {
         if (index <= 0 || index > count) {
             throw new DukeException("Invalid task number!");
         }
@@ -91,8 +91,7 @@ public class TaskList {
         Task t = taskList.get(index);
         taskList.remove(index);
         count -= 1;
-        String result = generateDeleteItemResponse(t);
-        return result;
+        return generateDeleteItemResponse(t);
     }
 
     private String generateDeleteItemResponse(Task t) {
@@ -112,7 +111,7 @@ public class TaskList {
      * @param inputParts An array of <code>String</code> split into type of task, name of task and date (if required)
      * @throws DukeException if command is invalid
      */
-    public String registerNewTask(String[] inputParts) throws DukeException {
+    String registerNewTask(String[] inputParts) throws DukeException {
         checkCommandValidity(inputParts[0]);
         Task t = addToList(inputParts[1], inputParts[0]);
         return echo(t);
@@ -124,21 +123,13 @@ public class TaskList {
      * @param type Type of command
      * @throws DukeException if command is invalid
      */
-    static void checkCommandValidity(String type) throws DukeException {
+    private void checkCommandValidity(String type) throws DukeException {
         if (!type.equals("todo") && !type.equals("deadline") && !type.equals("event")) {
             throw new DukeException("I don't know what that means :(");
         }
     }
 
-    /**
-     * Adds a task item to the tasklist.
-     *
-     * @param s name of task
-     * @param type type of task
-     * @return Task object to be appended to the tasklist
-     * @throws DukeException if description of task is empty or if format is incorrect
-     */
-    public Task addToList(String s, String type) throws DukeException {
+    private Task addToList(String s, String type) throws DukeException {
         errorIfDescriptionIsEmpty(removeWhitespaces(s));
         switch (type) {
         case "todo":
@@ -160,18 +151,17 @@ public class TaskList {
     }
 
     private String removeWhitespaces(String s) {
-        String trimmed = s.replaceAll("^\\s+", "");
-        return trimmed;
+        return s.replaceAll("^\\s+", "");
     }
 
-    static void errorIfDescriptionIsEmpty(String desc) throws DukeException {
+    private void errorIfDescriptionIsEmpty(String desc) throws DukeException {
         if (desc.equals("")) {
             throw new DukeException("Description cannot be empty!");
         }
     }
 
-    static void checkDeadlineFormat(String desc) throws DukeException {
-        String[] parts = desc.split("\\/" + "by");
+    private void checkDeadlineFormat(String desc) throws DukeException {
+        String[] parts = desc.split("/by");
         if (parts.length < 2) {
             String message = "Date required!\n";
             message += "Format: deadline {task_name} /by {date}";
@@ -183,15 +173,15 @@ public class TaskList {
     }
 
     private void addDeadlineToList(String desc) {
-        String[] parts = desc.split("\\/" + "by");
+        String[] parts = desc.split("/by");
         taskList.add(new Deadline(
                 parts[0].substring(0, parts[0].length() - 1),
                 createDateAndTime(parts[1].substring(1))
         ));
     }
 
-    static void checkEventFormat(String desc) throws DukeException {
-        String[] parts = desc.split("\\/" + "at");
+    private void checkEventFormat(String desc) throws DukeException {
+        String[] parts = desc.split("/at");
         if (parts.length < 2) {
             String message = "Date required!\n";
             message += "Format: event {task_name} /at {date}";
@@ -203,20 +193,14 @@ public class TaskList {
     }
 
     private void addEventToList(String desc) {
-        String[] parts = desc.split("\\/" + "by");
+        String[] parts = desc.split("/at");
         taskList.add(new Event(
                 parts[0].substring(0, parts[0].length() - 1),
                 createDateAndTime(parts[1].substring(1))
         ));
     }
 
-    /**
-     * Creates fixed date/time format from given string.
-     *
-     * @param s string to be interpreted as date/time format
-     * @return string in the fixed format
-     */
-    static String createDateAndTime(String s) {
+    private String createDateAndTime(String s) {
         String[] parts = s.split("\\s+");
         for (int i = 0; i < parts.length; i++) {
             if (parts[i].contains("/")) {
@@ -230,23 +214,11 @@ public class TaskList {
                      .substring(1);
     }
 
-    /**
-     * Checks if the input time is in 24 hour format.
-     *
-     * @param time input time
-     * @return true if time is 24 hour format, false otherwise
-     */
-    static boolean is24hrFormat(String time) {
+    private boolean is24hrFormat(String time) {
         return isInteger(time) && time.length() == 4 && Integer.parseInt(time) < 2400;
     }
 
-    /**
-     * Creates a fixed time format.
-     *
-     * @param time input time
-     * @return fixed time format as a <code>String</code>
-     */
-    static String createTime(String time) {
+    private String createTime(String time) {
         int hour = Integer.parseInt(time.substring(0, 2));
         String min = time.substring(2, 4);
         String timeOfDay = hour > 11 ? "pm" : "am";
@@ -257,63 +229,91 @@ public class TaskList {
         return hour + ":" + min + timeOfDay;
     }
 
-    /**
-     * Creates a fixed date format.
-     *
-     * @param date input time
-     * @return fixed date format as a <code>String</code>
-     */
-    static String createDate(String date) {
-        String[] parts = date.split("/");
-        String[] month = {
-            "",
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec"
-        };
-        final boolean[] validDate = {true};
-        if (parts.length == 3) {
-            IntStream.rangeClosed(0, 2)
-                     .forEach(i -> {
-                         if (!isInteger(parts[i])) {
-                             validDate[0] = false;
-                         } else if (i == 1
-                                 && (Integer.parseInt(parts[i]) < 1
-                                         || Integer.parseInt(parts[i]) > 12)) {
-                             validDate[0] = false;
-                         }
-
-                     });
-        } else {
-            validDate[0] = false;
-        }
-        if (validDate[0]) {
-            if (parts[2].length() == 4) {
-                return parts[0] + " " + month[Integer.parseInt(parts[1])] + " " + parts[2];
-            } else {
-                return parts[2] + " " + month[Integer.parseInt(parts[1])] + " " + parts[0];
-            }
-        } else {
+    private String createDate(String date) {
+        try {
+            String[] parts = date.split("/");
+            checkDateFormat(parts);
+            isAllIntegers(parts);
+            String day = parts[0];
+            String month = parts[1];
+            String year = parts[2];
+            checkDayAndMonth(day, month, year);
+            checkYear(year);
+            return createFixedDateFormat(day, month, year);
+        } catch (DukeException e) {
             return date;
         }
     }
 
-    /**
-     * Checks if a given string is an integer.
-     *
-     * @param n input string
-     * @return true if given string is an integer, false otherwise
-     */
-    static boolean isInteger(String n) {
+    private String createFixedDateFormat(String day, String month, String year) {
+        String[] months = {"", "Jan", "Feb", "Mar",
+                "Apr", "May", "Jun", "Jul", "Aug",
+                "Sep", "Oct", "Nov", "Dec"
+        };
+        return day + " " + months[Integer.parseInt(month)] + " " + year;
+    }
+
+    private void checkYear(String year) throws DukeException {
+        if (year.length() != 4) {
+            throw new DukeException("Invalid year!");
+        }
+    }
+
+    private void checkDayAndMonth(String day, String month, String year) throws DukeException {
+        int d = Integer.parseInt(day);
+        int m = Integer.parseInt(month);
+        if (monthHas31Days(m)) {
+            //month has 31 days
+            withinRange(d, 31);
+        } else if (monthHas30Days(m)) {
+            //month has 30 days
+            withinRange(d, 30);
+        } else if (m == 2) {
+            //february
+            int y = Integer.parseInt(year);
+            if (isLeapYear(y)) {
+                withinRange(d, 29);
+            } else {
+                withinRange(d, 28);
+            }
+        }
+        assert false : "Invalid month!";
+    }
+
+    private boolean monthHas31Days(int m) {
+        int[] have31Days = {1, 3, 5, 7, 8, 10, 12};
+        return Arrays.stream(have31Days).filter(x -> x == m).count() == 1;
+    }
+
+    private boolean monthHas30Days(int m) {
+        int[] have30Days = {4, 6, 9, 11};
+        return Arrays.stream(have30Days).filter(x -> x == m).count() == 1;
+    }
+
+    private boolean isLeapYear(int year) {
+        return year % 4 == 0;
+    }
+
+    private void withinRange(int target, int high) throws DukeException {
+        if ((target <= 0) || (target > high)) {
+            throw new DukeException("Invalid day!");
+        }
+    }
+
+    private void checkDateFormat(String[] parts) throws DukeException {
+        if (parts.length != 3) {
+            throw new DukeException("Wrong number of arguments for date");
+        }
+    }
+    private void isAllIntegers(String[] parts) throws DukeException {
+        for (String part : parts) {
+            if (!isInteger(part)) {
+                throw new DukeException("Wrong date format");
+            }
+        }
+    }
+
+    private boolean isInteger(String n) {
         try {
             Integer.parseInt(n);
             return true;
@@ -322,12 +322,7 @@ public class TaskList {
         }
     }
 
-    /**
-     * Echos the task in a fixed format.
-     *
-     * @param t Task object
-     */
-    public String echo(Task t) {
+    private String echo(Task t) {
         String result = "Got it. I've added this task:\n";
         result += t + "\n";
         if (count == 1) {
@@ -344,7 +339,7 @@ public class TaskList {
      * @param name Search query
      * @return String of all tasks containing the search query
      */
-    public String findItem(String name) {
+    String findItem(String name) {
         String initial = "Here are the matching tasks in your list:\n";
         return IntStream.rangeClosed(0, count - 1)
                 .mapToObj(x -> (x + 1) + "." + taskList.get(x).toString() + "\n")

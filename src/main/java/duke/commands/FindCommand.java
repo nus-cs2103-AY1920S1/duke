@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
 
+/**
+ * Find command.
+ */
 public class FindCommand extends Command {
     String kw;
 
@@ -12,7 +15,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds task.
+     * Finds tasks that match specified keyword.
      * @param tasks list of tasks
      * @param ui ui
      * @param storage  storage
@@ -23,6 +26,11 @@ public class FindCommand extends Command {
         return ui.getFoundMessage(taskMessage);
     }
 
+    /**
+     * Determines if command exits.
+     *
+     * @return boolean
+     */
     public boolean isExit() {
         return false;
     }

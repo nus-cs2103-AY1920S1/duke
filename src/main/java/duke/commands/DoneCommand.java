@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Updates task in index as done and updates Storage.
+     * Updates task at index as done and updates Storage.
      *
      * @param tasks   tasks
      * @param ui      ui

@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes task and updates Storage.
+     * Deletes task at index and updates Storage.
      *
      * @param tasks   tasks
      * @param ui      ui

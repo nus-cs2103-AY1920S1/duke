@@ -3,16 +3,19 @@ package duke.tasks;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Deadlines are tasks that need to be done before a specific date/time.
+ */
 public class Deadline extends Task {
     Date date;
 
+    /**
+     * Initialises deadline with task and date.
+     * @param task task
+     * @param date date
+     */
     public Deadline(String task, Date date) {
         super(task);
-        this.date = date;
-    }
-
-    Deadline(String task, Boolean done, Date date) {
-        super(task, done);
         this.date = date;
     }
 

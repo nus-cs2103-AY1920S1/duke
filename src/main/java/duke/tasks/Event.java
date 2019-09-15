@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Event task.
+ * Event tasks are tasks that start at a specific time and ends at a specific time.
  */
 public class Event extends Task {
     Date date;
@@ -17,18 +17,6 @@ public class Event extends Task {
      */
     public Event(String task, Date date) {
         super(task);
-        this.date = date;
-    }
-
-    /**
-     * Initialises Event with task, date, and status.
-     *
-     * @param task task
-     * @param done done
-     * @param date date
-     */
-    Event(String task, Boolean done, Date date) {
-        super(task, done);
         this.date = date;
     }
 

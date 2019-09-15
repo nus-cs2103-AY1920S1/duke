@@ -43,7 +43,6 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
-        Collections.sort(tasks, new TaskComparator());
     }
 
     /**

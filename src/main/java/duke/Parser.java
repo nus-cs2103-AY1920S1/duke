@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 import duke.exception.InsufficientDetailsException;
 import duke.exception.InvalidCommandException;
@@ -31,6 +32,8 @@ public class Parser {
             return bye();
         case "list":
             return list();
+        case "sort":
+            return sort();
         case "delete":
             return delete(commandDetails);
         case "done":
@@ -54,6 +57,10 @@ public class Parser {
 
     private static ListCommand list() {
         return new ListCommand();
+    }
+
+    private static SortCommand sort() {
+        return new SortCommand();
     }
 
     private static Command delete(String commandDetails) throws InsufficientDetailsException {

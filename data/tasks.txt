@@ -1,5 +1,5 @@
-D|1|finish week5 project|06/09/2019 2359|Shuyuan(Student)123
-E|0|grab|Monday|Someone()N.A.|Anyone()N.A.
-T|1|finish|Shuyuan()N.A.
-E|0|homework|today|Ziyuan()N.A.
-E|0|tasks|now|a()N.A.|b()N.A.|c()N.A.|d()N.A.
+E|0|eat|15/09/2019|Sheldon(friend)666
+D|1|sleep|Tonight|Amy(Sheldon's wife)888
+T|0|drink|Penny()N.A.
+T|0|study|Poorme()123
+T|0|sleep again|

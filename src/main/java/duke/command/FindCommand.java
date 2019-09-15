@@ -42,7 +42,7 @@ public class FindCommand extends TaskCommand {
         }
         StringBuilder sb = new StringBuilder(outputFindTask);
         for (int i = 0; i < findList.size(); i++) {
-            sb.append((i + 1) + "." + taskList.getTask(i + 1) + "\n");
+            sb.append((i + 1) + "." + findList.get(i) + "\n");
         }
         return ui.print(sb.toString());
     }

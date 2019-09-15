@@ -1,12 +1,3 @@
-# Commands 
-`list` list out all the tasks you have
-<br/> The followings are different types of tasks you can create
-<br/>`event|<task description>|<time>|<person name>(title)<contact number>`
-<br/>`deadline|<task description>|<time>|<person name>(title)<contact number>`
-<br/>`todo|<task description>|<person name>(title)<contact number>`
-<br/>Note: there can be multiple people separated by `|`, title and contact number can be empty 
-
-
 # Setting up
 
 **Prerequisites**

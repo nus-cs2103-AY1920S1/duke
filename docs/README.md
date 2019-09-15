@@ -51,7 +51,6 @@ This document uses the following typographical conventions:
 
 
 ### Types of Tasks <a name="types"></a>
-
 This application stores 3 different types of tasks:
 
 `todo`                  A Todo task represents a task to be done without any time limit.
@@ -59,6 +58,7 @@ This application stores 3 different types of tasks:
 `deadline`         A Deadline task represents a task to be done by a certain date and time.
     
 `event`               An Event task represents an event to attend at a certain date and time.
+
 
 ### Adding of Tasks <a name="add"></a>
 This section contains the commands to be keyed in to add different type of task.

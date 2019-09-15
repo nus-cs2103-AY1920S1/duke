@@ -14,7 +14,7 @@ import bot.duke.ui.Ui;
 public class AddEventCommand extends Command {
 
     /** Details of the event. */
-    private String detail;
+    private String description;
     /** Date-Time starting from. */
     private String datetimeFrom;
     /** Date-Time ending with. */
@@ -23,12 +23,12 @@ public class AddEventCommand extends Command {
     /**
      * Constructs the AddEventCommand object.
      *
-     * @param detail       Name of the Event
+     * @param description       Name of the Event
      * @param datetimeFrom Starting from
      * @param datetimeTo   Ending with
      */
-    public AddEventCommand(String detail, String datetimeFrom, String datetimeTo) {
-        this.detail = detail;
+    public AddEventCommand(String description, String datetimeFrom, String datetimeTo) {
+        this.description = description;
         this.datetimeFrom = datetimeFrom;
         this.datetimeTo = datetimeTo;
     }
@@ -44,7 +44,7 @@ public class AddEventCommand extends Command {
         try {
             Date datetimeFromDate = Task.DATE_FORMAT.parse(datetimeFrom);
             Date datetimeToDate = Task.DATE_FORMAT.parse(datetimeTo);
-            Event newEvent = new Event(detail, datetimeFromDate, datetimeToDate);
+            Event newEvent = new Event(description, datetimeFromDate, datetimeToDate);
             assert newEvent != null;
             tasks.add(newEvent);
             Ui.printAddSuccess(tasks.getTasks(), newEvent);

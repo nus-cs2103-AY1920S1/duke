@@ -9,15 +9,15 @@ import bot.duke.ui.Ui;
 public class AddTodoCommand extends Command {
 
     /** Details of the Todo.*/
-    private String detail;
+    private String description;
 
     /**
      * Constructs the AddTodoCommand object.
      *
-     * @param detail Details of the Task
+     * @param description Details of the Task
      */
-    public AddTodoCommand(String detail) {
-        this.detail = detail;
+    public AddTodoCommand(String description) {
+        this.description = description;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class AddTodoCommand extends Command {
      * @param storage The current Storage object
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Todo newTodo = new Todo(this.detail);
+        Todo newTodo = new Todo(this.description);
         assert newTodo != null;
         tasks.add(newTodo);
         ui.printAddSuccess(tasks.getTasks(), newTodo);

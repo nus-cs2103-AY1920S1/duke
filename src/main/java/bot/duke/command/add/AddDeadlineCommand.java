@@ -14,7 +14,7 @@ import bot.duke.ui.Ui;
 public class AddDeadlineCommand extends Command {
 
     /** Details of the event. */
-    private String detail;
+    private String description;
 
     /** Date-Time of the Deadline. */
     private String datetime;
@@ -22,11 +22,11 @@ public class AddDeadlineCommand extends Command {
     /**
      * Constructs the AddDeadline.
      *
-     * @param detail   Details of the Deadline
+     * @param description   Details of the Deadline
      * @param datetime Deadline of the Task object
      */
-    public AddDeadlineCommand(String detail, String datetime) {
-        this.detail = detail;
+    public AddDeadlineCommand(String description, String datetime) {
+        this.description = description;
         this.datetime = datetime;
     }
 
@@ -40,7 +40,7 @@ public class AddDeadlineCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             Date datetimeDate = Task.DATE_FORMAT.parse(datetime);
-            Deadline newDeadline = new Deadline(detail, datetimeDate);
+            Deadline newDeadline = new Deadline(description, datetimeDate);
             assert newDeadline != null;
             tasks.add(newDeadline);
             ui.printAddSuccess(tasks.getTasks(), newDeadline);

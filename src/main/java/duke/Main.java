@@ -13,8 +13,8 @@ import javafx.application.Application;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("src/main/java/duke.Duke.txt");
-
+    //private Duke duke = new Duke("src/main/java/duke.Duke.txt");
+    private Duke duke = new Duke("build/libs/src/Duke.txt");
     @Override
     public void start(Stage stage) {
         try {

@@ -1,17 +1,12 @@
 package duke.main;
 
 import duke.Duke;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
+import duke.command.*;
 import duke.exception.DukeException;
+import duke.exception.IncorrectNoteFormatException;
 import duke.exception.InvalidInstructionException;
+import duke.exception.InvalidNoteInstructionException;
+import duke.note.Note;
 import duke.task.Task;
 
 import java.time.LocalDateTime;
@@ -20,6 +15,14 @@ import java.time.LocalDateTime;
  * Parses Strings to identify different sub-commands in a given input command.
  */
 public class Parser {
+    private static String removeInstruction(String input) throws InvalidNoteInstructionException {
+        try {
+            return input.split(" ", 2)[1];
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidNoteInstructionException("Please input a valid note instruction!");
+        }
+    }
+    
     /**
      * Parses the instruction given in an input String.
      *
@@ -143,6 +146,25 @@ public class Parser {
                 Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
     }
     
+    private static Note parseWriteNote(String noteContents) throws IncorrectNoteFormatException {
+        if (!noteContents.contains("|")) {
+            throw new IncorrectNoteFormatException("Please write the note in the format "
+                    + "'note write <note title> | <note contents>'!");
+        } else {
+            noteContents = noteContents.split(" ", 2)[1];
+            String[] noteParsed = noteContents.split(" \\| ");
+            return new Note(noteParsed[0], noteParsed[1]);
+        }
+    }
+    
+    private static Note parseReadNote(String notePath) {
+        return new Note(notePath.split(" ", 2)[1]);
+    }
+    
+    private static Note parseDeleteNote(String notePath) {
+        return new Note(notePath.split(" ", 2)[1]);
+    }
+    
     public static Command parse(String input) throws DukeException {
         String instruction = Parser.parseInstruction(input);
         switch (instruction) {
@@ -167,6 +189,19 @@ public class Parser {
             String eventTaskContent = Parser.parseNonToDoContent(input);
             return new EventCommand(Parser.parseNonToDoDescription(eventTaskContent),
                     Parser.parseNonToDoTime(eventTaskContent));
+        case "note":
+            String noteContents = Parser.removeInstruction(input);
+            String noteInstruction = Parser.parseInstruction(noteContents);
+            switch (noteInstruction) {
+            case "write":
+                return new WriteNoteCommand(Parser.parseWriteNote(noteContents));
+            case "read":
+                return new ReadNoteCommand(Parser.parseReadNote(noteContents));
+            case "delete":
+                return new DeleteNoteCommand(Parser.parseDeleteNote(noteContents));
+            default:
+                throw new InvalidNoteInstructionException("Please input a valid note instruction!");
+            }
         default:
             throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

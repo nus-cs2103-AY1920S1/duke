@@ -87,4 +87,16 @@ public class Ui {
         return "Got it. I've removed this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
                 + " tasks in the list.";
     }
+    
+    public String showAfterWritingNote(String noteName) {
+        return "New note added with name: " + noteName;
+    }
+    
+    public String showAfterReadingNote(String noteName, String noteContents) {
+        return "Note name: " + noteName + "\nNote contents: \n" + noteContents;
+    }
+    
+    public String showAfterDeletingNote(String noteName) {
+        return "Note deleted with name: " + noteName;
+    }
 }

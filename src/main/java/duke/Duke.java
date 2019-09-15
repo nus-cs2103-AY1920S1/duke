@@ -39,6 +39,8 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    private boolean assertation = false;
+
     private void initialize() {
         String filePath = "." + File.separator + "duke.txt";
         storage = new Storage(filePath);
@@ -55,6 +57,7 @@ public class Duke extends Application {
         }
         showResponse(Ui.showWelcome());
         forcedLambda();
+        assert assertation : "Magic failed";
     }
 
     @Override
@@ -140,7 +143,8 @@ public class Duke extends Application {
 
     private void forcedLambda() {
         FuncInt lol = (x) -> System.out.println(x * x);
-        lol.magic(5);
+        lol.magic(10);
+        assertation = true;
     }
 
 }

@@ -46,7 +46,7 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-event.png" width = "512" height = "734"/>
+<img src = "images/ug-event.png" width = "512" height = "734"/>
 
 
 
@@ -61,7 +61,7 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-deadline.png" width = "512" height = "734" />
+<img src = "images/ug-deadline.png" width = "512" height = "734" />
 
 
 ### 4. `done` - Mark a task as done 
@@ -75,7 +75,7 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-done.png" width = "512" height = "734" />
+<img src = "images/ug-done.png" width = "512" height = "734" />
 
 
 ### 5. `list` - View your current list
@@ -87,7 +87,7 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-list.png" width = "512" height = "734" />
+<img src = "images/ug-list.png" width = "512" height = "734" />
 
 
 ### 6. `find` - Search list
@@ -103,7 +103,7 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-find.png" width = "512" height = "734" />
+<img src = "images/ug-find.png" width = "512" height = "734" />
 
 
 
@@ -124,7 +124,7 @@ Example:
 Expected outcome:
 
 
-<img src ="https://github.com/zhixianggg/duke/blob/master/docs/images/ug-priority.png" width = "512" height = "734" />
+<img src ="images/ug-priority.png" width = "512" height = "734" />
 
 
 ### 8. `delete` - Delete task
@@ -138,7 +138,7 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-delete.png" width = "512" height = "734" />
+<img src = "images/ug-delete.png" width = "512" height = "734" />
 
 
 ### 9. `bye` - Exit
@@ -150,6 +150,6 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-bye.png" width = "362" height = "205" />
+<img src = "images/ug-bye.png" width = "362" height = "205" />
 
 

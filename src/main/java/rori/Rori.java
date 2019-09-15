@@ -15,7 +15,6 @@ public class Rori {
     
     /**
      * Constructor for RoriManager, which instantiates several other classes as well.
-     * 
      */
     public Rori() throws RoriException {
         this.uiManager = new Ui();
@@ -32,7 +31,6 @@ public class Rori {
      * For the console version, please check initializeRori()
      * 
      * @param input The user's input.
-     * @param rori The instance of rori program.
      * @return a String going to be output to the user.
      * @throws RoriException When there is an error in one fo the commands.
      */

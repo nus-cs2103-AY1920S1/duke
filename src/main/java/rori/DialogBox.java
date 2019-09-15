@@ -28,11 +28,19 @@ public class DialogBox extends HBox {
     private static final double X_TRANSFORM_LABEL = 40;
     private static final double X_TRANSFORM_IMAGE = 20;
 
-    private static final Color USER_COLOR_CIRCLE = Color.valueOf("#96c983");
-    private static final Color CIRCLE_COLOR_ERROR = Color.CRIMSON;
-    private static final Color CIRCLE_COLOR_NORMAL = Color.DODGERBLUE;
-    private static final String LABEL_COLOR_ERROR = "#ffdee2";
-    private static final String LABEL_COLOR_NORMAL = "#deedff";
+    private static final Image USER_IMAGE = new Image(
+        DialogBox.class.getResourceAsStream("/images/User.png"));
+    private static final Image NORMAL_RORI_IMAGE = new Image(
+        DialogBox.class.getResourceAsStream("/images/NormalRori.png"));
+    private static final Image ERROR_RORI_IMAGE = new Image(
+        DialogBox.class.getResourceAsStream("/images/AngryRori.png"));
+
+    private static final String USER_COLOR_CIRCLE = "#96c983";
+    private static final String USER_COLOR_LABEL = "#e1ffd6";
+    private static final String NORMAL_COLOR_CIRCLE = "#1e90ff";
+    private static final String NORMAL_COLOR_LABEL = "#deedff";
+    private static final String ERROR_COLOR_CIRCLE = "#DC143C";
+    private static final String ERROR_COLOR_LABEL = "#ffdee2";
 
     public static double transformSize = 0;
 
@@ -44,16 +52,24 @@ public class DialogBox extends HBox {
     private Font fontRegular = Font.loadFont(
             this.getClass().getResource("/font/Minecraftia-Regular.ttf").toExternalForm(), 10);
 
-    private boolean isUser;
-
     /**
-     * Constructor for the dialogBox.
+     * Constructor for the dialog box.
      * 
-     * @param text The text to be displayed - Which can be the user or Rori.
-     * @param img The image to be displayed - Which can be the user or Rori.
-     */
-    private DialogBox(String text, Image img, boolean isUser, boolean hasError) {
-        this.isUser = isUser;
+     * @param text The user/rori messages that is output
+     * @param img The image of user or rori
+     * @param translateImageX The image that is to be translated for better positioning
+     * @param translateLabelX The label that is translated for better positioning
+     * @param circleColor The outline circle of the image color
+     * @param boxColor The text box color
+     * @param position The Alignment of the box
+     */       
+    private DialogBox(String text, 
+            Image img, 
+            double translateImageX, 
+            double translateLabelX,
+            String circleColor, 
+            String boxColor,
+            Pos position) {
     
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -64,38 +80,41 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        if (this.isUser) {
-            dialog.setTranslateX(-X_TRANSFORM_LABEL);
-            myCircle.setTranslateX(-X_TRANSFORM_IMAGE);
-            dialog.setAlignment(Pos.TOP_RIGHT);
-            myCircle.setFill(new ImagePattern(img));
-            myCircle.setStroke(USER_COLOR_CIRCLE);
-            myCircle.setEffect(new DropShadow(+14d, 0d, +2d, USER_COLOR_CIRCLE));
-            dialog.setEffect(new DropShadow(+4d, 0d, +2d, USER_COLOR_CIRCLE));
-        } else {
-            dialog.setTranslateX(X_TRANSFORM_LABEL);
-            myCircle.setTranslateX(X_TRANSFORM_IMAGE);
-            dialog.setAlignment(Pos.TOP_LEFT);
-            myCircle.setFill(new ImagePattern(img));
-            if(hasError) {
-                myCircle.setStroke(CIRCLE_COLOR_ERROR);
-                myCircle.setEffect(new DropShadow(+4d, 0d, +2d, CIRCLE_COLOR_ERROR));
-                dialog.setStyle(dialog.getStyle() + "-fx-background-color:" + LABEL_COLOR_ERROR);
-                dialog.setEffect(new DropShadow(+4d, 0d, +2d, CIRCLE_COLOR_ERROR));
-            } else {
-                myCircle.setStroke(CIRCLE_COLOR_NORMAL);
-                myCircle.setEffect(new DropShadow(+4d, 0d, +2d, CIRCLE_COLOR_NORMAL));
-                dialog.setStyle(dialog.getStyle() + "-fx-background-color:" + LABEL_COLOR_NORMAL);
-                dialog.setEffect(new DropShadow(+4d, 0d, +2d, CIRCLE_COLOR_NORMAL));
-            }
-        }
+        editDialogBox(text, img, translateImageX, translateLabelX, circleColor, boxColor, position);
+    }
 
-        String lines[] = text.split("\\r?\\n");
-        
-        for(String line : lines) {
-            if(line.length() >= 50) {
+    /**
+     * Edits the dialog box to make it looks nicer and output the text.
+     * 
+     * @param text The user/rori messages that is output
+     * @param img The image of user or rori
+     * @param translateImageX The image that is to be translated for better positioning
+     * @param translateLabelX The label that is translated for better positioning
+     * @param circleColor The outline circle of the image color
+     * @param boxColor The text box color
+     * @param position The Alignment of the box
+     */   
+    private void editDialogBox(String text,
+            Image img, 
+            double translateImageX, 
+            double translateLabelX,
+            String circleColor, 
+            String boxColor,
+            Pos position) {
+
+        dialog.setTranslateX(translateLabelX);
+        myCircle.setTranslateX(translateImageX);
+        dialog.setAlignment(position);
+        myCircle.setFill(new ImagePattern(img));
+        myCircle.setStroke(Color.valueOf(circleColor));
+        myCircle.setEffect(new DropShadow(+14d, 0d, +2d, Color.valueOf(circleColor)));
+        dialog.setStyle(dialog.getStyle() + "-fx-background-color:" + boxColor);
+        dialog.setEffect(new DropShadow(+4d, 0d, +2d, Color.valueOf(circleColor)));
+
+        String[] lines = text.split("\\r?\\n");   
+        for (String line : lines) {
+            if (line.length() >= 40) {
                 dialog.setPrefWidth(668.0);
-                System.out.println("yeet");
                 break;
             } 
         }
@@ -103,7 +122,6 @@ public class DialogBox extends HBox {
         dialog.setFont(fontRegular);
         dialog.setTextFill(Color.BLACK);
         dialog.setText(text);
-
     }
 
     /**
@@ -116,29 +134,56 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    /**
-     * Returns a DialogBox containing user's text and iamge.
-     * 
-     * @param text User's Text
-     * @param img User's Image
-     * @return DialogBox containing user's text and image
-     */
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, true, false);
-    }
 
     /**
-     * Returns DialogBox containing Rori's text and image, and whether the user input has an exception.
-     * 
-     * @param text Rori's Text
-     * @param img Rori's Image
-     * @param hasEeror Rori's 
-     * @return DialogBox containing Rori's text and image
+     * Returns a constructor for the user's DialogBox.
+     * @param text The user's input
+     * @return a constructor for the user's DialogBox.
      */
-    public static DialogBox getRoriDialog(String text, Image img, boolean hasError) {
-        DialogBox db = new DialogBox(text, img, false, hasError);
+    public static DialogBox getUserDialog(String text) {
+        return new DialogBox(text, 
+                USER_IMAGE, 
+                -X_TRANSFORM_IMAGE, 
+                -X_TRANSFORM_LABEL, 
+                USER_COLOR_CIRCLE, 
+                USER_COLOR_LABEL, 
+                Pos.TOP_RIGHT);
+    }
+
+
+    /**
+     * Returns a constructor for Rori's normal DialogBox. 
+     * @param text Rori's output
+     * @return a constructor for the Rori's normal DialogBox.
+     */
+    public static DialogBox getRoriNormalDialog(String text) {
+        DialogBox db = new DialogBox(text, 
+                NORMAL_RORI_IMAGE, 
+                X_TRANSFORM_IMAGE, 
+                X_TRANSFORM_LABEL, 
+                NORMAL_COLOR_CIRCLE, 
+                NORMAL_COLOR_LABEL, 
+                Pos.TOP_LEFT);
         db.flip();
         return db;
     }
+
+    /**
+     * Returns a constructor for the Rori's Error DialogBox.
+     * @param text Rori's output
+     * @return a constructor for the Rori's Error DialogBox.
+     */
+    public static DialogBox getRoriErrorDialog(String text) {
+        DialogBox db = new DialogBox(text, 
+                ERROR_RORI_IMAGE, 
+                X_TRANSFORM_IMAGE, 
+                X_TRANSFORM_LABEL, 
+                ERROR_COLOR_CIRCLE, 
+                ERROR_COLOR_LABEL, 
+                Pos.TOP_LEFT);
+        db.flip();
+        return db;
+    }
+    
 
 }

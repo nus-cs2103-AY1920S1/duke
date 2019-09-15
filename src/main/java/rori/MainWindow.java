@@ -3,10 +3,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -23,14 +21,7 @@ public class MainWindow extends AnchorPane {
 
     private Rori rori;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private final Image nomralRoriImage = new Image(this.getClass().getResourceAsStream("/images/NormalRori.png"));
-    private final Image angryRoriImage = new Image(this.getClass().getResourceAsStream("/images/AngryRori.png"));
-
-    private Image roriImage = new Image(this.getClass().getResourceAsStream("/images/NormalRori.png"));
-
     private boolean isInTutorial;
-    private Color roriShadowColor = Color.SKYBLUE;
 
     @FXML
     public void initialize() {
@@ -48,25 +39,25 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = null;
-        boolean hasError = false;
+        DialogBox userDialog = DialogBox.getUserDialog(input);
+        DialogBox roriDialog;
+        String response;
         if (isInTutorial) {
             response = rori.getTutorialResponse(input);
             isInTutorial = false;
-            roriImage = nomralRoriImage;
+            roriDialog = DialogBox.getRoriNormalDialog(response);
         } else {
             try {
                 response = rori.getResponse(input);
-                roriImage = nomralRoriImage;
+                roriDialog = DialogBox.getRoriNormalDialog(response);
             } catch (RoriException error) {
                 response = error.getMessage();
-                roriImage = angryRoriImage;
-                hasError = true;
+                roriDialog = DialogBox.getRoriErrorDialog(response);
             }
         }
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getRoriDialog(response, roriImage, hasError)
+                userDialog,
+                roriDialog
         );
         userInput.clear();
     }
@@ -76,7 +67,7 @@ public class MainWindow extends AnchorPane {
      */
     public void welcomeMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getRoriDialog(this.rori.welcomeMessage(), roriImage, false)
+                DialogBox.getRoriNormalDialog(this.rori.welcomeMessage())
         );
     }
 
@@ -85,7 +76,7 @@ public class MainWindow extends AnchorPane {
      */
     public void tutorialMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getRoriDialog(this.rori.getTutorial(), roriImage, false)
+                DialogBox.getRoriNormalDialog(this.rori.getTutorial())
         );
         isInTutorial = true;
     }

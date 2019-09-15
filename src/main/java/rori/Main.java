@@ -17,17 +17,21 @@ public class Main extends Application {
         rori = new Rori();
     }
 
+    /**
+     * Initializes the stage for the program, Rori.
+     * 
+     * @param stage The stage holding the nodes.
+     */
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            scene.getStylesheets().add("/css/Label.css");
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setRori(rori);
             stage.setTitle("Rori");
             stage.getIcons().add(new Image("/images/RoriIcon.png"));
+            fxmlLoader.<MainWindow>getController().setRori(rori);
             stage.show();
             beginRoriMessages(fxmlLoader);
         } catch (IOException e) {
@@ -35,6 +39,11 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Initializes Rori by printing welcome message and tutorial if first time.
+     * 
+     * @param fxmlLoader For the MainWindow.fxml
+     */
     private void beginRoriMessages(FXMLLoader fxmlLoader) {
         fxmlLoader.<MainWindow>getController().welcomeMessage();
         if (this.rori.getFirstTime()) {

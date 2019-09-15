@@ -128,7 +128,7 @@ Got it. I've added this task:
   [E][X] Attend Secret Society Meeting (at: 01:01)
 Now you have 7 tasks in the list.
 ```
-![event](https://raw.github.com/Kyzure/duke/master/docs/event.PNG)
+![event](https://raw.github.com/Kyzure/duke/master/docs/event.png)
 
 ### `list` - Display list of Tasks
 

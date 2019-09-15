@@ -56,7 +56,7 @@ public class Parser {
         if (firstWord.equals("bye")) {
             return new String("Bye. Hope to see you again soon!");
         } else if (firstWord.equals("list")) {
-            return ui.printList(this.taskList.getList());
+            return ui.printListUsingStream(this.taskList.getList());
         } else if (firstWord.equals("done")) {
             String message = processTaskDone(input, this.taskList, this.storage);
             return message;
@@ -137,7 +137,7 @@ public class Parser {
         int sizeAfterDeletion = taskList.getList().size();
         storage.updateFile();
         int diffInSize = sizeBeforeDeletion - sizeAfterDeletion;
-        assert diffInSize == 1: "Task not deleted";
+        assert diffInSize == 1: "List should have at least 1 element or task should be deleted";
         return ui.printDeleteTask(deletedTask, this.taskList.getList());
     }
 
@@ -161,6 +161,8 @@ public class Parser {
     public String processFindWithStream(String input, TaskList taskList, Storage storage) throws DukeException{
         ArrayList<Task> list = taskList.getList();
         String message = "";
+        assert list != null : "List should not point to null pointer";
+
         for (int i = 0; i < list.size(); i++) {
             String[] description = list.get(i).getDescription().split(" ");
             Stream<String> stream = Arrays.stream(description);

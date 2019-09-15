@@ -124,10 +124,10 @@ public class Ui {
     public String showHelp() {
         return "Wof wof! Doggo heard meowing!\n"
                 + "Meow : Doggo sends help\n"
-                + "List : Doggo tells you your task\n"
                 + "Todo : Tell Doggo your trouble\n"
                 + "Deadline : Tell Doggo your worries\n"
                 + "Event : Tell Doggo your schedule\n"
+                + "List : Doggo tells you your task\n"
                 + "Find : Doggo fetches your tasks\n"
                 + "Done : Doggo notes your completed worries\n"
                 + "Delete : Doggo clears your trouble\n"

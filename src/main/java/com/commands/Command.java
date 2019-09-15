@@ -1,5 +1,11 @@
+package com.commands;
+
 import java.io.IOException;
 import java.text.ParseException;
+
+// TODO package classes together
+// TODO handle exceptions better
+// TODO remove unnecessary imports
 
 /**
  * Contains information given by user about command.
@@ -18,11 +24,11 @@ public class Command {
         this.toContinueProgram = !(commandWord.equals("bye"));
     }
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
-    }
-
     public boolean toContinue() {
         return toContinueProgram;
+    }
+
+    public void execute(Duke duke) throws DukeException, IOException {
     }
 
     /**

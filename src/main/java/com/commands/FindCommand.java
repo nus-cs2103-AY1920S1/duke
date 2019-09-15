@@ -1,3 +1,5 @@
+package com.commands;
+
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
@@ -12,7 +14,9 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
-    public void execute(TaskList taskList, Ui ui) {
+    public void execute(Duke duke) {
+        TaskList taskList = duke.getTaskList();
+        Ui ui = duke.getUi();
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (String keyword : keywords) {
             for (Task currTask : taskList.getTaskArr()) {

@@ -1,3 +1,5 @@
+package com.tasks;
+
 public class Event extends Task {
 
     public Event(String description, String at) {

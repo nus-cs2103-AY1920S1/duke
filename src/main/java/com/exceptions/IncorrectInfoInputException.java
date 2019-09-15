@@ -1,3 +1,5 @@
+package com.exceptions;
+
 /**
  * Thrown when incorrect usage of commands with subcommands
  * e.g. deadline with /by, event with /at

@@ -1,5 +1,11 @@
-import java.io.IOException;
-import java.text.ParseException;
+import com.commands.*;
+import com.exceptions.*;
+
+import com.TaskList;
+
+import com.util.Storage;
+import com.util.Parser;
+import com.util.Ui;
 
 /**
  * A program named Duke.
@@ -14,39 +20,56 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke(String filePath) throws DukeException, IOException, ParseException {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        parser = new Parser();
+    private boolean inProgram;
 
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         taskList = new TaskList(storage.load());
+        parser = new Parser();
+        ui = new Ui();
+
+        inProgram = true;
     }
 
-    public void run() throws IOException {
+    public void run() {
         ui.showGreetings();
-        boolean inProgram = true;
         while (inProgram) {
             try {
                 String userFullInput = ui.readUserInput();
-                // Entered no input
-                if (userFullInput == "") {
-                    continue;
-                }
                 Command c = parser.parse(userFullInput);
-                c.execute(taskList, ui, storage);
-                inProgram = c.toContinue();
+                c.execute(this);
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
             }
         }
     }
 
-    public static void main(String[] args) throws DukeException, IOException, ParseException {
+    public static void main(String[] args) throws DukeException {
         new Duke("F:\\CS2103\\duke\\data\\duke.txt").run();
     }
 
+    //////////////
+    // GETTERS //
+    ////////////
+
     public TaskList getTaskList() {
         return taskList;
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
+
+    /////////////
+    // SETTERS //
+    ////////////
+
+    public void setExitProgram() {
+        inProgram = false;
     }
 
 }

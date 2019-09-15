@@ -1,3 +1,5 @@
+package com.commands;
+
 import java.io.IOException;
 
 public class DoneCommand extends Command {

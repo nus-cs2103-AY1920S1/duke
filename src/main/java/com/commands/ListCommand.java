@@ -1,4 +1,7 @@
+package com.commands;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ListCommand extends Command {
 
@@ -7,9 +10,11 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(Duke duke) throws DukeException, IOException {
+        TaskList taskList = duke.getTaskList();
+        Ui ui = duke.getUi();
         if (taskList.getNumTasks() == 0) {
-            ui.showMessage("You have no tasks yet!");
+            ui.showMessage("    You have no tasks yet!");
         } else {
             ui.showListCommandResponse(taskList.getTaskArr());
         }

@@ -1,3 +1,7 @@
+package com.util;
+
+import com.tasks.*;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -13,14 +17,6 @@ public class Ui {
     public Ui() {
         input = new Scanner(System.in);
     }
-
-    ////////////////
-    // CONSTANTS //
-    //////////////
-    // TODO make strings universal
-    // TODO package classes
-    private static final String STR_INDENT = "    ";
-    private static final String STR_BORDER = STR_INDENT + "___________________________________";
 
     //////////////////
     // USER INPUTS //
@@ -39,46 +35,47 @@ public class Ui {
     ////////////////////
 
     public void showGreetings() {
-        String greeting = joinWithNewLines("Hello! I'm Duke", "What can I do for you?");
-        showMessage(greeting);
+        showMessage(StaticStrings.GREETING);
     }
 
     public void showGoodbye() {
-        String goodbye = indentMessage("Bye. Hope to see you again soon!");
-        showMessage(goodbye);
+        showMessage(StaticStrings.GOODBYE);
     }
 
     public void showAddTaskResponse(Task addedTask, ArrayList<Task> taskArr) {
-        String message = joinWithNewLines("Noted. I've added this task",
-                addedTask.toString(),
-                numTasksLeftMessage(taskArr));
-        showMessage(message);
+        ArrayList<String> response = new ArrayList<String>();
+        response.add(StaticStrings.ADD_TASK);
+        response.add(addedTask.toString());
+        response.add(numTasksLeftMessage(taskArr));
+        showMessage(response);
     }
 
     public void showDeleteTaskResponse(Task deletedTask, ArrayList<Task> taskArr) {
-        String message = joinWithNewLines("Noted. I've removed this task",
-                deletedTask.toString(),
-                numTasksLeftMessage(taskArr));
-        showMessage(message);
+        ArrayList<String> response = new ArrayList<String>();
+        response.add(StaticStrings.REMOVE_TASK);
+        response.add(deletedTask.toString());
+        response.add(numTasksLeftMessage(taskArr));
+        showMessage(response);
     }
 
     public void showMarkTaskDoneResponse(Task doneTask) {
-        String message = joinWithNewLines("Nice! I've marked this task as done:",
-                doneTask.toString());
-        showMessage(message);
+        ArrayList<String> response = new ArrayList<String>();
+        response.add(StaticStrings.DONE_TASK);
+        response.add(doneTask.toString());
+        showMessage(response);
     }
 
     public void showListCommandResponse(ArrayList<Task> taskArr) {
-        ArrayList<String> output = listOfTasksMessage(taskArr);
-        output.add(0, "Here are the tasks in your list:");
-        String response = joinWithNewLines(output);
+        ArrayList<String> response = new ArrayList<String>();
+        response.add(StaticStrings.LIST_TASK);
+        response.addAll(listOfTasksMessage(taskArr));
         showMessage(response);
     }
 
     public void showFindKeywordResponse(ArrayList<Task> taskArr) {
-        ArrayList<String> output = listOfTasksMessage(taskArr);
-        output.add(0, "Here are the matching tasks in your list:");
-        String response = joinWithNewLines(output);
+        ArrayList<String> response = new ArrayList<String>();
+        response.add(StaticStrings.MATCHING_TASK);
+        response.addAll(listOfTasksMessage(taskArr));
         showMessage(response);
     }
 
@@ -95,17 +92,18 @@ public class Ui {
      */
     private ArrayList<String> listOfTasksMessage(ArrayList<Task> taskArr) {
         ArrayList<String> output = new ArrayList<String>();
-        int numTasks = taskArr.size();
         for (Task task : taskArr) {
-            output.add((taskArr.indexOf(task) + 1) + ". " +
-                    task.toString());
+            int currTaskIdx = taskArr.indexOf(task) + 1;
+            String currTaskString = currTaskIdx + ". " + task.toString();
+            output.add(currTaskString);
         }
         return output;
     }
 
     private String numTasksLeftMessage(ArrayList<Task> taskArr) {
-        return ("Now you have " + taskArr.size() +
-                (taskArr.size() == 1? " task":" tasks") +
+        int numTasks = taskArr.size();
+        return ("Now you have " + numTasks +
+                (numTasks == 1? " task":" tasks") +
                 " in the list.");
     }
 
@@ -113,8 +111,8 @@ public class Ui {
     // HELPER METHODS //
     ///////////////////
 
-    private String indentMessage(String message) {
-        return STR_INDENT + message;
+    public String indentMessage(String message) {
+        return StaticStrings.INDENT + message;
     }
 
     /**
@@ -122,21 +120,6 @@ public class Ui {
      * @param message Using varargs, each argument is a line in the message
      * @return Final message to be output to console, in a single string
      */
-    private String joinWithNewLines(String... message) {
-        String output = "";
-        int numLines = 1;
-        for (String line : message) {
-            // Add new line if not last sentence in message
-            if (numLines != message.length) {
-                output += indentMessage(line + "\n");
-                numLines++;
-            } else {
-                output += indentMessage(line);
-            }
-        }
-        return output;
-    }
-
     private String joinWithNewLines(ArrayList<String> message) {
         String output = "";
         int numLines = 1;
@@ -157,9 +140,15 @@ public class Ui {
      * @param message
      */
     public void showMessage(String message) {
-        System.out.println(STR_BORDER);
+        System.out.println(StaticStrings.BORDER);
         System.out.println(message);
-        System.out.println(STR_BORDER);
+        System.out.println(StaticStrings.BORDER);
+    }
+
+    public void showMessage(ArrayList<String> message) {
+        System.out.println(StaticStrings.BORDER);
+        System.out.println(joinWithNewLines(message));
+        System.out.println(StaticStrings.BORDER);
     }
 
 }

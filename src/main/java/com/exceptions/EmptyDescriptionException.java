@@ -1,3 +1,5 @@
+package com.exceptions;
+
 //Empty description after command (todo, event, deadline, list, done)
 
 /**

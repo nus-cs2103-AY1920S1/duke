@@ -1,3 +1,8 @@
+package com.util;
+
+import com.commands.*;
+import com.exceptions.*;
+
 import java.awt.font.NumericShaper;
 import java.util.List;
 import java.util.Arrays;
@@ -15,7 +20,7 @@ public class Parser {
 
     public Command parse(String userInput) throws DukeException {
         // Split input into individual words
-        ArrayList<String> fullUserInputArr = splitStrIntoArr(userInput, " ");
+        ArrayList<String> fullUserInputArr = splitStrIntoArr(userInput.trim(), " ");
         Command currCommand;
         // Identify command by first word
         String firstWord = fullUserInputArr.get(0);

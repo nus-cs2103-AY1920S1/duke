@@ -1,3 +1,5 @@
+package com.exceptions;
+
 /**
  * Thrown when data in text file in wrong format.
  */

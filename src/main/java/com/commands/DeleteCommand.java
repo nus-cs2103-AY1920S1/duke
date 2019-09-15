@@ -1,3 +1,5 @@
+package com.commands;
+
 import java.io.IOException;
 
 public class DeleteCommand extends Command {
@@ -8,15 +10,17 @@ public class DeleteCommand extends Command {
         this.deleteIdx = deleteTaskIdx;
     }
 
+    // TODO make better javadocs comments
     /**
      * Deletes task from list, saves changes in text file.
-     * @param taskList
-     * @param ui
-     * @param storage
+     * @param duke
      * @throws DukeException
      * @throws IOException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
+    public void execute(Duke duke) throws DukeException, IOException {
+        TaskList taskList = duke.getTaskList();
+        Storage storage = duke.getStorage();
+        Ui ui = duke.getUi();
         // Checks if index of task to delete is within range
         int numTasks = taskList.getNumTasks();
         if (numTasks == 0) {

@@ -1,4 +1,5 @@
-[Ui]: Ui.png
+[Ui]:Ui.png
+[GuiExp]:GuiExp.gif
 [AddTodo]:AddTodo.png
 [AddDeadline]:AddDeadline.png
 [AddEvent]:AddEvent.png
@@ -31,8 +32,10 @@ Blaze through your day by being productive with Duke today!
 You can get them [here](https://www.oracle.com/technetwork/java/javase/downloads/index.html). 
 2. Download the latest `duke-x.x.x.jar` from the [releases page](https://github.com/krusagiz/duke/releases).
 3. Copy the `duke-x.x.x.jar` to a folder of your choice.
-4. Double-click the `duke-x.x.x.jar` file.
-5. Enter commands (case-sensitive) into the text box and press `Enter`. Alternatively, press the can press `Send` button to execute the command.
+4. Double-click the `duke-x.x.x.jar` file. You should see a interactive window like this:
+![GuiExperience][GuiExp]
+5. Enter commands (case-sensitive) into the text box and press `Enter`. 
+Alternatively, you can click the `Send` button to execute the command.
     - Some sample commands:
         - `list`: lists all of your tasks
         - `todo <TODO_DESCRIPTION>`: adds a Todo task with the description *TODO_DESCRIPTION* to Duke

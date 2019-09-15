@@ -20,9 +20,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class Duke extends Application {
 
@@ -42,8 +39,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private boolean assertation = false;
-
     private void initialize() {
         String filePath = "." + File.separator + "duke.txt";
         storage = new Storage(filePath);
@@ -59,8 +54,6 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
         showResponse(Ui.showWelcome());
-        forcedLambda();
-        assert assertation : "Magic failed";
     }
 
     @Override
@@ -144,19 +137,4 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, duke));
     }
 
-    private void forcedLambda() {
-        FuncInt lol = (x) -> System.out.println(x * x);
-        lol.magic(10);
-        List<Integer> number = Arrays.asList(1, 2, 3, 4);
-        number = number.stream().map(x -> x * x).
-                collect(Collectors.toList());
-        if (number.get(3) == 16) {
-            assertation = true;
-        }
-    }
-
-}
-
-interface FuncInt {
-    void magic(int x);
 }

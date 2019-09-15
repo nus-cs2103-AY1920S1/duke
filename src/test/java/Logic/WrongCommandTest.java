@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class WrongCommandTest {
 
     @Test
-    void execute_delete_test(){
+    void execute_wrong_test(){
         UI ui = new UI_CLI();
         Storage storage = new Storage();
 

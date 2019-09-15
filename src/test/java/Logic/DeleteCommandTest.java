@@ -16,18 +16,15 @@ public class DeleteCommandTest {
         UI ui = new UI_CLI();
         Storage storage = new Storage();
 
-        Tasklist expectedTasks = new Tasklist();
-
         Tasklist actualTasks = new Tasklist();
         actualTasks.add(new todo("Borrow a Book"));
 
         Command command = new DeleteCommand("1");
         String actualOutput = command.execute(actualTasks, ui, storage);
-        String expectedOutput = "Got it. I've added this task:\n" +
-                "[T][x] Borrow a Book\n" +
-                "Now you have 1 tasks in this list\n";
+        String expectedOutput = "Noted. I've removed this task:\n" +
+                                "[T][x] Borrow a Book\n" +
+                                "You now have 0 tasks in this list\n";
 
-        //assertEquals(expectedTasks.get(0).getDetails(), actualTasks.get(0).getDetails());
-        assertEquals(actualOutput, expectedOutput);
+        assertEquals(expectedOutput, actualOutput);
     }
 }

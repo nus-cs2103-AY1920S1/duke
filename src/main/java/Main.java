@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("C:/Users/User/Documents/GitHub/duke/src/main/tasks.txt");
+    private Duke duke = new Duke("./data/tasks.txt");
 
     @Override
     public void start(Stage stage) {

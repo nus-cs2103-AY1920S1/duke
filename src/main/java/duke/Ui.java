@@ -17,23 +17,31 @@ public class Ui {
     /**
      * Prints the welcome logo.
      */
-    public void printLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
+    private void printLogo() {
+        String logo = " ___        _        \n"
+                + "|  _ \\ _  _| |    __ \n"
                 + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                + "| |_| | |_| |   <  _/\n"
+                + "|___/ \\_,_|_|\\_\\__|\n";
         System.out.println("Hello from\n" + logo);
     }
 
     /**
      * Prints a message to greet the user.
      */
-    public void greetUser() {
+    private void greetUser() {
         printLine();
-        printMessage("Hello! I'm Duke");
+        printMessage("Hello! I'm Duke Piglet");
         printMessage("What can I do for you?");
         printLine();
+    }
+
+    /**
+     * Prints a welcome message from Duke.
+     */
+    public void printWelcome() {
+        printLogo();
+        greetUser();
     }
 
     /**
@@ -138,7 +146,7 @@ public class Ui {
      * @param message Message that is to be printed.
      */
     public void printMessage(String message) {
-        System.out.println("\t " + message);
+        System.out.println(message);
     }
 
     /**

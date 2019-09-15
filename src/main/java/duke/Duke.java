@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.task.TaskComparator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -36,35 +35,24 @@ public class Duke {
     }
 
     /**
-     * Runs the chat bot.
+     * Returns the welcome message by Duke.
+     * @return Duke's welcome message.
      */
-    public void run() {
-        ui.printLogo();
-        ui.greetUser();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.printLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException exception) {
-                ui.printExceptionMessage(exception);
-            } finally {
-                ui.printLine();
-            }
-        }
-
+    public String getWelcome() {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream old = System.out;
+        changeSystemOut(outputStream);
+        ui.printWelcome();
+        resetSystemOut(old);
+        return outputStream.toString();
     }
 
-    public static void main(String[] args) {
-        new Duke("C:\\Users\\Yi Wai\\Documents\\Year 2 Semester 1\\CS2103\\duke\\data\\duke.txt").run();
-    }
+
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response corresponding to the input by the user.
+     * @param input Input command provided by the user.
+     * @return The response corresponding to the given command.
      */
     public String getResponse(String input) {
         PrintStream old = System.out;

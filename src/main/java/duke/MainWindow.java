@@ -35,8 +35,14 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Assigns the duke variable and creates a dialog box for Duke's welcome message.
+     * @param d The duke instance.
+     */
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().add(
+            new Group(DialogBox.getDukeDialog(duke.getWelcome(), dukeImage)));
     }
 
     /**

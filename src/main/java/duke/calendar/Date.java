@@ -171,7 +171,7 @@ public class Date implements Comparable<Date> {
             return day + "st of " + month.toString() + " " + year;
         } else if ((day % 10) == 2) {
             return day + "nd of " + month.toString() + " " + year;
-        } else if ((day % 10) == 3) {
+        } else if ((day % 10) == 3 && day != 13) {
             return day + "rd of " + month.toString() + " " + year;
         } else {
             return day + "th of " + month.toString() + " " + year;

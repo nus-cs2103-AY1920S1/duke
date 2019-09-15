@@ -11,11 +11,13 @@ public class TaskList {
         this.ls = new ArrayList<Task>();
     }
 
-    public TaskList(ArrayList<Task> load) {
-        this.ls = load;
+    public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null;
+        this.ls = tasks;
     }
 
     public void add(Task t) {
+        assert t != null;
         ls.add(t);
     }
 
@@ -33,6 +35,7 @@ public class TaskList {
     public int size() {
         return ls.size();
     }
+    //@@author
 
     /**
      * Generates string for all current tasks. To be consumed by duke.Storage.

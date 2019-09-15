@@ -24,6 +24,8 @@ public class Parser {
      * @throws DukeException if command is not of expected format
      */
     public static Command parse(String fullCommand) throws DukeException {
+        assert fullCommand != null;
+
         String s = fullCommand.trim();
         String[] input = s.split(" ");
         String description;

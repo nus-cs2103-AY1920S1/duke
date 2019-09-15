@@ -46,7 +46,7 @@ Example:
 Expected outcome:
 
 
-<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-event.png" width = "512" height = "734"/ >
+<img src = "https://github.com/zhixianggg/duke/blob/master/docs/images/ug-event.png" width = "512" height = "734"/>
 
 
 

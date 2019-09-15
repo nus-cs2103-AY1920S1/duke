@@ -11,6 +11,7 @@ public class Ui {
 
     private Scanner sc = new Scanner(System.in);
     private String line = "    ____________________________________________________________";
+    public static final String TAB = "     ";
 
     /**
      * Shows the welcome message.
@@ -34,7 +35,7 @@ public class Ui {
      * @param e error message when caught
      */
     public void showError(String e) {
-        System.err.println(e);
+        System.err.println(TAB + e);
     }
 
     /**
@@ -58,8 +59,8 @@ public class Ui {
      * @param numOfTasks number of tasks left on the list
      */
     void showDeleted(Task task, int numOfTasks) {
-        System.out.println(
-                "     Noted. I've removed this task: \n       " + task
+        System.out.println(TAB +
+                "Noted. I've removed this task: \n       " + task
                         + "\n     Now you have " + numOfTasks + " tasks in the list.");
     }
 
@@ -84,7 +85,7 @@ public class Ui {
      * @param numOfTasks current number of tasks
      */
     void showAdded(Task task, int numOfTasks) {
-        System.out.println("     Got it. I've added this task: \n       " + task
+        System.out.println(TAB + "Got it. I've added this task: \n       " + task
                 + "\n     Now you have " + numOfTasks + " tasks in the list.");
     }
 
@@ -93,6 +94,6 @@ public class Ui {
      * @param task task marked as done
      */
     void showDone(Task task) {
-        System.out.println("     Nice! I've marked this task as done: \n       " + task);
+        System.out.println(TAB + "Nice! I've marked this task as done: \n       " + task);
     }
 }

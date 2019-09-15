@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.23">
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\commands\AddCommand.java">
+<error line="52" severity="error" message="Unicode escape(s) usage should be avoided." source="com.puppycrawl.tools.checkstyle.checks.AvoidEscapedUnicodeCharactersCheck"/>
+<error line="92" severity="error" message="Unicode escape(s) usage should be avoided." source="com.puppycrawl.tools.checkstyle.checks.AvoidEscapedUnicodeCharactersCheck"/>
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\commands\Command.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\commands\DeleteCommand.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\commands\DoneCommand.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\commands\ExitCommand.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\commands\FindCommand.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\commands\ListCommand.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\duke\Duke.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\duke\Parser.java">
+<error line="52" severity="error" message="Unicode escape(s) usage should be avoided." source="com.puppycrawl.tools.checkstyle.checks.AvoidEscapedUnicodeCharactersCheck"/>
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\duke\Storage.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\duke\TaskList.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\duke\Ui.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\exceptions\DukeException.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\tasks\Deadline.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\tasks\Event.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\tasks\Task.java">
+</file>
+<file name="C:\Users\Bruce Ong\Desktop\duke\src\main\java\tasks\ToDo.java">
+</file>
+</checkstyle>

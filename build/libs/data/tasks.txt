@@ -1,0 +1,7 @@
+E | 1 | rap with Eminem | 20 December 2020, 11:59PM
+D | 0 | find Snoop Dogg at arcade | 12 September 2019, 9:00AM
+T | 1 | dance like Usher
+D | 1 | buy ice cream | 7 October 1997, 8:39AM
+E | 0 | do the spiderman dance | 6 May 2020, 7:00PM
+T | 0 | play basketball with Kobe Bryant
+E | 0 | study kanji | 15 September 2019, 8:08AM

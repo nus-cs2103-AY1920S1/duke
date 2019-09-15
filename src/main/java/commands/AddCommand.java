@@ -93,7 +93,7 @@ public class AddCommand extends Command {
                 throw new DukeException(ui.getInvalidDateTimeFormatMsg());
             }
         } else {
-            // Invalid command being supplied by user
+            // Invalid command being supplied by the user
             throw new DukeException(ui.getInvalidCommandMsg());
         }
         return ui.getSuccessfulAddMsg(taskLst);

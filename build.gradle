@@ -49,7 +49,3 @@ javafx {
 test {
     systemProperty"file.encoding", "utf-8"
 }
-
-
-
-

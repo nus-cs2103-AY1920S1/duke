@@ -7,12 +7,10 @@ import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 
-import java.io.IOException;
-
 public class AddCommand extends Command {
 
     @Override
-    public String execute(TaskList tasks, Storage storage, String command) throws IOException, DukeException {
+    public String execute(TaskList tasks, Storage storage, String command) {
         String message = String.format("Command: %s%s", command, System.lineSeparator());
         try {
             String addTextDescription;

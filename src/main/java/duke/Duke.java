@@ -138,12 +138,4 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, duke));
     }
 
-    public static void varargs(String... args) {
-        for (String s : args) {
-            System.out.println(s);
-        }
-        System.out.println("Wow, do I get a prize? #objectivestotallymet #totallylearning");
-
-    }
-
 }

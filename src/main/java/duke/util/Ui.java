@@ -19,10 +19,8 @@ public class Ui {
         return message;
     }
 
-
     public static String showBye() {
         return "Goodbye... Until more OOP.";
     }
-
 
 }

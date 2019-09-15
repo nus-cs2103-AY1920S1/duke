@@ -238,4 +238,27 @@ public class CommandLineUi extends Ui {
     public void printToCommandLine(String output) {
         System.out.println(output);
     }
+
+
+    /**
+     * Returns completed deadline sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public String getCompletedDeadlineStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int eventsCompleted = stat.getCompletedDeadlinesFromOneDayAgo(tasks);
+        if (eventsCompleted == 0) {
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\n     Events completed today: "
+                + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
+                + "\n     " + encouragement + "\n" + underscore;
+        return output;
+    }
+
 }

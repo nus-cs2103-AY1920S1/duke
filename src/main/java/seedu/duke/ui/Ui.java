@@ -125,4 +125,14 @@ public abstract class Ui {
      */
     public abstract Boolean isGraphicalUserInterface();
 
+
+    /**
+     * Returns string sequence for "stats deadline" command.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public abstract String getCompletedDeadlineStatSequence(Statistic stat, TaskList tasks);
+
 }

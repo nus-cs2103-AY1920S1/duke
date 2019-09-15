@@ -1,19 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.UnknownCommand;
-import seedu.duke.command.ByeCommandCli;
-import seedu.duke.command.TodoCommand;
-import seedu.duke.command.StatsResetCommand;
-import seedu.duke.command.StatsAllCommand;
-import seedu.duke.command.StatsEventCommand;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.DeadlineCommand;
-import seedu.duke.command.ByeCommandGui;
-import seedu.duke.command.Command;
-import seedu.duke.command.DoneCommand;
-import seedu.duke.command.EventCommand;
-import seedu.duke.command.FindCommand;
-import seedu.duke.command.ListCommand;
+import seedu.duke.command.*;
 
 import seedu.duke.ui.Ui;
 
@@ -198,6 +185,11 @@ public class Parser {
             case("event"):
 
                 command = new StatsEventCommand();
+                break;
+
+            case("deadline"):
+
+                command = new StatsDeadlineCommand();
                 break;
 
             default:

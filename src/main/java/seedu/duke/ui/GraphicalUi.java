@@ -241,4 +241,24 @@ public class GraphicalUi extends Ui {
     }
 
 
+    /**
+     * Returns completed deadline sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public String getCompletedDeadlineStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int deadlinessCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
+        if (deadlinessCompleted == 0) {
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\nDeadlines completed today: "
+                + deadlinessCompleted
+                + "\n" + encouragement + "\n";
+        return output;
+    }
 }

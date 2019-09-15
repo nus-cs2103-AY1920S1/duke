@@ -77,6 +77,16 @@ public class Statistic {
     }
 
     /**
+     * Returns the no. of deaadlines completed between now and one day ago.
+     *
+     * @param tasks TaskList object.
+     * @return Int no. of events completed between now and one day ago.
+     */
+    public int getCompletedDeadlinesFromOneDayAgo(TaskList tasks) {
+        return getSpecifiedCompletedTasksFromVariableDaysAgo(tasks, 'D', 1);
+    }
+
+    /**
      * Increments total Commands Executed.
      */
     public void incrementTotalCommandsExecuted() {

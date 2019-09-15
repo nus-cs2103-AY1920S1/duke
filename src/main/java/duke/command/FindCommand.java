@@ -10,6 +10,7 @@ import duke.core.Ui;
  * to find a task by searching for a keyword.
  */
 public class FindCommand extends Command {
+
     /** A string representation of the keyword for searching. */
     private String keyword;
 
@@ -49,6 +50,15 @@ public class FindCommand extends Command {
         ui.printSearchResults(tasks, keyword);
     }
 
+    /**
+     * Executes the command with respect to tasks (modifying the task list),
+     * UI, and storage (saving tasks in a file in hard disk). GUI version.
+     *
+     * @param tasks The task list where tasks are stored.
+     * @param ui The user interface that interacts with user input.
+     * @param storage The <code>Storage</code> object that handles task
+     * @return A string that represents the result of this execution.
+     */
     @Override
     public String executeGui(TaskList tasks, Ui ui, Storage storage) {
         return ui.printSearchResultsGui(tasks, keyword);

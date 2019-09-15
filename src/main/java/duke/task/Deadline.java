@@ -5,6 +5,7 @@ package duke.task;
  * inherits from the <code>Task</code> class.
  */
 public class Deadline extends Task {
+
     /** A string that represents the deadline of the task, as inputted by user. */
     private String dueTime;
 
@@ -23,6 +24,11 @@ public class Deadline extends Task {
         this.dueTime = dueTime;
     }
 
+    /**
+     * Updates the due time of the deadline.
+     *
+     * @param newDueTime The new due time to replace the existing one.
+     */
     public void updateDueTime(String newDueTime) {
         this.dueTime = newDueTime;
     }

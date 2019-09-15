@@ -60,6 +60,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.CENTER_LEFT);
     }
 
+    /**
+     * Creates a dialog box that contains the user's instruction.
+     *
+     * @param text A string that represents the user's instruction.
+     * @param img An image that represents the user.
+     * @return A dialog box that contains the user's instruction.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userDialog =  new DialogBox(text, img);
         userDialog.setBackground(new Background(new BackgroundFill(
@@ -69,6 +76,13 @@ public class DialogBox extends HBox {
         return userDialog;
     }
 
+    /**
+     * Creates a dialog box that contains Duke's reply to an instruction.
+     *
+     * @param text A string that represents Duke's reply.
+     * @param img An image that represents Duke.
+     * @return A dialog box that contains Duke's reply.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox dukeDialog = new DialogBox(text, img);
         dukeDialog.setBackground(new Background(new BackgroundFill(

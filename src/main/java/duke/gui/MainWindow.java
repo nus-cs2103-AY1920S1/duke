@@ -29,16 +29,26 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
+    /**
+     * Initializes the main window of Duke GUI.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         isExit = new SimpleBooleanProperty();
     }
 
+    /**
+     * Set the main window's Duke object.
+     * @param d The Duke object to be associated with the main window.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
+    /**
+     * Shows the welcome message in the GUI.
+     */
     public void showWelcome(){
         String welcomeMessage = new Ui().showWelcomeGui();
         dialogContainer.getChildren().add(
@@ -47,6 +57,9 @@ public class MainWindow extends AnchorPane {
                         dukeImage));
     }
 
+    /**
+     * Shows the result of loading past tasks from the local file.
+     */
     public void load() {
         String message = duke.loadTasks();
         dialogContainer.getChildren().add(

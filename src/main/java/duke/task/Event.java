@@ -5,6 +5,7 @@ package duke.task;
  * class inherits from the <code>Task</code> class.
  */
 public class Event extends Task {
+
     /** A string that represents the time of the event, as inputted by user. */
     private String occurTime;
 
@@ -23,6 +24,11 @@ public class Event extends Task {
         this.occurTime = occurTime;
     }
 
+    /**
+     * Updates the time of occurrence of the event.
+     *
+     * @param newOccurTime The new time of occurrence to replace the existing one.
+     */
     public void updateOccurTime(String newOccurTime) {
         this.occurTime = newOccurTime;
     }

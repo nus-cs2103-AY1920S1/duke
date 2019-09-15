@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
  * welcome messages and prmopts.
  */
 public class Ui {
+
     /** A <code>Scanner</code> used to read user input. */
     private Scanner sc;
 
@@ -36,6 +37,11 @@ public class Ui {
         System.out.println("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * Shows a welcome message, and prompts user to type instructions. GUI version.
+     *
+     * @return A string that represents the welcome message.
+     */
     public String showWelcomeGui() {
         return "Hello from DUKE\n"
                     + "\nHello! I'm Duke\nWhat can I do for you?";
@@ -48,10 +54,27 @@ public class Ui {
         System.out.println("Failed to Load past tasks :-(");
     }
 
+    /**
+     * Shows an error in loading the file where past tasks are stored. GUI version.
+     *
+     * @return A string that indicates failure in loading past tasks.
+     */
     public String showLoadingErrorGui() {
         return "Failed to Load past tasks :-(";
     }
 
+    /**
+     * Shows success in loading past tasks.
+     */
+    public void showLoadingSuccess() {
+        System.out.println("Past tasks loaded successfully :-)");
+    }
+
+    /**
+     * Shows success in loading past tasks. GUI version.
+     *
+     * @return A string that indicates success in loading past tasks.
+     */
     public String showLoadingSuccessGui() {
         return "Past tasks loaded successfully :-)";
     }
@@ -84,6 +107,15 @@ public class Ui {
                 + size + " task(s) in the list.");
     }
 
+    /**
+     * Shows that a <code>Task</code> has been added, and displays the number
+     * of current tasks in the list. GUI version.
+     *
+     * @param t The <code>Task</code> that is added to the list.
+     * @param size The number of tasks stored in the <code>TaskList</code>.
+     * @return A string that represents successful addition of the task, and
+     *      the number of current tasks in the list.
+     */
     public String addedTaskGui(Task t, int size) {
         return "Got it. I've added this task: \n  " + t + "\nNow you have "
                 + size + " task(s) in the list.";
@@ -98,6 +130,12 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done: \n  " + t);
     }
 
+    /**
+     * Shows that a <code>Task</code> has been marked as done. GUI version.
+     *
+     * @param t The <code>Task</code> that is marked as done.
+     * @return A string that indicates the task has been successfully marked as done.
+     */
     public String markedAsDoneGui(Task t) {
         return "Nice! I've marked this task as done: \n  " + t;
     }
@@ -113,16 +151,40 @@ public class Ui {
                 + size + " task(s) in the list.");
     }
 
+    /**
+     * Shows that a <code>Task</code> has been removed, and displays the number
+     * of current tasks in the list. GUI version.
+     *
+     * @param t The <code>Task</code> that is deleted from the list.
+     * @return A string that represents the successful removal of the task, and
+     *          the number of current tasks in the list.
+     */
     public String removedTaskGui(Task t, int size) {
         return "Noted. I've removed this task: \n  " + t + "\nNow you have "
                 + size + " task(s) in the list.";
     }
 
+    /**
+     * Shows that a <code>Task</code> has been updated, and display the number of
+     * current tasks in the list.
+     *
+     * @param t The <code>Task</code> that is updated.
+     * @param size The number of tasks stored in the <code>TaskList</code>.
+     */
     public void updatedTask(Task t, int size) {
         System.out.println("Ok! I've updated this task: \n  " + t + "\nNow you have "
                 + size + " task(s) in the list.");
     }
 
+    /**
+     * Shows that a <code>Task</code> has been updated, and display the number of
+     * current tasks in the list. GUI version.
+     *
+     * @param t The <code>Task</code> that is updated.
+     * @param size The number of tasks stored in the <code>TaskList</code>.
+     * @return A string that represents the task has been successfully updated, and
+     *          the number of current tasks in the list.
+     */
     public String updatedTaskGui(Task t, int size) {
         return "Ok! I've updated this task: \n  " + t + "\nNow you have "
                 + size + " task(s) in the list.";
@@ -139,6 +201,12 @@ public class Ui {
         list.forEach(t -> System.out.println(list.indexOf(t) + 1 + "." + t));
     }
 
+    /**
+     * Displays all tasks currently stored in the list. GUI version.
+     *
+     * @param tasks The <code>TaskList</code> used to store tasks.
+     * @return A string that represents all existing tasks.
+     */
     public String printTasksGui(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> list = tasks.getList();
@@ -155,6 +223,12 @@ public class Ui {
         System.out.println(errorMessage);
     }
 
+    /**
+     * Shows content of an error. GUI version.
+     *
+     * @param errorMessage A string that represents the content of the error.
+     * @return A string that represents the error message.
+     */
     public String showErrorGui(String errorMessage) {
         return errorMessage;
     }
@@ -174,6 +248,14 @@ public class Ui {
         results.forEach(t -> System.out.println(results.indexOf(t) + 1 + "." + t));
     }
 
+    /**
+     * Shows search results for finding a keyword in the task list. Displays
+     * all tasks that contain the keyword.
+     *
+     * @param tasks The <code>TaskList</code> where keyword is searched.
+     * @param keyword A string representation of the keyword.
+     * @return A string that represents all the matching results.
+     */
     public String printSearchResultsGui(TaskList tasks, String keyword) {
         StringBuilder sb = new StringBuilder();
         List<Task> results = tasks.getList().stream()
@@ -190,6 +272,11 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Shows bye message to user. GUI version.
+     *
+     * @return A string that represents the bye message.
+     */
     public String showByeGui() {
         return "Bye. Hope to see you again soon!";
     }

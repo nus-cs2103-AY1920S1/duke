@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * add and delete on the tasks.
  */
 public class TaskList {
+
     /**
      * An internal <code>ArrayList</code> structure to store and manipulate
      * the tasks.
@@ -50,6 +51,7 @@ public class TaskList {
      *
      * @param i The index of the <code>Task</code>.
      * @return The <code>Task</code> in the list with this specific index.
+     * @throws DukeException If the task id is larger than the size of the task list.
      */
     public Task getTask(int i) throws DukeException {
         assert i >= 1 : "Task ID starts from 1";
@@ -79,6 +81,14 @@ public class TaskList {
             tasks.remove(i - 1);
     }
 
+    /**
+     * Updates the description or time of an existing task.
+     *
+     * @param i The index of the task to be updated.
+     * @param attribute The attribute to be updated (description or time).
+     * @param newValue The new value to replace the existing one.
+     * @throws DukeException If the task does not exist, or does not have a time attribute.
+     */
     public void updateTask(int i, String attribute, String newValue) throws DukeException {
         assert i >= 1 : "Task ID starts from 1";
         Task t = this.getTask(i);

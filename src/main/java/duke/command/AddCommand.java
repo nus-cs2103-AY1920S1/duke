@@ -14,6 +14,7 @@ import duke.task.Task;
  * task.
  */
 public class AddCommand extends Command {
+
     /** The task to be added, as specified by this command. */
     private Task task;
 
@@ -47,6 +48,7 @@ public class AddCommand extends Command {
      * @param ui The user interface that interacts with user input.
      * @param storage The <code>Storage</code> object that handles task 
      *      storage in local file.
+     * @throws DukeException If an exception occurs during execution of the command.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -55,6 +57,16 @@ public class AddCommand extends Command {
         storage.save(tasks);
     }
 
+    /**
+     * Executes the command with respect to tasks (modifying the task list),
+     * UI, and storage (saving tasks in a file in hard disk). GUI version.
+     *
+     * @param tasks The task list where tasks are stored.
+     * @param ui The user interface that interacts with user input.
+     * @param storage The <code>Storage</code> object that handles task
+     * @return A string that represents the result of this execution.
+     * @throws DukeException If an exception occurs during execution of the command.
+     */
     @Override
     public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);

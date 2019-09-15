@@ -28,6 +28,7 @@ import java.util.stream.Stream;
  * related to the command, and checks for illegal instructions.
  */
 public class Parser {
+
     /**
      * Creates a string from a sub array of a string array.
      *
@@ -55,6 +56,13 @@ public class Parser {
         return Stream.of(words).collect(Collectors.toList()).indexOf(s);
     }
 
+    /**
+     * Formats a given date and time string into a more readable format.
+     *
+     * @param input The date and time string input by the user, in the form "d/MM/yyyy HHmm".
+     * @return A better formatted string that clearly shows day of the week, abbreviation of the month, and AM/PM.
+     * @throws DukeException If the given string cannot be parsed into <code>LocalDateTime</code>.
+     */
     private static String formatDateTime(String input) throws DukeException {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
         try {
@@ -71,6 +79,7 @@ public class Parser {
      *
      * @param words The string array to be parsed.
      * @return The <code>Task</code> that is parsed from the string array.
+     * @throws DukeException If an exception occurs during parsing.
      */
     private static Task parseTask(String[] words) throws DukeException {
         if (words[0].equals("todo")) {
@@ -91,6 +100,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if an inputted task id is valid (i.e. an integer larger than or equal to 1).
+     * @param s The string that represents the task id inputted by user.
+     * @return A boolean that indicates whether this task id is valid.
+     */
     private static boolean isValidTaskId(String s) {
         try {
             int taskId = Integer.parseInt(s);
@@ -101,11 +115,12 @@ public class Parser {
     }
 
     /**
-     * Checks for illegal user input and throws exceptions accordingly.
+     * Checks for invalid user input and throws exceptions accordingly.
      *
      * @param words The string array to be checked.
+     * @throws DukeException If the inputted instruction is invalid.
      */
-    private static void preCheckInstruction(String[] words) throws DukeException {
+    private static void checkInvalidInstruction(String[] words) throws DukeException {
         String fw = words[0];
         boolean isDoneCommand = fw.equals("done");
         boolean isDeleteCommand = fw.equals("delete");
@@ -136,10 +151,11 @@ public class Parser {
      * @param instruction The string that represents user input.
      * @return A <code>Command</code> that represents the specific type of
      *          command the user gives.
+     * @throws DukeException If the inputted instruction is invalid.
      */
     public static Command parse(String instruction) throws DukeException {
         String[] words = instruction.split(" ");
-        preCheckInstruction(words);
+        checkInvalidInstruction(words);
         String fw = words[0];
         switch (fw) {
         case "bye":

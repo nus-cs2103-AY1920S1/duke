@@ -6,6 +6,7 @@ package duke.task;
  * tasks.
  */
 public abstract class Task {
+
     /** A String that represents the specific content of the task. */
     private String description;
 
@@ -13,7 +14,7 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Initialises the minimum fields required to setup a <code>Task</code>.
+     * Initialises the minimum fields required to set up a <code>Task</code>.
      * All new tasks are uncompleted by default.
      *
      * @param description A string that represents the specific activity
@@ -43,6 +44,11 @@ public abstract class Task {
         return description;
     }
 
+    /**
+     * Updates the description the task.
+     *
+     * @param newDescription The new description to replace the existing one.
+     */
     public void updateDescription(String newDescription) {
         this.description = newDescription;
     }

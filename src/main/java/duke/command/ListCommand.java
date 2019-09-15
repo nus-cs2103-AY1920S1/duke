@@ -10,6 +10,7 @@ import duke.core.Ui;
  * to represent user instruction to display all existing tasks in the task list. 
  */
 public class ListCommand extends Command {
+
     /**
      * Constructs a <code>ListCommand</code> object.
      */
@@ -43,6 +44,15 @@ public class ListCommand extends Command {
         ui.printTasks(tasks);
     }
 
+    /**
+     * Executes the command with respect to tasks (modifying the task list),
+     * UI, and storage (saving tasks in a file in hard disk). GUI version.
+     *
+     * @param tasks The task list where tasks are stored.
+     * @param ui The user interface that interacts with user input.
+     * @param storage The <code>Storage</code> object that handles task
+     * @return A string that represents the result of this execution.
+     */
     @Override
     public String executeGui(TaskList tasks, Ui ui, Storage storage) {
         return ui.printTasksGui(tasks);

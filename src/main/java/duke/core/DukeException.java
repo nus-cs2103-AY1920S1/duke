@@ -4,6 +4,7 @@ package duke.core;
  * Represents exceptions specific to Duke.
  */
 public class DukeException extends Exception {
+
     /**
      * Constructs a <code>DukeException</code> with a specific string.
      *

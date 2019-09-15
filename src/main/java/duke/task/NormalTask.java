@@ -5,6 +5,7 @@ package duke.task;
  * The <code>NormalTask</code> class inherits from the <code>Task</code> class.
  */
 public class NormalTask extends Task {
+
     /**
      * Constructs a <code>NormalTask</code> object.
      *

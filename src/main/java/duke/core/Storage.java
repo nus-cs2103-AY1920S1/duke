@@ -18,6 +18,7 @@ import java.io.IOException;
  * a file and saving tasks in the file.
  */
 public class Storage {
+
     /** A string that represents the file path in local hard disk. */
     private String filePath;
 

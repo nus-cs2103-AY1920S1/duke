@@ -15,6 +15,7 @@ import java.io.File;
  * person to keep track of various things.
  */
 public class Duke {
+
     /**
      * A <code>Storage</code> object that deals with loading tasks from a local
      * file and saving tasks in the file.
@@ -30,6 +31,10 @@ public class Duke {
     /** A <code>Ui</code> object that deals with interactions with the user. */
     private Ui ui;
 
+    /**
+     * Constructs a <code>Duke</code> object with a default file path.
+     * Initializes user interaction system and loads tasks from the file.
+     */
     public Duke() {
         ui = new Ui();
         assert new File("data/tasks.txt").exists() : "tasks.txt not found";
@@ -54,12 +59,19 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            ui.showLoadingSuccess();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
+    /**
+     * Shows the result of loading past tasks from the local file.
+     *
+     * @return A string that represents success or failure of loading
+     *      past tasks.
+     */
     public String loadTasks() {
         try {
             tasks = new TaskList(storage.load());
@@ -93,7 +105,7 @@ public class Duke {
     }
 
     /**
-     * Kickstarts the <code>Duke</code> program by passing in a specific file
+     * Kick-starts the <code>Duke</code> program by passing in a specific file
      * path.
      *
      * @param args The command line arguments.

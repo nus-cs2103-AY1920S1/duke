@@ -13,7 +13,8 @@ import duke.task.Task;
  * instruction to mark an existing task from the task list as completed.
  */
 public class DoneCommand extends Command {
-    /** The index of the task to be marked as done, as specifed by this command. */
+
+    /** The index of the task to be marked as done, as specified by this command. */
     private int taskId;
 
     /**
@@ -46,6 +47,7 @@ public class DoneCommand extends Command {
      * @param ui The user interface that interacts with user input.
      * @param storage The <code>Storage</code> object that handles task 
      *      storage in local file.
+     * @throws DukeException If an exception occurs during execution of the command.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -55,6 +57,16 @@ public class DoneCommand extends Command {
         ui.markedAsDone(t);
     }
 
+    /**
+     * Executes the command with respect to tasks (modifying the task list),
+     * UI, and storage (saving tasks in a file in hard disk). GUI version.
+     *
+     * @param tasks The task list where tasks are stored.
+     * @param ui The user interface that interacts with user input.
+     * @param storage The <code>Storage</code> object that handles task
+     * @return A string that represents the result of this execution.
+     * @throws DukeException If an exception occurs during execution of the command.
+     */
     @Override
     public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.getTask(taskId);

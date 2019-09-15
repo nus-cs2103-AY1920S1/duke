@@ -10,6 +10,7 @@ import duke.core.Ui;
  * to quit the running Duke program.
  */
 public class ExitCommand extends Command {
+
     /**
      * Constructs a <code>ExitCommand</code> object.
      */
@@ -43,6 +44,15 @@ public class ExitCommand extends Command {
         ui.showBye();
     }
 
+    /**
+     * Executes the command with respect to tasks (modifying the task list),
+     * UI, and storage (saving tasks in a file in hard disk). GUI version.
+     *
+     * @param tasks The task list where tasks are stored.
+     * @param ui The user interface that interacts with user input.
+     * @param storage The <code>Storage</code> object that handles task
+     * @return A string that represents the result of this execution.
+     */
     @Override
     public String executeGui(TaskList tasks, Ui ui, Storage storage) {
         return ui.showByeGui();

@@ -47,7 +47,7 @@ public class Storage {
         try {
             File file = new File(filepath);
             FileWriter fr = new FileWriter(file);
-            file.mkdirs();
+            file.getParentFile().mkdirs();
             file.createNewFile();
             fr.close();
 
@@ -80,7 +80,7 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filepath);
-            file.mkdirs();
+            //file.mkdirs();
             BufferedReader br = new BufferedReader(
                     new FileReader(file));
             String line = br.readLine();
@@ -137,7 +137,7 @@ public class Storage {
         List<Note> notes = new ArrayList<>();
         try {
             File file = new File(filepath);
-            file.mkdirs();
+            //file.mkdirs();
             BufferedReader br = new BufferedReader(
                     new FileReader(file));
             String line = br.readLine();
@@ -169,7 +169,7 @@ public class Storage {
         try {
             File file = new File(filepath);
             FileWriter fr = new FileWriter(file);
-            file.mkdirs();
+            file.getParentFile().mkdirs();
             file.createNewFile();
             fr.close();
 

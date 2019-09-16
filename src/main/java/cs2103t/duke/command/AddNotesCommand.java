@@ -1,6 +1,7 @@
 package cs2103t.duke.command;
 
 import cs2103t.duke.exception.DukeException;
+import cs2103t.duke.exception.InvalidIdException;
 import cs2103t.duke.file.Storage;
 import cs2103t.duke.parse.Parser;
 import cs2103t.duke.task.Note;
@@ -61,8 +62,10 @@ public class AddNotesCommand extends Command {
         return val;
     }
 
-    private String addNotesToTask(Ui ui, NoteList noteList, String n, TaskList tasks, int taskId) {
-        //////CHECK TASK IF IS LEGIT/////
+    private String addNotesToTask(Ui ui, NoteList noteList, String n, TaskList tasks, int taskId) throws DukeException {
+        if (taskId > tasks.getSize() || taskId < 1) {
+            throw new InvalidIdException("" + taskId);
+        }
 
         Task t = tasks.retrieveTask(taskId);
         Note note = new Note(n, true);

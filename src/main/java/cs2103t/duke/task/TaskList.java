@@ -50,11 +50,11 @@ public class TaskList {
 
     /**
      * Gets task at id.
-     * @param id 0-based position of task in list of tasks
+     * @param id 1-based position of task in list of tasks
      * @return task at that id
      */
     public Task retrieveTask(int id) {
-        return this.taskList.get(id);
+        return this.taskList.get(id - 1);
     }
 
     /**

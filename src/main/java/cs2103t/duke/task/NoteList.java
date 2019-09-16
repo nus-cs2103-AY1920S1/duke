@@ -23,6 +23,15 @@ public class NoteList {
         this.notes = notes;
         deletedIds = new TreeSet<>();
         generalNotes = new ArrayList<>();
+        extractGeneralNotes(generalNotes, notes);
+    }
+
+    private void extractGeneralNotes(List<Note> genNotes, List<Note> notes) {
+        for (Note n : notes) {
+            if (n.isGeneral()) {
+                genNotes.add(n);
+            }
+        }
     }
 
     /**

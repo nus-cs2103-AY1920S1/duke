@@ -124,12 +124,12 @@ public class TaskList {
     public String findMatchingTasksString(String keyword) {
         ArrayList<Task> matchingTasksList = findMatchingTasks(keyword);
         int counter = 1;
-        listString = "" + INDENT + " ";
+        String tempListString = "" + INDENT + " ";
         for (Task task : matchingTasksList) {
-            listString += counter + ". " + task + '\n' + INDENT + " ";
+            tempListString += counter + ". " + task + '\n' + INDENT + " ";
             counter++;
         }
-        return listString;
+        return tempListString;
     }
 
     /**

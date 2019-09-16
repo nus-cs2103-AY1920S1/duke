@@ -15,7 +15,9 @@ public class Parser {
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
-    private static final String ADD_COMMAND = "add";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
 
     /**
      * Constructor for splitting input into main command and command details.
@@ -71,7 +73,7 @@ public class Parser {
             return new DeleteCommand(command, commandDetails, indent);
         } else if (command.equals(FIND_COMMAND)) {
             return new FindCommand(command, commandDetails, indent);
-        } else if (command.equals(ADD_COMMAND)) {
+        } else if (command.equals(TODO_COMMAND) || command.equals(EVENT_COMMAND) || command.equals(DEADLINE_COMMAND)) {
             return new AddCommand(command, commandDetails, indent);
         } else {
             return new InvalidCommand(command, commandDetails, indent);

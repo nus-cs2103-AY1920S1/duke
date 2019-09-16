@@ -25,15 +25,25 @@ public class Duke {
         notes = dukeSaveLoad.attemptLoadNoteList();
     }
 
+    /**
+     * Returns Duke's reponse to the User. This method will change Duke's state.
+     * 
+     * @param inputString The User input string.
+     * @return Duke's response to the user.
+     * 
+     * @throws FileNotFoundException If a save file does not exist and cannot be created, or cannot be opened.
+     * @throws IOException When an IOException occurs.
+     * @throws SecurityException If a security manager exists and its checkWrite method denies write access to the file.
+     */
     public String getResponse(String inputString) throws FileNotFoundException, IOException, SecurityException {
         try {
             DukeReply dukeReply = UserInputProcessor.processUserInput(inputString, tasks, notes);
 
-            if(dukeReply.shouldSaveTaskList) {
+            if (dukeReply.shouldSaveTaskList) {
                 dukeSaveLoad.attemptSaveTaskList(tasks);
             }
 
-            if(dukeReply.shouldSaveNoteList) {
+            if (dukeReply.shouldSaveNoteList) {
                 dukeSaveLoad.attemptSaveNoteList(notes);
             }
 
@@ -45,10 +55,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns Duke's hello message.
+     * 
+     * @return Duke's hello message.
+     */
     public String sayHi() {
         return DukeUi.GREET_HELLO;
     }
 
+    /**
+     * Returns whether the system should shutdown.
+     * 
+     * @return Whether the system should shutdown.
+     */
     public boolean systemShouldShutdown() {
         return systemShouldShutdown;
     }

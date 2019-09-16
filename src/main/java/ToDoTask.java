@@ -9,7 +9,7 @@ public class ToDoTask extends Task {
      * 
      * @param description The description of this <code>Task</code>
      */
-    public ToDoTask (String description) {
+    public ToDoTask(String description) {
         this.description = description;
         this.isDone = false;
     }
@@ -20,26 +20,36 @@ public class ToDoTask extends Task {
      * @param description The description of this <code>Task</code>
      * @param isDone The completion status of the <code>Task</code>
      */
-    public ToDoTask (String description, boolean isDone) {
+    public ToDoTask(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
     
     @Override
-    //Returns a copy of this task but with its completion status marked as done
+    /**
+     * Returns a copy of this <code>Task</code> but with its completion status marked as done.
+     * 
+     * @return A copy of this <code>Task</code> but with its completion status marked as done
+     */
     public Task getTaskMarkedAsDone() {
         return new ToDoTask(description, true);
     }
 
+    /**
+     * Returns a copy of this <code>Task</code> but with its completion status marked as done.
+     * 
+     * @return a copy of this <code>Task</code> but with its completion status marked as done
+     */
     @Override
-    //Returns a copy of this task but with its completion status marked as undone
     public Task getTaskMarkedUndone() {
         return new ToDoTask(description, false);
     }
 
     /**
-     * @return The <code>String</code> representation of this <code>Task</code>, containing the type of <code>Task</code>,
-     * completion status and description
+     * Returns the <code>String</code> representation of this <code>Task</code>.
+     * 
+     * @return The <code>String</code> representation of this <code>Task</code>, 
+     *     containing the type of <code>Task</code>, completion status and description
      */
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 /**
- * A class representing a <code>Task</code> with a deadline. Contains date-time information for when the <code>Task</code>
- * should be completed by.
+ * A class representing a <code>Task</code> with a deadline. 
+ * Contains date-time information for when the <code>Task</code> should be completed by.
  */
 public class DeadlineTask extends Task {
     private static final long serialVersionUID = 104430L;
@@ -8,7 +8,8 @@ public class DeadlineTask extends Task {
     private final DukeDateTime deadlineTime;
 
     /**
-     * Creates an instance of a <code>DeadlineTask</code>. The completion status is set to <code>false</code> by default.
+     * Creates an instance of a <code>DeadlineTask</code>. 
+     * The completion status is set to <code>false</code> by default.
      * 
      * @param description The description of this <code>Task</code>
      * @param deadlineTime The date-time by which this <code>Task</code> should be completed
@@ -33,20 +34,26 @@ public class DeadlineTask extends Task {
     }
 
     @Override
-    //Returns a copy of this task but with its completion status marked as done
+    /**
+     * @return A copy of this task but with its completion status marked as done.
+     */
     public Task getTaskMarkedAsDone() {
         return new DeadlineTask(description, deadlineTime, true);
     }
 
     @Override
-    //Returns a copy of this task but with its completion status marked as undone
+    /**
+     * @return A copy of this task but with its completion status marked as undone.
+     */
     public Task getTaskMarkedUndone() {
         return new DeadlineTask(description, deadlineTime, false);
     }
 
     /**
-     * @return The <code>String</code> representation of this <code>Task</code>, containing the type of <code>Task</code>,
-     * completion status and description
+     * Returns a String representation of this <code>Task</code>.
+     * 
+     * @return The <code>String</code> representation of this <code>Task</code>,
+     *     containing the type of <code>Task</code>, completion status and description.
      */
     @Override
     public String toString() {

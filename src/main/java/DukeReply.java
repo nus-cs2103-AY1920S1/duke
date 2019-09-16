@@ -11,7 +11,8 @@ public class DukeReply {
      * A constructor for a new <code>DukeReply</code>.
      * 
      * @param shouldExitLoop Whether or not the interaction loop should terminate and Duke should shutdown
-     * @param shouldSave Whether or not Duke should attempt to save the state of serializable properties
+     * @param shouldSaveTaskList Whether or not Duke should attempt the current state of the TaskList
+     * @param shouldSaveNoteList Whether or not Duke should attempt to save the current state of the NoteList
      * @param dukeReplyString Duke's message to the user
      */
     public DukeReply(boolean shouldExitLoop, 

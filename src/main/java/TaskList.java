@@ -1,8 +1,8 @@
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
- * A class representing a list of <code>Tasks</code>
+ * A class representing a list of <code>Tasks</code>.
  */
 public class TaskList implements Serializable {
     private static final long serialVersionUID = 163417L;
@@ -10,6 +10,8 @@ public class TaskList implements Serializable {
     private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
+     * Adds a <code>Task</code> to the <code>TaskList</code>.
+     * 
      * @param task The <code>Task</code> to be added to this <code>TaskList</code>
      */
     public void add(Task task) {
@@ -17,6 +19,8 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Deletes from the <code>TaskList</code> at the specified index.
+     * 
      * @param index The index at which a <code>Task</code> in the list will be deleted
      * @return The deleted <code>Task</code>
      * @throws DukeException If the chosen index does not exist in the list
@@ -39,6 +43,8 @@ public class TaskList implements Serializable {
     }
     
     /**
+     * Marks the <code>Task</code> at the specified index as done.
+     * 
      * @param index The index at which a <code>Task</code> in the list will be marked as done
      * @return The <code>Task</code> marked as done
      * @throws DukeException If the chosen index does not exist in the list
@@ -53,6 +59,8 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Returns whether the list is empty.
+     * 
      * @return <code>true</code> if the list is empty and <code>false</code> otherwise
      */
     public boolean isEmpty() {
@@ -60,6 +68,8 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Returns the number of elements in the list.
+     * 
      * @return The number of elements in the list
      */
     public int size() {
@@ -67,24 +77,26 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Returns as a list the Tasks containing the searchTerm.
+     * 
      * @param searchTerm The term to match for in the description
      * @return The <code>String</code> representation of a list of tasks whose description contains the 
      * <code>searchTerm</code>
      */
-    public String getMatchingTasksAsString (String searchTerm) {
+    public String getMatchingTasksAsString(String searchTerm) {
         StringBuilder sb = new StringBuilder();
         int iterator = 1;
 
-        for(Task t : tasks) {
+        for (Task t : tasks) {
             //For each Task t, print out one line of "X.[<Status>] Description", if it matches the search term
-            if(t.descriptionContainsTerm(searchTerm)) {
+            if (t.descriptionContainsTerm(searchTerm)) {
                 sb.append(String.format("%d.%s\n", iterator++, t.toString()));
             }
         }
 
         //If there's no matches found, feedback to the user
         String retval = sb.toString();
-        if(retval.isEmpty()) {
+        if (retval.isEmpty()) {
             retval = DukeUi.FEEDBACK_FIND_NOTHING;
         }
 
@@ -92,8 +104,10 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Returns the <code>String</code> representation of this <code>TaskList</code>.
+     * 
      * @return The <code>String</code> representation of this <code>TaskList</code>, containing all tasks in order of
-     * addition marked by its position in the list.
+     *     addition marked by its position in the list.
      */
     @Override
     public String toString() {
@@ -108,12 +122,19 @@ public class TaskList implements Serializable {
         return sb.toString();
     }
 
+    /**
+     * Checks if the specified index exists.
+     * 
+     * @param realIndex The index as a zero-indexed value
+     */
     private void checkIndexExists(int realIndex) throws DukeException {
-        if(realIndex < 0) {
+        if (realIndex < 0) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Sweat);
             throw new DukeException(DukeUi.ERROR_LIST_INDEX_SMALL);
         }
 
-        if(realIndex >= tasks.size()) {
+        if (realIndex >= tasks.size()) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Smile);
             throw new DukeException(
                 String.format(DukeUi.ERROR_LIST_INDEX_BIG, realIndex + 1));
         }

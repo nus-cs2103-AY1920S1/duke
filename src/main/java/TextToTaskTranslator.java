@@ -1,7 +1,7 @@
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A static class that generates Tasks based on the user's input.
@@ -40,7 +40,7 @@ public class TextToTaskTranslator {
     public static Task translateDeadlineTask(String userInputString) throws DukeException {
         String withoutCommand = userInputString.substring(8).trim();
 
-        if(!withoutCommand.equals("") && withoutCommand.contains("/by")) {
+        if (!withoutCommand.equals("") && withoutCommand.contains("/by")) {
             String [] splitString = withoutCommand.split("/by");
 
             checkDescriptionExists(splitString);
@@ -49,7 +49,7 @@ public class TextToTaskTranslator {
             LocalDate deadlineDate = null;
             LocalTime deadlineTime = null;
 
-            if(splitString.length == 2) {
+            if (splitString.length == 2) {
                 String timeSpecifications = splitString[1];
 
                 deadlineDate = extractDateFromString(timeSpecifications);
@@ -58,6 +58,7 @@ public class TextToTaskTranslator {
 
             return new DeadlineTask(description, new DukeDateTime(deadlineDate, deadlineTime));
         } else {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Sweat);
             throw new DukeException(
                 String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "deadline"));
         }
@@ -66,13 +67,13 @@ public class TextToTaskTranslator {
     /**
      * Generates an <code>EventTask</code> from the user's input.
      * 
-     * @return The generated <code>EventTask</code>.
-     * @throws DukeException The user's input command is incomplete, lacks a description or includes an invalid date.
+     * @return The generated <code>EventTask</code>
+     * @throws DukeException The user's input command is incomplete, lacks a description or includes an invalid date
      */
     public static Task translateEventTask(String userInputString) throws DukeException {
         String withoutCommand = userInputString.substring(5).trim();
 
-        if(!withoutCommand.equals("") && withoutCommand.contains("/at")) {
+        if (!withoutCommand.equals("") && withoutCommand.contains("/at")) {
             String [] splitString = withoutCommand.split("/at");
 
             checkDescriptionExists(splitString);
@@ -83,11 +84,11 @@ public class TextToTaskTranslator {
             LocalDate endDate = null;
             LocalTime endTime = null;
 
-            if(splitString.length == 2) {
+            if (splitString.length == 2) {
                 boolean bothStartAndEndDateExist
                     = splitString[1].contains("to") && !splitString[1].endsWith("to");
 
-                if(bothStartAndEndDateExist) {
+                if (bothStartAndEndDateExist) {
                     String [] timeSpecifications = splitString[1].split("to");
 
                     startDate = extractDateFromString(timeSpecifications[0]);
@@ -107,18 +108,26 @@ public class TextToTaskTranslator {
             DukeDuration eventDuration = new DukeDuration(startDateTime, endDateTime);
             return new EventTask(description, eventDuration);
         } else {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Sweat);
             throw new DukeException(
                 String.format(DukeUi.ERROR_INCOMPLETE_COMMAND, "event"));
         }
     }
     
-    /*Translates DD/MM/YYYY into a LocalDate. Days and months can also be input with 1 digit, while the year can
-      be input with 2 digits*/
+    /**
+     * Locates the first instance of a DD/MM/YYYY format <code>String</code>
+     *     and converts it into a <code>LocalDate</code>. Days and months can also be input with 1 digit, 
+     *     while the year can be input with 2 digits. 
+     * 
+     * @param timeSpecifications The <code>String</code> that contain timing specifications
+     * @return The <code>LocalDate</code> extracted from the input argument
+     * @throws DukeException If the input date is invalid
+     */
     private static LocalDate extractDateFromString(String timeSpecifications) throws DukeException {
         Matcher dateFormatMatcher = DATE_FORMAT_PATTERN.matcher(timeSpecifications);
         LocalDate deadlineDate = null;
                 
-        if(dateFormatMatcher.find()) {
+        if (dateFormatMatcher.find()) {
             String dateOnly = timeSpecifications.substring(dateFormatMatcher.start(), dateFormatMatcher.end());
             String [] values = dateOnly.split("/");
 
@@ -128,7 +137,7 @@ public class TextToTaskTranslator {
 
             checkDateCorrect(day, month);
                     
-            if(year < 100) {
+            if (year < 100) {
                 year += 2000;
             }
 
@@ -138,12 +147,19 @@ public class TextToTaskTranslator {
         return deadlineDate;
     }
 
-    //Translates military time (HHMM) into a LocalTime
+
+    /**
+     * Locates the first instance of a miltary time format String and converts it to a <code>LocalTime</code>.
+     * 
+     * @param timeSpecifications The <code>String</code> that containing timing specifications
+     * @return The <code>LocalTime</code> extracted from the input argument
+     * @throws DukeException If the input time is invalid
+     */
     private static LocalTime extractTimeFromString(String timeSpecifications) throws DukeException {
         Matcher timeFormatMatcher = TIME_FORMAT_PATTERN.matcher(timeSpecifications);
         LocalTime deadlineTime = null;
 
-        if(timeFormatMatcher.find()) {
+        if (timeFormatMatcher.find()) {
             String timeOnly = timeSpecifications.substring(timeFormatMatcher.start(), timeFormatMatcher.end());
             int hour = Integer.parseInt(timeOnly.substring(0, 2));
             int minute = Integer.parseInt(timeOnly.substring(2, 4));
@@ -156,49 +172,82 @@ public class TextToTaskTranslator {
         return deadlineTime;
     }
 
-    //Throws an exception if the input date cannot exist
-    private static void checkDateCorrect (int day, int month) throws DukeException {
-        if(day == 0) {
+    /**
+     * Checks if the day-month combination is valid, and throws a <code>DukeException</code> otherwise.
+     * 
+     * @param day The day of the month
+     * @param month The month of the year
+     * @throws DukeException If the day is zero or greater than the number of days in the month,
+     *     or if the month is zero or greater than 12
+     */
+    private static void checkDateCorrect(int day, int month) throws DukeException {
+        if (day == 0) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Sweat);
             throw new DukeException(DukeUi.ERROR_DAY_ZERO);
         }
 
-        if(month == 0) {
-            throw new DukeException(DukeUi.ERROR_MONTH_ZERO);
-        }
-
-        if(month > 12) {
-            throw new DukeException(DukeUi.ERROR_MONTH_BIG);
-        }
-
-        if(DAYS_EACH_MONTH[month - 1] < day) {
+        if (DAYS_EACH_MONTH[month - 1] < day) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Smile);
             throw new DukeException(
                 String.format(DukeUi.ERROR_DAY_BIG, NAMES_EACH_MONTH[month - 1]));
         }
+
+        if (month == 0) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Sweat);
+            throw new DukeException(DukeUi.ERROR_MONTH_ZERO);
+        }
+
+        if (month > 12) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Smile);
+            throw new DukeException(DukeUi.ERROR_MONTH_BIG);
+        }
     }
 
-    //Throws an exception if the input time cannot exist
-    private static void checkTimeCorrect (int hour, int minute) throws DukeException {
+    /**
+     * Checks if the time given is valid, and throws a <code>DukeException</code> otherwise.
+     * 
+     * @param hour The hours in the time
+     * @param minute The minutes in the time
+     * @throws DukeException If the hour is less than 0 or more than 23, or if the minutes are 0 or more than 59
+     */
+    private static void checkTimeCorrect(int hour, int minute) throws DukeException {
         //Checks for the hour
-        if(hour < 0 || hour > 23) {
+        if (hour < 0 || hour > 23) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Sweat);
             throw new DukeException(DukeUi.ERROR_HOURS_OOB);
         }
         
         //Checks for the minutes
-        if(minute < 0 || minute > 59) {
+        if (minute < 0 || minute > 59) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Sweat);
             throw new DukeException(DukeUi.ERROR_MINUTES_OOB);
         }
     }
 
-    //Throws an Exception if the would-be Task doesn't have a description
+    /**
+     * Checks if the Description is a non-empty <code>String</code>
+     *     and throws a new <code>DukeException</code> otherwise.
+     * 
+     * @param description The <code>Task</code> description to be checked
+     * @throws DukeException If the input <code>description</code> is an empty <code>String</code>
+     */
     private static void checkDescriptionExists(String description) throws DukeException {
-        if(description.equals("")) {
+        if (description.equals("")) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Pout);
             throw new DukeException(DukeUi.ERROR_NO_DESCRIPTION);
         }
     }
     
-    //Throws an Exception if the would-be Task doesn't have a description
-    private static void checkDescriptionExists (String [] splitString) throws DukeException {
-        if(splitString.length == 0){
+    /**
+     * Checks if the Description is a non-empty <code>String</code>
+     *     and throws a new <code>DukeException</code> otherwise.
+     * 
+     * @param splitString The <code>String</code> array that contains at index 0 the <code>Task</code> description
+     * @throws DukeException If the <code>String</code> array has length 0
+     */
+    private static void checkDescriptionExists(String [] splitString) throws DukeException {
+        if (splitString.length == 0) {
+            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Pout);
             throw new DukeException(DukeUi.ERROR_NO_DESCRIPTION);
         }
     }

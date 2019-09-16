@@ -41,14 +41,14 @@ public class DukeDateTime implements Serializable {
      */
     @Override
     public String toString() {
-        if(date == null && time == null) {
+        if (date == null && time == null) {
             return "Unspecified Time";
         } else {
             StringBuilder sb = new StringBuilder();
             boolean dateExists = false;
 
             //Prints the date
-            if(date != null) {
+            if (date != null) {
                 String dateString = date.toString();
                 sb.append(dateString.substring(8, 10));
                 sb.append("/");
@@ -60,8 +60,8 @@ public class DukeDateTime implements Serializable {
             }
 
             //Prints the time
-            if(time != null) {
-                if(dateExists) {
+            if (time != null) {
+                if (dateExists) {
                     sb.append(" ");
                 }
 

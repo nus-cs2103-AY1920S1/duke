@@ -70,7 +70,7 @@ public class Gui extends Application {
 
         mainLayout.setPrefSize(400.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(400.0, 570.0);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -79,9 +79,9 @@ public class Gui extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(330.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(65.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 

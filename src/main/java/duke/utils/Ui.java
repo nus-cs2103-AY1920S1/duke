@@ -93,7 +93,7 @@ public class Ui {
      * @param i the number of tasks left in the list
      */
     public String printDelete(Task task, int i) {
-        printline();
+        //printline();
         String msg = "\tNoted. I've removed this task:\n";
         msg = msg + "\t\t" + task + "\n";
         msg = msg + "\tNow you have " + i + " Duke.tasks in the list";

@@ -26,6 +26,13 @@ public class Deadline extends Task {
         //@@author
     }
 
+    /**
+     * Instantiates a Task object of type Deadline with Tag.
+     * @param description Str to describe deadline
+     * @param by Str, time of deadline
+     * @param tagName Str to describe tag
+     * @throws DateTimeParseDukeException when datetime is of invalid format
+     */
     public Deadline(String description, String by, String tagName) throws DateTimeParseDukeException {
         super(description,tagName);
 

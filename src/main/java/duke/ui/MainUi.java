@@ -18,7 +18,7 @@ public class MainUi extends Ui {
 
     @Override
     public void showWelcome() {
-        show("Hello! I'm Duke\nWhat can I do for you?");
+        show("Woof! I'm Dogy Duke\nWhat can I do for you?");
     }
 
     /**

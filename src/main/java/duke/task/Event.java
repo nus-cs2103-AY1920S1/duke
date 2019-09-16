@@ -25,6 +25,13 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Instantiates a Task object of type Event.
+     * @param description Str to describe deadline
+     * @param at Str, time of deadline
+     * @param tagName Str to describe tag
+     * @throws DateTimeParseDukeException when datetime is of invalid format
+     */
     public Event(String description, String at, String tagName) throws DateTimeParseDukeException {
         super(description,tagName);
 

@@ -1,6 +1,0 @@
-T | 0 | null | buy milk
-D | 0 | null | study test (by: 2019-10-10T12:00)
-E | 1 | null | movie (at: 2020-01-01T14:00:30)
-D | 0 | Urgent | fix phone (by: 2019-09-30T23:59:59)
-T | 0 | ASAP | submit project
-T | 0 | null | gdrgrd

@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("task.txt").usingMainUi();
+    private Duke duke = new Duke("tasks.txt").usingMainUi();
 
     @Override
     public void start(Stage stage) {
@@ -23,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Do(d)gy Duke");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

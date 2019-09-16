@@ -7,12 +7,14 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        System.out.println(ui.printGI());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        String eventOutput = ui.printGI() + "\n";
         Task assignmentToDo = new Event(action, variable);
         tasks.addToTaskList(assignmentToDo);
         storage.addToFile(Storage.file, assignmentToDo.toString());
-        Ui.printNumOfTasks();
-        System.out.println("  " + assignmentToDo.toString());
+        //Ui.printNumOfTasks();
+        eventOutput += "  " + assignmentToDo.toString() + "\n";
+        eventOutput += Ui.printNumOfTasks();
+        return eventOutput;
     }
 }

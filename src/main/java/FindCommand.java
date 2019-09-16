@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
 
         File f = new File(Storage.file);
         Scanner sc = new Scanner(f);
@@ -37,11 +37,12 @@ public class FindCommand extends Command {
                 throw new DukeException("No such word is found in any of the tasks.");
             } else {
                 Ui.printIndent();
-                System.out.println("Here are the matching tasks in your list!");
+                String matchingTask = "Here are the matching tasks in your list!\n";
                 for (String str : tempList) {
                     Ui.printIndent();
-                    System.out.println(str);
+                    matchingTask += str + "\n";
                 }
+                return matchingTask;
             }
     }
 }

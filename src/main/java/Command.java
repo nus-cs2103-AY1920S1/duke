@@ -21,6 +21,8 @@ public class Command {
 
     public boolean exitSwitch() { return canExit = !canExit; }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+        return "";
     }
+
 }

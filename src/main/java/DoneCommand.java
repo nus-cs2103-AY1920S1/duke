@@ -5,12 +5,13 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         int taskNum = Integer.parseInt(variable);
         TaskList.listOfTasks.get(taskNum - 1).markAsDone();
         ui.printIndent();
-        System.out.println("Nice! I've marked this task as done:");
+        String doneOutput = "Nice! I've marked this task as done:\n";
         ui.printIndent();
-        System.out.println(TaskList.listOfTasks.get(taskNum - 1).toString());
+        doneOutput += TaskList.listOfTasks.get(taskNum - 1).toString();
+        return doneOutput;
     }
 }

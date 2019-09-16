@@ -80,9 +80,9 @@ public class Ui {
     /**
      * Ends the chat bot.
      */
-    public void printBye() {
+    public String printBye() {
         printIndent();
-        System.out.println("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!";
     }
 
     public String readCommand() {
@@ -122,8 +122,7 @@ public class Ui {
         Ui.printIndent();
         return "Noted. I've removed this task.";
     }
-
-    /**
+     /**
      * Prints the number of tasks in the list.
      *
      * @throws IOException If the named file exists but is a directory rather than a regular file,

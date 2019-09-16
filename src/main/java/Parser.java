@@ -103,9 +103,6 @@ public class Parser {
                         + "    Find \n" + "        Eg. find __(keyword)__\n"
                         + "    List \n" + "    Bye\n");
         }
-
-
-
     }
 
     public static int getSlashIndex(String text) {

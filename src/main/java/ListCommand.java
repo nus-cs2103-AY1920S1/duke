@@ -9,20 +9,21 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws FileNotFoundException {
         ui.printIndent();
         if (TaskList.listOfTasks.isEmpty()) {
-            System.out.println("There is no tasks in your list currently!!!");
+            return "There is no tasks in your list currently!!!";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String list = "Here are the tasks in your list:\n";
             File temp = new File(Storage.file);
             Scanner s = new Scanner(temp);
             int numbering = 1;
             while (s.hasNext()) {
                 ui.printIndent();
-                System.out.println(numbering + ". " + s.nextLine());
+                list += numbering + ". " + s.nextLine() + "\n";
                 numbering++;
             }
+            return list;
         }
     }
 }

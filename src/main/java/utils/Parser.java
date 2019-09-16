@@ -1,6 +1,7 @@
 package utils;
 
 import java.text.ParseException;
+
 import exceptions.DukeException;
 
 public class Parser {
@@ -25,16 +26,14 @@ public class Parser {
             String[] splited = str.split(" ");
             String check = splited[0].toLowerCase();
             
-            //bye
             if (check.equals("bye")) {
                 ui.bye();
                 storage.saveFile(tasks);
                 System.exit(0);
 
-            //list
             }else if(check.equals("list")){
                 ui.print(tasks.toString());
-            //done
+            
             }else if(check.equals("done")){
                 int taskNum = Integer.parseInt(splited[1]) -1;
                 tasks.markAsDone(taskNum);
@@ -45,8 +44,8 @@ public class Parser {
 
             }else if(check.equals("todo")){
                 String description = str.replace("todo", "").trim();
-                //error handling
-                if(description.equals("")){
+                
+                if(description.equals("")){ //error handling
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 
                 }else{ //successful addition 
@@ -70,8 +69,8 @@ public class Parser {
                 }else{
                     tasks.addDeadline(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
                 }
-            //error handling
-            }else{
+           
+            }else{ //error handling
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
     

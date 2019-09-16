@@ -1,6 +1,7 @@
 package utils;
 
 import java.util.ArrayList;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
@@ -13,6 +14,7 @@ public class TaskList {
         this.tasks = tasks;
         this.ui = ui;
     }
+
     public TaskList(){
         this.tasks = new ArrayList<Task>();
     }
@@ -20,25 +22,31 @@ public class TaskList {
     public void add(Task task){
         tasks.add(task);
     }
+
     public int size(){
         return tasks.size();
     }
+
     public Task get(int i){
         return tasks.get(i);
     }
+
     public void addTodo(String description){
         tasks.add(new Todo(description));
     }
+
     public void addEvent(String description, DateTime datetime){
         Task current = new Event(description, datetime);
         tasks.add(current);
         ui.printMsg(current, tasks.size());
     }
+
     public void addDeadline(String description, DateTime datetime){
         Task current = new Deadline(description, datetime);
         tasks.add(current);
         ui.printMsg(current, tasks.size());
-    }   
+    }  
+
     public void delete(int i){
         Task current = tasks.get(i);
         tasks.remove(i);

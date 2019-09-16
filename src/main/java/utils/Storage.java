@@ -14,16 +14,21 @@ import tasks.Todo;
 public class Storage {
     private File file;
     private String fileLocation;
+
     public Storage(String fileloc){
         this.fileLocation = fileloc;
         this.file = new File(fileloc);
     }
 
     /**
+<<<<<<< HEAD
      * 
      * @return
      * called when duke is initialised,
      * reads the file and re-adds the tasks back into a new arraylist to be
+=======
+     * loads the saved tasks from file into new arraylist to be used inside TaskList
+>>>>>>> branch-A-CodingStandard
      */
 
     public ArrayList<Task> load(){
@@ -34,9 +39,11 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] splited = line.split("\\|");
+
                 for (int i = 0; i < splited.length; i++) {
                     splited[i] = splited[i].trim();
                 }
+
                 switch(splited[0]) {
                     case "T":
                         Task todo = new Todo(splited[2]);
@@ -77,9 +84,15 @@ public class Storage {
     /**
      * 
      * @param tasks
+<<<<<<< HEAD
      * writes the tasks inside the tasklist into the txtfile
      */
     
+=======
+     * takes tasks from tasklist and writes into txt file using tasks's own format
+     * 
+     */
+>>>>>>> branch-A-CodingStandard
     public void saveFile(TaskList tasks){
         try {
             FileWriter fw = new FileWriter(fileLocation);

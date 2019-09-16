@@ -14,14 +14,17 @@ public class Task {
     public void markAsDone(){
         this.isDone = true;
     }
+
     //returns the tick or cross
     public String getStatusIcon(){
         return "[" + (isDone ? "\u2713" : "\u2718") + "]";
     }
+
     @Override 
     public String toString(){
         return getStatusIcon() + " " + this.taskName;
     }
+    
     public String getStorageString(){
         return "";
     }

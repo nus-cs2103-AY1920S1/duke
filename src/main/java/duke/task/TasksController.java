@@ -228,4 +228,13 @@ public class TasksController {
         }
     }
 
+    public void deleteAllTasks() throws UiException {
+        try {
+            view.displayAllTasksDeleted(ui);
+
+            storage.writeTasks(new ArrayList<>());
+        } catch (StorageException e) {
+            ui.displayOutput(e.getMessage());
+        }
+    }
 }

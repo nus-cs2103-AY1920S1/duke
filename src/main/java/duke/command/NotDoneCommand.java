@@ -9,6 +9,12 @@ import duke.ui.Ui;
 public class NotDoneCommand extends Command {
     protected int index;
 
+    /**
+     * Initialise a NotDoneCommand.
+     *
+     * @param commandContent User input string less command word.
+     * @throws DukeException If user input argument is not a single integer.
+     */
     public NotDoneCommand(String commandContent) throws DukeException {
         super(commandContent);
 

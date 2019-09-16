@@ -9,6 +9,12 @@ import duke.ui.Ui;
 public class SortCommand extends Command {
     SortType sortType;
 
+    /**
+     * Initialise a SortCommand.
+     *
+     * @param commandContent User input string less command word.
+     * @throws DukeException If user input argument is not a valid sort type.
+     */
     public SortCommand(String commandContent) throws DukeException {
         if (commandContent.isEmpty()) {
             throw new DukeException("Description of sort cannot be empty.");

@@ -2,6 +2,12 @@ package duke.task;
 
 public class Todo extends Task {
 
+    /**
+     * Initialise a new Task.
+     *
+     * @param desc Description of the Task.
+     * @param done Whether the task is done.
+     */
     public Todo(String desc, boolean... done) {
         super(desc);
         if (done.length == 1) {

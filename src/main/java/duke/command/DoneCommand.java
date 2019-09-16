@@ -9,6 +9,12 @@ import duke.ui.Ui;
 public class DoneCommand extends Command {
     protected int index;
 
+    /**
+     * Initialise a DoneCommand.
+     *
+     * @param commandContent User input string less command word.
+     * @throws DukeException If user input argument is not a single integer.
+     */
     public DoneCommand(String commandContent) throws DukeException {
         super(commandContent);
 

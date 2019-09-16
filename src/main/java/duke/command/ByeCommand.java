@@ -5,8 +5,14 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
+    /**
+     * Initiate new ByeCommand.
+     *
+     * @param commandContent User input string less command word.
+     * @throws DukeException If additional input other than command word detected.
+     */
     public ByeCommand(String commandContent) throws DukeException {
         super(commandContent);
 

@@ -7,6 +7,12 @@ import duke.ui.Ui;
 
 public class ClearCommand extends Command {
 
+    /**
+     * Initialise a ClearCommand.
+     *
+     * @param commandContent User input string less command word.
+     * @throws DukeException If additional input other than command word detected.
+     */
     public ClearCommand(String commandContent) throws DukeException {
         super(commandContent);
 

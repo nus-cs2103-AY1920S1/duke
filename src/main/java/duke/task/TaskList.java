@@ -12,6 +12,11 @@ import java.util.stream.Collectors;
 public class TaskList {
     protected List<Task> tasks;
 
+    /**
+     * Initiate a new TaskList.
+     *
+     * @param tasks Optional List of Tasks can be passed to the constructor to initialise TaskList with tasks.
+     */
     public TaskList(List<Task>... tasks) {
         if (tasks.length == 1) {
             this.tasks = tasks[0];
@@ -120,6 +125,12 @@ public class TaskList {
         return index >= 1 && index <= tasks.size();
     }
 
+    /**
+     * Find Tasks by description keywords.
+     *
+     * @param keyword Keyword string that is used to search for tasks.
+     * @return List of tasks that matches the keyword passed in.
+     */
     public List<Task> findByKeyword(String keyword) {
         List<Task> tasks = new ArrayList<>(
                 getTasks().stream()
@@ -129,10 +140,19 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Clear TaskList and remove all tasks.
+     */
     public void clear() {
         getTasks().clear();
     }
 
+    /**
+     * Sort the list of tasks by a certain criteria.
+     *
+     * @param sortType Type of data by which user want to sort tasks.
+     * @throws DukeException If sort type passed in is not supported (ie. not sortable).
+     */
     public void sort(SortType sortType) throws DukeException {
         Comparator<Task> comparator;
         Function<Task, String> fn;

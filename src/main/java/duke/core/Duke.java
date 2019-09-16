@@ -14,7 +14,9 @@ public class Duke {
     protected String output;
     protected boolean isExit = false;
 
-    public Duke(){};
+    public Duke() {
+    }
+
     /**
      * duke.core.Duke Constructor that takes in a filePath where application data would be stored.
      *
@@ -64,6 +66,7 @@ public class Duke {
     public boolean getExit() {
         return isExit;
     }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.

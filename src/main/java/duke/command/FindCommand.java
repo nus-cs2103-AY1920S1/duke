@@ -14,6 +14,12 @@ public class FindCommand extends Command {
     private static final Pattern PAT = Pattern.compile(" ");
     String keyWords;
 
+    /**
+     * Initialise a FindCommand.
+     *
+     * @param commandContent User input string less command word.
+     * @throws DukeException If user input argument is empty.
+     */
     public FindCommand(String commandContent) throws DukeException {
         super();
 

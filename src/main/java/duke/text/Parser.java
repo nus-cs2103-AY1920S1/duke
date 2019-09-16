@@ -15,7 +15,7 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] inputs = fullCommand.split(" ", 2);
         String commandWordString = inputs.length >= 1 ? inputs[0].toUpperCase() : "";
-        String commandContent = inputs.length == 2 ? inputs[1] : "";
+        String commandContent    = inputs.length == 2 ? inputs[1]               : "";
 
         try {
             Command command = CommandWord.valueOf(commandWordString).parseCommand(commandContent);

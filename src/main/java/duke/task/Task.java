@@ -108,7 +108,7 @@ public class Task {
      */
 
     public String getDoneStatus() {
-        return isDone() ? "\u2714" : "\u2718";
+        return isDone() ? "O" : "X"; //"\u2714" : "\u2718";
     }
 
     public String toStorageString() {

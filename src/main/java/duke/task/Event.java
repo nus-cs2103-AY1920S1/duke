@@ -118,8 +118,8 @@ public class Event extends Task implements UsingDateTime {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                this.getStartDate().format(displayFormatter) + " to " +
-                this.getEndDate().format(displayFormatter) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.getStartDate().format(displayFormatter) + " to "
+                + this.getEndDate().format(displayFormatter) + ")";
     }
 }

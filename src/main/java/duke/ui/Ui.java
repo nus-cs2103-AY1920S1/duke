@@ -219,15 +219,19 @@ public class Ui {
         showMsg("Error loading tasks from file");
     }
 
+    /**
+     * Display matching tasks in TaskList.
+     *
+     * @param foundTasks List of found tasks.
+     * @throws DukeException If there is no tasks in TaskList.
+     */
     public void showFoundTasks(List<Task> foundTasks) throws DukeException {
-        if (!foundTasks.isEmpty()) {
-            showMsg("Here are the matching tasks in your list:");
-            for (Task t: foundTasks) {
-                showMsg((foundTasks.indexOf(t) + 1) + ". " + t);
-            }
-        } else {
+        if (foundTasks.isEmpty()) {
             showNothingFoundMsg();
         }
+
+        showMsg("Here are the matching tasks in your list:");
+        foundTasks.forEach(t -> showMsg((foundTasks.indexOf(t) + 1) + ". " + t));
     }
 
     private void showNothingFoundMsg() {

@@ -7,6 +7,12 @@ import duke.ui.Ui;
 
 public class ListCommand extends Command {
 
+    /**
+     * Initialise a ListCommand.
+     *
+     * @param commandContent User input string less command word.
+     * @throws DukeException If user input argument is not empty.
+     */
     public ListCommand(String commandContent) throws DukeException {
         super(commandContent);
 

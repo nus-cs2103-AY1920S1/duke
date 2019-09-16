@@ -59,6 +59,10 @@ public class Duke {
         new Duke("tasks.txt").run();
     }
 
+    /**
+     * Returns duke.Duke with child class MainUi
+     * @return duke.Duke meant for GUI interface. Uses MainUi instead of Ui class.
+     */
     //@@author CarbonGrid
     public Duke usingMainUi() {
         ui = new MainUi();

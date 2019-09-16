@@ -43,9 +43,7 @@ public class Duke extends Application{
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-//        tasks = new TaskList(new LinkedList<Task>());
             tasks = new TaskList(storage.printFileContents());
-
             assert tasks!= null;
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,14 +51,11 @@ public class Duke extends Application{
 
     }
 
-    //write to file when there is a change in state
-
     /**
      * Runs the logic for Duke.
      */
     public String run(String input) {
         try {
-//        tasks = new TaskList(new LinkedList<Task>());
             tasks = new TaskList(storage.printFileContents());
         } catch (IOException e) {
             System.out.println("File not found");
@@ -71,6 +66,7 @@ public class Duke extends Application{
             String error = "";
 
             String firstWord = split.getType();
+            assert firstWord !=null;
 
             if (firstWord.equals("bye")) {
 

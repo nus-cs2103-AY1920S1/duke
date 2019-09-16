@@ -1,5 +1,5 @@
 1. [T][✓] do fwoc
 2. [D][✓] fwoc (by: 6th aug)
-3. [D][✘] fwoc (by: 2nd of December 2019, 6.00PM)
-4. [T][✓] krbff
+3. [T][✓] krbff
+4. [T][✘] jeanne
 5. [T][✘] jeanne

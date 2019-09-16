@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class to encapsulate command arguments in a way that also provides some utility such as extracting date arguments.
+ */
 public class TaskArguments {
 
     private final String dateTimeRegex =
@@ -21,18 +24,34 @@ public class TaskArguments {
 
     private String arguments;
 
-    protected TaskArguments(String arguments) {
+    public TaskArguments(String arguments) {
         this.arguments = arguments;
     }
 
+    /**
+     * Returns the arguments as a string
+     * @return arguments string
+     */
     public String getArguments() {
         return arguments;
     }
 
+    /**
+     * Checks if the argument is empty
+     * @return true if argument is an empty string
+     */
     public boolean isEmpty() {
         return arguments.equals("");
     }
 
+    /**
+     * Extract days, dates and time from the argument and returns them as a list of LocalDateTimes. These arguments
+     * are removed from the original argument string once they have been extracted.
+     * @param numDates number of dates the argument should contain
+     * @return list of extracted LocalDateTimes
+     * @throws UnknownDateTimeException if date arguments are in an invalid format
+     * @throws DateTimeExtractionException if there are insufficient date arguments in the original argument string
+     */
     public List<LocalDateTime> extractLocalDateTime(int numDates) throws UnknownDateTimeException, DateTimeExtractionException {
 
         List<String> dateTimePatterns;

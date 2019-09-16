@@ -6,7 +6,16 @@ import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 
+/**
+ * Utility class to parse strings representing days into the upcoming LocalDateTime.
+ */
 public class DayParser {
+    /**
+     * Parse string representing days into corresponding LocalDateTime.
+     * @param day string representing day of the week
+     * @return corresponding LocalDateTime
+     * @throws UnknownDateTimeException if string is invalid
+     */
     public static LocalDateTime parse(String day) throws UnknownDateTimeException {
         String lowerCaseDay = day.toLowerCase();
 

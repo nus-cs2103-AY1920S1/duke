@@ -2,7 +2,6 @@
 
 This is a feature guide on a simple chatbot that I built as part of CS2030's Individual Project. This is a chatbot which functions as a todolist, and it supports 3 types of tasks for you to manage. They are, in no specific order: Todos, Deadlines, Events. You can mark these events as done and deleted, list them etc as you would a normal todo list.
 
-** Screenshot **
 ![Screenshot](Ui.png)
 
 

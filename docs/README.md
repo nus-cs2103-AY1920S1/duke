@@ -66,7 +66,7 @@ Example outcome:
       [E][✘] Group meeting (at: 12 September 2019 04:00PM)
     Now you have 3 tasks in the list.
    
--
+-----
 ### List all your tasks
 List all your tasks to see what you have to do.
 
@@ -89,7 +89,7 @@ Example outcome:
     2. [D][✘] Do homework (by: 12 December 2019 11:59PM)
     3. [E][✘] Group meeting (at: 12 September 2019 04:00PM)
    
--
+-----
 ### Mark a task as done
 Mark a task as done.
 
@@ -112,7 +112,7 @@ Example outcome:
     Nice! I've marked this task as done:
       [D][✓] Do homework (by: 12 December 2019 11:59PM)
  
--
+------
 ### Delete a task from the list
 Delete a task from the list.
 
@@ -136,7 +136,7 @@ Example outcome:
       [D][✓] Do homework (by: 12 December 2019 11:59PM)
     Now you have 2 tasks in the list.
  
--
+-----
 ### Find all tasks in the list containing a keyword
 Find all task in the list containing a keyword.
 
@@ -160,7 +160,7 @@ Example outcome:
     Here are the matching tasks in the list
     1. [E][✘] Group meeting (at: 12 September 2019 04:00PM)
     
--
+------
 ### Sort the tasks
 Sort the tasks in the list.
 

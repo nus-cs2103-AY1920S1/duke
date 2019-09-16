@@ -7,6 +7,8 @@ import duke.task.Task;
 import duke.task.TaskManager;
 import duke.ui.UserInterface;
 
+import java.io.IOException;
+
 /**
  *  The <code>DeleteCommand</code> is created when the user enters <code>"delete"</code>. The delete command will delete
  *  a specified task entered by the user. The user interface will display the information of the deleted task if
@@ -49,6 +51,8 @@ public class DeleteCommand implements Command {
             return ui.showSaveError();
         } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);
+        }  catch (IOException ioe) {
+            return ui.showSaveError();
         }
     }
 

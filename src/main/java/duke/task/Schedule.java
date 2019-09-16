@@ -3,8 +3,10 @@ package duke.task;
 import duke.extension.InsertionSortComparator;
 import duke.parser.FileToTaskParser;
 
-import java.util.*;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * This is the list of task items. This supports add, edit, delete operations. When a add, edit or delete operation is
@@ -16,7 +18,6 @@ public class Schedule {
      * This is the list of task items.
      */
 
-    private List<Task> todoTaskList;
     private List<Task> schedule;
 
     /**
@@ -24,7 +25,6 @@ public class Schedule {
      */
     public Schedule() {
         this.schedule = new ArrayList<>();
-        this.todoTaskList = new ArrayList<>();
     }
 
     /**
@@ -38,23 +38,8 @@ public class Schedule {
      * @param task the task to be appended to the list
      */
     public void add(Task task) {
-
-            schedule.add(task);
-            Comparator<Task> comparator = new InsertionSortComparator();
-            for (int i = schedule.size() - 1; i > 0; i--) {
-                int prevIndex = i - 1;
-                int currIndex = i;
-
-                Task prev = schedule.get(prevIndex);
-                Task curr = schedule.get(currIndex);
-
-                if (comparator.compare(prev, curr) > 0) {
-                    Collections.swap(schedule, prevIndex, currIndex);
-                } else {
-                    break;
-                }
-            }
-
+        schedule.add(task);
+        insertionSortSchedule();
     }
 
     /**
@@ -63,41 +48,75 @@ public class Schedule {
      * @return a string representation of the task removed to be printed on a user interface.
      */
     public void delete(Task task) {
-
             schedule.remove(task);
-
     }
 
     /**
      * Returns the number of tasks in the list.
      * @return the number of tasks in the list.
      */
-
+    public String view(String date) {
+        StringBuilder outputBuilder = new StringBuilder();
+        outputBuilder.append(createNewHeaderToDisplay(date));
+        outputBuilder.append(schedule.stream()
+                       .filter(x -> x.displayTaskDateIfPresent().equals(date))
+                       .map(x -> addTaskToView(x))
+                       .reduce("", (x, y) -> x + y));
+        outputBuilder.append("    ==========================================================");
+        return outputBuilder.toString();
+    }
     /**
      * Returns a string representation of the list of tasks.
      * @return a string representation of the list of tasks
      */
-    public String list() {
+    public String view() {
         StringBuilder outputBuilder = new StringBuilder();
-        outputBuilder.append("    ========================== TODO ==========================\n");
+        outputBuilder.append(createNewHeaderToDisplay("   TODO  "));
         String date = "";
         for(int i = 0; i <  schedule.size(); i++) {
-            String curr = schedule.get(i).displayTaskDateIfPresent();
+            Task task = schedule.get(i);
+            String curr = task.displayTaskDateIfPresent();
             if(date.equals(curr)) {
-                outputBuilder.append("    ");
-                outputBuilder.append(schedule.get(i).showFullInformation());
-                outputBuilder.append("\n");
+                outputBuilder.append(addTaskToView(task));
             } else {
                 date = curr;
-                outputBuilder.append("    ======================== ");
-                outputBuilder.append(date);
-                outputBuilder.append("  =======================\n");
-                outputBuilder.append("    ");
-                outputBuilder.append(schedule.get(i).showFullInformation());
-                outputBuilder.append("\n");
+                outputBuilder.append(createNewHeaderToDisplay(date));
+                outputBuilder.append(addTaskToView(task));
             }
         }
         outputBuilder.append("    ==========================================================");
         return outputBuilder.toString();
+    }
+
+    private String createNewHeaderToDisplay(String title) {
+        StringBuilder outputBuilder = new StringBuilder("    ======================== ");
+        outputBuilder.append(title);
+        outputBuilder.append("  =======================\n");
+        return outputBuilder.toString();
+    }
+
+    private String addTaskToView(Task task) {
+        StringBuilder outputBuilder = new StringBuilder();
+        outputBuilder.append("    ");
+        outputBuilder.append(task.showFullInformation());
+        outputBuilder.append("\n");
+        return outputBuilder.toString();
+    }
+
+    private void insertionSortSchedule() {
+        Comparator<Task> comparator = new InsertionSortComparator();
+        for (int i = schedule.size() - 1; i > 0; i--) {
+            int prevIndex = i - 1;
+            int currIndex = i;
+
+            Task prev = schedule.get(prevIndex);
+            Task curr = schedule.get(currIndex);
+
+            if (comparator.compare(prev, curr) > 0) {
+                Collections.swap(schedule, prevIndex, currIndex);
+            } else {
+                break;
+            }
+        }
     }
 }

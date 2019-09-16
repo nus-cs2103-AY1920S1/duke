@@ -24,43 +24,29 @@ public class FileToTaskParser {
     public static Task parse(String line) throws FailedToLoadIOException {
         lineCount++;
         String[] arr = line.split(",");
-//        System.out.println(Arrays.toString(arr));
         try {
-            boolean isDone = arr[1].equals("true");
-            boolean isReminder = !arr[2].equals("null");
-            String taskDescription = arr[3];
-            switch (arr[0]) {
+
+            String isDone = getIsDone(arr);
+            String reminderDate = getReminder(arr);
+
+            String taskDescription = getTaskDescription(arr);
+
+            switch (getTask(arr)) {
+
             case "todo":
                 Task todo = new Todo(taskDescription);
-//                System.out.println(todo);
-                if(isDone) {
-                    todo.markAsDone();
-                }
-                if(isReminder) {
-                    todo.setReminder(DateParser.parse(arr[2]));
-                }
+                todo.markAsDoneIfTrue(isDone);
+                todo.setReminderIfPresent(reminderDate);
                 return todo;
             case "deadline":
-                String deadlineBy = arr[4];
-//                System.out.println(deadlineBy);
-                Task deadline = new Deadline(taskDescription, DateParser.parse(deadlineBy));
-                if(isDone) {
-                    deadline.markAsDone();
-                }
-                if(isReminder) {
-                    deadline.setReminder(DateParser.parse(arr[2]));
-                }
-//                System.out.println(deadline);
+                Task deadline = new Deadline(taskDescription, DateParser.parse(getTaskDate(arr)));
+                deadline.markAsDoneIfTrue(isDone);
+                deadline.setReminderIfPresent(reminderDate);
                 return deadline;
             case "event":
-                String eventAt = arr[4];
-                Task event = new Event(taskDescription, DateParser.parse(eventAt));
-                if(isDone) {
-                    event.markAsDone();
-                }
-                if(isReminder) {
-                    event.setReminder(DateParser.parse(arr[2]));
-                }
+                Task event = new Event(taskDescription, DateParser.parse(getTaskDate(arr)));
+                event.markAsDoneIfTrue(isDone);
+                event.setReminderIfPresent(reminderDate);
                 return event;
             default:
                 throw new FailedToLoadIOException(lineCount, line);
@@ -70,5 +56,25 @@ public class FileToTaskParser {
         } catch (InvalidDateTimeException idte) {
             throw new FailedToLoadIOException(lineCount, line);
         }
+    }
+
+    private static String getTask(String[] arr) throws ArrayIndexOutOfBoundsException {
+        return arr[0];
+    }
+
+    private static String getIsDone(String[] arr) throws ArrayIndexOutOfBoundsException {
+        return arr[1];
+    }
+
+    private static String getReminder(String[] arr) throws ArrayIndexOutOfBoundsException {
+        return arr[2];
+    }
+
+    private static String getTaskDescription(String[] arr) throws ArrayIndexOutOfBoundsException {
+        return arr[3];
+    }
+
+    private static String getTaskDate(String[] arr) throws ArrayIndexOutOfBoundsException {
+        return arr[4];
     }
 }

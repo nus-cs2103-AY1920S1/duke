@@ -1,6 +1,7 @@
 package duke.main;
 
 import duke.command.Command;
+import duke.exception.FailedToLoadIOException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidParameterException;
 import duke.parser.CommandParser;
@@ -36,7 +37,7 @@ public class Duke {
         storage = new Storage("data/duke.txt");
         try {
             tasks = new TaskManager(storage.load());
-        } catch (IOException ie) {
+        } catch (IOException ioe) {
             userInterface.showLoadingError();
             tasks = new TaskManager();
         }
@@ -53,36 +54,6 @@ public class Duke {
         } catch (InvalidParameterException invalidParameters) {
             return userInterface.showInvalidParametersError(invalidParameters);
         }
-    }
-
-    /**
-     * This runs the entire Duke Program. Once duke has started running, user can start typing in commands to duke. The
-     * execution of individual {@link duke.command.Command} in Duke happens here.
-     */
-    public void run() {
-        userInterface.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = userInterface.readCommand();
-                Command c = CommandParser.parse(fullCommand);
-                c.execute(tasks, userInterface, storage);
-                isExit = c.isExit();
-            } catch (InvalidCommandException invalidCommand) {
-                userInterface.showInvalidCommandError(invalidCommand);
-            } catch (InvalidParameterException invalidParameters) {
-                userInterface.showInvalidParametersError(invalidParameters);
-            }
-        }
-
-    }
-
-    /**
-     * This is the main method of the Duke Program.
-     * @param args the arguments to be passed into the Duke program before the program is run.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
     }
 
 }

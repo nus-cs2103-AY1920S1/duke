@@ -96,20 +96,22 @@ public class Task {
         }
     }
 
+    public String encodeOptionalDate(Optional<Date> optionalDate) {
+        if(optionalDate.isPresent()) {
+            return DateFormatter.format(optionalDate.get());
+        } else {
+           return "null";
+        }
+    }
+
     public String encode() {
         StringBuilder outputBuilder = new StringBuilder("" + isDone);
         outputBuilder.append(',');
-        if(reminderDate.isPresent()) {
-            outputBuilder.append(DateFormatter.format(reminderDate.get()));
-            outputBuilder.append(",");
-        } else {
-            outputBuilder.append("null,");
-        }
+        outputBuilder.append(encodeOptionalDate(reminderDate));
+        outputBuilder.append(',');
         outputBuilder.append(description);
-        if(taskDate.isPresent()) {
-            outputBuilder.append(',');
-            outputBuilder.append(DateFormatter.format(taskDate.get()));
-        }
+        outputBuilder.append(',');
+        outputBuilder.append(encodeOptionalDate(taskDate));
         return outputBuilder.toString();
     }
 
@@ -133,4 +135,20 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    public void markAsDoneIfTrue(String isDone) {
+        this.isDone = isDone.equals("true");
+    }
+
+    public void markAsDoneIfTrue(Boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public void setReminderIfPresent(String reminderDate) throws InvalidDateTimeException {
+        boolean isPresent = !reminderDate.equals("null");
+        if(isPresent) {
+            Date date = DateParser.parse(reminderDate);
+            this.reminderDate = Optional.of(date);
+            new Reminder(this, date);
+        }
+    }
 }

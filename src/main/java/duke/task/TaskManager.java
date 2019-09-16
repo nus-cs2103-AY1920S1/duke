@@ -5,7 +5,6 @@ import duke.parser.FileToTaskParser;
 import duke.parser.TaskToFileParser;
 import duke.ui.Ui;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.stream.Stream;
 
@@ -90,20 +89,16 @@ public class TaskManager {
         return taskList.size();
     }
 
-    public int getScheduleSize() {
-        return taskList.size();
-    }
-
     /**
      * Returns a string representation of the list of tasks.
      * @return a string representation of the list of tasks
      */
     public String showTaskList() {
-        return taskList.list();
+        return taskList.view();
     }
 
-    public String showSchedule() {
-        return schedule.list();
+    public String showSchedule(String date) {
+        return date.isBlank() ? schedule.view() : schedule.view(date);
     }
 
     /**

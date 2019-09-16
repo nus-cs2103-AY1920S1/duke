@@ -19,12 +19,4 @@ public interface Command {
      */
     String execute(TaskManager taskManager, UserInterface ui, Storage storage) throws InvalidParameterException;
 
-    /**
-     * Returns <code>true</code> if the command is an exit command and <code>false</code> otherwise.
-     * @return <code>true</code> if the command is an exit command and <code>false</code> otherwise.
-     */
-    default boolean isExit() {
-        return this instanceof ExitCommand;
-    }
-
 }

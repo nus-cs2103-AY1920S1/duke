@@ -7,6 +7,8 @@ import duke.task.Task;
 import duke.task.TaskManager;
 import duke.ui.UserInterface;
 
+import java.io.IOException;
+
 /**
  *  The <code>DoneCommand</code> is created when the user enters <code>"done"</code>. The done command will mark a
  *  specified task entered by the user as done. The user interface will display the updated information if it is
@@ -49,6 +51,8 @@ public class DoneCommand implements Command {
             return ui.showSaveError();
         } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);
+        }  catch (IOException ioe) {
+            return ui.showSaveError();
         }
     }
 

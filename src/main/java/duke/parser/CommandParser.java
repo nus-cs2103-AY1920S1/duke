@@ -22,9 +22,9 @@ public class CommandParser {
      */
     public static Command parse(String fullCommand) throws InvalidCommandException, InvalidParameterException {
         String[] arr = fullCommand.split(" ");
-        String parameter = Arrays.stream(arr).skip(1).collect(Collectors.joining(" ")).trim();
+        String parameter = getParameter(arr);
         try {
-            switch (arr[0]) {
+            switch (getCommand(arr)) {
             case "list":
                 return new ListCommand();
             case "done":
@@ -42,15 +42,23 @@ public class CommandParser {
             case "remind":
                 return new RemindCommand(parameter);
             case "schedule":
-                return new ScheduleCommand();
+                return new ScheduleCommand(parameter);
             case "bye":
                 return new ExitCommand();
             default:
-                throw new InvalidCommandException(arr[0]);
+                throw new InvalidCommandException(getCommand(arr));
             }
         } catch (ArrayIndexOutOfBoundsException ioube) {
             throw new InvalidCommandException();
         }
+    }
+
+    private static String getCommand(String[] arr) throws ArrayStoreException{
+        return arr[0];
+    }
+
+    private static String getParameter(String[] arr) {
+        return Arrays.stream(arr).skip(1).collect(Collectors.joining(" ")).trim();
     }
 
 }

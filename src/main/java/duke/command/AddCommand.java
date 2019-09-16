@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.task.TaskManager;
 import duke.ui.UserInterface;
 
+import java.io.IOException;
+
 /**
  * The <code>AddCommand</code> is the parent class of {@link AddTodoCommand}, {@link AddDeadlineCommand},
  * {@link AddEventCommand}.
@@ -43,10 +45,19 @@ public class AddCommand implements Command {
             taskManager.addToTaskList(task);
             taskManager.addToSchedule(task);
             storage.save(taskManager.getCurrentTaskListToSave());
+            return ui.showAddInformation(task.toString(), taskManager.getTaskListSize());
         } catch (FailedToSaveIOException ftsioe) {
             return ui.showSaveError();
+        } catch (IOException ioe) {
+            return ui.showSaveError();
         }
-        return ui.showAddInformation(task.toString(), taskManager.getTaskListSize());
     }
 
+    protected String getTaskDescription(String[] arr) throws ArrayIndexOutOfBoundsException{
+        return arr[0];
+    }
+
+    protected String getTaskDate(String[] arr) throws ArrayIndexOutOfBoundsException{
+        return arr[1];
+    }
 }

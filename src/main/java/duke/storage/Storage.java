@@ -1,5 +1,7 @@
 package duke.storage;
 
+import duke.exception.DukeException;
+import duke.exception.FailedToLoadIOException;
 import duke.exception.FailedToSaveIOException;
 import duke.task.TaskManager;
 
@@ -35,9 +37,7 @@ public class Storage {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             return reader.lines();
         } catch(FileNotFoundException fnfe) {
-            File file = new File("data/duke.txt");
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            createTextFile();
             return Stream.empty();
         }
     }
@@ -47,31 +47,32 @@ public class Storage {
      * @param stream the stream of lines to be saved into the file
      * @throws IOException if an I/O error occurs
      */
-    public void save(Stream<String> stream) throws FailedToSaveIOException {
+    public void save(Stream<String> stream) throws FailedToSaveIOException, IOException {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             stream.forEach(line -> {
-                try {
-                    writer.write(line);
-                } catch (IOException ioe) {
-                    throw new UncheckedIOException(line, ioe);
-                }
+                writeLine(writer, line);
             });
             writer.close();
         } catch (FileNotFoundException fnfe) {
-            try {
-                File file = new File("data/duke.txt");
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-                save(stream);
-            } catch (IOException ioex) {
-                throw new FailedToSaveIOException();
-            }
-        } catch(IOException ioe) {
-            throw new FailedToSaveIOException();
+            createTextFile();
+            save(stream);
         } catch (UncheckedIOException uioe) {
             throw new FailedToSaveIOException(uioe.getMessage());
         }
     }
 
+    private static void writeLine(BufferedWriter writer, String line) throws UncheckedIOException {
+        try {
+            writer.write(line);
+        } catch (IOException ioe) {
+            throw new UncheckedIOException(line, ioe);
+        }
+    }
+
+    private static void createTextFile() throws IOException {
+        File file = new File("data/duke.txt");
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+    }
 }

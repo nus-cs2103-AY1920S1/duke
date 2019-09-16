@@ -8,6 +8,7 @@ import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.UserInterface;
 
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -24,10 +25,6 @@ public class RemindCommand implements Command {
 
     Date date;
 
-    private boolean isDateFieldEmpty (Date date) {
-        return date == null;
-    }
-
     /**
      * Constructs a new done command with the specified index of the task to be marked as done in the list of tasks.
      * @param index the index of the task to be mark as done in the list of tasks
@@ -36,8 +33,8 @@ public class RemindCommand implements Command {
     public RemindCommand(String line) throws InvalidParameterException {
         String[] arr = line.split(" ");
         try {
-            this.index = Integer.parseInt(arr[0]);
-            this.date = DateParser.parse(String.join(" ", arr[1], arr[2]));
+            this.index = getIndex(arr);
+            this.date = getDate(arr);
         } catch (NumberFormatException nfe) {
             throw new InvalidParameterException("" + index);
         } catch(ArrayIndexOutOfBoundsException aioube) {
@@ -64,7 +61,17 @@ public class RemindCommand implements Command {
             return ui.showSaveError();
         } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);
+        }  catch (IOException ioe) {
+            return ui.showSaveError();
         }
+    }
+
+    private int getIndex(String[] arr) throws ArrayIndexOutOfBoundsException, NumberFormatException {
+        return Integer.parseInt(arr[0]);
+    }
+
+    private Date getDate(String[] arr) throws ArrayIndexOutOfBoundsException, InvalidDateTimeException {
+        return DateParser.parse(String.join(" ", arr[1], arr[2]));
     }
 
 }

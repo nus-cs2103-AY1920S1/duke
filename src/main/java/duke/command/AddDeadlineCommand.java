@@ -25,9 +25,7 @@ public class AddDeadlineCommand extends AddCommand {
         }
         try {
             String[] arr = super.line.split(" /by ");
-            String taskDescription = arr[0];
-            String deadlineBy = arr[1];
-            super.task = new Deadline(taskDescription, deadlineBy);
+            super.task = new Deadline(getTaskDescription(arr), getTaskDate(arr));
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new InvalidParameterException(line);
         } catch(InvalidDateTimeException idte) {

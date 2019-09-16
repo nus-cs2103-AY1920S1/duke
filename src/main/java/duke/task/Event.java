@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.exception.InvalidDateTimeException;
-import duke.formatter.DateFormatter;
 import duke.parser.DateParser;
 import java.util.Date;
 
@@ -29,21 +28,6 @@ public class Event extends Task {
      */
     public Event(String description, Date at) {
         super(description, at);
-    }
-
-    public Event(String description, Date at, boolean isDone) {
-        super(description, at);
-        if(isDone) {
-            this.markAsDone();
-        }
-    }
-
-    public Event(String description, Date at, boolean isDone, Date reminder) {
-        super(description, at);
-        if(isDone) {
-            this.markAsDone();
-        }
-        this.setReminder(reminder);
     }
 
     /**

@@ -26,7 +26,7 @@ public class TaskList {
      * Constructs a new list of tasks.
      */
     public TaskList() {
-        this.taskList = new ArrayList();
+        this.taskList = new ArrayList<>();
     }
 
     /**
@@ -86,7 +86,7 @@ public class TaskList {
      * Returns a string representation of the list of tasks.
      * @return a string representation of the list of tasks
      */
-    public String list() {
+    public String view() {
         return IntStream.range(0, taskList.size())
                  .mapToObj(index -> {
                      int numbering = index + 1;
@@ -105,7 +105,7 @@ public class TaskList {
     public String find(String keyword) {
         return new TaskList(taskList.stream()
                             .filter(taskDescrption -> taskDescrption.contains(keyword))
-                            .map(task -> task.encode())).list();
+                            .map(task -> task.encode())).view();
 
 
     }

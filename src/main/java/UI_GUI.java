@@ -34,7 +34,6 @@ public class UI_GUI extends Application implements UI {
         dialogContainer.getChildren().addAll(
                 DialogBox.getWelcomeDialog(dukeText, new ImageView(duke_image))
         );
-
     }
 
     @Override
@@ -68,8 +67,8 @@ public class UI_GUI extends Application implements UI {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(1100.0);
-        stage.setMinWidth(800.0);
+        stage.setMinHeight(800.0);
+        stage.setMinWidth(1100.0);
 
         mainLayout.setPrefSize(1100.0, 800.0);
 

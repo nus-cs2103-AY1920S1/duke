@@ -23,6 +23,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Scene for Duke/User text and image.
+     * @param text Str to be displayed on DialogBox
+     * @param img image file to be displayed.
+     */
     private DialogBox(String text, Image img) {
         assert text != null;
         assert img != null;
@@ -54,6 +59,12 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns dialog box for Duke.
+     * @param text str to be displayed
+     * @param img image to be displayed
+     * @return DialogBox node
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

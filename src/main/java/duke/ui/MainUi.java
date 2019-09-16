@@ -21,6 +21,10 @@ public class MainUi extends Ui {
         show("Hello! I'm Duke\nWhat can I do for you?");
     }
 
+    /**
+     * Returns str kept in buffer and clears it afterwards.
+     * @return str to be displayed
+     */
     public String getResponse() {
         String str = buffer;
         buffer = null;

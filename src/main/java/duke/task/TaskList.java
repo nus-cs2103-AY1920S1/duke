@@ -15,7 +15,6 @@ public class TaskList {
 
     /**
      * Creates an instance of TaskList with empty new arrayList of tasks.
-     *
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -89,7 +88,7 @@ public class TaskList {
      * Validates that the task information entered by the user is in proper format.
      *
      * @param taskType type of task.
-     * @param taskDes description of task.
+     * @param taskDes  description of task.
      * @param taskTime date and time of task
      * @throws DukeException self-defined exceptions caused by illegal input.
      */
@@ -135,11 +134,14 @@ public class TaskList {
         // Handle exceptions
         validateInput(taskType, taskDes.toString(), taskTime.toString());
 
+        if (taskType.equals("todo")) {
+            return generateTask(taskType, taskDes);
+        }
         // Converts date format
         try {
             Date taskDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(taskTime.toString());
             // Creates new task
-            return generateTask(taskType, taskDes, taskDate);
+            return generateTaskWithDate(taskType, taskDes, taskDate);
         } catch (ParseException e) {
             // Do nothing if the date is not properly formatted
             throw new DukeException("\u2639 The time of the task is not in proper format. \n " +
@@ -203,20 +205,16 @@ public class TaskList {
     }
 
     /**
-     * Creates a new task instance and add it to the task list.
+     * Creates a new task instance with a date and add it to the task list.
      *
      * @param taskType type of task.
-     * @param taskDes description of task.
+     * @param taskDes  description of task.
      * @param taskTime time and/or date of task.
      * @return Task added to the task list.
      */
-    private Task generateTask(String taskType, StringBuilder taskDes, Date taskTime) {
+    private Task generateTaskWithDate(String taskType, StringBuilder taskDes, Date taskTime) {
         Task task;
         switch (taskType) {
-        case "todo":
-            task = new Todo(taskDes.toString());
-            tasks.add(task);
-            return task;
         case "deadline":
             task = new Deadline(taskDes.toString(), taskTime);
             tasks.add(task);
@@ -226,6 +224,23 @@ public class TaskList {
             tasks.add(task);
             return task;
         default:
+            throw new AssertionError(taskType);
+        }
+    }
+
+    /**
+     * Creates a new task instance and add it to the task list.
+     *
+     * @param taskType type of task.
+     * @param taskDes  description of task.
+     * @return Task added to the task list.
+     */
+    private Task generateTask(String taskType, StringBuilder taskDes) {
+        if (taskType.equals("todo")) {
+            Task task = new Todo(taskDes.toString());
+            tasks.add(task);
+            return task;
+        } else {
             throw new AssertionError(taskType);
         }
     }

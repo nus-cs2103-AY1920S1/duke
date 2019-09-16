@@ -1,4 +1,7 @@
 D | 0 | essay submission | 11/09/2019 0000
-T | 1 | join sports club
+T | 0 | join sports club
 E | 0 | project meeting | 10/09/2019 1500
-T | 1 | read book
+E | 0 | oral presentation | 13/09/2019 1200
+D | 0 | OP1 reflection | 15/09/2019 0000
+D | 0 | proposal submission | 16/09/2019 0000
+T | 1 | swimming

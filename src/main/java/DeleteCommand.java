@@ -1,5 +1,9 @@
 import java.io.IOException;
 
+/**
+ * Handles user's commands concerning the deletion of a 
+ * task in Duke.
+ */
 public class DeleteCommand extends Command {
 
     @Override
@@ -13,7 +17,7 @@ public class DeleteCommand extends Command {
         }
     }
     
-    private static void validateDeleteCommand(String command[]) throws DukeException {
+    private static void validateDeleteCommand(String[] command) throws DukeException {
         if (command.length == 1) {
             throw new DukeException("OOPS!!! The index of task to be deleted must be mentioned.");
         }

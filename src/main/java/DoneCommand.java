@@ -1,5 +1,9 @@
 import java.io.IOException;
 
+/**
+ * Handles user's commands concerning marking a task as 
+ * done inside Duke.
+ */
 public class DoneCommand extends Command {
 
     @Override
@@ -13,7 +17,7 @@ public class DoneCommand extends Command {
         }
     }
 
-    private static void validateDoneCommand(String command[]) throws DukeException {
+    private static void validateDoneCommand(String[] command) throws DukeException {
         if (command.length == 1) {
             throw new DukeException("OOPS!!! The completed task's index must be mentioned.");
         }

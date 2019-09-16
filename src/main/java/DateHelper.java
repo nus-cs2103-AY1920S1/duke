@@ -1,5 +1,9 @@
 import java.text.DateFormatSymbols;
 
+/**
+ * Helps handle and format the date inputted by the user into 
+ * Duke into a valid format.
+ */
 public class DateHelper {
 
     /**

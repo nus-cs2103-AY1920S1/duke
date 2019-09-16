@@ -105,7 +105,7 @@ public class Parser {
      * @return Returns the respective CommandName Enum if a match is found, otherwise the Error CommandName
      *         is returned.
      */
-    private static CommandName identifyCommandName(String input) {
+    public static CommandName identifyCommandName(String input) {
         CommandName commandName;
         try {
             String extractedCommand = input.split(" ")[0].toUpperCase();

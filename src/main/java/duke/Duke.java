@@ -1,33 +1,17 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-
 import duke.command.Command;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.UI;
 import duke.util.Parser;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 /**
  * Driver class.
  */
 public class Duke {
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private Storage storage;
     private TaskList tasks;
     private UI ui;
@@ -36,7 +20,11 @@ public class Duke {
      * Initializes the duke chatbot with a file path for storage purpose.
      */
     public Duke() {
-        this.storage = new Storage("data/duke.txt");
+        try {
+            this.storage = new Storage("duke.txt");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         this.ui = new UI();
         try {
             tasks = new TaskList(storage.readFile());

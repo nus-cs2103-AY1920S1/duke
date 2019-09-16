@@ -5,6 +5,7 @@ import java.util.Collections;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.TaskComparator;
 
 public class SortCommand extends Command {
@@ -23,8 +24,17 @@ public class SortCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         Collections.sort(tasks.getList(), new TaskComparator());
+        updateStorage(tasks, ui, storage);
         ListCommand listCommand = new ListCommand();
         listCommand.execute(tasks, ui, storage);
+    }
+
+    private void updateStorage(TaskList tasks, Ui ui, Storage storage) {
+        try {
+            storage.writeToFile(tasks);
+        } catch (DukeException exception) {
+            ui.printExceptionMessage(exception);
+        }
     }
 
     /**

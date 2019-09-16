@@ -39,8 +39,8 @@ public class DeleteCommand extends Command {
         int originalTaskSize = tasks.getSize();
         tasks.deleteTask(index - 1);
         assert tasks.getSize() == originalTaskSize - 1 : "Supposed to return true as a task should have been deleted.";
-        ui.printDeleteMessage(deletedTask, tasks.getSize());
         updateStorage(tasks, ui, storage);
+        ui.printDeleteMessage(deletedTask, tasks.getSize());
     }
 
     private void updateStorage(TaskList tasks, Ui ui, Storage storage) {

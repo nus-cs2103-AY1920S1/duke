@@ -40,10 +40,14 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
-            Scanner scanner = new Scanner(new File(filePath));
+            File file = new File(filePath);
+            file.createNewFile();
+            Scanner scanner = new Scanner(file);
             return getTasks(scanner);
         } catch (FileNotFoundException exception) {
             throw new StorageException("OOPS!!! Please specify a valid file path.");
+        } catch (IOException exception) {
+            throw new StorageException("OOPS!!! Something went wrong: " + exception.getMessage());
         }
     }
 

@@ -37,8 +37,8 @@ public class AddTodoCommand extends Command {
         }
         Todo todo = new Todo(details);
         tasks.addTask(todo);
-        ui.printAddTaskMessage(todo, tasks.getSize());
         updateStorage(tasks, ui, storage);
+        ui.printAddTaskMessage(todo, tasks.getSize());
     }
 
     private void updateStorage(TaskList tasks, Ui ui, Storage storage) {

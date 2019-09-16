@@ -40,8 +40,8 @@ public class DoneCommand extends Command {
         doneTask.markAsDone();
         assert doneTask.isDone() == true : "Supposed to return true as markAsDone() function should have "
                 + "marked the task as done.";
-        ui.printDoneMessage(doneTask);
         updateStorage(tasks, ui, storage);
+        ui.printDoneMessage(doneTask);
     }
 
     private void updateStorage(TaskList tasks, Ui ui, Storage storage) {

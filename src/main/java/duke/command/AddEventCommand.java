@@ -58,8 +58,8 @@ public class AddEventCommand extends Command {
         Event event = new Event(taskDescription, startDate, startTime, endDate, endTime);
 
         tasks.addTask(event);
-        ui.printAddTaskMessage(event, tasks.getSize());
         updateStorage(tasks, ui, storage);
+        ui.printAddTaskMessage(event, tasks.getSize());
     }
 
     private String[] getTaskDetails() {

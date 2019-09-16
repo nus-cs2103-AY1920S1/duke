@@ -27,7 +27,6 @@ public class Deadline extends Task {
         super(task, complete);
         this.dueDate = dueDate;
     }
-
     
     /**
      * Returns the String representation of a deadline as it is stored in text file on the local system.

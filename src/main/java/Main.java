@@ -15,7 +15,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws DukeException, IOException {
-        Duke duke = new Duke("/Users/abhimanyadav/Desktop/Duke/duke/src/main/java/dukeTasks.txt");
+        Duke duke = new Duke();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

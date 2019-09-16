@@ -1,10 +1,9 @@
-import java.io.FileNotFoundException;
+import java.io.File;
 
 /**
  * Main class of the program where supporting classes are called
  * and used to make Duke function.
  */
-
 public class Duke {
 
     private TaskList taskList;
@@ -13,28 +12,12 @@ public class Duke {
 
     /**
      * Creates a new Duke object.
-     * @param filePath Location of the local file where all tasks are stored or to be stored.
      * @throws IOException If the file path provided does not find a file.
      * @throws DukeException If an unknown or unidentifiable command is stored within the tasks file.
      */
-    public Duke(String filePath) throws DukeException, FileNotFoundException {
-        try {
-            storage = new Storage(filePath);
-            taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
-            System.err.println(e.toString());
-        } catch (FileNotFoundException e) {
-            System.err.println(e.toString());
-        }
-    }
-
-    /**
-     * Creates a new Duke object.
-     * @throws IOException If the file path provided does not find a file.
-     * @throws DukeException If an unknown or unidentifiable command is stored within the tasks file.
-     */
-    public Duke() throws FileNotFoundException, DukeException {
-        storage = new Storage("/Users/abhimanyadav/Desktop/Duke/duke/src/main/java/dukeTasks.txt");
+    public Duke() throws DukeException {
+        File f = new File("./dukeTasks.txt");
+        storage = new Storage(f.getAbsolutePath());
         taskList = new TaskList(storage.load());
     }
 

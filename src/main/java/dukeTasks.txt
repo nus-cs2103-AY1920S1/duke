@@ -1,9 +1,0 @@
-D | 1 | return book | 2nd of December 2019, 6pm
-E | 1 | attend party | 4th of June 2019, 6.30pm-10.30pm
-T | 0 | meet parents
-D | 1 | return book | 22nd of November 2019, 7pm
-T | 1 | kiss shashank
-D | 0 | return book | 2nd of December 2019, 6pm
-D | 0 | return book | 2nd of December 2019, 6pm
-D | 0 | return book | 2nd of December 2019, 6pm
-D | 0 | kill shashank | 2nd of November 2000, 6pm

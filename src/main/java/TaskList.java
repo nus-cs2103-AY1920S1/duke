@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 /**
  * The TaskList class handles the storage, adding and deleting of
@@ -51,20 +50,19 @@ public class TaskList {
      * @return List of all tasks containing the queried string.
      */
     public StringBuilder printMatchingTasks(String query) {
-        StringBuilder sb = new StringBuilder();
         int index = 1;
-        String queryLowerCase = query.toLowerCase();
-        queryLowerCase = queryLowerCase.replaceAll("\\*", "\\\\w*");
-        String toFind = Pattern.quote(queryLowerCase);
+        StringBuilder sb = new StringBuilder();
+        query = query.toLowerCase().replaceAll("\\*", "\\\\w*");
+        query = query.contains("\\w") ? ".*" + query + ".*" : query;
         for (Task task : this.taskList) {
-            String stringUnderCheck = task.toString().toLowerCase();
-            if (stringUnderCheck.matches(toFind) || stringUnderCheck.contains(query.toLowerCase())) {
+            String info = task.toString().toLowerCase();
+            if (info.matches(query) || info.contains(query.toLowerCase())) {
                 sb.append(index + ". " + task.toString() + "\n");
             }
             index++;
         }
         if (sb.length() == 0) {
-            return sb.append("No such tasks found :( (" + queryLowerCase + ")");
+            return sb.append("No such tasks found :( " + query);
         } else {
             return sb;
         }
@@ -78,6 +76,10 @@ public class TaskList {
     public StringBuilder printTasks() {
         int index = 1;
         StringBuilder sb = new StringBuilder();
+        if (this.getTaskList().isEmpty()) {
+            return sb.append("You have no tasks.");
+        }
+        
         sb.append("Here are the tasks in your list:" + "\n");
         for (Task task : this.getTaskList()) {
             sb.append(index + ". " + task.toString());
@@ -88,7 +90,6 @@ public class TaskList {
     }
 
     /**
-     * 
      * Deletes a specific task from the task list and writes
      * the changes back into the local file of tasks as well.
      * @param index The index of the task to be deleted from the array list.
@@ -97,7 +98,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
-    public StringBuilder deleteTask(int index, Storage storage) throws IndexOutOfBoundsException, IOException {
+    public StringBuilder deleteTask(int index, Storage storage) throws IOException {
         try {
             this.taskList.get(index - 1);
         } catch (IndexOutOfBoundsException e) {
@@ -122,7 +123,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */
-    public StringBuilder markAsDone(int index, Storage storage) throws IndexOutOfBoundsException, IOException {
+    public StringBuilder markAsDone(int index, Storage storage) throws IOException {
         StringBuilder sb = new StringBuilder();
         try {
             taskList.get(index - 1).markAsDone();

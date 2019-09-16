@@ -88,39 +88,47 @@ public class Duke extends Application {
         } else if(command.equals("find")) {
             String keyword = taskDetails;
             return ui.showMatchingTasks(tasks.find(keyword));
-        }
-        else {  //all other commands
+        } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             try {
-                if (command.equals("todo")) {
-                    if (taskDetails.equals("")) { //will it be such that String[].get(1) will be zero i.e. error?
-                        throw new DukeException("      :( OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    tasks.addTask(new Todo(taskDetails));
-                } else if (command.equals("deadline") || command.equals("event")) {
-                    if(taskDetails.equals("")) {
-                        throw new DukeException("      :( OOPS!!! The description of a " +
-                                command + " cannot be empty.");
-                    }
-                    //replace the first / so that the dates will not be split up
-                    taskDetails = taskDetails.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
-                    String[] tempStringArr = taskDetails.split(":");
-                    String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
-                    String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
-                    if (command.equals("deadline")) {
-                        tasks.addTask(new Deadline(description, secondString));
-                    } else {
-                        tasks.addTask(new Event(description, secondString));
-                    }
-                } else {//all other keywords not part of duke.Duke's duke.task handling schedule
-                    throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
+                if (taskDetails.equals("")) {
+                    throw new DukeException("      :( OOPS!!! The description of a " +
+                            command + " cannot be empty.");
+                }
+                switch (command) {
+                    case "todo":
+                        tasks.addTask(new Todo(taskDetails));
+                        break;
+                    case "deadline":
+                    case "event":
+                        //replace the first / so that the dates will not be split up
+                        taskDetails = taskDetails.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
+                        String[] tempStringArr = taskDetails.split(":");
+                        String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
+                        String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
+                        if (command.equals("deadline")) {
+                            tasks.addTask(new Deadline(description, secondString));
+                        } else {
+                            tasks.addTask(new Event(description, secondString));
+                        }
+                    default: //all other keywords not part of Duke's task handling schedule
+                        throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException de) {
                 return ui.showSeparationLine() + de.getMessage() + ui.showSeparationLine() + ui.showBlankLine();
-                //to prevent printing of below mentioned lines
             } catch (ArrayIndexOutOfBoundsException ae) {
                 return ui.showSeparationLine() + "      :( OOPS!!! You need to specify the " + command +
                         " time through a /by (deadline) and /at (event)\n" + ui.showSeparationLine() + ui.showBlankLine();
             }
+        } else {//all other keywords not part of Duke's task handling schedule
+            try {
+                throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
+            } catch (DukeException de) {
+                return ui.showSeparationLine() + de.getMessage() + ui.showSeparationLine() + ui.showBlankLine();
+            }
+        }
+
+            //to prevent printing of below mentioned lines
+
             Task temp = tasks.getTask(tasks.getListOfTasks().size() - 1);
             int size = tasks.getListOfTasks().size();
             storage.write(tasks.getListOfTasks());

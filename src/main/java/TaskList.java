@@ -52,7 +52,7 @@ public class TaskList {
             if (!stringHolder.isEmpty()) {
                 Task taskHolder = new ToDo(stringHolder, false);
                 taskList.add(taskHolder);
-                String stringBuilder = "Got it. I've added this task:\n" + "  [T][Not Done]" + stringHolder
+                String stringBuilder = "Got it. I've added this task:\n" + "  [T][X] " + stringHolder
                     + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
                 return stringBuilder;
             } else {
@@ -87,7 +87,7 @@ public class TaskList {
             Task taskHolder = new Deadline(stringHolder, dateHolder, false);
             taskList.add(taskHolder);
 
-            String stringBuilder = "Got it. I've added this task:\n" + "  [D][Not Done] " + stringHolder
+            String stringBuilder = "Got it. I've added this task:\n" + "  [D][X] " + stringHolder
                 + " (by: " + date + ")" + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
             return stringBuilder;
         } else {
@@ -119,7 +119,7 @@ public class TaskList {
             Task taskHolder = new Event(stringHolder, dateHolder, false);
             taskList.add(taskHolder);
 
-            String stringBuilder = "Got it. I've added this task:\n" + "  [E][Not Done] " + stringHolder
+            String stringBuilder = "Got it. I've added this task:\n" + "  [E][X] " + stringHolder
                 +  " (at: " + date + ")" + "\n" + "Now you have " + taskList.size() + " tasks in the list.";
             return stringBuilder;
         }

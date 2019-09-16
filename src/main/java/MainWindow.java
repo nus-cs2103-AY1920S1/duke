@@ -52,7 +52,6 @@ public class MainWindow extends AnchorPane {
             );
         }
 
-
         if (input.toLowerCase().equals("bye")) {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {

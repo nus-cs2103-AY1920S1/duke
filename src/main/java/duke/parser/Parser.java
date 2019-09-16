@@ -120,7 +120,7 @@ public class Parser {
      */
     private String getResponseToAddTask(String command, String taskType) throws MissingDescriptionException,
             MissingInputException {
-        String fullDesc = command.substring(taskType.length());
+        String fullDesc = command.substring(taskType.length()).trim();
         Task task = new Task();
 
         if (fullDesc.isEmpty()) {
@@ -171,8 +171,8 @@ public class Parser {
 
         String[] descAndDueBySplit = descAndDueBy.split("/by");
 
-        String desc = descAndDueBySplit[0];
-        String dueBy = descAndDueBySplit[1];
+        String desc = descAndDueBySplit[0].trim();
+        String dueBy = descAndDueBySplit[1].trim();
 
         return new Deadline(desc, dueBy);
     }
@@ -201,9 +201,9 @@ public class Parser {
             throw new MissingInputException("o noes!! i kennut find your event date and time after '/at' ( ._.)");
         }
 
-        String[] descAndWhenSplit = descAndWhen.split("/by");
-        String desc = descAndWhenSplit[0];
-        String when = descAndWhenSplit[1];
+        String[] descAndWhenSplit = descAndWhen.split("/at");
+        String desc = descAndWhenSplit[0].trim();
+        String when = descAndWhenSplit[1].trim();
         return new Event(desc, when);
     }
 

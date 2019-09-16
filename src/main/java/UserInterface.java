@@ -20,7 +20,6 @@ public class UserInterface {
 
         String userInput;
         while (!userCommand.equals("exit")) {
-
             userInput = scanner.nextLine();
             userCommand = userInput.split(" ",2)[0];
             try {
@@ -52,7 +51,7 @@ public class UserInterface {
                     }
                     //try to catch more exceptions
                     catch (Exception e) {
-                        dukePrint("☹ OOPS!!! The description of a " + userCommand + " cannot be empty.");
+                        dukePrint("OOPS!!! The description of a " + userCommand + " cannot be empty.");
                     }
                     break;
                 case "delete":
@@ -81,7 +80,7 @@ public class UserInterface {
                     break;
 
                 default:
-                    dukePrint("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    dukePrint("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
             data.save(todoList.lst);
 

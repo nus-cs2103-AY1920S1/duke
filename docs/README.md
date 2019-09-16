@@ -52,15 +52,16 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:` 
-   `[T][✘] read books`
-`Now you have 1 task(s) in the list.`
- 
+```
+ Got it. I've added this task:<br/> 
+   [T][✘] read books
+ Now you have 1 task(s) in the list.
+```
  
 ### `deadline` - add a task with a deadline
  
 To add a task with a specific deadline, type `deadline` followed by: (i) the _description_ of the task, 
-(ii) "/by", (iii) the _due time_, in `d/MM.yyyy HHmm` format. It will be recorded by Duke. 
+(ii) `/by`, (iii) the _due time_, in `d/MM.yyyy HHmm` format. It will be recorded by Duke. 
 By default, every newly added task is marked as undone.
  
 Example of usage: 
@@ -69,13 +70,15 @@ Example of usage:
  
 Expected outcome:
  
-`Got it. I've added this task:` 
-    `[D][✘] project submission (by: Wed, 2 Oct 2019, 11:59PM)`
-`Now you have 2 task(s) in the list.`
+```
+ Got it. I've added this task: 
+   [D][✘] project submission (by: Wed, 2 Oct 2019, 11:59PM)
+ Now you have 2 task(s) in the list.
+```
    
 ### `event` - add an event with a time of occurrence
 To add an event with a specific time of occurrence, type `event` followed by: (i) the _description_ of the event, 
-(ii) "/at", (iii) the _time of occurrence_, in `d/MM.yyyy HHmm` format. It will be recorded by Duke. 
+(ii) `/at`, (iii) the _time of occurrence_, in `d/MM.yyyy HHmm` format. It will be recorded by Duke. 
 By default, every newly added task is marked as undone.
 
 Example of usage: 
@@ -84,13 +87,15 @@ Example of usage:
  
 Expected outcome:
  
-`Got it. I've added this task:` 
-   `[E][✘] team meeting (at: Wed, 18 Sep 2019, 4:00PM)`
-`Now you have 3 task(s) in the list.`
+```
+ Got it. I've added this task: 
+   [E][✘] team meeting (at: Wed, 18 Sep 2019, 4:00PM)
+ Now you have 3 task(s) in the list.
+```
  
 ### `update` - update an existing task
 To update an existing task, type `update` followed by: (i) the task index, 
-(ii) the attribute which you want to update, i.e. _"description"_ or _"time"_ (if applicable), 
+(ii) the attribute which you want to update, i.e. `description` or `time` (if applicable), 
 (iii) the new value of the attribute. The task will be updated without changing its position
 in the list.
  
@@ -100,9 +105,11 @@ Example of usage #1:
   
 Expected outcome:
   
-`Ok! I've updated this task:` 
-   `[T][✘] read five books`
-`Now you have 3 task(s) in the list.`
+```
+ Ok! I've updated this task: 
+   [T][✘] read five books
+ Now you have 3 task(s) in the list.
+```
  
 Example of usage #2: 
   
@@ -110,9 +117,11 @@ Example of usage #2:
   
 Expected outcome:
   
-`Ok! I've updated this task:` 
-   `[D][✘] project submission (by: Thu, 19 Sep 2019, 11:59PM)`
-`Now you have 3 task(s) in the list.`
+```
+ Ok! I've updated this task: 
+   [D][✘] project submission (by: Thu, 19 Sep 2019, 11:59PM)
+ Now you have 3 task(s) in the list.
+```
  
 ### `done` - mark a task as done
 To mark an existing task as completed, type `done` followed by the index of the task.
@@ -124,8 +133,10 @@ Example of usage:
   
 Expected outcome:
   
-`Nice! I've marked this task as done:` 
-   `[T][✓] read five books`
+```
+ Nice! I've marked this task as done: 
+   [T][✓] read five books
+```
 
 ### `list` - display all existing tasks
 To have a look at all the tasks in the list, type `list`. 
@@ -137,10 +148,12 @@ Example of usage:
   
 Expected outcome:
   
-`Here are the tasks in your list:`
- `1.[T][✓] read five books`
- `2.[D][✘] project submission (by: Thu, 19 Sep 2019, 11:59PM)`
- `3.[E][✘] team meeting (at: Wed, 18 Sep 2019, 4:00PM)`
+```
+ Here are the tasks in your list:
+ 1.[T][✓] read five books
+ 2.[D][✘] project submission (by: Thu, 19 Sep 2019, 11:59PM)
+ 3.[E][✘] team meeting (at: Wed, 18 Sep 2019, 4:00PM)
+```
 
 ### `find` - search by keyword (or phrase)
 To search for all tasks that contain the specified keyword (or phrase), type `find` 
@@ -152,8 +165,10 @@ Example of usage:
   
 Expected outcome:
   
-`Here are the matching tasks in your list:`
- `1.[D][✘] project submission (by: Thu, 19 Sep 2019, 11:59PM)`
+```
+ Here are the matching tasks in your list:
+ 1.[D][✘] project submission (by: Thu, 19 Sep 2019, 11:59PM)
+```
 
 ### `delete` - delete an existing task from the list
 To delete an existing task, type `delete` followed by the index of the task. 
@@ -165,9 +180,11 @@ Example of usage:
   
 Expected outcome:
   
-`Noted. I've removed this task:` 
-   `[T][✓] read five books`
-`Now you have 2 task(s) in the list.`
+```
+ Noted. I've removed this task: 
+   [T][✓] read five books
+ Now you have 2 task(s) in the list.
+```
 
 ### `bye` - exit Duke
 To exit Duke, type `bye`. Duke will automatically terminate in one second.

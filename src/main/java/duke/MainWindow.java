@@ -44,6 +44,8 @@ public class MainWindow extends AnchorPane {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            dialogContainer.getChildren().add(DialogBox
+                    .getDukeDialog("Hello why are you talking to a dog?", dukeImage));
         } catch (IOException e) {
             e.printStackTrace();
         }

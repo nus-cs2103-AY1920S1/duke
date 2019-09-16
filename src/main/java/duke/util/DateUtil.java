@@ -22,6 +22,6 @@ public class DateUtil {
      * @throws ParseException if it fails to parse the date
      */
     public static Date parseStringToDate(String strDate) throws ParseException {
-        return new SimpleDateFormat("dd/mm/yy HHmm").parse(strDate);
+        return new SimpleDateFormat("dd/MM/yy HHmm").parse(strDate);
     } 
 }

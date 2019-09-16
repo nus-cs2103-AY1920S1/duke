@@ -9,10 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +22,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -30,8 +31,9 @@ public class DialogBox extends HBox {
      *
      * @param text String
      * @param img Image
+     * @param isDuke boolean
      */
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isDukeReply) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -40,7 +42,11 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        
+        if (!isDukeReply) {
+            dialog.setTextAlignment(TextAlignment.RIGHT);
+        }
+        dialog.setWrappingWidth(280.0);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -63,7 +69,7 @@ public class DialogBox extends HBox {
      * @return DialogBox
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, false);
     }
 
     /**
@@ -74,8 +80,9 @@ public class DialogBox extends HBox {
      * @return DialogBox
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, true);
         db.flip();
+        db.setStyle("-fx-background-color: grey;");
         return db;
     }
 }

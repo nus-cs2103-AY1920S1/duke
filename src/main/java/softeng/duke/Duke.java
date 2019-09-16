@@ -1,5 +1,10 @@
 package softeng.duke;
 
+import javafx.geometry.Insets;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.stage.StageStyle;
 import softeng.tasks.TaskList;
 import softeng.dukeExceptions.DukeException;
 import softeng.gui.DialogBox;
@@ -10,19 +15,18 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.File;
 
 
 /**
  * Represents a chat bot that manages your daily tasks.
  */
 public class Duke extends Application {
-    private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("images/DaDuke.png"));
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -73,9 +77,13 @@ public class Duke extends Application {
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getStyleClass().add("root");
+
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+        File f = new File("style/background.css");
+        scene.getStylesheets().addAll(this.getClass().getResource("style/background.css").toExternalForm());
 
         stage.setScene(scene);
         stage.show();
@@ -96,6 +104,20 @@ public class Duke extends Application {
 
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.setMinHeight(535);
+
+        // create a image
+        Image image = new Image(this.getClass().getResourceAsStream("images/bg.jpg"));
+
+        // create a background image
+        BackgroundImage backgroundimage = new BackgroundImage(image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.REPEAT,
+                BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+
+        //scrollPane.setBackground(new Background(backgroundimage));
+        dialogContainer.setBackground(new Background(backgroundimage));
 
         userInput.setPrefWidth(325.0);
 
@@ -118,7 +140,9 @@ public class Duke extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(tasks.initialList()), new ImageView(duke)));
+        DialogBox dukeInitial = DialogBox.getDukeDialog(new Label(tasks.initialList()), new ImageView(duke));
+        dialogContainer.getChildren().add(dukeInitial);
+        VBox.setMargin(dukeInitial, new Insets(10, 5, 10, 5));
     }
     /**
      * Iteration 1:
@@ -141,10 +165,14 @@ public class Duke extends Application {
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+        DialogBox userBox = DialogBox.getUserDialog(userText, new ImageView(user));
+        DialogBox dukeBox = DialogBox.getDukeDialog(dukeText, new ImageView(duke));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                userBox,
+                dukeBox
         );
+        VBox.setMargin(userBox, new Insets(10, 5, 10, 5));
+        VBox.setMargin(dukeBox, new Insets(10, 5, 10, 5));
         userInput.clear();
     }
 

@@ -1,12 +1,14 @@
 package softeng.gui;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.Node;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
 
@@ -18,11 +20,15 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        text.setPadding(new Insets(7, 10, 7, 10));
+        text.setBackground(new Background(new BackgroundFill(Color.WHITE, new CornerRadii(7), Insets.EMPTY)));
+        displayPicture.setFitWidth(80.0);
+        displayPicture.setFitHeight(80.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+        HBox.setMargin(text, new Insets(0, 3, 0, 3));
+        HBox.setMargin(displayPicture, new Insets(0, 3, 0, 3));
     }
 
     /**

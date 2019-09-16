@@ -1,3 +1,6 @@
 T | 1 |  eat
-T | 0 |  sleep
+T | 1 |  sleep
 D | 0 |  ip | next week
+T | 0 |  read
+D | 0 |  assignment | sunday
+T | 0 |  ktv | 7

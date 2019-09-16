@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.exception.DukeException;
+import duke.exception.NoTimeAndDateException;
 import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -28,10 +30,11 @@ public class AddCommand extends Command {
      * @return true if str can be converted to a valid time format, otherwise returns false.
      */
     public static boolean isValidTime(String str) {
+        LocalDateTime pattern;
         assert str != null;
 
         try {
-            DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            pattern = LocalDateTime.parse(str.trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
             return true;
         } catch (Exception e) {
             return false;
@@ -65,31 +68,44 @@ public class AddCommand extends Command {
         tasks.addTask(new Todo(oneLine[1].trim()));
     }
 
-    private void addEvent(TaskList tasks) throws duke.exception.NoTimeAndDateException {
+    private void addEvent(TaskList tasks) throws DukeException {
         String[] timeDate1;
         String description;
         String timeDate;
-        timeDate1 = oneLine[1].trim().split(" /at ");
+        timeDate1 = oneLine[1].trim().split("/at");
         if (timeDate1.length == 2 && isValidTime(timeDate1[1].trim())) {
             description = timeDate1[0].trim();
             timeDate = timeDate1[1].trim();
             tasks.addTask(new Event(description, timeDate));
         } else {
-            throw new duke.exception.NoTimeAndDateException("specific date/time for event is wrong");
+            if (timeDate1.length == 1 && isValidTime(timeDate1[0].trim())) {
+                throw new DukeException("No task name for event");
+            } else {
+                if (timeDate1[0].trim().equals("")) {
+                    throw new DukeException("No task name for event");
+                } else {
+                    throw new NoTimeAndDateException("specific date/time for event is wrong");
+                }
+            }
         }
     }
 
-    private void addDeadline(TaskList tasks) throws duke.exception.NoTimeAndDateException {
+    private void addDeadline(TaskList tasks) throws DukeException {
         String[] timeDate1;
         String description;
         String timeDate;
-        timeDate1 = oneLine[1].trim().split(" /by ");
-        if (timeDate1.length == 2 && isValidTime(timeDate1[1].trim())) {
+        timeDate1 = oneLine[1].trim().split("/by");
+
+        if (timeDate1.length == 2 && !timeDate1[0].trim().equals("") && isValidTime(timeDate1[1].trim())) {
             description = timeDate1[0].trim();
             timeDate = timeDate1[1].trim();
             tasks.addTask(new Deadline(description, timeDate));
         } else {
-            throw new duke.exception.NoTimeAndDateException("specific date/time for deadline is wrong");
+            if (timeDate1[0].trim().equals("")) {
+                throw new DukeException("No task name for deadline");
+            } else {
+                throw new NoTimeAndDateException("specific date/time for deadline is wrong");
+            }
         }
     }
 }

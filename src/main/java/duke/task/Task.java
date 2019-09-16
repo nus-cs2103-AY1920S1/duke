@@ -12,7 +12,7 @@ public abstract class Task {
     boolean isDone;
     LocalDateTime pattern;
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
-    private final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy HHmm");
+    private final DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MMM dd yyyy, HHmm");
 
 
     public Task(String description) {
@@ -92,7 +92,11 @@ public abstract class Task {
      * @return the String format of time and date.
      */
     String getTime() {
-        return pattern.format(formatter2);
+        try{
+            return pattern.format(formatter2);
+        }catch(Exception e){
+            return "the date and time is invalid";
+        }
     }
 
     /**

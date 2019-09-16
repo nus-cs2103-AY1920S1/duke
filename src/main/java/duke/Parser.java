@@ -121,7 +121,7 @@ class Parser {
             if (oneLine.length != 1) {
                 throw new ExtraDescriptionException("There is extra description for bye");
             }
-            outCommand = new ExitCommand();
+            outCommand = new ExitCommand("exit duke");
         } else if (firstWord.equals("list")) {
             if (oneLine.length != 1) {
                 throw new ExtraDescriptionException("There is extra description for list");
@@ -139,7 +139,7 @@ class Parser {
         } else {
             throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
-        assert outCommand != null : "outCommand from parse should be empty";
+        assert outCommand != null : "outCommand from parse should not be empty";
         return outCommand;
     }
 }

@@ -204,9 +204,21 @@ public class Duke extends Application{
                     error = "";
                     return emsg;
                 } else {
-                    tasks.add(newTask);
-                    saving((tasks.getList()));
-                    return ui.takeInput(newTask, tasks.size());
+                    String desc = newTask.getDescription();
+                    boolean descExist = false;
+                    for(int n = 0; n < tasks.getList().size(); n++){
+                        if(tasks.getList().get(n).getDescription().equals(desc)){
+                            descExist = true;
+                            break;
+                        }
+                    }
+                    if (descExist){
+                        return "\tOOPS!!! Task already exist in list";
+                    } else {
+                        tasks.add(newTask);
+                        saving((tasks.getList()));
+                        return ui.takeInput(newTask, tasks.size());
+                    }
                 }
 
             }

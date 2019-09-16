@@ -19,6 +19,6 @@ public class EventTest {
         event.setEndDate(LocalDateTime.parse("2019-09-06T20:00"));
         assertEquals(LocalDateTime.parse("2019-08-06T20:00"), event.getStartDate());
         assertEquals(LocalDateTime.parse("2019-09-06T20:00"), event.getEndDate());
-        assertEquals("[E][0] test event (at: 2019-08-06T20:00 to 2019-09-06T20:00)", event.toString());
+        assertEquals("[E][X] test event (at: 6 Aug 19 20:00 to 6 Sep 19 20:00)", event.toString());
     }
 }

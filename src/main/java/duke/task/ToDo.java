@@ -6,9 +6,9 @@ package duke.task;
 public class ToDo extends Task {
 
     /**
-     * Constructs an instance of a task that needs to be done
+     * Constructs an instance of a task that needs to be done.
      *
-     * @param description the description of that task
+     * @param description the description of that task.
      */
     public ToDo(String description) {
         super(description);

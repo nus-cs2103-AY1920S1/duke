@@ -54,26 +54,31 @@ public class Storage {
                 } else {
                     desc = item.substring(7);
                 }
-            Task t = null;
-            switch (type) {
-                case "[D]" : t = new Deadline(desc, date); break;
-                case "[T]" : t = new ToDo(desc); break;
-                case "[E]" : t = new Event(desc, date); break;
+                Task t = null;
+                switch (type) {
+                case "[D]" :
+                    t = new Deadline(desc, date);
+                    break;
+                case "[T]" :
+                    t = new ToDo(desc);
+                    break;
+                case "[E]" :
+                    t = new Event(desc, date);
+                    break;
                 default:
                     System.out.println("Unknown event type encountered.");
+                }
+                if (status.equals("[✓]")) {
+                    t.markAsDone();
+                }
+                list.add(t);
             }
-            if (status.equals("\u2713")) {
-                t.markAsDone();
-            }
-            list.add(t);
-        }
-        System.out.println("Loaded save data file successfully.");
-    } catch (FileNotFoundException e) {
+            System.out.println("Loaded save data file successfully.");
+        } catch (FileNotFoundException e) {
             //Create a new file if no file found
             File f = new File(filePath);
             try {
-                if (f.createNewFile())
-                {
+                if (f.createNewFile()) {
                     System.out.println("No existing file found! New save data file created!");
                 } else {
                     System.out.println("File already exists.");

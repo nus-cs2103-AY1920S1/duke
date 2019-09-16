@@ -58,7 +58,8 @@ public class Ui {
      * @throws DeleteTaskException an instance of delete task exception.
      * @throws CompleteTaskException an instance of complete task exception.
      */
-    public String action(String cmd) throws DukeWrongTaskException, UnknownCmdException, DeleteTaskException, CompleteTaskException {
+    public String action(String cmd) throws DukeWrongTaskException,
+            UnknownCmdException, DeleteTaskException, CompleteTaskException {
         Task t;
 
         String command = p.parseCommand(cmd);
@@ -86,7 +87,8 @@ public class Ui {
             if (lst.size() != 0) {
                 response = "Here are the matching tasks in your list:\n";
                 for (Task ta : lst) {
-                    response = response.concat(String.format("%d.%s\n", list.getTaskList().indexOf(ta) + 1, ta.toString()));
+                    response = response.concat(String.format("%d.%s\n",
+                            list.getTaskList().indexOf(ta) + 1, ta.toString()));
                 }
             } else {
                 response = "There are no matching tasks in your Task List!";
@@ -103,7 +105,7 @@ public class Ui {
             list.remove(index - 1);
             cnt--;
             response = response.concat(String.format("Now you have %d tasks in the list.\n", list.size()));
-            return response ;
+            return response;
         case "deadline":
             if (cmd.length() <= 9 || !cmd.contains("/")) {
                 throw (new DukeWrongTaskException("deadline"));

@@ -47,17 +47,17 @@ public class Parser {
         String cmd = parseCommand(s);
         int index = 0;
         switch (cmd) {
-            case "deadline":
-                index = s.indexOf("/");
-                return s.substring(9, index - 1).trim();
-            case "event":
-                index = s.indexOf("/");
-                return s.substring(6, index - 1).trim();
-            case "todo":
-            case "find":
-                return s.substring(5).trim();
-            default:
-                return "No description provided";
+        case "deadline":
+            index = s.indexOf("/");
+            return s.substring(9, index - 1).trim();
+        case "event":
+            index = s.indexOf("/");
+            return s.substring(6, index - 1).trim();
+        case "todo":
+        case "find":
+            return s.substring(5).trim();
+        default:
+            return "No description provided";
         }
     }
 

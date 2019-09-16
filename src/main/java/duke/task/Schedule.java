@@ -24,7 +24,7 @@ public class Schedule {
      */
     public Schedule() {
         this.schedule = new ArrayList<>();
-        this.todoTaskList = new ArrayList();
+        this.todoTaskList = new ArrayList<>();
     }
 
     /**

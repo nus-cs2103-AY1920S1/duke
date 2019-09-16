@@ -22,6 +22,7 @@ public class UI_GUI extends Application implements UI {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private boolean isExit;
 
     @Override
     public void printWelcome() {
@@ -31,6 +32,7 @@ public class UI_GUI extends Application implements UI {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke_image))
         );
+
     }
 
     @Override
@@ -51,12 +53,14 @@ public class UI_GUI extends Application implements UI {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
+        scrollPane.setStyle("-fx-background-color: #C0C0C0");
 
         userInput = new TextField();
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        mainLayout.setStyle("-fx-background-color: #C0C0C0");
 
         scene = new Scene(mainLayout);
 
@@ -105,20 +109,35 @@ public class UI_GUI extends Application implements UI {
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            isExit = handleUserInput();
+            if (duke.isExit()) {
+                try {
+                    Thread.sleep(1000);
+
+                } catch (Exception E) {
+                    System.out.println("Wait failed");
+                }
+                Platform.exit();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+            isExit = handleUserInput();
+            if (duke.isExit()) {
+                try {
+                    Thread.sleep(1000);
 
+                } catch (Exception E) {
+                    System.out.println("Wait failed");
+                }
+                Platform.exit();
+            }
+        });
 
         stage.setScene(scene);
         stage.show();
 
         printWelcome();
-
-
     }
 
     private Label getDialogLabel(String text) {
@@ -129,7 +148,7 @@ public class UI_GUI extends Application implements UI {
         return textToAdd;
     }
 
-    private void handleUserInput() {
+    private boolean handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -137,17 +156,7 @@ public class UI_GUI extends Application implements UI {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke_image))
         );
         userInput.clear();
-
-        if (duke.isExit()) {
-            try {
-                Thread.sleep(1000);
-            } catch (Exception E) {
-                System.out.println("Wait failed");
-            }
-
-            Platform.exit();
-            System.exit(1);
-        }
+        return duke.isExit();
     }
 
     private String getResponse(String input) {

@@ -56,8 +56,8 @@ public class AddTodoCommand extends Command {
             tasks.addTask(todo);
             super.addTags(todo, tags);
             int numberOfTasks = tasks.getListSize();
-            ui.printAddedMessage(todo, numberOfTasks);
             storage.writeToHardDisk(tasks);
+            ui.printAddedMessage(todo, numberOfTasks);
         } catch (DukeException exception) {
             ui.printException(exception);
         }

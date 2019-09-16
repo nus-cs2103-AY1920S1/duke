@@ -59,8 +59,8 @@ public class TagCommand extends Command {
                 }
                 action.addTag(tags[i]);
             }
-            ui.printTagMessage(action, tags);
             storage.writeToHardDisk(tasks);
+            ui.printTagMessage(action, tags);
         } catch (DukeException exception) {
             ui.printException(exception);
         }

@@ -76,8 +76,8 @@ public class AddEventCommand extends Command {
             tasks.addTask(taskEvent);
             super.addTags(taskEvent, tags);
             int numberOfTasks = tasks.getListSize();
-            ui.printAddedMessage(taskEvent, numberOfTasks);
             storage.writeToHardDisk(tasks);
+            ui.printAddedMessage(taskEvent, numberOfTasks);
         } catch (DukeException exception) {
             ui.printException(exception);
         }

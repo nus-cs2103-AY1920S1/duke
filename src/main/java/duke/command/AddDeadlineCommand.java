@@ -74,8 +74,8 @@ public class AddDeadlineCommand extends Command {
             tasks.addTask(taskDeadline);
             super.addTags(taskDeadline, tags);
             int numberOfTasks = tasks.getListSize();
-            ui.printAddedMessage(taskDeadline, numberOfTasks);
             storage.writeToHardDisk(tasks);
+            ui.printAddedMessage(taskDeadline, numberOfTasks);
         } catch (DukeException exception) {
             ui.printException(exception);
         }

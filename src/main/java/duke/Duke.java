@@ -1,16 +1,11 @@
 package duke;
 
-import duke.command.Command;
-import duke.exception.DukeException;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Represents a personal assistant chatbot that keeps track of tasks.

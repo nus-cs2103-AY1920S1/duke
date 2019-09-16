@@ -108,7 +108,7 @@ public class Ui {
      * Prints the error when the information in storage could not be loaded.
      */
     public void showLoadingError() {
-        printMessage("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        printMessage("OOPS!!! Something went wrong. I could not load the file :(");
     }
 
     /**

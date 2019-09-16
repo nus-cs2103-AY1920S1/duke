@@ -47,8 +47,8 @@ public class DeleteCommand extends Command {
             Task task = tasks.getTask(index);
             tasks.deleteTask(index);
             int numberOfTasks = tasks.getListSize();
-            ui.printDeleteMessage(task, numberOfTasks);
             storage.writeToHardDisk(tasks);
+            ui.printDeleteMessage(task, numberOfTasks);
         } catch (DukeException exception) {
             ui.printException(exception);
         }

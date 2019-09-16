@@ -42,6 +42,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filePath);
+            file.createNewFile();
             Scanner fileReader = new Scanner(file);
             while (fileReader.hasNext()) {
                 String taskInformation = fileReader.nextLine();
@@ -60,8 +61,12 @@ public class Storage {
                 }
             }
             return tasks;
-        } catch (FileNotFoundException | InvalidDateException | InvalidTimeException exception) {
+        } catch (FileNotFoundException exception) {
+            throw new StorageException("OOPS!!! Please specify a valid file path to store your list data.");
+        } catch (InvalidDateException | InvalidTimeException exception) {
             throw new StorageException("OOPS!!! Something must have gone wrong during storage.");
+        } catch (IOException exception) {
+            throw new StorageException("OOPS!!! Something went wrong: " + exception.getMessage());
         }
     }
 

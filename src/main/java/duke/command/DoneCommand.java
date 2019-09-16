@@ -46,8 +46,8 @@ public class DoneCommand extends Command {
         try {
             Task action = tasks.getTask(index);
             action.setDone();
-            ui.printDoneMessage(action);
             storage.writeToHardDisk(tasks);
+            ui.printDoneMessage(action);
         } catch (DukeException exception) {
             ui.printException(exception);
         }

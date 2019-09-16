@@ -1,13 +1,13 @@
 package trackr.command;
 
+import trackr.history.HistoryTracker;
 import trackr.storage.Storage;
 import trackr.tasklist.TaskList;
-import trackr.ui.Ui;
 
 public class HelpCommand extends Command {
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage, HistoryTracker history) {
         String result = "Here is a list of commands you may use:\n\n"
                 + "list - display all the tasks you currently have in your list\n\n"
                 + "todo <task name> - adds a task to be done to your list, please specify a name for the "

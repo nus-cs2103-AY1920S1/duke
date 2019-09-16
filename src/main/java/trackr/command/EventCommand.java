@@ -1,10 +1,10 @@
 package trackr.command;
 
 import trackr.date.DateTime;
+import trackr.history.HistoryTracker;
 import trackr.storage.Storage;
 import trackr.task.Event;
 import trackr.tasklist.TaskList;
-import trackr.ui.Ui;
 
 import java.text.ParseException;
 
@@ -29,11 +29,10 @@ public class EventCommand extends Command {
     /**
      * Adds an Event task to the task list.
      * @param tasks List of tasks
-     * @param ui Deals with interactions with the user
      * @param storage Deals with loading tasks from the file and saving tasks in the file
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage, HistoryTracker history) {
         try {
             String result = "";
             String[] separateTaskDate = userInput.split("/", 2);

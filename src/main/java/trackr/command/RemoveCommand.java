@@ -1,9 +1,10 @@
 package trackr.command;
 
+import trackr.exception.TrackrException;
+import trackr.history.HistoryTracker;
 import trackr.storage.Storage;
 import trackr.task.Task;
 import trackr.tasklist.TaskList;
-import trackr.ui.Ui;
 
 /**
  * Class when user issues a Delete command.
@@ -26,14 +27,18 @@ public class RemoveCommand extends Command {
     /**
      * Deletes task from list based in index provided by user.
      * @param tasks List of tasks
-     * @param ui Deals with interactions with the user
      * @param storage Deals with loading tasks from the file and saving tasks in the file
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws NumberFormatException {
+    public String execute(TaskList tasks, Storage storage, HistoryTracker history) throws TrackrException {
         String result = "";
         String[] inputStringArr = userInput.split(" ");
-        int taskNum = Integer.parseInt(inputStringArr[1]);
+        int taskNum;
+        try {
+            taskNum = Integer.parseInt(inputStringArr[1]);
+        } catch (NumberFormatException e) {
+            throw new TrackrException(":( OOPS!!! The 'remove' command requires you to input a number");
+        }
         Task t = tasks.get(taskNum - 1);
         tasks.remove(taskNum - 1);
         result += "Noted. I've removed this task:\n";

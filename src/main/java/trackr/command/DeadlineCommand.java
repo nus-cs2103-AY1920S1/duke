@@ -1,10 +1,10 @@
 package trackr.command;
 
 import trackr.date.DateTime;
+import trackr.history.HistoryTracker;
 import trackr.storage.Storage;
 import trackr.task.Deadline;
 import trackr.tasklist.TaskList;
-import trackr.ui.Ui;
 
 import java.text.ParseException;
 
@@ -29,11 +29,10 @@ public class DeadlineCommand extends Command {
     /**
      * Adds a Deadline task to the task list.
      * @param tasks List of tasks
-     * @param ui Deals with interactions with the user
      * @param storage Deals with loading tasks from the file and saving tasks in the file
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage, HistoryTracker history) {
         try {
             String result = "";
             String[] separateTaskDate = userInput.split("/", 2);
@@ -41,7 +40,6 @@ public class DeadlineCommand extends Command {
             String date = ((separateTaskDate[1].split(" ", 2))[1]).strip();
             DateTime dt = new DateTime(date);
             Deadline d = new Deadline(taskName, dt.toString());
-            assert d != null : "d should not be null";
             tasks.add(d);
             result += "Got it. I've added this task:\n" + "       [D][ ] " + d + " (by: " + dt + ")\n"
                     + "Now you have " + tasks.size() + " tasks in the list.";

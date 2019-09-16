@@ -12,7 +12,7 @@ public class TaskList {
     /**
      * Contains all tasks to be completed.
      */
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Default constructor when user has no tasks stored from previous session.
@@ -60,5 +60,13 @@ public class TaskList {
      */
     public void remove(int i) {
         tasks.remove(i);
+    }
+
+    public void overrideTasks(ArrayList<Task> newTasks) {
+        this.tasks = new ArrayList<>(newTasks);
+    }
+
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 }

@@ -62,9 +62,16 @@ public class MainWindow extends AnchorPane {
     }
 
     public void showWelcome() {
-        String welcomeMsg = trackr.ui.welcomeMsg();
+        String welcomeMsg = welcomeMsg();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMsg, dukeImg)
         );
+    }
+
+    private String welcomeMsg() {
+        String line = "___________________________________________________\n";
+        String greetMsg = "Hello! I'm Spongebob\nWhat can I do for you?\n";
+        String result = line + greetMsg + line;
+        return result;
     }
 }

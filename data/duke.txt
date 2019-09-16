@@ -2,3 +2,5 @@ T | 1 | dom
 E | 0 | seminar | 10th of June 2019, 6:00pm
 D | 0 | test | 20th of September 2019, 12:00pm
 D | 0 | shawn | 9th of June 1997, 6:00am
+T | 0 | shawn
+T | 0 | shawn

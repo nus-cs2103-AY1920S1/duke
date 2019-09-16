@@ -1,6 +1,17 @@
 package trackr.parser;
 
-import trackr.command.*;
+import trackr.command.Command;
+import trackr.command.CompleteCommand;
+import trackr.command.DeadlineCommand;
+import trackr.command.EventCommand;
+import trackr.command.ExitCommand;
+import trackr.command.FindCommand;
+import trackr.command.HelpCommand;
+import trackr.command.ListCommand;
+import trackr.command.RemoveCommand;
+import trackr.command.TodoCommand;
+import trackr.command.UndoCommand;
+import trackr.command.UpdateCommand;
 import trackr.exception.TrackrException;
 
 /**
@@ -14,8 +25,7 @@ public class Parser {
      * @return Command Command object after processing user input
      */
     public static Command parse(String input) {
-        String[] inputStringArr = input.split(" ");
-        String command = inputStringArr[0];
+        String command = getCommand(input);
         switch (command) {
         case "bye":
             return new ExitCommand();
@@ -45,8 +55,15 @@ public class Parser {
         case "update":
         case "u":
             return new UpdateCommand(input);
+        case "undo":
+            return new UndoCommand();
         default:
             throw new TrackrException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    private static String getCommand(String input) {
+        String[] inputStringArr = input.split(" ");
+        return inputStringArr[0];
     }
 }

@@ -1,10 +1,10 @@
 package trackr.command;
 
 import trackr.exception.TrackrException;
+import trackr.history.HistoryTracker;
 import trackr.storage.Storage;
 import trackr.task.Task;
 import trackr.tasklist.TaskList;
-import trackr.ui.Ui;
 
 /**
  * Class when user issues a Find command.
@@ -27,11 +27,10 @@ public class FindCommand extends Command {
     /**
      * Retrieves tasks matching the term provided by the user.
      * @param tasks List of tasks
-     * @param ui Deals with interactions with the user
      * @param storage Deals with loading tasks from the file and saving tasks in the file
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws TrackrException {
+    public String execute(TaskList tasks, Storage storage, HistoryTracker history) throws TrackrException {
         String result = "";
         String[] inputStringArr = userInput.split(" ", 2);
         if (inputStringArr.length == 1) {

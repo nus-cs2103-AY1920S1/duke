@@ -3,12 +3,12 @@ Duke is a personal assistant chatbot that helps you keep track of various tasks,
 `Deadline`s, and `Event`s.  
 Duke makes use of local storage so that previously entered tasks will be remembered even after the application closes.
 
+![Overview of Duke](images/Ui.png)
+
 ## Contents
 - [<b>Features</b>](#features)
 - [<b>Commands</b>](#commands)
 - [<b>Usage</b>](#usage)
-
-![Overview of Duke](images/Ui.png)
 
 ## <a name="features"></a>Features 
 ### 1. Keep track of various types of tasks

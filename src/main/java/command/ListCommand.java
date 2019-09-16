@@ -9,11 +9,6 @@ public class ListCommand extends Command {
         super(command);
     }
 
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.listCommand(tasks);
-    }
-
     /**
      * executes the printing of list.
      *

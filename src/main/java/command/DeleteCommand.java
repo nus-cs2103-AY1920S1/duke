@@ -10,23 +10,6 @@ public class DeleteCommand extends Command {
         super(command);
     }
 
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[]splitWords = command.split(" ");
-
-        try {
-            int val = Integer.parseInt(splitWords[1]);
-            assert val <= (tasks.size()) : "Enter a smaller number";
-            ui.deleteMessage(val - 1, tasks);
-            tasks.remove(val - 1);
-            storage.updateFile(tasks);
-        } catch (AssertionError f) {
-            System.out.println(f.getMessage());
-        } catch (Exception e) {
-            System.out.println("file not found");
-        }
-    }
-
     /**
      * Executes deletion.
      *

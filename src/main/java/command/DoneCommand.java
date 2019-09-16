@@ -9,23 +9,6 @@ public class DoneCommand extends Command {
         super(command);
     }
 
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[]splitWords = command.split(" ");
-
-        try {
-            int val = Integer.parseInt(splitWords[1]);
-            assert val <= (tasks.size()) : "Enter a smaller number";
-            tasks.taskDone(val - 1);
-            ui.doneMessage(val - 1, tasks);
-            storage.updateFile(tasks);
-        } catch (AssertionError f) {
-            System.out.println(f.getMessage());
-        } catch (Exception e) {
-            System.out.println("file not found");
-        }
-    }
-
     /**
      * Executes the change of tasks status to done.
      *

@@ -9,10 +9,6 @@ public class ByeCommand extends Command {
         super(command);
     }
 
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-    }
-
     public String executeAsString(TaskList tasks, Ui ui, Storage storage) {
         return ui.showConclusionFX();
     }

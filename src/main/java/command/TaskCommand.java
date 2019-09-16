@@ -1,12 +1,12 @@
-package Command;
+package command;
 
-import Exceptions.DukeException;
-import Task.Deadline;
-import Task.Event;
-import Task.ToDo;
-import Utilities.Storage;
-import Utilities.TaskList;
-import Utilities.Ui;
+import exceptions.DukeException;
+import task.Deadline;
+import task.Event;
+import task.ToDo;
+import utilities.Storage;
+import utilities.TaskList;
+import utilities.Ui;
 
 public class TaskCommand extends Command {
     public TaskCommand(String command) {
@@ -18,11 +18,11 @@ public class TaskCommand extends Command {
         try {
             String[]splitWords = command.trim().split("\\s",2);
 
-            if (splitWords[0].equals("todo")) {                                                                 //IF TODO
+            if (splitWords[0].equals("todo")) {
                 ToDo.createTodo(command, tasks, storage);
-            } else if (splitWords[0].equals("deadline")) {                                                      //IF DEADLINE
+            } else if (splitWords[0].equals("deadline")) {
                 Deadline.createDeadline(command, tasks, storage);
-            } else if (splitWords[0].equals("event")) {                                                         //IF EVENT
+            } else if (splitWords[0].equals("event")) {
                 Event.createEvent(command, tasks, storage);
             } else {
                 throw new DukeException("");
@@ -31,21 +31,35 @@ public class TaskCommand extends Command {
             System.out.println("Got it. I've added this task:" + "\n" + tasks.printLatest()
                     + "\n" + "Now you have " + tasks.size() + " tasks in the list.");
 
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("☹ OOPS!!! The date format is wrong.");
-        } catch (DukeException e){
+        } catch (DukeException e) {
             throw new DukeException("");
         }
     }
+
+    /**
+     * executes creating tasks.
+     *
+     * @param tasks is the taskList of tasks
+     *
+     * @param ui prints the output
+     *
+     * @param storage manages the output file
+     *
+     * @return the string output that is to be printed
+     *
+     * @throws DukeException when incorrect command is inputted
+     */
     public String executeAsString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String[]splitWords = command.trim().split("\\s",2);
 
-            if (splitWords[0].equals("todo")) {                                                                 //IF TODO
+            if (splitWords[0].equals("todo")) {
                 ToDo.createTodo(command, tasks, storage);
-            } else if (splitWords[0].equals("deadline")) {                                                      //IF DEADLINE
+            } else if (splitWords[0].equals("deadline")) {
                 Deadline.createDeadline(command, tasks, storage);
-            } else if (splitWords[0].equals("event")) {                                                         //IF EVENT
+            } else if (splitWords[0].equals("event")) {
                 Event.createEvent(command, tasks, storage);
             } else {
                 throw new DukeException("");
@@ -54,9 +68,9 @@ public class TaskCommand extends Command {
             return "Got it. I've added this task:" + "\n" + tasks.printLatest()
                     + "\n" + "Now you have " + tasks.size() + " tasks in the list.";
 
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             return "☹ OOPS!!! The date format is wrong.";
-        } catch (DukeException e){
+        } catch (DukeException e) {
             throw new DukeException("");
         }
     }

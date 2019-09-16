@@ -14,9 +14,11 @@ public class Deadline extends Task {
      * @param description of the models.Deadline task.
      */
     public Deadline(String description, String date) {
+
         super(description);
         this.date = date;
         this.identity = 'D';
+
     }
 
     /**
@@ -27,9 +29,11 @@ public class Deadline extends Task {
      * @param description of the task.
      */
     public Deadline(int intDone, String description, String date) {
+
         super(intDone, description);
         this.identity = 'D';
         this.date = date;
+
         if (intDone == 1) {
             this.isDone = true;
         } else {
@@ -45,6 +49,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+
         return "[D]" + super.toString() + " (by: " + date + ")";
     }
 
@@ -54,8 +59,10 @@ public class Deadline extends Task {
      * @return a string in the Duke.txt file format for a models.Deadline object.
      */
     public String toTextFile() {
+
         int done = isDone ? 1 : 0;
         return this.identity + " | " + done + " | " + this.description + " | " + this.date;
+
     }
 
 }

@@ -6,13 +6,33 @@ import execution.TaskList;
 import execution.UI;
 import models.Task;
 
+/**
+ * Represents the characteristics of a delete Command.
+ */
 public class DeleteCommand extends Command {
+
+    /**
+     * Contructs a delete command with the input string, which is supposedly an integer.
+     *
+     * @param description an integer string.
+     */
     public DeleteCommand(String description) {
+
         super(description);
+
     }
 
+    /**
+     * Execution of a DeleteCommand which would remove a task off the arraylist.
+     *
+     * @param taskList of current tasks.
+     * @param ui to set a response from duke.
+     * @param storage to store any changes in the storage.
+     * @throws DukeException
+     */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {
+
         super.execute(taskList, ui, storage);
 
         int deleteNum = Integer.parseInt(this.descriptionOfTask.trim()) - 1;
@@ -22,6 +42,11 @@ public class DeleteCommand extends Command {
 
     }
 
+    /**
+     * Handles the error and checks if it is valid for execution.
+     *
+     * @throws DukeException if description (the number) is left empty.
+     */
     @Override
     protected void checkValidity() throws DukeException {
         if (this.descriptionOfTask.isEmpty()) {

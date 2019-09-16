@@ -16,8 +16,10 @@ public abstract class Task {
      * @param description of the task being created.
      */
     public Task(String description) {
+
         this.description = description;
         this.isDone = false;
+
     }
 
     /**
@@ -28,12 +30,15 @@ public abstract class Task {
      * @param description of the task.
      */
     public Task(int intDone, String description) {
+
         this.description = description;
+
         if (intDone == 1) {
             this.isDone = true;
         } else {
             this.isDone = false;
         }
+
     }
 
     /**
@@ -42,7 +47,9 @@ public abstract class Task {
      * @return the icon, which is a string value.
      */
     public String getStatusIcon() {
+
         return isDone ? "[\u2713]" : "[\u2718]"; //return tick or X symbols
+
     }
 
     /**
@@ -59,8 +66,10 @@ public abstract class Task {
      * @return the status icon and description of the task.
      */
     @Override
-    public String toString(){
+    public String toString() {
+
         return getStatusIcon() + " " + this.description;
+
     }
 
     /**
@@ -71,12 +80,28 @@ public abstract class Task {
      */
     public abstract String toTextFile() ;
 
+    /**
+     * Returns the string value of the description attribute since it has only protected access.
+     *
+     * @return string value of description of Task object.
+     */
     public String getDescription() {
+
         return this.description;
+
     }
 
+    /**
+     * Returns a boolean value on whether the description of task contains a particular string value.
+     * This is for the Find Command.
+     *
+     * @param the particular string value we are checking if present.
+     * @return true if Task object's description contains the keyword. False if not.
+     */
     public boolean contains(String text) {
+
         return this.description.contains(text);
+
     }
 
 

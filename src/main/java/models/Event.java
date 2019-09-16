@@ -14,10 +14,9 @@ public class Event extends Task {
      * @param description of the models.Event task.
      */
     public Event(String description, String at) {
+
         super(description);
-
         this.dateAndTime = at;
-
         this.identity = 'E';
 
     }
@@ -30,14 +29,17 @@ public class Event extends Task {
      * @param description of the task.
      */
     public Event(int intDone, String description, String dateAndTime) {
+
         super(intDone, description);
         this.identity = 'E';
         this.dateAndTime = dateAndTime;
+
         if (intDone == 1) {
             this.isDone = true;
         } else {
             this.isDone = false;
         }
+
     }
 
     /**
@@ -47,6 +49,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+
         return "[E]" + super.toString() + " (at: " + dateAndTime + ")";
     }
 
@@ -56,8 +59,10 @@ public class Event extends Task {
      * @return a string in the Duke.txt file format for an models.Event object.
      */
     public String toTextFile() {
+
         int done = isDone ? 1 : 0;
         return this.identity + " | " + done + " | " + this.description + " | " + this.dateAndTime;
+
     }
 
 }

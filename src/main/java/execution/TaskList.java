@@ -31,6 +31,7 @@ public class TaskList {
     }
 
     public int getSize() {
+
         return this.list.size();
     }
 
@@ -44,6 +45,13 @@ public class TaskList {
         return this.list;
 
     }
+
+    /**
+     * Returns a task in the arraylist at the input integer's position.
+     *
+     * @param index is the position of the file in the arraylist.
+     * @return the Task at that position.
+     */
 
     public Task getTaskByIndex(int index) {
 
@@ -73,58 +81,6 @@ public class TaskList {
 
         return deleted;
 
-    }
-
-    /**
-     * Marks the task to be completed. The method removes the task by referencing the task based on its position on the
-     * list.
-     *
-     * @param taskNumber which is an integer, which refers to the position of the task in the current list.
-     */
-    public void completeTask(int taskNumber) {
-
-        Task completed = list.get(taskNumber);
-        completed.markAsDone();
-        System.out.println("Nice! I've marked this task as done: \n" + "   " + completed);
-
-    }
-
-    /**
-     * Prints the current existing list of tasks.
-     */
-    public void printList() {
-        int n = 1;
-
-        if (list.isEmpty()) {
-
-            System.out.println("List is empty");
-
-        } else {
-
-            for (Task item : list) {
-                System.out.println(n + "." + item);
-                n++;
-            }
-
-        }
-    }
-
-    /**
-     * Finds the existing list for tasks that have matching keywords.
-     *
-     * @param keyword that the user wants to find tasks with common word.
-     * @return a list of tasks that have the common keyword.
-     */
-    public ArrayList<Task> find(String keyword) {
-        ArrayList<Task> list = new ArrayList<>();
-        for (Task current : this.list) {
-            String taskInString = current.getDescription();
-
-            if (taskInString.toLowerCase().contains(keyword.toLowerCase())) {
-                list.add(current);
-            }
-        }
-        return list;
     }
 
 }

@@ -1,2 +1,0 @@
-T | 0 | eat 
-E | 0 | meeting | tonight

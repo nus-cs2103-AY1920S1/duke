@@ -22,6 +22,7 @@ public class Storage {
      * @param filepath the string value of the filepath of the duke.txt file.
      */
     public Storage(String filepath) {
+
         this.filePath = filepath;
     }
 
@@ -31,15 +32,20 @@ public class Storage {
      * @throws FileNotFoundException if the file is not found based on the filepath.
      */
     public ArrayList<Task> readFileContents() throws FileNotFoundException {
+
         File currentFile = new File(this.filePath);
         Scanner sc = new Scanner(currentFile);
         ArrayList<Task> list = new ArrayList<>();
+
         while (sc.hasNext()) {
+
             String current = sc.nextLine();
             char type = current.charAt(0);
             int isDone = Integer.parseInt("" + current.charAt(4));
             String des = current.substring(8).trim();
+
             switch (type) {
+
                 case 'T':
                     ToDo newT = new ToDo(isDone, des);
                     list.add(newT);
@@ -62,52 +68,40 @@ public class Storage {
                     break;
 
                 default:
+                    System.out.println("Error!");
+                    break;
+
             }
         }
         return list;
     }
 
     /**
-     * Checks if the file is empty. If it is empty, method will return true.
-     *
-     * @return a boolean on whether the file is empty or not.
-     */
-    public boolean isFileEmpty() {
-        File file = new File(this.filePath);
-        return 0 == file.length();
-    }
-
-    /**
-     * Writes to the duke.txt file and saves the information there. This method will overwrite the information
-     * on the current Duke.txt file.
-     *
-     * @param toAdd string pushed to the file.
-     * @throws IOException if there is an issue writing to the file.
-     */
-    public void writeToFile(String toAdd) throws IOException {
-        FileWriter fw = new FileWriter(this.filePath);
-        fw.write(toAdd);
-        fw.close();
-    }
-
-    /**
      * Saves tasks into specified file.
+     *
      * @param taskList Tasks to be saved.
      */
     public void saveToDataFile(TaskList taskList) {
+
         try {
+
             ArrayList<Task> tasks = taskList.getList();
             FileWriter fileWriter = new FileWriter(filePath);
             assert fileWriter != null;
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
             for (Task task: tasks) {
                 String taskData = task.toTextFile();
                 bufferedWriter.write(taskData);
                 bufferedWriter.newLine();
             }
+
             bufferedWriter.close();
+
         } catch (IOException e) {
+
             System.out.println(e.getMessage());
+
         }
     }
 

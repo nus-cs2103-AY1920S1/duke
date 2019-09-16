@@ -12,8 +12,10 @@ public class ToDo extends Task {
      * @param description of the models.ToDo task.
      */
     public ToDo(String description) {
+
         super(description);
         this.identity = 'T';
+
     }
 
     /**
@@ -24,6 +26,7 @@ public class ToDo extends Task {
      * @param description of the task.
      */
     public ToDo(int intDone, String description) {
+
         super(intDone, description);
         this.identity = 'T';
 
@@ -42,7 +45,9 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
+
         return "[T]" + super.toString();
+
     }
 
     /**
@@ -51,10 +56,10 @@ public class ToDo extends Task {
      * @return a string in the Duke.txt file format for a models.ToDo object.
      */
     public String toTextFile() {
+
         int done = isDone ? 1 : 0;
         return this.identity + " | " + done + " | " + this.description;
+
     }
-
-
 
 }

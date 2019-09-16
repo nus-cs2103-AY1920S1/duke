@@ -6,7 +6,7 @@ import duke.task.TaskList;
 /**
  * A class representing an add command.
  */
-public class AddCommand extends Command {
+public abstract class AddCommand extends Command{
     private Task task;
 
     /**

@@ -1,4 +1,2 @@
-T | 0 | a
-T | 1 | b
-T | 0 | c
-T | 0 | d
+T | 1 | buy food
+E | 1 | buy fruit | 2019-10-20T12:30

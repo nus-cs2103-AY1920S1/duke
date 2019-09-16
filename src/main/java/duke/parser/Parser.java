@@ -1,23 +1,14 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
-import duke.exception.IllegalCommandException;
-import duke.exception.IllegalDescriptionException;
-import duke.exception.IllegalIndexOfTaskException;
-import duke.task.TaskType;
+import duke.command.*;
+import duke.exception.*;
 import duke.filter.ComparisonOperator;
 import duke.filter.IndexFilter;
 import duke.filter.TimeFilter;
 import duke.filter.TypeFilter;
+import duke.task.TaskType;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -83,7 +74,7 @@ public class Parser {
     private DeadlineCommand parseDeadlineTask(String description) throws IllegalDescriptionException {
         int indexOfTime = description.indexOf("/by");
         if (indexOfTime == -1) {
-            throw new IllegalDescriptionException("The format of deadline description is wrong.");
+            throw new IllegalDescriptionException(DeadlineCommand.getCommandHelpInfo());
         }
         assert indexOfTime <= description.length() && indexOfTime + 3 <= description.length() :
                         "String length: " + description.length() + " separator index: " + indexOfTime;
@@ -96,7 +87,7 @@ public class Parser {
     private EventCommand parseEventTask(String description) throws IllegalDescriptionException {
         int indexOfTime = description.indexOf("/at");
         if (indexOfTime == -1) {
-            throw new IllegalDescriptionException("The format of deadline description is wrong.");
+            throw new IllegalDescriptionException(DeadlineCommand.getCommandHelpInfo());
         }
         assert indexOfTime <= description.length() && indexOfTime + 3 <= description.length() :
                         "String length: " + description.length() + " separator index: " + indexOfTime;
@@ -107,17 +98,22 @@ public class Parser {
     }
 
     private LocalDate parseDate(String dateString) throws IllegalDescriptionException {
+        //If no date provided, return today's date.
         if (dateString.isEmpty()) {
-            throw new IllegalDescriptionException("Date cannot be empty.");
+            return LocalDate.now();
         }
         String[] dayMonthYear = dateString.split("/");
         if (dayMonthYear.length != 3) {
-            throw new IllegalDescriptionException("Format of date is wrong.");
+            throw new IllegalDescriptionException("The format of date should be DD/MM/YYYY.");
         }
-        LocalDate date = LocalDate.of(Integer.parseInt(dayMonthYear[2]),
-                Integer.parseInt(dayMonthYear[1]),
-                Integer.parseInt(dayMonthYear[0]));
-        return date;
+        try {
+            LocalDate date = LocalDate.of(Integer.parseInt(dayMonthYear[2]),
+                    Integer.parseInt(dayMonthYear[1]),
+                    Integer.parseInt(dayMonthYear[0]));
+            return date;
+        } catch (NumberFormatException | DateTimeException e){
+           throw new IllegalDateException("Please provide a valid date.");
+        }
     }
 
     private LocalTime parseTime(String timeString) throws IllegalDescriptionException {
@@ -126,17 +122,25 @@ public class Parser {
         }
         String[] hourMinute = timeString.split(":");
         if (hourMinute.length != 2) {
-            throw new IllegalDescriptionException("Format of time is wrong.");
+            throw new IllegalDescriptionException("The format of time should be HH:MM.");
         }
-        LocalTime time = LocalTime.of(
-                Integer.parseInt(hourMinute[0]),
-                Integer.parseInt(hourMinute[1]));
-        return time;
+        try {
+            LocalTime time = LocalTime.of(
+                    Integer.parseInt(hourMinute[0]),
+                    Integer.parseInt(hourMinute[1]));
+            return time;
+        } catch (NumberFormatException | DateTimeException e) {
+            throw new IllegalTimeException("Please provide a valid time");
+        }
     }
 
     private LocalDateTime parseDateTime(String dateTimeString) throws IllegalDescriptionException {
         String dateString = getFirstWord(dateTimeString);
         String timeString = removeFirstWord(dateTimeString);
+        if(timeString.isEmpty()) {
+            timeString = dateTimeString;
+            return LocalDateTime.of(parseDate(""), parseTime(timeString));
+        }
         LocalDate date = parseDate(dateString);
         LocalTime time = parseTime(timeString);
         return LocalDateTime.of(date, time);

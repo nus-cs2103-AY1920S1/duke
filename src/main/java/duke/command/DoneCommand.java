@@ -36,6 +36,6 @@ public class DoneCommand extends Command {
         for (Task task: doneTasks) {
             task.setDone();
         }
-        return new CommandResult(CommandType.Delete, doneTasks);
+        return new CommandResult(CommandType.Done, doneTasks);
     }
 }

@@ -64,6 +64,9 @@ public class Ui {
      * @return a string of all tasks in the task list.
      */
     public String showTasks(Task[] tasks) {
+        if(tasks.length == 0) {
+            return composeBlock("Your task list is empty.");
+        }
         String[] text = new String[tasks.length + 1];
         text[0] = "Here are the tasks in your list:";
         for (int i = 0; i < tasks.length; i++) {

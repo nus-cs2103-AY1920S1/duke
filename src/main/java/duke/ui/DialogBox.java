@@ -8,9 +8,11 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
@@ -37,6 +39,16 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         cropImage(image);
+        addShadow();
+    }
+
+    private void addShadow() {
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setColor(Color.rgb(138, 138, 138, 0.8));
+        dropShadow.setWidth(2);
+        dropShadow.setOffsetY(2);
+        dropShadow.setOffsetX(2);
+        dialog.setEffect(dropShadow);
     }
 
     private void cropImage(Image image) {

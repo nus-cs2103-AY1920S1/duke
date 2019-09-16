@@ -6,7 +6,6 @@ import duke.handler.Duke;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,8 +26,6 @@ public class MainWindow extends AnchorPane {
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
-    @FXML
-    private Button sendButton;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpg"));
@@ -41,9 +38,6 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.setFitToWidth(true);
-        sendButton.setOnMouseClicked(event -> {
-            handleUserInput();
-        });
     }
 
     /**
@@ -107,7 +101,6 @@ public class MainWindow extends AnchorPane {
      */
     public void exit() {
         userInput.setDisable(true);
-        sendButton.setDisable(true);
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(event -> Platform.exit());
         delay.play();

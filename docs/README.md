@@ -48,7 +48,7 @@ You can add a new Deadline task to the list of tasks. Each deadline task has a d
  
 Format: `dateline [DESCRIPTION] /by [DATEANDTIME]`
  
-> Note: DATEANDTIME are to be specified in DD/MM/YYYY HHmm.
+> Note: DATEANDTIME is to be specified in DD/MM/YYYY HHmm.
  
 Example: `dateline post lecture quiz /at 19/09/2019 2359`
  

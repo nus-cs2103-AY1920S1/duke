@@ -23,7 +23,7 @@ public class Schedule {
      * Constructs a new list of tasks.
      */
     public Schedule() {
-        this.schedule = new ArrayList();
+        this.schedule = new ArrayList<>();
         this.todoTaskList = new ArrayList();
     }
 

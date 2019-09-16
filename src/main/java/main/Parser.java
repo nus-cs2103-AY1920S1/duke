@@ -1,6 +1,12 @@
 package main;
 
-import command.*;
+import command.AddCommand;
+import command.Command;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.SortCommand;
 
 import java.io.IOException;
 

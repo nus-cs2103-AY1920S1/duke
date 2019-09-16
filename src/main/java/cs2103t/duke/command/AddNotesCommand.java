@@ -69,8 +69,9 @@ public class AddNotesCommand extends Command {
 
         Task t = tasks.retrieveTask(taskId);
         Note note = new Note(n, true);
-        t.setNotes(note, noteList.getNoteListSize());
         noteList.addNote(note);
+        t.setNotes(note, noteList.getNoteListSize());
+        //System.out.println(t.getNoteId());
 
         return ui.dukeRespond("Got it. I've added this note:",
                 "  " + note.toString(),

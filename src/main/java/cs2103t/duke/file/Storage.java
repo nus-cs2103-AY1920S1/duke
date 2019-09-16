@@ -70,8 +70,10 @@ public class Storage {
     }
 
     private String getTaskDetailToPrint(Task t) {
-        return String.format("%s | %d | %d | %s\r\n",
+        String s = String.format("%s | %d | %d | %s\r\n",
                 t.getTaskType(), boolToInt(t.isCompleted()), t.getNoteId(), t.getDescription());
+        System.out.println(s);
+        return s;
     }
 
     /**
@@ -123,7 +125,10 @@ public class Storage {
         if (completed) {
             task.setCompleted();
         }
-        task.setNoteId(notesId);
+        if (notesId != 0) {
+            task.setNoteId(notesId);
+        }
+        assert notesId >= 0 : "for some reason notesId read from task file can be -ve O.O";
         return task;
     }
 
@@ -180,6 +185,9 @@ public class Storage {
             BufferedWriter br = new BufferedWriter(fr);
 
             for (Note n : noteList) {
+                if (n.isDeleted()) {
+                    continue;
+                }
                 br.write(getNoteDetailToPrint(n));
             }
 

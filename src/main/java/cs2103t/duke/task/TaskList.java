@@ -45,7 +45,7 @@ public class TaskList {
         for (Task t : taskList) {
             if (t.hasNotes()) {
                 int noteId = t.getNoteId();
-                t.setNotes(notes.getNote(noteId));
+                t.setNotes(notes.getNote(noteId - 1));
                 this.noteIdToTask.put(noteId, t);
             }
         }

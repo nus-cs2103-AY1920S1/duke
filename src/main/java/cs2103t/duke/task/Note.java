@@ -36,6 +36,10 @@ public class Note {
         return isDeleted;
     }
 
+    public void setDeleted() {
+        isDeleted = true;
+    }
+
     public void updateContent(String newContent) {
         this.content = newContent;
     }

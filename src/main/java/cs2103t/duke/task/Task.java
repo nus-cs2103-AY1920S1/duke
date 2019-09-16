@@ -117,6 +117,7 @@ public abstract class Task {
      */
     public void deleteNotes() {
         this.note = null;
+        this.noteId = 0;
         this.hasNotes = false;
     }
 
@@ -128,7 +129,15 @@ public abstract class Task {
         } else {
             checked = CROSS;
         }
-        return String.format("[%s][%s] %s || notes(if any): %s", this.taskType, checked, this.description, this.note);
+        return String.format("[%s][%s] %s%s", this.taskType, checked, this.description, getNotesString());
+    }
+
+    private String getNotesString() {
+        if (hasNotes) {
+            return String.format("\n|Notes:|\n  %s", this.note);
+        } else {
+            return "";
+        }
     }
 
     @Override

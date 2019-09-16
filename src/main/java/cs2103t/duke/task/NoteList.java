@@ -74,7 +74,9 @@ public class NoteList {
      */
     public Note deleteNote(int id) {
         this.deletedIds.add(id);
-        return getNote(id);
+        Note n = getNote(id);
+        n.setDeleted();
+        return n;
     }
 
     public int getGenNoteId(int id) {
@@ -100,6 +102,7 @@ public class NoteList {
         while (it.hasNext() && id > it.next()) {
             numDeletedIdsLessThanId++;
         }
+        System.out.println(id - numDeletedIdsLessThanId);
         return id - numDeletedIdsLessThanId;
     }
 

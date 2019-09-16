@@ -54,75 +54,78 @@ public class Duke extends Application {
     }
 
     public String run(String input) {
-            ui.showWelcome(); //can take this out and put it at the start of the initial programme
-            Parser p = new Parser(input);
-            p.parse();
-            String command = p.getCommand();
-            String taskDetails = p.getTaskDetails();
-            if (command.equals("bye")) {
-                return ui.showBye();
-            } else if (command.equals("list")) {
-                ui.showSeparationLine();
-                if (tasks.getListOfTasks().isEmpty()) {
-                    return "Sorry, there are no tasks in the list";
-                } else {
-                    return "     Here are the tasks in your list:\n" + tasks.printList() + ui.showSeparationLine()
-                            + ui.showBlankLine();
-                }
-            } else if (command.equals("done")) {
-                int number = Integer.parseInt(taskDetails);
-                Task newlyDoneTask = tasks.getTask(number - 1);
-                tasks.setTaskAsDone(number - 1);
-                storage.write(tasks.getListOfTasks());
-                return ui.showDone(newlyDoneTask);
-            } else if (command.equals("delete")) {
-                int number = Integer.parseInt(taskDetails);
-                Task taskToBeDeleted = tasks.getTask(number - 1);
-                tasks.deleteTask(number - 1);
-                int size = tasks.getListOfTasks().size();
-                storage.write(tasks.getListOfTasks());
-                return ui.showDelete(taskToBeDeleted, size);
-            } else if(command.equals("find")) {
-                String keyword = taskDetails;
-                return ui.showMatchingTasks(tasks.find(keyword));
+        ui.showWelcome(); //can take this out and put it at the start of the initial programme
+        Parser inputParser = new Parser(input);
+        inputParser.parse();
+        String command = inputParser.getCommand();
+        String taskDetails = inputParser.getTaskDetails();
+        if (command.equals("bye")) {
+            return ui.showBye();
+        } else if (command.equals("list")) {
+            StringBuilder listBuilder = new StringBuilder();
+            listBuilder.append(ui.showSeparationLine());
+            if (tasks.getListOfTasks().isEmpty()) {
+                listBuilder.append("Sorry, there are no tasks in the list");
+            } else {
+                listBuilder.append("     Here are the tasks in your list:\n");
+                listBuilder.append(tasks.printList());
+                listBuilder.append(ui.showSeparationLine());
             }
-            else {  //all other commands
-                try {
-                    if (command.equals("todo")) {
-                        if (taskDetails.equals("")) { //will it be such that String[].get(1) will be zero i.e. error?
-                            throw new DukeException("      :( OOPS!!! The description of a todo cannot be empty.");
-                        }
-                        tasks.addTask(new Todo(taskDetails));
-                    } else if (command.equals("deadline") || command.equals("event")) {
-                        if(taskDetails.equals("")) {
-                            throw new DukeException("      :( OOPS!!! The description of a " +
-                                    command + " cannot be empty.");
-                        }
-                        //replace the first / so that the dates will not be split up
-                        taskDetails = taskDetails.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
-                        String[] tempStringArr = taskDetails.split(":");
-                        String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
-                        String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
-                        if (command.equals("deadline")) {
-                            tasks.addTask(new Deadline(description, secondString));
-                        } else {
-                            tasks.addTask(new Event(description, secondString));
-                        }
-                    } else {//all other keywords not part of duke.Duke's duke.task handling schedule
-                        throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
+            return listBuilder.toString();
+        } else if (command.equals("done")) {
+            int taskNumber = Integer.parseInt(taskDetails);
+            Task newlyDoneTask = tasks.getTask(taskNumber - 1);
+            tasks.setTaskAsDone(taskNumber - 1);
+            storage.write(tasks.getListOfTasks());
+            return ui.showDone(newlyDoneTask);
+        } else if (command.equals("delete")) {
+            int taskNumber = Integer.parseInt(taskDetails);
+            Task taskToBeDeleted = tasks.getTask(taskNumber - 1);
+            tasks.deleteTask(taskNumber - 1);
+            int newSizeOfList = tasks.getListOfTasks().size();
+            storage.write(tasks.getListOfTasks());
+            return ui.showDelete(taskToBeDeleted, newSizeOfList);
+        } else if(command.equals("find")) {
+            String keyword = taskDetails;
+            return ui.showMatchingTasks(tasks.find(keyword));
+        }
+        else {  //all other commands
+            try {
+                if (command.equals("todo")) {
+                    if (taskDetails.equals("")) { //will it be such that String[].get(1) will be zero i.e. error?
+                        throw new DukeException("      :( OOPS!!! The description of a todo cannot be empty.");
                     }
-                } catch (DukeException de) {
-                    return ui.showSeparationLine() + de.getMessage() + ui.showSeparationLine() + ui.showBlankLine();
-                    //to prevent printing of below mentioned lines
-                } catch (ArrayIndexOutOfBoundsException ae) {
-                    return ui.showSeparationLine() + "      :( OOPS!!! You need to specify the " + command +
-                            " time through a /by (deadline) and /at (event)\n" + ui.showSeparationLine() + ui.showBlankLine();
+                    tasks.addTask(new Todo(taskDetails));
+                } else if (command.equals("deadline") || command.equals("event")) {
+                    if(taskDetails.equals("")) {
+                        throw new DukeException("      :( OOPS!!! The description of a " +
+                                command + " cannot be empty.");
+                    }
+                    //replace the first / so that the dates will not be split up
+                    taskDetails = taskDetails.replaceFirst("/", ":");  //need to assign this to tempString so it is re-recorded
+                    String[] tempStringArr = taskDetails.split(":");
+                    String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
+                    String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
+                    if (command.equals("deadline")) {
+                        tasks.addTask(new Deadline(description, secondString));
+                    } else {
+                        tasks.addTask(new Event(description, secondString));
+                    }
+                } else {//all other keywords not part of duke.Duke's duke.task handling schedule
+                    throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
-                Task temp = tasks.getTask(tasks.getListOfTasks().size() - 1);
-                int size = tasks.getListOfTasks().size();
-                storage.write(tasks.getListOfTasks());
-                return ui.showAdd(temp, size);
+            } catch (DukeException de) {
+                return ui.showSeparationLine() + de.getMessage() + ui.showSeparationLine() + ui.showBlankLine();
+                //to prevent printing of below mentioned lines
+            } catch (ArrayIndexOutOfBoundsException ae) {
+                return ui.showSeparationLine() + "      :( OOPS!!! You need to specify the " + command +
+                        " time through a /by (deadline) and /at (event)\n" + ui.showSeparationLine() + ui.showBlankLine();
             }
+            Task temp = tasks.getTask(tasks.getListOfTasks().size() - 1);
+            int size = tasks.getListOfTasks().size();
+            storage.write(tasks.getListOfTasks());
+            return ui.showAdd(temp, size);
+        }
     }
 
     @Override

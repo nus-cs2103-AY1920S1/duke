@@ -1,12 +1,6 @@
 package oop;
 
-import commands.AddCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.ExitCommand;
-import commands.FindCommand;
-import commands.PrintCommand;
+import commands.*;
 
 import exceptions.DukeException;
 import exceptions.InvalidCommandException;
@@ -53,6 +47,9 @@ public class Parser {
 
         case "find":
             return new FindCommand(arr[1]);
+
+        case "help":
+            return new HelpCommand();
 
         default :
             throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");

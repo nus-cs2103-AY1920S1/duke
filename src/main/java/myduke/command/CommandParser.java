@@ -139,11 +139,9 @@ public class CommandParser {
 
         String aliasName = parts[0].toLowerCase();
         String commandName = commandAliasMap.getOrDefault(aliasName, aliasName);
-        System.out.println(commandName);
         ThrowableFunction<String, Command, DukeException> constructorFunction = commandConstructorMap.get(commandName);
 
         if (constructorFunction == null) {
-            System.out.println("NOT FOUND");
             throw new DukeInvalidCommandException("I'm sorry, but I don't know what that means :-(");
         }
 

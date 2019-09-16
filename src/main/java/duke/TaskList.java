@@ -44,7 +44,9 @@ public class TaskList {
     String generateListForFile() {
         StringBuilder sb = new StringBuilder();
         for (Task task : ls) {
-            sb.append(task.getTaskTypeLetter()).append(" | ").append(task.getStatusIcon()).append(" | ")
+            sb.append(task.getTaskTypeLetter()).append(" | ")
+                    .append(task.getStatusIcon()).append(" | ")
+                    .append(task.getTagName()).append(" | ")
                     .append(task.getDescription()).append("\n");
         }
         return sb.toString();

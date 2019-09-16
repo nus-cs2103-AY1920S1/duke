@@ -25,6 +25,16 @@ public class Event extends Task {
         }
     }
 
+    public Event(String description, String at, String tagName) throws DateTimeParseDukeException {
+        super(description,tagName);
+
+        try {
+            this.at = LocalDateTime.parse(at.trim());
+        } catch (DateTimeParseException err) {
+            throw new DateTimeParseDukeException();
+        }
+    }
+
     public String getDescription() {
         return super.getDescription() + " (at: " + at + ")";
     }

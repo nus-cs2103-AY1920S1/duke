@@ -1,5 +1,5 @@
-D | 1 | do homework (by: 1920-12-12T12:12:12)
-T | 0 | grdgdrg
-E | 1 | do homework (at: 1920-12-12T12:12:12)
-T | 0 | grdgdr
-T | 0 | grdgrd
+T | 0 | null | buy milk
+D | 0 | null | study test (by: 2019-10-10T12:00)
+E | 1 | null | movie (at: 2020-01-01T14:00:30)
+D | 0 | Urgent | fix phone (by: 2019-09-30T23:59:59)
+T | 0 | ASAP | submit project 

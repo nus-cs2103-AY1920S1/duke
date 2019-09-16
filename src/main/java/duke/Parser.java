@@ -1,19 +1,15 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.ExitCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.Command;
-
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.EmptyDateTimeDukeException;
 import duke.exception.UnknownInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Parser {
 
@@ -31,28 +27,49 @@ public class Parser {
         String description;
         String date;
         String number;
+        String tagName = null;
+        List<String> list = Arrays.asList(input);
+
+        if (list.contains("/t")) {
+            tagName = list.get(list.indexOf("/t") + 1);
+        }
 
         int num;
         switch (input[0]) {
         case "todo":
-            description = s.substring(s.indexOf(" ") + 1);
-            return new AddCommand(new ToDo(description));
+            if (tagName == null) {
+                description = s.substring(s.indexOf(" ") + 1);
+                return new AddCommand(new ToDo(description));
+            } else {
+                description = s.substring(s.indexOf(" ") + 1, s.indexOf("/t"));
+                return new AddCommand(new ToDo(description, tagName));
+            }
         case "event":
             try {
                 description = s.substring(s.indexOf(" ") + 1, s.indexOf("/") - 1);
-                date = s.substring((s.indexOf("/") + 4));
+                if (tagName == null) {
+                    date = s.substring((s.indexOf("/") + 4));
+                    return new AddCommand(new Event(description, date));
+                } else {
+                    date = s.substring((s.indexOf("/") + 4), s.indexOf("/t"));
+                    return new AddCommand(new Event(description, date, tagName));
+                }
             } catch (StringIndexOutOfBoundsException err) {
                 throw new EmptyDateTimeDukeException();
             }
-            return new AddCommand(new Event(description, date));
         case "deadline":
             try {
                 description = s.substring(s.indexOf(" ") + 1, s.indexOf("/") - 1);
-                date = s.substring((s.indexOf("/") + 4));
+                if (tagName == null) {
+                    date = s.substring((s.indexOf("/") + 4));
+                    return new AddCommand(new Deadline(description, date));
+                } else {
+                    date = s.substring((s.indexOf("/") + 4), s.indexOf("/t"));
+                    return new AddCommand(new Deadline(description, date, tagName));
+                }
             } catch (StringIndexOutOfBoundsException err) {
                 throw new EmptyDateTimeDukeException();
             }
-            return new AddCommand(new Deadline(description, date));
         case "delete":
             number = s.substring(s.indexOf(" ") + 1);
             num = Integer.parseInt(number.trim());

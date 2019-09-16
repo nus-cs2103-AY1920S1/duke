@@ -1,6 +1,6 @@
-#*Duke*: User Guide
+# *Duke*: User Guide
 
-##Description
+## Description
 Duke is a friendly dog who helps remind you of your future tasks, so that you keep on track!
 
 ## Features 

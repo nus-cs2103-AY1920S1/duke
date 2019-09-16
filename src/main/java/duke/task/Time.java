@@ -10,6 +10,8 @@ public class Time {
     public Time(String format24h) {
         this.hour = Integer.parseInt(format24h.substring(0, 2));
         this.minute = Integer.parseInt(format24h.substring(2));
+        assert this.hour <= 23 : "hour value cannot be more than 24";
+        assert this.minute <= 59 : "minute value cannot be more than 59";
     }
 
     /**

@@ -15,6 +15,8 @@ public class Date {
         this.day = Integer.parseInt((String) Array.get(tempStringArr, 0));
         this.month = Integer.parseInt((String) Array.get(tempStringArr, 1));
         this.year = Integer.parseInt((String) Array.get(tempStringArr, 2));
+        assert this.month <= 12 : "month value cannot be more than 12";
+        assert this.day <= 31 : "day value cannot be more than 31";
     }
 
     /**
@@ -59,11 +61,11 @@ public class Date {
     public String toString() {
         StringBuilder outputString = new StringBuilder();
         outputString.append(this.day);
-        if (this.day == 1) {
+        if (this.day == 1 || this.day == 21 || this.day == 31) {
             outputString.append("st");
-        } else if (this.day == 2) {
+        } else if (this.day == 2 || this.day == 22) {
             outputString.append("nd");
-        } else if (this.day == 3) {
+        } else if (this.day == 3 || this.day == 23) {
             outputString.append("rd");
         } else {
             outputString.append("th");

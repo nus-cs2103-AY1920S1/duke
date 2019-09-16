@@ -37,14 +37,36 @@ public class TaskList {
 
     /**
      * Deletes a task from the stored task list given by the index called.
-     * @param number Specified index of task in task list.
+     * @param index Specified index of task in task list.
      */
-    public void deleteTask(int number) {
-        listOfTasks.remove(number);
+    public void deleteTask(int index) {
+        assert index >= 0 : "index passed to delete a task in taskList should be greater than or equals to zero";
+        listOfTasks.remove(index);
     }
 
     /**
-     * prints out the tasks in the stored task list.
+     * Returns a task in a specified position in the task list.
+     *
+     * @param index Specified index of task in task list.
+     * @return Task in specified position in task list.
+     */
+    public Task getTask(int index) {
+        assert index >= 0 : "index should be greater than or equals to zero";
+        return this.listOfTasks.get(index);
+    }
+
+    /**
+     * Sets a task in a specified position in the task list as done.
+     *
+     * @param number Specified index of task in task list.
+     */
+    public void setTaskAsDone(int number) {
+        Task temp = this.listOfTasks.get(number);
+        temp.setDone();
+    }
+
+    /**
+     * Prints out the tasks in the stored task list.
      */
     public String printList() {
         StringBuilder temp = new StringBuilder();
@@ -61,25 +83,10 @@ public class TaskList {
     }
 
     /**
-     * Sets a task in a specified position in the task list as done.
-     *
-     * @param number Specified index of task in task list.
+     * Finds and returns tasks in the stored task list with a particular keyword.
+     * @param keyword keyword passed in by user to search for tasks
+     * @return tasks in stored task list with particular keyword
      */
-    public void setTaskAsDone(int number) {
-        Task temp = this.listOfTasks.get(number - 1);
-        temp.setDone();
-    }
-
-    /**
-     * Returns a task in a specified position in the task list.
-     *
-     * @param number Specified index of task in task list.
-     * @return Task in specified position in task list.
-     */
-    public Task getTask(int number) { //what about case where it is empty?
-        return this.listOfTasks.get(number);
-    }
-
     public ArrayList<Task> find(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         for(Task task : this.listOfTasks) {

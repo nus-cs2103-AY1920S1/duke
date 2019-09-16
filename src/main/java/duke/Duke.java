@@ -62,26 +62,26 @@ public class Duke extends Application {
             if (command.equals("bye")) {
                 return ui.showBye();
             } else if (command.equals("list")) {
-                ui.showLine();
+                ui.showSeparationLine();
                 if (tasks.getListOfTasks().isEmpty()) {
                     return "Sorry, there are no tasks in the list";
                 } else {
-                    return "     Here are the tasks in your list:\n" + tasks.printList() + ui.showLine()
-                            + ui.separationline();
+                    return "     Here are the tasks in your list:\n" + tasks.printList() + ui.showSeparationLine()
+                            + ui.showBlankLine();
                 }
             } else if (command.equals("done")) {
                 int number = Integer.parseInt(taskDetails);
-                Task temp = tasks.getTask(number - 1);
+                Task newlyDoneTask = tasks.getTask(number - 1);
                 tasks.setTaskAsDone(number - 1);
                 storage.write(tasks.getListOfTasks());
-                return ui.showDone(temp);
+                return ui.showDone(newlyDoneTask);
             } else if (command.equals("delete")) {
                 int number = Integer.parseInt(taskDetails);
-                Task temp = tasks.getTask(number - 1);
+                Task taskToBeDeleted = tasks.getTask(number - 1);
                 tasks.deleteTask(number - 1);
                 int size = tasks.getListOfTasks().size();
                 storage.write(tasks.getListOfTasks());
-                return ui.showDelete(temp, size);
+                return ui.showDelete(taskToBeDeleted, size);
             } else if(command.equals("find")) {
                 String keyword = taskDetails;
                 return ui.showMatchingTasks(tasks.find(keyword));
@@ -112,11 +112,11 @@ public class Duke extends Application {
                         throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException de) {
-                    return ui.showLine() + de.getMessage() + ui.showLine() + ui.separationline();
+                    return ui.showSeparationLine() + de.getMessage() + ui.showSeparationLine() + ui.showBlankLine();
                     //to prevent printing of below mentioned lines
                 } catch (ArrayIndexOutOfBoundsException ae) {
-                    return ui.showLine() + "      :( OOPS!!! You need to specify the " + command +
-                            " time through a /by (deadline) and /at (event)\n" + ui.showLine() + ui.separationline();
+                    return ui.showSeparationLine() + "      :( OOPS!!! You need to specify the " + command +
+                            " time through a /by (deadline) and /at (event)\n" + ui.showSeparationLine() + ui.showBlankLine();
                 }
                 Task temp = tasks.getTask(tasks.getListOfTasks().size() - 1);
                 int size = tasks.getListOfTasks().size();

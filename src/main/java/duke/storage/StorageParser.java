@@ -9,7 +9,7 @@ import java.util.Map;
 abstract class StorageParser {
 
     /**
-     * Method for parsing a single line of input.
+     * Parses a single line of input.
      * Returns a Map object that can be used
      * to retrieve the relavant task data.
      * In the current iteration of the app, each task is
@@ -70,7 +70,7 @@ abstract class StorageParser {
     }
 
     /**
-     * Private utility method to validate the perimeter brackets of the input json string.
+     * Validates the perimeter brackets of the input json string.
      *
      * @param line The input string.
      * @throws DukeTaskFileParseException If the string has no opening or closing bracket.

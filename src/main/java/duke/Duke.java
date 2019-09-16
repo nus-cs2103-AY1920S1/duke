@@ -53,7 +53,7 @@ public class Duke {
     }
 
     /**
-     * Response processor of Duke.
+     * Processes a string response for Duke from the user.
      * Takes a string input and creates a command, and then executes it.
      * Also prints any error messages resulting from Duke to the ui.
      *

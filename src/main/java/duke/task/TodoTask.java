@@ -19,7 +19,7 @@ public class TodoTask extends Task {
     }
 
     /**
-     * Method retrieving task type specific status strings.
+     * Retrieves task type specific status strings.
      *
      * @return The task type specific status string.
      */

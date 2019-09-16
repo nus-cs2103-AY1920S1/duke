@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="600.0" style="-fx-border-style: solid; -fx-border-width: 2 1 2 1;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="600.0" style="-fx-border-style: solid; -fx-border-width: 2 1 2 1; -fx-border-radius: 10; -fx-background-radius: 10;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="dialog" alignment="CENTER_RIGHT" focusTraversable="false" lineSpacing="0.1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" style="-fx-border-style: solid;" text="Dummy text" textAlignment="RIGHT" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="105.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font name="Arial" size="17.0" />
          </font>
          <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </padding>
       </Label>
-      <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" style="-fx-image-borders: 10.0;" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
+      <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" style="-fx-image-borders: 10.0;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0" />
    </children>
    <padding>
       <Insets left="5.0" right="5.0" />

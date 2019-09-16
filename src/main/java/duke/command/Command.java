@@ -27,7 +27,7 @@ public abstract class Command {
     }
 
     /**
-     * Method for running the processing logic of the command.
+     * Runs the processing logic of the command.
      *
      * @param tasks TaskList of tasks to use.
      * @param ui MainWindow to use for displaying command output.
@@ -36,7 +36,7 @@ public abstract class Command {
     abstract void run(TaskList tasks, MainWindow ui, Storage storage);
 
     /**
-     * Method for running the validating logic of the command.
+     * Runs the validating logic of the command.
      *
      * @param tasks TaskList of tasks to use.
      * @param ui MainWindow to use for displaying command output.
@@ -47,7 +47,7 @@ public abstract class Command {
             throws DukeInvalidArgumentException;
 
     /**
-     * Public method for executing the command.
+     * Executes the command.
      * Validates the inputs first, then runs the processing logic.
      *
      * @param tasks TaskList of tasks to use.

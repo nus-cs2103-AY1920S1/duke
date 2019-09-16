@@ -28,7 +28,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Method retrieving task type specific status strings.
+     * Retrieves task type specific status strings.
      *
      * @return The task type specific status string.
      */
@@ -41,7 +41,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Private function for retrieving the formatted timing for display.
+     * Retrieves the formatted timing for display.
      *
      * @return The formatted timing string.
      */
@@ -50,7 +50,7 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Private function for validating and setting the deadline's due date.
+     * Validates and sets the deadline's due date.
      * Validates the timings according to the format defined
      * in TaskUtil, then sets the LocalDateTime instance
      * property.

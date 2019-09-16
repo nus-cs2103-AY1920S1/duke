@@ -2,7 +2,7 @@
 
 
 ## Contents
-- ##### [What is duke?](#what-is-duke?-1)
+- ##### [What is duke?](#what-is-duke-1)
 - ##### [Features](#features-1)
 - ##### [Command Usage](#command-usage-1)
 - ##### [Advanced Usage](#advanced-usage-1)
@@ -23,28 +23,44 @@ Duke is tailored for users who love to use command line input and type fast, as 
 - Deadlines - tasks with a description and deadline timing
 - Events - tasks with a description and a start and end timing
 
+<br/>
+
 ### See all current tasks in the user task list
 - The user can view his current task list with a simple command
 - The data is presented in a simple list format, and shows the relavant details of the task ( description, timings, whether it is done )
 
+<br/>
+
 ### Mark tasks in the task list as done
 - Tasks can be marked as done with a simple command
+
+<br/>
 
 ### Delete tasks from the task list
 - Tasks can be entirely removed from the user task list if the list is getting cluttered
 
+<br/>
+
 ### Find and filter tasks quickly
 - The task list can be filtered quickly by a search term
+
+<br/>
 
 ### Task list is preserved across application exits
 - The task list is saved whenever the task list is changed
 - The task list is read on application startup from the disk
 
+<br/>
+
 ### Easily editable task storage file
 - By using a easily readable json file format, Duke allows easy user editing of the storage task file on disk
 
+<br/>
+
 ### Save task list to disk and start afresh
 - The task list can be archived and saved to a seperate disk file, preserving data while allowing the user to start from an empty list
+
+<br/>
 
 ## Command Usage
 
@@ -53,6 +69,8 @@ Duke is tailored for users who love to use command line input and type fast, as 
 - There shouldn't be leading whitespaces before any command. (e.g. " List" will not work)
 - You can send your input by pressing enter, or clicking the send button on the bottom right
 - Commands that do not require arguments will check whether you gave it extraneous arguments! It is always good to type lesser :hugs:
+
+<br/>
 
 ### `List` - Lists the task list
 
@@ -64,6 +82,8 @@ Example of usage: `list`
 
 Expected outcome:
 ![List command example usage image](ListUsage.png)
+
+<br/>
 
 ### `Todo` - Adds a todo task
 
@@ -78,6 +98,8 @@ Example of usage:
 Expected outcome:
 ![Todo command example usage image](TodoUsage.png)
 
+<br/>
+
 ### `Deadline` - Adds a deadline task
 
 Adds a deadline task to the task list
@@ -85,13 +107,18 @@ Adds a deadline task to the task list
 Format: `deadline (Description) /by (Timing)`
 - Note the use of the "/by" seperator
 - Description is simply the text description of the todo task
-- Timing is of the format `d/m/yyyy HHmm`
+- Timing is of the format `d/m/yyyy HHmm` where :
+    - `d` is the the calendar day of the month ( 1 or 2 digit )
+    - `m` is the calendar month of the year ( 1 or 2 digit )
+    - `yyyy` is the 4 digit year of the era
 
 Example of usage: 
 `deadline Claim warranty for iphone /by 30/12/2019 2359`
 
 Expected outcome:
 ![Deadline command example usage image](DeadlineUsage.png)
+
+<br/>
 
 ### `Event` - Adds a event task
 
@@ -100,7 +127,10 @@ Adds a event task to the task list
 Format: `deadline (description) /by (TimingStart) to (TimingEnd)`
 - Note the use of the "/by" and "to" seperators
 - Description is simply the text description of the todo task
-- TimingStart is of the format `d/m/yyyy HHmm`
+- TimingStart is of the format `d/m/yyyy HHmm` where :
+    - `d` is the the calendar day of the month ( 1 or 2 digit )
+    - `m` is the calendar month of the year ( 1 or 2 digit )
+    - `yyyy` is the 4 digit year of the era
 - TimingEnd is either of the TimingStart format, or simply `HHmm` for events that start and end on the same day.
 - TimingEnd must also be later than the TimingStart, failing which Duke will prompt you again
 
@@ -110,6 +140,8 @@ Examples of usage:
 
 Expected outcome:
 ![Event command example usage image](EventUsage.png)
+
+<br/>
 
 ### `Done` - Marks a task as done
 
@@ -123,6 +155,8 @@ Examples of usage:
 
 Expected outcome:
 ![Done command example usage image](DoneUsage.png)
+
+<br/>
 
 ### `Delete` - Remove a task from the task list
 
@@ -138,6 +172,8 @@ Examples of usage:
 Expected outcome:
 ![Delete command example usage image](DeleteUsage.png)
 
+<br/>
+
 ### `Find` - Search for a task quickly
 
 Searches the task list's tasks' descriptions, filtering through the matching tasks that contain the search term.
@@ -150,6 +186,8 @@ Examples of usage:
 Expected outcome:
 ![Find command example usage image](FindUsage.png)
 
+<br/>
+
 ### `Archive` - Archives and wipes the task list
 
 Archives the current task list to disk, creating an archive directory in the directory of the application if not present near ( 5 directories upward ) the location of the application.
@@ -160,6 +198,8 @@ Format: `archive`
 
 Expected outcome:
 ![Archive command example usage image](ArchiveUsage.png)
+
+<br/>
 
 ### `Bye` - Exits the prograrm
 

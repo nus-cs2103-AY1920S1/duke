@@ -60,7 +60,8 @@ class StorageTest {
     @Test
     void setFilePath_fallbackDirNotExists_dirCreated() {
         final String FALLBACK_DIR_NAME = ((Double) Math.random()).toString();
-        assertDoesNotThrow(() -> new Storage(FALLBACK_DIR_NAME, null));
+        MainWindowStub uiStub = new MainWindowStub();
+        assertDoesNotThrow(() -> new Storage(FALLBACK_DIR_NAME, uiStub));
         Path dirCreated = Paths.get(System.getProperty("user.dir"), FALLBACK_DIR_NAME);
 
         if (!Files.isDirectory(dirCreated)) {

@@ -9,7 +9,7 @@ public enum TaskType {
     EVENT;
 
     /**
-     * Overrride implementation of toString that returns the lower case version.
+     * Override implementation of toString that returns the lower case version.
      *
      * @return Lower case string representation of enum.
      */

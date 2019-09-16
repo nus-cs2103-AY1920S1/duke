@@ -25,7 +25,7 @@ public abstract class TaskUtil {
     private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern(DISPLAY_FORMAT);
 
     /**
-     * Utility method for validating the input task description.
+     * Validates the input task description.
      *
      * @param description The input description string.
      * @throws DukeInvalidArgumentException If the description is empty.
@@ -41,7 +41,7 @@ public abstract class TaskUtil {
     }
 
     /**
-     * Method for parsing the input string using the dateFormatter.
+     * Parses the input string using the dateFormatter.
      * Returns the LocalDateTime representation of the string.
      *
      * @param dateString The input string.
@@ -60,7 +60,7 @@ public abstract class TaskUtil {
     }
 
     /**
-     * Method for parsing the input string using the timeFormatter.
+     * Parses the input string using the timeFormatter.
      * Returns the LocalTime representation of the string.
      *
      * @param timeString The input string.

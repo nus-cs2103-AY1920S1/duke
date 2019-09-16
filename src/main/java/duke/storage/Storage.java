@@ -101,7 +101,7 @@ public class Storage {
     }
 
     /**
-     * Private method to parse an input string of task data and store it into the task list.
+     * Parses an input string of task data and store it into the task list.
      * Also requires an input linenumber integer to print a more informative
      * storage file error message with a line number indication.
      *
@@ -130,7 +130,7 @@ public class Storage {
     }
 
     /**
-     * Private method to create the appropriate task type from given TaskType.
+     * Creates the appropriate task type from given TaskType.
      * Also sets the done status of the task accordingly.
      * Used in parseAndStoreTask method.
      *
@@ -217,7 +217,7 @@ public class Storage {
     }
 
     /**
-     * Private method to get the TaskType enum from a string.
+     * Retrieves the TaskType enum from a string.
      *
      * @param input The task type string.
      * @return The TaskType enum
@@ -235,7 +235,7 @@ public class Storage {
     }
 
     /**
-     * Private method to get the boolean done status from a string.
+     * Parses the boolean done status from a string.
      * Unlike Boolean.valueOf, only accepts 'true' or 'false' as valid arguments.
      *
      * @param status The status input string.
@@ -258,7 +258,7 @@ public class Storage {
     }
 
     /**
-     * Private method for validating the description of the task.
+     * Validates the description of the task.
      * See TaskUtil for more information on validation of the description.
      * Also returns the description again.
      *
@@ -279,9 +279,9 @@ public class Storage {
     }
 
     /**
-     * Private method called in the constructor of the storage instance.
+     * Sets the file path to be used for this storage instance.
      * Using the provided dirName, tries to search for an absolute directory path
-     * recursively upward up to the search limit.
+     * recursively upward up to the DIRECTORY_SEARCH_LIMIT.
      * If it is not found, the absolute directory path used is the present
      * working directory and the directory is created.
      * If directory creation fails, the user is alerted that the app cannot
@@ -292,15 +292,17 @@ public class Storage {
     private void setFilePath() {
         String workingDir = System.getProperty("user.dir");
         Path currentDir = Paths.get(workingDir);
-        int recursiveSearchCount = 1;
+        int searchCount = 1;
 
-        while (!Files.isDirectory(Paths.get(currentDir.toString(), dirName))
-                && recursiveSearchCount <= DIRECTORY_SEARCH_LIMIT) {
+        for (; searchCount <= DIRECTORY_SEARCH_LIMIT; searchCount++) {
+            if (currentDir == null
+                    || Files.isDirectory(Paths.get(currentDir.toString(), dirName))) {
+                break;
+            }
             currentDir = currentDir.getParent();
-            recursiveSearchCount++;
         }
 
-        if (recursiveSearchCount > 5) {
+        if (searchCount > DIRECTORY_SEARCH_LIMIT || currentDir == null) {
             //create directory in pwd since it dosen't exist
             createFileDirectory();
         } else {
@@ -311,6 +313,8 @@ public class Storage {
     /**
      * Creates a data directory in the working directory of the program.
      * Also sets the filePath associated with this storage instance.
+     * Shows the appropriate message if directory creation is successful
+     * or unsuccessful.
      */
     private void createFileDirectory() {
         String workingDir = System.getProperty("user.dir");
@@ -319,6 +323,11 @@ public class Storage {
         try {
             if (!Files.isDirectory(fallbackDirPath)) {
                 Files.createDirectory(fallbackDirPath);
+                ui.showMessage(" I didn't find a "
+                        + dirName
+                        + " directory upwards,\n"
+                        + " Since this is your first time running this app or the archive command,\n"
+                        + " I created a data directory for you!\n");
             }
         } catch (IOException ex) {
             printNoStorageMsg();
@@ -327,14 +336,16 @@ public class Storage {
     }
 
     /**
-     * Private method to display the no save-to-disk function message
+     * Displays the no save-to-disk function message
      * to the user.
      */
     private void printNoStorageMsg() {
         ui.showMessage(" =X  Oops! I failed to find a "
                 + dirName
                 + " directory upwards\n"
-                + "   and could not create one!");
+                + "   and could not create one in this directory!\n"
+                + " You may not have sufficient permission to modify the files in this directory!\n"
+                + "   Try moving the application to a different home folder!");
         ui.showMessage(
                 " You can still run the application, but note your data\n"
                     + "   will not be here the next time you restart the app!");

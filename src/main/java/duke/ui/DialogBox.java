@@ -58,7 +58,7 @@ class DialogBox extends AnchorPane {
     }
 
     /**
-     * Private method to set styles for a normal dialog box.
+     * Sets the styles for a normal dialog box.
      */
     private void setNormalDialogStyle() {
         dialog.setStyle(dialog.getStyle()
@@ -71,13 +71,13 @@ class DialogBox extends AnchorPane {
     }
 
     /**
-     * Private method to set styles for a flipped dialog box.
+     * Sets the styles for a flipped dialog box.
      */
     private void setFlippedDialogStyle() {
         AnchorPane.setLeftAnchor(displayPicture, WINDOW_IMAGE_SPACE);
         AnchorPane.setRightAnchor(displayPicture, null);
         AnchorPane.setTopAnchor(displayPicture,
-                displayPicture.getParent().getBoundsInLocal().getCenterY() / 2);
+                displayPicture.getParent().getBoundsInLocal().getHeight() / 2 - DIALOG_IMAGE_SPACE);
 
         dialog.setStyle(dialog.getStyle()
                 + "-fx-border-width: 0 0 0 2; -fx-border-color:#ddd6c7;");
@@ -92,7 +92,7 @@ class DialogBox extends AnchorPane {
     }
 
     /**
-     * Utility method for creating a dialog from the user.
+     * Creates a dialog box for the user.
      *
      * @param text String dialog message from the user.
      * @param image JavaFX image of user for the ImageView control.
@@ -103,7 +103,7 @@ class DialogBox extends AnchorPane {
     }
 
     /**
-     * Utility method for creating a dialog from duke.
+     * Creates a dialog box for duke.
      *
      * @param text String dialog message from duke.
      * @param image JavaFX image of duke for the ImageView control.

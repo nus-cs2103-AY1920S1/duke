@@ -8,7 +8,7 @@ import java.util.Arrays;
 public abstract class CommandParser {
 
     /**
-     * Method for parsing an input string an returning a command.
+     * Parses an input string and returns a command.
      *
      * @param commandString The input command string to parse.
      * @return The executable command.
@@ -68,7 +68,7 @@ public abstract class CommandParser {
     }
 
     /**
-     * Private utility method to get command type of input string array.
+     * Retrieves the command type of input string array.
      *
      * @param inputs Input string array to parse.
      * @return Commands enum command type.

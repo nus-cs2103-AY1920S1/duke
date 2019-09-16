@@ -31,7 +31,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Method retrieving task type specific status strings.
+     * Retrieves task type specific status strings.
      *
      * @return The task type specific status string.
      */
@@ -44,7 +44,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Private function for retrieving the formatted timing for display.
+     * Retrieves the formatted timing for display.
      *
      * @return The formatted timing string.
      */
@@ -55,7 +55,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Private function for validating and setting the event's time period.
+     * Validates and sets the event's time period.
      * Checks for the 'to' delimiter to denote the event's start and end date-times.
      * Also then validates the two string timings according to the formats defined
      * in TaskUtil, then sets the LocalDateTime instance properties.
@@ -85,7 +85,7 @@ public class EventTask extends Task {
     }
 
     /**
-     * Private function for setting the instance's dates.
+     * Sets the event task's start and end dates.
      * Takes a string array of size 2, the front element being the starting date,
      * and the second being the end date.
      * Calls TaskUtil's parsing functions to parse the arguments.

@@ -140,10 +140,12 @@ public class TasksController {
      */
     public void findTasks(String parameter) throws UiException {
         try {
+            String parameterInLowerCase = parameter.toLowerCase();
+
             List<Task> tasks = storage.getTasks();
 
             List<Task> matchingTasks = tasks.stream()
-                    .filter(task -> task.getDetails().contains(parameter))
+                    .filter(task -> task.getDetails().toLowerCase().contains(parameterInLowerCase))
                     .collect(Collectors.toList());
 
             view.displaySearchResults(matchingTasks, ui);

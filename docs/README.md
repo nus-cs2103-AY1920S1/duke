@@ -16,7 +16,6 @@ Expected outcome:
 
 `Got it. I've added this task:`\
 `[D][Not done] CS2100 assignment (by: 7/10/2019 2359)`\
-
 `Now you have 1 tasks in the list.`
 
 ### Deleting a task
@@ -46,8 +45,7 @@ Lists out all the tasks in the list
 Expected outcome:
 
 `Here are the tasks in your list:`\
-`1. [D][Not done] CS2100 assignment (by: 7/10/2019 2359)`\
-
+`1. [D][Not done] CS2100 assignment (by: 7/10/2019 2359)`
 
 ### Mark as done
 Marks a specified task as done based on its index

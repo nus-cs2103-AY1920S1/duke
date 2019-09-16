@@ -16,6 +16,10 @@ Creates a ToDo task and adds it to your task list.
 
 Example: `todo` `CS2103T Quiz`
 
+You should see that the task has been added to your list:
+
+![ToDo Image](https://github.com/bigjunnn/duke/blob/master/docs/ToDo.png)
+
 #### 2. Adding a 'Deadline' task
 
 Creates a deadline task and adds it to your task list.
@@ -24,9 +28,11 @@ Creates a deadline task and adds it to your task list.
 
 Example: `deadline` `iP` `[/by]` `[17/09/2019 1000]`
 
-Show lightbulb to inform of special format?
+You should see that the task has been added to your list:
 
-Show image?
+![Deadline Image](https://github.com/bigjunnn/duke/blob/master/docs/Deadline.png)
+
+Prompt for special format?
 
 #### 3. Adding an 'Event' task
 
@@ -36,9 +42,11 @@ Creates an event task and adds it to your task list.
 
 Example: `event` `concert` `[/at]` `[28/09/2019 2000]`
 
-Show lightbulb to inform of special format?
+You should see that the task has been added to your list:
 
-Show image?
+![Event Image](https://github.com/bigjunnn/duke/blob/master/docs/Event.png)
+
+Prompt for special format?
 
 #### 4. Listing tasks
 
@@ -48,7 +56,9 @@ List all current tasks.
 
 Example: `list`
 
-Show image?
+You should now see a list of your tasks:
+
+![List Image](https://github.com/bigjunnn/duke/blob/master/docs/List.png)
 
 #### 5. Finding tasks
 
@@ -58,9 +68,9 @@ Finds and returns you a list of tasks, based on your description.
 
 Example: `find` `concert`
 
-You should then see a list of tasks which contains the word "concert".
+You should then see a list of tasks which contains the word "concert":
 
-Show image?
+![Find Image](https://github.com/bigjunnn/duke/blob/master/docs/Find.png)
 
 #### 6. Mark as done
 
@@ -72,7 +82,7 @@ Example: `done` `2`
 
 This will set task number 2 in the list as done and you should see something like this: 
 
-Show image?
+![Done Image](https://github.com/bigjunnn/duke/blob/master/docs/Done.png)
 
 #### 6. Delete tasks
 
@@ -84,7 +94,7 @@ Example: `delete` `2`
 
 This will remove task number 2 in the list and you should see something like this:
 
-Show image?
+![Delete Image](https://github.com/bigjunnn/duke/blob/master/docs/Delete.png)
 
 #### 7. In-App Help
 
@@ -94,7 +104,9 @@ Allows you to view a summary of available commands in the app.
 
 Example: `help`
 
-Show image?
+You should now be able to view the available commands for the app:
+
+![Help Image](https://github.com/bigjunnn/duke/blob/master/docs/Help.png)
 
 
 

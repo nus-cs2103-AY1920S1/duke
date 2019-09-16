@@ -21,7 +21,7 @@ Expected outcome:
 ### Deleting a task
 Deletes a selected task in the list based on its index.
 
-#### Usage
+### Usage
 
 `delete TASK_INDEX`
 
@@ -38,7 +38,7 @@ Expected outcome:
 ### List
 Lists out all the tasks in the list
 
-#### Usage
+### Usage
 
 `list`
 
@@ -50,7 +50,7 @@ Expected outcome:
 ### Mark as done
 Marks a specified task as done based on its index
 
-#### Usage
+### Usage
 
 `done TASK_INDEX`
 
@@ -66,7 +66,7 @@ Expected outcome:
 ### Find task
 Lists out all the task that completely or partially match a given keyword.
 
-#### Usage
+### Usage
 
 `find KEYWORD`
 
@@ -82,7 +82,7 @@ Expected outcome:
 ### Undo task
 Undos the last modification carried out on the list.
 
-#### Usage
+### Usage
 
 `undo`
 

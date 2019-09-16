@@ -4,7 +4,7 @@ plugins {
     // shadow: to create JAR files
     id 'com.github.johnrengelman.shadow' version '5.1.0'
     // checkstyle
-    id 'checkstyle'
+//    id 'checkstyle'
     // JavaFX
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
@@ -41,9 +41,9 @@ shadowJar {
 }
 
 // checkstyle
-checkstyle {
-    toolVersion = '8.23'
-}
+//checkstyle {
+//    toolVersion = '8.23'
+//}
 
 // JavaFX
 javafx {

@@ -47,11 +47,10 @@ public class EventCommand implements Command {
 
             content = content.concat("Got it. I've added this task:\n");
             if (details != null) {
-                content = content.concat("[E][x] " + task.getDescription() + " (at: " + task.getDetails() + ")\n");
+                content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + " (at: " + task.getDetails() + ")\n");
             } else {
-                content = content.concat("[E][x] " + task.getDescription() + "\n");
+                content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + "\n");
             }
-            content = content.concat("[E][x] " + task.getDescription() + " (at: " + task.getDetails() + ")\n");
             content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
         }
         return content;

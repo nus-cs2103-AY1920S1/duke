@@ -19,6 +19,6 @@ public class todo extends Task {
 
     @Override
     public String getTime() {
-        return null;
+        return getDescription();
     }
 }

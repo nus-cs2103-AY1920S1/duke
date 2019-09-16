@@ -36,7 +36,7 @@ public class TodoCommand implements Command {
             tasks.add(task);
 
             content = content.concat("Got it. I've added this task:\n");
-            content = content.concat("[T][x] " + task.getDescription() + '\n');
+            content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + '\n');
             content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
         }
         return content;

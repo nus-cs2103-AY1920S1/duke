@@ -40,14 +40,18 @@ public class FindCommand implements Command {
                 }
             }
             for (i = 0; i < indexes.size(); i++) {
-                content = content.concat((i + 1) + ". ");
+                content = content.concat((indexes.get(i) + 1) + ". ");
                 content = content.concat("[" + tasks.get(indexes.get(i)).getSymbol() + "]");
                 content = content.concat("[" + tasks.get(indexes.get(i)).getIsDoneSymbol() + "]");
                 content = content.concat(" " + tasks.get(indexes.get(i)).getDescription());
                 if (tasks.get(indexes.get(i)).getSymbol() == 'D') {
-                    content = content.concat(" (by: " + tasks.get(indexes.get(i)).getDetails() + ")");
+                    if (tasks.get(indexes.get(i)).getDetails() != null) {
+                        content = content.concat(" (by: " + tasks.get(indexes.get(i)).getTime() + ")");
+                    }
                 } else if (tasks.get(indexes.get(i)).getSymbol() == 'E') {
-                    content = content.concat(" (at: " + tasks.get(indexes.get(i)).getDetails() + ")");
+                    if (tasks.get(indexes.get(i)).getDetails() != null) {
+                        content = content.concat(" (at: " + tasks.get(indexes.get(i)).getDetails() + ")");
+                    }
                 }
                 content = content.concat("\n");
             }

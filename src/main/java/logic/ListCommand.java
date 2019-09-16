@@ -25,6 +25,9 @@ public class ListCommand implements Command {
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         int i;
         String content = "";
+        if(tasks.size() == 0){
+            content = content.concat("There are currently no tasks!");
+        }
 
         for (i = 0; i < tasks.size(); i++) {
             content = content.concat((i + 1) + ". ");

@@ -49,9 +49,9 @@ public class DeadlineCommand implements Command {
 
             content = content.concat("Got it. I've added this task:\n");
             if (details != null) {
-                content = content.concat("[D][x] " + task.getDescription() + " (by: " + task.getTime() + ")\n");
+                content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + " (by: " + task.getTime() + ")\n");
             } else {
-                content = content.concat("[D][x] " + task.getDescription() + "\n");
+                content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + "\n");
             }
             content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
         }

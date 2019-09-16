@@ -27,7 +27,7 @@ public class event extends Task {
 
     @Override
     public String getTime() {
-        return null;
+        return getDetails();
     }
 
 

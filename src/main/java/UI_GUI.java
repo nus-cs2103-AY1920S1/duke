@@ -66,9 +66,9 @@ public class UI_GUI extends Application implements UI {
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(800.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(785, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -78,7 +78,7 @@ public class UI_GUI extends Application implements UI {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(725.0);
 
         sendButton.setPrefWidth(55.0);
 

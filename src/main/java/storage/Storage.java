@@ -15,7 +15,7 @@ import java.util.StringJoiner;
 
 public class Storage {
     private final Path filePath;
-    private final String DELIMITER = "/";
+    private final String DELIMITER = "//";
 
     /**
      * Creates an instance of Storage to save and load data into the filepath

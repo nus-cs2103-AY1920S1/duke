@@ -49,13 +49,13 @@ public class DeadlineCommand implements Command {
                 deadline task = new deadline(description, details);
                 tasks.add(task);
 
-                content = content.concat("Got it. I've added this task:\n");
+                content += "Got it. I've added this task:\n";
                 if (details != null) {
-                    content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + " (by: " + task.getTime() + ")\n");
+                    content += "[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + " (by: " + task.getTime() + ")\n";
                 } else {
-                    content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + "\n");
+                    content += "[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + "\n";
                 }
-                content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
+                content += "Now you have " + tasks.size() + " tasks in this list\n";
             }
         } catch (Exception E){
             content = "Ohno something went wrong! :(\n";

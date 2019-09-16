@@ -37,9 +37,9 @@ public class TodoCommand implements Command {
                 Task task = new todo(arguments.trim());
                 tasks.add(task);
 
-                content = content.concat("Got it. I've added this task:\n");
-                content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + '\n');
-                content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
+                content += "Got it. I've added this task:\n";
+                content += "[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + '\n';
+                content += "Now you have " + tasks.size() + " tasks in this list\n";
             }
         } catch (Exception E) {
             content = "Ohno something went wrong! :(\n";

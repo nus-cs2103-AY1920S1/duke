@@ -41,24 +41,24 @@ public class FindCommand implements Command {
             }
 
             if(indexes.size() == 0){
-                content = content.concat("There are no Tasks that fits your description\n");
+                content += "There are no Tasks that fits your description\n";
             }
 
             for (i = 0; i < indexes.size(); i++) {
-                content = content.concat((indexes.get(i) + 1) + ". ");
-                content = content.concat("[" + tasks.get(indexes.get(i)).getSymbol() + "]");
-                content = content.concat("[" + tasks.get(indexes.get(i)).getIsDoneSymbol() + "]");
-                content = content.concat(" " + tasks.get(indexes.get(i)).getDescription());
+                content += (indexes.get(i) + 1) + ". ";
+                content += "[" + tasks.get(indexes.get(i)).getSymbol() + "]";
+                content += "[" + tasks.get(indexes.get(i)).getIsDoneSymbol() + "]";
+                content += " " + tasks.get(indexes.get(i)).getDescription();
                 if (tasks.get(indexes.get(i)).getSymbol() == 'D') {
                     if (tasks.get(indexes.get(i)).getDetails() != null) {
-                        content = content.concat(" (by: " + tasks.get(indexes.get(i)).getTime() + ")");
+                        content += " (by: " + tasks.get(indexes.get(i)).getTime() + ")";
                     }
                 } else if (tasks.get(indexes.get(i)).getSymbol() == 'E') {
                     if (tasks.get(indexes.get(i)).getDetails() != null) {
-                        content = content.concat(" (at: " + tasks.get(indexes.get(i)).getDetails() + ")");
+                        content += " (at: " + tasks.get(indexes.get(i)).getDetails() + ")";
                     }
                 }
-                content = content.concat("\n");
+                content += "\n";
             }
         }
         return content;

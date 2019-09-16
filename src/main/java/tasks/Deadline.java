@@ -17,7 +17,7 @@ public class Deadline extends Task {
     }
     
     @Override
-    public String getStorageString(){
+    public String getStorageString() {
         return "D | " + super.isDone + " | " + this.taskName + " | " + by.toString();
     }
 }

@@ -5,31 +5,31 @@ public class Task {
     protected boolean isDone;
 
     //make the Task
-    public Task(String taskName){
+    public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
     }
 
     //mark the task as done
-    public void markAsDone(){
+    public void markAsDone() {
         this.isDone = true;
     }
 
     //returns the tick or cross
-    public String getStatusIcon(){
-        return "[" + (isDone ? "\u2713" : "\u2718") + "]";
+    public String getStatusIcon() {
+        return "[" + (isDone ? "✔" : "✘") + "]";
     }
 
-    public String getTaskName(){
+    public String getTaskName() {
         return this.taskName;
     }
     
     @Override 
-    public String toString(){
+    public String toString() {
         return getStatusIcon() + " " + this.taskName;
     }
     
-    public String getStorageString(){
+    public String getStorageString() {
         return "";
     }
 }

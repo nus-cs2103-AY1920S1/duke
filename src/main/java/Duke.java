@@ -4,7 +4,8 @@ import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
 import utils.Parser;
-import exceptions.DukeException;;
+
+import exceptions.DukeException;
 
 /**
  * this class is the main class of the application, it initializes the main components 
@@ -15,24 +16,29 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    
+    /**
+     * initialises the application with references to all main components.
+     * @param filepath computer relative / absolute path to txt file
+     */
 
-    public Duke(String filepath){
+    public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
         tasks = new TaskList(storage.load(), ui);
     }
     
     /**
-     * runs every command-line command through the parser method 
+     * runs every command-line command through the parser method.
      */
     
-    public void run(){
+    public void run() {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(tasks, ui, storage);
-        while (sc.hasNextLine()){
-            try{
+        while (sc.hasNextLine()) {
+            try {
                 parser.parse(sc.nextLine());
-            }catch(DukeException e){
+            } catch (DukeException e) {
                 ui.print(e.getMessage());
             }
         }

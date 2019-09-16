@@ -17,7 +17,7 @@ public class Event extends Task {
     }
     
     @Override
-    public String getStorageString(){
+    public String getStorageString() {
         return "E | " + super.isDone + " | " + this.taskName + " | " + at.toString();
     }
 }

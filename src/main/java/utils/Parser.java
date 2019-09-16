@@ -8,21 +8,25 @@ public class Parser {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    /**
+     * Parser class takes care of strings from single line commands.
+     * adds relevant tasks into the tasklist
+     */
 
-    public Parser(TaskList tasks, Ui ui, Storage storage){
+    public Parser(TaskList tasks, Ui ui, Storage storage) {
         this.tasks = tasks;
         this.ui = ui;
         this.storage = storage;
     }
     /**
-     * 
-     * @param str
-     * @throws DukeException
-     * takes user input and makes corresponding task object to be put inside tasklist 
-     * error handling done through DukeException
+     * takes user input and makes corresponding task object to be put inside tasklist.
+     * error handling done through DukeException.
+     * @param str single line from user input
+     * @throws DukeException error handling
      */
-    public void parse(String str) throws DukeException{
-        try{
+
+    public void parse(String str) throws DukeException {
+        try {
             String[] splited = str.split(" ");
             String check = splited[0].toLowerCase();
             
@@ -31,55 +35,55 @@ public class Parser {
                 storage.saveFile(tasks);
                 System.exit(0);
 
-            }else if(check.equals("list")){
+            } else if (check.equals("list")) {
                 ui.print(tasks.toString());
             
-            }else if(check.equals("done")){
-                int taskNum = Integer.parseInt(splited[1]) -1;
+            } else if (check.equals("done")) {
+                int taskNum = Integer.parseInt(splited[1]) - 1;
                 tasks.markAsDone(taskNum);
 
-            }else if(check.equals("delete")){
+            } else if (check.equals("delete")) {
                 int taskNum = Integer.parseInt(splited[1]) - 1;
                 tasks.delete(taskNum);
 
-            }else if(check.equals("todo")){
+            } else if (check.equals("todo")) {
                 String description = str.replaceFirst("todo", "").trim();
                 
-                if(description.equals("")){ //error handling
+                if (description.equals("")) { //error handling
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                 
-                }else{ //successful addition 
+                } else { //successful addition 
                     tasks.addTodo(description);
-                    Task current = tasks.get(tasks.size()-1);
+                    Task current = tasks.get(tasks.size() - 1);
                     ui.printMsg(current, tasks.size());
 
                 }
-            }else if(check.equals("event")){
+            } else if (check.equals("event")) {
                 String [] splitDate = str.replaceFirst("event", "").split("/at");
-                if(splitDate.length < 2){
+                if (splitDate.length < 2) {
                     throw new DukeException("☹ OOPS!!! Events require both a description and a date /at");
-                }else{
+                } else {
                     //if it reaches here it is successful
                     tasks.addEvent(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
                 }
-            }else if(check.equals("deadline")){
+            } else if (check.equals("deadline")) {
                 String [] splitDate = str.replaceFirst("deadline", "").split("/by");
-                if(splitDate.length < 2){
+                if (splitDate.length < 2) {
                     throw new DukeException("☹ OOPS!!! Deadlines require both a description and a date by");
-                }else{
+                } else {
                     tasks.addDeadline(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
                 }
-            }else if(check.equals("find")){
+            } else if (check.equals("find")) {
                 String keyword = str.replaceFirst("find", "").trim();
                 tasks.find(keyword);
             
-            }else{ //error handling
+            } else { //error handling
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
     
-        }catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Input cannot be empty!");
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             throw new DukeException("☹ OOPS!!! I'm sorry,Please enter the date in the format dd-MM-yyyy HH:mm");
         }             
         

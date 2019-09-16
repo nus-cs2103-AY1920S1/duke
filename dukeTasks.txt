@@ -1,2 +1,2 @@
-T | 1 | fdsd
-D | 0 | finish book | 11st of February 2019, 6pm
+T | 0 | math homework
+D | 1 | submit cs2103 assignment | 11th of November, 2019, 6pm

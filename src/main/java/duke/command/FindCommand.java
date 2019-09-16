@@ -48,8 +48,9 @@ public class FindCommand extends Command {
             StringBuilder temp = new StringBuilder();
             for (Task tk : myList) {
                 i++;
-                temp.append(Ui.frontSpace).append(" ").append(i).append(". ")
-                        .append("[" + idxList.get(i - 1) + "]")
+                temp.append(Ui.frontSpace).append(" ")
+                        .append(i).append(". ").append("[")
+                        .append(idxList.get(i - 1)).append("]")
                         .append(tk).append("\n");
             }
             return Ui.frontSpace + " Here are the matching tasks in your list: \n" + temp;

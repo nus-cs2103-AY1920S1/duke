@@ -84,7 +84,7 @@ public class AddCommand extends Command {
                 if (timeDate1[0].trim().equals("")) {
                     throw new DukeException("No task name for event");
                 } else {
-                    throw new NoTimeAndDateException("specific date/time for event is wrong");
+                    throw new NoTimeAndDateException("date/time should be dd/MM/yyyy HHmm");
                 }
             }
         }
@@ -104,7 +104,7 @@ public class AddCommand extends Command {
             if (timeDate1[0].trim().equals("")) {
                 throw new DukeException("No task name for deadline");
             } else {
-                throw new NoTimeAndDateException("specific date/time for deadline is wrong");
+                throw new NoTimeAndDateException("date/time should be dd/MM/yyyy HHmm");
             }
         }
     }

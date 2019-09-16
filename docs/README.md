@@ -269,7 +269,7 @@ Good luck, and do your best!
 - Cheng Geng - _Developer of Duke_
 
 ## Built With
-- [Gradle!](https://gradle.org/): for dependency management
+- [Gradle](https://gradle.org/): for dependency management
 
 ## Acknowledgements
 - People on StackExchange who asked the same questions as me on 5 years ago

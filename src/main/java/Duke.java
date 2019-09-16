@@ -13,15 +13,10 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) throws IOException {
+    public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (IOException e) {
-//            ui.showLoadingError();
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.load());
     }
 
     public void run() {

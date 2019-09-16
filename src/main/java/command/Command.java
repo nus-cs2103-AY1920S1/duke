@@ -1,8 +1,10 @@
 package command;
 
 import task.TaskList;
+import util.DukeException;
 import util.Storage;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,7 +21,7 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void executeCommand(TaskList taskList, Storage storage);
+    public abstract void executeCommand(TaskList taskList, Storage storage) throws DukeException, IOException;
 
     public String convertDate(String date) {
         if (date.indexOf('/') > -1) {

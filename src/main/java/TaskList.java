@@ -1,6 +1,9 @@
+import javafx.scene.layout.Priority;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 /**
  * Handles operations to the task list and contains the task list.
@@ -11,6 +14,8 @@ public class TaskList {
      */
     private static final String ADD_TYPE_DEADLINE = "deadline";
     private static final String ADD_TYPE_EVENT = "event";
+
+    private PriorityQueue<Task> sortedList;
 
     /**
      * ArrayList for tracking Tasks on the list.
@@ -143,5 +148,24 @@ public class TaskList {
                 listString += '\n' + INDENT + ' ';
             }
         }
+    }
+
+    public void returnSortedTasks() {
+        sortedList = new PriorityQueue<Task>(new SortByEarliestDeadline());
+        for(int i = 0; i < list.size(); i++) {
+            sortedList.add(list.get(i));
+            System.out.println(list.get(i));
+        }
+    }
+
+    public String returnSortedTasksString() {
+        returnSortedTasks();
+        int counter = 1;
+        String tempListString = "" + INDENT + " ";
+        for (Task task : sortedList) {
+            tempListString += counter + ". " + task + '\n' + INDENT + " ";
+            counter++;
+        }
+        return tempListString;
     }
 }

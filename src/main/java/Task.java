@@ -68,7 +68,7 @@ public class Task {
      * @return Task details
      */
     public String getDescription() {
-        return description;
+        return description.strip();
     }
 
     /**
@@ -93,6 +93,10 @@ public class Task {
      */
     public String getDateTime() {
         return dateTime.format(formatter);
+    }
+
+    public LocalDateTime getDateTimeAsDateTime() {
+        return dateTime;
     }
 
     /**

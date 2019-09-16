@@ -4,6 +4,8 @@ import util.DateTime;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class to encapsulate start and end time of tasks.
@@ -53,6 +55,20 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
             // task is done between two times
             return String.format("from: %s to: %s", DateTime.getString(start), DateTime.getString(end));
         }
+    }
+
+    public List<LocalDateTime> getDateTimes() {
+        List<LocalDateTime> result = new ArrayList<>();
+
+        if (start != null) {
+            result.add(start);
+        }
+
+        if (end != null) {
+            result.add(end);
+        }
+
+        return result;
     }
 
     @Override

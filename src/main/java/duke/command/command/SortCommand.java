@@ -1,8 +1,8 @@
 package duke.command.command;
 
 import duke.command.Command;
-import duke.command.CommandType;
-import duke.command.UndoAction;
+import duke.command.entities.CommandType;
+import duke.command.entities.UndoAction;
 import duke.command.entities.TaskSorts;
 import duke.task.Task;
 import duke.task.TasksController;
@@ -13,7 +13,6 @@ import ui.UiController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 

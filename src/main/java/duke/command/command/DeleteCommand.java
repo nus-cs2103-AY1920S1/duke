@@ -1,8 +1,7 @@
 package duke.command.command;
 
 import duke.command.Command;
-import duke.command.CommandType;
-import duke.command.UndoAction;
+import duke.command.entities.UndoAction;
 import duke.task.Task;
 import duke.task.TasksController;
 import error.command.CommandCreationException;

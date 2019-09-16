@@ -1,14 +1,11 @@
 package duke.task;
 
-import duke.command.UndoAction;
 import duke.command.entities.TaskSorts;
 import error.storage.StorageException;
 import error.ui.UiException;
 import storage.Storage;
 import ui.UiController;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;

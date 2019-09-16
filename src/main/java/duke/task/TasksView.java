@@ -136,7 +136,7 @@ public class TasksView {
                 .indent()
                 .append(replaced.getDescription())
                 .newLine()
-                .append("with:")
+                .append("Your new task is:")
                 .newLine()
                 .indent()
                 .append(task.getDescription());

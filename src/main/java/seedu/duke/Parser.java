@@ -17,8 +17,8 @@ public class Parser {
      * Takes in a line and returns a Optional Task. The Optional task is empty if
      * the line is malformed.
      * 
-     * @param line
-     * @return an Optional<Task> object parsed from the input line
+     * @param line the line from text file to be parsed into task.
+     * @return an Optional Task object parsed from the input line
      */
     public static Optional<Task> parseLineToTask(String line) {
         String[] tokens = line.split("|");
@@ -46,6 +46,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Given a command string, return a command object.
+     * 
+     * @param fullCommand a String containing the full command
+     * @return Command a command object
+     * @throws DukeException if any error occurs parsing the command
+     */
     public static Command parse(String fullCommand) throws DukeException {
         try {
             String[] commandTokens = fullCommand.split(" ", 2);

@@ -39,6 +39,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current tasklist into a text file.
+     * 
+     * @param tasks TaskList to be saved
+     * @throws IOException if the file is not found
+     */
     public void store(TaskList tasks) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
         bw.write(tasks.getSaveString());

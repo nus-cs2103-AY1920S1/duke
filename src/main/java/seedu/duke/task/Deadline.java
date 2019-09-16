@@ -11,10 +11,11 @@ public class Deadline extends Task {
     /**
      * Creates a deadline object.
      * 
-     * @param done
-     * @param description
-     * @param by
-     * @throws DateTimeParseException
+     * @param done        a boolean denoting the status of the task
+     * @param description a string describing the deadline
+     * @param by          a string following "dd/mm/yyyy hh:mm" denoting the
+     *                    deadline
+     * @throws DateTimeParseException if the format is not as above
      */
     public Deadline(boolean done, String description, String by) throws DateTimeParseException {
         super(description);
@@ -25,9 +26,10 @@ public class Deadline extends Task {
     /**
      * Creates a deadline object.
      * 
-     * @param description
-     * @param by
-     * @throws DateTimeParseException
+     * @param description a string describing the deadline
+     * @param by          a string following "dd/mm/yyyy hh:mm" denoting the
+     *                    deadline
+     * @throws DateTimeParseException if the format is not as above
      */
     public Deadline(String description, String by) throws DateTimeParseException {
         this(false, description, by);

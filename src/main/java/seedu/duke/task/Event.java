@@ -7,6 +7,15 @@ public class Event extends Task {
 
     protected LocalDateTime at;
 
+    /**
+     * Creates an Event object with status, description, and time.
+     * 
+     * @param done        a boolean denoting the state of the object
+     * @param description a String describing the event
+     * @param at          a string following "dd/mm/yyyy hh:mm" denoting the event
+     *                    time
+     * @throws DateTimeParseException if the time format is not as above
+     */
     public Event(boolean done, String description, String at) throws DateTimeParseException {
         super(description);
         this.at = parseTime(at.trim());

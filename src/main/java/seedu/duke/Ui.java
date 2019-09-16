@@ -9,20 +9,31 @@ public class Ui {
     // pass to the parser
     // get info from parser
     // show to the user
-    private String LINE = "-------------------------";
-    private String LOGO = " ____ _ \n" + "| _ \\ _ _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
+    private static final String LINE = "-------------------------";
+    private static final String LOGO = " ____ _ \n" + "| _ \\ _ _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| | < __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    private String LOADING_ERROR_MESSAGE = "Sorry, we encountered error loading your data. You will be using Duke fresh.";
+    private static final String LOADING_ERROR_MESSAGE = "Sorry, we encountered error loading your data."
+            + "You will be using Duke fresh.";
     private Scanner sc;
 
+    /**
+     * Creates a Ui object with a scanner.
+     *
+     * @param sc Scanner for the Ui object
+     */
     public Ui(Scanner sc) {
         this.sc = sc;
     }
 
+    /**
+     * Reads a line of command from stdin.
+     * 
+     * @return the line of command read.
+     */
     public String readCommand() {
         System.out.printf(">>> ");
         String fullCommand = sc.nextLine();
-        return fullCommand;
+        return fullCommand.trim();
     }
 
     public void showWelcome() {

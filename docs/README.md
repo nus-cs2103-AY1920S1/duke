@@ -2,10 +2,10 @@
 
 
 ## Contents
-- ##### [What is duke?](#what-is-duke?)
-- ##### [Features](#features)
-- ##### [Command Usage](#command-usage)
-- ##### [Advanced Usage](#advanced-usage)
+- ##### [What is duke?](#what-is-duke?-1)
+- ##### [Features](#features-1)
+- ##### [Command Usage](#command-usage-1)
+- ##### [Advanced Usage](#advanced-usage-1)
 
 ## What is Duke?
 Duke is an [Graphical User Interface](https://en.wikipedia.org/wiki/Graphical_user_interface) (GUI) application that focuses on helping the user manage his tasks.
@@ -19,32 +19,32 @@ Duke is tailored for users who love to use command line input and type fast, as 
 ## Features 
 
 ### Add various types of tasks to the user task list
-- ##### Todos - tasks with a simple description
-- ##### Deadlines - tasks with a description and deadline timing
-- ##### Events - tasks with a description and a start and end timing
+- Todos - tasks with a simple description
+- Deadlines - tasks with a description and deadline timing
+- Events - tasks with a description and a start and end timing
 
 ### See all current tasks in the user task list
-- ##### The user can view his current task list with a simple command
-- ##### The data is presented in a simple list format, and shows the relavant details of the task ( description, timings, whether it is done )
+- The user can view his current task list with a simple command
+- The data is presented in a simple list format, and shows the relavant details of the task ( description, timings, whether it is done )
 
 ### Mark tasks in the task list as done
-- ##### Tasks can be marked as done with a simple command
+- Tasks can be marked as done with a simple command
 
 ### Delete tasks from the task list
-- ##### Tasks can be entirely removed from the user task list if the list is getting cluttered
+- Tasks can be entirely removed from the user task list if the list is getting cluttered
 
 ### Find and filter tasks quickly
-- ##### The task list can be filtered quickly by a search term
+- The task list can be filtered quickly by a search term
 
 ### Task list is preserved across application exits
-- ##### The task list is saved whenever the task list is changed
-- ##### The task list is read on application startup from the disk
+- The task list is saved whenever the task list is changed
+- The task list is read on application startup from the disk
 
 ### Easily editable task storage file
-- ##### By using a easily readable json file format, Duke allows easy user editing of the storage task file on disk
+- By using a easily readable json file format, Duke allows easy user editing of the storage task file on disk
 
 ### Save task list to disk and start afresh
-- ##### The task list can be archived and saved to a seperate disk file, preserving data while allowing the user to start from an empty list
+- The task list can be archived and saved to a seperate disk file, preserving data while allowing the user to start from an empty list
 
 ## Command Usage
 

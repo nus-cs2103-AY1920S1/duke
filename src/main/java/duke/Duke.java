@@ -37,7 +37,11 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    /*
+
+    public Duke() {
+        this("data/tasks.txt");
+    }
+
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -49,53 +53,49 @@ public class Duke extends Application {
         }
     }
 
-    public void run() {
-        ui.showWelcome();
-        while (true) {
-            Parser p = new Parser(ui.readNextLine());
+    public String run(String input) {
+            ui.showWelcome(); //can take this out and put it at the start of the initial programme
+            Parser p = new Parser(input);
             p.parse();
             String command = p.getCommand();
             String taskDetails = p.getTaskDetails();
             if (command.equals("bye")) {
-                ui.showBye();
-                break;
+                return ui.showBye();
             } else if (command.equals("list")) {
                 ui.showLine();
                 if (tasks.getListOfTasks().isEmpty()) {
-                    System.out.println("Sorry, there are no tasks in the list");
+                    return "Sorry, there are no tasks in the list";
                 } else {
-                    System.out.println("     Here are the tasks in your list:");
-                    tasks.printList();
-                    ui.showLine();
-                    ui.separationline();
+                    return "     Here are the tasks in your list:\n" + tasks.printList() + ui.showLine()
+                            + ui.separationline();
                 }
             } else if (command.equals("done")) {
                 int number = Integer.parseInt(taskDetails);
                 Task temp = tasks.getTask(number - 1);
                 tasks.setTaskAsDone(number - 1);
-                ui.showDone(temp);
                 storage.write(tasks.getListOfTasks());
+                return ui.showDone(temp);
             } else if (command.equals("delete")) {
                 int number = Integer.parseInt(taskDetails);
                 Task temp = tasks.getTask(number - 1);
                 tasks.deleteTask(number - 1);
                 int size = tasks.getListOfTasks().size();
-                ui.showDelete(temp, size);
                 storage.write(tasks.getListOfTasks());
+                return ui.showDelete(temp, size);
             } else if(command.equals("find")) {
                 String keyword = taskDetails;
-                ui.showMatchingTasks(tasks.find(keyword));
+                return ui.showMatchingTasks(tasks.find(keyword));
             }
             else {  //all other commands
                 try {
                     if (command.equals("todo")) {
                         if (taskDetails.equals("")) { //will it be such that String[].get(1) will be zero i.e. error?
-                            throw new DukeException("      â˜¹ OOPS!!! The description of a todo cannot be empty.");
+                            throw new DukeException("      :( OOPS!!! The description of a todo cannot be empty.");
                         }
                         tasks.addTask(new Todo(taskDetails));
                     } else if (command.equals("deadline") || command.equals("event")) {
                         if(taskDetails.equals("")) {
-                            throw new DukeException("      â˜¹ OOPS!!! The description of a " +
+                            throw new DukeException("      :( OOPS!!! The description of a " +
                                     command + " cannot be empty.");
                         }
                         //replace the first / so that the dates will not be split up
@@ -112,30 +112,19 @@ public class Duke extends Application {
                         throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
                     }
                 } catch (DukeException de) {
-                    ui.showLine();
-                    System.err.println(de.getMessage());
-                    ui.showLine();
-                    ui.separationline();
-                    continue;  //to prevent printing of below mentioned lines
+                    return ui.showLine() + de.getMessage() + ui.showLine() + ui.separationline();
+                    //to prevent printing of below mentioned lines
                 } catch (ArrayIndexOutOfBoundsException ae) {
-                    ui.showLine();
-                    System.err.println("      â˜¹ OOPS!!! You need to specify the " + command +
-                            " time through a /by (deadline) and /at (event)");
-                    ui.showLine();
-                    ui.separationline();
-                    continue;
+                    return ui.showLine() + "      :( OOPS!!! You need to specify the " + command +
+                            " time through a /by (deadline) and /at (event)\n" + ui.showLine() + ui.separationline();
                 }
                 Task temp = tasks.getTask(tasks.getListOfTasks().size() - 1);
                 int size = tasks.getListOfTasks().size();
-                ui.showAdd(temp, size);
                 storage.write(tasks.getListOfTasks());
+                return ui.showAdd(temp, size);
             }
-        }
     }
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-    */
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -232,7 +221,8 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        //pass the string input to duke, duke should then run this and return a string that can be passed into the label.
+        return this.run(input);
     }
 }
 

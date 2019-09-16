@@ -40,19 +40,24 @@ public class TaskList {
      * @param number Specified index of task in task list.
      */
     public void deleteTask(int number) {
-        Task temp = listOfTasks.get(number - 1);
-        listOfTasks.remove(number - 1);
+        listOfTasks.remove(number);
     }
 
     /**
      * prints out the tasks in the stored task list.
      */
-    public void printList() {
+    public String printList() {
+        StringBuilder temp = new StringBuilder();
         int counter = 1;
         for (Task task : this.listOfTasks) {
-            System.out.println("     " + counter + "." + task);
+            temp.append("     ");
+            temp.append(counter);
+            temp.append(".");
+            temp.append(task);
+            temp.append("\n");
             counter++;
         }
+        return temp.toString();
     }
 
     /**

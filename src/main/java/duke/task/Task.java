@@ -57,9 +57,9 @@ public class Task {
     public String toString() {
         StringBuilder temp = new StringBuilder();
         if (this.isDone()) {
-            temp.append("[✓] ");
+            temp.append("[done] ");
         } else {
-            temp.append("[✗] ");
+            temp.append("[undone] ");
         }
         temp.append(this.description);
         return temp.toString();

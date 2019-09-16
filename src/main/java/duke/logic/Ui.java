@@ -42,41 +42,43 @@ public class Ui {
     /**
      * Prints a horizontal line in compliance with the user interface.
      */
-    public void showLine() {
+    public String showLine() {
         StringBuilder lineBuilder = new StringBuilder("     ");
         for (int i = 0; i < 59; i++) {
             lineBuilder.append("_");
         }
-        System.out.println(lineBuilder.toString());
+        lineBuilder.append("\n");
+        return lineBuilder.toString();
     }
 
     /**
      * Prints a separation line in compliance with the user interface.
      */
-    public void separationline() {
-        System.out.println();
+    public String separationline() {
+        return "\n";
     }
 
     /**
      * Prints a farewell statement when user command prompts to terminate the programme.
      */
-    public void showBye() {
-        this.showLine();
-        System.out.println("     Bye. Hope to see you again soon!");
-        this.showLine();
+    public String showBye() {
+        return this.showLine() + "     Bye. Hope to see you again soon!\n" + this.showLine();
     }
 
     /**
      * Prints a welcome statement when programme starts.
      */
-    public void showWelcome() {
+    public String showWelcome() {
+        StringBuilder tempBuilder = new StringBuilder();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm duke.Duke\nWhat can I do for you?" );
+        tempBuilder.append("Hello from\n");
+        tempBuilder.append(logo);
+        tempBuilder.append("Hello! I'm Duke\nWhat can I do for you?\n");
+        return tempBuilder.toString();
     }
 
     /**
@@ -84,12 +86,9 @@ public class Ui {
      *
      * @param task task that has been set as done.
      */
-    public void showDone(Task task) {
-        this.showLine();
-        System.out.println("     Nice! I've marked this duke.task as done:");
-        System.out.println("       " + task);
-        this.showLine();
-        this.separationline();
+    public String showDone(Task task) {
+        return this.showLine() + "     Nice! I've marked this task as done:\n       " + task + "\n" +
+                this.showLine() + this.separationline();
     }
 
     /**
@@ -98,13 +97,9 @@ public class Ui {
      * @param task task that has been deleted.
      * @param size size of the ArrayList<Task> </Task>.
      */
-    public void showDelete(Task task, int size) {
-        this.showLine();
-        System.out.println("     Nice! I've removed this duke.task:");
-        System.out.println("       " + task);
-        System.out.println("      Now you have " + size + " tasks in the list.");
-        this.showLine();
-        this.separationline();
+    public String showDelete(Task task, int size) {
+        return this.showLine() + "     Nice! I've removed this task:\n       " + task + "\n" +
+                "      Now you have " + size + " tasks in the list.\n" + this.showLine() + this.separationline();
     }
 
     /**
@@ -112,24 +107,32 @@ public class Ui {
      * @param task task that has been added.
      * @param size size of the ArrayList<Task> </Task>.
      */
-    public void showAdd(Task task, int size) {
-        this.showLine();
-        System.out.println("      Got it. I've added this duke.task:");
-        System.out.println("       " + task);
-        System.out.println("      Now you have " + size + " tasks in the list.");
-        this.showLine();
-        this.separationline();
+    public String showAdd(Task task, int size) {
+        StringBuilder tempBuilder = new StringBuilder();
+        tempBuilder.append(this.showLine());
+        tempBuilder.append("      Got it. I've added this task:\n       ");
+        tempBuilder.append(task);
+        tempBuilder.append("\n      Now you have " + size + " tasks in the list.\n");
+        tempBuilder.append(this.showLine());
+        tempBuilder.append(this.separationline());
+        return tempBuilder.toString();
     }
-    public void showMatchingTasks(ArrayList<Task> listOfMatches) {
-        this.showLine();
-        System.out.println("      Here are the matching tasks in your list:");
+    public String showMatchingTasks(ArrayList<Task> listOfMatches) {
+        StringBuilder tempBuilder = new StringBuilder();
+        tempBuilder.append(this.showLine());
+        tempBuilder.append("      Here are the matching tasks in your list:\n");
         int counter = 1;
         for(Task task : listOfMatches) {
-            System.out.println("     " + counter + "." + task);
+            tempBuilder.append("     ");
+            tempBuilder.append(counter);
+            tempBuilder.append(".");
+            tempBuilder.append(task);
+            tempBuilder.append("\n");
             counter++;
         }
-        this.showLine();
-        this.separationline();
+        tempBuilder.append(this.showLine());
+        tempBuilder.append(this.separationline());
+        return tempBuilder.toString();
     }
 
 }

@@ -90,8 +90,9 @@ public class TaskList implements Serializable {
         for (Task t : tasks) {
             //For each Task t, print out one line of "X.[<Status>] Description", if it matches the search term
             if (t.descriptionContainsTerm(searchTerm)) {
-                sb.append(String.format("%d.%s\n", iterator++, t.toString()));
+                sb.append(String.format("%d.%s\n", iterator, t.toString()));
             }
+            iterator++;
         }
 
         //If there's no matches found, feedback to the user

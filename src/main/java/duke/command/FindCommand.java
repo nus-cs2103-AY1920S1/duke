@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.util.ListIterator;
+import java.util.stream.IntStream;
+
 import duke.component.DukeDatabase;
 import duke.component.TaskList;
 import duke.task.Task;
-
-import java.util.ListIterator;
-import java.util.stream.IntStream;
 
 /**
  * Encapsulates a command which finds a task in the tasks list of Duke based on a keyword.
@@ -60,7 +60,8 @@ public class FindCommand extends QueryCommand {
         IntStream.rangeClosed(1, size)
                 .forEach(i -> {
                     Task currTask = iterator.next();
-                    if (currTask.toString().contains(keyword)) {
+                    String description = currTask.toString().toLowerCase();
+                    if (description.contains(keyword.toLowerCase())) {
                         matchingList.addTask(currTask);
                     }
                 });

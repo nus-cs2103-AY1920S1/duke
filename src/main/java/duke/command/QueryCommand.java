@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.component.TaskList;
-import duke.task.Task;
-
 import java.util.ListIterator;
 import java.util.stream.IntStream;
+
+import duke.component.TaskList;
+import duke.task.Task;
 
 /**
  * A class which serves as the parent of classes which queries the tasks list of Duke.
@@ -32,7 +32,7 @@ public abstract class QueryCommand extends Command {
                     // Append the index of a task follows by its description.
                     builder.append(index + ". ");
                     builder.append(iterator.next().toString());
-                    builder.append("\n");
+                    builder.append("\n\n"); // Add a new line in between every task
                 });
 
         return builder.toString();

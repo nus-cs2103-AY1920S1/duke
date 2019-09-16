@@ -28,9 +28,7 @@ public class CommandGenerator {
     public AddCommand getAddCommandForToDo(String input) throws DukeException {
         String topic = input.substring(4).trim();
 
-        boolean isInvalidInput = "".equals(topic);
-
-        if (isInvalidInput) {
+        if (topic.isEmpty()) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
 
@@ -95,8 +93,12 @@ public class CommandGenerator {
      * @param input user's input from the UI which consists of the keyword used to find tasks that contains the keyword.
      * @return a FindCommand which finds a task based on keyword.
      */
-    public FindCommand getFindCommand(String input) {
+    public FindCommand getFindCommand(String input) throws DukeException {
         String keyword = input.substring(4).trim();
+
+        if (keyword.isEmpty()) {
+            throw new DukeException("Keyword cannot be empty!");
+        }
 
         return new FindCommand(keyword);
     }

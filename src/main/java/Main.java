@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import duke.Duke;
 import duke.ui.controllers.MainWindow;
 import javafx.application.Application;
@@ -5,8 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * A GUI for Duke using FXML.
@@ -22,6 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke); // To attach duke to the MainWindow
             stage.show();
         } catch (IOException e) {

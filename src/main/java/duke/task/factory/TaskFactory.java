@@ -55,6 +55,21 @@ public class TaskFactory {
         List<Object> argsList = getArguments(input, numDates);
 
         // for now tasks are always not done and not recurring when created
+        return Optional.of(getTask(constructor, parameters, argsList));
+    }
+
+    public Task buidTask(TaskType type, String details, List<LocalDateTime> dateTimes) throws TaskCreationException {
+        Constructor<?> constructor = type.task.getConstructors()[0];
+        Class<?>[] parameters = constructor.getParameterTypes();
+
+
+        List<Object> argsList = new ArrayList<>(dateTimes);
+        argsList.add(details);
+        return getTask(constructor, parameters, argsList);
+    }
+
+    private Task getTask(Constructor<?> constructor, Class<?>[] parameters, List<Object> argsList) throws TaskCreationException {
+        // for now, all new tasks are not done and not recurring
         argsList.add(false);
         argsList.add(false);
 
@@ -63,8 +78,7 @@ public class TaskFactory {
             Object[] argsArray = reorderArgsList(parameters, argsList);
 
             // try to instantiate task with arguments
-            Task result = (Task) constructor.newInstance(argsArray);
-            return Optional.of(result);
+            return (Task) constructor.newInstance(argsArray);
 
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             throw new TaskCreationException(UNKNOWN_ERROR_MESSAGE);
@@ -80,7 +94,7 @@ public class TaskFactory {
      */
     private List<Object> getArguments(String input, int numDates) throws TaskCreationException {
         // gets arguments
-        TaskArguments arguments = CommandUtils.getTaskArguments(input);
+        TaskArguments arguments = CommandUtils.getTaskArgumentsFromInput(input);
 
         List<Object> argsList = new ArrayList<>();
 

@@ -1,8 +1,8 @@
 package util.command;
 
 import duke.command.Command;
-import duke.command.CommandProducer;
-import duke.command.CommandType;
+import duke.command.entities.CommandProducer;
+import duke.command.entities.CommandType;
 import duke.task.TasksController;
 import error.command.CommandCreationException;
 import ui.UiController;
@@ -43,13 +43,17 @@ public class CommandUtils {
      * @param userInput user input
      * @return arguments
      */
-    public static TaskArguments getTaskArguments(String userInput) {
+    public static TaskArguments getTaskArgumentsFromInput(String userInput) {
         String[] splitInput = userInput.split(" ", 2);
         if (splitInput.length > 1) {
             return new TaskArguments(splitInput[1]);
         } else {
             return new TaskArguments("");
         }
+    }
+
+    public static TaskArguments parseAsTaskArguments(String arguments) {
+        return new TaskArguments(arguments);
     }
 
     /**

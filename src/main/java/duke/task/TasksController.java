@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.command.UndoAction;
 import duke.command.entities.TaskSorts;
 import error.storage.StorageException;
 import error.ui.UiException;
@@ -8,7 +7,6 @@ import storage.Storage;
 import ui.UiController;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -17,7 +15,7 @@ import java.util.stream.Collectors;
 
 /**
  * Controller class that operates on user's task data.
- * */
+ */
 public class TasksController {
     private Storage storage;
     private TasksView view;
@@ -225,6 +223,34 @@ public class TasksController {
             storage.writeTasks(tasks);
         } catch (StorageException e) {
             ui.displayOutput(e.getMessage());
+        }
+    }
+
+    public Optional<Task> replaceTask(Task task, int index) throws UiException {
+        try {
+            List<Task> tasks = storage.getTasks();
+
+            Task replaced = tasks.remove(index);
+            tasks.add(index, task);
+            view.displayTaskReplaced(replaced, task, ui);
+
+            assert !tasks.contains(replaced);
+            assert tasks.contains(task);
+
+            storage.writeTasks(tasks);
+
+            return Optional.of(replaced);
+
+        } catch (StorageException e) {
+
+            ui.displayOutput(e.getMessage());
+            return Optional.empty();
+
+        } catch (IndexOutOfBoundsException e) {
+            String message = " ☹ OOPS!!! You have entered an invalid index :-(";
+
+            ui.displayOutput(message);
+            return Optional.empty();
         }
     }
 

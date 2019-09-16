@@ -1,4 +1,4 @@
-package duke.command;
+package duke.command.entities;
 
 import error.ui.UiException;
 

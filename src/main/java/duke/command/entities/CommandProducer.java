@@ -1,5 +1,6 @@
-package duke.command;
+package duke.command.entities;
 
+import duke.command.Command;
 import duke.task.TasksController;
 import error.command.CommandCreationException;
 import ui.UiController;

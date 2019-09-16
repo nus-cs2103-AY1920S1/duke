@@ -34,9 +34,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
-[T][✘] reading
-Now you have 1 task(s) in the list.`
+`Got it. I've added this task:`<br/>
+`[T][✘] reading`<br/>
+`Now you have 1 task(s) in the list.`
 
 ### `deadline [description] /by [dd/MM/yyyy HHmm]`
 
@@ -48,9 +48,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
-[D][✘] essay submission (by 10th September 2019, 11:59 pm)
-Now you have 2 task(s) in the list.`
+`Got it. I've added this task:`<br/>
+`[D][✘] essay submission (by 10th September 2019, 11:59 pm)`<br/>
+`Now you have 2 task(s) in the list.`
 
 ### `event [description] /at [dd/MM/yyyy HHmm]`
 
@@ -62,9 +62,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
-[E][✘] essay submission (at 11th September 2019, 04:00 pm)
-Now you have 3 task(s) in the list.`
+`Got it. I've added this task:`<br/>
+`[E][✘] essay submission (at 11th September 2019, 04:00 pm)`<br/>
+`Now you have 3 task(s) in the list.`
 
 ### `delete [index]`
 
@@ -76,9 +76,9 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:
-[D][✘] essay submission (by 10th September 2019, 11:59 pm)
-"Now you have 2 task(s) in the list`
+`Noted. I've removed this task:`<br/>
+`[D][✘] essay submission (by 10th September 2019, 11:59 pm)`<br/>
+`Now you have 2 task(s) in the list`
 
 ### `done [index]`
 
@@ -90,8 +90,8 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:
-[E][✓] group meeting (at 11th September 2019, 04:00 pm)`
+`Nice! I've marked this task as done:`<br/>
+`[E][✓] group meeting (at 11th September 2019, 04:00 pm)`
 
 ### `list`
 
@@ -103,9 +103,9 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:
-1. [T][✘] reading
-2. [E][✓] group meeting (at 11th September 2019, 04:00 pm)`
+`Here are the tasks in your list:`<br/>
+`1. [T][✘] reading`<br/>
+`2. [E][✓] group meeting (at 11th September 2019, 04:00 pm)`
 
 ### `find [keyword]`
 
@@ -117,8 +117,8 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:
-2. [E][✓] group meeting (at 11th September 2019, 04:00 pm)`
+`Here are the matching tasks in your list:`<br/>
+`2. [E][✓] group meeting (at 11th September 2019, 04:00 pm)`
 
 ### `bye`
 

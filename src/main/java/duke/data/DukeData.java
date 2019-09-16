@@ -158,19 +158,24 @@ public class DukeData {
     }
 
     /**
-     * Prints out everything in the data file saved in the hard disk.
+     * Returns everything in the data file saved in the hard disk.
+     * @reutrn a String representation of the tasks present in the hard disk
      * @throws IOException if an I/O Exception occurs
      */
-    public void printDataFile() throws IOException {
+    public String showDataFile() throws IOException {
         BufferedReader out = new BufferedReader(
                 new FileReader(this._saveFile));
-
         String line = out.readLine();
+        StringBuilder dataOut = new StringBuilder();
+
         while (line != null)  {
-            System.out.println(line);
+            dataOut.append(System.getProperty("line.separator"));
+            dataOut.append(line);
             line = out.readLine();
         }
         out.close();
+
+        return dataOut.toString();
     }
 
     /**

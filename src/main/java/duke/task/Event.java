@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.data.DateTime;
-
 import java.text.ParseException;
 
 /**
@@ -31,7 +29,7 @@ public class Event extends Task {
      * @return a string representation of an Event object
      */
     public String toString() {
-        return String.format("[E][%s]%s(at: %s)",
+        return String.format("[E][%s] %s(at: %s)",
                 this.getStatusIcon(), this._description, this._date);
     }
 

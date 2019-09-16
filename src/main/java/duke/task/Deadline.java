@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.data.DateTime;
-
 import java.text.ParseException;
 
 /**
@@ -31,7 +29,7 @@ public class Deadline extends Task {
      * @return a string representation of a Deadline object.
      */
     public String toString() {
-        return String.format("[D][%s]%s(by: %s)",
+        return String.format("[D][%s] %s(by: %s)",
                     this.getStatusIcon(), this._description, this._date);
     }
 

@@ -1,20 +1,19 @@
 package duke;
 
-import duke.command.Parser;
+import duke.command.Command;
+import duke.command.DukeException;
 import duke.data.DukeData;
-import duke.task.Task;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 /**
  * <h1>Duke</h1>
@@ -24,6 +23,7 @@ import java.util.ArrayList;
  */
 public class Duke extends Application { // handles all input and output
     private DukeData _myData;
+    private Ui ui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -31,14 +31,12 @@ public class Duke extends Application { // handles all input and output
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
     /**
      * Creates a Duke program.
      */
     public Duke() {
         this._myData = new DukeData();
+        this.ui = new Ui();
     }
 
     /**
@@ -47,22 +45,31 @@ public class Duke extends Application { // handles all input and output
      */
     public Duke(String filePath) {
         this._myData = new DukeData(filePath);
+        this.ui = new Ui();
     }
 
     /**
      * This method runs the Duke program.
      */
-    public void run() {
-        Parser parseIt = new Parser(this);
-        parseIt.parse();
-    }
+    private void run() {
+        this.ui.showIntro();
 
-    /**
-     * This method allows for retrieval of the user's TaskList that has been entered into Duke.
-     * @return ArrayList of Task objects that contains the users' tasks
-     */
-    public ArrayList<Task> getTaskList() {
-        return this._myData.load().getList();
+        String userCommand;
+        while (this.ui.hasNextInput() &&
+                !(userCommand = this.ui.getCommand()).equals("bye")) {
+            String output;
+            try {
+                Command cmd = Parser.parse(userCommand);
+                assert cmd != null;
+                output = Ui.addLines(cmd.execute(this._myData, this.ui));
+                System.out.println(output);
+            } catch (IOException e) {
+                System.err.println(Ui.addLines(e.getMessage()));
+            } catch (DukeException e) {
+                System.err.println(Ui.addLines(e.getMessage()));
+            }
+        }
+        this.ui.showFarewell();
     }
 
     /**
@@ -161,7 +168,13 @@ public class Duke extends Application { // handles all input and output
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String input) {
+        try {
+            Command cmd = Parser.parse(input);
+            assert cmd != null;
+            return cmd.execute(this._myData, this.ui);
+        } catch (DukeException | IOException e) {
+            return Ui.addLines(e.getMessage());
+        }
     }
 }

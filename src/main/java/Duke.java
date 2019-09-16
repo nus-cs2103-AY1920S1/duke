@@ -1,7 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
@@ -142,29 +141,19 @@ public class Duke extends Application {
     }
 
     public void handleUserInput() throws IOException, ParseException {
-        Label userText = new Label(userInput.getText());
+        String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
-        String response = parser.readUserCommand(dukeText,ui,list,storage);
-        Label dukeResponse = new Label(response);
-        Label welcomeText = new Label(ui.greet());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeResponse, new ImageView(duke))
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
 
-    String getResponse(String input) {
-        return input;
+    String getResponse(String dukeText) throws IOException, ParseException {
+        return parser.readUserCommand(dukeText,ui,list,storage);
     }
 
 
-    public static void main(String[] args) throws IOException, ParseException {
-        Scanner scan = new Scanner(System.in);
-        String command = scan.nextLine();
-        Duke d = new Duke();
-        String output = d.parser.readUserCommand(command,d.ui,d.list,d.storage);
-        System.out.println(output);
-    }
 
 }

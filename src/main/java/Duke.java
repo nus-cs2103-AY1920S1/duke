@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -14,12 +15,18 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private String filePath = "data/tasks.txt";
+    private String filePath = System.getProperty("user.dir")+"/data/tasks.txt";
 
     /**
      * Constructor.
      */
     public Duke() {
+        try {
+            new File("data").mkdir();   // Create storage directory named "data"
+            new File("data/tasks.txt").createNewFile(); // Create storage text file named "tasks.txt"
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -33,8 +40,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        File file = new File("data");
-        file.mkdir();
         new Duke().run();
     }
 

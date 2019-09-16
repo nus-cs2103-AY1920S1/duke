@@ -86,11 +86,12 @@ public class DukeDate {
         if (year < 0) {
             throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_YEAR);
         }
-        this.year = year;
-        this.month = this.getMonth(month);
-        if (!dayIsValid(month, day)) {
+        if (isInvalid(month, day)) {
             throw new DukeDateFormatException(AutoResponse.ERROR_DAY_MONTH_MISMATCH);
         }
+
+        this.year = year;
+        this.month = this.getMonth(month);
         this.day = day;
         this.setTime(hour, minute);
     }
@@ -110,11 +111,12 @@ public class DukeDate {
         if (year < 0) {
             throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_YEAR);
         }
-        this.year = year;
-        this.month = month;
-        if (!dayIsValid(month.getMonthInt(), day)) {
+        if (isInvalid(month.getMonthInt(), day)) {
             throw new DukeDateFormatException(AutoResponse.ERROR_DAY_MONTH_MISMATCH);
         }
+
+        this.year = year;
+        this.month = month;
         this.day = day;
         this.setTime(hour, minute);
     }
@@ -165,13 +167,13 @@ public class DukeDate {
      * @return True if given month and day is valid, false otherwise.
      * @throws DukeDateFormatException When the given fields is invalid.
      */
-    private boolean dayIsValid(int month, int day) throws DukeDateFormatException {
+    private boolean isInvalid(int month, int day) throws DukeDateFormatException {
         if (day < 1) {
             throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_DAY);
         }
         switch (month) {
         case 2:
-            return day <= 29;
+            return day > 29;
         case 1:
         case 3:
         case 5:
@@ -179,12 +181,12 @@ public class DukeDate {
         case 8:
         case 10:
         case 12:
-            return day <= 31;
+            return day > 31;
         case 4:
         case 6:
         case 9:
         case 11:
-            return day <= 30;
+            return day > 30;
         default:
             throw new DukeDateFormatException(AutoResponse.ERROR_ILLEGAL_MONTH);
         }

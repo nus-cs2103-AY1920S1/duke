@@ -40,21 +40,19 @@ public class Duke {
 
     /**
      * Returns the result of executing a command.
+     *
+     * @return Response of Duke.
      */
     public String getResponse(String input) {
         String[] command = input.split(" ", 2);
         try {
-            Command c = Parser.parseToCommand(command[0], command[1]);
+            String description = "";
+            if (command.length == 2) {
+                description = command[1];
+            }
+            Command c = Parser.parseToCommand(command[0], description);
             this.isExit = c.isExit();
             return c.getResponse(this.taskList, this.commandStack, this.storage);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            try {
-                Command c = Parser.parseToCommand(command[0], "");
-                this.isExit = c.isExit();
-                return c.getResponse(this.taskList, this.commandStack, this.storage);
-            } catch (DukeException e2) {
-                return e2.getMessage();
-            }
         } catch (DukeException e1) {
             return e1.getMessage();
         }

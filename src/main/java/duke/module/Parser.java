@@ -84,15 +84,15 @@ public class Parser {
             switch (taskComponents[0]) {
             case "T":
                 return new TodoTask(taskComponents[2],
-                        taskComponents[1].equals("1"));
+                                    taskComponents[1].equals("1"));
             case "D":
                 return new DeadlineTask(taskComponents[2],
-                        taskComponents[1].equals("1"),
-                        parseToDukeDate(taskComponents[3]));
+                                        taskComponents[1].equals("1"),
+                                        parseToDukeDate(taskComponents[3]));
             case "E":
                 return new EventTask(taskComponents[2],
-                        taskComponents[1].equals("1"),
-                        parseToDukeDate(taskComponents[3]));
+                                     taskComponents[1].equals("1"),
+                                     parseToDukeDate(taskComponents[3]));
             default:
                 throw new DukeIoException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
             }
@@ -114,13 +114,13 @@ public class Parser {
         try {
             String[] parsed = date.split(" |, |:");
             int hour = parsed[5].equals("AM")
-                    ? Integer.parseInt(parsed[3])
-                    : Integer.parseInt(parsed[3]) + 12;
+                       ? Integer.parseInt(parsed[3])
+                       : Integer.parseInt(parsed[3]) + 12;
             return new DukeDate(Integer.parseInt(parsed[2]),
-                    DukeDate.Month.valueOf(parsed[1].toUpperCase()),
-                    Integer.parseInt(parsed[0]),
-                    hour,
-                    Integer.parseInt(parsed[4]));
+                                DukeDate.Month.valueOf(parsed[1].toUpperCase()),
+                                Integer.parseInt(parsed[0]),
+                                hour,
+                                Integer.parseInt(parsed[4]));
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException | DukeDateFormatException e) {
             throw new DukeIoException(AutoResponse.ERROR_SAVE_FILE_FORMAT);
         }

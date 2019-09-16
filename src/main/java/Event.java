@@ -18,14 +18,14 @@ public class Event extends Task {
      * @param description Event description
      * @param eventDate Event date
      */
-    public Event(String description, String eventDate) {
+    public Event(String description, String eventDate) throws WrongDateFormatDukeException {
         super(description);
         try {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             this.atInDateFormat = dateFormat.parse(eventDate);
             this.atInStringFormat = eventDate;
         } catch (Exception e) {
-            this.atInStringFormat = eventDate;
+            throw new WrongDateFormatDukeException();
         }
     }
 

@@ -28,7 +28,7 @@ public class EventCommand extends Command {
      * @return string to be displayed
      */
     @Override
-    String execute(TaskList tasks, Storage storage) throws IOException, EmptyDescDukeException {
+    String execute(TaskList tasks, Storage storage) throws IOException, EmptyDescDukeException, WrongDateFormatDukeException {
         try {
             String[] commandLine = commandDesc.substring(6).split(" /at ");
             Event newEvent = new Event(commandLine[0], commandLine[1]);

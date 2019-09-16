@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
 public class TaskArguments {
 
     private final String dateTimeRegex =
-            "(([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})\\s?([0-9]{4}))";
+            "((([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})(\\s([0-9]{4}))?)" +
+            "|((?i)Mon|Monday|Tue|Tues|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday|Sun|Sunday)(\\s([0-9]{4}))?)";
     private static final String CANNOT_FIND_DATETIME_MESSAGE = "☹ OOPS!!! Unable to locate any datetimes!! :-(";
 
 
@@ -57,20 +58,38 @@ public class TaskArguments {
 
             } else {
 
-                // date arguments for tasks with 2 dates will be separated by a "to"
-                String regex = "(" + dateTimeRegex + "\\s?to\\s?" + dateTimeRegex + ")";
+                // date arguments for tasks with 2 dates may be separated by a "to"
+                String regexWithToSeparator = "(" + dateTimeRegex + "\\s?to\\s?" + dateTimeRegex + ")";
 
-                dateTimePatterns = findmatchingPatterns(arguments, regex);
+                dateTimePatterns = findmatchingPatterns(arguments, regexWithToSeparator);
 
-                // parse last identified matching regex into the two datetimes
-                String lastDateTimePairPattern = dateTimePatterns.get(dateTimePatterns.size() - 1);
-                String[] dateTimes = lastDateTimePairPattern.split("\\s?to\\s?");
+                if (dateTimePatterns.size() > 0) {
+                    // parse last identified matching regex into the two datetimes
+                    String lastDateTimePairPattern = dateTimePatterns.get(dateTimePatterns.size() - 1);
+                    String[] dateTimes = lastDateTimePairPattern.split("\\s?to\\s?");
 
-                foundDateTimes.add(DateTime.parse(dateTimes[0]));
-                foundDateTimes.add(DateTime.parse(dateTimes[1]));
+                    foundDateTimes.add(DateTime.parse(dateTimes[0]));
+                    foundDateTimes.add(DateTime.parse(dateTimes[1]));
+                } else {
+                    // date arguments for tasks may also just be 2 separate dates
+                    String regexWithSpaceSeparator = "(" + dateTimeRegex + "\\s" + dateTimeRegex + ")";
+
+
+                    dateTimePatterns = findmatchingPatterns(arguments, regexWithSpaceSeparator);
+                    String lastDateTimePairPattern = dateTimePatterns.get(dateTimePatterns.size() - 1);
+
+                    List<String> individualDateTimePatterns = findmatchingPatterns(lastDateTimePairPattern, dateTimeRegex);
+
+                    if (individualDateTimePatterns.size() != 2) {
+                        throw new UnknownDateTimeException();
+                    }
+
+                    foundDateTimes.add(DateTime.parse(individualDateTimePatterns.get(0)));
+                    foundDateTimes.add(DateTime.parse(individualDateTimePatterns.get(1)));
+                }
             }
 
-            arguments = arguments.replaceAll(dateTimePatterns.get(dateTimePatterns.size() - 1), "").trim();
+            arguments = arguments.replaceAll(dateTimePatterns.get(dateTimePatterns.size() - 1) + ".*$", "").trim();
 
             return foundDateTimes;
 

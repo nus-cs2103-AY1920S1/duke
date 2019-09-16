@@ -36,6 +36,7 @@ class TaskFactoryTest {
         Task task = factory.getTask("event hello everyone 02/01/2020 0210").get();
 
         assert task.getClass().equals(Event.class);
+        System.out.println(task.getDescription());
         assert task.getDescription().equals("[E][\u2718] hello everyone (at: Jan 02 2020, Thu, 02:10AM)");
     }
 
@@ -52,6 +53,15 @@ class TaskFactoryTest {
     void testCreateDoWithin() throws TaskCreationException {
         TaskFactory factory = new TaskFactory();
         Task task = factory.getTask("within hello everyone 02/01/2020 0210 to 03/02/2021 0900").get();
+
+        assert task.getClass().equals(DoWithin.class);
+        assert task.getDescription().equals("[W][\u2718] hello everyone (from: Jan 02 2020, Thu, 02:10AM to: Feb 03 2021, Wed, 09:00AM)");
+    }
+
+    @Test
+    void testCreateDoWithin2() throws TaskCreationException {
+        TaskFactory factory = new TaskFactory();
+        Task task = factory.getTask("within hello everyone 02/01/2020 0210 03/02/2021 0900").get();
 
         assert task.getClass().equals(DoWithin.class);
         assert task.getDescription().equals("[W][\u2718] hello everyone (from: Jan 02 2020, Thu, 02:10AM to: Feb 03 2021, Wed, 09:00AM)");

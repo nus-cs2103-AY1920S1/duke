@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Tasks> listOfTasks;
+    //private StringBuilder sb;
 
     public TaskList() {
         this.listOfTasks = new ArrayList<Tasks>();
@@ -30,10 +31,13 @@ public class TaskList {
         return listOfTasks.size();
     }
 
-    protected void printAll() {
+    protected String printAll() {
+        StringBuilder sb = new StringBuilder();
         for(Tasks t: listOfTasks) {
-            System.out.println(t);
+            //System.out.println(t);
+            sb.append(t);
         }
+        return sb.toString();
     }
 
 }

@@ -18,6 +18,6 @@ public class Event extends Tasks {
 
     @Override
     public String toString() {
-        return TAG + " | " + super.getStatus() + " | " + super.getDetails() + " | " + dateTime;
+        return TAG + " | " + super.getStatus() + " | " + super.getDetails() + " | " + dateTime + "\n";
     }
 }

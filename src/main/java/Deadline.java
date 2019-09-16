@@ -18,6 +18,6 @@ public class Deadline extends Tasks {
 
     @Override
     public String toString() {
-        return TAG + " | " + super.getStatus() + " | " + super.getDetails() + " | " + date;
+        return TAG + " | " + super.getStatus() + " | " + super.getDetails() + " | " + date + "\n";
     }
 }

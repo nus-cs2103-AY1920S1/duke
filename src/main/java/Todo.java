@@ -16,6 +16,6 @@ public class Todo extends Tasks {
 
     @Override
     public String toString() {
-        return TAG + " | " + super.getStatus() + " | " + super.getDetails();
+        return TAG + " | " + super.getStatus() + " | " + super.getDetails() + "\n";
     }
 }

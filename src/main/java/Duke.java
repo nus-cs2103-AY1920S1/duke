@@ -1,10 +1,11 @@
+
 public class Duke {
 
     private SaveToFile storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
         storage = new SaveToFile("/Users/meiannn/Documents/GitHub/duke/src/main/java/TaskList.txt");
         try {
@@ -14,8 +15,8 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
-    public void run() {
+    //this is supposed to return a string type
+    /*public void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -31,12 +32,32 @@ public class Duke {
                 ui.showLine();
             }
         }
+    }*/
+
+    public String dukeRun(String input) {
+        String output;
+        try {
+            String fullCommand = input;
+            //ui.showLine(); // show the divider line ("_______")
+            Command c = Parser.parse(fullCommand);
+            output = c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            output = ui.showError(e.getMessage());
+        }
+        return output;
     }
 
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    //public static void main(String[] args) {
+        //new Duke().run();
+    //}
+
+    String welcomeMessage() {
+        return ui.showWelcome();
     }
 
+    String getResponse(String input) {
+        return dukeRun(input); //returns output from duke.run()
+    }
 
 }

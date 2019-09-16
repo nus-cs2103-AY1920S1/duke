@@ -36,7 +36,6 @@ class TaskFactoryTest {
         Task task = factory.getTask("event hello everyone 02/01/2020 0210").get();
 
         assert task.getClass().equals(Event.class);
-        System.out.println(task.getDescription());
         assert task.getDescription()
                 .equals("[E][\u2718] hello everyone (at: Jan 02 2020, Thu, 02:10AM)");
     }

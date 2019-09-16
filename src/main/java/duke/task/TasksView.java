@@ -144,4 +144,14 @@ public class TasksView {
         String output = builder.build();
         ui.displayOutput(output);
     }
+
+    public void displayAllTasksDeleted(UiController ui) throws UiException {
+        OutputBuilder builder = new OutputBuilder();
+        builder.append("Noted. I have deleted all your tasks.")
+                .newLine()
+                .append("Now you have 0 tasks in the list.");
+
+        String output = builder.build();
+        ui.displayOutput(output);
+    }
 }

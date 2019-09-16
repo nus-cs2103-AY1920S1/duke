@@ -25,6 +25,8 @@ public class UpdateCommand extends Command {
     private static final String STORAGE_ERROR_MESSAGE = "☹ OOPS!!! Unable to access storage file! :-(";
     private static final String INVALID_ARGUMENT_MESSAGE = "☹ OOPS!!! Please enter a valid argument!!! :-(";
     private static final String UNEXPECTED_ERROR_MESSAGE = "☹ OOPS!!! Something unexpected happened!!! :-(";
+    private static final String NO_DATE_MESSAGE = "☹ OOPS!!! This task has no date!!! :-(";
+    private static final String INCORRECT_NUM_DATE_MESSAGE = "☹ OOPS!!! Please enter the correct number of dates!!! :-(";
 
     private TaskFactory factory;
     private int oldTaskIndex;
@@ -82,16 +84,24 @@ public class UpdateCommand extends Command {
     }
 
     private Task updateDate(String arguments, Task oldTask) throws CommandCreationException {
+
         try {
+            if (oldTask.getTaskType().numDates == 0) {
+                throw new CommandCreationException(NO_DATE_MESSAGE);
+            }
+
             TaskType oldTaskType = oldTask.getTaskType();
             int numDates = oldTaskType.numDates;
             String details = oldTask.getDetails();
 
             List<LocalDateTime> dateTimes = CommandUtils.parseAsTaskArguments(arguments).extractLocalDateTime(numDates);
+
             return factory.buidTask(oldTaskType, details, dateTimes);
 
-        } catch (UnknownDateTimeException | DateTimeExtractionException | TaskCreationException e) {
+        } catch (UnknownDateTimeException | TaskCreationException e) {
             throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
+        } catch (DateTimeExtractionException e) {
+            throw new CommandCreationException(INCORRECT_NUM_DATE_MESSAGE);
         }
     }
 

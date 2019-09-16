@@ -4,7 +4,7 @@
 
 **Duke** is a chatbot designed for anyone who wants to get organised!
 
- [Duke image](docs/Ui.png)
+![Duke image](docs/Ui.png)
 
 
 ## More Information

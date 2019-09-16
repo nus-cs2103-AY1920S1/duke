@@ -59,7 +59,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-
+---
 ### `deadline <description> /by DD/MM/YYYY HHHH` - Adds a Deadline
 
 A deadline with a short description `<description>` and deadline `DD/MM/YYYY HHHH`, will be added into your task list. Note that the time format is in a 24hr format.
@@ -192,7 +192,6 @@ Here are the matching tasks in your list:
 2. [A][✘] Celebrate (after: 29 Nov 19 11:00 AM)
 ```
 
-
 ---
 ### `delete <task number>` - Delete task
 
@@ -234,9 +233,9 @@ Expected outcome:
 Bye. Hope to see you again soon!
 ```
 
-
-### `alias <alias name> <reserved command>` - creates, updates or removes an alias command
 ---
+### `alias <alias name> <reserved command>` - creates, updates or removes an alias command
+
 
 Tag an alias name to a reserved command. More specifically, one of the following will happen depending on the parameters of the function. Please note that you can NOT remap a reserved command.
 

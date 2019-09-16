@@ -136,7 +136,7 @@ public class Ui {
      */
     public void showEditCommand(Task task) {
         displayMsg = new StringJoiner(System.lineSeparator());
-        displayMsg.add("I've update this task as:");
+        displayMsg.add("I've updated this task as:");
         displayMsg.add(task.toString());
     }
 

@@ -7,8 +7,6 @@ import java.util.Scanner;
 public class Ui {
 
     protected Scanner scan = new Scanner(System.in);
-    protected TaskList listTask = new TaskList();
-    protected Storage store = new Storage(Storage.file);
 
     /**
      * Constructor for Ui.
@@ -17,9 +15,6 @@ public class Ui {
 
     }
 
-    public String readInput() {
-        return scan.nextLine();
-    }
     /**
      * Prints the greeting at the initiation of the chat bot.
      */
@@ -85,23 +80,13 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Reads what the user writes.
+     *
+     * @return Returns what the scanner reads.
+     */
     public String readCommand() {
         return scan.nextLine();
-    }
-
-    /**
-     * Marks a task as done once the user has finished it.
-     *
-     * @param i To indicate which task number is done.
-     */
-    static String printDone(int i) {
-        TaskList.listOfTasks.get(i - 1).markAsDone();
-        printLine();
-        printIndent();
-        System.out.println("Nice! I've marked this task as done:");
-        printIndent();
-        return TaskList.listOfTasks.get(i - 1).toString();
-        //printLine();
     }
 
     /**
@@ -122,6 +107,7 @@ public class Ui {
         Ui.printIndent();
         return "Noted. I've removed this task.";
     }
+
      /**
      * Prints the number of tasks in the list.
      *
@@ -132,30 +118,6 @@ public class Ui {
         Ui.printIndent();
         return "Now you have " + Ui.getNumOfTasks() + " tasks in the list.";
         //Ui.printLine();
-    }
-
-    /**
-     * Prints the list of tasks that has been added by the user.
-     *
-     * @throws FileNotFoundException if there is no such file that contains the tasks.
-     */
-    static String printList() throws FileNotFoundException { //WHY NEVER USEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-        printLine();
-        printIndent();
-        if (TaskList.listOfTasks.isEmpty()) {
-            return "There is no tasks in your list currently!!!";
-        } else {
-            System.out.println("Here are the tasks in your list:");
-            File temp = new File(Storage.file);
-            Scanner s = new Scanner(temp);
-            int numbering = 1;
-            while (s.hasNext()) {
-                printIndent();
-                System.out.println(numbering + ". " + s.nextLine());
-                numbering++;
-            }
-            return "";
-        }
     }
 
     /**
@@ -182,7 +144,13 @@ public class Ui {
         System.out.println("Nothing in file!");
     }
 
+    /**
+     * Prints out the error message.
+     *
+     * @param error Error message.
+     */
     public void showError(String error) {
+        assert error != null;
         System.out.println(error);
     }
 }

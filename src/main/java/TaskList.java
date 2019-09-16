@@ -26,6 +26,7 @@ public class TaskList {
     }
 
     public void addToTaskList(Task assignment) {
+        assert assignment != null;
         listOfTasks.add(assignment);
     }
 }

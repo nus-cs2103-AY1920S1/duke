@@ -22,6 +22,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+        assert by != null;
         return "[D]" + super.toString() + " " + description + " (by: " + by + ")";
     }
 }

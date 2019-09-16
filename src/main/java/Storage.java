@@ -11,6 +11,11 @@ public class Storage {
     protected static ArrayList<Task> taskList = new ArrayList<Task>();
     protected static String file = "todo.txt";
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param file File that the list of tasks to be.
+     */
     public Storage(String file) {
 
     }
@@ -26,6 +31,8 @@ public class Storage {
      *     cannot be opened for any other reason.
      */
     public void addToFile(String filepath, String textToAdd) throws IOException {
+        assert filepath != null;
+        assert textToAdd != null;
         FileWriter typer = new FileWriter(filepath, true);
         typer.write(textToAdd + System.lineSeparator());
         typer.close();
@@ -43,6 +50,8 @@ public class Storage {
      *     cannot be opened for any other reason.
      */
     public void writeToFile(String filepath, String textToAdd) throws IOException {
+        assert filepath != null;
+        assert textToAdd != null;
         FileWriter typer = new FileWriter(filepath);
         typer.write(textToAdd);
         typer.close();
@@ -59,6 +68,7 @@ public class Storage {
      *     cannot be opened for any other reason.
      */
     public static int countLines(String filename) throws IOException {
+        assert filename != null;
         try (InputStream inputs = new BufferedInputStream(new FileInputStream(filename))) {
             byte[] characters = new byte[1024];
             int readCharacters = inputs.read(characters);
@@ -90,8 +100,8 @@ public class Storage {
     }
 
     /**
-     * Loads the task into the tasklist
-     *     in TaskList from the file.
+     * Loads the task into the task list
+     * in TaskList from the file.
      *
      * @return ArrayList that has been copied from the file.
      * @throws IOException If the named file exists but is a directory rather than a regular file,
@@ -101,6 +111,7 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException, DukeException {
         File f = new File(file);
+        assert f != null;
         Scanner sc = new Scanner(f);
         ArrayList<Task> tempList;
         if (countLines(file) == 0) {

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Task {
+
     protected String description;
     protected boolean isDone;
     protected boolean isCorrectFormat;

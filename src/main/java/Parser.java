@@ -5,13 +5,21 @@ import java.util.Scanner;
 
 public class Parser {
 
-
-    Scanner sc = new Scanner(System.in);
-
+    /**
+     * Makes sense of the user input and finds out what command
+     * the user typed in.
+     *
+     * @param line Input by user.
+     * @return Returns the command that comes from the user.
+     * @throws DukeException Prints out the message to tell the user
+     *                       what was wrong with the input by the user.
+     */
     public static Command parse(String line) throws DukeException {
+        assert line != null;
         String properInput = line.trim().toLowerCase();
         String[] inputArray = properInput.split(" ");
         String taskType = inputArray[0];
+        assert taskType != null;
         if (!isValidTaskType(taskType)) {
             Ui.printIndent();
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-("
@@ -105,11 +113,26 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the slash index from the input, if available.
+     * This is so that we can determine the dates easily.
+     *
+     * @param text Input by the user.
+     * @return Returns the index of the slash.
+     */
     public static int getSlashIndex(String text) {
         return text.indexOf("/");
     }
 
+    /**
+     *
+     *
+     * @param text
+     * @return
+     * @throws DukeException
+     */
     public static int getDayDateNumbers(String text) throws DukeException {
+        assert text != null;
         if ((text.length() > (getSlashIndex(text) + 4)) && (text.length() > (getSlashIndex(text) + 6))) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 4, getSlashIndex(text) + 6));
         } else {
@@ -119,6 +142,7 @@ public class Parser {
     }
 
     public static int getMonthDateNumbers(String text) throws DukeException {
+        assert text != null;
         if ((text.length() > (getSlashIndex(text) + 7)) && (text.length() > (getSlashIndex(text) + 9))) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 7, getSlashIndex(text) + 9));
         } else {
@@ -128,6 +152,7 @@ public class Parser {
     }
 
     public static int getYearDateNumbers(String text) throws DukeException {
+        assert text != null;
         if ((text.length() > (getSlashIndex(text) + 10)) && (text.length() > (getSlashIndex(text) + 14))) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 10, getSlashIndex(text) + 14));
         } else {
@@ -137,6 +162,7 @@ public class Parser {
     }
 
     public static int getHourDateNumbers(String text) throws DukeException {
+        assert text != null;
         if ((text.length() > (getSlashIndex(text) + 15)) && (text.length() > (getSlashIndex(text) + 17))) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 15, getSlashIndex(text) + 17));
         } else {
@@ -147,6 +173,7 @@ public class Parser {
 
 
     public static int getMinuteDateNumbers(String text) throws DukeException {
+        assert text != null;
         if (text.length() >= (getSlashIndex(text) + 17)) {
             return Integer.parseInt(text.substring(getSlashIndex(text) + 17));
         } else {
@@ -157,6 +184,7 @@ public class Parser {
 
 
     public static boolean isValidDateNumbers(String text) throws DukeException {
+        assert text != null;
         int dayDate = getDayDateNumbers(text);
         int monthDate = getMonthDateNumbers(text);
         int yearDate = getYearDateNumbers(text);
@@ -168,6 +196,7 @@ public class Parser {
     }
 
     public static boolean isValidDateFormat(String text) throws DukeException {
+        assert text != null;
         if (isValidDateNumbers(text)) {
             return true;
         } else {
@@ -188,6 +217,7 @@ public class Parser {
      *     appropriate strings.
      */
     public static String formatDate(String date) {
+        assert date != null;
         String formatted = date;
         if (!date.contains(")")) {
             try {
@@ -222,6 +252,7 @@ public class Parser {
     }
 
     public static boolean isValidTaskType(String taskType) {
+        assert  taskType != null;
         if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline") ||
                 taskType.equals("delete") || taskType.equals("done") || taskType.equals("find") ||
                 taskType.equals("list") || taskType.equals("bye") ) {
@@ -232,6 +263,7 @@ public class Parser {
     }
 
     public static String getDescriptionOfTask(String text) throws DukeException {
+        assert text != null;
         int spaceIndex = text.indexOf(" ");
         if ((text.contains("deadline") && isValidDeadlineCommand(text))
                 || text.contains("event") && isValidEventCommand(text)) {
@@ -246,18 +278,22 @@ public class Parser {
     }
 
     public static boolean isValidToDoCommand(String text) {
+        assert text != null;
         return text.contains(" ") && text.length() > 5;
     }
 
     public static boolean isValidDeadlineCommand(String text) {
+        assert text != null;
         return text.contains(" ") && text.contains("/") && text.contains("by");
     }
 
     public static boolean isValidEventCommand(String text) {
+        assert text != null;
         return text.contains(" ") && text.contains("/") && text.contains("at");
     }
 
     public static boolean isValidDeleteCommand(String text) throws DukeException, NumberFormatException {
+        assert text != null;
         if (text.length() < 7) {
             Ui.printIndent();
             throw new DukeException("Wrong Format! Please add an 'all' or a valid number after the delete word! :)");
@@ -280,10 +316,12 @@ public class Parser {
     }
 
     public static boolean isValidFindCommand(String text) {
+        assert text != null;
         return text.contains(" ") && text.length() > 5;
     }
 
     public static boolean isValidDoneCommand(String text) throws DukeException {
+        assert text != null;
         if (text.length() < 5) {
             Ui.printIndent();
             throw new DukeException("Wrong Format! Please add a valid number after the done word! :)");
@@ -306,16 +344,19 @@ public class Parser {
     }
 
     public static String findWord(String text) {
+        assert text != null;
         int spaceIndex = text.indexOf(" ");
         return text.substring(spaceIndex + 1);
     }
 
     public static String findToDelete(String text) {
+        assert text != null;
         int spaceIndex = text.indexOf(" ");
         return text.substring(spaceIndex + 1);
     }
 
     public static String findTaskNumber(String text) {
+        assert text != null;
         int spaceIndex = text.indexOf(" ");
         return text.substring(spaceIndex + 1);
     }

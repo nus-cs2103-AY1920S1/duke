@@ -6,15 +6,40 @@ import java.util.Scanner;
 
 public class FindCommand extends Command {
 
+    /**
+     * Constructor for FindCommand.
+     *
+     * @param action Find command word.s
+     * @param variable Number of task to be deleted.
+     */
     public FindCommand(String action, String variable) {
         super(action, variable);
 
     }
 
+    /**
+     * Executes the deadline command and prints out statements to
+     * tell the user that the deadline tasks has been added to
+     * the list of tasks.
+     *
+     * @param tasks Not needed in this case.
+     * @param ui Prints out statements to indicate to user what
+     *           has happened.
+     * @param storage Not needed in this case.
+     * @return Returns String to print out to the user.
+     * @throws IOException If the named file exists but is a directory rather
+     *                     than a regular file, does not exist but cannot be
+     *                     created, or cannot be opened for any other reason.
+     * @throws DukeException If there is no matching word, an error message
+     *                       will be sent to the user.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
-
+        assert tasks != null;
+        assert ui != null;
+        assert storage != null;
         File f = new File(Storage.file);
+        assert f != null;
         Scanner sc = new Scanner(f);
         ArrayList<String> tempList = new ArrayList<>();
             int num = 1;

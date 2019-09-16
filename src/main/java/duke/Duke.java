@@ -55,7 +55,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.loadSavedList());
-        } catch (IOException e) {
+        } catch (DukeException | IOException e) {
             ui.print(ui.showError(e));
             taskList = new TaskList();
         }

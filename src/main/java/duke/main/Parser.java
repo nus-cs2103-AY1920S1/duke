@@ -1,7 +1,20 @@
 package duke.main;
 
 import duke.Duke;
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DeleteNoteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.ListNoteCommand;
+import duke.command.ReadNoteCommand;
+import duke.command.ToDoCommand;
+import duke.command.WriteNoteCommand;
 import duke.exception.DukeException;
 import duke.exception.IncorrectNoteFormatException;
 import duke.exception.InvalidInstructionException;
@@ -137,6 +150,7 @@ public class Parser {
      *
      * @param inputElements The inputted String array containing the stored values of the formatted String.
      * @return Returns a LocalDateTime object representing the date of the Task.
+    
      */
     public static LocalDateTime parseStoredTime(String[] inputElements) {
         String[] taskTimeParsed = inputElements[3].split("[ /]");
@@ -146,6 +160,13 @@ public class Parser {
                 Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
     }
     
+    /**
+     * Parses instructions for writing a Note.
+     *
+     * @param noteContents The instructions for writing the Note, as a String.
+     * @return Returns the written Note.
+     * @throws IncorrectNoteFormatException An Exception thrown to indicate an incorrect format in the instructions.
+     */
     private static Note parseWriteNote(String noteContents) throws IncorrectNoteFormatException {
         if (!noteContents.contains("|")) {
             throw new IncorrectNoteFormatException("Please write the note in the format "
@@ -157,14 +178,34 @@ public class Parser {
         }
     }
     
+    /**
+     * Parses instructions for reading a Note.
+     *
+     * @param notePath The file path of the Note to be read.
+     * @return The Note at the specified file path.
+     */
     private static Note parseReadNote(String notePath) {
         return new Note(notePath.split(" ", 2)[1]);
     }
     
+    /**
+     * Parses instructions for deletng a Note.
+     *
+     * @param notePath The file path of the Note to be deleted.
+     * @return The Note at the specified file path.
+     */
     private static Note parseDeleteNote(String notePath) {
         return new Note(notePath.split(" ", 2)[1]);
     }
     
+    /**
+     * Parses instructions for executing Commands.
+     * This method parses user instructions and returns a Command representing the intended instruction.
+     *
+     * @param input The inputted instructions, as a String.
+     * @return Returns a Command representing the instructions.
+     * @throws DukeException A custom Exception indicating an error in the instructions.
+     */
     public static Command parse(String input) throws DukeException {
         String instruction = Parser.parseInstruction(input);
         switch (instruction) {

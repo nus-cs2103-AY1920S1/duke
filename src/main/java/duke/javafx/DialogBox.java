@@ -48,11 +48,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
     
-    public static DialogBox getUserDialog(String text, Image img) {
+    /**
+     * Returns a user DialogBox.
+     *
+     * @param text The text to show in the DialogBox, as a String.
+     * @param img The image avatar to show beside the DialogBox.
+     * @return Returns the DialogBox.
+     */
+    static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
     
-    public static DialogBox getDukeDialog(String text, Image img) {
+    /**
+     * Returns a Duke DialogBox.
+     * This DialogBox is identical to the user DialogBox, but with the image on the mirrored side.
+     *
+     * @param text The text to show in the DialogBox, as a String.
+     * @param img The image avatar to show beside the DialogBox.
+     * @return Returns the DialogBox.
+     */
+    static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

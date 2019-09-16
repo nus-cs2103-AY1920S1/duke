@@ -40,6 +40,12 @@ public class TaskList {
         return this.taskList;
     }
     
+    /**
+     * Gets a Task from this TaskList.
+     *
+     * @param index The index of the stored Task.
+     * @return Returns the retrieved Task.
+     */
     public Task getTask(int index) {
         return this.taskList.get(index);
     }
@@ -65,6 +71,12 @@ public class TaskList {
         assert (this.getSize() - currentSize == 1);
     }
     
+    /**
+     * Deletes a Task from this TaskList.
+     *
+     * @param index The index of the Task object.
+     * @return Returns the deleted Task object.
+     */
     public Task deleteTask(int index) {
         int currentSize = this.getSize();
         Task currentTask = taskList.remove(index);

@@ -1,5 +1,7 @@
 package duke.main;
 
+import duke.exception.DukeException;
+import duke.exception.InvalidStoredTaskFormatException;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
@@ -26,7 +28,6 @@ public class Storage {
      *
      * @param filePath The file path of the stored data.
      */
-
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -37,9 +38,10 @@ public class Storage {
      * If no file is detected in the given file path, creates a file at that location.
      *
      * @return Returns the list of Tasks stored in the specified file path location.
+     * @throws DukeException A custom Exception thrown to indicate an incorrect stored task syntax.
      * @throws IOException An Exception thrown to indicate an invalid file path.
      */
-    public ArrayList<Task> loadSavedList() throws IOException {
+    public ArrayList<Task> loadSavedList() throws DukeException, IOException {
         ArrayList<Task> returnTaskList = new ArrayList<>(100);
         File file = new File(filePath);
         file.createNewFile();
@@ -67,6 +69,9 @@ public class Storage {
                 Parser.parseTaskForMarking(lineElements, currentTask);
                 returnTaskList.add(currentTask);
                 break;
+            default:
+                throw new InvalidStoredTaskFormatException("Format of stored Tasks is incorrect! Please delete the "
+                        + "file 'CurrentTaskList.txt'");
             }
         }
         return returnTaskList;

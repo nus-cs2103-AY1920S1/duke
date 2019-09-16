@@ -17,8 +17,7 @@ public class WriteNoteCommand extends Command {
     }
     
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
-        NoteStorage noteStorage = new NoteStorage(this.note);
-        noteStorage.writeSavedNote();
+        new NoteStorage(this.note).writeSavedNote();
         return ui.showAfterWritingNote(this.note.getFileName());
     }
 }

@@ -24,6 +24,13 @@ public class NoteStorage {
         this.note = note;
     }
     
+    /**
+     * Loads a saved Note as a String.
+     *
+     * @return Returns a String containing the contents of the Note.
+     * @throws NoSuchNoteException A custom Exception indicating that the specified Note does not exist.
+     * @throws IOException An Exception indicating that a specified file path does not exist.
+     */
     public String loadSavedNote() throws NoSuchNoteException, IOException {
         File file = new File(this.note.getFilePath());
         if (!file.exists()) {
@@ -38,10 +45,16 @@ public class NoteStorage {
         }
     }
     
+    /**
+     * Saves a Note to the hard drive.
+     *
+     * @throws ExistingNoteException A custom Exception indicating that the specified Note already exists.
+     * @throws IOException An Exception indicating that a specified file path does not exist.
+     */
     public void writeSavedNote() throws ExistingNoteException, IOException {
         File file = new File(this.note.getFilePath());
         if (file.exists()) {
-            throw new ExistingNoteException("A note with the name " + this.note.getFileName() + " already exists!");
+            throw new ExistingNoteException("A note with the name '" + this.note.getFileName() + "' already exists!");
         } else {
             file.createNewFile();
             FileWriter fileWriter = new FileWriter(this.note.getFilePath());
@@ -50,10 +63,16 @@ public class NoteStorage {
         }
     }
     
+    /**
+     * Deletes the specified Note.
+     *
+     * @throws NoSuchNoteException A custom Exception indicating that the specified Note does not exist.
+     */
     public void deleteSavedNote() throws NoSuchNoteException {
         File file = new File(this.note.getFilePath());
         if (!file.exists()) {
-            throw new NoSuchNoteException("There is no existing note with the name " + this.note.getFileName() + "!");
+            throw new NoSuchNoteException("There is no existing note with the name '" + this.note.getFileName()
+                    + "'!");
         } else {
             file.delete();
         }

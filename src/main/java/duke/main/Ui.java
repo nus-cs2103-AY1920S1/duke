@@ -94,6 +94,13 @@ public class Ui {
         return helpPhrase;
     }
     
+    /**
+     * Returns all stored Tasks, as a String.
+     *
+     * @param taskList The TaskList object from Duke.
+     * @return Returns the Tasks as a String.
+     * @throws EmptyTaskListException An Exception to indicate that there are no stored Tasks.
+     */
     public String showList(TaskList taskList) throws EmptyTaskListException {
         if (taskList.getSize() == 0) {
             throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
@@ -105,17 +112,36 @@ public class Ui {
             return response;
         }
     }
-
+    
+    /**
+     * Shows the most recently added Task.
+     *
+     * @param currentTask The most recently added Task.
+     * @param currentSize The current number of Tasks stored in the TaskList.
+     * @return Returns a String showing the most recently added Task, and current number of Tasks.
+     */
     public String showAfterAddingTask(Task currentTask, int currentSize) {
         return "Got it. I've added this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
                 + " tasks in the list.";
     }
     
+    /**
+     * Shows the most recently deleted Task.
+     *
+     * @param currentTask The most recently deleted Task.
+     * @param currentSize The current number of Tasks stored in the TaskList.
+     * @return Returns a String showing the most recently deleted Task, and current number of Tasks.
+     */
     public String showAfterDeletingTask(Task currentTask, int currentSize) {
         return "Got it. I've removed this task:\n  " + currentTask.toString() + "\nNow you have " + currentSize
                 + " tasks in the list.";
     }
     
+    /**
+     * Lists the names of all stored Notes.
+     *
+     * @return Returns the names of all stored Notes, as a String.
+     */
     public String showNoteList() {
         try {
             Stream<Path> walk = Files.walk(Paths.get(Note.FILE_BASE_PATH));

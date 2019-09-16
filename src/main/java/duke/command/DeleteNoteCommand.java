@@ -15,8 +15,7 @@ public class DeleteNoteCommand extends Command {
     }
     
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        NoteStorage noteStorage = new NoteStorage(this.note);
-        noteStorage.deleteSavedNote();
+        new NoteStorage(this.note).deleteSavedNote();
         return ui.showAfterDeletingNote(this.note.getFileName());
     }
 }

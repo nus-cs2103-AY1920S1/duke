@@ -24,8 +24,28 @@ deadline Project Milestone 1 /by 21/10/2019 1200
 event Presentation /at 26/10/2019 1200
 done 1
 list
+find Pr
 bye
 ```
+
+## Table of Contents
+- [Features](#features)
+    - [Manage tasks](#manage-tasks)
+    - [Categorise tasks](#categorise-tasks)
+    - [Search for tasks](#search-for-tasks)
+    - [Load and save tasks](#load-and-save-tasks)
+- [Usage](#usage)
+    - [Basics: Adding and categorising tasks](#basics-adding-and-categorising-tasks)
+        - [deadline - Add a deadline task](#deadline---add-a-deadline-task)
+        - [event - Add an event task](#deadline---add-a-deadline-task)
+        - [todo - Add a todo task](#todo---add-a-todo-task)
+    - [Basics: Viewing your tasks](#basics-viewing-your-tasks)
+        - [done - Mark a task as done](#done---mark-a-task-as-done)
+        - [find - Find a task](#find---find-a-task)
+        - [list - List all tasks](#list---list-all-tasks)
+    - [Basics: Miscellaneous](#basics-miscellaneous)
+        - [bye - Quit the program](#bye---quit-the-program)
+        - [help - View help](#help---view-help)
 
 ## Features
 

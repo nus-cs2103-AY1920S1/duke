@@ -1,4 +1,4 @@
-[T][X] MA1101R Tutorial 2
 [T][X] CS2100 Tutorial 2
 [D][X] Submit Project (by: 16/09/2019 1800)
 [E][X] Attend Wedding  (at: 20/09/2019 1800)
+[E][X] Attend Wedding1  (at: 02/12/2019 1800)

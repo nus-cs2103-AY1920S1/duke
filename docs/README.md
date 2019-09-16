@@ -19,71 +19,129 @@ commands into a Command Box.
 
 
 
-## Features
+# Features
 
-### 1. Adding and Creating a Task: Todo, Deadline, Event
+## 1. Adding and Creating a Task: Todo, Deadline, Event
 Allows users to add a new Task into Duke.
 
-Todo Task
+### Todo Task
 	
 	 todo [Task_Description] - e.g. "todo MA1101R Tutorial 2"
 
 
 Expected outcome:
 ```
+__________________________________
 Got it. I've added this task:
   [T][X] MA1101R Tutorial 2
 Now you have 1 tasks in the list.
+__________________________________
 ```
 
-Event Task
+### Event Task
 	
 	 event [Task_Description] /at dd/mm/yyyy HHMM - e.g. "event Attend Wedding /at 02/12/2019 1800"
 
-Deadline Task
+Expected outcome:
+```
+__________________________________
+Got it. I've added this task:
+  [E][X] Attend Wedding (at: 02/12/2019 1800)
+Now you have 1 tasks in the list.
+__________________________________
+```
+
+### Deadline Task
 	
 	 deadline [Task_Description] /by dd/mm/yyyy HHMM - e.g. "deadline Submit Project /by 12/09/2019 1500"
 
+Expected outcome:
+```
+__________________________________
+Got it. I've added this task:
+  [D][X] Submit Project (by: 12/09/2019 1500)
+Now you have 1 tasks in the list.
+__________________________________
+```
 Note : *Duke* does not allow any duplicate [Task_Description], so do remember to input a unique [Task_Description] when
 creating new Task.
 
 
-### 2. List and Display all Task in the current list: List
+## 2. List and Display all Task in the current list: List
 Shows and Displays the whole list of task in the current list, together with their descriptions and date/time information. 
 
-List
+### List
 	
 	 list - e.g. "list"
 
+Expected outcome:
+```
+__________________________________
+Here are the tasks in your list:
+  1.[T][X] MA1101R Tutorial 2
+  2.[E][X] Attending Wedding (at: 02/12/2019 1800)
+  3.[D][X] Submit Project (by: 12/09/2019 1500)
+Now you have 3 tasks in the list.
+__________________________________
+```
 
-### 3. Find and Display Task by keyword: Find
+## 3. Find and Display Task by keyword: Find
 Finds and displays tasks with descriptions that corresponds to the input keyword.
 
-Find
+### Find
 	
 	 find [keyword] - e.g. "find tutorial"   
 
+Expected outcome:
+```
+__________________________________
+Here are the tasks in your list:
+  1.[T][X] MA1101R Tutorial 2
+__________________________________
+```
 
-### 4. Deleting a task on the list: Delete
+## 4. Deleting a task on the list: Delete
 Locate a task which corresponds to the input index and remove/delete it from the current list.
 
-Delete
+### Delete
 	
 	 delete [index] - e.g. "delete 1"
 
+Expected outcome:
+```
+__________________________________
+Noted. I've removed this task:
+  [T][X] MA1101R Tutorial 2
+Now you have 2 tasks in the list.
+__________________________________
+```
 
-### 5. Marks task as "done": Done
+## 5. Marks task as "done": Done
 Locate a task which corresponds to the input index and mark it as done.
 
-Done
+### Done
 	
 	 done [index] - e.g. "done 1" 
 
-### 6. Exiting the program: Bye
+Expected outcome:
+```
+__________________________________
+Here are the tasks in your list:
+  1.[T][X] MA1101R Tutorial 2
+  2.[E][X] Attending Wedding (at: 02/12/2019 1800)
+  3.[D][X] Submit Project (by: 12/09/2019 1500)
+Now you have 1 tasks in the list.
+__________________________________
+```
+
+## 6. Exiting the program: Bye
 Exits and Closes the program
 
-Bye
+### Bye
 	
 	 bye - e.g. "bye"
 
-##
+Expected outcome:
+```
+Closes Program
+```

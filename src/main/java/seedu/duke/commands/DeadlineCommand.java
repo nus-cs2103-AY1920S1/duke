@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.exceptions.InvalidArgumentException;
+import seedu.duke.storage.TaskList;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Task;
 import seedu.duke.ui.Ui;
@@ -21,7 +22,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> tasks) throws InvalidArgumentException {
+    public void execute(TaskList tasks) throws InvalidArgumentException {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("d/MM/yyyy HHmm");
             dateFormat.setLenient(false);

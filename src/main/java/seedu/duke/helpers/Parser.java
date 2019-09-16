@@ -51,7 +51,7 @@ public class Parser {
      *
      * @param input Command input from the user.
      * @return Returns the Command to be executed. An ErrorCommand will be returned should the command
-     * be invalid or contain invalid arguments.
+     *         be invalid or contain invalid arguments.
      */
     public static Command parseCommand(String input) {
 
@@ -101,9 +101,9 @@ public class Parser {
     /**
      * Identifies the CommandName from the input.
      *
-     * @param input
+     * @param input The complete command input from the user.
      * @return Returns the respective CommandName Enum if a match is found, otherwise the Error CommandName
-     * is returned.
+     *         is returned.
      */
     private static CommandName identifyCommandName(String input) {
         CommandName commandName;
@@ -117,7 +117,7 @@ public class Parser {
     }
 
     /**
-     * Returns the pattern to use based on the CommandName Enum
+     * Returns the pattern to use based on the CommandName Enum.
      *
      * @param commandName The CommandName Enum once identified.
      * @return

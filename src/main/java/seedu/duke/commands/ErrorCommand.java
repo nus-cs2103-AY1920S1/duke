@@ -1,21 +1,18 @@
 package seedu.duke.commands;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.trackables.Deadline;
-import seedu.duke.trackables.Task;
+import seedu.duke.storage.TaskList;
 import seedu.duke.ui.Ui;
 
-import java.util.List;
-
 public class ErrorCommand extends Command {
-    private DukeException dukeException;
+    private DukeException exception;
 
     public ErrorCommand(DukeException dukeException) {
-        this.dukeException = dukeException;
+        this.exception = dukeException;
     }
 
     @Override
-    public void execute(List<Task> tasks) {
-        Ui.printMessages(dukeException.toString());
+    public void execute(TaskList tasks) throws DukeException {
+        throw exception;
     }
 }

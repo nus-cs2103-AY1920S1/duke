@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.storage.TaskList;
 import seedu.duke.trackables.Task;
 import seedu.duke.trackables.Todo;
 import seedu.duke.ui.Ui;
@@ -15,7 +16,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> tasks) {
+    public void execute(TaskList tasks) {
         Todo todo = new Todo(description);
         tasks.add(todo);
         Ui.printMessages("Got it. I've added this task:",

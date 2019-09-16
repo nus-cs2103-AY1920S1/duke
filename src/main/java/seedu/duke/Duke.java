@@ -3,23 +3,24 @@ package seedu.duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.helpers.Parser;
 import seedu.duke.storage.Storage;
-import seedu.duke.trackables.Task;
+import seedu.duke.storage.TaskList;
 import seedu.duke.ui.Ui;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Duke {
 
-    private static List<Task> taskList = new ArrayList<Task>();
+    private TaskList tasks;
 
+    /**
+     * Constructs a new Duke Object by instantiating the TaskList by loading from Storage.
+     */
     public Duke() {
         // Load from file
         try {
-            taskList = Storage.getInstance().loadFromDisk();
+            tasks = Storage.getInstance().loadFromDisk();
         } catch (Storage.StorageOperationException e) {
             Ui.printError(e);
+            Ui.printLoadingError();
+            tasks = new TaskList();
         }
     }
 
@@ -32,18 +33,17 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Executes the Duke Assistant.
+     */
     public void run() {
         Ui.greet();
 
-
-
-        Scanner in = new Scanner(System.in);
-
         //noinspection InfiniteLoopStatement
         while (true) {
-            String input = in.nextLine();
+            String input = Ui.nextLine();
             try {
-                Parser.parseCommand(input).execute(taskList);
+                Parser.parseCommand(input).execute(tasks);
 
             } catch (DukeException e) {
                 Ui.printError(e);

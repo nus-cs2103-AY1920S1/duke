@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.InvalidArgumentException;
+import seedu.duke.storage.TaskList;
 import seedu.duke.trackables.Task;
 import seedu.duke.ui.Ui;
 
@@ -16,12 +17,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(List<Task> tasks) throws InvalidArgumentException {
-        try {
-            tasks.get(taskId - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new InvalidArgumentException("No task with id " + taskId + " exists.", e);
-        }
+    public void execute(TaskList tasks) throws InvalidArgumentException {
         tasks.get(taskId).markAsDone();
         Ui.printMessages("Nice! I've marked this task as done:",
             "  " + tasks.get(taskId).toString());

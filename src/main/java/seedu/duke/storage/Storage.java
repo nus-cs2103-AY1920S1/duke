@@ -51,7 +51,7 @@ public class Storage {
      *
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
-    public void saveToDisk(List<Task> tasks) throws StorageOperationException {
+    public void saveToDisk(TaskList tasks) throws StorageOperationException {
         try {
             if (!Files.exists(path)) {
                 Files.createDirectories(path.getParent());
@@ -71,18 +71,18 @@ public class Storage {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
-    public List<Task> loadFromDisk() throws StorageOperationException {
+    public TaskList loadFromDisk() throws StorageOperationException {
 
         if (!Files.exists(path)) {
-            return new ArrayList<Task>();
+            return new TaskList();
         }
 
         try {
-            return getTasksFromStrings(Files.readAllLines(path));
+            return new TaskList(getTasksFromStrings(Files.readAllLines(path)));
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path, ioe);
         } catch (Exception e) {
-            throw new StorageOperationException("Fatal error occured. Coud not load tasks.", e);
+            throw new StorageOperationException("Fatal error occurred. Cloud not load tasks.", e);
         }
     }
 
@@ -92,8 +92,8 @@ public class Storage {
      * @param tasks Lists containing all the tasks to convert.
      * @return Returns a list of Tasks in their String equivalent form.
      */
-    private List<String> getStringsFromTasks(List<Task> tasks) {
-        return tasks.stream().map(Task::getAsString).collect(Collectors.toList());
+    private List<String> getStringsFromTasks(TaskList tasks) {
+        return tasks.getList().stream().map(Task::getAsString).collect(Collectors.toList());
     }
 
     /**

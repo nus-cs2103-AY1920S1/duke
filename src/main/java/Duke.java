@@ -35,6 +35,7 @@ public class Duke {
                 String userFullInput = ui.readUserInput();
                 Command c = parser.parse(userFullInput);
                 c.execute(this.getTaskList(), this.getStorage());
+                assert doesProgramContinue == true : "doesProgramContinue should be true";
                 doesProgramContinue = c.continuesProgram();
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());

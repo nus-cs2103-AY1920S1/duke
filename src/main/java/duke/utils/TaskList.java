@@ -22,8 +22,6 @@ public class TaskList {
      * Prints the tasks that are in the list.
      */
     public String printList() {
-//        String line =  "\t____________________________________________________________";
-//        System.out.println(line);
         if (!li.isEmpty()) {
             String msg = "\tHere are the Duke.tasks in your list:\n";
             for (int i = 0; i < li.size(); i++) {
@@ -34,7 +32,6 @@ public class TaskList {
         } else {
             return "\tThe task list is empty";
         }
-//        System.out.println(line);
     }
 
     /**

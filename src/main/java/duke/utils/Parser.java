@@ -45,18 +45,6 @@ public class Parser {
         }
 
         return copy;
-        // if (type.equals("delete") || type.equals("list") || type.equals("bye") || type.equals("done")){
-        //     return split[1];
-        // } else if (type.equals("todo")){
-        //     actual =  String.join(" ", copy);
-        // } else if(type.equals("deadline")){
-        //     String help = String.join(" ", copy);
-
-        //     String task = "";
-        //     String time = "";
-
-
-        // }
             
     }
 

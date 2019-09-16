@@ -64,13 +64,6 @@ public class Storage {
         String line = null;
         while ((line = bf.readLine()) != null) {
             String[] what = line.split("\\|");
-            // 0 is the task type
-            // 1 is the done level
-            // 2 is the description
-            // 3 is the deadline if it has
-            // for(int i = 0; i < what.length; i++){
-            //     System.out.println(what[i]);
-            // }
             String taskType = what[0];
             int doner = Integer.parseInt(what[1]);
             Task newTask = null;
@@ -93,7 +86,6 @@ public class Storage {
      *                 to a date object
      * @return a date object from the string given
      */
-    //print the line for fromatting
     public Date dateTimeConversion(String dateTime) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy HHmm");
         String dateInString = dateTime;

@@ -21,7 +21,6 @@ public class Ui {
     /**
      * Prints a new line character.
      */
-    //print new line for formatting
     public void printnewline() {
         System.out.println("\n");
     }
@@ -54,7 +53,6 @@ public class Ui {
         String msg = "\tGot it. I've added this task:\n";
         msg = msg + "\t\t" + t + "\n";
         msg = msg + "\tNow you have " + i + " tasks in the list";
-//        printline();
         return msg;
     }
 
@@ -84,7 +82,6 @@ public class Ui {
         printline();
         String msg = "\tNice! I've marked this task as done:\n";
         msg = msg + "\t\t" + task;
-//        printline();
         return msg;
     }
 
@@ -95,13 +92,11 @@ public class Ui {
      * @param task the task that is deleted
      * @param i the number of tasks left in the list
      */
-    //completion of removal of task
     public String printDelete(Task task, int i) {
         printline();
         String msg = "\tNoted. I've removed this task:\n";
         msg = msg + "\t\t" + task + "\n";
         msg = msg + "\tNow you have " + i + " Duke.tasks in the list";
-//        printline();
         return msg;
     }
 

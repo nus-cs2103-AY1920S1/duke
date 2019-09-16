@@ -46,7 +46,7 @@ public class Duke extends Application{
 //        tasks = new TaskList(new LinkedList<Task>());
             tasks = new TaskList(storage.printFileContents());
 
-            assert tasks!= null
+            assert tasks!= null;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,25 +65,7 @@ public class Duke extends Application{
         } catch (IOException e) {
             System.out.println("File not found");
         }
-//        Scanner scan = new Scanner(System.in);
-        
-//        ui.showWelcome();
 
-        //LinkedList used to store all the String given by the user;
-        // LinkedList<Task> li = new LinkedList<Task>();
-
-        //read the existing task from the file and create the Duke.tasks to put
-        //into the list. 
-
-        // try{
-        //     storage.printFileContents(li);
-        // } catch(FileNotFoundException e){
-        //     //System.out.println("File not found");
-        // }
-
-//        while (true) {
-//            ui.printnewline();
-//            String echo = scan.nextLine();
             String echo = input;
             Parser split = new Parser(echo);
             String error = "";
@@ -91,32 +73,18 @@ public class Duke extends Application{
             String firstWord = split.getType();
 
             if (firstWord.equals("bye")) {
-                // if bye, then end the program
-//                ui.printline();
+
                 return "\tBye. Hope to see you again soon!";
-//                System.out.println("\tBye. Hope to see you again soon!");
-//                ui.printline();
-                
-                
-//                break;
 
             } else if (firstWord.equals("list")) {
-                //if list, print the list of Duke.tasks
                 return tasks.printList();
-
-
             } else if (firstWord.equals("done")) {
-                //if done, change the task status and tell them what they have completed
                 int taskNum = Integer.parseInt(split.getDesc().get(0));
-                //scan.nextLine();
-                //System.out.println(taskNum);
-                
                 int taskNumb = taskNum - 1;
                 
                 if (taskNumb >= tasks.size()) {
                     error = "taskDoNotExist";
                 } else if (tasks.getTask(taskNumb).getIsDone()) {
-                    //System.out.println("im here");
                     error = "taskAlreadyCompleted";
                 } else {
                     Task change = tasks.getTask(taskNumb);
@@ -199,8 +167,6 @@ public class Duke extends Application{
                         error = "emptyEvent";
                     } else {
                         int slashInt = help.indexOf("/at");
-                        //System.out.println(slashInt);
-                        //time = help.substring();
                         if (slashInt == -1) {
                             error = "emptyAt";
                         } else {
@@ -209,7 +175,6 @@ public class Duke extends Application{
                             if (task.equals(" ")) {
                                 error = "emptyEvent";
                             } else {
-                                //System.out.println(task);
                                 newTask = new Event(task, storage.dateTimeConversion(time));
                             }
                         }
@@ -221,7 +186,6 @@ public class Duke extends Application{
                 if (!error.isEmpty() || newTask == null) {
                     
                     AException ee =  new AException();
-//                    ui.printline();
                     String emsg = "";
                     if (error.equals("emptyToDo")) {
                         emsg =  ee.emptyToDoException();
@@ -237,11 +201,9 @@ public class Duke extends Application{
                         emsg = ee.dontUnderstand();
                     }
 
-//                    ui.printline();
                     error = "";
                     return emsg;
                 } else {
-//                    return "here";
                     tasks.add(newTask);
                     saving((tasks.getList()));
                     return ui.takeInput(newTask, tasks.size());
@@ -257,17 +219,10 @@ public class Duke extends Application{
                 } else if (error.equals("taskAlreadyCompleted")) {
                     return ee2.taskAlreadyCompleted();
                 }
-//                ui.printline();
             }
 
             return "";
 
-//            try {
-//                storage.writeFile(tasks.getList());
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            }
-//        }
     }
 
     public void saving(LinkedList<Task> li){
@@ -277,11 +232,6 @@ public class Duke extends Application{
             e.printStackTrace();
         }
     }
-    
-    
-//    public static void main(String[] args) {
-//        new Duke("duke.txt");
-//    }
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -299,7 +249,6 @@ public class Duke extends Application{
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 

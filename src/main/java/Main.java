@@ -10,10 +10,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-//    private Duke duke;
-//    public Main(){
-//        Duke duke = new Duke("data/duke.txt");
-//    }
     private Duke duke = new Duke("/Users/colourincrayons/Desktop/Uni Notes/Y2S1/CS2103T/duke/src/main/resources/data/duke.txt");
 
     @Override

@@ -7,8 +7,8 @@ public class Utils {
      * Takes in an array of strings and returns a copy of that array with each
      * element string trimmed.
      * 
-     * @param array
-     * @return
+     * @param array an input array of strings
+     * @return a copy of the input array, each element trimmed
      */
     public static String[] trimAll(String[] array) {
         String[] arrayCopy = Arrays.copyOf(array, array.length);

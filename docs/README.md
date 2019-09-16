@@ -1,4 +1,4 @@
-# User Guide
+# Duke
 
 ## Features 
 
@@ -18,3 +18,6 @@ Example of usage:
 Expected outcome:
 
 `outcome`
+
+
+

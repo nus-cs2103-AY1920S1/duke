@@ -84,7 +84,9 @@ public class Date {
         }
 
         int t = Integer.parseInt(timing);
-        if (t > 12) {
+        if (t == 12) {
+            return t + "pm";
+        } else if (t > 12) {
             return (t % 12) + "pm";
         } else if (t == 0) {
             return 12 + "am";

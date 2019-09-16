@@ -9,7 +9,7 @@ class DateTest {
     @Test
     void testNoonTime() {
         Date day = new Date("2/10/2020 1200");
-        assertEquals("2nd of October 2020, 10am", day.toString());
+        assertEquals("2nd of October 2020, 12pm", day.toString());
     }
 
     @Test

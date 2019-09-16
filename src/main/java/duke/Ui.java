@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents a user interface.
@@ -12,7 +11,6 @@ import java.util.Scanner;
  * user inputs.
  */
 public class Ui {
-    protected Scanner scanner = new Scanner(System.in);
 
     /**
      * Prints the welcome logo.
@@ -42,14 +40,6 @@ public class Ui {
     public void printWelcome() {
         printLogo();
         greetUser();
-    }
-
-    /**
-     * Reads a line of command given by the user.
-     * @return The unprocessed raw command.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
     }
 
     /**
@@ -147,12 +137,5 @@ public class Ui {
      */
     public void printMessage(String message) {
         System.out.println(message);
-    }
-
-    /**
-     * Closes the scanner.
-     */
-    public void closeScanner() {
-        scanner.close();
     }
 }

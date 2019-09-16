@@ -1,0 +1,7 @@
+language: java
+notifications:
+  email:
+    recipients:
+      - febee99@gmail.com
+    on_success: always # default: never
+    on_failure: always # default: always

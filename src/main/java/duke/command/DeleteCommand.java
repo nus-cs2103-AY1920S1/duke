@@ -6,7 +6,9 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 
 public class DeleteCommand extends Command {
+
     private final int index;
+    private int[] indexes;
 
     /**
      * Initialises a DeleteCommand.
@@ -16,6 +18,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int index) {
         this.index = index;
     }
+
 
     /**
      * Executes the Delete Command and removes the task from the Linked List and file.

@@ -1,6 +1,7 @@
 package ui;
 
 import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * A launcher class to workaround classpath issues.

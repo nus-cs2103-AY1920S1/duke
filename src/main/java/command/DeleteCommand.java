@@ -26,11 +26,15 @@ public class DeleteCommand extends Command {
      * @param storage Tasks storage: load & save.
      */
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
-        Task task = tasks.remove(index);
+        if (tasks.getSize() == 0) {
+            super.message = "No tasks in the task list. Can't remove anything!\nTry adding some tasks first :)";
+        } else {
+            Task task = tasks.remove(index - 1);
 
-        //display successful message and task count
-        super.message = "Noted. I've removed this task:\n";
-        super.message += task.toString() + "\n";
-        super.message += "Now you have " + tasks.getSize() + " tasks in the list.";
+            //display successful message and task count
+            super.message = "Noted. I've removed this task:\n";
+            super.message += task.toString() + "\n";
+            super.message += "Now you have " + tasks.getSize() + " tasks in the list.";
+        }
     }
 }

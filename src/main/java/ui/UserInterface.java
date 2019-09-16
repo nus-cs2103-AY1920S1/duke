@@ -13,7 +13,7 @@ public class UserInterface {
      * Displays the welcome message for the user and prompts their inputs.
      */
     public String welcome() {
-        return "\tHello! I'm duke.Duke\n\tWhat can I do for you?";
+        return "Hello! I'm duke.Duke\nWhat can I do for you?";
     }
 
     /**
@@ -26,8 +26,12 @@ public class UserInterface {
     /**
      * Displays error in loading of data.
      */
-    public void showLoadingError() {
-        System.out.println("No data was loaded into the task list.");
+    public String showLoadingError(String msg) {
+        return msg;
+    }
+
+    public String showLoadingSuccess() {
+        return "Data was loaded from file.";
     }
 
     /**

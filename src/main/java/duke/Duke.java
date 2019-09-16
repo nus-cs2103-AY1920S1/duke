@@ -1,6 +1,8 @@
 package duke;
 
 import command.Command;
+import exception.CorruptedDataException;
+import exception.DukeException;
 import task.TaskList;
 import ui.UserInterface;
 
@@ -16,6 +18,8 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private UserInterface ui;
+
+    private boolean isDataLoaded = false;
 
     public Duke(String filepath) {
         startup(filepath);
@@ -50,16 +54,25 @@ public class Duke {
      * Constructs Duke object.
      * @param filePath Specified file destination.
      */
-    public void startup(String filePath) {
+    private void startup(String filePath) {
         ui = new UserInterface();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            isDataLoaded = true;
         } catch (FileNotFoundException | ParseException e) {
             ui.showError(e.getMessage());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            isDataLoaded = false;
             tasks = new TaskList();
+        }
+    }
+
+    public String getLoadFileResponse() {
+        if (isDataLoaded) {
+            return ui.showLoadingSuccess();
+        } else {
+            return ui.showLoadingError(new CorruptedDataException().getMessage());
         }
     }
 

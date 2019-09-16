@@ -23,7 +23,11 @@ public class ListCommand extends Command {
      * @param storage Tasks storage: load & save.
      */
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
-        super.message = "Here are the tasks in your list:\n";
-        super.message += tasks.list();
+        if (tasks.getSize() == 0) {
+            super.message = "Congrats, Task list is empty. Time for a break!";
+        } else {
+            super.message = "Here are the tasks in your list:\n";
+            super.message += tasks.list();
+        }
     }
 }

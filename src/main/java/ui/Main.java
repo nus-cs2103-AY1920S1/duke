@@ -26,6 +26,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            fxmlLoader.<MainWindow>getController().showLoadDataStatus();
             fxmlLoader.<MainWindow>getController().showWelcome();
         } catch (IOException e) {
             e.printStackTrace();

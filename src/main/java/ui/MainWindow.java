@@ -53,9 +53,16 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    public void showWelcome() {
+    void showWelcome() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.getUi().welcome(), dukeImage)
+        );
+    }
+
+    void showLoadDataStatus() {
+        String msg = duke.getLoadFileResponse();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(msg, dukeImage)
         );
     }
 }

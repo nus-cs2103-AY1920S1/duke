@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.text.ParseException;
-import duke.DukeException;
-import duke.Parser;
+import exception.DukeException;
 
 class ParserTest {
     @Test

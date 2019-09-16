@@ -1,5 +1,7 @@
 package duke;
 
+import exception.CorruptedDataException;
+import exception.DukeException;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -59,7 +61,7 @@ public class Storage {
                 taskToAdd = new Todo(task[2], task[1].equals("+"));
                 break;
             default:
-                throw new DukeException();
+                throw new CorruptedDataException();
             }
             tasks.add(taskToAdd);
         }

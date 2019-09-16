@@ -8,6 +8,10 @@ import command.DoneCommand;
 import command.AddCommand;
 import command.EndCommand;
 
+import exception.DukeException;
+
+import exception.InvalidCommandException;
+import exception.MissingArgumentsException;
 import task.Deadline;
 import task.Todo;
 import task.Event;
@@ -33,8 +37,6 @@ public class Parser {
         //action required
         command = task[0];
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
         switch (command) {
         case "list":
             return new ListCommand();
@@ -43,39 +45,38 @@ public class Parser {
         case "bye":
             return new EndCommand();
         case "delete":
-            if (taskSize < 2) {
-                throw new DukeException(command);
-            } else {
-                return new DeleteCommand(Integer.parseInt(task[1].trim()));
-            }
         case "todo":
-            if (taskSize < 2) {
-                throw new DukeException(command);
-            } else {
-                return new AddCommand(new Todo(task[1].trim()));
-            }
+        case "find":
         case "deadline":
-            if (taskSize < 2) {
-                throw new DukeException(command);
-            } else {
-                String[] d = task[1].split(" /by ", 2);
-                return new AddCommand(new Deadline(d[0].trim(), formatter.parse(d[1])));
-            }
         case "event":
             if (taskSize < 2) {
-                throw new DukeException(command);
+                throw new MissingArgumentsException(command);
             } else {
-                String[] e = task[1].split(" /at ", 2);
-                return new AddCommand(new Event(e[0].trim(), formatter.parse(e[1])));
-            }
-        case "find":
-            if (taskSize < 2) {
-                throw new DukeException(command);
-            } else {
-                return new FindCommand(task[1]);
+                return addCommand(command, task[1]);
             }
         default:
-            throw new DukeException();
+            throw new InvalidCommandException();
+        }
+    }
+
+    private static Command addCommand(String command, String description) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        switch (command) {
+            case "delete":
+                return new DeleteCommand(Integer.parseInt(description.trim()));
+            case "todo":
+                return new AddCommand(new Todo(description.trim()));
+            case "find":
+                return new FindCommand(description);
+            case "deadline":
+                String[] byLimiter = description.split(" /by ", 2);
+                return new AddCommand(new Deadline(byLimiter[0].trim(), formatter.parse(byLimiter[1])));
+            case "event":
+                String[] atLimiter = description.split(" /at ", 2);
+                return new AddCommand(new Event(atLimiter[0].trim(), formatter.parse(atLimiter[1])));
+            default:
+                return null;
         }
     }
 }

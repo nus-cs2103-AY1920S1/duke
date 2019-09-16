@@ -1,4 +1,0 @@
-T | + | read book
-E | - | project meeting | 02-12-2019 18:00
-D | - | team meeting | 11-12-2222 18:00
-T | - | eat

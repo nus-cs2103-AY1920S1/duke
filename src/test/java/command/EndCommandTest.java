@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
-import duke.DukeException;
+import exception.DukeException;
 import duke.Parser;
 
 class EndCommandTest {

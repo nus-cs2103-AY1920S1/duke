@@ -21,7 +21,6 @@ public class Parser {
     public static Command parse(String commandText) throws DukeException {
         String[] arr = commandText.split(" ", 2);
         String command = arr[0];
-        int size = arr.length;
 
         switch (command) {
         case "list":
@@ -46,7 +45,7 @@ public class Parser {
             return new ExitCommand();
 
         case "find":
-            return new FindCommand(arr[1]);
+            return new FindCommand(commandText);
 
         case "help":
             return new HelpCommand();

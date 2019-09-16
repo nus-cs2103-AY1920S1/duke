@@ -49,7 +49,8 @@ public class AddCommand extends Command {
 
         case "deadline":
             String[] input2 = arrOfText[1].trim().split("/by");
-            if (input2.length != 2) {
+            String pattern1 = String.format("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2} [0-9]{4}$");
+            if (input2.length != 2 || !input2[1].trim().matches(pattern1)) {
                 throw new InvalidDescriptionException("Wrong description");
             }
             String response2 = ui.showText(task.addTask(new Deadlines(input2[0], input2[1])));
@@ -58,7 +59,8 @@ public class AddCommand extends Command {
 
         case "event":
             String[] input3 = arrOfText[1].trim().split("/at");
-            if (input3.length != 2) {
+            String pattern2 = String.format("^[0-3]?[0-9]/[0-3]?[0-9]/(?:[0-9]{2})?[0-9]{2} [0-9]{4}$");
+            if (input3.length != 2 || !input3[1].trim().matches(pattern2)) {
                 throw new InvalidDescriptionException("Wrong description");
             }
             String response3 = ui.showText(task.addTask(new Event(input3[0], input3[1])));

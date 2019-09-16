@@ -2,6 +2,7 @@ package commands;
 
 import exceptions.DukeException;
 
+import exceptions.InvalidDescriptionException;
 import oop.Storage;
 import oop.Ui;
 
@@ -31,8 +32,13 @@ public class FindCommand extends Command {
      * @throws DukeException Possibility of throwing a DukeException due to
      *      an exception occurring in the running of the application.
      */
-    public String execute(TaskList task, Ui ui, Storage storage) {
-        String pattern = String.format(".*%s.*", description);
+    public String execute(TaskList task, Ui ui, Storage storage) throws DukeException {
+        String[] arrOfText = description.split(" ", 2);
+        if (arrOfText.length < 2 || arrOfText[1].matches("\\s*")) {
+            throw new InvalidDescriptionException("Wrong description");
+        }
+
+        String pattern = String.format(".*%s.*", arrOfText[1]);
         TaskList tempTaskList = new TaskList();
         for (Task t : task.getTaskList()) {
             if (t.getDescription().matches(pattern)) {

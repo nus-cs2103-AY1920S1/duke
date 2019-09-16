@@ -76,22 +76,18 @@ public class Date {
      * @return The formatted time.
      */
     private String getTime(String time) {
-        String timing = "";
-        if (time.startsWith("0")) {
-            timing = time.substring(1, 2);
-        } else {
-            timing = time.substring(0, 2);
-        }
+        String hour = time.startsWith(("0")) ? time.substring(1, 2) : time.substring(0, 2);
+        String minutes = "." + time.substring(2, 4);
 
-        int t = Integer.parseInt(timing);
+        int t = Integer.parseInt(hour);
         if (t == 12) {
-            return t + "pm";
+            return t + minutes + "pm";
         } else if (t > 12) {
-            return (t % 12) + "pm";
+            return (t % 12) + minutes + "pm";
         } else if (t == 0) {
-            return 12 + "am";
+            return 12 + minutes + "am";
         } else {
-            return t + "am";
+            return t + minutes + "am";
         }
     }
 

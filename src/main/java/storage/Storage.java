@@ -82,6 +82,11 @@ public class Storage {
      * @throws IOException if designated file path is not found
      */
     public void save(TaskList tasks) throws IOException {
+        // create new directory called data if it does not exist
+        String currDir = System.getProperty("user.dir");
+        File createDataDir = new File(currDir + "/data");
+        createDataDir.mkdir();
+
         FileWriter fw = new FileWriter(this.filePath);
         StringJoiner textToAdd = new StringJoiner(System.lineSeparator());
         for (Task task : tasks.getTasks()) {

@@ -1,4 +1,4 @@
-Here are the list of commands that you can use:
+Woooof! Here are the list of commands that you can use:
   - todo <task name>
       (saves a default To-Do task)
   - deadline <task name> /by <date and time in D/MM/YYYY HHmm>

@@ -32,8 +32,8 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
          */
-        final String startMessage = "Hello! I'm Duke, Your Task Assistant Dog.\n"
-                + "What can I do for you?\n" + "If you need help, type help in the field.";
+        final String startMessage = "Bark Bark! I'm Duke, Your Task Assistant Dog.\n"
+                + "What can I do for you?\n" + "If you need help, type 'help' in the field.";
         return startMessage;
     }
 

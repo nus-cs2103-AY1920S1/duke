@@ -112,6 +112,14 @@ Here are the tasks in your list:
 2. [D][✓] example 2 (by: 15 September 2018, 12:39PM)
 ```
 
+### `help` - Displays a help message
+
+Ask Duke for the list of commands you can use if you are forgetful or new to the system.
+
+Example of usage:
+
+`help`
+
 ### `exit` - Closes the chat bot
 
 Say goodbye to Duke as it goes to sleep. The application window does not

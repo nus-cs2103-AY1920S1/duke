@@ -14,9 +14,9 @@ public class DeadlineTest {
         Date date1 = dateWithTime.parse("12/11/2019 1300");
         Deadline deadline1 = new Deadline("submit project 1", date1);
         Deadline deadline2 = new Deadline("submit project 2", date1, true);
-        assertEquals("[D][\u2718] submit project 1 (by: Tue Nov 12 13:00:00 SGT 2019)",
+        assertEquals("[D][\u2718] submit project 1 (by: Tue 12/11/2019 1300)",
                 deadline1.toString());
-        assertEquals("[D][\u2713] submit project 2 (by: Tue Nov 12 13:00:00 SGT 2019)",
+        assertEquals("[D][\u2713] submit project 2 (by: Tue 12/11/2019 1300)",
                 deadline2.toString());
     }
 }

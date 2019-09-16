@@ -14,9 +14,9 @@ public class EventTest {
         Date date1 = dateWithTime.parse("12/11/2019 1300");
         Event event1 = new Event("attend wedding 1", date1);
         Event event2 = new Event("attend wedding 2", date1, true);
-        assertEquals("[E][\u2718] attend wedding 1 (at: Tue Nov 12 13:00:00 SGT 2019)",
+        assertEquals("[E][\u2718] attend wedding 1 (at: Tue 12/11/2019 1300)",
                 event1.toString());
-        assertEquals("[E][\u2713] attend wedding 2 (at: Tue Nov 12 13:00:00 SGT 2019)",
+        assertEquals("[E][\u2713] attend wedding 2 (at: Tue 12/11/2019 1300)",
                 event2.toString());
     }
 }

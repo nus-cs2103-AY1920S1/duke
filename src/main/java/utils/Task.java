@@ -20,6 +20,10 @@ public class Task {
         return "[" + (isDone ? "\u2713" : "\u2718") + "]";
     }
 
+    public String getTaskName(){
+        return this.taskName;
+    }
+    
     @Override 
     public String toString(){
         return getStatusIcon() + " " + this.taskName;

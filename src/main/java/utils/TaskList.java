@@ -59,6 +59,22 @@ public class TaskList {
         ui.printTab("Nice! I've marked this task as done:\n" + "    " + current.toString());
     }
 
+    public void find(String keyword){
+        TaskList matches = new TaskList();
+
+        for(int i = 0; i < tasks.size(); i++){
+            String taskName = tasks.get(i).getTaskName();
+
+            if(taskName.contains(keyword)){
+                matches.add(tasks.get(i));
+            }
+            
+        }
+
+        ui.print("    Here are the matching tasks in your list: \n" + 
+                matches.toString());
+    }
+
     @Override
     public String toString(){
         String output = ""; 

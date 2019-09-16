@@ -15,11 +15,14 @@ public class DoneCommand extends Command {
 
         try {
             int val = Integer.parseInt(splitWords[1]);
+            assert val <= (tasks.size()) : "Enter a smaller number";
             tasks.taskDone(val-1);
             ui.doneMessage(val-1, tasks);
             storage.updateFile(tasks);
+        } catch (AssertionError f){
+            System.out.println(f.getMessage());
         } catch (Exception e) {
-            System.out.println("Error, you have entered an invalid number");
+            System.out.println("file not found");
         }
     }
 

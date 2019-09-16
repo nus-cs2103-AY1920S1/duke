@@ -71,7 +71,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieve list of tasks contained by the TaskList object
+     * Retrieve list of tasks contained by the TaskList object.
      * @return ArrayList List of tasks
      */
     public ArrayList<Task> getTasks() {

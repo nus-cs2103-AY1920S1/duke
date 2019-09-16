@@ -23,3 +23,5 @@ src/main/java/ToDo.class
 src/main/java/DukeException.class
 src/main/java/Storage.class
 src/main/java/Parser.class
+data/DukeArchive.txt
+src/main/java/Duke.class

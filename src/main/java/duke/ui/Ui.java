@@ -152,4 +152,36 @@ public class Ui {
     public String showAddedAliasCommand(String keyword, String alias) {
         return String.format("%s has been added as an alias to the %s command.\n", alias, keyword);
     }
+
+    /**
+     * Returns the String representation of a guide to provide help to the users.
+     *
+     * @return the String representation of the help guide.
+     */
+    public String showHelpCommand() {
+        String helpBye = "1. Type \"bye\" to exit from Duke.";
+        String helpList = "2. Type \"list\" to see the list of Tasks in Duke.";
+        String helpDone = "3. Type \"done\" followed by the number of the Task to be done to complete it.";
+        String helpTodo = "4. Type \"todo\" followed by a Task description to add a Todo Task.";
+        String helpDeadline = "5. Type \"deadline\" followed by a Task description in the format, description /by date"
+                + "(date in the format ddmmyyyy HHHH), to add a Deadline Task.";
+        String helpEvent = "6. Type \"event\" followed by a Task description in the format, description /at date"
+                + "(date in the format ddmmyyyy HHHH), to add a Event Task.";
+        String helpDelete = "7. Type \"delete\" followed by the number of the Task to be deleted from the TaskList"
+                + "to delete the specified command.";
+        String helpFind = "8. Type \"find\" followed by keywords that would match the description of the Tasks"
+                + "to find by those keywords.";
+        String helpAlias = "9. Type \"alias\" followed by a current command and its desired alias to create the alias.";
+
+        return String.format("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n",
+                helpBye,
+                helpList,
+                helpDone,
+                helpTodo,
+                helpDeadline,
+                helpEvent,
+                helpDelete,
+                helpFind,
+                helpAlias);
+    }
 }

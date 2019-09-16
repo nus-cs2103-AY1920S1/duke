@@ -58,6 +58,7 @@ public class CommandCentre {
         this.addDeleteCommand();
         this.addFindCommand();
         this.addAliasCommand();
+        this.addHelpCommand();
     }
 
     private void addByeCommand() {
@@ -181,6 +182,15 @@ public class CommandCentre {
                commands.put(alias, CommandCentre.getCommand(keyword));
                return ui.showAddedAliasCommand(keyword, alias);
            }
+        });
+    }
+
+    private void addHelpCommand() {
+        commands.put("help", new Command() {
+            @Override
+            public String execute(Optional<String[]> input) throws DukeException {
+                return ui.showHelpCommand();
+            }
         });
     }
 }

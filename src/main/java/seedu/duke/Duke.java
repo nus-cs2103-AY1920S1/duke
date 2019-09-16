@@ -30,6 +30,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = parser.parse(input);
+            if (command == null) {
+                return null;
+            }
             if (command.isExitCommand()) {
                 exit();
             }

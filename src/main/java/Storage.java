@@ -20,7 +20,18 @@ public class Storage {
      * @param fileName The tasks will load and save from the given file.
      */
     public Storage(String fileName) {
-        this.fileName = fileName;
+        File f1 = new File(System.getProperty("java.class.path"));
+        File dir = f1.getAbsoluteFile().getParentFile();
+        this.fileName = dir.toString() + "\\" + fileName;
+        try {
+            File f = new File(this.fileName);
+            if (!f.exists()) {
+                f.getParentFile().mkdirs();
+                f.createNewFile();
+            }
+        } catch (IOException e) {
+            e.getMessage();
+        }
     }
 
     /**
@@ -29,15 +40,6 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-        try {
-            File f = new File(fileName);
-            if (!f.exists()) {
-                f.getParentFile().mkdirs();
-                f.createNewFile();
-            }
-        } catch (IOException e) {
-            e.getMessage();
-        }
         try {
             FileReader reader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(reader);
@@ -100,7 +102,7 @@ public class Storage {
             bufferedWriter.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 }

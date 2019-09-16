@@ -19,69 +19,56 @@ commands into a Command Box.
 ### 1. Adding and Creating a Task: Todo, Deadline, Event
 Allows users to add a new Task into Duke.
 
-*Todo Task
+Todo Task
 	
-	* todo [Task_Description] - e.g. `todo MA1101R Tutorial 2`
+	 todo [Task_Description] - e.g. "todo MA1101R Tutorial 2"
 
-*Event Task
+Event Task
 	
-	* event [Task_Description] /at dd/mm/yyyy HHMM - e.g. `event Attend Wedding /at 02/12/2019 1800`
+	 event [Task_Description] /at dd/mm/yyyy HHMM - e.g. "event Attend Wedding /at 02/12/2019 1800"
 
-*Deadline Task
+Deadline Task
 	
-	* deadline [Task_Description] /by dd/mm/yyyy HHMM - e.g. `deadline Submit Project /by 12/09/2019 1500`
+	 deadline [Task_Description] /by dd/mm/yyyy HHMM - e.g. "deadline Submit Project /by 12/09/2019 1500"
 
 Note : *Duke* does not allow any duplicate [Task_Description], so do remember to input a unique [Task_Description] when
 creating new Task.
 
+
 ### 2. List and Display all Task in the current list: List
 Shows and Displays the whole list of task in the current list, together with their descriptions and date/time information. 
 
-*List
+List
 	
-	* list - e.g. `list`
+	 list - e.g. "list"
 
 
 ### 3. Find and Display Task by keyword: Find
 Finds and displays tasks with descriptions that corresponds to the input keyword.
 
-*Find
+Find
 	
-	* find [keyword] - e.g. `find tutorial`   
+	 find [keyword] - e.g. "find tutorial"   
 
 
 ### 4. Deleting a task on the list: Delete
 Locate a task which corresponds to the input index and remove/delete it from the current list.
 
-*Delete
+Delete
 	
-	* delete [index] - e.g. `delete 1`
+	 delete [index] - e.g. "delete 1"
 
 
 ### 5. Marks task as "done": Done
 Locate a task which corresponds to the input index and mark it as done.
 
-*Done
+Done
 	
-	* done [index] - e.g. `done 1` 
+	 `done` [index] - e.g. "done 1" 
 
 ### 6. Exiting the program: Bye
 Exits and Closes the program
 
-*Bye
+Bye
 	
-	* bye - e.g. `bye`
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
+	 `bye` - e.g. "bye"

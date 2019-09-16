@@ -64,20 +64,16 @@ public class Duke extends Application{
             String echo = input;
             Parser split = new Parser(echo);
             String error = "";
-
             String firstWord = split.getType();
             assert firstWord !=null;
 
             if (firstWord.equals("bye")) {
-
                 return "\tBye. Hope to see you again soon!";
-
             } else if (firstWord.equals("list")) {
                 return tasks.printList();
             } else if (firstWord.equals("done")) {
                 int taskNum = Integer.parseInt(split.getDesc().get(0));
                 int taskNumb = taskNum - 1;
-                
                 if (taskNumb >= tasks.size()) {
                     error = "taskDoNotExist";
                 } else if (tasks.getTask(taskNumb).getIsDone()) {
@@ -88,20 +84,16 @@ public class Duke extends Application{
                     saving((tasks.getList()));
                     return ui.printDone(change);
                 }
-
             } else if (firstWord.equals("delete")) {
                 int taskNum = Integer.parseInt(split.getDesc().get(0));
                 int taskNumb = taskNum - 1;
-
                 if (taskNumb >= tasks.size()) {
                     error = "taskDoNotExist";
                 } else {
-
                     tasks.remove(taskNumb);
                     saving((tasks.getList()));
                     return ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
                 }
-
             } else if (firstWord.equals("find")) {
                 String searchWord = split.getDesc().get(0);
                 LinkedList<Task> listWord = new LinkedList<>();
@@ -117,7 +109,6 @@ public class Duke extends Application{
                 String actual =  "";
                 Task newTask = null;
                 LinkedList<String> copy = split.getDesc();
-
                 if (firstWord.equals("todo")) {
                     actual =  String.join(" ", copy);
                     if (actual.isEmpty()) {
@@ -126,16 +117,12 @@ public class Duke extends Application{
                     newTask =  new ToDo(actual);
                 } else if (firstWord.equals("deadline")) {
                     String help = String.join(" ", copy);
-
                     String task = "";
                     String time = "";
-
                     if (help.isEmpty()) {
                         error = "emptyDeadline";
                     } else {
                         int slashInt = help.indexOf("/by");
-                        //System.out.println(slashInt);
-                        //time = help.substring();
                         if (slashInt == -1) {
                             error = "emptyBy";
                         } else {
@@ -150,15 +137,12 @@ public class Duke extends Application{
                                 System.out.println(time);
                             }
                         }
-
                     }
  
                 } else if (firstWord.equals("event")) {
                     String help = String.join(" ", copy);
-
                     String task = "";
                     String time = "";
-
                     if (help.isEmpty()) {
                         error = "emptyEvent";
                     } else {
@@ -178,9 +162,8 @@ public class Duke extends Application{
                     }
                 }
 
-                //handle all errors
+                //Error Handling
                 if (!error.isEmpty() || newTask == null) {
-                    
                     AException ee =  new AException();
                     String emsg = "";
                     if (error.equals("emptyToDo")) {
@@ -196,7 +179,6 @@ public class Duke extends Application{
                     } else {
                         emsg = ee.dontUnderstand();
                     }
-
                     error = "";
                     return emsg;
                 } else {
@@ -228,7 +210,6 @@ public class Duke extends Application{
                     return ee2.taskAlreadyCompleted();
                 }
             }
-
             return "";
 
     }

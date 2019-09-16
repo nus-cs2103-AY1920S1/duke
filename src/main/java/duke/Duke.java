@@ -9,9 +9,7 @@ import duke.util.Storage;
 import duke.util.Ui;
 
 /**
- * CLI Chat assistant that keep tracks of tasks.
- * Will be developed incrementally over the course
- * of CS2103.
+ * GUI Chat assistant that keep tracks of tasks.
  */
 public class Duke {
     // object attributes

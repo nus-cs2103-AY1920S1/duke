@@ -19,6 +19,7 @@ public class Ui {
             + "Hang on while I close this window for you...";
     public static final String LOADING_ERROR = "I couldn't find a saved task list...\n"
             + "Let me start up a brand new list!";
+    public static final String LINE = "    ____________________________________________________________";
 
     // Object attributes
     private Scanner sc;
@@ -28,16 +29,6 @@ public class Ui {
      */
     public Ui() {
         this.sc = new Scanner(System.in);
-    }
-
-    /**
-     * Returns a string containing input prompt from the user.
-     *
-     * @return String containing user input
-     */
-    public String getUserCommand() {
-        System.out.println(); // Injects a spacing for future user input
-        return sc.nextLine();
     }
 
     /**
@@ -51,32 +42,11 @@ public class Ui {
     }
 
     /**
-     * Prints a formatted String to the screen. This overloaded method provides
-     * an additional field for specifiying additional indents to pass to
-     * indentMessage().
-     *
-     * @param message String to be formatted and printed to screen
-     * @param extraIndent number of extra leading spaces on top of default indent
-     */
-    public void displayMessage(String message, int extraIndent) {
-        System.out.print(this.indentMessage(message, extraIndent));
-    }
-
-    /**
-     * Prints a single-line formatted String with default indent to the screen.
-     *
-     * @param message String to be formatted and printed to screen
-     */
-    public void displaySingleLine(String message) {
-        System.out.println(INDENT + message);
-    }
-
-    /**
      * Prints a line with default indents to the screen. Used to demarcate
      * Duke output from user input.
      */
     public void showLine() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println(LINE);
     }
 
     /**
@@ -127,24 +97,6 @@ public class Ui {
         return indentedOutput.toString();
     }
 
-
-    /**
-     * Prints out a formatted hello message with its
-     * own enclosing lines.
-     */
-    public void greetHello() {
-        this.showLine();
-        this.displayMessage(Ui.HELLO);
-        this.showLine();
-    }
-
-    /**
-     * Prints out a formatted goodbye greeting on the screen.
-     */
-    public void greetGoodbye() {
-        this.displaySingleLine(GOODBYE);
-    }
-
     /**
      * Prints out a formatted saved list loading error message.
      */
@@ -152,32 +104,5 @@ public class Ui {
         this.showLine();
         this.displayMessage(LOADING_ERROR);
         this.showLine();
-    }
-
-    /*
-     Prints the target string between two horizontal
-     bars. Adds a newline to the input string
-     before printing. Currently not used.
-
-     @param output  The string to be printed
-     */
-    private void formattedPrintln(String output) {
-        System.out.println("____________________________________________________________\n"
-                + output
-                + "\n"
-                + "____________________________________________________________\n");
-    }
-
-    /*
-     Prints the target string between two horizontal
-     bars. Newline is not added to input string.
-     Currently not used.
-
-     @param output  The string to be printed
-    */
-    private void formattedPrint(String output) {
-        System.out.println("____________________________________________________________\n"
-                + output
-                + "____________________________________________________________\n");
     }
 }

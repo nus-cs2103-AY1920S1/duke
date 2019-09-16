@@ -21,10 +21,10 @@ import java.io.FileWriter;
  */
 public class Storage {
     // CLASS ATTRIBUTES
-    // search for a config file which contains a path to the task list that duke should startup with
+    // path to a config file which contains a path to the task list that duke should startup with
     private static final String CONFIG_PATH = "./config/config.txt";
     // the default path to be used if no config file is found
-    private static final String DEFAULT_SAVE_PATH = "./saved_lists/savestate.tmp";
+    private static final String DEFAULT_SAVE_PATH = "./saved_lists/default.tmp";
 
 
     // OBJECT ATTRIBUTES

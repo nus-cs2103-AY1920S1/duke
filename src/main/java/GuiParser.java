@@ -75,6 +75,8 @@ public class GuiParser {
                     String out = gui.find();
                     out = out + "\n" + tasklist.printlistfind(temp);
                     return out;
+                } else if (ls[0].equals("help")) {
+                    return helpCommand();
                 } else {
                     try {
                         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -214,6 +216,18 @@ public class GuiParser {
         count--;
         out = out + "\n" + gui.listcount(count);
         storage.saveFile(tasklist.returnTasks());
+        return out;
+    }
+
+    public String helpCommand() {
+        String intro = "Here are some commands you can use:\n";
+        String list = "list\n";
+        String del = "delete [item number]\n";
+        String todo = "todo [todo description]\n";
+        String event = "event [event description] [time and date, dd/mm/yy]\n";
+        String deadline = "deadline [deadline description] [time and date, dd/mm/yy]\n";
+        String find = "find [description word]\n";
+        String out = intro + list + todo + event + deadline + find + del;
         return out;
     }
 }

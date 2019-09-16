@@ -12,7 +12,8 @@ public class GuiUI {
         */
         String a = ("\nHello! I'm Jeanne");
         String b = ("\nWhat can I do for you?\n");
-        return a + b;
+        String c = "\nYou may type 'help' for a list of commands!\n";
+        return a + b + c;
     }
 
     public String bye() {

@@ -1,5 +1,16 @@
 [![Build Status](https://travis-ci.org/SakuraBlossom/duke.svg?branch=master)](https://travis-ci.org/SakuraBlossom/duke)
 
+# Duke
+
+**Duke** is a chatbot designed for anyone who wants to get organised!
+
+ [Duke image](docs/Ui.png)
+
+
+## More Information
+
+To view the **user guide**, please click [here](https://sakurablossom.github.io/duke/).
+
 ## Setting up
 
 **Prerequisites**

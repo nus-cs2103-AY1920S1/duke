@@ -3,6 +3,6 @@ package seedu.duke.exceptions;
 public class DateParseException extends DukeException {
 
     public DateParseException() {
-        super("OOPS!!! Date is in the wrong format");
+        super("Your date format is wrong. It must be in the form of dd/MM/yyyy HHmm");
     }
 }

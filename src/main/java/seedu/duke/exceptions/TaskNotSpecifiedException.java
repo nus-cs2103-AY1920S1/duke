@@ -3,6 +3,6 @@ package seedu.duke.exceptions;
 public class TaskNotSpecifiedException extends DukeException {
 
     public TaskNotSpecifiedException() {
-        super("OOPS!!! Which task is it?");
+        super("Which task is it?");
     }
 }

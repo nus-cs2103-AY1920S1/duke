@@ -16,6 +16,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public void changeDateTime(DateTime by) {
+        this.at = at;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";

@@ -20,6 +20,14 @@ public class Task {
         return (isDone ? "1" : "0"); //return tick or X symbols
     }
 
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
+    public void changeDateTime(DateTime dateTime) {
+
+    }
+
     public String getDescription() {
         return this.description;
     }

@@ -22,9 +22,25 @@ public class Parser {
             if (userInput.substring(5).isBlank()) {
                 throw new EmptyFieldException("OOPS!!! You have to type something that you want to find");
             }
+        } else if (type.equals("edit")) {
+            if (userInput.length() < 7) {
+                throw new EmptyFieldException("OOPS!!! Insufficient input to edit the task");
+            }
+            if (!Character.isDigit(userInput.charAt(5))) {
+                throw new InvalidInputException("OOPS!!! Task number has to be an integer.");
+            }
+            int taskNum = Integer.parseInt(userInput.substring(5, 6));
+            if (taskNum > TaskList.getTaskListSize()) {
+                throw new InvalidInputException("OOPS!!! You do not have that many tasks.");
+            } else if (taskNum <= 0) {
+                throw new InvalidInputException("OOPS!!! Your task number is invalid.");
+            }
         } else if (type.equals("done")) {
             if (userInput.substring(4).isBlank()) {
                 throw new EmptyFieldException("OOPS!!! The task number cannot be empty.");
+            }
+            if (!Character.isDigit(userInput.charAt(5))) {
+                throw new InvalidInputException("OOPS!!! Task number has to be an integer.");
             }
             int taskNum = Integer.parseInt(userInput.substring(5));
             if (taskNum > TaskList.getTaskListSize()) {
@@ -56,9 +72,9 @@ public class Parser {
             if (description.isBlank()) {
                 throw new EmptyFieldException("OOPS!!! The description of a deadline cannot be empty.");
             }
-        } else if (type.equals("by")) {
+        } else if (type.equals("dateTime")) {
             if (userInput.isBlank()) {
-                throw new EmptyFieldException("OOPS!!! The deadline of a deadline cannot be empty.");
+                throw new EmptyFieldException("OOPS!!! The date/time field cannot be empty.");
             }
             String formatString = "dd/mm/yyyy";
             SimpleDateFormat format = new SimpleDateFormat(formatString);
@@ -74,14 +90,6 @@ public class Parser {
             if (description.isBlank()) {
                 throw new EmptyFieldException("OOPS!!! The description of an event cannot be empty.");
             }
-        } else if (type.equals("at")) {
-            if (userInput.isBlank()) {
-                throw new EmptyFieldException("OOPS!!! The 'at' field of an event cannot be empty.");
-            }
-            String formatString = "dd/mm/yyyy";
-            SimpleDateFormat format = new SimpleDateFormat(formatString);
-            format.setLenient(false);
-            format.parse(userInput.split(" ")[0]);
         } else if (type.isBlank() && userInput.isBlank()) {
             throw new EmptyFieldException("OOPS!!! I'm sorry, but you have to input something");
         } else {

@@ -17,6 +17,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public void changeDateTime(DateTime by) {
+        this.by = by;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

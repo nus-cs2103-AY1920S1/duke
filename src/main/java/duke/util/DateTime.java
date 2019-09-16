@@ -29,8 +29,7 @@ public class DateTime implements Serializable {
     public static DateTime parseString(String input) throws DukeException {
         try {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            Date dateTime;
-            dateTime = format.parse(input);
+            Date dateTime = format.parse(input);
             return new DateTime(dateTime);
         } catch (ParseException e) {
             throw new DukeException("I couldn't decipher the date and time"

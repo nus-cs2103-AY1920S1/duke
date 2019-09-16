@@ -16,11 +16,14 @@ public class DeleteCommand extends Command{
 
         try {
             int val = Integer.parseInt(splitWords[1]);
+            assert val <= (tasks.size()) : "Enter a smaller number";
             ui.deleteMessage(val-1, tasks);
             tasks.remove(val - 1);
             storage.updateFile(tasks);
+        } catch (AssertionError f){
+            System.out.println(f.getMessage());
         } catch (Exception e) {
-            System.out.println("Error, you have entered an invalid number");
+            System.out.println("file not found");
         }
     }
 
@@ -29,13 +32,15 @@ public class DeleteCommand extends Command{
 
         try {
             int val = Integer.parseInt(splitWords[1]);
+            assert val <= (tasks.size()) : "Enter a smaller number";
             String result = ui.deleteMessageFX(val-1, tasks);
             tasks.remove(val - 1);
             storage.updateFile(tasks);
             return result;
+        } catch (AssertionError f){
+            return f.getMessage();
         } catch (Exception e) {
-            return "Error, you have entered an invalid number";
-            //return e.getMessage() + "\n" + tasks.size();
+            return "File not found";
         }
     }
 

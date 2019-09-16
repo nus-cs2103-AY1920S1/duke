@@ -40,27 +40,6 @@ public class Duke {
     }
 
     /**
-     * Runs the chatbot.
-     */
-    public void run() {
-        ui.greetUser();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.drawLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printException(e);
-            } finally {
-                ui.drawLine();
-            }
-        }
-    }
-
-    /**
      * Generates the response by Duke in response to the user's input.
      * @param input Input by user.
      * @return Duke's response.
@@ -101,9 +80,5 @@ public class Duke {
         System.out.flush();
         System.setOut(old);
         return message.toString();
-    }
-
-    public static void main(String[] args) {
-        new Duke("C:\\Users\\Yi Yin\\Documents\\Year 2\\Semester 1\\CS2103\\duke\\data\\duke.txt").run();
     }
 }

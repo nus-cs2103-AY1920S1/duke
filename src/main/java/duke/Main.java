@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("C:\\Users\\Yi Yin\\Documents\\Year 2\\Semester 1\\CS2103\\duke\\data\\duke.txt");
+    private Duke duke = new Duke("data/duke.txt");
 
     public Main() {
     }

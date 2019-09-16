@@ -18,7 +18,7 @@ Example of usage:
 
 Expected outcome:
 
-`A new todo will be created with its description being "_todo finish math homework_"`
+`A new todo will be created with its description being "todo finish math homework"`
 
 ### Task Creation - Deadline
 Create deadline tasks and store them within Duke.
@@ -37,15 +37,15 @@ Example of usage:
 
 Expected outcome:
 
-`A new deadline will be created with its description being "_get ready for the party_" and`
-`the deadline's completion data and time being 2/12/2019 1800, or _2nd of December, 2019, 6pm_ as represented by Duke`
+`A new deadline will be created with its description being "get ready for the party" and`
+`the deadline's completion data and time being 2/12/2019 1800, or "2nd of December, 2019, 6pm" as represented by Duke`
 
 ### Task Creation - Event
 Create todo tasks and store them within Duke.
 
 ## Usage
 
-### `event [event description] /at [4/12/2019] [hhmm-hhmm]`
+### `event [event description] /at [DD/MM/YYY] [hhmm-hhmm]`
 
 Type and pass this command to Duke to create and store a new event task. The event's description
 and duration date and time will be as specified by you. To create an event successfully, follow
@@ -57,8 +57,8 @@ Example of usage:
 
 Expected outcome:
 
-`A new event will be created with its description being "_party at school_" and`
-`the event's duration data and time being 2/12/2019 1800-2230, or _2nd of December, 2019, 6pm-10.30pm_ as represented by Duke`
+`A new event will be created with its description being "party at school" and`
+`the event's duration data and time being 2/12/2019 1800-2230, or "2nd of December, 2019, 6pm-10.30pm" as represented by Duke`
 
 ### List
 List down all the tasks stored in Duke.
@@ -126,4 +126,4 @@ Example of usage:
 
 Expected outcome:
 
-`Duke will list down all the tasks which have the word _return_ in them.`
+`Duke will list down all the tasks which have the word "return" in them.`

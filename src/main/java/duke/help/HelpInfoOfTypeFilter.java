@@ -1,6 +1,10 @@
 package duke.help;
 
 public class HelpInfoOfTypeFilter extends HelpInfoOfFilterUsage {
+    /**
+     * Returns a string representation of help information.
+     * @return a string representation of help information.
+     */
     @Override
     public String getHelpInformation() {
         return "TypeFilter is used to filter tasks in your list by task type.\n"

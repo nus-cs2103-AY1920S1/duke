@@ -18,7 +18,7 @@ public class ListCommand extends Command {
     /**
      * Class constructor.
      */
-    public ListCommand(){
+    public ListCommand() {
         filter = Optional.<Filter>empty();
     }
 

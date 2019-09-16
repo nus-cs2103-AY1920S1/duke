@@ -6,7 +6,7 @@ public class IllegalDateException extends IllegalDescriptionException {
      * Constructor specifying the message.
      * @param message message about the exception.
      */
-    public IllegalDateException(String message){
+    public IllegalDateException(String message) {
         super(message);
     }
 }

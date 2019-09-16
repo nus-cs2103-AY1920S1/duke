@@ -71,7 +71,8 @@ public class HelpInformation {
         }
     }
 
-    private static HelpInformation getHelpInformationFor(CommandType commandType, CommandType.SubCommandType subCommandType) {
+    private static HelpInformation getHelpInformationFor(CommandType commandType,
+                                                         CommandType.SubCommandType subCommandType) {
         switch (commandType) {
         case Add:
             try {
@@ -87,5 +88,4 @@ public class HelpInformation {
     private static HelpInformation getHelpInformationFor() {
         return new HelpInformation();
     }
-
 }

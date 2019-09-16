@@ -1,8 +1,26 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.*;
-import duke.filter.*;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.exception.IllegalCommandException;
+import duke.exception.IllegalDateException;
+import duke.exception.IllegalDescriptionException;
+import duke.exception.IllegalIndexOfTaskException;
+import duke.exception.IllegalTimeException;
+import duke.filter.ComparisonOperator;
+import duke.filter.IndexFilter;
+import duke.filter.StatusFilter;
+import duke.filter.TimeFilter;
+import duke.filter.TypeFilter;
 import duke.task.TaskType;
 
 import java.time.DateTimeException;
@@ -131,8 +149,8 @@ public class Parser {
                     Integer.parseInt(dayMonthYear[1]),
                     Integer.parseInt(dayMonthYear[0]));
             return date;
-        } catch (NumberFormatException | DateTimeException e){
-           throw new IllegalDateException("Please provide a valid date.");
+        } catch (NumberFormatException | DateTimeException e) {
+            throw new IllegalDateException("Please provide a valid date.");
         }
     }
 
@@ -228,7 +246,7 @@ public class Parser {
 
     private StatusFilter getStatusFilter(String description) throws IllegalDescriptionException {
         String isDoneStatus = getFirstWord(description);
-        if (isDoneStatus.toLowerCase().equals("true") ) {
+        if (isDoneStatus.toLowerCase().equals("true")) {
             return new StatusFilter(true);
         } else if (isDoneStatus.toLowerCase().equals("false")) {
             return new StatusFilter(false);

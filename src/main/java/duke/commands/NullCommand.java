@@ -23,12 +23,13 @@ public class NullCommand extends Command{
     /**
      * Throws an exception which tells
      * the user that the input command is not valid
+     *
      * @param taskList The main task list of the application.
      * @param ui The main user interface of the application.
      * @throws DukeException Thrown when the command does not exist
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui) throws DukeException {
         throw new DukeException("Invalid Command! Please try again.", DukeExceptionType.INVALIDCOMMAND);
     }
 

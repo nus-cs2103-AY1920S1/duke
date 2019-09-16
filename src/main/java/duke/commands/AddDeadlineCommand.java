@@ -6,8 +6,6 @@ import java.io.IOException;
 import duke.core.TaskList;
 import duke.core.Ui;
 
-import duke.errors.DukeException;
-
 import duke.tasks.Deadline;
 
 
@@ -23,6 +21,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Initialises the add command which contains the parameters of the task to be created
+     *
      * @param description deadline description
      * @param date date description
      */
@@ -40,7 +39,7 @@ public class AddDeadlineCommand extends Command {
      * @throws IOException Thrown when the new task cannot be added to the file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui) throws IOException {
         Deadline task = new Deadline(this.description,this.date);
         taskList.addToList(task);
         ui.printAddMessage(task, taskList);

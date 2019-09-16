@@ -27,6 +27,8 @@ public class DukeException extends Exception {
                 return "File not found!!";
 			case TASKNOTFOUND:
 				return "Task not found!!";
+			case NOTSINGLEWORD:
+				return "Must be a single keyword";
     		default:
     			return "Unknown error! Please try again.";
     	}

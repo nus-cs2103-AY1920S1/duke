@@ -7,18 +7,11 @@ import duke.core.TaskList;
 import duke.core.Ui;
 
 /**
- * abstract class Command that represents an action by the user
- */
-
-/**
  * Base class for the other commands. Specifies the abstract method that is required to be implemented
  * by the children commands.
  */
 public abstract class Command {
     CommandType commandType;
-
-
-
 
     /**
      * getter for type of command
@@ -28,22 +21,13 @@ public abstract class Command {
         return commandType;
     }
 
-
     /**
      * Executes what the command is suppose to do.
      *
      * @param taskList The main task list of the application.
      * @param ui The main user interface of the application.
-     * @param storage The main storage of the application.
      * @throws DukeException Occurs when parts of the command cannot be executed.
-     */
-
-    
-    /**
-     *
-     * @param taskList list containing current tasks
-     * @param ui user interface
-     * @throws DukeException throws exception with error message in case anything goes wrong
+     * @throws IOException Thrown when the file update fails.
      */
     public abstract void execute(TaskList taskList, Ui ui) throws DukeException, IOException;
 

@@ -1,1 +1,7 @@
 1 / ToDo / ✘ / 1
+2 / ToDo / ✘ / 1 2 3 45
+3 / Deadline / ✘ / 45 / 12th of DECEMBER 1212, 12:12pm
+4 / Deadline / ✘ / 1 / 1
+5 / Deadline / ✘ / 1 / 1 2 3
+6 / Deadline / ✘ / 1 / 1
+7 / Deadline / ✓ / 1 / 1

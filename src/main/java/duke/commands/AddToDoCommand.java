@@ -5,8 +5,6 @@ import java.io.IOException;
 import duke.core.TaskList;
 import duke.core.Ui;
 
-import duke.errors.DukeException;
-
 import duke.tasks.ToDo;
 
 
@@ -21,9 +19,9 @@ public class AddToDoCommand extends Command{
 
     /**
      * Initialises the add command which contains the parameters of the task to be created
+     *
      * @param tokens user input split by space, required for creating a to-do task
      */
-
     public AddToDoCommand(String [] tokens) {
         this.tokens = tokens;
         this.commandType = CommandType.ADDTODO;
@@ -38,7 +36,7 @@ public class AddToDoCommand extends Command{
      * @throws IOException Thrown when the new task cannot be added to the file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui) throws IOException {
         ToDo task = ToDo.createToDo(tokens);
         taskList.addToList(task);
         ui.printAddMessage(task, taskList);

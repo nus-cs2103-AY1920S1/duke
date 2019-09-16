@@ -23,12 +23,14 @@ public class DoneCommand extends Command{
 
     /**
      * Constructor for creating a done command
+     *
      * @param index The index of the task that is going to be marked done
      */
 
     /**
      * Initialises the command which contains the index of the task
      * to be marked as done
+     *
      * @param index the index of the task to be deleted
      */
     private DoneCommand(int index){
@@ -39,6 +41,7 @@ public class DoneCommand extends Command{
 
     /**
      * Service for creating a done command that checks for number formatting errors
+     *
      * @param tokens user input split by space, required for creating a done command
      * @throws DukeException Thrown when the parameters does not specify the index of  the task
      */
@@ -53,12 +56,13 @@ public class DoneCommand extends Command{
 
     /**
      * Executes by marking a particular task as done and prints to the user
+     *
      * @param taskList list containing current tasks
      * @param ui user interface
      * @throws IOException Thrown when the file update fails.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui) throws IOException {
         try {
             Task task = taskList.getTaskAt(index+1);
             boolean isDoneBefore = task.setDone();

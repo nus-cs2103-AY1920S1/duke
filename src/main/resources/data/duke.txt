@@ -1,2 +1,2 @@
-T|1|123
-E|0|attend CS2103T lecture|02/10/2019 1800
+T|0|Buy Bread
+D|0|Return Book|02/12/2019 1800

@@ -10,42 +10,42 @@ public class AException {
      * Prints out message when the description of ToDo is empty.
      */
     public String emptyToDoException() {
-        return "\tOOPS!!! The description of a todo cannot be empty.";
+        return "OOPS!!! The description of a todo cannot be empty.";
     }
 
     /**
      * Prints out message when the description of Deadline is empty.
      */
     public String emptyDeadlineException() {
-        return "\tOOPS!!! The description of a deadline cannot be empty.";
+        return "OOPS!!! The description of a deadline cannot be empty.";
     }
 
     /**
      * Prints out message when the /by is not filled for Deadline.
      */
     public String emptyByException() {
-        return "\tOOPS!!! The date and time of deadline not specified.";
+        return "OOPS!!! The date and time of deadline not specified.";
     }
 
     /**
      * Prints out message when the description of Event is empty.
      */
     public String emptyEventException() {
-        return"\tOOPS!!! The description of a event cannot be empty.";
+        return"OOPS!!! The description of a event cannot be empty.";
     }
 
     /**
      * Prints out message when the /at is not filled for Event.
      */
     public String emptyAtException() {
-        return "\tOOPS!!! The date and time of event not specified.";
+        return "OOPS!!! The date and time of event not specified.";
     }
 
     /**
      * Prints out message when the command is not understood.
      */
     public String dontUnderstand() {
-        return "\tOOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
@@ -53,7 +53,7 @@ public class AException {
      * a task that is not in the list.
      */
     public String exceedListSize() {
-        return "\tOOPS!!! Task do not exist in list";
+        return "OOPS!!! Task do not exist in list";
     }
 
     /**

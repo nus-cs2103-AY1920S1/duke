@@ -23,14 +23,14 @@ public class TaskList {
      */
     public String printList() {
         if (!li.isEmpty()) {
-            String msg = "\tHere are the Duke.tasks in your list:\n";
+            String msg = "Here are the tasks in your list:\n";
             for (int i = 0; i < li.size(); i++) {
                 int j = i + 1;
-                msg = msg + "\t" + j + " " + li.get(i).toString();
+                msg = msg + "" + j + ". " + li.get(i).toString() +"\n";
             }
             return msg;
         } else {
-            return "\tThe task list is empty";
+            return "The task list is empty";
         }
     }
 

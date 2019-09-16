@@ -69,7 +69,7 @@ public class Duke extends Application{
             String firstWord = split.getType();
 
             if (firstWord.equals("bye")) {
-                return "\tBye. Hope to see you again soon!";
+                return "Bye. Hope to see you again soon!";
             } else if (firstWord.equals("list")) {
                 return tasks.printList();
             } else if (firstWord.equals("done")) {
@@ -91,9 +91,10 @@ public class Duke extends Application{
                 if (taskNumb >= tasks.size()) {
                     error = "taskDoNotExist";
                 } else {
+                    String a = ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
                     tasks.remove(taskNumb);
                     saving((tasks.getList()));
-                    return ui.printDelete(tasks.getTask(taskNumb - 1), tasks.size());
+                    return a;
                 }
             } else if (firstWord.equals("find")) {
                 String searchWord = split.getDesc().get(0);
@@ -192,7 +193,7 @@ public class Duke extends Application{
                         }
                     }
                     if (descExist){
-                        return "\tOOPS!!! Task already exist in list";
+                        return "OOPS!!! Task already exist in list";
                     } else {
                         tasks.add(newTask);
                         saving((tasks.getList()));

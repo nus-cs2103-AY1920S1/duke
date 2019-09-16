@@ -50,9 +50,9 @@ public class Ui {
      */
     public String takeInput(Task t, int i) {
         printline();
-        String msg = "\tGot it. I've added this task:\n";
-        msg = msg + "\t\t" + t + "\n";
-        msg = msg + "\tNow you have " + i + " tasks in the list";
+        String msg = "Got it. I've added this task:\n";
+        msg = msg + "\t" + t + "\n";
+        msg = msg + "Now you have " + i + " tasks in the list";
         return msg;
     }
 
@@ -63,7 +63,7 @@ public class Ui {
      */
     public void printList(LinkedList<Task> li) {
         printline();
-        System.out.println("\tHere are the Duke.tasks in your list:");
+        System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < li.size(); i++) {
             int j = i + 1;
             System.out.println("\t" + j + " " + li.get(i));
@@ -93,10 +93,9 @@ public class Ui {
      * @param i the number of tasks left in the list
      */
     public String printDelete(Task task, int i) {
-        //printline();
         String msg = "\tNoted. I've removed this task:\n";
         msg = msg + "\t\t" + task + "\n";
-        msg = msg + "\tNow you have " + i + " Duke.tasks in the list";
+        msg = msg + "\tNow you have " + i + " tasks in the list";
         return msg;
     }
 

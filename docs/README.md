@@ -44,7 +44,7 @@ Expected outcome:
 `  [T][0]buy milk`
 
 `Now you have 1 tasks in the list.`
-##
+
 ### Adding a event: `event` 
 Add a `Event` task to the journal
 
@@ -72,7 +72,7 @@ Expected outcome:
 `  [D][0] study test (by: 2019-10-05T23:59:59)`
 
 `Now you have 3 tasks in the list.`
-##
+
 ### Including a tag when adding tasks: `/t` 
 (Optional) Include a single `tag` when adding a task to the journal. 
 All types of tasks can accept a `tag`. Should be included at the end.  
@@ -98,7 +98,7 @@ Expected outcome:
 `  [D][0]<blueclues> complete art project (by: 2019-12-05T23:59:59)`
 
 `Now you have 5 tasks in the list.`
-##
+
 ### Listing tasks: `list` 
 Lists out all stored tasks.
 
@@ -119,7 +119,7 @@ Expected outcome:
 
 `  [D][0]<blueclues> complete art project (by: 2019-12-05T23:59:59)`
 
-##
+
 ### Finding all tasks with the containing keyword in their description: `find KEYWORD` 
 Searches through all tasks(and tags) for the specified keyword. If found, the task will be returned. 
 
@@ -132,7 +132,7 @@ Expected outcome:
 
 `  [D][0] study test (by: 2019-10-05T23:59:59)`
 
-##
+
 ### Deleting a task: `delete INDEX` 
 Delete a task from the journal at the specified `INDEX`.
 
@@ -146,11 +146,11 @@ Expected outcome:
 `  [E][0] event watch movie (at: 2020-01-10T12:30:00)`
 
 `Now you have 4 tasks in the list.`
-##
+
 ### Exiting the program: 'bye'
 Exit the program by closing the window or using the keyword `bye`
 
-##
+
 ### Saving the data
 Do(d)gy Duke automatically saves the data in file 'tasks.txt', 
 located in project root folder. 

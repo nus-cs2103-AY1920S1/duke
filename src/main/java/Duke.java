@@ -44,10 +44,9 @@ public class Duke {
     private Image duke = new Image(this.getClass()
             .getResourceAsStream("/images/DaDuke.png"));
 
-    public Duke() {}
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("/Users/michelleyong/Desktop/duke/data/duke.txt");
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -60,15 +59,12 @@ public class Duke {
     }
 
     /**
-     * This is the main method of the task manager.
-     *
-     * @throws FileNotFoundException If file is not found.
-     * @throws IOException If an input or output exception occurred.
-     * @throws ParseException If a parse exception occurred.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) throws FileNotFoundException,
-            IOException, ParseException {
-        new Duke("/Users/michelleyong/Desktop/duke/data/duke.txt").run();
+    String getResponse(String input) throws IOException, ParseException, DukeException {
+        Command command = Parser.getCommand(input);
+        return command.execute(storage, taskList, ui);
     }
 
     /**
@@ -77,21 +73,21 @@ public class Duke {
      * @throws IOException If an input or output exception occurred.
      * @throws ParseException If a parse exception occurred.
      */
+    /*
     public void run() throws IOException, ParseException {
         ui.printHello();
-        Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser(sc);
+        Parser parser = new Parser();
 
         while (sc.hasNext()) {
-            String text = parser.nextCommand();
-            String[] commandArr = parser.breakDownCommand(text);
+            String desc = parser.nextCommandDesc();
+            String[] commandArr = parser.breakDownCommand(desc);
             String command = parser.getCommand(commandArr);
             if (command.equals("todo")) {
                 try {
-                    if (text.length() <= 4) {
+                    if (desc.length() <= 4) {
                         throw new DukeException();
                     }
-                    Todo todo = parser.getTodo(text);
+                    Todo todo = parser.getTodo(desc);
                     taskList.addTask(todo);
                     ui.printTaskAdded(todo, taskList.getSize());
                     storage.appendTaskToFile(todo);
@@ -100,10 +96,10 @@ public class Duke {
                 }
             } else if (command.equals("deadline")) {
                 try {
-                    if (text.length() <= 8) {
+                    if (desc.length() <= 8) {
                         throw new DukeException();
                     }
-                    String[] descArr = parser.breakDownDescription(text);
+                    String[] descArr = parser.breakDownDescription(desc);
                     Date date = parser.getDate(descArr, storage);
                     Deadline deadline =
                             new Deadline(parser.getDeadlineDesc(descArr), date);
@@ -115,10 +111,10 @@ public class Duke {
                 }
             } else if (command.equals("event")) {
                 try {
-                    if (text.length() <= 5) {
+                    if (desc.length() <= 5) {
                         throw new DukeException();
                     }
-                    String[] descArr = parser.breakDownDescription(text);
+                    String[] descArr = parser.breakDownDescription(desc);
                     Date date = parser.getDate(descArr, storage);
                     Event event = new Event(parser.getEventDesc(descArr), date);
                     taskList.addTask(event);
@@ -131,7 +127,7 @@ public class Duke {
                 taskList.printList();
             } else if (command.equals("done")) {
                 try {
-                    if (text.length() <= 4) {
+                    if (desc.length() <= 4) {
                         throw new DukeException();
                     }
                     int num = parser.getTaskNum(commandArr);
@@ -149,7 +145,7 @@ public class Duke {
                 break;
             } else if (command.equals("delete")) {
                 try {
-                    if (text.length() <= 6) {
+                    if (desc.length() <= 6) {
                         throw new DukeException();
                     }
                     int num = parser.getTaskNum(commandArr);
@@ -163,7 +159,7 @@ public class Duke {
                     ui.printNoSuchTaskError();
                 }
             } else if (command.equals("find")) {
-                String toFind = parser.getKeyWord(text);
+                String toFind = parser.getKeyWord(desc);
                 ArrayList<Task> tasks = taskList.getList();
                 ArrayList<Task> taskFound = new ArrayList<>();
                 for (int i = 0; i < tasks.size(); i++) {
@@ -182,7 +178,7 @@ public class Duke {
             }
         }
         sc.close();
-    }
+    }*/
 
     /*
     @Override
@@ -286,14 +282,4 @@ public class Duke {
         );
         userInput.clear();
     }*/
-
-
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
 }

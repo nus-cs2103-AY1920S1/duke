@@ -1,9 +1,6 @@
-
-import tasks.Todo;
+import exception.DukeException;
 
 import java.util.Scanner;
-import java.util.Date;
-import java.text.ParseException;
 
 /**
  * Handles the user command.
@@ -11,110 +8,40 @@ import java.text.ParseException;
 public class Parser {
     private Scanner sc;
 
-    public Parser(Scanner sc) {
+    public Parser() {
+        Scanner sc = new Scanner(System.in);
         this.sc = sc;
     }
 
     /**
-     * Gets the next command from user input.
-     * 
-     * @return The next line of command.
-     */
-    public String nextCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Separates the command and description.
+     * Gets the command type of the task.
      *
-     * @param str The command string.
-     * @return A string array with command and description separated.
+     * @param input The input by the user.
+     * @return The command type.
+     * @throws DukeException If the command by the user is invalid.
      */
-    public String[] breakDownCommand(String str) {
-        return str.split(" ");
-    }
-
-    /**
-     * Separates the description and date.
-     *
-     * @param str The command string.
-     * @return A string array with description and date separated.
-     */
-    public String[] breakDownDescription(String str) {
-        return str.split("/");
-    }
-
-    /**
-     * Gets the command of the task.
-     *
-     * @param arr A string array with command and description separated.
-     * @return The command string.
-     */
-    public String getCommand(String[] arr) {
-        return arr[0];
-    }
-
-    /**
-     * Gets the todo based on the command line.
-     *
-     * @param line The command list.
-     * @return The todo.
-     */
-    public Todo getTodo(String line) {
-        String task = line.substring(5);
-        Todo todo = new Todo(task);
-        return todo;
-    }
-
-    /**
-     * Gets the description of the deadline.
-     *
-     * @param descArr The string array with command and description separated.
-     * @return The description of the deadline.
-     */
-    public String getDeadlineDesc(String[] descArr) {
-        return descArr[0].substring(9, descArr[0].length() - 1);
-    }
-
-    /**
-     * Gets the description of the event.
-     *
-     * @param descArr The string array with command and description separated.
-     * @return The description of the event.
-     */
-    public String getEventDesc(String[] descArr) {
-        return descArr[0].substring(6, descArr[0].length() - 1);
-    }
-
-    /**
-     * Gets the date.
-     *
-     * @param descArr The command line with description and date separated.
-     * @param storage The storage for the task manager.
-     * @return The date.
-     * @throws ParseException If a parse exception occurred.
-     */
-    public Date getDate(String[] descArr, Storage storage)
-            throws ParseException {
-        return storage.convertToDate(descArr[1].substring(3));
-    }
-
-    /**
-     * Gets the task number.
-     *
-     * @param arr The array with command and description separated.
-     * @return The task number.
-     */
-    public int getTaskNum(String[] arr) {
-        return Integer.parseInt(arr[1]) - 1;
-    }
-
-    /**
-     * Get the keyword to be searched.
-     * @param line The command line.
-     * @return The keyword.
-     */
-    public String getKeyWord(String line) {
-        return line.substring(5);
+    public static Command getCommand(String input) throws DukeException {
+        String[] inputArr = input.split(" ");
+        String command = inputArr[0];
+        switch (command) {
+        case "todo":
+            return new TodoCommand(input);
+        case "deadline":
+            return new DeadlineCommand(input);
+        case "event":
+            return new EventCommand(input);
+        case "list":
+            return new ListCommand(input);
+        case "done":
+            return new DoneCommand(input);
+        case "bye":
+            return new ByeCommand(input);
+        case "delete":
+            return new DeleteCommand(input);
+        case "find":
+            return new FindCommand(input);
+        default:
+            throw new DukeException();
+        }
     }
 }

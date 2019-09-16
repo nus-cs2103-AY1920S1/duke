@@ -75,28 +75,37 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of all tasks in the task list.
+     * Shows the list of all tasks in the task list.
      */
-    public void printList() {
+    public String showList() {
         int length = list.size();
-        System.out.println("Here are the tasks in your list:");
+        StringBuffer listDetails = new StringBuffer("Here are the tasks in your list:\n");
         for (int i = 1; i <= length; i++) {
             Task task = list.get(i - 1);
-            System.out.println(i + ". " + task);
+            listDetails.append(i);
+            listDetails.append(". ");
+            listDetails.append(task);
+            listDetails.append("\n");
         }
+        return listDetails.toString();
     }
 
     /**
-     * Prints the list of tasks found by keyword in the task list.
+     * Shows the list of tasks found by keyword in the task list.
      *
      * @param taskList The list of tasks found by the keyword.
+     * @return The list of tasks found.
      */
-    public void printTaskFound(ArrayList<Task> taskList) {
+    public String showTaskFound(ArrayList<Task> taskList) {
         int length = taskList.size();
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuffer taskFound = new StringBuffer("Here are the matching tasks in your list:/n");
         for (int i = 1; i <= length; i++) {
             Task task = taskList.get(i - 1);
-            System.out.println(i + ". " + task);
+            taskFound.append(i);
+            taskFound.append(". ");
+            taskFound.append(task);
+            taskFound.append("/n");
         }
+        return taskFound.toString();
     }
 }

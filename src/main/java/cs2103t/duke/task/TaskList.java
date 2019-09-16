@@ -32,6 +32,13 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    public void setupNotes(NoteList notes) {
+        for (Task t : taskList) {
+            if (t.hasNotes()) {
+                t.setNotes(notes.getNote(t.getNoteId()));
+            }
+        }
+    }
     /**
      * Gets number of tasks in list.
      * @return number of tasks in list.

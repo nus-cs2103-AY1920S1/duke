@@ -46,28 +46,13 @@ public class Duke {
         try {
             this.tasks = new TaskList(storageTask.loadTaskFromFile());
             this.notes = new NoteList(storageNotes.loadNotesFromFile());
+            tasks.setupNotes(notes);
         } catch (DukeException e) {
             ui.showLoadingError();
             this.tasks = new TaskList();
             this.notes = new NoteList();
         }
     }
-///////////THE NO NOTES SECTION//////////////////////
-    /**
-     * Constructs a Duke chatbot that reads from and writes to file located at datafilepath.
-     * @param dataFilepath file path to read and write data.
-     */
-    public Duke(String dataFilepath) {
-        this.ui = new Ui();
-        this.storageTask = new Storage(dataFilepath);
-        try {
-            this.tasks = new TaskList(storageTask.loadTaskFromFile());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            this.tasks = new TaskList();
-        }
-    }
-/////////END OF NO NOTES SECTION//////////////////
 
     /**
      * Gets response from duke logic given a command.

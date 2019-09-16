@@ -88,9 +88,17 @@ public abstract class Task {
      * @param id id of said notes in list of notes.
      */
     public void setNotes(Note note, int id) {
-        this.note = note;
+        setNotes(note);
         this.hasNotes = true;
         this.noteId = id;
+    }
+
+    /**
+     * Sets note of task as given note.
+     * @param note note to set to task.
+     */
+    public void setNotes(Note note) {
+        this.note = note;
     }
 
     /**
@@ -99,6 +107,7 @@ public abstract class Task {
      */
     public void setNoteId(int id) {
         this.noteId = id;
+        this.hasNotes = true;
     }
 
     /**

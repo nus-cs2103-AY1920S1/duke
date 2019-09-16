@@ -80,7 +80,6 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filepath);
-            //file.mkdirs();
             BufferedReader br = new BufferedReader(
                     new FileReader(file));
             String line = br.readLine();

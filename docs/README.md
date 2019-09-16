@@ -2,7 +2,7 @@
 
 
 ## Contents
-- ##### [What is duke?](#what-is-duke??)
+- ##### [What is duke?](#what-is-duke?)
 - ##### [Features](#features)
 - ##### [Command Usage](#command-usage)
 - ##### [Advanced Usage](#advanced-usage)
@@ -17,24 +17,32 @@ Duke is tailored for users who love to use command line input and type fast, as 
 ![Image of Duke in action](Ui.png)
 
 ## Features 
+
 ### Add various types of tasks to the user task list
 - ##### Todos - tasks with a simple description
 - ##### Deadlines - tasks with a description and deadline timing
 - ##### Events - tasks with a description and a start and end timing
+
 ### See all current tasks in the user task list
 - ##### The user can view his current task list with a simple command
 - ##### The data is presented in a simple list format, and shows the relavant details of the task ( description, timings, whether it is done )
+
 ### Mark tasks in the task list as done
 - ##### Tasks can be marked as done with a simple command
+
 ### Delete tasks from the task list
 - ##### Tasks can be entirely removed from the user task list if the list is getting cluttered
+
 ### Find and filter tasks quickly
 - ##### The task list can be filtered quickly by a search term
+
 ### Task list is preserved across application exits
 - ##### The task list is saved whenever the task list is changed
 - ##### The task list is read on application startup from the disk
+
 ### Easily editable task storage file
 - ##### By using a easily readable json file format, Duke allows easy user editing of the storage task file on disk
+
 ### Save task list to disk and start afresh
 - ##### The task list can be archived and saved to a seperate disk file, preserving data while allowing the user to start from an empty list
 
@@ -68,7 +76,7 @@ Example of usage:
 `todo Get a haircut`
 
 Expected outcome:
-![List command example usage image](TodoUsage.png)
+![Todo command example usage image](TodoUsage.png)
 
 ### `Deadline` - Adds a deadline task
 
@@ -83,7 +91,7 @@ Example of usage:
 `deadline Claim warranty for iphone /by 30/12/2019 2359`
 
 Expected outcome:
-![List command example usage image](DeadlineUsage.png)
+![Deadline command example usage image](DeadlineUsage.png)
 
 ### `Event` - Adds a event task
 
@@ -101,7 +109,7 @@ Examples of usage:
 - `event Software Engineering Lecture /at 08/01/2019 1200 to 1400`
 
 Expected outcome:
-![List command example usage image](EventUsage.png)
+![Event command example usage image](EventUsage.png)
 
 ### `Done` - Marks a task as done
 
@@ -114,7 +122,7 @@ Examples of usage:
 - `done 3`
 
 Expected outcome:
-![List command example usage image](DoneUsage.png)
+![Done command example usage image](DoneUsage.png)
 
 ### `Delete` - Remove a task from the task list
 
@@ -128,7 +136,7 @@ Examples of usage:
 - `delete 5`
 
 Expected outcome:
-![List command example usage image](DeleteUsage.png)
+![Delete command example usage image](DeleteUsage.png)
 
 ### `Find` - Search for a task quickly
 
@@ -140,7 +148,7 @@ Examples of usage:
 - `find meeting`
 
 Expected outcome:
-![List command example usage image](FindUsage.png)
+![Find command example usage image](FindUsage.png)
 
 ### `Archive` - Archives and wipes the task list
 
@@ -151,7 +159,7 @@ It then wipes the task list, allowing starting from an empty task list.
 Format: `archive`
 
 Expected outcome:
-![List command example usage image](ArchiveUsage.png)
+![Archive command example usage image](ArchiveUsage.png)
 
 ### `Bye` - Exits the prograrm
 
@@ -162,7 +170,7 @@ Note that you can always use the standard gui close button to exit Duke!
 Format: `bye`
 
 Expected outcome:
-![List command example usage image](ByeUsage.png)
+![Bye command example usage image](ByeUsage.png)
 
 <br/>
 

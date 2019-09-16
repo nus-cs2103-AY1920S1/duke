@@ -62,10 +62,18 @@ public class TaskList {
         tasks.remove(i);
     }
 
+    /**
+     * Replaces all tasks in the task list with the new list of tasks.
+     * @param newTasks New list of tasks
+     */
     public void overrideTasks(ArrayList<Task> newTasks) {
         this.tasks = new ArrayList<>(newTasks);
     }
 
+    /**
+     * Retrieve list of tasks contained by the TaskList object
+     * @return ArrayList List of tasks
+     */
     public ArrayList<Task> getTasks() {
         return this.tasks;
     }

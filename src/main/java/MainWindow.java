@@ -51,6 +51,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Exits program after a delay of 2 seconds.
+     */
     private void exitProgram() {
         Timer tm = new Timer();
         tm.schedule(new TimerTask() {
@@ -61,6 +64,9 @@ public class MainWindow extends AnchorPane {
         }, 2000);
     }
 
+    /**
+     * Displays welcome message to user on app start.
+     */
     public void showWelcome() {
         String welcomeMsg = welcomeMsg();
         dialogContainer.getChildren().addAll(
@@ -68,6 +74,10 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Returns welcome messsage to be displayed on app start.
+     * @return String Welcome message
+     */
     private String welcomeMsg() {
         String line = "___________________________________________________\n";
         String greetMsg = "Hello! I'm Spongebob\nWhat can I do for you?\n";

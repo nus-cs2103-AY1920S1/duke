@@ -28,9 +28,10 @@ public class CompleteCommand extends Command {
      * Prints message that a task has been marked as completed.
      * @param tasks List of tasks
      * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @param history Tracks input history
      * @throws TrackrException When task has already been marked done or number provided not in range
      * @throws NumberFormatException When the regex specified following the 'complete' command is not an
-     * integer
+     *     integer
      */
     @Override
     public String execute(TaskList tasks, Storage storage, HistoryTracker history) throws TrackrException {
@@ -43,13 +44,19 @@ public class CompleteCommand extends Command {
         }
         int totalTasks = tasks.size();
         if (isValidNumber(taskNum, totalTasks)) {
-            result = markTestAsDone(taskNum, tasks, storage);
+            result = markTestAsCompleted(taskNum, tasks, storage);
         } else {
             throw new TrackrException(":( OOPS!!! The number provided is not within the range of the list.");
         }
         return result;
     }
 
+    /**
+     * Extracts task number specified from user input.
+     * @param input User input
+     * @return int Task number
+     * @throws NumberFormatException When user does not specify a number with the 'complete' command
+     */
     private static int getTaskNumber(String input) throws NumberFormatException {
         String[] inputStringArr = input.split(" ");
         int taskNum;
@@ -61,11 +68,25 @@ public class CompleteCommand extends Command {
         return taskNum;
     }
 
+    /**
+     * Checks whether number specified by user is within the list.
+     * @param taskNum Number specified by user
+     * @param maxNum Number of last item in the list.
+     * @return boolean True if number specified by user is valid, false otherwise
+     */
     private static boolean isValidNumber(int taskNum, int maxNum) {
         return taskNum >= 1 && taskNum <= maxNum;
     }
 
-    private static String markTestAsDone(int taskNum, TaskList tasks, Storage storage) throws TrackrException {
+    /**
+     * Indicates that the task is completed.
+     * @param taskNum Task number specified by user
+     * @param tasks List of tasks
+     * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @return String Informs user whether the task was successfully marked as completed or
+     * @throws TrackrException When task was already marked as completed
+     */
+    private static String markTestAsCompleted(int taskNum, TaskList tasks, Storage storage) throws TrackrException {
         Task t = tasks.get(taskNum - 1);
         boolean isDone = t.getStatus();
         if (isDone) {

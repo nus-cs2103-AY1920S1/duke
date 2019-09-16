@@ -16,6 +16,10 @@ public class Main extends Application {
 
     private Trackr trackr = new Trackr();
 
+    /**
+     * Initialises the GUI of the application.
+     * @param stage Window to be shown
+     */
     @Override
     public void start(Stage stage) {
         try {

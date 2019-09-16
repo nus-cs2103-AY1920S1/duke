@@ -6,6 +6,13 @@ import trackr.tasklist.TaskList;
 
 public class HelpCommand extends Command {
 
+    /**
+     * Displays all available commands that users can issue to the application.
+     * @param tasks List of tasks
+     * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @param history Tracks input history
+     * @return String Instructions on available commands
+     */
     @Override
     public String execute(TaskList tasks, Storage storage, HistoryTracker history) {
         String result = "Here is a list of commands you may use:\n\n"
@@ -20,6 +27,7 @@ public class HelpCommand extends Command {
                 + "number!\n\n"
                 + "done <task number> - marks a task on your list as completed, please specify the task "
                 + "number!\n\n"
+                + "undo - undo previous command that made changes to the list of tasks\n\n"
                 + "find <task name> - finds and displays all tasks matching the name you have specified\n\n"
                 + "exit - exits the app and closes this window";
         return result;

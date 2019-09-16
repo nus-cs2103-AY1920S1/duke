@@ -28,6 +28,9 @@ public class RemoveCommand extends Command {
      * Deletes task from list based in index provided by user.
      * @param tasks List of tasks
      * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @param history Tracks input history
+     * @return String Inform user that task has been removed
+     * @throws TrackrException When user does not specify task number for the task to be removed
      */
     @Override
     public String execute(TaskList tasks, Storage storage, HistoryTracker history) throws TrackrException {
@@ -43,7 +46,7 @@ public class RemoveCommand extends Command {
         tasks.remove(taskNum - 1);
         result += "Noted. I've removed this task:\n";
         if (t.getType().equals("todo")) {
-            result += "       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t +'\n';
+            result += "       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t + '\n';
         } else if (t.getType().equals("event")) {
             result += "       " + t.getTypeIcon() + '[' + t.getStatusIcon() + "] " + t + " (at: "
                     + t.getDate() + ")\n";

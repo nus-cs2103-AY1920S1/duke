@@ -28,7 +28,9 @@ public class ListCommand extends Command {
      * Prints out current lists of tasks.
      * @param tasks List of tasks
      * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @param history Trakcs input history
      * @throws TrackrException When list command is not input correctly
+     * @return String List of all tasks in the program
      */
     @Override
     public String execute(TaskList tasks, Storage storage, HistoryTracker history) throws TrackrException {

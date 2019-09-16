@@ -30,6 +30,7 @@ public class DeadlineCommand extends Command {
      * Adds a Deadline task to the task list.
      * @param tasks List of tasks
      * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @param history Tracks input history
      */
     @Override
     public String execute(TaskList tasks, Storage storage, HistoryTracker history) {
@@ -46,8 +47,8 @@ public class DeadlineCommand extends Command {
             storage.appendToFile("D | 0 | " + taskName + " | " + dt.toString() + '\n');
             return result;
         } catch (ParseException e) {
-            return ":( OOPS!!! Date provided is not in the correct format. Please provide date in this " +
-                    "format: dd/MM/yyyy HHmm";
+            return ":( OOPS!!! Date provided is not in the correct format. Please provide date in this "
+                    + "format: dd/MM/yyyy HHmm";
         }
     }
 }

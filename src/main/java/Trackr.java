@@ -36,6 +36,11 @@ public class Trackr {
         }
     }
 
+    /**
+     * Retrieves response from app logic based on user input.
+     * @param input User input
+     * @return String Appropriate response to user input
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

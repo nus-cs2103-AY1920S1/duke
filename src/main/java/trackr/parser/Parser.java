@@ -62,6 +62,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Extracts command from user input.
+     * @param input User input
+     * @return String Command corresponding to user input
+     */
     private static String getCommand(String input) {
         String[] inputStringArr = input.split(" ");
         return inputStringArr[0];

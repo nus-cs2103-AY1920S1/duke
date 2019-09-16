@@ -28,6 +28,9 @@ public class FindCommand extends Command {
      * Retrieves tasks matching the term provided by the user.
      * @param tasks List of tasks
      * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @param history Tracks input history
+     * @return String Informs users which tasks match their search term
+     * @throws TrackrException When no search term is provided
      */
     @Override
     public String execute(TaskList tasks, Storage storage, HistoryTracker history) throws TrackrException {

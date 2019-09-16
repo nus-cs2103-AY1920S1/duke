@@ -11,9 +11,11 @@ import trackr.tasklist.TaskList;
 public abstract class Command {
 
     /**
-     * This is an abstract method that executes the correct actions based on the command.
+     * Performs the action specified by the command and prints a message informing the user about the changes.
      * @param tasks List of tasks
      * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @param history Tracks input history
+     * @return String Message informing user about changes by the command issued
      */
     public abstract String execute(TaskList tasks, Storage storage, HistoryTracker history);
 }

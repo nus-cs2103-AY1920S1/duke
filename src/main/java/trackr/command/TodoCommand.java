@@ -28,6 +28,8 @@ public class TodoCommand extends Command {
      * Adds a Todo task to the task list.
      * @param tasks List of tasks
      * @param storage Deals with loading tasks from the file and saving tasks in the file
+     * @param history Tracks input history
+     * @return String Informs user that Todo task has been added
      * @throws TrackrException When task description given by user is empty
      */
     @Override

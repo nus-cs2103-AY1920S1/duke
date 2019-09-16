@@ -48,6 +48,7 @@ public class CommandParser {
      */
     private Command parseName(String commandType, String arguments) {
         assert commandType != null: "commandType should not be null";
+
         if (commandType.equals(EXIT)) {
             return new ExitCommand();
         } else if (commandType.equals(LIST)) {

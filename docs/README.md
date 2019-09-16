@@ -53,7 +53,7 @@ Example of usage:
 Expected outcome:
 
 ```
- Got it. I've added this task:<br/> 
+ Got it. I've added this task: 
    [T][✘] read books
  Now you have 1 task(s) in the list.
 ```
@@ -195,4 +195,7 @@ Example of usage:
   
 Expected outcome:
   
-`Bye. Hope to see you again soon!` (Exits)
+```
+ Bye. Hope to see you again soon!` 
+ (Exits)
+```

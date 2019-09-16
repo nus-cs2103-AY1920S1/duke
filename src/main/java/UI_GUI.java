@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 
 public class UI_GUI extends Application implements UI {
     private Duke duke;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke_image = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
+    private Image duke_image = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;

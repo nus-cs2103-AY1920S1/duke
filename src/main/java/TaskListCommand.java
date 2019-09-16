@@ -20,6 +20,7 @@ public class TaskListCommand extends Command {
      * @param taskList The TaskList Class containing the task list.
      * @param storage  The Storage class containing the name of file the be read.
      * @return output The String output for GUI message.
+     * @throws DukeException If unable to identify command/
      */
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
@@ -34,13 +35,12 @@ public class TaskListCommand extends Command {
             output = taskList.searchByKeyword(this.command);
         } else if (type.equals("list")) {
             if (TaskList.tasks.isEmpty()) {
-                System.out.println("    Congratulations! You have no tasks remaining!");
                 output = "Congratulations! You have no tasks remaining!";
             } else {
                 output = taskList.printTaskList();
             }
         } else {
-            throw new DukeException("    TaskListCommand not identified.");
+            throw new DukeException("TaskListCommand Exception: Command not identified.");
         }
     return output;
     }

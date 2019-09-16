@@ -8,12 +8,12 @@ public class Parser {
     /**
      * Splits the full command into keyword and description.
      * Creates and returns a Command object.
-     * The type of the command is determined by the keyword.
      * The following types are AddCommands: "deadline", "event", "todo".
+     * The follow type is a HelpCommand: "help".
      * The following type is an ExitCommand: "exit".
      * The following types are StorageCommands: "save".
      * The following types are TaskListCommands: "clear", "delete", "done", "find", "list".
-     * Throws exceptions if command input is invalid.
+     * The HelpCommand is returned by default if no keyword is detected.
      *
      * @param fullCommand The full command input.
      * @return command A Command Class to be executed.
@@ -21,17 +21,20 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         String type = "";
+        String errorMessage = "";
         if (fullCommand.contains("find")) {
             type = "find";
             fullCommand = fullCommand.substring(4);
             if (fullCommand.isEmpty()) {
-                throw new DukeException("    OOPS!! Please specify keyword for search");
+                errorMessage += "Parser Exception: Please specify keyword for search in the format:\n";
+                errorMessage += "find -YourKeywordHere-"
+                throw new DukeException(errorMessage);
             }
         } else if (fullCommand.equals("clear")) {
             type = "clear";
         } else if (fullCommand.equals("bye")) {
             type = "exit";
-        } else if (fullCommand.equals("save")) {
+        }else if (fullCommand.equals("save")) {
             type = "save";
         } else if (fullCommand.equals("list")) {
             type = "list";
@@ -39,48 +42,48 @@ public class Parser {
             type = "delete";
             fullCommand = fullCommand.substring(6);
             if (fullCommand.isEmpty()) {
-                throw new DukeException("    OOPS!! Please specify which task to delete");
+                throw new DukeException("Parser Exception: OOPS!! Please specify which task to delete");
             }
             fullCommand = fullCommand.substring(1);
             if (fullCommand.charAt(0) < '0' || fullCommand.charAt(0) > '9') {
-                throw new DukeException("    OOPS!! Please enter a number for task number to be deleted");
+                throw new DukeException("Parser Exception: OOPS!! Please enter a number for task number to be deleted");
             }
         } else if (fullCommand.contains("done")) {
             type = "done";
             fullCommand = fullCommand.substring(4);
             if (fullCommand.isEmpty()) {
-                throw new DukeException("    OOPS!! Please specify which task is done");
+                throw new DukeException("Parser Exception: OOPS!! Please specify which task is done");
             }
             fullCommand = fullCommand.substring(1);
             if (fullCommand.charAt(0) < '0' || fullCommand.charAt(0) > '9') {
-                throw new DukeException("    OOPS!! Please enter a number for task number that is done");
+                throw new DukeException("Parser Exception: OOPS!! Please enter a number for task number that is done");
             }
         } else if (fullCommand.contains("event")) {
             if (fullCommand.contains("/at")) {
                 type = "event";
                 fullCommand = fullCommand.substring(5);
             } else {
-                throw new DukeException("    OOPS!! The event must include a time after the keyword /at");
+                throw new DukeException("Parser Exception: OOPS!! The event must include a time after the keyword /at");
             }
         } else if (fullCommand.contains("deadline")) {
             if (fullCommand.contains("/by")) {
                 type = "deadline";
                 fullCommand = fullCommand.substring(8);
             } else {
-                throw new DukeException("    OOPS!! The deadline must include a time after the keyword /by");
+                throw new DukeException("Parser Exception: OOPS!! The deadline must include a time after the keyword /by");
             }
         } else if (fullCommand.contains("todo")) {
             type = "todo";
             fullCommand = fullCommand.substring(4);
             if (fullCommand.isEmpty()) {
-                throw new DukeException("    OOPS!! The description of a todo cannot be empty.");
+                throw new DukeException("Parser Exception: OOPS!! The description of a todo cannot be empty.");
             }
         } else {
-            throw new DukeException("    OOPS!!! I'm sorry, but I don't know what that means :-(");
+            type = "help";
         }
 
         if (fullCommand.equals(" ")) {
-            throw new DukeException("    No command received, please re-enter command.");
+            throw new DukeException("Parser Exception: No command received, please re-enter command.");
         }
 
         Command command;
@@ -90,10 +93,11 @@ public class Parser {
             command = new ExitCommand(type, fullCommand);
         } else if (type.equals("save")) {
             command = new StorageCommand(type, fullCommand);
+        } else if (type.equals("help")) {
+            command = new HelpCommand(type, fullCommand);
         } else {
             command = new TaskListCommand(type, fullCommand);
         }
         return command;
     }
-
 }

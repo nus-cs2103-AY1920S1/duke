@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Storage {
 
     protected String fileName;
+    protected String initialTaskList;
     protected boolean hasInitialized = false;
 
     public Storage(String fileName) {
@@ -21,14 +22,17 @@ public class Storage {
      * Writes the contents of the task list onto the file.
      *
      * @param tasks The task list to get tasks from.
+     * @return output Message indicating that task list has been saved.
+     * @throws Exception If unable to write to file.
      */
-    public void saveTaskList(ArrayList<Task> tasks) {
+    public String saveTaskList(ArrayList<Task> tasks) throws Exception{
         StringBuilder sb = new StringBuilder();
+        String output = "";
         String strLine = "";
         try {
             String filename = this.fileName;
             FileWriter fw = new FileWriter(filename, false);
-            //appends the string to the file
+            //Appends the string to the file
             int index = 1;
             for (Task x : tasks) {
                 String type = "";
@@ -57,10 +61,12 @@ public class Storage {
             }
             fw.write("End of file");
             fw.close();
-            System.out.println("    Task list has been saved!");
+            output += "Task list has been saved!";
         } catch (IOException ioe) {
             System.err.println("IOException: " + ioe.getMessage());
+            throw new DukeException("Storage Exception: Error when writing to file.");
         }
+        return output;
     }
 
     /**
@@ -96,7 +102,8 @@ public class Storage {
     }
 
     /**
-     * Displays and returns the task list after loading from the file for initialization.
+     * Loads from the specified file for initialization.
+     * Saves the task list to the Storage object.
      * Does not load from file if already initialized.
      *
      * @return taskList The updated task list.
@@ -106,11 +113,12 @@ public class Storage {
         TaskList taskList = new TaskList();
         StringBuilder sb = new StringBuilder();
         String strLine = "";
+        String printQueue = "";
         try {
             BufferedReader br = new BufferedReader(new FileReader("duke.txt"));
             //read the file content
-            System.out.println("Here is your task list:");
-            System.out.println("Type     | Status   | Description (with time)\n");
+            printQueue += ("Here is your task list:");
+            printQueue += ("Type     | Status   | Description (with time)\n");
             while (strLine != null) {
                 sb.append(strLine);
                 sb.append(System.lineSeparator());
@@ -122,14 +130,15 @@ public class Storage {
                 if (!this.hasInitialized) {
                     loadFromFile(strLine, taskList);
                 }
-                System.out.println(strLine);
+                printQueue += strLine;
             }
             br.close();
             this.hasInitialized = true;
         } catch (IOException ioe) {
             System.err.println("IOException: " + ioe.getMessage());
-            throw new DukeException("    Error when reading file");
+            throw new DukeException("Storage Exception: Error when reading file");
         }
+        initialTaskList = printQueue;
         return taskList;
     }
 }

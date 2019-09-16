@@ -26,8 +26,13 @@ public class StorageCommand extends Command {
     public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
         String output = "";
         if (this.type.equals("save")) {
-            storage.saveTaskList(TaskList.tasks);
-            output = "Your task list has been saved!";
+            try {
+                storage.saveTaskList(TaskList.tasks);
+                output = "Your task list has been saved!";
+            } catch (Exception e) {
+                output += e;
+            }
+
         } else if (this.type.equals("display")) {
             storage.displayTaskList();
             output = "The following is your saved task list\n" + taskList.toString();

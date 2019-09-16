@@ -36,10 +36,10 @@ public class Event extends Task {
                 date.setTime(date.getTime() + ((hour * 60 + min) * 60000));
                 this.time = date.toString();
             } else {
-                throw new DukeException("    Time is not in the correct format");
+                throw new DukeException("Time is not in the correct format");
             }
         } else {
-            throw new DukeException("    Date is not in the format: (DD/MM/YYYY HHMM)");
+            throw new DukeException("Date is not in the format: (DD/MM/YYYY HHMM)");
         }
     }
 

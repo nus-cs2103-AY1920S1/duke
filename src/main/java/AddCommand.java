@@ -18,9 +18,10 @@ public class AddCommand extends Command {
      * @param taskList The TaskList Class containing the task list.
      * @param storage  The Storage class containing the name of file the be read.
      * @return output The String output for GUI message.
+     * @throws DukeException If unable to identify command.
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException{
         Task newTask;
         switch (this.type) {
         case "deadline":
@@ -50,11 +51,8 @@ public class AddCommand extends Command {
             break;
 
         default:
-            newTask = new Task(command);
+            throw new DukeException("AddCommand Exception: Unable to identify command");
         }
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("      " + newTask);
-        System.out.println("    Now you have " + TaskList.tasks.size() + " tasks in the list");
         String output = "Got it. I've added this task:" + newTask + "\n";
         output += "Now you have " + TaskList.tasks.size() + " tasks in the list";
         return output;

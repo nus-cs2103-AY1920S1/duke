@@ -24,6 +24,8 @@ public class Parser {
             return "todo";
         } else if (s.toLowerCase().startsWith("done")) {
             return "done";
+        } else if (s.toLowerCase().startsWith("update")) {
+            return "update";
         } else if (s.toLowerCase().startsWith("find")) {
             return "find";
         } else if (s.toLowerCase().startsWith("event")) {

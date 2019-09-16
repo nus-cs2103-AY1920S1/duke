@@ -3,18 +3,16 @@ package duke.task;
 /**
  * A Task that contains both a description and a date which the task must be completed by.
  */
-public class Deadline extends Task {
-    protected String ddl;
+public class Deadline extends TimeLimitTask {
 
     /**
-     * Constructs an deadline task.
+     * Constructs a deadline task with time limit.
      *
      * @param description the description of the deadline task.
      * @param d the specific deadline of that task.
      */
     public Deadline(String description, String d) {
-        super(description);
-        this.ddl = d;
+        super(description, d);
     }
 
     /**
@@ -23,7 +21,7 @@ public class Deadline extends Task {
      * @return deadline of the task.
      */
     public String getDdl() {
-        return ddl;
+        return getDateTime();
     }
 
     /**

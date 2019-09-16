@@ -3,9 +3,7 @@ package duke.task;
 /**
  * A Task that contains both a description and a date where the task takes place.
  */
-public class Event extends Task {
-    protected String dateTime;
-
+public class Event extends TimeLimitTask {
     /**
      * Constructs an instance of an event task.
      *
@@ -13,8 +11,7 @@ public class Event extends Task {
      * @param dt the date of that event task.
      */
     public Event(String description, String dt) {
-        super(description);
-        this.dateTime = dt;
+        super(description, dt);
     }
 
     /**
@@ -23,7 +20,7 @@ public class Event extends Task {
      * @return event date.
      */
     public String getDateTime() {
-        return dateTime;
+        return getDateTime();
     }
 
     /**

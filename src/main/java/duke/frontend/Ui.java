@@ -1,6 +1,11 @@
 package duke.frontend;
 
+import duke.task.TimeLimitTask;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 import static java.lang.Integer.parseInt;
 import duke.exception.DukeException;
 import duke.exception.UnknownCmdException;
@@ -8,12 +13,9 @@ import duke.exception.DukeWrongTaskException;
 import duke.exception.DeleteTaskException;
 import duke.exception.CompleteTaskException;
 import duke.exception.EmptyListException;
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.ToDo;
 import duke.parser.Parser;
 import java.util.ArrayList;
+import java.lang.IndexOutOfBoundsException;
 import duke.storage.Storage;
 
 /**
@@ -77,10 +79,14 @@ public class Ui {
                 throw (new CompleteTaskException());
             }
             index = parseInt(cmd.substring(5));
-            list.get(index - 1).markAsDone();
-            response = "Nice! I've marked this task as done:\n";
-            response = response.concat(list.get(index - 1).toString()).concat("\n");
-            return response;
+            try {
+                list.get(index - 1).markAsDone();
+                response = "Nice! I've marked this task as done:\n";
+                response = response.concat(list.get(index - 1).toString()).concat("\n");
+                return response;
+            } catch (IndexOutOfBoundsException e) {
+                throw new CompleteTaskException();
+            }
         case "find":
             String keyWord = p.parseDesc(cmd);
             ArrayList<Task> lst = list.returnAllMatchingTasks(keyWord);
@@ -99,13 +105,37 @@ public class Ui {
             if (cmd.length() <= 7 || parseInt(cmd.substring(7)) >= list.size() + 1) {
                 throw (new DeleteTaskException());
             }
-            index = parseInt(cmd.substring(7));
-            response = "Noted! I've removed this task:\n";
-            response = response.concat(list.get(index - 1).toString()).concat("\n");
-            list.remove(index - 1);
-            cnt--;
+            try {
+                index = parseInt(cmd.substring(7));
+                response = "Noted! I've removed this task:\n";
+                response = response.concat(list.get(index - 1).toString()).concat("\n");
+                list.remove(index - 1);
+                cnt--;
+            } catch (IndexOutOfBoundsException e) {
+                throw new DeleteTaskException();
+            }
             response = response.concat(String.format("Now you have %d tasks in the list.\n", list.size()));
             return response;
+        case "update":
+            try {
+                String[] component = cmd.split(" ");
+                index = parseInt(component[1]);
+                Task task = list.get(index - 1);
+                if (task instanceof Deadline || task instanceof Event) {
+                    TimeLimitTask newTask = (TimeLimitTask) task;
+                    String rawNewDate = "";
+                    for (int i = 2; i < component.length; i++) {
+                        rawNewDate = rawNewDate.concat(component[i] + " ");
+                    }
+                    String newDate = p.parseDate(rawNewDate);
+                    newTask.updateTime(newDate);
+                    return "I've successfully updated your task!";
+                } else {
+                    return "The task type is not Deadline or Event!";
+                }
+            } catch (IndexOutOfBoundsException e) {
+                return "Your update command is problematic!";
+            }
         case "deadline":
             if (cmd.length() <= 9 || !cmd.contains("/")) {
                 throw (new DukeWrongTaskException("deadline"));
@@ -146,7 +176,7 @@ public class Ui {
      * @return the error message to be displayed.
      */
     public String showLoadingError() {
-        return "There's no event in your task list!";
+        return "There's currently no event in your task list!";
     }
 
     /**
@@ -158,6 +188,8 @@ public class Ui {
      */
     public String start(String input) throws DukeException {
         cnt = list.size();
+
+        input = input.trim();
 
         String command = p.parseCommand(input);
         String response;

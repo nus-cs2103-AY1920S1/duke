@@ -17,10 +17,11 @@ public class DeleteCommand extends Command {
         } else {
             String desc = command.substring(7);
             int index = Integer.parseInt(desc);
-            if (index >= taskList.getTasks().size()) {
+            if (index > taskList.getTasks().size()) {
                 Ui.outOfBoundMsg();
+            } else {
+                taskList.deleteTask(index - 1);
             }
-            taskList.deleteTask(index - 1);
         }
     }
 }

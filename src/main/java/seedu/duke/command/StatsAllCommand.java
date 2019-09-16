@@ -33,7 +33,7 @@ public class StatsAllCommand extends Command {
 
         stats.incrementTotalCommandsExecuted();
 
-        return ui.getAllStatSequence(stats);
+        return ui.getAllStatSequence(stats, tasks);
 
     }
 

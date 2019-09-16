@@ -176,13 +176,16 @@ public class GraphicalUi extends Ui {
      * @param stat Statistic.
      * @return String.
      */
-    public String getAllStatSequence(Statistic stat) {
+    public String getAllStatSequence(Statistic stat, TaskList tasks) {
         String output = "Listing all statistics:"
                 + "\nTotal Commands Executed:    " + stat.getTotalCommandsExecuted()
                 + "\nTotal Tasks Deleted:                " + stat.getTotalTasksDeleted()
                 + "\nTotal To-Dos Completed:        " + stat.getTotalTodosCompleted()
                 + "\nTotal Deadlines Completed:    " + stat.getTotalDeadlinesCompleted()
                 + "\nTotal Events Completed:         " + stat.getTotalEventsCompleted()
+                + "\nTotal Events Completed TODAY:    " + stat.getCompletedEventsFromOneDayAgo(tasks)
+                + "\nTotal Deadlines Completed TODAY: " + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
+                + "\nTotal Todos Completed TODAY:     " + stat.getCompletedTodosFromOneDayAgo(tasks)
                 + "\n";
         return output;
     }
@@ -193,9 +196,9 @@ public class GraphicalUi extends Ui {
      * @param stat Statistic object.
      * @return String.
      */
-    public String getResetStatSequence(Statistic stat) {
+    public String getResetStatSequence(Statistic stat, TaskList tasks) {
         String output = "All statistics have been reset\n";
-        output += getAllStatSequence(stat);
+        output += getAllStatSequence(stat, tasks);
         return output;
     }
 

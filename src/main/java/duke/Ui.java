@@ -6,15 +6,6 @@ import duke.task.Task;
  * Encapsulates a user interface.
  */
 public class Ui {
-    protected static final String HORIZONTAL_LINE = "____________________________________________________________";
-    protected static final String INDENTATION = "    ";
-    protected static final String LOGO =
-              " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
     /**
      * Repackages messages into the chat bot format for output.
      *
@@ -22,14 +13,12 @@ public class Ui {
      * @return Messages ready to be output.
      */
     public static String output(String... messages) {
-        String output = "";
-        output += (INDENTATION + HORIZONTAL_LINE);
+        StringBuilder output = new StringBuilder();
         for (String message : messages) {
-            output += (INDENTATION + message.replace("\n", "\n" + INDENTATION));
+            output.append(message);
         }
-        output += (HORIZONTAL_LINE + "\n");
-        assert (!output.equals(""));
-        return output;
+        assert (!output.toString().equals(""));
+        return output.toString();
     }
 
     /**
@@ -92,7 +81,7 @@ public class Ui {
      * Outputs welcome message.
      */
     public static String showWelcomeMessage() {
-        return output("Hello from\n" + LOGO + "What can I do for you?\n");
+        return output("Hello from Bear.\nWhat can I do for you?\n");
     }
 
     /**

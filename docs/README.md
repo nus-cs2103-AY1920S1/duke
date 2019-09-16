@@ -62,7 +62,7 @@ Format:`list`
 
 Mark a task as done. Status changes from 0 to 1.
 
-Format `done [TASKNUMBER]`
+Format: `done [TASKNUMBER]`
 
 Example: `done 1` (Marks the first task as done)
 
@@ -70,7 +70,7 @@ Example: `done 1` (Marks the first task as done)
 
 Delete a task from the list.
 
-Format : `delete [TASKNUMBER]`
+Format: `delete [TASKNUMBER]`
 
 Example: `delete 2` (Deletes the second task in the list)
 

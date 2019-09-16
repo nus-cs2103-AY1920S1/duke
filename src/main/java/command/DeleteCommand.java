@@ -34,10 +34,8 @@ public class DeleteCommand extends Command {
         tasks.getTaskList().remove(index);
 
         // Save output as String
-        output += ui.getTopBorder();
         output += "\n\tNoted. I have removed this task: " + "\n\t" + removed;
         output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
-        output += ui.getBottomBorder();
 
         // Save in .txt file
         storage.deleteTask(index);

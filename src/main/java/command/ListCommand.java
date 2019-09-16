@@ -14,10 +14,8 @@ public class ListCommand extends Command {
         String output = "";
 
         // Save output as String
-        output += ui.getTopBorder();
         output += "\n\tHere are the tasks in your list: ";
         output += ui.getTasksAsString(tasks.getTaskList());
-        output += ui.getBottomBorder();
         return output;
     }
 

@@ -2,13 +2,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -55,6 +56,9 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox userBox = new DialogBox(text, img);
         userBox.setMinHeight(Region.USE_PREF_SIZE);
+        BackgroundFill backGroundFill = new BackgroundFill(Color.rgb(255, 234, 167), new CornerRadii(10), Insets.EMPTY);
+        Background backGround = new Background(backGroundFill);
+        userBox.setBackground(backGround);
         return userBox;
     }
 
@@ -65,16 +69,10 @@ public class DialogBox extends HBox {
         DialogBox dukeBox = new DialogBox(text, img);
         dukeBox.flip();
         dukeBox.setMinHeight(Region.USE_PREF_SIZE);
+        BackgroundFill backGroundFill = new BackgroundFill(Color.rgb(250, 177, 160), new CornerRadii(10), Insets.EMPTY);
+        Background backGround = new Background(backGroundFill);
+        dukeBox.setBackground(backGround);
         return dukeBox;
     }
 
-    /**
-     * Returns a DialogBox, specifically for start message.
-     */
-    public static DialogBox getStartDialog(String text, Image img) {
-        DialogBox startBox = new DialogBox(text, img);
-        startBox.flip();
-        startBox.setMinHeight(Region.USE_PREF_SIZE);
-        return startBox;
-    }
 }

@@ -37,15 +37,10 @@ public class MainWindow extends AnchorPane {
      * @param d Duke object
      */
     public void setDuke(Duke d) {
-        setWelcomeMessage(d);
+        DialogBox startBox = DialogBox.getDukeDialog(d.getStartMessage(), dukeImage);
+        dialogContainer.getChildren().add(startBox);
         duke = d;
 
-    }
-
-    @FXML
-    public void setWelcomeMessage(Duke d) {
-        DialogBox startBox = DialogBox.getStartDialog(d.getStartMessage(), dukeImage);
-        dialogContainer.getChildren().add(startBox);
     }
 
     /**
@@ -57,6 +52,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        dialogContainer.setSpacing(5);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();

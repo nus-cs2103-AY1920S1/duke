@@ -35,10 +35,8 @@ public class DoneCommand extends Command {
         Task doneTask = tasks.getTaskList().get(index);
 
         // Save output as String
-        output += ui.getTopBorder();
         output += "\n\tNice! I have marked this task as done: ";
         output += "\n\t" + doneTask;
-        output += ui.getBottomBorder();
 
         // Saving to file
         storage.updateAsDone(index);

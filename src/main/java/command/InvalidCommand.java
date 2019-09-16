@@ -20,9 +20,7 @@ public class InvalidCommand extends Command {
         String output = "";
 
         // Save output as String
-        output += ui.getTopBorder();
         output += "\n\t" + errorMessage;
-        output += ui.getBottomBorder();
         return output;
 
     }

@@ -13,20 +13,10 @@ public class Ui {
         String output = "";
 
         // Welcome message
-        output += getTopBorder();
-        output += "\n\tHello! I'm Duke!";
-        output += "\n\tWhat can I do for you?\n";
-        output += getBottomBorder();
+        output += "\n\tHello! I'm Patrick!";
+        output += "\n\tWhat can I do for you?";
 
         return output;
-    }
-
-    public String getTopBorder() {
-        return "____________________________________________________________";
-    }
-
-    public String getBottomBorder() {
-        return "\n____________________________________________________________";
     }
 
     /**

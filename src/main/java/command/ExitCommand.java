@@ -14,9 +14,7 @@ public class ExitCommand extends Command {
         String output = "";
 
         // Save output as String
-        output += ui.getTopBorder();
         output += "\n\tBye. Hope to see you again soon!";
-        output += ui.getBottomBorder();
         return output;
     }
 

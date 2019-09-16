@@ -53,11 +53,9 @@ public class AddCommand extends Command {
             storage.saveTask(textToAdd);
 
             // Save output as String
-            output += ui.getTopBorder();
             output += "\n\tGot it! I've added this task: ";
             output += "\n\t" + t.toString();
             output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
-            output += ui.getBottomBorder();
             break;
         }
         case "deadline": {
@@ -70,11 +68,9 @@ public class AddCommand extends Command {
             storage.saveTask(textToAdd);
 
             // Save output as String
-            output += ui.getTopBorder();
             output += "\n\tGot it! I've added this task: ";
             output += "\n\t" + d.toString();
             output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
-            output += ui.getBottomBorder();
             break;
         }
         case "event": {
@@ -87,11 +83,9 @@ public class AddCommand extends Command {
             storage.saveTask(textToAdd);
 
             // Save output as String
-            output += ui.getTopBorder();
             output += "\n\tGot it! I've added this task: ";
             output += "\n\t" + e.toString();
             output += "\n\tNow you have " + tasks.getSize() + " tasks in the list.";
-            output += ui.getBottomBorder();
             break;
         }
         default:

@@ -29,7 +29,7 @@ public class Parser {
      * @return Command object that is created according to the type of command.
      */
     public static Command parse(String fullCommand) {
-        String[] currArray = fullCommand.split("\\s+", 2);
+        String[] currArray = (fullCommand.trim()).split("\\s+", 2);
         switch (currArray[0]) {
         case "bye":
         case "b":

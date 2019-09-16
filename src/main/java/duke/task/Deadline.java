@@ -38,7 +38,11 @@ public class Deadline extends Task {
         if (detailsArray.length == 1) {
             throw new DukeException("OOPS!!! Please specify a date and time for your deadline :-(");
         }
-        return new Deadline(detailsArray[0], detailsArray[1]);
+        try {
+            return new Deadline(detailsArray[0], detailsArray[1]);
+        } catch (DukeException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     /**

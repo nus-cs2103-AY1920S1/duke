@@ -92,7 +92,7 @@ Expected outcome: <br/>
 
 ### 5. Find task
 To find a task, type `find <keyword>` <br/>
-**Note: find is case sensitive so make. See usage example 2 below:**
+**Note: find is case sensitive. See usage example 2 below:**
 
 Example of usage 1: <br/>
 `find CS`

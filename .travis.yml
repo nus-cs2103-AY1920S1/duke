@@ -1,5 +1,1 @@
 language: java
-
-deploy:
-  on:
-    tags: false

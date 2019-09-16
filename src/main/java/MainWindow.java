@@ -8,6 +8,8 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -36,6 +38,16 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    private void exitApplication() {
+        Timer exit = new Timer();
+        exit.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                System.exit(0);
+            }
+        }, 1000);
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -44,11 +56,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws IOException, ParseException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-
+        String greet = "Hi I'm Duke, what can I do for you?";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            exitApplication();
+        }
     }
 }

@@ -3,8 +3,10 @@ package duke.command.command;
 import duke.command.Command;
 import duke.command.UndoAction;
 import duke.task.Task;
+import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
+import ui.UiController;
 
 import java.util.Optional;
 
@@ -19,8 +21,8 @@ public class AddCommand extends Command {
      * @param task task to be added
      * @throws CommandCreationException if arguments are invalid
      */
-    public AddCommand(Task task) throws CommandCreationException {
-        super(null);
+    public AddCommand(Task task, UiController ui, TasksController tasksController) throws CommandCreationException {
+        super(null, ui, tasksController);
         this.task = task;
     }
 

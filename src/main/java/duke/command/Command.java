@@ -15,26 +15,11 @@ public abstract class Command {
     protected UiController ui;
     protected TasksController tasksController;
 
-    protected Command(CommandType type) throws CommandCreationException {
+    protected Command(CommandType type, UiController ui, TasksController tasksController) throws CommandCreationException {
         this.type = type;
-    }
-
-    /**
-     * Sets ui interface to be used for I/O.
-     * @param ui ui interface
-     */
-    public void setUi(UiController ui) {
         this.ui = ui;
+        this.tasksController = tasksController;
     }
-
-    /**
-     * Sets task controller for operations on tasks.
-     * @param controller task controller
-     */
-    public void setTasksController(TasksController controller) {
-        this.tasksController = controller;
-    }
-
 
     /**
      * Carries out command execution logic.

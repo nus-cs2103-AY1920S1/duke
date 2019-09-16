@@ -3,8 +3,10 @@ package duke.command.command;
 import duke.command.Command;
 import duke.command.CommandType;
 import duke.command.UndoAction;
+import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
+import ui.UiController;
 
 import java.util.Optional;
 
@@ -19,8 +21,8 @@ public class ListCommand extends Command {
      * @param s mandatory argument for command constructors
      * @throws CommandCreationException if argument is not empty
      */
-    public ListCommand(String s) throws CommandCreationException {
-        super(CommandType.LIST);
+    public ListCommand(String s, UiController ui, TasksController tasksController) throws CommandCreationException {
+        super(CommandType.LIST, ui, tasksController);
         if (!s.equals("")) {
             throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
         }

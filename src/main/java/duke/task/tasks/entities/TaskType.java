@@ -13,22 +13,24 @@ import java.io.Serializable;
  * Enum encapsulating different user tasks and its character code.
  */
 public enum TaskType implements Serializable {
-    TODO("todo", 'T', ToDo.class),
-    EVENT("event", 'E', Event.class),
-    DEADLINE("deadline", 'D', Deadline.class),
-    DO_WITHIN("within", 'W', DoWithin.class),
-    DO_AFTER("after", 'A', DoAfter.class);
+    TODO("todo", 'T', 0, ToDo.class),
+    EVENT("event", 'E', 1, Event.class),
+    DEADLINE("deadline", 'D', 1, Deadline.class),
+    DO_WITHIN("within", 'W', 2, DoWithin.class),
+    DO_AFTER("after", 'A', 1, DoAfter.class);
 
     private static final long serialVersionUID = 6529685098267757688L;
 
 
     public final String keyword;
     public final Character code;
+    public final int numDates;
     public final Class<? extends Task> task;
 
-    TaskType(String keyword, Character code, Class<? extends Task> task) {
+    TaskType(String keyword, Character code, int numDates, Class<? extends Task> task) {
         this.keyword = keyword;
         this.code = code;
+        this.numDates = numDates;
         this.task = task;
     }
 }

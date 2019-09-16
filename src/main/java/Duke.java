@@ -32,6 +32,7 @@ public class Duke {
         } else {
             ui = new UI_CLI();
         }
+        assert ui != null: "UI not initiated";
         storage = new Storage(Paths.get(filepath));
         tasks = storage.load();
     }

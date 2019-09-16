@@ -83,6 +83,7 @@ public class Storage {
      * @return resulting Task
      */
     public Task parseLine(String line) {
+        assert line != null: "input string cannot be null";
         String[] sp = line.split(DELIMITER);
 
         Class<? extends Task> taskType = parseTaskType(sp[0]);

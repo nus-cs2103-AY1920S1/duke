@@ -172,13 +172,21 @@ Closes Program
 ### `Keyword` - Duke Functions
 
 1) Todo [Task_Name]
+
 2) Deadline [Task_Name] [/by] [DD/MM/YYYY HH:MM]
+
 3) Event [Task_Name] [/at] [DD/MM/YYYY HH:MM]
+
 4) List
+
 5) Done [Index]
+
 6) Delete [Index]
+
 7) Find [Key_Word]
+
 8) Sort
+
 9) Bye
 
 

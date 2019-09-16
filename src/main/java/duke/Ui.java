@@ -221,7 +221,4 @@ public class Ui {
         return outputContent;
     }
 
-
-
-
 }

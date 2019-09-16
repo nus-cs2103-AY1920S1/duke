@@ -60,10 +60,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
 
+        userInput.clear();
+
         if (response.contains("Bye. Hope to see you again soon!!")) {
+            Thread.sleep(500);
             System.exit(0);
         }
-
-        userInput.clear();
     }
 }

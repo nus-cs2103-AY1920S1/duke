@@ -36,6 +36,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Checks whether a Task description is duplicated.
+     * @param inputInstruction input task description
+     * @param type type of task input
+     * @param ui inputs the ui object
+     * @return a boolean value whether the inputInstruction is a duplicate
+     */
     public boolean isDuplicatedTask(String inputInstruction, String type, Ui ui) {
         String inputDescription;
         try {

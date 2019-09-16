@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
@@ -8,10 +9,10 @@ import duke.tasks.Task;
 
 public class DoneCommand extends Command {
 
-    private int index;
+    private String inputInstruction;
 
-    public DoneCommand(int inputIndex) throws DukeException {
-        index = inputIndex;
+    public DoneCommand(String inputString) throws DukeException {
+        inputInstruction = inputString;
     }
 
     /**
@@ -23,6 +24,10 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList currentTaskList, Ui ui, Storage storage) {
         try {
+            int index = Parser.getTaskNum(inputInstruction, ui);
+            if (index == -1) {
+                throw new DukeException("indexInt");
+            }
             if (currentTaskList.getNoOfTask() < index || index <= 0) {
                 throw new DukeException("index");
             }

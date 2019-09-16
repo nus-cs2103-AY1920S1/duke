@@ -34,6 +34,10 @@ public class DukeException extends Exception {
             return "Unable to do so, File issue!";
         } else if (exceptionType.equals("duplicate")) {
             return "Duplicated Event Description, please change your event Description to a unique one";
+        } else if (exceptionType.equals("TaskNum")) {
+            return "Invalid Format! Please input a valid Task Number";
+        } else if (exceptionType.equals("indexInt")){
+            return "Invalid Format! Please input a valid integer index";
         } else {
             return "Invalid Format! Please Follow the Standard Command lines in the Guide.";
         }

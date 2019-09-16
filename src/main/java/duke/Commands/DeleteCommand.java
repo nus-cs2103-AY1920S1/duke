@@ -26,9 +26,12 @@ public class DeleteCommand extends Command {
             if (inputInstruction.length() == 6 || inputInstruction.length() == 7) {
                 throw new DukeException("delete");
             }
-            int taskNum = Parser.getTaskNum(inputInstruction);
+            int taskNum = Parser.getTaskNum(inputInstruction, ui);
             if (taskNum > currentTaskList.getNoOfTask()) {
                 throw new DukeException("index");
+            }
+            if (taskNum == -1) {
+                throw new DukeException("indexInt");
             }
             String outputString = ui.printDelete(taskNum, currentTaskList);
             storage.updateTaskToFile(currentTaskList.getEntireList());

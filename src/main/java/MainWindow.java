@@ -1,10 +1,13 @@
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -24,12 +27,23 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * A method to initialize the content structures within the MainWindow of the GUI.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("Hello there! I'm Duke.", dukeImage));
+        dialogContainer.setBackground(Background.EMPTY);
+        String style = "-fx-background-color: rgba(83, 84, 90, 1);";
+        dialogContainer.setStyle(style);
+        dialogContainer.setSpacing(10);
     }
 
+    /**
+     * A method to store Duke as a field of the class.
+     * @param d An instance of Duke.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

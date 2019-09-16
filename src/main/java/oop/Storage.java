@@ -41,14 +41,18 @@ public class Storage {
             File f = new File(filePath);
             f.createNewFile();
             Scanner sc = new Scanner(f);
-            StringBuilder sb = new StringBuilder(sc.nextLine());
 
-            while (sc.hasNextLine()) {
-                sb.append("\n" + sc.nextLine());
+            if (sc.hasNextLine()) {
+                StringBuilder sb = new StringBuilder(sc.nextLine());
+                while (sc.hasNextLine()) {
+                    sb.append("\n" + sc.nextLine());
+                }
+                return sb.toString();
+            } else {
+                return "";
             }
-            return sb.toString();
         } catch (Exception e) {
-            throw new DukeException("File not found");
+            throw new DukeException(String.format("There's no file found at in the filepath stated '%s'.", filePath));
         }
     }
 

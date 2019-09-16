@@ -23,7 +23,7 @@ public class DukeException extends Exception {
      * @return Returns the exception message.
      */
     public String getMessage() {
-        return String.format("☹ OOPS!!! %s", message);
+        return String.format("OOPS!!! %s", message);
     }
 }
 

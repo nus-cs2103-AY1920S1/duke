@@ -7,6 +7,9 @@ import duke.ui.Ui;
 
 import static duke.ui.Messages.UNKNOWN_COMMAND;
 
+/**
+ * An unknown Command.
+ */
 public class UnknownCommand extends Command {
     @Override
     protected void check(TaskList tasks) {

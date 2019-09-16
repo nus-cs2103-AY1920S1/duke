@@ -25,7 +25,7 @@ public final class DukeCli {
     }
 
     /**
-     * Run the Duke CLI application.
+     * Runs the Duke CLI application.
      */
     public void run() {
         ui.showWelcome();

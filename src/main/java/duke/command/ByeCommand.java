@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command that should exit Duke.
+ */
 public class ByeCommand extends Command {
     @Override
     protected void check(TaskList tasks) {

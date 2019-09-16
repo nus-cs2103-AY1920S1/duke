@@ -11,7 +11,7 @@ import static duke.ui.Messages.TASK_ADD_FAILURE;
 import static duke.ui.Messages.TASK_MISSING_DESCRIPTION;
 
 /**
- * Commands that add a new Task.
+ * Command that adds a new Task.
  */
 public abstract class AddTaskCommand extends Command {
     protected final String description;
@@ -27,6 +27,13 @@ public abstract class AddTaskCommand extends Command {
         }
     }
 
+    /**
+     * Adds a Task to the current TaskList.
+     * @param task the Task to be added
+     * @param tasks the TaskList to add the Task to
+     * @param ui the user interface
+     * @param storage the storage interface
+     */
     protected void addTask(final Task task, TaskList tasks, Ui ui, Storage storage) {
         if (tasks.addTask(task)) {
             ui.addTaskSuccess(task, tasks);

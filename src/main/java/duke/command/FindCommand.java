@@ -9,6 +9,9 @@ import duke.ui.Ui;
 
 import static duke.ui.Messages.FIND_MISSING_QUERY;
 
+/**
+ * Command that finds tasks by keywords.
+ */
 public class FindCommand extends Command {
     private final String[] queries;
 

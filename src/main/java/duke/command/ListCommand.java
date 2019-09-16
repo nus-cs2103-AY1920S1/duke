@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command that lists all tasks.
+ */
 public class ListCommand extends Command {
     @Override
     protected void check(TaskList tasks) {

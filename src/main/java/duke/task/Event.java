@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
+/**
+ * Task that starts at a certain datetime.
+ */
 public class Event extends Task {
     private LocalDateTime at;
 

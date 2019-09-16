@@ -13,6 +13,9 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
+/**
+ * A DialogBox is drawn whenever the user issues a Command or Duke responds.
+ */
 public class DialogBox extends HBox {
     private static final Image USER_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/User.png"));
     private static final Image DUKE_AVATAR = new Image(DialogBox.class.getResourceAsStream("/images/Duke.png"));

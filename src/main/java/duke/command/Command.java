@@ -6,7 +6,15 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * The Command base class.
+ */
 public abstract class Command {
+    /**
+     * Checks whether this Command is valid.
+     * @param tasks the current tasks
+     * @throws DukeInvalidCommandException if this Command is invalid
+     */
     protected abstract void check(final TaskList tasks) throws DukeInvalidCommandException;
 
     /**

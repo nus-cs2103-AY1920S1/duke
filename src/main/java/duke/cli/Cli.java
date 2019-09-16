@@ -33,6 +33,9 @@ public class Cli implements Ui {
         this.output.println(message.stripTrailing());
     }
 
+    /**
+     * Shows a long separator.
+     */
     public void showSeparator() {
         show(SEPARATOR);
     }

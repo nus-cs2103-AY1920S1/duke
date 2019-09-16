@@ -3,7 +3,7 @@ package duke.command;
 import java.time.LocalDateTime;
 
 /**
- * Commands that add a new task with a datetime field.
+ * Command that adds a new task with a datetime field.
  */
 public abstract class AddTaskWithTimeCommand extends AddTaskCommand {
     protected final LocalDateTime time;

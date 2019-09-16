@@ -7,6 +7,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Command that deletes a task.
+ */
 public class DeleteCommand extends SingleTaskCommand {
     public DeleteCommand(final Integer taskNumber) {
         super(taskNumber);

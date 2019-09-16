@@ -2,6 +2,9 @@ package duke.task;
 
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The base class of all types of Tasks.
+ */
 public abstract class Task {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     static final String STORAGE_STRING_SEPARATOR = " | ";
@@ -53,5 +56,9 @@ public abstract class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
+    /**
+     * Returns the representation of this Task in the data file.
+     * @return the representation of this Task in the data file
+     */
     public abstract String toStorageString();
 }

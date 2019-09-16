@@ -15,6 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Outermost component of the Duke GUI.
+ */
 public class MainWindow extends AnchorPane implements Ui {
     private final Storage storage = new Storage("duke.txt");
     private final TaskList tasks = new TaskList();

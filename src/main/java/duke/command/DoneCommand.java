@@ -9,6 +9,9 @@ import duke.ui.Ui;
 
 import static duke.ui.Messages.TASK_ALREADY_DONE;
 
+/**
+ * Command that marks a task as done.
+ */
 public class DoneCommand extends SingleTaskCommand {
     public DoneCommand(final Integer taskNumber) {
         super(taskNumber);

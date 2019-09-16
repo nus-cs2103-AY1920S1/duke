@@ -1,5 +1,8 @@
 package duke.ui;
 
+/**
+ * Utility class that stores all messages that Duke should display.
+ */
 public final class Messages {
     // Add task
     public static final String TASK_ADD_SUCCESS = "Got it. I've added this task:";

@@ -8,7 +8,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The Duke GUI application.
+ */
 public final class DukeGui extends Application {
+    /**
+     * Starts the Duke GUI application.
+     * @param stage the stage
+     */
     @Override
     public void start(Stage stage) {
         try {

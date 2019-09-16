@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 
 import static duke.ui.Messages.EVENT_MISSING_TIME;
 
+/**
+ * Command that adds a new event task.
+ */
 public class EventCommand extends AddTaskWithTimeCommand {
     public EventCommand(final String description, final LocalDateTime time) {
         super(description, time);

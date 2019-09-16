@@ -12,6 +12,9 @@ import static duke.ui.Messages.TASK_ADD_SUCCESS;
 import static duke.ui.Messages.TASK_DELETED;
 import static duke.ui.Messages.TASK_MARKED_AS_DONE;
 
+/**
+ * The Duke user interface.
+ */
 public interface Ui {
     void showMessage(final String message);
 
@@ -51,22 +54,40 @@ public interface Ui {
                 String.format(TASKS_COUNT, tasks.size())));
     }
 
+    /**
+     * Informs the user that a Task has been marked as done.
+     * @param task the Task that was marked as done
+     */
     default void taskMarkedAsDone(final Task task) {
         showMessage(String.format("%s%n%s", TASK_MARKED_AS_DONE, task.toString()));
     }
 
+    /**
+     * Informs the user that the last find did not match any Tasks.
+     */
     default void findNoMatch() {
         showMessage(FIND_NO_TASKS);
     }
 
+    /**
+     * List the matches from the last find Command.
+     * @param matches the Tasks that matched
+     */
     default void findMatches(final TaskList matches) {
         showMessage(String.format("%s%n%s", FIND_TASKS, matches.toString()));
     }
 
+    /**
+     * Informs the user that there are currently no tasks to list.
+     */
     default void listNoTasks() {
         showMessage(LIST_NO_TASKS);
     }
 
+    /**
+     * Lists the tasks currently in the task list.
+     * @param tasks the current TaskList
+     */
     default void listTasks(TaskList tasks) {
         showMessage(String.format("%s%n%s", LIST_TASKS, tasks.toString()));
     }

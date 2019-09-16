@@ -20,6 +20,9 @@ import static duke.task.Task.DATE_TIME_FORMATTER;
 import static duke.ui.Messages.LOAD_TASK_FILE_CORRUPTED;
 import static duke.ui.Messages.WRITE_TASK_FAILED;
 
+/**
+ * The storage interface of the Duke application.
+ */
 public class Storage {
     private final File file;
 
@@ -87,7 +90,7 @@ public class Storage {
     }
 
     /**
-     * Write tasks to data file.
+     * Writes tasks to data file.
      *
      * @param tasks The tasks to write to the data file
      * @throws DukeStorageException if the data file cannot be written
@@ -102,6 +105,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the directory that Duke should store its data.
+     * @return the directory that Duke should store its data
+     */
     private Path getDataDir() {
         String os = System.getProperty("os.name").toUpperCase();
         String path;

@@ -17,6 +17,9 @@ import java.time.format.DateTimeParseException;
 
 import static duke.task.Task.DATE_TIME_FORMATTER;
 
+/**
+ * Parses Commands.
+ */
 public class Parser {
     // Parser is for static use only
     private Parser() {

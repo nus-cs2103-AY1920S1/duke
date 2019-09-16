@@ -7,7 +7,7 @@ import static duke.ui.Messages.MISSING_TASK_NUMBER;
 import static duke.ui.Messages.TASK_DOES_NOT_EXIST;
 
 /**
- * Commands that manipulate a single Task.
+ * Command that manipulates a single Task.
  */
 public abstract class SingleTaskCommand extends Command {
     protected final Integer taskNumber;

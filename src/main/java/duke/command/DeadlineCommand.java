@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 
 import static duke.ui.Messages.DEADLINE_MISSING_TIME;
 
+/**
+ * Command that adds a new deadline task.
+ */
 public class DeadlineCommand extends AddTaskWithTimeCommand {
     public DeadlineCommand(final String description, final LocalDateTime time) {
         super(description, time);

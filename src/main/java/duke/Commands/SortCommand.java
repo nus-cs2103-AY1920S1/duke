@@ -4,19 +4,17 @@ import duke.TaskList;
 import duke.Ui;
 import duke.Storage;
 import duke.exceptions.DukeException;
-import duke.tasks.Task;
-import duke.tasks.Todo;
 
-public class ListCommand extends Command {
+public class SortCommand extends Command {
 
     private String inputInstruction;
 
-    public ListCommand(String inputString) {
+    public SortCommand(String inputString) {
         inputInstruction = inputString.toLowerCase();
     }
 
     /**
-     * Overrides execute method to achieve ListCommand.
+     * Overrides execute method to achieve SortCommand.
      * @param currentTaskList taskList containing all the current Task
      * @param ui class that handles all I/O managements
      * @param storage class that handles all file storage and loading
@@ -24,9 +22,11 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList currentTaskList, Ui ui, Storage storage) {
         try {
-            if (!inputInstruction.equals("list")) {
-                throw new DukeException("list");
+            if (!inputInstruction.equals("sort")) {
+                throw new DukeException("sort");
             }
+            currentTaskList.sortTask();
+            storage.updateTaskToFile(currentTaskList.getEntireList());
             return ui.printList(currentTaskList);
         } catch (Exception e) {
             return ui.printException(e);

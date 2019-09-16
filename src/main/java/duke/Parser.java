@@ -1,16 +1,17 @@
 package duke;
 
+import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.DuplicateCommand;
 import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.InvalidCommand;
-import duke.commands.DuplicateCommand;
 import duke.commands.ListCommand;
+import duke.commands.SortCommand;
 import duke.commands.TodoCommand;
-import duke.commands.ByeCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -98,7 +99,7 @@ public class Parser {
         String inputCommand = inputInstruction.split(" ")[0];
         switch (inputCommand.toLowerCase()) {
         case "list" :
-            return new ListCommand();
+            return new ListCommand(inputInstruction);
         case "done" :
             return new DoneCommand(inputInstruction);
         case "todo" :
@@ -125,6 +126,8 @@ public class Parser {
             return new FindCommand(inputInstruction);
         case "bye" :
             return new ByeCommand();
+        case "sort" :
+            return new SortCommand(inputInstruction);
         default :
             return new InvalidCommand();
         }

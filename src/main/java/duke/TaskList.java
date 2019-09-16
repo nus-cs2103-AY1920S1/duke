@@ -1,7 +1,11 @@
 package duke;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.exceptions.DukeException;
+import duke.tasks.Todo;
+
 import java.util.ArrayList;
 
 
@@ -116,7 +120,8 @@ public class TaskList {
             ArrayList<Task> tempTaskList = new ArrayList<>();
             for (int i = 0; i < listOfTask.size(); i++) {
                 Task currentTask = listOfTask.get(i);
-                if (currentTask.toString().contains(taskKeyWord)) {
+                String currentTaskString = currentTask.toString().toLowerCase();
+                if (currentTaskString.contains(taskKeyWord.toLowerCase())) {
                     tempTaskList.add(currentTask);
                 }
             }
@@ -128,5 +133,34 @@ public class TaskList {
                 }
             }
         }
+    }
+
+    /**
+     * Sorts the currentTasklist to list in the following order
+     * 1) To-do 2) Deadline 3) Event Task.
+     */
+    public void sortTask() {
+        ArrayList<Task> newListOfTask = new ArrayList<>();
+        for (int typeNo = 0; typeNo < 3; typeNo++) {
+            for (int i = 0; i < listOfTask.size(); i++) {
+                Task currentTask = listOfTask.get(i);
+                if (typeNo == 0) {
+                    if (currentTask instanceof Todo) {
+                        newListOfTask.add(currentTask);
+                    }
+                }
+                if (typeNo == 1) {
+                    if (currentTask instanceof Deadline) {
+                        newListOfTask.add(currentTask);
+                    }
+                }
+                if (typeNo == 2) {
+                    if (currentTask instanceof Event) {
+                        newListOfTask.add(currentTask);
+                    }
+                }
+            }
+        }
+        listOfTask = newListOfTask;
     }
 }

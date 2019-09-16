@@ -1,4 +1,8 @@
 [T][X] CS2100 Tutorial 2
+[T][X] homework
+[T][X] homework 3
 [D][X] Submit Project (by: 16/09/2019 1800)
+[D][X] homework 2 (by: 02/12/2019 1900)
+[D][X] homework 4 (by: 02/12/2019 1900)
 [E][X] Attend Wedding  (at: 20/09/2019 1800)
 [E][X] Attend Wedding1  (at: 02/12/2019 1800)

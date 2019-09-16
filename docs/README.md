@@ -47,7 +47,7 @@ Expected outcome:
 __________________________________
 Got it. I've added this task:
   [E][X] Attend Wedding (at: 02/12/2019 1800)
-Now you have 1 tasks in the list.
+Now you have 2 tasks in the list.
 __________________________________
 ```
 
@@ -60,7 +60,7 @@ Expected outcome:
 __________________________________
 Got it. I've added this task:
   [D][X] Submit Project (by: 12/09/2019 1500)
-Now you have 1 tasks in the list.
+Now you have 3 tasks in the list.
 __________________________________
 ```
 Note : *Duke* does not allow any duplicate [Task_Description], so do remember to input a unique [Task_Description] when
@@ -130,11 +130,31 @@ Here are the tasks in your list:
   1.[T][X] MA1101R Tutorial 2
   2.[E][X] Attending Wedding (at: 02/12/2019 1800)
   3.[D][X] Submit Project (by: 12/09/2019 1500)
-Now you have 1 tasks in the list.
+Now you have 3 tasks in the list.
 __________________________________
 ```
 
-## 6. Exiting the program: Bye
+
+## 6. Sorts the current list: Sort
+Sorts the current list of Task according to the different Task Types in order of
+Todo -> Deadline -> Event.
+
+### Sort
+	
+	 sort - e.g. "sort" 
+
+Expected outcome:
+```
+__________________________________
+Here are the tasks in your list:
+  1.[T][X] MA1101R Tutorial 2
+  2.[D][X] Submit Project (by: 12/09/2019 1500)
+  3.[E][X] Attending Wedding (at: 02/12/2019 1800)
+Now you have 3 tasks in the list.
+__________________________________
+```
+
+## 7. Exiting the program: Bye
 Exits and Closes the program
 
 ### Bye
@@ -145,3 +165,4 @@ Expected outcome:
 ```
 Closes Program
 ```
+

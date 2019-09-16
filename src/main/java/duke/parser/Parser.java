@@ -75,7 +75,7 @@ public class Parser {
      * @return The string array containing the task name and task date parsed from full command.
      * @throws DukeException In the event that a command is missing a task name.
      */
-    private static String[] getNameAndDate(String fullCommand) throws DukeException {
+    static String[] getNameAndDate(String fullCommand) throws DukeException {
         String taskType = fullCommand.trim().split("\\s+")[0]; //e.g. deadline
         String nameAndDate = fullCommand.split(taskType)[1].trim(); //e.g. do homework /by tomorrow
         String[] details;
@@ -93,7 +93,7 @@ public class Parser {
         }
     }
 
-    private static String[] parseToDoDetails(String taskType, String nameAndDate) throws DukeException {
+    static String[] parseToDoDetails(String taskType, String nameAndDate) throws DukeException {
         if (nameAndDate.length() < 1) {
             throw new MissingDescriptionException(taskType);
         }
@@ -101,7 +101,7 @@ public class Parser {
     }
 
 
-    private static String[] parseDeadlineDetails(String taskType, String nameAndDate) throws DukeException {
+    static String[] parseDeadlineDetails(String taskType, String nameAndDate) throws DukeException {
         String[] details;
         details = nameAndDate.split("/by");
         if (details.length == 0) { //e.g. deadline /by

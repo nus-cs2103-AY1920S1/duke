@@ -2,7 +2,6 @@ package duke;
 
 import java.io.UnsupportedEncodingException;
 
-import duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;

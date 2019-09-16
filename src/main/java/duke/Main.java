@@ -1,10 +1,13 @@
 package duke;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -31,5 +34,11 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void close() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.75));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
     }
 }

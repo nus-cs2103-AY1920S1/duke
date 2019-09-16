@@ -52,13 +52,6 @@ public class Ui {
     }
 
     /**
-     * Closes the <code>Scanner</code> object that reads user input.
-     */
-    public void closeScanner() {
-        userInput.close();
-    }
-
-    /**
      * Prints the input message in the console.
      * @param message Message to be printed.
      */

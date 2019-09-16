@@ -20,6 +20,7 @@ class AddTaskCommand extends Command {
     @Override
     String execute(TaskList tasks, Storage storage) throws IOException {
         tasks.addTask(newTask);
+        tasks.createReminders();
         storage.update(tasks);
         StringBuilder sb = new StringBuilder("Got it. I've added this task:\n");
         sb.append(newTask.toString());

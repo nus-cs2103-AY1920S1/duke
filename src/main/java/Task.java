@@ -29,6 +29,14 @@ abstract class Task implements Serializable {
     }
 
     /**
+     * Check if the task is complete.
+     * @return A boolean value for whether the task is complete.
+     */
+    boolean isDone() {
+        return isDone;
+    }
+
+    /**
      * Gets the description of the task.
      * @return The task description.
      */

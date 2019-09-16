@@ -24,6 +24,15 @@ public class TaskList implements Serializable {
     }
 
     /**
+     * Checks whether the task list is empty.
+     *
+     * @return A boolean value for whether the task list is empty.
+     */
+    boolean isEmpty() {
+        return taskList.isEmpty();
+    }
+
+    /**
      * Returns the task present in the specific index of the task list.
      *
      * @param index The target index.
@@ -108,10 +117,12 @@ public class TaskList implements Serializable {
      * Creates reminders of the user's upcoming tasks.
      */
     void createReminders() {
+        List<Reminder> currReminders = new ArrayList<>();
         for (Task task : taskList) {
             Optional<Reminder> potentialReminder = Reminder.createReminderIfValid(task);
-            potentialReminder.ifPresent(reminder -> reminders.add(reminder));
+            potentialReminder.ifPresent(reminder -> currReminders.add(reminder));
         }
+        reminders = currReminders;
     }
 
 }

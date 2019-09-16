@@ -8,13 +8,14 @@ import java.util.Optional;
  */
 public class Reminder implements Serializable {
     private TimedTask upcomingTask;
-    private String totalTimeLeft;
+    private String totalTimeDifference;
     private static final int THRESHOLD = 7;
-    private long daysLeft;
+    private boolean isOver;
+    private boolean isValid;
 
     private Reminder(TimedTask task) {
         upcomingTask = task;
-        calculateTimeLeft(task.getTimestamp());
+        checkValidity(task.getTimestamp());
     }
 
     /**
@@ -22,9 +23,10 @@ public class Reminder implements Serializable {
      *
      * @param timestamp The timestamp of the timed task.
      */
-    private void calculateTimeLeft(LocalDateTime timestamp) {
+    private void checkValidity(LocalDateTime timestamp) {
         LocalDateTime tempDateTime = LocalDateTime.now();
-        daysLeft = tempDateTime.until(timestamp, ChronoUnit.DAYS);
+
+        long daysLeft = tempDateTime.until(timestamp, ChronoUnit.DAYS);
         tempDateTime = tempDateTime.plusDays(daysLeft);
 
         long hoursLeft = tempDateTime.until(timestamp, ChronoUnit.HOURS);
@@ -32,7 +34,12 @@ public class Reminder implements Serializable {
 
         long minutesLeft = tempDateTime.until(timestamp, ChronoUnit.MINUTES);
 
-        totalTimeLeft = String.format("%d days, %d hours and %d minutes left", daysLeft, hoursLeft, minutesLeft);
+        totalTimeDifference = String.format("%d days, %d hours and %d minutes",
+                Math.abs(daysLeft), Math.abs(hoursLeft), Math.abs(minutesLeft));
+
+        isOver = (daysLeft < 0 || hoursLeft < 0 || minutesLeft < 0);
+
+        isValid = (daysLeft < THRESHOLD);
     }
 
     /**
@@ -42,9 +49,9 @@ public class Reminder implements Serializable {
      * @return An Optional Reminder which will contain a reminder if the task is upcoming.
      */
     static Optional<Reminder> createReminderIfValid(Task task) {
-        if (task.isTimed()) {
+        if (task.isTimed() && !(task.isDone())) {
             Reminder potentialReminder = new Reminder((TimedTask) task);
-            return (potentialReminder.daysLeft <= THRESHOLD) ? Optional.of(potentialReminder) : Optional.empty();
+            return (potentialReminder.isValid) ? Optional.of(potentialReminder) : Optional.empty();
         } else {
             return Optional.empty();
         }
@@ -57,7 +64,15 @@ public class Reminder implements Serializable {
      */
     @Override
     public String toString() {
-        return String.format("You have %s to complete the task: %s!", totalTimeLeft, upcomingTask.getTaskDescription());
+        if (isOver) {
+            return String.format(
+                    "The task, %s, has already gone past its scheduled time by %s!",
+                    upcomingTask.getTaskDescription(), totalTimeDifference);
+        } else {
+            return String.format(
+                    "You have %s left to complete the task: %s!",
+                    totalTimeDifference, upcomingTask.getTaskDescription());
+        }
     }
 
 }

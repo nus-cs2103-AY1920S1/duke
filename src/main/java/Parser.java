@@ -18,7 +18,7 @@ public class Parser {
         String action = parameters[0];
         Optional<Command> command;
         List<String> validActions = Arrays.asList(
-                "bye", "list", "done", "delete", "find", "todo", "deadline", "event");
+                "bye", "list", "reminders", "done", "delete", "find", "todo", "deadline", "event");
 
         if (!validActions.contains(action)) {
             throw new InvalidInputException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -30,6 +30,9 @@ public class Parser {
             break;
         case "list":
             command = Optional.of(new PrintListCommand());
+            break;
+        case "reminders":
+            command = Optional.of(new PrintRemindersCommand());
             break;
         default:
             command = Optional.empty();

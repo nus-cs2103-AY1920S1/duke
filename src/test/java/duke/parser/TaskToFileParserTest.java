@@ -16,19 +16,19 @@ class TaskToFileParserTest {
     public void parse_success() {
         try {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
-            assertEquals(TaskToFileParser.parse(new Todo("eat food")), "todo,false,eat food\n");
+            assertEquals(TaskToFileParser.parse(new Todo("eat food")), "todo,false,null,eat food\n");
             assertEquals(TaskToFileParser.parse(new Todo("eat food", true)),
-                         "todo,true,eat food\n");
+                         "todo,true,null,eat food\n");
             assertEquals(TaskToFileParser.parse(new Deadline("meeting", format.parse("10/10/2003 1100"),
-                                                       false)), "deadline,false,meeting,10/10/2003 1100\n");
+                                                       false)), "deadline,false,null,meeting,10/10/2003 1100\n");
             assertEquals(TaskToFileParser.parse(new Deadline("meeting", format.parse("10/10/2003 1100"),
                                                        true)),
-                         "deadline,true,meeting,10/10/2003 1100\n");
+                         "deadline,true,null,meeting,10/10/2003 1100\n");
             assertEquals(TaskToFileParser.parse(new Event("dinner", format.parse("23/04/2008 1023"),
-                                                    true)), "event,true,dinner,23/04/2008 1023\n");
+                                                    true)), "event,true,null,dinner,23/04/2008 1023\n");
             assertEquals(TaskToFileParser.parse(new Event("dinner", format.parse("23/04/2008 1023"),
                                                     false)),
-                         "event,false,dinner,23/04/2008 1023\n");
+                         "event,false,null,dinner,23/04/2008 1023\n");
         } catch (ParseException pe) {
             fail();
         }

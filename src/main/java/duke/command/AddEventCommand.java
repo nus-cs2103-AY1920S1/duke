@@ -3,10 +3,11 @@ package duke.command;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
 import duke.task.Event;
+import duke.task.TaskManager;
 
 /**
  * The <code>AddEventCommand</code> is created when the user enters <code>"event"</code>. The todo command add a event
- * task into the list of tasks in {@link duke.task.TaskList}. The user interface will display the new event task that
+ * task into the list of tasks in {@link TaskManager}. The user interface will display the new event task that
  * is added.
  */
 public class AddEventCommand extends AddCommand {

@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
 
 /**
@@ -20,7 +19,7 @@ public interface UserInterface {
 
     public String readCommand(String userInput);
 
-    public String showTable(String list);
+    public String showTable(String taskList);
 
     public String showResultsFound(String list);
 
@@ -36,7 +35,9 @@ public interface UserInterface {
 
     public String showInvalidParametersError(InvalidParameterException invalidParameter);
 
-    public String showInvalidDateTimeError(InvalidDateTimeException invalidDateTime);
-
     public String showSaveError();
+
+    public String showSetReminder(String task, String dateToRemind);
+
+    public String showSchedule(String schedule);
 }

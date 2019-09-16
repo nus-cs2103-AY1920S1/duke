@@ -1,11 +1,12 @@
 package duke.command;
 
 import duke.exception.InvalidParameterException;
+import duke.task.TaskManager;
 import duke.task.Todo;
 
 /**
  * The <code>AddTodoCommand</code> is created when the user enters <code>"todo"</code>. The todo command add a todo task
- * into the list of tasks in {@link duke.task.TaskList}. The user interface will display the new todo task that is added
+ * into the list of tasks in {@link TaskManager}. The user interface will display the new todo task that is added
  * .
  */
 public class AddTodoCommand extends AddCommand {

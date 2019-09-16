@@ -5,7 +5,7 @@ import duke.exception.InvalidCommandException;
 import duke.exception.InvalidParameterException;
 import duke.parser.CommandParser;
 import duke.storage.Storage;
-import duke.task.TaskList;
+import duke.task.TaskManager;
 import duke.ui.Ui;
 import duke.ui.UserInterface;
 
@@ -23,9 +23,9 @@ public class Duke {
      */
     private final Storage storage;
     /**
-     * This is a list of tasks. Operations can be performed in the TaskList class.
+     * This is a list of tasks. Operations can be performed in the TaskManager class.
      */
-    private TaskList tasks;
+    private TaskManager tasks;
     /** UI
      * This is the user interface for Duke.
      */
@@ -35,10 +35,10 @@ public class Duke {
         userInterface = new Ui();
         storage = new Storage("data/duke.txt");
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskManager(storage.load());
         } catch (IOException ie) {
             userInterface.showLoadingError();
-            tasks = new TaskList();
+            tasks = new TaskManager();
         }
 
     }

@@ -1,14 +1,6 @@
 package duke.parser;
 
-import duke.command.AddDeadlineCommand;
-import duke.command.AddEventCommand;
-import duke.command.AddTodoCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidParameterException;
 
@@ -47,6 +39,10 @@ public class CommandParser {
                 return new DeleteCommand(parameter);
             case "find":
                 return new FindCommand(parameter);
+            case "remind":
+                return new RemindCommand(parameter);
+            case "schedule":
+                return new ScheduleCommand();
             case "bye":
                 return new ExitCommand();
             default:

@@ -1,5 +1,10 @@
 package duke.task;
 
+import duke.exception.NullDateException;
+import duke.formatter.DateFormatter;
+
+import java.util.Date;
+
 /**
  * A todo item is a task with description. The todo item can be created, marked as done or deleted.
  */
@@ -19,7 +24,10 @@ public class Todo extends Task {
      * @param isDone the done status of the task
      */
     public Todo(String description, boolean isDone) {
-        super(description, isDone);
+        super(description);
+        if(isDone) {
+            this.markAsDone();
+        }
     }
 
     /**
@@ -27,7 +35,7 @@ public class Todo extends Task {
      * @return a string representation of the encoded todo task
      */
     public String encode() {
-        return "todo," + super.isDone + "," + super.description;
+        return "todo," + super.encode();
     }
 
     /**

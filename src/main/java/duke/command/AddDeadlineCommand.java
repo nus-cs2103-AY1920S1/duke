@@ -3,10 +3,11 @@ package duke.command;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
 import duke.task.Deadline;
+import duke.task.TaskManager;
 
 /**
  * The <code>AddDeadlineCommand</code> is created when the user enters <code>"deadline"</code>. The todo command add a \
- * deadline task into the list of tasks in {@link duke.task.TaskList}. The user interface will display the new deadline
+ * deadline task into the list of tasks in {@link TaskManager}. The user interface will display the new deadline
  * task that is added.
  */
 public class AddDeadlineCommand extends AddCommand {

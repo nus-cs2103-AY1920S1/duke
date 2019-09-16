@@ -1,34 +1,49 @@
 package duke.command;
 
 import duke.exception.FailedToSaveIOException;
+import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
+import duke.parser.DateParser;
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskManager;
 import duke.ui.UserInterface;
+
+import java.util.Date;
 
 /**
  *  The <code>DoneCommand</code> is created when the user enters <code>"done"</code>. The done command will mark a
  *  specified task entered by the user as done. The user interface will display the updated information if it is
  *  successful.
  */
-public class DoneCommand implements Command {
+public class RemindCommand implements Command {
 
     /**
      * The index of the task to be mark as done in the list of tasks.
      */
     int index;
 
+    Date date;
+
+    private boolean isDateFieldEmpty (Date date) {
+        return date == null;
+    }
+
     /**
      * Constructs a new done command with the specified index of the task to be marked as done in the list of tasks.
      * @param index the index of the task to be mark as done in the list of tasks
      * @throws InvalidParameterException if the index of the task specified is not a number
      */
-    public DoneCommand(String index) throws InvalidParameterException {
+    public RemindCommand(String line) throws InvalidParameterException {
+        String[] arr = line.split(" ");
         try {
-            this.index = Integer.parseInt(index);
+            this.index = Integer.parseInt(arr[0]);
+            this.date = DateParser.parse(String.join(" ", arr[1], arr[2]));
         } catch (NumberFormatException nfe) {
-            throw new InvalidParameterException(index);
+            throw new InvalidParameterException("" + index);
+        } catch(ArrayIndexOutOfBoundsException aioube) {
+            throw new InvalidParameterException(line);
+        } catch (InvalidDateTimeException idte) {
+            throw new InvalidParameterException(idte.getInvalidDateTime());
         }
     }
 
@@ -38,13 +53,13 @@ public class DoneCommand implements Command {
      * @param taskManager the list of tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
-     * @throws duke.exception.InvalidParameterException if the index is out of range
+     * @throws InvalidParameterException if the index is out of range
      */
     public String execute(TaskManager taskManager, UserInterface ui, Storage storage) throws InvalidParameterException {
         try {
-            String task = taskManager.markTaskAsDone(index);
+            String task = taskManager.remind(index, date);
             storage.save(taskManager.getCurrentTaskListToSave());
-            return ui.showMarkedAsDone(task);
+            return ui.showSetReminder(task, date.toString());
         } catch (FailedToSaveIOException ftsioe) {
             return ui.showSaveError();
         } catch (IndexOutOfBoundsException aioube) {

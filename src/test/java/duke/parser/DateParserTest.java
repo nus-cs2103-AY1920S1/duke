@@ -27,6 +27,8 @@ class DateParserTest {
                          formatter.parse("12/31/9999 2359").toString());
         } catch (ParseException pe) {
             fail();
+        } catch(InvalidDateTimeException idte) {
+            fail();
         }
     }
 

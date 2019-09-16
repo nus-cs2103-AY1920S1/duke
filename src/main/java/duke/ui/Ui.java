@@ -3,9 +3,12 @@ package duke.ui;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
+import duke.task.Task;
 
 import java.lang.StringBuilder;
+import java.util.Date;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 /**
  * This is the user interface of the Duke program. The Duke program will print information here. The user interface can
@@ -68,15 +71,6 @@ public class Ui implements UserInterface {
         return output;
     }
 
-    public String showInvalidDateTimeError(InvalidDateTimeException invalidDateTime) {
-        StringBuilder outputBuilder = new StringBuilder();
-        outputBuilder.append("    ------------------------------------------------------------\n");
-        outputBuilder.append("    🙁 OOPS!! Invalid Parameters: " + invalidDateTime.getInvalidDateTime() + " 🙁\n");
-        outputBuilder.append("    ------------------------------------------------------------\n");
-        String output = outputBuilder.toString();
-        return output;
-    }
-
     /**
      * Prints a loading error message for the user. This will occur when Duke is unable to load the
      * file path specified in Duke. See {@link duke.main.Duke} for more information.
@@ -116,15 +110,23 @@ public class Ui implements UserInterface {
      * Prints the current tasks in the list.
      * @param list the list of tasks to be printed
      */
-    public String showTable(String list) {
+    public String showTable(String taskList) {
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append("    ============================================================\n");
         outputBuilder.append("    Here are the tasks in your list:\n");
         outputBuilder.append("    ------------------------------------------------------------\n");
-        outputBuilder.append(list);
+        outputBuilder.append(taskList);
         outputBuilder.append("    ============================================================\n");
         String output = outputBuilder.toString();
         return output;
+    }
+
+    public String showSchedule(String schedule) {
+
+        StringBuilder outputBuilder = new StringBuilder();
+        outputBuilder.append("    I have fetched your schedule: \n\n");
+        outputBuilder.append(schedule);
+        return outputBuilder.toString();
     }
 
     /**
@@ -200,4 +202,14 @@ public class Ui implements UserInterface {
         return output;
     }
 
+    public String showSetReminder(String task, String dateToRemind) {
+        StringBuilder outputBuilder = new StringBuilder();
+        outputBuilder.append("    ------------------------------------------------------------\n");
+        outputBuilder.append("    Acknowledged. I've set the reminder for this task:\n");
+        outputBuilder.append("    ⏰ " + task + "\n");
+        outputBuilder.append("    Reminder has been set to: " + dateToRemind + "\n");
+        outputBuilder.append("    ------------------------------------------------------------\n");
+        String output = outputBuilder.toString();
+        return output;
+    }
 }

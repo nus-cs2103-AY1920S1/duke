@@ -1,6 +1,7 @@
 package duke.storage;
 
 import duke.exception.FailedToSaveIOException;
+import duke.task.TaskManager;
 
 import java.io.*;
 import java.util.stream.Stream;
@@ -8,7 +9,7 @@ import java.util.stream.Stream;
 /**
  * This is the storage of the Duke Program. The storage is the <code>filePath</code> specified in the constructor of the
  * {@link duke.main.Duke} object. The <code>Storage</code> class loads and save the file into a stream of lines for
- * easy parsing into the list of tasks. See {@link duke.task.TaskList} for more information.
+ * easy parsing into the list of tasks. See {@link TaskManager} for more information.
  */
 public class Storage {
     /**

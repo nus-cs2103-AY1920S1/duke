@@ -16,3 +16,19 @@
     -fx-fill: #616161;
     -fx-font-family: "Delius Unicase"
 }
+
+.alertPane {
+    -fx-background-image: url("/images/alert.jpg");
+    -fx-background-color: #BBDEFB;
+}
+
+.alertPane:header *.header-panel {
+    -fx-background-image: url("/images/alert.jpg");
+    -fx-background-color: #BBDEFB;
+}
+
+.alertPane:header .header-panel .label {
+    -fx-font-family: "Delius Unicase";
+    -fx-font-size: 16px;
+    -fx-text-fill: #616161;
+}

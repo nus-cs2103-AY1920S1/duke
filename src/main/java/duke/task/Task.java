@@ -1,15 +1,29 @@
 package duke.task;
 
+import duke.exception.InvalidDateTimeException;
+import duke.exception.NullDateException;
+import duke.extension.Reminder;
+import duke.formatter.DateFormatter;
+import duke.parser.DateParser;
+
+import java.util.Date;
+import java.util.Optional;
+
 /**
  * This is the task item to be added into the list of tasks. The <code>Task</code> abstract class provides an
  * abstraction over {@link Todo}, {@link Deadline}, {@link Event} items.
  */
-public abstract class Task {
+public class Task {
 
     /**
      * This is the description of the task.
      */
     protected String description;
+
+    protected Optional<Date> taskDate = Optional.empty();
+
+    protected Optional<Date> reminderDate = Optional.empty();
+
 
     /**
      * This is used to indicate whether the task is done.
@@ -22,24 +36,12 @@ public abstract class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
     }
 
-    /**
-     * Constructs a new task with description and the option to mark it as done.
-     * @param description the description of the task
-     * @param isDone the done status of the task
-     */
-    public Task(String description, boolean isDone) {
+    public Task(String description, Date taskDate) {
         this.description = description;
-        this.isDone = isDone;
+        this.taskDate = Optional.ofNullable(taskDate);
     }
-
-    /**
-     * Encodes the task to be stored in the storage.
-     * @return a string representation of the encoded task
-     */
-    public abstract String encode();
 
     /**
      * Gets the status icon of the done status of the task.
@@ -56,6 +58,23 @@ public abstract class Task {
         isDone = true;
     }
 
+    public String displayReminderIfPresent() {
+        if(reminderDate.isPresent()) {
+            return "Reminder set to: " + reminderDate.get().toString();
+        } else {
+            return "";
+        }
+    }
+
+    public void setReminder(Date date) {
+        reminderDate = Optional.ofNullable(date);
+        new Reminder(this, date);
+    }
+
+    public void clearReminder() {
+        reminderDate = Optional.empty();
+    }
+
     /**
      * Checks if the task's description contain the specified sequence of <code>char</code> values in the keyword.
      * @param keyword the specified sequence of <code>char</code> values
@@ -63,6 +82,45 @@ public abstract class Task {
      */
     public boolean contains(String keyword) {
         return description.contains(keyword);
+    }
+
+    public Date getTaskDate() throws NullDateException {
+        return taskDate.orElseThrow(NullDateException::new);
+    }
+
+    public String displayTaskDateIfPresent() {
+        if(taskDate.isPresent()) {
+            return DateFormatter.format(taskDate.get()).substring(0,10);
+        } else {
+            return "";
+        }
+    }
+
+    public String encode() {
+        StringBuilder outputBuilder = new StringBuilder("" + isDone);
+        outputBuilder.append(',');
+        if(reminderDate.isPresent()) {
+            outputBuilder.append(DateFormatter.format(reminderDate.get()));
+            outputBuilder.append(",");
+        } else {
+            outputBuilder.append("null,");
+        }
+        outputBuilder.append(description);
+        if(taskDate.isPresent()) {
+            outputBuilder.append(',');
+            outputBuilder.append(DateFormatter.format(taskDate.get()));
+        }
+        return outputBuilder.toString();
+    }
+
+    public String showFullInformation() {
+        StringBuilder outputBuilder = new StringBuilder();
+        outputBuilder.append(toString());
+        outputBuilder.append("\n");
+        outputBuilder.append("     ");
+        outputBuilder.append(displayReminderIfPresent());
+        outputBuilder.append("\n");
+        return outputBuilder.toString();
     }
 
     /**

@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.FailedToSaveIOException;
 import duke.storage.Storage;
 import duke.task.Task;
-import duke.task.TaskList;
+import duke.task.TaskManager;
 import duke.ui.UserInterface;
 
 /**
@@ -34,18 +34,19 @@ public class AddCommand implements Command {
     /**
      * Executes the command. This will add the specified task into the list of tasks. The task can be a todo, deadline
      * or event item.
-     * @param tasks the list of tasks
+     * @param taskManager the list of tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      */
-    public String execute(TaskList tasks, UserInterface ui, Storage storage) {
+    public String execute(TaskManager taskManager, UserInterface ui, Storage storage) {
         try {
-            tasks.add(task);
-            storage.save(tasks.save());
+            taskManager.addToTaskList(task);
+            taskManager.addToSchedule(task);
+            storage.save(taskManager.getCurrentTaskListToSave());
         } catch (FailedToSaveIOException ftsioe) {
             return ui.showSaveError();
         }
-        return ui.showAddInformation(task.toString(), tasks.size());
+        return ui.showAddInformation(task.toString(), taskManager.getTaskListSize());
     }
 
 }

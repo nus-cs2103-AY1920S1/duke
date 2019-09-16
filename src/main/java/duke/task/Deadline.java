@@ -12,19 +12,13 @@ import java.util.Date;
 public class Deadline extends Task {
 
     /**
-     * This is the date where the deadline task is due by.
-     */
-    private Date by;
-
-    /**
      * Constructs a new deadline task with description and the date where the deadline task is due by that has not been
      * done.
      * @param description the description of the deadline task
      * @param by the date the task is due by
      */
     public Deadline(String description, String by) throws InvalidDateTimeException {
-        super(description);
-        this.by = DateParser.parse(by);
+        super(description, DateParser.parse(by));
     }
 
     /**
@@ -34,9 +28,23 @@ public class Deadline extends Task {
      * @param by the date the task is due by
      * @param isDone the done status of the task
      */
+    public Deadline(String description, Date by) {
+        super(description, by);
+    }
+
     public Deadline(String description, Date by, boolean isDone) {
-        super(description, isDone);
-        this.by = by;
+        super(description, by);
+        if(isDone) {
+            this.markAsDone();
+        }
+    }
+
+    public Deadline(String description, Date by, boolean isDone, Date reminder) {
+        super(description, by);
+        if(isDone) {
+            this.markAsDone();
+        }
+        this.setReminder(reminder);
     }
 
     /**
@@ -44,8 +52,7 @@ public class Deadline extends Task {
      * @return a string representation of the encoded deadline task
      */
     public String encode() {
-        return "deadline," + super.isDone + "," + super.description + ","
-               + DateFormatter.format(by);
+        return "deadline," + super.encode();
     }
 
     /**
@@ -56,7 +63,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + by + ")";
+        return "[D]" + super.toString() + " (by:" + super.taskDate.get() + ")";
     }
 
 }

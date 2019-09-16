@@ -3,7 +3,8 @@ package duke.command;
 import duke.exception.FailedToSaveIOException;
 import duke.exception.InvalidParameterException;
 import duke.storage.Storage;
-import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.TaskManager;
 import duke.ui.UserInterface;
 
 /**
@@ -33,16 +34,17 @@ public class DeleteCommand implements Command {
 
     /**
      * Executes the command. This will delete the specified task entered by the user from the list of tasks
-     * @param tasks the list of tasks
+     * @param taskManager the list of tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      * @throws duke.exception.InvalidParameterException if the index is out of range
      */
-    public String execute(TaskList tasks, UserInterface ui, Storage storage) throws InvalidParameterException {
+    public String execute(TaskManager taskManager, UserInterface ui, Storage storage) throws InvalidParameterException {
         try {
-            String task = tasks.delete(index);
-            storage.save(tasks.save());
-            return ui.showDeletedMessage(task, tasks.size());
+            Task task = taskManager.deleteFromTaskList(index);
+            taskManager.deleteFromSchedule(task);
+            storage.save(taskManager.getCurrentTaskListToSave());
+            return ui.showDeletedMessage(task.toString(), taskManager.getTaskListSize());
         } catch (FailedToSaveIOException ftsioe) {
             return ui.showSaveError();
         } catch (IndexOutOfBoundsException aioube) {

@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.task.TaskList;
+import duke.task.TaskManager;
 import duke.ui.UserInterface;
 
 /**
@@ -24,14 +24,14 @@ public class FindCommand implements Command {
     }
 
     /**
-     * Executes the command. This will look through all the tasks in the list of tasks in {@link TaskList} and show
+     * Executes the command. This will look through all the tasks in the list of tasks in {@link TaskManager} and show
      * results found in the user interface
-     * @param tasks the list of tasks
+     * @param taskManager the list of tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      */
-    public String execute(TaskList tasks, UserInterface ui, Storage storage) {
-        return ui.showResultsFound(tasks.find(keyword));
+    public String execute(TaskManager taskManager, UserInterface ui, Storage storage) {
+        return ui.showResultsFound(taskManager.findFromTaskList(keyword));
     }
 
     /**

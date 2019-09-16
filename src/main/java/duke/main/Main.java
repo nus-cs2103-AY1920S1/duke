@@ -14,9 +14,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            BorderPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            FXMLLoader mainWindowLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            BorderPane bp = mainWindowLoader.load();
+            Scene scene = new Scene(bp);
             scene.getStylesheets().add("/style/stylesheet.css");
             stage.setMinWidth(630.0);
             stage.setMinHeight(703.0);

@@ -12,18 +12,12 @@ import java.util.Date;
 public class Event extends Task {
 
     /**
-     * This is the date where the event will be held at.
-     */
-    private Date at;
-
-    /**
      * Constructs a new event task with description and the date the event will be held at that has not been done.
      * @param description the description of the event task
      * @param at the date the event will be held at
      */
     public Event(String description, String at) throws InvalidDateTimeException {
-        super(description);
-        this.at = DateParser.parse(at);
+        super(description, DateParser.parse(at));
     }
 
     /**
@@ -33,9 +27,23 @@ public class Event extends Task {
      * @param at the date the event will be held at
      * @param isDone the done status of the task
      */
+    public Event(String description, Date at) {
+        super(description, at);
+    }
+
     public Event(String description, Date at, boolean isDone) {
-        super(description, isDone);
-        this.at = at;
+        super(description, at);
+        if(isDone) {
+            this.markAsDone();
+        }
+    }
+
+    public Event(String description, Date at, boolean isDone, Date reminder) {
+        super(description, at);
+        if(isDone) {
+            this.markAsDone();
+        }
+        this.setReminder(reminder);
     }
 
     /**
@@ -43,7 +51,7 @@ public class Event extends Task {
      * @return a string representation of the encoded event task
      */
     public String encode() {
-        return "event," + super.isDone + "," + super.description + "," + DateFormatter.format(at);
+        return "event," + super.encode();
     }
 
     /**
@@ -53,7 +61,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + at + ")";
+        return "[E]" + super.toString() + " (at:" + super.taskDate.get() + ")";
     }
 
 }

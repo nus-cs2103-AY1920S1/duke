@@ -14,23 +14,30 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class CommandParserTest {
     @Test
     public void parse_success() {
-        assertEquals(CommandParser.parse("todo eat food").getClass(),
-                     new AddTodoCommand("eat food").getClass());
-        assertEquals(CommandParser.parse("list").getClass(),
-                     new ListCommand().getClass());
-        assertEquals(CommandParser.parse("done 2").getClass(),
-                     new DoneCommand("2").getClass());
-        assertEquals(CommandParser.parse("deadline hw /by 31/12/2000 2359").getClass(),
-                     new AddDeadlineCommand("hw /by 31/12/2000 2359").getClass());
-        assertEquals(CommandParser.parse("event bbq /at 25/12/1965 1734").getClass(),
-                     new AddEventCommand("event bbq /at 25/12/1965 1734").getClass());
-        assertEquals(CommandParser.parse("delete 5").getClass(),
-                     new DeleteCommand("5").getClass());
-        assertEquals(CommandParser.parse("bye").getClass(), new ExitCommand().getClass());
+        try {
+            assertEquals(CommandParser.parse("todo eat food").getClass(),
+                    new AddTodoCommand("eat food").getClass());
+            assertEquals(CommandParser.parse("list").getClass(),
+                    new ListCommand().getClass());
+            assertEquals(CommandParser.parse("done 2").getClass(),
+                    new DoneCommand("2").getClass());
+            assertEquals(CommandParser.parse("deadline hw /by 31/12/2000 2359").getClass(),
+                    new AddDeadlineCommand("hw /by 31/12/2000 2359").getClass());
+            assertEquals(CommandParser.parse("event bbq /at 25/12/1965 1734").getClass(),
+                    new AddEventCommand("event bbq /at 25/12/1965 1734").getClass());
+            assertEquals(CommandParser.parse("delete 5").getClass(),
+                    new DeleteCommand("5").getClass());
+            assertEquals(CommandParser.parse("bye").getClass(), new ExitCommand().getClass());
+        } catch(InvalidCommandException ice) {
+            fail();
+        } catch(InvalidParameterException ipe) {
+            fail();
+        }
     }
 
     @Test
@@ -43,13 +50,13 @@ class CommandParserTest {
                 CommandParser.parse("deadline sdfdsf"));
         Assertions.assertThrows(InvalidParameterException.class, () ->
                 CommandParser.parse("deadline meeting /by "));
-        Assertions.assertThrows(InvalidDateTimeException.class, () ->
+        Assertions.assertThrows(InvalidParameterException.class, () ->
                 CommandParser.parse("deadline meeting /by 123456789"));
         Assertions.assertThrows(InvalidParameterException.class,
             () -> CommandParser.parse("event sdfdsf"));
         Assertions.assertThrows(InvalidParameterException.class,
             () -> CommandParser.parse("event meeting /at "));
-        Assertions.assertThrows(InvalidDateTimeException.class,
+        Assertions.assertThrows(InvalidParameterException.class,
             () -> CommandParser.parse("event meeting /at 123456789"));
         Assertions.assertThrows(InvalidParameterException.class,
             () -> CommandParser.parse("delete task"));
@@ -59,8 +66,6 @@ class CommandParserTest {
             () -> CommandParser.parse("helloWorld"));
         Assertions.assertThrows(InvalidCommandException.class,
             () -> CommandParser.parse(""));
-        Assertions.assertThrows(NullPointerException.class,
-            () ->  CommandParser.parse(null));
     }
 
 }

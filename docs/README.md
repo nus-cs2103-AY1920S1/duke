@@ -39,7 +39,7 @@ Gotcha! I've added a new task:
 You've got 1 task(s) on your list.
 ```
 
-![todo example](https://raw.github.com/Chenggeng97/duke/docs/todo.png)
+![todo example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/todo.png)
 
 ### `deadline` - Creates a new deadline task in memory
 Duke will create a new Deadline Task and store it within its memory.<br>
@@ -67,9 +67,9 @@ Gotcha! I've added a new task:
 You've got 3 task(s) on your list.
 ```
 
-![deadline example 1](https://raw.github.com/Chenggeng97/duke/docs/deadline1.png)
-![deadline example 2](https://raw.github.com/Chenggeng97/duke/docs/deadline2.png)
-![deadline example 3](https://raw.github.com/Chenggeng97/duke/docs/deadline3.png)
+![deadline example 1](https://raw.github.com/Chenggeng97/duke/tree/master/docs/deadline1.png)
+![deadline example 2](https://raw.github.com/Chenggeng97/duke/tree/master/docs/deadline2.png)
+![deadline example 3](https://raw.github.com/Chenggeng97/duke/tree/master/docs/deadline3.png)
 
 ### `event` - Creates an new event task in memory
 Duke will create a new Event Task and store it within its memory.
@@ -98,9 +98,9 @@ Gotcha! I've added a new task:
 You've got 3 task(s) on your list.
 ```
 
-![event example 1](https://raw.github.com/Chenggeng97/duke/docs/event1.png)
-![event example 2](https://raw.github.com/Chenggeng97/duke/docs/event2.png)
-![event example 3](https://raw.github.com/Chenggeng97/duke/docs/event3.png)
+![event example 1](https://raw.github.com/Chenggeng97/duke/tree/master/docs/event1.png)
+![event example 2](https://raw.github.com/Chenggeng97/duke/tree/master/docs/event2.png)
+![event example 3](https://raw.github.com/Chenggeng97/duke/tree/master/docs/event3.png)
 
 ### `list` - Pulls up the entire list of tasks
 Duke will return the entire list.<br>
@@ -118,7 +118,7 @@ Expected outcome:
 3.[E][✘] beat orgar (at 17/09/2019 1359)
 ```
 
-![list example](https://raw.github.com/Chenggeng97/duke/docs/list.png)
+![list example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/list.png)
 
 ### `find` - Pulls up only the items that match the keyword
 Duke will return only the parts of the list that match the keyword.
@@ -134,7 +134,7 @@ Scan complete! I've got your tasks right here!
 3.[E][✘] beat orgar (at 17/09/2019 1359)
 ```
 
-![find example](https://raw.github.com/Chenggeng97/duke/docs/find.png)
+![find example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/find.png)
 
 ### `done` - Marks an item on the list as done
 Duke will mark the Task a the specified index as done.
@@ -150,7 +150,7 @@ Good job! I've marked this task as done:
   [E][✓] beat orgar (at 17/09/2019 1359)
 ```
 
-![done example](https://raw.github.com/Chenggeng97/duke/docs/done.png)
+![done example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/done.png)
 
 ### `delete` - Delete a task from your list
 Duke will delete a Task.
@@ -167,7 +167,7 @@ No problem! I've deleted the task:
 You've got 2 task(s) on your list.
 ```
 
-![delete example](https://raw.github.com/Chenggeng97/duke/docs/delete.png)
+![delete example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/delete.png)
 
 ### `nuke` - Deletes all tasks from your list
 Duke will delete all Tasks.
@@ -182,7 +182,7 @@ Expected outcome:
 Boom! I've deleted all your tasks!
 ```
 
-![nuke example](https://raw.github.com/Chenggeng97/duke/docs/nuke.png)
+![nuke example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/nuke.png)
 
 ### `note` - Creates a new note in memory
 Duke will store a new note in its memory.
@@ -199,7 +199,7 @@ Gotcha! I've added a new note:
 You've got 1 note(s) on your list.
 ```
 
-![note example](https://raw.github.com/Chenggeng97/duke/docs/note.png)
+![note example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/note.png)
 
 ### `notelist` - Pulls up the entire list of notes
 Duke will return the entire list.
@@ -214,7 +214,7 @@ Expected outcome:
 1. McBorgar > borgarking
 ```
 
-![notelist example](https://raw.github.com/Chenggeng97/duke/docs/notelist.png)
+![notelist example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/notelist.png)
 
 ### `deletenote` - Deletes a note in memory
 Duke will delete the note at the specified index.
@@ -231,7 +231,7 @@ No problem! I've deleted the note:
 You've got 0 notes on your list.
 ```
 
-![deletenote example](https://raw.github.com/Chenggeng97/duke/docs/deletenote.png)
+![deletenote example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/deletenote.png)
 
 ### `nukenote` - Deletes all the notes
 Duke will delete all notes within the list.
@@ -246,7 +246,7 @@ Expected outcome:
 Boom! I've deleted all your notes!
 ```
 
-![nukenote example](https://raw.github.com/Chenggeng97/duke/docs/nukenote.png)
+![nukenote example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/nukenote.png)
 
 ### `bye` - shuts down the program
 Duke will shut down, after saying goodbye.
@@ -256,7 +256,7 @@ Example usage:
 bye
 ```
 
-![bye example](https://raw.github.com/Chenggeng97/duke/docs/bye.png)
+![bye example](https://raw.github.com/Chenggeng97/duke/tree/master/docs/bye.png)
 
 Expected outcome:
 ```

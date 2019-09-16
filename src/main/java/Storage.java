@@ -76,7 +76,7 @@ public class Storage {
                 list.add(createTaskFromFile(scan.nextLine()));
             }
             scan.close();
-        } catch(FileNotFoundException f) {
+        } catch (FileNotFoundException f) {
             createFile(file);
         }
         return list;
@@ -85,7 +85,7 @@ public class Storage {
     private void createFile(File file) {
         try {
             file.createNewFile();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.err.println(e.toString());
         }
     }

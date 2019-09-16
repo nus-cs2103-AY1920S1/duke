@@ -1,5 +1,9 @@
 import java.io.IOException;
 
+/**
+ * Handles the user command when the user decides to 
+ * exit Duke.
+ */
 public class ExitCommand extends Command {
 
     @Override

@@ -12,7 +12,6 @@ public class Duke {
 
     /**
      * Creates a new Duke object.
-     * @throws IOException If the file path provided does not find a file.
      * @throws DukeException If an unknown or unidentifiable command is stored within the tasks file.
      */
     public Duke() throws DukeException {
@@ -30,7 +29,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             return parser.processCommand(input, taskList, storage).toString();
-        } catch(Exception e) {
+        } catch (Exception e) {
             return e.getMessage();
         }
     }

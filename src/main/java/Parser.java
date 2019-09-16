@@ -19,11 +19,11 @@ public class Parser {
      * 
      * @param input The user input.
      * @param taskList The taskList object handling all tasks.
-     * @param ui The Ui object to display any messages to the user.
      * @param storage The Storage object needed to load and write back to the tasks file. 
      * @throws Exception When any error occurs during the execution of the user command.
      */
-    public StringBuilder processCommand(String input, TaskList taskList, Storage storage) throws DukeException, IOException{
+    public StringBuilder processCommand(
+            String input, TaskList taskList, Storage storage) throws DukeException, IOException {
         String[] command = input.split(" ");
         assert command.length > 0 : "command length should be greater than 0";
         if (command[0].equals("list")) {

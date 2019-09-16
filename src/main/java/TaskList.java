@@ -86,6 +86,7 @@ public class TaskList {
             sb.append("\n");
             index++;
         }
+        assert sb.length() > 0 : "The stringbuilder being returned shouldn't be empty";
         return sb;
     }
 
@@ -119,7 +120,8 @@ public class TaskList {
      * completed thereby signifying that the task has been completed.
      * @param index The index of the task in the array list to be set to completed to be marked as completed.
      * @param storage The Storage object handling the read and write from the local file storing the tasks.
-     * @return A stringbuilder object containing the response to be given by Duke upon marking a task as done successfully.
+     * @return A stringbuilder object containing the response to be given by Duke upon 
+     *     marking a task as done successfully.
      * @throws IndexOutOfBoundsException When the index specified by the user does not exist.
      * @throws IOException When the file to be written to is not found or does not exist.
      */

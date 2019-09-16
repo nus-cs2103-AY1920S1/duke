@@ -35,11 +35,17 @@ public class TaskList {
 
     /**
      * Adds a task into the task list.
+     * If task is a priority, task will be added to the front of the list.
+     * If task is not a priority, it will be added to the back of the list.
      *
      * @param task Task to be added into the list.
      */
     public void addToList(Task task) {
-        list.add(task);
+        if (task.isPriority()) {
+            list.add(0, task);
+        } else {
+            list.add(task);
+        }
     }
 
     /**
@@ -84,6 +90,8 @@ public class TaskList {
     public Task prioritise(int num) {
         Task prioritisedTask = list.get(num - 1);
         prioritisedTask.setAsPriority();
+        list.remove(num - 1);
+        addToList(prioritisedTask);
         return prioritisedTask;
     }
 
@@ -111,8 +119,13 @@ public class TaskList {
      */
     public String printList() {
         int i = 1;
+        boolean isNotPriority = false;
         String s = "";
         for (Task task : list) {
+            if (!task.isPriority() && !isNotPriority) {
+                isNotPriority = true;
+                s += "----------------------\n";
+            }
             s += i + ". " + task + "\n";
             i++;
         }

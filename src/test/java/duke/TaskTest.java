@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskTest {
 
-    Task t = new Task("blah blah");
+    Task t = new Task("blah blah", false);
 
     @Test
     public void testToString() {
-        assertEquals("[ ] blah blah", t.toString());
-        assertNotEquals("[ ] blah", t.toString());
-        assertNotEquals("[ ] blah ", t.toString());
-        assertNotEquals("[ ] blah bla", t.toString());
+        assertEquals("[ ][L] blah blah", t.toString());
+        assertNotEquals("[ ][L] blah", t.toString());
+        assertNotEquals("[ ][L] blah ", t.toString());
+        assertNotEquals("[ ][L] blah bla", t.toString());
     }
 
     @Test

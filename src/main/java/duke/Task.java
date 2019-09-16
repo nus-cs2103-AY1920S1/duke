@@ -36,7 +36,17 @@ public class Task {
 
     /**
      * Returns the priority level of the task,
-     * H represents high priority and L represents low priority.
+     * true if the task is a priority and false otherwise.
+     *
+     * @return isPriority The priority level of the task.
+     */
+    public boolean isPriority() {
+        return isPriority;
+    }
+
+    /**
+     * Returns the priority level of the task,
+     * "H" if the task is a priority and "L" otherwise.
      *
      * @return priorityLevel The priority level of the task.
      */
@@ -75,6 +85,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "][" + this.getPriority() + "] " + this.getDescription();
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 }

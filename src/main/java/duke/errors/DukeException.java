@@ -1,8 +1,12 @@
 package duke.errors;
 
+
+/**
+ * Represents an Exception class in Duke.
+ */
 public class DukeException extends Exception {
 
-    protected DukeExceptionType type;
+    private DukeExceptionType type;
 
     public DukeException(String error, DukeExceptionType type){
         super(error);
@@ -22,7 +26,7 @@ public class DukeException extends Exception {
             case FILENOTFOUND: 
                 return "File not found!!";
 			case TASKNOTFOUND:
-				return "core.tasks.Task not found!!";
+				return "Task not found!!";
     		default:
     			return "Unknown error! Please try again.";
     	}

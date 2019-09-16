@@ -20,10 +20,21 @@ import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+/**
+ * Represents a class that takes in user inputs and translates them into different commands.
+ */
 public class Parser {
 
     private static String[] responses = new String[]{"/by","/at"};
 
+    /**
+     * Takes in user input and convert it into a command which performs a set of
+     * instructions on the task list and ui.
+     *
+     * @param input String that contains user input
+     * @return A command that execute a set of instructions.
+     * @throws DukeException Thrown when there is a Duke exception.
+     */
     public static Command parseCommand(String input) throws DukeException, IllegalArgumentException {
         String[] tokens = input.split(" ");
         if (tokens[0].equals("bye")) {
@@ -42,6 +53,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Throws an exception which tells
+     * the user that the input command is not valid, by checking the length of command
+     * the user that the input lacks information based on each case
+     *
+     * @param tokens User input split by space
+     * @throws IllegalArgumentException Thrown when the length of the command is not sufficient
+     */
     private static void checkValidLength(String[] tokens) throws IllegalArgumentException {
         List<String> group1 = List.of("todo", "deadline", "event");
         List<String> group2 = List.of("done", "delete");
@@ -52,7 +71,7 @@ public class Parser {
         }
     }
 
-
+    // helper method to check if user input can still be a valid to-do, deadline or event task
     private static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
         List<String> validCommands = List.of("todo", "deadline", "event");
 
@@ -71,6 +90,16 @@ public class Parser {
     }
 
 
+
+    /**
+     * Takes in a string and tries to parse input string as Date and Time in dd/MM/yyyy HHmm,
+     * converting it into a more readable format
+     * eg. dd/MM/yyyy HHmm(e.g. 11/12/1111 1111 -> 11th of DECEMBER 1111, 11:11am)
+     *
+     * @param dateTimeString String to be parsed, and converted, if possible
+     * @return The formatted date and time, if it can be formatted
+     * @throws DukeException Thrown when the input cannot be formatted
+     */
     public static String parseDateTime(String dateTimeString) throws DukeException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
@@ -109,6 +138,7 @@ public class Parser {
         }
     }
 
+    // helper method to attach a prefix to a day
     private static String getFormattedDay(int day) {
         int remainderHundred = day % 100;
         if (remainderHundred > 9 && remainderHundred < 21) {
@@ -129,6 +159,8 @@ public class Parser {
     }
 
 
+    // helper method to check if the given date and time of a deadline or event task
+    // can be recognised as a DateTime format.
     private static Command createDateCommandIfValid(String[] tokens, int mode) throws DukeException {
         List<String> lst = Arrays.asList(tokens);
         String key = responses[mode];
@@ -163,6 +195,7 @@ public class Parser {
 
     }
 
+    //helper method to create the correct kind of DateTime Command
     private static Command createDateCommand(int mode, StringBuilder builder, String correctDate) {
         if (mode==0) {
             return new AddDeadlineCommand(builder.toString(),correctDate);

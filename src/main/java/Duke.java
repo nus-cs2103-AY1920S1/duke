@@ -11,20 +11,32 @@ import duke.tasks.Task;
 
 import java.io.IOException;
 
+
+/**
+ * The driver class to run user interface of Duke
+ */
 public class Duke {
 
     private Ui ui;
     private TaskList taskList;
-    private Storage storage;
 
-    public Duke(String filePath) throws DukeException, IOException {
+    /**
+     * constructor which initialises tasklist
+     * @throws DukeException if storage cannot be loaded
+     */
+    private Duke(String filePath) throws DukeException, IOException {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
-        this.taskList = new TaskList(this.storage.load(), this.storage);
+        Storage storage = new Storage(filePath);
+        this.taskList = new TaskList(storage.load(), storage);
         Task.setTaskList(taskList);
     }
 
-    public void run() throws IOException {
+    /**
+     * run method which contains the logic of the application. It takes in user input
+     * and parses the command. The command is executed accordingly
+     * based on their type.
+     */
+    private void run() throws IOException {
         ui.printWelcomeMessage();
         while (ui.hasInputs()) {
             try {
@@ -40,6 +52,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method to drive the application
+     * @param args Placeholder
+     * @throws DukeException for any exceptions that arise when running the application
+     */
     public static void main(String[] args) throws DukeException, IOException {
         new Duke("/Users/isaac/Desktop/CS2103T+CS2101/CS2103T/duke/data/duke.txt")
         .run();

@@ -15,17 +15,33 @@ import duke.errors.DukeExceptionType;
 
 
 
-
-
+/**
+ * Represents the storage of the application. Provides methods that to overwrite
+ * the contents of the file and loading data from the file.
+ */
 public class Storage{
 
     private File file;
 
+
+    /**
+     * Initialises the Storage with the filepath of the file
+     *
+     * @param filePath String of the directory the file is in.
+     */
     public Storage(String filePath){
         this.file = new File(filePath);
     }
 
-    public ArrayList<Task> load() throws DukeException, IOException {
+
+    /**
+     * Reads the data stored in the file, after which the date would be used
+     * to generate a ArrayList that would be returned.
+     *
+     * @return An ArrayList of tasks.
+     * @throws DukeException Thrown when the file does not exist.
+     */
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
@@ -40,7 +56,13 @@ public class Storage{
     }
 
 
-    public void overwriteStorage(ArrayList<Task> taskList) throws IOException{
+    /**
+     * Overwrites the data in the file by writing to the file.
+     *
+     * @param taskList Current task list stored in the application.
+     * @throws IOException Thrown when writing to file fails.
+     */
+    void overwriteStorage(ArrayList<Task> taskList) throws IOException{
         FileWriter fw = new FileWriter(this.file);
         for (Task task: taskList){
             switch (task.getType()) {
@@ -56,7 +78,7 @@ public class Storage{
                             "Deadline" + " / " +
                             task.getStatusIcon() + " / " +
                             task.getDescription() + " / " +
-                            ((Deadline) task).getTime() +
+                            ((Deadline) task).getDate() +
                             System.lineSeparator());
                     break;
                 case EVENT:
@@ -64,7 +86,7 @@ public class Storage{
                             "Event" + " / " +
                             task.getStatusIcon() + " / " +
                             task.getDescription() + " / " +
-                            ((Event) task).getTime() +
+                            ((Event) task).getDate() +
                             System.lineSeparator());
                     break;
                 default:
@@ -73,7 +95,8 @@ public class Storage{
         fw.close();
     }
 
-
+    //helper method to convert the written format of the task in the file
+    //into a Task to be loaded back into storage
     private Task formatFileToTask(String line) throws DukeException {
         String[] tokens = line.split(" / ");
         switch(tokens[1]){

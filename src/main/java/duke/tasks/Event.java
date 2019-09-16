@@ -1,24 +1,43 @@
 package duke.tasks;
 
+
+/**
+ * Represents an event task in the application.
+ * An event provides the getter methods to its date.
+ */
 public class Event extends Task {
 
-    private String time;
+    private String date;
 
-
-
-    public Event(String description, String time) {
+    /**
+     * Initialises an deadline task with the description and date and time of the event task.
+     *
+     * @param description Event description
+     * @param date Date description
+     */
+    public Event(String description, String date) {
         super(description);
-        this.time = time;
+        this.date = date;
         this.type = TaskType.EVENT;
     }
 
-    public String getTime() {
-        return this.time;
+    /**
+     * Returns a string containing the date and time of a event task
+     *
+     * @return String containing the date and time of a event task.
+     */
+    public String getDate() {
+        return this.date;
     }
 
+    /**
+     * Returns A string that includes the task type, description and date of the event task.
+     *
+     * @return String that includes the task type, description and date of the event task.
+     */
     @Override
     public String toString() {
         return String.format("[E][%s] %s(at: %s)", getStatusIcon(),
-                getDescription(), getTime());
+                getDescription(), getDate());
     }
 }

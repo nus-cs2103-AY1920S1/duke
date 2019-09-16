@@ -1,24 +1,42 @@
 package duke.tasks;
 
+/**
+ * Represents a deadline task in the application.
+ * A deadline provides the getter methods to its date.
+ */
 public class Deadline extends Task {
 
-    private String time;
+    private String date;
 
-    public Deadline(String description, String time) {
+    /**
+     * Initialises an deadline task with the description and date and time of the deadline task.
+     *
+     * @param description Deadline description
+     * @param date Date description
+     */
+    public Deadline(String description, String date) {
         super(description);
-        this.time = time;
+        this.date = date;
         this.type = TaskType.DEADLINE;
     }
 
-
-
-    public String getTime() {
-        return this.time;
+    /**
+     * Returns a string containing the date and time of a deadline task
+     *
+     * @return String containing the date and time of a deadline task.
+     */
+    public String getDate() {
+        return this.date;
     }
 
+    /**
+     * Returns A string that includes the task type, description and date of the deadline task.
+     *
+     * @return String that includes the task type, description and date of the deadline task.
+     */
     @Override
     public String toString() {
         return String.format("[D][%s] %s(by: %s)", getStatusIcon(),
-                getDescription(), getTime());
+                getDescription(), getDate());
     }
 }

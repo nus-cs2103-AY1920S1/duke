@@ -1,6 +1,6 @@
 class Ui {
-    private static final String logo = "";
-    private static final String intro = "Hi, Duke here!";
+    private static final String logo = "What's up Tom?";
+    private static final String intro = "Jerry here!";
 
     static String printLogo() {
         return "BEEP BEEP BEEP!\n" + logo;

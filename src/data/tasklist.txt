@@ -1,7 +1,5 @@
 D | 1 | watch 10 episodes of Running Man | 3rd aug | HIGH
-T | 0 | sleep
-T | 0 | go for tutorial | LOW
+T | 1 | go for tutorial | LOW
 E | 1 | presentation | 9aug
-T | 0 | run around NUS 
-E | 0 | Justin Bieber's concert | 3rd Oct | LOW
+E | 0 | Justin Bieber's concert | 3rd Oct 
 D | 1 | throw mum off the building :) | 3 sept 2090

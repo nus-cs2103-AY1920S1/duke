@@ -1,5 +1,6 @@
 # Duke - User Guide :grinning:
 ![DukeLogo](/resources/images/theDuke.png)  
+
 ## Introduction
    Duke is an application for users to manage their tasks in life. It uses simple commands and
    is optimized for users who **prefer to use desktop app to manage tasks**. 
@@ -11,9 +12,11 @@
       - **To-do**   
         These tasks are things that the users would plan to 
         do. 
+        
       - **Deadline**   
         These tasks are similar to **To-do** tasks, but they have 
         deadlines. 
+            
       - **Event**  
         These tasks are events that users like to keep track 
         of.  
@@ -43,14 +46,26 @@ corresponding details in the current list.
 ### 2. Adding a task : `add`
 
 * __Example of usage__:  
-    `list`
+    `todo go for tutorial`
 * __Expected outcome__:  
-    `outcome`
+    `Got it. I've added this task:            
+        [T][-] go for tutorial`
 
 ### 3. Marking a task as done : `done `
 
 ### 4. Deleting a task : `delete`
-
+    `
 ### 5. Filtering tasks using keyword: `find`
 
 ### 6. Prioritizing a task :  `#1` `#2` `#3`
+* __Example of usage__:  
+    `#1 2`  
+* __Expected outcome__:  
+    `outcome`  
+    *This sets the second task with a high priority.*
+
+### 7. Exiting the program :  `bye`  
+* __Example of usage__:  
+    `bye`
+* __Expected outcome__:  
+    `Farewell detected. Duke turning off...zzz`

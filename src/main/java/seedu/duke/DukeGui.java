@@ -16,9 +16,11 @@ import seedu.duke.cli.Parser;
 import seedu.duke.cli.commands.ByeCommand;
 import seedu.duke.tasks.TaskList;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 /**
  * The main class for the graphical Duke.
@@ -116,16 +118,15 @@ public class DukeGui extends Application {
     }
 
     private class TextAreaOutputStream extends OutputStream {
-        private StringBuilder buffer = new StringBuilder();
+        private ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         private PrintStream origOut = System.out;
 
         @Override
         public void write(int i) throws IOException {
-            char c = (char) i;
-            buffer.append(c);
-            if (c == '\n' && outputArea != null) {
-                final String line = buffer.toString();
-                buffer.setLength(0);
+            buffer.write(i);
+            if (i == ((int) '\n') && outputArea != null) {
+                final String line = buffer.toString(StandardCharsets.UTF_8);
+                buffer.reset();
                 origOut.println(line);
                 Platform.runLater(() -> {
                     outputArea.appendText(line);

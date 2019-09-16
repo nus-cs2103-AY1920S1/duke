@@ -137,6 +137,7 @@ public class Ui {
                 output += indentMessage(line);
             }
         }
+        assert !output.substring(output.length() - 2).equals("\n") : "message should not end with newline";
         return output;
     }
 
@@ -145,6 +146,7 @@ public class Ui {
      * @param message A string
      */
     public void showMessage(String message) {
+        assert message.substring(0, 3) == StaticStrings.INDENT : "message should be indented";
         System.out.println(StaticStrings.BORDER);
         System.out.println(message);
         System.out.println(StaticStrings.BORDER);

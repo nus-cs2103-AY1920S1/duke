@@ -32,6 +32,7 @@ public class DoneCommand extends Command {
             throw new DukeExecuteException(StaticStrings.NOT_IN_RANGE + numTasks);
         }
         try {
+            assert doneIdx < numTasks : "index of done task should be equals to or less than number of tasks";
             Task doneTask = taskList.markTaskDone(doneIdx);
             storage.save(taskList.getTaskArr());
             ui.showMarkTaskDoneResponse(doneTask);

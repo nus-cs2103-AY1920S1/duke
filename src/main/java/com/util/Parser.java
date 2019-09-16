@@ -100,6 +100,10 @@ public class Parser {
             throw new EmptyDescriptionException(subCommand);
         }
 
+        assert firstSubCommandIdx > 1 : "firstSubCommandIdx not be the first word in input";
+        assert firstSubCommandIdx < numInputWords -1 : "firstSubCommandIdx should not be the last word in user input";
+        assert firstSubCommandIdx != lastSubCommandIdx : "there should only be one subcommand";
+
         String taskDescription = joinArrIntoStr(fullUserInputArr.subList(1, firstSubCommandIdx));
         String subCommandDescription = joinArrIntoStr(fullUserInputArr.subList(firstSubCommandIdx+1, numInputWords));
         Command newCommand = new SubCommand(command, taskDescription, subCommand, subCommandDescription);

@@ -1,8 +1,5 @@
-T | 1 | read book
-E | 0 | project meeting | Aug 6th 2-4pm
-T | 1 | join sports club
-D | 0 | project | 2nd of December 2019, 6:00 PM
-E | 1 | marriage | 2nd of December 2019, 6:00 PM
-T | 0 | homework
-T | 0 | duke
-T | 0 | duke v2.0
+T | 1 | watch a movie
+D | 0 | 2106 lab | 25 september 1400
+E | 1 | 2101 op1 | 16 september 1000 
+D | 0 | 4248 wa2 | 20th of September 2019, 9:00 AM
+T | 1 | watch w5 webcasts

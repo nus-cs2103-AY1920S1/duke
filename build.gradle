@@ -7,8 +7,8 @@ plugins {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
+    archiveBaseName = "Greatest_To-Do_List"
+    archiveVersion = "0.1"
     archiveClassifier = null
     archiveAppendix = null
 }

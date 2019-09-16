@@ -34,6 +34,11 @@ Complete the following set up before
 running this application in your computer:
 
 1. Java SE Development Kit 11
+2. Download the `.jar` file and execute it in your
+command line using the following command: <br/>
+`java --module-path {PATH_TO_JAVAFX_SDK_11} 
+--add-modules javafx.controls,javafx.fxml 
+-jar Greatest_To-Do_List-1.0.jar`.
 
 ## Features
 Here are some features that you can expect from the Great To-Do List.

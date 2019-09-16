@@ -69,8 +69,12 @@ public class TaskList {
      *
      * @return The task lists.
      */
-    public ArrayList<Task> getAllTasks() {
-        return this.tasks;
+    public ArrayList<Task> getAllTasks() throws DukeException {
+        if (this.tasks.isEmpty()) {
+            throw new DukeException("OOPS!!! You have nothing in your task list!!!");
+        } else {
+            return this.tasks;
+        }
     }
 
     /**

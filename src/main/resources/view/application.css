@@ -5,18 +5,26 @@
 #text {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 #text .scroll-pane {
     -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 #text .scroll-pane .viewport {
     -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 #text .scroll-pane .content {
     -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 

@@ -9,6 +9,7 @@ import duke.commands.NullCommand;
 import duke.commands.AddToDoCommand;
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
+import duke.commands.FindCommand;
 
 import duke.errors.DukeException;
 import duke.errors.DukeExceptionType;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 public class Parser {
 
     private static String[] responses = new String[]{"/by","/at"};
+    private static int[] startingIndex = new int[]{9,6};
 
     /**
      * Takes in user input and convert it into a command which performs a set of
@@ -48,8 +50,12 @@ public class Parser {
             return DoneCommand.createDoneIfValid(tokens);
         } else if (tokens[0].equals("delete")) {
             return DeleteCommand.createDeleteIfValid(tokens);
+        } else if (tokens[0].equals("find")) {
+            return FindCommand.createFindCommandIfValid(tokens);
         } else {
-            return Parser.createAddCommandIfValid(tokens);
+            System.out.println(tokens[0]);
+            //return Parser.createAddCommandIfValid(tokens);
+            return Parser.createAddCommandIfValid(tokens, input);
         }
     }
 
@@ -68,11 +74,16 @@ public class Parser {
             throw new IllegalArgumentException(String.format("☹ OOPS!!! The description of a %s cannot be empty.",tokens[0]));
         } else if (tokens.length == 1 && group2.contains(tokens[0])) {
             throw new IllegalArgumentException(String.format("☹ OOPS!!! %s command requires integer.",tokens[0]));
+        } else if (tokens.length == 1 && tokens[0].equals("find")) {
+            throw new IllegalArgumentException(String.format("☹ OOPS!!! %s command requires keyword input.",tokens[0]));
         }
     }
 
     // helper method to check if user input can still be a valid to-do, deadline or event task
-    private static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
+
+
+//    private static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
+    private static Command createAddCommandIfValid(String[] tokens, String fullCommand) throws DukeException, IllegalArgumentException {
         List<String> validCommands = List.of("todo", "deadline", "event");
 
         if (!validCommands.contains(tokens[0])) {
@@ -81,15 +92,13 @@ public class Parser {
         if (tokens[0].equals("todo")) {
             return new AddToDoCommand(tokens);
         } else if (tokens[0].equals("deadline")) {
-            return createDateCommandIfValid(tokens,0);
+            return createDateCommandIfValid(tokens,fullCommand,0);
         } else if (tokens[0].equals("event")) {
-            return createDateCommandIfValid(tokens,1);
+            return createDateCommandIfValid(tokens,fullCommand,1);
         } else {
             return new NullCommand();
         }
     }
-
-
 
     /**
      * Takes in a string and tries to parse input string as Date and Time in dd/MM/yyyy HHmm,
@@ -161,46 +170,65 @@ public class Parser {
 
     // helper method to check if the given date and time of a deadline or event task
     // can be recognised as a DateTime format.
-    private static Command createDateCommandIfValid(String[] tokens, int mode) throws DukeException {
+    private static Command createDateCommandIfValid(String[] tokens, String fullCommand, int mode) throws DukeException {
         List<String> lst = Arrays.asList(tokens);
         String key = responses[mode];
         if (!lst.contains(key)) {
-            throw new IllegalArgumentException("Missing deadline");
+            throw new IllegalArgumentException("Missing deadline keyword!!");
         }
 
         int index = lst.indexOf(key);
-        int argLength = tokens.length - index - 1;
+        checkTaskDescription(index);
+        String[] datedTaskSplit = fullCommand.split(" " + key + " ");
+        checkDeadline(datedTaskSplit);
+        String description = datedTaskSplit[0].substring(startingIndex[mode]);
+        String dateTime = datedTaskSplit[1];
+        if (isDate(dateTime)) {
+            String dateTimeString = tokens[index + 1] + " " + tokens[index + 2];
+            dateTime = Parser.parseDateTime(dateTimeString);
+        }
 
-        if (argLength == 2) {
-            String dateTimeString = tokens[index+1] + " " + tokens[index+2];
-            String correctDate = Parser.parseDateTime(dateTimeString);
-            StringBuilder builder = new StringBuilder();
-            if (index -1 <=0) {
-                throw new DukeException("Please input task description",
-                        DukeExceptionType.GENERALMISTAKE);
-            }
-            for (int i = 1; i < index ; i++) {
-                String curr = tokens[i];
-                builder.append(curr);
-                if (i==index-1) {
-                    break;
-                }
-                builder.append(" ");
-            }
-            return createDateCommand(mode,builder,correctDate);
+        return createDateCommand(mode, description, dateTime);
+    }
+
+
+
+
+    //helper method to create the correct kind of DateTime Command
+    private static Command createDateCommand(int mode, String description, String correctDate) {
+        if (mode==0) {
+            return new AddDeadlineCommand(description,correctDate);
         } else {
-            throw new DukeException("Please input a date in dd/MM/yyyy HHmm format.",
+            return new AddEventCommand(description,correctDate);
+        }
+    }
+
+    private static boolean isDate(String dateDescription){
+        String[] dateSplit = dateDescription.split(" ");
+        if (dateSplit.length != 2){
+            return false;
+        } else if (!dateSplit[0].contains("/") ||
+                dateSplit[0].chars().filter(ch -> ch == '/').count() != 2) {
+            return false;
+        }
+        return true;
+    }
+
+    private static void checkTaskDescription(int index) throws DukeException {
+        if (index -1 <=0) {
+            throw new DukeException("Please input task description",
                     DukeExceptionType.GENERALMISTAKE);
         }
 
     }
 
-    //helper method to create the correct kind of DateTime Command
-    private static Command createDateCommand(int mode, StringBuilder builder, String correctDate) {
-        if (mode==0) {
-            return new AddDeadlineCommand(builder.toString(),correctDate);
-        } else {
-            return new AddEventCommand(builder.toString(),correctDate);
+    private static void checkDeadline(String [] datedTaskSplit) {
+        if (datedTaskSplit.length > 2) {
+            throw new IllegalArgumentException("Multiple keyword detected!!");
+        }
+
+        if (datedTaskSplit.length < 2) {
+            throw new IllegalArgumentException("Please insert a deadline!!!");
         }
     }
 

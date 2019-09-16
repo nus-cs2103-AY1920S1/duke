@@ -54,6 +54,7 @@ public class Duke {
 
     /**
      * Main method to drive the application
+     *
      * @param args Placeholder
      * @throws DukeException for any exceptions that arise when running the application
      */

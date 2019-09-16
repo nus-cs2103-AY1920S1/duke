@@ -8,7 +8,6 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.TaskType;
 
 import duke.errors.DukeException;
 import duke.errors.DukeExceptionType;

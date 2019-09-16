@@ -24,11 +24,12 @@ public class ExitCommand extends Command {
 
     /**
      * Prints the exit message.
+     *
      * @param taskList The main task list of the application.
      * @param ui The main user interface of the application.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException, IOException {
+    public void execute(TaskList taskList, Ui ui) {
         ui.printByeMessage();
     }
 

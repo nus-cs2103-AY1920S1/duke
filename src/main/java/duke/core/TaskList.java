@@ -1,5 +1,6 @@
 package duke.core;
 
+import java.util.List;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -101,6 +102,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in current list
+     *
      * @return number of tasks in current list
      */
     int getNumTasks(){
@@ -114,6 +116,16 @@ public class TaskList {
      */
     public int getTaskID(Task task) {
         return taskList.indexOf(task) + 1;
+    }
+
+    public List<Task> findTasks(String word) {
+        ArrayList<Task> lst= new ArrayList<>();
+        for (Task task: taskList) {
+            if (task.getDescription().contains(word)) {
+                lst.add(task);
+            }
+        }
+        return lst;
     }
 
 

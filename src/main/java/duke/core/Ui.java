@@ -131,6 +131,22 @@ public class Ui {
 
 
     /**
+     * Prints the list of tasks.
+     *
+     * @param lst List of tasks with matching keyword
+     */
+    public void printFindResults(List<Task> lst) {
+        System.out.println(horizontalLine);
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0; i < lst.size(); i++) {
+            System.out.println(String.format("     %d.%s",i+1, lst.get(i)));
+        }
+        System.out.println(horizontalLine);
+        System.out.println();
+    }
+
+
+    /**
      * Prints the exit message.
      */
     public void printByeMessage() {
@@ -140,6 +156,7 @@ public class Ui {
 
     /**
      * Prints out the exception.
+     *
      * @param e Exception object whose message is to be printed out
      */
     public void printErrorMessage(Exception e) {

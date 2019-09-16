@@ -20,9 +20,15 @@ import duke.commands.AddToDoCommand;
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 
-
+/**
+ * Class to test certain functionality of the Parser class
+ */
 class ParserTest {
 
+    /**
+     * Test that the parseDateTime method can convert into
+     * formatted date and time when a valid input is given
+     */
     @Test
     void parseDateTime_validInput_success() {
         try {
@@ -39,16 +45,24 @@ class ParserTest {
         }
     }
 
+    /**
+     * Test that the parseDateTime method throws an exception
+     * when it tries to parse and format an invalid input
+     */
     @Test
-    public void parseDateTime_invalidInput_exceptionThrown() {
+    void parseDateTime_invalidInput_exceptionThrown() {
         assertThrows(DukeException.class, () -> Parser.parseDateTime("1212"));
         assertThrows(DukeException.class, () -> Parser.parseDateTime("12/12/1212"));
         assertThrows(DukeException.class, () -> Parser.parseDateTime("12pm"));
         assertThrows(DukeException.class, () -> Parser.parseDateTime("Hello"));
     }
 
+    /**
+     * Test that the parseDateTime method throws an exception when the input
+     * is potentially valid but cannot be formatted to the expected format
+     */
     @Test
-    public void parseDateTime_validLookingInvalidNumbers_exceptionThrown() {
+    void parseDateTime_validLookingInvalidNumbers_exceptionThrown() {
         assertThrows(DukeException.class, () -> Parser.parseDateTime("0/12/1212 1212"));
         assertThrows(DukeException.class, () -> Parser.parseDateTime("-1/12/1212 1212"));
         assertThrows(DukeException.class, () -> Parser.parseDateTime("/12/1212 1212"));
@@ -60,9 +74,12 @@ class ParserTest {
     }
 
 
-
+    /**
+     * Test that the parseCommand method throws the expected Exceptions when the it tries to parse a input
+     * as a command, but the required arguments are not provided
+     */
     @Test
-    public void parseCommand_missingParameter_exceptionThrown() {
+    void parseCommand_missingParameter_exceptionThrown() {
         assertThrows(IllegalArgumentException.class, () -> Parser.parseCommand("todo "));
 
         assertThrows(IllegalArgumentException.class, () -> Parser.parseCommand("deadline "));
@@ -73,13 +90,18 @@ class ParserTest {
         assertThrows(IllegalArgumentException.class, () -> Parser.parseCommand("event task "));
         assertThrows(DukeException.class, () -> Parser.parseCommand("event /at time"));
 
+        assertThrows(IllegalArgumentException.class, () -> Parser.parseCommand("event task /at "));
+
         assertThrows(IllegalArgumentException.class, () -> Parser.parseCommand("done "));
         assertThrows(IllegalArgumentException.class, () -> Parser.parseCommand("delete "));
     }
 
-
+    /**
+     * Test that the parseCommand method ignores extra input when attempting to parse commands
+     * which require 0 arguments.
+     */
     @Test
-    public void parseCommand_extraArgumentForNoArgumentCommands_success() {
+    void parseCommand_extraArgumentForNoArgumentCommands_success() {
         try {
             assertTrue(Parser.parseCommand("list 1") instanceof ListCommand);
             assertTrue(Parser.parseCommand("bye 1") instanceof ExitCommand);
@@ -89,5 +111,21 @@ class ParserTest {
             fail("Should return a command ignoring the extra arguments");
         }
     }
+
+    /**
+     * Test that the parseCommand method properly still return an valid AddCommand
+     * even when the deadline is not in recognisable dateTime format
+     */
+    @Test
+    void parseCommand_nonParseableTimeForDeadlineOrEvent_success() {
+        try {
+            assertTrue(Parser.parseCommand("deadline task /by time") instanceof AddDeadlineCommand);
+            assertTrue(Parser.parseCommand("event task /at time") instanceof AddEventCommand);
+        } catch (DukeException ex) {
+            fail("Should return without formatting the time argument into dd/MM/yyyy HHmm");
+        }
+    }
+
+
 
 }

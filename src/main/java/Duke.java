@@ -103,7 +103,7 @@ public class Duke extends Application{
 
                     tasks.remove(taskNumb);
                     saving((tasks.getList()));
-                    return ui.printDelete(tasks.getTask(taskNumb), tasks.size() - 1);
+                    return ui.printDelete(tasks.getTask(taskNumb - 1), tasks.size());
                 }
 
             } else if (firstWord.equals("find")) {

@@ -35,6 +35,14 @@ public abstract class Task {
     public abstract LocalDateTime getDateTime();
 
     /**
+     * Returns the status of the task.
+     * @return true if the task is done, false if not done.
+     */
+    public boolean getStatus() {
+        return isDone;
+    }
+
+    /**
      * Returns an icon showing the status of the task.
      * @return tick icon if the task is done otherwise X icon.
      */

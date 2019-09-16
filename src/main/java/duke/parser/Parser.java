@@ -2,10 +2,7 @@ package duke.parser;
 
 import duke.command.*;
 import duke.exception.*;
-import duke.filter.ComparisonOperator;
-import duke.filter.IndexFilter;
-import duke.filter.TimeFilter;
-import duke.filter.TypeFilter;
+import duke.filter.*;
 import duke.task.TaskType;
 
 import java.time.DateTimeException;
@@ -19,22 +16,6 @@ import java.util.stream.IntStream;
  * A class representing a parser.
  */
 public class Parser {
-    private String getFirstWord(String string) {
-        int indexOfSpace = string.indexOf(' ');
-        if (indexOfSpace == -1) {
-            return string;
-        }
-        return string.substring(0, indexOfSpace);
-    }
-
-    private String removeFirstWord(String string) {
-        int indexOfSpace = string.indexOf(' ');
-        if (indexOfSpace == -1) {
-            return "";
-        }
-        return string.substring(indexOfSpace + 1).stripLeading();
-    }
-
     /**
      * Returns the command by parsing the command string that typed by the user.
      * @param commandString the command typed by the user
@@ -45,14 +26,14 @@ public class Parser {
     public Command parseCommand(String commandString)
             throws IllegalDescriptionException, IllegalCommandException, IllegalIndexOfTaskException {
         String stringWithoutLeadingSpaces = commandString.stripLeading();
-        String commandType = getFirstWord(stringWithoutLeadingSpaces);
+        String commandType = getFirstWord(stringWithoutLeadingSpaces).toLowerCase();
         String description = removeFirstWord(stringWithoutLeadingSpaces);
         switch (commandType) {
-        //Ignore words after the exit or list command
+        //Ignore words after bye
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return parseListCommand(description);
         case DoneCommand.COMMAND_WORD:
             return parseDoneCommand(description);
         case DeleteCommand.COMMAND_WORD:
@@ -65,9 +46,48 @@ public class Parser {
             return parseDeadlineTask(description);
         case EventCommand.COMMAND_WORD:
             return parseEventTask(description);
+        case HelpCommand.COMMAND_WORD:
+            return parseHelpCommand(description);
         default:
             throw new IllegalCommandException(
                     "I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private HelpCommand parseHelpCommand(String description) {
+        String firstWord = getFirstWord(description).toLowerCase();
+        switch (firstWord) {
+        case "":
+            return new HelpCommand();
+        case "done":
+            return new HelpCommand(CommandType.Done);
+        case "delete":
+            return new HelpCommand(CommandType.Delete);
+        case "list":
+            return new HelpCommand(CommandType.List);
+        case "find":
+            return new HelpCommand(CommandType.Find);
+        case "filter":
+            return new HelpCommand(CommandType.SubCommandType.Filter);
+        case "index":
+            return new HelpCommand(CommandType.SubCommandType.IndexFilter);
+        case "time":
+            return new HelpCommand(CommandType.SubCommandType.TimeFilter);
+        case "type":
+            return new HelpCommand(CommandType.SubCommandType.TypeFilter);
+        case "status":
+            return new HelpCommand(CommandType.SubCommandType.StatusFilter);
+        case "todo":
+            return new HelpCommand(CommandType.Add, CommandType.SubCommandType.Todo);
+        case "deadline":
+            return new HelpCommand(CommandType.Add, CommandType.SubCommandType.Deadline);
+        case "event":
+            return new HelpCommand(CommandType.Add, CommandType.SubCommandType.Event);
+        case "exit":
+        case "bye":
+            return new HelpCommand(CommandType.Exit);
+        default:
+            return new HelpCommand();
         }
     }
 
@@ -118,7 +138,7 @@ public class Parser {
 
     private LocalTime parseTime(String timeString) throws IllegalDescriptionException {
         if (timeString.isEmpty()) {
-            throw new IllegalDescriptionException("Time cannot be empty.");
+            return null;
         }
         String[] hourMinute = timeString.split(":");
         if (hourMinute.length != 2) {
@@ -136,10 +156,10 @@ public class Parser {
 
     private LocalDateTime parseDateTime(String dateTimeString) throws IllegalDescriptionException {
         String dateString = getFirstWord(dateTimeString);
-        String timeString = removeFirstWord(dateTimeString);
-        if(timeString.isEmpty()) {
-            timeString = dateTimeString;
-            return LocalDateTime.of(parseDate(""), parseTime(timeString));
+        String timeString = getSecondWord(dateTimeString);
+        if (dateString.contains(":")) {
+            timeString = dateString;
+            dateString = "";
         }
         LocalDate date = parseDate(dateString);
         LocalTime time = parseTime(timeString);
@@ -203,7 +223,18 @@ public class Parser {
     }
 
     private TypeFilter getTypeFilter(String description) throws IllegalDescriptionException {
-        return new TypeFilter(parseTaskType(removeFirstWord(description)));
+        return new TypeFilter(parseTaskType(getSecondWord(description)));
+    }
+
+    private StatusFilter getStatusFilter(String description) throws IllegalDescriptionException {
+        String isDoneStatus = getFirstWord(description);
+        if (isDoneStatus.toLowerCase().equals("true") ) {
+            return new StatusFilter(true);
+        } else if (isDoneStatus.toLowerCase().equals("false")) {
+            return new StatusFilter(false);
+        } else {
+            throw new IllegalDescriptionException("Done value should be true or false");
+        }
     }
 
     private TimeFilter getTimeFilter(String description) throws IllegalDescriptionException {
@@ -226,8 +257,33 @@ public class Parser {
         }
     }
 
+    private ListCommand parseListCommand(String description) throws
+            IllegalDescriptionException, IllegalIndexOfTaskException {
+        if (description.isEmpty()) {
+            return new ListCommand();
+        }
+        String filterType = getFirstWord(description);
+        switch (filterType) {
+        case "/type":
+            return new ListCommand(getTypeFilter(description));
+        case "/on":
+        case "/before":
+        case "/after":
+        case "/from":
+        case "/until":
+            return new ListCommand(getTimeFilter(description));
+        case "/done":
+            return new ListCommand(getStatusFilter(removeFirstWord(description)));
+        default:
+            return new ListCommand();
+        }
+    }
+
     private DeleteCommand parseDeleteCommand(String description) throws
             IllegalDescriptionException, IllegalIndexOfTaskException {
+        if (description.isEmpty()) {
+            throw new IllegalDescriptionException("Please provide a valid index or description.");
+        }
         String filterType = getFirstWord(description);
         switch (filterType) {
         case "/type":
@@ -238,6 +294,8 @@ public class Parser {
         case "/from":
         case "/until":
             return new DeleteCommand(getTimeFilter(description));
+        case "/done":
+            return new DeleteCommand(getStatusFilter(removeFirstWord(description)));
         default:
             return new DeleteCommand(getIndexFilter(description));
         }
@@ -245,6 +303,9 @@ public class Parser {
 
     private DoneCommand parseDoneCommand(String description) throws
             IllegalDescriptionException, IllegalIndexOfTaskException {
+        if (description.isEmpty()) {
+            throw new IllegalDescriptionException("Please provide a valid index or description");
+        }
         String filterType = getFirstWord(description);
         switch (filterType) {
         case "/type":
@@ -255,8 +316,30 @@ public class Parser {
         case "/from":
         case "/until":
             return new DoneCommand(getTimeFilter(description));
+        case "/done":
+            return new DoneCommand(getStatusFilter(removeFirstWord(description)));
         default:
             return new DoneCommand(getIndexFilter(description));
         }
+    }
+
+    private String getFirstWord(String string) {
+        int indexOfSpace = string.indexOf(' ');
+        if (indexOfSpace == -1) {
+            return string;
+        }
+        return string.substring(0, indexOfSpace);
+    }
+
+    private String removeFirstWord(String string) {
+        int indexOfSpace = string.indexOf(' ');
+        if (indexOfSpace == -1) {
+            return "";
+        }
+        return string.substring(indexOfSpace + 1).strip();
+    }
+
+    private String getSecondWord(String string) {
+        return getFirstWord(removeFirstWord(string));
     }
 }

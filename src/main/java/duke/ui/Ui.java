@@ -1,9 +1,12 @@
 package duke.ui;
 
 import duke.command.CommandResult;
+import duke.command.CommandType;
+import duke.help.HelpInformation;
 import duke.task.Task;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * A class deals with user interface.
@@ -42,6 +45,8 @@ public class Ui {
             return showTasks(result.getTasks());
         case Done:
             return showDoneTask(result.getTasks());
+        case Help:
+            return getHelpInformation(result);
         default:
             assert false : "unknown result type";
         }
@@ -68,7 +73,7 @@ public class Ui {
             return composeBlock("Your task list is empty.");
         }
         String[] text = new String[tasks.length + 1];
-        text[0] = "Here are the tasks in your list:";
+        text[0] = "Here are the tasks:";
         for (int i = 0; i < tasks.length; i++) {
             text[i + 1] = (i + 1) + "." + tasks[i];
         }
@@ -163,5 +168,12 @@ public class Ui {
      */
     public String showStoringError(IOException exception) {
         return composeBlock("OPPS!!! Fails to store your tasks.", exception.getMessage());
+    }
+
+    private String getHelpInformation(CommandResult result) {
+        HelpCommandResult helpCommandResult = (HelpCommandResult)result;
+        Optional<CommandType> commandType = helpCommandResult.getHelpCommandType();
+        Optional<CommandType.SubCommandType> subCommandType = helpCommandResult.getHelpSubCommandType();
+        return HelpInformation.getHelpInformationFor(commandType, subCommandType).getHelpInformation();
     }
 }

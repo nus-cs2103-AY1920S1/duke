@@ -76,6 +76,8 @@ class DialogBox extends AnchorPane {
     private void setFlippedDialogStyle() {
         AnchorPane.setLeftAnchor(displayPicture, WINDOW_IMAGE_SPACE);
         AnchorPane.setRightAnchor(displayPicture, null);
+        AnchorPane.setTopAnchor(displayPicture,
+                displayPicture.getParent().getBoundsInLocal().getCenterY() / 2);
 
         dialog.setStyle(dialog.getStyle()
                 + "-fx-border-width: 0 0 0 2; -fx-border-color:#ddd6c7;");

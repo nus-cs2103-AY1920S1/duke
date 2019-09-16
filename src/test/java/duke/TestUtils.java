@@ -14,8 +14,8 @@ public interface TestUtils {
      * @return Random string generated.
      */
     static String generateRandomString(int minChars, int maxChars) {
-        final int minAsciiChar = 33;
-        final int maxAsciiChar = 126;
+        final int MIN_ASCII_CHAR = 33;
+        final int MAX_ASCII_CHAR = 126;
 
         if (maxChars < 0) {
             throw new IllegalArgumentException(
@@ -28,8 +28,8 @@ public interface TestUtils {
         for (int i = 0; i < length; i++) {
             string.append(
                     (char) (
-                            Math.random() * (maxAsciiChar - minAsciiChar)
-                            + minAsciiChar));
+                            Math.random() * (MAX_ASCII_CHAR - MIN_ASCII_CHAR)
+                            + MIN_ASCII_CHAR));
         }
 
         return string.toString();

@@ -38,6 +38,7 @@ public class DukeApplication extends Application {
             stage.setScene(scene);
             stage.setMinWidth(MIN_WINDOW_WIDTH);
             stage.setMinHeight(MIN_WINDOW_HEIGHT);
+            stage.setTitle("Duke");
 
             MainWindow dukeMainWindow = fxmlLoader.<MainWindow>getController();
             duke = new Duke(dukeMainWindow);

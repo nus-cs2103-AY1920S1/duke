@@ -165,7 +165,7 @@ public class Storage {
     }
 
     /**
-     * Private method to get a scanner from the file path of this storage instance.
+     * Retrieves a scanner using the file path of this storage instance.
      * If the file does not exist, a ui notification is shown to the user.
      *
      * @return The scanner object, or null if the file does not exist.
@@ -201,10 +201,9 @@ public class Storage {
                 fileWriter.write(jsonLineStart);
 
                 if (task.getTiming() != null) {
-                    fileWriter.write(
-                            String.format(", %s: %s",
-                                    StorageKey.TIME.toString(),
-                                    task.getTiming()));
+                    fileWriter.write(String.format(", %s: %s",
+                            StorageKey.TIME.toString(),
+                            task.getTiming()));
                 }
 
                 fileWriter.write(" }\n");
@@ -303,19 +302,28 @@ public class Storage {
 
         if (recursiveSearchCount > 5) {
             //create directory in pwd since it dosen't exist
-            Path fallbackDirPath = Paths.get(workingDir, dirName);
-
-            try {
-                if (!Files.isDirectory(fallbackDirPath)) {
-                    Files.createDirectory(fallbackDirPath);
-                }
-            } catch (IOException ex) {
-                printNoStorageMsg();
-            }
-            this.filePath = Paths.get(fallbackDirPath.toString(), dataFileName).toString();
+            createFileDirectory();
         } else {
             this.filePath = Paths.get(currentDir.toString(), dirName, dataFileName).toString();
         }
+    }
+
+    /**
+     * Creates a data directory in the working directory of the program.
+     * Also sets the filePath associated with this storage instance.
+     */
+    private void createFileDirectory() {
+        String workingDir = System.getProperty("user.dir");
+        Path fallbackDirPath = Paths.get(workingDir, dirName);
+
+        try {
+            if (!Files.isDirectory(fallbackDirPath)) {
+                Files.createDirectory(fallbackDirPath);
+            }
+        } catch (IOException ex) {
+            printNoStorageMsg();
+        }
+        this.filePath = Paths.get(fallbackDirPath.toString(), dataFileName).toString();
     }
 
     /**

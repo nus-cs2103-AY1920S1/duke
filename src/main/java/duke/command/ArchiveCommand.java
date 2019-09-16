@@ -48,13 +48,12 @@ class ArchiveCommand extends WritableCommand {
 
         try {
             archive.saveTasksToDisk(tasks);
+            tasks.deleteAllTasks();
+            ui.showMessage("Got it. I've archived all your tasks to disk and wiped the task list!:\n");
         } catch (DukeFileWriteException ex) {
             ui.showMessage(" =X  OOPS!!! I couldn't archive your tasks!,\n"
                     + " I've left the task list as is!");
         }
-
-        tasks.deleteAllTasks();
-        ui.showMessage("Got it. I've archived all your tasks to disk and wiped the task list!:\n");
     }
 
     /**

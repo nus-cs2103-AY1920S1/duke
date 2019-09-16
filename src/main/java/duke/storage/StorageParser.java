@@ -27,7 +27,7 @@ abstract class StorageParser {
         checkOutermostBrackets(line);
         char[] lineArr = line.toCharArray();
 
-        //first word should be a key
+        //flag for whether the current input read is a key or a value
         boolean isKey = true;
 
         StringBuilder currentKey = new StringBuilder();

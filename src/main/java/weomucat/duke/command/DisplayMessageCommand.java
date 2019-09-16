@@ -2,7 +2,7 @@ package weomucat.duke.command;
 
 import weomucat.duke.DukeConsumer;
 import weomucat.duke.command.listener.DisplayCommandListener;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 public class DisplayMessageCommand extends DisplayCommand {
 

@@ -10,8 +10,8 @@ import weomucat.duke.command.listener.CommandListener;
 import weomucat.duke.exception.DukeException;
 import weomucat.duke.exception.DukeRuntimeException;
 import weomucat.duke.parser.FullCommandParser;
-import weomucat.duke.ui.Message;
 import weomucat.duke.ui.listener.UserInputListener;
+import weomucat.duke.ui.message.Message;
 
 /**
  * https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
@@ -92,7 +92,7 @@ public class Controller implements ByeCommandListener, UserInputListener {
       } catch (DukeException | DukeRuntimeException e) {
         // Add error command to front of queue.
         this.commandQueue.addFirst(
-            new DisplayErrorCommand(new Message("☹ OOPS!!! " + e.getMessage())));
+            new DisplayErrorCommand(new Message().addBody("☹ OOPS!!! " + e.getMessage())));
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

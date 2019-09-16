@@ -1,7 +1,6 @@
 package weomucat.duke.command;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,8 @@ import weomucat.duke.command.parameter.CommandNameParameter;
 import weomucat.duke.command.parameter.FlagParameter;
 import weomucat.duke.command.parameter.Parameter;
 import weomucat.duke.command.parameter.ParameterOptions;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageText;
 
 public class HelpCommand extends Command<DisplayCommandListener> {
 
@@ -56,7 +56,7 @@ public class HelpCommand extends Command<DisplayCommandListener> {
 
   @Override
   DukeConsumer<DisplayCommandListener> getListenerConsumer() {
-    Collection<Message> messages;
+    List<Message> messages;
     if (this.all.value()) {
       messages = listAllCommands();
     } else {
@@ -65,23 +65,26 @@ public class HelpCommand extends Command<DisplayCommandListener> {
     return listener -> listener.displayMessage(messages.toArray(new Message[0]));
   }
 
-  private Collection<Message> listAllCommands() {
+  private List<Message> listAllCommands() {
     ArrayList<Message> messages = new ArrayList<>();
-    messages.add(new Message("Listing all commands:"));
+    messages.add(new Message().addBody("Listing all commands:"));
 
-    ArrayList<String> result = new ArrayList<>();
+    List<List<MessageText>> result = new ArrayList<>();
     List<Command<?>> commands = UserCommands.getAll();
     commands.sort(Comparator.comparing(Command::getKeyword));
     for (Command<?> command : commands) {
-      result.add(String.format("===== %s =====\n%s",
-          command.getKeyword(), command.getDescription()));
+      List<MessageText> c = new ArrayList<>();
+      c.add(new MessageText(command.getKeyword()).setColor("#ffe082"));
+      c.add(new MessageText(" "));
+      c.add(new MessageText(command.getDescription()));
+      result.add(c);
     }
-    messages.add(new Message(String.join("\n\n", result)));
+    messages.add(new Message().addBody(result));
 
     return messages;
   }
 
-  private Collection<Message> explainCommand() {
+  private List<Message> explainCommand() {
     Command<?> command;
     if (this.command.value() == null) {
       command = new HelpCommand();
@@ -89,21 +92,21 @@ public class HelpCommand extends Command<DisplayCommandListener> {
       command = this.command.value();
     }
 
-    ArrayList<Message> messages = new ArrayList<>();
-    messages.add(new Message(
+    List<Message> messages = new ArrayList<>();
+    messages.add(new Message().addBody(
         String.format("Help page for '%s' command:", command.getKeyword())));
 
     // Add usage
     ArrayList<String> usage = usage(command);
-    messages.add(new Message(String.join(" ", usage)).setTitle("Usage"));
+    messages.add(new Message().addBody(String.join(" ", usage)).addTitle("Usage"));
 
     // Add description
-    messages.add(new Message(command.getDescription()).setTitle("Description"));
+    messages.add(new Message().addBody(command.getDescription()).addTitle("Description"));
 
     // Add parameter info
     ArrayList<String> parameters = parameters(command);
     if (parameters != null) {
-      messages.add(new Message(String.join("\n\n", parameters)).setTitle("Parameters"));
+      messages.add(new Message().addBody(String.join("\n\n", parameters)).addTitle("Parameters"));
     }
 
     return messages;

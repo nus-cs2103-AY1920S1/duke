@@ -1,17 +1,17 @@
 package weomucat.duke.ui.gui;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageColor;
+import weomucat.duke.ui.message.MessageText;
 
 /**
  * Represents a message in Root.
@@ -22,8 +22,8 @@ class MessageBox extends HBox {
   private static final int FONT_SIZE = 16;
   private static final FontWeight FONT_WEIGHT = FontWeight.BOLD;
 
-  private static final String DEFAULT_TEXT = "";
-  private static final String DEFAULT_BACKGROUND_COLOR = "#ffffff";
+  private static final MessageColor DEFAULT_TEXT_COLOR = new MessageColor("#000000");
+  private static final MessageColor DEFAULT_BACKGROUND_COLOR = new MessageColor("#ffffff");
 
   private static final int EMPTY_BODY_PADDING = 5;
   private static final int PADDING = 10;
@@ -35,13 +35,11 @@ class MessageBox extends HBox {
   @FXML
   private TextFlow body;
 
-  private String titleText;
-  private String titleColor;
-  private String titleBackgroundColor;
-
-  private String bodyText;
-  private String bodyColor;
-  private String bodyBackgroundColor;
+  private Message message;
+  private MessageColor titleTextColor;
+  private MessageColor titleBackgroundColor;
+  private MessageColor bodyTextColor;
+  private MessageColor bodyBackgroundColor;
 
   /**
    * Creates a text to be added to Root.
@@ -56,24 +54,16 @@ class MessageBox extends HBox {
       e.printStackTrace();
     }
 
-    this.titleText = DEFAULT_TEXT;
+    this.message = new Message();
+    this.titleTextColor = DEFAULT_TEXT_COLOR;
     this.titleBackgroundColor = DEFAULT_BACKGROUND_COLOR;
-
-    this.bodyText = DEFAULT_TEXT;
+    this.bodyTextColor = DEFAULT_TEXT_COLOR;
     this.bodyBackgroundColor = DEFAULT_BACKGROUND_COLOR;
     updateStyle();
   }
 
-  /**
-   * Set this title's text.
-   *
-   * @param text the text
-   */
-  void setTitleText(String text, String color) {
-    // Use UTF_8 encoding
-    this.titleText = new String(text.getBytes(), UTF_8);
-    this.titleColor = color;
-    updateStyle();
+  void setMessage(Message message) {
+    this.message = message;
   }
 
   /**
@@ -81,22 +71,29 @@ class MessageBox extends HBox {
    *
    * @param color the color in hexadecimal
    */
-  void setTitleBackgroundColor(String color) {
+  void setTitleTextColor(MessageColor color) {
+    this.titleTextColor = color;
+    updateStyle();
+  }
+
+  /**
+   * Set this title's background color.
+   *
+   * @param color the color in hexadecimal
+   */
+  void setTitleBackgroundColor(MessageColor color) {
     this.titleBackgroundColor = color;
     updateStyle();
   }
 
-
   /**
-   * Add to this body's text.
+   * Set this body's text color.
    *
-   * @param text  the text
-   * @param color the text color
+   * @param color the color in hexadecimal
    */
-  void setBodyText(String text, String color) {
-    // Use UTF_8 encoding
-    this.bodyText = new String(text.getBytes(), UTF_8);
-    this.bodyColor = color;
+  void setBodyTextColor(MessageColor color) {
+    this.bodyTextColor = color;
+    updateStyle();
   }
 
   /**
@@ -104,40 +101,52 @@ class MessageBox extends HBox {
    *
    * @param color the color in hexadecimal
    */
-  void setBodyBackgroundColor(String color) {
+  void setBodyBackgroundColor(MessageColor color) {
     this.bodyBackgroundColor = color;
     updateStyle();
   }
 
   private void updateStyle() {
     String bodyBackgroundRadius;
-    if (this.titleText.equals(DEFAULT_TEXT)) {
+    this.title.getChildren().clear();
+    if (this.message.getTitle().size() == 0) {
+      this.title.setPadding(new Insets(0));
       bodyBackgroundRadius = String.format("-fx-background-radius: %d", BACKGROUND_RADIUS);
     } else {
       this.title.setPadding(new Insets(PADDING));
-
-      Text textNode = new Text(this.titleText);
-      textNode.setFill(Color.valueOf(this.titleColor));
-      textNode.setFont(Font.font(FONT_NAME, FONT_WEIGHT, FONT_SIZE));
-
-      this.title.getChildren().clear();
-      this.title.getChildren().add(textNode);
-
       bodyBackgroundRadius = String.format("-fx-background-radius: 0 0 %d %d",
           BACKGROUND_RADIUS, BACKGROUND_RADIUS);
+
+      for (MessageText text : this.message.getTitle()) {
+        Text node = text.toGui();
+        MessageColor color = text.getColor();
+        if (color == null) {
+          node.setFill(this.titleTextColor.toGui());
+        } else {
+          node.setFill(color.toGui());
+        }
+        node.setFont(Font.font(FONT_NAME, FONT_WEIGHT, FONT_SIZE));
+        this.title.getChildren().add(node);
+      }
     }
 
-    if (this.bodyText.equals(DEFAULT_TEXT)) {
+    this.body.getChildren().clear();
+    if (this.message.getBody().size() == 0) {
       this.body.setPadding(new Insets(EMPTY_BODY_PADDING));
     } else {
       this.body.setPadding(new Insets(PADDING));
 
-      Text textNode = new Text(this.bodyText);
-      textNode.setFill(Color.valueOf(this.bodyColor));
-      textNode.setFont(Font.font(FONT_NAME, FONT_WEIGHT, FONT_SIZE));
-
-      this.body.getChildren().clear();
-      this.body.getChildren().add(textNode);
+      for (MessageText text : this.message.getBody()) {
+        Text node = text.toGui();
+        MessageColor color = text.getColor();
+        if (color == null) {
+          node.setFill(this.bodyTextColor.toGui());
+        } else {
+          node.setFill(color.toGui());
+        }
+        node.setFont(Font.font(FONT_NAME, FONT_WEIGHT, FONT_SIZE));
+        this.body.getChildren().add(node);
+      }
     }
 
     this.title.setStyle(String.format("-fx-background-color: %s; -fx-background-radius: %d %d 0 0",

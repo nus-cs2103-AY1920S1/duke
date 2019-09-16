@@ -3,12 +3,13 @@ package weomucat.duke.command;
 import weomucat.duke.DukeConsumer;
 import weomucat.duke.command.listener.LoadTasksCommandListener;
 import weomucat.duke.command.parameter.ParameterOptions;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 public class LoadTasksCommand extends Command<LoadTasksCommandListener> {
 
   public LoadTasksCommand() {
-    setRunAfter(() -> new DisplayMessageCommand(new Message("Loaded Tasks!")));
+    setRunAfter(() -> new DisplayMessageCommand(
+        new Message().addBody("Loaded Tasks!")));
   }
 
   @Override

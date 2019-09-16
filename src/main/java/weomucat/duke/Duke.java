@@ -19,10 +19,10 @@ import weomucat.duke.task.listener.ListTaskListener;
 import weomucat.duke.task.listener.ModifyTaskListener;
 import weomucat.duke.task.listener.TaskListSizeListener;
 import weomucat.duke.task.listener.TaskListStorageListener;
-import weomucat.duke.ui.Message;
 import weomucat.duke.ui.UiManager;
 import weomucat.duke.ui.cli.CommandLineUi;
 import weomucat.duke.ui.gui.GraphicalUi;
+import weomucat.duke.ui.message.Message;
 
 /**
  * Duke is a personal assistant chatbot that is able to remember tasks.
@@ -91,18 +91,20 @@ public class Duke {
     this.uiManager.acceptUserInput();
 
     // Greet user
-    this.controller.commandUpdate(new DisplayMessageCommand(new Message(
-        " ____        _        ",
-        "|  _ \\ _   _| | _____ ",
-        "| | | | | | | |/ / _ \\",
-        "| |_| | |_| |   <  __/",
-        "|____/ \\__,_|_|\\_\\___|")));
+    this.controller.commandUpdate(new DisplayMessageCommand(
+        new Message().addBody(
+            " ____        _        ",
+            "|  _ \\ _   _| | _____ ",
+            "| | | | | | | |/ / _ \\",
+            "| |_| | |_| |   <  __/",
+            "|____/ \\__,_|_|\\_\\___|")));
 
     // Load tasks
     this.controller.commandUpdate(new LoadTasksCommand());
 
     this.controller.commandUpdate(new DisplayMessageCommand(
-        new Message("Hello! I'm Duke! What can I do for you?",
+        new Message().addBody(
+            "Hello! I'm Duke! What can I do for you?",
             "Type 'help /all' to see all commands.")));
 
     // Block main thread to query for user input & commands.

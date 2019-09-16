@@ -1,6 +1,6 @@
 package weomucat.duke.command.listener;
 
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 /**
  * When DisplayCommand is run, this listener will be notified.

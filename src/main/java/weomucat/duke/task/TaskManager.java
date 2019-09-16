@@ -22,7 +22,7 @@ import weomucat.duke.task.listener.ModifyTaskListener;
 import weomucat.duke.task.listener.TaskListSizeListener;
 import weomucat.duke.task.listener.TaskListStorageListener;
 import weomucat.duke.task.listener.TaskListener;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 /**
  * A TaskManager manages tasks.
@@ -67,7 +67,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     this.tasks.add(task);
 
     // Update listeners
-    modifyTaskUpdate(new Message("Got it. I've added this task:"), task);
+    modifyTaskUpdate(new Message().addBody("Got it. I've added this task:"), task);
     taskListSizeUpdate();
   }
 
@@ -83,7 +83,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     this.tasks.remove(i);
 
     // Update listeners
-    modifyTaskUpdate(new Message("Noted. I've removed this task:"), task);
+    modifyTaskUpdate(new Message().addBody("Noted. I've removed this task:"), task);
     taskListSizeUpdate();
   }
 
@@ -101,7 +101,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     this.tasks.updateRecurringTasks();
 
     // Update listeners
-    modifyTaskUpdate(new Message("Nice! I've marked this task as done:"), task);
+    modifyTaskUpdate(new Message().addBody("Nice! I've marked this task as done:"), task);
   }
 
   /**
@@ -122,7 +122,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     event.setAt(atIndex);
 
     // Update listeners
-    modifyTaskUpdate(new Message("Got it. I've set the schedule for this event:"), task);
+    modifyTaskUpdate(new Message().addBody("Got it. I've set the schedule for this event:"), task);
   }
 
   /**
@@ -136,7 +136,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     listFilteredTasks(task -> {
       String description = task.getDescription().toLowerCase(LOCALE);
       return description.contains(key);
-    }, new Message("Here are the matching tasks in your list:"));
+    }, new Message().addBody("Here are the matching tasks in your list:"));
   }
 
   /**
@@ -146,7 +146,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
   void listOngoingTasks() {
     this.tasks.updateRecurringTasks();
     listFilteredTasks(task -> !task.isDone() && !task.isOverDue(),
-        new Message("Here are your ongoing tasks:"));
+        new Message().addBody("Here are your ongoing tasks:"));
   }
 
   /**
@@ -155,10 +155,10 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
   private void listAllTasks() {
     this.tasks.updateRecurringTasks();
     listFilteredTasks(task -> !task.isDone() && task.isOverDue(),
-        new Message("Here are your overdue tasks:"));
+        new Message().addBody("Here are your overdue tasks:"));
     listFilteredTasks(task -> !task.isDone() && !task.isOverDue(),
-        new Message("Here are your ongoing tasks:"));
-    listFilteredTasks(Task::isDone, new Message("Here are your done tasks:"));
+        new Message().addBody("Here are your ongoing tasks:"));
+    listFilteredTasks(Task::isDone, new Message().addBody("Here are your done tasks:"));
   }
 
   /**
@@ -179,7 +179,7 @@ public class TaskManager implements AddTaskCommandListener, DeleteTaskCommandLis
     snoozableTask.snooze(interval);
 
     // Update ModifyTaskListeners
-    modifyTaskUpdate(new Message("Got it. I've snoozed this task:"), task);
+    modifyTaskUpdate(new Message().addBody("Got it. I've snoozed this task:"), task);
   }
 
   private NumberedTaskList filterTasks(Predicate<Task> predicate) {

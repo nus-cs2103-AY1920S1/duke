@@ -1,7 +1,7 @@
 package weomucat.duke.task;
 
 import weomucat.duke.date.Date;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 /**
  * Todo is a special task that must have a description.
@@ -20,7 +20,7 @@ public class TodoTask extends Task {
   @Override
   public Message toMessage() {
     return new Message()
-        .setTitle(this.toString());
+        .addTitle(this.toString());
   }
 
   @Override

@@ -13,9 +13,9 @@ import weomucat.duke.command.ByeCommand;
 import weomucat.duke.command.Command;
 import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
-import weomucat.duke.ui.Message;
 import weomucat.duke.ui.Ui;
 import weomucat.duke.ui.listener.UserInputListener;
+import weomucat.duke.ui.message.Message;
 
 /**
  * Represents a JavaFx Graphical User Interface of Duke.
@@ -128,7 +128,7 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
       // Format task with no. in front
       Message m = task.toMessage();
       String title = String.format("%d. %s", pair.key(), m.getTitle());
-      displayTaskMessage(m.setTitle(title));
+      displayTaskMessage(m.addTitle(title));
     }
   }
 
@@ -140,8 +140,8 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
 
   @Override
   public void taskListSizeUpdate(int size) {
-    displayMessage(new Message(
-        String.format("Now you have %d task(s) in the list.", size)));
+    displayMessage(new Message()
+        .addBody(String.format("Now you have %d task(s) in the list.", size)));
   }
 
   @Override

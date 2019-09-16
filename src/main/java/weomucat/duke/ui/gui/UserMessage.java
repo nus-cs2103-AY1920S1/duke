@@ -1,6 +1,9 @@
 package weomucat.duke.ui.gui;
 
 import javafx.geometry.Pos;
+import javafx.scene.paint.Color;
+import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageColor;
 
 /**
  * Represents a message that is sent from the user.
@@ -8,8 +11,8 @@ import javafx.geometry.Pos;
  */
 class UserMessage extends MessageBox {
 
-  private static final String TEXT_COLOR = "#000000";
-  private static final String BACKGROUND_COLOR = "#ffffff";
+  private static final MessageColor TEXT_COLOR = new MessageColor("#000000");
+  private static final MessageColor BACKGROUND_COLOR = new MessageColor("#ffffff");
 
   /**
    * Creates a message that is sent from the user.
@@ -18,7 +21,8 @@ class UserMessage extends MessageBox {
    */
   UserMessage(String message) {
     setAlignment(Pos.TOP_RIGHT);
-    setBodyText(message, TEXT_COLOR);
+    setMessage(new Message().addBody(message));
+    setBodyTextColor(TEXT_COLOR);
     setBodyBackgroundColor(BACKGROUND_COLOR);
   }
 }

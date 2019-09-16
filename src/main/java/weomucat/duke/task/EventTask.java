@@ -6,7 +6,7 @@ import weomucat.duke.date.Date;
 import weomucat.duke.date.DateRange;
 import weomucat.duke.date.Interval;
 import weomucat.duke.exception.InvalidIndexException;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 /**
  * An event is a special task that has a date range.
@@ -91,8 +91,9 @@ public class EventTask extends RecurringTask {
       result.add(String.join("\n", slots));
     }
 
-    return new Message(String.join("\n\n", result))
-        .setTitle(this.toString());
+    return new Message()
+        .addTitle(this.toString())
+        .addBody(String.join("\n\n", result));
   }
 
   @Override

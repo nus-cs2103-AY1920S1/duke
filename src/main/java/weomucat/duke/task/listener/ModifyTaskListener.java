@@ -1,7 +1,7 @@
 package weomucat.duke.task.listener;
 
 import weomucat.duke.task.Task;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 /**
  * When a task is modified, this listener will be notified.

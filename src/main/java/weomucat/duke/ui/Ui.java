@@ -5,6 +5,7 @@ import weomucat.duke.task.listener.ListTaskListener;
 import weomucat.duke.task.listener.ModifyTaskListener;
 import weomucat.duke.task.listener.TaskListSizeListener;
 import weomucat.duke.ui.listener.UserInputListener;
+import weomucat.duke.ui.message.Message;
 
 /**
  * Ui is responsible for receiving input from the user, and displaying output to the user.

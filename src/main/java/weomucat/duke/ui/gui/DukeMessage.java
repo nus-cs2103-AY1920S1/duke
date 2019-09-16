@@ -1,7 +1,8 @@
 package weomucat.duke.ui.gui;
 
 import javafx.geometry.Pos;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageColor;
 
 /**
  * Represents a message that is sent from Duke.
@@ -9,9 +10,9 @@ import weomucat.duke.ui.Message;
  */
 class DukeMessage extends MessageBox {
 
-  private static final String TEXT_COLOR = "#FFFFFF";
-  private static final String TITLE_BACKGROUND_COLOR = "#455a64";
-  private static final String BODY_BACKGROUND_COLOR = "#37474f";
+  private static final MessageColor TEXT_COLOR = new MessageColor("#ffffff");
+  private static final MessageColor TITLE_BACKGROUND_COLOR = new MessageColor("#455a64");
+  private static final MessageColor BODY_BACKGROUND_COLOR = new MessageColor("#37474f");
 
   /**
    * Creates a message that is sent from Duke.
@@ -21,10 +22,11 @@ class DukeMessage extends MessageBox {
   DukeMessage(Message message) {
     super();
     setAlignment(Pos.TOP_LEFT);
-    setTitleText(message.getTitle(), TEXT_COLOR);
+    setMessage(message);
+    setTitleTextColor(TEXT_COLOR);
     setTitleBackgroundColor(TITLE_BACKGROUND_COLOR);
 
-    setBodyText(message.getBody(), TEXT_COLOR);
+    setBodyTextColor(TEXT_COLOR);
     setBodyBackgroundColor(BODY_BACKGROUND_COLOR);
   }
 }

@@ -1,7 +1,7 @@
 package weomucat.duke.task.listener;
 
 import weomucat.duke.task.NumberedTaskList;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 /**
  * When tasks need to be listed, this listener will be notified.

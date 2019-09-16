@@ -2,7 +2,7 @@ package weomucat.duke.command;
 
 import weomucat.duke.command.listener.DisplayCommandListener;
 import weomucat.duke.command.parameter.ParameterOptions;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 public abstract class DisplayCommand extends Command<DisplayCommandListener> {
 

@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import weomucat.duke.Pair;
 import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
-import weomucat.duke.ui.Message;
 import weomucat.duke.ui.Ui;
 import weomucat.duke.ui.listener.UserInputListener;
+import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageText;
 
 /**
  * Represents a Command Line User Interface of Duke.
@@ -74,35 +75,34 @@ public class CommandLineUi implements Ui {
 
   @Override
   public void displayMessage(Message message) {
-    System.out.println(MESSAGE_INDENTATION + DOUBLE_HORIZONTAL_LINE);
 
     // Title
-    String title = message.getTitle();
-    if (!title.equals("")) {
-      System.out.println(MESSAGE_INDENTATION + title);
-      System.out.println(MESSAGE_INDENTATION + SINGLE_HORIZONTAL_LINE);
+    System.out.println(DOUBLE_HORIZONTAL_LINE);
+    for (MessageText text : message.getTitle()) {
+      System.out.print(text.toCli());
+    }
+    System.out.println();
+    if (message.getTitle().size() > 0) {
+      System.out.println(SINGLE_HORIZONTAL_LINE);
     }
 
     // Body
-    String[] body = message.getBody().split("\n");
-    if (!(body.length == 1 && body[0].equals(""))) {
-      for (String line : body) {
-        System.out.println(MESSAGE_INDENTATION + line);
-      }
+    for (MessageText text : message.getBody()) {
+      System.out.print(text.toCli());
     }
-
-    System.out.println(MESSAGE_INDENTATION + DOUBLE_HORIZONTAL_LINE);
+    System.out.println();
+    System.out.println(DOUBLE_HORIZONTAL_LINE);
   }
 
   @Override
   public void displayError(Message message) {
     // TODO: ANSI Colors might not work on all terminals
     System.out.print("\033[38;2;255;0;0m");
-    System.out.println(MESSAGE_INDENTATION + DOUBLE_HORIZONTAL_LINE);
-    for (String line : message.getBody().split("\n")) {
-      System.out.println(MESSAGE_INDENTATION + line);
+    System.out.println(DOUBLE_HORIZONTAL_LINE);
+    for (MessageText text : message.getBody()) {
+      System.out.print(text.toCli());
     }
-    System.out.println(MESSAGE_INDENTATION + DOUBLE_HORIZONTAL_LINE);
+    System.out.println(DOUBLE_HORIZONTAL_LINE);
     System.out.print("\033[38;2;0;0;0m");
   }
 
@@ -121,7 +121,7 @@ public class CommandLineUi implements Ui {
       // Format task with no. in front
       Message m = task.toMessage();
       String title = String.format("%d. %s", pair.key(), m.getTitle());
-      displayMessage(m.setTitle(title));
+      displayMessage(m.addTitle(title));
     }
   }
 
@@ -133,7 +133,7 @@ public class CommandLineUi implements Ui {
 
   @Override
   public void taskListSizeUpdate(int size) {
-    displayMessage(new Message(
+    displayMessage(new Message().addBody(
         String.format("Now you have %d task(s) in the list.", size)));
   }
 }

@@ -3,7 +3,7 @@ package weomucat.duke.task;
 import java.util.ArrayList;
 import weomucat.duke.date.Date;
 import weomucat.duke.date.Interval;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 /**
  * A deadline is a special task that has a due date.
@@ -50,8 +50,9 @@ public class DeadlineTask extends RecurringTask implements SnoozableTask {
       result.add(String.format("===== RECURRENCE =====\n%s", this.every));
     }
 
-    return new Message(String.join("\n\n", result))
-        .setTitle(this.toString());
+    return new Message()
+        .addTitle(this.toString())
+        .addBody(String.join("\n\n", result));
   }
 
   @Override

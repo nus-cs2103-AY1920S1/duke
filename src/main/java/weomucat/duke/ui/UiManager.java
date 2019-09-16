@@ -10,6 +10,7 @@ import weomucat.duke.task.listener.ListTaskListener;
 import weomucat.duke.task.listener.ModifyTaskListener;
 import weomucat.duke.task.listener.TaskListSizeListener;
 import weomucat.duke.ui.listener.UserInputListener;
+import weomucat.duke.ui.message.Message;
 
 /**
  * UiManager is responsible for managing many uis.
@@ -85,7 +86,7 @@ public class UiManager implements ByeCommandListener, DisplayCommandListener,
   @Override
   public void byeCommandUpdate() {
     // Farewell user
-    displayMessage(new Message("Bye. Hope to see you again soon!"));
+    displayMessage(new Message().addBody("Bye. Hope to see you again soon!"));
 
     for (Ui ui : this.uis) {
       ui.byeCommandUpdate();

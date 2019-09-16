@@ -3,7 +3,7 @@ package weomucat.duke.task;
 import java.io.Serializable;
 import weomucat.duke.date.Date;
 import weomucat.duke.exception.DukeRuntimeException;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 /**
  * A Task is something the user has to do. By default, a Task is not done.

@@ -1,7 +1,7 @@
 package weomucat.duke.task;
 
 import weomucat.duke.date.Date;
-import weomucat.duke.ui.Message;
+import weomucat.duke.ui.message.Message;
 
 public class StubTask extends Task {
 

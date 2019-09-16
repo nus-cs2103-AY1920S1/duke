@@ -37,7 +37,7 @@ public class Parser {
                 tasks.delete(taskNum);
 
             }else if(check.equals("todo")){
-                String description = str.replace("todo", "").trim();
+                String description = str.replaceFirst("todo", "").trim();
                 
                 if(description.equals("")){ //error handling
                     throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -49,7 +49,7 @@ public class Parser {
 
                 }
             }else if(check.equals("event")){
-                String [] splitDate = str.replace("event", "").split("/at");
+                String [] splitDate = str.replaceFirst("event", "").split("/at");
                 if(splitDate.length < 2){
                     throw new DukeException("☹ OOPS!!! Events require both a description and a date /at");
                 }else{
@@ -57,13 +57,16 @@ public class Parser {
                     tasks.addEvent(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
                 }
             }else if(check.equals("deadline")){
-                String [] splitDate = str.replace("deadline", "").split("/by");
+                String [] splitDate = str.replaceFirst("deadline", "").split("/by");
                 if(splitDate.length < 2){
                     throw new DukeException("☹ OOPS!!! Deadlines require both a description and a date by");
                 }else{
                     tasks.addDeadline(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
                 }
-           
+            }else if(check.equals("find")){
+                String keyword = str.replaceFirst("find", "").trim();
+                tasks.find(keyword);
+            
             }else{ //error handling
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }

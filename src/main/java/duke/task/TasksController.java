@@ -1,11 +1,14 @@
 package duke.task;
 
+import duke.command.UndoAction;
+import duke.command.entities.TaskSorts;
 import error.storage.StorageException;
 import error.ui.UiException;
 import storage.Storage;
 import ui.UiController;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -39,13 +42,8 @@ public class TasksController {
      * Gets tasks.
      * @return list of tasks.
      */
-    public List<Task> getTasks() throws UiException {
-        try {
-            return storage.getTasks();
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
-            return new ArrayList<>();
-        }
+    public List<Task> getTasks() throws StorageException {
+        return storage.getTasks();
     }
 
     /**
@@ -204,4 +202,30 @@ public class TasksController {
             ui.displayOutput(e.getMessage());
         }
     }
+
+    public void sortTasks(TaskSorts sortingMethod) throws UiException {
+        try {
+            List<Task> tasks = storage.getTasks();
+
+            tasks.sort(sortingMethod.comparator);
+
+            view.displayTasksSorted(sortingMethod, ui);
+
+            storage.writeTasks(tasks);
+        } catch (StorageException e) {
+            ui.displayOutput(e.getMessage());
+        }
+    }
+
+    public void setNewTasksList(List<Task> tasks, boolean printMessage) throws UiException {
+        try {
+            if (printMessage) {
+                view.displayNewTasksSet(tasks.size(), ui);
+            }
+            storage.writeTasks(tasks);
+        } catch (StorageException e) {
+            ui.displayOutput(e.getMessage());
+        }
+    }
+
 }

@@ -49,6 +49,8 @@ public abstract class Task implements Serializable {
         return this.type;
     }
 
+    public TimeFrame getTimeFrame() { return this.timeFrame; }
+
     public boolean isRecurring() {
         return this.isRecurring;
     }

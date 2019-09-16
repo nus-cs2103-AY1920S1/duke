@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 /**
  * Class to encapsulate start and end time of tasks.
  */
-public class TimeFrame implements Serializable {
+public class TimeFrame implements Serializable, Comparable<TimeFrame> {
     private static final long serialVersionUID = 6529685098267111111L;
 
     private LocalDateTime start;
@@ -52,6 +52,21 @@ public class TimeFrame implements Serializable {
         } else {
             // task is done between two times
             return String.format("from: %s to: %s", DateTime.getString(start), DateTime.getString(end));
+        }
+    }
+
+    @Override
+    public int compareTo(TimeFrame timeFrame) {
+        if (this.end != null && timeFrame.end != null) {
+            return this.end.compareTo(timeFrame.end);
+        } else if (this.end != null) {
+            return -1;
+        } else if (timeFrame.end != null) {
+            return 1;
+        } else if (this.start != null && timeFrame.start != null) {
+            return this.start.compareTo(timeFrame.start);
+        } else {
+            return 0;
         }
     }
 }

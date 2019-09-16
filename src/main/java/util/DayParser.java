@@ -4,6 +4,8 @@ import error.datetime.UnknownDateTimeException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 
 /**
@@ -20,6 +22,16 @@ public class DayParser {
         String lowerCaseDay = day.toLowerCase();
 
         switch(lowerCaseDay) {
+            case "today":
+                return LocalDateTime.now()
+                        .withHour(0)
+                        .withMinute(0);
+
+            case "tomorrow":
+                return LocalDateTime.now()
+                        .plus(1, ChronoUnit.DAYS)
+                        .withHour(0)
+                        .withMinute(0);
 
             case "mon":
             case "monday":

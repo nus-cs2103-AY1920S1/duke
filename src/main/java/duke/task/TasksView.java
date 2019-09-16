@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.command.entities.TaskSorts;
 import error.ui.UiException;
 import ui.UiController;
 import util.OutputBuilder;
@@ -105,6 +106,24 @@ public class TasksView {
                 .newLine()
                 .indent()
                 .append(task.getDescription());
+
+        String output = builder.build();
+        ui.displayOutput(output);
+    }
+
+    public void displayTasksSorted(TaskSorts sortingMethod, UiController ui) throws UiException {
+        OutputBuilder builder = new OutputBuilder();
+        builder.append("Noted. I have sorted your tasks according to " + sortingMethod.keyword);
+
+        String output = builder.build();
+        ui.displayOutput(output);
+    }
+
+    public void displayNewTasksSet(int tasksLength, UiController ui) throws UiException {
+        OutputBuilder builder = new OutputBuilder();
+        builder.append("Noted. I have set your tasks to the new list:")
+                .newLine()
+                .append(String.format("Now you have %d tasks in the list", tasksLength));
 
         String output = builder.build();
         ui.displayOutput(output);

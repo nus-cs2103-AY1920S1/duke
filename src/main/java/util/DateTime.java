@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateTime {
     private static final String dateRegex = "((([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})(\\s([0-9]{4}))?))";
-    private static final String dayRegex = "((?i)(Mon|Monday|Tue|Tues|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday|Sun|Sunday)(\\s([0-9]{4}))?)";
+    private static final String dayRegex = "((?i)(Today|Tomorrow|Mon|Monday|Tue|Tues|Tuesday|Wed|Wednesday|Thu|Thursday|Fri|Friday|Sat|Saturday|Sun|Sunday)(\\s([0-9]{4}))?)";
 
     /**
      * Parses a string into a LocalDateTime object. E.g. 24/02/2022 0315.

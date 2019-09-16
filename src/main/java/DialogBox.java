@@ -47,14 +47,21 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates DialogBox of User based on program output.
+     *
+     * @param text String of displayed output.
+     * @param img Defined image avatar
+     * @return DialogBox used in MainWindow
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        var dialog_user = new DialogBox(text, img);
-        dialog_user.setId("user");
-        return dialog_user;
+        var dialogUser = new DialogBox(text, img);
+        dialogUser.setId("user");
+        return dialogUser;
     }
 
     /**
-     * Creates DialogBox based on program output.
+     * Creates DialogBox of Duke based on program output.
      *
      * @param text String of displayed output.
      * @param img  Defined image avatar

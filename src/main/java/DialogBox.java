@@ -23,7 +23,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    private final int IMAGE_SIZE = 90;
+    private final int IMAGE_SIZE = 70;
 
     public DialogBox(String text, Image img) {
         try {

@@ -1,5 +1,6 @@
 package duke.tasklist;
 
+import duke.exception.InvalidArgumentException;
 import duke.task.Task;
 import duke.ui.Ui;
 
@@ -53,11 +54,15 @@ public class TaskList {
 
     /**
      * Marks the task with the specified task number as done and prints the necessary output.
-     * @param taskNo The specified number of the task that is to be marked as done.
+     * @param taskNumber The specified number of the task that is to be marked as done.
      * @return the appropriate response to the user after the task is marked as done.
      */
-    public String getResponseToMarkAsDone(int taskNo) {
-        Task taskDone = tasks.get(taskNo - 1);
+    public String getResponseToMarkAsDone(int taskNumber) {
+        Task taskDone;
+        if (taskNumber - 1 > tasks.size()) {
+            taskDone = null;
+        }
+        taskDone = tasks.get(taskNumber - 1);
         taskDone.markAsDone();
         return ui.getDoneTaskResponse(taskDone);
     }
@@ -67,8 +72,12 @@ public class TaskList {
      * @param taskNumber The specified number of the task to be deleted from the tasks list.
      * @return the appropriate response to the user after the task is deleted from the task list.
      */
-    public String getResponseToDeleteTask(int taskNumber) {
-        Task task = tasks.remove(taskNumber - 1);
+    public String getResponseToDeleteTask(int taskNumber) throws InvalidArgumentException {
+        Task task;
+        if (taskNumber - 1 > tasks.size()) {
+            task = null;
+        }
+        task = tasks.remove(taskNumber - 1);
         return ui.getDeleteTaskResponse(task);
     }
 

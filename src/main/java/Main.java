@@ -31,7 +31,7 @@ public class Main extends Application {
             VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
             DialogBox helloDialog = DialogBox.getDukeDialog(
                     hello,
-                    new Image(this.getClass().getResourceAsStream("/images/shocked_cat.jpg"))
+                    new Image(this.getClass().getResourceAsStream("/images/shocked_cat_square.jpg"))
             );
             dialogContainer.getChildren().addAll(helloDialog);
         } catch (IOException e) {

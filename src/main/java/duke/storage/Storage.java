@@ -122,7 +122,7 @@ public class Storage {
             Deadline deadline = (Deadline) task;
             LocalDateTime due = deadline.getDueBy();
             String dueAsString = convertDateTimeToString(due);
-            return String.format("%s,%d,%s,%s", "D", isDone, desc, dueAsString);
+            return String.format("%s,%b,%s,%s", "D", isDone, desc, dueAsString);
         } else {
             Event event = (Event) task;
             LocalDateTime when = event.getWhen();
@@ -136,7 +136,7 @@ public class Storage {
     }
 
     public static LocalDateTime convertStringToDateTime(String string) {
-        return LocalDateTime.parse(string, formatter);
+        return LocalDateTime.parse(string.trim(), formatter);
     }
 
 }

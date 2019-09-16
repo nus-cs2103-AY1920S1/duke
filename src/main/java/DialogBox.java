@@ -47,10 +47,10 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         Text textBox = new Text(text);
         dialog.setMinHeight(textBox.getLayoutBounds().getHeight());
-        System.out.println(textBox.getLayoutBounds().getHeight());
+        //System.out.println(textBox.getLayoutBounds().getHeight());
 
         displayPicture.setImage(img);
-        Circle clip = new Circle(50, 50, 45);
+        Circle clip = new Circle(50, 50, 50);
         displayPicture.setClip(clip);
     }
 

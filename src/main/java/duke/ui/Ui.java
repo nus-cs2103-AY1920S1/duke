@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
 import duke.exception.MissingDescriptionException;
 import duke.exception.MissingInputException;
@@ -38,7 +39,8 @@ public class Ui {
         String output = "";
         try {
             output = parser.getResponseToCommand(command.trim());
-        } catch (InvalidCommandException | MissingInputException | MissingDescriptionException e) {
+        } catch (InvalidCommandException | InvalidArgumentException | MissingInputException |
+                MissingDescriptionException e) {
             output += e.getMessage();
         }
         assert(output != null);
@@ -88,6 +90,10 @@ public class Ui {
      * @return the response that Duke gives for the user to view the matching tasks.
      */
     public String getFindTaskResponse(ArrayList<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            return null;
+        }
+
         StringBuilder output = new StringBuilder("\there ya go, the matchy-matchy tasks in ur list:\n");
         for (int i = 0; i < matchingTasks.size(); i++) {
             output.append(String.format("\t%d.%s", i + 1, matchingTasks.get(i)));
@@ -102,7 +108,7 @@ public class Ui {
      */
     public String getListResponse(ArrayList<Task> tasks) {
         if (tasks.isEmpty()) {
-            return "u haf no tasks in ur list1!!";
+            return "u haf no tasks in ur list!!1!";
         }
 
         StringBuilder output = new StringBuilder("\there ya go, the tasks in ur list:\n");

@@ -36,6 +36,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Closes the application window.
+     */
     public static void close() {
         PauseTransition delay = new PauseTransition(Duration.seconds(0.75));
         delay.setOnFinished(event -> Platform.exit());

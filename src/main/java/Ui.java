@@ -1,13 +1,9 @@
 class Ui {
-    private static final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String intro = "Hello! I'm Duke What can I do for you?";
+    private static final String logo = "";
+    private static final String intro = "Hi, Duke here!";
 
     static String printLogo() {
-        return "Hello from\n" + logo;
+        return "BEEP BEEP BEEP!\n" + logo;
     }
 
     static String printHello() {
@@ -19,12 +15,12 @@ class Ui {
     }
 
     static String printList(TaskList tasks) {
-        return "Here are the tasks in your list:\n" +
+        return "You have: \n" +
                 tasks.printFormat();
     }
 
     static String printDone(Task task) {
-        return "Nice! I've marked this task as done: \n" +
+        return "Marked done: \n" +
                 "  " + task.getStatus();
     }
 
@@ -33,13 +29,13 @@ class Ui {
     }
 
     static String printCreated(Task t, TaskList tasks) {
-        return "Got it. I've added this task:\n" +
+        return "Added:\n" +
                 "  " + t.getStatus() +
                 printCount(tasks);
     }
 
     static String printRemoved(Task removedTask, TaskList tasks) {
-        return "Noted. I've removed this task: \n" +
+        return "Removed: \n" +
                 "  " + removedTask.getStatus() + "\n" +
                 printCount(tasks);
     }
@@ -73,7 +69,7 @@ class Ui {
     }
 
     static String printFind(String input, TaskList tasks) {
-        return "Here are the matching tasks in your list:\n" +
+        return "Matching Tasks:\n" +
                 tasks.find(input);
     }
 }

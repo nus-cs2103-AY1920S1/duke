@@ -1,7 +1,6 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
-public class UserInterface {
+class UserInterface {
     static TaskList todoList;
     static Storage data;
     UserInterface(TaskList todoList, Storage store) {
@@ -24,7 +23,7 @@ public class UserInterface {
             userCommand = userInput.split(" ",2)[0];
             try {
                 description = userInput.split(" ", 2)[1].split("/")[0];
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
 
@@ -76,7 +75,7 @@ public class UserInterface {
                 case "pause":
                     try {
                         Thread.sleep(1000);
-                    } catch (Exception e) {}
+                    } catch (Exception ignored) {}
                     break;
 
                 default:
@@ -120,7 +119,7 @@ public class UserInterface {
                 }
                 //try to catch more exceptions
                 catch (Exception e) {
-                    return ("☹ OOPS!!! The description of a " + userCommand + " cannot be empty.");
+                    return ("OOPS!!! The description of a " + userCommand + " cannot be empty.");
                 }
             case "delete":
                 try {
@@ -142,11 +141,11 @@ public class UserInterface {
             case "pause":
                 try {
                     Thread.sleep(1000);
-                } catch (Exception e) {}
+                } catch (Exception ignored) {}
                 break;
 
             default:
-                return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         data.save(todoList.lst);
 

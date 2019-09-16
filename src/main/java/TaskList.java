@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class TaskList {
 
     static ArrayList<ListItem> lst = new ArrayList<>();
-    private static String filename = "data/duke.txt";
+    private static String filename;
 
     TaskList(String filepath) {
         TaskList.filename = filepath;
@@ -53,6 +53,6 @@ public class TaskList {
             return "To do list is Empty :)";
         }
         assert(toReturn.length() > 6);
-        return toReturn.substring(0, toReturn.length());
+        return toReturn;
     }
 }

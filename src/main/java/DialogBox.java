@@ -50,7 +50,7 @@ public class DialogBox extends HBox {
         System.out.println(textBox.getLayoutBounds().getHeight());
 
         displayPicture.setImage(img);
-        Circle clip = new Circle(50, 35, 50);
+        Circle clip = new Circle(50, 50, 45);
         displayPicture.setClip(clip);
     }
 

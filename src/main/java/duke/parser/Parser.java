@@ -38,7 +38,7 @@ public class Parser {
      */
     public String getResponseToCommand(String command) throws InvalidCommandException, MissingInputException,
             MissingDescriptionException {
-        String[] commandWords = command.trim().split(" ");
+        String[] commandWords = command.trim().toLowerCase().split(" ");
         String commandType = commandWords[0];
         String output;
         TaskList taskList = new TaskList();
@@ -71,8 +71,11 @@ public class Parser {
         case "bye":
             output = this.ui.getByeResponse();
             break;
+        case "help":
+            output = this.ui.getHelpResponse();
+            break;
         default:
-            throw new InvalidCommandException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidCommandException("\tsowwie i dunno what tat means T~T");
         }
 
         return output;
@@ -93,7 +96,7 @@ public class Parser {
         Task task = new Task();
 
         if (fullDesc.isEmpty()) {
-            throw new MissingDescriptionException("☹ OOPS!!! The description of " + taskType + " cannot be empty.");
+            throw new MissingDescriptionException("o noes!! ur description of " + taskType + " is empty ( ._.)");
         }
 
         switch (taskType) {
@@ -102,7 +105,7 @@ public class Parser {
             break;
         case ("deadline"):
             if (!fullDesc.contains("/by")) {
-                throw new MissingInputException("☹ OOPS!!! The deadline cannot be found because /by is missing");
+                throw new MissingInputException("o noes!! i kennut find your deadline cos '/by' is missinggg ( ._.)");
             }
 
             String[] splitDeadlineDesc = fullDesc.split("/by");
@@ -115,16 +118,14 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 // above exception will be thrown when the splitDeadlineDesc only has one element
                 // this means that there is nothing after /by
-                throw new MissingInputException("☹ OOPS!!! The deadline cannot be found after /by");
+                throw new MissingInputException("o noes!! i kennut find your deadline after '/by' ( ._.)");
             }
 
             task = new Deadline(desc, deadline);
             break;
         case ("event"):
             if (!fullDesc.contains("/at")) {
-                throw new MissingInputException(
-                        "☹ OOPS!!! The event date and time cannot be found because /at is missing"
-                );
+                throw new MissingInputException("o noes!! i kennut find ur event date and time cos '/at' is missinggg ( ._.)");
             }
 
             String[] splitEventDesc = fullDesc.split("/at");
@@ -137,7 +138,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 // above exception will be thrown when the splitEventDesc only has one element
                 // this means that there is nothing after /at
-                throw new MissingInputException("☹ OOPS!!! The event date and time cannot be found after /at");
+                throw new MissingInputException("o noes!! i kennut find ur event date and time after '/at' ( ._.)");
             }
 
             task = new Event(desc, when);

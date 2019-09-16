@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/looking_out_window_cat.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/shocked_cat.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/sayang_cat_square.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/shocked_cat_square.jpg"));
 
     @FXML
     public void initialize() {
@@ -44,13 +44,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (!input.equals("")) { // does not allow user to send empty strings
+            String response = duke.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
 
-        if (input.equals("bye")) {
+
+        if (input.toLowerCase().equals("bye")) {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override

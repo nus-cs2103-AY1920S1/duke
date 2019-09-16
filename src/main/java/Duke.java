@@ -42,6 +42,7 @@ public class Duke {
             }
             return ui.getByeResponse();
         }
+
         return ui.getResponseToUserInput(input);
     }
 

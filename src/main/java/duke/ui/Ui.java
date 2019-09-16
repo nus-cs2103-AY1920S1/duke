@@ -24,7 +24,8 @@ public class Ui {
     }
 
     public String getHelloMessage() {
-        return "\tHello! I'm Duke\n\tWhat can I do for you?\n";
+        return "\tharro!! i am duke! :>\n\twat can i do for u??\n"
+                + "type 'help' if u dk or forgot d commands!!";
     }
 
     /**
@@ -51,10 +52,10 @@ public class Ui {
      *     current number of tasks in the list.
      */
     public String getAddTaskResponse(Task task) {
-        String output = "\tGot it. I've added this task:";
+        String output = "\tokie! i added this task oredi:";
         output += ("\t" + task.toString());
         int size = (new TaskList()).getSize();
-        output += String.format("\tNow you have %d tasks in the list.", size);
+        output += String.format("\tnow u got %d tasks in the list", size);
         return output;
     }
 
@@ -64,7 +65,7 @@ public class Ui {
      * @return the response that Duke gives to inform the user that the specified task is marked as done.
      */
     public String getDoneTaskResponse(Task task) {
-        return "\tNice! I've marked this task as done:\n\t\t" + task.toString();
+        return "\tnaisu! i marked this task as done oredi:\n\t\t" + task.toString();
     }
 
     /**
@@ -74,10 +75,10 @@ public class Ui {
      *     deleted.
      */
     public String getDeleteTaskResponse(Task task) {
-        String output = "\tNoted. I've removed this task:";
+        String output = "\tokie! i remove this task oredi:";
         output += "\t  " + task.toString();
         int size = (new TaskList()).getSize();
-        output += String.format("\tNow you have %d tasks in the list.", size);
+        output += String.format("\tnow you got %d tasks in the list", size);
         return output;
     }
 
@@ -87,7 +88,7 @@ public class Ui {
      * @return the response that Duke gives for the user to view the matching tasks.
      */
     public String getFindTaskResponse(ArrayList<Task> matchingTasks) {
-        StringBuilder output = new StringBuilder("\tHere are the matching tasks in your list:\n");
+        StringBuilder output = new StringBuilder("\there ya go, the matchy-matchy tasks in ur list:\n");
         for (int i = 0; i < matchingTasks.size(); i++) {
             output.append(String.format("\t%d.%s", i + 1, matchingTasks.get(i)));
         }
@@ -100,7 +101,11 @@ public class Ui {
      * @return the appropriate response that Duke gives for the user to view the task list.
      */
     public String getListResponse(ArrayList<Task> tasks) {
-        StringBuilder output = new StringBuilder("\tHere are the tasks in your list:\n");
+        if (tasks.isEmpty()) {
+            return "u haf no tasks in ur list1!!";
+        }
+
+        StringBuilder output = new StringBuilder("\there ya go, the tasks in ur list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             output.append(String.format("\t%d. %s\n", i + 1, tasks.get(i)));
         }
@@ -112,7 +117,25 @@ public class Ui {
      * @return the appropriate response that Duke gives when the user enters "bye".
      */
     public String getByeResponse() {
-        return "\tBye. Hope to see you again soon!";
+        return "\tokie baibai~ hope to see u again soon!~ :>";
     }
 
+    /**
+     * Retrives the appropriate response when the user requests for help.
+     * @return the appropriate response that Duke gives when the user enters "help".
+     */
+    public String getHelpResponse() {
+       String output = "u asked for halp?? here ya go~";
+       output += "todo <description> - to add a Todo task with the description\n";
+       output += "deadline <description> <deadline> - to add a Deadline task with the description and deadline\n";
+       output += "event <description> <event day & time> - to add an Event task with the description and event day & "
+               + "time\n";
+       output += "list - to display all the tasks in your list";
+       output += "done <task no.> - to mark that task as done";
+       output += "delete <task no.> - to delete that task from the list";
+       output += "find <keyword(s)> - to find the matching tasks with the keyword(s)";
+       output += "bye - to save the changes made to your list and exit the program" ;
+       output += "help - to display this help page";
+       return output;
+    }
 }

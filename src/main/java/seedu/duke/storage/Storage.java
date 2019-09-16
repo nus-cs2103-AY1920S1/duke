@@ -217,17 +217,18 @@ public class Storage {
      */
     public Todo newTodo(String[] words) {
         Boolean isDone = false;
-        String description = "";
-        String createDateTime = "";
-        String lastModifiedDateTime = "";
 
         if (words[1].contains("1")) {
             isDone = true;
         } else if (words[1].contains("0")) {
             isDone = false;
         }
+
+        String description = "";
         description = words[2].trim();
+        String createDateTime = "";
         createDateTime = words[4].trim();
+        String lastModifiedDateTime = "";
         lastModifiedDateTime = words[5].trim();
 
 
@@ -245,19 +246,19 @@ public class Storage {
      */
     public Event newEvent(String[] words) {
         Boolean isDone = false;
-        String description = "";
-        String extraDescription = "";
-        String createDateTime = "";
-        String lastModifiedDateTime = "";
 
         if (words[1].contains("1")) {
             isDone = true;
         } else if (words[1].contains("0")) {
             isDone = false;
         }
+        String description = "";
         description = words[2].trim();
+        String extraDescription = "";
         extraDescription = words[3].trim();
+        String createDateTime = "";
         createDateTime = words[4].trim();
+        String lastModifiedDateTime = "";
         lastModifiedDateTime = words[5].trim();
 
         Event newEvent = new Event(description, extraDescription, isDone,
@@ -274,19 +275,19 @@ public class Storage {
      */
     public Deadline newDeadline(String[] words) {
         Boolean isDone = false;
-        String description = "";
-        String extraDescription = "";
-        String createDateTime = "";
-        String lastModifiedDateTime = "";
-
+        
         if (words[1].contains("1")) {
             isDone = true;
         } else if (words[1].contains("0")) {
             isDone = false;
         }
+        String description = "";
         description = words[2].trim();
+        String extraDescription = "";
         extraDescription = words[3].trim();
+        String createDateTime = "";
         createDateTime = words[4].trim();
+        String lastModifiedDateTime = "";
         lastModifiedDateTime = words[5].trim();
 
         Deadline newDeadline = new Deadline(description, extraDescription, isDone,

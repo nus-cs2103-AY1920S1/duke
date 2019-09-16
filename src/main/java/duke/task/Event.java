@@ -24,7 +24,7 @@ public class Event extends Task {
      */
     @Override
     public String convertTaskToString() {
-        return String.format("E | %s | %s | %s", this.getStatus(), this.description, this.at);
+        return String.format("E | %s | %s | %s", getStatus(), description, at);
     }
 
     /**

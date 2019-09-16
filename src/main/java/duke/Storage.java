@@ -37,7 +37,7 @@ public class Storage {
         List<Task> taskList = new ArrayList<>();
         String line;
         try {
-            FileReader fileReader = new FileReader(this.filePath);
+            FileReader fileReader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             while ((line = bufferedReader.readLine()) != null) {
                 taskList.add(Task.convertStringToTask(line));

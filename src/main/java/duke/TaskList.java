@@ -25,7 +25,7 @@ public class TaskList {
      * Constructs a TaskList object with no prior data.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     /**
@@ -34,13 +34,16 @@ public class TaskList {
      * @return Tasks in task list as a string.
      */
     public String list() {
-        String message = "";
+        StringBuilder tasks = new StringBuilder();
+        String task;
         int index = 1;
         for (Iterator iterator = taskList.iterator(); iterator.hasNext(); index++) {
             assert (index >= 1);
-            message = message + index + "." + iterator.next() + "\n";
+            task = index + "." + iterator.next() + "\n";
+            tasks.append(task);
         }
-        return message;
+        assert (tasks.length() >= 0);
+        return tasks.toString();
     }
 
     /**
@@ -91,19 +94,20 @@ public class TaskList {
      * @return List of tasks containing keyword as a String.
      */
     public String find(String keyword) {
-        String message = "";
+        StringBuilder tasks = new StringBuilder();
+        String task;
         int i = 1;
         int index = 1;
         for (Iterator iterator = taskList.iterator(); iterator.hasNext(); i++) {
-            assert (i >= 1);
-            assert (index >= 1);
+            assert (i >= 1 && index >= 1);
             Task current = (Task) iterator.next();
             if (current.containsKeyword(keyword)) {
-                message = message + index + "." + current + "\n";
+                task = index + "." + current + "\n";
+                tasks.append(task);
                 index++;
             }
         }
-        return message;
+        return tasks.toString();
     }
 
     /**

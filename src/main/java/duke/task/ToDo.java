@@ -20,7 +20,7 @@ public class ToDo extends Task {
      */
     @Override
     public String convertTaskToString() {
-        return String.format("T | %s | %s", this.getStatus(), this.description);
+        return String.format("T | %s | %s", getStatus(), description);
     }
 
     /**

@@ -3,6 +3,6 @@ E | 0 | project meeting | Aug 6th 2-4pm
 T | 1 | join sports club
 D | 0 | project | 2nd of December 2019, 6:00 PM
 E | 1 | marriage | 2nd of December 2019, 6:00 PM
-D | 1 | cs2103 | 2nd of December 2019
 T | 0 | homework
 T | 0 | duke
+T | 0 | duke v2.0

@@ -1,10 +1,7 @@
 package duke;
 
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -15,21 +12,17 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    protected static final String DUKE_FILE = "duke.txt";
-
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Whale.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Bear.png"));
+    private Image userImage = new Image(getClass().getResourceAsStream("/images/Whale.png"));
+    private Image dukeImage = new Image(getClass().getResourceAsStream("/images/Bear.png"));
 
     /**
      * Initiates the chat bot window.
@@ -85,12 +78,7 @@ public class MainWindow extends AnchorPane {
                 return null;
             }
         };
-        delay.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                System.exit(0);
-            }
-        });
+        delay.setOnSucceeded(event -> System.exit(0));
         new Thread(delay).start();
     }
 }

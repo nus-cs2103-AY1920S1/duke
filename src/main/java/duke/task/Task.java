@@ -16,7 +16,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Task {
      * Marks a task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -79,9 +79,8 @@ public class Task {
                 task.markAsDone();
             }
             return task;
-        } else {
-            assert false;
         }
+        assert false;
         return null;
     }
 
@@ -91,7 +90,7 @@ public class Task {
      * @return Task in String format.
      */
     public String convertTaskToString() {
-        return String.format("- | %s | %s", this.getStatus(), this.description);
+        return String.format("- | %s | %s", getStatus(), description);
     }
 
     /**
@@ -101,6 +100,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.getStatusIcon(), this.description);
+        return String.format("[%s] %s", getStatusIcon(), description);
     }
 }

@@ -8,7 +8,7 @@ import java.text.ParseException;
  * Encapsulates date & time.
  */
 public class DateTime {
-    private static String[] suffixes = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th", "th",
+    private final static String[] SUFFIXES = { "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th", "th", "th",
         "th", "th", "th", "th", "th", "th", "th", "th", "st", "nd", "rd", "th", "th", "th", "th", "th",
         "th", "th", "st" };
 
@@ -30,8 +30,9 @@ public class DateTime {
         }
         SimpleDateFormat dayOfMonth = new SimpleDateFormat("d");
         int day = Integer.parseInt(dayOfMonth.format(dateTime));
-        String dayWithSuffix = day + suffixes[day];
-        output = outputFormat.format(dateTime);
-        return (dayWithSuffix + " of " + output);
+        String dayWithSuffix = day + SUFFIXES[day];
+        String formattedDateTime = outputFormat.format(dateTime);
+        output = dayWithSuffix + " of " + formattedDateTime;
+        return output;
     }
 }

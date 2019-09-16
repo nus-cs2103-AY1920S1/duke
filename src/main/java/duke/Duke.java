@@ -15,19 +15,17 @@ public class Duke {
      * Constructs a Duke object.
      */
     public Duke() {
-        this.taskList = new TaskList();
+        taskList = new TaskList();
     }
 
     /**
      * Attempts to load data file.
+     *
+     * @param filePath  Path to saved data file on hard disk.
      */
     public void load(String filePath) throws DukeException {
-        this.storage = new Storage(filePath);
-        try {
-            this.taskList = new TaskList(storage.load());
-        } catch (DukeException e) {
-            throw e;
-        }
+        storage = new Storage(filePath);
+        taskList = new TaskList(storage.load());
     }
 
     /**

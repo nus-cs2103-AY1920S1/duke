@@ -31,9 +31,13 @@ public class ListCommand implements Command {
             content = content.concat("[" + tasks.get(i).getIsDoneSymbol() + "]");
             content = content.concat(" " + tasks.get(i).getDescription());
             if(tasks.get(i).getSymbol() == 'D'){
-                content = content.concat(" (by: " + tasks.get(i).getDetails() + ")");
+                if(tasks.get(i).getDetails() != null) {
+                    content = content.concat(" (by: " + tasks.get(i).getTime() + ")");
+                };
             } else if(tasks.get(i).getSymbol() == 'E'){
-                content = content.concat(" (at: " + tasks.get(i).getDetails() + ")");
+                if(tasks.get(i).getDetails() != null){
+                    content = content.concat(" (at: " + tasks.get(i).getDetails() + ")");
+                }
             }
             content = content.concat("\n");
         }

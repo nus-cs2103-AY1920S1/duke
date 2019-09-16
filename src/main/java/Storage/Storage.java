@@ -146,7 +146,11 @@ public class Storage {
      * @return resulting task details
      */
     private String parseTaskDetails(String s){
-        return s;
+        if(s.equals("null")){
+            return null;
+        } else {
+            return s;
+        }
     }
 
     /**

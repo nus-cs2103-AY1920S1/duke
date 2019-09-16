@@ -16,4 +16,9 @@ public class todo extends Task{
     public char getSymbol() {
         return this.symbol;
     }
+
+    @Override
+    public String getTime() {
+        return null;
+    }
 }

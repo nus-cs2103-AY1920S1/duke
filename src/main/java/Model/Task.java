@@ -44,4 +44,6 @@ public abstract class Task {
     public String getDetails(){
         return null;
     }
+
+    public abstract String getTime();
 }

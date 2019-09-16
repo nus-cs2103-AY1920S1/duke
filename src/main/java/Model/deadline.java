@@ -48,5 +48,4 @@ public class deadline extends Task{
             return this.time.toString();
         }
     }
-
 }

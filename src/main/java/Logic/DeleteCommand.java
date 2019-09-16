@@ -28,18 +28,21 @@ public class DeleteCommand implements Command {
         int index = Integer.parseInt(arguments);
 
         String content = "";
-        content = content.concat("Noted. I've removed this task:\n");
-        content = content.concat("[" + tasks.get(index - 1).getSymbol() + "][" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription());
-        if(tasks.get(index - 1).getSymbol() == 'D'){
-            content = content.concat(" (by: " + tasks.get(index - 1).getDetails() + ")");
-        } else if (tasks.get(index - 1).getSymbol() == 'E'){
-            content = content.concat(" (at: " + tasks.get(index - 1).getDetails() + ")");
+        if(tasks.size() >= index){
+            content = content.concat("Noted. I've removed this task:\n");
+            content = content.concat("[" + tasks.get(index - 1).getSymbol() + "][" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription());
+            if(tasks.get(index - 1).getSymbol() == 'D'){
+                content = content.concat(" (by: " + tasks.get(index - 1).getDetails() + ")");
+            } else if (tasks.get(index - 1).getSymbol() == 'E'){
+                content = content.concat(" (at: " + tasks.get(index - 1).getDetails() + ")");
+            }
+            content = content.concat("\n");
+            tasks.remove(index - 1);
+            content = content.concat("You now have " + tasks.size() + " tasks in this list\n");
+        } else {
+            content = content.concat("Failed to delete Task!\n" +
+                    "No such Task found!\n");
         }
-        content = content.concat("\n");
-
-        tasks.remove(index - 1);
-
-        content = content.concat("You now have " + tasks.size() + " tasks in this list\n");
         return content;
     }
 

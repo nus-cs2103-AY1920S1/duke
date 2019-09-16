@@ -25,5 +25,10 @@ public class event extends Task{
         return this.details;
     }
 
+    @Override
+    public String getTime() {
+        return null;
+    }
+
 
 }

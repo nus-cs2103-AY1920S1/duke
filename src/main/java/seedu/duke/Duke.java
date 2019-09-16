@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.Scanner;
+
 import seedu.duke.command.Command;
 import seedu.duke.task.TaskList;
 
@@ -10,7 +12,7 @@ public class Duke {
     private Ui ui;
 
     public Duke(String filePath) {
-        ui = new Ui();
+        ui = new Ui(new Scanner(System.in));
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -32,6 +34,7 @@ public class Duke {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
+                continue;
             } finally {
                 ui.showLine();
             }

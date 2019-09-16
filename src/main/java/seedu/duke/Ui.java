@@ -13,16 +13,15 @@ public class Ui {
     private String LOGO = " ____ _ \n" + "| _ \\ _ _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| | < __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     private String LOADING_ERROR_MESSAGE = "Sorry, we encountered error loading your data. You will be using Duke fresh.";
+    private Scanner sc;
 
-    public Ui() {
-
+    public Ui(Scanner sc) {
+        this.sc = sc;
     }
 
     public String readCommand() {
         System.out.printf(">>> ");
-        Scanner sc = new Scanner(System.in);
         String fullCommand = sc.nextLine();
-        sc.close();
         return fullCommand;
     }
 

@@ -32,6 +32,9 @@ You can tag your tasks with a descriptor.
 ### Feature 9: Finding tags
 You can find all the tasks that have been tagged with a particular descriptor.
 
+### Feature 10: Closing the window
+You can close the window by typing bye.
+
 ## Usage
 
 ### `todo` - Adds a *Todo* to the list
@@ -209,3 +212,16 @@ These tasks are #cs2103!
     [E][NOT DONE] meeting #important #cs2103 (at: 12th SEPTEMBER 2019, 4pm to 12th SEPTEMBER 2019, 5pm)
 ```
 
+### `bye` - Closes the application window
+Closes the application window through user input.
+
+Format:
+
+`bye`
+
+Expected outcome: 
+
+```
+Bye. Hope to see you again soon!
+(application closes)
+```

@@ -1,7 +1,11 @@
 package command;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Storage;
 import duke.Ui;
+import javafx.application.Platform;
 import task.TaskList;
 
 /**
@@ -23,6 +27,19 @@ public class ExitCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showFarewellMessage();
+
+        Timer timer = new Timer();
+        timer.schedule(new ExitTask(), 1000); // 1 second
+    }
+
+    class ExitTask extends TimerTask {
+        /**
+         * Exits the application after five seconds.
+         */
+        @Override
+        public void run() {
+            Platform.exit();
+        }
     }
 
     /**

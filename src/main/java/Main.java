@@ -45,6 +45,14 @@ public class Main extends Application {
         }
     }
 
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        Duke.exitDuke();
+
+        System.exit(0);
+    }
+
     public static ByteArrayOutputStream getBaos() {
         return baos;
     }

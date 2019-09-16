@@ -14,8 +14,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
-`[D][Not done] CS2100 assignment (by: 7/10/2019 2359)`
+`Got it. I've added this task:`\n
+`[D][Not done] CS2100 assignment (by: 7/10/2019 2359)`\n
 `Now you have 1 tasks in the list.`
 
 ### Deleting a task
@@ -31,8 +31,8 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:`
-` [D][Not done] CS2100 assignment (by: 7/10/2019 2359)`
+`Noted. I've removed this task:`\n
+` [D][Not done] CS2100 assignment (by: 7/10/2019 2359)`\n
 `Now you have 0 tasks in the list.`
 
 ### List
@@ -44,8 +44,8 @@ Lists out all the tasks in the list
 
 Expected outcome:
 
-`Here are the tasks in your list:`
-`1. [D][Not done] CS2100 assignment (by: 7/10/2019 2359)`
+`Here are the tasks in your list:`\n
+`1. [D][Not done] CS2100 assignment (by: 7/10/2019 2359)`\n
 `2. [T][Done] Read book`
 
 
@@ -62,7 +62,7 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`
+`Nice! I've marked this task as done:`\n
 `[D][Done] CS2100 assignment (by: 7/10/2019 2359)`
 
 ### Find task
@@ -78,7 +78,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:`
+`Here are the matching tasks in your list:`\n
 `1. [D][Done] CS2100 assignment (by: 7/10/2019 2359)`
 
 ### Undo task
@@ -91,6 +91,6 @@ Undos the last modification carried out on the list.
 
 Expected outcome:
 
-`The last action was undone :)`
-`Here are the tasks in your list:`
+`The last action was undone :)`\n
+`Here are the tasks in your list:`\n
 `1. [D][Not done] CS2100 assignment (by: 7/10/2019 2359)`

@@ -40,6 +40,9 @@ You can find a task that is in the list using keywords.
 You can sort the tasks in the list in the order *Todo*, *Deadline* and *Event*.
 *Deadline* and *Event* tasks are sorted in chronological order.
 
+### Feature 9: Exit Duke
+You can exit the application when you have finished managing your tasks.
+
 ## Usage
 
 ### `todo` - Adds *Todo* task
@@ -162,7 +165,7 @@ Here are the tasks in your list:
 
 ### `find` - Finds tasks
 
-Find all tasks that are in the list that contains the given keyword. 
+Finds all tasks that are in the list that contains the given keyword. 
 
 Format: `find KEYWORD`
 
@@ -199,4 +202,20 @@ Here are the tasks in your list:
     5.[D][Not Done] study for test (by: 18th of SEPTEMBER 2019)
     6.[E][Not Done] carnival (at: 17th of SEPTEMBER, 8pm to 17th of SEPTEMBER, 10pm)
     7.[E][Not Done] presentation (at: 18th of SEPTEMBER, 9am)
+```
+
+### `bye` - Exits Duke
+
+Exits the task manager.
+
+Format: `bye`
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+```
+Bye. Hope to see you again soon!
 ```

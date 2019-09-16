@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.*;
 import duke.task.*;
 import duke.ui.*;
 import duke.storage.*;
@@ -19,12 +20,12 @@ public class AddDeadlineCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         if (tasklist.size() >= 100) {
-            ui.sendMessage("You can add no more than 100 tasks!");
+            throw new ListFullException();
         } else {
             DateTime dateTime = new DateTime(deadline);
-            tasklist.add(new Deadline(task, dateTime.toString()));
+            tasklist.add(new Deadline(task, dateTime.toReformat()));
             Task thing = tasklist.get(tasklist.size() - 1);
             ui.sendMessage("Got it. I've added this task: ");
             ui.sendMessage("  " + thing.toString());

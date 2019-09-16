@@ -15,9 +15,9 @@ public class Deadline extends Task {
     // overrides toString method in Task
     public String toString() {
         if (isDone) {
-            return "[D][" + "\u2713" + "] " + super.toString() + "(by:" + by + ")";
+            return "[D][" + "/" + "] " + super.toString() + "(by:" + by + ")";
         } else {
-            return "[D][" + "\u2718" + "] " + super.toString() + "(by:" + by + ")";
+            return "[D][" + "x" + "] " + super.toString() + "(by:" + by + ")";
         }
     }
 

@@ -15,9 +15,9 @@ public class Event extends Task {
     // overrides toString method in Task
     public String toString() {
         if (isDone) {
-            return "[E][" + "\u2713" + "] " + super.toString() + "(at:" + at + ")";
+            return "[E][" + "/" + "] " + super.toString() + "(at:" + at + ")";
         } else {
-            return "[E][" + "\u2718" + "] " + super.toString() + "(at:" + at + ")";
+            return "[E][" + "x" + "] " + super.toString() + "(at:" + at + ")";
         }
     }
 

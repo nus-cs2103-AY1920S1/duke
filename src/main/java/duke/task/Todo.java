@@ -11,9 +11,9 @@ public class Todo extends Task {
     // overrides toString method in Task
     public String toString() {
         if (isDone) {
-            return "[T][" + "\u2713" + "] " + super.toString();
+            return "[T][" + "/" + "] " + super.toString();
         } else {
-            return "[T][" + "\u2718" + "] " + super.toString();
+            return "[T][" + "x" + "] " + super.toString();
         }
     }
 

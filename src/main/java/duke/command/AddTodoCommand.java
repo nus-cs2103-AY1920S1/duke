@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.*;
 import duke.task.*;
 import duke.ui.*;
 import duke.storage.*;
@@ -16,9 +17,9 @@ public class AddTodoCommand extends Command{
         return false;
     }
 
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         if (tasklist.size() >= 100) {
-            ui.sendMessage("You can add no more than 100 tasks!");
+            throw new ListFullException();
         } else {
             tasklist.add(new Todo(item));
             Task thing = tasklist.get(tasklist.size() - 1);

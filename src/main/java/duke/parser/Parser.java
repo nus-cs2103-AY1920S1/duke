@@ -49,10 +49,18 @@ public class Parser {
             } else {
                 // take 2nd word onwards
                 String item = splitStr[1];
-                String[] data = item.split("/by", 2);
-                String task = data[0];
-                String deadline = data[1];
-                command = new AddDeadlineCommand(task, deadline);
+                try {
+                    String[] data = item.split("/by", 2);
+                    if (data.length == 2 && !data[1].isEmpty() && !data[1].equals(" ")) {
+                        String task = data[0];
+                        String deadline = data[1];
+                        command = new AddDeadlineCommand(task, deadline);
+                    } else {
+                        throw new MissingDateTimeException();
+                    }
+                } catch (Exception e) {
+                    throw new MissingDateTimeException();
+                }
             }
         } else if (fullCommand.startsWith("event")) {
             // split command at first space
@@ -63,10 +71,18 @@ public class Parser {
             } else {
                 // take 2nd word onwards
                 String item = splitStr[1];
-                String[] data = item.split("/at", 2);
-                String task = data[0];
-                String time = data[1];
-                command = new AddEventCommand(task, time);
+                try {
+                    String[] data = item.split("/at", 2);
+                    if (data.length == 2 && !data[1].isEmpty() && !data[1].equals(" ")) {
+                        String task = data[0];
+                        String time = data[1];
+                        command = new AddEventCommand(task, time);
+                    } else {
+                        throw new MissingDateTimeException();
+                    }
+                } catch (Exception e) {
+                    throw new MissingDateTimeException();
+                }
             }
         } else if (fullCommand.startsWith("delete")) {
             // to identify which task completed, split command at space

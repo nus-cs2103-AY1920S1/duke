@@ -1,5 +1,7 @@
 package duke.format;
 
+import duke.exception.*;
+
 public class DateTime {
 
     String dateTime;
@@ -12,23 +14,33 @@ public class DateTime {
         this.dateTime = dateTime.strip();
     }
 
-    public String toString() {
+    public String toReformat() throws DukeException {
         reformat(dateTime);
         return " " + day + " of " + month + " " + year + ", " + time;
     }
 
-    public void reformat(String dateTime) {
+    public void reformat(String dateTime) throws DukeException {
         String[] splitStr = dateTime.split("/", 3);
-        reformatDay(splitStr[0]);
-        reformatMonth(splitStr[1]);
-        String[] splitTime = splitStr[2].split(" ", 2);
-        reformatYear(splitTime[0]);
-        reformatTime(splitTime[1]);
+        if (splitStr.length < 3) {
+            throw new InvalidDateTimeException();
+        } else {
+            reformatDay(splitStr[0]);
+            reformatMonth(splitStr[1]);
+            String[] splitTime = splitStr[2].split(" ", 2);
+            if (splitTime.length < 2) {
+                throw new InvalidDateTimeException();
+            } else {
+                reformatYear(splitTime[0]);
+                reformatTime(splitTime[1]);
+            }
+        }
     }
 
-    public void reformatDay(String split) {
+    public void reformatDay(String split) throws DukeException {
         int i = Integer.parseInt(split);
-        if (i == 11 || i == 12 || i == 13) {
+        if (i > 31 || i < 1) {
+            throw new InvalidDateTimeException();
+        } else if (i == 11 || i == 12 || i == 13) {
             day = split + "th";
         } else if (i % 10 == 1) {
             day = split + "st";
@@ -41,7 +53,7 @@ public class DateTime {
         }
     }
 
-    public void reformatMonth(String split) {
+    public void reformatMonth(String split) throws DukeException {
         int i = Integer.parseInt(split);
         switch (i) {
         case 1:
@@ -68,7 +80,7 @@ public class DateTime {
         case 8:
             month = "August";
             break;
-        case 9 :
+        case 9:
             month = "September";
             break;
         case 10:
@@ -80,6 +92,8 @@ public class DateTime {
         case 12:
             month = "December";
             break;
+        default:
+            throw new InvalidDateTimeException();
         }
     }
 
@@ -87,11 +101,13 @@ public class DateTime {
         year = split;
     }
 
-    public void reformatTime(String split) {
+    public void reformatTime(String split) throws DukeException{
         int t = Integer.parseInt(split);
         int min = t % 100;
         int hr = t / 100;
-        if (hr == 0) {
+        if (t > 2359) {
+            throw new InvalidDateTimeException();
+        } else if (hr == 0) {
             if (min == 0) {
                 time = "12am";
             } else if (min <= 9) {

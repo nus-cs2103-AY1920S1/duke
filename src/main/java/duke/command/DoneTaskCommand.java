@@ -17,21 +17,18 @@ public class DoneTaskCommand extends Command {
         return false;
     }
 
-    public void execute(TaskList tasklist, Ui ui, Storage storage) {
+    public void execute(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
         // convert string to int
         int index = Integer.parseInt(itemIndex) - 1;
-        try {
-            if (index < 0 || index >= tasklist.size()) {
-                throw new InvalidIndexException();
-            } else {
-                Task item = tasklist.get(index);
-                // tick completed task
-                item.setDone();
-                ui.sendMessage("Nice! I've marked this task as done: ");
-                ui.sendMessage("  " + item.toString());
-            }
-        } catch (DukeException error) {
-            ui.sendMessage(error.toString());
+        if (index < 0 || index >= tasklist.size()) {
+            throw new InvalidIndexException();
+        } else {
+            Task item = tasklist.get(index);
+            // tick completed task
+            item.setDone();
+            ui.sendMessage("Nice! I've marked this task as done: ");
+            ui.sendMessage("  " + item.toString());
         }
     }
+
 }

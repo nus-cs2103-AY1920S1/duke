@@ -26,7 +26,7 @@ public class Ui {
      */
     public String showSeparationLine() {
         StringBuilder lineBuilder = new StringBuilder("     ");
-        for (int i = 0; i < 59; i++) {
+        for (int i = 0; i < 54; i++) {
             lineBuilder.append("_");
         }
         lineBuilder.append("\n");
@@ -109,14 +109,14 @@ public class Ui {
      */
     public String showAdd(Task task, int size) {
         assert size >= 0 : "size of taskList must be at least zero";
-        StringBuilder tempBuilder = new StringBuilder();
-        tempBuilder.append(this.showSeparationLine());
-        tempBuilder.append("      Got it. I've added this task:\n       ");
-        tempBuilder.append(task);
-        tempBuilder.append("\n      Now you have " + size + " tasks in the list.\n");
-        tempBuilder.append(this.showSeparationLine());
-        tempBuilder.append(this.showBlankLine());
-        return tempBuilder.toString();
+        StringBuilder addBuilder = new StringBuilder();
+        addBuilder.append(this.showSeparationLine());
+        addBuilder.append("      Got it. I've added this task:\n       ");
+        addBuilder.append(task);
+        addBuilder.append("\n      Now you have " + size + " tasks in the list.\n");
+        addBuilder.append(this.showSeparationLine());
+        addBuilder.append(this.showBlankLine());
+        return addBuilder.toString();
     }
     public String showMatchingTasks(ArrayList<Task> listOfMatches) {
         StringBuilder tasksBuilder = new StringBuilder();

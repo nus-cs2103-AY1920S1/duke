@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="69.0" prefWidth="534.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="460.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="dialog" alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="458.0" text="Here are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the listHere are your tasks in the " wrapText="true">
-         <font>
-            <Font name="Lao MN" size="12.0" />
-         </font>
+      <VBox alignment="CENTER" prefHeight="128.0" prefWidth="484.0">
+         <children>
+            <Text fx:id="dialog" fill="#323232" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="346.0">
+               <font>
+                  <Font name="Lao MN" size="12.3" />
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Text>
+         </children>
          <HBox.margin>
-            <Insets />
-         </HBox.margin></Label>
-      <ImageView fx:id="displayPicture" fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+            <Insets bottom="13.0" top="10.0" />
+         </HBox.margin>
+      </VBox>
+      <ImageView fx:id="displayPicture" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
          <HBox.margin>
-            <Insets />
+            <Insets bottom="9.0" />
          </HBox.margin></ImageView>
    </children>
-   <padding>
-      <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-   </padding>
 </fx:root>

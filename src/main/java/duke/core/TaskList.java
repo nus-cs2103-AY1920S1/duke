@@ -58,7 +58,7 @@ public class TaskList {
         try {
             return tasks.get(i - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(" \u2639  OOPS!!! The task does not exist :-(");
+            throw new DukeException("OOPS!!! The task does not exist :-(");
         }
     }
 
@@ -78,7 +78,7 @@ public class TaskList {
      */
     public void removeTask(int i) {
         assert i >= 1 : "Task ID starts from 1";
-            tasks.remove(i - 1);
+        tasks.remove(i - 1);
     }
 
     /**
@@ -100,7 +100,7 @@ public class TaskList {
             } else if (t instanceof Event) {
                 ((Event) t).updateOccurTime(newValue);
             } else {
-                throw new DukeException(" \u2639  OOPS!!! Normal tasks do not have a time attribute.");
+                throw new DukeException("OOPS!!! Normal tasks do not have a time attribute.");
             }
         }
     }

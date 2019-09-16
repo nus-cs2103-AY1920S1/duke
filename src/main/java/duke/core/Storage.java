@@ -49,21 +49,21 @@ public class Storage {
                 String[] words = nextLine.split(" \\| ");
                 if (words[0].equals("T")) {
                     Task t = new NormalTask(words[2]);
-                    if (words[1].equals("✓")) {
+                    if (words[1].equals("O")) {
                         t.markAsDone();
                     }
                     tasks.add(t);
                 }
                 if (words[0].equals("D")) {
                     Task t = new Deadline(words[2], words[3]);
-                    if (words[1].equals("✓")) {
+                    if (words[1].equals("O")) {
                         t.markAsDone();
                     }
                     tasks.add(t);
                 } 
                 if (words[0].equals("E")) {
                     Task t = new Event(words[2], words[3]);
-                    if (words[1].equals("✓")) {
+                    if (words[1].equals("O")) {
                         t.markAsDone();
                     }
                     tasks.add(t);

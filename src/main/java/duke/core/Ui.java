@@ -211,6 +211,7 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> list = tasks.getList();
         list.forEach(t -> sb.append(list.indexOf(t) + 1 + "." + t + "\n"));
+        sb.setLength(sb.length() - 1);
         return "Here are the tasks in your list:\n" + sb.toString();
     }
 
@@ -262,6 +263,7 @@ public class Ui {
                 .filter(t -> t.toString().contains(keyword))
                 .collect(Collectors.toList());
         results.forEach(t -> sb.append(results.indexOf(t) + 1 + "." + t + "\n"));
+        sb.setLength(sb.length() - 1);
         return "Here are the matching tasks in your list:\n" + sb.toString();
     }
 

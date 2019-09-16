@@ -15,7 +15,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -23,6 +22,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -31,7 +31,7 @@ import javafx.scene.paint.Color;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -68,11 +68,13 @@ public class DialogBox extends HBox {
      * @return A dialog box that contains the user's instruction.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox userDialog =  new DialogBox(text, img);
+        String indentation = String.format("%33s", "");
+        DialogBox userDialog =  new DialogBox(indentation + text, img);
         userDialog.setBackground(new Background(new BackgroundFill(
                 Color.rgb(187,210, 240),
                 new CornerRadii(10),
-                new Insets(5,60,5,2))));
+                new Insets(0,35,5,10))));
+        userDialog.setAlignment(Pos.CENTER);
         return userDialog;
     }
 
@@ -88,7 +90,7 @@ public class DialogBox extends HBox {
         dukeDialog.setBackground(new Background(new BackgroundFill(
                 Color.rgb(240,187, 231),
                 new CornerRadii(10),
-                new Insets(5,2,5,60))));
+                new Insets(0,5,5,35))));
         dukeDialog.flip();
         return dukeDialog;
     }

@@ -49,7 +49,7 @@ public class MainWindow extends AnchorPane {
     /**
      * Shows the welcome message in the GUI.
      */
-    public void showWelcome(){
+    public void showWelcome() {
         String welcomeMessage = new Ui().showWelcomeGui();
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(

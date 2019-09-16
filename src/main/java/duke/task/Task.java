@@ -28,10 +28,10 @@ public abstract class Task {
     /**
      * Returns an icon that represents the status of the task.
      *
-     * @return Tick if completed, cross if uncompleted.
+     * @return Circle if completed, cross if uncompleted.
      */
     protected String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "O" : "X"); //return circle or X symbols
     }
 
     /**

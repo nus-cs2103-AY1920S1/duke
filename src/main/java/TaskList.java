@@ -66,7 +66,7 @@ public class TaskList {
      * @return list of tasks
      */
     public String showTaskList() {
-        String message = "Here are the tasks in your list:";
+        String message = "Yip! Here are the tasks in your list:";
         for (int i = 0; i < list.size(); i++) {
             message += "\n" + (i + 1) + "." + list.get(i);
         }
@@ -80,7 +80,7 @@ public class TaskList {
      * @return list of tasks with matching search term
      */
     public String searchTaskList(String searchTerm) {
-        String message = "Here are the matching tasks in your list:";
+        String message = "Bork! Here are the matching tasks in your list:";
         int noOfSearches = 1;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).getDescription().contains(searchTerm)) {

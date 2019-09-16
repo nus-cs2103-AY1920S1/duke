@@ -32,7 +32,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
          */
-        final String startMessage = "Hello! I'm Duke, Your Task Assistant.\n"
+        final String startMessage = "Hello! I'm Duke, Your Task Assistant Dog.\n"
                 + "What can I do for you?\n" + "If you need help, type help in the field.";
         return startMessage;
     }
@@ -43,7 +43,7 @@ public class Ui {
      * @return goodbye message
      */
     public String showGoodbye() {
-        String endMessage = "Bye. Hope to see you again!";
+        String endMessage = "Woof! Hope to see you again!";
         return endMessage;
     }
 
@@ -65,7 +65,7 @@ public class Ui {
      * @return Message of successful add
      */
     public String showAdd(Task task, int listSize) {
-        String message = "Got it. I've added this task:\n" + task
+        String message = "Bark! I've added this task:\n" + task
                 + "\nNow you have " + listSize + " tasks in the list.";
         return message;
     }
@@ -77,7 +77,7 @@ public class Ui {
      * @return Message of marking done
      */
     public String showDone(Task task) {
-        String message = "Nice! I've marked this task as done:\n"
+        String message = "Ruff! I've marked this task as done:\n"
                 + task;
         return message;
     }
@@ -90,7 +90,7 @@ public class Ui {
      * @return Message of successful deletion
      */
     public String showDelete(Task task, int listSize) {
-        String message = "Noted. I've removed this task:\n" + task
+        String message = "Arf! I've removed this task:\n" + task
                 + "\nNow you have " + listSize + " tasks in the list.";
         return message;
     }

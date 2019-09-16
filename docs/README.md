@@ -2,8 +2,8 @@
 Duke is ~~an anime girl on your computer~~ a simple chatbot that helps you track your tasks and whether you've completed them.
 
 ## Getting Duke
-You can get Duke on your computer by downloading the latest .jar file under releases.<br>
-As Duke was developed on JDK 11, and as such it's recommended that you have Java SE 11 or later installed on your computer before running Duke.<br>
+You can get Duke on your computer by downloading the latest .jar file under releases.<br><br>
+As Duke was developed on JDK 11, and as such it's recommended that you have Java SE 11 or later installed on your computer before running Duke.<br><br>
 Alternatively, you can clone the repo. Then from the root folder, execute the command:
 ```
 gradlew run
@@ -72,8 +72,8 @@ You've got 3 task(s) on your list.
 ![deadline example 3](https://raw.github.com/Chenggeng97/duke/master/docs/deadline3.png)
 
 ### `event` - Creates an new event task in memory
-Duke will create a new Event Task and store it within its memory.
-The input dates should be pre-fixed by an `at`.
+Duke will create a new Event Task and store it within its memory.<br>
+The input dates should be pre-fixed by an `at`.<br>
 You may enter up to two pairs of date-times. The two dates should be split by a `to`.
 
 Example usage:
@@ -265,11 +265,11 @@ Good luck, and do your best!
 ```
 
 ## Authors
-Damith C. Rajapakse - _Module Coordinator_
-Cheng Geng - _Developer of Duke_
+- Damith C. Rajapakse - _Module Coordinator_
+- Cheng Geng - _Developer of Duke_
 
 ## Built With
-- Gradle: for dependency management
+- [Gradle!](https://gradle.org/): for dependency management
 
 ## Acknowledgements
 - People on StackExchange who asked the same questions as me on 5 years ago

@@ -107,7 +107,7 @@ public class Parser {
 
     // parses the arguments for remaining parameters to construct a EventCommand object
     private static EventCommand parseEventCommand(String[] parameters) throws DukeException {
-        assert(parameters[0].equals("event"));
+        assert (parameters[0].equals("event"));
         try {
             String[] deadlineParams = parameters[1].split(" /at ", 2);
             DateTime at = DateTime.parseString(deadlineParams[1]);

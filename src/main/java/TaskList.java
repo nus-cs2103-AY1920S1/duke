@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,8 @@ public class TaskList {
      * @param storage To be read from or written to.
      */
     public TaskList(Storage storage) {
-        this.tasklist = new ArrayList<Task>();
         this.storage = storage;
+        this.tasklist = storage.readInputFile();
     }
 
     /**
@@ -34,53 +35,51 @@ public class TaskList {
         final String COMMAND = modifiedTask[0];
         final String DESCRIPTION = modifiedTask[1];
         final String DATE = modifiedTask[2];
-        switch (COMMAND) {
-        case "todo":
-            ToDo todo = new ToDo(DESCRIPTION);
-            tasklist.add(todo);
-            statement = "Got it. I've added this task:\n  " + todo + "\nNow you have " + Task.getCurrTotal()
+        try {
+            switch (COMMAND) {
+                case "todo":
+                    ToDo todo = new ToDo(DESCRIPTION);
+                    tasklist.add(todo);
+                    statement = "Got it. I've added this task:\n  " + todo + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
-            storage.save(tasklist);
-            break;
-        case "deadline":
-            Deadline deadline = new Deadline(DESCRIPTION, DATE);
-            tasklist.add(deadline);
-            statement = "Got it. I've added this task:\n  " + deadline + "\nNow you have " + Task.getCurrTotal()
+                    storage.save(tasklist);
+                    return statement;
+                case "deadline":
+                    Deadline deadline = new Deadline(DESCRIPTION, DATE);
+                    tasklist.add(deadline);
+                    statement = "Got it. I've added this task:\n  " + deadline + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
-            storage.save(tasklist);
-            break;
-        case "event":
-            Event event = new Event(DESCRIPTION, DATE);
-            tasklist.add(event);
-            statement = "Got it. I've added this task:\n  " + event + "\nNow you have " + Task.getCurrTotal()
+                    storage.save(tasklist);
+                    return statement;
+                case "event":
+                    Event event = new Event(DESCRIPTION, DATE);
+                    tasklist.add(event);
+                    statement = "Got it. I've added this task:\n  " + event + "\nNow you have " + Task.getCurrTotal()
                             + " tasks in the list.";
-            storage.save(tasklist);
-            break;
-        case "list":
-            statement = checkList();
-            break;
-        case "done":
-            statement = complete(Integer.parseInt(DESCRIPTION));
-            storage.save(tasklist);
-            break;
-        case "delete":
-            statement = delete(Integer.parseInt(DESCRIPTION));
-            storage.save(tasklist);
-        break;
-        case "find":
-            statement = findList(DESCRIPTION);
-            break;
-        case "bye":
-            statement = "bye";
-            break;
-        case "help":
-            statement = help();
-            break;
-        default:
-            statement = COMMAND;
-            break;
+                    storage.save(tasklist);
+                    return statement;
+                case "list":
+                    return checkList();
+                case "done":
+                    statement =  complete(Integer.parseInt(DESCRIPTION));
+                    storage.save(tasklist);
+                    return statement;
+                case "delete":
+                    statement = delete(Integer.parseInt(DESCRIPTION));
+                    storage.save(tasklist);
+                    return statement;
+                case "find":
+                    return findList(DESCRIPTION);
+                case "bye":
+                    return "bye";
+                case "help":
+                    return help();
+                default:
+                    return COMMAND;
+            }
+        } catch (IOException ioe) {
+            return ioe.getMessage().toString();
         }
-        return statement;
     }
 
     protected String checkList() {
@@ -111,7 +110,7 @@ public class TaskList {
     }
 
     protected String complete(int i) {
-        if (i >= tasklist.size()) {
+        if (i > tasklist.size()) {
             return "\u2639 OOPS!!! I'm sorry, but I have no such task in your list :-(";
         }
         Task t = this.tasklist.get(i - 1);
@@ -121,7 +120,7 @@ public class TaskList {
     }
 
     protected String delete(int i) {
-        if (i >= tasklist.size()) {
+        if (i > tasklist.size()) {
             return "\u2639 OOPS!!! I'm sorry, but I have no such task in your list :-(";
         }
         Task t = this.tasklist.remove(i - 1);
@@ -132,12 +131,12 @@ public class TaskList {
     }
 
     protected String help() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String header = "Hello from\n" + logo + "Hello! I'm Duke\n" + "Here are some tips:\n";
+        String logo = " ___     __   ____\n"
+                    + "|  __|  / _ \\ |  __ \\\n"
+                    + "| |  _  | | | | |  |  | |\n"
+                    + "| |_| | | |_| | |  |_| |\n"
+                    + "|___/  \\__/ |____/\n";
+        String header = "Hello from\n" + logo + "Hello! I'm God\n" + "Here are some tips:\n";
         String task = "To add a task, you begin with either \"todo\", \"deadline\" or \"event\".\nFollowing that, "
                 + "you can add the description of the task. (ie, \"todo read a book\".)\nIf your task is a deadline, "
                 + "you are required to add after the description, the date of the form \"/by DD/MM/YYYY\" or \"/by DD/M"

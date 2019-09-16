@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
  * @version 0.1.3
  */
 public class Duke extends Application {
-    private static Storage storage = new Storage("C:\\Users\\AngKa\\duke\\src\\main\\java\\test.txt");
+    private static Storage storage = new Storage();
     private static TaskList tasks = new TaskList(storage);
     private static UI ui = new UI();
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -117,10 +118,10 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
-        String dukeResponse = tasks.addTask(dukeText);
-        if (dukeResponse.equals("bye")) {
+        String dukeResponse = getResponse(userInput.getText());
+        if (duke.equals("bye")) {
             dukeResponse = ui.bye();
+            Platform.exit();
         }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
@@ -134,6 +135,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return input;
+        String dukeText = tasks.addTask(input);
+        return dukeText;
     }
 }

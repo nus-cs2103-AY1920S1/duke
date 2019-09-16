@@ -33,6 +33,19 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Displays a welcome message when the application first starts up.
+     */
+    public void displayGreeting() {
+        String logo = " ___     __   ____\n"
+                + "|  __|  / _ \\ |  __ \\\n"
+                + "| |  _  | | | | |  |  | |\n"
+                + "| |_| | | |_| | |  |_| |\n"
+                + "|___/  \\__/ |____/\n";
+        logo += "Hello! I'm God\n" + "Here are your tasks for today:\n" + duke.getResponse("list");
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(logo, dukeImage));
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

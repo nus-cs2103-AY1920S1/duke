@@ -8,6 +8,8 @@ public class ListItem {
 
     ListItem(String description, String command, String date) {
         try {
+            assert(!command.equals(""));
+            assert (!description.equals(""));
             switch (command) {
                 case "todo":
                 case "[T]":
@@ -51,10 +53,10 @@ public class ListItem {
     public String toString() {
         String toReturn;
         if (isDone) {
-            toReturn = "[✓] " + this.description;
+            toReturn = "[DONE] " + this.description;
         }
         else {
-            toReturn = "[✗] " + this.description;
+            toReturn = "[X] " + this.description;
         }
 
         return this.status + toReturn + this.date;

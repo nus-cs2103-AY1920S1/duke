@@ -35,6 +35,7 @@ public class TaskList {
      * @return Output string for Duke to print
      */
     static String removeFromTodo(String index) {
+        assert(lst.size() != 0);
         ListItem target = lst.get(Integer.parseInt(index) - 1);
         lst.remove(target);
         String ret = "Noted. I've removed this task:" + target + "\n" +
@@ -46,11 +47,12 @@ public class TaskList {
     public String toString() {
         String toReturn = "";
         for (int i = 0; i < TaskList.lst.size(); i++) {
-            toReturn = toReturn.concat((i + 1) + "." + TaskList.lst.get(i).toString() + "\n     ");
+            toReturn = toReturn.concat((i + 1) + "." + TaskList.lst.get(i).toString() + "\n");
         }
         if (TaskList.lst.size() < 1) {
             return "To do list is Empty :)";
         }
-        return toReturn.substring(0, toReturn.length() - 6);
+        assert(toReturn.length() > 6);
+        return toReturn.substring(0, toReturn.length());
     }
 }

@@ -4,7 +4,7 @@ package duke.command;
  * Handles any command that is not understandable by Duke.
  */
 public class DukeException extends Exception {
-    private final String _message = " OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private final String _message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
     private String _error;
 
     /**

@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Task is an abstract class that handles its conctrete subclasses,
+ * Task is an abstract class that handles its concrete subclasses,
  * ToDo, Deadline, and Event.
  *
  * A Task can have a status which can be marked as done, a method to

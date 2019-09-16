@@ -1,4 +1,4 @@
-package duke.command;
+package duke;
 
 import duke.data.DukeData;
 import duke.data.TaskList;
@@ -6,6 +6,7 @@ import duke.task.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * The Ui class handles all user interactions and is responsible for returning the correct
@@ -18,7 +19,28 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String LINE = "____________________________________________________________";
+    private static final String LINE = "________________________________________________";
+
+    private Scanner sc;
+
+    /**
+     * Creates a new Ui object.
+     */
+    public Ui() {
+        this.sc = new Scanner(System.in);
+    }
+
+    /**
+     * Checks if there is any new input made by the user.
+     * @return true is there is more input, and false otherwise
+     */
+    public boolean hasNextInput() {
+        return this.sc.hasNext();
+    }
+
+    public String getCommand() {
+        return this.sc.nextLine();
+    }
 
     /**
      * Greets the users, and asks users what they want Duke to do.
@@ -99,14 +121,14 @@ public class Ui {
 
     /**
      * Shows the user his data that is stored in the hard disk.
-     * @param data the DukeData object that stores the user's data from Duke program
+     * @param dukeData the DukeData object that stores the user's data from Duke program
+     * @return a String representation of the data present in the local Storage file
      * @throws IOException if an I/O Exception occurs
      */
-    public void showData(DukeData data) throws IOException {
-        System.out.println(LINE);
-        data.printDataFile();
-        System.out.println(LINE);
-        System.out.println();
+    public String showData(DukeData dukeData) throws IOException {
+        String data = String.format("This is the list of tasks stored in your local storage disc:%s",
+                dukeData.showDataFile());
+        return addLines(data);
     }
 
     /**
@@ -139,8 +161,7 @@ public class Ui {
      * @return a String representation of the output with the lines
      */
     public static String addLines(String cmd) {
-        String out = String.format("%s%n %s%n%s%n",
-                LINE, cmd, LINE);
+        String out = String.format("%s%n%s%n", cmd, LINE);
         return out;
     }
 }

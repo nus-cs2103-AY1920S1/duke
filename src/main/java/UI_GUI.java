@@ -1,3 +1,5 @@
+import javafx.scene.layout.Background;
+import javafx.stage.StageStyle;
 import ui.UI;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -27,10 +29,10 @@ public class UI_GUI extends Application implements UI {
     @Override
     public void printWelcome() {
         String welcome = "Hello! I'm Duke!\n"
-                + "What can I do for you?\n";
+                + "What can I do for you? :)\n";
         Label dukeText = new Label(welcome);
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke_image))
+                DialogBox.getWelcomeDialog(dukeText, new ImageView(duke_image))
         );
 
     }
@@ -53,7 +55,6 @@ public class UI_GUI extends Application implements UI {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
-        scrollPane.setStyle("-fx-background-color: #C0C0C0");
 
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -67,12 +68,12 @@ public class UI_GUI extends Application implements UI {
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinHeight(1100.0);
+        stage.setMinWidth(800.0);
 
-        mainLayout.setPrefSize(800.0, 600.0);
+        mainLayout.setPrefSize(1100.0, 800.0);
 
-        scrollPane.setPrefSize(785, 535);
+        scrollPane.setPrefSize(1085, 735);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -82,7 +83,7 @@ public class UI_GUI extends Application implements UI {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(725.0);
+        userInput.setPrefWidth(1025.0);
 
         sendButton.setPrefWidth(55.0);
 

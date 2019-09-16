@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * Controller class that operates on user's task data.
- * */
+ */
 public class TasksController {
     private Storage storage;
     private TasksView view;
@@ -25,7 +25,8 @@ public class TasksController {
 
     /**
      * TaskListController constructor.
-     * @param ui ui interface for I/O
+     *
+     * @param ui      ui interface for I/O
      * @param storage storage to read and write files
      */
     private TasksController(Storage storage, UiController ui) {
@@ -40,6 +41,7 @@ public class TasksController {
 
     /**
      * Gets tasks.
+     *
      * @return list of tasks.
      */
     public List<Task> getTasks() throws StorageException {
@@ -48,6 +50,7 @@ public class TasksController {
 
     /**
      * Adds tasks and prints corresponding feedback.
+     *
      * @param task task to be added.
      */
     public void addTask(Task task, boolean displayMessage) throws UiException {
@@ -69,6 +72,7 @@ public class TasksController {
 
     /**
      * Sets a duke.task to done and prints corresponding feedback.
+     *
      * @param index index of task to be set to done.
      */
     public Optional<Task> setTaskToDone(int index) throws UiException {
@@ -106,6 +110,7 @@ public class TasksController {
 
     /**
      * Deletes a task and prints corresponding feedback.
+     *
      * @param index index of task to be deleted.
      */
     public Optional<Task> deleteTask(int index) throws UiException {
@@ -134,6 +139,7 @@ public class TasksController {
 
     /**
      * Finds tasks containing a substring and prints corresponding feedback.
+     *
      * @param parameter substring to be searched.
      */
     public void findTasks(String parameter) throws UiException {
@@ -154,9 +160,10 @@ public class TasksController {
 
     /**
      * Delete a task by its uuid.
-     * @param uuid uuid of task
+     *
+     * @param uuid         uuid of task
      * @param printMessage toggles printing of action
-     * @throws UiException if ui fails unexpectedly
+     * @throws UiException            if ui fails unexpectedly
      * @throws NoSuchElementException if uuid does not exist
      */
     public void deleteTaskByUuid(UUID uuid, boolean printMessage) throws UiException, NoSuchElementException {
@@ -182,8 +189,9 @@ public class TasksController {
 
     /**
      * Sets a task to undone by its uuid.
+     *
      * @param uuid uuid of task
-     * @throws UiException if ui fails unexpectedly
+     * @throws UiException            if ui fails unexpectedly
      * @throws NoSuchElementException if uuid does not exist
      */
     public void setTaskToUndoneByUuid(UUID uuid) throws UiException, NoSuchElementException {
@@ -228,4 +236,31 @@ public class TasksController {
         }
     }
 
+    public Optional<Task> replaceTask(Task task, int index) throws UiException {
+        try {
+            List<Task> tasks = storage.getTasks();
+
+            Task replaced = tasks.remove(index);
+            tasks.add(index, task);
+            view.displayTaskReplaced(replaced, task, ui);
+
+            assert !tasks.contains(replaced);
+            assert tasks.contains(task);
+
+            storage.writeTasks(tasks);
+
+            return Optional.of(replaced);
+
+        } catch (StorageException e) {
+
+            ui.displayOutput(e.getMessage());
+            return Optional.empty();
+
+        } catch (IndexOutOfBoundsException e) {
+            String message = " ☹ OOPS!!! You have entered an invalid index :-(";
+
+            ui.displayOutput(message);
+            return Optional.empty();
+        }
+    }
 }

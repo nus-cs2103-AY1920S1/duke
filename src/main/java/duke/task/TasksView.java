@@ -128,4 +128,20 @@ public class TasksView {
         String output = builder.build();
         ui.displayOutput(output);
     }
+
+    public void displayTaskReplaced(Task replaced, Task task,  UiController ui) throws UiException {
+        OutputBuilder builder = new OutputBuilder();
+        builder.append("Noted. I have replaced the task:")
+                .newLine()
+                .indent()
+                .append(replaced.getDescription())
+                .newLine()
+                .append("with:")
+                .newLine()
+                .indent()
+                .append(task.getDescription());
+
+        String output = builder.build();
+        ui.displayOutput(output);
+    }
 }

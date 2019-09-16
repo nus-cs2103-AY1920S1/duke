@@ -1,4 +1,4 @@
-import UserInterface.UI;
+import ui.UI;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -25,8 +25,8 @@ public class UI_GUI extends Application implements UI {
 
     @Override
     public void printWelcome() {
-        String welcome = "Hello! I'm Duke!\n" +
-                "What can I do for you?\n";
+        String welcome = "Hello! I'm Duke!\n"
+                + "What can I do for you?\n";
         Label dukeText = new Label(welcome);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke_image))
@@ -87,7 +87,7 @@ public class UI_GUI extends Application implements UI {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -119,7 +119,6 @@ public class UI_GUI extends Application implements UI {
         printWelcome();
 
 
-
     }
 
     private Label getDialogLabel(String text) {
@@ -130,7 +129,7 @@ public class UI_GUI extends Application implements UI {
         return textToAdd;
     }
 
-    private void handleUserInput(){
+    private void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -139,10 +138,10 @@ public class UI_GUI extends Application implements UI {
         );
         userInput.clear();
 
-        if(duke.isExit()){
-            try{
+        if (duke.isExit()) {
+            try {
                 Thread.sleep(1000);
-            } catch (Exception E){
+            } catch (Exception E) {
                 System.out.println("Wait failed");
             }
 

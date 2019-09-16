@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-public class todo extends Task{
+public class todo extends Task {
     private final char symbol = 'T';
 
     public todo(String description) {

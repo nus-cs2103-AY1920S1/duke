@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public abstract class Task {
     private String description;
@@ -9,39 +9,39 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public boolean isDone(){
+    public boolean isDone() {
         return this.isDone;
     }
 
-    public char getIsDoneSymbol(){
-        if(isDone){
+    public char getIsDoneSymbol() {
+        if (isDone) {
             return '\u2714';    //check mark symbol
         } else {
             return '\u2718';    //cross mark symbol
         }
     }
 
-    public void setIsDone(boolean isDone){
+    public void setIsDone(boolean isDone) {
         this.isDone = isDone;
     }
 
-    public boolean markAsDone(){
+    public boolean markAsDone() {
         return this.isDone = true;
     }
 
-    public boolean markAsUndone(){
+    public boolean markAsUndone() {
         return this.isDone = false;
     }
 
-    public char getSymbol(){
+    public char getSymbol() {
         return '?';
     }
 
-    public String getDetails(){
+    public String getDetails() {
         return null;
     }
 

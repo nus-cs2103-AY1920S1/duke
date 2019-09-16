@@ -1,9 +1,9 @@
-package UserInterface;
+package ui;
 
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class UI_CLI implements UI{
+public class UI_CLI implements UI {
 
     private final Scanner sc;
     private final PrintStream output = System.out;
@@ -29,7 +29,7 @@ public class UI_CLI implements UI{
     }
 
 
-    public void printContent(String content){
+    public void printContent(String content) {
         printHorizontalLine();
         println(content);
         printHorizontalLine();
@@ -39,7 +39,7 @@ public class UI_CLI implements UI{
         output.println("____________________________________________________________");
     }
 
-    public String getUserInput(){
+    public String getUserInput() {
         return sc.nextLine();
     }
 }

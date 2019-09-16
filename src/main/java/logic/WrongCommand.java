@@ -1,8 +1,8 @@
-package Logic;
+package logic;
 
-import Model.Tasklist;
-import Storage.Storage;
-import UserInterface.UI;
+import model.Tasklist;
+import storage.Storage;
+import ui.UI;
 
 public class WrongCommand implements Command {
     @Override
@@ -10,7 +10,6 @@ public class WrongCommand implements Command {
         String content = "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         return content;
     }
-
 
     @Override
     public boolean isExit() {

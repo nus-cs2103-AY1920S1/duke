@@ -1,10 +1,10 @@
-package Logic;
+package logic;
 
-import Model.Task;
-import Model.Tasklist;
-import Model.event;
-import Storage.Storage;
-import UserInterface.UI;
+import model.Task;
+import model.Tasklist;
+import model.event;
+import storage.Storage;
+import ui.UI;
 
 public class EventCommand implements Command {
     private String arguments;
@@ -13,15 +13,16 @@ public class EventCommand implements Command {
 
     /**
      * Creates an instance of EventCommand with its arguments
+     *
      * @param arguments arguments of the Command
      */
-    public EventCommand(String arguments){
+    public EventCommand(String arguments) {
         this.arguments = arguments;
-        try{
+        try {
             String[] sp = arguments.split(" /at ", 2);
             this.description = sp[0];
             this.details = sp[1];
-        } catch(Exception E){
+        } catch (Exception E) {
             this.description = arguments;
             this.details = null;
         }
@@ -29,22 +30,23 @@ public class EventCommand implements Command {
 
     /**
      * Parses the arguments of the Command and executes it
-     * @param tasks     the TaskList of Tasks
-     * @param ui        The User Interface
-     * @param storage   Storage
+     *
+     * @param tasks   the TaskList of Tasks
+     * @param ui      The User Interface
+     * @param storage Storage
      * @return
      */
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";
-        if(arguments == null){
+        if (arguments == null) {
             content = "OOPS!!! The description of a event cannot be empty.";
         } else {
             Task task = new event(description, details);
             tasks.add(task);
 
             content = content.concat("Got it. I've added this task:\n");
-            if(details != null){
+            if (details != null) {
                 content = content.concat("[E][x] " + task.getDescription() + " (at: " + task.getDetails() + ")\n");
             } else {
                 content = content.concat("[E][x] " + task.getDescription() + "\n");

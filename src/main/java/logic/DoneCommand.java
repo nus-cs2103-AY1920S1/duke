@@ -1,25 +1,27 @@
-package Logic;
+package logic;
 
-import Model.Tasklist;
-import Storage.Storage;
-import UserInterface.UI;
+import model.Tasklist;
+import storage.Storage;
+import ui.UI;
 
-public class DoneCommand implements Command{
+public class DoneCommand implements Command {
     private String arguments;
 
     /**
      * Creates an instance of DoneCommand with its arguments
+     *
      * @param arguments arguments of the Command
      */
-    public DoneCommand(String arguments){
+    public DoneCommand(String arguments) {
         this.arguments = arguments;
     }
 
     /**
      * Parses the arguments of the Command and executes it
-     * @param tasks     the TaskList of Tasks
-     * @param ui        The User Interface
-     * @param storage   Storage
+     *
+     * @param tasks   the TaskList of Tasks
+     * @param ui      The User Interface
+     * @param storage Storage
      * @return
      */
     @Override
@@ -29,7 +31,7 @@ public class DoneCommand implements Command{
         tasks.get(index - 1).markAsDone();
 
         String content = "Nice! I've marked this task as done:\n" +
-                "[" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription() +"\n";
+                "[" + tasks.get(index - 1).getIsDoneSymbol() + "] " + tasks.get(index - 1).getDescription() + "\n";
 
         return content;
     }

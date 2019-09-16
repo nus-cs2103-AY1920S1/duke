@@ -1,6 +1,6 @@
-package UserInterface;
+package ui;
 
-public interface UI{
+public interface UI {
 
     void printWelcome();
 

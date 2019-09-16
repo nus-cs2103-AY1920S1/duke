@@ -1,10 +1,10 @@
-package Logic;
-
-import Model.Tasklist;
-import Model.todo;
-import Storage.Storage;
-import UserInterface.UI;
-import UserInterface.UI_CLI;
+import logic.Command;
+import logic.CommandParser;
+import model.Tasklist;
+import model.todo;
+import storage.Storage;
+import ui.UI;
+import ui.UI_CLI;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class WrongCommandTest {
 
     @Test
-    void execute_wrong_test(){
+    void execute_wrong_test() {
         UI ui = new UI_CLI();
         Storage storage = new Storage();
 

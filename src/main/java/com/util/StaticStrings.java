@@ -45,4 +45,8 @@ public class StaticStrings {
     public static final String TOO_MANY_DELETE_INPUT = "Please just put the index of task in list after \"delete\" and nothing else.";
     public static final String NON_INT_PROVIDED_DELETE = "Please enter an integer after \"delete\".";
 
+    // Messages for Statistics
+
+    public static final String ERROR_LOG_NOT_FOUND = "Error in reading in execution log file from given path, creating new file.";
+    public static final String ERROR_SAVE_LOG = "Error in saving this execution to log, this will be missing.";
 }

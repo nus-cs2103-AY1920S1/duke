@@ -1,9 +1,11 @@
 package com.commands;
 
 import com.TaskList;
+import com.exceptions.DukeException;
 import com.tasks.Task;
 import com.util.Storage;
 import com.util.StaticStrings;
+import com.util.stats.DukeStatistics;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,10 @@ public class FindCommand extends Command {
     }
 
     public void execute(TaskList taskList, Storage storage) {
+        // No tasks to search through
+        if (taskList.getNumTasks() == 0) {
+            ui.showMessage(StaticStrings.NO_TASKS);
+        }
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (String keyword : keywords) {
             for (Task currTask : taskList.getTaskArr()) {
@@ -34,6 +40,7 @@ public class FindCommand extends Command {
         } else {
             ui.showFindKeywordResponse(matchingTasks);
         }
+        new DukeStatistics().addLog(this, keywords);
     }
 
 }

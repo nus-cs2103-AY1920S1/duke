@@ -50,6 +50,9 @@ public class Parser {
         case "delete":
             currCommand = parseDeleteCommand(fullUserInputArr);
             break;
+        case "stats":
+            currCommand = new StatsCommand();
+            break;
         default:
             throw new UnknownCommandException();
         }

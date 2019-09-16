@@ -9,6 +9,7 @@ import com.util.Storage;
 import java.util.ArrayList;
 
 import com.exceptions.command.*;
+import com.util.stats.DukeStatistics;
 
 /**
  * Commands which adds a task to list,
@@ -41,8 +42,8 @@ public class SubCommand extends AddCommand {
         taskList.addTask(newTask);
         ArrayList<Task> taskArr = taskList.getTaskArr();
         storage.save(taskArr);
+        new DukeStatistics().addLog(this, newTask);
         ui.showAddTaskResponse(newTask, taskArr);
-
     }
 
     public void print() {

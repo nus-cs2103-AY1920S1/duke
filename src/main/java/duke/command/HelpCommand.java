@@ -13,7 +13,8 @@ public class HelpCommand extends Command {
         ui.printLine("You may use the following commands:");
         ui.printLine("bye - Exit the program");
         ui.printLine("deadline [description] /by [date: dd/MM/YYYY] - Add deadline");
-        ui.printLine("done [index: 1] - Marks a task as done");
+        ui.printLine("delete [task number] - Delete a task");
+        ui.printLine("done [task number] - Marks a task as done");
         ui.printLine("event [description] /at [date: dd/MM/YYYY] - Add event");
         ui.printLine("find [keywords] - Finds a task based on its keywords");
         ui.printLine("help - Show help");

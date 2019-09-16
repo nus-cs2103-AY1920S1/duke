@@ -12,10 +12,16 @@ import java.util.Scanner;
 
 public class Duke {
 
-    static final String HORIZONTAL_LINE = "______________________________"
-        + "______________________________";
-
     private static List<Task> taskList = new ArrayList<Task>();
+
+    public Duke() {
+        // Load from file
+        try {
+            taskList = Storage.getInstance().loadFromDisk();
+        } catch (Storage.StorageOperationException e) {
+            Ui.printError(e);
+        }
+    }
 
     /**
      * Main Method.
@@ -23,15 +29,13 @@ public class Duke {
      * @param args string arguments for console.
      */
     public static void main(String[] args) {
+        new Duke().run();
+    }
 
+    public void run() {
         Ui.greet();
 
-        // Load from file
-        try {
-            taskList = Storage.getInstance().loadFromDisk();
-        } catch (Storage.StorageOperationException e) {
-            Ui.printError(e);
-        }
+
 
         Scanner in = new Scanner(System.in);
 

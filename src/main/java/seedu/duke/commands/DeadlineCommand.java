@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Task;
+import seedu.duke.ui.Ui;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ public class DeadlineCommand extends Command {
             Date date = dateFormat.parse(dateString);
             Deadline deadline = new Deadline(description, date);
             tasks.add(deadline);
-            echo("Got it. I've added this task:",
+            Ui.printMessages("Got it. I've added this task:",
                 "  " + deadline.toString(),
                 "Now you have " + tasks.size() + " tasks in the list.");
         } catch (ParseException pe) {

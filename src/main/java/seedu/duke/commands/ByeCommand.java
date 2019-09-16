@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.storage.Storage;
 import seedu.duke.trackables.Task;
+import seedu.duke.ui.Ui;
 
 import java.util.List;
 
@@ -11,11 +12,11 @@ public class ByeCommand extends Command {
 
     @Override
     public void execute(List<Task> tasks) {
-        echo("\t" + "Bye. Hope to see you again soon!");
+        Ui.printMessages("\t" + "Bye. Hope to see you again soon!");
         try {
             Storage.getInstance().saveToDisk(tasks);
         } catch (Storage.StorageOperationException e) {
-            echo(e.getMessage());
+            Ui.printError(e);
         }
         System.exit(0);
     }

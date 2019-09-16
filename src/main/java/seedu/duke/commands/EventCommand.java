@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.trackables.Event;
 import seedu.duke.trackables.Task;
+import seedu.duke.ui.Ui;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ public class EventCommand extends Command {
             Date date = dateFormat.parse(dateString);
             Event event = new Event(description, date);
             tasks.add(event);
-            echo("Got it. I've added this task:",
+            Ui.printMessages("Got it. I've added this task:",
                 "  " + event.toString(),
                 "Now you have " + tasks.size() + " tasks in the list.");
         } catch (ParseException pe) {

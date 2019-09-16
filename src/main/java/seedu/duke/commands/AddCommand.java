@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.trackables.Task;
+import seedu.duke.ui.Ui;
 
 import java.util.List;
 
@@ -16,6 +17,6 @@ public class AddCommand extends Command {
     public void execute(List<Task> tasks) {
         Task task = new Task(description);
         tasks.add(task);
-        echo("added: " + task.toString());
+        Ui.printMessages("added: " + task.toString());
     }
 }

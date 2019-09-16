@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Task;
+import seedu.duke.ui.Ui;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public class ErrorCommand extends Command {
 
     @Override
     public void execute(List<Task> tasks) {
-        echo(dukeException.toString());
+        Ui.printMessages(dukeException.toString());
     }
 }

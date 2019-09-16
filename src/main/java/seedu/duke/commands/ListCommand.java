@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.trackables.Task;
+import seedu.duke.ui.Ui;
 
 import java.util.List;
 
@@ -17,6 +18,6 @@ public class ListCommand extends Command {
         for (int i = 0; i < tasks.size(); i++) {
             message[i] = "\t" + (i + 1) + "." + tasks.get(i).toString();
         }
-        echo(message);
+        Ui.printMessages(message);
     }
 }

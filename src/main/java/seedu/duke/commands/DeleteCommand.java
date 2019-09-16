@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Task;
+import seedu.duke.ui.Ui;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class DeleteCommand extends Command {
         }
         Task taskToRemove = tasks.get(taskId);
         tasks.remove(taskId);
-        echo("Noted. I've removed this task:",
+        Ui.printMessages("Noted. I've removed this task:",
             "  " + taskToRemove.toString(),
             "Now you have " + tasks.size() + " tasks in the list.");
     }

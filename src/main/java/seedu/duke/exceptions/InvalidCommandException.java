@@ -3,7 +3,11 @@ package seedu.duke.exceptions;
 public class InvalidCommandException extends DukeException {
 
     public InvalidCommandException() {
+        super("No such command found.");
+    }
 
+    public InvalidCommandException(String message) {
+        super(message);
     }
 
     public InvalidCommandException(String message, Throwable cause) {
@@ -12,6 +16,6 @@ public class InvalidCommandException extends DukeException {
 
     @Override
     public String toString() {
-        return "No such command found.";
+        return super.getMessage();
     }
 }

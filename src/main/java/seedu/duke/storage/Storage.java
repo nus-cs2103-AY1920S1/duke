@@ -1,5 +1,7 @@
 package seedu.duke.storage;
 
+import seedu.duke.Duke;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Event;
 import seedu.duke.trackables.Task;
@@ -133,7 +135,16 @@ public class Storage {
      * Signals that some error has occurred while trying to convert and read/write data between the application
      * and the storage file.
      */
-    public static class StorageOperationException extends Exception {
+    public static class StorageOperationException extends DukeException {
+
+        public StorageOperationException() {
+            super();
+        }
+
+        public StorageOperationException(String message) {
+            super(message);
+        }
+
         public StorageOperationException(String message, Throwable cause) {
             super(message, cause);
         }

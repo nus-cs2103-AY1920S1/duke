@@ -12,6 +12,12 @@ public class ByeCommand extends Command {
     @Override
     public void execute(List<Task> tasks) {
         echo("\t" + "Bye. Hope to see you again soon!");
+        try {
+            Storage.getInstance().saveToDisk(tasks);
+        } catch (Storage.StorageOperationException e) {
+            echo(e.getMessage());
+        }
         System.exit(0);
     }
 }
+

@@ -4,7 +4,7 @@ import duke.task.*;
 import duke.ui.*;
 import duke.storage.*;
 
-public class SendTasksCommand extends Command{
+public class SendTasksCommand extends Command {
 
     public boolean isTerminated() {
         return false;

@@ -3,7 +3,7 @@ package duke.task;
 public class Deadline extends Task {
 
     // the Deadline subclass adds one field
-    public String by;
+    private String by;
 
     // the Deadline subclass has one constructor
     public Deadline(String item, String by) {

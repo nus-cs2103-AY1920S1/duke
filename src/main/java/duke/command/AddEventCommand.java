@@ -8,8 +8,8 @@ import duke.format.*;
 
 public class AddEventCommand extends Command {
 
-    String task;
-    String time;
+    private String task;
+    private String time;
 
     public AddEventCommand(String task, String time) {
         this.task = task;

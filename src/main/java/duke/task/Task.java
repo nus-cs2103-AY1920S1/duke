@@ -2,7 +2,7 @@ package duke.task;
 
 public class Task {
     public String item;
-    public boolean isDone;
+    boolean isDone;
 
     // Constructor
     public Task(String item) {

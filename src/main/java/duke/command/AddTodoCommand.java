@@ -5,9 +5,9 @@ import duke.task.*;
 import duke.ui.*;
 import duke.storage.*;
 
-public class AddTodoCommand extends Command{
+public class AddTodoCommand extends Command {
 
-    String item;
+    private String item;
 
     public AddTodoCommand(String item) {
         this.item = item;

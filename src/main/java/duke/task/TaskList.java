@@ -3,8 +3,8 @@ package duke.task;
 import java.util.ArrayList;
 
 public class TaskList {
-    // create array of tasks
-    public static ArrayList<Task> tasks;
+
+    private static ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();

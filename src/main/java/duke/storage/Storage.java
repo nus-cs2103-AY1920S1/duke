@@ -12,7 +12,7 @@ public class Storage {
 
     String filePath;
     // keep track of number of tasks
-    public static int count = 0;
+    private static int count = 0;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -30,7 +30,7 @@ public class Storage {
         return tasks;
     }
 
-    public static void loadTask(String item, ArrayList<Task> tasks) {
+    private static void loadTask(String item, ArrayList<Task> tasks) {
         if (item.startsWith("T")) {
             // split command into 3 parts
             String[] splitStr = item.split(" \\| ", 3);

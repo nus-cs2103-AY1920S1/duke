@@ -5,7 +5,7 @@ import duke.ui.*;
 import duke.storage.*;
 import java.io.IOException;
 
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     public boolean isTerminated() {
         return true;

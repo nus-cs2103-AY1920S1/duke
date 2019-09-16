@@ -8,8 +8,8 @@ import duke.format.*;
 
 public class AddDeadlineCommand extends Command {
 
-    String task;
-    String deadline;
+    private String task;
+    private String deadline;
 
     public AddDeadlineCommand(String task, String deadline) {
         this.task = task;

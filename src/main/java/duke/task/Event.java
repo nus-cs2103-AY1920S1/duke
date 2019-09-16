@@ -3,7 +3,7 @@ package duke.task;
 public class Event extends Task {
 
     // the Event subclass adds one field
-    public String at;
+    private String at;
 
     // the Event subclass has one constructor
     public Event(String item, String at) {

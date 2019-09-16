@@ -1,13 +1,13 @@
 package duke.command;
 
+import duke.exception.*;
 import duke.task.*;
 import duke.ui.*;
 import duke.storage.*;
-import duke.exception.*;
 
 public class DeleteTaskCommand extends Command {
 
-    String itemIndex;
+    private String itemIndex;
 
     public DeleteTaskCommand(String itemIndex) {
         this.itemIndex = itemIndex;

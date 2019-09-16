@@ -29,7 +29,7 @@ public class FindCommand extends Command {
         try {
             ArrayList<Task> results = tasks.searchTasks(command);
             if (results.isEmpty()) {
-                throw new DukeException("     0 Matching Results found!");
+                throw new DukeException("0 Matching Results found!");
             } else {
                 return ui.printMatches(results);
             }

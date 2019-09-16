@@ -52,9 +52,9 @@ public class Alias{
 
     public static void updateAliases(String type, String alias) throws IOException, DukeException{
         if (!types.containsKey(type)) {
-            throw new DukeException("\tInvalid type for syntax format: addsyntax <type> <alias>\n");
+            throw new DukeException("Invalid type for alias format: addalias <type> <alias>\n");
         } else if (aliases.containsKey(alias)) {
-            throw new DukeException("\tDuplicate Alias! Try something else!\n");
+            throw new DukeException("Duplicate Alias! Try something else!\n");
         }
         int index = types.get(type);
         Path path = Paths.get(filePath);
@@ -69,10 +69,10 @@ public class Alias{
     }
 
     public static String showAliases() {
-        StringBuilder sb = new StringBuilder("\tYour Abbreviation Library \n");
+        StringBuilder sb = new StringBuilder("Here are your aliases :) \n\n");
 
         for (Map.Entry<String, String> entry : aliases.entrySet()) {
-            sb.append("\t" + entry.getValue() + " : " + entry.getKey() + "\n");
+            sb.append(entry.getValue() + " : " + entry.getKey() + "\n");
         }
 
         return sb.toString();

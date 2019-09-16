@@ -34,7 +34,7 @@ public class Parser {
             if (Alias.aliases.containsKey(subcommand)) {
                 type = Alias.aliases.get(subcommand);
             } else {
-                throw new DukeException("       OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
 
             switch (type.toLowerCase()) {
@@ -54,9 +54,9 @@ public class Parser {
                 return new AddCommand("E", command);
             case "exit":
                 return new ExitCommand();
-            case "addsyntax":
+            case "addalias":
                 return new AddAlias(command);
-            case "listsyntax":
+            case "listalias":
                 return new ListAlias();
             default:
                 throw new AssertionError("INVALID PARSE: " + fullcommand);
@@ -75,21 +75,21 @@ public class Parser {
     public static void checkTask(String type, String command) throws DukeException {
         if (type.equals("T")) {
             if (command.isEmpty()) {
-                throw new DukeException("       OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
         } else if (type.equals("D")) {
             String[] arr = command.split("/by");
             if (arr[0].trim().isEmpty()) {
-                throw new DukeException("       OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             } else if (arr.length < 2 || arr[1].trim().isEmpty()) {
-                throw new DukeException("       OOPS!!! The deadline must have a specified date/time.");
+                throw new DukeException("OOPS!!! The deadline must have a specified date/time.");
             }
         } else if (type.equals("E")) {
             String[] arr = command.split("/at");
             if (arr[0].trim().isEmpty()) {
-                throw new DukeException("       OOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
             } else if (arr.length < 2 || arr[1].trim().isEmpty()) {
-                throw new DukeException("       OOPS!!! The event must have a specified date/time.");
+                throw new DukeException("OOPS!!! The event must have a specified date/time.");
             }
         } else {
             throw new AssertionError("invalid task type: " + type);
@@ -106,16 +106,16 @@ public class Parser {
     public static boolean isValidNumber(String command, int listSize) throws DukeException {
         try {
             if (command.isEmpty()) {
-                throw new DukeException("       OOPS!!! Command cannot be empty! Please try again!");
+                throw new DukeException("OOPS!!! Command cannot be empty! Please try again!");
             }
 
             if (!command.matches("\\d+")) {
-                throw new DukeException("       OOPS!!! Task id has to be numeric type!");
+                throw new DukeException("OOPS!!! Task id has to be numeric type!");
             }
 
             int pos = Integer.parseInt(command);
             if (pos > listSize || pos <= 0) {
-                throw new DukeException("       OOPS!!! Task id not within range of total number of tasks!");
+                throw new DukeException("OOPS!!! Task id not within range of total number of tasks!");
             }
 
         } catch (DukeException e) {

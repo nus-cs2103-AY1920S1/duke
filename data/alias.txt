@@ -1,10 +1,10 @@
-LIST | list
-EXIT | exit
+LIST | l
+EXIT | bye
 FIND | find
 DONE | done
 DELETE | delete
-TODO | t
+TODO | todo
 DEADLINE | deadline
 EVENT | event
-ADDSYNTAX | addsyntax
-LISTSYNTAX | listsyntax
+ADDALIAS | addalias
+LISTALIAS | listalias

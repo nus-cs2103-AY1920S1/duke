@@ -1,0 +1,55 @@
+.root {
+    -fx-font-size: 12px;
+    -fx-background-color: #ffffff;
+}
+
+.textfield {
+    -fx-font-family: Monaco;
+    -fx-border-color: black;
+    -fx-font-size: 14px;
+    -fx-border-width: 1px;
+}
+
+.send_Btn {
+    -fx-font-family: Courier;
+    -fx-font-weight: bolder;
+    -fx-font-size: 17px;
+    -fx-background-color: #853b41;
+    -fx-border-color: black;
+    -fx-border-width: 3px;
+}
+
+#duke {
+    -fx-font-family: Courier;
+    -fx-padding: 10px;
+    -fx-font-size: 13px;
+    -fx-background-color: #c4c093;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 5px;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-border-insets: 5px;
+}
+
+#user {
+    -fx-font-family: Monaco;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-font-size: 13px;
+    -fx-background-color: #f0f2ed;
+    -fx-background-radius: 15px;
+    -fx-background-insets: 5px;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-border-insets: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 8, 0, 0, 0);
+}
+
+#footer-section {
+    -fx-alignment: center;
+    -fx-padding: 10 10 10 10;
+    -fx-border-width: 1;
+    -fx-border-color: #E8E8E8 transparent transparent transparent;
+}

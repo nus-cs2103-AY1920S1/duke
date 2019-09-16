@@ -19,7 +19,7 @@ public class ListCommand extends Command {
      * @return String generate message as output from successful operation
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return ui.showLine() + ui.showList(tasks) + ui.showLine();
+        return ui.showList(tasks);
     }
 
     public boolean isExit() {

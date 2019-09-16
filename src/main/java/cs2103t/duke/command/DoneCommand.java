@@ -43,7 +43,7 @@ public class DoneCommand extends Command {
 
         Task task = tasks.markDone(id);
 
-        storageTasks.updateFileWithTask(tasks);
+        storageTasks.updateFileWithTask(tasks, noteList);
 
         return ui.dukeRespond("Nice! I've marked this task as done:",
                 "  " + task.toString());

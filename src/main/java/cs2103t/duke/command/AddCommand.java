@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         Task newTask = TaskList.createTask(this.taskType, this.fullDescription);
         tasks.addData(newTask);
 
-        storageTasks.updateFileWithTask(tasks);
+        storageTasks.updateFileWithTask(tasks, noteList);
 
         return ui.dukeRespond("Got it. I've added this task:",
                 "  " + newTask.toString(),

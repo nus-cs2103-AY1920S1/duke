@@ -40,9 +40,10 @@ public class Storage {
     /**
      * Writes to file the contents of taskList, without appending to original file contents.
      * @param taskList list of tasks to write to file.
+     * @param noteList
      * @throws DukeException if cannot write to file.
      */
-    public void updateFileWithTask(TaskList taskList) throws DukeException {
+    public void updateFileWithTask(TaskList taskList, NoteList noteList) throws DukeException {
         List<Task> tasks = taskList.getTaskList();
         try {
             File file = new File(filepath);
@@ -55,6 +56,9 @@ public class Storage {
             BufferedWriter br = new BufferedWriter(fr);
 
             for (Task t : tasks) {
+                if (t.hasNotes()) {
+                    t.setNoteId(noteList.getUpdatedTaskNoteId(t.getNoteId()));
+                }
                 br.write(getTaskDetailToPrint(t));
             }
 

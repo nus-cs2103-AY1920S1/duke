@@ -1,5 +1,7 @@
 package cs2103t.duke.task;
 
+import java.util.Objects;
+
 /**
  * Represents tasks, each with 3 main attributes: task type, description, whether it is completed.
  * A task can have up to 1 note.
@@ -127,5 +129,10 @@ public abstract class Task {
             checked = CROSS;
         }
         return String.format("[%s][%s] %s || notes(if any): %s", this.taskType, checked, this.description, this.note);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.description, this.isCompleted);
     }
 }

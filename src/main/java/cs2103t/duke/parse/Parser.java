@@ -101,6 +101,9 @@ public class Parser {
         case SETNOTES:
             cmd = new AddNotesCommand(d);
             break;
+        case DELETENOTES:
+            cmd = new DeleteNotesCommand(d);
+            break;
         case T: //fallthrough
         case D: //fallthrough
         case E: //fallthrough

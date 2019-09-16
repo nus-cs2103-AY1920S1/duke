@@ -12,7 +12,7 @@ package cs2103t.duke.task;
  * EXIT represents exit duke.
  */
 public enum TaskType {
-    T, D, E, LIST, DELETE, DONE, EXIT, FIND, SETNOTES, GETGENERALNOTES;
+    T, D, E, LIST, DELETE, DONE, EXIT, FIND, SETNOTES, GETGENERALNOTES, DELETENOTES;
 
     /**
      * Converts command keyword to task type.
@@ -59,6 +59,9 @@ public enum TaskType {
             break;
         case "SETNOTES":
             type = SETNOTES;
+            break;
+        case "DELETENOTES":
+            type = DELETENOTES;
             break;
         default:
             type = null;

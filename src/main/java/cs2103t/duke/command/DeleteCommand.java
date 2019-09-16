@@ -42,7 +42,13 @@ public class DeleteCommand extends Command {
         int id = Parser.parseStrToInt(this.taskId);
         Task task = tasks.deleteTask(id);
 
-        storageTasks.updateFileWithTask(tasks);
+        if (task.hasNotes()) {
+            int noteId = task.getNoteId();
+            noteList.deleteNote(noteId);
+            //tasks.updateNoteIdForEveryone(noteId);
+        }
+
+        storageTasks.updateFileWithTask(tasks, noteList);
 
         return ui.dukeRespond("Noted. I've removed this task:",
                 "  " + task.toString(),

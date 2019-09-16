@@ -77,15 +77,27 @@ public class NoteList {
         return getNote(id);
     }
 
+    public int getGenNoteId(int id) {
+        int genId = 0;
+        Note gen = generalNotes.get(id);
+        for (Note n : notes) {
+            if (n == gen) {
+                break;
+            }
+            genId++;
+        }
+        return genId;
+    }
+
     /**
-     * Gets the updated task note id. This will be used to write to the file.
+     * Gets the updated task note id. //This will be used before writing to the file.
      * @param id current (not updated) id of note (of some task).
      * @return updated id of note.
      */
     public int getUpdatedTaskNoteId(int id) {
         Iterator<Integer> it = deletedIds.iterator();
         int numDeletedIdsLessThanId = 0;
-        while (id > it.next()) {
+        while (it.hasNext() && id > it.next()) {
             numDeletedIdsLessThanId++;
         }
         return id - numDeletedIdsLessThanId;

@@ -5,6 +5,8 @@ public class Note {
     private String content;
     /** Whether note is general or bound to task. */
     private boolean isGeneral;
+    /** Whether note is deleted virtually already. */
+    private boolean isDeleted;
 
     private Note() {
 
@@ -13,11 +15,13 @@ public class Note {
     public Note(String note) {
         this.isGeneral = true;
         this.content = note;
+        this.isDeleted = false;
     }
 
     public Note(String note, boolean isBound) {
         this.content = note;
         this.isGeneral = !isBound;
+        this.isDeleted = false;
     }
 
     public boolean isGeneral() {
@@ -26,6 +30,10 @@ public class Note {
 
     public String getContent() {
         return content;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
     public void updateContent(String newContent) {

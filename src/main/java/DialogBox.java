@@ -48,7 +48,9 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var dialog_user = new DialogBox(text, img);
+        dialog_user.setId("user");
+        return dialog_user;
     }
 
     /**
@@ -61,6 +63,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setId("duke");
         return db;
     }
 }

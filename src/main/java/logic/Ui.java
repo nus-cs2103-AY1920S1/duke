@@ -9,7 +9,6 @@ import java.util.List;
  * Deals with interactions with the user and output on CLI.
  */
 public class Ui<T> {
-    public static String HORIZONTAL_LINE = "________________________________________________\n";
     public static String printString = "";
 
     /**
@@ -19,9 +18,7 @@ public class Ui<T> {
      */
     public static void loadStr(String input) {
         StringBuilder sb = new StringBuilder();
-        sb.append(HORIZONTAL_LINE);
         sb.append(input + "\n");
-        sb.append(HORIZONTAL_LINE);
         printString = sb.toString(); //stores string in static variable that can be called later
     }
 

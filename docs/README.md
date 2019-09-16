@@ -8,6 +8,8 @@ Duke makes use of local storage so that previously entered tasks will be remembe
 - [<b>Commands</b>](#commands)
 - [<b>Usage</b>](#usage)
 
+![Overview of Duke](images/Ui.png)
+
 ## <a name="features"></a>Features 
 ### 1. Keep track of various types of tasks
 Duke manages and helps you keep track of your tasks which can be either [ToDos](#todo), [Deadlines](#deadline), or 

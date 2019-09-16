@@ -4,7 +4,7 @@ import Model.Task;
 import Model.Tasklist;
 import Model.event;
 import Storage.Storage;
-import UI.UI;
+import UserInterface.UI;
 
 public class EventCommand implements Command {
     private String arguments;

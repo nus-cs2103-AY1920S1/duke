@@ -2,8 +2,8 @@ import Logic.Command;
 import Logic.CommandParser;
 import Model.Tasklist;
 import Storage.Storage;
-import UI.UI;
-import UI.UI_CLI;
+import UserInterface.UI;
+import UserInterface.UI_CLI;
 
 import java.nio.file.Paths;
 

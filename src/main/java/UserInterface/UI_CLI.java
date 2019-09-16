@@ -1,4 +1,4 @@
-package UI;
+package UserInterface;
 
 import java.io.PrintStream;
 import java.util.Scanner;

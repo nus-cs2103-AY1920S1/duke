@@ -2,7 +2,7 @@ package Logic;
 
 import Model.Tasklist;
 import Storage.Storage;
-import UI.UI;
+import UserInterface.UI;
 
 public class ExitCommand implements Command{
 

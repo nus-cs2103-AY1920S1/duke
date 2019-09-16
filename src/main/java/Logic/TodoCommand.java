@@ -4,7 +4,7 @@ import Model.Task;
 import Model.Tasklist;
 import Model.todo;
 import Storage.Storage;
-import UI.UI;
+import UserInterface.UI;
 
 public class TodoCommand implements Command {
     private String arguments;

@@ -3,8 +3,8 @@ package Logic;
 import Model.Tasklist;
 import Model.todo;
 import Storage.Storage;
-import UI.UI;
-import UI.UI_CLI;
+import UserInterface.UI;
+import UserInterface.UI_CLI;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

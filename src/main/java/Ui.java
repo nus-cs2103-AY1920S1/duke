@@ -43,7 +43,7 @@ public class Ui {
      * @return goodbye message
      */
     public String showGoodbye() {
-        String endMessage = "Woof! Hope to see you again!";
+        String endMessage = "Woof! Your list has been saved. Hope to see you again!";
         return endMessage;
     }
 

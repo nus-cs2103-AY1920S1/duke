@@ -28,6 +28,7 @@ public class Gui extends Application {
             stage.setTitle("Duke: Your Task Assistant Dog");
             stage.setScene(scene);
             stage.getIcons().add(new Image(Gui.class.getResourceAsStream("/images/dukeIcon.png")));
+            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

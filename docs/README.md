@@ -123,8 +123,19 @@ Example of usage:
 ### `exit` - Closes the chat bot
 
 Say goodbye to Duke as it goes to sleep. The application window does not
-close so that the user may reference the chat log.
+close so that the user may reference the chat log. Duke also saves the list
+for the next session.
 
 Example of usage:
 
 `exit`
+
+## References
+
+References of images used:
+
+https://unsplash.com/photos/w1v8XeHnkuI
+
+https://unsplash.com/photos/SLi2gBpbRZU
+
+https://www.freepik.com/free-vector/cute-dog-breeds_803197.htm#page=1&query=dog&position=21

@@ -45,6 +45,8 @@ public class Parser {
             return new FindCommand(constructedString);
         case "help" :
             return new HelpCommand(constructedString);
+        case "massdelete" :
+            return new MassDeleteCommand(constructedString);
         default:
             return new ErrorCommand("OOPS!! I'm sorry, but I don't know what that means :-(");
         }

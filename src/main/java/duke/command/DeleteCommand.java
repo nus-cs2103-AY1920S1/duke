@@ -25,15 +25,23 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String message) {
         super(message);
-        this.indexToDelete = Integer.parseInt(message);
+        try {
+            this.indexToDelete = Integer.parseInt(message);
+        } catch (NumberFormatException error) {
+            errorMessage = "Wrong format! Did you mean to use the mass delete function instead?";
+        }
     }
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
         this.taskList = listOfTasks;
         if (indexToDelete > taskList.size() || indexToDelete <= 0) {
-            errorMessage = "Such task does not exist!";
-            return;
+            if (errorMessage.equals("")) {
+                errorMessage = "Such task does not exist!";
+                return;
+            } else {
+                return;
+            }
         }
         toBeDeleted = listOfTasks.get(indexToDelete - 1);
         listOfTasks.removeTask(toBeDeleted);
@@ -45,7 +53,7 @@ public class DeleteCommand extends Command {
         if (!errorMessage.equals("")) {
             return errorMessage;
         } else {
-            return "Done! I have deleted this task : " + toBeDeleted.toString();
+            return "Done! I have deleted this task :\n" + toBeDeleted.toString();
         }
     }
 }

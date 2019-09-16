@@ -35,6 +35,9 @@ public class HelpCommand extends Command {
                 "To delete a task:\n" +
                 "delete <index>\n" +
                 "\n" +
+                "To mass delete a bunch of tasks:\n" +
+                "massdelete <indexes separated by space>\n" +
+                "\n" +
                 "To mark a task as done:\n" +
                 "done <index>\n" +
                 "\n" +

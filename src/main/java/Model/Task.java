@@ -19,9 +19,9 @@ public abstract class Task {
 
     public char getIsDoneSymbol(){
         if(isDone){
-            return 'v';
+            return '\u2714';    //check mark symbol
         } else {
-            return 'x';
+            return '\u2718';    //cross mark symbol
         }
     }
 

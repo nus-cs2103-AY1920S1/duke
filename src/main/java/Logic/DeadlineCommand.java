@@ -8,10 +8,21 @@ import UI.UI;
 public class DeadlineCommand implements Command {
     private String arguments;
 
+    /**
+     * Creates an instance of DeadlineCommand with its arguments
+     * @param arguments arguments of the Command
+     */
     public DeadlineCommand(String arguments){
         this.arguments = arguments;
     }
 
+    /**
+     * Parses the arguments of the Command and executes it
+     * @param tasks     the TaskList of Tasks
+     * @param ui        The User Interface
+     * @param storage   Storage
+     * @return
+     */
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";

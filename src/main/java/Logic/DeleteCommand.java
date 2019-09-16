@@ -8,10 +8,21 @@ public class DeleteCommand implements Command {
 
     private String arguments;
 
+    /**
+     * Creates an instance of DeleteCommand with its arguments
+     * @param arguments arguments of the Command
+     */
     public DeleteCommand(String arguments){
         this.arguments = arguments;
     }
 
+    /**
+     * Parses the arguments of the Command and executes it
+     * @param tasks     the TaskList of Tasks
+     * @param ui        The User Interface
+     * @param storage   Storage
+     * @return
+     */
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         int index = Integer.parseInt(arguments);

@@ -25,12 +25,9 @@ public class UI_GUI extends Application implements UI {
 
     @Override
     public void printWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        Label dukeText = new Label(logo);
+        String welcome = "Hello! I'm Duke!\n" +
+                "What can I do for you?\n";
+        Label dukeText = new Label(welcome);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke_image))
         );
@@ -48,7 +45,6 @@ public class UI_GUI extends Application implements UI {
 
     @Override
     public void start(Stage stage) {
-
         duke = new Duke("duke.txt", true);
 
         //The container for the content of the chat to scroll.

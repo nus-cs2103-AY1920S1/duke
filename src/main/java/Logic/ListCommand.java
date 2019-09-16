@@ -6,16 +6,24 @@ import UI.UI;
 
 public class ListCommand implements Command {
 
+    /**
+     * Creates an instance of ListCommand
+     */
     public ListCommand(){
 
     }
 
+    /**
+     * Parses the arguments of the Command and executes it
+     * @param tasks     the TaskList of Tasks
+     * @param ui        The User Interface
+     * @param storage   Storage
+     * @return
+     */
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage){
         int i;
-
         String content = "";
-        System.out.println(tasks.size());
 
         for(i = 0; i < tasks.size(); i++){
             content = content.concat((i + 1) + ". ");

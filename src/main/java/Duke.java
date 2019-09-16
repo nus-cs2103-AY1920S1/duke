@@ -13,7 +13,6 @@ public class Duke{
     private UI ui;
 
     private final String INPUT_DELIMITER = " ";
-
     private CommandParser commandParser = new CommandParser(INPUT_DELIMITER);
     private boolean isExit;
 
@@ -21,6 +20,12 @@ public class Duke{
         new Duke("duke.txt", false).run();
     }
 
+    /**
+     * Creates an instance of Duke with CLI or GUI. Duke will load and save data into the filepath
+     *
+     * @param filepath  the path of which data is saved and loaded from
+     * @param isGUI     determines if GUI or CLI is loaded
+     */
     public Duke(String filepath, boolean isGUI){
         if(isGUI){
             ui = new UI_GUI();
@@ -29,31 +34,40 @@ public class Duke{
         }
         storage = new Storage(Paths.get(filepath));
         tasks = storage.load();
-
     }
 
+    /**
+     * Runs the program with CLI interface
+     */
     public void run() {
         ui.printWelcome();
-
         isExit = false;
 
         while(!isExit){
             String userInput = ui.getUserInput();
-            Command command = commandParser.parseCommand(userInput);
-            String response = command.execute(tasks, ui, storage);
+            String response = runCommand(userInput);
             ui.printContent(response);
-            isExit = command.isExit();
         }
     }
 
+    /**
+     * Takes in input from user, parses the command, and executes it
+     *
+     * @param userInput     input from the user
+     * @return              output of the command
+     */
     public String runCommand(String userInput){
-        System.out.println(userInput);
         Command command = commandParser.parseCommand(userInput);
         String response = command.execute(tasks, ui, storage);
         isExit = command.isExit();
         return response;
     }
 
+    /**
+     * Checks if the program has exited
+     *
+     * @return  true if exited, false otherwise
+     */
     public boolean isExit(){
         return isExit;
     }

@@ -11,6 +11,7 @@ public class WrongCommand implements Command {
         return content;
     }
 
+
     @Override
     public boolean isExit() {
         return false;

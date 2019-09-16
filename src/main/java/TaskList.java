@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class TaskList {
 
@@ -41,6 +43,11 @@ public class TaskList {
         String ret = "Noted. I've removed this task:" + target + "\n" +
                 ("Now you have " + lst.size() + " tasks in the list.");
         return ret;
+    }
+
+    static String sortList() {
+        Collections.sort(lst);
+        return "Your list is now sorted!";
     }
 
     @Override

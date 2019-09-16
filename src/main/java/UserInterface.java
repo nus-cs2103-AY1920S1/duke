@@ -35,7 +35,11 @@ class UserInterface {
             }
             switch(userCommand) {
                 case "list":
-                    dukePrint(todoList);
+                    dukePrint("We are also here");
+                    break;
+                case "sort":
+                    dukePrint("We are here");
+                    //dukePrint(todoList.sortList());
                     break;
                 case "done":
                     ListItem target = todoList.lst.get(Integer.parseInt(userInput.split(" ", 2)[1]) - 1);
@@ -77,7 +81,8 @@ class UserInterface {
                         Thread.sleep(1000);
                     } catch (Exception ignored) {}
                     break;
-
+                case "exit":
+                    break;
                 default:
                     dukePrint("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -107,6 +112,8 @@ class UserInterface {
         switch(userCommand) {
             case "list":
                 return (todoList.toString());
+            case "sort":
+                return (todoList.sortList());
             case "done":
                 ListItem target = todoList.lst.get(Integer.parseInt(userInput.split(" ", 2)[1]) - 1);
                 target.done();
@@ -142,6 +149,8 @@ class UserInterface {
                 try {
                     Thread.sleep(1000);
                 } catch (Exception ignored) {}
+                break;
+            case "exit":
                 break;
 
             default:

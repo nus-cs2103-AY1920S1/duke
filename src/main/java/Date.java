@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 /**
  * Date representation of date string that's given
  */
-public class Date {
+public class Date{
     boolean exists = false;
     String precursor = "";
     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy HHss");
@@ -19,6 +19,10 @@ public class Date {
                 System.out.println("WrongDateFormat");
             }
         }
+    }
+
+    public java.util.Date getData() {
+        return this.data;
     }
 
     public String format() {

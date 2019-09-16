@@ -1,4 +1,4 @@
-public class ListItem {
+public class ListItem implements Comparable<ListItem>{
 
     private String description;
     private String status;
@@ -41,6 +41,10 @@ public class ListItem {
         this.isDone = true;
     }
 
+    Date getDate() {
+        return this.date;
+    }
+
     String format() {
         return isDone + "@" + this.status + "@" + this.description + "@" + this.date.format() + "\n";
     }
@@ -60,5 +64,10 @@ public class ListItem {
         }
 
         return this.status + toReturn + this.date;
+    }
+
+    @Override
+    public int compareTo(ListItem other) {
+        return getDate().getData().compareTo(other.getDate().getData());
     }
 }

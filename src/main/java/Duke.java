@@ -14,6 +14,14 @@ import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+
 import java.util.ArrayList;
 
 
@@ -27,6 +35,8 @@ public class Duke extends Application{
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
@@ -42,7 +52,7 @@ public class Duke extends Application{
 
     }
 
-    private Duke(String filePath) {
+    public Duke(String filePath) {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
@@ -52,7 +62,7 @@ public class Duke extends Application{
         ui = new UserInterface(tasks, storage);
     }
 
-    private void run() {
+    void run() {
         dukePrint("Hello! I'm Duke", "What can I do for you?");
         this.ui.listen();
         dukePrint("Bye. Hope to see you again soon!");
@@ -102,12 +112,12 @@ public class Duke extends Application{
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        Button sendButton = new Button("Send");
+        sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        Scene scene = new Scene(mainLayout);
+        scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.show();

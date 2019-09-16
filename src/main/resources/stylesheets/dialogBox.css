@@ -1,15 +1,20 @@
-.user-dialog {
-    -fx-background-color: #80e5ff;
+.dialog-box {
+    -fx-background-radius: 10;
+    -fx-background-insets: 8 8 8 8;
 }
 
-.duke-message-dialog {
-    -fx-background-color: #649665;
+.user-dialog-box {
+    -fx-background-color: #8e8e93;
 }
 
-.duke-warning-dialog {
-    -fx-background-color: #ffc74e;
+.duke-message-dialog-box {
+    -fx-background-color: #8e8e93;
 }
 
-.duke-error-dialog {
-    -fx-background-color: #ff5b5d;
+.duke-warning-dialog-box {
+    -fx-background-color: #ff9500;
+}
+
+.duke-error-dialog-box {
+    -fx-background-color: #ff3b30;
 }

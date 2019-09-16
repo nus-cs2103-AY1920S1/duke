@@ -17,7 +17,8 @@ public final class DukeGui extends Application {
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
             stage.setTitle("Duke");
-            stage.setMinHeight(925.0);
+            stage.setResizable(false);
+            stage.setMinHeight(900.0);
             stage.setMinWidth(600.0);
             stage.show();
         } catch (IOException e) {

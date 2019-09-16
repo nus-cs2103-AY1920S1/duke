@@ -31,7 +31,6 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        this.getStylesheets().add("stylesheets/dialogBox.css");
         this.dialog.setText(dialog);
         this.getStyleClass().add(styleClass);
         this.avatar.setImage(avatar);
@@ -44,7 +43,7 @@ public class DialogBox extends HBox {
      * @return a right-justified dialog with the given avatar
      */
     public static DialogBox getUserDialog(String dialog) {
-        return new DialogBox(dialog, DialogBox.USER_AVATAR, "user-dialog");
+        return new DialogBox(dialog, DialogBox.USER_AVATAR, "user-dialog-box");
     }
 
     /**
@@ -54,15 +53,15 @@ public class DialogBox extends HBox {
      * @return a left-justified dialog with the given avatar
      */
     public static DialogBox getDukeDialog(String dialog) {
-        return DialogBox.makeDukeDialog(dialog, "duke-message-dialog");
+        return DialogBox.makeDukeDialog(dialog, "duke-message-dialog-box");
     }
 
     public static DialogBox getDukeWarning(String dialog) {
-        return DialogBox.makeDukeDialog(dialog, "duke-warning-dialog");
+        return DialogBox.makeDukeDialog(dialog, "duke-warning-dialog-box");
     }
 
     public static DialogBox getDukeError(String dialog) {
-        return DialogBox.makeDukeDialog(dialog, "duke-error-dialog");
+        return DialogBox.makeDukeDialog(dialog, "duke-error-dialog-box");
     }
 
     private static DialogBox makeDukeDialog(String dialog, String type) {

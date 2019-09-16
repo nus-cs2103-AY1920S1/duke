@@ -1,5 +1,7 @@
 package task;
 
+import converter.StringDateConverter;
+
 import java.util.Date;
 
 /**
@@ -42,7 +44,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        String strDate = new StringDateConverter().convertDateToString(by);
+        return "[D]" + super.toString() + " (by: " + strDate + ")";
     }
 
     /**

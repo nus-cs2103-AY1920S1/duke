@@ -97,7 +97,8 @@ public class Ui {
     public void showDeleteCommand(TaskList tasks, int index) {
         displayMsg = new StringJoiner(System.lineSeparator());
         displayMsg.add("Noted. I've removed this task:");
-        displayMsg.add(tasks.getTasks().get(index).toString());
+        int numOnTaskList = index + 1;
+        displayMsg.add(numOnTaskList + ". " + tasks.getTasks().get(index));
         displayMsg.add("Now you have " + (tasks.getTasks().size() - 1) + " tasks in the list.");
     }
 
@@ -111,7 +112,7 @@ public class Ui {
         displayMsg.add("Here are the tasks in your list");
         for (int i = 0; i < tasks.getTasks().size(); i = i + 1) {
             int number = i + 1;
-            displayMsg.add(number + "." + tasks.getTasks().get(i));
+            displayMsg.add(number + ". " + tasks.getTasks().get(i));
         }
     }
 
@@ -124,8 +125,8 @@ public class Ui {
     public void showDoneCommand(TaskList tasks, int index) {
         displayMsg = new StringJoiner(System.lineSeparator());
         displayMsg.add("Nice! I've marked this task as done:");
-        displayMsg.add("[" + tasks.getTasks().get(index).getDoneIcon()
-                + "]" + tasks.getTasks().get(index).getDescription());
+        int numOnTaskList = index + 1;
+        displayMsg.add(numOnTaskList + ". " + tasks.getTasks().get(index));
     }
 
     /**
@@ -168,10 +169,11 @@ public class Ui {
     public void showFindCommand(TaskList tasks, String keyword) {
         displayMsg = new StringJoiner(System.lineSeparator());
         displayMsg.add("Here are the matching tasks in your list:");
+        int counter = 1;
         for (Task task : tasks.getTasks()) {
-            int counter = 1;
             if (task.getDescription().indexOf(keyword) != -1) {
-                displayMsg.add(counter + "." + task);
+                displayMsg.add(counter + ". " + task);
+                counter++;
             }
         }
     }

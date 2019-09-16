@@ -27,6 +27,17 @@ public class StringDateConverter {
     }
 
     /**
+     * Convert Date object to String object.
+     *
+     * @param date Java Date object
+     * @return String date in the form dd/MM/yyyy HHmm
+     */
+    public String convertDateToString(Date date) {
+        SimpleDateFormat dateWithTime = new SimpleDateFormat("E dd/MM/yyyy HHmm");
+        return dateWithTime.format(date);
+    }
+
+    /**
      * Checks if String date has the correct length for each component.
      * E.g dd has length 2, yyyy has length 4
      *

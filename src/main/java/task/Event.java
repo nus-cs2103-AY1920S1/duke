@@ -1,5 +1,7 @@
 package task;
 
+import converter.StringDateConverter;
+
 import java.util.Date;
 
 /**
@@ -42,7 +44,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        String strDate = new StringDateConverter().convertDateToString(at);
+        return "[E]" + super.toString() + " (at: " + strDate + ")";
     }
 
     /**

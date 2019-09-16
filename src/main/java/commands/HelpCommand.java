@@ -26,15 +26,15 @@ public class HelpCommand extends Command {
      */
     public String execute(TaskList task, Ui ui, Storage storage) {
         String listHelp = "list - checks all current tasking in your task list\n";
-        String doneHelp = "done <task number> - marks the task as done. (eg. 'done 2' will mark the second task " +
-                "on the list as done)\n";
-        String deleteHelp = "delete <task number> - removes the task from the list. (eg. 'delete 3' will remove " +
-                "the third task on the list)\n";
+        String doneHelp = "done <task number> - marks the task as done. (eg. 'done 2' will mark the second task "
+                + "on the list as done)\n";
+        String deleteHelp = "delete <task number> - removes the task from the list. (eg. 'delete 3' will remove "
+                + "the third task on the list)\n";
         String todoHelp = "todo <task name> - keys in a ToDo Task. (eg. todo drink water)\n";
-        String eventHelp = "event <task name> /at <dd/mm/yyyy hhmm> - keys in an Event Task. (eg. event book " +
-                "convention /at 02/09/2019 1400)\n";
-        String deadlineHelp = "deadline <task name> /by <dd/mm/yyyy hhmm> - keys in a deadline Task. (eg. " +
-                "clear rubbish /by 16/09/2019 2200)\n";
+        String eventHelp = "event <task name> /at <dd/mm/yyyy hhmm> - keys in an Event Task. (eg. event book "
+                + "convention /at 02/09/2019 1400)\n";
+        String deadlineHelp = "deadline <task name> /by <dd/mm/yyyy hhmm> - keys in a deadline Task. (eg. "
+                + "clear rubbish /by 16/09/2019 2200)\n";
         String findHelp = "find <keyword> - searches for an existing task containing the keyword.\n";
         String byeHelp = "bye - terminates the application.\n";
 

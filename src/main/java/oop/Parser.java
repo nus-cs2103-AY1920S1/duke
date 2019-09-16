@@ -1,6 +1,13 @@
 package oop;
 
-import commands.*;
+import commands.Command;
+import commands.DoneCommand;
+import commands.FindCommand;
+import commands.PrintCommand;
+import commands.DeleteCommand;
+import commands.AddCommand;
+import commands.ExitCommand;
+import commands.HelpCommand;
 
 import exceptions.DukeException;
 import exceptions.InvalidCommandException;

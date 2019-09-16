@@ -1,11 +1,10 @@
-package Utilities;
+package utilities;
 
-//import javafx.concurrent.Task;
 
-import Task.Deadline;
-import Task.Event;
-import Task.Task;
-import Task.ToDo;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,68 +14,61 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
- * Utilities.Storage enables data to be retrieved and stored in the text file
+ * Utilities.Storage enables data to be retrieved and stored in the text file.
  */
 public class Storage {
 
-    /**
-     * variable is the filename to output to
-     */
     private String filename;
 
     /**
-     * constructor
+     * constructor.
+     *
      * @param filename is the name of hard drive file to output to
      */
-    public Storage(String filename){
+    public Storage(String filename) {
         this.filename = filename;
     }
 
     /**
-     * to load the list from output
+     * to load the list from output.
+     *
      * @return ArrayList of tasks to create Utilities.TaskList
+     *
      * @throws Exception in case BufferedReader is unable to read the filename
      */
     public ArrayList<Task> load() throws Exception  {
-        ArrayList<Task>list = new ArrayList<>();
+        ArrayList<Task> list = new ArrayList<>();
 
         BufferedReader br = Files.newBufferedReader(Paths.get(filename));
         String lineToRead;
 
         while ((lineToRead = br.readLine()) != null) {
-            if ( (!lineToRead.equals("")) && (lineToRead.charAt(0) == 'T') ) {
+            if ((!lineToRead.equals("")) && (lineToRead.charAt(0) == 'T')) {
                 Task newTask = ToDo.outputAsToDo(lineToRead);
                 list.add(newTask);
-            } else if ( (!lineToRead.equals("")) && (lineToRead.charAt(0) == 'D') ) {
+            } else if ((!lineToRead.equals("")) && (lineToRead.charAt(0) == 'D')) {
                 Task newTask = Deadline.outputAsDeadline(lineToRead);
                 list.add(newTask);
-            } else if ( (!lineToRead.equals("")) && (lineToRead.charAt(0) == 'E') ) {
+            } else if ((!lineToRead.equals("")) && (lineToRead.charAt(0) == 'E')) {
                 Task newTask = Event.outputAsEvent(lineToRead);
                 list.add(newTask);
-            } else {}
+            }
         }
         return list;
 
     }
 
     /**
-     * prints list on the output text file
+     * prints list on the output text file.
+     *
      * @param tasks is the list of tasks to be printed
+     *
      * @throws FileNotFoundException in case filename is not found
      */
-    public void updateFile(TaskList tasks) throws FileNotFoundException {      //previously named as printToOutput
+    public void updateFile(TaskList tasks) throws FileNotFoundException {
         PrintStream outputTo = new PrintStream(filename);
         outputTo.println(tasks.printForOutput());
         outputTo.close();
     }
 
-    /**
-     * empties out the output if required, but not the Utilities.TaskList
-     * @throws FileNotFoundException in case the filename is not found
-     */
-    public void emptyOutput() throws FileNotFoundException {
-        PrintStream outputTo = new PrintStream(filename);
-        outputTo.println("");
-        outputTo.close();
-    }
 }

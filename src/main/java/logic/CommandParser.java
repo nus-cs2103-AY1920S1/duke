@@ -29,13 +29,14 @@ public class CommandParser {
      * @return resulting Command
      */
     public Command parseCommand(String s) {
-        String[] sp = s.split(DELIMITER, 2);
-
-        if (sp.length < 2) {
-            return parseName(sp[0], null);
-        } else {
+        try{
+            String[] sp = s.split(DELIMITER, 2);
             return parseName(sp[0], sp[1]);
+
+        } catch(Exception E){
+            return parseName(s, null);
         }
+
     }
 
     /**

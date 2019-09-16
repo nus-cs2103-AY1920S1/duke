@@ -29,16 +29,22 @@ public class TodoCommand implements Command {
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";
-        if (arguments == null) {
-            content = "OOPS! The description of a todo cannot be empty.\n";
-        } else {
-            Task task = new todo(arguments);
-            tasks.add(task);
+        try{
+            if (arguments == null || arguments.trim().equals("")) {
+                content = "OOPS! The description of a todo cannot be empty.\n" +
+                            "Usage: todo <description>\n";
+            } else {
+                Task task = new todo(arguments.trim());
+                tasks.add(task);
 
-            content = content.concat("Got it. I've added this task:\n");
-            content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + '\n');
-            content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
+                content = content.concat("Got it. I've added this task:\n");
+                content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + '\n');
+                content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
+            }
+        } catch (Exception E) {
+            content = "Ohno something went wrong! :(\n";
         }
+
         return content;
     }
 

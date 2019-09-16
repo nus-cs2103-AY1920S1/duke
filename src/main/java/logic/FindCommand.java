@@ -29,16 +29,21 @@ public class FindCommand implements Command {
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";
-        if (arguments == null) {
+        if (this.arguments == null || this.arguments.trim().equals("")) {
             content = "OOPS!!! The description of a find cannot be empty.";
         } else {
             ArrayList<Integer> indexes = new ArrayList<Integer>();
             int i;
             for (i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i).getDescription().contains(arguments)) {
+                if (tasks.get(i).getDescription().contains(this.arguments)) {
                     indexes.add(i);
                 }
             }
+
+            if(indexes.size() == 0){
+                content = content.concat("There are no Tasks that fits your description\n");
+            }
+
             for (i = 0; i < indexes.size(); i++) {
                 content = content.concat((indexes.get(i) + 1) + ". ");
                 content = content.concat("[" + tasks.get(indexes.get(i)).getSymbol() + "]");

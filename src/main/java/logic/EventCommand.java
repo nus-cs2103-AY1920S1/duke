@@ -20,8 +20,8 @@ public class EventCommand implements Command {
         this.arguments = arguments;
         try {
             String[] sp = arguments.split(" /at ", 2);
-            this.description = sp[0];
-            this.details = sp[1];
+            this.description = sp[0].trim();
+            this.details = sp[1].trim();
         } catch (Exception E) {
             this.description = arguments;
             this.details = null;
@@ -39,20 +39,26 @@ public class EventCommand implements Command {
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";
-        if (arguments == null) {
-            content = "OOPS!!! The description of a event cannot be empty.";
-        } else {
-            Task task = new event(description, details);
-            tasks.add(task);
-
-            content = content.concat("Got it. I've added this task:\n");
-            if (details != null) {
-                content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + " (at: " + task.getDetails() + ")\n");
+        try{
+            if (arguments == null || arguments.trim().equals("")) {
+                content = "OOPS!!! The description of a event cannot be empty.\n" +
+                            "Usage: event <description> /at <details>\n";
             } else {
-                content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + "\n");
+                Task task = new event(description, details);
+                tasks.add(task);
+
+                content = content.concat("Got it. I've added this task:\n");
+                if (details != null) {
+                    content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + " (at: " + task.getDetails() + ")\n");
+                } else {
+                    content = content.concat("[" + task.getSymbol() + "][" + task.getIsDoneSymbol() + "] " + task.getDescription() + "\n");
+                }
+                content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
             }
-            content = content.concat("Now you have " + tasks.size() + " tasks in this list\n");
+        } catch (Exception E){
+            content = "Ohno something went wrong! :(\n";
         }
+
         return content;
     }
 

@@ -27,7 +27,14 @@ public interface Ui {
     void showBye();
 
     /**
-     * Inform user that a task has been added successfully.
+     * Displays the help message.
+     */
+    default void showHelp() {
+        showMessage(Messages.HELP_MESSAGE);
+    }
+
+    /**
+     * Informs user that a task has been added successfully.
      *
      * @param task  the task that has been added
      * @param tasks all the tasks after the addition
@@ -41,7 +48,7 @@ public interface Ui {
     }
 
     /**
-     * Inform user that a task has been deleted successfully.
+     * Informs user that a task has been deleted successfully.
      *
      * @param task  the task that has been deleted
      * @param tasks all the tasks after the deletion
@@ -70,7 +77,7 @@ public interface Ui {
     }
 
     /**
-     * List the matches from the last find Command.
+     * Lists the matches from the last find Command.
      * @param matches the Tasks that matched
      */
     default void findMatches(final TaskList matches) {

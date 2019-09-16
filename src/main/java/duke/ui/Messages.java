@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.List;
+
 /**
  * Utility class that stores all messages that Duke should display.
  */
@@ -33,6 +35,17 @@ public final class Messages {
     public static final String TASKS_COUNT = "Now you have %d tasks in the list";
     public static final String BYE_MESSAGE = "Bye!";
     public static final String UNKNOWN_COMMAND = "Unknown command";
+    public static final String HELP_MESSAGE = String.join(
+        System.lineSeparator(),
+        List.of(
+            "todo DESC", "\t- add a todo with the given description",
+            "event DESC /at DATETIME", "\t- add an event that starts at DATETIME and have the given description",
+            "deadline DESC /by DEADLINE", "\t- add deadline that ends at DEADLINE and have the given description",
+            "delete TASK_NUMBER", "\t- delete the task with the given task number",
+            "done TASK_NUMBER", "\t- mark the task with the given task number as done",
+            "find [KEYWORD [KEYWORD ...] ]", "\t- find all tasks that march at least one KEYWORD",
+            "help", "\t- display this help message",
+            "bye", "\t- exit Duke"));
 
     // This class is for static use only
     private Messages() {

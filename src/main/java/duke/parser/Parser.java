@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.command.UnknownCommand;
@@ -74,6 +75,8 @@ public class Parser {
                 return new DeleteCommand(arguments.isBlank() ? null : parseTaskNumber(arguments));
             case "find":
                 return new FindCommand(arguments.isBlank() ? null : arguments.split("\\s+"));
+            case "help":
+                return new HelpCommand();
             default:
                 return new UnknownCommand();
         }

@@ -19,7 +19,14 @@ import duke.task.Todo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * This class allows the <code>Duke</code> application to understand the user's input
@@ -139,8 +146,17 @@ public class Parser {
      * @throws DukeException If there is a problem with data processing, loading or saving.
      */
     public static Date dateFormatter(String date) throws DukeException {
+        String dateFormat = "dd/MM/uuuu HHmm";
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter
+                .ofPattern(dateFormat, Locale.US)
+                .withResolverStyle(ResolverStyle.STRICT);
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+            LocalDateTime.parse(date, dateTimeFormatter);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException(ex.getMessage());
+        }
+        try {
             Date parseDate = formatter.parse(date);
             return parseDate;
         } catch (ParseException e) {

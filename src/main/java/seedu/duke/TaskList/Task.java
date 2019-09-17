@@ -9,8 +9,8 @@ public class Task {
 
     public String taskType;
     public String description;
-    public boolean isDone;
     public String time;
+    private boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -18,7 +18,6 @@ public class Task {
     }
 
     public String getStatusIcon() {
-
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
@@ -30,13 +29,7 @@ public class Task {
         }
     }
 
-    public String getTaskType() {
-
-        return this.taskType;
-    }
-
     public void setTaskType(String type) {
-
         this.taskType = type;
     }
 
@@ -100,5 +93,4 @@ public class Task {
     public String toActionString() {
         return null;
     }
-
 }

@@ -22,13 +22,13 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new deadline task with description, the date where the deadline task is due by that has not been
-     * done and the option to mark it as done.
+     * done.
      * @param description the description of the deadline task
      * @param by the date the task is due by
-     * @param isDone the done status of the task
      */
     public Deadline(String description, Date by) {
         super(description, by);
+        assert(by != null);
     }
 
     /**

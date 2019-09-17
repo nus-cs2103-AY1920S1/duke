@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.FailedToSaveIOException;
+import duke.exception.FailedToSaveIoException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidParameterException;
 import duke.parser.DateParser;
@@ -37,7 +37,7 @@ public class RemindCommand implements Command {
             this.date = getDate(arr);
         } catch (NumberFormatException nfe) {
             throw new InvalidParameterException("" + index);
-        } catch(ArrayIndexOutOfBoundsException aioube) {
+        } catch (ArrayIndexOutOfBoundsException aioube) {
             throw new InvalidParameterException(line);
         } catch (InvalidDateTimeException idte) {
             throw new InvalidParameterException(idte.getInvalidDateTime());
@@ -54,10 +54,11 @@ public class RemindCommand implements Command {
      */
     public String execute(TaskManager taskManager, UserInterface ui, Storage storage) throws InvalidParameterException {
         try {
+            assert(date != null);
             String task = taskManager.remind(index, date);
             storage.save(taskManager.getCurrentTaskListToSave());
             return ui.showSetReminder(task, date.toString());
-        } catch (FailedToSaveIOException ftsioe) {
+        } catch (FailedToSaveIoException ftsioe) {
             return ui.showSaveError();
         } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);

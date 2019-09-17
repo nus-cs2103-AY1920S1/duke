@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * This is a runtime exception that occur when the file is parsed line by line.
  */
-public class FailedToLoadIOException extends DukeException {
+public class FailedToLoadIoException extends DukeException {
 
     /**
      * This is the line number that the parsing error occurred.
@@ -21,7 +21,7 @@ public class FailedToLoadIOException extends DukeException {
      * @param lineCount the line number where the parsing error occurred
      * @param line the content of the line where the parsing error occurred
      */
-    public FailedToLoadIOException(int lineCount, String line) {
+    public FailedToLoadIoException(int lineCount, String line) {
         super();
         this.lineCount = lineCount;
         this.line = line;

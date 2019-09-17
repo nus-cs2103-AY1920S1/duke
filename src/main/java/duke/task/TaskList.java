@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.exception.FailedToLoadIOException;
+import duke.exception.FailedToLoadIoException;
 import duke.parser.FileToTaskParser;
 import duke.parser.TaskToFileParser;
 import duke.ui.Ui;
@@ -40,7 +40,7 @@ public class TaskList {
             try {
                 Task task = FileToTaskParser.parse(line);
                 taskList.add(task);
-            } catch (FailedToLoadIOException lifpe) {
+            } catch (FailedToLoadIoException lifpe) {
                 new Ui().showLineError(lifpe.getLineCount(), line);
             }
         });
@@ -51,6 +51,7 @@ public class TaskList {
      * @param task the task to be appended to the list
      */
     public void add(Task task) {
+        assert(task != null);
         taskList.add(task);
     }
 
@@ -60,6 +61,7 @@ public class TaskList {
      * @return a string representation of the task removed to be printed on a user interface.
      */
     public Task delete(int index) {
+        assert(index >= 0);
         return taskList.remove(index);
     }
 
@@ -69,6 +71,7 @@ public class TaskList {
      * @return a string representation of the done task to be be printed on a user interface.
      */
     public Task done(int index) {
+        assert(index >= 0);
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
@@ -88,13 +91,13 @@ public class TaskList {
      */
     public String view() {
         return IntStream.range(0, taskList.size())
-                 .mapToObj(index -> {
-                     int numbering = index + 1;
-                     Task task = taskList.get(index);
-                     return ("    " + numbering + "." + task.toString() + "\n"
-                             + "     " + task.displayReminderIfPresent() + "\n");
-                 })
-                .reduce("", (x, y) -> x + y);
+               .mapToObj(index -> {
+                   int numbering = index + 1;
+                   Task task = taskList.get(index);
+                   return ("    " + numbering + "." + task.toString() + "\n"
+                           + "     " + task.displayReminderIfPresent() + "\n");
+               })
+               .reduce("", (x, y) -> x + y);
     }
 
     /**
@@ -118,10 +121,12 @@ public class TaskList {
         return taskList.stream().map(x -> TaskToFileParser.parse(x));
     }
 
-
     public Task remind(int index, Date date) {
+        assert(index >= 0);
+        assert(date != null);
         Task remindedTask = taskList.get(index);
         remindedTask.setReminder(date);
         return remindedTask;
     }
+
 }

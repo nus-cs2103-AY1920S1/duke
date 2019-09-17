@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.exception.FailedToSaveIOException;
+import duke.exception.FailedToSaveIoException;
 import duke.exception.InvalidParameterException;
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskManager;
 import duke.ui.UserInterface;
 
@@ -47,7 +46,7 @@ public class DoneCommand implements Command {
             String task = taskManager.markTaskAsDone(index);
             storage.save(taskManager.getCurrentTaskListToSave());
             return ui.showMarkedAsDone(task);
-        } catch (FailedToSaveIOException ftsioe) {
+        } catch (FailedToSaveIoException ftsioe) {
             return ui.showSaveError();
         } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);

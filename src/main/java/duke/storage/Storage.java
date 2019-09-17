@@ -1,11 +1,16 @@
 package duke.storage;
 
-import duke.exception.DukeException;
-import duke.exception.FailedToLoadIOException;
-import duke.exception.FailedToSaveIOException;
+import duke.exception.FailedToSaveIoException;
 import duke.task.TaskManager;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.stream.Stream;
 
 /**
@@ -36,7 +41,7 @@ public class Storage {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
             return reader.lines();
-        } catch(FileNotFoundException fnfe) {
+        } catch (FileNotFoundException fnfe) {
             createTextFile();
             return Stream.empty();
         }
@@ -47,7 +52,7 @@ public class Storage {
      * @param stream the stream of lines to be saved into the file
      * @throws IOException if an I/O error occurs
      */
-    public void save(Stream<String> stream) throws FailedToSaveIOException, IOException {
+    public void save(Stream<String> stream) throws FailedToSaveIoException, IOException {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             stream.forEach(line -> {
@@ -58,7 +63,7 @@ public class Storage {
             createTextFile();
             save(stream);
         } catch (UncheckedIOException uioe) {
-            throw new FailedToSaveIOException(uioe.getMessage());
+            throw new FailedToSaveIoException(uioe.getMessage());
         }
     }
 
@@ -75,4 +80,5 @@ public class Storage {
         file.getParentFile().mkdirs();
         file.createNewFile();
     }
+
 }

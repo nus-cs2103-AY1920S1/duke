@@ -1,8 +1,12 @@
 package duke.parser;
 
-import duke.exception.FailedToLoadIOException;
+import duke.exception.FailedToLoadIoException;
 import duke.exception.InvalidDateTimeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskManager;
+import duke.task.Todo;
 
 /**
  * This is a parser used to parse each line in the file to a <code>Task</code>. The <code>Task</code> can be added into
@@ -19,11 +23,12 @@ public class FileToTaskParser {
      * Parses the string into a {@link Task} that can be added into a list of tasks in {@link TaskManager}.
      * @param line the line to be parsed
      * @return a task that can be added into a list of tasks
-     * @throws FailedToLoadIOException if the line cannot be parsed by the <code>FileToTaskParser</code>
+     * @throws FailedToLoadIoException if the line cannot be parsed by the <code>FileToTaskParser</code>
      */
-    public static Task parse(String line) throws FailedToLoadIOException {
+    public static Task parse(String line) throws FailedToLoadIoException {
         lineCount++;
         String[] arr = line.split(",");
+        assert(arr.length >= 5);
         try {
 
             String isDone = getIsDone(arr);
@@ -49,12 +54,12 @@ public class FileToTaskParser {
                 event.setReminderIfPresent(reminderDate);
                 return event;
             default:
-                throw new FailedToLoadIOException(lineCount, line);
+                throw new FailedToLoadIoException(lineCount, line);
             }
         } catch (ArrayIndexOutOfBoundsException aiobe) {
-            throw new FailedToLoadIOException(lineCount, line);
+            throw new FailedToLoadIoException(lineCount, line);
         } catch (InvalidDateTimeException idte) {
-            throw new FailedToLoadIOException(lineCount, line);
+            throw new FailedToLoadIoException(lineCount, line);
         }
     }
 
@@ -77,4 +82,5 @@ public class FileToTaskParser {
     private static String getTaskDate(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[4];
     }
+
 }

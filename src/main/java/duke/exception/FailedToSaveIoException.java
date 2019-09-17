@@ -3,14 +3,14 @@ package duke.exception;
 /**
  * This is a runtime exception that occur when there is failed or interrupted operations in the writer.
  */
-public class FailedToSaveIOException extends DukeException {
+public class FailedToSaveIoException extends DukeException {
 
     /**
      * This is the content of the line where the write error occured.
      */
     private String line;
 
-    public FailedToSaveIOException() {
+    public FailedToSaveIoException() {
         this.line = "";
     }
 
@@ -19,7 +19,7 @@ public class FailedToSaveIOException extends DukeException {
      * occurred.
      * @param line the content of the line where the write error occurred
      */
-    public FailedToSaveIOException(String line) {
+    public FailedToSaveIoException(String line) {
         super();
         this.line = line;
     }

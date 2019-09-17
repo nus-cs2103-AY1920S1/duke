@@ -27,4 +27,5 @@ public class NotificationAlert extends TimerTask {
         alertWindow.style("/style/stylesheet.css", "alertPane");
         alertWindow.display();
     }
+
 }

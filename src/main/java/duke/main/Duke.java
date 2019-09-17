@@ -1,7 +1,6 @@
 package duke.main;
 
 import duke.command.Command;
-import duke.exception.FailedToLoadIOException;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidParameterException;
 import duke.parser.CommandParser;

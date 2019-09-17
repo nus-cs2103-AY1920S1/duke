@@ -51,7 +51,7 @@ public class Parser {
         Parser.ui = ui;
         assert !command.equals("") : "The description of the command cannot be an empty string";
 
-        if (command.equals("bye")) {
+        if (command.equalsIgnoreCase("bye")) {
             return new ExitCommand();
         }
 
@@ -61,12 +61,15 @@ public class Parser {
             return new ListCommand();
         } else if (command.trim().equalsIgnoreCase("show stats")) {
             return new StatisticsCommand();
-        } else if (detailsArray.length == 1 && (detailsArray[0].equals("todo") || detailsArray[0].equals("deadline")
-                    || detailsArray[0].equals("event") || detailsArray[0].equals("done")
-                || detailsArray[0].equals("delete") || detailsArray[0].equals("find"))) {
+        } else if (detailsArray.length == 1 && (detailsArray[0].equalsIgnoreCase("todo")
+                || detailsArray[0].equalsIgnoreCase("deadline")
+                || detailsArray[0].equalsIgnoreCase("event")
+                || detailsArray[0].equalsIgnoreCase("done")
+                || detailsArray[0].equalsIgnoreCase("delete")
+                || detailsArray[0].equalsIgnoreCase("find"))) {
             throw new EmptyDescriptionException(ui.getEmptyDescriptionMsg(detailsArray[0]));
         } else {
-            switch (detailsArray[0]) {
+            switch (detailsArray[0].toLowerCase()) {
             case "todo":
                 return new TodoCommand(String.join(" ",
                         Arrays.copyOfRange(detailsArray, 1, detailsArray.length)));
@@ -107,7 +110,7 @@ public class Parser {
         String[] arr1 = command.split(" ", 2);    // to split the command and the index
         String[] arr2 = arr1[1].split("[,] ");
 
-        switch (arr1[0]) {
+        switch (arr1[0].toLowerCase()) {
         case "find":
             for (int i = 0; i < arr2.length; i++) {
                 // split the individual keyword to check if it contains multiple words
@@ -143,7 +146,7 @@ public class Parser {
      * @throws MissingTimeStampException if the timestamp is missing, or "/by" or "/at" is missing
      */
     static void getDate(String[] detailsArray) throws ParseException, MissingTimeStampException {
-        if (detailsArray[0].equals("deadline")) {
+        if (detailsArray[0].equalsIgnoreCase("deadline")) {
             for (int i = 0; i < detailsArray.length; i++) {
                 if (detailsArray[i].equals("/by")) {
                     dateTime = dateParse(String.join(" ",

@@ -29,6 +29,8 @@ todo <task description>
 
 The "To-do" task only contains a *task description*, which you may enter after the `todo` command, separated by a whitespace.
 
+<details><summary>How to use:</summary>
+
 #### Example of usage: 
 
 ```
@@ -44,6 +46,7 @@ _____________________________________________________
  Now you have 1 task in your list.
 _____________________________________________________
 ```
+</details>
 
 ### `deadline` - Creates a "Deadline" task
 ```
@@ -57,6 +60,8 @@ The task description should be entered after the `deadline` command, separated b
 The deadline time should be entered after the `/by` keyword, separated by a white space. The `/by` keyword should also be separated from the task description by a whitespace.
 
 Deadline time must be entered in the format `dd/MM/yyyy HHmm`. Note the use of 24-hour time format.
+
+<details><summary>How to use:</summary>
 
 #### Example of usage: 
 
@@ -73,6 +78,7 @@ _____________________________________________________
  Now you have 2 tasks in your list.
 _____________________________________________________
 ```
+</details>
 
 ### `event` - Creates a "Event" task
 ```
@@ -87,6 +93,8 @@ The event time should be entered after the `/at` keyword, separated by a white s
 
 Event time must be entered in the format `dd/MM/yyyy HHmm`. Note the use of 24-hour time format.
 
+<details><summary>How to use:</summary>
+ 
 #### Example of usage: 
 
 ```
@@ -102,6 +110,7 @@ _____________________________________________________
  Now you have 3 tasks in your list.
 _____________________________________________________
 ```
+</details>
 
 ### `list` - Lists all recorded events
 ```
@@ -110,6 +119,8 @@ list
 
 Lists all the tasks currently stored within the task list.
 
+<details><summary>How to use:</summary>
+ 
 #### Example of usage:
 
 ```
@@ -126,6 +137,7 @@ _____________________________________________________
   3.[E][✗] house warming (at: Wed Jan 01 20:00:00 SGT 2020)
 _____________________________________________________
 ```
+</details>
 
 ### `done` - Marks task as done
 ```
@@ -134,6 +146,8 @@ done <index>
 
 Indicates a task as done, according to that task's *index* within the task list.
 
+<details><summary>How to use:</summary>
+ 
 #### Example of usage:
 
 ##### When the task list looks like this:
@@ -161,6 +175,7 @@ _____________________________________________________
   [D][✓] clean room (by: Wed Jan 01 00:00:00 SGT 2020)
 _____________________________________________________
 ```
+</details>
 
 ### `delete` - Deletes a task
 ```
@@ -169,6 +184,8 @@ delete <index>
 
 Deletes a task according to that task's *index* within the task list.
 
+<details><summary>How to use:</summary>
+ 
 #### Example of usage:
 
 ##### When the task list looks like this:
@@ -196,6 +213,7 @@ _____________________________________________________
   [T][✗] grab lunch
 _____________________________________________________
 ```
+</details>
 
 ### `undo` - Undoes a change
 ```
@@ -209,6 +227,8 @@ Changes that can be undone include:
 - deleting of tasks from the task list
 - indicating a task as done
 
+<details><summary>How to use:</summary>
+ 
 #### Example of usage:
 
 ##### When the task list looks like this:
@@ -240,8 +260,7 @@ _____________________________________________________
   [T][✗] grab lunch
 _____________________________________________________
 ```
-
-
+</details>
 
 ### `find` - Find tasks with a certain keyword
 ```
@@ -250,6 +269,8 @@ find <keyword>
 
 Lists all the tasks within the current task list that contain the specified *keyword*.
 
+<details><summary>How to use:</summary>
+ 
 #### Example of usage:
 
 ##### When the task list looks like this:
@@ -271,7 +292,7 @@ _____________________________________________________
 find book
 ```
 
-##### Expected outcome:
+#### Expected outcome:
 
 ```
 _____________________________________________________
@@ -281,4 +302,28 @@ _____________________________________________________
   3.[D][✗] return book (by: Fri Oct 04 17:00:00 SGT 2019)
 _____________________________________________________
 ```
+</details>
 
+### `bye` - Stops Duke from running
+```
+bye
+```
+
+Says bye to Duke. Any further input made after the `bye` command will not do anything.
+
+<details><summary>How to use:</summary>
+ 
+#### Example of usage:
+
+```
+bye
+```
+
+#### Expected outcome:
+
+```
+_____________________________________________________
+ Bye. Hope to see you again soon!
+_____________________________________________________
+```
+</details>

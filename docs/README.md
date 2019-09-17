@@ -34,9 +34,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
- [T][ ] borrow book
- Now you have 1 tasks in the list.`
+```
+Got it. I've added this task:
+[T][ ] borrow book
+Now you have 1 tasks in the list.
+```
 
 ### `deadline` - Adds a deadline task
 
@@ -48,9 +50,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
- [D][ ] return book (by: 17 Sep 2019, 10:34 PM)
- Now you have 1 tasks in the list.`
+```
+Got it. I've added this task:
+[D][ ] return book (by: 17 Sep 2019, 10:34 PM)
+Now you have 1 tasks in the list.
+```
 
 ### `event` - Adds an event task
 
@@ -62,10 +66,12 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:
- [E][ ] book meeting (by: 10 Feb 2015, 09:00 AM)
- Now you have 1 tasks in the list.`
- 
+```
+Got it. I've added this task:
+[E][ ] book meeting (by: 10 Feb 2015, 09:00 AM)
+Now you have 1 tasks in the list.
+``` 
+
 ### `done` - Marks a task as done
 
 Marks a task as done in the task list of Duke, this action is irreversible.
@@ -76,8 +82,10 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:
- [E][+] book meeting (by: 10 Feb 2015, 09:00 AM)`
+```
+Nice! I've marked this task as done:
+[E][+] book meeting (by: 10 Feb 2015, 09:00 AM)
+```
  
 ### `delete` - Deletes a task
 
@@ -89,9 +97,11 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:
- [E][+] book meeting (by: 10 Feb 2015, 09:00 AM)
- Now you have 0 tasks in the list.`
+```
+Noted. I've removed this task:
+[E][+] book meeting (by: 10 Feb 2015, 09:00 AM)
+Now you have 0 tasks in the list.
+```
   
 ### `find` - Finds tasks
 
@@ -103,11 +113,13 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:
- 1.[E][+] book meeting (by: 10 Feb 2015, 09:00 AM)
- Now you have 0 tasks in the list.
- 2.[D][ ] return book (by: 17 Sep 2019, 10:34 PM)`
- 
+```
+Here are the matching tasks in your list:
+1. [E][+] book meeting (by: 10 Feb 2015, 09:00 AM)
+Now you have 0 tasks in the list.
+2. [D][ ] return book (by: 17 Sep 2019, 10:34 PM)
+```
+
 ### `prioritise` - Prioritises a task
 
 Prioritise a task in the task list by ranking it first in the list.
@@ -118,9 +130,11 @@ Example of usage:
 
 Expected outcome:
 
-`Okay! I've marked this as a high priority task:
- [D][ ] return book (by: 17 Sep 2019, 10:34 PM)`
- 
+```
+Okay! I've marked this as a high priority task:
+[D][ ] return book (by: 17 Sep 2019, 10:34 PM)
+``` 
+
 ### `priority` - Prioritises a task when adding to Duke 
 
 Marks a task as high priority immediately when adding it to Duke.
@@ -131,9 +145,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it I have added this task:
- [E][ ] read book
- Now you have 1 tasks in the list.`
+```
+Got it I have added this task:
+[E][ ] read book
+Now you have 1 tasks in the list.
+```
 
 ### `list` - Lists all task in Duke 
 
@@ -145,10 +161,12 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:
-  1.[E][+] book meeting (by: 10 Feb 2015, 09:00 AM)
-  `----------------------`
-  2.[D][ ] return book (by: 17 Sep 2019, 10:34 PM)`
+```
+Here are the tasks in your list:
+1. [E][+] book meeting (by: 10 Feb 2015, 09:00 AM)
+----------------------
+2. [D][ ] return book (by: 17 Sep 2019, 10:34 PM)
+```
 
 ### `bye` - Exits the program 
 

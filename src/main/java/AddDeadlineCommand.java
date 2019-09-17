@@ -27,11 +27,11 @@ public class AddDeadlineCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui, String input) throws DukeException {
         String[] userWords;
         if (input.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
         userWords = input.split("/by");
         if (userWords.length == 1) {
-            throw new DukeException("☹ OOPS!!! The date/time of a deadline cannot be empty or is wrongly typed.");
+            throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty or is wrongly typed.");
         }
         try {
             LocalDateTime dateObj = LocalDateTime.parse(userWords[1].trim(),

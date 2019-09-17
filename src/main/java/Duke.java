@@ -20,7 +20,7 @@ public class Duke {
      * Constructor of Duke class.
      */
     public Duke() {
-        String filePath = "src/main/data/duke.txt";
+        String filePath = "dukeList.txt";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -77,7 +77,7 @@ public class Duke {
 
     /*
     public static void main(String[] args) {
-        new Duke("src/main/data/duke.txt").run();
+        new Duke("src/main/data/example.txt").run();
     }
      */
 

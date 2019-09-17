@@ -1,8 +1,9 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -31,6 +32,10 @@ public class Storage {
      */
     public ArrayList<Task> loadData() throws DukeException {
         try {
+            /*
+            // Code to load example list.
+            InputStream in = this.getClass().getClassLoader().getResourceAsStream(filePath);
+             */
             File f = new File(filePath);
             ArrayList<Task> list = new ArrayList<>();
             //System.out.println(f.getAbsolutePath());

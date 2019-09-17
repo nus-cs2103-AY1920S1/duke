@@ -1,6 +1,5 @@
+import java.io.InputStream;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 /**
  * Handles the printing of Duke messages.
@@ -16,7 +15,7 @@ public class Ui {
      */
     public Ui() {
         sc = new Scanner(System.in);
-        helpFilePath = "src/main/data/help.txt";
+        helpFilePath = "data/help.txt";
     }
 
     /**
@@ -104,12 +103,12 @@ public class Ui {
      */
     public String showHelp() throws DukeException {
         try {
-            File f = new File(helpFilePath);
-            Scanner sc = new Scanner(f);
+            InputStream in = this.getClass().getClassLoader().getResourceAsStream(helpFilePath);
+            Scanner sc = new Scanner(in);
             String helpMessage = sc.useDelimiter("\\A").next();
             sc.close();
             return helpMessage;
-        } catch (FileNotFoundException e) {
+        } catch (NullPointerException e) {
             throw new DukeException("Failed to load help text file");
         }
     }

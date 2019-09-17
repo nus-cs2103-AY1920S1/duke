@@ -25,11 +25,11 @@ public class AddEventCommand extends Command {
 
         String[] userWords;
         if (input.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
         }
         userWords = input.split("/at");
         if (userWords.length == 1) {
-            throw new DukeException("☹ OOPS!!! The date/time of an event cannot be empty or is wrongly typed.");
+            throw new DukeException("OOPS!!! The venue of an event cannot be empty or is wrongly typed.");
         }
         return tasks.addTask(new Event(userWords[0].trim(), userWords[1].trim()));
 

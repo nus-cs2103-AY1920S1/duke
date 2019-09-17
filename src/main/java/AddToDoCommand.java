@@ -23,7 +23,7 @@ public class AddToDoCommand extends Command {
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui, String input) throws DukeException {
         if (input.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         return tasks.addTask(new Task(input));
     }

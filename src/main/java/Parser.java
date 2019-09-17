@@ -1,5 +1,3 @@
-import java.util.InputMismatchException;
-
 /**
  * Deals with making sense of the user command
  */
@@ -39,7 +37,7 @@ public class Parser {
         case ("help") :
             return CommandType.HELP;
         default :
-            throw new InputMismatchException("I'm sorry, but I don't know what that means");
+            return CommandType.ERROR;
         }
     }
 }

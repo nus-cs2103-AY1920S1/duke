@@ -138,12 +138,14 @@ public class Duke extends Application {
                 Ui ui = new Ui();
                 Command command = new Command();
                 response = command.execute(tasks, ui, storage, input);
-            } catch (InputMismatchException | IllegalArgumentException | IndexOutOfBoundsException | IOException | DukeException e) {
-                response = ui.printErrorMessage(e.getMessage());
+            } catch (DukeException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            return "Smart Baby says: \n" + response;
+            return response;
         } else {
-            return "error";
+            return ui.printOops();
         }
     }
 }

@@ -50,11 +50,11 @@ public class Storage {
                     break;
 
                 default:
-                    System.out.println("error");
+                    System.out.println("Task(s) in task list does not match");
                 }
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("File not found");
         }
     }
 

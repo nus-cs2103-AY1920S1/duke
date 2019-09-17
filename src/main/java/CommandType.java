@@ -10,7 +10,8 @@ public enum CommandType {
     DONE,
     BYE,
     FIND,
-    HELP;
+    HELP,
+    ERROR;
 
     @Override
     public String toString() {

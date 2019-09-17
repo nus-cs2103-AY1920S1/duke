@@ -48,7 +48,7 @@ public class Ui {
      * Prints do not understand message.
      */
     public String printOops() {
-        String oops = "(ヾﾉ꒪ཫ꒪ ) OOPS!!! I'm sorry, but I don't know what that means\n"
+        String oops = "ಠ_ಠ OOPS!!! I'm sorry, but I don't know what that means.\n"
                 + "Type 'help' to see what I can do for you. (｡◕‿◕｡)";
         return oops;
     }
@@ -116,14 +116,20 @@ public class Ui {
      * Prints correct format for event input.
      */
     public String printEventFormat() {
-        return " (;´･д･`) Doesn't match the event format.\n Please use /at dd/mm/yyyy 0000 (in 24hr).\n";
+        return " (;´･д･`) Doesn't match the event format.\n"
+            + "Please use \"event ... /at dd/mm/yyyy 0000\" (in 24hr).\n";
     }
 
     /**
      * Prints correct format for deadline input.
      */
     public String printDeadlineFormat() {
-        return " (. ﾟーﾟ) Doesn't match the deadline format.\n Please use /by dd/mm/yyyy 0000 (in 24hr).\n";
+        return " (. ﾟーﾟ) Doesn't match the deadline format.\n"
+            + "Please use \"deadline ... /by dd/mm/yyyy 0000\" (in 24hr).\n";
+    }
+
+    public String printNoInputError() {
+        return "( ͡° ͜ʖ ͡°) Ahh I can't read your mind yet, say something.\n";
     }
 
     /**
@@ -131,20 +137,22 @@ public class Ui {
      * @param taskType
      * @throws DukeException
      */
-    public String throwErrorMessage(String taskType) throws DukeException {
-        if (Stream.of("delete", "done", "todo", "deadline", "event").anyMatch(s -> taskType.equals(s))) {
-            throw new DukeException("∑(゜Д゜;) OOPS!!! The description of a " + taskType + " cannot be empty.\n");
-        } else {
-            throw new DukeException("_(꒪ཀ꒪」∠)_ OOPS!!! I'm sorry, but I don't know what that means.\n");
-        }
-    }
 
-    /**
-     * String representation of the error message.
-     * @param error
-     */
-    public String printErrorMessage(String error) {
-        return "OOPS!!! " + error + "\n";
+    public String throwErrorMessage(String taskType) {
+        switch (taskType) {
+        case "todo" :
+            return "∑(゜Д゜;) Description of a todo can't be empty.\n";
+        case "event" :
+            return "∑(゜Д゜;) Description of an event can't be empty.\n";
+        case "deadline" :
+            return "∑(゜Д゜;) Description of a deadline can't be empty.\n";
+        case "done" :
+            return "I've done nothing productive all day...you too? (⊃◜⌓◝⊂)\n";
+        case "delete" :
+            return "One does not simply delete nothing.(￣ ︶ ￣;)\n";
+        default :
+            return "ಠ_ಠ OOPS!!! I'm sorry, but I don't know what that means.\n";
+        }
     }
 
     public String printHelp() {

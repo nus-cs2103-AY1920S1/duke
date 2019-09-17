@@ -11,13 +11,20 @@ their todo tasks, events and deadlines.
 ## Features 
 
 
-### Feature 1 - Done
+### Feature 1 - Add/Delete Tasks
 
-Tick items off and mark them as completed.
+In Duke, you can add 3 types of tasks:
+- To-do
+- Event
+- Deadline
 
-### Feature 2 - Prioritize 
+Set them as done after you have completed it.
+Set priority (1-4) for the task after adding it.
 
-Set priority to all your tasks.
+### Feature 2 - Find
+
+Duke has a simple search function that allows you to search by keywords.
+Helpful if you have a very long list.
 
 ## Commands
 

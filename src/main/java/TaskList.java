@@ -25,8 +25,6 @@ public class TaskList {
 
     /**
      * To add a task into the tasklist
-     * Updates the counters of number of
-     * events, deadlines, toDos.
      * @param task to be added
      */
     public void addTask(Task task) {

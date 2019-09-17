@@ -47,10 +47,6 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String printRemovedMessage(Task task) {
-        return "Nice! I've marked this task as done\n" + task;
-    }
-
     public String printDoneMessage(Task task) {
         return "Nice! I've marked this task as done\n" + task;
     }

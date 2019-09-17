@@ -2,6 +2,20 @@
 ##### A simple chatbot that helps to manage todos, events, and deadlines.
 
 
+Three or more...
+
+---
+
+Hyphens
+
+***
+
+Asterisks
+
+___
+
+Underscores
+
 ## Prerequisite
 1. Make sure you have at least **Java  11** installed on your computer.
 2. download the latest version of **Duke.jar** found [here](https://github.com/austinsantoso/duke/releases).
@@ -89,7 +103,7 @@ Duke will respond with a new event task with the given name and date.
 ***
 ### Manipulating tasks
 ***
-##### `done [task number]` - COmpletes a task
+##### `done [task number]` - Completes a task
 Marks the tasks with the given task number as completed.
 
 **Example of usage:**

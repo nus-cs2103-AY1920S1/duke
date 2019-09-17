@@ -1,3 +1,5 @@
+import java.util.logging.Logger;
+
 /**
  * Main class of the application.
  */
@@ -16,7 +18,6 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -29,11 +30,13 @@ public class Duke {
      * @return the response text
      */
     public String getResponse(String input) {
-        if (input.equals("bye")) {
+        String inputIgnoreCase = input.toLowerCase();
+
+        if (inputIgnoreCase.equals("bye")) {
             return "Bye. Hope to see you again soon!";
         } else {
             try {
-                return Parser.parse(tasks, ui, input, storage);
+                return Parser.parse(tasks, ui, inputIgnoreCase, storage);
             } catch (Exception err) {
                 return "[Exception]" + err;
             }

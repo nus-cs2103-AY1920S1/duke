@@ -5,11 +5,6 @@ import java.util.LinkedList;
  * To deals with interactions with the user.
  */
 public class Ui extends AnchorPane {
-
-    String showLoadingError() {
-        return "File loaded unsuccessful";
-    }
-
     /**
      * Printing the list of task from a taskList.
      *

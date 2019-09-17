@@ -49,14 +49,14 @@ public class Parser {
 
                 assert selectedTask.getStatusIcon().equals("X") : "Task should be marked as done";
 
-                storage.writeFile(tasks.getListOfTasks());
+                saveFile(storage, tasks);
                 return ui.printTaskDone(selectedTask);
             } else if (actionKey.equals("delete")) { // delete a specific plan
                 LinkedList<Task> totalTasks = tasks.getListOfTasks();
                 int index = Integer.parseInt(keyList[1]);
                 String outputText = ui.printTaskDelete(totalTasks, index);
                 tasks.deleteTask(index - 1);
-                storage.writeFile(tasks.getListOfTasks());
+                saveFile(storage, tasks);
                 return outputText;
             } else if (actionKey.equals("find")) {
                 String textToSearch = keyList[1];
@@ -66,24 +66,27 @@ public class Parser {
                     String[] deadlineList = deadlineHandler(keyList);
                     LocalDateTime convertedTimeStamp = convertDateAndTime(deadlineList[1]);
                     Deadline newDeadline = new Deadline(deadlineList[0], convertedTimeStamp);
+
                     tasks.addTask(newDeadline);
-                    storage.writeFile(tasks.getListOfTasks());
+                    saveFile(storage, tasks);
                     return ui.printAddTask(tasks, newDeadline);
                 } else if (actionKey.equals("event")) {
                     String[] eventList = eventHandler(keyList);
                     LocalDateTime convertedTimeStamp = convertDateAndTime(eventList[1]);
                     Event newEvent = new Event(eventList[0], convertedTimeStamp);
+
                     tasks.addTask(newEvent);
-                    storage.writeFile(tasks.getListOfTasks());
+                    saveFile(storage, tasks);
                     return ui.printAddTask(tasks, newEvent);
                 } else if (actionKey.equals("todo")) {
                     if (keyList.length <= 1) {
                         throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
                     }
 
-                    Todo newTodo = new Todo(inputText.split(" ", 2)[1]);
+                    String description = inputText.split(" ", 2)[1];
+                    Todo newTodo = new Todo(description);
                     tasks.addTask(newTodo);
-                    storage.writeFile(tasks.getListOfTasks());
+                    saveFile(storage, tasks);
                     return ui.printAddTask(tasks, newTodo);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -120,5 +123,9 @@ public class Parser {
         }
 
         return contentList;
+    }
+
+    private static void saveFile(Storage storage, TaskList tasks) {
+        storage.writeFile(tasks.getListOfTasks());
     }
 }

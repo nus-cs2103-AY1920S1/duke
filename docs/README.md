@@ -1,5 +1,5 @@
 # User Guide
-Duke is an interactive chatbot that serves as a task list.
+Duke is an interactive chatbot that serves as a personal task list.
 
 ## Features
 
@@ -15,18 +15,31 @@ In Duke, every task is set to be not done by default, and a cross symbol [✗] w
 View all the tasks in your task list. Each task will have a representative symbol to represent its status - done or not done.
 
 ### Auto-save functionality
-All tasks are automatically saved.
+In Duke, all tasks are automatically saved. No manual saving is needed.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `bye` - Terminates the application
 
-Describe action and its outcome.
+Duke program will exit, and its GUI window will close.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`bye`
 
 Expected outcome:
 
-`outcome`
+GUI window closed.
+
+### `list` - Displays all tasks in the task list
+
+Duke program will exit, and its GUI window will close.
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+`Here are the tasks in your list:
+ 1.[T][✗] lawsuit research`

@@ -68,7 +68,7 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         default:
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("I'm sorry, but I don't know what that means ╥﹏╥");
         }
     }
 }

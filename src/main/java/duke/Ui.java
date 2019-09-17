@@ -60,7 +60,7 @@ public class Ui {
      * @param tasks the task list.
      */
     public void printTaskAdded(Task task, TaskList tasks) {
-        printGuiMessage("Got it. I've added this task: \n  " + task
+        printGuiMessage("Got it (ﾟ▽ﾟ)/ \nI've added this task: \n  " + task
                 + "\nNow you have " + Ui.pluralize("task", tasks.getSize()) + " in the list.");
     }
 
@@ -70,7 +70,7 @@ public class Ui {
      * @param task the task marked as done.
      */
     public void printTaskDone(Task task) {
-        printGuiMessage("Nice! I've marked this task as done:\n  " + task);
+        printGuiMessage("Got it (ﾟ▽ﾟ)/ \nI've marked this task as done:\n  " + task);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Ui {
      * @param tasks the task list before deletion.
      */
     public void printTaskDeleted(Task task, TaskList tasks) {
-        printGuiMessage("Noted. I've removed this task: \n  " + task
+        printGuiMessage("Noted (^._.^)ﾉ \nI've removed this task: \n  " + task
                 + "\nNow you have " + Ui.pluralize("task", tasks.getSize() - 1) + " in the list.");
     }
 
@@ -91,7 +91,7 @@ public class Ui {
      * @param tasks the task list before deletion.
      */
     public void printTaskArchived(Task task, TaskList tasks) {
-        printGuiMessage("Noted. I've archived this task: \n  " + task
+        printGuiMessage("Noted (^._.^)ﾉ \nI've archived this task: \n  " + task
                 + "\nNow you have " + Ui.pluralize("task", tasks.getSize() - 1) + " in the list.");
     }
 
@@ -127,7 +127,7 @@ public class Ui {
      * @param e the error to be printed.
      */
     public void printError(Exception e) {
-        printGuiMessage("☹ OOPS!!! " + e.getMessage());
+        printGuiMessage("OOPS!!! " + e.getMessage());
     }
 
     /**

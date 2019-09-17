@@ -3,6 +3,7 @@ package com.commands;
 import com.TaskList;
 import com.util.StaticStrings;
 import com.util.Storage;
+import com.util.stats.DukeStatistics;
 
 public class ListCommand extends Command {
 
@@ -17,6 +18,7 @@ public class ListCommand extends Command {
         } else {
             ui.showListCommandResponse(taskList.getTaskArr());
         }
+        new DukeStatistics().addLog(this);
     }
 
     /**

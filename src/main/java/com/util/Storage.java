@@ -2,7 +2,6 @@ package com.util;
 
 import com.tasks.*;
 import com.exceptions.*;
-import com.util.StaticStrings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -110,7 +109,7 @@ public class Storage {
                 );
                 // If not last task in data, append new line
                 int currTaskIdx = taskArr.indexOf(currTask);
-                if(currTaskIdx + 1 != taskArr.size()) {
+                if (currTaskIdx + 1 != taskArr.size()) {
                     fw.write("\n");
                 }
             }

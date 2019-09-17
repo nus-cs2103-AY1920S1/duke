@@ -4,6 +4,7 @@ import com.TaskList;
 import com.exceptions.DukeException;
 import com.util.Storage;
 import com.tasks.*;
+import com.util.stats.DukeStatistics;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class ToDoCommand extends AddCommand {
         taskList.addTask(newTask);
         ArrayList<Task> taskArr = taskList.getTaskArr();
         storage.save(taskArr);
+        new DukeStatistics().addLog(this, newTask);
         ui.showAddTaskResponse(newTask, taskArr);
     }
 

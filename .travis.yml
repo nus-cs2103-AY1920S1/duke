@@ -3,8 +3,8 @@ matrix:
    include:
      - jdk: openjdk11
 
-before_script:
-  - chmod a+x gradlew
+before_install:
+  - chmod +x gradlew
 
 script: ./gradlew build
 

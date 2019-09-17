@@ -16,7 +16,6 @@ public class DoneCommand extends Command {
      * @param storage the Storage to be used
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLine();
         index = Integer.parseInt(ui.getRemainingWords().trim());
         tasks.getTaskArrayList().get(index - 1).markAsDone();
         storage.writeData();

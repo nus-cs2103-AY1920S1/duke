@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 /**
  * A date class to be used in the Duke application.
  * This class represents the time and date of the tasks.
- * <code>DukeDate</code> can be formatted into a String by {@link DukeDate#format()} or {@link DukeDate#toString()}.
+ * {@code DukeDate} can be formatted into a String by {@link DukeDate#format(boolean)} or {@link DukeDate#toString()}.
  */
 public class DukeDate {
 
@@ -221,13 +221,16 @@ public class DukeDate {
      *     <li>a - the AM/PM marker
      * </ul>
      *
+     * @param shouldTrim If true, trims the month into first three words.
      * @return This DukeDate formatted into a String.
      */
-    public String format() {
+    public String format(boolean shouldTrim) {
         DecimalFormat df = new DecimalFormat("00");
         return String.format("%d %s, %d, %d:%s %s",
                              this.day,
-                             this.month.toString().substring(0, 3),
+                             shouldTrim
+                                 ? this.month.toString().substring(0, 3)
+                                 : this.month,
                              this.year,
                              this.hour,
                              df.format(this.minute),
@@ -235,13 +238,13 @@ public class DukeDate {
     }
 
     /**
-     * Returns same result as {@link DukeDate#format()}.
+     * Returns same result as {@link DukeDate#format(boolean)}.
      *
-     * @return {@link DukeDate#format()}.
+     * @return {@link DukeDate#format(boolean)}.
      */
     @Override
     public String toString() {
-        return this.format();
+        return this.format(false);
     }
 
 }

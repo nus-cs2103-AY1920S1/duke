@@ -19,7 +19,7 @@ import duke.module.CommandStack;
  * @version v0.1
  * @since   2019-09-01
  */
-public class Duke {
+public class DukeCli {
 
     private Ui ui;
     private TaskList taskList;
@@ -32,7 +32,7 @@ public class Duke {
      * @throws DukeIoException When an error occurs during the input-output process or
      *     during the parsing of the save file
      */
-    public Duke() throws DukeIoException {
+    public DukeCli() throws DukeIoException {
         this.ui = new Ui();
         this.commandStack = new CommandStack();
         this.storage = new Storage();

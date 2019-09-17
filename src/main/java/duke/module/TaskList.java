@@ -115,7 +115,7 @@ public class TaskList {
      */
     public void addTaskAt(int index, Task task) {
         assert task != null : "TaskList.java (line 117) : task should not be null";
-        assert index > 0 && index <= this.taskList.size() : "TaskList.java (line 118) : index is out of bounds";
+        assert index > 0 && index - 1 <= this.taskList.size() : "TaskList.java (line 118) : index is out of bounds";
         this.taskList.add(index - 1, task);
     }
 

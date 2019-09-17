@@ -2,7 +2,7 @@ package dukegui.controller;
 
 import duke.module.AutoResponse;
 
-import dukegui.Duke;
+import dukegui.DukeGui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private DukeGui duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ryan.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/D.png"));
@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
         AnchorPane.setRightAnchor(userInput, sendButton.getPrefWidth());
     }
 
-    public void setDuke(Duke duke) {
+    public void setDuke(DukeGui duke) {
         this.duke = duke;
     }
 

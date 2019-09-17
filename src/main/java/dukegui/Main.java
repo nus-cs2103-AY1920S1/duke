@@ -17,10 +17,10 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke;
+    private DukeGui duke;
 
     public Main() throws DukeIoException {
-        duke = new Duke();
+        duke = new DukeGui();
     }
 
     @Override

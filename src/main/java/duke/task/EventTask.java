@@ -43,10 +43,10 @@ public class EventTask extends Task {
      * The format is "dd Month, YYYY, hh:mm a".
      *
      * @return The date field formatted as a String.
-     * @see DukeDate#format()
+     * @see DukeDate#format(boolean)
      */
     public String getDateAsString() {
-        return this.time.format();
+        return this.time.format(true);
     }
 
     /**
@@ -66,7 +66,9 @@ public class EventTask extends Task {
      */
     @Override
     public String getStatus() {
-        return String.format("[E]%s (at: %s)", super.getStatus(), this.time);
+        return String.format("[E]%s (at: %s)",
+                             super.getStatus(),
+                             this.time.format(true));
     }
 
 }

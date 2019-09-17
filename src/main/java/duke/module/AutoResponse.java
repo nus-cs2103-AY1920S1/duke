@@ -27,7 +27,7 @@ public class AutoResponse {
     public static final String DUKE_NO_TASKS = "You currently have no tasks in your list.";
     public static final String DUKE_UNDO_ADD_TASK = "Noted. I've removed this task again:";
     public static final String DUKE_UNDO_DELETE_NO_TASK = "No tasks were deleted before.";
-    public static final String DUKE_UNDO_DELETE_TASK = "Got it. I've added the following task(s):";
+    public static final String DUKE_UNDO_DELETE_TASK = "Got it. I've added back the following task(s):";
     public static final String DUKE_UNDO_DONE_NO_TASK = "No tasks were marked as done before.";
     public static final String DUKE_UNDO_DONE_TASK = "Noted. I've marked the following task as unfinished:";
     public static final String DUKE_UNDO_DONE_ALL_TASKS = "Noted. I've marked all tasks as undone.";

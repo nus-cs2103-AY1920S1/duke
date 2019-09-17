@@ -21,11 +21,8 @@ import java.util.ArrayList;
  */
 public class Storage {
 
-    /** Stores the pathway of the saved file. */
     private String cwd;
-    /** Stores the name of the saved file. */
     private String fileName;
-    /** Stores and saves all the tasks inputted by the user. */
     private File savedFile;
 
     /**
@@ -38,7 +35,7 @@ public class Storage {
      * @throws DukeIoException When an error occurs during the input-output process.
      */
     public Storage() throws DukeIoException {
-        this.cwd = "src/main/resources/save-file";
+        this.cwd = System.getProperty("user.home");
         this.fileName = "tasks.txt";
         this.savedFile = new File(this.cwd + File.separator + this.fileName);
         try {
@@ -46,10 +43,6 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeIoException(e.getMessage());
         }
-    }
-
-    public String getAddress() {
-        return this.cwd + this.fileName;
     }
 
     /**

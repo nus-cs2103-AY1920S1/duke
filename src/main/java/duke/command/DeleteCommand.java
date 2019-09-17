@@ -122,7 +122,8 @@ public class DeleteCommand extends Command implements Undoable {
             break;
         default:
             taskList.addTaskAt(Integer.parseInt(this.deletedIndex), this.deletedTasks[0]);
-            message = new String[] { AutoResponse.DUKE_UNDO_DELETE_TASK, this.deletedTasks[0].getStatus() };
+            message = new String[] { AutoResponse.DUKE_UNDO_DELETE_TASK,
+                                     "  " + this.deletedTasks[0].getStatus() };
             break;
         }
 

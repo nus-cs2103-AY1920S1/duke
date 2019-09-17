@@ -43,10 +43,10 @@ public class DeadlineTask extends Task {
      * The format is "dd Month, YYYY, hh:mm a".
      *
      * @return The dueDate field formatted as a String.
-     * @see DukeDate#format()
+     * @see DukeDate#format(boolean)
      */
     public String getDateAsString() {
-        return this.dueDate.format();
+        return this.dueDate.format(true);
     }
 
     /**
@@ -66,7 +66,9 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getStatus() {
-        return String.format("[D]%s (by: %s)", super.getStatus(), this.dueDate);
+        return String.format("[D]%s (by: %s)",
+                             super.getStatus(),
+                             this.dueDate.format(true));
     }
 
 }

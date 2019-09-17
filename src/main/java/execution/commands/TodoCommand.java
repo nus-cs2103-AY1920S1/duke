@@ -37,8 +37,19 @@ public class TodoCommand extends Command {
         super.execute(tasklist, ui, storage);
         checkValidity();
 
-        Task newTodo = new ToDo(this.descriptionOfTask);
-        tasklist.addTask(newTodo);
+        int int_Priority = this.descriptionOfTask.indexOf('*');
+
+        Task newTodo;
+        if (int_Priority >= 0) {
+            String newDescription = this.descriptionOfTask.substring(0, int_Priority) +
+                    this.descriptionOfTask.substring(int_Priority + 1);
+             newTodo = new ToDo(newDescription);
+            newTodo.markAsPriority();
+            tasklist.addPriorityTask(newTodo);
+        } else {
+             newTodo = new ToDo(this.descriptionOfTask);
+             tasklist.addTask(newTodo);
+        }
         ui.displayAddingOfTask(newTodo, tasklist.getSize());
         storage.saveToDataFile(tasklist);
 

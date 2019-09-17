@@ -1,0 +1,3 @@
+D | 0 | homework     **** Priority **** | thursday 
+E | 0 | school     **** Priority **** | tmr
+D | 0 | code | tonight

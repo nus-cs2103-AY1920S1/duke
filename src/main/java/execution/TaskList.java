@@ -30,6 +30,11 @@ public class TaskList {
         this.list = currentList;
     }
 
+    /**
+     * Returns the size of the current arraylist.
+     *
+     * @return the integer value of the number of tasks in the arraylist currently.
+     */
     public int getSize() {
 
         assert this.list != null;
@@ -72,6 +77,17 @@ public class TaskList {
 
         assert this.list != null;
         this.list.add(current);
+
+    }
+
+    /**
+     * Adds a task to the top of the list, since it is of priority.
+     *
+     * @param priority task to be added.
+     */
+    public void addPriorityTask(Task priority) {
+
+        this.list.add(0, priority);
 
     }
 

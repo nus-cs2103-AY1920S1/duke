@@ -9,6 +9,7 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected char identity;
+    protected boolean isPriority;
 
     /**
      * Creating a task object. It is the default for a task to be not done upon creation.
@@ -19,6 +20,7 @@ public abstract class Task {
 
         this.description = description;
         this.isDone = false;
+        this.isPriority = false;
 
     }
 
@@ -61,6 +63,16 @@ public abstract class Task {
     }
 
     /**
+     * Marks the task as high priority.
+     */
+    public void markAsPriority() {
+
+        this.isPriority = true;
+        this.description += "     " + this.priorityDescription();
+
+    }
+
+    /**
      * Returns the string value of a models.Task object.
      *
      * @return the status icon and description of the task.
@@ -95,13 +107,18 @@ public abstract class Task {
      * Returns a boolean value on whether the description of task contains a particular string value.
      * This is for the Find Command.
      *
-     * @param the particular string value we are checking if present.
+     * @param text particular string value we are checking if present.
      * @return true if Task object's description contains the keyword. False if not.
      */
     public boolean contains(String text) {
 
         return this.description.contains(text);
 
+    }
+
+    public String priorityDescription() {
+
+        return "**** Priority ****";
     }
 
 

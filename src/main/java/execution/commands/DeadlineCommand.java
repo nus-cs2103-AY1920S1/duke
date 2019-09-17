@@ -79,16 +79,30 @@ public class DeadlineCommand extends Command {
         String wholeTask = this.descriptionOfTask.trim();
         int index = wholeTask.indexOf('/');
 
+
         //what the task is
         String description = wholeTask.substring(0, index).trim();
         //when it is due by
         String date = wholeTask.substring(index + 4).trim();
+        int int_Priority = date.indexOf('*');
         //if the format is correct
         String formattedDate = getFormattedDate(date);
 
+
         //the execution
-        Task newDeadline = new Deadline(description, formattedDate);
-        taskList.addTask(newDeadline);
+        Task newDeadline;
+        if(int_Priority >= 0) {
+            //removing the * if is priority
+            String cleanDate = formattedDate.substring(0, int_Priority) +
+                    formattedDate.substring(int_Priority + 1);
+            newDeadline = new Deadline(description, cleanDate);
+            newDeadline.markAsPriority();
+            taskList.addPriorityTask(newDeadline);
+        } else {
+            newDeadline = new Deadline(description, formattedDate);
+            taskList.addTask(newDeadline);
+        }
+
         ui.displayAddingOfTask(newDeadline, taskList.getSize());
         storage.saveToDataFile(taskList);
 

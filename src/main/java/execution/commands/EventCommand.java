@@ -40,14 +40,24 @@ public class EventCommand extends Command {
         String wholeTask = this.descriptionOfTask.trim();
         int index = wholeTask.indexOf('/');
 
+
         //what the task is
         String description = wholeTask.substring(0, index).trim();
         //when it is due by
         String date = wholeTask.substring(index + 4).trim();
-        Task newEvent = new Event(description, date);
+        int int_Priority = date.indexOf('*');
 
         //execution
-        taskList.addTask(newEvent);
+        Task newEvent;
+        if(int_Priority >= 0) {
+            String cleanDate = date.substring(0, int_Priority) + date.substring(int_Priority + 1);
+            newEvent = new Event(description, cleanDate);
+            newEvent.markAsPriority();
+            taskList.addPriorityTask(newEvent);
+        } else {
+            newEvent = new Event(this.descriptionOfTask, date);
+            taskList.addTask(newEvent);
+        }
         ui.displayAddingOfTask(newEvent, taskList.getSize());
         storage.saveToDataFile(taskList);
     }

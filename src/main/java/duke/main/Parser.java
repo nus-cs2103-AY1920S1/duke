@@ -204,7 +204,7 @@ public class Parser {
     }
 
     private String getDscForEventAndDeadline(String input, int taskLength, int indexOfDivider) throws EmptyDscDukeException {
-        String description = input.substring(taskLength + 1, indexOfDivider);
+        String description = input.substring(taskLength + 1, indexOfDivider - 1);
         checkForEmptyDsc(description);
 
         return description;

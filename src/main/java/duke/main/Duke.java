@@ -19,8 +19,8 @@ public class Duke {
     /**
      * Constructor for duke.
      */
-    public Duke() {
-        storage = new Storage("data/savedList.txt");
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         parser = new Parser();
         try {
             tasks = storage.load(parser);

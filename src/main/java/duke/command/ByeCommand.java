@@ -5,6 +5,9 @@ import duke.data.DukeData;
 
 import java.io.IOException;
 
+/**
+ * The ByeCommand handles the Duke's farewell to the user.
+ */
 public class ByeCommand implements Command {
 
     /**

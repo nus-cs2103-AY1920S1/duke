@@ -5,7 +5,12 @@ import duke.data.DukeData;
 
 import java.io.IOException;
 
+/**
+ * The DataCommand handles the command where the user requests to view the data stored
+ * in the local disc.
+ */
 public class DataCommand implements Command {
+
     /**
      * Execute method which calls the method upon initialisation of the object.
      * @param dukeData the storage object of the program

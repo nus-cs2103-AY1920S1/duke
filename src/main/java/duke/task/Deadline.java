@@ -6,19 +6,19 @@ import java.text.ParseException;
  * The Deadline class represents any tasks that have a description, and a deadline in nature.
  */
 public class Deadline extends Task {
-    private String _date;
-    private DateTime _dateTime;
+    private String date;
+    private DateTime dateTime;
 
     /**
      * Creates a Deadline object, which is also a Task.
-     * @param desc a description of the Deadline Task
+     * @param description a description of the Deadline Task
      * @param date the date of the Deadline which is to be done by
      */
-    public Deadline(String desc, String date) {
-        super(desc);
+    public Deadline(String description, String date) {
+        super(description);
         try {
-            this._dateTime = new DateTime(date);
-            this._date = this._dateTime.getDateTimeString();
+            this.dateTime = new DateTime(date);
+            this.date = this.dateTime.getDateTimeString();
         } catch (ParseException e) {
             System.err.println("Cant parse Date: " + date);
         }
@@ -26,11 +26,11 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of a Deadline object.
-     * @return a string representation of a Deadline object.
+     * @return a string representation of a Deadline object
      */
     public String toString() {
         return String.format("[D][%s] %s(by: %s)",
-                    this.getStatusIcon(), this._description, this._date);
+                    this.getStatusIcon(), this.description, this.date);
     }
 
     /**
@@ -40,14 +40,14 @@ public class Deadline extends Task {
      */
     public String toData() {
         return String.format("E | %s | %s | %s",
-                this.getStatusIcon(), this._description, this._date);
+                this.getStatusIcon(), this.description, this.date);
     }
 
     /**
      * Returns a string representation of the expected Deadline in the new format.
-     * @return a string of the deadline's date.
+     * @return a string of the deadline's date
      */
     public String getDeadline() {
-         return this._date;
+         return this.date;
     }
 }

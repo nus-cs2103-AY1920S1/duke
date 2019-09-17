@@ -38,6 +38,10 @@ public class Ui {
         return this.sc.hasNext();
     }
 
+    /**
+     * Gets the next command from the user's input.
+     * @return a String representation of the user's command
+     */
     public String getCommand() {
         return this.sc.nextLine();
     }
@@ -156,7 +160,7 @@ public class Ui {
     }
 
     /**
-     * Adds a line before and after every command.
+     * Adds a line after every command.
      * @param cmd the command output
      * @return a String representation of the output with the lines
      */

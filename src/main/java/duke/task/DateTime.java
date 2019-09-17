@@ -11,11 +11,11 @@ import java.util.Date;
 public class DateTime {
     private final SimpleDateFormat DATETIME_FORMATGIVEN = new SimpleDateFormat(
             "d/M/yyyy HHmm");
-    private final String FORMAT_TOSHOW = " 'of' MMMM yyyy, ha";
+    private final String FORMAT_TO_SHOW = " 'of' MMMM yyyy, ha";
     private final SimpleDateFormat DATETIME_FORMATTER = new SimpleDateFormat(
-            FORMAT_TOSHOW);
-    private String _dateTime;
-    private Date _date;
+            FORMAT_TO_SHOW);
+    private String dateTime;
+    private Date date;
 
     /**
      * Constructs a new DateTime object with the given date and time.
@@ -24,19 +24,19 @@ public class DateTime {
      * not presented in the given format
      */
     public DateTime(String dateTime) throws ParseException {
-        this._dateTime = dateTime;
-        this._date = DATETIME_FORMATGIVEN.parse(dateTime);
+        this.dateTime = dateTime;
+        this.date = DATETIME_FORMATGIVEN.parse(dateTime);
     }
 
     /**
      * This method formats the date and time into the more readable format,
      * and returns a string representation of it.
-     * @return a string representation of the given date and time in the new format.
+     * @return a string representation of the given date and time in the new format
      */
     public String getDateTimeString() {
-        String[] splitDate = this._dateTime.split("/");
+        String[] splitDate = this.dateTime.split("/");
         String suffix = getSuffix(Integer.parseInt(splitDate[0]));
-        String dateTimeString = suffix + DATETIME_FORMATTER.format(this._date);
+        String dateTimeString = suffix + DATETIME_FORMATTER.format(this.date);
         return dateTimeString;
     }
 

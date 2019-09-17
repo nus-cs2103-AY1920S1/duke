@@ -3,6 +3,9 @@ package duke.command;
 import duke.Ui;
 import duke.data.DukeData;
 
+/**
+ * The Wrong command handles any command which is not understandable by Duke.
+ */
 public class WrongCommand implements Command {
     private String givenCommand;
 
@@ -13,6 +16,7 @@ public class WrongCommand implements Command {
     public WrongCommand(String command) {
         this.givenCommand = command;
     }
+
     /**
      * Execute method which calls the method upon initialisation of the object.
      * @param dukeData the storage object of the program

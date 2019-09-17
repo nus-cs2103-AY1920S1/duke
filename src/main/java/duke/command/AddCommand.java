@@ -7,6 +7,9 @@ import duke.task.Task;
 
 import java.io.IOException;
 
+/**
+ * The AddCommand handles the adding of any ToDo, Deadline, or Event Tasks into the Duke program.
+ */
 public class AddCommand implements Command {
     private Task taskToBeAdded;
 

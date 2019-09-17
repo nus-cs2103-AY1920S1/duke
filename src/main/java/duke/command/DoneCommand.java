@@ -5,6 +5,9 @@ import duke.data.DukeData;
 
 import java.io.IOException;
 
+/**
+ * The DoneCommand handles any the marking of a task as 'done'.
+ */
 public class DoneCommand implements Command {
     private int taskIndex;
 

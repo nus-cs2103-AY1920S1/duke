@@ -1,5 +1,3 @@
-package duke;
-
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -7,6 +5,10 @@ import duke.dukeexception.DukeException;
 import duke.command.Command;
 import duke.parser.Parser;
 
+/**
+ * Main driver class for Duke application. Duke application helps the user to manage tasks and allows the user to
+ * add, remove, mark a task as completed, list all tasks and find all tasks containing a keyword.
+ */
 public class Duke {
 
     private Storage storage;
@@ -16,6 +18,10 @@ public class Duke {
     private static final String INDENT_SPACING = "    ";
     private static final String ROOT_DIRECTORY = "C:/Users/gbrls/OneDrive/Desktop/duke-master/src/main/java/duke/";
 
+    /**
+     * Loads a save file and generates a new Ui, Storage and TaskList object stored as instance variables.
+     * @param filePath file path corresponding to the location of the save file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles user input and
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

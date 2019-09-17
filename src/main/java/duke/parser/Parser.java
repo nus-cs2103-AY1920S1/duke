@@ -68,6 +68,7 @@ public class Parser {
         default:
             throw new DukeException(ERROR_INVALID_INPUT);
         }
+
     }
 
     private static Command handleTodo(String input) {

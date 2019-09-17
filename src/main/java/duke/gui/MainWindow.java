@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String WELCOME_TEXT = "HOHO, how can I DIOke do for you?";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,11 +29,13 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Jotaro.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Dio.jpg"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/Background.jpg"));
 
     @FXML
     public void initialize() {
 
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(WELCOME_TEXT, dukeImage));
     }
 
     public void setDuke(Duke d) {

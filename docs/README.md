@@ -2,8 +2,9 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Feature 1: List all tasks
+List all the tasks
+
 
 ## Usage
 

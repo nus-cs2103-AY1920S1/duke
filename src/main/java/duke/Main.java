@@ -32,6 +32,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            stage.setTitle("Chat with DIOke");
         } catch (IOException e) {
             e.printStackTrace();
         }

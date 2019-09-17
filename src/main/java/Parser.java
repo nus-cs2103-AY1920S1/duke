@@ -138,6 +138,10 @@ class Parser implements ControllerInterface,
         String[] commandlist = command.split(" ");
         /* check for exceptions */
         Integer taskNum = Integer.valueOf(commandlist[1]);
+
+        assert taskNum < this.model.getTotalTasks() 
+            : "doneTask is not within bounds"; 
+
         TaskInterface task = this.model.doneTask(taskNum);
         this.display.printDoneTaskSection(task.toString());
     }
@@ -152,9 +156,14 @@ class Parser implements ControllerInterface,
         /* check for exceptions */
         Integer taskNum = Integer.valueOf(commandlist[1]);
 
+
         //TAG patch, delete the tag before you delete the obj
         //tag deletion relies Tasklist as well
         this.notifyTagCommandObservers("TAG DELETETAG " + commandlist[1]);
+
+        assert taskNum < this.model.getTotalTasks() 
+            : "deleteTask is not within bounds"; 
+
         TaskInterface task = this.model.deleteTask(taskNum);
         this.display.printDeleteTaskSection(task.toString(), 
                 this.model.getTotalTasks());

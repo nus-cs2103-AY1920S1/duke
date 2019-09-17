@@ -51,5 +51,6 @@ application {
 run {
 //https://stackoverflow.com/questions/36723447/java-util-scanner-throws-nosuchelementexception-when-application-is-started-with
     standardInput = System.in
+    enableAssertions = true
 }
 

@@ -5,8 +5,8 @@ Duke is a task manager application that uses **Command Line Interface(CLI)** and
 
 ## How to Use
 1. Ensure that your computer has `Java 11` or above, if not download it from [here](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html).
-2. Download the latest release of the application [here]().
-3. After downloading the jar file, run your terminal and go to the directory in which the jar file is located, then run `java -jar duke.jar`. The application will start after running the command.
+2. Download the latest release of the application [here](https://github.com/WilliamRyank/duke/releases/tag/A-Release).
+3. After downloading the jar file, run your terminal and go to the directory in which the jar file is located, then run `java -jar duke-0.2.jar`. The application will start after running the command.
 4. Now, you should be able to type in some commands in the application. Refer to the below section to find out different commands that you can use in the application.
 
 ## Features

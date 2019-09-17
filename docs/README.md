@@ -22,7 +22,7 @@ You may also load your own storage file.
 
 ## Usage
 
-Firstly, use `java -jar duke.jar` to launch the application.
+Firstly, use `java -jar duke-0.2.3.jar` to launch the application.
 
 ### Manage tasks
 

@@ -21,7 +21,7 @@ javafx {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1.1"
+    archiveVersion = "0.2.0"
     archiveClassifier = null
     archiveAppendix = null
 }
@@ -31,7 +31,7 @@ test {
 }
 
 group 'seedu.duke'
-version '0.1.0'
+version '0.2.0'
 
 repositories {
     mavenCentral()

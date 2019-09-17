@@ -33,7 +33,7 @@ GUI window closed.
 
 ### `list` - Displays all tasks in the task list
 
-Duke program will exit, and its GUI window will close.
+Shows the full task list.
 
 Example of usage: 
 
@@ -41,5 +41,28 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:
- 1.[T][✗] lawsuit research`
+`Here are the tasks in your list:\n1.[T][✗] lawsuit research\n2.[T][✗] hire intern`
+
+### `delete <n>` - Deletes a specific task in the task list
+
+The nth task in the task list will be deleted.
+
+Example of usage: 
+
+`delete 1`
+
+Expected outcome:
+
+`Noted. I've removed ths task:\n[T][✗] lawsuit research\nNow you have 0 tasks in the list.`
+
+### `done <n>` - Marks a specific task in the task list as done
+
+The nth task in the task list will be marked as done.
+
+Example of usage: 
+
+`done 1`
+
+Expected outcome:
+
+`Nice! I've marked this task as done:\n[T][✓] hire intern`

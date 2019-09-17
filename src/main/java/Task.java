@@ -68,7 +68,7 @@ public class Task {
      * @return Task details
      */
     public String getDescription() {
-        return description;
+        return description.trim();
     }
 
     /**

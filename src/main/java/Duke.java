@@ -24,8 +24,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser1.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke1.jpg"));
 
     /**
      * Constant indentation from start of line (formatting).

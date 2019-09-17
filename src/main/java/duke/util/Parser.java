@@ -1,6 +1,7 @@
 package duke.util;
 
 import duke.command.FindCommand;
+import duke.command.HelloCommand;
 import duke.command.LoadCommand;
 import duke.command.SaveCommand;
 import duke.exception.DukeException;
@@ -31,9 +32,13 @@ public class Parser {
      */
     public static Command parseForCommands(String input) throws DukeException {
         String[] parameters = input.split(" ", 2);
-        String command = parameters[0];
+        String command = parameters[0].toLowerCase();
 
         switch (command) {
+        case HelloCommand.KEYWORD_ONE:
+        case HelloCommand.KEYWORD_TWO:
+        case HelloCommand.KEYWORD_THREE:
+            return new HelloCommand();
         case ListCommand.KEYWORD:
             return new ListCommand();
         case ByeCommand.KEYWORD:

@@ -20,6 +20,7 @@ public class Ui {
     public static final String LOADING_ERROR = "I couldn't find a saved task list...\n"
             + "Let me start up a brand new list!";
     public static final String LINE = "    ____________________________________________________________";
+    public static final String HELLO_RESPONSE = "Hello to you too!";
 
     // Object attributes
     private Scanner sc;

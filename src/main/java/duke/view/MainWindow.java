@@ -68,8 +68,8 @@ public class MainWindow extends AnchorPane {
         }
     }
 
-    // closes duke gracefully. should only be called when a shutdown signal
-    // is received from the ByeCommand.
+    // closes duke gracefully. should only be called when a shutdown signal.
+    // is received from the ByeCommand
     private void closeWindowAndExit() {
         new Timer().schedule(new TimerTask() {
             @Override

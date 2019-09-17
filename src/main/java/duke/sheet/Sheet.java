@@ -141,10 +141,11 @@ public class Sheet {
     public String find(String keyword) {
         StringBuilder sb = new StringBuilder("");
         int count = 0;
-        for (Task task : tasks) {
-            if (task.getDescription().contains(keyword)) {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 count++;
-                sb.append(" ").append(count).append(". ").append(tasks.get(count).toString().trim()).append("\n");
+                sb.append(" ").append(count).append(". ").append(task.toString().trim()).append("\n");
             }
         }
         if (count == 0) {

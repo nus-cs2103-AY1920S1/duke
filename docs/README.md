@@ -1,7 +1,7 @@
 # Duke - User Guide :grinning:
-![DukeLogo](/resources/images/theDuke.png)  
+![DukeLogo](/images/theDuke.jpg)  
 
-Table of Contents :  
+**Table of Contents :**  
 - [1. Introduction](#1-introduction)  
 - [2. Features](#2-features)  
 - [3. Commands](#3-commands)  

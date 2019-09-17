@@ -30,26 +30,26 @@ public class Ui {
 
                     + "help:\nPrints the list of commands\n\n"
 
-                    + "done n:\nMarks the n-th task on the list as done\n\n"
+                    + "done [n]:\nMarks the n-th task on the list as done\n\n"
 
-                    + "delete n:\nDeletes the n-th task on the list\n\n"
+                    + "delete [n]:\nDeletes the n-th task on the list\n\n"
 
-                    + "todo taskName :\n"
+                    + "todo [taskName] :\n"
                     + "Adds a new Todo task with the given \"taskName\".\n\n"
 
-                    + "event taskName /at DD/MM/YYYY HHmm :\n"
+                    + "event [taskName] /at [DD/MM/YYYY HHmm] :\n"
                     + "Adds a new Event task with the deadline in the given format.\n\n"
 
-                    + "deadline taskName /by DD/MM/YYYY HHmm :\n"
+                    + "deadline [taskName] /by [DD/MM/YYYY HHmm] :\n"
                     + "Adds a new Deadline task with the deadline in the given format.\n\n"
 
                     + "undo:\n"
                     + "Undoes the most recent action.\n\n"
 
-                    + "find keyword :\n"
+                    + "find [keyword] :\n"
                     + "Returns a list of task with names containing the \"keyword\".\n\n"
 
-                    + "sort category r:\n"
+                    + "sort [category] r:\n"
                     + "Sorts and returns the list of tasks. Category can be one of \"name\", "
                     + "\"deadline\", \"type\", \"status\"."
                     + "\nOptional argument \"r\" sorts list in reverse order.\n\n";
@@ -69,9 +69,9 @@ public class Ui {
      * Prints a hello message when program first initializes.
      */
     public void printWelcomeMessage() {
-        outputBuilder.append("Hello from\n" + LOGO);
         outputBuilder.append("Hello! I'm Duke\n");
         outputBuilder.append("What can I do for you?\n");
+        outputBuilder.append("Enter \"help\" for a list of commands.\n");
     }
 
     /**

@@ -83,7 +83,7 @@ public class Ui {
      *
      * @param list the list to be printed.
      */
-    public String showList(ArrayList<Task> list) {
+    public String showTaskList(ArrayList<Task> list) {
         int count = 1;
         String listTasks = "Here are the task(s) in your list:\n\n";
         for (Task task: list) {

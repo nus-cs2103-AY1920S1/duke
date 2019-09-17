@@ -11,11 +11,13 @@ import duke.task.Todo;
 import duke.task.Deadline;
 import duke.ui.Ui;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
 public class CommandCentre {
     private static HashMap<String, Command> commands;
+    private static ArrayList<String> aliases = new ArrayList<>();
     private TaskList taskList;
     private Ui ui;
 
@@ -46,6 +48,19 @@ public class CommandCentre {
         } else {
             throw new DukeCommandException("I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    /**
+     * Adds aliases to a list so that they can be written to file when the bye command is given.
+     *
+     * @param alias a String that associates an alias to an existing command
+     */
+    public static void addAlias(String alias) {
+        aliases.add(alias);
+    }
+
+    public static ArrayList<String> getAliases() {
+        return aliases;
     }
 
     private void initialiseCommandList() {
@@ -83,7 +98,7 @@ public class CommandCentre {
                 if (input.isPresent()) {
                     throw new DukeTaskException("List should not have a description.");
                 }
-                return ui.showList(taskList.getTaskList());
+                return ui.showTaskList(taskList.getTaskList());
             }
         });
     }
@@ -180,6 +195,7 @@ public class CommandCentre {
                String keyword = input.get()[0].split(" ")[0];
                String alias = input.get()[0].split(" ")[1];
                commands.put(alias, CommandCentre.getCommand(keyword));
+               aliases.add(String.format("%s %s", keyword, alias));
                return ui.showAddedAliasCommand(keyword, alias);
            }
         });

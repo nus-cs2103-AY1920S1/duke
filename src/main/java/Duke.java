@@ -27,12 +27,17 @@ public class Duke {
         storage = new Storage(filePath);
         isExit = false;
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadData());
         } catch (DukeException e) {
             ui.showError(e.toString());
             tasks = new TaskList();
         } finally {
             commandCentre = new CommandCentre(tasks, ui);
+            try {
+                storage.loadAlias();
+            } catch (DukeException e) {
+                ui.showError(e.toString());
+            }
             assert ui == null : "Ui should not be null";
             assert storage == null : "Storage should not be null";
             assert tasks == null : "TaskList should not be null";
@@ -56,7 +61,8 @@ public class Duke {
             }
         }
         ui.closeScanner();
-        storage.write(tasks);
+        storage.writeData(tasks);
+        storage.writeAlias();
     }
 
     /**
@@ -67,7 +73,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         if (isExit) {
-            storage.write(tasks);
+            storage.writeData(tasks);
+            storage.writeAlias();
             return null;
         } else {
             try {

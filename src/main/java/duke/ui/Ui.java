@@ -38,13 +38,6 @@ public class Ui {
 	 * @return String with message with information of added task and number of tasks in list.
 	 */
 	public String getAddedTaskMessage(char firstAlphabet, boolean isDone, String taskDescription, int numberOfItems) {
-		char icon;
-		if (isDone) {
-			icon = 'Y';
-		} else {
-			icon = 'X';
-		}
-		
 		StringBuilder addedTaskMessage = new StringBuilder("Got it. I've added this task: \n");
 		addedTaskMessage.append("\t[").append(firstAlphabet).append("] ");
 		addedTaskMessage.append(taskDescription).append("\n");
@@ -58,11 +51,22 @@ public class Ui {
 	 * @return String with list of tasks in task list.
 	 */
 	public String getList(ArrayList<String> listToPrint) {
-		StringBuilder listOfTasksToPrint = new StringBuilder("Here are the tasks in your list:\n");
-		for (int i = 0; i < listToPrint.size(); i++) {
-			listOfTasksToPrint.append("\t").append(i + 1).append(".").append(listToPrint.get(i)).append("\n");
+		String output = "";
+		
+		boolean isListSizePositive = listToPrint.size() > 0;
+		
+		if(!isListSizePositive){
+			output = "There are currently no items in the list.\n";
 		}
-		return listOfTasksToPrint.toString();
+		
+		if(isListSizePositive) {
+			StringBuilder listOfTasksToPrint = new StringBuilder("Here are the tasks in your list:\n");
+			for (int i = 0; i < listToPrint.size(); i++) {
+				listOfTasksToPrint.append("\t").append(i + 1).append(".").append(listToPrint.get(i)).append("\n");
+			}
+			output = listOfTasksToPrint.toString();
+		}
+		return output;
 	}
 	
 	/**
@@ -130,5 +134,9 @@ public class Ui {
 	 */
 	public String getSavingError() {
 		return "Error in saving to disk.";
+	}
+	
+	public String getNoItemsInList() {
+		return "There are no items in list.";
 	}
 }

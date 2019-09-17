@@ -68,7 +68,7 @@ public class Duke {
 		} catch (CommandNotFoundException c) {
 			output = "Command not found.\nPlease check again.";
 		} catch (NullPointerException n) {
-			output = "Internal error encountered." + " (Null Ptr)";
+			output = "Internal error encountered. (Null Ptr)";
 		} catch (IOException i) {
 			output = "Internal error encountered." + " (IO exception)";
 		} catch (IncorrectNumberOfArgumentsException a) {

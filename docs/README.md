@@ -116,7 +116,6 @@ Expected outcome:
 ```
 Here are the matching tasks in your list:
 1. [E][+] book meeting (by: 10 Feb 2015, 09:00 AM)
-Now you have 0 tasks in the list.
 2. [D][ ] return book (by: 17 Sep 2019, 10:34 PM)
 ```
 
@@ -170,7 +169,7 @@ Here are the tasks in your list:
 
 ### `bye` - Exits the program 
 
-It closes the window and exits the program.
+Closes the window and exits the program.
 
 Example of usage: 
 

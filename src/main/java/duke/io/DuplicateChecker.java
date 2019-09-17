@@ -12,6 +12,12 @@ public class DuplicateChecker {
         }
         return false;
     }
+
+    /**
+     * Checks for duplication of current task to add in previous tasks.
+     * @param act current user command
+     * @return true if a same task is found and false otherwise
+     */
     public static boolean checkDuplication(String act) {
         String command = act.split(" ")[0];
         if(checkWhitelist(command)) {

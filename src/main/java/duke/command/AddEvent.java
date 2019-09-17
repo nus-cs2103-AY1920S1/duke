@@ -10,7 +10,7 @@ import duke.tasklist.TaskList;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 
-public class AddEvent {
+public class AddEvent extends Command {
     public static String addEvent(String act, Storage sto) throws FileNotFoundException, DukeIllegalDescriptionException {
         String eventDetail = act.substring(6);
         int eventDivision = eventDetail.indexOf("/");

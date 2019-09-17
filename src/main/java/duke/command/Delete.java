@@ -6,7 +6,7 @@ import duke.tasklist.TaskList;
 
 import java.io.FileNotFoundException;
 
-public class Delete {
+public class Delete extends Command{
     public static String delete(String act, Storage sto) throws FileNotFoundException {
         int d = Integer.parseInt(act.substring(7)) - 1;
         Task temp = TaskList.taskList.get(d);

@@ -24,7 +24,7 @@ public class Storage {
     private String filePath;
 
     /**
-     *
+     * Constructor of Storage.
      * @param filePath relative path of list storing file
      */
     public Storage(String filePath) {
@@ -51,34 +51,39 @@ public class Storage {
                     content = line.substring(line.indexOf(".") + 8, line.indexOf("(") - 1);
                     time = line.substring(line.indexOf(":") + 2, line.indexOf(")"));
                 }
-                switch (type) {
-                case "T":
-                    Task todo = new ToDo(content);
-                    if (state.contentEquals("Y")) {
-                        todo.setDone();
-                    }
-                    tasks.add(todo);
-                    break;
-                case "D":
-                    Task deadline = new Deadline(content, time);
-                    if (state.contentEquals("Y")) {
-                        deadline.setDone();
-                    }
-                    tasks.add(deadline);
-                    break;
-                case "E":
-                    Task event = new Event(content, time);
-                    if (state.contentEquals("Y")) {
-                        event.setDone();
-                    }
-                    tasks.add(event);
-                    break;
-                }
+                parseLine(type, state, content, time, tasks);
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return tasks;
+    }
+
+    private void parseLine(String type, String state, String content,
+                           String time, LinkedList<Task> tasks) throws ParseException {
+        switch (type) {
+        case "T":
+            Task todo = new ToDo(content);
+            if (state.contentEquals("Y")) {
+                todo.setDone();
+            }
+            tasks.add(todo);
+            break;
+        case "D":
+            Task deadline = new Deadline(content, time);
+            if (state.contentEquals("Y")) {
+                deadline.setDone();
+            }
+            tasks.add(deadline);
+            break;
+        case "E":
+            Task event = new Event(content, time);
+            if (state.contentEquals("Y")) {
+                event.setDone();
+            }
+            tasks.add(event);
+            break;
+        }
     }
 
     /**

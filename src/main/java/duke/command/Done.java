@@ -5,7 +5,7 @@ import duke.tasklist.TaskList;
 
 import java.io.FileNotFoundException;
 
-public class Done {
+public class Done extends Command {
     public static String done(String act, Storage sto) throws FileNotFoundException {
         int n = Integer.parseInt(act.substring(5));
         TaskList.taskList.get(n - 1).setDone();

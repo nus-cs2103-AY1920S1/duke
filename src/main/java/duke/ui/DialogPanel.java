@@ -8,10 +8,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Dialog panel class used for Duke's GUI.
+ */
 public class DialogPanel extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Constructor of DialogPanel.
+     * @param label
+     * @param iv
+     */
     public DialogPanel(Label label, ImageView iv) {
         text = label;
         displayPicture = iv;

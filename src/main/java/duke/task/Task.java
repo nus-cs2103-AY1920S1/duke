@@ -8,11 +8,11 @@ public class Task {
     private boolean isDone;
 
     /**
-     *
+     *Constructor of a task.
      * @param description description of task
      */
     Task(String description) {
-        //assert description.length() > 0;
+        assert description.length() > 0;
         this.description = description;
         this.isDone = false;
     }
@@ -25,6 +25,9 @@ public class Task {
         return (isDone ? "Y" : "N");
     }
 
+    /**
+     * Sets the state of current task to done.
+     */
     public void setDone() {
         this.isDone = true;
     }

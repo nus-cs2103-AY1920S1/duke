@@ -12,14 +12,14 @@ public class Deadline extends Task {
     private Date by;
 
     /**
-     *
+     * Constructor of Deadline task.
      * @param description description of deadline task
      * @param by time of deadline
      * @throws ParseException
      */
     public Deadline(String description, String by) throws ParseException {
         super(description);
-        //assert by.length() > 0;
+        assert by.length() > 0;
         this.by = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(by);
     }
 

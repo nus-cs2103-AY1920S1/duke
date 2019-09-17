@@ -6,7 +6,7 @@ import duke.tasklist.TaskList;
 
 import java.util.LinkedList;
 
-public class Find {
+public class Find extends Command {
     public static String find(String act, Storage sto) {
         String keyword = act.substring(5);
         String response = "";

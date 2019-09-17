@@ -10,7 +10,8 @@ import duke.tasklist.TaskList;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 
-public class AddDeadline {
+public class AddDeadline extends Command {
+
     public static String addDeadline(String act, Storage storage) throws DukeIllegalDescriptionException,
             FileNotFoundException {
         String dlDetail = act.substring(9);

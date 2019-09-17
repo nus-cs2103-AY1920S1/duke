@@ -1,20 +1,20 @@
 package duke.io;
 
 import duke.actionstack.DukeActionStack;
-import duke.command.*;
+import duke.command.AddEvent;
+import duke.command.Clear;
+import duke.command.Delete;
+import duke.command.AddDeadline;
+import duke.command.AddTodo;
+import duke.command.ListTasks;
+import duke.command.Done;
+import duke.command.Find;
 import duke.exception.DukeDuplicateTaskException;
 import duke.exception.DukeIllegalActionException;
 import duke.exception.DukeIllegalDescriptionException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.tasklist.TaskList;
-import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
-import java.text.ParseException;
-import java.util.LinkedList;
+
 
 /**
  * Makes sense of user's input and react in accordance.
@@ -37,7 +37,7 @@ public class Parser {
         try {
             switch (Action.valueOf(act.split(" ")[0].toUpperCase())) {
             case LIST:
-                response = List.list();
+                response = ListTasks.listTasks();
                 break;
             case DONE:
                 response = Done.done(act, storage);

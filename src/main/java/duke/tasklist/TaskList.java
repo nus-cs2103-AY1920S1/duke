@@ -10,10 +10,17 @@ import java.util.LinkedList;
 public class TaskList extends LinkedList<Task> {
     public static LinkedList<Task> taskList;
 
+    /**
+     * Constructor.
+     */
     public TaskList() {
         taskList = new LinkedList<>();
     }
 
+    /**
+     * Constructor.
+     * @param tasks List of tasks
+     */
     public TaskList(LinkedList<Task> tasks) {
         taskList = new LinkedList<>(tasks);
     }

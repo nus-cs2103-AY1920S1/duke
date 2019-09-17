@@ -12,14 +12,14 @@ public class Event extends Task {
     private Date at;
 
     /**
-     *
+     * Constructor of Event.
      * @param description description of event
      * @param at time spot of happening
      * @throws ParseException
      */
     public Event(String description, String at) throws ParseException {
         super(description);
-        //assert at.length() > 0;
+        assert at.length() > 0;
         this.at = new SimpleDateFormat("yyyy/MM/dd HH:mm").parse(at);
     }
 

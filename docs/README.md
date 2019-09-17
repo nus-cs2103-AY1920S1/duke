@@ -73,12 +73,13 @@ a task with.
 
 `DATE` refers to the date of the task.
 
+![alt text](https://github.com/C-likethis123/duke/tree/master/docs/TaskList.png "Task List")
 **Referring to the above screenshot:**
 
-1. To update task <number>, a ToDo task, type `update <number> read 2103T example user guide`.
+1. To update task 8, a ToDo task, type `update 8 read 2103T example user guide`.
 The task description will be updated to `read 2103T example user guide`.
-2. To update task <number>, a Deadline task, type `update <number> do CS2100 tutorial /by 17/09/2018 1700`.
-3. To update task <number>, an Event task, type `update <number> AngelHack 2019: Singapore /at 03/06/2019`.
+2. To update task 1, a Deadline task, type `update 1 do CS2100 tutorial /by 17/09/2018 1700`.
+3. To update task 7, an Event task, type `update 7 AngelHack 2019: Singapore /at 03/06/2019`.
 
 ### Checking off tasks
 To mark a task as done, type `done INDEX`. 

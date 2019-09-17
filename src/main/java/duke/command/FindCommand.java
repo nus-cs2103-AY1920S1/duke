@@ -39,7 +39,7 @@ public class FindCommand extends Command {
      * @throws DukeException If there is an error while executing the FindCommand
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskList = tasks.getTaskArrayList();
         ArrayList<Task> matches = new ArrayList<>();
         for (Task task : taskList) {
@@ -47,6 +47,6 @@ public class FindCommand extends Command {
                 matches.add(task);
             }
         }
-        new ListCommand().execute(new TaskList(matches), ui, storage);
+        return new ListCommand().execute(new TaskList(matches), ui, storage);
     }
 }

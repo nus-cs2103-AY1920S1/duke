@@ -23,7 +23,7 @@ public abstract class Command {
      * @param storage The storage object being used by the user
      * @throws DukeException An error trying to carry out the command
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Constructor for command will set isExit to false by default.

@@ -31,7 +31,7 @@ public class ListCommand extends Command {
      * @throws DukeException Exception thrown if there is an error executing the ListCommand
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int startNumber = 1;
         ArrayList<String> allTasks = new ArrayList<>();
         for (Task t : tasks.getTaskArrayList()) {
@@ -44,5 +44,11 @@ public class ListCommand extends Command {
             allTasks.add(0, "Here are the tasks:");
         }
         ui.messageUser(allTasks);
+        String answer = "";
+        for (String message : allTasks) {
+            answer += message + '\n';
+        }
+
+        return answer;
     }
 }

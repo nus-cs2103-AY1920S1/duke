@@ -36,13 +36,18 @@ public class DoneCommand extends Command {
      * @throws DukeException An error when trying to mark a task as done.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.taskNumToComplete <= 0 || taskNumToComplete > tasks.getSize()) {
-            throw new DukeException("Task Number is out of bounds");
+            throw new DukeException("Task number is out of bounds" + tasks.getSize());
         }
-        tasks.markTaskAsDone(this.taskNumToComplete - 1);
-        Task taskToComplete = tasks.getTaskFromList(this.taskNumToComplete - 1);
+        tasks.markTaskAsDone(this.taskNumToComplete);
+        Task taskToComplete = tasks.getTaskFromList(this.taskNumToComplete);
+        String answer = ("Nice! I've marked this task as done:"
+                + System.lineSeparator()
+                + "  "
+                + taskToComplete.getTaskStatus());
         ui.messageUser("Nice! I've marked this task as done:",
                 "  " + taskToComplete.getTaskStatus());
+        return answer;
     }
 }

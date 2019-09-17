@@ -35,14 +35,21 @@ public class DeleteCommand extends Command {
      * @throws DukeException An error trying to delete a task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (this.taskNumToDelete <= 0 || this.taskNumToDelete > tasks.getSize()) {
             throw new DukeException("Task Number is out of bounds");
         }
-        Task removedTask = tasks.deleteTaskFromList(this.taskNumToDelete - 1);
+        Task removedTask = tasks.deleteTaskFromList(this.taskNumToDelete);
+        String answer = ("Noted. I've removed this task:"
+                + System.lineSeparator()
+                + removedTask.getTaskDescription()
+                + System.lineSeparator()
+                + "Now you have " + tasks.getSize()
+                        + ((tasks.getSize() == 1) ? " task" : " tasks") + " in the list.");
         ui.messageUser("Noted. I've removed this task:",
                 removedTask.getTaskDescription(),
                 "Now you have " + tasks.getSize()
-                        + ((tasks.getSize() <= 1) ? " task" : " tasks") + " in the list.");
+                        + ((tasks.getSize() == 1) ? " task" : " tasks") + " in the list.");
+        return answer;
     }
 }

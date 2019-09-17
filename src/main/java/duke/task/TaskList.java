@@ -86,8 +86,9 @@ public class TaskList {
             throw new DukeException("Task Number is out of bounds");
         }
         Task taskToMark = this.getTaskFromList(taskNumToMark);
-        taskToMark.markAsDone();
-        setIndexToTask(taskNumToMark, taskToMark);
+        Task markedTask = taskToMark.markAsDone();
+        System.out.println("SETTING");
+        setIndexToTask(taskNumToMark, markedTask);
     }
 
     /**

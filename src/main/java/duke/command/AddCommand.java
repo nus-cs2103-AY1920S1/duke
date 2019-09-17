@@ -35,11 +35,18 @@ public class AddCommand extends Command {
      * @param storage Storage if required for the execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTaskToList(this.taskToAdd);
+        String answer = ("Got it. I've added this task:"
+                + System.lineSeparator()
+                + taskToAdd.getTaskStatus()
+                + System.lineSeparator()
+                + "Now you have " + tasks.getSize()
+                        + ((tasks.getSize() == 1) ? " task" : " tasks") + " in the list.");
         ui.messageUser("Got it. I've added this task:",
                 taskToAdd.getTaskStatus(),
                 "Now you have " + tasks.getSize()
-                        + ((tasks.getSize() <= 1) ? " task" : " tasks") + " in the list.");
+                        + ((tasks.getSize() == 1) ? " task" : " tasks") + " in the list.");
+        return answer;
     }
 }

@@ -58,6 +58,15 @@ public class Duke {
         c.execute(tasks, storage);
         return c.getResponse();
     }
+
+    public String getWelcome() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        return "Hello from\n" + logo;
+    }
 }
 
 

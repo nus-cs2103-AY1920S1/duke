@@ -28,7 +28,7 @@ public class ListCommand extends Command {
     public String getResponse() {
         StringBuilder str = new StringBuilder();
         str.append("Here are the tasks in your list:\n");
-        for(int i = 1;i <= taskList.list.size();i++) {
+        for (int i = 1;i <= taskList.list.size();i++) {
             str.append(i + "."
                     + taskList.list.get(i - 1).toActionString() + "\n");
         }

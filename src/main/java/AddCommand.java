@@ -31,7 +31,7 @@ public class AddCommand extends Command {
         switch (action) {
         case TODO:
             //trim so that cannot pass with just spaces
-            desc =input.substring(4).trim();
+            desc = input.substring(4).trim();
             if (desc.equals("")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
             } else {

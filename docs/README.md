@@ -17,7 +17,7 @@ To update the chatbot, we use a set of keywords and descriptions (if applicable)
 
 e.g. todo buy bread - creates a todo task with "buy bread" as the description
 
-###Keywords and their functions
+### Keywords and their functions
 
 1. Add tasks - adds tasks to charlie
     - `todo` description - Lets Charlie know you have a todo task

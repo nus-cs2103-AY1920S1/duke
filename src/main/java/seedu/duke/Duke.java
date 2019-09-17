@@ -26,7 +26,7 @@ public class Duke extends Application {
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/isabelle_neutral.png"));
 
     private static Storage storage;
     private static TaskList tasks;

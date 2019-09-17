@@ -4,6 +4,7 @@ package seedu.duke;
  * Handles the parsing of user input.
  */
 public class Parser {
+    private static boolean isTriviaAnswer;
 
     /**
      * Parses user input and returns a command corresponding to user input.
@@ -20,7 +21,10 @@ public class Parser {
 
         validateInput(full);
 
-        if (s.equals("done")) {
+        if (isTriviaAnswer) {
+            isTriviaAnswer = false;
+            c = new AnswerCommand(full);
+        } else if (s.equals("done")) {
             c = new DoneCommand(Integer.valueOf(arr[1]) - 1);
         } else if (s.equals("delete")) {
             c = new DeleteCommand(Integer.valueOf(arr[1]) - 1);
@@ -28,16 +32,17 @@ public class Parser {
             String information = arr[1].trim();
             String[] split = information.split(" ", 2);
             c = new EditCommand(Integer.valueOf(split[0]) - 1, split[1]);
+        } else if (s.equals("trivia")) {
+            isTriviaAnswer = true;
+            c = new TriviaCommand();
         } else if (s.equals("todo") || s.equals("deadline") || s.equals("event")) {
             c = new AddCommand(s, arr[1].trim());
         } else if (s.toLowerCase().equals("list")) {
             c = new ListCommand();
         } else if (s.equals("find")) {
             c = new FindCommand(arr[1].trim());
-        } else {
-            if (s.equals("bye")) {
+        } else if (s.equals("bye")) {
                 c = new ExitCommand();
-            }
         }
 
         return c;
@@ -65,13 +70,14 @@ public class Parser {
             } else if (first.equals("done") || first.equals("delete") || first.equals("find")) {
                 //if done, delete or find are not followed by a number
                 throw new DukeException("Please specify a task.");
-            } else if (!first.equals("bye") && !first.equals("list")) {
+            } else if (!first.equals("bye") && !first.equals("list") && !first.equals("trivia") && !isTriviaAnswer) {
                 //if it is not a single-worded valid input
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         } else {
             //if it is an invalid input containing multiple words
-            if (!task && !first.equals("done") && !first.equals("delete") && !first.equals("find") && !first.equals("edit")) {
+            if (!task && !first.equals("done") && !first.equals("delete") && !first.equals("find")
+                    && !first.equals("edit") && !isTriviaAnswer) {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             } else if ((first.equals("event") && !input.contains("/at"))
                     || (first.equals("deadline") && !input.contains("/by"))) {

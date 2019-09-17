@@ -11,10 +11,15 @@ public class Ui {
     protected static Scanner sc;
     /** String of a line for formatting.*/
     private static String line = "____________________________________________________________";
+    protected static String answer;
 
     /** Constructor.*/
     public Ui() {
         sc = new Scanner(System.in);
+    }
+
+    public static void setAnswer(String ans) {
+        answer = ans;
     }
 
     /**
@@ -147,5 +152,19 @@ public class Ui {
         String result = "You have successfully edited the task:\n" + original
                 + "\nto:\n" + newString;
         return result;
+    }
+
+    public static String correctAnswer() {
+        String result = "Correct! The answer is " + answer + "! Great job!";
+        return result;
+    }
+
+    public static String wrongAnswer() {
+        String result = "Sorry, the answer is " + answer + ". Better luck next time!";
+        return result;
+    }
+
+    public static String getAnswer() {
+        return answer;
     }
 }

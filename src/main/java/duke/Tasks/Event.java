@@ -18,6 +18,10 @@ public class Event extends Task {
         this.at = LocalDateTime.parse(at, format1);
     }
 
+    public LocalDateTime getDateTime() {
+        return at;
+    }
+
     public String getDescription() {
         return description;
     }

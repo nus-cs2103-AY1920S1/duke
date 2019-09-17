@@ -139,7 +139,7 @@ public class TaskList {
      * Sorts the currentTasklist to list in the following order
      * 1) To-do 2) Deadline 3) Event Task.
      */
-    public void sortTask() {
+    public void sortTaskByEventType() {
         ArrayList<Task> newListOfTask = new ArrayList<>();
         for (int typeNo = 0; typeNo < 3; typeNo++) {
             for (int i = 0; i < listOfTask.size(); i++) {
@@ -161,6 +161,37 @@ public class TaskList {
                 }
             }
         }
+        listOfTask = newListOfTask;
+    }
+
+    /**
+     * Sorts the currentTasklist to list in the order of time,
+     * with the earliest event as the first.
+     */
+    public void sortTaskByTime() {
+        ArrayList<Task> restOfListOfTask = new ArrayList<>();
+        ArrayList<Task> newListOfTodoTask = new ArrayList<>();
+        for (int j = 0; j < listOfTask.size(); j++) {
+            Task currentTask = listOfTask.get(j);
+            if (currentTask instanceof Todo) {
+                newListOfTodoTask.add(currentTask);
+            } else {
+                restOfListOfTask.add(currentTask);
+            }
+        }
+        ArrayList<Task> newListOfTask = new ArrayList<>();
+        while (!restOfListOfTask.isEmpty()) {
+            Task currentEarliestTask = restOfListOfTask.get(0);
+            for (int i = 0; i < restOfListOfTask.size(); i++) {
+                Task currentTask = restOfListOfTask.get(i);
+                if (currentEarliestTask.getDateTime().isAfter(currentTask.getDateTime())) {
+                    currentEarliestTask = currentTask;
+                }
+            }
+            newListOfTask.add(currentEarliestTask);
+            restOfListOfTask.remove(currentEarliestTask);
+        }
+        newListOfTask.addAll(newListOfTodoTask);
         listOfTask = newListOfTask;
     }
 }

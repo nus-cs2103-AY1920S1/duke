@@ -32,9 +32,10 @@ public class Parser {
     /**
      * Returns the task index from the inputInstructions. Helps to identify the index number
      * @param inputInstruction user string input which includes task index and description
+     * @param ui user interface object to deal with I/O
      * @return the task index after separating from the rest of the string
      */
-    public static int getTaskNum(String inputInstruction, Ui ui) throws DukeException {
+    public static int getTaskNum(String inputInstruction, Ui ui) {
         try {
             String[] taskNumString = inputInstruction.split(" ");
             int taskNum = Integer.parseInt(taskNumString[1]);
@@ -49,6 +50,7 @@ public class Parser {
     /**
      * Returns a String of the DateTime, in the correct/preferred format.
      * @param stringInput string of a DateTime in the format that is found in the textFile
+     * @param splitKey takes in a String to be used as a splitkey
      * @return a String output of a reformatted String of the DateTime
      */
     public static String extractDateTime(String stringInput, String splitKey) {
@@ -92,6 +94,8 @@ public class Parser {
     /**
      * returns a Command Object according to the user instruction.
      * @param inputInstruction a string input by the user do different commands/task
+     * @param ui Ui object to handle all I/O
+     * @param currentTaskList takes in the currentTasklist
      * @return a Command Object according to the user input
      * @throws DukeException for invalid input
      */

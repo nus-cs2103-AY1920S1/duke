@@ -3,6 +3,7 @@ package duke.tasks;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * Represents a Deadline Task which extends the Task Class
@@ -20,6 +21,10 @@ public class Deadline extends Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public LocalDateTime getDateTime() {
+        return by;
     }
 
     @Override

@@ -22,10 +22,19 @@ public class SortCommand extends Command {
      */
     public String execute(TaskList currentTaskList, Ui ui, Storage storage) {
         try {
-            if (!inputInstruction.equals("sort")) {
+            if (inputInstruction.length() == 4 || inputInstruction.length() == 5) {
                 throw new DukeException("sort");
             }
-            currentTaskList.sortTask();
+            String sortType = inputInstruction.substring(5);
+            if (!(sortType.equals("type") || sortType.equals("time"))) {
+                throw new DukeException("sort");
+            }
+            if (sortType.equals("type")) {
+                currentTaskList.sortTaskByEventType();
+            }
+            if (sortType.equals("time")) {
+                currentTaskList.sortTaskByTime();
+            }
             storage.updateTaskToFile(currentTaskList.getEntireList());
             return ui.printList(currentTaskList);
         } catch (Exception e) {

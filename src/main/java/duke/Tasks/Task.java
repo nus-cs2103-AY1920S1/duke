@@ -1,5 +1,8 @@
 package duke.tasks;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a Task class which basically represents a task
  * a Task object is represented with a description, a isDone
@@ -9,6 +12,7 @@ package duke.tasks;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected LocalDateTime at;
 
     /**
      * Constructor for Task object. Takes in task description
@@ -29,6 +33,10 @@ public class Task {
         } else {
             return "X";
         }
+    }
+
+    public LocalDateTime getDateTime() {
+        return at;
     }
 
     public String getDescription() {

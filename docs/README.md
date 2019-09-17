@@ -136,20 +136,32 @@ __________________________________
 
 
 ## 6. Sorts the current list: Sort
-Sorts the current list of Task according to the different Task Types in order of
-Todo -> Deadline -> Event.
+Sorts the current list of Task according to either time or event type.
+Sorting by event Type : Todo -> Deadline -> Event.
+Sorting by event Time : Earliest event will be placed first on the list.
 
 ### Sort
 	
-	 sort - e.g. "sort" 
+	 sort [sort_type]- e.g. "sort type" or "sort time"
 
-Expected outcome:
+Expected outcome: Sort type
 ```
 __________________________________
 Here are the tasks in your list:
   1.[T][X] MA1101R Tutorial 2
   2.[D][X] Submit Project (by: 12/09/2019 1500)
   3.[E][X] Attending Wedding (at: 02/12/2019 1800)
+Now you have 3 tasks in the list.
+__________________________________
+```
+
+Expected outcome: Sort time
+```
+__________________________________
+Here are the tasks in your list:
+  1.[D][X] Submit Project (by: 12/09/2019 1500)
+  2.[E][X] Attending Wedding (at: 02/12/2019 1800)
+  3.[T][X] MA1101R Tutorial 2
 Now you have 3 tasks in the list.
 __________________________________
 ```
@@ -185,9 +197,15 @@ Closes Program
 
 7) Find [Key_Word]
 
-8) Sort
+8) Sort [Sort_Type]
+    - Sort By Event Type [sort type]
+    - Sort By Time [sort time]
 
 9) Bye
 
+
+## Others / Credits
+Images from https://www.pexels.com/ [Free Stock photos]
+Codes - Self Written
 
 

@@ -16,8 +16,6 @@ public class TaskList {
     private static final String ADD_TYPE_DEADLINE = "deadline";
     private static final String ADD_TYPE_EVENT = "event";
 
-//    private PriorityQueue<Task> sortedList;
-
     /**
      * ArrayList for tracking Tasks on the list.
      */
@@ -151,12 +149,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints a sorted list, either by earliest to latest or completion status.
+     * @param keyword Indicates sorting type, either "completion" or "datetime"
+     * @return String of sorted list, by completion or by datetime
+     */
     public String returnSortedTasksString(String keyword) {
         ArrayList<Task> taskListCopy = new ArrayList<Task>();
         for (Task task : list) {
             taskListCopy.add(task);
         }
-        if(keyword.equals("datetime")) {
+        if (keyword.equals("datetime")) {
             Collections.sort(taskListCopy, new SortByEarliestDeadline());
         } else {
             Collections.sort(taskListCopy, new SortByCompleted());

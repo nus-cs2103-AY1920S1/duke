@@ -174,6 +174,7 @@ class PostponeCommand extends Command {
     PostponeCommand(int index, String time) {
         assert index > 0 : "index of task cannot be negative";
         this.index = index;
+        this.time = time;
     }
 
     /**

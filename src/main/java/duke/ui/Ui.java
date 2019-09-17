@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Ui {
 
     static String divider;
-    String logo;
-    String commandType;
     Scanner scanner;
     String remainingWords;
 

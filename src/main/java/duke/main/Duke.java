@@ -27,13 +27,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     public Duke(String filePath) {
         ui = new Ui();
@@ -45,34 +38,6 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-
-//    /**
-//     * Runs the entire logic of the program. showWelcome() displays the duke logo and greets
-//     * the user. isExit boolean ensures that the while loop doesn't end until the user input of
-//     * "bye" is encountered. User's input will be read through the ui and then parsed to give
-//     * a Command object. The specific command will then be executed.
-//     * This method has try and catch blocks within to help with catching both DukeException
-//     * and ParseException
-//     *
-//     */
-//    public void run() {
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                ui.showLine(); // show the divider line ("_______")
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            } catch (ParseException e) {
-//                System.out.println(e.getMessage());
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
-//    }
 
     /**
      * Gets response to be returned through duke output
@@ -103,16 +68,5 @@ public class Duke {
          }
      }
  }
-
-
-//    /**
-//     * Runs the main method to load the duke.txt file into the program and then calls the run method
-//     * @param args
-//     * @throws DukeException when an error of duke.main.Duke occurs
-//     * @throws ParseException when a string is not parsed properly
-//     */
-//    public static void main(String[] args) throws DukeException, ParseException{
-//        new Duke("/Users/lawnce/Desktop/duke/data/duke.txt").run();
-//    }
 
 }

@@ -42,4 +42,11 @@ public class Duke {
 
         return response;
     }
+
+    /**
+     * Terminates duke and do necessary cleaning tasks such as update the data file of the program.
+     */
+    public void terminate() {
+        database.update(tasksList);
+    }
 }

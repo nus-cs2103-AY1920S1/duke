@@ -1,17 +1,17 @@
 package duke.component;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Task.TaskType;
 import duke.task.ToDo;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Encapsulates the database of duke.Duke bot.
@@ -53,10 +53,8 @@ public class DukeDatabase {
      * Set the directory of the data text file used to record the tasks of the user.
      */
     private void setDatabaseDirectory() {
-        String projectRoot = new File(System.getProperty("user.dir"))
-                .getParentFile()
-                .getPath();
-        databaseDirectory = String.format("%s/data/duke.txt", projectRoot);
+        String currDirectory = new File(System.getProperty("user.dir")).getPath();
+        databaseDirectory = String.format("%s/data/duke.txt", currDirectory);
     }
 
     /**
@@ -65,7 +63,7 @@ public class DukeDatabase {
     private void createDataFile() {
         try {
             tasksFile = new File(databaseDirectory);
-            tasksFile.getParentFile().mkdirs();
+            tasksFile.getParentFile().mkdirs(); // create the /data directory if it has not exist
             tasksFile.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();

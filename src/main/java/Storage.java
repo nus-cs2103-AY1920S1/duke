@@ -18,7 +18,7 @@ class Storage implements TaskObserver, StorageInterface {
 
     private TaskModelInterface model;
     //private String path = "../../../../data/duke.txt";
-    private String path = "/data/duke.txt";
+    private String path = "./data/duke.txt";
     private TaskCreator taskCreator;
 
     public Storage(TaskModelInterface model) {
@@ -82,6 +82,16 @@ class Storage implements TaskObserver, StorageInterface {
 
             //Ui.printErrorSection(loadFileErrorMsg);
             System.out.println(loadFileErrorMsg);
+
+            //create the file
+            File f = new File(this.path);
+            boolean flag = f.mkdir();
+            if (flag) {
+                System.out.println("path created successfully");
+            } else {
+                System.out.println("path created unsuccessfully");
+            }
+                    
         } 
         return taskList.stream();
     }

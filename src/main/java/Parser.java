@@ -1,6 +1,10 @@
 // java -Dfile.encoding=UTF8 classname
+//import tagModule.TagCommandObserver;
+//import tagModule.TagCommandObservable;
+
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.String;
 import java.util.stream.Stream;
@@ -10,11 +14,13 @@ import java.util.Iterator;
  * Class which contains logic to deterime what commands to be executed
  * given an input by user.
  */
-class Parser implements ControllerInterface {
+class Parser implements ControllerInterface, 
+    TagCommandObservable {
     private TaskModelInterface model;
     private Ui display;
     private TaskCreator taskCreator;
     private GooeyBridge bridge;
+    private List<TagCommandObserver> tagCommandObservers;
 
     public Parser(TaskModelInterface model) {
         this.model = model;
@@ -23,6 +29,11 @@ class Parser implements ControllerInterface {
         this.taskCreator = new BasicTaskCreator();
         this.bridge = new GooeyBridge(this);
         this.display.registerObserver(this.bridge);
+        this.tagCommandObservers = new ArrayList<>();
+    }
+
+    public Ui getUi() {
+        return this.display;
     }
 
     /**
@@ -39,6 +50,19 @@ class Parser implements ControllerInterface {
 
     public GooeyBridge getBridge() {
         return this.bridge;
+    }
+
+
+    //private List<TagCommandObserver> tagCommandObservers;
+    public void registerTagCommandObserver(TagCommandObserver o) {
+        this.tagCommandObservers.add(o);
+        //tagCommandObservers.add(o);
+    }
+
+    public void notifyTagCommandObservers(String command) {
+        for (TagCommandObserver o : this.tagCommandObservers) {
+            o.tagCommandUpdate(command);
+        }
     }
 
 
@@ -63,6 +87,10 @@ class Parser implements ControllerInterface {
         } else if 
             (commandlist[0].toUpperCase().equals("FIND")) {
             this.findTasks(command);
+        } else if 
+            (commandlist[0].toUpperCase().equals("TAG")) {
+            System.out.println("here<<<<");
+            this.notifyTagCommandObservers(command);
         } else if (isEndCommand(command)) {
             display.printExitMessage();
         } else {
@@ -127,6 +155,11 @@ class Parser implements ControllerInterface {
         String[] commandlist = command.split(" ");
         /* check for exceptions */
         Integer taskNum = Integer.valueOf(commandlist[1]);
+
+
+        //TAG patch, delete the tag before you delete the obj
+        //tag deletion relies Tasklist as well
+        this.notifyTagCommandObservers("TAG DELETETAG " + commandlist[1]);
 
         assert taskNum < this.model.getTotalTasks() 
             : "deleteTask is not within bounds"; 

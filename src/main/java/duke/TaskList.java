@@ -94,6 +94,7 @@ public class TaskList {
      * @return List of tasks containing keyword as a String.
      */
     public String find(String keyword) {
+        String lowercaseKeyword = keyword.toLowerCase();
         StringBuilder tasks = new StringBuilder();
         String task;
         int i = 1;
@@ -101,7 +102,7 @@ public class TaskList {
         for (Iterator iterator = taskList.iterator(); iterator.hasNext(); i++) {
             assert (i >= 1 && index >= 1);
             Task current = (Task) iterator.next();
-            if (current.containsKeyword(keyword)) {
+            if (current.containsKeyword(lowercaseKeyword)) {
                 task = index + "." + current + "\n";
                 tasks.append(task);
                 index++;

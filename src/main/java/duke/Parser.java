@@ -18,36 +18,37 @@ public class Parser {
      * @throws DukeException  If description of todo is empty or input format is invalid.
      */
     public static Command parse(String input) throws DukeException {
-        if (input.equals("bye")) {
+        String lowercaseInput = input.toLowerCase();
+        if (lowercaseInput.equals("bye")) {
             return new ByeCommand();
-        } else if (input.equals("list")) {
+        } else if (lowercaseInput.equals("list")) {
             return new ListCommand();
-        } else if (input.startsWith("done")) {
+        } else if (lowercaseInput.startsWith("done")) {
             int doneIndex = Integer.parseInt(input.split(" ")[1]) - 1;
             return new DoneCommand(doneIndex);
-        } else if (input.startsWith("delete")) {
+        } else if (lowercaseInput.startsWith("delete")) {
             int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1;
             return new DeleteCommand(deleteIndex);
-        } else if (input.startsWith("find")) {
-            input = input.replaceFirst("^find", "");
+        } else if (lowercaseInput.startsWith("find")) {
+            input = input.replaceFirst("(?i)^find", "");
             String keyword = input.substring(input.indexOf(" ") + 1);
             return new FindCommand(keyword);
-        } else if (input.startsWith("load")) {
-            input = input.replaceFirst("^load", "");
+        } else if (lowercaseInput.startsWith("load")) {
+            input = input.replaceFirst("(?i)^load", "");
             String filePath = input.substring(input.indexOf(" ") + 1);
             return new FileCommand(filePath);
         }
         Task task;
-        if (input.startsWith("todo")) {
-            input = input.replaceFirst("^todo", "");
+        if (lowercaseInput.startsWith("todo")) {
+            input = input.replaceFirst("(?i)^todo", "");
             if (input.substring(input.indexOf(" ") + 1).isEmpty()) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
             }
             task = new ToDo(input.substring(input.indexOf(" ") + 1));
-        } else if (input.startsWith("deadline")) {
+        } else if (lowercaseInput.startsWith("deadline")) {
             task = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1),
                     DateTime.parse(input.substring(input.indexOf("/") + 4)));
-        } else if (input.startsWith("event")) {
+        } else if (lowercaseInput.startsWith("event")) {
             task = new Event(input.substring(input.indexOf(" ") + 1, input.indexOf("/") - 1),
                     DateTime.parse(input.substring(input.indexOf("/") + 4)));
         } else {

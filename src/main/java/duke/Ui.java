@@ -99,6 +99,6 @@ public class Ui {
      * @param filePath  Path to saved data file on hard disk.
      */
     public static String showLoadMessage(String filePath) {
-        return ("Your saved data has been successfully loaded from " + filePath + "\n");
+        return ("Your saved data has been successfully loaded from " + filePath + ".\n");
     }
 }

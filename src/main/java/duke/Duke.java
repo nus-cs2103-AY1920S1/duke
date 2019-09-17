@@ -8,6 +8,8 @@ import java.lang.String;
  * Encapsulates a chat bot.
  */
 public class Duke {
+    private static final String DEFAULT_FILE = "bear.txt";
+
     protected Storage storage;
     protected TaskList taskList;
 
@@ -15,6 +17,7 @@ public class Duke {
      * Constructs a Duke object.
      */
     public Duke() {
+        storage = new Storage(DEFAULT_FILE);
         taskList = new TaskList();
     }
 

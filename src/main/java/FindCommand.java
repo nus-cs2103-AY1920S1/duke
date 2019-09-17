@@ -17,7 +17,7 @@ public class FindCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) {
         String filter = input.substring(4).trim();
-        assert filter != null || !filter.equals(""): "filter should not be null";
+        assert filter != null || !filter.equals("") : "filter should not be null";
         if (filter.length() == 0) {
             return "No keyword to search";
         }

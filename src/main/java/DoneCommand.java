@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) {
         String doneNumber = input.substring(4).trim();
-        assert doneNumber != null || !doneNumber.equals(""): "doneNumber should not be null";
+        assert doneNumber != null || !doneNumber.equals("") : "doneNumber should not be null";
         if (doneNumber.length() == 0) {
             return "No task number detected to be completed";
         }

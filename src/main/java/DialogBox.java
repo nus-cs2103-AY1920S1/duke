@@ -1,3 +1,7 @@
+// @@author LeowWB-reused
+// Original code by Jeffrey Lum, and can be found in the tutorials directory of this repository.
+// Reused with minor modifications.
+
 import java.io.IOException;
 import java.util.Collections;
 

@@ -18,7 +18,7 @@ public class Ui {
 	 */
 	public String showLoadingError() {
 		return breakLine
-				+ " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+				+ " OOPS!!! I'm sorry, but I don't know what that means :-(\n"
 				+ breakLine;
 	}
 
@@ -28,7 +28,7 @@ public class Ui {
 	 */
 	public String showException(Exception e) {
 		return breakLine
-				+ " ☹ OOPS!!! " + e.toString() + "\n"
+				+ " OOPS!!! " + e.toString() + "\n"
 				+ breakLine;
 	}
 

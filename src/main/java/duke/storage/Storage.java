@@ -1,11 +1,8 @@
 package duke.storage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
 
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
@@ -38,13 +35,12 @@ public class Storage {
 	 * @param ui UI to show load messages if failed.
 	 * @return task list from file.
 	 * @throws IncorrectFileFormatException If file format is incorrect.
-	 * @throws FileNotFoundException        if file is not found.
 	 */
 	public ArrayList<Task> load(Ui ui) throws IncorrectFileFormatException, FileNotFoundException {
 		File f;
-		f = new File(targetFilePath);
-		
+		f = new File("data/tasks.txt");
 		Scanner s = new Scanner(f, "Unicode");
+		
 		ArrayList<String> listInput = new ArrayList<>();
 		
 		while (s.hasNextLine()) {
@@ -74,7 +70,7 @@ public class Storage {
 	 */
 	public void save(ArrayList<String> l) throws IOException {
 		try {
-			FileWriter fw = new FileWriter(printFilePath);
+			FileWriter fw = new FileWriter("data/print.txt");
 			for (String s : l) {
 				fw.write(s + System.lineSeparator());
 			}

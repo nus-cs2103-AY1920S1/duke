@@ -1,6 +1,5 @@
 package command;
 
-import main.HistoryManager;
 import main.Storage;
 import main.Ui;
 import task.InsufficientTaskArgumentException;
@@ -13,9 +12,8 @@ public class UndoCommand implements Command {
     }
 
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
-        TaskList prevTaskList = historyManager.undo();
-        storage.updateTasks(prevTaskList);
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
+        TaskList prevTaskList = storage.undo();
         ui.nextLine("Got it! I've undo the previous command.");
         return prevTaskList;
     }

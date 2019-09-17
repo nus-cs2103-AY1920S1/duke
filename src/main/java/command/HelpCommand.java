@@ -1,6 +1,5 @@
 package command;
 
-import main.HistoryManager;
 import main.Storage;
 import main.Ui;
 import task.InsufficientTaskArgumentException;
@@ -13,7 +12,7 @@ public class HelpCommand implements Command {
     }
 
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException {
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
         String helpText = "    ____________________________________________________________\n" +
                 "    | command    | arguments   | description                          |\n" +
                 "    ____________________________________________________________\n" +

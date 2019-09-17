@@ -2,13 +2,15 @@ package main;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Stack;
+
 import task.*;
 
 public class Storage {
     private String filepath;
-    private File data;
     private FileWriter fileWriter;
     private PrintWriter printWriter;
+    private Stack<TaskList> records;
 
     /**
      * Constructor for Storage objects
@@ -16,7 +18,7 @@ public class Storage {
      */
     public Storage(String filepath) {
         this.filepath = filepath;
-        this.data = new File(filepath);
+        this.records = new Stack<>();
     }
 
     private Task getData(String[] data){
@@ -41,6 +43,7 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<Task>();
+        File data = new File(filepath);
         try {
             if (data.createNewFile()) {
                 System.out.println("    Previous file not found. Creating a new file");
@@ -68,10 +71,16 @@ public class Storage {
      * @param tasks TaskList. Data in tasks replaces the TaskList data from the previous file.
      */
     public void updateTasks(TaskList tasks) {
+        writeTasks(tasks);
+        updateRecords();
+    }
+
+    public void writeTasks(TaskList tasks) {
+        File data = new File(filepath);
         try {
-            this.data.delete();
-            this.data.createNewFile();
-            this.fileWriter = new FileWriter(this.data, false);
+            data.delete();
+            data.createNewFile();
+            this.fileWriter = new FileWriter(data, false);
             this.printWriter = new PrintWriter(this.fileWriter);
             for (int i = 0; i < tasks.size(); i = i + 1) {
                 this.printWriter.println(tasks.get(i).toDataFormat());
@@ -80,5 +89,24 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Error! file not loaded into database.");
         }
+    }
+
+    public void updateRecords() {
+        TaskList tasks = new TaskList(this.load());
+        this.records.push(tasks);
+        this.writeTasks(tasks);
+    }
+
+    public TaskList undo() {
+        if (records.isEmpty()) {
+            return new TaskList(this.load());
+        }
+        records.pop();
+        if (records.isEmpty()) {
+            return new TaskList(this.load());
+        }
+        TaskList prev = records.peek();
+        writeTasks(prev);
+        return prev;
     }
 }

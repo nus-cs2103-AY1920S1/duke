@@ -1,5 +1,5 @@
 package command;
-import main.HistoryManager;
+
 import task.TaskList;
 import main.Ui;
 import main.Storage;
@@ -13,7 +13,7 @@ public interface Command {
      * @param storage Storage is the class that manages file reading and file writing of the data passed into the app.
      * @throws InsufficientTaskArgumentException exception thrown when command does not have enough arguments.
      */
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage, HistoryManager historyManager) throws InsufficientTaskArgumentException;
+    public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException;
 
     /**
      * isExit checks if the command is an exit command.

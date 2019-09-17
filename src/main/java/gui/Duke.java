@@ -29,7 +29,6 @@ public class Duke extends Application{
     private Ui ui = new Ui();
     private Storage storage = new Storage("./DukeData.txt");
     private TaskList taskList;
-    private HistoryManager historyManager = new HistoryManager(storage);
     private final double APP_HEIGHT = 595.0;
     private final double APP_WIDTH = 500.0;
 
@@ -63,7 +62,7 @@ public class Duke extends Application{
     private String getResponse(String input, Stage stage) {
         try {
             Command c = Parser.parse(input);
-            taskList = c.execute(taskList, ui, storage, historyManager);
+            taskList = c.execute(taskList, ui, storage);
             this.isOpen = !c.isExit();
             this.duke = new Image(this.getClass().getResourceAsStream("/images/Rowlet.jpg"));
             return ui.showLine();
@@ -128,6 +127,7 @@ public class Duke extends Application{
     public void start(Stage stage) throws Exception {
         //Step 1. Setting up required components
         taskList = new TaskList(storage.load());
+        storage.updateTasks(taskList);
 
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();

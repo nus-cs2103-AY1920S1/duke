@@ -32,6 +32,7 @@ public class TaskList {
 
     public int getSize() {
 
+        assert this.list != null;
         return this.list.size();
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
 
+        assert this.list != null;
         return this.list;
 
     }
@@ -55,6 +57,7 @@ public class TaskList {
 
     public Task getTaskByIndex(int index) {
 
+        assert this.list != null;
         return this.list.get(index);
     }
 
@@ -65,6 +68,7 @@ public class TaskList {
      */
     public void addTask(Task current) {
 
+        assert this.list != null;
         this.list.add(current);
 
     }
@@ -78,6 +82,7 @@ public class TaskList {
 
         Task deleted = list.get(current);
         list.remove(current);
+        assert this.list != null;
 
         return deleted;
 

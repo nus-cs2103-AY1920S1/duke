@@ -1,3 +1,8 @@
+# ambervoong/duke
+A simple task manager with a command line interface.
+
+**[User Guide Here](http://ambervoong.github.io/duke/)**
+
 # Setting up
 
 **Prerequisites**

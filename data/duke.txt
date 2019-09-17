@@ -1,19 +1,2 @@
-D, 1, dance, Mon Dec 02 23:59:00 SGT 2019
-E, 1, welcome tea, Thu Aug 29 19:00:00 SGT 2019
-D, 1, cs2103t, Tue Apr 02 23:59:00 SGT 2019
-D, 1, splashdow happening, Mon Dec 02 23:59:00 SGT 2019
-E, 1, splasdowwnnnn, Fri Mar 02 12:34:00 SGT 2018
-D, 1, hdhwriwu, Mon Dec 23 23:59:00 SGT 2019
-D, 1, fsgjdfs, Mon Dec 23 23:59:00 SGT 2019
-D, 1, hhksd, Thu Dec 12 23:56:00 SGT 2019
-D, 1, djaaas, Sun Dec 22 23:59:00 SGT 2019
-D, 1, hahdkas, Mon Dec 23 23:59:00 SGT 2019
-E, 1, jshfksjdh, Sun Dec 22 23:59:00 SGT 2019
-T, 1, meap
-D, 1, jada, Tue Feb 12 23:56:00 SGT 2019
-D, 1, read book, Sat Mar 12 23:59:00 SGT 2016
-T, 0, meap
-T, 0, meap
-T, 0, lala
-D, 0, low, Sun Jun 23 23:59:00 SGT 2019
-E, 0, yay, Thu Dec 12 23:59:00 SGT 2019
+E, 0, welcome tea, Thu Aug 29 19:00:00 SGT 2019
+D, 0, sdfs, Mon Dec 23 23:59:00 SGT 2019

@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.VocabularyList;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -80,7 +81,8 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui,
+                              Storage storage, VocabularyList vocabularyList) throws DukeException {
         tasklist.addTask(task);
         storage.updateData(tasklist);
         return ui.generateResponse("Got it. I've added this task:",

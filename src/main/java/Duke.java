@@ -4,6 +4,7 @@ import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.VocabularyList;
 
 /**
  * Main Duke class.
@@ -11,6 +12,7 @@ import duke.Ui;
 public class Duke {
     private Storage storage;
     private TaskList tasks;
+    private VocabularyList vocabularyList;
     private Ui ui;
     private boolean readyToExit = false;
 
@@ -18,12 +20,13 @@ public class Duke {
      * Constructor for Duke Class.
      */
     public Duke() {
-        String filepath = "list.txt";
+        String filepath = "duke.txt";
         String vocabpath = "vocabulary.txt";
         ui = new Ui();
 
         try {
             storage = new Storage(filepath, vocabpath);
+            vocabularyList = new VocabularyList(storage.loadVocabulary());
         } catch (DukeException duke) {
             ui.showLoadingError(duke);
         }
@@ -44,8 +47,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(storage.getVocabularyList().format(input));
-            String response = c.getResponse(tasks, ui, storage);
+            Command c = Parser.parse(vocabularyList.format(input));
+            String response;
+            response = c.getResponse(tasks, ui, storage, vocabularyList);
             if (c.isExit()) {
                 this.setExit();
             }

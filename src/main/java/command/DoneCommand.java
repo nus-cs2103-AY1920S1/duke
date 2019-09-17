@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.VocabularyList;
 
 import static java.lang.String.format;
 
@@ -29,7 +30,8 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList tasklist, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui,
+                              Storage storage, VocabularyList vocabularyList) throws DukeException {
         DukeException.checkValidity(index < 1 || index > tasklist.getTaskSize(),
                 "Index out of range.");
         tasklist.markDone(index);

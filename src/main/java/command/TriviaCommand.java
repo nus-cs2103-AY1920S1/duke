@@ -49,9 +49,9 @@ public class TriviaCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasklist, Ui ui,
+                              Storage storage, VocabularyList vocabularyList) throws DukeException {
         String response;
-        VocabularyList vocabularyList = storage.getVocabularyList();
         switch (command) {
         case "query":
             response = ui.generateResponse("Here are the possible commands for trivia:",
@@ -64,7 +64,7 @@ public class TriviaCommand extends Command {
             assert !vocabulary.isEmpty() : "Vocabulary should not be empty";
             assert !content.isEmpty() : "Content should not be empty";
             vocabularyList.memorise(vocabulary, content);
-            storage.updateVocabulary();
+            storage.updateVocabulary(vocabularyList);
             response = ui.generateResponse("Duke has memorised " + vocabulary);
             break;
         case "list":
@@ -75,13 +75,13 @@ public class TriviaCommand extends Command {
         case "erase":
             assert !vocabulary.isEmpty() : "Vocabulary should not be empty";
             vocabularyList.eraseWord(vocabulary);
-            storage.updateVocabulary();
+            storage.updateVocabulary(vocabularyList);
             response = ui.generateResponse(String.format("%s has been removed from Duke's memory",
                     vocabulary));
             break;
         case "reset":
             vocabularyList.reset();
-            storage.updateVocabulary();
+            storage.updateVocabulary(vocabularyList);
             response = ui.generateResponse("Vocabulary bank has been reset.");
             break;
         default:

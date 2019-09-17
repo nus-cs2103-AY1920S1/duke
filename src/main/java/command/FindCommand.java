@@ -3,6 +3,7 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.VocabularyList;
 
 import java.util.stream.Stream;
 
@@ -18,7 +19,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList tasklist, Ui ui, Storage storage) {
+    public String getResponse(TaskList tasklist, Ui ui,
+                              Storage storage, VocabularyList vocabularyList) {
         Stream<String> taskStream = tasklist
                 .getList()
                 .stream()

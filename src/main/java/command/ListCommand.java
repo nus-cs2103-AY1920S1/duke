@@ -3,6 +3,7 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.VocabularyList;
 import task.Task;
 
 import java.util.stream.IntStream;
@@ -22,7 +23,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String getResponse(TaskList tasklist, Ui ui, Storage storage) {
+    public String getResponse(TaskList tasklist, Ui ui,
+                              Storage storage, VocabularyList vocabularyList) {
         Stream<String> taskStream = IntStream
                 .range(0, tasklist.getTaskSize())
                 .mapToObj(i -> {

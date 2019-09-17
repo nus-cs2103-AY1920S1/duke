@@ -19,7 +19,6 @@ import java.util.Scanner;
 public class Storage {
     private String filepath;
     private String vocabpath;
-    private VocabularyList vocabularyList;
 
     /**
      * Storage constructor.
@@ -30,15 +29,15 @@ public class Storage {
     public Storage(String filepath, String vocabpath) throws DukeException {
         this.filepath = filepath;
         this.vocabpath = vocabpath;
-        this.vocabularyList = new VocabularyList(loadVocabulary());
     }
 
     /**
-     * Updates the vocabulary file.
+     * Updates the given vocabulary file.
      *
+     * @param vocabularyList VocabularyList of Duke.
      * @throws DukeException Catches IOException.
      */
-    public void updateVocabulary() throws DukeException {
+    public void updateVocabulary(VocabularyList vocabularyList) throws DukeException {
         try {
             String[] list = vocabularyList.getList();
             FileWriter fw = new FileWriter(this.vocabpath);
@@ -50,15 +49,6 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException(e.toString());
         }
-    }
-
-    /**
-     * Getter function for VocabularyList.
-     *
-     * @return VocabularyList of Storage.
-     */
-    public VocabularyList getVocabularyList() {
-        return this.vocabularyList;
     }
 
     /**

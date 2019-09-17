@@ -2,7 +2,7 @@
 
 ## Features 
 
-:bear: Bear is an interactive, error-resistant and lightweight task manager with a clean and minimalist interface that helps you to get things done.
+Bear is an interactive, error-resistant and lightweight task manager with a clean and minimalist interface that helps you to get things done.
 
 Bear supports seamless data storage and transfer between devices so you can access your task list from anywhere. Changes are automatically saved. 
 
@@ -112,9 +112,9 @@ Now you have 2 tasks in the list.
 ### `list` - List all tasks
 
 You can use this command to list all tasks in your task list.
-The tasks will ordered 
+The generated list will be in chronological order.
 
-Example of expected outcome:
+Expected outcome:
 
 ```
 Here are the tasks in your list:

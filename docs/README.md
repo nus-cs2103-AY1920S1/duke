@@ -1,6 +1,4 @@
-| By: `Voong Yu Xuan` | 
-
----
+# Project Duke - User Guide
 
 # Table of Contents 
    1. [Introduction](#Introduction)

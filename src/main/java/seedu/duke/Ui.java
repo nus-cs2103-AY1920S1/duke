@@ -26,7 +26,7 @@ public class Ui {
      * Prints the intro when starting the application.
      */
     public static String intro() {
-        String logo = "Hello! I'm Duke\nWhat can I do for you?";
+        String logo = "Hello! \nIs there something I can help you with today?";
         return logo;
     }
 

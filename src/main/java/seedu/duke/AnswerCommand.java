@@ -10,8 +10,8 @@ public class AnswerCommand extends Command {
     @Override
     public String execute(TaskList t, Ui u, Storage s) {
         String correctAnswer = u.getAnswer();
-        if (answer.toLowerCase().equals(correctAnswer.toLowerCase()) || answer.toLowerCase().contains(correctAnswer.toLowerCase())
-            || correctAnswer.toLowerCase().contains(answer.toLowerCase())) {
+        if ((answer.toLowerCase().equals(correctAnswer.toLowerCase()) || answer.toLowerCase().contains(correctAnswer.toLowerCase())
+            || correctAnswer.toLowerCase().contains(answer.toLowerCase())) && !answer.equals("")) {
             return u.correctAnswer();
         } else {
             return u.wrongAnswer();

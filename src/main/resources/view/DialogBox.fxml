@@ -9,9 +9,6 @@
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <children>
         <Label fx:id="dialog" maxHeight="Infinity" minHeight="-Infinity" text="Label" wrapText="true">
-            <font>
-                <Font name="Sitka Small" size="10.0" />
-            </font>
          </Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>

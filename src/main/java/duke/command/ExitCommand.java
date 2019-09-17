@@ -34,7 +34,7 @@ public class ExitCommand extends Command {
         ui.messageUser("Bye. Hope to see you again soon!");
         try {
             storage.save(tasks);
-        }catch(IOException e) {
+        } catch (IOException e) {
             return "ERROR SAVING :(";
         }
         return "Bye. Hope to see you again soon!";

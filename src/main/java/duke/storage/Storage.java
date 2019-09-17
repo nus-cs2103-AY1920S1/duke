@@ -72,7 +72,6 @@ public class Storage {
     public void save(TaskList tasks) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath);
         fileWriter.write(tasks.listAllTasksAsString());
-        System.out.println("WRITING SUCCESSFUL");
         fileWriter.close();
     }
 }

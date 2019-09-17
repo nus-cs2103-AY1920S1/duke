@@ -87,7 +87,6 @@ public class TaskList {
         }
         Task taskToMark = this.getTaskFromList(taskNumToMark);
         Task markedTask = taskToMark.markAsDone();
-        System.out.println("SETTING");
         setIndexToTask(taskNumToMark, markedTask);
     }
 

@@ -19,7 +19,7 @@ public class TodoTest {
     @Test
     public void testGetTaskStatus() throws DukeException {
         Todo test = new Todo(" TEST");
-        assertEquals("[T] [✗] TEST", test.getTaskStatus());
+        assertEquals("[T] [\u2718] TEST", test.getTaskStatus());
     }
 
 

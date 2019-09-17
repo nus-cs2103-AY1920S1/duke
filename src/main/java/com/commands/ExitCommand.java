@@ -5,6 +5,7 @@ import com.util.Storage;
 import com.util.ui.*;
 import gui.GUIUi;
 import com.util.stats.DukeStatistics;
+import javafx.application.Platform;
 
 public class ExitCommand extends Command {
 
@@ -19,6 +20,11 @@ public class ExitCommand extends Command {
     public void execute(Ui ui) {
         ui.showGoodbye();
         new DukeStatistics().addLog(this);
+        // Close window
+        if (ui instanceof GUIUi) {
+            Platform.exit();
+            System.exit(0);
+        }
         continuesProgram = false;
     }
 }

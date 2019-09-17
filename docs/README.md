@@ -155,7 +155,8 @@ Example of usage:
 `load myBear.txt`
 
 Expected outcome:
-
-`Your saved data has been successfully loaded from myBear.txt.`
+```
+Your saved data has been successfully loaded from myBear.txt.
+```
 
 If no data source is loaded, your task list is automatically saved in `bear.txt`.

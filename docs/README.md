@@ -88,7 +88,7 @@ Expected outcome:
 
 `Nice! I've marked this task as done:`  
  `[E][✓] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`
- 
+
 ### `delete (task number)` - Delete a task
 The task with that particular task number will be deleted.
  
@@ -101,7 +101,7 @@ The task with that particular task number will be deleted.
 `Noted. I've removed this task:`  
  `[E][✓] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`  
  `Now you have 2 tasks in the list.`
- 
+
 ### `find (keyword)` - Find a task
 Find a task by searching for that particular `(keyword)`.
  

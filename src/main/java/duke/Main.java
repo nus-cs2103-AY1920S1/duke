@@ -18,13 +18,17 @@ public class Main extends Application {
     private Duke duke = new Duke("/Users/lawnce/Desktop/duke/data/duke.txt");
 
 
+    /**
+     * Starts the whole program
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|____/ \\__,_|_|\\_\\___|\n ";
         System.out.println("Hello from\n" + logo);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));

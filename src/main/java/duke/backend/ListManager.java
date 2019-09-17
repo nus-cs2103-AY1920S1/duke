@@ -31,8 +31,8 @@ public class ListManager {
     public String add(String fullCommand, String[] splitCommand) {
         String output = "";
         switch (splitCommand[0]) {
-        case "todo": {
-            String[] stringBreaker = fullCommand.split("todo", 2);
+        case "t": {
+            String[] stringBreaker = fullCommand.split("t", 2);
             if (!stringBreaker[1].equals("")) {
                 ToDos todo = new ToDos(stringBreaker[1], this.formatter);
                 actualList.add(todo);
@@ -45,7 +45,7 @@ public class ListManager {
             }
             break;
         }
-        case "deadline": {
+        case "d": {
             String newString = fullCommand.substring(9);
             String[] stringBreaker = newString.split("/by", 2);
             try {
@@ -60,7 +60,7 @@ public class ListManager {
             }
             break;
         }
-        case "event": {
+        case "e": {
             String newString = fullCommand.substring(6);
             String[] stringBreaker = newString.split("/at", 2);
             try {

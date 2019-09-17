@@ -18,8 +18,8 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws IllegalArgumentException {
         String[] splitCommand = fullCommand.split(" ", 0);
-        if (splitCommand[0].equals("todo") || splitCommand[0].equals("deadline")
-                || splitCommand[0].equals("event")) {
+        if (splitCommand[0].equals("t") || splitCommand[0].equals("d")
+                || splitCommand[0].equals("e")) {
             return new AddCommand(fullCommand, splitCommand);
         } else if (splitCommand[0].equals("done")) {
             return new DoneCommand(fullCommand, splitCommand);

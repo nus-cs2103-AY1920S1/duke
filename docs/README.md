@@ -9,7 +9,7 @@ with a Command Line Interface (CLI)**.
 3. Copy the jar file to a desired folder. In the folder, create a folder `/data`. In `/data`, add a file called `duke.txt`.
 3. Start a terminal from the folder where the jar file is. Type `java -jar duke-0.1.3.jar`. The GUI should appear in a few seconds.
 4. After starting up, Duke greets its users upon starting up.
-//put an image here
+![alt text](https://github.com/C-likethis123/duke/blob/master/docs/Initialisation.png?raw=true "Duke greeting users")
 5. Type commands in the text box and press `Enter` to execute it.
 6. Some example commands to try:
     1. `list`: lists all tasks in the task list.

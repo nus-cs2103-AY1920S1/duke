@@ -10,21 +10,21 @@
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" styleClass="ap" stylesheets="@../CSSFiles/Style.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" maxHeight="1.7976931348623157E308" minHeight="-Infinity" text="Label" textFill="#fffbfb" wrapText="true">
-         <font>
-            <Font name="Showcard Gothic" size="14.0" />
-         </font>
-         <padding>
-            <Insets left="10.0" right="10.0" />
-         </padding>
-      </Label>
+            <font>
+                <Font name="Showcard Gothic" size="14.0" />
+            </font>
+            <padding>
+                <Insets left="10.0" right="10.0" />
+            </padding>
+        </Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/User.png" />
-         </image>
-         <HBox.margin>
-            <Insets left="10.0" right="10.0" />
-         </HBox.margin>
-      </ImageView>
+            <image>
+                <Image url="@../images/User.png" />
+            </image>
+            <HBox.margin>
+                <Insets left="10.0" right="10.0" />
+            </HBox.margin>
+        </ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />

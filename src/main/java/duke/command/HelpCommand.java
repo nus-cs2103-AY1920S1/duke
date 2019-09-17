@@ -38,6 +38,9 @@ public class HelpCommand extends Command {
                 "To mass delete a bunch of tasks:\n" +
                 "massdelete <indexes separated by space>\n" +
                 "\n" +
+                "To clear the list:\n" +
+                "clearall\n" +
+                "\n" +
                 "To mark a task as done:\n" +
                 "done <index>\n" +
                 "\n" +
@@ -50,7 +53,7 @@ public class HelpCommand extends Command {
                 "To exit the program:\n" +
                 "bye\n" +
                 "\n" +
-                "Have fun using the program!";
+                "Glad to help!";
     }
     public String toString() {
         return this.help;

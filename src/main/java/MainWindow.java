@@ -59,8 +59,11 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void showWelcomeMessage() {
-        String input = "Hi! Welcome to Radomir!\n";
-        input += "Type 'help' to get the list of commands available.";
+        String input = "Hi! Welcome to Radomir!\n" +
+                "\n";
+        input += "Type 'help' to get the list of commands available.\n\n" +
+                "For first time users, type 'tutorial' to know more about the app." +
+                " (Warning, this will delete your current list!)";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(input, dukeImage)
         );

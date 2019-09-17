@@ -47,6 +47,10 @@ public class Parser {
             return new HelpCommand(constructedString);
         case "massdelete" :
             return new MassDeleteCommand(constructedString);
+        case "clearall" :
+            return new ClearAllCommand(constructedString);
+        case "tutorial" :
+            return new TutorialCommand(constructedString);
         default:
             return new ErrorCommand("OOPS!! I'm sorry, but I don't know what that means :-(");
         }

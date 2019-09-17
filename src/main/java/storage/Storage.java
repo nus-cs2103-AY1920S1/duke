@@ -92,7 +92,6 @@ public class Storage {
 
         try {
             File file = new File(filePath);
-            file.getParentFile().mkdirs();
             file.createNewFile();
             fileWriter = new FileWriter(filePath, false);
             for (Task task : tasks) {

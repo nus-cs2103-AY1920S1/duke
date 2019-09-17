@@ -20,6 +20,9 @@ import com.leeyiyuan.storage.Storage;
 import com.leeyiyuan.storage.StorageException;
 import com.leeyiyuan.task.TaskList;
 
+
+import java.io.File;
+
 public class MainWindow extends VBox implements UserOutputInterface {
     @FXML
     private ScrollPane scrollPane;
@@ -39,13 +42,15 @@ public class MainWindow extends VBox implements UserOutputInterface {
 
     @FXML
     private void initialize() {
-        this.storage = new Storage("/home/leeyiyuan/Projects/duke/data/duke.txt");
+        this.storage = new Storage("duke.txt");
         this.parser = new Parser();
+
+        addDukeDialog("Hello! I'm Duke\nWhat can I do for you?");
+        addDukeDialog("By the way, I'm using this file to store your data:\n" + new File("duke.txt").getAbsolutePath());
 
         try {
             this.tasks = new TaskList(this.storage.load());
         } catch (StorageException e) {
-            addDukeDialog("Using new task list.");
             this.tasks = new TaskList();
         }
 
@@ -61,13 +66,13 @@ public class MainWindow extends VBox implements UserOutputInterface {
             Command command = this.parser.parse(input);
             command.execute(this.tasks, this, this.storage);
         } catch (CommandParseException e) {
-            showError(e.toString());
+            showError(e.getMessage());
         } catch (AbortException e) {
             Platform.exit();
         } catch (CommandExecuteException e) {
-            showError(e.toString());
+            showError(e.getMessage());
         } catch (StorageException e) {
-            showError(e.toString());
+            showError(e.getMessage());
         }
 
         userInput.clear();

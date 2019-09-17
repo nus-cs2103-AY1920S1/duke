@@ -5,6 +5,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 
+import java.awt.*;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.ArrayList;
 
 /**
@@ -13,22 +16,24 @@ import java.util.ArrayList;
 public class Ui {
     public static final String PREFIX = "    ";
     public static final String DIVIDER = "******************************************";
-    private static final String WELCOME_MESSAGE_1 = "Hello! I'm";
-    private static final String WELCOME_MESSAGE_2 = "What can I do for you?";
-    private static final String LOGO =
-            "            ____   _   _ __     ____   __\n"
-            + "       / \\      /   __ \\ | \\  | |\\ \\     / /\\ \\   / /\n"
-            + "     /     \\  \t ||   |||   \\| |  \\ \\_/ /   \\ V  / \n"
-            + "    /  / \\ \\  ||   |||   . `   |    \\   /       > <  \n"
-            + "  /   ____ \t ||__|||  |\\   |    | |     /  .   \\ \n"
-            + " /_ /      \\_\\\\___ / |_|  \\_|   |_|   /_ / \\ _\\\n";
-    private static final String ADD_MESSAGE = "Got it. I've added this task:";
-    private static final String SEARCH_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String WELCOME_MESSAGE_1 = "Hey partner! I'm the";
+    private static final String WELCOME_MESSAGE_2 = "It's good to see you again! Here's what you have to do:";
+    private static final String ADD_MESSAGE = "No problem. I've added the task!";
+    private static final String SEARCH_MESSAGE = "Here's the matching tasks from your list!";
+    private static final String LIST_MESSAGE = "Glad to help partner! Here are your tasks: ";
+    private static final String LIST_EMPTY_MESSAGE = "It seems we're done for the day! Amazing!";
+    private static final String LIST_FILLED_MESSAGE = "Let's get to work!";
     private static final String REMIND_MESSAGE = "Here are your upcoming tasks. Don't forget them!";
-    private static final String DELETE_MESSAGE = "Noted. I've removed this task:";
-    private static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
-    private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-
+    private static final String DELETE_MESSAGE_1 = "All right. That's one task down: ";
+    private static final String DELETE_MESSAGE_2 = "Feels good to check that off, doesn't it?";
+    private static final String DONE_MESSAGE = "Great! I've marked this task as done:";
+    private static final String EXIT_MESSAGE = "Aww... Come back soon partner!";
+    private static final String LOGO =
+            "  _  _   _   _  _ ___  _    ___ ___ \n" +
+            " | || | /_\\ | \\| |   \\| |  | __| _ \\\n" +
+            " | __ |/ _ \\| .` | |) | |__| _||   /\n" +
+            " |_||_/_/ \\_\\_|\\_|___/|____|___|_|_\\\n" +
+            "                                    ";
     /**
      * Convenience method for formatting un-indented input.
      *
@@ -50,12 +55,13 @@ public class Ui {
     }
 
     /**
-     * Prints out a welcome message.
+     * Greets the user and shows his current tasks.
      *
+     * @param taskList the list of tasks to complete.
      * @return the formatted text string.
      */
-    String showWelcomeMessage() {
-        return showToUser(WELCOME_MESSAGE_1, LOGO, WELCOME_MESSAGE_2);
+    String showWelcomeMessage(TaskList taskList) {
+        return showToUser(WELCOME_MESSAGE_1, LOGO, WELCOME_MESSAGE_2, "", showTaskList(taskList));
     }
 
     /**
@@ -77,7 +83,9 @@ public class Ui {
      */
     public String showAddMessage(Task task, long taskCount) {
         return showToUser(ADD_MESSAGE,
+                "",
                 task.toString(),
+                "",
                 (taskCount == 1
                     ? "Now you have 1 task in the list."
                     : String.format("Now you have %d tasks in the list.", taskCount)));
@@ -90,7 +98,7 @@ public class Ui {
      * @return the formatted text string.
      */
     public String showDoneMessage(Task task) {
-        return showToUser(DONE_MESSAGE, task.toString());
+        return showToUser(DONE_MESSAGE, "", task.toString());
     }
 
     /**
@@ -101,11 +109,17 @@ public class Ui {
      * @return the formatted text string.
      */
     public String showDeleteMessage(Task task, long taskCount) {
-        return showToUser(DELETE_MESSAGE,
+        return showToUser(DELETE_MESSAGE_1,
                 task.toString(),
+                "",
                 (taskCount == 1
-                    ? "Now you have 1 task in the list."
-                    : String.format("Now you have %d tasks in the list.", taskCount)));
+                        ? "Now you have 1 task left. "
+                        : String.format("Now you have %d tasks left. ", taskCount)) + DELETE_MESSAGE_2);
+    }
+
+    public String showListMessage(TaskList taskList) {
+        String postfix = taskList.isEmpty() ? LIST_EMPTY_MESSAGE : LIST_FILLED_MESSAGE;
+        return showToUser(LIST_MESSAGE, "", showTaskList(taskList), postfix);
     }
 
     /**
@@ -115,7 +129,7 @@ public class Ui {
      * @return the formatted text string.
      */
     public String showSearchList(TaskList searchList) {
-        return showToUser(SEARCH_MESSAGE, showTaskList(searchList));
+        return showToUser(SEARCH_MESSAGE, "", showTaskList(searchList));
     }
 
     /**

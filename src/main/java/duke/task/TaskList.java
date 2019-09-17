@@ -41,7 +41,7 @@ public class TaskList {
      */
     public Task delete(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
+            throw new DukeIndexOutOfBoundsException("Hmm... There's no such task index.");
         }
         return tasks.remove(idx);
     }
@@ -55,7 +55,7 @@ public class TaskList {
      */
     public Task get(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
+            throw new DukeIndexOutOfBoundsException("Hmm... There's no such task index.");
         }
         return tasks.get(idx);
     }
@@ -185,7 +185,7 @@ public class TaskList {
      */
     public Task markAsDone(int idx) throws DukeIndexOutOfBoundsException {
         if (idx <= 0 || idx >= tasks.size()) {
-            throw new DukeIndexOutOfBoundsException(":'( OOPS!!! There's no such task index.");
+            throw new DukeIndexOutOfBoundsException("Hmm... There's no such task index.");
         }
         Task task = tasks.get(idx);
         task.markAsDone();
@@ -199,6 +199,10 @@ public class TaskList {
      */
     public long count() {
         return tasks.size() - 1; // account for 1-indexing.
+    }
+
+    public boolean isEmpty() {
+        return count() == 0;
     }
 
     public ArrayList<Task> getTaskList() {

@@ -31,7 +31,7 @@ test {
 }
 
 group 'seedu.duke'
-version '0.1.0'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -43,7 +43,7 @@ application {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.2.0"
+    archiveVersion = "1.0.0"
     archiveClassifier = null
     archiveAppendix = null
 }

@@ -33,20 +33,7 @@ public class Mission {
             this.type = MissionType.E;
         }
     }
-    public Mission(String content, String type, String state, String time, String atby) {
-        this.time = null;
-        this.content = content;
-        this.state = state;
-        this.time = time;
-        this.atby = atby;
-        if(type.contentEquals("todo") || type.contentEquals("T")) {
-            this.type = MissionType.T;
-        } else if(type.contentEquals("deadline") || type.contentEquals("D")) {
-            this.type = MissionType.D;
-        } else if(type.contentEquals("event") || type.contentEquals("E")) {
-            this.type = MissionType.E;
-        }
-    }
+
     public Mission(String content, String type, String time, String atby) {
         this.time = time;
         realtime = new Time(time);
@@ -62,6 +49,20 @@ public class Mission {
         }
     }
 
+    public Mission(String content, String type, String state, String time, String atby) {
+        this.time = null;
+        this.content = content;
+        this.state = state;
+        this.time = time;
+        this.atby = atby;
+        if(type.contentEquals("todo") || type.contentEquals("T")) {
+            this.type = MissionType.T;
+        } else if(type.contentEquals("deadline") || type.contentEquals("D")) {
+            this.type = MissionType.D;
+        } else if(type.contentEquals("event") || type.contentEquals("E")) {
+            this.type = MissionType.E;
+        }
+    }
 
     public void changeState() {
         if(this.state.contentEquals("✗")) {
@@ -69,34 +70,28 @@ public class Mission {
         }
     }
 
-    public String printMission() {
+    public static Mission newMission(String str) {
+        String[] s = str.split("\\|");
+        String MissionType = s[0];
+        String state = (s[1].contentEquals("0")) ? "✗" : "✓";
+        String content = s[2];
+        Mission mission;
+        if(s.length == 4) {
+            String time = s[3].replaceFirst("\\(by: ", "").replaceFirst("\\)", "");
+            time = time.replaceFirst("\\(at: ", "").replaceFirst("\\)", "");
+            mission = new Mission(content, MissionType, state, time, "by");
+        } else {
+            mission = new Mission(content, MissionType, state);
+        }
+        return mission;
+    }
+
+    @Override
+    public String toString() {
         if(time != null) {
             return "[" + type + "][" + state + "] " + content + " (" + atby + ":" + time + ")\n";
         } else {
             return "[" + type + "][" + state + "] " + content + "\n";
         }
-    }
-
-
-    public String getState() {
-        return state;
-    }
-
-    public static Mission newMission(String str) {
-        //System.out.println("*******" + str);
-        String[] s = str.split("\\|");
-        String MissionType = s[0];
-        System.out.println("MissionType = " + MissionType);
-        String state = (s[1].contentEquals("0")) ? "✗" : "✓";
-        String content = s[2];
-        Mission m;
-        if(s.length == 4) {
-            String time = s[3].replaceFirst("\\(by: ", "").replaceFirst("\\)", "");
-            time = time.replaceFirst("\\(at: ", "").replaceFirst("\\)", "");
-            m = new Mission(content, MissionType, state, time, "by");
-        } else {
-            m = new Mission(content, MissionType, state);
-        }
-        return m;
     }
 }

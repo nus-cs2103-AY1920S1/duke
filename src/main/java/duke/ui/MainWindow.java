@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for duke.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow {
     @FXML

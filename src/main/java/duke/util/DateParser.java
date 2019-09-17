@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
  */
 public class DateParser {
     /**
-     * Array of date formats that Duke is able to parse. A valid date can take
-     * any of the following formats:
+     * Array of date formats that the application is able to parse. A valid date
+     * can take any of the following formats:
      * 1. EEE, d MMM yy, HH:mm
      * 2. d-MM-yyyy HH:mm
      * 3. ISO date time

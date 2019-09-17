@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
+import duke.ui.SpeechMaker;
 import duke.util.HardDiskStorage;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -34,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Sets up Duke's user interface, storage, and task list.
+     * Sets up user interface, storage, and task list for the Duke application.
      *
      * @param filePath Path to data file.
      */
@@ -51,17 +52,17 @@ public class Duke {
     }
 
     /**
-     * Executes the given user input and returns Duke's response.
+     * Executes the given user input and returns Snowball's response.
      *
      * @param input String of user-given input.
-     * @return String of Duke's response to given input.
+     * @return String of Snowball's response to given input.
      */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return "Sorry, " + e.getMessage();
+            return SpeechMaker.getApology(e.getMessage());
         }
     }
 }

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.task.TaskList;
+import duke.ui.SpeechMaker;
 import duke.util.Storage;
 import duke.util.TextUi;
 
@@ -26,7 +27,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {
-        String byeMessage = "Bye. Hope to see you again soon!";
+        String byeMessage = SpeechMaker.BYE_MESSAGE;
         ui.showText(byeMessage);
         return byeMessage;
     }

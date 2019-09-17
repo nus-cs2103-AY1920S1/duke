@@ -14,7 +14,7 @@
         - [`bye` - Greets user farewell](#bye---greets-user-farewell)
 
 
-# Introduction
+## Introduction
 Duke is a chatbot that helps a person to keep track of various tasks. 
 Duke loads its data on startup from a local save file and saves the current task
 list to the save file when the user exits the app using the `bye` command.
@@ -22,7 +22,7 @@ list to the save file when the user exits the app using the `bye` command.
 Below is a screenshot of Duke in use.
 ![](Ui.png "Project Duke UI")
 
-# Features 
+## Features 
 
 ---
 

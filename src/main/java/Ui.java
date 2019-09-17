@@ -98,12 +98,6 @@ public class Ui {
         return this.inputArr;
     }
 
-    /**
-     * Returns description of Todo task.
-     *
-     * @return description of Todo task.
-     */
-
     void setResponse(String response) {
         this.response = "    ______________________________________________\n"
                 +
@@ -114,7 +108,7 @@ public class Ui {
     void printResponse(){
         print(response);
     }
-    public String getResponse(){
+    String getResponse(){
         return this.response;
     }
 

@@ -18,27 +18,7 @@ import javafx.scene.image.ImageView;
 /**
  * Main class that runs the Duke program.
  */
-public class Duke extends Application {
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    @Override
-    public void start(Stage stage) {
-
-    }
-
+public class Duke {
     private Storage storage = new Storage();
     private TaskList tasks = new TaskList();
     private Ui ui = new Ui();
@@ -56,6 +36,10 @@ public class Duke extends Application {
 
     }
 
+    /**
+     * Gets the welcome message on startup.
+      * @return welcome message, including list of tasks
+     */
     public String getWelcomeMessage() {
         ui.setResponse("Hello! I am Duke\n"
                 +
@@ -93,10 +77,19 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Gets the UI Duke is using.
+     * @return Ui object Duke is using
+     */
     public Ui getUi() {
         return ui;
     }
 
+    /**
+     * Gets Duke's response on user's input.
+     * @param input user's input
+     * @return Duke's response
+     */
     public String getDukeResponse(String input) {
         try {
             Command c = Parser.parse(input);

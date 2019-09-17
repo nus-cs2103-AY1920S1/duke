@@ -40,6 +40,7 @@ public class Storage {
      */
     public LinkedList<Task> load() throws DukeException {
         try {
+            System.out.println("loaded");
             if (!taskListFile.exists()) {
                 throw new NoExistingListException("No saved List found.");
             }
@@ -52,17 +53,24 @@ public class Storage {
                 String nextTask = sc.nextLine();
 
                 String[] nextTaskArr = nextTask.split("~");
-                boolean status = nextTaskArr[1].equals("1");
+                boolean status = nextTaskArr[2].equals("1");
+                Priority taskPriority = getPriority(nextTaskArr[0]);
 
-                if (nextTaskArr[0].equals("T")) {
-                    taskList.add(
-                            new Todo(nextTaskArr[2], status));
-                } else if (nextTaskArr[0].equals("D")) {
-                    taskList.add(
-                            new Deadline(nextTaskArr[2], nextTaskArr[3], status));
-                } else if (nextTaskArr[0].equals("E")) {
-                    taskList.add(
-                            new Event(nextTaskArr[2], nextTaskArr[3], status));
+                switch (nextTaskArr[1]) {
+                    case "T":
+                        taskList.add(
+                                new Todo(nextTaskArr[3], status, taskPriority));
+                        break;
+                    case "D":
+                        taskList.add(
+                                new Deadline(nextTaskArr[3], nextTaskArr[4], status, taskPriority));
+                        break;
+                    case "E":
+                        taskList.add(
+                                new Event(nextTaskArr[3], nextTaskArr[4], status, taskPriority));
+                        break;
+                     default:
+                        assert false;
                 }
             }
 
@@ -70,6 +78,19 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
             return new LinkedList<Task>();
+        }
+    }
+
+    private Priority getPriority(String priorityString) {
+        if (priorityString.equals("HIGH")) {
+            return Priority.HIGH;
+        } else if (priorityString.equals("MEDIUM")) {
+            return Priority.MEDIUM;
+        } else if (priorityString.equals("LOW")) {
+            return Priority.LOW;
+        } else {
+            assert false;
+            return Priority.MEDIUM;
         }
     }
 

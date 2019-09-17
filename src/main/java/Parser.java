@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * Parser is a class that aids in parsing through the user input
  * and understanding the commands and executing them accordingly.
@@ -6,6 +8,9 @@
  */
 public class Parser {
     private Ui ui;
+    private String taskType;
+    private String taskDesc;
+    Priority taskPriority = Priority.LOW;
 
     /**
      * Constructs a Parser object.
@@ -30,16 +35,7 @@ public class Parser {
      */
     public String parseCommand(String input, TaskList taskList) throws DukeException {
         assert input != null;
-
-        String[] inputArr = input.split(" ");
-
-        //Extracting task type and description from input
-        String taskType = inputArr[0];
-        String taskDesc = getDesc(inputArr);
-
-        if (!correctInput(taskType)) {
-            throw new IncorrectInputException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
-        }
+        preProcessInput(input);
 
         if (taskType.equals("bye")) {
 
@@ -47,11 +43,19 @@ public class Parser {
 
         } else if (taskType.equals("list")) {
 
-            return ui.printTaskList(taskList);
+            return ui.showTaskList(taskList);
+
+        } else if (taskType.equals("priority")){
+
+            String output = ui.showPriorityTaskList(
+                    taskList.getPriorityTaskList());
+            taskList.updateQueue();
+            return output;
 
         } else if (taskDesc.isEmpty()) {
 
-            throw new NoDescriptionException(":( OOPS!!! The description of " + inputArr[0] + " cannot be empty.");
+            throw new NoDescriptionException(
+                    ":( OOPS!!! The description of " + taskType + " cannot be empty.");
 
         } else if (taskType.equals("done")) {
 
@@ -83,6 +87,31 @@ public class Parser {
         }
     }
 
+    private void preProcessInput(String input) throws DukeException {
+        String[] inputArr = input.split(" ");
+
+        if (inputArr[0].equals("high")) {
+            taskPriority = Priority.HIGH;
+            inputArr = Arrays.copyOfRange(inputArr,1, inputArr.length);
+        } else if (inputArr[0].equals("medium")) {
+            taskPriority = Priority.MEDIUM;
+            inputArr = Arrays.copyOfRange(inputArr,1, inputArr.length);
+        } else if (inputArr[0].equals("low")) {
+            inputArr = Arrays.copyOfRange(inputArr,1, inputArr.length);
+        } else{
+
+        }
+
+        //Extracting task type and description from input
+        taskType = inputArr[0];
+        taskDesc = getDesc(inputArr);
+
+        if (!correctInput(taskType)) {
+            throw new IncorrectInputException(
+                    ":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
     private String doneCommand(String taskDesc, TaskList taskList) {
         int taskNum = Integer.parseInt(taskDesc);
         Task task = taskList.getTask(taskNum);
@@ -104,7 +133,7 @@ public class Parser {
     }
 
     private String todoCommand(String taskDesc, TaskList taskList) {
-        Task newTodo = new Todo(taskDesc);
+        Task newTodo = new Todo(taskDesc, taskPriority);
         taskList.addTask(newTodo);
 
         return ui.showTaskAdded(newTodo, taskList);
@@ -113,7 +142,7 @@ public class Parser {
     private String deadlineCommand(String taskDesc, TaskList taskList) {
         String[] taskDescArr = taskDesc.split(" /");
 
-        Task newDeadline = new Deadline(taskDescArr[0], taskDescArr[1]);
+        Task newDeadline = new Deadline(taskDescArr[0], taskDescArr[1], taskPriority);
 
         taskList.addTask(newDeadline);
 
@@ -123,7 +152,7 @@ public class Parser {
     private String eventCommand(String taskDesc, TaskList taskList) {
         String[] taskDescArr = taskDesc.split(" /");
 
-        Task newEvent = new Event(taskDescArr[0], taskDescArr[1]);
+        Task newEvent = new Event(taskDescArr[0], taskDescArr[1], taskPriority);
 
         taskList.addTask(newEvent);
 
@@ -159,6 +188,7 @@ public class Parser {
                 input.equals("done") ||
                 input.equals("bye") ||
                 input.equals("delete") ||
-                input.equals("find");
+                input.equals("find") ||
+                input.equals("priority");
     }
 }

@@ -14,8 +14,8 @@ public class Deadline extends Task {
      * @param description Description of the task.
      * @param deadline deadline of the task.
      */
-    public Deadline(String description, String deadline) {
-        super(description);
+    public Deadline(String description, String deadline, Priority priority) {
+        super(description, priority);
 
         this.deadlineString = makeDeadline(deadline);
         this.deadlineDate = storeAsDateTime(deadlineString);
@@ -30,8 +30,8 @@ public class Deadline extends Task {
      * @param deadline Date of the deadline
      * @param status Status of completion
      */
-    public Deadline(String description, String deadline, boolean status) {
-        super(description);
+    public Deadline(String description, String deadline, boolean status, Priority priority) {
+        super(description, priority);
         this.deadlineString = makeDeadline(deadline);
         this.deadlineDate = storeAsDateTime(deadlineString);
         this.isDone = status;
@@ -71,6 +71,7 @@ public class Deadline extends Task {
     public String toFileFormat() {
         StringBuilder fileFormat = new StringBuilder();
 
+        fileFormat.append(taskPriority.toString() + "~");
         fileFormat.append("D~");
 
         if (this.isDone) {

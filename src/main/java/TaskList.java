@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.PriorityQueue;
 
 /**
  * TaskList represents a list of tasks.
@@ -8,6 +9,7 @@ import java.util.ListIterator;
  */
 public class TaskList {
     private LinkedList<Task> taskList;
+    private PriorityQueue<Task> priorityTaskList;
 
     /**
      * Constructs a TaskList object.
@@ -15,6 +17,7 @@ public class TaskList {
      */
     public TaskList() {
         taskList = new LinkedList<Task>();
+        priorityTaskList = new PriorityQueue<Task>();
     }
 
     /**
@@ -30,11 +33,13 @@ public class TaskList {
     public void deleteTask(int taskNum) {
         assert !(taskNum < 0) : "Negative task number";
         taskList.remove(taskNum -1);
+        updateQueue();
     }
 
     public void addTask(Task task) {
         assert task != null;
         taskList.add(task);
+        updateQueue();
     }
 
     public LinkedList<Task> getList() {
@@ -44,6 +49,10 @@ public class TaskList {
     public Task getTask(int taskNum) {
         assert !(taskNum < 0) : "Negative task number";
         return taskList.get(taskNum -1);
+    }
+
+    public PriorityQueue<Task> getPriorityTaskList() {
+        return priorityTaskList;
     }
 
     public int size() {
@@ -77,5 +86,17 @@ public class TaskList {
 
         return tasksFound;
 
+    }
+
+    public void updateQueue() {
+        int numOfTask = taskList.size();
+        PriorityQueue<Task> updatedQueue = new PriorityQueue<>();
+
+        for (int i = 0; i < numOfTask; i++) {
+            Task current = taskList.get(i);
+            updatedQueue.add(current);
+        }
+
+        priorityTaskList = updatedQueue;
     }
 }

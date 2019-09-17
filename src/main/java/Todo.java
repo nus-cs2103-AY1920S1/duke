@@ -8,8 +8,8 @@ public class Todo extends Task {
      * Constructs a Todo object.
      * @param description Description of the task.
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, Priority priority) {
+        super(description, priority);
     }
 
     /**
@@ -20,8 +20,8 @@ public class Todo extends Task {
      * @param description Description of the task
      * @param status Status of completion
      */
-    public Todo(String description, boolean status) {
-        super(description);
+    public Todo(String description, boolean status, Priority priority) {
+        super(description, priority);
         this.isDone = status;
     }
 
@@ -37,6 +37,7 @@ public class Todo extends Task {
     public String toFileFormat() {
         StringBuilder fileFormat = new StringBuilder();
 
+        fileFormat.append(taskPriority.toString() + "~");
         fileFormat.append("T~");
 
         if (this.isDone) {

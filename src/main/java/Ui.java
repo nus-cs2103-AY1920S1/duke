@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.PriorityQueue;
 
 /**
  * Ui is a class that designed to output the how the program
@@ -40,35 +41,34 @@ public class Ui {
         return stringLine;
     }
 
-    public String printTaskList(TaskList taskList) {
-        String output;
+    public String showTaskList(TaskList taskList) {
         if (taskList.isEmpty()) {
 
-            output = line()
+            String output = line()
                     + indent() + "There are no tasks in the list currently.\n"
                     + line();
 
             return output;
 
         } else {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder output = new StringBuilder();
             LinkedList<Task> taskLinkedList = taskList.getList();
             ListIterator<Task> iter = taskLinkedList.listIterator();
 
             int count = 1;
 
-            sb.append(line());
+            output.append(line());
 
-            sb.append(indent() + "Here are the tasks in your list:\n");
+            output.append(indent() + "Here are the tasks in your list:\n");
 
             while (iter.hasNext()) {
                 String currentTask = iter.next().toString();
-                sb.append(indent() + count + "." + currentTask + "\n");
+                output.append(indent() + count + "." + currentTask + "\n");
                 count++;
             }
 
-            sb.append(line());
-            return sb.toString();
+            output.append(line());
+            return output.toString();
         }
     }
 
@@ -89,39 +89,39 @@ public class Ui {
     }
 
     public String showTaskAdded(Task task, TaskList taskList) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(line());
-        sb.append(indent() + "Got it. I've added this task:\n");
-        sb.append(indent() + "  " + task.toString() + "\n");
-        sb.append(indent());
+        StringBuilder output = new StringBuilder();
+        output.append(line());
+        output.append(indent() + "Got it. I've added this task:\n");
+        output.append(indent() + "  " + task.toString() + "\n");
+        output.append(indent());
 
         if (taskList.size() == 1) {
-            sb.append("Now you have 1 task in the list.\n");
+            output.append("Now you have 1 task in the list.\n");
         } else {
-            sb.append("Now you have " + taskList.size() + " tasks in the list.\n");
+            output.append("Now you have " + taskList.size() + " tasks in the list.\n");
         }
 
-        sb.append(line());
-        return sb.toString();
+        output.append(line());
+        return output.toString();
     }
 
     public String showTaskDeleted(Task task, TaskList taskList) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(line());
-        sb.append(indent() + "Noted. I've removed this task:\n");
-        sb.append(indent() + "  " + task.toString() + "\n");
-        sb.append(indent());
+        StringBuilder output = new StringBuilder();
+        output.append(line());
+        output.append(indent() + "Noted. I've removed this task:\n");
+        output.append(indent() + "  " + task.toString() + "\n");
+        output.append(indent());
 
         if (taskList.size() == 1) {
-            sb.append("Now you have 1 task in your list.\n");
+            output.append("Now you have 1 task in your list.\n");
         } else if (taskList.isEmpty()) {
-            sb.append("Now you have no tasks in your list.\n");
+            output.append("Now you have no tasks in your list.\n");
         } else {
-            sb.append("Now you have " + (taskList.size()) + " tasks in your list.\n");
+            output.append("Now you have " + (taskList.size()) + " tasks in your list.\n");
         }
 
-        sb.append(line());
-        return sb.toString();
+        output.append(line());
+        return output.toString();
     }
 
     /**
@@ -130,26 +130,43 @@ public class Ui {
      * @param taskList List of matching tasks
      */
     public String showFoundTasks(LinkedList<Task> taskList) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder output = new StringBuilder();
         ListIterator<Task> iter = taskList.listIterator();
         Task current;
         int count = 1;
 
-        sb.append(line());
+        output.append(line());
 
         if (taskList.isEmpty()) {
-            sb.append(indent() + "There are no matching tasks in your list.\n");
+            output.append(indent() + "There are no matching tasks in your list.\n");
         } else {
-            sb.append(indent() + "Here are the matching tasks in your list:\n");
+            output.append(indent() + "Here are the matching tasks in your list:\n");
         }
 
         while(iter.hasNext()) {
             current = iter.next();
-            sb.append(indent() + count + "." + current.toString() + "\n");
+            output.append(indent() + count + "." + current.toString() + "\n");
         }
 
-        sb.append(line());
-        return sb.toString();
+        output.append(line());
+        return output.toString();
+    }
+
+    public String showPriorityTaskList(PriorityQueue<Task> priorityTaskList) {
+        StringBuilder output = new StringBuilder();
+
+        output.append(line());
+        output.append(indent() + "Here is the list of your tasks prioritised.\n");
+
+        while (!priorityTaskList.isEmpty()) {
+            Task currentTask = priorityTaskList.poll();
+            String taskPriority = currentTask.getPriority().toString();
+            output.append(indent() + taskPriority + " " + currentTask.toString() + "\n");
+        }
+
+        output.append(line());
+
+        return output.toString();
     }
 
     public String showException(DukeException e) {

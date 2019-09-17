@@ -1,5 +1,4 @@
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 
 /**
  * Task is an object simulating a task, eg events.
@@ -10,19 +9,20 @@ import java.util.LinkedList;
  * tasks such as doing the task and storing the deadlines
  * of the task as a Java date.
  */
-public class Task {
+public class Task implements Comparable<Task>{
     protected String description;
     protected boolean isDone;
-    protected static LinkedList<Task> taskList = new LinkedList<>();
+    protected Priority taskPriority;
 
     /**
      * Constructs a Task object.
      * A task generally constructed with a description what to do.
      * @param description Description of what the task is about.
      */
-    public Task(String description) {
+    public Task(String description, Priority taskPriority) {
         this.description = description;
         this.isDone = false;
+        this.taskPriority = taskPriority;
     }
 
     /**
@@ -97,13 +97,15 @@ public class Task {
 
         sb.append(hour + ":" + minutes + ":00");
 
-        LocalDateTime dateTime = LocalDateTime.parse(sb.toString());
-
-        return dateTime;
+        return LocalDateTime.parse(sb.toString());
     }
 
     public String getDesc() {
         return this.description;
+    }
+
+    public Priority getPriority() {
+        return taskPriority;
     }
 
     /**
@@ -118,6 +120,24 @@ public class Task {
     public String toString() {
         String task = "[" + this.getStatusIcon() + "] " + description;
         return task;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (this.taskPriority == task.taskPriority) {
+            return 0;
+        } else if (this.taskPriority == Priority.HIGH) {
+            return -1;
+        } else if (this.taskPriority == Priority.LOW) {
+            return 1;
+        } else if (task.taskPriority == Priority.HIGH) {
+            return 1;
+        } else if (task.taskPriority == Priority.LOW) {
+            return -1;
+        } else {
+            assert false;
+            return 0;
+        }
     }
 
 }

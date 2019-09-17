@@ -1,1 +1,5 @@
-T~0~study with avina
+HIGH~T~1~lunch date
+LOW~E~1~project~at: 23/12/2019 1515
+MEDIUM~E~1~project~at: 23/9/2019 1200
+HIGH~E~0~project~at: 23/9/2019 1200
+LOW~T~1~die

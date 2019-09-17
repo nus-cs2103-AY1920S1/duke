@@ -14,8 +14,8 @@ public class Event extends Task {
      * @param description Description of the event.
      * @param eventDate Date of the event.
      */
-    public Event(String description, String eventDate) {
-        super(description);
+    public Event(String description, String eventDate, Priority priority) {
+        super(description, priority);
         this.eventDateString = makeEventDate(eventDate);
         this.eventDate = storeAsDateTime(eventDateString);
     }
@@ -29,8 +29,8 @@ public class Event extends Task {
      * @param deadline Date of the deadline
      * @param status Status of completion
      */
-    public Event(String description, String eventDate, boolean status) {
-        super(description);
+    public Event(String description, String eventDate, boolean status, Priority priority) {
+        super(description, priority);
         this.eventDateString = makeEventDate(eventDate);
         this.eventDate = storeAsDateTime(eventDateString);
         this.isDone = status;
@@ -71,6 +71,7 @@ public class Event extends Task {
     public String toFileFormat() {
         StringBuilder fileFormat = new StringBuilder();
 
+        fileFormat.append(taskPriority.toString() + "~");
         fileFormat.append("E~");
 
         if (this.isDone) {

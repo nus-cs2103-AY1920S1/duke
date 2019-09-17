@@ -1,3 +1,5 @@
+import java.io.File;
+
 import command.Command;
 import main.Archive;
 import main.DukeException;
@@ -23,10 +25,12 @@ public class Duke {
 
         createNewUi();
 
-        String taskListFilePath = "data/tasks.txt";
+        String root = new File(System.getProperty("user.dir")).getPath();
+
+        String taskListFilePath = root + "/data/tasks.txt";
         createNewStorage(taskListFilePath);
 
-        String archiveFilePath = "data/archive.txt";
+        String archiveFilePath = root + "/data/archive.txt";
         createNewArchive(archiveFilePath);
         createNewTaskList();
     }

@@ -13,6 +13,7 @@ public abstract class DataFile {
         this.filePath = filePath;
         File file = new File(filePath);
         isValidFilePath = file.exists();
+        System.out.println("File at " + filePath + "exists? " + isValidFilePath);
     }
 
     public DataFile() throws DukeException {
@@ -31,7 +32,7 @@ public abstract class DataFile {
     }
 
     public String makeDataDirectoryIfNotExist() {
-        String root = new File(System.getProperty("user.dir")).getParentFile().getPath();
+        String root = new File(System.getProperty("user.dir")).getPath();
         File dataDir = new File(root + "/data");
         if (!dataDir.exists()) {
             dataDir.mkdir();

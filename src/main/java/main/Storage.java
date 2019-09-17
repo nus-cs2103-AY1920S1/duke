@@ -16,7 +16,10 @@ import java.util.Scanner;
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
-public class Storage extends DataFile{
+public class Storage {
+
+    private String filePath;
+    private boolean isValidFilePath;
 
     /**
      * Creates a new Storage object which reads and writes to file at filepath.
@@ -25,8 +28,10 @@ public class Storage extends DataFile{
      *
      * @param filePath File path to read from and to write to.
      */
-    public Storage(String filePath){
-        super(filePath);
+    public Storage(String filePath) {
+        this.filePath = filePath;
+        File file = new File(filePath);
+        isValidFilePath = file.getAbsoluteFile().exists();
     }
 
     /**
@@ -36,7 +41,35 @@ public class Storage extends DataFile{
      * predetermined file path
      */
     public Storage() throws DukeException {
-        super();
+        try {
+            filePath = createNewFile();
+        } catch (IOException e) {
+            isValidFilePath = false;
+            throw new DukeException("File cannot be created.");
+        }
+    }
+
+    /**
+     * Returns true if file path is valid.
+     *
+     * @return true if file path is valid.
+     */
+    public boolean isValidFilePath() {
+        return isValidFilePath;
+    }
+
+    /**
+     * Makes a directory called Data if it does not exist.
+     *
+     * @return file path of new data directory.
+     */
+    public String makeDataDirectoryIfNotExist() {
+        String root = new File(System.getProperty("user.dir")).getPath();
+        File dataDir = new File(root + "/data");
+        if (!dataDir.exists()) {
+            dataDir.mkdir();
+        }
+        return dataDir.toString();
     }
 
     /**
@@ -44,10 +77,9 @@ public class Storage extends DataFile{
      *
      * @throws IOException if file cannot be created
      */
-    @Override
     public String createNewFile() throws IOException {
         String dataDir = makeDataDirectoryIfNotExist();
-        File taskListFile = new File(dataDir + "/data.txt");
+        File taskListFile = new File(dataDir + "/tasks.txt");
         boolean isFileCreated = taskListFile.createNewFile();
         if (isFileCreated) {
             filePath = taskListFile.toString();
@@ -175,5 +207,31 @@ public class Storage extends DataFile{
         } catch (IOException e) {
             throw new DukeException("Error in saving to file: " + e.getMessage());
         }
+    }
+
+    void appendToFile(String filePath, String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAppend + System.lineSeparator());
+        fw.close();
+    }
+
+    /**
+     * Clears the file found at filePath.
+     *
+     * @throws DukeException if file is not found.
+     */
+    public void clearAll() throws DukeException {
+        if (!isValidFilePath) {
+            return;
+        }
+        try {
+            new FileWriter(filePath); //create new file
+        } catch (IOException e) {
+            throw new DukeException("File does not exist, there is nothing to clear!");
+        }
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 }

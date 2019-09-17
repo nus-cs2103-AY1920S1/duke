@@ -33,10 +33,6 @@ public class Ui {
         assert input.strip().length() != 0 : "Input cannot be empty";
         String output = "";
         String[] task = input.split(" ");
-        if (task[0].equals("bye")) {
-            output = "Bye. Hope to see you again soon!";
-            return output;
-        }
         try {
             output = handleInput(task, input);
         } catch (IllegalArgumentException e) {
@@ -73,6 +69,9 @@ public class Ui {
             break;
         case "priority":
             output = handleTasks(task[1], input, true);
+            break;
+        case "bye":
+            output = "Bye. Hope to see you again soon!";
             break;
         case "todo":
             // Fallthrough

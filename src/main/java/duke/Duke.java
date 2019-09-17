@@ -19,7 +19,7 @@ public class Duke {
      * Constructor for class Duke.
      */
     public Duke() {
-        String filePath = "C:\\CS2103T\\duke\\data\\tasks.txt";
+        String filePath = "data/duke.txt";
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadTasks());

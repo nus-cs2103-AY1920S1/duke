@@ -1,6 +1,12 @@
 # Duke - User Guide :grinning:
 ![DukeLogo](/resources/images/theDuke.png)  
 
+Table of Contents :
+[Introduction](## - Introduction)  
+[Features](## - Features)  
+[Commands](## - Commands)  
+[Command Summary](## - command-summary)
+
 ## Introduction
    Duke is an application for users to manage their tasks in life. It uses simple commands and
    is optimized for users who **prefer to use desktop app to manage tasks**. 

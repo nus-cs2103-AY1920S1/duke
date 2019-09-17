@@ -2,7 +2,8 @@ package com.commands;
 
 import com.TaskList;
 import com.util.Storage;
-import com.util.Ui;
+import com.util.ui.Ui;
+import gui.GUIUi;
 import com.exceptions.*;
 
 /**
@@ -16,15 +17,13 @@ public class Command {
 
     protected String command; // e.g. list, done, bye, todo, deadline, event
     protected boolean continuesProgram;
-    protected Ui ui;
 
     public Command(String commandWord) {
         this.command = commandWord;
         continuesProgram = true;
-        ui = new Ui();
     }
 
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
     }
 
     public boolean continuesProgram() {

@@ -3,6 +3,7 @@ package com.commands;
 import com.TaskList;
 import com.exceptions.DukeException;
 import com.util.Storage;
+import com.util.ui.Ui;
 
 public class AddCommand extends Command {
 
@@ -22,7 +23,7 @@ public class AddCommand extends Command {
         this.hasSubCommand = hasSubCommand;
     }
 
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
     }
 
     public void print() {

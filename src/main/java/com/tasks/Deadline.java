@@ -1,7 +1,5 @@
 package com.tasks;
 
-import com.util.Ui;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,8 +25,7 @@ public class Deadline extends Task {
                 this.subDescription = newBy;
             }
         } catch (ParseException e) {
-            new Ui().showMessage("Date not valid.",
-                    "(Example: Recognised format \"2/12/2019 1800\"; converts to \"2nd of December 2019, 6pm\")");
+            this.subDescription = by;
         }
     }
 

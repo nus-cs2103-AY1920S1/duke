@@ -8,6 +8,8 @@ import com.util.StaticStrings;
 
 import com.exceptions.DukeException;
 import com.exceptions.command.*;
+import com.util.ui.*;
+import gui.GUIUi;
 import com.util.stats.DukeStatistics;
 
 public class DeleteCommand extends Command {
@@ -24,7 +26,7 @@ public class DeleteCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         // Checks if index of task to delete is within range
         int numTasks = taskList.getNumTasks();
         if (numTasks == 0) {

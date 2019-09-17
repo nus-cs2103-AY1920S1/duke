@@ -9,6 +9,8 @@ import com.util.Storage;
 import java.util.ArrayList;
 
 import com.exceptions.command.*;
+import com.util.ui.*;
+import gui.GUIUi;
 import com.util.stats.DukeStatistics;
 
 /**
@@ -26,7 +28,7 @@ public class SubCommand extends AddCommand {
         this.subDescription = subDescription;
     }
 
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         Task newTask;
         switch (command) {
         case "deadline":

@@ -3,7 +3,6 @@ package com.util.stats;
 import com.exceptions.DukeException;
 import com.exceptions.DukeStorageException;
 import com.util.StaticStrings;
-import com.util.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,13 +27,11 @@ public class StatsStorage {
     private File f;
     private boolean doesFileExist;
     private Log currLog;
-    private Ui ui;
 
     public StatsStorage(String filePath) {
         this.fp = filePath;
         this.f = new File(filePath);
         this.doesFileExist = f.exists();
-        ui = new Ui();
     }
 
     public ArrayList<Log> load() {
@@ -72,7 +69,6 @@ public class StatsStorage {
             }
             return logArr;
         } catch (FileNotFoundException e) {
-            ui.showMessage(StaticStrings.ERROR_LOG_NOT_FOUND);
             return new ArrayList<Log>();
         }
     }
@@ -94,7 +90,7 @@ public class StatsStorage {
             }
             fw.close();
         } catch (IOException e) {
-            ui.showMessage(StaticStrings.ERROR_SAVE_LOG);
+            f = new File(fp);
         }
     }
 

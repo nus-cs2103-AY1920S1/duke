@@ -78,12 +78,11 @@ public class Storage {
             File directory = new File(folder);
             if (!directory.exists()) {
                 directory.mkdir();
-            } else {
-                if (!file.exists()) {
-                    file.createNewFile();
-                }
-                assert file.exists() : "File should exist now";
             }
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            assert file.exists() : "File should exist now";
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

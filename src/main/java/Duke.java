@@ -23,9 +23,6 @@ public class Duke {
      * @return response to the user's input.
      */
     public String getResponse(String input) {
-        if (Parser.hasTerminated()) {
-            return ui.print();
-        }
         try {
             Parser.parse(tasks, ui, input);
             storage.save(tasks.getListOfTasks());

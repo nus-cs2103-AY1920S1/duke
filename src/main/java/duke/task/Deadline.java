@@ -28,6 +28,6 @@ public class Deadline extends Task {
 
     @Override
     protected Deadline clone() {
-        return new Deadline(this.getDescription(), by.format(DATE_TIME_FORMAT), this.getIsDone());
+        return new Deadline(this.getDescription(), by.toString(), this.getIsDone());
     }
 }

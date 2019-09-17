@@ -28,6 +28,6 @@ public class Event extends Task {
 
     @Override
     protected Event clone() {
-        return new Event(this.getDescription(), at.format(DATE_TIME_FORMAT), this.getIsDone());
+        return new Event(this.getDescription(), at.toString(), this.getIsDone());
     }
 }

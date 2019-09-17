@@ -64,7 +64,7 @@ public class Duke extends Application {
     }
 
     public Duke() {
-        this("/Users/auxin/duke/data/Tasks.txt");
+        this("/data/Tasks.txt");
     }
 
 //    public static void main(String[] args) {

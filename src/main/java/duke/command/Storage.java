@@ -23,6 +23,7 @@ import java.util.ArrayList;
  */
 public class Storage {
 
+    private static String basePath = new File("").getAbsolutePath();
     private static String filePath;
     private ArrayList<Task> store = new ArrayList<>();
 
@@ -32,7 +33,7 @@ public class Storage {
      * @param filePath A string to represent the filepath in the hard disk.
      */
     public Storage(String filePath) {
-        Storage.filePath = filePath;
+        Storage.filePath = basePath + filePath;
     }
 
     /**
@@ -55,7 +56,7 @@ public class Storage {
      * To create a new folder in the directory if the specific folder is not existed.
      */
     public void createFolder() {
-        String folderPath = "/Users/auxin/duke/data";
+        String folderPath = basePath + "/data";
         File newFolder = new File(folderPath);
         if (newFolder.mkdir()) {
             System.out.println("Folder is created.");

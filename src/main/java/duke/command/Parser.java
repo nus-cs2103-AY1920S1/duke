@@ -62,6 +62,8 @@ public class Parser {
         case find:
             output = commandFind();
             break;
+        case clear:
+            output = commandClear();
         }
         return output;
     }
@@ -255,6 +257,14 @@ public class Parser {
         return output;
     }
 
+    private String commandClear() {
+        String output = "I have cleared all tasks for you!";
+        TaskList.getList().clear();
+        Storage storage = new Storage();
+        storage.appendToFile(storage.getFilePath(), "", false);
+        return output;
+    }
+
     private void checkDuplicateTodo(String string) throws DukeDuplicateException {
         for (Task tasks : TaskList.getList()) {
             if (tasks.toString().contains(string)) {
@@ -271,11 +281,10 @@ public class Parser {
         }
     }
 
-
     /**
      * To represent the commands users can input.
      */
     enum Command {
-        bye, list, done, todo, deadline, event, delete, find
+        bye, list, done, todo, deadline, event, delete, find, clear
     }
 }

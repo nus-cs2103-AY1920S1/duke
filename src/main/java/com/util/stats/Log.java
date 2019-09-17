@@ -4,6 +4,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Contains information about a command that was executed.
+ */
 public class Log {
 
     private LocalDateTime dateTimeStamp;
@@ -51,6 +54,10 @@ public class Log {
         return timeFormat.format(dateTimeStamp);
     }
 
+    public LocalDateTime getDateTimeStamp() {
+        return dateTimeStamp;
+    }
+
     public String getCommandWord() {
         return commandWord;
     }
@@ -68,4 +75,5 @@ public class Log {
         }
         return keywords.toString();
     }
+
 }

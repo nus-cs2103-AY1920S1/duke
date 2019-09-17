@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Responsible for reading and storing log of executed commands to file in hard disk.
+ */
 public class StatsStorage {
 
     // Format of file

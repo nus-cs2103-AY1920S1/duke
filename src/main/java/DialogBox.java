@@ -5,14 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -35,14 +33,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-//        Text t = new Text(text);
-//        Bounds d = t.getLayoutBounds();
-//        dialog.setPrefHeight(d.getHeight());
-//        dialog.setMaxHeight(d.getHeight());
-//        dialog.setPrefWidth(d.getWidth());
-//        dialog.setMaxWidth(d.getWidth());
         dialog.setText(text);
-//        dialog.setWrapText(true);
+        dialog.setWrapText(false);
         displayPicture.setImage(img);
     }
 
@@ -58,16 +50,12 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-//        db.setPrefSize(db.getHeight(), db.getWidth());
-//        db.setPrefSize(db.getWidth(), db.getHeight());
         db.flip();
         return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-//        db.setPrefSize(db.getHeight(), db.getWidth());
-//        db.setPrefSize(db.getWidth(), db.getHeight());
         return db;
     }
 }

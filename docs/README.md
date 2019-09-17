@@ -22,16 +22,16 @@ Adds a new tasks to todo list, doing so will:
  
  Task type | Command
  ------------ | -------------
- Todo | **todo** <description>
- Deadline |  **deadline** <description>  **/by** <date in DD/MM/YYY HHMM format>
-  Event |  **Event** <description>  **/at** <date in DD/MM/YYY HHMM format>
+ Todo | **todo** + (description)
+ Deadline |  **deadline** + (description)  **/by** + (date in DD/MM/YYY HHMM format)
+  Event |  **Event** + (description) +  **/at**  + (date in DD/MM/YYY HHMM format)
   
  ### Mark task as done
   Marks the task as completed. Doing so will :
   * Change the status icon of task when the todo list is shown using **list** command. 
   *  Update the task in duke.txt (from 1 to 0).
   
-  Command: **done**  <index number of task to be marked as done>
+  Command: **done**  + (index number of task to be marked as done)
   
   ### Delete task
   Deletes the task from todo list by index. Doing so will :
@@ -39,7 +39,7 @@ Adds a new tasks to todo list, doing so will:
   *  Remove the task from duke.txt.
   * Update the tasks statistics respectively.
   
-  Command: **delete**  <index number of task to be deleted>
+  Command: **delete**  + (index number of task to be deleted)
   
   ### List all tasks
   Lists all tasks from todo list, with index. Doing so will list tasks in the following format:
@@ -47,7 +47,7 @@ Adds a new tasks to todo list, doing so will:
        Number of tasks not completed: Y
        Here are the tasks in your list:**
     
-    **1.[**<Task type shown>**][** <status icon> **]** <description> **(by/at:** <date in DAY MONTH DATE HH:MM:SS format> **SGT 2019)**
+    **1.[**(Task type shown)**][** (status icon) **]** (description) **(by/at:** (date in DAY MONTH DATE HH:MM:SS format) **SGT 2019)**
     
     Task status | Status icon
     ------------ | -------------

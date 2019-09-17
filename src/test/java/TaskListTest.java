@@ -15,6 +15,6 @@ class TaskListTest {
         tasks.add(new Task("go to school", TaskType.TODO));
         TaskList taskList = new TaskList(tasks);
 
-        assertEquals("T | false | go to school\n", taskList.convertTasksToString());
+        assertEquals("T | false | go to school | null\n", taskList.convertTasksToString());
     }
 }

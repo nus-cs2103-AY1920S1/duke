@@ -86,6 +86,15 @@ public class Duke {
     }
 
     /**
+     * Returns the Ui object associated with Duke.
+     *
+     * @return Ui object associated with Duke.
+     */
+    public static Ui getUi() {
+        return ui;
+    }
+
+    /**
      * Generates a response to user input.
      *
      * @param input The user's input.

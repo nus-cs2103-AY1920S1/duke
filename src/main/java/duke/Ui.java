@@ -14,10 +14,10 @@ public class Ui {
      * Greets the user with default text.
      */
     public void greet() {
-        String greeting = LINE
-                + "     Hello! I'm Duke\n"
-                + "     What can I do for you?\n"
-                + LINE;
+        showLine();
+        String greeting = "     Hello! I'm Duke\n"
+                        + "     What can I do for you?\n";
+        showLine();
 
         System.out.println(greeting);
     }

@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -17,6 +18,8 @@ public class Main extends Application {
 
     private Duke duke = new Duke("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt");
     private static ByteArrayOutputStream baos;
+    @FXML
+    private MainWindow mainWindow;
 
     @Override
     public void start(Stage stage) {

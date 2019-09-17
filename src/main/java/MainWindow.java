@@ -32,6 +32,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        showGreeting();
     }
 
     /**
@@ -47,5 +48,16 @@ public class MainWindow extends AnchorPane {
                 new Group(DialogBox.getDukeDialog(response, dukeImage))
         );
         userInput.clear();
+    }
+
+    /**
+     * Shows user greetings from Duke.
+     */
+    private void showGreeting() {
+        String greeting = "     Hello! I'm Duke!\n"
+                + "     What can I do for you?\n";
+        dialogContainer.getChildren().addAll(
+                new Group(DialogBox.getDukeDialog(greeting, dukeImage))
+        );
     }
 }

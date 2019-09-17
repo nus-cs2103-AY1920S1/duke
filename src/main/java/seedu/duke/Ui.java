@@ -29,7 +29,7 @@ public class Ui {
      * Returns the exit message in the form of a string.
      */
     public static String exit() {
-        String byeMessage = "Bye. Hope to see you again soon!";
+        String byeMessage = "Bye!!! Hope to see you again soon!";
         return byeMessage;
     }
 

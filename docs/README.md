@@ -17,9 +17,11 @@
     2.5 [Finding Tasks](#find)  
     2.6 [Sorting Tasks](#sort)  
     2.7 [Mass Operation of Tasks](#massOp)
+    2.8 [Exiting of Program](#exit)
 
-3. [Viewing of Statistics](#stats)  
+3. [Data Analysis](#stats)  
     3.1 [Viewing of Statistics by Time](#time)  
+    3.2 [Collection of Data](#data)
     
 4. [Glossary](#glossary)  
 
@@ -189,10 +191,21 @@ To execute the same command to multiple tasks at once, add `, ` between the inde
 
 :exclamation: This only applies to `done`, `delete`, `find` commands.
 
+### **Exiting of Program** <a name="exit"></a>
+
+To exit the program: `bye`
+
+    Example of usage: bye
+    Expected Outcome: Bye!!! Hope to see you again soon!
+    
+:exclamation: The program will exit immediately after this command.
+
 <br> 
 <br> 
 
-## **Viewing of Statistics** <a name="stats"></a>
+## **Data Analysis** <a name="stats"></a>
+
+### **Viewing of Statistics** <a name="time"></a>
 
 To view an overview of the tasks done over time, there are two ways:
 
@@ -206,6 +219,27 @@ To view an overview of the tasks done over time, there are two ways:
     This is an example of an expected chart:  
 <img src="https://github.com/EvonDong/duke/blob/master/docs/BarChart1.png" width="350">
 
+<br>
+
+### **Collection of Data** <a name="data"></a>
+
+The list of all the tasks is located in the data directory called data as `tasks.txt`.
+The storage file is easy to read and edit.
+
+Note that the file follows the following format:
+ * Each variables are separated by  `|`.
+ * The first letter represents the type of task. 
+    Letter | Task
+    ----| ----
+    T | todo
+    D | deadline
+    E | event
+ * The second variable is the task description.
+ * If exists, the third variable may be a timestamp depending on whether it is a `deadline` or `event` task. The timestamp will be in the format  [dd/MM/yyyy HHmm].
+ * If the task has been completed, the last variable will be the timestamp of when it was marked as done.
+
+This is an example of an expected chart:  
+    
 <br>
 <br>
 

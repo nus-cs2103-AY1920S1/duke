@@ -104,3 +104,15 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:`<br/>`[D][✗] submission of lawyer annual report (by: 25/11/2019 1200)`<br/>`Now you have 4 tasks in the list.`
+
+### `find <keyword>` - Finds task(s) with description matching the keyword
+
+Show all tasks that matches the specified keyword
+
+Example of usage: 
+
+`find documents`
+
+Expected outcome:
+
+`Here are the matching tasks in your list:`<br/>`1.[T][✗] sign documents`

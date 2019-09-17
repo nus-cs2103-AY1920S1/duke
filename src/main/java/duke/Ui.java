@@ -145,7 +145,7 @@ public class Ui {
      * Shows the welcome message.
      */
     public void showWelcome() {
-        printGuiMessage("Hello! I'm Duke\nWhat can I do for you?");
+        printGuiMessage("こんにちは！メイドちゃんです！\nWhat can I do for you?");
     }
 
     /**

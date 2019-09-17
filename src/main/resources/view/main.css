@@ -1,5 +1,5 @@
 .root {
-    -fx-font-family: "Lucida Handwriting";
+    -fx-font-family: "Helvetica Neue";
 }
 
 /* This is never used byt for some reason I have a dialogContainer in MainWindow */

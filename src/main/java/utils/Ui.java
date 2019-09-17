@@ -37,16 +37,16 @@ public class Ui {
     }
 
     public String printMsg(Task t, int size) {
-        return(addDoubleLine("     Got it. I've added this task: \n" 
-            + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list."));
+        return ("     Got it. I've added this task: \n" 
+            + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list.");
     }
 
     public String print(String str) {
-        return (addDoubleLine(str));
+        return str;
     }
 
     public String printTab(String str) {
-        return("    " + str);
+        return "    " + str ;
     }
     
     public String bye() {

@@ -65,6 +65,7 @@ public class TaskList {
      */
 
     public String delete(int i) {
+        assert i <= tasks.size();
         Task current = tasks.get(i);
         tasks.remove(i);
         return ui.printTab("Noted. I've removed this task: \n" 

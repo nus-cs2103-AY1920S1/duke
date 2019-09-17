@@ -29,7 +29,7 @@ public class FindCommand extends Command {
     public void displayList(ArrayList<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             int itemIndex = i + 1;
-            String itemDisplay = itemIndex + "." + list.get(i).getDescription();
+            String itemDisplay = itemIndex + "." + list.get(i).toString();
             System.out.println(itemDisplay);
         }
     }
@@ -38,7 +38,7 @@ public class FindCommand extends Command {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             int itemIndex = i + 1;
-            String itemDisplay = itemIndex + "." + list.get(i).getDescription();
+            String itemDisplay = itemIndex + "." + list.get(i).toString();
             sb.append(itemDisplay);
             sb.append("\n");
         }

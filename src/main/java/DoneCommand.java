@@ -27,7 +27,7 @@ public class DoneCommand extends Command{
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
-        return ui.printDoneMessage(task);
+        return ui.doneMessage(task);
     }
 
     /**

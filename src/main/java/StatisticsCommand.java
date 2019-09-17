@@ -15,7 +15,7 @@ public class StatisticsCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Statistics s = new Statistics(tasks);
         s.generateStatistics();
-        return ui.printStatistics(s);
+        return ui.getStatistics(s);
     }
 
     /**

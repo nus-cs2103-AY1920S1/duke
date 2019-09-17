@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
         int taskListSizeAfterDeletingTask = tasks.getSize();
         assert taskListSize - 1 == taskListSizeAfterDeletingTask
                 : "task list did not shrink by 1 after deletion";
-        return ui.printDeleteMessage(tasks, task);
+        return ui.deleteMessage(tasks, task);
     }
 
     /**

@@ -27,7 +27,7 @@ public class AddCommand extends Command {
         }
         int taskListSizeAfterAddingTask = tasks.getSize();
         assert taskListSize + 1 == taskListSizeAfterAddingTask : "size of tasklist did not grow";
-        return ui.printAddMessage(tasks, this.task);
+        return ui.addMessage(tasks, this.task);
     }
 
     /**

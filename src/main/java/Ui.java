@@ -41,32 +41,32 @@ public class Ui {
     }
 
     /**
-     * Printing various messages
+     * Retrieving various messages
      */
-    public String printExitMessage() {
+    public String exitMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
-    public String printDoneMessage(Task task) {
+    public String doneMessage(Task task) {
         return "Nice! I've marked this task as done\n" + task;
     }
 
-    public String printDeleteMessage(TaskList tasks, Task task) {
+    public String deleteMessage(TaskList tasks, Task task) {
         tasks.delete(task);
         return ("Noted. I've removed this task:\n\t" + task + "\n" +
         "Now you have " + tasks.getSize() + " tasks in the list.");
     }
 
-    public String printAddMessage(TaskList tasks, Task task) {
+    public String addMessage(TaskList tasks, Task task) {
         return ("Got it. I've added this task: \n\t"
                 + task + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.");
     }
-    public String printListMessage(TaskList tasks) {
+    public String listMessage(TaskList tasks) {
         return ("Here are the tasks in your list:\n" +
         tasks.showList()); // this prints the list of tasks
     }
 
-    public String printHelpMessage(Storage storage) {
+    public String helpMessage(Storage storage) {
         return storage.getHelpInfo();
     }
 
@@ -74,10 +74,10 @@ public class Ui {
         return ("___________________________________________________");
     }
 
-    public String printStatistics(Statistics s) {
+    public String getStatistics(Statistics s) {
         return s.toString();
     }
-    public String printFunFact() {
+    public String getFunFact() {
         return "Fun fact! Did you know that...?";
     }
     /**

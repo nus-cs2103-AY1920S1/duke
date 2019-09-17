@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -51,25 +52,9 @@ public class DialogBox extends HBox {
     }
 
     private void setBoxHeight(String text) {
-        int numLines = countLines(text);
-
-        if (numLines <= 4) {
-            this.dialog.setPrefHeight(USE_COMPUTED_SIZE);
-            this.setPrefHeight(USE_COMPUTED_SIZE);
-
-        } else if (numLines > 4) {
-            this.dialog.setPrefHeight(numLines * 20);
-            this.setPrefHeight(numLines * 20);
-
-        } else {
-            assert false : "Error in initialising variable numLines";
-        }
+        this.dialog.setMinHeight(Region.USE_PREF_SIZE);
     }
 
-    private int countLines(String text) {
-        String[] lineArray = text.split("\n", -1);
-        return lineArray.length;
-    }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
@@ -81,17 +66,40 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a new instance of DialogBox.
+     * Meant for user dialogue box creation only.
+     *
+     * @param text User Input.
+     * @param img  User profile picture.
+     * @return DialogBox DialogBox containing input and user profile picture.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a new instance of DialogBox.
+     * Meant for bot response dialogue box creation only.
+     *
+     * @param text Bot response.
+     * @param img  Duke profile picture.
+     * @return DialogBox DialogBox containing response and user profile picture.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
 
-    //for creating dialog box to show welcome message
+    /**
+     * Returns a new instance of DialogBox.
+     * Meant for showing welcome message only.
+     *
+     * @param text Welcome message.
+     * @param img  Duke profile picture.
+     * @return DialogBox DialogBox containing welcome message and user profile picture.
+     */
     public static DialogBox createDialog(String text, Image img) {
         return new DialogBox(text, img);
 

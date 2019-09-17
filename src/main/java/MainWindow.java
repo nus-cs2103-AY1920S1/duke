@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 /**
@@ -56,7 +57,7 @@ public class MainWindow extends AnchorPane {
 
         //Set preferred height of dialogContainer(VBox)
         setVBoxHeight();
-
+        userInput.clear();
 
     }
 
@@ -74,15 +75,11 @@ public class MainWindow extends AnchorPane {
         //Change the total height of the VBox according to the individual height of elements
         for (Node node : dialogContainer.getChildren()) {
             DialogBox dialogBox = (DialogBox) node;
-            if (dialogBox.getPrefHeight() != -1.0) {
-                height += dialogBox.getPrefHeight();
-            } else {
-                height += 100;
-            }
+           height += Region.USE_PREF_SIZE;
         }
 
         dialogContainer.setPrefHeight(height);
-        userInput.clear();
+
     }
 
 

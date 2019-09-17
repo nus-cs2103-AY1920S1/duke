@@ -5,6 +5,9 @@ import duke.data.DukeData;
 
 import java.io.IOException;
 
+/**
+ * The DeleteCommand handles any command from the user to delete any task from the list.
+ */
 public class DeleteCommand implements Command {
     private int taskIndex;
 
@@ -12,9 +15,10 @@ public class DeleteCommand implements Command {
      * Creates a new Delete Command with the given taskIndex.
      * @param taskIndex the index number of the task to be deleted
      */
-    public DeleteCommand(int taskIndex){
+    public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
+
     /**
      * Execute method which calls the method upon initialisation of the object.
      * @param dukeData the storage object of the program

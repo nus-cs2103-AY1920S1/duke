@@ -5,7 +5,11 @@ import duke.data.DukeData;
 
 import java.io.IOException;
 
+/**
+ * The ListCommand handles the command where the user requests to view the tasks in his/her list.
+ */
 public class ListCommand implements Command {
+
     /**
      * Execute method which calls the method upon initialisation of the object.
      * @param dukeData the storage object of the program

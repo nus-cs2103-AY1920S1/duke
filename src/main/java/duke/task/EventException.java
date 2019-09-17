@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 /**
  * The EventException class handles any incorrect event input by the user,
  * and prompts them to enter in the correct format.
@@ -15,11 +13,11 @@ public class EventException extends Exception {
 
     /**
      * Constructs a EventException object.
-     * @param msg the message linked to the exception
+     * @param message the message linked to the exception
      * @param type the type of error that is to be handled in this class
      */
-    public EventException(String msg, int type) {
-        this._error = msg;
+    public EventException(String message, int type) {
+        this._error = message;
         this._type = type;
     }
 

@@ -31,7 +31,7 @@ public class DateTime {
     /**
      * This method formats the date and time into the more readable format,
      * and returns a string representation of it.
-     * @return a string representation of the given date and time in the new format.
+     * @return a string representation of the given date and time in the new format
      */
     public String getDateTimeString() {
         String[] splitDate = this._dateTime.split("/");

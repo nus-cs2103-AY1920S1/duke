@@ -16,6 +16,6 @@ public interface Command {
      * @param ui ui object which handles output of user interaction
      * @return a string representation of the output for that command
      */
-    public String execute(DukeData dukeData, Ui ui) throws IOException, DukeException;
+    String execute(DukeData dukeData, Ui ui) throws IOException, DukeException;
 
 }

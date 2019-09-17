@@ -5,15 +5,15 @@ package duke.task;
  * and prompts them to enter in the correct format.
  */
 public class ToDoException extends Exception{
-    private final String _noDesc = " OOPS!!! The description of a todo cannot be empty.";
+    private final String _noDescription = " OOPS!!! The description of a todo cannot be empty.";
     private String _error;
 
     /**
      * Constructs a ToDoException object.
-     * @param msg the message linked to the exception
+     * @param message the message linked to the exception
      */
-    public ToDoException(String msg) {
-        this._error = msg;
+    public ToDoException(String message) {
+        this._error = message;
     }
 
     /**
@@ -22,6 +22,6 @@ public class ToDoException extends Exception{
      * found in the ToDo object.
      */
     public String getMessage() {
-        return _noDesc;
+        return _noDescription;
     }
 }

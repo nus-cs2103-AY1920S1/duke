@@ -90,9 +90,9 @@ public class DukeData {
 
     /**
      * Adds and updates the given task to the file saved in the hard disk.
-     * @param index the index of the task to be added.
-     * @param task Task object which can represent ToDo, Deadline, or Event.
-     * @throws IOException
+     * @param index the index of the task to be added
+     * @param task Task object which can represent ToDo, Deadline, or Event
+     * @throws IOException if an I/O Exception occurs
      */
     public void addTask(int index, Task task) throws IOException {
         this._taskList.addTask(task);
@@ -180,7 +180,7 @@ public class DukeData {
 
     /**
      * Loads the data that DukeData manages in the form of a TaskList object.
-     * @return TaskList object of the list that DukeData manages
+     * @return the TaskList object of the list that DukeData manages
      */
     public TaskList load() {
         return this._taskList;

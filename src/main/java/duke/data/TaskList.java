@@ -52,7 +52,7 @@ public class TaskList {
     /**
      * Gets the Task object with the given index index number from the list.
      * @param index the index number of the Task
-     * @return the Task object
+     * @return the Task object with the given index
      */
     public Task getTask(int index) {
         return this._tasks.get(index);

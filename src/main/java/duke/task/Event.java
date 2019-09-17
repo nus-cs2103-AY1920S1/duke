@@ -11,11 +11,11 @@ public class Event extends Task {
 
     /**
      * Creates an Event object, which is also a Task.
-     * @param desc a description of the Event Task
+     * @param description a description of the Event Task
      * @param date the date the Event will be held on
      */
-    public Event(String desc, String date) {
-        super(desc);
+    public Event(String description, String date) {
+        super(description);
         try {
             this._dateTime = new DateTime(date);
             this._date = this._dateTime.getDateTimeString();
@@ -36,7 +36,7 @@ public class Event extends Task {
     /**
      * Returns a string representation of the Event object to be saved
      * into the hard disk file for the Duke program.
-     * @return the data representation of the Event Task.
+     * @return the data representation of the Event Task
      */
     public String toData() {
         return String.format("E | %s | %s | %s",

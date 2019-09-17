@@ -5,6 +5,10 @@ import duke.data.DukeData;
 
 import java.io.IOException;
 
+/**
+ * The FindCommand helps the user search for tasks in the list which matches
+ * the given keyword by the user.
+ */
 public class FindCommand implements Command {
     private String findKeyword;
 

@@ -39,7 +39,7 @@ public abstract class Task {
 
     /**
      * Gets the Description of the Task Object.
-     * @return a description of the current Task.
+     * @return a description of the current Task
      */
     public final String getDesc() {
         return this._description;

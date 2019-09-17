@@ -13,17 +13,17 @@ public class DeadlineException extends Exception{
 
     /**
      * Constructs a EventException object.
-     * @param msg the message linked to the exception
+     * @param message the message linked to the exception
      * @param type the type of error that is to be handled in this class
      */
-    public DeadlineException(String msg, int type) {
-        this._error = msg;
+    public DeadlineException(String message, int type) {
+        this._error = message;
         this._type = type;
     }
 
     /**
      * Gets the error message tied to the exception found.
-     * @return  a string of error message for the exception found in the Deadline object.
+     * @return a string of error message for the exception found in the Deadline object
      */
     public String getMessage() {
         if (this._type == 1) {

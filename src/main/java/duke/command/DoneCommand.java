@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Saved file) {
         Task task = tasks.setDone(this.taskNum);
-        ui.printDuke("Nice! I've marked this task as done: \n" +
-                     "\t" + task + "\n");
+        ui.printDuke("Nice! I've marked this task as done: \n"
+                     + "\t" + task + "\n");
     }
 }

@@ -14,8 +14,8 @@ public class AddCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Saved file) {
         tasks.add(this.task);
-        ui.printDuke("Got it. I've added this task:\n  " +
-                 "\t" + this.task + "\n" +
-                 "\t Now you have " + tasks.size() + " tasks in the list.\n");
+        ui.printDuke("Got it. I've added this task:\n  "
+                 + "\t" + this.task + "\n"
+                 + "\t Now you have " + tasks.size() + " tasks in the list.\n");
     }
 }

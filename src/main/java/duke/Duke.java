@@ -27,7 +27,7 @@ public class Duke {
         ui.printIntro();
 
         Boolean isBye = false;
-        while(!isBye) {
+        while (!isBye) {
             try {
                 input = ui.scanCmd();
                 ui.printLine();

@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
 
     public void execute(TaskList tasks, Ui ui, Saved file) {
         Task task = tasks.delete(this.taskNum);
-        ui.printDuke("Noted. I've removed this task: \n" +
-                     "\t" + task + "\n \tNow you have " + tasks.size() + " tasks in the list.\n");
+        ui.printDuke("Noted. I've removed this task: \n"
+                     + "\t" + task + "\n \tNow you have " + tasks.size() + " tasks in the list.\n");
     }
 }

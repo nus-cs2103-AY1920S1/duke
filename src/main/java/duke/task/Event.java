@@ -36,6 +36,7 @@ public class Event extends Task {
         this.date = eventTime.parse(this.at);
         return this.eventTime.format(date);
     }
+
     @Override
     public String toString() {
         try {

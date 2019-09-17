@@ -12,7 +12,6 @@ public class Deadline extends Task {
     private SimpleDateFormat deadline;
     protected String by;
     private Date date;
-    protected int dd, mm, yyyy, hrs, min, time;
 
     public Deadline(String description, String by) throws DateTimeException {
         super(description);
@@ -38,7 +37,7 @@ public class Deadline extends Task {
             date = deadline.parse(this.by);
             return deadline.format(date);
         } catch (ParseException exception) {
-            System.out.println("\u2639 OOPS!!! Please enter a valid deadline");
+            System.out.println("OOPS!!! Please enter a valid deadline");
         }
         return "";
     }

@@ -1,14 +1,12 @@
 package duke.ui;
 
 import duke.task.Task;
-import duke.TaskList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    Scanner scan = new Scanner(System.in);
-    final private static String LINE = "____________________________________________________________";
+    private Scanner scan = new Scanner(System.in);
 
 
     public void printIntro() {
@@ -25,7 +23,7 @@ public class Ui {
     }
 
     public void printLine() {
-        System.out.println("    " + LINE);
+        System.out.println("\t____________________________________________________________");
     }
 
     public String scanCmd() {

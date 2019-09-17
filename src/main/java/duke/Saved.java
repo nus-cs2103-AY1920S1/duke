@@ -17,53 +17,51 @@ import java.io.IOException;
 public class Saved {
     private String filePath;
 
-    public Saved(String filePath) {
+    Saved(String filePath) {
         this.filePath = filePath;
     }
 
-    public ArrayList<Task> loadData() throws FileNotFoundException, ParseException {
+    ArrayList<Task> loadData() throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
 
         ArrayList<Task> list = new ArrayList<>();
 
-        while(scan.hasNext()) {
+        while (scan.hasNext()) {
             String[] text = scan.nextLine().split(" \\| ", 4);
-
             Task t;
 
             switch (text[0]) {
-                case "T":
-                    t = new Todo(text[2]);
-                    break;
-                case "D":
-                    t = new Deadline(text[2], text[3]);
-                    break;
-                case "E":
-                    t = new Event(text[2], text[3]);
-                    break;
-                default:
-                    t = new Task("");
-                    break;
+            case "T":
+                t = new Todo(text[2]);
+                break;
+            case "D":
+                t = new Deadline(text[2], text[3]);
+                break;
+            case "E":
+                t = new Event(text[2], text[3]);
+                break;
+            default:
+                t = new Task("");
+                break;
             }
 
             if (text[1].equals("1")) {
                 t.setAsDone();
             }
-
             list.add(t);
         }
         return list;
     }
 
-    public void saveToFile(ArrayList<Task> list) throws IOException, ParseException {
+    public void saveToFile(ArrayList<Task> list) throws IOException {
         FileWriter newFile = new FileWriter(this.filePath);
         String listToFile = "";
         String s;
 
         for (Task task: list) {
             if (task instanceof Event) {
-                s = "E" + " | "+ task.getDone() + " | " + task.getDesc() + " | " + task.getAt();
+                s = "E" + " | " + task.getDone() + " | " + task.getDesc() + " | " + task.getAt();
             } else if (task instanceof Deadline) {
                 s = "D | " + task.getDone() + " | " + task.getDesc() + " | " + task.getBy();
             } else {
@@ -76,6 +74,5 @@ public class Saved {
 
         newFile.write(listToFile);
         newFile.flush();
-        //newFile.close();
     }
 }

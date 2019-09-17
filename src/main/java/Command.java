@@ -9,6 +9,7 @@ public abstract class Command {
      * @param input input from user.
      */
     public Command(String input) {
+        assert input.length() > 0 : "invalid input";
         this.input = input;
     }
 

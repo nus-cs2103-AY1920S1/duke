@@ -13,6 +13,7 @@ public class Task implements Serializable {
      * @param task description of the task.
      */
     public Task(String task) {
+        assert task.length() > 0 : "Invalid task name";
         this.task = task;
     }
 

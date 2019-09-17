@@ -14,7 +14,7 @@ public class Ui {
     protected TaskList tasks;
     public String line = "    ____________________________________________________________";
     public String indent = "     ";
-    public String hiMsg = "Hello! I'm duke.core.Duke" + "\n" + indent + "What can I do for you?";
+    public String hiMsg = "Hello! I'm Duke.\nWhat can I do for you?";
     public String byeMsg = "Bye. Hope to see you again soon!";
     public String addMsg = "Got it. I've added this task:";
     public String doneMsg = "Nice! I've marked this task as done:";

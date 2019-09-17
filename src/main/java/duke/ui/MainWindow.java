@@ -69,15 +69,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (duke.getExit()) {
-            try {
-                Thread.sleep(0);
-            } catch (InterruptedException e) {
-                Platform.exit();
-            }
+            Platform.exit();
         }
     }
 
     public void setHiMsg() {
-
+        dialogContainer.getChildren().add(
+                new RightDialogBox(duke.getUi().hiMsg, dukeImage)
+        );
     }
 }

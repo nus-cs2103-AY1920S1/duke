@@ -6,6 +6,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.text.Parser;
 import duke.ui.Ui;
+import javafx.application.Application;
 
 public class Duke {
     protected TaskList tasks;
@@ -65,6 +66,14 @@ public class Duke {
 
     public boolean getExit() {
         return isExit;
+    }
+
+    /**
+     * Get ui of duke.
+     * @return ui object.
+     */
+    public Ui getUi() {
+        return ui;
     }
 
     /**

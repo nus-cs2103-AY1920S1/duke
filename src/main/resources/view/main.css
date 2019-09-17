@@ -20,11 +20,11 @@ RightDialogBox Label, LeftDialogBox Label {
 }
 
 RightDialogBox Label {
-    -fx-border-insets: 0 10px 0 30px;
-    -fx-background-insets: 0 10px 0 30px;
+    -fx-border-insets: 0 10px 0 50px;
+    -fx-background-insets: 0 10px 0 50px;
 }
 
 LeftDialogBox Label {
-    -fx-border-insets: 0 30px 0 10px;
-    -fx-background-insets: 0 30px 0 10px;
+    -fx-border-insets: 0 50px 0 10px;
+    -fx-background-insets: 0 50px 0 10px;
 }

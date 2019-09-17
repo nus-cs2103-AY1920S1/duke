@@ -116,11 +116,10 @@ public class Schedule {
             Task prev = schedule.get(prevIndex);
             Task curr = schedule.get(currIndex);
 
-            if (comparator.compare(prev, curr) > 0) {
-                Collections.swap(schedule, prevIndex, currIndex);
-            } else {
+            if (comparator.compare(prev, curr) <= 0) {
                 break;
             }
+            Collections.swap(schedule, prevIndex, currIndex);
         }
     }
 

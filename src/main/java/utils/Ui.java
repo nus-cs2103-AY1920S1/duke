@@ -36,20 +36,20 @@ public class Ui {
         return line + "\n" + str + "\n" + line;
     }
 
-    public void printMsg(Task t, int size) {
-        System.out.println(addDoubleLine("     Got it. I've added this task: \n" 
+    public String printMsg(Task t, int size) {
+        return(addDoubleLine("     Got it. I've added this task: \n" 
             + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list."));
     }
 
-    public void print(String str) {
-        System.out.println(addDoubleLine(str));
+    public String print(String str) {
+        return (addDoubleLine(str));
     }
 
-    public void printTab(String str) {
-        print("    " + str);
+    public String printTab(String str) {
+        return("    " + str);
     }
     
-    public void bye() {
-        System.out.println(addDoubleLine("     Bye. Hope to see you again soon!"));
+    public String bye() {
+        return(addDoubleLine("     Bye. Hope to see you again soon!"));
     }
 }

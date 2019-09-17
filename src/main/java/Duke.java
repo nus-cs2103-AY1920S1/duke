@@ -29,12 +29,19 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Parser parser;
+    private final static String filePath = "/Users/estherngo/Documents/elsa/2103/duke/src/main/java/data/duke.txt";
 
     /**
      * This is for the GUI, needs an empty constructor for it to work. 
      */
 
-    public Duke() {}
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.load(), ui);
+        parser = new Parser(tasks, ui, storage);
+    }
 
     
      /** initialises the application with references to all main components.
@@ -48,7 +55,13 @@ public class Duke {
     }
     
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        String output = "";
+        try {
+            output = parser.parse(input);
+        } catch(DukeException e) {
+            output = e.getMessage();
+        }
+        return output;
     }		     
 
 

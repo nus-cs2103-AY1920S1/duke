@@ -41,10 +41,10 @@ public class TaskList {
      * @param datetime /at
      */
 
-    public void addEvent(String description, DateTime datetime) {
+    public String addEvent(String description, DateTime datetime) {
         Task current = new Event(description, datetime);
         tasks.add(current);
-        ui.printMsg(current, tasks.size());
+        return ui.printMsg(current, tasks.size());
     }
 
     /**
@@ -53,10 +53,10 @@ public class TaskList {
      * @param datetime /by
      */
 
-    public void addDeadline(String description, DateTime datetime) {
+    public String addDeadline(String description, DateTime datetime) {
         Task current = new Deadline(description, datetime);
         tasks.add(current);
-        ui.printMsg(current, tasks.size());
+        return ui.printMsg(current, tasks.size());
     }  
     
     /**
@@ -64,10 +64,10 @@ public class TaskList {
      * @param i integer i (arraylist position)
      */
 
-    public void delete(int i) {
+    public String delete(int i) {
         Task current = tasks.get(i);
         tasks.remove(i);
-        ui.printTab("Noted. I've removed this task: \n" 
+        return ui.printTab("Noted. I've removed this task: \n" 
             + "    " + current.toString() + "\n     Now you have " + tasks.size() + " tasks in the list.");
     }
     /**
@@ -75,10 +75,10 @@ public class TaskList {
      * @param i integer i (arraylist position)
      */
 
-    public void markAsDone(int i) {
+    public String markAsDone(int i) {
         Task current = tasks.get(i);
         current.markAsDone();
-        ui.printTab("Nice! I've marked this task as done:\n" + "    " + current.toString());
+        return ui.printTab("Nice! I've marked this task as done:\n" + "    " + current.toString());
     }
     /**
      * goes through tasklist to find if there is a task containing
@@ -86,7 +86,7 @@ public class TaskList {
      * @param keyword string keyword
      */
     
-    public void find(String keyword) {
+    public String find(String keyword) {
         TaskList matches = new TaskList();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -98,7 +98,7 @@ public class TaskList {
             
         }
 
-        ui.print("    Here are the matching tasks in your list: \n" 
+        return ui.print("    Here are the matching tasks in your list: \n" 
                     + matches.toString());
     }
 

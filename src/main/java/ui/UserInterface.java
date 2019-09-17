@@ -38,7 +38,11 @@ public class UserInterface {
      * Displays the error message.
      * @param message Error message.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return "Error in " + message + ".";
+    }
+
+    public String showSuccess(String message) {
+        return "Success in " + message + ".";
     }
 }

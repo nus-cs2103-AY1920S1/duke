@@ -65,4 +65,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(msg, dukeImage)
         );
     }
+
+    void showLoadDukeStatus() {
+        String msg = duke.getFileFoundResponse("loading duke");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(msg, dukeImage)
+        );
+    }
 }

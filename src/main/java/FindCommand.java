@@ -1,5 +1,6 @@
 public class FindCommand extends Command {
     String keywords = "";
+
     public FindCommand(String str) {
         this.keywords = str;
     }

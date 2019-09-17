@@ -1,10 +1,10 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    private String IDENTIFIER ="UnIqUE_kEy_4324345";
+    private static String IDENTIFIER = "UnIqUE_kEy_4324345";
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param description user input describing task
      */
@@ -14,7 +14,7 @@ public class Task {
     }
 
     /**
-     * Set symbol for completion status
+     * Set symbol for completion status.
      *
      * @return tick or X symbols
      */
@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * Set symbol for completion status for storage file
+     * Set symbol for completion status for storage file.
      *
      * @return O or X symbols
      */
@@ -34,32 +34,37 @@ public class Task {
 
 
     /**
-     * Mark task as completed
+     * Mark task as completed.
      */
     public void setDone() {
         this.isDone = true;
     }
 
     public String toString() {
+
         return "[" + getStatusIcon() + "]" + this.description;
     }
 
     public String toFileString() {
+
         return "[" + getFileStatusIcon() + "]" + this.description;
     }
 
 
-    private String format(String command, String cmdPrefix, String datePrefix ) {
-        String unprocessed = command;
-        String[] temp = unprocessed.split("/", 2);
+    private String format(String command, String cmdPrefix, String datePrefix) {
+        String[] temp = command.split("/", 2);
         String dateString = temp[1];
         String formattedDateString = datePrefix + dateString + ")";
 
         return cmdPrefix + temp[0] + formattedDateString;
     }
 
-    public String getString(String str, String cmd, String prefix, String datePrefix) {
-        String task = str;
+    /**
+     * Formats string if it is from user input and adds prefix to string if it is read from file.
+     *
+     * @return formatted string
+     */
+    public String getString(String task, String cmd, String prefix, String datePrefix) {
         if (this.isFromInput(task)) {
             String temp = this.cleanString(task);
             String result = temp.replaceAll(cmd, " ");
@@ -69,6 +74,11 @@ public class Task {
         }
     }
 
+    /**
+     * Checks if this task is equal to Task t.
+     *
+     * @return true if equal
+     */
     public boolean equals(Task t) {
         //System.out.println(t.toString());
         //System.out.println(this.toString());
@@ -83,9 +93,6 @@ public class Task {
     public boolean isFromInput(String str) {
         return str.contains(IDENTIFIER);
     }
-
-
-
 
 
 }

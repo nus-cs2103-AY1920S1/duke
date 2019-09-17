@@ -1,9 +1,10 @@
-public class Event extends Task{
-    private String EVENT_CMD = "event";
-    private String EVENT_PREFIX = "[E]";
-    private String EVENT_DATE_PREFIX = "(at: ";
+public class Event extends Task {
+    private static String EVENT_CMD = "event";
+    private static String EVENT_PREFIX = "[E]";
+    private static String EVENT_DATE_PREFIX = "(at: ";
+
     /**
-     * Constructor
+     * Constructor.
      *
      * @param s Input String specifying task
      */
@@ -12,7 +13,7 @@ public class Event extends Task{
     }
 
     /**
-     * returns Task as formatted String
+     * returns Task as formatted String.
      *
      * @return formatted String
      */

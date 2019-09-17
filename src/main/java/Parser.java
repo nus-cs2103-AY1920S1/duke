@@ -14,9 +14,10 @@ public class Parser {
     static String ADD_TODO_COMMAND = "todo ";
     static String ADD_DEADLINE_COMMAND = "deadline ";
     static String ADD_EVENT_COMMAND = "event ";
-    static String IDENTIFIER ="UnIqUE_kEy_4324345";
+    private static String IDENTIFIER = "UnIqUE_kEy_4324345";
+
     /**
-     * To parse all user inputs
+     * Parses all user inputs.
      *
      * @param command user input
      * @return command to be executed
@@ -35,9 +36,9 @@ public class Parser {
     }
 
     private static boolean isAddTaskCommand(String command) {
-        if (command.startsWith(ADD_TODO_COMMAND) ||
-                command.startsWith(ADD_DEADLINE_COMMAND) ||
-                command.startsWith(ADD_EVENT_COMMAND)) {
+        if (command.startsWith(ADD_TODO_COMMAND)
+                || command.startsWith(ADD_DEADLINE_COMMAND)
+                || command.startsWith(ADD_EVENT_COMMAND)) {
             return true;
         } else {
             return false;
@@ -46,8 +47,8 @@ public class Parser {
     }
 
     private static boolean isEditTaskCommand(String command) {
-        if (command.startsWith(DELETE_COMMAND) ||
-                command.startsWith(DONE_COMMAND)) {
+        if (command.startsWith(DELETE_COMMAND)
+                || command.startsWith(DONE_COMMAND)) {
             return true;
         } else {
             return false;
@@ -56,9 +57,9 @@ public class Parser {
     }
 
     private static boolean isFunctionalCommand(String command) {
-        if (command.equals(EXIT_COMMAND) ||
-                command.equals(LIST_COMMAND) ||
-                command.startsWith(FIND_COMMAND)) {
+        if (command.equals(EXIT_COMMAND)
+                || command.equals(LIST_COMMAND)
+                || command.startsWith(FIND_COMMAND)) {
             return true;
         } else {
             return false;
@@ -76,7 +77,8 @@ public class Parser {
             }
         } else if (command.startsWith(ADD_EVENT_COMMAND)) {
             if (!command.contains("/at ")) {
-                throw new DukeException("☹ OOPS!!! Wrong format ! Please follow :\n event project meeting /at 15/09/19");
+                throw new DukeException("☹ OOPS!!! Wrong format ! "
+                        + "Please follow :\n event project meeting /at 15/09/19");
             } else {
                 return new AddCommand(new Event(formatTime(command)));
             }
@@ -121,7 +123,7 @@ public class Parser {
     }
 
     /**
-     * To format time of user input
+     * To format time of user input.
      *
      * @param input user input
      * @return formatted time string
@@ -147,7 +149,7 @@ public class Parser {
                 break;
 
             } catch (ParseException e) {
-                //System.out.println("!");
+                continue;
             }
         }
         if (date == null) {

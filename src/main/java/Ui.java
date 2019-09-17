@@ -2,17 +2,16 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Ui {
-    //Scanner sc;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public Ui() {
 
     }
 
     /**
-     * Displays welcome message
+     * Displays welcome message.
      */
     public String showWelcome() {
 
@@ -20,17 +19,7 @@ public class Ui {
     }
 
     /**
-     * Gets command
-     *
-     * @return user input
-     */
-    /*
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Displays error message
+     * Displays error message.
      *
      * @param message text of error
      */
@@ -39,23 +28,25 @@ public class Ui {
     }
 
     /**
-     * Displays goodbye message
+     * Displays goodbye message.
      */
     public String showGoodbye() {
         return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Displays all tasks in given linkedlist
+     * Displays all tasks in given linkedlist.
      *
      * @param tasks linkedlist containing tasks
      */
     public String showList(LinkedList<Task> tasks) {
         return "Here are the tasks in your list:\n" + showGivenList(tasks);
     }
+
     public String showMatch(LinkedList<Task> tasks) {
         return "Here are the matching tasks in your list:\n" + showGivenList(tasks);
     }
+
     private String showGivenList(LinkedList<Task> tasks) {
         int i = 1;
         StringBuilder result = new StringBuilder();
@@ -70,7 +61,7 @@ public class Ui {
     }
 
     /**
-     * Displays confirmation for deleting task
+     * Displays confirmation for deleting task.
      *
      * @param t task deleted
      * @param i total number of tasks
@@ -81,7 +72,7 @@ public class Ui {
     }
 
     /**
-     * Displays confirmation for completing task
+     * Displays confirmation for completing task.
      *
      * @param t completed task
      */
@@ -90,7 +81,7 @@ public class Ui {
     }
 
     /**
-     * Displays confirmation for adding task
+     * Displays confirmation for adding task.
      *
      * @param t task added
      * @param i total number of tasks
@@ -100,10 +91,4 @@ public class Ui {
         return "Got it. I've added this task:\n" + t + "\n" +  "Now you have " + i + " tasks in the list.";
     }
 
-    /**
-     * Displays line
-     */
-    public void showLine() {
-        System.out.println("-----------------------------------------------------------------------------------\n");
-    }
 }

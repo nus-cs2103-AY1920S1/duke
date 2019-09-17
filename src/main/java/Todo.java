@@ -1,8 +1,9 @@
 public class Todo extends Task {
-    private String TODO_CMD = "todo";
-    private String TODO_PREFIX = "[T]";
+    static String TODO_CMD = "todo";
+    static String TODO_PREFIX = "[T]";
+
     /**
-     * Constructor
+     * Constructor.
      *
      * @param s description of task
      */
@@ -11,7 +12,7 @@ public class Todo extends Task {
     }
 
     /**
-     * returns Task as formatted String
+     * Returns Task as formatted String.
      *
      * @return formatted String
      */

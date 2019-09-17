@@ -36,12 +36,17 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Create new instance of Duke and displays welcome message and error message if there is something
+     * wrong with loading the save file.
+     *
+     */
     public void setDuke(Duke d) {
         duke = d;
         assert duke != null : "duke is null!";
 
         String setupMsg = duke.setUp();
-        if (!setupMsg.equals(duke.SUCCESS)) {
+        if (!setupMsg.equals(Duke.SUCCESS)) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(setupMsg, dukeImage)
             );

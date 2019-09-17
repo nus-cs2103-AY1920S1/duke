@@ -2,7 +2,7 @@ public class DeleteCommand extends Command {
     int id;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param i Index of task to be deleted
      */
@@ -11,7 +11,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes task from TaskList and displays confirmation
+     * Deletes task from TaskList and displays confirmation.
      *
      * @param tasks Class dealing with manipulating global LinkedList storing tasks
      * @param ui User Interface

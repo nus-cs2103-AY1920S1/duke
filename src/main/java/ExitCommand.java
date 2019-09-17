@@ -1,13 +1,13 @@
 public class ExitCommand extends Command {
     /**
-     * Constructor
+     * Constructor.
      */
     public ExitCommand() {
         super();
     }
 
     /**
-     * Update save file with all changes and display confirmation
+     * Update save file with all changes and display confirmation.
      *
      * @param tasks Class dealing with manipulating global LinkedList storing tasks
      * @param ui User Interface
@@ -21,15 +21,6 @@ public class ExitCommand extends Command {
         assert  storage != null : "Storage instance is null!";
         storage.updateSaveFile(tasks.getAllTasks());
         return ui.showGoodbye();
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public boolean isExit() {
-        return true;
     }
 
 }

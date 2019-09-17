@@ -15,14 +15,23 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    String SUCCESS = "Setup Successful";
+    static String SUCCESS = "Setup Successful";
 
+    /**
+     * Constructor.
+     *
+     * @param filePath Location of save file
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-
     }
 
+    /**
+     * Tries to load save file.
+     *
+     * @return string message signifying success or failure
+     */
     public String setUp() {
         try {
             tasks = new TaskList(storage.load());
@@ -33,10 +42,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns welcome message.
+     *
+     * @return Welcome string
+     */
     public String welcome() {
         return ui.showWelcome();
     }
 
+    /**
+     * Runs input through parser and execute command.
+     *
+     * @return result of executing input
+     */
     public String getResponse(String input) {
         String response = "";
         try {

@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 
 public class Storage {
     private String filePath;
-    private String TODO = "[T]";
-    private String DEADLINE = "[D]";
-    private String EVENT = "[E]";
-    private String COMPLETE = "[O]";
-    private String INCOMPLETE = "[X]";
+    static String TODO = "[T]";
+    static String DEADLINE = "[D]";
+    static String EVENT = "[E]";
+    static String COMPLETE = "[O]";
+    static String INCOMPLETE = "[X]";
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param s location of file
      */
@@ -25,7 +25,7 @@ public class Storage {
     }
 
     /**
-     * Loads tasks to task list
+     * Loads tasks to task list.
      *
      * @return LinkedList containing tasks
      * @throws DukeException if file does not exist
@@ -41,23 +41,32 @@ public class Storage {
                     .collect(Collectors.toList());
             for (String s : temp) {
                 Task curr = null;
-                String cmd = s.substring(3,6);
-                String description = s.substring(9);
-                String status = s.substring(6,9);
-                if (cmd.equals(TODO)) {
-                    curr = new Todo(description);
-                } else if (cmd.equals(DEADLINE)) {
-                    curr = new Deadline(description);
-                } else if (cmd.equals(EVENT)) {
-                    curr = new Event(description);
+                String[] strArray = s.split(". ", 2);
+                if (strArray.length != 2) {
+                    throw new DukeException("Invalid data entries in save file!");
                 } else {
-                    throw new DukeException("Please make sure all the entries in your file starts with the correct prefix!");
+                    String cmd = strArray[1].substring(0, 3);
+                    String description = strArray[1].substring(6);
+                    String status = strArray[1].substring(3, 6);
+                    if (cmd.equals(TODO)) {
+                        curr = new Todo(description);
+                    } else if (cmd.equals(DEADLINE)) {
+                        curr = new Deadline(description);
+                    } else if (cmd.equals(EVENT)) {
+                        curr = new Event(description);
+                    } else {
+                        throw new DukeException("Please make sure all the entries in your file "
+                                + "starts with the correct prefix!");
+                    }
+
+                    if (status.equals(COMPLETE)) {
+                        curr.setDone();
+                    } else if (!status.equals(INCOMPLETE)) {
+                        throw new DukeException("Please make sure all the entries in your file "
+                                + "starts with the correct prefix!");
+                    }
                 }
-                if (status.equals(COMPLETE)) {
-                    curr.setDone();
-                } else if (!status.equals(INCOMPLETE)) {
-                    throw new DukeException("Please make sure all the entries in your file starts with the correct prefix!");
-                }
+
                 result.add(curr);
             }
         } catch (IOException e) {
@@ -67,7 +76,7 @@ public class Storage {
     }
 
     /**
-     * Updates Save file with any changes
+     * Updates Save file with any changes.
      *
      * @param tasks Class dealing with manipulating global LinkedList storing tasks
      * @throws DukeException if save file fails

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 
 public class ParserTest {
+
     @Test
     public void dateInputTest1() {
         Assertions.assertThrows(DukeException.class, () -> {
@@ -39,13 +40,6 @@ public class ParserTest {
             Parser.parse("event return book /at when the cow jumps over the moon");
         });
     }
-    @Test
-    public void outtest() {
-        System.out.println("\u2713");
-        System.out.println("\u2718");
-        System.out.println("☹ OOPS!!!");
-    }
-
 
 
 }

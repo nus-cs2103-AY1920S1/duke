@@ -2,7 +2,7 @@ public class DoneCommand extends Command {
     int id;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param i Index of task to be done
      */
@@ -11,7 +11,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Marks task in Tasklist as complete and displays confirmation
+     * Marks task in Tasklist as complete and displays confirmation.
      *
      * @param tasks Class dealing with manipulating global LinkedList storing tasks
      * @param ui User Interface

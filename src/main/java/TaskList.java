@@ -4,14 +4,14 @@ public class TaskList {
     LinkedList<Task> tasks;
 
     /**
-     * Constructor for case with no existing save file
+     * Constructor for case with no existing save file.
      */
     public TaskList() {
         this.tasks = new LinkedList<Task>();
     }
 
     /**
-     * Constructor for case with existing save file
+     * Constructor for case with existing save file.
      *
      * @param lst LinkedList storing existing tasks
      */
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * returns task at given id in linkedlist
+     * Returns task at given id in linkedlist.
      *
      * @param id index in linkedlist
      * @return task
@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Gets all tasks
+     * Gets all tasks.
      *
      * @return linkedlist containing all tasks
      */
@@ -43,7 +43,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task
+     * Deletes task.
      *
      * @param i index in linkedlist
      * @throws DukeException if index out of bounds
@@ -57,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * Mark task at index as complete
+     * Marks task at index as complete.
      *
      * @param i index in linkedlist
      * @throws DukeException if index out of bounds
@@ -71,7 +71,7 @@ public class TaskList {
     }
 
     /**
-     * Adds task to linkedlist
+     * Adds task to linkedlist.
      *
      * @param t task to be added
      */
@@ -80,7 +80,7 @@ public class TaskList {
     }
 
     /**
-     * returns total number of tasks
+     * Returns total number of tasks.
      *
      * @return size of linkedlist
      */
@@ -88,6 +88,11 @@ public class TaskList {
         return this.tasks.size();
     }
 
+    /**
+     * Returns a list of tasks which contains the keyword.
+     *
+     * @return list of tasks
+     */
     public LinkedList<Task> findTasks(String keywords) {
         LinkedList<Task> results = new LinkedList<>();
         for (Task t : this.tasks) {
@@ -98,6 +103,11 @@ public class TaskList {
         return results;
     }
 
+    /**
+     * Checks all tasks in the Tasklist to see if t is a duplicate.
+     *
+     * @return true if task already exist
+     */
     public boolean isDuplicate(Task t) {
         for (Task task : tasks) {
             if (task.equals(t)) {

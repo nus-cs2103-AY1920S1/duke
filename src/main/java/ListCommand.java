@@ -1,13 +1,13 @@
 public class ListCommand extends Command {
     /**
-     * Constructor
+     * Constructor.
      */
     public ListCommand() {
         super();
     }
 
     /**
-     * Display all tasks
+     * Display all tasks.
      *
      * @param tasks Class dealing with manipulating global LinkedList storing tasks
      * @param ui User Interface

@@ -1,9 +1,10 @@
 public class Deadline extends Task {
-    private String DEADLINE_CMD = "deadline";
-    private String DEADLINE_PREFIX = "[D]";
-    private String DEADLINE_DATE_PREFIX = "(by: ";
+    private static String DEADLINE_CMD = "deadline";
+    private static String DEADLINE_PREFIX = "[D]";
+    private static String DEADLINE_DATE_PREFIX = "(by: ";
+
     /**
-     * Constructor
+     * Constructor.
      *
      * @param s Input String specifying task
      */
@@ -12,7 +13,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * returns Task as formatted String
+     * Returns Task as formatted String.
      *
      * @return formatted String
      */

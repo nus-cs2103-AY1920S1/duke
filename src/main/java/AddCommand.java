@@ -2,7 +2,7 @@ public class AddCommand extends Command {
     Task task;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param t Task to be added
      */
@@ -11,7 +11,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds task to TaskList and displays confirmation
+     * Adds task to TaskList and displays confirmation.
      *
      * @param tasks Class dealing with manipulating global LinkedList storing tasks
      * @param ui User Interface

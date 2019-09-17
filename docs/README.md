@@ -5,7 +5,7 @@ Table of Contents
 -   [1. Introduction](#1-introduction)
 -   [2. Quick Start](#2-quick-start)
 -   [3. Features](#3-features)
-    -   [3.1 Adding a task: `add`](#31-adding-a-task)
+    -   [3.1 Adding a task:](#31-adding-a-task)
     -   [3.2 List all tasks: `list`](#32-list-all-tasks)
     -   [3.3 Set a task as done: `done`](#33-set-as-done)
     -   [3.4 Delete a task: `delete`](#34-delete-a-task)
@@ -14,7 +14,7 @@ Table of Contents
 
 ## 1. Introduction
 
-Duke is a Personal Assistant Chatbot that helps a those who prefer to use a desktop app for managing tasks. More important, Duke is optimised for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Duke can get your task management done faster than traditional GUI apps.
+Duke is a Personal Assistant Chatbot that helps a those who prefer to use a desktop app for managing tasks. More important, Duke is optimised for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Duke can get your task management done faster than traditional GUI apps if you are a fast typer.
 
 ## 2. Quick Start
 

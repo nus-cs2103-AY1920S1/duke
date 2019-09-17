@@ -9,7 +9,7 @@ something the user wants to do, an event to attend, or a deadline to meet.
 ## 2 Quick Start
 To launch the Duke application, follow these steps:
 1. Ensure you have Java version 11 or later installed on your computer.
-1. Download the latest version of Duke [here](https://github.com/zhangxuan97/duke/releases).
+1. Download the latest version of Duke [here](https://github.com/zhangxuan97/duke/releases/tag/A-Release).
 1. To run the application:
     * For Mac OS users: Navigate to the folder which contains the jar file (latest `v0.2.jar`) 
     in terminal and enter the command `java -jar v0.2.jar`.

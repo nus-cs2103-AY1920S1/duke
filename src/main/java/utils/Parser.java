@@ -31,55 +31,68 @@ public class Parser {
             String[] splited = str.split(" ");
             String check = splited[0].toLowerCase();
             
-            if (check.equals("bye")) {
-                output = ui.bye();
-                storage.saveFile(tasks);
-                System.exit(0);
+            switch (check) {
+                case "bye" :
+                    output = ui.bye();
+                    storage.saveFile(tasks);
+                    System.exit(0);
+                    break;
 
-            } else if (check.equals("list")) {
-                output = ui.print(tasks.toString());
-            
-            } else if (check.equals("done")) {
-                int taskNum = Integer.parseInt(splited[1]) - 1;
-                tasks.markAsDone(taskNum);
-
-            } else if (check.equals("delete")) {
-                int taskNum = Integer.parseInt(splited[1]) - 1;
-                output = tasks.delete(taskNum);
-
-            } else if (check.equals("todo")) {
-                String description = str.replaceFirst("todo", "").trim();
+                case "list": 
+                    output = ui.print(tasks.toString());
+                    break;
                 
-                if (description.equals("")) { //error handling
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                
-                } else { //successful addition 
-                    tasks.addTodo(description);
-                    Task current = tasks.get(tasks.size() - 1);
-                    output = ui.printMsg(current, tasks.size());
+                case "done":
+                    int taskNum = Integer.parseInt(splited[1]) - 1;
+                    tasks.markAsDone(taskNum);
+                    break;
 
-                }
-            } else if (check.equals("event")) {
-                String [] splitDate = str.replaceFirst("event", "").split("/at");
-                if (splitDate.length < 2) {
-                    throw new DukeException("☹ OOPS!!! Events require both a description and a date /at");
-                } else {
-                    //if it reaches here it is successful
-                    output = tasks.addEvent(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
-                }
-            } else if (check.equals("deadline")) {
-                String [] splitDate = str.replaceFirst("deadline", "").split("/by");
-                if (splitDate.length < 2) {
-                    throw new DukeException("☹ OOPS!!! Deadlines require both a description and a date by");
-                } else {
-                    output = tasks.addDeadline(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
-                }
-            } else if (check.equals("find")) {
-                String keyword = str.replaceFirst("find", "").trim();
-                output = tasks.find(keyword);
-            
-            } else { //error handling
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                case "delete":
+                    int taskNum2 = Integer.parseInt(splited[1]) - 1;
+                    output = tasks.delete(taskNum2);
+                    break;
+
+                case "todo":
+                    String description = str.replaceFirst("todo", "").trim();
+                    
+                    if (description.equals("")) { //error handling
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    
+                    } else { //successful addition 
+                        tasks.addTodo(description);
+                        Task current = tasks.get(tasks.size() - 1);
+                        output = ui.printMsg(current, tasks.size());
+
+                    }
+                    break;
+
+                case "event":
+                    String [] splitDate = str.replaceFirst("event", "").split("/at");
+                    if (splitDate.length < 2) {
+                        throw new DukeException("☹ OOPS!!! Events require both a description and a date /at");
+                    } else {
+                        //if it reaches here it is successful
+                        output = tasks.addEvent(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
+                    }
+                    break;
+
+                case "deadline":
+                    String [] splitDate = str.replaceFirst("deadline", "").split("/by");
+                    if (splitDate.length < 2) {
+                        throw new DukeException("☹ OOPS!!! Deadlines require both a description and a date by");
+                    } else {
+                        output = tasks.addDeadline(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
+                    }
+                    break;
+
+                case "find":
+                    String keyword = str.replaceFirst("find", "").trim();
+                    output = tasks.find(keyword);
+                    break;
+
+                default: //error handling
+                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                
             }
     
         } catch (ArrayIndexOutOfBoundsException e) {

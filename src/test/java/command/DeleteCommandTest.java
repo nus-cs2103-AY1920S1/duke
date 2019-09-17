@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DeleteCommandTest {
 
     @Test
-    public void testDelete() {
+    public void testDelete_succesfullyDelete() {
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("todo borrow book"));
         DeleteCommand deleteCommand = new DeleteCommand("delete 1");
@@ -22,7 +22,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void testDeleteEmpty() {
+    public void testDelete_EmptyEntry_returnEmptyMessage() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         TaskList taskList = new TaskList();
@@ -32,7 +32,7 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void testDeleteOutofbound() {
+    public void testDelete_Outofbound_outofboundMessage() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         TaskList taskList = new TaskList();

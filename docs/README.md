@@ -18,7 +18,7 @@ Example: `todo` `CS2103T Quiz`
 
 You should see that the task has been added to your list:
 
-![ToDo Image](https://github.com/bigjunnn/duke/blob/master/docs/ToDo.png)
+![ToDo Image](https://imgur.com/2f2VI2x)
 
 #### 2. Adding a 'Deadline' task
 
@@ -30,7 +30,7 @@ Example: `deadline` `iP` `[/by]` `[17/09/2019 1000]`
 
 You should see that the task has been added to your list:
 
-![Deadline Image](https://github.com/bigjunnn/duke/blob/master/docs/Deadline.png)
+![Deadline Image](https://imgur.com/A5Ja9WS)
 
 :warning: Date & Time must be entered in format dd/mm/yyyy HHmm
 
@@ -44,7 +44,7 @@ Example: `event` `concert` `[/at]` `[28/09/2019 2000]`
 
 You should see that the task has been added to your list:
 
-![Event Image](https://github.com/bigjunnn/duke/blob/master/docs/Event.png)
+![Event Image](https://imgur.com/vfYzrup)
 
 :warning: Date & Time must be entered in format dd/mm/yyyy HHmm
 
@@ -58,7 +58,7 @@ Example: `list`
 
 You should now see a list of your tasks:
 
-![List Image](https://github.com/bigjunnn/duke/blob/master/docs/List.png)
+![List Image](https://imgur.com/3wgh0sh)
 
 #### 5. Finding tasks
 
@@ -70,7 +70,7 @@ Example: `find` `concert`
 
 You should then see a list of tasks which contains the word "concert":
 
-![Find Image](https://github.com/bigjunnn/duke/blob/master/docs/Find.png)
+![Find Image](https://imgur.com/0GSMPtU)
 
 #### 6. Mark as done
 
@@ -82,7 +82,7 @@ Example: `done` `2`
 
 This will set task number 2 in the list as done and you should see something like this: 
 
-![Done Image](https://github.com/bigjunnn/duke/blob/master/docs/Done.png)
+![Done Image](https://imgur.com/KMDVrQa)
 
 #### 6. Delete tasks
 
@@ -94,7 +94,7 @@ Example: `delete` `2`
 
 This will remove task number 2 in the list and you should see something like this:
 
-![Delete Image](https://github.com/bigjunnn/duke/blob/master/docs/Delete.png)
+![Delete Image](https://imgur.com/mqKjZ9w)
 
 #### 7. In-App Help
 
@@ -106,7 +106,7 @@ Example: `help`
 
 You should now be able to view the available commands for the app:
 
-![Help Image](https://github.com/bigjunnn/duke/blob/master/docs/Help.png)
+![Help Image](https://imgur.com/rSZAAeI)
 
 
 

@@ -44,8 +44,12 @@ public class TaskList implements Serializable {
      *
      * @param index task to be deleted.
      */
-    public void deleteTask(int index) {
-        this.tasks.remove(index);
+    public void deleteTask(int index) throws DukeException {
+        try {
+            this.tasks.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! Please input a valid number.");
+        }
     }
 
     /**

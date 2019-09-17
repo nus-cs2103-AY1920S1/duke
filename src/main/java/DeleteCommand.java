@@ -28,18 +28,16 @@ public class DeleteCommand extends Command {
         }
         int num = Integer.parseInt(inputArr[1]);
         //invalid num, will index out of bounds
-        if (num > tasks.getSize()) {
-            throw new DukeException("☹ OOPS!!! Please input a valid number.");
-        } else {
-            tasks.deleteTask(num - 1);
-            ui.setResponse("Noted. I've removed this task:\n"
-                    +
-                    "     " + tasks.getTask(num - 1) + "\n"
-                    +
-                    "     Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
-            storage.save(tasks);
+        Task task = tasks.getTask(num - 1);
+        tasks.deleteTask(num - 1);
+        ui.setResponse("Noted. I've removed this task:\n"
+                +
+                "     " + task + "\n"
+                +
+                "     Now you have " + (tasks.getSize()) + " tasks in the list.");
+        storage.save(tasks);
 
-        }
     }
 }
+
 

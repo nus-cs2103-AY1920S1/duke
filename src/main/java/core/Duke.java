@@ -8,6 +8,8 @@ import task.TaskList;
 import ui.Cli;
 import ui.Ui;
 
+import java.io.File;
+
 /**
  * Duke Chat Class.
  *
@@ -20,6 +22,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    public static final String filePath = System.getProperty("user.dir") + "/data/duke.txt";
 
     /**
      * Duke Constructor, defaults to CLI mode.
@@ -79,7 +82,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(System.getProperty("user.dir") + "/data/duke.txt", new Cli()).run();
+        new Duke(Duke.filePath, new Cli()).run();
     }
 
     /**

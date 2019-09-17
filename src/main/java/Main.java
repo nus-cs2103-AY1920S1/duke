@@ -14,9 +14,6 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
-    public Main() throws FileNotFoundException {
-    }
-
     @Override
     public void start(Stage stage) {
         try {
@@ -26,6 +23,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            duke.DukeStart();
         } catch (IOException e) {
             e.printStackTrace();
         }

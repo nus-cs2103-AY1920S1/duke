@@ -26,7 +26,7 @@ public class Storage {
      * @return taskList
      */
 
-    static ArrayList<Task> load() throws FileNotFoundException {
+    static ArrayList<Task> load() {
 
         ArrayList<Task> taskList = new ArrayList<>();
         try {

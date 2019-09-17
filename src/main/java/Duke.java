@@ -15,7 +15,7 @@ public class Duke {
      * Initializes the Duke application and the storage file.
      */
 
-    Duke() throws FileNotFoundException {
+    public void DukeStart() {
         ui = new Ui();
         Storage storage = new Storage("../duke.txt");
         taskList = new TaskList(Storage.load());

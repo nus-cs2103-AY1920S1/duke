@@ -1,9 +1,9 @@
-# User Guide
+# duke by Lawnce
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Feature 1 - Add ToDo
+Adds any todos to the list 
 
 ## Usage
 

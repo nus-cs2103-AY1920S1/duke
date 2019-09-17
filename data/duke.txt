@@ -1,3 +1,2 @@
-[T][X] Brush my Teeth
 [D][X] Computer Graphics Assignment (by: 01 of October 2019, 11:59 PM)
-[E][X] Magic Show (at: 16 of September 2019, 12:00 PM)
+[T][X] poop

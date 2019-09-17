@@ -11,7 +11,7 @@ import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.exception.EmptyToDoDescriptionException;
 import duke.exception.UnknownCommandException;
-import duke.exception.WrongEventFormatException;
+import duke.exception.WrongTaskFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -52,7 +52,7 @@ public class Parser {
         return new DoneCommand(taskNumber);
     }
 
-    private static Command createEventTask(String command) throws WrongEventFormatException {
+    private static Command createEventTask(String command) throws WrongTaskFormatException {
         try {
             Task userTask;
             String task = command.replaceFirst("event ", "");
@@ -60,12 +60,12 @@ public class Parser {
             userTask = new Event(taskInformation[0], taskInformation[1]);
             return new AddCommand(userTask);
         } catch (IndexOutOfBoundsException ex) {
-            throw new WrongEventFormatException("To create a task, you should follow this format: "
+            throw new WrongTaskFormatException("To create a task, you should follow this format: "
                     + "event <description> /at DD/MM/YYYY HHMM");
         }
     }
 
-    private static Command createDeadlineTask(String command) throws WrongEventFormatException {
+    private static Command createDeadlineTask(String command) throws WrongTaskFormatException {
         try {
             Task userTask;
             String task = command.replaceFirst("deadline ", "");
@@ -73,13 +73,13 @@ public class Parser {
             userTask = new Deadline(taskInformation[0], taskInformation[1]);
             return new AddCommand(userTask);
         } catch (IndexOutOfBoundsException ex) {
-            throw new WrongEventFormatException("To create a Deadline, you should follow this format:"
+            throw new WrongTaskFormatException("To create a Deadline, you should follow this format:\n"
                     + "deadline <description> /by DD/MM/YYYY HHMM");
         }
 
     }
 
-    private static Command createUpdateCommand(String command) {
+    private static Command createUpdateCommand(String command) throws WrongTaskFormatException {
         String task = command.replaceFirst("update ", "");
         return new UpdateCommand(task);
     }

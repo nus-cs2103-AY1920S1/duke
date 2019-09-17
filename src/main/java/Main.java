@@ -22,6 +22,7 @@ public class Main extends Application {
             fxmlLoader.setRoot(mainWindow);
             mainWindow = fxmlLoader.load();
             Scene scene = new Scene(mainWindow);
+            stage.setTitle("Duke");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

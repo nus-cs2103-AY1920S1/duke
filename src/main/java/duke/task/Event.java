@@ -1,7 +1,8 @@
 package duke.task;
 
+import duke.storage.Storage;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents an Event task.
@@ -17,7 +18,8 @@ public class Event extends Task {
      */
     public Event(String desc, String when) {
         super(desc);
-        this.when = convertStringToDateTime(when);
+        new Storage();
+        this.when = Storage.convertStringToDateTime(when);
     }
 
     /**
@@ -28,7 +30,7 @@ public class Event extends Task {
      */
     public Event(String desc, boolean isDone, String when) {
         super(desc, isDone);
-        this.when = convertStringToDateTime(when);
+        this.when = Storage.convertStringToDateTime(when);
     }
 
     public LocalDateTime getWhen() {
@@ -36,27 +38,12 @@ public class Event extends Task {
     }
 
     public void setWhen(String when) {
-        this.when = convertStringToDateTime(when);
-    }
-
-    /**
-     * Converts the specified string to a LocalDateTime object.
-     * @param when The specified event date and time to be converted.
-     * @return The LocalDateTime of the specified event date and time.
-     */
-    private LocalDateTime convertStringToDateTime(String when) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
-        return LocalDateTime.parse(when, formatter);
+        this.when = Storage.convertStringToDateTime(when);
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy Hmm");
-        return String.format(
-                "[%s][%s] %s (at: %s)",
-                "E",
-                super.getDoneSymbol(),
-                this.desc,
-                this.when.format(formatter));
+        String when = Storage.convertDateTimeToString(this.when);
+        return String.format("[%s][%s] %s (at: %s)", "E", super.getDoneSymbol(), this.desc, when);
     }
 }

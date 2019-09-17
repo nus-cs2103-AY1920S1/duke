@@ -55,10 +55,10 @@ public class Ui {
      *     current number of tasks in the list.
      */
     public String getAddTaskResponse(Task task) {
-        String output = "\tokie! i added this task:\n";
-        output += "\t" + task.toString() + "\n";
+        String output = "okie! i added this task:\n";
+        output += "" + task.toString() + "\n";
         int size = (new TaskList()).getSize();
-        output += String.format("\tnow u haf %d tasks in the list", size);
+        output += String.format("now u haf %d tasks in the list", size);
         return output;
     }
 
@@ -68,7 +68,7 @@ public class Ui {
      * @return the response that Duke gives to inform the user that the specified task is marked as done.
      */
     public String getDoneTaskResponse(Task task) {
-        return "\tnaisu! i marked this task as done:\n\t" + task.toString();
+        return "naisu! i marked this task as done:\n" + task.toString();
     }
 
     /**
@@ -78,10 +78,10 @@ public class Ui {
      *     deleted.
      */
     public String getDeleteTaskResponse(Task task) {
-        String output = "\tokie! i remove this task:\n";
-        output += "\t\t" + task.toString() + "\n";
+        String output = "okie! i remove this task:\n";
+        output += "" + task.toString() + "\n";
         int size = (new TaskList()).getSize();
-        output += String.format("\tnow u haf %d tasks in the list", size);
+        output += String.format("now u haf %d tasks in the list", size);
         return output;
     }
 
@@ -97,7 +97,7 @@ public class Ui {
 
         StringBuilder output = new StringBuilder("here ya go, the matchy-matchy tasks in ur list:\n");
         for (int i = 0; i < matchingTasks.size(); i++) {
-            output.append(String.format("\t%d. %s", i + 1, matchingTasks.get(i)));
+            output.append(String.format("%d. %s\n", i + 1, matchingTasks.get(i)));
         }
         return output.toString();
     }
@@ -112,9 +112,9 @@ public class Ui {
             return "u haf no tasks in ur list!!1!";
         }
 
-        StringBuilder output = new StringBuilder("\there ya go, the tasks in ur list:\n");
+        StringBuilder output = new StringBuilder("here ya go, the tasks in ur list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            output.append(String.format("\t%d. %s\n", i + 1, tasks.get(i)));
+            output.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
         }
         return output.toString();
     }

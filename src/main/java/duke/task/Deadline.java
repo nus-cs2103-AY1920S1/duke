@@ -3,7 +3,6 @@ package duke.task;
 import duke.storage.Storage;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Deadline task.
@@ -46,13 +45,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-        return String.format(
-                "[%s][%s] %s (by: %s)",
-                "D",
-                super.getDoneSymbol(),
-                this.desc,
-                this.dueBy.format(formatter));
+        String dueBy = Storage.convertDateTimeToString(this.dueBy);
+        return String.format("[%s][%s] %s (by: %s)", "D", super.getDoneSymbol(), this.desc, dueBy);
     }
 
 }

@@ -32,7 +32,7 @@ public class Storage {
      * An empty constructor that creates a Storage object.
      */
     public Storage() {
-        formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     }
 
     /**
@@ -41,7 +41,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         Storage.filePath = filePath;
-        formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+        formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     }
 
     /**

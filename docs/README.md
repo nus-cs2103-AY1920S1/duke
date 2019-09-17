@@ -36,7 +36,7 @@ An Event is a task that starts at a specific time.
 
 You can use this command to add an Event to your task list.
 
-Command format: `event <event description> <event date/time>`
+Command format: `event <event description> /at <event date/time>`
 
 Bear understands and automatically converts dates and times in the format `DD/MM/YYYY HHMM`.
 

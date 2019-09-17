@@ -230,7 +230,7 @@ Note that the file follows the following format:
  * Each variables are separated by  `|`.
  * The first letter represents the type of task. 
     Letter | Task
-    ----| ----
+    ---- | ----
     T | todo
     D | deadline
     E | event

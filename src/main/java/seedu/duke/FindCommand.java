@@ -33,10 +33,11 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
         String output = ui.printMatchingMsg();
+        ArrayList<Task> matchingList = new ArrayList<>();
         for (Object keyword: findList) {
-            ArrayList<Task> matchingList = list.findMatching((String) keyword);
-            output += ui.printMatchingList(matchingList);
+            matchingList.addAll(list.findMatching((String) keyword));
         }
+        output += ui.printMatchingList(matchingList);
         return output;
     }
 

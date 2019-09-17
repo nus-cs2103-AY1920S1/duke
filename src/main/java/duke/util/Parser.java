@@ -162,7 +162,7 @@ public class Parser {
      *
      * @param intString Input string representing a task number.
      * @return a task number corresponding to the input string.
-     * @throws DukeException if the task number or format is invalid.
+     * @throws DukeException if the task number format is invalid.
      */
     private static int parseTaskNumber(String intString) throws DukeException {
         int result;
@@ -170,8 +170,6 @@ public class Parser {
             result = Integer.parseInt(intString);
         } catch (NumberFormatException e) {
             throw new DukeException("Task number format invalid!");
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Task number invalid!");
         }
         return result;
     }

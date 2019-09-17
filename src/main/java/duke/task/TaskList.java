@@ -61,16 +61,20 @@ public class TaskList implements Iterable<Task> {
      *
      * @param index Index of task to be marked as done.
      * @return message to be printed.
-     * @throws DukeException if encountered IO exceptions while updating disk storage.
+     * @throws DukeException if task index is invalid or encountered IO exceptions while updating disk storage.
      */
     public String[] doTask(int index) throws DukeException {
-        Task task = taskList.get(index - 1);
-        task.markAsDone();
-        this.updateDatabase();
-        return new String[] {
-            "Nice! I've marked this task as done:",
-            task.toString()
-        };
+        try {
+            Task task = taskList.get(index - 1);
+            task.markAsDone();
+            this.updateDatabase();
+            return new String[] {
+                "Nice! I've marked this task as done:",
+                task.toString()
+            };
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number invalid!");
+        }
     }
 
     /**
@@ -78,18 +82,22 @@ public class TaskList implements Iterable<Task> {
      *
      * @param index Index of task to be deleted.
      * @return message to be printed.
-     * @throws DukeException if encountered IO exceptions while updating disk storage.
+     * @throws DukeException if task index is invalid or encountered IO exceptions while updating disk storage.
      */
     public String[] deleteTask(int index) throws DukeException {
-        Task task = taskList.remove(index - 1);
-        this.updateDatabase();
-        return new String[] {
-            "Noted! I've removed this task:",
-            task.toString(),
-            taskList.size() == 1
-                ? "Now you have 1 task in the list!"
-                : "Now you have " + taskList.size() + " tasks in the list!"
-        };
+        try {
+            Task task = taskList.remove(index - 1);
+            this.updateDatabase();
+            return new String[]{
+                "Noted! I've removed this task:",
+                task.toString(),
+                taskList.size() == 1
+                    ? "Now you have 1 task in the list!"
+                    : "Now you have " + taskList.size() + " tasks in the list!"
+            };
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number invalid!");
+        }
     }
 
     /**
@@ -98,16 +106,20 @@ public class TaskList implements Iterable<Task> {
      * @param index Index of task to be marked as done.
      * @param tag Tag to be added to the task.
      * @return message to be printed.
-     * @throws DukeException if encountered IO exceptions while updating disk storage.
+     * @throws DukeException if task index is invalid or encountered IO exceptions while updating disk storage.
      */
     public String[] tagTask(int index, String tag) throws DukeException {
-        Task task = taskList.get(index - 1);
-        task.addTag(tag);
-        this.updateDatabase();
-        return new String[] {
-            "Tag " + tag + " added to this task:",
-            task.toString()
-        };
+        try {
+            Task task = taskList.get(index - 1);
+            task.addTag(tag);
+            this.updateDatabase();
+            return new String[] {
+                "Tag " + tag + " added to this task:",
+                task.toString()
+            };
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Task number invalid!");
+        }
     }
 
     /**

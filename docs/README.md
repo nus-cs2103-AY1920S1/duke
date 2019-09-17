@@ -73,7 +73,7 @@ a task with.
 
 `DATE` refers to the date of the task.
 
-![alt text](https://github.com/C-likethis123/duke/tree/master/docs/TaskList.png "Task List")
+![alt text](https://github.com/C-likethis123/duke/blob/master/docs/TaskList.png?raw=true "Task List")
 **Referring to the above screenshot:**
 
 1. To update task 8, a ToDo task, type `update 8 read 2103T example user guide`.

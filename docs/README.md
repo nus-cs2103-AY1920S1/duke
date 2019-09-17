@@ -44,7 +44,7 @@ Command: `todo <description>`
 Expected outcome:
 
 `Creates a new todo task with the given description`
-
+---
 ### `deadline` - Adds a new Deadline task
 
 Adds a new task with a deadline to be met.
@@ -56,7 +56,7 @@ Command: `deadline <description> /by <ddmmyyyy HHHH>`
 Expected outcome:
 
 `Creates a new deadline task based on the specified description and deadline`
-
+---
 ### `event` - Adds a new Event task
 
 Adds a new event and when it will happen.
@@ -68,7 +68,7 @@ Command: `event <description> /at <ddmmyyyy HHHH>`
 Expected outcome:
 
 `Creates a new event task based on the specified description and date`
-
+---
 ### `delete` - Deletes a task
 
 Deletes a task given its index.
@@ -80,7 +80,7 @@ Command: `delete <index>`
 Expected outcome:
 
 `Deletes the task at the specified index`
-
+---
 ### `done` - Marks a task as done
 
 Marks a task as done given its index.
@@ -92,7 +92,7 @@ Command: `done <index>`
 Expected outcome:
 
 `Marks the specified task as done`
-
+---
 ### `list` - List all tasks
 
 List all tasks added into the task list.
@@ -104,7 +104,7 @@ Command: `list`
 Expected outcome:
 
 `A list view of all tasks`
-
+---
 ### `find` - Finds tasks containing keywords
 
 Lists and finds all tasks with matching keywords.
@@ -116,7 +116,7 @@ Command: `find <keyword(s)>`
 Expected outcome:
 
 `A list view of all tasks matching the keyword(s)`
-
+---
 ### `alias` - Associates command to alias
 
 Create a new alias for an existing command.
@@ -128,7 +128,7 @@ Command: `alias <existing command> <alias>`
 Expected outcome:
 
 `The alias serves the same function as the command it is associated to`
-
+---
 ### `bye` - Exit Duke
 
 Saves the aliases and task list.

@@ -73,6 +73,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Show Hi Msg in app window.
+     */
     public void setHiMsg() {
         dialogContainer.getChildren().add(
                 new RightDialogBox(duke.getUi().hiMsg, dukeImage)

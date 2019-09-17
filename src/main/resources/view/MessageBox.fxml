@@ -7,11 +7,10 @@
 
 <fx:root type="HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <effect>
-        <DropShadow blurType="GAUSSIAN" color="#00000033" height="20.0" offsetX="5.0" offsetY="5.0" radius="20"
-                    width="20.0"/>
+        <DropShadow blurType="GAUSSIAN" color="#00000033" height="20.0" offsetX="5.0" offsetY="5.0" radius="20" width="20.0" />
     </effect>
     <VBox>
-        <TextFlow fx:id="title"/>
-        <TextFlow fx:id="body"/>
+        <TextFlow fx:id="title" />
+        <TextFlow fx:id="body" lineSpacing="4.0" />
     </VBox>
 </fx:root>

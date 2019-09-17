@@ -4,6 +4,7 @@ import java.io.Serializable;
 import weomucat.duke.date.Date;
 import weomucat.duke.exception.DukeRuntimeException;
 import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageContent;
 
 /**
  * A Task is something the user has to do. By default, a Task is not done.
@@ -30,6 +31,26 @@ public abstract class Task implements Comparable<Date>, Serializable {
   }
 
   /**
+   * Gets the Message representation of this Task.
+   *
+   * @return the message
+   */
+  public Message toMessage() {
+    MessageContent content = new MessageContent()
+        .addText(this.description)
+        .addTag(this.getTaskName());
+
+    if (this.done) {
+      content.addTag("Done");
+    } else if (this.isOverDue()) {
+      content.addTag("Overdue");
+    }
+
+    return new Message().setTitle(
+        content.insertBetween(MessageContent.whitespace(1)));
+  }
+
+  /**
    * Returns the description of this Task.
    *
    * @return description of this Task
@@ -51,13 +72,7 @@ public abstract class Task implements Comparable<Date>, Serializable {
     this.done = done;
   }
 
-  public abstract Message toMessage();
-
   abstract boolean isOverDue();
 
-  @Override
-  public String toString() {
-    String doneIcon = this.done ? "[✓]" : "[✘]";
-    return String.format("%s %s", doneIcon, this.description);
-  }
+  abstract String getTaskName();
 }

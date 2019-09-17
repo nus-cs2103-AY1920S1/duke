@@ -11,7 +11,9 @@ import weomucat.duke.task.Task;
 import weomucat.duke.ui.Ui;
 import weomucat.duke.ui.listener.UserInputListener;
 import weomucat.duke.ui.message.Message;
-import weomucat.duke.ui.message.MessageText;
+import weomucat.duke.ui.message.MessageContent;
+import weomucat.duke.ui.message.element.MessageElement;
+import weomucat.duke.ui.message.element.MessageText;
 
 /**
  * Represents a Command Line User Interface of Duke.
@@ -78,16 +80,16 @@ public class CommandLineUi implements Ui {
 
     // Title
     System.out.println(DOUBLE_HORIZONTAL_LINE);
-    for (MessageText text : message.getTitle()) {
+    for (MessageElement text : message.getTitle().getElements()) {
       System.out.print(text.toCli());
     }
-    System.out.println();
-    if (message.getTitle().size() > 0) {
+    if (!message.getTitle().getElements().isEmpty()) {
+      System.out.println();
       System.out.println(SINGLE_HORIZONTAL_LINE);
     }
 
     // Body
-    for (MessageText text : message.getBody()) {
+    for (MessageElement text : message.getBody().getElements()) {
       System.out.print(text.toCli());
     }
     System.out.println();
@@ -99,9 +101,10 @@ public class CommandLineUi implements Ui {
     // TODO: ANSI Colors might not work on all terminals
     System.out.print("\033[38;2;255;0;0m");
     System.out.println(DOUBLE_HORIZONTAL_LINE);
-    for (MessageText text : message.getBody()) {
+    for (MessageElement text : message.getBody().getElements()) {
       System.out.print(text.toCli());
     }
+    System.out.println();
     System.out.println(DOUBLE_HORIZONTAL_LINE);
     System.out.print("\033[38;2;0;0;0m");
   }
@@ -120,8 +123,10 @@ public class CommandLineUi implements Ui {
 
       // Format task with no. in front
       Message m = task.toMessage();
-      String title = String.format("%d. %s", pair.key(), m.getTitle());
-      displayMessage(m.addTitle(title));
+      MessageContent title = new MessageContent()
+          .addText(String.format("%d. ", pair.key()), MessageText.Type.SECONDARY)
+          .add(m.getTitle());
+      displayMessage(m.setTitle(title));
     }
   }
 

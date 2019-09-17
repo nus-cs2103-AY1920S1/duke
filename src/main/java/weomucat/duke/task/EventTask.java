@@ -2,17 +2,22 @@ package weomucat.duke.task;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import weomucat.duke.date.Date;
 import weomucat.duke.date.DateRange;
 import weomucat.duke.date.Interval;
 import weomucat.duke.exception.InvalidIndexException;
 import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageContent;
+import weomucat.duke.ui.message.element.MessageText;
 
 /**
  * An event is a special task that has a date range.
  * It can also have tentative schedules (date ranges).
  */
 public class EventTask extends RecurringTask {
+
+  private static final String NAME = "Event";
 
   private DateRange at;
   private ArrayList<DateRange> atSlots;
@@ -69,31 +74,43 @@ public class EventTask extends RecurringTask {
 
   @Override
   public Message toMessage() {
-    ArrayList<String> result = new ArrayList<>();
+    List<MessageContent> contents = new ArrayList<>();
 
     if (this.at != null) {
-      result.add(String.format("===== AT =====\n%s", this.at));
+      contents.add(new MessageContent()
+          .addText("At: ", MessageText.Type.SECONDARY)
+          .addText(this.at.toString()));
     }
 
     if (this.every != null) {
-      result.add(String.format("===== RECURRENCE =====\n%s", this.every));
+      contents.add(new MessageContent()
+          .addText("Recurrence: ", MessageText.Type.SECONDARY)
+          .addText(this.every.toString()));
     }
 
     if (this.atSlots.size() > 1) {
-      ArrayList<String> slots = new ArrayList<>();
-      slots.add("===== TENTATIVE SCHEDULES =====");
+      MessageContent content = new MessageContent()
+          .addText("Tentative Schedules:", MessageText.Type.SECONDARY);
       for (int i = 0; i < this.atSlots.size(); i++) {
         DateRange range = this.atSlots.get(i);
 
         // Format date range with no. in front
-        slots.add(String.format("%d. %s", i + 1, range));
+        content.addText(String.format("%d. %s", i + 1, range));
       }
-      result.add(String.join("\n", slots));
+      contents.add(content.insertBetween(MessageContent.newLine(1)));
     }
 
-    return new Message()
-        .addTitle(this.toString())
-        .addBody(String.join("\n\n", result));
+    return super.toMessage()
+        .addBody(MessageContent.join(MessageContent.newLine(1), contents));
+  }
+
+  @Override
+  public int compareTo(Date date) {
+    if (this.at == null) {
+      return 0;
+    } else {
+      return this.at.getFrom().compareTo(date);
+    }
   }
 
   @Override
@@ -106,16 +123,7 @@ public class EventTask extends RecurringTask {
   }
 
   @Override
-  public String toString() {
-    return String.format("[E]%s", super.toString());
-  }
-
-  @Override
-  public int compareTo(Date date) {
-    if (this.at == null) {
-      return 0;
-    } else {
-      return this.at.getFrom().compareTo(date);
-    }
+  String getTaskName() {
+    return NAME;
   }
 }

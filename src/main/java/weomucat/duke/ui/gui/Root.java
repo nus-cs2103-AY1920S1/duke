@@ -7,6 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import weomucat.duke.exception.DukeException;
+import weomucat.duke.ui.gui.message.MessageBox;
+import weomucat.duke.ui.gui.message.UserMessage;
 import weomucat.duke.ui.listener.UserInputListener;
 
 /**

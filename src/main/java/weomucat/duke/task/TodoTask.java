@@ -1,12 +1,13 @@
 package weomucat.duke.task;
 
 import weomucat.duke.date.Date;
-import weomucat.duke.ui.message.Message;
 
 /**
  * Todo is a special task that must have a description.
  */
 public class TodoTask extends Task {
+
+  private static final String NAME = "Todo";
 
   /**
    * Creates a TodoTask.
@@ -18,9 +19,8 @@ public class TodoTask extends Task {
   }
 
   @Override
-  public Message toMessage() {
-    return new Message()
-        .addTitle(this.toString());
+  public int compareTo(Date date) {
+    return 0;
   }
 
   @Override
@@ -29,12 +29,7 @@ public class TodoTask extends Task {
   }
 
   @Override
-  public String toString() {
-    return String.format("[T]%s", super.toString());
-  }
-
-  @Override
-  public int compareTo(Date date) {
-    return 0;
+  String getTaskName() {
+    return NAME;
   }
 }

@@ -3,50 +3,54 @@ package weomucat.duke.ui.message;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * Represents a message to be displayed by a Ui.
  */
 public class Message {
-  private List<MessageText> title;
-  private List<MessageText> body;
+  private MessageContent title;
+  private List<MessageContent> body;
 
   public Message() {
-    this.title = new ArrayList<>();
+    this.title = new MessageContent();
     this.body = new ArrayList<>();
   }
 
-  public Message addTitle(String string) {
-    this.title.add(new MessageText(string));
-    return this;
-  }
-
-  public Message addTitle(MessageText text) {
-    this.title.add(text);
-    return this;
-  }
-
-  public List<MessageText> getTitle() {
+  public MessageContent getTitle() {
     return this.title;
   }
 
+  public Message setTitle(String title) {
+    this.title = new MessageContent().addText(title);
+    return this;
+  }
+
+  public Message setTitle(MessageContent title) {
+    this.title = title;
+    return this;
+  }
+
+  /**
+   * Append text to be displayed in a message body.
+   *
+   * @param body text(s) to append
+   * @return this instance
+   */
   public Message addBody(String... body) {
-    List<List<MessageText>> texts = Stream.of(body)
-        .map(MessageText::new)
-        .map(Arrays::asList)
-        .collect(Collectors.toList());
-    addBody(texts);
+    MessageContent[] texts = Stream.of(body)
+        .map(s -> new MessageContent().addText(s))
+        .toArray(MessageContent[]::new);
+    this.addBody(texts);
     return this;
   }
 
-  public Message addBody(List<List<MessageText>> body) {
-    this.body.addAll(MessageText.join(MessageText.newLine(1), body));
+  public Message addBody(MessageContent... body) {
+    this.body.addAll(Arrays.asList(body));
     return this;
   }
 
-  public List<MessageText> getBody() {
-    return this.body;
+  public MessageContent getBody() {
+    return MessageContent.join(MessageContent.newLine(1), this.body);
   }
 }

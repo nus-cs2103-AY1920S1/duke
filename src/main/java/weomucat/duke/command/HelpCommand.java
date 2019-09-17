@@ -12,7 +12,8 @@ import weomucat.duke.command.parameter.FlagParameter;
 import weomucat.duke.command.parameter.Parameter;
 import weomucat.duke.command.parameter.ParameterOptions;
 import weomucat.duke.ui.message.Message;
-import weomucat.duke.ui.message.MessageText;
+import weomucat.duke.ui.message.MessageContent;
+import weomucat.duke.ui.message.element.MessageText;
 
 public class HelpCommand extends Command<DisplayCommandListener> {
 
@@ -69,17 +70,16 @@ public class HelpCommand extends Command<DisplayCommandListener> {
     ArrayList<Message> messages = new ArrayList<>();
     messages.add(new Message().addBody("Listing all commands:"));
 
-    List<List<MessageText>> result = new ArrayList<>();
+    Message result = new Message();
     List<Command<?>> commands = UserCommands.getAll();
     commands.sort(Comparator.comparing(Command::getKeyword));
     for (Command<?> command : commands) {
-      List<MessageText> c = new ArrayList<>();
-      c.add(new MessageText(command.getKeyword()).setColor("#ffe082"));
-      c.add(new MessageText(" "));
-      c.add(new MessageText(command.getDescription()));
-      result.add(c);
+      result.addBody(new MessageContent()
+          .addText(command.getKeyword(), MessageText.Type.SECONDARY)
+          .addText(" - ")
+          .addText(command.getDescription()));
     }
-    messages.add(new Message().addBody(result));
+    messages.add(result);
 
     return messages;
   }
@@ -94,34 +94,41 @@ public class HelpCommand extends Command<DisplayCommandListener> {
 
     List<Message> messages = new ArrayList<>();
     messages.add(new Message().addBody(
-        String.format("Help page for '%s' command:", command.getKeyword())));
+        new MessageContent()
+            .addText("Help page for '")
+            .addText(command.getKeyword(), MessageText.Type.SECONDARY)
+            .addText("' command:")));
 
     // Add usage
-    ArrayList<String> usage = usage(command);
-    messages.add(new Message().addBody(String.join(" ", usage)).addTitle("Usage"));
+    List<MessageContent> usage = usage(command);
+    messages.add(new Message()
+        .setTitle("Usage")
+        .addBody(MessageContent.join(new MessageContent().addText(" "), usage)));
 
     // Add description
-    messages.add(new Message().addBody(command.getDescription()).addTitle("Description"));
+    messages.add(new Message()
+        .setTitle("Description")
+        .addBody(command.getDescription()));
 
     // Add parameter info
-    ArrayList<String> parameters = parameters(command);
+    Message parameters = parameters(command);
     if (parameters != null) {
-      messages.add(new Message().addBody(String.join("\n\n", parameters)).addTitle("Parameters"));
+      messages.add(parameters);
     }
 
     return messages;
   }
 
-  private ArrayList<String> usage(Command<?> command) {
-    ArrayList<String> result = new ArrayList<>();
-    result.add(command.getKeyword());
+  private List<MessageContent> usage(Command<?> command) {
+    List<MessageContent> result = new ArrayList<>();
+    result.add(new MessageContent().addText(command.getKeyword()));
 
     ParameterOptions parameterOptions = command.getParameterOptions();
     if (parameterOptions == null) {
       return result;
     }
 
-    ArrayList<Pair<String, Parameter>> parameters = new ArrayList<>();
+    List<Pair<String, Parameter>> parameters = new ArrayList<>();
     Parameter defaultParameter = parameterOptions.getDefaultParameter();
     if (defaultParameter != null) {
       parameters.add(new Pair<>(null, defaultParameter));
@@ -134,25 +141,29 @@ public class HelpCommand extends Command<DisplayCommandListener> {
       String keyword = pair.key();
       Parameter parameter = pair.value();
 
-      ArrayList<String> titleList = new ArrayList<>();
+      MessageContent content = new MessageContent();
       if (keyword != null) {
-        titleList.add(keyword);
+        content.addText(keyword);
       }
       if (parameter.name() != null) {
-        titleList.add(String.format("<%s>", parameter.name()));
+        content.addText(String.format("<%s>", parameter.name()), MessageText.Type.SECONDARY);
       }
-      String title = String.join(" ", titleList);
-      if (!parameter.isRequired()) {
-        title = String.format("[%s]", title);
+      content.insertBetween(new MessageContent().addText(" "));
+
+      if (parameter.isRequired()) {
+        result.add(content);
+      } else {
+        result.add(new MessageContent()
+            .addText("[")
+            .add(content)
+            .addText("]"));
       }
-      result.add(title);
     }
 
     return result;
   }
 
-  private ArrayList<String> parameters(Command<?> command) {
-
+  private Message parameters(Command<?> command) {
     ParameterOptions parameterOptions = command.getParameterOptions();
     if (parameterOptions == null) {
       return null;
@@ -167,27 +178,29 @@ public class HelpCommand extends Command<DisplayCommandListener> {
       parameters.add(new Pair<>(p.getKey(), p.getValue()));
     }
 
-    ArrayList<String> result = new ArrayList<>();
+    Message result = new Message().setTitle("Parameters");
+
+    List<MessageContent> descriptions = new ArrayList<>();
     for (Pair<String, Parameter> pair : parameters) {
       String keyword = pair.key();
       Parameter parameter = pair.value();
 
-      ArrayList<String> titleList = new ArrayList<>();
+      MessageContent description = new MessageContent();
       if (keyword != null) {
-        titleList.add(keyword);
+        description.addText(keyword, MessageText.Type.SECONDARY);
       }
       if (parameter.name() != null) {
-        titleList.add(String.format("<%s>", parameter.name()));
+        description.addText(String.format("<%s>", parameter.name()), MessageText.Type.SECONDARY);
       }
-
-      ArrayList<String> parameterList = new ArrayList<>();
-      parameterList.add(String.join(" ", titleList));
-      parameterList.add(String.format("Required: %s", parameter.isRequired() ? "Yes" : "No"));
-      parameterList.add(String.format("Type: %s", parameter.type()));
-      parameterList.add(String.format("Description: %s", parameter.description()));
-      result.add(String.join("\n", parameterList));
+      description.insertBetween(new MessageContent().addText(" "))
+          .add(MessageContent.newLine(1))
+          .addText(String.format("Required: %s", parameter.isRequired() ? "Yes" : "No"))
+          .add(MessageContent.newLine(1))
+          .addText(String.format("Type: %s", parameter.type()))
+          .add(MessageContent.newLine(1))
+          .addText(String.format("Description: %s", parameter.description()));
+      descriptions.add(description);
     }
-
-    return result;
+    return result.addBody(MessageContent.join(MessageContent.newLine(2), descriptions));
   }
 }

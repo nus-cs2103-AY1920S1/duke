@@ -1,14 +1,19 @@
 package weomucat.duke.task;
 
 import java.util.ArrayList;
+import java.util.List;
 import weomucat.duke.date.Date;
 import weomucat.duke.date.Interval;
 import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageContent;
+import weomucat.duke.ui.message.element.MessageText;
 
 /**
  * A deadline is a special task that has a due date.
  */
 public class DeadlineTask extends RecurringTask implements SnoozableTask {
+
+  private static final String NAME = "Deadline";
 
   private Date by;
   private Interval every;
@@ -43,26 +48,20 @@ public class DeadlineTask extends RecurringTask implements SnoozableTask {
 
   @Override
   public Message toMessage() {
-    ArrayList<String> result = new ArrayList<>();
-    result.add(String.format("===== BY =====\n%s", this.by));
+    List<MessageContent> contents = new ArrayList<>();
+
+    contents.add(new MessageContent()
+        .addText("By: ", MessageText.Type.SECONDARY)
+        .addText(this.by.toString()));
 
     if (this.every != null) {
-      result.add(String.format("===== RECURRENCE =====\n%s", this.every));
+      contents.add(new MessageContent()
+          .addText("Recurrence: ", MessageText.Type.SECONDARY)
+          .addText(this.every.toString()));
     }
 
-    return new Message()
-        .addTitle(this.toString())
-        .addBody(String.join("\n\n", result));
-  }
-
-  @Override
-  boolean isOverDue() {
-    return this.by.compareTo(Date.now()) < 0;
-  }
-
-  @Override
-  public String toString() {
-    return String.format("[D]%s", super.toString());
+    return super.toMessage()
+        .addBody(MessageContent.join(MessageContent.newLine(1), contents));
   }
 
   @Override
@@ -73,5 +72,15 @@ public class DeadlineTask extends RecurringTask implements SnoozableTask {
   @Override
   public void snooze(Interval interval) {
     this.by = this.by.plus(interval);
+  }
+
+  @Override
+  boolean isOverDue() {
+    return this.by.compareTo(Date.now()) < 0;
+  }
+
+  @Override
+  String getTaskName() {
+    return NAME;
   }
 }

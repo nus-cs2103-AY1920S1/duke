@@ -14,8 +14,13 @@ import weomucat.duke.command.Command;
 import weomucat.duke.task.NumberedTaskList;
 import weomucat.duke.task.Task;
 import weomucat.duke.ui.Ui;
+import weomucat.duke.ui.gui.message.DukeErrorMessage;
+import weomucat.duke.ui.gui.message.DukeMessage;
+import weomucat.duke.ui.gui.message.DukeTaskMessage;
 import weomucat.duke.ui.listener.UserInputListener;
 import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageContent;
+import weomucat.duke.ui.message.element.MessageText;
 
 /**
  * Represents a JavaFx Graphical User Interface of Duke.
@@ -127,8 +132,10 @@ public class GraphicalUi extends Application implements Ui, UserInputListener {
 
       // Format task with no. in front
       Message m = task.toMessage();
-      String title = String.format("%d. %s", pair.key(), m.getTitle());
-      displayTaskMessage(m.addTitle(title));
+      MessageContent title = new MessageContent()
+          .addText(String.format("%d. ", pair.key()), MessageText.Type.SECONDARY)
+          .add(m.getTitle());
+      displayTaskMessage(m.setTitle(title));
     }
   }
 

@@ -20,6 +20,11 @@ public class StubTask extends Task {
   }
 
   @Override
+  String getTaskName() {
+    return null;
+  }
+
+  @Override
   public int compareTo(Date date) {
     return 0;
   }

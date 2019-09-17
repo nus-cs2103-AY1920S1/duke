@@ -23,6 +23,8 @@ import weomucat.duke.ui.UiManager;
 import weomucat.duke.ui.cli.CommandLineUi;
 import weomucat.duke.ui.gui.GraphicalUi;
 import weomucat.duke.ui.message.Message;
+import weomucat.duke.ui.message.MessageContent;
+import weomucat.duke.ui.message.element.MessageText;
 
 /**
  * Duke is a personal assistant chatbot that is able to remember tasks.
@@ -103,9 +105,12 @@ public class Duke {
     this.controller.commandUpdate(new LoadTasksCommand());
 
     this.controller.commandUpdate(new DisplayMessageCommand(
-        new Message().addBody(
-            "Hello! I'm Duke! What can I do for you?",
-            "Type 'help /all' to see all commands.")));
+        new Message()
+            .addBody("Hello! I'm Duke! What can I do for you?")
+            .addBody(new MessageContent()
+                .addText("Type '")
+                .addText("help /all", MessageText.Type.SECONDARY)
+                .addText("' to see all commands."))));
 
     // Block main thread to query for user input & commands.
     this.controller.run();

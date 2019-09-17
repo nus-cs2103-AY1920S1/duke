@@ -37,6 +37,7 @@ public class Duke {
             parser = new Parser(tasks, storage);
         } catch (DukeException e) {
             tasks = new TaskList();
+            parser = new Parser(tasks, storage);
             throw e;
         }
 

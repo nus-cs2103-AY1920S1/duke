@@ -7,10 +7,7 @@ import duke.lib.task.Event;
 import duke.lib.task.Task;
 import duke.lib.task.ToDo;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -109,7 +106,14 @@ public class DataStorage {
     }
 
     private void readFromFile() throws IOException, DukeException {
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            file.mkdir();
+        }
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
         try {
             String line;
             while ((line = br.readLine()) != null) {

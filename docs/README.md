@@ -170,8 +170,7 @@ Bye. Hope to see you again soon!
 - Myself
 - I
 - Adithyajoshi5 in his blog for the led computation algorithm
-
-Expected outcome:
+-bye
 
 ```
 Bye. Hope to see you again soon!

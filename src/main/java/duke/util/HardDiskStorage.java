@@ -30,7 +30,7 @@ public class HardDiskStorage implements Storage {
      * @param filePath Relative path to data file.
      */
     public HardDiskStorage(String filePath) {
-        dataFile = new File(filePath);
+        dataFile = new File(System.getProperty("user.dir") + filePath);
     }
 
     /**
@@ -52,14 +52,18 @@ public class HardDiskStorage implements Storage {
                 switch(details[0]) {
                 case "T":
                     taskList.add(new Todo(details[2], isDone));
+                    break;
                 case "E":
                     taskList.add(new Event(details[2], details[3], isDone));
+                    break;
                 case "D":
                     taskList.add(new Deadline(details[2], details[3], isDone));
+                    break;
                 default:
                     taskList.add(new Task("This task could not be parsed "
                             + "from the given data file."));
                     // TODO: Find better way to handle parsing error.
+                    break;
                 }
             }
             return taskList;

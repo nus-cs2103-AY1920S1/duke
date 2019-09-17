@@ -23,8 +23,14 @@ public class Duke {
     public Duke() {
         // hardcoded storage file path
         storage = new HardDiskStorage("/data/duke.txt");
-        tasks = new TaskList();
         ui = new TextUi();
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+        assert tasks != null;
     }
 
     /**

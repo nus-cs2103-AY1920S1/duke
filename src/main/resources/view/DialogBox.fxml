@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets ?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root alignment="TOP_RIGHT" prefWidth="400.0" type="javafx.scene.layout.HBox"
-         xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" prefWidth="600.0" type="javafx.scene.layout.HBox"
+         xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+         style="-fx-padding: 15.0 5.0 5.0 15.0">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true"/>
+        <Label fx:id="dialog" text="Label" wrapText="true"
+               style="-fx-font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; -fx-padding: 10 10 10 10;
+               -fx-background-color: #CDEDFD; -fx-background-radius: 10 10 10 10">
+        </Label>
         <ImageView fx:id="displayPicture" fitHeight="79.0" fitWidth="79.0" pickOnBounds="true" preserveRatio="true" />
     </children>
-    <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
-    </padding>
 </fx:root>

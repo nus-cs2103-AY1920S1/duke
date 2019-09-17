@@ -64,31 +64,4 @@ public class Duke {
             return "Sorry, " + e.getMessage();
         }
     }
-
-    /**
-     * Alternative method for running the main application via CLI.
-     *
-     * <p>Duke begins by printing a welcome message. Subsequently, it scans
-     * for user input, then validates and processes it accordingly. This is
-     * repeated until the command to exit ("bye") is received.
-     */
-    public void run() {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showErrorMessage(e.getMessage());
-                // TODO: Add "help" feature: list all supported commands
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
 }

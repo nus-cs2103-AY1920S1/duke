@@ -24,8 +24,8 @@ public class MainWindow {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User1.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Dukey.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Dog.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Snowball.png"));
 
     @FXML
     public void initialize() {

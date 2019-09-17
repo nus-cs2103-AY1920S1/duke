@@ -28,6 +28,8 @@ find Pr
 bye
 ```
 
+More details can be found under [Usage](#usage).
+
 ## Table of Contents
 - [Features](#features)
     - [Manage tasks](#manage-tasks)
@@ -92,11 +94,17 @@ Creates a deadline.
 
 **Example of usage:**
 
-`deadline [description] /by [date]`
+`deadline my homework /by 13/1/2019 2100`
 
 **Expected outcome:**
 
-A new deadline called `description` is created and has a due date by `date`. The date format is `dd/MM/YYYY HHmm`.
+```
+Got it. I've added this task: 
+[D][ ] my homework (by: Sun Jan 13 21:00:00 SGT 2019)
+Now you have 1 tasks in the list.
+```
+
+A new deadline called `my homework` is created and has a due date by `13 Jan 2019, 21:00`. The date format is `dd/MM/YYYY HHmm`.
 
 ---
 
@@ -106,11 +114,17 @@ Creates an event.
 
 **Example of usage:**
 
-`event [description] /at [date]`
+`event meeting /at 17/9/2019 1200`
 
 **Expected outcome:**
 
-A new event called `description` is created and is set at `date`. The date format is `dd/MM/YYYY HHmm`.
+```
+Got it. I've added this task: 
+[E][ ] meeting (at: Tue Sep 17 12:00:00 SGT 2019)
+Now you have 1 tasks in the list.
+```
+
+A new event called `meeting` is created and is set at `17 Sep 2019, 12:00`. The date format is `dd/MM/YYYY HHmm`.
 
 ---
 
@@ -120,11 +134,17 @@ Creates a todo.
 
 **Example of usage:**
 
-`todo [description]`
+`todo school project`
 
 **Expected outcome:**
 
-A new task called `description` is created.
+```
+Got it. I've added this task: 
+[T][ ] school project
+Now you have 1 tasks in the list.
+```
+
+A new todo called `school project` is created.
 
 ---
 
@@ -138,11 +158,17 @@ Deletes a task.
 
 **Example of usage:**
 
-`delete [task number]`
+`delete 1`
 
 **Expected outcome:**
 
-The `task number` from the task list is deleted. It can range from 1 to the number of tasks in the list.
+```
+Noted. I've removed this task:
+[D][ ] my homework (by: Sun Jan 13 21:00:00 SGT 2019)
+Now you have 0 tasks in the list.
+```
+
+Assuming there is a single task called `my homework`, task number `1` from the task list is deleted. It can range from 1 to the number of tasks in the list.
 
 ---
 
@@ -152,11 +178,16 @@ Marks a task as done.
 
 **Example of usage:**
 
-`done [task number]`
+`done 1`
 
 **Expected outcome:**
 
-The `task number` from the task list is marked as done, as indicated by `[x]`. It can range from 1 to the number of tasks in the list.
+```
+Nice! I've marked this task as done:
+[T][x] homework
+```
+
+Task number `1`, labelled `homework` from the task list is marked as done, as indicated by `[x]`. Task number `1` can range from 1 to the number of tasks in the list.
 
 ---
 
@@ -170,11 +201,17 @@ Finds a task with given keywords.
 
 **Example of usage:**
 
-`find [task name]`
+`find pre`
 
 **Expected outcome:**
 
-The task containing `task name` is returned.
+```
+Here are the matching tasks in your list:
+1.[T][ ] prepare materials
+2.[T][ ] prepare content
+```
+
+Assuming the list has 3 tasks (`draw props`, `prepare materials`, `prepare content`), the tasks containing the word `pre` is returned.
 
 ---
 
@@ -187,6 +224,13 @@ Lists all tasks.
 `list`
 
 **Expected outcome:**
+
+```
+Here are the tasks in your list:
+1. [T][ ] draw props
+2. [T][ ] prepare materials
+3. [T][ ] prepare content
+```
 
 A list of recorded tasks is shown.
 
@@ -219,5 +263,18 @@ Shows all available commands.
 `help`
 
 **Expected outcome:**
+
+```
+You may use the following commands:
+bye - Exit the program
+deadline [description] /by [date: dd/MM/YYYY] - Add deadline
+delete [task number] - Delete a task
+done [task number] - Marks a task as done
+event [description] /at [date: dd/MM/YYYY] - Add event
+find [keywords] - Finds a task based on its keywords
+help - Show help
+list - List all tasks
+todo [description] - Add a todo
+```
 
 All available commands are shown.

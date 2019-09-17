@@ -20,8 +20,11 @@ deadline Project Milestone 1 /by 21/10/2019 1200
 event Presentation /at 26/10/2019 1200
 done 1
 list
+find Pr
 bye
 ```
+
+More details can be found under [More Information](#more-information).
 
 ## More Information
 

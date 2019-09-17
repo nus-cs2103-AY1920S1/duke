@@ -46,7 +46,7 @@ public class Storage {
         File data = new File(filepath);
         try {
             if (data.createNewFile()) {
-                System.out.println("    Previous file not found. Creating a new file");
+                //If file is already present then use that file.
             } else {
                 FileReader fr = new FileReader(data);
                 BufferedReader bufferedReader = new BufferedReader(fr);
@@ -56,7 +56,6 @@ public class Storage {
                     Task t = getData(dataReads);
                     tasks.add(t);
                 }
-                System.out.println("    Previous file is found! Command \"list\" to checkout previous tasks!");
             }
             this.fileWriter = new FileWriter(data, false);
             this.printWriter = new PrintWriter(fileWriter);

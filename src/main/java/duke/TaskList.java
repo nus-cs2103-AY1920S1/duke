@@ -143,6 +143,22 @@ public class TaskList {
         return -1;
     }
 
+    /**
+     * Filters the task list with a specific task type.
+     *
+     * @param taskType the task type used to filter the list.
+     * @return the filtered task list.
+     */
+    public TaskList filterByTaskType(Class taskType) {
+        TaskList newList = new TaskList();
+        for (Task myTask : tasks) {
+            if (taskType.isInstance(myTask)) {
+                newList.addTask(myTask);
+            }
+        }
+        return newList;
+    }
+
     @Override
     public String toString() {
         StringBuilder myBuilder = new StringBuilder();

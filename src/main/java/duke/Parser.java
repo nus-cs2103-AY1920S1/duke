@@ -8,6 +8,9 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 public class Parser {
     /**
@@ -25,7 +28,7 @@ public class Parser {
             if (rawCommand.length() < words[0].length() + 2) {
                 throw new DukeException("The description of a todo cannot be empty.");
             }
-            return new AddCommand("todo", rawCommand.substring(5));
+            return new AddCommand("todo", rawCommand.substring(words[0].length() + 1));
         case "deadline":
         case "event":
             StringBuilder argumentBuilder = new StringBuilder();
@@ -44,7 +47,21 @@ public class Parser {
             }
             return new AddCommand(words[0], argumentBuilder.toString(), option, optionArgumentBuilder.toString());
         case "list":
-            return new ListCommand();
+            if (rawCommand.length() > words[0].length() + 1) {
+                String typeName = rawCommand.substring(words[0].length() + 1);
+                switch (typeName) {
+                case "todo":
+                    return new ListCommand(Todo.class);
+                case "deadline":
+                    return new ListCommand(Deadline.class);
+                case "event":
+                    return new ListCommand(Event.class);
+                default:
+                    throw new DukeException("I'm sorry, but I don't know what that means ╥﹏╥");
+                }
+            } else {
+                return new ListCommand();
+            }
         case "delete":
             if (rawCommand.length() < words[0].length() + 2) {
                 throw new DukeException("Please specify the task to be deleted.");

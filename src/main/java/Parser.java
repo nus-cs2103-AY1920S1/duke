@@ -24,7 +24,7 @@ public class Parser {
                     TaskList.stringifyTasks();
             case "done":
                 {
-                    Task t = TaskList.get(Integer.parseInt(others));
+                    Task t = TaskList.get(Integer.parseInt(others) - 1);
                     t.markDone();
                     return String.format(
                         "Nice! I've marked this task as done:\n  %s",
@@ -32,7 +32,7 @@ public class Parser {
                     );
                 }
             case "delete":
-                TaskList.removeTask(Integer.parseInt(others));
+                TaskList.removeTask(Integer.parseInt(others) - 1);
                 return "Deleted!";
             case "todo":
                 {
@@ -50,7 +50,7 @@ public class Parser {
                         );
                     } catch (ArrayIndexOutOfBoundsException e) {
                         throw new DukeException(
-                            "Too few details for deadline!"
+                            "Wrong format for deadline! Format: <name> /by dd/mm/yyyy hh:mm"
                         );
                     }
                 }
@@ -62,12 +62,16 @@ public class Parser {
                             new Event(details[0], details[1])
                         );
                     } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("Too few details for event!");
+                        throw new DukeException(
+                            "Wrong format for event! Format: <name> /at dd/mm/yyyy hh:mm"
+                            );
                     }
                 }
             case "find":
                 return ("Here are matching tasks in your list:") +
                     TaskList.stringifyTasks(TaskList.query(others));
+            case "help":
+                return MainWindow.greeting;
             default:
                 throw new DukeException("Unknown command " + in);
         }

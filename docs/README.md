@@ -21,11 +21,11 @@
     
     3.7 [Exiting the application](#exiting-the-application)
 
-## Introduction <a name=introduction>
+## Introduction
 Duke is a desktop personal assistant application. It is **optimised for users who prefer to work
 with a Command Line Interface (CLI)**.
 
-## Quick start <a name=quick-start>
+## Quick start
 1. Ensure you have `Java 11` or above installed on your computer.
 2. Download the latest jar file [here](https://github.com/C-likethis123/duke/releases/tag/A-Release).
 3. Copy the jar file to a desired folder. In the folder, create a folder `/data`. In `/data`, add a file called `duke.txt`.
@@ -39,7 +39,7 @@ with a Command Line Interface (CLI)**.
     3. `bye`: exits the application
 7. Refer to Features for details on each command.    
      
-## Features <a name=features>
+## Features
 
 ### Adding a task 
 There are three types of tasks:

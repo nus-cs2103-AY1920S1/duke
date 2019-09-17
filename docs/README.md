@@ -86,27 +86,66 @@ Deletes a task in the list by its index. You may use the `list` command to view 
 Format: `delete INDEX_OF_TASK_IN_LIST`
 
 Examples:
-
-
+  - `delete 5`
+  - `delete 3`
 
 ### 3.6 Loading and saving task lists: `load` and `save`
+These commands instruct Duke to save and load from different directories. Note that if you close Duke, it will always startup with the most recently used/saved/loaded task list.
+
+#### 3.6.1 Specifying a new save location: `save`
+Changes the save location of the current list, and then attempts a save.  
+Format: `save DIRECTORY_TO_SAVE_FILE`
+
+Examples:
+  - `save case_studies/Wanderer_2050_crash.tmp`
+  - `save archives/Wanderer_Crew_Memorial.tmp`
+  
+#### 3.6.2 Loading a list from a save location: `load`
+Loads an existing saved task list from a specified path on the disk. Note that if you close Duke, if will always startup with the most recently used/saved/loaded task list.
+Format: `load DIRECTORY_TO_LOAD_FILE`
+
+Examples:
+  - `load case_studies/Columbia_2003_crash.tmp`
+  - `load guides/How_to_avoid_being_found_guilty_of_gross_negligence.tmp`
+
 ### 3.7 Exiting Duke: `bye`
+Closes and exits the chat application. Alternatively, you may close the window by clicking the 'x' button on the top right corner.  
+Format: `bye`
 
 
+## 4. FAQs
 
-### Feature 1 
-Description of feature.
+**Q:** How do i transfer my data to another computer?  
+**A:** Install the app in the other computer using the Quick Start guide given above. If you want to preserve the current data and state of the Duke program, transfer the /config folder over along with any saved task list files.
 
-## Usage
+**Q.** Duke can't save the list to the folder I want! How do I fix this?  
+**A.** Check the permissions of the folder that Duke is trying to save to. Ensure that write permissions in on.
 
-### `Keyword` - Describe action
+## 5. Command Summary
+- **Add Todo tasks:** `todo DESCRIPTION_OF_TASK`  
+eg. `todo write eulogy for crew`
 
-Describe action and its outcome.
+- **Add Deadline tasks:** `deadline DESCRIPTION_OF_TASK /by dd/MM/yyyy HHmm`  
+eg. `deadline finish investigative report /by 17/08/2050 0900`
 
-Example of usage: 
+- **Add Event tasks:** `event DESCRIPTION_OF_TASK /at dd/MM/yyyy HHmm`  
+eg. `event attend Wanderer 2050 investigative trial /at 18/08/2050 0900`
 
-`keyword (optional arguments)`
+- **List:** `list`
 
-Expected outcome:
+- **Mark as Done:** `done INDEX_OF_TASK_IN_LIST`  
+eg. `done 8`
 
-`outcome`
+- **Find:** `find KEYWORD`  
+eg. `find public apology speech script`
+
+- **Delete:** `delete INDEX_OF_TASK_IN_LIST`  
+eg. `delete 16`
+
+- **Save:** `save DIRECTORY_TO_SAVE_FILE`  
+eg. `save ./me.tmp`
+
+- **Load:** `load DIRECTORY_TO_LOAD_FILE`  
+eg. `load ./alcohol_list.tmp`
+
+- **Bye:** `bye`

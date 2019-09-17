@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private String dir = System.getProperty("user.dir") + "/src/main/java/savedData.txt";
+    private String dir = System.getProperty("user.dir") + "/dukeData.txt";
     private Duke duke = new Duke(dir);
 
     @Override
@@ -22,6 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Duke v0.2 by Lee Wah");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
             fxmlLoader.<MainWindow>getController().showDukeIntro();

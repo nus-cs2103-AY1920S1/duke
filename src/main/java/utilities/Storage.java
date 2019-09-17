@@ -17,9 +17,18 @@ public class Storage {
 	 */
 	private String filePath;
 
-	public Storage(final String filePath) {
+	public Storage(String filePath) {
 		this.filePath = filePath;
 		assert filePath.isEmpty();
+
+		File dukeData = new File(filePath);
+		try {
+			if (!dukeData.exists()) {
+				dukeData.createNewFile();
+			}
+		} catch (IOException e) {
+			System.out.println(e);
+		}
 	}
 
 	/**
@@ -29,7 +38,7 @@ public class Storage {
 	 */
 	public void saveMemory(TaskList tasks) throws DukeException {
 		ArrayList<Task> memory = tasks.getMemory();
-		String dir = System.getProperty("user.dir") + "/src/main/java/savedData.txt";
+		String dir = filePath;
 		BufferedWriter out;
 		try {
 			out = new BufferedWriter(new FileWriter(dir));

@@ -15,6 +15,7 @@ public class Duke {
 	private Ui ui;
 	private Parser parser;
 	private boolean initialised;
+	private boolean isBye;
 
     /**
      * Constructor.
@@ -32,6 +33,7 @@ public class Duke {
         ui.setTaskList(tasks);
         parser = new Parser();
         initialised = false;
+        isBye = false;
     }
 
 	/**
@@ -49,56 +51,63 @@ public class Duke {
 		String command = parser.getCommand(rawInput);
     	String result = "";
 		try {
-			switch (command) {
-				case "bye":
-					result = ui.printBye();
-					break;
-				case "list":
-					result = ui.printList();
-					break;
-				case "find":
-					result = ui.printFind(parser.processFind(rawInput));
-					break;
-				case "done":
-					int index = parser.processDone(rawInput);
-					tasks.doneTask(index);
-					storage.saveMemory(tasks);
-					result = ui.printDone(index);
-					break;
-				case "delete":
-					Task deletedTask = tasks.deleteTask(parser.processDelete(rawInput));
-					storage.saveMemory(tasks);
-					result = ui.printDeleted(deletedTask);
-					break;
-				case "todo":
-				case "deadline":
-				case "event":
-					Task newTask = parser.generateTask(rawInput);
-					tasks.addTask(newTask);
-					storage.saveMemory(tasks);
-					result = ui.printAdded();
-					break;
-				case "undo":
-					result = ui.printUndo(tasks.undoTask());
-					storage.saveMemory(tasks);
-					break;
-				case "none":
-					result = ui.showLoadingError();
-					break;
-			}
+			result = logicAndResponse(command, rawInput);
 		} catch (DukeException e) {
 			result = ui.showException(e);
 		}
 		return result;
     }
 
+	private String logicAndResponse(String command, String rawInput) throws DukeException {
+    	String result = "";
+		switch (command) {
+			case "bye":
+				result = ui.printBye();
+				isBye = true;
+				break;
+			case "list":
+				result = ui.printList();
+				break;
+			case "find":
+				result = ui.printFind(parser.processFind(rawInput));
+				break;
+			case "done":
+				int index = parser.processDone(rawInput);
+				tasks.doneTask(index);
+				storage.saveMemory(tasks);
+				result = ui.printDone(index);
+				break;
+			case "delete":
+				Task deletedTask = tasks.deleteTask(parser.processDelete(rawInput));
+				storage.saveMemory(tasks);
+				result = ui.printDeleted(deletedTask);
+				break;
+			case "todo":
+			case "deadline":
+			case "event":
+				Task newTask = parser.generateTask(rawInput);
+				tasks.addTask(newTask);
+				storage.saveMemory(tasks);
+				result = ui.printAdded();
+				break;
+			case "undo":
+				result = ui.printUndo(tasks.undoTask());
+				storage.saveMemory(tasks);
+				break;
+			case "none":
+				result = ui.showLoadingError();
+				break;
+		}
+		return result;
+	}
 
 	/**
 	 * You should have your own function to generate a response to user input.
 	 * Replace this stub with your completed method.
 	 */
 	String getResponse(String input) {
-	    return run(input);
+		if (!isBye) return run(input);
+		else return "";
 	}
 
 	void loadData() {

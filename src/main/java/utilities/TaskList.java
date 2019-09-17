@@ -77,9 +77,7 @@ public class TaskList {
 	 * Lists the newest task in memory.
 	 * @return Newest task.
 	 */
-	public String listLatest() {
-		return memory.get(memory.size() - 1).showTask();
-	}
+	public String listLatest() { return memory.get(memory.size() - 1).showTask(); }
 
 	/**
 	 * Adds a task into memory, updates the last known command and task.

@@ -108,13 +108,14 @@ public class Ui {
 	public String printAdded() {
 		String tasksLeft;
 		if (tasks.getMemory().size() == 1) {
-			tasksLeft = " Now you have 1 task in your list";
+			tasksLeft = " Now you have 1 task in your list\n";
 		} else {
-			tasksLeft = " Now you have " + tasks.getMemory().size() + " tasks in your list.";
+			tasksLeft = " Now you have " + tasks.getMemory().size() + " tasks in your list.\n";
 		}
 		return breakLine
 				+ " Got it. I've added this task:\n   "
 				+ tasks.listLatest() + "\n"
+				+ tasksLeft
 				+ breakLine;
 	}
 	

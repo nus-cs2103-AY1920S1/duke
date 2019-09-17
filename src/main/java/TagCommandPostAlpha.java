@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
+//the idea of using a whole lot of Observers to wire
+//several classes together and the new implementation
+//of command is inspired by Weomucat (in 2103T Duke)
+//this is a simplified version of it which is not as elegant
 
 public class TagCommandPostAlpha implements TagCommandObserver, 
     UpdateTaskCommandObserver, DeleteTaskCommandObserver {

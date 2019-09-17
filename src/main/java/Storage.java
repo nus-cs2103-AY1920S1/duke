@@ -85,11 +85,16 @@ class Storage implements TaskObserver, StorageInterface {
 
             //create the file
             File f = new File(this.path);
-            boolean flag = f.mkdir();
+            boolean flag = f.getParentFile().mkdir();
             if (flag) {
-                System.out.println("path created successfully");
+                try {
+                    f.createNewFile();
+                    System.out.println("path created successfully");
+                } catch(Exception ei) {
+                    System.out.println("unable to create file");
+                }
             } else {
-                System.out.println("path created unsuccessfully");
+                System.out.println("path creation unsuccessfully");
             }
                     
         } 

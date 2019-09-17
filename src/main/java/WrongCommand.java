@@ -19,9 +19,8 @@ public class WrongCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Duke.print("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+        throw new DukeException ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 

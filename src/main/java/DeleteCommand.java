@@ -20,35 +20,24 @@ public class DeleteCommand extends Command {
      * @param storage Storage object to save and load files.
      */
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputArr = input.split(" ");
-        try {
-            //no input number
-            if (inputArr.length == 1) {
-                throw new NumberFormatException();
-            }
-            int num = Integer.parseInt(inputArr[1]);
-            //invalid num, will index out of bounds
-            if (num > tasks.getSize()) {
-                throw new NumberFormatException();
-            } else {
-                Duke.print("Noted. I've removed this task:\n"
-                        +
-                        "     " + tasks.getTask(num - 1) + "\n"
-                        +
-                        "     Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
-                tasks.deleteTask(num - 1);
-                return ("Noted. I've removed this task:\n"
-                        +
-                        "     " + tasks.getTask(num - 1) + "\n"
-                        +
-                        "     Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
-            }
-        } catch (NumberFormatException e) {
-            Duke.print("☹ OOPS!!! Please input a valid number.");
-            return ("☹ OOPS!!! Please input a valid number.");
-
+        //no input number
+        if (inputArr.length == 1) {
+            throw new DukeException("☹ OOPS!!! Please input a valid number.");
         }
-    }
+        int num = Integer.parseInt(inputArr[1]);
+        //invalid num, will index out of bounds
+        Task task = tasks.getTask(num - 1);
+        tasks.deleteTask(num - 1);
+        ui.setResponse("Noted. I've removed this task:\n"
+                +
+                "     " + task + "\n"
+                +
+                "     Now you have " + (tasks.getSize()) + " tasks in the list.");
+        storage.save(tasks);
 
+    }
 }
+
+

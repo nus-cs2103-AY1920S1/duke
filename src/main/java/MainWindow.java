@@ -33,6 +33,14 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    @FXML
+    public void welcomeMessage() {
+        String message = duke.getWelcomeMessage();
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(message,dukeImage)
+        );
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -40,7 +48,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = duke.getDukeResponse(input);
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

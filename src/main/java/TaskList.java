@@ -17,7 +17,6 @@ public class TaskList implements Serializable {
         for (int i = 0; i < size; i++) {
             listOfTask.append(i + 1 + ". " + this.tasks.get(i) + "\n" + "     ");
         }
-        Duke.print(listOfTask.toString());
         return (listOfTask.toString());
 
     }
@@ -45,8 +44,12 @@ public class TaskList implements Serializable {
      *
      * @param index task to be deleted.
      */
-    public void deleteTask(int index) {
-        this.tasks.remove(index);
+    public void deleteTask(int index) throws DukeException {
+        try {
+            this.tasks.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! Please input a valid number.");
+        }
     }
 
     /**
@@ -64,8 +67,12 @@ public class TaskList implements Serializable {
      * @param index index of task to be returned.
      * @return task at the given index.
      */
-    public Task getTask(int index) {
-        return this.tasks.get(index);
+    public Task getTask(int index) throws DukeException{
+        try {
+            return this.tasks.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! Please input a valid number.");
+        }
     }
 
 }

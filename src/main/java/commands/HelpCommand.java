@@ -35,7 +35,8 @@ public class HelpCommand extends Command {
                 + "convention /at 02/09/2019 1400)\n";
         String deadlineHelp = "deadline <task name> /by <dd/mm/yyyy hhmm> - keys in a deadline Task. (eg. "
                 + "clear rubbish /by 16/09/2019 2200)\n";
-        String findHelp = "find <keyword> - searches for an existing task containing the keyword.\n";
+        String findHelp = "find <keyword> - searches for an existing task containing the keyword. (keyword is "
+                + "CASE SENSITIVE)\n";
         String byeHelp = "bye - terminates the application.\n";
 
         return String.format("%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s",

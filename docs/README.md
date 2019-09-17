@@ -43,8 +43,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:\n1.[T][✗] lawsuit research\n2.[T][✗] hire intern`
-`Test`
+`Here are the tasks in your list:`<br/>`1.[T][✗] lawsuit research`<br/>`2.[T][✗] hire intern`
 
 ### `delete <n>` - Deletes a specific task in the task list
 
@@ -56,7 +55,7 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed ths task:\n[T][✗] lawsuit research\nNow you have 0 tasks in the list.`
+`Noted. I've removed ths task:`<br/>`[T][✗] lawsuit research`<br/>`Now you have 0 tasks in the list.`
 
 ### `done <n>` - Marks a specific task in the task list as done
 
@@ -68,7 +67,7 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:\n[T][✓] hire intern`
+`Nice! I've marked this task as done:`<br/>`[T][✓] hire intern`
 
 ### `todo <desciption>` - Adds a todo task into the task list
 
@@ -80,7 +79,5 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
-`[T][✗] sign documents`
-`Now you have 2 tasks in the list`
+`Got it. I've added this task:`<br/>`[T][✗] sign documents`<br/>`Now you have 2 tasks in the list`
 

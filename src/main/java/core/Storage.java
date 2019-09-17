@@ -11,7 +11,6 @@ import task.Todo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,8 +36,6 @@ public class Storage {
      */
     public void save(TaskList taskList) throws DukeIoException {
         try {
-            File file = new File(path.toString());
-            file.getParentFile();
             if (!Files.exists(path)) {
                 Files.createFile(path);
             }

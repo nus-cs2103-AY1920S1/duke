@@ -15,7 +15,7 @@ try out Duke if you are interested!
    
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-    ![Ui](https://github.com/brebeek/duke/tree/master/docs/Ui.png)
+    ![Ui](https://github.com/brebeek/duke/blob/master/docs/Ui.png)
 5. Type the command in the command box and press <kbd>Enter</kbd> to execute it.\
    e.g. typing `list` and pressing <kbd>Enter</kbd> will list all tasks in the list.
 ## 3. Features 

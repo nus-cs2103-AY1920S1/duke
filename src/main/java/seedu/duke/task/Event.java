@@ -27,7 +27,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + strAt + ")" + ((priority == null)? "" : " <<P: " + priority
-                + ">>");
+        return "[E]" + super.toString() + " (at: " + strAt + ")" + ((priority == null)? "" : " <P: " + priority
+                + ">");
     }
 }

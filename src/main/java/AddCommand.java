@@ -21,7 +21,7 @@ public class AddCommand extends Command {
      * @throws DukeException If unable to identify command.
      */
     @Override
-    public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException{
+    public String execute(Ui ui, TaskList taskList, Storage storage) throws DukeException {
         Task newTask;
         switch (this.type) {
         case "deadline":
@@ -53,7 +53,7 @@ public class AddCommand extends Command {
         default:
             throw new DukeException("AddCommand Exception: Unable to identify command");
         }
-        String output = "Got it. I've added this task:" + newTask + "\n";
+        String output = "Got it. I've added this task:\n" + newTask + "\n";
         output += "Now you have " + TaskList.tasks.size() + " tasks in the list";
         return output;
     }

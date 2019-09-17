@@ -6,13 +6,17 @@ import java.util.ArrayList;
 
 /**
  * Represents a storage file.
- * Contains a filename to read and write from.
+ * Contains a file name to read and write from.
+ * Contains an archive file name to read and write from.
+ * Contains a boolean that decides if the archive file should be used.
  */
 public class Storage {
 
     protected String fileName;
+    protected String archiveFileName = "dukeArchive.txt";
     protected String initialTaskList;
     protected boolean hasInitialized = false;
+    protected boolean isArchive = false;
 
     public Storage(String fileName) {
         this.fileName = fileName;
@@ -30,8 +34,11 @@ public class Storage {
         String output = "";
         String strLine = "";
         try {
-            String filename = this.fileName;
-            FileWriter fw = new FileWriter(filename, false);
+            String fileToOpen = this.fileName;
+            if (isArchive) {
+                fileToOpen = archiveFileName;
+            }
+            FileWriter fw = new FileWriter(fileToOpen, false);
             //Appends the string to the file
             int index = 1;
             for (Task x : tasks) {
@@ -61,7 +68,11 @@ public class Storage {
             }
             fw.write("End of file");
             fw.close();
-            output += "Task list has been saved!";
+            if (isArchive) {
+                output += "Archive task list has been saved! Current task list has been cleared.";
+            } else {
+                output += "Task list has been saved!";
+            }
         } catch (IOException ioe) {
             System.err.println("IOException: " + ioe.getMessage());
             throw new DukeException("Storage Exception: Error when writing to file.");
@@ -112,13 +123,16 @@ public class Storage {
     public TaskList displayTaskList() throws DukeException {
         TaskList taskList = new TaskList();
         StringBuilder sb = new StringBuilder();
+        String fileToOpen = fileName;
+        if (isArchive) {
+            fileToOpen = archiveFileName;
+        }
         String strLine = "";
         String printQueue = "";
         try {
-            BufferedReader br = new BufferedReader(new FileReader("duke.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(fileToOpen));
             //read the file content
-            printQueue += ("Here is your task list:");
-            printQueue += ("Type     | Status   | Description (with time)\n");
+            printQueue += ("Here is your task list file:");
             while (strLine != null) {
                 sb.append(strLine);
                 sb.append(System.lineSeparator());
@@ -136,9 +150,42 @@ public class Storage {
             this.hasInitialized = true;
         } catch (IOException ioe) {
             System.err.println("IOException: " + ioe.getMessage());
-            throw new DukeException("Storage Exception: Error when reading file");
+            throw new DukeException("Storage Exception: Error when reading " + fileToOpen);
         }
         initialTaskList = printQueue;
         return taskList;
+    }
+
+    /**
+     * Writes the contents of the task list onto the archive file.
+     *
+     * @param tasks The task list to get tasks from.
+     * @return output Message indicating that archive task list has been saved.
+     */
+    public String archiveSaveTaskList(ArrayList<Task> tasks) {
+        String output = "";
+        try {
+            isArchive = true;
+            output += saveTaskList(tasks);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            isArchive = false;
+        }
+        return output;
+    }
+
+    public TaskList archiveLoadTaskList() throws DukeException{
+        isArchive = true;
+        try {
+            isArchive = true;
+            hasInitialized = false;
+            TaskList output = displayTaskList();
+            isArchive = false;
+            return output;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DukeException("Storage Exception: Error when loading from archive");
+        }
     }
 }

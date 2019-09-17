@@ -35,10 +35,8 @@ public class TaskList {
      */
     public String printTaskList() {
         String output = "Here are the tasks in your list:";
-        int index = 1;
         for (Task x : tasks) {
-            output += ("\n" + index + ". " + x);
-            index++;
+            output += ("\n" + x);
         }
         return output;
     }
@@ -65,7 +63,7 @@ public class TaskList {
         int index = Integer.parseInt(command);
         if (index <= tasks.size() && index > 0) {
             Task removedTask = tasks.remove(index - 1);
-            output +=  ("Noted. I've removed this task:\n      " + removedTask);
+            output +=  ("Noted. I've removed this task:\n" + removedTask);
             output += ("\nNow you have " + tasks.size() + " tasks left in the list");
             if (tasks.isEmpty()) {
                 output += ("Congratulations, your last task has been deleted!");

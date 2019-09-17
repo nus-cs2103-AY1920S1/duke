@@ -30,10 +30,11 @@ public class Task {
      * Gets time of the task for Events and Deadlines.
      * Does nothing for ToDos or Tasks.
      *
-     * @return tick symbol if done, X symbol if not done.
+     * @return time Time of the event or deadline.
      */
     public String getTime() {
-        return "";
+        String time = "";
+        return time;
     }
 
     /**

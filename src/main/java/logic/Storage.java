@@ -6,10 +6,7 @@ import task.Events;
 import task.Task;
 import task.ToDo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +18,10 @@ import java.util.regex.Pattern;
  */
 
 public class Storage {
-    private String taskFilePath;
-    private String contactFilePath;
-
-    public Storage(String taskFilePath, String contactFilePath) {
-        this.taskFilePath = taskFilePath;
-        this.contactFilePath = contactFilePath;
-    }
+    private String taskFilePath = "/data/tasks.txt";
+    private String taskFileWrite = "./src/main/resources/data/tasks.txt";
+    private String contactFilePath = "/data/contacts.txt";
+    private String contactFileWrite = "./src/main/resources/data/contacts.txt";
 
     /**
      * Reads and scans text file, convert them to Task Objs to be added.
@@ -37,29 +31,17 @@ public class Storage {
      */
     public List<Task> loadTasks() throws DukeException {
         List<Task> taskList = new ArrayList<>();
+        InputStream stream = Storage.class.getResourceAsStream(taskFilePath);
+        Scanner sc = new Scanner(stream);
 
-        try {
-            File f = new File(taskFilePath); //hardCoded file directory
-            Scanner sc = new Scanner(f);
-
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-                String[] strArr = line.split(Pattern.quote(" | "));
-                Task task = readAndCreateTask(strArr);
-                taskList.add(task);
-            }
-
-            Ui.loadStr("Data is loaded from data/taskList.txt");
-        } catch (FileNotFoundException e) {
-            Ui.loadStr("File not found, data not loaded!\nCreating new file taskList.txt");
-            File f = new File(taskFilePath);
-
-            try {
-                f.createNewFile(); //creates new text file
-            } catch (IOException ioE) {
-                Ui.loadStr(ioE.getMessage());
-            }
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
+            String[] strArr = line.split(Pattern.quote(" | "));
+            Task task = readAndCreateTask(strArr);
+            taskList.add(task);
         }
+
+        Ui.loadStr("Data is loaded from data/taskList.txt");
         return taskList;
     }
 
@@ -70,33 +52,22 @@ public class Storage {
      */
     public List<Contact> loadContacts() throws DukeException {
         List<Contact> contactList = new ArrayList<>();
+        InputStream stream = Storage.class.getResourceAsStream(contactFilePath);
+        Scanner sc = new Scanner(stream);
 
-        try {
-            File f = new File(contactFilePath); //hardCoded file directory
-            Scanner sc = new Scanner(f);
+        while (sc.hasNext()) {
+            String line = sc.nextLine();
 
-            while (sc.hasNext()) {
-                String line = sc.nextLine();
-
-                String[] contactArr = line.split(Pattern.quote(" | "));
-                //Name, RS, Num, Email
-                if (contactArr.length != 4) {
-                    throw new DukeException("Error: File corrupted, cannot read");
-                }
-                Contact c = new Contact(contactArr); //creates contacts
-                contactList.add(c);
+            String[] contactArr = line.split(Pattern.quote(" | "));
+            //Name, RS, Num, Email
+            if (contactArr.length != 4) {
+                throw new DukeException("Error: File corrupted, cannot read");
             }
+            Contact c = new Contact(contactArr); //creates contacts
+            contactList.add(c);
+
 
             Ui.loadStr("Data is loaded from data/contactList.txt");
-        } catch (FileNotFoundException e) {
-            Ui.loadStr("File not found, data not loaded!\nCreating new file contactList.txt");
-            File f = new File(contactFilePath);
-
-            try {
-                f.createNewFile(); //creates new text file
-            } catch (IOException ioE) {
-                Ui.loadStr(ioE.getMessage());
-            }
         }
         return contactList;
     }
@@ -153,7 +124,7 @@ public class Storage {
         }
 
         try {
-            FileWriter fw = new FileWriter(taskFilePath);
+            FileWriter fw = new FileWriter(taskFileWrite);
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {
@@ -180,7 +151,7 @@ public class Storage {
         }
 
         try {
-            FileWriter fw = new FileWriter(contactFilePath);
+            FileWriter fw = new FileWriter(contactFileWrite);
             fw.write(sb.toString());
             fw.close();
         } catch (IOException e) {

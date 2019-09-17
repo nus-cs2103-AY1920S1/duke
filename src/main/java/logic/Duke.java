@@ -10,8 +10,8 @@ import java.util.Scanner;
  */
 public class Duke {
     private Scanner sc = new Scanner(System.in);
-    private String taskListPath = "./src/main/data/taskList.txt";
-    private String contactListPath = "./src/main/data/contactList.txt";
+    //    private String taskListPath = "./src/main/data/taskList.txt";
+//    private String contactListPath = "./src/main/data/contactList.txt";
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -21,7 +21,7 @@ public class Duke {
      * Constructor.
      */
     public Duke() {
-        storage = new Storage(taskListPath, contactListPath);
+        storage = new Storage();
         ui = new Ui();
         try {
             tasks = new TaskList(storage.loadTasks());

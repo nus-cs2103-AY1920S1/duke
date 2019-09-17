@@ -21,6 +21,8 @@ public class Parser {
      */
     public static Command parse(String fullCommand) {
         int i = fullCommand.indexOf(' ');
+        int j = fullCommand.indexOf("/");
+        int length = fullCommand.length();
         String first = getFirstWord(fullCommand);
         switch (first) {
             case "delete":
@@ -34,64 +36,69 @@ public class Parser {
             case "find":
                 return new FindCommand(fullCommand.substring((i + 1)));
             case "todo":
-                addNewTodo(fullCommand);
+                if (length == 4) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    return null;
+                } else {
+                    ToDos taskTodo = new ToDos(fullCommand.substring(i + 1));
+                    taskTodo.setTaskType("T");
+                    return new AddCommand(taskTodo);
+                }
+            case "t":
+                if (length == 1) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                    return null;
+                } else {
+                    ToDos taskTodo = new ToDos(fullCommand.substring(i + 1));
+                    taskTodo.setTaskType("T");
+                    return new AddCommand(taskTodo);
+                }
             case "deadline":
-                addNewDeadline(fullCommand);
+                if (length == 8) {
+                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                    return null;
+                } else {
+                    Deadlines taskDeadline = new Deadlines(fullCommand.substring(i + 1, j - 1));
+                    taskDeadline.setTime(fullCommand.substring(j + 4));
+                    taskDeadline.setTaskType("D");
+                    return new AddCommand(taskDeadline);
+                }
+            case "d":
+                if (length == 1) {
+                    System.out.println("OOPS!!! The description of a deadline cannot be empty.");
+                    return null;
+                } else {
+                    Deadlines taskDeadline = new Deadlines(fullCommand.substring(i + 1, j - 1));
+                    taskDeadline.setTime(fullCommand.substring(j + 4));
+                    taskDeadline.setTaskType("D");
+                    return new AddCommand(taskDeadline);
+                }
             case "event":
-                addNewEvent(fullCommand);
+                if (length == 5) {
+                    System.out.println("OOPS!!! The description of an event cannot be empty.");
+                    return null;
+                } else {
+                    Events taskEvent = new Events(fullCommand.substring(i + 1, j - 1));
+                    taskEvent.setTime(fullCommand.substring(j + 4));
+                    taskEvent.setTaskType("E");
+                    return new AddCommand(taskEvent);
+                }
+            case "e":
+                if (length == 1) {
+                    System.out.println("OOPS!!! The description of an event cannot be empty.");
+                    return null;
+                } else {
+                    Events taskEvent = new Events(fullCommand.substring(i + 1, j - 1));
+                    taskEvent.setTime(fullCommand.substring(j + 4));
+                    taskEvent.setTaskType("E");
+                    return new AddCommand(taskEvent);
+                }
             default:
                 System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-()");
                 assert false : first;
                 return null;
         }
     }
-
-    private static AddCommand addNewEvent(String fullCommand) {
-        int p = fullCommand.indexOf("/");
-        int q = fullCommand.indexOf(" ");
-        int length = fullCommand.length();
-        switch (length) {
-            case 5:
-                System.out.println("OOPS!!! The description of an event cannot be empty.");
-                return null;
-            default:
-                Events taskEvent = new Events(fullCommand.substring(q + 1, p - 1));
-                taskEvent.setTime(fullCommand.substring(p + 4));
-                taskEvent.setTaskType("E");
-                return new AddCommand(taskEvent);
-        }
-    }
-
-    private static AddCommand addNewDeadline(String fullCommand) {
-        int j = fullCommand.indexOf("/");
-        int k = fullCommand.indexOf(" ");
-        int length = fullCommand.length();
-        switch (length) {
-            case 8:
-                System.out.println("OOPS!!! The description of a deadline cannot be empty.");
-                return null;
-            default:
-                Deadlines taskDeadline = new Deadlines(fullCommand.substring(k + 1, j - 1));
-                taskDeadline.setTime(fullCommand.substring(j + 4));
-                taskDeadline.setTaskType("D");
-                return new AddCommand(taskDeadline);
-        }
-    }
-
-    private static AddCommand addNewTodo(String fullCommand) {
-        int i = fullCommand.indexOf(' ');
-        int length = fullCommand.length();
-        switch (length) {
-            case 4:
-                System.out.println("OOPS!!! The description of a todo cannot be empty.");
-                return null;
-            default:
-                ToDos taskTodo = new ToDos(fullCommand.substring(i + 1));
-                taskTodo.setTaskType("T");
-                return new AddCommand(taskTodo);
-        }
-    }
-
 
     /**
      * to get the first word in a string of input

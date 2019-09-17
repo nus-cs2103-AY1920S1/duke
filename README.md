@@ -1,42 +1,15 @@
-# Formatting
-My formatting follows the [Google Java Format](https://github.com/google/google-java-format) because they have a nice tool to autoformat and I don't have a fancy IDE to setup the complex and odd oracle tabination settings. Anyway the only difference is the indentation in switch statements as far as I can tell.
+# Da Suntec Task Manager
+Brought to you by a disciple of DaMyth.
 
-# Setting up
+## Was ist das?
+This is a todo/deadline management system.
+![screenshot][docs/Ui.png]
 
-**Prerequisites**
+## Usage
+Usage is simple and easy. It is very straightforward. Just boot it up and it
+will teach you in 5 seconds how to use it. If you still can't use it, then know
+that you are being *judged*. Da Suntec looks upon us all.
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
-
-**Importing the project into IntelliJ**
-
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
-
-# Tutorials 
-
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
-
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
-
-# Feedback, Bug Reports
-
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
-* We welcome pull requests too.
+## How to get it
+You are amazed by this wonder. You want to get it. Click releases and download
+the jar file then. It is so wonderfully easy and convenient!

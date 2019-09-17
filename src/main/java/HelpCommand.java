@@ -1,27 +1,21 @@
-import java.util.Random;
-
-public class FunFactCommand extends Command{
-    private int randomInt;
-
+public class HelpCommand extends Command {
     /**
-     * Constructor to create a funfact object
+     * Constructor for a HelpCommand object
      */
-
-    public FunFactCommand() {
+    public HelpCommand() {
         super();
-        this.randomInt = (new Random()).nextInt(19);
     }
 
     /**
-     * Retrieves and displays a random funfact from database
+     * Executes the command.
+     * Lists all files in the task.
      * @param tasks to handle the tasks
      * @param ui to get user input
      * @param storage to store tasks
-     * @return
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.printFunFact() + "\n\t" + storage.getFunFact(randomInt);
+        return ui.printHelpMessage(storage);
     }
 
     /**

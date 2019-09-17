@@ -25,7 +25,7 @@ public class DoneCommand extends Command{
         try {
             storage.writeToHardDisk(tasks);
         } catch (DukeException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return ui.printDoneMessage(task);
     }

@@ -28,6 +28,8 @@ public class Parser {
                 case "facts":
                 case "fun":
                     return new FunFactCommand();
+                case "help" :
+                    return new HelpCommand();
                 case "stat" :
                 case "stats":
                 case "statistics":

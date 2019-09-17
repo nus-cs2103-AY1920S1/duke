@@ -14,6 +14,9 @@ public class Storage {
 
     private String filepath;
     private String[] funFacts;
+    private String helpInfo;
+    private final String funFactFilePath = "C:\\repos\\duke\\src\\main\\resources\\funFacts\\FunFacts.txt";
+    private final String helpInfoFilePath ="C:\\repos\\duke\\src\\main\\resources\\helpInfo\\HelpInfo.txt";
 
     /**
      * Constructs a storage object.
@@ -22,7 +25,37 @@ public class Storage {
 
     public Storage (String filepath) {
         this.filepath = filepath;
-        this.funFacts = loadFunFacts("C:\\repos\\duke\\src\\main\\resources\\funFacts\\FunFacts.txt");
+        this.funFacts = loadFunFacts(funFactFilePath);
+        this.helpInfo = loadHelpInfo(helpInfoFilePath);
+    }
+
+    /**
+     * Loading up helpInfo from the hard disc
+     * @param filePath
+     * @return A string that displays the help info to the user
+     */
+
+    public String loadHelpInfo(String filePath) {
+        StringBuilder sb = new StringBuilder("");
+        try {
+            Scanner sc = new Scanner(new File(filePath));
+            while (sc.hasNextLine()) {
+                // scan til EOF
+                sb.append(sc.nextLine());
+                sb.append("\n");
+            }
+        } catch (FileNotFoundException f) {
+            f.printStackTrace();
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Getter method to retrieve the help info
+     * @return A String of help info
+     */
+    public String getHelpInfo() {
+        return this.helpInfo;
     }
 
     /**

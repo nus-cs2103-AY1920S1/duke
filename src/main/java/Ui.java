@@ -69,6 +69,10 @@ public class Ui {
         tasks.showList()); // this prints the list of tasks
     }
 
+    public String printHelpMessage(Storage storage) {
+        return storage.getHelpInfo();
+    }
+
     public String showLine() {
         return ("___________________________________________________");
     }

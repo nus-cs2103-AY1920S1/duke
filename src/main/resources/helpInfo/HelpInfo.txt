@@ -1,0 +1,26 @@
+Hello! Thanks for using Duke.
+
+Here is list of commands :
+
+exit    - exits duke
+list    - displays your list of tasks
+stats   - displays statistics of your list
+funfact - shows a random fun fact
+
+find   [word]  - finds tasks related to the word entered
+example syntax : find book
+
+done   [index] - marks a task at index done
+example syntax : done 3
+
+delete [index] - deletes a task at index
+example syntax : delete 8
+
+todo [task] - adds a todo 
+example syntax : todo do homework
+
+deadline [task] [/by] [DD/MM/YYYY HHmm] - adds a deadline with a specified date
+example syntax : deadline submit project /by 20/10/2011 1800
+
+event [task] [/at] [DD/MM/YYYY HHmm] - adds an event with a specified date
+example syntax : event birthday party /at 21/11/2014 1400

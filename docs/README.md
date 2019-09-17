@@ -5,8 +5,9 @@ with a Command Line Interface (CLI)**.
 
 ## Quick start
 1. Ensure you have `Java 11` or above installed on your computer.
-2. Download the latest `jar` file here, or clone from Github.
-3. Double click to start the application. The GUI should appear in a few seconds.
+2. Download the latest jar file here.
+3. Copy the jar file to a desired folder. In the folder, create a folder `/data`. In `/data`, add a file called `duke.txt`.
+3. Start a terminal from the folder where the jar file is. Type `java -jar duke-0.1.3.jar`. The GUI should appear in a few seconds.
 4. After starting up, Duke greets its users upon starting up.
 //put an image here
 5. Type commands in the text box and press `Enter` to execute it.

@@ -25,6 +25,7 @@ public class UI {
      * Prints out a welcome statement when users first open the Duke program.
      */
     public void welcome() {
+        
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -33,6 +34,7 @@ public class UI {
 
         System.out.println("Hello I'm\n" + logo + "\nWhat can I do for you?");
         this.response = ("Hello I'm\n" + logo + "\nWhat can I do for you?");
+
     }
 
     /**

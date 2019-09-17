@@ -52,7 +52,7 @@ public class TodoCommand extends Command {
     @Override
     public void checkValidity() throws DukeException {
 
-        if(this.descriptionOfTask.isEmpty()) {
+        if (this.descriptionOfTask.isEmpty()) {
             throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
         }
 

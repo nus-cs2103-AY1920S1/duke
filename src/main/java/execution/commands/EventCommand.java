@@ -30,7 +30,7 @@ public class EventCommand extends Command {
      * @param taskList where the new Event task is added (if there are no exceptions) to.
      * @param ui to set a response from duke.
      * @param storage to store any changes in the storage.
-     * @throws DukeException
+     * @throws DukeException thrown when an input to create event command is invalid.
      */
     @Override
     public void execute(TaskList taskList, UI ui, Storage storage) throws DukeException {

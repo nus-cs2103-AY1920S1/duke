@@ -1,4 +1,3 @@
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -44,7 +43,7 @@ public class Duke extends Application {
     /**
      * The filepath to read from/write to.
      */
-    private String filePath;
+    private final String filePath;
     /**
      * The taskList to store the user's tasks.
      */
@@ -52,7 +51,7 @@ public class Duke extends Application {
     /**
      * The User interface.
      */
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * Constructor for Duke which takes in a filepath.
@@ -62,6 +61,12 @@ public class Duke extends Application {
     public Duke(String filepath) {
         this.ui = new Ui();
         this.filePath = filepath;
+        try {
+            this.storage = new Storage(filePath);
+            this.tasks = this.storage.load();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

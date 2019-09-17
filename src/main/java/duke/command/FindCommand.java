@@ -47,6 +47,23 @@ public class FindCommand extends Command {
                 matches.add(task);
             }
         }
-        return new ListCommand().execute(new TaskList(matches), ui, storage);
+        int startNumber = 1;
+        ArrayList<String> allTasks = new ArrayList<>();
+        for (Task t : new TaskList(matches).getTaskArrayList()) {
+            allTasks.add("" + startNumber + "." + t.getTaskStatus());
+            startNumber++;
+        }
+        if (startNumber == 1) {
+            allTasks.add("There are no tasks!");
+        } else {
+            allTasks.add(0, "Here are the tasks found:");
+        }
+        ui.messageUser(allTasks);
+        StringBuilder answer = new StringBuilder();
+        for (String message : allTasks) {
+            answer.append(message).append('\n');
+        }
+
+        return answer.toString();
     }
 }

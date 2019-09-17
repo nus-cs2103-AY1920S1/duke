@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Reads command and performs operations based on input or activity
@@ -42,10 +43,10 @@ public class Parser {
     }
 
     public void checkToDo (Scanner sc) throws Exception {
-        String description = sc.nextLine();
-        assert !description.isEmpty();
-        if (!description.isEmpty()) {
-            tasks.add(new Todo(description));
+        String fulldescription = sc.nextLine();
+        assert !fulldescription.isEmpty();
+        if (!fulldescription.isEmpty()) {
+            tasks.add(new Todo(fulldescription));
             storage.append(tasks.getLast());
         } else {
             throw new Exception();
@@ -56,13 +57,15 @@ public class Parser {
         String fullDescription = sc.nextLine();
         assert !(fullDescription == null);
         if (!fullDescription.isEmpty()) {
-            String[] descriptionAndDate = fullDescription.split("/by");
+            String[] descriptionAndDate = fullDescription.split(" /by ");
             String description = descriptionAndDate[0];
             String by = descriptionAndDate[1];
             assert !(description == null);
             assert !(by == null);
-            tasks.add(new Deadline(description, by));
-            storage.append(tasks.getLast());
+            if(noClash(by)) {
+                tasks.add(new Deadline(description, by)); //checks for no clash with another task in the list, if true then add Deadline to the TaskList
+                storage.append(tasks.getLast());
+            }
         } else {
             throw new Exception();
         }
@@ -71,19 +74,38 @@ public class Parser {
         String fullDescription = sc.nextLine();
         assert !(fullDescription == null);
         if (!fullDescription.isEmpty()) {
-            String[] descriptionAndAt = fullDescription.split("/at");
+            String[] descriptionAndAt = fullDescription.split(" /at ");
             String description = descriptionAndAt[0];
             String at = descriptionAndAt[1];
             assert !(description == null);
             assert !(at == null);
-            tasks.add(new Event(description, at));
-            storage.append(tasks.getLast());
+            if(noClash(at)) {
+                tasks.add(new Event(description, at)); //check for no clash with another task in the list, if true then add Event to the TaskList
+                storage.append(tasks.getLast());
+            }
         } else {
             throw new Exception();
         }
     }
 
-    public void checkTask (Scanner sc) {
+    public boolean noClash(String timeAndDate) {
+        ArrayList<Task> list = tasks.getList();
+        for(int i = 0; i < list.size(); i++) {
+            if(list.get(i) instanceof Deadline) {
+                if(((Deadline) list.get(i)).getBy().equals(timeAndDate)) {
+                    return false;
+                }
+            } else if(list.get(i) instanceof Event) {
+                if(((Event) list.get(i)).getAt().equals(timeAndDate)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public void checkTask (Scanner sc, String command) {
         try {
             if(command.equals("todo")) {
                 checkToDo(sc);
@@ -98,7 +120,7 @@ public class Parser {
             System.out.println(" " + tasks.printLatest());
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
         } catch(IllegalArgumentException e) {
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(\n" + "Enter <help> for a list of commands\n");
         } catch(Exception e) {
             System.out.println(command);
             System.out.println("OOPS!!! The description of a todo cannot be empty.");
@@ -114,7 +136,7 @@ public class Parser {
         } else if(command.equals("list")) {
             tasks.printForList();
         } else {
-            checkTask(sc);
+            checkTask(sc, this.command);
         }
     }
 }

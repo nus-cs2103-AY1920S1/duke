@@ -1,4 +1,5 @@
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,7 +12,7 @@ public class Storage {
     public Storage() {
         this.filename = "../../../data/tasks.txt";
     }
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, ParseException {
         File file = new File(filename);
         System.out.println(file.getCanonicalPath());
         System.out.println(file.exists());

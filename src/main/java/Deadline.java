@@ -1,10 +1,15 @@
+import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Deadline extends Task {
 
-    protected String by;
+    private Date date;
+    private SimpleDateFormat dateFormat;
+    private String by;
 
-    protected String date;
+
+    //protected String date;
     protected String month;
     protected String monthInWords;
     protected String year;
@@ -28,11 +33,32 @@ public class Deadline extends Task {
     protected String formattedDate;
     protected String formattedDateAndTime = "";
 
-    public Deadline(String description, String by) {
+    public Deadline (String description, String date) throws ParseException {
+        super(description);
+        this.by = date;
+        try {
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            dateFormat.setLenient(false);
+            this.date = dateFormat.parse(date);
+        } catch (ParseException e) {
+            throw e;
+        }
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[D]%s (by: %s)", super.getDescription(), dateFormat.format(date));
+    }
+
+    /*public Deadline(String description, String by) {
         super(description);
         this.by = by.trim();
-        /*SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        tasks.addItemsToList(new Deadline(c.getInstruction), formatter */
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        tasks.addItemsToList(new Deadline(c.getInstruction), formatter
 
         String[] arr = this.by.split(" ");
         timeInString = arr[2];
@@ -69,7 +95,8 @@ public class Deadline extends Task {
         if(!formattedDateAndTime.equals("")){
             this.by = formattedDateAndTime;
         }
-    }
+    }*/
+
     public String getDescription() {
         return super.getDescription();
     }
@@ -77,15 +104,15 @@ public class Deadline extends Task {
         return by;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return "[D]" + super.toString() + "(by:" + by + ")";
-    }
+    }*/
 
-    public static Deadline outputAsDeadline(String lineToRead) {
+    /*public static Deadline outputAsDeadline(String lineToRead) {
         String[] descriptionNDate = lineToRead.split(",");
         String description = descriptionNDate[0];
         String by = descriptionNDate[1];
         return new Deadline(description, by);
-    }
+    }*/
 }

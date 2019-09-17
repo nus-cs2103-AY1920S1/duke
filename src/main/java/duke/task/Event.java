@@ -15,7 +15,7 @@ public class Event extends Task {
      * Constructor of Event.
      * @param description description of event
      * @param at time spot of happening
-     * @throws ParseException
+     * @throws ParseException ParseException
      */
     public Event(String description, String at) throws ParseException {
         super(description);

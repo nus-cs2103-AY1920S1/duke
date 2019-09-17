@@ -9,7 +9,17 @@ import duke.tasklist.TaskList;
 import java.io.FileNotFoundException;
 
 public class AddTodo extends Command {
-    public static String addTodo(String act, Storage sto) throws DukeIllegalDescriptionException, FileNotFoundException {
+
+    /**
+     * Adds a to-do task to list and returns a notification.
+     * @param act command string
+     * @param sto storage of current duke instance
+     * @return notification string
+     * @throws DukeIllegalDescriptionException DukeIllegalDescriptionException
+     * @throws FileNotFoundException FileNotFoundException
+     */
+    public static String addTodo(String act, Storage sto) throws DukeIllegalDescriptionException,
+            FileNotFoundException {
         String tdDescription = act.substring(5);
         if (tdDescription.isBlank()) {
             throw new DukeIllegalDescriptionException(act);

@@ -12,6 +12,14 @@ import java.text.ParseException;
 
 public class AddDeadline extends Command {
 
+    /**
+     * Adds a deadline task to list and returns a notification.
+     * @param act command string
+     * @param storage storage of current duke instance
+     * @return notification string
+     * @throws DukeIllegalDescriptionException DukeIllegalDescriptionException
+     * @throws FileNotFoundException FileNotFoundException
+     */
     public static String addDeadline(String act, Storage storage) throws DukeIllegalDescriptionException,
             FileNotFoundException {
         String dlDetail = act.substring(9);

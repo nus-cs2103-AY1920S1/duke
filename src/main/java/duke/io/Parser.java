@@ -22,16 +22,17 @@ import java.io.FileNotFoundException;
 public class Parser {
 
     /**
+     * Parses user command.
      * @param act     keyword indicating the intended operation from user input
      * @param storage storage object to interact with
-     * @throws FileNotFoundException
-     * @throws DukeIllegalDescriptionException
-     * @throws DukeIllegalActionException
+     * @throws FileNotFoundException FileNotFoundException
+     * @throws DukeIllegalDescriptionException DukeIllegalDescriptionException
+     * @throws DukeIllegalActionException DukeIllegalActionException
      */
     public static String parse(String act, Storage storage) throws FileNotFoundException,
             DukeIllegalDescriptionException, DukeIllegalActionException, DukeDuplicateTaskException {
         String response = "";
-        if(DuplicateChecker.checkDuplication(act)) {
+        if (DuplicateChecker.checkDuplication(act)) {
             throw new DukeDuplicateTaskException();
         }
         try {

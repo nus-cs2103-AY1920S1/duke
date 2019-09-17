@@ -19,44 +19,48 @@ try out Duke if you are interested!
    e.g. typing `list` and pressing <kbd>Enter</kbd> will list all tasks in the list.
 
 ## 3. Features 
-
-### 3.1 Adding to-do task: 
+All commands are *case insensitive*.
+### 3.1 `todo` - Adding to-do task: 
 Adds an undone to-do task to task list.\
 Format: `todo DESCRIPTION` 
 * e.g. `todo Have dinner`
 
-### 3.2 Adding event: 
+### 3.2 `event`- Adding event: 
 Adds an undone event with a time stamp to task list.\
 Format: `event DESCRIPTION /at YYYY/MM/DD HH:mm` 
 * e.g. `event Orientation /at 2019/01/01 14:00`
 
-### 3.3 Adding deadline task: 
+### 3.3 `deadline` - Adding deadline task: 
 Adds an undone deadline task with a due time to task list.\
 Format: `deadline DESCRIPTION /by YYYY/MM/DD HH:mm` 
 * e.g. `deadline Video project /by 2019/07/31 21:59`
 
-### 3.4 Listing all tasks: 
+### 3.4 `list` - Listing all tasks: 
 Lists all the tasks currently in task list.\
 Format: `list` 
 
-### 3.5 Marking a task as done: 
+### 3.5 `done` - Marking a task as done: 
 Marks a selected task in list as done.\
 Format: `done INDEX` 
 * e.g. `done 1`
 
-### 3.6 Deleting a task: 
+### 3.6 `delete` - Deleting a task: 
 Deletes a task from list.\
 Format: `delete INDEX` 
 * e.g. `delete 1`
 
-###3.7 Finding tasks by content matching: 
+###3.7 `find` - Finding tasks by content matching: 
 Searches for all tasks with given keyword in task list.\
 Format: `find KEYWORD` 
 * e.g. `find book`
 
-### 3.8 Clearing the task list: 
+### 3.8 `clear` - Clearing the task list: 
 Clears the task list.\
 Format: `clear` 
+
+### 3.9 `bye` - Exiting the chat bot:
+Exits from the Duke GUI.\
+Format: `bye`
 
 ##4. FAQ
 

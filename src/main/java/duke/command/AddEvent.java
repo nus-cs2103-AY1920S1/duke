@@ -11,7 +11,17 @@ import java.io.FileNotFoundException;
 import java.text.ParseException;
 
 public class AddEvent extends Command {
-    public static String addEvent(String act, Storage sto) throws FileNotFoundException, DukeIllegalDescriptionException {
+
+    /**
+     * Adds an event to list and returns a notification.
+     * @param act command string
+     * @param sto storage of current duke instance
+     * @return notification string
+     * @throws FileNotFoundException FileNotFoundException
+     * @throws DukeIllegalDescriptionException DukeIllegalDescriptionException
+     */
+    public static String addEvent(String act, Storage sto) throws FileNotFoundException,
+            DukeIllegalDescriptionException {
         String eventDetail = act.substring(6);
         int eventDivision = eventDetail.indexOf("/");
         try {

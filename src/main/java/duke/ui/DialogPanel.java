@@ -18,8 +18,8 @@ public class DialogPanel extends HBox {
 
     /**
      * Constructor of DialogPanel.
-     * @param label
-     * @param iv
+     * @param label Label
+     * @param iv ImageView
      */
     public DialogPanel(Label label, ImageView iv) {
         text = label;
@@ -43,6 +43,12 @@ public class DialogPanel extends HBox {
         return new DialogPanel(l, iv);
     }
 
+    /**
+     * Get method for user dialog.
+     * @param l Label
+     * @param iv ImageView
+     * @return user DialogPanel
+     */
     public static DialogPanel getDukeDialog(Label l, ImageView iv) {
         var db = new DialogPanel(l, iv);
         db.flip();

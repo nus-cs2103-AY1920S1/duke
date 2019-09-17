@@ -15,7 +15,7 @@ public class Deadline extends Task {
      * Constructor of Deadline task.
      * @param description description of deadline task
      * @param by time of deadline
-     * @throws ParseException
+     * @throws ParseException ParseException
      */
     public Deadline(String description, String by) throws ParseException {
         super(description);

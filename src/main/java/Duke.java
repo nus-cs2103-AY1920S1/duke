@@ -109,7 +109,7 @@ public class Duke extends Application {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().addAll(
@@ -121,7 +121,7 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             if (handleUserInput()) {
                 Platform.exit();
-            };
+            }
         });
     }
 
@@ -129,14 +129,14 @@ public class Duke extends Application {
         String response = "";
         boolean isExit = false;
         Label userText = new Label(userInput.getText());
-            try {
-                if(userInput.getText().contains("bye")) {
-                    isExit = true;
-                }
-                response = ui.readUserInput(userInput.getText());
-            } catch (Exception e) {
-                response = e.getMessage();
+        try {
+            if (userInput.getText().contains("bye")) {
+                isExit = true;
             }
+            response = ui.readUserInput(userInput.getText());
+        } catch (Exception e) {
+            response = e.getMessage();
+        }
 
         Label dukeText = new Label(response);
         dialogContainer.getChildren().addAll(

@@ -17,15 +17,11 @@ public class Ui {
      * Generates and prints the greeting message of DukeBot.
      */
     public String initMessage() {
-          return ("Hello! I'm Duke\n" + "What can I do for you?");
+        return ("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     private Storage storage;
 
-    /**
-     *
-     * @param storage storage object to interact with
-     */
     public Ui(Storage storage) {
         this.storage = storage;
     }
@@ -40,8 +36,8 @@ public class Ui {
     public String readUserInput(String act) {
         try {
             return Parser.parse(act, storage);
-        } catch (DukeIllegalDescriptionException | DukeIllegalActionException |
-                DukeDuplicateTaskException | FileNotFoundException e) {
+        } catch (DukeIllegalDescriptionException | DukeIllegalActionException
+                | DukeDuplicateTaskException | FileNotFoundException e) {
             return (e.getMessage());
         }
     }

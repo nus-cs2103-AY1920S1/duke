@@ -34,7 +34,7 @@ public class Storage {
     /**
      * Loads the assigned file and parse the stored list of tasks as <code>Task</code> objects.
      * @return Existing list of tasks
-     * @throws IOException
+     * @throws IOException IOException
      */
     public LinkedList<Task> load() throws IOException {
         LinkedList<Task> tasks = new LinkedList<>();
@@ -83,12 +83,14 @@ public class Storage {
             }
             tasks.add(event);
             break;
+        default:
+            break;
         }
     }
 
     /**
      * Saves the tasks of <code>TaskList</code> in designated file.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException FileNotFoundException
      */
     public void saveData() throws FileNotFoundException {
         File file = new File(basePath + filePath);

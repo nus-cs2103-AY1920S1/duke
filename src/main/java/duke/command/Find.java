@@ -7,6 +7,13 @@ import duke.tasklist.TaskList;
 import java.util.LinkedList;
 
 public class Find extends Command {
+
+    /**
+     * Finds all tasks containing a keyword and returns as a String.
+     * @param act command string
+     * @param sto storage of current duke instance
+     * @return notification string
+     */
     public static String find(String act, Storage sto) {
         String keyword = act.substring(5);
         String response = "";

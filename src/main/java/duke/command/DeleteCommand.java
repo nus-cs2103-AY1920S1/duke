@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.FailedToSaveIOException;
+import duke.exception.FailedToSaveIoException;
 import duke.exception.InvalidParameterException;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -26,7 +26,7 @@ public class DeleteCommand implements Command {
      * @param index the index of the task to be deleted in the list of tasks
      * @throws InvalidParameterException if the index of the task specified is not a number
      */
-    public DeleteCommand(String index) throws InvalidParameterException{
+    public DeleteCommand(String index) throws InvalidParameterException {
         try {
             this.index = Integer.parseInt(index);
         } catch (NumberFormatException nfe) {
@@ -47,7 +47,7 @@ public class DeleteCommand implements Command {
             taskManager.deleteFromSchedule(task);
             storage.save(taskManager.getCurrentTaskListToSave());
             return ui.showDeletedMessage(task.toString(), taskManager.getTaskListSize());
-        } catch (FailedToSaveIOException ftsioe) {
+        } catch (FailedToSaveIoException ftsioe) {
             return ui.showSaveError();
         } catch (IndexOutOfBoundsException aioube) {
             throw new InvalidParameterException("" + index);

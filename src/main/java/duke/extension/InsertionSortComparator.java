@@ -8,12 +8,13 @@ import java.util.Comparator;
 
 public class InsertionSortComparator implements Comparator<Task> {
     public int compare(Task task1, Task task2) {
-        try{
+        try {
             return task1.getTaskDate().compareTo(task2.getTaskDate());
         } catch (NullDateException nde) {
-            if(isTodo(task1) && isTodo(task2)) {
+            assert(isTodo(task1) || isTodo(task2));
+            if (isTodo(task1) && isTodo(task2)) {
                 return 0;
-            } else if(isTodo(task1)) {
+            } else if (isTodo(task1)) {
                 return -1;
             } else {
                 return 1;

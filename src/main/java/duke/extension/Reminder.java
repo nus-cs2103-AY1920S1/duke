@@ -24,4 +24,5 @@ public class Reminder {
     public String toString() {
         return "⏰ " + dateToRemind.toString() + " ⏰";
     }
+
 }

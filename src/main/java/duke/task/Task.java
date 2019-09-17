@@ -59,7 +59,7 @@ public class Task {
     }
 
     public String displayReminderIfPresent() {
-        if(reminderDate.isPresent()) {
+        if (reminderDate.isPresent()) {
             return "Reminder set to: " + reminderDate.get().toString();
         } else {
             return "";
@@ -67,6 +67,7 @@ public class Task {
     }
 
     public void setReminder(Date date) {
+        assert(date != null);
         reminderDate = Optional.ofNullable(date);
         new Reminder(this, date);
     }
@@ -89,7 +90,7 @@ public class Task {
     }
 
     public String displayTaskDateIfPresent() {
-        if(taskDate.isPresent()) {
+        if (taskDate.isPresent()) {
             return DateFormatter.format(taskDate.get()).substring(0,10);
         } else {
             return "";
@@ -97,10 +98,10 @@ public class Task {
     }
 
     public String encodeOptionalDate(Optional<Date> optionalDate) {
-        if(optionalDate.isPresent()) {
+        if (optionalDate.isPresent()) {
             return DateFormatter.format(optionalDate.get());
         } else {
-           return "null";
+            return "null";
         }
     }
 
@@ -145,10 +146,11 @@ public class Task {
 
     public void setReminderIfPresent(String reminderDate) throws InvalidDateTimeException {
         boolean isPresent = !reminderDate.equals("null");
-        if(isPresent) {
+        if (isPresent) {
             Date date = DateParser.parse(reminderDate);
             this.reminderDate = Optional.of(date);
             new Reminder(this, date);
         }
     }
+
 }

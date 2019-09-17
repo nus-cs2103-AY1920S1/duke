@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.FailedToSaveIOException;
+import duke.exception.FailedToSaveIoException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskManager;
@@ -46,18 +46,19 @@ public class AddCommand implements Command {
             taskManager.addToSchedule(task);
             storage.save(taskManager.getCurrentTaskListToSave());
             return ui.showAddInformation(task.toString(), taskManager.getTaskListSize());
-        } catch (FailedToSaveIOException ftsioe) {
+        } catch (FailedToSaveIoException ftsioe) {
             return ui.showSaveError();
         } catch (IOException ioe) {
             return ui.showSaveError();
         }
     }
 
-    protected String getTaskDescription(String[] arr) throws ArrayIndexOutOfBoundsException{
+    protected String getTaskDescription(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[0];
     }
 
-    protected String getTaskDate(String[] arr) throws ArrayIndexOutOfBoundsException{
+    protected String getTaskDate(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[1];
     }
+
 }

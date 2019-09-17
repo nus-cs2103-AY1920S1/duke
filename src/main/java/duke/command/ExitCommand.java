@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.exception.FailedToSaveIOException;
+import duke.exception.FailedToSaveIoException;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.UserInterface;
@@ -14,8 +14,8 @@ import duke.ui.UserInterface;
 public class ExitCommand implements Command {
 
     /**
-     * Executes the command. This will save the list of tasks in {@link TaskManager} into the storage. The storage is the
-     * file path specified by {@link duke.main.Duke} and {@link Storage}.
+     * Executes the command. This will save the list of tasks in {@link TaskManager} into the storage. The storage is
+     * the file path specified by {@link duke.main.Duke} and {@link Storage}.
      * @param taskManager the list of tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
@@ -23,7 +23,7 @@ public class ExitCommand implements Command {
     public String execute(TaskManager taskManager, UserInterface ui, Storage storage) {
         try {
             storage.save(taskManager.getCurrentTaskListToSave());
-        } catch (FailedToSaveIOException ftsioe) {
+        } catch (FailedToSaveIoException ftsioe) {
             return ui.showSaveError();
         } finally {
             return ui.showExitMessage();

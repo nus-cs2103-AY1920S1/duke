@@ -1,6 +1,16 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.RemindCommand;
+import duke.command.ScheduleCommand;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidParameterException;
 
@@ -22,6 +32,7 @@ public class CommandParser {
      */
     public static Command parse(String fullCommand) throws InvalidCommandException, InvalidParameterException {
         String[] arr = fullCommand.split(" ");
+        assert(arr.length > 0);
         String parameter = getParameter(arr);
         try {
             switch (getCommand(arr)) {
@@ -53,7 +64,7 @@ public class CommandParser {
         }
     }
 
-    private static String getCommand(String[] arr) throws ArrayStoreException{
+    private static String getCommand(String[] arr) throws ArrayStoreException {
         return arr[0];
     }
 

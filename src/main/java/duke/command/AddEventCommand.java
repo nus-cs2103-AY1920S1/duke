@@ -20,11 +20,12 @@ public class AddEventCommand extends AddCommand {
      */
     public AddEventCommand(String line) throws InvalidParameterException {
         super(line);
-        if(line.isBlank()) {
+        if (line.isBlank()) {
             throw new InvalidParameterException();
         }
         try {
             String[] arr = super.line.split(" /at ");
+            assert(arr.length >= 2);
             super.task = new Event(getTaskDescription(arr), getTaskDate(arr));
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new InvalidParameterException(line);

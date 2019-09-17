@@ -38,6 +38,7 @@ public class Schedule {
      * @param task the task to be appended to the list
      */
     public void add(Task task) {
+        assert(task != null);
         schedule.add(task);
         insertionSortSchedule();
     }
@@ -48,7 +49,8 @@ public class Schedule {
      * @return a string representation of the task removed to be printed on a user interface.
      */
     public void delete(Task task) {
-            schedule.remove(task);
+        assert(task != null);
+        schedule.remove(task);
     }
 
     /**
@@ -59,12 +61,13 @@ public class Schedule {
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append(createNewHeaderToDisplay(date));
         outputBuilder.append(schedule.stream()
-                       .filter(x -> x.displayTaskDateIfPresent().equals(date))
-                       .map(x -> addTaskToView(x))
-                       .reduce("", (x, y) -> x + y));
+                             .filter(x -> x.displayTaskDateIfPresent().equals(date))
+                             .map(x -> addTaskToView(x))
+                             .reduce("", (x, y) -> x + y));
         outputBuilder.append("    ==========================================================");
         return outputBuilder.toString();
     }
+
     /**
      * Returns a string representation of the list of tasks.
      * @return a string representation of the list of tasks
@@ -73,10 +76,10 @@ public class Schedule {
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append(createNewHeaderToDisplay("   TODO  "));
         String date = "";
-        for(int i = 0; i <  schedule.size(); i++) {
+        for (int i = 0; i <  schedule.size(); i++) {
             Task task = schedule.get(i);
             String curr = task.displayTaskDateIfPresent();
-            if(date.equals(curr)) {
+            if (date.equals(curr)) {
                 outputBuilder.append(addTaskToView(task));
             } else {
                 date = curr;
@@ -96,6 +99,7 @@ public class Schedule {
     }
 
     private String addTaskToView(Task task) {
+        assert(task != null);
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append("    ");
         outputBuilder.append(task.showFullInformation());
@@ -119,4 +123,5 @@ public class Schedule {
             }
         }
     }
+
 }

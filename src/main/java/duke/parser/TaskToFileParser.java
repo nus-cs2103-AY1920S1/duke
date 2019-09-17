@@ -14,7 +14,7 @@ public class TaskToFileParser {
      * @return a string representation of task
      */
     public static String parse(Task task) {
-
+        assert(task != null);
         return task.encode() + "\n";
     }
 

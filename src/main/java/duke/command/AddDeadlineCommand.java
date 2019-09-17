@@ -20,15 +20,16 @@ public class AddDeadlineCommand extends AddCommand {
      */
     public AddDeadlineCommand(String line) throws InvalidParameterException {
         super(line);
-        if(line.isBlank()) {
+        if (line.isBlank()) {
             throw new InvalidParameterException();
         }
         try {
             String[] arr = super.line.split(" /by ");
+            assert(arr.length >= 2);
             super.task = new Deadline(getTaskDescription(arr), getTaskDate(arr));
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new InvalidParameterException(line);
-        } catch(InvalidDateTimeException idte) {
+        } catch (InvalidDateTimeException idte) {
             throw new InvalidParameterException(idte.getInvalidDateTime());
         }
     }

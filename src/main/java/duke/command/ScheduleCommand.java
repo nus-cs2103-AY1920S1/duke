@@ -16,15 +16,16 @@ public class ScheduleCommand implements Command {
     String line;
 
     public ScheduleCommand(String line) throws InvalidParameterException {
-        if(line.isBlank()) {
+        if (line.isBlank()) {
             this.line = line;
-        } else if(isValidDate(line)) {
+        } else if (isValidDate(line)) {
             this.line = line.substring(0, 10);
         } else {
             throw new InvalidParameterException(line);
         }
 
     }
+
     /**
      * Executes the command. This will display the list of tasks in the user interface.
      * @param taskManager the list of tasks

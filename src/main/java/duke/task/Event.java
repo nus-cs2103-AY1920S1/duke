@@ -20,14 +20,13 @@ public class Event extends Task {
     }
 
     /**
-     * Constructs a new event task with description,the date the event will be held at that has not been done and the
-     * option to mark it as done.
+     * Constructs a new event task with description, the date the event will be held at that has not been done.
      * @param description the description of the event task
      * @param at the date the event will be held at
-     * @param isDone the done status of the task
      */
     public Event(String description, Date at) {
         super(description, at);
+        assert(at != null);
     }
 
     /**

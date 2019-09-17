@@ -1,20 +1,22 @@
-# User Guide
+# Duke - User Guide
 
-## Features 
+## 1. Introduction
 
-### Feature 1 
-Description of feature.
+Duke is a desktop app to **track your tasks** such as to-dos, events and deadlines. **Prefer to use the Command Line Interface** (CLI) with Graphical User Interface (GUI)? Duke is the one for you.
 
-## Usage
+## 2. Quick Start
 
-### `Keyword` - Describe action
+1. Ensure that you have Java `11` or above installed in your Computer.
 
-Describe action and its outcome.
+2. Download the latest `duke.jar` [here](https://github.com/joloong/duke/releases/tag/A-Release).
 
-Example of usage: 
+3. Double-click the file to start the app.
 
-`keyword (optional arguments)`
+4. Play around with it.
 
-Expected outcome:
+## 3. Features
 
-`outcome`
+### 3.1. Listing all tasks: `list`
+
+Shows a list of all tasks in Duke.
+Format: `list`

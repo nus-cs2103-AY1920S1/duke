@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -22,6 +25,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private FXMLLoader fxmlLoader;
     
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -42,6 +46,10 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    public void setLoader(FXMLLoader fLoader) {
+        fxmlLoader = fLoader;
+    }
+
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -50,16 +58,42 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        
+        if(duke.needReminder(input)){
+            this.showReminder(duke.getReminder(input), duke.getReminderDelay(input));
+        }
         userInput.clear();
     }
     
-    public void showReminder(String reminder) {
+    public void showReminder(String reminder, long delay) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+        scheduler.schedule(
+                new Runnable(){
+                    @Override
+                    public void run() {
+                        //new dialog box in main window to show                    
+                        dialogContainer.getChildren().addAll(
+                                DialogBox.getDukeDialog(reminder, dukeImage)
+                        );
+                    }
+                },
+                delay,
+                TimeUnit.SECONDS);
+    }
+    
+    public void dukeDisplay(String string) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(reminder, dukeImage)
+                DialogBox.getDukeDialog(string, dukeImage)
         );
+    }
+    
+    public FXMLLoader getFxmlLoader() {
+        return fxmlLoader;
     }
 }

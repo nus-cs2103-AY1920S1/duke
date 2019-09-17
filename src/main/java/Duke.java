@@ -37,4 +37,16 @@ public class Duke {
         
         return output;
     }
+    
+    public boolean needReminder(String input) {
+        return Parser.checkReminder(input);
+    }
+    
+    public String getReminder(String input) {
+        return Parser.getReminder(input);
+    }
+    
+    public long getReminderDelay(String input) {
+        return Parser.getReminderDelay(input);
+    }
 }

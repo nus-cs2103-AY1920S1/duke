@@ -1,13 +1,7 @@
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Parser {
@@ -140,27 +134,55 @@ public class Parser {
             
             Duration duration = Duration.between(LocalDateTime.now(), LocalDateTime.parse(cmdArgs[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
             long initalDelay = duration.getSeconds();
-            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-            scheduler.schedule(new Runnable(){
-                @Override
-                public void run() {
-                    //new dialog box in main window to show
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
-                    try {
-                        Parent root = loader.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    
-                    loader.<MainWindow>getController().showReminder(reminder);
-                }
-                               },
-                    initalDelay,
-                    TimeUnit.SECONDS);
+            
+            result.add("Reminder added for task " + cmdArgs[0]);
+            break;
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         
         return result;
+    }
+    
+    public static boolean checkReminder(String input) {
+        //Split input incase it has a command and argument
+        String[] inputArray = input.split(" ", 2);
+
+        
+
+        switch (inputArray[0]) {
+        case "remind":
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    public static long getReminderDelay(String input) {
+        Duration duration = Duration.of(0, TimeUnit.SECONDS.toChronoUnit());
+        try {
+            String[] inputArray = input.split(" ", 2);
+            String[] cmdArgs = new String[0];
+            cmdArgs = inputArray[1].split(" /at ", 2);
+            String reminder = "Reminder for task no. " + cmdArgs[0];
+            duration = Duration.between(LocalDateTime.now(), LocalDateTime.parse(cmdArgs[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        } finally {
+            
+        } 
+        long initalDelay = duration.getSeconds();
+        return initalDelay;
+    }
+    
+    public static String getReminder(String input) {
+        String reminder = "";
+        try {
+            String[] inputArray = input.split(" ", 2);
+            String[] cmdArgs = new String[0];
+            cmdArgs = inputArray[1].split(" /at ", 2);
+            reminder = "Reminder for task no. " + cmdArgs[0];
+        } finally {
+            
+        }
+        return reminder;
     }
 }

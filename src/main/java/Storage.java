@@ -52,7 +52,7 @@ public class Storage {
             }
             String[] inputArr = scanner.nextLine().trim().split(" ", 3);
             char taskType = inputArr[0].charAt(1);
-            boolean isTaskComplete = (inputArr[1].equals("[\u2713]")) ? true : false;
+            boolean isTaskComplete = (inputArr[1].equals("[o]")) ? true : false;
             if (taskType == 'T') {
                 tasklist.add(new Task(inputArr[2], ADD_TYPE_TODO, isTaskComplete));
             } else if (taskType == 'D') {

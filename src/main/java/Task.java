@@ -60,7 +60,7 @@ public class Task {
      * @return Tick or cross indicating completion of task
      */
     public String getStatusIcon() {
-        return (isDone ? "[\u2713]" : "[\u2718]");
+        return (isDone ? "[o]" : "[\u2718]");
     }
 
     /**
@@ -93,6 +93,10 @@ public class Task {
      */
     public String getDateTime() {
         return dateTime.format(formatter);
+    }
+
+    public LocalDateTime getDateTimeAsDateTime() {
+        return dateTime;
     }
 
     /**

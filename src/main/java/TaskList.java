@@ -1,6 +1,10 @@
+import javafx.scene.layout.Priority;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.PriorityQueue;
 
 /**
  * Handles operations to the task list and contains the task list.
@@ -143,5 +147,29 @@ public class TaskList {
                 listString += '\n' + INDENT + ' ';
             }
         }
+    }
+
+    /**
+     * Prints a sorted list, either by earliest to latest or completion status.
+     * @param keyword Indicates sorting type, either "completion" or "datetime"
+     * @return String of sorted list, by completion or by datetime
+     */
+    public String returnSortedTasksString(String keyword) {
+        ArrayList<Task> taskListCopy = new ArrayList<Task>();
+        for (Task task : list) {
+            taskListCopy.add(task);
+        }
+        if (keyword.equals("datetime")) {
+            Collections.sort(taskListCopy, new SortByEarliestDeadline());
+        } else {
+            Collections.sort(taskListCopy, new SortByCompleted());
+        }
+        int counter = 1;
+        String tempListString = "" + INDENT + " ";
+        for (Task task : taskListCopy) {
+            tempListString += counter + ". " + task + '\n' + INDENT + " ";
+            counter++;
+        }
+        return tempListString;
     }
 }

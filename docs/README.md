@@ -243,7 +243,7 @@ E | event
  * If exists, the third variable may be a timestamp depending on whether it is a `deadline` or `event` task. The timestamp will be in the format  [dd/MM/yyyy HHmm].
  * If the task has been completed, the last variable will be the timestamp of when it was marked as done.
 
-This is an example of an expected chart:  
+This is an example of a sample text file:  
 <img src="https://github.com/EvonDong/duke/blob/master/docs/data.png" width="370">
 <br>
 <br>

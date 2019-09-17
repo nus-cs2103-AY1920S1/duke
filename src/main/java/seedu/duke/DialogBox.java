@@ -46,6 +46,8 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(50, 40, 50));
+
+        dialog.setStyle(dialog.getStyle() + ("-fx-background-color: rgba(0.5,180,355,0.05);"));
     }
 
     /**

@@ -1,7 +1,11 @@
 package seedu.duke;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
@@ -37,6 +41,8 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserImage.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeImage.png"));
     private Image chatBotImage = new Image(this.getClass().getResourceAsStream("/images/ChatBot_Image.jpg"));
+
+    public static EventHandler<ActionEvent> exitHandler;
 
     /**
      * Binds the scroll pane to the dialogContainer so as to set up the main layout.

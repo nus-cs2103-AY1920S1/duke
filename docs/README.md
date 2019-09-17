@@ -26,7 +26,7 @@ Adds a new tasks to todo list, doing so will:
  Deadline |  **deadline** <description>  **/by** <date in DD/MM/YYY HHMM format>
   Event |  **Event** <description>  **/at** <date in DD/MM/YYY HHMM format>
   
-  ### Mark task as done
+ ### Mark task as done
   Marks the task as completed. Doing so will :
   * Change the status icon of task when the todo list is shown using **list** command. 
   *  Update the task in duke.txt (from 1 to 0).
@@ -48,7 +48,14 @@ Adds a new tasks to todo list, doing so will:
        Here are the tasks in your list:**
     
     **1.[**<task type>**][** <status icon, either *v for completed* or *x for not completed* **]** <description> **(by/at:** <date in DAY MONTH DATE HH:MM:SS format> **SGT 2019)**
-  Command: **list**
+    
+    Task type |
+    ------------ | -------------
+    Deadline | **D**
+    Event | **E**
+    Todo | **T**
+  
+   Command: **list**
  
 
 

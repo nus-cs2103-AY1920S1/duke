@@ -45,6 +45,10 @@ public class Deadline extends Task {
         return this.dateToStorage;
     }
 
+    /**
+     * A representation of the deadline
+     * @return a string representing the deadline
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by : " + this.date + ")";

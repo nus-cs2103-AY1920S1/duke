@@ -1,18 +1,23 @@
-# Duke - User Guide :grinning:
-![DukeLogo](/images/theDuke.jpg)  
+# Duke - User Guide :grinning:   
+
+![Duke Logo](/images/theDuke.png)
+![Duke](https://raw.githubusercontent.com/charliechoong/duke/master/resources/images/theDuke.png)  
 
 **Table of Contents :**  
 - [1. Introduction](#1-introduction)  
 - [2. Features](#2-features)  
-- [3. Commands](#3-commands)  
-    - [3.1 Adding a task](#1-adding-a-task)  
-    - [3.2 Listing all tasks](#2-listing-all-tasks-list)
-    - [3.3 Marking a task as done](#3-marking-a-task-as-done--done-)
-    - [3.4 Deleting a task](#4-deleting-a-task--delete)
-    - [3.5 Filtering tasks using a keyword](#5-filtering-tasks-using-keyword-find)
-    - [3.6 Prioritising a task](#6-prioritizing-a-task---1-2-3)
-    - [3.7 Exiting the program](#7-exiting-the-program---bye)
+    - [2.1 Feature 1: Task category](#21-feature-1-task-category)
+    - [2.2 Feature 2: Saving and loading tasks](#22-feature-2-saving-and-loading-list)
+- [3. Commands](#33-commands)  
+    - [3.1 Adding a task](#31-adding-a-task)  
+    - [3.2 Listing all tasks](#32-listing-all-tasks-list)
+    - [3.3 Marking a task as done](#33-marking-a-task-as-done--done-)
+    - [3.4 Deleting a task](#34-deleting-a-task--delete)
+    - [3.5 Filtering tasks using a keyword](#35-filtering-tasks-using-keyword-find)
+    - [3.6 Prioritising a task](#36-prioritizing-a-task---1-2-3)
+    - [3.7 Exiting the program](#37-exiting-the-program---bye)
 - [4. Command Summary](#4-command-summary)
+- [5. Frequently Asked Questions](#5-faq)
 
 ## 1. Introduction
    Duke is an application for users to manage their tasks in life. It uses simple commands and
@@ -20,38 +25,30 @@
 ## 2. Features 
    To utilise the features, users simple type in appropriate commands and Duke will carry out.
    The features are as listed below:
-   * Feature 1  
-      Duke categorised tasks into 3 types:
-      - **To-do**   
-        These tasks are things that the users would plan to 
-        do. 
+### 2.1. Feature 1: Task Category  
+   Duke categorised tasks into 3 types:
+   - **To-do**   
+   These tasks are things that the users would plan to 
+     do. 
         
-      - **Deadline**   
-        These tasks are similar to **To-do** tasks, but they have 
-        deadlines. 
+   - **Deadline**   
+   These tasks are similar to **To-do** tasks, but they have deadlines. 
             
-      - **Event**  
-        These tasks are events that users like to keep track 
-        of.  
+   - **Event**  
+   These tasks are events that users would like to keep track of.  
         
-   * Feature 2  
-      Duke allows for loading and saving tasks from and to 
-      hard disk. This means that users can exit the application
-      and still have the updates list of task when they use
-      it again.
-      
-   * Feature 3   
-      Duke allows users to prioritise their tasks. This helps
-      them to keep track of the more important tasks, especially
-      if they have many tasks in the list.
+### 2.2. Feature 2: Saving and loading list  
+   Duke allows for loading and saving tasks from and to 
+   hard disk. This means that users can exit the application
+   and still have the updates list of task when they use
+   it again. 
     
-
 ## 3. Commands
-The commands are as listed below : 
+   The commands are as listed below : 
 
-### 3.1 Adding a task : `add`
-This command allows you to add any of the 3 types of tasks to 
-list. The full command differs for all 3 types.
+### 3.1. Adding a task : `add`
+   This command allows you to add any of the 3 types of tasks to 
+   list. The full command differs for all 3 types.
 
 *Format for Todo task: `todo [description]`*
 * __Example of adding a *Todo* task__:  
@@ -96,7 +93,7 @@ corresponding details in the list.
         3.[E][-] presentation (at: 10aug)
         4.[D][-] throw mum off building :) (by: 3 sept 2090)
     ```
-### 3. Marking a task as done : `done `
+### 3.3. Marking a task as done : `done `
 This command allows the user to mark a task as done.  
  
 *Format: `done [taskIndex]`*
@@ -109,7 +106,7 @@ This command allows the user to mark a task as done.
      [+] presentation
     ```
     
-### 4. Deleting a task : `delete`
+### 3.4. Deleting a task : `delete`
 This command allows the user to delete a task.  
 
 *Format: `delete [taskIndex]`*
@@ -121,7 +118,7 @@ This command allows the user to delete a task.
     Noted. I've removed this task:     
       [D][-] throw mum off building :) (by: 3 sept 2090)
     ```
-### 5. Filtering tasks using keyword: `find`
+### 3.5. Filtering tasks using keyword: `find`
 This command allows the user to list out all tasks containing a
 keyword.
 
@@ -136,7 +133,7 @@ keyword.
         2.[E][-] presentation (at: 10aug)
     ```
     *This command lists out all the tasks containing the keyword `10`.*
-### 6. Prioritizing a task :  `#1` `#2` `#3`
+### 3.6. Prioritizing a task :  `#1` `#2` `#3`
 This command allows the user to prioritise a task. `#1` represents high 
 priority. `#2` represents medium priority. `#3` represents low
 priority.    
@@ -152,7 +149,7 @@ priority.
     ```  
     *This sets the second task with a HIGH priority.*
 
-### 7. Exiting the program :  `bye`  
+### 3.7. Exiting the program :  `bye`  
 This command allows the user to exit the Duke application.
 * __Example of usage__:  
     `bye`
@@ -160,7 +157,7 @@ This command allows the user to exit the Duke application.
 * __Expected outcome__:  
     `Farewell detected. Duke turning off...zzz`
 
-## Command Summary
+## 4. Command Summary
 
 * Add : `[taskType] [description] ...`  
    * Todo: `todo [description]`
@@ -185,4 +182,12 @@ This command allows the user to exit the Duke application.
 * List : `list`
 
 * Prioritise: `#[priorityNumber] [taskIndex]`
-   * eg. `#2 3` , `#1 1` , `#3 1`
+   * eg. `#2 3` , `#1 1` , `#3 1`  
+   
+## 5. FAQ
+* Q: *Why doesn't my list load correctly when I re-opened the application?*  
+    * You have to exit the program correctly (ie. with the "bye" command) in order for the application to update
+      on the hard disk.  
+      
+* Q: *Why can't I add the Event/Deadline task?*
+    * Please ensure that you followed the correct format. Please refer to [3.1 Adding a task](31-adding-a-task--add).

@@ -95,19 +95,19 @@ public class Storage {
         switch (taskInfo[0]) {
         case "T":
             taskList.addNewTodoTask(taskInfo[2],
-                    taskInfo[1].equals(Task.DONE));
+                    taskInfo[1].equals(Task.DONE + ""));
             break;
 
         case "D":
             taskList.addNewDeadlineTask(taskInfo[2],
                     taskInfo[3],
-                    taskInfo[1].equals(Task.DONE));
+                    taskInfo[1].equals(Task.DONE + ""));
             break;
 
         case "E":
             taskList.addNewEventTask(taskInfo[2],
                     taskInfo[3],
-                    taskInfo[1].equals(Task.DONE));
+                    taskInfo[1].equals(Task.DONE + ""));
             break;
 
         default:

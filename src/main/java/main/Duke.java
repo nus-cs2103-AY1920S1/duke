@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class Duke {
 
-    private static final String ROOT = Paths.get(System.getProperty("user.dir")).getRoot().toString();
+    private static final String ROOT = Paths.get(System.getProperty("user.home")).toString();
     private static final String STORAGE_PATH = "\\duke.txt";
     private static final Logger LOGGER = Logger.getLogger(Duke.class.getName());
     public static final String EXIT_MESSAGE = "main.Duke.EXIT_MESSAGE";

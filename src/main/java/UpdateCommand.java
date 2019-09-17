@@ -22,7 +22,7 @@ public class UpdateCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         int num;
         String[] inputArr = input.split(" ");
         switch (action) {
@@ -37,14 +37,15 @@ public class UpdateCommand extends Command {
                     throw new DukeException("☹ OOPS!!! Please input a valid number.");
                 } else {
                     tasks.getTask(num - 1).markAsDone();
+                    storage.save(tasks);
                 }
             break;
         case LIST:
-            return tasks.listTasks();
+            ui.setResponse(tasks.listTasks());
+            break;
         default:
             break;
         }
-        return null;
     }
 
 

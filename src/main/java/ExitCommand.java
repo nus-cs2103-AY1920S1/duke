@@ -19,10 +19,9 @@ public class ExitCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         this.isExit = true;
-        Duke.print("Bye. Hope to see you again soon!");
-        return ("Bye. Hope to see you again soon!");
+        ui.setResponse ("Bye. Hope to see you again soon!");
     }
 
 

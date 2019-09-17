@@ -23,7 +23,7 @@ public class AddCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         int num;
         String desc;
         Task task = null;
@@ -82,20 +82,13 @@ public class AddCommand extends Command {
         // if task is still null do nothing
         if (task != null) {
             tasks.addTask(task);
-            Duke.print("Got it. I've added this task:\n"
+            ui.setResponse("Got it. I've added this task:\n"
                     +
                     "       " + task + "\n"
                     +
                     "     Now you have " + tasks.getSize() + " tasks in the list.");
-            return ("Got it. I've added this task:\n"
-                    +
-                    "       " + task + "\n"
-                    +
-                    "     Now you have " + tasks.getSize() + " tasks in the list.");
+            storage.save(tasks);
         } else {
-            return null;
         }
     }
-
-
 }

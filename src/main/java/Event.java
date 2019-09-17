@@ -13,7 +13,7 @@ public class Event extends Task {
      */
     public Event(String task, String dateTime) {
         super(task);
-        this.dateTime = Duke.toDateString(dateTime);
+        this.dateTime = Ui.toDateString(dateTime);
     }
 
     /**

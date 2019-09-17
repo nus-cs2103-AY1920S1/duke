@@ -13,7 +13,7 @@ public class Deadline extends Task {
      */
     public Deadline(String task, String dateTime) {
         super(task);
-        this.dateTime = Duke.toDateString(dateTime);
+        this.dateTime = Ui.toDateString(dateTime);
     }
 
     /**

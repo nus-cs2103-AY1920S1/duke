@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
      * @param storage Storage object to save and load files.
      */
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] inputArr = input.split(" ");
         //no input number
         if (inputArr.length == 1) {
@@ -31,17 +31,14 @@ public class DeleteCommand extends Command {
         if (num > tasks.getSize()) {
             throw new DukeException("☹ OOPS!!! Please input a valid number.");
         } else {
-            Duke.print("Noted. I've removed this task:\n"
-                    +
-                    "     " + tasks.getTask(num - 1) + "\n"
-                    +
-                    "     Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
             tasks.deleteTask(num - 1);
-            return ("Noted. I've removed this task:\n"
+            ui.setResponse("Noted. I've removed this task:\n"
                     +
                     "     " + tasks.getTask(num - 1) + "\n"
                     +
                     "     Now you have " + (tasks.getSize() - 1) + " tasks in the list.");
+            storage.save(tasks);
+
         }
     }
 }

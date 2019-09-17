@@ -17,7 +17,6 @@ public class TaskList implements Serializable {
         for (int i = 0; i < size; i++) {
             listOfTask.append(i + 1 + ". " + this.tasks.get(i) + "\n" + "     ");
         }
-        Duke.print(listOfTask.toString());
         return (listOfTask.toString());
 
     }

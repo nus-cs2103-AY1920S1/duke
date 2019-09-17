@@ -10,7 +10,7 @@ public class FindCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String desc = this.input.substring(4).trim();
         if (desc.equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a find cannot be empty.");
@@ -23,7 +23,7 @@ public class FindCommand extends Command {
                 i++;
             }
         }
-        return ("Here are the matching tasks in your list:" + "\n" + result);
+        ui.setResponse("Here are the matching tasks in your list:" + "\n" + result);
     }
 }
 

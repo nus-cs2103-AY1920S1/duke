@@ -40,7 +40,7 @@ public class Duke {
             isExit = c.isExit();
             storage.save(tasks.getAllTasks());
 
-            if(isExit) {
+            if (isExit) {
                 return ui.goodbye();
             } else {
                 return c.toString();
@@ -70,6 +70,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets the string status of data loading for the task list.
+     * @return String statement of success/failure
+     */
     public String getLoadFileResponse() {
         if (isDataLoaded) {
             return ui.showLoadingSuccess();

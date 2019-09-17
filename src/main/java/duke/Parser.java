@@ -69,22 +69,22 @@ public class Parser {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         switch (command) {
-            case "delete":
-                return new DeleteCommand(Integer.parseInt(description.trim()));
-            case "todo":
-                return new AddCommand(new Todo(description.trim()));
-            case "find":
-                return new FindCommand(description);
-            case "deadline":
-                assert description.contains("/by") : "Missing arguments for deadline";
-                String[] byLimiter = description.split(" /by ", 2);
-                return new AddCommand(new Deadline(byLimiter[0].trim(), formatter.parse(byLimiter[1])));
-            case "event":
-                assert description.contains("/at") : "Missing arguments for event";
-                String[] atLimiter = description.split(" /at ", 2);
-                return new AddCommand(new Event(atLimiter[0].trim(), formatter.parse(atLimiter[1])));
-            default:
-                return null;
+        case "delete":
+            return new DeleteCommand(Integer.parseInt(description.trim()));
+        case "todo":
+            return new AddCommand(new Todo(description.trim()));
+        case "find":
+            return new FindCommand(description);
+        case "deadline":
+            assert description.contains("/by") : "Missing arguments for deadline";
+            String[] byLimiter = description.split(" /by ", 2);
+            return new AddCommand(new Deadline(byLimiter[0].trim(), formatter.parse(byLimiter[1])));
+        case "event":
+            assert description.contains("/at") : "Missing arguments for event";
+            String[] atLimiter = description.split(" /at ", 2);
+            return new AddCommand(new Event(atLimiter[0].trim(), formatter.parse(atLimiter[1])));
+        default:
+            return null;
         }
     }
 }

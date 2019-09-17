@@ -4,10 +4,13 @@ package ui;
  * Interacts with the user with beautified interface.
  */
 public class UserInterface {
+
     /**
      * Constructs the UserInterface object.
      */
-    public UserInterface() {}
+    public UserInterface() {
+
+    }
 
     /**
      * Displays the welcome message for the user and prompts their inputs.

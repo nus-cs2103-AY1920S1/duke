@@ -32,6 +32,7 @@ public abstract class Command {
     }
 
     /**
+     * Indicates if the command is to exit or not.
      * @return Indicates if the command is to exit or not.
      */
     public boolean isExit() {

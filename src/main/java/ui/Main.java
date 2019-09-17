@@ -24,7 +24,7 @@ public class Main extends Application {
 
             Duke duke = new Duke("data/dukeData.txt");
             String loadDukeMsg = duke.getFileFoundResponse("loading duke");
-            if(loadDukeMsg.contains("Success")) {
+            if (loadDukeMsg.contains("Success")) {
                 fxmlLoader.<MainWindow>getController().setDuke(duke);
                 stage.show();
                 fxmlLoader.<MainWindow>getController().showLoadDukeStatus();

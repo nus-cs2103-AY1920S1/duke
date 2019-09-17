@@ -13,6 +13,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() + ((priority == null)? "" : " <<Priority: " + priority + ">>");
+        return "[T]" + super.toString() + ((priority == null)? "" : " <<P: " + priority + ">>");
     }
 }

@@ -14,7 +14,7 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "+" : "-");
+        return (isDone ? "\u2713" : "\u274C");
     }
 
     /** Set a task as done and returns an acknowledgement of making the task as done.
@@ -22,7 +22,7 @@ public class Task {
      */
     public String markAsDone() {
         this.isDone = true;
-        String reply = "Nice! I've marked this task as done:\n\t" +  " [+] " + description;
+        String reply = "Nice! I've marked this task as done:\n\t" +  " [\u2713] " + description;
         return reply;
     }
 

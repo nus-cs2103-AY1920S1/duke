@@ -1,7 +1,8 @@
 language: java
+
 matrix:
    include:
-     - jdk: openjdk12
+     - jdk: openjdk11
 
 before_install:
   - chmod +x gradlew

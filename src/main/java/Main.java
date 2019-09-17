@@ -29,7 +29,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/DaDuke.png")));
-            stage.setTitle("Duke");
+            stage.setTitle("DaDuke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

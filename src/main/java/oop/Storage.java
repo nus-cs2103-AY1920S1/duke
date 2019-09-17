@@ -39,6 +39,8 @@ public class Storage {
     public String load() throws DukeException {
         try {
             File f = new File(filePath);
+            File folder = new File("data");
+            folder.mkdir();
             f.createNewFile();
             Scanner sc = new Scanner(f);
 

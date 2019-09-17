@@ -116,7 +116,7 @@ public class TaskList implements Iterable<Task> {
      */
     public String[] printList() {
         String[] output = new String[this.taskList.size() + 1];
-        output[0] = "Here are the tasks in your list";
+        output[0] = "Here are the tasks in your list:";
         int counter = 1;
         for (Task task : this.taskList) {
             output[counter] = counter++ + "." + task;

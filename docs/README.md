@@ -13,7 +13,9 @@ Exits DukeBot application.
 
 Example of usage: 
 
-`bye`
+```
+bye
+```
 
 Expected outcome:
 
@@ -27,7 +29,9 @@ Adds a Deadline Task to task list.
 
 Example of usage: 
 
-`deadline hello world /by 01/01/2019 1800`
+```
+deadline hello world /by 01/01/2019 1800
+```
 
 Expected outcome:
 
@@ -43,7 +47,9 @@ Deletes a task from task list.
 
 Example of usage: 
 
-`delete 1`
+```
+delete 1
+```
 
 Expected outcome:
 
@@ -59,7 +65,9 @@ Marks a task as done in task list.
 
 Example of usage: 
 
-`done 1`
+```
+done 1
+```
 
 Expected outcome:
 
@@ -74,7 +82,9 @@ Adds an Event Task to task list.
 
 Example of usage: 
 
-`event hello world /at 01/01/2019 1800`
+```
+event hello world /at 01/01/2019 1800
+```
 
 Expected outcome:
 
@@ -90,7 +100,9 @@ Searches tasks by keyword in the task list.
 
 Example of usage: 
 
-`find world`
+```
+find world
+```
 
 Expected outcome:
 
@@ -105,7 +117,9 @@ Lists all tasks in the task list.
 
 Example of usage: 
 
-`list`
+```
+list
+```
 
 Expected outcome:
 
@@ -120,7 +134,9 @@ Adds a tag to a task in the task list.
 
 Example of usage: 
 
-`tag 1 /as life`
+```
+tag 1 /as life
+```
 
 Expected outcome:
 
@@ -135,7 +151,9 @@ Adds a Todo Task to task list.
 
 Example of usage: 
 
-`todo hello world`
+```
+todo hello world
+```
 
 Expected outcome:
 

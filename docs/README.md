@@ -18,7 +18,7 @@ Example: `todo` `CS2103T Quiz`
 
 You should see that the task has been added to your list:
 
-![ToDo Image](/docs/ToDo.png)
+![ToDo Image](https://i.imgur.com/2f2VI2x.png)
 
 #### 2. Adding a 'Deadline' task
 
@@ -30,7 +30,7 @@ Example: `deadline` `iP` `[/by]` `[17/09/2019 1000]`
 
 You should see that the task has been added to your list:
 
-![Deadline Image](/docs/Deadline.png)
+![Deadline Image](https://i.imgur.com/A5Ja9WS.png)
 
 :warning: Date & Time must be entered in format dd/mm/yyyy HHmm
 
@@ -44,7 +44,7 @@ Example: `event` `concert` `[/at]` `[28/09/2019 2000]`
 
 You should see that the task has been added to your list:
 
-![Event Image](/docs/Event.png)
+![Event Image](https://i.imgur.com/vfYzrup.png)
 
 :warning: Date & Time must be entered in format dd/mm/yyyy HHmm
 
@@ -58,7 +58,7 @@ Example: `list`
 
 You should now see a list of your tasks:
 
-![List Image](/docs/List.png)
+![List](https://i.imgur.com/3wgh0sh.png)
 
 #### 5. Finding tasks
 
@@ -70,7 +70,7 @@ Example: `find` `concert`
 
 You should then see a list of tasks which contains the word "concert":
 
-![Find Image](/docs/Find.png)
+![Find Image](https://i.imgur.com/0GSMPtU.png)
 
 #### 6. Mark as done
 
@@ -82,7 +82,7 @@ Example: `done` `2`
 
 This will set task number 2 in the list as done and you should see something like this: 
 
-![Done Image](/docs/Done.png)
+![Done Image](https://i.imgur.com/KMDVrQa.png)
 
 #### 6. Delete tasks
 
@@ -94,7 +94,7 @@ Example: `delete` `2`
 
 This will remove task number 2 in the list and you should see something like this:
 
-![Delete Image](/docs/Delete.png)
+![Delete Image](https://i.imgur.com/mqKjZ9w.png)
 
 #### 7. In-App Help
 
@@ -106,7 +106,7 @@ Example: `help`
 
 You should now be able to view the available commands for the app:
 
-![Help Image](/docs/Help.png)
+![Help Image](https://i.imgur.com/rSZAAeI.png)
 
 
 

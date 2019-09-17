@@ -14,7 +14,7 @@ public class AddCommandTest {
             AddCommand lc = new AddCommand("deadline", "/by now");
             lc.execute(tasks, ui);
         } catch (DukeException e) {
-            assertEquals("Please include task description!", e.getMessage());
+            assertEquals("Please include task description!\n", e.getMessage());
         } catch (ParseException pe) {
             fail();
         }

@@ -27,8 +27,8 @@ public class Duke extends Application {
 	private Button sendButton;
 	private Scene scene;
 
-	private Image user = new Image(this.getClass().getResourceAsStream("/images/eclair.jpeg"));
-	private Image duke = new Image(this.getClass().getResourceAsStream("/images/USP_shirts.png"));
+	private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+	private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
 	private Storage storage;
 	private TaskList tasks;
@@ -163,7 +163,7 @@ public class Duke extends Application {
 		try {
 			String[] parts = command.split(" ");
 			String type = parts[0];
-			String remainingCommand = command.substring(type.length());
+			String remainingCommand = command.substring(type.length()).trim();
 			Command c = Parser.parse(type, remainingCommand);  // ?
 			c.execute(tasks, ui);
 			storage.update(tasks, filename);

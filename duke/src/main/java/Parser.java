@@ -17,6 +17,8 @@ class Parser {
 			return new ExitCommand(command, remainingCommand);
 		} else if (command.equals("find")) {
 			return new FindCommand(command, remainingCommand);
+		} else if (command.equals("update")) {
+			return new UpdateCommand(command, remainingCommand);
 		} else {
 			return new AddCommand(command, remainingCommand);
 		}

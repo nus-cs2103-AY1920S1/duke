@@ -46,7 +46,10 @@ public class DoneCommand extends Command {
         if (!errorMessage.equals("")) {
             return errorMessage;
         } else {
-            return task.toString();
+            String output = "";
+            output += "Well done! You have completed this task:\n\n"
+                    + task.toString();
+            return output;
         }
     }
 }

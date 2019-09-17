@@ -49,7 +49,7 @@ public class Main extends Application {
      * @param scene the Scene at which the welcome message is displayed
      */
     private void addWelcomeMessage(Scene scene) {
-        String welcomeMessage  = "Hello! I'm duke.Duke\nWhat can I do for you?";
+        String welcomeMessage  = "Hello! I'm Duke\nWhat can I do for you?";
         VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMessage,

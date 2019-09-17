@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,7 +44,9 @@ public class Storage {
      * @param arr an ArrayList of Tasks to update the file in the corresponding filePath
      */
     public static  void  updateFile(ArrayList<Task> arr) {
-        File dir = new File("/Users/joannasara/Desktop/duke/data");
+//        File dir = new File("/Users/joannasara/Desktop/duke/data");
+        Path path = FileSystems.getDefault().getPath(".");
+        File dir = new File(path.toString() + "/data");
         if (!dir.exists()) {
             dir.mkdir();
         }
@@ -67,8 +71,9 @@ public class Storage {
      * @param arr an ArrayList of Tasks
      */
     public static void addToArchive(ArrayList<Task> arr) {
-        File dir = new File("/Users/joannasara/Desktop/duke/data");
-        if (!dir.exists()) {
+//        File dir = new File("/Users/joannasara/Desktop/duke/data");
+        Path path = FileSystems.getDefault().getPath(".");
+        File dir = new File(path.toString() + "/data");        if (!dir.exists()) {
             dir.mkdir();
         }
 

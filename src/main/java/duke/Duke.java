@@ -40,7 +40,6 @@ public class Duke extends Application {
         try {
             taskList  = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
             taskList = new TaskList();
         }
         parser = new Parser(taskList, ui);

@@ -8,16 +8,16 @@ package duke.task;
  * get its status icon and description, as well as its String representation.
  */
 public abstract class Task {
-    protected String _description;
-    protected boolean _isDone;
+    protected String description;
+    protected boolean isDone;
 
     /**
      * Constructs a Task object (which cannot be initialised on its own)
      * @param description a Description of the Task
      */
     public Task(String description) {
-        this._description = description;
-        this._isDone = false;
+        this.description = description;
+        this.isDone = false;
     }
 
     /**
@@ -27,14 +27,14 @@ public abstract class Task {
      * and a "X" if a Task is not marked as done
      */
     public final String getStatusIcon() {
-        return (_isDone ? "O" : "X");
+        return (isDone ? "O" : "X");
     }
 
     /**
      * Marks the Task as done.
      */
     public final void markAsDone() {
-        this._isDone = true;
+        this.isDone = true;
     }
 
     /**
@@ -42,7 +42,7 @@ public abstract class Task {
      * @return a description of the current Task
      */
     public final String getDesc() {
-        return this._description;
+        return this.description;
     }
 
     /**

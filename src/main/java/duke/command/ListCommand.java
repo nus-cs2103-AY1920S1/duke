@@ -3,8 +3,6 @@ package duke.command;
 import duke.Ui;
 import duke.data.DukeData;
 
-import java.io.IOException;
-
 /**
  * The ListCommand handles the command where the user requests to view the tasks in his/her list.
  */
@@ -17,7 +15,7 @@ public class ListCommand implements Command {
      * @return a string representation of the list of tasks added to the Duke Program
      */
     @Override
-    public String execute(DukeData dukeData, Ui ui) throws IOException {
+    public String execute(DukeData dukeData, Ui ui) {
         return ui.showList(dukeData.load().getList());
     }
 }

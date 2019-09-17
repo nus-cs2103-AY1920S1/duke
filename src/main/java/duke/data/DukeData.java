@@ -16,17 +16,17 @@ import java.io.IOException;
  */
 public class DukeData {
     // every time Duke starts up, create and load a new or existing file.
-    private File _saveFile;
-    private FileWriter _fw;
-    private BufferedWriter _bw;
-    private TaskList _taskList;
+    private File saveFile;
+    private FileWriter fw;
+    private BufferedWriter bw;
+    private TaskList taskList;
 
     /**
      * Generates a new DukeData object which handles creation of a
      * new txt file in the default data directory.
      */
     public DukeData() {
-        this._taskList = new TaskList();
+        this.taskList = new TaskList();
 
         // create a new File in the data file
         File dir = new File("/Users/StudyBuddy/Desktop/CS2103/iP/duke/src/main/data");
@@ -40,15 +40,15 @@ public class DukeData {
                     if (!tagFile.exists()) {
                         tagFile.createNewFile();
                     }
-                    this._saveFile = tagFile;
+                    this.saveFile = tagFile;
                 } catch (IOException e) {
                     System.err.println("Data file is null.");
                 }
             }
 
             // attach the file to FileWriter and BufferedWriter
-            this._fw = new FileWriter(this._saveFile);
-            this._bw = new BufferedWriter(this._fw);
+            this.fw = new FileWriter(this.saveFile);
+            this.bw = new BufferedWriter(this.fw);
         } catch (IOException e) {
             System.err.println("Cant make Directory.");
         }
@@ -60,7 +60,7 @@ public class DukeData {
      * @param filePath the file path where the user wants to save Duke's data to
      */
     public DukeData(String filePath) {
-        this._taskList = new TaskList();
+        this.taskList = new TaskList();
 
         // create a new File in the data file
         File dir = new File(filePath);
@@ -74,15 +74,15 @@ public class DukeData {
                     if (!tagFile.exists()) {
                         tagFile.createNewFile();
                     }
-                    this._saveFile = tagFile;
+                    this.saveFile = tagFile;
                 } catch (IOException e) {
                     System.err.println("Data file is null.");
                 }
             }
 
             // attach the file to FileWriter and BufferedWriter
-            this._fw = new FileWriter(this._saveFile);
-            this._bw = new BufferedWriter(this._fw);
+            this.fw = new FileWriter(this.saveFile);
+            this.bw = new BufferedWriter(this.fw);
         } catch (IOException e) {
             System.err.println("Cant make Directory.");
         }
@@ -92,14 +92,13 @@ public class DukeData {
      * Adds and updates the given task to the file saved in the hard disk.
      * @param index the index of the task to be added
      * @param task Task object which can represent ToDo, Deadline, or Event
-     * @throws IOException if an I/O Exception occurs
      */
     public void addTask(int index, Task task) throws IOException {
-        this._taskList.addTask(task);
+        this.taskList.addTask(task);
 
-        this._bw.write(String.format(" %d. %s", index, task.toData()));
-        this._bw.newLine();
-        this._bw.flush();
+        this.bw.write(String.format(" %d. %s", index, task.toData()));
+        this.bw.newLine();
+        this.bw.flush();
     }
 
     /**
@@ -108,20 +107,20 @@ public class DukeData {
      * @throws IOException if an I/O Exception occurs
      */
     public void removeTask(int index) throws IOException {
-        this._taskList.removeTask(index);
+        this.taskList.removeTask(index);
 
         // now we replace the file with the new updated data
         int count = 1;
-        FileWriter updatedFW = new FileWriter(this._saveFile);
+        FileWriter updatedFW = new FileWriter(this.saveFile);
         BufferedWriter updatedBW = new BufferedWriter(updatedFW);
-        for (Task task : this._taskList.getList()) {
+        for (Task task : this.taskList.getList()) {
             updatedBW.write(String.format(" %d. %s", count, task.toData()));
             updatedBW.newLine();
             count++;
         }
         updatedBW.flush();
-        this._fw = updatedFW;
-        this._bw = updatedBW;
+        this.fw = updatedFW;
+        this.bw = updatedBW;
     }
 
     /**
@@ -133,20 +132,20 @@ public class DukeData {
      */
     public void taskDone(int index)
             throws IOException, FileNotFoundException {
-        this._taskList.markTaskAsDone(index);
+        this.taskList.markTaskAsDone(index);
 
         // now we replace the file with the new updated data
         int count = 1;
-        FileWriter updatedFW = new FileWriter(this._saveFile);
+        FileWriter updatedFW = new FileWriter(this.saveFile);
         BufferedWriter updatedBW = new BufferedWriter(updatedFW);
-        for (Task task : this._taskList.getList()) {
+        for (Task task : this.taskList.getList()) {
             updatedBW.write(String.format(" %d. %s", count, task.toData()));
             updatedBW.newLine();
             count++;
         }
         updatedBW.flush();
-        this._bw = updatedBW;
-        this._fw = updatedFW;
+        this.bw = updatedBW;
+        this.fw = updatedFW;
     }
 
     /**
@@ -154,7 +153,7 @@ public class DukeData {
      * @throws IOException if an I/O Exception occurs
      */
     public void exit() throws IOException {
-        this._bw.close();
+        this.bw.close();
     }
 
     /**
@@ -164,7 +163,7 @@ public class DukeData {
      */
     public String showDataFile() throws IOException {
         BufferedReader out = new BufferedReader(
-                new FileReader(this._saveFile));
+                new FileReader(this.saveFile));
         String line = out.readLine();
         StringBuilder dataOut = new StringBuilder();
 
@@ -183,6 +182,6 @@ public class DukeData {
      * @return the TaskList object of the list that DukeData manages
      */
     public TaskList load() {
-        return this._taskList;
+        return this.taskList;
     }
 }

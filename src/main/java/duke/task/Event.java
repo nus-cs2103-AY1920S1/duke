@@ -6,8 +6,8 @@ import java.text.ParseException;
  * The Event class represents any tasks that have a description, and an event date in nature.
  */
 public class Event extends Task {
-    private String _date;
-    private DateTime _dateTime;
+    private String date;
+    private DateTime dateTime;
 
     /**
      * Creates an Event object, which is also a Task.
@@ -17,8 +17,8 @@ public class Event extends Task {
     public Event(String description, String date) {
         super(description);
         try {
-            this._dateTime = new DateTime(date);
-            this._date = this._dateTime.getDateTimeString();
+            this.dateTime = new DateTime(date);
+            this.date = this.dateTime.getDateTimeString();
         } catch (ParseException e) {
             System.err.println("Cant parse Date: " + date);
         }
@@ -30,7 +30,7 @@ public class Event extends Task {
      */
     public String toString() {
         return String.format("[E][%s] %s(at: %s)",
-                this.getStatusIcon(), this._description, this._date);
+                this.getStatusIcon(), this.description, this.date);
     }
 
     /**
@@ -40,6 +40,6 @@ public class Event extends Task {
      */
     public String toData() {
         return String.format("E | %s | %s | %s",
-                this.getStatusIcon(), this._description, this._date);
+                this.getStatusIcon(), this.description, this.date);
     }
 }

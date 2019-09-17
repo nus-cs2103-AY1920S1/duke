@@ -19,8 +19,7 @@ public class ToDo extends Task {
      * @return a string representation of a ToDo object
      */
     public String toString() {
-        return String.format("[T][%s] %s",
-                this.getStatusIcon(), this._description);
+        return String.format("[T][%s] %s", this.getStatusIcon(), this.description);
     }
 
     /**
@@ -30,6 +29,6 @@ public class ToDo extends Task {
      */
     public String toData() {
         return String.format("T | %s | %s",
-                this.getStatusIcon(), this._description);
+                this.getStatusIcon(), this.description);
     }
 }

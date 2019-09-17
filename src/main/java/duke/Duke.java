@@ -13,15 +13,15 @@ import java.io.IOException;
  * they have, and even delete them after they are done.
  */
 public class Duke { // handles all input and output
-    private DukeData _myData;
-    private Ui ui;
+    private DukeData myData;
+    private Ui myUi;
 
     /**
      * Creates a Duke program.
      */
     public Duke() {
-        this._myData = new DukeData();
-        this.ui = new Ui();
+        this.myData = new DukeData();
+        this.myUi = new Ui();
     }
 
     /**
@@ -29,24 +29,24 @@ public class Duke { // handles all input and output
      * @param filePath the path to save the Duke's data from user input
      */
     public Duke(String filePath) {
-        this._myData = new DukeData(filePath);
-        this.ui = new Ui();
+        this.myData = new DukeData(filePath);
+        this.myUi = new Ui();
     }
 
     /**
      * This method runs the Duke program.
      */
     private void run() {
-        this.ui.showIntro();
+        this.myUi.showIntro();
 
         String userCommand;
-        while (this.ui.hasNextInput() &&
-                !(userCommand = this.ui.getCommand()).equals("bye")) {
+        while (this.myUi.hasNextInput() &&
+                !(userCommand = this.myUi.getCommand()).equals("bye")) {
             String output;
             try {
                 Command cmd = Parser.parse(userCommand);
                 assert cmd != null;
-                output = Ui.addLines(cmd.execute(this._myData, this.ui));
+                output = Ui.addLines(cmd.execute(this.myData, this.myUi));
                 System.out.println(output);
             } catch (IOException e) {
                 System.err.println(Ui.addLines(e.getMessage()));
@@ -54,7 +54,7 @@ public class Duke { // handles all input and output
                 System.err.println(Ui.addLines(e.getMessage()));
             }
         }
-        this.ui.showFarewell();
+        this.myUi.showFarewell();
     }
 
     /**
@@ -62,7 +62,7 @@ public class Duke { // handles all input and output
      * @return a DukeData representation of the data that has been stored
      */
     public DukeData getData() {
-        return this._myData;
+        return this.myData;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Duke { // handles all input and output
         try {
             Command cmd = Parser.parse(input);
             assert cmd != null;
-            return cmd.execute(this._myData, this.ui);
+            return cmd.execute(this.myData, this.myUi);
         } catch (DukeException | IOException e) {
             return Ui.addLines(e.getMessage());
         }

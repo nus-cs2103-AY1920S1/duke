@@ -6,8 +6,8 @@ import java.text.ParseException;
  * The Deadline class represents any tasks that have a description, and a deadline in nature.
  */
 public class Deadline extends Task {
-    private String _date;
-    private DateTime _dateTime;
+    private String date;
+    private DateTime dateTime;
 
     /**
      * Creates a Deadline object, which is also a Task.
@@ -17,8 +17,8 @@ public class Deadline extends Task {
     public Deadline(String description, String date) {
         super(description);
         try {
-            this._dateTime = new DateTime(date);
-            this._date = this._dateTime.getDateTimeString();
+            this.dateTime = new DateTime(date);
+            this.date = this.dateTime.getDateTimeString();
         } catch (ParseException e) {
             System.err.println("Cant parse Date: " + date);
         }
@@ -30,7 +30,7 @@ public class Deadline extends Task {
      */
     public String toString() {
         return String.format("[D][%s] %s(by: %s)",
-                    this.getStatusIcon(), this._description, this._date);
+                    this.getStatusIcon(), this.description, this.date);
     }
 
     /**
@@ -40,7 +40,7 @@ public class Deadline extends Task {
      */
     public String toData() {
         return String.format("E | %s | %s | %s",
-                this.getStatusIcon(), this._description, this._date);
+                this.getStatusIcon(), this.description, this.date);
     }
 
     /**
@@ -48,6 +48,6 @@ public class Deadline extends Task {
      * @return a string of the deadline's date
      */
     public String getDeadline() {
-         return this._date;
+         return this.date;
     }
 }

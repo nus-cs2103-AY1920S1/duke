@@ -173,10 +173,36 @@ public class Main extends Application {
 
         // starting OWO
 
-        TaskModelInterface model = new TaskList();
+        TaskList model = new TaskList();
+        //TaskModelInterface model = new TaskList();
         StorageInterface storage = new Storage(model);
         ControllerInterface friday = new Parser(model);
         this.bridge = ((Parser) friday).getBridge();
+        Ui display = friday.getUi();
+
+
+        //tag stuff
+        TagCommandPostAlpha tagcommand = new TagCommandPostAlpha((PrimaryStoreInterface) model);
+        model.registerUpdateTaskCommandObserver(tagcommand);
+        model.registerDeleteTaskCommandObserver(tagcommand);
+        ((Parser) friday).registerTagCommandObserver(tagcommand);
+        TagStoreAlpha tagstore = new TagStoreAlpha();
+        tagcommand.registerAddTagObserver(tagstore);
+        tagcommand.registerQueryTagObserver(tagstore);
+        tagcommand.registerQueryTaskObserver(tagstore);
+        tagcommand.registerQueryAllTagsObserver(tagstore);
+        tagcommand.registerDeleteTagObserver(tagstore);
+        tagcommand.registerDeleteTaskObserver(tagstore);
+        tagcommand.registerDeletePairObserver(tagstore);
+        tagcommand.registerUpdateTagObserver(tagstore);
+        tagcommand.registerUpdateTaskObserver(tagstore);
+        tagstore.registerPairFeedbackObserver(display);
+        tagstore.registerQueryFeedbackObserver(display);
+        tagstore.registerTaskFeedbackObserver(display);
+        tagstore.registerTagFeedbackObserver(display);
+
+
+
         Label banner = new Label(Ui.stringGreeting());
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(banner, new ImageView(duke)));

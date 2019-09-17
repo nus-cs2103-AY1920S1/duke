@@ -29,9 +29,9 @@ public class Duke {
 	 * Set up storage, parser and ui.
 	 */
 	Duke() {
-		filepath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt";
+		//filepath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt";
 		Parser.initialize();
-		storage = new Storage(filepath);
+		storage = new Storage();
 		ui = new Ui();
 	}
 	

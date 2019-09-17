@@ -14,18 +14,18 @@ import duke.ui.Ui;
  * Has loading from file and saving to hard disk function.
  */
 public class Storage {
-	private String targetFilePath;
-	private String printFilePath;
+	//private String targetFilePath;
+	//private String printFilePath;
 	
 	/**
 	 * Constructor to initialize storage filepaths.
 	 *
-	 * @param filePath String containing filepath to read list of task from disk.
+	 * //@param filePath String containing filepath to read list of task from disk.
 	 */
-	public Storage(String filePath) {
+	public Storage() {
 		// Convert string filePath to actual filepath and store in FilePath class
-		targetFilePath = filePath;
-		printFilePath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\print.txt";
+		//targetFilePath = filePath;
+		//printFilePath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\print.txt";
 	}
 	
 	/**

@@ -1,0 +1,28 @@
+Sep 17, 2019 10:42:10 PM duke.task.TaskFactory getTask
+INFO: Create false TODO with raw args [to-do]
+Sep 17, 2019 10:42:10 PM duke.task.TaskFactory getTask
+FINE: Create todo [T][X] to-do
+Sep 17, 2019 10:42:10 PM duke.task.TaskFactory getTask
+INFO: Create false DEADLINE with raw args [deadline, /by, 080919 2359]
+Sep 17, 2019 10:42:10 PM duke.Parser parseDeadline
+FINE: Parse deadline to ZonedDateTime: 080919 2359
+Sep 17, 2019 10:42:10 PM duke.Parser parseDeadline
+FINE: Parsed to ZonedDateTime successfully: 2019-09-08T23:59+08:00[Asia/Singapore]
+Sep 17, 2019 10:42:10 PM duke.task.TaskFactory getTask
+FINE: Create deadline [D][X] deadline (by: 08 September 2019, 11:59PM, GMT+8)
+Sep 17, 2019 10:42:10 PM duke.task.TaskFactory getTask
+INFO: Create false EVENT with raw args [event, /at, Home]
+Sep 17, 2019 10:42:10 PM duke.task.TaskFactory getTask
+FINE: Create event [E][X] event (at: Home)
+Sep 17, 2019 10:42:10 PM duke.storage.Storage readFromDisk
+INFO: Read 3 tasks from disk successfully
+Sep 17, 2019 10:42:11 PM duke.Parser parseDeadline
+FINE: Parse deadline to ZonedDateTime: 080919 2359
+Sep 17, 2019 10:42:11 PM duke.Parser parseDeadline
+FINE: Parsed to ZonedDateTime successfully: 2019-09-08T23:59+08:00[Asia/Singapore]
+Sep 17, 2019 10:42:14 PM duke.Parser parseListCommand
+INFO: Parse LIST command: []
+Sep 17, 2019 10:42:14 PM duke.Parser parseDeadline
+FINE: Parse deadline to ZonedDateTime: 080919 2359
+Sep 17, 2019 10:42:14 PM duke.Parser parseDeadline
+FINE: Parsed to ZonedDateTime successfully: 2019-09-08T23:59+08:00[Asia/Singapore]

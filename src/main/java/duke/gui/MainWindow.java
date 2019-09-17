@@ -1,5 +1,6 @@
 package duke.gui;
 
+import duke.Main;
 import duke.command.CommandResponse;
 import duke.Duke;
 import duke.exception.DukeException;
@@ -30,8 +31,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaHunter.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaHandler.png"));
 
     /**
      * Bind the dialog container to the button of the scroll pane, and greet the user.
@@ -39,14 +40,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        // Greet the user
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(new Ui().showWelcomeMessage(), dukeImage)
-        );
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
+        // Greet the user
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(new Ui().showWelcomeMessage(duke.getTaskList()), dukeImage)
+        );
     }
 
     /**

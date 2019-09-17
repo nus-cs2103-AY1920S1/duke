@@ -19,6 +19,8 @@ import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static duke.Parser.DEADLINE_PARSE_PATTERN;
 import static duke.Parser.LOCALE;
@@ -28,11 +30,14 @@ import static duke.task.TaskType.DEADLINE;
 import static java.nio.file.StandardOpenOption.CREATE;
 import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static java.nio.file.StandardOpenOption.WRITE;
+import static java.util.logging.Level.INFO;
+import static java.util.logging.Level.SEVERE;
 
 /**
  * Stores and retrieves persisting task information from the hard disk.
  */
 public class Storage {
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private Path path;
 
     /**
@@ -71,7 +76,9 @@ public class Storage {
                     throw new IOException("Attempting to read unknown task from disk!");
                 }
             }
+            logger.log(INFO, "Read {0} tasks from disk successfully", new Object[]{taskList.count()});
         } catch (IOException e) {
+            logger.log(SEVERE, "Unable to read form disk");
             throw new DukeIoException(e.getMessage());
         }
         return taskList;
@@ -111,7 +118,9 @@ public class Storage {
                 }
             }
             bw.close();
+            logger.log(INFO, "Write {0} tasks to disk successfully", new Object[]{taskList.count()});
         } catch (IOException e) {
+            logger.log(SEVERE, "Unable to write to disk");
             throw new DukeIoException(e.getMessage());
         }
         return taskList;

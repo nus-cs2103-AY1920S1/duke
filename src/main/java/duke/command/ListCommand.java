@@ -22,7 +22,7 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList taskList, Ui ui, Storage storage) {
-        String response = ui.showTaskList(taskList);
+        String response = ui.showListMessage(taskList);
         return new CommandResponse(response, super.isExit());
     }
 }

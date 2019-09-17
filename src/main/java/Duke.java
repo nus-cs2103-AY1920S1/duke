@@ -4,6 +4,8 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -13,6 +15,7 @@ import javafx.scene.layout.*;
  */
 public class Duke {
 
+    public static final String filepath = "Data/Duke.txt";
     /**
      * To indicate whether the program is done.
      */
@@ -63,7 +66,7 @@ public class Duke {
      * @throws Exception Used for when there are any errors.
      */
     public Duke() throws Exception {
-        String filepath = "src/main/Data/Duke.txt";
+        InputStream in = this.getClass().getResourceAsStream(filepath);
         this.storage = new Storage(filepath);
         storage.loadTasks();
         try {

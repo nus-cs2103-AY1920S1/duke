@@ -4,7 +4,6 @@ import duke.exception.DukeException;
 import duke.component.TaskList;
 import duke.database.Storage;
 import duke.function.CheckDuplicate;
-import duke.task.Task;
 import duke.task.Todo;
 
 /**

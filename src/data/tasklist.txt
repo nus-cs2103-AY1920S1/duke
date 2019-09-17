@@ -1,5 +1,6 @@
 T | 1 | watch 10 of Damith's videos | HIGH
-D | 1 | go CS2103 tut | later | HIGH
+D | 0 | go CS2103 tut | later
 T | 0 | other modules | LOW
-E | 1 | Justin Bieber's concert | 3rd Oct 
-D | 1 | show mum my results :( | 01/13/2090
+E | 0 | Justin Bieber's concert | 3rd Oct
+D | 0 | show mum results :( | 06/13/2090
+E | 1 | Damith's event | 8th june | HIGH

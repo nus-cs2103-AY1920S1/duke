@@ -117,4 +117,18 @@ public class TaskList {
     public ArrayList<Task> getAllTasks() {
         return tasks;
     }
+
+    public boolean isDuplicateTask(Task task) {
+        boolean isDup = false;
+        String description = task.getDescription().toLowerCase();
+
+        for (Task t: tasks) {
+            if(description.equals(t.getDescription().toLowerCase())) {
+                isDup = true;
+                break;
+            }
+        }
+
+        return isDup;
+    }
 }

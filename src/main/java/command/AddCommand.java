@@ -34,12 +34,17 @@ public class AddCommand extends Command {
      * @param storage Tasks storage: load & save.
      */
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
-        //add task into the task list
-        tasks.add(task);
+        //check for duplicate
+        if(!tasks.isDuplicateTask(task)) {
+            //add task into the task list
+            tasks.add(task);
 
-        //display successful message and task count
-        super.message = "Got it. I've added this task:\n";
-        super.message += task.toString() + "\n";
-        super.message += "Now you have " + tasks.getSize() + " tasks in the list.";
+            //display successful message and task count
+            super.message = "Got it. I've added this task:\n";
+            super.message += task.toString() + "\n";
+            super.message += "Now you have " + tasks.getSize() + " tasks in the list.";
+        } else {
+            super.message = "Task is duplicated, hence, not added to task list.";
+        }
     }
 }

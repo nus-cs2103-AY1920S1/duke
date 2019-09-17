@@ -37,7 +37,7 @@ public class Deadline extends Task {
         super(description);
         this.by = date;
         try {
-            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             dateFormat.setLenient(false);
             this.date = dateFormat.parse(date);
         } catch (ParseException e) {
@@ -45,9 +45,9 @@ public class Deadline extends Task {
         }
     }
 
-    public Date getDate() {
+    /*public Date getDate() {
         return date;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -57,8 +57,8 @@ public class Deadline extends Task {
     /*public Deadline(String description, String by) {
         super(description);
         this.by = by.trim();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
-        tasks.addItemsToList(new Deadline(c.getInstruction), formatter
+        //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
+        //tasks.addItemsToList(new Deadline(c.getInstruction), formatter
 
         String[] arr = this.by.split(" ");
         timeInString = arr[2];

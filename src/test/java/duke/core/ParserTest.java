@@ -97,8 +97,22 @@ class ParserTest {
     }
 
     /**
+     * Test that the parseCommand method properly still return an valid AddCommand
+     * even when the deadline is not in recognisable dateTime format
+     */
+    @Test
+    void parseCommand_nonParseableTimeForDeadlineOrEvent_success() {
+        try {
+            assertTrue(Parser.parseCommand("deadline task /by time") instanceof AddDeadlineCommand);
+            assertTrue(Parser.parseCommand("event task /at time") instanceof AddEventCommand);
+        } catch (DukeException ex) {
+            fail("Should return without formatting the time parameter into dd/MM/yyyy HHmm");
+        }
+    }
+
+    /**
      * Test that the parseCommand method ignores extra input when attempting to parse commands
-     * which require 0 arguments.
+     * which do not require arguments.
      */
     @Test
     void parseCommand_extraArgumentForNoArgumentCommands_success() {
@@ -112,19 +126,7 @@ class ParserTest {
         }
     }
 
-    /**
-     * Test that the parseCommand method properly still return an valid AddCommand
-     * even when the deadline is not in recognisable dateTime format
-     */
-    @Test
-    void parseCommand_nonParseableTimeForDeadlineOrEvent_success() {
-        try {
-            assertTrue(Parser.parseCommand("deadline task /by time") instanceof AddDeadlineCommand);
-            assertTrue(Parser.parseCommand("event task /at time") instanceof AddEventCommand);
-        } catch (DukeException ex) {
-            fail("Should return without formatting the time argument into dd/MM/yyyy HHmm");
-        }
-    }
+
 
 
 

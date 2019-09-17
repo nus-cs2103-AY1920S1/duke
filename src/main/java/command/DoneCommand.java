@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
         if (command.substring(4).isEmpty()) {
-            Ui.doneEmptyMsg();
+            Ui.doneErrorMsg();
         } else {
             try {
                 String desc = command.substring(5);

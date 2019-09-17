@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 /**
  * Dialog panel class used for Duke's GUI.
  */
+//Reused from nus-cs2103-ay1920s1.github.io/ with minor modifications
 public class DialogPanel extends HBox {
     private Label text;
     private ImageView displayPicture;

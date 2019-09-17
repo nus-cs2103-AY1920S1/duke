@@ -16,8 +16,8 @@ try out Duke if you are interested!
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 
     ![Ui](https://github.com/brebeek/duke/tree/master/docs/Ui.png)
-5. Type the command in the command box and press <kbd>Enter</kbd> to execute it.
-   e.g. typing `help` and pressing <kbd>Enter</kbd> will open the help window.
+5. Type the command in the command box and press <kbd>Enter</kbd> to execute it.\
+   e.g. typing `list` and pressing <kbd>Enter</kbd> will list all tasks in the list.
 ## 3. Features 
 
 ### 3.1 Adding to-do task: 
@@ -65,3 +65,8 @@ A: Install the app in the other computer and overwrite the data
 file it creates at `\duke\data\duke.txt` 
 with the file that contains the data of your previous 
 Duke folder.
+
+## 5. Acknowledgements
+Some contents are implemented and modified in accordance to *CS2103T* 
+course materials and tutorials.
+

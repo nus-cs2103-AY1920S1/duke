@@ -61,6 +61,7 @@ public class Duke extends Application {
     /**
      * Overrides the start method in Application.
      */
+    //Reused from nus-cs2103-ay1920s1.github.io/ with minor modifications
     @Override
     public void start(Stage stage) {
         initPane();

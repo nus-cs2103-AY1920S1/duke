@@ -29,8 +29,8 @@ You may quit the application by simply typing `bye` or closing the window using 
 ## Usage
 
 ### `todo` - add a to-do task
-Command: `todo [task description]`
-Example: `todo go to school`
+Command: `todo [task description]`  
+Example: `todo go to school`  
 Expected outcome:
 ```
 Got it. I've added this task:
@@ -39,8 +39,8 @@ Now you have [number of tasks] tasks in the list.
 ```
 
 ### `deadline` - add a deadline task
-Command: `deadline [task description] /by [dd/mm/yyyy hhmm]`
-Example: `deadline essay /by 20/09/2019 2359`
+Command: `deadline [task description] /by [dd/mm/yyyy hhmm]`  
+Example: `deadline essay /by 20/09/2019 2359`  
 Expected outcome:
 ```
 Got it. I've added this task:
@@ -49,8 +49,8 @@ Now you have [number of tasks] tasks in the list.
 ```
 
 ### `event` - add an event task
-Command: `event [task description] /at [dd/mm/yyyy hhmm]`
-Example: `event birthday celebration /at 15/08/2020 0001`
+Command: `event [task description] /at [dd/mm/yyyy hhmm]`  
+Example: `event birthday celebration /at 15/08/2020 0001`  
 Expected outcome:
 ```
 Got it. I've added this task:
@@ -59,8 +59,8 @@ Now you have [number of tasks] tasks in the list.
 ```
 
 ### `list` - list down all existing tasks
-This will show all the tasks with their index, task type, status (done/undone), task description, time (if any), priority level (if any).
-Command: `list`
+This will show all the tasks with their index, task type, status (done/undone), task description, time (if any), priority level (if any).  
+Command: `list`  
 Expected outcome (example):
 ```
 Here are the tasks in your list:
@@ -70,8 +70,8 @@ Here are the tasks in your list:
 ```
 
 ### `delete` - delete an existing task
-Command: `delete [index of the task]`
-Example: `delete 5`
+Command: `delete [index of the task]`  
+Example: `delete 5`  
 Expected outcome:
 ```
 Noted. I've removed this task:
@@ -80,8 +80,8 @@ Now you have [number of tasks] tasks in the list.
 ```
 
 ### `done` - mark a task as done
-Command: `done [index of the task]`
-Example: `done 3`
+Command: `done [index of the task]`  
+Example: `done 3`  
 Expected outcome:
 ```
 Nice! I've marked this task as done:
@@ -89,9 +89,9 @@ Nice! I've marked this task as done:
 ```
 
 ### `priority` - assign a priority level to a task
-You may assign a priority level to a task or change an existing priority level.
-Command: `priority [index of the task] [priority level]`
-Example: `priority 2 high`
+You may assign a priority level to a task or change an existing priority level.  
+Command: `priority [index of the task] [priority level]`  
+Example: `priority 2 high`  
 Expected outcome:
 ```
 The following task has been set to Priority HIGH
@@ -99,8 +99,8 @@ The following task has been set to Priority HIGH
 ```
 
 ### `find` - find tasks by keywords
-Command: `find [keywords or phrases]`
-Example: `find group project`
+Command: `find [keywords or phrases]`  
+Example: `find group project`  
 Expected outcome:
 ```
 Here are the matching tasks in your list:
@@ -109,8 +109,8 @@ Here are the matching tasks in your list:
 ```
 
 ### `bye` - close the application
-Command: `bye`
-Expected outcome:
+Command: `bye`  
+Expected outcome:  
 ```
 Bye. Hope to see you again soon!
 ```

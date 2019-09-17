@@ -256,7 +256,6 @@ public class Parser {
             TaskList taskList, Ui ui, String userInput) throws DukeException {
         try {
             userInput = userInput.substring(6).trim();
-            System.out.println(userInput);
             if (userInput.equals("deadline")) {
                 Collections.sort(taskList.getListOfTasks(), new SortByDeadline());
             } else {

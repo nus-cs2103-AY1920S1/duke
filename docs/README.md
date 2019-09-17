@@ -20,8 +20,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
- `[T][✗] read books`
+`Got it. I've added this task:`  
+ `[T][✗] read books`  
 `Now you have 1 task in the list.`
 
 ### `event (description) /at (period)` - Add an Event task
@@ -33,8 +33,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:` 
- `[E][✗] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`
+`Got it. I've added this task:`   
+ `[E][✗] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`  
 `Now you have 2 tasks in the list.`
 
 ### `deadline (description) /by (deadline)` - Add a Deadline task
@@ -46,8 +46,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:` 
- `[D][✗] return books (by: 3rd of March 2019, 2:00pm)`
+`Got it. I've added this task:`  
+ `[D][✗] return books (by: 3rd of March 2019, 2:00pm)`  
 `Now you have 3 tasks in the list.`
 
 ### `(description) /after (afterWhen)` - Add a DoAfter task
@@ -59,8 +59,8 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
- `[DA][✗] return books (after: 1st of February 2013, 2:00pm)`
+`Got it. I've added this task:`  
+ `[DA][✗] return books (after: 1st of February 2013, 2:00pm)`  
 `Now you have 1 task in the list.`
 
 ### `list` - List all the tasks
@@ -72,9 +72,9 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:`
-`1.[T][✗] read books`
-`2.[E][✗] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`
+`Here are the tasks in your list:`  
+`1.[T][✗] read books`  
+`2.[E][✗] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`  
 `3.[D][✗] return books (by: 3rd of March 2019, 2:00pm)`
 
 ### `done (task number)` - Mark task as done
@@ -86,7 +86,7 @@ Example of usage:
 
 Expected outcome:
 
-`Nice! I've marked this task as done:`
+`Nice! I've marked this task as done:`  
  `[E][✓] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`
  
  ### `delete (task number)` - Delete a task
@@ -98,8 +98,8 @@ Expected outcome:
  
  Expected outcome:
  
-`Noted. I've removed this task:`
- `[E][✓] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`
+`Noted. I've removed this task:`  
+ `[E][✓] project meeting (at: 3rd of March 2019, 2:00pm to 4:00pm)`  
  `Now you have 2 tasks in the list.`
  
  ### `find (keyword)` - Find a task
@@ -111,8 +111,8 @@ Expected outcome:
  
  Expected outcome:
  
- `Here are the matching tasks in your list:`
-`1.[DA][✗] return books (after: 1st of February 2013, 2:00pm)`
+ `Here are the matching tasks in your list:`  
+`1.[DA][✗] return books (after: 1st of February 2013, 2:00pm)`  
 `2.[T][✗] read books`
 
 ### `bye` - Exit from the application

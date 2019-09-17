@@ -16,8 +16,8 @@
     2.4 [Handling of Tasks](#handle)  
     2.5 [Finding Tasks](#find)  
     2.6 [Sorting Tasks](#sort)  
-    2.7 [Mass Operation of Tasks](#massOp)
-    2.8 [Exiting of Program](#exit)
+    2.7 [Mass Operation of Tasks](#massOp)  
+    2.8 [Exiting of Program](#exit)  
 
 3. [Data Analysis](#stats)  
     3.1 [Viewing of Statistics by Time](#time)  
@@ -223,7 +223,7 @@ To view an overview of the tasks done over time, there are two ways:
 
 ### **Collection of Data** <a name="data"></a>
 
-The list of all the tasks is located in the data directory called data as `tasks.txt`.
+The list of all the tasks is located in the data directory and is named as `tasks.txt`.
 The storage file is easy to read and edit.
 
 Note that the file follows the following format:

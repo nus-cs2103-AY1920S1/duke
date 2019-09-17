@@ -52,6 +52,21 @@ public class TaskList {
         return sb.toString();
     }
 
+    public String findReminders() {
+        StringBuilder sb = new StringBuilder();
+        int size = this.list.size();
+        sb.append("Here are your upcoming deadlines:\n");
+        for (int i = 0; i < size; i++) {
+            String entry = list.get(i).toString();
+            if (entry.contains("(") && entry.contains(")")) {
+                String[] substrings = entry.split(":");
+                String deadline = substrings[1].replace(")", "");
+                sb.append(deadline.trim() + "\n");
+            }
+        }
+        return sb.toString();
+    }
+
     public String setDone(String input) {
         // Assumption: fixed format - remove first 4 characters to get index. i.e. "done"
         String value = input.substring(4);

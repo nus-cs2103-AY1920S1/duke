@@ -60,7 +60,7 @@ public class DateUtil {
         return template;
     }
 
-    private static String[] formatAll (String[] strings) throws IllegalTimeFormatException {
+    private static String[] formatAll(String[] strings) throws IllegalTimeFormatException {
         String[] date = strings[0].split("/");
         String time = strings[1];
         if (time.length() < 3) {

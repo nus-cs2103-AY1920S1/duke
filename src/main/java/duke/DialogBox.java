@@ -43,10 +43,17 @@ class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        Node box = this.getChildren().get(0);
+        ObservableList<Node> tmp;
+        if (box instanceof HBox) {
+            tmp = FXCollections.observableArrayList(((HBox) box).getChildren());
+            Collections.reverse(tmp);
+            ((HBox)box).getChildren().setAll(tmp);
+            ((HBox)box).setAlignment(Pos.TOP_LEFT);
+            setAlignment(Pos.TOP_LEFT);
+        }
+ //       ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+
     }
 
     static DialogBox getUserDialog(String text, Image img) {

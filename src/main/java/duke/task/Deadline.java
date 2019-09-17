@@ -2,7 +2,7 @@ package duke.task;
 
 import duke.util.DateParser;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Deadlines are special Tasks that have a due date.
@@ -10,29 +10,29 @@ import java.util.Date;
 public class Deadline extends Task {
 
     /** Due date of task */
-    private Date by;
+    private LocalDateTime dueDateTime;
 
     /**
      * Creates a new Deadline with the given description and due date.
      *
      * @param description       Task to be completed.
-     * @param by                Due date for the Deadline.
+     * @param dueDateTime                Due date for the Deadline.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String dueDateTime) {
         super(description);
-        this.by = DateParser.parse(by);
+        this.dueDateTime = DateParser.parse(dueDateTime);
     }
 
     /**
      * Creates a new Deadline with the given description, due date and status.
      *
      * @param description       Task to be completed.
-     * @param by                Due date for the Deadline.
+     * @param dueDateTime       Due date for the Deadline.
      * @param isDone            Whether the Deadline is completed or not.
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String dueDateTime, boolean isDone) {
         super(description, isDone);
-        this.by = DateParser.parse(by);
+        this.dueDateTime = DateParser.parse(dueDateTime);
     }
 
     /**
@@ -47,25 +47,27 @@ public class Deadline extends Task {
 
     /**
      * Returns a representation of the current Deadline, including its due
-     * date or time, in an appropriate format for data storage.
+     * date or time, in an appropriate format for data storage. The due date is
+     * formatted according to the default DateTimeFormatter given by DateParser.
      *
      * @return  String representing the current Deadline.
      */
     @Override
     public String formatAsData() {
         return super.formatAsData() + " | "
-                + String.format("%1$ta, %1$td %1$tb %1$ty, %1$tR", by);
+                + dueDateTime.format(DateParser.getDefaultFormat());
     }
 
     /**
      * Returns a string containing the type of Task, done status, description,
-     * and deadline.
+     * and deadline. The deadline is formatted according to the default
+     * DateTimeFormatter given by DateParser.
      *
      * @return  String describing the Deadline.
      */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-                + String.format("%1$ta, %1$td %1$tb %1$ty, %1$tR", by) + ")";
+                + dueDateTime.format(DateParser.getDefaultFormat()) + ")";
     }
 }

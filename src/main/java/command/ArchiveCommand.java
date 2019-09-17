@@ -57,6 +57,9 @@ public class ArchiveCommand extends Command {
 
     private Task archiveByTaskId(TaskList tasks, Storage storage, Archive archive) throws DukeException {
         assert taskNum > -1: "Archive task at " + taskNum;
+        if (taskNum <= 0 || taskNum > tasks.size()) {
+            throw new DukeException("I can only archive tasks from 1 to " + tasks.size());
+        }
         Task archivedTask = tasks.deleteTask(taskNum);
         try {
             archive.addTaskToArchive(archivedTask);

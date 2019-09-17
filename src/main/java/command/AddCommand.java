@@ -9,8 +9,6 @@ import util.Ui;
 
 public class AddCommand extends Command {
 
-    private String command;
-
     public AddCommand(String command) {
         this.command = command;
     }

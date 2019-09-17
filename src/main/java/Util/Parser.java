@@ -1,6 +1,7 @@
 package util;
 
 import command.Command;
+import command.FindCommand;
 import command.Instruction;
 import command.ExitCommand;
 import command.AddCommand;
@@ -27,6 +28,8 @@ public class Parser {
             return new ListCommand(command);
         } else if (command.contains(Instruction.DONE.toString())) {
             return new DoneCommand(command);
+        } else if (command.contains(Instruction.FIND.toString())) {
+            return new FindCommand(command);
         } else {
             return new UnknownCommand(command);
         }

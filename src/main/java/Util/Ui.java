@@ -39,6 +39,10 @@ public class Ui {
         System.out.println("Nice! I've marked this task as done: ");
     }
 
+    public static void findMsg() {
+        System.out.println("Here are the matching tasks in your list");
+    }
+
     public static void unknownMsg() {
         System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
@@ -67,8 +71,16 @@ public class Ui {
         System.out.println("☹ OOPS!!! You cannot delete an empty entry.");
     }
 
-    public static void doneEmptyMsg() {
-        System.out.println("☹ OOPS!!! This entry does not exist");
+    public static void doneErrorMsg() {
+        System.out.println("☹ OOPS!!! This entry does not exist.");
+    }
+
+    public static void findErrorMsg() {
+        System.out.println("☹ OOPS!!! You must specify the description.");
+    }
+
+    public static void findEmptyMsg() {
+        System.out.println("☹ OOPS!!! No matching task is found.");
     }
 
     public static void showErrorMsg(Exception error) {

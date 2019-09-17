@@ -91,7 +91,7 @@ Expected outcome:
 `1. [D][x] return book (by: 21st of July 2019, 6:00pm)`
 `2. [E][x] fly to Egypt (at: 22nd of May 2019, 4:55pm)`
 
-# Feature 5 - Done
+# Feature 6 - Done
 Marks a specific task in the list as done
 
 ## Usage 
@@ -107,7 +107,7 @@ Expected outcome:
 `1. [D][✓] return book (by: 21st of July 2019, 6:00pm)`
 `2. [E][x] fly to Egypt (at: 22nd of May 2019, 4:55pm)`
 
-# Feature 6 - Find
+# Feature 7 - Find
 Finds a specific task in the list 
 
 ## Usage 
@@ -122,7 +122,7 @@ Expected outcome:
 
 `1. [D][✓] return book (by: 21st of July 2019, 6:00pm)`
 
-# Feature 7 - Exit
+# Feature 8 - Exit
 Exits the program
 
 ## Usage 

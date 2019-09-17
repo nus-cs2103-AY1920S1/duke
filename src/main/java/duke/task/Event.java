@@ -1,15 +1,17 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.util.Date;
-import java.time.LocalTime;
 
 public class Event extends Task {
 
     protected String at;
     private SimpleDateFormat eventTime;
     private Date date;
-    //protected int dd, mm, yyyy, startTime, startHrs, startMin, endTime, endHrs, endMin;
 
     public Event(String description, String at) throws DateTimeException {
         super(description);

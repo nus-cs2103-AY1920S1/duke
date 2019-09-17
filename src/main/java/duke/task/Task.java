@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.text.ParseException;
 
 public class Task {
@@ -13,19 +15,10 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
     }
 
     public String getType() {
-        /*
-        if (type.equals("todo")) {
-            return "T";
-        } else if (type.equals("deadline")) {
-            return "D";
-        } else if (type.equals("event")){
-            return "E";
-        }
-        */
         return "error";
     }
 
@@ -47,8 +40,8 @@ public class Task {
 
     /* mutators */
 
-    public void isDone(boolean boo) {
-        this.isDone = boo;
+    public void setAsDone() {
+        this.isDone = true;
     }
 
     public void addType(String type) {

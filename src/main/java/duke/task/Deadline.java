@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.task.Task;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;

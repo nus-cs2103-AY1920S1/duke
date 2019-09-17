@@ -16,6 +16,7 @@ public class DukeGui extends Application {
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DukeGui.class.getResource("/view/MainWindow.fxml"));
+            stage.setTitle("Duke");
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
             stage.show();

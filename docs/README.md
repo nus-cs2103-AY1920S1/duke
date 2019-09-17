@@ -7,8 +7,7 @@ Duke is for those who prefer to use a desktop app for managing tasks. Duke can m
 2. Download the latest duke.jar here.
 3. Copy the file to the folder you want to use as the home folder for your Duke.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
-![Image of Duke] 
-(https://github.com/bernicechio/duke/blob/master/docs/Ui.png)
+![Image of Duke](https://github.com/bernicechio/duke/blob/master/docs/Ui.png)
 5. Type the command in the command box and press 'Enter' to execute it.
 e.g. typing 'todo read book' and pressing 'Enter' will add the todo task read book to your Duke.
 6. Some example commands you can try:

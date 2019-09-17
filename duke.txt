@@ -1,2 +1,4 @@
-T 1 bananann
-D 1 jiojio 25/03/1998 1356
+T 0 eat eat eat
+E 1 jump down 29/03/2019 2359
+D 0 do this project 30/09/2019 2359
+T 0 nothing better to do

@@ -96,6 +96,9 @@ public class Duke extends Application {
         }
     }
 
+    //@@author jeffrylum-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart3.md
+
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -200,6 +203,8 @@ public class Duke extends Application {
         );
         userInput.clear();
     }
+
+    // @@author
 
     // Duke's response, customisable
     String getResponse(String input) {

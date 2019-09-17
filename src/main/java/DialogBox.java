@@ -9,6 +9,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+//@@author jeffrylum-reused
+//Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart3.md
+//with minor modifications
+
 public class DialogBox extends HBox {
 
     private Label text;
@@ -44,3 +48,5 @@ public class DialogBox extends HBox {
         return db;
     }
 }
+
+//@@author

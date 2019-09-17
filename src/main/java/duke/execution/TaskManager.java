@@ -183,7 +183,7 @@ public class TaskManager {
     private String listToString(ArrayList<Task> taskList){
         StringBuilder outputMessage = new StringBuilder();
         int i = taskList.size();
-        for(int x = 1; x <=i; x++){
+        for(int x = 1; x <= i; x++){
             outputMessage.append("\n  " + x + "." + taskList.get(x-1));
         }
         return outputMessage.toString();

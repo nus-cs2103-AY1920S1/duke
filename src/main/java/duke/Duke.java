@@ -1,6 +1,7 @@
 package duke;
 
 import duke.execution.*;
+import javafx.application.Platform;
 
 /**
  * Duke is a mini list AI project for CS2103 iP and it steals my soul :(
@@ -66,7 +67,11 @@ public class Duke{
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        if(input.equals("bye")){
+            Platform.exit();
+        }
         try {
+            assert !input.equals("bye"): "Code error, program should terminate.";
             Command c = Parser.parse(input);
             return c.executeGui(tasks, ui, fileManager);
         }catch(DukeException e){

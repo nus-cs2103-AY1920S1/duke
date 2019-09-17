@@ -66,7 +66,16 @@ public class VocabularyList {
                 .toArray(String[]::new);
     }
 
-    public void eraseWord(String vocabulary) {
+    /**
+     * Erases the given vocabulary from Duke's memory.
+     *
+     * @param vocabulary Given vocabulary
+     * @throws DukeException If vocabulary is not found in Duke.
+     */
+    public void eraseWord(String vocabulary) throws DukeException {
+        if (!dictionary.containsKey(vocabulary)) {
+            throw new DukeException("Vocabulary does not exist in Duke");
+        }
         dictionary.remove(vocabulary);
     }
 

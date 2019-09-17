@@ -58,11 +58,11 @@ public class TaskList {
     /**
      * Sets a task in a specified position in the task list as done.
      *
-     * @param number Specified index of task in task list.
+     * @param index Specified index of task in task list.
      */
-    public void setTaskAsDone(int number) {
-        Task temp = this.listOfTasks.get(number);
-        temp.setDone();
+    public void setTaskAsDone(int index) {
+        Task newlyDoneTask = this.listOfTasks.get(index);
+        newlyDoneTask.setDone();
     }
 
     /**

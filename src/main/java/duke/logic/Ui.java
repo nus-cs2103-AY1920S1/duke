@@ -97,7 +97,7 @@ public class Ui {
         deleteBuilder.append("\n");
         deleteBuilder.append("      Now you have ");
         deleteBuilder.append(size);
-        deleteBuilder.append("tasks in the list.\n");
+        deleteBuilder.append(" task(s) in the list.\n");
         deleteBuilder.append(this.showSeparationLine());
         return deleteBuilder.toString();
     }
@@ -113,7 +113,7 @@ public class Ui {
         addBuilder.append(this.showSeparationLine());
         addBuilder.append("      Got it. I've added this task:\n       ");
         addBuilder.append(task);
-        addBuilder.append("\n      Now you have " + size + " tasks in the list.\n");
+        addBuilder.append("\n      Now you have " + size + " task(s) in the list.\n");
         addBuilder.append(this.showSeparationLine());
         addBuilder.append(this.showBlankLine());
         return addBuilder.toString();
@@ -121,7 +121,7 @@ public class Ui {
     public String showMatchingTasks(ArrayList<Task> listOfMatches) {
         StringBuilder tasksBuilder = new StringBuilder();
         tasksBuilder.append(this.showSeparationLine());
-        tasksBuilder.append("      Here are the matching tasks in your list:\n");
+        tasksBuilder.append("      Here are the matching task(s) in your list:\n");
         int counter = 1;
         for(Task task : listOfMatches) {
             tasksBuilder.append("     ");

@@ -90,13 +90,14 @@ public class Duke extends Application {
             return ui.showMatchingTasks(tasks.find(keyword));
         } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
             try {
+                Task newTask;
                 if (taskDetails.equals("")) {
                     throw new DukeException("      :( OOPS!!! The description of a " +
                             command + " cannot be empty.");
                 }
                 switch (command) {
                     case "todo":
-                        tasks.addTask(new Todo(taskDetails));
+                        newTask = new Todo(taskDetails);
                         break;
                     case "deadline":
                     case "event":
@@ -106,13 +107,18 @@ public class Duke extends Application {
                         String description = ((String) Array.get(tempStringArr, 0)).trim();  //to remove ending whitespace
                         String secondString = ((String) Array.get(tempStringArr, 1)).substring(3);
                         if (command.equals("deadline")) {
-                            tasks.addTask(new Deadline(description, secondString));
+                            newTask = new Deadline(description, secondString);
                         } else {
-                            tasks.addTask(new Event(description, secondString));
+                            newTask = new Event(description, secondString);
                         }
+                        break;
                     default: //all other keywords not part of Duke's task handling schedule
                         throw new DukeException("      OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
+                tasks.addTask(newTask);
+                int newSizeOfList = tasks.getListOfTasks().size();
+                storage.write(tasks.getListOfTasks());
+                return ui.showAdd(newTask, newSizeOfList);
             } catch (DukeException de) {
                 return ui.showSeparationLine() + de.getMessage() + ui.showSeparationLine() + ui.showBlankLine();
             } catch (ArrayIndexOutOfBoundsException ae) {
@@ -125,14 +131,6 @@ public class Duke extends Application {
             } catch (DukeException de) {
                 return ui.showSeparationLine() + de.getMessage() + ui.showSeparationLine() + ui.showBlankLine();
             }
-        }
-
-            //to prevent printing of below mentioned lines
-
-            Task temp = tasks.getTask(tasks.getListOfTasks().size() - 1);
-            int size = tasks.getListOfTasks().size();
-            storage.write(tasks.getListOfTasks());
-            return ui.showAdd(temp, size);
         }
     }
 

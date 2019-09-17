@@ -22,6 +22,6 @@ public class Quote {
      * @return a String representation of the full quote
      */
     public String toString() {
-        return String.format("%s%n -%s", this.quote, this.author);
+        return String.format("%s%n- %s", this.quote, this.author);
     }
 }

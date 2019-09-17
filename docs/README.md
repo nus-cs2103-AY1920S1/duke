@@ -31,6 +31,7 @@ e.g. todo buy bread - creates a todo task with "buy bread" as the description
     deadline Return Book /by 2/12/2019 1800
     event Attend CS2103T Lecture /at 2/10/2019 1800
     ```
+   
 2. Show list of tasks
     - `list` - Charlie will list the tasks you have added
     ```
@@ -42,7 +43,6 @@ e.g. todo buy bread - creates a todo task with "buy bread" as the description
     1. [T][✗] Buy bread
     2. [D][✗] Return Book (by: 02 Dec 2019 06:00 PM)
     3. [E][✗] Attend CS2103T Lecture (at: 02 Oct 2019 06:00 PM)
-   
     ```
 3. Delete tasks
     - `delete` number-as-shown-on-list
@@ -55,6 +55,7 @@ e.g. todo buy bread - creates a todo task with "buy bread" as the description
         [E][✗] Attend CS2103T Lecture (at: 02 Oct 2019 06:00 PM)
     Now you have 2 tasks in the list
     ```
+   
 4. Find keywords in tasks
     - `find` word-in-task
     ```

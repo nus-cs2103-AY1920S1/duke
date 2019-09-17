@@ -133,7 +133,7 @@ public class AddTodoCommand extends Command implements Undoable {
      * @return False.
      */
     @Override
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 

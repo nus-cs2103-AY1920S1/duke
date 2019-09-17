@@ -18,6 +18,9 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command implements Undoable {
 
+    private static final String DELETE_EMPTY_LIST = "-1";
+    private static final String DELETE_ALL = "all";
+
     private String detail;
     private Task[] deletedTasks;
     private String deletedIndex;
@@ -73,12 +76,12 @@ public class DeleteCommand extends Command implements Undoable {
             }
             if (taskList.isEmpty()) {
                 this.deletedTasks = new Task[0];
-                this.deletedIndex = "-1";
+                this.deletedIndex = DELETE_EMPTY_LIST;
                 message = new String[] { AutoResponse.DUKE_NO_TASKS };
-            } else if (this.detail.equals("all")) {
+            } else if (this.detail.equals(DELETE_ALL)) {
                 this.deletedTasks = taskList.toArray();
                 taskList.deleteAllTasks();
-                this.deletedIndex = "all";
+                this.deletedIndex = DELETE_ALL;
                 message = new String[] { AutoResponse.DUKE_DELETE_ALL_TASKS };
             } else {
                 throw new DukeIllegalIndexException(AutoResponse.ERROR_ILLEGAL_INDEX);
@@ -110,10 +113,10 @@ public class DeleteCommand extends Command implements Undoable {
         // Add the deleted tasks back.
         String[] message;
         switch (this.deletedIndex) {
-        case "-1":
+        case DELETE_EMPTY_LIST:
             message = new String[] { AutoResponse.DUKE_UNDO_DELETE_NO_TASK };
             break;
-        case "all":
+        case DELETE_ALL:
             for (Task task : this.deletedTasks) {
                 taskList.addTask(task);
             }
@@ -151,10 +154,10 @@ public class DeleteCommand extends Command implements Undoable {
 
         String[] message;
         switch (this.deletedIndex) {
-        case "-1":
+        case DELETE_EMPTY_LIST:
             message = new String[] { AutoResponse.DUKE_REDO_DELETE_NO_TASK };
             break;
-        case "all":
+        case DELETE_ALL:
             taskList.deleteAllTasks();
             message = new String[] { AutoResponse.DUKE_REDO_DELETE_ALL_TASKS };
             break;
@@ -178,7 +181,7 @@ public class DeleteCommand extends Command implements Undoable {
      * @return False.
      */
     @Override
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 

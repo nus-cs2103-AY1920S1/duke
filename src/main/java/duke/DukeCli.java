@@ -47,14 +47,14 @@ public class DukeCli {
         this.ui.greet();
 
         // Handle user input
-        boolean isExit = false;
-        while (!isExit) {
+        boolean shouldExit = false;
+        while (!shouldExit) {
             try {
                 String command = this.ui.readCommand();
                 String description = this.ui.readDescription();
                 Command c = Parser.parseToCommand(command, description);
                 c.execute(this.taskList, this.commandStack, this.ui, this.storage);
-                isExit = c.isExit();
+                shouldExit = c.shouldExit();
             } catch (DukeException e) {
                 this.ui.printToUser(e.getMessage());
             }

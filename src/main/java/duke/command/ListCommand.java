@@ -41,7 +41,7 @@ public class ListCommand extends Command {
      * @return False.
      */
     @Override
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 

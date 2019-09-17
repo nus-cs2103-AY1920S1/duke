@@ -177,7 +177,7 @@ public class AddEventCommand extends Command implements Undoable {
      * @return False.
      */
     @Override
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 

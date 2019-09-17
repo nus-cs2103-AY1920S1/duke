@@ -16,6 +16,9 @@ import duke.module.Ui;
  */
 public class DoneCommand extends Command implements Undoable {
 
+    private static final String DONE_EMPTY_LIST = "-1";
+    private static final String DONE_ALL = "all";
+
     private String detail;
     private String finishedIndex;
 
@@ -70,11 +73,11 @@ public class DoneCommand extends Command implements Undoable {
             }
 
             if (taskList.isEmpty()) {
-                this.finishedIndex = "-1";
+                this.finishedIndex = DONE_EMPTY_LIST;
                 message = new String[] { AutoResponse.DUKE_NO_TASKS };
-            } else if (this.detail.equals("all")) {
+            } else if (this.detail.equals(DONE_ALL)) {
                 taskList.markAsDoneAllTasks();
-                this.finishedIndex = "all";
+                this.finishedIndex = DONE_ALL;
                 message = taskList.listAll();
                 message[0] = AutoResponse.DUKE_DONE_ALL_TASKS;
             } else {
@@ -109,10 +112,10 @@ public class DoneCommand extends Command implements Undoable {
         String[] message;
         // Display the result to the user
         switch (this.finishedIndex) {
-        case "-1":
+        case DONE_EMPTY_LIST:
             message = new String[] { AutoResponse.DUKE_UNDO_DONE_NO_TASK };
             break;
-        case "all":
+        case DONE_ALL:
             taskList.markAsUnfinishedAllTasks();
             message = new String[] { AutoResponse.DUKE_UNDO_DONE_ALL_TASKS };
             break;
@@ -148,10 +151,10 @@ public class DoneCommand extends Command implements Undoable {
         String[] message;
         // Display the result to the user
         switch (this.finishedIndex) {
-        case "-1":
+        case DONE_EMPTY_LIST:
             message = new String[] { AutoResponse.DUKE_REDO_DONE_NO_TASK };
             break;
-        case "all":
+        case DONE_ALL:
             taskList.markAsDoneAllTasks();
             message = new String[] { AutoResponse.DUKE_REDO_DONE_ALL_TASKS };
             break;
@@ -176,7 +179,7 @@ public class DoneCommand extends Command implements Undoable {
      * @return False.
      */
     @Override
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 

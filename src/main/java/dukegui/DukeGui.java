@@ -23,7 +23,7 @@ public class DukeGui {
     private TaskList taskList;
     private Storage storage;
     private CommandStack commandStack;
-    private boolean isExit;
+    private boolean shouldExit;
 
     /**
      * Initializes the necessary modules to run the Duke application.
@@ -35,7 +35,7 @@ public class DukeGui {
         this.commandStack = new CommandStack();
         this.storage = new Storage();
         this.taskList = new TaskList(storage.load());
-        this.isExit = false;
+        this.shouldExit = false;
     }
 
     /**
@@ -51,15 +51,15 @@ public class DukeGui {
                 description = command[1];
             }
             Command c = Parser.parseToCommand(command[0], description);
-            this.isExit = c.isExit();
+            this.shouldExit = c.shouldExit();
             return c.getResponse(this.taskList, this.commandStack, this.storage);
         } catch (DukeException e1) {
             return e1.getMessage();
         }
     }
 
-    public boolean isExit() {
-        return this.isExit;
+    public boolean shouldExit() {
+        return this.shouldExit;
     }
 
 }

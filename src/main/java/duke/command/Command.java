@@ -41,6 +41,6 @@ public abstract class Command {
      *
      * @return True if Duke should quit, false otherwise.
      */
-    public abstract boolean isExit();
+    public abstract boolean shouldExit();
 
 }

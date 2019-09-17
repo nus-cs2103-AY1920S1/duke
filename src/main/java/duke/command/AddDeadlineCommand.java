@@ -177,10 +177,10 @@ public class AddDeadlineCommand extends Command implements Undoable {
      * Returns false.
      *
      * @return False.
-     * @see Command#isExit()
+     * @see Command#shouldExit()
      */
     @Override
-    public boolean isExit() {
+    public boolean shouldExit() {
         return false;
     }
 

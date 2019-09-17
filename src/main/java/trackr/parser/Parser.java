@@ -58,7 +58,7 @@ public class Parser {
         case "undo":
             return new UndoCommand();
         default:
-            throw new TrackrException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new TrackrException(":( OOPS!!! I'm sorry, but I don't know what that means.");
         }
     }
 

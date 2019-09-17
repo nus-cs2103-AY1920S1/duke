@@ -2,8 +2,11 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * This is the main class of the Trackr application. The Trackr application is an interface of a
@@ -28,8 +31,12 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setTrackr(trackr);
+            Image image = new Image("/images/app_icon.png");
+            stage.getIcons().add(image);
+            stage.setTitle("Trackr - Never Forget a Task Again!");
+            stage.setResizable(false);
+            stage.setMaximized(false);
             stage.show();
-            stage.setTitle("Ask Spongebob!");
             fxmlLoader.<MainWindow>getController().showWelcome();
         } catch (IOException e) {
             e.printStackTrace();

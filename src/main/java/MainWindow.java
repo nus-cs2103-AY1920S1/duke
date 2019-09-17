@@ -79,9 +79,6 @@ public class MainWindow extends AnchorPane {
      * @return String Welcome message
      */
     private String welcomeMsg() {
-        String line = "___________________________________________________\n";
-        String greetMsg = "Hello! I'm Spongebob\nWhat can I do for you?\n";
-        String result = line + greetMsg + line;
-        return result;
+        return "Hello! I'm Spongebob!\nWhat can I do for you?\n";
     }
 }

@@ -23,7 +23,7 @@ public class UndoCommand extends Command {
                 updateTasklistAndStorage(tasks, storage, history);
                 return "Got it. I've undone the previous command:\n" + previousInput;
             } else {
-                String result = "";
+                String result = ":( OOPS!!! There are no commands to be undone.";
                 // remove command that cannot be undone from stack
                 history.retrieveHistory();
                 // search for next available command that can be undone
@@ -36,7 +36,6 @@ public class UndoCommand extends Command {
                         break;
                     } else {
                         history.retrieveHistory();
-                        result = ":( OOPS!!! There are no commands to be undone.";
                     }
                 }
                 return result;

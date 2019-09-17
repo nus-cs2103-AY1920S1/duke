@@ -42,15 +42,15 @@ You can add a new Event task to the list of tasks. Each event task has a start d
  
  Example: `event project meeting /at 18/09/2019 1400`
 
-#### 1.3 Add Deadline Tasks: `dateline`
+#### 1.3 Add Deadline Tasks: `deadline`
 
 You can add a new Deadline task to the list of tasks. Each deadline task has a deadline associated with it.
  
-Format: `dateline [DESCRIPTION] /by [DATEANDTIME]`
+Format: `deadline [DESCRIPTION] /by [DATEANDTIME]`
  
 > Note: DATEANDTIME is to be specified in DD/MM/YYYY HHmm.
  
-Example: `dateline post lecture quiz /at 19/09/2019 2359`
+Example: `deadline post lecture quiz /at 19/09/2019 2359`
  
 ### 2. List tasks: `list`
 

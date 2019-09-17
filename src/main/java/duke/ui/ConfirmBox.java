@@ -16,6 +16,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * @@author zhixianggg-reused.
+ * Reused from thenewboston's YouTube JavaFX GUI Design Tutorial.
+ * JavaFX Java GUI Tutorial - 7 - Closing the Program Properly.
+ * https://www.youtube.com/watch?v=ZuHcl5MmRck&list=PL6gx4Cwl9DGBzfXLWLSYVy8EbTdpGbUIG&index=7.
+ *
+ */
 public class ConfirmBox {
 
     static boolean answer;

@@ -227,7 +227,7 @@ The list of all the tasks is located in the data directory called data as `tasks
 The storage file is easy to read and edit.
 
 Note that the file follows the following format:
- * Each variables are separated by  `|`.
+ * Each variable is separated by  `|`.
  * The first letter represents the type of task.  
  
 Letter | Task

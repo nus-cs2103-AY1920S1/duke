@@ -9,3 +9,4 @@ T | 0 | jogging
 E | 0 | water festival | 05/02/2014 0522
 T | 0 | swimming
 E | 0 | party | 05/06/2015 0131
+T | 0 | playing cards

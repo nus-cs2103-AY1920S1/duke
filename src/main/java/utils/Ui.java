@@ -23,33 +23,33 @@ public class Ui {
      * inital message from duke.
      */
 
-    static String greeting() {
+    static void greeting() {
         String output = "    ____________________________________________________________\n" 
             + "     Hello! I'm Duke\n"
             + "     What can I do for you?\n"
             + "    ____________________________________________________________\n";
-        return output;
+        System.out.println(output);
     }
-    //not used in gui implementation
+    
     static String addDoubleLine(String str) {
         String line = "    ____________________________________________________________";
         return line + "\n" + str + "\n" + line;
     }
 
-    public String printMsg(Task t, int size) {
-        return ("     Got it. I've added this task: \n" 
-            + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list.");
+    public void printMsg(Task t, int size) {
+        System.out.println(addDoubleLine("     Got it. I've added this task: \n" 
+            + "      " + t.toString() + "\n     Now you have " + size + " tasks in the list."));
     }
 
-    public String print(String str) {
-        return (str);
+    public void print(String str) {
+        System.out.println(addDoubleLine(str));
     }
 
-    public String printTab(String str) {
-        return ("    " + str);
+    public void printTab(String str) {
+        print("    " + str);
     }
     
-    public String bye() {
-        return ("     Bye. Hope to see you again soon!");
+    public void bye() {
+        System.out.println(addDoubleLine("     Bye. Hope to see you again soon!"));
     }
 }

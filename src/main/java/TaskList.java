@@ -48,7 +48,7 @@ public class TaskList {
         String response = "";
         while (iter.hasNext()) {
             Task task = iter.next();
-            response += i + ". " + task.toString();
+            response += i + ". " + task.toString() + "\n";
             i++;
         }
         return response;

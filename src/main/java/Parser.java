@@ -45,7 +45,7 @@ public class Parser {
             case ("todo"):
                 String description = sc.nextLine().trim();
                 if (description.equals("")) {
-                    response = "☹ OOPS!!! The description of a todo cannot be empty.";
+                    response = "Oops! The description of a todo cannot be empty.";
                 } else {
                     ToDo newToDo = new ToDo(description);
                     response = taskList.addTask(newToDo);
@@ -72,7 +72,7 @@ public class Parser {
                 response = taskList.findTasks(keyword);
                 break;
             default:
-                response = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                response = "Oops! I'm sorry, but I don't know what that means :-(";
             }
 
             // write all tasks to file

@@ -1,4 +1,6 @@
 # User Guide
+
+## About Duke
 Duke is an interactive chatbot that serves as a personal task list.
 
 ## Features
@@ -33,7 +35,7 @@ GUI window closed.
 
 ### `list` - Displays all tasks in the task list
 
-Shows the full task list.
+Shows the task list in full.
 
 Example of usage: 
 
@@ -42,6 +44,7 @@ Example of usage:
 Expected outcome:
 
 `Here are the tasks in your list:\n1.[T][✗] lawsuit research\n2.[T][✗] hire intern`
+`Test`
 
 ### `delete <n>` - Deletes a specific task in the task list
 
@@ -66,3 +69,18 @@ Example of usage:
 Expected outcome:
 
 `Nice! I've marked this task as done:\n[T][✓] hire intern`
+
+### `todo <desciption>` - Adds a todo task into the task list
+
+A todo task of the specified description will be appended to the current task list.
+
+Example of usage: 
+
+`todo sign documents`
+
+Expected outcome:
+
+`Got it. I've added this task:`
+`[T][✗] sign documents`
+`Now you have 2 tasks in the list`
+

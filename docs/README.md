@@ -1,10 +1,10 @@
 # User Guide
 ## Features
-Welcome to Hi!Bro's User Guide. You are able to add tasks and check them though this useful tool.
+Welcome to Hi!Bro's User Guide. You are able to add tasks and check them by using this useful tool.
 
-### storage feature
+### Storage feature
 1. Hi!bro can read all tasks from `data/tasks.txt`.
-2. save new tasks to the same location
+2. save new tasks to the same location.
 
 ### Manage feature
 1. add different types of task
@@ -13,18 +13,16 @@ Welcome to Hi!Bro's User Guide. You are able to add tasks and check them though 
 4. list all the tasks in the taskList
 
 ### Search feature
-you can More flexibility in searching for tasks which are matched to the keyword.
+You can search for tasks which are matched to the keyword.
 
 ## Usage
 ### Adding different types of tasks
-#### `todo [taskName]` - Add a new todo task
+#### `todo [taskName]`
 Adds a new todo task.
 
 **Example of usage:**
 
 `todo task 1`
-
-A new task called as `[taskName]`is created.
 
 **Expected outcome:**
 ```
@@ -33,8 +31,8 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-#### `deadline [taskName] /by [dd/mm/yyyy HHmm]` - Add a deadline task
-Adds a new deadline task.
+#### `deadline [taskName] /by [dd/mm/yyyy HHmm]`
+Add a new deadline task.
 
 **Example of usage:**
 
@@ -47,10 +45,9 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
-A new task called `taskName` is created and it has a due date by `date`.
 
-#### `event [taskName] /at [dd/mm/yyyy HHmm]` - Add a deadline task
-Adds a new event task.
+#### `event [taskName] /at [dd/mm/yyyy HHmm]`
+Add a new event task.
 
 **Example of usage:**
 
@@ -62,12 +59,11 @@ Got it. I've added this task:
   [T][✘] task 3 (at: Feb 02, 2009 0900)
 Now you have 3 tasks in the list.
 ```
-A new task called `taskName` is created and it is set at `date`.
 
 ### checking and updating taskList
 
 #### `done [taskNum]` - Mark a task as done
-Marks a task as done.
+Mark a task as done.
 
 **Example of usage:**
 
@@ -81,7 +77,7 @@ Nice! I've marked this task as done:
 
 #### `find [keyword]` - Find a task
 
-find items even if the keyword matches the item only partially.
+Find tasks even if the keyword matches the taskName only partially.
 
 **Example of usage:**
 
@@ -94,11 +90,10 @@ Here are the matching tasks in your list:
 2. [T][✓] task 2 (by: Jan 01, 2009 0900)
 3. [T][✘] task 3 (at: Feb 02, 2009 0900)
 ```
-the list of tasks contain the keyword.
 
-#### `list` - List all tasks 
+#### `list` 
 
-Lists all tasks in `data/tasks.txt`.
+List all tasks in `data/tasks.txt`.
 
 **Example of usage:**
 
@@ -111,13 +106,11 @@ Here are the tasks in your list:
 2. [T][✓] task 2 (by: Jan 01, 2009 0900)
 3. [T][✘] task 3 (at: Feb 02, 2009 0900)
 ```
-all the tasks in this location.
-
 
 
 ### `delete [taskNum]`
 
-Deletes a task in taskList.
+Delete a task in taskList.
 
 Example of usage: 
 
@@ -130,9 +123,9 @@ Noted. I've removed this task:
  [T][✘] task 1
 Now you have 2 tasks in the list.
 ```
-#### `bye` - Quit the program
+#### `bye`
 
-Quits the program.
+Quit the program.
 
 **Example of usage:**
 

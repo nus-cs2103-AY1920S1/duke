@@ -1,10 +1,5 @@
 T|0|make bed again
-D|1|make bed |Sat, 11 Dec 1999, 04:00 PM
-D|0|do homework |Fri, 20 Dec 2019, 08:00 PM
-D|0|do work |Sun, 22 Dec 2019, 08:00 PM
-T|0|make fishball
-T|0|csad
-D|0|csada |Fri, 20 Sep 2019, 11:59 PM
-D|0|csa |Sat, 11 Dec 1999, 08:00 PM
-D|0|casca |Sat, 14 Sep 2019, 11:59 PM
-D|0|csaac |Mon, 16 Sep 2019, 11:59 PM
+D|0|make bed |Wed, 18 Sep 2019, 11:59 PM
+T|0|make the bed
+D|0|hand in homework |Wed, 18 Sep 2019, 11:59 PM
+T|1|make fishball

@@ -15,7 +15,6 @@ public class DateParser {
 
     private static final String[] allDays = new String[] {
         "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"};
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm", java.util.Locale.ENGLISH);
 
     /**
      * Parses any description and determines the type of command that was entered.
@@ -28,11 +27,13 @@ public class DateParser {
         try {
             if (fullDate.contains("-")) {
                 String[] dates = fullDate.split("-");
+                System.out.println(Arrays.toString(dates));
                 return new Date[]{parseDate(dates[0]), parseDate(dates[1])};
             } else {
                 return new Date[] {parseDate(fullDate)};
             }
         } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
             throw new MissingFieldException("<$ending_date>");
         }
     }
@@ -44,11 +45,13 @@ public class DateParser {
      */
     private static Date parseDate(String date) throws DukeException {
         try {
-            Date myDate = sdf.parse(parseNaturalDate(date));
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm", java.util.Locale.ENGLISH);
+            Date myDate = sdf.parse(parseNaturalDate(date.trim()));
             sdf.applyPattern("EEE, d MMM yyyy, hh:mm a");
             String dateString = sdf.format(myDate);
             return sdf.parse(dateString);
         } catch (ParseException e) {
+            System.out.println(e.getLocalizedMessage());
             throw new IncorrectFormatException("Date formats", "should have the format e.g. 11/12/1999 1600");
         }
     }
@@ -60,7 +63,8 @@ public class DateParser {
      */
     private static String parseNaturalDate(String date) {
         Calendar calendar = Calendar.getInstance();
-        String day = date.split("\\s+")[1];
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm", java.util.Locale.ENGLISH);
+        String day = date.split("\\s+")[0];
         switch (day) {
         case "today":
             return sdf.format(setToEndOfDay(calendar.getTime()));
@@ -84,7 +88,6 @@ public class DateParser {
      * @return The string representation of the new date object.
      */
     private static String parseDaysOfWeek(Optional<String> day, String date, Calendar calendar) {
-        System.out.println(day);
         int dayToday = calendar.get(Calendar.DAY_OF_WEEK);
         int days = Arrays.asList(allDays).indexOf(day.get()) + 1 - dayToday;
         System.out.println(days);
@@ -98,7 +101,8 @@ public class DateParser {
             System.out.println("next " + days);
         }
         calendar.add(Calendar.DAY_OF_YEAR, days);
-        return sdf.format(setToEndOfDay(calendar.getTime()));
+        return new SimpleDateFormat("dd/MM/yyyy HHmm",
+                java.util.Locale.ENGLISH).format(setToEndOfDay(calendar.getTime()));
     }
 
     /**
@@ -117,3 +121,4 @@ public class DateParser {
         return cal.getTime();
     }
 }
+

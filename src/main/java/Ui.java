@@ -32,6 +32,7 @@ public class Ui {
         for (int i = 0; i < 47; i++) {
             line.append("_");
         }
+
         line.append("\n");
 
         String stringLine = line.toString();

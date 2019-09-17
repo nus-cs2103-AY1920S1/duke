@@ -15,6 +15,7 @@ import java.io.IOException;
 public class Duke { // handles all input and output
     private DukeData myData;
     private Ui myUi;
+    private QuoteGenerator myQuoter;
 
     /**
      * Creates a Duke program.
@@ -22,6 +23,7 @@ public class Duke { // handles all input and output
     public Duke() {
         this.myData = new DukeData();
         this.myUi = new Ui();
+        this.myQuoter = new QuoteGenerator();
     }
 
     /**
@@ -31,6 +33,7 @@ public class Duke { // handles all input and output
     public Duke(String filePath) {
         this.myData = new DukeData(filePath);
         this.myUi = new Ui();
+        this.myQuoter = new QuoteGenerator();
     }
 
     /**

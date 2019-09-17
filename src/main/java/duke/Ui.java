@@ -21,6 +21,7 @@ public class Ui {
 
     private static final String LINE = "________________________________________________";
 
+    private QuoteGenerator quoteGenie;
     private Scanner sc;
 
     /**
@@ -28,6 +29,7 @@ public class Ui {
      */
     public Ui() {
         this.sc = new Scanner(System.in);
+        this.quoteGenie = new QuoteGenerator();
     }
 
     /**
@@ -157,6 +159,14 @@ public class Ui {
             }
         }
         return addLines(found.toString());
+    }
+
+    /**
+     * This methods generates and displays a random quote to brighten the user's day.
+     * @return a String representation of the
+     */
+    public String showQuote() {
+        return addLines(this.quoteGenie.getRandomQuote());
     }
 
     /**

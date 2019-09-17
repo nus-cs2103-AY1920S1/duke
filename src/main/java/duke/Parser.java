@@ -81,6 +81,8 @@ public class Parser {
             case "find":
                 cmdLine = inputSplit[1]; // extract the rest of the line
                 return new FindCommand(cmdLine);
+            case "quote":
+                return new QuoteCommand();
             default: // if it is not any of the above commands
                 return new WrongCommand(input);
             }

@@ -98,9 +98,11 @@ public class Parser {
      */
     private static void validate(String commandType, int inputLength)
             throws DukeException {
+        String lowerCaseType = commandType.toLowerCase();
+
         boolean isInvalidType = true;
         for (String type : VALID_COMMANDS) {
-            if (commandType.equals(type)) {
+            if (lowerCaseType.equals(type)) {
                 isInvalidType = false;
                 break;
             }
@@ -109,11 +111,11 @@ public class Parser {
             throw new DukeException("I don't know what that means... :(");
         }
 
-        boolean isCommandWithNoArgs = commandType.equals("list") || commandType.equals("bye");
+        boolean isCommandWithNoArgs = lowerCaseType.equals("list") || lowerCaseType.equals("bye");
 
-        boolean isTooShort = !isCommandWithNoArgs && inputLength < commandType.length() + 2;
+        boolean isTooShort = !isCommandWithNoArgs && inputLength < lowerCaseType.length() + 2;
         if (isTooShort) {
-            switch (commandType) {
+            switch (lowerCaseType) {
             case "done":
                 // Fallthrough
             case "undone":
@@ -135,11 +137,10 @@ public class Parser {
             }
         }
 
-        boolean hasExtraWords = isCommandWithNoArgs && inputLength > commandType.length();
+        boolean hasExtraWords = isCommandWithNoArgs && inputLength > lowerCaseType.length();
         if (hasExtraWords) {
             throw new DukeException("did you mean to type another command?");
         }
-        // TODO: Case insensitive commands
         // TODO: Validate format of "event" and "deadline" date/time
         // TODO: Use better control flow (not exceptions)
     }
@@ -157,7 +158,8 @@ public class Parser {
     private static Command makeCommand(String type, String commandArgs) throws
             DukeException {
         // TODO: Make Parser parse the command arguments too
-        switch (type) {
+        String lowerCaseType = type.toLowerCase();
+        switch (lowerCaseType) {
         case "done":
             return new DoneCommand(commandArgs, true);
         case "undone":

@@ -3,15 +3,17 @@ package logic;
 import commands.Command;
 import commands.TaskCommands;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
  * Driver Class for Program.
  */
 public class Duke {
+    private String taskPath = "./tasks.txt";
+    private String contactPath = "./contacts.txt";
     private Scanner sc = new Scanner(System.in);
-    //    private String taskListPath = "./src/main/data/taskList.txt";
-//    private String contactListPath = "./src/main/data/contactList.txt";
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -21,13 +23,24 @@ public class Duke {
      * Constructor.
      */
     public Duke() {
-        storage = new Storage();
-        ui = new Ui();
+        File taskFile = new File(taskPath);
+        File contactFile = new File(contactPath);
         try {
+            if (!taskFile.exists()) {
+                taskFile.createNewFile();
+            }
+
+            if (!contactFile.exists()) {
+                contactFile.createNewFile();
+            }
+            storage = new Storage(taskFile, contactFile);
+            ui = new Ui();
             tasks = new TaskList(storage.loadTasks());
             contacts = new ContactList(storage.loadContacts());
         } catch (DukeException e) {
             Ui.loadStr(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

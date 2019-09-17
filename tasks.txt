@@ -1,0 +1,5 @@
+D | 1 | return book | 10/12/2019 0830
+D | 1 | project meeting | 7/7/2019 0815
+T | 1 | join sports club
+E | 0 | Do CS2103T | 20/8/2019 0000 - 18/11/2019 2359
+D | 0 | iP | 23/9/2019 2359

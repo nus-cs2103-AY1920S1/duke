@@ -30,6 +30,8 @@ public class Parser {
      * @throws DukeException
      */
     public String parseCommand(String input, TaskList taskList) throws DukeException {
+        assert input != null;
+
         String[] inputArr = input.split(" ");
         String taskType = inputArr[0];
         String taskDesc = getDesc(inputArr);
@@ -60,7 +62,6 @@ public class Parser {
             }
 
         } else if (taskType.equals("delete")) {
-
             int taskNum = Integer.parseInt(taskDesc);
             Task task = taskList.getTask(taskNum);
             taskList.deleteTask(taskNum);

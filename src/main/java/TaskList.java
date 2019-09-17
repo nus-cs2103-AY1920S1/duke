@@ -28,10 +28,12 @@ public class TaskList {
     }
 
     public void deleteTask(int taskNum) {
+        assert !(taskNum < 0) : "Negative task number";
         taskList.remove(taskNum -1);
     }
 
     public void addTask(Task task) {
+        assert task != null;
         taskList.add(task);
     }
 
@@ -40,6 +42,7 @@ public class TaskList {
     }
 
     public Task getTask(int taskNum) {
+        assert !(taskNum < 0) : "Negative task number";
         return taskList.get(taskNum -1);
     }
 

@@ -67,7 +67,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return run(input);
+        String output = run(input);
+        assert output != null;
+        return output;
     }
 
 }

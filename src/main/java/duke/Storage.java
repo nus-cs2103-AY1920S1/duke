@@ -65,6 +65,8 @@ public class Storage {
             }
             tasks.add(taskToAdd);
         }
+
+        assert tasks.size() > 0 : "Error in loading";
         return tasks;
     }
 

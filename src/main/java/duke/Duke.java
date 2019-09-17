@@ -20,6 +20,7 @@ public class Duke {
     private UserInterface ui;
 
     private boolean isDataLoaded = false;
+    private boolean isFileFound = false;
 
     public Duke(String filepath) {
         startup(filepath);
@@ -60,8 +61,9 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
             isDataLoaded = true;
+            isFileFound = true;
         } catch (FileNotFoundException | ParseException e) {
-            ui.showError(e.getMessage());
+            isFileFound = false;
         } catch (DukeException e) {
             isDataLoaded = false;
             tasks = new TaskList();
@@ -74,6 +76,10 @@ public class Duke {
         } else {
             return ui.showLoadingError(new CorruptedDataException().getMessage());
         }
+    }
+
+    public String getFileFoundResponse(String msg) {
+        return isFileFound ? ui.showSuccess(msg) : ui.showError(msg);
     }
 
     public UserInterface getUi() {

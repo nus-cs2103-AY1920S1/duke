@@ -3,7 +3,6 @@ package ui;
 import duke.Duke;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,8 +14,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/dukeData.txt");
-
     @Override
     public void start(Stage stage) {
         try {
@@ -24,10 +21,21 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
-            stage.show();
-            fxmlLoader.<MainWindow>getController().showLoadDataStatus();
-            fxmlLoader.<MainWindow>getController().showWelcome();
+
+            Duke duke = new Duke("data/dukeData.txt");
+            String loadDukeMsg = duke.getFileFoundResponse("loading duke");
+            if(loadDukeMsg.contains("Success")) {
+                fxmlLoader.<MainWindow>getController().setDuke(duke);
+                stage.show();
+                fxmlLoader.<MainWindow>getController().showLoadDukeStatus();
+                fxmlLoader.<MainWindow>getController().showLoadDataStatus();
+                fxmlLoader.<MainWindow>getController().showWelcome();
+            } else {
+                //ERROR
+                assert !loadDukeMsg.contains("Success") : "Workflow error";
+                System.err.println(loadDukeMsg);
+                System.exit(0);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

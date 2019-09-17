@@ -32,9 +32,9 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
-`  [D][✘] drop CS (by 30/09/2019 2359)`
-`Now you have 2 tasks in the list.`
+`Got it. I've added this task: 
+  [D][✘] drop CS (by 30/09/2019 2359)
+Now you have 2 tasks in the list.`
 
 ### `deadline` - adding a deadline to the list
 adds a deadline and the date that it should done by

@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Service for creating a delete command that checks for number formatting errors
-     * @param tokens user input split by space, required for creating a delete command
+     * @param tokens User input split by space, required for creating a delete command
      * @throws DukeException Thrown when the parameters does not specify the index of  the task
      */
     public static DeleteCommand createDeleteIfValid(String [] tokens) throws DukeException {

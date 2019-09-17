@@ -1,4 +1,6 @@
 package duke.tasks;
+
+
 /**
  * Represents different task types
  */

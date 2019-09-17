@@ -54,7 +54,6 @@ public class Parser {
             return FindCommand.createFindCommandIfValid(tokens);
         } else {
             System.out.println(tokens[0]);
-            //return Parser.createAddCommandIfValid(tokens);
             return Parser.createAddCommandIfValid(tokens, input);
         }
     }
@@ -80,9 +79,6 @@ public class Parser {
     }
 
     // helper method to check if user input can still be a valid to-do, deadline or event task
-
-
-//    private static Command createAddCommandIfValid(String[] tokens) throws DukeException, IllegalArgumentException {
     private static Command createAddCommandIfValid(String[] tokens, String fullCommand) throws DukeException, IllegalArgumentException {
         List<String> validCommands = List.of("todo", "deadline", "event");
 
@@ -190,10 +186,7 @@ public class Parser {
 
         return createDateCommand(mode, description, dateTime);
     }
-
-
-
-
+    
     //helper method to create the correct kind of DateTime Command
     private static Command createDateCommand(int mode, String description, String correctDate) {
         if (mode==0) {

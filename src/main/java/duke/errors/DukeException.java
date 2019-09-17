@@ -13,6 +13,10 @@ public class DukeException extends Exception {
         this.type = type;
     }
 
+	/**
+	 * Specifies the message to be printed based on different Exception types
+	 * @return String which is the message of the exception.
+	 */
     public String getMessage() {
     	switch (type) {
     		case INVALIDCOMMAND:

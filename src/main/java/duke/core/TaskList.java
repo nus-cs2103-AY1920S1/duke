@@ -33,7 +33,7 @@ public class TaskList {
      * Initialises the TaskList, with a given ArrayList to store the tasks,
      * and holds a reference to the main storage
      *
-     * @param list list to initialise with
+     * @param list List to initialise with
      * @param storage The main storage of the application.
      */
     public TaskList(ArrayList<Task> list, Storage storage){
@@ -103,7 +103,7 @@ public class TaskList {
     /**
      * Returns the number of tasks in current list
      *
-     * @return number of tasks in current list
+     * @return Number of tasks in current list
      */
     int getNumTasks(){
         return this.taskList.size();
@@ -112,12 +112,18 @@ public class TaskList {
     /**
      * Returns the position of the specified task in current list
      *
-     * @return position of the specified task in current list
+     * @return Position of the specified task in current list
      */
     public int getTaskID(Task task) {
         return taskList.indexOf(task) + 1;
     }
 
+
+    /**
+     * Returns a list of tasks containing the specific keyword
+     *
+     * @return List of tasks containing the specific keyword
+     */
     public List<Task> findTasks(String word) {
         ArrayList<Task> lst= new ArrayList<>();
         for (Task task: taskList) {

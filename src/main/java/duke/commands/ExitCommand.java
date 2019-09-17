@@ -13,8 +13,6 @@ import duke.errors.DukeException;
  */
 public class ExitCommand extends Command {
 
- 
-
     /**
      * Initialises the exit command
      */

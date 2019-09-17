@@ -22,12 +22,6 @@ public class DoneCommand extends Command{
     private int index;
 
     /**
-     * Constructor for creating a done command
-     *
-     * @param index The index of the task that is going to be marked done
-     */
-
-    /**
      * Initialises the command which contains the index of the task
      * to be marked as done
      *

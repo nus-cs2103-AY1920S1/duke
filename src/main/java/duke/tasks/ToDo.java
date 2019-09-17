@@ -7,11 +7,8 @@ import java.lang.StringBuilder;
  * Represents a Todo task in the application.
  * A Todo provides a factory method to create itself.
  */
-
-
-
 public class ToDo extends Task {
-    
+
     /**
      * Initialises a todo task with the description of the task.
      *

@@ -1,10 +1,7 @@
 # User Guide
 
-![GitHub Logo](/Users/yenpeng/Desktop/duke/docs/docs:Ui.png)
-Format: ![Smart_Baby_sample_image](https://photos.app.goo.gl/vcupf4D77xiio1Px9)
-
 ## Features 
-
+-------------------------------------------------------------------------------------------
 ### Add Tasks
 Smart Baby allows you to add various tasks such as to-dos, deadlines, and events.
 This is to help you keep track of when and what to do.
@@ -24,8 +21,9 @@ Smart Baby can help you find the tasks you are looking for from your list.
 ### Help
 Smart Baby will tell you what commands can be used.
 
-## Usage
 
+## Usage
+-------------------------------------------------------------------------------------------
 ### `todo` - To add a to-do task to the list.
 
 Provide the item description after the todo command.
@@ -36,8 +34,8 @@ Example of usage:
 
 Expected outcome:
 
-`ಥ◡ಥ Got it. I've added this task:`
-`[T][✘] buy milk and cereal`
+`ಥ◡ಥ Got it. I've added this task:\`
+`[T][✘] buy milk and cereal\`
 `Now you have 1 tasks in the list`
 
 ### `event` - To add an event to the list.
@@ -50,8 +48,8 @@ Example of usage:
 
 Expected outcome:
 
-`ಥ◡ಥ Got it. I've added this task:`
-`[E][✘] wedding anniversary dinner (at: 30-9-2019 18:00)`
+`ಥ◡ಥ Got it. I've added this task:\`
+`[E][✘] wedding anniversary dinner (at: 30-9-2019 18:00)\`
 `Now you have 4 tasks in the list.`
 
 ### `deadline` - To add a task with deadline to the list.
@@ -64,8 +62,8 @@ Example of usage:
 
 Expected outcome:
 
-`ಥ◡ಥ Got it. I've added this task:`
-`[D][✘] CS3230 assignment (by: 01-10-2019 11:59)`
+`ಥ◡ಥ Got it. I've added this task:\`
+`[D][✘] CS3230 assignment (by: 01-10-2019 11:59)\`
 `Now you have 5 tasks in the list.`
 
 ### `list` - To list down the items on the list.
@@ -76,9 +74,9 @@ Example of usage:
 
 Expected outcome:
 
-`(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Here are the task(s) in your list:`
-`1. [T][✘] buy milk and cereal`
-`2. [E][✘] wedding anniversary dinner (at: 30-9-2019 18:00)`
+`(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Here are the task(s) in your list:\`
+`1. [T][✘] buy milk and cereal\`
+`2. [E][✘] wedding anniversary dinner (at: 30-9-2019 18:00)\`
 `3. [D][✘] CS3230 assignment (by: 01-10-2019 11:59)`
 
 ### `done` - To mark a task as done.
@@ -91,7 +89,7 @@ Example of usage:
 
 Expected outcome:
 
-`´ ▽ ` `)ﾉ Nice! I've marked this task as done:`
+`´ ▽ ` `)ﾉ Nice! I've marked this task as done:\`
 `[✓] buy milk and cereal`
 
 ### `delete` - To delete an item on the list.
@@ -104,8 +102,8 @@ Example of usage:
 
 Expected outcome:
 
-`(¬‿¬) Noted. I've removed this task:`
-`[T][✓] buy milk and cereal`
+`(¬‿¬) Noted. I've removed this task:\`
+`[T][✓] buy milk and cereal\`
 `Now you have 2 tasks in the list.`
 
 ### `find` - To see item(s) containing the keyword from the list.
@@ -118,7 +116,7 @@ Example of usage:
 
 Expected outcome:
 
-`இ~இ Here are the matching task(s) in your list:`
+`இ~இ Here are the matching task(s) in your list:\`
 `1. [D][✘] CS3230 assignment (by: 01-10-2019 11:59)`
 
 ### `help` - To obtain a list of commands that can be used on Smart Baby.
@@ -129,14 +127,14 @@ Example of usage:
 
 Expected outcome:
 
-`Come, lemme teachu some baby talk (●´ω｀●):`
-`todo - to add a todo task to the list.`
-`event - to add an event with date and time to the list.`
-`deadline - to add a task with deadline to the list.`
-`list - to see the items on the list.`
-`done - to mark a completed task as done.`
-`delete - to remove a task from the list.`
-`find - to see item(s) containing the keyword from the list.`
+`Come, lemme teachu some baby talk (●´ω｀●):\`
+`todo - to add a todo task to the list.\`
+`event - to add an event with date and time to the list.\`
+`deadline - to add a task with deadline to the list.\`
+`list - to see the items on the list.\`
+`done - to mark a completed task as done.\`
+`delete - to remove a task from the list.\`
+`find - to see item(s) containing the keyword from the list.\`
 `bye - to end the session.`
 
 ### `bye` - To end the session with Smart Baby.

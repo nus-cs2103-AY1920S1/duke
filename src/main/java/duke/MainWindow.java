@@ -12,6 +12,15 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static String WELCOME_MESSAGE =
+        "Hello! I'm\n" +
+        " ____        _        \n" +
+        "|  _ \\ _   _| | _____ \n" +
+        "| | | | | | | |/ / _ \\\n" +
+        "| |_| | |_| |   <  __/\n" +
+        "|____/ \\__,_|_|\\_\\___|\n" +
+        "What can I do for you?";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -23,12 +32,15 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+            DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

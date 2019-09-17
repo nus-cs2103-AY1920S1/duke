@@ -20,6 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            stage.setTitle("Duke's TodoList");
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setClassLoader(getClass().getClassLoader());
             fxmlLoader.setLocation(getClass().getResource("/view/MainWindow.fxml"));

@@ -20,7 +20,6 @@ import java.io.FileReader;
 
 public class Storage {
     private static File file;
-    private UiText ui = new UiText();
     public static final String DEFAULT_PATH = "src" + UiText.fileSeparator + "main" +
             UiText.fileSeparator + "data" + UiText.fileSeparator + "duke.txt";
 

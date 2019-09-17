@@ -15,11 +15,11 @@ public class TaskList {
     }
 
     /**
-    * Gets the 1-indexed i-th task.
-    *
-    * @param i The i-th task.
-    * @return The task.
-    */
+     * Gets the 1-indexed i-th task.
+     *
+     * @param i The i-th task.
+     * @return The task.
+     */
     public static Task get(int i) throws DukeException {
         try {
             return storage.get(i - 1);
@@ -48,24 +48,21 @@ public class TaskList {
     }
 
     /**
-    * Adds a task to the list.
-    *
-    * @param t The task to be added.
-    */
+     * Adds a task to the list.
+     *
+     * @param t The task to be added.
+     */
     public static String addTask(Task t) {
         storage.add(t);
         Storage.saveTasks(storage);
-        return "Got it. I've added this task:\n" +
-            t.toString() +
-            "\n" +
-            getStorageSize();
+        return "Got it. I've added this task:\n" + t.toString() + "\n" + getStorageSize();
     }
 
     /**
-    * Removes the 1-indexed i-th task from the list.
-    *
-    * @param the i-th task to remove.
-    */
+     * Removes the 1-indexed i-th task from the list.
+     *
+     * @param the i-th task to remove.
+     */
     public static String removeTask(int i) throws DukeException {
         Task t;
         try {
@@ -75,19 +72,16 @@ public class TaskList {
             throw new DukeException("That task doesn't exist!");
         }
         Storage.saveTasks(storage);
-        return String.format(
-            "Noted. I've removed this task:\n  %s",
-            t.toString()
-        ) +
-            getStorageSize();
+        return String.format("Noted. I've removed this task:\n  %s", t.toString())
+                + getStorageSize();
     }
 
     /**
-    * Searches the list of tasks for something and returns everything that matches.
-    *
-    * @param s The string to search for.
-    * @return An arraylist of tasks that contains all matches.
-    */
+     * Searches the list of tasks for something and returns everything that matches.
+     *
+     * @param s The string to search for.
+     * @return An arraylist of tasks that contains all matches.
+     */
     public static ArrayList<Task> query(String s) {
         ArrayList<Task> res = new ArrayList<Task>();
         for (Task t : storage) {

@@ -9,19 +9,19 @@ public class Storage {
     private static String path;
 
     /**
-    * Sets the path to load and save from.
-    *
-    * @param path The path to load and save from.
-    */
+     * Sets the path to load and save from.
+     *
+     * @param path The path to load and save from.
+     */
     public static void setPath(String path) {
         Storage.path = path;
     }
 
     /**
-    * Save tasks.
-    *
-    * @param storage The list of tasks to store.
-    */
+     * Save tasks.
+     *
+     * @param storage The list of tasks to store.
+     */
     public static void saveTasks(ArrayList<Task> storage) {
         try {
             FileOutputStream fs = new FileOutputStream(path);
@@ -35,10 +35,10 @@ public class Storage {
     }
 
     /**
-    * Loads tasks.
-    *
-    * @return The loaded list, it will be empty if there is a read failure.
-    */
+     * Loads tasks.
+     *
+     * @return The loaded list, it will be empty if there is a read failure.
+     */
     public static ArrayList<Task> loadTasks() throws DukeException {
         try {
             FileInputStream fs = new FileInputStream(path);

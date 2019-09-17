@@ -10,7 +10,11 @@ class DukeTest {
         ArrayList<Task> tasks = new ArrayList<Task>();
         tasks.add(t);
         TaskList tl = new TaskList(tasks);
-        System.out.println(TaskList.get(1).toString());
+        try {
+            System.out.println(TaskList.get(1).toString());
+        } catch (Exception e) {
+            fail();
+        }
     }
 
     public void missingFile_exceptionThrown() {

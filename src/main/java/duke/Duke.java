@@ -10,9 +10,9 @@ import duke.exception.LoadingErrorDukeException;
 
 public class Duke {
 	/**
-	 * Represents user interface of Duke.
+	 * Represents exception handler of Duke.
 	 */
-	private Ui ui;
+	private ExceptionHandler exceptionHandler;
 	/**
 	 * Represents task list which stores all tasks given to Duke.
 	 */
@@ -27,7 +27,7 @@ public class Duke {
 	 * Constructor of Duke. Sets up user interface, storage and task list.
 	 */
 	public Duke() {
-		ui = new Ui();
+		exceptionHandler = new ExceptionHandler();
 		storage = new Storage("src/data/list.txt");
 		try {
 			tasks = new TaskList(storage.loadList());
@@ -47,7 +47,7 @@ public class Duke {
 			Command command = Parser.parse(input);
 			return command.execute(tasks, storage);
 		} catch (Exception e) {
-			return ui.showError(e);
+			return exceptionHandler.showError(e);
 		}
 	}
 }

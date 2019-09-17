@@ -63,7 +63,7 @@ public class Parser {
 	}
 
 	/**
-	 * Abstraction used to create AddCommand from given String.
+	 * Create AddCommand from given String.
 	 *
 	 * @param fullCommand String of user input.
 	 * @return AddCommand based on user input.
@@ -75,7 +75,7 @@ public class Parser {
 		String checkType[] = Arrays.copyOf(fullCommand.split(" ", 2), 2);
 		String typeOfTask = checkType[0];
 		String theTask = checkType[1];
-		// switch statement for todo, deadline, task
+		// switch statement for todo, deadline, task, doafter
 		switch (typeOfTask) {
 		case "todo":
 			taskToAdd = new ToDo(theTask);

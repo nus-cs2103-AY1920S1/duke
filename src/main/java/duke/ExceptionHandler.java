@@ -5,23 +5,14 @@ import duke.exception.InvalidInputDukeException;
 import duke.exception.InvalidTaskDukeException;
 
 /**
- * Represents the user interface of Duke.
+ * Represents the exception handler of Duke.
  */
-public class Ui {
-
-	/**
-	 * Logo of Duke.
-	 */
-	public static final String logo = " ____        _        \n"
-			+ "|  _ \\ _   _| | _____ \n"
-			+ "| | | | | | | |/ / _ \\\n"
-			+ "| |_| | |_| |   <  __/\n"
-			+ "|____/ \\__,_|_|\\_\\___|\n";
+public class ExceptionHandler {
 
 	/**
 	 * Constructor of user interface.
 	 */
-	public Ui() {
+	public ExceptionHandler() {
 	}
 
 	/**

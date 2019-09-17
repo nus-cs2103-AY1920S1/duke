@@ -1,3 +1,5 @@
+package gui;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,10 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import logic.Duke;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for gui.MainWindow. Provides the layout for the other controls.
  */
+
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;

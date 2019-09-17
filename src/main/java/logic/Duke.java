@@ -1,11 +1,7 @@
+package logic;
+
 import commands.Command;
 import commands.TaskCommands;
-import logic.ContactList;
-import logic.DukeException;
-import logic.Parser;
-import logic.Storage;
-import logic.TaskList;
-import logic.Ui;
 
 import java.util.Scanner;
 
@@ -38,7 +34,7 @@ public class Duke {
     /**
      * Continuously scans for User Input, Creates Command Objects and execute accordingly.
      */
-    void run() {
+    public void run() {
         ui.greet();
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
@@ -51,7 +47,13 @@ public class Duke {
         }
     }
 
-    String getResponse(String input) {
+    /**
+     * Returns string representation of response from Duke.
+     *
+     * @param input User-typed input
+     * @return Duke's generated response string
+     */
+    public String getResponse(String input) {
         try {
             Command c = Parser.parseCommand(input);
             if (c instanceof TaskCommands) {
@@ -67,7 +69,7 @@ public class Duke {
 
     }
 
-    String startMessage() {
+    public String startMessage() {
         ui.greet();
         return Ui.getLoadedStr();
     }

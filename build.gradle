@@ -26,7 +26,7 @@ repositories {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = "gui.Launcher"
 }
 
 javafx {

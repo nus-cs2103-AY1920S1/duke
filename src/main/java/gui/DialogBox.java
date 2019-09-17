@@ -1,3 +1,5 @@
+package gui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -48,29 +50,29 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates DialogBox of User based on program output.
+     * Creates gui.DialogBox of User based on program output.
      *
      * @param text String of displayed output.
-     * @param img Defined image avatar
-     * @return DialogBox used in MainWindow
+     * @param img  Defined image avatar
+     * @return gui.DialogBox used in gui.MainWindow
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        var dialogUser = new DialogBox(text, img);
+        DialogBox dialogUser = new DialogBox(text, img);
         dialogUser.setId("user");
         return dialogUser;
     }
 
     /**
-     * Creates DialogBox of Duke based on program output.
+     * Creates gui.DialogBox of Duke based on program output.
      *
      * @param text String of displayed output.
      * @param img  Defined image avatar
-     * @return DialogBox used in MainWindow
+     * @return gui.DialogBox used in gui.MainWindow
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        db.setId("duke");
-        return db;
+        DialogBox dialogDuke = new DialogBox(text, img);
+        dialogDuke.flip();
+        dialogDuke.setId("duke");
+        return dialogDuke;
     }
 }

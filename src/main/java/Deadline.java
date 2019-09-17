@@ -31,7 +31,7 @@ public class Deadline extends Task {
         String hour = timeString.substring(0,2);
         String minute = timeString.substring(2,4);
 
-        myFormatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        myFormatDate = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         myDate = LocalDate.parse(String.format("%s-%s-%s", year, month, day));
         myTime = LocalTime.parse(hour + ":" + minute);
 

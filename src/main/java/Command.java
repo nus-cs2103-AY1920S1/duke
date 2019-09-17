@@ -35,13 +35,15 @@ public class Command {
 
             case TODO :
                 try {
-                    if (TaskLine.length() == 4) {
-                        reply =  ui.throwInputError("todo");
-                    } else {
-                        Task todoTask = new Todo(TaskLine.substring(5));
-                        taskList.add(todoTask);
-                        reply =  ui.printAddTask(todoTask,taskList.size());
+                    for (int i = 0; i < taskList.size(); i++) {
+                        if (taskList.get(i).getDescription().equals(TaskLine.substring(5))) {
+                            reply =  ui.throwInputError("duplicate");
+                            break outLoop;
+                        }
                     }
+                    Task todoTask = new Todo(TaskLine.substring(5));
+                    taskList.add(todoTask);
+                    reply =  ui.printAddTask(todoTask,taskList.size());
                 } catch (Exception e){
                     reply = ui.throwInputError("todo");
                 }
@@ -49,14 +51,17 @@ public class Command {
 
             case DEADLINE :
                 try {
-                    if (TaskLine.length() == 8) {
-                        reply =  ui.throwInputError("deadline");
-                    } else {
-                        int indexOfSlash = TaskLine.indexOf("/");
-                        Task deadlineTask = new Deadline(TaskLine.substring(9, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
-                        taskList.add(deadlineTask);
-                        reply =  ui.printAddTask(deadlineTask,taskList.size());
+                    int indexOfSlash = TaskLine.indexOf("/");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        if (taskList.get(i).getDescription().equals(TaskLine.substring(8, indexOfSlash - 1)) &&
+                            taskList.get(i).getDate().equals(TaskLine.substring(indexOfSlash + 4))) {
+                            reply = ui.throwInputError("duplicate");
+                            break outLoop;
+                        }
                     }
+                    Task deadlineTask = new Deadline(TaskLine.substring(8, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
+                    taskList.add(deadlineTask);
+                    reply = ui.printAddTask(deadlineTask, taskList.size());
                 } catch (Exception e){
                     reply = ui.throwInputError("deadline");
                 }
@@ -64,14 +69,17 @@ public class Command {
 
             case EVENT :
                 try {
-                    if (TaskLine.length() == 5) {
-                        reply =  ui.throwInputError("event");
-                    } else {
-                        int indexOfSlash = TaskLine.indexOf("/");
-                        Task eventTask = new Event(TaskLine.substring(6, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
-                        taskList.add(eventTask);
-                        reply =  ui.printAddTask(eventTask,taskList.size());
+                    int indexOfSlash = TaskLine.indexOf("/");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        if (taskList.get(i).getDescription().equals(TaskLine.substring(6, indexOfSlash - 1)) &&
+                                taskList.get(i).getDate().equals(TaskLine.substring(indexOfSlash + 4))) {
+                            reply = ui.throwInputError("duplicate");
+                            break outLoop;
+                        }
                     }
+                    Task eventTask = new Event(TaskLine.substring(6, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
+                    taskList.add(eventTask);
+                    reply = ui.printAddTask(eventTask, taskList.size());
                 } catch (Exception e) {
                     reply =  ui.throwInputError("event");
                 }

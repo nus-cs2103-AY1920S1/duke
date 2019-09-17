@@ -1,28 +1,30 @@
 # Duke - User Guide
 
-1. [Introduction](#1-introduction)
+1. [**Introduction**](#1-introduction)
 
-2. [Quick Start](#2-quick-start)
+2. [**Quick Start**](#2-quick-start)
 
-3. [Features](#3-features)
+3. [**Features**](#3-features)
 
-  3.1. [Listing all tasks: `list`](#31-listing-all-tasks-list)
+   3.1. [Listing all tasks: `list`](#31-listing-all-tasks-list)
+   
+   3.2. [Adding a todo: `todo`](#32-adding-a-todo-todo)
+   
+   3.3. [Adding an event: `event`](#33-adding-an-event-event)
+   
+   3.4. [Adding a deadline: `deadline`](#34-adding-a-deadline-deadline)
+   
+   3.5. [Finding a task: `find`](#35-finding-a-task-find)
+   
+   3.6. [Marking a task as done: `done`](#36-marking-a-task-as-done-done)
+   
+   3.7. [Deleting a task: `delete`](#37-deleting-a-task-delete)
+   
+   3.8. [Exiting the program: `bye`](#38-exiting-the-program-bye)
   
-  3.2. [Adding a todo: `todo`](#32-adding-a-todo-todo)
-  
-  3.3. [Adding an event: `event`](#33-adding-an-event-event)
-  
-  3.4. [Adding a deadline: `deadline`](#34-adding-a-deadline-deadline)
-  
-  3.5. [Finding a task: `find`](#35-finding-a-task-find)
-  
-  3.6. [Marking a task as done: `done`](#36-marking-a-task-as-done-done)
-  
-  3.7. [Deleting a task: `delete`](#37-deleting-a-task-delete)
-  
-  3.8. [Exiting the program: `bye`](#38-exiting-the-program-bye)
-  
-4. [Command Summary](#4-command-summary)
+4. [**Command Summary**](#4-command-summary)
+
+5. [**Credits**](#5-credits)
 
 ## 1. Introduction
 
@@ -122,3 +124,6 @@ Format: `bye`
 * **Delete**: `delete INDEX`
 * **List**: `list`
 * **Exit**: `bye`
+
+## 5. Credits
+[AB3 User Guide](https://github.com/se-edu/addressbook-level3/blob/master/docs/UserGuide.adoc)

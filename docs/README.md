@@ -14,12 +14,20 @@ for reminders for tasks that will happen in a week's time.
 
 ## Getting started
 
-### Running jar file (Windows)
+Download `JohnTaskAssistant.jar` file from [here](https://github.com/Russell-Loh-NUS/duke/releases/tag/v0.2) and double click on it. If double clicking does not work, follow the instructions below.
+
+### Running jar file (Cross Platform)
 1. Open terminal/command prompt
+2. Type java -jar JohnTaskAssistant.jar
+
+*If the above does not work, download the platform dependent jar files from [here](https://github.com/Russell-Loh-NUS/duke/releases/tag/v0.2) and follow the instructions below*
+
+### Running jar file (Windows)
+1. Open command prompt
 2. Type java -jar JohnTaskAssistant-Win.jar
 
 ### Running jar file (Mac)
-1. Open terminal/command prompt
+1. Open terminal
 2. Type java -jar JohnTaskAssistant-Mac.jar
 
 ### Importing project and run on Intellij IDE

@@ -43,9 +43,7 @@ public class Duke extends Application{
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-//        tasks = new TaskList(new LinkedList<Task>());
             tasks = new TaskList(storage.printFileContents());
-
             assert tasks!= null;
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,6 +65,7 @@ public class Duke extends Application{
             Parser split = new Parser(echo);
             String error = "";
             String firstWord = split.getType();
+            assert firstWord !=null;
 
             if (firstWord.equals("bye")) {
                 return "Bye. Hope to see you again soon!";

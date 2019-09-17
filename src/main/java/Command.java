@@ -19,7 +19,7 @@ public abstract class Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    abstract String execute(TaskList tasks, Ui ui, Storage storage) throws Exception;
+    abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns boolean object isExit to determine if program should exit.

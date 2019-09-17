@@ -7,14 +7,16 @@ Adds any todos to the list
 
 ## Usage
 
-### `Keyword` - Describe action
+### todo - Describe action
 
-Describe action and its outcome.
+When user inputs command of "todo", the remaining words behind such a command will be added into the .txt file that is in also stored in the repo. The writing of data is done real-time
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo borrow book`
 
 Expected outcome:
 
-`outcome`
+`Got it. I've added this task:
+[T][x] return book
+"Now you have " + tasks.getTaskArrayList().size() + " tasks in the list."`

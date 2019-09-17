@@ -1,21 +1,6 @@
 # Duke - User Guide
 ##### A simple chatbot that helps to manage todos, events, and deadlines.
 
-
-Three or more...
-
----
-
-Hyphens
-
-***
-
-Asterisks
-
-___
-
-Underscores
-
 ## Prerequisite
 1. Make sure you have at least **Java  11** installed on your computer.
 2. download the latest version of **Duke.jar** found [here](https://github.com/austinsantoso/duke/releases).
@@ -41,7 +26,7 @@ Duke can clasify tasks to different types:
 **Here are the commands available to Duke:**
 
 ### Basic Features
-***
+---
 ##### `help` - Displays help
 displays the help text.
 
@@ -50,7 +35,9 @@ displays the help text.
 
 **Expected Outcome:**
 A textbox containing a list of commands that can be used by duke, as well as their respective outcomes.
-***
+
+---
+
 ##### `list` - Displays current list
 displays All lists currently saved.
 
@@ -59,7 +46,9 @@ displays All lists currently saved.
 
 **Expected Outcome:**
 A list containing all tasks stored currently stored.
-***
+
+---
+
 ##### `bye` - Closes the program.
 Closes the program.
 
@@ -68,10 +57,13 @@ Closes the program.
 
 **Expected Outcome:**
 The program will close.
-***
+
+---
 
 ### Adding Tasks
-***
+
+---
+
 ##### `todo [task name]` - Adds a todo task
 adds a todo task to the list with the given task name.
 
@@ -80,7 +72,9 @@ adds a todo task to the list with the given task name.
 
 **Expected Outcome:**
 Duke will respond with a new todo task with the given name.
-***
+
+---
+
 ##### `deadline [task name] /by [date]` - adds a deadline task
 adds a deadline task to the list with the given task name and date.
 The date must follow format `dd/MM/YYYY HH:mm`
@@ -90,7 +84,9 @@ The date must follow format `dd/MM/YYYY HH:mm`
 
 **Expected Outcome:**
 Duke will respond with a new deadline task with the given name and date.
-***
+
+---
+
 ##### `event [task name] /at [date]` - adds an event task
 adds an event task to the list with the given task name and date.
 The date must follow format `dd/MM/YYYY HH:mm`
@@ -100,9 +96,13 @@ The date must follow format `dd/MM/YYYY HH:mm`
 
 **Expected Outcome:**
 Duke will respond with a new event task with the given name and date.
-***
+
+---
+
 ### Manipulating tasks
-***
+
+---
+
 ##### `done [task number]` - Completes a task
 Marks the tasks with the given task number as completed.
 
@@ -111,7 +111,9 @@ Marks the tasks with the given task number as completed.
 
 **Expected Outcome:**
 A message stating that the given `task number` has been succesfully marked as complete.    
-***
+
+---
+
 ##### `remove [task number]` - Removes a task
 removes the tasks with the given task number from the list
 
@@ -120,4 +122,5 @@ removes the tasks with the given task number from the list
 
 **Expected Outcome:**
 A message stating that the given `task number` has been succesfully removed from the list.
-***
+
+---

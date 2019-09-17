@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     private static Storage storage = new Storage();
     private static TaskList tasks = new TaskList(storage);
-    private static UI ui = new UI();
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private ScrollPane scrollPane;
@@ -119,10 +118,6 @@ public class Duke extends Application {
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeResponse = getResponse(userInput.getText());
-        if (duke.equals("bye")) {
-            dukeResponse = ui.bye();
-            Platform.exit();
-        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
                 DialogBox.getDukeDialog(dukeResponse, duke)

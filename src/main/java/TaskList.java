@@ -71,7 +71,7 @@ public class TaskList {
                 case "find":
                     return findList(DESCRIPTION);
                 case "bye":
-                    return "bye";
+                    return "Bye. Hope to see you again soon!";
                 case "help":
                     return help();
                 default:

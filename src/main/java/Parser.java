@@ -30,9 +30,15 @@ public class Parser {
                     task[1] = "";
                     task[2] = ""; // {list/bye, "", ""}
                 } else if (action.equals("done") || action.equals("delete") || action.equals("find")) {
-                    if (raw.length > 2) {
+                    if (raw.length < 2) {
+                        throw new DukeActionException("\u2639 OOPS!!! I'm sorry, but " + raw[0] + " should not have" +
+                                " less than 2 arguments :-(");
+                    } else if (raw.length > 2) {
                         throw new DukeActionException("\u2639 OOPS!!! I'm sorry, but " + raw[0] + " should not have" +
                                 " more than 2 arguments :-(");
+                    } else if (Integer.parseInt(raw[1]) <= 0) {
+                        throw new DukeActionException("\u2639 OOPS!!! I'm sorry, but " + raw[0] + " should not have" +
+                                " a value 0 or less :-(");
                     }
                     task[1] = raw[1];
                     task[2] = ""; // {done/delete/find, number for done or delete, word for find, ""}
@@ -60,6 +66,9 @@ public class Parser {
             throw new DukeEmptyException(raw[0]);
         } else {
             raw[0] = "";
+            if (raw[1].contains("/by") || raw[1].contains("/at")) {
+                throw new DukeEmptyException(task[0]);
+            }
             task[1] = String.join(" ", raw).substring(1); //{command, desc+date, ""}
             if (task[0].equals("deadline")) {
                 return deadlineCommand(task);
@@ -79,8 +88,9 @@ public class Parser {
                     + " \"dd/MM/yyyy HHmm\"");
         }
         boolean hasDateFormat = (desc_By[1].split("/").length == 3); // {"18", "12", "2019 1800"}
-        boolean hasTimeFormat = (desc_By[1].split("-").length == 1); // {"18/12/2019 1800"}
-        if (!hasDateFormat || !hasTimeFormat) {
+        boolean hasWrongTimeFormat = (desc_By[1].split(" ")[1].length() > 4); // {"18/12/2019", "18003dse3"}
+        boolean hasExtraTimeFormat = (desc_By[1].split("-").length == 1); // {"18/12/2019 1800"}
+        if (!hasDateFormat || !hasExtraTimeFormat || hasWrongTimeFormat) {
             throw new DukeDeadlineException("\u2639 OOPS!!! I'm sorry, but the date of a deadline must be in the format"
                     + " \"dd/MM/yyyy HHmm\"");
         }
@@ -96,8 +106,9 @@ public class Parser {
                     + " \"dd/MM/yyyy HHmm-HHmm\"");
         }
         boolean hasDateFormat = (desc_At[1].split("/").length == 3); // {"18", "12", "2019 1800"}
-        boolean hasTimeFormat = (desc_At[1].split("-").length == 2); // {"18/12/2019 1800", "2000"}
-        if (!hasDateFormat || !hasTimeFormat) {
+        boolean hasWrongTimeFormat = (desc_At[1].split(" ")[1].length() > 9); // {"18/12/2019", "1800-20003dse3"}
+        boolean hasExtraTimeFormat = (desc_At[1].split("-").length == 2); // {"18/12/2019 1800", "1800-2000"}
+        if (!hasDateFormat || !hasExtraTimeFormat || hasWrongTimeFormat) {
             throw new DukeEventException("\u2639 OOPS!!! I'm sorry, but the date of a event must be in the format"
                     + " \"dd/MM/yyyy HHmm-HHmm\"");
         }

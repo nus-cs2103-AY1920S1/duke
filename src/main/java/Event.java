@@ -22,13 +22,14 @@ public class Event extends Task {
     public Event(String description, String on) {
         super(description);
         this.on = on;
-        assert on.length() == 20 : "Parser failed to process event correctly.";
+        System.out.println(on.length());
+        assert (on.length() >= 16 || on.length() <= 20) : "Parser failed to process event correctly.";
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
             this.date = formatter.parse(on.substring(0, 9));
             formatter = new SimpleDateFormat("HHmm");
-            this.startTime = formatter.parse(on.substring(10, 14));
-            this.endTime = formatter.parse(on.substring(15));
+            this.startTime = formatter.parse(on.substring(11, 14));
+            this.endTime = formatter.parse(on.substring(16));
         } catch (ParseException pe) {
             System.out.println("Event: Something serious happened here...");
         }

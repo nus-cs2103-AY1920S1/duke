@@ -20,7 +20,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        assert by.length() == 10 || by.length() == 15: "Parser failed to process deadline correctly.";
+        assert by.length()  >= 6 || by.length() <= 15: "Parser failed to process deadline correctly.";
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
             this.date = formatter.parse(by);

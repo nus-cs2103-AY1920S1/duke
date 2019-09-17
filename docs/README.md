@@ -37,7 +37,7 @@ There are 3 different types of tasks:
     - Format: `deadline [NAME] /by [DATE]`
     - Date is formatted as such: DD/MM/YY HHMM
 3. Events: tasks that start at a specific time and ends at a specific time e.g., team project meeting on 2/10/2019 2-4pm
-    - Format: `event [NAME] /on [DATE]`
+    - Format: `event [NAME] /at [DATE]`
     - Date is formatted as such: DD/MM/YY HHMM
 
 ### 3.2 List all tasks

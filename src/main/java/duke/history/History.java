@@ -33,7 +33,6 @@ public class History {
     public void addHistoryState() {
         try {
             String prev = storage.readFile();
-            System.out.println(prev);
             historyStorageStack.push(prev);
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,7 +46,6 @@ public class History {
     public void undo() throws DukeException {
         try {
             String prev = historyStorageStack.pop();
-            System.out.println(prev);
             storage.save(prev);
             tasks.setList(storage.load());
         } catch (IOException e) {

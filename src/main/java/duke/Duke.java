@@ -1,5 +1,8 @@
 package duke;
 
+import java.io.File;
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.history.History;
@@ -18,13 +21,12 @@ public class Duke extends Application {
 
     /**
      * Constructor for the Duke class.
-     *
-     * @param filePath Local filePath to the data storage file.
      */
-    private Duke(String filePath) {
+    public Duke() throws IOException {
         ui = new Ui();
         ui.setDuke(this);
-        storage = new Storage(filePath);
+        new File("duke.txt").createNewFile();
+        storage = new Storage("duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -32,10 +34,6 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
         history = new History(storage, tasks);
-    }
-
-    public Duke() {
-        this("src/main/data/duke.txt");
     }
 
     public String execute(String command) throws DukeException {

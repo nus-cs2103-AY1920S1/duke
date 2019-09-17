@@ -56,6 +56,7 @@ public class Ui extends AnchorPane {
             FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/Ui.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            primaryStage.setResizable(false);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Duke");
             fxmlLoader.<Ui>getController().setDuke(duke);

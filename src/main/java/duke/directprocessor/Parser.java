@@ -14,8 +14,6 @@ import duke.commands.SlotCommand;
 import duke.commands.SpecifyCommand;
 import duke.tasks.TaskType;
 
-import java.lang.reflect.InvocationTargetException;
-
 /**
  * This is a class that recognizes the user's input and calls the corresponding command.
  * It only recognizes the first word of the user input and key words like "/at", "/by".
@@ -31,6 +29,7 @@ public class Parser {
      * @throws DukeException If the command is invalid.
      */
     public static Command parse(String s) throws DukeException {
+        s = s.trim();
         String[] splitInput = s.split("\\s+", 2);
         if (splitInput.length == 0) {
             throw new DukeException("The command cannot be empty.");

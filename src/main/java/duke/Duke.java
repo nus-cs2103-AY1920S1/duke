@@ -40,7 +40,11 @@ public class Duke {
     String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui);
+            String toReturn = c.execute(tasks, ui);
+            if (c.isExit()) {
+                System.exit(0);
+            }
+            return toReturn;
         } catch (DukeException e) {
             return e.getMessage();
         }

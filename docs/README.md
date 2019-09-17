@@ -117,7 +117,7 @@ Expected outcome:
 `1. [D][X] software enginnering project (by:` <br/>
    `20/09/2019 23:00:00)`
 
-### `bye` - Execute the program and save the modified task list
+### `bye` - Exit the program and save the modified task list
 
 Example usage:
 
@@ -125,8 +125,7 @@ Example usage:
 
 Expected outcome:
 
-`Bye master! Hope to see you again soon.` <br />
-`You can now close the window.`
+The application window closes.
 
 ### `slot` - Add a new possible slot to an event task
 

@@ -2,19 +2,17 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Add tasks
+Add "todo", "event", and "deadline" tasks
 
 ## Usage
 
-### `Keyword` - Describe action
-
-Describe action and its outcome.
+### `[Task type] [Description]` - Adds a task of the specified type with the given description
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo nothing`
 
 Expected outcome:
 
-`outcome`
+`Got it. This task was added to the list of tasks.`

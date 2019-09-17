@@ -20,7 +20,7 @@ dependencies {
 
 application {
     // Change this to your main class.
-    mainClassName = "Launcher"
+    mainClassName = "SerSlacksalot.GUI.Launcher"
 }
 
 checkstyle {
@@ -37,6 +37,10 @@ shadowJar {
     archiveVersion = "0.1.3"
     archiveClassifier = null
     archiveAppendix = null
+}
+
+test {
+    useJUnitPlatform()
 }
 
 run {

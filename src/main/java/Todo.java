@@ -1,4 +1,6 @@
 public class Todo extends Task {
+    private String TODO_CMD = "todo";
+    private String TODO_PREFIX = "[T]";
     /**
      * Constructor
      *
@@ -14,7 +16,22 @@ public class Todo extends Task {
      * @return formatted String
      */
     public String toString() {
-
-        return "[T]" + super.toString();
+        return format(super.toString());
     }
+
+    public String toFileString() {
+        return format(super.toFileString());
+    }
+
+
+    private String format(String str) {
+        String temp = str.replaceAll(TODO_CMD, " ");
+        String result = super.cleanString(temp);
+        return TODO_PREFIX + result;
+    }
+
+
+
+
+
 }

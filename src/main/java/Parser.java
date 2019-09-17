@@ -14,6 +14,7 @@ public class Parser {
     static String ADD_TODO_COMMAND = "todo ";
     static String ADD_DEADLINE_COMMAND = "deadline ";
     static String ADD_EVENT_COMMAND = "event ";
+    static String IDENTIFIER ="UnIqUE_kEy_4324345";
     /**
      * To parse all user inputs
      *
@@ -142,7 +143,7 @@ public class Parser {
                 df.setLenient(false);
                 date = df.parse(rawDate.toString().substring(3));
                 DateFormat formatter = new SimpleDateFormat(outputFormats.get(i));
-                fullCommand.append("   ").append(formatter.format(date));
+                fullCommand.append("/").append(IDENTIFIER).append(formatter.format(date));
                 break;
 
             } catch (ParseException e) {

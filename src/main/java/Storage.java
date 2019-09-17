@@ -12,7 +12,8 @@ public class Storage {
     private String TODO = "[T]";
     private String DEADLINE = "[D]";
     private String EVENT = "[E]";
-    private String COMPLETE = "[✓]";
+    private String COMPLETE = "[O]";
+    private String INCOMPLETE = "[X]";
 
     /**
      * Constructor
@@ -33,22 +34,29 @@ public class Storage {
         File file = new File(filePath);
         LinkedList<Task> result = new LinkedList<>();
         if (!file.exists()) {
-            throw new DukeException("File not found!");
+            throw new DukeException("Save file not found! Duke will be saving everything to a new file.");
         }
         try {
             List<String> temp = Files.lines(file.toPath())
                     .collect(Collectors.toList());
             for (String s : temp) {
                 Task curr = null;
-                if (s.contains(TODO)) {
-                    curr = new Todo(s.substring(7));
-                } else if (s.contains(DEADLINE)) {
-                    curr = new Deadline(s.substring(7));
-                } else if (s.contains(EVENT)) {
-                    curr = new Event(s.substring(7));
+                String cmd = s.substring(3,6);
+                String description = s.substring(9);
+                String status = s.substring(6,9);
+                if (cmd.equals(TODO)) {
+                    curr = new Todo(description);
+                } else if (cmd.equals(DEADLINE)) {
+                    curr = new Deadline(description);
+                } else if (cmd.equals(EVENT)) {
+                    curr = new Event(description);
+                } else {
+                    throw new DukeException("Please make sure all the entries in your file starts with the correct prefix!");
                 }
-                if (s.contains(COMPLETE)) {
+                if (status.equals(COMPLETE)) {
                     curr.setDone();
+                } else if (!status.equals(INCOMPLETE)) {
+                    throw new DukeException("Please make sure all the entries in your file starts with the correct prefix!");
                 }
                 result.add(curr);
             }
@@ -71,7 +79,7 @@ public class Storage {
             int i = 1;
             //StringBuilder result = new StringBuilder();
             for (Task t : tasks) {
-                fw.write(i + ". " + t + "\n");
+                fw.write(i + ". " + t.toFileString() + "\n");
                 i++;
             }
 

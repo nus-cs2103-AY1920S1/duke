@@ -39,10 +39,19 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         assert duke != null : "duke is null!";
+
+        String setupMsg = duke.setUp();
+        if (!setupMsg.equals(duke.SUCCESS)) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(setupMsg, dukeImage)
+            );
+        }
+
         String response = duke.welcome();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
     }
 
     /**

@@ -1,6 +1,7 @@
 public class Deadline extends Task {
-    protected String description;
-    protected boolean isDone;
+    private String DEADLINE_CMD = "deadline";
+    private String DEADLINE_PREFIX = "[D]";
+    private String DEADLINE_DATE_PREFIX = "(by: ";
     /**
      * Constructor
      *
@@ -16,29 +17,15 @@ public class Deadline extends Task {
      * @return formatted String
      */
     public String toString() {
-        String unprocessed = super.toString();
-        StringBuilder temp = new StringBuilder();
-
-        boolean isFirst = true;
-        if (unprocessed.contains("/")) {
-            for (int i = 0; i < unprocessed.length(); i++) {
-                char c = unprocessed.charAt(i);
-                if (c == '/' && isFirst) {
-                    temp.append("(by:");
-                    i += 2;
-                    isFirst = false;
-                } else {
-                    temp.append(c);
-                }
-                //Process char
-
-            }
-            return "[D]" + temp.append(')').toString();
-        } else {
-            return "[D]" + unprocessed;
-        }
-
-
-
+        return super.getString(super.toString(), DEADLINE_CMD, DEADLINE_PREFIX, DEADLINE_DATE_PREFIX);
     }
+
+    public String toFileString() {
+        return super.getString(super.toFileString(), DEADLINE_CMD, DEADLINE_PREFIX, DEADLINE_DATE_PREFIX);
+    }
+
+
+
+
+
 }

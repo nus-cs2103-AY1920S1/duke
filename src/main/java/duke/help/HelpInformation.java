@@ -1,7 +1,6 @@
 package duke.help;
 
 import duke.command.CommandType;
-import duke.exception.IllegalCommandTypeException;
 
 import java.util.Optional;
 
@@ -75,11 +74,7 @@ public class HelpInformation {
                                                          CommandType.SubCommandType subCommandType) {
         switch (commandType) {
         case Add:
-            try {
                 return new HelpInfoOfAddCommand(subCommandType);
-            } catch (IllegalCommandTypeException e) {
-                return new HelpInformation();
-            }
         default:
             return new HelpInformation();
         }

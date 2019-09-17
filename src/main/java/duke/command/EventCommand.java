@@ -6,7 +6,7 @@ import duke.task.Event;
 import java.time.LocalDateTime;
 
 /**
- * A class representing add a event task command.
+ * A class representing a event task command.
  */
 public class EventCommand extends AddCommand {
     public static final String COMMAND_WORD = "event";

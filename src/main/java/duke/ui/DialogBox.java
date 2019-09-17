@@ -46,8 +46,8 @@ public class DialogBox extends HBox {
         DropShadow dropShadow = new DropShadow();
         dropShadow.setColor(Color.rgb(138, 138, 138, 0.8));
         dropShadow.setWidth(2);
-        dropShadow.setOffsetY(2);
-        dropShadow.setOffsetX(2);
+        dropShadow.setOffsetY(1);
+        dropShadow.setOffsetX(1);
         dialog.setEffect(dropShadow);
     }
 
@@ -80,6 +80,7 @@ public class DialogBox extends HBox {
         DialogBox dialogBox = new DialogBox(text, image);
         dialogBox.flip();
         dialogBox.setAlignment(Pos.TOP_RIGHT);
+        dialogBox.getStyleClass().add("user");
         return dialogBox;
     }
 

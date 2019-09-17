@@ -11,16 +11,14 @@ public class HelpInfoOfAddCommand extends HelpInformation {
      * @param subCommandType the sub command type of an Add command.
      * @throws IllegalCommandTypeException If the sub command type is not Todo, Event or Deadline.
      */
-    public HelpInfoOfAddCommand(CommandType.SubCommandType subCommandType) throws IllegalCommandTypeException {
+    public HelpInfoOfAddCommand(CommandType.SubCommandType subCommandType) {
         switch (subCommandType) {
         case Todo:
         case Event:
         case Deadline:
-            break;
+            this.subCommandType = subCommandType;
         default:
-            throw new IllegalCommandTypeException(subCommandType + " is not a Add command");
         }
-        this.subCommandType = subCommandType;
     }
 
     /**

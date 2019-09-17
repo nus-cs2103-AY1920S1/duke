@@ -11,16 +11,13 @@ import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
-import duke.exception.IllegalCommandException;
-import duke.exception.IllegalDateException;
-import duke.exception.IllegalDescriptionException;
-import duke.exception.IllegalIndexOfTaskException;
-import duke.exception.IllegalTimeException;
+import duke.exception.*;
 import duke.filter.ComparisonOperator;
 import duke.filter.IndexFilter;
 import duke.filter.StatusFilter;
 import duke.filter.TimeFilter;
 import duke.filter.TypeFilter;
+import duke.help.HelpInfoOfAddCommand;
 import duke.task.TaskType;
 
 import java.time.DateTimeException;
@@ -112,7 +109,8 @@ public class Parser {
     private DeadlineCommand parseDeadlineTask(String description) throws IllegalDescriptionException {
         int indexOfTime = description.indexOf("/by");
         if (indexOfTime == -1) {
-            throw new IllegalDescriptionException(DeadlineCommand.getCommandHelpInfo());
+            throw new IllegalDescriptionException(
+                    new HelpInfoOfAddCommand(CommandType.SubCommandType.Deadline).getHelpInformation());
         }
         assert indexOfTime <= description.length() && indexOfTime + 3 <= description.length() :
                         "String length: " + description.length() + " separator index: " + indexOfTime;
@@ -125,7 +123,8 @@ public class Parser {
     private EventCommand parseEventTask(String description) throws IllegalDescriptionException {
         int indexOfTime = description.indexOf("/at");
         if (indexOfTime == -1) {
-            throw new IllegalDescriptionException(DeadlineCommand.getCommandHelpInfo());
+            throw new IllegalDescriptionException(
+                    new HelpInfoOfAddCommand(CommandType.SubCommandType.Event).getHelpInformation());
         }
         assert indexOfTime <= description.length() && indexOfTime + 3 <= description.length() :
                         "String length: " + description.length() + " separator index: " + indexOfTime;
@@ -236,7 +235,7 @@ public class Parser {
         case "deadline":
             return TaskType.Deadline;
         default:
-            throw new IllegalDescriptionException("Please provide a valid task type");
+            throw new IllegalDescriptionException("Please provide a valid task type.");
         }
     }
 

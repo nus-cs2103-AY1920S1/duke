@@ -21,12 +21,4 @@ public class DeadlineCommand extends AddCommand {
             throws IllegalDescriptionException {
         super(new Deadline(description, dateTime));
     }
-
-    /**
-     * Returns a string of help information for the deadline command.
-     * @return a string of help information for the deadline command.
-     */
-    public static String getCommandHelpInfo() {
-        return "The format of deadline command is: deadline <taks description> /by <DD/MM/YYYY HH:MM>";
-    }
 }

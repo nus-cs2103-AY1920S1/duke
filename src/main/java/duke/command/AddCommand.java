@@ -18,6 +18,14 @@ public abstract class AddCommand extends Command {
     }
 
     /**
+     * Returns the task to be added.
+     * @return the task to be added.
+     */
+    public Task getTask() {
+        return task;
+    }
+
+    /**
      * Returns the result of executing the command.
      * Add the task to the list.
      * @param tasks a list task to work on.

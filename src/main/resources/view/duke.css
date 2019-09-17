@@ -1,6 +1,6 @@
 #mainWindow {
     -fx-padding: 10px 5px 10px 5px;
-    -fx-background-color: #A8C8BF;
+    -fx-background-color: #3a5f76;
 }
 
 .scroll-pane > .viewport {
@@ -9,7 +9,7 @@
 
 #scrollPane {
     -fx-border-width: 0;
-    -fx-background-color: #A8C8BF;
+    -fx-background-color: #3a5f76;
 }
 
 #userInput {
@@ -19,12 +19,12 @@
 }
 
 #dialog {
-    -fx-padding: 8px 10px 10px 10px;
+    -fx-padding: 5px 10px 5px 10px;
     -fx-font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
     -fx-font-size: 16px;
     -fx-background-radius: 0.5em;
-    -fx-background-color: #253D4C;
-    -fx-text-fill: #FFFDF8;
+    -fx-border-radius: 0.5em;
+    -fx-background-color: rgba(255, 255, 255, 0.8);
 }
 
 #dialogContainer {
@@ -32,5 +32,5 @@
 }
 
 .dialogBox {
-    -fx-padding: 5px;
+    -fx-padding: 10px 5px;
 }

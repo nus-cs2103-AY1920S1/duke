@@ -3,6 +3,7 @@ import javafx.scene.layout.Priority;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
@@ -15,7 +16,7 @@ public class TaskList {
     private static final String ADD_TYPE_DEADLINE = "deadline";
     private static final String ADD_TYPE_EVENT = "event";
 
-    private PriorityQueue<Task> sortedList;
+//    private PriorityQueue<Task> sortedList;
 
     /**
      * ArrayList for tracking Tasks on the list.
@@ -150,19 +151,19 @@ public class TaskList {
         }
     }
 
-    public void returnSortedTasks() {
-        sortedList = new PriorityQueue<Task>(new SortByEarliestDeadline());
-        for(int i = 0; i < list.size(); i++) {
-            sortedList.add(list.get(i));
-            System.out.println(list.get(i));
+    public String returnSortedTasksString(String keyword) {
+        ArrayList<Task> taskListCopy = new ArrayList<Task>();
+        for (Task task : list) {
+            taskListCopy.add(task);
         }
-    }
-
-    public String returnSortedTasksString() {
-        returnSortedTasks();
+        if(keyword.equals("datetime")) {
+            Collections.sort(taskListCopy, new SortByEarliestDeadline());
+        } else {
+            Collections.sort(taskListCopy, new SortByCompleted());
+        }
         int counter = 1;
         String tempListString = "" + INDENT + " ";
-        for (Task task : sortedList) {
+        for (Task task : taskListCopy) {
             tempListString += counter + ". " + task + '\n' + INDENT + " ";
             counter++;
         }

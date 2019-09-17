@@ -23,9 +23,8 @@ public class Duke {
      * Constructs a Duke object.
      */
     public Duke() {
-        String filePath = "data/duke.txt";
         ui = new Ui(new Scanner(System.in));
-        storage = new Storage(filePath);
+        storage = new Storage();
         isExit = false;
         try {
             tasks = new TaskList(storage.loadData());

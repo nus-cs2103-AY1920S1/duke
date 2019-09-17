@@ -9,7 +9,6 @@ import duke.task.Deadline;
 import duke.task.Todo;
 import duke.parser.Parser;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.File;
 import java.io.IOException;
@@ -21,18 +20,8 @@ import java.util.Scanner;
  * A Storage class loads and writes data into an output file.
  */
 public class Storage {
-    private String dataFilePath;
+    private String dataFilePath = "data/duke.txt";
     private String aliasFilePath = "data/alias.txt";
-
-    /**
-     * Constructs a new Storage object to read and write to a text file stored
-     * on the hard disk.
-     *
-     * @param dataFilePath the file path of the file stored on the hard disk.
-     */
-    public Storage(String dataFilePath) {
-        this.dataFilePath = dataFilePath;
-    }
 
     /**
      * Returns the file path of the file stored on the hard disk.
@@ -54,6 +43,8 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(dataFilePath);
+            file.getParentFile().mkdir();
+            file.createNewFile();
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String[] line = sc.nextLine().split(" \\| ");
@@ -90,7 +81,7 @@ public class Storage {
                 }
             }
             return tasks;
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new DukeException("The file stated in the file path cannot be found.");
         }
     }
@@ -131,6 +122,8 @@ public class Storage {
     public void loadAlias() throws DukeException {
         try {
             File file = new File(aliasFilePath);
+            file.getParentFile().mkdir();
+            file.createNewFile();
             Scanner sc = new Scanner(file);
 
             while(sc.hasNext()) {
@@ -140,7 +133,7 @@ public class Storage {
                 CommandCentre.addAlias(line);
             }
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new DukeException("The file of aliases cannot be found.");
         }
     }

@@ -45,7 +45,12 @@ public class EventCommand extends Command {
         }
     }
 
-
+    /** Makes a date in the format from the user input
+     * @param input
+     * @return a string date that is in the required form
+     * @throws ParseException upon wrong format of date
+     * adopted and edited from weigenie (github username)
+     */
     public String makeDate(String input) throws ParseException {
 
         assert input!= null : "input should be an instance of string";

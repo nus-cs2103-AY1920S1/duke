@@ -1,20 +1,19 @@
-# Project Duke - User Guide
 | By: `Voong Yu Xuan` | 
 
 ---
 
 # Table of Contents 
    1. [Introduction](#Introduction)
-   2. [Features](#features)
+   2. [Features](#Features)
         - [`todo <description>` - Adds a Todo](#todo-description---adds-a-todo)
         - [`event <description> /at <datetime>` - Adds an event](#event-description-at-datetime---adds-an-event)
         - [`deadline <description> /by <datetime>` - Adds a deadline](#deadline-description-by-datetime---adds-a-deadline)
         - [`list` - Displays Task List](#list---displays-tasklist)
-        - [`done <index>` - Sets task in Task List as Done](#done---sets-task-at-index-of-task-list-as-done)
-        - [`delete <index>` - Deletes task from Task List](#delete---deletes-task-at-index-from-task-list)
-        - [`find <text>` - Finds task matching text](#find-text---find tasks matching text)
-        - [`undo` - Undoes task](#undo)
-        - [`bye` - Greets user farewell](#bye)
+        - [`done <index>` - Sets task in Task List as Done](#done---sets-task-in-task-list-as-done)
+        - [`delete <index>` - Deletes task from Task List](#delete---deletes-task-from-task-list)
+        - [`find <text>` - Finds task matching text](#find-text---find-tasks-matching-text)
+        - [`undo` - Undoes task](#undo---undoes-task)
+        - [`bye` - Greets user farewell](#bye---greets-user-farewell)
 
 
 # Introduction
@@ -137,7 +136,7 @@ Now you have 0 tasks in the list.
 
 ---
 
-## `find <text>` - Find all Tasks containing given text
+## `find <text>` - Find tasks matching text
 
 ### Find all Tasks containing given text.
 
@@ -154,7 +153,7 @@ Here are the matching tasks in your list:
 
 ---
 
-## `undo` - Undoes task]
+## `undo` - Undoes task
 ### Undoes last executed task
 
 Example of usage: 

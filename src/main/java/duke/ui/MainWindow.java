@@ -30,7 +30,9 @@ public class MainWindow {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        // TODO: add welcome message
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(SpeechMaker.getWelcomeMessage(), dukeImage)
+        );
     }
 
     /**

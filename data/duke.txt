@@ -1,9 +1,13 @@
 T | 1 | read book
 T | 1 | borrow book
 E | 1 | 1v1 u | 20/12/2019 1700
-D | 1 | return book | 2/12/2019 1800
-T | 0 | ur mum
-T | 0 | ur mum
-T | 0 | ur mum
 D | 0 | ur mum | 23/01/2019 1700
-E | 0 | POPO IS HERE HANDS UP | 17/07/2020 1800
+T | 0 | ur mum
+T | 0 | ur mum
+T | 0 | test
+T | 0 | test
+T | 0 | test test
+T | 0 | test test
+T | 0 | test test
+T | 0 | ur mum :D
+T | 0 | test

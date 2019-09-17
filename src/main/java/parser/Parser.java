@@ -16,27 +16,27 @@ public class Parser {
 
     /**
      * Interprets the user's input and returns the respective command.
-     * @param command user's input string
+     * @param input user's input string
      * @return command according to user's input
      * @throws InvalidDescriptionException empty description of task
      * @throws InvalidCommandException unknown command
      */
-    public static Command parse(String command) throws DukeException {
-        String[] splitString = command.split(" ");
+    public static Command parse(String input) throws DukeException {
+        String[] splitString = input.split(" ");
         String commandType = splitString[0];
-        if (command.equals("list")) {
+        if (input.equals("list")) {
             return new ListCommand();
-        } else if (splitString[0].equals("done")) {
+        } else if (commandType.equals("done")) {
             int taskIndex = Integer.valueOf(splitString[1]) - 1;
             return new DoneCommand(taskIndex);
-        } else if (command.equals("bye")) {
+        } else if (input.equals("bye")) {
             return new ByeCommand();
         } else if (commandType.equals("todo")) {
-            return new AddCommand(stringToTodo(command));
+            return new AddCommand(stringToTodo(input));
         } else if (commandType.equals("deadline")) {
-            return new AddCommand(stringToDeadLine(command));
+            return new AddCommand(stringToDeadLine(input));
         } else if (commandType.equals("event")) {
-            return new AddCommand(stringToEvent(command));
+            return new AddCommand(stringToEvent(input));
         } else if (commandType.equals("delete")) {
             int taskIndex = Integer.valueOf(splitString[1]) - 1;
             return new DeleteCommand(taskIndex);
@@ -46,6 +46,8 @@ public class Parser {
                 builder.append(splitString[i] + " ");
             }
             return new FindCommand(builder.toString().trim());
+        } else if (commandType.equals("edit")) {
+            return stringToEditCmd(input);
         } else {
             throw new InvalidCommandException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -93,6 +95,19 @@ public class Parser {
         } catch (DateTimeParseException e) {
             throw new DukeException("Please enter a valid date in the format DD/MM/YYYY HHmm");
         }
+    }
+
+    private static EditCommand stringToEditCmd(String input) throws DukeException {
+        String[] splitString = input.split(" ");
+        if (splitString.length < 3) {
+            throw new InvalidDescriptionException("\u2639 OOPS!!! The description of a task cannot be empty.");
+        }
+        StringBuilder descriptionBuilder = new StringBuilder();
+        for (int i = 2; i < splitString.length; i++) {
+            descriptionBuilder.append(splitString[i] + " ");
+        }
+        int taskIndex = Integer.valueOf(splitString[1]) - 1;
+        return new EditCommand(taskIndex, descriptionBuilder.toString().trim());
     }
 }
 

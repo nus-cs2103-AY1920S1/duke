@@ -1,6 +1,7 @@
 package tasks;
 
 import exceptions.DukeException;
+import exceptions.InvalidDescriptionException;
 import exceptions.TaskNotFoundException;
 
 import java.util.ArrayList;
@@ -79,5 +80,16 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    /**
+     * Edits the description of the indicated task.
+     */
+    public void editTaskDescription(int taskIndex, String newDescription) throws InvalidDescriptionException {
+        if (newDescription.isEmpty()) {
+            throw new InvalidDescriptionException("Updated description cannot be empty! :)");
+        } else {
+            tasks.get(taskIndex).setDescription(newDescription);
+        }
     }
 }

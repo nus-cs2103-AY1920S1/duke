@@ -2,10 +2,7 @@ import commands.Command;
 import exceptions.DukeException;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -36,14 +33,14 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         initializeElements();
         setAttributes(primaryStage);
         setActions();
-
+        showWelcomeMessage();
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) { // Supposed to be Exceptions.DukeException
+        } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -123,7 +120,6 @@ public class Duke extends Application {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 
@@ -143,12 +139,16 @@ public class Duke extends Application {
         userInput.clear();
     }
 
+    private void showWelcomeMessage() {
+        //Message shifts to the right for some reason HEADACHE
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("test", dukeIv));
+    }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String fullCommand) {
-//        ui.showWelcome();
         boolean isExit = false;
         try {
             Command c = Parser.parse(fullCommand);

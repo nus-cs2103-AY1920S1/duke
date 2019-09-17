@@ -5,7 +5,7 @@ import tasks.Task;
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String LOGO = " ____        _        \n"
+    private static final String LOGO = "____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -17,7 +17,7 @@ public class Ui {
     /**
      * Prints the welcome message.
      */
-    public String showWelcome() {
+    public static String showWelcomeMessage() {
         return WELCOME_MESSAGE;
     }
 
@@ -106,6 +106,11 @@ public class Ui {
      * Prints an error message if there is a loading error.
      */
     public void showLoadingError() {
+    }
+
+    public String showEditMessage(int taskIndex, String newDescription) {
+        taskIndex = taskIndex + 1;
+        return "Task: " + taskIndex + " has been updated to " + newDescription;
     }
 
     /**

@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -25,7 +24,7 @@ public class Parser {
         if (!availableCommands.contains(command.split(" ")[0])) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         } else if (command.equals("bye")) {
-            return ui.exit();
+            System.exit(0);
         } else if (command.equals("list")) {
             return ui.printList(taskList);
         } else if (command.startsWith("done")) {
@@ -54,5 +53,6 @@ public class Parser {
             storage.saveTask();
             return stringBuilder;
         }
+        return null;
     }
 }

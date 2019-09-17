@@ -25,12 +25,15 @@ This feature will list all tasks currently in the list.
 This feature will find the indicated keyword in the list.
 
 ### Sort
-List will be sorted in this order Todo > Deadline > Event
+List will be sorted in this order Todo > Deadline > Event.
+
+### Bye
+Closes the program.
 
 ## Usage
 
 ### `todo/deadline/event`
-Adds task into the list
+Adds task into the list.
 
 Examples of usage:
 
@@ -52,7 +55,7 @@ Expected outcome:
 ---
 
 ### `done`
-Marks the task as done
+Marks the task as done.
 
 Examples of usage:
 
@@ -100,5 +103,18 @@ Examples of usage:
 Expected outcome:
 
 `All tasks that are found in list will be listed out, with all of the information provided`
+
+---
+
+### `bye`
+Exits the program
+
+Examples of usage:
+
+`bye`
+
+Expected outcome:
+
+`The program will be exited.`
 
 ---

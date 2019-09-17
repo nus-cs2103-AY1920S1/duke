@@ -39,6 +39,9 @@ public class Duke {
     /**
      * If run GUI, change Ui to output GUI responses.
      */
+    //@@author {halfwhole}-reused
+    //{Referenced solution to get GUI showing response}
+    //{Thank you halfwhole}
     public void convertToGUIUi(VBox dialogContainer) {
         ui = new GUIUi(dialogContainer);
         ui.showGreetings();

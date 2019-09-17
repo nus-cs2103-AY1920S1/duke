@@ -13,14 +13,28 @@ public class Duke {
     private Scanner scan;
     private Ui ui;
 
-    public Duke(String filePath) throws IOException, ParseException {
+    /**
+     * Creates a Duke object.
+     * Initialise the storage, task list and ui objects.
+     *
+     * @param filePath the local path to the storage file
+     * @throws IOException filePath is inaccessible or cannot be found
+     */
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         savedFile = new Saved(filePath);
 
         tasks = new TaskList(savedFile.loadData());
     }
 
-    public void run() throws IOException, ParseException {
+    /**
+     * Obtains user input from command line, parses it and executes the commands.
+     * Shows errors to the user in case of invalid input.
+     * Saves updated tasks back into the local file
+     *
+     * @throws IOException filePath is inaccessible or cannot be found
+     */
+    public void run() throws IOException {
         String input;
         Command cmd;
 
@@ -43,7 +57,13 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
+    /**
+     * Required main method.
+     *
+     * @param args command line arguments
+     * @throws IOException local file is inaccessible or cannot be found
+     */
+    public static void main(String[] args) throws IOException {
         new Duke("src/main/java/data.txt").run();
     }
 

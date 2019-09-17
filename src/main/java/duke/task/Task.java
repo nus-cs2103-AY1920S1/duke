@@ -3,25 +3,36 @@ package duke.task;
 import java.text.ParseException;
 
 public class Task {
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
     protected String type;
-    protected String deadline;
     protected String event;
 
+    /**
+     * Creates a task object.
+     * Called by task, deadline and event.
+     *
+     * @param description description of task
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
+    /**
+     * Returns status of task.
+     *
+     * @return tick or X symbols to represent whether task is done.
+     */
+    private String getStatusIcon() {
+        return isDone ? "✓" : "✗";
     }
 
-    public String getType() {
-        return "error";
-    }
-
+    /**
+     * Returns description of task.
+     *
+     * @return description of task
+     */
     public String getDesc() {
         return this.description;
     }
@@ -34,26 +45,25 @@ public class Task {
         return "";
     }
 
+    /**
+     * Returns whether task is done in the form of a string.
+     *
+     * @return status of task
+     */
     public String getDone() {
         return this.isDone ? "1" : "0";
     }
 
-    /* mutators */
-
     public void setAsDone() {
-        this.isDone = true;
     }
 
-    public void addType(String type) {
-        this.type = type;
-    }
-
+    /**
+     * Represents the task in a format suitable for the user to read.
+     *
+     * @return string representation of task
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
-    }
-
-    public String toFile() throws ParseException {
-        return "";
     }
 }

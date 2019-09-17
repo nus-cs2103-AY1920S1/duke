@@ -21,6 +21,12 @@ public class Saved {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the tasks stored in local file and returns them as a list of tasks.
+     *
+     * @return list of tasks stored in the text document
+     * @throws FileNotFoundException local file cannot be found
+     */
     ArrayList<Task> loadData() throws FileNotFoundException {
         File file = new File(filePath);
         Scanner scan = new Scanner(file);
@@ -54,6 +60,12 @@ public class Saved {
         return list;
     }
 
+    /**
+     * Saves updated list of tasks into local file.
+     *
+     * @param list list of tasks
+     * @throws IOException local file cannot be found or inaccessible.
+     */
     public void saveToFile(ArrayList<Task> list) throws IOException {
         FileWriter newFile = new FileWriter(this.filePath);
         String listToFile = "";

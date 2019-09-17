@@ -21,6 +21,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Parser {
+
+    /**
+     * Interprets user's input and returns the respective command.
+     * @param input user's input
+     * @return command according to interpretation of user's input
+     * @throws ArrayIndexOutOfBoundsException empty description of task or unknown command
+     */
     public static Command parse(String input) throws DukeException {
         assert input != null;
 

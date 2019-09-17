@@ -13,6 +13,12 @@ public class Deadline extends Task {
     protected String by;
     private Date date;
 
+    /**
+     * Creates a task with a deadline.
+     *
+     * @param description description of the task
+     * @param by the deadline of the task
+     */
     public Deadline(String description, String by) throws DateTimeException {
         super(description);
         this.by = by;
@@ -21,17 +27,32 @@ public class Deadline extends Task {
         this.deadline = new SimpleDateFormat("dd/MM/yyyy HHmm");
     }
 
-    @Override
+    /**
+     * Returns deadline as the task type.
+     *
+     * @return type of task
+     */
     public String getType() {
         return this.type;
     }
 
+    /**
+     * Returns deadline of the task.
+     *
+     * @return deadline of task
+     */
     @Override
     public String getBy() {
         return this.by;
     }
 
-    public String convertEventTime() throws ParseException, DateTimeException {
+    /**
+     * Converts the deadline from SimpleDateFormat to String.
+     *
+     * @return deadline of task in the form of a string
+     * @throws DateTimeException deadline is in the wrong format
+     */
+    public String convertEventTime() throws DateTimeException {
 
         try {
             date = deadline.parse(this.by);
@@ -42,12 +63,13 @@ public class Deadline extends Task {
         return "";
     }
 
+    /**
+     * Represents the task in a format suitable for the user to read.
+     *
+     * @return string representation of task
+     */
     @Override
     public String toString() {
-        try {
-            return "[D]" + super.toString() + " (by: " + convertEventTime() + ")";
-        } catch (ParseException exception) {
-            return "Error";
-        }
+        return "[D]" + super.toString() + " (by: " + convertEventTime() + ")";
     }
 }

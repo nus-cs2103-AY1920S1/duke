@@ -5,6 +5,8 @@ import com.exceptions.DukeException;
 import com.tasks.Task;
 import com.util.Storage;
 import com.util.StaticStrings;
+import com.util.ui.*;
+import gui.GUIUi;
 import com.util.stats.DukeStatistics;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
-    public void execute(TaskList taskList, Storage storage) {
+    public void execute(TaskList taskList, Storage storage, Ui ui) {
         // No tasks to search through
         if (taskList.getNumTasks() == 0) {
             ui.showMessage(StaticStrings.NO_TASKS);

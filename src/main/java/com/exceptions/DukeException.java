@@ -1,16 +1,15 @@
 package com.exceptions;
 
-import com.util.Ui;
+import com.util.ui.*;
+import gui.GUIUi;
 
 public class DukeException extends Exception {
 
     private String message;
-    private Ui ui;
 
     public DukeException(String message) {
         super(message);
-        ui = new Ui();
-        this.message = ui.indentMessage(message);
+        this.message = message;
     }
 
     public String getMessage() {

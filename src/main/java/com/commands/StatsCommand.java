@@ -3,6 +3,8 @@ package com.commands;
 import com.TaskList;
 import com.util.StaticStrings;
 import com.util.Storage;
+import com.util.ui.*;
+import gui.GUIUi;
 import com.util.stats.DukeStatistics;
 
 public class StatsCommand extends Command {
@@ -13,11 +15,11 @@ public class StatsCommand extends Command {
         dukeStats = new DukeStatistics();
     }
 
-    public void execute(TaskList taskList, Storage storage) {
-        execute();
+    public void execute(TaskList taskList, Storage storage, Ui ui) {
+        execute(ui);
     }
 
-    private void execute() {
+    private void execute(Ui ui) {
         ui.showMessage(StaticStrings.STATS_NUM_DONE + dukeStats.getNumTasksDone(),
                 StaticStrings.STATS_LIST_DONE,
                     dukeStats.getListTasksDone().toString(),

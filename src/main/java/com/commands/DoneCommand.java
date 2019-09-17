@@ -7,6 +7,8 @@ import com.util.StaticStrings;
 
 import com.exceptions.DukeException;
 import com.exceptions.command.*;
+import com.util.ui.*;
+import gui.GUIUi;
 import com.util.stats.DukeStatistics;
 
 public class DoneCommand extends Command {
@@ -23,7 +25,7 @@ public class DoneCommand extends Command {
      * @param storage
      * @throws DukeException
      */
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Storage storage, Ui ui) throws DukeException {
         // Checks if index of task to mark done is within range
         int numTasks = taskList.getNumTasks();
         if (numTasks == 0) {

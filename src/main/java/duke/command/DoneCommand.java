@@ -25,11 +25,5 @@ public class DoneCommand extends Command {
         return toPrint;
     }
 
-    /**
-     * Returns true or false regarding whether this method will end the while loop in the duke method run()
-     * @return false or true
-     */
-    public boolean isExit() {
-        return false;
-    }
+
 }

@@ -23,12 +23,4 @@ public class ListCommand extends Command {
         return toPrint;
     }
 
-    /**
-     * Returns true or false regarding whether this method will end the while loop in the duke method run()
-     * @return false or true
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

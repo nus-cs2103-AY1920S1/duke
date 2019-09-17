@@ -39,11 +39,6 @@ public class FindCommand extends Command {
         return printArrayList();
     }
 
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
     public String printArrayList() {
         String toPrint = "";
         for (int i = 0; i < toPrintArrayList.size(); i++) {

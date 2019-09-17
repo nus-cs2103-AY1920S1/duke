@@ -17,6 +17,7 @@ public class Parser {
      * @throws DukeException if the user's input is not recognised
      */
     public static Command parse(String command) throws DukeException {
+        assert command!=null : "command should be valid input string";
             switch (command) {
             case ("list"):
                 return new ListCommand();

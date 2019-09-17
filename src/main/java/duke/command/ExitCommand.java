@@ -18,12 +18,4 @@ public class ExitCommand extends Command {
         return "Bye. Hope to see you again soon!";
     }
 
-    /**
-     * Returns true or false regarding whether this method will end the while loop in the duke method run()
-     * @return false or true
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }

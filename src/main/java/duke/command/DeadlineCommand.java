@@ -46,15 +46,11 @@ public class DeadlineCommand extends Command {
         }
     }
 
-    /**
-     * Returns true or false regarding whether this method will end the while loop in the duke method run()
-     * @return false or true
-     */
-    public boolean isExit() {
-        return false;
-    }
 
     public String makeDate(String input) throws ParseException {
+
+        assert input!= null : "input should be an instance of string";
+
         String ordinalIndicator;
         Date date = DATE_FORMAT.parse(input);
         String day = new SimpleDateFormat("dd").format(date);
@@ -76,6 +72,10 @@ public class DeadlineCommand extends Command {
         }
 
         String outputDate = int_day + ordinalIndicator + " of " + month + " " + year + ", " + time;
+
+        assert outputDate!= null : "outputDate should not be null";
+
         return outputDate;
     }
+
 }

@@ -51,10 +51,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
+        assert img!=null : "Image should be valid";
+        assert text!=null : "Text shouldn't be empty";
         return new DialogBox(text, img);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
+        assert img!=null : "Image should be valid";
+        assert text!=null : "Text shouldn't be empty";
         var db = new DialogBox(text, img);
         db.flip();
         return db;

@@ -145,7 +145,13 @@ public class Duke extends Application {
 
         // Initial opening introduction and prompt for user input
         System.out.println(ui.openingStatement());
-
+        try {
+            Command c = Parser.parse("remind");
+            System.out.println(c.execute(tasks, ui, storage));
+        }
+        catch (DukeException err) {
+            System.out.println("No reminders.");
+        }
         while (!isExit) {
             try {
                 String input = ui.readCommand();

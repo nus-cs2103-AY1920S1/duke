@@ -1,12 +1,13 @@
 package parser;
 
-import commands.Command;
 import commands.AddCommand;
+import commands.Command;
 import commands.DeleteCommand;
 import commands.DoneCommand;
 import commands.ExitCommand;
 import commands.FindCommand;
 import commands.ListCommand;
+import commands.RemindCommand;
 import exception.DukeException;
 import ui.Ui;
 
@@ -41,6 +42,9 @@ public class Parser {
             String keyword = parser.parseDescription("find", input);
             return new FindCommand(keyword);
 
+
+        case "remind":
+            return new RemindCommand();
         case "todo":
         case "deadline":
         case "event":

@@ -1,91 +1,123 @@
 # User Guide
 ## Features
-## TaskList
-You may add or remove tasks into Duke.
+Welcome to Hi!Bro's User Guide. You are able to add tasks and check them though this useful tool.
 
-## Deadlines
-You may set deadlines to tasks.
+### storage feature
+1. Hi!bro can read all tasks from `data/tasks.txt`.
+2. save new tasks to the same location
+
+### Manage feature
+1. add different types of task
+2. delete a task
+3. mark a task as done
+4. list all the tasks in the taskList
+
+### Search feature
+you can More flexibility in searching for tasks which are matched to the keyword.
 
 ## Usage
-## list
-Lists out all the tasks currently in Duke.
+### Adding different types of tasks
+#### `todo [taskName]` - Add a new todo task
+Adds a new todo task.
 
-Example of usage:
+**Example of usage:**
+
+`todo task 1`
+
+A new task called as `[taskName]`is created.
+
+**Expected outcome:**
+```
+Got it. I've added this task:
+  [T][✘] task 1
+Now you have 1 tasks in the list.
+```
+
+#### `deadline [taskName] /by [dd/mm/yyyy HHmm]` - Add a deadline task
+Adds a new deadline task.
+
+**Example of usage:**
+
+`deadline task 2 /by 01/01/2009 0900`
+
+**Expected outcome:**
+```
+Got it. I've added this task:
+  [T][✘] task 2 (by: Jan 01, 2009 0900)
+Now you have 2 tasks in the list.
+```
+
+A new task called `taskName` is created and it has a due date by `date`.
+
+#### `event [taskName] /at [dd/mm/yyyy HHmm]` - Add a deadline task
+Adds a new event task.
+
+**Example of usage:**
+
+`event task 3 /at 02/02/2009 0900`
+
+**Expected outcome:**
+```
+Got it. I've added this task:
+  [T][✘] task 3 (at: Feb 02, 2009 0900)
+Now you have 3 tasks in the list.
+```
+A new task called `taskName` is created and it is set at `date`.
+
+### checking and updating taskList
+
+#### `done [taskNum]` - Mark a task as done
+Marks a task as done.
+
+**Example of usage:**
+
+`done 2`
+
+**Expected outcome:**
+```
+Nice! I've marked this task as done:
+  [T][✓] task 2 (by: Jan 01, 2009 0900)
+```
+
+#### `find [keyword]` - Find a task
+
+find items even if the keyword matches the item only partially.
+
+**Example of usage:**
+
+`find as`
+
+**Expected outcome:**
+```
+Here are the matching tasks in your list:
+1. [T][✘] task 1
+2. [T][✓] task 2 (by: Jan 01, 2009 0900)
+3. [T][✘] task 3 (at: Feb 02, 2009 0900)
+```
+the list of tasks contain the keyword.
+
+#### `list` - List all tasks 
+
+Lists all tasks in `data/tasks.txt`.
+
+**Example of usage:**
 
 `list`
 
-Expected outcome:
+**Expected outcome:**
 ```
-1. [T][✓] buy bread
-2. [E][✓] project meeting (at:02/12/2019 1800)
-3. [D][✓] return book (by: 05/12/2019 1300)
+Here are the tasks in your list:
+1. [T][✘] task 1
+2. [T][✓] task 2 (by: Jan 01, 2009 0900)
+3. [T][✘] task 3 (at: Feb 02, 2009 0900)
 ```
+all the tasks in this location.
 
-### `todo <taskname>`
 
-Adds a todo task in Duke.
 
-Example of usage: 
+### `delete [taskNum]`
 
-`todo buy bread`
-
-Expected outcome:
-
-```
-Got it. I've added this task:
-[T]✘ buy bread
-```
-
-### `event <taskname> /at dd/mm/yyyy HHmm`
-
-Adds an event task in Duke.
-
-Example of usage: 
-
-`event project meeting /at 02/12/2019 1800`
-
-Expected outcome:
-
-```
-Got it. I've added this task:
-[E]✘ project meeting (at:02/12/2019 1800)
-Now you have 1 tasks in the list.
-```
-
-### `deadline <taskname> /at dd/mm/yyyy HHmm`
-
-Adds a deadline task in Duke.
-
-Example of usage: 
-
-`deadline return book /at 05/12/2019 1300`
-
-Expected outcome:
-
-```
-Got it. I've added this task:
-[D]✘ return book (at:05/12/2019 1300)
-Now you have 1 tasks in the list.
-```
-
-### `done <index>`
-
-Marks a task as done in Duke.
-
-Example of usage: 
-
-`done 1`
-
-Expected outcome:
-
-```
-Nice! I've marked this task as done:
-[E]✓ project meeting (at:02/12/2019 1800)
-```
-
-### `delete <index>`
-
-Deletes a task in Duke.
+Deletes a task in taskList.
 
 Example of usage: 
 
@@ -95,62 +127,17 @@ Expected outcome:
 
 ```
 Noted. I've removed this task:
-[E]✓ project meeting (at:02/12/2019 1800)
-Now you have 1 tasks in the list.
+ [T][✘] task 1
+Now you have 2 tasks in the list.
 ```
+#### `bye` - Quit the program
 
-### `done <index>`
+Quits the program.
 
-Marks a task as done in Duke.
-
-Example of usage: 
-
-`done 1`
-
-Expected outcome:
-
-```
-Nice! I've marked this task as done:
-[E]✓ project meeting (at:02/12/2019 1800)
-```
-
-### `find <keyword>`
-
-Finds all tasks with the keyword in Duke.
-
-Example of usage: 
-
-`find book`
-
-Expected outcome:
-
-```
-Here are the matching tasks in your list:
-[T]✓ buy book
-[T]✓ read book
-```
-
-### `bye`
-
-Exits Duke.
-
-Example of usage: 
+**Example of usage:**
 
 `bye`
 
-Expected outcome:
+**Expected outcome:**
 
-Program closes.
-
-### `help`
-
-Expected outcome:
-
-todo <taskname> : Adds a todo task to the tasklist
-event <taskname> /by <location> : Adds an event task to the task list
-deadline <taskname> /at dd/mm/yyyy HHmm : Adds a deadline task to the task list
-list : Displays the task list
-done <index> : Marks a task at <index> as done
-delete <index> : Deletes a task at <index>
-find <keyword> : Displays all tasks with <keyword>
-bye : Exits the program
+The program closes.

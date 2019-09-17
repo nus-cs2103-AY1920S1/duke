@@ -36,7 +36,15 @@ public class UpdateCommand extends Command {
                 if (num > tasks.getSize()) {
                     throw new DukeException("☹ OOPS!!! Please input a valid number.");
                 } else {
-                    tasks.getTask(num - 1).markAsDone();
+                    Task task = tasks.getTask(num - 1);
+                    task.markAsDone();
+                    ui.setResponse("    ____________________________________________________________\n"
+                            +
+                            "     Nice! I've marked this task as done:\n"
+                            +
+                            "     " + task + "\n"
+                            +
+                            "    ____________________________________________________________\n");
                     storage.save(tasks);
                 }
             break;

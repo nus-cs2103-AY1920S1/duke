@@ -67,6 +67,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Exits the application after 3 seconds.
+     */
     private void exit() {
         Timer timer = new Timer();
         TimerTask exitTask = new TimerTask() {

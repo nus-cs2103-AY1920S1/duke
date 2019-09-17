@@ -1,16 +1,23 @@
 # Duke - User Guide :grinning:
 ![DukeLogo](/resources/images/theDuke.png)  
 
-Table of Contents :
-[Introduction](## - Introduction)  
-[Features](## - Features)  
-[Commands](## - Commands)  
-[Command Summary](## - command-summary)
+Table of Contents :  
+- [1. Introduction](#1-introduction)  
+- [2. Features](#2-features)  
+- [3. Commands](#3-commands)  
+    - [3.1 Adding a task](#1-adding-a-task)  
+    - [3.2 Listing all tasks](#2-listing-all-tasks-list)
+    - [3.3 Marking a task as done](#3-marking-a-task-as-done--done-)
+    - [3.4 Deleting a task](#4-deleting-a-task--delete)
+    - [3.5 Filtering tasks using a keyword](#5-filtering-tasks-using-keyword-find)
+    - [3.6 Prioritising a task](#6-prioritizing-a-task---1-2-3)
+    - [3.7 Exiting the program](#7-exiting-the-program---bye)
+- [4. Command Summary](#4-command-summary)
 
-## Introduction
+## 1. Introduction
    Duke is an application for users to manage their tasks in life. It uses simple commands and
    is optimized for users who **prefer to use desktop app to manage tasks**. 
-## Features 
+## 2. Features 
    To utilise the features, users simple type in appropriate commands and Duke will carry out.
    The features are as listed below:
    * Feature 1  
@@ -39,10 +46,10 @@ Table of Contents :
       if they have many tasks in the list.
     
 
-## Commands
-   The commands are as listed below : 
+## 3. Commands
+The commands are as listed below : 
 
-### 1. Adding a task : `add`
+### 3.1 Adding a task : `add`
 This command allows you to add any of the 3 types of tasks to 
 list. The full command differs for all 3 types.
 
@@ -74,7 +81,7 @@ list. The full command differs for all 3 types.
      [E][-] presentation (at: 10aug)
     Now you have 3 tasks in the list.
     ```
-### 2. Listing all tasks: `list` 
+### 3.2. Listing all tasks: `list` 
 This command prints out the list of tasks and their 
 corresponding details in the list. 
 

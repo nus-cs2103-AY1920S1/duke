@@ -67,8 +67,12 @@ public class TaskList implements Serializable {
      * @param index index of task to be returned.
      * @return task at the given index.
      */
-    public Task getTask(int index) {
-        return this.tasks.get(index);
+    public Task getTask(int index) throws DukeException{
+        try {
+            return this.tasks.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! Please input a valid number.");
+        }
     }
 
 }

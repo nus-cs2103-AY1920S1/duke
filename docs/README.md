@@ -207,8 +207,8 @@ Finds a task with given keywords.
 
 ```
 Here are the matching tasks in your list:
-1.[T][ ] prepare materials
-2.[T][ ] prepare content
+1. [T][ ] prepare materials
+2. [T][ ] prepare content
 ```
 
 Assuming the list has 3 tasks (`draw props`, `prepare materials`, `prepare content`), the tasks containing the word `pre` is returned.

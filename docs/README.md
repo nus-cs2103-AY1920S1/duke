@@ -163,3 +163,31 @@ Exits the program.
 Syntax:
 
 `bye`: Upon entering "bye", the program will exit.
+
+## 4 Storing of Task List and Archive
+
+Duke saves your task list to an external folder called data. The folder structure should look 
+something like this:
+
+```
+Parent Folder
+│   v0.2.jar
+│
+└─── data
+│     │   tasks.txt
+│     │   archive.txt
+```
+
+If there is no existing `data` folder within the parent folder, Duke will create the `data` 
+folder, along with the files `tasks.txt` and `archive.txt`. If the folder and files already 
+exist or have previously been created, Duke will load the saved task list from `tasks.txt` 
+upon launch of the application. Any additional archived tasks will be appended to the existing 
+`archive.txt` file.
+
+Note regarding `tasks.txt`: 
+It is important that the user does not modify the `tasks.txt` file externally as doing so 
+may corrupt the existing task list. Any intended modifications can be done within the Duke 
+application using the set of supported commands.
+
+Note regarding `archive.txt`:
+The user is free to modify the existing archive file.

@@ -103,7 +103,7 @@ public class Parser {
         for (Task t : list.taskList) {
             writeDataToFile = writeDataToFile + t.toString() + "\n";
         }
-        storage.writeFile(writeDataToFile,storage.filePath);
+        storage.writeFile(writeDataToFile);
         return output;
     }
 }

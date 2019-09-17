@@ -30,11 +30,11 @@ public class Duke {
      * Creates a duke object which stores data in the specified path .
      *
      */
-    public Duke() throws FileNotFoundException, ParseException {
+    public Duke() throws IOException, ParseException {
         list = new TaskList();
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage("data/Duke.txt");
+        storage = new Storage();
         // file contains user data
         File file = new File("data/Duke.txt");
         //read and load the existing data into the task list.

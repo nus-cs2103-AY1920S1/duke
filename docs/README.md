@@ -191,6 +191,9 @@ To execute the same command to multiple tasks at once, add `, ` between the inde
 
 :exclamation: This only applies to `done`, `delete`, `find` commands.
 
+
+<br>
+
 ### **Exiting of Program** <a name="exit"></a>
 
 To exit the program: `bye`

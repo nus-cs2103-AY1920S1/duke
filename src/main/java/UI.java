@@ -23,7 +23,7 @@ public class UI {
                 " `-'     `-'  `-'     `-'  `-'     `-'   `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-' ";
 
         String greet = line +
-                "     Hello! I'm Tai Ping\n" +
+                "     Hello! I'm Tai Ping, your tasks manager!\n" +
                 "     What can I do for you?\n" +
                 lineOnly;
         return "Hello from\n" + logo + greet;
@@ -31,14 +31,14 @@ public class UI {
 
     public String printBye() {
         String bye = line +
-                "     Bye. Hope to see you again soon!\n" +
+                "Bye. Hope to see you again soon! (ᵔᴥᵔ) \n" +
                 line;
         return bye;
     }
 
     public String printIDK() {
         return line +
-                "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+                "OOPS!!! I'm sorry, but I don't know what that means (ᵔᴥᵔ) \n" +
                 lineOnly;
     }
 
@@ -51,7 +51,7 @@ public class UI {
             count++;
         }
         return (line +
-                "Here are the tasks in your list:\n" +
+                "Here are the task(s) in your list:\n" +
                 tasks +
                 line);
     }
@@ -98,31 +98,31 @@ public class UI {
         switch (taskType) {
         case "todo" :
             return (line +
-                    "     Hey! Description of a todo cannot be empty :(\n" +
+                    "Hey! Description of a todo cannot be empty (ᵔᴥᵔ) \n" +
                     lineOnly);
         case "event" :
             return (line +
-                    "     Hey! Description of a event cannot be empty :(\n" +
+                    "Hey! Description of a event cannot be empty (ᵔᴥᵔ) \n" +
                     lineOnly);
         case "deadline" :
             return (line +
-                    "     Hey! Description of a deadline cannot be empty :(\n" +
+                    "Hey! Description of a deadline cannot be empty (ᵔᴥᵔ) \n" +
                     lineOnly);
         case "done" :
             return (line +
-                    "     Hey! Description of a done cannot be empty :(\n" +
+                    "Hey! Description of a done cannot be empty (ᵔᴥᵔ)\n" +
                     lineOnly);
         case "delete" :
             return (line +
-                    "     Hey! Description of a delete cannot be empty :(\n" +
+                    "Hey! Description of a delete cannot be empty (ᵔᴥᵔ) \n" +
                     lineOnly);
         case "duplicate" :
             return (line +
-                    "     Hey! You are repeating your tasks :(\n" +
+                    "Hey! You are repeating your tasks (ᵔᴥᵔ) \n" +
                     lineOnly);
         default :
             return (line +
-                    "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+                    "OOPS!!! I'm sorry, but I don't know what that means (ᵔᴥᵔ) \n" +
                     lineOnly);
         }
     }

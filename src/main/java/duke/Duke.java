@@ -145,19 +145,19 @@ public class Duke extends Application {
     private void applyWindowStyling() {
         this.stage.setTitle("Duke");
         this.stage.setResizable(false);
-        this.stage.setWidth(500.0);
-        this.stage.setHeight(600.0);
-        this.mainLayout.setPrefSize(500.0, 600.0);
+        this.stage.setWidth(600.0);
+        this.stage.setHeight(700.0);
+        this.mainLayout.setPrefSize(600.0, 700.0);
         
-        scrollPane.setPrefSize(485, 535);
+        scrollPane.setPrefSize(585, 635);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setVvalue(0.5);
         scrollPane.setFitToWidth(true);
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         
-        userInput.setPrefWidth(405.0);
-        sendButton.setPrefWidth(75.0);
+        userInput.setPrefWidth(480.0);
+        sendButton.setPrefWidth(100.0);
         
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);

@@ -30,8 +30,8 @@ Queen_BB can store 3 types of tasks namely `todo`, `deadline`, `event`. The foll
 Queen_BB allows you to create a new task by simply using the `todo`, `deadline` or `event` commands. Every new task
  is marked as not done by default.
  
- It will confirm the creation of a new task. If a task already exists, then a
-  message regarding the same will be displayed.
+It will confirm the creation of a new task. If a task already exists, then a message regarding the same will be
+ displayed.
  
 
 ### Task Completion
@@ -56,94 +56,94 @@ All the tasks saved in the local .txt file will be loaded on launch.
 Queen_BB bids farewell.
 
 ## 4. Usage
- ### Create Todo 
- Create a new todo by typing `todo <Task to be added>`.
+### Create Todo 
+Create a new todo by typing `todo <Task to be added>`.
  
- Eg: `todo read harry potter`
+Eg: `todo read harry potter`
  
- Expected output: 
+Expected output: 
  ```
 Got it. I've added this task:
 [T][X] read harry potter
 Now you have 1 item in the list.
 ```
  
- ### Create Deadline
- Create a new deadline by typing `deadline <Task to be added> /by <DD/MM/YYYY HHMM>`.
+### Create Deadline
+Create a new deadline by typing `deadline <Task to be added> /by <DD/MM/YYYY HHMM>`.
  
- Eg: `deadline finish CS2103T homework /by 12/12/2019 2359`
+Eg: `deadline finish CS2103T homework /by 12/12/2019 2359`
  
- Expected output: 
+Expected output: 
   ```
- Got it. I've added this task:
- [D][X] finish CS2103T homework (by: Thu Dec 12 23:59:00 SGT 2019)
- Now you have 2 item in the list.
+Got it. I've added this task:
+[D][X] finish CS2103T homework (by: Thu Dec 12 23:59:00 SGT 2019)
+Now you have 2 item in the list.
  ```
  
- ### Create Event
- Create a new event by typing `event <Task to be added> /at <DD/MM/YYYY HHMM>`.
+### Create Event
+Create a new event by typing `event <Task to be added> /at <DD/MM/YYYY HHMM>`.
  
- Eg: `event Orbital Splashdown /at 12/12/2019 1800`
+Eg: `event Orbital Splashdown /at 12/12/2019 1800`
  
- Expected output: 
+Expected output: 
  ```
-  Got it. I've added this task:
-  [E][X] Orbital Splashdown (by: Thu Dec 12 23:59:00 SGT 2019)
-  Now you have 3 item in the list.
+Got it. I've added this task:
+[E][X] Orbital Splashdown (by: Thu Dec 12 23:59:00 SGT 2019)
+Now you have 3 item in the list.
   ```
  
- ### Mark Task as Done
- Mark a task as done by typing `done <Task Number as per the list>`.
+### Mark Task as Done
+Mark a task as done by typing `done <Task Number as per the list>`.
  
- Eg: `done 2` will mark task number 2 in the list of tasks as done
+Eg: `done 2` will mark task number 2 in the list of tasks as done
  
- Expected output: 
+Expected output: 
  ```
- Nice! I've marked this task as done:
- [D][✓] finish CS2103T homework (by: Thu Dec 12 23:59:00 SGT 2019)
+Nice! I've marked this task as done:
+[D][✓] finish CS2103T homework (by: Thu Dec 12 23:59:00 SGT 2019)
  ```
  
- ### Delete a Task
- Delete a task by typing `delete <Task Number as per the list>`.
+### Delete a Task
+Delete a task by typing `delete <Task Number as per the list>`.
  
- Eg: `delete 2` will delete task number 2 from the list
+Eg: `delete 2` will delete task number 2 from the list
  
- Expected output: 
+Expected output: 
   ```
-  Noted. I've removed this task:
-  [D][✓] finish CS2103T homework (by: Thu Dec 12 23:59:00 SGT 2019)
-  Now you have 2 tasks in the list
-  ```
-
- ### Display List
- Show all the tasks in the list.
- 
- Eg: `list` will display all the tasks in the list
- 
- Expected output:
- ```
- Here are the tasks in your list:
- 1. [T][X] read harry potter
- 2. [E][X] Orbital Splashdown (by: Thu Dec 12 23:59:00 SGT 2019)
- ```
-
- ### Find a Task
- Find a task by typing `find <Keyword>` .
- 
- Eg: `find read` will filter all the tasks which contain the keyword `cs2103T`
- 
- Expected output:
-  ```
-  Here are the matching tasks in your list:
-  1. [T][X] read harry potter
+Noted. I've removed this task:
+[D][✓] finish CS2103T homework (by: Thu Dec 12 23:59:00 SGT 2019)
+Now you have 2 tasks in the list
   ```
 
- ### Bye
- Queen_BB replied with a goodbye message on typing `bye`.
+### Display List
+Show all the tasks in the list.
  
- Eg: `bye`
+Eg: `list` will display all the tasks in the list
  
- Expected output:
+Expected output:
  ```
- Bye. Hope to see you again soon!
+Here are the tasks in your list:
+1. [T][X] read harry potter
+2. [E][X] Orbital Splashdown (by: Thu Dec 12 23:59:00 SGT 2019)
+ ```
+
+### Find a Task
+Find a task by typing `find <Keyword>` .
+ 
+Eg: `find read` will filter all the tasks which contain the keyword `cs2103T`
+ 
+Expected output:
+  ```
+Here are the matching tasks in your list:
+1. [T][X] read harry potter
+  ```
+
+### Bye
+Queen_BB replied with a goodbye message on typing `bye`.
+ 
+Eg: `bye`
+ 
+Expected output:
+ ```
+Bye. Hope to see you again soon!
  ```

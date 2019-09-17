@@ -58,7 +58,7 @@ A Deadline is a task that needs to be done before a specific date/time.
 
 You can use this command to add a Deadline to your task list.
 
-Command format: `deadline <deadline description> <deadline date/time>`
+Command format: `deadline <deadline description> /by <deadline date/time>`
 
 Bear understands and automatically converts dates and times in the format `DD/MM/YYYY HHMM`.
 

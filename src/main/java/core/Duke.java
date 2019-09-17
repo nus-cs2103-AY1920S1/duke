@@ -22,7 +22,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    public final static String filePath = System.getProperty("user.dir") + "/data/duke.txt";
+    public static final String filePath = System.getProperty("user.dir") + "/data/duke.txt";
 
     /**
      * Duke Constructor, defaults to CLI mode.

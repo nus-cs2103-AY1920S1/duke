@@ -32,7 +32,7 @@ You should see that the task has been added to your list:
 
 ![Deadline Image](https://github.com/bigjunnn/duke/blob/master/docs/Deadline.png)
 
-Prompt for special format?
+:warning: Date & Time must be entered in format dd/mm/yyyy HHmm
 
 #### 3. Adding an 'Event' task
 
@@ -46,7 +46,7 @@ You should see that the task has been added to your list:
 
 ![Event Image](https://github.com/bigjunnn/duke/blob/master/docs/Event.png)
 
-Prompt for special format?
+:warning: Date & Time must be entered in format dd/mm/yyyy HHmm
 
 #### 4. Listing tasks
 

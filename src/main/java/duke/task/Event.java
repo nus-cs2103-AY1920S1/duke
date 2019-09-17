@@ -41,10 +41,10 @@ public class Event extends Task {
         super(description);
         this.eventDate = parseDate(eventDate);
         if (this.getTaskDescription().equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description of a event cannot be empty.");
         }
         if (this.getEventDate().equals("")) {
-            throw new DukeException("☹ OOPS!!! The date field of a event cannot be empty.");
+            throw new DukeException(":( OOPS!!! The date field of a event cannot be empty.");
         }
         this.taskType = "E";
     }
@@ -83,7 +83,7 @@ public class Event extends Task {
      */
     public Task markAsDone() throws DukeException {
         if (this.isDone) {
-            throw new DukeException("☹ OOPS!!! The event is already marked as done.");
+            throw new DukeException(":( OOPS!!! The event is already marked as done.");
         }
         Event completed = new Event(this.description, this.eventDate);
         completed.isDone = true;

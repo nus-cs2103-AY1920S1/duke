@@ -64,16 +64,21 @@ public class Duke extends Application {
         this.filePath = filepath;
     }
 
+    /**
+     * Constructor for Duke without filepath, we assume filepath to be data/duke.txt.
+     */
     public Duke() {
         this.ui = new Ui();
         this.filePath = "data/duke.txt";
-        System.out.println("accessing data");
         try {
             this.storage = new Storage(this.filePath);
             this.tasks = this.storage.load();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        assert this.ui != null : "The Ui should not be null";
+        assert this.storage != null : "The Storage should not be null";
+        assert this.tasks != null : "The Tasks should not be null";
     }
 
     @Override

@@ -42,10 +42,10 @@ public class Deadline extends Task {
         System.out.println("Deadline is" + deadline);
         this.deadline = parseDate(deadline);
         if (this.getTaskDescription().equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a Deadline cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description of a Deadline cannot be empty.");
         }
         if (this.getDeadline().equals("")) {
-            throw new DukeException("☹ OOPS!!! The date field of a Deadline cannot be empty.");
+            throw new DukeException(":( OOPS!!! The date field of a Deadline cannot be empty.");
         }
         this.taskType = "D";
     }
@@ -84,7 +84,7 @@ public class Deadline extends Task {
      */
     public Task markAsDone() throws DukeException {
         if (this.isDone) {
-            throw new DukeException("☹ OOPS!!! The Deadline is already marked as done.");
+            throw new DukeException(":( OOPS!!! The Deadline is already marked as done.");
         }
         Deadline completed = new Deadline(this.description, this.deadline);
         completed.isDone = true;

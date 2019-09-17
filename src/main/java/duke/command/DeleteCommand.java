@@ -35,6 +35,6 @@ public class DeleteCommand extends Command {
         this.storage.saveToDisk(this.taskList);
         return "Noted. I've removed this task:\n"
                 + ui.indentMessage(task.toString())
-                + "Now you have " + this.taskList.getSize() + " task(s) in the list.";
+                + "\nNow you have " + this.taskList.getSize() + " task(s) in the list.";
     }
 }

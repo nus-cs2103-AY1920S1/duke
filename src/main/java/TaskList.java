@@ -11,7 +11,6 @@ import seedu.duke.comparator.NameComparator;
 import seedu.duke.comparator.DateComparator;
 import java.util.ArrayList;
 
-
 /**
  * Class containing the list of Tasks, and methods to modify it.
  * @author Lim Daekoon
@@ -220,3 +219,4 @@ public class TaskList {
         return stringArray;
     }
 }
+

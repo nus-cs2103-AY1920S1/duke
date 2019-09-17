@@ -1,3 +1,7 @@
 E|0| turn book | 8th of July 2019, 2:00pm
 E|0| return dog | 18th of August 2019, 4:00pm
 D|0| return book | 18th of May 2019, 5:00pm
+T|0|  return book
+D|0| return book | 21st of July 2019, 6:00pm
+E|0| fly to Egypt | 22nd of July 0025, 5:00pm
+E|0| fly to Egypt | 22nd of May 0019, 4:55pm

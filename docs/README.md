@@ -14,12 +14,12 @@ The name Duke was chosen in honor of Duke, the Java Mascot. **While Duke has a G
  
 
 ## Starting Off
-1. Copy the file to the folder you want to use as the home folder Duke.
+1. Copy the file to the folder you want to use as the home folder for Duke.
 2. Double-click the file to start the app. The GUI should appear in a few seconds.
 
 ![Image of Duke start screen](https://tanzhanming.github.io/duke/UGpic1.PNG)
 
-3.Type the command in the command box and press `Enter` or click `Send` to execute it.
+3.Type the command in the command box and press `Enter` or click `Send` to execute it.\
 4.Lastly, entering `bye` exits the app.
 
  

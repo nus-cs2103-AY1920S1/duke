@@ -21,7 +21,7 @@
 ## <a name="intro"></a>Introduction
 Duke is a desktop application that helps keep track of the tasks that you have to do. This user guide explains the different features that have been implemented, the commands that are available to you, as well as examples on how to use the commands.
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ## <a name="features"></a>Features 
 
@@ -40,7 +40,7 @@ Duke allows you to find tasks that contain your specified keywords.
 ### <a name="f-undo"></a>5. Undoing of changes
 Duke allows you to undo changes in case you make any mistakes.
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ## <a name="usage"></a>Usage
 
@@ -70,7 +70,7 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ##
 
@@ -106,7 +106,7 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ##
 
@@ -142,7 +142,7 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ##
 
@@ -173,7 +173,7 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ##
 
@@ -215,7 +215,7 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ##
 
@@ -257,7 +257,7 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ##
 
@@ -308,7 +308,7 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ##
 
@@ -354,7 +354,7 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)
 
 ##
 
@@ -382,4 +382,4 @@ _____________________________________________________
 ```
 </details>
 
-[:point_up_2:](#toc)
+[Back to top](#toc)

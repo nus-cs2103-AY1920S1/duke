@@ -22,7 +22,7 @@ public class FindCommand implements Command {
     private String concatenateStrings(ArrayList<String> strings) {
         String result = "";
         for (String s : strings) {
-            result = result + "s" + "\n";
+            result = result + s + "\n";
         }
         result = result.equals("") ? "\n" : result;
         return result;

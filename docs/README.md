@@ -69,9 +69,9 @@ Expected outcome:
 
 `Nice! I've marked this task as done:`<br/>`[T][✓] hire intern`
 
-### `todo <desciption>` - Adds a todo task into the task list
+### `todo <desciption>` - Adds a todo into the task list
 
-A todo task of the specified description will be appended to the current task list.
+A todo of the specified description will be appended to the current task list.
 
 Example of usage: 
 
@@ -79,5 +79,28 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`<br/>`[T][✗] sign documents`<br/>`Now you have 2 tasks in the list`
+`Got it. I've added this task:`<br/>`[T][✗] sign documents`<br/>`Now you have 2 tasks in the list.`
 
+### `event <desciption> /at <dd/MM/yyyy HHmm>` - Adds a event into the task list
+
+An event of the specified description and date time will be appended to the current task list.
+
+Example of usage: 
+
+`event gala dinner /at 20/10/2019 1900`
+
+Expected outcome:
+
+`Got it. I've added this task:`<br/>`[E][✗] gala dinner (at: 20/10/2019 1900)`<br/>`Now you have 3 tasks in the list.`
+
+### `deadline <desciption> /by <dd/MM/yyyy HHmm>` - Adds a deadline into the task list
+
+An deadline of the specified description and date time will be appended to the current task list.
+
+Example of usage: 
+
+`deadline submission of lawyer annual report /by 25/11/2019 1200`
+
+Expected outcome:
+
+`Got it. I've added this task:`<br/>`[D][✗] submission of lawyer annual report (by: 25/11/2019 1200)`<br/>`Now you have 4 tasks in the list.`

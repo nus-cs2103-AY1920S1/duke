@@ -20,7 +20,7 @@ class Parser {
 
     void parse(String input, Ui ui, TaskList taskList) throws DukeException, ParseException {
         String command = input.split(" ")[0].trim();
-        assert !command.isEmpty() : "Input must not be empty";
+        assert !command.isEmpty() : "Input must not be empty"; //added assert
         switch (command) {
             case "bye":
                 if (!input.substring(3).isEmpty()){

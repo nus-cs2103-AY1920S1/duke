@@ -44,14 +44,14 @@ public class Ui {
     }
 
     void setToDone(int taskNum, TaskList taskList) {
-        assert(taskNum > 0) : "Task number must be more than 1";
+        assert(taskNum > 0) : "Task number must be more than 1"; //added assert
         output = "Nice! I've marked this task as done:\n"
                 + "[" + taskList.getTaskList().get(taskNum - 1).getStatusIcon() + "]"
                 + taskList.getTaskList().get(taskNum - 1).toString();
     }
 
     void setToDelete(int taskNum2, TaskList taskList) {
-        assert(taskNum2 > 0) : "Task number must be more than 1";
+        assert(taskNum2 > 0) : "Task number must be more than 1"; //added assert
         output = "Noted. I've removed this task:\n"
                 + taskList.getTaskList().get(taskNum2 - 1).toString() + "\n"
                 + "Now you have " + (taskList.getTaskList().size() - 1) + "tasks in the list.";

@@ -146,6 +146,9 @@ public class UiText {
      * @return Message of items in the list
      */
     public static String listingMsg(ArrayList<Task> tasks) {
+        if (tasks.size() < 1) {
+            return "You do not have any task in your list";
+        }
         assert tasks.size() > 0;
         StringBuilder output = new StringBuilder();
         output.append("Here are the tasks in your list:\n");
@@ -277,4 +280,6 @@ public class UiText {
     public static String helpForList() {
         return "list --list of task will be displayed.";
     }
+
+    public static String fileSeparator = System.getProperty("file.separator");
 }

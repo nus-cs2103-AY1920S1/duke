@@ -21,14 +21,30 @@ import java.io.FileReader;
 public class Storage {
     private static File file;
     private UiText ui = new UiText();
-    public static final String DEFAULT_PATH = "src/main/data/duke.txt";
+    public static final String DEFAULT_PATH = "src" + UiText.fileSeparator + "main" +
+            UiText.fileSeparator + "data" + UiText.fileSeparator + "duke.txt";
 
     /**
      * Constructor to construct a Storage with given file path.
      * @param filePath givenFile path to retrive anf storage the tasks.
      */
     public Storage(String filePath) {
-        this.file = new File(filePath);
+        File tempFile = new File(filePath);
+        if (tempFile.exists()){
+            this.file = tempFile;
+        } else {
+            File dir = new File("data");
+            if (!dir.exists()) {
+                try {
+                    dir.mkdir();
+                } catch (SecurityException se) {
+                    //do something
+                }
+            }
+            assert (dir.exists());
+            file = new File("data", "duke.txt");
+        }
+
     }
 
     /**

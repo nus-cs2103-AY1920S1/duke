@@ -84,7 +84,7 @@ public class MassDeleteCommand extends Command {
             return errorMessage;
         } else {
             String output = "";
-            output += "Success! I have deleted the following tasks:\n";
+            output += "Success! I have deleted the following tasks:\n\n";
             for (int i = deletedTasks.size() - 1; i >= 0; i--) {
                 if (i == 0) {
                     output += deletedTasks.get(i).toString();

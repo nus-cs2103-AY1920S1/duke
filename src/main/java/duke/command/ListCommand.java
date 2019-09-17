@@ -30,7 +30,10 @@ public class ListCommand extends Command {
         if (taskList.size() == 0) {
             return "Sorry but the list is empty!";
         } else {
-            return taskList.toString();
+            String output = "";
+            output += "Here are you list of tasks: \n\n"
+                    + taskList.toString();
+            return output;
         }
     }
 }

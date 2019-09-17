@@ -54,7 +54,7 @@ public class DeleteCommand extends Command {
         if (!errorMessage.equals("")) {
             return errorMessage;
         } else {
-            return "Done! I have deleted this task :\n" + toBeDeleted.toString();
+            return "Done! I have deleted this task :\n\n" + toBeDeleted.toString();
         }
     }
 }

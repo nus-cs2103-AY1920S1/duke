@@ -228,12 +228,14 @@ The storage file is easy to read and edit.
 
 Note that the file follows the following format:
  * Each variables are separated by  `|`.
- * The first letter represents the type of task. 
+ * The first letter represents the type of task.  
+ 
 Letter | Task
 ---- | ----
 T | todo
 D | deadline
 E | event
+
  * The second variable is the task description.
  * If exists, the third variable may be a timestamp depending on whether it is a `deadline` or `event` task. The timestamp will be in the format  [dd/MM/yyyy HHmm].
  * If the task has been completed, the last variable will be the timestamp of when it was marked as done.

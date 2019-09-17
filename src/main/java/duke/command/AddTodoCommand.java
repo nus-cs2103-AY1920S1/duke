@@ -47,7 +47,7 @@ public class AddTodoCommand extends Command {
         if (!errorMessage.equals("")) {
             return errorMessage;
         } else {
-            String output = "Done! I have added this task to the list: " + newTodo.toString() + "\n";
+            String output = "Done! I have added this task to the list:\n\n" + newTodo.toString() + "\n\n";
             output += "You now have " + taskList.size() + " tasks in the list";
             return output;
         }

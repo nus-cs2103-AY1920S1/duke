@@ -98,7 +98,7 @@ public class AddEventCommand extends Command {
         if (!errorMessage.equals("noError")) {
             return errorMessage;
         } else {
-            String output = "Done! I have added this event to the list" + event.toString() + "\n";
+            String output = "Done! I have added this event to the list\n\n" + event.toString() + "\n\n";
             output += "You now have " + listOfTasks.size() + " tasks in the list!";
             return output;
         }

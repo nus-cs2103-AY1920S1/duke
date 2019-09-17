@@ -3,18 +3,27 @@
 ## Features 
 
 ### Feature 1 
-Description of feature.
+Enable adding of task, including todo, deadline and event
+
+### Feature 2
+User can view the list of tasks
+
+### Feature 3
+User can mark a task as done 
+
+### Feature 4
+User can delete a task
 
 ## Usage
 
 ### `Keyword` - Describe action
 
-Describe action and its outcome.
-
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo read book`
 
 Expected outcome:
 
-`outcome`
+`"I have successfully added the following task
+    [T][x] read book
+    Now you have 1 task in your list`

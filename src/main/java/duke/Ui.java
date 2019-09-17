@@ -61,6 +61,41 @@ public class Ui {
         return "Bye. Hope to see you again soon!";
     }
 
+    /**
+     * Returns String message specifying the full list of commands.
+     *
+     * @return String message representing Duke's response.
+     */
+    public String getListOfCommands() {
+        return "Listed here are the available commands in Duke:\n\n" +
+                "1)  Adding a new task\n\n" +
+                "\"todo [description]\": Adds a todo task to the list\n\"deadline [description] /by [date-time]\"" +
+                ": Adds a deadline task to the list\nevent [description] /at [date-time]\": " +
+                "Adds an event task to the list\n\nValid Date-Time formats:\n \u2022 3 October 2019 2359" +
+                "\n \u2022 03/10/2019 2359\n \u2022 03102019 11:59PM\n \u2022 03 10 2019 11:59AM\n\n" +
+                "Examples of valid commands:\n \u2022 todo run 2.4km\n \u2022 deadline submit assignment " +
+                "/by 5 November 2019 0900\n \u2022 event play basketball /at 05/11/2019 9:00AM\n\n" +
+                "\n2)  Listing all tasks\n\n" +
+                "\"list\": Displays the current list of all tasks\n\n" +
+                "\n3)  Marking a task as done\n\n" +
+                "\"done [task-number]\": Marks the task with the specified task-number as done.\n\n" +
+                "The task number of a task is indicated by its position in the list of tasks. (starting from 1)\n" +
+                "This number can be displayed by using the list command.\n\n" +
+                "\n4)  Deleting a task\n\n" +
+                "\"delete [task-number]\": Removes the task with the specified task-number from the current list.\n\n" +
+                "This command has similar syntax to the done command.\n\n" +
+                "\n5)  Searching for task by keyword(s)\n\n" +
+                "\"find [keywords delimited by a single space]\":\n" +
+                "Finds and displays tasks whose description contains the given keyword(s)\n\n" +
+                "Multiple keywords may be specified, delimited by a single space.\n" +
+                "Note for find command:\n" +
+                " \u2022 The order of the keywords do not matter.\n" +
+                " \u2022 A task description is a match only if it contains all the keywords.\n\n" +
+                "\n6)  Exiting the program\n\n" +
+                "\"bye\": Displays the exit message and closes the program.";
+
+    }
+
     // ============================================================================================================
     // ===============================Exception messages to be output to the user==================================
     // ============================================================================================================

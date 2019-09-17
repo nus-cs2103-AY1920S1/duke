@@ -4,13 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import commands.Command;
-import commands.AddCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.ExitCommand;
-import commands.ListCommand;
-import commands.FindCommand;
+import commands.*;
 
 import exceptions.DukeException;
 
@@ -37,6 +31,8 @@ public class Parser {
     public static Command parse(String fullCommand, Duke duke) throws DukeException {
         String[] commandArr = fullCommand.split(" ", 2);
         switch (commandArr[0]) {
+        case "help":
+            return new HelpCommand(commandArr);
         case "bye":
             return new ExitCommand(commandArr, duke);
         case "list":

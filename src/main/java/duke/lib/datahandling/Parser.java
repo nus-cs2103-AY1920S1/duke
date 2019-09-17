@@ -1,6 +1,5 @@
 package duke.lib.datahandling;
 
-import duke.lib.TaskList;
 import duke.lib.autocorrect.SpellCheck;
 import duke.lib.ui.UI;
 import duke.lib.common.DukeException;

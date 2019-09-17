@@ -8,7 +8,7 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" spacing="2.0" style="-fx-background-color: black; -fx-border-color: grey;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="dialog" blendMode="HARD_LIGHT" text="Label" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
+      <Label fx:id="dialog" blendMode="HARD_LIGHT" maxHeight="-Infinity" minHeight="-Infinity" text="Label" textFill="WHITE" wrapText="true" HBox.hgrow="ALWAYS">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>

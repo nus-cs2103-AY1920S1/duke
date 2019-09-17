@@ -1,4 +1,4 @@
-package duke.lib;
+package duke.lib.datahandling;
 
 import duke.lib.common.DukeException;
 import duke.lib.task.Task;

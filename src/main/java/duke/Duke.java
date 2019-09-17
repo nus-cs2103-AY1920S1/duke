@@ -1,6 +1,6 @@
 package duke;
 
-import duke.lib.TaskList;
+import duke.lib.datahandling.TaskList;
 import duke.lib.common.DukeException;
 import duke.lib.datahandling.DataStorage;
 import duke.lib.datahandling.Parser;

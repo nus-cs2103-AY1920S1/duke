@@ -5,6 +5,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 import java.util.Scanner;
 
@@ -72,14 +73,14 @@ public class Duke {
      * @return a String representation of Duke's response.
      */
     public String getResponse(String input) {
-        if (isExit) {
+        if (input.equals("bye")) {
             storage.writeData(tasks);
             storage.writeAlias();
+            Platform.exit();
             return null;
         } else {
             try {
                 Command command = CommandCentre.getCommand(Parser.parseCommand(input));
-                isExit = command.isExit();
                 return command.execute(Parser.parseDescription(input));
             } catch (DukeException e) {
                 return ui.showError(e.getMessage());

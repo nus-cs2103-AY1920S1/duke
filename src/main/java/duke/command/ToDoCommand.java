@@ -17,12 +17,4 @@ public class ToDoCommand extends AddCommand {
     public ToDoCommand(String description) throws IllegalDescriptionException {
         super(new ToDo(description));
     }
-
-    /**
-     * Returns a string of help information for the todo command.
-     * @return a string of help information for the todo command.
-     */
-    public String getCommandHelpInfo() {
-        return "The format of deadline command is: todo <taks description>";
-    }
 }

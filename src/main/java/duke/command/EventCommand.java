@@ -21,12 +21,4 @@ public class EventCommand extends AddCommand {
             throws IllegalDescriptionException {
         super(new Event(description, dateTime));
     }
-
-    /**
-     * Returns a string of help information for the event command.
-     * @return a string of help information for the event command.
-     */
-    public static String getCommandHelpInfo() {
-        return "The format of event command is: event <taks description> /at <DD/MM/YYYY HH:MM>";
-    }
 }

@@ -1,6 +1,15 @@
 package duke.parser;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
 import duke.exception.IllegalCommandTypeException;
 import duke.exception.IllegalDateException;
 import duke.exception.IllegalDescriptionException;
@@ -11,15 +20,18 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     private Parser parser = new Parser();
+
     @Test
     public void testParseExitCommand() {
         try {
             assertTrue(parser.parseCommand("Bye   abc123 ") instanceof ExitCommand);
-        } catch (Exception e){
+        } catch (Exception e) {
             fail();
         }
     }
@@ -29,7 +41,7 @@ public class ParserTest {
         try {
             Command listCommand = parser.parseCommand("List 1 2");
             assertTrue(listCommand instanceof ListCommand);
-        } catch (Exception e){
+        } catch (Exception e) {
             fail();
         }
     }

@@ -17,6 +17,7 @@ public class HelpInfoOfAddCommand extends HelpInformation {
         case Event:
         case Deadline:
             this.subCommandType = subCommandType;
+            break;
         default:
         }
     }

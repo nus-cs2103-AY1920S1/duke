@@ -74,7 +74,7 @@ public class HelpInformation {
                                                          CommandType.SubCommandType subCommandType) {
         switch (commandType) {
         case Add:
-                return new HelpInfoOfAddCommand(subCommandType);
+            return new HelpInfoOfAddCommand(subCommandType);
         default:
             return new HelpInformation();
         }

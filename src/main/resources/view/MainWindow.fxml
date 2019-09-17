@@ -8,8 +8,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="658.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="424.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="424.0" layoutY="658.0" style="-fx-background-color: #A0DDFF" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
+        <TextField fx:id="userInput" layoutY="658.0" onAction="#handleUserInput" promptText="Type your command here" style="-fx-prompt-text-fill: #E2E2E2; -fx-background-color: #F9AA33; -fx-font-size: 14; -fx-font-weight: bold" prefHeight="41.0" prefWidth="424.0" AnchorPane.bottomAnchor="1.0" />
+        <Button fx:id="sendButton" layoutX="424.0" layoutY="658.0" style="-fx-background-color: #344955; -fx-text-fill: #FFFFFF; -fx-font-size: 16; -fx-font-weight: bold" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="657.0" prefWidth="500.0" vvalue="1.0">
             <content>
                 <VBox fx:id="dialogContainer" prefHeight="643.0" prefWidth="478.0" />

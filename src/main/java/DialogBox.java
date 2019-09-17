@@ -14,8 +14,6 @@ import java.util.Collections;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -51,6 +49,15 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    /**
+     * creates a flipped DialogBox.
+     *
+     * @param text is the string output that Duke says
+     *
+     * @param img is the image of Duke
+     *
+     * @return the DialogBox to be shown
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

@@ -1,5 +1,5 @@
-import Exceptions.DukeException;
-import Task.Deadline;
+import exceptions.DukeException;
+import task.Deadline;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

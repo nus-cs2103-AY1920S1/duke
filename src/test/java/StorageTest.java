@@ -1,6 +1,6 @@
-import Task.Task;
-import Utilities.Storage;
-import Utilities.TaskList;
+import task.Task;
+import utilities.Storage;
+import utilities.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

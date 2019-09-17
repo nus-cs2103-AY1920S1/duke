@@ -1,34 +1,29 @@
-import Command.Command;
-import Exceptions.DukeException;
-import Utilities.Parser;
-import Utilities.Storage;
-import Utilities.TaskList;
-import Utilities.Ui;
-import javafx.scene.image.Image;
+import exceptions.DukeException;
+import utilities.Parser;
+import utilities.Storage;
+import utilities.TaskList;
+import utilities.Ui;
+import command.Command;
 
 
 /**
- * Main entry point
+ * Main entry point.
  */
-public class Duke /*extends Application*/{
-    /**
-     * Attributes for storage, tasks, and ui
-     */
+public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/daduke.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-
-
     /**
-     * constructor for Duke
+     * constructor for Duke.
+     *
      * @param filePath is the filename of the text file
+     *
      * @throws Exception in case file is not able to load
      */
-    public Duke(String filePath) throws Exception {
+    private Duke(String filePath) throws Exception {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -40,9 +35,11 @@ public class Duke /*extends Application*/{
     }
 
     /**
-     * Dummy constructor
+     * constructor for Duke when launcher is running.
+     *
+     * @throws Exception in case file is unable to load
      */
-    public Duke() throws Exception{
+    Duke() throws Exception {
         ui = new Ui();
         storage = new Storage("DukeOutput.txt");
         try {
@@ -55,9 +52,9 @@ public class Duke /*extends Application*/{
 
 
     /**
-     * asks ui to run the application
+     * asks ui to run the application.
      */
-    public void run() {
+    private void run() {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -65,13 +62,15 @@ public class Duke /*extends Application*/{
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                //c.execute(tasks, ui, storage);
+                String result = c.executeAsString(tasks, ui, storage);
+                System.out.println(result);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (Exception e) {
                 System.out.println("fml");
-            }finally {
+            } finally {
                 ui.showLine();
             }
         }
@@ -81,8 +80,10 @@ public class Duke /*extends Application*/{
 
 
     /**
-     * entry point of Duke
+     * entry point of Duke.
+     *
      * @param args are standard feature
+     *
      * @throws Exception in case file is not found
      */
     public static void main(String[] args) throws Exception {
@@ -91,20 +92,22 @@ public class Duke /*extends Application*/{
     }
 
 
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * to get response the display it.
+     *
+     * @param input is the input command
+     *
+     * @return the String output message
      */
     String getResponse(String input) {
-            try {
-                Command c = Parser.parse(input);
-                return c.executeAsString(tasks, ui, storage);
-            } catch (DukeException e) {
-                return ui.showErrorFX(e.getMessage());
-            } catch (Exception e) {
-                return "fml";
-            }
+        try {
+            Command c = Parser.parse(input);
+            return c.executeAsString(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showErrorFX(e.getMessage());
+        } catch (Exception e) {
+            return "fml";
+        }
     }
 
 

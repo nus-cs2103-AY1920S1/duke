@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateUtil {
 
+    private static final int DATE_TEMPLATE_SIZE = 5;
+    private static final String DEFAULT_TIME = "00";
+
     /**
      * Creates a LocalDateTime object form its String representation.
      *
@@ -19,58 +22,79 @@ public class DateUtil {
      * @throws IllegalTimeFormatException If the input String is not convertible to a LocalDateTime object.
      */
     public static LocalDateTime toTime(String s) throws IllegalTimeFormatException {
-        String[] dateTime = s.trim().split(" "); // split date and time
-        String[] date = dateTime[0].split("/"); // split date into day, month and year
+        String [] formattedTime = formatTimeString(s);
+        return toLocalDateTime(formattedTime);
+    }
 
-        String[] temp = new String[5];
-        for (int i = 0; i < 5; i++) {
-            if (i < date.length) {
-                // store date information into a String array [dd, MM, yy, hh, mm] that toTime method understands
-                temp[i] = date[i];
-            } else {
-                // use 00 to replace missing date and time information
-                temp[i] = "00";
-            }
-        }
-        date = temp;
-        String time;
-        if (date[0].length() > 2) {
-            // user only inputs time, without date, hence date[0] equals dateTime[0] equals s, the time.
-            time = dateTime[0];
-            date[0] = "00"; // overwrite wrong dd data in date[0]
-            date[3] = time.substring(0, 2); // set hh
-            date[4] = time.substring(2); // set mm
-        } else if (dateTime.length > 1) {
+    private static String[] formatTimeString(String s) throws IllegalTimeFormatException {
+        // split date and time
+        String[] dateTime = s.trim().split(" ");
+
+        if (!s.contains("/")) {
+            // user only inputs time "hhmm", without date.
+            return formatTimeOnly(dateTime[0]);
+        } else {
             // user enters both date and time.
-            time = dateTime[1];
+            return formatAll(dateTime);
+        }
+    }
+
+    private static String[] makeDateTemplate(String[] strings) {
+        String[] temp = new String[DATE_TEMPLATE_SIZE];
+        for (int i = 0; i < DATE_TEMPLATE_SIZE; i++) {
+            if (i >= strings.length) {
+                temp[i] = DEFAULT_TIME;
+                continue;
+            }
+            temp[i] = strings[i];
+        }
+        return temp;
+    }
+
+    private static String[] formatTimeOnly(String string) {
+        String[] template = new String[DATE_TEMPLATE_SIZE];
+        for (int i = 0; i < DATE_TEMPLATE_SIZE; i++) {
+            template[i] = DEFAULT_TIME;
+        }
+        template[DATE_TEMPLATE_SIZE - 2] = string.substring(0, 2); // set hh
+        template[DATE_TEMPLATE_SIZE - 1] = string.substring(2); // set mm
+        return template;
+    }
+
+    private static String[] formatAll(String[] strings) throws IllegalTimeFormatException {
+        String[] date = strings[0].split("/");
+        String[] template = makeDateTemplate(date);
+
+        if (strings.length == 1) {
+            // no time input
+            template[DATE_TEMPLATE_SIZE - 2] = DEFAULT_TIME; // set hh
+            template[DATE_TEMPLATE_SIZE - 1] = DEFAULT_TIME; // set mm
+        } else {
+            String time = strings[1];
             if (time.length() < 3) {
                 // time is not entered in the format of hhmm.
                 throw new IllegalTimeFormatException("> < Sorry, I couldn't recognise the time.\n"
                         + "     Enter time in the format of 'hhmm' :D");
             }
-            date[3] = time.substring(0, 2); // set hh
-            date[4] = time.substring(2); // set mm
+            template[DATE_TEMPLATE_SIZE - 2] = time.substring(0, 2); // set hh
+            template[DATE_TEMPLATE_SIZE - 1] = time.substring(2); // set mm
         }
-        return toLocalDateTime(date);
+        return template;
     }
 
     private static LocalDateTime toLocalDateTime(String[] times) throws IllegalTimeFormatException {
         try {
             LocalDateTime current = LocalDateTime.now(); // default date is the current date
-            int year = times[2].equals("00") ? current.getYear() : Integer.parseInt(times[2]);
-            int month = times[1].equals("00") ? current.getMonth().getValue() : Integer.parseInt(times[1]);
-            int day = times[0].equals("00") ? current.getDayOfMonth() : Integer.parseInt(times[0]);
+            int year = times[2].equals(DEFAULT_TIME) ? current.getYear() : Integer.parseInt(times[2]);
+            int month = times[1].equals(DEFAULT_TIME) ? current.getMonth().getValue() : Integer.parseInt(times[1]);
+            int day = times[0].equals(DEFAULT_TIME) ? current.getDayOfMonth() : Integer.parseInt(times[0]);
             int hour = Integer.parseInt(times[3]); // default time is 1200 AM
             int minute = Integer.parseInt(times[4]);
             return LocalDateTime.of(year, month, day, hour, minute);
-        } catch (DateTimeException e) {
+        } catch (DateTimeException | NumberFormatException e) {
             throw new IllegalTimeFormatException(
                     "> < Sorry, I couldn't recognise the time.\n"
-                            + "     Try enter in the format of 'dd/MM/yy hhmm' :D");
-        } catch (NumberFormatException nfe) {
-            throw new IllegalTimeFormatException(
-                    "> < Sorry, only numbers can be recognised for time.\n"
-                            + "     Try enter in the format of 'dd/MM/yy hhmm' :D");
+                            + "Try enter in the format of 'dd/MM/yy hhmm' :D");
         }
     }
 

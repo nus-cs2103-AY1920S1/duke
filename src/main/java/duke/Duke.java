@@ -44,16 +44,15 @@ public class Duke {
     /**
      * Starts the Duke programme.
      *
-     * @param input User input String.
      */
-    void start(String input) {
+    void start() {
 
         try {
             assert mw != null;
             String fullCommand = mw.getInput();
             Command c = Parser.parse(fullCommand);
             if (c.isExit()) {
-                // exit
+
                 System.exit(0);
             }
             c.execute(sheet, ui, storage);

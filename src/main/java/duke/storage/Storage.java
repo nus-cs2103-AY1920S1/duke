@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,7 +44,7 @@ public class Storage {
             f.createNewFile();
             this.tasks = f;
             Path p = Paths.get(pathToFile);
-            List<String> lst = Files.readAllLines(p);
+            List<String> lst = Files.readAllLines(p, Charset.forName("UTF-8"));
             List<Task> taskList = new ArrayList<>();
             for (String t : lst) {
                 taskList.add(Task.toTask(t));

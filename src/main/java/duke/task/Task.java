@@ -11,7 +11,7 @@ public class Task implements Comparable<Task> {
     private boolean isDone;
 
     private static final String TICK = "v";
-    private static final String CROSS = "×";
+    private static final String CROSS = "x";
 
     /**
      * Constructs a unspecified and unfinished Task object.
@@ -91,7 +91,7 @@ public class Task implements Comparable<Task> {
      *
      * @return String symbol of the status of task.
      */
-    public String getStatusIcon() {
+    String getStatusIcon() {
         return (isDone ? TICK : CROSS); //return tick or X symbols
     }
 

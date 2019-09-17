@@ -30,7 +30,7 @@ public class Parser {
      */
     public static Task parseStoredMessage(String message) throws DukeException {
         String[] commands = message.split("\\s{1}\\|\\s{1}");
-        Task taskToAdd = null;
+        Task taskToAdd;
         switch (commands[0]) {
         case "T":
             taskToAdd = new Todo(commands[2], (commands[1].equals("\u2713")));
@@ -93,10 +93,10 @@ public class Parser {
             }
             return new ExitCommand();
         case "find":
-            if (!(commands.length == 2)) {
-                throw new DukeException(":( OOPS!!! Your bye command is in the wrong format.");
+            if (commands.length < 2) {
+                throw new DukeException(":( OOPS!!! Your find command is in the wrong format.");
             }
-            return new FindCommand(commands[1]);
+            return new FindCommand(message.substring(4));
         default:
             throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

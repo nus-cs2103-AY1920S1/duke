@@ -7,6 +7,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Represents a command to find a task.
@@ -15,7 +17,7 @@ public class FindCommand extends Command {
     /**
      * Term to be searched within the TaskList.
      */
-    private String searchTerm;
+    private List<String> searchTerms;
 
     /**
      * Constructor for FindCommand.
@@ -23,7 +25,8 @@ public class FindCommand extends Command {
      * @param searchTerm The term to be searched.
      */
     public FindCommand(String searchTerm) {
-        this.searchTerm = searchTerm;
+        this.searchTerms = Arrays.asList(searchTerm.substring(1).split(" "));
+        System.out.print(searchTerms.toString());
     }
 
     /**
@@ -43,8 +46,10 @@ public class FindCommand extends Command {
         ArrayList<Task> taskList = tasks.getTaskArrayList();
         ArrayList<Task> matches = new ArrayList<>();
         for (Task task : taskList) {
-            if (task.getTaskDescription().contains(this.searchTerm)) {
-                matches.add(task);
+            for (String searchTerm : searchTerms) {
+                if (task.getTaskDescription().contains(searchTerm) && !matches.contains(task)) {
+                    matches.add(task);
+                }
             }
         }
         int startNumber = 1;
@@ -54,9 +59,11 @@ public class FindCommand extends Command {
             startNumber++;
         }
         if (startNumber == 1) {
-            allTasks.add("There are no tasks!");
+            allTasks.add("Sorry, I can't find any tasks!");
+        } else if (this.searchTerms.size() == 1) {
+            allTasks.add(0, "Here are the tasks found that match your search term:");
         } else {
-            allTasks.add(0, "Here are the tasks found:");
+            allTasks.add(0, "Here are the tasks found that match any of your search terms:");
         }
         ui.messageUser(allTasks);
         StringBuilder answer = new StringBuilder();

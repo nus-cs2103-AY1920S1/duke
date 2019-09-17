@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.stream.Stream;
+
 import javafx.scene.control.TextField;
 
 /**
@@ -18,6 +19,7 @@ public class Ui {
 
     /**
      * Reads command from user input.
+     *
      * @return string of user input.
      */
     public String readCommand() {
@@ -55,6 +57,7 @@ public class Ui {
 
     /**
      * Prints list of tasks in TaskList.
+     *
      * @param tasks Task objects in TaskList.
      */
     public String printList(TaskList tasks) {
@@ -64,12 +67,13 @@ public class Ui {
             assert t != null;
             taskList = taskList + (i + 1) + "." + t.toString() + "\n";
         }
-        return "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Here are the tasks in your list:\n"
+        return "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Here are the task(s) in your list:\n"
                 + taskList;
     }
 
     /**
      * Prints message for tasks that are done.
+     *
      * @param task task object that has just been completed.
      */
     public String printDone(Task task) {
@@ -79,7 +83,8 @@ public class Ui {
 
     /**
      * Prints message after task has been added to TaskList.
-     * @param task new task object that has been added.
+     *
+     * @param task           new task object that has been added.
      * @param sizeOfTaskList size of TaskList.
      */
     public String printAddTask(Task task, int sizeOfTaskList) {
@@ -89,7 +94,8 @@ public class Ui {
 
     /**
      * Prints message after task has been deleted from TaskList.
-     * @param deletedTask deleted Task.
+     *
+     * @param deletedTask    deleted Task.
      * @param sizeOfTaskList size of taskList.
      */
     public String printDelete(Task deletedTask, int sizeOfTaskList) {
@@ -100,15 +106,16 @@ public class Ui {
 
     /**
      * Prints matching tasks in list.
+     *
      * @param findList list of matches.
      */
     public String printFind(TaskList findList) {
         String taskList = "";
         for (int i = 0; i < findList.size(); i++) {
             Task task = findList.get(i);
-            taskList = taskList + (i+1) + "." + task.toString() + "\n";
+            taskList = taskList + (i + 1) + "." + task.toString() + "\n";
         }
-        return "இ~இ Here are the matching tasks in your list:\n"
+        return "இ~இ Here are the matching task(s) in your list:\n"
                 + taskList;
     }
 
@@ -117,7 +124,7 @@ public class Ui {
      */
     public String printEventFormat() {
         return " (;´･д･`) Doesn't match the event format.\n"
-            + "Please use \"event ... /at dd/mm/yyyy 0000\" (in 24hr).\n";
+                + "Please use \"event ... /at dd/mm/yyyy 0000\" (in 24hr).\n";
     }
 
     /**
@@ -125,39 +132,41 @@ public class Ui {
      */
     public String printDeadlineFormat() {
         return " (. ﾟーﾟ) Doesn't match the deadline format.\n"
-            + "Please use \"deadline ... /by dd/mm/yyyy 0000\" (in 24hr).\n";
+                + "Please use \"deadline ... /by dd/mm/yyyy 0000\" (in 24hr).\n";
     }
 
     /**
      * Prints error messages if task description is empty or cannot be understood.
+     *
      * @param taskType
      */
     public String throwErrorMessage(String taskType) {
         switch (taskType) {
-        case "todo" :
+        case "todo":
             return "∑(゜Д゜;) Description of a todo can't be empty.\n";
-        case "event" :
+        case "event":
             return "∑(゜Д゜;) Description of an event can't be empty.\n";
-        case "deadline" :
+        case "deadline":
             return "∑(゜Д゜;) Description of a deadline can't be empty.\n";
-        case "done" :
+        case "done":
             return "I've done nothing productive all day...you too? (⊃◜⌓◝⊂)\n";
-        case "delete" :
+        case "delete":
             return "One does not simply delete nothing.(￣ ︶ ￣;)\n";
-        default :
+        default:
             return "ಠ_ಠ OOPS!!! I'm sorry, but I don't know what that means.\n";
         }
     }
 
     public String printHelp() {
-        String help = "Come, lemme teachu baby talk (●´ω｀●):\n"
-                + "list - returns current tasks in task list.\n"
-                + "done [task number] - mark task as done.\n"
-                + "delete [task number] - delete task from task list.\n"
-                + "todo [description] - insert a todo task into task list.\n"
-                + "deadline [description] /by [dd/MM/yyyy] [0000] - insert a deadline task into task list.\n"
-                + "event [description] /at [dd/MM/yyyy] [0000] - insert an event into task list.\n"
-                + "find [keyword] - find task(s) containing keyword in task list.\n";
+        String help = "Come, lemme teachu some baby talk (●´ω｀●):\n"
+                + "todo - to add a todo task to the list.\n"
+                + "event - to add an event with date and time to the list.\n"
+                + "deadline - to add a task with deadline to the list.\n"
+                + "list - to see items on the list.\n"
+                + "done - to mark a completed task as done.\n"
+                + "delete - to remove a task from the list.\n"
+                + "find - to see item(s) containing the keyword from the list.\n"
+                + "bye - to end the session.";
         return help;
     }
 }

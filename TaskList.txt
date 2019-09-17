@@ -1,0 +1,5 @@
+T | 1 | CS3241 lab 2
+D | 1 | CS2100 lab 4 | 23/09/2019 1800
+T | 0 | dinner with friends tomorrow
+E | 0 | wedding anniversary dinner | 30/09/2019 1800
+D | 0 | CS3230 assignment | 01/10/2019 1159

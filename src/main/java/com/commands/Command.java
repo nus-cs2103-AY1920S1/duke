@@ -31,6 +31,10 @@ public class Command {
         return continuesProgram;
     }
 
+    public String getCommandWord() {
+        return command;
+    }
+
     /**
      * To help with debugging.
      */

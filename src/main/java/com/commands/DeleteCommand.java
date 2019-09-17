@@ -8,6 +8,7 @@ import com.util.StaticStrings;
 
 import com.exceptions.DukeException;
 import com.exceptions.command.*;
+import com.util.stats.DukeStatistics;
 
 public class DeleteCommand extends Command {
 
@@ -35,6 +36,7 @@ public class DeleteCommand extends Command {
 
         Task deletedTask = taskList.deleteTask(deleteIdx);
         storage.save(taskList.getTaskArr());
+        new DukeStatistics().addLog(this, deletedTask);
         ui.showDeleteTaskResponse(deletedTask, taskList.getTaskArr());
     }
 

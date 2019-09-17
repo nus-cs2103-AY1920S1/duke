@@ -45,4 +45,25 @@ public class StaticStrings {
     public static final String TOO_MANY_DELETE_INPUT = "Please just put the index of task in list after \"delete\" and nothing else.";
     public static final String NON_INT_PROVIDED_DELETE = "Please enter an integer after \"delete\".";
 
+    // Messages for Statistics (Storage)
+
+    public static final String ERROR_LOG_NOT_FOUND = "Error in reading in execution log file from given path, creating new file.";
+    public static final String ERROR_SAVE_LOG = "Error in saving this execution to log, this will be missing.";
+
+    // Message for Statistics (Execution)
+
+    public static final String STATS_NUM_DONE = "No. of tasks marked done so far: ";
+    public static final String STATS_LIST_DONE = "List of tasks done so far: ";
+    public static final String STATS_NUM_DONE_PASTWEEK = "No. of tasks marked done in the past 7 days: ";
+    public static final String STATS_NUM_DONE_TODO = "No. of ToDo tasks marked done so far: ";
+    public static final String STATS_NUM_DONE_DEADLINE = "No. of Deadline tasks marked done so far: ";
+    public static final String STATS_NUM_DONE_EVENT = "No. of Event tasks marked done so far: ";
+
+    public static final String STATS_NUM_DELETED = "No. of tasks deleted so far: ";
+    public static final String STATS_LIST_TASKS_DELETED = "List of tasks deleted so far: ";
+    public static final String STATS_NUM_UNDONE_TASKS_DELETED = "No. of tasks deleted that was not done: ";
+
+    public static final String STATS_SEARCHED_KEYWORDS = "List of words searched so far: ";
+    public static final String STATS_SEARCHED_KEYWORDS_PASTWEKK = "List of words searched in the past 7 days: ";
+
 }

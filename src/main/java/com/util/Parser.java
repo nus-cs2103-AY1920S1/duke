@@ -50,6 +50,9 @@ public class Parser {
         case "delete":
             currCommand = parseDeleteCommand(fullUserInputArr);
             break;
+        case "stats":
+            currCommand = new StatsCommand();
+            break;
         default:
             throw new UnknownCommandException();
         }
@@ -99,6 +102,10 @@ public class Parser {
         if (!hasSubCommandDescription) {
             throw new EmptyDescriptionException(subCommand);
         }
+
+        assert firstSubCommandIdx > 1 : "firstSubCommandIdx not be the first word in input";
+        assert firstSubCommandIdx < numInputWords -1 : "firstSubCommandIdx should not be the last word in user input";
+        assert firstSubCommandIdx != lastSubCommandIdx : "there should only be one subcommand";
 
         String taskDescription = joinArrIntoStr(fullUserInputArr.subList(1, firstSubCommandIdx));
         String subCommandDescription = joinArrIntoStr(fullUserInputArr.subList(firstSubCommandIdx+1, numInputWords));

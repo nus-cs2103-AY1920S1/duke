@@ -5,6 +5,7 @@ import com.tasks.*;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Deals with interaction with the user.
@@ -96,12 +97,11 @@ public class Ui {
      * @return Message in a single string
      */
     private ArrayList<String> listOfTasksMessage(ArrayList<Task> taskArr) {
-        ArrayList<String> output = new ArrayList<String>();
-        for (Task task : taskArr) {
-            int currTaskIdx = taskArr.indexOf(task) + 1;
-            String currTaskString = currTaskIdx + ". " + task.toString();
-            output.add(currTaskString);
-        }
+        ArrayList<String> output = taskArr
+                .stream()
+                .map((t) -> (taskArr.indexOf(t) + 1) + ". " + t.toString())
+                .collect(Collectors
+                        .toCollection(ArrayList::new));;
         return output;
     }
 
@@ -126,17 +126,16 @@ public class Ui {
      * @return Final message to be output to console, in a single string
      */
     private String joinWithNewLines(ArrayList<String> message) {
-        String output = "";
-        int numLines = 1;
-        for (String line : message) {
-            // Add new line if not last sentence in message
-            if (numLines != message.size()) {
-                output += indentMessage(line + "\n");
-                numLines++;
-            } else {
-                output += indentMessage(line);
-            }
-        }
+        int lastIdx = message.size()-1;
+        String output = message
+                .subList(0, lastIdx)
+                .stream()
+                .reduce("",
+                        (subOutput, line) -> subOutput + indentMessage(line) + "\n");
+        output += indentMessage(message.get(lastIdx));
+
+        assert !output.substring(output.length() - 2).equals("\n") : "message should not end with newline";
+
         return output;
     }
 
@@ -145,6 +144,7 @@ public class Ui {
      * @param message A string
      */
     public void showMessage(String message) {
+        assert message.substring(0, 3) == StaticStrings.INDENT : "message should be indented";
         System.out.println(StaticStrings.BORDER);
         System.out.println(message);
         System.out.println(StaticStrings.BORDER);

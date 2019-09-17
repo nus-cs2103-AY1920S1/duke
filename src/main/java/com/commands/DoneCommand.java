@@ -7,6 +7,7 @@ import com.util.StaticStrings;
 
 import com.exceptions.DukeException;
 import com.exceptions.command.*;
+import com.util.stats.DukeStatistics;
 
 public class DoneCommand extends Command {
 
@@ -32,8 +33,10 @@ public class DoneCommand extends Command {
             throw new DukeExecuteException(StaticStrings.NOT_IN_RANGE + numTasks);
         }
         try {
+            assert doneIdx < numTasks : "index of done task should be equals to or less than number of tasks";
             Task doneTask = taskList.markTaskDone(doneIdx);
             storage.save(taskList.getTaskArr());
+            new DukeStatistics().addLog(this, doneTask);
             ui.showMarkTaskDoneResponse(doneTask);
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());

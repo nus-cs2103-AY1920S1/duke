@@ -6,6 +6,7 @@ import com.TaskList;
 import com.util.Storage;
 import com.util.Parser;
 import com.util.Ui;
+import com.util.stats.StatsStorage;
 
 /**
  * A program named Duke.
@@ -20,8 +21,8 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
-    public Duke(String filePath) throws DukeException {
-        storage = new Storage(filePath);
+    public Duke() throws DukeException {
+        storage = new Storage("F:\\CS2103\\duke\\data\\duke.txt");
         taskList = new TaskList(storage.load());
         parser = new Parser();
         ui = new Ui();
@@ -35,6 +36,7 @@ public class Duke {
                 String userFullInput = ui.readUserInput();
                 Command c = parser.parse(userFullInput);
                 c.execute(this.getTaskList(), this.getStorage());
+                assert doesProgramContinue == true : "doesProgramContinue should be true";
                 doesProgramContinue = c.continuesProgram();
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
@@ -43,7 +45,7 @@ public class Duke {
     }
 
     public static void main(String[] args) throws DukeException {
-        new Duke("F:\\CS2103\\duke\\data\\duke.txt").run();
+        new Duke().run();
     }
 
     //////////////

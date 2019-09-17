@@ -1,28 +1,50 @@
 # User Guide
 
-## Introduction
-Duke is a desktop application that helps keep track of the tasks that you have to do.
+### <a name="toc"></a>Table of Contents
+- [Introduction](#intro)
+- [Features](#features)
+  - [Task List](#f-tasklist)
+  - [Different types of tasks](#f-types)
+  - [Tracking task progress](#f-done)
+  - [Task filtering](#f-find)
+  - [Undoing of changes](#f-undo)
+- [Usage](#usage)
+  - [todo](#u-todo)
+  - [deadline](#u-deadline)
+  - [event](#u-event)
+  - [list](#u-list)
+  - [done](#u-done)
+  - [delete](#u-delete)
+  - [undo](#u-undo)
+  - [bye](#u-bye)
 
-## Features 
+## <a name="intro"></a>Introduction
+Duke is a desktop application that helps keep track of the tasks that you have to do. This user guide explains the different features that have been implemented, the commands that are available to you, as well as examples on how to use the commands.
 
-### Task List
+[:point_up_2:](#toc)
+
+## <a name="features"></a>Features 
+
+### <a name="f-tasklist"></a>1. Task List
 Duke maintains a task list that you can add and remove different tasks into in order to keep track of them.
 
-### Different types of tasks
+### <a name="f-types"></a>2. Different types of tasks
 Duke supports 3 types of task types, "To-do", "Deadline", and "Event" tasks.
 
-### Tracking task progress
+### <a name="f-done"></a>3. Tracking task progress
 Duke allows you to indicate a tasks state of completion, whether it is undone or done.
 
-### Task filtering
+### <a name="f-find"></a>4. Task filtering
 Duke allows you to find tasks that contain your specified keywords.
 
-### Undoing of changes
+### <a name="f-undo"></a>5. Undoing of changes
 Duke allows you to undo changes in case you make any mistakes.
 
-## Usage
+[:point_up_2:](#toc)
 
-### `todo` - Creates a "To-do" task
+## <a name="usage"></a>Usage
+
+### <a name="u-todo"></a>`todo` - Creates a "To-do" task
 ```
 todo <task description>
 ```
@@ -48,7 +70,11 @@ _____________________________________________________
 ```
 </details>
 
-### `deadline` - Creates a "Deadline" task
+[:point_up_2:](#toc)
+
+##
+
+### <a name="u-deadline"></a>`deadline` - Creates a "Deadline" task
 ```
 deadline <task description> /by <deadline time>
 ```
@@ -80,7 +106,11 @@ _____________________________________________________
 ```
 </details>
 
-### `event` - Creates a "Event" task
+[:point_up_2:](#toc)
+
+##
+
+### <a name="u-event"></a>`event` - Creates a "Event" task
 ```
 event <task description> /at <event time>
 ```
@@ -112,7 +142,11 @@ _____________________________________________________
 ```
 </details>
 
-### `list` - Lists all recorded events
+[:point_up_2:](#toc)
+
+##
+
+### <a name="u-list"></a>`list` - Lists all recorded events
 ```
 list
 ```
@@ -139,7 +173,11 @@ _____________________________________________________
 ```
 </details>
 
-### `done` - Marks task as done
+[:point_up_2:](#toc)
+
+##
+
+### <a name="u-done"></a>`done` - Marks task as done
 ```
 done <index>
 ```
@@ -177,7 +215,11 @@ _____________________________________________________
 ```
 </details>
 
-### `delete` - Deletes a task
+[:point_up_2:](#toc)
+
+##
+
+### <a name="u-delete"></a>`delete` - Deletes a task
 ```
 delete <index>
 ```
@@ -215,7 +257,11 @@ _____________________________________________________
 ```
 </details>
 
-### `undo` - Undoes a change
+[:point_up_2:](#toc)
+
+##
+
+### <a name="u-undo"></a>`undo` - Undoes a change
 ```
 undo
 ```
@@ -262,7 +308,11 @@ _____________________________________________________
 ```
 </details>
 
-### `find` - Find tasks with a certain keyword
+[:point_up_2:](#toc)
+
+##
+
+### <a name="u-find"></a>`find` - Find tasks with a certain keyword
 ```
 find <keyword>
 ```
@@ -304,7 +354,11 @@ _____________________________________________________
 ```
 </details>
 
-### `bye` - Stops Duke from running
+[:point_up_2:](#toc)
+
+##
+
+### <a name="u-bye"></a>`bye` - Stops Duke from running
 ```
 bye
 ```
@@ -327,3 +381,5 @@ _____________________________________________________
 _____________________________________________________
 ```
 </details>
+
+[:point_up_2:](#toc)

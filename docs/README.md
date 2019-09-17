@@ -47,7 +47,12 @@ Adds a new tasks to todo list, doing so will:
        Number of tasks not completed: Y
        Here are the tasks in your list:**
     
-    **1.[**<Task type shown>**][** <status icon, either *v for completed* or *x for not completed* **]** <description> **(by/at:** <date in DAY MONTH DATE HH:MM:SS format> **SGT 2019)**
+    **1.[**<Task type shown>**][** <status icon> **]** <description> **(by/at:** <date in DAY MONTH DATE HH:MM:SS format> **SGT 2019)**
+    
+    Task status | Status icon
+    ------------ | -------------
+    Completed | **v**
+    Not completed | **x**
     
     Type |  Task type shown
     ------------ | -------------

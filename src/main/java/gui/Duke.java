@@ -1,11 +1,15 @@
 package gui;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.layout.*;
-import main.*;
-import task.*;
-import command.*;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import main.DukeException;
+import main.Parser;
+import main.Storage;
+import main.Ui;
+import task.TaskList;
+import task.InsufficientTaskArgumentException;
+import command.Command;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,7 +21,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
-public class Duke extends Application{
+public class Duke extends Application {
     private boolean isOpen = true;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -29,8 +33,8 @@ public class Duke extends Application{
     private Ui ui = new Ui();
     private Storage storage = new Storage("./DukeData.txt");
     private TaskList taskList;
-    private final double APP_HEIGHT = 595.0;
-    private final double APP_WIDTH = 500.0;
+    private static final double APP_HEIGHT = 595.0;
+    private static final double APP_WIDTH = 500.0;
 
     public Duke() {
 
@@ -154,7 +158,7 @@ public class Duke extends Application{
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
         stage.setScene(scene);
         stage.show();

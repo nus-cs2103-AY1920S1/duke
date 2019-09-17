@@ -1,4 +1,5 @@
 package task;
+
 import java.lang.Exception;
 
 public class InsufficientTaskArgumentException extends Exception {

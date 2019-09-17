@@ -1,13 +1,12 @@
 package task;
 
-import task.*;
 import java.util.ArrayList;
 
 public class TaskList {
     ArrayList<Task> tasks;
 
     /**
-     * Empty constructor for TaskList objects. (Creates an entirely new TaskList)
+     * Empty constructor for TaskList objects. (Creates an entirely new TaskList).
      */
     public TaskList() {
         this.tasks = new ArrayList<Task>();
@@ -56,7 +55,7 @@ public class TaskList {
     }
 
     /**
-     * Appends Task t to the back of the Tasklist
+     * Appends Task t to the back of the Tasklist.
      * @param t Task to be appended.
      * @return Task that was added.
      */
@@ -81,6 +80,11 @@ public class TaskList {
         return result;
     }
 
+    /**
+     * findAllMatches returns a list of strings that contain tasks with a name that matches desc.
+     * @param desc desc is the string of interest to filter from the TaskList.
+     * @return ArrayList of String objects.
+     */
     public ArrayList<String> findAllMatches(String desc) {
         ArrayList<String> result = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {

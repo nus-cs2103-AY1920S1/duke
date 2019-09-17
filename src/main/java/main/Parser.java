@@ -1,7 +1,13 @@
 package main;
 
-import command.*;
-
+import command.AddCommand;
+import command.Command;
+import command.AdminCommand;
+import command.DeleteCommand;
+import command.ExitCommand;
+import command.UndoCommand;
+import command.HelpCommand;
+import command.FindCommand;
 import java.util.ArrayList;
 
 public class Parser {
@@ -11,7 +17,7 @@ public class Parser {
      * @return Command that will be executed.
      * @throws DukeException if the full command does not match any command type.
      */
-    public static Command parse(String fullCommand) throws DukeException{
+    public static Command parse(String fullCommand) throws DukeException {
         String[] commandComponents = fullCommand.split(" ");
         Command c = null;
         ArrayList<String> commandArgs = new ArrayList<>();
@@ -59,9 +65,12 @@ public class Parser {
         } else if (commandComponents[0].equals("help")) {
             c = new HelpCommand();
         } else {
-            throw new DukeException("    ____________________________________________________________\n" +
-                    "    Sorry! I don't know what this command does:\n" +  "    " + fullCommand + "\n" +
-                    "    ____________________________________________________________");
+            throw new DukeException("    ____________________________________________________________\n"
+                    + "    Sorry! I don't know what this command does:\n"
+                    + "    "
+                    + fullCommand
+                    + "\n"
+                    + "    ____________________________________________________________");
         }
         return c;
     }

@@ -1,6 +1,11 @@
 package command;
-import task.*;
-import main.*;
+
+import task.InsufficientTaskArgumentException;
+import task.Task;
+import task.TaskList;
+import main.Storage;
+import main.Ui;
+
 public class AdminCommand implements Command {
     String commandType;
     int commandArg;
@@ -35,23 +40,26 @@ public class AdminCommand implements Command {
             result = result + "    " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
         result = result.equals("") ? "\n" : result;
-        String finalResult = "    ____________________________________________________________\n" +
-                "    Here are the tasks in your list:\n" +
-                result +
-                "    ____________________________________________________________";
+        String finalResult = "    ____________________________________________________________\n"
+                + "    Here are the tasks in your list:\n"
+                + result
+                + "    ____________________________________________________________";
         ui.nextLine(finalResult);
     }
 
     private void handleDoneCall(TaskList tasks, Ui ui, Storage storage) {
         Task targetedTask = tasks.get(commandArg - 1);
         Task.markAsDone(targetedTask);
-        String result = "    ____________________________________________________________\n" +
-                "     Nice! I've marked this task as done: \n" +
-                "       " + targetedTask.toString() + "\n" +
-                "    ____________________________________________________________";
+        String result = "    ____________________________________________________________\n"
+                + "     Nice! I've marked this task as done: \n"
+                + "       "
+                + targetedTask.toString()
+                + "\n"
+                + "    ____________________________________________________________";
         ui.nextLine(result);
         storage.updateTasks(tasks);
     }
+
     /**
      * execute performs the command in the gui.Duke app.
      * @param tasks TaskList that contains the list of tasks that is tracked.

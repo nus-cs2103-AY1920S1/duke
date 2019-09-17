@@ -1,10 +1,18 @@
 package main;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
-
-import task.*;
+import task.Task;
+import task.TaskList;
+import task.ToDo;
+import task.Event;
+import task.Deadline;
 
 public class Storage {
     private String filepath;
@@ -13,7 +21,7 @@ public class Storage {
     private Stack<TaskList> records;
 
     /**
-     * Constructor for Storage objects
+     * Constructor for Storage objects.
      * @param filepath String of the location for data storage.
      */
     public Storage(String filepath) {
@@ -21,7 +29,7 @@ public class Storage {
         this.records = new Stack<>();
     }
 
-    private Task getData(String[] data){
+    private Task getData(String[] data) {
         Task t = null;
         if (data[0].equals("T")) {
             t = new ToDo(data[2]);
@@ -36,10 +44,11 @@ public class Storage {
         }
         return t;
     }
+
     /**
      * Reads tasks from a previous saved file (if present) and store it in a list of tasks.
-     * @return ArrayList<Task> a list that contains the tasks from the previous save point
-     * (if a previous save point exists). Else an empty list is returned.
+     * @return ArrayList of Task objects is a list that contains the tasks from the previous save point
+     *     (if a previous save point exists). Else an empty list is returned.
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -66,7 +75,7 @@ public class Storage {
     }
 
     /**
-     * updateTasks updates the file that stores the list of tasks data.
+     * updateTasks updates records and stores the list of tasks in a txt file.
      * @param tasks TaskList. Data in tasks replaces the TaskList data from the previous file.
      */
     public void updateTasks(TaskList tasks) {
@@ -74,6 +83,10 @@ public class Storage {
         updateRecords();
     }
 
+    /**
+     * writeTasks writes tasks in the TaskList to a DukeData.txt file stored in ./ directory.
+     * @param tasks TaskList containing tasks to be written in txt file.
+     */
     public void writeTasks(TaskList tasks) {
         File data = new File(filepath);
         try {
@@ -90,12 +103,19 @@ public class Storage {
         }
     }
 
+    /**
+     * updateRecords keeps track of history to be used when user invokes undo method.
+     */
     public void updateRecords() {
         TaskList tasks = new TaskList(this.load());
         this.records.push(tasks);
         this.writeTasks(tasks);
     }
 
+    /**
+     * undo returns the previous state of TaskList one command before modification.
+     * @return TaskList containing all tasks before modification.
+     */
     public TaskList undo() {
         if (records.isEmpty()) {
             return new TaskList(this.load());

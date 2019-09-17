@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import main.Parser;
 import main.DukeException;
-import command.*;
 
 public class ParserTest {
+
     @Test
     /**
      * Checks if Parser.parse executes the command deadline correctly.

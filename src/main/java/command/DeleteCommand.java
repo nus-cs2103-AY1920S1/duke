@@ -1,6 +1,10 @@
 package command;
-import task.*;
-import main.*;
+
+import task.Task;
+import task.TaskList;
+import task.InsufficientTaskArgumentException;
+import main.Storage;
+import main.Ui;
 
 public class DeleteCommand implements Command {
 
@@ -26,12 +30,16 @@ public class DeleteCommand implements Command {
     private void handleDeleteCall(TaskList tasks, Ui ui, Storage storage) {
         Task removed = tasks.removeTask(taskNumber - 1);
         storage.updateTasks(tasks);
-        ui.nextLine("    ____________________________________________________________\n" +
-                "     Noted. I've removed this task: \n" +
-                "       " + removed.toString() + "\n" +
-                "     Now you have " + tasks.size() + " tasks in the list.\n" +
-                "    ____________________________________________________________");
+        ui.nextLine("    ____________________________________________________________\n"
+                + "     Noted. I've removed this task: \n"
+                + "       " + removed.toString()
+                + "\n"
+                + "     Now you have "
+                + tasks.size()
+                + " tasks in the list.\n"
+                + "    ____________________________________________________________");
     }
+
     /**
      * execute performs the command in the gui.Duke app.
      * @param tasks TaskList that contains the list of tasks that is tracked.
@@ -46,7 +54,6 @@ public class DeleteCommand implements Command {
         }
 
         handleDeleteCall(tasks, ui, storage);
-        //historyManager.updateRecords();
         return tasks;
     }
 

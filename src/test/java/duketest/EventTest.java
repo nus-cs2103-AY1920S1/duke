@@ -5,6 +5,7 @@ import task.Event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EventTest {
+
     @Test
     /**
      * Checks if toString() method of Event object returns the correct String for ui to show.
@@ -13,6 +14,7 @@ public class EventTest {
         assertEquals(new Event("Dance competition", "15/08/2019", "1600").toString(),
                 "[E][-] Dance competition (at: 15th August 2019 4pm)");
     }
+
     @Test
     /**
      * Checks if toDataFormat() method of Event object returns the correct String for storage to store.

@@ -33,6 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String toDataFormat() {
-        return "E | " + super.getStatusIcon() + " | " + super.description + " | " + this.date.origin() + " | " + this.time.origin();
+        return "E | " + super.getStatusIcon() + " | " + super.description + " | " + this.date.origin() + " | "
+                + this.time.origin();
     }
 }

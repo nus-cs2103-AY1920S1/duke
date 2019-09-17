@@ -12,7 +12,7 @@ public class FindCommand implements Command {
     private String stringArgument;
 
     /**
-     * Constructor for FindCommand
+     * Constructor for FindCommand.
      * @param stringArgument String. The keyword to search for in a tasklist.
      */
     public FindCommand(String stringArgument) {
@@ -27,6 +27,7 @@ public class FindCommand implements Command {
         result = result.equals("") ? "\n" : result;
         return result;
     }
+
     /**
      * execute performs the command in the gui.Duke app.
      * @param tasks TaskList that contains the list of tasks that is tracked.
@@ -38,10 +39,10 @@ public class FindCommand implements Command {
     public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws InsufficientTaskArgumentException {
         ArrayList<String> tasksThatMatch = tasks.findAllMatches(this.stringArgument);
         String matched = concatenateStrings(tasksThatMatch);
-        String result = "    ____________________________________________________________\n" +
-                "    Here are the matching tasks in your list:\n" +
-                matched +
-                "    ____________________________________________________________";
+        String result = "    ____________________________________________________________\n"
+                + "    Here are the matching tasks in your list:\n"
+                + matched
+                + "    ____________________________________________________________";
         ui.nextLine(result);
         return tasks;
     }

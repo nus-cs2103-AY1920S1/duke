@@ -53,18 +53,21 @@ public class Ui {
      * @param msg Error message that is printed.
      */
     public void showError(String msg) {
-        System.out.println("    ____________________________________________________________\n" + "    " + msg + "\n" +
-                "    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n"
+                + "    "
+                + msg
+                + "\n"
+                + "    ____________________________________________________________");
     }
 
     /**
      * Shows the welcome message of the user interface.
      */
     public String showWelcome() {
-        String welcome = "    ____________________________________________________________\n" +
-                "     Hello! I'm Duke. Use \"list\" to view your current tasks.\n" +
-                "     What can I do for you today?\n" +
-                "    ____________________________________________________________";
+        String welcome = "    ____________________________________________________________\n"
+                + "     Hello! I'm Duke. Use \"list\" to view your current tasks.\n"
+                + "     What can I do for you today?\n"
+                + "    ____________________________________________________________";
         System.out.println(welcome);
         return welcome;
     }
@@ -74,8 +77,8 @@ public class Ui {
      */
     public void showExit() {
         sc.close();
-        System.out.println("    ____________________________________________________________\n" +
-                "     Bye. Hope to see you again soon!\n" +
-                "    ____________________________________________________________");
+        System.out.println("    ____________________________________________________________\n"
+                + "     Bye. Hope to see you again soon!\n"
+                + "    ____________________________________________________________");
     }
 }

@@ -24,6 +24,9 @@ javafx {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:win'
+    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:linux'
+    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:mac'
 }
 
 test {

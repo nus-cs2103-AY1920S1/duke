@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ *
+ */
 public abstract class Command {
 
     boolean isExit;
@@ -21,8 +24,21 @@ public abstract class Command {
         return isExit;
     }
 
+    /**
+     * Abstract method to execute command
+     * @param taskList the list of tasks
+     * @param storage storage for saving and loading from file
+     * @throws DukeException
+     * @throws IOException
+     */
     public abstract void executeCommand(TaskList taskList, Storage storage) throws DukeException, IOException;
 
+
+    /**
+     * For level8 to transform a given string to a date
+     * @param date given string
+     * @return converted date
+     */
     public String convertDate(String date) {
         if (date.indexOf('/') > -1) {
             if (date.indexOf(' ') > -1) {

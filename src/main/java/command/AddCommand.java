@@ -7,7 +7,6 @@ import task.ToDo;
 import util.Storage;
 import util.Ui;
 
-
 public class AddCommand extends Command {
 
     private String command;
@@ -15,7 +14,6 @@ public class AddCommand extends Command {
     public AddCommand(String command) {
         this.command = command;
     }
-
     @Override
     public void executeCommand(TaskList taskList, Storage storage) {
         String desc;

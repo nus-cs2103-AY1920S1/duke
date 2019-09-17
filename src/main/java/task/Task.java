@@ -9,18 +9,34 @@ public class Task {
         this.isDone = false;
     }
 
+
+    /**
+     * @return the description of the task
+     */
     public String getDesc() {
         return this.desc;
     }
 
+
+    /**
+     * @return the status of a task ([✘] or [✓])
+     */
     private String getStatus() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+
+    /**
+     * @return the status of a task(0 or 1)
+     */
     public int getDone() {
         return isDone ? 1 : 0;
     }
 
+
+    /**
+     * mark a task as done
+     */
     public void markAsDone() {
         isDone = true;
     }

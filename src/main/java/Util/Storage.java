@@ -21,6 +21,9 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /** load an existing taskList from a filepath
+     * @return reformat the file and add them to a new taskList
+     */
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
         try {
@@ -49,6 +52,11 @@ public class Storage {
         return tasks;
     }
 
+    /** Save the current taskList to a file
+     * @param tasks current taskList
+     * @throws DukeException
+     * @throws IOException
+     */
     public void save(List<Task> tasks) throws DukeException, IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
         for (Task task : tasks) {

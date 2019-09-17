@@ -11,6 +11,10 @@ import command.UnknownCommand;
 
 public class Parser {
 
+    /** Parse the command according to user input
+     * @param command user input
+     * @return parse to corresponding command
+     */
     public static Command parse(String command) {
         if (command.contains(Instruction.BYE.toString())) {
             return new ExitCommand(command);

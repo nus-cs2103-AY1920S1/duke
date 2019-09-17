@@ -2,21 +2,17 @@ package dude.helper;
 
 import dude.fxgui.DialogBox;
 import dude.task.Task;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles reading from user input and printing to user interface.
  */
 public class Ui {
-    public String separationLine = "__";
     private VBox dialogContainer;
     private TextField userInput;
     public Image user = new Image(this.getClass().getResourceAsStream("/images/userSleipnir.png"));

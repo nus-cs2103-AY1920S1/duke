@@ -34,9 +34,13 @@ public class Dude extends Application {
      */
     public Dude() {
         this.filePath = new File("").getAbsolutePath() + "/data/duke.txt";
-        ui = new Ui(userInput);
-        storage = new Storage(filePath);
+        setupScrollPane();
+        setupDialogContainer();
+        setupInputTextField();
+        ui = new Ui(dialogContainer, userInput);
+        storage = new Storage(filePath,dialogContainer);
         Parser.setFilePath(filePath);
+        ui.showWelcome();
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
@@ -48,18 +52,11 @@ public class Dude extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Set up display window components
-        setupScrollPane();
-        setupDialogContainer();
-        setupInputTextField();
         setupSendButton();
         AnchorPane mainLayout = setupAnchorPaneLayout();
 
         // Create Stage
         createStage(primaryStage, mainLayout);
-
-        ui = new Ui(dialogContainer, userInput);
-        storage = new Storage(filePath, dialogContainer);
-        ui.showWelcome();
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();

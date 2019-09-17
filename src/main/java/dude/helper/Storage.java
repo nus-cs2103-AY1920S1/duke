@@ -4,6 +4,7 @@ import dude.task.Deadline;
 import dude.task.Event;
 import dude.task.Task;
 import dude.task.Todo;
+import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,8 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
-import javafx.scene.layout.VBox;
 
 /**
  * Handles reading from and writing to save file on hard disk.
@@ -40,6 +39,7 @@ public class Storage {
     public ArrayList<Task> load() throws IOException, NoSuchElementException {
         ArrayList<Task> tasks = new ArrayList<>();
         File listFile = new File(filePath);
+        listFile.getParentFile().mkdir();
         listFile.createNewFile(); // Directory data needs to exist already
 
         Scanner fileScanner = new Scanner(listFile);

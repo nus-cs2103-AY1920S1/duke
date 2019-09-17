@@ -37,8 +37,8 @@ public class UpdateCommand extends Command {
             storage.writeTaskToFile(tasks);
             return message;
         } catch (IndexOutOfBoundsException ex) {
-        throw new WrongTaskFormatException("To update a task, you should follow this format:\n"
-                + "update <task number> <task description> [optional]<time in DD/MM/YYYY HHMM>");
+            throw new WrongTaskFormatException("To update a task, you should follow this format:\n"
+                    + "update <task number> <task description> [optional]<time in DD/MM/YYYY HHMM>");
         }
     }
 }

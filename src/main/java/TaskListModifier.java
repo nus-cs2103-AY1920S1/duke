@@ -52,9 +52,8 @@ public class TaskListModifier {
                 taskList.remove(taskNumber);
                 FileWriting.writeToFile(taskList);
             } catch (IndexOutOfBoundsException | IOException err){
-                System.out.println("You only have " + taskList.size() + " tasks, please choose a number from that\n");
-                ui.setGuidedUserInterfaceMsg("You only have " + taskList.size() + " tasks, please choose a number " +
-                        "from that\n");
+                ui.printToConsoleAndGui("You only have " + taskList.size() +
+                        " tasks, please choose a number from that.\n");
             }
         } else {
 
@@ -65,9 +64,8 @@ public class TaskListModifier {
                 ui.setTaskDone(taskList, taskNumber);
                 FileWriting.writeToFile(taskList);
             } catch (IndexOutOfBoundsException | IOException err) {
-                System.out.println("You only have " + taskList.size() + " tasks, please choose a number from that\n");
-                ui.setGuidedUserInterfaceMsg("You only have " + taskList.size() + " tasks, please choose a number " +
-                        "from that\n");
+                ui.printToConsoleAndGui("You only have " + taskList.size() +
+                        " tasks, please choose a number from that.\n");
             }
         }
     }

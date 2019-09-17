@@ -12,7 +12,7 @@ It's friendly chat-bot style interface makes task management as easy as talking 
 
 ## 2. Quick Start
 1. Ensure you have Java `11` or above installed on your computer.
-2. Download the latest `duke.jar` here.
+2. Download the latest `duke.jar` [here](https://github.com/arjavibahety/duke/releases/tag/A-Release).
 3. Copy the file to the folder you wish to use.
 4. Open your terminal and type `java -jar <path to jar file>` and hit enter. The GUI will be displayed.
 5. Type a command in the text box and press `Enter` key. Queen_bb will respond accordingly.

@@ -114,6 +114,8 @@ public class Parser {
 
         assert toParse.split("/by").length > 1: "Deadline command did not use /by delimiter";
 
+        if(!toParse.contains("/by"))
+            throw new DukeException(DATETIME_ERROR);
         if (toParse.split("/by")[1].trim().split(" ").length != 2) {
             throw new DukeException(DATETIME_ERROR);
         }
@@ -148,8 +150,14 @@ public class Parser {
         }
 
         assert toParse.split("/at").length > 1: "Event command did not use /at delimiter";
-
+        if(!toParse.contains("/at"))
+            throw new DukeException(DATETIME_ERROR);
         //Check if both date and time are specified
+
+        if(toParse.split("/at").length < 2) {
+            throw new DukeException(DATETIME_ERROR);
+        }
+
         if (toParse.split("/at")[1].trim().split(" ").length != 2) {
             throw new DukeException(DATETIME_ERROR);
         }

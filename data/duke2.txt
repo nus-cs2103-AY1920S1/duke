@@ -1,7 +1,1 @@
-D|1|Send Email|9/9/2019 2300
-E|1|Friday Band Rehearsal|13/9/2019 1900
-T|1|RicardoMilos
-T|0|Buy Groceries
-E|0|Music Festival|29/10/2019 1930
-D|0|Finish Math Quiz|11/11/2020 2359
-E|0|Math for AI Symposium|6/12/2020 1030
+T|0|4

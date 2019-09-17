@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.TaskList;
@@ -21,7 +22,7 @@ public class DeadlineCommand extends Command {
      * @param timing Timing of Deadline to be completed by.
      * @return Response to be sent to the GUI.
      */
-    public DeadlineCommand(String description, String date, String timing) {
+    public DeadlineCommand(String description, String date, String timing) throws DukeException {
         this.newTask = new Deadline(description, date, timing);
     }
 

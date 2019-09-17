@@ -83,6 +83,7 @@ public class Storage {
             fileInputStream.close();
             return tasksLoadedFromFilePath;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new DukeException(LOADING_ERROR);
         }
     }
@@ -126,7 +127,7 @@ public class Storage {
         }
     }
 
-    private Deadline readAndGetDeadline(String fileData) {
+    private Deadline readAndGetDeadline(String fileData) throws DukeException {
         String[] fileTokens = fileData.split("\\|");
         String[] dateTimeTokens = fileTokens[3].split(" ");
         String taskDate = dateTimeTokens[0];
@@ -144,7 +145,7 @@ public class Storage {
 
     }
 
-    private Event readAndGetEvent(String fileData) {
+    private Event readAndGetEvent(String fileData) throws DukeException {
         String[] fileTokens = fileData.split("\\|");
         String[] dateTimeTokens = fileTokens[3].split(" ");
         String taskDate = dateTimeTokens[0];

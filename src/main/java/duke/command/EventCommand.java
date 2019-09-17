@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.dukeexception.DukeException;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -21,7 +22,7 @@ public class EventCommand extends Command {
      * @param timing Timing of Event to attend.
      * @return Response to be sent to the GUI.
      */
-    public EventCommand(String description, String date, String timing) {
+    public EventCommand(String description, String date, String timing) throws DukeException {
         this.newTask = new Event(description, date, timing);
     }
 

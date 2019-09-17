@@ -2,6 +2,7 @@ package duke.task;
 
 import duke.datetime.Date;
 import duke.datetime.Timing;
+import duke.dukeexception.DukeException;
 
 /**
  * Represents an actual deadline that the user has to meet.
@@ -19,7 +20,7 @@ public class Deadline extends Task {
      * @param timing Timing of deadline.
      * @param done Completion status of deadline.
      */
-    public Deadline(String description, String date, String timing, int done) {
+    public Deadline(String description, String date, String timing, int done) throws DukeException {
         super(description, done);
         this.date = new Date(date);
         this.timing = new Timing(timing);
@@ -55,7 +56,7 @@ public class Deadline extends Task {
      * @param date Date of deadline.
      * @param timing Timing of deadline.
      */
-    public Deadline(String description, String date, String timing) {
+    public Deadline(String description, String date, String timing) throws DukeException {
         super(description);
         this.date = new Date(date);
         this.timing = new Timing(timing);

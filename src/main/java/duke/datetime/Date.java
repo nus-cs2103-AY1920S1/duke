@@ -1,5 +1,8 @@
 package duke.datetime;
 
+import duke.Duke;
+import duke.dukeexception.DukeException;
+import static duke.dukeexception.DukeException.*;
 /**
  * Represents a date in the format Day/Month/Year.
  */
@@ -18,12 +21,24 @@ public class Date {
      *
      * @param dateString String to parse into Date.
      */
-    public Date(String dateString) {
-        this.dateString = dateString;
-        String[] tokens = dateString.split("/");
-        this.day = Integer.parseInt(tokens[0]);
-        this.month = Integer.parseInt(tokens[1]);
-        this.year = Integer.parseInt(tokens[2]);
+    public Date(String dateString) throws DukeException {
+        try {
+            this.dateString = dateString;
+            String[] tokens = dateString.split("/");
+            this.day = Integer.parseInt(tokens[0]);
+            this.month = Integer.parseInt(tokens[1]);
+            this.year = Integer.parseInt(tokens[2]);
+
+            if(day > 31) {
+                throw new DukeException(DATETIME_ERROR);
+            }
+            if(month > 12 || month  < 1) {
+                throw new DukeException(DATETIME_ERROR);
+            }
+
+        } catch (Exception de) {
+            throw new DukeException(DATETIME_ERROR);
+        }
     }
 
     /**

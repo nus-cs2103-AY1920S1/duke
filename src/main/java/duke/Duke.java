@@ -49,27 +49,35 @@ public class Duke {
             this.metaData.writeMetaData(filePath);
             return ui.getFilePathOpenedSuccessfullyResponse(filePath);
         } catch (DukeException e) {
+            Response toReturn = ui.getLoadingErrorResponse(filePath);
             if(e.getMessage().equals(LOADING_ERROR)) {
                 this.taskList = new TaskList();
-                createNewDataFilePath(filePath);
+                toReturn = createNewDataFilePath(filePath);
             }
-            return ui.getLoadingErrorResponse(filePath);
+
+            return toReturn;
         }
     }
 
-    private void createNewDataFilePath(String filePath) {
+    private Response createNewDataFilePath(String filePath) {
         File tempFile = new File(filePath);
 
         try {
             if (!tempFile.exists()) {
                 tempFile.getParentFile().mkdirs();
+
                 tempFile.createNewFile();
             }
             this.metaData.writeMetaData(filePath);
+            return ui.getLoadingErrorResponse(filePath);
         } catch (IOException e) {
-            ui.getErrorResponse("Error initializing new file " + filePath);
+            return ui.getErrorResponse("Error initializing new file " + filePath);
         } catch (DukeException de) {
-            ui.getErrorResponse("Error writing .metadata");
+            return ui.getErrorResponse("Error writing .metadata");
+        } catch (NullPointerException ne) {
+            return ui.getErrorResponse("Parent directory cannot be null! " +
+                    "Try \"data/duke.txt\""
+                    + "\n WARNING: Your tasks are NOT being saved.");
         }
     }
 

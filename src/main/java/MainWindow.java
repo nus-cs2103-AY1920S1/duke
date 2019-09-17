@@ -1,3 +1,8 @@
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.application.Platform;
+
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
@@ -56,5 +61,22 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            exit();
+        }
+    }
+
+    private void exit() {
+        Timer timer = new Timer();
+        TimerTask exitTask = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.exit();
+                System.exit(0);
+            }
+        };
+
+        timer.schedule(exitTask, 3000);
     }
 }

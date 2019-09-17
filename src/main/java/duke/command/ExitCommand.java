@@ -25,7 +25,7 @@ public class ExitCommand extends Command {
     @Override
     public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.saveTasks(tasks);
-        return ui.getExitMsg(); // TODO: figure out how to exit GUI
+        return ui.getExitMsg();
     }
 
     /**

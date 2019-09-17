@@ -88,7 +88,9 @@ public class Ui {
      * @return String containing the exit message.
      */
     public String getExitMsg() {
-        return "Your tasks have been saved.\nBye. Hope to see you again soon!";
+        return "Your tasks have been saved.\n"
+                + "Bye! The app will close in 3 seconds.\n"
+                + "Hope to see you again soon!";
     }
 
     /**

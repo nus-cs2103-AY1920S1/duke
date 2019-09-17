@@ -78,7 +78,7 @@ public class Storage {
                 printWriter.flush();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error! file not loaded into database.");
         }
     }
 }

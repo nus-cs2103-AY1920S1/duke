@@ -1,5 +1,8 @@
 package gui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.layout.*;
 import main.*;
 import task.*;
 import command.*;
@@ -8,11 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
@@ -27,7 +27,7 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Vanillite.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Rowlet.jpg"));
     private Ui ui = new Ui();
-    private Storage storage = new Storage("./src/main/java/DukeData.txt");
+    private Storage storage = new Storage("./DukeData.txt");
     private TaskList taskList;
     private HistoryManager historyManager = new HistoryManager(storage);
     private final double APP_HEIGHT = 595.0;
@@ -88,7 +88,7 @@ public class Duke extends Application{
     }
 
     private void setScrollPaneStyle() {
-        scrollPane.setPrefSize(495, 538);
+        scrollPane.setPrefSize(510, 538);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setStyle("-fx-background: grey;");
@@ -116,7 +116,7 @@ public class Duke extends Application{
     }
 
     private void setUserInputStyle(Stage stage) {
-        userInput.setPrefWidth(415.0);
+        userInput.setPrefWidth(435.0);
         userInput.setPrefHeight(50.0);
         // Giving "Enter" functionality to input.
         userInput.setOnAction((event) -> {
@@ -138,6 +138,7 @@ public class Duke extends Application{
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
+        //Pane mainLayout = new Pane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
@@ -155,7 +156,6 @@ public class Duke extends Application{
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
         stage.setScene(scene);
         stage.show();
     }

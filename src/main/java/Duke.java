@@ -5,17 +5,22 @@ import duke.tasklist.TaskList;
 import duke.ui.UI;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
 /**
  * The main class of the program.
  */
 public class Duke {
 
-    public static final String filepath = "Data/Duke.txt";
+    /**
+     * This specifies the filepath for use.
+     */
+    public static final String filepath = "Data/Tasks.txt";
+
     /**
      * To indicate whether the program is done.
      */
@@ -47,7 +52,7 @@ public class Duke {
     private VBox dialogContainer;
 
     /**
-     * The box for the user input;
+     * The box for the user input.
      */
     private TextField userInput;
 
@@ -78,12 +83,18 @@ public class Duke {
     }
 
     /**
-     * To exit the program;
+     * To exit the program.
      */
     public void terminate() {
         this.exitProgram = true;
     }
 
+    /**
+     * This method produces a response from Radomir to be displayed.
+     * @param input The user's input.
+     * @return Radomir's response in string form.
+     * @throws Exception Handles exceptions that occurs when the method runs.
+     */
     public String getResponse(String input) throws Exception {
         if (exitProgram) {
             return "You said you are leaving so please leave >:(";

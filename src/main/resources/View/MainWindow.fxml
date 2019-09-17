@@ -9,15 +9,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" styleClass="ap" stylesheets="@../CSSFiles/Style.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="MainWindow">
+<AnchorPane maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" styleClass="ap" stylesheets="@../CSSFiles/Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutX="3.0" layoutY="757.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="428.0" promptText="Type your request here!" styleClass="text" stylesheets="@../CSSFiles/Style.css" AnchorPane.bottomAnchor="2.0">
+        <TextField fx:id="userInput" layoutX="3.0" layoutY="757.0" onAction="#handleUserInput" prefHeight="40.0" prefWidth="428.0" promptText="Type your request here!" styleClass="text" stylesheets="@../CSSFiles/Style.css" AnchorPane.bottomAnchor="3.0">
          <font>
-            <Font name="Showcard Gothic" size="15.0" />
+            <Font name="Impact" size="17.0" />
          </font></TextField>
-        <Button fx:id="sendButton" layoutX="517.0" layoutY="757.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="40.0" prefWidth="80.0" styleClass="sendButton" stylesheets="@../CSSFiles/Style.css" text="Send!" textAlignment="CENTER" textFill="#110404">
+        <Button fx:id="sendButton" layoutX="517.0" layoutY="757.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="39.0" prefWidth="80.0" styleClass="sendButton" stylesheets="@../CSSFiles/Style.css" text="SEND!" textAlignment="CENTER" textFill="#110404">
          <font>
-            <Font name="Showcard Gothic" size="19.0" />
+            <Font name="Impact" size="20.0" />
          </font></Button>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" prefHeight="756.0" prefWidth="600.0" stylesheets="@../CSSFiles/Style.css" vvalue="1.0">
             <content>
@@ -34,9 +34,9 @@
             <String fx:value="decrement-button" />
          </styleClass>
         </ScrollPane>
-      <Button fx:id="sendButton1" layoutX="434.0" layoutY="757.0" mnemonicParsing="false" onAction="#quitTheApp" prefHeight="40.0" prefWidth="80.0" styleClass="sendButton" stylesheets="@../CSSFiles/Style.css" text="QUIT!" textAlignment="CENTER" textFill="#110404">
+      <Button fx:id="sendButton1" layoutX="434.0" layoutY="757.0" mnemonicParsing="false" onAction="#quitTheApp" prefHeight="39.0" prefWidth="80.0" styleClass="sendButton" stylesheets="@../CSSFiles/Style.css" text="QUIT!" textAlignment="CENTER" textFill="#110404">
          <font>
-            <Font name="Showcard Gothic" size="19.0" />
+            <Font name="Impact" size="20.0" />
          </font>
       </Button>
     </children>

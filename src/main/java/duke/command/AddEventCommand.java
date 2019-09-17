@@ -92,6 +92,8 @@ public class AddEventCommand extends Command {
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
     }
+
+    @Override
     public String toString() {
         if (!errorMessage.equals("noError")) {
             return errorMessage;

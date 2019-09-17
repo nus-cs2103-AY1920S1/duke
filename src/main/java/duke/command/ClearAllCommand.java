@@ -23,13 +23,14 @@ public class ClearAllCommand extends Command {
      */
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
-        for (int i = listOfTasks.size() - 1; i >= 0; i --) {
+        for (int i = listOfTasks.size() - 1; i >= 0; i--) {
             listOfTasks.removeTask(listOfTasks.get(i));
         }
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
     }
 
+    @Override
     public String toString() {
         return "Congratulations! The list is now empty!";
     }

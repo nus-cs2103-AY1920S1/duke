@@ -1,7 +1,20 @@
 package duke.parser;
 
-import duke.command.*;
-import duke.exception.DukeException;
+import duke.command.Command;
+import duke.command.AddDeadlineCommand;
+import duke.command.AddEventCommand;
+import duke.command.AddTodoCommand;
+import duke.command.ByeCommand;
+import duke.command.ClearAllCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ErrorCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.MassDeleteCommand;
+import duke.command.TutorialCommand;
+
 
 /**
  * Class that takes in a String and parse it to return a valid command.

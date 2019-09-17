@@ -44,6 +44,7 @@ public class FindCommand extends Command {
         }
     }
 
+    @Override
     public String toString() {
         if (taskList.isEmpty()) {
             return "The list is empty!";

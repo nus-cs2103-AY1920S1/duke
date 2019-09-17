@@ -25,6 +25,7 @@ public class ListCommand extends Command {
         this.taskList = listOfTasks;
     }
 
+    @Override
     public String toString() {
         if (taskList.size() == 0) {
             return "Sorry but the list is empty!";

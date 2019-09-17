@@ -32,7 +32,13 @@ public class Storage {
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
-        Scanner s = new Scanner(diskList);
+        Scanner s;
+
+        try {
+            s = new Scanner(diskList);
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("File not on disk");
+        }
 
         while (s.hasNext()) {
             String[] savedTasks = s.nextLine().split(" \\| ");

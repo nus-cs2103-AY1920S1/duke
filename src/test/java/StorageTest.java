@@ -16,8 +16,7 @@ public class StorageTest {
             assertEquals(new ArrayList<Task>(), dummy.load());
             fail();
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            assertEquals("data\\dummy.txt (The system cannot find the file specified)", e.getMessage());
+            assertEquals("File not on disk", e.getMessage());
         }
     }
 }

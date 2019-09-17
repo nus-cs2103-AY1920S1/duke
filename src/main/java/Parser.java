@@ -71,6 +71,8 @@ public class Parser {
         assert command.length() > 0 : "Please enter something";
         if (command.equals("bye")) {
             output = ui.exit();
+        } else if (command.equals("hello")) {
+            output = ui.greet();
         } else if (command.equals("list")) {
             // returns all the tasks in the list.
             output = list.getList();

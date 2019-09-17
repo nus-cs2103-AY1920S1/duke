@@ -61,8 +61,8 @@ public class TaskList {
      */
     protected String deleteTask(int y) {
         assert y < taskList.size() : "There is no task corresponding to that number";
-        if (taskList.size() == 0) {
-            return "The task list is empty\n";
+        if (taskList.size() < y) {
+            return "The index of the task to be deleted exceeds the number of tasks in the list\n";
         } else {
             taskList.remove(y - 1);
             if (taskList.size() == 1) {

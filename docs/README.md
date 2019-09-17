@@ -62,7 +62,7 @@ Now you have 3 tasks in the list.
 
 ### checking and updating taskList
 
-#### `done [taskNum]` - Mark a task as done
+#### `done [taskNum]`
 Mark a task as done.
 
 **Example of usage:**
@@ -75,7 +75,7 @@ Nice! I've marked this task as done:
   [T][✓] task 2 (by: Jan 01, 2009 0900)
 ```
 
-#### `find [keyword]` - Find a task
+#### `find [keyword]`
 
 Find tasks even if the keyword matches the taskName only partially.
 

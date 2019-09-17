@@ -2,7 +2,7 @@
 
 ## Features 
 
-### Feature 1 - Add ToDos
+# Feature 1 - Add ToDos
 Adds any todos to the list 
 
 ## Usage
@@ -20,7 +20,7 @@ Expected outcome:
 [T][x] return book
 "Now you have " + tasks.getTaskArrayList().size() + " tasks in the list."`
 
-### Feature 2 - Add Deadlines
+# Feature 2 - Add Deadlines
 Adds any deadlines to the list 
 
 ## Usage 
@@ -39,7 +39,7 @@ Expected outcome:
 [D][x] return book (by: 21st of July 2019, 6:00pm)
 "Now you have " + tasks.getTaskArrayList().size() + " tasks in the list."`
 
-### Feature 3 - Add Events
+# Feature 3 - Add Events
 Adds any events to the list 
 
 ## Usage 
@@ -58,7 +58,7 @@ Expected outcome:
 [E][x] fly to Egypt (at: 22nd of May 2019, 4:55pm)
 "Now you have " + tasks.getTaskArrayList().size() + " tasks in the list."`
 
-### Feature 4 - List
+# Feature 4 - List
 Shows the list of tasks
 
 ## Usage 
@@ -75,7 +75,7 @@ Expected outcome:
 `2. [D][x] return book (by: 21st of July 2019, 6:00pm)`
 `3. [E][x] fly to Egypt (at: 22nd of May 2019, 4:55pm)`
 
-### Feature 5 - Delete
+# Feature 5 - Delete
 Deletes a specific task in the list
 
 ## Usage 
@@ -91,7 +91,7 @@ Expected outcome:
 `1. [D][x] return book (by: 21st of July 2019, 6:00pm)`
 `2. [E][x] fly to Egypt (at: 22nd of May 2019, 4:55pm)`
 
-### Feature 5 - Done
+# Feature 5 - Done
 Marks a specific task in the list as done
 
 ## Usage 
@@ -107,7 +107,7 @@ Expected outcome:
 `1. [D][✓] return book (by: 21st of July 2019, 6:00pm)`
 `2. [E][x] fly to Egypt (at: 22nd of May 2019, 4:55pm)`
 
-### Feature 6 - Find
+# Feature 6 - Find
 Finds a specific task in the list 
 
 ## Usage 
@@ -122,7 +122,7 @@ Expected outcome:
 
 `1. [D][✓] return book (by: 21st of July 2019, 6:00pm)`
 
-### Feature 7 - Exit
+# Feature 7 - Exit
 Exits the program
 
 ## Usage 

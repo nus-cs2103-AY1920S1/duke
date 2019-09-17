@@ -13,13 +13,13 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
     private static String WELCOME_MESSAGE =
-        "Hello! I'm\n" +
-        " ____        _        \n" +
-        "|  _ \\ _   _| | _____ \n" +
-        "| | | | | | | |/ / _ \\\n" +
-        "| |_| | |_| |   <  __/\n" +
-        "|____/ \\__,_|_|\\_\\___|\n" +
-        "What can I do for you?";
+        "Hello! I'm\n"
+        + " ____        _        \n"
+        + "|  _ \\ _   _| | _____ \n"
+        + "| | | | | | | |/ / _ \\\n"
+        + "| |_| | |_| |   <  __/\n"
+        + "|____/ \\__,_|_|\\_\\___|\n"
+        + "What can I do for you?";
 
     @FXML
     private ScrollPane scrollPane;
@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
             DialogBox.getDukeDialog(WELCOME_MESSAGE, dukeImage)

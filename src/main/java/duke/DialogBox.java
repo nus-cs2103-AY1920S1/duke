@@ -52,8 +52,6 @@ class DialogBox extends HBox {
             ((HBox)box).setAlignment(Pos.TOP_LEFT);
             setAlignment(Pos.TOP_LEFT);
         }
- //       ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-
     }
 
     static DialogBox getUserDialog(String text, Image img) {

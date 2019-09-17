@@ -139,6 +139,9 @@ public class Duke extends Application implements Serializable {
             switch (commandArgs[0]){
             case "bye":
                 return STATE_EXIT;
+            case "help":
+                help(commandArgs);
+                break;
             case "find":
                 find(commandArgs);
                 break;
@@ -164,6 +167,20 @@ public class Duke extends Application implements Serializable {
             ui.flush();
         }
         return STATE_CONTINUE;
+    }
+
+    private void help(String[] commandArgs) throws IOException{
+        ui.write("Here are the list of commands:\n");
+        ui.write("  bye: close the application\n");
+        ui.write("  help: bring up this help page\n");
+        ui.write("  find: find a specific task with a keyword\n");
+        ui.write("  list: displays the current task list\n");
+        ui.write("  done: mark a task as done\n");
+        ui.write("  delete: delete a task in the task list\n");
+        ui.write("  todo: add a todo task\n");
+        ui.write("  event: add an event task with an event time\n");
+        ui.write("  deadline: add a deadline task with a deadline\n");
+        ui.flush();
     }
 
     /**

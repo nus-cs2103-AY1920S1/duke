@@ -26,9 +26,10 @@ public class Ui {
      * showWelcome greets the user
      */
 
-    public void showWelcome() {
-        System.out.println("Hello from\n" + LOGO);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public String showWelcome() {
+        return ("Hello from\n" + LOGO) + "\n" +
+        ("Hello! I'm Duke\nWhat can I do for you?") + "\n" +
+                ("Type 'help' for a list of commands");
     }
 
     /**

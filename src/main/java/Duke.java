@@ -161,6 +161,12 @@ public class Duke extends Application {
             handleUserInput();
         });
 
+        // Shows Welcome upon startup
+        Label dukeWelcomeText = new Label(ui.showWelcome());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(dukeWelcomeText, new ImageView(duke))
+        );
+
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 

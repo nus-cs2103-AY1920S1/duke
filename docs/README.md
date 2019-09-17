@@ -1,6 +1,10 @@
 # User Guide
 
-## Features 
+---
+
+## Features
+
+---
 
 ### Add your tasks
 You can add the following tasks!
@@ -19,6 +23,8 @@ With a keyword, you can search which of your tasks contain the keyword.
 It is saved in a file named `tasks.txt` in your home directory.
 
 **See usage of each feature down below**
+
+---
 
 ## Usage
 

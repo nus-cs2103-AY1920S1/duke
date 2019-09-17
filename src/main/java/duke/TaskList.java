@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Gets a particular task from the list.
+     * Gets a particular task from the list using index number.
      *
      * @param taskNum the index number of the task to be retrieved.
      * @return the task retrieved from the list.
@@ -62,6 +62,21 @@ public class TaskList {
     }
 
     /**
+     * Gets a particular task from the list using task description.
+     *
+     * @param taskDescription the description of the task to be retrieved.
+     * @return the task retrieved from the list.
+     * @throws DukeException if the task cannot be found.
+     */
+    public Task getTask(String taskDescription) throws DukeException {
+        int taskNum = findExactTask(taskDescription);
+        if (taskNum == -1) {
+            throw new DukeException("You do not have a task with description \"" + taskDescription + "\".");
+        }
+        return getTask(taskNum);
+    }
+
+    /**
      * Adds a task to the list.
      *
      * @param task the task to be added to the list.
@@ -71,7 +86,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a particular task from the list.
+     * Deletes a particular task from the list using index number.
      *
      * @param taskNum the index number of the task to be deleted.
      * @throws DukeException if the task cannot be found.
@@ -81,6 +96,20 @@ public class TaskList {
             throw new DukeException("You do not have a task with index " + taskNum + ".");
         }
         tasks.remove(taskNum - 1);
+    }
+
+    /**
+     * Deletes a particular task from the list using description.
+     *
+     * @param taskDescription the description of the task to be deleted.
+     * @throws DukeException if the task cannot be found.
+     */
+    public void deleteTask(String taskDescription) throws DukeException {
+        int taskNum = findExactTask(taskDescription);
+        if (taskNum == -1) {
+            throw new DukeException("You do not have a task with description \"" + taskDescription + "\".");
+        }
+        deleteTask(taskNum);
     }
 
     /**
@@ -96,6 +125,22 @@ public class TaskList {
             }
         }
         return newList;
+    }
+
+    /**
+     * Finds the task with a description which matches the keyword exactly and returns the task's index.
+     *
+     * @param keyword the keyword to search for tasks.
+     * @return the index of the first matching task.
+     */
+    public int findExactTask(String keyword) {
+        for (int i = 0; i < tasks.size(); i++) {
+            Task myTask = tasks.get(i);
+            if (myTask.getDescription().equals(keyword)) {
+                return i + 1;
+            }
+        }
+        return -1;
     }
 
     @Override

@@ -7,14 +7,14 @@ import duke.Ui;
 import duke.task.Task;
 
 public class DeleteCommand extends Command {
-    private int argument;
+    private String argument;
 
     /**
      * Constructs a command to delete a task.
      *
      * @param argument the argument supplied to the command.
      */
-    public DeleteCommand(int argument) {
+    public DeleteCommand(String argument) {
         this.argument = argument;
     }
 
@@ -27,9 +27,16 @@ public class DeleteCommand extends Command {
      * @throws DukeException if the command fails to execute.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task myTask = tasks.getTask(argument);
-        ui.printTaskDeleted(myTask, tasks);
-        tasks.deleteTask(argument);
+        Task myTask;
+        try {
+            myTask = tasks.getTask(Integer.parseInt(argument));
+            ui.printTaskDeleted(myTask, tasks);
+            tasks.deleteTask(Integer.parseInt(argument));
+        } catch (NumberFormatException e) {
+            myTask = tasks.getTask(argument);
+            ui.printTaskDeleted(myTask, tasks);
+            tasks.deleteTask(argument);
+        }
         storage.saveMain(tasks);
     }
 }

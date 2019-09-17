@@ -7,14 +7,14 @@ import duke.Ui;
 import duke.task.Task;
 
 public class DoneCommand extends Command {
-    private int argument;
+    private String argument;
 
     /**
      * Constructs a command to mark a task as done.
      *
      * @param argument the argument supplied to the command.
      */
-    public DoneCommand(int argument) {
+    public DoneCommand(String argument) {
         this.argument = argument;
     }
 
@@ -27,7 +27,12 @@ public class DoneCommand extends Command {
      * @throws DukeException if the command fails to execute.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task myTask = tasks.getTask(argument);
+        Task myTask;
+        try {
+            myTask = tasks.getTask(Integer.parseInt(argument));
+        } catch (NumberFormatException e) {
+            myTask = tasks.getTask(argument);
+        }
         myTask.markAsDone();
         ui.printTaskDone(myTask);
         storage.saveMain(tasks);

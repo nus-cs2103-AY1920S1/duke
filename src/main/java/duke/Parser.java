@@ -49,12 +49,12 @@ public class Parser {
             if (rawCommand.length() < words[0].length() + 2) {
                 throw new DukeException("Please specify the task to be deleted.");
             }
-            return new DeleteCommand(Integer.parseInt(rawCommand.substring(7)));
+            return new DeleteCommand(rawCommand.substring(7));
         case "done":
             if (rawCommand.length() < words[0].length() + 2) {
                 throw new DukeException("Please specify the task to be marked as done.");
             }
-            return new DoneCommand(Integer.parseInt(rawCommand.substring(5)));
+            return new DoneCommand(rawCommand.substring(5));
         case "find":
             if (rawCommand.length() < words[0].length() + 2) {
                 throw new DukeException("Please specify a search keyword.");

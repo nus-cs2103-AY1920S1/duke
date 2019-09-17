@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -23,6 +24,7 @@ import java.util.Collections;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+
     @FXML
     private ImageView displayPicture;
 

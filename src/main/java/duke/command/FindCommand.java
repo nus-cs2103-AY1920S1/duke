@@ -45,6 +45,7 @@ public class FindCommand extends Command {
 
         StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
 
+        //Solution adapted from https://stackoverflow.com/questions/18552005/is-there-a-concise-way-to-iterate-over-a-stream-with-indices-in-java-8
         IntStream.rangeClosed(1, foundTasks.size())
                 .mapToObj(index -> String.format("\n %d . %s",
                                            index, foundTasks.get(index - 1)))

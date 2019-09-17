@@ -69,6 +69,8 @@ public class MainWindow extends AnchorPane {
 
     }
 
+    //Solution below adapted from https://stackoverflow.com/questions/30439848/how-to-adjust-labels-width-to-fit-its-content
+    //Solution below also adapted from John Min Kyungho Github: john0227
     private void setVBoxHeight() {
         double height = 0.0;
 

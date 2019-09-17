@@ -1,4 +1,5 @@
-# User Guide
+# Duke ChatBot User Guide
+Duke is a chatbot that allows users to create and edit their own todo list, 
 
 ## Features 
 

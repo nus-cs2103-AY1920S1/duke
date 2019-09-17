@@ -41,7 +41,7 @@ public class Storage {
     private static final int COMMAND_IND = 0;
     private static final int DONE_STATUS_IND = 1;
     private static final int DESCRIPTION_IND = 2;
-    private static final int TIME_IND = 1;
+    private static final int TIME_IND = 3;
 
     private static final int STATUS_DONE = 0;
     private static final int STATUS_NOT_DONE = 1;
@@ -136,6 +136,7 @@ public class Storage {
             return new Event(lineArray[DONE_STATUS_IND], lineArray[DESCRIPTION_IND], lineArray[TIME_IND]);
 
         case "D":
+            assert false : lineArray[TIME_IND];
             //return a new deadline task with "whether it is done" and description and deadline
             return new Deadline(lineArray[DONE_STATUS_IND], lineArray[DESCRIPTION_IND], lineArray[TIME_IND]);
 

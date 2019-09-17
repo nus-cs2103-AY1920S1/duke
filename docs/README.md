@@ -5,11 +5,16 @@ Duke is a product for those who prefer to have a simple interface to note down t
 
 ## 2. Quick Start
 1.Ensure that you have Java 11 or above installed in your Computer.
+<<<<<<< HEAD
 
 2.Download the latest duke.jar [here.](https://github.com/ROHITREDDYBALAM/duke/releases)
 
 3.Copy the file to the folder you want to use as the home folder for your Duke.
 
+=======
+2.Download the latest duke.jar 
+3.Copy the file to the folder you want to use as the home folder for your Duke.
+>>>>>>> e7ab475cce7c386827045f8e1c7a9c36b4379f01
 4.Double-click the file to start the app. The GUI should appear in a few seconds.
 
 ## Features 

@@ -141,7 +141,6 @@ public class Parser {
         if (hasExtraWords) {
             throw new DukeException("did you mean to type another command?");
         }
-        // TODO: Validate format of "event" and "deadline" date/time
         // TODO: Use better control flow (not exceptions)
     }
 

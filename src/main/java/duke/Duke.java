@@ -66,7 +66,7 @@ public class Duke {
     }
 
     /**
-     * Alternative method the main application by interacting with user input via CLI.
+     * Alternative method for running the main application via CLI.
      *
      * <p>Duke begins by printing a welcome message. Subsequently, it scans
      * for user input, then validates and processes it accordingly. This is

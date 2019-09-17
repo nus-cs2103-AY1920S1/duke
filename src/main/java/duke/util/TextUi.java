@@ -46,7 +46,6 @@ public class TextUi {
      *
      * @param text Single line of text to be printed.
      */
-    // TODO: Wrap text for longer lines
     private void show(String text) {
         System.out.println(INDENT + " " + text);
     }

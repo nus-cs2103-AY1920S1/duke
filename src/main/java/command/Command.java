@@ -7,7 +7,7 @@ import utilities.Ui;
 public abstract class Command {
     protected String command;
 
-    public Command(String command) {
+    Command(String command) {
         this.command = command;
     }
 

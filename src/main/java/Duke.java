@@ -3,7 +3,6 @@ import utilities.Parser;
 import utilities.Storage;
 import utilities.TaskList;
 import utilities.Ui;
-import command.Command;
 
 
 /**
@@ -61,7 +60,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
-                Command c = Parser.parse(fullCommand);
+                command.Command c = Parser.parse(fullCommand);
                 //c.execute(tasks, ui, storage);
                 String result = c.executeAsString(tasks, ui, storage);
                 System.out.println(result);
@@ -74,8 +73,6 @@ public class Duke {
                 ui.showLine();
             }
         }
-        ui.showConclusion();
-        ui.showLine();
     }
 
 
@@ -101,7 +98,7 @@ public class Duke {
      */
     String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
+            command.Command c = Parser.parse(input);
             return c.executeAsString(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showErrorFX(e.getMessage());

@@ -122,5 +122,4 @@ public class Command {
         storage.rewriteData();
         return response;
     }
-
 }

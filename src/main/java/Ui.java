@@ -128,16 +128,10 @@ public class Ui {
             + "Please use \"deadline ... /by dd/mm/yyyy 0000\" (in 24hr).\n";
     }
 
-    public String printNoInputError() {
-        return "( ͡° ͜ʖ ͡°) Ahh I can't read your mind yet, say something.\n";
-    }
-
     /**
      * Prints error messages if task description is empty or cannot be understood.
      * @param taskType
-     * @throws DukeException
      */
-
     public String throwErrorMessage(String taskType) {
         switch (taskType) {
         case "todo" :

@@ -22,7 +22,6 @@ public class Duke {
 	private Storage storage;
 	private TaskList tasks;
 	private Ui ui;
-	private String filepath;
 	
 	/**
 	 * Constructor to initialize Duke for startup.
@@ -39,17 +38,17 @@ public class Duke {
 	 * Performs Duke start up operation to generate task list.
 	 */
 	void performDukeStartup() throws IncorrectFileFormatException, FileNotFoundException {
+		tasks = new TaskList();
 		try {
 			tasks = new TaskList(storage.load(ui));
-		} catch (InvalidPathException i) {
-			tasks = new TaskList();
-			throw new InvalidPathException(filepath, ui.getLoadingError());
 		} catch (IncorrectFileFormatException j) {
 			throw new IncorrectFileFormatException(ui.getLoadingError());
 		} catch (NullPointerException n) {
 			throw new NullPointerException(ui.getIndexError());
 		} catch (FileNotFoundException f1) {
 			throw new FileNotFoundException(ui.getLoadingError());
+		} catch (IOException e) {
+			System.out.println("IO");
 		}
 	}
 	

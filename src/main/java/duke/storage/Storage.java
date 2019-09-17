@@ -2,7 +2,6 @@ package duke.storage;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
@@ -36,16 +35,25 @@ public class Storage {
 	 * @return task list from file.
 	 * @throws IncorrectFileFormatException If file format is incorrect.
 	 */
-	public ArrayList<Task> load(Ui ui) throws IncorrectFileFormatException, FileNotFoundException {
-		File f;
-		f = new File("data/tasks.txt");
-		Scanner s = new Scanner(f, "Unicode");
+	public ArrayList<Task> load(Ui ui) throws IncorrectFileFormatException, IOException {
+		//File f;
+		//f = new File("data/tasks.txt");
+		//Scanner s = new Scanner(f, "Unicode");
+		
+		
+		InputStream stream = Storage.class.getClassLoader().getResourceAsStream("tasks.txt");
+		if(stream == null){
+			return new ArrayList<>();
+		}
+		
+		assert stream != null;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 		
 		ArrayList<String> listInput = new ArrayList<>();
 		
-		while (s.hasNextLine()) {
-			String i = s.nextLine();
-			listInput.add(i);
+		String i = " ";
+		while ((i = reader.readLine()) != null) {
+			listInput.add(i.trim());
 		}
 		
 		ArrayList<Task> listTask = new ArrayList<>();

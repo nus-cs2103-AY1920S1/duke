@@ -3,7 +3,6 @@ package duke.command;
 import duke.util.Storage;
 import duke.util.TextUi;
 
-import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -34,18 +33,18 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {
-        TaskList foundTasks = new TaskList();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            if (task.toString().contains(this.details)) {
-                foundTasks.add(task);
+        String allTasks = tasks.asIndexedString();
+        StringBuilder foundTasks = new StringBuilder();
+        for (String task : allTasks.split("\n")) {
+            if (task.contains(this.details)) {
+                foundTasks.append(task.concat("\n"));
             }
         }
-        boolean hasNoMatchingTasks = foundTasks.size() == 0;
+        boolean hasNoMatchingTasks = foundTasks.length() == 0;
         if (hasNoMatchingTasks) {
             return "Hmm... you have no tasks containing this description!\n"
                     + "Did you mean to find something else?";
         }
-        return foundTasks.asIndexedString();
+        return foundTasks.toString();
     }
 }

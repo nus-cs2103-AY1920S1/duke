@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -16,11 +17,13 @@ import java.util.Collections;
 
 public class DialogBox extends HBox {
     @FXML
+    private Label header;
+    @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String name) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -30,6 +33,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        header.setText(name);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -45,14 +49,17 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img, "User");
+        db.dialog.setFont(new Font("Consolas", 10));
+        db.setMinSize(TextArea.USE_PREF_SIZE, TextArea.USE_PREF_SIZE);
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, "Jarvis");
         db.flip();
         db.dialog.setFont(new Font("Consolas", 10));
-        db.setMinHeight(db.dialog.getMinHeight());
+        db.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
         return db;
     }
 }

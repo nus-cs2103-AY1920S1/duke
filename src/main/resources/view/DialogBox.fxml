@@ -3,11 +3,35 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="177.0" prefWidth="392.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" text="Label" wrapText="true" />
+      <VBox prefHeight="147.0" prefWidth="239.0">
+         <children>
+            <AnchorPane prefHeight="28.0" prefWidth="299.0">
+               <children>
+                    <Label fx:id="header" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutY="5.0" text="header" textFill="#0778f7" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                    </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="21.0" prefWidth="81.0">
+               <children>
+                  <Label fx:id="dialog" alignment="TOP_LEFT" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity" text="message" textFill="#0a0a0a" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>

@@ -141,7 +141,7 @@ public class Duke extends Application {
             } catch (InputMismatchException | IllegalArgumentException | IndexOutOfBoundsException | IOException | DukeException e) {
                 response = ui.printErrorMessage(e.getMessage());
             }
-            return "Smart Baby says: " + response;
+            return "Smart Baby says: \n" + response;
         } else {
             return "error";
         }

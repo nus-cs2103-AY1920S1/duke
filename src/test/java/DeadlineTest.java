@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
+import duke.tasks.Deadline;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

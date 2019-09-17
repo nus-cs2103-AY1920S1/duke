@@ -78,7 +78,7 @@ public class Duke {
     private String done(AddList adl, String in) {
         String curroutput = SPLIT_LINE;
         if (in.split(" ").length == 1) {
-            curroutput += "☹ OOPS!!! The description of a todo cannot be empty.\n";
+            curroutput += "☹ OOPS!!! The description of a done cannot be empty.\n";
         }
         if (in.split(" ").length > 1) {
             String subin2 = in.split(" ")[1];
@@ -95,7 +95,7 @@ public class Duke {
     private String delete(AddList adl, String in) {
         String curroutput = SPLIT_LINE;
         if (in.split(" ").length == 1) {
-             curroutput+= "☹ OOPS!!! The description of a todo cannot be empty.\n";
+             curroutput+= "☹ OOPS!!! The description of a delete cannot be empty.\n";
         }
         if (in.split(" ").length > 1) {
             String subin2 = in.split(" ")[1];
@@ -119,9 +119,11 @@ public class Duke {
     private String find(AddList adl, String in) {
         String curroutput = SPLIT_LINE;
         if (in.split(" ").length == 1) {
-            curroutput += "☹ OOPS!!! The description of a todo cannot be empty.\n";
+            curroutput += "☹ OOPS!!! The description of find cannot be empty.\n";
+
         }
         if (in.split(" ").length > 1) {
+            curroutput += "Here are the matching tasks in your list:\n";
             String keyword = in.split(" ")[1];
             curroutput += adl.findEvent(keyword);
         }
@@ -132,7 +134,7 @@ public class Duke {
     private String mission(AddList adl, String in, String subin1) {
         String curroutput = SPLIT_LINE;
         if (in.split(" ").length == 1) {
-            curroutput += "☹ OOPS!!! The description of a todo cannot be empty.\n";
+            curroutput += "☹ OOPS!!! The description of a task cannot be empty.\n";
         }
         if (in.split(" ").length > 1) {
             curroutput += subin1 + "\n";

@@ -57,7 +57,9 @@ public class DialogBox extends HBox {
      * @return DialogBox object representing a chat entry
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color:linear-gradient( from 0% 0% to 120% 120%, lavenderblush, white);");
+        return db;
     }
 
     /**
@@ -70,6 +72,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color:linear-gradient( from 0% 0% to 100% 100%, white, azure);");
         db.flip();
         return db;
     }

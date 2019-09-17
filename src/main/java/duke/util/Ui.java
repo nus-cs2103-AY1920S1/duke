@@ -10,10 +10,10 @@ public class Ui {
     // Class attributes
     public static final String INDENT = "      ";
     public static final String HELLO = " ___        _        \n"
-            + "|  _ \\ _  _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/\\__,_|_|\\_\\___|\n"
+            + "|  _ \\ _  _| | ___ \n"
+            + "| | | | | | | | / / _  \\\n"
+            + "| |_| | |_| |  <  __/\n"
+            + "|___/\\_,_|_|\\_\\__|\n"
             + "Hello! I'm Duke. What can I do for you?";
     public static final String GOODBYE  = "Bye. Hope to see you again soon!\n"
             + "Hang on while I close this window for you...";

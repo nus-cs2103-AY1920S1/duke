@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,6 +43,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        //scrollPane.setFitToHeight(false);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.HELLO, dukeImage));
     }
 
@@ -80,39 +80,9 @@ public class MainWindow extends AnchorPane {
         }, SHUTDOWN_DELAY);
     }
 
-    // given a string with multiple lines (identified by terminating newlines),
-    // returns an ArrayList object with each entry
-    // containing a maximum of n lines from the original string.
-    private ArrayList<String> splitEveryNthLine(String text, int n) {
-        String[] splitStr = text.split("\n");
-        StringBuilder sb = new StringBuilder();
-        ArrayList<String> returnList = new ArrayList<>();
-
-        for (int i = 0; i < splitStr.length; i++) { // for every line in string
-            sb.append(splitStr[i]);
-            sb.append("\n");
-            if ((i + 1) % n == 0 || i + 1 == splitStr.length) { // if every nth line OR end of string,
-                returnList.add(sb.toString()); // append to the list as a separate entry
-                sb.setLength(0);
-            }
-        }
-        return returnList;
-    }
-
-    // publishes Duke response, with each box containing maximum of 7 lines to
-    // prevent text overrun/truncation.
+    // publishes Duke response to the chat window.
     private void publishDukeResponse(String response) {
-        ArrayList<String> splitResponse = splitEveryNthLine(response, 7);
-
-        for (int i = 0; i < splitResponse.size(); i++) {
-            // if first box, display duke image. else no image.
-            DialogBox box = DialogBox.getDukeDialog(splitResponse.get(i), (i == 0) ? dukeImage : null);
-            box.setPadding(new Insets((i == 0) ? 15 : 0, // if first box, use normal top padding. else 0 top padding
-                    5, // normal right padding
-                    (i + 1 == splitResponse.size()) ? 15 : 0, // if last box, use normal btm padding. else 0 padding.
-                    5)); // normal left padding
-            dialogContainer.getChildren().add(box);
-        }
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
     }
 
     // publishes user response to the chat window.

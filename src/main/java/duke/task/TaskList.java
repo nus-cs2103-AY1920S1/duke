@@ -139,8 +139,7 @@ public class TaskList implements Serializable {
         StringBuilder sb = new StringBuilder();
         int i = 1;
         for (Task task : this.tasks) {
-            sb.append(i++);
-            sb.append(". ");
+            sb.append(String.format("%3d. ", i++));
             sb.append(task);
             sb.append("\n");
         }

@@ -21,6 +21,26 @@ In Duke, all tasks are automatically saved. No manual saving is needed.
 
 ## Usage
 
+### `help` - Displays all commands supported by Duke
+
+Displays all commands supported by Duke. Command keyword, command format and command description will be stated clearly for the user to easily refer.
+
+Example of usage: 
+
+`help`
+
+Expected outcome:
+
+`Sure, let me help you out. Here are all the commands you can enter:`<br/>
+`bye - terminates the application`<br/>
+`list - displays all tasks in the task list`<br/>
+`delete <n> - deletes the nth task in the task list. Note that n is a positive integer.`<br/>
+`done <n> - marks the nth task in the task list as done. Note that n is a positive integer.`<br/>
+`todo <description> - adds a to-do task into the task list`<br/>
+`event <description> /at <dd/MM/yyyy HHmm> - adds an event into the task list`<br/>
+`deadline <description> /by <dd/MM/yyyy HHmm> - adds a deadline into the task list`<br/>
+`find <keyword> - finds tasks(s) with description matching the keyword`
+
 ### `bye` - Terminates the application
 
 Duke program will exit, and its GUI window will close.
@@ -107,11 +127,11 @@ Expected outcome:
 
 ### `find <keyword>` - Finds task(s) with description matching the keyword
 
-Show all tasks that matches the specified keyword
+Show all tasks that matches the specified keyword. Partial matching is also supported.
 
 Example of usage: 
 
-`find documents`
+`find doc`
 
 Expected outcome:
 

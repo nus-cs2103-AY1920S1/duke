@@ -52,26 +52,26 @@ public class Parser {
         }
 
         switch (command) {
-            case BYE:
-                return new ExitCommand();
-            case LIST:
-                return new ListCommand();
-            case DONE:
-                return new DoneCommand(next);
-            case DEADLINE:
-                return new DeadlineCommand(next);
-            case EVENT:
-                return new EventCommand(next);
-            case TODO:
-                return new TodoCommand(next);
-            case DELETE:
-                return new DeleteCommand(next);
-            case FIND:
-                return new FindCommand(next);
-            case DEFINE:
-                return new DefineCommand(next);
-            default:
-                throw new DukeException("How is it even possible to reach this line of code?");
+        case BYE:
+            return new ExitCommand();
+        case LIST:
+            return new ListCommand();
+        case DONE:
+            return new DoneCommand(next);
+        case DEADLINE:
+            return new DeadlineCommand(next);
+        case EVENT:
+            return new EventCommand(next);
+        case TODO:
+            return new TodoCommand(next);
+        case DELETE:
+            return new DeleteCommand(next);
+        case FIND:
+            return new FindCommand(next);
+        case DEFINE:
+            return new DefineCommand(next);
+        default:
+            throw new DukeException("How is it even possible to reach this line of code?");
         }
     }
 }

@@ -19,7 +19,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = 'Main'
+    mainClassName = 'Launcher'
 }
 
 dependencies {
@@ -39,8 +39,8 @@ run {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.1"
+    archiveBaseName = 'duke'
+    archiveVersion = '0.2'
     archiveClassifier = null
     archiveAppendix = null
 }

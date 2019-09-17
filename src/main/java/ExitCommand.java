@@ -18,7 +18,6 @@ public class ExitCommand extends Command {
 
     @Override
     public String executeForGui(TaskList tasks, Ui ui, Storage storage) {
-        Platform.exit();
-        return "Bye. Hope to see you again soon!";
+        return ui.exitForGui();
     }
 }

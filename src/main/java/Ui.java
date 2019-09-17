@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 /**
  * Represents the user interface of the application.
  */
@@ -17,12 +19,21 @@ public class Ui {
         System.out.println("This is Donna from Suits.\nWhat can I do for you?");
     }
 
+    public String showWelcomeForGui() {
+        return "This is Donna from Suits.\nWhat can I do for you?";
+    }
+
     /**
      * Prints exit message and exits the application.
      */
     public void exit() {
         System.out.println("Bye. Hope to see you again soon!");
         System.exit(0);
+    }
+
+    public String exitForGui() {
+        Platform.exit();
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -37,12 +48,12 @@ public class Ui {
         System.out.println("Sure, let me help you out. Here are all the commands you can enter:");
         System.out.println("bye - terminates the application");
         System.out.println("list - displays all tasks in the task list");
-        System.out.println("delete 'n' - deletes the nth task in the task list. Note that n is a positive integer.");
-        System.out.println("done 'n' - marks the nth task in the task list as done. Note that n is a positive integer.");
-        System.out.println("todo 'description' - adds a to-do task into the task list");
-        System.out.println("event 'description' '/at dd/MM/yyyy HHmm' - adds an event into the task list");
-        System.out.println("deadline 'description' '/by dd/MM/yyyy HHmm' - adds a deadline into the task list");
-        System.out.println("find 'keyword' - finds tasks(s) with description matching the keyword");
+        System.out.println("delete <n> - deletes the nth task in the task list. Note that n is a positive integer.");
+        System.out.println("done <n> - marks the nth task in the task list as done. Note that n is a positive integer.");
+        System.out.println("todo <description> - adds a to-do task into the task list");
+        System.out.println("event <description> /at <dd/MM/yyyy HHmm> - adds an event into the task list");
+        System.out.println("deadline <description> /by <dd/MM/yyyy HHmm> - adds a deadline into the task list");
+        System.out.println("find <keyword> - finds tasks(s) with description matching the keyword");
     }
 
     public String showHelpForGui() {
@@ -50,12 +61,12 @@ public class Ui {
         sb.append("Sure, let me help you out. Here are all the commands you can enter:\n\n");
         sb.append("bye - terminates the application\n");
         sb.append("list - displays all tasks in the task list\n");
-        sb.append("delete 'n' - deletes the nth task in the task list. Note that n is a positive integer.\n");
-        sb.append("done 'n' - marks the nth task in the task list as done. Note that n is a positive integer.\n");
-        sb.append("todo 'description' - adds a to-do task into the task list\n");
-        sb.append("event 'description' '/at dd/MM/yyyy HHmm' - adds an event into the task list\n");
-        sb.append("deadline 'description' '/by dd/MM/yyyy HHmm' - adds a deadline into the task list\n");
-        sb.append("find 'keyword' - finds tasks(s) with description matching the keyword");
+        sb.append("delete <n> - deletes the nth task in the task list. Note that n is a positive integer.\n");
+        sb.append("done <n> - marks the nth task in the task list as done. Note that n is a positive integer.\n");
+        sb.append("todo <description> - adds a to-do task into the task list\n");
+        sb.append("event <description> /at <dd/MM/yyyy HHmm> - adds an event into the task list\n");
+        sb.append("deadline <description> /by <dd/MM/yyyy HHmm> - adds a deadline into the task list\n");
+        sb.append("find <keyword> - finds tasks(s) with description matching the keyword");
         return sb.toString();
     }
 }

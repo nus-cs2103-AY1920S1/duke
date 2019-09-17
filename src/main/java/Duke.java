@@ -76,7 +76,7 @@ public class Duke extends Application {
          }
     }
 
-    public String welcomeMessage() {
-         return "This is Donna from Suits.\nWhat can I do for you?";
+    public Ui getUi() {
+         return ui;
     }
 }

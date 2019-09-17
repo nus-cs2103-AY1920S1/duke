@@ -1,8 +1,8 @@
 D | 1 | A-MoreOOP | 04/09/2019 1300
-D | 0 | A-JUnit | 04/09/2019 1300
-D | 0 | A-Jar | 04/09/2019 1300
+D | 1 | A-JUnit | 04/09/2019 1300
+D | 1 | A-Jar | 04/09/2019 1300
 T | 1 | A-Packages
-D | 0 | A-JavaDoc | 04/09/2019 1300
+D | 1 | A-JavaDoc | 04/09/2019 1300
 D | 1 | A-CodingStandard | 04/09/2019 1300
 D | 1 | Level-9 | 04/09/2019 1300
 E | 0 | cs2103 group meeting | 19/09/2019 1800

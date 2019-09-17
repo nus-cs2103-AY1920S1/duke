@@ -11,14 +11,19 @@ You can add the following tasks!
 * Todo Task
 * Deadline Task
 * Event Task
+
 ### Complete tasks
 You can mark each task as complete!
+
 ### Delete tasks
 You can delete tasks from your Duke!
+
 ### List all your tasks
 You can list all your tasks to get an overview of what you have to do!
+
 ### Find your tasks
 With a keyword, you can search which of your tasks contain the keyword.
+
 ### Automatically saves all of your tasks
 It is saved in a file named `tasks.txt` in your home directory.
 

@@ -8,8 +8,8 @@
 - [2. Features](#2-features)  
     - [2.1 Feature 1: Task category](#21-feature-1-task-category)
     - [2.2 Feature 2: Saving and loading tasks](#22-feature-2-saving-and-loading-list)
-- [3. Commands](#33-commands)  
-    - [3.1 Adding a task](#31-adding-a-task)  
+- [3. Commands](#3-commands)  
+    - [3.1 Adding a task](#31-adding-a-task--add)  
     - [3.2 Listing all tasks](#32-listing-all-tasks-list)
     - [3.3 Marking a task as done](#33-marking-a-task-as-done--done-)
     - [3.4 Deleting a task](#34-deleting-a-task--delete)
@@ -129,7 +129,7 @@ keyword.
 * __Expected outcome__:  
     ```
     Here are the matching tasks in your list:
-        1.[D][-] watch 10 episodes of Running Man (by: 3rd aug)
+        1.[D][+] watch 10 episodes of Running Man (by: 3rd aug)
         2.[E][-] presentation (at: 10aug)
     ```
     *This command lists out all the tasks containing the keyword `10`.*

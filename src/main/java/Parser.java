@@ -71,6 +71,9 @@ public class Parser {
                 String keyword = sc.nextLine().trim();
                 response = taskList.findTasks(keyword);
                 break;
+            case ("joke"):
+                response = Joke.getJoke();
+                break;
             default:
                 response = "Oops! I'm sorry, but I don't know what that means :-(";
             }

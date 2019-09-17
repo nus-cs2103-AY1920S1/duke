@@ -1,7 +1,6 @@
 # Duke - User Guide    
 
-![Duke Logo]()
-![Duke](https://raw.githubusercontent.com/charliechoong/duke/master/resources/images/theDuke.png)  
+![Duke](https://raw.githubusercontent.com/charliechoong/duke/master/resources/images/theDuke.png)   
 
 **Table of Contents :**  
 - [1. Introduction](#1-introduction)  

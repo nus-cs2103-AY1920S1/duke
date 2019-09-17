@@ -2,8 +2,6 @@
 
 ## Features 
 
-### 
-
 :bear: Bear is an interactive, error-resistant and lightweight task manager with a clean and minimalist interface that helps you to get things done.
 
 Bear supports seamless data storage and transfer between devices so you can access your task list from anywhere. Changes are automatically saved. 

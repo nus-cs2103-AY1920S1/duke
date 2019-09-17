@@ -37,6 +37,8 @@ public class Parser {
             return new ExitCommand(commandArr, duke);
         case "list":
             return new ListCommand(commandArr);
+        case "clear":
+            return new ClearCommand(commandArr);
         case "delete":
             return new DeleteCommand(commandArr);
         case "done":

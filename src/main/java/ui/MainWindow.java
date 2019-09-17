@@ -4,14 +4,13 @@ import exceptions.DukeException;
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.BooleanBinding;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import javafx.fxml.FXML;
 
 import duke.Duke;
+import duke.Ui;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -44,6 +43,7 @@ public class MainWindow extends AnchorPane {
     private EventHandler<ActionEvent> textFieldEvent;
 
     private Duke duke;
+    private Ui ui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/eminem.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/lelouch2.jpeg"));
@@ -83,16 +83,25 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Initializes the duke property to be used by MainWindow class.
+     * Initializes the duke property and the ui object to be used by MainWindow class.
      * Also outputs the welcome message for Duke onto the screen.
      *
-     * @param duke
+     * @param duke Duke object associated with the Window.
      */
     public void setDuke(Duke duke) {
         this.duke = duke;
-        dialogContainer.getChildren().add(
+        this.ui = duke.getUi();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.getDukeAsciiArt(), dukeImage),
                 DialogBox.getDukeDialog("Hello, I'm Duke! What can I do for you?", dukeImage)
         );
+    }
+
+    /**
+     * Remove all dialog-boxes from the window to prevent cluttering.
+     */
+    public void clearWindow() {
+        dialogContainer.getChildren().clear();
     }
 
     /**
@@ -102,17 +111,21 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.replaceAll("\\s+", "").equals("")) {
-
-        }
         // Output a different coloured background Label as Duke's response
         // should an error occur.
         try {
             String response = duke.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
+            if (input.equals("clear")) {
+                clearWindow();
+                dialogContainer.getChildren().add(
+                        DialogBox.getDukeDialog(response, dukeImage)
+                );
+            } else {
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getDukeDialog(response, dukeImage)
+                );
+            }
         } catch (IOException | DukeException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

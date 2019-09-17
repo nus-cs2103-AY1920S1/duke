@@ -18,6 +18,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    // Instantiate Duke object
     private Duke duke = new Duke();
 
     @Override

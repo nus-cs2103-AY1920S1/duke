@@ -3,6 +3,7 @@ package duke;
 import commands.Command;
 
 import exceptions.DukeException;
+import ui.MainWindow;
 
 import java.io.IOException;
 
@@ -21,6 +22,7 @@ public class Duke {
      * the TaskList object storing all recorded Tasks.
      */
     private TaskList tasks;
+
     /**
      * the Ui object dealing with user interaction.
      */
@@ -30,6 +32,15 @@ public class Duke {
      * boolean indicating whether the program should be exited.
      */
     private boolean shouldExitProgram = false;
+
+    /**
+     * Returns the Ui object dealing with user interaction.
+     *
+     * @return Ui object.
+     */
+    public Ui getUi() {
+        return ui;
+    }
 
     /**
      * Getter method for the boolean indicating whether program should be exited.
@@ -54,7 +65,6 @@ public class Duke {
      * instantiates Ui, Storage and TaskList objects.
      */
     public Duke() {
-//        String filePath = "." + File.separator + "data" + File.separator + "duke.txt";
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
         try {

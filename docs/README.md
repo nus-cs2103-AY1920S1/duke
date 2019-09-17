@@ -8,7 +8,8 @@
    3.4. [Marking a task as done](#34-marking-a-task-as-done) : `done`   
    3.5. [Deleting a task](#35-deleting-a-task) : `delete`    
    3.6. [Searching for a task by keyword(s)](#36-searching-a-task-by-keyword) : `find`  
-   3.7. [Exiting the program](#37-exiting-the-program) : `bye`
+   3.7. [Clearing the window](#37-clearing-the-window) : `clear`    
+   3.8. [Exiting the program](#37-exiting-the-program) : `bye`
    
 ## 1. Introduction
 Duke is a Personal Assistant Chatbot that aids users in keeping track of various tasks.
@@ -113,7 +114,12 @@ Finds task with description: `help guild register for the boss event`
 
 Format: `find [keywords delimited by a single space]`
 
-### 3.7 Exiting the program
+### 3.7 Clearing the window
+Clears the window of all dialog-boxes and outputs a message.
+
+Format: `clear`
+
+### 3.8 Exiting the program
 Displays the exit message and closes the program.
 
 Format: `bye`

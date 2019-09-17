@@ -15,6 +15,52 @@ public class Ui {
     // ===========================================================================================================
 
     /**
+     * Returns a String to be output when Duke starts
+     * along with the welcome message.
+     *
+     * @return String Ascii Art of Duke.
+     */
+    public String getDukeAsciiArt() {
+        return "                        _,.------....___,.' ',.-.\n" +
+                "                     ,-'          _,.--\"        |\n" +
+                "                   ,'         _.-'              .\n" +
+                "                  /   ,     ,' \\______ \\  __ __|  | __ ____\n" +
+                "                 .   /     /    |    |  \\|  |  \\  |/ // __ \\\n" +
+                "                 |  |     .     |    `   \\  |  /    <\\  ___/\n" +
+                "       ____      |___._.  |     /______  /____/|__|_ \\\\___>\n" +
+                "     .'    `---\"\"       ``\"-.--\"'`     \\/       .   \\/\n" +
+                "    .  ,            __               `              |   .\n" +
+                "    `,'         ,-\"'  .               \\             |    L\n" +
+                "   ,'          '    _.'                -._          /    |\n" +
+                "  ,`-.    ,\".   `--'                      >.      ,'     |\n" +
+                " . .'\\'   `-'       __    ,  ,-.         /  `.__.-      ,'\n" +
+                " ||:, .           ,'  ;  /  / \\ `        `.    .      .'/\n" +
+                " '|'  \\          `--'  ' ,'_  . .         `.__, \\   , /\n" +
+                "/ \\:_  |                 .  \"' :_;                `.'.'\n" +
+                ".    \"\"'                  \"\"\"\"\"'                    V\n" +
+                " `.                                 .    `.   _,..  `\n" +
+                "   `,_   .    .                _,-'/    .. `,'   __  `\n" +
+                "    ) \\`._        ___....----\"'  ,'   .'  \\ |   '  \\  .\n" +
+                "   /   `. \"`-.--\"'         _,' ,'     `---' |    `./  |\n" +
+                "  .   _  `\"\"'--.._____..--\"   ,             '         |\n" +
+                "  | .\" `. `-.                /-.           /          ,\n" +
+                "  | `._.'    `,_            ;  /         ,'          .\n" +
+                " .'          /| `-.        . ,'         ,           ,\n" +
+                " '-.__ __ _,','    '`-..___;-...__   ,.'\\ ____.___.'\n" +
+                " `\"^--'..'   '-`-^-'\"--    `-^-'`.''\"\"\"\"\"`.,^.`.--'";
+    }
+
+    /**
+     * Returns String message representing Duke's response
+     * upon clearing the window of all dialog-boxes.
+     *
+     * @return String message representing Duke's response.
+     */
+    public String getClearedMsg() {
+        return "I have cleared the window of all clutter!";
+    }
+
+    /**
      * Returns String message representing Duke's response
      * upon successful addition of the task.
      *
@@ -91,7 +137,9 @@ public class Ui {
                 "Note for find command:\n" +
                 " \u2022 The order of the keywords do not matter.\n" +
                 " \u2022 A task description is a match only if it contains all the keywords.\n\n" +
-                "\n6)  Exiting the program\n\n" +
+                "\n6)  Clearing the window\n\n" +
+                "\"clear\": Clears the window of clutter.\n\n" +
+                "\n7)  Exiting the program\n\n" +
                 "\"bye\": Displays the exit message and closes the program.";
 
     }

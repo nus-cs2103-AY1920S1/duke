@@ -1,3 +1,5 @@
+package duke.ui;
+
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;

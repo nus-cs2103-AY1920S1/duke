@@ -42,6 +42,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Links the Duke instance and greets the user.
+     *
+     * @param duke the duke instance to link.
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
         // Greet the user

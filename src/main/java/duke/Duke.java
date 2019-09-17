@@ -19,7 +19,7 @@ import java.util.logging.SimpleFormatter;
  * Main Driver class housing the infinite loop.
  */
 public class Duke {
-    private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+    private static final Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private Storage storage;
     private TaskList taskList;

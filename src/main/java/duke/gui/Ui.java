@@ -5,9 +5,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
 
-import java.awt.*;
-import java.awt.font.TextAttribute;
-import java.text.AttributedString;
 import java.util.ArrayList;
 
 /**
@@ -29,11 +26,12 @@ public class Ui {
     private static final String DONE_MESSAGE = "Great! I've marked this task as done:";
     private static final String EXIT_MESSAGE = "Aww... Come back soon partner!";
     private static final String LOGO =
-            "  _  _   _   _  _ ___  _    ___ ___ \n" +
-            " | || | /_\\ | \\| |   \\| |  | __| _ \\\n" +
-            " | __ |/ _ \\| .` | |) | |__| _||   /\n" +
-            " |_||_/_/ \\_\\_|\\_|___/|____|___|_|_\\\n" +
-            "                                    ";
+            "  _  _   _   _  _ ___  _    ___ ___ \n"
+            + " | || | /_\\ | \\| |   \\| |  | __| _ \\\n"
+            + " | __ |/ _ \\| .` | |) | |__| _||   /\n"
+            + " |_||_/_/ \\_\\_|\\_|___/|____|___|_|_\\\n"
+            + "                                    ";
+
     /**
      * Convenience method for formatting un-indented input.
      *
@@ -42,16 +40,6 @@ public class Ui {
      */
     static String addNewLine(String input) {
         return input + '\n';
-    }
-
-    /**
-     * Convenience method for adding dividers above and below the text.
-     *
-     * @param input the text to format.
-     * @return the formatted text string.
-     */
-    public static String addDividers(String input) {
-        return addNewLine(DIVIDER) + input + addNewLine(DIVIDER);
     }
 
     /**

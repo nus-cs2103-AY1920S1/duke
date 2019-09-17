@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AddCommandTest {
 
     @Test
-    public void testAddTodo() {
+    public void testAddTodo_successfullyAdd() {
         TaskList taskList = new TaskList();
         AddCommand addCommand = new AddCommand("todo borrow book");
         addCommand.executeCommand(taskList, null);
@@ -19,7 +19,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void testAddTodoEmpty() {
+    public void testAddTodoEmpty_EmptyMessage() {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         TaskList taskList = new TaskList();

@@ -5,48 +5,57 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * reads the user input.
-     * @return The user input as a command.
-     */
-    public static String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String command = sc.nextLine();
-        return command;
-    }
-
-    /**
      * prints a indented line.
      */
-    public static void showLine() {
-        String indentedLine = "    ____________________________________________________________";
-        System.out.println(indentedLine);
+    public static String showLine() {
+        return "    _______________________________________________";
     }
 
     /**
      * prints a welcome message.
      */
-    public static void greet() {
-        echo("Hello! I'm Duke\nWhat can I do for you?");
+    public static String greet() {
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
+        output.append("Hello! I'm Duke\nWhat can I do for you?");
+        output.append("\n");
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
     }
 
     /**
      * prints a goodbye message.
      */
-    public static void exit() {
-        echo("Bye. Hope to see you again soon!");
+    public static String exit() {
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
+        output.append("Bye. Hope to see you again soon!");
+        output.append("\n");
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
+
     }
 
     /**
      * prints a string in a special format.
      * @param s String to be printed.
      */
-    public static void echo(String s) {
+    public static String echo(String s) {
         String[] arr = s.split("\n");
-        showLine();
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
         for (String str : arr) {
-            System.out.println("     " + str);
+            output.append("     " + str);
+            output.append("\n");
         }
-        showLine();
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
     }
 
     /**
@@ -54,11 +63,11 @@ public class Ui {
      * @param t Task that is added.
      * @param x Current number of tasks in list.
      */
-    public static void echo(Task t, int x) {
+    public static String echo(Task t, int x) {
         if (x == 1) {
-            echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " task in the list.");
+            return echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " task in the list.");
         } else {
-            echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " tasks in the list.");
+            return echo("Got it. I've added this task: \n  " + t + "\nNow you have " + x + " tasks in the list.");
         }
     }
 
@@ -66,31 +75,45 @@ public class Ui {
      * prints the current list of tasks.
      * @param taskList the list of tasks to be printed.
      */
-    public static void printList(TaskList taskList) {
+
+    public static String printList(TaskList taskList) {
         Task[] tasks = taskList.getTasks();
-        showLine();
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
         if (tasks[0] == null) {
-            System.out.println("     There are no tasks in your list.");
+            output.append("     There are no tasks in your list.");
+            output.append("\n");
         } else {
-            System.out.println("     Here are the tasks in your list:");
+            output.append("     Here are the tasks in your list:");
+            output.append("\n");
             int taskIndex = 0;
             while (tasks[taskIndex] != null) {
-                System.out.println("     " + (taskIndex + 1) + ". " + tasks[taskIndex]);
+                output.append("     " + (taskIndex + 1) + ". " + tasks[taskIndex]);
+                output.append("\n");
                 taskIndex++;
             }
         }
-        showLine();
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
     }
 
     /**
      * prints out response when a task is completed.
      * @param t the completed task.
      */
-    public static void printDone(Task t) {
-        showLine();
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.println("       " + t);
-        showLine();
+    public static String printDone(Task t) {
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
+        output.append("     Nice! I've marked this task as done:");
+        output.append("\n");
+        output.append("       " + t);
+        output.append("\n");
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
     }
 
     /**
@@ -98,16 +121,24 @@ public class Ui {
      * @param t the deleted task.
      * @param numOfTasksLeft number of tasks left in the list.
      */
-    public static void printDeleted(Task t, int numOfTasksLeft) {
-        showLine();
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + t);
+    public static String printDeleted(Task t, int numOfTasksLeft) {
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
+        output.append("     Noted. I've removed this task:");
+        output.append("\n");
+        output.append("       " + t);
+        output.append("\n");
         if (numOfTasksLeft == 1) {
-            System.out.println("     Now you have " + numOfTasksLeft + " task in the list.");
+            output.append("     Now you have " + numOfTasksLeft + " task in the list.");
+            output.append("\n");
         } else {
-            System.out.println("     Now you have " + numOfTasksLeft + " tasks in the list.");
+            output.append("     Now you have " + numOfTasksLeft + " tasks in the list.");
+            output.append("\n");
         }
-        showLine();
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
     }
 
     /**
@@ -115,11 +146,12 @@ public class Ui {
      * @param keyword the word to find for.
      * @param taskList the list of tasks to look at.
      */
-    public static void printFound(String keyword, TaskList taskList) {
+    public static String printFound(String keyword, TaskList taskList) {
         Task[] tasks = taskList.getTasks();
         ArrayList<Task> taskArrayList = new ArrayList<>(Arrays.asList(tasks));
-
-        showLine();
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
 
         StringBuilder matchedTasks = new StringBuilder();
         int counter = 1;
@@ -133,23 +165,32 @@ public class Ui {
             index++;
         }
         if (matchedTasks.toString().equals("")) {
-            System.out.println("     There are no matching tasks in your list.");
+            output.append("     There are no matching tasks in your list.");
+            output.append("\n");
         } else {
-            System.out.println("     Here are the matching tasks in your list:");
+            output.append("     Here are the matching tasks in your list:");
+            output.append("\n");
         }
-        System.out.print(matchedTasks);
+        output.append(matchedTasks);
+        output.append("\n");
 
-        showLine();
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
     }
 
     /**
      * prints out an error response.
      * @param string the error to be printed.
      */
-    public static void showError(String string) {
-        showLine();
-        System.out.println("     " + string);
-        showLine();
-
+    public static String showError(String string) {
+        StringBuilder output = new StringBuilder();
+        output.append(showLine());
+        output.append("\n");
+        output.append("     " + string);
+        output.append("\n");
+        output.append(showLine());
+        output.append("\n");
+        return output.toString();
     }
 }

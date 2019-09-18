@@ -31,7 +31,7 @@ public class ListCommand extends Command {
         if (tasks.isEmpty()) {
             response = "You have no tasks now. Hooray!";
         } else {
-            response = tasks.asIndexedString();
+            response = tasks.toIndexedString();
         }
         assert !response.equals("");
         ui.showText(response);

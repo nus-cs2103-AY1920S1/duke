@@ -63,7 +63,7 @@ public class Task {
      * @return The status icon associated with the current task.
      */
     private String getStatusIcon() {
-        return isDone ? "+" : " ";
+        return isDone ? "+" : "-";
         // return isDone ? "\u2713" : "\u2718"; // return tick or X symbols
     }
 
@@ -125,7 +125,9 @@ public class Task {
      * @return String representing the current Task.
      */
     public String formatAsData() {
-        return getType() + " | " + getStatusIcon() + " | " + description;
+        String delimiter = " | ";
+        return getType() + delimiter + getStatusIcon() + delimiter
+                + priority.asInteger() + delimiter + description;
     }
 
     /**

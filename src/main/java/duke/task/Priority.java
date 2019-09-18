@@ -6,15 +6,27 @@ package duke.task;
  * "Important!!", "Quite important", "Not very important", and "None".
  */
 public enum Priority {
-    HIGH("Important!!"),
-    MEDIUM("Quite important"),
-    LOW("Not very important"),
-    NONE("None");
+    NONE("None", 0),
+    LOW("Not very important", 1),
+    MEDIUM("Quite important", 2),
+    HIGH("Important!!", 3);
 
     private String descriptor;
+    private int importance;
 
-    private Priority(String descriptor) {
+    private Priority(String descriptor, int importance) {
         this.descriptor = descriptor;
+        this.importance = importance;
+    }
+
+    /**
+     * Returns an integer representation of the Priority level. Integer
+     * representations of priority levels range from 0 (NONE) to 3 (HIGH).
+     *
+     * @return Integer representing the level of Priority.
+     */
+    public int asInteger() {
+        return this.importance;
     }
 
     /**

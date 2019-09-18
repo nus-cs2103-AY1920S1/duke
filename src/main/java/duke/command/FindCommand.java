@@ -33,7 +33,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, TextUi ui, Storage storage) {
-        String allTasks = tasks.asIndexedString();
+        String allTasks = tasks.toIndexedString();
         StringBuilder foundTasks = new StringBuilder();
         for (String task : allTasks.split("\n")) {
             if (task.contains(this.details)) {

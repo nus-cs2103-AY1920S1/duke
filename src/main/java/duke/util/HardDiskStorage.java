@@ -3,6 +3,7 @@ package duke.util;
 import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Priority;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -49,22 +50,25 @@ public class HardDiskStorage implements Storage {
                 String task = fileScanner.nextLine();
                 String[] details = task.split(" \\| ");
                 boolean isDone = Task.checkStatus(details[1]);
+                Task newTask;
                 switch(details[0]) {
                 case "T":
-                    taskList.add(new Todo(details[2], isDone));
+                    newTask = new Todo(details[3], isDone);
                     break;
                 case "E":
-                    taskList.add(new Event(details[2], details[3], isDone));
+                    newTask = new Event(details[3], details[4], isDone);
                     break;
                 case "D":
-                    taskList.add(new Deadline(details[2], details[3], isDone));
+                    newTask = new Deadline(details[3], details[4], isDone);
                     break;
                 default:
-                    taskList.add(new Task("This task could not be parsed "
-                            + "from the given data file."));
-                    // TODO: Find better way to handle parsing error.
+                    newTask = new Task("This task could not be parsed "
+                            + "from the given data file.");
                     break;
                 }
+                int taskPriorityLevel = Integer.parseInt(details[2]);
+                newTask.setPriority(Priority.values()[taskPriorityLevel]);
+                taskList.add(newTask);
             }
             return taskList;
         } catch (FileNotFoundException e) {

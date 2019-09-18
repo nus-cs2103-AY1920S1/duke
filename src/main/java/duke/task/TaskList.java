@@ -78,7 +78,7 @@ public class TaskList { // TODO: extend List<Task>
      *
      * @return  String containing all tasks as a one-indexed list.
      */
-    public String asIndexedString() {
+    public String toIndexedString() {
         String output = "";
         for (int i = 1; i <= this.size(); i++) {
             output = output.concat(i + "." + this.get(i - 1).toString() + "\n");

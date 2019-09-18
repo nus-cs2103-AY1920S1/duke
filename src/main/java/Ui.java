@@ -96,12 +96,26 @@ public class Ui {
 
             switch (parseInfo[0]) {
             case "done":
-                response.append("Nice! I've marked this task as done:\n");
-                response.append(mainTaskList.getDoneTask(parseInfo[1]) + "\n");
+                int doneNum = Integer.valueOf(parseInfo[1]);
+
+                if (doneNum > 0 && doneNum <= currentNum) {
+                    response.append("Nice! I've marked this task as done:\n");
+                    response.append(mainTaskList.getDoneTask(parseInfo[1]) + "\n");
+                } else {
+                    response.append("Task does not exist");
+                }
+
                 break;
             case "delete":
-                response.append("Noted. I've removed this task:\n");
-                response.append(mainTaskList.deleteTask(parseInfo[1]) + "\n");
+                int delNum = Integer.valueOf(parseInfo[1]);
+
+                if (delNum > 0 && delNum <= currentNum) {
+                    response.append("Noted. I've removed this task:\n");
+                    response.append(mainTaskList.deleteTask(parseInfo[1]) + "\n");
+                } else {
+                    response.append("Task does not exist");
+                }
+
                 break;
             case "todo":
                 mainTaskList.addTodoTask(parseInfo[1]);

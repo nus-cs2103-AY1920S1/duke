@@ -1,0 +1,9 @@
+T | 1 | 4 | read book
+D | 1 | 4 | complete tutorial | 07 Sep 2019 0000
+T | 1 | 1 | go home
+E | 0 | 4 | Odesza's concert | 22 Sep 2019 1230
+D | 0 | 4 | tP | 07 Sep 2019 0000
+T | 0 | 4 | Watch YouTube
+T | 0 | 4 | Buy Nike's shoes
+D | 1 | 4 | Online Quiz | 10 Oct 2019 2359
+E | 0 | 4 | JJ Lin's concert | 12 Dec 2019 1900

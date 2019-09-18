@@ -14,7 +14,7 @@ Get the documentation for duke commands
 
 ### `list` 
 
-List of all the tasks added. The list is 1 index
+List of all the tasks added. The list is 1 index.
 
 #### Example command: 
 ```$xslt

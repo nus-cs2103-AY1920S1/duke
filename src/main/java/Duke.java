@@ -31,14 +31,14 @@ public class Duke {
      * Constructor for Duke.
      */
     public Duke() {
-        String filePath = "src/main/java/data/tasks.txt";
+        String filePath = "data/tasks.txt";
         ui = new Ui();
         storage = new Storage(filePath);
 
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
+            tasks = new TaskList();
         } catch (IOException e) {
             System.out.println("IO Exception!");
         }

@@ -33,8 +33,10 @@ public class Storage {
     }
 
     public Storage(String filePath) {
-        this.file = new File(filePath);
-        assert (file.exists()) : "File doesn't exist.";
+        File directory = new File("data");
+        directory.mkdirs();
+
+        this.file = new File(directory, "tasks.txt");
     }
 
     /**
@@ -46,41 +48,44 @@ public class Storage {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-        // Read from the file location
-        Scanner sc = new Scanner(file);
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            String[] wordArr = line.split("\\|");
-            String taskType = wordArr[0].trim();
-            int done = Integer.parseInt(wordArr[1].trim());
-            String description = wordArr[2].trim();
+        if (!file.exists()) {
+            file.createNewFile();
+        } else {
+            // Read from the file location
+            Scanner sc = new Scanner(file);
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] wordArr = line.split("\\|");
+                String taskType = wordArr[0].trim();
+                int done = Integer.parseInt(wordArr[1].trim());
+                String description = wordArr[2].trim();
 
-            if (taskType.equals("T")) {
-                tasks.add(new ToDo(description));
+                if (taskType.equals("T")) {
+                    tasks.add(new ToDo(description));
 
-                if (done == 1) {
-                    tasks.get(tasks.size() - 1).setAsDone();
-                }
-            } else if (taskType.equals("D")) {
-                String time = wordArr[3].trim();
-                tasks.add(new DeadLine(description, time));
+                    if (done == 1) {
+                        tasks.get(tasks.size() - 1).setAsDone();
+                    }
+                } else if (taskType.equals("D")) {
+                    String time = wordArr[3].trim();
+                    tasks.add(new DeadLine(description, time));
 
-                if (done == 1) {
-                    tasks.get(tasks.size() - 1).setAsDone();
-                }
-            } else {
-                String time = wordArr[3].trim();
-                tasks.add(new Event(description, time));
+                    if (done == 1) {
+                        tasks.get(tasks.size() - 1).setAsDone();
+                    }
+                } else {
+                    String time = wordArr[3].trim();
+                    tasks.add(new Event(description, time));
 
-                if (done == 1) {
-                    tasks.get(tasks.size() - 1).setAsDone();
+                    if (done == 1) {
+                        tasks.get(tasks.size() - 1).setAsDone();
+                    }
                 }
             }
+
+            sc.close();
         }
-
-        sc.close();
         return tasks;
-
     }
 
     /**

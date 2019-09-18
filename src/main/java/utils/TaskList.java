@@ -6,7 +6,11 @@ import tasks.Task;
 
 public class TaskList {
 
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList;
+
+    public TaskList() {
+        this.taskList = new ArrayList<>();
+    }
 
     public TaskList(ArrayList<Task> tasks) {
         this.taskList = tasks;

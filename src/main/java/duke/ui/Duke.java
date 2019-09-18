@@ -1,11 +1,16 @@
 package duke.ui;
 
+import java.awt.*;
+import java.net.URI;
 import java.util.Arrays;
 
 import duke.command.Parser;
 import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.DukeException;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 
 /**
  * duke.main.Duke class. Creates a new duke.main.Ui, duke.command.TaskList and duke.command.Storage object,
@@ -19,6 +24,8 @@ public class Duke {
     private Storage storage;
     /** Stores the duke.command.TaskList object used to add/delete tasks. */
     private TaskList taskList;
+    /** Easter egg counter. */
+    private int larry = 5;
 
     // Solution below adapted from https://github.com/nexolute/duke/blob/master/src/main/java/duke/Duke.java
     /**
@@ -47,7 +54,17 @@ public class Duke {
             switch (command) {
             case "bye":
                 ui.printGoodbye();
-                System.exit(0);
+
+                //@@author pohlinwei-reused
+                // Taken from https://github.com/pohlinwei/duke/blob/master/src/main/java/duke/util/ui/MainWindow.java.
+                // Line 64 - 67.
+                // Allows the exit message to be printed before the program closes.
+                PauseTransition delay = new PauseTransition(Duration.seconds(1));
+                delay.setOnFinished(event -> Platform.exit());
+                delay.play();
+
+                //@@author
+
                 break;
 
             case "list":
@@ -86,6 +103,24 @@ public class Duke {
 
             case "help":
                 ui.printToUser(taskList.help());
+                break;
+
+            case "larry":
+                if (larry == 1) {
+                    //@@author TorstenH.-reused
+                    // Taken from https://www.codeproject.com/Questions/398241/how-to-open-url-in-java
+                    // Opens a URL in the user's default browser.
+                    try {
+                        Desktop desktop = java.awt.Desktop.getDesktop();
+                        URI oURL = new URI("https://www.youtube.com/watch?v=_uv8Ej4CEoQ");
+                        desktop.browse(oURL);
+                    } catch (Exception e) {
+                        throw new DukeException("Oops, failed to launch Easter Egg.");
+                    }
+                    //@@author
+                } else {
+                    larry--;
+                }
                 break;
 
             default:

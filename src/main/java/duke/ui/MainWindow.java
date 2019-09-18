@@ -23,8 +23,8 @@ public class MainWindow extends Stage {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Bob.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Larry.png"));
 
     @FXML
     public void initialize() {
@@ -51,11 +51,7 @@ public class MainWindow extends Stage {
     }
 
     // Solution below adapted from https://github.com/nexolute/duke/blob/master/src/main/java/duke/MainWindow.java
-    public void printAsUser(String s) {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(s, userImage));
-    }
-
-    public void printAsDuke(String s) {
+    public void printAsLarry(String s) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(s, dukeImage));
     }
 

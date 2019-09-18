@@ -54,6 +54,10 @@ public class Duke {
         }
     }
 
+    public String showDukeWelcome() {
+        return this.ui.showWelcome();
+    }
+
     /**
      * Gets response from duke logic given a command.
      * @param fullCommand the entire command given to duke.

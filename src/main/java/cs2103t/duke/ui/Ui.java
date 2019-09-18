@@ -15,17 +15,26 @@ public class Ui {
     }
 
     /**
-     * Shows welcome response when Duke starts up.
+     * Returns welcome response of Duke/
+     * @return welcome message
      */
-    public void showWelcome() {
+    public String showWelcome() {
+        String eva = " ______ _     ___ ___\n" +
+                "|   ___| \\    /  /   \\\n" +
+                "|  |__ \\  \\  /  / /\\  \\\n" +
+                "|   __| \\  \\/  / /__\\  \\\n" +
+                "|  |___  \\    / ______  \\\n" +
+                "|______|  \\__/_/      \\__\\";
+        /*
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+         */
 
-        dukeRespond("Hello! I'm Duke", "What can I do for you?");
+        return dukeRespond("Hello from\n" + eva,"Hello! I'm Eeeeeeva", "What can I do for you?");
     }
 
     /**

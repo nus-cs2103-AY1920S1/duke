@@ -149,6 +149,13 @@ public class Ui {
     }
 
     /**
+     * Shows the exit message.
+     */
+    public void showExit() {
+        printGuiMessage("さよなら！また会おうね！");
+    }
+
+    /**
      * Converts the item specified in its plural form.
      *
      * @param item the item to be converted.

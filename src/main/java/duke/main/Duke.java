@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 public class Duke extends Application {
 
     //region VARIABLES
-    private static String LIST_PATH = "C:/Users/Yu Han Jeong/Desktop/CS2103T/duke/src/data/duke.txt";
+    private static String LIST_PATH = "src/data/duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

@@ -6,7 +6,6 @@ import java.util.Date;
 
 /**
  * Event is a task that happens at certain date.
- *
  */
 public class Event extends Task {
     private Date eventAt;

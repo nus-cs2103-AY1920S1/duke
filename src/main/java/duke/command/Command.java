@@ -3,6 +3,12 @@ package duke.command;
 import duke.task.TaskList;
 
 public abstract class Command {
+    /**
+     * Executes the command on a TaskList.
+     *
+     * @param tasks The TaskList to execute the command on.
+     * @return A string to describe the execution of the command.
+     */
     public abstract String execute(TaskList tasks);
 
     protected String createTotalNumOfTaskMsg(TaskList tasks) {

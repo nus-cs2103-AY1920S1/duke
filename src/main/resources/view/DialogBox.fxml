@@ -18,10 +18,10 @@
          <font>
             <Font name="Helvetica" size="12.0" />
          </font></Label>
-      <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="displayPicture" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true" />
    </children>
    <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      <Insets left="5.0" right="5.0" top="5.0" />
    </padding>
    <opaqueInsets>
       <Insets />

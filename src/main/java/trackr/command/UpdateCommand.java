@@ -21,7 +21,7 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Prints message that a task has been marked as completed.
+     * Prints message that a task has been updated.
      * @param tasks List of tasks
      * @param storage Deals with loading tasks from the file and saving tasks in the file
      * @param history Tracks input history

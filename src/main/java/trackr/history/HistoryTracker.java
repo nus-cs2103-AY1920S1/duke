@@ -52,4 +52,8 @@ public class HistoryTracker {
         inputHistory.pop();
         return tasklistHistory.pop();
     }
+
+    public Stack<String> getInputHistory() {
+        return inputHistory;
+    }
 }

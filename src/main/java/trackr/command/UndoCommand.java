@@ -32,7 +32,7 @@ public class UndoCommand extends Command {
                     if (canBeUndone(prevInput)) {
                         tasks.overrideTasks(history.retrieveHistory().getTasks());
                         storage.rewriteFile(tasks);
-                        result = "Got it. I've undone the previous command:\n" + prevInput;
+                        result = "Got it. I've undone the previous command:\n       " + prevInput;
                         break;
                     } else {
                         history.retrieveHistory();

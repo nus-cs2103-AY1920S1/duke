@@ -28,6 +28,17 @@ public class Event extends Task {
     }
 
     /**
+     * Constructor that creates a new Event object using a Task object.
+     * @param t Task object
+     */
+    public Event(Task t) {
+        super(t.toString());
+        this.type = "event";
+        this.date = t.getDate();
+        this.isDone = t.getStatus();
+    }
+
+    /**
      * This method is used to get the type of the event task.
      * @return String This returns the type of the event task
      */

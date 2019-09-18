@@ -32,6 +32,10 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Assigns name of task object.
+     * @param taskName Name of task
+     */
     public void setName(String taskName) {
         this.taskName = taskName;
     }

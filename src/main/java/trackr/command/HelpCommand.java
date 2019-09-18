@@ -23,12 +23,15 @@ public class HelpCommand extends Command {
                 + "specify a name and date for the deadline!\n\n"
                 + "event <task name> /at <dd/MM/yyyy HHmm> - adds a deadline to your list, please specify "
                 + "a name and date for the event!\n\n"
-                + "delete <task number> - deletes a task from your list based on the specified task "
-                + "number!\n\n"
-                + "done <task number> - marks a task on your list as completed, please specify the task "
-                + "number!\n\n"
+                + "remove <task number> - deletes a task from your list based on the specified "
+                + "task number!\n\n"
+                + "complete <task number> - marks a task on your list as completed, please "
+                + "specify the task number!\n\n"
+                + "update <task number> <new task name> - changes the name of existing task to a "
+                + "new name\n\n"
                 + "undo - undo previous command that made changes to the list of tasks\n\n"
                 + "find <task name> - finds and displays all tasks matching the name you have specified\n\n"
+                + "history - displays all your input history for this session \n\n"
                 + "exit - exits the app and closes this window";
         return result;
     }

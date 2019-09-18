@@ -21,6 +21,16 @@ public class Todo extends Task {
     }
 
     /**
+     * Constructor that creates a new Todo object using a Task object.
+     * @param t Task object
+     */
+    public Todo(Task t) {
+        super(t.toString());
+        this.type = "todo";
+        this.isDone = t.getStatus();
+    }
+
+    /**
      * This method is used to get the type of the todo task.
      * @return String This returns the type of the todo task
      */

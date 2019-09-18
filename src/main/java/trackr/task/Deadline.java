@@ -28,6 +28,17 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructor that creates a new Deadline object using a Task object.
+     * @param t Task object
+     */
+    public Deadline(Task t) {
+        super(t.toString());
+        this.type = "deadline";
+        this.date = t.getDate();
+        this.isDone = t.getStatus();
+    }
+
+    /**
      * This method is used to get the type of the deadline task.
      * @return String This returns the type of the deadline task
      */
@@ -52,5 +63,11 @@ public class Deadline extends Task {
     @Override
     public String getDate() {
         return date;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        Deadline d = (Deadline) super.clone();
+        return d;
     }
 }

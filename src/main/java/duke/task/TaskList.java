@@ -24,6 +24,11 @@ public class TaskList {
         tasks.add(null); // leave index 0 unused for clarity.
     }
 
+    /**
+     * Constructs a 1-indexed task list with the provided tasks.
+     *
+     * @param tasks the list of tasks used to generate the task list.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this();
         if (!tasks.isEmpty() && tasks.get(0) == null) {
@@ -114,7 +119,7 @@ public class TaskList {
     }
 
     /**
-     * Arranges the tasks into a hash map of task type : task list of that task type
+     * Arranges the tasks into a hash map of (task type : task) list of that task type.
      *
      * @param list the task list containing only specified tasks.
      * @param type the type present in the task list we sort by.
@@ -240,6 +245,11 @@ public class TaskList {
         return tasks.size() - 1; // account for 1-indexing.
     }
 
+    /**
+     * Checks if the task list is empty.
+     *
+     * @return true if empty, false otherwise.
+     */
     public boolean isEmpty() {
         return count() == 0;
     }

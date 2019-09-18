@@ -163,7 +163,7 @@ public class Parser {
         TaskType type;
         if (args[0].equals("todo")) {
             type = TODO;
-        } else if (args[0].equals("deadline")){
+        } else if (args[0].equals("deadline")) {
             type = DEADLINE;
         } else if (args[0].equals("event")) {
             type = EVENT;
@@ -184,7 +184,7 @@ public class Parser {
     }
 
     /**
-     * Business logic for date and time parsing. Code adapted from duke/WeomuCat
+     * Business logic for date and time parsing. @@author KendrickAng-reused. Code adapted from duke/WeomuCat
      */
 
     /**

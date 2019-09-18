@@ -131,7 +131,13 @@ public class Ui {
         return showToUser(SEARCH_MESSAGE, "", showTaskList(searchList));
     }
 
-
+    /**
+     * Prints out the sorted task list of the specified task type. Checks for overdue deadlines.
+     *
+     * @param taskDict the dictionary mapping task type to its task list.
+     * @param type the task type to sort by.
+     * @return the formatted text string.
+     */
     public String showRemindList(HashMap<TaskType, TaskList> taskDict, TaskType type) {
         if (type == TODO) {
             return showToUser(REMIND_MESSAGE, "", showTaskList(taskDict.get(TODO)));

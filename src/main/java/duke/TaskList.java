@@ -60,7 +60,7 @@ public class TaskList {
      */
     public TaskList search(String str) {
         return new TaskList(this.tasks.stream()
-                .filter(t -> t.getDescription().contains(str))
+                .filter(t -> t.getDescription().toLowerCase().contains(str.toLowerCase()))
                 .collect(Collectors.toList()));
     }
 }

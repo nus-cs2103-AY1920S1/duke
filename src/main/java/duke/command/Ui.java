@@ -101,7 +101,7 @@ public class Ui {
      * @param taskList the taskList that needs its Tasks' details printed.
      */
     public String showTasks(TaskList taskList) {
-        String result = "";
+        String result = "Here are the tasks in your list:\n";
         ArrayList<Task> arr = taskList.getArr();
         for (int i = 0; i < arr.size(); i++) {
             Task temp = arr.get(i);

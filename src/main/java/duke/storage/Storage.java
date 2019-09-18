@@ -67,6 +67,23 @@ public class Storage {
         return tl;
     }
 
+    public void createNewDir(String filePath) {
+        File newFolder = new File(filePath);
+        boolean createdDir = newFolder.mkdir();
+        assert createdDir : "failed to create directory";
+    }
+
+    public void createNewSaveFile(String filePath) {
+        File newSaveFile = new File(filePath);
+        boolean createdFile = false;
+        try {
+            createdFile = newSaveFile.createNewFile();
+        } catch (IOException e) {
+            System.out.println("IOException when trying to create a new save file");
+        }
+        assert createdFile : "file already exists";
+    }
+
     private void executeCommandToLoadTask(TaskList tl, Command c) throws SaveFileWrongFormatDukeException {
         if (c instanceof UnloadableCommand) {
             throw new SaveFileWrongFormatDukeException("Save file contains a line that could not be loaded");

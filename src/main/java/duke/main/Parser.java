@@ -1,15 +1,6 @@
 package duke.main;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.command.PriorityCommand;
-import duke.command.TodoCommand;
+import duke.command.*;
 import duke.exception.EmptyDscDukeException;
 import duke.exception.InvalidPriorityDukeException;
 import duke.exception.NoDateDukeException;
@@ -86,7 +77,7 @@ public class Parser {
         try {
             checkIfAnythingAfterCommand(task, input);
             index = input.substring(task.length() + 1);
-            c = new DoneCommand(tryToParseIndex(index));
+            c = new DeleteCommand(tryToParseIndex(index));
         } catch (NoTaskIndexDukeException e) {
             c = new InvalidCommand("Index not provided");
         } catch (NumberFormatException e) {

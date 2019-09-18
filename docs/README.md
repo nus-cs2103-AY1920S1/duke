@@ -7,44 +7,64 @@ Task Chick is **optimized for users who prefer to work with a Command Line Inter
 ## Features 
 
 ### Add tasks 
-<img src="./READMEMedia/media/add.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/add.png" width="128" height="183.5" />
+
 Chicky is able to add _todos_, _events_ and _deadlines_ to your task list.
+
 * _Todos_ are tasks without any date or time attached to it
 * _Events_ and _deadlines_ are tasks with a date and time attached to it
 
 ### Update task description
-<img src="./READMEMedia/media/update.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/update.png" width="128" height="183.5" />
+
 Chicky can modify the description of your task.
 
 ### Complete tasks
-<img src="./READMEMedia/media/complete.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/complete.png" width="128" height="183.5" />
+
 Chicky helps you feel accomplished by marking completed tasks with a _v_. Good job!
 
 ### Delete tasks
-<img src="./READMEMedia/media/delete.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/delete.png" width="128" height="183.5" />
+
 If you no longer want a task to be on your list, Chicky can delete it for you.
 
 ### Undo
-<img src="./READMEMedia/media/undo.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/undo.png" width="128" height="183.5" />
+
 We all make mistakes! Chicky can help you undo a command.
 
 ### View all tasks
-<img src="./READMEMedia/media/view.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/view.png" width="128" height="183.5" />
+
 To get an overview of all your tasks, ask Chicky for a list!
 
 ### View schedule
-<img src="./READMEMedia/media/schedule.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/schedule.png" width="128" height="183.5" />
+
 If you want to know what tasks you have on a specific date, Chicky can find that for you.
 
 ### Find keywords
-<img src="./READMEMedia/media/find.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/find.png" width="128" height="183.5" />
+
 Chicky helps you find relevant tasks. All you need to do it specify a search term!
 
 ### Help
-<img src="./READMEMedia/media/help.png" width="256" height="367" />
+
+<img src="./READMEMedia/media/help.png" width="128" height="183.5" />
+
 Get help on the go from Chicky. A list of commands and their keywords will be displayed.
 
 ### Exit
+
 Feel free to close Task Chick once you're done. Your session will be saved. Remember to say bye to Chicky!
 
 ## Usage
@@ -97,15 +117,11 @@ Deletes a task from your task list.
 
 ### `undo` or `u` - Undo an action
 
-`undo` or `u`
-
 Undo a change to the task list. Changes made in a previous session of Task Chick cannot be undone.
 
 ### `list` or `l` - View all tasks
 
 View all your tasks.
-
-`list` or `l`
 
 ### `schedule` or `s` - View scheduled tasks
 
@@ -121,12 +137,8 @@ Find tasks containing a specific search term.
 
 ### `help` or `h` - View instructions
 
-`help` or `h`
-
 Get instructions on how to use Task Chick.
 
 ### `bye` - Exit Task Chick
-
-`bye`
 
 Exit this session of Task Chick. Task Chick will close after 2 seconds.

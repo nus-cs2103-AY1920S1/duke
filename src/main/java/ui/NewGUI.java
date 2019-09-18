@@ -8,7 +8,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 public class NewGUI extends VBox {
     @FXML
@@ -27,12 +26,12 @@ public class NewGUI extends VBox {
     @FXML
     private Integer task;
     private TaskView taskView;
-    private TaskCashFlows taskCashFlows;
+    private TaskNoteBook taskNoteBook;
 
     public void setDuke(Duke d) {
         duke = d;
         taskView = new TaskView(duke.getAllTasks());
-        taskCashFlows = new TaskCashFlows();
+        taskNoteBook = new TaskNoteBook();
         tableArea.getChildren().addAll(taskView.getTable());
     }
 
@@ -52,7 +51,7 @@ public class NewGUI extends VBox {
             if (split.length != 1) {
                 task = Integer.parseInt(split[2])-1;
                 //taskCashFlows.setCashFlowTableView(duke.getAllTasks().get(task).getCashFlows());
-                tableArea.getChildren().addAll(taskCashFlows.getCashFlowTableView());
+                tableArea.getChildren().addAll(taskNoteBook.getCashFlowTableView());
             }else{
                 //taskView.setTable(duke.getAllTasks());
                 tableArea.getChildren().addAll(taskView.getTable());
@@ -60,7 +59,7 @@ public class NewGUI extends VBox {
         }
         taskView.setItems(duke.getAllTasks());
         if(task != null) {
-            taskCashFlows.setCashFlowTableView(duke.getAllTasks().get(task).getCashFlows());
+            taskNoteBook.setCashFlowTableView(duke.getAllTasks().get(task).getNoteBook());
         }
         systemOutput.setText(response);
         userInput.clear();

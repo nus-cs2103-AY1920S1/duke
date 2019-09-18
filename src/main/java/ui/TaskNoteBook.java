@@ -1,6 +1,6 @@
 package ui;
 
-import financedata.CashFlow;
+import Notes.Notes;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,43 +16,42 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class TaskCashFlows extends TableView {
+public class TaskNoteBook extends TableView {
     @FXML
-    private TableView<CashFlow> cashFlowTableView;
+    private TableView<Notes> taskNoteBook;
     @FXML
-    private TableColumn<CashFlow, String> descriptionCol;
+    private TableColumn<Notes, String> categoryCol;
     @FXML
-    private TableColumn<CashFlow, Double> valueCol;
+    private TableColumn<Notes, String> descriptionCol;
     @FXML
-    private TableColumn<CashFlow, LocalDateTime> dateDueCol;
+    private TableColumn<Notes, LocalDateTime> dateCol;
     @FXML
-    private TableColumn<CashFlow, LocalDateTime> dateCreatedCol;
+    private TableColumn<Notes, LocalDateTime> dateCreatedCol;
     private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
 
-    public TaskCashFlows() {
+    public TaskNoteBook() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(NewGUI.class.getResource("/view/TaskCashFlows.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(NewGUI.class.getResource("/view/TaskNoteBook.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //cashFlowTableView.setItems(cashFlows);
-        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("sourceDescription"));
-        valueCol.setCellValueFactory(new PropertyValueFactory<>("value"));
-        dateDueCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
-        dateDueCol.setCellFactory(new ColumnFormatter<>(outputFormat));
-        dateCreatedCol.setCellValueFactory(new PropertyValueFactory<>("dateDue"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateCol.setCellFactory(new ColumnFormatter<>(outputFormat));
+        dateCreatedCol.setCellValueFactory(new PropertyValueFactory<>("dateCreated"));
         dateCreatedCol.setCellFactory(new ColumnFormatter<>(outputFormat));
     }
 
-    public TableView<CashFlow> getCashFlowTableView(){
-        return cashFlowTableView;
+    public TableView<Notes> getCashFlowTableView(){
+        return taskNoteBook;
     }
 
-    public void setCashFlowTableView(ObservableList<CashFlow> cashFlows){
-        cashFlowTableView.setItems(cashFlows);
+    public void setCashFlowTableView(ObservableList<Notes> noteBook){
+        taskNoteBook.setItems(noteBook);
     }
 
     private static class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {

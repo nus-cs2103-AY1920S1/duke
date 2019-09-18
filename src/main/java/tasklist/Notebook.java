@@ -7,22 +7,20 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDateTime;
 
-/**
- * Represents the Todo type of task.
- */
+public class Notebook extends Task{
 
-public class Todo extends Task {
     @JsonCreator
-    public Todo(@JsonProperty("description") String description,
+    public Notebook(@JsonProperty("description") String description,
                 @JsonProperty("isDone") boolean completionStatus,
                 @JsonProperty("dateDue") LocalDateTime date) {
         super(description,completionStatus,date);
-        taskType = new SimpleStringProperty("Todo");
+        taskType = new SimpleStringProperty("notebook");
     }
 
 
     @Override
     public String getOverallStatus() {
-        return "[T]" + getCurrentStatus() + description.getValue();
+        return "[N]" + description.getValue();
     }
+
 }

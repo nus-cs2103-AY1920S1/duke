@@ -31,7 +31,7 @@ public class JsonParser {
         mapper.registerModule(new JavaTimeModule());
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-        writer.writeValue(new File("SaveFile.json"),tasks);
+        writer.writeValue(new File(filepath),tasks);
     }
 
     public TaskList readData() throws IOException {

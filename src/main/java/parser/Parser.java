@@ -3,7 +3,6 @@ package parser;
 import ui.TextUi;
 import tasklist.TaskList;
 
-import javax.crypto.spec.PSource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -23,16 +22,16 @@ public class Parser {
     private boolean isSafe = true;
     private TaskList scheduler;
     private TextUi ui;
-    private String sourceDescription;
+    private String category;
     private Integer tasknum;
-    private Double value;
+    private String noteDescription;
     public static final Pattern COMMAND_FORMAT= Pattern.compile("(?<commandWord>\\w+)"
             + "\\s*(?<completionStatus>(\\[[01]\\])?)"
-            + "\\s*(?<description>([\\w\\s\\d{}.]+)?)"
+            + "\\s*(?<description>([\\w\\s\\d{}.|]+)?)"
             + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
-    public static final Pattern CASH_FORMAT= Pattern.compile("\\{(?<task>[0-9.]+)\\}"
-            + "\\s*(?<sourceDescription>([\\w\\s\\d]+)?)"
-            + "\\s*\\{(?<value>[0-9.]+)\\}");
+    public static final Pattern NOTE_FORMAT = Pattern.compile("\\{(?<task>[0-9.]+)\\}"
+            + "\\s*(?<category>([\\w\\s\\d]+)?)"
+            + "\\|?\\s*(?<description>([\\w\\s\\d]+)?)");
 
     public Parser() {
         ui = new TextUi();
@@ -58,12 +57,12 @@ public class Parser {
         }
     }
 
-    public void splitCashCommand(String cashCommand){
-        Matcher matcher = CASH_FORMAT.matcher(cashCommand);
+    public void splitNotesCommand(String cashCommand){
+        Matcher matcher = NOTE_FORMAT.matcher(cashCommand);
         if (matcher.find()){
-            tasknum = Integer.parseInt(matcher.group("task"));
-            sourceDescription = matcher.group("sourceDescription");
-            value = Double.parseDouble(matcher.group("value"));
+            tasknum = Integer.parseInt(matcher.group("task")) - 1;
+            category = matcher.group("category");
+            noteDescription = matcher.group("description");
         }else{
             ui.printErrorMsg2();
             isSafe = false;
@@ -80,7 +79,6 @@ public class Parser {
         description = matcher.group("description").trim();
         if (!matcher.group("date").isEmpty()) {
             try {
-                // Parsing the date
                 DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
                 date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
             } catch (DateTimeParseException e) {
@@ -95,6 +93,7 @@ public class Parser {
         case "todo":
         case "deadline":
         case "event":
+        case "notebook":
             scheduler.addTask(command, description, isDone, date);
             if (!isLoading) {
                 scheduler.printNewTask();
@@ -112,10 +111,13 @@ public class Parser {
         case "find":
             scheduler.findTasks(description);
             break;
-        case "addcashflow":
-            splitCashCommand(description);
-            scheduler.addCashFlow(tasknum, sourceDescription, value, date);
-            System.out.println("added");
+        case "addnote":
+            splitNotesCommand(description);
+            scheduler.getTasks().get(tasknum).addNote(category, noteDescription, date);
+            break;
+        case "deletenote":
+            splitNotesCommand(description);
+            scheduler.getTasks().get(tasknum).removeNote(category);
             break;
         default:
             ui.printErrorMsg1();

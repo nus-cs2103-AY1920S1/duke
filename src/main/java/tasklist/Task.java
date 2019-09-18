@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-import financedata.CashFlow;
+import Notes.Notes;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -28,6 +28,7 @@ import java.util.ArrayList;
         @Type(value = Todo.class, name = "Todo"),
         @Type(value = Deadline.class, name = "Deadline"),
         @Type(value = Event.class, name = "Event"),
+        @Type(value = Notebook.class, name = "Notebook")
 })
 /**
  * Abstract class for all tasks.
@@ -40,7 +41,7 @@ public abstract class Task {
     protected SimpleBooleanProperty isDone;
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
     protected ObjectProperty<LocalDateTime> dateDue;
-    protected ArrayList<CashFlow> cashFlows = new ArrayList<>();
+    protected ArrayList<Notes> noteBook = new ArrayList<>();
     protected TextUi ui = new TextUi();
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM hhmm a");
 
@@ -85,27 +86,19 @@ public abstract class Task {
         isDone.setValue(true);
     }
 
-    /**
-     * prints the the full task details in to a format for easy storage and loading.
-     * to be implemented according to task type.
-     * @return a string that contains the details of the task in a format the parser can read
-     */
-    @JsonIgnore
-    public abstract String encodeForStorage();
 
-    public void addCashFlow(String sourceDescription, Double value,LocalDateTime dateDue){
-        cashFlows.add(new CashFlow(sourceDescription, value, dateDue));
-        System.out.println(cashFlows.size());
+    public void addNote(String category, String description,LocalDateTime dateDue){
+        noteBook.add(new Notes(category, description, dateDue));
+        ui.printAddedItem(category + " " + description + " " + dateDue, noteBook.size());
     }
 
-    public void removeCashFlow(String cashFlowToRemove){
-        if (cashFlowToRemove.contains("all")){
-            cashFlows.clear();
-            ui.printRemovedTask("All entries", cashFlows.size()+1);
+    public void removeNote(String noteToRemove){
+        if (noteToRemove.contains("all")){
+            noteBook.clear();
+            ui.printRemovedItem("All entries", noteBook.size()+1);
         }else {
-            int cashFlowTodDelete = Integer.parseInt(cashFlowToRemove);
-            //ui.printRemovedTask(cashFlows.get(CashFlowTodDelete - 1).getOverallStatus(), tasks.size());
-            cashFlows.remove(cashFlowTodDelete - 1);
+            int NoteToDelete = Integer.parseInt(noteToRemove);
+            noteBook.remove(NoteToDelete - 1);
         }
     }
 
@@ -157,11 +150,8 @@ public abstract class Task {
         this.dateDue.set(dateDue);
     }
 
-    public ObservableList<CashFlow> getCashFlows() {
-        return FXCollections.observableArrayList(cashFlows);
+    public ObservableList<Notes> getNoteBook() {
+        return FXCollections.observableArrayList(noteBook);
     }
 
-/*    public void setCashFlows(ObservableList<CashFlow> cashFlows) {
-        this.cashFlows = cashFlows;
-    }*/
 }

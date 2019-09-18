@@ -12,15 +12,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected String at;
-
-/*    public Event(String name, boolean completionStatus, LocalDateTime date) {
-        super(name, completionStatus,date);
-        taskType = new SimpleStringProperty("Event");
-    }*/
-
     @JsonCreator
-    public Event(@JsonProperty("description") String description,@JsonProperty("isDOne") boolean completionStatus, @JsonProperty("dateDue") LocalDateTime date) {
+    public Event(@JsonProperty("description") String description,
+                 @JsonProperty("isDone") boolean completionStatus,
+                 @JsonProperty("dateDue") LocalDateTime date) {
         super(description, completionStatus,date);
         taskType = new SimpleStringProperty("Event");
     }
@@ -31,10 +26,4 @@ public class Event extends Task {
                 + dateDue.getValue().format(OUTPUT_FORMAT) + ")";
     }
 
-    @Override
-    public String encodeForStorage() {
-        int myInt = isDone.getValue() ? 1 : 0;
-        return "event [" + myInt + "]" + description.getValue() + "/at"
-                + dateDue.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-    }
 }

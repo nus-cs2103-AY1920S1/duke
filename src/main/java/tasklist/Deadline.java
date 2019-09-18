@@ -13,7 +13,9 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
 
     @JsonCreator
-    public Deadline(@JsonProperty("description") String description, @JsonProperty("isDOne") boolean completionStatus, @JsonProperty("dateDue") LocalDateTime date) {
+    public Deadline(@JsonProperty("description") String description,
+                    @JsonProperty("isDOne") boolean completionStatus,
+                    @JsonProperty("dateDue") LocalDateTime date) {
         super(description,completionStatus, date);
         taskType = new SimpleStringProperty("Deadline");
     }
@@ -22,13 +24,6 @@ public class Deadline extends Task {
     public String getOverallStatus() {
         return "[D]" + getCurrentStatus() + description.getValue() + "(by:"
                 + dateDue.getValue().format(OUTPUT_FORMAT) + ")";
-    }
-
-    @Override
-    public String encodeForStorage() {
-        int myInt = isDone.getValue() ? 1 : 0;
-        return "deadline [" + myInt + "]" + description.getValue() + "/by"
-                + dateDue.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
 }

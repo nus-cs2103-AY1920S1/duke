@@ -30,14 +30,14 @@ public class TaskList {
      * prints the ui after adding a new task.
      */
     public void printNewTask() {
-        ui.printAddedTask(tasks.get(tasks.size()-1).getOverallStatus(), tasks.size());
+        ui.printAddedItem(tasks.get(tasks.size()-1).getOverallStatus(), tasks.size());
     }
 
     /**
      * prints the ui for listing tasks.
      */
     public void listTasks() {
-        ui.printTaskList(tasks);
+        ui.printItemList(tasks);
     }
 
     /**
@@ -68,6 +68,8 @@ public class TaskList {
         case "event":
             tasks.add(new Event(description, completionStatus, date));
             break;
+        case "notebook":
+            tasks.add(new Notebook(description,completionStatus,date));
         default:
             // not necessary as tasktype can only be the above 3
         }
@@ -80,10 +82,10 @@ public class TaskList {
     public void removeTask(String deletedEvent) {
         if (deletedEvent.contains("all")){
             tasks.clear();
-            ui.printRemovedTask("All tasks", tasks.size()+1);
+            ui.printRemovedItem("All tasks", tasks.size()+1);
         }else {
             int taskTodDelete = Integer.parseInt(deletedEvent);
-            ui.printRemovedTask(tasks.get(taskTodDelete - 1).getOverallStatus(), tasks.size());
+            ui.printRemovedItem(tasks.get(taskTodDelete - 1).getOverallStatus(), tasks.size());
             tasks.remove(taskTodDelete - 1);
         }
     }
@@ -110,9 +112,5 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public void addCashFlow(Integer tasknum, String sourceDescription , Double value , LocalDateTime dateDue){
-        tasks.get(tasknum).addCashFlow(sourceDescription, value, dateDue);
-        System.out.println("done");
-    }
 
 }

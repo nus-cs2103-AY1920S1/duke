@@ -1,6 +1,5 @@
 # User Guide
 
-##Introduction
 **Duke** is created for simple and easy **management of tasks**, using text commands in the command line. It supports various tasks like **DoAfters, Deadlines, Events** and **ToDos** and tracks them by displaying a neat overview of all tasks in a Graphical User Interface (GUI).
 
 ## Features
@@ -10,7 +9,7 @@
 
 #### Usage
 
-### `bye`
+#### `bye`
 
 Saves all current data and **exits** Duke.
 
@@ -23,7 +22,7 @@ Adds a **DoAfter** task to Duke.
 
 #### Usage
 
-### `doafter NAME_OF_DOAFTER /after DATE_TIME`
+#### `doafter NAME_OF_DOAFTER /after DATE_TIME`
 
 Add **DoAfter** task with *DATE_TIME* (format DD/MM/YYYY HH/MM) to Duke.
 
@@ -36,7 +35,7 @@ Marks a task as **done** in Duke.
 
 #### Usage
 
-### `done INDEX_OF_TASK`
+#### `done INDEX_OF_TASK`
 
 Marks a task at index *INDEX_OF_TASK* as **done** in Duke.
 
@@ -49,7 +48,7 @@ Adds a **Deadline** task to Duke.
 
 #### Usage
 
-### `deadline NAME_OF_DEADLINE /by DATE_TIME`
+#### `deadline NAME_OF_DEADLINE /by DATE_TIME`
 
 Add **Deadline** with *DATE_TIME* (format DD/MM/YYYY HH/MM) to Duke.
 
@@ -62,7 +61,7 @@ Example of usage:
 
 #### Usage
 
-### `delete INDEX_OF_TASK`
+#### `delete INDEX_OF_TASK`
 
 **Deletes** task at *INDEX_OF_TASK* in Duke.
 
@@ -75,7 +74,7 @@ Adds an **Event** task to Duke.
 
 #### Usage
 
-### `event NAME_OF_EVENT /at DATE_TIME`
+#### `event NAME_OF_EVENT /at DATE_TIME`
 
 Add **Event** with *DATE_TIME* (format DD/MM/YYYY HH/MM) to Duke.
 
@@ -88,7 +87,7 @@ Example of usage:
 
 #### Usage
 
-### `find STRING`
+#### `find STRING`
 
 **Finds** all occurrences of *STRING* in tasks of Duke and prints them out.
 
@@ -101,7 +100,7 @@ Example of usage:
 
 #### Usage
 
-### `list`
+#### `list`
 
 **Prints** out all tasks in Duke.
 
@@ -114,7 +113,7 @@ Adds an **ToDo** task to Duke.
 
 #### Usage
 
-### `event NAME_OF_TODO`
+#### `event NAME_OF_TODO`
 
 Add **ToDo** to Duke.
 

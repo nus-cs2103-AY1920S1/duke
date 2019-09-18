@@ -1,3 +1,5 @@
+import java.text.NumberFormat;
+
 /**
  * Delete command that inherits from Command, deletes a task from TaskList.
  */
@@ -21,21 +23,21 @@ public class DeleteCommand extends Command {
      */
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] inputArr = input.split(" ");
-        //no input number
-        if (inputArr.length == 1) {
+        try {
+            String[] inputArr = input.split(" ");
+            //no input number
+            if (inputArr.length == 1) {
+                throw new DukeException("☹ OOPS!!! Please input a valid number.");
+            }
+            int num = Integer.valueOf(inputArr[1]);
+            //invalid num, will index out of bounds
+            Task task = tasks.getTask(num - 1);
+            tasks.deleteTask(num - 1);
+            ui.setDeleteResponse(task, tasks.getSize());
+            storage.save(tasks);
+        } catch(NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! Please input a valid number.");
         }
-        int num = Integer.parseInt(inputArr[1]);
-        //invalid num, will index out of bounds
-        Task task = tasks.getTask(num - 1);
-        tasks.deleteTask(num - 1);
-        ui.setResponse("Noted. I've removed this task:\n"
-                +
-                "     " + task + "\n"
-                +
-                "     Now you have " + (tasks.getSize()) + " tasks in the list.");
-        storage.save(tasks);
 
     }
 }

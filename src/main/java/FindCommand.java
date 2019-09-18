@@ -23,7 +23,7 @@ public class FindCommand extends Command {
                 i++;
             }
         }
-        ui.setResponse("Here are the matching tasks in your list:" + "\n" + result);
+        ui.setFindResponse(result.toString());
     }
 }
 

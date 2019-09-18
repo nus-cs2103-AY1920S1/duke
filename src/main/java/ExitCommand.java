@@ -21,7 +21,7 @@ public class ExitCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         this.isExit = true;
-        ui.setResponse ("Bye. Hope to see you again soon!");
+        ui.setExitResponse ("Bye. Hope to see you again soon!");
     }
 
 

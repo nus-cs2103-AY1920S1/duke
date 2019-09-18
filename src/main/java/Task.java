@@ -52,6 +52,10 @@ public class Task implements Serializable {
         return task.contains(s);
     }
 
+    public String getDateTime() {
+        return "";
+    }
+
     @Override
     public String toString() {
         String logo;

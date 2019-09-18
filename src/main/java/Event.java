@@ -15,6 +15,14 @@ public class Event extends Task {
         super(task);
         this.dateTime = Ui.toDateString(dateTime);
     }
+    /**
+     * Gets the date and time of the event.
+     * @return date and time of event.
+     */
+    @Override
+    public String getDateTime() {
+        return this.dateTime;
+    }
 
     /**
      * Returns a string representation of an Event object.

@@ -30,7 +30,7 @@ public class Duke {
         try {
             storage.load(tasks);
         } catch (DukeException e) {
-            ui.setResponse(e.getMessage());
+            ui.setErrorResponse(e.getMessage());
             ui.printResponse();
         }
 
@@ -41,7 +41,7 @@ public class Duke {
       * @return welcome message, including list of tasks
      */
     public String getWelcomeMessage() {
-        ui.setResponse("Hello! I am Duke\n"
+        ui.setWelcomeResponse("Hello! I am Duke\n"
                 +
                 "     What can I do for you?\n"
                 +
@@ -71,7 +71,7 @@ public class Duke {
                 isExit = c.isExit();
                 storage.save(tasks);
             } catch (DukeException e) {
-                ui.setResponse(e.getMessage());
+                ui.setErrorResponse(e.getMessage());
                 ui.printResponse();
             }
         }
@@ -97,7 +97,7 @@ public class Duke {
             ui.printResponse();
             return ui.getResponse();
         } catch (DukeException e) {
-            ui.setResponse(e.getMessage());
+            ui.setErrorResponse(e.getMessage());
             ui.printResponse();
             return ui.getResponse();
         }

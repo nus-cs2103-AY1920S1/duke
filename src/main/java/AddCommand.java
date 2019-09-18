@@ -16,6 +16,16 @@ public class AddCommand extends Command {
         this.action = action;
     }
 
+    public TaskList detectAnomalies(Task currentTask, TaskList tasks) {
+        TaskList clashedTasks = new TaskList();
+        for (Task task : tasks.getTasks()) {
+            if (currentTask.getDateTime().equals(task.getDateTime())) {
+                clashedTasks.addTask(task);
+            }
+        }
+        return clashedTasks;
+    }
+
     /**
      * Executes the action to be performed.
      *
@@ -23,11 +33,12 @@ public class AddCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int num;
         String desc;
         Task task = null;
         String[] inputArr = input.split(" ");
+        TaskList clashedTasks = null;
         switch (action) {
         case TODO:
             //trim so that cannot pass with just spaces
@@ -54,6 +65,7 @@ public class AddCommand extends Command {
                     throw new DukeException("☹ OOPS!!! Please input a deadline after /by");
                 } else {
                     task = new Deadline(desc, by);
+                    clashedTasks = detectAnomalies(task, tasks);
                 }
             }
             break;
@@ -73,6 +85,7 @@ public class AddCommand extends Command {
                     throw new DukeException("☹ OOPS!!! Please input a time after /at");
                 } else {
                     task = new Event(desc, at);
+                    clashedTasks = detectAnomalies(task, tasks);
                 }
             }
             break;
@@ -80,15 +93,13 @@ public class AddCommand extends Command {
             break;
         }
         // if task is still null do nothing
-        if (task != null) {
-            tasks.addTask(task);
-            ui.setResponse("Got it. I've added this task:\n"
-                    +
-                    "       " + task + "\n"
-                    +
-                    "     Now you have " + tasks.getSize() + " tasks in the list.");
-            storage.save(tasks);
+        assert task != null : "Task is null, exceptions not handled.";
+        tasks.addTask(task);
+        if (clashedTasks == null || clashedTasks.getSize() == 0) {
+            ui.setAddTaskResponse(task, tasks.getSize());
         } else {
+            ui.setClashedTaskResponse(task, clashedTasks, tasks.getSize());
         }
+        storage.save(tasks);
     }
 }

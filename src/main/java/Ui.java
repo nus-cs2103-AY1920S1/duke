@@ -1,5 +1,9 @@
 import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.time.DateTimeException;
+import java.util.Date;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
 
 /**
  * User interaction class to take care of all user interactions in the program.
@@ -16,43 +20,34 @@ public class Ui {
      * @param dateTime date and time in dd/mm/yy hh:mm format.
      * @return Day of Month, Year hh.mm(am/pm) format. Example: 2nd of December 2019, 6pm.
      */
+
     static String toDateString(String dateTime) {
         try {
-            String[] s = dateTime.split(" ");
-            String[] date = s[0].split("/");
-            int intDay = Integer.parseInt(date[0]);
-            String day = "";
-            int intTime = Integer.parseInt(s[1]);
-            String time = "";
-            if (intDay > 3) {
-                day = intDay + "th";
-            } else if (intDay == 1) {
-                day = intDay + "st";
-            } else if (intDay == 2) {
-                day = intDay + "nd";
-            } else if (intDay == 3) {
-                day = intDay + "rd";
+            SimpleDateFormat parser = null;
+            SimpleDateFormat formatter = null;
+            if (dateTime.split(" ").length == 2) {
+                parser = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                formatter = new SimpleDateFormat("dd MMMM yyyy, h.mm a");
+            } else {
+                parser = new SimpleDateFormat("dd/MM/yyyy");
+                formatter = new SimpleDateFormat("dd MMMM yyyy");
             }
-            int intMinutes = intTime % 100;
-            String minutes = "";
-            if (intMinutes / 10 == 0) {
-                minutes = "0" + intMinutes;
+            Date convertedDate = parser.parse(dateTime);
+            String output = formatter.format(convertedDate);
+            String[] outputArr = output.split(" ");
+            int day = Integer.valueOf(outputArr[0]) % 10;
+            if (day > 3 || day == 0) {
+                outputArr[0] += "th of";
+            } else if (day == 1) {
+                outputArr[0] += "st of";
+            } else if (day == 2) {
+                outputArr[0] += "nd of";
+            } else if (day == 3) {
+                outputArr[0] += "rd of";
             }
-            if (intTime > 1259) {
-                intTime -= 1200;
-                time = intTime / 100 + "." + minutes + "pm";
-            } else if (intTime > 1159) {
-                time = intTime / 100 + "." + minutes + "pm";
-            } else if (intTime < 1159) {
-                time = intTime / 100 + "." + minutes + "am";
-            }
-            int intMonth = Integer.parseInt(date[1]);
-            String month = new DateFormatSymbols().getMonths()[intMonth - 1];
-            int year = Integer.parseInt(date[2]);
-            String result = "";
-            result = day + " of " + month + " " + year + ", " + time;
+            String result = String.join(" ", outputArr);
             return result;
-        } catch (Exception e) {
+        } catch (DateTimeException | ParseException e) {
             return dateTime;
         }
     }
@@ -98,17 +93,84 @@ public class Ui {
         return this.inputArr;
     }
 
-    void setResponse(String response) {
+    private void setResponse(String response) {
         this.response = "    ______________________________________________\n"
                 +
                 "     " + response + "\n"
                 +
                 "    ______________________________________________";
     }
-    void printResponse(){
+
+    public void setAddTaskResponse(Task task, int size) {
+        setResponse("Got it. I've added this task:\n"
+                +
+                "       " + task + "\n"
+                +
+                "     Now you have " + size + " tasks in the list.");
+    }
+
+    public void setClashedTaskResponse(Task task, TaskList clashedTasks, int size) {
+        StringBuilder clashedTasksStr = new StringBuilder();
+        for (Task clashedTask : clashedTasks.getTasks()) {
+            clashedTasksStr.append("    " + clashedTask + "\n");
+        }
+        setResponse("Take note, newly added task's schedule clashes with existing tasks:\n"
+                +
+                clashedTasksStr
+                +
+                "    I've added this task:\n"
+                +
+                "       " + task + "\n"
+                +
+                "    Now you have " + size + " tasks in the list.");
+    }
+
+    public void setListResponse(TaskList tasks) {
+        setResponse(tasks.listTasks());
+    }
+
+    public void setDoneResponse(Task task) {
+        setResponse("     Nice! I've marked this task as done:\n"
+                +
+                "     "
+                +
+                task);
+    }
+
+    public void setFindResponse(String result) {
+        setResponse("Here are the matching tasks in your list:" + "\n" + result);
+    }
+
+    public void setExitResponse(String message) {
+        setResponse(message);
+    }
+
+    public void setErrorResponse(String error) {
+        setResponse(error);
+    }
+
+    public void setWelcomeResponse(String message) {
+        setResponse(message);
+    }
+
+    public void setDeleteResponse(Task task, int size) {
+        setResponse("Noted. I've removed this task:\n"
+                +
+                "     " + task + "\n"
+                +
+                "     Now you have "
+                +
+                size
+                +
+                " tasks in the list.");
+
+    }
+
+    void printResponse() {
         print(response);
     }
-    String getResponse(){
+
+    String getResponse() {
         return this.response;
     }
 

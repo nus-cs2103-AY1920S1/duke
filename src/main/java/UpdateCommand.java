@@ -22,34 +22,28 @@ public class UpdateCommand extends Command {
      * @param ui      Ui object.
      * @param storage Storage object to save and load files.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int num;
         String[] inputArr = input.split(" ");
         switch (action) {
         case DONE:
-                //no input number
-                if (inputArr.length == 1) {
-                    throw new DukeException("☹ OOPS!!! Please input a valid number.");
-                }
-                num = Integer.parseInt(inputArr[1]);
-                //invalid num, will index out of bounds
-                if (num > tasks.getSize()) {
-                    throw new DukeException("☹ OOPS!!! Please input a valid number.");
-                } else {
-                    Task task = tasks.getTask(num - 1);
-                    task.markAsDone();
-                    ui.setResponse("    ____________________________________________________________\n"
-                            +
-                            "     Nice! I've marked this task as done:\n"
-                            +
-                            "     " + task + "\n"
-                            +
-                            "    ____________________________________________________________\n");
-                    storage.save(tasks);
-                }
+            //no input number
+            if (inputArr.length == 1) {
+                throw new DukeException("☹ OOPS!!! Please input a valid number.");
+            }
+            num = Integer.parseInt(inputArr[1]);
+            //invalid num, will index out of bounds
+            if (num > tasks.getSize()) {
+                throw new DukeException("☹ OOPS!!! Please input a valid number.");
+            } else {
+                Task task = tasks.getTask(num - 1);
+                task.markAsDone();
+                ui.setDoneResponse(task);
+                storage.save(tasks);
+            }
             break;
         case LIST:
-            ui.setResponse(tasks.listTasks());
+            ui.setListResponse(tasks);
             break;
         default:
             break;

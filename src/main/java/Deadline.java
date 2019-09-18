@@ -3,7 +3,7 @@
  */
 public class Deadline extends Task {
 
-    public String dateTime;
+    private String dateTime;
 
     /**
      * Constructs a new Deadline object.
@@ -16,6 +16,14 @@ public class Deadline extends Task {
         this.dateTime = Ui.toDateString(dateTime);
     }
 
+    /**
+     * Gets the date and time of the deadline.
+     * @return date and time of deadline
+     */
+    @Override
+    public String getDateTime() {
+        return this.dateTime;
+    }
     /**
      * Returns a string representation of a Deadline object in the in the format of [D][✗] task (by: dateTime).
      *

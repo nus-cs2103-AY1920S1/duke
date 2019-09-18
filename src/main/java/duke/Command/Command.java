@@ -29,11 +29,11 @@ public abstract class Command {
         return this.shouldExit;
     }
 
-   /**
-    * Executes the commands on Duke.
-    *
-    * @return feedback message to update user.
-    */
+    /**
+     * Executes the commands on Duke.
+     *
+     * @return feedback message to update user.
+     */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
 }

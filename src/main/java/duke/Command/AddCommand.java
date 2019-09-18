@@ -47,7 +47,7 @@ public class AddCommand extends Command {
                 taskToAdd = new ToDo(inputsplit[1]);
                 break;
             case "deadline":
-                descripSplit = inputsplit[1].split( " /by ", 2);
+                descripSplit = inputsplit[1].split(" /by ", 2);
                 ldt = DateTimeHelper.formatInput(descripSplit[1]);
                 taskToAdd = new Deadline(descripSplit[0], ldt);
                 break;

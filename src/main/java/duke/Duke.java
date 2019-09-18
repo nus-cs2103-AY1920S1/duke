@@ -1,29 +1,13 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import duke.core.Storage;
 import duke.core.Ui;
 import duke.core.Parser;
 import duke.command.Command;
 import duke.helper.DukeException;
 import duke.task.TaskList;
-import duke.task.Task;
-import java.util.ArrayList;
 
 public class Duke {
-    private ArrayList<Task> textEntered;
     private Storage storage;
     private TaskList tasks;
     private Ui userIF;
@@ -49,8 +33,8 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            //no empty string input
-//            assert input != "";
+            //no empty string input since already disabled send button if is empty string
+            assert input != "";
             Command c = Parser.parse(input);
             return c.execute(tasks, userIF, storage);
         } catch (DukeException e) {

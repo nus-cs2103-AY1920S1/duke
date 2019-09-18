@@ -94,7 +94,7 @@ public class Storage {
         }
     }
 
-    private Task outputTaskDetails(String taskDetails) throws DukeException{
+    private Task outputTaskDetails(String taskDetails) throws DukeException {
         //note that | is known as || in java
         String[] inputsplit = taskDetails.split("\\|");
         String taskType = inputsplit[0];
@@ -118,6 +118,7 @@ public class Storage {
         this.checkIfDone(taskToAdd,inputsplit[1]);
         return taskToAdd;
     }
+
     /**
      * Checks if the task is done by calling markIsDone();
      * Called by outputFileContents and checks the string which is retrieved from duke.txt if the task is Done.

@@ -42,7 +42,7 @@ public class Deadline extends Task implements Timeable {
     }
 
     /**
-     * Returns a string, referring to the type of task
+     * Returns a string, referring to the type of task.
      *
      * @return the symbol for type of task, "[D]".
      */

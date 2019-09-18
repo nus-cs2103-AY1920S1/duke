@@ -13,6 +13,7 @@ import javafx.beans.binding.Bindings;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -31,6 +32,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Disables the send button if the textfield is empty.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -42,6 +46,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Displays a greeting DialogBox.
+     */
     public void greet() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.sayHello(), dukeImage)
@@ -56,6 +63,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        //Ensures nothing is returned if the Userinput is equals to ""
         if (input.equalsIgnoreCase("")) {
             return ;
         }

@@ -42,17 +42,17 @@ public class TaskList {
     }
 
     /**
-     * Singles out the Tasks in the ArrayList.
+     * Filters out the Tasks in the ArrayList.
      *
-     * @param inputString obtained from the Parser to reflect the string to find
-     * @return returnedTaskList, the new ArrayList<Task> containing the tasks found.
+     * @param inputString obtained from the Parser to reflect the string to find.
+     * @return returnedTaskList, the new ArrayList containing the tasks found.
      */
     public ArrayList<Task> findTask(String inputString) {
         ArrayList<Task> returnedTaskList = new ArrayList<Task>();
         for (int i = 0; i < taskArray.size(); i++) {
             Task t = taskArray.get(i);
             String toCheck = t.getDescription();
-            if (toCheck.contains(inputString)) {
+            if (toCheck.toLowerCase().contains(inputString)) {
                 returnedTaskList.add(t);
             }
         }

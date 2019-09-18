@@ -37,8 +37,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        double minHeight = text.split("\n").length * 17 + 50 ;
-        dialog.setMinHeight(minHeight - 30);
+        double minHeight = text.split("\n").length * 25 + 75;
         setLabelSize(text, minHeight);
         setImageViewSize(img);
     }

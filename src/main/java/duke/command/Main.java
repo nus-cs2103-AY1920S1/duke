@@ -23,6 +23,9 @@ public class Main extends Application {
         try {
             Scene scene = loadLayout(stage);
             addWelcomeMessage(scene);
+            stage.setTitle("Missy Wathev Udan");
+            Image appIcon = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+            stage.getIcons().add(appIcon);
         } catch (IOException e) {
             e.printStackTrace();
         }

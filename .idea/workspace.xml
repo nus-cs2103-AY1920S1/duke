@@ -6,27 +6,30 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.5.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.5.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.5.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.5.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.5.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.5.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.5.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.5.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.5.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.5.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Storage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Storage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/TaskList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/TaskList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/ToDos.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/ToDos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/view/DialogBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/view/DialogBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/view/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/view/MainWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Deadline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deadline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DialogBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DialogBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Events.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Events.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/TaskList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TaskList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ToDos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ToDos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Ui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DialogBox.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DialogBox.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/MainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/ToDosTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distributions/duke-0.1.0.tar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/distributions/duke-0.1.0.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/duke-0.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/EventsTest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/ToDosTest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/base-style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/js/report.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/default-package.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/scripts/duke" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/scripts/duke.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-EventsTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-ToDosTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +50,23 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="duke" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="duke" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="duke" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="shadow" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -83,6 +102,14 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="gradle clean" />
+      <command value="gradle fatjar" />
+      <command value="gradle fatJar" />
+      <command value="gradle shadowJar" />
+    </option>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -95,60 +122,14 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.kwan_chen_sheng_duke [run]">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="duke_main" />
-      <option name="VM_PARAMETERS" value="-enableassertions" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Gradle.kwan_chen_sheng_duke [shadowJar]">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="VM_PARAMETERS" value="-ea" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="kwan_chen_sheng_duke [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="buildDependents" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="kwan_chen_sheng_duke [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="kwan_chen_sheng_duke [run --ea]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="kwan_chen_sheng_duke [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -159,8 +140,45 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="run" />
-            <option value="--ea" />
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="kwan_chen_sheng_duke [fatJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="fatJar" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="kwan_chen_sheng_duke [fatjar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="fatjar" />
           </list>
         </option>
         <option name="vmOptions" value="" />
@@ -187,20 +205,39 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="kwan_chen_sheng_duke [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="shadowJar" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Gradle.kwan_chen_sheng_duke [run --ea]" />
       <item itemvalue="Gradle.kwan_chen_sheng_duke [run]" />
-      <item itemvalue="Gradle.kwan_chen_sheng_duke [buildDependents]" />
-      <item itemvalue="Gradle.kwan_chen_sheng_duke [build]" />
+      <item itemvalue="Gradle.kwan_chen_sheng_duke [clean]" />
+      <item itemvalue="Gradle.kwan_chen_sheng_duke [fatjar]" />
+      <item itemvalue="Gradle.kwan_chen_sheng_duke [fatJar]" />
+      <item itemvalue="Gradle.kwan_chen_sheng_duke [shadowJar]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.kwan_chen_sheng_duke [shadowJar]" />
         <item itemvalue="Gradle.kwan_chen_sheng_duke [run]" />
-        <item itemvalue="Gradle.kwan_chen_sheng_duke [build]" />
-        <item itemvalue="Gradle.kwan_chen_sheng_duke [buildDependents]" />
-        <item itemvalue="Gradle.kwan_chen_sheng_duke [run --ea]" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Gradle.kwan_chen_sheng_duke [fatJar]" />
+        <item itemvalue="Gradle.kwan_chen_sheng_duke [fatjar]" />
+        <item itemvalue="Gradle.kwan_chen_sheng_duke [clean]" />
       </list>
     </recent_temporary>
   </component>

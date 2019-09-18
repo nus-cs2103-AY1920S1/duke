@@ -2,4 +2,3 @@ T | 0 | to-do
 D | 0 | deadline | /by | 080919 2359
 D | 0 | deadline | /by | 080920 2359
 E | 0 | event | /at | Home
-D | 0 | clean beas | /by | 031219 2359

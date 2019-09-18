@@ -31,12 +31,10 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this();
-        if (!tasks.isEmpty() && tasks.get(0) == null) {
-            // adding 1-indexed list of tasks
-            this.tasks.addAll(1, tasks);
-        } else {
-            // adding a 0-indexed list of tasks
-            this.tasks.addAll(tasks);
+        for (Task task: tasks) {
+            if (task != null) {
+                this.tasks.add(task);
+            }
         }
     }
 

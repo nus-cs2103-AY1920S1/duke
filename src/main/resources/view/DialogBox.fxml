@@ -9,7 +9,7 @@
 
 <!-- @@author KendrickAng-reused -->
 <!-- Solution adapted from ccyccyccy/duke -->
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="490.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" style="-fx-background-color: white; -fx-background-radius: 8.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" text="Label" wrapText="true">
             <HBox.margin>
@@ -26,6 +26,9 @@
             <clip>
                 <Circle centerX="50.0" centerY="50.0" radius="50.0" />
             </clip>
+            <HBox.margin>
+                <Insets left="10.0" />
+            </HBox.margin>
         </ImageView>
     </children>
     <padding>

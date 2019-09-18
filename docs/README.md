@@ -2,7 +2,7 @@
 
 Trackr is a **desktop application that helps you to manage tasks**. Trackr is **optimized for users who prefer to work with a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-<img src="./READMEMedia/media/app.png" width="254" height="400" />
+<img src="app.png" width="254" height="400" />
 
 If you can type fast, Trackr can help you complete your task management process faster than traditional GUI apps.
 
@@ -12,7 +12,7 @@ If you can type fast, Trackr can help you complete your task management process 
 3. Copy the file to the folder you want to use as the home folder for your list of tasks.
 4. Double-click the file to start to app. The GUI should appear in a few seconds.
 
-<img src="./READMEMedia/media/launch.png" width="254" height="400" />
+<img src="launch.png" width="254" height="400" />
 
 5. Type all commands in the command box at the bottom and press "Enter" on your keyboard to execute it.
 e.g. typing `help` and pressing "Enter" will show a list of available commands.

@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * An exception when no task index is given to Duke when checking/deleting tasks.
+ * An exception when no priority when trying to set a task's priority.
  */
 public class NoPriorityDukeException extends DukeException {
     public NoPriorityDukeException(String s) {

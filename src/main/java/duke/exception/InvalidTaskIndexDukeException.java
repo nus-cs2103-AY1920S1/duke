@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * An exception when an invalid task index is given to Duke when checking/deleting tasks.
+ * An exception when the task index is invalid because it is not a number or it is out of bounds.
  */
 public class InvalidTaskIndexDukeException extends DukeException {
     public InvalidTaskIndexDukeException(String s) {

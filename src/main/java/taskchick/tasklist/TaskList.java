@@ -50,7 +50,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         int counter = 1;
         for (Task task : tasksToPrint) {
-            sb.append(counter + "." + task.toString() + "\n");
+            sb.append("\n" + counter + "." + task.toString() + "\n");
             counter++;
         }
         return sb.toString();
@@ -91,7 +91,7 @@ public class TaskList {
     public String undoCommand(Storage storage, String olderTaskListInString) {
         ArrayList<Task> olderTaskList = storage.loadTasks(olderTaskListInString);
         replaceTaskList(olderTaskList);
-        StringBuilder sb = new StringBuilder("Ctrl + Z activated!\n" + "Here is your list now:\n");
+        StringBuilder sb = new StringBuilder("Change undone!\n\n" + "Here is your list now:\n");
         sb.append(printNumberedTasks(tasks));
         return sb.toString();
     }
@@ -103,7 +103,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         tasks.add(task);
-        return "Got it. I've added this task:\n" + task.toString() + "\n" + getListSize();
+        return "Got it. Chicky has added this task:\n\n" + task.toString() + "\n\n" + getListSize();
     }
 
     /**
@@ -117,7 +117,8 @@ public class TaskList {
         Task taskToUpdate = tasks.get(index - 1);
         String oldTaskString = taskToUpdate.toString();
         taskToUpdate.updateDescription(description);
-        return "I have updated the task\n" + oldTaskString + "\n" + "as follows\n" + taskToUpdate.toString();
+        return "Chicky has updated the task:\n\n" + oldTaskString + "\n\n" + "as follows:\n\n"
+                + taskToUpdate.toString();
     }
 
     /**
@@ -125,11 +126,11 @@ public class TaskList {
      */
     public String printTasks() {
         if (tasks.isEmpty()) {
-            return "You do not have any tasks in your list.\n" + "Use 'help' to see how to add tasks" +
-                    " to your list!";
+            return "You do not have any tasks in your list.\n" + "Use 'help' to see how to add tasks"
+                    + " to your list!";
         }
 
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder sb = new StringBuilder("Chicky found these tasks in your list:\n");
         sb.append(printNumberedTasks(tasks));
         return sb.toString();
     }
@@ -141,7 +142,7 @@ public class TaskList {
      */
     public String completeTask(int taskNumber) {
         tasks.get(taskNumber - 1).markAsCompleted();
-        return "Nice! I've marked this task as completed:\n" + tasks.get(taskNumber - 1).toString();
+        return "Good job! Chicky has marked this task as completed:\n\n" + tasks.get(taskNumber - 1).toString();
     }
 
     /**
@@ -152,7 +153,7 @@ public class TaskList {
     public String deleteTask(int taskNumber) {
         String taskDescription = tasks.get(taskNumber - 1).toString();
         tasks.remove(taskNumber - 1);
-        return "Noted. I've removed this task:\n" + taskDescription + "\n" + getListSize();
+        return "Alrighty! Chicky has removed this task:\n\n" + taskDescription + "\n\n" + getListSize();
     }
 
     /**
@@ -192,13 +193,14 @@ public class TaskList {
      */
     private String printFoundGreeting(int numResults, String searchTerm) {
         if (numResults == 0) {
-            return "OOPS!!! You don't have any tasks containing the term \"" + searchTerm + "\".";
+            return "OOPS!!! Chicky can't find any task containing the term \"" + searchTerm + "\".";
         } else if (numResults == 1) {
-            return "You have 1 task containing the term \"" + searchTerm + "\":";
+            return "Yay!!! Chicky found 1 task containing the term \"" + searchTerm + "\":\n";
         } else if (numResults > 1) {
-            return "You have " + numResults + " tasks containing the term \"" + searchTerm + "\":";
+            return "Yay!!! Chicky found " + numResults + " tasks containing the term \"" + searchTerm
+                    + "\":\n";
         } else {
-            return "OOPS!!! Task Chick has encountered an unexpected error.";
+            return "OOPS!!! Chicky has encountered an unexpected error.";
         }
     }
 
@@ -244,13 +246,13 @@ public class TaskList {
      */
     private String printScheduleGreeting(int listSize) {
         if (listSize == 0) {
-            return "You do not have any tasks on that day!";
+            return "Yay!!! You do not have any tasks on that day!";
         } else if (listSize == 1) {
-            return "You have 1 task on that day:\n";
+            return "Chicky found 1 task on that day:\n";
         } else if (listSize > 1) {
-            return "You have " + listSize + " tasks on that day:\n";
+            return "Chicky found " + listSize + " tasks on that day:\n";
         } else {
-            return "OOPS!!! Task Chick encountered an unexpected error.";
+            return "OOPS!!! Chicky has encountered an unexpected error.";
         }
     }
 

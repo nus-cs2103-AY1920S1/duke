@@ -32,7 +32,7 @@ public class TaskChick {
      * Initialises a session for Duke and loads tasks, if any, from a previous session.
      */
     public TaskChick() {
-        storage = new Storage("data/taskchick.txt");
+        storage = new Storage("taskchick.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {

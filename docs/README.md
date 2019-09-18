@@ -7,7 +7,7 @@ You can also edit the task descriptions and time afterwards.
 
 ## Usage
 
-###Task Creation:
+### Task Creation:
 
 `todo [taskname]` - creates a simple task to do.
 
@@ -19,10 +19,10 @@ Expected outcome:
 
 `task added to list`
 
-###Task Viewing:
+### Task Viewing:
 `list` - lists all saved tasks
 
-###Task Amendment:
+### Task Amendment:
 
 `update [task number] desc [description of task to change to]` - to change name/ description of task
 
@@ -32,7 +32,7 @@ Expected outcome:
 
 `task updated`
 
-###Task Deletion:
+### Task Deletion:
 
 `delete [task number]` - deletes task from list
 

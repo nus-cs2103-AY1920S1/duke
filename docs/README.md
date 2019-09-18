@@ -14,6 +14,7 @@ you need to do in Duke and check any time you like. Try and enjoy!
   
    e.g. 31/12/2019 23:59
 
+<br><br>
 
 ### 2.1 Adding a new task without time restriction: `todo`
 

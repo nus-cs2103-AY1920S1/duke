@@ -1,18 +1,10 @@
 package duke;
 
+import duke.command.Command;
+import duke.task.TaskList;
+
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
-
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.ToDo;
 
 public abstract class Duke {
     protected static final String DEFAULT_FILE_PATH = "tasks.txt";
@@ -38,15 +30,7 @@ public abstract class Duke {
             }
             tasks = new TaskList();
         }
-        parser = new Parser();
-        parser.register("todo", ToDo.getCommand(tasks, storage));
-        parser.register("deadline", Deadline.getCommand(tasks, storage));
-        parser.register("event", Event.getCommand(tasks, storage));
-        parser.register("list", new ListCommand(tasks));
-        parser.register("find", new FindCommand(tasks));
-        parser.register("done", new DoneCommand(tasks, storage));
-        parser.register("delete", new DeleteCommand(tasks, storage));
-        parser.register("bye", new ByeCommand());
+        parser = Parser.getForDefaultCommands(tasks, storage);
     }
 
     protected boolean runInput(String input) {

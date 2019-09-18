@@ -5,6 +5,7 @@
     1. Types of Tasks
     1. Add Task
     1. Delete Task
+    1. Delete All Tasks
     1. Mark Task Complete
     1. Find Task
     1. Show Task List
@@ -28,6 +29,7 @@ Duke allows the creation of 3 different types of task.
 `event` A task that includes description and specifies a date/time of when the task will occur.
 
 Each task is shown in this format `[task type][task complete] "description" ("by/at: date time")`
+
     Example of a todo task: [T][1] cs2103 increments
     Example of a deadline task: [D][0] cs2103 project (by: 13th September 2019, 4:00pm)
     
@@ -75,6 +77,12 @@ To delete a task, use the command `delete "task number*"`
              Now you have 6 tasks in the list.
           
  *If unsure of task number, you may use the Show Task List function to see the task number of the task you want to delete.
+ 
+### Delete All Tasks
+To delete all tasks, use the command `delete all`
+
+    Example: delete all
+    Outcome: All tasks have been deleted. Your task list is now empty.
 
 ### Mark Task Complete
 To mark a task as completed, use the command `done "task number*"`
@@ -88,8 +96,10 @@ To mark a task as completed, use the command `done "task number*"`
 ### Find Task
 To find tasks by description, use the command `find "description*"`
 
-    Example: find Cs2103
-    Outcome:
+    Example: find increments
+    Outcome: Here are the matching tasks in your list:
+             1.[T][1] cs2103 increments
+             2.[D][0] CS2103 iP increments (by: 21st March 2019, 6:00pm-6:40pm)
     
 *Input description is non-case-sensitive
 
@@ -98,4 +108,13 @@ To exit Duke, use the command `bye`.
 Duke will exit immediately after that.
 
 ## Command Summary
+* Show Task List: `list`
+* Add todo: `todo "description"`
+* Add deadline: `deadline "description" /by "dd/mm/yyyy hhmm-hhmm"`
+* Add event: `event "description" /at "dd/mm/yyyy hhmm"`
+* Delete Task: `delete "task number"`
+* Delete All Task: `delete all`
+* Mark Task Complete: `done "task number"`
+* Find Task: `find "description"`
+* Exit Duke: `bye`
 

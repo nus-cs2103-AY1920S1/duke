@@ -2,6 +2,8 @@ import tasks.Task;
 
 /**
  * Deals with the interactions with the user.
+ *
+ * @author Michelle Yong
  */
 public class Ui {
     public Ui() {}
@@ -9,6 +11,8 @@ public class Ui {
     /**
      * Shows the details of the task added.
      *
+     * @param task The task added.
+     * @param size The new total number of tasks.
      * @return The task added and the number of task in the list.
      */
     public String showTaskAdded(Task task, int size) {
@@ -31,21 +35,17 @@ public class Ui {
 
     /**
      * Shows deadline error.
+     *
+     * @return The deadline error message.
      */
     public String showDeadlineError() {
         return "OOPS!!! The deadline description cannot be empty.";
     }
 
     /**
-     * Shows hello when the application runs.
-     */
-    public void showHello() {
-        System.out.println("Hello! I'm your task manager!");
-        System.out.println("What can I do for you?");
-    }
-
-    /**
      * Shows bye when the application ends.
+     *
+     * @return The bye message.
      */
     public String showBye() {
         return "Bye. Hope to see you again soon!";
@@ -53,27 +53,37 @@ public class Ui {
 
     /**
      * Shows the details of the task marked done.
+     *
+     * @param task The task that is marked done.
+     * @return The message telling user that the task has been marked done.
      */
     public String showTaskDone(Task task) {
-        StringBuffer taskDone = new StringBuffer("Nice! I've marked this task as done: /n ");
+        assert (task.getIsDone());
+        StringBuffer taskDone = new StringBuffer("Nice! I've marked this task as done: \n");
         taskDone.append(task);
         return taskDone.toString();
     }
 
     /**
      * Shows the details of the task removed.
+     *
+     * @param removed The task removed.
+     * @param size The new total number of tasks.
+     * @return The message telling user that the task has been removed.
      */
     public String showTaskRemoved(Task removed, int size) {
         StringBuffer taskRemoved = new StringBuffer("Noted. I've removed this task: ");
         taskRemoved.append(removed);
-        taskRemoved.append("Now you have ");
+        taskRemoved.append("\nNow you have ");
         taskRemoved.append(size);
-        taskRemoved.append(" tasks in the list.");
+        taskRemoved.append(" tasks in the list.\n");
         return taskRemoved.toString();
     }
 
     /**
      * Shows event error.
+     *
+     * @return The event error message.
      */
     public String showEventError() {
         return "OOPS!!! The event description cannot be empty.";
@@ -81,6 +91,8 @@ public class Ui {
 
     /**
      * Shows task error.
+     *
+     * @return The message telling user that there is no such task.
      */
     public String showNoSuchTaskError() {
         return "OOPS!!! There is no such task.";
@@ -88,6 +100,8 @@ public class Ui {
 
     /**
      * Shows command error.
+     *
+     * @return The message telling user that there is no such command.
      */
     public String showUnknownCommandError() {
         return "OOPS!!! I'm sorry, I don't know what you mean :(";

@@ -4,6 +4,8 @@ import java.util.Date;
 
 /**
  * Represents a task.
+ *
+ * @author Michelle Yong
  */
 public class Task {
     protected String description;
@@ -12,7 +14,7 @@ public class Task {
     protected String type = "";
 
     /**
-     * Creates a task object.
+     * Creates a task with description.
      *
      * @param description The description of the task.
      */
@@ -49,6 +51,16 @@ public class Task {
     }
 
     /**
+     * Gets if the task is marked done.
+     *
+     * @return True if task is mark as done.
+     */
+    public boolean getIsDone() {
+        return this.isDone;
+    }
+
+
+    /**
      * Gets the status icon of the task.
      * Tick if it is done, cross otherwise.
      *
@@ -62,7 +74,7 @@ public class Task {
      * Gets the status number of the task.
      * 1 if it is done, 0 otherwise.
      *
-     * @return The status number of the task
+     * @return The status number of the task.
      */
     public String getStatusNum() {
         return isDone ? "1" : "0";
@@ -73,12 +85,14 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+        assert isDone;
     }
 
     /**
      * Checks if the task description contains the keyword
-     * @param keyword the word to be found
-     * @return true if the task description contains the keyword
+     *
+     * @param keyword The word to be found.
+     * @return True if the task description contains the keyword.
      */
     public boolean hasKeyword(String keyword) {
         return description.contains(keyword);

@@ -1,18 +1,14 @@
 import exception.DukeException;
 
-import java.util.Scanner;
-
 /**
  * Handles the user command.
+ *
+ * @author Michelle Yong
  */
 public class Parser {
-    private Scanner sc;
+    public Parser() { }
 
-    public Parser() {
-        Scanner sc = new Scanner(System.in);
-        this.sc = sc;
-    }
-
+    // Features to add: help, tag, priority, edit, undo
     /**
      * Gets the command type of the task.
      *
@@ -31,11 +27,11 @@ public class Parser {
         case "event":
             return new EventCommand(input);
         case "list":
-            return new ListCommand(input);
+            return new ListCommand();
         case "done":
             return new DoneCommand(input);
         case "bye":
-            return new ByeCommand(input);
+            return new ByeCommand();
         case "delete":
             return new DeleteCommand(input);
         case "find":

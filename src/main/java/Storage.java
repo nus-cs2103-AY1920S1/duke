@@ -1,9 +1,7 @@
-
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -16,10 +14,17 @@ import java.text.SimpleDateFormat;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
+ *
+ * @author Michelle Yong
  */
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates the storage with the file of tasks.
+     *
+     * @param filePath The path to the file of tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -37,15 +42,18 @@ public class Storage {
         Scanner fs = new Scanner(file);
         while (fs.hasNext()) {
             String line = fs.nextLine();
+            assert (line.length() > 0);
             String[] taskArr = line.split(" \\| ");
             String type = taskArr[0];
             if (type.equals("T")) {
+                assert (type.equals("T"));
                 Todo todo = new Todo(taskArr[2]);
                 if (taskArr[1].equals("1")) {
                     todo.markAsDone();
                 }
                 list.add(todo);
             } else if (type.equals("D")) {
+                assert (type.equals("D"));
                 String date = taskArr[3].substring(8, 10) + " "
                         + taskArr[3].substring(4, 7) + " "
                         + taskArr[3].substring(24, 28) + " "
@@ -53,16 +61,19 @@ public class Storage {
                 Deadline deadline = new Deadline(taskArr[2],
                         convertToDate(date));
                 if (taskArr[1].equals("1")) {
+                    assert (taskArr[1].equals("1"));
                     deadline.markAsDone();
                 }
                 list.add(deadline);
             } else if (type.equals("E")) {
+                assert (type.equals("E"));
                 String date = taskArr[3].substring(8, 10) + " "
                         + taskArr[3].substring(4, 7) + " "
                         + taskArr[3].substring(24, 28) + " "
                         + taskArr[3].substring(11, 16);
                 Event event = new Event(taskArr[2], convertToDate(date));
                 if (taskArr[1].equals("1")) {
+                    assert (taskArr[1].equals("1"));
                     event.markAsDone();
                 }
                 list.add(event);
@@ -108,16 +119,20 @@ public class Storage {
         StringBuffer textToAdd = new StringBuffer();
         String type = task.getType();
         if (type.equals("T")) {
+            assert (type.equals("T"));
             textToAdd.append("T | ");
         } else if (type.equals("D")) {
+            assert (type.equals("D"));
             textToAdd.append("D | ");
         } else if (type.equals("E")) {
+            assert (type.equals("E"));
             textToAdd.append("E | ");
         }
         textToAdd.append(task.getStatusNum());
         textToAdd.append(" | ");
         textToAdd.append(task.getDescription());
         if (type.equals("D") || type.equals("E")) {
+            assert (type.equals("D") || type.equals("E"));
             textToAdd.append(" | ");
             textToAdd.append(task.getDate());
         }

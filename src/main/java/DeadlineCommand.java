@@ -1,20 +1,41 @@
 import exception.DukeException;
 import tasks.Deadline;
-
+import java.util.Date;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Date;
 
+/**
+ * Represents a deadline command.
+ *
+ * @author Michelle Yong
+ */
 public class DeadlineCommand extends Command {
+    /**
+     * Creates a deadline command with the description.
+     *
+     * @param desc The description for the deadline command.
+     */
     public DeadlineCommand(String desc) {
         super(desc);
     }
 
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, ParseException {
+    /**
+     * Executes the deadline command and shows that the deadline has been added to the list.
+     *
+     * @param storage The storage for the file with all the tasks.
+     * @param taskList The taskList used.
+     * @param ui The User Interface used.
+     * @return The message telling user that the deadline has been added.
+     * @throws IOException If an input or output exception occurred.
+     * @throws ParseException If a parse exception occurred.
+     */
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws
+            IOException, ParseException {
         try {
             if (desc.length() <= 8) {
                 throw new DukeException();
             }
+            assert (desc.length() > 8);
             String[] descArr = desc.split("/");
             Date date = getDate(descArr, storage);
             Deadline deadline =
@@ -22,7 +43,6 @@ public class DeadlineCommand extends Command {
             taskList.addTask(deadline);
             storage.appendTaskToFile(deadline);
             return ui.showTaskAdded(deadline, taskList.getSize());
-
         } catch (DukeException e) {
             return ui.showDeadlineError();
         }
@@ -35,6 +55,7 @@ public class DeadlineCommand extends Command {
      * @return The description of the deadline.
      */
     public String getDeadlineDesc(String[] descArr) {
+        assert (descArr[0].length() >= 9);
         return descArr[0].substring(9, descArr[0].length() - 1);
     }
 }

@@ -1,17 +1,22 @@
-import exception.DukeException;
 import tasks.Task;
-
 import java.util.ArrayList;
 
 /**
  * Contains the task list and updates tasks in the list.
+ *
+ * @author Michelle Yong
  */
 public class TaskList {
     ArrayList<Task> list = new ArrayList<Task>();
 
     public TaskList() {}
 
-    public TaskList(ArrayList<Task> list) throws DukeException {
+    /**
+     * Creates the task list.
+     *
+     * @param list The list of tasks.
+     */
+    public TaskList(ArrayList<Task> list) {
         this.list = list;
     }
 
@@ -22,16 +27,6 @@ public class TaskList {
      */
     public ArrayList<Task> getList() {
         return list;
-    }
-
-    /**
-     * Gets the task of index n.
-     *
-     * @param n The index of the task in the list.
-     * @return The task of index n.
-     */
-    public Task getTask(int n) {
-        return list.get(n);
     }
 
     /**
@@ -59,6 +54,7 @@ public class TaskList {
      * @return The task after it is marked as done.
      */
     public Task markTaskAsDone(int n) {
+        assert (list.size() > n);
         Task task = list.get(n);
         task.markAsDone();
         return task;
@@ -71,6 +67,7 @@ public class TaskList {
      * @return The task after it is removed from the list.
      */
     public Task removeTask(int n) {
+        assert (list.size() > n);
         return list.remove(n);
     }
 

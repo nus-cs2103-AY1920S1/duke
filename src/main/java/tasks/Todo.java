@@ -2,10 +2,12 @@ package tasks;
 
 /**
  * Represents a todo.
+ *
+ * @author Michelle Yong
  */
 public class Todo extends Task {
     /**
-     * Creates a todo object.
+     * Creates a todo with description.
      *
      * @param description The description of the todo.
      */

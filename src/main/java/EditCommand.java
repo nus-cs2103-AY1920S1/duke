@@ -35,10 +35,12 @@ public class EditCommand extends Command {
                 Event event = (Event) task;
                 event.editDateTime(replacement);
                 tasks.setTask(editIndex - 1, event);
-            } else {
+            } else if (task instanceof Deadline){
                 Deadline deadline = (Deadline) task;
                 deadline.editDateTime(replacement);
                 tasks.setTask(editIndex - 1, deadline);
+            } else {
+                throw new DukeException("You can't edit the date time of a todo task");
             }
         }
 

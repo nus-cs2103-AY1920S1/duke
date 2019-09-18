@@ -14,8 +14,15 @@ import java.util.Scanner;
 public class Storage {
     protected String filePath;
 
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
+        try {
+            File dataDir = new File("data");
+            dataDir.mkdir();
+            new File(filePath).createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("Unable to create a new save file");
+        }
     }
 
     /**

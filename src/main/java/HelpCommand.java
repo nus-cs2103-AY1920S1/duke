@@ -8,7 +8,7 @@ public class HelpCommand extends Command {
 
     /**
      * Executes the command.
-     * Lists all files in the task.
+     * Shows help info to the user.
      * @param tasks to handle the tasks
      * @param ui to get user input
      * @param storage to store tasks

@@ -169,7 +169,6 @@ public class Duke extends Application {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(dukeWelcomeText, new ImageView(duke))
         );
-
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 

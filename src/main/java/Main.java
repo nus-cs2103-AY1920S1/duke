@@ -7,12 +7,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.Path;
 
 /**
  * A class representing the javafx application.
  */
 public class Main extends Application {
-    private static final String FILEPATH = "/Users/jiangyuxin/Documents/sem1/cs2103/duke/data/duke.txt";
+    private static final String FILEPATH = Path.of(System.getProperty("user.dir"),
+            "data", "duke.txt").toString();
     private Duke duke = new Duke(FILEPATH);
 
     /**

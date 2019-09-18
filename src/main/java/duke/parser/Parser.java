@@ -111,7 +111,7 @@ public class Parser {
     }
 
     private DeadlineCommand parseDeadlineTask(String description) throws IllegalDescriptionException {
-        int indexOfTime = description.indexOf("/by");
+        int indexOfTime = description.toLowerCase().indexOf("/by");
         if (indexOfTime == -1) {
             throw new IllegalDescriptionException(
                     new HelpInfoOfAddCommand(CommandType.SubCommandType.Deadline).getHelpInformation());
@@ -125,7 +125,7 @@ public class Parser {
     }
 
     private EventCommand parseEventTask(String description) throws IllegalDescriptionException {
-        int indexOfTime = description.indexOf("/at");
+        int indexOfTime = description.toLowerCase().indexOf("/at");
         if (indexOfTime == -1) {
             throw new IllegalDescriptionException(
                     new HelpInfoOfAddCommand(CommandType.SubCommandType.Event).getHelpInformation());
@@ -231,7 +231,7 @@ public class Parser {
     }
 
     private TaskType parseTaskType(String taskType) throws IllegalDescriptionException {
-        switch (taskType) {
+        switch (taskType.toLowerCase()) {
         case "todo":
             return TaskType.ToDo;
         case "event":
@@ -248,10 +248,10 @@ public class Parser {
     }
 
     private StatusFilter getStatusFilter(String description) throws IllegalDescriptionException {
-        String isDoneStatus = getFirstWord(description);
-        if (isDoneStatus.toLowerCase().equals("true")) {
+        String isDoneStatus = getFirstWord(description).toLowerCase();
+        if (isDoneStatus.equals("true")) {
             return new StatusFilter(true);
-        } else if (isDoneStatus.toLowerCase().equals("false")) {
+        } else if (isDoneStatus.equals("false")) {
             return new StatusFilter(false);
         } else {
             throw new IllegalDescriptionException("Done value should be true or false");
@@ -259,7 +259,7 @@ public class Parser {
     }
 
     private TimeFilter getTimeFilter(String description) throws IllegalDescriptionException {
-        String preposition = getFirstWord(description);
+        String preposition = getFirstWord(description).toLowerCase();
         LocalDateTime dateTime = parseDateTime(removeFirstWord(description));
 
         switch (preposition) {
@@ -283,7 +283,7 @@ public class Parser {
         if (description.isEmpty()) {
             return new ListCommand();
         }
-        String filterType = getFirstWord(description);
+        String filterType = getFirstWord(description).toLowerCase();
         switch (filterType) {
         case "/type":
             return new ListCommand(getTypeFilter(description));
@@ -305,7 +305,7 @@ public class Parser {
         if (description.isEmpty()) {
             throw new IllegalDescriptionException("Please provide a valid index or description.");
         }
-        String filterType = getFirstWord(description);
+        String filterType = getFirstWord(description).toLowerCase();
         switch (filterType) {
         case "/type":
             return new DeleteCommand(getTypeFilter(description));
@@ -327,7 +327,7 @@ public class Parser {
         if (description.isEmpty()) {
             throw new IllegalDescriptionException("Please provide a valid index or description");
         }
-        String filterType = getFirstWord(description);
+        String filterType = getFirstWord(description).toLowerCase();
         switch (filterType) {
         case "/type":
             return new DoneCommand(getTypeFilter(description));

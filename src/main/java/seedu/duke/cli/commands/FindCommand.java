@@ -14,7 +14,7 @@ public class FindCommand implements Command {
 
     @CommandConstructor("find")
     public FindCommand(@Argument(isTrailing = true) String substring) {
-        this.substring = substring;
+        this.substring = substring == null ? "" : substring;
     }
 
     @Override

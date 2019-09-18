@@ -26,7 +26,7 @@ class ToDo extends Task {
      */
     @Override
     public String toString() {
-        String doneStr = this.done ? "✓" : "✗";
+        String doneStr = this.done ? Unicode.TICK : Unicode.CROSS;
         return String.format("[T][%s] %s", doneStr, this.name);
     }
 }

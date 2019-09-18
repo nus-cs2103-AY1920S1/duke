@@ -29,7 +29,7 @@ class Event extends Task {
      */
     @Override
     public String toString() {
-        String doneStr = this.done ? "✓" : "✗";
+        String doneStr = this.done ? Unicode.TICK : Unicode.CROSS;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return String.format("[E][%s] %s (at: %s)", doneStr, this.name, format.format(this.date));
     }

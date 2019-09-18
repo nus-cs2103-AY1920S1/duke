@@ -120,7 +120,7 @@ class UI {
      * @return formatted error.
      */
     public String printError(DukeException e) {
-        return prettyPrint(String.format("☹ OOPS!!! %s", e.getMessage()));
+        return prettyPrint(String.format("%s OOPS!!! %s", Unicode.SAD_FACE, e.getMessage()));
     }
 
     /**
@@ -130,9 +130,9 @@ class UI {
      */
     private static String prettyPrint(String str) {
         StringBuilder sb = new StringBuilder();
-        sb.append("    --------------------------------------------------\n");
+        sb.append("    --------------------------------------------\n");
         sb.append("     " + str + "\n");
-        sb.append("    --------------------------------------------------\n");
+        sb.append("    --------------------------------------------\n");
         return sb.toString();
     }
 }

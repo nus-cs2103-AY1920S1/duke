@@ -25,6 +25,7 @@ public class ParserTest {
     public void parseEventTest() throws DukeException {
         Parser parser = new Parser();
         String input = "event concert /at 2019-08-31 21:00";
-        assertEquals("[E][✗] concert (at: 2019-08-31 21:00)", parser.parseEvent(input).toString());
+        assertEquals(String.format("[E][%s] concert (at: 2019-08-31 21:00)", Unicode.CROSS),
+                parser.parseEvent(input).toString());
     }
 }

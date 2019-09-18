@@ -29,7 +29,7 @@ class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String doneStr = this.done ? "✓" : "✗";
+        String doneStr = this.done ? Unicode.TICK : Unicode.CROSS;
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return String.format("[D][%s] %s (by: %s)", doneStr, this.name, format.format(this.date));
     }

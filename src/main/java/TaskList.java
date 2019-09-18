@@ -69,6 +69,7 @@ class TaskList {
             sb.append(String.format("     %d. %s\n", counter[0], task.toString()));
             counter[0] += 1;
         });
+        sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
 

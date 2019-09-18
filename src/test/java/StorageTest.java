@@ -8,7 +8,8 @@ public class StorageTest {
     @Test
     public void readTaskTest() throws DukeException {
         String taskStr = "E - 0 - concert - 2019-08-31 21:00";
-        assertEquals(Storage.readTask(taskStr).toString(), "[E][✗] concert (at: 2019-08-31 21:00)");
+        assertEquals(Storage.readTask(taskStr).toString(),
+                String.format("[E][%s] concert (at: 2019-08-31 21:00)", Unicode.CROSS));
     }
 
     @Test

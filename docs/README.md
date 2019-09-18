@@ -1,5 +1,7 @@
 # User Guide
 
+![Image of Ui](Ui.png)
+
 ### Outline
 1. Features
 1. Usage

@@ -12,7 +12,6 @@ public class Deadline extends Task {
 
     private LocalDateTime byDate;
 
-
     /**
      * Constructor for Deadline class.
      *

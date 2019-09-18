@@ -11,7 +11,6 @@ public abstract class Task {
     TypeOfTask taskType;
     String tag;
 
-
     /**
      * Constructor for Task class.
      *
@@ -26,8 +25,6 @@ public abstract class Task {
     }
 
 
-
-
     /**
      * Converts task to <code>String</code> that will be scanned into preset task.txt file.
      *
@@ -39,9 +36,13 @@ public abstract class Task {
         String taskType = this.taskType.toString();
         // todo1 + " " + "" => todo1
         String taskNameAndDetails = (taskName + " " + details).stripTrailing();
-        String result = String.format("%s|%c|%s|%s", taskType, isCompleted, taskNameAndDetails, this.tag);
 
-//      String result = taskType + " | " + isCompleted + " | " + this.taskName + " " + this.details + " | " + ;
+        //@@author C-likethis123-reused
+        // Inspiration of handling output using String.format taken from
+        // github user C-likethis123's filepath: duke/src/main/java/duke/task/Task.java
+        String result = String.format("%s|%c|%s|%s", taskType, isCompleted, taskNameAndDetails, this.tag);
+        //@@author
+
         return result;
     }
 
@@ -63,14 +64,10 @@ public abstract class Task {
     }
 
     /**
-     * Get details of task.
+     * Get completion status of task.
      *
-     * @return String representing extra details of task
+     * @return boolean representing whether task is completed
      */
-    public String getDetails() {
-        return details;
-    }
-
     public boolean getCompletionStatus() {
         return isCompleted;
     }
@@ -82,9 +79,13 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        char isCompletedsymbol = this.isCompleted ? 'Y' : 'N';
+        char isCompletedSymbol = this.isCompleted ? 'Y' : 'N';
         String taskNameAndDetails = (taskName + " " + details).stripTrailing();
-        String result = "[" + taskType + "][" + isCompletedsymbol + "] " + taskNameAndDetails + " " + "[" + tag + "]";
+        String tagWithBrackets = "";
+        if (tag.length() > 1 && tag.startsWith("#")) {
+            tagWithBrackets = "[" + tag + "]";
+        }
+        String result = "[" + taskType + "][" + isCompletedSymbol + "] " + taskNameAndDetails + " " + tagWithBrackets;
         return result.stripTrailing();
     }
 }

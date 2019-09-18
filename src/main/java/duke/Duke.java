@@ -3,15 +3,13 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.ui.MainWindow;
 import duke.ui.MessageHandler;
 import duke.utilities.Parser;
 import duke.utilities.Storage;
 
-import java.util.logging.Logger;
 
 /**
- * Driver class for Duke operations.
+ * Contains methods relevant to the start up and shut down of the Duke application.
  *
  * @author JXKENG
  */
@@ -23,8 +21,10 @@ public class Duke {
     private boolean isExit = false;
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Get Duke's response given a full command.
+     *
+     * @param fullCommand A <code>String</code> command
+     * @return Duke's response in <code>String</code> format
      */
     public String getResponse(String fullCommand) {
         String response;
@@ -33,15 +33,25 @@ public class Duke {
             response = c.execute(tasks, messageHandler, storage);
             isExit = c.isExit();
         } catch (DukeException e) {
-            response = "\u2639 OOPS!!! " + e.getMessage();
+            response = "): OOPS!!! " + e.getMessage();
         }
         return response;
     }
 
+    /**
+     * Checks if application should exit.
+     *
+     * @return a <code>boolean</code> representing if the application should exit
+     */
     public boolean applicationShouldExit() {
         return isExit;
     }
 
+    /**
+     * Get Duke's hi message when initializing Duke.
+     *
+     * @return Duke's hi message with a list of where you left off previously
+     */
     public String hiMessage() {
         return messageHandler.hiMessage();
     }

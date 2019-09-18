@@ -161,6 +161,12 @@ public class MessageHandler {
         return results;
     }
 
+    /**
+     * Tag task success message.
+     *
+     * @param task task that was tagged
+     * @return <code>String</code> task successfully tagged message
+     */
     public String tagAddedConfirmationMessage(Task task) {
         return "I've tagged this task: \n"
                 + "\t  " + task.toString() + "\n";

@@ -22,6 +22,7 @@ public class CreateEventCommandTest {
     private static TaskList tasks = new TaskList();
     private static MessageHandler messageHandler = new MessageHandler(tasks, storage);
 
+
     @BeforeEach
     public void emptyFile() {
         try {

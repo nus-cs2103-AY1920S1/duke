@@ -65,7 +65,7 @@ public class Storage {
                 Task t = convertFileLineToTask(fileLine);
                 tasks.addTask(t);
             } catch (DukeException dukeError) {
-                System.out.println("\u2639 OOPS!!! " + dukeError.getMessage());
+                System.out.println("): OOPS!!! " + dukeError.getMessage());
             } catch (DateTimeParseException parseError) {
                 System.out.println(parseError.getMessage()
                         + ". Please make sure dates from file are in this format DD/MM/YYYY HHMM");

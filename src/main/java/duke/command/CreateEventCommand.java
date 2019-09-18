@@ -50,7 +50,6 @@ public class CreateEventCommand extends Command {
         }
 
         String response;
-
         try {
             Task t = new Event(eventText, at, false, tag);
             tasks.addTask(t);

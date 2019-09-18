@@ -63,7 +63,7 @@ public class TaskList {
         Task task = taskList.get(taskNumber - 1);
         task.markAsCompleted();
 
-        assert task.isCompleted == true;
+        assert task.isCompleted;
 
         return task;
     }
@@ -90,7 +90,7 @@ public class TaskList {
     }
 
     /**
-     * Gets list from <code>TaskList</code> object.
+     * Gets search results list from <code>TaskList</code> object.
      *
      * @return <code>List</code> object which contains list matching search results
      */
@@ -106,16 +106,29 @@ public class TaskList {
         return searchResults;
     }
 
+    /**
+     * Gets list of tasks.
+     *
+     * @return <code>List</code> object which contains all tasks
+     */
     public List<Task> getList() {
         assert taskList != null;
         return taskList;
     }
 
-    public Task tagTask (int taskNumber, String tag) throws TaskDoesNotExistException {
+
+    /**
+     * Gives a task a hash tag.
+     * @param taskNumber integer representing the number of the task to be marked as completed
+     * @param tag <code>String</code> representing the hash tag without the # symbol.
+     * @return <code>Task</code> that was successfully tagged
+     *
+     * @throws TaskDoesNotExistException if taskNumber does not correspond to task in list
+     */
+    public Task tagTask(int taskNumber, String tag) throws TaskDoesNotExistException {
         if (taskNumber > taskList.size()) {
             throw new TaskDoesNotExistException("Task not found");
         }
-
 
         Task task = taskList.get(taskNumber - 1);
         task.tag = "#" + tag;

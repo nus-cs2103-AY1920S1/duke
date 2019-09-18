@@ -1,7 +1,7 @@
 import duke.command.Command;
 import duke.util.*;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * This is the driver class that utilises existing classes to receive and respond to the user's commands. It loads and
@@ -33,7 +33,7 @@ public class Duke {
     public String setUp() {
         try {
             taskList = new TaskList(storage.loadTasks());
-        } catch (FileNotFoundException | DukeException e) {
+        } catch (IOException | DukeException e) {
             ui.showLoadingError();
             taskList = new TaskList();
         }

@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class Storage {
 
     private String filePath;
-    private File file;
 
     /**
      * This is a sole constructor specifying the file path to load data from and write data to.
@@ -25,7 +24,6 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        file = new File(filePath);
     }
 
     /**
@@ -36,8 +34,9 @@ public class Storage {
      * @throws FileNotFoundException If the <code>Scanner</code> cannot find the file to read information from
      */
   
-    public List<Task> loadTasks() throws FileNotFoundException, DukeException {
-        assert file != null;
+    public List<Task> loadTasks() throws DukeException, IOException {
+        File file = new File(filePath);
+        file.createNewFile();
         Scanner scanner = new Scanner(file);
         List<Task> taskList = new ArrayList<>();
         while (scanner.hasNext()) {

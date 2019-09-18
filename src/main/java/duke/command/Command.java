@@ -5,8 +5,6 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.IOException;
-
 /**
  * Command is the abstract base class for all executable commands. A Command object encapsulates the information about
  * whether a command should be treated as a termination of user input. Besides, the abstract method <code>execute</code>

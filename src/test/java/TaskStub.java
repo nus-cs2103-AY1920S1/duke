@@ -8,7 +8,7 @@ public class TaskStub extends Task {
     public TaskStub() {
         super.taskType = getTaskType();
         super.description = getDescription();
-        super.completed = false;
+        super.isCompleted = false;
     }
 
     public String getDescription() {
@@ -16,7 +16,7 @@ public class TaskStub extends Task {
     }
 
     public boolean isCompleted() {
-        return completed;
+        return isCompleted;
     }
 
     public TaskType getTaskType() {
@@ -25,6 +25,6 @@ public class TaskStub extends Task {
 
     //setter mtds
     public void setCompleted() {
-        completed = true;
+        isCompleted = true;
     }
 }

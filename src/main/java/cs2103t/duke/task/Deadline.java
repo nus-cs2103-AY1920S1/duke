@@ -25,7 +25,7 @@ public class Deadline extends Task {
     }
 
     private Deadline(String descr, boolean completed) throws IncorrectTaskFormatException {
-        super.completed = completed;
+        super.isCompleted = completed;
         super.taskType = TaskType.D;
 
         setupDetails(descr);

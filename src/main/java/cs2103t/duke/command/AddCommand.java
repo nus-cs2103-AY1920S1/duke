@@ -2,6 +2,7 @@ package cs2103t.duke.command;
 
 import cs2103t.duke.exception.DukeException;
 import cs2103t.duke.file.Storage;
+import cs2103t.duke.task.NoteList;
 import cs2103t.duke.task.Task;
 import cs2103t.duke.task.TaskList;
 import cs2103t.duke.task.TaskType;
@@ -31,15 +32,17 @@ public class AddCommand extends Command {
      * Creates and adds new task to list of tasks.
      * @param tasks TaskList agent to handle list of tasks.
      * @param ui Ui in charge of printing.
-     * @param storage Storage agent in charge of writing to file.
+     * @param storageTasks Storage agent in charge of writing to file.
+     * @param storageNotes
+     * @param noteList
      * @throws DukeException if command is invalid or cannot write to file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storageTasks, Storage storageNotes, NoteList noteList) throws DukeException {
         Task newTask = TaskList.createTask(this.taskType, this.fullDescription);
         tasks.addData(newTask);
 
-        storage.updateFile(tasks);
+        storageTasks.updateFileWithTask(tasks, noteList);
 
         return ui.dukeRespond("Got it. I've added this task:",
                 "  " + newTask.toString(),

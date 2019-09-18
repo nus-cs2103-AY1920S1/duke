@@ -6,7 +6,9 @@ import cs2103t.duke.exception.InvalidKeywordException;
 import cs2103t.duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * Represents an agent that handles the list of tasks.
@@ -16,12 +18,14 @@ import java.util.List;
 public class TaskList {
     /** List of tasks to keep track of. */
     private List<Task> taskList;
+    private TreeMap<Integer, Task> noteIdToTask;
 
     /**
      * Constructs a TaskList with an empty list of tasks.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
+        this.noteIdToTask = new TreeMap<>();
     }
 
     /**
@@ -30,6 +34,21 @@ public class TaskList {
      */
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
+        this.noteIdToTask = new TreeMap<>();
+    }
+
+    /**
+     * Initialises tasks with notes.
+     * @param notes NoteList agent to handle list of notes.
+     */
+    public void setupNotes(NoteList notes) {
+        for (Task t : taskList) {
+            if (t.hasNotes()) {
+                int noteId = t.getNoteId();
+                t.setNotes(notes.getNote(noteId - 1));
+                this.noteIdToTask.put(noteId, t);
+            }
+        }
     }
 
     /**
@@ -46,6 +65,15 @@ public class TaskList {
      */
     public List<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Gets task at id.
+     * @param id 1-based position of task in list of tasks
+     * @return task at that id
+     */
+    public Task retrieveTask(int id) {
+        return this.taskList.get(id - 1);
     }
 
     /**
@@ -105,6 +133,19 @@ public class TaskList {
         assert task != null : "Deleted empty task?";
         return task;
     }
+/*
+    public void updateNoteIdForEveryone(int removedId) {
+        Iterator<Integer> it = this.noteIdToTask.subMap(removedId, noteIdToTask.lastKey()).keySet().iterator();
+        int i = 0;
+
+        while (it.hasNext()) {
+            int id = it.next();
+            i++;
+            Task t = this.noteIdToTask.get(id);
+            t.setNoteId(id - i);
+        }
+    }
+ */
 
     /**
      * Creates the corresponding task.
@@ -154,4 +195,5 @@ public class TaskList {
     private boolean containsKeyword(Task t, String kw) {
         return t.toString().contains(kw);
     }
+
 }

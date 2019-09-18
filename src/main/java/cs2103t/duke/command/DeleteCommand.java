@@ -4,6 +4,7 @@ import cs2103t.duke.exception.DukeException;
 import cs2103t.duke.exception.NoIdGivenException;
 import cs2103t.duke.file.Storage;
 import cs2103t.duke.parse.Parser;
+import cs2103t.duke.task.NoteList;
 import cs2103t.duke.task.Task;
 import cs2103t.duke.task.TaskList;
 import cs2103t.duke.ui.Ui;
@@ -28,18 +29,26 @@ public class DeleteCommand extends Command {
      * Deletes task from list of tasks.
      * @param tasks TaskList agent to handle list of tasks.
      * @param ui Ui in charge of printing.
-     * @param storage Storage agent in charge of writing to file.
+     * @param storageTasks Storage agent in charge of writing to file.
+     * @param storageNotes
+     * @param noteList
      * @throws DukeException if command is invalid or cannot write to file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storageTasks, Storage storageNotes, NoteList noteList) throws DukeException {
         if (this.taskId.equals("")) {
             throw new NoIdGivenException("delete");
         }
         int id = Parser.parseStrToInt(this.taskId);
         Task task = tasks.deleteTask(id);
 
-        storage.updateFile(tasks);
+        if (task.hasNotes()) {
+            int noteId = task.getNoteId();
+            noteList.deleteNote(noteId - 1);
+            //tasks.updateNoteIdForEveryone(noteId);
+        }
+
+        storageTasks.updateFileWithTask(tasks, noteList);
 
         return ui.dukeRespond("Noted. I've removed this task:",
                 "  " + task.toString(),

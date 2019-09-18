@@ -1,3 +1,5 @@
+import java.awt.*;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -55,6 +57,12 @@ public class MainWindow extends AnchorPane {
         if (input.contains("bye") || input.equalsIgnoreCase("exit")) {
             closeButtonAction();
         }
+    }
+
+    public void showWelcome() {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(duke.showDukeWelcome(), dukeImage)
+        );
     }
 
     /**

@@ -2,6 +2,7 @@ import cs2103t.duke.command.Command;
 import cs2103t.duke.exception.DukeException;
 import cs2103t.duke.file.Storage;
 import cs2103t.duke.parse.Parser;
+import cs2103t.duke.task.NoteList;
 import cs2103t.duke.task.TaskList;
 import cs2103t.duke.ui.Ui;
 
@@ -20,14 +21,19 @@ import cs2103t.duke.ui.Ui;
  * Duke will save the tasks in a file ("./data/tasks.txt") and read from it.
  */
 public class Duke {
-    /** Handles file reading and writing. */
-    private Storage storage;
+    /** Handles task file reading and writing. */
+    private Storage storageTask;
+    /** Handles notes file reading and writing. */
+    private Storage storageNotes;
     /** Handles direct changes to list of tasks. */
     private TaskList tasks;
     /** Handles system i/o in duke format. */
     private Ui ui;
+    /** Handles list of notes. */
+    private NoteList notes;
 
-    private String dataFilepath = "./data/tasks.txt";
+    private String taskFilepath = "./data/tasks.txt";
+    private String notesFilepath = "./data/notes.txt";
 
     /**
      * Constructs Duke object to be called by Application launcher, javafx.
@@ -35,28 +41,21 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(dataFilepath);
+        this.storageTask = new Storage(taskFilepath);
+        this.storageNotes = new Storage(notesFilepath);
         try {
-            this.tasks = new TaskList(storage.load());
+            this.tasks = new TaskList(storageTask.loadTaskFromFile());
+            this.notes = new NoteList(storageNotes.loadNotesFromFile());
+            tasks.setupNotes(notes);
         } catch (DukeException e) {
             ui.showLoadingError();
             this.tasks = new TaskList();
+            this.notes = new NoteList();
         }
     }
 
-    /**
-     * Constructs a Duke chatbot that reads from and writes to file located at datafilepath.
-     * @param dataFilepath file path to read and write data.
-     */
-    public Duke(String dataFilepath) {
-        this.ui = new Ui();
-        this.storage = new Storage(dataFilepath);
-        try {
-            this.tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            this.tasks = new TaskList();
-        }
+    public String showDukeWelcome() {
+        return this.ui.showWelcome();
     }
 
     /**
@@ -68,7 +67,7 @@ public class Duke {
         String res;
         try {
             Command c = Parser.parse(fullCommand);
-            res = c.execute(this.tasks, this.ui, this.storage);
+            res = c.execute(this.tasks, this.ui, this.storageTask, this.storageNotes, this.notes);
         } catch (DukeException e) {
             res = e.toString();
         }

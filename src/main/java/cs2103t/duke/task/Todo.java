@@ -13,7 +13,7 @@ public class Todo extends Task {
 
     private Todo(String descr, boolean completed) {
         super.description = descr;
-        super.completed = completed;
+        super.isCompleted = completed;
         super.taskType = TaskType.T;
     }
 

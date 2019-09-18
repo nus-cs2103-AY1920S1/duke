@@ -1,6 +1,7 @@
 package cs2103t.duke.command;
 
 import cs2103t.duke.file.Storage;
+import cs2103t.duke.task.NoteList;
 import cs2103t.duke.task.Task;
 import cs2103t.duke.task.TaskList;
 import cs2103t.duke.ui.Ui;
@@ -9,6 +10,7 @@ import java.util.List;
 
 /**
  * Represents a find command. Searches for occurrence of a given phrase in the description of task.
+ * This includes searches into the notes of a task, or also searching for general notes.
  */
 public class FindCommand extends Command {
     /** Keyword to find in task strings. */
@@ -27,11 +29,13 @@ public class FindCommand extends Command {
      * Finds tasks that contain keyword.
      * @param taskList TaskList agent to handle list of tasks.
      * @param ui Ui in charge of printing.
-     * @param storage Storage agent in charge of reading/writing to file.
+     * @param storageTasks Storage agent in charge of reading/writing to file.
+     * @param storageNotes
+     * @param noteList
      * @return String containing list of tasks that have that keyword.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storageTasks, Storage storageNotes, NoteList noteList) {
         List<Task> foundTasks = taskList.findTasks(this.wordToFind);
         if (foundTasks.isEmpty()) {
             return ui.dukeRespond("Sorry! I can't find any matching tasks in your list. Try another phrase?");

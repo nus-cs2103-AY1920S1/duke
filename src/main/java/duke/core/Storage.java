@@ -18,7 +18,7 @@ public class Storage {
 
     /**
      * Class constructor.
-     * @param file File instance to be used for storage
+     * @param dataFolder File instance to be used for storage
      */
     public Storage(File dataFolder) {
         this.dataFolder = dataFolder;

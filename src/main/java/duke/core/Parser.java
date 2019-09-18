@@ -1,6 +1,17 @@
 package duke.core;
 
-import duke.commands.*;
+import duke.commands.AddCommand;
+import duke.commands.ArchiveCommand;
+import duke.commands.ClearCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EmptyCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
+import duke.commands.RetrieveCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;

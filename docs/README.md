@@ -1,12 +1,26 @@
 # User Guide
+Duke is a task storing command-line-based application. The commands are not case-specific and remove all trailing white spaces. 
+* Todo
+* Deadline
+* Event
+* Delete
+* Done
+* List
+* Find 
+* Undo
+
+## Storage
+The task is stored in the data directory located at or upward ( to a limit of 5 ) from the application and is titled duke.txt. If you have a similarly named txt file, please clear it before running the application in the event of format differences. 
 
 ## Features 
 
 ### Adding a task
 Adds a new task into duke. Types of tasks are:
-* Todo (format: todo TASK_NAME)
-* Deadline (format: deadline TASK_NAME /by DATE)
-* Event (format: event TASK_NAME /by DATE)
+* Todo (format: todo [TASK_NAME])
+* Deadline (format: deadline [TASK_NAME] /by [DATE])
+* Event (format: event [TASK_NAME] /by [DATE])
+
+Where [DATE] format is "[DAY]/[MONTH]/[YEAR] [HOUR][MIN]"
 
 Example of usage: 
 
@@ -23,7 +37,7 @@ Deletes a selected task in the list based on its index.
 
 ### Usage
 
-`delete TASK_INDEX`
+`delete [TASK_INDEX]`
 
 Example of usage: 
 
@@ -52,7 +66,7 @@ Marks a specified task as done based on its index
 
 ### Usage
 
-`done TASK_INDEX`
+`done [TASK_INDEX]`
 
 Example of usage: 
 
@@ -68,7 +82,7 @@ Lists out all the task that completely or partially match a given keyword.
 
 ### Usage
 
-`find KEYWORD`
+`find [KEYWORD]`
 
 Example of usage: 
 

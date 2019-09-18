@@ -48,12 +48,11 @@ public class Parser {
         String first = strArr[0];
         String next = String.join(" ", strArr).replace(first, "");
 
-        try {
-            command = shortcuts.get(first);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!shortcuts.containsKey(first)) {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+
+        command = shortcuts.get(first);
 
         switch (command) {
             case BYE:

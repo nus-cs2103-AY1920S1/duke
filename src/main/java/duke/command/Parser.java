@@ -7,6 +7,8 @@ import duke.task.Task;
 import duke.task.Todo;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Represents a parser that will be used to parse each line of input.
@@ -68,7 +70,13 @@ public class Parser {
         } else if (typeArray[0].equals("event")) {
             task = parseEvent(arr, typeArray);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            ArrayList<String> responseArr = new ArrayList<>();
+            responseArr.add("what is that");
+            responseArr.add("huh");
+            responseArr.add("what");
+            responseArr.add("nani?");
+            Random rand = new Random();
+            throw new DukeException(responseArr.get(rand.nextInt(4)));
         }
         return ui.printAdd(task);
     }

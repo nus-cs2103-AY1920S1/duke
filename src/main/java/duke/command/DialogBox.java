@@ -37,8 +37,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        double minHeight = text.split("\n").length * 25 + 50;
-        setDialogBoxSize(minHeight);
+        double minHeight = text.split("\n").length * 17 + 50 ;
+        dialog.setMinHeight(minHeight - 30);
         setLabelSize(text, minHeight);
         setImageViewSize(img);
     }
@@ -49,7 +49,7 @@ public class DialogBox extends HBox {
      */
     private void setImageViewSize(Image img) {
         displayPicture.setImage(img);
-        displayPicture.setClip(new Circle(50, 35, 50));
+        displayPicture.setClip(new Circle(25, 17, 25));
     }
 
     /**
@@ -60,7 +60,9 @@ public class DialogBox extends HBox {
     private void setLabelSize(String text, double minHeight) {
         dialog.setText(text);
         dialog.setPadding(new Insets(10, 10, 10, 10));
-        dialog.setMinHeight(minHeight);
+        this.setMinHeight(minHeight);
+        dialog.setBackground(
+                new Background(new BackgroundFill(Color.rgb( 126, 179, 191), new CornerRadii(10), Insets.EMPTY)));
     }
 
     /**
@@ -90,6 +92,8 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.setBackground(
+                new Background(new BackgroundFill(Color.rgb(140, 134, 48, 0.8), new CornerRadii(10), Insets.EMPTY)));
     }
 
     /**

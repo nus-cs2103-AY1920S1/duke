@@ -31,8 +31,8 @@ public class Ui {
         this.taskList = taskList;
         this.storage = storage;
 
-//        System.out.println("Hello! I'm duke.Duke");
-//        System.out.println("What can I do for you?");
+        System.out.println("Hello! My name is Missy Wathev Udan.");
+        System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);
         String word = sc.nextLine();
@@ -41,11 +41,11 @@ public class Ui {
             try {
                 parser.parseLine(word);
             } catch (DukeException e) {
-//                System.out.println(e.getMessage());
+                System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
-//                System.out.println("Must input an integer");
+                System.out.println("Must input an integer");
             } catch (FileNotFoundException e) {
-//                System.out.println("Archive not found");
+                System.out.println("Archive not found");
             } finally {
                 word = sc.nextLine();
             }
@@ -59,14 +59,19 @@ public class Ui {
      * Prints the list of Tasks stored in the TaskList.
      */
     public String printList() {
+        if (taskList.getSize() == 0) {
+            return "Nada, nichts, nothing to do, wow";
+        }
+
         int i = 1;
-//        System.out.println("Here are the tasks in your list:");
+        System.out.println("Here are the tasks in your list:");
         String result = "Here are the tasks in your list:\n";
         for (Task task : taskList.getList()) {
-//            System.out.println(i + ". " + task);
+            System.out.println(i + ". " + task);
             result += i + ". " + task + "\n";
             i++;
         }
+
         return result;
     }
 
@@ -74,11 +79,11 @@ public class Ui {
      * Prints the message displayed when the user deletes a Task.
      */
     public String printDelete(Task task) {
-//        System.out.println("Noted. I've removed this task: : ");
-//        System.out.println("\t" + task);
-//        System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
+        System.out.println("Noted. I've removed this task: : ");
+        System.out.println("\t" + task);
+        System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
 
-        return "Noted. I've removed this task: : \n"
+        return "Okay I'll remove this task: : \n"
                 + "\t" + task + "\n"
                 + "Now you have " +  taskList.getSize()  +  " tasks in the list.";
     }
@@ -87,18 +92,18 @@ public class Ui {
      * Prints the message displayed when the user marks a Task as done.
      */
     public String printDone(Task task) {
-//        System.out.println("Nice! I've marked this task as done: ");
-//        System.out.println("\t" + task);
-        return "Nice! I've marked this task as done: \n\t" +task;
+        System.out.println("Nice! I've marked this task as done: ");
+        System.out.println("\t" + task);
+        return "You have done something, nice!!: \n\t" +task;
     }
 
     /**
      * Prints the message displayed when the user adds a new Task.
      */
     public String printAdd(Task task) {
-//        System.out.println("Got it. I've added this task:");
-//        System.out.println("\t" + task.toString());
-//        System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
+        System.out.println("Got it. I've added this task:");
+        System.out.println("\t" + task.toString());
+        System.out.println("Now you have " +  taskList.getSize()  +  " tasks in the list.");
         return "Got it. I've added this task:\n"
                 + "\t" + task.toString() + "\n"
                 + "Now you have " +  taskList.getSize()  +  " tasks in the list.";
@@ -109,7 +114,7 @@ public class Ui {
      */
     public String printMatchingList(String pattern) {
         int i = 1;
-//        System.out.println("Here are the matching tasks in your list:");
+        System.out.println("Here are the matching tasks in your list:");
         String result = "Here are the matching tasks in your list:\n";
         for (Task task : taskList.getList()) {
             if (task.toString().contains(pattern) || task.getFileStringFormat().contains(pattern)) {

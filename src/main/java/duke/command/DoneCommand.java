@@ -8,7 +8,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DoneCommand implements Command {
-    private final TaskList tasks;
+    private TaskList tasks;
     private Storage storage;
 
     public DoneCommand(TaskList tasks, Storage storage) {

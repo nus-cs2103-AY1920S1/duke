@@ -25,7 +25,8 @@ public class Storage {
             this.filePath = filePath;
             fw = new FileWriter(filePath, true);
         } catch(IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Error occurred creating new storage object.");
         }
 
     }
@@ -73,7 +74,8 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Error occurred loading tasks from file");
         }
 
         return commands;
@@ -83,15 +85,16 @@ public class Storage {
      * Saves the latest task in the .txt file
      * @param Task t
      */
-    public void save(Task t) {
+     protected void save(Task t) {
         try {
             this.fw.append(t.storageString() + System.lineSeparator());
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Error occurred saving task to file.");
         }
     }
 
-    public void delete(int i) {
+    protected void delete(int i) {
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
@@ -109,7 +112,8 @@ public class Storage {
             Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("src/main/java/data/temp.txt"));
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Error occurred deleting task in file");
         }
     }
 
@@ -118,7 +122,7 @@ public class Storage {
      * @param t
      * @param index
      */
-    public void done(Task t, int index) {
+    protected void done(Task t, int index) {
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
@@ -137,7 +141,8 @@ public class Storage {
             Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get("src/main/java/data/duke.txt"), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("src/main/java/data/temp.txt"));
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Error occurred updating status of task.");
         }
     }
 
@@ -147,7 +152,7 @@ public class Storage {
             BufferedReader br = new BufferedReader(fr);
             FileWriter ff = new FileWriter("src/main/java/data/temp.txt", true);
             String x;
-            for (Task t : tasks.commands) {
+            for (Task t : tasks.getList()) {
                     ff.write(t.storageString() + System.lineSeparator());
                     ff.flush();
             }
@@ -155,7 +160,8 @@ public class Storage {
             Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             Files.delete(Paths.get("src/main/java/data/temp.txt"));
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("Error occurred saving tasks to textfile.");
         }
     }
 }

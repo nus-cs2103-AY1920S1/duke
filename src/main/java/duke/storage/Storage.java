@@ -101,7 +101,9 @@ public class Storage {
                 String name = str;
                 list.addPerson(new Person(name));
             } else {
+                assert startIndex >= 0: "name doesn't exist";
                 String name = str.substring(0, startIndex);
+                assert endIndex >= startIndex+1: "title doesn't exist";
                 String title = str.substring(startIndex + 1, endIndex);
                 if (endIndex == str.length() - 1) {
                     list.addPerson(new Person(name, title));

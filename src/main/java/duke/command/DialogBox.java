@@ -38,6 +38,8 @@ public class DialogBox extends HBox {
         }
 
         double minHeight = text.split("\n").length * 25 + 75;
+        dialog.setStyle("-fx-text-fill: beige");
+
         setLabelSize(text, minHeight);
         setImageViewSize(img);
     }

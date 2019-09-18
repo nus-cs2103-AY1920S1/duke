@@ -25,9 +25,9 @@ e.g. typing `help` and pressing "Enter" will show a list of available commands.
 
 Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo TASK_NAME'`, `TASK_NAME` is a parameter which can be used as `todo gym workout`.
 
-#### 2.1 Viewing help: `help`
-Displays all available commands in the application.
-Format: `help`
+>#### 2.1 Viewing help: `help`
+>Displays all available commands in the application.
+>Format: `help`
 
 #### 2.2 Adding a task to be done: `todo`
 Adds a task to be done with the provided name to your list.

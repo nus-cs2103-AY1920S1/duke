@@ -40,6 +40,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printRemoveMessage(tasks.delete(this.deletedTask), tasks.size());
+        if (tasks.size() == 0) {
+            throw new DukeException("The task list is empty, you have nothing to delete!");
+        } else {
+            ui.printRemoveMessage(tasks.delete(this.deletedTask), tasks.size());
+        }
     }
 }

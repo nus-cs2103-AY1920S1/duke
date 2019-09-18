@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.storage.Storage;
@@ -24,10 +25,15 @@ public class DeleteAllCommand extends Command {
      * @param tasks The task lists which contains all the user added tasks.
      * @param ui The user interface which deals with user input and interaction.
      * @param storage The storage to load and save task data into the output file.
+     * @throws DukeException when the tasks list is already empty.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.deleteAll();
-        ui.printDeleteAllMessage();
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (tasks.size() == 0) {
+            throw new DukeException("You have nothing to delete from the task list!");
+        } else {
+            tasks.deleteAll();
+            ui.printDeleteAllMessage();
+        }
     }
 }

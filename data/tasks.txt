@@ -2,4 +2,5 @@ T | O | read books
 E | X | happy new year | Wed, 1 Jan 2020, 12:00AM
 D | O | project submission | Thu, 19 Sep 2019, 11:59PM
 E | X | movie | Wed, 2 Oct 2019, 7:00PM
-E | X | dinner | Mon, 23 Sep 2019, 6:00PM
+E | X | dinner | Mon, 23 Sep 2019, 5:45PM
+T | X | return books

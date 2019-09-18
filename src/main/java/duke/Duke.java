@@ -120,8 +120,12 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
-            return c.executeGui(tasks, ui, storage);
+            if (input.equals("Who's Asia No.1 university?")) {
+                return "You";
+            } else {
+                Command c = Parser.parse(input);
+                return c.executeGui(tasks, ui, storage);
+            }
         } catch (DukeException e) {
             return ui.showErrorGui(e.getMessage());
         }

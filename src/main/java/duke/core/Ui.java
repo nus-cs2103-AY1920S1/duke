@@ -43,8 +43,8 @@ public class Ui {
      * @return A string that represents the welcome message.
      */
     public String showWelcomeGui() {
-        return "Hello from DUKE\n"
-                    + "\nHello! I'm Duke\nWhat can I do for you?";
+        return "Hello from TSINGHUA\n"
+                    + "\nHello! I'm Tsinghua : )\nWhat can I do for you?";
     }
 
     /**

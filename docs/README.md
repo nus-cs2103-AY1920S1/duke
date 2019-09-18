@@ -1,6 +1,7 @@
 # User Guide
 
 ###Outline
+
 1. Features
 1. Usage
 1. Command list
@@ -127,7 +128,9 @@ Expected outcome:
 
 ![Image of list](assets/done.png)
 
+
 ##Command list
+
 
 Command | Syntax
 ------- | ------

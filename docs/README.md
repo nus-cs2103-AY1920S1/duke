@@ -10,7 +10,7 @@ Task Chick is **optimized for users who prefer to work with a Command Line Inter
 
 1. Download the latest release of Task Chick 
 [here](https://github.com/hellodommy/duke/releases/download/v1.0/taskchick-1.0.jar).
-2. Double-click on the file (your tasks will be saved in the same directory as _taskchick.txt_)
+2. Double-click on the file (your tasks will be saved in the same directory as the `taskchick-1.0.jar` file)
 3. Task Chick's GUI will appear in a new window.
 4. Follow the instructions [here](#usage) to get started with Task Chick.
 

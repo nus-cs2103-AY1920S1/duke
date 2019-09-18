@@ -32,9 +32,9 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    private static Color DUKE_COLOR = Color.POWDERBLUE;
-    private static Color USER_COLOR = Color.LIGHTGREEN;
-    private CornerRadii DIALOG_CORNERS = new CornerRadii(10,10,10,10,false);
+    private static final Color DUKE_COLOR = Color.POWDERBLUE;
+    private static final Color USER_COLOR = Color.LIGHTGREEN;
+    private static final CornerRadii DIALOG_CORNERS = new CornerRadii(10,10,10,10,false);
 
     private DialogBox(String text, Image img, Color fill) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));

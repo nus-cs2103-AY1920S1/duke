@@ -20,7 +20,7 @@ public class Parser {
         String[] parseInfo = new String[2];
 
         if (input.matches("(done|delete)\\s+\\d+|(todo|find)\\s+.+|deadline\\s+.+/by.+|event\\s+.+/at.+"
-                + "|(read|write)\\s+data/.+")) {
+                + "|(read|write)\\s+.+")) {
             parseInfo = input.split("\\s+", 2);
         } else if (input.equals("list")) {
             parseInfo[0] = "list";

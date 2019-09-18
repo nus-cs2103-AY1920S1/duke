@@ -133,7 +133,7 @@ public class Ui {
                 response.append("Data source for reading has been changed\n");
 
                 try {
-                    setList(new TaskList(new Storage(parseInfo[1]).load()));
+                    setList(new TaskList(new Storage("data/" + parseInfo[1]).load()));
                 } catch (FileNotFoundException e) {
                     response.append(LOADING_ERROR + "\n");
                     setList(new TaskList());
@@ -141,7 +141,7 @@ public class Ui {
                 break;
             case "write":
                 response.append("Data source for writing has been changed\n");
-                setStorage(new Storage(parseInfo[1]));
+                setStorage(new Storage("data/" + parseInfo[1]));
                 break;
             case "list":
                 response.append("Here are the tasks in your list:\n");

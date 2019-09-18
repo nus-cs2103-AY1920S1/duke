@@ -67,6 +67,7 @@ public class Storage {
      * @param tasks List of tasks.
      */
     public void overWrite(ArrayList<Task> tasks) throws IOException {
+        new File("data").mkdir();
         diskList.createNewFile();
 
         StringBuilder sb = new StringBuilder();

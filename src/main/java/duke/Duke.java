@@ -1,16 +1,14 @@
 package duke;
 
-import duke.command.Parser;
-import duke.command.Storage;
-import duke.command.TaskList;
-import duke.command.Ui;
-
-import java.text.ParseException;
+import duke.exception.DukeException;
+import duke.logic.Parser;
+import duke.logic.Ui;
+import duke.model.TaskList;
 
 /**
  * The main driver of Duke program.
  */
-class Duke {
+public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -39,7 +37,7 @@ class Duke {
      * @param input The input text
      * @return Returns the response by Duke in the form of string
      */
-    String getResponse(String input) {
+    public String getResponse(String input) {
         String response;
         try {
             response = parser.processLine(input); // add, delete, etc

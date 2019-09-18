@@ -1,12 +1,12 @@
-package duke.command;
+package duke.logic;
 
-import duke.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.exception.DukeException;
+import duke.model.TaskList;
+import duke.model.task.Deadline;
+import duke.model.task.Event;
+import duke.model.task.Task;
+import duke.model.task.ToDo;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 /**
@@ -63,6 +63,9 @@ public class Parser {
         case "update":
             Task updatedTask = updateTask(userInput, list, words);
             return ui.printUpdateTask(updatedTask);
+        case "clear":
+            tasks.list.clear();
+            return ui.printClearTask();
         default:
             Task newTask = addNewTask(userInput, list, words, firstWord);
             return ui.printAddTask(newTask, list);
@@ -137,7 +140,7 @@ public class Parser {
             task = createEvent(userInput, words);
             break;
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Please enter a valid input. Enter \"help\" for more info.");
         }
 
         tasks.add(task);
@@ -154,7 +157,7 @@ public class Parser {
      */
     private Task createEvent(String userInput, String[] words) throws DukeException {
         if (words.length < 2 || words[1].equals("")) {
-            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+            throw new DukeException("The description of a event cannot be empty.");
         }
 
         String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
@@ -172,7 +175,7 @@ public class Parser {
      */
     private Task createDeadline(String userInput, String[] words) throws DukeException {
         if (words.length < 2 || words[1].equals("")) {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("The description of a deadline cannot be empty.");
         }
 
         String description = userInput.split(" ", 2)[1].split(" /", 2)[0];
@@ -190,7 +193,7 @@ public class Parser {
      */
     private Task createTodo(String userInput, String[] words) throws DukeException {
         if (words.length < 2 || words[1].equals("")) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("The description of a todo cannot be empty.");
         }
 
         return new ToDo(userInput.split(" ", 2)[1]);

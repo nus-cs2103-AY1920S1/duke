@@ -1,4 +1,4 @@
-package duke.task;
+package duke.model.task;
 
 /**
  * A class representing a to-do, inherits from task.

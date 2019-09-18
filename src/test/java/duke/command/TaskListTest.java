@@ -1,12 +1,10 @@
 package duke.command;
 
-import com.sun.source.util.TaskListener;
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.model.TaskList;
+import duke.model.task.Task;
+
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

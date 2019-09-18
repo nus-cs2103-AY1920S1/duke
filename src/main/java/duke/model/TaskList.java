@@ -1,6 +1,6 @@
-package duke.command;
+package duke.model;
 
-import duke.task.Task;
+import duke.model.task.Task;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * A class representing the list of tasks to be done.
  */
 public class TaskList {
-    ArrayList<Task> list;
+    public ArrayList<Task> list;
 
     /**
      * Constructor for TaskList, in the event when the list is provided.
@@ -41,7 +41,7 @@ public class TaskList {
      * @param index The index of the task in the list to be deleted.
      * @return Returns the deleted task.
      */
-    Task delete(int index) {
+    public Task delete(int index) {
         return list.remove(index);
     }
 

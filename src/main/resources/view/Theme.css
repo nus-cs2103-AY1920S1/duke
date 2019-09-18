@@ -1,0 +1,41 @@
+.root {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #FFF;
+}
+
+#root {
+    -fx-background-color: #FFF;
+}
+
+#scrollPane {
+    -fx-background-color: #FFF;
+    -fx-padding: 0;
+    -fx-start-margin: 0;
+    -fx-end-margin: 0;
+}
+
+#dialogContainer {
+    -fx-background-color: #FFF;
+}
+
+#dialog {
+    -fx-padding: 2 10 2 10;
+    -fx-text-fill: #555555;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13.0;
+}
+
+#userInput {
+    -fx-background-color: #EEE;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13.0;
+}
+
+#dialogBox {
+    -fx-padding: 10 10 10 15;
+}
+
+#sendButton {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13.0;
+}

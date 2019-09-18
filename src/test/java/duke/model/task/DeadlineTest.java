@@ -1,36 +1,34 @@
-package duke.task;
+package duke.model.task;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
-
-import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
- * Unit test for event class.
+ * Unit test for Deadline class.
  */
-class EventTest {
+class DeadlineTest {
 
     /**
-     * Create an event object with correct input and format.
+     * Create a deadline object with correct input and format.
      *
-     * @result An event object is created successfully.
+     * @result A deadline object is created successfully.
      */
     @Test
-    void eventCreation_normalInput_outputMatches() {
+    void deadlineCreation_normalInput_outputMatches() {
         Task task = null;
         try {
-            task = new Event("party", "29/08/2019 2200");
+            task = new Deadline("submit assignment", "29/08/2019 2359");
         } catch (DukeException e) {
             e.printStackTrace();
         }
         assert task != null;
-        assertEquals(task.toString(), "[E][x] party (at: 29/08/2019 2200)");
+        assertEquals(task.toString(), "[D][x] submit assignment (by: 29/08/2019 2359)");
     }
 
     /**
-     * Create an event object with wrong date format.
+     * Create a deadline object with wrong date format.
      *
      * @result An exception will be thrown.
      */
@@ -38,14 +36,14 @@ class EventTest {
     void checkDateFormat_wrongDateFormat_exceptionThrown() {
         Task task = null;
         try {
-            task = new Event("event", "20/09/2019");
+            task = new Deadline("submit quiz", "20/09/2019");
         } catch (DukeException e) {
             assertEquals(e.getMessage(), "Unparseable date: \"20/09/2019\"\nPlease use the format: dd/MM/yyyy hhmm");
         }
     }
 
     /**
-     * Check the event object file string format.
+     * Check the deadline object file string format.
      *
      * @result The format matches correctly.
      */
@@ -53,8 +51,8 @@ class EventTest {
     void checkFileStringFormat_correctFormat_success() {
         Task task = null;
         try {
-            task = new Event("an event", "12/10/2020 0900");
-            assertEquals("E | 0 | an event | 12/10/2020 0900", task.getFileStringFormat());
+            task = new Deadline("submit quiz", "20/09/2019 2359");
+            assertEquals("D | 0 | submit quiz | 20/09/2019 2359", task.getFileStringFormat());
         } catch (DukeException e) {
             System.err.println(e.getMessage());
         }

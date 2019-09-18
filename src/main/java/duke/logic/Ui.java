@@ -1,9 +1,10 @@
-package duke.command;
+package duke.logic;
 
-import duke.task.Task;
+import duke.model.task.Task;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;
+
 
 /**
  * A class which deals with the interactions of the user, including printing and requesting for input.
@@ -67,7 +68,7 @@ public class Ui {
     String printDeleteTask(Task removed, ArrayList<Task> list) {
         return ("Noted. I've removed this task:\n"
                 + "  " + removed.toString() + "\n"
-                + "Now you have " + list.size() + " in the list.");
+                + "Now you have " + list.size() + "task" + (list.size() > 1 ? "s" : "") + " in the list.");
     }
 
     /**
@@ -80,20 +81,44 @@ public class Ui {
     String printAddTask(Task task, ArrayList<Task> list) {
         return ("Got it. I've added this task:\n"
                 + "  " + task.toString() + "\n"
-                + "Now you have " + list.size() + " tasks in the list");
+                + "Now you have " + list.size() + " task" + (list.size() > 1 ? "s" : "") + " in the list");
     }
 
+    /**
+     * Returns a message to remind user that a task has been updated.
+     *
+     * @param task The task to be updated.
+     * @return Returns a message to remind user that a task has been updated.
+     */
     String printUpdateTask(Task task) {
         return ("Noted. I've edited this task:\n"
                 + "  " + task.toString() + "\n");
     }
 
+    /**
+     * Returns a message to help user with the available commands.
+     *
+     * @return Returns a message to help users with the available commands.
+     */
     String printHelp() {
         return ("Available commands:\n"
                 + "\"list\"\n"
                 + "\"done <index>\"\n"
                 + "\"delete <index>\"\n"
                 + "\"find <string>\"\n"
-                + "\"update <index> w/<description> d/<date>\"\n");
+                + "\"update <index> w/<description> d/<date>\"\n"
+                + "\"clear\"\n"
+                + "\"todo <name>\"\n"
+                + "\"deadline <name> /by <date> <time>\"\n"
+                + "\"event <name> /at <date> <time>\"\n");
+    }
+
+    /**
+     * Returns a string to remind user that all tasks has been cleared.
+     *
+     * @return Returns a string to remind user that all tasks has been cleared.
+     */
+    String printClearTask() {
+        return ("All task cleared!");
     }
 }

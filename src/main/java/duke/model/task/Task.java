@@ -1,4 +1,4 @@
-package duke.task;
+package duke.model.task;
 
 /**
  * An abstract class representing a Task.

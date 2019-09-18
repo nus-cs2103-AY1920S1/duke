@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -10,10 +10,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 /**
  * An example of a custom control using FXML.
@@ -37,9 +46,11 @@ public class DialogBox extends HBox {
         }
 
         int lineCount = text.split("\n").length;
-        dialog.setMinHeight((double) lineCount * 20);
+        dialog.setMinHeight((double) (lineCount - 2) * 19 + 2 * 22);
         dialog.setText(text);
+
         displayPicture.setImage(img);
+        //displayPicture.setClip(new Circle(25, 25, 25));
     }
 
     /**
@@ -52,8 +63,20 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a dialog box.
+     *
+     * @param text the text for the dialog box
+     * @param img the image for the dialog box
+     * @return returns a dialog box
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+
+        Label dialog = (Label) db.getChildren().get(0);
+        dialog.setBackground(
+                new Background(new BackgroundFill(Color.rgb(255, 213, 171), new CornerRadii(10), Insets.EMPTY)));
+        return db;
     }
 
     /**
@@ -66,6 +89,11 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+
+        Label dialog = (Label) db.getChildren().get(1);
+        dialog.setBackground(
+                new Background(new BackgroundFill(Color.rgb(179, 224, 255), new CornerRadii(10), Insets.EMPTY)));
+
         return db;
     }
 }

@@ -1,5 +1,9 @@
-T | 1 | aa
-D | 1 | return book | 2/12/2019 1800
-E | 1 | event | 2/12/2019 1800
-D | 1 | quiz | 02/10/2019 2359
-T | 0 | study
+T | 0 | a
+T | 0 | b
+T | 0 | c
+T | 1 | d
+T | 0 | e
+T | 0 | f
+T | 0 | g
+T | 0 | a
+T | 0 | fjdklsafsa

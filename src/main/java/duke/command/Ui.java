@@ -149,7 +149,7 @@ public class Ui {
         if (taskList.isEmpty()) {
             return "There are no Tasks in your list with '" + filter + "' in their description.\n";
         }
-        String result = "Here are the tasks with '" + filter + "' in your list:\n";
+        String result = "Here are the tasks in your list with '" + filter + "' in their description:\n";
         ArrayList<Task> arr = taskList.getArr();
         for (int i = 0; i < arr.size(); i++) {
             Task temp = arr.get(i);

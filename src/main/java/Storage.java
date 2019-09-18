@@ -14,6 +14,11 @@ import java.util.Scanner;
 public class Storage {
     protected String filePath;
 
+    /**
+     * Storage constructor that handles the saving, loading and updating of contents in the saved file.
+     * @param filePath filepath of the stored data file
+     * @throws DukeException when unable to create a save file
+     */
     public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         try {
@@ -171,7 +176,7 @@ public class Storage {
         writeBackToFile(list, filePath);
     }
 
-    private void writeBackToFile(List<String> list, String filePath) throws IOException{
+    private void writeBackToFile(List<String> list, String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         //write all but the last task to file to avoid adding extra line separator
         for (int i = 0; i < list.size() - 1; i++) {

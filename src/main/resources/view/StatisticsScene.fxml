@@ -5,12 +5,12 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 
-<BarChart fx:id="taskChart" barGap="5.0" focusTraversable="true" prefHeight="602.0" prefWidth="544.0" title="Statistics of Tasks" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.duke.StatisticsController">
+<BarChart fx:id="taskChart" barGap="5.0" focusTraversable="true" prefHeight="602.0" prefWidth="544.0" title="Statistics of Tasks" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.duke.StatisticsController">
     <xAxis>
-        <CategoryAxis label="Categories" prefHeight="124.0" prefWidth="433.0" side="BOTTOM" startMargin="15.0" fx:id="xaxis" />
+        <CategoryAxis label="Categories" prefHeight="124.0" prefWidth="433.0" side="BOTTOM" startMargin="15.0" fx:id="horizontalAxis" />
     </xAxis>
     <yAxis>
-        <NumberAxis fx:id="yaxis" label="Number of Tasks" side="LEFT" />
+        <NumberAxis fx:id="verticalAxis" label="Number of Tasks" side="LEFT" />
     </yAxis>
    <padding>
       <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />

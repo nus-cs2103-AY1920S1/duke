@@ -19,10 +19,10 @@ public class StatisticsController {
 
     @FXML
 
-    CategoryAxis xaxis = new CategoryAxis();
+    CategoryAxis horizontalAxis = new CategoryAxis();
 
     @FXML
-    NumberAxis yaxis = new NumberAxis();
+    NumberAxis verticalAxis = new NumberAxis();
 
 
     /**

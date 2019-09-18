@@ -10,21 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.duke.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.duke.MainWindow">
     <children>
-        <Button fx:id="sendButton" contentDisplay="BOTTOM" layoutX="419.0" layoutY="663.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="77.0" text="Send" />
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" opacity="0.92" prefHeight="41.0" prefWidth="420.0" promptText="Enter task to be noted down" AnchorPane.bottomAnchor="1.0">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <effect>
-            <SepiaTone />
-         </effect></TextField>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="666.0" prefWidth="496.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="496.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="663.0" prefWidth="493.0">
+                <VBox fx:id="dialogContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="493.0">
                <children>
-                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                  <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
                     <items>
                       <Button defaultButton="true" mnemonicParsing="false" onAction="#showStatsScene" prefHeight="27.0" prefWidth="479.0" text="Show Statistics" textAlignment="CENTER">
                            <font>
@@ -40,5 +32,14 @@
             <InnerShadow blurType="ONE_PASS_BOX" />
          </effect>
         </ScrollPane>
+        <TextField fx:id="userInput" layoutY="663.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#handleUserInput" opacity="0.92" prefHeight="41.0" prefWidth="420.0" promptText="Enter task to be noted down">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+         <effect>
+            <SepiaTone />
+         </effect>
+      </TextField>
+        <Button fx:id="sendButton" contentDisplay="BOTTOM" defaultButton="true" layoutX="419.0" layoutY="663.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="77.0" text="Send" />
     </children>
 </AnchorPane>

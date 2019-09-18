@@ -87,7 +87,7 @@ public class AddDeadlineCommand extends Command {
             errorMessage = "Wrong syntax, should be using /by for deadline";
             return;
         }
-        deadline = new Deadline(input, extraInfo);
+        deadline = new Deadline(mainInput, extraInfo);
         listOfTasks.addDeadline(deadline);
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();

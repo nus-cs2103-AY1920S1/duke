@@ -41,8 +41,8 @@ public class Time {
         int hours = time / 100;
         hours = hours % 12;
         int minutes = time % 100;
-        if (minutes > 60) {
-            throw new DukeException("     Invalid minute format!");
+        if (minutes >= 60) {
+            validFormat = false;
         }
         String hour = String.valueOf(hours);
         String minute = "";

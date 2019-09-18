@@ -87,7 +87,7 @@ public class AddEventCommand extends Command {
             errorMessage = "Wrong syntax, should be using /at for event";
             return;
         }
-        event = new Event(input, extraInfo);
+        event = new Event(mainInput, extraInfo);
         listOfTasks.addEvent(event);
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();

@@ -47,6 +47,11 @@ public class Ui {
                     + "\nHello! I'm Tsinghua : )\nWhat can I do for you?";
     }
 
+    /**
+     * Asks the user to specify a file path for saving and loading tasks.
+     *
+     * @return A string that gives instructions to the user for specifying file path.
+     */
     public String askForFilePath() {
         return "Please specify the path where your tasks are stored, "
                 + "in the following format: \nload  {complete file path}/{filename}\n"

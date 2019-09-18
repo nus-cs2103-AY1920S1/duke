@@ -57,6 +57,9 @@ public class MainWindow extends AnchorPane {
                         dukeImage));
     }
 
+    /**
+     * Asks the user to specify a file path for saving and loading tasks.
+     */
     public void askForFilePath() {
         String askForFilePathMessage = new Ui().askForFilePath();
         dialogContainer.getChildren().add(
@@ -65,16 +68,19 @@ public class MainWindow extends AnchorPane {
                         dukeImage));
     }
 
+    /*
     /**
      * Shows the result of loading past tasks from the local file.
      */
-/*    public void load() {
+    /*
+    public void load() {
         String message = duke.loadTasks();
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
                         message,
                         dukeImage));
-    }*/
+    }
+    */
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to

@@ -15,6 +15,10 @@ public class TaskList {
         return this.commands.size();
     }
 
+    protected Task getTask(int index) {
+        return this.commands.get(index);
+    }
+
     protected ArrayList<Task> getList() {
 //        int count = 1;
 //        String str = "";

@@ -28,6 +28,23 @@ public class Task {
     }
 
     /**
+     * Edits the specified attribute of task object with given update.
+     * @param attribute: done, des
+     * @param update: true/false, new des
+     */
+    public void edit(String attribute, String update) {
+        if (attribute.equals("done")) {
+            assert update.equals("true") || update.equals("false") : "Must provide true or false only";
+            this.isDone = update.equals("true");
+            this.status = update.equals("true") ? 1 : 0;
+        } else if (attribute.equals("des")) {
+            this.description = update;
+        } else {
+            System.out.println("Attribute does not exist");
+        }
+    }
+
+    /**
      * Formats the string to how it should be saved in the .txt file
      * @return String to save in the .txt file
      */

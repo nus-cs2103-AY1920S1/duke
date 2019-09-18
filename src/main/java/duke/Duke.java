@@ -1,5 +1,9 @@
 package duke;
 
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.command.Command;
 import duke.ui.GuiUi;
 import duke.ui.SystemUi;
@@ -84,5 +88,19 @@ public class Duke {
             ui.showLine();
         }
         return isExit;
+    }
+
+    /**
+     * Exits the Duke program.
+     */
+    public void exit() {
+        this.saveTasks();
+        Timer timer = new Timer();
+        TimerTask exitApp = new TimerTask() {
+            public void run() {
+                System.exit(0);
+            }
+        };
+        timer.schedule(exitApp, new Date(System.currentTimeMillis() + 1000));
     }
 }

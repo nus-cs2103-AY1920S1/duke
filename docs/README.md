@@ -1,5 +1,6 @@
 # User Guide
-
+## OwlBook
+![Application screenshot](./Ui.png);
 ## Features 
 OwlBook is an task manager that stores and manages the tasks that you are required to complete. OwlBook is great
 for users who prefer using a Command Line Interface (CLI) while keeping some Graphical User Interface (GUI). It 
@@ -16,7 +17,7 @@ Describe action and its outcome.
 
 _____________
 Command  |  Arguments | Description |
-
+------------ | ------------- | -------------
 `todo` | `description` | adds a todo task to with `description` to your task list.
 `deadline` | `description` /by `dd/mm/yyyy` | adds a deadline task with `description` and due date by `dd/mm/yyyy` to your task list.
 `event` | `description` /at `dd/mm/yyyy` `time` | adds an event with `description` at `dd/mm/yyyy`, `time` in 24h clock representation to your task list.
@@ -47,7 +48,7 @@ Describe action and its outcome.
 
 _____________
 Command  |  Arguments | Description |
-
+------------ | ------------- | -------------
 `delete` | `tasknumber` | deletes task with `tasknumber` in your task list.
 _____________
 
@@ -75,7 +76,7 @@ Describe action and its outcome.
 
 _____________
 Command  |  Arguments | Description |
-
+------------ | ------------- | -------------
 `find` | `taskname` | Retrieves all tasks with names that contain `taskname`
 _____________
 
@@ -104,7 +105,7 @@ Describe action and its outcome.
 
 _____________
 Command  |  Arguments | Description |
-
+------------ | ------------- | -------------
 `list` | none | Displays all of your tasks.
 
 `done` | `tasknumber` | Marks task with `tasknumber` as done.
@@ -134,7 +135,7 @@ Expected outcome:
  
  _____________
  Command  |  Arguments | Description |
- 
+ ------------ | ------------- | -------------
  `help` | none | Displays help information.
  
  _____________
@@ -150,7 +151,7 @@ Expected outcome:
  
  _____________
  Command  |  Arguments | Description |
- 
+ ------------ | ------------- | -------------
  `undo` | none | undo the previous command.
 
  _____________
@@ -168,7 +169,22 @@ Expected outcome:
     Here are the tasks in your list:
 
     ____________________________________________________________
+    
+### Feature 6 
+ Bye
+ 
+ ## Usage
+ 
+ ### `bye` - Saves the state of your task list and exits the application.
+ 
+ Describe action and its outcome.
+ 
+ _____________
+ Command  |  Arguments | Description |
+ ------------ | ------------- | -------------
+ `bye` | none | closes application.
 
+ _____________
  
  
 

@@ -1,3 +1,5 @@
+package duke.ui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -26,9 +28,9 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Creates a new DialogBox object.
-     * @param text The text to display in the DialogBox.
-     * @param img The image to display as the profile picture within the DialogBox.
+     * Creates a new duke.main.DialogBox object.
+     * @param text The text to display in the duke.main.DialogBox.
+     * @param img The image to display as the profile picture within the duke.main.DialogBox.
      */
     public DialogBox(String text, Image img) {
         try {
@@ -46,7 +48,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the view of the DialogBox.
+     * Flips the view of the duke.main.DialogBox.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -56,9 +58,9 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a DialogBox from the point of view of the user.
-     * @param text The text to display in the DialogBox.
-     * @param img The image to display as the profile picture within the DialogBox.
+     * Creates a duke.main.DialogBox from the point of view of the user.
+     * @param text The text to display in the duke.main.DialogBox.
+     * @param img The image to display as the profile picture within the duke.main.DialogBox.
      * @return
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -66,9 +68,9 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a DialogBox from the point of view of Duke.
-     * @param text The text to display in the DialogBox.
-     * @param img The image to display as the profile picture within the DialogBox.
+     * Creates a duke.main.DialogBox from the point of view of duke.main.Duke.
+     * @param text The text to display in the duke.main.DialogBox.
+     * @param img The image to display as the profile picture within the duke.main.DialogBox.
      * @return
      */
     public static DialogBox getDukeDialog(String text, Image img) {

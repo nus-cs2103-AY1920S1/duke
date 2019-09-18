@@ -1,6 +1,7 @@
+package duke.ui;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -8,7 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for duke.main.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends Stage {
     @FXML
@@ -36,7 +37,7 @@ public class MainWindow extends Stage {
     }
 
     /**
-     * Creates the two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them
+     * Creates the two dialog boxes, one echoing user input and the other containing duke.main.Duke's reply and then appends them
      * to the dialog container. Clears the user input after processing.
      */
     @FXML

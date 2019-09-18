@@ -25,9 +25,10 @@ public class FindCommand extends Command {
      * Lists all the tasks if their descriptions contain the searching keyword. If there is no matching task, a message
      * will tell the user there is no task to show.
      *
-     * @param taskList the task list that provides information about users' current tasks and to be modified
-     * @param ui       the <code>Ui</code> object to handle input and output
-     * @param storage  the <code>Storage</code> object to load and record data
+     * @param taskList        {@inheritDoc}
+     * @param ui              {@inheritDoc}
+     * @param storage         {@inheritDoc}
+     * @return                a string showing all tasks in the task list filtered by <code>keyword</code>
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

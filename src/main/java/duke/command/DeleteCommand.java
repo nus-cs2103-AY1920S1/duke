@@ -12,15 +12,15 @@ import duke.util.Ui;
  */
 public class DeleteCommand extends Command {
 
-    private int target;
+    private int taskNumber;
 
     /**
      * This is a class constructor specifying the target number.
      *
-     * @param target the order shown in the task list
+     * @param taskNumber the order shown in the task list
      */
-    public DeleteCommand(int target) {
-        this.target = target;
+    public DeleteCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     /**
@@ -28,17 +28,18 @@ public class DeleteCommand extends Command {
      * deleting. If the specified task number is out of the available range, a <code>DukeException</code> will be
      * thrown.
      *
-     * @param taskList the task list that provides information about users' current tasks and to be modified
-     * @param ui       the <code>Ui</code> object to handle input and output
-     * @param storage  the <code>Storage</code> object to load and record data
-     * @throws DukeException If the specified number for the task does not existed in the current list
+     * @param taskList        {@inheritDoc}
+     * @param ui              {@inheritDoc}
+     * @param storage         {@inheritDoc}
+     * @return                a string showing the specified task is deleted from the task list
+     * @throws DukeException  If the specified task number does not existed in the current list
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        if (target < 0 || target >= taskList.getTotalTask()) {
+        if (taskNumber < 0 || taskNumber >= taskList.getTotalTask()) {
             throw new DukeException("The task number is invalid!");
         }
-        Task removedTask = taskList.removeTaskAt(target);
+        Task removedTask = taskList.removeTaskAt(taskNumber);
         return ui.showTaskDeleted(taskList.getTotalTask(), removedTask);
     }
 
@@ -53,7 +54,7 @@ public class DeleteCommand extends Command {
     public boolean equals(Object obj) {
         if (obj instanceof DeleteCommand) {
             DeleteCommand another = (DeleteCommand) obj;
-            return this.target == another.target;
+            return this.taskNumber == another.taskNumber;
         } else {
             return false;
         }

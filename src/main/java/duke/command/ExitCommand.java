@@ -24,9 +24,10 @@ public class ExitCommand extends Command {
      * Terminates the user input by changing <code>isExist</code>, the condition for loops, to be <code>true</code>.
      * Besides, it also save the whole list to hard disk for future use.
      *
-     * @param taskList the task list that provides information about users' current tasks and to be modified
-     * @param ui       the <code>Ui</code> object to handle input and output
-     * @param storage  the <code>Storage</code> object to load and record data
+     * @param taskList        {@inheritDoc}
+     * @param ui              {@inheritDoc}
+     * @param storage         {@inheritDoc}
+     * @return                a string saying bye to the user
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

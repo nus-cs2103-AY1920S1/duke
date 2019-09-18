@@ -1,20 +1,19 @@
 package duke.task;
 
+import duke.util.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 
 /**
- * Task is the base base class for all tasks. A Task object encapsulates the information about the description and
- * status (done or not). It is possible to create specific task objects from strings in the storage using
- * <code>from</code>.
- *
- * @author Zhnag Xiaoyu
+ * Task is the base base class for all tasks. Basically, a Task object encapsulates the information about
+ * the description and status (done or not).
  */
 public class Task {
 
-    static protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy, HH:mm");
+    static final protected DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MMM-yyyy, HH:mm");
     protected String description;
     protected boolean isDone;
 
@@ -40,6 +39,18 @@ public class Task {
         this.isDone = isDone;
     }
 
+    private String getStatusIcon() {
+        return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean getStatus() {
+        return isDone;
+    }
+
     /**
      * Creates a specific <code>Task</code> object from a string, which contains the information about a task stored in
      * the hard disk. Task types can be <code>Todo</code>, <code>Deadline</code>, and <code>Event</code>, indicated by
@@ -49,7 +60,7 @@ public class Task {
      * @return a specific <code>Task</code> object, namely, <code>Todo</code>, <code>Deadline</code>, or
      * <code>Event</code>,
      */
-    static public Task from(String taskInfo) {
+    static public Task from(String taskInfo) throws DukeException {
         String[] taskInfos = taskInfo.split("\\|");
         switch (taskInfos[0]) {
         case "T":
@@ -63,21 +74,8 @@ public class Task {
             return new Event(taskInfos[2], LocalDateTime.parse(taskInfos[3]), LocalTime.parse(taskInfos[4]),
                     Boolean.parseBoolean(taskInfos[1]));
         default:
-            assert false;
+            throw new DukeException("Oh! Storage is corrupted!");
         }
-        return new Task(taskInfos[2]);
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public boolean getStatus() {
-        return isDone;
-    }
-
-    public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
     }
 
     public void markDone() {
@@ -92,22 +90,5 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
-    }
-
-    /**
-     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status.
-     *
-     * @param obj the object to be compared
-     * @return <code>true</code> if the specifications for two tasks are all the same;
-     * <code>false</code> otherwise.
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Task) {
-            Task another = (Task) obj;
-            return this.description.equals(another.description) && this.isDone == another.isDone;
-        } else {
-            return false;
-        }
     }
 }

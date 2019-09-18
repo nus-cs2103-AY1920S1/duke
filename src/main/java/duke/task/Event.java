@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
- * This is one kind of <code>Task</code> to specify the details and the duration for the item in the task list.
+ * This is one kind of <code>Task</code> that specifies the description and the duration for the item in the task list.
  */
 public class Event extends Task {
 
@@ -14,7 +14,7 @@ public class Event extends Task {
     /**
      * {@inheritDoc} This is a class constructor specifying the description, start time and end time for the task. The
      * <code>isDone</code> status is set to be <code>false</code> by default.
-     *
+     *F
      * @param startDateTime a <code>LocalDateTime</code> object to specify the start date and time of this event
      * @param endTime       a <code>LocalTime</code> object to specify the end time of this event
      */
@@ -53,16 +53,33 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + formatter.format(startDateTime) + " - " + endTime + ")";
+        return "[E]" + super.toString() + " (at: " + DATE_TIME_FORMATTER.format(startDateTime) + " - " + endTime + ")";
     }
 
     /**
-     * {@inheritDoc} Compares two <code>Todo</code> objects by their descriptions, <code>isDone</code> status,
-     * <code>startDateTime</code>, and <code>endTime</code>.
+     * Compares two <code>Task</code> objects by their descriptions and <code>isDone</code> status.
+     * The comparison is mainly used for JUnit tests.
+     *
+     * @param obj  the object to be compared
+     * @return     <code>true</code> if the specifications for two tasks are all the same;
+     *             <code>false</code> otherwise.
      */
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj) && obj instanceof Event && this.startDateTime.equals(startDateTime)
-                && this.endTime.equals(endTime);
+        //@@author ZhangHuafan-reused
+        //Reused from https://www.javaworld.com/article/3305792/comparing-java-objects-with-equals-and-hashcode.html
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
+        //@@author
+        Event another = (Event) obj;
+        boolean isSameDescription = this.description.equals(another.description);
+        boolean isSameStatus = this.isDone == another.isDone;
+        boolean isSameStartDateTime = this.startDateTime.equals(another.startDateTime);
+        boolean isSameEndTime = this.endTime.equals(another.endTime);
+        return isSameDescription && isSameStatus && isSameStartDateTime && isSameEndTime;
     }
 }

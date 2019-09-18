@@ -12,13 +12,13 @@ import java.util.Scanner;
  * rest needs to take in some parameter(s) to show according responses.
  */
 public class Ui {
-    private static final String indentation = "     ";
-    private static final String separator = "    ____________________________________________________________\n";
-    private static final String welcomeSentence = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String endingSentence = "Bye. Hope to see you again soon!";
-    private static final String savingError = "☹ OOPS!!! We cannot save your data!";
-    private static final String loadingError = "☹ OOPS!!! We cannot load your data!";
-    private static final String noTaskMsg = "kkk ~ There is no task in your todo list now!";
+    private static final String INDENTATION = "     ";
+    private static final String SEPARATOR = "    ____________________________________________________________\n";
+    private static final String WELCOME_Msg = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String ENDING_Msg = "Bye. Hope to see you again soon!";
+    private static final String SAVING_ERROR_Msg = "☹ OOPS!!! We cannot save your data!";
+    private static final String LOADING_ERROR_Msg = "☹ OOPS!!! We cannot load your data!";
+    private static final String NO_TASK_Msg = "kkk ~ There is no task in your todo list now!";
     private Scanner scanner;
 
     /**
@@ -29,28 +29,28 @@ public class Ui {
     }
 
     private String getFormattedStr(String str) {
-        return separator + indentation + str.replace("\n", "\n" + indentation)
-                + "\n" + separator;
+        return SEPARATOR + INDENTATION + str.replace("\n", "\n" + INDENTATION)
+                + "\n" + SEPARATOR;
     }
 
     public String showWelcome() {
-        System.out.println(getFormattedStr(welcomeSentence));
-        return welcomeSentence;
+        System.out.println(getFormattedStr(WELCOME_Msg));
+        return WELCOME_Msg;
     }
 
     public String showGoodbye() {
-        System.out.println(getFormattedStr(endingSentence));
-        return endingSentence;
+        System.out.println(getFormattedStr(ENDING_Msg));
+        return ENDING_Msg;
     }
 
     public String showSavingError() {
-        System.out.println(getFormattedStr(savingError));
-        return savingError;
+        System.out.println(getFormattedStr(SAVING_ERROR_Msg));
+        return SAVING_ERROR_Msg;
     }
 
     public String showLoadingError() {
-        System.out.println(getFormattedStr(loadingError));
-        return loadingError;
+        System.out.println(getFormattedStr(LOADING_ERROR_Msg));
+        return LOADING_ERROR_Msg;
     }
 
     public String showError(String errorMsg) {
@@ -59,8 +59,8 @@ public class Ui {
     }
 
     public String showNoTask() {
-        System.out.println(getFormattedStr(noTaskMsg));
-        return noTaskMsg;
+        System.out.println(getFormattedStr(NO_TASK_Msg));
+        return NO_TASK_Msg;
     }
 
     public String showTaskAdded(int total, Task newTask) {
@@ -88,12 +88,12 @@ public class Ui {
         if (taskList.getTotalTask() == 0) {
             return showNoTask();
         } else {
-            String formattedList = separator;
-            formattedList = formattedList + indentation + "Here are the tasks in your list:\n";
+            String formattedList = SEPARATOR;
+            formattedList = formattedList + INDENTATION + "Here are the tasks in your list:\n";
             for (int i = 1; i <= taskList.getTotalTask(); i++) {
-                formattedList = formattedList + indentation + i + ". " + taskList.getTaskAt(i - 1) + "\n";
+                formattedList = formattedList + INDENTATION + i + ". " + taskList.getTaskAt(i - 1) + "\n";
             }
-            formattedList = formattedList + separator;
+            formattedList = formattedList + SEPARATOR;
             System.out.println(formattedList);
             return formattedList;
         }

@@ -2,8 +2,6 @@
 
 **Duke** is created for simple and easy **management of tasks**, using text commands in the command line. It supports various tasks like **DoAfters, Deadlines, Events** and **ToDos** and tracks them by displaying a neat overview of all tasks in a Graphical User Interface (GUI).
 
-![User Interface](/docs/Ui.png)
-
 ## Features
 
 ### Bye

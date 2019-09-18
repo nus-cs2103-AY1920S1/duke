@@ -4,8 +4,8 @@ package duke.task;
  * To-do task is a task that is supposed to be completed in the future.
  */
 public class TodoTask  extends Task {
-    public TodoTask(String taskDetails) {
-        super(taskDetails);
+    public TodoTask(String description) {
+        super(description);
     }
 
     /**
@@ -14,8 +14,8 @@ public class TodoTask  extends Task {
      *
      * @return string that contains information about a task.
      */
-    String saveInfo() {
-        return "todo" + " " + taskDetails
+    public String saveInfo() {
+        return "todo" + " " + description
                 + System.getProperty("line.separator") + completed
                 + System.getProperty("line.separator") + priority.toString();
     }
@@ -23,9 +23,9 @@ public class TodoTask  extends Task {
     @Override
     public String toString() {
         if (this.completed) {
-            return "[T][\u2713] " + taskDetails + " " + priority.toString();
+            return "[T][\u2713] " + description + " " + priority.toString();
         } else {
-            return "[T][\u2717] " + taskDetails + " " + priority.toString();
+            return "[T][\u2717] " + description + " " + priority.toString();
         }
     }
 }

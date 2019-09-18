@@ -78,7 +78,7 @@ public class TaskList {
      */
     public String getTaskDsc(int taskIndex) {
         Task t = taskList.get(taskIndex);
-        return t.getTaskDetails();
+        return t.getDescription();
     }
 
     /**
@@ -87,7 +87,7 @@ public class TaskList {
      * description and PriorityLevel.
      *
      * @param taskIndex The index of the task.
-     * @return A String of the type of task, completion status, description and PriorityLevel.
+     * @return A String of the type of task, completion status, description, time and PriorityLevel.
      */
     public String getFullTaskInfo(int taskIndex) {
         Task t = taskList.get(taskIndex);

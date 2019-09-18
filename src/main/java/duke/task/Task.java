@@ -1,16 +1,15 @@
 package duke.task;
 
 /**
- * Task is an abstract class from which other tasks are built upon.
- * Tasks represents the tasks that a person has when using Duke.
+ * An abstract class for tasks.
  */
 public abstract class Task implements Comparable<Task> {
-    String taskDetails;
+    String description;
     boolean completed;
     PriorityLevel priority;
 
     Task(String taskDetails) {
-        this.taskDetails = taskDetails;
+        this.description = taskDetails;
         this.priority = PriorityLevel.LOW;
         this.completed = false;
     }
@@ -31,6 +30,8 @@ public abstract class Task implements Comparable<Task> {
 
     /**
      * Get the priority level of a task.
+     *
+     * @return The PriorityLevel of the task.
      */
     public PriorityLevel getPriority() {
         return this.priority;
@@ -38,16 +39,17 @@ public abstract class Task implements Comparable<Task> {
 
     /**
      * Returns a string of a task that can contain
-     * its description, time and completion status.
+     * its type, completion status, description, time
+     * and PriorityLevel.
      *
-     * @return string that contains information about a task.
+     * @return A string that contains full information about a task.
      */
-    abstract String saveInfo();
+    public abstract String saveInfo();
 
     /**
      * Returns the completion status of a task.
      *
-     * @return task completion status.
+     * @return The task's completion status.
      */
     public boolean isCompleted() {
         return this.completed;
@@ -56,21 +58,27 @@ public abstract class Task implements Comparable<Task> {
     /**
      * A getter for task details.
      *
-     * @return the task details.
+     * @return The task description.
      */
-    public String getTaskDetails() {
-        return this.taskDetails;
+    public String getDescription() {
+        return this.description;
     }
 
+    /**
+     * Returns a string containing full information of the task.
+     *
+     * @return A string representation of the task.
+     */
     @Override
-    public String toString() {
-        if (completed) {
-            return "[\u2713] " + this.taskDetails + " " + priority.toString();
-        } else {
-            return "[\u2717] " + this.taskDetails + " " + priority.toString();
-        }
-    }
+    public abstract String toString();
 
+    /**
+     * Compares two Task objects by their PriorityLevel.
+     *
+     * @return the int 0 if this Task has same PriorityLevel as the Task in argument;
+     * -1 if PriorityLevel of this Task is higher than the Task in argument;
+     * 1 if the PriorityLevel of this Task is lower than the Task in argument.
+     */
     @Override
     public int compareTo(Task anotherTask) {
         PriorityLevel otherPriority = anotherTask.getPriority();

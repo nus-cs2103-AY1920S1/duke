@@ -10,8 +10,8 @@ import java.util.Date;
 public class Deadline extends Task {
     private Date deadlineBy;
 
-    public Deadline(String taskDetails, Date deadlineBy) {
-        super(taskDetails);
+    public Deadline(String description, Date deadlineBy) {
+        super(description);
         this.deadlineBy = deadlineBy;
     }
 
@@ -22,7 +22,7 @@ public class Deadline extends Task {
      * @return string that contains information about a task.
      */
     public String saveInfo() {
-        return "deadline" + " " + taskDetails + " /by " + Parser.inputDateFormat.format(deadlineBy)
+        return "deadline" + " " + description + " /by " + Parser.inputDateFormat.format(deadlineBy)
                 + System.getProperty("line.separator") + completed
                 + System.getProperty("line.separator") + priority.toString();
     }
@@ -35,7 +35,7 @@ public class Deadline extends Task {
         } else {
             sb.append("[D][\u2717] ");
         }
-        sb.append(taskDetails);
+        sb.append(description);
         sb.append(" (");
         sb.append(Parser.outputDateFormat.format(deadlineBy));
         sb.append(")");

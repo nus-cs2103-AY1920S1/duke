@@ -11,8 +11,8 @@ import java.util.Date;
 public class Event extends Task {
     private Date eventAt;
 
-    public Event(String taskDetails, Date eventAt) {
-        super(taskDetails);
+    public Event(String description, Date eventAt) {
+        super(description);
         this.eventAt = eventAt;
     }
 
@@ -22,8 +22,8 @@ public class Event extends Task {
      *
      * @return string that contains information about a task.
      */
-    String saveInfo() {
-        return "event" + " " + taskDetails + " /at " + Parser.inputDateFormat.format(eventAt)
+    public String saveInfo() {
+        return "event" + " " + description + " /at " + Parser.inputDateFormat.format(eventAt)
                 + System.getProperty("line.separator") + completed
                 + System.getProperty("line.separator") + priority.toString();
     }
@@ -36,7 +36,7 @@ public class Event extends Task {
         } else {
             sb.append("[E][\u2717] ");
         }
-        sb.append(taskDetails);
+        sb.append(description);
         sb.append(" (");
         sb.append(Parser.outputDateFormat.format(eventAt));
         sb.append(")");

@@ -1,3 +1,4 @@
+! [Duke](Ui.png)
 # User Guide
 
 ## Features

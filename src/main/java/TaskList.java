@@ -14,6 +14,10 @@ public class TaskList {
 
     }
 
+    public TaskList(ArrayList<Task> taskArr){
+        this.tasksArr =  taskArr;
+    }
+
     /**
      * Use the Buffered File provided in the constructor to read the file and populate the list with the stored
      * tasks
@@ -132,7 +136,7 @@ public class TaskList {
         return "Now you have " + tasksArr.size() + " tasks in the list.";
     }
 
-    public ArrayList<Task> find(String keyWord){
+    public TaskList find(String keyWord){
         ArrayList<Task> list = new ArrayList<Task>();
         for (int i = 0 ; i < tasksArr.size() ; i++){
             Task currTask = tasksArr.get(i);
@@ -141,7 +145,7 @@ public class TaskList {
                 list.add(currTask);
             }
         }
-        return list;
+        return new TaskList(list);
     }
 
     /**
@@ -151,6 +155,14 @@ public class TaskList {
     @Override
     public String toString() {
         String string = "Here are the tasks in your list:\n";
+        for (int i = 0 ; i < tasksArr.size() ; i++ ) {
+            string = string + "    " + (i + 1) + ". " + tasksArr.get(i).getTaskDetails() + "\n";
+        }
+        return string;
+    }
+
+    public String toFoundListString(){
+        String string = "Here are the matching in your list:\n";
         for (int i = 0 ; i < tasksArr.size() ; i++ ) {
             string = string + "    " + (i + 1) + ". " + tasksArr.get(i).getTaskDetails() + "\n";
         }

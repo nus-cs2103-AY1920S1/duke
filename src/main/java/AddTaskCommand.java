@@ -55,9 +55,8 @@ public class AddTaskCommand extends Command {
      * @param storage
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printString("Got it. I've added this task:");
         tasks.addTask(currTask);
-        ui.printString("  " + currTask.getTaskDetails());
-        return tasks.listDetails();
+        ui.printString("Got it. I've added this task:\n" + "  " + currTask.getTaskDetails() + "\n" + tasks.listDetails());
+        return "Got it. I've added this task:\n" + "  " + currTask.getTaskDetails() + "\n" + tasks.listDetails();
     };
 }

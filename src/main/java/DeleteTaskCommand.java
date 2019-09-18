@@ -21,7 +21,7 @@ public class DeleteTaskCommand extends Command {
         Task currTask = tasks.deleteTask(index);
         String output = "";
         output = "Noted. I've removed this task: \n";
-        output = output + "   " + currTask + "\n";
+        output = output + "   " + currTask.getTaskDetails() + "\n";
         output = output + tasks.listDetails();
         return output;
     }

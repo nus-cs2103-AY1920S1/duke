@@ -24,6 +24,7 @@ public class Storage {
         ArrayList<List<String>> tasks = new ArrayList<>();
         try {
             File file = new File(this.filePath);
+            file.getParentFile().mkdirs();
             file.createNewFile();
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;

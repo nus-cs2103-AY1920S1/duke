@@ -29,7 +29,7 @@ public class Duke extends Application {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("data/duke.txt");
+        storage = new Storage("./duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException ex) {

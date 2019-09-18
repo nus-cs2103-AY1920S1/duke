@@ -8,16 +8,14 @@ The features available in the task tracker are summarised below.
 ## Features
 
 ##### Commands overview
-| Command | Description |
-| --- | --- |
-| [todo](#11-todo---add-a-todo-task) | Create a new task with a description |
-| [event](#12-event---add-an-event-task) | Create a new task with a description and location/time |
-| [deadline](#13-deadline---add-a-deadline-task) | Create a new task with a description and deadline |
-| [list](#2-list-all-tasks) | List all tasks |
-| [delete](#3-delete-a-task) | Delete a specified task |
-| [done](#4-mark-a-task-as-done) | Marks a task as done |
-| [remindme](#6-get-reminders-for-tasks) | Shows reminders for specified task types |
-| [bye](#7-exit-the-application) | Exits the application |
+* [todo](#11-todo---add-a-todo-task) - Create a new task with a description
+* [event](#12-event---add-an-event-task) - Create a new task with a description and location/time
+* [deadline](#13-deadline---add-a-deadline-task) - Create a new task with a description and deadline
+* [list](#2-list-all-tasks) - List all tasks
+* [delete](#3-delete-a-task) - Delete a specified task
+* [done](#4-mark-a-task-as-done) - Marks a task as done
+* [remindme](#6-get-reminders-for-tasks) - Shows reminders for specified task types
+* [bye](#7-exit-the-application) - Exits the application
 
 ##### Command Format
 * Words in `<UPPER_CASE>` are parameters to be supplied by the user
@@ -86,8 +84,7 @@ Three types of tasks, `TODO`, `EVENT` and `DEADLINE` can be added.
 
 ---
 
-### 2. List all tasks
-
+### 2. List all task
 Displays all tasks in the tracker to the screen.
 
 ###### Syntax: `list`

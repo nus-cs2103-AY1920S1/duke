@@ -70,7 +70,6 @@ public class Ui {
         return msg;
     }
 
-
     public String showTaskDeleted(int total, Task removedTask) {
         String msg = "Noted. I've removed this task: \n" + "  " + removedTask
                 + "\nNow you have " + total + " tasks in the list.";
@@ -80,6 +79,12 @@ public class Ui {
 
     public String showTaskDone(Task doneTask) {
         String msg = "Nice! I've marked this task as done:\n" + "  " + doneTask;
+        System.out.println(getFormattedStr(msg));
+        return msg;
+    }
+
+    public String showTaskDuplicated() {
+        String msg = "A same task already exists!!! Do not bother yourself to do it twice=)";
         System.out.println(getFormattedStr(msg));
         return msg;
     }

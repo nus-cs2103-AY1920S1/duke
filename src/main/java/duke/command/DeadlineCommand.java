@@ -30,6 +30,9 @@ public class DeadlineCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = new Deadline(description, dueDateTime);
+        if (taskList.contains(newTask)) {
+            return ui.showTaskDuplicated();
+        }
         taskList.add(newTask);
         try {
             storage.recordTasks(taskList);

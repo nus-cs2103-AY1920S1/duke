@@ -36,6 +36,15 @@ public class TaskList {
         return tasks.remove(index);
     }
 
+    public boolean contains(Task task) {
+        for (Task t : tasks) {
+            if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Compares two task list by sequentially comparing each task.
      *

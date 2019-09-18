@@ -9,7 +9,6 @@ import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.DoneCommand;
 import seedu.duke.commands.ErrorCommand;
 import seedu.duke.commands.EventCommand;
-import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.TodoCommand;
 import seedu.duke.exceptions.InvalidArgumentException;
@@ -28,7 +27,6 @@ public class Parser {
         DEADLINE("deadline"),
         EVENT("event"),
         DELETE("delete"),
-        FIND("find"),
         BYE("bye"),
         ERROR("");
 
@@ -45,8 +43,7 @@ public class Parser {
     private static final String TODO_PATTERN = "(todo)(?=\\s)\\s([\\w\\D]+)";
     private static final String DEADLINE_PATTERN = "(deadline)(?=\\s)\\s([\\w\\D]+(?=\\s/by\\s))\\s/by\\s([\\w\\D]+)";
     private static final String EVENT_PATTERN = "(event)(?=\\s)\\s([\\w\\D]+(?=\\s/at\\s))\\s/at\\s([\\w\\D]+)";
-    private static final String DELETE_PATTERN = "(delete)(?=\\s)\\s([\\d]+)";
-    private static final String FIND_PATTERN = "(find)(?=\\s)\\s([\\w\\D]+)";
+    private static final String DELETE_PATTEN = "(delete)(?=\\s)\\s([\\d]+)";
     private static final String BYE_PATTERN = "(bye)";
 
     /**
@@ -94,8 +91,6 @@ public class Parser {
         } else if (command == CommandName.DELETE) {
             int taskId = Integer.parseInt(matcher.group(2));
             commandToExecute = new DeleteCommand(taskId);
-        } else if (command == CommandName.FIND) {
-            commandToExecute = new FindCommand(matcher.group(2));
         } else if (command == CommandName.BYE) {
             commandToExecute = new ByeCommand();
         }
@@ -150,10 +145,7 @@ public class Parser {
             pattern = DEADLINE_PATTERN;
             break;
         case DELETE:
-            pattern = DELETE_PATTERN;
-            break;
-            case FIND:
-            pattern = FIND_PATTERN;
+            pattern = DELETE_PATTEN;
             break;
         case BYE:
             pattern = BYE_PATTERN;

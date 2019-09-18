@@ -24,10 +24,6 @@ public class Task {
         return (this.isDone ? "\u2713" : "\u2718");
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
     public boolean isDone() {
         return this.isDone;
     }

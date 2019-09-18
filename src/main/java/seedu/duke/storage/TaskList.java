@@ -9,7 +9,6 @@ import seedu.duke.trackables.Task;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TaskList {
 
@@ -69,14 +68,6 @@ public class TaskList {
             throw new InvalidArgumentException("No task with id " + index + " exists.");
         }
         return tasks.remove(index);
-    }
-
-    public TaskList findByDescription(String description) {
-        TaskList searchResult;
-        searchResult = new TaskList(tasks.stream()
-            .filter(task -> task.getDescription().contains(description))
-            .collect(Collectors.toList()));
-        return searchResult;
     }
 
     public int size() {

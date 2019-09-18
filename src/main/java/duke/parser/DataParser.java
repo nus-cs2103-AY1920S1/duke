@@ -118,6 +118,11 @@ public class DataParser {
             throw new InvalidTaskIndexException();
         } else {
             String index = parsedData[1];
+            try {
+                Integer.parseInt(index);
+            } catch (Exception e) {
+                throw new InvalidTaskIndexException();
+            }
             int taskIndex = Integer.parseInt(index) - 1;
             return taskIndex;
         }

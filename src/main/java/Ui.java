@@ -101,6 +101,11 @@ public class Ui {
                 "    ______________________________________________";
     }
 
+    /**
+     * Sets response for Add command.
+     * @param task task added.
+     * @param size size of TaskList after adding task.
+     */
     public void setAddTaskResponse(Task task, int size) {
         setResponse("Got it. I've added this task:\n"
                 +
@@ -109,6 +114,12 @@ public class Ui {
                 "     Now you have " + size + " tasks in the list.");
     }
 
+    /**
+     * Sets response for anomaly with adding tasks with clashed schedules.
+     * @param task added task.
+     * @param clashedTasks TaskList of clashed tasks.
+     * @param size size of TaskList after adding task.
+     */
     public void setClashedTaskResponse(Task task, TaskList clashedTasks, int size) {
         StringBuilder clashedTasksStr = new StringBuilder();
         for (Task clashedTask : clashedTasks.getTasks()) {
@@ -125,10 +136,18 @@ public class Ui {
                 "    Now you have " + size + " tasks in the list.");
     }
 
-    public void setListResponse(TaskList tasks) {
-        setResponse(tasks.listTasks());
+    /**
+     * Sets response for List command.
+     * @param list list of task.
+     */
+    public void setListResponse(String list) {
+        setResponse(list);
     }
 
+    /**
+     * Sets response for Done command.
+     * @param task task to be marked as done.
+     */
     public void setDoneResponse(Task task) {
         setResponse("     Nice! I've marked this task as done:\n"
                 +
@@ -137,22 +156,43 @@ public class Ui {
                 task);
     }
 
+    /**
+     * Sets response for Find command.
+     * @param result result of the find command.
+     */
     public void setFindResponse(String result) {
         setResponse("Here are the matching tasks in your list:" + "\n" + result);
     }
 
+    /**
+     * Sets response for Exit command.
+     * @param message exit message.
+     */
     public void setExitResponse(String message) {
         setResponse(message);
     }
 
+    /**
+     * Sets response for Error messages.
+     * @param error error message.
+     */
     public void setErrorResponse(String error) {
         setResponse(error);
     }
 
+    /**
+     * Sets response for Welcome message.
+     * @param message welcome message.
+     */
     public void setWelcomeResponse(String message) {
         setResponse(message);
     }
 
+    /**
+     * Sets response for Delete message.
+     * @param task task to be deleted.
+     * @param size size of TaskList after deletion.
+     */
     public void setDeleteResponse(Task task, int size) {
         setResponse("Noted. I've removed this task:\n"
                 +
@@ -166,10 +206,17 @@ public class Ui {
 
     }
 
-    void printResponse() {
+    /**
+     * Prints response in CLI.
+     */
+    public void printResponse() {
         print(response);
     }
 
+    /**
+     * Gets the UI response.
+     * @return UI response attribute.
+     */
     String getResponse() {
         return this.response;
     }

@@ -43,7 +43,7 @@ public class UpdateCommand extends Command {
             }
             break;
         case LIST:
-            ui.setListResponse(tasks);
+            ui.setListResponse(tasks.listTasks());
             break;
         default:
             break;

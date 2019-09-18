@@ -3,9 +3,12 @@ package duke.task;
 import duke.Parser;
 import duke.exception.DukeIndexOutOfBoundsException;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import static duke.task.TaskType.DEADLINE_OVERDUE;
 import static duke.task.TaskType.TODO;
 import static duke.task.TaskType.EVENT;
 import static duke.task.TaskType.DEADLINE;
@@ -19,6 +22,17 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
         tasks.add(null); // leave index 0 unused for clarity.
+    }
+
+    public TaskList(ArrayList<Task> tasks) {
+        this();
+        if (!tasks.isEmpty() && tasks.get(0) == null) {
+            // adding 1-indexed list of tasks
+            this.tasks.addAll(1, tasks);
+        } else {
+            // adding a 0-indexed list of tasks
+            this.tasks.addAll(tasks);
+        }
     }
 
     /**
@@ -84,7 +98,7 @@ public class TaskList {
      * @param type the task type to filter by.
      * @return the filtered, ordered tasklist.
      */
-    public TaskList filter(TaskType type) {
+    public HashMap<TaskType, TaskList> filter(TaskType type) {
         TaskList newList = new TaskList();
         for (Task task: this.getTaskList()) {
             if (task == null
@@ -96,49 +110,74 @@ public class TaskList {
             newList.add(task);
         }
         // have the null value stay at 0-index to maintain 1-indexing
-        newList.tasks = sortByType(newList.getTaskList(), type);
-        return newList;
+        return sortByType(newList, type);
     }
 
-    private ArrayList<Task> sortByType(ArrayList<Task> list, TaskType type) {
+    /**
+     * Arranges the tasks into a hash map of task type : task list of that task type
+     *
+     * @param list the task list containing only specified tasks.
+     * @param type the type present in the task list we sort by.
+     * @return the hash map of arranged tasks.
+     */
+    private HashMap<TaskType, TaskList> sortByType(TaskList list, TaskType type) {
+        HashMap<TaskType, TaskList> out = new HashMap<>();
         switch (type) {
         case EVENT:
-            return sortEvents(list);
+            ArrayList<Task> eventList = sortEvents(list.getTaskList());
+            out.put(EVENT, new TaskList(eventList));
+            return out;
         case DEADLINE:
-            return sortDeadlines(list);
-        case ALL:
-            // sort by deadlines first, then
-            ArrayList<Task> deadlineList = new ArrayList<>();
-            ArrayList<Task> eventList = new ArrayList<>();
-            ArrayList<Task> todoList = new ArrayList<>();
-            for (Task t: list) {
-                // account for 1-indexing where null is at 0th index
-                if (t != null) {
-                    if (t instanceof Deadline) {
-                        deadlineList.add(t);
-                    } else if (t instanceof Event) {
-                        eventList.add(t);
-                    } else if (t instanceof Todo) {
-                        todoList.add(t);
-                    }
-                }
-            }
-            // we don't sort to-dos at all
-            ArrayList<Task> sortedDeadlineList = sortDeadlines(deadlineList);
-            ArrayList<Task> sortedEventList = sortEvents(eventList);
-            // add deadlines first, then events, then todos
-            ArrayList<Task> newList = new ArrayList<>();
-            newList.add(null);
-            newList.addAll(sortedDeadlineList);
-            newList.addAll(sortedEventList);
-            newList.addAll(todoList);
-            return newList; // have list point at the updated list
+            HashMap<TaskType, ArrayList<Task>> h = extractTasks(list.getTaskList());
+            out.put(DEADLINE, new TaskList(sortDeadlines(h.get(DEADLINE))));
+            out.put(DEADLINE_OVERDUE, new TaskList(sortDeadlines(h.get(DEADLINE_OVERDUE))));
+            return out;
         case TODO:
+            // Todos don't need to be sorted
+            out.put(TODO, new TaskList(list.getTaskList()));
             break;
+        case ALL:
+            HashMap<TaskType, ArrayList<Task>> h2 = extractTasks(list.getTaskList());
+            // add deadlines first, then events, then todos. Todos aren't sorted (yet)
+            out.put(DEADLINE, new TaskList(sortDeadlines(h2.get(DEADLINE))));
+            out.put(DEADLINE_OVERDUE, new TaskList(sortDeadlines(h2.get(DEADLINE_OVERDUE))));
+            out.put(EVENT, new TaskList(sortEvents(h2.get(EVENT))));
+            out.put(TODO, new TaskList(h2.get(TODO)));
+            return out;
         default:
-            assert false;
+            assert false; // shouldn't reach here
         }
-        return list;
+        return out;
+    }
+
+    private HashMap<TaskType, ArrayList<Task>> extractTasks(ArrayList<Task> list) {
+        // separate into overdue deadlines and on-time deadlines
+        ArrayList<Task> overdue = new ArrayList<>();
+        ArrayList<Task> onTime = new ArrayList<>();
+        ArrayList<Task> events = new ArrayList<>();
+        ArrayList<Task> todos = new ArrayList<>();
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
+        for (Task task: list) {
+            if (task instanceof Deadline) {
+                Deadline d = (Deadline) task;
+                // overdue if supposed deadline is earlier than now
+                if (d.getZonedDateTime().compareTo(now) < 0) {
+                    overdue.add(d);
+                } else {
+                    onTime.add(d);
+                }
+            } else if (task instanceof Event) {
+                events.add(task);
+            } else if (task instanceof Todo) {
+                todos.add(task);
+            }
+        }
+        HashMap<TaskType, ArrayList<Task>> h = new HashMap<>();
+        h.put(DEADLINE, onTime);
+        h.put(DEADLINE_OVERDUE, overdue);
+        h.put(EVENT, events);
+        h.put(TODO, todos);
+        return h;
     }
 
     private ArrayList<Task> sortDeadlines(ArrayList<Task> list) {

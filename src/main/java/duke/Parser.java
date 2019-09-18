@@ -156,18 +156,22 @@ public class Parser {
         logger.log(INFO, "Parse REMIND command: {0}", new Object[]{Arrays.toString(args)});
 
         if (args.length != 1) {
-            throw new DukeUnknownInputException("Hmm... would you like a reminder on your event or deadline tasks?");
+            throw new DukeUnknownInputException(
+                    "Hmm... would you like a reminder on your 'event' or 'deadline' tasks?");
         }
 
         TaskType type;
-        if (args[0].equals("deadline")) {
+        if (args[0].equals("todo")) {
+            type = TODO;
+        } else if (args[0].equals("deadline")){
             type = DEADLINE;
         } else if (args[0].equals("event")) {
             type = EVENT;
         } else if (args[0].equals("all")) {
             type = ALL;
         } else {
-            throw new DukeUnknownInputException("Hmm... I don't know those arguments. Do you mean deadline or event?");
+            throw new DukeUnknownInputException(
+                    "Hmm... I don't know those arguments. Do you mean 'deadline', 'event' or 'all'?");
         }
 
         return new RemindCommand(type, false);

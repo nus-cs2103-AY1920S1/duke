@@ -3,8 +3,8 @@ package duke.ui;
 public class Ui {
     StringBuilder outputMessage = new StringBuilder();
 
-    private static final String MESSAGE_GREETING = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String MESSAGE_BYE      = "Bye. Hope to see you again soon!";
+    private static final String MESSAGE_GREETING = "Hi! Welcome to PokeTask!\nWhat do you want to do today?";
+    private static final String MESSAGE_BYE      = "Bye! See you again soon!";
 
     /**
      * Returns outputMessage to print to GUI.

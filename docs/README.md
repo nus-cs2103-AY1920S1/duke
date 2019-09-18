@@ -3,57 +3,59 @@
 ## Features 
 
 ### **1. Add tasks**
-*todos* - tasks without specific deadlines or dates<br/>
-*deadlines* - tasks with specific deadlines<br/>
+*todos* - tasks without specific deadlines or dates  
+*deadlines* - tasks with specific deadlines  
 *events* - tasks with specific time and dates
 
-**Usage**
+####**Usage**
 
 `Keywords` - `todo`, `deadline`, `event`
 
-Adds the task to the task list:<br/>
-`todo [description]`<br/>
-`deadline [description] [dd/MM/yyyy HHmm]`<br/>
+Adds the task to the task list  
+
+`todo [description]`  
+`deadline [description] [dd/MM/yyyy HHmm]`  
 `event [description] [dd/MM/yyyy HHmm]`
 
-Example of usage:
+Examples of usage:
 
 1. `todo watch Lord of the Rigs`
 2. `deadline return Harry Potter to library /by: 30th of October 2019, 9.30pm`
 3. `event attend seminar /at 25/09/2019 1800`
 
-Expected outcome:
+Expected outcomes:
 
-1. `Got it. I've added this task:`<br/>
-`  [T][✘] watch Lord of the Rigs`<br/>
+1. `Got it. I've added this task:`  
+`  [T][✘] watch Lord of the Rigs`  
 `Now you have 1 task in the list.`
 
-2. `Got it. I've added this task:`<br/>
-`  [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`<br/>
+2. `Got it. I've added this task:`  
+`  [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`  
 `Now you have 2 tasks in the list.`
 
-3. `Got it. I've added this task:`<br/>
-`  [E][✘] attend seminar (at: 25/09/2019 1800)`<br/>
+3. `Got it. I've added this task:`  
+`  [E][✘] attend seminar (at: 25/09/2019 1800)`  
 `Now you have 3 tasks in the list.`
 
 ### **2. Edit tasks**
 Edits the description or the date and time of the task.
 
-**Usage**
+####**Usage**
 
 `Keyword`- `edit`
 
-Edits the description/date and time of the task:<br/>
-`edit description [new description]`<br/>
-`edit datetime [dd/MM/yyyy HHmm}`
+Edits the description/date and time of the task  
 
-Example of usage:
+`edit description [new description]`  
+`edit datetime [dd/MM/yyyy HHmm]`
+
+Examples of usage:
 
 1. `edit 1 description watch Lord of the Rings`
 2. `edit 2 datetime 29/10/2019 2130`
 3. `edit 3 description attend wedding`
 
-Expected outcome:
+Expected outcomes:
 
 1. `The task: [T][✘] watch Lord of the Rings has been changed to [T][✘] watch Lord of the Rings`
 2. `The task: [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm) has been changed to [D][✘] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`
@@ -63,44 +65,50 @@ Expected outcome:
 
 Marks the tasks that are in the task list as done.
 
-**Usage**
+####**Usage**
 
 `Keyword`- `done`
 
-Example of usage:
+Marks the task as done using the given task number  
+
+`done [task number]`
+
+Example of usage:  
 
 `done 2`
 
-Expected outcome:<br/>
-`Nice! I've marked this task as done:`<br/>
-`  [D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`
+Expected outcome:  
+`Nice! I've marked this task as done:`  
+`[D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`
 
 ### **4. List tasks**
 
 Lists the tasks that are in the task list.
 
-**Usage**
+####**Usage**
 
-`Keyword`- `list`
+`Keyword`- `list`  
 
-Example of usage:
+Example of usage:  
 
 `list`
 
 Expected outcome:
 
-`1.[T][✘] watch Lord of the Rings`<br/>
-`2.[D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`<br/>
+`1.[T][✘] watch Lord of the Rings`  
+`2.[D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`  
 `3.[E][✘] attend wedding (at: 25/09/2019 1800)`
 
 ### **5. Find tasks**
 
 Finds a specific task  in the task list.
 
-**Usage**
+####**Usage**
 
-`Keyword`- `find`
-The keyword does not have to be case sensitive.<br/>
+`Keyword`- `find`  
+
+The keyword is not case sensitive.  
+
 `find [keyword(s)]`
 
 Example of usage:
@@ -109,16 +117,18 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:`<br/>
+`Here are the matching tasks in your list:`  
 `2.[D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`
 
 ### **6. Delete tasks**
 
-Deletes a specific task  in the task list.
+Deletes a specific task in the task list.
 
-**Usage**
+####**Usage**
 
 `Keyword`- `delete`
+
+Deletes specified task using task number  
 
 `delete [task number]`
 
@@ -128,15 +138,15 @@ Example of usage:
 
 Expected outcome:
 
-`Noted. I've removed this task:
-  [D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)
-Now you have 2 tasks in the list.`
+`Noted. I've removed this task:`  
+`  [D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`  
+`Now you have 2 tasks in the list.`
 
 ### **7. Quit Application**
 
 Closes the application window. All tasks will be saved automatically.
 
-**Usage**
+####**Usage**
 
 `Keyword`- `bye`
 

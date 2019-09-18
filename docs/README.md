@@ -7,15 +7,24 @@ Duke is a schedule planner targeted at users who prefer Command Line Interface.
 
 ### Add different task types
 You can add and keep track of 3 different types of task.
-1. Todo
-2. Deadline
-3. Event
+1. Todo: a task with no deadline
+2. Deadline: a task to be completed by a certain date.
+3. Event: attend an event at a given date.
 
-### Find task
-You can find a task by it's description.
+### List all task
+Show all the tasks with one command.
+
+### Mark task as done
+You can enjoy the satisfaction of ticking your task as done after completing them.
 
 ### Edit task
 You can edit a specific task if you have entered the wrong details.
+
+### Find task
+Too many task? You can find them by their descriptions.
+
+### Delete task
+Do not want to keep track of a task anymore? You can remove them from the list.
 
 ## Usage
 

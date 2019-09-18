@@ -15,6 +15,9 @@ import misc.Ui;
 
 import task.TaskList;
 
+/**
+ * A Duke Chat Bot that handles the main logic of the program.
+ */
 public class Duke {
     private Ui ui;
     private ExceptionHandler exceptionHandler;
@@ -33,6 +36,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Generates a response for user input actions.
+     * @param input the input instruction from user.
+     * @return a String that is feedback-ed to user.
+     */
     String getResponse(String input) {
         Parser parser = new Parser();
         String dukeResponse;

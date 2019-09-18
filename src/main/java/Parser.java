@@ -44,6 +44,8 @@ public class Parser {
         if (input.contains("/by")) {
             parseInfo = input.split("\\s+/by\\s+");
         } else {
+            assert input.contains("/at") : "String input should contain /at";
+
             parseInfo = input.split("\\s+/at\\s+");
         }
 

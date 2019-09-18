@@ -25,6 +25,8 @@ public class Todo extends Task {
 
         if (indicator.equals("1")) {
             this.setDone();
+        } else {
+            assert indicator.equals("0") : "String indicator should be 0";
         }
     }
 

@@ -1,4 +1,4 @@
-# User Guide
+﻿# User Guide
 
 ## Features 
 
@@ -57,7 +57,7 @@ Examples of usage:
 
 Expected outcomes:
 
-1. `The task: [T][✘] watch Lord of the Rings has been changed to [T][✘] watch Lord of the Rings`
+1. `The task: [T][✘] watch Lord of the Rigs has been changed to [T][✘] watch Lord of the Rings`
 2. `The task: [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm) has been changed to [D][✘] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`
 3. `The task: [E][✘] attend seminar (at: 25/09/2019 1800) has been changed to [E][✘] attend wedding (at: 25/09/2019 1800)`
 

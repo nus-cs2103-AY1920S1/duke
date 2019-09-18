@@ -22,7 +22,7 @@ Welcome to Duke's friendly user guide. Here we will discuss the features availab
 
 ### Duke
  **Duke** is a friendly chatbot TodoList application that tracks down your tasks for you.
-![Image of Duke](docs\Ui.png)
+![Image of Duke](https://raw.githubusercontent.com/heze8/duke/master/docs/Ui.png)
  
 ### Features
 List of features
@@ -170,8 +170,6 @@ Bye. Hope to see you again soon!
 - Myself
 - I
 - Adithyajoshi5 in his blog for the led computation algorithm
-
-Expected outcome:
 
 ```
 Bye. Hope to see you again soon!

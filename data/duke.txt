@@ -1,3 +1,12 @@
-D -- ✘ -- kdkd -- 10/10/2019 12:00
+D -- ✓ -- kdkd -- 10/10/2019 12:00
 D -- ✘ -- laf -- 20/09/2019 23:59
 E -- ✘ -- SEP -- 20/09/2019 19:59
+T -- ✘ -- ff
+T -- ✘ -- fgkt
+T -- ✘ -- fkrk
+T -- ✘ -- anything
+T -- ✘ -- Finish work
+E -- ✘ -- Dinner -- 10/10/2019 12:00
+T -- ✘ -- UI scrennshot
+E -- ✘ -- Submit Jar -- 20/09/2019 23:59
+T -- ✘ -- Buy Drink

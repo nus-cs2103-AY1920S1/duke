@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Simulates the different commands that the user can enter.
  */
@@ -6,6 +10,7 @@ public class Command {
     private boolean isExit;
     private String cmd;
     private String cmdDetails;
+    private static SimpleDateFormat PARSEIN = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     public Command(String firstPart, String everythingElse) {
         this.cmd = firstPart;
@@ -50,26 +55,36 @@ public class Command {
                 return Ui.printAddedMsg();
             }
 
+        case "snooze":
+            SnoozeCommand sc = new SnoozeCommand(cmd, cmdDetails);
+            return sc.execute(list, ui, store);
+
         case "deadline":
-            String[] separate = cmdDetails.split("/");
+            String[] separate = cmdDetails.split("/by");
             try {
-                Tasks newDeadline = new Deadline(separate[0].trim(), separate[1].trim());
+                Date dd= PARSEIN.parse(separate[1].trim());
+                Tasks newDeadline = new Deadline(separate[0].trim(), dd);
                 list.addTask(newDeadline);
                 store.updateFile(list);
                 return Ui.printAddedMsg();
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS! I do not know what that means!");
+            } catch (ParseException e) {
+                throw new DukeException("Please give a proper date.");
             }
 
         case "event":
-            String[] separate2 = cmdDetails.split("/");
+            String[] separate2 = cmdDetails.split("/at");
             try {
-                Tasks newEvent = new Event(separate2[0].trim(), separate2[1].trim());
+                Date de = PARSEIN.parse(separate2[1].trim());
+                Tasks newEvent = new Event(separate2[0].trim(), de);
                 list.addTask(newEvent);
                 store.updateFile(list);
                 return Ui.printAddedMsg();
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS! I do not know what that means!");
+            } catch (ParseException e) {
+                throw new DukeException("Please give a proper date.");
             }
 
         default:

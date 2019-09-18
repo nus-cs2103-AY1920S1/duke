@@ -46,8 +46,8 @@ public class Duke {
     /**
      * Parses the input into a command.
      *
-     * @param input the string which is parsed.
-     * @return a Command parsed from the string.
+     * @param input the string that is parsed.
+     * @return a command parsed from the string.
      */
     public Command parseInput(String input) {
         Command commandFromInput = parser.parse(input);

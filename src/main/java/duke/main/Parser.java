@@ -9,14 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Parser {
-    public static SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
-    public static SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMMM yyyy hh':'mma");
+    /*The format of date that is accepted during parsing.*/
+    public static final SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    /*The format of date that is printed to users.*/
+    public static final SimpleDateFormat outputDateFormat = new SimpleDateFormat("dd MMMMM yyyy hh':'mma");
 
     /**
-     * Parses a user input and performs action based on the input.
+     * Parses a user input into a command.
      *
-     * @param input the input from user to duke.
-     * @return a boolean to tell whether Duke should continue waiting for more commands.
+     * @param input the string that is parsed.
+     * @return a command parsed from the string.
      */
     public Command parse(String input) {
         String[] splitInput = input.trim().split(" ");

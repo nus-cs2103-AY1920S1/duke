@@ -1,39 +1,93 @@
-# Setting up
+# Trackr
 
-**Prerequisites**
+Trackr is a desktop application that helps you to manage tasks. Trackr is **optimized for users who prefer to work with a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
-* JDK 11
-* Recommended: IntelliJ IDE
-* Fork this repo to your GitHub account and clone the fork to your computer
+If you can type fast, Trackr can help you complete your task management process faster than traditional GUI apps.
 
-**Importing the project into IntelliJ**
+### 1. Quick Start
+1. Ensure you have Java `11` or above installed in your computer.
+2. Download the latest `Trackr.jar` [here](https://github.com/shawnlsj97/duke/releases/tag/v0.1).
+3. Copy the file to the folder you want to use as the home folder for your list of tasks.
+4. Double-click the file to start to app. The GUI should appear in a few seconds.
 
-1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
-1. Set up the correct JDK version.
-   * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
-   * If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11.
-   * Click `OK`.
-1. Click `Import Project`.
-1. Locate the project directory and click `OK`.
-1. Select `Create project from existing sources` and click `Next`.
-1. Rename the project if you want. Click `Next`.
-1. Ensure that your src folder is checked. Keep clicking `Next`.
-1. Click `Finish`.
+<img src="./READMEMedia/media/launch.png" width="254" height="400" />
 
-# Tutorials 
+5. Type all commands in the command box at the bottom and press "Enter" on your keyboard to execute it.
+e.g. typing `help` and pressing "Enter" will show a list of available commands.
+    * Some example commands you can try:
+        * `list`: lists all tasks
+        * `todo 100 pushups`: adds a task to be done called `100 pushups` to the task list
+        * `delete 1`: deletes the 1st task shown in the list
+        * `exit`: exits the app
+        * Refer to the section below for details of available commands in this application
 
-Duke Increment | Tutorial
----------------|---------------
-`A-Gradle` | [Gradle Tutorial](tutorials/gradleTutorial.md)
-`A-TextUiTesting` | [Text UI Testing Tutorial](tutorials/textUiTestingTutorial.md)
-`Level-10` | JavaFX tutorials:<br>→ [Part 1: Introduction to JavaFX][fx1]<br>→ [Part 2: Creating a GUI for Duke][fx2]<br>→ [Part 3: Interacting with the user][fx3]<br>→ [Part 4: Introduction to FXML][fx4]
+### 2. Features
 
-[fx1]: <tutorials/javaFxTutorialPart1.md>
-[fx2]: <tutorials/javaFxTutorialPart2.md>
-[fx3]: <tutorials/javaFxTutorialPart3.md>
-[fx4]: <tutorials/javaFxTutorialPart4.md>
+Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo TASK_NAME'`, `TASK_NAME` is a parameter which can be used as `todo gym workout`.
 
-# Feedback, Bug Reports
+##### 2.1 Viewing help: `help`
+Displays all available commands in the application.
+Format: `help`
 
-* If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
+##### 2.2 Adding a task to be done: `todo`
+Adds a task to be done with the provided name to your list.
+Format: `todo TASK_NAME`
+
+##### 2.3 Adding a deadline: `deadline`
+Adds a deadline to your list.
+Format: `deadline DEADLINE_NAME /by DD/MM/YYYY HHMM`
+
+##### 2.4 Adding an event to be attended: `event`
+Adds a deadline to your list.
+Format: `event EVENT_NAME /at DD/MM/YYYY HHMM`
+
+##### 2.5 Listing all tasks: `list`
+Shows all tasks in your list.
+Format: `list`
+
+##### 2.6 Updating name of task in your list: `update`
+Updates name of specified task in your list.
+Format: `update INDEX NEW_TASK_NAME`
+
+##### 2.7 Retrieving tasks by name: `find`
+Finds tasks whose names contain any of the given keywords.
+Format: `find KEYWORD`
+
+##### 2.8 Marking a task as completed: `complete`
+Marks specified task on the list as completed.
+Format: `complete INDEX`
+
+##### 2.9 Removing a task: `remove`
+Remove specified task from the list.
+Format: `remove INDEX`
+
+##### 2.10 Undoing previous command: `undo`
+Undo previous command and revert changes to the list of tasks.
+Format: `undo`
+
+##### 2.11 Display input history: `history`
+Display all input you made into the application during the current session.
+Format: `history`
+
+##### 2.12 Exiting the application: `exit`
+Exits the program.
+Format: `exit`
+
+##### 2.13 Saving data
+Task list data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
+
+### 3. FAQ
+*Q*: How can I transfer my task list to a new computer?
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Trackr folder.
+
+### 4. Feedback, Bug Reports
+
+* If you have feedback or bug reports, please post in [shawnlsj97/duke issue tracker](https://github.com/shawnlsj97/duke/issues).
 * We welcome pull requests too.
+
+### 5. License
+Trackr is [MIT-licensed](https://github.com/shawnlsj97/duke/blob/master/LICENSE).
+
+
+### 6. Command Summary

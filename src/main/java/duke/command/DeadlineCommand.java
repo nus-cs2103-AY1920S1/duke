@@ -4,6 +4,8 @@ import duke.task.Deadline;
 import duke.DukeException;
 import duke.TaskList;
 
+import java.time.format.DateTimeParseException;
+
 public class DeadlineCommand extends Command {
 
     public static final String name = "deadline";
@@ -20,7 +22,12 @@ public class DeadlineCommand extends Command {
         }
         String deadlineDescription =  fullCommand.substring(9, byIndex);
         String by = fullCommand.substring(byIndex + 5);
-        Deadline deadline = new Deadline(deadlineDescription, by);
+        Deadline deadline;
+        try {
+            deadline = new Deadline(deadlineDescription, by);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Date must formatted in the form dd/MM/yyyy HHmm");
+        }
         tasks.addTask(deadline);
         String output = "Got it. I've added this task: \n"
                 + deadline.toString()

@@ -10,16 +10,22 @@ import java.util.Date;
 public class Deadline extends Task {
     private Date deadlineBy;
 
+    /**
+     * Creates a new Deadline with a description and Date of deadline.
+     *
+     * @param description The task's description.
+     * @param deadlineBy The Date of the deadline.
+     */
     public Deadline(String description, Date deadlineBy) {
         super(description);
         this.deadlineBy = deadlineBy;
     }
 
     /**
-     * Returns a string of a task that can contain
-     * its description, time and completion status.
+     * Returns a string of a Deadline that can contain
+     * its type, completion status, description, time and PriorityLevel.
      *
-     * @return string that contains information about a task.
+     * @return A string that contains information about anDeadline.
      */
     public String saveInfo() {
         return "deadline" + " " + description + " /by " + Parser.inputDateFormat.format(deadlineBy)
@@ -27,6 +33,13 @@ public class Deadline extends Task {
                 + System.getProperty("line.separator") + priority.toString();
     }
 
+    /**
+     * Returns a string containing full information of the Deadline.
+     * This includes type, completion status, description, time
+     * and PriorityLevel.
+     *
+     * @return A string representation of this Deadline.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

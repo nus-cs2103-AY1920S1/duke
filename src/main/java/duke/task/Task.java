@@ -8,8 +8,13 @@ public abstract class Task implements Comparable<Task> {
     boolean completed;
     PriorityLevel priority;
 
-    Task(String taskDetails) {
-        this.description = taskDetails;
+    /**
+     * Creates a new Task with a task description.
+     *
+     * @param description The task's description.
+     */
+    Task(String description) {
+        this.description = description;
         this.priority = PriorityLevel.LOW;
         this.completed = false;
     }

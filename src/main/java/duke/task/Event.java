@@ -11,16 +11,22 @@ import java.util.Date;
 public class Event extends Task {
     private Date eventAt;
 
+    /**
+     * Creates a new Event with a description and Date of Event.
+     *
+     * @param description The task's description.
+     * @param eventAt The Date of the event.
+     */
     public Event(String description, Date eventAt) {
         super(description);
         this.eventAt = eventAt;
     }
 
     /**
-     * Returns a string of a task that can contain
-     * its description, time and completion status.
+     * Returns a string of an Event that can contain
+     * its type, completion status, description, time and PriorityLevel.
      *
-     * @return string that contains information about a task.
+     * @return A string that contains information about an Event.
      */
     public String saveInfo() {
         return "event" + " " + description + " /at " + Parser.inputDateFormat.format(eventAt)
@@ -28,6 +34,13 @@ public class Event extends Task {
                 + System.getProperty("line.separator") + priority.toString();
     }
 
+    /**
+     * Returns a string containing full information of the Event.
+     * This includes type, completion status, description, time
+     * and PriorityLevel.
+     *
+     * @return A string representation of this Event.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

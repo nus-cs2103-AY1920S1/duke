@@ -22,9 +22,9 @@ public class TaskListTest {
             tl.addTask(new Deadline("Software Engineering Project",
                     "20/08/2019 00:00:00"));
             ArrayList<String> check = tl.listAllTask();
-            assertEquals("1.[T][\u2715] Eat dinner", check.get(0));
-            assertEquals("2.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
-            assertEquals("3.[D][\u2715] Software Engineering Project (by: 20/08/2019 00:00:00)",
+            assertEquals("1.[T][X] Eat dinner", check.get(0));
+            assertEquals("2.[E][X] Drink beer (at: \n  19/08/2019 20:00:00)", check.get(1));
+            assertEquals("3.[D][X] Software Engineering Project (by: \n  20/08/2019 00:00:00)",
                     check.get(2));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -41,9 +41,9 @@ public class TaskListTest {
                     "20/08/2019 00:00:00"));
             tl.finishTask(2);
             ArrayList<String> check = tl.listAllTask();
-            assertEquals("1.[T][\u2715] Eat dinner", check.get(0));
-            assertEquals("2.[E][\u2713] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
-            assertEquals("3.[D][\u2715] Software Engineering Project (by: 20/08/2019 00:00:00)",
+            assertEquals("1.[T][X] Eat dinner", check.get(0));
+            assertEquals("2.[E][V] Drink beer (at: \n  19/08/2019 20:00:00)", check.get(1));
+            assertEquals("3.[D][X] Software Engineering Project (by: \n  20/08/2019 00:00:00)",
                     check.get(2));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -61,8 +61,8 @@ public class TaskListTest {
             tl.finishTask(2);
             tl.deleteTask(3);
             ArrayList<String> check = tl.listAllTask();
-            assertEquals("1.[T][\u2715] Eat dinner", check.get(0));
-            assertEquals("2.[E][\u2713] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
+            assertEquals("1.[T][X] Eat dinner", check.get(0));
+            assertEquals("2.[E][V] Drink beer (at: \n  19/08/2019 20:00:00)", check.get(1));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             assertEquals(1, 2);

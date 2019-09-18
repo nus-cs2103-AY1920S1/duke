@@ -42,17 +42,17 @@ public class Parser {
         }
         try {
             switch (keyWord) {
-                case LIST: return listCommand();
-                case BYE: return exitCommand();
-                case TODO: return todoCommand(splitInput[1]);
-                case EVENT: return eventCommand(splitInput[1]);
-                case DEADLINE: return deadlineCommand(splitInput[1]);
-                case DONE: return finishCommand(splitInput[1]);
-                case DELETE: return deleteCommand(splitInput[1]);
-                case FIND: return findCommand(splitInput[1]);
-                case SLOT: return slotCommand(splitInput[1]);
-                case SPECIFY: return specifyCommand(splitInput[1]);
-                default: return fakeCommand();
+            case LIST: return listCommand();
+            case BYE: return exitCommand();
+            case TODO: return todoCommand(splitInput[1]);
+            case EVENT: return eventCommand(splitInput[1]);
+            case DEADLINE: return deadlineCommand(splitInput[1]);
+            case DONE: return finishCommand(splitInput[1]);
+            case DELETE: return deleteCommand(splitInput[1]);
+            case FIND: return findCommand(splitInput[1]);
+            case SLOT: return slotCommand(splitInput[1]);
+            case SPECIFY: return specifyCommand(splitInput[1]);
+            default: return fakeCommand();
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("This keyword requires further specification.");
@@ -84,7 +84,7 @@ public class Parser {
         return new AddCommand(TaskType.E, eventName, eventTime);
     }
 
-    private static Command deadlineCommand(String deadlineInfo) throws DukeException{
+    private static Command deadlineCommand(String deadlineInfo) throws DukeException {
         String[] nameAndTime = deadlineInfo.split("/by");
         if (nameAndTime.length == 1) {
             throw new DukeException("Please specify the deadline of the task.");

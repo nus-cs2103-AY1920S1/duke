@@ -2,8 +2,12 @@ package duke.commands;
 
 import duke.directprocessor.Ui;
 import duke.DukeException;
-import duke.tasks.*;
 import duke.directprocessor.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+import duke.tasks.Todo;
 
 /**
  * This is the specific command used to add a new task into the task list.
@@ -53,10 +57,17 @@ public class AddCommand extends Command {
         checkNullPointer(tl, ui);
         Task toAdd;
         switch (taskType) {
-            case T: toAdd = new Todo(taskName); break;
-            case D: toAdd = new Deadline(taskName, taskTime); break;
-            case E: toAdd = new Event(taskName, taskTime); break;
-            default: throw new DukeException("The task type is invalid.");
+        case T:
+            toAdd = new Todo(taskName);
+            break;
+        case D:
+            toAdd = new Deadline(taskName, taskTime);
+            break;
+        case E:
+            toAdd = new Event(taskName, taskTime);
+            break;
+        default:
+            throw new DukeException("The task type is invalid.");
         }
         tl.addTask(toAdd);
         return ui.showAddMessage(toAdd, tl.getTotalNumber());

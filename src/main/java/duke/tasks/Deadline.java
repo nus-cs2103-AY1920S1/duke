@@ -34,22 +34,24 @@ public class Deadline extends Task {
     }
 
     /**
-     * This method returns the information of the task FOR THE USER to see.
+     * Get the information of the task FOR THE USER to see.
      * Output of this method is usually handled by Ui class.
      *
      * @return The information of the task, in form [type][finished] task name. For example, [T][X] Eat dinner.
      */
     @Override
     public String taskInfo() {
+        //CHECKSTYLE.OFF: AvoidEscapedUnicodeCharactersCheck
         if (isFinished()) {
-            return "[D]" + "[\u2713] " + getName() + " (by: \n  " + myFormat.format(deathTime) + ")";
+            return "[D]" + "[V] " + getName() + " (by: \n  " + myFormat.format(deathTime) + ")";
         } else {
-            return "[D]" + "[\u2715] " + getName() + " (by: \n  " + myFormat.format(deathTime) + ")";
+            return "[D]" + "[X] " + getName() + " (by: \n  " + myFormat.format(deathTime) + ")";
         }
+        //CHECKSTYLE.ON: AvoidEscapedUnicodeCharactersCheck
     }
 
     /**
-     * This method returns the information of the task FOR SAVING INTO A FILE.
+     * Get the information of the task FOR SAVING INTO A FILE.
      * Output of this method is usually handled by the task list.
      *
      * @return The information of the task, in form type|finished|task name. For example, T|0|Eat dinner.

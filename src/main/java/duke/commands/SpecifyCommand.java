@@ -8,7 +8,7 @@ import duke.tasks.Task;
 /**
  * This is the specific command to specify the time of an event task.
  */
-public class SpecifyCommand extends Command{
+public class SpecifyCommand extends Command {
 
     /**
      * The position of the event task to be specified.

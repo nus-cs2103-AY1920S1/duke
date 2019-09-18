@@ -1,8 +1,12 @@
 package duke.directprocessor;
 
 import duke.DukeException;
-import duke.tasks.*;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.TaskType;
+import duke.tasks.Todo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -49,7 +53,7 @@ public class Storage {
      * @return the translated Task.
      * @throws DukeException If the initialization of the task type fails.
      */
-    private static Task translateTask(String[] lineComponents) throws DukeException{
+    private static Task translateTask(String[] lineComponents) throws DukeException {
         boolean isFinished;
         if (lineComponents[1].equals("0")) {
             isFinished = false;
@@ -58,11 +62,11 @@ public class Storage {
         }
         String taskName = lineComponents[2];
         TaskType taskType = TaskType.valueOf(lineComponents[0]);
-        switch(taskType) {
-            case T: return translateTodo(taskName, isFinished);
-            case D: return translateDeadline(taskName, isFinished, lineComponents[3]);
-            case E: return translateEvent(taskName, isFinished, lineComponents[3]);
-            default: throw new DukeException("The file cannot be read, we are starting a new task list.");
+        switch (taskType) {
+        case T: return translateTodo(taskName, isFinished);
+        case D: return translateDeadline(taskName, isFinished, lineComponents[3]);
+        case E: return translateEvent(taskName, isFinished, lineComponents[3]);
+        default: throw new DukeException("The file cannot be read, we are starting a new task list.");
         }
     }
 
@@ -112,7 +116,8 @@ public class Storage {
      * @return The translated deadline task.
      * @throws DukeException If the task name is empty or the task time is not in valid format.
      */
-    private static Deadline translateDeadline(String taskName, boolean isFinished, String taskTime) throws DukeException {
+    private static Deadline translateDeadline(String taskName,
+                                              boolean isFinished, String taskTime) throws DukeException {
         Deadline toAdd = new Deadline(taskName, taskTime);
         if (isFinished) {
             toAdd.setAsFinish();

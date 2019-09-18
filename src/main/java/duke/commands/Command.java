@@ -38,7 +38,7 @@ public abstract class Command {
      * @param ui The user interface to accept the command.
      */
     void checkNullPointer(TaskList tl, Ui ui) {
-        assert tl != null: "This command is pointing to a null task list.";
-        assert ui != null: "This command is pointing to a null user interface.";
+        assert tl != null : "This command is pointing to a null task list.";
+        assert ui != null : "This command is pointing to a null user interface.";
     }
 }

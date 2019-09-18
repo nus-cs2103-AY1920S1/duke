@@ -79,7 +79,7 @@ public class TaskList {
     }
 
     /**
-     * This method returns all tasks whose task name contains the given message s in the form of a string array list.
+     * Get all tasks whose task name contains the given message s in the form of a string array list.
      *
      * @param s The target string we want to find inside the task name.
      * @return All tasks whose task name matches the target string in the form of a string array list.

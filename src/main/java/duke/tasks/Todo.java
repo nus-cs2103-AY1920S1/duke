@@ -18,7 +18,7 @@ public class Todo extends Task {
     }
 
     /**
-     * This method returns the information of the task FOR THE USER to see.
+     * Get the information of the task FOR THE USER to see.
      * Output of this method is usually handled by Ui class.
      * @return The information of the task, in form [type][finished] task name. For example, [T][X] Eat dinner.
      */
@@ -26,15 +26,15 @@ public class Todo extends Task {
     public String taskInfo() {
         String indicator;
         if (isFinished()) {
-            indicator = "[\u2713] ";
+            indicator = "[V] ";
         } else {
-            indicator = "[\u2715] ";
+            indicator = "[X] ";
         }
         return "[T]" + indicator + getName();
     }
 
     /**
-     * This method returns the information of the task FOR SAVING INTO A FILE.
+     * Get the information of the task FOR SAVING INTO A FILE.
      * Output of this method is usually handled by the task list.
      * @return The information of the task, in form type|finished|task name. For example, T|0|Eat dinner.
      */

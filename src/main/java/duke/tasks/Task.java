@@ -28,21 +28,21 @@ public abstract class Task {
     }
 
     /**
-     * This method returns the information of the task FOR THE USER to see.
+     * Get the information of the task FOR THE USER to see.
      * Output of this method is usually handled by Ui class.
      * @return The information of the task, in form [type][finished] task name. For example, [T][X] Eat dinner.
      */
     public abstract String taskInfo();
 
     /**
-     * This method returns the information of the task FOR SAVING INTO A FILE.
+     * Get the information of the task FOR SAVING INTO A FILE.
      * Output of this method is usually handled by the task list.
      * @return The information of the task, in form type|finished|task name. For example, T|0|Eat dinner.
      */
     public abstract String recordInfo();
 
     /**
-     * This method returns the name of the task. Only be passed around inside the package.
+     * Get the name of the task. Only be passed around inside the package.
      * @return The name of the task.
      */
     String getName() {

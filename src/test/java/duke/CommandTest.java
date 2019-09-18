@@ -7,6 +7,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.FakeCommand;
 import duke.commands.FindCommand;
 import duke.commands.FinishCommand;
+import duke.tasks.TaskType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,11 +23,11 @@ public class CommandTest {
 
     @Test
     public void validAddCommandTest1() {
-        AddCommand ac = new AddCommand("T", "Eat dinner");
+        AddCommand ac = new AddCommand(TaskType.T, "Eat dinner");
         try {
             ac.execute(tl, ui);
             Assertions.assertFalse(ac.isExit());
-            Assertions.assertEquals("1.[T][\u2715] Eat dinner", tl.listAllTask().get(0));
+            Assertions.assertEquals("1.[T][X] Eat dinner", tl.listAllTask().get(0));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             Assertions.assertEquals(1, 2);
@@ -35,20 +36,20 @@ public class CommandTest {
 
     @Test
     public void validAddCommandTest2() {
-        AddCommand ac1 = new AddCommand("D",
+        AddCommand ac1 = new AddCommand(TaskType.D,
                 "Software Engineering project", "19/08/2019 00:00:00");
-        AddCommand ac2 = new AddCommand("E",
+        AddCommand ac2 = new AddCommand(TaskType.E,
                 "Drink beer", "19/08/2019 20:00:00");
-        AddCommand ac3 = new AddCommand("T", "Eat dinner");
+        AddCommand ac3 = new AddCommand(TaskType.T, "Eat dinner");
         try {
             ac1.execute(tl, ui);
             ac2.execute(tl, ui);
             ac3.execute(tl, ui);
             ArrayList<String> check = tl.listAllTask();
-            Assertions.assertEquals("1.[D][\u2715] Software Engineering project (by: 19/08/2019 00:00:00)",
+            Assertions.assertEquals("1.[D][X] Software Engineering project (by: \n  19/08/2019 00:00:00)",
                     check.get(0));
-            Assertions.assertEquals("2.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
-            Assertions.assertEquals("3.[T][\u2715] Eat dinner", check.get(2));
+            Assertions.assertEquals("2.[E][X] Drink beer (at: \n  19/08/2019 20:00:00)", check.get(1));
+            Assertions.assertEquals("3.[T][X] Eat dinner", check.get(2));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             Assertions.assertEquals(1, 2);
@@ -57,11 +58,11 @@ public class CommandTest {
 
     @Test
     public void invalidAddCommandTest1() {
-        AddCommand ac1 = new AddCommand("D",
+        AddCommand ac1 = new AddCommand(TaskType.D,
                 "Software Engineering project", "19/08/2019 00:00:00");
-        AddCommand ac2 = new AddCommand("E",
+        AddCommand ac2 = new AddCommand(TaskType.E,
                 "Drink beer", "Saturday");
-        AddCommand ac3 = new AddCommand("T", "Eat dinner");
+        AddCommand ac3 = new AddCommand(TaskType.T, "Eat dinner");
         try {
             ac1.execute(tl, ui);
             ac2.execute(tl, ui);
@@ -76,11 +77,11 @@ public class CommandTest {
 
     @Test
     public void invalidAddCommandTest2() {
-        AddCommand ac1 = new AddCommand("D",
+        AddCommand ac1 = new AddCommand(TaskType.D,
                 "", "19/08/2019 00:00:00");
-        AddCommand ac2 = new AddCommand("E",
+        AddCommand ac2 = new AddCommand(TaskType.E,
                 "Drink beer", "19/08/2019 20:00:00");
-        AddCommand ac3 = new AddCommand("T", "Eat dinner");
+        AddCommand ac3 = new AddCommand(TaskType.T, "Eat dinner");
         try {
             ac1.execute(tl, ui);
             ac2.execute(tl, ui);
@@ -94,11 +95,11 @@ public class CommandTest {
 
     @Test
     public void validDeleteCommandTest() {
-        AddCommand ac1 = new AddCommand("D",
+        AddCommand ac1 = new AddCommand(TaskType.D,
                 "Software Engineering project", "19/08/2019 00:00:00");
-        AddCommand ac2 = new AddCommand("E",
+        AddCommand ac2 = new AddCommand(TaskType.E,
                 "Drink beer", "19/08/2019 20:00:00");
-        AddCommand ac3 = new AddCommand("T", "Eat dinner");
+        AddCommand ac3 = new AddCommand(TaskType.T, "Eat dinner");
         DeleteCommand dc1 = new DeleteCommand(1);
         try {
             ac1.execute(tl, ui);
@@ -106,8 +107,8 @@ public class CommandTest {
             ac3.execute(tl, ui);
             dc1.execute(tl, ui);
             ArrayList<String> check = tl.listAllTask();
-            Assertions.assertEquals("1.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(0));
-            Assertions.assertEquals("2.[T][\u2715] Eat dinner", check.get(1));
+            Assertions.assertEquals("1.[E][X] Drink beer (at: \n  19/08/2019 20:00:00)", check.get(0));
+            Assertions.assertEquals("2.[T][X] Eat dinner", check.get(1));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             Assertions.assertEquals(1, 2);
@@ -127,11 +128,11 @@ public class CommandTest {
 
     @Test
     public void validFinishCommandTest() {
-        AddCommand ac1 = new AddCommand("D",
+        AddCommand ac1 = new AddCommand(TaskType.D,
                 "Software Engineering project", "19/08/2019 00:00:00");
-        AddCommand ac2 = new AddCommand("E",
+        AddCommand ac2 = new AddCommand(TaskType.E,
                 "Drink beer", "19/08/2019 20:00:00");
-        AddCommand ac3 = new AddCommand("T", "Eat dinner");
+        AddCommand ac3 = new AddCommand(TaskType.T, "Eat dinner");
         FinishCommand fc = new FinishCommand(3);
         try {
             ac1.execute(tl, ui);
@@ -139,10 +140,10 @@ public class CommandTest {
             ac3.execute(tl, ui);
             fc.execute(tl, ui);
             ArrayList<String> check = tl.listAllTask();
-            Assertions.assertEquals("1.[D][\u2715] Software Engineering project (by: 19/08/2019 00:00:00)",
+            Assertions.assertEquals("1.[D][X] Software Engineering project (by: \n  19/08/2019 00:00:00)",
                     check.get(0));
-            Assertions.assertEquals("2.[E][\u2715] Drink beer (at: 19/08/2019 20:00:00)", check.get(1));
-            Assertions.assertEquals("3.[T][\u2713] Eat dinner", check.get(2));
+            Assertions.assertEquals("2.[E][X] Drink beer (at: \n  19/08/2019 20:00:00)", check.get(1));
+            Assertions.assertEquals("3.[T][V] Eat dinner", check.get(2));
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             Assertions.assertEquals(1, 2);
@@ -151,11 +152,11 @@ public class CommandTest {
 
     @Test
     public void findCommandTest() {
-        AddCommand ac1 = new AddCommand("D",
+        AddCommand ac1 = new AddCommand(TaskType.D,
                 "Software Engineering project", "19/08/2019 00:00:00");
-        AddCommand ac2 = new AddCommand("E",
+        AddCommand ac2 = new AddCommand(TaskType.E,
                 "Drink beer", "19/08/2019 20:00:00");
-        AddCommand ac3 = new AddCommand("T", "Eat dinner");
+        AddCommand ac3 = new AddCommand(TaskType.T, "Eat dinner");
         FinishCommand fc = new FinishCommand(3);
         FindCommand fdc = new FindCommand("dinner");
         try {
@@ -165,7 +166,7 @@ public class CommandTest {
             fc.execute(tl, ui);
             fdc.execute(tl, ui);
             ArrayList<String> check = tl.listMatchTask("dinner");
-            Assertions.assertEquals("1.[T][\u2713] Eat dinner", check.get(0));
+            Assertions.assertEquals("1.[T][V] Eat dinner", check.get(0));
             Assertions.assertEquals(1, check.size());
         } catch (DukeException e) {
             System.out.println(e.getMessage());

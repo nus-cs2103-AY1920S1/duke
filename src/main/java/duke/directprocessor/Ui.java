@@ -55,8 +55,8 @@ public class Ui {
      */
     public String showDeleteMessage(Task t, int totaltaskNumber) {
         return "Noted master! I've removed this task:\n"
-                + "  " + t.taskInfo() + "\n" +
-                "Now you have " + totaltaskNumber + " tasks in the list.\n";
+                + "  " + t.taskInfo() + "\n"
+                + "Now you have " + totaltaskNumber + " tasks in the list.\n";
     }
 
     /**
@@ -88,7 +88,7 @@ public class Ui {
         String toReturn = "";
         toReturn = toReturn + "Here are the matching tasks in your list, master:\n";
         for (int i = 0; i < tl.size(); i++) {
-           toReturn = toReturn + " " + tl.get(i) + "\n";
+            toReturn = toReturn + " " + tl.get(i) + "\n";
         }
         return toReturn;
     }

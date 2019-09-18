@@ -6,19 +6,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeadlineTest {
     @Test
     public void testStringConversion() {
-        assertEquals("[D][✘] individual project (by: 28/08/2019 2359)",
-                new Deadline("individual project", "28/08/2019 2359").toString());
+        assertEquals("[D][X] individual project (by: Wed, 28 Aug 2019, 11:59PM)",
+                new Deadline("individual project", "Wed, 28 Aug 2019, 11:59PM").toString());
     }
 
     @Test
     public void testStringFormatter() {
-        assertEquals("D | ✘ | individual project | 28/08/2019 2359",
-                new Deadline("individual project", "28/08/2019 2359").format());
+        assertEquals("D | X | individual project | Wed, 28 Aug 2019, 11:59PM",
+                new Deadline("individual project", "Wed, 28 Aug 2019, 11:59PM").format());
     }
 
     @Test
     public void testStatusIconGetter() {
-        assertEquals("✘",
-                new Deadline("individual project", "28/08/2019 2359").getStatusIcon());
+        assertEquals("X",
+                new Deadline("individual project", "Wed, 28 Aug 2019, 11:59PM").getStatusIcon());
     }
 }

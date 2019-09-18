@@ -12,7 +12,8 @@ public class ParserTest {
             assertEquals(new ExitCommand(), Parser.parse("byo"));
             fail();
         } catch (DukeException e) {
-            assertEquals(" ☹  OOPS!!! I'm sorry, but I don't know what that means :-(",
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means...\n"
+                            + "The first word of your instruction seems to be an invalid command :-(",
                     e.getMessage());
         }
     }

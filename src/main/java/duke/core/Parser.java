@@ -75,13 +75,13 @@ public class Parser {
     }
 
     /**
-     * Parses a <code>Task</code> from a string array.
+     * Parses a <code>Task</code> from a string array that represents user instruction.
      *
      * @param words The string array to be parsed.
      * @return The <code>Task</code> that is parsed from the string array.
      * @throws DukeException If an exception occurs during parsing.
      */
-    private static Task parseTask(String[] words) throws DukeException {
+    private static Task parseTaskFromInstruction(String[] words) throws DukeException {
         if (words[0].equals("todo")) {
             return new NormalTask(subString(words, 1, words.length));
         } else if (words[0].equals("deadline")) {
@@ -98,6 +98,35 @@ public class Parser {
             String formattedOccurTime = formatDateTime(occurTime);
             return new Event(description, formattedOccurTime);
         }
+    }
+
+    /**
+     * Parses a <code>Task</code> from a string array that represents one line from the locally stored file.
+     *
+     * @param words The string array to be parsed.
+     * @return The <code>Task</code> that is parsed from the string array.
+     * @throws DukeException If an exception occurs during parsing.
+     */
+    public static Task parseTaskFromFile(String[] words) throws DukeException {
+        Task t;
+        switch (words[0]) {
+        case "T":
+            t = new NormalTask(words[2]);
+            break;
+        case "D":
+            t = new Deadline(words[2], words[3]);
+            break;
+        case "E":
+            t = new Event(words[2], words[3]);
+            break;
+        default:
+            throw new DukeException("Unable to parse task.");
+        }
+        boolean isDone = words[1].equals("O");
+        if (isDone) {
+            t.markAsDone();
+        }
+        return t;
     }
 
     /**
@@ -194,7 +223,7 @@ public class Parser {
             if (words.length < 2) {
                 throw new DukeException("OOPS!!! The description of a task cannot be empty.");
             }
-            Task t = parseTask(words);
+            Task t = parseTaskFromInstruction(words);
             return new AddCommand(t);
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means...\n"

@@ -1,15 +1,10 @@
 package duke.core;
 
 import duke.task.Task;
-import duke.task.NormalTask;
-import duke.task.Deadline;
-import duke.task.Event;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -40,38 +35,18 @@ public class Storage {
      * @throws DukeException If file is not found.
      */
     public ArrayList<Task> load() throws DukeException {
-        File duke = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            Scanner fileScanner = new Scanner(duke);
+            Scanner fileScanner = new Scanner(this.getClass().getResourceAsStream("/data/tasks.txt"));
             while (fileScanner.hasNext()) {
                 String nextLine = fileScanner.nextLine();
                 String[] words = nextLine.split(" \\| ");
-                if (words[0].equals("T")) {
-                    Task t = new NormalTask(words[2]);
-                    if (words[1].equals("O")) {
-                        t.markAsDone();
-                    }
-                    tasks.add(t);
-                }
-                if (words[0].equals("D")) {
-                    Task t = new Deadline(words[2], words[3]);
-                    if (words[1].equals("O")) {
-                        t.markAsDone();
-                    }
-                    tasks.add(t);
-                } 
-                if (words[0].equals("E")) {
-                    Task t = new Event(words[2], words[3]);
-                    if (words[1].equals("O")) {
-                        t.markAsDone();
-                    }
-                    tasks.add(t);
-                }
+                Task t = Parser.parseTaskFromFile(words);
+                tasks.add(t);
             }
             return tasks;
-        } catch (FileNotFoundException e) {
-            throw new DukeException("Load failed");
+        } catch (NullPointerException | DukeException e) {
+            throw new DukeException("Loading failed.");
         }
     }
 

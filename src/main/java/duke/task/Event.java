@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents an event that occurs at a specific time. The <code>Evente</code> 
+ * Represents an event that occurs at a specific time. The <code>Event</code>
  * class inherits from the <code>Task</code> class.
  */
 public class Event extends Task {

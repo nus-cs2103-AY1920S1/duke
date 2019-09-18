@@ -9,9 +9,7 @@ public class Ui {
     public String buffer;
 
     String format(String output) {
-        return "    ____________________________________________________________\n"
-                + indent(output)
-                + "    ____________________________________________________________\n";
+        return indent(output) + "\n";
     }
 
     String indent(String output) {

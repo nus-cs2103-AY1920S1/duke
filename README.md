@@ -7,12 +7,11 @@
    1. Modifying tasks in Duke
    1. Searching and listing tasks in Duke
    1. Shortcut commands and modifying them
-   1. Define
 1. Command summary
-
+-------------------------------------------------------------------------------
 
 ## 1. Introduction
-Insert sample text here
+This is a Duke program named Pepeg, which serves as a task manager for all your daily tasks.
 
 ## 2. Features
 Insert sample text here
@@ -27,8 +26,8 @@ done, delete
 find, list
 
 ### 2.iv Shortcut commands and modifying them
-find, list
-
+shortcuts: b, l, d, dead, e, t, del, f, def
+modify: define
 
 ## 3. Command summary
 all the above + bye (exit command)

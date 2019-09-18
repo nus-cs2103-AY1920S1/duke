@@ -93,6 +93,8 @@ public class Storage {
             String eventDescription = edd[0].substring(0, edd[0].length() - 1);
             newTask = new Event(eventDescription, eventTime);
             break;
+        default:
+            // Will not enter this as only types T/D/E would be stored in the txt file
         }
 
         // Read from line to see if task should be marked as done
@@ -109,22 +111,5 @@ public class Storage {
         }
 
         return newTask;
-    }
-
-    //For debugging, delete later
-    public String openFile() throws DukeException {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String str = "";
-            String allLines = "";
-
-            while ((str = br.readLine()) != null) {
-                allLines += str;
-            }
-            return allLines;
-
-        } catch (IOException e) {
-            throw new DukeException("File cannot be accessed");
-        }
     }
 }

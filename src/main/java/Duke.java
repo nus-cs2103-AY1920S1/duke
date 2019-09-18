@@ -50,15 +50,4 @@ public class Duke {
         String s3 = ui.showList(taskList);
         return s1 + "\n" + s2 + "\n" + s3;
     }
-
-    // delete later
-    public String showList() {
-        String re = "";
-        try {
-            re = storage.openFile();
-        } catch (DukeException e) {
-
-        }
-        return re;
-    }
 }

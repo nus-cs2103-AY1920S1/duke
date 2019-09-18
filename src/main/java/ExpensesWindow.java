@@ -1,7 +1,7 @@
-import Expenses.Expenses;
-import Expenses.Item;
-import Expenses.ItemInfo;
-import Expenses.TrackingService;
+import expenses.Expenses;
+import expenses.Item;
+import expenses.ItemInfo;
+import expenses.TrackingService;
 import commands.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import reactiveJava.Subscription;
+import rxjava.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,8 @@ public class ExpensesWindow extends BorderPane {
     private Expenses expenses;
     private Button saveButton = new Button();
     private TrackingService service = TrackingService.getTrackingService();
-    private Subscription<ItemInfo> deletionSubscription = TrackingService.getDeleteItemSubject().subscribe(this::delete);
+    private Subscription<ItemInfo> deletionSubscription = TrackingService
+            .getDeleteItemSubject().subscribe(this::delete);
     private Subscription<ItemInfo> editSubscription = TrackingService.getEditItemSubject().subscribe(this::edit);
 
     void setError(String message) {

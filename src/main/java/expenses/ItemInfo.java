@@ -1,4 +1,4 @@
-package Expenses;
+package expenses;
 
 public class ItemInfo {
     public boolean isCredit;

@@ -1,16 +1,21 @@
-package Expenses;
+package expenses;
 
-import reactiveJava.Subject;
+import rxjava.Subject;
 
 public class TrackingService {
     private static TrackingService service;
     private static Subject<ItemInfo> deleteItemSubject;
     private static Subject<ItemInfo> editItemSubject;
+
     private TrackingService() {
         deleteItemSubject = new Subject<>();
         editItemSubject = new Subject<>();
     }
 
+    /**
+     * Returns a single instance of the tracking service.
+     * @return the singleton
+     */
     public static TrackingService getTrackingService() {
         if (service == null) {
             service = new TrackingService();

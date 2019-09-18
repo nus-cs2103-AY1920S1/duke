@@ -1,4 +1,4 @@
-import Expenses.Expenses;
+import expenses.Expenses;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ExpensesMain extends Application {
-    private Expenses e = new Expenses();
+    private Expenses expenses = new Expenses();
+
     @Override
     public void start(Stage stage) throws Exception {
         try {
@@ -16,8 +17,8 @@ public class ExpensesMain extends Application {
             BorderPane bp = fxmlLoader.load();
             Scene scene = new Scene(bp);
             stage.setScene(scene);
-            fxmlLoader.<ExpensesWindow>getController().setExpensesObject(e);
-            fxmlLoader.<ExpensesWindow>getController().setError(e.initialisationErrorMessage);
+            fxmlLoader.<ExpensesWindow>getController().setExpensesObject(expenses);
+            fxmlLoader.<ExpensesWindow>getController().setError(expenses.initialisationErrorMessage);
             fxmlLoader.<ExpensesWindow>getController().setListeners();
             fxmlLoader.<ExpensesWindow>getController().render();
             stage.show();

@@ -49,9 +49,17 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete a batch of tasks.
+     * @param indicesToDeleteAt containing all the indices of the tasks to delete.
+     * @return an arraylist of deleted tasks.
+     * @throws DukeException
+     */
     public ArrayList<Task> batchDelete(ArrayList<Integer> indicesToDeleteAt) throws DukeException {
         try {
-            ArrayList<Task> deleted = new ArrayList<>(indicesToDeleteAt.stream().map(i -> arr.get(i)).collect(Collectors.toList()));
+            ArrayList<Task> deleted = new ArrayList<>(indicesToDeleteAt
+                    .stream()
+                    .map(i -> arr.get(i)).collect(Collectors.toList()));
             arr.removeAll(deleted);
             return deleted;
         } catch (IndexOutOfBoundsException e) {
@@ -112,6 +120,10 @@ public class TaskList {
         return temp;
     }
 
+    /**
+     * Scan through array and delete completed tasks.
+     * @return a String array of all tasks that were deleted.
+     */
     public String[] removeCompletedTasks() {
         arr.removeIf(t -> t.isDone);
         ArrayList<String> temp = new ArrayList<>();
@@ -121,6 +133,11 @@ public class TaskList {
         return temp.toArray(new String[0]);
     }
 
+    /**
+     * Finds all tasks that match a keyword
+     * @param str
+     * @return a String array of these tasks
+     */
     public String[] findTaskByKeywordAndPrintList(String str) {
         ArrayList<String> list = new ArrayList<>();
         list.add("Placeholder for first line");

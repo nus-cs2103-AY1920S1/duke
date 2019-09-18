@@ -29,16 +29,21 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Builds the correct task.
+     * @return a Task of the correct class.
+     */
     public Task build() {
         switch (type) {
-            case TODO:
-                return new ToDo(description);
-            case EVENT:
-                return new Event(description, timeframe);
-            case DEADLINE:
-                return new Deadline(description, deadline);
+        case TODO:
+            return new ToDo(description);
+        case EVENT:
+            return new Event(description, timeframe);
+        case DEADLINE:
+            return new Deadline(description, deadline);
+        default:
+            return null;
         }
-        return null;
     }
 
 }

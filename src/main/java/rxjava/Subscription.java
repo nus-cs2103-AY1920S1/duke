@@ -1,4 +1,4 @@
-package reactiveJava;
+package rxjava;
 
 import java.util.function.Consumer;
 

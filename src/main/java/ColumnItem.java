@@ -1,5 +1,5 @@
-import Expenses.ItemInfo;
-import Expenses.TrackingService;
+import expenses.ItemInfo;
+import expenses.TrackingService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;

@@ -3,6 +3,9 @@ package commands;
 import components.Storage;
 import components.TaskList;
 
+/**
+ * An interface for creating commands.
+ */
 public interface Command {
     /**
      * @param storage  refers to the Storage instance. This object allows any commands that edit the Tasklist to save

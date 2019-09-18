@@ -150,26 +150,33 @@ public class MainWindow extends BorderPane {
         header.setUnderline(true);
         header.setText("Commands");
         header.setFont(Font.font("System", 12));
-        TextFlow bye = makeCommand("bye", "Exits the application.");
-        TextFlow deadline = makeCommand("deadline <task> /by <dd/mm/yyyy hhmm>", "Creates a task with a deadline.");
-        TextFlow done = makeCommand("done <index number>", "Marks a task as done.");
-        TextFlow todo = makeCommand("todo <task name>", "Creates a to-do item.");
-        TextFlow delete = makeCommand("delete <range>", "e.g delete 1-4,6-9,12 will delete items 1 through 4, 6 through 9 and 12.");
-        TextFlow list = makeCommand("list", "Lists all items.");
-        TextFlow rmdone = makeCommand("rmdone", "Deletes all completed items.");
-        TextFlow clear = makeCommand("clear", "Clears the console.");
-        TextFlow help = makeCommand("help", "Shows this window.");
-        TextFlow importNoOver = makeCommand("import", "Opens file selector for importing w/o overwrite");
-        TextFlow importOver = makeCommand("overwrite", "Opens file selector for importing with overwrite");
-        TextFlow find = makeCommand("find <keyword>", "Returns a list of tasks that contain the keyword");
+        final TextFlow bye = makeCommand("bye", "Exits the application.");
+        final TextFlow deadline = makeCommand("deadline <task> /by <dd/mm/yyyy hhmm>",
+                "Creates a task with a deadline.");
+        final TextFlow done = makeCommand("done <index number>", "Marks a task as done.");
+        final TextFlow todo = makeCommand("todo <task name>", "Creates a to-do item.");
+        final TextFlow delete = makeCommand("delete <range>",
+                "e.g delete 1-4,6-9,12 will delete items 1 through 4, 6 through 9 and 12.");
+        final TextFlow list = makeCommand("list", "Lists all items.");
+        final TextFlow rmdone = makeCommand("rmdone", "Deletes all completed items.");
+        final TextFlow clear = makeCommand("clear", "Clears the console.");
+        final TextFlow help = makeCommand("help", "Shows this window.");
+        final TextFlow importNoOver = makeCommand("import", "Opens file selector for importing w/o overwrite");
+        final TextFlow importOver = makeCommand("overwrite", "Opens file selector for importing with overwrite");
+        final TextFlow find = makeCommand("find <keyword>", "Returns a list of tasks that contain the keyword");
+        final TextFlow event = makeCommand("event <name> /at <dd/mm/yyyy hhmm>", "Creates an event that starts at the given time.");
+        final TextFlow deleteAll = makeCommand("deleteAll", "Delete all tasks.");
         Text glossary = new Text();
         glossary.setUnderline(true);
         glossary.setText("Glossary");
         glossary.setFont(Font.font("System", 12));
-        TextFlow overwriteMeaning = makeCommand("Importing with overwrite", "Replace current tasks in Duke with tasks from the imported file");
-        TextFlow noverwriteMeaning = makeCommand("Importing without overwrite", "Add tasks from file to currently existing tasks in Duke.");
-        showModal("Help", Pos.TOP_LEFT, header, bye, clear, deadline, delete, done,
-                find, help, importNoOver, list, importOver, rmdone, todo, glossary, overwriteMeaning, noverwriteMeaning);
+        TextFlow overwriteMeaning = makeCommand("Importing with overwrite",
+                "Replace current tasks in Duke with tasks from the imported file");
+        TextFlow noverwriteMeaning = makeCommand("Importing without overwrite",
+                "Add tasks from file to currently existing tasks in Duke.");
+        showModal("Help", Pos.TOP_LEFT, header, bye, clear, deadline, delete, deleteAll, done, event,
+                find, help, importNoOver, list, importOver, rmdone, todo, glossary,
+                overwriteMeaning, noverwriteMeaning);
     }
 
     private TextFlow makeCommand(String command, String desc) {

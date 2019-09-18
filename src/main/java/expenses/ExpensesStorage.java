@@ -1,6 +1,5 @@
-package Expenses;
+package expenses;
 
-import Expenses.Item;
 import commands.DukeException;
 
 import java.io.*;
@@ -20,7 +19,9 @@ public class ExpensesStorage {
     public void save(ArrayList<Item> credit, ArrayList<Item> debit) throws DukeException {
         //First delete the old file
         File file = new File(filepath);
-        if (file.exists()) file.delete();
+        if (file.exists()) {
+            file.delete();
+        }
 
         try (FileOutputStream fout = new FileOutputStream(filepath);
              ObjectOutputStream oos = new ObjectOutputStream(fout)) {
@@ -42,7 +43,8 @@ public class ExpensesStorage {
     /**
      * Returns an arraylist of arraylist of Items. The first list is the credit, the second is the debit.
      *
-     * @return an empty ArrayList if file has not been created or is empty, and the ArrayList of existing Items otherwise.
+     * @return an empty ArrayList if file has not been created or is empty,
+     *     and the ArrayList of existing Items otherwise.
      */
     ArrayList<ArrayList<Item>> load() throws DukeException {
         try (FileInputStream fi = new FileInputStream(new File(filepath));

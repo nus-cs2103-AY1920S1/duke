@@ -3,6 +3,7 @@ package components;
 import commands.DukeException;
 import tasks.Task;
 
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -14,12 +15,14 @@ public class Storage {
     }
 
     /**
-     * Overwrites entire file with current items
+     * Overwrites entire file with current items.
      */
     public void save(ArrayList<Task> arr) throws DukeException {
         //First delete the old file
         File file = new File(filepath);
-        if (file.exists()) file.delete();
+        if (file.exists()) {
+            file.delete();
+        }
 
         //Write the objects to file
         try (FileOutputStream fout = new FileOutputStream(filepath);
@@ -38,7 +41,8 @@ public class Storage {
     /**
      * Returns an arraylist of Tasks.
      *
-     * @return an empty ArrayList if file has not been created or is empty, and the ArrayList of existing Tasks otherwise.
+     * @return an empty ArrayList if file has not been created or is empty,
+     *  and the ArrayList of existing Tasks otherwise.
      */
     public ArrayList<Task> load() throws DukeException {
         try (FileInputStream fi = new FileInputStream(new File(filepath));

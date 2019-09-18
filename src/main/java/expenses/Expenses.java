@@ -1,8 +1,7 @@
-package Expenses;
+package expenses;
 
 import commands.DukeException;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Expenses {
@@ -12,6 +11,9 @@ public class Expenses {
     public double balance = 0;
     public String initialisationErrorMessage;
 
+    /**
+     * Create an expenses object that stores credit and debit items and can access storage.
+     */
     public Expenses() {
         storage = new ExpensesStorage("src/data/expenses.txt");
         try {
@@ -31,7 +33,12 @@ public class Expenses {
         }
     }
 
-
+    /**
+     *
+     * @param title
+     * @param amount
+     * @param isCredit
+     */
     public void add(String title, double amount, boolean isCredit) {
         if (isCredit) {
             balance += amount;

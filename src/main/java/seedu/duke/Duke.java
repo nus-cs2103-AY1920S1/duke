@@ -21,10 +21,8 @@ public class Duke {
     private Storage storageHandler;
     private TaskList taskList;
     private Trivia trivia;
-    private static final String savedPath
-            = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\duke.txt";
-    private static final String triviaPath
-            = "C:\\Users\\drago\\Documents\\MEGA\\Work\\Uni\\Year 2\\CS2103T\\duke\\data\\trivia.json";
+    private static final String savedPath = "data/duke.txt";
+    private static final String triviaPath = "data/trivia.json";
 
     /**
      * You should have your own function to generate a response to user input.

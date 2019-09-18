@@ -15,19 +15,19 @@ You can create 3 types of task which are `deadline`, `event` and `todo`.
 ### Delete task
 Delete a task that is in the tasklist.
 
-###Find task
+### Find task
 Find a task in the tasklist.
 
-###List task
+### List task
 List out all the task in the tasklist.
 
-###Mark task as 'Done'
+### Mark task as 'Done'
 Mark the task as 'Done' to show that it has been completed.
 
-###View the number of tasks for each type
+### View the number of tasks for each type
 Shows the number of tasks for a certain type of task and the number of tasks that are completed and not completed.
 
-###Bye
+### Bye
 Exit the application.
 
 ## Usage
@@ -42,9 +42,9 @@ Example of usage:
 
 Expected outcome:
 
-`>Got it. I've added this task:
+>Got it. I've added this task:
 >[D][]homework (by:12th of December 2019 12:30pm tomorrow)
->Now you have 1 tasks in the list.`
+>Now you have 1 tasks in the list.
 
 ### `event` - To add a event task in the tasklist.
 
@@ -56,9 +56,9 @@ Example of usage:
 
 Expected outcome:
 
-`>Got it. I've added this task:
+>Got it. I've added this task:
 >[E][]birthday (at:12th of December 2019 12:30pm tomorrow)
->Now you have 1 tasks in the list.`
+>Now you have 1 tasks in the list.
 
 ### `todo` - To add a todo task in the tasklist.
 
@@ -70,9 +70,9 @@ Example of usage:
 
 Expected outcome:
 
-`>Got it. I've added this task:
+>Got it. I've added this task:
 >[T][]swim
->Now you have 1 tasks in the list.`
+>Now you have 1 tasks in the list.
 
 ### `delete` - To delete a task in the tasklist.
 
@@ -84,9 +84,9 @@ Example of usage:
 
 Expected outcome:
 
-`>Noted. I've removed this task:
+>Noted. I've removed this task:
 >[E][]birthday (at:12th of December 2019 12:30pm tomorrow)
->Now you have 2 tasks in the list.`
+>Now you have 2 tasks in the list.
 
 ### `find` - To find a task in the tasklist.
 
@@ -98,8 +98,8 @@ Example of usage:
 
 Expected outcome:
 
-`>Here are the matching tasks in your list:
->1.[E][]birthday (at:12th of December 2019 12:30pm tomorrow)`
+>Here are the matching tasks in your list:
+>1.[E][]birthday (at:12th of December 2019 12:30pm tomorrow)
 
 ### `list` - List out all the tasks in the tasklist.
 
@@ -111,9 +111,9 @@ Example of usage:
 
 Expected outcome:
 
-`>Here are the tasks in your list:
+>Here are the tasks in your list:
 >1.[E][]birthday (at:12th of December 2019 12:30pm tomorrow)
->2.[T][]swim`
+>2.[T][]swim
 
 ### `done` - Marks a task as 'Done'.
 
@@ -125,8 +125,8 @@ Example of usage:
 
 Expected outcome:
 
-`>Nice!. I've marked this task as done:
->[E][x]birthday (at:12th of December 2019 12:30pm tomorrow)`
+>Nice!. I've marked this task as done:
+>[E][x]birthday (at:12th of December 2019 12:30pm tomorrow)
 
 ### `stats` - Displays the number of tasks for each type.
 
@@ -138,11 +138,11 @@ Example of usage:
 
 Expected outcome:
 
-`>Number of deadline tasks: 0
+>Number of deadline tasks: 0
 >Number of event tasks: 1
 >Number of todo tasks: 2
 >Number of tasks done: 1
->Number of tasks not done: 2`
+>Number of tasks not done: 2
 
 ### `bye` - Exit the application.
 

@@ -1,3 +1,7 @@
+// @@author ShuTingY-reused
+// Original code by Jeffrey Lum, and can be found in the tutorials directory of this repository.
+// Reused with minor modifications.
+
 package duke;
 
 import java.io.IOException;
@@ -20,9 +24,9 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
-            //scene.getStylesheets().addAll(Main.class.getResource("./stylesheet.css").toExternalForm());
-
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

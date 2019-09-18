@@ -55,12 +55,7 @@ public class UiText {
      * Standard welcome message that will displayed when the user start the Chatbot.
      */
     public static String greeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String msg = "Hello from\n" + logo + "\nHello! I\'m Duke\n"
+        String msg = "Hello! I\'m Duke\n"
                 + "What can I do for you?";
         return msg;
 
@@ -198,23 +193,17 @@ public class UiText {
      */
     public static String helpFullContent() {
         StringBuilder content = new StringBuilder();
-        content.append("Here is the list of commands with their format and function\n");
-        content.append("\t-");
-        content.append(UiText.helpForDeadline());
-        content.append("\n\t-");
-        content.append(UiText.helpForEvent());
-        content.append("\n\t-");
-        content.append(UiText.helpForTodo());
-        content.append("\n\t-");
-        content.append(UiText.helpForFind());
-        content.append("\n\t-");
-        content.append(UiText.helpForDelete());
-        content.append("\n\t-");
-        content.append(UiText.helpForDone());
-        content.append("\n\t-");
-        content.append(UiText.helpForExit());
-        content.append("\n\t-");
-        content.append(UiText.helpForList());
+        content.append("Here is the list of commands \n");
+        content.append("\t-deadline");
+        content.append("\n\t-delete");
+        content.append("\n\t-done");
+        content.append("\n\t-event");
+        content.append("\n\t-exit");
+        content.append("\n\t-find");
+        content.append("\n\t-list");
+        content.append("\n\t-todo");
+        content.append("\n\t-time format");
+        content.append("\n Enter \"help <command>\" for detail");
         return content.toString();
     }
 
@@ -241,6 +230,8 @@ public class UiText {
                 return UiText.helpForList();
             case "find":
                 return UiText.helpForFind();
+            case "time":
+                return UiText.helpForTimeFormat();
             default:
                 return "Please key in a valid keyword";
         }
@@ -248,37 +239,41 @@ public class UiText {
     }
 
     public static String helpForDeadline() {
-        return "deadline <task description> /by <date and time in dd/mmm/yyyy xx:xx>" +
-                " an deadline task of the given time will be added to the task list";
+        return "Format: \ndeadline <task descrip> /by <date and time>" +
+                " \n\t- An deadline task of the given time will be \n\t  added to the task list";
     }
 
     public static String helpForEvent() {
-        return "event <task description> /at <date and time in dd/mmm/yyyy xx:xx>"
-                + " an event task with the given time will be added to the task list.";
+        return "Format: \nevent <task descrip> /at <date and time>"
+                + "\n\t- An event task with the given time will be \n\t  added to the task list.";
     }
 
     public static String helpForTodo() {
-        return "todo <task description> --a todo task will be added to the task list.";
+        return "Format: \ntodo <task descrip> \n\t- A todo task will be added to the task \n\t   list.";
     }
 
     public static String helpForDelete() {
-        return "delete <no of the task in the list> --the task that associated with the number on the list will be deleted.";
+        return "Format: \ndelete <number> \n\t- The task that associated with the number \n\t   on the list will be deleted.";
     }
 
     public static String helpForDone() {
-        return "done <no of the task in the list> --the task that associated with the number on the list will be mark as done.";
+        return "Format: \ndone <number> \n\t- The task that associated with the number on the\n\t  list will be mark as done.";
     }
 
     public static String helpForExit() {
-        return "bye --you will exit the application.";
+        return "Format: \nbye \n- You will exit the application.";
     }
 
     public static String helpForFind() {
-        return "find <keyword> --task that contain the keyword will be shown as a list.";
+        return "Format: \nfind <keyword> \n\t- Task that contain the keyword will be \n\t   shown as a list.";
     }
 
     public static String helpForList() {
-        return "list --list of task will be displayed.";
+        return "Format: \nlist \n\t- list of task will be displayed.";
+    }
+    public static String helpForTimeFormat() {
+        return "Follow one of the following formats: \n <dd/mmm/yyyy xx:xx>" +
+                "\n <dd/mm/yyyy>";
     }
 
     public static String fileSeparator = System.getProperty("file.separator");

@@ -1,19 +1,22 @@
 # User Guide
 
 ## Features 
-
-### Feature 1 
-Description of feature.
+* Help the user keep track of various type of tasks
+* Show what are the task on the list
+* Mark the task as completed
+* Delete a task from the list
+* Search the key through all existing task
+* Show help on the command format
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Create a new todo task 
 
-Describe action and its outcome.
+Creates a new todo task with given discription.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo [description]`
 
 Expected outcome:
 

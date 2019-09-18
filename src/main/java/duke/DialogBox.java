@@ -1,3 +1,6 @@
+// @@author ShuTingY-reused
+// Original code by Jeffrey Lum, and can be found in the tutorials directory of this repository.
+// Reused with minor modifications.
 package duke;
 
 import java.io.IOException;

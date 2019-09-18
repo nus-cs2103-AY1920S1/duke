@@ -10,6 +10,7 @@ import seedu.duke.util.Storage;
 import seedu.duke.util.TaskList;
 import seedu.duke.util.UI;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -21,8 +22,9 @@ public class Duke {
     private Storage storageHandler;
     private TaskList taskList;
     private Trivia trivia;
-    private static final String savedPath = "data/duke.txt";
-    private static final String triviaPath = "data/trivia.json";
+    private static final String dirPath =  System.getProperty("user.home") + File.separator + "data";
+    private static final String savedPath = dirPath + File.separator + "duke.txt";
+    private static final String triviaPath = dirPath + File.separator + "trivia.json";
 
     /**
      * You should have your own function to generate a response to user input.
@@ -41,7 +43,10 @@ public class Duke {
             } else {
                 return "Well that sucks";
             }
-        } catch (DukeException | TriviaException ex) {
+        } catch (DukeException ex) {
+            return ui.showError(ex.getMessage());
+        } catch (TriviaException ex) {
+            Parser.forceQuitQuiz();
             return ui.showError(ex.getMessage());
         }
     }
@@ -58,10 +63,10 @@ public class Duke {
             taskList = new TaskList(storageHandler.loadList());
             trivia = storageHandler.loadTrivia();
         } catch (DukeException ex) {
-            ui.cannotLoad();
+            System.out.println(ui.cannotLoad());
             taskList = new TaskList();
         } catch (TriviaException ex) {
-            ui.cannotLoadTrivia();
+            System.out.println(ui.cannotLoadTrivia());
             trivia = new Trivia();
         }
     }

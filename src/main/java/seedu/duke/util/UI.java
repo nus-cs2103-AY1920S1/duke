@@ -37,6 +37,7 @@ public class UI {
     private static final String TRIVIA_WRONG = "HAH, you have slipped up yet again!\n";
     private static final String TRIVIA_WRONG_FINAL = "WRONG! What a way to end the trivia, Joestar.";
     private static final String TRIVIA_NEXT_QUESTION = "Next question:\n";
+    private static final Object TRIVIA_START_QUIZ = "It's time to begin, Jotaro.\n";
 
     /**
      * Prints out a welcome message.
@@ -165,6 +166,10 @@ public class UI {
 
     public String showQuestion(Trivia trivia) {
         return trivia.showCurrentQuestion();
+    }
+
+    public String startQuiz(Trivia trivia) {
+        return TRIVIA_START_QUIZ + showQuestion(trivia);
     }
 
     public String finishTrivia() {

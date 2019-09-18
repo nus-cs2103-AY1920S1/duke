@@ -1,5 +1,7 @@
 package seedu.duke.trivia;
 
+import seedu.duke.exceptions.TriviaException;
+
 import java.util.ArrayList;
 
 public class Trivia {
@@ -37,15 +39,22 @@ public class Trivia {
         return questionBank.get(questionIndex).deleteAnswer(answerIndex);
     }
 
-    public boolean checkNextAnswer(String input) {
-        if (currentQuestionIndex < questionBank.size() - 1) {
-            boolean temp = questionBank.get(currentQuestionIndex).checkAnswer(input);
-            currentQuestionIndex++;
-            return temp;
+    public boolean checkNextAnswer(String input) throws TriviaException {
+        if (!questionBank.get(currentQuestionIndex).hasAnswers()) {
+            throw new TriviaException("You haven't given me any answers for this stupid question!");
         } else {
-            boolean temp = questionBank.get(questionBank.size() - 1).checkAnswer(input);
-            resetQuestionIndex();
-            return temp;
+            if (currentQuestionIndex < questionBank.size() - 1 && questionBank.size() > 1) {
+                boolean temp = questionBank.get(currentQuestionIndex).checkAnswer(input);
+                currentQuestionIndex++;
+                return temp;
+            } else if (questionBank.size() == 1) {
+                boolean temp = questionBank.get(currentQuestionIndex).checkAnswer(input);
+                return temp;
+            } else {
+                boolean temp = questionBank.get(questionBank.size() - 1).checkAnswer(input);
+                resetQuestionIndex();
+                return temp;
+            }
         }
     }
 

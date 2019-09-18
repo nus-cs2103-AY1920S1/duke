@@ -57,12 +57,6 @@ public class MainWindow extends AnchorPane {
                 }
             };
             buffer.schedule(closeWindow, 1000);
-        } else if (input.equals("quiz-all")) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog("It's time to begin your test.", dukeImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
         } else {
             showOutput(input, response);
         }

@@ -16,6 +16,10 @@ public class Parser {
         return mode;
     }
 
+    public static void forceQuitQuiz() {
+        isQuizzing = false;
+    }
+
     public static MasterCommand parse(String input) throws DukeException, TriviaException {
         if (mode.equals("trivia")){
             return parseTrivia(input);

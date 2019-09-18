@@ -32,6 +32,10 @@ public class QuestionAnswer {
         return false;
     }
 
+    public boolean hasAnswers() {
+        return possibleAnswers.size() > 0;
+    }
+
     public String getAnswers() {
         String temp = "";
         for (int i = 0; i < possibleAnswers.size(); i++) {

@@ -34,6 +34,18 @@ public class Storage {
         gson = new Gson();
         file = new File(list);
         this.trivia = new File(trivia);
+        try {
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+            if (!this.trivia.exists()) {
+                this.trivia.getParentFile().mkdirs();
+                this.trivia.createNewFile();
+            }
+        } catch (IOException ex) {
+            System.out.println("File does not exist");
+        }
     }
 
     /**

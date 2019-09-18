@@ -33,18 +33,16 @@ public class Duke {
      */
     public String getResponse(String input) {
         String output = "";
-        if (!input.equals("bye")) {
-            try {
-                Command c = Parser.parse(input);
-                output = c.execute(tasks);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-            try {
-                storage.save(tasks);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+        try {
+            Command c = Parser.parse(input);
+            output = c.execute(tasks);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
         return output;
     }

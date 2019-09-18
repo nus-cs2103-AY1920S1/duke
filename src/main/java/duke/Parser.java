@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -38,6 +39,8 @@ public class Parser {
             return new FindCommand(fullCommand);
         case SortCommand.name:
             return new SortCommand(fullCommand);
+        case ByeCommand.name:
+            return new ByeCommand(fullCommand);
         default:
             return new ErrorCommand(fullCommand);
         }

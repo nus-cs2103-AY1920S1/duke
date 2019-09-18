@@ -19,6 +19,9 @@ public class SortCommand extends Command {
 
     @Override
     public String execute(TaskList tasks) throws DukeException {
+        if (fullCommand.split(" ").length < 2) {
+            throw new DukeException("Sort commands requires a second argument");
+        }
         String sortType = fullCommand.split(" ")[1];
         switch (sortType) {
         case "type":
@@ -28,7 +31,7 @@ public class SortCommand extends Command {
             sortByDescription(tasks);
             return "Sorted by description";
         default:
-            return "Sort command requires a valid argument";
+            throw new DukeException("Sort command requires a valid argument");
         }
     }
 

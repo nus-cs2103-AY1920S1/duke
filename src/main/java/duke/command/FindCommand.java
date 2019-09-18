@@ -25,7 +25,7 @@ public class FindCommand extends Command {
      * @param ui to give feedback to user
      * @throws DukeException when no matches are found
      */
-    public void execute(TaskList tasks, Ui ui, Saved file) throws DukeException {
-        ui.printList(tasks.findMatch(this.keyword));
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
+        return ui.showList(tasks.findMatch(this.keyword));
     }
 }

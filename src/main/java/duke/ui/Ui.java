@@ -12,12 +12,12 @@ public class Ui {
      * Prints welcome message for user.
      */
     public void printIntro() {
-        String logo = "\t ____        _        \n"
-                + "\t |  _ \\ _   _| | _____ \n"
-                + "\t | | | | | | | |/ / _ \\\n"
-                + "\t | |_| | |_| |   <  __/\n"
-                + "\t |____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("\t Hello from\n" + logo);
+        String logo = "\t____        _        \n"
+                + "\t|  _ \\ _   _| | _____ \n"
+                + "\t| | | | | | | |/ / _ \\\n"
+                + "\t| |_| | |_| |   <  __/\n"
+                + "\t|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("\tHello from\n" + logo);
         printLine();
         printDuke("Hello! I'm Duke\n");
         printDuke("What can I do for you?\n");
@@ -52,15 +52,29 @@ public class Ui {
      *
      * @param list list containing tasks
      */
-    public void printList(ArrayList<Task> list) {
-        System.out.println("\t Here are the tasks in your list:");
+    public String showList(ArrayList<Task> list) {
+        StringBuilder msg = new StringBuilder();
+
+        System.out.println("\tHere are the tasks in your list:");
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            System.out.println("\t" + (i + 1) + ". " + task.toString());
+            msg.append("\t" + (i + 1) + ". " + task.toString() + "\n");
 
         }
+        return msg.toString();
     }
 
+    /**
+     * Returns a message to be printed once a task is added.
+     * @param numOfTasks total number of tasks after a task has been added
+     * @param taskDescription description of the newly added task
+     */
+    public String showAddTaskMessage(int numOfTasks, String taskDescription) {
+        StringBuilder msg = new StringBuilder();
+        msg.append("Got it. I've added this task:\n  " + taskDescription + "\n");
+        msg.append("Now you have " + numOfTasks + " task(s) in the list.");
+        return msg.toString();
+    }
     /**
      * Prints error messages.
      *
@@ -70,4 +84,21 @@ public class Ui {
         printDuke(error);
     }
 
+    public String showDeleteMessage(String removedTask, int numOfTasks) {
+        StringBuilder msg = new StringBuilder();
+        msg.append("Noted. I've removed this task:\n  " + removedTask + "\n");
+        msg.append("Now you have " + numOfTasks + " task(s) in the list.");
+        return msg.toString();
+    }
+
+    public String showBye() {
+        return "Bye! Hope to see you again!";
+    }
+
+    public String showDone(Task task) {
+        StringBuilder msg = new StringBuilder();
+        msg.append("Nice! I've marked this task as done:\n");
+        msg.append("\t[" + task.getStatusIcon() + "] " + task.getDesc());
+        return msg.toString();
+    }
 }

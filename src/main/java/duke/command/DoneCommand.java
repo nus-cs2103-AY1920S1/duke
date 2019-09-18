@@ -22,9 +22,8 @@ public class DoneCommand extends Command {
      * @param tasks contains the current list of tasks
      * @param ui to give feedback to the user
      */
-    public void execute(TaskList tasks, Ui ui, Saved file) {
+    public String execute(TaskList tasks, Ui ui) {
         Task task = tasks.setDone(this.taskNum);
-        ui.printDuke("Nice! I've marked this task as done: \n"
-                     + "\t" + task + "\n");
+        return ui.showDone(task);
     }
 }

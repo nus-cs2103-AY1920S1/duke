@@ -24,7 +24,7 @@ public class Task {
      *
      * @return tick or X symbols to represent whether task is done.
      */
-    private String getStatusIcon() {
+    public String getStatusIcon() {
         return isDone ? "✓" : "✗";
     }
 

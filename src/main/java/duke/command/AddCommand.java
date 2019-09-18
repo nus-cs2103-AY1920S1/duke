@@ -22,10 +22,8 @@ public class AddCommand extends Command {
      * @param tasks contains the current list of tasks
      * @param ui to give feedback to the user
      */
-    public void execute(TaskList tasks, Ui ui, Saved file) {
+    public String execute(TaskList tasks, Ui ui) {
         tasks.add(this.task);
-        ui.printDuke("Got it. I've added this task:\n  "
-                 + "\t" + this.task + "\n"
-                 + "\t Now you have " + tasks.size() + " tasks in the list.\n");
+        return ui.showAddTaskMessage(tasks.size(), task.toString());
     }
 }

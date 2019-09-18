@@ -18,9 +18,8 @@ public class DeleteCommand extends Command {
      * @param tasks task to be deleted
      * @param ui to give feedback to the user
      */
-    public void execute(TaskList tasks, Ui ui, Saved file) {
+    public String execute(TaskList tasks, Ui ui) {
         Task task = tasks.delete(this.taskNum);
-        ui.printDuke("Noted. I've removed this task: \n"
-                     + "\t" + task + "\n \tNow you have " + tasks.size() + " tasks in the list.\n");
+        return ui.showDeleteMessage(task.toString(), tasks.size());
     }
 }

@@ -7,31 +7,29 @@ import java.util.Scanner;
 import duke.command.Command;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
+/**
+ * Main class duke to start the programme.
+ */
 public class Duke extends Application {
     private TaskList tasks;
     private Saved savedFile;
     private Scanner scan;
     private Ui ui;
 
-
     /**
      * Creates a Duke object.
      * Initialise the storage, task list and ui objects.
-     *
-     * @param filePath the local path to the storage file
-     * @throws IOException filePath is inaccessible or cannot be found
      */
-    public Duke(String filePath) throws IOException {
+    public Duke() {
+        savedFile = new Saved("src/main/java/data.txt");
         ui = new Ui();
-        savedFile = new Saved(filePath);
-
-        tasks = new TaskList(savedFile.loadData());
+        try {
+            tasks = new TaskList(savedFile.loadData());
+        } catch (IOException e) {
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -53,7 +51,7 @@ public class Duke extends Application {
                 input = ui.scanCmd();
                 ui.printLine();
                 cmd = Parser.parse(input);
-                cmd.execute(tasks, ui, savedFile);
+                cmd.execute(tasks, ui);
                 isBye = cmd.isBye();
             } catch (DukeException error) {
                 ui.printError(error.getMessage());
@@ -71,15 +69,22 @@ public class Duke extends Application {
      * @throws IOException local file is inaccessible or cannot be found
      */
     public static void main(String[] args) throws IOException {
-        new Duke("src/main/java/data.txt").run();
+        new Duke().run();
+    }
+
+    /**
+     * Gets response from the user.
+     */
+    public String getResponse(String input) {
+        try {
+            Command cmd = Parser.parse(input);
+            return cmd.execute(tasks, ui);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    public void start(Stage start) {
     }
 }

@@ -10,7 +10,7 @@ public class ExitCommand extends Command {
     /**
      * Relays to the driver class that the user wishes to exit Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Saved file) {
-        ui.printDuke("Bye. Hope to see you again soon!\n");
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.showBye();
     }
 }

@@ -13,7 +13,7 @@ public class ListCommand extends Command {
      * @param tasks to access the list of tasks
      * @param ui to give feedback to user
      */
-    public void execute(TaskList tasks, Ui ui, Saved file) {
-        ui.printList(tasks.getTaskArrayList());
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.showList(tasks.getTaskArrayList());
     }
 }

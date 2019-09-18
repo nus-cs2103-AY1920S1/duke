@@ -4,8 +4,6 @@ import seedu.duke.storage.TaskList;
 import seedu.duke.trackables.Task;
 import seedu.duke.ui.Ui;
 
-import java.util.List;
-
 public class AddCommand extends Command {
 
     private String description;

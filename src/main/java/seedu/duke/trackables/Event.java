@@ -1,18 +1,16 @@
 package seedu.duke.trackables;
 
-import seedu.duke.exceptions.InvalidArgumentException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event extends Task {
 
-    private Date at;
+    private Date attendDate;
 
-    public Event(String description, Date at)  {
+    public Event(String description, Date attendDate)  {
         super(description);
-        this.at = at;
+        this.attendDate = attendDate;
     }
 
     /**
@@ -23,20 +21,20 @@ public class Event extends Task {
     public Event(String... args) {
         super(args);
         try {
-            this.at = new SimpleDateFormat("d/MM/yyyy HHmm").parse(args[3]);
+            this.attendDate = new SimpleDateFormat("d/MM/yyyy HHmm").parse(args[3]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    private String getAtAsFormatedDate() {
-        return new SimpleDateFormat("d/MM/yyyy HHmm").format(at);
+    private String getAttendDateAsFormattedDate() {
+        return new SimpleDateFormat("d/MM/yyyy HHmm").format(attendDate);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-            + getAtAsFormatedDate() + ")";
+            + getAttendDateAsFormattedDate() + ")";
     }
 
     @Override
@@ -45,7 +43,7 @@ public class Event extends Task {
         sb.append("E").append(" | ")
             .append(isDone ? "1" : "0")
             .append(" | ").append(this.description)
-            .append(" | ").append(getAtAsFormatedDate());
+            .append(" | ").append(getAttendDateAsFormattedDate());
         return sb.toString();
     }
 }

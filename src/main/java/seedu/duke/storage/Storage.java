@@ -1,19 +1,15 @@
 package seedu.duke.storage;
 
-import seedu.duke.Duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Event;
 import seedu.duke.trackables.Task;
 import seedu.duke.trackables.Todo;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,7 +54,7 @@ public class Storage {
                 Files.createFile(path);
             }
 
-            List<String> tasksAsString = getStringsFromTasks(tasks);
+            List<String> tasksAsString = extractStringsFromTasks(tasks);
             Files.write(path, tasksAsString);
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path, ioe);
@@ -78,7 +74,7 @@ public class Storage {
         }
 
         try {
-            return new TaskList(getTasksFromStrings(Files.readAllLines(path)));
+            return new TaskList(restoreTasksFromStrings(Files.readAllLines(path)));
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path, ioe);
         } catch (Exception e) {
@@ -92,7 +88,7 @@ public class Storage {
      * @param tasks Lists containing all the tasks to convert.
      * @return Returns a list of Tasks in their String equivalent form.
      */
-    private List<String> getStringsFromTasks(TaskList tasks) {
+    private List<String> extractStringsFromTasks(TaskList tasks) {
         return tasks.getList().stream().map(Task::getAsString).collect(Collectors.toList());
     }
 
@@ -102,7 +98,7 @@ public class Storage {
      * @param stringTasks List containing all tasks in their string forms.
      * @return
      */
-    private List<Task> getTasksFromStrings(List<String> stringTasks) {
+    private List<Task> restoreTasksFromStrings(List<String> stringTasks) {
         return stringTasks.stream()
             .map(identifyTask -> identifyTask.split(" \\| "))        // Split String
             .map(this::stringArgsToTask).collect(Collectors.toList());     // Run each String[] through stringToTask()

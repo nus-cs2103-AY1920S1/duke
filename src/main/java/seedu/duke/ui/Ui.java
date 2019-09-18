@@ -41,15 +41,22 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints the message when there is a loading error.
+     */
     public static void printLoadingError() {
         printMessages("Creating a new taskList for you...");
     }
 
+    /**
+     * Prints the message contained in the DukeException {@code e}
+     * @param e the Exception whose message should be printed.
+     */
     public static void printError(DukeException e) {
         printMessages(e.getMessage());
     }
 
-    public static String nextLine() {
+    public static String readNextLine() {
         return scanner.nextLine();
     }
 

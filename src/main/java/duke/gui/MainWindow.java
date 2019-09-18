@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -22,7 +22,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private GuiDuke guiDuke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -30,16 +30,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+
+    public void setDuke(GuiDuke d) {
+        guiDuke = d;
         showWelcome();
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
-    }
-
     private void showWelcome() {
-        DialogBox welcome = DialogBox.getDukeDialog("Hello! I'm Duke\nWhat can I do for you?", dukeImage);
-        dialogContainer.getChildren().add(welcome);
+        for (String message : guiDuke.getAndClearMessages()) {
+            DialogBox dialog = DialogBox.getDukeDialog(message, dukeImage);
+            dialogContainer.getChildren().add(dialog);
+        }
     }
 
     /**
@@ -49,11 +51,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (duke.isExit(input)) {
+        String response = guiDuke.getResponse(input);
+        if (guiDuke.shouldExit()) {
             Platform.exit();
             return;
         }
-        String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

@@ -62,7 +62,8 @@ public class Executor {
             } else if (type.equals("list")) {
                 result = ui.showTasks(tasks);
             } else if (type.equals("find")) {
-                result = ui.showTasks(tasks.find(commandAnalyzer.getList().get(0)));
+                String filter = commandAnalyzer.getList().get(0);
+                result = ui.showFound(tasks.find(filter), filter);
             } else {
                 if (type.equals("todo")) {
                     try {

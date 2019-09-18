@@ -140,6 +140,25 @@ public class Ui {
     }
 
     /**
+     * Prints all the tasks with a given String in their description.
+     * @param taskList TaskList created by find operation of TaskList
+     * @param filter String that is used to filter tasks
+     * @return String representing list of tasks with given filter in their descriptions
+     */
+    public String showFound(TaskList taskList, String filter) {
+        if (taskList.isEmpty()) {
+            return "There are no Tasks in your list with '" + filter + "' in their description.\n";
+        }
+        String result = "Here are the tasks with '" + filter + "' in your list:\n";
+        ArrayList<Task> arr = taskList.getArr();
+        for (int i = 0; i < arr.size(); i++) {
+            Task temp = arr.get(i);
+            result += (i + 1) + ". " + temp + "\n";
+        }
+        return result;
+    }
+
+    /**
      * Prints a duplicate message error message.
      * @param task Task that is duplicate
      * @return message to user to indicate an attempt to add duplicate Task

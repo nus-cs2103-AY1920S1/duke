@@ -36,12 +36,26 @@ public class Duke {
                 sf.updateFile(listOfTasks.getTaskList());
                 break;
 
+<<<<<<< Updated upstream
                 case "delete":
                 int indexOfTask2 = Integer.parseInt(descriptions.get(1));
                 listOfTasks.deleteTask(indexOfTask2 - 1);
                 System.out.println("List of tasks updated.");
                 sf.updateFile(listOfTasks.getTaskList());
                 break;
+=======
+    private String dukeRun(String input) {
+        String output;
+        try {
+            String fullCommand = input;
+            Command c = Parser.parse(fullCommand);
+            output = c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            output = ui.showError(e.getMessage());
+        }
+        return output;
+    }
+>>>>>>> Stashed changes
 
                 case "todo":
                 try {

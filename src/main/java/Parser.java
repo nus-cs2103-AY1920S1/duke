@@ -153,7 +153,7 @@ public class Parser {
             }
         }
         if (date == null) {
-            throw new DukeException("Time format not acceptable! Please use dd/mm/yy format");
+            throw new DukeException("Invalid date or time format not acceptable! Please use dd/mm/yy format");
         } else {
             return fullCommand.toString();
         }

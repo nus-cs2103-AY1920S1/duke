@@ -6,7 +6,7 @@ import taskchick.tasklist.TaskList;
 import java.io.FileNotFoundException;
 
 /**
- * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ * Task Chick is a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
 public class TaskChick {
 
@@ -14,8 +14,10 @@ public class TaskChick {
     private TaskList tasks;
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Takes in user input and gets the corresponding response from Task Chick.
+     *
+     * @param input User input.
+     * @return Task Chick's response.
      */
     String getResponse(String input) {
         try {
@@ -30,7 +32,7 @@ public class TaskChick {
      * Initialises a session for Duke and loads tasks, if any, from a previous session.
      */
     public TaskChick() {
-        storage = new Storage("/users/dominique/documents/cs2103t/duke/data/duke.txt");
+        storage = new Storage("/users/dominique/documents/cs2103t/duke/data/taskchick.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {

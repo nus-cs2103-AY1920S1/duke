@@ -8,7 +8,7 @@ Duke is a combination of a chatbot and To-Do List which allows users to manage t
 ### Add a new Task
 Save three types of Task: ToDo, Event, Deadline.
 
-####Usage
+#### Usage
 
 `todo [description]` - add a new `todo` Task with the given `description`.
 
@@ -16,11 +16,11 @@ Save three types of Task: ToDo, Event, Deadline.
 
 `deadline [description] /by [dd/mm/yyyy HHmm]` - add a new `deadline` Task with the given `description` and due date.
 
-####Example of usage:
+#### Example of usage:
 
 `event Google Tech Talk /at 17/09/2019 1730` 
 
-####Expected outcome:
+#### Expected outcome:
 
 ![Add](add.png)
 
@@ -28,15 +28,15 @@ Save three types of Task: ToDo, Event, Deadline.
 ### List Task
 Show a list of Task that have been added.
 
-####Usage
+#### Usage
 
 `list` - show the list of Task that the user has added.
 
-####Example of usage:
+#### Example of usage:
 
 `list` 
 
-####Expected outcome:
+#### Expected outcome:
 
 ![List](list.png)
 
@@ -44,30 +44,30 @@ Show a list of Task that have been added.
 ### Update Task
 Set Task as done.
 
-####Usage
+#### Usage
 
 `done [task number]` - set the Task at the specified number as done.
 
-####Example of usage:
+#### Example of usage:
 
 `done 1` 
 
-####Expected outcome:
+#### Expected outcome:
 
 ![Done](done.png)
 
 ### Remove Task
 Remove Task from the TaskList.
 
-####Usage
+#### Usage
 
 `delete [task number]` - delete the Task at the specified number.
 
-####Example of usage:
+#### Example of usage:
 
 `delete 1` 
 
-####Expected outcome:
+#### Expected outcome:
 
 ![Delete](delete.png)
 <img src="delete.png" width=300 align=right>
@@ -78,15 +78,15 @@ Remove Task from the TaskList.
 Show a list of Task that contains a specified keyword.
 
 
-####Usage
+#### Usage
 
-`find [keyword]` - show Task that contains `keyword'
+`find [keyword]` - show Task that contains `keyword`
 
-####Example of usage:
+#### Example of usage:
 
 `find better` 
 
-####Expected outcome:
+#### Expected outcome:
 
 ![Find](find.png)
 
@@ -94,15 +94,15 @@ Show a list of Task that contains a specified keyword.
 Move the list of Task to a separate file and clear the current active list.
 
 
-####Usage
+#### Usage
 
 `archive` - move all Task currently in the list to archive file
 
-####Example of usage:
+#### Example of usage:
 
-`archive
+`archive`
 
-####Expected outcome:
+#### Expected outcome:
 
 ![Archive](archive.png)
 
@@ -110,14 +110,14 @@ Move the list of Task to a separate file and clear the current active list.
 Show a list containing all the Task that have been moved to archive.
 
 
-####Usage
+#### Usage
 
 `list archive` - show all task currently in the archive
 
-####Example of usage:
+#### Example of usage:
 
 `list archive` 
 
-####Expected outcome:
+#### Expected outcome:
 
 ![List Archive](listarchive.png)

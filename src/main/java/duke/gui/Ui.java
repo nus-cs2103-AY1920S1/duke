@@ -6,6 +6,13 @@ import duke.task.TaskList;
 import duke.task.TaskType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static duke.task.TaskType.ALL;
+import static duke.task.TaskType.DEADLINE;
+import static duke.task.TaskType.DEADLINE_OVERDUE;
+import static duke.task.TaskType.EVENT;
+import static duke.task.TaskType.TODO;
 
 /**
  * Deals with interactions with the user.
@@ -14,13 +21,17 @@ public class Ui {
     public static final String PREFIX = "    ";
     public static final String DIVIDER = "******************************************";
     private static final String WELCOME_MESSAGE_1 = "Hey partner! I'm the";
-    private static final String WELCOME_MESSAGE_2 = "It's good to see you again! Here's what you have to do:";
+    private static final String WELCOME_MESSAGE_2 =
+            "It's good to see you again! Here are your tasks. How can I help you?";
     private static final String ADD_MESSAGE = "No problem. I've added the task!";
     private static final String SEARCH_MESSAGE = "Here's the matching tasks from your list!";
     private static final String LIST_MESSAGE = "Glad to help partner! Here are your tasks: ";
     private static final String LIST_EMPTY_MESSAGE = "It seems we're done for the day! Amazing!";
     private static final String LIST_FILLED_MESSAGE = "Let's get to work!";
     private static final String REMIND_MESSAGE = "Here are your upcoming tasks. Don't forget them!";
+    private static final String REMIND_OVERDUE_MESSAGE = "Oh no, you have some overdue tasks!";
+    private static final String REMIND_ONTIME_MESSAGE = "It seems you're right on track. Keep it up!";
+
     private static final String DELETE_MESSAGE_1 = "All right. That's one task down: ";
     private static final String DELETE_MESSAGE_2 = "Feels good to check that off, doesn't it?";
     private static final String DONE_MESSAGE = "Great! I've marked this task as done:";
@@ -120,19 +131,29 @@ public class Ui {
         return showToUser(SEARCH_MESSAGE, "", showTaskList(searchList));
     }
 
-    /**
-     * Prints out a sorted list of tasks, filtered by the specified task.
-     *
-     * @param remindList the list to filter and sort.
-     * @param type the task type to show reminders for.
-     * @return the formatted text string.
-     */
-    public String showRemindList(TaskList remindList, TaskType type) {
-        return showToUser(REMIND_MESSAGE,
-                "",
-                "TASK TYPE: " + type.toString(),
-                "",
-                showTaskList(remindList));
+
+    public String showRemindList(HashMap<TaskType, TaskList> taskDict, TaskType type) {
+        if (type == TODO) {
+            return showToUser(REMIND_MESSAGE, "", showTaskList(taskDict.get(TODO)));
+        }
+        if (type == EVENT) {
+            return showToUser(REMIND_MESSAGE, "", showTaskList(taskDict.get(EVENT)));
+        }
+        if (type == DEADLINE) {
+            boolean hasOverdue = !taskDict.get(DEADLINE_OVERDUE).isEmpty();
+            return showToUser(REMIND_MESSAGE, "")
+                    + (!taskDict.get(DEADLINE).isEmpty() ? showTaskList(taskDict.get(DEADLINE)) : "")
+                    + showToUser("", hasOverdue ? REMIND_OVERDUE_MESSAGE : REMIND_ONTIME_MESSAGE, "")
+                    + (hasOverdue ? showTaskList(taskDict.get(DEADLINE_OVERDUE)) : "");
+        }
+        // ALL - deadlines, then events, then todos
+        boolean hasOverdue = !taskDict.get(DEADLINE_OVERDUE).isEmpty();
+        return showToUser(REMIND_MESSAGE, "", DEADLINE.toString())
+                + (!taskDict.get(DEADLINE).isEmpty() ? showTaskList(taskDict.get(DEADLINE)) : "")
+                + showToUser("", hasOverdue ? REMIND_OVERDUE_MESSAGE : REMIND_ONTIME_MESSAGE,
+                    hasOverdue ? showTaskList(taskDict.get(DEADLINE_OVERDUE)) : "",
+                    EVENT.toString(), showTaskList(taskDict.get(EVENT)),
+                    TODO.toString(), showTaskList(taskDict.get(TODO)));
     }
 
     /**

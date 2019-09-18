@@ -40,13 +40,22 @@ public class Deadline extends Task {
         this.deadline = deadline;
     }
 
+    /**
+     * Transforms the instance's deadline string into a ZonedDateTime object.
+     *
+     * @return the ZonedDateTime object.
+     */
+    public ZonedDateTime getZonedDateTime() {
+        return Parser.parseDateTime(deadline, DEADLINE);
+    }
+
     public String getDeadline() {
         return this.deadline;
     }
 
     @Override
     public String toString() {
-        ZonedDateTime dateTime = Parser.parseDateTime(deadline, DEADLINE);
+        ZonedDateTime dateTime = getZonedDateTime();
         DateTimeFormatter deadlineFormatter = DateTimeFormatter.ofPattern(DEADLINE_FORMAT_PATTERN, LOCALE);
         return String.format("[D]%s (by: %s)", super.toString(), dateTime.format(deadlineFormatter));
     }

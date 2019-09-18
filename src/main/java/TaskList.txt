@@ -1,4 +1,2 @@
-D | 0 | finish this | by tmr
-
-E | 1 | meeting | at 7pm tmr
+T | 1 | readboo
 

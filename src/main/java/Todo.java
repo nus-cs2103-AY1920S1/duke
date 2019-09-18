@@ -9,6 +9,9 @@ public class Todo extends Tasks {
         super(dets, status);
     }
 
+    /**
+     * Sets task status to done using the method in the super class.
+     */
     public void doTask() {
         super.doTask();
     }

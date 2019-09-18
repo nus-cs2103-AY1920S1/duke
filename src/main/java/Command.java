@@ -1,3 +1,6 @@
+/**
+ * Simulates the different commands that the user can enter.
+ */
 public class Command {
 
     private boolean isExit;
@@ -9,14 +12,19 @@ public class Command {
         this.cmdDetails = everythingElse;
     }
 
-
+    /**
+     * Main method that executes the request by the user.
+     * @param list is the task list where all tasks are stored
+     * @param ui the ui handling the input and output of duke
+     * @param store the storage object that helps load information from duke into the file and vice versa.
+     * @return the corresponding string according to the command executed.
+     * @throws DukeException
+     */
     public String execute(TaskList list, Ui ui, SaveToFile store) throws DukeException {
         switch (cmd) {
         case "bye":
-            //System.out.println("Bye! See you again soon!");
             return "Bye! See you again soon!";
-            //this.isExit = true;
-            //break;
+
 
         case "list":
             return list.printAll();
@@ -85,7 +93,4 @@ public class Command {
         }
     }
 
-    public boolean isExit() {
-        return this.isExit;
-    }
 }

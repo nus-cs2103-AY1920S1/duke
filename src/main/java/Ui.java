@@ -18,21 +18,12 @@ public class Ui{
         return logo + "Hello! I'm Duke \nWhat can I do for you?";
     }
 
-    public void showLine() {
-        System.out.println("_______");
-    }
 
-    //public String readCommand() {
-        //return sc.nextLine();
-    //}
-    
     public String showError(String msg) {
-        //System.out.println(msg);
         return msg;
     } 
 
     public static String  printAddedMsg() {
-        //System.out.println("Task added!");
         return "Task added!";
     }
 

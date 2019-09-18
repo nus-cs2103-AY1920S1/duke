@@ -31,6 +31,10 @@ public class TaskList {
         return listOfTasks.size();
     }
 
+    /**
+     * Appends all the tasks in the list into one string to be output as duke response.
+     * @return a string of all the tasks in the proper format.
+     */
     protected String printAll() {
         StringBuilder sb = new StringBuilder();
         for(Tasks t: listOfTasks) {

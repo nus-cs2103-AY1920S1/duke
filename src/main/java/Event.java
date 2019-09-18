@@ -12,6 +12,9 @@ public class Event extends Tasks {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Sets task status to done using the method in the super class.
+     */
     public void doTask() {
         super.doTask();
     }

@@ -10,6 +10,10 @@ public class SaveToFile {
         this.filePath = filePath;
     }
 
+    /**
+     * Updates the txt file with the new task list.
+     * @param listOfTasks the list of tasks used while the program is running.
+     */
     public void updateFile(TaskList listOfTasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -23,6 +27,11 @@ public class SaveToFile {
         
     }
 
+    /**
+     * Loads the information from the text file where previous information is saved.
+     * @return
+     * @throws DukeException when there is no file/file is empty.
+     */
     public ArrayList<Tasks> load() throws DukeException {
         ArrayList<Tasks> taskList = new ArrayList<>();
         Scanner sc = new Scanner(filePath);

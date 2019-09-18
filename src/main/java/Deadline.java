@@ -12,6 +12,9 @@ public class Deadline extends Tasks {
         this.date = date;
     }
 
+    /**
+     * Sets task status to done using the method in the super class.
+     */
     public void doTask() {
         super.doTask();
     }

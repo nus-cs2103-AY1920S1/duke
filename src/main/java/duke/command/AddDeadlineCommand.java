@@ -30,7 +30,7 @@ public class AddDeadlineCommand extends Command {
         //adds all the words in the user input before the substring /by into deadlineNameBuilder
         while (!commandArray[arrayIndex].equals("/by")) {
             if (arrayIndex >= commandArray.length - 1) {
-                throw new DukeException("☹ OOPS!!! The '/by' sequence couldn't be found.");
+                throw new DukeException(":( OOPS!!! The '/by' sequence couldn't be found.");
             }
             deadlineNameBuilder.append(" " + commandArray[arrayIndex]);
             arrayIndex++;
@@ -40,7 +40,7 @@ public class AddDeadlineCommand extends Command {
         // creates the due date string in the form of deadlineDueBuilder
         StringBuilder deadlineDueBuilder = new StringBuilder();
         if (arrayIndex >= commandArray.length) {
-            throw new DukeException("☹ OOPS!!! The deadline must be specified.");
+            throw new DukeException(":( OOPS!!! The deadline must be specified.");
         }
         boolean isFirstWord = true;
         while (arrayIndex < commandArray.length) {

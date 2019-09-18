@@ -30,7 +30,7 @@ public class AddEventCommand extends Command {
         //creates name of event by appending all words before the substring /at
         while (!commandArray[arrayIndex].equals("/at")) {
             if (arrayIndex >= commandArray.length - 1) {
-                throw new DukeException("☹ OOPS!!! The '/at' sequence couldn't be found.");
+                throw new DukeException(":( OOPS!!! The '/at' sequence couldn't be found.");
             }
             eventNameBuilder.append(" " + commandArray[arrayIndex]);
             arrayIndex++;
@@ -40,7 +40,7 @@ public class AddEventCommand extends Command {
         StringBuilder eventDurationBuilder = new StringBuilder();
         //creates duration of event by appending all words after the substring /at
         if (arrayIndex >= commandArray.length) {
-            throw new DukeException("☹ OOPS!!! The event timing must be specified.");
+            throw new DukeException(":( OOPS!!! The event timing must be specified.");
         }
         boolean isFirstWord = true;
         while (arrayIndex < commandArray.length) {

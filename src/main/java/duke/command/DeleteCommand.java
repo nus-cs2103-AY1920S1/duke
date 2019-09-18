@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (index < 1 || tasks.getSize() < index) {
-            throw new DukeException("☹ OOPS!!! There is no available task in the given index.");
+            throw new DukeException(":( OOPS!!! There is no available task in the given index.");
         }
         Task toRemove = tasks.getTask(index - 1);
         tasks.deleteTask(index - 1);

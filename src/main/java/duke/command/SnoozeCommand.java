@@ -27,7 +27,7 @@ public class SnoozeCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException{
         if (index < 1 || tasks.getSize() < index) {
-            throw new DukeException("☹ OOPS!!! There is no available task in the given index.");
+            throw new DukeException(":( OOPS!!! There is no available task in the given index.");
         }
         Task taskToChange = tasks.getTask(index - 1);
         if(taskToChange instanceof Deadline){
@@ -37,7 +37,7 @@ public class SnoozeCommand extends Command {
             Event eventToChange = (Event) taskToChange;
             eventToChange.setDuration(newDateTime);
         } else {
-            throw new DukeException("☹ OOPS!!! Operation cannot be executed for this Task type");
+            throw new DukeException(":( OOPS!!! Operation cannot be executed for this Task type");
         }
         try {
             storage.updateFile(tasks);

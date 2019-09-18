@@ -3,6 +3,7 @@ E | 1 | 1UP Welcome Tea | 18th of September 1997, 6.00pm
 D | 1 | UTS2101 paper | 28th of August 2019, 4.00pm
 E | 1 | House Committea | 26th of August 2019, 10.00pm
 T | 1 | Minh
-E | 0 | Rally | 2nd of September 2019, 8.00pm
+E | 1 | Rally | 2nd of September 2019, 8.00pm
 T | 1 | duke
-E | 0 | sleep | 18th of September 1997, 6.00pm
+E | 1 | sleep | 18th of September 1997, 6.00pm
+T | 0 | IP

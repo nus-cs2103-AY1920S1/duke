@@ -5,8 +5,8 @@ import duke.exception.DukeShutDownException;
 import duke.util.Ui;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,8 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.application.Platform;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * JavaFX Controller for MainWindow. Provides the layout for the MainWindow,
@@ -32,6 +30,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Label bottomStatusBar;
 
     private Duke duke;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -43,12 +43,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        //scrollPane.setFitToHeight(false);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.HELLO, dukeImage));
     }
 
     public void setDuke(Duke d) {
         this.duke = d;
+        this.updateBottomStatus();
     }
 
     /**
@@ -65,19 +65,29 @@ public class MainWindow extends AnchorPane {
         } catch (DukeShutDownException e) {
             this.publishDukeResponse(Ui.GOODBYE);
             this.closeWindowAndExit();
+        } finally {
+            this.updateBottomStatus();
         }
+    }
+
+    // update bottom status bar to display current save location of task list in Duke
+    private void updateBottomStatus() {
+        this.bottomStatusBar.setText("Current Save Location:  "
+                + this.duke.getCurrentSavePath());
     }
 
     // closes duke gracefully. should only be called when a shutdown signal.
     // is received from the ByeCommand
     private void closeWindowAndExit() {
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
+        new Thread(() -> {
+            try {
+                Thread.sleep(SHUTDOWN_DELAY);
                 Platform.exit();
                 System.exit(0);
+            } catch (InterruptedException e) {
+                System.err.println(e.getStackTrace());
             }
-        }, SHUTDOWN_DELAY);
+        }).start();
     }
 
     // publishes Duke response to the chat window.

@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.util.Ui;
 
 
 /**
@@ -50,11 +51,15 @@ public class LoadCommand extends Command {
                     + this.filePath + "'\n\n"
                     + (new ListCommand()).initialize(storage, taskList, ui).execute()
                     // remind users that save location was also changed
-                    + "\nNOTE: I will also update the save path to the same location\n"
+                    + "\nNOTE: I will also update the save path to the same location.\n"
                     + "If you want to save to a different location, use the 'save' command!";
         } catch (DukeException e) { // upon failure, revert back to old path
             this.storage.changeSavePath(previousPath);
-            throw e;
+            throw new DukeException("Hmm, I couldn't locate any saved lists in the following file path:\n"
+                    + Ui.INDENT + "'" + this.filePath + "'"
+                    + "\n\nIn any case, I will continue to use the current file path:\n"
+                    + Ui.INDENT + "'" + previousPath + "'",
+                    e);
         }
     }
 }

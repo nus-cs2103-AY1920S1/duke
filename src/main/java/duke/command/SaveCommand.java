@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.util.Ui;
 
 /**
  * Class representing a command that changes the save file location.
@@ -48,11 +49,11 @@ public class SaveCommand extends Command {
         } catch (DukeException originalError) { // upon failure, revert back to last working path
             this.storage.changeSavePath(previousPath);
             // then continue to pass the exception upwards
-            throw new DukeException("Something went wrong when saving to the new savePath: \n'"
-                    + this.filePath
-                    + "'\n. I'm reverting back to the previous file path used: "
-                    + previousPath
-                    + "'", originalError);
+            throw new DukeException("I'm so sorry! I couldn't save to the following filepath:\n"
+                    + Ui.INDENT + "'" + this.filePath + "'"
+                    + "\n\nI'm reverting back to the previous file path used\n"
+                    + Ui.INDENT + "'" + previousPath + "'",
+                    originalError);
         }
     }
 }

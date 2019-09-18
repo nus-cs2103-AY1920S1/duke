@@ -38,7 +38,7 @@ public class FindCommand extends Command {
                     + searchWord
                     + "' ...";
         } else {
-            return "Here are the matching tasks in your list:\n"
+            return "Here are all the tasks in your list that matches the query '" + this.searchWord + "':\n"
                     + ui.indentMessage(results.toString());
         }
     }

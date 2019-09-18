@@ -8,7 +8,7 @@ The Duke Chat Assistant is for users who prefer a chat-assistant desktop-based a
 
 ## 2. Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `duke.jar` link:{repoURL}/releases[here].
+2. Download the latest `.jar` for Duke link:{repoURL}/releases[here].
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type a command message in the text box and press enter to send it to Duke
@@ -169,13 +169,13 @@ Format: `bye`
 
 ## 5. Command Summary
 - **Add Todo tasks:** `todo DESCRIPTION_OF_TASK`  
-eg. `todo write eulogy for crew`
+eg. `todo Write eulogy for crew`
 
 - **Add Deadline tasks:** `deadline DESCRIPTION_OF_TASK /by dd/MM/yyyy HHmm`  
-eg. `deadline finish investigative report /by 17/08/2050 0900`
+eg. `deadline Finish investigative report /by 17/08/2050 0900`
 
 - **Add Event tasks:** `event DESCRIPTION_OF_TASK /at dd/MM/yyyy HHmm`  
-eg. `event attend Wanderer 2050 investigative trial /at 18/08/2050 0900`
+eg. `event Attend Wanderer 2050 investigative trial /at 18/08/2050 0900`
 
 - **List:** `list`
 

@@ -60,8 +60,8 @@ public class Parser {
         case SaveCommand.KEYWORD:
             return Parser.parseSaveCommand(parameters);
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, "
-                    + "but I don't know what that means :-(");
+            throw new DukeException("At my current stage, I have no idea what that means."
+                    + "\nMaybe one day I'll know :(");
         }
     }
 
@@ -105,8 +105,8 @@ public class Parser {
         try {
             return new TodoCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! The description of a todo task"
-                    + " cannot be empty.", e);
+            throw new DukeException("Hey! You need to give me a description"
+                    + " for a todo task!", e);
         }
     }
 
@@ -118,8 +118,8 @@ public class Parser {
             DateTime at = DateTime.parseString(deadlineParams[1]);
             return new EventCommand(deadlineParams[0], at);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
-                    + " to create an event task.", e);
+            throw new DukeException("Hey! You need to give me both description\nAND time"
+                    + " to create an event task!", e);
         }
     }
 
@@ -131,8 +131,8 @@ public class Parser {
             DateTime by = DateTime.parseString(deadlineParams[1]);
             return new DeadlineCommand(deadlineParams[0], by);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! You need to give me both description\nAND time"
-                    + " to create a deadline task.", e);
+            throw new DukeException("Hey! You need to give me both description\nAND time"
+                    + " to create a deadline task!", e);
         }
     }
 
@@ -142,7 +142,7 @@ public class Parser {
         try {
             return new FindCommand(parameters[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Hey! You need to give me a search word to look for!", e);
+            throw new DukeException("I'm not psychic! You need to give me a search word to look for!", e);
         }
     }
 

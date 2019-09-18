@@ -28,9 +28,17 @@ public class Duke {
         try {
             this.taskList = new TaskList(this.storage.loadFromDisk());
         } catch (DukeException e) {
-            ui.showLoadingError();
             this.taskList = new TaskList();
         }
+    }
+
+    /**
+     * Returns the current save path that Duke is saving its internal state to.
+     *
+     * @return save path stored in the Storage object held by the Duke instance.
+     */
+    public String getCurrentSavePath() {
+        return this.storage.getSavePath();
     }
 
     /**

@@ -67,7 +67,7 @@ public class Storage {
             this.updateStartupConfig();
         } catch (IOException e) {
             throw new DukeException("I'm so sorry! I had trouble sync-ing the task list"
-                    + "to the disk!\n"
+                    + " to the disk!\n"
                     + "Any changes might not be saved ):", e);
         } catch (ClassNotFoundException e) {
             throw new DukeException("I'm sorry, I couldn't decipher the saved list at:\n"
@@ -95,7 +95,7 @@ public class Storage {
             oos.writeObject(list);
             oos.close();
             this.updateStartupConfig();
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             throw new DukeException("I'm so sorry! I had trouble saving the task list"
                     + "to the following path:\n"
                     + this.file.getPath() + "\n"

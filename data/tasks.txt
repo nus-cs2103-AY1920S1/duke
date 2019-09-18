@@ -1,6 +1,4 @@
-[T][?] hihi
-[T][?] hihi
-[E][?] wedding (at: chapel)
-[T][?] bye
-[T][?] now
-[T][?] yes
+[T][?] buy gift 4 Aunt Viv
+[T][?] test
+[E][?] Ashley's recital (at: school)
+[D][?] help Uncle Phil (by: Thu Dec 21 17:30:00 SGT 2000)

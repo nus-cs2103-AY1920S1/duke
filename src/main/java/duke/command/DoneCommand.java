@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.handler.Storage;
 import duke.ui.Ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DoneCommand extends Command {
@@ -15,10 +16,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
+    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws IOException {
         assert index > 0 && index <= tasks.size() : "The task index does not exist.";
         Task task = tasks.get(index - 1);
         task.markAsDone();
-        response = "Nice! I've marked this task as done:\n    " + task;
+        response = "Very good. I've marked this task as done:\n    " + task;
+        storage.save(tasks);
     }
 }

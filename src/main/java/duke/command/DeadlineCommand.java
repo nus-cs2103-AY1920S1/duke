@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.handler.Storage;
 import duke.ui.Ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeadlineCommand extends Command {
@@ -27,7 +28,8 @@ public class DeadlineCommand extends Command {
             tasks.add(deadlineTask);
             response = "Got it. I've added this task:\n    " + deadlineTask + "\nNow you have " + tasks.size()
                     + " task(s) in the " + "list.";
-        } catch (DukeException e) {
+            storage.save(tasks);
+        } catch (DukeException | IOException e) {
             response = e.getMessage();
         }
     }

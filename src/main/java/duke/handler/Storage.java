@@ -67,7 +67,7 @@ public class Storage {
                     list.add(task);
                 } else if (type.equals("E")) {
                     String[] infoArr = info.split("at:");
-                    String description = infoArr[0].substring(0, infoArr[1].length() - 1).trim();
+                    String description = infoArr[0].substring(0, infoArr[0].length() - 1).trim();
                     String at = infoArr[1].substring(1, infoArr[1].length() - 1);
                     task = new Event(description, at);
                     if (status.equals("\u2713")) {
@@ -76,7 +76,7 @@ public class Storage {
                     list.add(task);
                 } else if (type.equals("D")) {
                     String[] infoArr = info.split("by:");
-                    String description = infoArr[0].substring(0, infoArr[1].length() - 1).trim();
+                    String description = infoArr[0].substring(0, infoArr[0].length() - 1).trim();
                     String by = infoArr[1].substring(1, infoArr[1].length() - 1);
                     task = new Deadline(description, by);
                     if (status.equals("\u2713")) {

@@ -64,7 +64,7 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.setMinHeight(db.dialog.getMinHeight());
         BackgroundFill bFill = new BackgroundFill(
-                Color.web("#C5D1D8"),
+                Color.web("#FECFD7"),
                 new CornerRadii(5),
                 new Insets(5)
         );
@@ -83,7 +83,7 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.setMinHeight(db.dialog.getMinHeight());
         BackgroundFill bFill = new BackgroundFill(
-                Color.web("#B7C6CE"),
+                Color.web("#C4DBBA"),
                 new CornerRadii(5),
                 new Insets(5)
         );

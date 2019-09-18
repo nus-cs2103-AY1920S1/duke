@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,14 +30,15 @@ import javax.swing.*;
  * Duke is the main class that launches the chat bot when it is run.
  */
 public class Duke extends Application {
-    private static final String DUKE_GREETING = "Hey there! How can I help you today?";
+    private static final String DUKE_GREETING = "Master William, how can I help you today?";
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/will.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/jeffrey.png"));
+    private Image banner = new Image(this.getClass().getResourceAsStream("/images/banner.png"));
     /**
      * This is the storage class which does the saving and loading of the files.
      */
@@ -89,7 +91,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Jeffrey - Freshest Task Manager");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -129,7 +131,11 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        dialogContainer.getChildren().add(
+        ImageView bannerView = new ImageView(banner);
+        bannerView.setFitWidth(350);
+        bannerView.setPreserveRatio(true);
+        dialogContainer.getChildren().addAll(
+                bannerView,
                 DialogBox.getDukeDialog(DUKE_GREETING, new ImageView(duke).getImage())
         );
     }

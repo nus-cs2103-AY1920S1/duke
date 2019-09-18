@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.handler.Storage;
 import duke.ui.Ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class EventCommand extends Command {
@@ -18,7 +19,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (description.equals("")) {
             throw new DukeException("The description of an event cannot be empty.");
         }
@@ -26,5 +27,6 @@ public class EventCommand extends Command {
         tasks.add(eventTask);
         response = "Got it. I've added this task:\n    " + eventTask + "\nNow you have " + tasks.size()
                 + " task(s) in the " + "list.";
+        storage.save(tasks)
     }
 }

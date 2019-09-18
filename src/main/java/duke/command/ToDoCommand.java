@@ -6,6 +6,7 @@ import duke.task.ToDo;
 import duke.handler.Storage;
 import duke.ui.Ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ToDoCommand extends Command {
@@ -16,7 +17,7 @@ public class ToDoCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws DukeException, IOException {
         if (description.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
@@ -24,5 +25,6 @@ public class ToDoCommand extends Command {
         tasks.add(toDoTask);
         response = "Got it. I've added this task:\n    " + toDoTask + "\nNow you have " + tasks.size()
                 + " task(s) in the " + "list.";
+        storage.save(tasks);
     }
 }

@@ -29,7 +29,7 @@ public abstract class Command {
      * @throws DukeException Occurs when parts of the command cannot be executed.
      * @throws IOException Thrown when the file update fails.
      */
-    public abstract void execute(TaskList taskList, Ui ui) throws DukeException, IOException;
+    public abstract String execute(TaskList taskList, Ui ui) throws DukeException, IOException;
 
 }
 

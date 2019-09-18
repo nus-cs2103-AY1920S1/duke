@@ -52,13 +52,13 @@ public class DeleteCommand extends Command {
      * @throws IOException Thrown when the task cannot be removed from the file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws IOException {
+    public String execute(TaskList taskList, Ui ui) throws IOException {
         try {
             Task task = taskList.getTaskAt(index+1);
             taskList.removeFromList(task);
-            ui.printDeletion(task, taskList);
+            return ui.printDeletion(task, taskList);
         } catch (IndexOutOfBoundsException error3) {
-            ui.printOneLine(new DukeException("No such task", DukeExceptionType.MISSINGTASK).getMessage());
+            return ui.printOneLine(new DukeException("No such task", DukeExceptionType.MISSINGTASK).getMessage());
         }
     }
 

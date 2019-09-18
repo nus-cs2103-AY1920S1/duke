@@ -36,10 +36,10 @@ public class AddToDoCommand extends Command{
      * @throws IOException Thrown when the new task cannot be added to the file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws IOException {
+    public String execute(TaskList taskList, Ui ui) throws IOException {
         ToDo task = ToDo.createToDo(tokens);
         taskList.addToList(task);
-        ui.printAddMessage(task, taskList);
+        return ui.printAddMessage(task, taskList);
     }
     
 }

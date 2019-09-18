@@ -13,8 +13,6 @@ import duke.tasks.Task;
  */
 public class Ui {
 
-    final private static String horizontalLine = "    ____________________________________________________________";
-
     private Scanner sc = new Scanner(System.in);
 
 
@@ -40,14 +38,12 @@ public class Ui {
     /**
      * Prints the welcome message of the application.
      */
-    public void printWelcomeMessage() {
+    public String printWelcomeMessage() {
         List<String> start = new ArrayList<>();
         start.add("Hello! I'm Duke");
         start.add("What can I do for you?");
-        this.printInput(start);
+        return this.printInput(start);
     }
-
-
 
     /**
      * Prints a message when a task is added.
@@ -55,14 +51,17 @@ public class Ui {
      * @param task Task that was added.
      * @param taskList Task list where the Task is stored.
      */
-    public void printAddMessage(Task task, TaskList taskList) {
-        System.out.println(horizontalLine);
+    public String printAddMessage(Task task, TaskList taskList) {
+        StringBuilder builder = new StringBuilder();
 
-        System.out.println("     Got it. I've added this task: ");
-        System.out.println(String.format("       %s",task));
-        System.out.println(String.format("     Now you have %d tasks in the list.", taskList.getNumTasks()));
-        System.out.println(horizontalLine);
-        System.out.println();
+        appendWithNewline(builder,"Got it. I've added this task: ");
+        appendWithNewline(builder,task.toString());
+        appendWithNewline(builder,
+                String.format("Now you have %d tasks in the list.",taskList.getNumTasks()));
+
+        return builder.toString();
+
+
 
     }
 
@@ -72,14 +71,14 @@ public class Ui {
      * @param task Task that was deleted.
      * @param taskList Task list that the Task was removed from.
      */
-    public void printDeletion(Task task, TaskList taskList) {
-        System.out.println(horizontalLine);
+    public String printDeletion(Task task, TaskList taskList) {
 
-        System.out.println("     Noted. I've removed this task: ");
-        System.out.println(String.format("       %s",task));
-        System.out.println(String.format("     Now you have %d tasks in the list.",taskList.getNumTasks()));
-        System.out.println(horizontalLine);
-        System.out.println();
+        StringBuilder builder = new StringBuilder();
+        appendWithNewline(builder,"Noted. I've removed this task: ");
+        appendWithNewline(builder,
+                String.format("Now you have %d tasks in the list.",taskList.getNumTasks()));
+
+        return builder.toString();
 
     }
 
@@ -89,14 +88,14 @@ public class Ui {
      *
      * @param start List of Strings which needs to be printed sequentially
      */
-    public void printInput(List<String> start) {
-        System.out.println(horizontalLine);
+    public String printInput(List<String> start) {
+        StringBuilder builder = new StringBuilder();
         for (String input : start) {
-            System.out.println(String.format("     %s",input));
+            appendWithNewline(builder,input);
         }
 
-        System.out.println(horizontalLine);
-        System.out.println();
+        return builder.toString();
+
     }
 
     /**
@@ -104,11 +103,11 @@ public class Ui {
      *
      * @param input String to be printed
      */
-    public void printOneLine(String input) {
-        System.out.println(horizontalLine);
-        System.out.println(String.format("     %s",input));
-        System.out.println(horizontalLine);
-        System.out.println();
+    public String printOneLine(String input) {
+        StringBuilder builder = new StringBuilder();
+        appendWithNewline(builder,input);
+
+        return builder.toString();
 
     }
 
@@ -118,15 +117,18 @@ public class Ui {
      *
      * @param taskList List of tasks stored in the application.
      */
-    public void printNumberList(TaskList taskList) {
-        System.out.println(horizontalLine);
-        System.out.println("     Here are the tasks in your list:");
+
+
+    public String printNumberList(TaskList taskList) {
+
+        StringBuilder builder = new StringBuilder();
+        appendWithNewline(builder, "Here are the tasks in your list:");
         for (int i = 0; i < taskList.getNumTasks(); i++) {
-            System.out.println(String.format("     %d.%s",i+1, taskList.getTaskAt(i+1)));
+            appendWithNewline(builder,
+                    String.format("%d.%s",i+1, taskList.getTaskAt(i+1)));
         }
 
-        System.out.println(horizontalLine);
-        System.out.println();
+        return builder.toString();
     }
 
 
@@ -135,23 +137,30 @@ public class Ui {
      *
      * @param lst List of tasks with matching keyword
      */
-    public void printFindResults(List<Task> lst) {
-        System.out.println(horizontalLine);
-        System.out.println("     Here are the matching tasks in your list:");
+    public String printFindResults(List<Task> lst) {
+
+        StringBuilder builder = new StringBuilder();
+
+
+        builder.append("Here are the matching tasks in your list:");
+        builder.append("\n");
         for (int i = 0; i < lst.size(); i++) {
-            System.out.println(String.format("     %d.%s",i+1, lst.get(i)));
+            appendWithNewline(builder,
+                    String.format("%d.%s",i+1, lst.get(i)));
         }
-        System.out.println(horizontalLine);
-        System.out.println();
+
+        return builder.toString();
     }
 
 
     /**
      * Prints the exit message.
      */
-    public void printByeMessage() {
-        this.printOneLine("Bye. Hope to see you again soon!");
+    public String printByeMessage() {
+
+        return this.printOneLine("Bye. Hope to see you again soon!");
     }
+
 
 
     /**
@@ -159,11 +168,16 @@ public class Ui {
      *
      * @param e Exception object whose message is to be printed out
      */
-    public void printErrorMessage(Exception e) {
-        this.printOneLine(e.getMessage());
+    public String printErrorMessage(Exception e) {
+        return this.printOneLine(e.getMessage());
     }
 
-    
+
+    private void appendWithNewline(StringBuilder builder, String msg) {
+        builder.append(msg);
+        builder.append("\n");
+    }
+
     
 }
 

@@ -28,7 +28,7 @@ public class NullCommand extends Command{
      * @throws DukeException Thrown when the command does not exist
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public String execute(TaskList taskList, Ui ui) throws DukeException {
         throw new DukeException("Invalid Command! Please try again.", DukeExceptionType.INVALIDCOMMAND);
     }
 

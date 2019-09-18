@@ -56,7 +56,7 @@ public class DoneCommand extends Command{
      * @throws IOException Thrown when the file update fails.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws IOException {
+    public String execute(TaskList taskList, Ui ui) throws IOException {
         try {
             Task task = taskList.getTaskAt(index+1);
             boolean isDoneBefore = task.setDone();
@@ -67,12 +67,12 @@ public class DoneCommand extends Command{
 
             List<String> inst = List.of("Nice! I've marked this task as done: ",
                     "  "+task.toString());
-            ui.printInput(inst);
+            return ui.printInput(inst);
 
         } catch (IndexOutOfBoundsException error3) {
-            ui.printOneLine(new DukeException("No such task", DukeExceptionType.MISSINGTASK).getMessage());
+            return ui.printOneLine(new DukeException("No such task", DukeExceptionType.MISSINGTASK).getMessage());
         } catch (IllegalArgumentException error2) {
-            ui.printOneLine(new DukeException(error2.getMessage(), DukeExceptionType.GENERALMISTAKE).getMessage());
+            return ui.printOneLine(new DukeException(error2.getMessage(), DukeExceptionType.GENERALMISTAKE).getMessage());
         }
     }
 

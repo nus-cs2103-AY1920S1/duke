@@ -40,10 +40,10 @@ public class AddEventCommand extends Command{
      * @param ui The main user interface of the application.
      * @throws IOException Thrown when the new task cannot be added to the file.
      */
-    public void execute(TaskList taskList, Ui ui) throws IOException {
+    public String execute(TaskList taskList, Ui ui) throws IOException {
         Event task = new Event(this.description,this.date);
         taskList.addToList(task);
-        ui.printAddMessage(task, taskList);
+        return ui.printAddMessage(task, taskList);
     }
 
 

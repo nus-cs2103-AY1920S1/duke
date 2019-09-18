@@ -20,11 +20,11 @@ public class DukeException extends Exception {
     public String getMessage() {
     	switch (type) {
     		case INVALIDCOMMAND:
-    			return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    			return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     		case NOTINTEGER:
-    			return "☹ Invalid input, must be an integer!!";
+    			return "Invalid input, must be an integer!!";
     		case MISSINGTASK:
-    			return "☹ No such task";
+    			return "No such task";
     		case GENERALMISTAKE:
     			return super.getMessage();
             case FILENOTFOUND: 

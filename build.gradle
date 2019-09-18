@@ -33,7 +33,7 @@ javafx {
 }
 
 application {
-    mainClassName = 'Duke'
+    mainClassName = 'Launcher'
     run {
         standardInput = System.in
     }

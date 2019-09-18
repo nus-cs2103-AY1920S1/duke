@@ -43,9 +43,9 @@ public class FindCommand extends Command {
      * @param taskList list containing current tasks
      * @param ui user interface
      */
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         List<Task> resultList = taskList.findTasks(this.keyword);
-        ui.printFindResults(resultList);
+        return ui.printFindResults(resultList);
     }
 
 

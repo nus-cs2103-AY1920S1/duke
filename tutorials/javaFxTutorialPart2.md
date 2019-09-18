@@ -49,6 +49,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
+
 public class Duke extends Application {
 
     private ScrollPane scrollPane;

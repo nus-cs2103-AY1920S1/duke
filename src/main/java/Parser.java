@@ -35,17 +35,34 @@ public class Parser {
                 case "statistics":
                     return new StatisticsCommand();
                 case "done":
-                    int indexDone = Integer.parseInt(userInput[1]);
+                    int indexDone = 0;
+                    try {
+                        indexDone = Integer.parseInt(userInput[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("Index for done cannot be empty!!"
+                         + "\n Type 'help' for a list of commands");
+                    }
                     return new DoneCommand(indexDone);
                 case "delete":
                 case "del":
-                    int indexDelete = Integer.parseInt(userInput[1]);
+                    int indexDelete = 0;
+                    try {
+                        indexDelete = Integer.parseInt(userInput[1]);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("Index for delete cannot be empty!!"
+                                + "\n Type 'help' for a list of commands");
+                    }
                     return new DeleteCommand(indexDelete);
                 case "todo":
                 case "t":
                 case "td":
                 case "toDo":
-                    String descTodo = userInput[1];
+                    String descTodo = "";
+                    try {
+                        descTodo = userInput[1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    }
                     if (descTodo.isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
                     }
@@ -55,7 +72,12 @@ public class Parser {
                 case "d":
                 case "dl":
                 case "deadLine":
-                    String descDeadline = userInput[1];
+                    String descDeadline = "";
+                    try {
+                        descDeadline = userInput[1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                    }
                     if (descDeadline.isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
                     }
@@ -74,7 +96,12 @@ public class Parser {
                     return new AddCommand(deadline);
                 case "event":
                 case "e":
-                    String descEvent = userInput[1];
+                    String descEvent = "";
+                    try {
+                        descEvent = userInput[1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                    }
                     if (descEvent.isEmpty()) {
                         throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
                     }
@@ -93,7 +120,13 @@ public class Parser {
                     return new AddCommand(event);
                 case "find":
                 case "search":
-                    String query = userInput[1];
+                    String query = "";
+                    try {
+                        query = userInput[1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new DukeException("Please indicate what you would like to search for."
+                         + "\nType 'help' for a list of instructions.");
+                    }
                     return new FindCommand(query);
                 default :
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

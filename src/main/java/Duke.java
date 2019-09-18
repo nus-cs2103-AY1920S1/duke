@@ -211,7 +211,7 @@ public class Duke extends Application {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return ui.showError(e.getMessage());
+            return e.getMessage();
         }
     }
 

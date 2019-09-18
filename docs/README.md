@@ -1,5 +1,9 @@
 # User Guide
 
+![Ui](Ui.png)
+
+(branch for chatbot style UI is [here](https://github.com/le0tan/duke/tree/branch-redo_GUI))
+
 ## Features 
 
 ### Add tasks with type

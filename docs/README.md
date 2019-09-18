@@ -3,17 +3,17 @@
 ## Features 
 
 ### **1. Add tasks**
-*todos* - tasks without specific deadlines or dates\
-*deadlines* - tasks with specific deadlines\
+*todos* - tasks without specific deadlines or dates<br/>
+*deadlines* - tasks with specific deadlines<br/>
 *events* - tasks with specific time and dates
 
 **Usage**
 
 `Keywords` - `todo`, `deadline`, `event`
 
-Adds the task to the task list:\
-`todo [description]`\
-`deadline [description] [dd/MM/yyyy HHmm]`\
+Adds the task to the task list:<br/>
+`todo [description]`<br/>
+`deadline [description] [dd/MM/yyyy HHmm]`<br/>
 `event [description] [dd/MM/yyyy HHmm]`
 
 Example of usage:
@@ -24,16 +24,16 @@ Example of usage:
 
 Expected outcome:
 
-1. `Got it. I've added this task:`\
-`  [T][✘] watch Lord of the Rigs`\
+1. `Got it. I've added this task:`<br/>
+`  [T][✘] watch Lord of the Rigs`<br/>
 `Now you have 1 task in the list.`
 
-2. `Got it. I've added this task:`\
-`  [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`\
+2. `Got it. I've added this task:`<br/>
+`  [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`<br/>
 `Now you have 2 tasks in the list.`
 
-3. `Got it. I've added this task:`\
-`  [E][✘] attend seminar (at: 25/09/2019 1800)`\
+3. `Got it. I've added this task:`<br/>
+`  [E][✘] attend seminar (at: 25/09/2019 1800)`<br/>
 `Now you have 3 tasks in the list.`
 
 ### **2. Edit tasks**
@@ -43,8 +43,8 @@ Edits the description or the date and time of the task.
 
 ###`Keyword`- `edit`
 
-Edits the description/date and time of the task:\
-`edit description [new description]`\
+Edits the description/date and time of the task:<br/>
+`edit description [new description]`<br/>
 `edit datetime [dd/MM/yyyy HHmm}`
 
 Example of usage:
@@ -71,8 +71,8 @@ Example of usage:
 
 `done 2`
 
-Expected outcome:\
-`Nice! I've marked this task as done:`\
+Expected outcome:<br/>
+`Nice! I've marked this task as done:`<br/>
 `  [D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`
 
 ### **4. List tasks**
@@ -89,8 +89,8 @@ Example of usage:
 
 Expected outcome:
 
-`1.[T][✘] watch Lord of the Rings`\
-`2.[D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`\
+`1.[T][✘] watch Lord of the Rings`<br/>
+`2.[D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`<br/>
 `3.[E][✘] attend wedding (at: 25/09/2019 1800)`
 
 ### **5. Find tasks**
@@ -100,7 +100,7 @@ Finds a specific task  in the task list.
 **Usage**
 
 ###`Keyword`- `find`
-The keyword does not have to be case sensitive.\
+The keyword does not have to be case sensitive.<br/>
 `find [keyword(s)]`
 
 Example of usage:
@@ -109,7 +109,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the matching tasks in your list:`\
+`Here are the matching tasks in your list:`<br/>
 `2.[D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`
 
 ### **6. Delete tasks**

@@ -24,91 +24,28 @@ public class Parser {
      * @param command
      */
     public String parse(String command) {
-            assert command.isEmpty() : "Command cannot be empty";
+            assert command.isEmpty() : "Input cannot be empty";
             String[] inputArr = command.split(" ");
             String userCommand = inputArr[0];
             String dukeText;
             try {
                 if (userCommand.equals("bye")) {
-                    dukeText = this.ui.bye();
                     this.storage.close(this.commands);
+                    dukeText = this.ui.bye();
                 } else if (userCommand.equals("list")) {
-                    dukeText = this.ui.list() + "\n" + this.commands.list();
+                    dukeText = this.ui.list(this.commands);
                 } else if (userCommand.equals("done")) {
-                    try {
-                        int index = Integer.parseInt(inputArr[1]) - 1;
-                        try {
-                            Task doneTask = this.commands.done(index);
-                            dukeText = this.ui.done(doneTask);
-                            storage.done(doneTask, index + 1);
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("OOPS!!! Index for done does not exist in the list.");
-                        }
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("OOPS!!! Index for done cannot be empty.");
-                    }
+                    dukeText = parseDone(inputArr);
                 } else if (userCommand.equals("deadline")) {
-                    try {
-                        String dL = command.split(" ", 2)[1];
-                        try {
-                            String[] taskDeadLine = dL.split(" /by ");
-                            String taskD = taskDeadLine[0];
-                            String by = taskDeadLine[1];
-                            Task tt = new Deadline(taskD, new DateTime(by));
-                            this.commands.add(tt);
-                            dukeText = this.ui.addTask(tt, this.commands.size());
-                            storage.save(tt);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new DukeException("OOPS!!! The format for deadline is wrong. Please follow: <description> /by <time>");
-                        }
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("OOPS!!! The description of deadline cannot be empty.");
-                    }
+                    dukeText = parseTask(command, "d");
                 } else if (userCommand.equals("event")) {
-                    try {
-                        String eEvent = command.split(" ", 2)[1];
-                        try {
-                            String[] taskEvent = eEvent.split(" /at ");
-                            String taskE = taskEvent[0];
-                            String at = taskEvent[1];
-                            Task ee = new Event(taskE, new DateTime(at));
-                            this.commands.add(ee);
-                            dukeText = this.ui.addTask(ee, this.commands.size());
-                            storage.save(ee);
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new DukeException("OOPS!!! The format for event is wrong. Please follow: <description> /at <time>");
-                        }
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("OOPS!!! The description of event cannot be empty.");
-                    }
+                    dukeText = parseTask(command, "e");
                 } else if (userCommand.equals("todo")) {
-                    try {
-                        String todoT = command.split(" ", 2)[1];
-                        Task t = new Todo(todoT);
-                        this.commands.add(t);
-                        dukeText = this.ui.addTask(t, this.commands.size());
-                        storage.save(t);
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                    }
+                    dukeText = parseTask(command, "t");
                 } else if (userCommand.equals("delete")) {
-                    try {
-                        int i = Integer.parseInt(inputArr[1]) - 1;
-                        assert i <= commands.size() : "Index for delete is out of bounds";
-                        try {
-                            Task tt = this.commands.delete(i);
-                            dukeText = this.ui.delete(tt, this.commands.size());
-                            storage.delete(i + 1);
-                        } catch (IndexOutOfBoundsException e) {
-                            throw new DukeException("OOPS!!! Index for delete does not exist in the list.");
-                        }
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        throw new DukeException("OOPS!!! Index for delete cannot be empty.");
-                    }
+                    dukeText = parseDelete(inputArr);
                 } else if (userCommand.equals("find")) {
-                    assert inputArr.length > 1 : "Missing word to find";
-                    String word = inputArr[1];
-                    dukeText = this.ui.find() + "\n" + this.commands.find(word);
+                    dukeText = parseFind(inputArr);
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
@@ -117,6 +54,79 @@ public class Parser {
             }
 
             return dukeText;
+
+    }
+
+    private String parseTask(String command, String type) throws DukeException {
+        try {
+            String taskString = command.split(" ", 2)[1];
+            String delimiter = "";
+            Task tt = null;
+            if (type.equals("e")) {
+                delimiter = " /at ";
+            } else if (type.equals("d")) {
+                delimiter = " /by ";
+            } else {
+                tt = new Todo(taskString);
+            }
+            try {
+                String[] taskArr = taskString.split(delimiter);
+                String des = taskArr[0];
+                String dateTime = taskArr[1];
+                if (type.equals("e")) {
+                    tt = new Event(des, new DateTime(dateTime));
+                } else if (type.equals('d')) {
+                    tt = new Deadline(des, new DateTime(dateTime));
+                }
+                this.commands.add(tt);
+                storage.save(tt);
+                return this.ui.addTask(tt, this.commands.size());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                String messageError = type.equals("d") ? "OOPS!!! The format for deadline is wrong. Please follow: <description> /by <time>"
+                                                       : type.equals("e") ? "OOPS!!! The format for event is wrong. Please follow: <description> /at <time>"
+                                                                          : "OOPS!!! The description of a todo cannot be empty.";
+                throw new DukeException(messageError);
+            }
+        } catch (ArrayIndexOutOfBoundsException e){
+            throw new DukeException("OOPS!! Description for the task cannot be empty.");
+        }
+    }
+
+    private String parseDelete(String[] inputArr) throws DukeException {
+        try {
+            int i = Integer.parseInt(inputArr[1]) - 1;
+            assert i <= commands.size() : "Index for delete is out of bounds";
+            try {
+                Task tt = this.commands.delete(i);
+                storage.delete(i + 1);
+                return this.ui.delete(tt, this.commands.size());
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("OOPS!!! Index for delete does not exist in the list.");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! Index for delete cannot be empty.");
+        }
+    }
+
+    private String parseFind(String[] inputArr) {
+        assert inputArr.length < 2 : "Missing word to find";
+        String word = inputArr[1];
+        return this.ui.find() + "\n" + this.commands.find(word);
+    }
+
+    private String parseDone(String[] inputArr) throws DukeException {
+        try {
+            int index = Integer.parseInt(inputArr[1]) - 1;
+            try {
+                Task doneTask = this.commands.done(index);
+                this.storage.done(doneTask, index + 1);
+                return this.ui.done(doneTask);
+            } catch (IndexOutOfBoundsException e) {
+                throw new DukeException("OOPS!!! Index for done does not exist in the list.");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! Index for done cannot be empty.");
+        }
 
     }
 }

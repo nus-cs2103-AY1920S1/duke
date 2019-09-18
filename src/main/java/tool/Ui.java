@@ -7,7 +7,7 @@ public class Ui {
     /**
      * Greeting message for Duke
      */
-    public String hi() {
+    protected String hi() {
 
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
@@ -15,7 +15,7 @@ public class Ui {
     /**
      * Farewell message for Duke
      */
-    public String bye() {
+    protected String bye() {
 
         return "Bye. Hope to see you again soon!";
     }
@@ -23,16 +23,22 @@ public class Ui {
     /**
      * Handles the UI for "list" command
      */
-    public String list() {
-
-        return "Here are the tasks in your list:";
+    protected String list(TaskList tasks) {
+        int count = 1;
+        String str = "Here are the tasks in your list:\n";
+        for (Task t : tasks.getList()) {
+            str = str + count + ". " + t + "\n";
+            count++;
+        }
+        return str;
+//        return "Here are the tasks in your list:\n";
     }
 
     /**
      * Handles the UI for "done" command
      * @param t
      */
-    public String done(Task t) {
+    protected String done(Task t) {
 
         return "Nice! I've marked this task as done:\n  " + t;
     }
@@ -43,7 +49,7 @@ public class Ui {
      * @param size
      */
 
-    public String addTask(Task t, int size) {
+    protected String addTask(Task t, int size) {
         return "Got it. I've added this task:\n  " + t
                 + "\nNow you have " + size + " tasks in the list.";
     }
@@ -53,7 +59,7 @@ public class Ui {
      * @param t
      * @param size
      */
-    public String delete(Task t, int size) {
+    protected String delete(Task t, int size) {
         return "Noted. I've removed this task:\n  " + t +
                 "\nNow you have " + size + " tasks in the list.";
     }
@@ -61,7 +67,7 @@ public class Ui {
     /**
      * Handles the UI for "find" command
      */
-    public String find() {
+    protected String find() {
 
         return "Here are the matching tasks in your list:";
     }

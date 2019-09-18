@@ -2,16 +2,23 @@ package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
 abstract class TimeTask extends Task {
+    static final String DATE_FORMAT_HINT = "Please enter the date in the format d/M/yyyy HHmm e.g. 19/9/2019 1430";
+    private DateTimeFormatter saveFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy MMMM dd HHmm");
     private LocalDateTime time;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
 
     TimeTask(String description, String timeString) {
         super(description);
-        time = LocalDateTime.parse(timeString, formatter);
+        DateTimeFormatter parseFormatter = new DateTimeFormatterBuilder()
+                .appendOptional(saveFormatter)
+                .appendOptional(displayFormatter)
+                .toFormatter();
+        time = LocalDateTime.parse(timeString, parseFormatter);
     }
 
     /**
@@ -20,7 +27,7 @@ abstract class TimeTask extends Task {
      * @return Time as a string.
      */
     String getSaveTimeString() {
-        return formatter.format(time);
+        return saveFormatter.format(time);
     }
 
     /**
@@ -29,7 +36,7 @@ abstract class TimeTask extends Task {
      * @return Time as a string.
      */
     String getTimeString() {
-        return DateTimeFormatter.ofPattern("yyyy MMMM dd HHmm").format(time);
+        return displayFormatter.format(time);
     }
 
     /**

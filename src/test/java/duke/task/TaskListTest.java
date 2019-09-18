@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,7 +34,7 @@ class TaskListTest {
     }
 
     @Test
-    void getAsLines_normalTasks_success() {
+    void getAsLines_normalTasks_success() throws DukeException {
         ToDo todo = new ToDo("todo");
         Deadline deadline = new Deadline("deadline", "27/7/2019 1111");
         Event event = new Event("event", "28/8/2019 1234");

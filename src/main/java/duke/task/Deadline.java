@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.Storage;
 import duke.command.Command;
 
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class Deadline extends TimeTask {
@@ -32,11 +33,15 @@ public class Deadline extends TimeTask {
             assert separator > 1;
             String description = String.join(" ", wordList.subList(1, separator));
             String time = String.join(" ", wordList.subList(separator + 1, words.length));
-            Task task = new Deadline(description, time);
-            tasks.add(task);
-            storage.store(tasks.getAsLines());
-            return List.of("Got it. I've added this task:", "  " + task,
-                    "Now you have " + tasks.size() + " tasks in the list.");
+            try {
+                Task task = new Deadline(description, time);
+                tasks.add(task);
+                storage.store(tasks.getAsLines());
+                return List.of("Got it. I've added this task:", "  " + task,
+                        "Now you have " + tasks.size() + " tasks in the list.");
+            } catch (DateTimeParseException e) {
+                return List.of(TimeTask.DATE_FORMAT_HINT, "Could not interpret as date: " + time);
+            }
         };
     }
 

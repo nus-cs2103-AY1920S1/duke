@@ -23,10 +23,14 @@ public abstract class Duke {
         TaskList tasks;
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (DukeException | IOException e) {
             if (!(e instanceof NoSuchFileException)) {
+                if (e instanceof DukeException) {
+                    ui.showError(e.getMessage());
+                } else {
+                    e.printStackTrace();
+                }
                 ui.showError("Could not load tasks. Proceeding may overwrite old tasks.");
-                e.printStackTrace();
             }
             tasks = new TaskList();
         }

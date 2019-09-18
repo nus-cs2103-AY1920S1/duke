@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.DukeException;
+
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -18,7 +21,7 @@ public class TaskList {
      *
      * @param lines List of lines to parse tasks.
      */
-    public TaskList(List<String> lines) {
+    public TaskList(List<String> lines) throws DukeException {
         for (String line : lines) {
             tasks.add(parseTask(line));
         }
@@ -95,26 +98,47 @@ public class TaskList {
      * @param line Line to parse.
      * @return Parsed task.
      */
-    private Task parseTask(String line) {
+    private Task parseTask(String line) throws DukeException {
         String[] data = line.split("\\|");
         Task task;
-        switch (data[0]) {
-        case "T":
-            task = new ToDo(toOriginalString(data[2]));
-            break;
-        case "D":
-            task = new Deadline(toOriginalString(data[2]), toOriginalString(data[3]));
-            break;
-        case "E":
-            task = new Event(toOriginalString(data[2]), toOriginalString(data[3]));
-            break;
-        default:
-            return null;
+        try {
+            switch (data[0]) {
+            case "T":
+                ensureLength(data, 3, line);
+                task = new ToDo(toOriginalString(data[2]));
+                break;
+            case "D":
+                ensureLength(data, 4, line);
+                task = new Deadline(toOriginalString(data[2]), toOriginalString(data[3]));
+                break;
+            case "E":
+                ensureLength(data, 4, line);
+                task = new Event(toOriginalString(data[2]), toOriginalString(data[3]));
+                break;
+            default:
+                throw new DukeException("Error loading tasks: Unknown line in save file: " + line);
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Error loading tasks: Could not understand date in: " + line);
         }
         if (data[1].equals("1")) {
             task.markAsDone();
         }
         return task;
+    }
+
+    /**
+     * Throws a DukeException if the length of the data array is not equal to the provided expected length.
+     *
+     * @param data Data array to check length.
+     * @param length Expected length of data array.
+     * @param line Original line to include in exception message.
+     * @throws DukeException If the length of the data array is different from the expected length.
+     */
+    private void ensureLength(String[] data, int length, String line) throws DukeException {
+        if (data.length != length) {
+            throw new DukeException("Error loading tasks: Could not understand line in save file: " + line);
+        }
     }
 
     /**

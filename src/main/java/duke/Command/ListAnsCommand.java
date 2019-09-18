@@ -16,7 +16,7 @@ public class ListAnsCommand {
         //get the flashcard, get card list, get all ans, pass in to ui method for format, use string builder to append
         Flashcard flashcard = list.get_Flashcard(msg);
         ArrayList<Card> cardList = flashcard.get_CardList();
-        for(int i=0; i<flashcard.get_NoOfCards(); i++){
+        for(int i=0; i<cardList.size(); i++){
             builder.append((i+1) + ". " + cardList.get(i).get_Ans() + "\n");
         }
         return builder.toString();

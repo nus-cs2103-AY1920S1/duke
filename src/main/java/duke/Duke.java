@@ -30,6 +30,7 @@ public class Duke{
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
+        flashcards = new FlashcardList();
 
         /*try {
             tasks = new TaskList(storage.load());
@@ -70,7 +71,6 @@ public class Duke{
         }
 
         public String getResponse(String input) throws IOException {
-            flashcards = new FlashcardList();
             Command c = Parser.parse(input);
             String final_Output = c.execute(tasks, ui, storage, flashcards);
 

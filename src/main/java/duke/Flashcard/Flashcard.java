@@ -15,14 +15,18 @@ public class Flashcard {
     }
 
     public Flashcard() {
+        ArrayList<Card> t = new ArrayList<>();
+        this.cardList = t;
+        this.no_of_cards = t.size();
+        this.name = "";
     }
 
-    public void add(Card t){
-        cardList.add(t);
+    public void addCard(Card t){
+        this.get_CardList().add(t);
         no_of_cards++;
     }
-    public void remove(int index){
-        cardList.remove(index - 1);
+    public void remove(ArrayList<Card> CardList, int index){
+        CardList.remove(index - 1);
         no_of_cards--;
     }
     public String get_Name(){return name;}

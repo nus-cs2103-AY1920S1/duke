@@ -5,7 +5,7 @@ import duke.command.Command;
 /**
  * Starts execution of the bot.
  */
-public class Duke  {
+public class Duke {
 
     private Storage storage;
     private TaskList tasks;

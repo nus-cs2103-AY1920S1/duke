@@ -1,4 +1,4 @@
-package Notes;
+package notes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -16,12 +16,17 @@ public class Notes {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm", timezone = "UTC")
     private SimpleObjectProperty<LocalDateTime> date;
 
-
+    /**
+     * Constructor with some Json tags to allow reading from file.
+     * @param category contains type of category the note belongs too
+     * @param description contains actual note
+     * @param date optional date that can be included
+     */
     @JsonCreator
-    public Notes(@JsonProperty("category") String sourceDescription,
+    public Notes(@JsonProperty("category") String category,
                  @JsonProperty("description") String description,
-                 @JsonProperty("date") LocalDateTime date){
-        this.category = new SimpleStringProperty(sourceDescription);
+                 @JsonProperty("date") LocalDateTime date) {
+        this.category = new SimpleStringProperty(category);
         this.description = new SimpleStringProperty(description);
         this.dateCreated = new SimpleObjectProperty<>(LocalDateTime.now());
         this.date = new SimpleObjectProperty<>(date);

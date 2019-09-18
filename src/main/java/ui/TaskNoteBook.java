@@ -1,22 +1,16 @@
 package ui;
 
-import Notes.Notes;
+import notes.Notes;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
-
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class TaskNoteBook extends TableView {
+public class TaskNoteBook extends DateTable {
     @FXML
     private TableView<Notes> taskNoteBook;
     @FXML
@@ -27,17 +21,14 @@ public class TaskNoteBook extends TableView {
     private TableColumn<Notes, LocalDateTime> dateCol;
     @FXML
     private TableColumn<Notes, LocalDateTime> dateCreatedCol;
-    private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
 
-    public TaskNoteBook() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(NewGUI.class.getResource("/view/TaskNoteBook.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    /**
+     * Constructor for to create a tasknotebook table that display notes within a task or notebook.
+     * @param filepath contains the filepath to the FXML file
+     */
+    public TaskNoteBook(String filepath) {
+        super(filepath);
         categoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -46,40 +37,14 @@ public class TaskNoteBook extends TableView {
         dateCreatedCol.setCellFactory(new ColumnFormatter<>(outputFormat));
     }
 
-    public TableView<Notes> getCashFlowTableView(){
+    public TableView<Notes> getTaskNoteBook() {
         return taskNoteBook;
     }
 
-    public void setCashFlowTableView(ObservableList<Notes> noteBook){
+    public void setTaskNoteBook(ObservableList<Notes> noteBook) {
         taskNoteBook.setItems(noteBook);
     }
 
-    private static class ColumnFormatter<S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
-
-        private final DateTimeFormatter format;
-
-        ColumnFormatter(DateTimeFormatter format) {
-            super();
-            this.format = format;
-        }
-
-        @Override
-        public TableCell<S, T> call(TableColumn<S, T> arg0) {
-            return new TableCell<S, T>() {
-                @Override
-                protected void updateItem(T item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (item == null || empty) {
-                        setGraphic(null);
-                    } else {
-                        LocalDateTime ld = (LocalDateTime) item;
-                        String val = ld.format(format);
-                        setGraphic(new Label(val));
-                    }
-                }
-            };
-        }
-    }
 }
 
 

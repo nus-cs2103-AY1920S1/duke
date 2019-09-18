@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.time.LocalDateTime;
 
-public class Notebook extends Task{
+public class Notebook extends Task {
 
     @JsonCreator
     public Notebook(@JsonProperty("description") String description,

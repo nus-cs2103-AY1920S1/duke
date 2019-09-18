@@ -30,7 +30,7 @@ public class TaskList {
      * prints the ui after adding a new task.
      */
     public void printNewTask() {
-        ui.printAddedItem(tasks.get(tasks.size()-1).getOverallStatus(), tasks.size());
+        ui.printAddedItem(tasks.get(tasks.size() - 1).getOverallStatus(), tasks.size());
     }
 
     /**
@@ -71,6 +71,7 @@ public class TaskList {
             break;
         case "notebook":
             tasks.add(new Notebook(description,completionStatus,date));
+            break;
         default:
             // not necessary as tasktype can only be the above 3
         }
@@ -81,10 +82,10 @@ public class TaskList {
      * @param deletedEvent determines the task to be deleted
      */
     public void removeTask(String deletedEvent) {
-        if (deletedEvent.contains("all")){
+        if (deletedEvent.contains("all")) {
             tasks.clear();
-            ui.printRemovedItem("All tasks", tasks.size()+1);
-        }else {
+            ui.printRemovedItem("All tasks", tasks.size() + 1);
+        } else {
             int taskTodDelete = Integer.parseInt(deletedEvent);
             ui.printRemovedItem(tasks.get(taskTodDelete - 1).getOverallStatus(), tasks.size());
             tasks.remove(taskTodDelete - 1);

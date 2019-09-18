@@ -54,6 +54,7 @@ public class Parser {
             } else if (actionKey.equals("delete")) { // delete a specific plan
                 LinkedList<Task> totalTasks = tasks.getListOfTasks();
                 int index = Integer.parseInt(keyList[1]);
+                checkForValidDeletion(totalTasks, index);
                 String outputText = ui.printTaskDelete(totalTasks, index);
                 tasks.deleteTask(index - 1);
                 saveFile(storage, tasks);
@@ -89,13 +90,13 @@ public class Parser {
                     saveFile(storage, tasks);
                     return ui.printAddTask(tasks, newTodo);
                 } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                    throw new DukeException("I'm sorry, but I don't know what that means  :(");
                 }
             }
         } catch (DukeException err) {
             return err.getMessage();
         } catch (Exception err) {
-            return "[Exception] " + err;
+            return "[Exception]\n" + err;
         }
     }
 
@@ -127,5 +128,15 @@ public class Parser {
 
     private static void saveFile(Storage storage, TaskList tasks) {
         storage.writeFile(tasks.getListOfTasks());
+    }
+
+    private static void checkForValidDeletion(LinkedList<Task> totalTasks, int index) throws DukeException {
+        if (totalTasks.size() == 0) {
+            throw new DukeException("You cannot delete something from an empty list");
+        } else if (index < 1) {
+            throw new DukeException("Index cannot be negative or zero");
+        } else if (index > totalTasks.size()) {
+            throw new DukeException("Number is not in the list of tasks");
+        }
     }
 }

@@ -9,6 +9,7 @@
 1. Shortcut commands and modifying them
 1. Command summary
 
+-----------------------------------------------------------------------
 
 ## 1. Introduction
 This is a modified Duke task manager named Pepeg for all your daily tasking needs.

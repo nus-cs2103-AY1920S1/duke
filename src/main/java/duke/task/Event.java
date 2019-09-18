@@ -13,9 +13,18 @@ public class Event extends Task {
         this.at = new DateAndTime(at);
     }
 
+    public Event(String description, String by, int freq) throws DukeException {
+        super(description, freq);
+        this.at = new DateAndTime(by);
+    }
+
+    public DateAndTime getDateAndTime() {
+        return at;
+    }
+
     @Override
     public String toSave() {
-        return "E | " + (isDone ? 1 : 0) + " | " + description + " | " + at.toSave();
+        return "E | " + (isDone ? 1 : 0) + " | " + description + " | " + frequency + " | " + at.toSave();
     }
 
     @Override

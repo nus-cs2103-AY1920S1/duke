@@ -11,4 +11,8 @@ public class TodoCommand extends AddCommand {
         super(new Todo(command));
     }
 
+    public TodoCommand(String command, int freq) {
+        super(new Todo(command, freq));
+    }
+
 }

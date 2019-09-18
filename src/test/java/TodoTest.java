@@ -9,10 +9,10 @@ public class TodoTest {
     @Test
     public void todoSavingAsString_todo_expectedString() {
         Task t = new Todo("buy groceries");
-        assertEquals("T | 0 | buy groceries", t.toSave());
+        assertEquals("T | 0 | buy groceries | 0", t.toSave());
 
         t.markAsDone();
-        assertEquals("T | 1 | buy groceries", t.toSave());
+        assertEquals("T | 1 | buy groceries | 0", t.toSave());
     }
 
     @Test

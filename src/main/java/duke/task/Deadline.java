@@ -13,9 +13,18 @@ public class Deadline extends Task {
         this.by = new DateAndTime(by);
     }
 
+    public Deadline(String description, String by, int freq) throws DukeException {
+        super(description, freq);
+        this.by = new DateAndTime(by);
+    }
+
+    public DateAndTime getDateAndTime() {
+        return by;
+    }
+
     @Override
     public String toSave() {
-        return "D | " + (isDone ? 1 : 0) + " | " + description + " | " + by.toSave();
+        return "D | " + (isDone ? 1 : 0) + " | " + description + " | " + frequency + " | " + by.toSave();
     }
 
     @Override

@@ -41,14 +41,26 @@ public class Parser {
             return new DeleteCommand(j);
         case "todo":
             try {
-                return new TodoCommand(command[1]);
+                String[] detailsTRecurs = command[1].split(" /every ");
+                if (detailsTRecurs.length == 1) {
+                    return new TodoCommand(detailsTRecurs[0]);
+                } else {
+                    int freq = Integer.parseInt(detailsTRecurs[1]);
+                    return new TodoCommand(detailsTRecurs[0], freq);
+                }
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
             }
         case "deadline":
             try {
                 String[] detailsD = command[1].split(" /by ");
-                return new DeadlineCommand(detailsD[0], detailsD[1]);
+                String[] detailsDRecurs = detailsD[1].split(" /every ");
+                if (detailsDRecurs.length == 1) {
+                    return new DeadlineCommand(detailsD[0], detailsDRecurs[0]);
+                } else {
+                    int freq = Integer.parseInt(detailsDRecurs[1]);
+                    return new DeadlineCommand(detailsD[0], detailsDRecurs[0], freq);
+                }
             } catch (DukeException e) {
                 throw new DukeException(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -57,7 +69,13 @@ public class Parser {
         case "event":
             try {
                 String[] detailsE = command[1].split(" /at ");
-                return new EventCommand(detailsE[0], detailsE[1]);
+                String[] detailsERecurs = detailsE[1].split(" /every ");
+                if (detailsERecurs.length == 1) {
+                    return new EventCommand(detailsE[0], detailsERecurs[0]);
+                } else {
+                    int freq = Integer.parseInt(detailsERecurs[1]);
+                    return new EventCommand(detailsE[0], detailsERecurs[0], freq);
+                }
             } catch (DukeException e) {
                 throw new DukeException(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e) {

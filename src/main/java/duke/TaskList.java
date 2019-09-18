@@ -1,6 +1,10 @@
 package duke;
 
+import duke.task.DateAndTime;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
+import duke.task.Todo;
 
 import java.util.LinkedList;
 
@@ -49,9 +53,30 @@ public class TaskList {
         }
 
         Task t = taskList.remove(taskNum);
+        int freq = t.getFrequency();
         t.markAsDone();
+
         taskList.add(taskNum, t);
         assert t.getStatusIcon().equals("\u2713");
+
+        if (freq != 0) {
+            Task tRecur = new Task("dummy task");
+            if (t instanceof Todo) {
+                tRecur = new Todo(t.getDescription(), freq);
+            } else if (t instanceof Deadline) {
+                DateAndTime dt = ((Deadline) t).getDateAndTime();
+                String nextDateAndTime = dt.getNext(freq);
+                tRecur = new Deadline(t.getDescription(), nextDateAndTime, freq);
+            } else if (t instanceof Event) {
+                DateAndTime dt = ((Event) t).getDateAndTime();
+                String nextDateAndTime = dt.getNext(freq);
+                tRecur = new Event(t.getDescription(), nextDateAndTime, freq);
+            } else {
+                assert false;
+            }
+
+            taskList.add(tRecur);
+        }
 
         return t;
     }

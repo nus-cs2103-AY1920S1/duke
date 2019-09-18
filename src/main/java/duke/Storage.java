@@ -57,17 +57,18 @@ public class Storage {
         while (readFile.hasNext()) {
             String nextTask = readFile.nextLine();
             String[] details = nextTask.split(Pattern.quote(" | "));
-            assert details.length == 3 || details.length == 4;
+            assert details.length == 4 || details.length == 5;
 
             String type = details[0];
+            int freq = Integer.parseInt(details[3]);
             Task task = new Task("dummy task");
 
             if (type.equals("T")) {
-                task = new Todo(details[2]);
+                task = new Todo(details[2], freq);
             } else if (type.equals("D")) {
-                task = new Deadline(details[2], details[3]);
+                task = new Deadline(details[2], details[4], freq);
             } else if (type.equals("E")) {
-                task = new Event(details[2], details[3]);
+                task = new Event(details[2], details[4], freq);
             } else {
                 assert false;
             }

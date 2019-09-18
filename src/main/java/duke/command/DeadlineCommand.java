@@ -12,4 +12,7 @@ public class DeadlineCommand extends AddCommand {
         super(new Deadline(description, by));
     }
 
+    public DeadlineCommand(String description, String by, int freq) throws DukeException {
+        super(new Deadline(description, by, freq));
+    }
 }

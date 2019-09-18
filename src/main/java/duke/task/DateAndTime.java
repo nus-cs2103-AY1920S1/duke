@@ -7,6 +7,8 @@ import duke.DukeException;
  */
 public class DateAndTime {
     protected String dateAndTime;
+    protected String time;
+
     protected int date;
     protected int month;
     protected int year;
@@ -23,7 +25,9 @@ public class DateAndTime {
         try {
             String[] split = dateAndTime.split(" ");
             String date[] = split[0].split("/");
-            int time = Integer.parseInt(split[1]) / 100;
+
+            this.time = split[1];
+            int time = Integer.parseInt(this.time) / 100;
 
             int dateToCheck = Integer.parseInt(date[0]);
             int monthToCheck = Integer.parseInt(date[1]);
@@ -66,6 +70,28 @@ public class DateAndTime {
 
     private String getDateSuffix() {
         return (date == 1) ? "st" : (date == 2) ? "nd" : (date == 3) ? "rd" : "th";
+    }
+
+    public String getNext(int freq) {
+        int nextDate = date + freq;
+        int nextMonth = month;
+        int nextYear = year;
+
+        int diff = nextDate - monthToMaxDays[month];
+
+        while (diff > 0) {
+            nextDate = diff;
+            nextMonth += 1;
+
+            if (nextMonth > 12) {
+                nextYear += 1;
+                nextMonth = 1;
+            }
+
+            diff = nextDate - monthToMaxDays[nextMonth];
+        }
+
+        return nextDate + "/" + nextMonth + "/" + nextYear + " " + time;
     }
 
     /**

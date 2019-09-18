@@ -7,9 +7,16 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    protected int frequency;
+
     public Task(String description) {
+        this(description, 0);
+    }
+
+    public Task(String description, int frequency) {
         this.description = description;
         this.isDone = false;
+        this.frequency = frequency;
     }
 
     /**
@@ -35,6 +42,10 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public int getFrequency() {
+        return frequency;
     }
 
     /**

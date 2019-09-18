@@ -12,4 +12,8 @@ public class EventCommand extends AddCommand {
         super(new Event(description, at));
     }
 
+    public EventCommand(String description, String by, int freq) throws DukeException {
+        super(new Event(description, by, freq));
+    }
+
 }

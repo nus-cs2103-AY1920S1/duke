@@ -30,8 +30,4 @@ public class TodoCommandTest {
         assertEquals(tExpected.get(0).toString(), t.getTasks().get(0).toString());
     }
 
-    @Test
-    public void exiting_todoCommand_noExitingOrFalse() {
-        assertEquals(false, new TodoCommand("buy groceries").isExit());
-    }
 }

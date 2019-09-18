@@ -9,9 +9,13 @@ public class Todo extends Task {
         super(description);
     }
 
+    public Todo(String description, int frequency) {
+        super(description, frequency);
+    }
+
     @Override
     public String toSave() {
-        return "T | " + (isDone ? 1 : 0) + " | " + description;
+        return "T | " + (isDone ? 1 : 0) + " | " + description + " | " + frequency;
     }
 
     @Override

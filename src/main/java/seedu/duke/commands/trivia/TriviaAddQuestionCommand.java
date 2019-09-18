@@ -15,7 +15,7 @@ public class TriviaAddQuestionCommand extends TriviaCommand {
     @Override
     public String execute(Trivia trivia, UI ui, Storage storage) throws TriviaException {
         trivia.addQuestion(toAdd);
-        storage.writeTrivia(trivia);
+        storage.writeTrivia();
         return ui.questionAdded(toAdd);
     }
 }

@@ -1,20 +1,23 @@
-# User Guide
+# Virgil User Guide
 
 ## Features 
 
 ### Feature 1 
-Description of feature.
+Creates a todo Task from user input.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - Creates a todo Task from the following String
 
-Describe action and its outcome.
+Todo creates a todo task from the following String and adds it
+into the TaskList
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo Do Laundry`
 
 Expected outcome:
 
-`outcome`
+`Got it. I've added this task:
+  [T][X] Do Laundry
+Now you have X tasks in this list`

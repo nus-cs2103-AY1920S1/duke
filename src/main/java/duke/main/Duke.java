@@ -17,7 +17,9 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor for duke.
+     * Initialises a new Duke by loading the save file from a filePath.
+     *
+     * @param filePath the file path that storage loads from
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);

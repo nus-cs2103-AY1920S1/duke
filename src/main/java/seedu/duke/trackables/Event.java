@@ -1,11 +1,12 @@
 package seedu.duke.trackables;
 
-import seedu.duke.exceptions.InvalidArgumentException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents an Event that starts at a specific time. It contains a description and a start date.
+ */
 public class Event extends Task {
 
     private Date at;
@@ -29,14 +30,14 @@ public class Event extends Task {
         }
     }
 
-    private String getAtAsFormatedDate() {
+    private String getAtAsFormattedDate() {
         return new SimpleDateFormat("d/MM/yyyy HHmm").format(at);
     }
 
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-            + getAtAsFormatedDate() + ")";
+            + getAtAsFormattedDate() + ")";
     }
 
     @Override
@@ -45,7 +46,7 @@ public class Event extends Task {
         sb.append("E").append(" | ")
             .append(isDone ? "1" : "0")
             .append(" | ").append(this.description)
-            .append(" | ").append(getAtAsFormatedDate());
+            .append(" | ").append(getAtAsFormattedDate());
         return sb.toString();
     }
 }

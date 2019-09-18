@@ -5,8 +5,8 @@ import seedu.duke.exceptions.DukeException;
 import java.util.Scanner;
 
 /**
+ * Represents the User Interface that the user interacts with. It handles input and output, from and to the user.
  * The Ui Class is static as there is exactly one Ui in Duke, and more should not be instantiated.
- * A Singleton implementation would have been excessive for a utility class.
  */
 public class Ui {
 

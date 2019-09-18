@@ -1,5 +1,8 @@
 package seedu.duke.exceptions;
 
+/**
+ * Top Level abstraction of all Duke-Specific Exceptions.
+ */
 public class DukeException extends Exception {
 
     public DukeException() {

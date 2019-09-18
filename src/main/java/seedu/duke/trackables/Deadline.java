@@ -4,6 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents a Deadline that needs to be met. It contains a description and a completion deadline.
+ */
 public class Deadline extends Task {
 
     private Date by;

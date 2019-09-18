@@ -1,13 +1,9 @@
 package seedu.duke.storage;
 
-import seedu.duke.Duke;
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.InvalidArgumentException;
-import seedu.duke.exceptions.InvalidCommandException;
 import seedu.duke.trackables.Task;
 
 import java.util.ArrayList;
-import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 
 public class TaskList {
@@ -23,6 +19,11 @@ public class TaskList {
     }
 
     // CRUD Tasks
+
+    /**
+     * Adds the task {@code newTask} to {@code tasks}.
+     * @param newTask The task to add.
+     */
     public void add(Task newTask) {
         this.tasks.add(newTask);
     }

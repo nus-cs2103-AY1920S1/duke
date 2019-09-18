@@ -6,15 +6,24 @@ import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
 import seedu.duke.ui.Ui;
 
+/**
+ * The Duke Assistant keeps track of 'trackables' such as ToDos, Events and Deadlines.
+ * The CLI Interface makes it ideal for a no distraction environment.
+ *
+ * @since 2019-08-13
+ */
+
 public class Duke {
 
     private TaskList tasks;
 
     /**
-     * Constructs a new Duke Object by instantiating the TaskList by loading from Storage.
+     * Constructs a new Duke Object.
+     * TaskList is instantiated by loading from Storage if data exists.
+     * If existing data does not exist or ends in an exception, an empty TaskList is returned.
      */
     public Duke() {
-        // Load from file
+        // Load from dish
         try {
             tasks = Storage.getInstance().loadFromDisk();
         } catch (Storage.StorageOperationException e) {
@@ -25,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Main Method.
+     * Main Method. Duke is instantiated and run here.
      *
      * @param args string arguments for console.
      */

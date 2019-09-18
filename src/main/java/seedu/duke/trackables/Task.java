@@ -1,19 +1,22 @@
 package seedu.duke.trackables;
 
-
+/**
+ * Represents a plain old Task that contains a single description and its done state.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
-
-    public Task() {
-
-    }
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
 
+    /**
+     * Constructs a new Task using string arguments. Typically used when restoring Task from Storage.
+     *
+     * @param args String arguments containing Event data from Storage.
+     */
     public Task(String... args) {
         this.isDone = !args[1].equals("0");
         this.description = args[2];

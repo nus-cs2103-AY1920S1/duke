@@ -1,20 +1,61 @@
 # User Guide
 
-## Features 
+## COMIC DUKE
+An application which helps to `enhance` and `declutter` **your** life in `COMIC SANS`. 
 
-### Feature 1 
-Description of feature.
+> Sincere, Simple and Straightforward
 
-## Usage
+## Why should I care?
 
-### `Keyword` - Describe action
+### Add Todo, Event and Deadline: `todo` `event` `deadline`
+Keep track of your tasks in a simple and straight manner.
 
-Describe action and its outcome.
+Example of usage
+* todo `<description>`
+    * todo return book
+    
+* event `<description>` /at `<DD/MM/YYYY HHMM format>` 
+    * event flying carpet /at 02/12/2019 1400
+    
+* deadline `<description>` /by `<DD/MM/YYYY HHMM format>`
+    * deadline learn how to fly a carpet /by 03/12/2019 1401
+
+
+### Mark tasks as done: `done`
+Mark your tasks as done once its done. Its just that simple!
+
+Example of usage
+* done `<index>`
+    * done 1
+    
+* done `<index>`, `<index>`, `<index>`...
+    * done 1,2,3,4
+
+
+### Delete tasks: `delete`
+Delete it if its a mistake just like you are.
 
 Example of usage: 
+* delete `<index>`
+    * delete 1
+    
+* delete `<index>`, `<index>`, `<index>`...
+    * delete 1,2,3,4
 
-`keyword (optional arguments)`
+### List all tasks: `list`
+Sees all your tasks and makes you feel stressed or happy depending on how long the list is.
 
-Expected outcome:
+Example of usage: 
+* list
 
-`outcome`
+### Find a task: `find`
+Find your tasks by searching for the description.
+
+Example of usage: 
+* find `<desciption>`
+
+    * find todo
+    * find carpet
+
+
+*What are you waiting for? Go comic sans*

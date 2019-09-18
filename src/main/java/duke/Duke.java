@@ -19,15 +19,18 @@ public class Duke {
      * Constructor for class Duke.
      */
     public Duke() {
-        String filePath = "data/duke.txt";
+        String filePath = "data/duke.txt"; // C:\CS2103T\duke\data\duke.txt
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.loadTasks());
         } catch (DukeException | ParseException e) {
             tasks = new TaskList(); // if there are no tasks to load from tasks.txt or tasks.txt is corrupted
         } catch (FileNotFoundException e) {
+            File directory = new File("data");
             File file = new File(filePath);
+            tasks = new TaskList();
             try {
+                directory.mkdir();
                 file.createNewFile();
             } catch (IOException ex) {
                 ex.printStackTrace();

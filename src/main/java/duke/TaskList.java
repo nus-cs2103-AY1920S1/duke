@@ -60,7 +60,7 @@ public class TaskList {
     /**
      * Returns the task after marking it as done.
      *
-     * @param num Number of the tasks in the task list.
+     * @param num Number of the task in the task list.
      * @return task Task that has been marked as done.
      */
     public Task markAsDone(int num) {
@@ -99,7 +99,7 @@ public class TaskList {
      * Returns a string consisting of all tasks that matches the given keyword in the task list.
      *
      * @param s The keyword.
-     * @return string All tasks that manage the keyword.
+     * @return String All tasks that contain the keyword.
      */
     public String find(String s) {
         List<Task> temp = new ArrayList<>();
@@ -115,7 +115,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a string containing the task list in order of which task is added first.
+     * Returns a string containing all tasks in the task list.
      */
     public String printList() {
         int i = 1;

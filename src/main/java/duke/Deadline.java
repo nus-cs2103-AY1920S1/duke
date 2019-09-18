@@ -26,7 +26,7 @@ public class Deadline extends Task {
     /**
      * Returns the formatted deadline of the task.
      *
-     * @return by Deadline of the task.
+     * @return String Deadline of the task.
      */
     public String getBy() {
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a");

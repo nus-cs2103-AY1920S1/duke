@@ -56,7 +56,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (input.equals("bye")) {
             new Timer().schedule(new TimerTask() {
-                public void run () { Platform.exit(); }
+                public void run() {
+                    Platform.exit();
+                }
             }, 1000);
         }
     }

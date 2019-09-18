@@ -26,7 +26,7 @@ public class Event extends Task {
     /**
      * Returns the formatted date and time of the event.
      *
-     * @return at Date and time of event.
+     * @return String Date and time of event.
      */
     public String getAt() {
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm a");

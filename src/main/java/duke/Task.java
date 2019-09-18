@@ -2,7 +2,7 @@ package duke;
 
 /**
  * The Task class contains methods for query of the tasks
- * as well as to set tasks as done.
+ * as well as to sets tasks as done.
  */
 public class Task {
 
@@ -14,6 +14,7 @@ public class Task {
      * Constructor for Task class.
      *
      * @param description The task.
+     * @param isPriority Priority level of task.
      */
     public Task(String description, boolean isPriority) {
         this.description = description;
@@ -22,9 +23,9 @@ public class Task {
     }
 
     /**
-     * Returns "+" symbol if a task is done.
+     * Returns status symbol symbol of a task.
      *
-     * @return symbol A tick or cross symbol.
+     * @return symbol Plus symbol if task is done and blank otherwise.
      */
     public String getStatusIcon() {
         return (isDone ? "+" : " ");

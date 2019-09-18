@@ -17,6 +17,7 @@ public class Parser {
      * Constructor for Parser class.
      *
      * @param str String that needs to be parsed.
+     * @param p Priority level of task.
      */
     public Parser(String str, boolean p) {
         this.str = str;
@@ -39,7 +40,7 @@ public class Parser {
 
         if (isPriority) {
             taskDescription = str.replace(wordArray[0], "")
-                                        .replace(wordArray[1], "").trim();
+                                 .replace(wordArray[1], "").trim();
             eventType = wordArray[1];
         } else {
             taskDescription = str.replace(wordArray[0], "").trim();

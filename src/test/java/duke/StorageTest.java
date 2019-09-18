@@ -19,9 +19,9 @@ public class StorageTest {
     public void testLoadTasks() throws DukeException, FileNotFoundException, ParseException {
         Storage s = new Storage("C:/CS2103T/duke/src/test/java/TestFile.txt");
         List<Task> actual = s.loadTasks();
-        assertEquals("[T][ ][L] read book", actual.get(0).toString());
-        assertEquals("[D][+][L] borrow book (by: 06 Jun 2012, 06:00 PM)", actual.get(1).toString());
-        assertEquals("[E][ ][L] meeting (at: 25 Jun 2016, 06:00 AM)", actual.get(2).toString());
+        assertEquals("[T][ ] read book", actual.get(0).toString());
+        assertEquals("[D][+] borrow book (by: 06 Jun 2012, 06:00 PM)", actual.get(1).toString());
+        assertEquals("[E][ ] meeting (at: 25 Jun 2016, 06:00 AM)", actual.get(2).toString());
     }
 
     @Test

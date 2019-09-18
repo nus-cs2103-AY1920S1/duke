@@ -1,5 +1,7 @@
 # Task Chick
 
+<img src="./src/main/resources/images/chicky.png" width="128" height="128" />
+
 Task Chick is a Personal Assistant Chatbot that helps you to keep track of various things.
 Task Chick is **optimized for users who prefer to work with a Command Line Interface (CLI)** while still
  having the benefits of a Graphical User Interface (GUI).

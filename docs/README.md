@@ -1,10 +1,4 @@
-<style>
-p {
- text-align:center
-}
-</style>
 
-<p>
 
 # User Guide
 
@@ -95,4 +89,6 @@ bye ends the program for you
 
 And thats all for now folks! I'll be adding new features soon so stay tuned!
 
-</p>
+
+
+

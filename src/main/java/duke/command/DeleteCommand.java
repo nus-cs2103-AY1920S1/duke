@@ -22,12 +22,12 @@ public class DeleteCommand extends Command {
         }
         int position = Integer.parseInt(ui.getRemainingWords().trim());
 
-        String toPrint = "Noted. I've removed this task. \n";
-        toPrint += (tasks.getTaskArrayList().get(position-1)) + "\n";
+        String print = "Noted. I've removed this task. \n";
+        print += (tasks.getTaskArrayList().get(position-1)) + "\n";
         tasks.delete(position-1);
         storage.writeData();
-        toPrint += ("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list");
-        return toPrint;
+        print += ("Now you have " + tasks.getTaskArrayList().size() + " tasks in the list");
+        return print;
     }
 
 }

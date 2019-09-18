@@ -7,7 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -66,6 +71,9 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setBackground(new Background(new BackgroundFill(new Color(0.96, 0.79, 0.64, 0.7),
+                CornerRadii.EMPTY,
+                Insets.EMPTY)));
         db.flip();
         return db;
     }

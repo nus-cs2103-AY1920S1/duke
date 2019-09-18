@@ -20,6 +20,8 @@ public class Main extends Application {
         Scene scene = new Scene(ap);
         stage.setScene(scene);
         fxmlLoader.<MainWindow>getController().setUi(ui);
+        stage.setTitle("Duke");
+        stage.setResizable(false);
         stage.show();
     }
 }

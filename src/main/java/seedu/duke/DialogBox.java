@@ -13,8 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -41,7 +41,6 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         dialog.setPadding(new Insets(10));
         dialog.setMinHeight(Region.USE_PREF_SIZE);
-//        dialog.setMinWidth(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 
@@ -64,6 +63,13 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(db.dialog.getMinHeight());
+        BackgroundFill bFill = new BackgroundFill(
+                Color.web("#C5D1D8"),
+                new CornerRadii(5),
+                new Insets(5)
+        );
+        Background background = new Background(bFill);
+        db.setBackground(background);
         return db;
     }
 
@@ -76,6 +82,13 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(db.dialog.getMinHeight());
+        BackgroundFill bFill = new BackgroundFill(
+                Color.web("#B7C6CE"),
+                new CornerRadii(5),
+                new Insets(5)
+        );
+        Background background = new Background(bFill);
+        db.setBackground(background);
         db.flip();
         return db;
     }

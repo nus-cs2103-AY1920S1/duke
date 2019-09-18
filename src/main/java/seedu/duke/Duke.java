@@ -23,10 +23,13 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javax.swing.*;
+
 /**
  * Duke is the main class that launches the chat bot when it is run.
  */
 public class Duke extends Application {
+    private static final String DUKE_GREETING = "Hey there! How can I help you today?";
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -127,7 +130,7 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(ui.logo, new ImageView(duke).getImage())
+                DialogBox.getDukeDialog(DUKE_GREETING, new ImageView(duke).getImage())
         );
     }
 

@@ -20,14 +20,22 @@ public class DateTimeHandler {
      * Parses string from user input to Date and LocalTime.
      * @throws ParseException If parsing of date fails.
      */
-    public void parseDateTimeFromUserInput() throws ParseException {
+    public void parseDateTimeFromUserInput() throws DukeException{
         SimpleDateFormat parser = new SimpleDateFormat("dd/MM/yyyy");
-        date = parser.parse(dateTime[1]);
+        try {
+            date = parser.parse(dateTime[1]);
+        } catch (ParseException e) {
+            throw new DukeException("OOPS!!! Date format is wrong. It should be dd/mm/yyyy");
+        }
 
-        int intTime = Integer.parseInt(dateTime[2]);
-        int hour = intTime / 100;
-        int minute = intTime % 100;
-        time = LocalTime.of(hour, minute);
+        try {
+            int intTime = Integer.parseInt(dateTime[2]);
+            int hour = intTime / 100;
+            int minute = intTime % 100;
+            time = LocalTime.of(hour, minute);
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Time format is wrong. It should be in 24 hour format. E.g 1800 is 6:00PM");
+        }
     }
 
     /**

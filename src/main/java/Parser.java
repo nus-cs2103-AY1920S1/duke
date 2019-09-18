@@ -207,7 +207,7 @@ public class Parser {
         return new TaskList(listOfTaskContainsKeyword);
     }
 
-    public boolean isDuplicate(TaskList tasks, Task t) {
+    private boolean isDuplicate(TaskList tasks, Task t) {
         ArrayList<Task> list = tasks.getList();
         for (Task task : list) {
             if (task.equals(t)) {

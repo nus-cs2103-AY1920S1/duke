@@ -20,8 +20,7 @@ public class Storage {
      * @param fileName The tasks will load and save from the given file.
      */
     public Storage(String fileName) {
-        File f1 = new File(System.getProperty("java.class.path"));
-        File dir = f1.getAbsoluteFile().getParentFile();
+        File dir = new File(System.getProperty("user.dir"));
         this.fileName = dir.toString() + "\\" + fileName;
         try {
             File f = new File(this.fileName);

@@ -27,8 +27,6 @@ public class DateTime {
         }
     }
 
-
-
     @Override
     public String toString() {
         return this.day + " " + this.month + " " + this.year + " " + this.time + "hrs";

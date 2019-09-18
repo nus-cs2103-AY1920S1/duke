@@ -77,7 +77,7 @@ public class Ui {
         if (prevTask.equals(newTask.toString())) {
             return "OOPS!! There's nothing to change.";
         } else {
-            return "Success! I've edited this task:\n" + prevTask + "\nto this:\n" + newTask;
+            return "Success! I've edited this task from this:\n" + prevTask + "\nto this:\n" + newTask;
         }
     }
 

@@ -147,12 +147,13 @@ public class Parser {
         //input = i/attribute/new des
         String input = command.split(" ", 2)[1];
         try {
-            String[] splitInput = input.split("/");
+            String[] splitInput = input.split("/", 3);
             int i = Integer.parseInt(splitInput[0]);
             Task toEdit = this.commands.getTask(i - 1);
             String oldTask = toEdit.toString();
             String attribute = splitInput[1];
             String newDes = splitInput[2];
+            System.out.println("newDes: " + newDes);
             toEdit.edit(attribute, newDes);
             this.storage.done(toEdit, i);
             return this.ui.edit(oldTask, toEdit);

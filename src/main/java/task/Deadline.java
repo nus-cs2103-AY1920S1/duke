@@ -12,20 +12,25 @@ public class Deadline extends Task {
 
     /**
      * Edits the specified attribute of task object with given update.
-     * @param attribute: done, des, date
+     * @param attribute: done, des, date, time
      * @param update: true/false, new des, date
      */
     @Override
     public void edit(String attribute, String update) {
-        if (attribute.equals("done")) {
-            assert update.equals("true") || update.equals("false") : "Must provide true or false only";
-            this.isDone = update.equals("true");
-        } else if (attribute.equals("des")) {
-            this.description = update;
-        } else if (attribute.equals("date")) {
-            this.by = new DateTime(update);
-        } else {
-            System.out.println("Attribute does not exist");
+        switch (attribute) {
+            case "done":
+                assert update.equals("true") || update.equals("false") : "Must provide true or false only";
+                this.isDone = update.equals("true");
+                break;
+            case "des":
+                this.description = update;
+                break;
+            case "date":
+                this.by = new DateTime(update);
+                break;
+            default:
+                System.out.println("Attribute does not exist");
+                break;
         }
     }
 

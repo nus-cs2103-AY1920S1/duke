@@ -35,14 +35,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        Task toDelete = tasks.getTask(entry);
-        tasks.deleteFromList(entry);
         try {
+            Task toDelete = tasks.getTask(entry);
+            tasks.deleteFromList(entry);
             storage.writeToFile(tasks);
+            return ui.operateTask(toDelete, tasks, false);
         } catch (IOException ex) {
             throw new DukeException("OOPS!!! I cannot read your file! :(");
+        } catch (IndexOutOfBoundsException ex) {
+            throw new DukeException("OOPS!!! There aren't any tasks to delete!");
         }
-
-        return ui.operateTask(toDelete, tasks, false);
     }
 }

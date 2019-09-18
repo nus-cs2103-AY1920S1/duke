@@ -21,7 +21,9 @@ public class Parser {
     }
 
     public static MasterCommand parse(String input) throws DukeException, TriviaException {
-        if (mode.equals("trivia")){
+        if (input.equals("bye")) {
+            return new ByeCommand();
+        } else if (mode.equals("trivia")){
             return parseTrivia(input);
         } else {
             return parseBase(input);
@@ -46,7 +48,7 @@ public class Parser {
                 }
             } else if (keywords[0].equals("add")) {
                 return new TriviaAddQuestionCommand(parseAddQuestion(keywords));
-            } else if (keywords[0].equals("addans")) {
+            } else if (keywords[0].equals("add-ans")) {
                 String[] args = parseAddAnswer(keywords);
                 return new TriviaAddAnswerCommand(args[0], Integer.parseInt(args[1]));
             } else if (keywords[0].equals("view-all")) {
@@ -84,9 +86,7 @@ public class Parser {
     public static Command parseBase(String input) throws DukeException {
         String[] keywords = input.split(" ");
         try {
-            if (keywords[0].equals("bye")) {
-                return new ByeCommand();
-            } else if (keywords[0].equals("list")) {
+            if (keywords[0].equals("list")) {
                 return new ListCommand();
             } else if (keywords[0].equals("done")) {
                 return new DoneCommand(parseIndex(keywords));

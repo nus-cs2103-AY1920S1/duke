@@ -16,9 +16,13 @@ public class TriviaAddAnswerCommand extends TriviaCommand {
 
     @Override
     public String execute(Trivia trivia, UI ui, Storage storage) throws TriviaException {
-        trivia.addAnswer(answerToAdd, answerIndex);
-        storage.writeTrivia(trivia);
-        return ui.answerAdded(answerToAdd, trivia.viewQuestion(answerIndex));
+        try {
+            trivia.addAnswer(answerToAdd, answerIndex);
+            storage.writeTrivia(trivia);
+            return ui.answerAdded(answerToAdd, trivia.viewQuestion(answerIndex));
+        } catch (IndexOutOfBoundsException ex) {
+            throw new TriviaException("Tell me the answer, JOTARO!");
+        }
     }
 
 }

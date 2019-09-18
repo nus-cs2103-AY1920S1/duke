@@ -26,7 +26,7 @@ public class UI {
     private static final String NOT_FOUND = "OOPS!!! There weren't any matching tasks in your list!\n";
     private static final String TRIVIA_QUESTION_ADDED = "Ho, I see you have added a question:\n";
     private static final String ERROR_CANNOT_LOAD_TRIVIA = "It's time to start from a clean slate. THE WORLD!!!";
-    private static final String TRIVIA_START = "Answer my questions, filthy Joestar.";
+    private static final String TRIVIA_START = "Answer my questions, Joestar.";
     private static final String TRIVIA_ANSWER_ADDED = "Hm, so that is the answer to this question:\n";
     private static final String TRIVIA_EXIT = "No, this cannot be, I AM DIOOOOOOOO!!!";
     private static final String TRIVIA_DELETE_QUESTION = "What?? You are erasing this knowledge from my memory???\n";

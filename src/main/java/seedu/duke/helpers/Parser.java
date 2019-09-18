@@ -18,8 +18,18 @@ import seedu.duke.exceptions.InvalidCommandException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * A Utility class that parses user input by extracting out the command and arguments from the input.
+ * When adding new commands, a new {@code CommandName} {@code enum} must be created together with the corresponding
+ * Regular Expression pattern in the form COMMANDNAME_PATTERN as a {@code static final String}.
+ * Additionally, an entry should be added into {@link Parser#identifyCommandName(String)} for the correct Pattern
+ * selection.
+ */
 public class Parser {
 
+    /**
+     * Enumerates the different Commands supported with their CLI equivalent strings as keys.
+     */
     enum CommandName {
         LIST("list"),
         ADD("add"),
@@ -39,6 +49,9 @@ public class Parser {
         }
     }
 
+    /**
+     * Pattern strings used by the Regular Expression matcher to extract command arguments.
+     */
     private static final String LIST_PATTERN = "(list)";
     private static final String ADD_PATTERN = "(add)(?=\\s)\\s([\\w\\D]+)";
     private static final String DONE_PATTERN = "(done)(?=\\s)\\s([\\d]+)";

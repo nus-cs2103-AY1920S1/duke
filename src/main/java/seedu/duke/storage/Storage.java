@@ -1,35 +1,38 @@
 package seedu.duke.storage;
 
-import seedu.duke.Duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.trackables.Deadline;
 import seedu.duke.trackables.Event;
 import seedu.duke.trackables.Task;
 import seedu.duke.trackables.Todo;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.attribute.FileAttribute;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a Storage system that handles saving and loading of tasks to and from the file-system.
+ * Storage is a Singleton to prevent concurrent access to the storage file due to multiple instantiation. The Storage
+ * {@code instance} is instantiated exactly once.
+ */
 public class Storage {
 
     /**
-     * Default file path used if the user doesn't provide the file name.
+     * Default file path used.
      */
     private static final String DEFAULT_STORAGE_PATH = "/data/tasksfile.txt";
 
+    /**
+     * Singleton Storage Instance.
+     */
     private static Storage instance;
 
     private final Path path;
 
     private Storage() {
-
         path = Paths.get(System.getProperty("user.dir") + DEFAULT_STORAGE_PATH);
     }
 
@@ -44,7 +47,6 @@ public class Storage {
         }
         return instance;
     }
-
 
     /**
      * Saves the list of tasks to the storage file.
@@ -67,9 +69,10 @@ public class Storage {
 
     /**
      * Loads the Tasks data from the storage file, and then returns it.
-     * Returns an empty {@code AddressBook} if the file does not exist, or is not a regular file.
      *
-     * @throws StorageOperationException if there were errors reading and/or converting data from file.
+     * @return The populated {@code TaskList}, otherwise an empty {@code TaskList} if the file does not exist,
+     * or is an irregular file.
+     * @throws StorageOperationException thrown when there were errors reading and/or converting data from file.
      */
     public TaskList loadFromDisk() throws StorageOperationException {
 
@@ -90,7 +93,8 @@ public class Storage {
      * Converts all the {@code tasks} as their equivalent Strings.
      *
      * @param tasks Lists containing all the tasks to convert.
-     * @return Returns a list of Tasks in their String equivalent form.
+     * @return A list of Tasks in their String equivalent form otherwise, an empty {@code List<String>}
+     *         if {@code tasks} is empty.
      */
     private List<String> getStringsFromTasks(TaskList tasks) {
         return tasks.getList().stream().map(Task::getAsString).collect(Collectors.toList());
@@ -100,7 +104,7 @@ public class Storage {
      * Converts all the {@code stringTasks} as their equivalent Task Objects.
      *
      * @param stringTasks List containing all tasks in their string forms.
-     * @return
+     * @return A list of Tasks otherwise, an empty {@code List<Task} if {@code stringTasks} is empty.
      */
     private List<Task> getTasksFromStrings(List<String> stringTasks) {
         return stringTasks.stream()
@@ -125,10 +129,6 @@ public class Storage {
         default:
             return new Task(args);
         }
-    }
-
-    public String getPath() {
-        return path.toString();
     }
 
     /**

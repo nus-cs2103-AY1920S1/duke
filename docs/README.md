@@ -69,9 +69,6 @@ Remove Task from the TaskList.
 #### Expected outcome:
 
 ![Delete](delete.png)
-<img src="delete.png" width=300 align=right>
-
-
 
 ### Find Task
 Show a list of Task that contains a specified keyword.

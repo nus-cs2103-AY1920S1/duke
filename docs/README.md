@@ -1,4 +1,4 @@
-! [Duke](Ui.png)
+! [Duke](./Ui.png)
 # User Guide
 
 ## Features

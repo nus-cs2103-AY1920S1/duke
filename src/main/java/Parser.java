@@ -45,6 +45,9 @@ public class Parser {
                 split = i;
             }
         }
+
+        assert split > 0 : "Input does not have an identifier.";
+
         String taskDesc = joinStrings(Arrays.copyOfRange(params, 0, split));
         String taskDue = joinStrings(Arrays.copyOfRange(params, split + 1, params.length));
         return new String[]{taskDesc, taskDue};

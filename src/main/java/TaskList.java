@@ -77,7 +77,10 @@ public class TaskList {
             throw new DukeException("Action already marked as done!");
         }
         String s = done_message + "\t   " + current;
-        save();
+
+        boolean isSaved = save();
+        assert isSaved == true : "Error: not saved to disk.";
+
         return s;
     }
 
@@ -95,7 +98,10 @@ public class TaskList {
             throw new DukeException("No such task with that ID.");
         }
         String s = delete_message + "\t   " + current;
-        save();
+
+        boolean isSaved = save();
+        assert isSaved == true : "Error: not saved to disk.";
+
         return s;
     }
 
@@ -113,7 +119,10 @@ public class TaskList {
         Task current = new ToDo(task);
         taskList.add(current);
         String s = task_added_message + "\t   " + current + totalNoOfTasks();
-        save();
+
+        boolean isSaved = save();
+        assert isSaved == true : "Error: not saved to disk.";
+
         return s;
     }
 
@@ -141,7 +150,10 @@ public class TaskList {
         }
         taskList.add(current);
         String s = task_added_message + "\t   " + current + totalNoOfTasks();
-        save();
+
+        boolean isSaved = save();
+        assert isSaved == true : "Error: not saved to disk.";
+
         return s;
     }
 
@@ -169,7 +181,10 @@ public class TaskList {
         }
         taskList.add(current);
         String s = task_added_message + "\t   " + current + totalNoOfTasks();
-        save();
+
+        boolean isSaved = save();
+        assert isSaved == true : "Error: not saved to disk.";
+
         return s;
     }
 
@@ -205,11 +220,13 @@ public class TaskList {
     /**
      * Tells the Storage object to save the tasks to file.
      */
-    private void save() {
+    private boolean save() {
         try {
             storage.saveToFile(taskList);
+            return true;
         } catch (IOException e) {
             System.err.println("Error writing task to disk. Your changes were not saved. Check your file permissions?");
+            return false;
         }
     }
 

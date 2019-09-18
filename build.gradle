@@ -19,11 +19,10 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "Launcher"
+    mainClassName = "duke.Launcher"
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
     String javaFxVersion = '11'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -43,6 +42,7 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-web', version: javaFxVersion, classifier: 'linux'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 
 test {

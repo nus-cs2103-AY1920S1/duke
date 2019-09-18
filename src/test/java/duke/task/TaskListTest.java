@@ -8,7 +8,7 @@ class TaskListTest {
     @Test
     void addAndGet_validIndex_success() {
         TaskList taskList = new TaskList();
-        Task task = new Task("desc");
+        Task task = new TaskImpl("desc");
         taskList.add(task);
         assertEquals(task, taskList.get(0));
     }
@@ -16,16 +16,16 @@ class TaskListTest {
     @Test
     void size_withTasks_success() {
         TaskList taskList = new TaskList();
-        taskList.add(new Task("task1"));
-        taskList.add(new Task("task2"));
+        taskList.add(new TaskImpl("task1"));
+        taskList.add(new TaskImpl("task2"));
         assertEquals(2, taskList.size());
     }
 
     @Test
     void delete_validIndex_success() {
         TaskList taskList = new TaskList();
-        Task task1 = new Task("task1");
-        Task task2 = new Task("task2");
+        Task task1 = new TaskImpl("task1");
+        Task task2 = new TaskImpl("task2");
         taskList.add(task1);
         taskList.add(task2);
         assertEquals(task1, taskList.remove(0));

@@ -1,13 +1,12 @@
 package duke.command;
 
+import duke.StorageStub;
+import duke.task.TaskImpl;
+import duke.task.TaskListStub;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
-
-import duke.StorageStub;
-import duke.task.Task;
-import duke.task.TaskListStub;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,7 +16,7 @@ class DeleteCommandTest {
 
     @Test
     void run_validIndex_success() throws IOException {
-        String deleteString = new Task("remove 123").toString();
+        String deleteString = new TaskImpl("remove 123").toString();
         List<String> expected = List.of("Noted. I've removed this task:", "  " + deleteString,
                 "Now you have " + taskListStub.size() + " tasks in the list.");
         List<String> actual = new DeleteCommand(taskListStub, storageStub)

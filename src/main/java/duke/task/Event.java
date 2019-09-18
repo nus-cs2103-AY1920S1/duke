@@ -1,11 +1,10 @@
 package duke.task;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import duke.DukeException;
 import duke.Storage;
 import duke.command.Command;
+
+import java.util.List;
 
 public class Event extends TimeTask {
     Event(String description, String time) {
@@ -41,17 +40,13 @@ public class Event extends TimeTask {
     }
 
     /**
-     * Returns a list of strings representing this task so that it can be saved.
+     * Returns the type of this task.
      *
-     * @return A representation of this task as a list for saving.
+     * @return Type of this task as a string.
      */
     @Override
-    public List<String> getSaveList() {
-        List<String> list = new ArrayList<>();
-        list.add("E");
-        list.addAll(super.getSaveList());
-        list.add(getSaveTimeString());
-        return list;
+    String getTaskType() {
+        return "E";
     }
 
     /**
@@ -61,6 +56,6 @@ public class Event extends TimeTask {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + getTimeString() + ")";
+        return super.toString() + " (at: " + getTimeString() + ")";
     }
 }

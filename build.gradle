@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'org.openjfx.javafxplugin' version '0.0.7'
     id 'application'
-    id 'checkstyle'
+    // id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -18,9 +18,9 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-checkstyle {
-    toolVersion = '8.23'
-}
+//checkstyle {
+//    toolVersion = '8.23'
+//}
 
 application {
     // Change this to your main class.

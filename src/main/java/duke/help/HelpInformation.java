@@ -12,9 +12,9 @@ public class HelpInformation {
     public String getHelpInformation() {
         return "Welcome to Duke application. This is an application for you to easily create a personal task list "
                 + "and retrieve tasks efficiently.\n"
-                + "Duke supports Add(Todo, Event, Deadline), Done, Delete, List, Find, Exit command and filter."
-                + "Type 'help <command name>' or 'help <filter name>' to learn more."
-                + "Try 'help todo'!";
+                + "Duke supports Add(Todo, Event, Deadline), Done, Delete, List, Find, Exit command and filter. "
+                + "Type 'help', 'help <command>' or 'help <filter>' to learn more. "
+                + "Try 'help todo' now to learn how to add a todo task!";
     }
 
     /**

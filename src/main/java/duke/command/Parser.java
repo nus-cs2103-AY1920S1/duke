@@ -26,62 +26,98 @@ public class Parser {
      *
      * @param line line being processed.
      * @throws DukeException  If input is incorrect.
-     * @throws ParseException  If date is not in date format.
+     * @throws ParseException If date is not in date format.
      */
     public void process(String line) throws DukeException, ParseException {
-        Task currTask; //refers to current task in list
         String[] words = line.split(" ", 2);
-        String currEvent = words[0];
-        if (line.equals("list")) {
+        String command = words[0];
+        switch (command) {
+        case "list":
             ui.printList(taskList.list);
-        } else if (words[0].equals("done")) {
-            Integer num; //number in list which is done
-            num = Integer.valueOf(words[1]);
-            currTask = taskList.list.get(num - 1);
-            currTask.setStatusIcon(true);
-            ui.printDone(currTask);
-        } else if (currEvent.equals("todo")) {
-            if (words.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            }
-            String desc = words[1];
-            currTask = new ToDos(desc);
-            taskList.add(currTask);
-            ui.printAdd(currTask, taskList);
-        } else if (currEvent.equals("deadline")) {
-            if (words.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            }
-            int before = taskList.getSize();
-            String desc = words[1].split(" /by ", 2)[0];
-            String time = words[1].split(" /by ", 2)[1];
-            currTask = new Deadline(desc, time);
-            taskList.add(currTask);
-            assert taskList.getSize() == (before + 1) : "taskList size not incremented.";
-            ui.printAdd(currTask, taskList);
-        } else if (currEvent.equals("event")) {
-            if (words.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-            }
-            String desc = words[1].split(" /at ", 2)[0];
-            String time = words[1].split(" /at ", 2)[1];
-            currTask = new Event(desc, time);
-            taskList.add(currTask);
-            ui.printAdd(currTask, taskList);
-        } else if (words[0].equals("delete")) {
-            currTask = taskList.delete(words[1]);
-            ui.printDelete(currTask, taskList);
-        } else if (words[0].equals("find")) {
-            ArrayList<Task> temp = new ArrayList<>();
-            for (int i = 0; i < taskList.list.size(); i++) {
-                String currDesc = taskList.list.get(i).getDesc();
-                if (currDesc.contains(words[1])) {
-                    temp.add(taskList.list.get(i));
-                }
-            }
-            ui.printFind(temp);
-        } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            break;
+        case "reminder":
+            ui.printReminder(taskList.list);
+            break;
+        case "done":
+            processDone(words);
+            break;
+        case "todo":
+            processToDo(words);
+            break;
+        case "deadline":
+            processDeadline(words);
+            break;
+        case "event":
+            processEvent(words);
+            break;
+        case "delete":
+            processDelete(words);
+            break;
+        case "find":
+            processFind(words);
+            break;
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+    }
+
+    public void processDone(String[] w) throws DukeException{
+        if (w.length < 2) {
+            throw new DukeException("OOPS!!! The description of a done cannot be empty.");
+        }
+        int n = Integer.parseInt(w[1]);
+        Task currTask = taskList.list.get(n - 1);
+        currTask.setStatusIcon(true);
+        ui.printDone(currTask);
+    }
+
+    public void processToDo(String[] w) throws DukeException {
+        if (w.length < 2) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        }
+        String desc = w[1];
+        Task currTask = new ToDos(desc);
+        taskList.add(currTask);
+        ui.printAdd(currTask, taskList);
+    }
+
+    public void processDeadline(String[] w) throws DukeException, ParseException {
+        if (w.length < 2) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        }
+        int before = taskList.getSize();
+        String desc = w[1].split(" /by ", 2)[0];
+        String time = w[1].split(" /by ", 2)[1];
+        Task currTask = new Deadline(desc, time);
+        taskList.add(currTask);
+        assert taskList.getSize() == (before + 1) : "taskList size not incremented.";
+        ui.printAdd(currTask, taskList);
+    }
+
+    public void processEvent(String[] w) throws DukeException, ParseException {
+        if (w.length < 2) {
+            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+        }
+        String desc = w[1].split(" /at ", 2)[0];
+        String time = w[1].split(" /at ", 2)[1];
+        Task currTask = new Event(desc, time);
+        taskList.add(currTask);
+        ui.printAdd(currTask, taskList);
+    }
+
+    public void processDelete(String[] w) {
+        Task currTask = taskList.delete(w[1]);
+        ui.printDelete(currTask, taskList);
+    }
+
+    public void processFind(String[] w) {
+        ArrayList<Task> temp = new ArrayList<>();
+        for (int i = 0; i < taskList.list.size(); i++) {
+            String currDesc = taskList.list.get(i).getDesc();
+            if (currDesc.contains(w[1])) {
+                temp.add(taskList.list.get(i));
+            }
+        }
+        ui.printFind(temp);
     }
 }

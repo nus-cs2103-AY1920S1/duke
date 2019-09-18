@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Represents a task.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected int num;
@@ -20,6 +20,8 @@ public class Task {
         this.isDone = false;
         this.num = 0;
     }
+
+    public abstract int getDiffDays();
 
     /**
      * To get the status icon based on the status.

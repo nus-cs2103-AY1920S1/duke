@@ -1,0 +1,11 @@
+.root {
+    -fx-background-color: #383838;
+}
+
+.label {
+    -fx-font-size: 9pt;
+    -fx-font-family: "Comic Sans MS";
+    -fx-text-fill: white;
+    -fx-opacity: 1.0;
+    -fx-padding: 5 10 5 10;
+}

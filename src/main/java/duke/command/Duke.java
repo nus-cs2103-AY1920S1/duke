@@ -35,7 +35,9 @@ public class Duke{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assert !response.equals("") : "Response is not updated";
+        if (!input.equals("bye")) {
+            assert !response.equals("") : "Response is not updated";
+        }
         return response;
     }
 }

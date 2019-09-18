@@ -8,6 +8,10 @@ public class ToDos extends Task {
         super(description);
     }
 
+    public int getDiffDays() {
+        return Integer.MAX_VALUE;
+    }
+
     /**
      * Deals with changing the task to file format string.
      *

@@ -1,6 +1,2 @@
-T|1|a
-T|0|b
-T|1|borrow book
-T|0|abc
-T|0|anything
-T|0|abcdef
+T|0|get A for 2103
+D|1|finish 2013 IP|20/09/2019 00:00

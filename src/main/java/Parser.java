@@ -17,35 +17,19 @@ public class Parser {
         } else if (fullCommand.equals("list")) {
             return new ListCommand();
         } else {
-            String[] fields = fullCommand.split(" ", 2);
+            String[] fields;
+            fields = fullCommand.split(" ", 2);
             String command = fields[0];
             if (command.equals("done")) {
-                if (secondFieldIsEmpty(fields)) {
-                    throw new DukeException("Please indicate the task number!");
-                }
-                int doIndex = Integer.parseInt(fullCommand.substring(5));
-                return new DoneCommand(doIndex);
+                return generateDoneCommand(fields, fullCommand);
             } else if (command.equals("find")) {
-                if (secondFieldIsEmpty(fields)) {
-                    throw new DukeException("Please indicate what you want to find!");
-                }
-                return new FindCommand(fullCommand.substring(5));
+                return generateFindCommand(fields, fullCommand);
             } else if (command.equals("edit")) {
-                if (secondFieldIsEmpty(fields)) {
-                    throw new DukeException("Please indicate what you want to edit!");
-                }
-                return new EditCommand(fullCommand.substring(5));
+                return generateEditCommand(fields, fullCommand);
             } else if (command.equals("delete")) {
-                if (secondFieldIsEmpty(fields)) {
-                    throw new DukeException("Please indicate what you want to delete!");
-                }
-                int deleteIndex = Integer.parseInt(fullCommand.substring(7));
-                return new DeleteCommand(deleteIndex);
+                return generateDeleteCommand(fields, fullCommand);
             } else if (command.equals("todo") || command.equals("deadline") || command.equals("event")) {
-                if (secondFieldIsEmpty(fields)) {
-                    throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
-                }
-                return new AddCommand(fullCommand);
+                return generateAddCommand(fields, fullCommand);
             } else {
                 throw new DukeException("Please enter a valid command");
             }
@@ -54,6 +38,53 @@ public class Parser {
 
     //Used to check if the description field is empty
     private static boolean secondFieldIsEmpty(String[] fields) {
-        return fields.length <= 1;
+        return fields.length <= 1 || fields[1].length() <= 0;
+    }
+
+    private static DoneCommand generateDoneCommand(String[] fields, String fullCommand) throws DukeException {
+        if (secondFieldIsEmpty(fields)) {
+            throw new DukeException("Please indicate the task number!");
+        }
+        int doIndex;
+        try {
+            doIndex = Integer.parseInt(fullCommand.substring(5));
+        } catch (NumberFormatException e) {
+            throw new DukeException("Ensure that you enter in this format:\ndone [task number]");
+        }
+        return new DoneCommand(doIndex);
+    }
+
+    private static FindCommand generateFindCommand(String[] fields, String fullCommand) throws DukeException {
+        if (secondFieldIsEmpty(fields)) {
+            throw new DukeException("Please indicate what you want to find!");
+        }
+        return new FindCommand(fullCommand.substring(5));
+    }
+
+    private static EditCommand generateEditCommand(String[] fields, String fullCommand) throws DukeException {
+        if (secondFieldIsEmpty(fields)) {
+            throw new DukeException("Please indicate what you want to edit!");
+        }
+        return new EditCommand(fullCommand.substring(5));
+    }
+
+    private static DeleteCommand generateDeleteCommand(String[] fields, String fullCommand) throws DukeException {
+        if (secondFieldIsEmpty(fields)) {
+            throw new DukeException("Please indicate what you want to delete!");
+        }
+        try {
+            int deleteIndex = Integer.parseInt(fullCommand.substring(7));
+            return new DeleteCommand(deleteIndex);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Ensure that you enter in this format:\ndelete [task number]");
+        }
+    }
+
+    private static AddCommand generateAddCommand(String[] fields, String fullCommand) throws DukeException {
+        String command = fields[0];
+        if (secondFieldIsEmpty(fields)) {
+            throw new DukeException("☹ OOPS!!! The description of a " + command + " cannot be empty.");
+        }
+        return new AddCommand(fullCommand);
     }
 }

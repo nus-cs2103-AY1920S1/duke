@@ -26,10 +26,14 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList containing the user's saved tasks
      * @param ui Ui object to handle the user input
      * @param storage storage object to determine where the executed results are stored
-     * @throws IOException if stream to file cannot be written to or closed.
+     * @return message response to user
+     * @throws DukeException if the deletion index does not exist
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String executeAndReturnMessage(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        if (deleteIndex > tasks.getNumOfTasks() || deleteIndex <= 0) {
+            throw new DukeException("The specified task number does not exist");
+        }
         Task chosenTask = tasks.getTask(deleteIndex - 1);
         tasks.removeTask(deleteIndex - 1);
         try {

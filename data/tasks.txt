@@ -1,3 +1,0 @@
-T | 0 | make jar file executable
-T | 0 | catch all formatting errors
-T | 0 | catch all indexing errors

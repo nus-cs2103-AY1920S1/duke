@@ -32,15 +32,16 @@ public class AddCommand extends Command {
      * @param tasks TaskList containing the user's saved tasks
      * @param ui Ui object to handle the user input
      * @param storage storage object to determine where the executed results are stored
+     * @return message response to user
      * @throws Exception if user input is invalid
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeAndReturnMessage(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         setFields(fullCommand);
-        if (command.equals("todo")) {
+        if (command.equals("todo")) { //add the to-do task to task list
             tasks.addTask(new ToDo(description));
         } else {
-            try {
+            try { //try to add the task to the task list
                 if (command.equals("event")) {
                     DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
                     LocalDateTime dateAndTime = LocalDateTime.parse(dateTime, format);
@@ -55,7 +56,7 @@ public class AddCommand extends Command {
             }
         }
 
-        try {
+        try { //try to save the task into the stored file
             storage.addToFile(tasks.getTask(tasks.getNumOfTasks() - 1).toSaveString());
             return "Got it. I've added this task:\n"
                     + "  " + tasks.getTask(tasks.getNumOfTasks() - 1) + "\n"
@@ -67,19 +68,24 @@ public class AddCommand extends Command {
     }
 
     //Used to set the command, description and date and time for the add command
-    private void setFields(String line) {
+    private void setFields(String line) throws DukeException {
         String[] fields = line.split(" ", 2);
         this.command = fields[0];
-        if (fields[0].equals("deadline")) {
-            String[] descAndDateTime = fields[1].split(" /by ", 2);
-            this.description = descAndDateTime[0];
-            this.dateTime = descAndDateTime[1];
-        } else if (fields[0].equals("event")) {
-            String[] descAndDateTime = fields[1].split(" /at ", 2);
-            this.description = descAndDateTime[0];
-            this.dateTime = descAndDateTime[1];
-        } else {
-            this.description = fields[1];
+        try {
+            if (fields[0].equals("deadline")) {
+                String[] descAndDateTime = fields[1].split(" /by ", 2);
+                this.description = descAndDateTime[0];
+                this.dateTime = descAndDateTime[1];
+            } else if (fields[0].equals("event")) {
+                String[] descAndDateTime = fields[1].split(" /at ", 2);
+                this.description = descAndDateTime[0];
+                this.dateTime = descAndDateTime[1];
+            } else {
+                this.description = fields[1];
+            }
+        } catch (Exception e) {
+            throw new DukeException("Enter your command as follows:\n"
+                    + "[command] [description] ['/by' for deadline or '/at' for event] [dd/MM/yyyy HHmm]");
         }
     }
 }

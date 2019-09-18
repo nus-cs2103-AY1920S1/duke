@@ -1,5 +1,4 @@
 # Duke
-![Application Layout Preview](Ui.png)
 
 Duke is a combination of a chatbot and To-Do List which allows users to manage their tasks in an interactive manner. 
 

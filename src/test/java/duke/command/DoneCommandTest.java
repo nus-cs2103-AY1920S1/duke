@@ -18,11 +18,11 @@ class DoneCommandTest {
 
     @Test
     void run_validIndex_success() throws IOException {
-        Task doneTask = new TaskImpl("get 123");
+        Task doneTask = new TaskImpl("get 3");
         doneTask.markAsDone();
         List<String> expected = List.of("Nice! I've marked this task as done:", "  " + doneTask);
         List<String> actual = new DoneCommand(taskListStub, storageStub)
-                .run(new String[]{"done", "124"});
+                .run(new String[]{"done", "4"});
         assertEquals(expected, actual);
         assertEquals(doneTask.toString(), taskListStub.lastAction.toString());
         assertEquals(doneTask.toString(), storageStub.stored.get(0));

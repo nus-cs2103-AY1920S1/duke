@@ -25,7 +25,15 @@ public class DoneCommand implements Command {
      */
     @Override
     public List<String> run(String[] words) throws IOException {
-        Task task = tasks.get(Integer.parseInt(words[1]) - 1);
+        int index = Integer.parseInt(words[1]) - 1;
+        if (tasks.size() == 0) {
+            return List.of("There are no tasks in the list.");
+        } else if (tasks.size() == 1 && index != 1) {
+            return List.of("Invalid task number. Please use 1 to choose the only task.");
+        } else if (index < 0 || index >= tasks.size()) {
+            return List.of("Invalid task number. Please use a number from 1 to " + tasks.size() + ".");
+        }
+        Task task = tasks.get(index);
         task.markAsDone();
         storage.store(tasks.getAsLines());
         return List.of("Nice! I've marked this task as done:", "  " + task);

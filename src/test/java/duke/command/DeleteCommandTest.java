@@ -16,11 +16,11 @@ class DeleteCommandTest {
 
     @Test
     void run_validIndex_success() throws IOException {
-        String deleteString = new TaskImpl("remove 123").toString();
+        String deleteString = new TaskImpl("remove 3").toString();
         List<String> expected = List.of("Noted. I've removed this task:", "  " + deleteString,
                 "Now you have " + taskListStub.size() + " tasks in the list.");
         List<String> actual = new DeleteCommand(taskListStub, storageStub)
-                .run(new String[]{"delete", "124"});
+                .run(new String[]{"delete", "4"});
         assertEquals(expected, actual);
         assertEquals(deleteString, taskListStub.lastAction.toString());
         assertEquals(deleteString, storageStub.stored.get(0));

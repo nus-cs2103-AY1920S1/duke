@@ -3,15 +3,22 @@ package duke;
 import duke.exception.DukeException;
 import duke.ui.Ui;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Scanner;
 import duke.command.Command;
 
-public class Duke {
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+public class Duke extends Application {
     private TaskList tasks;
     private Saved savedFile;
     private Scanner scan;
     private Ui ui;
+
 
     /**
      * Creates a Duke object.
@@ -67,5 +74,12 @@ public class Duke {
         new Duke("src/main/java/data.txt").run();
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 }

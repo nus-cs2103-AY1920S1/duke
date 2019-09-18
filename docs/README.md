@@ -1,10 +1,18 @@
 # Task Chick
 
-<img src="https://raw.githubusercontent.com/hellodommy/duke/master/src/main/resources/images/chicky.png" width="128" height="128" />
+<img src="./src/main/resources/images/chicky.png" width="128" height="128" />
 
 Task Chick is a Personal Assistant Chatbot that helps you to keep track of various things.
 Task Chick is **optimized for users who prefer to work with a Command Line Interface (CLI)** while still
  having the benefits of a Graphical User Interface (GUI).
+
+## User Guide
+
+1. Download the latest release of Task Chick 
+[here](https://github.com/hellodommy/duke/releases/download/v1.0/taskchick-1.0.jar).
+2. Double-click on the file (your tasks will be saved in the same directory as _taskchick.txt_)
+3. Task Chick's GUI will appear in a new window.
+4. Follow the instructions [here](#usage) to get started with Task Chick.
 
 ## Features 
 

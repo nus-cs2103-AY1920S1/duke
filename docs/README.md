@@ -49,7 +49,7 @@ Deletes a task from list.<br/>
 Format: `delete INDEX` 
 * e.g. `delete 1`
 
-###3.7 `find` - Finding tasks by content matching: 
+### 3.7 `find` - Finding tasks by content matching: 
 Searches for all tasks with given keyword in task list.<br/>
 Format: `find KEYWORD` 
 * e.g. `find book`
@@ -62,7 +62,7 @@ Format: `clear`
 Exits from the Duke GUI.<br/>
 Format: `bye`
 
-##4. FAQ
+## 4. FAQ
 
 Q: How do I transfer my data to another Computer?<br/>
 A: Install the app in the other computer and overwrite the data 

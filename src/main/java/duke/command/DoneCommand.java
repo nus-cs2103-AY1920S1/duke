@@ -6,6 +6,8 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.io.IOException;
+
 /**
  * This is a <code>Command</code> to mark one task done. After the <code>execute</code>, The status, <code>isDone</code>
  * of the target task, specified by the ordering number, will be changed to <code>true</code>.
@@ -40,6 +42,11 @@ public class DoneCommand extends Command {
         }
         Task doneTask = taskList.getTaskAt(taskNumber);
         doneTask.markDone();
+        try {
+            storage.recordTasks(taskList);
+        } catch (IOException e) {
+            return ui.showSavingError();
+        }
         return ui.showTaskDone(doneTask);
     }
 

@@ -1,14 +1,19 @@
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * This is class that represents controller for MainWindow.
+ * It provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -28,6 +33,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.setFitToWidth(true);
     }
 
     public void setDuke(Duke duke) {
@@ -49,9 +55,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        if (userInput.equals("bye")) {
-            Platform.exit();
+        if (input.equals("bye")) {
+            exit();
         }
         userInput.clear();
     }
+
+    //@@author ZhangHuafan
+    //Reused from https://github.com/jyx11011/duke/blob/master/src/main/java/duke/ui/MainWindow.java
+    public void exit() {
+        userInput.setDisable(true);
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+        delay.setOnFinished(event -> Platform.exit());
+        delay.play();
+    }
+    //@@author
 }

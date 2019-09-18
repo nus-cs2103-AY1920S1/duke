@@ -6,6 +6,8 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.io.IOException;
+
 /**
  * This is a <code>Command</code> to delete one task from the task list. After the <code>execute</code>, The target
  * task, specified by the ordering number, will be deleted.
@@ -40,6 +42,11 @@ public class DeleteCommand extends Command {
             throw new DukeException("The task number is invalid!");
         }
         Task removedTask = taskList.removeTaskAt(taskNumber);
+        try {
+            storage.recordTasks(taskList);
+        } catch (IOException e) {
+            return ui.showSavingError();
+        }
         return ui.showTaskDeleted(taskList.getTotalTask(), removedTask);
     }
 

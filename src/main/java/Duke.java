@@ -24,17 +24,6 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        setUp();
-    }
-
-    /**
-     * Starts the program by initialising and run the <code>Duck</code> object. The file path is
-     * "/Users/xiaoyu/duke/data/duke.txt" by default.
-     *
-     * @param args an array of <code>String</code> read from console
-     */
-    public static void main(String[] args) {
-        new Duke("/Users/xiaoyu/duke/data/duke.txt").run();
     }
 
     public TaskList getTaskList() {
@@ -42,22 +31,13 @@ public class Duke {
     }
 
     public String setUp() {
-
         try {
             taskList = new TaskList(storage.loadTasks());
         } catch (FileNotFoundException | DukeException e) {
             ui.showLoadingError();
             taskList = new TaskList();
         }
-
-        String listInfo;
-        assert taskList != null;
-        if (taskList.getTotalTask() > 0) {
-            listInfo = ui.showFullList(taskList);
-        } else {
-            listInfo = ui.showNoTask();
-        }
-        return ui.showWelcome() + listInfo;
+        return ui.showWelcome();
     }
 
     /**

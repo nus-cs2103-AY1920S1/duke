@@ -14,11 +14,11 @@ import java.util.Scanner;
 public class Ui {
     private static final String INDENTATION = "     ";
     private static final String SEPARATOR = "    ____________________________________________________________\n";
-    private static final String WELCOME_Msg = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String ENDING_Msg = "Bye. Hope to see you again soon!";
-    private static final String SAVING_ERROR_Msg = "☹ OOPS!!! We cannot save your data!";
-    private static final String LOADING_ERROR_Msg = "☹ OOPS!!! We cannot load your data!";
-    private static final String NO_TASK_Msg = "kkk ~ There is no task in your todo list now!";
+    public static final String WELCOME_Msg = "Hello! I'm Duke\nWhat can I do for you?";
+    public static final String ENDING_Msg = "Bye. Hope to see you again soon!";
+    public static final String SAVING_ERROR_Msg = "☹ OOPS!!! We cannot save your data!";
+    public static final String LOADING_ERROR_Msg = "☹ OOPS!!! We cannot load your data!";
+    public static final String NO_TASK_Msg = "kkk ~ There is no task in your todo list now!";
     private Scanner scanner;
 
     /**
@@ -88,14 +88,13 @@ public class Ui {
         if (taskList.getTotalTask() == 0) {
             return showNoTask();
         } else {
-            String formattedList = SEPARATOR;
-            formattedList = formattedList + INDENTATION + "Here are the tasks in your list:\n";
+            String formattedList = "";
+            String header = "Here are the tasks in your list:\n";
             for (int i = 1; i <= taskList.getTotalTask(); i++) {
                 formattedList = formattedList + INDENTATION + i + ". " + taskList.getTaskAt(i - 1) + "\n";
             }
-            formattedList = formattedList + SEPARATOR;
-            System.out.println(formattedList);
-            return formattedList;
+            System.out.println(SEPARATOR + INDENTATION + header + formattedList + SEPARATOR);
+            return header + formattedList;
         }
     }
 

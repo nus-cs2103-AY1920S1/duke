@@ -2,10 +2,12 @@ package duke.command;
 
 import duke.task.Deadline;
 import duke.task.Task;
+import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class DeadlineCommand extends Command{
@@ -30,6 +32,11 @@ public class DeadlineCommand extends Command{
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = new Deadline(description, dueDateTime);
         taskList.add(newTask);
+        try {
+            storage.recordTasks(taskList);
+        } catch (IOException e) {
+            return ui.showSavingError();
+        }
         return ui.showTaskAdded(taskList.getTotalTask(), newTask);
     }
 

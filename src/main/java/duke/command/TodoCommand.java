@@ -6,6 +6,8 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+import java.io.IOException;
+
 public class TodoCommand extends Command{
 
     private String description;
@@ -26,6 +28,11 @@ public class TodoCommand extends Command{
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = new Todo(description);
         taskList.add(newTask);
+        try {
+            storage.recordTasks(taskList);
+        } catch (IOException e) {
+            return ui.showSavingError();
+        }
         return ui.showTaskAdded(taskList.getTotalTask(), newTask);
     }
 

@@ -78,21 +78,21 @@ public class Storage {
 
         // Create the appropriate new Task.
         switch (type) {
-            case("T"):
-                newTask = new ToDo(desc);
-                break;
-            case("D"):
-                String[] dd = desc.split("by:");
-                String deadline = dd[1].substring(0, dd[1].length() - 1);
-                String description = dd[0].substring(0, dd[0].length() - 1);
-                newTask = new Deadline(description, deadline);
-                break;
-            case("E"):
-                String[] edd = desc.split("at:");
-                String eventTime = edd[1].substring(0, edd[1].length() - 1);
-                String eventDescription = edd[0].substring(0, edd[0].length() - 1);
-                newTask = new Event(eventDescription, eventTime);
-                break;
+        case("T"):
+            newTask = new ToDo(desc);
+            break;
+        case("D"):
+            String[] dd = desc.split("by:");
+            String deadline = dd[1].substring(0, dd[1].length() - 1);
+            String description = dd[0].substring(0, dd[0].length() - 1);
+            newTask = new Deadline(description, deadline);
+            break;
+        case("E"):
+            String[] edd = desc.split("at:");
+            String eventTime = edd[1].substring(0, edd[1].length() - 1);
+            String eventDescription = edd[0].substring(0, edd[0].length() - 1);
+            newTask = new Event(eventDescription, eventTime);
+            break;
         }
 
         // Read from line to see if task should be marked as done
@@ -112,7 +112,7 @@ public class Storage {
     }
 
     //For debugging, delete later
-    public String openFile() throws DukeException{
+    public String openFile() throws DukeException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String str = "";

@@ -36,36 +36,67 @@ public class Parser {
             commandType = command.substring(0, command.indexOf(" "));
         }
 
-        switch(commandType){
-            case("list"):
-                String list = taskList.printAllTasks();
-                reply = "Here are the tasks in your list:" + "\n" + list;
-                break;
-            case("done"):
-                reply = executeDone(command);
-                break;
-            case("delete"):
-                reply = executeDelete(command);
-                break;
-            case("find"):
-                reply = executeFind(command);
-                break;
-            case("bye"):
-                reply = ui.showFarewell();
-                break;
-            default:
-                if (containsTask(commandType)) {
-                    // Processes task command, not the same as generateNewTask()
-                    reply = executeNewTask(command);
-                } else {
-                    // Unknown command
-                    reply = ui.showErrorMessage(new UnknownTaskTypeException());
-                }
+        switch (commandType) {
+        case("list"):
+            String list = taskList.printAllTasks();
+            reply = "Here are the tasks in your list:" + "\n" + list;
+            break;
+        case("done"):
+            reply = executeDone(command);
+            break;
+        case("delete"):
+            reply = executeDelete(command);
+            break;
+        case("find"):
+            reply = executeFind(command);
+            break;
+        case("bye"):
+            reply = ui.showFarewell();
+            break;
+        default:
+            if (containsTask(commandType)) {
+                // Processes task command, not the same as generateNewTask()
+                reply = executeNewTask(command);
+            } else {
+                // Unknown command
+                reply = ui.showErrorMessage(new UnknownTaskTypeException());
+            }
         }
+
         return reply;
     }
 
+    /**
+     * Processes the command to generate a new task. If command is not empty, it calls generateNewTask() and saves the
+     * list automatically.
+     * @param command string given
+     * @return the response from duke, either successful or error.
+     */
+    private String executeNewTask(String command) {
+        String reply;
 
+        try {
+            if (!command.isEmpty()) {
+                Task newTask = Parser.generateNewTask(command);
+                taskList.addTask(newTask);
+
+                // Save the new list to storage
+                try {
+                    saveToStorage();
+                } catch (IOException e) {
+                    reply = ui.showLoadingError();
+                    return reply;
+                }
+                reply = ui.showAddTask(newTask, taskList.numTasks);
+            } else {
+                throw new UnknownTaskTypeException();
+            }
+        } catch (DukeException err) {
+            reply = ui.showErrorMessage(err);
+        }
+
+        return reply;
+    }
 
     /**
      * Generates the appropriate task that matches the command.
@@ -80,6 +111,7 @@ public class Parser {
             boolean hasTags = false;
             ArrayList<String> tags = new ArrayList<>();
 
+            // Process all tags
             if (taskDescription.contains("#")) {
                 hasTags = true;
                 String[] processed = taskDescription.split("#");
@@ -97,20 +129,25 @@ public class Parser {
             // Create the appropriate Task type
             try {
                 switch (type) {
-                    case("todo"):
-                        newTask = generateNewToDo(taskDescription);
-                    case("deadline"):
-                        newTask = generateNewDeadline(taskDescription);
-                    case("event"):
-                        newTask = generateNewEvent(taskDescription);
+                case("todo"):
+                    newTask = generateNewToDo(taskDescription);
+                    break;
+                case("deadline"):
+                    newTask = generateNewDeadline(taskDescription);
+                    break;
+                case("event"):
+                    newTask = generateNewEvent(taskDescription);
+                    break;
+                default:
+                    // Should not enter this as the type is already filtered and must be one of todo/deadline/event.
                 }
             } catch (DukeException e) {
                 String taskWithIssue = e.getMessage();
                 throw new MissingDateTimeException("Date Time missing."
-                        + "Please set a date and time. (Eg. " + taskWithIssue +  "read book /by Sunday)");
+                        + "Please set a date and time. (Eg. " + taskWithIssue +  " read book /by Sunday)");
             }
 
-
+            // Add all tags to the new task.
             if (hasTags) {
                 for (String tag : tags) {
                     newTask.addTag(tag);
@@ -128,54 +165,6 @@ public class Parser {
                 throw new UnknownTaskTypeException();
             }
         }
-    }
-
-    /**
-     * Formats the date time given as a string.
-     * @param deadline to be formatted.
-     * @return String representing the formatted date time.
-     */
-    private static String formatDateTime(String deadline) {
-        // Split to individual components
-        deadline = deadline.trim();
-        String[] dd = deadline.split(" ");
-        String[] date = dd[0].split("/");
-        String time = dd[1];
-        int hours = Integer.valueOf(time.substring(0,2));
-        int minutes = Integer.valueOf(time.substring(2));
-
-        LocalDateTime actualDateTime = LocalDateTime.of(Integer.valueOf(date[2]), Integer.valueOf(date[1]),
-                Integer.valueOf(date[0]), hours, minutes);
-        // maybe error here
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm a");
-        String formatted = " " + dtf.format(actualDateTime);
-        return formatted;
-    }
-
-    /**
-     * Determines if a string is an integer.
-     * @param ss to check if it is an integer.
-     * @return true or false
-     */
-    private boolean isInteger(String ss) {
-        try {
-            Integer.parseInt(ss);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
-            return false;
-        }
-
-        // Only reaches here if input string is an integer and no exceptions are thrown.
-        return true;
-    }
-
-    /**
-     * Saves the newest version of the list to the file.
-     * @throws IOException if the save fails.
-     */
-    private void saveToStorage() throws IOException {
-        storage.saveToFile(taskList.toString());
     }
 
     /**
@@ -285,65 +274,114 @@ public class Parser {
     }
 
     /**
-     * Processes the command to generate a new task. If command is not empty, it calls generateNewTask() and saves the
-     * list automatically.
-     * @param command string given
-     * @return the response from duke, either successful or error.
+     * Generate new ToDo object with the given description.
+     * @param taskDescription of the ToDo task.
+     * @return new ToDo object.
      */
-    private String executeNewTask(String command) {
-        String reply;
-
-        try {
-            if (!command.isEmpty()) {
-                Task newTask = Parser.generateNewTask(command);
-                taskList.addTask(newTask);
-
-                // Save the new list to storage
-                try {
-                    saveToStorage();
-                } catch (IOException e) {
-                    reply = ui.showLoadingError();
-                    return reply;
-                }
-
-                reply = ui.showAddTask(newTask, taskList.numTasks);
-            } else {
-                throw new UnknownTaskTypeException();
-            }
-
-        } catch (DukeException err) {
-            reply = ui.showErrorMessage(err);
-        }
-
-        return reply;
-    }
-
     private static ToDo generateNewToDo(String taskDescription) {
         return new ToDo(taskDescription);
     }
 
+    /**
+     * Generates new Deadline object with the given description.
+     * @param taskDescription of the Deadline task.
+     * @return new Deadline object.
+     * @throws DukeException of incorrect Date Time format.
+     */
     private static Deadline generateNewDeadline(String taskDescription) throws DukeException {
-        try {
-            String[] sentence = taskDescription.split("/by");
-            String description = sentence[0];
-            String deadline = formatDateTime(sentence[1]);
+        String[] sentence = taskDescription.split("/by");
+        String description = sentence[0];
+        String deadline;
 
+        try {
+            // If the given Date Time is in the correct format.
+            deadline = formatDateTime(sentence[1]);
             return new Deadline(description, deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Deadline");
+            if (!sentence[1].isEmpty()) {
+                // If the given Date Time is in another format.
+                deadline = sentence[1];
+                return new Deadline(description, deadline);
+            } else {
+                // No Date Time given for deadline.
+                throw new DukeException("Deadline");
+            }
         }
     }
 
+    /**
+     * Generates new Event object with the given description.
+     * @param taskDescription of the Event task.
+     * @return new Event object.
+     * @throws DukeException of incorrect DateTime format.
+     */
     private static Event generateNewEvent(String taskDescription) throws DukeException {
+        String[] sentence = taskDescription.split("/at");
+        String description = sentence[0];
+        String time;
+
         try {
-            String[] sentence = taskDescription.split("/at");
-            String description = sentence[0];
-            String time = sentence[1];
-            System.out.println(time);
+            // If the given Date Time is in the correct format.
+            time = formatDateTime(sentence[1]);
             return new Event(description, time);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Event");
+            if (!sentence[1].isEmpty()) {
+                // If the given Date Time is in another format.
+                time = sentence[1];
+                return new Event(description, time);
+            } else {
+                // No Date Time given for event.
+                throw new DukeException("Event");
+            }
         }
+    }
+
+    /**
+     * Formats the date time given as a string.
+     * @param deadline to be formatted.
+     * @return String representing the formatted date time.
+     */
+    private static String formatDateTime(String deadline) {
+        // Split to individual components
+        deadline = deadline.trim();
+        String[] dd = deadline.split(" ");
+        String[] date = dd[0].split("/");
+        String time = dd[1];
+        int hours = Integer.valueOf(time.substring(0,2));
+        int minutes = Integer.valueOf(time.substring(2));
+
+        LocalDateTime actualDateTime = LocalDateTime.of(Integer.valueOf(date[2]), Integer.valueOf(date[1]),
+                Integer.valueOf(date[0]), hours, minutes);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm a");
+        String formatted = " " + dtf.format(actualDateTime);
+        return formatted;
+    }
+
+    /**
+     * Determines if a string is an integer.
+     * @param ss to check if it is an integer.
+     * @return true or false
+     */
+    private boolean isInteger(String ss) {
+        try {
+            Integer.parseInt(ss);
+        } catch (NumberFormatException e) {
+            return false;
+        } catch (NullPointerException e) {
+            return false;
+        }
+
+        // Only reaches here if input string is an integer and no exceptions are thrown.
+        return true;
+    }
+
+    /**
+     * Saves the newest version of the list to the file.
+     * @throws IOException if the save fails.
+     */
+    private void saveToStorage() throws IOException {
+        storage.saveToFile(taskList.toString());
     }
 
     /**
@@ -358,4 +396,5 @@ public class Parser {
         boolean containsAnyTask = (containsToDo | containsDeadline | containsEvent);
         return containsAnyTask;
     }
+
 }

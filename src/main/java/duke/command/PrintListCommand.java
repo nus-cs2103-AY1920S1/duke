@@ -24,9 +24,14 @@ public class PrintListCommand extends Command {
 	@Override
 	public String execute(TaskList tasks, Storage storage) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Here are the tasks in your list:\n");
-		for (int i = 1; i < tasks.size() + 1; i++) {
-			sb.append(String.format("  %d. %s\n", i, tasks.get(i)));
+		if (tasks.isEmpty()) {
+			sb.append("There are currently no tasks in your list!\n");
+			sb.append("Start adding by adding some tasks!");
+		} else {
+			sb.append("Here are the tasks in your list:\n");
+			for (int i = 1; i < tasks.size() + 1; i++) {
+				sb.append(String.format("  %d. %s\n", i, tasks.get(i)));
+			}
 		}
 		return sb.toString();
 	}

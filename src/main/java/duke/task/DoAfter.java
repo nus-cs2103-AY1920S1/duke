@@ -5,50 +5,39 @@ import duke.exception.InvalidTaskDukeException;
 
 public class DoAfter extends Task {
 
-	private String after;
+	private String afterWhen;
 
 	/**
 	 * Constructor of Task.
 	 *
 	 * @param name Sets name of Task to input.
 	 */
-	public DoAfter(String name, String after) throws EmptyTaskDukeException, InvalidTaskDukeException {
+	public DoAfter(String name, String afterWhen) throws EmptyTaskDukeException, InvalidTaskDukeException {
 		super(name);
 		if (name == null) {
 			throw new EmptyTaskDukeException("doafter");
 		}
-		if (after == null) {
+		if (afterWhen == null) {
 			throw new InvalidTaskDukeException("doafter");
 		}
-		this.after = after;
+		this.afterWhen = afterWhen;
 	}
 
-	@Override
-	public String getName() {
-		return super.getName();
-	}
-
-	@Override
-	public boolean isDone() {
-		return super.isDone();
-	}
-
-	@Override
-	public void setDone(boolean done) {
-		super.setDone(done);
-	}
-
-	@Override
-	public void done() {
-		super.done();
+	/**
+	 * Accessor to get due date (afterWhen) of DoAfter.
+	 *
+	 * @return
+	 */
+	public String getAfterWhen() {
+		return afterWhen;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder("[DoAfter]");
+		StringBuilder stringBuilder = new StringBuilder("[DA]");
 		stringBuilder.append(super.toString());
 		stringBuilder.append(" (");
-		stringBuilder.append(DateTime.create(after));
+		stringBuilder.append(DateTime.create(afterWhen));
 		stringBuilder.append(")");
 		return stringBuilder.toString();
 	}

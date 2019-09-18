@@ -5,6 +5,7 @@ import duke.exception.InvalidTaskDukeException;
 import duke.exception.LoadingErrorDukeException;
 
 import duke.task.Deadline;
+import duke.task.DoAfter;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
@@ -94,10 +95,13 @@ public class Storage {
 	private static Task createTaskFromInput(String[] inputArray) throws InvalidTaskDukeException, EmptyTaskDukeException {
 		Task createdTask = null;
 		switch (inputArray[0]) {
-		case "T":
+		case "TD":
 			createdTask = new ToDo(inputArray[2]);
 			break;
-		case "D":
+		case "DA":
+			createdTask = new DoAfter(inputArray[2], inputArray[3]);
+			break;
+		case "DL":
 			createdTask = new Deadline(inputArray[2], inputArray[3]);
 			break;
 		case "E":
@@ -125,11 +129,13 @@ public class Storage {
 
 		// Determine type of Task and add to line
 		if (task instanceof ToDo) {
-			stringBuilder.append("T");
+			stringBuilder.append("TD");
 		} else if (task instanceof Deadline) {
-			stringBuilder.append("D");
+			stringBuilder.append("DL");
 		} else if (task instanceof Event) {
 			stringBuilder.append("E");
+		} else if (task instanceof DoAfter) {
+			stringBuilder.append("DA");
 		}
 
 		stringBuilder.append(" | ");
@@ -142,20 +148,21 @@ public class Storage {
 		}
 
 		stringBuilder.append(" | ");
+		stringBuilder.append(task.getName());
 
-		// Add name to line
-		if (task instanceof ToDo) {
-			stringBuilder.append(task.getName());
-		} else if (task instanceof Event) {
-			stringBuilder.append(task.getName());
+		// Add DateTime
+		if (task instanceof Event) {
 			stringBuilder.append(" | ");
 			Event event = (Event) task;
 			stringBuilder.append(event.getAtTime());
 		} else if (task instanceof Deadline) {
-			stringBuilder.append(task.getName());
 			stringBuilder.append(" | ");
 			Deadline deadline = (Deadline) task;
 			stringBuilder.append(deadline.getByWhen());
+		} else if (task instanceof DoAfter) {
+			stringBuilder.append(" | ");
+			DoAfter doAfter = (DoAfter) task;
+			stringBuilder.append(doAfter.getAfterWhen());
 		}
 
 		String lineToAdd = stringBuilder.toString();

@@ -48,7 +48,7 @@ public class Deadline extends Task {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder("[Deadline]");
+		StringBuilder stringBuilder = new StringBuilder("[DL]");
 		stringBuilder.append(super.toString());
 		stringBuilder.append(" (");
 		stringBuilder.append(DateTime.create(byWhen));

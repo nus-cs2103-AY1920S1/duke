@@ -9,6 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -47,6 +50,8 @@ public class MainWindow extends AnchorPane {
 	/**
 	 * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
 	 * the dialog container. Clears the user input after processing.
+	 *
+	 * If user input's "bye", ByeCommand will execute and window will close after 3 seconds.
 	 */
 	@FXML
 	private void handleUserInput() {
@@ -55,5 +60,16 @@ public class MainWindow extends AnchorPane {
 		dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
 				DialogBox.getDukeDialog(response, dukeImage));
 		userInput.clear();
+
+		if (input.equals("bye")) {
+			Timer timer = new Timer();
+			TimerTask task = new TimerTask() {
+				public void run() {
+					System.exit(0);
+				}
+			};
+			timer.schedule(task, 3000);
+		}
+
 	}
 }

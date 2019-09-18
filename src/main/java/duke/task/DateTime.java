@@ -129,7 +129,7 @@ public class DateTime {
 
 		stringBuilder.append(String.format(" %d, ", year));
 
-		if (hour == 0) {
+		if ((hour == 0) || (hour == 12)) {
 			stringBuilder.append("12");
 		} else {
 			int hourMod = hour % 12;
@@ -137,7 +137,7 @@ public class DateTime {
 		}
 		stringBuilder.append(String.format(".%02d", minute));
 
-		if (hour > 12) {
+		if (hour >= 12) {
 			stringBuilder.append("pm");
 		} else {
 			stringBuilder.append("am");

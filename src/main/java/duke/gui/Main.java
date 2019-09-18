@@ -41,9 +41,12 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().load();
             fxmlLoader.<MainWindow>getController().isExit.addListener((observable, oldValue, newValue) -> {
                 if (oldValue != newValue) {
+                    //@@author James_D-reused
+                    //Reused from https://stackoverflow.com/a/27334455 with minor modifications
                     PauseTransition delay = new PauseTransition(Duration.seconds(1));
                     delay.setOnFinished(event -> stage.close());
                     delay.play();
+                    //@@author
                 }
             });
         } catch (IOException e) {

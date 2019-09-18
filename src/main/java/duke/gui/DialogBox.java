@@ -22,11 +22,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a Text
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
@@ -34,6 +35,14 @@ public class DialogBox extends HBox {
     private Text dialog;
     @FXML
     private ImageView displayPicture;
+
+    private static final Paint PALE_BLUE = Color.rgb(187,210, 240);
+    private static final Paint PALE_PINK = Color.rgb(240,187, 231);
+
+    private static final CornerRadii ROUND_CORNER = new CornerRadii(10);
+
+    private static final Insets USER_DIALOG_INSETS = new Insets(0,35,5,10);
+    private static final Insets DUKE_DIALOG_INSETS = new Insets(0,5,5,35);
 
     private DialogBox(String text, Image img) {
         try {
@@ -71,10 +80,9 @@ public class DialogBox extends HBox {
         String indentation = String.format("%33s", "");
         DialogBox userDialog =  new DialogBox(indentation + text, img);
         userDialog.setBackground(new Background(new BackgroundFill(
-                Color.rgb(187,210, 240),
-                new CornerRadii(10),
-                new Insets(0,35,5,10))));
-        userDialog.setAlignment(Pos.CENTER);
+                PALE_BLUE,
+                ROUND_CORNER,
+                USER_DIALOG_INSETS)));
         return userDialog;
     }
 
@@ -88,9 +96,9 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox dukeDialog = new DialogBox(text, img);
         dukeDialog.setBackground(new Background(new BackgroundFill(
-                Color.rgb(240,187, 231),
-                new CornerRadii(10),
-                new Insets(0,5,5,35))));
+                PALE_PINK,
+                ROUND_CORNER,
+                DUKE_DIALOG_INSETS)));
         dukeDialog.flip();
         return dukeDialog;
     }

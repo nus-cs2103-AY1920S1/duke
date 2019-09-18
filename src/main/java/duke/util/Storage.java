@@ -36,6 +36,7 @@ public class Storage {
      * @throws FileNotFoundException If the <code>Scanner</code> cannot find the file to read information from
      */
     public List<Task> loadTasks() throws FileNotFoundException {
+        assert file != null;
         Scanner scanner = new Scanner(file);
         List<Task> taskList = new ArrayList<>();
         while (scanner.hasNext()) {

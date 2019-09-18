@@ -53,14 +53,17 @@ public class Task {
         String[] taskInfos = taskInfo.split("\\|");
         switch (taskInfos[0]) {
         case "T":
+            assert taskInfos.length == 3;
             return new Todo(taskInfos[2], Boolean.parseBoolean(taskInfos[1]));
         case "D":
+            assert taskInfos.length == 4;
             return new Deadline(taskInfos[2], LocalDateTime.parse(taskInfos[3]), Boolean.parseBoolean(taskInfos[1]));
         case "E":
+            assert taskInfos.length == 4;
             return new Event(taskInfos[2], LocalDateTime.parse(taskInfos[3]), LocalTime.parse(taskInfos[4]),
                     Boolean.parseBoolean(taskInfos[1]));
         default:
-            break;
+            assert false;
         }
         return new Task(taskInfos[2]);
     }

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.gui.Main;
 import javafx.application.Application;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class Launcher {
      */
     public static void main(String[] args) {
         if (List.of(args).contains("cmdline")) {
-            Duke.main(args);
+            CmdDuke.main(args);
         } else {
             Application.launch(Main.class, args);
         }

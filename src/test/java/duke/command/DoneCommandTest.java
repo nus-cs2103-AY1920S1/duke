@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.task.TaskImpl;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ class DoneCommandTest {
 
     @Test
     void run_validIndex_success() throws IOException {
-        Task doneTask = new Task("get 123");
+        Task doneTask = new TaskImpl("get 123");
         doneTask.markAsDone();
         List<String> expected = List.of("Nice! I've marked this task as done:", "  " + doneTask);
         List<String> actual = new DoneCommand(taskListStub, storageStub)

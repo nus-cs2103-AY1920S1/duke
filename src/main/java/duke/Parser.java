@@ -3,7 +3,16 @@ package duke;
 import java.util.HashMap;
 import java.util.Map;
 
+import duke.command.ByeCommand;
 import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 class Parser {
     private Map<String, Command> commands = new HashMap<>();
@@ -31,5 +40,25 @@ class Parser {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
         return command;
+    }
+
+    /**
+     * Returns a parser with the default commands for Duke.
+     *
+     * @param tasks Task list to use.
+     * @param storage Storage to store tasks.
+     * @return Parser to parse commands.
+     */
+    static Parser getForDefaultCommands(TaskList tasks, Storage storage) {
+        Parser parser = new Parser();
+        parser.register("todo", ToDo.getCommand(tasks, storage));
+        parser.register("deadline", Deadline.getCommand(tasks, storage));
+        parser.register("event", Event.getCommand(tasks, storage));
+        parser.register("list", new ListCommand(tasks));
+        parser.register("find", new FindCommand(tasks));
+        parser.register("done", new DoneCommand(tasks, storage));
+        parser.register("delete", new DeleteCommand(tasks, storage));
+        parser.register("bye", new ByeCommand());
+        return parser;
     }
 }

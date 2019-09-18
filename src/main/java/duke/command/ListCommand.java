@@ -6,7 +6,7 @@ import java.util.List;
 import duke.task.TaskList;
 
 public class ListCommand implements Command {
-    private final TaskList tasks;
+    private TaskList tasks;
 
     public ListCommand(TaskList tasks) {
         this.tasks = tasks;

@@ -7,7 +7,7 @@ import java.util.List;
 import duke.task.TaskList;
 
 public class FindCommand implements Command {
-    private final TaskList tasks;
+    private TaskList tasks;
 
     public FindCommand(TaskList tasks) {
         this.tasks = tasks;

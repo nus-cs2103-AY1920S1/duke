@@ -1,49 +1,22 @@
 package duke;
 
 import java.util.List;
-import java.util.Scanner;
 
-class Ui {
-    private Scanner input = new Scanner(System.in);
-
+public interface Ui {
     /**
-     * Returns whether there is another line of input to read.
+     * Outputs a list of lines.
      *
-     * @return Whether there is another line of input.
+     * @param messages List of lines.
      */
-    boolean hasNextLine() {
-        return input.hasNextLine();
-    }
-
-    /**
-     * Reads a line from the input.
-     *
-     * @return Next line of input.
-     */
-    String readCommand() {
-        return input.nextLine();
-    }
+    void showMessage(List<String> messages);
 
     /**
      * Outputs a list of lines.
      *
      * @param messages List of lines.
      */
-    void printMessage(List<String> messages) {
-        System.out.println("    ____________________________________________________________");
-        for (String message : messages) {
-            System.out.println("     " + message);
-        }
-        System.out.println("    ____________________________________________________________\n");
-    }
-
-    /**
-     * Outputs a list of lines.
-     *
-     * @param messages List of lines.
-     */
-    private void printMessage(String... messages) {
-        printMessage(List.of(messages));
+    default void showMessage(String... messages) {
+        showMessage(List.of(messages));
     }
 
     /**
@@ -51,14 +24,14 @@ class Ui {
      *
      * @param message Error message.
      */
-    void showError(String message) {
-        printMessage(message);
+    default void showError(String message) {
+        showMessage(message);
     }
 
     /**
      * Outputs a welcome message.
      */
-    void showWelcome() {
-        printMessage("Hello! I'm Duke", "What can I do for you?");
+    default void showWelcome() {
+        showMessage("Hello! I'm Duke", "What can I do for you?");
     }
 }

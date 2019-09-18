@@ -1,30 +1,24 @@
 package duke;
 
+import duke.command.Command;
+import duke.task.TaskList;
+
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.ToDo;
-
-public class Duke {
+public abstract class Duke {
+    protected static final String DEFAULT_FILE_PATH = "tasks.txt";
     private Parser parser;
-    private Ui ui;
+    protected Ui ui;
 
     /**
      * Constructs a new copy of the Duke application.
      *
      * @param filePath File path of the save file to store tasks.
      */
-    Duke(String filePath) {
-        ui = new Ui();
+    protected Duke(String filePath, Ui ui) {
+        this.ui = ui;
+        ui.showWelcome();
         Storage storage = new Storage(filePath);
         TaskList tasks;
         try {
@@ -36,63 +30,22 @@ public class Duke {
             }
             tasks = new TaskList();
         }
-        parser = new Parser();
-        parser.register("todo", ToDo.getCommand(tasks, storage));
-        parser.register("deadline", Deadline.getCommand(tasks, storage));
-        parser.register("event", Event.getCommand(tasks, storage));
-        parser.register("list", new ListCommand(tasks));
-        parser.register("find", new FindCommand(tasks));
-        parser.register("done", new DoneCommand(tasks, storage));
-        parser.register("delete", new DeleteCommand(tasks, storage));
-        parser.register("bye", new ByeCommand());
+        parser = Parser.getForDefaultCommands(tasks, storage);
     }
 
-    /**
-     * Runs this Duke application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit && ui.hasNextLine()) {
-            String[] words = ui.readCommand().split(" ");
-            try {
-                Command command = parser.parse(words);
-                assert command != null;
-                ui.printMessage(command.run(words));
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (IOException e) {
-                ui.showError(e.getMessage());
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
-    }
-
-    String getResponse(String input) {
-        try {
-            String[] words = input.split(" ");
-            Command command = parser.parse(words);
-            assert command != null;
-            return String.join("\n", command.run(words));
-        } catch (DukeException e) {
-            return e.getMessage();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
-    }
-
-    boolean isExit(String input) {
+    protected boolean runInput(String input) {
         String[] words = input.split(" ");
         try {
-            return parser.parse(words).isExit();
+            Command command = parser.parse(words);
+            assert command != null;
+            ui.showMessage(command.run(words));
+            return command.isExit();
         } catch (DukeException e) {
-            return false;
+            ui.showError(e.getMessage());
+        } catch (IOException e) {
+            ui.showError(e.getMessage());
+            e.printStackTrace();
         }
+        return false;
     }
 }

@@ -12,12 +12,12 @@ public class TaskListStub extends TaskList {
 
     @Override
     public Task remove(int index) {
-        return lastAction = new Task("remove " + index);
+        return lastAction = new TaskImpl("remove " + index);
     }
 
     @Override
     public Task get(int index) {
-        return lastAction = new Task("get " + index);
+        return lastAction = new TaskImpl("get " + index);
     }
 
     @Override

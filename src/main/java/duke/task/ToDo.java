@@ -1,12 +1,11 @@
 package duke.task;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import duke.DukeException;
 import duke.Storage;
 import duke.command.Command;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ToDo extends Task {
     ToDo(String description) {
@@ -35,25 +34,12 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a list of strings representing this task so that it can be saved.
+     * Returns the type of this task.
      *
-     * @return A representation of this task as a list for saving.
+     * @return Type of this task as a string.
      */
     @Override
-    public List<String> getSaveList() {
-        List<String> list = new ArrayList<>();
-        list.add("T");
-        list.addAll(super.getSaveList());
-        return list;
-    }
-
-    /**
-     * Returns this task as a string to display to the user.
-     *
-     * @return This task as a string.
-     */
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
+    String getTaskType() {
+        return "T";
     }
 }

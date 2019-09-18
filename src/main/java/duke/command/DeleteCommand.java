@@ -8,7 +8,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class DeleteCommand implements Command {
-    private final TaskList tasks;
+    private TaskList tasks;
     private Storage storage;
 
     public DeleteCommand(TaskList tasks, Storage storage) {

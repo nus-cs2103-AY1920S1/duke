@@ -2,7 +2,7 @@ package duke.task;
 
 import java.util.List;
 
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -33,8 +33,15 @@ public class Task {
      * @return A representation of this task as a list for saving.
      */
     public List<String> getSaveList() {
-        return List.of(isDone ? "1" : "0", description);
+        return List.of(getTaskType(), isDone ? "1" : "0", description);
     }
+
+    /**
+     * Returns the type of this task.
+     *
+     * @return Type of this task as a string.
+     */
+    abstract String getTaskType();
 
     /**
      * Returns this task as a string to display to the user.
@@ -43,6 +50,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getTaskType() + "][" + getStatusIcon() + "] " + description;
     }
 }

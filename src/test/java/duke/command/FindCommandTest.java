@@ -1,11 +1,10 @@
 package duke.command;
 
+import duke.task.TaskImpl;
+import duke.task.TaskListStub;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-
-import duke.task.Task;
-import duke.task.TaskListStub;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,7 +14,7 @@ class FindCommandTest {
     @Test
     void run_validIndex_success() {
         List<String> expected = List.of("Here are the matching tasks in your list:",
-                "1." + new Task("get 3"));
+                "1." + new TaskImpl("get 3"));
         List<String> actual = new FindCommand(taskListStub).run(new String[]{"find", "t 3"});
         assertEquals(expected, actual);
     }

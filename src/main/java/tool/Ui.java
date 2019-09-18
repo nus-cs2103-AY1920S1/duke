@@ -72,4 +72,13 @@ public class Ui {
         return "Here are the matching tasks in your list:";
     }
 
+    protected String edit(String prevTask, Task newTask) {
+        System.out.println("new task: " + newTask + "\nold task: " + prevTask);
+        if (prevTask.equals(newTask.toString())) {
+            return "OOPS!! There's nothing to change.";
+        } else {
+            return "Success! I've edited this task:\n" + prevTask + "\nto this:\n" + newTask;
+        }
+    }
+
 }

@@ -7,9 +7,9 @@ import task.Todo;
 
 
 public class Parser {
-    protected TaskList commands;
-    protected Storage storage;
-    protected Ui ui;
+    private TaskList commands;
+    private Storage storage;
+    private Ui ui;
 
 
     public Parser(TaskList commands, Storage storage, Ui ui) {
@@ -28,26 +28,39 @@ public class Parser {
             String[] inputArr = command.split(" ");
             String userCommand = inputArr[0];
             String dukeText;
+//            System.out.println("command: " + userCommand);
             try {
-                if (userCommand.equals("bye")) {
-                    this.storage.close(this.commands);
-                    dukeText = this.ui.bye();
-                } else if (userCommand.equals("list")) {
-                    dukeText = this.ui.list(this.commands);
-                } else if (userCommand.equals("done")) {
-                    dukeText = parseDone(inputArr);
-                } else if (userCommand.equals("deadline")) {
-                    dukeText = parseTask(command, "d");
-                } else if (userCommand.equals("event")) {
-                    dukeText = parseTask(command, "e");
-                } else if (userCommand.equals("todo")) {
-                    dukeText = parseTask(command, "t");
-                } else if (userCommand.equals("delete")) {
-                    dukeText = parseDelete(inputArr);
-                } else if (userCommand.equals("find")) {
-                    dukeText = parseFind(inputArr);
-                } else {
-                    throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                switch (userCommand) {
+                    case "bye":
+                        this.storage.close(this.commands);
+                        dukeText = this.ui.bye();
+                        break;
+                    case "list":
+                        dukeText = this.ui.list(this.commands);
+                        break;
+                    case "done":
+                        dukeText = parseDone(inputArr);
+                        break;
+                    case "deadline":
+                        dukeText = parseTask(command, "d");
+                        break;
+                    case "event":
+                        dukeText = parseTask(command, "e");
+                        break;
+                    case "todo":
+                        dukeText = parseTask(command, "t");
+                        break;
+                    case "delete":
+                        dukeText = parseDelete(inputArr);
+                        break;
+                    case "find":
+                        dukeText = parseFind(inputArr);
+                        break;
+                    case "edit":
+                        dukeText = parseEdit(command);
+                        break;
+                    default:
+                        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 dukeText = e.getMessage();
@@ -75,7 +88,7 @@ public class Parser {
                 String dateTime = taskArr[1];
                 if (type.equals("e")) {
                     tt = new Event(des, new DateTime(dateTime));
-                } else if (type.equals('d')) {
+                } else if (type.equals("d")) {
                     tt = new Deadline(des, new DateTime(dateTime));
                 }
                 this.commands.add(tt);
@@ -128,5 +141,23 @@ public class Parser {
             throw new DukeException("OOPS!!! Index for done cannot be empty.");
         }
 
+    }
+
+    private String parseEdit(String command) throws DukeException {
+        //input = i/attribute/new des
+        String input = command.split(" ", 2)[1];
+        try {
+            String[] splitInput = input.split("/");
+            int i = Integer.parseInt(splitInput[0]);
+            Task toEdit = this.commands.getTask(i - 1);
+            String oldTask = toEdit.toString();
+            String attribute = splitInput[1];
+            String newDes = splitInput[2];
+            toEdit.edit(attribute, newDes);
+            this.storage.done(toEdit, i);
+            return this.ui.edit(oldTask, toEdit);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Format for edit command is wrong. Try: edit index/attribute/updated info instead.");
+        }
     }
 }

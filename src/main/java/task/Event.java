@@ -11,6 +11,30 @@ public class Event extends Task {
     }
 
     /**
+     * Edits the specified attribute of task object with given update.
+     * @param attribute: done, des, date
+     * @param update: true/false, new des, date
+     */
+    @Override
+    public void edit(String attribute, String update) {
+        switch (attribute) {
+            case "done":
+                assert update.equals("true") || update.equals("false") : "Must provide true or false only";
+                this.isDone = update.equals("true");
+                break;
+            case "des":
+                this.description = update;
+                break;
+            case "date":
+                this.at = new DateTime(update);
+                break;
+            default:
+                System.out.println("Attribute does not exist");
+                break;
+        }
+    }
+
+    /**
      * Formats the string to how it should be saved in the .txt file
      * @return String to save in the .txt file
      */

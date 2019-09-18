@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Represents the main class of Duke.
+ */
 public class Duke extends Application {
 
     private Storage storage;
@@ -24,6 +27,10 @@ public class Duke extends Application {
     //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     //private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Starts by creating GUI for Duke.
+     * @param stage stage.
+     */
     @Override
     public void start(Stage stage) {
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
@@ -137,7 +144,7 @@ public class Duke extends Application {
     }
 
     /**
-     * This class tests for chatbot Duke.
+     * Constructor of Duke. Initialises Ui, Storage and TaskList.
      */
     public Duke() {
         ui = new Ui();
@@ -149,6 +156,10 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
     }
+
+    /**
+     * Starts the duke program.
+     */
     public void run() {
         ui.run(tasks, storage);
     }
@@ -156,6 +167,11 @@ public class Duke extends Application {
     /*public static void main(String[] args) {
         new Duke("../../../data/tasks.txt").run();
     }*/
+
+    /**
+     * main method of duke program.
+     * @param args args.
+     */
     public static void main(String[] args) {
         new Duke().run();
     }

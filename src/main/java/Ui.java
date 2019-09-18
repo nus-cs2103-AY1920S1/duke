@@ -1,8 +1,15 @@
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Represents the interaction betweeen user and Duke.
+ */
 public class Ui {
 
+    /**
+     * Starts Duke and sends command to parser.
+     * @param tasks Task object.
+     * @param storage Storage object.
+     */
     public void run (TaskList tasks, Storage storage) {
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?");
@@ -22,6 +29,10 @@ public class Ui {
             System.out.println("File not Found");
         }
     }
+
+    /**
+     * Prints if file not available.
+     */
     public void showLoadingError() {
         System.out.println("File not available");
     }

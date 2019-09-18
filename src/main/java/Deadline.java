@@ -2,6 +2,11 @@ import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Deadline class represents on of the 3 tasks.
+ * Has the date attribute to understand date and time.
+ * Has description attribute to represent task description.
+ */
 public class Deadline extends Task {
 
     private Date date;
@@ -20,7 +25,7 @@ public class Deadline extends Task {
     protected int intDate;
     protected int intMonth;
     protected int intYear;
-    protected String amOrpm;
+    protected String amOrPm;
     protected  String[] suffixes =
             {  "0th",  "1st",  "2nd",  "3rd",  "4th",  "5th",  "6th",  "7th",  "8th",  "9th",
                     "10th", "11th", "12th", "13th", "14th", "15th", "16th", "17th", "18th", "19th",
@@ -33,6 +38,12 @@ public class Deadline extends Task {
     protected String formattedDate;
     protected String formattedDateAndTime = "";
 
+    /**
+     * Constructor of Deadline object.
+     * @param description Full description of deadline task.
+     * @param date Date at which task is due.
+     * @throws ParseException when date entered is invalid or input of wrong format.
+     */
     public Deadline (String description, String date) throws ParseException {
         super(description);
         this.by = date;
@@ -49,6 +60,10 @@ public class Deadline extends Task {
         return date;
     }*/
 
+    /**
+     * Formats the the deadline object.
+     * @return a string representation of deadline object.
+     */
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)", super.getDescription(), dateFormat.format(date));
@@ -72,9 +87,9 @@ public class Deadline extends Task {
             amOrpm = "am";
         }
         if(min == 0) {
-            formattedTime = hour + amOrpm + "";
+            formattedTime = hour + amOrPm + "";
         } else {
-            formattedTime = hour + "." + min + amOrpm;
+            formattedTime = hour + "." + min + amOrPm;
         }
 
         String[] splitDates = arr[1].split("/");
@@ -97,9 +112,18 @@ public class Deadline extends Task {
         }
     }*/
 
+    /**
+     * Returns the description of deadline object.
+     * @return a string representation of description.
+     */
     public String getDescription() {
         return super.getDescription();
     }
+
+    /**
+     * Returns the due date of deadline object.
+     * @return a string representation of date.
+     */
     public String getBy() {
         return by;
     }

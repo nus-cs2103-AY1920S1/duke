@@ -9,9 +9,19 @@ public class Storage {
 
     private String filename;
 
+    /**
+     * Storage class deals with loading tasks from the file and saving tasks in the file.
+     */
     public Storage() {
         this.filename = "../../../data/tasks.txt";
     }
+
+    /**
+     * Loads tasks into TaskList according to the Task Todo or Deadline or Event.
+     * @return Arraylist of Tasks.
+     * @throws IOException if file not found.
+     * @throws ParseException parseexception.
+     */
     public ArrayList<Task> load() throws IOException, ParseException {
         File file = new File(filename);
         System.out.println(file.getCanonicalPath());
@@ -33,6 +43,12 @@ public class Storage {
         }
         return list;
     }
+
+    /**
+     * Appends Task to task.txt file.
+     * @param task task to add to txt file.
+     * @throws Exception if there is error in file handling.
+     */
     public void append(Task task) throws Exception {
         FileWriter writer = new FileWriter(filename, true);
         String status = task.getIsDone() ? "1" : "0";
@@ -49,6 +65,12 @@ public class Storage {
         }
         writer.close();
     }
+
+    /**
+     * Updates the task.txt when task is done or deleted.
+     * @param list ArrayList of Task to update.
+     * @throws IOException error in file handling.
+     */
     public void update(ArrayList<Task> list) throws IOException {
         BufferedWriter bufferWriter = Files.newBufferedWriter(Paths.get(filename));
         int counter = 0;

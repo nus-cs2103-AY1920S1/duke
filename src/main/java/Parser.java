@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * Reads command and performs operations based on input or activity
+ * Reads command and creates its respective Task object. Performs operations on TaskList. Stores the TaskList in a storage file.
  */
 public class Parser {
 
@@ -11,10 +11,20 @@ public class Parser {
     private TaskList tasks;
     private String command;
 
+    /**
+     * Constructor of Parser.
+     * @param storage storage object.
+     * @param tasks TaskList object.
+     */
     public Parser (Storage storage, TaskList tasks) {
         this.storage = storage;
         this.tasks = tasks;
     }
+
+    /**
+     * Checks if command is done and marks task as done.
+     * @param sc Scanner object.
+     */
     public void checkDone (Scanner sc) {
         try {
             int taskNum = sc.nextInt();
@@ -28,6 +38,10 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if command is delete and removes task from TaskList.
+     * @param sc Scanner object.
+     */
     public void checkDelete (Scanner sc) {
         try {
             int numToDelete = sc.nextInt();
@@ -42,17 +56,27 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if command is Todo and creates a todo Object.
+     * @param sc Scanner object.
+     * @throws Exception if description is empty.
+     */
     public void checkToDo (Scanner sc) throws Exception {
-        String fulldescription = sc.nextLine();
-        assert !fulldescription.isEmpty();
-        if (!fulldescription.isEmpty()) {
-            tasks.add(new Todo(fulldescription));
+        String fullDescription = sc.nextLine();
+        assert !fullDescription.isEmpty();
+        if (!fullDescription.isEmpty()) {
+            tasks.add(new Todo(fullDescription));
             storage.append(tasks.getLast());
         } else {
             throw new Exception();
         }
     }
 
+    /**
+     * Checks if command is deadline and creates a Deadline object.
+     * @param sc Scanner object.
+     * @throws Exception if description is empty.
+     */
     public void checkDeadline (Scanner sc) throws Exception {
         String fullDescription = sc.nextLine();
         assert !(fullDescription == null);
@@ -70,6 +94,12 @@ public class Parser {
             throw new Exception();
         }
     }
+
+    /**
+     * Checks if command is event and creates a Deadline object.
+     * @param sc Scanner object.
+     * @throws Exception if description is empty.
+     */
     public void checkEvent (Scanner sc) throws Exception {
         String fullDescription = sc.nextLine();
         assert !(fullDescription == null);
@@ -88,6 +118,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks for any anomalies like no clash in timing.
+     * @param timeAndDate timeAndDate of task object to be checked with the timeAndDate of other task objects.
+     * @return
+     */
     public boolean noClash(String timeAndDate) {
         ArrayList<Task> list = tasks.getList();
         for(int i = 0; i < list.size(); i++) {
@@ -104,7 +139,11 @@ public class Parser {
         return true;
     }
 
-
+    /**
+     * Checks if command is todo, deadline or event.
+     * @param sc Scanner object.
+     * @param command type of task.
+     */
     public void checkTask (Scanner sc, String command) {
         try {
             if(command.equals("todo")) {
@@ -127,6 +166,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Parser reads in command from user.
+     * @param command commands like done, delete, list
+     * @param sc
+     */
     public void read (String command, Scanner sc) {
         this.command = command;
         if (command.equals("done")) {

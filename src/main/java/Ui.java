@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.text.ParseException;
 
 /**
@@ -61,7 +63,8 @@ public class Ui {
     public static String readInput(String userInput) {
         String[] userInputSplit = userInput.split(" ");
         if (userInputSplit[0].equals("bye")) {
-            return "goodbye!";
+            Platform.exit();
+            return "Goodbye";
         }
         if (userInputSplit[0].equals("list")) {
             return printTaskList();

@@ -23,18 +23,9 @@ public class DateTime {
     public DateTime(String dateTime) throws InvalidInputException {
         String[] splitDateAndTime = dateTime.split(" ");
         String[] splitDate = splitDateAndTime[0].split("/");
-        String day = splitDate[0];
-        String month = splitDate[1];
+        String day = splitDate[0].replaceFirst("^0+(?!$)", "");
+        String month = splitDate[1].replaceFirst("^0+(?!$)", "");
         final String year = splitDate[2];
-
-//        try {
-//            String dateStr = splitDateAndTime[0];
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/mm/yyyy");
-//            LocalDateTime date = LocalDateTime.parse(dateStr, formatter);
-//        } catch (DateTimeParseException e) {
-////            throw new InvalidInputException("OOPS!!! The Date field is invalid");
-//            throw new InvalidInputException("input is " + dateTime);
-//        }
 
         if (day.equals("1") || day.equals("21") || day.equals("31")) {
             day = day + "st";

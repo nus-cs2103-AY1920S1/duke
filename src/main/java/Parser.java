@@ -19,6 +19,7 @@ public class Parser {
      *                       in the wrong format
      */
 
+    @SuppressWarnings("checkstyle:AvoidEscapedUnicodeCharacters")
     public static Command parse(String command) throws DukeException {
         String[] commandSplit = command.split(" ");
         String type = commandSplit[0];
@@ -75,7 +76,7 @@ public class Parser {
             return new AddCommand(enumType, timeSplit[0].substring(6), timeSplit[1]);
 
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't"
+            throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't"
                     + "know what that means :-(");
         }
     }
@@ -93,7 +94,7 @@ public class Parser {
         String[] timeSplit;
 
         if (type.equals("event")) {
-            timeSplit = command.split("/at");
+            timeSplit = command.split("/at ");
         } else if (type.equals("deadline")) {
             timeSplit = command.split("/by");
         } else {
@@ -101,7 +102,7 @@ public class Parser {
         }
 
         if (timeSplit.length == 1) {
-            throw new DukeException("☹ OOPS!!! Please enter a time / duration for your task.");
+            throw new DukeException("\u2639 OOPS!!! Please enter a time / duration for your task.");
         }
 
         return timeSplit;
@@ -112,29 +113,29 @@ public class Parser {
 
         switch (type) {
         case "done":
-            toThrow = new DukeException("☹ OOPS!!! Please indicate "
+            toThrow = new DukeException("\u2639 OOPS!!! Please indicate "
                     + "which task you have completed.");
             break;
         case "delete":
-            toThrow = new DukeException("☹ OOPS!!! Please indicate which task "
+            toThrow = new DukeException("\u2639 OOPS!!! Please indicate which task "
                     + "you would like to delete.");
             break;
         case "find":
-            toThrow = new DukeException("☹ OOPS!!! Please indicate the keyword "
+            toThrow = new DukeException("\u2639 OOPS!!! Please indicate the keyword "
                     + "you are looking for!");
             break;
         case "sort":
-            toThrow = new DukeException("☹ OOPS!!! Please indicate how "
+            toThrow = new DukeException("\u2639 OOPS!!! Please indicate how "
                     + "you want to sort the list!");
             break;
         case "todo":
         case "deadline":
         case "event":
-            toThrow = new DukeException("☹ OOPS!!! The description of a "
+            toThrow = new DukeException("\u2639 OOPS!!! The description of a "
                     + "task cannot be empty.");
             break;
         default:
-             toThrow = new DukeException(" ☹ OOPS!!! I'm sorry, but I don't "
+             toThrow = new DukeException("\u2639 OOPS!!! I'm sorry, but I don't "
                      + "know what that means :-(");
         }
 

@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (this.intNum > tasks.size()) {
-            throw new DukeException("☹ OOPS!!! Task " + intNum + " does not exist.");
+            throw new DukeException("\u2639 OOPS!!! Task " + intNum + " does not exist.");
         }
 
         Task toRemove = tasks.get(intNum - 1);

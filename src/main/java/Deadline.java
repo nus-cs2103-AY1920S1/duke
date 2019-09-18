@@ -44,9 +44,9 @@ public class Deadline extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            return type + " | [✓] | " + taskDesc + " | " + timeDesc + "\n";
+            return type + " | [\u2713] | " + taskDesc + " | " + timeDesc + "\n";
         } else {
-            return type + " | [✗] | " + taskDesc + " | " + timeDesc + "\n";
+            return type + " | [\u274C] | " + taskDesc + " | " + timeDesc + "\n";
         }
     }
 

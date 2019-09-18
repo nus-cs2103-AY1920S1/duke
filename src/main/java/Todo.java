@@ -29,9 +29,9 @@ public class Todo extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            return type + " | [✓] | " + taskDesc + "\n";
+            return type + " | [\u2713] | " + taskDesc + "\n";
         } else {
-            return type + " | [✗] | " + taskDesc + "\n";
+            return type + " | [\u274C] | " + taskDesc + "\n";
         }
     }
 

@@ -34,10 +34,10 @@ public abstract class Task {
     @Override
     public String toString() {
         if (isDone) {
-            return "[" + type + "][✓] " + taskDesc;
+            return "[" + type + "][\u2713] " + taskDesc;
 
         } else {
-            return "[" + type + "][✗] " + taskDesc;
+            return "[" + type + "][\u274C] " + taskDesc;
         }
     }
 

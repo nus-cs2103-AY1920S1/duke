@@ -13,21 +13,21 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import java.io.*;
+
 
 /**
  * Represents main running class of the Duke program.
  */
 public class Duke extends Application {
-    private Storage storage = new Storage("C:\\Users\\Lynn\\Desktop\\Y2S1\\CS2103T\\iP\\dukenew\\src\\main\\java\\TaskList.txt");
+    private Storage storage = new Storage("C:\\Users\\Public\\Documents\\DukeTaskList.txt");
     private TaskList tasks;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Image user = new Image(this.getClass()
+    private Image userImage = new Image(this.getClass()
             .getResourceAsStream("/resources/images/DaUser.png"));
-    private Image duke = new Image(this.getClass()
+    private Image dukeImage = new Image(this.getClass()
             .getResourceAsStream("/resources/images/DaDuke.png"));
 
     @Override
@@ -98,9 +98,10 @@ public class Duke extends Application {
 
         //Step 3. Add functionality to handle user input.
         //Display welcome text upon running of the app
-        String welcomeText = "Hello! I'm Duke" + "\n" + "What can I do for you?";
+        String welcomeText = "Hello! I'm Duke" + "\n" + "What can I do for you?" + "\n"
+                + "(Note: Your task list will be saved in location C:\\Users\\Public\\Documents)";
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(new Label(welcomeText), new ImageView(duke))
+                DialogBox.getDukeDialog(new Label(welcomeText), new ImageView(dukeImage))
         );
         sendButton.setOnMouseClicked((event) -> {
             try {
@@ -132,9 +133,10 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
+
         userInput.clear();
     }
 
@@ -142,8 +144,8 @@ public class Duke extends Application {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(e.getMessage());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke)));
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage)));
         userInput.clear();
     }
 

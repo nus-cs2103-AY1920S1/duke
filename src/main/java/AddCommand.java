@@ -40,7 +40,7 @@ public class AddCommand extends Command {
             break;
 
         case EVENT:
-            newTask = new Event("E", this.taskDesc, this.timeDesc);
+            newTask = new Event("E", this.taskDesc, this.timeDesc.split(" ")[0], this.timeDesc.split(" ")[1]);
             break;
 
         case FIXED:

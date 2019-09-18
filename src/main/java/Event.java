@@ -6,25 +6,27 @@ import java.text.ParseException;
  * Represents an "Event" task inputted by the user.
  */
 public class Event extends Task {
-    private String timeDesc;
+    private String timeDescDate;
+    private String timeDescTime;
     protected Date date;
 
     /**
      * Constructs an Events task object.
      * @param desc description of the task by user
-     * @param timeDesc inputted time of the task
+     * @param timeDescDate inputted time of the task
+     * @param timeDescTime inputted time of the task
      * @throws DukeException if task description or time is not inputted,
      *                       or time is inputted in the wrong format
      */
-    public Event(String type, String desc, String timeDesc) throws DukeException {
+    public Event(String type, String desc, String timeDescDate, String timeDescTime) throws DukeException {
         super(type, desc);
-        this.timeDesc = timeDesc;
-
+        this.timeDescDate = timeDescDate;
+        this.timeDescTime = timeDescTime;
         try {
-            SimpleDateFormat deadlineFormatter = new SimpleDateFormat("dd/MM/yyyy hhmm-hhmm");
-            this.date = deadlineFormatter.parse(timeDesc);
+            SimpleDateFormat deadlineFormatter = new SimpleDateFormat("dd/MM/yyyy");
+            this.date = deadlineFormatter.parse(timeDescDate);
         } catch (ParseException e) {
-            throw new DukeException("Please enter deadline in format dd/mm/yyyy hhmm-hhmm");
+            throw new DukeException("Please enter event time in format dd/mm/yyyy hhmm-hhmm hha");
         }
     }
 
@@ -35,7 +37,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (at: " + date + ")";
+        return super.toString() + " (at: " + date + " " + timeDescTime + ")";
     }
 
     /**
@@ -44,9 +46,9 @@ public class Event extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            return type + " | [✓] | " + taskDesc + " | " + timeDesc + "\n";
+            return type + " | [\u2713] | " + taskDesc + " | " + timeDescDate + " " + timeDescTime + "\n";
         } else {
-            return type + " | [✗] | " + taskDesc + " | " + timeDesc + "\n";
+            return type + " | [\u274C] | " + taskDesc + " | " + timeDescDate + " " + timeDescTime + "\n";
         }
     }
 

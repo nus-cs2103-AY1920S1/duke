@@ -29,9 +29,9 @@ public class FixedDurationTask extends Task {
      */
     public String toFileFormat() {
         if (isDone) {
-            return type + " | [✓] | " + taskDesc + " | " + duration + "\n";
+            return type + " | [\u2713] | " + taskDesc + " | " + duration + "\n";
         } else {
-            return type + " | [✗] | " + taskDesc + " | " + duration + "\n";
+            return type + " | [\u274C] | " + taskDesc + " | " + duration + "\n";
         }
     }
 

@@ -30,7 +30,7 @@ public class TaskList {
                 break;
 
             case "E":
-                add = new Event(type, listItem[2], listItem[3]);
+                add = new Event(type, listItem[2], listItem[3].split(" ")[0], listItem[3].split(" ")[1]);
                 addTask(add, listItem[1]);
                 break;
 
@@ -57,7 +57,7 @@ public class TaskList {
      * @param status indicates whether the task has been completed
      */
     public void addTask(Task task, String status) {
-        if(status == "✓") {
+        if(status == "\u2713") {
             task.markAsDone();
         }
 

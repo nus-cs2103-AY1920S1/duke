@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.DukeException;
 import duke.task.Task;
 import duke.TaskList;
@@ -16,6 +17,9 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks) throws DukeException {
         Task taskToMarkAsDone;
         int selectedIndex;
+        if (splitInput.length < 2) {
+            throw new DukeException("Done command needs a second argument");
+        }
         try {
             selectedIndex = Integer.parseInt(splitInput[1]) - 1;
         } catch (NumberFormatException e) {

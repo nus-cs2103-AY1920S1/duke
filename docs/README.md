@@ -51,6 +51,8 @@ todo <task description>
 
 The "To-do" task only contains a *task description*, which you may enter after the `todo` command, separated by a whitespace.
 
+<details><summary>How to use:</summary>
+  
 #### Example of usage: 
 
 ```
@@ -66,6 +68,7 @@ _____________________________________________________
  Now you have 1 task in your list.
 _____________________________________________________
 ```
+</details>
  
 [Back to top](#toc)
  

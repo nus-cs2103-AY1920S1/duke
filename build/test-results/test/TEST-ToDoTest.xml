@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ToDoTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-09-15T03:58:11" hostname="ShiraishiZaiden" time="0.081">
+  <properties/>
+  <testcase name="testFileStringFormat()" classname="ToDoTest" time="0.078"/>
+  <testcase name="testToStringFormat()" classname="ToDoTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

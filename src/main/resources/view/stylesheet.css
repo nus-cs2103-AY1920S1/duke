@@ -1,0 +1,67 @@
+/* MainWindow */
+
+/* Remove default glow effect when controls are in focus */
+.root {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+#sendButton {
+    -fx-background-color: white;
+    -fx-border-radius: 0;
+    /* Add icon to the button */
+    -fx-background-image: url('../images/send.png');
+    -fx-background-size: 26px 26px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+#sendButton:disabled {
+    -fx-background-color: white;
+    -fx-opacity: 0.6;
+}
+
+#userInput {
+    -fx-background-color: white;
+    -fx-border-radius:10;
+}
+
+#dialogContainer {
+    -fx-background-color: linear-gradient(to bottom, #A2DFF9, #B2E4FA, #A2DFF9);
+    -fx-background-insets: 0, 1;
+}
+
+/* DialogBox */
+
+#dialog {
+    -fx-background-color: #D6FFFE;
+    -fx-background-radius: 5;
+}
+
+#displayPicture {
+    -fx-background-radius: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

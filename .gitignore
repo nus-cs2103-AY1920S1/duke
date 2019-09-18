@@ -5,10 +5,13 @@
 
 # Gradle build files
 /.gradle/
-/build/
+!/build/libs/duke-0.2.jar
 src/main/resources/docs/
 
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml
 bin/
+
+# Data text files
+/data/

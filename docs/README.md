@@ -1,13 +1,23 @@
 # User Guide
 
-## Features 
+## What is Duke?
+Duke (Keanu Reeves!) is your personal chatbot assistant. He helps you organize your life. 
+The application uses a command line interface (CLI) to keep a record of your tasks. 
+Duke remembers todos, deadlines and events, so that you don't have to.
 
-### Feature 1 
+## Features 
+* Add tasks 
+* Delete tasks
+* Mark tasks as completed
+* Tag tasks
+* Search for tasks 
+* List all tasks
+
+### Add task
 Description of feature.
 
-## Usage
 
-### `Keyword` - Describe action
+### `add taskName` - Describe action
 
 Describe action and its outcome.
 

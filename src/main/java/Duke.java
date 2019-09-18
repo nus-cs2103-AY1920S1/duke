@@ -1,22 +1,26 @@
 import java.util.Arrays;
-import java.util.Scanner;
+
+import duke.command.Parser;
+import duke.command.Storage;
+import duke.command.TaskList;
 import duke.command.DukeException;
 
 /**
- * Duke class. Creates a new Ui, TaskList and Storage object, then runs the main method of the program.
+ * Duke class. Creates a new Ui, duke.command.TaskList and duke.command.Storage object,
+ * then runs the main method of the program.
  */
 public class Duke {
 
     /** Stores the Ui object used to display messages to the user. */
     private Ui ui;
-    /** Stores the Storage object used to read/write from file. */
+    /** Stores the duke.command.Storage object used to read/write from file. */
     private Storage storage;
-    /** Stores the TaskList object used to add/delete tasks. */
+    /** Stores the duke.command.TaskList object used to add/delete tasks. */
     private TaskList taskList;
 
     // Solution below adapted from https://github.com/nexolute/duke/blob/master/src/main/java/duke/Duke.java
     /**
-     * Initializes the Duke object by setting the Ui, Storage and TaskList objects.
+     * Initializes the Duke object by setting the Ui, duke.command.Storage and duke.command.TaskList objects.
      * @param mainWindow the MainWindow of the application.
      */
     public void initialize(MainWindow mainWindow) {
@@ -48,20 +52,12 @@ public class Duke {
                 break;
 
             case "done":
-                try {
-                    index = Integer.valueOf(params[0]);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("You need to specify a task ID to mark as done.");
-                }
+                index = Parser.checkForValidIndex(params);
                 ui.printToUser(taskList.markAsDone(index));
                 break;
 
             case "delete":
-                try {
-                    index = Integer.valueOf(params[0]);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DukeException("You need to specify a task ID to delete.");
-                }
+                index = Parser.checkForValidIndex(params);
                 ui.printToUser(taskList.delete(index));
                 break;
 
@@ -77,8 +73,16 @@ public class Duke {
                 ui.printToUser(taskList.createEvent(params));
                 break;
 
+            case "note":
+                ui.printToUser(taskList.createNote(params));
+                break;
+
             case "find":
                 ui.printToUser(taskList.findEvent(params));
+                break;
+
+            case "help":
+                ui.printToUser(taskList.help());
                 break;
 
             default:

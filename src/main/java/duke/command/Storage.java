@@ -1,3 +1,12 @@
+package duke.command;
+
+import duke.task.Deadline;
+import duke.task.Status;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.task.Event;
+import duke.task.Note;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -6,14 +15,10 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Status;
-import duke.task.Task;
-import duke.task.ToDo;
+
 
 /**
- * Storage class. Handles the reading/writing of data to disk.
+ * duke.command.Storage class. Handles the reading/writing of data to disk.
  */
 public class Storage {
 
@@ -23,7 +28,7 @@ public class Storage {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
-     * Creates a new Storage object.
+     * Creates a new duke.command.Storage object.
      * @param fileName The location of the file to be read/written to.
      */
     public Storage(String fileName) {
@@ -60,6 +65,10 @@ public class Storage {
 
                 case "E":
                     taskList.add(new Event(status, params[2], LocalDateTime.parse(params[3], formatter)));
+                    break;
+
+                case "N":
+                    taskList.add(new Note(params[1]));
                     break;
 
                 default:

@@ -21,26 +21,57 @@ There are three types of tasks: deadline, event and todo.
 
 ## Usage
 
-### todo <task_name>
+### todo 
 
-submit a todo task to Duke
+Submit a todo task to Duke
+todo task has no date and time.
 
 Example of usage: 
 
 `todo run`
 
-### deadline <task_name> /by <date time>
+### deadline 
 
-submit a deadline task to Duke
+Submit a deadline task with date and time to Duke
 
 Example of usage: 
 
 `deadline return book /by 2/12/2019 1800`
 
-### event <task_name> /at <date time>
+### event <task_name>
 
-submit an event task to Duke
+Submit an event task with date and time to Duke
 
 Example of usage: 
 
 `event return book /by 2/12/2019 1800`
+
+### Feature 3 
+Make changes to task lists.
+
+## Usage
+
+### delete 
+
+Delete a task, task is identified with a digit.
+
+Example of usage: 
+If we want to remove task 1
+`delete 1`
+
+### done
+
+Mark a task as done, task is identified with a digit
+
+Example of usage: 
+If we want to mark task 1 as done
+`done 1`
+
+### Feature 4 
+Terminate interactions with Duke.
+
+## Usage
+### bye
+Example of usage: 
+`bye`
+

@@ -9,26 +9,26 @@ Description of feature.
 
 ### 1. bye
 
->#### Usage:
->
+##### Usage:
+
 >`bye`
->
->#### Description:
->
+
+##### Description:
+
 >Exits Duke.
 
 ### 2. deadline
 
->#### Usage:
->
+##### Usage:
+
 >`deadline <description> /by <due> [/every <recurrence>]`
->
->#### Description:
->
+
+##### Description:
+
 >Creates a deadline task. A deadline is a task that has a due date.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<description>`
 >
 >Required: Yes
@@ -36,7 +36,7 @@ Description of feature.
 >Type: String
 >
 >Description: The description of this deadline.
->
+
 >`/by <due>`
 >
 >Required: Yes
@@ -44,7 +44,7 @@ Description of feature.
 >Type: ISO-8601 Date
 >
 >Description: The due date of this deadline.
->
+
 >`/every <recurrence>`
 >
 >Required: No
@@ -55,16 +55,16 @@ Description of feature.
 
 ### 3. delete
 
->#### Usage:
->
+##### Usage:
+
 >`delete <task>`
->
->#### Description:
->
+
+##### Description:
+
 >Deletes a task forever.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<task>`
 >
 >Required: Yes
@@ -75,16 +75,16 @@ Description of feature.
 
 ### 4. done
 
->#### Usage:
->
+##### Usage:
+
 >`done <task>`
->
->#### Description:
->
+
+##### Description:
+
 >Marks a task as done. Well done!
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<task>`
 >
 >Required: Yes
@@ -95,16 +95,16 @@ Description of feature.
 
 ### 5. event
 
->#### Usage:
->
+##### Usage:
+
 >`event <description> /at <schedule> [/every <recurrence>]`
->
->#### Description:
->
+
+##### Description:
+
 >Creates an event task. An event has a start date and an end date.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<description>`
 >
 >Required: Yes
@@ -112,7 +112,7 @@ Description of feature.
 >Type: String
 >
 >Description: The description of this event.
->
+
 >`/at <schedule>`
 >
 >Required: Yes
@@ -120,7 +120,7 @@ Description of feature.
 >Type: ISO-8601 Date Range(s)
 >
 >Description: The schedule(s) of this event.
->
+
 >`/every <recurrence>`
 >
 >Required: No
@@ -131,16 +131,16 @@ Description of feature.
 
 ### 6. event_at
 
->#### Usage:
->
+##### Usage:
+
 >`event_at <task> /at <schedule>`
->
->#### Description:
->
+
+##### Description:
+
 >Confirms a schedule from a list of tentative schedules in an event.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<task>`
 >
 >Required: Yes
@@ -148,7 +148,7 @@ Description of feature.
 >Type: Index
 >
 >Description: The index of the event.
->
+
 >`/at <schedule>`
 >
 >Required: Yes
@@ -159,16 +159,16 @@ Description of feature.
 
 ### 7. find
 
->#### Usage:
->
+##### Usage:
+
 >`find <keyword>`
->
->#### Description:
->
+
+##### Description:
+
 >Searches for all tasks whose description matches a keyword.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<keyword>`
 >
 >Required: Yes
@@ -179,16 +179,16 @@ Description of feature.
 
 ### 8. help
 
->#### Usage:
->
+##### Usage:
+
 >`help [<command>] [/all]`
->
->#### Description:
->
+
+##### Description:
+
 >Explains how a command works.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<command>`
 >
 >Required: No
@@ -196,7 +196,7 @@ Description of feature.
 >Type: Command Name
 >
 >Description: The command name to find help for.
->
+
 >`/all`
 >
 >Required: No
@@ -207,16 +207,16 @@ Description of feature.
 
 ### 9. list
 
->#### Usage:
->
+##### Usage:
+
 >`list [/all]`
->
->#### Description:
->
+
+##### Description:
+
 >Lists tasks which are upcoming and not done.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`/all`
 >
 >Required: No
@@ -227,16 +227,16 @@ Description of feature.
 
 ### 10. snooze
 
->#### Usage:
->
+##### Usage:
+
 >`snooze <task> /by <duration>`
->
->#### Description:
->
+
+##### Description:
+
 >Pushes back the due date of a deadline by a given duration.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<task>`
 >
 >Required: Yes
@@ -244,7 +244,7 @@ Description of feature.
 >Type: Index
 >
 >Description: The index of the task to snooze.
->
+
 >`/by <duration>`
 >
 >Required: Yes
@@ -255,16 +255,16 @@ Description of feature.
 
 ### 11. todo
 
->#### Usage:
->
+##### Usage:
+
 >`todo <description>`
->
->#### Description:
->
+
+##### Description:
+
 >Creates a todo task. A todo has no due date.
->
->#### Parameters:
->
+
+##### Parameters:
+
 >`<description>`
 >
 >Required: Yes

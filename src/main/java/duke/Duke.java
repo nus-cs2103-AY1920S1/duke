@@ -59,7 +59,6 @@ public class Duke {
             String fullCommand = ui.readCommand();
             isExit = respond(fullCommand);
         }
-        saveTasks();
     }
 
     /**
@@ -81,6 +80,7 @@ public class Duke {
             ui.showLine();
             Command cmd = Parser.parse(input);
             cmd.execute(tasks, ui);
+            saveTasks();
             isExit = cmd.isExit();
         } catch (DukeException e) {
             ui.showError(e);
@@ -94,7 +94,6 @@ public class Duke {
      * Exits the Duke program.
      */
     public void exit() {
-        this.saveTasks();
         Timer timer = new Timer();
         TimerTask exitApp = new TimerTask() {
             public void run() {

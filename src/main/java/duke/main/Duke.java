@@ -19,7 +19,7 @@ public class Duke {
     /**
      * Initialises a new Duke by loading the save file from a filePath.
      *
-     * @param filePath the file path that storage loads from
+     * @param filePath the file path that storage loads from.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -33,12 +33,31 @@ public class Duke {
     }
 
     /**
-     * This is where the Duke application starts to run.
+     * Returns a string of the executed command.
+     *
+     * @param c the command that is executed.
+     * @return a string describing the effects of the executed command.
      */
-    public String getResponse(String input) {
-        Command commandFromInput = parser.parse(input);
-        String returnString = commandFromInput.execute(tasks);
-        storage.saveDuke(tasks.saveInfo());
+    public String getResponse(Command c) {
+        String returnString = c.execute(tasks);
         return returnString;
+    }
+
+    /**
+     * Parses the input into a command.
+     *
+     * @param input the string which is parsed.
+     * @return a Command parsed from the string.
+     */
+    public Command parseInput(String input) {
+        Command commandFromInput = parser.parse(input);
+        return commandFromInput;
+    }
+
+    /**
+     * Saves the state of tasks in storage.
+     */
+    public void dukeSave() {
+        storage.saveDuke(tasks.saveInfo());
     }
 }

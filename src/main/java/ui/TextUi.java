@@ -1,6 +1,9 @@
 package ui;
 
+import javafx.collections.ObservableList;
 import tasklist.Task;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -20,15 +23,15 @@ public class TextUi {
     }
 
     /**
-     * ui for printing when a new a task has been added.
+     * ui for printing when a new a item has been added.
      * @param task full task string including type, status, description and date(if applicable)
      * @param size total number of tasks in the list
      */
-    public void printAddedTask(String task, int size) {
+    public void printAddedItem(String task, int size) {
         System.out.println(DIVIDER + "\n"
-                + "     Got it. I've added this task:\n"
+                + "     Got it. I've added this item:\n"
                 + "       " + task + "\n"
-                + "     Now you have " + size + " tasks in the list.\n"
+                + "     Now you have " + size + " item in the list.\n"
                 + DIVIDER);
     }
 
@@ -36,14 +39,10 @@ public class TextUi {
      * prints out the entire list.
      * @param taskList is the linkedlist containing the tasks to be printed
      */
-    public void printTaskList(LinkedList<Task> taskList) {
+    public void printItemList(ArrayList<Task> taskList) {
         int i = 0;
         System.out.println(DIVIDER + "\n"
-                + "     Here are the tasks in your list:");
-        while (i < taskList.size()) {
-            System.out.println("     " + (i + 1) + ". " + taskList.get(i).getOverallStatus());
-            i++;
-        }
+                + "     Here are the items in your list:");
         System.out.println(DIVIDER);
     }
 
@@ -53,7 +52,7 @@ public class TextUi {
      */
     public void printCompletedTask(String completedtask) {
         System.out.println(DIVIDER + "\n"
-                + "     Nice! I've marked this task as done: \n"
+                + "     Nice! I've marked this item as done: \n"
                 + "       " + completedtask + "\n" + DIVIDER);
     }
 
@@ -62,11 +61,11 @@ public class TextUi {
      * @param task full task description
      * @param size total number of tasks on the list
      */
-    public void printRemovedTask(String task, int size) {
+    public void printRemovedItem(String task, int size) {
         System.out.println(DIVIDER + "\n"
-                + "     Noted. I've removed this task: \n"
+                + "     Noted. I've removed this item: \n"
                 + "       " + task + "\n"
-                + "     Now you have " + (size - 1) + " tasks in the list.\n"
+                + "     Now you have " + (size - 1) + " items in the list.\n"
                 + "    ____________________________________________________________");
     }
 
@@ -131,18 +130,14 @@ public class TextUi {
      * prints the ui for listing the found tasks.
      * @param foundtasks list containing the tasks that were found
      */
-    public void printFoundTasks(LinkedList<String> foundtasks) {
+    public void printFoundTasks(ObservableList<String> foundtasks) {
         if (foundtasks.isEmpty()) {
             System.out.println(DIVIDER + "\n"
                     + "     ☹ OOPS!!! I'm sorry, but I couldn't find anything :-(\n"
                     + DIVIDER);
         } else {
             System.out.println(DIVIDER + "\n"
-                    + "     Here are the matching tasks in your list:");
-            int i = 0;
-            for (String s : foundtasks) {
-                System.out.println("     " + ++i + "." + s);
-            }
+                    + "     Here are the matching items in your list:");
             System.out.println(DIVIDER);
         }
     }

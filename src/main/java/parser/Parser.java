@@ -2,6 +2,7 @@ package parser;
 
 import ui.TextUi;
 import tasklist.TaskList;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -18,12 +19,19 @@ public class Parser {
     private boolean isDone;
     String description;
     private LocalDateTime date;
-    private boolean isSafe;
+    private boolean isSafe = true;
+    private TaskList scheduler;
     private TextUi ui;
-    public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\w+)"
+    private String category;
+    private Integer tasknum;
+    private String noteDescription;
+    public static final Pattern COMMAND_FORMAT= Pattern.compile("(?<commandWord>\\w+)"
             + "\\s*(?<completionStatus>(\\[[01]\\])?)"
-            + "\\s*(?<description>([\\w\\s\\d]+)?)"
+            + "\\s*(?<description>([\\w\\s\\d{}.|]+)?)"
             + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
+    public static final Pattern NOTE_FORMAT = Pattern.compile("\\{(?<task>[0-9.]+)\\}"
+            + "\\s*(?<category>([\\w\\s\\d]+)?)"
+            + "\\|?\\s*(?<description>([\\w\\s\\d]+)?)");
 
     public Parser() {
         ui = new TextUi();
@@ -35,60 +43,86 @@ public class Parser {
      * @param scheduler TaskList object that commands are to be executed on
      * @param isLoading boolean variable to check if the input is from a user or save file (to stop some print actions)
      */
-    public void parse(String fullCommand, TaskList scheduler, boolean isLoading) {
-        isSafe = true;
+    public void parseTasks(String fullCommand, TaskList scheduler, boolean isLoading) {
+        this.scheduler = scheduler;
         Matcher matcher = COMMAND_FORMAT.matcher(fullCommand);
         if (matcher.find()) {
-            command = matcher.group("commandWord");
-            isDone = matcher.group("completionStatus").equals("[1]");
-            description = matcher.group("description").trim();
-            if (!matcher.group("date").isEmpty()) {
-                try {
-                    // Parsing the date
-                    DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-                    date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
-                } catch (DateTimeParseException e) {
-                    ui.printWrongDate();
-                    isSafe = false;
-                }
-            }
-
+            splitTaskKeywords(matcher);
             if (isSafe) {
-                switch (command) {
-                case "todo":
-                case "deadline":
-                case "event":
-                    scheduler.addTask(command, description, isDone, date);
-                    if (!isLoading) {
-                        scheduler.printNewTask();
-                    }
-                    break;
-                case "list":
-                    scheduler.listTasks();
-                    break;
-                case "done":
-                    scheduler.completeTask(description);
-                    break;
-                case "delete":
-                    scheduler.removeTask(description);
-                    break;
-                case "find":
-                    scheduler.findTasks(description);
-                    break;
-                default:
-                    ui.printErrorMsg1();
-                    isSafe = false;
-                }
+                executeCommand(command,isLoading);
             }
         } else {
             ui.printErrorMsg2();
             isSafe = false;
         }
+    }
 
+    public void splitNotesCommand(String cashCommand){
+        Matcher matcher = NOTE_FORMAT.matcher(cashCommand);
+        if (matcher.find()){
+            tasknum = Integer.parseInt(matcher.group("task")) - 1;
+            category = matcher.group("category");
+            noteDescription = matcher.group("description");
+        }else{
+            ui.printErrorMsg2();
+            isSafe = false;
+        }
     }
 
     public boolean isSafe() {
         return isSafe;
+    }
+
+    public void splitTaskKeywords(Matcher matcher){
+        command = matcher.group("commandWord");
+        isDone = matcher.group("completionStatus").equals("[1]");
+        description = matcher.group("description").trim();
+        if (!matcher.group("date").isEmpty()) {
+            try {
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                date = LocalDateTime.parse(matcher.group("date").trim(), inputFormat);
+            } catch (DateTimeParseException e) {
+                ui.printWrongDate();
+                isSafe = false;
+            }
+        }
+    }
+
+    public void executeCommand(String command, Boolean isLoading){
+        switch (command) {
+        case "todo":
+        case "deadline":
+        case "event":
+        case "notebook":
+            scheduler.addTask(command, description, isDone, date);
+            if (!isLoading) {
+                scheduler.printNewTask();
+            }
+            break;
+        case "list":
+            scheduler.listTasks();
+            break;
+        case "done":
+            scheduler.completeTask(description);
+            break;
+        case "delete":
+            scheduler.removeTask(description);
+            break;
+        case "find":
+            scheduler.findTasks(description);
+            break;
+        case "addnote":
+            splitNotesCommand(description);
+            scheduler.getTasks().get(tasknum).addNote(category, noteDescription, date);
+            break;
+        case "deletenote":
+            splitNotesCommand(description);
+            scheduler.getTasks().get(tasknum).removeNote(category);
+            break;
+        default:
+            ui.printErrorMsg1();
+            isSafe = false;
+        }
     }
 
 }

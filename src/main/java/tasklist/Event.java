@@ -1,5 +1,9 @@
 package tasklist;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -8,21 +12,18 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected String at;
-
-    public Event(String name, boolean completionStatus, LocalDateTime date) {
-        super(name, completionStatus,date);
+    @JsonCreator
+    public Event(@JsonProperty("description") String description,
+                 @JsonProperty("isDone") boolean completionStatus,
+                 @JsonProperty("dateDue") LocalDateTime date) {
+        super(description, completionStatus,date);
+        taskType = new SimpleStringProperty("Event");
     }
 
     @Override
     public String getOverallStatus() {
-        return "[E]" + getCurrentStatus() + description + "(at:" + date.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + getCurrentStatus() + description.getValue() + "(at:"
+                + dateDue.getValue().format(OUTPUT_FORMAT) + ")";
     }
 
-    @Override
-    public String encodeForStorage() {
-        int myInt = isDone ? 1 : 0;
-        return "event [" + myInt + "]" + description + "/at"
-                + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
-    }
 }

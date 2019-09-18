@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TaskListTest {
     @Test
-    void addTaskTest() {
+    void addTaskTest() throws DukeException {
         TaskList taskList = new TaskList();
         taskList.addTask(new Todo("description"));
         assertEquals(1, taskList.size());
@@ -16,7 +16,7 @@ public class TaskListTest {
     }
 
     @Test
-    void deleteTaskTest() {
+    void deleteTaskTest() throws DukeException {
         TaskList taskList = new TaskList();
         taskList.addTask(new Todo("description"));
         taskList.remove(1);

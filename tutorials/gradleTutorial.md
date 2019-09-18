@@ -30,17 +30,17 @@ As a developer, you write a _build file_ that describes the project. A build fil
    git checkout master
    git merge gradle
    ```
-1. Open the `build.gradle` file in an editor. Update the following code block to point to the main class (i.e., the one containing the `main` method) of your application. The code below assumes your main class is `seedu.duke.Duke`
+1. Open the `build.gradle` file in an editor. Update the following code block to point to the duke.ui class (i.e., the one containing the `duke.ui` method) of your application. The code below assumes your duke.ui class is `seedu.duke.duke.ui.Duke`
    ```groovy
    application {
-       mainClassName = "seedu.duke.Duke"
+       mainClassName = "seedu.duke.duke.ui.Duke"
    }
    ```
-1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the command `gradlew run`. This should result in Gradle running the main method of your project.
+1. To check if Gradle has been added to the project correctly, open a terminal window, navigate to the root directory of your project and run the command `gradlew run`. This should result in Gradle running the duke.ui method of your project.
 
 :bulb: Simply run the command `gradlew {taskName}` in the terminal and Gradle will run the task! Here are some example commands:
 * `gradlew tasks` (or `gradlew tasks --all`): shows a list of tasks available
-* `gradlew run`: runs the main class of your project
+* `gradlew run`: runs the duke.ui class of your project
 
 :bulb: Some plugins may add more helpful tasks so be sure to check their documentation!
 
@@ -85,7 +85,7 @@ checkstyle {
 Checkstyle expects configuration files for checkstyle to be in `./config/checkstyle/` by convention.
 A sample checkstyle rule configuration is provided in the branch.
 
-The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the command will check your main code and test code against the style rules).
+The plugin adds a few _tasks_ to your project. Run `gradlew checkstyleMain checkstyleTest` to verify that you have set up Checkstyle properly (the command will check your duke.ui code and test code against the style rules).
 
 **Resources**:
 * [Gradle documentation for CheckStyle plugin](https://docs.gradle.org/current/userguide/checkstyle_plugin.html)
@@ -144,9 +144,9 @@ test {
 By convention, java tests belong in `src/test/java` folder. Create a new `test/java` folder in under `src`.
 ```
 src
-├─main
+├─duke.ui
 │  └─java
-│     └─seedu/duke/Duke.java
+│     └─seedu/duke/duke.ui.Duke.java
 └─test
     └─java
         └─seedu/duke/DukeTest.java

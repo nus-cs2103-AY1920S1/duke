@@ -105,7 +105,7 @@ public class TaskList {
 
     /**
      * Allows to user to check what commands are available.
-     * @return A string representing the manual for Duke.
+     * @return A string representing the manual for duke.main.Duke.
      */
     public String help() {
         return Help.help();

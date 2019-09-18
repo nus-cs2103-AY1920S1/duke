@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * Provides a custom DukeException objects describing exceptions arising from Duke.
+ * Provides a custom DukeException objects describing exceptions arising from duke.main.Duke.
  */
 public class DukeException extends Exception {
 

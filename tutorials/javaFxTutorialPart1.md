@@ -18,7 +18,7 @@ A JavaFX application is like a play you are directing. Instead of creating props
 
    `File` > `Project Structure` > `Libraries` > `+` > `Java` > `{JAVAFX_HOME}/lib`
 
-1. From `Run` > `Edit Configurations`, add the following line into your `VM options` for each of the `main` classes.
+1. From `Run` > `Edit Configurations`, add the following line into your `VM options` for each of the `duke.ui` classes.
 
    `--module-path {JAVAFX_HOME}/lib --add-modules javafx.controls,javafx.fxml`<br>
    e.g., `--module-path C:/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml`
@@ -44,7 +44,7 @@ javafx {
 
 ## Writing your first program
 
-As customary, let’s start off with a simple “Hello World” program. Modify your `Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
+As customary, let’s start off with a simple “Hello World” program. Modify your `duke.ui.Duke` class to extend `javafx.application.Application`. This requires you to override the `Application#start()` method and provide a concrete implementation. Notice that the method signature for `Application#start()` has a parameter `Stage`. This is the _primary stage_ that JavaFX provides.
 
 ```java
 import javafx.application.Application;
@@ -52,7 +52,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-public class Duke extends Application {
+public class duke.ui.Duke extends Application {
     
     // ...
 
@@ -79,8 +79,8 @@ import javafx.application.Application;
  * A launcher class to workaround classpath issues.
  */
 public class Launcher {
-    public static void main(String[] args) {
-        Application.launch(Duke.class, args);
+    public static void duke.ui(String[] args) {
+        Application.launch(duke.ui.Duke.class, args);
     }
 }
 ```

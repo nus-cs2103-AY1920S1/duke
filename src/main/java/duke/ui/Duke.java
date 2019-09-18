@@ -1,3 +1,5 @@
+package duke.ui;
+
 import java.util.Arrays;
 
 import duke.command.Parser;
@@ -6,12 +8,12 @@ import duke.command.TaskList;
 import duke.command.DukeException;
 
 /**
- * Duke class. Creates a new Ui, duke.command.TaskList and duke.command.Storage object,
- * then runs the main method of the program.
+ * duke.main.Duke class. Creates a new duke.main.Ui, duke.command.TaskList and duke.command.Storage object,
+ * then runs the duke.main method of the program.
  */
 public class Duke {
 
-    /** Stores the Ui object used to display messages to the user. */
+    /** Stores the duke.main.Ui object used to display messages to the user. */
     private Ui ui;
     /** Stores the duke.command.Storage object used to read/write from file. */
     private Storage storage;
@@ -20,8 +22,8 @@ public class Duke {
 
     // Solution below adapted from https://github.com/nexolute/duke/blob/master/src/main/java/duke/Duke.java
     /**
-     * Initializes the Duke object by setting the Ui, duke.command.Storage and duke.command.TaskList objects.
-     * @param mainWindow the MainWindow of the application.
+     * Initializes the duke.main.Duke object by setting the duke.main.Ui, duke.command.Storage and duke.command.TaskList objects.
+     * @param mainWindow the duke.main.MainWindow of the application.
      */
     public void initialize(MainWindow mainWindow) {
         ui = new Ui(mainWindow);
@@ -31,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * Requests a response from Duke.
+     * Requests a response from duke.main.Duke.
      * @param input The input string from the user.
      */
     void getResponse(String input) {

@@ -38,6 +38,6 @@ javafx {
 }
 
 application {
-    // Change this to your main class.
+    // Change this to your duke.main class.
     mainClassName = "Launcher"
 }

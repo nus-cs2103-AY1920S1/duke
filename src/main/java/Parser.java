@@ -31,30 +31,37 @@ public class Parser {
      */
     public String processCommand(String command) {
         String reply = "";
-
-        // When command is 'list'
-        if (command.equals("list")) {
-            String list = taskList.printAllTasks();
-            reply = "Here are the tasks in your list:" + "\n" + list;
-        } else if (command.contains("done")) {
-            reply = executeDone(command);
-        } else if (command.contains("delete")) {
-            reply = executeDelete(command);
-        } else if (command.contains("find")) {
-            reply = executeFind(command);
-        } else if (containsTask(command)) {
-            // Processes task command, not the same as generateNewTask()
-            reply = executeNewTask(command);
-        } else {
-            // Unknown command
-            reply = ui.showErrorMessage(new UnknownTaskTypeException());
+        String commandType = command; //default value
+        if (command.contains(" ")) {
+            commandType = command.substring(0, command.indexOf(" "));
         }
 
-        // When command is bye
-        if (command.equals("bye")) {
-            reply = ui.showFarewell();
+        switch(commandType){
+            case("list"):
+                String list = taskList.printAllTasks();
+                reply = "Here are the tasks in your list:" + "\n" + list;
+                break;
+            case("done"):
+                reply = executeDone(command);
+                break;
+            case("delete"):
+                reply = executeDelete(command);
+                break;
+            case("find"):
+                reply = executeFind(command);
+                break;
+            case("bye"):
+                reply = ui.showFarewell();
+                break;
+            default:
+                if (containsTask(commandType)) {
+                    // Processes task command, not the same as generateNewTask()
+                    reply = executeNewTask(command);
+                } else {
+                    // Unknown command
+                    reply = ui.showErrorMessage(new UnknownTaskTypeException());
+                }
         }
-
         return reply;
     }
 
@@ -88,35 +95,21 @@ public class Parser {
             Task newTask = new Task("dummy");
 
             // Create the appropriate Task type
-            if (type.equals("todo")) {
-                newTask = new ToDo(taskDescription);
-            }
-
             try {
-                if (type.equals("deadline")) {
-                    String[] sentence = taskDescription.split("/by");
-                    String description = sentence[0];
-                    String deadline = formatDateTime(sentence[1]);
-
-                    newTask = new Deadline(description, deadline);
+                switch (type) {
+                    case("todo"):
+                        newTask = generateNewToDo(taskDescription);
+                    case("deadline"):
+                        newTask = generateNewDeadline(taskDescription);
+                    case("event"):
+                        newTask = generateNewEvent(taskDescription);
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new MissingDateTimeException("DateTime missing."
-                        + "Please set a deadline. (Eg. deadline read book /by Sunday)");
+            } catch (DukeException e) {
+                String taskWithIssue = e.getMessage();
+                throw new MissingDateTimeException("Date Time missing."
+                        + "Please set a date and time. (Eg. " + taskWithIssue +  "read book /by Sunday)");
             }
 
-            try {
-                if (type.equals("event")) {
-                    String[] sentence = taskDescription.split("/at");
-                    String description = sentence[0];
-                    String time = sentence[1];
-                    System.out.println(time);
-                    newTask = new Event(description, time);
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new MissingDateTimeException("Event time period missing."
-                        + "Please set a start and end time. (Eg. event dance /at Mon 2-4pm)");
-            }
 
             if (hasTags) {
                 for (String tag : tags) {
@@ -284,6 +277,7 @@ public class Parser {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             reply = ui.promptFindKeyword();
+            return reply;
         }
 
         reply = ui.showSearchList(taskList.searchFor(keyword));
@@ -309,6 +303,7 @@ public class Parser {
                     saveToStorage();
                 } catch (IOException e) {
                     reply = ui.showLoadingError();
+                    return reply;
                 }
 
                 reply = ui.showAddTask(newTask, taskList.numTasks);
@@ -321,6 +316,34 @@ public class Parser {
         }
 
         return reply;
+    }
+
+    private static ToDo generateNewToDo(String taskDescription) {
+        return new ToDo(taskDescription);
+    }
+
+    private static Deadline generateNewDeadline(String taskDescription) throws DukeException {
+        try {
+            String[] sentence = taskDescription.split("/by");
+            String description = sentence[0];
+            String deadline = formatDateTime(sentence[1]);
+
+            return new Deadline(description, deadline);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Deadline");
+        }
+    }
+
+    private static Event generateNewEvent(String taskDescription) throws DukeException {
+        try {
+            String[] sentence = taskDescription.split("/at");
+            String description = sentence[0];
+            String time = sentence[1];
+            System.out.println(time);
+            return new Event(description, time);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Event");
+        }
     }
 
     /**

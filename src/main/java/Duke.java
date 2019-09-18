@@ -68,7 +68,8 @@ public class Duke extends Application{
             assert firstWord !=null;
 
             if (firstWord.equals("bye")) {
-                return "Bye. Hope to see you again soon!";
+                System.exit(0);
+                //return "Bye. Hope to see you again soon!";
             } else if (firstWord.equals("list")) {
                 return tasks.printList();
             } else if (firstWord.equals("done")) {

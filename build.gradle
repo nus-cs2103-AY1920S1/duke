@@ -3,7 +3,6 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
-    id 'org.openjfx.javafxplugin' version '0.0.8'
 }
 
 group 'weomucat.duke'
@@ -11,6 +10,7 @@ version '0.2'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 application {
@@ -18,13 +18,24 @@ application {
     mainClassName = "weomucat.duke.Duke"
 }
 
-javafx {
-    version = "12.0.2"
-    modules = ['javafx.controls', 'javafx.fxml']
+ext {
+    javaFxVersion = '11.0.2'
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
+    implementation "org.openjfx:javafx-base:$javaFxVersion:win"
+    implementation "org.openjfx:javafx-base:$javaFxVersion:mac"
+    implementation "org.openjfx:javafx-base:$javaFxVersion:linux"
+    implementation "org.openjfx:javafx-controls:$javaFxVersion:win"
+    implementation "org.openjfx:javafx-controls:$javaFxVersion:mac"
+    implementation "org.openjfx:javafx-controls:$javaFxVersion:linux"
+    implementation "org.openjfx:javafx-fxml:$javaFxVersion:win"
+    implementation "org.openjfx:javafx-fxml:$javaFxVersion:mac"
+    implementation "org.openjfx:javafx-fxml:$javaFxVersion:linux"
+    implementation "org.openjfx:javafx-graphics:$javaFxVersion:win"
+    implementation "org.openjfx:javafx-graphics:$javaFxVersion:mac"
+    implementation "org.openjfx:javafx-graphics:$javaFxVersion:linux"
+    testImplementation "org.junit.jupiter:junit-jupiter:5.5.0"
 }
 
 run {

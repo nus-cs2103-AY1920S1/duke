@@ -92,7 +92,7 @@ public class Controller implements ByeCommandListener, UserInputListener {
       } catch (DukeException | DukeRuntimeException e) {
         // Add error command to front of queue.
         this.commandQueue.addFirst(
-            new DisplayErrorCommand(new Message().addBody("☹ OOPS!!! " + e.getMessage())));
+            new DisplayErrorCommand(new Message().addBody("OOPS!!! " + e.getMessage())));
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

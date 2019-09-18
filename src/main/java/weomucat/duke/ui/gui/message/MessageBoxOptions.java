@@ -5,18 +5,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import weomucat.duke.ui.message.MessageColor;
 import weomucat.duke.ui.message.element.MessageTag;
 import weomucat.duke.ui.message.element.MessageText;
 
 public class MessageBoxOptions {
-  private static final String FONT_NAME = "Monospaced";
-  private static final int FONT_SIZE = 16;
-  private static final FontWeight FONT_WEIGHT = FontWeight.BOLD;
-
   private static final int TAG_PADDING = 5;
   private static final int TAG_RADIUS = 5;
 
@@ -66,7 +60,6 @@ public class MessageBoxOptions {
 
     Text text = new Text(string);
     text.setFill(color.toGui());
-    text.setFont(Font.font(FONT_NAME, FONT_WEIGHT, FONT_SIZE));
     return text;
   }
 
@@ -82,7 +75,6 @@ public class MessageBoxOptions {
         this.tagBackgroundColor.toGui(), new CornerRadii(TAG_RADIUS), null)));
     label.setPadding(new Insets(0, TAG_PADDING, 0, TAG_PADDING));
     label.setTextFill(this.tagForegroundColor.toGui());
-    label.setFont(Font.font(FONT_NAME, FONT_WEIGHT, FONT_SIZE));
     return label;
   }
 

@@ -98,15 +98,12 @@ public class CommandLineUi implements Ui {
 
   @Override
   public void displayError(Message message) {
-    // TODO: ANSI Colors might not work on all terminals
-    System.out.print("\033[38;2;255;0;0m");
     System.out.println(DOUBLE_HORIZONTAL_LINE);
     for (MessageElement text : message.getBody().getElements()) {
       System.out.print(text.toCli());
     }
     System.out.println();
     System.out.println(DOUBLE_HORIZONTAL_LINE);
-    System.out.print("\033[38;2;0;0;0m");
   }
 
   @Override

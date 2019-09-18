@@ -11,18 +11,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weomucat.duke.ui.gui.Root">
+<VBox alignment="TOP_CENTER" stylesheets="@root.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weomucat.duke.ui.gui.Root">
    <HBox alignment="CENTER" style="-fx-background-color: #81b9bf;">
       <Label alignment="CENTER" minHeight="60.0" text="Duke - Personal Assistant Chatbot" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="Monospaced Bold" size="16.0" />
-         </font>
          <padding>
             <Insets left="20.0" right="20.0" />
          </padding>
+         <font>
+            <Font name="Monospaced Bold" size="16.0" />
+         </font>
       </Label>
       <ImageView fitHeight="66.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@Cat.png" />
+         <Image url="@../images/Cat.png" />
       </ImageView>
    </HBox>
    <ScrollPane fx:id="scrollPane" fitToWidth="true" pannable="true" prefHeight="768.0" prefWidth="756.0" style="-fx-background-radius: 0; -fx-background: #b2ebf2; -fx-background-color: #81b9bf;" VBox.vgrow="ALWAYS">
@@ -47,7 +47,7 @@
          </font>
          <graphic>
             <ImageView fitHeight="59.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@Button.png" />
+               <Image url="@../images/Button.png" />
             </ImageView>
          </graphic>
       </Button>

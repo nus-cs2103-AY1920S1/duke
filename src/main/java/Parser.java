@@ -39,6 +39,9 @@ public class Parser {
             } else if (command.contains("find")) {
                 ArrayList<Task> foundTask = this.tasksList.findTasks(command);
                 return ui.showFoundMessage(foundTask);
+            } else if (command.contains("view")) {
+                ArrayList<Task> viewTaskOnDay = this.tasksList.viewTasks(command);
+                return ui.showViewMessage(viewTaskOnDay);
             } else {
                 return "I'm sorry, but I don't know what that means :-(";
             }

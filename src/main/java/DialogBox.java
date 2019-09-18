@@ -5,18 +5,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -30,8 +32,6 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     @FXML
     private Rectangle fill;
-    @FXML
-    private Pane root = new Pane();
 
     private DialogBox(String text, Image img) {
         try {
@@ -44,25 +44,15 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setFont(Font.font("verdana", 12));
+        dialog.setTextFill(Color.BLACK);
+        dialog.setBackground(new Background(
+                new BackgroundFill(Color.WHITE, new CornerRadii(10),
+                        Insets.EMPTY)));
+        dialog.setPadding(new Insets(10));
+
         displayPicture.setImage(img);
-        fill = new Rectangle(displayPicture.getFitWidth(),
-                displayPicture.getFitHeight());
-        fill.setArcHeight(20);
-        fill.setArcWidth(20);
-        displayPicture.setClip(fill);
-
-
-        SnapshotParameters parameters = new SnapshotParameters();
-        parameters.setFill(Color.TRANSPARENT);
-        WritableImage image = displayPicture.snapshot(parameters, null);
-
-        displayPicture.setClip(null);
-        displayPicture.setEffect(new DropShadow(20, Color.BLACK));
-
-        displayPicture.setImage(image);
-
-
-
+        displayPicture.setClip(new Circle(50, 50, 50));
 
     }
 
@@ -73,7 +63,7 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
     }
 
     /**
@@ -83,7 +73,8 @@ public class DialogBox extends HBox {
      * @return new DialogBox object.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        return db;
     }
 
     /**

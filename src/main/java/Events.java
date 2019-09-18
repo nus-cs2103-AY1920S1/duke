@@ -21,6 +21,11 @@ public class Events extends Task {
     }
 
     @Override
+    public String getNumericalDate() {
+        return this.datetime[0];
+    }
+
+    @Override
     public String formatString() {
         return "E-" + super.checkStatus() + "-" + super.getDescription().trim() + "-" + this.event[1];
     }
@@ -33,6 +38,5 @@ public class Events extends Task {
         } catch (ParseException parseError) {
             return parseError.toString();
         }
-
     }
 }

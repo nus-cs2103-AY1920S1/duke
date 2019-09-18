@@ -2,6 +2,8 @@
 
 Trackr is a **desktop application that helps you to manage tasks**. Trackr is **optimized for users who prefer to work with a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
+<img src="./READMEMedia/media/app.png" width="254" height="400" />
+
 If you can type fast, Trackr can help you complete your task management process faster than traditional GUI apps.
 
 ### 1. Quick Start
@@ -27,50 +29,76 @@ Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `tod
 
 #### 2.1 Viewing help: `help`
 Displays all available commands in the application.
+
 Format: `help`
 
 #### 2.2 Adding a task to be done: `todo`
 Adds a task to be done with the provided name to your list.
+
 Format: `todo TASK_NAME`
+
+Example: `todo 100 pushups`
 
 #### 2.3 Adding a deadline: `deadline`
 Adds a deadline to your list.
+
 Format: `deadline DEADLINE_NAME /by DD/MM/YYYY HHMM`
+
+Example: `deadline math assignment /by 30/11/2019 2359`
 
 #### 2.4 Adding an event to be attended: `event`
 Adds a deadline to your list.
+
 Format: `event EVENT_NAME /at DD/MM/YYYY HHMM`
+
+Example: `event birthday party /at 28/10/2019 1930`
 
 #### 2.5 Listing all tasks: `list`
 Shows all tasks in your list.
+
 Format: `list`
 
 #### 2.6 Updating name of task in your list: `update`
 Updates name of specified task in your list.
+
 Format: `update INDEX NEW_TASK_NAME`
+
+Example: `update 1 50 situps`
 
 #### 2.7 Retrieving tasks by name: `find`
 Finds tasks whose names contain any of the given keywords.
+
 Format: `find KEYWORD`
+
+Example: `find assignment`
 
 #### 2.8 Marking a task as completed: `complete`
 Marks specified task on the list as completed.
+
 Format: `complete INDEX`
+
+Example: `complete 1`
 
 #### 2.9 Removing a task: `remove`
 Remove specified task from the list.
+
 Format: `remove INDEX`
+
+Example: `remove 1`
 
 #### 2.10 Undoing previous command: `undo`
 Undo previous command and revert changes to the list of tasks.
+
 Format: `undo`
 
 #### 2.11 Display input history: `history`
 Display all input you made into the application during the current session.
+
 Format: `history`
 
 #### 2.12 Exiting the application: `exit`
 Exits the program.
+
 Format: `exit`
 
 #### 2.13 Saving data

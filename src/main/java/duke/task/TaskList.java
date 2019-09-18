@@ -57,6 +57,10 @@ public class TaskList {
      * @return a stringified list of every {@link Task} to be used in the {@link duke.storage.Storage}.
      */
     public String stringify() {
+        if (tasks.size() == 0) {
+            return "";
+        }
+
         StringBuilder sb = new StringBuilder(tasks.get(0).stringify());
         for (int i = 1; i < tasks.size(); i++) {
             Task task = tasks.get(i);

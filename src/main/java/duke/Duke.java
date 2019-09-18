@@ -5,14 +5,12 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * Main class for Duke application.
  */
 public class Duke {
     private Storage storage;
-    private Ui ui;
     private TaskList taskList;
 
     /**
@@ -23,7 +21,6 @@ public class Duke {
     public Duke(String filePath) {
         assert filePath != null : "Filepath cannot be null.";
         this.storage = new Storage(filePath);
-        this.ui = new Ui();
         this.taskList = new TaskList(storage);
     }
 

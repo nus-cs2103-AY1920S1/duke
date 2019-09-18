@@ -14,7 +14,7 @@ Have fun!
 ## 2. Quick Start <a name="Quick Start"></a>
 1. Ensure you have Java 11 or above installed in your Computer.  
 
-1. Download the latest dukebot.jar at [here](https://github.com/calvincxz/duke/releases/tag/v1.2)
+1. Download the latest dukebot.jar at [here](https://github.com/calvincxz/duke/releases)
 
 ## 3. Features 
 

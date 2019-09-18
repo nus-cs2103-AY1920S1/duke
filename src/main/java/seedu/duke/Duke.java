@@ -26,7 +26,6 @@ public class Duke extends Application {
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/isabelle_neutral.png"));
 
     private static Storage storage;
     private static TaskList tasks;
@@ -161,21 +160,23 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
+        ChatDisplay response = getResponse(userInput.getText());
+        String dukeText = response.getText();
+        Image dukeImage = response.getDisplayPicture();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
+                DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
     }
 
-    String getResponse(String input) {
+    ChatDisplay getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             isExit = c.isExit();
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return e.getMessage();
+            return ui.showError(e.getMessage());
         }
     }
 }

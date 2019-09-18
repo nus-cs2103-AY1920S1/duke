@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
      * @return a String containing the delete message.
      */
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         Task task = t.list.get(delete);
         t.list.remove(delete);
         try {

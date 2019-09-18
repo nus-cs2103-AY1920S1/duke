@@ -24,7 +24,7 @@ public abstract class Command {
      * @param s Storage.
      * @return
      */
-    public abstract String execute(TaskList t, Ui u, Storage s);
+    public abstract ChatDisplay execute(TaskList t, Ui u, Storage s);
 
     /**
      * Returns whether Task is done.

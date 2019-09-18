@@ -13,7 +13,7 @@ public class ListCommand extends Command {
      * @return a String containing the list message.
      */
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         return u.list(t);
     }
 }

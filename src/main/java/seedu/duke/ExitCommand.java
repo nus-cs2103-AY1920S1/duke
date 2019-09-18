@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
      * @return a String containing the exit message.
      */
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         return u.exitLine();
     }
 }

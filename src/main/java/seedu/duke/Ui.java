@@ -24,6 +24,7 @@ public class Ui {
 
     /**
      * Prints the intro when starting the application.
+     * @return
      */
     public static String intro() {
         String logo = "Hello! \nIs there something I can help you with today?";
@@ -50,8 +51,9 @@ public class Ui {
      * Prints error message.
      * @param str String containing error message.
      */
-    public static void showError(String str) {
-        System.out.println(format(str));
+    public static ChatDisplay showError(String str) {
+        ChatDisplay result = new ChatDisplay(str, ChatDisplay.Expression.CONFUSED);
+        return result;
     }
 
     /**
@@ -74,9 +76,10 @@ public class Ui {
      * @param str String representing Task done.
      * @return
      */
-    public static String doneLine(String str) {
+    public static ChatDisplay doneLine(String str) {
         String message = "Nice! I've marked this task as done:\n " + str;
-        return message;
+        ChatDisplay result = new ChatDisplay(message, ChatDisplay.Expression.SINGING);
+        return result;
     }
 
     /**
@@ -85,9 +88,10 @@ public class Ui {
      * @param size integer representing the current size of the TaskList.
      * @return
      */
-    public static String deleteLine(String str, int size) {
-        String result = "Noted. I've removed this task: \n   "
-                + str + "\n Now you have " + size + " tasks in the list.";
+    public static ChatDisplay deleteLine(String str, int size) {
+        String delete = "You've finished! Good job! I'll remove this task for you: \n   "
+                + str + "\nNow you have " + size + " tasks in the list.";
+        ChatDisplay result = new ChatDisplay(delete, ChatDisplay.Expression.SPARKLY);
         return result;
     }
 
@@ -97,19 +101,21 @@ public class Ui {
      * @param size integer representing the current size of the TaskList.
      * @return
      */
-    public static String addLine(String str, int size) {
-        String message = "Got it. I've added this task:\n " + str
+    public static ChatDisplay addLine(String str, int size) {
+        String message = "Alright! I'll add this task for you:\n " + str
                 + "\nNow you have " + size + " tasks in the list.";
-        return message;
+        ChatDisplay result = new ChatDisplay(message, ChatDisplay.Expression.SINGING);
+        return result;
     }
 
     /**
      * Prints exit message.
      * @return
      */
-    public static String exitLine() {
+    public static ChatDisplay exitLine() {
         String message = "Bye. Hope to see you again soon!";
-        return message;
+        ChatDisplay result = new ChatDisplay(message, ChatDisplay.Expression.SINGING);
+        return result;
     }
 
     /**
@@ -117,7 +123,7 @@ public class Ui {
      * @param tl Current TaskList.
      * @return String containing list message.
      */
-    public static String list(TaskList tl) {
+    public static ChatDisplay list(TaskList tl) {
         String message = "";
         if (tl.list.size() != 0) {
             message += "Here are the tasks in your list:\n";
@@ -127,7 +133,8 @@ public class Ui {
         } else {
             message = "You have no tasks in your list.";
         }
-        return message;
+        ChatDisplay result = new ChatDisplay(message, ChatDisplay.Expression.NEUTRAL);
+        return result;
     }
 
     /**
@@ -135,36 +142,45 @@ public class Ui {
      * @param tl taskList
      * @return String containing matching list message.
      */
-    public static String listMatching(ArrayList<Task> tl) {
-        String result = "";
+    public static ChatDisplay listMatching(ArrayList<Task> tl) {
+        String message = "";
         if (tl.size() != 0) {
-            result += "Here are the matching tasks in your list:\n";
+            message += "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= tl.size(); i++) {
-                result += " " + i + ". " + tl.get(i - 1).toString() + "\n";
+                message += " " + i + ". " + tl.get(i - 1).toString() + "\n";
             }
         } else {
-            result = "You have no matching tasks in your list.";
+            message = "You have no matching tasks in your list.";
         }
+        ChatDisplay result = new ChatDisplay(message, ChatDisplay.Expression.NEUTRAL);
         return result;
     }
 
-    public static String editMessage(String original, String newString) {
-        String result = "You have successfully edited the task:\n" + original
+    public static ChatDisplay editMessage(String original, String newString) {
+        String message = "You have successfully edited the task:\n" + original
                 + "\nto:\n" + newString;
+        ChatDisplay result = new ChatDisplay(message, ChatDisplay.Expression.NEUTRAL);
         return result;
     }
 
-    public static String correctAnswer() {
-        String result = "Correct! The answer is " + answer + "! Great job!";
+    public static ChatDisplay correctAnswer() {
+        String message = "Correct! The answer is " + answer + "! Great job!";
+        ChatDisplay result = new ChatDisplay(message, ChatDisplay.Expression.SPARKLY);
         return result;
     }
 
-    public static String wrongAnswer() {
-        String result = "Sorry, the answer is " + answer + ". Better luck next time!";
+    public static ChatDisplay wrongAnswer() {
+        String message = "Sorry, the answer is " + answer + ". Better luck next time!";
+        ChatDisplay result = new ChatDisplay(message, ChatDisplay.Expression.CONCERNED);
         return result;
     }
 
     public static String getAnswer() {
         return answer;
+    }
+
+    public ChatDisplay questionMessage(String question) {
+        ChatDisplay result = new ChatDisplay(question, ChatDisplay.Expression.NEUTRAL);
+        return result;
     }
 }

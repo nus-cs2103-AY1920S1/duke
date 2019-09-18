@@ -19,7 +19,7 @@ public class FindCommand extends Command {
      * @return a String containing the find message.
      */
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         ArrayList<Task> list = new ArrayList<>();
         for (Task task: t.list) {
             String title = task.description;

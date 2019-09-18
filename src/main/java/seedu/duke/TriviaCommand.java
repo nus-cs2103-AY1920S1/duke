@@ -11,7 +11,7 @@ public class TriviaCommand extends Command {
     protected static String url = "https://trivia.fyi/random-trivia-questions/";
 
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         String result = "";
         try {
             Document doc = Jsoup.connect(url).timeout(0).get();
@@ -33,6 +33,6 @@ public class TriviaCommand extends Command {
             e.printStackTrace();
         }
 
-        return result;
+        return u.questionMessage(result);
     }
 }

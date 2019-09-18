@@ -72,13 +72,13 @@ public class Parser {
                 throw new DukeException("Please specify a task.");
             } else if (!first.equals("bye") && !first.equals("list") && !first.equals("trivia") && !isTriviaAnswer) {
                 //if it is not a single-worded valid input
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry, but I don't know what that means.");
             }
         } else {
             //if it is an invalid input containing multiple words
             if (!task && !first.equals("done") && !first.equals("delete") && !first.equals("find")
                     && !first.equals("edit") && !isTriviaAnswer) {
-                throw new DukeException("I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("I'm sorry, but I don't know what that means.");
             } else if ((first.equals("event") && !input.contains("/at"))
                     || (first.equals("deadline") && !input.contains("/by"))) {
                 //if event or deadline do not have details

@@ -8,7 +8,7 @@ public class AnswerCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         String correctAnswer = u.getAnswer();
         if ((answer.toLowerCase().equals(correctAnswer.toLowerCase()) || answer.toLowerCase().contains(correctAnswer.toLowerCase())
             || correctAnswer.toLowerCase().contains(answer.toLowerCase())) && !answer.equals("")) {

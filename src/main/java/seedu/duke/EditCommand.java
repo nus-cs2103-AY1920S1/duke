@@ -18,7 +18,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         Task tobeEdited = t.list.get(position);
         String type = tobeEdited.getType();
         String original = tobeEdited.toString();

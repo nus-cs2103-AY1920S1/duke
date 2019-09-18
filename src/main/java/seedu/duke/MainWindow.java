@@ -26,42 +26,6 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/isabelle_neutral.png"));
 
-    private static String expression;
-
-    public enum Expression {
-        NEUTRAL, CONFUSED, SAD, CONCERNED, SPARKLY, SHOCKED, STRESSED;
-    }
-
-    public static void setExpression(String str) {
-        expression = str;
-    }
-
-    public void setImage(Expression e) {
-        switch (e) {
-            case NEUTRAL:
-                dukeImage = new Image(this.getClass().getResourceAsStream("/images/isabelle_neutral.png"));
-                break;
-            case SAD:
-                dukeImage = new Image(this.getClass().getResourceAsStream("/images/isabelle_sad.png"));
-                break;
-            case SHOCKED:
-                dukeImage = new Image(this.getClass().getResourceAsStream("/images/isabelle_shocked.png"));
-                break;
-            case SPARKLY:
-                dukeImage = new Image(this.getClass().getResourceAsStream("/images/isabelle_sparkly.png"));
-                break;
-            case CONFUSED:
-                dukeImage = new Image(this.getClass().getResourceAsStream("/images/isabelle_confused.png"));
-                break;
-            case STRESSED:
-                dukeImage = new Image(this.getClass().getResourceAsStream("/images/isabelle_stressed.png"));
-                break;
-            case CONCERNED:
-                dukeImage = new Image(this.getClass().getResourceAsStream("/images/isabelle_concerned.png"));
-                break;
-        }
-    }
-
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -81,7 +45,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        ChatDisplay chat = duke.getResponse(input);
+        String response = chat.getText();
+        Image dukeImage = chat.getDisplayPicture();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

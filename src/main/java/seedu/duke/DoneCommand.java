@@ -23,7 +23,7 @@ public class DoneCommand extends Command {
      * @return a String containing the Done message.
      */
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         Task task = t.list.get(done);
         task.done();
         try {

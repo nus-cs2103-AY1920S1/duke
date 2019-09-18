@@ -30,7 +30,7 @@ public class AddCommand extends Command {
      * @return a String representing the add message
      */
     @Override
-    public String execute(TaskList t, Ui u, Storage s) {
+    public ChatDisplay execute(TaskList t, Ui u, Storage s) {
         Task task = createNewTask();
         int size = t.list.size();
         t.list.add(task);

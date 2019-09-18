@@ -44,7 +44,7 @@ public class Storage {
                 int hours = time / 100;
                 int minutes = time % 100;
                 dateAndTime.set(Integer.parseInt(date[2]),
-                        Integer.parseInt(date[1]),
+                        Integer.parseInt(date[1]) - 1,
                         Integer.parseInt(date[0]),
                         hours,
                         minutes);
@@ -62,12 +62,12 @@ public class Storage {
                 int endHours = endTime / 100;
                 int endMinutes = endTime % 100;
                 startDateAndTime.set(Integer.parseInt(date[2]),
-                        Integer.parseInt(date[1]),
+                        Integer.parseInt(date[1]) - 1,
                         Integer.parseInt(date[0]),
                         startHours,
                         startMinutes);
                 endDateAndTime.set(Integer.parseInt(date[2]),
-                        Integer.parseInt(date[1]),
+                        Integer.parseInt(date[1]) - 1,
                         Integer.parseInt(date[0]),
                         endHours,
                         endMinutes);

@@ -12,7 +12,7 @@ line Interface (CLI) for you to type the command and Duke will do what you input
 1. Copy the file to the folder you want to use as the home folder for your Duke.
 
 1. Double-click the file to start the app. The GUI should appear in a few seconds.\
-![Ui](https://github.com/Auxinnn/duke/blob/master/docs/Ui.png?raw=true) 
+![Ui](Ui.png)
 
 1. Type the command in the command box and press <kbd>Enter</kbd> to execute it.\
 e.g. typing `list` and pressing <kbd>Enter</kbd> will print the task list.

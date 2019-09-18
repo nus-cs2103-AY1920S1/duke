@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -32,7 +33,7 @@ public class MainWindow extends AnchorPane {
      * Initializes a pane as the main window.
      */
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         String greeting = String.format("%s\n%s\n", "Hello! I'm Duke", "What can I do for you?");
@@ -51,7 +52,7 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() throws IOException, ParseException {
         String input = userInput.getText();
         String response = ui.getResponse(input);
         ui.write();

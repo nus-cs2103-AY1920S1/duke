@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 /**
  * Represents a chatbot assistant. A <code>Duke</code> object corresponds
@@ -44,11 +45,11 @@ public class Duke {
     /**
      * Initiates the chatbot to take user input.
      */
-    public void run() throws IOException {
+    public void run() throws IOException, ParseException {
         ui.initiate(storage, tasks);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ParseException {
         new Duke("data/tasks.txt").run();
     }
 }

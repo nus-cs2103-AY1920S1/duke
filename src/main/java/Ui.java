@@ -3,6 +3,7 @@ import javafx.application.Platform;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -29,7 +30,7 @@ public class Ui {
      * @param storage Storage handling.
      * @param taskList Task handling.
      */
-    public void initiate(Storage storage, TaskList taskList) throws IOException {
+    public void initiate(Storage storage, TaskList taskList) throws IOException, ParseException {
         mainStorage = storage;
         mainTaskList = taskList;
 
@@ -86,7 +87,7 @@ public class Ui {
      * @param input User commands.
      * @return Chatbot response.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws ParseException {
         StringBuilder response = new StringBuilder();
 
         if (!input.equals("bye")) {

@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
@@ -37,7 +38,7 @@ public class Parser {
      * @param input Command details.
      * @return Parsed details.
      */
-    public static String[] parseDetails(String input) {
+    public static String[] parseDetails(String input) throws ParseException {
         String[] parseInfo;
 
         if (input.contains("/by")) {
@@ -57,17 +58,13 @@ public class Parser {
      * @param date Numerical date/time.
      * @return Textual date/time.
      */
-    public static String convertDate(String date) {
+    public static String convertDate(String date) throws ParseException {
         SimpleDateFormat numDateTime = new SimpleDateFormat("d/M/y HHmm");
         SimpleDateFormat textDateTime = new SimpleDateFormat("d MMMM y, h.mma");
 
-        try {
-            if (date.matches("\\d+/\\d+/\\d+\\s+\\d+")) {
-                Date d = numDateTime.parse(date);
-                date = textDateTime.format(d);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (date.matches("\\d+/\\d+/\\d+\\s+\\d+")) {
+            Date d = numDateTime.parse(date);
+            date = textDateTime.format(d);
         }
 
         return date;

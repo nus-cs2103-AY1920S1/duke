@@ -39,8 +39,8 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
-        clip.setArcWidth(55);
-        clip.setArcHeight(55);
+        clip.setArcWidth(99);
+        clip.setArcHeight(99);
         displayPicture.setClip(clip);
     }
 

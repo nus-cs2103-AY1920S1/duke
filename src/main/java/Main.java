@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import ui.NewGUI;
+import ui.NewGui;
 
 /**
  * A GUI for Duke using FXML.
@@ -22,11 +22,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/NewGUI.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/NewGui.fxml"));
             VBox vb = fxmlLoader.load();
             Scene scene = new Scene(vb);
             stage.setScene(scene);
-            fxmlLoader.<NewGUI>getController().setDuke(duke);
+            fxmlLoader.<NewGui>getController().setUi(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

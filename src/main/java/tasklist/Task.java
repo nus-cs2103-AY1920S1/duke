@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
-import Notes.Notes;
+import notes.Notes;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -86,19 +86,28 @@ public abstract class Task {
         isDone.setValue(true);
     }
 
-
-    public void addNote(String category, String description,LocalDateTime dateDue){
-        noteBook.add(new Notes(category, description, dateDue));
-        ui.printAddedItem(category + " " + description + " " + dateDue, noteBook.size());
+    /**
+     * adds a note to a particular task or notebook.
+     * @param category contains the category type of the note
+     * @param description contains the actual note
+     * @param date contains an optional date
+     */
+    public void addNote(String category, String description,LocalDateTime date) {
+        noteBook.add(new Notes(category, description, date));
+        ui.printAddedItem(category + " " + description + " " + date, noteBook.size());
     }
 
-    public void removeNote(String noteToRemove){
-        if (noteToRemove.contains("all")){
+    /**
+     * Method to remove the note or all the notes of a designated task or notebook.
+     * @param noteToRemove contains command indicating whether all tasks are to be deleted or 1 particular one
+     */
+    public void removeNote(String noteToRemove) {
+        if (noteToRemove.contains("all")) {
             noteBook.clear();
-            ui.printRemovedItem("All entries", noteBook.size()+1);
-        }else {
-            int NoteToDelete = Integer.parseInt(noteToRemove);
-            noteBook.remove(NoteToDelete - 1);
+            ui.printRemovedItem("All entries", noteBook.size() + 1);
+        } else {
+            int noteToDelete = Integer.parseInt(noteToRemove);
+            noteBook.remove(noteToDelete - 1);
         }
     }
 

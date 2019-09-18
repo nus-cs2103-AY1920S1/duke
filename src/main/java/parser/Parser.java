@@ -25,7 +25,7 @@ public class Parser {
     private String category;
     private Integer tasknum;
     private String noteDescription;
-    public static final Pattern COMMAND_FORMAT= Pattern.compile("(?<commandWord>\\w+)"
+    public static final Pattern COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\w+)"
             + "\\s*(?<completionStatus>(\\[[01]\\])?)"
             + "\\s*(?<description>([\\w\\s\\d{}.|]+)?)"
             + "(?:(/by|/at))?(?<date>([\\w\\s\\d/]+)?)");
@@ -49,7 +49,7 @@ public class Parser {
         if (matcher.find()) {
             splitTaskKeywords(matcher);
             if (isSafe) {
-                executeCommand(command,isLoading);
+                executeCommand(command);
             }
         } else {
             ui.printErrorMsg2();
@@ -57,13 +57,17 @@ public class Parser {
         }
     }
 
-    public void splitNotesCommand(String cashCommand){
-        Matcher matcher = NOTE_FORMAT.matcher(cashCommand);
-        if (matcher.find()){
+    /**
+     * Parses the commands for handling notes.
+     * @param noteCommand actual command for handling notes
+     */
+    public void splitNotesCommand(String noteCommand) {
+        Matcher matcher = NOTE_FORMAT.matcher(noteCommand);
+        if (matcher.find()) {
             tasknum = Integer.parseInt(matcher.group("task")) - 1;
             category = matcher.group("category");
             noteDescription = matcher.group("description");
-        }else{
+        } else {
             ui.printErrorMsg2();
             isSafe = false;
         }
@@ -73,7 +77,11 @@ public class Parser {
         return isSafe;
     }
 
-    public void splitTaskKeywords(Matcher matcher){
+    /**
+     * Method to initialize the various variables with the parsed command.
+     * @param matcher contains the parsed command according to the above regex format
+     */
+    public void splitTaskKeywords(Matcher matcher) {
         command = matcher.group("commandWord");
         isDone = matcher.group("completionStatus").equals("[1]");
         description = matcher.group("description").trim();
@@ -88,16 +96,17 @@ public class Parser {
         }
     }
 
-    public void executeCommand(String command, Boolean isLoading){
+    /**
+     * Method that executes the commands according to the appropriate command word.
+     * @param command contains the main command word
+     */
+    public void executeCommand(String command) {
         switch (command) {
         case "todo":
         case "deadline":
         case "event":
         case "notebook":
             scheduler.addTask(command, description, isDone, date);
-            if (!isLoading) {
-                scheduler.printNewTask();
-            }
             break;
         case "list":
             scheduler.listTasks();

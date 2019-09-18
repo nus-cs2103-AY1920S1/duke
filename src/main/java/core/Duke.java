@@ -15,7 +15,7 @@ import java.io.PrintStream;
  * Main class of the program.
  * starts the application and receives use input.
  */
-public class Duke{
+public class Duke {
     private TaskList tasks;
     private JsonParser jsonParser;
 
@@ -25,6 +25,12 @@ public class Duke{
         tasks = jsonParser.readData();
     }
 
+    /**
+     * Main link between the ui and the core program.
+     * @param input user input
+     * @return returns collection of print statements to be displayed by chatbot
+     * @throws IOException when there is a loading error
+     */
     public String getResponse(String input) throws IOException {
         Parser parser = new Parser();
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();

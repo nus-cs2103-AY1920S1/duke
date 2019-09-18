@@ -1,31 +1,30 @@
 package storage;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import tasklist.Task;
 import tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class JsonParser {
 
     private String filepath;
-    private TaskList tasks;
+    private TaskList taskList;
 
-    public JsonParser(String filepath){
+    public JsonParser(String filepath) {
         this.filepath = filepath;
     }
 
+    /**
+     * Method to store data in the Json format.
+     * @param tasks contains the tasklist to be stored.
+     * @throws IOException in the case of a missing file
+     */
     public void storeData(TaskList tasks) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -34,11 +33,16 @@ public class JsonParser {
         writer.writeValue(new File(filepath),tasks);
     }
 
+    /**
+     * Method to load data from the Json formatted file.
+     * @return returns the tasklist class with all the saveddata loaded
+     * @throws IOException in the case of missing file
+     */
     public TaskList readData() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-        tasks = mapper.readValue(new FileInputStream(filepath), TaskList.class);
-        return tasks;
+        taskList = mapper.readValue(new FileInputStream(filepath), TaskList.class);
+        return taskList;
     }
 
 }

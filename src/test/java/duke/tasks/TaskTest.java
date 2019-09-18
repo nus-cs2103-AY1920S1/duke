@@ -8,7 +8,7 @@ import duke.person.PersonList;
 
 public class TaskTest {
     @Test
-    public void DescriptionListConstructorTest() {
+    public void descriptionListConstructorTest() {
         Task task = new Task("des", null);
         String description = task.getDescription();
         Boolean isDone = task.getStatus();
@@ -28,7 +28,7 @@ public class TaskTest {
 
     @Test
     public void toStringTest() {
-        Task task = new Task("des",null);
+        Task task = new Task("des", null);
         String str = task.toString();
         assertEquals("[-]des", str);
     }

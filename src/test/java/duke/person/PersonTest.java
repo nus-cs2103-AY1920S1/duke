@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PersonTest {
     @Test
-    public void NameConstructorTest() {
+    public void nameConstructorTest() {
         Person person = new Person("myname");
         String name = person.getName();
         String title = person.getTitle();
@@ -17,8 +17,8 @@ public class PersonTest {
     }
 
     @Test
-    public void NameTitleContactConstructorTest() {
-        Person person = new Person("myname","mytitle", "mycontact");
+    public void nameTitleContactConstructorTest() {
+        Person person = new Person("myname", "mytitle", "mycontact");
         String name = person.getName();
         String title = person.getTitle();
         String contact = person.getContact();

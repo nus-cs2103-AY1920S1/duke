@@ -8,7 +8,7 @@ plugins {
 
 shadowJar {
     archiveBaseName = "chatbot"
-    archiveVersion = "0.1.4"
+    archiveVersion = "0.2"
     archiveClassifier = null
     archiveAppendix = null
 }

@@ -112,6 +112,14 @@ public class UserInterface {
         return generateDeleteMessage(task, listSize);
     }
 
+    public void printSnooze(Task task){
+        this.print("Following task has been rescheduled:\n" + task);
+    }
+
+    public String printSnoozeGui(Task task){
+        return "Following task rescheduled uwu:\n" + task;
+    }
+
     /**
      * Prints error message
      * @param message error details
@@ -121,7 +129,7 @@ public class UserInterface {
     }
 
     public String printErrorGui(String message){
-        return "Error xwx: " + message;
+        return "(◕︵◕) Error: " + message;
     }
 
     /**

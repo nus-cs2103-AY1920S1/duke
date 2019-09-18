@@ -40,10 +40,15 @@ public class Event extends Task {
         }
     }
 
+    public Task updateDateTime(String newDateTime) throws DukeException{
+        this.setDateTime(newDateTime);
+        return this;
+    }
+
     public String toFileString(){
         StringBuilder fileString = new StringBuilder();
         fileString.append("E | 0 | " + description + " | ");
-        fileString.append(datetimeToString() + "\n");
+        fileString.append(datetimeToString());
         return fileString.toString();
     }
 

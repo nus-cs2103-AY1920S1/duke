@@ -1,5 +1,6 @@
 package duke.execution;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import duke.task.*;
 /**
@@ -202,5 +203,28 @@ public class TaskManager {
 
     protected int getSize(){
         return this.todoList.size();
+    }
+
+    /**
+     * Returns index of task
+     * @param task
+     * @return
+     */
+    protected int getTaskIndex(Task task){
+        return todoList.indexOf(task);
+    }
+
+    protected Task delayTask(String input) throws DukeException{
+        try{
+            String[] userInput = input.split(" ", 2);
+            int editIndex = Integer.parseInt(userInput[0]);
+            Task task = todoList.get(editIndex-1);
+            task.updateDateTime(userInput[1]);
+            return task;
+        }catch(NumberFormatException e){
+            throw new DukeException("Bad snooze input. Enter command as \"snooze + index + new date & time\"");
+        }catch(IndexOutOfBoundsException e){
+            throw new DukeException("Task index does not exist");
+        }
     }
 }

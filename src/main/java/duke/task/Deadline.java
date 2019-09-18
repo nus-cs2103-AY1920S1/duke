@@ -38,6 +38,11 @@ public class Deadline extends Task {
         }
     }
 
+    public Task updateDateTime(String newDateTime) throws DukeException{
+        this.setDateTime(newDateTime);
+        return this;
+    }
+
     public String toFileString(){
         StringBuilder fileString = new StringBuilder();
         fileString.append("D | 0 | " + description + " | ");

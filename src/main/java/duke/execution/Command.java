@@ -59,6 +59,10 @@ public class Command {
             ui.printList(tasks.generateList());
         }else if(info[0].equals("bye")){
             this.isExit = true;
+        }else if(info[0].equals("snooze")){
+            Task task = tasks.delayTask(info[1]);
+            fileManager.fileEditTime(tasks.getTaskIndex(task), task);
+            ui.printSnooze(task);
         }
     }
 
@@ -83,6 +87,10 @@ public class Command {
             return ui.printListGui(tasks.generateList());
         }else if(info[0].equals("bye")){
             return ui.printByeGui();
+        }else if(info[0].equals("snooze")){
+            Task task = tasks.delayTask(info[1]);
+            fileManager.fileEditTime(tasks.getTaskIndex(task), task);
+            return ui.printSnoozeGui(task);
         }
         return "Command not recognized?";
     }

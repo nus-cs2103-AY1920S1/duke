@@ -29,6 +29,7 @@ public class Parser {
         case "find":
             return new Command(taskInfo, false, false, false, true);
         case "list":
+        case "snooze":
         case "bye":
             return new Command(taskInfo, false, false, false, false);
         default:

@@ -1,4 +1,7 @@
 package duke.task;
+
+import duke.execution.DukeException;
+
 /**
  * Represents a task in a checklist
  */
@@ -35,5 +38,7 @@ public abstract class Task {
      */
     @Override
     public abstract String toString();
+
+    public abstract Task updateDateTime(String info) throws DukeException;
 }
 

@@ -1,4 +1,7 @@
 package duke.task;
+
+import duke.execution.DukeException;
+
 /**
  * Represents Todo object, subclass of Task
  */
@@ -20,5 +23,9 @@ public class Todo extends Task {
         } else {
             return "[T]" + "[" + "\u2718" + "]" + this.description;
         }
+    }
+
+    public Task updateDateTime(String info) throws DukeException{
+        throw new DukeException("Task is a Todo. There is no associated date/time.");
     }
 }

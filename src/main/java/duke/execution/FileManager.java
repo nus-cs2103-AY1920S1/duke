@@ -148,4 +148,21 @@ public class FileManager {
             throw new DukeException("File write error");
         }
     }
+
+    protected void fileEditTime(int editIndex, Task editedTask) throws DukeException{
+        StringBuilder finalInput = new StringBuilder();
+        try {
+            ArrayList<String> fileContent = new ArrayList<>(Files.readAllLines(saveList.toPath(), StandardCharsets.UTF_8));
+            fileContent.set(editIndex, editedTask.toFileString());
+            for(String s: fileContent){
+                finalInput.append(s + "\n");
+            }
+            FileWriter overwriteEditor = new FileWriter(saveList, false);
+            overwriteEditor.write(finalInput.toString());
+            overwriteEditor.close();
+        } catch (IOException e){
+            throw new DukeException("File write error");
+        }
+
+    }
 }

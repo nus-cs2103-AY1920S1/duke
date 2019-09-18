@@ -114,7 +114,9 @@ public class Storage {
      */
     private void updateStartupConfig() throws DukeException {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(CONFIG_PATH));
+            File config = new File(CONFIG_PATH);
+            config.getParentFile().mkdirs();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(config));
             writer.write(this.file.getPath());
             writer.newLine();
             writer.close();

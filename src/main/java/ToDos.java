@@ -14,6 +14,11 @@ public class ToDos extends Task {
     }
 
     @Override
+    public String getNumericalDate() {
+        return "";
+    }
+
+    @Override
     public String formatString() {
         return "T-" + super.checkStatus().trim() + "-" + super.getDescription();
     }

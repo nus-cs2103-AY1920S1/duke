@@ -22,6 +22,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getNumericalDate() {
+        return this.datetime[0];
+    }
+
+    @Override
     public String formatString() {
         return "D-" + super.checkStatus() + "-" + super.getDescription().trim() + "-" + this.deadline[1];
     }

@@ -114,4 +114,13 @@ public class Ui {
         return foundMessage;
     }
 
+    protected String showViewMessage(ArrayList<Task> viewTasklist) {
+        String viewMessage = "";
+        for (int x = 0; x < viewTasklist.size(); x++) {
+            viewMessage = viewMessage+ 1 + ". " + viewTasklist.get(x) + "\n";
+        }
+
+        return viewMessage;
+    }
+
 }

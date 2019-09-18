@@ -156,6 +156,7 @@ public abstract class Task {
         }
     }
 
+    public abstract String getNumericalDate();
 
     /**
      * Format the String into a save file format.

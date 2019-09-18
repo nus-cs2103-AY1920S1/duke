@@ -108,4 +108,24 @@ public class TaskList {
         }
     }
 
+    protected ArrayList<Task> viewTasks(String command) throws  IllegalCommandException {
+        if (!command.contains(" ")) {
+            throw new IllegalCommandException("There must be a date input");
+        } else {
+            String[] splitString = command.split(" ", 2);
+            ArrayList<Task> viewTasks = new ArrayList<>();
+            for (Task task : this.taskList) {
+                processViewTasks(task, viewTasks, splitString[1]);
+            }
+            return viewTasks;
+        }
+    }
+
+    protected static void processViewTasks
+            (Task task, ArrayList<Task> viewTasks, String date) {
+        if (task.getNumericalDate().contains(date)) {
+            viewTasks.add(task);
+        }
+    }
+
 }

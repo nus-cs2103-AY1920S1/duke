@@ -5,7 +5,7 @@ Duke is a personal chatbot that helps you keep track of your personal tasks. It 
 
 ## Getting Started
 1. Ensure that you have Java 11 or above installed on your computer.
-2. Download the latest release of Duke from here.
+2. Download the latest release of Duke from [here](https://github.com/bigjunnn/duke/releases).
 
 ## Features
 #### 1. Adding a 'ToDo' task

@@ -7,11 +7,11 @@ Duke is the ultimate task tracker and manager.
 **Scroll down to begin organising your life**
 
 
-#Features 
+# Features 
+ 
+## Feature 1: Add Tasks
 
-##Feature 1: Add Tasks
-
-###Add any of the 3 type of Tasks:**
+### Add any of the 3 type of Tasks:**
 
 1. **Event Tasks**
   * Format: event {event task} /at dd/mm/yyyy hhmm (24Hour)
@@ -28,9 +28,9 @@ Duke is the ultimate task tracker and manager.
   * Eg: todo use duke 
   * For tasks which *just have to be done*
 
-##Feature 2: List Tasks
+## Feature 2: List Tasks
 
-###List all your tasks**
+### List all your tasks**
 
 1. **How to list?**
   * Format: list
@@ -38,27 +38,27 @@ Duke is the ultimate task tracker and manager.
   * Simply lists all your tasks and completion status 
   * *(Tick = Done, Cross = Undone)*
 
-##Feature 3: Delete Tasks
+## Feature 3: Delete Tasks
 
-###Delete tasks from your list**
+### Delete tasks from your list**
 
 1. **How to delete?**
   * Format: delete {index}
   * Eg: delete 1
   * Deletes the task at position *index*, which you can check when you use the list command
 
-##Feature 4: Do Tasks
+## Feature 4: Do Tasks
 
-###Marks the indexed task as done**
+### Marks the indexed task as done**
 
 1. **How to do?**
   * Format: do {index}
   * Eg: do 3
   * Marks the indexed task as done and gives you a very satisfying *tick*
 
-##Feature 5: Search Tasks
+## Feature 5: Search Tasks
 
-###Shows you all the related to what you searched for**
+### Shows you all the related to what you searched for**
 
 1. **How to search?**
   * Format: search {what are you looking for?}
@@ -66,9 +66,9 @@ Duke is the ultimate task tracker and manager.
   * Returns a list of all tasks which *correspond to what you searched for*
 
 
-##Feature 5: Statistics
+## Feature 5: Statistics
 
-###Shows you a summary of your tasks and their completion status**
+### Shows you a summary of your tasks and their completion status**
 
 1. **How to get statistics?**
   * Format: statistics
@@ -83,6 +83,6 @@ Duke is the ultimate task tracker and manager.
 bye ends the program for you
 
 
-#End
+# End
 
 And thats all for now folks! I'll be adding new features soon so stay tuned!

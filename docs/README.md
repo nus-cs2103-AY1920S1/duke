@@ -41,7 +41,7 @@ Description of feature.
 
 <br>
 
-### 2. deadline
+### 2. [deadline](#2-deadline)
 ---
 ##### Usage:
 
@@ -79,7 +79,7 @@ Description of feature.
 
 <br>
 
-### 3. delete
+### 3. [delete](#3-delete)
 ---
 ##### Usage:
 
@@ -101,7 +101,7 @@ Description of feature.
 
 <br>
 
-### 4. done
+### 4. [done](#4-done)
 ---
 ##### Usage:
 
@@ -123,7 +123,7 @@ Description of feature.
 
 <br>
 
-### 5. event
+### 5. [event](#5-event)
 ---
 ##### Usage:
 
@@ -161,7 +161,7 @@ Description of feature.
 
 <br>
 
-### 6. event_at
+### 6. [event_at](#6-event_at)
 ---
 ##### Usage:
 
@@ -191,7 +191,7 @@ Description of feature.
 
 <br>
 
-### 7. find
+### 7. [find](#7-find)
 ---
 ##### Usage:
 
@@ -213,7 +213,7 @@ Description of feature.
 
 <br>
 
-### 8. help
+### 8. [help](#8-help)
 ---
 ##### Usage:
 
@@ -243,7 +243,7 @@ Description of feature.
 
 <br>
 
-### 9. list
+### 9. [list](#9-list)
 ---
 ##### Usage:
 
@@ -265,7 +265,7 @@ Description of feature.
 
 <br>
 
-### 10. snooze
+### 10. [snooze](#10-snooze)
 ---
 ##### Usage:
 
@@ -295,7 +295,7 @@ Description of feature.
 
 <br>
 
-### 11. todo
+### 11. [todo](#11-todo)
 ---
 ##### Usage:
 

@@ -107,11 +107,6 @@ public class MainWindow extends AnchorPane {
         try {
             TaskList.calculateStats();
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/StatisticsScene.fxml"));
-            /*
-            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-            int width = gd.getDisplayMode().getWidth();
-            int height = gd.getDisplayMode().getHeight(); */
-
             BarChart chart = fxmlLoader.load();
             Scene scene = new Scene(chart);
             window.setScene(scene);

@@ -41,7 +41,7 @@ Edits the description or the date and time of the task.
 
 **Usage**
 
-###`Keyword`- `edit`
+`Keyword`- `edit`
 
 Edits the description/date and time of the task:<br/>
 `edit description [new description]`<br/>
@@ -65,7 +65,7 @@ Marks the tasks that are in the task list as done.
 
 **Usage**
 
-###`Keyword`- `done`
+`Keyword`- `done`
 
 Example of usage:
 
@@ -81,7 +81,7 @@ Lists the tasks that are in the task list.
 
 **Usage**
 
-###`Keyword`- `list`
+`Keyword`- `list`
 
 Example of usage:
 
@@ -99,7 +99,7 @@ Finds a specific task  in the task list.
 
 **Usage**
 
-###`Keyword`- `find`
+`Keyword`- `find`
 The keyword does not have to be case sensitive.<br/>
 `find [keyword(s)]`
 
@@ -118,7 +118,7 @@ Deletes a specific task  in the task list.
 
 **Usage**
 
-###`Keyword`- `delete`
+`Keyword`- `delete`
 
 `delete [task number]`
 
@@ -138,7 +138,7 @@ Closes the application window. All tasks will be saved automatically.
 
 **Usage**
 
-###`Keyword`- `bye`
+`Keyword`- `bye`
 
 Example of usage:
 

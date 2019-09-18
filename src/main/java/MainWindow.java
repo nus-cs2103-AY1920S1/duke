@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
     private TaskChick taskChick;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private Image chickyImage = new Image(this.getClass().getResourceAsStream("/images/chicky.png"));
 
     @FXML
     public void initialize() {
@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane {
         String response = taskChick.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, chickyImage)
         );
         userInput.clear();
         // ends the program when user inputs "bye"
@@ -67,7 +67,7 @@ public class MainWindow extends AnchorPane {
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello, I'm Task Chick!\n\nWhat can I do for you today?\n\nEnter "
-                                + "'help' to see how you can use me ^_^", dukeImage)
+                                + "'help' to see how you can use me ^_^", chickyImage)
         );
     }
 }

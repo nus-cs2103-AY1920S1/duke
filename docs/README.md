@@ -9,9 +9,11 @@ as well as from a GUI.
 
 ### Available in both CLI and GUI
 GUI:  
-![GUI version](./Ui_300x460.png)  
+![GUI version](./Ui_300x460.png)
+<br><br>
 CLI:  
 ![CLI version](./Cli_417x460.png)  
+<br><br>
 While the GUI may be more intuitive to use, the CLI version provides a simpler
 and distraction-free environment for you to focus on managing your tasks.  
 The command syntax is the same in both GUI and CLI.  

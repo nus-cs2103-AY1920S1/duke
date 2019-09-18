@@ -1,12 +1,13 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class TimeTask extends Task {
+public abstract class TimeTask extends Task {
     static final String DATE_FORMAT_HINT = "Please enter the date in the format d/M/yyyy HHmm e.g. 19/9/2019 1430";
     private DateTimeFormatter saveFormatter = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("yyyy MMMM dd HHmm");
@@ -49,5 +50,15 @@ abstract class TimeTask extends Task {
         List<String> list = new ArrayList<>(super.getSaveList());
         list.add(getSaveTimeString());
         return list;
+    }
+
+    /**
+     * Returns whether this task is on the given date.
+     *
+     * @param date Date which this task is checked to be on.
+     * @return Whether the task is on the date.
+     */
+    public boolean isOn(LocalDate date) {
+        return time.toLocalDate().isEqual(date);
     }
 }

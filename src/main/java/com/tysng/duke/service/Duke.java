@@ -15,12 +15,8 @@ import java.util.stream.Collectors;
  */
 public class Duke {
     private TaskList taskList;
+    private TaskList archiveList;
     private Storage storage;
-
-
-    public Duke() {
-
-    }
 
     /**
      * Constructs a service layer object with the external Storage layer.
@@ -30,6 +26,7 @@ public class Duke {
     public Duke(Storage storage) {
         this.storage = storage;
         this.taskList = new TaskList(this.storage.loadTasks());
+        this.archiveList = new TaskList(this.storage.loadArchive());
     }
 
     /**
@@ -42,10 +39,13 @@ public class Duke {
         Response response;
         switch (command.getType()) {
         case LIST:
-            response = this.handleList();
+            response = this.handleList(command.getKeyword());
             break;
         case DONE:
             response = this.handleDone(command.getTargetIndex());
+            break;
+        case ARCHIVE:
+            response = this.handleArchive(command.getTargetIndex());
             break;
         case DELETE:
             response = this.handleDelete(command.getTargetIndex());
@@ -66,6 +66,7 @@ public class Duke {
             throw new Error("Fatal error: the command is not valid");
         }
         this.storage.saveTasks(this.taskList.getTaskList());
+        this.storage.saveArchive(this.archiveList.getTaskList());
         return response;
     }
 
@@ -79,6 +80,12 @@ public class Duke {
     private Response handleDone(int targetIndex) {
         taskList.getTask(targetIndex).setCompleted(true);
         return Response.newDone(this.taskList.getTask(targetIndex));
+    }
+
+    private Response handleArchive(int targetIndex) {
+        Task removed = taskList.getTaskList().remove(targetIndex);
+        archiveList.addTask(removed);
+        return Response.newArchive(removed);
     }
 
     private Response handleDelete(int targetIndex) {
@@ -99,7 +106,13 @@ public class Duke {
         return Response.newAdded(item, this.taskList.getTaskList().size());
     }
 
-    private Response handleList() {
+    private Response handleList(String arg) {
+        if (arg == null) {
+            return Response.newListing(this.taskList.getTaskList());
+        }
+        if (arg.equals("archive")) {
+            return Response.newListing(this.archiveList.getTaskList());
+        }
         return Response.newListing(this.taskList.getTaskList());
     }
 

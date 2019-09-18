@@ -87,11 +87,16 @@ public class Command {
 
         switch (command[0]) {
         case "list":
+            if ((command.length > 1) && (command[1].equals("archive"))) {
+                return new Command(CommandType.LIST, "archive");
+            }
             return new Command(CommandType.LIST);
         case "bye":
             return new Command(CommandType.BYE);
         case "done":
             return new Command(CommandType.DONE, Integer.parseInt(command[1]));
+        case "archive":
+            return new Command(CommandType.ARCHIVE, Integer.parseInt(command[1]));
         case "delete":
             return new Command(CommandType.DELETE, Integer.parseInt(command[1]));
         case "find":
@@ -155,6 +160,6 @@ public class Command {
      * The only types of Command allowed.
      */
     public enum CommandType {
-        BYE, LIST, DONE, ADD, ECHO, DELETE, FIND
+        BYE, LIST, DONE, ADD, ECHO, DELETE, FIND, ARCHIVE
     }
 }

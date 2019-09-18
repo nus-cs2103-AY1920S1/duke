@@ -94,6 +94,19 @@ public class Response {
         ));
     }
 
+
+    /**
+     * Generates a Done type response.
+     *
+     * @param item the item marked as done
+     * @return a response
+     */
+    public static Response newArchive(Task item) {
+        return new Response(List.of(
+                "This task is archive:",
+                Response.INDENT + item.toString()
+        ));
+    }
     /**
      * Generates a Delete type response.
      *
@@ -125,7 +138,7 @@ public class Response {
      * @return a response
      */
     public static Response newListing(List<Task> items) {
-        return Response.listing(items, "Here are the tasks in your list:");
+        return Response.listing(items, "Here are the tasks:");
     }
 
     /**

@@ -19,23 +19,19 @@ import java.util.stream.Stream;
  * This class handles saving and loading from local files.
  */
 public class Storage {
-    private static final String FILENAME = "duke.txt";
+
+    private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
 
     /**
      * The platform-independent path to the /data folder.
      */
     private static Path DATA_FOLDER = Path.of(".", "data");
 
-    private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-
     /**
-     * The Path object is assigned at run time.
+     * Paths to the storage files.
      */
-    private Path storageFilePath;
-
-    private Storage() {
-        this.storageFilePath = Path.of(DATA_FOLDER.toString(), FILENAME);
-    }
+    private Path storageFilePath = Path.of(DATA_FOLDER.toString(), "duke.txt");
+    private Path archiveFilePath = Path.of(DATA_FOLDER.toString(), "archive.txt");
 
     /**
      * Constructs a new Storage class.  The static factory method will create the data.txt file if the path
@@ -54,6 +50,10 @@ public class Storage {
                 Files.createFile(storage.storageFilePath);
             }
 
+            if (!Files.exists(storage.archiveFilePath)) {
+                Files.createFile(storage.archiveFilePath);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,12 +66,35 @@ public class Storage {
      * @param taskList a list of tasks
      */
     public void saveTasks(List<Task> taskList) {
+        saveTasksToFile(this.storageFilePath, taskList);
+    }
+
+    /**
+     * Saves the given archive list to local files.
+     *
+     * @param taskList a list of archives
+     */
+    public void saveArchive(List<Task> taskList) {
+        saveTasksToFile(this.archiveFilePath, taskList);
+    }
+
+    private void saveTasksToFile(Path path, List<Task> taskList) {
         List<String> entries = taskList.stream().map(this::toFileEntry).collect(Collectors.toList());
         try {
-            Files.write(this.storageFilePath, entries);
+            Files.write(path, entries);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Loads the archive from local storage.  When the storage text file is not found, it writes the stack trace
+     * to stderr and returns an empty list.
+     *
+     * @return the loaded archive
+     */
+    public List<Task> loadArchive() {
+        return loadTasksFromFile(this.archiveFilePath);
     }
 
     /**
@@ -81,8 +104,13 @@ public class Storage {
      * @return the loaded tasks
      */
     public List<Task> loadTasks() {
+        return loadTasksFromFile(this.storageFilePath);
+    }
+
+
+    private List<Task> loadTasksFromFile(Path path) {
         try {
-            List<String> entries = Files.readAllLines(this.storageFilePath);
+            List<String> entries = Files.readAllLines(path);
             return entries.stream().map(this::parse).flatMap(Optional::stream).collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();

@@ -38,7 +38,6 @@ public class TaskList {
     protected String printAll() {
         StringBuilder sb = new StringBuilder();
         for(Tasks t: listOfTasks) {
-            //System.out.println(t);
             sb.append(t);
         }
         return sb.toString();

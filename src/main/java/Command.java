@@ -25,31 +25,20 @@ public class Command {
         case "bye":
             return "Bye! See you again soon!";
 
-
         case "list":
             return list.printAll();
-            //break;
 
         case "delete":
-            if (cmdDetails.length() < 1) {
-                throw new DukeException("Please specify the task to be deleted.");
-            } else {
-                list.deleteTask(Integer.parseInt(cmdDetails) - 1);
-                store.updateFile(list);
-                return "Task deleted!";
-            }
-            //break;
+            DeleteCommand ddc = new DeleteCommand(cmd, cmdDetails);
+            return ddc.execute(list, ui, store);
 
         case "done":
-            if (cmdDetails.length() < 1) {
-                throw new DukeException("Please specify the task that is completed.");
-            } else {
-                int taskIndex =  Integer.parseInt(cmdDetails);
-                list.getTask(taskIndex - 1).doTask();
-                store.updateFile(list);
-                return "Task done";
-            }
-            //break;
+            DoneCommand dc = new DoneCommand(cmd, cmdDetails);
+            return dc.execute(list, ui, store);
+
+        case "find":
+            FindCommand fc = new FindCommand(cmd, cmdDetails);
+            return fc.execute(list, ui, store);
 
         case "todo":
             if (cmdDetails.length() < 1) {
@@ -59,9 +48,7 @@ public class Command {
                 list.addTask(newTodo);
                 store.updateFile(list);
                 return Ui.printAddedMsg();
-                //return "Todo added";
             }
-            //break;
 
         case "deadline":
             String[] separate = cmdDetails.split("/");
@@ -70,11 +57,9 @@ public class Command {
                 list.addTask(newDeadline);
                 store.updateFile(list);
                 return Ui.printAddedMsg();
-                //return "Deadline added!";
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS! I do not know what that means!");
             }
-            //break;
 
         case "event":
             String[] separate2 = cmdDetails.split("/");
@@ -86,7 +71,6 @@ public class Command {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS! I do not know what that means!");
             }
-            //break;
 
         default:
             throw new DukeException("OOPS! I do not know what that means!");

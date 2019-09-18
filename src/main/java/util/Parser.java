@@ -79,8 +79,8 @@ public class Parser {
             assert (words.length == 2);
             String command = words[0];
             itemId = Integer.parseInt(words[1]);
-        } catch (AssertionError | NumberFormatException e) {
-            throw new DukeException("☹ OOPS!!! Incorrect format for done command.");
+        } catch (AssertionError | NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! Incorrect format for done command. Format: `done [ITEMID]`.");
         }
 
         return new DoneCommand(itemId);
@@ -101,8 +101,8 @@ public class Parser {
             assert (words.length == 2);
             String command = words[0];
             itemId = Integer.parseInt(words[1]);
-        } catch (AssertionError | NumberFormatException e) {
-            throw new DukeException("☹ OOPS!!! Incorrect format for delete command.");
+        } catch (AssertionError | NumberFormatException | IndexOutOfBoundsException e) {
+            throw new DukeException("☹ OOPS!!! Incorrect format for delete command. Format: `delete [ITEMID]`.");
         }
 
         return new DeleteCommand(itemId);
@@ -153,7 +153,7 @@ public class Parser {
         case "event":
             args = info.split("/at");
             if (args.length != 2) {
-                throw new DukeException("☹ OOPS!!! A event must include a description and date.");
+                throw new DukeException("☹ OOPS!!! An event must include a description and date.");
             }
 
             description = args[0].trim();
@@ -164,7 +164,7 @@ public class Parser {
             try {
                 date = dateFormatter.parse(args[1].trim());
             } catch (ParseException e) {
-                throw new DukeException("☹ OOPS!!! Incorrect date format.");
+                throw new DukeException("☹ OOPS!!! Incorrect date format. Format: `[MONTH]/[DAY]/[YEAR] [HOUR][MIN]`.");
             }
 
             return new AddCommand(new Event(description, date));
@@ -184,7 +184,7 @@ public class Parser {
         try {
             query = input.substring("find ".length()).trim();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! Incorrect format for find command.");
+            throw new DukeException("☹ OOPS!!! Incorrect format for find command. Format: `find [QUERY]`.");
         }
         return new FindCommand(query);
     }
@@ -200,7 +200,7 @@ public class Parser {
         try {
             field = input.substring("sort".length()).trim();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("☹ OOPS!!! Incorrect format for sort command.");
+            throw new DukeException("☹ OOPS!!! Incorrect format for sort command. Format: `sort [FIELD]`.");
         }
         return new SortCommand(field);
     }

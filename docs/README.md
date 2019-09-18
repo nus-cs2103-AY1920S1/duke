@@ -108,7 +108,7 @@ Example of usage:
 Expected outcome:
 
 `Here is the sorted list:`\
-`     1.[E][✘] Kennedy's visit to Texas (at: Thu Oct 11 12:30:00 SGT 64)`\
+`     1.[E][✘] Kennedy's visit to Texas (at: Tue Nov 22 12:30:00 SGT 63)`\
 `     2.[D][✓] CS2100 assignment (by: Wed Sep 18 23:59:00 SGT 2019)`
 
 ## Exit program

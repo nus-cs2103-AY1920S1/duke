@@ -36,7 +36,7 @@ public class FindCommand extends Command {
                 tempList.addTask(task);
             }
         }
-        ui.printResponse("Here are the matching tasks in your list:\n  "
+        ui.printResponse("Here are the matching tasks in your list:\n"
                 + tempList.toString() + "\n");
     }
 

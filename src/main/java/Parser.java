@@ -39,7 +39,7 @@ public class Parser {
         switch (commandType) {
         case("list"):
             String list = taskList.printAllTasks();
-            reply = "Here are the tasks in your list:" + "\n" + list;
+            reply = "Woof! Here are the tasks in your list:" + "\n" + list;
             break;
         case("done"):
             reply = executeDone(command);
@@ -143,7 +143,7 @@ public class Parser {
                 }
             } catch (DukeException e) {
                 String taskWithIssue = e.getMessage();
-                throw new MissingDateTimeException("Date Time missing."
+                throw new MissingDateTimeException("Woof Woof!! Date Time missing."
                         + "Please set a date and time. (Eg. " + taskWithIssue +  " read book /by Sunday)");
             }
 
@@ -289,23 +289,25 @@ public class Parser {
      * @throws DukeException of incorrect Date Time format.
      */
     private static Deadline generateNewDeadline(String taskDescription) throws DukeException {
-        String[] sentence = taskDescription.split("/by");
-        String description = sentence[0];
+        String description;
         String deadline;
 
         try {
             // If the given Date Time is in the correct format.
-            deadline = formatDateTime(sentence[1]);
+            String[] sentence = taskDescription.split("/by");
+            description = sentence[0];
+            try {
+                deadline = formatDateTime(sentence[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                if (!sentence[1].isEmpty()) {
+                    deadline = sentence[1];           // If the Date Time is in another format.
+                } else {
+                    throw e;                          // No Date Time given for deadline.
+                }
+            }
             return new Deadline(description, deadline);
         } catch (ArrayIndexOutOfBoundsException e) {
-            if (!sentence[1].isEmpty()) {
-                // If the given Date Time is in another format.
-                deadline = sentence[1];
-                return new Deadline(description, deadline);
-            } else {
-                // No Date Time given for deadline.
-                throw new DukeException("Deadline");
-            }
+            throw new DukeException("Deadline");
         }
     }
 
@@ -316,23 +318,25 @@ public class Parser {
      * @throws DukeException of incorrect DateTime format.
      */
     private static Event generateNewEvent(String taskDescription) throws DukeException {
-        String[] sentence = taskDescription.split("/at");
-        String description = sentence[0];
+        String description;
         String time;
 
         try {
             // If the given Date Time is in the correct format.
-            time = formatDateTime(sentence[1]);
+            String[] sentence = taskDescription.split("/at");
+            description = sentence[0];
+            try {
+                time = formatDateTime(sentence[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                if (!sentence[1].isEmpty()) {
+                    time = sentence[1];           // If the Date Time is in another format.
+                } else {
+                    throw e;                      // No Date Time given for event.
+                }
+            }
             return new Event(description, time);
         } catch (ArrayIndexOutOfBoundsException e) {
-            if (!sentence[1].isEmpty()) {
-                // If the given Date Time is in another format.
-                time = sentence[1];
-                return new Event(description, time);
-            } else {
-                // No Date Time given for event.
-                throw new DukeException("Event");
-            }
+            throw new DukeException("Event");
         }
     }
 

@@ -46,7 +46,7 @@ public class Storage {
                 loadList.add(task);
             }
         } catch (IOException e) {
-            throw new DukeException("File cannot be accessed");
+            throw new DukeException("Woof Woof!! File cannot be accessed");
         }
 
         return loadList;

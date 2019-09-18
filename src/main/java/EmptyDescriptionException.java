@@ -8,6 +8,6 @@ public class EmptyDescriptionException extends DukeException {
      * @param rootError the error given by Java.
      */
     public EmptyDescriptionException(String taskType, Throwable rootError) {
-        super("OOPS!!! The description of a " + taskType + " cannot be empty.", rootError);
+        super("WOOf?? The description of a " + taskType + " cannot be empty.", rootError);
     }
 }

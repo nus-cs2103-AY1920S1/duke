@@ -1,5 +1,6 @@
 package command;
 
+import utilities.ExpenseList;
 import utilities.Storage;
 import utilities.TaskList;
 import utilities.Ui;
@@ -20,13 +21,13 @@ public class DoneCommand extends Command {
      *
      * @return the command to be printed
      */
-    public String executeAsString(TaskList tasks, Ui ui, Storage storage) {
+    public String executeAsString(TaskList tasks, Ui ui, Storage storage, ExpenseList expenses) {
         String[]splitWords = command.split(" ");
 
         try {
             int val = Integer.parseInt(splitWords[1]);
             tasks.taskDone(val - 1);
-            storage.updateFile(tasks);
+            storage.updateFile(tasks, expenses);
             return ui.doneMessageFX(val - 1, tasks);
         } catch (Exception e) {
             return "Error, you have entered an invalid number";

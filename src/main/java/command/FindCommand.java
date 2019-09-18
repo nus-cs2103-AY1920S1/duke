@@ -1,5 +1,6 @@
 package command;
 
+import utilities.ExpenseList;
 import utilities.Storage;
 import utilities.TaskList;
 import utilities.Ui;
@@ -20,7 +21,7 @@ public class FindCommand extends Command {
      *
      * @return the output to be printed on screen
      */
-    public String executeAsString(TaskList tasks, Ui ui, Storage storage) {
+    public String executeAsString(TaskList tasks, Ui ui, Storage storage, ExpenseList expenses) {
         String[]splitWords = command.split(" ",2);
         String wordToFind = splitWords[1];
         TaskList findResults = new TaskList();

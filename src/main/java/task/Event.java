@@ -1,6 +1,7 @@
 package task;
 
 import exceptions.DukeException;
+import utilities.ExpenseList;
 import utilities.Storage;
 import utilities.TaskList;
 
@@ -48,9 +49,9 @@ public class Event extends Task {
      */
     public String printer() {
         if (done) {
-            return "[E][✓] " + midCommand + "(at: " + formattedDate + ")";
+            return "[E][:)] " + midCommand + "(at: " + formattedDate + ")";
         } else {
-            return "[E][✗] " + midCommand + "(at: " + formattedDate + ")";
+            return "[E][:(] " + midCommand + "(at: " + formattedDate + ")";
         }
     }
 
@@ -93,14 +94,14 @@ public class Event extends Task {
      *
      * @throws DukeException in case user inputs in an incorrect format
      */
-    public static void createEvent(String command, TaskList tasks, Storage storage) throws DukeException {
+    public static void createEvent(String command, TaskList tasks, Storage storage, ExpenseList expense) throws DukeException {
         String[]splitWords = command.trim().split("\\s",2);
         String midCommand = splitWords[1].trim();
 
         try {
             if (midCommand.length() != 0) {
                 tasks.add(new Event(midCommand));
-                storage.updateFile(tasks);
+                storage.updateFile(tasks, expense);
             } else {
                 throw new Exception();
             }

@@ -4,6 +4,7 @@ import exceptions.DukeException;
 import task.Deadline;
 import task.Event;
 import task.ToDo;
+import utilities.ExpenseList;
 import utilities.Storage;
 import utilities.TaskList;
 import utilities.Ui;
@@ -26,16 +27,16 @@ public class TaskCommand extends Command {
      *
      * @throws DukeException when incorrect command is inputted
      */
-    public String executeAsString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeAsString(TaskList tasks, Ui ui, Storage storage, ExpenseList expenses) throws DukeException {
         try {
             String[]splitWords = command.trim().split("\\s",2);
 
             if (splitWords[0].equals("todo")) {
-                ToDo.createTodo(command, tasks, storage);
+                ToDo.createTodo(command, tasks, storage, expenses);
             } else if (splitWords[0].equals("deadline")) {
-                Deadline.createDeadline(command, tasks, storage);
+                Deadline.createDeadline(command, tasks, storage, expenses);
             } else if (splitWords[0].equals("event")) {
-                Event.createEvent(command, tasks, storage);
+                Event.createEvent(command, tasks, storage, expenses);
             } else {
                 throw new DukeException("");
             }

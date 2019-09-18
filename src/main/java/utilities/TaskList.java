@@ -35,7 +35,11 @@ public class TaskList {
         StringBuilder result = new StringBuilder();
 
         for (int i = 1; i <= list.size(); i++) {
-            result.append(list.get(i - 1).printToOutput()).append("\n");
+            if (i == list.size()) {
+                result.append(list.get(i - 1).printToOutput());
+            } else {
+                result.append(list.get(i - 1).printToOutput()).append("\n");
+            }
         }
 
         return result.toString();

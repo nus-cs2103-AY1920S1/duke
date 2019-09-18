@@ -1,6 +1,7 @@
 package task;
 
 import exceptions.DukeException;
+import utilities.ExpenseList;
 import utilities.Storage;
 import utilities.TaskList;
 
@@ -25,9 +26,9 @@ public class ToDo extends Task {
      */
     public String printer() {
         if (done) {
-            return "[T][✓] " + command;
+            return "[T][:)] " + command;
         } else {
-            return "[T][✗] " + command;
+            return "[T][:(] " + command;
         }
     }
 
@@ -69,14 +70,14 @@ public class ToDo extends Task {
      *
      * @throws DukeException in case user inputs in an incorrect format
      */
-    public static void createTodo(String command, TaskList tasks, Storage storage) throws DukeException {
+    public static void createTodo(String command, TaskList tasks, Storage storage, ExpenseList expenses) throws DukeException {
         String[]splitWords = command.trim().split("\\s",2);
         String midCommand = splitWords[1].trim();
 
         try {
             if (midCommand.length() != 0) {
                 tasks.add(new ToDo(midCommand));
-                storage.updateFile(tasks);
+                storage.updateFile(tasks, expenses);
             } else {
                 throw new DukeException("");
             }

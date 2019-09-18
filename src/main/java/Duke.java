@@ -1,8 +1,5 @@
 import exceptions.DukeException;
-import utilities.Parser;
-import utilities.Storage;
-import utilities.TaskList;
-import utilities.Ui;
+import utilities.*;
 
 
 /**
@@ -13,6 +10,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private ExpenseList expenses;
 
 
     /**
@@ -25,8 +23,10 @@ public class Duke {
     private Duke(String filePath) throws Exception {
         ui = new Ui();
         storage = new Storage(filePath);
+        expenses = new ExpenseList();
         try {
             tasks = new TaskList(storage.load());
+            expenses = new ExpenseList(storage.loadExpenses());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -41,6 +41,7 @@ public class Duke {
     Duke() throws Exception {
         ui = new Ui();
         storage = new Storage("DukeOutput.txt");
+        expenses = new ExpenseList(storage.loadExpenses());
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -62,13 +63,13 @@ public class Duke {
                 ui.showLine();
                 command.Command c = Parser.parse(fullCommand);
                 //c.execute(tasks, ui, storage);
-                String result = c.executeAsString(tasks, ui, storage);
+                String result = c.executeAsString(tasks, ui, storage, expenses);
                 System.out.println(result);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } catch (Exception e) {
-                System.out.println("fml");
+                System.out.println(e.getMessage());
             } finally {
                 ui.showLine();
             }
@@ -99,11 +100,11 @@ public class Duke {
     String getResponse(String input) {
         try {
             command.Command c = Parser.parse(input);
-            return c.executeAsString(tasks, ui, storage);
+            return c.executeAsString(tasks, ui, storage, expenses);
         } catch (DukeException e) {
             return ui.showErrorFX(e.getMessage());
         } catch (Exception e) {
-            return "fml";
+            return e.getMessage();
         }
     }
 

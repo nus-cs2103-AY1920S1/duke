@@ -32,6 +32,12 @@ public class Parser {
             return new ListCommand(command);
         } else if (words[0].equals("find")) {
             return new FindCommand(command);
+        } else if (words[0].equals("spent")) {
+            return new ExpenseCommand(command);
+        } else if (words[0].equals("expenses")) {
+            return new ExpenseListCommand(command);
+        } else if ((words.length == 2) && (words[0].equals("deleteExpense")) && (isNumeric(words[1]))) {
+            return new DeleteExpenseCommand(command);
         } else {
             return new TaskCommand(command);
         }

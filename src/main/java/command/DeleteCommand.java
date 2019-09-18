@@ -1,5 +1,6 @@
 package command;
 
+import utilities.ExpenseList;
 import utilities.Storage;
 import utilities.TaskList;
 import utilities.Ui;
@@ -21,7 +22,7 @@ public class DeleteCommand extends Command {
      *
      * @return the final string command that has to be printed
      */
-    public String executeAsString(TaskList tasks, Ui ui, Storage storage) {
+    public String executeAsString(TaskList tasks, Ui ui, Storage storage, ExpenseList expenses) {
         String[]splitWords = command.split(" ");
 
         try {
@@ -29,7 +30,7 @@ public class DeleteCommand extends Command {
             assert val <= (tasks.size()) : "Enter a smaller number";
             String result = ui.deleteMessageFX(val - 1, tasks);
             tasks.remove(val - 1);
-            storage.updateFile(tasks);
+            storage.updateFile(tasks, expenses);
             return result;
         } catch (AssertionError f) {
             return f.getMessage();

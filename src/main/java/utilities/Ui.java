@@ -1,5 +1,7 @@
 package utilities;
 
+import expense.Expense;
+
 import java.util.Scanner;
 
 /**
@@ -40,12 +42,12 @@ public class Ui {
                 + "What can I do for you?" + "\n" + lineBorder;
     }
 
-    /**
+/*    /**
      * prints conclusion message.
      */
-    public void showConclusion() {
+/*    public void showConclusion() {
         System.out.println("Bye. Hope to see you again soon!");
-    }
+    }*/
 
     /**
      * to print conclusion message.
@@ -79,7 +81,7 @@ public class Ui {
      * @param message is default parameter
      */
     public void showError(String message) {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-()");
+        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-()");
     }
 
     /**
@@ -90,7 +92,7 @@ public class Ui {
      * @return the error message
      */
     public String showErrorFX(String message) {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-()";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-()";
     }
 
     /**
@@ -100,25 +102,25 @@ public class Ui {
         System.out.println("File not available");
     }
 
-    /**
+/*    /**
      * return loading error message as String.
      *
      * @return error message
      */
-    public String showLoadingErrorFX() {
+/*    public String showLoadingErrorFX() {
         return "File not available";
-    }
+    }*/
 
-    /**
+/*    /**
      * print message for done command.
      *
      * @param n is the digit of task to be deleted
      *
      * @param tasks is the TaskList
      */
-    public void doneMessage(int n, TaskList tasks) {
+/*    public void doneMessage(int n, TaskList tasks) {
         System.out.println("Nice! I've marked this task as done: \n" + tasks.taskPrint(n));
-    }
+    }*/
 
     /**
      * return done message as String.
@@ -132,17 +134,17 @@ public class Ui {
         return "Nice! I've marked this task as done: \n" + tasks.taskPrint(n);
     }
 
-    /**
+/*    /**
      * to print delete message.
      *
      * @param n is the digit of task to be deleted
      *
      * @param tasks is the TaskList
      */
-    public void deleteMessage(int n, TaskList tasks) {
+/*    public void deleteMessage(int n, TaskList tasks) {
         System.out.println("Noted. I've removed this task:" + "\n" + tasks.taskPrint(n)
                 + "\n" + "Now you have " + (tasks.size() - 1) + " tasks in the list.");
-    }
+    }*/
 
     /**
      * to return the delete message as String.
@@ -158,16 +160,16 @@ public class Ui {
                 + "\n" + "Now you have " + (tasks.size() - 1) + " tasks in the list.";
     }
 
-    /**
+/*    /**
      * prints all contents in list format.
      *
      * @param tasks is the TaskList
      */
-    public void listCommand(TaskList tasks) {
+/*    public void listCommand(TaskList tasks) {
         for (int i = 1; i <= tasks.size(); i++) {
             System.out.println(i + ". " + tasks.get(i - 1).printer());
         }
-    }
+    }*/
 
     /**
      * return list as String.
@@ -188,19 +190,19 @@ public class Ui {
         return s.toString();
     }
 
-    /**
+/*    /**
      * to print the find command results.
      *
      * @param tasks is the TaskList
      */
-    public void findCommand(TaskList tasks) {
+/*    public void findCommand(TaskList tasks) {
         if (tasks.isEmpty()) {
             System.out.println("Sorry, we couldn't find any results!");
         } else {
             System.out.println("Here are the matching tasks in your list:");
             this.listCommand(tasks);
         }
-    }
+    }*/
 
     /**
      * return find results as String.
@@ -217,6 +219,34 @@ public class Ui {
         }
     }
 
+    /**
+     * to print expense message.
+     *
+     * @param item is the expense object
+     *
+     * @return string to be printed
+     */
+    public String expenseMessage(Expense item) {
+        return "Your expense has been added to the list: " + "\n"
+                    + item.toString();
+    }
 
+    public String expenseListMessage(ExpenseList list) {
+        return list.toSubString() + "\n" + "\n" + "Total: " + String.format("%.2f", list.totalValue());
+    }
+
+    /**
+     * to return the expense delete message as String.
+     *
+     * @param n is the digit of task to be deleted
+     *
+     * @param expenses is the ExpenseList
+     *
+     * @return the delete message
+     */
+    public String deleteExpenseMessage(int n, ExpenseList expenses) {
+        return "Noted. I've removed this expense:" + "\n" + expenses.get(n).toString()
+                + "\n" + "Now you have " + (expenses.size() - 1) + " expenses in the list.";
+    }
 
 }

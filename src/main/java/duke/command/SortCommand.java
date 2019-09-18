@@ -9,7 +9,7 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class SortCommand extends Command{
+public class SortCommand extends Command {
     String by;
 
     public SortCommand(String by) {
@@ -48,8 +48,8 @@ public class SortCommand extends Command{
             if (tasks.size() == 0) {
                 response = "You have no tasks.";
             } else {
-                StringBuilder sb = new StringBuilder("Here are your tasks sorted by " + by +
-                        ":\nDeadline, Event, Todo\n");
+                StringBuilder sb = new StringBuilder("Here are your tasks sorted by " + by
+                        + ":\nDeadline, Event, Todo\n");
                 for (int i = 0; i < tasks.size(); i++) {
                     int k = i + 1;
                     if (i > 0) {
@@ -64,6 +64,7 @@ public class SortCommand extends Command{
         } else {
             throw new DukeException("I don't know what that means!");
         }
+
 
     }
 

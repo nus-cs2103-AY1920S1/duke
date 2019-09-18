@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 
 /**
  * An example of a custom control using FXML.
@@ -39,6 +40,8 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         dialog.setPadding(new Insets(10));
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
+//        dialog.setMinWidth(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 
@@ -52,12 +55,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a dialogbox of the user.
+     * @param text the user text in the dialogbox
+     * @param img the avatar for the user
+     * @return Dialogbox
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(db.dialog.getMinHeight());
         return db;
     }
 
+    /**
+     * Returns a dialogbox of Duke.
+     * @param text the Duke response in the dialogbox
+     * @param img the avatar for Duke
+     * @return Dialogbox
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setMinHeight(db.dialog.getMinHeight());

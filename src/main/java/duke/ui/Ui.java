@@ -8,7 +8,7 @@ public class Ui {
     /**
      * The Duke logo.
      */
-    String logo = " ____        _        \n"
+    public String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"

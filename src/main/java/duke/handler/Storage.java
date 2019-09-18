@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.util.ArrayList;
+
 /**
  * The Storage class deals with the saving and loading of data into Duke.
  * The data are the tasks that the user specified.
@@ -29,7 +30,7 @@ public class Storage {
     /**
      * Saves the data into the specified filepath.
      * @param list The list of tasks to be saved.
-     * @throws IOException
+     * @throws IOException if file cannot be found or is corrupted
      */
     public void save(ArrayList<Task> list) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath));

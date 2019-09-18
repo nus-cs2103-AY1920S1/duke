@@ -23,19 +23,15 @@ public class Deadline extends Task {
      * @param description Description of the deadline.
      * @param dateTime Date and Time at which the deadline is.
      */
-    public Deadline(String description, String dateTime) throws DukeException{
+    public Deadline(String description, String dateTime) throws DukeException {
         super(description);
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             this.date = dateFormat.parse(dateTime);
             this.by = date.toString();
         } catch (ParseException pe) {
-//            this.by = dateTime;
-//            System.out.println("    Next time, please specify the deadline in this format: dd/mm/yyy hh:mm");
-//            System.out.println("    example: 01/12/2019 14:30");
-//            System.out.println();
-            throw new DukeException("Please specify the deadline in this format: dd/mm/yyy hh:mm\n" +
-                    "example: 01/12/2019 14:30");
+            throw new DukeException("Please specify the deadline in this format: dd/mm/yyy hh:mm\n"
+                    + "example: 01/12/2019 14:30");
         }
     }
 

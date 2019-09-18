@@ -15,7 +15,7 @@ public class Parser {
      * @throws DukeException DukeException is thrown if the command is not valid
      */
     public static Command parse(String fullCommand) throws DukeException {
-        assert !fullCommand.equals(""): "The command is empty.";
+        assert !fullCommand.equals("") : "The command is empty.";
         fullCommand = fullCommand.trim();
         String[] commandWords = fullCommand.split("\\s+");
         String commandType = commandWords[0];

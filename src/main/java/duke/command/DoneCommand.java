@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
-        assert index > 0 && index <= tasks.size(): "The task index does not exist.";
+        assert index > 0 && index <= tasks.size() : "The task index does not exist.";
         Task task = tasks.get(index - 1);
         task.markAsDone();
         response = "Nice! I've marked this task as done:\n    " + task;

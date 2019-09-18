@@ -12,5 +12,18 @@ public class ByeCommand extends Command {
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) throws IOException {
         response = "Bye! Hope to see you again soon.";
         storage.save(tasks);
+        setTimeout(() -> System.exit(0), 1000);
+    }
+
+    public static void setTimeout(Runnable runnable, int delay){
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            }
+            catch (Exception e){
+                System.err.println(e);
+            }
+        }).start();
     }
 }

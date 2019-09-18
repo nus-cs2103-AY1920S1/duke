@@ -32,8 +32,8 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     /**
      * This is the storage class which does the saving and loading of the files.
      */
@@ -111,7 +111,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -125,6 +125,10 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(ui.logo, new ImageView(duke).getImage())
+        );
     }
 
     /**
@@ -136,7 +140,6 @@ public class Duke extends Application {
     private Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
 

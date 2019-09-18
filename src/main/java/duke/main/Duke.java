@@ -19,7 +19,7 @@ public class Duke {
     /**
      * Initialises a new Duke by loading the save file from a filePath.
      *
-     * @param filePath the file path that storage loads from.
+     * @param filePath The file path that storage loads from.
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
@@ -35,8 +35,8 @@ public class Duke {
     /**
      * Returns a string of the executed command.
      *
-     * @param c the command that is executed.
-     * @return a string describing the effects of the executed command.
+     * @param c The command that is executed.
+     * @return A string describing the effects of the executed command.
      */
     public String getResponse(Command c) {
         String returnString = c.execute(tasks);
@@ -46,8 +46,8 @@ public class Duke {
     /**
      * Parses the input into a command.
      *
-     * @param input the string that is parsed.
-     * @return a command parsed from the string.
+     * @param input The string that is parsed.
+     * @return A command parsed from the string.
      */
     public Command parseInput(String input) {
         Command commandFromInput = parser.parse(input);

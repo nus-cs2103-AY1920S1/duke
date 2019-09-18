@@ -17,8 +17,8 @@ public class Parser {
     /**
      * Parses a user input into a command.
      *
-     * @param input the string that is parsed.
-     * @return a command parsed from the string.
+     * @param input The string that is parsed.
+     * @return A command parsed from the string.
      */
     public Command parse(String input) {
         String[] splitInput = input.trim().split(" ");

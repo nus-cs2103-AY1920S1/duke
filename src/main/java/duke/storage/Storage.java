@@ -26,9 +26,9 @@ public class Storage {
     }
 
     /**
-     * Saves a string to the save-file.
+     * Saves a string to the file.
      *
-     * @param stringToSave  string that will be saved to a file
+     * @param stringToSave The string that is saved to a file.
      */
     public void saveDuke(String stringToSave) {
         try {
@@ -41,11 +41,11 @@ public class Storage {
     }
 
     /**
-     * Loads the save-file to Duke.
+     * Loads the file to Duke.
      *
-     * @return TaskList that was saved in the save-file.
-     * @throws FileNotFoundException If there is an error in the file path, or the file does not exists.
-     * @throws SaveFileWrongFormatDukeException If there is an error in the save file that affects loading.
+     * @return A TaskList that is loaded with tasks from the save file.
+     * @throws FileNotFoundException If the file path is invalid or the file does not exists.
+     * @throws SaveFileWrongFormatDukeException If save file could not be parsed successfully.
      */
     public TaskList load(Parser parser) throws FileNotFoundException, SaveFileWrongFormatDukeException {
         TaskList tl = new TaskList();
@@ -54,30 +54,41 @@ public class Storage {
         int currentTaskIndex = 0;
         while (fileSc.hasNext()) {
             line = fileSc.nextLine();
-            Command commandToLoadTask = parser.parse(line);
-            if (commandToLoadTask instanceof UnloadableCommand) {
-                throw new SaveFileWrongFormatDukeException("Save file contains a line that could not be loaded");
-            }
-            commandToLoadTask.execute(tl);
+            Command commandToAddTask = parser.parse(line);
+            executeCommandToLoadTask(tl, commandToAddTask);
+
             if (Boolean.parseBoolean(fileSc.nextLine())) {
                 tl.checkTask(currentTaskIndex);
             }
-            String priorityInString = fileSc.nextLine();
-            switch (priorityInString) {
-            case "HIGH":
-                tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.HIGH);
-                break;
-            case "MEDIUM":
-                tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.MEDIUM);
-                break;
-            case "LOW":
-                tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.LOW);
-                break;
-            default:
-                throw new SaveFileWrongFormatDukeException("Save file contains an invalid priority level");
-            }
+
+            String priority = fileSc.nextLine();
+            setPriorityOfTask(tl, currentTaskIndex, priority);
+
             currentTaskIndex += 1;
         }
         return tl;
+    }
+
+    private void executeCommandToLoadTask(TaskList tl, Command c) throws SaveFileWrongFormatDukeException {
+        if (c instanceof UnloadableCommand) {
+            throw new SaveFileWrongFormatDukeException("Save file contains a line that could not be loaded");
+        }
+        c.execute(tl);
+    }
+
+    private void setPriorityOfTask(TaskList tl, int currentTaskIndex, String priority) throws SaveFileWrongFormatDukeException{
+        switch (priority) {
+        case "HIGH":
+            tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.HIGH);
+            break;
+        case "MEDIUM":
+            tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.MEDIUM);
+            break;
+        case "LOW":
+            tl.setPriorityOfTask(currentTaskIndex, PriorityLevel.LOW);
+            break;
+        default:
+            throw new SaveFileWrongFormatDukeException("Save file contains an invalid priority level");
+        }
     }
 }

@@ -5,13 +5,18 @@ import exception.DukeException;
 import exception.IncompleteInputException;
 
 /**
- *
+ * Parser checks the user input and converts it into command format so that Duke cna execute the program
  */
 
 public class Parser {
 
     /**
+     * Returns Command to execute based on user input
      *
+     * @param userInput String of what the user wants to do
+     * @return Command so that Duke can carry out the program.
+     * @throws DukeException if input does not match any of the standard commands
+     * @throws IncompleteInputException if command is to add tasks but it not complete
      */
 
 
@@ -35,8 +40,8 @@ public class Parser {
                      return new StatisticsCommand();
                 } else {
                      if((userInput.contains("todo")&&(userInput.length()>5))||
-                             (userInput.contains("deadline")&&(userInput.length()>9)&&userInput.contains("/")) ||
-                             (userInput.contains("event")&&(userInput.length()>6)&&userInput.contains("/"))) {
+                              (userInput.contains("event")&&(userInput.length()>6)&&userInput.contains("/"))||
+                             (userInput.contains("deadline")&&userInput.length()>9)) {
                             return new AddCommand(userInput);
                      } else if(userInput.contains("todo")) {
                          throw new IncompleteInputException("\u2639 OOPS!!! The description of a todo cannot be empty.");

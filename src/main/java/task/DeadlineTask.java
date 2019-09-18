@@ -4,7 +4,7 @@ import java.util.Date;
 import formatter.TimeFormatter;
 
 /**
- *
+ * Represents a task with a deadline <param>deadline</param> as a Date
  */
 
 public class DeadlineTask extends Task {
@@ -12,7 +12,11 @@ public class DeadlineTask extends Task {
     Date deadline;
 
     /**
+     * Sets the initial params for the task and sets type to D for deadline
      *
+     * @param inputTask  String of the actual task
+     * @param complete Boolean is initially set to false
+     * @param endTime Date is the date and time that this task should be completed by
      */
 
     public DeadlineTask(String inputTask, boolean complete, Date endTime) {
@@ -21,17 +25,10 @@ public class DeadlineTask extends Task {
         deadline = endTime;
     }
 
-    /**
-     *
-     */
-
     public Date getTime() {
         return deadline;
     }
 
-    /**
-     *
-     */
 
     @Override
     public String toString() {

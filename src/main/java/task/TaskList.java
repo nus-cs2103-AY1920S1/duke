@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 
 /**
- *
+ * Maintains an arraylist of all the stored tasks
+ * Maintains an array of the stats of the tasks
  */
 
 public class TaskList {
@@ -18,21 +19,21 @@ public class TaskList {
     int eventTasks;
     int eventTasksDone;
 
-    /**
-     *
-     */
 
     public TaskList() {
         myTaskList = new ArrayList<>();
     }
 
-    /**
-     *
-     */
-
     public ArrayList<Task> getList() {
         return myTaskList;
     }
+
+    /**
+     * Searches for tasks which match the input String
+     *
+     * @param input String input by user which is being searched for
+     * @return ArrayList of the tasks that matched the input string
+     */
 
     public ArrayList<Task> searchTasks(String input) {
         ArrayList<Task> answer = new ArrayList<>();
@@ -47,7 +48,10 @@ public class TaskList {
 
 
     /**
+     * Searches for tasks which match the input String
      *
+     * @param addedTask String input by user which is being searched for
+     * @return ArrayList of the tasks that matched the input string
      */
 
     //Add and print the added notes
@@ -86,11 +90,12 @@ public class TaskList {
 
 
     /**
+     * Marks indexed tasks as done
      *
+     * @param index of task (in tasklist) which has been done
+     * @return Task which has been done
      */
 
-    //Retrieve the task, complete it and return the formatted String
-    //"Nice! I've marked..."
     public Task taskDone(int index) {
         assert index>0: "You cant do this guy";
         Task curr =  myTaskList.get(index).taskComplete();
@@ -109,7 +114,10 @@ public class TaskList {
 
 
     /**
+     * Deletes indexed task
      *
+     * @param index of task (in tasklist) which has been deleted
+     * @return Task which has been deleted
      */
 
     public Task deleteTask(int index) {
@@ -139,7 +147,9 @@ public class TaskList {
     }
 
     /**
+     * Gives the stats of all the tasks
      *
+     * @return int[] of the numbers of different tasks and their completion status
      */
 
     public int[] getStats() {

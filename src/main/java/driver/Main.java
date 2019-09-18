@@ -1,7 +1,6 @@
 package driver;
 
 import ui.MainWindow;
-import ui.DialogBox;
 import java.io.IOException;
 
 import javafx.application.Application;

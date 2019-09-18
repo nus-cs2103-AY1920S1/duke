@@ -1,14 +1,2 @@
-D,false,kill irds ,12/12/1212 1212
-D,false,kill birds ,12/12/1212 1212
-T,false,poop
-D,false,kill irds ,12/12/1212 1212
-D,false,kill birds ,12/12/1212 1212
-T,false,poop
-D,false,baba ,12/12/1212 1212
-D,false,kill irds ,12/12/1212 1212
-D,false,kill birds ,12/12/1212 1212
-T,false,poop
-D,false,kill irds ,12/12/1212 1212
-D,false,kill birds ,12/12/1212 1212
-T,false,poop
-D,false,baba ,12/12/1212 1212
+D,false,,19/09/2019 1800
+T,false,Eat Lunch

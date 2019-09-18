@@ -4,9 +4,9 @@ import task.Task;
 import java.util.ArrayList;
 
 
-/**
- *
- */
+    /**
+    * Formats all objects to the appropriate String form
+    */
 
 public class TextFormatter {
     String logo = " ____        _        \n"
@@ -15,9 +15,12 @@ public class TextFormatter {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    /**
-     *
-     */
+        /**
+         * Returns the arrayList of tasks as a String
+         *
+         * @param input an arraylist of all the tasks
+         * @return String of tasks
+         */
 
 
     public static String listFormat(ArrayList<Task> input) {
@@ -30,12 +33,16 @@ public class TextFormatter {
         }
         String tasks = myTasks.toString();
 
-        return separator + listMessageTitle + tasks + separator;
+        return  listMessageTitle + tasks;
     }
 
-    /**
-     *
-     */
+        /**
+         * Returns the deleted task and the total tasks left as a String
+         *
+         * @param removed Task that has been removed
+         * @param size number of remaining tasks
+         * @return String of the deleted task
+         */
 
     public static String deleteFormat(Task removed, int size) {
         String separator = "    ____________________________________________________________";
@@ -48,11 +55,15 @@ public class TextFormatter {
        return answer;
 }
 
-    /**
-     *
-     */
+        /**
+         * Returns the done task
+         *
+         * @param done Task that has been done
+         * @return String of done task
+         */
 
-    public static String doneFormat(Task done) {
+
+        public static String doneFormat(Task done) {
         String firstLine = "Nice! I've marked this task as done:\n";
         String secondLine = "      " + done;
         String answer =  firstLine + secondLine;
@@ -61,9 +72,12 @@ public class TextFormatter {
         return separator + converted + separator;
     }
 
-    /**
-     *
-     */
+        /**
+         * Returns the error
+         *
+         * @param error Exception that has been thrown
+         * @return String of error
+         */
 
 
     public static String errorFormat(Exception error) {
@@ -72,21 +86,27 @@ public class TextFormatter {
         return separator + err + "\n" + separator;
     }
 
-    /**
-     *
-     */
+        /**
+         * Returns the added task and the total tasks left as a String
+         *
+         * @param inputTask Task that has been added
+         * @param size number of remaining tasks
+         * @return String of the added task
+         */
 
     public static String addFormat(Task inputTask, int size) {
         String separator = "    ____________________________________________________________\n";
         String addingTask = "    Got it. I've added this task:\n";
         String converted = "        "+ inputTask.toString() + "\n";
         String taskTracking = "    Now you have " + size + " tasks in the list.\n";
-        return separator + addingTask + converted + taskTracking + separator;
+        return  addingTask + converted + taskTracking;
     }
 
-    /**
-     *
-     */
+        /**
+         * Returns the exit message as a String
+         *
+         * @return String saying bye
+         */
 
     public static String byeFormat() {
         String end = "Bye. Hope to see you again soon!";
@@ -95,9 +115,11 @@ public class TextFormatter {
         return separator + converted + separator;
     }
 
-    /**
-     *
-     */
+        /**
+         * Returns the hello message as a String
+         *
+         * @return String saying hello
+         */
 
     public static String helloFormat() {
         String start = "Hello! I'm Duke\n    What can I do for you?";
@@ -105,6 +127,13 @@ public class TextFormatter {
         String converted = "    " + start + "\n";
         return separator + converted + separator;
     }
+
+        /**
+         * Returns the arrayList of matched tasks as a String of the list
+         *
+         * @param input an arraylist of all the tasks that match the search String
+         * @return String of searched tasks
+         */
 
 
     public static String searchFormat(ArrayList<Task> input) {
@@ -120,12 +149,19 @@ public class TextFormatter {
         return separator + listMessageTitle + tasks + separator;
     }
 
+        /**
+         * Returns an array of the statistics as a String
+         *
+         * @param stats an array of the collated number of different types of tasks
+         * @return String of statistics
+         */
+
     public static String statsFormat(int[] stats) {
         String separator = "    ____________________________________________________________\n";
         String statsMessageTitle = "    Here are your statistics: \n";
         StringBuilder myTasks = new StringBuilder();
-        myTasks.append("Total Tasks :" + stats[0] + "\n");
-        myTasks.append("Total Tasks Done:" + stats[1] + "\n");
+        myTasks.append("Total Tasks : " + stats[0] + "\n");
+        myTasks.append("Total Tasks Done : " + stats[1] + "\n");
         myTasks.append("Total ToDo Tasks:" + stats[2] + "\n");
         myTasks.append("Total ToDo Tasks Done:" + stats[3] + "\n");
         myTasks.append("Total Deadline Tasks:" + stats[4] + "\n");
@@ -136,6 +172,8 @@ public class TextFormatter {
         String statsString = myTasks.toString();
         return separator + statsMessageTitle + statsString + separator;
     }
+
+
 
     }
 

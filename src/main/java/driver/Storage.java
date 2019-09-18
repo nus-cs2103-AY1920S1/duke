@@ -17,20 +17,30 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- *
+ * Storage class controls the file reading and file writing functions of Duke
  */
 
 public class Storage {
     String filePath;
 
     /**
+     * Constructor for Storage stores filepath specified by user
      *
+     * @param x  String of filepath
      */
 
     public Storage(String x) {
     filePath =x;
     }
-    //import tasks from database
+
+    /**
+     * loadTasks take in a taskList and stores all tasks read from an external file
+     * into the taskList
+     *
+     * @param myList taskList to store all the tasks that are read from the file
+     * @throws FileNotFoundException if filepath is invalid
+     */
+
     protected void loadTasks(TaskList myList) throws FileNotFoundException {
         ArrayList<Task> myTasksStore = myList.getList();
         File f = new File(filePath); // create a File for the given file path
@@ -52,7 +62,11 @@ public class Storage {
     }
 
     /**
+     * updateTasks take in a taskList and stores all tasks read from the tasklist
+     * into an external file
      *
+     * @param myList taskList is a reference for the new tasks
+     * @throws IOException if filepath is invalid
      */
 
     //Write new tasks at the end of the process

@@ -1,10 +1,11 @@
 package task;
 
 /**
- *
+ * Abstract class for all tasks, with <param>name</param> as the actual task,
+ * <param>completed</param> as the state of the tasks completion and
+ * <param>type</param> as the different type of tasks
  */
-
-public class Task {
+public abstract class Task {
     String name;
     boolean completed;
     String type;
@@ -38,11 +39,11 @@ public class Task {
     public boolean getDoneStatus() { return completed;}
 
     /**
+     * Converts the task completion state to done (true)
      *
+     * @return Task itself, now that it is completed
      */
 
-    //return the String of having completed the current task
-    //Change the completed variable
     public Task taskComplete() {
         completed = true;
         return this;

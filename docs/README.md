@@ -25,15 +25,15 @@ Examples of usage:
 
 Expected outcomes:
 
-`Got it. I've added this task:`  
+1. `Got it. I've added this task:`  
 `[T][✘] watch Lord of the Rigs`  
 `Now you have 1 task in the list.`  
 
-`Got it. I've added this task:`  
+2. `Got it. I've added this task:`  
 `[D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`  
 `Now you have 2 tasks in the list.`  
 
-`Got it. I've added this task:`  
+3. `Got it. I've added this task:`  
 `[E][✘] attend seminar (at: 25/09/2019 1800)`  
 `Now you have 3 tasks in the list.`
 
@@ -139,7 +139,7 @@ Example of usage:
 Expected outcome:
 
 `Noted. I've removed this task:`<br/>
-`  [D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`<br/>
+`[D][✓] return Harry Potter to library (by: 29th of October 2019, 9.30pm)`<br/>
 `Now you have 2 tasks in the list.`
 
 ### **7. Quit Application**

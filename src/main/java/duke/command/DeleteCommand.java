@@ -13,31 +13,30 @@ public class DeleteCommand extends Command {
     private int taskNumber;
 
     /**
-     * Creates a RemoveCommand object with the specified task number to be removed assigned.
+     * Creates a DeleteCommand object with the specified task number to be deleted assigned.
      *
-     * @param command Contains the index of the task to be removed.
-     * @throws NumberFormatException If index of task to be removed is not a number.
+     * @param taskNumber Index of the task to be deleted.
      */
-    public DeleteCommand(String command) throws NumberFormatException {
-        try {
-            this.taskNumber = Integer.parseInt(command);
-        } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please specify the index of the task to be removed.");
-        }
+    public DeleteCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     /**
-     * Parses the command given to Duke and creates a RemoveCommand if possible.
+     * Parses the command given to Duke and creates a DeleteCommand if possible.
      *
      * @param fullCommand Full command split by whitespace.
-     * @return RemoveCommand object to be created.
+     * @return DeleteCommand object to be created.
      * @throws DukeException If no index is given.
      */
     public static DeleteCommand process(String[] fullCommand) throws DukeException {
-        if (fullCommand.length == 1) {
-            throw new DukeException("OOPS!!! Please specify the index of the task to be removed.");
+        try {
+            return new DeleteCommand(Integer.parseInt(fullCommand[1]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! Please specify the index of the task to be deleted.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please specify the index of the task to be deleted as an "
+                    + "integer.");
         }
-        return new DeleteCommand(fullCommand[1]);
     }
 
     /**
@@ -48,20 +47,17 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        UndoCommand.saveVersion(storage.getSavedListString(tasks));
-        StringBuilder sb = new StringBuilder();
         try {
+            UndoCommand.saveVersion(storage.getSavedListString(tasks));
+            StringBuilder sb = new StringBuilder();
             sb.append(tasks.deleteTask(taskNumber));
-        } catch (IndexOutOfBoundsException e) {
-            sb.append("OOPS!!! Your specified task number is out of range.");
-            UndoCommand.removeRecentSavedVersion();
-        }
-        try {
             storage.store(tasks);
+            return sb.toString();
+        } catch (IndexOutOfBoundsException e) {
+            UndoCommand.removeRecentSavedVersion();
+            throw new DukeException("OOPS!!! Your specified task number is out of range.");
         } catch (IOException e) {
-            sb.append("OOPS!!! " + e.getMessage());
+            throw new DukeException("OOPS!!! " + e.getMessage());
         }
-        assert(!(sb.toString()).isEmpty());
-        return sb.toString();
     }
 }

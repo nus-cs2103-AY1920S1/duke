@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 
@@ -39,16 +40,15 @@ public class UndoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        StringBuilder sb = new StringBuilder();
         if (listVersions.isEmpty()) {
             return "You have nothing to undo!";
         }
-        sb.append(tasks.undoCommand(storage, listVersions.pop()));
         try {
+            StringBuilder sb = new StringBuilder(tasks.undoCommand(storage, listVersions.pop()));
             storage.store(tasks);
+            return sb.toString();
         } catch (IOException e) {
-            sb.append("OOPS!!! " + e.getMessage());
+            throw new DukeException("OOPS!!! " + e.getMessage());
         }
-        return sb.toString();
     }
 }

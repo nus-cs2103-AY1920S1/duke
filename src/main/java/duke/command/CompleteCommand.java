@@ -16,15 +16,10 @@ public class CompleteCommand extends Command {
     /**
      * Creates a CompleteCommand object with the specified task number to be marked as completed assigned.
      *
-     * @param command Contains the index of the task to be marked as completed.
-     * @throws NumberFormatException If index of task to be marked as done is not a number.
+     * @param taskNumber Index of the task to be marked as completed.
      */
-    public CompleteCommand(String command) throws NumberFormatException {
-        try {
-            this.taskNumber = Integer.parseInt(command);
-        } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please specify a task number to be marked as completed.");
-        }
+    public CompleteCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     /**
@@ -35,10 +30,14 @@ public class CompleteCommand extends Command {
      * @throws DukeException If no index is given.
      */
     public static CompleteCommand process(String[] fullCommand) throws DukeException {
-        if (fullCommand.length == 1) {
+        try {
+            return new CompleteCommand(Integer.parseInt(fullCommand[1]));
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! Please specify a task number to be marked as completed.");
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please specify the index of the task to be marked as completed"
+                    + " as an integer.");
         }
-        return new CompleteCommand(fullCommand[1]);
     }
 
     /**
@@ -48,21 +47,17 @@ public class CompleteCommand extends Command {
      * @param storage Storage to be updated with the task completed.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
-        UndoCommand.saveVersion(storage.getSavedListString(tasks));
-        StringBuilder sb = new StringBuilder();
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            sb.append(tasks.completeTask(taskNumber));
-        } catch (IndexOutOfBoundsException e) {
-            sb.append("OOPS!!! Your specified task number is out of range.");
-            UndoCommand.removeRecentSavedVersion();
-        }
-        try {
+            UndoCommand.saveVersion(storage.getSavedListString(tasks));
+            StringBuilder sb = new StringBuilder(tasks.completeTask(taskNumber));
             storage.store(tasks);
+            return sb.toString();
+        } catch (IndexOutOfBoundsException e) {
+            UndoCommand.removeRecentSavedVersion();
+            throw new DukeException("OOPS!!! Your specified task number is out of range.");
         } catch (IOException e) {
-            sb.append("OOPS!!! " + e.getMessage());
+            throw new DukeException("OOPS!!! " + e.getMessage());
         }
-        assert(!(sb.toString()).isEmpty());
-        return sb.toString();
     }
 }

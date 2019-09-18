@@ -27,24 +27,18 @@ public class ScheduleCommand extends Command {
      * @return ScheduleCommand object to be created.
      * @throws NumberFormatException If date given is not in number format (eg. 9/Sep/2019).
      */
-    public static ScheduleCommand process(String[] fullCommand) throws NumberFormatException {
-        if (fullCommand.length == 1) {
-            throw new DukeException("OOPS!!! Please specify the date that you want to check.");
-        }
-
-        String[] dateArray = fullCommand[1].split("/", 3);
-
-        if (dateArray.length < 3) {
-            throw new DukeException("OOPS!!! Please enter the date in the format DD/MM/YYYY");
-        }
-
+    public static ScheduleCommand process(String[] fullCommand) throws DukeException {
         try {
+            String[] dateArray = fullCommand[1].split("/", 3);
             int dayFromArray = Integer.parseInt(dateArray[0]);
             int monthFromArray = Integer.parseInt(dateArray[1]);
             int yearFromArray = Integer.parseInt(dateArray[2]);
             return new ScheduleCommand(new int[]{dayFromArray, monthFromArray, yearFromArray});
         } catch (NumberFormatException e) {
             throw new DukeException("OOPS!!! Please enter the date in the format DD/MM/YYYY");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! Please specify the date you want to check in the format "
+                    + "DD/MM/YYYY");
         }
     }
 

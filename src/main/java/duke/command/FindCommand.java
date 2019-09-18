@@ -28,10 +28,11 @@ public class FindCommand extends Command {
      * @throws DukeException If no search term has been specified.
      */
     public static FindCommand process(String[] fullCommand) throws DukeException {
-        if (fullCommand.length == 1) {
-            throw new DukeException("     OOPS!!! Please specify a search term.");
+        try {
+            return new FindCommand(fullCommand[1]);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! Please specify a search term.");
         }
-        return new FindCommand(fullCommand[1]);
     }
 
     /**

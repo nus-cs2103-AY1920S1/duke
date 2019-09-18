@@ -17,16 +17,12 @@ public class UpdateCommand extends Command {
     /**
      * Creates a UpdateCommand object with the task number and new description to be updated assigned.
      *
-     * @param commandArray Containing task number in the first entry and new description in the second entry.
-     * @throws NumberFormatException If index of task to be updated is not a number.
+     * @param taskNumber Index of the task to be updated.
+     * @param newDescription Updated description of the task.
      */
-    public UpdateCommand(String[] commandArray) throws NumberFormatException {
-        try {
-            this.taskNumber = Integer.parseInt(commandArray[0]);
-            this.newDescription = commandArray[1];
-        } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please specify the index of the task to be updated.");
-        }
+    public UpdateCommand(int taskNumber, String newDescription) {
+        this.taskNumber = taskNumber;
+        this.newDescription = newDescription;
     }
 
     /**
@@ -37,16 +33,15 @@ public class UpdateCommand extends Command {
      * @throws DukeException If input is not in the format update [task number] [new description].
      */
     public static UpdateCommand process(String[] fullCommand) throws DukeException {
-        if (fullCommand.length == 1) {
+        try {
+            String[] currArray = fullCommand[1].split("\\s+", 2);
+            return new UpdateCommand(Integer.parseInt(currArray[0]), currArray[1]);
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! Please enter in the format update [task number] [new "
                     + "description]");
+        } catch (NumberFormatException e) {
+            throw new DukeException("OOPS!!! Please specify the index of the task as an integer.");
         }
-        String[] currArray = fullCommand[1].split("\\s+", 2);
-        if (currArray.length == 1) {
-            throw new DukeException("OOPS!!! Please enter in the format update [task number] [new "
-                    + "description]");
-        }
-        return new UpdateCommand(currArray);
     }
 
     /**
@@ -57,18 +52,17 @@ public class UpdateCommand extends Command {
      * @return Response to user.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
-        StringBuilder sb = new StringBuilder();
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
+            UndoCommand.saveVersion(storage.getSavedListString(tasks));
+            StringBuilder sb = new StringBuilder();
             sb.append(tasks.updateDescription(taskNumber, newDescription));
-        } catch (IndexOutOfBoundsException e) {
-            return "OOPS!!! Your specified task number is out of range.";
-        }
-        try {
             storage.store(tasks);
+            return sb.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("OOPS!!! Your specified task number is out of range.");
         } catch (IOException e) {
-            sb.append("OOPS!!! " + e.getMessage());
+            throw new DukeException("OOPS!!! " + e.getMessage());
         }
-        return sb.toString();
     }
 }

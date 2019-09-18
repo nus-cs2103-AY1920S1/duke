@@ -38,7 +38,7 @@ public class DateTime {
      * @return DateTime object created.
      * @throws ArrayIndexOutOfBoundsException If date and time given is not in the accepted format.
      */
-    public static DateTime create(String dateTimeString) throws ArrayIndexOutOfBoundsException, DukeException {
+    public static DateTime create(String dateTimeString) throws DukeException {
         try {
             String[] currArray = dateTimeString.split("\\s+", 2);
             String dateString = currArray[0];

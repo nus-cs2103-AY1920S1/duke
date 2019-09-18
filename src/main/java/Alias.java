@@ -51,7 +51,6 @@ public class Alias{
 
         this.dir = dir;
         this.file = new File(dir, arr[1]);
-        this.filePath = arr[1];
     }
 
     public static void load() throws IOException {

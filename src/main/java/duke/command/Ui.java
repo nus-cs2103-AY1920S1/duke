@@ -113,6 +113,16 @@ public class Ui {
         return result;
     }
 
+    public String showDeletedTasks(ArrayList<Task> deletedTasks, int noOfTasks) {
+        String result = "I have removed all the tasks that were done. Here are the removed tasks:\n";
+        int i = 1;
+        for (Task deletedTask : deletedTasks) {
+            result += i + ". " + deletedTask.toString() + "\n";
+            i++;
+        }
+        result += "Now you have " + noOfTasks + " tasks left in the list.";
+        return result;
+    }
     /**
      * Prints error message if loading history file encounters problem.
      */

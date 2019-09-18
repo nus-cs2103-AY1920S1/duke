@@ -123,7 +123,7 @@ public class Parser {
         } else if (order.equals("done") || order.equals("delete")) {
             type = order;
             list.add(command.split(order + " ")[1]);
-        } else if (order.equals("list") || order.equals("bye")) {
+        } else if (order.equals("list") || order.equals("bye") || order.equals("deletedone")) {
             type = order;
         } else if (order.equals("find")) {
             type = "find";

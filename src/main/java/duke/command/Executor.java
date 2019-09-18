@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Executor {
     /**
@@ -36,6 +37,25 @@ public class Executor {
                     result = ui.showException(de);
                 } catch (NumberFormatException nfe) {
                     result = ui.showNumberFormatError("done");
+                }
+            } else if (type.equals("deletedone")) {
+                try {
+                    ArrayList<Task> deletedTasks = new ArrayList<>();
+                    for (int i = 0; i < tasks.size(); i++) {
+                        Task task = tasks.get(i);
+                        if (task.isDone()) {
+                            deletedTasks.add(tasks.remove(i));
+                            i--;
+                        }
+                    }
+                    if (deletedTasks.size()==0) {
+                        result = "No tasks are currently done!";
+                    } else {
+                        result = ui.showDeletedTasks(deletedTasks, tasks.size());
+                    }
+                    storage.update(tasks);
+                } catch (IOException ie) {
+                    result = ui.showException(ie);
                 }
             } else if (type.equals("bye")) {
                 result = ui.showGoodBye();

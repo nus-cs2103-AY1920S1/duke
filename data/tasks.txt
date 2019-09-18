@@ -1,3 +1,0 @@
-T | 0 | watch Naruto
-E | 0 | attend John's birthday party | 2019-11-10T20:00
-D | 1 | return library books | 2019-11-12T12:00

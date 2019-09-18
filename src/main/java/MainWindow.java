@@ -37,7 +37,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() throws IOException {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
-        String greeting = String.format("%s\n%s\n", "Hello! I'm Duke", "What can I do for you?");
+        String greeting = String.format("%s\n%s\n\n%s\n", "Hello! I'm Duke", "What can I do for you?",
+                "Enter 'help' for a list of commands");
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(greeting, dukeImage)
@@ -56,7 +57,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws IOException, ParseException {
         String input = userInput.getText();
         String response = ui.getResponse(input);
-        ui.write();
+
+        if (!input.startsWith("read")) {
+            ui.write();
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

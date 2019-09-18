@@ -16,7 +16,7 @@ import javafx.stage.WindowEvent;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("/Users/liuzechu/Desktop/CS2103/project_duke/duke/data/duke.txt");
+    private Duke duke = new Duke("duke.txt");
     private static ByteArrayOutputStream baos;
     @FXML
     private MainWindow mainWindow;

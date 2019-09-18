@@ -60,4 +60,13 @@ public class MainWindow extends AnchorPane {
             }, 2000);
         }
     }
+
+    /**
+     * Displays welcome message to user when they first open Duke.
+     */
+    public void showWelcome() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog("Hi, I'm Duke! What can I do for you today?", dukeImage)
+        );
+    }
 }

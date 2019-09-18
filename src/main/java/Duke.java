@@ -17,9 +17,6 @@ public class Duke {
     public static final String DELIM_AFTER = "/after";
 
     public static final String DATE_FORMAT = "dd-MM-yy HHmm";
-
-    public static final String USER_NAME = System.getProperty("user.name");
-
     public static final int MAX_TASKS = 100;
 
     private TaskList taskList;
@@ -35,7 +32,7 @@ public class Duke {
     public Duke() {
         this.ui = new Ui();
         this.dateParser = new DateParser(DATE_FORMAT);
-        this.storage = new Storage(dateParser, "C:\\Users\\" + USER_NAME + "\\Documents\\GitHub\\duke\\data.dat");
+        this.storage = new Storage(dateParser, "data.dat");
         this.parser = new Parser();
         this.exiter = new Exiter();
 

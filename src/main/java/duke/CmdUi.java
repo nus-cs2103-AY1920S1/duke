@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CmdUi implements Ui {
+    private static final String LINE = "    ____________________________________________________________";
+    private static final String INDENT = "     ";
     private Scanner input = new Scanner(System.in);
 
     /**
@@ -31,10 +33,11 @@ public class CmdUi implements Ui {
      */
     @Override
     public void showMessage(List<String> messages) {
-        System.out.println("    ____________________________________________________________");
+        System.out.println(LINE);
         for (String message : messages) {
-            System.out.println("     " + message);
+            System.out.println(INDENT + message);
         }
-        System.out.println("    ____________________________________________________________\n");
+        System.out.println(LINE);
+        System.out.println();
     }
 }

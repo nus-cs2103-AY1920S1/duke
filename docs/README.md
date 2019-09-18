@@ -1,5 +1,5 @@
 # User Guide for [Duke](https://github.com/victorvic54/duke)
-![Image](Ui.png)
+![Duke](Ui.png)
 
 ## Overview
 Duke, a Personal Assistant chat bot that helps a person to keep 

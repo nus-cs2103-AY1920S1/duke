@@ -179,7 +179,7 @@ public class Parser {
             String[] inputArray = input.split(" ", 2);
             String[] cmdArgs = new String[0];
             cmdArgs = inputArray[1].split(" /at ", 2);
-            reminder = "Reminder for task" + cmdArgs[0];
+            reminder = "Reminder for task " + cmdArgs[0];
         } finally {
             
         }

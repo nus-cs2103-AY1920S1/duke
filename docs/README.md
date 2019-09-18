@@ -8,6 +8,7 @@ Duke is a task management tool which helps you to keep track of various task. It
 5. Mark tasks as 'Done'
 6. View the number of task for each type
 7. Bye
+
 ### Add tasks 
 You can create 3 types of task which are `deadline`, `event` and `todo`. 
 
@@ -33,7 +34,7 @@ Exit the application.
 
 ### `deadline` - To add a deadline task in the tasklist.
 
-Creates a deadline task that will be added to the tasklist with the format of `deadline <description> /by <format of date in dd/mm/yyyy> and <format of time in hhmm> respectively.`
+Creates a deadline task that will be added to the tasklist with the format of `deadline <description> /by <format of date in dd/mm/yyyy> and <format of time in hhmm>.`
 
 Example of usage: 
 
@@ -42,7 +43,9 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:
+
 [D][]homework (by:12th of December 2019 12:30pm tomorrow)
+
 Now you have 1 tasks in the list.`
 
 ### `event` - To add a event task in the tasklist.

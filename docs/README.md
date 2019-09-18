@@ -1,4 +1,4 @@
-# User Guide
+# digivice User Guide
 
 ## Features 
 

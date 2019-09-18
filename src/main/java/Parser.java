@@ -52,11 +52,16 @@ public class Parser {
             if (userInput.substring(6).isBlank()) {
                 throw new EmptyFieldException("OOPS!!! The task number cannot be empty.");
             }
-            int taskNum = Integer.parseInt(userInput.substring(7));
-            if (taskNum > TaskList.getTaskListSize()) {
-                throw new InvalidInputException("OOPS!!! You do not have that many tasks.");
-            } else if (taskNum <= 0) {
-                throw new InvalidInputException("OOPS!!! Your task number is invalid.");
+
+            if (Character.isDigit(userInput.charAt(7))) {
+                int taskNum = Integer.parseInt(userInput.substring(7));
+                if (taskNum > TaskList.getTaskListSize()) {
+                    throw new InvalidInputException("OOPS!!! You do not have that many tasks.");
+                } else if (taskNum <= 0) {
+                    throw new InvalidInputException("OOPS!!! Your task number is invalid.");
+                }
+            } else if (!userInput.substring(7).equals("all")) {
+                throw new InvalidInputException("OOPS!!! Thats an invalid input.");
             }
         } else if (type.equals("todo")) {
             if (userInput.substring(4).isBlank()) {

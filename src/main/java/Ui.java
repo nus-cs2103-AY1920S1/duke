@@ -127,7 +127,11 @@ public class Ui {
             selectedTask.markAsDone();
             return "Nice! I've marked this task as done: \n" + selectedTask;
         } else if (userInputSplit[0].equals("delete")) {
-            int taskNumber = Integer.parseInt(userInput.substring(7));
+            if (userInputSplit[1].equals("all")) {
+                TaskList.removeAllTasks();
+                return "All tasks have been deleted. Your task list is now empty";
+            }
+            int taskNumber = Integer.parseInt(userInputSplit[1]);
             return delTaskInTaskList(taskNumber);
         } else if (userInputSplit[0].equals("todo")) {
             String description = userInput.substring(5);

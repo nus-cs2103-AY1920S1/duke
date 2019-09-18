@@ -49,6 +49,10 @@ public class TaskList {
         return taskList;
     }
 
+    public static void removeAllTasks() {
+        taskList = new ArrayList<Task>();
+    }
+
     /**
      * Returns all the tasks currently in the tasklist.
      *

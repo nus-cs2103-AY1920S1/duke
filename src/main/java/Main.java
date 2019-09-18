@@ -13,8 +13,7 @@ import java.nio.file.Path;
  * A class representing the javafx application.
  */
 public class Main extends Application {
-    private static final String FILEPATH = Path.of(System.getProperty("user.dir"),
-            "data", "duke.txt").toString();
+    private static final String FILEPATH = Path.of(System.getProperty("user.home"), "duke.txt").toString();
     private Duke duke = new Duke(FILEPATH);
 
     /**

@@ -32,40 +32,46 @@ public class Storage {
 
     /**
      * Returns a list of tasks that are stored in disk.
-     *
-     * @throws FileNotFoundException If the file specified by the filePath is not found.
+     * @return a list of tasks that are stored in disk.
+     * @throws FileNotFoundException If storage file is not found.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
-        File f = new File(filePath);
         ArrayList<Task> list = new ArrayList<>();
-
-        Scanner in = new Scanner(f);
-        while (in.hasNextLine()) {
-            String[] str = in.nextLine().split(" \\| ");
-            Task task;
-            try {
-                switch (str[0]) {
-                case "T":
-                    task = new ToDo(str[2]);
-                    break;
-                case "E":
-                    task = new Event(str[2], LocalDateTime.parse(str[3]));
-                    break;
-                case "D":
-                    task = new Deadline(str[2], LocalDateTime.parse(str[3]));
-                    break;
-                default:
-                    continue;
+        File f = new File(filePath);
+        try {
+            Scanner in = new Scanner(f);
+            while (in.hasNextLine()) {
+                String[] str = in.nextLine().split(" \\| ");
+                Task task;
+                try {
+                    switch (str[0]) {
+                    case "T":
+                        task = new ToDo(str[2]);
+                        break;
+                    case "E":
+                        task = new Event(str[2], LocalDateTime.parse(str[3]));
+                        break;
+                    case "D":
+                        task = new Deadline(str[2], LocalDateTime.parse(str[3]));
+                        break;
+                    default:
+                        continue;
+                    }
+                    if (str[1].equals(doneString)) {
+                        task.setDone();
+                    }
+                    list.add(task);
+                } catch (IllegalDescriptionException e) {
+                    e.printStackTrace();
                 }
-                if (str[1].equals(doneString)) {
-                    task.setDone();
-                }
-                list.add(task);
-            } catch (IllegalDescriptionException e) {
-                e.printStackTrace();
             }
+        } catch (FileNotFoundException e) {
+            if (!f.createNewFile()) {
+                throw e;
+            }
+        } finally {
+            return list;
         }
-        return list;
     }
 
     /**

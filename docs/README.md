@@ -1,20 +1,23 @@
-# User Guide
+# Keud - Yet another to-do manager
+This is a NUS Computer Science Software Engineering course project.
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+Keud supports:
+* adding a to-do, deadline or event
+* moving a task to archive  
+* and more
 
 ## Usage
 
-### `Keyword` - Describe action
+### `list` - list the tasks
 
-Describe action and its outcome.
+`list` will list all the current tasks in the list, and `list archive` will 
+show the archived tasks.
 
-Example of usage: 
+### `done` - set a task to complete
 
-`keyword (optional arguments)`
+`done [number]` will mark the specified task to complete.
 
-Expected outcome:
 
-`outcome`
+

@@ -37,6 +37,12 @@ public abstract class Task {
                 + dateWithoutDay;
     }
 
+    /**
+     * Checks if two Calendar times are equal in value.
+     * @param time1 Calendar time 1
+     * @param time2 Calendar time 2
+     * @return true if the times are equal, false otherwise
+     */
     public static boolean equal(Calendar time1, Calendar time2) {
         return time1.get(Calendar.DAY_OF_MONTH) == time2.get(Calendar.DAY_OF_MONTH)
                 && time1.get(Calendar.MONTH) == time2.get(Calendar.MONTH)
@@ -44,6 +50,7 @@ public abstract class Task {
                 && time1.get(Calendar.HOUR_OF_DAY) == time2.get(Calendar.HOUR_OF_DAY)
                 && time1.get(Calendar.MINUTE) == time2.get(Calendar.MINUTE);
     }
+
     /**
      * Creates a task object with description as input.
      * @param des description of task.

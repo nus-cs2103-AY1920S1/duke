@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 /**
  * Interacts with user by providing messages when required.
+ * Each method returns a string that dukeDialogBox will display.
  */
 public class Ui {
     public static String hr = "______________________________________________________________________";
 
     /**
      * Prints welcome when Duke is run.
+     * @return String representing welcome message
      */
     public String showWelcome() {
         String result = "";
@@ -20,6 +22,7 @@ public class Ui {
 
     /**
      * Prints goodbye when 'bye' command executed.
+     * @return String representing GoodBye message
      */
     public String showGoodBye() {
         return "Bye. Hope to see you again soon!\nMay The Force Be With You!";
@@ -27,7 +30,8 @@ public class Ui {
 
     /**
      * Prints exception's message.
-     * @param e exception that needs to be printed.
+     * @param e exception that needs to be printed
+     * @return String representing the Exception message
      */
     public String showException(Exception e) {
         return e.getMessage();
@@ -35,7 +39,8 @@ public class Ui {
 
     /**
      * Prints particular type of error message when non-number input is provided where number is required.
-     * @param type type of command for which the error message needs to be generated.
+     * @param type type of command for which the error message needs to be generated
+     * @return String representing the numberFormatError message
      */
     public String showNumberFormatError(String type) {
         String result = "";
@@ -53,16 +58,10 @@ public class Ui {
     }
 
     /**
-     * Prints a long horizontal line for segmentation of commands that user provides and output that user sees.
-     */
-    public static String printLine() {
-        return hr + "\n";
-    }
-
-    /**
      * Prints a message providing details about task just created.
-     * @param task the task that is created.
-     * @param noOfTasks number of tasks at the time, usually from TaskList.
+     * @param task the task that is created
+     * @param noOfTasks number of tasks at the time, usually from TaskList
+     * @return String representing the Task that is created and the number of Tasks in the TaskList
      */
     public String showTaskCreated(Task task, int noOfTasks) {
         String result = "";
@@ -74,7 +73,8 @@ public class Ui {
 
     /**
      * Prints a message providing details about the task just marked as done.
-     * @param task task that is marked as done.
+     * @param task task that is marked as done
+     * @return String representing the Task that is marked as done
      */
     public String showTaskDone(Task task) {
         String result = "";
@@ -85,8 +85,9 @@ public class Ui {
 
     /**
      * Prints a message providing details about the task just deleted and remaining tasks in TaskList.
-     * @param task task that is just deleted.
+     * @param task task that is just deleted
      * @param noOfTasks number of tasks in TaskList
+     * @return String representing the Task that is deleted
      */
     public String showTaskDeleted(Task task, int noOfTasks) {
         String result = "";
@@ -98,7 +99,8 @@ public class Ui {
 
     /**
      * Prints output for the 'list' command.
-     * @param taskList the taskList that needs its Tasks' details printed.
+     * @param taskList the taskList that needs its Tasks' details printed
+     * @return String representing a list of Tasks in TaskList
      */
     public String showTasks(TaskList taskList) {
         String result = "Here are the tasks in your list:\n";
@@ -113,6 +115,12 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Prints out a list of deleted Tasks.
+     * @param deletedTasks ArrayList of Tasks deleted by executor
+     * @param noOfTasks number of Tasks remaining in the TaskList
+     * @return String representing a list of deleted Tasks
+     */
     public String showDeletedTasks(ArrayList<Task> deletedTasks, int noOfTasks) {
         String result = "I have removed all the tasks that were done. Here are the removed tasks:\n";
         int i = 1;
@@ -123,13 +131,19 @@ public class Ui {
         result += "Now you have " + noOfTasks + " tasks left in the list.";
         return result;
     }
+
     /**
      * Prints error message if loading history file encounters problem.
      */
-    public String showLoadingError() {
-        return " :( OOPS!!! Error occurred while loading the history file.";
+    public void showLoadingError() {
+        System.out.println(" :( OOPS!!! Error occurred while loading the history file.");
     }
 
+    /**
+     * Prints a duplicate message error message.
+     * @param task Task that is duplicate
+     * @return message to user to indicate an attempt to add duplicate Task
+     */
     public String showDuplicateTaskMessage(Task task) {
         return " :( OOPS!!! " + task.toString() + " already exists! Please enter a different Task.";
     }

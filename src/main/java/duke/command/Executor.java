@@ -48,7 +48,7 @@ public class Executor {
                             i--;
                         }
                     }
-                    if (deletedTasks.size()==0) {
+                    if (deletedTasks.size() == 0) {
                         result = "No tasks are currently done!";
                     } else {
                         result = ui.showDeletedTasks(deletedTasks, tasks.size());

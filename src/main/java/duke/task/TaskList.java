@@ -33,6 +33,13 @@ public class TaskList {
     }
 
     /**
+     * This method clears all the tasks that is currently in the tasklist.
+     */
+    public void deleteAll() {
+        this.tasks.clear();
+    }
+
+    /**
      * This method removes the <code>task</code> from the task list.
      *
      * @param index The zero-based index of the task to be deleted.
@@ -69,12 +76,8 @@ public class TaskList {
      *
      * @return The task lists.
      */
-    public ArrayList<Task> getAllTasks() throws DukeException {
-        if (this.tasks.isEmpty()) {
-            throw new DukeException("OOPS!!! You have nothing in your task list!!!");
-        } else {
-            return this.tasks;
-        }
+    public ArrayList<Task> getAllTasks() {
+        return this.tasks;
     }
 
     /**
@@ -83,6 +86,7 @@ public class TaskList {
      *
      * @param word Keyword to search.
      * @return ArrayList of tasks.
+     * @throws DukeException when there is no tasks with the <code>word</code> found in task list.
      */
     public ArrayList<Task> findTaskWithWord(String word) throws DukeException {
         assert (tasks != null && tasks.size() != 0) :
@@ -96,7 +100,7 @@ public class TaskList {
             }
         }
         if (tasksWithWord.size() == 0) {
-            throw new DukeException("No events with '" + word + "' found in your tasklist!");
+            throw new DukeException("No tasks with '" + word + "' found in your tasklist!");
         } else {
             return tasksWithWord;
         }

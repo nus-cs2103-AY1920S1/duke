@@ -127,4 +127,12 @@ public class Ui {
     public void printError(String error) {
         append(error);
     }
+
+    /**
+     * Append clear tasklist message and prints it out to the users.
+     */
+    public void printDeleteAllMessage() {
+        append("Noted. I've removed ALL your tasks!");
+        append("Now you have 0 tasks in the list.");
+    }
 }

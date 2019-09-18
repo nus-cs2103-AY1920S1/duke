@@ -27,7 +27,7 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             ui.printTaskList(tasks.getAllTasks());
-        } catch (AssertionError | DukeException e) {
+        } catch (AssertionError e) {
             ui.printError(e.getMessage());
         }
     }

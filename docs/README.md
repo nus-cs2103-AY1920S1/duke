@@ -124,7 +124,7 @@ Expected outcome:
 
 ### `delete` - Delete a Task.
 
-Deletes a specified task using command `delete INDEX OF TASK`
+Delete a specified task using command `delete INDEX OF TASK`
 and press Enter.
 
 Example of usage:
@@ -135,6 +135,20 @@ Expected outcome:
 
 `Noted. I've removed this task:`<br/>
 Followed by the tasks that was in the list at index 6.
+
+### `deleteAll` - Remove all tasks from the task list.
+
+Clear the task list using the command `deleteAll` and
+press Enter. Please note that the action is IRREVERSIBLE.
+
+Example of usage: 
+
+`deleteAll`
+
+Expected outcome:
+
+`Noted. I've removed ALL tasks.`<br/>
+`Now you have 0 tasks in your task list.`
 
 ### `done` - Mark a Task as Done.
 

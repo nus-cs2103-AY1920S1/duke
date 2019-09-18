@@ -2,6 +2,7 @@ package duke.parser;
 
 import duke.command.AddCommand;
 import duke.command.Command;
+import duke.command.DeleteAllCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
@@ -77,6 +78,9 @@ public class Parser {
         if (data.length == 1) {
             throw new InvalidDeadlineException(
                     "OOPS!!! You must include the date and the time of the event after '/by'!");
+        } else if (data[0].split(" ").length == 1) {
+            throw new InvalidDeadlineException(
+                    "OOPS!!! Please give an event description before '/by' !");
         }
     }
 
@@ -105,6 +109,8 @@ public class Parser {
         if (data.length == 1) {
             throw new InvalidEventException(
                     "OOPS!!! You must include the date and the time of the event after '/at'!");
+        } else if (data[0].split(" ").length == 1) {
+            throw new InvalidEventException("OOPS!!! Please give an event description before '/at' !");
         }
     }
 
@@ -238,6 +244,9 @@ public class Parser {
                     } catch (DukeException e) {
                         throw new DukeException(e.getMessage());
                     }
+                }
+                case "deleteAll": {
+                    return new DeleteAllCommand();
                 }
                 default: {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -38,18 +38,6 @@ public class Person {
         return title;
     }
 
-    public void modifyName(String name) {
-        this.name = name;
-    }
-
-    public void modifyTitle(String title) {
-        this.title = title;
-    }
-
-    public void modifyContact(String contact) {
-        this.contact = contact;
-    }
-
     public String toString() {
         return this.name + "(" + this.title + ")" + this.contact;
     }

@@ -30,7 +30,7 @@ public class UiTest {
         System.setOut(new PrintStream(outContent));
         Ui ui = new Ui();
         ui.say("yeet");
-        assertEquals(format("yeet"), outContent.toString());
+        assertEquals("yeet\n", outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -39,7 +39,7 @@ public class UiTest {
         System.setOut(new PrintStream(outContent));
         Ui ui = new Ui();
         ui.greet();
-        assertEquals(format(HELLO_STRING), outContent.toString());
+        assertEquals(HELLO_STRING + "\n", outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -48,7 +48,7 @@ public class UiTest {
         System.setOut(new PrintStream(outContent));
         Ui ui = new Ui();
         ui.farewell();
-        assertEquals(format(BYE_STRING), outContent.toString());
+        assertEquals(BYE_STRING + "\n", outContent.toString());
         System.setOut(originalOut);
     }
 
@@ -57,7 +57,7 @@ public class UiTest {
         System.setOut(new PrintStream(outContent));
         Ui ui = new Ui();
         ui.sayError("The answer is not 42.");
-        assertEquals(format(ERROR_PREPEND + " " + "The answer is not 42."), outContent.toString());
+        assertEquals(ERROR_PREPEND + " " + "The answer is not 42.\n", outContent.toString());
         System.setOut(originalOut);
     }
 }

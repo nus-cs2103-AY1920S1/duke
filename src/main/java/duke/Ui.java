@@ -65,6 +65,7 @@ public class Ui {
      * @param sequence The String to be printed
      */
     public void say(String sequence) {
+        System.out.println(sequence);
         lastSaid = sequence;
     }
 

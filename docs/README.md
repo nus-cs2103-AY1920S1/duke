@@ -2,19 +2,24 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Keep track of tasks
+* Add tasks to duke.
+* Mark tasks as complete.
+* Set varying priorities of tasks.
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo taskDescription` - todo
 
-Describe action and its outcome.
+Adds a to-do task to duke.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo duke IP`
 
 Expected outcome:
 
-`outcome`
+```
+Got it. I've added this task:
+[T][✘] duke IP
+```

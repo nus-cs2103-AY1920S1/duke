@@ -1,5 +1,5 @@
-E|0|eat|15/09/2019|Sheldon(friend)666
+E|0|eat|15/09/2019 1800|Sheldon(friend)666
 D|1|sleep|Tonight|Amy(Sheldon's wife)888
 T|0|drink|Penny()N.A.
-T|0|study|Poorme()123
-T|0|sleep again|
+T|1|study|Poorme()123
+T|1|sleep again|

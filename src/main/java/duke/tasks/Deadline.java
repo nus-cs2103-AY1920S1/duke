@@ -4,6 +4,10 @@ import duke.person.PersonList;
 
 public class Deadline extends Task {
     protected String by;
+    protected String day;
+    protected String month;
+    protected String year;
+    protected String time;
 
     /**
      * constructor for deadline type task.
@@ -15,6 +19,24 @@ public class Deadline extends Task {
     public Deadline(String description, String by, PersonList list) {
         super(description, list);
         this.by = by;
+        parseBy(by);
+    }
+
+    private void parseBy(String by) {
+        if (by.contains("/")) {
+            String[] parts = by.split("[/]");
+            assert parts.length == 3 : "time format is wrong";
+            day = parts[0];
+            month = parts[1];
+            String[] subParts = parts[2].split(" ");
+            year = subParts[0];
+            time = subParts[1];
+        } else {
+            day = "";
+            month = "";
+            year = "";
+            time = "";
+        }
     }
 
     public String getBy() {

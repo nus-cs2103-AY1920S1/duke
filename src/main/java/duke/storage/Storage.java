@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
     private static final String outputNoSave = "Tasks are not able to be saved into .txt file.";
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -101,9 +101,9 @@ public class Storage {
                 String name = str;
                 list.addPerson(new Person(name));
             } else {
-                assert startIndex >= 0: "name doesn't exist";
+                assert startIndex >= 0 : "name doesn't exist";
                 String name = str.substring(0, startIndex);
-                assert endIndex >= startIndex+1: "title doesn't exist";
+                assert endIndex >= startIndex + 1 : "title doesn't exist";
                 String title = str.substring(startIndex + 1, endIndex);
                 if (endIndex == str.length() - 1) {
                     list.addPerson(new Person(name, title));

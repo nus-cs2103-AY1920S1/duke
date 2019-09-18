@@ -30,6 +30,12 @@ Each person consists of name, title/relationship and contact number.
 A person can be represented by `name(title)123456`. 
 If title or contact number are unknown, they can be omitted. 
 Thus, these commands are also applicable: `James`,`James(boss)`,`James()123`. 
+
+When creating `event` and `deadline` tasks, time is necessary for your new task. 
+Your time can be a random string such as `tomorrow morning`. 
+But if you want STM to understand your time as day, month, year, time; 
+Your time should be in this format `day/month/year time`. 
+For example, these are valid time `tonight`,`Wednesday afternoon`,`18/09/2019 1800`,`2/12/2020 6pm`.
 ### Add tasks
 You can use `event`,`deadline`,`todo` commands to add different types of tasks.
 

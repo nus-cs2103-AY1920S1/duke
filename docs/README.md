@@ -6,12 +6,38 @@ Please read further for a more in-depth explanation.
 
 ## Features 
 
-### ToDo 
-This feature allows the adding of undone tasks with no specific deadline to the TaskList.
+### 1. ToDo 
+Adds an undone task with no specific deadline to the TaskList.
+
+### 2. Deadline
+Adds an undone task with a specific deadline to the Tasklist.
+
+### 3. Event
+Adds an undone Event task to the Tasklist.
+
+### 4. List
+This feature displays the list of tasks in the Tasklist.
+
+### 5. Done
+This feature marks a task as done.
+
+### 6. Edit
+This feature edits a task currently in the Tasklist.
+
+### 7. Delete
+This feature deletes a task from the Tasklist.
+
+### 8. Find
+This feature searches and retrieves tasks matching the given description.
+
+### 9. Trivia
+This feature asks a random trivia question and expects a response.
 
 ## Usage
 
-### Keyword: `todo [description]'
+### 1. ToDo
+
+Format: `todo [description]'
 
 [description] here represents the description of the task to be done.
 For example, it could be "wash the dishes", or "review the CS2101 script".
@@ -26,12 +52,10 @@ Expected outcome:
 
 `[T][✘] wash the dishes` will be added to the Tasklist.
 
-### Deadline
-This feature adds an undone task with a specific deadline to the Tasklist.
 
-## Usage
+### 2. Deadline
 
-### Keyword: 'deadline [description] /by [timing]'
+Format: 'deadline [description] /by [timing]'
 
 [description] represents the description of the task.
 For example, 'watch the CS2105 webcast'.
@@ -51,12 +75,9 @@ Expected outcome:
 
 `[D][✘] finish CS2105 Assignment 1 (by: 9 October 2019 11:59PM)`
 
-### Event
-Adds an undone Event task to the Tasklist.
+### 3. Event
 
-## Usage
-
-### Keyword: 'event [description] /at [timing]'
+Format: 'event [description] /at [timing]'
 
 This feature adds an event at a specified time to the Tasklist.
 
@@ -72,54 +93,45 @@ The task will be expressed in the format of '[Task type][Done status] Task descr
 
 Example of usage: 
 
-'event Claire's architecture exhibition /at 09/10/2019 1900`
+`event Claire's architecture exhibition /at 09/10/2019 1900`
 
 Expected outcome:
 
 `[E][✘] Claire's architecture exhibition (at: 9 October 2019 07:00PM)`
 
-### List
-This feature displays the list of tasks in the Tasklist.
+### 4. List
 
-## Usage
-
-### Keyword: 'list'
+Format: 'list'
 
 Displays the Tasklist with each task at a specific index representing their current position.
 
 Example of usage: 
 
-'event Claire's architecture exhibition /at 09/10/2019 1900`
+`event Claire's architecture exhibition /at 09/10/2019 1900`
 `list`
 
 Expected outcome:
 
 `1. [E][✘] Claire's architecture exhibition (at: 9 October 2019 07:00PM)`
 
-### Done
-This feature marks a task as done.
+### 5. Done
 
-## Usage
-
-### Keyword: 'done [index]'
+Format: 'done [index]'
 
 Marks the task currently at [index] position in the Tasklist as done.
 
 Example of usage: 
 
-'done 1'
+`done 1`
 `list`
 
 Expected outcome:
 
 `1. [E][✓] Claire's architecture exhibition (at: 9 October 2019 07:00PM)`
 
-### Edit
-This feature edits a task currently in the Tasklist.
+### 6. Edit
 
-## Usage
-
-### Keyword: 'edit [index] [new description]'
+Format: 'edit [index] [new description]'
 
 This will edit the task at [index] position in the Tasklist and replace its description.
 In the event that a deadline or event is being edited, the command will look like this:
@@ -133,58 +145,49 @@ Expected outcome:
 
 `1. [E][✓] Claire's graduation ceremony (at: 9 October 2019 06:00PM)`
 
-### Delete
-This feature deletes a task from the Tasklist.
+### 7. Delete
 
-## Usage
-
-### Keyword: `delete [index]'
+Format: `delete [index]'
 
 This will delete the task at [index] position in the Tasklist. 
 The remaining tasks' indexes will be updated to match their new position.
 
 Example of usage: 
 
-'list'
-'1. [T][✘] wash the dishes
+`list`
+`1. [T][✘] wash the dishes
  2. [D][✓] finish CS2105 Assignment 1 (by: 9 October 2019 11:59PM)
- 3. [E][✘] Claire's architecture exhibition (at: 9 October 2019 07:00PM)'
+ 3. [E][✘] Claire's architecture exhibition (at: 9 October 2019 07:00PM)`
 `delete 2`
 
 Expected outcome:
 
 `list`
-'1. [T][✘] wash the dishes
- 2. [E][✘] Claire's architecture exhibition (at: 9 October 2019 07:00PM)'
+`1. [T][✘] wash the dishes
+ 2. [E][✘] Claire's architecture exhibition (at: 9 October 2019 07:00PM)`
 
-### Find
-This feature searches and retrieves tasks matching the given description.
+### 8. Find
 
-## Usage
-
-### Keyword: 'find [input]'
+Format: 'find [input]'
 
 The search results will be returned if they contain [input].
 
 Example of usage: 
 
-'1. [T][✘] wash the dishes
+`1. [T][✘] wash the dishes
  2. [D][✓] finish CS2105 Assignment 1 (by: 9 October 2019 11:59PM)
- 3. [E][✘] Claire's architecture exhibition (at: 9 October 2019 07:00PM)'
+ 3. [E][✘] Claire's architecture exhibition (at: 9 October 2019 07:00PM)`
 `find dish`
 
 Expected outcome:
 
 `1. [T][✘] wash the dishes`
 
-### Trivia
-This feature asks a random trivia question and expects a response.
+### 9. Trivia
 
-## Usage
+Format: 'trivia'
 
-### Keyword: 'trivia'
-
-Upon sending this command, the chatbot will return a question.
+Upon sending the 'trivia' command, the chatbot will return a question.
 For example, "What instrument can Sherlock Holmes play?"
 Your next input will then be your answer.
 For example, "the violin".
@@ -192,10 +195,10 @@ The chatbot will then respond with a message indicating whether your answer was 
 
 Example of usage: 
 
-`trivia`
-'The art and practice of garden cultivation and management is called what?'
-'Agriculture'
+User input: `trivia`
+Chatbot: `The art and practice of garden cultivation and management is called what?`
+User input: `Agriculture`
 
 Expected outcome:
 
-`Sorry, the answer is Horticulture. Better luck next time!`
+Chatbot: `Sorry, the answer is Horticulture. Better luck next time!`

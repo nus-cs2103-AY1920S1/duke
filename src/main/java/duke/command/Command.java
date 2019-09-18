@@ -38,6 +38,12 @@ public class Command {
         this.output = output;
     }
 
+    public void addOutput(String input) {
+        StringBuilder sb = new StringBuilder(output);
+        sb.append("\n").append(input);
+        output = sb.toString();
+    }
+
     public ArrayList<Task> getTaskList() {
         return taskList;
     }

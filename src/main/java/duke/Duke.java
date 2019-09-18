@@ -46,16 +46,16 @@ public class Duke {
         try {
             result = taskList.doCommand(command);
             ui.printOutput(result.getOutput());
-            ui.printOutput(taskList.getReminder());
+            String reminder = taskList.getReminder();
+            if (!reminder.contains("nil")) {
+                result.addOutput(reminder);
+                ui.printOutput(result.getOutput());
+            }
             storage.writeDuke(result.getTaskList());
         } catch (DukeException | IOException ex) {
             result.setOutput(ex.getMessage());
             ui.printError(ex);
         }
         return result.getOutput();
-    }
-
-    public String getReminder() {
-        return taskList.getReminder();
     }
 }

@@ -97,4 +97,11 @@ public class Storage {
         }
         write(lines);
     }
+
+    /**
+     * Creates new duke.txt if duke.txt is missing
+     */
+    public void createNewDuke() {
+
+    }
 }

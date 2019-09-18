@@ -2,7 +2,6 @@ package duke.tasklist;
 
 import java.util.ArrayList;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
 import duke.command.Command;
@@ -104,7 +103,7 @@ public class TaskList {
         }
         String s;
         if (remindTasks.isEmpty()) {
-            s = "No upcoming tasks.";
+            s = "nil";
         } else {
             s = "Here's a list of upcoming tasks:\n";
             StringBuilder sb = new StringBuilder(s);

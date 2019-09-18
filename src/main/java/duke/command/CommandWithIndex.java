@@ -1,13 +1,18 @@
 package duke.command;
 
 import duke.exception.InvalidTaskIndexDukeException;
-import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.ArrayList;
-
+/**
+ * An abstract class for commands that requires the task index to execute.
+ */
 public abstract class CommandWithIndex extends Command{
     protected int index;
+
+    /**
+     * Constructs a command with task index.
+     * @param index The task's index.
+     */
     public CommandWithIndex(int index) {
         this.index = index;
     }

@@ -4,12 +4,25 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * A command to find tasks in a TaskList that matches the searchKey.
+ */
 public class FindCommand extends Command {
     private String searchKey;
+
+    /**
+     * Constructs a FindCommand with the searchKey.
+     * @param searchKey The searchKey that will be used to identify matching tasks.
+     */
     public FindCommand(String searchKey) {
         this.searchKey = searchKey;
     }
 
+    /**
+     * Returns a string of tasks from the TaskList that has a description that matches the searchKey.
+     * @param tasks The TaskList to search tasks from.
+     * @return A string of tasks that matches the searchKey.
+     */
     @Override
     public String execute(TaskList tasks) {
         ArrayList<String> matchList = new ArrayList<>();

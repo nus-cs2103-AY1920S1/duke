@@ -10,22 +10,36 @@ import java.util.Date;
 public class Deadline extends Task {
     private Date deadlineBy;
 
-    public Deadline(String taskDetails, Date deadlineBy) {
-        super(taskDetails);
+    /**
+     * Creates a new Deadline with a description and Date of deadline.
+     *
+     * @param description The task's description.
+     * @param deadlineBy The Date of the deadline.
+     */
+    public Deadline(String description, Date deadlineBy) {
+        super(description);
         this.deadlineBy = deadlineBy;
     }
 
     /**
-     * Returns a string of a task that can contain
-     * its description, time and completion status.
+     * Returns a string of a Deadline that can contain
+     * its type, completion status, description, time and PriorityLevel.
      *
-     * @return string that contains information about a task.
+     * @return A string that contains information about anDeadline.
      */
     public String saveInfo() {
-        return "deadline" + " " + taskDetails + " /by " + Parser.inputDateFormat.format(deadlineBy)
-                + System.getProperty("line.separator") + completed;
+        return "deadline" + " " + description + " /by " + Parser.inputDateFormat.format(deadlineBy)
+                + System.getProperty("line.separator") + completed
+                + System.getProperty("line.separator") + priority.toString();
     }
 
+    /**
+     * Returns a string containing full information of the Deadline.
+     * This includes type, completion status, description, time
+     * and PriorityLevel.
+     *
+     * @return A string representation of this Deadline.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -34,10 +48,12 @@ public class Deadline extends Task {
         } else {
             sb.append("[D][\u2717] ");
         }
-        sb.append(taskDetails);
+        sb.append(description);
         sb.append(" (");
         sb.append(Parser.outputDateFormat.format(deadlineBy));
         sb.append(")");
+        sb.append(" ");
+        sb.append(priority.toString());
         return sb.toString();
     }
 }

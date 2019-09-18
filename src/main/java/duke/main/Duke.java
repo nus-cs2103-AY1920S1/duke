@@ -4,7 +4,6 @@ import duke.command.Command;
 import duke.exception.SaveFileWrongFormatDukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.UI;
 
 import java.io.FileNotFoundException;
 
@@ -13,32 +12,56 @@ import java.io.FileNotFoundException;
  * to-do tasks, deadlines and events.
  */
 public class Duke {
-    private UI ui;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
 
     /**
-     * Constructor for duke.
+     * Initialises a new Duke by loading the save file from a filePath.
+     *
+     * @param filePath The file path that storage loads from.
      */
-    public Duke() {
-        storage = new Storage("data/savedList.txt");
+    public Duke(String filePath) {
+        storage = new Storage(filePath);
         parser = new Parser();
         try {
             tasks = storage.load(parser);
-        } catch (FileNotFoundException | SaveFileWrongFormatDukeException e) {
+        } catch (FileNotFoundException e) {
+            storage.createNewDir("data");
+            storage.createNewSaveFile("savedList.txt");
+            tasks = new TaskList();
+        } catch (SaveFileWrongFormatDukeException e) {
             tasks = new TaskList();
             System.out.println(e.getMessage());
         }
     }
 
     /**
-     * This is where the Duke application starts to run.
+     * Returns a string of the executed command.
+     *
+     * @param c The command that is executed.
+     * @return A string describing the effects of the executed command.
      */
-    public String getResponse(String input) {
-        Command commandFromInput = parser.parse(input);
-        String returnString = commandFromInput.execute(tasks);
-        storage.saveDuke(tasks.saveInfo());
+    public String getResponse(Command c) {
+        String returnString = c.execute(tasks);
         return returnString;
+    }
+
+    /**
+     * Parses the input into a command.
+     *
+     * @param input The string that is parsed.
+     * @return A command parsed from the string.
+     */
+    public Command parseInput(String input) {
+        Command commandFromInput = parser.parse(input);
+        return commandFromInput;
+    }
+
+    /**
+     * Saves the state of tasks in storage.
+     */
+    public void dukeSave() {
+        storage.saveDuke(tasks.saveInfo());
     }
 }

@@ -1,6 +1,7 @@
 package duke;
 
-import java.util.ArrayList;
+import duke.command.*;
+
 import java.util.Arrays;
 
 /**
@@ -22,6 +23,62 @@ public class Parser {
     public Parser(String fullCommand) {
         this.fullCommand = fullCommand;
         this.part = fullCommand.split(" ");
+    }
+
+    Command parseCommand() throws DukeException {
+        if (checkValidity()) {
+            switch (getCommandType()) {
+            case "list":
+                return new ListCommand(fullCommand);
+            case "done":
+                return new DoneCommand(fullCommand);
+            case "delete":
+                return new DeleteCommand(fullCommand);
+            case "find":
+                return new FindCommand(fullCommand);
+            case "todo":
+                return new TodoCommand(fullCommand);
+            case "deadline":
+                return new DeadlineCommand(fullCommand);
+            case "event":
+                return new EventCommand(fullCommand);
+            default:
+                assert false : getCommandType();
+            }
+        }
+        return new Command(fullCommand);
+    }
+
+    /**
+     * Returns true if the full command is a valid command, or false otherwise.
+     * @return boolean variable representing the validity of the command.
+     * @throws DukeException if the command is invalid.
+     */
+    boolean checkValidity() throws DukeException {
+        switch (getCommandType()) {
+        case "list":
+            break;
+        case "done": case "delete":
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! You need to enter an index.");
+            }
+            break;
+        case "find":
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! You need to enter a keyword to search");
+            }
+            break;
+        case "todo": case "deadline": case "event":
+            if (part.length < 2) {
+                throw new DukeException("☹ OOPS!!! The description of a(n)" + getCommandType()
+                        + "cannot be empty.");
+            }
+            break;
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what "
+                    + "that means :-(");
+        }
+        return true;
     }
 
     /**
@@ -52,7 +109,6 @@ public class Parser {
                                 .filter(s -> !s.equals("") && !s.equals("delete") && !s.equals("done"))
                                 .mapToInt(Integer::parseInt)
                                 .toArray();
-            //int[] indices = Arrays.stream(range).mapToInt(Integer::parseInt).toArray();
             return indices;
         }
     }
@@ -96,35 +152,4 @@ public class Parser {
         return time[1];
     }
 
-    /**
-     * Returns true if the full command is a valid command, or false otherwise.
-     * @return boolean variable representing the validity of the command.
-     * @throws DukeException if the command is invalid.
-     */
-    boolean checkValidity() throws DukeException {
-        switch (getCommandType()) {
-        case "list":
-            break;
-        case "done": case "delete":
-            if (part.length < 2) {
-                throw new DukeException("☹ OOPS!!! You need to enter an index.");
-            }
-            break;
-        case "find":
-            if (part.length < 2) {
-                throw new DukeException("☹ OOPS!!! You need to enter a keyword to search");
-            }
-            break;
-        case "todo": case "deadline": case "event":
-            if (part.length < 2) {
-                throw new DukeException("☹ OOPS!!! The description of a(n)" + getCommandType()
-                        + "cannot be empty.");
-            }
-            break;
-        default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what "
-                    + "that means :-(");
-        }
-        return true;
-    }
 }

@@ -30,13 +30,10 @@ public class DoneCommand extends Command {
      */
     String execute(TaskList tasks, Storage storage) throws IOException {
         Parser parser = new Parser(fullCommand);
-        int[] range = parser.getIndices();
-        String message = "Nice! I've marked the following task(s) as done: \n  ";
-        for (int i : range) {
-            message += tasks.doneTask(i);
-            message += "\n  ";
-        }
+
+        String message = tasks.doneTask(parser.getIndices());
         storage.updateFile(tasks);
         return message;
+
     }
 }

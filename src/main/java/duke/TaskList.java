@@ -39,10 +39,15 @@ public class TaskList {
      * Prints out the tasks in the list currently.
      */
     public String showTasks() {
-        String message = "Here are the tasks in your list: \n";
-        for (int i = 0; i < list.size(); i++) {
-            message += (i + 1) + ". " + list.get(i) + "\n";
+        String message = "Here are the tasks in your list: ";
+        int i = 0;
+        for (Task task : list) {
+            message += "\n" + (i+1) + ". " + task;
+            i++;
         }
+        //for (int i = 0; i < list.size(); i++) {
+        //    message += (i + 1) + ". " + list.get(i) + "\n";
+        //}
         return message;
     }
 
@@ -50,11 +55,11 @@ public class TaskList {
      * Prints out the tasks with keyword in the list currently.
      */
     public String findTask(String keyword) {
-        String message = "Here are the matching tasks in your list: \n";
+        String message = "Here are the matching tasks in your list: ";
         int i = 0;
         for (Task task : list) {
             if (task.toString().contains(keyword)) {
-               message += (i + 1) + ". " + task + "\n";
+               message += "\n" + (i + 1) + ". " + task ;
                 i++;
             }
         }
@@ -109,10 +114,15 @@ public class TaskList {
      * Marks the task of the specified index to "done".
      * @param idx integer that represents the index of the task in the command.
      */
-    public String doneTask(int idx) {
-        assert idx >=1 && idx <= list.size() : "Invalid index input";
-        list.get(idx - 1).markAsDone();
-        return list.get(idx - 1).toString();
+    public String doneTask(int[] indices) {
+        StringBuilder message = new StringBuilder("Nice! I've marked the following task(s) as done: ");
+        for (int i : indices) {
+            assert i >= 1 && i <= list.size() : "Invalid index input";
+            list.get(i - 1).markAsDone();
+            message.append("\n  ");
+            message.append(list.get(i - 1));
+        }
+        return message.toString();
     }
 
     /**
@@ -120,13 +130,14 @@ public class TaskList {
      * @param indices integer that represents the index of the task in the command.
      */
     public String deleteTask(int[] indices) {
-        String message = "Noted. I've removed the task(s): \n  ";
+        StringBuilder message = new StringBuilder("Noted. I've removed the task(s): ");
         ArrayList<Task> toRemove = new ArrayList<>();
         for (int i : indices) {
+            assert i >=1 && i <= list.size() : "Invalid index input";
             list.get(i - 1).markAsDeleted();
             toRemove.add(list.get(i - 1));
-            message += list.get(i - 1).toString();
-            message += "\n  ";
+            message.append("\n  ");
+            message.append(list.get(i - 1).toString());
         }
         list.removeAll(toRemove);
         return message + "\nNow you have " + list.size() + " tasks in the list.";

@@ -11,9 +11,8 @@ class Ui {
     /**
      * Prints out greeting message to users.
      */
-    void greet() {
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+    String greet() {
+        return "Hello! I'm Duke \nWhat can I do for you?";
     }
 
     /**

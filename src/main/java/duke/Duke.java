@@ -16,8 +16,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
-    private CommandGenerator cg = new CommandGenerator();
-    private Scanner sc = new Scanner(System.in);
+    private Parser parser;
 
     /**
      * Loads the data from given file path.
@@ -45,43 +44,21 @@ public class Duke {
         }
     }
 
-    /**
-     * Greets users, reads in inputs, processes the command, prints the outputs.
-     */
-    void run() {
-        ui.greet();
-        String fullCommand = ui.readInput(sc);
-
-        while (!fullCommand.equals("bye")) {
-
-            try {
-                Command command = cg.generateCommand(fullCommand);
-                command.execute(tasks, storage);
-            } catch (DukeException | IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-
-            // Scans the next command line.
-            fullCommand = ui.readInput(sc);
-        }
-
-        ui.sayBye();
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
     String getResponse(String input) {
         if (input.equals("bye")) {
             return ui.sayBye();
         } else {
             try {
-                Command command = cg.generateCommand(input);
+                parser = new Parser(input);
+                Command command = parser.parseCommand();
                 return command.execute(tasks, storage);
             } catch (DukeException | IOException ex) {
                 return ex.getMessage();
             }
         }
+    }
+
+    String getGreeting() {
+        return ui.greet();
     }
 }

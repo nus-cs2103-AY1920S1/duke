@@ -1,3 +1,11 @@
+<style>
+p {
+ text-align:center
+}
+</style>
+
+<p>
+
 # User Guide
 
 Problems organising your life? Say Hi to *DUKE*
@@ -86,3 +94,5 @@ bye ends the program for you
 # End
 
 And thats all for now folks! I'll be adding new features soon so stay tuned!
+
+</p>

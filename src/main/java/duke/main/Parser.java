@@ -1,7 +1,20 @@
 package duke.main;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.PriorityCommand;
+import duke.command.TodoCommand;
+import duke.exception.EmptyDscDukeException;
+import duke.exception.InvalidPriorityDukeException;
+import duke.exception.NoDateDukeException;
+import duke.exception.NoPriorityDukeException;
+import duke.exception.NoTaskIndexDukeException;
 import duke.task.PriorityLevel;
 
 import java.text.ParseException;

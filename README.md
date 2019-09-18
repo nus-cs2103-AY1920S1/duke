@@ -32,59 +32,73 @@ Displays all available commands in the application.
 
 Format: `help`
 
-#### 2.2 Adding a task to be done: `todo`
+#### 2.2 Adding a task to be done: `todo` (alias `t`)
 Adds a task to be done with the provided name to your list.
 
-Format: `todo TASK_NAME`
+Format: `todo TASK_NAME` or `t TASK_NAME`
 
-Example: `todo 100 pushups`
+Examples: 
+* `todo 100 pushups`
+* `t 200 pushups`
 
-#### 2.3 Adding a deadline: `deadline`
+#### 2.3 Adding a deadline: `deadline` (alias `d`)
 Adds a deadline to your list.
 
-Format: `deadline DEADLINE_NAME /by DD/MM/YYYY HHMM`
+Format: `deadline DEADLINE_NAME /by DD/MM/YYYY HHMM` or `d DEADLINE_NAME /by DD/MM/YYYY HHMM`
 
-Example: `deadline math assignment /by 30/11/2019 2359`
+Examples: 
+* `deadline math assignment /by 30/11/2019 2359`
+* `d science assignment /by 30/11/2019 2359`
 
-#### 2.4 Adding an event to be attended: `event`
+#### 2.4 Adding an event to be attended: `event` (alias `e`)
 Adds a deadline to your list.
 
-Format: `event EVENT_NAME /at DD/MM/YYYY HHMM`
+Format: `event EVENT_NAME /at DD/MM/YYYY HHMM` or `e EVENT_NAME /at DD/MM/YYYY HHMM`
 
-Example: `event birthday party /at 28/10/2019 1930`
+Examples: 
+*`event birthday party /at 28/10/2019 1930`
+*`e baby shower /at 28/10/2019 1930`
 
-#### 2.5 Listing all tasks: `list`
+#### 2.5 Listing all tasks: `list` (alias `l`)
 Shows all tasks in your list.
 
-Format: `list`
+Format: `list` or `l`
 
-#### 2.6 Updating name of task in your list: `update`
+#### 2.6 Updating name of task in your list: `update` (alias `u`)
 Updates name of specified task in your list.
 
-Format: `update INDEX NEW_TASK_NAME`
+Format: `update INDEX NEW_TASK_NAME` or `u INDEX NEW_TASK_NAME`
 
-Example: `update 1 50 situps`
+Examples: 
+* `update 1 50 situps`
+* `u 2 60 crunches`
 
-#### 2.7 Retrieving tasks by name: `find`
+#### 2.7 Retrieving tasks by name: `find` (alias `f`)
 Finds tasks whose names contain any of the given keywords.
 
-Format: `find KEYWORD`
+Format: `find KEYWORD` or `f KEYWORD`
 
-Example: `find assignment`
+Examples: 
+* `find assignment`
+* `f assignment`
 
-#### 2.8 Marking a task as completed: `complete`
+#### 2.8 Marking a task as completed: `complete` (alias `c`)
 Marks specified task on the list as completed.
 
-Format: `complete INDEX`
+Format: `complete INDEX` or `c INDEX`
 
-Example: `complete 1`
+Examples: 
+* `complete 1`
+* `c 1`
 
-#### 2.9 Removing a task: `remove`
+#### 2.9 Removing a task: `remove` (alias `r`)
 Remove specified task from the list.
 
-Format: `remove INDEX`
+Format: `remove INDEX` or `r INDEX`
 
-Example: `remove 1`
+Examples: 
+* `remove 1`
+* `r 2`
 
 #### 2.10 Undoing previous command: `undo`
 Undo previous command and revert changes to the list of tasks.

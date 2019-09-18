@@ -2,8 +2,6 @@
 
 Duke is a chat bot that helps you manage your tasks. 
 
-![Duke screenshot] (/docs/Ui.png)
-
 ## Features 
 
 Duke manages a task list that can store:

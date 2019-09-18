@@ -81,7 +81,7 @@ public class TaskList { // TODO: extend List<Task>
     public String toIndexedString() {
         String output = "";
         for (int i = 1; i <= this.size(); i++) {
-            output = output.concat(i + "." + this.get(i - 1).toString() + "\n");
+            output = output.concat(i + ". " + this.get(i - 1).toString() + "\n");
         }
         return output;
     }

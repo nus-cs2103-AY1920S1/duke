@@ -13,12 +13,14 @@ public class DateParser {
      * can take any of the following formats:
      * 1. EEE, d MMM yy, HH:mm
      * 2. d-MM-yyyy HH:mm
-     * 3. ISO date time
+     * 3. dMMyy HHmm
+     * 4. ISO date time (yyyy-MM-ddTHH:mm:ss)
      * where EEE is the day of week (e.g. Mon, Fri).
      */
     public static final DateTimeFormatter[] DATE_FORMATS = {
         DateTimeFormatter.ofPattern("EEE, d MMM yy, HH:mm"),
         DateTimeFormatter.ofPattern("d-MM-yy HH:mm"),
+        DateTimeFormatter.ofPattern("dMMyy HHmm"),
         DateTimeFormatter.ISO_DATE_TIME
     };
 

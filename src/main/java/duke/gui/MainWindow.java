@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        String intro = "Good Morning!\n"
+        String intro = "Good morning!\n"
                 + "What can I do for you?";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(

@@ -1,8 +1,9 @@
 package duke.tasklist;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
-
+import java.time.format.DateTimeFormatter;
 import duke.DukeException;
 import duke.command.Command;
 import duke.task.Task;
@@ -183,6 +184,12 @@ public class TaskList {
         }
         String desc = input.substring(9, input.indexOf('/') - 1);
         String date = input.substring(input.indexOf("/by") + 4);
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(date, format);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Date in wrong format. Use dd/MM/yyyy HHmm format.");
+        }
         Task task = new Deadline(desc, date);
         tasks.add(task);
         return "Got it. I've added this task: \n" + task +
@@ -199,6 +206,12 @@ public class TaskList {
         }
         String desc = input.substring(6, input.indexOf('/') - 1);
         String date = input.substring(input.indexOf("/at") + 4);
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+            LocalDateTime dateTime = LocalDateTime.parse(date, format);
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("Date in wrong format. Use dd/MM/yyyy HHmm format.");
+        }
         Task task = new Event(desc, date);
         tasks.add(task);
         return "Got it. I've added this task: \n" + task +

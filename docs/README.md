@@ -28,6 +28,26 @@ Deletes a task or note.
 
 ## Usage
 
+### `help` - Lists all possible commands
+Lists all possible commands with their syntax.
+
+Example use: 
+
+`help`
+
+Expected outcome:
+
+`Here are the lists of commands available:
+list - displays a list of all available tasks.
+todo <description> - Adds a new todo.
+deadline <description> /by <dd/MM/yyyy HHmm> - Adds a new deadline.
+event <description> /at <dd/MM/yyyy HHmm> - Adds a new event.
+note <content> - Adds a new note.
+find <keyword> - finds an item by the keyword specified.
+done <number> - marks the entry with the corresponding number done.
+delete <number> - deletes the entry with the corresponding number.
+help - displays this help menu.`
+
 ### `list` - Lists all tasks
 Lists all tasks currently stored.
 
@@ -58,7 +78,7 @@ Adds a new deadline task with `description` as its description, and the date/tim
 
 Example use: 
 
-`deadline return book 30/09/2018 1800`
+`deadline return book /by 30/09/2018 1800`
 
 Expected outcome:
 
@@ -66,21 +86,66 @@ Expected outcome:
 `[D][✗] return book (by: 30/09/2019 1800)`
 `Now you have 2 tasks in the list.`
 
-            + "event <description> /at <dd/MM/yyyy HHmm> - Adds a new event.\n\n"
-            + "note <content> - Adds a new note.\n\n"
-            + "done <number> - marks the entry with the corresponding number done.\n\n"
-            + "delete <number> - deletes the entry with the corresponding number.\n\n"
-            + "help - displays this help menu.\n";
+### `event <description> /at <dd/MM/yyyy HHmm> ` - Adds a new event.
+Adds a new event task with `description` as its description, and the date/time as its time.
 
+Example use: 
 
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
+`event party /at 30/09/2018 1800`
 
 Expected outcome:
 
-`outcome`
+`Got it. I've added this task:`
+`[E][✗] party (at: 30/09/2019 1800)`
+`Now you have 3 tasks in the list.`
+
+### `note <content>` - Adds a new note.
+Adds a new short note with `description` as its content.
+
+Example use: 
+
+`note see a doctor`
+
+Expected outcome:
+
+`Got it. I've added this task:`
+`[N] see a doctor`
+`Now you have 4 tasks in the list.`
+
+### `done <number>` - Marks item as done
+Marks with the item with the corresponding number as done.
+
+Example use: 
+
+`done 1`
+
+Expected outcome:
+
+`Nice! I've marked this task as done:`
+`[T][✓] read book`
+
+### `delete <number>` - Deletes an item
+Deletes the item with the corresponding number.
+
+Example use: 
+
+`delete 1`
+
+Expected outcome:
+
+`Noted. I've removed this task:`
+`[T][✓] read book`
+
+### `find <keyword>` - Finds an item
+Finds all items matching the given keyword.
+
+Example use: 
+
+`find book`
+
+Expected outcome:
+
+`Here are the matching tasks in your list:`
+`2. [D][✗] return book (by: 30/09/2019 1800)`
+
+

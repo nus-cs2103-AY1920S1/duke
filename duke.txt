@@ -1,0 +1,5 @@
+T|1|meet friend for lunch
+T|0|CS2103T assignment
+T|0|eat an apple
+D|0|return book |2019-03-21T20:50
+E|0|project meeting |2019-01-20T06:30|2019-01-20T07:30

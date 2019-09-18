@@ -1,6 +1,6 @@
-import duke.tasks.EventsTask;
-
 import java.time.LocalDateTime;
+
+import duke.tasks.EventsTask;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 /**

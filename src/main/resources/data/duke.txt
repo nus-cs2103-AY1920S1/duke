@@ -1,5 +1,0 @@
-D|1|return book|2019-03-21T20:50
-T|1|asd
-T|0|do asd
-E|0|project meeting |2019-01-20T06:30|2019-01-20T07:30
-T|0|something

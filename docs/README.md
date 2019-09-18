@@ -8,7 +8,7 @@ The Duke Chat Assistant is for users who prefer a chat-assistant desktop-based a
 
 ## 2. Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `.jar` for Duke link:{repoURL}/releases[here].
+2. Download the latest `.jar` for Duke [here](https://github.com/SendorasLeft/duke/releases).
 3. Copy the file to the folder you want to use as the home folder for Duke.
 4. Double-click the file to start the app. The GUI should appear in a few seconds.
 5. Type a command message in the text box and press enter to send it to Duke

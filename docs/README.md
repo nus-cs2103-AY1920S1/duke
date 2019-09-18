@@ -1,7 +1,7 @@
 # DaDuke
 # User Guide
 
-Everything you need to know to run Duke on your computer.
+Everything you need to know to run DaDuke on your computer.
 
 ![UserInterface](./Ui.png)
 
@@ -23,7 +23,7 @@ Everything you need to know to run Duke on your computer.
 1. `Check Duplicates` - *This ensures no repeated Tasks are keyed into TaskList.*
 
 ## Commands 
-**Duke supports the following commands:**
+**DaDuke supports the following commands:**
 
 `todo <task name>` - creates a new ToDos Task (eg. todo Homework).
 

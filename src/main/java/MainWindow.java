@@ -32,7 +32,6 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
-
     }
 
     @FXML
@@ -55,5 +54,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            closeWindow();
+        }
+    }
+
+    @FXML
+    private void closeWindow() {
+        scrollPane.getScene().getWindow().hide();
     }
 }

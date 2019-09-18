@@ -8,7 +8,7 @@ Task Chick is **optimized for users who prefer to work with a Command Line Inter
 
 ### Add tasks 
 
-<img src="./READMEMedia/media/add.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/add.png" width="192" height="275.25" />
 
 Chicky is able to add _todos_, _events_ and _deadlines_ to your task list.
 
@@ -17,49 +17,49 @@ Chicky is able to add _todos_, _events_ and _deadlines_ to your task list.
 
 ### Update task description
 
-<img src="./READMEMedia/media/update.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/update.png" width="192" height="275.25" />
 
 Chicky can modify the description of your task.
 
 ### Complete tasks
 
-<img src="./READMEMedia/media/complete.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/complete.png" width="192" height="275.25" />
 
 Chicky helps you feel accomplished by marking completed tasks with a _v_. Good job!
 
 ### Delete tasks
 
-<img src="./READMEMedia/media/delete.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/delete.png" width="192" height="275.25" />
 
 If you no longer want a task to be on your list, Chicky can delete it for you.
 
 ### Undo
 
-<img src="./READMEMedia/media/undo.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/undo.png" width="192" height="275.25" />
 
 We all make mistakes! Chicky can help you undo a command.
 
 ### View all tasks
 
-<img src="./READMEMedia/media/view.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/view.png" width="192" height="275.25" />
 
 To get an overview of all your tasks, ask Chicky for a list!
 
 ### View schedule
 
-<img src="./READMEMedia/media/schedule.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/schedule.png" width="192" height="275.25" />
 
 If you want to know what tasks you have on a specific date, Chicky can find that for you.
 
 ### Find keywords
 
-<img src="./READMEMedia/media/find.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/find.png" width="192" height="275.25" />
 
 Chicky helps you find relevant tasks. All you need to do it specify a search term!
 
 ### Help
 
-<img src="./READMEMedia/media/help.png" width="128" height="183.5" />
+<img src="./READMEMedia/media/help.png" width="192" height="275.25" />
 
 Get help on the go from Chicky. A list of commands and their keywords will be displayed.
 

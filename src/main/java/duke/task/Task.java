@@ -109,7 +109,9 @@ public abstract class Task implements Comparable<Task> {
                 return 1;
             }
         default:
+            assert false : this.priority + " does not belong in PriorityLevel enumeration";
             return 0;
         }
     }
+
 }

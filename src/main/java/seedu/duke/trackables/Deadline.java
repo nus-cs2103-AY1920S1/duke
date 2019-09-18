@@ -9,11 +9,11 @@ import java.util.Date;
  */
 public class Deadline extends Task {
 
-    private Date by;
+    private Date completeBy;
 
-    public Deadline(String description, Date by) {
+    public Deadline(String description, Date completeBy) {
         super(description);
-        this.by = by;
+        this.completeBy = completeBy;
     }
 
     /**
@@ -24,20 +24,20 @@ public class Deadline extends Task {
     public Deadline(String... args) {
         super(args);
         try {
-            this.by = new SimpleDateFormat("d/MM/yyyy HHmm").parse(args[3]);
+            this.completeBy = new SimpleDateFormat("yyyyMMd HHmm").parse(args[3]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    public String getByAsFormattedString() {
-        return new SimpleDateFormat("d/MM/yyyy HHmm").format(by);
+    public String getCompleteByAsFormattedString() {
+        return new SimpleDateFormat("yyyyMMd HHmm").format(completeBy);
     }
 
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-            + getByAsFormattedString() + ")";
+            + getCompleteByAsFormattedString() + ")";
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Deadline extends Task {
         sb.append("D").append(" | ")
             .append(isDone ? "1" : "0")
             .append(" | ").append(this.description)
-            .append(" | ").append(getByAsFormattedString());
+            .append(" | ").append(getCompleteByAsFormattedString());
         return sb.toString();
     }
 }

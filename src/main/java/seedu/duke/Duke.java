@@ -50,7 +50,7 @@ public class Duke {
 
         //noinspection InfiniteLoopStatement
         while (true) {
-            String input = Ui.nextLine();
+            String input = Ui.readNextLine();
             try {
                 Parser.parseCommand(input).execute(tasks);
 

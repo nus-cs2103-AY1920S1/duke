@@ -60,7 +60,7 @@ public class Storage {
                 Files.createFile(path);
             }
 
-            List<String> tasksAsString = getStringsFromTasks(tasks);
+            List<String> tasksAsString = extractStringsFromTasks(tasks);
             Files.write(path, tasksAsString);
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path, ioe);
@@ -81,7 +81,7 @@ public class Storage {
         }
 
         try {
-            return new TaskList(getTasksFromStrings(Files.readAllLines(path)));
+            return new TaskList(restoreTasksFromStrings(Files.readAllLines(path)));
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path, ioe);
         } catch (Exception e) {
@@ -96,7 +96,7 @@ public class Storage {
      * @return A list of Tasks in their String equivalent form otherwise, an empty {@code List<String>}
      *         if {@code tasks} is empty.
      */
-    private List<String> getStringsFromTasks(TaskList tasks) {
+    private List<String> extractStringsFromTasks(TaskList tasks) {
         return tasks.getList().stream().map(Task::getAsString).collect(Collectors.toList());
     }
 
@@ -106,7 +106,7 @@ public class Storage {
      * @param stringTasks List containing all tasks in their string forms.
      * @return A list of Tasks otherwise, an empty {@code List<Task} if {@code stringTasks} is empty.
      */
-    private List<Task> getTasksFromStrings(List<String> stringTasks) {
+    private List<Task> restoreTasksFromStrings(List<String> stringTasks) {
         return stringTasks.stream()
             .map(identifyTask -> identifyTask.split(" \\| "))        // Split String
             .map(this::stringArgsToTask).collect(Collectors.toList());     // Run each String[] through stringToTask()

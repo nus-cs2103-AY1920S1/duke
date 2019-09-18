@@ -7,17 +7,17 @@ import java.time.format.DateTimeFormatter;
  * Represents a task object.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
-    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-    public static final int LENGTH_OF_DATE_DESCRIPTION = 32;
+    private String description;
+    private boolean isDone;
+    static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    static final int LENGTH_OF_DATE_DESCRIPTION = 32;
 
     /**
      * Constructor for duke.task.Task.
      *
      * @param description String representation of the description
      */
-    public Task(String description) throws DateTimeException {
+    Task(String description) throws DateTimeException {
         this.description = description;
         this.isDone = false;
     }
@@ -28,7 +28,7 @@ public class Task {
      * @param description String representation of the description
      * @param isDone      whether it is done or not
      */
-    public Task(String description, boolean isDone) throws DateTimeException {
+    Task(String description, boolean isDone) throws DateTimeException {
         this.description = description;
         this.isDone = isDone;
     }
@@ -64,7 +64,7 @@ public class Task {
      *
      * @return String representation on whether task is done or not
      */
-    public String getStatusIcon() {
+    private String getStatusIcon() {
         return (isDone ? "+" : "-");
     }
 
@@ -75,8 +75,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String mark = "[" + getStatusIcon() + "] " + getDescription();
-        return mark;
+        return "[" + getStatusIcon() + "] " + getDescription();
     }
 
     /**

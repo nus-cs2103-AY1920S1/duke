@@ -8,13 +8,13 @@ import duke.Ui;
 import java.util.ArrayList;
 
 /**
- * Represents a command which finds the Tasks in the Tasklist which contains the same use input String.
+ * Represents a command which finds the Tasks in the task list which contains the same use input String.
  *
  * @see TaskList
  * @see Task
  */
 public class FindCommand extends Command {
-    private String keywordToFind;
+    private final String keywordToFind;
 
     /**
      * Constructor for duke.command.FindCommand.

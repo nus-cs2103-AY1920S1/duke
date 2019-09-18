@@ -3,14 +3,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TodoTest {
+class TodoTest {
     @Test
-    public void toStringTodoTest() {
+    void toStringTodoTest() {
         assertEquals("[T][-] Help me", new Todo("Help me").toString());
     }
 
     @Test
-    public void toDataStringTodoTest() {
+    void toDataStringTodoTest() {
         assertEquals("T | 0 | Help me", new Todo("Help me").toDataString());
     }
 }

@@ -19,7 +19,7 @@ import duke.Ui;
  */
 
 public abstract class Command {
-    String[] commandSplitBySpaces;
+    final String[] commandSplitBySpaces;
 
     /**
      * Constructor for all commands.

@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Represents a command which lists out the Tasks in the Tasklist.
+ * Represents a command which lists out the Tasks in the task list.
  *
  * @see TaskList
  * @see Task
@@ -31,7 +31,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        if (taskList.getTasks().size() == 0) {
+        if (taskList.getTasksSize() == 0) {
             throw new IllegalArgumentException("Nothing found in list");
         }
         String outputString = "";

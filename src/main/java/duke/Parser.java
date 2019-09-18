@@ -17,14 +17,8 @@ import java.util.InputMismatchException;
  *
  * @see Command
  */
-public class Parser {
-    static String stringCommand;
-
-    /**
-     * Default constructor for duke.Parser.
-     */
-    public Parser() {
-    }
+class Parser {
+    private static String stringCommand;
 
     /**
      * Converts a string given by user into actual command to be executed.

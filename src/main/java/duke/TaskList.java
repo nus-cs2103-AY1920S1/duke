@@ -13,7 +13,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor that takes in a Arraylist of tasks.
+     * Constructor that takes in a array list of tasks.
      *
      * @param tasks Arraylist of tasks
      */
@@ -28,6 +28,24 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    /**
+     * Gets the task at the index.
+     *
+     * @return task
+     */
+    public Task getTask(int number) {
+        return tasks.get(number);
+    }
+
+    /**
+     * Gets the size of the task list.
+     *
+     * @return the size of the task list
+     */
+    public int getTasksSize() {
+        return tasks.size();
     }
 
     /**

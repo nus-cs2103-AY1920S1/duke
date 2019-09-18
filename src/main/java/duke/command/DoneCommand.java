@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 
 /**
- * Represents a command which changes duke.task.Task specified in an index in the Tasklist to be done.
+ * Represents a command which changes duke.task.Task specified in an index in the task list to be done.
  *
  * @see TaskList
  * @see Task
@@ -43,7 +43,7 @@ public class DoneCommand extends Command {
 
             outputString = outputString + ui.printDoneMessage();
             for (Integer number : numbers) {
-                outputString = outputString + ui.printTask(taskList.getTasks().get(number - 1));
+                outputString = outputString + ui.printTask(taskList.getTask(number - 1));
                 taskList.done(number - 1);
             }
             return outputString;

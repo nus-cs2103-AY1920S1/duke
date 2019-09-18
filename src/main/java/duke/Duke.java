@@ -1,11 +1,6 @@
 package duke;
 
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
 import duke.command.Command;
-import duke.task.Task;
 
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -18,10 +13,10 @@ import java.util.ArrayList;
  *
  * @author hooncp
  */
-public class Duke {
+class Duke {
     private TaskList taskList;
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
     private boolean isExit;
 
     public Duke() {
@@ -34,15 +29,14 @@ public class Duke {
      *
      * @param filePath String representation of where the data file is stored
      */
-    public Duke(String filePath) {
+    private Duke(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
         isExit = false;
         try {
             taskList = new TaskList(storage.load());
         } catch (IOException e) {
-            ui.showLoadingError();
-            taskList = new TaskList(new ArrayList<Task>());
+            taskList = new TaskList(new ArrayList<>());
         }
     }
 
@@ -53,7 +47,7 @@ public class Duke {
      * @return output from duke.Duke
      */
     public String getResponse(String input) {
-        String output = "";
+        String output;
         //boolean isTestForAssertion = true;
         //assert isTestForAssertion = false;
         try {
@@ -61,7 +55,7 @@ public class Duke {
             assert command != null;
             output = command.execute(taskList, ui, storage);
         } catch (InputMismatchException | IllegalArgumentException
-                | IndexOutOfBoundsException | DateTimeException e) {
+                | DateTimeException e) {
             output = ui.printErrorMessage(e.getMessage());
         }
         return output;

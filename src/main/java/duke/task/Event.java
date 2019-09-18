@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @see Task
  */
 public class Event extends Task {
-    protected LocalDateTime at;
+    private LocalDateTime at;
 
     /**
      * Constructor for event.

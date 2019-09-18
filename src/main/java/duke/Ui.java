@@ -24,7 +24,7 @@ public class Ui {
      * @param taskList taskList used to store tasks
      */
     public String printNumberOfTasks(TaskList taskList) {
-        return ("Now you have " + taskList.getTasks().size()
+        return ("Now you have " + taskList.getTasksSize()
                 + " tasks in the list.") + "\n";
     }
 
@@ -93,7 +93,7 @@ public class Ui {
      * String representation of greetings for duke.Duke bot.
      */
     public String greet() {
-        return ("Hello! I'm duke.Duke\nWhat can I do for you?") + "\n";
+        return ("Beep Boop! I'm Duke\nWhat can I do for you?") + "\n";
     }
 
     /**
@@ -104,17 +104,10 @@ public class Ui {
     }
 
     /**
-     * String representation of the loading message error.
-     */
-    public String showLoadingError() {
-        return ("Error, file not found") + "\n";
-    }
-
-    /**
      * String representation of the message for the find command.
      */
     public String printFindMessage(ArrayList<Task> tasks) {
-        String outputString = "";
+        String outputString;
         outputString = "Here are the matching tasks in your list:\n";
         int count = 1;
         for (Task t : tasks) {

@@ -33,7 +33,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -51,7 +51,7 @@ public class MainWindow extends AnchorPane {
 
 
     /**
-     * Greets the user when Dukebot is initialised.
+     * Greets the user when Duke is initialised.
      */
     public void dukeGreet() {
         String input = duke.greeting();

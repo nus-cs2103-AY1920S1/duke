@@ -8,26 +8,17 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.time.DateTimeException;
 import java.util.InputMismatchException;
 
 /**
- * Represents a command which adds duke.task.Task to the Tasklist.
+ * Represents a command which adds duke.task.Task to the task list.
  *
  * @see TaskList
  * @see Task
  */
 public class AddCommand extends Command {
-    String type;
+    private final String type;
 
-    /**
-     * Constructor for duke.command.AddCommand
-     *
-     * @param commandSplitBySpaces String representation of the user input
-     */
-    public AddCommand(String[] commandSplitBySpaces) {
-        super(commandSplitBySpaces);
-    }
 
     /**
      * Constructor for duke.command.AddCommand
@@ -49,31 +40,48 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task addTask;
-        String outputString = "";
         switch (type) {
         case "todo":
-            String joinedString = String.join(" ", commandSplitBySpaces);
-            String details = joinedString.substring("todo".length()).trim();
-            addTask = new Todo(details);
+            addTask = createTodo();
             break;
         case "deadline":
-            if (commandSplitBySpaces.length == 1) {
-                throw new InputMismatchException("You are either missing description or time");
-            }
-            addTask = new Deadline(commandSplitBySpaces[0], commandSplitBySpaces[1]);
+            addTask = createDeadline();
             break;
         case "event":
-            if (commandSplitBySpaces.length == 1) {
-                throw new InputMismatchException("You are either missing description or time");
-            }
-            addTask = new Event(commandSplitBySpaces[0], commandSplitBySpaces[1]);
+            addTask = createEvent();
             break;
         default:
             throw new InputMismatchException("type not found");
         }
+        assert addTask != null;
+        taskList.add(addTask);
+        return createMessage(ui, addTask, taskList);
+    }
+
+    private Todo createTodo() {
+        String joinedString = String.join(" ", commandSplitBySpaces);
+        String details = joinedString.substring("todo".length()).trim();
+        return new Todo(details);
+    }
+
+    private Deadline createDeadline() {
+        if (commandSplitBySpaces.length == 1) {
+            throw new InputMismatchException("You are either missing description or time");
+        }
+        return new Deadline(commandSplitBySpaces[0], commandSplitBySpaces[1]);
+    }
+
+    private Event createEvent() {
+        if (commandSplitBySpaces.length == 1) {
+            throw new InputMismatchException("You are either missing description or time");
+        }
+        return new Event(commandSplitBySpaces[0], commandSplitBySpaces[1]);
+    }
+
+    private String createMessage(Ui ui, Task addTask, TaskList taskList) {
+        String outputString = "";
         outputString = outputString + ui.printAddedMessage();
         outputString = outputString + ui.printTask(addTask);
-        taskList.add(addTask);
         outputString = outputString + ui.printNumberOfTasks(taskList);
         return outputString;
     }

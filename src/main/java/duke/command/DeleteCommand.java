@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.InputMismatchException;
 
 /**
- * Represents a command which deletes duke.task.Task specified in an index in the Tasklist.
+ * Represents a command which deletes duke.task.Task specified in an index in the task list.
  *
  * @see TaskList
  * @see Task
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
             outputString = outputString + ui.printDeletedMessage();
 
             for (Integer number : numbers) {
-                outputString = outputString + ui.printTask(taskList.getTasks().get(number - 1));
+                outputString = outputString + ui.printTask(taskList.getTask(number - 1));
                 taskList.delete(number - 1);
             }
 

@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  * @see Task
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    private final LocalDateTime by;
 
     /**
      * Constructor for duke.task.Deadline.
@@ -36,7 +36,7 @@ public class Deadline extends Task {
     /**
      * Gets the String representation of the deadline.
      *
-     * @return the String representation of the deadlnie
+     * @return the String representation of the deadline
      */
     @Override
     public String toString() {

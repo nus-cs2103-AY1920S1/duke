@@ -7,7 +7,7 @@
 *deadlines* - tasks with specific deadlines  
 *events* - tasks with specific time and dates
 
-####**Usage**
+**Usage**
 
 `Keywords` - `todo`, `deadline`, `event`
 
@@ -26,21 +26,21 @@ Examples of usage:
 Expected outcomes:
 
 1. `Got it. I've added this task:`  
-`  [T][✘] watch Lord of the Rigs`  
-`Now you have 1 task in the list.`
+   `  [T][✘] watch Lord of the Rigs`  
+   `Now you have 1 task in the list.`
 
 2. `Got it. I've added this task:`  
-`  [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`  
-`Now you have 2 tasks in the list.`
+   `  [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`  
+   `Now you have 2 tasks in the list.`
 
 3. `Got it. I've added this task:`  
-`  [E][✘] attend seminar (at: 25/09/2019 1800)`  
-`Now you have 3 tasks in the list.`
+   `  [E][✘] attend seminar (at: 25/09/2019 1800)`  
+   `Now you have 3 tasks in the list.`
 
 ### **2. Edit tasks**
 Edits the description or the date and time of the task.
 
-####**Usage**
+**Usage**
 
 `Keyword`- `edit`
 
@@ -65,7 +65,7 @@ Expected outcomes:
 
 Marks the tasks that are in the task list as done.
 
-####**Usage**
+**Usage**
 
 `Keyword`- `done`
 
@@ -85,7 +85,7 @@ Expected outcome:
 
 Lists the tasks that are in the task list.
 
-####**Usage**
+**Usage**
 
 `Keyword`- `list`  
 
@@ -103,7 +103,7 @@ Expected outcome:
 
 Finds a specific task  in the task list.
 
-####**Usage**
+**Usage**
 
 `Keyword`- `find`  
 
@@ -124,7 +124,7 @@ Expected outcome:
 
 Deletes a specific task in the task list.
 
-####**Usage**
+**Usage**
 
 `Keyword`- `delete`
 
@@ -146,7 +146,7 @@ Expected outcome:
 
 Closes the application window. All tasks will be saved automatically.
 
-####**Usage**
+**Usage**
 
 `Keyword`- `bye`
 

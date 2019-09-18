@@ -14,7 +14,7 @@ public class Storage {
     }
 
     /**
-     * writes and saves all Task data into a txt file.
+     * Writes and saves all Task data into a txt file.
      * @param taskManager a TaskList object
      *
      */
@@ -26,7 +26,7 @@ public class Storage {
     }
 
     /**
-     * calls saveTask().
+     * Calls saveTask().
      * @param taskManager a TaskList object
      *
      */

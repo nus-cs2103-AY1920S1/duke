@@ -5,7 +5,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
+//@@author j-lum - reused
+//{CS2103 Java GUI tutorial}
 public class DialogBox extends HBox {
 
     private Label text;

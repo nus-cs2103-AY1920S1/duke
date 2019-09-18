@@ -1,0 +1,2 @@
+[T][✓] CS2103
+[D][✗] return book (by: 2 December 2019 at 0600 PM)

@@ -13,7 +13,7 @@ public class Task {
     }
 
     /**
-     * returns name of a Task instance.
+     * Returns name of a Task instance.
      *
      */
 
@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * sets isDone attribute to true, to denote a given Task instance is completed.
+     * Sets isDone attribute to true, to denote a given Task instance is completed.
      *
      */
     public boolean setCompleted() {
@@ -31,7 +31,7 @@ public class Task {
     }
 
     /**
-     * returns isDone value.
+     * Returns isDone value.
      *
      */
 

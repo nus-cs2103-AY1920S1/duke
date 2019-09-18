@@ -1,4 +1,7 @@
-# DukeBot User Guide
+# DukeBot User Guide [![Status](https://travis-ci.org/jiayushe/duke.svg?branch=master)](https://travis-ci.org/jiayushe/duke)
+
+## User Interface
+![UI](Ui.png)
 
 ## Features 
 

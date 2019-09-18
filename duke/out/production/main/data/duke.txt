@@ -1,2 +1,0 @@
-deadline 0 work /by 2/2/2019 1900
-deadline 0 meeting minutes /by 20 Mar 2019 12pm

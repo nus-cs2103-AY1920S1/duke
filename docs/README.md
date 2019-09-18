@@ -3,18 +3,15 @@
 ## Features 
 
 ### Feature 1 
-Description of feature.
+list all available task(s).
 
 ## Usage
 
-### `Keyword` - Describe action
+### list - list all task(s)
 
-Describe action and its outcome.
+list all available task(s).
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
-Expected outcome:
-
-`outcome`

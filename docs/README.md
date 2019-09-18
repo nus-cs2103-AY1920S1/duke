@@ -129,6 +129,7 @@ Expected outcome:
 
 
 ## Command list
+
 Command | Syntax
 ------- | ------
 Adding task | todo [description]

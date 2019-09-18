@@ -3,11 +3,23 @@ package duke.command;
 import duke.exception.InvalidTaskIndexDukeException;
 import duke.task.TaskList;
 
+/**
+ * A command that deletes a task from TaskList when executed.
+ */
 public class DeleteCommand extends CommandWithIndex {
+    /**
+     * Constructs a DeleteCommand that deletes a task.
+     * @param index The index of the task to delete.
+     */
     public DeleteCommand(int index) {
         super(index);
     }
 
+    /**
+     * Deletes the task with the index in the TaskList.
+     * @param tasks The TaskList to delete the task from.
+     * @return A string confirming the deletion of the Task.
+     */
     @Override
     public String execute(TaskList tasks) {
         try {

@@ -15,16 +15,16 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Creates an empty task list if there is no previous session of Duke, or no tasks in the task list.
+     * Creates an empty task list if there is no previous session of Task Chick, or no tasks in the task list.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Fills the new  task list with tasks from previous session of Duke.
+     * Fills the new  task list with tasks from previous session of Task Chick.
      *
-     * @param savedTasks Task list from the previous session of Duke.
+     * @param savedTasks Task list from the previous session of Task Chick.
      */
     public TaskList(ArrayList<Task> savedTasks) {
         tasks = new ArrayList<>();
@@ -198,7 +198,7 @@ public class TaskList {
         } else if (numResults > 1) {
             return "You have " + numResults + " tasks containing the term \"" + searchTerm + "\":";
         } else {
-            return "OOPS!!! Duke has encountered an unexpected error.";
+            return "OOPS!!! Task Chick has encountered an unexpected error.";
         }
     }
 
@@ -250,7 +250,7 @@ public class TaskList {
         } else if (listSize > 1) {
             return "You have " + listSize + " tasks on that day:\n";
         } else {
-            return "OOPS!!! Duke encountered an unexpected error.";
+            return "OOPS!!! Task Chick encountered an unexpected error.";
         }
     }
 

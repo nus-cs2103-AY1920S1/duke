@@ -4,7 +4,7 @@ import taskchick.tasklist.TaskList;
 import taskchick.storage.Storage;
 
 /**
- * Command to end the Duke session.
+ * Command to end the Task Chick session.
  */
 public class ExitCommand extends Command {
 

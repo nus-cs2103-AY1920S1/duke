@@ -26,7 +26,7 @@ public class UpdateCommand extends Command {
     }
 
     /**
-     * Parses the command given to Duke and creates a UpdateCommand if possible.
+     * Parses the command given to Task Chick and creates a UpdateCommand if possible.
      *
      * @param fullCommand Full command split by whitespace.
      * @return UpdateCommand object to be created.

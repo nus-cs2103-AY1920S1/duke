@@ -21,7 +21,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Parses the command given to Duke and creates a FindCommand if possible.
+     * Parses the command given to Task Chick and creates a FindCommand if possible.
      *
      * @param fullCommand Full command split by the first whitespace.
      * @return FindCommand object to be created.

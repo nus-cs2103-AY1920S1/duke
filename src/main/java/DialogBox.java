@@ -53,7 +53,7 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img, "#4996f5", "#ffffff");
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getTaskChickDialog(String text, Image img) {
         var db = new DialogBox(text, img, "#e5e5e9", "#000000");
         db.flip();
         return db;

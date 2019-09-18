@@ -24,7 +24,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Parses the command given to Duke and creates a deadline task if possible.
+     * Parses the command given to Task Chick and creates a deadline task if possible.
      *
      * @param fullCommand Full command split by the word "deadline".
      * @return Deadline object created.

@@ -4,7 +4,7 @@ import taskchick.tasklist.TaskList;
 import taskchick.storage.Storage;
 
 /**
- * Command to guide users on how to use Duke.
+ * Command to guide users on how to use Task Chick.
  */
 public class HelpCommand extends Command {
 

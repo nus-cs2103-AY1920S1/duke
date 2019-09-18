@@ -23,7 +23,7 @@ public class CompleteCommand extends Command {
     }
 
     /**
-     * Parses the command given to Duke and creates a CompleteCommand if possible.
+     * Parses the command given to Task Chick and creates a CompleteCommand if possible.
      *
      * @param fullCommand Full command split by whitespace.
      * @return CompleteCommand object to be created.

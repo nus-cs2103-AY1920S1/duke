@@ -3,7 +3,7 @@ package taskchick.datetime;
 import taskchick.exception.TaskChickException;
 
 /**
- * Enables Duke to understand date and times.
+ * Enables Task Chick to understand date and times.
  */
 public class DateTime {
 
@@ -13,7 +13,7 @@ public class DateTime {
     private int time;
 
     /**
-     * Initialises appropriate date and time fields for Duke to understand.
+     * Initialises appropriate date and time fields for Task Chick to understand.
      *
      * @param year 4-digit integer.
      * @param month Integer value of the month.

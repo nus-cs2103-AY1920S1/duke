@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     /**
-     * Parses the command given to Duke and creates a event task if possible.
+     * Parses the command given to Task Chick and creates a event task if possible.
      *
      * @param fullCommand Full command split by the word "event".
      * @return Event object created.

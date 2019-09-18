@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Parses the command given to Duke and creates a DeleteCommand if possible.
+     * Parses the command given to Task Chick and creates a DeleteCommand if possible.
      *
      * @param fullCommand Full command split by whitespace.
      * @return DeleteCommand object to be created.

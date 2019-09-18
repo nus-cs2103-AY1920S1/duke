@@ -17,7 +17,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Parses the command given to Duke and creates a Todo task if possible.
+     * Parses the command given to Task Chick and creates a Todo task if possible.
      *
      * @param fullCommand Full command split by the word "todo".
      * @return Todo task created.

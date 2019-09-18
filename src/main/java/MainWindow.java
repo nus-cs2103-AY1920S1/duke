@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(TaskChick tc) {
+    public void setTaskChick(TaskChick tc) {
         taskChick = tc;
     }
 
@@ -46,7 +46,7 @@ public class MainWindow extends AnchorPane {
         String response = taskChick.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, chickyImage)
+                DialogBox.getTaskChickDialog(response, chickyImage)
         );
         userInput.clear();
         // ends the program when user inputs "bye"
@@ -62,11 +62,12 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Displays welcome message to user when they first open Duke.
+     * Displays welcome message to user when they first open Task Chick.
      */
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello, I'm Task Chick!\n\nWhat can I do for you today?\n\nEnter "
+                DialogBox.getTaskChickDialog("Hello, I'm Task Chick!\n\nWhat can I do for you " +
+                        "today?\n\nEnter "
                                 + "'help' to see how you can use me ^_^", chickyImage)
         );
     }

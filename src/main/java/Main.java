@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Task Chick using FXML.
  */
 public class Main extends Application {
 
@@ -19,7 +19,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(taskChick);
+            fxmlLoader.<MainWindow>getController().setTaskChick(taskChick);
             fxmlLoader.<MainWindow>getController().showWelcome();
             stage.setTitle("Task Chick - Chicky to keep you on track!");
             stage.show();

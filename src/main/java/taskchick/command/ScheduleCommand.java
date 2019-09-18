@@ -21,11 +21,12 @@ public class ScheduleCommand extends Command {
     }
 
     /**
-     * Parses the command given to Duke and creates a ScheduleCommand if possible.
+     * Parses the command given to Task Chick and creates a ScheduleCommand if possible.
      *
      * @param fullCommand Full command split by whitespace.
      * @return ScheduleCommand object to be created.
-     * @throws NumberFormatException If date given is not in number format (eg. 9/Sep/2019).
+     * @throws TaskChickException If date given is not in number format (eg. 9/Sep/2019), or not in
+     * dd/mm/yyyy format.
      */
     public static ScheduleCommand process(String[] fullCommand) throws TaskChickException {
         try {

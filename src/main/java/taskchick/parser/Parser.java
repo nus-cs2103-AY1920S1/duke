@@ -22,7 +22,7 @@ import taskchick.task.Todo;
 public class Parser {
 
     /**
-     * Reads commands give to Duke.
+     * Reads commands give to Task Chick.
      * Creates the appropriate command object.
      *
      * @param fullCommand Whole command where the first word will be extracted.

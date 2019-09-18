@@ -1,16 +1,12 @@
 #GoodMorning
-
 ![Image of GoodMorning](assets/goodmorning.png)
 
 GoodMorning is a chat bot that can assist you in your daily tasks.
-
 # User Guide
-
 ###Outline
 1. Features
 1. Usage
 1. Command list
-
 ## Features 
 1. Task management
 1. Display upcoming tasks

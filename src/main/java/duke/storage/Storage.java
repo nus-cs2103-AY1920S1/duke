@@ -40,6 +40,7 @@ public class Storage {
         try {
             File f = new File(filepath);
             if (!f.exists()) {
+                f.getParentFile().mkdirs();
                 f.createNewFile();
             }
             BufferedReader bufferedReader = new BufferedReader(new FileReader(f));

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 /**
  * Represents a system that deals with user interaction, for example, printing 
- * welcome messages and prmopts.
+ * welcome messages and prompts.
  */
 public class Ui {
 
@@ -45,6 +45,13 @@ public class Ui {
     public String showWelcomeGui() {
         return "Hello from TSINGHUA\n"
                     + "\nHello! I'm Tsinghua : )\nWhat can I do for you?";
+    }
+
+    public String askForFilePath() {
+        return "Please specify the path where your tasks are stored, "
+                + "in the following format: \nload  {complete file path}/{filename}\n"
+                + "You could omit the complete file path and only specify a file name, "
+                + "in which case the file will be stored into and read from the current directory.";
     }
 
     /**
@@ -211,7 +218,9 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> list = tasks.getList();
         list.forEach(t -> sb.append(list.indexOf(t) + 1 + "." + t + "\n"));
-        sb.setLength(sb.length() - 1);
+        if (sb.length() > 1) {
+            sb.setLength(sb.length() - 1);
+        }
         return "Here are the tasks in your list:\n" + sb.toString();
     }
 
@@ -263,7 +272,9 @@ public class Ui {
                 .filter(t -> t.toString().contains(keyword))
                 .collect(Collectors.toList());
         results.forEach(t -> sb.append(results.indexOf(t) + 1 + "." + t + "\n"));
-        sb.setLength(sb.length() - 1);
+        if (sb.length() > 1) {
+            sb.setLength(sb.length() - 1);
+        }
         return "Here are the matching tasks in your list:\n" + sb.toString();
     }
 

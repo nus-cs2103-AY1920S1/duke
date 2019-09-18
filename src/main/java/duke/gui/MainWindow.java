@@ -57,16 +57,24 @@ public class MainWindow extends AnchorPane {
                         dukeImage));
     }
 
+    public void askForFilePath() {
+        String askForFilePathMessage = new Ui().askForFilePath();
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(
+                        askForFilePathMessage,
+                        dukeImage));
+    }
+
     /**
      * Shows the result of loading past tasks from the local file.
      */
-    public void load() {
+/*    public void load() {
         String message = duke.loadTasks();
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
                         message,
                         dukeImage));
-    }
+    }*/
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to

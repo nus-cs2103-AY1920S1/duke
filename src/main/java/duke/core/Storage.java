@@ -2,6 +2,8 @@ package duke.core;
 
 import duke.task.Task;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,6 +29,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     /**
      * Loads tasks from the file into a <code>ArrayList</code> of 
      * <code>Task</code>.
@@ -35,19 +41,21 @@ public class Storage {
      * @throws DukeException If file is not found.
      */
     public ArrayList<Task> load() throws DukeException {
+        File duke = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            Scanner fileScanner = new Scanner(this.getClass().getResourceAsStream("/data/tasks.txt"));
+            Scanner fileScanner = new Scanner(duke);
             while (fileScanner.hasNext()) {
                 String nextLine = fileScanner.nextLine();
                 String[] words = nextLine.split(" \\| ");
                 Task t = Parser.parseTaskFromFile(words);
                 tasks.add(t);
             }
-            return tasks;
-        } catch (NullPointerException | DukeException e) {
-            throw new DukeException("Loading failed.");
+        } catch (FileNotFoundException | DukeException e) {
+            throw new DukeException("Oops, there seems to be no existing file...\n"
+                    + "A new file will be created once you add a task.");
         }
+        return tasks;
     }
 
     /**
@@ -64,11 +72,10 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Failed to save tasks :-(");
+            throw new DukeException("Failed to save task to the local file :-(");
         }
     }
 }
-
 
 
 

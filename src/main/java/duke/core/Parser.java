@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.LoadCommand;
 import duke.command.UpdateCommand;
 
 import duke.task.Task;
@@ -210,7 +211,7 @@ public class Parser {
             if (words.length < 2) {
                 throw new DukeException("OOPS!!! The keyword of a \"find\" command cannot be empty.");
             }
-            return new FindCommand(words[1]);
+            return new FindCommand(instruction.substring(5));
         case "update":
             String newValue = subString(words, 3, words.length);
             if (words[2].equals("description")) {
@@ -225,6 +226,8 @@ public class Parser {
             }
             Task t = parseTaskFromInstruction(words);
             return new AddCommand(t);
+        case "load":
+            return new LoadCommand(instruction.substring(5));
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means...\n"
                     + "The first word of your instruction seems to be an invalid command :-(");

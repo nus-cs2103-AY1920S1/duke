@@ -38,7 +38,8 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
             fxmlLoader.<MainWindow>getController().showWelcome();
-            fxmlLoader.<MainWindow>getController().load();
+            fxmlLoader.<MainWindow>getController().askForFilePath();
+            //fxmlLoader.<MainWindow>getController().load();
             fxmlLoader.<MainWindow>getController().isExit.addListener((observable, oldValue, newValue) -> {
                 if (oldValue != newValue) {
                     //@@author James_D-reused

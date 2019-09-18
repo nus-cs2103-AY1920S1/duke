@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 
+import duke.command.LoadCommand;
 import duke.core.DukeException;
 import duke.core.Parser;
 import duke.core.Storage;
@@ -37,13 +38,8 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        assert new File("data/tasks.txt").exists() : "tasks.txt not found";
-        storage = new Storage("data/tasks.txt");
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            tasks = new TaskList();
-        }
+        storage = new Storage("");
+        tasks = new TaskList();
     }
 
     /**
@@ -65,6 +61,7 @@ public class Duke {
             tasks = new TaskList();
         }
     }
+
 
     /**
      * Shows the result of loading past tasks from the local file.
@@ -120,11 +117,15 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            if (input.equals("Who's Asia No.1 university?")) {
+            if (input.equals("Who's Asia's No.1 university?")) {
                 return "You";
             } else {
                 Command c = Parser.parse(input);
-                return c.executeGui(tasks, ui, storage);
+                String executionOutcome = c.executeGui(tasks, ui, storage);
+                if (c instanceof LoadCommand) {
+                    tasks = new TaskList(storage.load());
+                }
+                return executionOutcome;
             }
         } catch (DukeException e) {
             return ui.showErrorGui(e.getMessage());

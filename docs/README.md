@@ -1,5 +1,5 @@
 # User Guide
-
+![Screenshot of Duke GUI](Ui.png)
 ### Overview 
 Duke is used to track your daily tasks
 

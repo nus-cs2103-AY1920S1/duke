@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -43,7 +44,12 @@ class Storage {
      */
     void persist(TaskList tasks) throws DukeException {
         try {
-            FileOutputStream fout = new FileOutputStream(this.filePath);
+            // Create file if it does not exist
+            File file = new File(this.filePath);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+
+            FileOutputStream fout = new FileOutputStream(file, false);
             ObjectOutputStream oos = new ObjectOutputStream(fout);
 
             oos.writeObject(tasks);

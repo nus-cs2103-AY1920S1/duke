@@ -26,6 +26,6 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks) throws InvalidArgumentException {
         tasks.get(taskId).markAsDone();
         Ui.printMessages("Nice! I've marked this task as done:",
-            "  " + tasks.get(taskId + 1).toString());
+            "  " + tasks.get(taskId).toString());
     }
 }

@@ -54,7 +54,7 @@ public class TaskList {
      */
     public void update(int index, Task newTask) throws InvalidArgumentException {
         if (!isValidIndex(index)) {
-            throw new InvalidArgumentException("No task with id " + index + " exists.");
+            throw new InvalidArgumentException("No task with id " + (index + 1) + " exists.");
         }
         this.tasks.set(index, newTask);
     }
@@ -67,7 +67,7 @@ public class TaskList {
      */
     public Task remove(int index) throws InvalidArgumentException {
         if (!isValidIndex(index)) {
-            throw new InvalidArgumentException("No task with id " + index + " exists.");
+            throw new InvalidArgumentException("No task with id " + (index + 1) + " exists.");
         }
         return tasks.remove(index);
     }

@@ -34,7 +34,7 @@ public class DeadlineCommand extends Command {
     @Override
     public void execute(TaskList tasks) throws InvalidArgumentException {
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMd HHmm HHmm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMd HHmm");
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateString);
             Deadline deadline = new Deadline(description, date);
@@ -43,7 +43,7 @@ public class DeadlineCommand extends Command {
                 "  " + deadline.toString(),
                 "Now you have " + tasks.size() + " tasks in the list.");
         } catch (ParseException pe) {
-            throw new InvalidArgumentException("Date input is not in the right format yyyyMMd HHmm HHmm", pe);
+            throw new InvalidArgumentException("Date input is not in the right format yyyyMMd HHmm", pe);
         }
     }
 }

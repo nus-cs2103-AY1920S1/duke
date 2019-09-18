@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks) throws InvalidArgumentException {
-        Task taskToRemove = tasks.remove(taskId + 1);
+        Task taskToRemove = tasks.remove(taskId);
         Ui.printMessages("Noted. I've removed this task:",
             "  " + taskToRemove.toString(),
             "Now you have " + tasks.size() + " tasks in the list.");

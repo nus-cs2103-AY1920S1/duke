@@ -28,9 +28,10 @@ public class Main extends Application {
             scene.getStylesheets().add("/view/Style.css");
             stage.setScene(scene);
             stage.show();
+            stage.setTitle("Mr. Dukie");
             VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("Hello! I'm Duke.\nWhat can I do for you?", dukeImage)
+                    DialogBox.getDukeDialog("Hello! I'm Mr. Dukie.\nWhat can I do for you?", dukeImage)
             );
         } catch (IOException e) {
             e.printStackTrace();

@@ -67,8 +67,12 @@ public class Ui {
      * @param list list of task to be printed.
      */
     public void printList(ArrayList<Task> list) {
-        for (int i = 1; i <= list.size(); i++) {
-            s += i + ". " + list.get(i - 1) + "\n";
+        if (list.isEmpty()) {
+            s += "There are no tasks in your list.";
+        } else {
+            for (int i = 1; i <= list.size(); i++) {
+                s += i + ". " + list.get(i - 1) + "\n";
+            }
         }
     }
 
@@ -78,11 +82,15 @@ public class Ui {
      * @param list list of reminders to be printed.
      */
     public void printReminder(ArrayList<Task> list) {
-        s += "Reminders:\n";
-        for (int i = 1; i <= list.size(); i++) {
-            Task curr = list.get(i - 1);
-            if (curr.getDiffDays() <= 3 && curr.getDiffDays() >= 0) {
-                s += curr + "\n";
+        if (list.isEmpty()) {
+            s += "There are no tasks in your list.";
+        } else {
+            s += "Reminders:\n";
+            for (int i = 1; i <= list.size(); i++) {
+                Task curr = list.get(i - 1);
+                if (curr.getDiffDays() <= 3 && curr.getDiffDays() >= 0) {
+                    s += curr + "\n";
+                }
             }
         }
     }

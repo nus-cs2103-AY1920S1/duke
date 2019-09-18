@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -37,6 +38,10 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
+        clip.setArcWidth(55);
+        clip.setArcHeight(55);
+        displayPicture.setClip(clip);
     }
 
     /**

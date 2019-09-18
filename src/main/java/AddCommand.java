@@ -46,7 +46,7 @@ public class AddCommand extends Command {
      * @param ui User Interface.
      * @param storage Storage of tasks.txt files.
      */
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         String cmd = this.getCommand();
         Task newTask;
         if (cmd.equals("deadline")) {
@@ -59,6 +59,8 @@ public class AddCommand extends Command {
         tasks.addTask(newTask);
         this.newTask = newTask;
         this.tasks = tasks;
+
+        storage.save(tasks);
     }
 
     public boolean isExit() {

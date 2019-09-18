@@ -40,6 +40,8 @@ public class DeleteCommand extends Command {
 
         this.deletedTask = deletedTask;
         this.tasks = tasks;
+
+        storage.save(tasks);
     }
 
     public boolean isExit() {

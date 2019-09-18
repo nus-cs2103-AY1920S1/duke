@@ -33,8 +33,8 @@ public class MainWindow extends AnchorPane {
 
         //adding start up message
         String message = "Hello! I'm Duke!\n"
-                + "What can I do for you?\n"
-                + "Remember to type 'bye' to save before exiting!";
+                + "What can I do for you?\n\n"
+                + "Type `help` to view user commands.";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
     }
 

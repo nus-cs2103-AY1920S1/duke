@@ -26,6 +26,8 @@ public class Parser {
         try {
             if (cmd.equals("list")) {
                 nextCommand = new ShowCommand(cmd);
+            } else if (cmd.equals("help")) {
+                nextCommand = new HelpCommand(cmd);
             } else if (cmd.equals("find")) {
                 String desc = inputArr[1].trim();
                 nextCommand = new FindCommand(cmd, desc);

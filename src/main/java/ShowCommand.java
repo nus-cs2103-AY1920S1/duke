@@ -8,7 +8,7 @@ public class ShowCommand extends Command {
 
     /**
      * Represents an action to display their tasks.
-     * @param command Type of task
+     * @param command Type of task.
      */
     public ShowCommand(String command) {
         super(command);

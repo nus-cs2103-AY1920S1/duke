@@ -27,9 +27,12 @@ E.g. event SkillsFuture Seminar /at 15/9/2019 1400
 - Commands are **CASE-SENSITIVE**
 - Date format **MUST** be followed strictly.
 
-### 1. To view all tasks: **`list`**
+### 1. View user commands
+Format: `help`
+
+### 2. View all tasks: **`list`**
 Format: `list`
-### 2. To add a new task: **`todo`**, **`event`**, **`deadline`**
+### 3. Add a new task: **`todo`**, **`event`**, **`deadline`**
 Adds a new task into the task manager. <br />
 #### There are 3 types of tasks you can add into Duke:
 1. `todo` task - A to-do task which requires description only.
@@ -44,27 +47,24 @@ Adds a new task into the task manager. <br />
 2. `deadline Submission of Maths Worksheet /by 29/9/2019 1300`
 3. `event John's birthday /at 1/8/2020 1800`
 
-### 3. Find task using a keyword: **`find`**
+### 4. Find task using a keyword: **`find`**
 Format: `find <keyword>`
 
 #### Examples:
 1. `find workshop`
 2. `find Project work`
 
-### 4. Mark a task as done: **`done`**
+### 5. Mark a task as done: **`done`**
 Format: `done <index of task on list>`
 
 #### Example:
 1. done 3
 
-### 5. Delete a task: **`delete`**
+### 6. Delete a task: **`delete`**
 Format: `delete <index of task on list>`
 
 #### Example:
 1. delete 2
-
-### 6. Save your progress: **`bye`**
-Format: `bye`
 
 ### 7. View your schedule for a specific date: **`view`**
 Format: `view <date>` (date format: dd/mm/yyyy)
@@ -73,19 +73,23 @@ Format: `view <date>` (date format: dd/mm/yyyy)
 1. `view 29/10/2019`
 2. `view 1/2/2019`
 
+### 8. Exit the program: **`bye`**
+Format: `bye`
+
 ## FAQ
 *Q*: Where is the tasks file saved at? <br />
 *A*: Go to the directory where you put your `duke.jar` at. 
 There is a `data` folder created and it contains your `tasks.txt` file.
 
 ## Command Summary
-1. To view tasks: `list`
-2. To add a new task:
+1. View user commands: `help`
+2. View tasks: `list`
+3. Add a new task:
 	- `todo <description>`
 	- `deadline <description> /by <date & time>`
-	- `event <description> /at <date & time`
-3. Find: `find <keyword>`
-4. Mark task as done: `done <index of task on list>`
-5. Delete task: `delete <index of task on list>`
-6. Save: `bye`
+	- `event <description> /at <date & time>`
+4. Find: `find <keyword>`
+5. Mark task as done: `done <index of task on list>`
+6. Delete task: `delete <index of task on list>`
 7. View schedule by date: `view <date>`
+8. Exit the program: `bye`

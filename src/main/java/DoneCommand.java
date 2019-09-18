@@ -37,6 +37,8 @@ public class DoneCommand extends Command {
         Task doneTask = tasks.getTask(this.getIndex());
         tasks.markTaskDone(this.getIndex());
         this.doneTask = doneTask;
+
+        storage.save(tasks);
     }
 
     public boolean isExit() {

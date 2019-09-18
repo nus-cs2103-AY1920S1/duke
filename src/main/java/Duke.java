@@ -15,6 +15,8 @@ import tool.Storage;
 import tool.TaskList;
 import tool.Ui;
 
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 
@@ -28,7 +30,7 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private static Storage storage = new Storage("src/main/java/data/duke.txt");
+    private static Storage storage = new Storage("./duke.txt");
 
 
     public static void main(String[] args) {

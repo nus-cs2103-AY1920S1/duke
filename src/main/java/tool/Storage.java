@@ -98,7 +98,7 @@ public class Storage {
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
-            FileWriter ff = new FileWriter("src/main/java/data/temp.txt", true);
+            FileWriter ff = new FileWriter("./temp.txt", true);
             int j = 1;
             String x;
             while ((x = br.readLine()) != null) {
@@ -109,8 +109,8 @@ public class Storage {
                 j++;
             }
             ff.close();
-            Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-            Files.delete(Paths.get("src/main/java/data/temp.txt"));
+            Files.copy(Paths.get("./temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+            Files.delete(Paths.get("./temp.txt"));
         } catch (IOException e) {
 //            e.printStackTrace();
             System.out.println("Error occurred deleting task in file");
@@ -126,7 +126,7 @@ public class Storage {
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
-            FileWriter ff = new FileWriter("src/main/java/data/temp.txt", true);
+            FileWriter ff = new FileWriter("./temp.txt", true);
             String x;
             int i = 1;
             while ((x = br.readLine()) != null) {
@@ -138,8 +138,8 @@ public class Storage {
                 i++;
             }
             ff.close();
-            Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get("src/main/java/data/duke.txt"), StandardCopyOption.REPLACE_EXISTING);
-            Files.delete(Paths.get("src/main/java/data/temp.txt"));
+            Files.copy(Paths.get("./temp.txt"), Paths.get("./duke.txt"), StandardCopyOption.REPLACE_EXISTING);
+            Files.delete(Paths.get("./temp.txt"));
         } catch (IOException e) {
 //            e.printStackTrace();
             System.out.println("Error occurred updating status of task.");
@@ -150,18 +150,18 @@ public class Storage {
         try {
             FileReader fr = new FileReader(filePath);
             BufferedReader br = new BufferedReader(fr);
-            FileWriter ff = new FileWriter("src/main/java/data/temp.txt", true);
+            FileWriter ff = new FileWriter("./temp.txt", true);
             String x;
             for (Task t : tasks.getList()) {
                     ff.write(t.storageString() + System.lineSeparator());
                     ff.flush();
             }
             ff.close();
-            Files.copy(Paths.get("src/main/java/data/temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
-            Files.delete(Paths.get("src/main/java/data/temp.txt"));
+            Files.copy(Paths.get("./temp.txt"), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+            Files.delete(Paths.get("./temp.txt"));
         } catch (IOException e) {
 //            e.printStackTrace();
-            System.out.println("Error occurred saving tasks to textfile.");
+            System.out.println("Error occurred saving tasks to text file.");
         }
     }
 }

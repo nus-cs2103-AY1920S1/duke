@@ -34,7 +34,7 @@ public class SaveToFile {
      */
     public ArrayList<Tasks> load() throws DukeException {
         ArrayList<Tasks> taskList = new ArrayList<>();
-        Scanner sc = new Scanner(filePath);
+        /*Scanner sc = new Scanner(filePath);
         while (sc.hasNext()) {
             String nextTask = sc.nextLine();
             String[] details = nextTask.split(" | ");
@@ -67,7 +67,7 @@ public class SaveToFile {
             default:
                 throw new DukeException();
             }
-        } 
+        } */
         return taskList;
     }
 

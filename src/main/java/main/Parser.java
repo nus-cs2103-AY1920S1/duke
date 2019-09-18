@@ -54,7 +54,7 @@ public class Parser {
             c = new AdminCommand(commandComponents[0]);
         } else if (commandComponents[0].equals("done")) {
             c = new AdminCommand(commandComponents[0], Integer.parseInt(commandComponents[1]));
-        } else if (commandComponents[0].equals("delete")) {
+        } else if (commandComponents[0].equals("delete") && commandComponents.length == 2) {
             c = new DeleteCommand(Integer.parseInt(commandComponents[1]));
         } else if (commandComponents[0].equals("bye")) {
             c = new ExitCommand();

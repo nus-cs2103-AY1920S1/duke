@@ -10,7 +10,7 @@ import duke.util.TextUi;
 public class ListCommand extends Command {
 
     /**
-     * Creates a new ListCommand, which requires no other details,
+     * Creates a new ListCommand, which requires no other details.
      */
     public ListCommand() {
         super(false);

@@ -8,11 +8,11 @@ public class TextUi {
 
     /* STATIC VARIABLES */
 
-    /** Horizontal line of width 60 characters */
+    /** Horizontal line of width 60 characters. */
     private static final String HORIZONTAL_LINE =
             "____________________________________________________________";
 
-    /** Four space indentation */
+    /** Four space indentation. */
     private static final String INDENT = "    ";
 
     /* METHODS TO DISPLAY OUTPUT */

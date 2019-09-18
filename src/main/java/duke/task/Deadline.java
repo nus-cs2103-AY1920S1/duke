@@ -9,14 +9,14 @@ import java.time.LocalDateTime;
  */
 public class Deadline extends Task {
 
-    /** Due date of task */
+    /** Due date of task. */
     private LocalDateTime dueDateTime;
 
     /**
      * Creates a new Deadline with the given description and due date.
      *
-     * @param description       Task to be completed.
-     * @param dueDateTime                Due date for the Deadline.
+     * @param description Task to be completed.
+     * @param dueDateTime Due date for the Deadline.
      */
     public Deadline(String description, String dueDateTime) {
         super(description);
@@ -40,7 +40,7 @@ public class Deadline extends Task {
     /**
      * Returns the letter "D", representing the type Deadline.
      *
-     * @return  The letter "D" in a String.
+     * @return The letter "D" in a String.
      */
     @Override
     public String getType() {
@@ -52,7 +52,7 @@ public class Deadline extends Task {
      * date or time, in an appropriate format for data storage. The due date is
      * formatted according to the default DateTimeFormatter given by DateParser.
      *
-     * @return  String representing the current Deadline.
+     * @return String representing the current Deadline.
      */
     @Override
     public String formatAsData() {
@@ -65,7 +65,7 @@ public class Deadline extends Task {
      * and deadline. The deadline is formatted according to the default
      * DateTimeFormatter given by DateParser.
      *
-     * @return  String describing the Deadline.
+     * @return String describing the Deadline.
      */
     @Override
     public String toString() {

@@ -46,7 +46,7 @@ public class TaskList { // TODO: extend List<Task>
     }
 
     /**
-     * Adds a Task to the TaskList
+     * Adds a Task to the TaskList.
      *
      * @param newTask   Task to be added.
      */

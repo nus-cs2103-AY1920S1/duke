@@ -67,7 +67,7 @@ public class Parser {
      */
     public static Priority parsePriority(String input) throws DukeException {
         String trimmedInput = input.strip();
-        switch(trimmedInput) {
+        switch (trimmedInput) {
         case "high":
             return Priority.HIGH;
         case "quite":

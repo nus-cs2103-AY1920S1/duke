@@ -27,6 +27,10 @@ public class MainWindow {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Dog.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Snowball.png"));
 
+    /**
+     * Initialises the scroll pane's vvalue property  and adds a welcome message
+     * to the dialogue container.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

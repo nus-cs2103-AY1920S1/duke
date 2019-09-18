@@ -17,9 +17,9 @@ public class DateParser {
      * where EEE is the day of week (e.g. Mon, Fri).
      */
     public static final DateTimeFormatter[] DATE_FORMATS = {
-            DateTimeFormatter.ofPattern("EEE, d MMM yy, HH:mm"),
-            DateTimeFormatter.ofPattern("d-MM-yy HH:mm"),
-            DateTimeFormatter.ISO_DATE_TIME
+        DateTimeFormatter.ofPattern("EEE, d MMM yy, HH:mm"),
+        DateTimeFormatter.ofPattern("d-MM-yy HH:mm"),
+        DateTimeFormatter.ISO_DATE_TIME
     };
 
     /**

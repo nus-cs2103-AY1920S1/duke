@@ -52,7 +52,7 @@ public class HardDiskStorage implements Storage {
                 boolean isDone = Task.checkStatus(details[1]);
                 int priorityNumber = Integer.parseInt(details[2]);
                 Priority taskPriority = Priority.values()[priorityNumber];
-                switch(details[0]) {
+                switch (details[0]) {
                 case "T":
                     taskList.add(new Todo(details[3], isDone, taskPriority));
                     break;

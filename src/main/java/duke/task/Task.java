@@ -31,29 +31,33 @@ public class Task {
      * checking of status icons.
      */
     private Task() {
-        this("", true);
+        this("", true, Priority.NONE);
     }
 
     /**
-     * Creates a new undone Task with the given description.
+     * Creates a new undone Task with the given description. By default, Tasks
+     * are created with Priority level NONE.
      *
      * @param description Description of the Task. Description length should
      *                    be at most 50 characters (for now).
      */
     public Task(String description) {
-        this(description, false);
+        this(description, false, Priority.NONE);
     }
 
     /**
-     * Creates a new Task with the given description and isDone status.
+     * Creates a new Task with the given description, isDone status and level of
+     * Priority.
      *
      * @param description Description of the Task. Description length should
      *                    be at most 50 characters (for now).
+     * @param isDone Whether the Task has been completed or not.
+     * @param priority Level of priority for the Task.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, Priority priority) {
         this.description = description;
         this.isDone = isDone;
-        this.priority = Priority.NONE;
+        this.priority = priority;
     }
 
     /**

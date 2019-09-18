@@ -50,25 +50,23 @@ public class HardDiskStorage implements Storage {
                 String task = fileScanner.nextLine();
                 String[] details = task.split(" \\| ");
                 boolean isDone = Task.checkStatus(details[1]);
-                Task newTask;
+                int priorityNumber = Integer.parseInt(details[2]);
+                Priority taskPriority = Priority.values()[priorityNumber];
                 switch(details[0]) {
                 case "T":
-                    newTask = new Todo(details[3], isDone);
+                    taskList.add(new Todo(details[3], isDone, taskPriority));
                     break;
                 case "E":
-                    newTask = new Event(details[3], details[4], isDone);
+                    taskList.add(new Event(details[3], details[4], isDone, taskPriority));
                     break;
                 case "D":
-                    newTask = new Deadline(details[3], details[4], isDone);
+                    taskList.add(new Deadline(details[3], details[4], isDone, taskPriority));
                     break;
                 default:
-                    newTask = new Task("This task could not be parsed "
-                            + "from the given data file.");
+                    taskList.add(new Task("This task could not be parsed "
+                            + "from the given data file."));
                     break;
                 }
-                int taskPriorityLevel = Integer.parseInt(details[2]);
-                newTask.setPriority(Priority.values()[taskPriorityLevel]);
-                taskList.add(newTask);
             }
             return taskList;
         } catch (FileNotFoundException e) {

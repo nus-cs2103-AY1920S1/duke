@@ -8,7 +8,7 @@ public class Todo extends Task {
     /**
      * Creates a new Todo task with the given description.
      *
-     * @param description       Task to be completed.
+     * @param description Task to be completed.
      */
     public Todo(String description) {
         super(description);
@@ -17,17 +17,18 @@ public class Todo extends Task {
     /**
      * Creates a new Todo task with the given description and status.
      *
-     * @param description       Task to be completed.
-     * @param isDone            Whether the Task has been completed or not.
+     * @param description Task to be completed.
+     * @param isDone Whether the Task has been completed or not.
+     * @param priority Level of priority for this Task.
      */
-    public Todo(String description, boolean isDone) {
-        super(description, isDone);
+    public Todo(String description, boolean isDone, Priority priority) {
+        super(description, isDone, priority);
     }
 
     /**
      * Returns the letter "T", representing the type Todo.
      *
-     * @return  String of the letter "T".
+     * @return String of the letter "T".
      */
     @Override
     public String getType() {
@@ -38,7 +39,7 @@ public class Todo extends Task {
      * Returns a string containing the type of Task, done status, and
      * description.
      *
-     * @return  String describing the Todo.
+     * @return String describing the Todo.
      */
     @Override
     public String toString() {

@@ -26,12 +26,14 @@ public class Deadline extends Task {
     /**
      * Creates a new Deadline with the given description, due date and status.
      *
-     * @param description       Task to be completed.
-     * @param dueDateTime       Due date for the Deadline.
-     * @param isDone            Whether the Deadline is completed or not.
+     * @param description Task to be completed.
+     * @param dueDateTime Due date for the Deadline.
+     * @param isDone Whether the Deadline is completed or not.
+     * @param priority Level of priority for the Deadline.
      */
-    public Deadline(String description, String dueDateTime, boolean isDone) {
-        super(description, isDone);
+    public Deadline(String description, String dueDateTime, boolean isDone,
+                    Priority priority) {
+        super(description, isDone, priority);
         this.dueDateTime = DateParser.parse(dueDateTime);
     }
 

@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import duke.exception.EmptyTaskDukeException;
 import duke.exception.InvalidInputDukeException;

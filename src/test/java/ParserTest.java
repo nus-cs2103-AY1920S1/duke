@@ -1,4 +1,4 @@
- import duke.Parser;
+ import duke.logic.Parser;
 
  import duke.command.DeleteCommand;
  import duke.command.PrintListCommand;

@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Storage;
+import duke.logic.TaskList;
+import duke.logic.Storage;
 
 /**
  * Represents a command that handles requests in Duke.

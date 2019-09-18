@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import duke.command.Command;
 import duke.command.AddCommand;

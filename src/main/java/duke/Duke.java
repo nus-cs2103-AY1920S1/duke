@@ -47,7 +47,7 @@ public class Duke extends Application {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
     /**
-     * The constructor of the uke class, pass string value to the variable, load the file from hard disk and create
+     * The constructor of the Duke class, pass string value to the variable, load the file from hard disk and create
      * a new file if not existed.
      *
      * @param filePath The store location of the file.
@@ -66,14 +66,6 @@ public class Duke extends Application {
     public Duke() {
         this("/data/Tasks.txt");
     }
-
-//    public static void main(String[] args) {
-//        Duke duke = new Duke("/Users/auxin/duke/data/Tasks.txt");
-//        duke.greet();
-//        while (Ui.getFlag()) {
-//            duke.run();
-//        }
-//    }
 
     /**
      * To create a new folder and new file if not existed and set a new empty task list.
@@ -127,7 +119,7 @@ public class Duke extends Application {
     }
 
     private void formatWindow(Stage stage, AnchorPane mainLayout) {
-        stage.setTitle("duke.Duke");
+        stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

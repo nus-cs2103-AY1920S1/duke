@@ -96,7 +96,7 @@ public class Storage {
                 switch (type) {
                 case "T":
                     Task todo = new Todo(action);
-                    if (isDone.equals("\u2713")) {
+                    if (isDone.equals("1")) {
                         todo.markAsDone();
                     }
                     store.add(todo);
@@ -104,7 +104,7 @@ public class Storage {
                 case "D":
                     String by = arr[3];
                     Task deadline = new Deadline(action, by);
-                    if (isDone.equals("\u2713")) {
+                    if (isDone.equals("1")) {
                         deadline.markAsDone();
                     }
                     store.add(deadline);
@@ -112,7 +112,7 @@ public class Storage {
                 case "E":
                     String at = arr[3];
                     Task event = new Event(action, at);
-                    if (isDone.equals("\u2713")) {
+                    if (isDone.equals("1")) {
                         event.markAsDone();
                     }
                     store.add(event);

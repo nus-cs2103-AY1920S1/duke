@@ -64,6 +64,9 @@ public class Parser {
             break;
         case clear:
             output = commandClear();
+            break;
+        default:
+            break;
         }
         return output;
     }
@@ -125,12 +128,12 @@ public class Parser {
         String output = "";
         try {
             Ui ui = new Ui();
-            Storage storage = new Storage();
             Task todo = new Todo(actions[1]);
             TaskList.getList().add(todo);
             output += ui.printAddTask();
             output += (todo + "\n");
             output += ui.printCountTasks();
+            Storage storage = new Storage();
             storage.appendToFile(storage.getFilePath(), todo.toString(), true);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeIllegalDescriptionException(actions[0]);
@@ -147,13 +150,12 @@ public class Parser {
     private String commandDeadline() throws DukeIllegalDescriptionException, DukeDuplicateException {
         String output = "";
         try {
-            Ui ui = new Ui();
-            Storage storage = new Storage();
             String[] dl = actions[1].split(" /by ");
             String ddlTime = dl[1];
             assert !ddlTime.isEmpty() : "The input time is invalid.";
             SimpleDateFormat ddlFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
             Date ddlDate = ddlFormat.parse(ddlTime);
+            Ui ui = new Ui();
             String newDdlTime = ui.getNewFormatDeadline().format(ddlDate);
             checkDuplicate(dl[0], newDdlTime);
             Task deadline = new Deadline(dl[0], newDdlTime);
@@ -161,11 +163,10 @@ public class Parser {
             output += ui.printAddTask();
             output += (deadline + "\n");
             output += ui.printCountTasks();
+            Storage storage = new Storage();
             storage.appendToFile(storage.getFilePath(), deadline.toString(), true);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | ParseException e) {
             throw new DukeIllegalDescriptionException(actions[0]);
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
         return output;
     }
@@ -179,8 +180,6 @@ public class Parser {
     private String commandEvent() throws DukeIllegalDescriptionException, DukeDuplicateException {
         String output = "";
         try {
-            Ui ui = new Ui();
-            Storage storage = new Storage();
             String[] ev = actions[1].split(" /at ");
             String eventTime = ev[1];
             assert !eventTime.isEmpty() : "The input time is invalid.";
@@ -191,19 +190,19 @@ public class Parser {
             SimpleDateFormat eventFormatEnd = new SimpleDateFormat("HHmm");
             Date eventDateStart = eventFormatStart.parse(eventStart);
             Date eventDateEnd = eventFormatEnd.parse(eventEnd);
-            String newEventTime = ui.getNewFormatEvStart().format(eventDateStart) +
-                    " to " + ui.getNewFormatEvEnd().format(eventDateEnd);
+            Ui ui = new Ui();
+            String newEventTime = ui.getNewFormatEvStart().format(eventDateStart)
+                    + " to " + ui.getNewFormatEvEnd().format(eventDateEnd);
             checkDuplicate(ev[0], newEventTime);
             Task event = new Event(ev[0], newEventTime);
             TaskList.getList().add(event);
             output += ui.printAddTask();
             output += (event + "\n");
             output += ui.printCountTasks();
+            Storage storage = new Storage();
             storage.appendToFile(storage.getFilePath(), event.toString(), true);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException | ParseException e) {
             throw new DukeIllegalDescriptionException(actions[1]);
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
         return output;
     }
@@ -214,13 +213,13 @@ public class Parser {
     private String commandDelete() throws DukeIllegalDescriptionException {
         String output = "";
         try {
-            Ui ui = new Ui();
             Storage storage = new Storage();
             int delNum = Integer.parseInt(actions[1]) - 1;
             assert delNum > 0 : "The input number is invalid.";
             Task delTask = TaskList.getList().get(delNum);
             TaskList.getList().remove(delNum);
             output += ("Noted. I've removed this task:\n" + delTask.toString() + "\n");
+            Ui ui = new Ui();
             output += ui.printCountTasks();
             boolean isAppendDel = false;
             for (Task task : TaskList.getList()) {

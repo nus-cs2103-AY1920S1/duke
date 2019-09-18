@@ -20,7 +20,7 @@ public class Ui {
     private static SimpleDateFormat newFormatEvEnd = new SimpleDateFormat("HH:mm a", Locale.ENGLISH);
 
     /**
-     * To set the flag to be false;
+     * To set the flag to be false.
      */
     static void setFlag() {
         Ui.flag = false;
@@ -36,23 +36,17 @@ public class Ui {
     }
 
     /**
-     * To print the greet message from duke.Duke.
+     * To print the greet message from Duke.
      */
     public String greet() {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
         return "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
      * To scan the commands inputted from the users and pass it to Parser class to take actions.
      *
-     * @throws DukeIllegalInputException       Invalid input from users which can not be recognized by duke.Duke.
-     * @throws DukeIllegalDescriptionException Invalid description after commands which can not be recognized by duke.Duke.
+     * @throws DukeIllegalInputException       Invalid input from users which can not be recognized by Duke.
+     * @throws DukeIllegalDescriptionException Invalid description after commands which can not be recognized by Duke.
      */
     public void scan() throws DukeIllegalInputException, DukeIllegalDescriptionException {
         Scanner sc = new Scanner(System.in);

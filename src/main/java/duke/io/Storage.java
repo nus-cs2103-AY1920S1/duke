@@ -92,12 +92,30 @@ public class Storage {
      * Saves the tasks of <code>TaskList</code> in designated file.
      * @throws FileNotFoundException FileNotFoundException
      */
-    public void saveData() throws FileNotFoundException {
+    public void saveData() {
         File file = new File(basePath + filePath);
         try (PrintWriter out = new PrintWriter(file)) {
             for (Task task : TaskList.taskList) {
                 out.println(task.toString());
             }
+        } catch (FileNotFoundException e) {
+            createFolder();
+            createFile();
         }
+    }
+
+    /**
+     * Creates new folder if not exists.
+     */
+    public void createFolder() {
+        String folderPath = basePath + "/data";
+        File newFolder = new File(folderPath);
+    }
+
+    /**
+     * Creates new file if not exists.
+     */
+    public void createFile() {
+        File file = new File(filePath);
     }
 }

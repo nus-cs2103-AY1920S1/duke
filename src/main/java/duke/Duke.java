@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.IoDukeException;
 import duke.parser.CommandParser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -31,6 +32,12 @@ public class Duke {
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+
+            try {
+                storage.createStorageFile();
+            } catch (IoDukeException ioException) {
+                // Suppress the error, as we only want to create the file.
+            }
         }
     }
 

@@ -78,7 +78,43 @@ You can filter out important tasks by searching for their name as a keyword.
 
 ### Load and save tasks
 
-Doke saves your tasks to: `data/tasks.txt`. For advanced users, you may modify it by inferring from the given format. Corrupt files will be discarded by the application and re-generated on launch.
+Doke saves your tasks to: `data/tasks.txt`. Corrupt files will be discarded by the application and re-generated on launch.
+
+The format of each task type is defined below.
+
+---
+
+Deadline Format:
+```
+D|[Done: true/false]|Description|[By date]
+```
+
+Event Format:
+```
+E|[Done: true/false]|Description|[At date]
+```
+
+Todo Format:
+```
+T|[Done: true/false]|Description
+```
+
+---
+
+For example, given a save file with the following content:
+```
+D|false|complete The Project|20/9/2019 1800
+E|false|Attend the funfair|25/12/2019 1200
+T|true|homework
+```
+
+The following output is returned:
+```
+Here are the tasks in your list:
+1. [D][ ] complete The Project (by: Fri Sep 20 18:00:00 SGT 2019)
+2. [E][ ] Attend the funfair (at: Wed Dec 25 12:00:00 SGT 2019)
+3. [T][x] homework
+```
 
 ## Usage
 
@@ -197,7 +233,7 @@ Task number `1`, labelled `homework` from the task list is marked as done, as in
 
 #### `find` - Find a task
 
-Finds a task with given keywords.
+Finds a task with given keywords (case-sensitive).
 
 **Example of usage:**
 

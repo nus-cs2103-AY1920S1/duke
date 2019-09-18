@@ -63,25 +63,56 @@ public class Storage {
     /**
      * Saves a list of tasks to the file path in the constructor object.
      *
+     * @param tasks List of tasks
      * @throws DukeException If the file failed to save.
      */
     public void save(TaskList tasks) throws DukeException {
         PrintWriter writer = null;
         try {
-            Path path = Paths.get(filePath);
+            writer = getStorageFile();
 
-            // Create directories if necessary
-            if (path.getParent() != null) {
-                Files.createDirectories(path.getParent().getFileName());
-            }
-
-            writer = new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
             for (Task task : tasks.getTaskList()) {
                 String output = StorageSerializer.serialize(task);
                 writer.write(output);
             }
         } catch (IOException e) {
             throw new IoDukeException("Error opening file for saving");
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
+    }
+
+    /**
+     * Gets the file handle for save storage.
+     * The handle must be closed after use.
+     *
+     * @return A file handle for the storage file.
+     * @throws IOException If an IO error occurred.
+     */
+    private PrintWriter getStorageFile() throws IOException {
+        Path path = Paths.get(filePath);
+
+        // Create directories if necessary
+        if (path.getParent() != null) {
+            Files.createDirectories(path.getParent().getFileName());
+        }
+
+        return new PrintWriter(new BufferedWriter(new FileWriter(filePath)));
+    }
+
+    /**
+     * Creates a storage file if it does not exist.
+     *
+     * @throws IoDukeException If an IO error occurred.
+     */
+    public void createStorageFile() throws IoDukeException {
+        PrintWriter writer = null;
+        try {
+            writer = getStorageFile();
+        } catch (IOException e) {
+            throw new IoDukeException("Error opening task file for reading");
         } finally {
             if (writer != null) {
                 writer.close();

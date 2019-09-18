@@ -4,7 +4,7 @@ A personal chatbot which helps users keep track of their todo tasks, events and 
 
 ## Getting Started
 
-1. Ensure that you have Java Version 11 installed on your computer.
+1. Ensure that you have Java 11 installed on your computer.
 2. Download the latest `quack.jar` [here](https://github.com/choongyx/duke/releases).
 3. Copy the file to the folder you want to use as the home folder for Quack.
 4. Double-click the file to start the app. The GUI should appear in a few seconds as shown below.

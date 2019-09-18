@@ -58,7 +58,11 @@ public class Ui {
         String output = "okie! i added this task:\n";
         output += "" + task.toString() + "\n";
         int size = (new TaskList()).getSize();
-        output += String.format("now u haf %d tasks in the list", size);
+        if (size == 1) {
+            output += String.format("now u haf %d task in the list", size);
+        } else {
+            output += String.format("now u haf %d tasks in the list", size);
+        }
         return output;
     }
 
@@ -78,10 +82,14 @@ public class Ui {
      *     deleted.
      */
     public String getDeleteTaskResponse(Task task) {
-        String output = "okie! i remove this task:\n";
+        String output = "okie! i delete this task:\n";
         output += "" + task.toString() + "\n";
         int size = (new TaskList()).getSize();
-        output += String.format("now u haf %d tasks in the list", size);
+        if (size == 1) {
+            output += String.format("now u haf %d task in the list", size);
+        } else {
+            output += String.format("now u haf %d tasks in the list", size);
+        }
         return output;
     }
 
@@ -134,8 +142,8 @@ public class Ui {
     public String getHelpResponse() {
        String output = "u asked for halp?? here ya go~\n\n";
        output += "todo <description> - to add a Todo task with the description\n\n";
-       output += "deadline <description> <deadline> - to add a Deadline task with the description and deadline\n\n";
-       output += "event <description> <event day & time> - to add an Event task with the description and event day & "
+       output += "deadline <description> <deadline: eg. 1/9/2019 2359> - to add a Deadline task with the description and deadline\n\n";
+       output += "event <description> <event day & time: eg. 1/9/2019 2359> - to add an Event task with the description and event day & "
                + "time\n\n";
        output += "list - to display all the tasks in your list\n\n";
        output += "done <task no.> - to mark that task as done\n\n";

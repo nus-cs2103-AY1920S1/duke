@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+//Some design for MainWindow adapted from https://github.com/ang-zeyu/duke/blob/master/src/main/java/duke/ui/MainWindow.java
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */

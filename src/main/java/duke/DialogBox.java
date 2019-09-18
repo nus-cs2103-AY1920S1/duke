@@ -64,7 +64,10 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+
+        var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color:AQUA");
+        return db;
     }
 
     public static DialogBox getWelcomeDukeDialog(String text, Image img, int num1, int num2) {

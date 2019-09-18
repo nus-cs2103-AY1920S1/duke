@@ -2,17 +2,54 @@
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import javax.swing.event.TreeModelEvent;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
+
+    private static ScrollPane scrollPane;
+
+    private static VBox dialogContainer;
+
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+
+    private static final String LOGO =
+            " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static final String INTRODUCTION = "Hello from \n";
+
     private Duke duke = new Duke("list.txt");
+
+//    public void showIntroduction() {
+//        Label dukeLogo = new Label(LOGO);
+////        dukeLogo.setMaxWidth(scrollPane.getWidth());
+//        dukeLogo.setAlignment(Pos.CENTER);
+//        dialogContainer.getChildren().add(dukeLogo);
+//
+//        String intro = INTRODUCTION;
+//        dialogContainer.getChildren().add(
+//                DialogBox.getDukeDialog(intro, dukeImage)
+//        );
+//    }
 
     @Override
     public void start(Stage stage) {
@@ -30,6 +67,8 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+
+//            showIntroduction();
         } catch (IOException e) {
             e.printStackTrace();
         }

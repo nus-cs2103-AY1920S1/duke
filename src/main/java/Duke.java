@@ -94,8 +94,6 @@ public class Duke extends Application {
      */
     String getResponse(String input) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Duke heard: " + input + "\n" + "\n");
-
         try {
             Command c = Parser.parse(input);
             sb.append(c.execute(tasks, ui, storage) + "\n");

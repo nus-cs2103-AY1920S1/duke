@@ -28,7 +28,7 @@ public class TaskList {
     }
 
     public String printList() {
-        StringBuilder sb =new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int size = this.list.size();
         for (int i = 0; i < size; i++) {
             sb.append((i + 1) + "." + list.get(i) + "\n");
@@ -37,7 +37,7 @@ public class TaskList {
     }
 
     public String findListEntry(String action) {
-        StringBuilder sb =new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         int size = this.list.size();
         int index = 1;
         for (int i = 0; i < size; i++) {

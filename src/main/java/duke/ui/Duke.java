@@ -1,6 +1,6 @@
 package duke.ui;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.net.URI;
 import java.util.Arrays;
 
@@ -8,6 +8,7 @@ import duke.command.Parser;
 import duke.command.Storage;
 import duke.command.TaskList;
 import duke.command.DukeException;
+
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.util.Duration;
@@ -112,8 +113,8 @@ public class Duke {
                     // Opens a URL in the user's default browser.
                     try {
                         Desktop desktop = java.awt.Desktop.getDesktop();
-                        URI oURL = new URI("https://www.youtube.com/watch?v=_uv8Ej4CEoQ");
-                        desktop.browse(oURL);
+                        URI url = new URI("https://www.youtube.com/watch?v=_uv8Ej4CEoQ");
+                        desktop.browse(url);
                     } catch (Exception e) {
                         throw new DukeException("Oops, failed to launch Easter Egg.");
                     }

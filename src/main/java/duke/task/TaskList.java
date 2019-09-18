@@ -89,7 +89,8 @@ public class TaskList {
      * @throws DukeException when there is no tasks with the <code>word</code> found in task list.
      */
     public ArrayList<Task> findTaskWithWord(String word) throws DukeException {
-        assert (tasks != null && tasks.size() != 0) :
+        System.out.println(this.tasks.size());
+        assert (tasks.size() > 0) :
                 "You have no tasks in your tasks list, HOW AM I GOING TO FIND THIS?!?!";
         ArrayList<Task> tasksWithWord = new ArrayList<>();
         int numberOfTask = this.tasks.size();
@@ -116,7 +117,7 @@ public class TaskList {
      */
 
     public ArrayList<? extends Task> findTaskOfType(String word) throws DukeException {
-        assert (tasks != null && tasks.size() != 0) :
+        assert (tasks.size() > 0) :
                 "You have no tasks in your tasks list, HOW AM I GOING TO FIND THIS?!?!";
         ArrayList<Deadline> deadlines = new ArrayList<>();
         ArrayList<Event> events = new ArrayList<>();

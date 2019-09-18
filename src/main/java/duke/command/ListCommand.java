@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -25,10 +24,11 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
+        if (tasks == null || tasks.size() == 0) {
+            ui.printError("You have no tasks in your tasks list. Add a todo/event/deadline now!");
+        } else {
             ui.printTaskList(tasks.getAllTasks());
-        } catch (AssertionError e) {
-            ui.printError(e.getMessage());
         }
+
     }
 }

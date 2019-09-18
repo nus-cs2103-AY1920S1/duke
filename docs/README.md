@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.com/SendorasLeft/duke.svg?branch=master)](https://travis-ci.com/SendorasLeft/duke)
 
 ## 1. Introduction
-The Duke Chat Assistant is for users who prefer a chat-assistant desktop-based app for managing their daily errands and pending tasks in lieu of traditional GUIs. This simple-to-use chat app combines both Command Line Interface (CLI) style commands with a friendly chat-style GUI whose responses aim to mimick the style of chatting with a close friend. Read on to find out how you can get started!
+The Duke Chat Assistant is for users who prefer a chat-assistant desktop-based app for managing their daily errands and pending tasks in lieu of traditional GUIs. This simple-to-use chat app combines both Command Line Interface (CLI) style commands with a friendly chat-style GUI whose responses aim to mimick natural conversations with a personal assistant. Read on to find out how you can get started!
 
   ![image goes here](Ui.png)
 
@@ -27,13 +27,13 @@ The Duke Chat Assistant is for users who prefer a chat-assistant desktop-based a
 ### Command Format
 - Each command must begin with a command word. See each command below for the list of associated command words.
 - Command words are case-insensitive eg. `list`, `LIST`, and `LiSt` all activate the list command.
-- Words in `UPPER_CASE` are the parameters to be supplied by the user eg. `list`
+- Words in `UPPER_CASE` are the parameters to be supplied by the user eg. `DESCRIPTION_OF_TASK` denotes that you should provide a short description of the task.
 
 ### 3.1 Adding a task: `todo`, `deadline`, and `event`
 You can instruct Duke to add three different types of tasks:
 
 #### 3.1.1 Todo 
-Add tasks that have a description only.  
+Adds a task that has a description only.  
 
 Format: `todo DESCRIPTION_OF_TASK`  
 
@@ -45,34 +45,34 @@ Examples:
     Expected Output: `[T][✗] Make sure the O-rings are up to scratch`
   
 #### 3.1.2 Deadline
-Add tasks that need to be completed by a certain date.  
+Adds a task that needs to be completed by a certain date.  
 
 Format: `deadline DESCRIPTION_OF_TASK /by dd/MM/YYYY HHmm`  
 
 Examples:  
   - `deadline Assemble the astronaut team /by 08/08/2043 2359`  
-    **Expected Output:** `[D][✗] Assemble the astronaut team (by: 08 Aug 2043, 11:59 PM`
+    **Expected Output:** `[D][✗] Assemble the astronaut team (by: 08 Aug 2043, 11:59 PM)`
     
   - `deadline Make sure all personnel are actually on-board /by 17/02/2050 1000`  
-    **Expected Output:** `[D][✗] Make sure all personnel are actually on-board (by: 17 Feb 2050, 10:00 AM`
+    **Expected Output:** `[D][✗] Make sure all personnel are actually on-board (by: 17 Feb 2050, 10:00 AM)`
     
   - `deadline Go to the Moon /by 17/02/2050 1800`  
-    **Expected Output:** `[D][✗] Go to the Moon (by: 17 Feb 2050, 06:00 PM`
+    **Expected Output:** `[D][✗] Go to the Moon (by: 17 Feb 2050, 06:00 PM)`
   
 #### 3.1.3 Event  
-Add tasks that need to be done at a certain time.  
+Add a task that needs to be done at a certain time.  
 
 Format: `event DESCRIPTION_OF_TASK /at dd/MM/YYYY HHmm`  
 
 Examples:  
   - `event Launch the rocket /at 17/02/2050 1500`  
-    **Expected Output:** `[E][✗] Launch the rocket (at: 17 Feb 2050, 03:00 PM`
+    **Expected Output:** `[E][✗] Launch the rocket (at: 17 Feb 2050, 03:00 PM)`
     
   - `event Hide the evidence and silence the reporters /at 17/02/2050 1830`  
-    **Expected Output:** `[E][✗] Hide the evidence and silence the reporters (at: 17 Feb 2050, 06:30 PM`
+    **Expected Output:** `[E][✗] Hide the evidence and silence the reporters (at: 17 Feb 2050, 06:30 PM)`
        
 ### 3.2 Listing out all tasks: `list`
-Shows a list of all tasks in the current list.  
+Shows a list of all tasks.  
 
 Format: `list`  
 **Expected Output:** List of all tasks
@@ -88,13 +88,13 @@ Examples:
     **Expected Output:** `[T][✓] Make sure the O-rings are up to scratch`
     
   - `done 5`  
-    **Expected Output:** `[D][✓] Go to the Moon (by: 17 Feb 2050, 06:00 PM`
+    **Expected Output:** `[D][✓] Go to the Moon (by: 17 Feb 2050, 06:00 PM)`
 
 ### 3.4 Finding a task by description: `find`
 Searches and displays a list of tasks in Duke whose description matches the supplied keyword. 
   - The search is case-insensitive. eg. `corpses` will match `CoRpSes`
   - Only the description of the tasks are searched.
-  - As long as the keyword is present anywhere in the task description, it will be a search result eg. `off` will match `takeoff failure`
+  - As long as the keyword is present anywhere in the task description, it will be listed as a search result eg. `off` will match `takeoff failure`
 
 Format: `find KEYWORD`  
 **Expected Output:** List of results
@@ -121,7 +121,7 @@ Examples:
     **Expected Output:** Task at index 5 removed from list if it exists.
     
   - `delete 3`  
-    **Expected Output:** Task at index 5 removed from list if it exists.
+    **Expected Output:** Task at index 3 removed from list if it exists.
 
 ### 3.6 Loading and saving task lists: `load` and `save`
 These commands instruct Duke to save and load from different directories. Note that if you close Duke, it will always startup with the most recently used/saved/loaded task list.
@@ -140,10 +140,10 @@ Examples:
     **Expected Output:** Invalid save path. Duke will continue saving to the previous save path.
   
 #### 3.6.2 Loading a list from a save location: `load`
-Loads an existing saved task list from a specified path on the disk. Note that if you close Duke, if will always startup with the most recently used/saved/loaded task list.
+Loads an existing saved task list from a specified path on the disk. Note that if you close Duke, if will always start up with the most recently used/saved/loaded task list.
 
 Format: `load DIRECTORY_TO_LOAD_FILE`  
-**Expected Output:**  Load a previously saved task list from the hard disk, which replaces the current working one open in Duke.
+**Expected Output:**  Loads a previously saved task list from the hard disk, which replaces the current working one open in Duke.
 
 Examples:
   - `load case_studies/Columbia_2003_crash.tmp`  
@@ -162,10 +162,10 @@ Format: `bye`
 ## 4. FAQs
 
 **Q:** How do i transfer my data to another computer?  
-**A:** Install the app in the other computer using the Quick Start guide given above. If you want to preserve the current data and state of the Duke program, transfer the /config folder over along with any saved task list files.
+**A:** Install the app in the other computer using the Quick Start guide given above. If you want to preserve the current data and state of the Duke program, transfer the /config folder over along with any saved task list files while maintaining the same folder structure.
 
 **Q.** Duke can't save the list to the folder I want! How do I fix this?  
-**A.** Check the permissions of the folder that Duke is trying to save to. Ensure that write permissions in on.
+**A.** Check the permissions of the folder that Duke is trying to save to. Ensure that write permissions are toggled on for that folder.
 
 ## 5. Command Summary
 - **Add Todo tasks:** `todo DESCRIPTION_OF_TASK`  
@@ -180,13 +180,13 @@ eg. `event Attend Wanderer 2050 investigative trial /at 18/08/2050 0900`
 - **List:** `list`
 
 - **Mark as Done:** `done INDEX_OF_TASK_IN_LIST`  
-eg. `done 8`
+eg. `done 13`
 
 - **Find:** `find KEYWORD`  
 eg. `find public apology speech script`
 
 - **Delete:** `delete INDEX_OF_TASK_IN_LIST`  
-eg. `delete 16`
+eg. `delete 14`
 
 - **Save:** `save DIRECTORY_TO_SAVE_FILE`  
 eg. `save ./me.tmp`

@@ -57,7 +57,6 @@ public class Duke {
             String[] words = ui.readCommand().split(" ");
             try {
                 Command command = parser.parse(words);
-                assert command != null;
                 ui.printMessage(command.run(words));
                 isExit = command.isExit();
             } catch (DukeException e) {
@@ -77,7 +76,6 @@ public class Duke {
         try {
             String[] words = input.split(" ");
             Command command = parser.parse(words);
-            assert command != null;
             return String.join("\n", command.run(words));
         } catch (DukeException e) {
             return e.getMessage();

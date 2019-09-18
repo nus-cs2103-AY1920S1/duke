@@ -20,9 +20,7 @@ public class TaskList {
      */
     public TaskList(List<String> lines) {
         for (String line : lines) {
-            Task task = parseTask(line);
-            assert task != null;
-            tasks.add(task);
+            tasks.add(parseTask(line));
         }
     }
 

@@ -30,7 +30,6 @@ public class Event extends TimeTask {
             } else if (separator == words.length - 1) {
                 throw new DukeException("The time of an event cannot be empty.");
             }
-            assert separator > 1;
             String description = String.join(" ", wordList.subList(1, separator));
             String time = String.join(" ", wordList.subList(separator + 1, words.length));
             Task task = new Event(description, time);

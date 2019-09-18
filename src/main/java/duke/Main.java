@@ -25,7 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setTitle("Duke: Personal Chat Assistant");
-            stage.setResizable(true);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

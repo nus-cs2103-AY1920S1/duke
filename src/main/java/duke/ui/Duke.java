@@ -22,7 +22,8 @@ public class Duke {
 
     // Solution below adapted from https://github.com/nexolute/duke/blob/master/src/main/java/duke/Duke.java
     /**
-     * Initializes the duke.main.Duke object by setting the duke.main.Ui, duke.command.Storage and duke.command.TaskList objects.
+     * Initializes the duke.main.Duke object by setting the duke.main.Ui,
+     * duke.command.Storage and duke.command.TaskList objects.
      * @param mainWindow the duke.main.MainWindow of the application.
      */
     public void initialize(MainWindow mainWindow) {

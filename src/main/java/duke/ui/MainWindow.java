@@ -37,8 +37,8 @@ public class MainWindow extends Stage {
     }
 
     /**
-     * Creates the two dialog boxes, one echoing user input and the other containing duke.main.Duke's reply and then appends them
-     * to the dialog container. Clears the user input after processing.
+     * Creates the two dialog boxes, one echoing user input and the other containing duke.main.Duke's reply and
+     * then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {

@@ -87,7 +87,7 @@ public class Parser {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
         if (arr.length < 2 || arr[1].trim().equals("")) {
-            throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty, add a /at description!");
+            throw new DukeException("Events need /at description!");
         }
         if (!arr[1].startsWith("at ")) {
             throw new DukeException("Use /at  ");
@@ -100,10 +100,10 @@ public class Parser {
     private Task parseDeadline(String[] arr, String[] typeArray) throws DukeException {
         Task task;
         if (typeArray.length < 2 || typeArray[1].trim().equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("Add description to your deadline!");
         }
         if (arr.length < 2 || arr[1].trim().equals("")) {
-            throw new DukeException("☹ OOPS!!! The time of a deadline cannot be empty, add a /by description!");
+            throw new DukeException("Add a /by description!");
         }
         if (!arr[1].startsWith("by ")) {
             throw new DukeException("Use /by  ");
@@ -116,7 +116,7 @@ public class Parser {
     private Task parseTodo(String[] typeArray) throws DukeException {
         Task task;
         if (typeArray.length < 2  || typeArray[1].trim().equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("Add more information about the todo!");
         }
         task = new Todo(typeArray[1], false, "");
         taskList.addTask(task);

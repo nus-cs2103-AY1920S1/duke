@@ -26,9 +26,9 @@ public class Duke extends Application {
     private VBox dialogContainer;
     private TextField userInput;
     private Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/resources/images/DaUser.png"));
+            .getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass()
-            .getResourceAsStream("/resources/images/DaDuke.png"));
+            .getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
@@ -60,7 +60,7 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.getIcons().add(new Image(this.getClass()
-                .getResourceAsStream("/resources/images/javamascot.png")));
+                .getResourceAsStream("/images/javamascot.png")));
         stage.show();
 
         //Step 2. Formatting the window to look as expected

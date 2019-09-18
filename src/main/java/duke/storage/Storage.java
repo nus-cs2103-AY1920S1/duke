@@ -1,9 +1,8 @@
 package duke.storage;
 
 import duke.command.Command;
-import duke.exception.DukeException;
-import duke.exception.SaveFileWrongFormatDukeException;
 import duke.command.UnloadableCommand;
+import duke.exception.SaveFileWrongFormatDukeException;
 import duke.main.Parser;
 import duke.task.PriorityLevel;
 import duke.task.TaskList;
@@ -12,7 +11,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Scanner;
 
 /**

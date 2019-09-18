@@ -82,6 +82,10 @@ public class Storage {
         String next = br.readLine();
         while (next != null) {
             String[] input = next.split(" ");
+            if (input.length < 2) {
+                String type = "error";
+                return;
+            }
             String status = input[1];
             String type = input[0];
             String description = "";

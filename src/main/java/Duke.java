@@ -24,7 +24,7 @@ public class Duke {
     /**
      * To indicate whether the program is done.
      */
-    private boolean exitProgram = false;
+    public boolean exitProgram = false;
 
     /**
      * The storage containing the file to be modified in the hard drive.

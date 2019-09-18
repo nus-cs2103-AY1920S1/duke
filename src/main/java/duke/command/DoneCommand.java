@@ -25,12 +25,19 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String message) {
         super(message);
-        this.index = Integer.parseInt(message);
+        try {
+            this.index = Integer.parseInt(message);
+        } catch (NumberFormatException error) {
+            errorMessage = "Sorry that is not an acceptable number format!";
+        }
     }
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
         this.taskList = listOfTasks;
+        if (!errorMessage.equals("")) {
+            return;
+        }
         if (index > taskList.size() || index <= 0) {
             errorMessage = "Such task does not exist!";
             return;

@@ -38,10 +38,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws Exception {
         String input = userInput.getText();
-        if (input.isEmpty()) {
+        if (input.isEmpty() && duke.exitProgram == true) {
             System.exit(0);
         }
         String response = duke.getResponse(input);
+        if (input.isEmpty()) {
+            response = "Command cannot be empty! Please say something";
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

@@ -64,6 +64,9 @@ public class Parser {
             return new ClearAllCommand(constructedString);
         case "tutorial" :
             return new TutorialCommand(constructedString);
+        case "error" :
+            return new ErrorCommand("Unable to read the task list! Did you do something to it?"
+                    + " Try to fix it by deleting the tasks.txt file!");
         default:
             return new ErrorCommand("OOPS!! I'm sorry, but I don't know what that means :-(");
         }

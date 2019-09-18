@@ -12,11 +12,34 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
+import java.util.HashMap;
+
 /**
  * Class to handle user input.
  */
 public class Parser {
-    public static String[] shortcuts = {"b", "l", "d", "dead", "e", "t", "del", "f", "def"};
+    private static HashMap<String, CommandEnum> shortcuts = new HashMap<>();
+
+    static {
+        shortcuts.put("b", CommandEnum.BYE);
+        shortcuts.put("bye", CommandEnum.BYE);
+        shortcuts.put("dead", CommandEnum.DEADLINE);
+        shortcuts.put("deadline", CommandEnum.DEADLINE);
+        shortcuts.put("def", CommandEnum.DEFINE);
+        shortcuts.put("define", CommandEnum.DEFINE);
+        shortcuts.put("del", CommandEnum.DELETE);
+        shortcuts.put("delete", CommandEnum.DELETE);
+        shortcuts.put("d", CommandEnum.DONE);
+        shortcuts.put("done", CommandEnum.DONE);
+        shortcuts.put("e", CommandEnum.EVENT);
+        shortcuts.put("event", CommandEnum.EVENT);
+        shortcuts.put("f", CommandEnum.FIND);
+        shortcuts.put("find", CommandEnum.FIND);
+        shortcuts.put("l", CommandEnum.LIST);
+        shortcuts.put("list", CommandEnum.LIST);
+        shortcuts.put("t", CommandEnum.TODO);
+        shortcuts.put("todo", CommandEnum.TODO);
+    }
 
     static Command parse(String input) throws DukeException {
         CommandEnum command;
@@ -26,52 +49,49 @@ public class Parser {
         String next = String.join(" ", strArr).replace(first, "");
 
         try {
-            command = CommandEnum.valueOf(first.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            if (first.equals(shortcuts[0])) {
-                command = CommandEnum.BYE;
-            } else if (first.equals(shortcuts[1])) {
-                command = CommandEnum.LIST;
-            } else if (first.equals(shortcuts[2])) {
-                command = CommandEnum.DONE;
-            } else if (first.equals(shortcuts[3])) {
-                command = CommandEnum.DEADLINE;
-            } else if (first.equals(shortcuts[4])) {
-                command = CommandEnum.EVENT;
-            } else if (first.equals(shortcuts[5])) {
-                command = CommandEnum.TODO;
-            } else if (first.equals(shortcuts[6])) {
-                command = CommandEnum.DELETE;
-            } else if (first.equals(shortcuts[7])) {
-                command = CommandEnum.FIND;
-            } else if (first.equals(shortcuts[8])) {
-                command = CommandEnum.DEFINE;
-            } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
+            command = shortcuts.get(first);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         switch (command) {
-        case BYE:
-            return new ExitCommand();
-        case LIST:
-            return new ListCommand();
-        case DONE:
-            return new DoneCommand(next);
-        case DEADLINE:
-            return new DeadlineCommand(next);
-        case EVENT:
-            return new EventCommand(next);
-        case TODO:
-            return new TodoCommand(next);
-        case DELETE:
-            return new DeleteCommand(next);
-        case FIND:
-            return new FindCommand(next);
-        case DEFINE:
-            return new DefineCommand(next);
-        default:
-            throw new DukeException("How is it even possible to reach this line of code?");
+            case BYE:
+                return new ExitCommand();
+            case LIST:
+                return new ListCommand();
+            case DONE:
+                return new DoneCommand(next);
+            case DEADLINE:
+                return new DeadlineCommand(next);
+            case EVENT:
+                return new EventCommand(next);
+            case TODO:
+                return new TodoCommand(next);
+            case DELETE:
+                return new DeleteCommand(next);
+            case FIND:
+                return new FindCommand(next);
+            case DEFINE:
+                return new DefineCommand(next);
+            default:
+                throw new DukeException("How is it even possible to reach this line of code?");
         }
+    }
+
+    public static void replaceShortcut(String toReplace, String newKeyword) throws DukeException {
+        if (toReplace.equals(newKeyword)) {
+            throw new DukeException("Why are u replacing the shortcut with the exact same thing?");
+        }
+        if (!shortcuts.containsKey(toReplace)) {
+            throw new DukeException("☹ OOPS!!! Please enter a valid shortcut to be replaced.");
+        }
+        if (shortcuts.containsKey(newKeyword)) {
+            throw new DukeException("☹ OOPS!!! Please enter a new keyword that is not in use.");
+        }
+
+        CommandEnum temp = shortcuts.get(toReplace);
+        shortcuts.remove(toReplace);
+        shortcuts.put(newKeyword, temp);
     }
 }

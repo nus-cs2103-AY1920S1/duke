@@ -17,7 +17,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
 
-        assert new File(filePath).exists() == true;
+        assert new File(filePath).exists();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

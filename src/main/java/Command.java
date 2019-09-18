@@ -55,6 +55,10 @@ public class Command {
                 return Ui.printAddedMsg();
             }
 
+        case "snooze":
+            SnoozeCommand sc = new SnoozeCommand(cmd, cmdDetails);
+            return sc.execute(list, ui, store);
+
         case "deadline":
             String[] separate = cmdDetails.split("/by");
             try {

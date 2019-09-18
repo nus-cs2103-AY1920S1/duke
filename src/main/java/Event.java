@@ -1,3 +1,4 @@
+import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -8,7 +9,7 @@ public class Event extends Tasks {
     private static SimpleDateFormat FORMATOUT = new SimpleDateFormat("dd MMMMM yyyy ha");
 
     public Event(String dets, Date date) {
-        super(dets);
+        super(dets, "E");
         this.date = date;
         this.dateOut = FORMATOUT.format(date);
     }
@@ -17,6 +18,17 @@ public class Event extends Tasks {
         super(dets, status);
         this.date = date;
         this.dateOut = FORMATOUT.format(date);
+    }
+
+    /**
+     * Snoozes the task for 7 days when executed
+     */
+    void snooze() {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, 7);
+        date = c.getTime();
+        dateOut = FORMATOUT.format(date);
     }
 
     /**

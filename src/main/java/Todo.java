@@ -2,7 +2,7 @@ public class Todo extends Tasks {
     private final String TAG = "T";
 
     public Todo(String dets) {
-        super(dets);
+        super(dets, "T");
     }
 
     public Todo(String dets, int status) {

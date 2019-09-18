@@ -164,7 +164,7 @@ public class Parser {
             String[] inputArray = input.split(" ", 2);
             String[] cmdArgs = new String[0];
             cmdArgs = inputArray[1].split(" /at ", 2);
-            String reminder = "Reminder for task no. " + cmdArgs[0];
+            String reminder = "Reminder for " + cmdArgs[0];
             duration = Duration.between(LocalDateTime.now(), LocalDateTime.parse(cmdArgs[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
         } finally {
             
@@ -179,7 +179,7 @@ public class Parser {
             String[] inputArray = input.split(" ", 2);
             String[] cmdArgs = new String[0];
             cmdArgs = inputArray[1].split(" /at ", 2);
-            reminder = "Reminder for task no. " + cmdArgs[0];
+            reminder = "Reminder for task" + cmdArgs[0];
         } finally {
             
         }

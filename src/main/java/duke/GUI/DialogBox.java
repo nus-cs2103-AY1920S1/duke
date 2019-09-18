@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,8 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 
 public class DialogBox extends HBox {
 
@@ -22,8 +20,6 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-    @FXML
-    private VBox textContainer;
 
     private DialogBox(String text, Image img) {
         try {
@@ -49,16 +45,30 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox object containing user inputs to MainWindow.
+     * @param text String of user inputs.
+     * @param img Image of the user.
+     * @return a DialogBox object containing user inputs
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #DCDCDC;");
+        db.setStyle("-fx-background-color: #C2DFFF;"
+                + "-fx-background-radius: 15;");
         return db;
     }
 
+    /**
+     * Returns a DialogBox object containing duke's responses to MainWindow.
+     * @param text String of duke's response.
+     * @param img Image of duke
+     * @return a DialogBox object containing duke's responses
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setStyle("-fx-background-color: #F4F4F4;");
+        db.setStyle("-fx-background-color: #E5E4E2;"
+                + "-fx-background-radius: 15;");
         return db;
     }
 }

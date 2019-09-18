@@ -1,4 +1,4 @@
-package duke;
+package duke.core;
 
 /**
  * Encapsulates a Storage object to deal with loading tasks from the file

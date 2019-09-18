@@ -1,4 +1,4 @@
-package duke;
+package duke.core;
 
 /**
  * Encapsulates a TaskList object, which contains the task list,
@@ -42,7 +42,7 @@ public class TaskList {
         String message = "Here are the tasks in your list: ";
         int i = 0;
         for (Task task : list) {
-            message += "\n" + (i+1) + ". " + task;
+            message += "\n" + (i + 1) + ". " + task;
             i++;
         }
         //for (int i = 0; i < list.size(); i++) {
@@ -59,7 +59,7 @@ public class TaskList {
         int i = 0;
         for (Task task : list) {
             if (task.toString().contains(keyword)) {
-               message += "\n" + (i + 1) + ". " + task ;
+                message += "\n" + (i + 1) + ". " + task;
                 i++;
             }
         }
@@ -112,7 +112,7 @@ public class TaskList {
 
     /**
      * Marks the task of the specified index to "done".
-     * @param idx integer that represents the index of the task in the command.
+     * @param indices integer array that represents the index of the task in the command.
      */
     public String doneTask(int[] indices) {
         StringBuilder message = new StringBuilder("Nice! I've marked the following task(s) as done: ");
@@ -127,13 +127,13 @@ public class TaskList {
 
     /**
      * Deletes the task in the command from the task list.
-     * @param indices integer that represents the index of the task in the command.
+     * @param indices integer array that represents the index of the task in the command.
      */
     public String deleteTask(int[] indices) {
         StringBuilder message = new StringBuilder("Noted. I've removed the task(s): ");
         ArrayList<Task> toRemove = new ArrayList<>();
         for (int i : indices) {
-            assert i >=1 && i <= list.size() : "Invalid index input";
+            assert i >= 1 && i <= list.size() : "Invalid index input";
             list.get(i - 1).markAsDeleted();
             toRemove.add(list.get(i - 1));
             message.append("\n  ");

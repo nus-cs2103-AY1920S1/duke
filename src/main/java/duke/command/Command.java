@@ -4,8 +4,8 @@ package duke.command;
  * Encapsulates a Command object that is able to represent different types of command.
  */
 
-import duke.Storage;
-import duke.TaskList;
+import duke.core.Storage;
+import duke.core.TaskList;
 
 import java.io.IOException;
 
@@ -24,8 +24,8 @@ public class Command {
     /**
      * Executes actions according different command type.
      * @param tasks TaskList object containing a list of existing tasks.
-     * @param storage
-     * @throws IOException
+     * @param storage the storage object that deals with saving and loading task lists.
+     * @throws IOException thrown when no file found.
      */
     public String execute(TaskList tasks, Storage storage) throws IOException {
         return "";

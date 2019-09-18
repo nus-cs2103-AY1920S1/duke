@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
+import duke.core.Parser;
+import duke.core.Storage;
+import duke.core.TaskList;
 
 /**
  * Encapsulates a FindCommand object in charge of finding tasks which contains the keyword
@@ -15,7 +15,7 @@ public class FindCommand extends Command {
      * The constructor is inherited from Command class.
      * @param fullCommand String of valid, full command input
      */
-    public FindCommand (String fullCommand) {
+    public FindCommand(String fullCommand) {
         super(fullCommand);
     }
 

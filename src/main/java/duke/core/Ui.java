@@ -2,7 +2,7 @@
  * Encapsulates a ui object to deal with interactions with the user.
  */
 
-package duke;
+package duke.core;
 
 import java.util.Scanner;
 

@@ -2,6 +2,8 @@
  * Encapsulates a DukeTest object to run JUnit test on Duke.
  */
 
+import duke.core.Parser;
+import duke.task.Todo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

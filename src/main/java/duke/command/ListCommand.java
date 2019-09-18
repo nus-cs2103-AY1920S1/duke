@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
+import duke.core.Storage;
+import duke.core.TaskList;
 
 /**
  * Encapsulates a ListCommand object in charge of listing existing tasks in the list.
@@ -13,7 +13,7 @@ public class ListCommand extends Command {
      * The constructor is inherited from Command class.
      * @param fullCommand String of valid, full command input
      */
-    public ListCommand (String fullCommand) {
+    public ListCommand(String fullCommand) {
         super(fullCommand);
     }
 

@@ -1,6 +1,13 @@
-package duke;
+package duke.core;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 import java.util.Arrays;
 
@@ -85,7 +92,7 @@ public class Parser {
      * Returns the command type which is the first word of the full command.
      * @return String of command type.
      */
-    String getCommandType() {
+    public String getCommandType() {
         return part[0];
     }
 

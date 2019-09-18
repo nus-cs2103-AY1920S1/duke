@@ -4,9 +4,9 @@ package duke.command;
  * Encapsulates a DeleteCommand object in charge of deleting the target task from the list.
  */
 
-import duke.Parser;
-import duke.Storage;
-import duke.TaskList;
+import duke.core.Parser;
+import duke.core.Storage;
+import duke.core.TaskList;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
      * The constructor is inherited from Command class.
      * @param fullCommand String of valid, full command input
      */
-    public DeleteCommand (String fullCommand) {
+    public DeleteCommand(String fullCommand) {
         super(fullCommand);
     }
 

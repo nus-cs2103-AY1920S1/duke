@@ -1,4 +1,4 @@
-package duke;
+package duke.core;
 
 /**
  * This program reads in command, adds new tasks into the task lists, changes the task
@@ -9,7 +9,6 @@ import duke.command.Command;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Duke {
 
@@ -20,20 +19,8 @@ public class Duke {
 
     /**
      * Loads the data from given file path.
-     * @param filePath filepath of the data of previous task lists.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
-
-    Duke() {
+    public Duke() {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
         try {
@@ -44,7 +31,12 @@ public class Duke {
         }
     }
 
-    String getResponse(String input) {
+    /**
+     * Returns a string representation of duke's response to the DialogBox.
+     * @param input String of user input.
+     * @return String of duke's response to be shown.
+     */
+    public String getResponse(String input) {
         if (input.equals("bye")) {
             return ui.sayBye();
         } else {
@@ -58,7 +50,7 @@ public class Duke {
         }
     }
 
-    String getGreeting() {
+    public String getGreeting() {
         return ui.greet();
     }
 }

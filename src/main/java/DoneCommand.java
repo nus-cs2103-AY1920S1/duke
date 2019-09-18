@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Marks a task as done to indicate the completion of the task.
+ */
 public class DoneCommand extends Command {
 
 	private String input;
@@ -16,6 +19,12 @@ public class DoneCommand extends Command {
 		}
 	}
 
+	/**
+	 * Executes the done command to mark the selected task as completed.
+	 * @param tasks Tasklist consisting of current tasks.
+	 * @param storage Updating of storage with new tasks.
+	 * @return A string to indicate the completion of the selected task.
+	 */
 	public String execute(TaskList tasks, DukeWriteFile storage) {
 		StringBuilder taskDone = new StringBuilder();
 		try {

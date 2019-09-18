@@ -22,6 +22,12 @@ public class Event extends Task {
 		return at;
 	}
 
+	/**
+	 * Creates a event task with the description and the time/venue of the event.
+	 * @param input Description of the event.
+	 * @return Event task to be added into the tasklist.
+	 * @throws DukeException
+	 */
 	public static Event createEvent(String input) throws DukeException {
 		if (input.length() < 6) {
 			throw new DukeException(Ui.EMPTY_INPUT);
@@ -38,6 +44,14 @@ public class Event extends Task {
 		return newEvent;
 	}
 
+	/**
+	 * Executes the event command which displays the description of the event created.
+	 * @param task Event task to be added into the tasklist.
+	 * @param storage Storage of the tasklist.
+	 * @param tasks Tasklist.
+	 * @return A string of the task that has been added into the tasklist.
+	 * @throws IOException
+	 */
 	public String execute(Event task, DukeWriteFile storage, TaskList tasks) throws IOException {
 		StringBuilder printTask = new StringBuilder();
 		printTask.append(Ui.BORDER + "\nGot it. I've added this task:\n");

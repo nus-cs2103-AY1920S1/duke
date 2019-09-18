@@ -13,7 +13,7 @@ public class DateAndTime {
 	}
 
 	/**
-	 * Changing the format of the date from dd/mm/yyyy to [date] of [month] [year].
+	 * Formats the date from dd/mm/yyyy to [date] of [month] [year].
 	 *
 	 * @param date Date of the deadline or event.
 	 * @return Formatted date.
@@ -37,7 +37,7 @@ public class DateAndTime {
 	}
 
 	/**
-	 * Changing the format of time from 24-hour clock to 12-hour clock.
+	 * Formats the time from 24-hour clock to 12-hour clock.
 	 *
 	 * @param time Time of the deadline or event.
 	 * @return Formatted time.
@@ -90,7 +90,7 @@ public class DateAndTime {
 	}
 
 	/**
-	 * Formatting of the date.
+	 * Formats the date of the task.
 	 *
 	 * @param day day of the date.
 	 * @return Formatted day.
@@ -133,7 +133,7 @@ public class DateAndTime {
 	}
 
 	/**
-	 * Formatting of the month from number form to the name of the month.
+	 * Formats the month from number form to the name of the month.
 	 *
 	 * @param month
 	 * @return Formatted month.
@@ -186,7 +186,7 @@ public class DateAndTime {
 	}
 
 	/**
-	 * Converting of the date and/or time of the deadline to the required format.
+	 * Converts the date and/or time of the deadline to the required format.
 	 *
 	 * @param time Date/time of the deadline.
 	 * @return Formatted date/time.
@@ -196,32 +196,21 @@ public class DateAndTime {
 		String[] timeAndDate = time.split(" ");
 		String formatDeadline = "";
 		for (int i = 0; i < timeAndDate.length; i++) {
+			String formattedDateAndTime = "";
 			String[] date = timeAndDate[i].split("/");
-			if (date.length == 3) {
-				if (timeAndDate.length == 1) {
-					formatDeadline += DateTime.formatDate(timeAndDate[i]);
-				}else if (i == 0) {
-					formatDeadline += DateTime.formatDate(timeAndDate[i]) + ", ";
-				} else if (i == timeAndDate.length - 1) {
-					formatDeadline += DateTime.formatDate(timeAndDate[i]);
-				} else {
-					formatDeadline += DateTime.formatDate(timeAndDate[i]) + ", ";
-				}
-			} else if (timeAndDate[i].length() == 4) {
-				if (timeAndDate.length == 1) {
-					formatDeadline += DateTime.formatTime(timeAndDate[i]);
-				}else if (i == 0) {
-					formatDeadline += DateTime.formatTime(timeAndDate[i]) + ", ";
-				} else if (i == timeAndDate.length - 1) {
-					formatDeadline += DateTime.formatTime(timeAndDate[i]);
-				} else {
-					formatDeadline += DateTime.formatTime(timeAndDate[i]) + ", ";
-				}
+			if (date.length == 3) { //If the current input is a date, then format the date accordingly.
+				formattedDateAndTime = DateTime.formatDate(timeAndDate[i]);
+			} else if (timeAndDate[i].length() == 4) { //Formats the time from 24h clock to 12 hr clock.
+				formattedDateAndTime = DateTime.formatTime(timeAndDate[i]);
 			} else {
-				if (i == 0 || i != timeAndDate.length - 1) {
-					formatDeadline += timeAndDate[i] + " ";
-				}
+				formattedDateAndTime = timeAndDate[i];
 			}
+			if (i == 0 || i != timeAndDate.length - 1) {
+				formatDeadline += formattedDateAndTime + " ";
+			} else {
+				formatDeadline += formattedDateAndTime;
+			}
+
 		}
 		return formatDeadline;
 	}

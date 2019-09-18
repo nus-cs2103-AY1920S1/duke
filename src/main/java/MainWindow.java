@@ -8,6 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+/**
+ * Controller for MainWindow. Provides the layout for the other controls.
+ */
 public class MainWindow extends AnchorPane {
 	@FXML
 	private ScrollPane scrollPane;
@@ -20,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
 	private Duke duke;
 
-	private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-	private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+	private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Nub.png"));
+	private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Nub3.png"));
 
 	@FXML
 	public void initialize() {

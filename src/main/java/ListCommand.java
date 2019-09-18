@@ -1,3 +1,6 @@
+/**
+ * A command to list out all the current tasks.
+ */
 public class ListCommand extends Command{
 
 	private String input;
@@ -7,6 +10,12 @@ public class ListCommand extends Command{
 		this.input = input;
 	}
 
+	/**
+	 * Executes the list command which will list out all current tasks.
+	 * @param tasks Tasklist consisting of current tasks.
+	 * @param storage Updating of storage with new tasks.
+	 * @return A string which contains all of the current tasks with their descriptions.
+	 */
 	public String execute(TaskList tasks, DukeWriteFile storage) {
 		int itemNumber = 1;
 		int numberOfTask = tasks.getCounter();

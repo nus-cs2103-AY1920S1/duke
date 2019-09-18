@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Deletes a task inside the tasklist which has been done or deemed unnecessary.
+ */
 public class DeleteCommand extends Command {
 
 	private String input;
@@ -9,13 +12,20 @@ public class DeleteCommand extends Command {
 		this.input = input;
 		taskDelete = input.split(" ");
 		if (taskDelete.length == 1) {
-			throw new DukeException("☹ OOPS!!! Which task would you like to delete?");
+			throw new DukeException("OOPS!!! Which task would you like to delete?");
 		}
 		if (taskDelete.length > 2) {
 			throw new DukeInvalidArgumentException(Ui.DELETE_FORMAT, input);
 		}
 	}
 
+	/**
+	 * Executes the delete command, removing the task in the tasklist.
+	 *
+	 * @param tasks   Tasklist consisting of current tasks.
+	 * @param storage Updating of storage with new tasks.
+	 * @return String to display the task that has been deleted.
+	 */
 	public String execute(TaskList tasks, DukeWriteFile storage) {
 		StringBuilder taskToBeDeleted = new StringBuilder();
 		try {

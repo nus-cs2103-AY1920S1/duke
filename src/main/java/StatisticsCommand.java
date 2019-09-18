@@ -1,3 +1,7 @@
+/**
+ * Tracks the number of tasks that has been completed/not completed and the number of tasks belonging to the
+ * respective task type.
+ */
 public class StatisticsCommand extends Command {
 
 	int taskDone;
@@ -14,6 +18,12 @@ public class StatisticsCommand extends Command {
 		todoTasks = 0;
 	}
 
+	/**
+	 * Executes the statistics command to calculate the number of task for the respective type of tasks.
+	 * @param tasks Tasklist consisting of current tasks.
+	 * @param storage Updating of storage with new tasks.
+	 * @return A String to indicate the number of tasks for each type.
+	 */
 	public String execute(TaskList tasks, DukeWriteFile storage) {
 
 		for (int i = 0; i < tasks.getCounter(); i++) {

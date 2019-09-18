@@ -48,7 +48,7 @@ Sees all your tasks and makes you feel stressed or happy depending on how long t
 Example of usage: 
 * list
 
-## Find a task: `find`
+### Find a task: `find`
 Find your tasks by searching for the description.
 
 Example of usage: 

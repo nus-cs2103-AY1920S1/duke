@@ -86,7 +86,7 @@ Expected outcome:
 
 `Removes specific numbered task from list`
 
-### `List` - Displays current tasks
+### `list` - Displays current tasks
 
 Displays current tasks.
 

@@ -7,6 +7,7 @@ import duke.command.UnknownCommandException;
 import duke.parser.ParserManager;
 import duke.task.TaskList;
 import duke.ui.MainWindow;
+import javafx.animation.PauseTransition;
 
 public class Duke {
     private TaskList taskList;
@@ -53,7 +54,18 @@ public class Duke {
                 return Ui.getInvalidStatementMessage(input);
             }
         }
-        return Ui.getGoodbyeMessage();
+        exit();
+        return null;
+    }
+
+    /**
+     * Exits the application.
+     */
+    public void exit() {
+        mainWindow.display(Ui.getGoodbyeMessage());
+        PauseTransition exitTransition = new PauseTransition();
+        exitTransition.setOnFinished(mainWindow.exitHandler);
+        exitTransition.play();
     }
 
     /**

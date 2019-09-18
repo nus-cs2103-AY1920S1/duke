@@ -1,6 +1,5 @@
 package duke;
 
-import duke.command.Commands;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TaskList;
@@ -120,15 +119,17 @@ public class DataStorage {
             directory = directory.getParent();
             count++;
         }
-        if (count > SEARCH_LIMIT) {
+        if ((count > SEARCH_LIMIT) || (directory == null)) {
             // Create new directory
+            Path newPath = Paths.get(workingDirectory, PARENT_DIR_NAME);
             try {
-                Path newPath = Paths.get(workingDirectory, PARENT_DIR_NAME);
-                Files.createDirectory(newPath);
-                this.path = Paths.get(newPath.toString(), FILE_NAME).toString();
+                if (!Files.isDirectory(newPath)) {
+                    Files.createDirectory(newPath);
+                }
             } catch (IOException e) {
                 System.out.println("Storage location not found :( ");
             }
+            this.path = Paths.get(newPath.toString(), FILE_NAME).toString();
         } else {
             this.path = Paths.get(directory.toString(), PARENT_DIR_NAME, FILE_NAME).toString();
         }

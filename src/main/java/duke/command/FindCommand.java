@@ -26,7 +26,6 @@ public class FindCommand extends Command {
      */
     public FindCommand(String searchTerm) {
         this.searchTerms = Arrays.asList(searchTerm.substring(1).split(" "));
-        System.out.print(searchTerms.toString());
     }
 
     /**

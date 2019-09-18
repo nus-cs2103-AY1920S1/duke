@@ -39,7 +39,6 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadline) throws DukeException {
         super(description);
-        System.out.println("Deadline is" + deadline);
         this.deadline = parseDate(deadline);
         if (this.getTaskDescription().equals("")) {
             throw new DukeException(":( OOPS!!! The description of a Deadline cannot be empty.");

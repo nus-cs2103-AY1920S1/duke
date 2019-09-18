@@ -29,6 +29,14 @@ public class UI {
     private static final String TRIVIA_START = "Answer my questions, filthy Joestar.";
     private static final String TRIVIA_ANSWER_ADDED = "Hm, so that is the answer to this question:\n";
     private static final String TRIVIA_EXIT = "No, this cannot be, I AM DIOOOOOOOO!!!";
+    private static final String TRIVIA_DELETE_QUESTION = "What?? You are erasing this knowledge from my memory???\n";
+    private static final String TRIVIA_DELETE_ANSWER = "What?? I'm forgetting an answer...\n";
+    private static final String TRIVIA_FINISH = "Interesting match, I will make sure to beat you next time...";
+    private static final String TRIVIA_CORRECT = "Ho, you got the correct answer, Jotaro\n";
+    private static final String TRIVIA_CORRECT_FINAL = "Dammit, you got the final answer correct.";
+    private static final String TRIVIA_WRONG = "HAH, you have slipped up yet again!\n";
+    private static final String TRIVIA_WRONG_FINAL = "WRONG! What a way to end the trivia, Joestar.";
+    private static final String TRIVIA_NEXT_QUESTION = "Next question:\n";
 
     /**
      * Prints out a welcome message.
@@ -145,5 +153,37 @@ public class UI {
 
     public String exitTrivia() {
         return TRIVIA_EXIT;
+    }
+
+    public String deleteQuestion(String deletedQuestion) {
+        return TRIVIA_DELETE_QUESTION + deletedQuestion;
+    }
+
+    public String deleteAnswer(String deletedAnswer) {
+        return TRIVIA_DELETE_ANSWER + deletedAnswer;
+    }
+
+    public String showQuestion(Trivia trivia) {
+        return trivia.showCurrentQuestion();
+    }
+
+    public String finishTrivia() {
+        return TRIVIA_FINISH;
+    }
+
+    public String correctAnswer(Trivia trivia) {
+        return TRIVIA_CORRECT + TRIVIA_NEXT_QUESTION + trivia.showCurrentQuestion();
+    }
+
+    public String correctAnswerFinal() {
+        return TRIVIA_CORRECT_FINAL;
+    }
+
+    public String wrongAnswer(Trivia trivia) {
+        return TRIVIA_WRONG + TRIVIA_NEXT_QUESTION + trivia.showCurrentQuestion();
+    }
+
+    public String wrongAnswerFinal() {
+        return TRIVIA_WRONG_FINAL;
     }
 }

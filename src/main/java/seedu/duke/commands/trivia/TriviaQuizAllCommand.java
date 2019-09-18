@@ -8,6 +8,7 @@ import seedu.duke.util.UI;
 public class TriviaQuizAllCommand extends TriviaCommand {
     @Override
     public String execute(Trivia trivia, UI ui, Storage storage) throws TriviaException {
-        return null;
+        trivia.startQuestionIndex();
+        return trivia.showCurrentQuestion();
     }
 }

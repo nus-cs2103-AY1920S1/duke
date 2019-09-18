@@ -43,9 +43,7 @@ public class Duke {
             } else {
                 return "Well that sucks";
             }
-        } catch (DukeException ex) {
-            return ui.showError(ex.getMessage());
-        } catch (TriviaException ex) {
+        } catch (DukeException | TriviaException ex) {
             return ui.showError(ex.getMessage());
         }
     }
@@ -105,9 +103,7 @@ public class Duke {
                     MasterCommand c = Parser.parse(command);
                     System.out.println(c.execute(trivia, ui, storageHandler));
                 }
-            } catch (DukeException ex) {
-                System.out.println(ui.showError(ex.getMessage()));
-            } catch (TriviaException ex) {
+            } catch (DukeException | TriviaException ex) {
                 System.out.println(ui.showError(ex.getMessage()));
             }
         }

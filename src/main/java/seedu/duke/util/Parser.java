@@ -10,6 +10,7 @@ import seedu.duke.exceptions.TriviaException;
 public class Parser {
 
     private static String mode = "base";
+    private static boolean isQuizzing = false;
 
     public static String getMode() {
         return mode;
@@ -26,7 +27,20 @@ public class Parser {
     public static TriviaCommand parseTrivia(String input) throws TriviaException {
         String[] keywords = input.split(" ");
         try {
-            if (keywords[0].equals("add")) {
+            if (isQuizzing) {
+                if (keywords[0].equals("/quit")) {
+                    isQuizzing = false;
+                    return new TriviaQuitCommand();
+                } else {
+                    TriviaAnswerCommand temp = new TriviaAnswerCommand(input);
+                    if (temp.isFinal()) {
+                        isQuizzing = false;
+                        return temp;
+                    } else {
+                        return temp;
+                    }
+                }
+            } else if (keywords[0].equals("add")) {
                 return new TriviaAddQuestionCommand(parseAddQuestion(keywords));
             } else if (keywords[0].equals("addans")) {
                 String[] args = parseAddAnswer(keywords);
@@ -36,11 +50,23 @@ public class Parser {
             } else if (keywords[0].equals("exit")) {
                 mode = "base";
                 return new TriviaExitCommand();
+            } else if (keywords[0].equals("delete")) {
+                int[] indexes = parseTriviaDelete(keywords);
+                if (indexes.length == 1) {
+                    return new TriviaDeleteCommand(indexes[0]);
+                } else {
+                    return new TriviaDeleteCommand(indexes[0], indexes[1]);
+                }
+            } else if (keywords[0].equals("quiz-all")) {
+                isQuizzing = true;
+                return new TriviaQuizAllCommand();
             } else {
                 throw new TriviaException("FOOL!!! I can't hear you over THE WORLD!!!");
             }
         } catch (NumberFormatException ex) {
             throw new TriviaException("FOOL!!! I only accept numbers!");
+        } catch (IndexOutOfBoundsException ex) {
+            throw new TriviaException("HA!!! You cannot make me forget what is not there.");
         }
     }
 
@@ -202,5 +228,24 @@ public class Parser {
             }
             return new String[] {temp.strip(), date.strip()};
         }
+    }
+
+    public static int[] parseTriviaDelete(String[] keywords) throws TriviaException {
+        int[] indexes;
+        try {
+            if (keywords[1].equals("question") && keywords.length == 3) {
+                indexes = new int[1];
+                indexes[0] = Integer.parseInt(keywords[2]);
+            } else if (keywords[1].equals("answer") && keywords.length == 4) {
+                indexes = new int[2];
+                indexes[0] = Integer.parseInt(keywords[2]);
+                indexes[1] = Integer.parseInt(keywords[3]);
+            } else {
+                throw new TriviaException("Do you take me for a fool?");
+            }
+        } catch (IndexOutOfBoundsException ex) {
+            throw new TriviaException("What are you trying to pull, Jotaro?");
+        }
+        return indexes;
     }
 }

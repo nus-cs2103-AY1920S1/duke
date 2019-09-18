@@ -49,10 +49,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (input.equals("bye")) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog("HA, you're lucky this time, Jotaro.", dukeImage)
-            );
+            showOutput(input, "HA, you're lucky this time, Jotaro.");
             Timer buffer = new Timer();
             TimerTask closeWindow = new TimerTask() {
                 public void run() {
@@ -60,12 +57,22 @@ public class MainWindow extends AnchorPane {
                 }
             };
             buffer.schedule(closeWindow, 1000);
-        } else {
+        } else if (input.equals("quiz-all")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog("It's time to begin your test.", dukeImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
+        } else {
+            showOutput(input, response);
         }
         userInput.clear();
+    }
+
+    private void showOutput(String input, String response) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
     }
 }

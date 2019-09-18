@@ -15,6 +15,10 @@ public class QuestionAnswer {
         possibleAnswers.add(answer);
     }
 
+    public String deleteAnswer(int index) {
+        return possibleAnswers.remove(index);
+    }
+
     public String getQuestion() {
         return question;
     }

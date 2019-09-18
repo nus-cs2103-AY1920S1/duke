@@ -84,7 +84,7 @@ public class TaskList {
     private String getSaveString(Task task) {
         StringJoiner joiner = new StringJoiner("|");
         for (String field : task.getSaveList()) {
-            joiner.add(escape(field));
+            joiner.add(toSaveString(field));
         }
         return joiner.toString();
     }
@@ -100,13 +100,13 @@ public class TaskList {
         Task task;
         switch (data[0]) {
         case "T":
-            task = new ToDo(unescape(data[2]));
+            task = new ToDo(toOriginalString(data[2]));
             break;
         case "D":
-            task = new Deadline(unescape(data[2]), unescape(data[3]));
+            task = new Deadline(toOriginalString(data[2]), toOriginalString(data[3]));
             break;
         case "E":
-            task = new Event(unescape(data[2]), unescape(data[3]));
+            task = new Event(toOriginalString(data[2]), toOriginalString(data[3]));
             break;
         default:
             return null;
@@ -123,17 +123,17 @@ public class TaskList {
      * @param str String to escape.
      * @return Escaped string.
      */
-    private String escape(String str) {
+    private String toSaveString(String str) {
         return str.replace("\\", "\\\\").replace("|", "\\p");
     }
 
     /**
-     * Unescapes an escaped string to use for reconstructing a task.
+     * Converts an escaped string back to the original string for reconstructing a task.
      *
      * @param str String to unescape.
      * @return Original string.
      */
-    private String unescape(String str) {
+    private String toOriginalString(String str) {
         // Split the array at double backslashes, keeping trailing empty strings
         String[] parts = str.split("\\\\\\\\", -1);
 

@@ -4,6 +4,7 @@ package duke.command;
  * Encapsulates a Command object that is able to represent different types of command.
  */
 
+import duke.core.DukeException;
 import duke.core.Storage;
 import duke.core.TaskList;
 
@@ -27,7 +28,7 @@ public class Command {
      * @param storage the storage object that deals with saving and loading task lists.
      * @throws IOException thrown when no file found.
      */
-    public String execute(TaskList tasks, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         return "";
     }
 }

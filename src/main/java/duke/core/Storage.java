@@ -39,34 +39,37 @@ public class Storage {
      * @return an ArrayList of tasks loaded from the file.
      * @throws FileNotFoundException if the file cannot be found by the path.
      */
-    ArrayList<Task> load() throws FileNotFoundException {
-        FileReader fr = new FileReader(filePath);
+    ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
-        Scanner s = new Scanner(fr);
+        try {
+            FileReader fr = new FileReader(filePath);
+            Scanner s = new Scanner(fr);
+            while (s.hasNext()) {
+                String line = s.nextLine();
+                String[] part = line.split("/");
 
-        while (s.hasNext()) {
-            String line = s.nextLine();
-            String[] part = line.split("/");
+                // Status is either done or not done.
+                String status = part[1];
+                boolean isDone;
+                isDone = status.equals("✓");
 
-            // Status is either done or not done.
-            String status = part[1];
-            boolean isDone;
-            isDone = status.equals("✓");
-
-            // Checks the type of task.
-            switch (part[0]) {
-            case "T":
-                tasks.add(new Todo(part[2], isDone));
-                break;
-            case "D":
-                tasks.add(new Deadline(part[2], isDone, part[3]));
-                break;
-            case "E":
-                tasks.add(new Event(part[2], isDone, part[3]));
-                break;
-            default:
-                assert false : part[0];
+                // Checks the type of task.
+                switch (part[0]) {
+                case "T":
+                    tasks.add(new Todo(part[2], isDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(part[2], isDone, part[3]));
+                    break;
+                case "E":
+                    tasks.add(new Event(part[2], isDone, part[3]));
+                    break;
+                default:
+                    assert false : part[0];
+                }
             }
+        } catch (FileNotFoundException e) {
+            throw new DukeException("☹ OOPS!!! Duke can't find the file.");
         }
         return tasks;
     }
@@ -74,11 +77,15 @@ public class Storage {
     /**
      * Saves the tasks in the list whenever there is any change.
      */
-    public void updateFile(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (Task task : tasks.getTaskList()) {
-            fw.write(task.storageFormat() + "\n");
-            fw.flush();
+    public void updateFile(TaskList tasks) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            for (Task task : tasks.getTaskList()) {
+                fw.write(task.storageFormat() + "\n");
+                fw.flush();
+            }
+        } catch (IOException e) {
+            throw new DukeException("☹ OOPS!!! Duke can't find the file.");
         }
     }
 }

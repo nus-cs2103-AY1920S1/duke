@@ -4,6 +4,7 @@ package duke.command;
  * Encapsulates a DeleteCommand object in charge of deleting the target task from the list.
  */
 
+import duke.core.DukeException;
 import duke.core.Parser;
 import duke.core.Storage;
 import duke.core.TaskList;
@@ -27,7 +28,7 @@ public class DeleteCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    public String execute(TaskList tasks, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Parser parser = new Parser(fullCommand);
         String message = tasks.deleteTask(parser.getIndices());
         storage.updateFile(tasks);

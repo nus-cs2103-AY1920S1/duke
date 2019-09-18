@@ -4,6 +4,7 @@ package duke.command;
  * Encapsulates a DoneCommand object in charge of marking the target task as done.
  */
 
+import duke.core.DukeException;
 import duke.core.Parser;
 import duke.core.Storage;
 import duke.core.TaskList;
@@ -27,7 +28,7 @@ public class DoneCommand extends Command {
      * @param storage
      * @throws IOException
      */
-    public String execute(TaskList tasks, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Parser parser = new Parser(fullCommand);
         String message = tasks.doneTask(parser.getIndices());
         storage.updateFile(tasks);

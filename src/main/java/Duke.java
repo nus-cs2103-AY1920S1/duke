@@ -22,10 +22,7 @@ public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Storage storage;
-    private TaskList tasks;
-    private UI ui;
-    private Command c;
+    private UI ui = new UI();
 
     public Duke() {
     }
@@ -91,7 +88,6 @@ public class Duke extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-
     }
     /**
      * Iteration 1:
@@ -124,14 +120,14 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * To generate a response to user input.
+     * Running the main code to run the entire chatbot
      */
     protected String getResponse(String input) {
         if (input != null) {
+            Greeting();
             String output = "";
             try {
-                UI ui = new UI();
                 TaskList taskList = new TaskList();
                 Storage storage = new Storage(taskList);
                 Command c = new Command();
@@ -141,9 +137,13 @@ public class Duke extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return "TaiPing say: " + output;
+            return "TaiPing say: \n" + output;
         } else {
             return "error";
         }
+    }
+
+    protected String Greeting() {
+        return ui.printGreeting();
     }
 }

@@ -1,5 +1,8 @@
 import java.io.IOException;
 
+/**
+ * Command class to execute all the different commands the chatbot receive
+ */
 public class Command {
 
     public Command() {
@@ -7,7 +10,6 @@ public class Command {
 
     public String execute(TaskList taskList, UI ui,Storage storage, String input) throws DukeException, IOException {
         storage.LoadFile();
-        ui.printGreeting();
         String TaskLine = input;
         Parser parser = new Parser();
         String reply = "";
@@ -53,13 +55,13 @@ public class Command {
                 try {
                     int indexOfSlash = TaskLine.indexOf("/");
                     for (int i = 0; i < taskList.size(); i++) {
-                        if (taskList.get(i).getDescription().equals(TaskLine.substring(9, indexOfSlash - 1)) &&
+                        if (taskList.get(i).getDescription().equals(TaskLine.substring(8, indexOfSlash - 1)) &&
                             taskList.get(i).getDate().equals(TaskLine.substring(indexOfSlash + 4))) {
                             reply = ui.throwInputError("duplicate");
                             break outLoop;
                         }
                     }
-                    Task deadlineTask = new Deadline(TaskLine.substring(9, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
+                    Task deadlineTask = new Deadline(TaskLine.substring(8, indexOfSlash - 1), TaskLine.substring(indexOfSlash + 4));
                     taskList.add(deadlineTask);
                     reply = ui.printAddTask(deadlineTask, taskList.size());
                 } catch (Exception e){
@@ -71,7 +73,7 @@ public class Command {
                 try {
                     int indexOfSlash = TaskLine.indexOf("/");
                     for (int i = 0; i < taskList.size(); i++) {
-                        if (taskList.get(i).getDescription().equals(TaskLine.substring(9, indexOfSlash - 1)) &&
+                        if (taskList.get(i).getDescription().equals(TaskLine.substring(6, indexOfSlash - 1)) &&
                                 taskList.get(i).getDate().equals(TaskLine.substring(indexOfSlash + 4))) {
                             reply = ui.throwInputError("duplicate");
                             break outLoop;

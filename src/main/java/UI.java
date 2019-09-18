@@ -8,37 +8,45 @@ public class UI {
     public UI() {
     }
 
-    String line = ("____________________________________________________\n");
-    String lineOnly = ("____________________________________________________");
+    String line = ("_________________________________________________\n");
+    String lineOnly = ("_________________________________________________");
+    String bear = "\uD83D\uDC3B";
 
     public String printGreeting() {
-        String logo = "   _     _      _     _      _     _       _     _      _     _      _     _      _     _   \n" +
-                "  (c).-.(c)    (c).-.(c)    (c).-.(c)     (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)  \n" +
-                "   / ._. \\      / ._. \\      / ._. \\       / ._. \\      / ._. \\      / ._. \\      / ._. \\   \n" +
-                " __\\( Y )/__  __\\( Y )/__  __\\( Y )/__   __\\( Y )/__  __\\( Y )/__  __\\( Y )/__  __\\( Y )/__ \n" +
-                "(_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._) (_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._)\n" +
-                "   || T ||      || A ||      || I ||       || P ||      || I ||      || N ||      || G ||   \n" +
-                " _.' `-' '._  _.' `-' '._  _.' `-' '._   _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._ \n" +
-                "(.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.) (.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.)\n" +
-                " `-'     `-'  `-'     `-'  `-'     `-'   `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-' ";
-
+//        String logo = "   _     _      _     _      _     _       _     _      _     _      _     _      _     _   \n" +
+//                "  (c).-.(c)    (c).-.(c)    (c).-.(c)     (c).-.(c)    (c).-.(c)    (c).-.(c)    (c).-.(c)  \n" +
+//                "   / ._. \\      / ._. \\      / ._. \\       / ._. \\      / ._. \\      / ._. \\      / ._. \\   \n" +
+//                " __\\( Y )/__  __\\( Y )/__  __\\( Y )/__   __\\( Y )/__  __\\( Y )/__  __\\( Y )/__  __\\( Y )/__ \n" +
+//                "(_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._) (_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._)(_.-/'-'\\-._)\n" +
+//                "   || T ||      || A ||      || I ||       || P ||      || I ||      || N ||      || G ||   \n" +
+//                " _.' `-' '._  _.' `-' '._  _.' `-' '._   _.' `-' '._  _.' `-' '._  _.' `-' '._  _.' `-' '._ \n" +
+//                "(.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.) (.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.)(.-./`-'\\.-.)\n" +
+//                " `-'     `-'  `-'     `-'  `-'     `-'   `-'     `-'  `-'     `-'  `-'     `-'  `-'     `-' ";
+        String logo =  "\n" +
+                "  _____     _   ___ _           \n" +
+                " |_   _|_ _(_) | _ (_)_ _  __ _ \n" +
+                "   | |/ _` | | |  _/ | ' \\/ _` |\n" +
+                "   |_|\\__,_|_| |_| |_|_||_\\__, |\n" +
+                "                          |___/ \n";
         String greet = line +
-                "     Hello! I'm Tai Ping\n" +
-                "     What can I do for you?\n" +
+                "Hello! I'm Tai Ping, your tasks manager\n" +
+                "What can I do for you?\n" +
+                "To add task, type [TaskType] [Taskname]\n" +
+                "/by or /at [date and time]\n" +
                 lineOnly;
         return "Hello from\n" + logo + greet;
     }
 
     public String printBye() {
         String bye = line +
-                "     Bye. Hope to see you again soon!\n" +
+                "Bye. Hope to see you again soon!\n" +
                 line;
         return bye;
     }
 
     public String printIDK() {
         return line +
-                "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+                "OOPS!!! I'm sorry, but I don't know what that means" + bear + "\n" +
                 lineOnly;
     }
 
@@ -98,31 +106,31 @@ public class UI {
         switch (taskType) {
         case "todo" :
             return (line +
-                    "     Hey! Description of a todo cannot be empty :(\n" +
+                    "Hey! Description of a todo cannot be empty" + bear + "\n" +
                     lineOnly);
         case "event" :
             return (line +
-                    "     Hey! Description of a event cannot be empty :(\n" +
+                    "Hey! Description of a event cannot be empty" + bear + "\n" +
                     lineOnly);
         case "deadline" :
             return (line +
-                    "     Hey! Description of a deadline cannot be empty :(\n" +
+                    "Hey! Description of a deadline cannot be empty" + bear + "\n" +
                     lineOnly);
         case "done" :
             return (line +
-                    "     Hey! Description of a done cannot be empty :(\n" +
+                    "Hey! Description of a done cannot be empty" + bear + "\n" +
                     lineOnly);
         case "delete" :
             return (line +
-                    "     Hey! Description of a delete cannot be empty :(\n" +
+                    "Hey! Description of a delete cannot be empty" + bear + "\n" +
                     lineOnly);
         case "duplicate" :
             return (line +
-                    "     Hey! You are repeating your tasks :(\n" +
+                    "Hey! You are repeating your tasks" + bear + "\n" +
                     lineOnly);
         default :
             return (line +
-                    "     OOPS!!! I'm sorry, but I don't know what that means :(\n" +
+                    "OOPS!!! I'm sorry, but I don't know what that means" + bear + "\n" +
                     lineOnly);
         }
     }

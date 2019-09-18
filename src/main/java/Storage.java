@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 
+/**
+ * Storage class to store the files and load the files which contain the list of tasks
+ * It also run a check to see if the user have text files prior to running this chatbot
+ */
 public class Storage {
 
     protected TaskList taskList;

@@ -19,23 +19,36 @@ public final class Launcher {
     /**
      * Launches the Duke application, or exit if the argument is invalid.
      *
-     * @param args "cli" or "gui"
+     * @param args "cli" or "gui", defaults to "gui" if empty
      */
     public static void main(String[] args) {
-        if (args.length != 1 || !VALID_ARGS.contains(args[0])) {
+        if (!hasValidArgs(args)) {
             printUsageAndExit();
-        } else if (args[0].equals("cli")) {
+        }
+
+        String mode = getMode(args);
+        if (mode.equals("cli")) {
             launchCli();
-        } else if (args[0].equals("gui")) {
-            launchGui();
         } else {
-            // Should not reach here
-            assert false;
+            launchGui();
+        }
+    }
+
+    private static boolean hasValidArgs(String[] args) {
+        return args.length == 0 || args.length == 1 && VALID_ARGS.contains(args[0]);
+    }
+
+    private static String getMode(String[] args) {
+        if (args.length == 1 && args[0].equals("cli")) {
+            return "cli";
+        } else {
+            // Default to launching GUI
+            return "gui";
         }
     }
 
     private static void printUsageAndExit() {
-        System.err.println("Usage: java Launcher ( cli | gui )");
+        System.err.println("Usage: java -jar duke-0.x.jar [cli]");
         System.exit(1);
     }
 

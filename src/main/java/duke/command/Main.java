@@ -25,6 +25,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            scene.getStylesheets().add("/view/Style.css");
             stage.setScene(scene);
             stage.show();
             VBox dialogContainer = (VBox) scene.lookup("#dialogContainer");

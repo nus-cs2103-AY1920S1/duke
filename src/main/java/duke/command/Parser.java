@@ -32,36 +32,40 @@ public class Parser {
         String[] words = line.split(" ", 2);
         String command = words[0];
         switch (command) {
-            case "list":
-                ui.printList(taskList.list);
-                break;
-            case "reminder":
-                ui.printReminder(taskList.list);
-                break;
-            case "done":
-                processDone(Integer.parseInt(words[1]));
-                break;
-            case "todo":
-                processToDo(words);
-                break;
-            case "deadline":
-                processDeadline(words);
-                break;
-            case "event":
-                processEvent(words);
-                break;
-            case "delete":
-                processDelete(words);
-                break;
-            case "find":
-                processFind(words);
-                break;
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        case "list":
+            ui.printList(taskList.list);
+            break;
+        case "reminder":
+            ui.printReminder(taskList.list);
+            break;
+        case "done":
+            processDone(words);
+            break;
+        case "todo":
+            processToDo(words);
+            break;
+        case "deadline":
+            processDeadline(words);
+            break;
+        case "event":
+            processEvent(words);
+            break;
+        case "delete":
+            processDelete(words);
+            break;
+        case "find":
+            processFind(words);
+            break;
+        default:
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
-    public void processDone(int n) {
+    public void processDone(String[] w) throws DukeException{
+        if (w.length < 2) {
+            throw new DukeException("OOPS!!! The description of a done cannot be empty.");
+        }
+        int n = Integer.parseInt(w[1]);
         Task currTask = taskList.list.get(n - 1);
         currTask.setStatusIcon(true);
         ui.printDone(currTask);
@@ -69,7 +73,7 @@ public class Parser {
 
     public void processToDo(String[] w) throws DukeException {
         if (w.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         String desc = w[1];
         Task currTask = new ToDos(desc);
@@ -79,7 +83,7 @@ public class Parser {
 
     public void processDeadline(String[] w) throws DukeException, ParseException {
         if (w.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
         }
         int before = taskList.getSize();
         String desc = w[1].split(" /by ", 2)[0];
@@ -92,7 +96,7 @@ public class Parser {
 
     public void processEvent(String[] w) throws DukeException, ParseException {
         if (w.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
         }
         String desc = w[1].split(" /at ", 2)[0];
         String time = w[1].split(" /at ", 2)[1];

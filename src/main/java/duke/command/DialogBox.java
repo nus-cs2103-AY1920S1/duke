@@ -10,7 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
@@ -40,8 +41,11 @@ public class DialogBox extends HBox {
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
             dialog.setPadding(new Insets(10, 10, 10, 10));
-            displayPicture.setClip(new Circle(50, 35, 50));
-            dialog.setMinHeight((double) lineCount * 20);
+            dialog.setBorder(new Border(new BorderStroke(Color.DIMGREY,
+                    BorderStrokeStyle.DASHED, new CornerRadii(10), BorderWidths.DEFAULT)));
+            displayPicture.setClip(new Circle(30, 30, 27));
+            dialog.setMinHeight((double) (lineCount - 2) * 18.8 + 2 * 30);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -61,12 +65,19 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        Label dialog = (Label) db.getChildren().get(0);
+        dialog.setBackground(
+                new Background(new BackgroundFill(Color.PEACHPUFF, new CornerRadii(10), Insets.EMPTY)));
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        Label dialog = (Label) db.getChildren().get(1);
+        dialog.setBackground(
+                new Background(new BackgroundFill(Color.LIGHTSTEELBLUE, new CornerRadii(10), Insets.EMPTY)));
         return db;
     }
 }

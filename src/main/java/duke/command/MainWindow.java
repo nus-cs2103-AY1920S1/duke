@@ -2,12 +2,14 @@ package duke.command;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -29,6 +31,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.BEIGE, new CornerRadii(0), Insets.EMPTY)));
     }
 
     public void setDuke(Duke d) {
@@ -47,6 +50,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
         if (input.equals("bye")) {
             Platform.exit();
             System.exit(0);

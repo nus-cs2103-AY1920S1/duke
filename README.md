@@ -1,5 +1,5 @@
 # Bunny Duke User Guide
-Bunny Duke is a tasks and expenses manager chat bot.
+Bunny Duke is a task and expense manager chat bot.
 
 ## Table of Contents
 
@@ -69,7 +69,7 @@ Tasks that have a time and date to attend to it.
 - Deadline:
 Tasks that have a time and date as its deadline.
 
-#### Add Tasks Command
+#### Add Task Command
 Duke Bunny can help add the 3 different tasks into the task list to help you keep track of them all.
 He will reply you if he successfully did so and the number of tasks in the list.
 If there is incorrect user input format, he will also reply with what went wrong.
@@ -98,7 +98,7 @@ The data will be saved once the command is made.
 	Now you have 2 tasks in the list.
 	```
 	
-- To add a Task with a Deadline called *German Assignment* to be done by *21 September 2019* at *10.30AM*, send:
+- To add a Task with a Deadline called *German Assignment* to be done by *21 September 2019* at *10.00AM*, send:
 	`deadline german assignment /by 21/09/2019 1000`
 	or
 	`deadline german assignment /by 21/09/2019 10.00 AM`

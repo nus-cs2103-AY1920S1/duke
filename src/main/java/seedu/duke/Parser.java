@@ -532,7 +532,7 @@ public class Parser {
         double amount = Double.parseDouble(arr[arrSize - 1]);
         String description = arr[1];
         if (arrSize > 3) {
-            for (int i = 2; i < arrSize - 2; i++) {
+            for (int i = 2; i <= arrSize - 2; i++) {
                 description = description + " " + arr[i];
             }
         }

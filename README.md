@@ -3,7 +3,7 @@ Brought to you by a disciple of DaMyth.
 
 ## Was ist das?
 This is a todo/deadline management system.
-![screenshot][docs/Ui.png]
+![screenshot](docs/Ui.png)
 
 ## Usage
 Usage is simple and easy. It is very straightforward. Just boot it up and it

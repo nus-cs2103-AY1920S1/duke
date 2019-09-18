@@ -22,12 +22,14 @@ public class FindCommand extends Command {
     @Override
     public String executeAndReturnMessage(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<String> matchList = new ArrayList<String>();
-        int index = 0;
+        ArrayList<Integer> indexList = new ArrayList<Integer>();
 
-        for (Task task : tasks.tasks) {
-            String line = task.toString().toLowerCase();
-            if (line.contains(keyWord)) {
+        for (int i = 0; i < tasks.getNumOfTasks(); i++) {
+            String line = tasks.getTask(i).toString();
+            String s = line.toLowerCase();
+            if (s.contains(keyWord)) {
                 matchList.add(line);
+                indexList.add(i + 1);
             }
         }
 
@@ -37,9 +39,11 @@ public class FindCommand extends Command {
 
         String reply = "Here are the matching tasks in your list:\n";
 
+        int i = 0;
+
         for (String line : matchList) {
-            reply += (index + 1) + "." + line + "\n";
-            index++;
+            reply += (indexList.get(i)) + "." + line + "\n";
+            i++;
         }
 
         return reply;

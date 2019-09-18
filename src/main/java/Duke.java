@@ -47,7 +47,7 @@ public class Duke extends Application {
 
         try {
             this.ui = new UI();
-            this.storage = new Storage("/Users/joshuaseet/Desktop/CS2103/Duke/src/main/duke.txt");
+            this.storage = new Storage("data/duke.txt");
             ArrayList<Task> existing = storage.readFileContents();
             this.taskList = new TaskList(existing);
         } catch (Exception e){

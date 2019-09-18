@@ -1,5 +1,6 @@
 package duke.ui;
 
+import duke.Duke;
 import duke.command.TaskCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -28,6 +29,8 @@ public class Parser {
     private static final String outputEmptyEventDescription = "The description of a event cannot be empty.\n";
     private static final String outputEmptyEventTime = "Please provide a time for your event task\n";
     private static final String outputEmptyFind = "Please provide the string you want to search in the tasks\n";
+    private static final String outputInvalidTime =
+            "Please provide the time for the task in the format of day/month/year time\n";
 
     /**
      * parses the command string and create according type of command.
@@ -102,6 +105,7 @@ public class Parser {
         }
         String description = parts[1];
         String date = parts[2];
+        parseTime(date);
         PersonList list = parsePersonList(Arrays.copyOfRange(parts, 3, parts.length));
         Task deadlineTask = new Deadline(description, date, list);
         return new AddCommand(deadlineTask);
@@ -115,9 +119,24 @@ public class Parser {
         }
         String description = parts[1];
         String date = parts[2];
+        parseTime(date);
         PersonList personList = parsePersonList(Arrays.copyOfRange(parts, 3, parts.length));
         Task deadlineTask = new Event(description, date, personList);
         return new AddCommand(deadlineTask);
+    }
+
+    private static void parseTime(String date) throws DukeException {
+        if (date.contains("/")) {
+            String[] dateParts = date.split("[/]");
+            if (dateParts.length != 3) {
+                throw new DukeException(outputInvalidTime);
+            } else {
+                String[] timeParts = dateParts[2].split(" ");
+                if (timeParts.length != 2) {
+                    throw new DukeException(outputInvalidTime);
+                }
+            }
+        }
     }
 
     private static TaskCommand parseFind(String[] parts) throws DukeException {

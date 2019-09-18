@@ -46,7 +46,7 @@ public class Duke {
      * Default constructor. JavaFX GUI can't run without declaring this.
      */
     public Duke() {
-        this("data/duke.txt");
+        this("duke.txt");
     }
 
     /**

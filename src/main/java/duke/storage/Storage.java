@@ -16,14 +16,10 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static duke.Parser.DEADLINE_PARSE_PATTERN;
-import static duke.Parser.LOCALE;
 import static duke.task.TaskType.TODO;
 import static duke.task.TaskType.EVENT;
 import static duke.task.TaskType.DEADLINE;
@@ -32,6 +28,7 @@ import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
 import static java.nio.file.StandardOpenOption.WRITE;
 import static java.util.logging.Level.INFO;
 import static java.util.logging.Level.SEVERE;
+import static java.util.logging.Level.WARNING;
 
 /**
  * Stores and retrieves persisting task information from the hard disk.
@@ -78,7 +75,7 @@ public class Storage {
             }
             logger.log(INFO, "Read {0} tasks from disk successfully", new Object[]{taskList.count()});
         } catch (IOException e) {
-            logger.log(SEVERE, "Unable to read form disk");
+            logger.log(WARNING, "Unable to read from disk. Will create new data file.");
             throw new DukeIoException(e.getMessage());
         }
         return taskList;

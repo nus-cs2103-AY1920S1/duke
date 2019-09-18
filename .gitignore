@@ -1,5 +1,6 @@
 # Duke violatile files
-# /data/duke.txt
+# duke.txt
+myLogger.log
 
 # IDEA files
 /.idea/

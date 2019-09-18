@@ -23,6 +23,8 @@ public class Ui {
     private static final String WELCOME_MESSAGE_1 = "Hey partner! I'm the";
     private static final String WELCOME_MESSAGE_2 =
             "It's good to see you again! Here are your tasks. How can I help you?";
+    private static final String WELCOME_MESSAGE_3 =
+            "It's good to see you again! It seems you have no tasks yet. How can I help you?";
     private static final String ADD_MESSAGE = "No problem. I've added the task!";
     private static final String SEARCH_MESSAGE = "Here's the matching tasks from your list!";
     private static final String LIST_MESSAGE = "Glad to help partner! Here are your tasks: ";
@@ -60,7 +62,11 @@ public class Ui {
      * @return the formatted text string.
      */
     String showWelcomeMessage(TaskList taskList) {
-        return showToUser(WELCOME_MESSAGE_1, LOGO, WELCOME_MESSAGE_2, "", showTaskList(taskList));
+        return showToUser(WELCOME_MESSAGE_1,
+                LOGO,
+                taskList.isEmpty() ? WELCOME_MESSAGE_3 : WELCOME_MESSAGE_2,
+                "",
+                showTaskList(taskList));
     }
 
     /**

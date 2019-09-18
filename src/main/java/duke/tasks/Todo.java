@@ -4,7 +4,6 @@ import duke.DukeException;
 
 /**
  * The Todo subclass of the Task superclass.
- * @Extends duke.tasks.Task
  */
 public class Todo extends Task {
 

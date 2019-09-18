@@ -19,6 +19,7 @@ public abstract class Command {
      *
      * @param tl The target task list to accept the command.
      * @param ui The target user interface to generate the command information as a String.
+     * @return The execution information of this command.
      * @throws DukeException Based on specific Command subclass.
      */
     public abstract String execute(TaskList tl, Ui ui) throws DukeException;

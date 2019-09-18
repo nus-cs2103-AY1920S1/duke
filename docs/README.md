@@ -1,4 +1,5 @@
 # User Guide
+<img src="Ui.png" width="370" height="600">
 
 ## COMIC DUKE
 An application which helps to `enhance` and `declutter` **your** life in `COMIC SANS`. 

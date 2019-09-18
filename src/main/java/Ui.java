@@ -147,6 +147,9 @@ public class Ui {
                 response.append("Here are the tasks in your list:\n");
                 response.append(mainTaskList);
                 break;
+            case "help":
+                response.append(getHelpMessage());
+                break;
             case "find":
                 response.append("Here are the matching tasks in your list:\n");
                 for (int i = 0, j = 0; i < mainTaskList.getNumTask(); i++) {
@@ -185,5 +188,30 @@ public class Ui {
      */
     public void write() throws IOException {
         mainStorage.overWrite(mainTaskList.getList());
+    }
+
+    private String getHelpMessage() {
+        return "List of available commands:\n\n" +
+                "deadline [subject] /by [date/time]\n" +
+                "\tAdds task that needs to be done before a\n" +
+                "\tspecific date/time.\n" +
+                "delete [number]\n" +
+                "\tRemoves task from list.\n" +
+                "done [number]\n" +
+                "\tMarks a task as done.\n" +
+                "event [subject] /at [date/time]\n" +
+                "\tAdds task that starts and ends at a specific\n" +
+                "\tdate/time.\n" +
+                "find [keyword]\n" +
+                "\tSearches for task by keyword.\n" +
+                "list\n" +
+                "\tDisplays current list of tasks.\n" +
+                "read [file]\n" +
+                "\tChanges data source for reading.\n" +
+                "todo [subject]\n" +
+                "\tAdds task without any date/time attached to\n" +
+                "\tit.\n" +
+                "write [file]\n" +
+                "\tChanges data source for writing.\n";
     }
 }

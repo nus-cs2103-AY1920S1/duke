@@ -24,6 +24,8 @@ public class Parser {
             parseInfo = input.split("\\s+", 2);
         } else if (input.equals("list")) {
             parseInfo[0] = "list";
+        } else if (input.equals("help")){
+            parseInfo[0] = "help";
         } else {
             parseInfo[0] = "unknown";
         }

@@ -1,4 +1,3 @@
 [E][ ] cry (at: birth ) (tags: labour  mumpains )
 [D][+] labour (by: 12 Dec 2012, 21:00 PM) (tags: baby  parent )
 [E][+] cry (at: 3pm ) (tags: noisy  wail  baby )
-[E][ ] cry2 (at: 12 Feb 2012, 13:00 PM) (tags: noisy  baby  bleh )

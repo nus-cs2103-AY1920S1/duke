@@ -47,6 +47,7 @@ public class Storage {
             if (file.exists()) {
                 return loadTasks();
             } else {
+                file.createNewFile();
                 throw new DukeException("New Path: File does not exist");
             }
         } catch (Exception e) {

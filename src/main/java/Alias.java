@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.File;
 import duke.error.DukeException;
 
 /**
@@ -29,14 +30,59 @@ public class Alias{
         put("TODO", 5);
         put("DEADLINE", 6);
         put("EVENT", 7);
+        put ("LISTALIAS", 8);
+        put ("ADDALIAS", 9);
     }};
-    protected final static String filePath = "data/alias.txt";
+    private static File file;
+    private static File dir;
+    private static String filePath = "data/alias.txt";
     protected static TreeMap<String, String> aliases = new TreeMap<>();
     protected static TreeMap<String, String> aliases_types = new TreeMap<>();
 
+    /**
+     * Creates a instance of Storage object
+     *
+     * @param filepath String of the file location
+     */
+    public Alias() {
+        String[] arr = filePath.split("/");
+        dir = new File(arr[0]);
+        dir.mkdirs();
+
+        this.dir = dir;
+        this.file = new File(dir, arr[1]);
+        this.filePath = arr[1];
+    }
+
+    public static void load() throws IOException {
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+                createNewAliases();
+            }
+            loadAliases();
+        } catch (IOException e) {}
+    }
+
+    public static void createNewAliases() throws IOException {
+        try {
+            FileWriter writer = new FileWriter(file, true); //initialize file writer
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+
+            for (Map.Entry<String, Integer> entry : types.entrySet()) {
+                bufferedWriter.write(entry.getKey() + " | " + entry.getKey().toLowerCase());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void loadAliases() throws IOException {
         try {
-            FileReader reader = new FileReader(filePath);
+            FileReader reader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(reader);
 
             String line;

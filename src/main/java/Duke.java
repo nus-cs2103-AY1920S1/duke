@@ -11,6 +11,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Alias alias;
     /* file location to store text file */
     private String filePath = "data/tasks.txt";
 
@@ -20,9 +21,10 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage(filePath);
+        alias = new Alias();
         try {
+            alias.load();
             tasks = new TaskList(storage.load());
-            Alias.loadAliases();
         } catch (Exception e) {
             tasks = new TaskList();
         }

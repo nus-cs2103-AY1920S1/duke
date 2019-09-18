@@ -85,6 +85,10 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filepath);
+            file.getParentFile().mkdirs();
+            if (!file.exists()) {
+                file.createNewFile();
+            }
             BufferedReader br = new BufferedReader(
                     new FileReader(file));
             String line = br.readLine();

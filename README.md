@@ -91,16 +91,16 @@ Trackr is [MIT-licensed](https://github.com/shawnlsj97/duke/blob/master/LICENSE)
 
 
 ### 6. Command Summary
-* *Add*
-    * *Todo*: `todo TASK_NAME`
-    * *Deadline*: `deadline DEADLINE_NAME /by DD/MM/YYYY HHMM`
-    * *Event*: `event EVENT_NAME /at DD/MM/YYYY HHMM`
-* *Update*: `update INDEX NEW_TASK_NAME`
-* *List*: `list`
-* *Find*: `find KEYWORD`
-* *Complete*: `complete INDEX`
-* *Remove*: `remove INDEX`
-* *Undo*: `undo`
-* *History*: `history`
-* *Help*: `help`
-* *Exit*: `exit`
+* **Add**
+    * **Todo**: `todo TASK_NAME`
+    * **Deadline**: `deadline DEADLINE_NAME /by DD/MM/YYYY HHMM`
+    * **Event**: `event EVENT_NAME /at DD/MM/YYYY HHMM`
+* **Update**: `update INDEX NEW_TASK_NAME`
+* **List**: `list`
+* **Find**: `find KEYWORD`
+* **Complete**: `complete INDEX`
+* **Remove**: `remove INDEX`
+* **Undo**: `undo`
+* **History**: `history`
+* **Help**: `help`
+* **Exit**: `exit`

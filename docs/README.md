@@ -15,7 +15,7 @@ You can also edit the task descriptions and time afterwards.
 
 `event [taskname] /at [time]` - creates an event with eve
 
-Expected outcome:
+#### Expected outcome:
 
 `task added to list`
 
@@ -28,7 +28,7 @@ Expected outcome:
 
 `update [task number] time [time to change to]` - to change deadline/ time of tasks with deadlines/ events
 
-Expected outcome:
+#### Expected outcome:
 
 `task updated`
 
@@ -36,6 +36,6 @@ Expected outcome:
 
 `delete [task number]` - deletes task from list
 
-Expected outcome:
+#### Expected outcome:
 
 `task deleted`

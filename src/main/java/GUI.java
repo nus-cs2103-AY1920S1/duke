@@ -9,7 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+//@@author j-lum - reused
+//{CS2103 Java GUI tutorial}
 public class GUI {
 
     private ScrollPane scrollPane;
@@ -19,7 +20,7 @@ public class GUI {
     private Scene scene;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private static Ui uiManager = new Ui();
 

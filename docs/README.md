@@ -25,16 +25,16 @@ Examples of usage:
 
 Expected outcomes:
 
- `Got it. I've added this task:`<br/>
-`  [T][✘] watch Lord of the Rigs`<br/>
-`Now you have 1 task in the list.`<br/>
+`Got it. I've added this task:`  
+`[T][✘] watch Lord of the Rigs`  
+`Now you have 1 task in the list.`  
 
-`Got it. I've added this task:`<br/>
-`  [D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`<br/>
-`Now you have 2 tasks in the list.`<br/>
+`Got it. I've added this task:`  
+`[D][✘] return Harry Potter to library (by: 30th of October 2019, 9.30pm)`  
+`Now you have 2 tasks in the list.`  
 
-`Got it. I've added this task:`<br/>
-`  [E][✘] attend seminar (at: 25/09/2019 1800)`<br/>
+`Got it. I've added this task:`  
+`[E][✘] attend seminar (at: 25/09/2019 1800)`  
 `Now you have 3 tasks in the list.`
 
 ### **2. Edit tasks**

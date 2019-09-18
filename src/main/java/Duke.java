@@ -59,8 +59,14 @@ public class Duke extends Application {
         }
     }
 
+    //Solution below adapted from https://github.com/nus-cs2103-AY1920S1/duke
     @Override
     public void start(Stage stage) {
+        setup(stage);
+        window();
+        functionality();
+    }
+    private void setup(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -80,9 +86,9 @@ public class Duke extends Application {
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(500.0);
-
         mainLayout.setPrefSize(500.0, 600.0);
-
+    }
+    public void window() {
         scrollPane.setPrefSize(485, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -103,7 +109,9 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+    }
 
+    public void functionality() {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         dialogContainer.getChildren().addAll(

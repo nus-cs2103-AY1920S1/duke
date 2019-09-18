@@ -32,57 +32,49 @@ public class Parser {
 
     /**
      * this method is to deal with different commands
-     *
      * @param storage the object to interact with
      * @throws IllegalDukeFormatException
      * @throws IllegalDukeArgumentException
      */
     public String parse(Storage storage) throws IllegalDukeFormatException, IllegalDukeArgumentException, ParseException {
-        switch (Command.valueOf(splitCommand[0])) {
-            case list:
-                return commandList();
-            case bye:
-                return commandBye();
-            case done:
-                return commandDone(storage);
-            case todo:
-                return commandTodo(storage);
-            case deadline:
-                return commandDeadline(storage);
-            case event:
-                return commandEvent(storage);
-            case delete:
-                return commandDelete(storage);
-            case find:
-                return commandFind();
-            case update:
-                return commandUpdate(storage);
+        try{
+            switch (Command.valueOf(splitCommand[0])) {
+                case list:
+                    return commandList();
+                case bye:
+                    return commandBye();
+                case done:
+                    return commandDone(storage);
+                case todo:
+                    return commandTodo(storage);
+                case deadline:
+                    return commandDeadline(storage);
+                case event:
+                    return commandEvent(storage);
+                case delete:
+                    return commandDelete(storage);
+                case find:
+                    return commandFind();
+                case update:
+                    return commandUpdate(storage);
+            }
+            return "";
+        } catch (IllegalArgumentException e) {
+            return "No such command!\n";
         }
-        return "";
     }
 
-    /**
-     * method for "list" command, return the list
-     */
     private String commandList() {
         String tasks = "Here are the tasks in your list:\n";
         System.out.println(tasks);
         return tasks + TaskList.listString() + "\n";
     }
 
-    /**
-     * method for "bye" command, return ending and set isExit to true
-     */
     private String commandBye() {
         String Exit = "Bye. Hope to see you again soon!\n";
         return Exit;
     }
 
-    /**
-     * method for "done" command, set the task done, and rewrite them to text file with the status updated.
-     *
-     * @param storage the object to interact with
-     */
     private String commandDone(Storage storage) {
         try {
             int index = Integer.parseInt(splitCommand[1]);
@@ -101,15 +93,8 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             return "Selected index not exists" + "\n";
         }
-
     }
 
-    /**
-     * method for "todo" command, add the todo task into the list and write it in text file
-     *
-     * @param storage the object to interact with
-     * @throws IllegalDukeArgumentException
-     */
     private String commandTodo(Storage storage) throws IllegalDukeArgumentException {
         try {
             String descriptionT = splitCommand[1];
@@ -122,15 +107,8 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new IllegalDukeArgumentException();
         }
-
     }
 
-    /**
-     * method for "deadline" command, add the deadline task into the list and write it in text file
-     *
-     * @param storage the object to interact with
-     * @throws IllegalDukeFormatException
-     */
     private String commandDeadline(Storage storage) throws IllegalDukeFormatException {
         try {
             String[] fullCommand = splitCommand[1].split(" /by ");
@@ -149,12 +127,6 @@ public class Parser {
         }
     }
 
-    /**
-     * method for "event" command, add the event task into the list and write it in text file
-     *
-     * @param storage the object to interact with
-     * @throws IllegalDukeFormatException
-     */
     private String commandEvent(Storage storage) throws IllegalDukeFormatException {
         try {
             String[] fullCommand = splitCommand[1].split(" /at ");
@@ -173,11 +145,6 @@ public class Parser {
         }
     }
 
-    /**
-     * method for "delete" command, delete the task by remove it from the taskList and rewrite list to file
-     *
-     * @param storage the object to interact with
-     */
     private String commandDelete(Storage storage) {
         try {
             int indexD = Integer.parseInt(splitCommand[1]) - 1;

@@ -6,8 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+//Solution below adapted from https://github.com/nus-cs2103-AY1920S1/duke
 public class DialogBox extends HBox {
-
     private Label text;
     private ImageView displayPicture;
 
@@ -22,6 +22,7 @@ public class DialogBox extends HBox {
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
     }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */

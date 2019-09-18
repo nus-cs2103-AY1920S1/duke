@@ -32,6 +32,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Initialises a Storage object.
+     */
     public Storage(String filePath) {
         File directory = new File("data");
         directory.mkdirs();

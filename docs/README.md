@@ -9,7 +9,7 @@ try out Duke if you are interested!
 ## 2. Quickstart
 1. Ensure you have Java 11 or above installed in your Computer.
    
-2. Download the latest Duke.jar [here](https://github.com/brebeek/duke).
+2. Download the latest Duke.jar [here](https://github.com/brebeek/duke/releases/download/v0.1.4/duke-0.1.4.jar).
    
 3. Copy the file to the folder you want to use as the home folder for Duke.
    

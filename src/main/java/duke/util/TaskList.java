@@ -32,17 +32,6 @@ public class TaskList {
         tasks.add(task);
     }
 
-    /**
-     * Copies all the tasks from another task list to this task list.
-     *
-     * @param another a <code>TaskList</code> object containing some tasks
-     */
-    public void addAll(TaskList another) {
-        for (int i = 0; i < another.getTotalTask(); i++) {
-            tasks.add(another.getTaskAt(i));
-        }
-    }
-
     public Task removeTaskAt(int index) {
         return tasks.remove(index);
     }

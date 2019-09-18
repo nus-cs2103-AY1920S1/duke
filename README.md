@@ -1,12 +1,12 @@
 # Trackr
 
-Trackr is a desktop application that helps you to manage tasks. Trackr is **optimized for users who prefer to work with a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+Trackr is a **desktop application that helps you to manage tasks**. Trackr is **optimized for users who prefer to work with a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
 If you can type fast, Trackr can help you complete your task management process faster than traditional GUI apps.
 
 ### 1. Quick Start
 1. Ensure you have Java `11` or above installed in your computer.
-2. Download the latest `Trackr.jar` [here](https://github.com/shawnlsj97/duke/releases/tag/v0.1.4).
+2. Download the latest `trackr.jar` [here](https://github.com/shawnlsj97/duke/releases/tag/v1.0).
 3. Copy the file to the folder you want to use as the home folder for your list of tasks.
 4. Double-click the file to start to app. The GUI should appear in a few seconds.
 

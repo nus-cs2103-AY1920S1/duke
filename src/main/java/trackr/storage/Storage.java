@@ -35,8 +35,9 @@ public class Storage {
      * @return ArrayList List of tasks
      * @throws FileNotFoundException On wrong filepath used
      */
-    public ArrayList<Task> load() throws FileNotFoundException {
+    public ArrayList<Task> load() throws IOException {
         File f = new File(filePath);
+        f.createNewFile();
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {

@@ -28,7 +28,7 @@ checkstyle {
 
 shadowJar {
     archiveBaseName = "trackr"
-    archiveVersion = "0.1.4"
+    archiveVersion = "1.0"
     archiveClassifier = null
     archiveAppendix = null
 }

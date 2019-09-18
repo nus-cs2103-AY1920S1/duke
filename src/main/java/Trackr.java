@@ -12,6 +12,7 @@ import trackr.task.Todo;
 import trackr.tasklist.TaskList;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class Trackr {
@@ -35,11 +36,11 @@ public class Trackr {
      * This is the class constructor assigning a filepath to the Duke object.
      */
     public Trackr() {
-        storage = new Storage("C:/Users/Shawn Lee/Desktop/UNI FILES/Y2S1/CS2103T/duke/data/duke.txt");
+        storage = new Storage("trackr.txt");
         history = new HistoryTracker();
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException ex) {
+        } catch (IOException ex) {
             tasks = new TaskList();
         }
     }

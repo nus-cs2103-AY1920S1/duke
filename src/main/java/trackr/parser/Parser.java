@@ -16,7 +16,7 @@ public class Parser {
     public static Command parse(String input) {
         String command = getCommand(input);
         switch (command) {
-        case "bye":
+        case "exit":
             return new ExitCommand();
         case "list":
         case "l":

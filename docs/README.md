@@ -15,21 +15,21 @@ Description of feature.
 
 ## Commands
 
-1. bye
+1. [bye](#1-bye)
 2. [deadline](#2-deadline)
-3. delete
-4. done
-5. event
-6. event_at
-7. find
-8. help
-9. list
-10. snooze
-11. todo
+3. [delete](#3-delete)
+4. [done](#4-done)
+5. [event](#5-event)
+6. [event_at](#6-event_at)
+7. [find](#7-find)
+8. [help](#8-help)
+9. [list](#9-list)
+10. [snooze](#10-snooze)
+11. [todo](#11-todo)
 
 <br>
 
-### 1. bye
+### 1. [bye](#1-bye)
 ---
 ##### Usage:
 

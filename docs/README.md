@@ -1,6 +1,6 @@
 # [Duke](https://github.com/geshuming/duke) User Guide
 
-![UI](UI.png)
+![Ui](Ui.png)
 
 ---
 

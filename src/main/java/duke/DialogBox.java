@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 
 /**
@@ -48,6 +49,9 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        String style = "-fx-background-color: rgba(246, 129, 105); -fx-background-radius: 30 30 30 30; "
+                + "-fx-border-radius: 30 30 30 30;";
+        setStyle(style);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

@@ -1,7 +1,7 @@
-package duke.task;
+package taskchick.task;
 
-import duke.datetime.DateTime;
-import duke.exception.DukeException;
+import taskchick.datetime.DateTime;
+import taskchick.exception.TaskChickException;
 
 /**
  * Events are tasks that start at a specific time and ends at a specific time.
@@ -28,16 +28,16 @@ public class Event extends Task {
      *
      * @param fullCommand Full command split by the word "event".
      * @return Event object created.
-     * @throws DukeException If the deadline has no description, or no date/time.
+     * @throws TaskChickException If the deadline has no description, or no date/time.
      */
-    public static Event process(String[] fullCommand) throws DukeException {
+    public static Event process(String[] fullCommand) throws TaskChickException {
         if (fullCommand.length == 1) {
-            throw new DukeException("OOPS!!! The description of an event cannot be empty :-(");
+            throw new TaskChickException("OOPS!!! The description of an event cannot be empty :-(");
         }
 
         String[] detailsArray = fullCommand[1].split(" /at ", 2);
         if (detailsArray.length == 1) {
-            throw new DukeException("OOPS!!! Please specify a date and time for your event :-(");
+            throw new TaskChickException("OOPS!!! Please specify a date and time for your event :-(");
         }
 
         return new Event(detailsArray[0], detailsArray[1]);

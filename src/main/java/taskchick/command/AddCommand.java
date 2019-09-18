@@ -1,9 +1,9 @@
-package duke.command;
+package taskchick.command;
 
 import java.io.IOException;
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
-import duke.task.Task;
+import taskchick.tasklist.TaskList;
+import taskchick.storage.Storage;
+import taskchick.task.Task;
 
 /**
  * Command to add tasks to the task list.

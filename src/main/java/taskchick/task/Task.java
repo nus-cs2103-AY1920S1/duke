@@ -1,4 +1,4 @@
-package duke.task;
+package taskchick.task;
 
 /**
  * Tasks include events, deadlines and todo actions.

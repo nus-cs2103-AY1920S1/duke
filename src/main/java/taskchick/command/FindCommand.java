@@ -1,8 +1,8 @@
-package duke.command;
+package taskchick.command;
 
-import duke.exception.DukeException;
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
+import taskchick.exception.TaskChickException;
+import taskchick.tasklist.TaskList;
+import taskchick.storage.Storage;
 
 /**
  * Command to search for tasks containing a specific key word/phrase and display those matching tasks.
@@ -25,13 +25,13 @@ public class FindCommand extends Command {
      *
      * @param fullCommand Full command split by the first whitespace.
      * @return FindCommand object to be created.
-     * @throws DukeException If no search term has been specified.
+     * @throws TaskChickException If no search term has been specified.
      */
-    public static FindCommand process(String[] fullCommand) throws DukeException {
+    public static FindCommand process(String[] fullCommand) throws TaskChickException {
         try {
             return new FindCommand(fullCommand[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Please specify a search term.");
+            throw new TaskChickException("OOPS!!! Please specify a search term.");
         }
     }
 

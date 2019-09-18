@@ -1,4 +1,4 @@
-import duke.datetime.DateTime;
+import taskchick.datetime.DateTime;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

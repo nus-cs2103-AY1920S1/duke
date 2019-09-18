@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private TaskChick taskChick = new TaskChick();
 
     @Override
     public void start(Stage stage) {
@@ -19,8 +19,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(taskChick);
             fxmlLoader.<MainWindow>getController().showWelcome();
+            stage.setTitle("Task Chick - Chicky to keep you on track!");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

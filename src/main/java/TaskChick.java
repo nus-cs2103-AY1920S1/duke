@@ -1,14 +1,14 @@
-import duke.command.Command;
-import duke.exception.DukeException;
-import duke.parser.Parser;
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
+import taskchick.command.Command;
+import taskchick.exception.TaskChickException;
+import taskchick.parser.Parser;
+import taskchick.storage.Storage;
+import taskchick.tasklist.TaskList;
 import java.io.FileNotFoundException;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
  */
-public class Duke {
+public class TaskChick {
 
     private Storage storage;
     private TaskList tasks;
@@ -21,7 +21,7 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, storage);
-        } catch (DukeException e) {
+        } catch (TaskChickException e) {
             return e.getMessage();
         }
     }
@@ -29,7 +29,7 @@ public class Duke {
     /**
      * Initialises a session for Duke and loads tasks, if any, from a previous session.
      */
-    public Duke() {
+    public TaskChick() {
         storage = new Storage("/users/dominique/documents/cs2103t/duke/data/duke.txt");
         try {
             tasks = new TaskList(storage.load());

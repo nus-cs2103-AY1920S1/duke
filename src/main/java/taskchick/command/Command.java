@@ -1,7 +1,7 @@
-package duke.command;
+package taskchick.command;
 
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
+import taskchick.tasklist.TaskList;
+import taskchick.storage.Storage;
 
 /**
  * Abstract class that Represents an executable command.

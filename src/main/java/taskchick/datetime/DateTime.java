@@ -1,6 +1,6 @@
-package duke.datetime;
+package taskchick.datetime;
 
-import duke.exception.DukeException;
+import taskchick.exception.TaskChickException;
 
 /**
  * Enables Duke to understand date and times.
@@ -38,7 +38,7 @@ public class DateTime {
      * @return DateTime object created.
      * @throws ArrayIndexOutOfBoundsException If date and time given is not in the accepted format.
      */
-    public static DateTime create(String dateTimeString) throws DukeException {
+    public static DateTime create(String dateTimeString) throws TaskChickException {
         try {
             String[] currArray = dateTimeString.split("\\s+", 2);
             String dateString = currArray[0];
@@ -47,7 +47,7 @@ public class DateTime {
             return new DateTime(Integer.parseInt(dateArray[2]), Integer.parseInt(dateArray[1]),
                     Integer.parseInt(dateArray[0]), Integer.parseInt(timeString));
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Please indicate the date/time in the format DD/MM/YYYY HHMM.");
+            throw new TaskChickException("OOPS!!! Please indicate the date/time in the format DD/MM/YYYY HHMM.");
         }
     }
 
@@ -66,7 +66,7 @@ public class DateTime {
         } else if (day <= 30){
             return day + "th";
         } else {
-            throw new DukeException("OOPS!!! Please enter a valid date.");
+            throw new TaskChickException("OOPS!!! Please enter a valid date.");
         }
     }
 
@@ -115,7 +115,7 @@ public class DateTime {
             monthString = "December";
             return monthString;
         default:
-            throw new DukeException("OOPS!!! Please enter a valid month.");
+            throw new TaskChickException("OOPS!!! Please enter a valid month.");
         }
     }
 
@@ -145,7 +145,7 @@ public class DateTime {
             hour = (time - minute) / 100 - 12;
             timeSuffix = "pm";
         } else {
-            throw new DukeException("OOPS!!! Please enter a valid time.");
+            throw new TaskChickException("OOPS!!! Please enter a valid time.");
         }
         return hour + ":" + String.format("%02d", minute) + timeSuffix;
     }

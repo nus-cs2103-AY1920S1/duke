@@ -1,8 +1,8 @@
-package duke.command;
+package taskchick.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
+import taskchick.exception.TaskChickException;
+import taskchick.storage.Storage;
+import taskchick.tasklist.TaskList;
 
 import java.io.IOException;
 import java.util.Stack;
@@ -48,7 +48,7 @@ public class UndoCommand extends Command {
             storage.store(tasks);
             return sb.toString();
         } catch (IOException e) {
-            throw new DukeException("OOPS!!! " + e.getMessage());
+            throw new TaskChickException("OOPS!!! " + e.getMessage());
         }
     }
 }

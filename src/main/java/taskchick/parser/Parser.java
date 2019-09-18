@@ -1,20 +1,20 @@
-package duke.parser;
+package taskchick.parser;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.CompleteCommand;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.HelpCommand;
-import duke.command.ListCommand;
-import duke.command.ScheduleCommand;
-import duke.command.UndoCommand;
-import duke.command.UpdateCommand;
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
+import taskchick.command.AddCommand;
+import taskchick.command.Command;
+import taskchick.command.CompleteCommand;
+import taskchick.command.DeleteCommand;
+import taskchick.command.ExitCommand;
+import taskchick.command.FindCommand;
+import taskchick.command.HelpCommand;
+import taskchick.command.ListCommand;
+import taskchick.command.ScheduleCommand;
+import taskchick.command.UndoCommand;
+import taskchick.command.UpdateCommand;
+import taskchick.exception.TaskChickException;
+import taskchick.task.Deadline;
+import taskchick.task.Event;
+import taskchick.task.Todo;
 
 /**
  * Deals with making sense of the user command.
@@ -68,7 +68,7 @@ public class Parser {
         case "u":
             return new UndoCommand();
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new TaskChickException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

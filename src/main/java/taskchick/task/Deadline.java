@@ -1,7 +1,7 @@
-package duke.task;
+package taskchick.task;
 
-import duke.datetime.DateTime;
-import duke.exception.DukeException;
+import taskchick.datetime.DateTime;
+import taskchick.exception.TaskChickException;
 
 /**
  * Deadlines are tasks that need to be done before a specific date/time.
@@ -28,20 +28,20 @@ public class Deadline extends Task {
      *
      * @param fullCommand Full command split by the word "deadline".
      * @return Deadline object created.
-     * @throws DukeException If the deadline has no description, or no date/time.
+     * @throws TaskChickException If the deadline has no description, or no date/time.
      */
-    public static Deadline process(String[] fullCommand) throws DukeException {
+    public static Deadline process(String[] fullCommand) throws TaskChickException {
         if (fullCommand.length == 1) {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty :-(");
+            throw new TaskChickException("OOPS!!! The description of a deadline cannot be empty :-(");
         }
         String[] detailsArray = fullCommand[1].split(" /by ", 2);
         if (detailsArray.length == 1) {
-            throw new DukeException("OOPS!!! Please specify a date and time for your deadline :-(");
+            throw new TaskChickException("OOPS!!! Please specify a date and time for your deadline :-(");
         }
         try {
             return new Deadline(detailsArray[0], detailsArray[1]);
-        } catch (DukeException e) {
-            throw new DukeException(e.getMessage());
+        } catch (TaskChickException e) {
+            throw new TaskChickException(e.getMessage());
         }
     }
 

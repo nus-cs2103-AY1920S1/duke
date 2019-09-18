@@ -1,9 +1,9 @@
-package duke.command;
+package taskchick.command;
 
 import java.io.IOException;
-import duke.exception.DukeException;
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
+import taskchick.exception.TaskChickException;
+import taskchick.tasklist.TaskList;
+import taskchick.storage.Storage;
 
 /**
  * Command to remove tasks from the task list.
@@ -26,15 +26,15 @@ public class DeleteCommand extends Command {
      *
      * @param fullCommand Full command split by whitespace.
      * @return DeleteCommand object to be created.
-     * @throws DukeException If no index is given.
+     * @throws TaskChickException If no index is given.
      */
-    public static DeleteCommand process(String[] fullCommand) throws DukeException {
+    public static DeleteCommand process(String[] fullCommand) throws TaskChickException {
         try {
             return new DeleteCommand(Integer.parseInt(fullCommand[1]));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Please specify the index of the task to be deleted.");
+            throw new TaskChickException("OOPS!!! Please specify the index of the task to be deleted.");
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please specify the index of the task to be deleted as an "
+            throw new TaskChickException("OOPS!!! Please specify the index of the task to be deleted as an "
                     + "integer.");
         }
     }
@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
      * @param storage Storage to be updated with the task removed.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) throws TaskChickException {
         try {
             UndoCommand.saveVersion(storage.getSavedListString(tasks));
             StringBuilder sb = new StringBuilder();
@@ -55,9 +55,9 @@ public class DeleteCommand extends Command {
             return sb.toString();
         } catch (IndexOutOfBoundsException e) {
             UndoCommand.removeRecentSavedVersion();
-            throw new DukeException("OOPS!!! Your specified task number is out of range.");
+            throw new TaskChickException("OOPS!!! Your specified task number is out of range.");
         } catch (IOException e) {
-            throw new DukeException("OOPS!!! " + e.getMessage());
+            throw new TaskChickException("OOPS!!! " + e.getMessage());
         }
     }
 }

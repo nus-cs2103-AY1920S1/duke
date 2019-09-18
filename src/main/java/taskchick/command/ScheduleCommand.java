@@ -1,8 +1,8 @@
-package duke.command;
+package taskchick.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
+import taskchick.exception.TaskChickException;
+import taskchick.storage.Storage;
+import taskchick.tasklist.TaskList;
 
 /**
  * Command to show users the tasks they have on a specific date.
@@ -27,7 +27,7 @@ public class ScheduleCommand extends Command {
      * @return ScheduleCommand object to be created.
      * @throws NumberFormatException If date given is not in number format (eg. 9/Sep/2019).
      */
-    public static ScheduleCommand process(String[] fullCommand) throws DukeException {
+    public static ScheduleCommand process(String[] fullCommand) throws TaskChickException {
         try {
             String[] dateArray = fullCommand[1].split("/", 3);
             int dayFromArray = Integer.parseInt(dateArray[0]);
@@ -35,9 +35,9 @@ public class ScheduleCommand extends Command {
             int yearFromArray = Integer.parseInt(dateArray[2]);
             return new ScheduleCommand(new int[]{dayFromArray, monthFromArray, yearFromArray});
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please enter the date in the format DD/MM/YYYY");
+            throw new TaskChickException("OOPS!!! Please enter the date in the format DD/MM/YYYY");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Please specify the date you want to check in the format "
+            throw new TaskChickException("OOPS!!! Please specify the date you want to check in the format "
                     + "DD/MM/YYYY");
         }
     }

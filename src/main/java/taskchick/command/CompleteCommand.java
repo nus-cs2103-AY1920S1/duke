@@ -1,10 +1,10 @@
-package duke.command;
+package taskchick.command;
 
 import java.io.IOException;
 
-import duke.exception.DukeException;
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
+import taskchick.exception.TaskChickException;
+import taskchick.tasklist.TaskList;
+import taskchick.storage.Storage;
 
 /**
  * Command to mark a task as completed.
@@ -27,15 +27,15 @@ public class CompleteCommand extends Command {
      *
      * @param fullCommand Full command split by whitespace.
      * @return CompleteCommand object to be created.
-     * @throws DukeException If no index is given.
+     * @throws TaskChickException If no index is given.
      */
-    public static CompleteCommand process(String[] fullCommand) throws DukeException {
+    public static CompleteCommand process(String[] fullCommand) throws TaskChickException {
         try {
             return new CompleteCommand(Integer.parseInt(fullCommand[1]));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Please specify a task number to be marked as completed.");
+            throw new TaskChickException("OOPS!!! Please specify a task number to be marked as completed.");
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please specify the index of the task to be marked as completed"
+            throw new TaskChickException("OOPS!!! Please specify the index of the task to be marked as completed"
                     + " as an integer.");
         }
     }
@@ -47,7 +47,7 @@ public class CompleteCommand extends Command {
      * @param storage Storage to be updated with the task completed.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws TaskChickException {
         try {
             UndoCommand.saveVersion(storage.getSavedListString(tasks));
             StringBuilder sb = new StringBuilder(tasks.completeTask(taskNumber));
@@ -55,9 +55,9 @@ public class CompleteCommand extends Command {
             return sb.toString();
         } catch (IndexOutOfBoundsException e) {
             UndoCommand.removeRecentSavedVersion();
-            throw new DukeException("OOPS!!! Your specified task number is out of range.");
+            throw new TaskChickException("OOPS!!! Your specified task number is out of range.");
         } catch (IOException e) {
-            throw new DukeException("OOPS!!! " + e.getMessage());
+            throw new TaskChickException("OOPS!!! " + e.getMessage());
         }
     }
 }

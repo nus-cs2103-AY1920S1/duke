@@ -1,8 +1,8 @@
-package duke.tasklist;
+package taskchick.tasklist;
 
-import duke.storage.Storage;
-import duke.task.Task;
-import duke.task.Todo;
+import taskchick.storage.Storage;
+import taskchick.task.Task;
+import taskchick.task.Todo;
 
 import java.util.ArrayList;
 import java.util.Arrays;

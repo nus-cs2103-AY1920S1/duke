@@ -1,8 +1,8 @@
-package duke.command;
+package taskchick.command;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import duke.tasklist.TaskList;
+import taskchick.exception.TaskChickException;
+import taskchick.storage.Storage;
+import taskchick.tasklist.TaskList;
 
 import java.io.IOException;
 
@@ -30,17 +30,17 @@ public class UpdateCommand extends Command {
      *
      * @param fullCommand Full command split by whitespace.
      * @return UpdateCommand object to be created.
-     * @throws DukeException If input is not in the format update [task number] [new description].
+     * @throws TaskChickException If input is not in the format update [task number] [new description].
      */
-    public static UpdateCommand process(String[] fullCommand) throws DukeException {
+    public static UpdateCommand process(String[] fullCommand) throws TaskChickException {
         try {
             String[] currArray = fullCommand[1].split("\\s+", 2);
             return new UpdateCommand(Integer.parseInt(currArray[0]), currArray[1]);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Please enter in the format update [task number] [new "
+            throw new TaskChickException("OOPS!!! Please enter in the format update [task number] [new "
                     + "description]");
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please specify the index of the task as an integer.");
+            throw new TaskChickException("OOPS!!! Please specify the index of the task as an integer.");
         }
     }
 
@@ -52,7 +52,7 @@ public class UpdateCommand extends Command {
      * @return Response to user.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws TaskChickException {
         try {
             UndoCommand.saveVersion(storage.getSavedListString(tasks));
             StringBuilder sb = new StringBuilder();
@@ -60,9 +60,9 @@ public class UpdateCommand extends Command {
             storage.store(tasks);
             return sb.toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("OOPS!!! Your specified task number is out of range.");
+            throw new TaskChickException("OOPS!!! Your specified task number is out of range.");
         } catch (IOException e) {
-            throw new DukeException("OOPS!!! " + e.getMessage());
+            throw new TaskChickException("OOPS!!! " + e.getMessage());
         }
     }
 }

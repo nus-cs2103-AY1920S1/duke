@@ -1,6 +1,6 @@
-package duke.task;
+package taskchick.task;
 
-import duke.exception.DukeException;
+import taskchick.exception.TaskChickException;
 
 /**
  * Todos are tasks without any date/time attached to it.
@@ -21,11 +21,11 @@ public class Todo extends Task {
      *
      * @param fullCommand Full command split by the word "todo".
      * @return Todo task created.
-     * @throws DukeException If the description of the todo is empty.
+     * @throws TaskChickException If the description of the todo is empty.
      */
-    public static Todo process(String[] fullCommand) throws DukeException {
+    public static Todo process(String[] fullCommand) throws TaskChickException {
         if (fullCommand.length == 1) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty :-(");
+            throw new TaskChickException("OOPS!!! The description of a todo cannot be empty :-(");
         }
         return new Todo(fullCommand[1]);
     }

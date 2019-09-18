@@ -22,7 +22,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private TaskChick taskChick;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
@@ -32,8 +32,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(TaskChick tc) {
+        taskChick = tc;
     }
 
     /**
@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = taskChick.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -66,7 +66,8 @@ public class MainWindow extends AnchorPane {
      */
     public void showWelcome() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hi, I'm Duke! What can I do for you today?", dukeImage)
+                DialogBox.getDukeDialog("Hello, I'm Task Chick!\n\nWhat can I do for you today?\n\nEnter "
+                                + "'help' to see how you can use me ^_^", dukeImage)
         );
     }
 }

@@ -1,11 +1,11 @@
-package duke.storage;
+package taskchick.storage;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import duke.tasklist.TaskList;
+import taskchick.exception.TaskChickException;
+import taskchick.task.Deadline;
+import taskchick.task.Event;
+import taskchick.task.Task;
+import taskchick.task.Todo;
+import taskchick.tasklist.TaskList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -110,7 +110,7 @@ public class Storage {
             } else if (currTask.charAt(0) == 'E') {
                 loadedTaskList.add(loadEvent(currTask));
             } else {
-                throw new DukeException("OOPS!!! Your task file appears to be corrupted.");
+                throw new TaskChickException("OOPS!!! Your task file appears to be corrupted.");
             }
         }
         sc.close();

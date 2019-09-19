@@ -133,12 +133,18 @@ public class TaskList {
         }
         return res.toString();
     }
+
     public String initialList() {
         StringBuilder str = new StringBuilder();
-        str.append("Here are your current tasks:\n");
-        for (Task t : taskList) {
-            str.append(t.toString() + "\n");
+        if (taskList.isEmpty()) {
+            str.append("Hi! You currently do not have any task!");
+            return str.toString();
+        } else {
+            str.append("Here are your current tasks:\n");
+            for (Task t : taskList) {
+                str.append(t.toString() + "\n");
+            }
+            return str.toString();
         }
-        return str.toString();
     }
 }

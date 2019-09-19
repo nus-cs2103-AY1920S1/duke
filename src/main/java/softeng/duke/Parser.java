@@ -21,6 +21,9 @@ public class Parser {
     public String parse(TaskList tasks, String input, Storage storage, Statistics stats) {
         String cmd = input;
         Scanner cmdSc = new Scanner(cmd);
+        if (!cmdSc.hasNext()) {
+            return "You didn't enter anything!";
+        }
         try {
             assert cmdSc.hasNext() : "You didn't enter anything!";
         } catch (AssertionError err) {

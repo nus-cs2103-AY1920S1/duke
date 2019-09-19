@@ -1,7 +1,7 @@
 # User Guide
 Welcome to Duke: Martin's Todo Helper! 
 
-![User Interface](UI.png)
+![User Interface](Ui.png)
 
 To help you understand this application, there a few things 
 you would need to set up before proceeding with usage. 

@@ -57,10 +57,10 @@ Sounds interesting? Get started now!
 #### 3. Features
 
 Command Format |
-:--------------|
-- Words in `UPPER_CASE` are the parameters to be supplied by the user. Ex: In `deadline DESCRIPTION /by DATE_AND_TIME`, `DESCRIPTION` and `DATE_AND_TIME` are parameters which can be used as `deadline ma2202 hw /by 19/09/2019 1800`. |
-- Items in square brackets are optional. Ex: `deadline DESCRIPTION /by DATE_AND_TIME [/every FREQUENCY_IN_DAYS]` can be used as `deadline ma2202 hw /by 19/09/2019 1800 /every 7` or as `deadline ma2202 hw /by 19/09/2019 1800`.|
-- Parameters need to be in the order given. Ex: If the command specifies `DESCRIPTION /by DATE_AND_TIME`, something like `/by DATE_AND_TIME DESCRIPTION` would be invalid input. |
+---------------|
+Words in `UPPER_CASE` are the parameters to be supplied by the user. Ex: In `deadline DESCRIPTION /by DATE_AND_TIME`, `DESCRIPTION` and `DATE_AND_TIME` are parameters which can be used as `deadline ma2202 hw /by 19/09/2019 1800`. |
+Items in square brackets are optional. Ex: `deadline DESCRIPTION /by DATE_AND_TIME [/every FREQUENCY_IN_DAYS]` can be used as `deadline ma2202 hw /by 19/09/2019 1800 /every 7` or as `deadline ma2202 hw /by 19/09/2019 1800`.|
+Parameters need to be in the order given. Ex: If the command specifies `DESCRIPTION /by DATE_AND_TIME`, something like `/by DATE_AND_TIME DESCRIPTION` would be invalid input. |
 
 **3.1. Adding a todo: `todo`**
 

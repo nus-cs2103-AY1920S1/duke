@@ -33,8 +33,8 @@ public class Storage {
         assert currentWorkingDirectoryPath != null
                 : "The path to the current working directory cannot be a null object.";
 
-        this.directoryPath = currentWorkingDirectoryPath + "\\data";
-        this.filePath = currentWorkingDirectoryPath + "\\data\\Duke.txt";
+        this.directoryPath = currentWorkingDirectoryPath + "/data";
+        this.filePath = currentWorkingDirectoryPath + "/data/Duke.txt";
         this.directory = new File(directoryPath);
         this.inputFile = new File(filePath);
     }

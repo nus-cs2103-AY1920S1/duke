@@ -7,6 +7,11 @@ public class Duke {
         new DataForDuke(filePath);
     }
     
+    public Duke () {
+        
+        new DataForDuke();
+    }
+    
     /**
      * Function to run the file upon opening.
      */
@@ -18,7 +23,9 @@ public class Duke {
      * Todo: do try and except here to see if duke file is empty.
      */
     public static void main(String[]args) {
-        new Duke("C:\\Users\\shaun\\Documents\\GitHub\\duke\\data\\duke.txt").run();
+        // can use this line if you want to have txt input.
+        //new Duke("C:\\Users\\shaun\\Documents\\GitHub\\duke\\data\\duke.txt").run();
+        new Duke().run();
     }
 }
 

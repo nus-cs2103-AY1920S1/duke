@@ -1,6 +1,0 @@
-T,1,read book
-T,0,readbook
-T,0,fire book
-T,0,read a
-T,0,read b
-T,0,c

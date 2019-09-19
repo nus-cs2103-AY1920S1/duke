@@ -43,18 +43,18 @@ public class TaskList {
         //String output = "";
         for (int i = 0; i < list.size(); i++) {
             int itemIndex = i + 1;
-            String itemDisplay = itemIndex + "." + list.get(i).toString();
-            System.out.println(itemDisplay);
+            String output = itemIndex + "." + list.get(i).toString();
+            System.out.println(output);
         }
     }
 
     public String showlistString() {
-        String output = "";
+        String str = "";
         for (int i = 0; i < list.size(); i++) {
             int itemIndex = i + 1;
-            output = output + "." + list.get(i).toString()+"/n";
+            str = str + itemIndex + "." + list.get(i).toString()+"\n";
         }
-        return output;
+        return str;
     }
 
 
@@ -90,8 +90,8 @@ public class TaskList {
                 d.setDateTime(dateTime);
             }
             add(t);
-            String a ="Got it. I've added this task:" + t;
-            String b ="Now you have " + list.size() + " tasks in the list.";
+            String a ="Got it. I've added this task:\n" + t +"\n";
+            String b ="Now you have " + list.size() + " tasks in the list.\n";
             return a+b;
         } catch (Exception e) {
             String c ="Error " + "Please enter date and time in right format.";

@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ public class Duke extends Application {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
+            File data = new File("data");
+            data.mkdir();
+            File text = new File("data/tasks.txt");
+            text.createNewFile();
             tasks = new TaskList(storage.loadtxt());
         } catch (Exception e) {
             ui.showLoadingError();
@@ -27,9 +32,7 @@ public class Duke extends Application {
     }
 
     public void start(Stage stage) {
-        File file = new File("data");
-        file.mkdir();
-       new Duke().run();
+        new Duke().run();
     }
 
     /**
@@ -64,14 +67,14 @@ public class Duke extends Application {
                     break;
                 case "event":
                     try {
-                        event(tasks.getlist(), s);
+                        event(s);
                     } catch (ErrorException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
                 case "deadline":
                     try {
-                        deadline(tasks.getlist(), s);
+                        deadline(s);
                     } catch (ErrorException e) {
                         System.out.println(e.getMessage());
                     }
@@ -119,7 +122,8 @@ public class Duke extends Application {
             storage.addtask(tasks.getlist());
         }
     }
-    public String todoStrig(ArrayList<Task> list, String s) throws ErrorException {
+
+    public String todoString(ArrayList<Task> list, String s) throws ErrorException {
         if (s.length() == 4) {
             throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
@@ -127,12 +131,12 @@ public class Duke extends Application {
             Task t = new Todo(td);
             list.add(t);
             ui.drawline();
-            String first="     Got it. I've added this task:";
-            String second="     " + t;
-            String third="     Now you have " + list.size() + " tasks in the list.";
+            String first = "Got it. I've added this task:\n";
+            String second = ""+t;
+            String third = "\nNow you have " + list.size() + " tasks in the list.";
             ui.drawline();
             storage.addtask(tasks.getlist());
-            return first+second+third;
+            return first + second + third;
         }
     }
 
@@ -143,7 +147,7 @@ public class Duke extends Application {
      * @param s user command
      * @return result of the command
      */
-    public void deadline(ArrayList<Task> list, String s) throws ErrorException {
+    public void deadline(String s) throws ErrorException {
         if (s.length() == 8) {
             throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
@@ -156,7 +160,8 @@ public class Duke extends Application {
             tasks.timeform(deadlineBy, d);
         }
     }
-    public String deadlineString(ArrayList<Task> list, String s) throws ErrorException {
+
+    public String deadlineString(String s) throws ErrorException {
         if (s.length() == 8) {
             throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
@@ -176,7 +181,7 @@ public class Duke extends Application {
      * @param s user command
      * @return result of the command
      */
-    public void event(ArrayList<Task> list, String s) throws ErrorException {
+    public void event(String s) throws ErrorException {
         if (s.length() == 5) {
             throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
@@ -189,7 +194,8 @@ public class Duke extends Application {
             tasks.timeform(eventAt, event);
         }
     }
-    public String eventString(ArrayList<Task> list, String s) throws ErrorException {
+
+    public String eventString(String s) throws ErrorException {
         if (s.length() == 5) {
             throw new ErrorException("☹ OOPS!!! The description of a todo cannot be empty.");
         } else {
@@ -212,24 +218,31 @@ public class Duke extends Application {
     public void other(String s) throws ErrorException {
         throw new ErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+
     public String otherString(String s) throws ErrorException {
-       throw new ErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new ErrorException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
+
     public void stats(ArrayList<Task> list) {
         ui.drawline();
         int n = list.size();
-        System.out.println("     There are Total "+n+ " tasks in the task list");
+        System.out.println("     There are Total " + n + " tasks in the task list");
         int a = 0;
         int b = 0;
-        for(int i = 0;i<list.size();i++){
-            if(list.get(i).getStatusIcon()=="\u2713"){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getStatusIcon() == "\u2713") {
                 a++;
+            } else {
+                b++;
             }
-            else{b++;}
         }
-        System.out.println("     " +a+" events have done");
-        System.out.println("     " +b+" events have not GIT done");
+        System.out.println("     " + a + " events have done");
+        System.out.println("     " + b + " events have not GIT done");
         ui.drawline();
+    }
+
+    public String statsString(ArrayList<Task> list) {
+        return "stats";
     }
 
     /**
@@ -272,15 +285,6 @@ public class Duke extends Application {
         ui.drawline();
     }
 
-    /**
-     * Executes the command and returns the result.
-     */
-    public void echo(ArrayList<Task> list, Task t) {
-        list.add(t);
-        ui.drawline();
-        System.out.println("     added: " + t.getName());
-        ui.drawline();
-    }
 
     /**
      * Executes the command and returns the result.
@@ -332,70 +336,123 @@ public class Duke extends Application {
         }
         String output = "";
         for (int i = 0; i < list.size(); i++) {
-            int itemIndex = i + 1;
-            output = output + "." + list.get(i).toString() + "/n";
+            int n = i + 1;
+            output = output + n + "." + list.get(i).toString() + "\n";
         }
         return output;
     }
 
     public String getResponse(String input) {
-        String output = "";
-        //ui.showWelcome();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            String s = sc.nextLine();
-            String[] a = Parser.parse(s);
-            switch (a[0]) {
-                case "bye":
-                    ui.bye();
-                    output = "";
-                case "list":
-                    String first = "     Here are the tasks in your list:";
-                    String second = tasks.showlistString();
-                    output = first + second;
-
-                case "done":
+        String[] a = Parser.parse(input);
+        switch (a[0]) {
+            case "list":
+                return tasks.showlistString();
+            case "bye":
+                Platform.exit();
+                return "Bye. Hope to see you again soon!";
+            case "todo":
+                try {
+                    return todoString(tasks.getlist(), input);
+                } catch (ErrorException e) {
+                    return e.getMessage();
+                }
+            case "done":
                     int n = Integer.parseInt(a[1]);
-                    output= doneString(tasks.getlist(), n - 1);
+                    return doneString(tasks.getlist(), n - 1);
 
-                case "todo":
+            case "event":
                     try {
-                        output = todoStrig(tasks.getlist(), s);
+                       return eventString(input);
                     } catch (ErrorException e) {
-                        output= e.getMessage();
+                        return e.getMessage();
                     }
 
-                case "event":
+            case "deadline":
                     try {
-                       output= eventString(tasks.getlist(), s);
+                       return deadlineString(input);
                     } catch (ErrorException e) {
-                        output= e.getMessage();
+                        return e.getMessage();
                     }
 
+            case "delete":
+                int m = Integer.parseInt(a[1]);
+                return deleteString(tasks.getlist(), m - 1);
 
-                case "deadline":
+            case "find":
+                   return findString(tasks.getlist(), input);
 
-                    try {
-                       output= deadlineString(tasks.getlist(), s);
+            case "stats":
+                return statsString(tasks.getlist());
+
+            default:
+                try {
+                       return otherString(input);
                     } catch (ErrorException e) {
-                        output= e.getMessage();
+                        return e.getMessage();
                     }
 
-                case "delete":
-                    int m = Integer.parseInt(a[1]);
-                   output= deleteString(tasks.getlist(), m - 1);
-
-                case "find":
-                   output= findString(tasks.getlist(), s);
-
-                default:
-                    try {
-                       output= otherString(s);
-                    } catch (ErrorException e) {
-                        output= e.getMessage();
-                    }
-            }
         }
-        return output;
     }
 }
+
+//    public String getResponse(String input) {
+//        String output = "";
+//        //ui.showWelcome();
+//        Scanner sc = new Scanner(System.in);
+//        while (sc.hasNextLine()) {
+//            String s = sc.nextLine();
+//            String[] a = Parser.parse(s);
+//            switch (a[0]) {
+//                case "bye":
+//                    ui.bye();
+//                    output = "";
+//                case "list":
+//                    String first = "     Here are the tasks in your list:";
+//                    String second = tasks.showlistString();
+//                    output = first + second;
+//
+//                case "done":
+//                    int n = Integer.parseInt(a[1]);
+//                    output= doneString(tasks.getlist(), n - 1);
+//
+//                case "todo":
+//                    try {
+//                        output = todoStrig(tasks.getlist(), s);
+//                    } catch (ErrorException e) {
+//                        output= e.getMessage();
+//                    }
+//
+//                case "event":
+//                    try {
+//                       output= eventString(tasks.getlist(), s);
+//                    } catch (ErrorException e) {
+//                        output= e.getMessage();
+//                    }
+//
+//
+//                case "deadline":
+//
+//                    try {
+//                       output= deadlineString(tasks.getlist(), s);
+//                    } catch (ErrorException e) {
+//                        output= e.getMessage();
+//                    }
+//
+//                case "delete":
+//                    int m = Integer.parseInt(a[1]);
+//                   output= deleteString(tasks.getlist(), m - 1);
+//
+//                case "find":
+//                   output= findString(tasks.getlist(), s);
+//
+//                default:
+//                    try {
+//                       output= otherString(s);
+//                    } catch (ErrorException e) {
+//                        output= e.getMessage();
+//                    }
+//            }
+//        }
+//        return output;
+
+

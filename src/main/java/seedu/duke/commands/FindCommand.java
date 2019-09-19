@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds and lists the tasks containing {@code keyword}
+     * Finds and lists the tasks containing {@code keyword}.
      * @param keyword The keyword to find.
      * @return The response.
      */
@@ -34,7 +34,7 @@ public class FindCommand extends Command {
                 .collect(Collectors.toList());
         TaskList matchTaskList = new TaskList(null);
         matchTaskList.addAll(list);
-        return "Here are the matching tasks in your list:\n" +
-                matchTaskList.toString() + "\n";
+        return "Here are the matching tasks in your list:\n"
+                + matchTaskList.toString() + "\n";
     }
 }

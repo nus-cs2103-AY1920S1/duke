@@ -37,8 +37,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two {@code DialogBox}s, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two {@code DialogBox}s, one echoing user input and the other containing Duke's reply
+     * and then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {

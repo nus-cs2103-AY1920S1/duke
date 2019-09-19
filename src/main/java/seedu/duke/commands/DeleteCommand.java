@@ -7,7 +7,7 @@ import seedu.duke.exceptions.TaskDoesNotExistException;
 import seedu.duke.exceptions.TaskNotSpecifiedException;
 import seedu.duke.task.Task;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     public DeleteCommand(String arg, TaskList taskList) {
         super(arg, taskList);
     }

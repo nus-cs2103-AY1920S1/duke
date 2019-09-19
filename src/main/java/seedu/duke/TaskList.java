@@ -71,6 +71,11 @@ public class TaskList extends ArrayList<Task> {
         return "Now you have " + size() + " tasks in the list.\n";
     }
 
+    /**
+     * Returns a message when user adds a task.
+     * @param task The added task.
+     * @return The response.
+     */
     public String getAddedMsg(Task task) {
         assert task != null;
         String taskString = "  " + task + "\n";

@@ -17,7 +17,7 @@ public class ListCommand extends Command {
      * @return The list.
      */
     private String list() {
-        return "Here are the tasks in your list:\n" +
-                taskList.toString() + "\n";
+        return "Here are the tasks in your list:\n"
+                + taskList.toString() + "\n";
     }
 }

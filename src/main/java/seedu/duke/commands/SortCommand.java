@@ -67,13 +67,13 @@ public class SortCommand extends Command {
             return x.getDescription().compareTo(y.getDescription());
         }),
         DONE("done", (x, y) -> {
-           if (x.isDone() && !y.isDone()) {
-               return 1;
-           } else if (!x.isDone() && y.isDone()) {
-               return -1;
-           } else {
-               return 0;
-           }
+            if (x.isDone() && !y.isDone()) {
+                return 1;
+            } else if (!x.isDone() && y.isDone()) {
+                return -1;
+            } else {
+                return 0;
+            }
         }),
         DEADLINE("deadline", (x, y) -> {
             if (x instanceof Deadline && y instanceof Deadline) {
@@ -100,8 +100,7 @@ public class SortCommand extends Command {
         TODO("todo", (x, y) -> {
             if (x instanceof Todo && !(y instanceof Todo)) {
                 return -1;
-            }
-            else if (y instanceof Todo && !(x instanceof Todo)) {
+            } else if (y instanceof Todo && !(x instanceof Todo)) {
                 return 1;
             } else {
                 return 0;

@@ -4,6 +4,7 @@ public class ByeCommand extends Command {
     public ByeCommand() {
         super(null, null);
     }
+
     @Override
     public String execute() {
         return "Bye...";

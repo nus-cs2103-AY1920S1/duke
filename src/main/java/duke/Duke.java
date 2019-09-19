@@ -39,6 +39,10 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initializes Duke against a flat file database.
+     * Creates a new flat file if it does not exist.
+     */
     private void initialize() {
         String filePath = "." + File.separator + "duke.txt";
         storage = new Storage(filePath);
@@ -56,6 +60,11 @@ public class Duke extends Application {
         showResponse(Ui.showWelcome());
     }
 
+    /**
+     * Starts the JavaFX stage.
+     *
+     * @param stage JavaFX stage object
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -114,6 +123,9 @@ public class Duke extends Application {
         initialize();
     }
 
+    /**
+     * Takes in input from user through JavaFX GUI and performs necessary logic.
+     */
     private void handleUserInput() {
         try {
             String fullCommand = userInput.getText();
@@ -133,6 +145,11 @@ public class Duke extends Application {
         }
     }
 
+    /**
+     * Shows the response of logic against an executed command.
+     *
+     * @param dukeText The message to be shown
+     */
     public void showResponse(String dukeText) {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeText, duke));

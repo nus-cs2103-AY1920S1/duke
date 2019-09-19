@@ -16,10 +16,20 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor for the flat file database storage.
+     *
+     * @param filePath File location for the flat file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Saves the database.
+     *
+     * @param tasks The full list of tasks to be saved
+     */
     public void save(ArrayList<Task> tasks) throws IOException, DukeException {
         FileWriter fw = new FileWriter(filePath);
         try {
@@ -32,6 +42,9 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads the database.
+     */
     public ArrayList<Task> load() throws FileNotFoundException, DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         File dataFile = new File(filePath);

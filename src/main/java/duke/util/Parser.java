@@ -4,6 +4,11 @@ import duke.command.*;
 
 public class Parser {
 
+    /**
+     * Parses the user's input and directs it to the appropriate command.
+     *
+     * @param fullCommand The entirety of the user's input
+     */
     public static Command parse(String fullCommand) {
         if (fullCommand.equals("bye")) {
             return new ExitCommand();

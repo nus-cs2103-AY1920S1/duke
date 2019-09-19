@@ -7,6 +7,13 @@ import static java.lang.Integer.parseInt;
 
 public class DoneCommand extends Command {
 
+    /**
+     * Executes the Done Command
+     *
+     * @param tasks The current tasks loaded
+     * @param storage The storage file loaded
+     * @param command The command that is being executed
+     */
     @Override
     public String execute(TaskList tasks, Storage storage, String command) {
         String message = "";

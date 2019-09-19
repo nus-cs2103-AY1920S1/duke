@@ -8,22 +8,39 @@ public class TaskList {
 
     private ArrayList<Task> tasks;
 
+    /**
+     * Constructor to populate the TaskList object with tasks loaded from database.
+     *
+     * @param tasks Loaded ArrayList of tasks
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Constructor for a blank TaskList object.
+     */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Returns the ArrayList of tasks.
+     */
     public ArrayList<Task> getList() {
         return tasks;
     }
 
+    /**
+     * Returns the size of items in the task list.
+     */
     public int getSize() {
         return tasks.size();
     }
 
+    /**
+     * Creates an output containing all the elements of the task list.
+     */
     public String output() {
         String taskString = "";
         for (int i = 1; i <= tasks.size(); i++) {
@@ -32,6 +49,11 @@ public class TaskList {
         return taskString;
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param index The index of the task to be marked as done
+     */
     public String markDone(int index) {
         tasks.get(index).done();
         String message = String.format("Nice! I've marked this task as done:%s%s",
@@ -39,6 +61,11 @@ public class TaskList {
         return message;
     }
 
+    /**
+     * Removes a task from the task list.
+     *
+     * @param index The index of the task to be removed
+     */
     public String remove(int index) {
         String message = String.format("Noted. I've removed this task:%s%s%s",
                 System.lineSeparator(), tasks.get(index), System.lineSeparator());
@@ -47,6 +74,11 @@ public class TaskList {
         return message;
     }
 
+    /**
+     * Adds a new task to the task list.
+     *
+     * @param t The task to be added
+     */
     public String add(Task t) {
         tasks.add(t);
         String message = String.format("Got it. I've added this task:%s%s%s",

@@ -16,6 +16,12 @@ public class DialogBox extends HBox {
 
     private Label text;
 
+    /**
+     * Generates a DialogBox for display in the GUI.
+     *
+     * @param message The message to be shown
+     * @param theImage The image to be shown
+     */
     public DialogBox(String message, Image theImage) {
         text = new Label(message);
         text.setWrapText(true);
@@ -34,6 +40,9 @@ public class DialogBox extends HBox {
         HBox.setMargin(theFlowPane, new Insets(10, 10, 0, 10));
     }
 
+    /**
+     * Flips the DialogBox to the other side to facilitate a conversational view.
+     */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         for (Node node : tmp) {
@@ -45,10 +54,16 @@ public class DialogBox extends HBox {
         }
     }
 
+    /**
+     * Creates a DialogBox to get user input.
+     */
     public static DialogBox getUserDialog(String message, Image theImage) {
         return new DialogBox(message, theImage);
     }
 
+    /**
+     * Creates a DialogBox for responding.
+     */
     public static DialogBox getDukeDialog(String message, Image theImage) {
         DialogBox db = new DialogBox(message, theImage);
         db.flip();

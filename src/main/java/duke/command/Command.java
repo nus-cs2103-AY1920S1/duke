@@ -14,10 +14,16 @@ public abstract class Command {
         isExit = false;
     }
 
+    /**
+     * Returns if the command executed will exit the program
+     */
     public boolean isExit() {
         return isExit;
     }
 
+    /**
+     * Executes the Command
+     */
     public abstract String execute(TaskList tasks, Storage storage, String command) throws IOException, DukeException;
 
 }

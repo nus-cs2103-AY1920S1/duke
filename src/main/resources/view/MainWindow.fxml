@@ -12,9 +12,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.duke.MainWindow">
     <children>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="496.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hvalue="1.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="666.0" prefWidth="496.0" vbarPolicy="AS_NEEDED" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="493.0">
+                <VBox fx:id="dialogContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="663.0" prefWidth="493.0">
                <children>
                   <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
                     <items>

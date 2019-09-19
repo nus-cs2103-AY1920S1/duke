@@ -10,3 +10,6 @@
     -fx-border-width: 10;
 }
 
+.dialogText {
+    -fx-font-family: "Helvetica";
+}

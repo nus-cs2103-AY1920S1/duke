@@ -1,7 +1,7 @@
 T | 0 | Complete Project Work
 D | 1 | Buy Groceries | 26/10/2019 18:30
 T | 1 | Complete CS2103T Individual Project
-T | 0 | Add more features to Duke
+T | 1 | Add more features to Duke
 T | 0 | Merge A-UserGuide to Master branch
 E | 0 | Exam | 01/10/2019 09:00 | 01/10/2019 09:00
 E | 0 | Lecture | 01/11/2019 10:00 | 01/11/2019 10:00

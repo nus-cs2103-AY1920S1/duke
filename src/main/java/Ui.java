@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Ui {
+class Ui {
     private String output;
 
     String getOutput() {
@@ -15,9 +15,8 @@ public class Ui {
 
         output = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
-            String num = "" + (i + 1);
-            output += "     " + num + ".[" + taskList.getTaskList().get(i).getStatusIcon() + "] "
-                    + taskList.getTaskList().get(i).toString() + "\n";
+            int taskNum = i + 1;
+            output += taskNum + ". " + taskList.getTaskList().get(i).toString() + "\n";
         }
     }
 
@@ -40,14 +39,13 @@ public class Ui {
     }
 
     void setToDone(int taskNum, TaskList taskList) {
-        assert(taskNum > 0) : "Task number must be more than 1"; //added assert
+        assert(taskNum > 0) : "Task number must be more than 1";
         output = "Nice! I've marked this task as done:\n"
-                + "[" + taskList.getTaskList().get(taskNum - 1).getStatusIcon() + "]"
                 + taskList.getTaskList().get(taskNum - 1).toString();
     }
 
     void setToDelete(int taskNum2, TaskList taskList) {
-        assert(taskNum2 > 0) : "Task number must be more than 1"; //added assert
+        assert(taskNum2 > 0) : "Task number must be more than 1";
         output = "Noted. I've removed this task:\n"
                 + taskList.getTaskList().get(taskNum2 - 1).toString() + "\n"
                 + "Now you have " + (taskList.getTaskList().size() - 1) + "tasks in the list.";
@@ -62,7 +60,15 @@ public class Ui {
         output = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < relatedTasks.size(); i++) {
             int num = i + 1;
-            output += num + "." + relatedTasks.get(i) + "\n";
+            output += num + ". " + relatedTasks.get(i) + "\n";
+        }
+    }
+
+    void setToSort(ArrayList<Task> taskList, String sortType) {
+        output = "The list is now sorted according to: " + sortType + "\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            int taskNum = i + 1;
+            output += taskNum + ". " + taskList.get(i) + "\n";
         }
     }
 

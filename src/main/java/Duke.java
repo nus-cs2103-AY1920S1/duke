@@ -14,10 +14,10 @@ public class Duke {
      * Initializes the Duke application and the storage file.
      */
 
-    Duke() {
+    void DukeStart() {
         ui = new Ui();
         Storage storage = new Storage("../duke.txt");
-        taskList = new TaskList(Storage.load());
+        taskList = new TaskList(storage.load());
         parser = new Parser();
     }
 
@@ -31,7 +31,7 @@ public class Duke {
     String getResponse (String input) {
         try {
             parser.parse(input, ui, taskList);
-        } catch (DukeException | ParseException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
         return ui.getOutput();

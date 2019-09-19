@@ -1,6 +1,8 @@
 import java.text.ParseException;
         import java.text.SimpleDateFormat;
         import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Deals with making sense of the user command
@@ -15,10 +17,9 @@ class Parser {
      * @param ui User Interface in dealing with duke
      * @param taskList Task list of the current file
      * @throws DukeException If user input is in wrong format
-     * @throws ParseException If user input of time is in wrong format
      */
 
-    void parse(String input, Ui ui, TaskList taskList) throws DukeException, ParseException {
+    void parse(String input, Ui ui, TaskList taskList) throws DukeException {
         String command = input.split(" ")[0].trim();
         assert !command.isEmpty() : "Input must not be empty"; //added assert
         switch (command) {
@@ -42,12 +43,12 @@ class Parser {
                 Task todoTask = new Todo(todoDescription);
                 taskList.getTaskList().add(todoTask);
                 ui.setToTodo(todoTask, taskList);
-                Storage.saveTaskList(taskList.getTaskList());//saves file
+                Storage.saveTaskList(taskList.getTaskList()); //saves file
                 break;
             case "deadline":
                 try {
                     String deadlineDescription = input.substring(8).trim();
-                    String[] deadlineArray = input.split("/by");
+                    String[] deadlineArray = deadlineDescription.split("/by");
                     String deadlineName = deadlineArray[0].trim();
                     String deadlineBy = deadlineArray[1].trim();
                     if (deadlineDescription.isEmpty() || deadlineBy.isEmpty()) {
@@ -67,7 +68,7 @@ class Parser {
             case "event":
                 try {
                     String eventDescription = input.substring(5).trim();
-                    String[] eventArray = input.split("/at");
+                    String[] eventArray = eventDescription.split("/at");
                     String eventName = eventArray[0].trim();
                     String eventAt = eventArray[1].trim();
                     if (eventDescription.isEmpty() || eventAt.isEmpty()) {
@@ -116,6 +117,23 @@ class Parser {
                     break;
                 } catch (Exception e) {
                     throw new DukeException("☹ OOPS!!! Wrong format. Use: delete (task number)");
+                }
+            case "sort":
+                try {
+                    String sortType = input.substring(4).trim();
+                    if (sortType.equals("event")) {
+                        Collections.sort(taskList.getTaskList(), new EventSort());
+                    } else if (sortType.equals("deadline")) {
+                        Collections.sort(taskList.getTaskList(), new DeadlineSort());
+                    } else if (sortType.equals("todo")) {
+                        Collections.sort(taskList.getTaskList(), new TodoSort());
+                    } else {
+                        throw new DukeException("☹ OOPS!!! There are only event/deadline/todo for type of sort");
+                    }
+                    ui.setToSort(taskList.getTaskList(), sortType);
+                    break;
+                } catch (Exception e) {
+                    throw new DukeException("☹ OOPS!!! Your input format is wrong. Use: sort (type of sort)");
                 }
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

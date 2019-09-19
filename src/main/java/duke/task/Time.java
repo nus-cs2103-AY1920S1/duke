@@ -22,22 +22,18 @@ public class Time {
     @Override
     public String toString() {
         StringBuilder timeString = new StringBuilder();
-        if (this.hour >= 12) {
-            if (this.hour > 12) {
-                timeString.append(this.hour - 12);
-            } else {
-                timeString.append(this.hour);
-            }
-            if (this.minute != 0) {
-                timeString.append(this.minute);
-            }
-                timeString.append("pm");
+        if (this.hour > 12) {
+            timeString.append(this.hour - 12);
         } else {
             timeString.append(this.hour);
-            if (this.minute != 0) {
-                timeString.append(":");
-                timeString.append(this.minute);
-            }
+        }
+        if (this.minute != 0) {
+            timeString.append(":");
+            timeString.append(String.format("%02d", this.minute));
+        }
+        if (this.hour >= 12) {
+            timeString.append("pm");
+        } else {
             timeString.append("am");
         }
         return timeString.toString();

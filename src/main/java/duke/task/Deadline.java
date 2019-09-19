@@ -14,8 +14,8 @@ public class Deadline extends Task {
         super(description);
         this.exactBy = by;
         String[] temp = by.split(" ");
-        byDate = new Date((String) Array.get(temp, 0));
-        byTime = new Time((String) Array.get(temp, 1));
+            byDate = new Date((String) Array.get(temp, 0));
+            byTime = new Time((String) Array.get(temp, 1));
     }
 
     /**
@@ -36,6 +36,7 @@ public class Deadline extends Task {
     public String getTaskType() {
         return "D";
     }
+
     /**
      * Returns string description of the task.
      *

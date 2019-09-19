@@ -44,7 +44,7 @@ public class Task {
      * @return string representing type of task.
      */
     public String getTaskType() {
-        //to be reviewed
+        //how to make code more elegant
         return null;
     }
 

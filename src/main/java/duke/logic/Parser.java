@@ -11,7 +11,7 @@ public class Parser {
     private String taskDetails;
 
     public Parser(String inputString) {
-        this.inputString = inputString;
+        this.inputString = inputString.toLowerCase();
     }
 
     /**

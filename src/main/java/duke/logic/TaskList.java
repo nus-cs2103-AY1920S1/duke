@@ -69,17 +69,17 @@ public class TaskList {
      * Prints out the tasks in the stored task list.
      */
     public String printList() {
-        StringBuilder temp = new StringBuilder();
+        StringBuilder listBuilder = new StringBuilder();
         int counter = 1;
         for (Task task : this.listOfTasks) {
-            temp.append("     ");
-            temp.append(counter);
-            temp.append(".");
-            temp.append(task);
-            temp.append("\n");
+            listBuilder.append("     ");
+            listBuilder.append(counter);
+            listBuilder.append(".");
+            listBuilder.append(task);
+            listBuilder.append("\n");
             counter++;
         }
-        return temp.toString();
+        return listBuilder.toString();
     }
 
     /**
@@ -88,12 +88,12 @@ public class TaskList {
      * @return tasks in stored task list with particular keyword
      */
     public ArrayList<Task> find(String keyword) {
-        ArrayList<Task> temp = new ArrayList<>();
+        ArrayList<Task> tasksWithKeyword = new ArrayList<>();
         for(Task task : this.listOfTasks) {
             if(task.getDescription().contains(keyword)) {
-                temp.add(task);
+                tasksWithKeyword.add(task);
             }
         }
-        return temp;
+        return tasksWithKeyword;
     }
 }

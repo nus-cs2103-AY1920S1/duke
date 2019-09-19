@@ -1,0 +1,5 @@
+T : 0 : eat
+T : 0 : drink water
+D : 0 : work : 19/09/2019 1500
+D : 0 : do homework : 20/09/2019 1842
+D : 0 : do homework : 20052019 0500

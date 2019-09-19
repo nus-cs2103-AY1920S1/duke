@@ -58,26 +58,26 @@ public class Storage {
             System.err.println("Error: " + e.getMessage());
         }
         for(Task task : list) {
-            StringBuilder temp = new StringBuilder();
-            temp.append(task.getTaskType());
-            temp.append(" | ");
+            StringBuilder dataBuilder = new StringBuilder();
+            dataBuilder.append(task.getTaskType());
+            dataBuilder.append(" : ");
             if (task.isDone()) {
-                temp.append(1);
+                dataBuilder.append(1);
             } else {
-                temp.append(0);
+                dataBuilder.append(0);
             }
-            temp.append(" | ");
-            temp.append(task.getDescription());
+            dataBuilder.append(" : ");
+            dataBuilder.append(task.getDescription());
             if ((task instanceof Event) || (task instanceof Deadline)) {
-                temp.append(" | ");
+                dataBuilder.append(" : ");
                 if (task instanceof Event) {
-                    temp.append(((Event) task).getExactDuration());
+                    dataBuilder.append(((Event) task).getExactDuration());
                 } else {
-                    temp.append(((Deadline) task).getExactBy());
+                    dataBuilder.append(((Deadline) task).getExactBy());
                 }
             }
             try {
-                appendToFile(this.filePath, temp.toString() + System.lineSeparator());
+                appendToFile(this.filePath, dataBuilder.toString() + System.lineSeparator());
             } catch (IOException e) {
                 System.err.println("Error: " + e.getMessage());
             }
@@ -91,32 +91,30 @@ public class Storage {
      * @throws FileNotFoundException If file cannot be found.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> listToBeLoaded = new ArrayList<>();
         File f = new File(this.filePath);
         Scanner s = new Scanner(f);
         while(s.hasNext()) {
-            String[] temp = s.nextLine().split(" ");
+            String[] temp = s.nextLine().split(" : ");
             String task = (String) Array.get(temp, 0);
             for(int i = 0; i < temp.length; i++) {
                 System.out.println((String)Array.get(temp,i));
             }
             Task newTask;
             if (task.equals("T")) {
-                newTask = new Todo((String)Array.get(temp,4));
+                newTask = new Todo((String)Array.get(temp,2));
             } else if (task.equals("D")) {
-                newTask = new Deadline((String)Array.get(temp,4),
-                        (String)Array.get(temp, 6) + " " +
-                                (String)Array.get(temp, 7));
+                newTask = new Deadline((String)Array.get(temp,2),
+                        (String)Array.get(temp, 3));
             } else {
-                newTask = new Event((String)Array.get(temp,4),
-                        (String)Array.get(temp, 6) + " " +
-                                (String)Array.get(temp, 7));
+                newTask = new Event((String)Array.get(temp,2),
+                        (String)Array.get(temp, 3));
             }
-            if (((String) Array.get(temp, 2)).equals("1")) {
+            if (((String) Array.get(temp, 1)).equals("1")) {
                 newTask.setDone();
             }
-            list.add(newTask);
+            listToBeLoaded.add(newTask);
         }
-        return list;
+        return listToBeLoaded;
     }
 }

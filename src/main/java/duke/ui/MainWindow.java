@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
 
-    private static final String USER_IMAGE_PATH = "/images/user.png";
+    private static final String USER_IMAGE_PATH = "/images/doge.png";
     private static final String DUKE_IMAGE_PATH = "/images/duke.png";
 
     @FXML

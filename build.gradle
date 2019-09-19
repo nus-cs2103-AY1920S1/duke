@@ -32,8 +32,8 @@ run {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveVersion = "0.1.3"
-    archiveClassifier = null
+    archiveVersion = "0.19"
+    archiveClassifier = "alpha"
     archiveAppendix = null
 }
 

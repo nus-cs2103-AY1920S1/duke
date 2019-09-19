@@ -8,7 +8,7 @@
 
 **Getting Duke**
 
-Simply download the v0.2 jar release to get started.
+Simply download the v0.3 jar release to get started. It is available here: https://github.com/atharvjoshi/duke/releases/tag/A-Release
 
 # Using Duke 
 

@@ -2,5 +2,5 @@
      2. [D][✓] Assignment 0 (by: 20th of September 2019, 11.59 PM)
      3. [T][✓] Homework
      4. [D][✗] Project Submission (by: 22nd of September 2019, 11.59 PM)
-     5. [E][✗] Lecture (at: 04th of October 2019, 12.00 PM)
+     5. [E][✓] Lecture (at: 04th of October 2019, 12.00 PM)
      

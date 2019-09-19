@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -67,6 +68,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void exit() {
+        //@@author alaete-reused
+        //Reused from https://stackoverflow.com/a/26454506 with modifications
         Task<Void> delay = new Task<Void>() {
             @Override
             protected Void call() {
@@ -78,7 +81,8 @@ public class MainWindow extends AnchorPane {
                 return null;
             }
         };
-        delay.setOnSucceeded(event -> System.exit(0));
+        delay.setOnSucceeded(event -> Platform.exit());
         new Thread(delay).start();
+        //@@author
     }
 }

@@ -4,7 +4,7 @@
 
 Welcome to Duke: Martin's Todo Helper! 
 
-![User Interface](docs/UI.png)
+![User Interface](docs/Ui.png)
 
 ## Prerequisites
 1) Have Java installed on your computer. 

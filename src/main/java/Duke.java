@@ -194,7 +194,7 @@ public class Duke extends Application implements Serializable {
             throw new DukeException("\u2639 OOPS!!! Done function needs exactly one argument.");
         }
         TaskList<Task> shortList = new TaskList<>(todoList);
-        shortList.removeIf((x) -> !x.getName().matches(".*" + args[1] + ".*"));
+        shortList.removeIf(x -> (!x.getName().matches(".*" + args[1] + ".*")));
         printList(shortList);
     }
 
@@ -265,7 +265,7 @@ public class Duke extends Application implements Serializable {
 
     private void printList(TaskList<Task> tl) throws IOException {
         int counter = 1;
-        for (Task item : todoList) {
+        for (Task item : tl) {
             ui.write(String.format("%s %d.%s\n", PRINT_INDENT, counter++, item));
         }
         if (counter == 1) {
@@ -330,7 +330,7 @@ public class Duke extends Application implements Serializable {
      * @throws IOException if stream fed to Duke is not valid
      */
     private void greet() throws IOException {
-        ui.write(String.format("%s Hello! I'm Duke\n", PRINT_INDENT));
+        ui.write(String.format("%s Hello! I'm Daman, some people call me Damyth, others, Dalegend\n", PRINT_INDENT));
         ui.write(String.format("%s What can I do for you?\n", PRINT_INDENT));
         ui.flush();
     }
@@ -356,7 +356,7 @@ public class Duke extends Application implements Serializable {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Daman");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

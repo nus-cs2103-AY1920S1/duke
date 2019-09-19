@@ -66,6 +66,9 @@ public class Parser {
             throw new DukeException("OOPS!!! The description of a done cannot be empty.");
         }
         int n = Integer.parseInt(w[1]);
+        if (n > taskList.getSize()) {
+            throw new DukeException("There is no task number " + n + " in the list.");
+        }
         Task currTask = taskList.list.get(n - 1);
         currTask.setStatusIcon(true);
         ui.printDone(currTask);

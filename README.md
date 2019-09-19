@@ -1,13 +1,11 @@
 # Setting up
 
 **Prerequisites**
-
 * JDK 11
 * Recommended: IntelliJ IDE
 * Fork this repo to your GitHub account and clone the fork to your computer
 
 **Importing the project into IntelliJ**
-
 1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first).
 1. Set up the correct JDK version.
    * Click `Configure` > `Structure for new Projects` (in older versions of Intellij:`Configure` > `Project Defaults` > `Project Structure`).
@@ -19,8 +17,6 @@
 1. Rename the project if you want. Click `Next`.
 1. Ensure that your src folder is checked. Keep clicking `Next`.
 1. Click `Finish`.
-
-# Tutorials 
 
 Duke Increment | Tutorial
 ---------------|---------------
@@ -34,6 +30,5 @@ Duke Increment | Tutorial
 [fx4]: <tutorials/javaFxTutorialPart4.md>
 
 # Feedback, Bug Reports
-
 * If you have feedback or bug reports, please post in [se-edu/duke issue tracker](https://github.com/se-edu/duke/issues).
 * We welcome pull requests too.

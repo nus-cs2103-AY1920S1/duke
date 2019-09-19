@@ -1,0 +1,5 @@
+T | 0 | sleep
+D | 1 | 2103T ip| 28 of August 2019, 11:59 PM
+E | 1 | project meeting| Friday 2101 classroom
+T | 1 | run
+D | 0 | return book| June 6th

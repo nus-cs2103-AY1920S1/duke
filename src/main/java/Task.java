@@ -80,8 +80,6 @@ public class Task {
      * @return true if equal
      */
     public boolean equals(Task t) {
-        //System.out.println(t.toString());
-        //System.out.println(this.toString());
         return t.toString().equals(this.toString());
     }
 

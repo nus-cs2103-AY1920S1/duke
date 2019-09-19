@@ -86,7 +86,7 @@ public class Storage {
             File saveFile = new File(filePath);
             FileWriter fw = new FileWriter(saveFile, false);
             int i = 1;
-            //StringBuilder result = new StringBuilder();
+
             for (Task t : tasks) {
                 fw.write(i + ". " + t.toFileString() + "\n");
                 i++;

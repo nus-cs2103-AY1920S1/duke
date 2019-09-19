@@ -19,7 +19,8 @@ public class Ui {
      */
     public String showWelcome() {
         return "Hello from TSINGHUA\n"
-                    + "\nHello! I'm Tsinghua : )\nWhat can I do for you?";
+                    + "\nHello, Asia's No.1 University!"
+                    + "\nI'm Tsinghua : ) What can I do for you?";
     }
 
     /**

@@ -61,6 +61,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Deals with processing the done command and taking actions accordingly.
+     *
+     * @param w array containing command name and rest of line from input.
+     * @throws DukeException if input is incorrect.
+     */
     public void processDone(String[] w) throws DukeException{
         if (w.length < 2) {
             throw new DukeException("OOPS!!! The description of a done cannot be empty.");
@@ -74,6 +80,12 @@ public class Parser {
         ui.printDone(currTask);
     }
 
+    /**
+     * Deals with processing the todos command and taking actions accordingly.
+     *
+     * @param w array containing command name and rest of line from input.
+     * @throws DukeException If input is incorrect.
+     */
     public void processToDo(String[] w) throws DukeException {
         if (w.length < 2) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -84,6 +96,13 @@ public class Parser {
         ui.printAdd(currTask, taskList);
     }
 
+    /**
+     * Deals with processing the deadline command and taking actions accordingly.
+     *
+     * @param w array containing command name and rest of line from input.
+     * @throws DukeException If input is incorrect.
+     * @throws ParseException If date is not in date format.
+     */
     public void processDeadline(String[] w) throws DukeException, ParseException {
         if (w.length < 2) {
             throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
@@ -97,6 +116,13 @@ public class Parser {
         ui.printAdd(currTask, taskList);
     }
 
+    /**
+     * Deals with processing the event command and taking actions accordingly.
+     *
+     * @param w array containing command name and rest of line from input.
+     * @throws DukeException If input is incorrect.
+     * @throws ParseException If date is not in date format.
+     */
     public void processEvent(String[] w) throws DukeException, ParseException {
         if (w.length < 2) {
             throw new DukeException("OOPS!!! The description of a event cannot be empty.");
@@ -108,11 +134,21 @@ public class Parser {
         ui.printAdd(currTask, taskList);
     }
 
+    /**
+     * Deals with processing the delete command and taking actions accordingly.
+     *
+     * @param w array containing command name and rest of line from input.
+     */
     public void processDelete(String[] w) {
         Task currTask = taskList.delete(w[1]);
         ui.printDelete(currTask, taskList);
     }
 
+    /**
+     * Deals with processing the find command and taking actions accordingly.
+     *
+     * @param w array containing command name and rest of line from input.
+     */
     public void processFind(String[] w) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < taskList.list.size(); i++) {

@@ -3,9 +3,6 @@ package duke.task;
 import duke.command.TaskList;
 import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -34,6 +31,11 @@ class TaskListTest {
             
             public String format() {
                 return null;
+            }
+
+            @Override
+            public int getDiffDays() {
+                return 0;
             }
         }
 

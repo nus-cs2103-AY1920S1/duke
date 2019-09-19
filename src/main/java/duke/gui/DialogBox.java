@@ -55,10 +55,12 @@ public class DialogBox extends HBox {
      * Returns a DialogBox component for User.
      * @param text Input text.
      * @param img Picture to show.
-     * @return DialogBox comopnent for User.
+     * @return DialogBox component for User.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle(db.dialog.getStyle() + "-fx-background-color: #FFF04D;");
+        return db;
     }
 
     /**
@@ -69,6 +71,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.dialog.setStyle(db.dialog.getStyle() + "-fx-background-color: #EBB871;");
         db.flip();
         return db;
     }

@@ -88,6 +88,7 @@ public class Storage {
      */
     private static void createTextFile() throws IOException {
         //@@author bjhoohaha-reused
+        //Used to fix issue where storage file cannot be found
         //Reused from: https://stackoverflow.com/questions/3090761/how-to-create-a-new-file-together-with-missing-parent-directories with minor modifications
         File file = new File("data/duke.txt");
         file.getParentFile().mkdirs();

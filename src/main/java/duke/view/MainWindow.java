@@ -97,6 +97,7 @@ public class MainWindow extends BorderPane {
         userInput.setDisable(true);
         sendButton.setDisable(true);
         //@@author bjhoohaha-reused
+        //Used to fix issue where exit message is not displayed when exit
         //Reused from https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx with minor modifications
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(event -> {

@@ -57,6 +57,7 @@ Example of usage:
 
 * delete 1
 - - -
+
 `done <index>`
 
 Mark-As-Done Tasks upon completion. Duke will display the Task and tick the Task to indicate completion.

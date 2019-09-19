@@ -1,8 +1,8 @@
-package duke;
+package duke.task;
 
 import java.io.Serializable;
 
-abstract class Task implements Serializable {
+public abstract class Task implements Serializable {
     private String description;
     private boolean isDone = false;
 
@@ -20,7 +20,7 @@ abstract class Task implements Serializable {
      *
      * @return isDone.
      */
-    boolean getIsDone() {
+    public boolean getIsDone() {
         return this.isDone;
     }
 
@@ -29,14 +29,14 @@ abstract class Task implements Serializable {
      *
      * @return Description.
      */
-    String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
     /**
      * Marks a task as done.
      */
-    void markAsDone() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -50,9 +50,9 @@ abstract class Task implements Serializable {
     }
 
     /**
-     * Generates the task's text representation in display format.
+     * Generates the task's string representation.
      *
-     * @return Text representation of the task in display format
+     * @return String representation of the task.
      */
     @Override
     public String toString() {

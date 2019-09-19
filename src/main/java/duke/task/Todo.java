@@ -1,19 +1,19 @@
-package duke;
+package duke.task;
 
-class Todo extends Task {
+public class Todo extends Task {
     /**
-     * Creates a new todo.
+     * Constructs a new todo.
      *
      * @param description Description of the todo.
      */
-    Todo(String description) {
+    public Todo(String description) {
         super(description);
     }
 
     /**
-     * Generates the task's text representation in display format.
+     * Generates the todo's string representation.
      *
-     * @return Text representation of the task in display format
+     * @return String representation of the todo.
      */
     @Override
     public String toString() {

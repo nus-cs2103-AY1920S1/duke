@@ -1,23 +1,14 @@
 package duke;
 
+import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
-
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
     @Test
-    void extractCommand_validInput_pass() {
+    void parseTodo_validInput_pass() throws DukeException {
         String input = "todo buy eggs";
-        assertEquals("todo", Parser.extractCommand(input));
-    }
-
-    @Test
-    void parseDate_validInput_pass() throws DukeException {
-        String dateStr = "24/12/2018 1530";
-        Date date = Parser.parseDate(dateStr);
-
-        assertEquals(Duke.DATE_FORMATTER.format(date), dateStr);
+        assertEquals("buy eggs", Parser.parse(input).getParams());
     }
 }

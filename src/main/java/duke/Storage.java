@@ -1,38 +1,54 @@
 package duke;
 
+import duke.exception.DukeException;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
-class Storage {
+public class Storage {
     private String filePath;
 
     /**
-     * Creates a new Storage instance.
-     *
-     * @param filePath Relative path of the save file.
+     * Constructs a new Storage instance.
      */
-    Storage(String filePath) {
-        this.filePath = String.format("%s/%s", System.getProperty("user.dir"), filePath);
+    Storage() {
+        String separator = File.separator;
+        this.filePath = String.format(
+                "%s%s%s%s%s",
+                System.getProperty("user.dir"), separator, "data", separator, "duke.txt"
+        );
     }
 
     /**
-     * Loads tasks from a save file.
+     * Modifies the path of the storage instance.
+     *
+     * @param fileName Save file name.
+     */
+    public void setPath(String fileName) {
+        String separator = File.separator;
+        this.filePath = String.format(
+                "%s%s%s%s%s",
+                System.getProperty("user.dir"), separator, "data", separator, fileName
+        );
+    }
+
+    /**
+     * Loads tasks from save file.
      *
      * @return TaskList with all saved tasks.
-     * @throws DukeException If file I/O fails or if save file data is invalid.
      */
-    TaskList load() throws DukeException {
+    TaskList load() {
         try {
             FileInputStream fin = new FileInputStream(this.filePath);
             ObjectInputStream ois = new ObjectInputStream(fin);
 
             return (TaskList) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            throw new DukeException("Failed to read from save file.");
+            return new TaskList();
         }
     }
 

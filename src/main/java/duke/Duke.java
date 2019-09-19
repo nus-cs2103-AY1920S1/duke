@@ -1,162 +1,39 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+
 import java.text.SimpleDateFormat;
 
 public class Duke {
-    // Configuration
-    static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
+    public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HHmm");
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
 
     /**
-     * Creates a new Duke instance.
+     * Constructs a new Duke instance.
+     */
+    public Duke() {
+        this.storage = new Storage();
+        this.tasks = storage.load();
+    }
+
+    /**
+     * Processes a command.
      *
-     * @param filePath Relative path of the save file.
+     * @param input Command string.
+     * @return Output string.
      */
-    private Duke(String filePath) {
-        this.ui = new Ui();
-
+    public String process(String input) {
         try {
-            this.loadData(filePath);
-        } catch (DukeException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Creates a new Duke instance, no-argument version.
-     */
-    Duke() {
-        this("data/duke.txt");
-    }
-
-    /**
-     * Starts Duke's execution, used for command-line execution.
-     */
-    private void run() {
-        System.out.println(this.ui.showWelcome());
-
-        String input = this.ui.getInput();
-        while (input != null) {
-            String output = process(input);
-            System.out.println(output);
-
-            input = this.ui.getInput();
-        }
-
-        System.out.println(this.ui.showGoodbye());
-        System.exit(0);
-    }
-
-    /**
-     * Obtains output from Duke given an input string.
-     *
-     * @param input Input string
-     * @return Duke output
-     */
-    String process(String input) {
-        StringBuilder output = new StringBuilder();
-
-        try {
-            String command = Parser.extractCommand(input);
-
-            switch (command) {
-            case "bye": {
-                output.append(this.ui.showGoodbye());
-                System.exit(0);
-                break;
-            }
-
-            case "list": {
-                output.append(this.ui.showTasks(this.tasks.toString()));
-                break;
-            }
-
-            case "done":
-                // fallthrough
-            case "delete": {
-                int taskId = Integer.parseInt(Parser.extractId(input));
-
-                if (command.equals("delete")) {
-                    Task deletedTask = this.tasks.deleteTask(taskId);
-                    output.append(this.ui.showTaskDeletion(deletedTask));
-                }
-
-                if (command.equals("done")) {
-                    Task doneTask = this.tasks.markDone(taskId);
-                    output.append(this.ui.showTaskDone(doneTask));
-                }
-
-                break;
-            }
-
-            case "find": {
-                String query = Parser.extractQuery(input);
-                output.append(this.ui.showQuery(this.tasks.query(query)));
-                break;
-            }
-
-            case "savefile": {
-                String filePath = Parser.extractQuery(input);
-                try {
-                    this.loadData(filePath);
-                    output.append(this.ui.showSaveFileChange(filePath));
-                } catch (DukeException e) {
-                    output.append(this.ui.showNewSaveFile(filePath));
-                }
-
-                break;
-            }
-
-            case "todo":
-                // fallthrough
-            case "deadline":
-                // fallthrough
-            case "event": {
-                Task newTask = Parser.parseTask(input);
-                this.tasks.addTask(newTask);
-                output.append(this.ui.showTaskAdded(newTask));
-                break;
-            }
-
-            default: {
-                output.append(this.ui.showException(new DukeException("Sorry I do not understand. Please try again.")));
-            }
-            }
+            Command c = Parser.parse(input);
+            String output = c.executeCommand(this.tasks, this.storage);
 
             this.storage.persist(this.tasks);
+            return output;
         } catch (DukeException e) {
-            output.append(this.ui.showException(e));
+            return Ui.showError(e);
         }
-
-        return output.toString();
-    }
-
-    /**
-     * Attempts to load data from a save file. If the save file is not found, a new task list is created.
-     *
-     * @param filePath Save file location.
-     * @throws DukeException If loading data from the save file fails due to I/O or data errors.
-     */
-    private void loadData(String filePath) throws DukeException {
-        this.storage = new Storage(filePath);
-
-        try {
-            this.tasks = storage.load();
-        } catch (DukeException e) {
-            this.tasks = new TaskList();
-            throw e;
-        }
-    }
-
-    /**
-     * Instantiates and runs the a new Duke instance.
-     *
-     * @param args Command-line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }

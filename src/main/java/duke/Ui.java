@@ -1,55 +1,45 @@
 package duke;
 
-import java.util.Scanner;
+import duke.task.Task;
 
-class Ui {
-    private Scanner scanner = new Scanner(System.in);
-
-    String getInput() {
-        if (scanner.hasNextLine()) {
-            return scanner.nextLine();
-        }
-
-        return null;
+public class Ui {
+    public static String showBye() {
+        return "Bye! Hope to see you again soon :-)";
     }
 
-    String showWelcome() {
-        return "Hello! I'm Duke. What can I do for you?";
+    public static String showTasks(TaskList tasks) {
+        return String.format("%s%n%s", "Here are your tasks:", tasks.toString());
     }
 
-    String showGoodbye() {
-        return "Bye. Hope to see you again soon!";
+    public static String showDeletedTask(Task task) {
+        return String.format("%s%n%s", "Done! I have deleted the following task:", task.toString());
     }
 
-    String showTasks(String tasks) {
-        return String.format("Here are your tasks:%n%s", tasks);
+    public static String showDoneTask(Task task) {
+        return String.format("%s%n%s", "Great! I have marked the following task as done:", task.toString());
     }
 
-    String showQuery(String tasks) {
-        return String.format("Here are the matching tasks in your list:%n%s", tasks);
+    public static String showFindMatches(TaskList tasks) {
+        return String.format("%s%n%s", "Done! I have found the following tasks matching your query:", tasks.toString());
     }
 
-    String showSaveFileChange(String filePath) {
-        return String.format("Done! I have loaded tasks from the save file located at:%n%s", filePath);
+    public static String showFindNoMatch() {
+        return "Oh no! No task matching your query was found :-(";
     }
 
-    String showNewSaveFile(String filePath) {
-        return String.format("No existing save file found at %s.%nI have created a new one!", filePath);
+    public static String showChangedSaveFile(String fileName) {
+        return String.format("%s%n%s", "Done! I have switched to the following save file:", fileName);
     }
 
-    String showTaskDeletion(Task deletedTask) {
-        return String.format("Done! I have deleted the following task:%n%s", deletedTask.toString());
+    public static String showAddedTask(Task task) {
+        return String.format("%s%n%s", "Done! I have successfully added the following task:", task.toString());
     }
 
-    String showTaskDone(Task doneTask) {
-        return String.format("Done! I have marked the following task as done:%n%s", doneTask.toString());
+    static String showInvalidCommand() {
+        return "Invalid command, please try again!";
     }
 
-    String showTaskAdded(Task newTask) {
-        return String.format("Done! I have added the following task:%n%s", newTask.toString());
-    }
-
-    String showException(DukeException e) {
-        return String.format("Error:%n%s", e.getMessage());
+    static String showError(Exception e) {
+        return String.format("%s%n%s", "Error:", e.getMessage());
     }
 }

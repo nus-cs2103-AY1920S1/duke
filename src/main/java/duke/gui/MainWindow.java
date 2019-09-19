@@ -1,5 +1,7 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,11 +46,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(duke.process(userInput.getText()));
+
+        String dukeOutput = duke.process(userInput.getText());
+        Label dukeText = new Label(dukeOutput);
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         userInput.clear();
+
+        if (dukeOutput.startsWith("Bye!")) {
+            Platform.exit();
+        }
     }
 }

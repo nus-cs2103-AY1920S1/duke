@@ -11,12 +11,23 @@ public class ParserTest {
     @Test
     public void parse_correctCommand_success() throws DukeException {
         assertEquals(new ByeCommand().getClass(), new Parser("bye").parse("bye").getClass());
-        assertEquals(new SendTasksCommand().getClass(), new Parser("list").parse("list").getClass());
-        assertEquals(new DoneTaskCommand("2").getClass(), new Parser("done 2").parse("done 2").getClass());
-        assertEquals(new AddTodoCommand("project increments").getClass(), new Parser("todo project increments").parse("todo project increments").getClass());
-        assertEquals(new AddDeadlineCommand("return book ", " 15/09/2019 1700").getClass(), new Parser("deadline return book /by 15/09/2019 1700").parse("deadline return book /by 15/09/2019 1700").getClass());
-        assertEquals(new AddEventCommand("project meeting ", " 17/12/2019 1500").getClass(), new Parser("event project meeting /at 17/12/2019 1500").parse("event project meeting /at 17/12/2019 1500").getClass());
-        assertEquals(new DeleteTaskCommand("5").getClass(), new Parser("delete 5").parse("delete 5").getClass());
+        assertEquals(new SendTasksCommand().getClass(),
+                new Parser("list").parse("list").getClass());
+        assertEquals(new DoneTaskCommand("2").getClass(),
+                new Parser("done 2").parse("done 2").getClass());
+        assertEquals(new AddTodoCommand("project increments").getClass(),
+                new Parser("todo project increments").parse("todo " +
+                        "project increments").getClass());
+        assertEquals(new AddDeadlineCommand("return book ", " 15/09/2019 1700").getClass(),
+                new Parser("deadline return book /by 15/09/2019 1700").parse("deadline " +
+                        "return book /by 15/09/2019 1700").getClass());
+        assertEquals(new AddEventCommand("project meeting ", " 17/12/2019 1500").getClass(),
+                new Parser("event project meeting /at 17/12/2019 1500").parse("event " +
+                        "project meeting /at 17/12/2019 1500").getClass());
+        assertEquals(new DeleteTaskCommand("5").getClass(),
+                new Parser("delete 5").parse("delete 5").getClass());
+        assertEquals(new FindCommand("book").getClass(),
+                new Parser("find book").parse("find book").getClass());
     }
 
     @Test
@@ -96,6 +107,16 @@ public class ParserTest {
             fail(); // the test should not reach this line
         } catch (DukeException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", e.toString());
+        }
+    }
+
+    @Test
+    public void parse_missingKeyword_exceptionThrown() {
+        try {
+            assertEquals(new FindCommand("book"), new Parser("find").parse("find"));
+            fail(); // the test should not reach this line
+        } catch (DukeException e) {
+            assertEquals("☹ OOPS!!! Please indicate keyword to be searched.", e.toString());
         }
     }
 }

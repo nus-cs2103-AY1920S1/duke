@@ -95,6 +95,17 @@ public class Parser {
                 String itemIndex = splitStr[1];
                 command = new DeleteTaskCommand(itemIndex);
             }
+        } else if (fullCommand.startsWith("find")) {
+            // to extract keyword, split command at space
+            String[] splitStr = fullCommand.split(" ", 2);
+            // if less than 2 words
+            if (splitStr.length <2) {
+                throw new MissingKeywordException();
+            } else {
+                // take 2nd word
+                String keyword = splitStr[1];
+                command = new FindCommand(keyword);
+            }
         } else {
             throw new InvalidCommandException();
         } return command;

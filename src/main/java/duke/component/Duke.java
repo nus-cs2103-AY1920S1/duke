@@ -37,9 +37,6 @@ public class Duke {
     private Button sendButton;
     private Scene scene;
 
-    //Create an initialise two user image for chatbot
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Creates a new instance of Duke with file path of text file.

@@ -7,7 +7,7 @@ line Interface (CLI) for you to type the command and Duke will do what you input
 ## 2. Quick Start 
 1. Ensure you have Java `11` or above installed in your Computer
 
-1. Download the latest `Duke.jar` [here](https://github.com/Auxinnn/duke/releases/download/v0.1.3/duke-0.1.3.jar).
+1. Download the latest `Duke.jar` [here](https://github.com/Auxinnn/duke/releases/download/v0.1.4/duke-0.1.4.jar).
 
 1. Copy the file to the folder you want to use as the home folder for your Duke.
 

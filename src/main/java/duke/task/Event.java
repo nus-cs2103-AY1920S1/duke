@@ -19,7 +19,7 @@ public class Event extends TimeLimitTask {
      *
      * @return event date.
      */
-    public String getDateTime() {
+    public String getEventDate() {
         return getDateTime();
     }
 
@@ -30,6 +30,6 @@ public class Event extends TimeLimitTask {
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), getDescription(), getDateTime());
+        return String.format("[E][%s] %s (at: %s)", getStatusIcon(), getDescription(), getEventDate());
     }
 }

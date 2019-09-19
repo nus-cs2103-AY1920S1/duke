@@ -20,6 +20,7 @@ public class Parser {
         command = command.trim();
         String[] commandWords = command.split(" ");
         String order = commandWords[0];
+        order = order.toLowerCase();
         boolean addedTask = true;
         if (command.split(order  + " ").length == 1
                 && (order.equals("event") || order.equals("todo") || order.equals("deadline"))) {

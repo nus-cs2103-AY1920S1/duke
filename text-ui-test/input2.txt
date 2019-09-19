@@ -1,0 +1,5 @@
+todo this is a super long message that your mama also don't know how to deal with it
+list
+done 1
+delete 1
+bye

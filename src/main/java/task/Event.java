@@ -70,6 +70,6 @@ public class Event extends Task {
     public String toEncodedString() {
         int isDoneStatus = isDone ? 1 : 0;
 
-        return String.format("D : %d : %s : %s", isDoneStatus, description, unformattedDateTime);
+        return String.format("E : %d : %s : %s", isDoneStatus, description, unformattedDateTime);
     }
 }

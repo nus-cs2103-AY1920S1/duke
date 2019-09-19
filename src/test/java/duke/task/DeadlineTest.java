@@ -13,6 +13,6 @@ public class DeadlineTest {
     public void testDeadlineToString() {
         Deadline deadline = new Deadline("return book",
                 LocalDateTime.parse("2/12/2019 1800", DateTimeFormatter.ofPattern("d/M/yyyy HHmm")));
-        assertEquals(deadline.toString(), "[D][✘] return book (by: 2nd of December 2019, 6.00PM)");
+        assertEquals(deadline.toString(), "[D][-] return book (by: 2nd of December 2019, 6.00PM)");
     }
 }

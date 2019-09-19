@@ -1,3 +1,7 @@
+# Duke Application 
+
+![User interface](docs/Ui.png)
+
 # Setting up
 
 **Prerequisites**

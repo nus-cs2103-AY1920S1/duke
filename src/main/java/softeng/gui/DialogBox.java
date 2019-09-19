@@ -10,6 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 
+/**
+ * Represents a dialog box for the user or Duke
+ */
 public class DialogBox extends HBox {
 
     private Label text;

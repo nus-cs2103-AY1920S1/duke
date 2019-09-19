@@ -3,6 +3,10 @@ package softeng.tasks;
 import java.util.Objects;
 import softeng.date.Date;
 
+/**
+ * Represents an Event task. An <code>Event</code> object corresponds to the
+ * description of the task and the date. e.g. <code>party at Saturday</code>
+ */
 public class Event extends Task{
     protected String at;
     protected Date atDate;

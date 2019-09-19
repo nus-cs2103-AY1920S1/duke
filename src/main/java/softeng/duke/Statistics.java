@@ -13,6 +13,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a statistics recorder of tasks done before.
+ */
+
 public class Statistics {
     private List<Task> tasksDone;
 
@@ -42,9 +46,19 @@ public class Statistics {
             System.out.println("ioException caught when loading file!");
         }
     }
+
+    /**
+     * Adds a done task into the records
+     * @param task the newly done task to be added
+     */
     public void addToDone(Task task) {
         tasksDone.add(task);
     }
+
+    /**
+     * Lists all the tasks done
+     * @return a string containing all the tasks done
+     */
     public String listDone(){
         StringBuilder str = new StringBuilder();
         str.append("Here are the tasks you have done:\n");
@@ -54,6 +68,9 @@ public class Statistics {
         return str.toString();
     }
 
+    /**
+     * Saves the tasks done to disk
+     */
     public void save() {
         List<String> lines = new LinkedList<>();
         for (Task t : tasksDone) {

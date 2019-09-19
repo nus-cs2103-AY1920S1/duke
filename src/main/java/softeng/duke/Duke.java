@@ -38,12 +38,6 @@ public class Duke extends Application {
     private Parser parser;
     private Statistics stats;
 
-    /*public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
-
-    }*/
     public Duke() {
         ui = new Ui();
         storage = new Storage("../../save.txt");
@@ -52,20 +46,8 @@ public class Duke extends Application {
         stats = new Statistics();
     }
     public static void main(String[] args) throws DukeException{
-        new Duke()/*.run()*/;
+        new Duke();
     }
-
-    /*public void Greet(){
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }*/
-
-    /*public void run() {
-        Greet();
-        Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser(sc);
-        parser.read(tasks);
-        storage.save(tasks);
-    }*/
 
     @Override
     public void start(Stage stage) {
@@ -82,8 +64,6 @@ public class Duke extends Application {
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
-        File f = new File("style/background.css");
-        scene.getStylesheets().addAll(this.getClass().getResource("style/background.css").toExternalForm());
 
         stage.setScene(scene);
         stage.show();

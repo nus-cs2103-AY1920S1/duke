@@ -86,8 +86,8 @@ class Parser {
      * @throws DukeException Exception in case command is incomplete.
      */
     public int parseInteger(String indexStr) throws DukeException {
-        if (indexStr.isEmpty()) {
-            throw new DukeException("Please provide an index.");
+        if (indexStr.split(" ").length != 2) {
+            throw new DukeException("Please enter in the format `command <index>`.");
         }
         return Integer.parseInt(indexStr.split(" ")[1]);
     }

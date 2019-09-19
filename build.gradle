@@ -34,7 +34,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "STM"
     archiveVersion = "0.2.0"
     archiveClassifier = null
     archiveAppendix = null

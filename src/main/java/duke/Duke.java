@@ -32,7 +32,7 @@ public class Duke {
     }
 
     public Duke() {
-        this("./data/tasks.txt");
+        this("./data/STM_tasks.txt");
     }
 
     /**
@@ -41,7 +41,7 @@ public class Duke {
      * @param args standard main args
      */
     public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
+        new Duke("./data/STM_tasks.txt").run();
     }
 
     /**

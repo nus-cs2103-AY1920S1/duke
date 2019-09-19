@@ -56,7 +56,7 @@ public class Ui {
     }
 
     public String showLine() {
-        return line;
+        return "";
     }
 
     /**

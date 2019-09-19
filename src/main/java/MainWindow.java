@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/girl.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/boy.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("images/girl.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("images/boy.png"));
 
     @FXML
     public void initialize() {
@@ -48,7 +48,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
         //Gaurd clause
-        if (response.equals("Bye")) {
+        if (response.contains("Bye")) {
             System.exit(0);
         }
 

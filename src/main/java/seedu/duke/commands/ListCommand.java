@@ -17,6 +17,10 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks) {
 
-        return tasks.printAll();
+        StringBuilder response = new StringBuilder();
+
+        response.append("Here are tasks in your list:\n");
+        response.append(tasks.printAll());
+        return response.toString();
     }
 }

@@ -75,18 +75,11 @@ public class Duke {
                 System.exit(0);
             }
 
+            return response;
+
         } catch (DukeException e) {
             return e.getMessage();
         }
-
-        return "";
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
 }

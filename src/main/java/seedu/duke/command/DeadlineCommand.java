@@ -52,16 +52,31 @@ public class DeadlineCommand extends Command {
      * @param fullCommand fullCommand Full String command entered by the User.
      * @return Deadline object,
      */
-    public Deadline newDeadline(String fullCommand) {
+    public Deadline newDeadline(String fullCommand) throws DukeException {
         String description = Parser.getDeadlineDescription(fullCommand);
         String extraDescription = Parser.getDeadlineDateTime(fullCommand);
 
         assert description != null : "Description should not be null";
         assert extraDescription != null : "Extra Description should not be null";
 
+        checkValidDate(extraDescription);
+
         Deadline newDeadline = new Deadline(description, extraDescription);
 
         return newDeadline;
+    }
+
+    public void checkValidDate(String dateString) throws DukeException {
+        int count = 0;
+        for (char c : dateString.toCharArray()) {
+            if (c == '/') {
+                count ++;
+            }
+        }
+
+        if (count != 2) {
+            throw new DukeException("Date format must be 'DD/MM/YYYY'");
+        }
     }
 
     /**

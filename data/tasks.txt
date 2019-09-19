@@ -1,4 +1,4 @@
 event type | isDone | description | extra description | dateCreated | lastModified
-T | 0 | d |  dummyExtraDescriptionForTodo | 2019-09-14T00:57:25.107426500 | 2019-09-14T00:57:25.107426500
-T | 0 | B |  dummyExtraDescriptionForTodo | 2019-09-14T14:56:56.597314600 | 2019-09-14T14:56:56.598158400
-T | 0 | C |  dummyExtraDescriptionForTodo | 2019-09-14T15:00:32.425947 | 2019-09-14T15:00:32.425947
+T | 0 | Todo-1 |  dummyExtraDescriptionForTodo | 2019-09-19T15:04:53.136263500 | 2019-09-19T15:04:53.136263500
+D | 0 | Deadline-1 | 29th of December 2019, 9am | 2019-09-19T15:06:00.562676100 | 2019-09-19T15:06:00.562676100
+E | 0 | Event-1 | uTown | 2019-09-19T15:06:13.339506100 | 2019-09-19T15:06:13.339506100

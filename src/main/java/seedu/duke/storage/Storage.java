@@ -275,7 +275,7 @@ public class Storage {
      */
     public Deadline newDeadline(String[] words) {
         Boolean isDone = false;
-        
+
         if (words[1].contains("1")) {
             isDone = true;
         } else if (words[1].contains("0")) {

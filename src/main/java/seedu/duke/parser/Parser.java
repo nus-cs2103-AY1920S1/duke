@@ -17,6 +17,7 @@ import seedu.duke.command.StatsTodoCommand;
 import seedu.duke.command.TodoCommand;
 import seedu.duke.command.UnknownCommand;
 
+import seedu.duke.core.DukeException;
 import seedu.duke.ui.Ui;
 
 /**
@@ -126,7 +127,7 @@ public class Parser {
      * @param ui User Interface object.
      * @return Command object.
      */
-    public static Command getCommand(String fullCommand, Ui ui) {
+    public static Command getCommand(String fullCommand, Ui ui) throws DukeException {
         String taskType = parseCommand(fullCommand);
 
         // Initialize commannd with UnknownCommand

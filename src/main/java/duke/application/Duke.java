@@ -7,6 +7,7 @@ import duke.command.DukeException;
 import duke.command.Storage;
 import duke.command.TaskList;
 
+import java.io.File;
 import java.util.Scanner;
 import java.io.IOException;
 
@@ -20,24 +21,39 @@ public class Duke {
     private TaskList tasks;
     private Storage storage;
 
-    public Duke() {
-        this("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/dukerepo/src/main/java/history.txt");
-    }
-
     /**
-     * Constructs a Duke object that saves Tasks in the provided filePath.
-     * @param filePath the path of the text file which is a directory for the Tasks.
+     * Constructs a Duke object.
+     * Creates a new 'data' directory and 'history.txt' file, if none exist to maintain TaskList.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        //the following solution has been adapted from
+        // https://github.com/nus-cs2103-AY1920S1/duke/pull/37/commits/060a6e36a706715f663c335ddb0b7d615fd4af81
         try {
-            tasks = new TaskList(storage.load());
-        } catch (IOException de) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        } catch (DukeException de) {
-            ui.showException(de);
+            String rootPath = System.getProperty("user.dir");
+            String dataDirectoryPath = rootPath + File.separator + "data";
+            String dataFilePath = rootPath + File.separator + "data" + File.separator + "history.txt";
+            File dataDirectory = new File(dataDirectoryPath);
+            File dataFile = new File(dataFilePath);
+            if (dataDirectory.mkdir()) {
+                dataFile.createNewFile();
+                System.out.println("New directory and history file created.");
+            } else {
+                if (dataFile.mkdir()) {
+                    System.out.println("New file created.");
+                }
+            }
+            storage = new Storage(dataFilePath);
+            try {
+                tasks = new TaskList(storage.load());
+            } catch (IOException de) {
+                ui.showLoadingError();
+                tasks = new TaskList();
+            } catch (DukeException de) {
+                ui.showException(de);
+            }
+        } catch (IOException ie) {
+            System.err.println(ie);
         }
     }
 
@@ -51,6 +67,9 @@ public class Duke {
             String command = sc.nextLine();
             try {
                 Parser commandAnalyzer = new Parser(command);
+                if (commandAnalyzer.getType().equals("bye")) {
+                    break;
+                }
                 System.out.print(Executor.execute(commandAnalyzer, ui, tasks, storage));
             } catch (DukeException de) {
                 System.err.println(de.getMessage());
@@ -59,7 +78,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:/Users/mtg-1/OneDrive/Documents/NUS/Y2S1/CS2103/repos/dukerepo/src/main/java/history.txt").run();
+        new Duke().run();
     }
 
     /**

@@ -105,7 +105,7 @@ public class Tasklist {
      * @param textArr list formed during startup consisting of current tasks.
      * @return the list of task that are saved in duke.txt.
      */
-    @SuppressWarnings("StringConcatenationInsideStringBufferAppend")
+    @SuppressWarnings({"StringConcatenationInsideStringBufferAppend", "IfCanBeSwitch"})
     public String loadEvents(ArrayList<String> textArr) {
         sb = new StringBuilder();
         for (int i = 0; i < textArr.size(); i++) {
@@ -116,8 +116,11 @@ public class Tasklist {
                 task = new ToDo(str[2]);
             } else if (str[0].equals("D")) {
                 task = new Deadline(str[2], str[3]);
-            } else {
+            } else if (str[0].equals("E")) {
                 task = new Event(str[2], str[3]);
+            } else {
+                str = new String[]{"T", "✓", "Start Duke"};
+                task = new ToDo(str[2]);
             }
 
             if (str[1].equals("✓")) {

@@ -45,7 +45,7 @@ Example of usage:
 
 Expected outcome:
 
-![todo image](images/todo.png)
+![todo image](images/todo.PNG)
 
 ### `deadline`
 ####Adds a deadline task to the list with date and time.
@@ -59,7 +59,7 @@ Example of usage:
 
 Expected outcome:
 
-![deadline image](images/deadline.png)
+![deadline image](images/deadline.PNG)
 
 ### `event`
 ####Adds an event task to the list with date and time.
@@ -73,7 +73,7 @@ Example of usage:
 
 Expected outcome:
 
-![event image](images/event.png)
+![event image](images/event.PNG)
 
 ### `list`
 ####Lists all tasks currently in the list.
@@ -87,7 +87,7 @@ Example of usage:
 
 Expected outcome:
 
-![list image](images/list.png)
+![list image](images/list.PNG)
 
 ### `find`
 ####Finds all tasks with specified character sequence.
@@ -101,7 +101,7 @@ Example of usage:
 
 Expected outcome:
 
-![find image](images/find.png)
+![find image](images/find.PNG)
 
 ### `done`
 ####Marks the specified task as **done**.
@@ -115,22 +115,8 @@ Example of usage:
 
 Expected outcome:
 
-![done image](images/done.png)
-
-### `done`
-####Marks the specified task as **done**.
-
-User types in `done <task number>` to mark the task with the corresponding task number in the list as done. Undone tasks
-will be marked with a **[-]** and done tasks will be marked with a **[+]**.
-
-Example of usage: 
-
-`done 3`
-
-Expected outcome:
-
-![done image](images/done.png)
-
+![done image](images/done.PNG)
+    
 ### `delete`
 ####Removes the specified task from the list.
 
@@ -142,7 +128,7 @@ Example of usage:
 
 Expected outcome:
 
-![delete image](images/delete.png)
+![delete image](images/delete.PNG)
 
 ### `trivia`
 ####Enters Trivia Mode.
@@ -156,7 +142,7 @@ Example of usage:
 
 Expected outcome:
 
-![trivia image](images/trivia.png)
+![trivia image](images/trivia.PNG)
 
 ### `add`
 ####Adds a question to the trivia list.
@@ -169,7 +155,7 @@ Example of usage:
 
 Expected outcome:
 
-![trivia image](images/add.png)
+![trivia image](images/add.PNG)
 
 ### `add-ans`
 ####Adds an answer to a question in the trivia list.
@@ -184,7 +170,7 @@ Example of usage:
 
 Expected outcome:
 
-![add-ans image](images/add-ans.png)
+![add-ans image](images/add-ans.PNG)
 
 ### `delete`
 ####Delete either an answer to a question or a whole question in the trivia list.
@@ -200,7 +186,7 @@ Example of usage:
 
 Expected outcome:
 
-![delete image](images/delete(trivia).png)
+![delete image](images/delete(trivia).PNG)
 
 ### `view-all`
 ####View all the current questions and answers in the trivia list so far.
@@ -213,7 +199,7 @@ Example of usage:
 
 Expected outcome:
 
-![view-all image](images/view-all.png)
+![view-all image](images/view-all.PNG)
 
 ### `quiz-all`
 ####Quizzes the user on all the questions he put into the trivia list, only accepting answers he put in himself.
@@ -231,7 +217,7 @@ Example of usage:
 
 Expected outcome:
 
-![quiz-all image](images/quiz-all.png)
+![quiz-all image](images/quiz-all.PNG)
 
 ### `exit`
 ####Exits Trivia mode to go back to the base mode.
@@ -244,7 +230,7 @@ Example of usage:
 
 Expected outcome:
 
-![exit image](images/exit.png)
+![exit image](images/exit.PNG)
 
 ### `bye`
 ####Closes the application.

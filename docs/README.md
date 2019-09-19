@@ -2,7 +2,7 @@
 
 Say Hello to the **TOM and JERRY Task Tracker**!
 
-![introImage](https://github.com/shiyao821/duke/blob/master/docs/Ui.PNG)
+![introImage](https://github.com/shiyao821/duke/blob/master/docs/Ui.png)
 
 #### Create and manage your todo lists with the following commands:
 

@@ -3,8 +3,9 @@ package commands;
 import exceptions.DukeException;
 import exceptions.InvalidDescriptionException;
 
-import oop.Storage;
-import oop.Ui;
+import storage.Storage;
+
+import ui.Ui;
 
 import tasks.TaskList;
 

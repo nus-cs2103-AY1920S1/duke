@@ -1,6 +1,6 @@
 package tasks;
 
-import oop.Date;
+import date.Date;
 
 /**
  * The Event class is a type of task. It contains a description of the

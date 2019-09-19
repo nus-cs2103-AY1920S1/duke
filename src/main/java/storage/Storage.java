@@ -1,4 +1,4 @@
-package oop;
+package storage;
 
 import exceptions.DukeException;
 

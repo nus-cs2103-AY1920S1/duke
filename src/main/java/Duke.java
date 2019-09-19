@@ -2,9 +2,11 @@ import commands.Command;
 
 import exceptions.DukeException;
 
-import oop.Parser;
-import oop.Storage;
-import oop.Ui;
+import parser.Parser;
+
+import storage.Storage;
+
+import ui.Ui;
 
 import tasks.TaskList;
 

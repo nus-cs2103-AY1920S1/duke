@@ -1,6 +1,6 @@
 package tasks;
 
-import oop.Date;
+import date.Date;
 
 /**
  * Deadlines is a form of Task. It contains a description of the task

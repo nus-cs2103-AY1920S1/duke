@@ -2,8 +2,9 @@ package commands;
 
 import exceptions.DukeException;
 
-import oop.Storage;
-import oop.Ui;
+import storage.Storage;
+
+import ui.Ui;
 
 import tasks.TaskList;
 

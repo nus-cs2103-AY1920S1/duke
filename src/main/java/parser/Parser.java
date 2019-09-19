@@ -1,4 +1,4 @@
-package oop;
+package parser;
 
 import commands.Command;
 import commands.DoneCommand;

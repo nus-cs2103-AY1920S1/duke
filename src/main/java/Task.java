@@ -2,6 +2,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.IllformedLocaleException;
 
 /**
  * An abstract class to instantiate all the Task objects.
@@ -86,7 +87,6 @@ public abstract class Task {
         } catch (ParseException parseError) {
             return parseError.toString();
         }
-
     }
 
     /**
@@ -113,11 +113,10 @@ public abstract class Task {
             editedDay = "31st";
         } else if (Integer.valueOf(day) < 31) {
             editedDay = day + "th";
-        } else {
-            assert false : "No such day";
         }
 
         return editedDay;
+
     }
 
     /**

@@ -94,6 +94,7 @@ public class Ui {
      * @param taskDoneStr String of the task done.
      */
     protected String getDoneMessage(String taskDoneStr) {
+
         String doneMessage = " Nice! I've marked this tasked as done:\n"
                 + taskDoneStr;
 
@@ -118,6 +119,9 @@ public class Ui {
         String viewMessage = "";
         for (int x = 0; x < viewTasklist.size(); x++) {
             viewMessage = viewMessage+ 1 + ". " + viewTasklist.get(x) + "\n";
+        }
+        if (viewMessage.equals("")) {
+            viewMessage = "No task found";
         }
 
         return viewMessage;

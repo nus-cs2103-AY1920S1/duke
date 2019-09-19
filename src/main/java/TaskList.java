@@ -38,13 +38,57 @@ public class TaskList {
         } else if (command.contains("event")) {
             String[] splitCommand = command.split(" ", 2);
             String[] splitEvent = (splitCommand[1].split("/", 2));
-            taskList.add(new Events(splitEvent[0], splitEvent[1]));
+            if (validDate(splitEvent[1])) {
+                taskList.add(new Events(splitEvent[0], splitEvent[1]));
+            } else {
+                throw new IllegalCommandException("Wrong date! Enter again");
+            }
         } else if (command.contains("deadline")) {
             String[] splitCommand = command.split(" ", 2);
             String[] splitDeadline = (splitCommand[1].split("/", 2));
+            if (validDateTime(splitDeadline[1])) {
+                taskList.add(new Events(splitDeadline[0], splitDeadline[1]));
+            } else {
+                throw new IllegalCommandException("Wrong date! Enter again");
+            }
             taskList.add(new Deadline(splitDeadline[0], splitDeadline[1]));
         }
     }
+
+
+    /**
+     * Check if the date is valid.
+     * @param dateTime the date and time input by User.
+     * @return true if the date is valid.
+     */
+    protected boolean validDateTime (String dateTime) {
+        String[] getDateTime = dateTime.split(" ");
+        String[] getDate = getDateTime[1].split("/");
+        String day = getDate[0];
+        String month = getDate[1];
+        String time = getDateTime[2];
+        if (Integer.valueOf(day) > 31 || Integer.valueOf(month) > 12 ||
+            Integer.valueOf(time) > 2359) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Check if the date is valid.
+     * @param date the date input by User.
+     * @return true if the date is valid.
+     */
+    protected boolean validDate (String date) {
+        String[] getDate = date.split("/");
+        String day = getDate[0];
+        String month = getDate[1];
+        if (Integer.valueOf(day) > 31 || Integer.valueOf(month) > 12) {
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * Delete the task that the User inputs in number. Eg. (User types "delete 3" means to
@@ -80,8 +124,13 @@ public class TaskList {
         } else {
             String[] splitString = command.split(" ");
             int taskDone = Integer.valueOf(splitString[1]);
-            taskList.get(taskDone - 1).markAsDone();
-            return taskList.get(taskDone - 1).getDescription();
+            if (taskDone < taskList.size()) {
+                taskList.get(taskDone - 1).markAsDone();
+                return taskList.get(taskDone - 1).getDescription();
+            } else {
+                throw new IllegalCommandException("Invalid Task !");
+            }
+
         }
     }
 
@@ -108,19 +157,36 @@ public class TaskList {
         }
     }
 
+    /**
+     * A method to view date and add the tasks to a list when the date matches.
+     * @param command the date input by user.
+     * @return A list of tasks that matches the date.
+     * @throws IllegalCommandException When user did not input a date.
+     */
     protected ArrayList<Task> viewTasks(String command) throws  IllegalCommandException {
         if (!command.contains(" ")) {
             throw new IllegalCommandException("There must be a date input");
         } else {
             String[] splitString = command.split(" ", 2);
-            ArrayList<Task> viewTasks = new ArrayList<>();
-            for (Task task : this.taskList) {
-                processViewTasks(task, viewTasks, splitString[1]);
+            if (validDate(splitString[1])) {
+                ArrayList<Task> viewTasks = new ArrayList<>();
+                for (Task task : this.taskList) {
+                    processViewTasks(task, viewTasks, splitString[1]);
+                }
+                return viewTasks;
+            } else {
+                throw new IllegalCommandException("Invalid date to search!");
             }
-            return viewTasks;
+
         }
     }
 
+    /**
+     * A method to add task when the task date matches the input date.
+     * @param task Selected task.
+     * @param viewTasks List of tasks that matches the input date
+     * @param date date input by User.
+     */
     protected static void processViewTasks
             (Task task, ArrayList<Task> viewTasks, String date) {
         if (task.getNumericalDate().contains(date)) {

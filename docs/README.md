@@ -94,7 +94,7 @@ Example of usage:
 
 Expected outcome:
 
-`Here are the tasks in your list:
+`Here are the task(s) in your list:
 1. [T][+] eat lunch
 2. [D][-] sleep (by: 18th Spetember, 2019. 11:55pm)
 3. [E][-] eat lunch (at: 19th September, 2019. 1:00pm - 19th September, 2019. 2:00pm)`

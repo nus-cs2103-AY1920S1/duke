@@ -12,3 +12,4 @@ T # 0 # 123 /for
 T # 0 # 4321 /for 2hr
 T # 0 # 43210 /for
 T # 0 # 12345 /for 1hr
+E # 0 # reading # 8

@@ -1,4 +1,4 @@
-# Setting up
+# User Guide
 
 **Prerequisites**
 

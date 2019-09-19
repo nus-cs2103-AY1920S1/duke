@@ -3,6 +3,10 @@ package duke.parser;
 import duke.command.*;
 import duke.exception.*;
 
+/**
+ * Deals with making sense of the user command.
+ * Determines which command to be executed by Duke.
+ */
 public class Parser {
 
     String fullCommand;
@@ -13,6 +17,13 @@ public class Parser {
         this.fullCommand = fullCommand;
     }
 
+    /**
+     * Recognises certain user inputs as a valid Duke command to be executed.
+     *
+     * @param fullCommand raw user input.
+     * @return a suitable command.
+     * @throws DukeException if incomplete or invalid user input given.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.equals("bye")) {
             command = new ByeCommand();

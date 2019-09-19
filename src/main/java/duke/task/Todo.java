@@ -1,12 +1,26 @@
 package duke.task;
 
+/**
+ * Represents a type of task known as Todo.
+ */
 public class Todo extends Task {
 
+    /**
+     * Initialises a Todo.
+     * A Todo consists of the task itself.
+     *
+     * @param item name of the task.
+     */
     // the Todo subclass has one constructor
     public Todo(String item) {
         super(item);
     }
 
+    /**
+     * Prints a Todo as a string to the user in a specific format.
+     *
+     * @return Todo.
+     */
     @Override
     // overrides toString method in Task
     public String toString() {
@@ -17,6 +31,11 @@ public class Todo extends Task {
         }
     }
 
+    /**
+     * Saves a Todo as a string to the file in a specific format.
+     *
+     * @return Todo.
+     */
     @Override
     // overrides saveTask method in Task
     public String saveTask() {

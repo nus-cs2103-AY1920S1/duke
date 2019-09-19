@@ -2,6 +2,9 @@ package duke.format;
 
 import duke.exception.*;
 
+/**
+ * Teaching Duke to understand dates and times.
+ */
 public class DateTime {
 
     String dateTime;
@@ -10,10 +13,23 @@ public class DateTime {
     String year;
     String time;
 
+    /**
+     * Initialises a DateTime.
+     * Ensures no white spaces at front and back of string before reformatting it.
+     *
+     * @param dateTime raw string extracted from original user input string.
+     */
     public DateTime(String dateTime) {
         this.dateTime = dateTime.strip();
     }
 
+    /**
+     * Converts original dateTime string to a different format.
+     * eg. Converts 2/12/2019 1800 -> 2nd of December 2019, 6pm.
+     *
+     * @return reformatted string.
+     * @throws DukeException if invalid dateTime given.
+     */
     public String toReformat() throws DukeException {
         reformat(dateTime);
         return " " + day + " of " + month + " " + year + ", " + time;

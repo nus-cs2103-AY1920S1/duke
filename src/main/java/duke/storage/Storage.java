@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with the loading and saving of tasks to the assigned file.
+ */
 public class Storage {
 
     String filePath;
@@ -18,6 +21,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Creates a new list of tasks and load tasks one by one from the saved file in filepath to this list.
+     *
+     * @return list of saved tasks.
+     * @throws FileNotFoundException if no such file is found in filepath.
+     */
     public ArrayList<Task> loadFile() throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<>();
         // create a file object
@@ -30,6 +39,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Figures out the type of task being loaded from saved file, creates the new task and adds to the new list of tasks.
+     * For each task being created, check if it is done already and mark it accordingly while loading.
+     *
+     * @param item entire task as a string.
+     * @param tasks new task list to be loaded with tasks.
+     */
     public static void loadTask(String item, ArrayList<Task> tasks) {
         if (item.startsWith("T")) {
             // split command into 3 parts
@@ -58,6 +74,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the existing list of tasks to the filepath.
+     *
+     * @param tasklist existing list of tasks.
+     * @throws IOException if unable to save file.
+     */
     public void saveFile(TaskList tasklist) throws IOException {
         FileWriter save = new FileWriter(filePath);
         for (int i = 0; i < tasklist.size(); i++) {

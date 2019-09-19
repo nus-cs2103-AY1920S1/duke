@@ -1,4 +1,4 @@
-# User Guide
+# <h1> User Guide
 
 ### 1. Introduction
 ### 2. Quick Start
@@ -20,8 +20,8 @@
 
 
 ## 1. Introduction
-####This application allows the user to create, store and manage tasks.
-####The user can also create flashcards with this application. 
+#### This application allows the user to create, store and manage tasks.
+#### The user can also create flashcards with this application. 
 
 ## 2. Quick Start
 ####    1. Install Java 11 or above in your computer 

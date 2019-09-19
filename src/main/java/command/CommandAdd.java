@@ -107,6 +107,7 @@ public class CommandAdd extends Command {
         tasks.add(task);
         string = string + task.toString() + "\n";
         string = string + "Now you have " + tasks.getNoOfTasks() + " tasks in the list.";
+        storage.save(tasks.getList(), tasks.getNoOfTasks());
         return string;
     }
 

@@ -39,7 +39,7 @@ repositories {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 // I miss Visual Studio

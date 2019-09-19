@@ -83,3 +83,5 @@
 #### A. Simply install the app on the other computer. Then replace the text file it creates with the text file that contains your previous schedule.
 #### Q. Does the app keep my topic folders & flashcards after the app is shut down?
 #### A. No. The app is currently in it's beta version. More upgrades to come.
+#### Q. Can I set reminders for tasks?
+#### A. No. The app is currently in it's beta version. More upgrades to come.

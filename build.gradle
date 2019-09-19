@@ -7,17 +7,22 @@ plugins {
 }
 
 group 'seedu.duke'
-version '0.1.0'
+version '0.2'
 
 checkstyle {
     toolVersion = '8.23'
 }
 
+def archiveBaseName = "duke"
+def archiveVersion = "0.2"
+def archiveClassifier = null
+def archiveAppendix = null
+
 shadowJar {
-    archiveBaseName = "duke"
-    archiveVersion = "0.2"
-    archiveClassifier = null
-    archiveAppendix = null
+    archiveBaseName
+    archiveVersion
+    archiveClassifier
+    archiveAppendix
 }
 
 repositories {

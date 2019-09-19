@@ -23,7 +23,7 @@ public class Event extends Task {
      *
      * @throws IllegalArgumentException in case date is not entered in the correct format
      */
-    private Event(String command) throws IllegalArgumentException {
+    public Event(String command) throws IllegalArgumentException {
         super(command);
         this.done = false;
         String[]splitUpDate = command.split("/",2);

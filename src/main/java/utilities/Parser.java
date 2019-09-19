@@ -38,6 +38,8 @@ public class Parser {
             return new ExpenseListCommand(command);
         } else if ((words.length == 2) && (words[0].equals("deleteExpense")) && (isNumeric(words[1]))) {
             return new DeleteExpenseCommand(command);
+        } else if (words[0].equals("hello")) {
+            return new HelloCommand(command);
         } else {
             return new TaskCommand(command);
         }

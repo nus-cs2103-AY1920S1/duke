@@ -43,11 +43,11 @@ Shows the list of saved tasks.
 
 Example of usage: 
 
-list
+`list`
 
 Expected outcome:
 
-A list of all your tasks is shown.
+`A list of all your tasks is shown.`
 
 ### `todo` - Adds a todo task
 
@@ -55,11 +55,11 @@ Adds a todo task to current task list.
 
 Example of usage: 
 
-todo <task>
+`todo <task>`
 
 Expected outcome:
 
-Acknowledgement that a todo task is added.
+`Acknowledgement that a todo task is added.`
 
 ### `Deadline` - Adds a deadline task
 
@@ -67,12 +67,13 @@ Adds a deadline task to current task list.
 
 Example of usage: 
 
-deadline <description> by/<date>
-<date> must follow dd/MM/yyyy HHmm format.
+`deadline <description> by/<date>`
+
+`<date> must follow dd/MM/yyyy HHmm format.`
 
 Expected outcome:
 
-Acknowledgement that a deadline task is added.
+`Acknowledgement that a deadline task is added.`
 
 ### `event` - Adds an even task
 
@@ -80,36 +81,37 @@ Adds an event task to current task list.
 
 Example of usage: 
 
-event <description> at/<date>
-<date> must follow dd/MM/yyyy HHmm format.
+`event <description> at/<date>`
+
+`<date> must follow dd/MM/yyyy HHmm format.`
 
 Expected outcome:
 
-Acknowledgement that an event task is added.
+`Acknowledgement that an event task is added.`
 
 ### `done` - Marks a task as done
 
-Use the list command to see your list of tasks, and mark the index of the desired task as done
+Use the `list` command to see your list of tasks, and mark the index of the desired task as done
 
 Example of usage: 
 
-done <index>
+`done <index>`
 
 Expected outcome:
 
-Acknowledgement of the done command and the newly marked task is shown.
+`Acknowledgement of the done command and the newly marked task is shown.`
 
 ### `delete` - Deletes a task
 
-Use the list command to see your list of tasks, and delete the index of the task.
+Use the `list` command to see your list of tasks, and delete the index of the task.
 
 Example of usage: 
 
-delete <index>
+`delete <index>`
 
 Expected outcome:
 
-The task at the index is removed from the list.
+`The task at the index is removed from the list.`
 
 ### `find` - Search for a task
 
@@ -117,11 +119,11 @@ Search for all tasks containing the given keyword.
 
 Example of usage: 
 
-search <keyword>
+`search <keyword>`
 
 Expected outcome:
 
-A list containing all the tasks with the given keyword is returned.
+`A list containing all the tasks with the given keyword is returned.`
 
 ### `sort` - Sorts the list
 
@@ -129,10 +131,10 @@ The current list of tasks is sorted according to date in ascending order. Todos 
 
 Example of usage: 
 
-sort
+`sort`
 
 Expected outcome:
 
-Acknowledgement of the sort command.
+`Acknowledgement of the sort command.`
 
 

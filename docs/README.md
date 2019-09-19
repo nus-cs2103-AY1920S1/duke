@@ -1,18 +1,18 @@
-# Duke v0.2.0 User Guide
+# Christopher v0.2.0 User Guide
 
-## Duke's Amazing Features 
+## Christopher's Amazing Features 
 
 ### Task Management
-* Duke can store and manage tasks by categorizing the tasks into 3 types;
+* Christopher can store and manage tasks by categorizing the tasks into 3 types;
     * `Todo` is a type of task which you do not need a specific time limit.
     * `Deadline` is a type of task where you need to complete by a specific time.
     * `Event` is a type of task which is happening in the future at a specific time.
-* Duke allows the user to display the list of all tasks that the user have inserted inside the program.
+* Christopher allows the user to display the list of all tasks that the user have inserted inside the program.
 It both temporarily stores the task list in the program while running, and also updating the task list in a text file.
-* Duke will also load the tasks from the text file which contains all the saved tasks in the beginning of the program.
+* Christopher will also load the tasks from the text file which contains all the saved tasks in the beginning of the program.
 
 ### CLI (Command Line Interface) Structure
-* Duke handles all commands by a formatted sentence structure. Following are the legal commands that are available in Duke.
+* Christopher handles all commands by a formatted sentence structure. Following are the legal commands that are available in Christopher.
     1. **Inserting** a task: `[task_type] [task_description] /[time_regex] [dd/MM/YY HH:MM]`
     1. **Displaying** the list of tasks `list`
     1. **Marking** the task as 'Done' `done [task_list_index]`
@@ -26,12 +26,54 @@ It both temporarily stores the task list in the program while running, and also 
 ## Usage
 
 ### `Add task` - Inserting a task(Todo, Event, Deadline) into the task list
+When creating a 'Todo' task, user must only specify the task description whereas when creating 'Deadline' and 'Event' type tasks,
+user must specify both task description and time (dd/MM/YY HH:MM). 
 
 `[task_type] [task_description] /[time_regex] [dd/MM/YY HH:MM]`
 
-Example of usage: 
+**Example of usage**: 
 `Todo Buy bread`, `Event project meeting /at 18/09/19 12:00`, `deadline submit report /by 19/09/19 11:59`
 
-Expected outcome:
+**Expected outcome**:
 
-![event_outcome](/docs/event.PNG)
+![event_outcome](./event.PNG)
+
+Christopher will return the formatted task once saving is complete. [E] represents that the task is an Event type.
+[✘] shows that the task has not been marked as completed.
+
+### `Delete task` - Inserting a task(Todo, Event, Deadline) into the task list
+
+User must specify the task list index within the bound of the list size. If index that is out of list bound,
+Christopher will return an error statement.
+
+`delete [task_list_index]`
+
+**Example of usage**: 
+`delete 2`
+
+**Expected outcome**:
+
+![event_outcome](./delete.PNG)
+
+Christopher returns the full detail of the deleted task once deletion is complete.
+
+![event_outcome](./delete_error.PNG)
+
+If user enters an task list index which is out of the list size, 
+Christopher will return an error statement with an exception.
+
+### `Update task` - Updating a task(Todo, Event, Deadline) from the task list
+User can update the task which is stored inside the task list.
+1. If user wants to update a 'Todo' type task, user can only specify the task description.
+   `update [task_list_index] [new_task_description]`
+1. For updating 'Event' and 'Deadline' type tasks, user must update either 1; task description or
+time or both.
+    `update [task_list_index] [new_task_description] [new_time]`
+
+**Example of usage**: 
+`update 2 report 2 test`
+
+**Expected outcome**:
+
+![event_outcome](./update.PNG)
+

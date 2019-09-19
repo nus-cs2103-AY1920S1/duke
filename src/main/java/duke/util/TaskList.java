@@ -43,7 +43,7 @@ public class TaskList {
         String message = String.format("Noted. I've removed this task:%s%s%s",
                 System.lineSeparator(), tasks.get(index), System.lineSeparator());
         tasks.remove(index);
-        message += "You now have " + getSize() + (getSize() == 1 ? "task" : " tasks") + " in the list.";
+        message += "You now have " + getSize() + (getSize() == 1 ? " task" : " tasks") + " in the list.";
         return message;
     }
 
@@ -51,7 +51,7 @@ public class TaskList {
         tasks.add(t);
         String message = String.format("Got it. I've added this task:%s%s%s",
                 System.lineSeparator(), t, System.lineSeparator());
-        message += "You now have " + getSize() + (getSize() == 1 ? "task" : " tasks") + " in the list.";
+        message += "You now have " + getSize() + (getSize() == 1 ? " task" : " tasks") + " in the list.";
         return message;
     }
 

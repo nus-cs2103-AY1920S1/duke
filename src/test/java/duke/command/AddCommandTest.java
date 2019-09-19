@@ -15,7 +15,7 @@ public class AddCommandTest {
     public void execute_invalidCommand_WrongDateFormatException() {
         try {
             new AddCommand("E", "Testing", "Sunday").execute(new TaskListStub(),
-                    new UserInterfaceStub(), new StorageStub(""));
+                    new UserInterfaceStub(), new StorageStub());
             fail();
         } catch (Exception e) {
             assertEquals(" \u2639 OOPS!!!  Please follow the correct datetime format(dd/mm/yyyy HHMM)",

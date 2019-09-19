@@ -16,49 +16,28 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class StorageStub implements DukeStorage {
-    private String directory;
-    private String filename;
 
-    public StorageStub(String directory) {
-        this.directory = directory;
-        this.filename = "duke.txt";
-    }
-
-    //calls every time something is added or deleted
+    /**
+     * Updates the list in the file by writing to the file.
+     *
+     * @param taskList Current task list stored in the application.
+     * @throws IOException Thrown when an error occurred while writing to a file.
+     */
     public void updateList(MyList taskList) throws IOException {
     }
 
-    public MyList loadList() throws DukeMissingFileException, DukeCorruptedDataException, DukeWrongDateFormatException {
-        MyList taskList = new TaskList();
-        File file = new File(directory + filename);
-        try {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                Task task = dataParser(sc.nextLine());
-                taskList.add(task);
-            }
-            sc.close();
-        } catch (FileNotFoundException e) {
-            throw new DukeMissingFileException();
-        }
-        return taskList;
-    }
-
-    private Task dataParser(String data) throws DukeCorruptedDataException, DukeWrongDateFormatException {
-        String[] arguments = data.split(" \\| ");
-        boolean isDone;
-        isDone = arguments[1].equals("1");
-
-        switch (arguments[0]) {
-        case "T":
-            return new TodoTask(arguments[2], isDone);
-        case "D":
-            return new DeadlineTask(arguments[2], arguments[3], isDone);
-        case "E":
-            return new EventTask((arguments[2]), arguments[3], isDone);
-        default:
-            throw new DukeCorruptedDataException();
-        }
+    /**
+     * Reads the data stored in the file which would then be use to generate a task list
+     * that would be returned.
+     *
+     * @return A list from the data loaded from the file.
+     * @throws DukeMissingFileException Thrown when the file does not exist.
+     * @throws DukeCorruptedDataException Thrown when the data of the file is corrupted.
+     * @throws DukeWrongDateFormatException Thrown when the datetime Format is wrong.
+     */
+    public MyList loadList() throws DukeMissingFileException, DukeCorruptedDataException,
+            DukeWrongDateFormatException {
+        return null;
     }
 
 }

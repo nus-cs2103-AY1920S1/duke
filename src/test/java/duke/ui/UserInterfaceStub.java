@@ -14,50 +14,101 @@ public class UserInterfaceStub implements DukeUserInterface {
     public UserInterfaceStub() {
     }
 
-    @Override
-    public String readCommand() {
-        return "Testing readCommand";
+    /**
+     * Returns the introduction message of the application.
+     */
+    public String getIntro() {
+        return "";
     }
 
-    //closes scanner
-    @Override
-    public void exit() {
+    /**
+     * Returns the exit message.
+     */
+    public String getExitMsg() {
+        return "";
     }
 
-    //prints line with indentation in front
-    @Override
-    public void printLine() {
+    /**
+     * Returns a message when a task is added.
+     *
+     * @param task Task that was added.
+     * @param taskList Task List where the Task is stored.
+     * @return String which represents the output text.
+     */
+    public String getAddTaskMsg(Task task, MyList taskList) {
+        return "";
     }
 
-    @Override
-    public void printIntro() {
+    /**
+     * Returns the list of tasks.
+     *
+     * @param myList List of tasks stored in the application.
+     * @return String which represents the output text.
+     */
+    public String getList(MyList myList) {
+        return "";
     }
 
-    @Override
-    public void printExitMsg() {
+    /**
+     * Returns the message containing the list of tasks that matches the String word from the Find command.
+     *
+     * @param myList MyList of tasks which contains the String word from the Find command.
+     * @return String which represents the output text.
+     */
+    public String getFindList(MyList myList) {
+        return "";
     }
 
-    @Override
-    public void printAddTaskMsg(Task task, MyList taskList) {
+    /**
+     * Returns the message to be printed when a task is marked as done.
+     *
+     * @param task Task that was marked as done.
+     * @return String which represents the output text.
+     */
+    public String getDoneMsg(Task task) {
+        return "";
     }
 
-    @Override
-    public void printList(MyList myList) {
+    /**
+     * Returns the exception message.
+     *
+     * @param msg Message of the exception.
+     * @return String which represents the output text.
+     */
+    public String getException(String msg) {
+        return "";
     }
 
-    @Override
-    public void printDoneMsg(Task task) {
+    /**
+     * Returns the message to be printed when a task is deleted.
+     *
+     * @param task Task that was deleted.
+     * @param taskList Task list that the Task was removed from.
+     * @return String which represents the output text.
+     */
+    public String getDeleteMsg(Task task, MyList taskList) {
+        return "";
     }
 
-    @Override
-    public void printException(String msg) {
+    /**
+     * Returns the message to be printed when a tag is added to a task.
+     *
+     * @param task Task which the tag is added to.
+     * @param tagName String name of the tag.
+     * @return String message to be printed.
+     */
+    public String getAddTagMsg(Task task, String tagName) {
+        return "";
     }
 
-    @Override
-    public void printDeleteMsg(Task task, MyList taskList) {
-    }
-
-    @Override
-    public void printFindList(MyList resultList) {
+    /**
+     * Returns the message to be printed when a tag is deleted from a task.
+     *
+     * @param task Task which the tag is added to.
+     * @param tagName String name of the tag.
+     * @return String message to be printed.
+     */
+    public String getDeleteTagMsg(Task task, String tagName) {
+        return "";
     }
 }

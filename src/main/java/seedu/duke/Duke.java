@@ -67,7 +67,7 @@ public class Duke extends Application {
      * @param args list of String arguments.
      */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke("data/isabelle.txt").run();
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.io.File;
  * Deals with loading tasks from the file and saving tasks in the file
  */
 
-public class Storage {
+class Storage {
 
     private static File file;
 
@@ -26,56 +26,64 @@ public class Storage {
      * @return taskList
      */
 
-    static ArrayList<Task> load() throws FileNotFoundException {
-
+    static ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-
                 String[] task = sc.nextLine().split("\\|");
-                String taskType = task[0].trim();
-                boolean isTaskDone = task[2].trim().equals("1");
-
-                switch (taskType) {
-                    case "T":
-                        Todo newTask = new Todo(task[2].trim());
-                        if (isTaskDone) newTask.markAsDone();
-                        taskList.add(newTask);
-                        break;
-                    case "E":
-                        String eventDescription = task[2].trim();
-                        String at = task[3].trim();
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                        Event newEvent = new Event(eventDescription, sdf.parse(at));
-                        if (isTaskDone) newEvent.markAsDone();
-                        taskList.add(newEvent);
-                        break;
-                    case "D":
-                        String deadlineDescription = task[2].trim();
-                        String by = task[3].trim();
-                        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HHmm");
-                        Deadline newDeadline = new Deadline(deadlineDescription, sdf2.parse(by));
-                        if (isTaskDone) newDeadline.markAsDone();
-                        taskList.add(newDeadline);
-                        break;
-                    default:
+                updateData(taskList, task);
                 }
-            }
-        } catch (FileNotFoundException | ParseException err) {
-            System.out.println(err.getMessage());
+        } catch (FileNotFoundException | ParseException e) {
+            System.out.println(e.getMessage());
         }
         return taskList;
     }
 
     /**
-     * Saves the current taskList onto the hard drive
+     * Update the taskList that will later be loaded
      *
-     * @param taskList
+     * @param taskList The record of tasks to be updated
+     * @param task An array split into sections within the task
      */
 
+    private static void updateData(ArrayList<Task> taskList, String[] task) throws ParseException {
+        String taskType = task[0].trim();
+        boolean isTaskDone = task[1].trim().equals("1");
 
-    public static void saveTaskList(List<Task> taskList) {
+        switch (taskType) {
+            case "T":
+                Todo newTask = new Todo(task[2].trim());
+                if (isTaskDone) newTask.markAsDone();
+                taskList.add(newTask);
+                break;
+            case "E":
+                String eventDescription = task[2].trim();
+                String at = task[3].trim();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                Event newEvent = new Event(eventDescription, sdf.parse(at));
+                if (isTaskDone) newEvent.markAsDone();
+                taskList.add(newEvent);
+                break;
+            case "D":
+                String deadlineDescription = task[2].trim();
+                String by = task[3].trim();
+                SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HHmm");
+                Deadline newDeadline = new Deadline(deadlineDescription, sdf2.parse(by));
+                if (isTaskDone) newDeadline.markAsDone();
+                taskList.add(newDeadline);
+                break;
+            default:
+        }
+    }
+
+    /**
+     * Saves the current taskList onto the hard drive
+     *
+     * @param taskList The record of tasks to be saved
+     */
+
+    static void saveTaskList(List<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : taskList) {

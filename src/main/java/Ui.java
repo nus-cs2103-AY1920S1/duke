@@ -7,10 +7,6 @@ public class Ui {
         return this.output;
     }
 
-    String greet() { //duke greet
-        return "Hello! I'm Duke.\n" + "What can I do for you?\n";
-    }
-
     void setToFarewell() {
         output = "Bye. Hope to see you again soon!";
     }
@@ -66,7 +62,7 @@ public class Ui {
         output = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < relatedTasks.size(); i++) {
             int num = i + 1;
-            output += num + "." + relatedTasks.get(i);
+            output += num + "." + relatedTasks.get(i) + "\n";
         }
     }
 

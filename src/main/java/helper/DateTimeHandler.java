@@ -37,7 +37,7 @@ public class DateTimeHandler {
         LocalDateTime dateTime = LocalDateTime.parse(s, formatter);
         DateTimeFormatter dukeFormatter = new DateTimeFormatterBuilder()
                 .appendText(ChronoField.DAY_OF_MONTH, ordNo)
-                .appendPattern(" 'of' MMMM yyyy, ha")
+                .appendPattern(" 'of' MMMM yyyy, h:ma")
                 .toFormatter();
 
         String st = dateTime.format(dukeFormatter);

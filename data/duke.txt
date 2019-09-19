@@ -1,12 +1,5 @@
-T | 1 | return book
-T | 0 | return book 
-D | 0 | return books | 2nd of December 2019, 6PM
-D | 0 | return books | 2nd of December 2019, 6PM
-D | 1 | return books | 2nd of December 2019, 6PM
-D | 0 | return books | 2nd of December 2019, 6PM
-T | 0 | borrow books
-E | 0 | unicon | 7th of December 2019, 7-8PM | 7/12/2019 1900-2000
-T | 0 | borrow book
-T | 0 | return book
-T | 0 | return book
-T | 0 | return book
+T | 1 | CS2100 Tutorial
+T | 1 | CS2100 Lab
+D | 0 | CS2103T Individual Project | 19th of September 2019, 11:59PM
+D | 0 | CS2103T Team Project | 19th of September 2019, 11:59PM
+E | 0 | Facebook Hackathon | 21st of September 2019, 9-9PM | 21/9/2019 0900-2100

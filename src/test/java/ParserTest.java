@@ -1,8 +1,7 @@
+import org.junit.jupiter.api.Test;
 import task.Deadline;
 import task.Event;
 import task.ToDo;
-
-import org.junit.jupiter.api.Test;
 
 import misc.Parser;
 

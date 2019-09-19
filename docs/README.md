@@ -44,7 +44,7 @@ Format: `delete <task index>`
 ### 6. Finding tasks with keyword(s) : `find`
 Finds all tasks that partially/exactly match any of the keywords.  
   
-Format: `find <keyword 1> <optional keyword 2> ...`
+Format: `find <keyword 1> <other keywords>...`
 
 #### Example of usage:
 - `find meeting`

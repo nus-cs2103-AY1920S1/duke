@@ -73,7 +73,7 @@ public class Constant {
     public static final String HELP_MESSAGE_TODO = "◇ todo <description> : Add todo to the list";
     public static final String HELP_MESSAGE_DONE = "◇ done <task index> : Mark the task as done";
     public static final String HELP_MESSAGE_DELETE = "◇ delete <task index> : Delete the task from the list";
-    public static final String HELP_MESSAGE_FIND = "◇ find <keyword 1> <optional keyword 2> ... : "
+    public static final String HELP_MESSAGE_FIND = "◇ find <keyword 1> <other keywords>... : "
             + "Find all tasks that partially/exactly match any of the keywords";
     public static final String HELP_MESSAGE_CLEAR = "◇ clear : Delete all tasks from the list";
     public static final String HELP_MESSAGE_EXIT = "◇ bye : Exit the program";

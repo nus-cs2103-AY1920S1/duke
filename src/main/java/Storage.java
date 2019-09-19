@@ -15,8 +15,8 @@ public class Storage {
     private String filepath;
     private String[] funFacts;
     private String helpInfo;
-    private final String funFactFilePath = "C:\\repos\\duke\\src\\main\\resources\\funFacts\\FunFacts.txt";
-    private final String helpInfoFilePath ="C:\\repos\\duke\\src\\main\\resources\\helpInfo\\HelpInfo.txt";
+    private final String FUN_FACT_FILEPATH = "src/main/resources/funFacts/FunFacts.txt";
+    private final String HELP_INFO_FILEPATH = "src/main/resources/helpInfo/HelpInfo.txt";
 
     /**
      * Constructs a storage object.
@@ -25,8 +25,8 @@ public class Storage {
 
     public Storage (String filepath) {
         this.filepath = filepath;
-        this.funFacts = loadFunFacts(funFactFilePath);
-        this.helpInfo = loadHelpInfo(helpInfoFilePath);
+        this.funFacts = loadFunFacts(FUN_FACT_FILEPATH);
+        this.helpInfo = loadHelpInfo(HELP_INFO_FILEPATH);
     }
 
     /**
@@ -154,19 +154,20 @@ public class Storage {
 
     public void writeToHardDisk(TaskList tasks) throws DukeException{
         try {
-            String taskListFilePath = "C:\\repos\\duke\\out\\data\\TaskList.txt";
+            String taskListFilePath = this.filepath;
             FileWriter fw = new FileWriter (taskListFilePath);
             for (int i = 0; i < tasks.getSize(); i++) {
                 if (tasks.getTask(i) instanceof Deadline) {
                     writeToFile(taskListFilePath, "D | " + tasks.getTask(i).isDone() + " | "
-                            + tasks.getTask(i).getTask() + " | " + ((Deadline) tasks.getTask(i)).getDateToStorage());
+                            + tasks.getTask(i).getTask() + " | " + ((Deadline) tasks.getTask(i)).getDateToBeStored());
                 } else if (tasks.getTask(i) instanceof Event) {
                     writeToFile(taskListFilePath, "E | " + tasks.getTask(i).isDone() + " | "
-                            + tasks.getTask(i).getTask() + " | " + ((Event) tasks.getTask(i)).getDateToStorage());
+                            + tasks.getTask(i).getTask() + " | " + ((Event) tasks.getTask(i)).getDateToBeStored());
                 } else {
                     writeToFile(taskListFilePath, "T | " + tasks.getTask(i).isDone() + " | "
                             + tasks.getTask(i).getTask());
                 }
+                // no newline for last line.
                 if (i != tasks.getSize() - 1) {
                     writeToFile(taskListFilePath, "\n");
                 }

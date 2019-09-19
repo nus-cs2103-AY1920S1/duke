@@ -44,6 +44,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private static final String TASKLIST_FILEPATH = "src/main/resources/taskList/TaskList.txt";
 
     /**
      * Images for the user and Duke
@@ -58,7 +59,7 @@ public class Duke extends Application {
      * Empty constructor.
      */
     public Duke() {
-        this("C:\\repos\\duke\\out\\data\\TaskList.txt");
+        this(TASKLIST_FILEPATH);
     }
 
     /**
@@ -186,7 +187,7 @@ public class Duke extends Application {
      * @param args the filepath of the tasklist in the harddisk
      */
     public static void main(String[] args) {
-        new Duke("C:\\repos\\duke\\out\\data\\TaskList.txt").run();
+        new Duke(TASKLIST_FILEPATH).run();
     }
 
 

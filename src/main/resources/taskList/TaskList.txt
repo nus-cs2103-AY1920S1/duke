@@ -1,0 +1,8 @@
+E | 1 | cs2103t project meeting  |  10/10/2019 1159
+D | 1 | submit project  |  20/10/2011 1800
+D | 1 | do proj  |  10/20/2014 1800
+E | 0 | golf show  |  20/10/2013 1800
+T | 0 | play guitar
+T | 0 |       
+T | 0 | say hello
+T | 0 | blabla

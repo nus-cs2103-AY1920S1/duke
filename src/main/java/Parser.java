@@ -2,6 +2,7 @@ import Task.Deadline;
 import Task.Event;
 import Task.Task;
 import Task.Todo;
+import javafx.application.Platform;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -46,11 +47,16 @@ public class Parser {
      */
     public String doCommand() throws ParseException {
         if (taskDetails.equals("")) {
-            if (!command.equals("list") ) {
+            if (command.equals("list") || command.equals("bye")) {
+            } else {
                 return ui.showDescriptionEmptyError();
             }
         }
         switch (command) {
+        case "bye":
+            Platform.exit();
+            System.exit(0);
+            return ui.sayGoodbye();
         case "when":
             int duration = Integer.parseInt(taskDetails);
             Date timeSlot = list.findFreeTime(duration);
@@ -78,7 +84,6 @@ public class Parser {
             return ui.taskCreated(task) + "\n" +
                     ui.showNumberOfTasks(list.getList());
         case "deadline": {
-            //split the string by /
             String[] halves = taskDetails.split("/by");
             String description = halves[0];
             String by = halves[1];

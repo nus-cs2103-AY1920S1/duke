@@ -37,12 +37,11 @@ public class Storage {
     /**
      * Updates the .txt with the most recent changes.
      *
-     * @param filePath location of the file as a string.
      * @param list The existing ArrayList of Tasks after user has made changes to it.
      */
-    public boolean updateTasks(String filePath, ArrayList<Task> list) {
+    public boolean updateTasks(ArrayList<Task> list) {
         try {
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(file);
             String result = "";
             for (int i = 0; i < list.size(); i++) {
                 Task task = list.get(i);

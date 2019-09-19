@@ -42,6 +42,16 @@ public class Storage {
      * @throws FileNotFoundException When no such file is available.
      */
     public ArrayList<Task> loadTasksFromFile() throws FileNotFoundException, DukeException {
+        // create a new file if it does not already exist
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         File f = new File(filePath); // create a File for the given file path
         Scanner scanner = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<Task> result = new ArrayList<>();

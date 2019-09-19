@@ -4,20 +4,20 @@ class DukeException extends Exception {
 class InputUnknownException extends DukeException {
     @Override
     public String getMessage() {
-        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return ">:( Grow up Tom. Can't understand your words. ";
     }
 }
 
 class InvalidInputFormatException extends DukeException {
     @Override
     public String getMessage() {
-        return "The format for this command is wrong. Type 'formats' to check";
+        return "The input format is wrong. Check out 'formats'";
     }
 }
 
 class ListItemEmptyException extends DukeException {
     @Override
     public String getMessage() {
-        return "No such item in list!";
+        return "Nothing like that in the list!";
     }
 }

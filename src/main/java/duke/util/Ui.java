@@ -6,7 +6,7 @@ public class Ui {
     }
 
     public static String showWelcome() {
-        String message = String.format("Hello! I'm Duke.%sWhat can I OOP for you today?", System.lineSeparator());
+        String message = String.format("Hello! I'm Nick.%sWhat can I OOP for you today?", System.lineSeparator());
         return message;
     }
 
@@ -24,7 +24,7 @@ public class Ui {
     }
 
     public static String showHelp() {
-        String message = String.format("Hello! I'm Duke! You can use:%stodo <item>%sdeadline <item> /by <when>"
+        String message = String.format("Hello! I'm Nick! You can use:%stodo <item>%sdeadline <item> /by <when>"
                         + "%sevent <item> /at <when>%sfind <keyword>%sdone <number>%sdelete <number>%sstats%sbye", System.lineSeparator(), System.lineSeparator(),
                 System.lineSeparator(), System.lineSeparator(), System.lineSeparator(), System.lineSeparator(), System.lineSeparator(), System.lineSeparator());
         return message;

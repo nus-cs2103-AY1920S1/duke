@@ -6,8 +6,6 @@
 public class ListCommand extends Command {
     /**
      * Creates a list command with the description.
-     *
-     * @param desc The description for the list command.
      */
     public ListCommand() {}
 

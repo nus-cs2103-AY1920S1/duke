@@ -8,7 +8,7 @@ import java.text.ParseException;
  * @author Michelle Yong
  */
 public abstract class Command {
-    String desc;
+    String description;
 
     /**
      * Creates a command.
@@ -18,10 +18,10 @@ public abstract class Command {
     /**
      * Creates a command with description.
      *
-     * @param desc The description for the command.
+     * @param description The description for the command.
      */
-    public Command(String desc) {
-        this.desc = desc;
+    public Command(String description) {
+        this.description = description;
     }
 
     /**
@@ -35,8 +35,8 @@ public abstract class Command {
      * @throws ParseException If a parse exception occurred.
      * @throws AssertionError If an assertion error occurred.
      */
-    public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws
-            IOException, ParseException, AssertionError;
+    public abstract String execute(Storage storage, TaskList taskList, Ui ui)
+            throws IOException, ParseException, AssertionError;
 
     /**
      * Gets the date.

@@ -11,14 +11,14 @@ public class TodoCommand extends Command {
     /**
      * Creates a todo command with the description.
      *
-     * @param desc The description for the todo command.
+     * @param description The description for the todo command.
      */
-    public TodoCommand(String desc) {
-        super(desc);
+    public TodoCommand(String description) {
+        super(description);
     }
 
     /**
-     * Executes the todo command and shows that the todo has been added to the list.
+     * Executes the todo command and shows the todo has been added to the list.
      *
      * @param storage The storage for the file with all the tasks.
      * @param taskList The taskList used.
@@ -26,13 +26,14 @@ public class TodoCommand extends Command {
      * @return The message telling user that the todo has been added.
      * @throws IOException If an input or output exception occurred.
      */
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws
+            IOException {
         try {
-            if (desc.length() <= 4) {
+            if (description.length() <= 4) {
                 throw new DukeException();
             }
-            assert (desc.length() > 4);
-            String task = desc.substring(5);
+            assert (description.length() > 4);
+            String task = description.substring(5);
             Todo todo = new Todo(task);
             taskList.addTask(todo);
             storage.appendTaskToFile(todo);

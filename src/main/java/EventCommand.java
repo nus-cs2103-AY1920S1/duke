@@ -13,14 +13,14 @@ public class EventCommand extends Command {
     /**
      * Creates an event command with the description.
      *
-     * @param desc The description for the event command.
+     * @param description The description for the event command.
      */
-    public EventCommand(String desc) {
-        super(desc);
+    public EventCommand(String description) {
+        super(description);
     }
 
     /**
-     * Executes the event command and shows that the event has been added to the list.
+     * Executes the event command and shows the event has been added to the list.
      *
      * @param storage The storage for the file with all the tasks.
      * @param taskList The taskList used.
@@ -29,13 +29,14 @@ public class EventCommand extends Command {
      * @throws IOException If an input or output exception occurred.
      * @throws ParseException If a parse exception occurred.
      */
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, ParseException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws
+            IOException, ParseException {
         try {
-            if (desc.length() <= 5) {
+            if (description.length() <= 5) {
                 throw new DukeException();
             }
-            assert (desc.length() > 5);
-            String[] descArr = desc.split("/");;
+            assert (description.length() > 5);
+            String[] descArr = description.split("/");;
             Date date = getDate(descArr, storage);
             Event event = new Event(getEventDesc(descArr), date);
             taskList.addTask(event);

@@ -12,6 +12,10 @@ public class Task {
     protected boolean isDone;
     protected Date date;
     protected String type = "";
+    private final int DONE = 1;
+    private final int NOT_DONE = 0;
+    private final String DONE_ICON = "\u2713";
+    private final String NOT_DONE_ICON = "\u2718";
 
     /**
      * Creates a task with description.
@@ -67,7 +71,7 @@ public class Task {
      * @return The status icon of the task.
      */
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718";
+        return isDone ? DONE_ICON : NOT_DONE_ICON;
     }
 
     /**
@@ -76,8 +80,8 @@ public class Task {
      *
      * @return The status number of the task.
      */
-    public String getStatusNum() {
-        return isDone ? "1" : "0";
+    public int getStatusNum() {
+        return isDone ? DONE : NOT_DONE;
     }
 
     /**
@@ -100,7 +104,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] "
-                + this.getDescription();
+        return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 }

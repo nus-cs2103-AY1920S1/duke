@@ -11,10 +11,10 @@ public class DeleteCommand extends Command {
     /**
      * Creates a delete command with the description.
      *
-     * @param desc The description for the delete command.
+     * @param description The description for the delete command.
      */
-    public DeleteCommand(String desc) {
-        super(desc);
+    public DeleteCommand(String description) {
+        super(description);
     }
 
     /**
@@ -29,19 +29,19 @@ public class DeleteCommand extends Command {
     public String execute(Storage storage, TaskList taskList, Ui ui)
             throws IOException {
         try {
-            if (desc.length() <= 6) {
+            if (description.length() <= 6) {
                 throw new DukeException();
             }
-            assert (desc.length() > 6);
-            String[] descArr = desc.split(" ");
-            int num = getTaskNum(descArr);
-            if (num >= taskList.getSize()) {
+            assert (description.length() > 6);
+            String[] descArr = description.split(" ");
+            int taskNum = getTaskNum(descArr);
+            if (taskNum >= taskList.getSize()) {
                 throw new DukeException();
             }
-            assert (num < taskList.getSize());
-            Task removed = taskList.removeTask(num);
+            assert (taskNum < taskList.getSize());
+            Task removedTask = taskList.removeTask(taskNum);
             storage.updateTaskInFile(taskList.getList());
-            return ui.showTaskRemoved(removed, taskList.getSize());
+            return ui.showTaskRemoved(removedTask, taskList.getSize());
         } catch (DukeException e) {
             return ui.showNoSuchTaskError();
         }

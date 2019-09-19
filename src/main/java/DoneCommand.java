@@ -11,10 +11,10 @@ public class DoneCommand extends Command {
     /**
      * Creates a done command with the description.
      *
-     * @param desc The description for the done command.
+     * @param description The description for the done command.
      */
-    public DoneCommand(String desc) {
-        super(desc);
+    public DoneCommand(String description) {
+        super(description);
     }
 
     /**
@@ -27,19 +27,20 @@ public class DoneCommand extends Command {
      * @throws IOException If an input or output exception occurred.
      * @throws AssertionError If an assertion error occurred.
      */
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, AssertionError {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws
+            IOException, AssertionError {
         try {
-            if (desc.length() <= 4) {
+            if (description.length() <= 4) {
                 throw new DukeException();
             }
-            assert (desc.length() > 4);
-            String[] descArr = desc.split(" ");
-            int num = getTaskNum(descArr);
-            if (num >= taskList.getSize()) {
+            assert (description.length() > 4);
+            String[] descArr = description.split(" ");
+            int taskNum = getTaskNum(descArr);
+            if (taskNum >= taskList.getSize()) {
                 throw new DukeException();
             }
-            assert (num < taskList.getSize());
-            Task task = taskList.markTaskAsDone(num);
+            assert (taskNum < taskList.getSize());
+            Task task = taskList.markTaskAsDone(taskNum);
             assert task.getIsDone();
             storage.updateTaskInFile(taskList.getList());
             return ui.showTaskDone(task);

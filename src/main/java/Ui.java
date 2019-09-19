@@ -16,7 +16,8 @@ public class Ui {
      * @return The task added and the number of task in the list.
      */
     public String showTaskAdded(Task task, int size) {
-        StringBuffer taskAdded = new StringBuffer("Got it. I've added this task:\n ");
+        StringBuffer taskAdded =
+                new StringBuffer("Got it. I've added this task:\n ");
         taskAdded.append(task);
         taskAdded.append("\nNow you have ");
         taskAdded.append(size);
@@ -59,7 +60,8 @@ public class Ui {
      */
     public String showTaskDone(Task task) {
         assert (task.getIsDone());
-        StringBuffer taskDone = new StringBuffer("Nice! I've marked this task as done: \n");
+        StringBuffer taskDone =
+                new StringBuffer("Nice! I've marked this task as done: \n");
         taskDone.append(task);
         return taskDone.toString();
     }
@@ -72,7 +74,8 @@ public class Ui {
      * @return The message telling user that the task has been removed.
      */
     public String showTaskRemoved(Task removed, int size) {
-        StringBuffer taskRemoved = new StringBuffer("Noted. I've removed this task: ");
+        StringBuffer taskRemoved =
+                new StringBuffer("Noted. I've removed this task: ");
         taskRemoved.append(removed);
         taskRemoved.append("\nNow you have ");
         taskRemoved.append(size);

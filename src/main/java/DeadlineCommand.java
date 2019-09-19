@@ -13,14 +13,14 @@ public class DeadlineCommand extends Command {
     /**
      * Creates a deadline command with the description.
      *
-     * @param desc The description for the deadline command.
+     * @param description The description for the deadline command.
      */
-    public DeadlineCommand(String desc) {
-        super(desc);
+    public DeadlineCommand(String description) {
+        super(description);
     }
 
     /**
-     * Executes the deadline command and shows that the deadline has been added to the list.
+     * Executes the deadline command and shows the deadline has been added to the list.
      *
      * @param storage The storage for the file with all the tasks.
      * @param taskList The taskList used.
@@ -32,14 +32,13 @@ public class DeadlineCommand extends Command {
     public String execute(Storage storage, TaskList taskList, Ui ui) throws
             IOException, ParseException {
         try {
-            if (desc.length() <= 8) {
+            if (description.length() <= 8) {
                 throw new DukeException();
             }
-            assert (desc.length() > 8);
-            String[] descArr = desc.split("/");
+            assert (description.length() > 8);
+            String[] descArr = description.split("/");
             Date date = getDate(descArr, storage);
-            Deadline deadline =
-                    new Deadline(getDeadlineDesc(descArr), date);
+            Deadline deadline = new Deadline(getDeadlineDesc(descArr), date);
             taskList.addTask(deadline);
             storage.appendTaskToFile(deadline);
             return ui.showTaskAdded(deadline, taskList.getSize());

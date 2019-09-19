@@ -76,7 +76,8 @@ public class TaskList {
      */
     public String showList() {
         int length = list.size();
-        StringBuffer listDetails = new StringBuffer("Here are the tasks in your list:\n");
+        StringBuffer listDetails =
+                new StringBuffer("Here are the tasks in your list:\n");
         for (int i = 1; i <= length; i++) {
             Task task = list.get(i - 1);
             listDetails.append(i);
@@ -95,7 +96,8 @@ public class TaskList {
      */
     public String showTaskFound(ArrayList<Task> taskList) {
         int length = taskList.size();
-        StringBuffer taskFound = new StringBuffer("Here are the matching tasks in your list:/n");
+        StringBuffer taskFound =
+                new StringBuffer("Here are the matching tasks in your list:/n");
         for (int i = 1; i <= length; i++) {
             Task task = taskList.get(i - 1);
             taskFound.append(i);

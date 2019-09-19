@@ -10,10 +10,10 @@ public class FindCommand extends Command {
     /**
      * Creates a find command with the description.
      *
-     * @param desc The description for the find command.
+     * @param description The description for the find command.
      */
-    public FindCommand(String desc) {
-        super(desc);
+    public FindCommand(String description) {
+        super(description);
     }
 
     /**
@@ -25,17 +25,17 @@ public class FindCommand extends Command {
      * @return The task(s) found using the keyword.
      */
     public String execute(Storage storage, TaskList taskList, Ui ui) {
-        String toFind = getKeyWord(desc);
+        String toFind = getKeyWord(description);
         ArrayList<Task> tasks = taskList.getList();
-        ArrayList<Task> taskFound = new ArrayList<>();
+        ArrayList<Task> tasksFound = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             assert (i < tasks.size());
             Task t = tasks.get(i);
             if (t.hasKeyword(toFind)) {
-                taskFound.add(t);
+                tasksFound.add(t);
             }
         }
-        return taskList.showTaskFound(taskFound);
+        return taskList.showTaskFound(tasksFound);
     }
 
     /**

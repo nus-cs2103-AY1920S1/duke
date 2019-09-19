@@ -86,10 +86,13 @@ public class Storage {
      * Creates a new text file at the specified path <code>data/duke.txt</code> for storage purposes.
      * @throws IOException if an I/O error occurs
      */
+    //@@author bjhoohaha-reused
+    //Reused from: https://stackoverflow.com/questions/3090761/how-to-create-a-new-file-together-with-missing-parent-directories with minor modifications
     private static void createTextFile() throws IOException {
         File file = new File("data/duke.txt");
         file.getParentFile().mkdirs();
         file.createNewFile();
     }
+    //@@author
 
 }

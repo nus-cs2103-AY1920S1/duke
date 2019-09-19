@@ -96,11 +96,14 @@ public class MainWindow extends BorderPane {
     private void exitMainWindow() {
         userInput.setDisable(true);
         sendButton.setDisable(true);
+        //@@author bjhoohaha-reused
+        //Reused from https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx with minor modifications
         PauseTransition delay = new PauseTransition(Duration.seconds(3));
         delay.setOnFinished(event -> {
             Platform.exit();
             System.exit(0);
         });
+        //@@author
         delay.play();
     }
 

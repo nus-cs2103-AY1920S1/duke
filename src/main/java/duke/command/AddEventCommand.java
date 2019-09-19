@@ -7,6 +7,8 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UiText;
 
+import java.util.Date;
+
 public class AddEventCommand extends Command {
     public AddEventCommand(String[] msg) {
         super(msg);
@@ -28,9 +30,14 @@ public class AddEventCommand extends Command {
         assert super.command.length > 1;
         String[] msgs = super.command[1].split("/at");
         if (msgs.length == 2 && !msgs[1].equals(" ") && !msgs[0].equals("")) {
-            Task task = new Event(msgs[0], msgs[1]);
-            list.addToList(task);
-            return UiText.addedMsg(task);
+            try {
+                Date temp = new Date(msgs[1]);
+                Task task = new Event(msgs[0], msgs[1]);
+                list.addToList(task);
+                return UiText.addedMsg(task);
+            } catch (Exception e) {
+                throw new DukeException("please put your date as \n\t[dd/mm/yyyy] \n\tor[dd/mm/yyyy xx:xx(24hr)]");
+            }
         } else {
             throw new DukeException("OOPS!! The format of the description of a deadline is wrong.");
         }

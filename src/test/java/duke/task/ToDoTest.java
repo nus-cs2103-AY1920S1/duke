@@ -12,7 +12,7 @@ class ToDoTest {
     void testToString() {
         try {
             assertEquals("[T][-] 2103 project work",
-                    new ToDo(new Parser("todo 2103 project work")).toString());
+                    new ToDo(new Parser("TODO 2103 project work")).toString());
             ToDo toDo = new ToDo(new Parser("todo"));
         } catch (DukeException e) {
             assertEquals(e.getMessage(), " :( OOPS!!! The description of todos cannot be empty.");

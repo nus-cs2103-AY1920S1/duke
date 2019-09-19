@@ -48,6 +48,8 @@ class Ui {
                 "\tevent <description> /at <memo>\n" +
                 "\tdelete <task number>\n" +
                 "\tdone <task number>\n" +
+                "\tfind <description>\n" +
+                "\tformats\n" +
                 "\tbye";
     }
 
@@ -65,7 +67,9 @@ class Ui {
                 "done<space>list_index\n" +
                 "\teg. done 6 (deletes Task number 6)\n" +
                 "delete<space>list_index\n" +
-                "\teg. delete 3 (deletes Task number 3)";
+                "\teg. delete 3 (deletes Task number 3)\n" +
+                "find<space>description\n" +
+                "\teg. find shopping";
     }
 
     static String printFind(String input, TaskList tasks) {

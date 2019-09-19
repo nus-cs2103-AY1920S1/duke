@@ -17,14 +17,14 @@ is the app for you!
         2. ![`find`](#find) - To find a task.
     3. Modifying Tasks
         1. ![`done`](#done) - To mark a task as done.
-        2. ![`delete`](#delete) - To remove a task from the list.
+        2. ![`deletebase`](#deletebase) - To remove a task from the list.
     4. ![`trivia`](#trivia) - Enter Trivia Mode.
 2. Trivia Mode
     1. Adding Items
         1. ![`add`](#add) - To add a question.
         2. ![`add-ans`](#add-ans) - To add an answer to a question.
     2. Deleting Items
-        1. ![`delete`](#delete) - To delete questions and answers.
+        1. ![`deldeletetrivia`](#deldeletetrivia) - To delete questions and answers.
     3. Viewing Items
         1. ![`view-all`](#view-all) - To view all questions and answers.
     4. Quiz Time
@@ -35,7 +35,7 @@ is the app for you!
 ## Usage
 
 ### `todo`
-#### Adds a todo task to the list.
+####  Adds a todo task to the list.
 
 User types in `todo <description of task>` to add a todo task with the description provided.
 
@@ -48,7 +48,7 @@ Expected outcome:
 ![todo image](images/todo.PNG)
 
 ### `deadline`
-####Adds a deadline task to the list with date and time.
+#### Adds a deadline task to the list with date and time.
 
 User types in `deadline <description of task> /by <date> <time>` to add a deadline task with the description provided.
 Take note that date must be in **dd/mm/yyyy** format and time must be in **24hr** format.
@@ -62,7 +62,7 @@ Expected outcome:
 ![deadline image](images/deadline.PNG)
 
 ### `event`
-####Adds an event task to the list with date and time.
+####  Adds an event task to the list with date and time.
 
 User types in `event <description of task> /at <date> <time>` to add a event task with the description provided.
 Take note that date must be in **dd/mm/yyyy** format and time must be in **24hr** format.
@@ -76,7 +76,7 @@ Expected outcome:
 ![event image](images/event.PNG)
 
 ### `list`
-####Lists all tasks currently in the list.
+####  Lists all tasks currently in the list.
 
 User types in `list` to display all the tasks he has logged so far. Also displays done status as well as date and time
 for event and deadline.
@@ -90,7 +90,7 @@ Expected outcome:
 ![list image](images/list.PNG)
 
 ### `find`
-####Finds all tasks with specified character sequence.
+####  Finds all tasks with specified character sequence.
 
 User types in `find <character sequence>` to display all the tasks with the specified character sequence be it an actual
 word or not.
@@ -104,7 +104,7 @@ Expected outcome:
 ![find image](images/find.PNG)
 
 ### `done`
-####Marks the specified task as **done**.
+#### Marks the specified task as **done**.
 
 User types in `done <task number>` to mark the task with the corresponding task number in the list as done. Undone tasks
 will be marked with a **[-]** and done tasks will be marked with a **[+]**.
@@ -117,8 +117,8 @@ Expected outcome:
 
 ![done image](images/done.PNG)
     
-### `delete`
-####Removes the specified task from the list.
+### `deletebase`
+#### Removes the specified task from the list.
 
 User types in `delete <task number>` to remove the task with the corresponding task number from the list.
 
@@ -131,7 +131,7 @@ Expected outcome:
 ![delete image](images/delete.PNG)
 
 ### `trivia`
-####Enters Trivia Mode.
+#### Enters Trivia Mode.
 
 User types in `trivia` to enter trivia mode. Commands in this mode are different and DIO will not respond to any
 commands listed above. Likewise, none of the commands below can be used if not in trivia mode.
@@ -145,7 +145,7 @@ Expected outcome:
 ![trivia image](images/trivia.PNG)
 
 ### `add`
-####Adds a question to the trivia list.
+#### Adds a question to the trivia list.
 
 User types in `add <question>` to add a question he wants to the trivia list.
 
@@ -158,7 +158,7 @@ Expected outcome:
 ![trivia image](images/add.PNG)
 
 ### `add-ans`
-####Adds an answer to a question in the trivia list.
+#### Adds an answer to a question in the trivia list.
 
 User types in `add-ans <question number> <answer>` to add an answer to a question he wants to the trivia list. Do note
 that it is possible to add multiple answers to a single question for leniency or questions with multiple answers.
@@ -172,8 +172,8 @@ Expected outcome:
 
 ![add-ans image](images/add-ans.PNG)
 
-### `delete`
-####Delete either an answer to a question or a whole question in the trivia list.
+### `deldeletetrivia`
+#### Delete either an answer to a question or a whole question in the trivia list.
 
 User types in `delete (question || answer) <question> [<answer>]` to first choose whether to delete a question or an
 answer. Subsequently, if the user wants to delete a question, the question number is specified. If he wishes to delete
@@ -189,7 +189,7 @@ Expected outcome:
 ![delete image](images/delete(trivia).PNG)
 
 ### `view-all`
-####View all the current questions and answers in the trivia list so far.
+#### View all the current questions and answers in the trivia list so far.
 
 User types in `view-all` to view all the questions and answers the user has put into the trivia list.
 
@@ -202,7 +202,7 @@ Expected outcome:
 ![view-all image](images/view-all.PNG)
 
 ### `quiz-all`
-####Quizzes the user on all the questions he put into the trivia list, only accepting answers he put in himself.
+#### Quizzes the user on all the questions he put into the trivia list, only accepting answers he put in himself.
 
 User types in `quiz-all` to start the quiz. These are the things that can happen during a quiz:
 * The user can type in a correct answer.
@@ -220,7 +220,7 @@ Expected outcome:
 ![quiz-all image](images/quiz-all.PNG)
 
 ### `exit`
-####Exits Trivia mode to go back to the base mode.
+#### Exits Trivia mode to go back to the base mode.
 
 User types in `exit` to go back to the base mode with the regular commands.
 
@@ -233,7 +233,7 @@ Expected outcome:
 ![exit image](images/exit.PNG)
 
 ### `bye`
-####Closes the application.
+#### Closes the application.
 
 User types in `bye` to close the application
 

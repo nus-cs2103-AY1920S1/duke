@@ -1,6 +1,8 @@
 package duke.util;
 
 import java.util.List;
+import java.util.Arrays;
+import java.io.File;
 //CHECKSTYLE:OFF - Doing this because Paths need the * import
 import java.nio.file.*;
 //CHECKSTYLE:ON
@@ -25,6 +27,11 @@ public class Storage {
      * @param path String
      */
     public Storage(String path) {
+        File directory = new File(path);
+        if (!directory.exists()) {
+            directory.getParentFile().mkdirs();
+        }
+
         this.path = Paths.get(path);
     }  
     

@@ -100,7 +100,7 @@ public class Ui {
      * @return String
      */
     public String genWelcome() {
-        return "Hello I'm Duke\nWhat can I do for you\n";
+        return "Hello I'm Dog\nWhat can I do for you\n";
     }
 
     /**
@@ -127,7 +127,7 @@ public class Ui {
      * @return String
      */
     public String genReadError() {
-        return "Sorry, failed to read from the disc\n"; 
+        return "Sorry, failed to read from the dog. If it's your first time running this, ignore.\n"; 
     }
 
     /**

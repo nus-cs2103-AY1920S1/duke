@@ -46,7 +46,7 @@ public class DialogBox extends HBox {
         if (!isDukeReply) {
             dialog.setTextAlignment(TextAlignment.RIGHT);
         }
-        dialog.setWrappingWidth(280.0);
+        dialog.setWrappingWidth(260.0);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -69,7 +69,9 @@ public class DialogBox extends HBox {
      * @return DialogBox
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, false);
+        var db = new DialogBox(text, img, false);
+        db.setStyle("-fx-background-color: #cad4f3");
+        return db;
     }
 
     /**
@@ -82,7 +84,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, true);
         db.flip();
-        db.setStyle("-fx-background-color: grey;");
+        db.setStyle("-fx-background-color: #dfe2ff;");
         return db;
     }
 }

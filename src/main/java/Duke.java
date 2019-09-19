@@ -31,7 +31,7 @@ public class Duke {
     String getResponse (String input) {
         try {
             parser.parse(input, ui, taskList);
-        } catch (DukeException | ParseException e) {
+        } catch (DukeException e) {
             return e.getMessage();
         }
         return ui.getOutput();

@@ -17,10 +17,9 @@ class Parser {
      * @param ui User Interface in dealing with duke
      * @param taskList Task list of the current file
      * @throws DukeException If user input is in wrong format
-     * @throws ParseException If user input of time is in wrong format
      */
 
-    void parse(String input, Ui ui, TaskList taskList) throws DukeException, ParseException {
+    void parse(String input, Ui ui, TaskList taskList) throws DukeException {
         String command = input.split(" ")[0].trim();
         assert !command.isEmpty() : "Input must not be empty";
         switch (command) {
@@ -49,7 +48,7 @@ class Parser {
             case "deadline":
                 try {
                     String deadlineDescription = input.substring(8).trim();
-                    String[] deadlineArray = input.split("/by");
+                    String[] deadlineArray = deadlineDescription.split("/by");
                     String deadlineName = deadlineArray[0].trim();
                     String deadlineBy = deadlineArray[1].trim();
                     if (deadlineDescription.isEmpty() || deadlineBy.isEmpty()) {
@@ -69,7 +68,7 @@ class Parser {
             case "event":
                 try {
                     String eventDescription = input.substring(5).trim();
-                    String[] eventArray = input.split("/at");
+                    String[] eventArray = eventDescription.split("/at");
                     String eventName = eventArray[0].trim();
                     String eventAt = eventArray[1].trim();
                     if (eventDescription.isEmpty() || eventAt.isEmpty()) {
@@ -119,19 +118,22 @@ class Parser {
                 } catch (Exception e) {
                     throw new DukeException("☹ OOPS!!! Wrong format. Use: delete (task number)");
                 }
-            case "sortby":
+            case "sort":
                 try {
-                    String sortType = input.substring(6).trim();
+                    String sortType = input.substring(4).trim();
                     if (sortType.equals("event")) {
-                        Comparator<Task> com = new EventSort();
-                        Collections.sort(taskList.getTaskList(), com);
-                        System.out.println("it was here");
+                        Collections.sort(taskList.getTaskList(), new EventSort());
+                    } else if (sortType.equals("deadline")) {
+                        Collections.sort(taskList.getTaskList(), new DeadlineSort());
+                    } else if (sortType.equals("todo")) {
+                        Collections.sort(taskList.getTaskList(), new TodoSort());
                     } else {
-                        throw new Exception("☹ OOPS!!! Sort category is either event or deadline");
+                        throw new DukeException("☹ OOPS!!! There are only event/deadline/todo for type of sort");
                     }
-                    ui.setToSort(taskList.getTaskList(), input);
+                    ui.setToSort(taskList.getTaskList(), sortType);
+                    break;
                 } catch (Exception e) {
-                    throw new DukeException("☹ OOPS!!! Your input format is wrong. Use: sortby (type of sort)");
+                    throw new DukeException("☹ OOPS!!! Your input format is wrong. Use: sort (type of sort)");
                 }
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

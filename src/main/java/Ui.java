@@ -41,7 +41,6 @@ class Ui {
     void setToDone(int taskNum, TaskList taskList) {
         assert(taskNum > 0) : "Task number must be more than 1";
         output = "Nice! I've marked this task as done:\n"
-                + "[" + taskList.getTaskList().get(taskNum - 1).getStatusIcon() + "]"
                 + taskList.getTaskList().get(taskNum - 1).toString();
     }
 
@@ -61,12 +60,12 @@ class Ui {
         output = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < relatedTasks.size(); i++) {
             int num = i + 1;
-            output += num + ". " + relatedTasks.get(i);
+            output += num + ". " + relatedTasks.get(i) + "\n";
         }
     }
 
     void setToSort(ArrayList<Task> taskList, String sortType) {
-        output = "The list is now sorted according to: " + sortType + "\n    ";
+        output = "The list is now sorted according to: " + sortType + "\n";
         for (int i = 0; i < taskList.size(); i++) {
             int taskNum = i + 1;
             output += taskNum + ". " + taskList.get(i) + "\n";

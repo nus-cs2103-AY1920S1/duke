@@ -33,7 +33,7 @@ class Storage {
             while (sc.hasNext()) {
                 String[] task = sc.nextLine().split("\\|");
                 String taskType = task[0].trim();
-                boolean isTaskDone = task[2].trim().equals("1");
+                boolean isTaskDone = task[1].trim().equals("1");
 
                 switch (taskType) {
                     case "T":

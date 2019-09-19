@@ -103,7 +103,7 @@ public class Ui {
      * @return String representing a list of Tasks in TaskList
      */
     public String showTasks(TaskList taskList) {
-        String result = "Here are the tasks in your list:\n";
+        String result = "Here are the task(s) in your list:\n";
         ArrayList<Task> arr = taskList.getArr();
         for (int i = 0; i < arr.size(); i++) {
             Task temp = arr.get(i);
@@ -128,7 +128,7 @@ public class Ui {
             result += i + ". " + deletedTask.toString() + "\n";
             i++;
         }
-        result += "Now you have " + noOfTasks + " tasks left in the list.";
+        result += "Now you have " + noOfTasks + " task(s) left in the list.";
         return result;
     }
 
@@ -149,7 +149,7 @@ public class Ui {
         if (taskList.isEmpty()) {
             return "There are no Tasks in your list with '" + filter + "' in their description.\n";
         }
-        String result = "Here are the tasks in your list with '" + filter + "' in their description:\n";
+        String result = "Here are the task(s) in your list with '" + filter + "' in their description:\n";
         ArrayList<Task> arr = taskList.getArr();
         for (int i = 0; i < arr.size(); i++) {
             Task temp = arr.get(i);

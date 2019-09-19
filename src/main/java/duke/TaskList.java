@@ -14,7 +14,7 @@ public class TaskList {
     }
 
     TaskList() {
-
+        taskList = new ArrayList<>();
     }
 
     /**

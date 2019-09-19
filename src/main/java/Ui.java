@@ -53,17 +53,17 @@ public class Ui {
     }
 
     /**
-     * Prints message wrapped in "_______".
+     * Prints message wrapped in "-------".
      *
-     * @param message message before formatting with "_____".
+     * @param message message before formatting with "-----".
      */
     public static void print(String message) {
         System.out.println(
-                "    ____________________________________________________________\n"
+                "    ------------------------------------------------------------\n"
                         +
                         "     " + message + "\n"
                         +
-                        "    ____________________________________________________________");
+                        "    ------------------------------------------------------------");
     }
 
     /**
@@ -94,15 +94,16 @@ public class Ui {
     }
 
     private void setResponse(String response) {
-        this.response = "    ______________________________________________\n"
+        this.response = "    ---------------------------------------------\n"
                 +
                 "     " + response + "\n"
                 +
-                "    ______________________________________________";
+                "    ---------------------------------------------";
     }
 
     /**
      * Sets response for Add command.
+     *
      * @param task task added.
      * @param size size of TaskList after adding task.
      */
@@ -116,9 +117,10 @@ public class Ui {
 
     /**
      * Sets response for anomaly with adding tasks with clashed schedules.
-     * @param task added task.
+     *
+     * @param task         added task.
      * @param clashedTasks TaskList of clashed tasks.
-     * @param size size of TaskList after adding task.
+     * @param size         size of TaskList after adding task.
      */
     public void setClashedTaskResponse(Task task, TaskList clashedTasks, int size) {
         StringBuilder clashedTasksStr = new StringBuilder();
@@ -138,6 +140,7 @@ public class Ui {
 
     /**
      * Sets response for List command.
+     *
      * @param list list of task.
      */
     public void setListResponse(String list) {
@@ -146,10 +149,11 @@ public class Ui {
 
     /**
      * Sets response for Done command.
+     *
      * @param task task to be marked as done.
      */
     public void setDoneResponse(Task task) {
-        setResponse("     Nice! I've marked this task as done:\n"
+        setResponse("Nice! I've marked this task as done:\n"
                 +
                 "     "
                 +
@@ -158,6 +162,7 @@ public class Ui {
 
     /**
      * Sets response for Find command.
+     *
      * @param result result of the find command.
      */
     public void setFindResponse(String result) {
@@ -166,6 +171,7 @@ public class Ui {
 
     /**
      * Sets response for Exit command.
+     *
      * @param message exit message.
      */
     public void setExitResponse(String message) {
@@ -174,6 +180,7 @@ public class Ui {
 
     /**
      * Sets response for Error messages.
+     *
      * @param error error message.
      */
     public void setErrorResponse(String error) {
@@ -182,6 +189,7 @@ public class Ui {
 
     /**
      * Sets response for Welcome message.
+     *
      * @param message welcome message.
      */
     public void setWelcomeResponse(String message) {
@@ -190,6 +198,7 @@ public class Ui {
 
     /**
      * Sets response for Delete message.
+     *
      * @param task task to be deleted.
      * @param size size of TaskList after deletion.
      */
@@ -215,6 +224,7 @@ public class Ui {
 
     /**
      * Gets the UI response.
+     *
      * @return UI response attribute.
      */
     String getResponse() {

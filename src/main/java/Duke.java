@@ -45,7 +45,11 @@ public class Duke {
                 +
                 "     What can I do for you?\n"
                 +
-                "     "
+                "     \n"
+                +
+                "     These are your current tasks:\n "
+                +
+                "    "
                 +
                 this.tasks.listTasks());
         return ui.getResponse();

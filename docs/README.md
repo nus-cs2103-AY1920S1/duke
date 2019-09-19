@@ -68,6 +68,7 @@ Nice! I've marked this task as done:
 
 ### `delete <index>`
 **Delete the task of the provided index from the list.**
+
 Example of usage:
 ```
 delete 1
@@ -121,7 +122,7 @@ Expected outcome:
 All tasks cleared!
 ```
 
-###`help`
+### `help`
 **Lists all available commands in the program.**
 
 Example of usage:

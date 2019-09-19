@@ -41,8 +41,8 @@ public class DialogBox extends HBox {
 
     private static final CornerRadii ROUND_CORNER = new CornerRadii(10);
 
-    private static final Insets USER_DIALOG_INSETS = new Insets(0,70,5,10);
-    private static final Insets DUKE_DIALOG_INSETS = new Insets(0,5,5,76);
+    private static final Insets USER_DIALOG_INSETS = new Insets(0,35,5,10);
+    private static final Insets DUKE_DIALOG_INSETS = new Insets(0,5,5,35);
 
     private DialogBox(String text, Image img) {
         try {

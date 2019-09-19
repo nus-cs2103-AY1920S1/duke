@@ -18,9 +18,7 @@ public class Ui {
      * @return A string that represents the welcome message.
      */
     public String showWelcome() {
-        return "Hello from TSINGHUA\n"
-                    + "\nHello, Asia's No.1 University!"
-                    + "\nI'm Tsinghua : ) What can I do for you?";
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**

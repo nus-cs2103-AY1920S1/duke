@@ -2,3 +2,6 @@ todo`✓`study for midterms`
 event`✘`birthday`12/12/2019 0000
 todo`✘`read book`
 deadline`✘` return book`12/12/2000 1822
+todo`✘`asd`
+todo`✘`ass`
+todo`✘`aaa`

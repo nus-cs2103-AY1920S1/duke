@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
      * Shows the welcome message in the GUI.
      */
     public void showWelcome() {
-        String welcomeMessage = new Ui().showWelcomeGui();
+        String welcomeMessage = new Ui().showWelcome();
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
                         welcomeMessage,
@@ -58,29 +58,15 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Asks the user to specify a file path for saving and loading tasks.
-     */
-    public void askForFilePath() {
-        String askForFilePathMessage = new Ui().askForFilePath();
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(
-                        askForFilePathMessage,
-                        dukeImage));
-    }
-
-    /*
-    /**
      * Shows the result of loading past tasks from the local file.
      */
-    /*
     public void load() {
-        String message = duke.loadTasks();
+        String message = duke.loadPastTasks();
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(
                         message,
                         dukeImage));
     }
-    */
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to

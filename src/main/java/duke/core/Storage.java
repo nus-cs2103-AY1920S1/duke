@@ -15,21 +15,9 @@ import java.io.IOException;
  * a file and saving tasks in the file.
  */
 public class Storage {
-
-    /** A string that represents the file path in local hard disk. */
     private String filePath;
 
-    /**
-     * Constructs a <code>Storage</code> object with a specific file path.
-     *
-     * @param filePath A string that represents the path of the file to be
-     *          loaded and modified.
-     */
     public Storage(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
@@ -41,21 +29,33 @@ public class Storage {
      * @throws DukeException If file is not found.
      */
     public ArrayList<Task> load() throws DukeException {
-        File duke = new File(filePath);
+        File storageFile = new File(filePath);
+        storageFile.getParentFile().mkdir();
         ArrayList<Task> tasks = new ArrayList<>();
         try {
-            Scanner fileScanner = new Scanner(duke);
+            Scanner fileScanner = new Scanner(storageFile);
             while (fileScanner.hasNext()) {
                 String nextLine = fileScanner.nextLine();
                 String[] words = nextLine.split(" \\| ");
                 Task t = Parser.parseTaskFromFile(words);
                 tasks.add(t);
             }
-        } catch (FileNotFoundException | DukeException e) {
-            throw new DukeException("Oops, there seems to be no existing file...\n"
-                    + "A new file will be created once you add a task.");
+            return tasks;
+        } catch (FileNotFoundException e) {
+            createNewFile(storageFile);
+            throw new DukeException("Oops, there seems to be no existing storage file...\n"
+                    + "A new folder will be created with an empty storage file inside it.");
+        } catch (DukeException e) {
+            throw new DukeException("Oops, an error occurred when parsing past tasks from the storage file :-(");
         }
-        return tasks;
+    }
+
+    private void createNewFile(File storageFile) throws DukeException {
+        try {
+            storageFile.createNewFile();
+        } catch (IOException e) {
+            throw new DukeException("An error occurred when creating a new storage file.");
+        }
     }
 
     /**
@@ -72,7 +72,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Failed to save task to the local file :-(");
+            throw new DukeException("Oops, an error occurred when saving task to the local file :-(");
         }
     }
 }

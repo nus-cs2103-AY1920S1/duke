@@ -38,20 +38,6 @@ public class FindCommand extends Command {
 
     /**
      * Executes the command with respect to tasks (modifying the task list),
-     * UI, and storage (saving tasks in a file in hard disk).
-     *
-     * @param tasks The task list where tasks are stored.
-     * @param ui The user interface that interacts with user input.
-     * @param storage The <code>Storage</code> object that handles task
-     *      storage in local file.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printSearchResults(tasks, keyword);
-    }
-
-    /**
-     * Executes the command with respect to tasks (modifying the task list),
      * UI, and storage (saving tasks in a file in hard disk). GUI version.
      *
      * @param tasks The task list where tasks are stored.
@@ -60,7 +46,7 @@ public class FindCommand extends Command {
      * @return A string that represents the result of this execution.
      */
     @Override
-    public String executeGui(TaskList tasks, Ui ui, Storage storage) {
-        return ui.printSearchResultsGui(tasks, keyword);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showSearchResults(tasks, keyword);
     }
 }

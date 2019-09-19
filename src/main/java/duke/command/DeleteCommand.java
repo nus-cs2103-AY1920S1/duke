@@ -40,24 +40,6 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the command with respect to tasks (modifying the task list), 
-     * UI, and storage (saving tasks in a file in hard disk).
-     *
-     * @param tasks The task list where tasks are stored.
-     * @param ui The user interface that interacts with user input.
-     * @param storage The <code>Storage</code> object that handles task 
-     *      storage in local file.
-     * @throws DukeException If an exception occurs during execution of the command.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task t = tasks.getTask(taskId);
-        tasks.removeTask(taskId);
-        ui.removedTask(t, tasks.getSize());
-        storage.save(tasks);
-    }
-
-    /**
      * Executes the command with respect to tasks (modifying the task list),
      * UI, and storage (saving tasks in a file in hard disk). GUI version.
      *
@@ -68,11 +50,11 @@ public class DeleteCommand extends Command {
      * @throws DukeException If an exception occurs during execution of the command.
      */
     @Override
-    public String executeGui(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task t = tasks.getTask(taskId);
         tasks.removeTask(taskId);
         storage.save(tasks);
-        return ui.removedTaskGui(t, tasks.getSize());
+        return ui.removedTask(t, tasks.getSize());
     }
 }
 

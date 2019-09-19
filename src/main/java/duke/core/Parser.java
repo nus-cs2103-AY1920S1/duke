@@ -7,7 +7,6 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.command.LoadCommand;
 import duke.command.UpdateCommand;
 
 import duke.task.Task;
@@ -226,8 +225,6 @@ public class Parser {
             }
             Task t = parseTaskFromInstruction(words);
             return new AddCommand(t);
-        case "load":
-            return new LoadCommand(instruction.substring(5));
         default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means...\n"
                     + "The first word of your instruction seems to be an invalid command :-(");

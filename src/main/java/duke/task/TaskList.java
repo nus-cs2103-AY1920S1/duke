@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * Represents a list of tasks inputted by the user.
  */
 public class TaskList {
-    // create array of tasks
-    public static ArrayList<Task> tasks;
+
+    private static ArrayList<Task> tasks;
 
     public TaskList() {
         tasks = new ArrayList<>();

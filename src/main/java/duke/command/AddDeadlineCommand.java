@@ -11,8 +11,8 @@ import duke.format.*;
  */
 public class AddDeadlineCommand extends Command {
 
-    String task;
-    String deadline;
+    private String task;
+    private String deadline;
 
     /**
      * Initialises the task and its deadline to be added.

@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * This command terminates the application.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     /**
      * Stops application from reading anymore user inputs.

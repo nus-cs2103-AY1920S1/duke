@@ -7,11 +7,11 @@ import duke.exception.*;
  */
 public class DateTime {
 
-    String dateTime;
-    String day;
-    String month;
-    String year;
-    String time;
+    private String dateTime;
+    private String day;
+    private String month;
+    private String year;
+    private String time;
 
     /**
      * Initialises a DateTime.
@@ -35,7 +35,7 @@ public class DateTime {
         return " " + day + " of " + month + " " + year + ", " + time;
     }
 
-    public void reformat(String dateTime) throws DukeException {
+    private void reformat(String dateTime) throws DukeException {
         String[] splitStr = dateTime.split("/", 3);
         if (splitStr.length < 3) {
             throw new InvalidDateTimeException();
@@ -52,7 +52,7 @@ public class DateTime {
         }
     }
 
-    public void reformatDay(String split) throws DukeException {
+    private void reformatDay(String split) throws DukeException {
         int i = Integer.parseInt(split);
         if (i > 31 || i < 1) {
             throw new InvalidDateTimeException();
@@ -69,7 +69,7 @@ public class DateTime {
         }
     }
 
-    public void reformatMonth(String split) throws DukeException {
+    private void reformatMonth(String split) throws DukeException {
         int i = Integer.parseInt(split);
         switch (i) {
         case 1:
@@ -110,14 +110,15 @@ public class DateTime {
             break;
         default:
             throw new InvalidDateTimeException();
+            // Fallthrough
         }
     }
 
-    public void reformatYear(String split) {
+    private void reformatYear(String split) {
         year = split;
     }
 
-    public void reformatTime(String split) throws DukeException{
+    private void reformatTime(String split) throws DukeException {
         int t = Integer.parseInt(split);
         int min = t % 100;
         int hr = t / 100;

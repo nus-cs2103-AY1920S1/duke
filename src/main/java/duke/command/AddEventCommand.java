@@ -11,8 +11,8 @@ import duke.format.*;
  */
 public class AddEventCommand extends Command {
 
-    String task;
-    String time;
+    private String task;
+    private String time;
 
     /**
      * Initialises the task and its time to be added.

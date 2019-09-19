@@ -5,7 +5,7 @@ package duke.task;
  */
 public class Task {
     public String item;
-    public boolean isDone;
+    boolean isDone;
 
     /**
      * Initialises a Task.

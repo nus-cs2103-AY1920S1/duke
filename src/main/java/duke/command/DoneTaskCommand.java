@@ -1,16 +1,16 @@
 package duke.command;
 
+import duke.exception.*;
 import duke.task.*;
 import duke.ui.*;
 import duke.storage.*;
-import duke.exception.*;
 
 /**
  * This command marks task as done from the list of tasks.
  */
 public class DoneTaskCommand extends Command {
 
-    String itemIndex;
+    private String itemIndex;
 
     /**
      * Initialises marking a task as done using the task index.

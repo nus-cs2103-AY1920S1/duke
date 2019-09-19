@@ -8,9 +8,9 @@ import duke.storage.*;
 /**
  * This command adds a Todo to the list of tasks.
  */
-public class AddTodoCommand extends Command{
+public class AddTodoCommand extends Command {
 
-    String item;
+    private String item;
 
     /**
      * Initialises the task to be added.

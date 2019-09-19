@@ -2,9 +2,9 @@ import java.io.FileNotFoundException;
 import duke.command.*;
 import duke.exception.*;
 import duke.parser.*;
-import duke.storage.*;
 import duke.task.*;
 import duke.ui.*;
+import duke.storage.*;
 
 /**
  * This is a Personal Assistant Chatbot named Duke. It acts like a task manager to help a person keep track of

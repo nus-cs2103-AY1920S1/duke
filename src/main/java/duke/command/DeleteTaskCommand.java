@@ -1,16 +1,16 @@
 package duke.command;
 
+import duke.exception.*;
 import duke.task.*;
 import duke.ui.*;
 import duke.storage.*;
-import duke.exception.*;
 
 /**
  * This command deletes task from the list of tasks.
  */
 public class DeleteTaskCommand extends Command {
 
-    String itemIndex;
+    private String itemIndex;
 
     /**
      * Initialises deleting of a task using the task index.

@@ -108,7 +108,8 @@ public class Parser {
             }
         } else {
             throw new InvalidCommandException();
-        } return command;
+        }
+        return command;
     }
 
 }

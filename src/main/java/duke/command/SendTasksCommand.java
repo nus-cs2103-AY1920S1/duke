@@ -7,7 +7,7 @@ import duke.storage.*;
 /**
  * This command lists down all tasks from the list of tasks.
  */
-public class SendTasksCommand extends Command{
+public class SendTasksCommand extends Command {
 
     /**
      * Ensures that Duke application continues to read in user inputs.

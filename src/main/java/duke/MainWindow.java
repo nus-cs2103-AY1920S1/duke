@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import misc.Ui;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,6 +35,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.welcome(), dukeImage));
     }
 
     public void setDuke(Duke d) {

@@ -47,7 +47,7 @@ Example of usage:
 
 * update 2 Deadline return book /by 13/12/2019
 
-----
+- - -
 
 `delete <index>`
 
@@ -56,6 +56,7 @@ Delete redundant Tasks. Duke will display the Task that is being removed and upd
 Example of usage: 
 
 * delete 1
+
 - - -
 
 `done <index>`

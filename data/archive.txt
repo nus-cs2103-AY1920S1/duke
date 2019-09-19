@@ -15,3 +15,4 @@ E | 1 | Sarah's Birthday | September 25 2019 12:00 AM (Date archived: 11/09/2019
 T | 0 | Buy a new T-shirt (Date archived: 17/09/2019)
 D | 1 | CS2103 Post-Lecture Quiz | September 12 2019 11:59 PM (Date archived: 17/09/2019)
 E | 1 | Dental | October 17 2019 04:00 PM (Date archived: 17/09/2019)
+T | 0 | eat (Date archived: 19/09/2019)

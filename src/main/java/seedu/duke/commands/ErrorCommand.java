@@ -21,7 +21,7 @@ public class ErrorCommand extends Command {
      * @throws DukeException Re-throws the {@code exception}.
      */
     @Override
-    public void execute(TaskList tasks) throws DukeException {
+    public String execute(TaskList tasks) throws DukeException {
         throw exception;
     }
 }

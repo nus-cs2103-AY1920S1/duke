@@ -24,10 +24,10 @@ public class DeleteCommand extends Command {
      * @throws InvalidArgumentException Thrown when the {@code taskId} provided was out of bounds.
      */
     @Override
-    public void execute(TaskList tasks) throws InvalidArgumentException {
+    public String execute(TaskList tasks) throws InvalidArgumentException {
         Task taskToRemove = tasks.remove(taskId);
-        Ui.printMessages("Noted. I've removed this task:",
-            "  " + taskToRemove.toString(),
-            "Now you have " + tasks.size() + " tasks in the list.");
+        return "Noted. I've removed this task:"
+            + "\n  " + taskToRemove.toString()
+            + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

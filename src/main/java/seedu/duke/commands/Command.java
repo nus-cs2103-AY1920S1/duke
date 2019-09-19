@@ -17,7 +17,5 @@ public abstract class Command {
      * @throws DukeException Thrown when an issue arises during execution. Refer to
      *         the specific Command abstractions for the exact exception thrown.
      */
-    public void execute(TaskList tasks) throws DukeException {
-
-    }
+    public abstract String execute(TaskList tasks) throws DukeException;
 }

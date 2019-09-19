@@ -22,11 +22,11 @@ public class TodoCommand extends Command {
      * @param tasks The current TaskList instance.
      */
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         Todo todo = new Todo(description);
         tasks.add(todo);
-        Ui.printMessages("Got it. I've added this task:",
-            "  " + todo.toString(),
-            "Now you have " + tasks.size() + " tasks in the list.");
+        return "Got it. I've added this task:"
+            + "\n  " + todo.toString()
+            + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

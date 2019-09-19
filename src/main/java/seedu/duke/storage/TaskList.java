@@ -80,6 +80,22 @@ public class TaskList {
         return searchResult;
     }
 
+    public String printAll() {
+        StringBuilder response = new StringBuilder();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            response.append("\t")
+                .append(i + 1)
+                .append(".")
+                .append(tasks.get(i).toString());
+
+            if (i < tasks.size()) {
+                response.append("\n");
+            }
+        }
+        return response.toString();
+    }
+
     public int size() {
         return this.tasks.size();
     }

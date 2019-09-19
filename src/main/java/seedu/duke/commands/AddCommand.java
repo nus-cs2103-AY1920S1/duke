@@ -21,9 +21,9 @@ public class AddCommand extends Command {
      * @param tasks The TaskList object to add the task to.
      */
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         Task task = new Task(description);
         tasks.add(task);
-        Ui.printMessages("added: " + task.toString());
+        return "added: " + task.toString();
     }
 }

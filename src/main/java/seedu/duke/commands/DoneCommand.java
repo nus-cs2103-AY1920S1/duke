@@ -23,9 +23,9 @@ public class DoneCommand extends Command {
      * @throws InvalidArgumentException Thrown when the {@code taskId} provided was out of bounds.
      */
     @Override
-    public void execute(TaskList tasks) throws InvalidArgumentException {
+    public String execute(TaskList tasks) throws InvalidArgumentException {
         tasks.get(taskId).markAsDone();
-        Ui.printMessages("Nice! I've marked this task as done:",
-            "  " + tasks.get(taskId).toString());
+        return "Nice! I've marked this task as done:"
+            + "\n  " + tasks.get(taskId).toString();
     }
 }

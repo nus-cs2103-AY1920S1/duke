@@ -32,16 +32,16 @@ public class EventCommand extends Command {
      *         Likely causes are incorrect date formats.
      */
     @Override
-    public void execute(TaskList tasks) throws InvalidArgumentException {
+    public String execute(TaskList tasks) throws InvalidArgumentException {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMd HHmm");
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateString);
             Event event = new Event(description, date);
             tasks.add(event);
-            Ui.printMessages("Got it. I've added this task:",
-                "  " + event.toString(),
-                "Now you have " + tasks.size() + " tasks in the list.");
+            return "Got it. I've added this task:"
+                + "\n " + event.toString()
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (ParseException pe) {
             throw new InvalidArgumentException("Date input is not in the right format yyyyMMd HHmm", pe);
         }

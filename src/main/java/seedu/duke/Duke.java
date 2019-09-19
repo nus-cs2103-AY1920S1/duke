@@ -3,6 +3,8 @@ package seedu.duke;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import seedu.duke.commands.ByeCommand;
+import seedu.duke.commands.Command;
 import seedu.duke.controllers.DialogBox;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.helpers.Parser;
@@ -65,11 +67,18 @@ public class Duke {
 
     public String handleCommand(String input) {
         try {
-            Parser.parseCommand(input).execute(tasks);
+            Command commandToExecute = Parser.parseCommand(input);
+            String response = commandToExecute.execute(tasks);
+
+            if (commandToExecute.getClass() == ByeCommand.class) {
+                Storage.getInstance().saveToDisk(tasks);
+                System.exit(0);
+            }
 
         } catch (DukeException e) {
             return e.getMessage();
         }
+
         return "";
     }
 

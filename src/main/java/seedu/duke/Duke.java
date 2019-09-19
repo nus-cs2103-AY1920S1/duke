@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import seedu.duke.controllers.DialogBox;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.helpers.Parser;
 import seedu.duke.storage.Storage;
@@ -23,7 +27,7 @@ public class Duke {
      * If existing data does not exist or ends in an exception, an empty TaskList is returned.
      */
     public Duke() {
-        // Load from dish
+        // Load from disk
         try {
             tasks = Storage.getInstance().loadFromDisk();
         } catch (Storage.StorageOperationException e) {
@@ -34,7 +38,7 @@ public class Duke {
     }
 
     /**
-     * Main Method. Duke is instantiated and run here.
+     * seedu.duke.Main Method. Duke is instantiated and run here.
      *
      * @param args string arguments for console.
      */
@@ -53,12 +57,27 @@ public class Duke {
             String input = Ui.readNextLine();
             try {
                 Parser.parseCommand(input).execute(tasks);
-
             } catch (DukeException e) {
                 Ui.printError(e);
             }
         }
     }
 
+    public String handleCommand(String input) {
+        try {
+            Parser.parseCommand(input).execute(tasks);
 
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return "";
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 }

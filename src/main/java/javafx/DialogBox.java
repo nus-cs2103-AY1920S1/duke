@@ -47,7 +47,7 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
-        ((Text) tmp.get(1)).setTextAlignment(TextAlignment.LEFT);
+        text.setTextAlignment(TextAlignment.LEFT);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }

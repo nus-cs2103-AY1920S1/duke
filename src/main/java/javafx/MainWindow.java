@@ -27,8 +27,6 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
-    private boolean isExit;
-
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -40,7 +38,6 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
-        isExit = false;
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(duke.showWelcome(), dukeImage)
         );
@@ -53,22 +50,19 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() throws InterruptedException {
-        if (!isExit) {
-            String input = userInput.getText();
-            String response = duke.run(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
+        String input = userInput.getText();
+        String response = duke.run(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
 
-            if (input.equals("bye")) {
-                isExit = true;
-            }
-
-            userInput.clear();
-        } else {
-            dialogContainer.getScene().getWindow().hide();
+        if (input.equals("bye")) {
+            sendButton.setDisable(true);
+            userInput.setDisable(true);
         }
+
+        userInput.clear();
     }
 
 }

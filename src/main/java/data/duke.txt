@@ -1,3 +1,0 @@
-todo 0 essay
-event 0 finance briefing /at 23 Sep 2019 9am
-deadline 1 CS2103 /by 18 Sep 2019 11pm

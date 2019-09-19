@@ -21,9 +21,15 @@ class Storage {
 	 * @throws FileNotFoundException if file is not found
 	 */
 
-	public ArrayList<AddCommand> load() throws FileNotFoundException {
+	public ArrayList<AddCommand> load() throws IOException {
 		ArrayList<AddCommand> commands = new ArrayList<>();
 		File f = new File(filename);
+		if (!f.exists()) {
+			f.getParentFile().mkdirs();
+		}
+		if (!f.exists() && !f.createNewFile()) {
+			throw new IOException("Error creating file");
+		}
 		Scanner s = new Scanner(f);
 		
 		while (s.hasNext()) {

@@ -34,9 +34,9 @@ public class Duke extends Application {
 	private TaskList tasks;
 	private Ui ui;
 
-	private static String filename = "/Users/mandy/CS2103/duke/src/main/java/data/duke.txt"; // todo isDone? description
+	private static String filename = "data/duke.txt"; // todo isDone? description
 
-	public Duke() throws FileNotFoundException, DukeException, ParseException {
+	public Duke() throws DukeException, ParseException, IOException {
 		ui = new Ui();
 		storage = new Storage(filename);
 		tasks = new TaskList(storage.load());
@@ -167,7 +167,10 @@ public class Duke extends Application {
 			Command c = Parser.parse(type, remainingCommand);  // ?
 			c.execute(tasks, ui);
 			storage.update(tasks, filename);
-		} catch (FileNotFoundException | ParseException e) {
+		} catch (FileNotFoundException fe) {
+			// creates file
+
+		} catch (ParseException e) {
 			ui.showError(e.getMessage());
 		} catch (IOException ie){
 			ui.showError(ie.getMessage());

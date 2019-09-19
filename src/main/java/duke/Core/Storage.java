@@ -17,8 +17,8 @@ import java.util.Scanner;
 public class Storage {
 
     //stores information of the data in the duke.txt file.
-    final String fileName = "C:\\Users\\dandf\\Pictures\\CS2103-Duke\\duke/data/duke.txt";
-    final String direcName = "C:\\Users\\dandf\\Pictures\\CS2103-Duke\\duke/data";
+    final String fileName = "../duke/data/duke.txt";
+    final String direcName = "../duke/data";
 
     /**
      * Writes the updated contents from TaskList.
@@ -33,7 +33,7 @@ public class Storage {
             File taskStorage = new File(fileName);
             File directoryStorage = new File(direcName);
             if (!taskStorage.getAbsoluteFile().exists()) {
-                directoryStorage.mkdir();
+                directoryStorage.mkdirs();
                 taskStorage.createNewFile();
             }
             FileWriter taskWrite = new FileWriter(fileName);

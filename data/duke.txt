@@ -1,7 +1,1 @@
-[T]|false|borrow book
-[E]|false|Singing Competition|2019-09-09 2100
-[D]|false|Submit 2103 Assignment|2019-09-10 1000
-[T]|false|water the plant
-[E]|false|attend pubstomp|2019-09-10 1200
-[D]|false|listen to lectures|2019-09-13 2000
-[T]|false|buy lunch for sister
+[T]|false|shower plants

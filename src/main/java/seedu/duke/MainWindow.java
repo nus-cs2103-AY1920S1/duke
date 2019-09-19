@@ -51,5 +51,15 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (response.equals(Messages.MESSAGE_GOODBYE_MESSAGE)) {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            System.exit(0);
+                        }
+                    }, 500
+            );
+        }
     }
 }

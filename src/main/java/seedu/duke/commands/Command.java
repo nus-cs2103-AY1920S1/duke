@@ -7,7 +7,7 @@ import seedu.duke.ui.UI;
 
 public abstract class Command {
 
-    protected boolean isExit = false;
+    public boolean isExit = false;
 
     public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         return "";

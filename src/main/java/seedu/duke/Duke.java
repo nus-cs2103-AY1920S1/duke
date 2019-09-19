@@ -35,7 +35,8 @@ public class Duke {
     protected String getResponse(String input) {
         try {
             Command c = new Parser().parse(input);
-            return c.execute(tasks, ui, storage);
+            String response =  c.execute(tasks, ui, storage);
+            return response;
         } catch (DukeException e) {
             return Messages.MESSAGE_UNKNOWN_COMMAND;
         } catch (ArrayIndexOutOfBoundsException e) {

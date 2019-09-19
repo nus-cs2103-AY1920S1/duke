@@ -1,3 +1,4 @@
-todo>>0>>eat
-deadline>>0>>run >>12/12/0014 2009
-todo>>0>>eat
+deadline>>0>>snap >>20/12/0030 1800
+deadline>>0>>destroy the avengers >>15/12/0020 1800
+event>>0>>party >>19/09/0019 1500
+event>>0>>party again >>19/09/2019 1500

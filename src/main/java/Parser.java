@@ -43,9 +43,16 @@ public class Parser {
             if (inputText.equals("list")) { // to print all the list of plans
                 return ui.printList(tasks);
             } else if (actionKey.equals("done")) { // mark as done if the plan is finished
+                LinkedList<Task> totalTasks = tasks.getListOfTasks();
                 int index = Integer.parseInt(inputText.split(" ")[1]);
-                Task selectedTask = tasks.getListOfTasks().get(index - 1);
-                selectedTask.markAsDone();
+                checkForValidDone(totalTasks, index);
+
+                Task selectedTask = totalTasks.get(index - 1);
+                if (selectedTask.getIsDone()) {
+                    throw new DukeException("Task " + index + " is already marked as done");
+                } else {
+                    selectedTask.markAsDone();
+                }
 
                 assert selectedTask.getStatusIcon().equals("X") : "Task should be marked as done";
 
@@ -95,6 +102,8 @@ public class Parser {
             }
         } catch (DukeException err) {
             return err.getMessage();
+        } catch (NumberFormatException err) {
+            return "Invalid string on the action, should be integer";
         } catch (Exception err) {
             return "[Exception]\n" + err;
         }
@@ -134,9 +143,19 @@ public class Parser {
         if (totalTasks.size() == 0) {
             throw new DukeException("You cannot delete something from an empty list");
         } else if (index < 1) {
-            throw new DukeException("Index cannot be negative or zero");
+            throw new DukeException("Index cannot be negative or zero. Maximum index is " + totalTasks.size());
         } else if (index > totalTasks.size()) {
-            throw new DukeException("Number is not in the list of tasks");
+            throw new DukeException("Number is not in the list of tasks. Maximum index is " + totalTasks.size());
+        }
+    }
+
+    private static void checkForValidDone(LinkedList<Task> totalTasks, int index) throws DukeException {
+        if (totalTasks.size() == 0) {
+            throw new DukeException("You cannot done something from an empty list");
+        } else if (index < 1) {
+            throw new DukeException("Index cannot be negative or zero. Maximum index is " + totalTasks.size());
+        } else if (index > totalTasks.size()) {
+            throw new DukeException("Number is not in the list of tasks. Maximum index is " + totalTasks.size());
         }
     }
 }

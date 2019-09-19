@@ -12,7 +12,9 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] description = fullCommand.trim().split(" ", 2);
         String command = description[0];
-        if (command.equals("todo")) {
+        if (command.equals("help")) {
+            return new HelpCommand(description);
+        } else if (command.equals("todo")) {
             return new AddTodoCommand(description);
         } else if (command.equals("event")) {
             return new AddEventCommand(description);

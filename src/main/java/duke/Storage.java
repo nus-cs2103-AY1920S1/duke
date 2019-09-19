@@ -15,18 +15,33 @@ import java.util.Scanner;
  * Encapsulates a storage object to handle file input/output.
  */
 public class Storage {
-    private String filepath;
-    public static final String DEFAULT_FILEPATH = "src/main/data/duke.txt";
+    private File file;
+    public static final String DEFAULT_FILEPATH = "/src/main/data/duke.txt";
+    public static final String EXECUTABLE_DIRECTORY = "data";
 
     public Storage(String filepath) {
-        this.filepath = filepath;
+        File temp = new File(filepath);
+        if(temp.exists()) {
+            this.file = temp;
+        } else {
+            File dataDir = new File(EXECUTABLE_DIRECTORY);
+            if (!dataDir.exists()) {
+                dataDir.mkdir();
+            }
+            try {
+                temp = new File(EXECUTABLE_DIRECTORY, "duke.txt");
+                temp.createNewFile();
+                this.file = temp;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            File file = new File(filepath);
             Scanner sc = new Scanner(file);
 
             while (sc.hasNextLine()) {
@@ -70,7 +85,7 @@ public class Storage {
 
     public void save(TaskList tasklist) throws DukeException {
         try {
-            FileWriter filewriter = new FileWriter(filepath);
+            FileWriter filewriter = new FileWriter(file);
 
             for (Task task : tasklist.getList()) {
                 filewriter.write(task.textFormat());

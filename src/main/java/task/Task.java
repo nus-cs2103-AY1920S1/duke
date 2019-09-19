@@ -23,4 +23,5 @@ public abstract class Task {
 
     @Override
     public abstract String toString();
+    public abstract String toEncodedString();
 }

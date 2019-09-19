@@ -32,11 +32,20 @@ public class Event extends Task {
         this.formattedDateTime = parser.convertStringToTime(dateTime, "event");
     }
 
+    /**
+     * Displays a String representation of this Event to the user.
+     * @return a String representation of this Event
+     */
     @Override
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", getStatusIcon(), description, formattedDateTime);
     }
 
+    /**
+     * Compares if two Events are the same.
+     * @param o the other object to be compared with.
+     * @return a boolean.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -51,5 +60,16 @@ public class Event extends Task {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns a String representation of this Event to be written in a save file.
+     * @return an encoded String representation of this Event.
+     */
+    @Override
+    public String toEncodedString() {
+        int isDoneStatus = isDone ? 1 : 0;
+
+        return String.format("D : %d : %s : %s", isDoneStatus, description, unformattedDateTime);
     }
 }

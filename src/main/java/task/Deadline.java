@@ -32,11 +32,20 @@ public class Deadline extends Task {
         formattedDateTime = parser.convertStringToTime(dateTime, "deadline");
     }
 
+    /**
+     * Displays a String representation of this Deadline to the user.
+     * @return a String representation of this Deadline
+     */
     @Override
     public String toString() {
         return String.format("[D][%s] %s (by: %s)", getStatusIcon(), description, formattedDateTime);
     }
 
+    /**
+     * Compares if two Deadlines are the same.
+     * @param o the other object to be compared with.
+     * @return a boolean.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -53,4 +62,14 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a String representation of this Deadline to be written in a save file.
+     * @return an encoded String representation of this Deadline.
+     */
+    @Override
+    public String toEncodedString() {
+        int isDoneStatus = isDone ? 1 : 0;
+
+        return String.format("D : %d : %s : %s", isDoneStatus, description, unformattedDateTime);
+    }
 }

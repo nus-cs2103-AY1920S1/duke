@@ -31,22 +31,10 @@ public class Parser {
      * Writes Tasks as Strings that are saved into a local save file. The parsed String
      * contains information about the task's completion status, Task type and Date/Time (if any).
      * @param task The Task to be parsed into a String and saved into a local save file.
-     * @return The parsed String of the Task's details, null if task is of unknown type.
+     * @return The parsed String of the Task's details.
      */
-    String writeTaskAsText(Task task) {
-        int isDoneStatus = task.isDone ? 1 : 0;
-        
-        if (task instanceof ToDo) {
-            return String.format("T : %d : %s", isDoneStatus, task.description);
-        } else if (task instanceof Deadline) {
-            return String.format("D : %d : %s : %s", isDoneStatus, task.description,
-                    ((Deadline)task).unformattedDateTime);
-        } else if (task instanceof Event) {
-            return String.format("E : %d : %s : %s", isDoneStatus, task.description,
-                    ((Event)task).unformattedDateTime);
-        }
-
-        return null;
+    public String writeTaskAsText(Task task) {
+        return task.toEncodedString();
     }
 
     /**
@@ -56,6 +44,8 @@ public class Parser {
      * @return A Task in the user's task list when the program last exits. 
      */
     Task readTextAsTask(String stringTask) {
+        assert stringTask != null : "String task is empty";
+
         String[] taskContents = stringTask.split(" : ");
 
         String taskTag = taskContents[0];
@@ -200,6 +190,7 @@ public class Parser {
                 errorMessage = "The command \"list\" should not have anything after!\n"
                         + "Please remove any additional characters!";
             } else {
+                userInput.close();
                 return taskList.listAllTasks("list");
             }
             break;
@@ -215,6 +206,8 @@ public class Parser {
         case "done":
             if (userInput.hasNextInt()) {
                 int taskNumberDone = userInput.nextInt();
+                
+                userInput.close();
                 return taskMarkedDoneMessage(taskList, taskNumberDone);
             } else {
                 errorMessage = "You need to tell me which task to mark as done!";
@@ -223,6 +216,8 @@ public class Parser {
         case "delete":
             if (userInput.hasNextInt()) {
                 int taskNumberDelete = userInput.nextInt();
+
+                userInput.close();
                 return taskDeletedMessage(taskList, taskNumberDelete);
             } else {
                 errorMessage = "You need to tell me which task to delete!";
@@ -231,6 +226,8 @@ public class Parser {
         case "find":
             if (userInput.hasNext()) {
                 String keyword = userInput.nextLine().strip();
+
+                userInput.close();
                 return taskList.find(keyword);
             } else {
                 errorMessage = "I need a keyword to look for matching tasks!";
@@ -241,6 +238,8 @@ public class Parser {
 
             if (userInput.hasNext()) {
                 String details = userInput.nextLine().strip();
+    
+                userInput.close();
                 return taskList.makeNewTask(details, null, "todo");
             } else {
                 errorMessage = "The description of a todo cannot be empty!";
@@ -263,6 +262,7 @@ public class Parser {
                         String taskDescription = contentDateTime[0].strip();
                         String dateTime = contentDateTime[1].strip();
 
+                        userInput.close();
                         return taskList.makeNewTask(taskDescription, dateTime, "deadline");
                     }
                 } else {
@@ -289,6 +289,7 @@ public class Parser {
                         String taskDescription = contentDateTime[0].strip();
                         String dateTime = contentDateTime[1].strip();
 
+                        userInput.close();
                         return taskList.makeNewTask(taskDescription, dateTime, "event");
                     }
                 } else {
@@ -313,6 +314,9 @@ public class Parser {
     }
 
     private String taskDeletedMessage(TaskList taskList, int taskNumberDelete) throws IOException {
+        assert taskNumberDelete > 0 : "Index for task deleting is negative";
+        assert taskNumberDelete % 1 == 0 : "Index for task deleting is non-integer";
+
         if (taskList.temporarySearchList != null) {
             return taskList.delete(taskNumberDelete, true);
         } else {
@@ -321,6 +325,9 @@ public class Parser {
     }
 
     private String taskMarkedDoneMessage(TaskList taskList, int taskNumberDone) throws DukeException, IOException {
+        assert taskNumberDone > 0 : "Index for marking task as done is negative";
+        assert taskNumberDone % 1 == 0 : "Index for marking task as done is non-integer";
+
         if (taskList.temporarySearchList != null) {
             return taskList.markTaskAsDone(taskNumberDone, true);
         } else {

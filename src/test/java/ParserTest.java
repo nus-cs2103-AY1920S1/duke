@@ -2,8 +2,10 @@ import task.Deadline;
 import task.Event;
 import task.ToDo;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import misc.Parser;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {

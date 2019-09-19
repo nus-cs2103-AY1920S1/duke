@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import misc.Storage;
-import misc.Ui;
 
 /**
  * Represents a TaskList object that can add, delete, list and mark tasks as done upon user request.
@@ -36,14 +35,6 @@ public class TaskList {
         this.tasks = tasks;
         this.storage = storage;
         temporarySearchList = null;
-    }
-
-    /**
-     * Indicates if there are existing tasks in the task list.
-     * @return A boolean.
-     */
-    public boolean hasTask() {
-        return tasks.size() != 0;
     }
 
     /**
@@ -108,6 +99,7 @@ public class TaskList {
      * Lists all tasks upon user request.
      * @param type A boolean that determines if tasks are listed from the original or search result list.
      * @throws DukeException if there are no task to list.
+     * @return a String that lists all tasks of the user.
      */
     public String listAllTasks(String type) throws DukeException {
         handleEmptyTaskListError();
@@ -145,6 +137,7 @@ public class TaskList {
      * @param dateTime The Date/Time of the task (if any) to be created.
      * @param taskType The type of the task (e.g. Todo, Event etc)
      * @throws IOException if task created cannot be saved to a local save file.
+     * @return a String that informs the user that a task has been added successfully.
      */
     public String makeNewTask(String description, String dateTime, String taskType) throws IOException, DukeException {
         Task task;
@@ -169,6 +162,9 @@ public class TaskList {
     }
 
     private String taskAddSuccess(Task task) throws IOException {
+        assert tasks != null : "TaskList is null";
+        assert storage != null : "Storage is null";
+
         tasks.add(task);
         storage.addToLocalSave(task);
 
@@ -222,6 +218,7 @@ public class TaskList {
      * Searches matching tasks with user specified keyword.
      * @param keyword The keyword to search for in all tasks.
      * @throws DukeException if the original task list is empty or there are no search results.
+     * @return a String that lists all matching tasks found.
      */
     public String find(String keyword) throws DukeException {
         handleEmptyTaskListError();

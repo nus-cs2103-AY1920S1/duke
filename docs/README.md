@@ -6,21 +6,21 @@
 
 [3. Features](#3-features)
     
-[3.1. Adding a todo task: ](#31-adding-a-todo-task-todo) todo
+- [3.1. Adding a todo task: ](#31-adding-a-todo-task-todo) todo
 
-[3.2. Adding a deadline task: ](#32-adding-a-deadline-task-deadline) deadline
+- [3.2. Adding a deadline task: ](#32-adding-a-deadline-task-deadline) deadline
 
-[3.3. Adding an event task: ](#33-adding-an-event-task-event) event
+- [3.3. Adding an event task: ](#33-adding-an-event-task-event) event
 
-[3.4. Listing all tasks: ](#34-listing-all-tasks-list) list
+- [3.4. Listing all tasks: ](#34-listing-all-tasks-list) list
 
-[3.5. Locating tasks by name: ](#35-locating-tasks-by-name-find) find
+- [3.5. Locating tasks by name: ](#35-locating-tasks-by-name-find) find
 
-[3.6. Deleting a task: ](#36-deleting-a-task-delete) delete
+- [3.6. Deleting a task: ](#36-deleting-a-task-delete) delete
 
-[3.7. Exiting the program: ](#37-exiting-the-program-bye) bye
+- [3.7. Exiting the program: ](#37-exiting-the-program-bye) bye
 
-[3.8. Loading and saving tasks: ](#38-loading-and-saving-tasks)
+- [3.8. Loading and saving tasks](#38-loading-and-saving-tasks)
 
 ## 1. Introduction
 
@@ -31,7 +31,7 @@ a Command Line Interface (CLI) while still having the benefits of a Graphical Us
 
 1. Ensure you have Java `11` or above installed in your local machine.
 
-2. Download the latest duke.jar [here] ().
+2. Download duke-v0.2.jar [here](https://github.com/jun-ha0/duke/releases/tag/A-Release).
 
 3. Copy the file to the folder you want to use as the folder for your Duke application.
 
@@ -39,7 +39,9 @@ a Command Line Interface (CLI) while still having the benefits of a Graphical Us
 
     ![Folder-example](folder-example.png)
 
-5. Double-click the file to run the app. The GUI should appear in a few seconds.
+5. Double-click the file to run the app. The GUI should appear in a few seconds. If unable to run, check the following: 
+    - Ensure that there is a folder named `data` as per step 4.
+    - Try `java -jar duke-v0.2.jar` from the terminal.
 
     ![User interface](Ui.png)
 
@@ -65,13 +67,15 @@ Adds a todo task to the task list.
 Example `todo homework`: adds a todo task to the task list
 
 ### 3.2 Adding a deadline task: `deadline`
-Adds a deadline task to the task list.
+Adds a deadline task to the task list. Note that deadlines must have `/by` followed by a date and time in 
+d/M/yyyy HHmm format.
 
 Example
     `deadline return book /by 2/1/2019 2359`: adds a deadline task to the task list.
 
 ### 3.3 Adding an event task: `event`
-Adds an event task to the task list.
+Adds an event task to the task list. Note that events must have `/at` followed by a date and time in 
+d/M/yyyy HHmm format.
 
 Example
     `event project meeting /at 2/12/2019 1800`: adds an event task to the task list.
@@ -86,7 +90,7 @@ Example
 Finds the tasks with specified keyword.
 
 Example
-    `delete 3` : deletes the 3rd task shown in the current list.
+    `find project` : finds all task with keyword 'project' in the current list.
 
 ### 3.6 Deleting a task: `delete`
 Deletes specified task from the current task list.

@@ -48,7 +48,7 @@ boolean isExit;
                 break;
             case 6:                                //done
                 DoneCommand done = new DoneCommand();
-                output = done.Done(tasks, this.msg, ui);
+                output = done.Done(tasks, store, this.msg, ui);
                 break;
             case 7:                                //delete
                 DeleteCommand del = new DeleteCommand();

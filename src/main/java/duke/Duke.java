@@ -26,7 +26,7 @@ public class Duke{
 
     /////////////////////////////// duke.Duke constructors  /////////////////////////////////////////////
 
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
@@ -67,7 +67,8 @@ public class Duke{
             System.out.println("Hello from\n" + logo);
             System.out.println("What can i do for you?\n");
 
-            new Duke("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt").run();
+            //new Duke("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt").run();
+            new Duke("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\build\\lib\\src\\Duke.txt").run();
         }
 
         public String getResponse(String input) throws IOException {

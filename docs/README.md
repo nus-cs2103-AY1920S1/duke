@@ -31,11 +31,11 @@ You can sort tasks by due date, with the earliest due tasks at the top.
 
 Example of usage: 
 
-bye
+`bye`
 
 Expected outcome:
 
-Program terminates.
+`Program terminates.`
 
 ### `list` - List all saved tasks
 

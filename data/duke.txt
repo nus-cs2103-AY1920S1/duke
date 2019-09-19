@@ -1,4 +1,2 @@
-Number of tasks completed: 1
-Number of tasks not completed: 1
-D | 0 | Project  | Wed Sep 18 11:59:00 SGT 2019
-E | 1 |  Party  | Thu Sep 19 01:00:00 SGT 2019
+Number of tasks completed: 0
+Number of tasks not completed: 0

@@ -48,7 +48,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
 
         //Gaurd clause
-        if (response.contains("Bye")) {
+        if (response.equals("Bye")) {
             System.exit(0);
         }
 

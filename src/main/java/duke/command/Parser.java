@@ -75,6 +75,10 @@ public class Parser {
             assert Integer.parseInt(month) >= 1 && Integer.parseInt(month) <= 12 : "Month should be in 1-12 range!";
             assert Integer.parseInt(year) > 0 : "Year should be positive (restricted to A.D.)";
             assert Integer.parseInt(day) >= 1 && Integer.parseInt(day) <= 31 : "Day should be restricted in 1-31 range";
+            assert startHours <= endHours : "startTime cannot be greater than endTime.";
+            if (startHours == endHours) {
+                assert startMinutes < endMinutes : "startTime cannot be greater than or equal to endTime.";
+            }
             list.add(details[0]);
             list.add(day);
             list.add(month);

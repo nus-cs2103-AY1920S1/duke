@@ -144,12 +144,12 @@ priority.
 * __Expected outcome__:  
     ```
     Alright! Master Duke has set priority HIGH for this task:
-      [T][+] go for tutorial <<Priority: HIGH>>
+      [T][+] go for tutorial <Priority: HIGH>
     ```  
     *This sets the second task with a HIGH priority.*
 
 ### 3.7. Exiting the program :  `bye`  
-This command allows the user to exit the Duke application.
+This command allows the user to exit and closes the Duke application.
 * __Example of usage__:  
     `bye`
     

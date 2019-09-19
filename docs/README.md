@@ -32,8 +32,11 @@ track in this era of increasingly busy lifestyle.
 ## 3. Getting Started
 
 ### 3.1 Install Duke
-Go to [Duke](https://github.com/honhaochen/duke). Click `clone or download` and download the zip file. 
-Extract the `jar` file and you may start having fun with it! 
+* Go to [Duke](https://github.com/honhaochen/duke). 
+* Click `clone or download` and download the zip file. 
+* Extract the `jar` file.
+* Create a folder name `data` along side with your `jar` file to save your progress inside it.
+* You may start having fun with it now! 
 
 ### 3.2 How to use
 

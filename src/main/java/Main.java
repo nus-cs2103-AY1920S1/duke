@@ -1,4 +1,3 @@
-import duke.Duke;
 import javafx.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +12,6 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
-
     /**
      * Starts the GUI stage for Duke application.
      * @param stage the javafx stage.
@@ -26,7 +23,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke();
+            stage.setTitle("Duke");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

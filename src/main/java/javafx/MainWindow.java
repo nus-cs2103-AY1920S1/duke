@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import ui.Ui;
 
 /**
  * Controller for javafx.MainWindow. Provides the layout for the other controls.
@@ -34,13 +35,10 @@ public class MainWindow extends AnchorPane {
 
     /**
      * initialise Duke.
-     * @param d the constructed Duke object instance.
      */
-    public void setDuke(Duke d) {
-        duke = d;
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.showWelcome(), dukeImage)
-        );
+    public void setDuke() {
+        Ui.bindWindow(this);
+        duke = new Duke();
     }
 
     /**
@@ -65,4 +63,13 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Shows messages for user.
+     * @param msg can be warnings, or some information regarding the system.
+     */
+    public void showMessage(String msg) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(msg, dukeImage)
+        );
+    }
 }

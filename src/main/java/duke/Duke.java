@@ -9,6 +9,8 @@ import task.TaskList;
 import task.UndoStack;
 import ui.Ui;
 
+import java.io.IOException;
+
 /**
  * Main Duke bot class.
  * Used to instantiate your personal Duke bot.
@@ -25,11 +27,11 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
+        ui.showWelcome();
         try {
             storage = new Storage("data/tasks.txt");
-        } catch (DukeException e) {
-            System.err.println(e);
-            System.out.println("You can still use Duke, but progress will not be saved");
+        } catch (IOException e) {
+            ui.showStorageError();
             storage = new FakeStorage();
         }
 
@@ -38,7 +40,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            System.out.println(ui.showLoadingError());
+            ui.showTaskLoadingError();
             tasks = new TaskList();
         }
 
@@ -53,15 +55,7 @@ public class Duke {
             Command c = Parser.parse(command);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            return ui.showError(e.getMessage());
+            return e.getMessage();
         }
-    }
-
-    /**
-     * Outputs a welcome message when Duke is started.
-     * @return the welcome message as String
-     */
-    public String showWelcome() {
-        return ui.showWelcome();
     }
 }

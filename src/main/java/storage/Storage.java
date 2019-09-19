@@ -1,14 +1,15 @@
 package storage;
 
 import exception.DukeException;
+import task.Deadline;
+import task.Event;
 import task.Task;
 import task.TaskList;
 import task.ToDo;
-import task.Event;
-import task.Deadline;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -26,13 +27,12 @@ public class Storage {
      * Storage Constructor.
      * @param filepath the file location in local pc.
      */
-    public Storage(String filepath) throws DukeException {
+    public Storage(String filepath) throws IOException {
         this.filepath = filepath;
-        try {
-            this.sc = new Scanner(new File(this.filepath));
-        } catch (FileNotFoundException e) {
-            throw new DukeException("No such file exits");
-        }
+
+        File file = new File(this.filepath);
+        file.createNewFile(); // This should create a new file if file is not already exists.
+        this.sc = new Scanner(new File(this.filepath));
 
         assert sc != null : "Scanner should not be NULL";
         assert filepath != null : "Filepath should not be NULL";
@@ -70,7 +70,7 @@ public class Storage {
                 } else if (input[0].equals("[E]")) {
                     tasks.add(new Event(input[1], input[2], input[3]));
                 } else {
-                    continue;
+                    throw new DukeException("Load fails");
                 }
             }
             return tasks;

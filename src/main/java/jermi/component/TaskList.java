@@ -56,6 +56,7 @@ public class TaskList {
      *
      * @param index Index (starting from 1) of task.
      * @return Task of the specified index.
+     * @throws JermiException {@link InvalidIndexException}.
      */
     public Task getTask(int index) throws JermiException {
         try {
@@ -69,6 +70,7 @@ public class TaskList {
      * Removes the task of the specified index in the list.
      *
      * @param index Index (starting from 1) of task.
+     * @throws JermiException {@link InvalidIndexException}.
      */
     public void remove(int index) throws JermiException {
         try {

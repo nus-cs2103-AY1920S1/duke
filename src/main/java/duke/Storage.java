@@ -1,8 +1,6 @@
 package duke;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
@@ -10,13 +8,25 @@ public class Storage {
     int no_of_task = 0;
     ArrayList<Task> taskList = new ArrayList<Task>();
     String filePath;
+    File file;
 
-    Storage(String filePath) {                   //constructor: receiving the filepath
+    Storage(String filePath) throws IOException {                   //constructor: receiving the filepath
         this.filePath = filePath;
+        File temp = new File(filePath);
+        if (temp.exists()) {
+            file = temp;
+        }else{
+            File dir = new File("src");
+            if(!dir.exists()) {
+                dir.mkdir();
+            }
+            file = new File("src", "Duke.txt");
+            file.createNewFile();
+        }
     }
 
     //////////////////////////// LOAD FILE Method /////////////////////////////////////////////
-    ArrayList<Task> load(){                      //loads the file onto an arraylist & returns the arrayList
+    public ArrayList<Task> load(){                      //loads the file onto an arraylist & returns the arrayList
         try {
         char type;
         int status;
@@ -24,7 +34,7 @@ public class Storage {
         String time;
         String strCurrentLine;
         String des_time;    //a substring for duke.Task description onwards
-        objReader = new BufferedReader(new FileReader(filePath));
+        objReader = new BufferedReader(new FileReader(file));
 
 
         while ((strCurrentLine = objReader.readLine()) != null) {
@@ -66,26 +76,18 @@ public class Storage {
 
   ////////////////////////////////// SAVE FILE Method ///////////////////////////////////////////////////////
 
-  public static void AutoSave(TaskList tasks, int no_of_task) throws IOException {
+  public void AutoSave(TaskList tasks, int no_of_task) throws IOException {
       System.out.println("System performing autosave");
-      WriteFile data = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt");
-      WriteFile data_append = new WriteFile("D:\\madae\\School\\cs2103T\\IdeaProjects\\DUKE\\src\\main\\java\\duke\\Duke.txt", true);
+      FileWriter data = new FileWriter(file);
 
       for (int i = 0; i < no_of_task; i++) {
-          if(i>0){
               if(tasks.taskList.get(i).type == 'T')
-                  data_append.writeToFile(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description);
+                  data.write(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + System.getProperty( "line.separator" ));
               else
-                  data_append.writeToFile(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + " | " + tasks.taskList.get(i).get_TimeFrame());
-          }
-          else{
-              if(tasks.taskList.get(i).type == 'T')
-                  data.writeToFile(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description);
-              else
-                  data.writeToFile(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + " | " + tasks.taskList.get(i).get_TimeFrame());
-          }
-      }
+                  data.write(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + " | " + tasks.taskList.get(i).get_TimeFrame() + System.getProperty( "line.separator" ));
 
+      }
+      data.close();
   }
  ////////////////////////////////////////  End of SAVE FILE Method  ///////////////////////////////////////////
 

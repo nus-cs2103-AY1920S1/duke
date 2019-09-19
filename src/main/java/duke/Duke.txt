@@ -1,2 +1,1 @@
-T | 0 | borrow
-D | 0 | meet | Sunday
+T | 0 | borrow book

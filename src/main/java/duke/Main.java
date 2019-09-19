@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -13,7 +14,11 @@ import javafx.application.Application;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("src/main/java/duke.Duke.txt");
+    //private Duke duke = new Duke("src/main/java/duke.Duke.txt");
+    private Duke duke = new Duke("src" + File.separator + "Duke.txt");
+
+    public Main() throws IOException {
+    }
 
     @Override
     public void start(Stage stage) {

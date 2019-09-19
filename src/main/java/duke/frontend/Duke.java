@@ -12,6 +12,9 @@ public class Duke {
     private Storage storage;
     private TaskList list;
 
+
+    public Duke() {
+    }
     /**
      * Constructs a Duke and specifies its file path.
      *
@@ -55,5 +58,4 @@ public class Duke {
     public String getResponse(String input) throws DukeException {
         return ui.start(input);
     }
-
 }

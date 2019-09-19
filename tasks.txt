@@ -1,12 +1,2 @@
-todo>>1>>run
-deadline>>1>>run again >>12/12/2012 2000
-todo>>1>>run faster
-deadline>>1>>party hard >>13/12/1111 1200
-deadline>>0>>midterms >>12/12/2012 2300
-event>>0>>party >>03/12/2012 2359
-todo>>0>>run
-event>>0>>run >>11/09/2019 1800
-event>>0>>run again >>11/09/2019 2133
-todo>>0>>snap finger
-todo>>0>>clear
-event>>0>>kill yourself >>11/11/2019 1000
+todo>>0>>eat
+deadline>>0>>run >>12/12/0014 2009

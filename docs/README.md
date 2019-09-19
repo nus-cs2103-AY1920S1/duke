@@ -4,6 +4,8 @@ It is able to create, update, delete and search for various types of tasks such 
 Furthermore, you can update these tasksto be marked as done once you have finished them. 
 The chatbot also automatically stores these tasks on exit 
 and automatically loads them up again when you start it up the next time. Enjoy!
+
+[![Ui.png](https://i.postimg.cc/cJ9Yy42L/Ui.png)](https://postimg.cc/d7CDGvJb)
  
 ## Features 
 * Support for Todos, Events and Deadlines.
@@ -15,8 +17,10 @@ and automatically loads them up again when you start it up the next time. Enjoy!
 
 ## Usage
 
-`deadline <desciption> /by <date> <time>`\
+`deadline <desciption> /by <date> <time>`
+
 `event <description> /at <date> <time>`  
+
 `todo <description>` 
 
 Create new Tasks for Duke to keep track of. Duke will display the Task you have input and update you on the number of Tasks you currently have.

@@ -23,7 +23,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         try {
-            storage = new Storage("/users/junhup/desktop/duke/src/duke.txt");
+            storage = new Storage("duke.txt");
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showError(e);

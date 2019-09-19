@@ -26,8 +26,8 @@ public class MainWindow extends AnchorPane {
     
     private Duke duke;
     
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/bear1.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bear2.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/bear1.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bear2.png"));
     
     @FXML
     public void initialize() {
@@ -51,6 +51,9 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    
+        //@@author {Parcly-Taxel}-reused
+        //{Exits the program after a set timing of input command 'bye'}
         if (input.equals("bye")) {
             Timer tm = new Timer();
             tm.schedule(new TimerTask() {
@@ -60,6 +63,7 @@ public class MainWindow extends AnchorPane {
                 }
             }, 2000);
         }
+        //@@author
     }
     
     /**

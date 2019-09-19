@@ -1,14 +1,10 @@
 import java.util.ArrayList;
 
-public class Ui {
+class Ui {
     private String output;
 
     String getOutput() {
         return this.output;
-    }
-
-    String greet() { //duke greet
-        return "Hello! I'm Duke.\n" + "What can I do for you?\n";
     }
 
     void setToFarewell() {
@@ -19,9 +15,8 @@ public class Ui {
 
         output = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
-            String num = "" + (i + 1);
-            output += "     " + num + ".[" + taskList.getTaskList().get(i).getStatusIcon() + "] "
-                    + taskList.getTaskList().get(i).toString() + "\n";
+            int taskNum = i + 1;
+            output += taskNum + ". " + taskList.getTaskList().get(i).toString() + "\n";
         }
     }
 
@@ -66,44 +61,16 @@ public class Ui {
         output = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < relatedTasks.size(); i++) {
             int num = i + 1;
-            output += num + "." + relatedTasks.get(i);
+            output += num + ". " + relatedTasks.get(i);
         }
     }
 
     void setToSort(ArrayList<Task> taskList, String sortType) {
-        output = "The list have been sorted according to: " + sortType + "\n    ";
+        output = "The list is now sorted according to: " + sortType + "\n    ";
         for (int i = 0; i < taskList.size(); i++) {
             int taskNum = i + 1;
-            output += taskNum + "." + taskList.get(i) + "\n    ";
+            output += taskNum + ". " + taskList.get(i) + "\n";
         }
     }
 
 }
-
-/*
-import org.junit.jupiter.api.Test;
-  import static org.junit.jupiter.api.Assertions.assertEquals;  
-
-public class TodoTest { 
-    @Test 
-    private void printTodo() { 
-        Todo todo = new Todo("learn guitar");  
-        assertEquals("[T][✘] learn guitar", todo.toString()); 
-    } 
-}
-
-
-import org.junit.jupiter.api.Test;
-  import static org.junit.jupiter.api.Assertions.assertEquals;  
-
-public class TodoTest { 
-    @Test 
-    private void printTodo() { 
-        Todo todo = new Todo("learn guitar");  
-        assertEquals("[T][✘] learn guitar", todo.toString()); 
-    } 
-}
-
-
-
- */

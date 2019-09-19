@@ -12,7 +12,7 @@ import java.io.File;
  * Deals with loading tasks from the file and saving tasks in the file
  */
 
-public class Storage {
+class Storage {
 
     private static File file;
 
@@ -27,12 +27,10 @@ public class Storage {
      */
 
     static ArrayList<Task> load() {
-
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-
                 String[] task = sc.nextLine().split("\\|");
                 String taskType = task[0].trim();
                 boolean isTaskDone = task[2].trim().equals("1");
@@ -75,23 +73,22 @@ public class Storage {
      */
 
 
-    public static void saveTaskList(List<Task> taskList) {
+    static void saveTaskList(List<Task> taskList) {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task task : taskList) {
+                String str;
                 if (task instanceof Event) {
-                    String str = String.format("E | %s | %s | %s\n", task.isDone() ? "1" : "0",
+                    str = String.format("E | %s | %s | %s\n", task.isDone() ? "1" : "0",
                             task.getDescription(), ((Event) task).getAt());
-                    fw.write(str);
                 } else if (task instanceof Deadline) {
-                    String str = String.format("D | %s | %s | %s\n", task.isDone() ? "1" : "0",
+                    str = String.format("D | %s | %s | %s\n", task.isDone() ? "1" : "0",
                             task.getDescription(), ((Deadline) task).getBy());
-                    fw.write(str);
                 } else {
-                    String str = String.format("T | %s | %s\n", task.isDone() ? "1" : "0",
+                    str = String.format("T | %s | %s\n", task.isDone() ? "1" : "0",
                             task.getDescription());
-                    fw.write(str);
                 }
+                fw.write(str);
             }
             fw.close();
         } catch (IOException e) {

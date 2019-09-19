@@ -11,6 +11,6 @@ public class EventSort implements Comparator<Task> {
         } else if (!(t2 instanceof Event)) {
             return -1;
         }
-        return ((Event) t1).getEventTime().compareTo(((Event) t2).getEventTime());
+        return ((Event) t1).getAt().compareTo(((Event) t2).getAt());
     }
 }

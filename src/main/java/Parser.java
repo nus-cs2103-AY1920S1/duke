@@ -2,6 +2,7 @@ import java.text.ParseException;
         import java.text.SimpleDateFormat;
         import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Deals with making sense of the user command
@@ -43,7 +44,7 @@ class Parser {
                 Task todoTask = new Todo(todoDescription);
                 taskList.getTaskList().add(todoTask);
                 ui.setToTodo(todoTask, taskList);
-                Storage.saveTaskList(taskList.getTaskList());//saves file
+                Storage.saveTaskList(taskList.getTaskList()); //saves file
                 break;
             case "deadline":
                 try {
@@ -122,10 +123,13 @@ class Parser {
                 try {
                     String sortType = input.substring(6).trim();
                     if (sortType.equals("event")) {
-                        Collections.sort(taskList.getTaskList(), new EventSort());
+                        Comparator<Task> com = new EventSort();
+                        Collections.sort(taskList.getTaskList(), com);
+                        System.out.println("it was here");
                     } else {
-                        throw new Exception();
-                    } ui.setToSort(taskList.getTaskList(), input);
+                        throw new Exception("☹ OOPS!!! Sort category is either event or deadline");
+                    }
+                    ui.setToSort(taskList.getTaskList(), input);
                 } catch (Exception e) {
                     throw new DukeException("☹ OOPS!!! Your input format is wrong. Use: sortby (type of sort)");
                 }

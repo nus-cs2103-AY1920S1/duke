@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event extends Task {
@@ -8,16 +10,15 @@ public class Event extends Task {
         this.at = at;
     }
 
-    Date getAt() {
-        return this.at;
+    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HHmm");
+
+    String getAt() {
+        return dateFormat.format(this.at);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return "[E]" + super.toString() + " (at: " + dateFormat.format(this.at) + ")";
     }
 
-    public Date getEventTime() {
-        return this.at;
-    }
 }

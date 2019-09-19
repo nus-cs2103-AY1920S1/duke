@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.text.ParseException;
 
 /**
@@ -15,10 +14,10 @@ public class Duke {
      * Initializes the Duke application and the storage file.
      */
 
-    public void DukeStart() {
+    void DukeStart() {
         ui = new Ui();
         Storage storage = new Storage("../duke.txt");
-        taskList = new TaskList(Storage.load());
+        taskList = new TaskList(storage.load());
         parser = new Parser();
     }
 

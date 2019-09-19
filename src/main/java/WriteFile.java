@@ -1,16 +1,30 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
 
 public class WriteFile {
-    private String  file_path;
+    private String  filePath;
     private boolean append_to_file = false;
 
-    public WriteFile(String file_path, boolean append_value) {
-        this.file_path = file_path;
+    public WriteFile(String path,boolean append_value) {
+        this.filePath = path;
         append_to_file = append_value;
     }
+    public void createFile() {
+        try {
+            File file = new File(filePath);
+            if (file.exists()) {
+
+                return;
+            }
+            file.createNewFile();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public void writeToFile( String textLine ) {
         /**
          *  Writes specified text to file in filepath specified upon construction
@@ -22,7 +36,7 @@ public class WriteFile {
          * @return none
          */
         try {
-            FileWriter write = new FileWriter(file_path,append_to_file);
+            FileWriter write = new FileWriter(filePath,append_to_file);
             BufferedWriter write_line = new BufferedWriter(write);
             write_line.write(textLine);
             write_line.newLine();
@@ -30,7 +44,6 @@ public class WriteFile {
         } catch (IOException e) {
             System.out.println("No can do son.");
         }
-
     }
     public void setAppend(boolean append) {
         append_to_file = append;

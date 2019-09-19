@@ -39,6 +39,7 @@ public class Storage {
         String line = "";
         // FileReader reads text files in the default encoding.
         FileReader fileReader = new FileReader(path);
+        System.out.println(path);
         // always need to wrap file reader in buffer reader
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         while((line = bufferedReader.readLine()) != null) {
@@ -55,6 +56,7 @@ public class Storage {
          *   @params String task: line of un-parsed task
          *   @returns none
          */
+        System.out.println("hi");
         ArrayList<Task> taskArr = tasks.getList();
         // converts tasks in string from storage to taskarr
         if (task.equals("")) {
@@ -89,6 +91,7 @@ public class Storage {
          *   @returns none
          *
          */
+        txtFile.writeToFile(""); // overwrite any existing
         ArrayList<Task> taskArr = tasks.getList();
         for (Task t: taskArr) {
             String mainTxt = "";

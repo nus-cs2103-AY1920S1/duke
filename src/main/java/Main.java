@@ -6,7 +6,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
-    private Duke dukeBot = new Duke("C:\\Users\\Seb\\duke\\storage\\duke.txt");
+    //private Duke dukeBot = new Duke();
 
     public static void main(String[] args) {
         launch();
@@ -19,7 +19,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Soviet Comrade");
-            fxmlLoader.<MainWindow>getController().setDuke(dukeBot);
+            //fxmlLoader.<MainWindow>getController().setDuke(dukeBot);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,11 +6,12 @@ public class Duke {
     // Classes used in Duke
     private Storage storage;
     private Ui ui;
+    private String path;
     private TaskList taskList = new TaskList();
     private WriteFile data;
     private Parser parser = new Parser();
 
-    public Duke(String path) {
+    public Duke() {
         /**
          *  init 3 main components, ui storage and tasklist
          *  then init storage: load tasks into tasklist
@@ -19,23 +20,30 @@ public class Duke {
          *  @params String of path where tasks text file is
          *  @return none
          */
+        String fileSeparator = System.getProperty("file.separator");
+        path = "." +fileSeparator+"duke.txt";
+        data = new WriteFile(path,false);
+        storage = new Storage(data,path,taskList);
+        ui = new Ui();
+        ui.link(taskList,storage);
+    }
+    public String dukeInit() {
+        String welcome = ui.showWelcome();
+        data.createFile();
+        System.out.println("hi");
         try {
-            data = new WriteFile(path,false);
-            ui = new Ui();
-            Storage storage = new Storage(data,path,taskList);
             storage.initStorage();
-            ui.link(taskList,storage);
-            ui.showWelcome();
+
         } catch (DukeException ex) {
-            ex.getMessage();
+            return ex.getMessage();
         } catch(ParseException ex) {
-            System.out.println("wtf dude");
-        } catch(
-        FileNotFoundException ex) {
-            System.out.println("I can't see");
-        } catch(
-        IOException ex) {
-            System.out.println("That sign will stop me, cos I can't read!");
+            return ex.getMessage();
+        } catch(FileNotFoundException ex) {
+            welcome += " Creating a new paper for your chores.";
+        } catch(IOException ex) {
+            return "That sign will stop me, cos I can't read!";
+        } finally {
+            return welcome;
         }
     }
     public String getResponse(String inputOrig) {

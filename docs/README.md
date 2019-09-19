@@ -2,8 +2,13 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### Manage Your Life!
+Do normal calendars have too much functionality?
+HustlePad provides just 3 calendaring functions - Todo, Event, and Deadline!
+
+### Command-Line Interface
+Do you want a BLAST FROM THE PAST? HustlePad is created 100% on 2008's JavaFX.
+Combined with the CLI interface, experience life before the days of the Palm Pilot!
 
 ## Usage
 

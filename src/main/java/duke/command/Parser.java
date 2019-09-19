@@ -19,17 +19,17 @@ public class Parser {
     public Parser(String command) throws DukeException {
         command = command.trim();
         String[] commandWords = command.split(" ");
-        String order = commandWords[0];
-        order = order.toLowerCase();
+        String caseSensitiveOrder = commandWords[0];
+        String order = caseSensitiveOrder.toLowerCase();
         boolean addedTask = true;
-        if (command.split(order  + " ").length == 1
+        if (command.split(caseSensitiveOrder  + " ").length == 1
                 && (order.equals("event") || order.equals("todo") || order.equals("deadline"))) {
             throw new DukeException(" :( OOPS!!! The description of " + order + "s cannot be empty.");
         }
         if (order.equals("todo")) {
             type = "todo";
-            if (command.split("todo ").length > 1) {
-                list.add(command.split("todo ")[1]);
+            if (command.split(caseSensitiveOrder + " ").length > 1) {
+                list.add(command.split(caseSensitiveOrder + " ")[1]);
             } else {
                 throw new DukeException(" :( OOPS!!! Please provide description.");
             }
@@ -38,7 +38,7 @@ public class Parser {
                 throw new DukeException(" :( OOPS!!! An event must have a start and end time. Use '/at'.");
             }
             type = "event";
-            String instruction = command.split("event ")[1];
+            String instruction = command.split(caseSensitiveOrder + " ")[1];
             String[] details = instruction.split(" /at ");
             if (details.length != 2) {
                 throw new DukeException(" :( OOPS!!! Invalid Format. Either Description or Date"
@@ -92,7 +92,7 @@ public class Parser {
             if (command.split("/by").length == 1) {
                 throw new DukeException(" :( OOPS!!! An deadline must have date and time. Use '/by'.");
             }
-            String instruction = command.split("deadline ")[1];
+            String instruction = command.split(caseSensitiveOrder + " ")[1];
             String[] details = instruction.split(" /by ");
             if (details.length != 2) {
                 throw new DukeException(" :( OOPS!!! Invalid Format. Either Description or DateAndTime not provided.");
@@ -127,12 +127,12 @@ public class Parser {
             list.add("" + minutes);
         } else if (order.equals("done") || order.equals("delete")) {
             type = order;
-            list.add(command.split(order + " ")[1]);
+            list.add(command.split(caseSensitiveOrder + " ")[1]);
         } else if (order.equals("list") || order.equals("bye") || order.equals("deletedone")) {
             type = order;
         } else if (order.equals("find")) {
             type = "find";
-            list.add(command.split("find ")[1]);
+            list.add(command.split(caseSensitiveOrder + " ")[1]);
         } else {
             valid = false;
         }

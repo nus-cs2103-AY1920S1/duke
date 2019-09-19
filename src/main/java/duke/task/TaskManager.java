@@ -144,11 +144,11 @@ public class TaskManager {
      * Add reminder to the specified index from the task list.
      * @param index the index of the task in the task list
      * @param date the date to set the reminder at
-     * @return
+     * @return a string representation of the task in which the reminder was set
      */
     public String remind(int index, Date date) {
         assert(date != null);
-        return taskList.remind(index - 1, date).toString();
+        return taskList.remind(index - 1, date);
     }
 
 }

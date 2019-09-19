@@ -14,6 +14,7 @@ public class Event extends Task {
      * Constructs a new event task with description and the date the event will be held at that has not been done.
      * @param description the description of the event task
      * @param at the date the event will be held at
+     * @throws InvalidDateTimeException if the date is invalid
      */
     public Event(String description, String at) throws InvalidDateTimeException {
         super(description, DateParser.parse(at));

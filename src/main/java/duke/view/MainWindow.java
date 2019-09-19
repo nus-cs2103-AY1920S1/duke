@@ -85,14 +85,32 @@ public class MainWindow extends BorderPane {
         String input = userInput.getText();
         scrollBox.getChildren().addAll(DialogBox.getUserDialog(input), DialogBox.getDukeDialog(input));
         userInput.clear();
-        if (input.equals("bye")) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished(event -> {
-                Platform.exit();
-                System.exit(0);
-            });
-            delay.play();
+        if (isExit(input)) {
+            exitMainWindow();
         }
+    }
+
+    /**
+     * Exits the main window and closes the application when called.
+     */
+    private void exitMainWindow() {
+        userInput.setDisable(true);
+        sendButton.setDisable(true);
+        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        delay.setOnFinished(event -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        delay.play();
+    }
+
+    /**
+     * Checks if the user input is a {@link duke.command.ExitCommand} that tells the program to exit.
+     * @param input
+     * @return true if the user input is the bye command, false otherwise.
+     */
+    private boolean isExit(String input) {
+        return input.equals("bye");
     }
 
 }

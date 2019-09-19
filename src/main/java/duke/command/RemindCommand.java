@@ -25,11 +25,6 @@ public class RemindCommand implements Command {
 
     Date date;
 
-    /**
-     * Constructs a new done command with the specified index of the task to be marked as done in the list of tasks.
-     * @param index the index of the task to be mark as done in the list of tasks
-     * @throws InvalidParameterException if the index of the task specified is not a number
-     */
     public RemindCommand(String line) throws InvalidParameterException {
         String[] arr = line.split(" ");
         try {

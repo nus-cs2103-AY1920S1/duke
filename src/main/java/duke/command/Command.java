@@ -16,6 +16,8 @@ public interface Command {
      * @param taskManager the list of taskManager
      * @param ui the user interface
      * @param storage the storage for the taskManager
+     * @return a string representation of the output after command execution
+     * @throws InvalidParameterException if the parameters passed into the command are invalid
      */
     String execute(TaskManager taskManager, UserInterface ui, Storage storage) throws InvalidParameterException;
 

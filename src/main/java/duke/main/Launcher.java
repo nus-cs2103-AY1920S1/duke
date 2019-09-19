@@ -7,6 +7,10 @@ import javafx.application.Application;
  */
 public class Launcher {
 
+    /**
+     * Starts the duke application.
+     * @param args the array of arguments from the command line
+     */
     public static void main(String[] args) {
         Application.launch(duke.main.Main.class, args);
     }

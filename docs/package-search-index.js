@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"duke.command"},{"l":"duke.exception"},{"l":"duke.formatter"},{"l":"duke.main"},{"l":"duke.parser"},{"l":"duke.storage"},{"l":"duke.task"},{"l":"duke.ui"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"duke.command"},{"l":"duke.exception"},{"l":"duke.extension"},{"l":"duke.formatter"},{"l":"duke.main"},{"l":"duke.parser"},{"l":"duke.storage"},{"l":"duke.task"},{"l":"duke.ui"},{"l":"duke.view"}]

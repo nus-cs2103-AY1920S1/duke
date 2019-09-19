@@ -9,33 +9,26 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * This is the list of task items. This supports add, edit, delete operations. When a add, edit or delete operation is
- * to be performed, the <code>TaskManager</code> class provides an abstraction to support these operations.
+ * This is the schedule of task items. This supports add, edit, delete operations. When a add, edit or delete
+ * operation is to be performed, the <code>TaskManager</code> class provides an abstraction to support these operations.
+ * The tasks are insertion into the schedule by the order of the date field for the task date.
  */
 public class Schedule {
-
     /**
-     * This is the list of task items.
+     * This is the list of task items. It acts as the schedule
      */
-
     private List<Task> schedule;
 
     /**
-     * Constructs a new list of tasks.
+     * Constructs a new schedule.
      */
     public Schedule() {
         this.schedule = new ArrayList<>();
     }
 
     /**
-     * Constructs a new list of tasks from a stream of line. This stream of lines will be parsed by
-     * {@link FileToTaskParser} to each individual tasks that will be added individually to form a list of tasks.
-     * @param lines the stream of lines to be parsed.
-     */
-
-    /**
-     * Appends the task to the end of the list of the tasks.
-     * @param task the task to be appended to the list
+     * Inserts the task into the schedule.
+     * @param task the task to be inserted into the schedule
      */
     public void add(Task task) {
         assert(task != null);
@@ -44,9 +37,8 @@ public class Schedule {
     }
 
     /**
-     * Removes the task at the specified index from the list of tasks.
-     * @param index the index of the task to be removed
-     * @return a string representation of the task removed to be printed on a user interface.
+     * Removes the task from the schedule.
+     * @param task the task to be deleted from the schedule
      */
     public void delete(Task task) {
         assert(task != null);
@@ -54,8 +46,9 @@ public class Schedule {
     }
 
     /**
-     * Returns the number of tasks in the list.
-     * @return the number of tasks in the list.
+     * Views the current schedule for the specified date
+     * @param date the specified date for schedule view
+     * @return the date for the schedule to be viewed
      */
     public String view(String date) {
         StringBuilder outputBuilder = new StringBuilder();
@@ -69,8 +62,8 @@ public class Schedule {
     }
 
     /**
-     * Returns a string representation of the list of tasks.
-     * @return a string representation of the list of tasks
+     * Views the schedule.
+     * @return a string representation of the schedule of task.
      */
     public String view() {
         StringBuilder outputBuilder = new StringBuilder();
@@ -91,6 +84,11 @@ public class Schedule {
         return outputBuilder.toString();
     }
 
+    /**
+     * Creates a new header to display for view.
+     * @param title the title of the header
+     * @return a string representation of the header
+     */
     private String createNewHeaderToDisplay(String title) {
         StringBuilder outputBuilder = new StringBuilder("    ======================== ");
         outputBuilder.append(title);
@@ -98,6 +96,11 @@ public class Schedule {
         return outputBuilder.toString();
     }
 
+    /**
+     * Adds the task to view.
+     * @param task the task to be added to view
+     * @return a string representation of the task to be added to view
+     */
     private String addTaskToView(Task task) {
         assert(task != null);
         StringBuilder outputBuilder = new StringBuilder();
@@ -107,6 +110,9 @@ public class Schedule {
         return outputBuilder.toString();
     }
 
+    /**
+     * Runs insertion sort on the schedule.
+     */
     private void insertionSortSchedule() {
         Comparator<Task> comparator = new InsertionSortComparator();
         for (int i = schedule.size() - 1; i > 0; i--) {

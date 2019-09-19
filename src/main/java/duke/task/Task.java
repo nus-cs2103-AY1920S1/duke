@@ -19,9 +19,14 @@ public class Task {
      * This is the description of the task.
      */
     protected String description;
-
+    /**
+     * This is the container for the date field of the task. The container may be empty if it is a {@link Todo} task.
+     */
     protected Optional<Date> taskDate = Optional.empty();
-
+    /**
+     * This is the container for the date field of the reminder set for the task. The container may be empty if a
+     * reminder is not set for the task.
+     */
     protected Optional<Date> reminderDate = Optional.empty();
 
 
@@ -31,13 +36,18 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructs a new task with description that is not done.
+     * Constructs a new task with description.
      * @param description the description for the task
      */
     public Task(String description) {
         this.description = description;
     }
 
+    /**
+     * Constructs a new task with description and date field for the task.
+     * @param description the description for the task
+     * @param taskDate the date field for the task
+     */
     public Task(String description, Date taskDate) {
         this.description = description;
         this.taskDate = Optional.ofNullable(taskDate);
@@ -58,6 +68,10 @@ public class Task {
         isDone = true;
     }
 
+    /**
+     * Displays the reminder as a string representation if present.
+     * @return a string representation of the reminder and a empty string otherwise
+     */
     public String displayReminderIfPresent() {
         if (reminderDate.isPresent()) {
             return "Reminder set to: " + reminderDate.get().toString();
@@ -66,12 +80,19 @@ public class Task {
         }
     }
 
+    /**
+     * Sets a reminder for the task for the specified date.
+     * @param date the date of the reminder
+     */
     public void setReminder(Date date) {
         assert(date != null);
         reminderDate = Optional.ofNullable(date);
         new Reminder(this, date);
     }
 
+    /**
+     * Clears the reminder set for the task.
+     */
     public void clearReminder() {
         reminderDate = Optional.empty();
     }
@@ -85,10 +106,19 @@ public class Task {
         return description.contains(keyword);
     }
 
+    /**
+     * Gets the task date for the task if present.
+     * @return the task date for the task if present
+     * @throws NullDateException if the task date is absent
+     */
     public Date getTaskDate() throws NullDateException {
         return taskDate.orElseThrow(NullDateException::new);
     }
 
+    /**
+     * Displays a string representation of the task date if present.
+     * @return a string representation of the task date if present, and an empty string otherwise.
+     */
     public String displayTaskDateIfPresent() {
         if (taskDate.isPresent()) {
             return DateFormatter.format(taskDate.get()).substring(0,10);
@@ -97,6 +127,11 @@ public class Task {
         }
     }
 
+    /**
+     * Encodes a date field of the task for storage.
+     * @param optionalDate the optional date to encode
+     * @return a string representation of the date field if present and <code>"null"</code> otherwise.
+     */
     public String encodeOptionalDate(Optional<Date> optionalDate) {
         if (optionalDate.isPresent()) {
             return DateFormatter.format(optionalDate.get());
@@ -105,6 +140,10 @@ public class Task {
         }
     }
 
+    /**
+     * Encodes the task into a format for storage purposes.
+     * @return a string representation of the encoded task
+     */
     public String encode() {
         StringBuilder outputBuilder = new StringBuilder("" + isDone);
         outputBuilder.append(',');
@@ -116,6 +155,11 @@ public class Task {
         return outputBuilder.toString();
     }
 
+    /**
+     * Shows full information for the task with its task description, date, status and the reminder date if present.
+     * @return a string representation of the full information of the task with its corresponding description, date,
+     * status and the reminder date if present
+     */
     public String showFullInformation() {
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append(toString());
@@ -136,14 +180,27 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Mark the task as done if the string passed in is equal to <code>"true"</code>.
+     * @param isDone a string representation of whether the task is done.
+     */
     public void markAsDoneIfTrue(String isDone) {
         this.isDone = isDone.equals("true");
     }
 
+    /**
+     * Mark the task as done if the boolean value passed in is true.
+     * @param isDone the boolean value of whether the task is done
+     */
     public void markAsDoneIfTrue(Boolean isDone) {
         this.isDone = isDone;
     }
 
+    /**
+     * Sets the reminder for the task at the specified date if a string representation of the remainder date is valid.
+     * @param reminderDate the string representation to set the reminder for the date
+     * @throws InvalidDateTimeException if the string representation of the date passed in has a invalid format
+     */
     public void setReminderIfPresent(String reminderDate) throws InvalidDateTimeException {
         boolean isPresent = !reminderDate.equals("null");
         if (isPresent) {

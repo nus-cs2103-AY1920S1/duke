@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 /**
  * This is the list of task items. This supports add, edit, delete operations. When a add, edit or delete operation is
- * to be performed, the <code>TaskManager</code> class provides an abstraction to support these operations.
+ * to be performed, the <code>TaskList</code> class provides an abstraction to support these operations.
  */
 public class TaskList {
 
@@ -121,12 +121,18 @@ public class TaskList {
         return taskList.stream().map(x -> TaskToFileParser.parse(x));
     }
 
-    public Task remind(int index, Date date) {
+    /**
+     * Sets a reminder on the specified date for the task in the task list at the specified index.
+     * @param index the index for the task to set the reminder on
+     * @param date the  date for the reminder
+     * @return a string representation of the reminded taskf
+     */
+    public String remind(int index, Date date) {
         assert(index >= 0);
         assert(date != null);
         Task remindedTask = taskList.get(index);
         remindedTask.setReminder(date);
-        return remindedTask;
+        return remindedTask.toString();
     }
 
 }

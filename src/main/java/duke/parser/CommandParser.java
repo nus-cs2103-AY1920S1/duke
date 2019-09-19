@@ -29,6 +29,7 @@ public class CommandParser {
      * @param fullCommand the full command to be parse
      * @return a command
      * @throws InvalidCommandException if a invalid command is entered by the user
+     * @throws InvalidParameterException if the parameters passed into the command is invalid
      */
     public static Command parse(String fullCommand) throws InvalidCommandException, InvalidParameterException {
         String[] arr = fullCommand.split(" ");
@@ -64,10 +65,22 @@ public class CommandParser {
         }
     }
 
+    /**
+     * Gets the command type from the array.
+     * @param arr the array which contains the information
+     * @return a string representation of the command type
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     private static String getCommand(String[] arr) throws ArrayStoreException {
         return arr[0];
     }
 
+    /**
+     * Gets the parameter for the task from the array.
+     * @param arr the array which contains the information
+     * @return a string representation of the parameter for the command
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     private static String getParameter(String[] arr) {
         return Arrays.stream(arr).skip(1).collect(Collectors.joining(" ")).trim();
     }

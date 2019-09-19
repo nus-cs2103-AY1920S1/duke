@@ -105,7 +105,7 @@ public interface UserInterface {
      * Shows a message that says that the reminder has been set.
      * @param task the task whose reminder has been set
      * @param dateToRemind the date of the reminder set
-     * @return
+     * @return a string representation of the reminder that has been set
      */
     String showSetReminder(String task, String dateToRemind);
 

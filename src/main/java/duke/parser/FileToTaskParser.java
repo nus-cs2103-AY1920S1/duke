@@ -63,22 +63,52 @@ public class FileToTaskParser {
         }
     }
 
+    /**
+     * Gets the type of the task from the array.
+     * @param arr the array which contains the information
+     * @return a string representation of the type of task
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     private static String getTask(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[0];
     }
 
+    /**
+     * Gets a string representation of the boolean value whether the task is done.
+     * @param arr the array which contains the information
+     * @return a string representation of the boolean value that indicates whether the task is done
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     private static String getIsDone(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[1];
     }
 
+    /**
+     * Gets the reminder of the task from the array.
+     * @param arr the array which contains the information
+     * @return a string representation of the reminder for the task
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     private static String getReminder(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[2];
     }
 
+    /**
+     * Gets the description of the task from the array.
+     * @param arr the array which contains the information
+     * @return a string representation of the task description
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     private static String getTaskDescription(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[3];
     }
 
+    /**
+     * Gets the date field of the task from the array.
+     * @param arr the array which contains the information
+     * @return a string representation of the date field for the task
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     private static String getTaskDate(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[4];
     }

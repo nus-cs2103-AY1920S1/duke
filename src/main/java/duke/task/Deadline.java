@@ -15,6 +15,7 @@ public class Deadline extends Task {
      * done.
      * @param description the description of the deadline task
      * @param by the date the task is due by
+     * @throws InvalidDateTimeException if the date is invalid
      */
     public Deadline(String description, String by) throws InvalidDateTimeException {
         super(description, DateParser.parse(by));

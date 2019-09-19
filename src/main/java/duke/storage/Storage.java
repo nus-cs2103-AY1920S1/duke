@@ -51,6 +51,7 @@ public class Storage {
      * Saves the stream of lines inside the file.
      * @param stream the stream of lines to be saved into the file
      * @throws IOException if an I/O error occurs
+     * @throws FailedToSaveIoException if the string cannot be saved to file
      */
     public void save(Stream<String> stream) throws FailedToSaveIoException, IOException {
         try {
@@ -67,6 +68,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the line to file using a writer.
+     * @param writer the writer used to write the line
+     * @param line the line to be written
+     * @throws UncheckedIOException
+     */
     private static void writeLine(BufferedWriter writer, String line) throws UncheckedIOException {
         try {
             writer.write(line);
@@ -75,6 +82,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new text file at the specified path <code>data/duke.txt</code> for storage purposes.
+     * @throws IOException if an I/O error occurs
+     */
     private static void createTextFile() throws IOException {
         File file = new File("data/duke.txt");
         file.getParentFile().mkdirs();

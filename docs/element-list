@@ -1,8 +1,10 @@
 duke.command
 duke.exception
+duke.extension
 duke.formatter
 duke.main
 duke.parser
 duke.storage
 duke.task
-duke.commandLineUserInterface
+duke.ui
+duke.view

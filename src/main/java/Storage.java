@@ -14,10 +14,13 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
+    private File file;
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String filePath) throws IOException {
+        this.file = new File(filePath);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
     }
 
     /**
@@ -102,8 +105,7 @@ public class Storage {
      * @return ArrayList of Tasks
      */
     public ArrayList<Task> getTasks() throws FileNotFoundException, ParseException {
-        File file = getFile(filePath);
-        assert file != null : "file should exist by now";
+        assert this.file != null : "file should exist by now";
         Scanner sc = new Scanner(file);
         ArrayList<Task> list = new ArrayList<>();
 

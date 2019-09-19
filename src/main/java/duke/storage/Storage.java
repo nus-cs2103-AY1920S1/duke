@@ -68,7 +68,7 @@ public class Storage {
                 default:
                     System.out.println("Unknown event type encountered.");
                 }
-                if (status.equals("[✓]")) {
+                if (status.equals("[\u2713]")) {
                     t.markAsDone();
                 }
                 list.add(t);

@@ -23,7 +23,7 @@ public abstract class Task {
      * @return completion status of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "✓" : "☓");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**

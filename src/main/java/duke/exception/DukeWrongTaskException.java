@@ -10,6 +10,6 @@ public class DukeWrongTaskException extends DukeException {
      * @param type the type of task with invalid description or date.
      */
     public DukeWrongTaskException(String type) {
-        super(String.format("☹ OOPS!!! The description or timing of %s is problematic.", type));
+        super(String.format("OOPS!!! The description or timing of %s is problematic.", type));
     }
 }

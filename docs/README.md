@@ -6,7 +6,7 @@ a virtual chatbot.
 ## 2. Features 
 > Note: Commands are all in small-case letters.
 ### 2.1 Add a task
----
+-
 There are 3 types of tasks that can be added into Duke's tasks list, namely *To Dos, Deadlines, and Events*.
 
 Command: `[TYPE OF TASK] [DESCRIPTION]`
@@ -33,14 +33,14 @@ Command: `event [Task Details] /at [DD/MM/YYYY HHMM]`
 Example: `event party /at 19/09/2019 1400`
 
 ### 2.2 List all tasks 
----
+-
 List all the tasks in the tasks list.
 
 Command: `list`
 
 
 ### 2.3 Mark a task as done
----
+-
 Mark a task in the tasks list as "Done" using the given index of the task.
 > You can check the index of the task by running a `list` command.
 
@@ -53,7 +53,7 @@ Index **must be a positive integer** and must be within the range of the task li
 
 
 ### 2.4 Delete a task 
----
+-
 Delete a task from the tasks list using the given INDEX of the task.
 > You can check the index of the task by running a `list` command.
 
@@ -66,7 +66,7 @@ Index **must be a positive integer** and must be within the range of the task li
 
 
 ### 2.5 Find tasks 
----
+-
 Find tasks that contain the KEYWORD given in their description and list them out.
 
 Command: `find [KEYWORD]`
@@ -74,7 +74,7 @@ Command: `find [KEYWORD]`
 Example: `find assignment`
 
 ### 2.6 Find free time
----
+-
 Find the next available free time to schedule an event.
 >Note: Only existing *Events* in the task list will be taken into consideration to avoid conflict. 
 >(ToDOs and Deadlines will be ignored)
@@ -97,7 +97,7 @@ Date and Time of next event in list is 19/09/2019 14:00 then `when 3` returns 19
 
 
 ### 2.7 Exit 
----
+-
 Exit the program.
 
 Command: `bye`

@@ -24,21 +24,21 @@
 ####The user can also create flashcards with this application. 
 
 ## 2. Quick Start
-####  1. Install Java 11 or above in your computer 
-####  2. Download the duke-0.1.3.jar file
-####  3. Double click on the app to run.
+####    1. Install Java 11 or above in your computer 
+####    2. Download the duke-0.1.3.jar file
+####    3. Double click on the app to run.
 
 ## 3. Features 
 #### Follow the formats given below to execute each command.
 
-### 3.1 Add a To Do task: todo
-#### Adds a To Do task to the schedule.
-#### Format: `todo` *task_name*
+###   3.1 Add a To Do task: todo
+####    Adds a To Do task to the schedule.
+####    Format: `todo` *task_name*
 
-### 3.2 Add an Event task: event
-#### Adds an Event task to the schedule.
-#### Format: `event` *task_name* /at *date* *time*
-###### Note: Date format (DD/MM/YYYY). Time format (24hr. Eg. 1900) 
+###   3.2 Add an Event task: event
+####    Adds an Event task to the schedule.
+####    Format: `event` *task_name* /at *date* *time*
+######  Note: Date format (DD/MM/YYYY). Time format (24hr. Eg. 1900) 
 
 ### 3.3 Add a Deadline task: deadline
 #### Adds a Deadline task to the schedule.

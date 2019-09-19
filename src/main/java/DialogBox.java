@@ -44,11 +44,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setFont(Font.font("verdana", 12));
+        dialog.setFont(new Font("dialog", 12));
         dialog.setTextFill(Color.BLACK);
-        dialog.setBackground(new Background(
-                new BackgroundFill(Color.WHITE, new CornerRadii(10),
-                        Insets.EMPTY)));
         dialog.setPadding(new Insets(10));
 
         displayPicture.setImage(img);
@@ -74,6 +71,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setAlignment(Pos.CENTER_RIGHT);
         return db;
     }
 
@@ -87,6 +85,9 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
         db.dialog.setMinHeight(Label.USE_PREF_SIZE);
         db.flip();
+        db.setBackground(new Background(
+                new BackgroundFill(Color.WHITE, CornerRadii.EMPTY,
+                        Insets.EMPTY)));
         return db;
     }
 }

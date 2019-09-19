@@ -63,6 +63,9 @@ class TaskList {
      * @return String representing all tasks.
      */
     public String listTasks() {
+        if (this.tasks.isEmpty()) {
+            return "No tasks present currently!";
+        }
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         int[] counter = new int[]{1};
         tasks.forEach(task -> {

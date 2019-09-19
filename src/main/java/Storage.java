@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -23,6 +24,14 @@ class Storage {
      */
     public Storage(String path) {
         this.path = Paths.get(path);
+        // create file if not present
+        if (!Files.exists(this.path)) {
+            try {
+                Files.createFile(this.path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -51,8 +60,7 @@ class Storage {
      */
     public void writeTasksToFile(TaskList tl) throws DukeException {
         try {
-            Path path = Paths.get("data/duke.txt");
-            BufferedWriter writer = Files.newBufferedWriter(path, Charset.forName("UTF-8"));
+            BufferedWriter writer = Files.newBufferedWriter(this.path, Charset.forName("UTF-8"));
             for (Task task : tl.getTasks()) {
                 writer.write(writeTask(task) + "\n");
             }

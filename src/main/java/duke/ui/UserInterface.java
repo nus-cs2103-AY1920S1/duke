@@ -120,4 +120,15 @@ public class UserInterface implements DukeUserInterface {
     public String getAddTagMsg(Task task, String tagName) {
         return String.format("Noted. I've added the tag %s to the task: %s.", tagName, task.getDescription());
     }
+
+    /**
+     * Returns the message to be printed when a tag is deleted from a task.
+     *
+     * @param task Task which the tag is added to.
+     * @param tagName String name of the tag.
+     * @return String message to be printed.
+     */
+    public String getDeleteTagMsg(Task task, String tagName) {
+        return String.format("Noted. I've deleted the tag %s from the task: %s.", tagName, task.getDescription());
+    }
 }

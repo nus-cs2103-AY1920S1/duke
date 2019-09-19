@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import duke.exception.DukeDuplicateTagException;
+import duke.exception.DukeMissingTagException;
 import duke.tag.Tag;
 
 /**
@@ -108,6 +110,11 @@ public abstract class Task {
         return sb.toString();
     }
 
+    /**
+     * Returns a long String of tags with #.
+     *
+     * @return String of tags with # prepended.
+     */
     public String getTags() {
         StringBuilder sb = new StringBuilder("");
         for (Tag tag : tagList) {
@@ -121,8 +128,23 @@ public abstract class Task {
      *
      * @param tagName String of the tagName to be added.
      */
-    public void addTag(String tagName) {
+    public void addTag(String tagName) throws DukeDuplicateTagException {
+        Tag tag = new Tag(tagName);
+        if (tagList.contains(tag)) {
+            throw new DukeDuplicateTagException();
+        }
         tagList.add(new Tag(tagName));
+    }
+
+    /**
+     * Deletes a tag from the tagList.
+     *
+     * @param tagName String of the tagName to be deleted.
+     */
+    public void deleteTag(String tagName) throws DukeMissingTagException {
+        if (!tagList.remove(new Tag(tagName))) {
+            throw new DukeMissingTagException();
+        }
     }
 
 

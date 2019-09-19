@@ -38,7 +38,8 @@ public class DeadlineTask extends Task {
      * @param isDone Boolean representing the completion state of the task.
      * @throws DukeWrongDateFormatException Thrown when the String deadline is of the wrong format.
      */
-    public DeadlineTask(String description, String deadline, boolean isDone, List<Tag> tagList) throws DukeWrongDateFormatException {
+    public DeadlineTask(String description, String deadline, boolean isDone, List<Tag> tagList)
+            throws DukeWrongDateFormatException {
         super(description, isDone, tagList);
         try {
             this.dateTime = Consts.DATE_TIME_FORMATTER.parse(deadline);

@@ -68,4 +68,13 @@ public interface DukeUserInterface {
      * @return String message to be printed.
      */
     public String getAddTagMsg(Task task, String tagName);
+
+    /**
+     * Returns the message to be printed when a tag is deleted from a task.
+     *
+     * @param task Task which the tag is added to.
+     * @param tagName String name of the tag.
+     * @return String message to be printed.
+     */
+    public String getDeleteTagMsg(Task task, String tagName);
 }

@@ -4,6 +4,7 @@ import duke.command.AddCommand;
 import duke.command.AddTagCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.DeleteTagCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
@@ -44,9 +45,11 @@ public class Parser {
             num = parseInteger(arguments[0], arguments[1]);
             return handleDoneDeleteCase(arguments[0], num);
         case "tag":
+            //Fallthrough
+        case "deletetag":
             num = parseInteger(arguments[0], arguments[1]);
             String tagName = parseArrayToString(arguments, 2, arguments.length);
-            return handleTagCase(num, tagName);
+            return handleTagDeleteTagCase(arguments[0], num, tagName);
         case "deadline":
             //Fallthrough
         case "event":
@@ -87,8 +90,15 @@ public class Parser {
         }
     }
 
-    private static Command handleTagCase(int index, String tagName) {
-        return new AddTagCommand(index, tagName);
+    private static Command handleTagDeleteTagCase(String command, int index, String tagName) {
+        if (command.equals("tag")) {
+            return new AddTagCommand(index, tagName);
+        } else if (command.equals("deletetag")) {
+            return new DeleteTagCommand(index, tagName);
+        } else {
+            assert false : " tag and deletetag command not found";
+            return null;
+        }
     }
 
     private static Command handleAddTaskCommands(String[] arguments) throws DukeEmptyDescriptionException,

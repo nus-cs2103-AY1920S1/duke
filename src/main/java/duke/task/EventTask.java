@@ -38,7 +38,8 @@ public class EventTask extends Task {
      * @param isDone Boolean representing the completion state of the task.
      * @throws DukeWrongDateFormatException Thrown when the String startDate is of the wrong format.
      */
-    public EventTask(String description, String startDate, boolean isDone, List<Tag> tagList) throws DukeWrongDateFormatException {
+    public EventTask(String description, String startDate, boolean isDone, List<Tag> tagList)
+            throws DukeWrongDateFormatException {
         super(description, isDone, tagList);
         try {
             this.dateTime = Consts.DATE_TIME_FORMATTER.parse(startDate);

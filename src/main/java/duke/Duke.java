@@ -28,7 +28,7 @@ public class Duke {
      */
     public Duke() {
         // TODO: Don't hardcode
-        this.storage = new Storage("/Users/joshuawong/Documents/NUS/Y2S1/CS2103/duke/data/duke.txt"); 
+        this.storage = new Storage("data/duke.txt"); 
         this.ui = new Ui();
         try {
             this.tasks = this.storage.load();    

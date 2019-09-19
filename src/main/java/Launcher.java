@@ -6,5 +6,9 @@ public class Launcher {
     }
 }
 
-
-//comment fro PR
+/*
+    Credits to CarbonGrid(Daniel Xian(?)) for his cleanly written code,
+    which made understanding method calls and overcoming A-OOP and GUI possible.
+    Thank you!
+*/
+ 

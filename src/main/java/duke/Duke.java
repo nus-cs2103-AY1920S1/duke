@@ -1,12 +1,11 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.ui.MainUi;
 import duke.ui.Ui;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Duke {
     private Storage storage;
@@ -26,7 +25,6 @@ public class Duke {
         } catch (DukeException | IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-            File file = new File(filePath);
         }
     }
 

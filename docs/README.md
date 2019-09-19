@@ -25,8 +25,9 @@ Describe action and its outcome.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`list`
 
 Expected outcome:
 
-`outcome`
+`Here is a list of your current tasks: -'
+	1. [Deadline] [X] Eat candy (by: 22/05/2019 1200)`

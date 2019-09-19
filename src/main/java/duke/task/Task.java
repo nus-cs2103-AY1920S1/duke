@@ -1,5 +1,6 @@
 package duke.task;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 
 /**
@@ -15,6 +16,8 @@ public class Task {
      * A boolean describing whether the task has been completed.
      */
     protected boolean isDone;
+    private static final LocalDateTime dateCreated = LocalDateTime.now();
+
 
     public Task(String description) {
         this.description = description;
@@ -26,7 +29,7 @@ public class Task {
      * @return A tick or cross symbol, depending on whether the task has been completed.
      */
     public String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718"; //return tick or X symbols
+        return isDone ? "Y" : "N"; //return tick or X symbols
     }
 
     /**

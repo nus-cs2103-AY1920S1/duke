@@ -61,6 +61,24 @@ public class SortCommand extends Command {
                 }
                 response = sb.toString();
             }
+        } else if (by.equals("type")) {
+            tasks = getSortedTaskByType(tasks);
+            if (tasks.size() == 0) {
+                response = "You have no tasks.";
+            } else {
+                StringBuilder sb = new StringBuilder("Here are your tasks sorted by " + by
+                        + ":\nDeadline, Event, Todo\n");
+                for (int i = 0; i < tasks.size(); i++) {
+                    int k = i + 1;
+                    if (i > 0) {
+                        sb.append("\n");
+                    }
+                    sb.append(k);
+                    sb.append(". ");
+                    sb.append(tasks.get(i));
+                }
+                response = sb.toString();
+            }
         } else {
             throw new DukeException("I don't know what that means!");
         }

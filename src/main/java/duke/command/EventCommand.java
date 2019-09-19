@@ -27,6 +27,6 @@ public class EventCommand extends Command {
         tasks.add(eventTask);
         response = "Got it. I've added this task:\n    " + eventTask + "\nNow you have " + tasks.size()
                 + " task(s) in the " + "list.";
-        storage.save(tasks)
+        storage.save(tasks);
     }
 }

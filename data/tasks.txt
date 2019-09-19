@@ -1,4 +1,5 @@
-[T][?] buy gift 4 Aunt Viv
-[T][?] test
-[E][?] Ashley's recital (at: school)
-[D][?] help Uncle Phil (by: Thu Dec 21 17:30:00 SGT 2000)
+[E][N] Ashley's recital (at: school)
+[T][N] test
+[T][Y] buy gift 4 Aunt Viv
+[T][N] test
+[D][N] test (by: 12 Dec 2000 12:40)

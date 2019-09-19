@@ -155,6 +155,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s\nTags: %s", getStatusIcon(), getDescription(), getTags());
+        return String.format("[%s] %s", getStatusIcon(), getDescription());
     }
 }

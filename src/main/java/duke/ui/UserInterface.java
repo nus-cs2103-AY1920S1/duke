@@ -15,7 +15,7 @@ public class UserInterface implements DukeUserInterface {
      * Returns the introduction message of the application.
      */
     public String getIntro() {
-        return "Hello! I'm Duke!\n"
+        return "Hello! I'm Rooster!\n"
                 + "What can I do for you?";
     }
 

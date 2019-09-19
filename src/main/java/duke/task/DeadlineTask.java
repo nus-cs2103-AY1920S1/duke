@@ -56,6 +56,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), Consts.DATE_TIME_OUTPUT_FORMATTER.format(dateTime));
+        return String.format("[D]%s (by: %s)\nTags: %s\n", super.toString(),
+                Consts.DATE_TIME_OUTPUT_FORMATTER.format(dateTime), getTags());
     }
 }

@@ -57,6 +57,7 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), Consts.DATE_TIME_OUTPUT_FORMATTER.format(dateTime));
+        return String.format("[E]%s (at: %s)\nTags: %s\n", super.toString(),
+                Consts.DATE_TIME_OUTPUT_FORMATTER.format(dateTime), getTags());
     }
 }

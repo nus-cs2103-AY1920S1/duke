@@ -1,14 +1,14 @@
 import java.util.Date;
 
 public class Deadline extends Task {
-    protected Date by;
+    private Date by;
 
-    public Deadline(String description, Date by) {
+    Deadline(String description, Date by) {
         super(description);
         this.by = by;
     }
 
-    public Date getBy() {
+    Date getBy() {
         return this.by;
     }
 

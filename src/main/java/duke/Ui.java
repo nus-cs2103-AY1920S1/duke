@@ -96,10 +96,10 @@ public class Ui{
     }
 
     public String print_CreateFlashCard(String name){
-         return "A Flashcard called " + name + " has been created." ;
+         return "A topic folder called " + name + " has been created." ;
     }
 
-    public String print_CreateCard(String name) { return "A card under the Flashcard name *" + name + "* has been created." ;}
+    public String print_CreateCard(String name) { return "A flashcard under the topic name *" + name + "* has been created." ;}
 
 
 }

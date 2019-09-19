@@ -82,9 +82,9 @@ public class Storage {
 
       for (int i = 0; i < no_of_task; i++) {
               if(tasks.taskList.get(i).type == 'T')
-                  data.write(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description);
+                  data.write(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + System.getProperty( "line.separator" ));
               else
-                  data.write(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + " | " + tasks.taskList.get(i).get_TimeFrame());
+                  data.write(tasks.taskList.get(i).type + " | " + tasks.taskList.get(i).status + " | " + tasks.taskList.get(i).description + " | " + tasks.taskList.get(i).get_TimeFrame() + System.getProperty( "line.separator" ));
 
       }
       data.close();

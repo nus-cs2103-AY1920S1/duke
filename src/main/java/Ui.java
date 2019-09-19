@@ -94,11 +94,8 @@ public class Ui {
     }
 
     private void setResponse(String response) {
-        this.response = "    ---------------------------------------------\n"
-                +
-                "     " + response + "\n"
-                +
-                "    ---------------------------------------------";
+        this.response = response + "\n";
+
     }
 
     /**
@@ -110,9 +107,9 @@ public class Ui {
     public void setAddTaskResponse(Task task, int size) {
         setResponse("Got it. I've added this task:\n"
                 +
-                "       " + task + "\n"
+                task + "\n"
                 +
-                "     Now you have " + size + " tasks in the list.");
+                "Now you have " + size + " tasks in the list.");
     }
 
     /**
@@ -131,11 +128,11 @@ public class Ui {
                 +
                 clashedTasksStr
                 +
-                "    I've added this task:\n"
+                "I've added this task:\n"
                 +
-                "       " + task + "\n"
+                task + "\n"
                 +
-                "    Now you have " + size + " tasks in the list.");
+                "Now you have " + size + " tasks in the list.");
     }
 
     /**
@@ -154,8 +151,6 @@ public class Ui {
      */
     public void setDoneResponse(Task task) {
         setResponse("Nice! I've marked this task as done:\n"
-                +
-                "     "
                 +
                 task);
     }
@@ -205,9 +200,9 @@ public class Ui {
     public void setDeleteResponse(Task task, int size) {
         setResponse("Noted. I've removed this task:\n"
                 +
-                "     " + task + "\n"
+                task + "\n"
                 +
-                "     Now you have "
+                "Now you have "
                 +
                 size
                 +

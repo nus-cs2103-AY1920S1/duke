@@ -15,7 +15,7 @@ public class TaskList implements Serializable {
         int size = this.tasks.size();
         StringBuilder listOfTask = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            listOfTask.append(i + 1 + ". " + this.tasks.get(i) + "\n" + "     ");
+            listOfTask.append(i + 1 + ". " + this.tasks.get(i) + "\n");
         }
         return (listOfTask.toString());
 

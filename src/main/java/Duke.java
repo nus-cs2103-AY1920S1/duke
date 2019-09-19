@@ -43,13 +43,11 @@ public class Duke {
     public String getWelcomeMessage() {
         ui.setWelcomeResponse("Hello! I am Duke\n"
                 +
-                "     What can I do for you?\n"
+                "What can I do for you?\n"
                 +
-                "     \n"
+                "\n"
                 +
-                "     These are your current tasks:\n "
-                +
-                "    "
+                "These are your current tasks:\n "
                 +
                 this.tasks.listTasks());
         return ui.getResponse();
@@ -62,7 +60,7 @@ public class Duke {
         Parser parser = new Parser();
         Ui.print("Hello! I am Duke\n"
                 +
-                "     What can I do for you?");
+                "What can I do for you?");
         this.tasks.listTasks();
         boolean isExit = false;
         while (!isExit) {

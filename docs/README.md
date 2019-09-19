@@ -65,7 +65,7 @@ Condition:
 Index **must be a positive integer** and must be within the range of the task list.
 
 
-### 2.6 Find tasks 
+### 2.5 Find tasks 
 ---
 Find tasks that contain the KEYWORD given in their description and list them out.
 
@@ -73,7 +73,7 @@ Command: `find [KEYWORD]`
 
 Example: `find assignment`
 
-### 2.7 Find free time
+### 2.6 Find free time
 ---
 Find the next available free time to schedule an event.
 >Note: Only existing *Events* in the task list will be taken into consideration to avoid conflict. 
@@ -92,10 +92,11 @@ Command: `when [DURATION OF EVENT]`
 
 Example: `when 3` 
 
-Finds the next available 3 hour time slot from now.
+Finds the next available 3 hour time slot from now. If current Date and Time is 19/09/2019 14:00 and 
+Date and Time of next event in list is 19/09/2019 14:00 then `when 3` returns 19/09/2019 18:00.
 
 
-### 2.8 Exit 
+### 2.7 Exit 
 ---
 Exit the program.
 

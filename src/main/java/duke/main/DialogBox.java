@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -22,7 +23,7 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    public Label dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -45,17 +46,22 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        this.getChildren().setAll(tmp);
+        this.setAlignment(Pos.TOP_LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text.toUpperCase(), img);
+        db.dialog.setFont(new Font(12.0));
+        db.dialog.setStyle("-fx-background-color: #963; -fx-border-color: #630; -fx-border-width: 2; -fx-padding: 5; -fx-font-weight: bold");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setFont(new Font(12.0));
+        db.dialog.setStyle("-fx-background-color: #090; -fx-border-color: #060; -fx-border-width: 2; -fx-padding: 5; -fx-font-weight: bold");
         return db;
     }
 }

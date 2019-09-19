@@ -1,1 +1,6 @@
-[T] | [?] | eat food
+[T] | [?] | eat breakfast 
+[D] | [?] | eng_assignment | by: 2pm
+[D] | [?] | math_assignment | by: 12 of July 2018, 3:39 PM
+[D] | [?] | sci_assignment | by: 12 of July 2018, 4:05 PM
+[E] | [?] | meeting | at: 2pm
+

@@ -5,19 +5,30 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
 import duke.exception.DukeException;
+
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.FileWriter;
 
 /**
- * Deals with loading tasks from the file and saving tasks to the file
+ * Deals with loading tasks from the history file and saving tasks to the history file
  */
 public class Storage {
-    private String filePath;
+    private File history;
 
     public Storage(String filePath) {
-        this.filePath = filePath;
+        try {
+            this.history = new File(filePath);
+            if (!history.exists()) {
+                history.getParentFile().mkdir();
+                history.createNewFile();
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -25,12 +36,11 @@ public class Storage {
      * and stores them in an ArrayList of tasks.
      *
      * @return an ArrayList of existing tasks
-     * @throws DukeException if file cannot be found or opened
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() {
+        ArrayList<Task> tasks = new ArrayList<Task>();
         try {
-            ArrayList<Task> tasks = new ArrayList<Task>();
-            Scanner sc = new Scanner(new File(filePath));
+            Scanner sc = new Scanner(history);
             while (sc.hasNextLine()) {
                 String[] task = sc.nextLine().split(" \\| ");
                 switch (task[0]) {
@@ -48,24 +58,24 @@ public class Storage {
             return tasks;
         }
         catch (Exception e) {
-            throw new DukeException("OOPS!!! " + e.getMessage());
+            return tasks;
         }
     }
 
     public void appendToFile(Task task) throws DukeException {
         try {
-            FileWriter fw = new FileWriter("data/duke.txt", true);
+            FileWriter fw = new FileWriter(history, true);
             fw.append(task.toString() + "\n");
             fw.close();
         }
         catch (Exception e) {
-            throw new DukeException("OOPS!!!" + e.getMessage());
+            throw new DukeException("OOPS!!! " + e.getMessage());
         }
     }
 
     public void writeToFile(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter("data/duke.txt");
+            FileWriter fw = new FileWriter(history);
             ArrayList<Task> added = tasks.getTasks();
             for (int i = 0; i < added.size(); i++) {
                 fw.write(added.get(i).toString() + "\n");
@@ -73,7 +83,7 @@ public class Storage {
             fw.close();
         }
         catch (Exception e) {
-            throw new DukeException("OOPS!!!" + e.getMessage());
+            throw new DukeException("OOPS!!! " + e.getMessage());
         }
     }
 }

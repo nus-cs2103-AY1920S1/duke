@@ -9,6 +9,6 @@ import duke.main.TaskList;
  */
 public class ByeCommand implements Command {
     public String execute(Storage storage, Ui ui, TaskList tasks) {
-        return "Bye. Hope to see you again soon!";
+        return ui.getClosing();
     }
 }

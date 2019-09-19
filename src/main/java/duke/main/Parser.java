@@ -27,23 +27,24 @@ public class Parser {
         String[] split = fullCommand.split(" ", 2);
         String command = split[0];
         String details = split.length == 1 ? "" : split[1];
-        if (command.equals("bye")) {
+        switch(command) {
+        case "bye":
             return parseBye(details);
-        } else if (command.equals("list")) {
+        case "list":
             return parseList(details);
-        } else if (command.equals("done")) {
+        case "done":
             return parseDone(details);
-        } else if (command.equals("delete")) {
+        case "delete":
             return parseDelete(details);
-        } else if (command.equals("deadline")) {
+        case "deadline":
             return parseDeadline(details);
-        } else if (command.equals("event")) {
+        case "event":
             return parseEvent(details);
-        } else if (command.equals("todo")) {
+        case "todo":
             return parseTodo(details);
-        } else if (command.equals("find")) {
+        case "find":
             return parseFind(details);
-        } else {
+        default:
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-()");
         }
     }

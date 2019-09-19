@@ -1,5 +1,8 @@
 package duke.main;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +10,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -32,6 +40,10 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        Image image = new Image("/images/Planet.png");
+        BackgroundSize size = new BackgroundSize(600.0, 600.0, true, true, true, true);
+        BackgroundImage bi= new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, size);
+        dialogContainer.setBackground(new Background(bi));
         DialogBox dukeWelcome = DialogBox.getDukeDialog(duke.getWelcome(), dukeImage);
 
         assert dukeWelcome != null : "dukeWelcome should not be null";
@@ -54,9 +66,18 @@ public class MainWindow extends AnchorPane {
         assert dukeDialog != null : "dukeDialog should not be null";
 
         dialogContainer.getChildren().addAll(userDialog, dukeDialog);
+
         userInput.clear();
         if (input.equals("bye")) {
-            System.exit(0);
+            new Timer().schedule(
+                    new TimerTask() {
+                        @Override
+                        public void run() {
+                            System.exit(0);
+                        }
+                    },
+                    1000
+            );
         }
     }
 }

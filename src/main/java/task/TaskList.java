@@ -118,12 +118,17 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Checks for duplicate tasks.
+     * @param task Task to be checked.
+     * @return True for duplicate.
+     */
     public boolean isDuplicateTask(Task task) {
         boolean isDup = false;
         String description = task.getDescription().toLowerCase();
 
         for (Task t: tasks) {
-            if(description.equals(t.getDescription().toLowerCase())) {
+            if (description.equals(t.getDescription().toLowerCase())) {
                 isDup = true;
                 break;
             }

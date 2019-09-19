@@ -35,7 +35,7 @@ public class AddCommand extends Command {
      */
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
         //check for duplicate
-        if(!tasks.isDuplicateTask(task)) {
+        if (!tasks.isDuplicateTask(task)) {
             //add task into the task list
             tasks.add(task);
 

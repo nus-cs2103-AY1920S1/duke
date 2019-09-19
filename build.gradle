@@ -28,7 +28,7 @@ javafx {
 
 //Gradle set-up
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "ui.Launcher"
 }
 
 //Checkstyle setup

@@ -237,8 +237,6 @@ public class Parser {
             throw new DukeException("Task does not exist.");
         }
 
-        System.out.println("HELLO");
-
         int index = Integer.parseInt(words[1]) - 1;
         Task removed = tasks.delete(index);
         return removed;

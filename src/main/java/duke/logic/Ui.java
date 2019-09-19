@@ -16,7 +16,7 @@ public class Ui {
      * @return Returns the welcome message.
      */
     public static String printWelcome() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return "Hello! I'm PikaTodo.\nWhat can I do for you?";
     }
 
     /**
@@ -36,7 +36,7 @@ public class Ui {
      */
     public String printList(ArrayList<Task> list) {
         if (list.isEmpty()) {
-            return "No task found";
+            return "No task found.";
         } else {
             StringBuilder sb = new StringBuilder();
             sb.append("Here are the tasks in your list:\n");
@@ -68,7 +68,7 @@ public class Ui {
     String printDeleteTask(Task removed, ArrayList<Task> list) {
         return ("Noted. I've removed this task:\n"
                 + "  " + removed.toString() + "\n"
-                + "Now you have " + list.size() + "task" + (list.size() > 1 ? "s" : "") + " in the list.");
+                + "Now you have " + list.size() + " task" + (list.size() > 1 ? "s" : "") + " in the list.");
     }
 
     /**
@@ -110,7 +110,8 @@ public class Ui {
                 + "\"clear\"\n"
                 + "\"todo <name>\"\n"
                 + "\"deadline <name> /by <date> <time>\"\n"
-                + "\"event <name> /at <date> <time>\"\n");
+                + "\"event <name> /at <date> <time>\"\n"
+                + "\"bye\"\n");
     }
 
     /**

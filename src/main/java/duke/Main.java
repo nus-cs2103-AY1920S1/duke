@@ -29,6 +29,9 @@ public class Main extends Application {
 
             scene.getStylesheets().add("/view/Theme.css");
             stage.setScene(scene);
+            stage.setTitle("PikaTodo");
+            Image icon = new Image("/images/masterball.png");
+            stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show(); // set visibility to true
 

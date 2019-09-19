@@ -15,7 +15,7 @@
 }
 
 #dialogContainer {
-    -fx-background-color: #FFF;
+    -fx-background-color: #555;
 }
 
 #dialog {
@@ -38,4 +38,5 @@
 #sendButton {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 13.0;
+    -fx-background-color: #FFBFBF;
 }

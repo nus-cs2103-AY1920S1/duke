@@ -44,7 +44,12 @@ public class Storage {
      * @throws ParseException if wrong date/time format encountered
      */
     public void loadToList(TaskList emptyList) throws FileNotFoundException,
-            ParseException {
+            ParseException, IOException {
+        // create file if it doesn't already exist
+        if (!this.file.exists()) {
+            this.file.getParentFile().mkdir();
+            this.file.createNewFile();
+        }
         // read file using Scanner class
         Scanner s = new Scanner(this.file);
         while (s.hasNext()) {

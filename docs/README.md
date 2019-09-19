@@ -1,4 +1,4 @@
-# <h1> User Guide
+# User Guide
 
 ### 1. Introduction
 ### 2. Quick Start

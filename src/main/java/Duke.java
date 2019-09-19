@@ -1,5 +1,6 @@
 import duke.command.Command;
 import duke.command.LoadCommand;
+import duke.command.SaveCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -49,6 +50,15 @@ public class Duke {
             return output;
         } catch (DukeException e) {
             return e.getMessage();
+        }
+    }
+
+    public void saveTasks() {
+        try {
+            SaveCommand c = new SaveCommand();
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            e.printStackTrace();
         }
     }
 

@@ -18,6 +18,7 @@ public class SaveCommand extends Command {
 
     private static final String SAVE_SUCCESS_MESSAGE = "Tasks saved. Bye bye!";
     private static final String SAVE_FAIL_MESSAGE = "Unable to save tasks. Please check your file path.";
+
     /**
      * Executes the command and saves tasks into a file on the hard-disk.
      * @param tasks List of tasks

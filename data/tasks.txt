@@ -1,0 +1,12 @@
+T | 1 | art painting | 2019-09-18T00:50
+E | 1 | art festival | 06/05/2011 0242 | 2019-09-15T20:09
+D | 0 | art assignment | 06/02/2012 1342
+T | 1 | workout | 2019-09-15T21:57
+D | 0 | math project | 06/04/2022 0123
+D | 1 | music project | 06/04/2022 0123 | 2019-09-19T20:51
+T | 0 | learning piano
+T | 1 | jogging | 2019-09-19T20:50
+E | 1 | water festival | 05/02/2014 0522 | 2019-09-19T20:50
+T | 1 | swimming | 2019-09-19T20:51
+E | 0 | party | 05/06/2015 0131
+T | 1 | kite flying | 2019-09-19T16:02

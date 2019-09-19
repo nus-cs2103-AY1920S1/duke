@@ -59,7 +59,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            isExit = c.isExit();//useless?
+            isExit = c.isExit();
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();

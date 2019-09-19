@@ -47,7 +47,6 @@ public class Storage {
             while (sc.hasNextLine()) {
 
                 String instruction = sc.nextLine();
-                //test
                 System.out.println(instruction);
                 String[] lines = instruction.split(" \\| ");
                 Task task = createTask(lines);

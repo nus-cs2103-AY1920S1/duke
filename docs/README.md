@@ -43,8 +43,9 @@ track in this era of increasingly busy lifestyle.
 
 ### <a id="3.1"> 3.1 Install Duke</a>
 * Go to [Duke](https://github.com/honhaochen/duke/releases/tag/A-Release). 
+
 * Download the `jar` file.
-* Create a folder name `data` along side with your `jar` file to save your progress inside it.
+
 * You may start having fun with it now! 
 
 ### <a id="3.2">3.2 How to use</a>

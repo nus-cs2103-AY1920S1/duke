@@ -39,8 +39,7 @@ public class Ui {
      */
     public void showStorageError() {
         showMessages("File corrupted / File path doesnt exist.\n"
-                + "You can still use Duke, but progress will not be saved.\n"
-                + "Did you create a folder named 'data'?");
+                + "You can still use Duke, but progress will not be saved.");
     }
 
     /**

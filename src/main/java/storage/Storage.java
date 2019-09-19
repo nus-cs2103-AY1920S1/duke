@@ -31,6 +31,7 @@ public class Storage {
         this.filepath = filepath;
 
         File file = new File(this.filepath);
+        file.getParentFile().mkdirs(); // This should create a folder for the file.
         file.createNewFile(); // This should create a new file if file is not already exists.
         this.sc = new Scanner(new File(this.filepath));
 

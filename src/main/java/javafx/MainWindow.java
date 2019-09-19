@@ -1,6 +1,8 @@
 package javafx;
 
 import duke.Duke;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import ui.Ui;
 
 /**
@@ -56,8 +59,7 @@ public class MainWindow extends AnchorPane {
         );
 
         if (input.equals("bye")) {
-            sendButton.setDisable(true);
-            userInput.setDisable(true);
+            exit();
         }
 
         userInput.clear();
@@ -71,5 +73,20 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(msg, dukeImage)
         );
+    }
+
+    /**
+     * Exits the program with a 1.5 seconds delay.
+     * @author James_D
+     */
+    private void exit() {
+        PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
+        delay.setOnFinished(event -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        sendButton.setDisable(true);
+        userInput.setDisable(true);
+        delay.play();
     }
 }

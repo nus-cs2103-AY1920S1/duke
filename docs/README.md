@@ -2,6 +2,8 @@
 
 ## Features 
 
+![Screenshot](https://raw.githubusercontent.com/ReignOfComputer/duke/master/docs/Ui.png)
+
 ### Manage Your Life!
 Do normal calendars have too much functionality?
 HustlePad provides just 3 calendaring functions - Todo, Event, and Deadline!

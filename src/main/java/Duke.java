@@ -2,7 +2,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
-    private static Ui uiManager = new Ui();
+    //private static Ui uiManager = new Ui();
     private static GUI gui = new GUI();
 
     @Override
@@ -11,5 +11,11 @@ public class Duke extends Application {
         gui.init(stage);
 
     }
+    //public Duke() {}
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 
 }

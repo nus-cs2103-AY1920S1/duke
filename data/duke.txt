@@ -1,2 +1,6 @@
 D | 0 | return book | 12/12/2019, 1800
-T | 0 | homework
+T | 0 | GEQ1000 homework
+T | 0 | more homework
+D | 1 | Individual Project | 13/07/2019, 2359
+D | 0 | Find an Internship | 20/09/2019, 2359
+T | 0 | Exercise

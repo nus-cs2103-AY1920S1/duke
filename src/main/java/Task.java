@@ -35,7 +35,7 @@ public class Task {
         String[] cmdList = s.split("\\|");
         assert cmdList.length > 0 : "Blank data loaded into storage file";
         String keyword = cmdList[0].trim();
-        Boolean isDone = Boolean.valueOf(cmdList[1].trim());
+        Boolean isDone = cmdList[1].trim().equals("1") ? true : false;
         String description = cmdList[2].trim();
         if (keyword.equalsIgnoreCase("T")) {
             t = new Todo(description);

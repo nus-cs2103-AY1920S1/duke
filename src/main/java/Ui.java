@@ -5,6 +5,12 @@ public class Ui {
     private MainWindow window;
     private Scanner sc;
 
+    private static final String DUKE_LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
     /**
      * Constructs a Ui object to print Duke responses out in the command line interface.
      */
@@ -41,7 +47,7 @@ public class Ui {
      * Prints welcome message when Duke is initialised.
      */
     public void printWelcome() {
-        printInGui("Hello, I'm Duke\nWhat can I do for you?");
+        printInGui("Starting up...\n" + DUKE_LOGO + "\n" + "Hello, I'm Duke\nWhat can I do for you?");
     }
 
 

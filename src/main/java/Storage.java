@@ -1,7 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -82,9 +79,16 @@ public class Storage {
      * @throws FileNotFoundException File directory cannot be located
      * @throws UnsupportedEncodingException File type is not supported
      */
-    public void updateTodoFile(String todoString) throws FileNotFoundException, UnsupportedEncodingException {
-        writer = new PrintWriter(filename, "UTF-8");
-        writer.printf(todoString);
-        writer.close();
+    public void updateTodoFile(String todoString) throws IOException {
+        try {
+            writer = new PrintWriter(filename, "UTF-8");
+            writer.printf(todoString);
+            writer.close();
+        } catch (FileNotFoundException err) {
+            File f = new File(filename);
+            f.getParentFile().mkdir();
+            f.createNewFile();
+            updateTodoFile(todoString);
+        }
     }
 }

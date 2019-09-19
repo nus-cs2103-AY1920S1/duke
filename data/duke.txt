@@ -1,6 +1,5 @@
-[T] | [?] | eat breakfast 
-[D] | [?] | eng_assignment | by: 2pm
-[D] | [?] | math_assignment | by: 12 of July 2018, 3:39 PM
-[D] | [?] | sci_assignment | by: 12 of July 2018, 4:05 PM
-[E] | [?] | meeting | at: 2pm
-
+[T] | [?] | backflip to school
+[D] | [?] | eng_assignment | by: 2 of October 2019, 11:59 PM
+[D] | [?] | math_assignment | by: 5 of October 2019, 11:59 PM
+[D] | [?] | sci_assignment | by: 8 of October 2019, 11:59 PM
+[E] | [?] | breakup with girlfriend | at: 31 of December 2019, 11:59 PM

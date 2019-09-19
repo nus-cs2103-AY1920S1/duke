@@ -36,7 +36,7 @@ public class DeleteCommand implements Command {
 
     /**
      * Executes the command. This will delete the specified task entered by the user from the list of tasks
-     * @param taskManager the list of tasks
+     * @param taskManager the task manager for the tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      * @throws duke.exception.InvalidParameterException if the index is out of range

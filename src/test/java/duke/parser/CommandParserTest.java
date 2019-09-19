@@ -42,30 +42,30 @@ class CommandParserTest {
 
     @Test
     public void parse_failed_with_ExceptionThrown() {
-        Assertions.assertThrows(InvalidCommandException.class, () ->
-                                CommandParser.parse("hello"));
-        Assertions.assertThrows(InvalidParameterException.class, () ->
-                                CommandParser.parse("todo "));
-        Assertions.assertThrows(InvalidParameterException.class, () ->
-                                CommandParser.parse("deadline sdfdsf"));
-        Assertions.assertThrows(InvalidParameterException.class, () ->
-                                CommandParser.parse("deadline meeting /by "));
-        Assertions.assertThrows(InvalidParameterException.class, () ->
-                                CommandParser.parse("deadline meeting /by 123456789"));
-        Assertions.assertThrows(InvalidParameterException.class,
-                                () -> CommandParser.parse("event sdfdsf"));
-        Assertions.assertThrows(InvalidParameterException.class,
-                                () -> CommandParser.parse("event meeting /at "));
-        Assertions.assertThrows(InvalidParameterException.class,
-                                () -> CommandParser.parse("event meeting /at 123456789"));
-        Assertions.assertThrows(InvalidParameterException.class,
-                                () -> CommandParser.parse("delete task"));
-        Assertions.assertThrows(InvalidParameterException.class,
-                                () -> CommandParser.parse("done task"));
         Assertions.assertThrows(InvalidCommandException.class,
-                                () -> CommandParser.parse("helloWorld"));
+            () -> CommandParser.parse("hello"));
+        Assertions.assertThrows(InvalidParameterException.class,
+            () -> CommandParser.parse("todo "));
+        Assertions.assertThrows(AssertionError.class,
+            () -> CommandParser.parse("deadline sdfdsf"));
+        Assertions.assertThrows(AssertionError.class,
+            () -> CommandParser.parse("deadline meeting /by "));
+        Assertions.assertThrows(InvalidParameterException.class,
+            () -> CommandParser.parse("deadline meeting /by 123456789"));
+        Assertions.assertThrows(AssertionError.class,
+            () -> CommandParser.parse("event sdfdsf"));
+        Assertions.assertThrows(AssertionError.class,
+            () -> CommandParser.parse("event meeting /at "));
+        Assertions.assertThrows(InvalidParameterException.class,
+            () -> CommandParser.parse("event meeting /at 123456789"));
+        Assertions.assertThrows(InvalidParameterException.class,
+            () -> CommandParser.parse("delete task"));
+        Assertions.assertThrows(InvalidParameterException.class,
+            () -> CommandParser.parse("done task"));
         Assertions.assertThrows(InvalidCommandException.class,
-                                () -> CommandParser.parse(""));
+            () -> CommandParser.parse("helloWorld"));
+        Assertions.assertThrows(InvalidCommandException.class,
+            () -> CommandParser.parse(""));
     }
 
 }

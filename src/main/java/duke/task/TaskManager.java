@@ -57,15 +57,16 @@ public class TaskManager {
      * @param task the task to be appended to the list
      */
     public void addToTaskList(Task task) {
-        assert(task != null);
+        assert (task != null);
         taskList.add(task);
     }
+
     /**
      * Inserts the task to the end of a sorted schedule of the tasks.
      * @param task the task to be inserted into the schedule
      */
     public void addToSchedule(Task task) {
-        assert(task != null);
+        assert (task != null);
         schedule.add(task);
     }
 
@@ -75,16 +76,16 @@ public class TaskManager {
      * @return the task deleted from the task list
      */
     public Task deleteFromTaskList(int index) {
-        assert(index >= 1);
+         assert (index >= 1);
         return taskList.delete(index - 1);
     }
 
     /**
-     * Search and delete the task from the schedule
+     * Search and delete the task from the schedule.
      * @param task the task to be deleted
      */
     public void deleteFromSchedule(Task task) {
-        assert(task != null);
+        assert (task != null);
         schedule.delete(task);
     }
 
@@ -94,7 +95,7 @@ public class TaskManager {
      * @return a string representation of the done task to be be printed on a user interface.
      */
     public String markTaskAsDone(int index) {
-        assert(index >= 1);
+        assert (index >= 1);
         return taskList.done(index - 1).toString();
     }
 
@@ -115,7 +116,7 @@ public class TaskManager {
     }
 
     /**
-     * Retirm a string representation fo the schedule of task at a specified date
+     * Retirm a string representation fo the schedule of task at a specified date.
      * @param date specifies a particular day of the schedule of tasks to be displayed
      * @return a string representation of the schedule of tasks
      */
@@ -147,7 +148,7 @@ public class TaskManager {
      * @return a string representation of the task in which the reminder was set
      */
     public String remind(int index, Date date) {
-        assert(date != null);
+        assert (date != null);
         return taskList.remind(index - 1, date);
     }
 

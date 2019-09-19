@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * This is a runtime exception that occur when an invalid date is entered by the user.
+ * This is a exception that occur when an invalid date is entered by the user.
  */
 public class InvalidDateTimeException extends DukeException {
 

@@ -33,7 +33,7 @@ public class CommandParser {
      */
     public static Command parse(String fullCommand) throws InvalidCommandException, InvalidParameterException {
         String[] arr = fullCommand.split(" ");
-        assert(arr.length > 0);
+        assert (arr.length > 0);
         String parameter = getParameter(arr);
         try {
             switch (getCommand(arr)) {

@@ -29,7 +29,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, Date by) {
         super(description, by);
-        assert(by != null);
+        assert (by != null);
     }
 
     /**

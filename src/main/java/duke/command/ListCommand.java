@@ -12,7 +12,7 @@ public class ListCommand implements Command {
 
     /**
      * Executes the command. This will display the list of tasks in the user interface.
-     * @param taskManager the list of tasks
+     * @param taskManager the task manager for the tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      */

@@ -106,7 +106,7 @@ public class MainWindow extends BorderPane {
 
     /**
      * Checks if the user input is a {@link duke.command.ExitCommand} that tells the program to exit.
-     * @param input
+     * @param input the user input
      * @return true if the user input is the bye command, false otherwise.
      */
     private boolean isExit(String input) {

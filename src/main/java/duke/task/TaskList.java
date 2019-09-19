@@ -51,7 +51,7 @@ public class TaskList {
      * @param task the task to be appended to the list
      */
     public void add(Task task) {
-        assert(task != null);
+        assert (task != null);
         taskList.add(task);
     }
 
@@ -61,7 +61,7 @@ public class TaskList {
      * @return a string representation of the task removed to be printed on a user interface.
      */
     public Task delete(int index) {
-        assert(index >= 0);
+        assert (index >= 0);
         return taskList.remove(index);
     }
 
@@ -71,7 +71,7 @@ public class TaskList {
      * @return a string representation of the done task to be be printed on a user interface.
      */
     public Task done(int index) {
-        assert(index >= 0);
+        assert (index >= 0);
         Task task = taskList.get(index);
         task.markAsDone();
         return task;
@@ -102,7 +102,7 @@ public class TaskList {
 
     /**
      * Finds all matching tasks with the given keyword.
-     * @param keyword the keyword to look out for in tasks' description
+     * @param keyword the keyword to look out for in tasks description
      * @return a string representation of the list of tasks that match the keyword
      */
     public String find(String keyword) {
@@ -125,11 +125,11 @@ public class TaskList {
      * Sets a reminder on the specified date for the task in the task list at the specified index.
      * @param index the index for the task to set the reminder on
      * @param date the  date for the reminder
-     * @return a string representation of the reminded taskf
+     * @return a string representation of the reminded task
      */
     public String remind(int index, Date date) {
-        assert(index >= 0);
-        assert(date != null);
+        assert (index >= 0);
+        assert (date != null);
         Task remindedTask = taskList.get(index);
         remindedTask.setReminder(date);
         return remindedTask.toString();

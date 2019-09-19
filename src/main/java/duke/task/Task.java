@@ -85,7 +85,7 @@ public class Task {
      * @param date the date of the reminder
      */
     public void setReminder(Date date) {
-        assert(date != null);
+        assert (date != null);
         reminderDate = Optional.ofNullable(date);
         new Reminder(this, date);
     }
@@ -158,7 +158,7 @@ public class Task {
     /**
      * Shows full information for the task with its task description, date, status and the reminder date if present.
      * @return a string representation of the full information of the task with its corresponding description, date,
-     * status and the reminder date if present
+     *      status and the reminder date if present
      */
     public String showFullInformation() {
         StringBuilder outputBuilder = new StringBuilder();
@@ -189,7 +189,7 @@ public class Task {
     }
 
     /**
-     * Mark the task as done if the boolean value passed in is true.
+     * Mark the task as done if the boolean value passed in is <code>true</code>.
      * @param isDone the boolean value of whether the task is done
      */
     public void markAsDoneIfTrue(Boolean isDone) {

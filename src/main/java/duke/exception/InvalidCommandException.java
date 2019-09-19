@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * This is a runtime exception that occur when the user enters an invalid command.
+ * This is a exception that occur when the user enters an invalid command.
  */
 public class InvalidCommandException extends DukeException {
 

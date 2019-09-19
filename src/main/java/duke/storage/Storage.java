@@ -72,7 +72,7 @@ public class Storage {
      * Writes the line to file using a writer.
      * @param writer the writer used to write the line
      * @param line the line to be written
-     * @throws UncheckedIOException
+     * @throws UncheckedIOException if I/O error occurs
      */
     private static void writeLine(BufferedWriter writer, String line) throws UncheckedIOException {
         try {

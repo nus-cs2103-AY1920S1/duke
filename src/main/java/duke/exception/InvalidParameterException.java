@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * This is a runtime exception that occur when the user enters an invalid parameter.
+ * This is a exception that occur when the user enters an invalid parameter.
  */
 public class InvalidParameterException extends DukeException {
 

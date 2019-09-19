@@ -1,23 +1,25 @@
 package duke.exception;
 
 /**
- * This is a runtime exception that occur when there is failed or interrupted operations in the writer.
+ * This is a exception that occur when it fails to save.
  */
 public class FailedToSaveIoException extends DukeException {
 
     /**
-     * This is the content of the line where the write error occured.
+     * This is the content of the line where the save error occured.
      */
     private String line;
 
+    /**
+     * Constructs a new failed to save exception with a empty line.
+     */
     public FailedToSaveIoException() {
         this.line = "";
     }
 
     /**
-     * Constructs a new line in file write exception with the specified line number and contents where the error
-     * occurred.
-     * @param line the content of the line where the write error occurred
+     * Constructs a new failed to save exception with the line contents.
+     * @param line the content of the line where the save error occurred
      */
     public FailedToSaveIoException(String line) {
         super();
@@ -25,7 +27,7 @@ public class FailedToSaveIoException extends DukeException {
     }
 
     /**
-     * Gets the content of the line where the write error occurred.
+     * Gets the content of the line where the save error occurred.
      * @return a string representation of the line content
      */
     public String getLine() {

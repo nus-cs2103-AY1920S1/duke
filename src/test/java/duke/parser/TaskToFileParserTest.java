@@ -17,16 +17,16 @@ class TaskToFileParserTest {
     public void parse_success() {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HHmm");
         try {
-            Task todo1  = new Todo("eat food");
-            Task todo2  = new Todo("eat food");
+            final Task todo1  = new Todo("eat food");
+            final Task todo2  = new Todo("eat food");
             todo2.markAsDone();
 
-            Task deadline1 = new Deadline("meeting", format.parse("10/10/2003 1100"));
-            Task deadline2 = new Deadline("meeting", format.parse("10/10/2003 1100"));
+            final Task deadline1 = new Deadline("meeting", format.parse("10/10/2003 1100"));
+            final Task deadline2 = new Deadline("meeting", format.parse("10/10/2003 1100"));
             deadline2.markAsDone();
 
-            Task event1 = new Event("dinner", format.parse("23/04/2008 1023"));
-            Task event2 = new Event("dinner", format.parse("23/04/2008 1023"));
+            final Task event1 = new Event("dinner", format.parse("23/04/2008 1023"));
+            final Task event2 = new Event("dinner", format.parse("23/04/2008 1023"));
             event2.markAsDone();
 
             assertEquals(TaskToFileParser.parse(todo1), "todo,false,null,eat food,null\n");

@@ -31,7 +31,7 @@ public class Schedule {
      * @param task the task to be inserted into the schedule
      */
     public void add(Task task) {
-        assert(task != null);
+        assert (task != null);
         schedule.add(task);
         insertionSortSchedule();
     }
@@ -41,12 +41,12 @@ public class Schedule {
      * @param task the task to be deleted from the schedule
      */
     public void delete(Task task) {
-        assert(task != null);
+        assert (task != null);
         schedule.remove(task);
     }
 
     /**
-     * Views the current schedule for the specified date
+     * Views the current schedule for the specified date.
      * @param date the specified date for schedule view
      * @return the date for the schedule to be viewed
      */
@@ -102,7 +102,7 @@ public class Schedule {
      * @return a string representation of the task to be added to view
      */
     private String addTaskToView(Task task) {
-        assert(task != null);
+        assert (task != null);
         StringBuilder outputBuilder = new StringBuilder();
         outputBuilder.append("    ");
         outputBuilder.append(task.showFullInformation());

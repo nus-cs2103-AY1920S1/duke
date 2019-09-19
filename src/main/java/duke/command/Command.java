@@ -13,7 +13,7 @@ public interface Command {
 
     /**
      * Executes the command.
-     * @param taskManager the list of taskManager
+     * @param taskManager the task manager for the tasks
      * @param ui the user interface
      * @param storage the storage for the taskManager
      * @return a string representation of the output after command execution

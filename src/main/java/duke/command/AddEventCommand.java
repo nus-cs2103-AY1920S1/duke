@@ -25,7 +25,7 @@ public class AddEventCommand extends AddCommand {
         }
         try {
             String[] arr = super.line.split(" /at ");
-            assert(arr.length >= 2);
+            assert (arr.length >= 2);
             super.task = new Event(getTaskDescription(arr), getTaskDate(arr));
         } catch (ArrayIndexOutOfBoundsException aioobe) {
             throw new InvalidParameterException(line);

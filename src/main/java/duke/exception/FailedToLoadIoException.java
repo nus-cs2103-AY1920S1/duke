@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * This is a runtime exception that occur when the file is parsed line by line.
+ * This is a exception that occur when the file is parsed line by line.
  */
 public class FailedToLoadIoException extends DukeException {
 
@@ -16,10 +16,10 @@ public class FailedToLoadIoException extends DukeException {
     private String line;
 
     /**
-     * Constructs a new line in file parse exception with the specified line number and contents where the error
+     * Constructs a new failed to load exception with the specified line number and contents where the error
      * occurred.
-     * @param lineCount the line number where the parsing error occurred
-     * @param line the content of the line where the parsing error occurred
+     * @param lineCount the line number where it failed to load
+     * @param line the content of the line where it failed to load
      */
     public FailedToLoadIoException(int lineCount, String line) {
         super();
@@ -28,7 +28,7 @@ public class FailedToLoadIoException extends DukeException {
     }
 
     /**
-     * Gets the content of the line where the parsing error occurred.
+     * Gets the content of the line where the error occured.
      * @return a string representation of the line content
      */
     public String getLine() {
@@ -36,8 +36,8 @@ public class FailedToLoadIoException extends DukeException {
     }
 
     /**
-     * Gets the line number where parsing error occurred.
-     * @return the line number where parsing error occurred
+     * Gets the line number where the error occurred.
+     * @return the line number where the error occured
      */
     public int getLineCount() {
         return lineCount;

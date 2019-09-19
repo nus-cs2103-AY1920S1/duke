@@ -18,7 +18,7 @@ public class DoneCommand implements Command {
     /**
      * The index of the task to be mark as done in the list of tasks.
      */
-    int index;
+    private int index;
 
     /**
      * Constructs a new done command with the specified index of the task to be marked as done in the list of tasks.
@@ -36,7 +36,7 @@ public class DoneCommand implements Command {
     /**
      * Executes the command. This will mark the task specified by the user as done and display the updated information
      * on the user interface.
-     * @param taskManager the list of tasks
+     * @param taskManager the task manager for the tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      * @throws duke.exception.InvalidParameterException if the index is out of range

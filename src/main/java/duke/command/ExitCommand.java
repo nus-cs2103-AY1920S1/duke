@@ -16,7 +16,7 @@ public class ExitCommand implements Command {
     /**
      * Executes the command. This will save the list of tasks in {@link TaskManager} into the storage. The storage is
      * the file path specified by {@link duke.main.Duke} and {@link Storage}.
-     * @param taskManager the list of tasks
+     * @param taskManager the task manager for the tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      */

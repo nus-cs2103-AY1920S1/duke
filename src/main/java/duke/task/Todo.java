@@ -22,8 +22,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a string representation of the todo task. The string representation consist of ("[T]") with the string
-     * representation of the task.
+     * Returns a string representation of the todo task. The string representation consist of <code>"[T]"</code>
+     * with the string representation of the task.
      * @return a string representation of the todo task
      */
     @Override

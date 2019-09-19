@@ -26,7 +26,7 @@ public class FindCommand implements Command {
     /**
      * Executes the command. This will look through all the tasks in the list of tasks in {@link TaskManager} and show
      * results found in the user interface
-     * @param taskManager the list of tasks
+     * @param taskManager the task manager for the tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      */

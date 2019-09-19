@@ -28,7 +28,7 @@ public class FileToTaskParser {
     public static Task parse(String line) throws FailedToLoadIoException {
         lineCount++;
         String[] arr = line.split(",");
-        assert(arr.length >= 5);
+        assert (arr.length >= 5);
         try {
 
             String isDone = getIsDone(arr);

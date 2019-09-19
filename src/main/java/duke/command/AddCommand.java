@@ -36,7 +36,7 @@ public class AddCommand implements Command {
     /**
      * Executes the command. This will add the specified task into the list of tasks. The task can be a todo, deadline
      * or event item.
-     * @param taskManager the list of tasks
+     * @param taskManager the task manager for the tasks
      * @param ui the user interface
      * @param storage the storage for the tasks
      */
@@ -53,10 +53,22 @@ public class AddCommand implements Command {
         }
     }
 
+    /**
+     * Gets the task description from the array.
+     * @param arr the array which contains the information
+     * @return a string representation of the task description
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     protected String getTaskDescription(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[0];
     }
 
+    /**
+     * Gets the date field for the task from the array.
+     * @param arr the array which contains the information
+     * @return a string representation of the task date
+     * @throws ArrayIndexOutOfBoundsException if the information does not exist in the array
+     */
     protected String getTaskDate(String[] arr) throws ArrayIndexOutOfBoundsException {
         return arr[1];
     }

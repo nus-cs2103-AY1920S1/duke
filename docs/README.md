@@ -31,9 +31,10 @@ If you no longer wants a task to be tracked, you can delete it from the task lis
 After every single modification to your task list, your latest tasks are automatically
 saved in a local file on your hard drive, presented in an easily understandable format. 
  
-### Load past tasks
-Every time Duke is launched, it prompts you to load past tasks by specifying a file path.
-If loading fails, it creates a new file to be stored in the specified location.
+### Load past tasks from a local file
+Every time Duke is launched, it attempts to load past tasks from 
+{current directory}/DukeStorage/tasks.txt. If loading fails, it creates a new file to 
+be stored in the above mentioned location.
 
 ### Exit the app
 You can exit Duke by typing a single word _"bye"_, and the app will be automatically terminated.
@@ -184,31 +185,6 @@ Expected outcome:
  Noted. I've removed this task: 
    [T][✓] read five books
  Now you have 2 task(s) in the list.
-```
-### `load` - load past tasks from local file
-To load past tasks from local file, type `load` followed by the complete file path. 
-If you don't feel like typing a file path, minimally you need to specify a file name, 
-in which case the file will be created in the current directory.
- 
-Example of usage #1: 
-  
-`load /Users/apple/Desktop/tasks.txt` 
-(Provided the file already exists)
-  
-Expected outcome #1:
-  
-`Past tasks loaded successfully :-)`
-
-Example of usage #2: 
-  
-`load tasks.txt` 
-(Provided the file does not exist)
-  
-Expected outcome #2:
-  
-```
- Oops, there seems to be no existing file...
- A new file will be created once you add a task.
 ```
 
 ### `bye` - exit Duke

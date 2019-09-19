@@ -11,7 +11,7 @@ public class Task {
     /** DateTimeFormatter that parses user input of date & time to format to be displayed in Duke. */
     public static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("dd MMMM yyyy, h:mm a");
     /** DateTimeFormatter that parses the LocalDateTime to a format to be stored in the data file */
-    public static final DateTimeFormatter FILE_DATE_TIME = DateTimeFormatter.ofPattern("dd/MM/yy hhmm");
+    public static final DateTimeFormatter FILE_DATE_TIME = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
 
     /** Description of the task */
     protected String name;

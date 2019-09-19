@@ -3,6 +3,10 @@ package duke;
 import duke.task.Task;
 
 public class Ui {
+    public static String showWelcome() {
+        return "Hello! How many I help you today?";
+    }
+
     public static String showBye() {
         return "Bye! Hope to see you again soon :-)";
     }

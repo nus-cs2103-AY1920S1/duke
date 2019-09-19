@@ -1,6 +1,7 @@
 package duke.gui;
 
 import duke.Duke;
+import duke.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,12 +28,15 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/toad.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mario.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        Label welcomeMessage = new Label(Ui.showWelcome());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, new ImageView(dukeImage)));
     }
 
     public void setDuke(Duke d) {
@@ -58,6 +62,7 @@ public class MainWindow extends AnchorPane {
 
         if (dukeOutput.startsWith("Bye!")) {
             Platform.exit();
+            System.exit(0);
         }
     }
 }

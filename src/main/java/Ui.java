@@ -5,11 +5,8 @@ public class Ui {
     /**
      * Prints welcome message when Duke.java is run
      */
-    public void showWelcome() {
-        System.out.println("    ____________________________________________________________");
-        System.out.println("     Hello! I'm Duke");
-        System.out.println("     What can I do for you?");
-        System.out.println("    ____________________________________________________________\n");
+    public String showWelcome() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**

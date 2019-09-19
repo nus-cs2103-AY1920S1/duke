@@ -17,10 +17,11 @@ public abstract class Task {
     /**
      * Marks task as done
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
         System.out.println("     Nice! I've marked this task as done:\n"
                 + "       [\u2713] " + description);
+        return "Nice! I've marked this task as done:\n  [\u2713] " + description;
     }
 
     @Override

@@ -1,5 +1,7 @@
 # User Guide to Duke
+
 #### Table of Contents
+
 <a href="#1">1. What is Duke?</a>
 <br />
 <a href="#2">2. Features</a>
@@ -12,11 +14,13 @@
 <br />
 <a href="#4">4. Feedback and Contact Us</a>
 
-## 1. What is Duke?
+---
+## <a id="1">1. What is Duke?</a>
 Duke is a personal bot for everyone. It manages your daily tasks and keeps you on
 track in this era of increasingly busy lifestyle.
 
-## 2. Features
+---
+## <a id="2">2. Features</a>
 1. Add a **Task**.
        
     A **Task** is either one of these:
@@ -34,15 +38,16 @@ track in this era of increasingly busy lifestyle.
 
 1. `undo` an action. Undo your mistake.  
 
-## 3. Getting Started
+---
+## <a id="3">3. Getting Started</a>
 
-### 3.1 Install Duke
+### <a id="3.1"> 3.1 Install Duke</a>
 * Go to [Duke](https://github.com/honhaochen/duke/releases/tag/A-Release). 
 * Download the `jar` file.
 * Create a folder name `data` along side with your `jar` file to save your progress inside it.
 * You may start having fun with it now! 
 
-### 3.2 How to use
+### <a id="3.2">3.2 How to use</a>
 
 Command | Description
 ----------- | -----------
@@ -56,8 +61,9 @@ delete [index]                 | Delete the specified index of task in your list
 undo                           | Undo to your last action, your task list will be reverted into previous ones
 bye                            | Exits Duke
 
-## 4. Feedback and Contact Us
-Contact Us
+---
+## <a id="4">4. Feedback and Contact Us</a>
+
 Thanks for using the product Duke. For any issues, queries or feedback, feel free to drop the developer a message. I can be contacted through:
 * [Github](https://github.com/honhaochen)
 

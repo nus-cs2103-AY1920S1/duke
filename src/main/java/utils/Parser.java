@@ -77,11 +77,11 @@ public class Parser {
                     break;
 
                 case "deadline":
-                    String [] splitDate = str.replaceFirst("deadline", "").split("/by");
-                    if (splitDate.length < 2) {
+                    String [] splitDate2 = str.replaceFirst("deadline", "").split("/by");
+                    if (splitDate2.length < 2) {
                         throw new DukeException("☹ OOPS!!! Deadlines require both a description and a date by");
                     } else {
-                        output = tasks.addDeadline(splitDate[0].trim(), new DateTime(splitDate[1].trim()));
+                        output = tasks.addDeadline(splitDate2[0].trim(), new DateTime(splitDate2[1].trim()));
                     }
                     break;
 

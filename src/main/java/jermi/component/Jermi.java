@@ -56,6 +56,7 @@ public class Jermi {
      * Outputs the response of Jermi.
      *
      * @param input User input.
+     * @param shouldExit Indicator for if the program should close.
      * @return Response of Jermi.
      */
     public String getResponse(String input, boolean[] shouldExit) {

@@ -17,7 +17,6 @@ import jermi.task.Deadline;
 import jermi.task.Event;
 import jermi.task.Task;
 import jermi.task.ToDo;
-import jermi.misc.TaskType;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class Storage {
     public Storage(String pathname, TaskList taskList) throws JermiException {
         this.taskList = taskList;
         this.file = new File(pathname);
-        this.fileToTaskList();
+        this.initialise();
     }
 
     /**
@@ -86,18 +85,33 @@ public class Storage {
     }
 
     /**
-     * Reads saved data in file and adds it to {@link TaskList}.
+     * Sets up {@link TaskList} and file.
      *
      * @throws JermiException {@link LoadingException}.
      */
-    private void fileToTaskList() throws JermiException {
+    private void initialise() throws JermiException {
+        try {
+            this.fileToTaskList();
+        } catch (IOException e) {
+            throw new LoadingException(e.getMessage());
+        }
+    }
+
+    /**
+     * Reads saved data in file and adds it to {@link TaskList} if file exists else creates new file.
+     *
+     * @throws IOException {@link IOException}.
+     * @throws JermiException {@link CorruptedSaveFormatException}.
+     */
+    private void fileToTaskList() throws IOException, JermiException {
         try {
             List<String> lines = Files.readAllLines(this.file.toPath());
             for (String line : lines) {
                 this.taskList.add(this.saveFormatToTask(line));
             }
-        } catch (IOException e) {
-            throw new LoadingException(e.getMessage());
+        } catch (java.nio.file.NoSuchFileException e) {
+            this.file.getParentFile().mkdirs();
+            this.file.createNewFile();
         }
     }
 

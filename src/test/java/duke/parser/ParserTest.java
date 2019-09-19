@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ParserTest {
 
     @Test
-    public void parse_userEnterInput_exceptionNotThrown() {
+    public void parseUserEnterInputExceptionNotThrown() {
         assertDoesNotThrow(() -> Parser.parse("event project meeting /at 2/12/2019 1800"));
         assertDoesNotThrow(() -> Parser.parse("event project meeting /at 2/2/2019 1800"));
         assertDoesNotThrow(() -> Parser.parse(" event   project meeting     /at         2/2/2019 1800   "));
@@ -21,7 +21,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_userEnterInput_exceptionThrown() {
+    public void parseUserEnterInputExceptionThrown() {
         assertThrows(DukeException.class, () -> Parser.parse(""));
         assertThrows(DukeException.class, () -> Parser.parse("  "));
         assertThrows(DukeException.class, () -> Parser.parse("event  /at 2/12/2019 1800"));

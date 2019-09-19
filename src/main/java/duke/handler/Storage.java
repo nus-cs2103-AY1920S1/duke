@@ -61,7 +61,7 @@ public class Storage {
                 Task task;
                 if (type.equals("T")) {
                     task = new ToDo(info.trim());
-                    if (status.equals("Y")) {
+                    if (status.equals("\u2713")) {
                         task.markAsDone();
                     }
                     list.add(task);
@@ -79,7 +79,7 @@ public class Storage {
                     String description = infoArr[0].substring(0, infoArr[0].length() - 1).trim();
                     String by = infoArr[1].substring(1, infoArr[1].length() - 1);
                     task = new Deadline(description, by);
-                    if (status.equals("Y")) {
+                    if (status.equals("\u2713")) {
                         task.markAsDone();
                     }
                     list.add(task);

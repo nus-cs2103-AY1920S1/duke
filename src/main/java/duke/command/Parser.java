@@ -47,7 +47,8 @@ public class Parser {
             String by = fullCommand.substring(5).trim();
             return new SortCommand(by);
         } else {
-            throw new DukeException("I'm terribly sorry, but I don't know what that means.");
+            throw new DukeException("I'm terribly sorry, but I don't know what that means." +
+                    " You see, I don't do small talk very often.");
         }
     }
 }

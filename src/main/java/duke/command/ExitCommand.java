@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.common.Message;
+import duke.common.MessageUtils;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -18,6 +18,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(DukeResponse dukeResponse, TaskList taskList, Storage storage) throws DukeException {
-        dukeResponse.add(Message.MESSAGE_BYE);
+        dukeResponse.add(MessageUtils.MESSAGE_BYE);
     }
 }

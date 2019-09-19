@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 import duke.command.Command;
 import duke.command.DukeResponse;
-import duke.parser.Parser;
+import duke.parser.ParserUtils;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -52,7 +52,7 @@ public class Duke {
     String getResponse(String input) {
         try {
             DukeResponse dukeResponse = new DukeResponse();
-            Command command = Parser.parse(input);
+            Command command = ParserUtils.parse(input);
             command.execute(dukeResponse, taskList, storage);
             return dukeResponse.toString();
         } catch (DukeException e) {

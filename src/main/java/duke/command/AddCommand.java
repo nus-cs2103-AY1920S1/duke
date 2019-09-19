@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.common.Message;
+import duke.common.MessageUtils;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -33,8 +33,8 @@ public class AddCommand extends Command {
         assert task != null;
         taskList.addTask(task);
         storage.save(task.getSimplifiedRepresentation());
-        dukeResponse.add(Message.MESSAGE_ADDED);
+        dukeResponse.add(MessageUtils.MESSAGE_ADDED);
         dukeResponse.add(" " + task);
-        dukeResponse.add(String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size()));
+        dukeResponse.add(String.format(MessageUtils.MESSAGE_SHOW_TASK_SIZE, taskList.size()));
     }
 }

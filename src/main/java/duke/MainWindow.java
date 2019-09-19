@@ -1,7 +1,7 @@
 package duke;
 
-import duke.common.Message;
-import duke.parser.Parser;
+import duke.common.MessageUtils;
+import duke.parser.ParserUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(Message.LOGO + Message.MESSAGE_WELCOME, dukeImage)
+                DialogBox.getDukeDialog(MessageUtils.LOGO + MessageUtils.MESSAGE_WELCOME, dukeImage)
         );
     }
 
@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        if (Parser.getCommandFrom(input).equals("bye")) {
+        if (ParserUtils.getCommandFrom(input).equals("bye")) {
             duke.exit();
         }
     }

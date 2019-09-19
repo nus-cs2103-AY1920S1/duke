@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.parser.Parser;
+import duke.parser.ParserUtils;
 
 /**
  * Represents a deadline which is a task needed to be done by a given date and time.
@@ -40,6 +40,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + Parser.getFormattedDateTimeFrom(deadlineDateTime) + ")";
+        return "[D]" + super.toString() + " (by: " + ParserUtils.getFormattedDateTimeFrom(deadlineDateTime) + ")";
     }
 }

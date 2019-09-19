@@ -1,9 +1,9 @@
 package duke.storage;
 
-import static duke.common.Message.MESSAGE_ERROR_CREATING_STORAGE_FILE;
-import static duke.common.Message.MESSAGE_ERROR_MISSING_STORAGE_FILE;
-import static duke.common.Message.MESSAGE_ERROR_READING_FROM_FILE;
-import static duke.common.Message.MESSAGE_STORAGE_FILE_CREATED;
+import static duke.common.MessageUtils.MESSAGE_ERROR_CREATING_STORAGE_FILE;
+import static duke.common.MessageUtils.MESSAGE_ERROR_MISSING_STORAGE_FILE;
+import static duke.common.MessageUtils.MESSAGE_ERROR_READING_FROM_FILE;
+import static duke.common.MessageUtils.MESSAGE_STORAGE_FILE_CREATED;
 
 import java.io.File;
 import java.io.FileNotFoundException;

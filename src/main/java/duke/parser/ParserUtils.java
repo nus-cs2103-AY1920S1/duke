@@ -11,7 +11,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.common.Message;
+import duke.common.MessageUtils;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -19,7 +19,7 @@ import duke.task.Todo;
 /**
  * Parses user input.
  */
-public class Parser {
+public class ParserUtils {
     /**
      * Parses user input into command for execution.
      *
@@ -47,7 +47,7 @@ public class Parser {
         case "find":
             return new FindCommand(getKeywordFrom(inputLine));
         default:
-            throw new DukeException(Message.MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new DukeException(MessageUtils.MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
 
@@ -59,14 +59,14 @@ public class Parser {
         try {
             return Integer.parseInt(inputLine.strip().split(" ")[1]);
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(Message.MESSAGE_INVALID_TASK_INDEX);
+            throw new DukeException(MessageUtils.MESSAGE_INVALID_TASK_INDEX);
         }
     }
 
     private static Todo createTodoFrom(String inputLine) throws DukeException {
         String todoDescription = inputLine.substring("todo".length()).strip();
         if (todoDescription.isEmpty()) {
-            throw new DukeException(Message.MESSAGE_INVALID_TODO_FORMAT);
+            throw new DukeException(MessageUtils.MESSAGE_INVALID_TODO_FORMAT);
         }
         return new Todo(todoDescription);
     }
@@ -76,15 +76,15 @@ public class Parser {
             String[] deadlinePart = inputLine.substring("deadline".length()).split("/by");
             String deadlineDescription = deadlinePart[0].strip();
             if (deadlineDescription.isEmpty()) {
-                throw new DukeException(Message.MESSAGE_INVALID_DEADLINE_FORMAT);
+                throw new DukeException(MessageUtils.MESSAGE_INVALID_DEADLINE_FORMAT);
             }
             LocalDateTime deadlineDateTime = LocalDateTime.parse(deadlinePart[1].strip(),
                     DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
             return new Deadline(deadlineDescription, deadlineDateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(Message.MESSAGE_INVALID_DEADLINE_FORMAT);
+            throw new DukeException(MessageUtils.MESSAGE_INVALID_DEADLINE_FORMAT);
         } catch (java.time.format.DateTimeParseException e) {
-            throw new DukeException((Message.MESSAGE_INVALID_DATE_FORMAT));
+            throw new DukeException((MessageUtils.MESSAGE_INVALID_DATE_FORMAT));
         }
     }
 
@@ -93,22 +93,22 @@ public class Parser {
             String[] eventPart = inputLine.substring("event".length()).split("/at");
             String eventDescription = eventPart[0].strip();
             if (eventDescription.isEmpty()) {
-                throw new DukeException(Message.MESSAGE_INVALID_EVENT_FORMAT);
+                throw new DukeException(MessageUtils.MESSAGE_INVALID_EVENT_FORMAT);
             }
             LocalDateTime eventDateTime = LocalDateTime.parse(eventPart[1].strip(),
                     DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
             return new Event(eventDescription, eventDateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(Message.MESSAGE_INVALID_EVENT_FORMAT);
+            throw new DukeException(MessageUtils.MESSAGE_INVALID_EVENT_FORMAT);
         } catch (java.time.format.DateTimeParseException e) {
-            throw new DukeException((Message.MESSAGE_INVALID_DATE_FORMAT));
+            throw new DukeException((MessageUtils.MESSAGE_INVALID_DATE_FORMAT));
         }
     }
 
     private static String getKeywordFrom(String inputLine) throws DukeException {
         String keyword = inputLine.substring("find".length()).strip();
         if (keyword.isEmpty()) {
-            throw new DukeException(Message.MESSAGE_INVALID_KEYWORD_FORMAT);
+            throw new DukeException(MessageUtils.MESSAGE_INVALID_KEYWORD_FORMAT);
         }
         return keyword;
     }

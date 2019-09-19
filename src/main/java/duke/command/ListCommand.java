@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.common.Message;
+import duke.common.MessageUtils;
 import duke.storage.Storage;
 import duke.task.TaskList;
 
@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(DukeResponse dukeResponse, TaskList taskList, Storage storage) throws DukeException {
-        dukeResponse.add(String.format(Message.MESSAGE_SHOW_TASK_LIST, ""));
+        dukeResponse.add(String.format(MessageUtils.MESSAGE_SHOW_TASK_LIST, ""));
         for (String taskName : taskList.getTaskNames()) {
             dukeResponse.add(taskName + "\n");
         }

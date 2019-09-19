@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.common.Message;
+import duke.common.MessageUtils;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -31,13 +31,13 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(DukeResponse dukeResponse, TaskList taskList, Storage storage) throws DukeException {
         if (index <= 0 || index > taskList.size()) {
-            throw new DukeException(Message.MESSAGE_INVALID_TASK_INDEX);
+            throw new DukeException(MessageUtils.MESSAGE_INVALID_TASK_INDEX);
         }
         Task task = taskList.delete(index);
         assert task != null;
         storage.save(taskList.getSimplifiedTaskRepresentations());
-        dukeResponse.add(Message.MESSAGE_DELETED);
+        dukeResponse.add(MessageUtils.MESSAGE_DELETED);
         dukeResponse.add(" " + task);
-        dukeResponse.add(String.format(Message.MESSAGE_SHOW_TASK_SIZE, taskList.size()));
+        dukeResponse.add(String.format(MessageUtils.MESSAGE_SHOW_TASK_SIZE, taskList.size()));
     }
 }

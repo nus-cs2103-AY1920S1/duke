@@ -3,7 +3,7 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.parser.Parser;
+import duke.parser.ParserUtils;
 
 /**
  * Represents an event at a given date and time.
@@ -40,6 +40,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Parser.getFormattedDateTimeFrom(eventDateTime) + ")";
+        return "[E]" + super.toString() + " (at: " + ParserUtils.getFormattedDateTimeFrom(eventDateTime) + ")";
     }
 }

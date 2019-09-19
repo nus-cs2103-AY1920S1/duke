@@ -3,7 +3,7 @@ package duke.common;
 /**
  * Contains messages displayed to user.
  */
-public class Message {
+public class MessageUtils {
     public static final String MESSAGE_WELCOME = "Hello! I'm Duke\nWhat can I do for you?\n\n";
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

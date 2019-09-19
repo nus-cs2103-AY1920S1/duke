@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        String welcome = "     Hello! I'm Duke\n" +
+        String welcome = "     Hello! I'm Kim Jong Un\n" +
                 "     What can I do for you?";
         duke = d;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcome,dukeImage));

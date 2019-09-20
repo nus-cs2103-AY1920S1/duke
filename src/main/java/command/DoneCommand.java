@@ -32,6 +32,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList task, Ui ui, Storage storage) throws IOException {
         try {
             int index = Integer.parseInt(temp[1]) - 1;
+            task.getList().get(index).markAsDone();
             storage.arrayToFile(task.getList());
             return ui.printDone(task.getList(), index);
         } catch (NullPointerException e) {

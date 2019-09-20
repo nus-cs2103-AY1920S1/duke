@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
      * @param storage Tasks storage: load & save.
      */
     public void execute(TaskList tasks, UserInterface ui, Storage storage) {
-        Task task = tasks.done(index);
+        Task task = tasks.done(index - 1);
 
         //display successful message
         super.message = "Nice! I've marked this task as done:\n";

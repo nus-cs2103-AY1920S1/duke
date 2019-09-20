@@ -6,7 +6,7 @@ Snowball is a Task Manager which helps to keep track of all the things you have 
 Snowball communicates using a chat interface, so all you have to do is to type in your 
 commands, and Snowball will handle the rest!
 
-![Snowball image](../src/main/resources/images/Snowball.png)
+![Snowball image](https://github.com/dorcastan/duke/blob/master/src/main/resources/images/Snowball.png?raw=true)
 >Hello! My name is Snowball. I'm here to help you organise your tasks!
 
 

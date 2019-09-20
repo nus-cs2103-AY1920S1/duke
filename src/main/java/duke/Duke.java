@@ -43,6 +43,15 @@ public class Duke {
     }
 
     /**
+     * Returns the Storage object dealing with reading and writing the list of tasks to the file.
+     *
+     * @return Storage object.
+     */
+    public Storage getStorage() {
+        return storage;
+    }
+
+    /**
      * Getter method for the boolean indicating whether program should be exited.
      *
      * @return boolean shouldExitProgram

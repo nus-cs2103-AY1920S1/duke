@@ -26,6 +26,30 @@ public class Storage {
     /** The path of the file to be read from and written to. */
     private String filePath;
 
+    /** The boolean indicating whether the data folder already exists. */
+    private boolean hasDataFolder;
+
+    /** The boolean indicating whether the txt file where the list of tasks is stored already exists. */
+    private boolean hasTxtFile;
+
+    /**
+     * Returns a boolean indicating whether the text file where list of tasks is stored already exists.
+     *
+     * @return boolean hasTxtFile.
+     */
+    public boolean getHasTxtFile() {
+        return hasTxtFile;
+    }
+
+    /**
+     * Returns a boolean indicating whether the data folder already exists.
+     *
+     * @return boolean hasDataFolder;
+     */
+    public boolean getHasDataFolder() {
+        return hasDataFolder;
+    }
+
     /**
      * The Storage constructor takes the path of the
      * file to be read from as input.
@@ -46,8 +70,13 @@ public class Storage {
      */
     ArrayList<Task> load() throws DukeException, IOException {
 
-        File f = new File(filePath);
+        // Create a new directory for data folder if it currently does not exist
+        File directory = new File("./data");
+        hasDataFolder = directory.exists();
+        directory.mkdirs();
         // Create a new txt file if it currently does not exist
+        File f = new File(filePath);
+        hasTxtFile = f.exists();
         f.createNewFile();
         Scanner sc = new Scanner(f);
         ArrayList<Task> taskLst = new ArrayList<>();

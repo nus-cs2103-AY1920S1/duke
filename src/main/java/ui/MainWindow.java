@@ -1,5 +1,6 @@
 package ui;
 
+import duke.Storage;
 import exceptions.DukeException;
 import javafx.animation.PauseTransition;
 import javafx.beans.binding.BooleanBinding;
@@ -44,6 +45,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private Ui ui;
+    private Storage storage;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/eminem.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/lelouch2.jpeg"));
@@ -91,8 +93,21 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke duke) {
         this.duke = duke;
         this.ui = duke.getUi();
+        this.storage = duke.getStorage();
+        DialogBox LoadBox;
+        if (storage.getHasTxtFile() && storage.getHasDataFolder()) {
+            LoadBox = DialogBox.getDukeDialog("The list of tasks has been successfully loaded from" +
+                    " the text file in the data folder!", dukeImage);
+        } else if (storage.getHasDataFolder()) {
+            LoadBox = DialogBox.getDukeDialog("A text file was not found in the data folder. A text" +
+                    " file representing an empty task list has been created!", dukeImage);
+        } else {
+            LoadBox = DialogBox.getDukeDialog("A data folder was not found. A new data folder" +
+                    " has been created along with a text file representing an empty task list!", dukeImage);
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(ui.getDukeAsciiArt(), dukeImage),
+                LoadBox,
                 DialogBox.getDukeDialog("Hello, I'm Duke! What can I do for you?", dukeImage)
         );
     }

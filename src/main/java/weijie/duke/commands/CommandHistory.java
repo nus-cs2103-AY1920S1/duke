@@ -17,7 +17,6 @@ public class CommandHistory {
     }
 
     public void addCommand(ITaskCommand command) {
-        System.out.println("before: " + commandStateHistory + "\nindex: " + presentState);
         command.getCommandState()
                 .ifPresent(undo -> {
                     if (presentState >= commandStateHistory.size()) {

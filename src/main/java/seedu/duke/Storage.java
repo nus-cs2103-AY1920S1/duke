@@ -2,11 +2,11 @@ package seedu.duke;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.stream.Stream;
 
 import seedu.duke.task.TaskList;
 
@@ -15,27 +15,42 @@ public class Storage {
     // read
     private String filePath;
 
+    /**
+     * Instantiate a Storage object.
+     *
+     * @param filePath the path to the file where data is stored and read.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
+        if (!(new File(filePath)).exists()) {
+            createFile();
+        }
     }
 
     /**
-     * Returns a stream of String that is loaded from the file as specified by the
-     * Storage object.
+     * Returns an array of String that is loaded from the file as specified by the
+     * Storage object, each containing one line.
      * 
      * @return a stream of strings, each string is a line in the file
      */
-    public Stream<String> load() throws DukeException {
+    public String[] load() throws DukeException {
         // load tasks from SAVE_LOCATION into the arraylist of tasks, cache.
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            Stream<String> lines = br.lines();
-            br.close();
-            return lines;
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            return br.lines().toArray(String[]::new);
         } catch (FileNotFoundException e) {
             throw new DukeException("The data file cannot be found!");
         } catch (IOException e) {
             throw new DukeException("The data file cannot be read!");
+        }
+    }
+
+    private void createFile() {
+        File file = new File(filePath);
+        if (file.getParent() != null) {
+            File parent = new File(file.getParent());
+            if (!parent.exists()) {
+                parent.mkdirs();
+            }
         }
     }
 

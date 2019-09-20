@@ -12,7 +12,7 @@ public class Ui {
     private static final String LINE = "-------------------------";
     private static final String LOGO = " ____ _ \n" + "| _ \\ _ _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| | < __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String LOADING_ERROR_MESSAGE = "Sorry, we encountered error loading your data."
+    private static final String LOADING_ERROR_MESSAGE = "Sorry, we encountered error loading your data. "
             + "You will be using Duke fresh.";
     private Scanner sc;
 
@@ -55,5 +55,9 @@ public class Ui {
 
     public void showSuccessMessage(String action, Task t) {
         System.out.printf("%s %s successful!\n", action, t);
+    }
+
+    public void show(String s) {
+        System.out.println(s);
     }
 }

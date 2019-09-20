@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import seedu.duke.DukeException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -23,7 +25,17 @@ public class Task {
         this("");
     }
 
-    public Task markAsDone() {
+    /**
+     * Marks the task as done. Returns the task if successful, else throws a
+     * {@link DukeException}.
+     * 
+     * @return the successfully marked-as-done task.
+     * @throws DukeException if task is already done.
+     */
+    public Task markAsDone() throws DukeException {
+        if (this.isDone) {
+            throw new DukeException(String.format("Task %s is already done!", this));
+        }
         this.isDone = true;
         return this;
     }
@@ -46,5 +58,9 @@ public class Task {
 
     public static LocalDateTime parseTime(String time) throws DateTimeParseException {
         return LocalDateTime.parse(time, dtf);
+    }
+
+    boolean containKeyword(String keyword) {
+        return description.contains(keyword);
     }
 }

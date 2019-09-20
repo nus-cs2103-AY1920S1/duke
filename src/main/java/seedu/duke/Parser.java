@@ -5,14 +5,15 @@ import java.util.Optional;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DoneCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.ListCommand;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.ToDo;
 
 public class Parser {
-    // main function that splits and switch the command
     /**
      * Takes in a line and returns a Optional Task. The Optional task is empty if
      * the line is malformed.
@@ -21,10 +22,7 @@ public class Parser {
      * @return an Optional Task object parsed from the input line
      */
     public static Optional<Task> parseLineToTask(String line) {
-        String[] tokens = line.split("|");
-        for (int i = 0; i < tokens.length; i++) {
-            tokens[i] = tokens[i].trim();
-        }
+        String[] tokens = Utils.trimAll(line.split("\\|"));
         if (line.length() < 1) {
             return Optional.empty();
         }
@@ -55,7 +53,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         try {
-            String[] commandTokens = fullCommand.split(" ", 2);
+            String[] commandTokens = Utils.trimAll(fullCommand.split(" ", 2));
             switch (commandTokens[0]) {
             case "todo":
             case "deadline":
@@ -63,6 +61,10 @@ public class Parser {
                 return parseAddCommand(fullCommand);
             case "delete":
                 return parseDeleteCommand(commandTokens);
+            case "list":
+                return new ListCommand();
+            case "done":
+                return parseDoneCommand(commandTokens);
             case "bye":
             case "exit":
                 return new ExitCommand();
@@ -130,12 +132,16 @@ public class Parser {
         if (todoMissingDescription(commandTokens)) {
             throw new DukeException("A todo must have a non-empty description!");
         }
-        return new AddCommand(new ToDo(commandTokens[2]));
+        return new AddCommand(new ToDo(commandTokens[1]));
     }
 
     // (probably) delete number
     private static DeleteCommand parseDeleteCommand(String[] commandTokens) {
         Integer number = Integer.parseInt(commandTokens[1].trim());
         return new DeleteCommand(number);
+    }
+
+    private static DoneCommand parseDoneCommand(String[] commandTokens) {
+        return new DoneCommand(Integer.parseInt(commandTokens[1]));
     }
 }

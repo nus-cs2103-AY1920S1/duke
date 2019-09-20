@@ -14,6 +14,12 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    //@@author jaesimin-reused
+    //Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart1.md with minor modifications
+    //Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart2.md with minor modifications
+    //Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart3.md with minor modifications
+    //Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart4.md with minor modifications
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -51,6 +57,8 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    //@@author
 
     @FXML
     void showWelcome() {

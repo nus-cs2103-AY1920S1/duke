@@ -9,6 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+//@@author jaesimin-reused
+//Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart1.md with minor modifications
+//Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart2.md with minor modifications
+//Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart3.md with minor modifications
+//Reused from https://github.com/nus-cs2103-AY1920S1/duke/blob/master/tutorials/javaFxTutorialPart4.md with minor modifications
+
 /**
  * A GUI for Duke using FXML.
  */
@@ -41,3 +47,5 @@ public class Main extends Application {
         }
     }
 }
+
+//@@author

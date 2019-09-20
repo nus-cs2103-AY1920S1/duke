@@ -1,6 +1,6 @@
 # User Guide
 
-![Sample image](https://github.com/CowSaysBaa/duke/blob/master/docs/Ui.png)
+![Sample image](https://raw.githubusercontent.com/CowSaysBaa/duke/master/docs/Ui.png)
 
 ## Features 
 

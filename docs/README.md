@@ -122,4 +122,8 @@ Expected outcome:
 <br>`Bye. Hope to see you again soon!`</br>
 <br>Find your saved file in the data folder</br>
 
-
+### Acknowledgements
+Some code from More-OOP is reused in this project
+<br>https://nus-cs2103-ay1920s1.github.io/website/schedule/week3/project.html</br>
+<br>Some code from this tutorial is reused</br>
+<br>https://github.com/SQwQ/duke/blob/master/tutorials/javaFxTutorialPart4.md</br>

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class CreateEventCommandTest {
-    private static String filePath = "C:\\Users\\jxken\\Desktop\\Github\\duke\\src\\test\\java\\dukeTest.txt";
+    private static String filePath = "./dukeTest.txt";
     private static Storage storage = new Storage(filePath);
     private static TaskList tasks = new TaskList();
     private static MessageHandler messageHandler = new MessageHandler(tasks, storage);

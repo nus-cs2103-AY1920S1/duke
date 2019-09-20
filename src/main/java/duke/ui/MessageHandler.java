@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Helper class for displaying user interface messages.
@@ -47,32 +46,7 @@ public class MessageHandler {
      * @return <code>String</code> hello message
      */
     public String hiMessage() {
-        String message = "Hello! I'm Duke.\n";
-
-        try {
-            storage.readFromTasksFileToList(tasks);
-            message += "This is where you left off previously:\n";
-        } catch (FileNotFoundException e) {
-            message += "Fetching failed. " + e.getMessage() + "\n";
-            message += "Creating file now...\n";
-            File dukeTxt = new File(Duke.filePath);
-            try {
-                dukeTxt.createNewFile();
-                message += "File created! " + dukeTxt.getAbsolutePath() + "\n";
-                message += "Reading file...\n";
-            } catch (IOException ioe) {
-                message += "\t File creation was not successful. \n";
-                message += "\t Exiting system.";
-                return message;
-            }
-
-        }
-
-        message += getAllTasksAsString();
-
-        assert !message.isEmpty();
-
-        return message;
+        return "Hello! I'm Duke.\n";
     }
 
 

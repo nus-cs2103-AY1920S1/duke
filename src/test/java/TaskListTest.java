@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
-    private static final String FILE_PATH = "C:\\Users\\jxken\\Desktop\\Github\\duke\\src\\test\\java\\dukeTest.txt";
+    private static final String FILE_PATH = "./dukeTest.txt";
     private Storage storage = new Storage(FILE_PATH);
     private TaskList tasks;
 

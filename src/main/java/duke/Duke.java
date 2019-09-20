@@ -7,6 +7,10 @@ import duke.ui.MessageHandler;
 import duke.utilities.Parser;
 import duke.utilities.Storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 
 /**
  * Contains methods relevant to the start up and shut down of the Duke application.
@@ -14,8 +18,8 @@ import duke.utilities.Storage;
  * @author JXKENG
  */
 public class Duke {
-    public static final String filePath = "C:/Users/jxken/Desktop/Github/duke/data/duke.txt";
-    private Storage storage = new Storage(filePath);
+    public static final String FILE_PATH = "./data/duke.txt";
+    private Storage storage = new Storage(FILE_PATH);
     private TaskList tasks = new TaskList();
     private MessageHandler messageHandler = new MessageHandler(tasks, storage);
     private boolean isExit = false;
@@ -48,12 +52,37 @@ public class Duke {
     }
 
     /**
-     * Get Duke's hi message when initializing Duke.
+     * Says hi and loads previous state if possible.
+     * If not, sets up task file in data folder in current directory <code>./data</code>
      *
      * @return Duke's hi message with a list of where you left off previously
      */
-    public String hiMessage() {
-        return messageHandler.hiMessage();
+    public String initialize() {
+        String message = messageHandler.hiMessage();
+        try {
+            storage.readFromTasksFileToList(tasks);
+            message += "This is where you left off previously:\n";
+        } catch (FileNotFoundException e) {
+            message += "Fetching failed. " + e.getMessage() + "\n";
+            message += "Creating file now...\n";
+            File dukeTxt = new File(Duke.FILE_PATH);
+            try {
+                dukeTxt.createNewFile();
+                message += "File created! " + dukeTxt.getCanonicalPath() + "\n";
+                message += "Reading file...\n";
+            } catch (IOException ioe) {
+                message += "\t File creation was not successful. \n";
+                message += "\t Exiting system.";
+                return message;
+            }
+
+        }
+
+        message += messageHandler.getAllTasksAsString();
+
+        assert !message.isEmpty();
+
+        return message;
     }
 }
 

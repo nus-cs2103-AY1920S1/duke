@@ -220,4 +220,5 @@ Bye. Hope to see you again soon!
 ```
 
 A sample Duke Helpbot response can be seen below.
+
 ![Bye command](bye.png)

@@ -29,7 +29,6 @@ public class CommandHistory {
                     presentState++;
                     maxIndex = presentState;
                 });
-        System.out.println("after: " + commandStateHistory + "\nindex: " + presentState);
     }
 
     TaskResponse undo() {

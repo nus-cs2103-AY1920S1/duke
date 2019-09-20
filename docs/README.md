@@ -8,8 +8,9 @@
   3.4. [Marking a task as done](#34-marking-a-task-as-done) : `done`   
   3.5. [Deleting a task](#35-deleting-a-task) : `delete`    
   3.6. [Searching for a task by keyword(s)](#36-searching-a-task-by-keyword) : `find`  
-  3.7. [Clearing the window](#37-clearing-the-window) : `clear`    
-  3.8. [Exiting the program](#37-exiting-the-program) : `bye`
+  3.7. [Undoing and redoing commands](#37-undoing-and-redoing-commands) : `undo`, `redo`        
+  3.8. [Clearing the window](#37-clearing-the-window) : `clear`    
+  3.9. [Exiting the program](#37-exiting-the-program) : `bye`
    
 ## 1. Introduction
 Duke is a Personal Assistant Chatbot that aids users in keeping track of various tasks.
@@ -17,15 +18,14 @@ Duke is a Personal Assistant Chatbot that aids users in keeping track of various
 ## 2. Setting Up
 1. Ensure that you have Java `11` or above installed on your computer. 
 2. Download the latest `duke-0.2.jar` [here.](https://github.com/bruceskellator/duke/releases/tag/A-Release)
-3. Copy the file to a folder. This will be the home folder for Duke.
-4. Double-click on the `duke-0.2.jar` to start the app.  
+3. Double-click on the `duke-0.2.jar` to start the app.  
 The GUI should appear in a few seconds.
+    
+    ![Screenshot of Duke GUI](https://github.com/bruceskellator/duke/blob/master/docs/Ui.png?raw=true)
 
-![Screenshot of Duke GUI](https://github.com/bruceskellator/duke/blob/master/docs/Ui.png?raw=true)
-
-6. Once the app has started, key in a valid command and hit `enter`.
+4. Once the app has started, key in a valid command and hit `enter`.
 Alternatively, you can click the `send` button to execute it.
-7. You are now good to go!   
+5. You are now good to go!   
 The list of tasks is saved to the file every
 time a command executes.   
 Therefore, you can simply close the app without losing any changes.  
@@ -111,12 +111,26 @@ Finds task with description: `help guild register for the boss event`
 
 Format: `find [keywords delimited by a single space]`
 
-### 3.7 Clearing the window
+### 3.7 Undoing or redoing commands
+**Undoable** commands can be undone or redone.  
+Undoable commands: 
+* `todo`, `event`, `deadline` (Adding tasks)
+* `delete` (Deleting tasks)
+* `done` (Marking tasks as done)    
+
+Note that if the user makes certain changes after undoing,  
+by calling any of the Undoable commands mentioned above,  
+all information pertaining to the most recent undo command  
+and beyond will be lost. (As per Microsoft Windows implementation)  
+
+Format: `undo`, `redo`
+
+### 3.8 Clearing the window
 Clears the window of all dialog-boxes and outputs a message.
 
 Format: `clear`
 
-### 3.8 Exiting the program
+### 3.9 Exiting the program
 Displays the exit message and closes the program.
 
 Format: `bye`

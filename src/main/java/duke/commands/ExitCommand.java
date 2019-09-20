@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      * Initialises the exit command
      */
     public ExitCommand(){
-        this.commandType = CommandType.EXIT;
+        super(CommandType.EXIT);
     }
 
     /**
@@ -28,6 +28,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
+        assert ui != null;
         return ui.printByeMessage();
     }
 

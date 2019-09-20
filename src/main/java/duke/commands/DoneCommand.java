@@ -28,8 +28,9 @@ public class DoneCommand extends Command{
      * @param index the index of the task to be deleted
      */
     private DoneCommand(int index){
-        this.commandType = CommandType.DONE;
+        super(CommandType.DONE);
         this.index = index;
+        assert index >= 0;
     }
 
 
@@ -57,7 +58,10 @@ public class DoneCommand extends Command{
      */
     @Override
     public String execute(TaskList taskList, Ui ui) throws IOException {
+        assert ui != null;
         try {
+            assert taskList != null;
+
             Task task = taskList.getTaskAt(index+1);
             boolean isDoneBefore = task.setDone();
             if (isDoneBefore) {

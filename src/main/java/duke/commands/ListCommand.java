@@ -3,7 +3,7 @@ package duke.commands;
 
 import duke.core.TaskList;
 import duke.core.Ui;
-
+import duke.errors.DukeAssertions;
 
 
 /**
@@ -15,7 +15,7 @@ public class ListCommand extends Command {
      * Initialises the list command
      */
     public ListCommand(){
-        this.commandType = CommandType.LIST;
+        super(CommandType.LIST);
     }
 
     /**
@@ -26,6 +26,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) {
+        DukeAssertions.assertNotNull(taskList, ui);
         return ui.printNumberList(taskList);
     }
 }

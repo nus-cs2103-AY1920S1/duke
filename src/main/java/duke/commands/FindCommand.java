@@ -4,6 +4,7 @@ import java.util.List;
 
 import duke.core.TaskList;
 import duke.core.Ui;
+import duke.errors.DukeAssertions;
 import duke.errors.DukeException;
 import duke.errors.DukeExceptionType;
 import duke.tasks.Task;
@@ -21,8 +22,9 @@ public class FindCommand extends Command {
      * Initialises the find command
      */
     private FindCommand(String keyword) {
+        super(CommandType.FIND);
         this.keyword = keyword;
-        this.commandType = CommandType.FIND;
+        assert keyword != null;
     }
 
     /**
@@ -44,6 +46,7 @@ public class FindCommand extends Command {
      * @param ui user interface
      */
     public String execute(TaskList taskList, Ui ui) {
+        DukeAssertions.assertNotNull(taskList, ui);
         List<Task> resultList = taskList.findTasks(this.keyword);
         return ui.printFindResults(resultList);
     }

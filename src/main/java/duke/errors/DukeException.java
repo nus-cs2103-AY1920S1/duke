@@ -11,6 +11,8 @@ public class DukeException extends Exception {
     public DukeException(String error, DukeExceptionType type){
         super(error);
         this.type = type;
+
+        assert type != null;
     }
 
 	/**

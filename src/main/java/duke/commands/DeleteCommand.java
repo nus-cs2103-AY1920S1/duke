@@ -5,6 +5,7 @@ import java.io.IOException;
 import duke.core.TaskList;
 import duke.core.Ui;
 
+import duke.errors.DukeAssertions;
 import duke.errors.DukeException;
 import duke.errors.DukeExceptionType;
 
@@ -26,8 +27,10 @@ public class DeleteCommand extends Command {
      * @param index the index of the task to be deleted
      */
     private DeleteCommand(int index){
-        this.commandType = CommandType.DELETE;
+        super(CommandType.DELETE);
         this.index = index;
+
+        assert index >= 0;
     }
 
     /**
@@ -53,7 +56,10 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) throws IOException {
+        assert ui != null;
         try {
+            assert taskList != null;
+
             Task task = taskList.getTaskAt(index+1);
             taskList.removeFromList(task);
             return ui.printDeletion(task, taskList);

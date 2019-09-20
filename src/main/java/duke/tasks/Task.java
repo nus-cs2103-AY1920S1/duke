@@ -1,7 +1,7 @@
 package duke.tasks;
 
 import duke.core.TaskList;
-
+import duke.errors.DukeAssertions;
 
 
 /**
@@ -15,7 +15,7 @@ import duke.core.TaskList;
 public abstract class Task {
     private String description;
     private boolean isDone;
-    TaskType type;
+    private TaskType type;
 
     public static TaskList taskList;
 
@@ -25,9 +25,13 @@ public abstract class Task {
      *
      * @param description Description of the task.
      */
-    public Task(String description) {
+    public Task(String description, TaskType type) {
         this.description = description;
+        this.type = type;
         this.isDone = false;
+
+        DukeAssertions.assertNotNull(description, type);
+
     }
 
     /**
@@ -36,6 +40,7 @@ public abstract class Task {
      * @return TaskType
      */
     public TaskType getType() {
+        assert type != null;
         return type;
     }
 
@@ -54,6 +59,7 @@ public abstract class Task {
      * @return String that represents the description of the task.
      */
     public String getDescription() {
+        assert description != null;
         return description;
     }
 
@@ -86,6 +92,7 @@ public abstract class Task {
      */
     public static void setTaskList(TaskList taskList) {
         Task.taskList = taskList;
+        assert taskList != null;
     }
 
     /**
@@ -94,6 +101,7 @@ public abstract class Task {
      * @return Position of the specified task in current list
      */
     public static int getTaskID(Task task) {
+        assert taskList != null;
         return Task.taskList.getTaskID(task);
     }
 }

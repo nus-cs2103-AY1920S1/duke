@@ -1,6 +1,8 @@
 package duke.commands;
 
 import java.io.IOException;
+
+import duke.errors.DukeAssertions;
 import duke.errors.DukeException;
 
 import duke.core.TaskList;
@@ -11,7 +13,14 @@ import duke.core.Ui;
  * by the children commands.
  */
 public abstract class Command {
-    CommandType commandType;
+    private CommandType commandType;
+
+    public Command(CommandType commandType) {
+        this.commandType = commandType;
+
+        DukeAssertions.assertNotNull(commandType);
+    }
+
 
     /**
      * getter for type of command

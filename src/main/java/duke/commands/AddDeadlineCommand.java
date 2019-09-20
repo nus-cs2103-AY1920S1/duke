@@ -6,6 +6,7 @@ import java.io.IOException;
 import duke.core.TaskList;
 import duke.core.Ui;
 
+import duke.errors.DukeAssertions;
 import duke.tasks.Deadline;
 
 
@@ -26,9 +27,11 @@ public class AddDeadlineCommand extends Command {
      * @param date date description
      */
     public AddDeadlineCommand(String description, String date) {
+        super(CommandType.ADDDEADLINE);
         this.description = description;
         this.date = date;
-        this.commandType = CommandType.ADDDEADLINE;
+
+        DukeAssertions.assertNotNull(description,date);
     }
 
     /**
@@ -41,6 +44,9 @@ public class AddDeadlineCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui) throws IOException {
         Deadline task = new Deadline(this.description,this.date);
+
+        DukeAssertions.assertNotNull(taskList,ui);
+
         taskList.addToList(task);
         return ui.printAddMessage(task, taskList);
     }

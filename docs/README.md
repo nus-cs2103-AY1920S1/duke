@@ -86,6 +86,7 @@ Expected outcome:
 list all the tasks in the list, arranged according to the time added.
 
 Example of usage:
+
 `list`
 
 Expected outcome:
@@ -95,21 +96,23 @@ Expected outcome:
 ### `bye` - Exit the program 
 
 Exit the program and update local file
-`todo [description]`
+
+`bye`
 
 Expected outcome:
 
 ![](exit.png)
 
-### `help` - Create a new todo task 
-
-Creates a new todo task with given discription.
+### `help` - show helping message 
 
 Example of usage: 
 
-`todo [description]`
+`help`
+
+`help [keyword]`
 
 Expected outcome:
+
 ![](help.png)
 
 

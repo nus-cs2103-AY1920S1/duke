@@ -4,16 +4,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="dialog" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" prefWidth="277.0" text="Label" wrapText="true">
+      <Label fx:id="dialog" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" prefWidth="277.0" text="Label" wrapText="true">
          <padding>
             <Insets left="7.5" right="7.5" />
          </padding>
          <HBox.margin>
             <Insets left="7.5" right="7.5" />
-         </HBox.margin></Label>
+         </HBox.margin>
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font></Label>
       <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
    </children>
    <padding>

@@ -5,7 +5,7 @@ import tasks.Task;
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String LOGO = "____        _        \n"
+    private static final String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -58,10 +58,14 @@ public class Ui {
      * @param tasks arraylist of tasks stored.
      */
     public String printTaskListMessage(ArrayList<Task> tasks) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Here are the tasks in your list:\n");
-        sb.append(getTaskListStringOf(tasks));
-        return sb.toString();
+        if (tasks.size() == 0) {
+            return "There are no tasks in this list!";
+        } else {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the tasks in your list:\n");
+            sb.append(getTaskListStringOf(tasks));
+            return sb.toString();
+        }
     }
 
     public String getTaskListStringOf(ArrayList<Task> tasks) {

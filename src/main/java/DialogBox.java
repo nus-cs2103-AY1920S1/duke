@@ -13,7 +13,9 @@ import javafx.scene.shape.Circle;
 import java.io.IOException;
 import java.util.Collections;
 
-
+//@@author {chanjunren}-reused
+//Adapted from JavaFX tutorial
+//@@author
 public class DialogBox extends HBox {
     private final Circle CLIP = new Circle(50,50,50);
     @FXML
@@ -39,12 +41,11 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        dialog.setAlignment(Pos.CENTER_LEFT);
     }
 
     public static DialogBox getUserDialog(String input, Image img) {
-        var db = new DialogBox(input, img);
-        return db;
+        return new DialogBox(input, img);
     }
 
     public static DialogBox getDukeDialog(String response, Image img) {

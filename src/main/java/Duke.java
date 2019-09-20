@@ -13,7 +13,9 @@ import storage.Storage;
 import tasks.TaskList;
 import ui.Ui;
 
-
+//@@author {chanjunren}-reused
+//Adapted from JavaFX tutorial
+//@@author
 public class Duke extends Application {
 
     private static final String FILE_PATH = "data/duke.txt";
@@ -37,9 +39,9 @@ public class Duke extends Application {
         initializeElements();
         setAttributes(primaryStage);
         setActions();
-        showWelcomeMessage();
         try {
             tasks = new TaskList(storage.load());
+            showWelcomeMessage();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
@@ -140,8 +142,7 @@ public class Duke extends Application {
     }
 
     private void showWelcomeMessage() {
-        //Message shifts to the right for some reason HEADACHE
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog("test", dukeIv));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcomeMessage(), dukeIv));
     }
 
     /**

@@ -21,6 +21,7 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
+        file = new File(filePath);
         tasks = new ArrayList<>();
     }
 
@@ -49,8 +50,6 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         try {
-
-            file = new File(filePath);
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String str;

@@ -45,7 +45,7 @@ public class Duke extends Application {
     public Duke() {
         ui = new Ui();
         tasks = new TaskList();
-        storage = new Storage("src/data/tasks.txt");
+        storage = new Storage("/data/tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

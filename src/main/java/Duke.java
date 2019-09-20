@@ -226,7 +226,7 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke("src/data/tasks.txt").run();
+        new Duke("C:/Users/Low Cheng Yi/Desktop/CS2103/duke/src/data/tasks.txt").run();
     }
 
 }

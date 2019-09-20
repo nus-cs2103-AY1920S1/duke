@@ -1,5 +1,4 @@
-1. [T][✓] do fwoc
-2. [D][✓] fwoc (by: 6th aug)
-3. [T][✓] krbff
-4. [T][✘] jeanne
-5. [T][✘] jeanne
+1. [D][✓] fwoc (by: 6th aug)
+2. [T][✓] krbff
+3. [T][✘] CS2103T
+4. [E][✘] Tutorial (at: 6th of June 2019, 6.00AM)

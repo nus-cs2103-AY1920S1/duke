@@ -224,8 +224,8 @@ public class GuiParser {
         String list = "list\n";
         String del = "delete [item number]\n";
         String todo = "todo [todo description]\n";
-        String event = "event [event description] [time and date, dd/mm/yy]\n";
-        String deadline = "deadline [deadline description] [time and date, dd/mm/yy]\n";
+        String event = "event [event description] /at [dd/mm/yyyy] [hhmm]\n";
+        String deadline = "deadline [deadline description] /by [dd/mm/yyyy]\n";
         String find = "find [description word]\n";
         String out = intro + list + todo + event + deadline + find + del;
         return out;

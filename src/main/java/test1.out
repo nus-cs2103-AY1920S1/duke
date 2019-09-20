@@ -1,0 +1,29 @@
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
+
+Hello! I'm Duke What can I do for you?
+added: first
+added: second
+added: third
+added: forth
+1.[?] first
+2.[?] second
+3.[?] third
+4.[?] forth
+Nice! I've marked this task as done: 
+  [?] first
+Nice! I've marked this task as done: 
+  [?] forth
+added: this should all be correct
+Now you have 4 tasks in the list.
+Got it. I've added this task:
+  [D][?] positive check (of: twin)
+Now you have 5 tasks in the list.
+Got it. I've added this task:
+  [E][?] how the heck (am: I supposed to know?)
+Now you have 6 tasks in the list.
+Bye. Hope to see you again soon!

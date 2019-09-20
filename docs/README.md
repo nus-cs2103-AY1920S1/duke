@@ -1,5 +1,7 @@
 # User Guide
 
+![Sample image](docs/Ui.png)
+
 ## Features 
 
 ### Task tracking

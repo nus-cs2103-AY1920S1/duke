@@ -1,12 +1,11 @@
 package duke.tasklist;
 
-import duke.command.InvalidDeleteDukeException;
+import duke.command.exceptions.InvalidDeleteDukeException;
 import duke.date.EventConflictChecker;
 import duke.task.Event;
 import duke.task.InvalidTaskDukeException;
 import duke.task.Task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

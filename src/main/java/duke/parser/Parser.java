@@ -1,6 +1,7 @@
 package duke.parser;
 
 import duke.command.*;
+import duke.command.exceptions.InvalidCommandDukeException;
 import duke.exception.DukeException;
 
 /**

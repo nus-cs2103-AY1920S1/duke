@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.command.exceptions.InvalidFindDukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;

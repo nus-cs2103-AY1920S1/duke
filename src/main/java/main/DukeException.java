@@ -2,11 +2,11 @@ package main;
 
 public class DukeException extends Exception {
 
-    private String s;
+    private String message;
 
-    public DukeException(String s) {
-        super(s);
-        this.s = s;
+    public DukeException(String message) {
+        super(message);
+        this.message = message;
     }
 
 }

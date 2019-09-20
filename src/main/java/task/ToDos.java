@@ -6,7 +6,7 @@ package task;
 public class ToDos extends Task {
 
     /**
-     * Creates the ToDos object
+     * Creates the ToDos object.
      *
      * @param description Task message.
      * @param isDone      Marks the task as done nor not done.

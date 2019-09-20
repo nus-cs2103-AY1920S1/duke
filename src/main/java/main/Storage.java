@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class Storage {
 
     String filePath;
-    File f;
+    File file;
 
     /**
      * Creates a storage object, attempts to read text
@@ -29,11 +29,11 @@ public class Storage {
     public Storage(String filePath) throws IOException {
         this.filePath = filePath;
 
-        File f = new File(filePath);
-        if (!f.exists()) {
-            f.createNewFile();
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.createNewFile();
         }
-        this.f = f;
+        this.file = file;
     }
 
     /**
@@ -42,10 +42,11 @@ public class Storage {
      *
      * @return Task array.
      * @throws FileNotFoundException If file is not found.
+     * @throws DukeException if task type cannot be determined.
      */
-    public ArrayList<Task> fileInitialization() throws FileNotFoundException {
+    public ArrayList<Task> fileInitialization() throws FileNotFoundException, DukeException {
 
-        Scanner s = new Scanner(f);
+        Scanner s = new Scanner(file);
         ArrayList<Task> clone = new ArrayList<Task>();
 
         while (s.hasNext()) {
@@ -64,7 +65,10 @@ public class Storage {
             case "E":
                 clone.add(new Events(inputArr[2], TaskList.dateTimeParser(inputArr[3]), done));
                 break;
+            default:
+                throw new DukeException("Task type cannot be determined from file.");
             }
+
 
         }
 

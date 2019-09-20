@@ -8,7 +8,7 @@ public class Task {
     private boolean isDone;
 
     /**
-     * Creates the Task object
+     * Creates the Task object.
      *
      * @param description Task message.
      * @param isDone      Marks the task as done nor not done.

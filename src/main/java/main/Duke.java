@@ -17,6 +17,9 @@ public class Duke {
     private Storage storage;
     private TaskList task;
 
+    /**
+     * Creates the Ui, Storage and Tasklist objects.
+     */
     public Duke() {
         try {
             this.ui = new Ui();
@@ -26,10 +29,15 @@ public class Duke {
             System.out.println(ui.printError("File not found"));
         } catch (IOException e) {
             System.out.println(ui.printError(e.getMessage()));
+        } catch (DukeException e) {
+            System.out.println(ui.printError(e.getMessage()));
         }
 
     }
 
+    /**
+     * Creates and run duke.
+     */
     public static void main(String[] args) {
         Ui ui = new Ui();
         System.out.println(ui.printMessage("Hello! I'm Duke\nWhat can i do for you?"));

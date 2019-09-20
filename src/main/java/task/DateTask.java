@@ -10,7 +10,7 @@ public class DateTask extends Task {
     private LocalDateTime date;
 
     /**
-     * Creates the DateTask object
+     * Creates the DateTask object.
      *
      * @param description Task message.
      * @param date        Date for task.

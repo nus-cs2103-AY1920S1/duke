@@ -1,32 +1,36 @@
-import main.DateTime;
 import main.DukeException;
-import task.Deadlines;
+import main.TaskList;
 import org.junit.jupiter.api.Test;
+import task.Deadlines;
+
+import java.time.DateTimeException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
-    public void testDateTime(){
+    public void testDateTime() {
         try {
-            assertEquals("10/10/2001 1000", new DateTime("10/10/2001 1000").toString());
-        } catch (DukeException e) {
+            assertEquals("10/10/2001 1000",
+                    TaskList.localDateTimeToString(TaskList.dateTimeParser("10/10/2001 1000")));
+        } catch (DateTimeException e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Test
-    public void testDeadlines(){
+    public void testDeadlines() {
         try {
-            assertEquals("[D][\u2713] test (by: 10/10/1000 1000)", new Deadlines("test",
-                    new DateTime("10/10/1000 1000"), true).toString());
-        } catch (DukeException e){
+            assertEquals(false,
+                    new Deadlines("test",
+                            TaskList.dateTimeParser("10/10/1000 1000"), false).isDone());
+        } catch (DateTimeException e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Test
-    public void testDukeException(){
+    public void testDukeException() {
         assertEquals("hi", new DukeException("hi").getMessage());
     }
 }

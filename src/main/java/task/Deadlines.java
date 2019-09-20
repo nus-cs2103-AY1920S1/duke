@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class Deadlines extends DateTask {
 
     /**
-     * Creates the Deadlines object
+     * Creates the Deadlines object.
      *
      * @param description Task message.
      * @param date        Date of deadline in DD/MM/YYYY TTTT format.

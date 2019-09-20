@@ -5,7 +5,7 @@ import task.Task;
 import java.util.ArrayList;
 
 /**
- * Represents the printing of outputs
+ * Represents the printing of outputs.
  */
 public class Ui {
 

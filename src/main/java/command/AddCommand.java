@@ -66,7 +66,7 @@ public class AddCommand extends Command {
         } catch (DukeException e) {
             return ui.printError(e.getMessage());
         } catch (DateTimeException e) {
-            return ui.printError(e.getMessage());
+            return ui.printError("Please enter a description followed by a valid date and time.");
         }
     }
 }

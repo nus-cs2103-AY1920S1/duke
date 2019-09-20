@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class Events extends DateTask {
 
     /**
-     * Creates the Events object
+     * Creates the Events object.
      *
      * @param description Task message.
      * @param date        Date of deadline in DD/MM/YYYY TTTT format.
@@ -22,6 +22,7 @@ public class Events extends DateTask {
 
     @Override
     public String toString() {
-        return "[E]" + "[" + getStatusIcon() + "] " + getDescription() + " (at: " + TaskList.localDateTimeToString(getDate()) + ")";
+        return "[E]" + "[" + getStatusIcon() + "] " + getDescription()
+                + " (at: " + TaskList.localDateTimeToString(getDate()) + ")";
     }
 }

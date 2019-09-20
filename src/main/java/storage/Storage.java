@@ -25,7 +25,7 @@ public class Storage {
     /**
      * Loads the tasks stored in the file and returns them as a list of tasks.
      * @return list of tasks stored in the text document
-     * @throws DukeException err i not v sure
+     * @throws DukeException
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -38,7 +38,8 @@ public class Storage {
                 tasks.add(taskStringToTask(taskType, s));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            new File("./data").mkdir();
+            new File("/data/duke.txt").createNewFile();
         } finally {
             return tasks;
         }

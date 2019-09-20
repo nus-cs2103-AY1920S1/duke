@@ -6,16 +6,6 @@ Welcome from Duke User Guide. Here, you will find how to use Duke Application.
 - [What is Duke?](#what-is-duke)
     - [Image of Duke](#image-of-duke)
     
-- [Commands](#commands)
-    - [`list` - Lists down all the task](#list---lists-down-all-the-task)
-    - [`todo <Description>` - to add a todo task](#todo-description---to-add-a-todo-task)
-    - [`deadline <Description> /by <Date in DD/MM/YYYY> <Time in HHMM>`- to add a deadline](#deadline-description-by-date-in-ddmmyyyy-time-in-hhmm--to-add-a-deadline)
-    - [`event <Description>' /at <Date in DD/MM/YYYY> <Time in HHMM>` - to add an event](#event-description-at-date-in-ddmmyyyy-time-in-hhmm---to-add-an-event)
-    - [`delete <Task Number>` - to delete a task](#delete-task-number---to-delete-a-task)
-    - [`done <Task Number>` - to mark a task as done](#done-task-number---to-mark-a-task-as-done)
-    - [`undo` - to undo previous actions](#undo---to-undo-previous-actions)
-    - [`find <keyword>` - to list down tasks with particular keyword](#find-keyword---to-list-down-tasks-with-particular-keyword)
-    - [`bye` - to exit Duke](#bye---to-exit-duke)
 
 ## What is Duke?
  **Duke** is a friendly chatbot application which allow you to manage your daily tasks by keeping track of them.
@@ -64,3 +54,18 @@ This command will delete a task located at a particular index number.
 
 Example:
 * `delete 1'
+
+
+### Find a task
+
+This command will find a task in the tasklist according to the keyword.  
+
+Example:
+* `find homework`
+
+### Bye
+
+This command will send a bye message.  
+
+Example:
+* `bye`

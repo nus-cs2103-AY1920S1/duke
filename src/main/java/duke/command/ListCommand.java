@@ -32,11 +32,17 @@ public class ListCommand extends Command {
      */
     public String execute(TaskList tasks, Storage storage) {
         ArrayList<Task> tasksList = tasks.getTasks();
-        String result = "";
+        String result = "Here are your tasks:\n";
         for (int i = 0; i < tasksList.size(); i++) {
-            result += tasksList.get(i) + "\n";
+            int j = i + 1;
+            result += j + ": " + tasksList.get(i) + "\n";
         }
-        return result;
+        if (tasksList.isEmpty()) {
+            result = "You have no tasks right now!";
+            return result;
+        } else {
+            return result;
+        }
     }
     
     /**

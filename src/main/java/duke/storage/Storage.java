@@ -21,7 +21,7 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
-        file = new File(filePath);
+
         tasks = new ArrayList<>();
     }
 
@@ -50,6 +50,9 @@ public class Storage {
 
     public ArrayList<Task> load() throws DukeException {
         try {
+            file = new File(filePath);
+            file.createNewFile();
+            System.out.println(file.getAbsolutePath());
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String str;
@@ -60,7 +63,7 @@ public class Storage {
                 String done = words[1];
                 StringBuilder descriptions = new StringBuilder();
                 Task task;
-                switch(type) {
+                switch (type) {
                     case "T":
                         for (int i = 2; i < words.length; i++) {
                             descriptions.append(words[i]);

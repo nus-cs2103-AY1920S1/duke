@@ -45,7 +45,7 @@ public class Duke extends Application {
     public Duke() {
         ui = new Ui();
         tasks = new TaskList();
-        storage = new Storage("/data/tasks.txt");
+        storage = new Storage("tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -89,9 +89,7 @@ public class Duke extends Application {
         Command c = Parser.parse(input);
         response = c.execute(tasks, ui, storage);
         isExit = c.isExit();
-        if (isExit) {
-            storage.save();
-        }
+        storage.save();
         return response;
     }
 
@@ -226,7 +224,7 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke("src/data/tasks.txt").run();
+        new Duke("tasks.txt").run();
     }
 
 }

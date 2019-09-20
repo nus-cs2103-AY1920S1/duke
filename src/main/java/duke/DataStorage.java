@@ -114,11 +114,16 @@ public class DataStorage {
         String workingDirectory = System.getProperty("user.dir");
         Path directory = Paths.get(workingDirectory);
         int count = 1;
-        while (!Files.isDirectory(Paths.get(directory.toString(), PARENT_DIR_NAME))
-                && count <= SEARCH_LIMIT) {
+
+        while (count <= SEARCH_LIMIT) {
+            if ((directory == null)
+                    || Files.isDirectory(Paths.get(directory.toString(), PARENT_DIR_NAME))) {
+                break;
+            }
             directory = directory.getParent();
             count++;
         }
+
         if ((count > SEARCH_LIMIT) || (directory == null)) {
             // Create new directory
             Path newPath = Paths.get(workingDirectory, PARENT_DIR_NAME);

@@ -29,6 +29,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Obot Wan Kenobi");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
             duke = new Duke("C:\\Users\\hatzi\\Documents\\Sourcetree\\duke\\data\\tasks.txt");

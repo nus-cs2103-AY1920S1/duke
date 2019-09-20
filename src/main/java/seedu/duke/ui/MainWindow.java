@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import seedu.duke.core.Duke;
-import seedu.duke.ui.DialogBox;
 
 /**
  * Controller for seedu.duke.ui.MainWindow. Provides the layout for the other controls.
@@ -26,16 +25,24 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/117.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/commando.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userPic.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukePic.jpg"));
 
     /**
      * Initialize.
      */
     @FXML
     public void initialize() {
+        String introduction = "__________________________________________________\n"
+                + "Sample Commands: \n"
+                + "'todo Laundry' - Adds a To-do called Laundry\n"
+                + "'deadline CS2105 Assignment /by 27/12/2019 2345' - Adds a deadline task\n"
+                + "'event Dad's birthday /at Yishun' - Adds an event task\n"
+                + "'stats all' - Views all stats\n"
+                + "__________________________________________________\n";
+        String welcomeString = "Hello there!\n" + "What can I do for you?\n";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! I'm Duke\n" + "What can I do for you?\n",
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeString + introduction,
                 dukeImage));
     }
 
@@ -68,5 +75,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                    System.exit(0);
+                } catch (InterruptedException e) {
+                    dialogContainer.getChildren().add(
+                            DialogBox.getDukeDialog("ObiWan exiting!", dukeImage)
+                    );
+                }
+            }).start();
+        }
+
     }
 }

@@ -6,16 +6,16 @@ import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
 /**
- * Represents the "stats all" command.
+ * Represents the "stats deadline" command.
  */
-public class StatsAllCommand extends Command {
+public class StatsDeadlineCommand extends Command {
 
     /**
      * Default constructor.
      */
-    public StatsAllCommand() {
-
+    public StatsDeadlineCommand() {
     }
+
 
     /**
      * Executes the command.
@@ -33,8 +33,11 @@ public class StatsAllCommand extends Command {
 
         stats.incrementTotalCommandsExecuted();
 
-        return ui.getAllStatSequence(stats, tasks);
+        return ui.getCompletedDeadlineStatSequence(stats,tasks);
 
     }
+
+
+
 
 }

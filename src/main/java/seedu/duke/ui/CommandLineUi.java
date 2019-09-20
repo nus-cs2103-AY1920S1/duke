@@ -168,13 +168,18 @@ public class CommandLineUi extends Ui {
      * @param stat Statistic.
      * @return String.
      */
-    public String getAllStatSequence(Statistic stat) {
+    public String getAllStatSequence(Statistic stat, TaskList tasks) {
         String output = "\n     Listing all statistics:"
-                + "\n     Total Commands Executed:    " + stat.getTotalCommandsExecuted()
-                + "\n     Total Tasks Deleted:        " + stat.getTotalTasksDeleted()
-                + "\n     Total To-Dos Completed:     " + stat.getTotalTodosCompleted()
-                + "\n     Total Deadlines Completed:  " + stat.getTotalDeadlinesCompleted()
-                + "\n     Total Events Completed:     " + stat.getTotalEventsCompleted()
+                + "\n     Total Commands Executed:         " + stat.getTotalCommandsExecuted()
+                + "\n     Total Tasks Deleted:             " + stat.getTotalTasksDeleted()
+                + "\n\n     Total To-Dos Completed:          " + stat.getTotalTodosCompleted()
+                + "\n     Total Todos Completed TODAY:     " + stat.getCompletedTodosFromOneDayAgo(tasks)
+                + "\n\n     Total Deadlines Completed:       " + stat.getTotalDeadlinesCompleted()
+                + "\n     Total Deadlines Completed TODAY: " + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
+                + "\n\n     Total Events Completed:          " + stat.getTotalEventsCompleted()
+                + "\n     Total Events Completed TODAY:    " + stat.getCompletedEventsFromOneDayAgo(tasks)
+
+
                 + "\n" + underscore;
         return output;
     }
@@ -185,9 +190,9 @@ public class CommandLineUi extends Ui {
      * @param stat Statistic object.
      * @return String.
      */
-    public String getResetStatSequence(Statistic stat) {
-        String output = "\n     All statistics have been reset";
-        output += getAllStatSequence(stat);
+    public String getResetStatSequence(Statistic stat, TaskList tasks) {
+        String output = "\n     All GLOBAL statistics have been reset";
+        output += getAllStatSequence(stat, tasks);
         return output;
     }
 
@@ -238,4 +243,49 @@ public class CommandLineUi extends Ui {
     public void printToCommandLine(String output) {
         System.out.println(output);
     }
+
+
+    /**
+     * Returns completed deadline sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public String getCompletedDeadlineStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int eventsCompleted = stat.getCompletedDeadlinesFromOneDayAgo(tasks);
+        if (eventsCompleted == 0) {
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\n     Events completed today: "
+                + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
+                + "\n     " + encouragement + "\n" + underscore;
+        return output;
+    }
+
+
+    /**
+     * Returns completed todo sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public String getCompletedTodoStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int todosCompleted = stat.getCompletedTodosFromOneDayAgo(tasks);
+        if (todosCompleted == 0) {
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\n     Events completed today: "
+                + stat.getCompletedTodosFromOneDayAgo(tasks)
+                + "\n     " + encouragement + "\n" + underscore;
+        return output;
+    }
+
 }

@@ -90,17 +90,19 @@ public abstract class Ui {
      * Returns reset stats sequence for reset stats command.
      *
      * @param stats Statistic object.
+     * @param tasks TaskList object.
      * @return String.
      */
-    public abstract String getResetStatSequence(Statistic stats);
+    public abstract String getResetStatSequence(Statistic stats, TaskList tasks);
 
     /**
      * Returns string sequence for "all stats" command.
      *
      * @param stats Statistic object.
+     * @param tasks TaskLIst object.
      * @return String.
      */
-    public abstract String getAllStatSequence(Statistic stats);
+    public abstract String getAllStatSequence(Statistic stats, TaskList tasks);
 
     /**
      * Returns string sequence for "stats event" command.
@@ -124,5 +126,24 @@ public abstract class Ui {
      * @return Boolean.
      */
     public abstract Boolean isGraphicalUserInterface();
+
+
+    /**
+     * Returns string sequence for "stats deadline" command.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public abstract String getCompletedDeadlineStatSequence(Statistic stat, TaskList tasks);
+
+    /**
+     * Returns string sequence for "stats todo" command.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public abstract String getCompletedTodoStatSequence(Statistic stat, TaskList tasks);
 
 }

@@ -33,7 +33,7 @@ public class StatsResetCommand extends Command {
 
         stats.resetStats();
 
-        return ui.getResetStatSequence(stats);
+        return ui.getResetStatSequence(stats, tasks);
 
     }
 

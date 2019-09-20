@@ -6,16 +6,16 @@ import seedu.duke.tasklist.TaskList;
 import seedu.duke.ui.Ui;
 
 /**
- * Represents the "stats all" command.
+ * Represents the "stats todo" command.
  */
-public class StatsAllCommand extends Command {
-
+public class StatsTodoCommand extends Command {
     /**
      * Default constructor.
      */
-    public StatsAllCommand() {
-
+    public StatsTodoCommand() {
     }
+
+
 
     /**
      * Executes the command.
@@ -33,8 +33,7 @@ public class StatsAllCommand extends Command {
 
         stats.incrementTotalCommandsExecuted();
 
-        return ui.getAllStatSequence(stats, tasks);
+        return ui.getCompletedTodoStatSequence(stats,tasks);
 
     }
-
 }

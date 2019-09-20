@@ -123,7 +123,7 @@ public class GraphicalUi extends Ui {
      * @return String.
      */
     public String getByeSequence() {
-        String output = "\n" + "Bye. Hope to see you again soon!" + "\n";
+        String output = "\n" + "The Force will be with you, always" + "\n";
         return (output);
     }
 
@@ -176,13 +176,18 @@ public class GraphicalUi extends Ui {
      * @param stat Statistic.
      * @return String.
      */
-    public String getAllStatSequence(Statistic stat) {
+    public String getAllStatSequence(Statistic stat, TaskList tasks) {
         String output = "Listing all statistics:"
                 + "\nTotal Commands Executed:    " + stat.getTotalCommandsExecuted()
                 + "\nTotal Tasks Deleted:                " + stat.getTotalTasksDeleted()
-                + "\nTotal To-Dos Completed:        " + stat.getTotalTodosCompleted()
-                + "\nTotal Deadlines Completed:    " + stat.getTotalDeadlinesCompleted()
-                + "\nTotal Events Completed:         " + stat.getTotalEventsCompleted()
+                + "\n\nTotal To-Dos Completed:              " + stat.getTotalTodosCompleted()
+                + "\nTotal Todos Completed TODAY:   " + stat.getCompletedTodosFromOneDayAgo(tasks)
+                + "\n\nTotal Deadlines Completed:              " + stat.getTotalDeadlinesCompleted()
+                + "\nTotal Deadlines Completed TODAY:   " + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
+                + "\n\nTotal Events Completed:                  " + stat.getTotalEventsCompleted()
+                + "\nTotal Events Completed TODAY:    " + stat.getCompletedEventsFromOneDayAgo(tasks)
+
+
                 + "\n";
         return output;
     }
@@ -193,9 +198,9 @@ public class GraphicalUi extends Ui {
      * @param stat Statistic object.
      * @return String.
      */
-    public String getResetStatSequence(Statistic stat) {
+    public String getResetStatSequence(Statistic stat, TaskList tasks) {
         String output = "All statistics have been reset\n";
-        output += getAllStatSequence(stat);
+        output += getAllStatSequence(stat, tasks);
         return output;
     }
 
@@ -241,4 +246,45 @@ public class GraphicalUi extends Ui {
     }
 
 
+    /**
+     * Returns completed deadline sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public String getCompletedDeadlineStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int deadlinessCompleted = stat.getCompletedEventsFromOneDayAgo(tasks);
+        if (deadlinessCompleted == 0) {
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\nDeadlines completed today: "
+                + deadlinessCompleted
+                + "\n" + encouragement + "\n";
+        return output;
+    }
+
+    /**
+     * Returns completed todo sequence.
+     *
+     * @param stat Statistic object.
+     * @param tasks TaskList object.
+     * @return String.
+     */
+    public String getCompletedTodoStatSequence(Statistic stat, TaskList tasks) {
+        String encouragement = "";
+        int todosCompleted = stat.getCompletedTodosFromOneDayAgo(tasks);
+        if (todosCompleted == 0) {
+            encouragement = "You can do better! :)";
+        } else {
+            encouragement = "Well Done!";
+        }
+        String output = "\nDeadlines completed today: "
+                + todosCompleted
+                + "\n" + encouragement + "\n";
+        return output;
+    }
 }

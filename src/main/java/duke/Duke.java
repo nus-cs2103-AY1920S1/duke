@@ -1,5 +1,8 @@
 package duke;
 
+import static duke.ui.Ui.MESSAGE_RETURN;
+import static duke.ui.Ui.MESSAGE_WELCOME;
+
 import duke.command.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -48,18 +51,10 @@ public class Duke {
         try {
             tasks = storage.load();
             ui.append(String.format("Loaded from %s", storage.getFilePath()));
+            ui.append("----------------------");
         } catch (DukeException ex) {
-            ui.append(ex.getMessage());
             tasks = new TaskList();
         }
-    }
-
-    /**
-     * Returns data load message. Only used on initialization.
-     * @return Data load message.
-     */
-    public String getStartUpMessage() {
-        return ui.getMessage();
     }
 
     /**
@@ -67,7 +62,12 @@ public class Duke {
      * @return Greeting message.
      */
     public String getGreeting() {
-        return ui.getGreeting();
+        if (tasks.isEmpty()) {
+            ui.append(MESSAGE_WELCOME);
+        } else {
+            ui.append(MESSAGE_RETURN);
+        }
+        return ui.getMessage();
     }
 }
 

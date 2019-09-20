@@ -3,7 +3,8 @@ package duke.ui;
 public class Ui {
     StringBuilder outputMessage = new StringBuilder();
 
-    private static final String MESSAGE_GREETING = "Hi! Welcome to PokeTask!\nWhat do you want to do today?";
+    public static final String MESSAGE_RETURN = "Hi! Welcome back to PokeTask!\nWhat do you want to do today?";
+    public static final String MESSAGE_WELCOME = "Hi! Welcome to PokeTask!\nEnter 'help' for a list of commands!";
     private static final String MESSAGE_BYE      = "Bye! See you again soon!";
 
     /**
@@ -28,14 +29,6 @@ public class Ui {
     public void append(String output) {
         outputMessage.append(output);
         outputMessage.append("\n");
-    }
-
-    /**
-     * Returns the greeting message.
-     * @return Greeting message.
-     */
-    public String getGreeting() {
-        return MESSAGE_GREETING;
     }
 
     /**

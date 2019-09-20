@@ -42,7 +42,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void sendStartUpMessage() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.getStartUpMessage(), dukeImage),
                 DialogBox.getDukeDialog(duke.getGreeting(), dukeImage)
         );
     }

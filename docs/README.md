@@ -5,7 +5,7 @@ Welcome from Duke User Guide. Here, you will find how to use Duke Application.
 
 - [What is Duke?](#what-is-duke)
     - [Image of Duke](#image-of-duke)
-    
+- [Feature List](#Features)
 
 ## What is Duke?
  **Duke** is a friendly chatbot application which allow you to manage your daily tasks by keeping track of them.

@@ -1,4 +1,4 @@
 event type | isDone | description | extra description | dateCreated | lastModified
-T | 0 | Todo-1 |  dummyExtraDescriptionForTodo | 2019-09-19T15:04:53.136263500 | 2019-09-19T15:04:53.136263500
-D | 0 | Deadline-1 | 29th of December 2019, 9am | 2019-09-19T15:06:00.562676100 | 2019-09-19T15:06:00.562676100
-E | 0 | Event-1 | uTown | 2019-09-19T15:06:13.339506100 | 2019-09-19T15:06:13.339506100
+T | 0 | Laundry |  dummyExtraDescriptionForTodo | 2019-09-20T21:49:25.395655200 | 2019-09-20T21:49:25.395655200
+D | 0 | CS2105 Assignment | 27th of December 2019, 11.59pm | 2019-09-20T21:49:44.641070100 | 2019-09-20T21:49:44.641070100
+E | 0 | Dad's birthdat | Yishun | 2019-09-20T21:50:01.081548800 | 2019-09-20T21:50:01.081548800

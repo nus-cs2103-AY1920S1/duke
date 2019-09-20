@@ -87,7 +87,7 @@ public class Storage {
             if (!tmpDir.exists()) {
                 tmpDir.createNewFile();
             }
-            assert taskListText.exists() : "File should exist now";
+            assert tmpDir.exists() : "File should exist now";
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

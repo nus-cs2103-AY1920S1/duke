@@ -27,7 +27,7 @@ This will show you what commands can be used.
 -------------------------------------------------------------------------------------------
 ### `todo` - To add a to-do task to the list.
 
-Provide the item description after the todo command.
+1. Provide the item description after the todo command.
 
 E.g. `todo buy milk and cereal`
 

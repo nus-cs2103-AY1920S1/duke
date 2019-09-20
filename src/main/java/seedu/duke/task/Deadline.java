@@ -1,8 +1,8 @@
 package seedu.duke.task;
 
-import seedu.duke.parser.DateParser;
-
 import java.util.Date;
+
+import seedu.duke.parser.DateParser;
 
 /** Represents a task with a deadline. */
 public class Deadline extends Task {
@@ -22,13 +22,13 @@ public class Deadline extends Task {
 
     @Override
     public String writeToFile() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + strBy + ((priority == null)? "\n" : " | "
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + strBy + ((priority == null) ? "\n" : " | "
                 + priority + "\n");
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + strBy + ")" + ((priority == null)? "" : " <P: " + priority
+        return "[D]" + super.toString() + " (by: " + strBy + ")" + ((priority == null) ? "" : " <P: " + priority
                 + ">");
     }
 }

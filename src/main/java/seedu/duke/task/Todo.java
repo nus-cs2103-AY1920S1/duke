@@ -7,12 +7,12 @@ public class Todo extends Task {
 
     @Override
     public String writeToFile() {
-        return "T | " + (isDone ? "1" : "0") + " | " + description + ((priority == null)? "\n" : " | " + priority +
-                "\n");
+        return "T | " + (isDone ? "1" : "0") + " | " + description + ((priority == null) ? "\n" : " | " + priority
+                + "\n");
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() + ((priority == null)? "" : " <P: " + priority + ">");
+        return "[T]" + super.toString() + ((priority == null) ? "" : " <P: " + priority + ">");
     }
 }

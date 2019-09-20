@@ -7,10 +7,10 @@ import seedu.duke.ui.UI;
 /**
  * This class represents the "done" command to mark a task as done.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private int taskIndex;
 
-    public DoneCommand(int taskIndex){
+    public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 

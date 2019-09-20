@@ -9,7 +9,7 @@ import seedu.duke.ui.UI;
 /**
  * This class represents the "delete" command by user and removes the task as specified by the index given by user.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int taskIndex;
 
     public DeleteCommand(int taskIndex) {

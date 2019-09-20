@@ -11,6 +11,6 @@ public abstract class Command {
 
     public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         return "";
-    };
+    }
 
 }

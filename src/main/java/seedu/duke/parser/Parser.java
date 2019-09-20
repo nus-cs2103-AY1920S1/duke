@@ -21,7 +21,7 @@ public class Parser {
      * @param command Represents the command to be executedd.
      * @return Command Represents the command corresponding to user input.
      */
-    public Command parse(String command) throws DukeException{
+    public Command parse(String command) throws DukeException {
         String[] parts = command.split(" ", 2);
         switch (parts[0]) {
         case "bye":

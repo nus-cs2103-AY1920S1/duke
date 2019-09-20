@@ -10,7 +10,6 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        //this.priority = Priority.LOW;
     }
 
     public String getStatusIcon() {
@@ -22,15 +21,16 @@ public class Task {
      */
     public String markAsDone() {
         this.isDone = true;
-        String reply = "Nice! I've marked this task as done:\n\t" +  " [\u2713] " + description;
-        return reply;
+        return "Nice! I've marked this task as done:\n\t" +  " [\u2713] " + description;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public Priority getPriority() { return priority; }
+    public Priority getPriority() {
+        return priority;
+    }
 
     public void setPriority(Priority priority) {
         this.priority = priority;

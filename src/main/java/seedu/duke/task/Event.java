@@ -1,8 +1,8 @@
 package seedu.duke.task;
 
-import seedu.duke.parser.DateParser;
-
 import java.util.Date;
+
+import seedu.duke.parser.DateParser;
 
 public class Event extends Task {
     protected String strAt;
@@ -21,13 +21,13 @@ public class Event extends Task {
 
     @Override
     public String writeToFile() {
-        return "E | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.strAt +
-                ((priority == null)? "\n" : " | " + priority + "\n");
+        return "E | " + (isDone ? "1" : "0") + " | " + this.description + " | " + this.strAt
+                + ((priority == null) ? "\n" : " | " + priority + "\n");
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + strAt + ")" + ((priority == null)? "" : " <P: " + priority
+        return "[E]" + super.toString() + " (at: " + strAt + ")" + ((priority == null) ? "" : " <P: " + priority
                 + ">");
     }
 }

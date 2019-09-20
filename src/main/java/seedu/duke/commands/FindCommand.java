@@ -6,7 +6,8 @@ import seedu.duke.task.TaskList;
 import seedu.duke.ui.UI;
 
 /**
- * This class represents the "find" command by user and prints out all the tasks in the Task list containing the keyword input by user.
+ * This class represents the "find" command by user and prints out all the tasks in the Task list containing the
+ * keyword input by user.
  */
 public class FindCommand extends Command {
     private String keyword;

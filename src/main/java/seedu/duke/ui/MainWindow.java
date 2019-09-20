@@ -9,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import seedu.duke.core.Duke;
-import seedu.duke.ui.DialogBox;
 
 /**
  * Controller for seedu.duke.ui.MainWindow. Provides the layout for the other controls.
@@ -34,8 +33,16 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        String introduction = "__________________________________________________\n"
+                + "Sample Commands: \n"
+                + "'todo Laundry' - Adds a To-do called Laundry\n"
+                + "'deadline CS2105 Assignment /by 27/12/2019 2345' - Adds a deadline task\n"
+                + "'event Dad's birthday /at Yishun' - Adds an event task\n"
+                + "'stats all' - Views all stats\n"
+                + "__________________________________________________\n";
+        String welcomeString = "Hello! I'm Duke\n" + "What can I do for you?\n";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello! I'm Duke\n" + "What can I do for you?\n",
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeString + introduction,
                 dukeImage));
     }
 

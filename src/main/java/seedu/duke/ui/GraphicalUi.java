@@ -180,12 +180,14 @@ public class GraphicalUi extends Ui {
         String output = "Listing all statistics:"
                 + "\nTotal Commands Executed:    " + stat.getTotalCommandsExecuted()
                 + "\nTotal Tasks Deleted:                " + stat.getTotalTasksDeleted()
-                + "\nTotal To-Dos Completed:        " + stat.getTotalTodosCompleted()
-                + "\nTotal Deadlines Completed:    " + stat.getTotalDeadlinesCompleted()
-                + "\nTotal Events Completed:         " + stat.getTotalEventsCompleted()
+                + "\n\nTotal To-Dos Completed:              " + stat.getTotalTodosCompleted()
+                + "\nTotal Todos Completed TODAY:   " + stat.getCompletedTodosFromOneDayAgo(tasks)
+                + "\n\nTotal Deadlines Completed:              " + stat.getTotalDeadlinesCompleted()
+                + "\nTotal Deadlines Completed TODAY:   " + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
+                + "\n\nTotal Events Completed:                  " + stat.getTotalEventsCompleted()
                 + "\nTotal Events Completed TODAY:    " + stat.getCompletedEventsFromOneDayAgo(tasks)
-                + "\nTotal Deadlines Completed TODAY: " + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
-                + "\nTotal Todos Completed TODAY:     " + stat.getCompletedTodosFromOneDayAgo(tasks)
+
+
                 + "\n";
         return output;
     }

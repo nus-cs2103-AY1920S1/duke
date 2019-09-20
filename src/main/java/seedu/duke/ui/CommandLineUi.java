@@ -172,12 +172,14 @@ public class CommandLineUi extends Ui {
         String output = "\n     Listing all statistics:"
                 + "\n     Total Commands Executed:         " + stat.getTotalCommandsExecuted()
                 + "\n     Total Tasks Deleted:             " + stat.getTotalTasksDeleted()
-                + "\n     Total To-Dos Completed:          " + stat.getTotalTodosCompleted()
-                + "\n     Total Deadlines Completed:       " + stat.getTotalDeadlinesCompleted()
-                + "\n     Total Events Completed:          " + stat.getTotalEventsCompleted()
-                + "\n     Total Events Completed TODAY:    " + stat.getCompletedEventsFromOneDayAgo(tasks)
-                + "\n     Total Deadlines Completed TODAY: " + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
+                + "\n\n     Total To-Dos Completed:          " + stat.getTotalTodosCompleted()
                 + "\n     Total Todos Completed TODAY:     " + stat.getCompletedTodosFromOneDayAgo(tasks)
+                + "\n\n     Total Deadlines Completed:       " + stat.getTotalDeadlinesCompleted()
+                + "\n     Total Deadlines Completed TODAY: " + stat.getCompletedDeadlinesFromOneDayAgo(tasks)
+                + "\n\n     Total Events Completed:          " + stat.getTotalEventsCompleted()
+                + "\n     Total Events Completed TODAY:    " + stat.getCompletedEventsFromOneDayAgo(tasks)
+
+
                 + "\n" + underscore;
         return output;
     }

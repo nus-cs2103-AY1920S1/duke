@@ -16,7 +16,7 @@ public class NullCommand extends Command{
      * Initialises the null command
      */
     public NullCommand(){
-        this.commandType = CommandType.NULL;
+        super(CommandType.NULL);
     }
 
     /**

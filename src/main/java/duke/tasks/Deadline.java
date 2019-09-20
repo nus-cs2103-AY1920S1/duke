@@ -15,9 +15,10 @@ public class Deadline extends Task {
      * @param date Date description
      */
     public Deadline(String description, String date) {
-        super(description);
+        super(description, TaskType.DEADLINE);
         this.date = date;
-        this.type = TaskType.DEADLINE;
+
+        assert date != null;
     }
 
     /**
@@ -26,6 +27,7 @@ public class Deadline extends Task {
      * @return String containing the date and time of a deadline task.
      */
     public String getDate() {
+        assert date != null;
         return this.date;
     }
 

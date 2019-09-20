@@ -11,6 +11,7 @@ import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.FindCommand;
 
+import duke.errors.DukeAssertions;
 import duke.errors.DukeException;
 import duke.errors.DukeExceptionType;
 
@@ -67,6 +68,7 @@ public class Parser {
      * @throws IllegalArgumentException Thrown when the length of the command is not sufficient
      */
     private static void checkValidLength(String[] tokens) throws IllegalArgumentException {
+        DukeAssertions.assertArrayNotEmpty(tokens);
         List<String> group1 = List.of("todo", "deadline", "event");
         List<String> group2 = List.of("done", "delete");
         if (tokens.length == 1 && group1.contains(tokens[0])) {
@@ -80,6 +82,8 @@ public class Parser {
 
     // helper method to check if user input can still be a valid to-do, deadline or event task
     private static Command createAddCommandIfValid(String[] tokens, String fullCommand) throws DukeException, IllegalArgumentException {
+        DukeAssertions.assertArrayNotEmpty(tokens);
+
         List<String> validCommands = List.of("todo", "deadline", "event");
 
         if (!validCommands.contains(tokens[0])) {
@@ -105,7 +109,8 @@ public class Parser {
      * @return The formatted date and time, if it can be formatted
      * @throws DukeException Thrown when the input cannot be formatted
      */
-    public static String parseDateTime(String dateTimeString) throws DukeException {
+    private static String parseDateTime(String dateTimeString) throws DukeException {
+        assert dateTimeString != null;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
             LocalDateTime dateAndTime = LocalDateTime.parse(dateTimeString, formatter);
@@ -145,6 +150,7 @@ public class Parser {
 
     // helper method to attach a prefix to a day
     private static String getFormattedDay(int day) {
+        assert day > 1;
         int remainderHundred = day % 100;
         if (remainderHundred > 9 && remainderHundred < 21) {
             return day + "th";
@@ -167,6 +173,9 @@ public class Parser {
     // helper method to check if the given date and time of a deadline or event task
     // can be recognised as a DateTime format.
     private static Command createDateCommandIfValid(String[] tokens, String fullCommand, int mode) throws DukeException {
+        DukeAssertions.assertArrayNotEmpty(tokens);
+        assert fullCommand != null;
+
         List<String> lst = Arrays.asList(tokens);
         String key = responses[mode];
         if (!lst.contains(key)) {
@@ -197,14 +206,21 @@ public class Parser {
     }
 
     private static boolean isDate(String dateDescription){
+        assert dateDescription != null;
         String[] dateSplit = dateDescription.split(" ");
         if (dateSplit.length != 2){
             return false;
         } else if (!dateSplit[0].contains("/") ||
-                dateSplit[0].chars().filter(ch -> ch == '/').count() != 2) {
+                checkSlashCount(dateSplit[0])) {
             return false;
         }
         return true;
+    }
+
+    private static boolean checkSlashCount(String str) {
+        return str.chars()
+                .filter(ch -> ch == '/')
+                .count() != 2;
     }
 
     private static void checkTaskDescription(int index) throws DukeException {

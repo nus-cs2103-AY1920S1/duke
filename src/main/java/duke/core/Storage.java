@@ -62,6 +62,7 @@ public class Storage{
      * @throws IOException Thrown when writing to file fails.
      */
     void overwriteStorage(ArrayList<Task> taskList) throws IOException{
+        assert (this.file != null);
         FileWriter fw = new FileWriter(this.file);
         for (Task task: taskList){
             switch (task.getType()) {
@@ -97,6 +98,7 @@ public class Storage{
     //helper method to convert the written format of the task in the file
     //into a Task to be loaded back into storage
     private Task formatFileToTask(String line) throws DukeException {
+        assert line != null;
         String[] tokens = line.split(" / ");
         switch(tokens[1]){
             case "ToDo":

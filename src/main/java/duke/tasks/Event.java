@@ -16,9 +16,9 @@ public class Event extends Task {
      * @param date Date description
      */
     public Event(String description, String date) {
-        super(description);
+        super(description, TaskType.EVENT);
         this.date = date;
-        this.type = TaskType.EVENT;
+        assert date != null;
     }
 
     /**
@@ -27,6 +27,7 @@ public class Event extends Task {
      * @return String containing the date and time of a event task.
      */
     public String getDate() {
+        assert date != null;
         return this.date;
     }
 

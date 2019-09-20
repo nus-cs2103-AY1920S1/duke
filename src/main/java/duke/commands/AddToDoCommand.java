@@ -5,6 +5,7 @@ import java.io.IOException;
 import duke.core.TaskList;
 import duke.core.Ui;
 
+import duke.errors.DukeAssertions;
 import duke.tasks.ToDo;
 
 
@@ -23,8 +24,9 @@ public class AddToDoCommand extends Command{
      * @param tokens user input split by space, required for creating a to-do task
      */
     public AddToDoCommand(String [] tokens) {
+        super(CommandType.ADDTODO);
         this.tokens = tokens;
-        this.commandType = CommandType.ADDTODO;
+
     }
 
 
@@ -38,6 +40,9 @@ public class AddToDoCommand extends Command{
     @Override
     public String execute(TaskList taskList, Ui ui) throws IOException {
         ToDo task = ToDo.createToDo(tokens);
+
+        DukeAssertions.assertNotNull(taskList,ui);
+
         taskList.addToList(task);
         return ui.printAddMessage(task, taskList);
     }

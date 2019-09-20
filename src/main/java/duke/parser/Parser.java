@@ -7,6 +7,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 
 public class Parser {
@@ -47,6 +48,11 @@ public class Parser {
             return new DoneCommand(getIds(line));
         case "delete":
             return new DeleteCommand(getIds(line));
+        case "help":
+            if (line.length != 1) {
+                throw new DukeException(ERROR_TOO_MANY_ARGUMENTS);
+            }
+            return new HelpCommand();
         case "bye":
             if (line.length != 1) {
                 throw new DukeException(ERROR_TOO_MANY_ARGUMENTS);

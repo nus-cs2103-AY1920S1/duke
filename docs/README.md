@@ -2,11 +2,11 @@
 
 ## Table Of Contents
 1. Introduction
-2. Quick Start
-3. Features
-    3. feature 1
-4. FAQ
-5. Command Summary
+1. Quick Start
+1. Features
+    1. feature 1
+1. FAQ
+1. Command Summary
 
 ## Features 
 

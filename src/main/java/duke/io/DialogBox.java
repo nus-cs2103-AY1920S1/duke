@@ -35,6 +35,9 @@ class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        //Solution to deal with text clipping taken from Erwin Chan on CS2103/Slack
+        dialog.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+
         dialog.setText(text);
         displayPicture.setImage(img);
     }

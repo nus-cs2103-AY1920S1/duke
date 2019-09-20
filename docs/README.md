@@ -1,14 +1,36 @@
 # User Guide
 
+<br>
+<br>
+<br>
+
 ## Features
 
 ### Feature 1
 Description of feature.
 
+<br>
+<br>
+<br>
+
 ## Commands
 
-### 1. bye
+1. [bye](#1-bye)
+2. [deadline](#2-deadline)
+3. [delete](#3-delete)
+4. [done](#4-done)
+5. [event](#5-event)
+6. [event_at](#6-event_at)
+7. [find](#7-find)
+8. [help](#8-help)
+9. [list](#9-list)
+10. [snooze](#10-snooze)
+11. [todo](#11-todo)
 
+<br>
+
+### 1. [bye](#1-bye)
+---
 ##### Usage:
 
 >`bye`
@@ -17,8 +39,10 @@ Description of feature.
 
 >Exits Duke.
 
-### 2. deadline
+<br>
 
+### 2. [deadline](#2-deadline)
+---
 ##### Usage:
 
 >`deadline <description> /by <due> [/every <recurrence>]`
@@ -53,8 +77,10 @@ Description of feature.
 >
 >Description: The recurrence interval of this deadline.
 
-### 3. delete
+<br>
 
+### 3. [delete](#3-delete)
+---
 ##### Usage:
 
 >`delete <task>`
@@ -73,8 +99,10 @@ Description of feature.
 >
 >Description: The index of the task to delete.
 
-### 4. done
+<br>
 
+### 4. [done](#4-done)
+---
 ##### Usage:
 
 >`done <task>`
@@ -93,8 +121,10 @@ Description of feature.
 >
 >Description: The index of the task to mark as done.
 
-### 5. event
+<br>
 
+### 5. [event](#5-event)
+---
 ##### Usage:
 
 >`event <description> /at <schedule> [/every <recurrence>]`
@@ -129,8 +159,10 @@ Description of feature.
 >
 >Description: The recurrence interval of this event.
 
-### 6. event_at
+<br>
 
+### 6. [event_at](#6-event_at)
+---
 ##### Usage:
 
 >`event_at <task> /at <schedule>`
@@ -157,8 +189,10 @@ Description of feature.
 >
 >Description: The index of the tentative schedule within the event to choose.
 
-### 7. find
+<br>
 
+### 7. [find](#7-find)
+---
 ##### Usage:
 
 >`find <keyword>`
@@ -177,8 +211,10 @@ Description of feature.
 >
 >Description: The needle for any partially matching task description.
 
-### 8. help
+<br>
 
+### 8. [help](#8-help)
+---
 ##### Usage:
 
 >`help [<command>] [/all]`
@@ -205,8 +241,10 @@ Description of feature.
 >
 >Description: If this flag is set, list all available commands.
 
-### 9. list
+<br>
 
+### 9. [list](#9-list)
+---
 ##### Usage:
 
 >`list [/all]`
@@ -225,8 +263,10 @@ Description of feature.
 >
 >Description: If this flag is set, tasks which are overdue or done will be listed.
 
-### 10. snooze
+<br>
 
+### 10. [snooze](#10-snooze)
+---
 ##### Usage:
 
 >`snooze <task> /by <duration>`
@@ -253,8 +293,10 @@ Description of feature.
 >
 >Description: The duration to snooze the task.
 
-### 11. todo
+<br>
 
+### 11. [todo](#11-todo)
+---
 ##### Usage:
 
 >`todo <description>`

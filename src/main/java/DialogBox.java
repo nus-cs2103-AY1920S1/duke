@@ -9,6 +9,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -17,6 +20,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 
 /**
  * An example of a custom control using FXML.
@@ -47,15 +51,22 @@ public class DialogBox extends HBox {
     private void initializeBox(String text) {
         this.setPadding(new Insets(10, 10, 10, 10));
         this.setSpacing(5);
-        dialog.setText(text);
+        formatDialog(text);
         Circle clip = new Circle(50, 50, 37.5);
         displayPicture.setClip(clip);
     }
 
+    private void formatDialog(String text) {
+        dialog.setText(text);
+        dialog.setFont(Font.font ("Calibri", 14));
+        dialog.setTextFill(Color.WHITE);
+        dialog.setTextOverrun(OverrunStyle.CLIP);
+    }
+
     private void setBackground(boolean isDuke) {
         Color c = isDuke
-                ? Color.LIMEGREEN
-                : Color.DEEPSKYBLUE;
+                ? Color.DARKSLATEBLUE
+                : Color.DARKORANGE;
         CornerRadii r = new CornerRadii(5);
         Insets in = isDuke
                 ? new Insets(5, 40, 20, 20)

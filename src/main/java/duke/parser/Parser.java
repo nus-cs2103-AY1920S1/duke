@@ -36,14 +36,16 @@ public class Parser {
     }
 
     private boolean isNullaryCommand(String cleanedInput) {
-        return cleanedInput.startsWith("list") || cleanedInput.startsWith("bye");
+        return cleanedInput.startsWith("list") || cleanedInput.startsWith("bye") || cleanedInput.startsWith("help");
     }
 
     private Command makeNullaryCommand(String cleanedInput) {
         if (cleanedInput.startsWith("list")) {
             return new ListCommand();
-        } else {
+        } else if (cleanedInput.startsWith("bye")) {
             return new ExitCommand();
+        } else {
+            return new HelpCommand();
         }
     }
 

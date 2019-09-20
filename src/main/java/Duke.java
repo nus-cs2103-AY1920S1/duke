@@ -7,6 +7,8 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+//import org.apache.commons.text.WordUtils;
+
 /**
  * Handles program semantics at a very high level of abstraction.
  */
@@ -47,6 +49,7 @@ public class Duke {
         try {
             Command c = parser.parseInput(input);
             String output = c.execute(tasks, ui, storage);
+            //String wrappedOutput = WordUtils.wrap(output, 70);
             return output;
         } catch (DukeException e) {
             return e.getMessage();

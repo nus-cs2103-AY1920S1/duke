@@ -26,6 +26,8 @@ public class Main extends Application {
             //Used to fix issue where font files could not be loaded in windows / linux
             //Reused from: https://stackoverflow.com/questions/16855677/how-to-embed-ttf-fonts-is-javafx-2-2
             Font.loadFont(
+                    // Font taken from https://fonts.google.com/specimen/Delius+Unicase
+                    // Credits to Designer Natalia Raices
                     Main.class.getResource("/fonts/deliusunicase-regular.ttf").toExternalForm(), 10
             );
             //@@author

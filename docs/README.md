@@ -2,6 +2,26 @@
 
 Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a case insensitve CLI application.
 
+## Quick Start
+
+#### Computing Environment
+
+Duke GUI has been tested and possible to run on Windows and Linux given the following computing environment
+* openjdk 11.0.4
+* OpenJDK Runtime Environment Build 11.0.4
+
+For Linux, please enter `java --version` to check if the minimum Java requirement is met before running the GUI application.
+For Windows, please enter `java --version` to check if the minimum Java requirement is met before running the GUI application.
+
+#### Start Duke Helpbot
+
+For Linux, 
+* Download the Duke Helpbot from release page.
+* Go to the download location folder. You will see the `duke-0.2.0.jar` file. 
+
+* Right click the 
+![Linux Properties](linux_rightclickpermission.png)
+
 ## Features 
 
 Duke allows users to track three types of task - To Do, Deadline and Events. In addition, there are also various utility functions to allow the user to manage his/her task list. These functions include `list`, `delete`, `done`, `bye`, `help`, `find`.

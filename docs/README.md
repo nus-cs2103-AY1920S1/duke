@@ -80,6 +80,11 @@ Here are the tasks in your list:
 3.[T][N] read book
 ```
 
+A sample Duke Helpbot response can be seen below.
+
+![List command](list.png)
+
+
   
 ### `help` - Show help page to assist user in commands available
 
@@ -96,19 +101,29 @@ Welcome to help page!
 Here are some commands you can use:
 list, todo, event, deadline, done, delete, find, bye
 ```
+
+A sample Duke Helpbot response can be seen below.
+
+![Help command](help.png)
+
   
 The user can further check the syntax required of each command to use it, by supplying the command interested.
   
 Example of usage: 
 
-`help done`
+`help todo`
   
 Example of expected outcome:
 
 ```
 Here is what I found!
-delete <task number>
+todo <task description>
 ```
+A sample Duke Helpbot response can be seen below.
+
+![help specific command](helptodo.png)
+
+
   
 ### `todo` - Adds a To Do task to the task list.
 
@@ -125,6 +140,10 @@ Got it. I've added this task:
   [T] Homework
 Now you have 5 tasks in the list.
 ```
+A sample Duke Helpbot response can be seen below.
+
+![Todo command](todo.png)
+
   
 ### `event` - Adds an Event to the task list.
 
@@ -142,6 +161,12 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 ```
 
+A sample Duke Helpbot response can be seen below.
+
+![Event command](event.png)
+
+
+
 ### `deadline` - Adds an task with deadline to the task list.
 
 The user can add a task with a deadline to the task list to track any deadlines he/she has. The deadline requires a date and time to be furnished with the deadline task description.
@@ -158,6 +183,11 @@ Got it. I've added this task:
 Now you have 5 tasks in the list.
 ```
 
+A sample Duke Helpbot response can be seen below.
+
+![Deadline command](deadline.png)
+
+
 ### `done` - Sets a task as completed.
 
 The user can update the completion status of the task to done. The user needs to identify the task to be set as done with the task number, by checking the task list.
@@ -172,6 +202,10 @@ Example of expected outcome:
 Nice! I've marked this task as done:
   [D][Y] CS2103 IP (by: 12/10/2019 1123)
 ```
+A sample Duke Helpbot response can be seen below.
+
+![Done command](done.png)
+
 
 
 ### `delete` - Deletes a task in task list.
@@ -189,6 +223,11 @@ Noted. I've removed this task:
   [E][N] CS2103 IP (by: 12/10/2019 1123)
 ```
 
+A sample Duke Helpbot response can be seen below.
+
+![Delete command](delete1.png)
+
+
 ### `find` - Finds all the task with the matching keyword in the task description.
 
 The user can find all the task entries in the task list, in which the task description contains the specified keyword. 
@@ -204,6 +243,11 @@ Here are the matching tasks in your list:
   1.[D][N] return book (by: 12/10/2019 1123)
   2.[Y][N] read book
 ```
+
+A sample Duke Helpbot response can be seen below.
+
+![Find command](findbook.png)
+
 
 ### `bye` - To exit and stop Duke.
 

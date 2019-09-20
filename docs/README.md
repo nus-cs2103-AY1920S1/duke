@@ -144,7 +144,7 @@ priority.
 * __Expected outcome__:  
     ```
     Alright! Master Duke has set priority HIGH for this task:
-      [T][+] go for tutorial <Priority: HIGH>
+      [T][+] go for tutorial <P: HIGH>
     ```  
     *This sets the second task with a HIGH priority.*
 

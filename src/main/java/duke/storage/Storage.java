@@ -6,10 +6,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -125,7 +122,7 @@ public class Storage {
 
             return tasks;
         } catch (Exception e) {
-            throw new DukeException("File not found");
+            throw new DukeException("Error");
         }
     }
 }

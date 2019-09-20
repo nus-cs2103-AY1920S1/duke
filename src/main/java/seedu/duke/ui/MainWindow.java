@@ -40,7 +40,7 @@ public class MainWindow extends AnchorPane {
                 + "'event Dad's birthday /at Yishun' - Adds an event task\n"
                 + "'stats all' - Views all stats\n"
                 + "__________________________________________________\n";
-        String welcomeString = "Hello! I'm Duke\n" + "What can I do for you?\n";
+        String welcomeString = "Hello there!\n" + "What can I do for you?\n";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeString + introduction,
                 dukeImage));
@@ -75,5 +75,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.equals("bye")) {
+            new Thread(() -> {
+                try {
+                    Thread.sleep(2000);
+                    System.exit(0);
+                } catch (InterruptedException e) {
+                    dialogContainer.getChildren().add(
+                            DialogBox.getDukeDialog("ObiWan exiting!", dukeImage)
+                    );
+                }
+            }).start();
+        }
+
     }
 }

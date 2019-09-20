@@ -123,7 +123,7 @@ public class GraphicalUi extends Ui {
      * @return String.
      */
     public String getByeSequence() {
-        String output = "\n" + "Bye. Hope to see you again soon!" + "\n";
+        String output = "\n" + "The Force will be with you, always" + "\n";
         return (output);
     }
 

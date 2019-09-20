@@ -37,7 +37,7 @@ public class ArchiveStorage extends Storage {
             new File("./data").mkdirs();
             if (!taskFile.exists()) {
                 taskFile.createNewFile();
-                this.fileAccessStatus = "Any previously saved archives were not be loaded: new file was created";
+                this.fileAccessStatus = "Any previously saved archives were not loaded: new file was created";
             } else {
                 Scanner scanner = new Scanner(taskFile);
                 String currentArchiveName = "";
@@ -59,9 +59,9 @@ public class ArchiveStorage extends Storage {
             }
 
         } catch (IOException e) {
-            this.fileAccessStatus = "Any previously saved archives were not be loaded: Could not create new file :(";
+            this.fileAccessStatus = "Any previously saved archives were not loaded: Could not create new file :(";
         } catch (InvalidTaskArgumentDukeException e) {
-            this.fileAccessStatus = "Any previously saved archives were not be loaded: Invalid format in file :(";
+            this.fileAccessStatus = "Any previously saved archives were not loaded: Invalid format in file :(";
         }
     }
 

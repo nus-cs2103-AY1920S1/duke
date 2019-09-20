@@ -29,7 +29,7 @@ public class TaskStorage extends Storage {
             new File("./data").mkdirs();
             if (!taskFile.exists()) {
                 taskFile.createNewFile();
-                this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: new file was created";
+                this.fileAccessStatus = "Any previously saved list of tasks was not loaded: new file was created";
             } else {
                 Scanner scanner = new Scanner(taskFile);
                 while (scanner.hasNext()) {
@@ -39,9 +39,9 @@ public class TaskStorage extends Storage {
                 this.fileAccessStatus = "Previously saved list of tasks successfully loaded :)";
             }
         } catch (IOException e) {
-            this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: Could not create new file :(";
+            this.fileAccessStatus = "Any previously saved list of tasks was not loaded: Could not create new file :(";
         } catch (InvalidTaskArgumentDukeException e) {
-            this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: Invalid format in file :(";
+            this.fileAccessStatus = "Any previously saved list of tasks was not loaded: Invalid format in file :(";
         }
 
     }

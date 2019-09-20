@@ -87,7 +87,7 @@ There is no need to save manually.
 <br/><br/> 
   
 ### 3.10. Detecting duplicate Tasks 
-Throws an error message when user tries to add a Task with an existing Task description    
+Throws an error message when user tries to add a Task with an existing Task description:    
 `"OOPS!!! Duplicate task already exists!"`    
 <br/><br/> 
  

@@ -22,7 +22,7 @@ import exceptions.DukeException;
  * add task items to the list of tasks. These items
  * can be ToDo, Event or Deadline tasks.
  */
-public class AddCommand extends Command {
+public class AddCommand extends UndoableCommand {
 
     /**
      * Constructor for AddCommand.
@@ -96,7 +96,24 @@ public class AddCommand extends Command {
             // Invalid command being supplied by the user
             throw new DukeException(ui.getInvalidCommandMsg());
         }
+        // Add the UndoableCommand to the stack of commands that can be undone
+        // since it is a valid command and has not thrown any errors
+        super.execute(tasks, ui, storage);
+        // Since the user has made changes to the code,
+        // clear the redoStack of all undoable commands
+        RedoCommand.redoStack.removeAllElements();
         return ui.getSuccessfulAddMsg(taskLst);
+    }
+
+    /**
+     * Removes the added task from the list.
+     *
+     * @param tasks the TaskList object storing all recorded Tasks.
+     */
+    public void executeInverse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ArrayList<Task> taskLst = tasks.getTaskLst();
+        // Remove the most recent addition to the task list
+        taskLst.remove(taskLst.size() - 1);
     }
 
 }

@@ -15,7 +15,10 @@ import java.util.ArrayList;
  * item in the list of tasks as done.
  * These items can be ToDo, Event or Deadline tasks.
  */
-public class DoneCommand extends Command {
+public class DoneCommand extends UndoableCommand {
+
+    /** The Task that was marked as done following the execution of this done command. */
+    Task doneTask;
 
     /**
      * Constructor for DoneCommand.
@@ -50,12 +53,28 @@ public class DoneCommand extends Command {
         }
         assert taskDoneIndex >= 0 : "taskDoneIndex must be non-negative";
         if (Command.checkValidTaskNumber(taskDoneIndex, taskLst)) {
-            taskLst.get(taskDoneIndex).setDone();
+            doneTask = taskLst.get(taskDoneIndex);
+            doneTask.setDone();
+            // Add the UndoableCommand to the stack of commands that can be undone
+            // since it is a valid command and has not thrown any errors
+            super.execute(tasks, ui, storage);
+            // Since the user has made changes to the code,
+            // clear the redoStack of all undoable commands
+            RedoCommand.redoStack.removeAllElements();
             return ui.getSuccessfulDoneMsg(taskDoneIndex, taskLst);
         } else {
             throw new DukeException(ui.getInvalidTaskNumMsg(taskLst));
         }
 
+    }
+
+    /**
+     * Mark the done task as undone.
+     *
+     * @param tasks the TaskList object storing all recorded Tasks.
+     */
+    public void executeInverse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        doneTask.setUndone();
     }
 
 }

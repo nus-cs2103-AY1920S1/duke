@@ -108,6 +108,46 @@ public class Ui {
     }
 
     /**
+     * Returns String message representing Duke's response
+     * upon undoing a command.
+     *
+     * @return String message representing Duke's response.
+     */
+    public String getUndoMsg() {
+        return "Undo successful!";
+    }
+
+    /**
+     * Returns String message representing Duke's response
+     * upon redoing a command.
+     *
+     * @return String message representing Duke's response.
+     */
+    public String getRedoMsg() {
+        return "Redo successful!";
+    }
+
+    /**
+     * Returns String message representing Duke's response
+     * when there are no commands to undo.
+     *
+     * @return String message representing Duke's response.
+     */
+    public String getNothingToUndoMsg() {
+        return "You have no commands to undo.";
+    }
+
+    /**
+     * Returns String message representing Duke's response
+     * when there are no commands to redo.
+     *
+     * @return String message representing Duke's response.
+     */
+    public String getNothingToRedoMsg() {
+        return "You have no commands to redo.";
+    }
+
+    /**
      * Returns String message specifying the full list of commands.
      *
      * @return String message representing Duke's response.

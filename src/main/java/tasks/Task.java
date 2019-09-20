@@ -50,6 +50,14 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * Changes the state of the task from completed to not completed.
+     * Boolean value is held by isDone is changed from true to false.
+     */
+    public void setUndone() {
+        this.isDone = false;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;

@@ -39,6 +39,10 @@ public class Parser {
             return new ListCommand(commandArr);
         case "clear":
             return new ClearCommand(commandArr);
+        case "undo":
+            return new UndoCommand(commandArr);
+        case "redo":
+            return new RedoCommand(commandArr);
         case "delete":
             return new DeleteCommand(commandArr);
         case "done":

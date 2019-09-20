@@ -1,5 +1,6 @@
 package commands;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import duke.TaskList;
@@ -15,7 +16,12 @@ import tasks.Task;
  * task item from the list of tasks. These items
  * can be ToDo, Event or Deadline tasks.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends UndoableCommand {
+
+    /** The Task that was deleted following the execution of this delete command. */
+    Task deletedTask;
+    /** The index of the deletedTask in the list of tasks at the point of deletion. */
+    int delTaskIndex;
 
     /**
      * Constructor for DeleteCommand.
@@ -42,7 +48,6 @@ public class DeleteCommand extends Command {
         if (commandArr.length <= 1) {
             throw new DukeException(ui.getMissingTaskNumMsg());
         }
-        int delTaskIndex;
         try {
             delTaskIndex = Integer.parseInt(commandArr[1]) - 1;
         } catch (NumberFormatException e) {
@@ -50,11 +55,28 @@ public class DeleteCommand extends Command {
         }
         assert delTaskIndex >= 0 : "delTaskIndex must be non-negative";
         if (Command.checkValidTaskNumber(delTaskIndex, taskLst)) {
-            Task deletedTask = taskLst.remove(delTaskIndex);
+            deletedTask = taskLst.remove(delTaskIndex);
+            // Add the UndoableCommand to the stack of commands that can be undone
+            // since it is a valid command and has not thrown any errors
+            super.execute(tasks, ui, storage);
+            // Since the user has made changes to the code,
+            // clear the redoStack of all undoable commands
+            RedoCommand.redoStack.removeAllElements();
             return ui.getSuccessfulDeleteMsg(deletedTask, taskLst);
         } else {
             throw new DukeException(ui.getInvalidTaskNumMsg(taskLst));
         }
+    }
+
+    /**
+     * Adds the deleted task back to the list.
+     *
+     * @param tasks the TaskList object storing all recorded Tasks.
+     */
+    public void executeInverse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        // Add the deleted task back to task list
+        ArrayList<Task> taskLst = tasks.getTaskLst();
+        taskLst.add(delTaskIndex, deletedTask);
     }
 
 }

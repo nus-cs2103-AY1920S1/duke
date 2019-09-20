@@ -4,6 +4,7 @@ import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 public class ExitCommand extends Command {
     /**
@@ -16,5 +17,6 @@ public class ExitCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ui.append(ui.getBye());
+        Platform.exit();
     }
 }

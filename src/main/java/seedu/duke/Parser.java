@@ -7,13 +7,51 @@ import seedu.duke.command.Command;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.DoneCommand;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.SearchCommand;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.ToDo;
 
 public class Parser {
+    /**
+     * Given a command string, return a command object.
+     * 
+     * @param fullCommand a String containing the full command
+     * @return Command a command object
+     * @throws DukeException if any error occurs parsing the command
+     */
+    public static Command parse(String fullCommand) throws DukeException {
+        try {
+            String[] commandTokens = Utils.trimAll(fullCommand.split(" ", 2));
+            switch (commandTokens[0]) {
+            case "todo":
+            case "deadline":
+            case "event":
+                return parseAddCommand(fullCommand);
+            case "delete":
+                return parseDeleteCommand(commandTokens);
+            case "list":
+                return new ListCommand();
+            case "done":
+                return parseDoneCommand(commandTokens);
+            case "bye":
+            case "exit":
+                return new ExitCommand();
+            case "help":
+                return new HelpCommand();
+            case "search":
+                return parseSearchCommand(commandTokens);
+            default:
+                throw new DukeException("No such command!");
+            }
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
     /**
      * Takes in a line and returns a Optional Task. The Optional task is empty if
      * the line is malformed.
@@ -41,38 +79,6 @@ public class Parser {
         } catch (Exception ex) {
             ex.printStackTrace();
             return Optional.empty();
-        }
-    }
-
-    /**
-     * Given a command string, return a command object.
-     * 
-     * @param fullCommand a String containing the full command
-     * @return Command a command object
-     * @throws DukeException if any error occurs parsing the command
-     */
-    public static Command parse(String fullCommand) throws DukeException {
-        try {
-            String[] commandTokens = Utils.trimAll(fullCommand.split(" ", 2));
-            switch (commandTokens[0]) {
-            case "todo":
-            case "deadline":
-            case "event":
-                return parseAddCommand(fullCommand);
-            case "delete":
-                return parseDeleteCommand(commandTokens);
-            case "list":
-                return new ListCommand();
-            case "done":
-                return parseDoneCommand(commandTokens);
-            case "bye":
-            case "exit":
-                return new ExitCommand();
-            default:
-                throw new DukeException("No such command!");
-            }
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
         }
     }
 
@@ -143,5 +149,14 @@ public class Parser {
 
     private static DoneCommand parseDoneCommand(String[] commandTokens) {
         return new DoneCommand(Integer.parseInt(commandTokens[1]));
+    }
+
+    private static SearchCommand parseSearchCommand(String[] commandTokens) throws DukeException {
+        try {
+            String keyword = commandTokens[1];
+            return new SearchCommand(keyword);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Please enter keyword to search for!");
+        }
     }
 }

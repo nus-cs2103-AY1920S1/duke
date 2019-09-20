@@ -14,6 +14,8 @@ public class Ui {
             + "| |_| | |_| | < __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String LOADING_ERROR_MESSAGE = "Sorry, we encountered error loading your data. "
             + "You will be using Duke fresh.";
+    private static final String HELP_MESSAGE = "todo <desc>\n" + "event <desc> at dd/mm/yyyy hhmm\n"
+            + "deadline <desc> by dd/mm/yyyy hhmm" + "list\n" + "delete <number>\n" + "exit\n";
     private Scanner sc;
 
     /**
@@ -59,5 +61,9 @@ public class Ui {
 
     public void show(String s) {
         System.out.println(s);
+    }
+
+    public void showHelpMessage() {
+        System.out.println(HELP_MESSAGE);
     }
 }

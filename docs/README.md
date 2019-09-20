@@ -8,12 +8,13 @@
     1.5. [Delete Tasks](#14-delete-tasks) : `list` <br/>
 
 2. [Tag Features](#2-tag-features) <br/>
-    2.1. [Adding Tags](#21-add-tags) : `todo`, `event`, `deadline` <br/>
-    2.2. [Remove a Tag](#22-remove-tag-from-task) : `delete` <br/>
-    2.3. [Query Tags a Task Has](#23-query-tags-a-task-has) : `done` <br/>
-    2.4. [Query Tasks a Specific Tag Has](#24-query-tasks-a-specific-tag-has) : `list` <br/>
-    2.5. [Update Tag](#25-update-tag): <br/>
-    2.6. [Delete Tag](#26-delete-tag): <br/>
+    2.1. [Adding Tags](#21-add-tags) : `tag addtag` <br/>
+    2.2. [Remove a Tag](#22-remove-tag-from-task) : `tag deletepair` <br/>
+    2.3. [Query Tags a Task Has](#23-query-tags-a-task-has) : `tag querytask` <br/>
+    2.4. [Query Tasks a Specific Tag Has](#24-query-tasks-a-specific-tag-has) : `tag querytag` <br/>
+    2.5. [Query All Tags](#25-query-all-tags): `tag all`<br/>    
+    2.6. [Update Tag](#26-update-tag): `tag updatetag`<br/>
+    2.7. [Delete Tag](#27-delete-tag): `tag deletetag`<br/>
 
 ## Features
 

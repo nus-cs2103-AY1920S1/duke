@@ -5,6 +5,7 @@ import duke.dukeinterface.Ui;
 import textfiles.ReadFile;
 import textfiles.WriteFile;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.application.Platform;
@@ -87,8 +88,14 @@ public class Duke extends Application {
     /**
      * Constructor for Duke class. It loads the file upon startup.
      */
-    public Duke() {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public Duke() throws IOException {
+        File new_file = new File(filename);
+        new_file.getParentFile().mkdirs();
+        new_file.createNewFile();
+
         ReadFile file = new ReadFile(filename);
+
         try {
             textArr = file.openFile();
         } catch (IOException e) {

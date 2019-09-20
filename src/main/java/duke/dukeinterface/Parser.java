@@ -16,6 +16,7 @@ import duke.task.ToDo;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.StringJoiner;
 import java.lang.StringBuilder;
 
@@ -253,7 +254,7 @@ public class Parser {
 
             case "morehelp":
                 c = new HelpCommand();
-                fileRead(helpname);
+                java.awt.Desktop.getDesktop().browse(URI.create("https://ngzhaoming.github.io/duke/"));
                 result = ((HelpCommand) c).moreHelpCommand();
                 break;
 

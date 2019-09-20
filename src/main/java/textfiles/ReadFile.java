@@ -1,6 +1,7 @@
 package textfiles;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class ReadFile extends Storage {
      */
     public ArrayList<String> openFile() throws IOException {
         FileReader fr = new FileReader(path);
+
         BufferedReader textReader = new BufferedReader(fr);
         String line = textReader.readLine();
 

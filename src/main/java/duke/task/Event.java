@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.parser.IncorrectArgumentsException;
+
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -42,15 +44,15 @@ public class Event extends Task {
 	 * @param isDone          Boolean indicating if task is completed.
 	 * @param givenTime       String of given time of deadline.
 	 */
-	public Event(char taskType, String taskDescription, boolean isDone, String givenTime) {
+	public Event(char taskType, String taskDescription, boolean isDone,
+				 String givenTime) throws IncorrectArgumentsException {
 		super(taskType, taskDescription, isDone);
 		
-		try {
-			df = new SimpleDateFormat("dd/MM/yyyy HHmm");
-			this.givenTime = df.parse(givenTime, new ParsePosition(0));
-			
-		} catch (NullPointerException n) {
-			throw new NullPointerException();
+		df = new SimpleDateFormat("dd/MM/yyyy HHmm");
+		this.givenTime = df.parse(givenTime, new ParsePosition(0));
+		
+		if (this.givenTime == null) {
+			throw new IncorrectArgumentsException("Time format is incorrect.");
 		}
 	}
 	

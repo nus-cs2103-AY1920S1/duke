@@ -1,6 +1,7 @@
 package duke.frontend;
 
 import duke.Duke;
+import duke.parser.IncorrectArgumentsException;
 import duke.parser.IncorrectFileFormatException;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -58,6 +59,8 @@ public class MainWindow extends AnchorPane {
 			loadingErrorMessage = n.getMessage();
 		} catch (FileNotFoundException z) {
 			loadingErrorMessage = z.getMessage();
+		} catch (IncorrectArgumentsException e) {
+			loadingErrorMessage = e.getMessage();
 		}
 		
 		if (isErrorOccurred) {

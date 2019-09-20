@@ -43,7 +43,8 @@ public class Parser {
 	 * @return Command object of the user.
 	 * @throws CommandNotFoundException If command entered by user is not found.
 	 */
-	public static Command parse(String input) throws CommandNotFoundException, IncorrectNumberOfArgumentsException {
+	public static Command parse(
+	String input) throws CommandNotFoundException, IncorrectNumberOfArgumentsException, IncorrectArgumentsException {
 		boolean isCommandFound = isCommandValid(input);
 		if (!isCommandFound) {
 			throw new CommandNotFoundException();
@@ -224,7 +225,8 @@ public class Parser {
 	 * @return task object of the file.
 	 * @throws IncorrectFileFormatException If input entered by user is not recognized.
 	 */
-	public static Task parseFromFile(String input, Ui ui) throws IncorrectFileFormatException {
+	public static Task parseFromFile(String input, Ui ui) throws IncorrectFileFormatException,
+																 IncorrectArgumentsException {
 		Task task = new Task();
 		boolean isTaskDone = false;
 		

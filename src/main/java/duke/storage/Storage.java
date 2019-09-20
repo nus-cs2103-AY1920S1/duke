@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import duke.parser.IncorrectArgumentsException;
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.Parser;
 import duke.task.Task;
@@ -38,7 +39,7 @@ public class Storage {
 	 * @return task list from file.
 	 * @throws IncorrectFileFormatException If file format is incorrect.
 	 */
-	public ArrayList<Task> load(Ui ui) throws IncorrectFileFormatException, IOException {
+	public ArrayList<Task> load(Ui ui) throws IncorrectFileFormatException, IOException, IncorrectArgumentsException {
 		//File f;
 		//f = new File("data/tasks.txt");
 		//Scanner s = new Scanner(f, "Unicode");
@@ -68,6 +69,8 @@ public class Storage {
 				
 			} catch (NullPointerException n) {
 				throw new NullPointerException();
+			} catch (IncorrectArgumentsException e) {
+				throw e;
 			}
 		}
 		return listTask;

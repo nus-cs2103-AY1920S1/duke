@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import duke.command.CommandNotFoundException;
+import duke.parser.IncorrectArgumentsException;
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.IncorrectNumberOfArgumentsException;
 import duke.storage.Storage;
@@ -34,7 +35,8 @@ public class Duke {
 	/**
 	 * Performs Duke start up operation to generate task list.
 	 */
-	public void performDukeStartup() throws IncorrectFileFormatException, FileNotFoundException {
+	public void performDukeStartup() throws IncorrectFileFormatException, FileNotFoundException,
+											IncorrectArgumentsException {
 		tasks = new TaskList();
 		try {
 			tasks = new TaskList(storage.load(ui));
@@ -46,6 +48,8 @@ public class Duke {
 			throw new FileNotFoundException(ui.getLoadingError());
 		} catch (IOException e) {
 			// error
+		} catch (IncorrectArgumentsException e) {
+			throw e;
 		}
 	}
 	
@@ -69,6 +73,8 @@ public class Duke {
 			output = "Internal error encountered." + " (IO exception)";
 		} catch (IncorrectNumberOfArgumentsException a) {
 			output = "Incorrect command format.\nPlease check again.";
+		} catch (IncorrectArgumentsException e) {
+			output = "Incorrect arguments supplied.\nPlease check again.\n";
 		}
 		return output;
 	}

@@ -13,3 +13,4 @@ src/main/resources/docs/
 *.iml
 bin/
 src/main/java/META-INF/MANIFEST.MF
+data/stats.txt

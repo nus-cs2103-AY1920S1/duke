@@ -26,14 +26,20 @@ public class TaskStorage extends Storage {
 
         try {
             File taskFile = new File(filePath);
-            Scanner scanner = new Scanner(taskFile);
-            while (scanner.hasNext()) {
-                String textLine = scanner.nextLine();
-                taskList.addTask(stringToTask(textLine));
+            new File("./data").mkdirs();
+            if (!taskFile.exists()) {
+                taskFile.createNewFile();
+                this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: new file was created";
+            } else {
+                Scanner scanner = new Scanner(taskFile);
+                while (scanner.hasNext()) {
+                    String textLine = scanner.nextLine();
+                    taskList.addTask(stringToTask(textLine));
+                }
+                this.fileAccessStatus = "Previously saved list of tasks successfully loaded :)";
             }
-            this.fileAccessStatus = "Previously saved list of tasks successfully loaded :)";
-        } catch (FileNotFoundException e) {
-            this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: File not found :(";
+        } catch (IOException e) {
+            this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: Could not create new file :(";
         } catch (InvalidTaskArgumentDukeException e) {
             this.fileAccessStatus = "Any previously saved list of tasks was not be loaded: Invalid format in file :(";
         }

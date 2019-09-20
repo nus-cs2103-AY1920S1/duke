@@ -34,25 +34,32 @@ public class ArchiveStorage extends Storage {
     public void getArchivedTasksFromFile(HashMap<String, TaskList> archives) {
         try {
             File taskFile = new File(filePath);
-            Scanner scanner = new Scanner(taskFile);
-            String currentArchiveName = "";
-            TaskList currentArchiveTasks = new TaskList();
+            new File("./data").mkdirs();
+            if (!taskFile.exists()) {
+                taskFile.createNewFile();
+                this.fileAccessStatus = "Any previously saved archives were not be loaded: new file was created";
+            } else {
+                Scanner scanner = new Scanner(taskFile);
+                String currentArchiveName = "";
+                TaskList currentArchiveTasks = new TaskList();
 
-            while (scanner.hasNext()) {
-                String textLine = scanner.nextLine();
+                while (scanner.hasNext()) {
+                    String textLine = scanner.nextLine();
 
-                if (isEndOfArchiveMarker(textLine)) {
-                    archives.put(currentArchiveName, currentArchiveTasks);
-                } else if (isArchiveName(textLine)) {
-                    currentArchiveName = textLine;
-                    currentArchiveTasks = new TaskList();
-                } else {
-                    currentArchiveTasks.addTask(stringToTask(textLine));
+                    if (isEndOfArchiveMarker(textLine)) {
+                        archives.put(currentArchiveName, currentArchiveTasks);
+                    } else if (isArchiveName(textLine)) {
+                        currentArchiveName = textLine;
+                        currentArchiveTasks = new TaskList();
+                    } else {
+                        currentArchiveTasks.addTask(stringToTask(textLine));
+                    }
                 }
+                this.fileAccessStatus = "Previously saved archives successfully loaded :)";
             }
-            this.fileAccessStatus = "Previously saved archives successfully loaded :)";
-        } catch (FileNotFoundException e) {
-            this.fileAccessStatus = "Any previously saved archives were not be loaded: File not found :(";
+
+        } catch (IOException e) {
+            this.fileAccessStatus = "Any previously saved archives were not be loaded: Could not create new file :(";
         } catch (InvalidTaskArgumentDukeException e) {
             this.fileAccessStatus = "Any previously saved archives were not be loaded: Invalid format in file :(";
         }

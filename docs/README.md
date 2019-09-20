@@ -116,6 +116,18 @@ Example of usage:
 
 Expected outcome:
 
-`noted. I have removed this task:
+`Noted. I have removed this task:
   [D][✘] find a wife (by: 17/07/2090 1200)
   Now you have 1 task in the list.`
+  
+### `edit` - Edits a task's descripton.
+
+Updates the description of a specified task.
+
+Example of usage: 
+
+`edit 1 dinner`
+
+Expected outcome:
+
+`Task 1 has been updated to dinner`

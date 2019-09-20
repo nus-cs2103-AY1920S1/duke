@@ -44,7 +44,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static final String TASKLIST_FILEPATH = "src/main/resources/taskList/TaskList.txt";
+    private static final String TASKLIST_FILEPATH = "data/TaskList.txt";
 
     /**
      * Images for the user and Duke
@@ -84,6 +84,7 @@ public class Duke extends Application {
         boolean isExit = false;
         while (!isExit) {
             try {
+                Runtime.getRuntime().exit(0);
                 String fullCommand = ui.readCommand();
                 System.out.println(ui.showLine()); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
@@ -208,9 +209,16 @@ public class Duke extends Application {
 
     // Duke's response, customisable
     String getResponse(String input) {
+        boolean isExit = false;
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+            if (isExit) {
+                Runtime.getRuntime().exit(0);
+                return c.execute(tasks, ui, storage);
+            } else {
+                return c.execute(tasks, ui, storage);
+            }
         } catch (DukeException e) {
             return e.getMessage();
         }

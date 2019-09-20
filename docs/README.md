@@ -13,6 +13,9 @@ Sounds interesting? Get started now!
 * Run the program by typing in `gradlew build` followed by `gradlew run` command in your terminal.
 * The Duke application will open.
 * Alternatively, you can download the jar file `v0.2 Duke ChatBot` from the releases page of this repo and run that file on your local computer.
+* The GUI should appear in a few seconds as below:
+
+![Duke: One app to manage all your tasks](https://raw.githubusercontent.com/sandydays/duke/master/docs/Ui.png)
 
 #### 3. Features
 

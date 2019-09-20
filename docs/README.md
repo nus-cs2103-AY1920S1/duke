@@ -18,90 +18,62 @@ _**The Jedi Academy**_ is a Personal Assistant Chatbot that helps a person to ke
 
 ### 3.1. Listing all Tasks: `list` 
 Lists all Tasks saved in hard drive currently    
-&nbsp;
-
-Usage Format:     
+* Usage Format:     
 `list`    
 &nbsp;
 
 ### 3.2. Adding Todo Task: `todo`     
 Adds a Todo Task with the supplied Task Description     
-&nbsp;
-
-Usage Format:         
--`todo {TASK}`    
-&nbsp;
-
-Example Usage:    
-->todo cartwheel to school  
+* Usage Format:         
+`todo {TASK}`    
+* Example Usage:    
+`todo cartwheel to school`  
 &nbsp;
 
 ### 3.3. Adding Deadline Task: `deadline` 
 Adds a Deadline Task with the supplied Task Description and DateTime    
-&nbsp;
-
-Usage Format:      
+* Usage Format:      
 `event {TASK} /by {DATETIME}`    
-&nbsp;
-
-Example Usage:    
->deadline assignment /by 14/07/2019 2359    
+* Example Usage:    
+`deadline assignment /by 14/07/2019 2359`  
 &nbsp;
 
 ### 3.4. Adding Event Task: `event`     
 Adds a Event Task with the supplied Task Description and DateTime    
-&nbsp;
-
-Usage Format:       
+* Usage Format:       
 `event {TASK} /at {DATETIME}`
-&nbsp;
-
-Example Usage:     
->event diving competition /at 21/07/2019 1400    
+* Example Usage:     
+`event diving competition /at 21/07/2019 1400`    
 &nbsp;
 
 
 ### 3.5. Marking Task as Done: `done`  
 Marks a Task at the specified index in the task list as Done    
-&nbsp;
-
-Usage Format:     
+* Usage Format:     
 `done {INDEX}`    
-&nbsp;
-
-Example Usage:    
->done 2    
+* Example Usage:    
+`done 2`    
 &nbsp;
 
 ### 3.6. Deleting Task: `delete` 
 Deletes a Task at the specified index in the task list    
-&nbsp;
-
-Usage Format:     
+* Usage Format:     
 `delete {INDEX}`    
-&nbsp;
-
-Example Usage:    
->delete 3    
+* Example Usage:    
+`delete 3 `   
 &nbsp;
 
 ### 3.7. Finding Task: `find` 
 Finds the Tasks whose Description contains the supplied KEYWORD    
-&nbsp;
-
-Usage Format:     
+* Usage Format:     
 `find {KEYWORD}`    
-&nbsp;
-
-Example Usage:    
->find something    
+* Example Usage:    
+`find something`    
 &nbsp;
 
 ### 3.8. Exiting the Program: `bye` 
 Exits the Program    
-&nbsp;
-
-Usage Format:     
+* Usage Format:     
 `bye`    
 &nbsp;
 
@@ -113,7 +85,7 @@ There is no need to save manually.
   
 ### 3.10. Detecting duplicate Tasks 
 Throws an error message when user tried to add a Task with an existing Task description    
->"OOPS!!! Duplicate task already exists!"    
+`"OOPS!!! Duplicate task already exists!"`    
 &nbsp;
  
 ## 4. Command Summary

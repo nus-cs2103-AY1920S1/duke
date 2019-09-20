@@ -40,7 +40,7 @@ public class Duke {
         } catch (DukeException e) {
             return Messages.MESSAGE_UNKNOWN_COMMAND;
         } catch (ArrayIndexOutOfBoundsException e) {
-            return "The description cannot be empty :-(";
+            return Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
         }
     }
 }

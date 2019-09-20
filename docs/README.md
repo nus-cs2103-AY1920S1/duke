@@ -2,14 +2,14 @@
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)  
-   3.1. [Viewing list of commands](#31-viewing-list-of-commands) : `help`   
-   3.2. [Adding a new task](#32-adding-a-new-task) : `todo`, `event`, `deadline`  
-   3.3. [Listing all tasks](#33-listing-all-tasks) : `list`  
-   3.4. [Marking a task as done](#34-marking-a-task-as-done) : `done`   
-   3.5. [Deleting a task](#35-deleting-a-task) : `delete`    
-   3.6. [Searching for a task by keyword(s)](#36-searching-a-task-by-keyword) : `find`  
-   3.7. [Clearing the window](#37-clearing-the-window) : `clear`    
-   3.8. [Exiting the program](#37-exiting-the-program) : `bye`
+  3.1. [Viewing list of commands](#31-viewing-list-of-commands) : `help`   
+  3.2. [Adding a new task](#32-adding-a-new-task) : `todo`, `event`, `deadline`  
+  3.3. [Listing all tasks](#33-listing-all-tasks) : `list`  
+  3.4. [Marking a task as done](#34-marking-a-task-as-done) : `done`   
+  3.5. [Deleting a task](#35-deleting-a-task) : `delete`    
+  3.6. [Searching for a task by keyword(s)](#36-searching-a-task-by-keyword) : `find`  
+  3.7. [Clearing the window](#37-clearing-the-window) : `clear`    
+  3.8. [Exiting the program](#37-exiting-the-program) : `bye`
    
 ## 1. Introduction
 Duke is a Personal Assistant Chatbot that aids users in keeping track of various tasks.
@@ -18,10 +18,7 @@ Duke is a Personal Assistant Chatbot that aids users in keeping track of various
 1. Ensure that you have Java `11` or above installed on your computer. 
 2. Download the latest `duke-0.2.jar` [here.](https://github.com/bruceskellator/duke/releases/tag/A-Release)
 3. Copy the file to a folder. This will be the home folder for Duke.
-4. Create a folder named `data` in the home folder.  
-Then, create a text file in `data` named `tasks.txt`.   
-Your tasks will be stored and loaded from there.
-5. Double-click on the `duke-0.2.jar` to start the app.  
+4. Double-click on the `duke-0.2.jar` to start the app.  
 The GUI should appear in a few seconds.
 
 ![Screenshot of Duke GUI](https://github.com/bruceskellator/duke/blob/master/docs/Ui.png?raw=true)

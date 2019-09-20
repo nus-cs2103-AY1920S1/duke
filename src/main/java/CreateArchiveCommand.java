@@ -42,6 +42,7 @@ public class CreateArchiveCommand extends ArchiveCommand {
         }
 
         archives.put(archiveName, new TaskList());
+        archiveStorage.loadArchivedTasksToFile(archives);
         return ui.showCreateArchiveMessage(archiveName);
     }
 }

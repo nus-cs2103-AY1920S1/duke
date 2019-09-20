@@ -47,6 +47,8 @@ public class RevertArchiveTaskCommand extends ArchiveCommand {
             Task revertedTask = archive.getTask(taskNumber);
             archive.deleteTask(taskNumber);
             tasks.addTask(revertedTask);
+            taskStorage.loadTasksToFile(tasks);
+            archiveStorage.loadArchivedTasksToFile(archives);
             return ui.showRevertArchiveTaskMessage(archiveName, revertedTask);
         } else {
             throw new InvalidCommandDukeException("OOF!! There is no task labelled that number!!");

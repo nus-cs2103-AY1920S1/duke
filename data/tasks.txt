@@ -1,3 +1,4 @@
 D|1|cs2100 assignment 1|15/09/2019 2359
-E|0|charity run|14/09/2019 1600
+E|1|charity run|14/09/2019 1600
 T|0|buy birthday presents
+E|1|cs2103T team meeting|12/09/2019 1330

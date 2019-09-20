@@ -30,6 +30,7 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, TaskStorage taskStorage, ArchiveStorage archiveStorage,
                           HashMap<String, TaskList> archives) {
         tasks.addTask(this.task);
+        taskStorage.loadTasksToFile(tasks);
         // Precondition for showAddTaskMessage
         assert tasks.taskListSize() > 0 : "List of Tasks should be at least 1 after adding new task";
         return ui.showAddTaskMessage(this.task, tasks.taskListSize());

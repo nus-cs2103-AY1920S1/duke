@@ -34,6 +34,7 @@ public class DoneCommand extends Command {
                           HashMap<String, TaskList> archives) throws InvalidCommandDukeException {
         if (taskNumber >= 0 && taskNumber < tasks.taskListSize()) {
             tasks.markAsDone(taskNumber);
+            taskStorage.loadTasksToFile(tasks);
             return ui.showMarkTaskAsDoneMessage(tasks.getTask(taskNumber));
         } else {
             throw new InvalidCommandDukeException("OOF!! There is no task labelled that number!!");

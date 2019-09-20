@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
         if (taskNumber >= 0 && taskNumber < tasks.taskListSize()) {
             Task removedTask = tasks.getTask(taskNumber);
             tasks.deleteTask(taskNumber);
+            taskStorage.loadTasksToFile(tasks);
             return ui.showDeleteTaskMessage(removedTask, tasks.taskListSize());
         } else {
             throw new InvalidCommandDukeException("OOF!!! There is no task labelled that number!!");

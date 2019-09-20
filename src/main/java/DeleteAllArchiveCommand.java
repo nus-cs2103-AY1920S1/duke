@@ -39,6 +39,7 @@ public class DeleteAllArchiveCommand extends ArchiveCommand {
         }
 
         archives.remove(archiveName);
+        archiveStorage.loadArchivedTasksToFile(archives);
         return ui.showDeleteAllArchiveMessage(archiveName, archives);
     }
 }

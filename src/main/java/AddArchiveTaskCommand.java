@@ -46,6 +46,7 @@ public class AddArchiveTaskCommand extends ArchiveCommand {
             tasks.deleteTask(taskNumber);
             TaskList archive = archives.get(archiveName);
             archive.addTask(archivedTask);
+            archiveStorage.loadArchivedTasksToFile(archives);
             return ui.showAddArchiveTaskMessage(archiveName, archive, archivedTask);
         } else {
             throw new InvalidCommandDukeException("OOF!! There is no task labelled that number!!");

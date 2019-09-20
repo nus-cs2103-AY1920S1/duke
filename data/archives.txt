@@ -7,6 +7,3 @@ Past Meetings
 E|1|cs2101 OP1 meeting|05/09/2019 1400
 E|1|cs2103T team meeting|12/09/2019 1330
 /end
-Assignments
-D|1|literature readings|05/08/2019 2359
-/end

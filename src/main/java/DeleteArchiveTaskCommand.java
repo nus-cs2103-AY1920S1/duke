@@ -49,6 +49,8 @@ public class DeleteArchiveTaskCommand extends ArchiveCommand {
             if (archive.taskListSize() == 0) {
                 archives.remove(archiveName);
             }
+
+            archiveStorage.loadArchivedTasksToFile(archives);
             return ui.showDeleteArchiveTaskMessage(removedTask, archiveName);
         } else {
             throw new InvalidCommandDukeException("OOF!! There is no task labelled that number!!");

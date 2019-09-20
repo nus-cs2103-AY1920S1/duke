@@ -25,6 +25,8 @@ For Linux,
 * Check the `Allow executing file as program` box.
 ![Linux Check](linux_checkpermission.png)
 
+* Double click the `duke-0.2.0.jar` file to execute the Duke Helpbot GUI. 
+
 ## Features 
 
 Duke allows users to track three types of task - To Do, Deadline and Events. In addition, there are also various utility functions to allow the user to manage his/her task list. These functions include `list`, `delete`, `done`, `bye`, `help`, `find`.

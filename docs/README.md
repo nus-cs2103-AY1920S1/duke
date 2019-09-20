@@ -19,8 +19,11 @@ For Linux,
 * Download the Duke Helpbot from release page.
 * Go to the download location folder. You will see the `duke-0.2.0.jar` file. 
 
-* Right click the 
+* Right click the `duke-0.2.0.jar` file and click on `properties`. 
 ![Linux Properties](linux_rightclickpermission.png)
+
+* Check the `Allow executing file as program` box.
+![Linux Check](linux_checkpermission.png)
 
 ## Features 
 

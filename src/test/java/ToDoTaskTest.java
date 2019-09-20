@@ -3,8 +3,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTaskTest {
-    protected static final char UNICODE_TICK = (char) 0x2713;
-    protected static final char UNICODE_CROSS = (char) 0x2718;
+    protected static final char UNICODE_TICK = 'O';
+    protected static final char UNICODE_CROSS = 'X';
 
     @Test
     public void testStringConversion() {

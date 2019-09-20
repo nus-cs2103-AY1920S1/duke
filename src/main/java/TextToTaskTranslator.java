@@ -14,7 +14,8 @@ public class TextToTaskTranslator {
     //A Pattern for the format "hhmm". Will not clash with the 4 digits for year in DATE_FORMAT_PATTERN
     private static final Pattern TIME_FORMAT_PATTERN = Pattern.compile("(?<!\\/)\\d{4}\\b");
 
-    private static final int [] DAYS_EACH_MONTH = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    private static final int [] DAYS_EACH_MONTH = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+    private static final int DAYS_IN_LEAP_MONTH = 29;
     private static final String [] NAMES_EACH_MONTH 
         = { "January", "Februrary", "March", "April", "May", "June", 
             "July", "August",  "September", "October", "November", "December" };
@@ -135,11 +136,12 @@ public class TextToTaskTranslator {
             int month = Integer.parseInt(values[1]);
             int year = Integer.parseInt(values[2]);
 
-            checkDateCorrect(day, month);
-                    
             if (year < 100) {
                 year += 2000;
             }
+
+            checkDateCorrect(day, month, year);
+                
 
             deadlineDate = LocalDate.of(year, month, day);
         }
@@ -177,19 +179,25 @@ public class TextToTaskTranslator {
      * 
      * @param day The day of the month
      * @param month The month of the year
+     * @param year The year
      * @throws DukeException If the day is zero or greater than the number of days in the month,
      *     or if the month is zero or greater than 12
      */
-    private static void checkDateCorrect(int day, int month) throws DukeException {
+    private static void checkDateCorrect(int day, int month, int year) throws DukeException {
         if (day == 0) {
             GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Sweat);
             throw new DukeException(DukeUi.ERROR_DAY_ZERO);
         }
 
-        if (DAYS_EACH_MONTH[month - 1] < day) {
-            GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Smile);
-            throw new DukeException(
-                String.format(DukeUi.ERROR_DAY_BIG, NAMES_EACH_MONTH[month - 1]));
+        boolean monthIsFebruary = (month == 2);
+        if (monthIsFebruary) {
+            checkFebruaryDateCorrect(day, year);
+        } else {
+            if (DAYS_EACH_MONTH[month - 1] < day) {
+                GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Smile);
+                throw new DukeException(
+                    String.format(DukeUi.ERROR_DAY_BIG, NAMES_EACH_MONTH[month - 1]));
+            }
         }
 
         if (month == 0) {
@@ -200,6 +208,37 @@ public class TextToTaskTranslator {
         if (month > 12) {
             GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Smile);
             throw new DukeException(DukeUi.ERROR_MONTH_BIG);
+        }
+    }
+
+    /**
+     * Checks if the day-month combination is valid for the month of February,
+     *     and throws a <code>DukeException</code> otherwise.
+     * 
+     * @param day The day of the month
+     * @param year The year
+     * @throws DukeException If the day is greater than the number of days of the month
+     */
+    private static void checkFebruaryDateCorrect(int day, int year) throws DukeException {
+        boolean yearDivisbleByFour = year % 4 == 0;
+        boolean yearDivisibleByHundred = year % 100 == 0;
+        boolean yearDivisibleByFourHundred = year % 400 == 0;
+        int indexOfFebruaryInArray = 1;
+        
+        if (yearDivisbleByFour && !yearDivisibleByHundred || yearDivisibleByFourHundred) {
+            //Check against 29 days
+            if (DAYS_IN_LEAP_MONTH < day) {
+                GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Smile);
+                throw new DukeException(
+                    String.format(DukeUi.ERROR_DAY_BIG, NAMES_EACH_MONTH[indexOfFebruaryInArray]));
+            }
+        } else {
+            //Check against 28 days
+            if (DAYS_EACH_MONTH[indexOfFebruaryInArray] < day) {
+                GlobalDukeImageChoiceBuffer.setDukeImageChoice(DukeImageChoice.Smile);
+                throw new DukeException(
+                    String.format(DukeUi.ERROR_DAY_BIG, NAMES_EACH_MONTH[indexOfFebruaryInArray]));
+            }
         }
     }
 

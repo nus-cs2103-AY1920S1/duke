@@ -5,6 +5,9 @@
     -fx-border-color: transparent;
     border-color: transparent;
     -fx-focus-color: transparent;
+    
+    -fx-background-image: url("../images/RealArrow.png");
+    background-image: url("../images/RealArrow.png");
 }
 
 .button:hover {

@@ -15,12 +15,12 @@
             <Font name="Consolas" size="12.0" />
          </font>
       </TextField>
-      <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" onMouseEntered="#onMouseEnterButton" onMouseExited="#onMouseExitButton" prefHeight="41.0" prefWidth="76.0" stylesheets="@button.css" text="❧" textFill="#b01078">
+      <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" onMouseEntered="#onMouseEnterButton" onMouseExited="#onMouseExitButton" prefHeight="42.0" prefWidth="76.0" stylesheets="@button.css" textFill="#b01078">
          <font>
-            <Font name="Consolas" size="32.0" />
+            <Font name="Edwardian Script ITC" size="32.0" />
          </font>
          <padding>
-            <Insets bottom="-5.0" left="-5.0" right="-5.0" top="-5.0" />
+            <Insets bottom="-50.0" left="-50.0" right="-50.0" top="-50.0" />
          </padding></Button>
       <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" stylesheets="@scrollpane.css" vvalue="1.0">
          <content>

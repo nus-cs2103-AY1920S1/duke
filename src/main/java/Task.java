@@ -6,8 +6,14 @@ import java.io.Serializable;
 public abstract class Task implements Serializable {
     private static final long serialVersionUID = 122462L;
     
+    /*
     protected static final char UNICODE_TICK = (char) 0x2713;
     protected static final char UNICODE_CROSS = (char) 0x2718;
+    */
+
+    protected static final char UNICODE_TICK = 'O';
+    protected static final char UNICODE_CROSS = 'X';
+
     protected static final String TO_STRING_FORMAT = "[%c][%c] %s";
 
     protected String description;

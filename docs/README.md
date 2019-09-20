@@ -256,13 +256,13 @@ Example usage:
 bye
 ```
 
-![bye example](https://raw.github.com/Chenggeng97/duke/master/docs/bye.png)
-
 Expected outcome:
 ```
 Alright, see you again!
 Good luck, and do your best!
 ```
+
+![bye example](https://raw.github.com/Chenggeng97/duke/master/docs/bye.png)
 
 ## Authors
 - Damith C. Rajapakse - _Module Coordinator_

@@ -15,17 +15,21 @@ For Windows, please enter `java --version` to check if the minimum Java requirem
 
 #### Start Duke Helpbot
 
-For Linux, 
-* Download the Duke Helpbot from release page.
-* Go to the download location folder. You will see the `duke-0.2.0.jar` file. 
+* Download the Duke Helpbot from [release page](https://github.com/huiminlim/duke/releases/tag/A-Release).
 
+
+For Linux, 
+* Go to the download location folder. You will see the `duke-0.2.0.jar` file. 
 * Right click the `duke-0.2.0.jar` file and click on `properties`. 
 ![Linux Properties](linux_rightclickpermission.png)
-
 * Check the `Allow executing file as program` box.
 ![Linux Check](linux_checkpermission.png)
-
 * Double click the `duke-0.2.0.jar` file to execute the Duke Helpbot GUI. 
+
+For Windows,
+
+*
+
 
 ## Features 
 

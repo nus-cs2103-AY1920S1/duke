@@ -4,7 +4,7 @@ Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a cas
 
 ## Quick Start
 
-#### Computing Environment
+### Computing Environment
 
 Duke GUI has been tested and possible to run on Windows and Linux given the following computing environment
 * openjdk 11.0.4
@@ -17,8 +17,7 @@ For Windows, please enter `java --version` to check if the minimum Java requirem
 
 * Download the Duke Helpbot from [release page](https://github.com/huiminlim/duke/releases/tag/A-Release).
 
-
-For Linux, 
+#### For Linux, 
 * Go to the download location folder. You will see the `duke-0.2.0.jar` file. 
 * Right click the `duke-0.2.0.jar` file and click on `properties`. 
 ![Linux Properties](linux_rightclickpermission.png)
@@ -26,9 +25,13 @@ For Linux,
 ![Linux Check](linux_checkpermission.png)
 * Double click the `duke-0.2.0.jar` file to execute the Duke Helpbot GUI. 
 
-For Windows,
+Alternatively, a command can be issued in the command terminal: `java -jar duke-0.2.0.jar`.
 
-*
+#### For Windows,
+* Go to the download location folder. You will see the `duke-0.2.0.jar` file. 
+* Double click the `duke-0.2.0.jar` file to execute the Duke Helpbot GUI. 
+
+Alternatively, a command can be issued in the command terminal: `java -jar duke-0.2.0.jar`.
 
 
 ## Features 

@@ -16,11 +16,12 @@ public class Ui {
      * Prints welcome message when application starts up.
      */
     public void showWelcome() {
-        System.out.println("This is Donna from Suits.\nWhat can I do for you?");
+        System.out.println("This is Donna from Suits.\nFeel free to enter 'help' to see all the commands" +
+                " I can help you with.");
     }
 
     public String showWelcomeForGui() {
-        return "This is Donna from Suits.\nWhat can I do for you?";
+        return "This is Donna from Suits.\nFeel free to enter 'help' to see all the commands I can help you with.";
     }
 
     /**

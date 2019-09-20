@@ -54,6 +54,9 @@ Completed | Y
 Incomplete | N
 
 
+A sample list with the Task Icon and Completion Status is show below
+![Sample list](samplelist.png)
+
 ## Usage
 
 ### `list` - List out all tasks 

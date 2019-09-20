@@ -131,3 +131,16 @@ Example of usage:
 Expected outcome:
 
 `Task 1 has been updated to dinner`
+
+
+### `bye` - Exits the programme.
+
+Exits the program.
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+`Program closes`

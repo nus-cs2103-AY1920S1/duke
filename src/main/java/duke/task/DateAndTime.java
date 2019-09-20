@@ -12,7 +12,8 @@ public class DateAndTime {
     protected int date;
     protected int month;
     protected int year;
-    protected int timeNumber;
+    protected int hourNumber;
+    protected int minNumber;
     protected String timeDay;
 
     protected String[] monthMappings = new String[]{"", "January", "February", "March", "April", "May", "June",
@@ -27,14 +28,15 @@ public class DateAndTime {
             String date[] = split[0].split("/");
 
             this.time = split[1];
-            int time = Integer.parseInt(this.time) / 100;
+            int hours = Integer.parseInt(this.time) / 100;
+            int mins = Integer.parseInt(this.time) % 100;
 
             int dateToCheck = Integer.parseInt(date[0]);
             int monthToCheck = Integer.parseInt(date[1]);
             int yearToCheck = Integer.parseInt(date[2]);
 
             validateDate(dateToCheck, monthToCheck, yearToCheck);
-            validateTime(time);
+            validateTime(hours, mins);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Date and time not in correct format.");
@@ -56,13 +58,19 @@ public class DateAndTime {
         this.year = year;
     }
 
-    private void validateTime(int time) throws DukeException {
-        if (time < 12 && time >= 0) {
-            this.timeNumber = (time == 0) ? 12 : time;
+    private void validateTime(int hour, int min) throws DukeException {
+        if (hour < 12 && hour >= 0) {
+            this.hourNumber = (hour == 0) ? 12 : hour;
             this.timeDay = "am";
-        } else if (time < 24 && time >= 12) {
-            this.timeNumber = (time == 12) ? 12 : time - 12;
+        } else if (hour < 24 && hour >= 12) {
+            this.hourNumber = (hour == 12) ? 12 : hour - 12;
             this.timeDay = "pm";
+        } else {
+            throw new DukeException("Incorrect time entered");
+        }
+
+        if (min < 60 && min >= 0) {
+            this.minNumber = min;
         } else {
             throw new DukeException("Incorrect time entered");
         }
@@ -107,6 +115,7 @@ public class DateAndTime {
     @Override
     public String toString() {
         String extra = getDateSuffix();
-        return date + extra + " of " + monthMappings[month] + " " + year + ", " + timeNumber + timeDay;
+        String min = String.format("%02d", minNumber);
+        return date + extra + " of " + monthMappings[month] + " " + year + ", " + hourNumber + ":" + min+ timeDay;
     }
 }

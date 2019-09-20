@@ -1,6 +1,9 @@
 package duke.storage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import duke.parser.IncorrectFileFormatException;
@@ -18,7 +21,7 @@ public class Storage {
 	
 	/**
 	 * Constructor to initialize storage filepaths.
-	 *
+	 * <p>
 	 * //@param filePath String containing filepath to read list of task from disk.
 	 */
 	public Storage() {
@@ -42,11 +45,10 @@ public class Storage {
 		
 		
 		InputStream stream = Storage.class.getClassLoader().getResourceAsStream("tasks.txt");
-		if(stream == null){
+		if (stream == null) {
 			return new ArrayList<>();
 		}
 		
-		assert stream != null;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 		
 		ArrayList<String> listInput = new ArrayList<>();
@@ -71,21 +73,6 @@ public class Storage {
 		return listTask;
 	}
 	
-	/**
-	 * Obtain list of tasks to print, save to hard disk.
-	 *
-	 * @param l List containing all string format tasks to save.
-	 */
-	public void save(ArrayList<String> l) throws IOException {
-		try {
-			FileWriter fw = new FileWriter("data/print.txt");
-			for (String s : l) {
-				fw.write(s + System.lineSeparator());
-			}
-			fw.close();
-		} catch (IOException e) {
-			throw e;
-		}
-	}
+	
 }
 

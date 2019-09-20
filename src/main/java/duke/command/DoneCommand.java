@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
 	@Override
 	public String execute(TaskList list, Ui ui, Storage storage) throws IOException {
 		Task t = list.setTaskDone(taskNumberDone - 1);
-		storage.save(list.printList());
+		//storage.save(list.printList());
 		return ui.getDoneTask(t);
 	}
 	

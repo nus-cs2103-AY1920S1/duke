@@ -1,4 +1,4 @@
-package duke;
+package duke.frontend;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

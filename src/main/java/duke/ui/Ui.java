@@ -55,11 +55,11 @@ public class Ui {
 		
 		boolean isListSizePositive = listToPrint.size() > 0;
 		
-		if(!isListSizePositive){
+		if (!isListSizePositive) {
 			output = "There are currently no items in the list.\n";
 		}
 		
-		if(isListSizePositive) {
+		if (isListSizePositive) {
 			StringBuilder listOfTasksToPrint = new StringBuilder("Here are the tasks in your list:\n");
 			for (int i = 0; i < listToPrint.size(); i++) {
 				listOfTasksToPrint.append("\t").append(i + 1).append(".").append(listToPrint.get(i)).append("\n");

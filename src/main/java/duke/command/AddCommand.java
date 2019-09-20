@@ -36,7 +36,6 @@ public class AddCommand extends Command {
 		Task temp = getPendingTask();
 		list.addNewTask(temp);
 		list.increaseTaskCount();
-		storage.save(list.printList());
 		
 		String addedTaskMessage = ui.getAddedTaskMessage(temp.getFirstCharTask(), temp.getIsDone(),
 														 temp.getTaskDescription(),

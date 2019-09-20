@@ -1,5 +1,6 @@
-package duke;
+package duke.frontend;
 
+import duke.Duke;
 import duke.parser.IncorrectFileFormatException;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -75,28 +76,13 @@ public class MainWindow extends AnchorPane {
 	private void handleUserInput() {
 		String input = userInput.getText();
 		
-		if (input.toLowerCase().startsWith("help")) {
-			String remainingInput = input.toLowerCase().replace("help", "").trim();
-			
-			if (remainingInput.length() == 0) {
-				handleHelpPage();
-			} else {
-				handleHelpPage(remainingInput);
-			}
+		boolean isHelpCommand = input.toLowerCase().startsWith("help");
+		
+		if (isHelpCommand) {
+			handleHelpPage(input);
 		} else {
 			handleOperations(input);
 		}
-	}
-	
-	/*
-		Handles the display for help page and helpful advice for users.
-	 */
-	private void handleHelpPage() {
-		String helpLine1 = "Welcome to help page!\n";
-		String helpLine2 = "Here are some commands you can use:\n";
-		String helpLine3 = "list, todo, event, deadline, done, delete, find, bye";
-		dialogContainer.getChildren().addAll(HelpBox.getHelpBox(helpLine1 + helpLine2 + helpLine3, jigglypuff));
-		userInput.clear();
 	}
 	
 	/**
@@ -105,37 +91,8 @@ public class MainWindow extends AnchorPane {
 	 * @param commandInterested Command entered by user.
 	 */
 	private void handleHelpPage(String commandInterested) {
-		String helpLine1 = "Here is what I found!\n";
-		
-		boolean isByeCommand = commandInterested.toLowerCase().equals("bye");
-		boolean isFindCommand = commandInterested.toLowerCase().equals("find");
-		boolean isListCommand = commandInterested.toLowerCase().equals("list");
-		boolean isDeleteCommand = commandInterested.toLowerCase().equals("delete");
-		boolean isToDoCommand = commandInterested.toLowerCase().equals("todo");
-		boolean isDeadlineCommand = commandInterested.toLowerCase().equals("deadline");
-		boolean isEventCommand = commandInterested.toLowerCase().equals("event");
-		boolean isDoneCommand = commandInterested.toLowerCase().equals("done");
-		
-		String helpLine3 = "Sorry! Command not found!\n";
-		if (isToDoCommand) {
-			helpLine3 = commandInterested + " <task description>\n";
-		} else if (isDeadlineCommand) {
-			helpLine3 = commandInterested + " <task description> /by dd/mm/yyyy\n";
-		} else if (isEventCommand) {
-			helpLine3 = commandInterested + " <task description> /at dd/mm/yyyy\n";
-		} else if (isDeleteCommand) {
-			helpLine3 = commandInterested + " <task number>";
-		} else if (isListCommand) {
-			helpLine3 = commandInterested;
-		} else if (isFindCommand) {
-			helpLine3 = commandInterested + " <keyword>\n";
-		} else if (isByeCommand) {
-			helpLine3 = commandInterested;
-		} else if(isDoneCommand){
-			helpLine3 = commandInterested + " <task number>";
-		}
-		
-		dialogContainer.getChildren().addAll(new HelpBox(helpLine1 + helpLine3, jigglypuff));
+		String helpOutput = duke.getDukeResponse(commandInterested);
+		dialogContainer.getChildren().addAll(new HelpBox(helpOutput, jigglypuff));
 		userInput.clear();
 	}
 	
@@ -147,6 +104,5 @@ public class MainWindow extends AnchorPane {
 		dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
 											 DialogBox.getDukeDialog(response, dukeImage));
 		userInput.clear();
-		
 	}
 }

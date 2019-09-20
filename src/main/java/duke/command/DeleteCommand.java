@@ -37,11 +37,14 @@ public class DeleteCommand extends Command {
 	@Override
 	public String execute(TaskList list, Ui ui, Storage storage) {
 		Task t = list.deleteTask(taskNumberToDelete - 1);
+		/*
 		try {
 			storage.save(list.printList());
 		} catch (IOException o) {
 			return ui.getSavingError();
 		}
+		
+		 */
 		return ui.getDeletedTask(t, list.getTaskCount());
 	}
 	

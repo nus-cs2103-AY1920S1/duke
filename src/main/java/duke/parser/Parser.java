@@ -1,14 +1,6 @@
 package duke.parser;
 
-import duke.command.ListCommand;
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.DeleteCommand;
-import duke.command.CommandNotFoundException;
-import duke.command.FindCommand;
-import duke.command.DoneCommand;
-import duke.command.CommandType;
-import duke.command.Command;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -39,6 +31,7 @@ public class Parser {
 		commandList.add("LIST");
 		commandList.add("BYE");
 		commandList.add("FIND");
+		commandList.add("HELP");
 	}
 	
 	/**
@@ -68,6 +61,7 @@ public class Parser {
 		boolean isCommandTypeDone = (type == CommandType.DONE);
 		boolean isCommandTypeList = (type == CommandType.LIST);
 		boolean isCommandTypeFind = (type == CommandType.FIND);
+		boolean isCommandTypeHelp = (type == CommandType.HELP);
 		
 		if (isCommandTypeAdd) {
 			boolean isCommandToDo = commandName.equals("TODO");
@@ -79,7 +73,8 @@ public class Parser {
 				String taskDescription = input.substring("Todo".length()).trim();
 				
 				// Empty task description
-				if(taskDescription.equals("")){
+				boolean isEmptyTaskDescription = taskDescription.equals("");
+				if (isEmptyTaskDescription) {
 					throw new IncorrectNumberOfArgumentsException();
 				}
 				task = new ToDo(firstCharOfCommand, taskDescription, false);
@@ -129,8 +124,18 @@ public class Parser {
 			}
 			command = new FindCommand(commandName, keyword, new Task());
 			
-		} else {
+		} else if (isCommandTypeHelp) {
+			String remainingInput = input.toLowerCase().replace("help", "").trim();
 			
+			boolean isGeneralHelpCommand = (remainingInput.length() == 0);
+			
+			if (isGeneralHelpCommand) {
+				command = new HelpCommand(false, null);
+			} else {
+				command = new HelpCommand(true, remainingInput);
+			}
+			
+		} else {
 			throw new CommandNotFoundException();
 		}
 		

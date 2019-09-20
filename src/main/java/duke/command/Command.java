@@ -59,16 +59,6 @@ public abstract class Command {
 	public Task getPendingTask() {
 		return pendingTask;
 	}
-	
-	/**
-	 * Return type of command from enum COMMAND_TYPE.
-	 *
-	 * @return COMMAND_TYPE enum constant of commandType.
-	 */
-	public CommandType getCommandType() {
-		return commandType;
-	}
-	
 }
 
 

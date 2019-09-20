@@ -2,9 +2,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.InvalidPathException;
 
-import duke.command.ByeCommand;
 import duke.command.CommandNotFoundException;
 import duke.parser.IncorrectFileFormatException;
 import duke.parser.IncorrectNumberOfArgumentsException;
@@ -27,8 +25,7 @@ public class Duke {
 	 * Constructor to initialize Duke for startup.
 	 * Set up storage, parser and ui.
 	 */
-	Duke() {
-		//filepath = "C:\\Users\\user\\Desktop\\CS2103_Git\\duke\\data\\tasks.txt";
+	public Duke() {
 		Parser.initialize();
 		storage = new Storage();
 		ui = new Ui();
@@ -37,7 +34,7 @@ public class Duke {
 	/**
 	 * Performs Duke start up operation to generate task list.
 	 */
-	void performDukeStartup() throws IncorrectFileFormatException, FileNotFoundException {
+	public void performDukeStartup() throws IncorrectFileFormatException, FileNotFoundException {
 		tasks = new TaskList();
 		try {
 			tasks = new TaskList(storage.load(ui));
@@ -48,7 +45,7 @@ public class Duke {
 		} catch (FileNotFoundException f1) {
 			throw new FileNotFoundException(ui.getLoadingError());
 		} catch (IOException e) {
-			System.out.println("IO");
+			// error
 		}
 	}
 	
@@ -57,7 +54,7 @@ public class Duke {
 	 *
 	 * @return Dialog box with duke response and image.
 	 */
-	String getDukeResponse(String input) {
+	public String getDukeResponse(String input) {
 		String output;
 		try {
 			Command c = Parser.parse(input);
@@ -81,7 +78,7 @@ public class Duke {
 	 *
 	 * @return Dialog box with duke welcome message and image.
 	 */
-	String getDukeWelcome() {
+	public String getDukeWelcome() {
 		return ui.getWelcome();
 	}
 }

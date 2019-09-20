@@ -1,6 +1,6 @@
 # User Guide
 
-Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a case insensitve CLI application.
+Duke is a personal chat bot that uses the CLI to manage daily tasks. It is a case insensitve CLI application. 
 
 ## Quick Start
 
@@ -36,7 +36,7 @@ Alternatively, a command can be issued in the command terminal: `java -jar duke-
 
 ## Features 
 
-Duke allows users to track three types of task - To Do, Deadline and Events. In addition, there are also various utility functions to allow the user to manage his/her task list. These functions include `list`, `delete`, `done`, `bye`, `help`, `find`.
+Duke allows you to track three types of task - To Do, Deadline and Events. In addition, there are also various utility functions to allow you to manage your task list. These functions include `list`, `delete`, `done`, `bye`, `help`, `find`.
 
 For all To Do, Deadline and Events, a task description is shown in chronological order in which they were added. The classification of the To Do, Deadline and Events are denoted by a task icon, as shown in table below.
 
@@ -61,7 +61,9 @@ A sample list with the Task Icon and Completion Status is show below
 
 ### `list` - List out all tasks 
 
-A list of all the To Do, Deadline and Events are shown to the user.
+A list of all the To Do, Deadline and Events are shown to the you.
+
+Format: `list`
 
 For Deadlines, the date and time in which the task is due is included in the same line after the task description.
 For Events, the date and time in which the task is happening is included in the same line after the task description.
@@ -88,8 +90,9 @@ A sample Duke Helpbot response can be seen below.
   
 ### `help` - Show help page to assist user in commands available
 
-Shows the various commands that the Duke chat bot uses in the application. 
+Help shows you the various commands that the Duke chat bot uses in the application. 
   
+Format: `help`
   
 Example of usage: 
 
@@ -107,7 +110,7 @@ A sample Duke Helpbot response can be seen below.
 ![Help command](help.png)
 
   
-The user can further check the syntax required of each command to use it, by supplying the command interested.
+You can further check the syntax required of each command to use it, by supplying the command interested.
   
 Example of usage: 
 
@@ -127,8 +130,12 @@ A sample Duke Helpbot response can be seen below.
   
 ### `todo` - Adds a To Do task to the task list.
 
-The user can add a To Do task that has no deadline to the task list.
-  
+You can add a To Do task that has no deadline to the task list.
+
+Format: `todo TASK_DESCRIPTION`
+where 
+* `TASK_DESCRIPTION` refers to the task item that you wish to add into the task list. 
+
 Example of usage: 
   
 `todo Homework`
@@ -147,8 +154,13 @@ A sample Duke Helpbot response can be seen below.
   
 ### `event` - Adds an Event to the task list.
 
-The user can add an Event to the task list to track any event that he/she may have in his/her schedule. The event requires a date and time to be furnished with the event description.
-  
+You can add an Event to the task list to track any event that you may have in your schedule. The event requires a date and time to be furnished with the event description.
+
+
+Format: `event EVENT_DESCRIPTION /at DD/MM/YYYY HHHH`
+where 
+* `EVENT_DESCRIPTION`: The description of the event you wish to add to the task list.
+* `DD/MM/YYYY HHHH`: The date and time format of the event. The time is strictly in 24-hours format.
 
 Example of usage: 
   
@@ -169,7 +181,14 @@ A sample Duke Helpbot response can be seen below.
 
 ### `deadline` - Adds an task with deadline to the task list.
 
-The user can add a task with a deadline to the task list to track any deadlines he/she has. The deadline requires a date and time to be furnished with the deadline task description.
+You can add a task with a deadline to the task list to track any deadlines you have. The deadline requires a date and time to be furnished with the deadline task description.
+
+
+Format: `deadline DEADLINE_DESCRIPTION /at DD/MM/YYYY HHHH`
+where 
+* `DEADLINE_DESCRIPTION`: The description of the deadline you wish to add to the task list.
+* `DD/MM/YYYY HHHH`: The date and time format of the event. The time is strictly in 24-hours format.
+
 
 Example of usage:  
 
@@ -190,7 +209,11 @@ A sample Duke Helpbot response can be seen below.
 
 ### `done` - Sets a task as completed.
 
-The user can update the completion status of the task to done. The user needs to identify the task to be set as done with the task number, by checking the task list.
+You can update the completion status of the task to done. You need to identify the task to be set as done with the task number, by checking the task list.
+
+
+Format: `done INDEX_TASK`
+where `INDEX_TASK`: Index of the task in your task list. To check the index, you can use the `list` command to refer to the index.
 
 Example of usage: 
 
@@ -210,7 +233,10 @@ A sample Duke Helpbot response can be seen below.
 
 ### `delete` - Deletes a task in task list.
 
-The user can delete a specific task from the task list. The user needs to identify the task to be deleted with the task number, by checking the task list.
+You can delete a specific task from the task list. You need to identify the task to be deleted with the task number, by checking the task list.
+
+Format: `delete INDEX_TASK`
+where `INDEX_TASK`: Index of the task in your task list. To check the index, you can use the `list` command to refer to the index.
 
 Example of usage: 
 
@@ -230,7 +256,11 @@ A sample Duke Helpbot response can be seen below.
 
 ### `find` - Finds all the task with the matching keyword in the task description.
 
-The user can find all the task entries in the task list, in which the task description contains the specified keyword. 
+You can find all the task entries in the task list, in which the task description contains the specified keyword. 
+
+Format: `find KEYWORD`
+where `KEYWORD`: Keyword to search for in tasks in task list.
+
 
 Example of usage: 
 
@@ -251,7 +281,9 @@ A sample Duke Helpbot response can be seen below.
 
 ### `bye` - To exit and stop Duke.
 
-To stop the session with Duke, the user can specify this command to end the session with Duke.
+To stop the session with Duke, you can specify `bye` to end the session with Duke.
+
+Format: `bye`
 
 Example of usage: 
 

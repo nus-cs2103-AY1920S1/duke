@@ -1,8 +1,9 @@
 # User Guide
-> Duke is a chatbot that helps us to keep track of our tasks on hand. :simple_smile:
+> Duke is a chatbot that helps us to keep track of our tasks on hand. 
 
 ## Task Overview 
 > There are 3 types of tasks offered by Duke.
+
 ### `Todo`  
 * Tasks without any date/time attached to it.
 * _eg. buy food_

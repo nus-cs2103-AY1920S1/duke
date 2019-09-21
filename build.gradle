@@ -3,13 +3,11 @@ plugins {
     id 'application'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
-group 'seedu.duke'
-version '0.1.0'
-
-repositories {
-    mavenCentral()
+checkstyle {
+    toolVersion = '8.23'
 }
 
 shadowJar {
@@ -19,17 +17,13 @@ shadowJar {
     archiveAppendix = null
 }
 
-application {
-    // Change this to your main class.
-    mainClassName = "Launcher"
-}
-
-checkstyle {
-    toolVersion = '8.23'
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 dependencies {
-    String javaFxVersion = '11'
+    String javaFxVersion = '11.0.2'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -42,10 +36,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
-    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-media', version: javaFxVersion, classifier: 'linux'
-
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
 }
 
@@ -53,6 +43,19 @@ test {
     useJUnitPlatform()
 }
 
+group 'seedu.duke'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    // Change this to your main class.
+    mainClassName = "Launcher"
+}
+
 run {
     standardInput = System.in
+    enableAssertions = true
 }

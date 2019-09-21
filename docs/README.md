@@ -1,11 +1,13 @@
 # User Guide
 
+![Screenshot of Duke GUI](Ui.png)
+
 ## Features 
 
 ### Keep track and manages all your tasks
 Duke can help you manage all your todo, deadline and event tasks.
 
-### Save data
+### Saves Data
 Duke can save all your tasks so that you can access them later.
 
 ### Optimized for the Keyboard
@@ -18,7 +20,7 @@ Duke is fully usable with just a keyboard. Ideal for fast typers!
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo borrow book`.
 * Items in square brackets are optional e.g `event DESCRIPTION [/at DETAILS]` can be used as `event lecture` or as `event lecture /at LT19`.
 
-### `help` - Help menu
+### `help` - Help Menu
 
 Displays a list of commands and usage that can be used.
 
@@ -101,7 +103,7 @@ Expected outcome:
     [D][✘] return library book (by: 2019-09-21T23:59) 
     Now you have 6 tasks in this list
     
-### `list` - Shows all your tasks
+### `list` - Shows all your Tasks
 
 Shows all your Todos, Events and Deadlines together with their description, details and whether they are done or not. It also saves the current state of your list into Duke's storage.
 
@@ -118,7 +120,7 @@ Expected outcome:
     5. [D][✘] project submission (by: Sunday)
     6. [D][✘] return library book (by: 2019-09-21T23:59)
     
-### `find` - Find a task
+### `find` - Find a Task
 
 Find a task based on a keyword supplied by the user
 
@@ -135,7 +137,7 @@ Expected outcome:
     1. [T][✘] borrow a book
     6. [D][✘] return library book (by: 2019-09-21T23:59)
     
-### `done` - Mark a task as done
+### `done` - Mark a Task as Done
 
 Marks a task as done by selecting the task number as shown when using the `list` or `find` command
 
@@ -152,7 +154,7 @@ Expected outcome:
     Nice! I've marked this task as done:
     [T][✔] borrow a book
     
-### `delete` - Delete a task
+### `delete` - Delete a Task
 
 Deletes a task by selecting the task number as shown when using the `list` or `find` command
 

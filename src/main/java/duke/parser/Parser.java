@@ -193,18 +193,18 @@ public class Parser {
      * @throws IncorrectNoteFormatException An Exception thrown to indicate an incorrect format in the instructions.
      */
     private static Note parseWriteNote(String noteContents) throws IncorrectNoteFormatException {
-        if (!noteContents.contains("|")) {
+        if (!noteContents.contains(" | ")) {
             throw new IncorrectNoteFormatException("Please write the note in the format 'note write <note title> |"
                     + " <note contents>'!");
         } else {
             try {
                 noteContents = noteContents.split(" ", 2)[1];
+                String[] noteParsed = noteContents.split(" \\| ");
+                return new Note(noteParsed[0], noteParsed[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new IncorrectNoteFormatException("Please write the note in the format 'note write <note title> |"
                         + " <note contents>'!");
             }
-            String[] noteParsed = noteContents.split(" \\| ");
-            return new Note(noteParsed[0], noteParsed[1]);
         }
     }
     
@@ -214,7 +214,7 @@ public class Parser {
      * @param notePath The file path of the Note to be read.
      * @return The Note at the specified file path.
      */
-    private static Note parseReadNote(String notePath) throws InvalidNoteInstructionException{
+    private static Note parseReadNote(String notePath) throws InvalidNoteInstructionException {
         try {
             return new Note(notePath.split(" ", 2)[1]);
         } catch (ArrayIndexOutOfBoundsException e) {

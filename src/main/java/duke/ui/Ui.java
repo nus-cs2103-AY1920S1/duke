@@ -1,8 +1,9 @@
-package duke.main;
+package duke.ui;
 
 import duke.exception.EmptyTaskListException;
 import duke.note.Note;
 import duke.task.Task;
+import duke.tasklist.TaskList;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -144,13 +145,15 @@ public class Ui {
      */
     public String showNoteList() {
         try {
-            Stream<Path> walk = Files.walk(Paths.get(Note.FILE_BASE_PATH));
-            List<String> noteList = walk
+            
+            Stream<Path> noteStream = Files.walk(Paths.get(Note.FILE_BASE_PATH));
+            List<String> noteList = noteStream
                     .map(x -> x.toString())
                     .filter(f -> f.endsWith(".txt"))
                     .map(x -> x.replace(Note.FILE_BASE_PATH, ""))
                     .map(x -> x.replace(".txt", ""))
                     .collect(Collectors.toList());
+            
             String response = "";
             for (int i = 0; i < noteList.size(); i++) {
                 response = response.concat((i + 1) + ": " + noteList.get(i) + "\n");

@@ -1,7 +1,8 @@
-package duke.main;
+package duke.storage;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidStoredTaskFormatException;
+import duke.parser.Parser;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;

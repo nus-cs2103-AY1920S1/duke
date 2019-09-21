@@ -1,4 +1,4 @@
-package duke.main;
+package duke.parser;
 
 import duke.Duke;
 import duke.command.ByeCommand;
@@ -118,7 +118,7 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns a String array containing the values stored in the given formatted String.
      */
-    static String[] parseStoredLine(String input) {
+    public static String[] parseStoredLine(String input) {
         return input.split(" \\| ");
     }
     
@@ -128,7 +128,7 @@ public class Parser {
      * @param inputElements The inputted String array containing the stored values of the formatted String.
      * @return Returns the instruction value, as a String.
      */
-    static String parseStoredInstruction(String[] inputElements) {
+    public static String parseStoredInstruction(String[] inputElements) {
         return inputElements[0];
     }
     
@@ -138,7 +138,7 @@ public class Parser {
      * @param inputElements The inputted String array containing the stored values of the formatted String.
      * @param task The given Task to be marked as done.
      */
-    static void parseTaskForMarking(String[] inputElements, Task task) {
+    public static void parseTaskForMarking(String[] inputElements, Task task) {
         if (inputElements[1].equals("+")) {
             task.markAsDone();
         }

@@ -4,9 +4,9 @@ import duke.exception.DukeException;
 import duke.exception.EmptyTaskListException;
 import duke.exception.InvalidIntegerTaskListException;
 import duke.exception.NotAnIntegerTaskListException;
-import duke.main.Storage;
-import duke.main.TaskList;
-import duke.main.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 import java.io.IOException;
 

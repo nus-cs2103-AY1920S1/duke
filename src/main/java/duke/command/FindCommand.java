@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.main.Storage;
-import duke.main.TaskList;
-import duke.main.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;

@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyTaskDescriptionException;
-import duke.main.Storage;
-import duke.main.TaskList;
-import duke.main.Ui;
+import duke.storage.Storage;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.ToDoTask;
 

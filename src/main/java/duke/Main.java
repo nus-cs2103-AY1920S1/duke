@@ -25,6 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             MainWindow userInterface = fxmlLoader.getController();
             userInterface.setDuke(duke);
+            stage.setTitle("Comic Duke");
             userInterface.dukeGreet();
             stage.show();
         } catch (IOException e) {

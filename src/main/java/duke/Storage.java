@@ -36,6 +36,10 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException {
         File file = new File(filePath);
+        if (!file.exists()) {
+           file.getParentFile().mkdirs();
+           FileWriter writer = new FileWriter(file);
+        }
         BufferedReader in = new BufferedReader(new FileReader(file));
         String line;
         while ((line = in.readLine()) != null) {

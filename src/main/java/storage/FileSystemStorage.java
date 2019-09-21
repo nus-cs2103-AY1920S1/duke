@@ -43,10 +43,9 @@ public class FileSystemStorage implements Storage {
                 FileOutputStream outputStream = new FileOutputStream(storageFilePath);
                 ObjectOutputStream taskWriter = new ObjectOutputStream(outputStream);
 
-                System.out.println("Creating new storage file.");
+                System.out.println("Creating new storage file...");
                 taskWriter.writeObject(new ArrayList<Task>());
                 taskWriter.close();
-
             }
 
         } catch (IOException e) {

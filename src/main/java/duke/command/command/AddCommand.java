@@ -19,6 +19,7 @@ public class AddCommand extends Command {
     /**
      * Constructor for AddCommand.
      * @param task task to be added
+     * @param ui
      * @throws CommandCreationException if arguments are invalid
      */
     public AddCommand(Task task, UiController ui, TasksController tasksController) throws CommandCreationException {

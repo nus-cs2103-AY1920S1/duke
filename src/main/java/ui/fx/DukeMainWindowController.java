@@ -8,7 +8,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.KeyEvent;
 
-import ui.input.InputHandler;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Main window for JavaFx Ui.
@@ -24,24 +25,18 @@ public class DukeMainWindowController {
     private Image userImage;
     private Image dukeImage;
 
-    private InputHandler inputHandler;
+    private List<FxDukeInput> fxDukeInputs;
 
     public DukeMainWindowController() {
-        userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
-        dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
+        this.userImage = new Image(getClass().getResourceAsStream("/images/DaUser.png"));
+        this.dukeImage = new Image(getClass().getResourceAsStream("/images/DaDuke.png"));
+
+        this.fxDukeInputs = new ArrayList<>();
     }
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    /**
-     * Sets up input handler to listen for user inputs.
-     * @param input handler
-     */
-    public void configureController(InputHandler input) {
-        this.inputHandler = input;
     }
 
     /**
@@ -54,11 +49,13 @@ public class DukeMainWindowController {
 
         if (!input.equals("")) {
             printUserMessage(input);
-
-            inputHandler.updateAllListeners(input);
-
-            userInput.clear();
         }
+
+        if (!input.equals("") && this.fxDukeInputs.size() > 0) {
+            this.fxDukeInputs.forEach(fxDukeInput -> fxDukeInput.receiveInput(input));
+        }
+
+        userInput.clear();
     }
 
     /**
@@ -73,21 +70,39 @@ public class DukeMainWindowController {
     }
 
     /**
-     * Prints message from program.
+     * Prints message from Duke's perspective.
      * @param message message to be printed
      */
-    public void printDukeMessage(String message) {
+    void printDukeMessage(String message) {
         dialogContainer.getChildren().addAll(FxDialogBox.getDukeDialog(message, dukeImage));
     }
 
     /**
-     * Prints message from user.
+     * Prints message from user's perspective.
      * @param message message to be printed
      */
-    public void printUserMessage(String message) {
+    private void printUserMessage(String message) {
         dialogContainer.getChildren().addAll(
                 FxDialogBox.getUserDialog(message, userImage)
         );
+    }
+
+    /**
+     * Adds a fxDukeInput instance to the list of listeners. This fxDukeInput will be notified through its
+     * receiveInput(String input) method each time the user enters a input.
+     * @param fxDukeInput fxDukeInput to be added as a listener.
+     */
+    void addInputListener(FxDukeInput fxDukeInput) {
+        this.fxDukeInputs.add(fxDukeInput);
+    }
+
+    /**
+     * Removes a fxDukeInput instance from the list of listeners. This fxDukeInput instance will no longer be notified
+     * of any user inputs.
+     * @param fxDukeInput fxDukeInput to be removed as a listener.
+     */
+    void removeInputListener(FxDukeInput fxDukeInput) {
+        this.fxDukeInputs.remove(fxDukeInput);
     }
 }
 

@@ -34,7 +34,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute() throws UiException {
-        ui.exit();
+        ui.stopUi();
     }
 
     /**

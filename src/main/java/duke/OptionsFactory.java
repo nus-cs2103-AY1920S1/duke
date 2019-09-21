@@ -4,11 +4,10 @@ import error.storage.StorageException;
 import storage.FileSystemStorage;
 import storage.Storage;
 
-import ui.cli.ClInput;
-import ui.cli.ClOutput;
-import ui.fx.FxMain;
-import ui.input.InputHandler;
-import ui.output.OutputHandler;
+import ui.UiController;
+import ui.UiControllerFactory;
+import ui.UiDriver;
+import ui.UiType;
 
 /**
  * Factory to generate duke runtime options.
@@ -21,48 +20,47 @@ public class OptionsFactory {
 
     /**
      * Generates options based on custom parameters.
-     * @param guiEnabled to enable JavaFx gui
-     * @param persistentDataEnabled to enable changes to be stored in local memory
+     * @param isGuiEnabled to enable JavaFx gui
+     * @param isPersistentDataEnabled to enable changes to be stored in local memory
      * @return
      */
-    public static Options select(boolean guiEnabled, boolean persistentDataEnabled) {
-        InputHandler input = null;
-        OutputHandler output = null;
+    public static DukeOptions select(boolean isGuiEnabled, boolean isPersistentDataEnabled, UiDriver driver) {
+        UiController uiController;
+        Storage storage;
 
-        if (guiEnabled) {
-            FxMain gui = FxMain.getInstance();
-            input = gui;
-            output = gui;
+        // Setup UiController
+        if (isGuiEnabled) {
+            uiController = UiControllerFactory.createUiController(driver, UiType.JAVAFX);
         } else {
-            input = ClInput.getInstance();
-            output = ClOutput.getInstance();
+            uiController = UiControllerFactory.createUiController(driver, UiType.CLI);
         }
-
-        Storage storage = null;
 
         // Setup file storage
-        if (persistentDataEnabled) {
-            try {
-                storage = FileSystemStorage.getInstance(getDefaultStorageFilePath());
-                System.out.println("Storage file found.");
-            } catch (StorageException e) {
-                System.out.println("Unable to access storage file.");
-            }
+        if (isPersistentDataEnabled) {
+            storage = OptionsFactory.getPersistentStorage();
+        } else {
+            storage = null;
         }
 
-        return getOptions(input, output, storage);
+        return getOptions(uiController, storage);
     }
 
-    private static Options getOptions(InputHandler input, OutputHandler output, Storage storage) {
-        return new Options() {
-            @Override
-            public InputHandler getInput() {
-                return input;
-            }
+    private static Storage getPersistentStorage() {
+        try {
+            Storage storage = FileSystemStorage.getInstance(getDefaultStorageFilePath());
+            System.out.println("Storage file found.");
+            return storage;
+        } catch (StorageException e) {
+            System.out.println("Unable to access storage file.");
+            return null;
+        }
+    }
 
+    private static DukeOptions getOptions(UiController uiController, Storage storage) {
+        return new DukeOptions() {
             @Override
-            public OutputHandler getOutput() {
-                return output;
+            public UiController getUiController() {
+                return uiController;
             }
 
             @Override

@@ -5,10 +5,8 @@ import duke.command.factory.CommandFactory;
 import duke.task.TasksController;
 import error.ui.UiException;
 import storage.Storage;
-import ui.UiActivity;
 import ui.UiController;
-import ui.input.InputHandler;
-import ui.output.OutputHandler;
+import ui.UiDriver;
 
 import java.util.Optional;
 
@@ -16,33 +14,37 @@ import java.util.Optional;
  * Main driver class for Duke task manager program.
  */
 
-public class Duke implements UiActivity {
+public class Duke implements UiDriver {
     private UiController ui;
     private CommandFactory commandFactory;
 
     /**
      * Program entry point.
+     *
      * @param args program arguments
      */
     public static void main(String[] args) {
         Duke duke = new Duke();
 
-        boolean guiEnabled = true;
+        boolean isGuiEnabled;
 
-        if (args.length > 0) {
-            if (args[0].equals("console")) {
-                guiEnabled = false;
-            } else {
-                System.out.println("Invalid arguments.");
-                System.exit(1);
-            }
+        if (args.length == 0) {
+            isGuiEnabled = true;
+        } else if (args.length == 1 && args[0].equals("-c")) {
+            isGuiEnabled = false;
+        } else {
+            System.out.println("Invalid program arguments.");
+            System.exit(1);
+            return;
         }
 
         try {
-            Options options = OptionsFactory.select(guiEnabled, true);
+            DukeOptions options = OptionsFactory.select(isGuiEnabled, true, duke);
             duke.configure(options);
         } catch (Exception e) {
             System.out.println("FATAL: Unable to configure application.");
+            System.exit(1);
+            return;
         }
 
         duke.run();
@@ -59,29 +61,24 @@ public class Duke implements UiActivity {
 
     /**
      * Configures the main driver with a set of customizable options.
+     *
      * @param options the program's runtime options
      */
-    public void configure(Options options) {
+    public void configure(DukeOptions options) {
         // Initialize UI component
-        InputHandler input = options.getInput();
-        OutputHandler output = options.getOutput();
-        ui = new UiController(input, output, this);
+        this.ui = options.getUiController();
 
         // Initialize tasks and storage
         Storage storage = options.getStorage();
-        assert storage != null;
         TasksController tasks = TasksController.fromStorage(storage, ui);
 
         // Initialize command factory
         commandFactory = new CommandFactory(tasks, ui);
     }
 
-    /**
-     * Parse input and execute corresponding command.
-     * @param input user input
-     */
+
     @Override
-    public void onInputReceived(String input) {
+    public void receiveUserInput(String input) {
         try {
             // Get command and execute
             Optional<Command> command = commandFactory.parse(input);
@@ -95,11 +92,4 @@ public class Duke implements UiActivity {
         }
     }
 
-    /**
-     * Closes the program.
-     */
-    @Override
-    public void stopActivity() {
-        System.exit(0);
-    }
 }

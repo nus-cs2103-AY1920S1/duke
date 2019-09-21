@@ -1,6 +1,5 @@
 package commands;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import duke.TaskList;
@@ -19,9 +18,9 @@ import tasks.Task;
 public class DeleteCommand extends UndoableCommand {
 
     /** The Task that was deleted following the execution of this delete command. */
-    Task deletedTask;
+    private Task deletedTask;
     /** The index of the deletedTask in the list of tasks at the point of deletion. */
-    int delTaskIndex;
+    private int delTaskIndex;
 
     /**
      * Constructor for DeleteCommand.
@@ -41,9 +40,9 @@ public class DeleteCommand extends UndoableCommand {
      * @param tasks the TaskList object storing all recorded Tasks.
      * @param ui the Ui object dealing with user interaction.
      * @param storage the Storage object that reads from and writes to the file.
-     * @return String output reply from Duke.
+     * @throws DukeException  If there is invalid input.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeDirect(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         if (commandArr.length <= 1) {
             throw new DukeException(ui.getMissingTaskNumMsg());
@@ -56,16 +55,32 @@ public class DeleteCommand extends UndoableCommand {
         assert delTaskIndex >= 0 : "delTaskIndex must be non-negative";
         if (Command.checkValidTaskNumber(delTaskIndex, taskLst)) {
             deletedTask = taskLst.remove(delTaskIndex);
-            // Add the UndoableCommand to the stack of commands that can be undone
-            // since it is a valid command and has not thrown any errors
-            super.execute(tasks, ui, storage);
-            // Since the user has made changes to the code,
-            // clear the redoStack of all undoable commands
-            RedoCommand.redoStack.removeAllElements();
-            return ui.getSuccessfulDeleteMsg(deletedTask, taskLst);
         } else {
             throw new DukeException(ui.getInvalidTaskNumMsg(taskLst));
         }
+    }
+
+    /**
+     * Removes the specified task from the list of tasks.
+     * The number of the task to be removed is specified
+     * in the user input. Also adds the command
+     * to the undoable stack of commands.
+     *
+     * @param tasks the TaskList object storing all recorded Tasks.
+     * @param ui the Ui object dealing with user interaction.
+     * @param storage the Storage object that reads from and writes to the file.
+     * @return String output reply from Duke.
+     */
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ArrayList<Task> taskLst = tasks.getTaskLst();
+        executeDirect(tasks, ui, storage);
+        // Add the UndoableCommand to the stack of commands that can be undone
+        // since it is a valid command and has not thrown any errors
+        super.execute(tasks, ui, storage);
+        // Since the user has made changes to the code,
+        // clear the redoStack of all undoable commands
+        RedoCommand.redoStack.removeAllElements();
+        return ui.getSuccessfulDeleteMsg(deletedTask, taskLst);
     }
 
     /**
@@ -73,7 +88,7 @@ public class DeleteCommand extends UndoableCommand {
      *
      * @param tasks the TaskList object storing all recorded Tasks.
      */
-    public void executeInverse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeInverse(TaskList tasks, Ui ui, Storage storage) {
         // Add the deleted task back to task list
         ArrayList<Task> taskLst = tasks.getTaskLst();
         taskLst.add(delTaskIndex, deletedTask);

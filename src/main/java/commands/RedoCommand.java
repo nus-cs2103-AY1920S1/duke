@@ -43,9 +43,9 @@ public class RedoCommand extends Command {
         if (redoStack.empty()) {
             return ui.getNothingToRedoMsg();
         }
-        // Undo the operations
+        // Redo the operations
         UndoableCommand toRedo = redoStack.pop();
-        toRedo.execute(tasks, ui, storage);
+        toRedo.executeDirect(tasks, ui, storage);
         // Add the top command in redoStack to the undoStack in order to perform future undo-s
         UndoCommand.undoStack.add(toRedo);
         return ui.getRedoMsg();

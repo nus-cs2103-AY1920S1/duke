@@ -38,12 +38,22 @@ public abstract class UndoableCommand extends Command {
     }
 
     /**
+     * Performs the direct operation for an undoable command.
+     *
+     * @param tasks the TaskList object storing all recorded Tasks.
+     * @param ui the Ui object dealing with user interaction.
+     * @param storage the Storage object that reads from and writes to the file.
+     * @throws DukeException  If there is invalid input.
+     */
+    public abstract void executeDirect(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    /**
      * Performs the inverse operation for an undoable command.
      *
      * @param tasks the TaskList object storing all recorded Tasks.
      * @param ui the Ui object dealing with user interaction.
      * @param storage the Storage object that reads from and writes to the file.
      */
-    public abstract void executeInverse(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void executeInverse(TaskList tasks, Ui ui, Storage storage);
 
 }

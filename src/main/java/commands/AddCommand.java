@@ -43,9 +43,8 @@ public class AddCommand extends UndoableCommand {
      * @param ui the Ui object dealing with user interaction.
      * @param storage the Storage object that reads from and writes to the file.
      * @throws DukeException  If there is invalid input.
-     * @return String output reply from Duke.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeDirect(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         if (commandArr[0].equals("todo")) {
             if (commandArr.length <= 1) {
@@ -96,6 +95,23 @@ public class AddCommand extends UndoableCommand {
             // Invalid command being supplied by the user
             throw new DukeException(ui.getInvalidCommandMsg());
         }
+    }
+
+    /**
+     * Adds the corresponding Task type to the list of tasks
+     * based on the user input. These Tasks can be either
+     * a ToDo, Event or Deadline Task. Also adds the command
+     * to the undoable stack of commands.
+     *
+     * @param tasks the TaskList object storing all recorded Tasks.
+     * @param ui the Ui object dealing with user interaction.
+     * @param storage the Storage object that reads from and writes to the file.
+     * @throws DukeException  If there is invalid input.
+     * @return String output reply from Duke.
+     */
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ArrayList<Task> taskLst = tasks.getTaskLst();
+        executeDirect(tasks, ui, storage);
         // Add the UndoableCommand to the stack of commands that can be undone
         // since it is a valid command and has not thrown any errors
         super.execute(tasks, ui, storage);
@@ -110,7 +126,7 @@ public class AddCommand extends UndoableCommand {
      *
      * @param tasks the TaskList object storing all recorded Tasks.
      */
-    public void executeInverse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeInverse(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         // Remove the most recent addition to the task list
         taskLst.remove(taskLst.size() - 1);

@@ -18,7 +18,9 @@ import java.util.ArrayList;
 public class DoneCommand extends UndoableCommand {
 
     /** The Task that was marked as done following the execution of this done command. */
-    Task doneTask;
+    private Task doneTask;
+    /** The index of the Task marked as done in the task list. */
+    private int taskDoneIndex;
 
     /**
      * Constructor for DoneCommand.
@@ -38,14 +40,13 @@ public class DoneCommand extends UndoableCommand {
      * @param tasks the TaskList object storing all recorded Tasks.
      * @param ui the Ui object dealing with user interaction.
      * @param storage the Storage object that reads from and writes to the file.
-     * @return String output reply from Duke.
+     * @throws DukeException  If there is invalid input.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeDirect(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskLst = tasks.getTaskLst();
         if (commandArr.length <= 1) {
             throw new DukeException(ui.getMissingTaskNumMsg());
         }
-        int taskDoneIndex;
         try {
             taskDoneIndex = Integer.parseInt(commandArr[1]) - 1;
         } catch (NumberFormatException e) {
@@ -55,17 +56,31 @@ public class DoneCommand extends UndoableCommand {
         if (Command.checkValidTaskNumber(taskDoneIndex, taskLst)) {
             doneTask = taskLst.get(taskDoneIndex);
             doneTask.setDone();
-            // Add the UndoableCommand to the stack of commands that can be undone
-            // since it is a valid command and has not thrown any errors
-            super.execute(tasks, ui, storage);
-            // Since the user has made changes to the code,
-            // clear the redoStack of all undoable commands
-            RedoCommand.redoStack.removeAllElements();
-            return ui.getSuccessfulDoneMsg(taskDoneIndex, taskLst);
         } else {
             throw new DukeException(ui.getInvalidTaskNumMsg(taskLst));
         }
+    }
 
+    /**
+     * Marks the specified task as completed.
+     * The number of the task to be marked is specified
+     * by the user via the user input.
+     *
+     * @param tasks the TaskList object storing all recorded Tasks.
+     * @param ui the Ui object dealing with user interaction.
+     * @param storage the Storage object that reads from and writes to the file.
+     * @return String output reply from Duke.
+     */
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ArrayList<Task> taskLst = tasks.getTaskLst();
+        executeDirect(tasks, ui, storage);
+        // Add the UndoableCommand to the stack of commands that can be undone
+        // since it is a valid command and has not thrown any errors
+        super.execute(tasks, ui, storage);
+        // Since the user has made changes to the code,
+        // clear the redoStack of all undoable commands
+        RedoCommand.redoStack.removeAllElements();
+        return ui.getSuccessfulDoneMsg(taskDoneIndex, taskLst);
     }
 
     /**
@@ -73,7 +88,7 @@ public class DoneCommand extends UndoableCommand {
      *
      * @param tasks the TaskList object storing all recorded Tasks.
      */
-    public void executeInverse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void executeInverse(TaskList tasks, Ui ui, Storage storage) {
         doneTask.setUndone();
     }
 

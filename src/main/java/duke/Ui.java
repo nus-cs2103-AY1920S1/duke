@@ -177,9 +177,12 @@ public class Ui {
                 "Note for find command:\n" +
                 " \u2022 The order of the keywords do not matter.\n" +
                 " \u2022 A task description is a match only if it contains all the keywords.\n\n" +
-                "\n6)  Clearing the window\n\n" +
+                "\n6) Undoing and redoing commands\n\n" +
+                "\"undo\": Undoes the previous command.\n" +
+                "\"redo\": Redoes the previous undone command.\n\n" +
+                "\n7)  Clearing the window\n\n" +
                 "\"clear\": Clears the window of clutter.\n\n" +
-                "\n7)  Exiting the program\n\n" +
+                "\n8)  Exiting the program\n\n" +
                 "\"bye\": Displays the exit message and closes the program.";
 
     }

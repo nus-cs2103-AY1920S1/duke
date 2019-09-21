@@ -24,16 +24,7 @@ public class Ui {
                 + " /    / __ \\    \\   |    |____     |    |      \\   \\    |   |___ \n"
                 + "/ _ /         \\ _ \\  \\______|   | _ |        \\_ \\  |_____|\n";
         System.out.println("Hello from\n" + logo);
-        drawLine();
-        System.out.println("\tHello! I'm Pooh\n\tWhat can I do for you?");
-        drawLine();
-    }
-
-    /**
-     * Prints a line in the console.
-     */
-    public void drawLine() {
-        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("Hello! I'm Pooh\nWhat can I do for you?");
     }
 
     /**
@@ -75,7 +66,7 @@ public class Ui {
      */
     public void printDeleteMessage(Task task, int numberOfTasks) {
         printMessage("Noted. I've removed this task: ");
-        printMessage("\t " + task);
+        printMessage(task.toString());
         printMessage("Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
     }
 
@@ -85,7 +76,7 @@ public class Ui {
      */
     public void printDoneMessage(Task task) {
         printMessage("Nice! I've marked this task as done: ");
-        printMessage("\t " + task);
+        printMessage(task.toString());
     }
 
     /**
@@ -95,13 +86,13 @@ public class Ui {
      */
     public void printAddedMessage(Task task, int numberOfTasks) {
         printMessage("Got it. I've added this task: ");
-        printMessage("\t " + task);
+        printMessage(task.toString());
         printMessage("Now you have " + numberOfTasks + (numberOfTasks == 1 ? " task" : " tasks") + " in the list.");
     }
 
     public void printTagMessage(Task task, String[] tags) {
         printMessage("Got it. I have tagged this task: ");
-        printMessage("\t " + task);
+        printMessage(task.toString());
     }
 
     /**
@@ -123,7 +114,7 @@ public class Ui {
             printMessage("These tasks are #" + tag + "!");
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                printMessage("\t " + task);
+                printMessage(task.toString());
             }
         }
     }

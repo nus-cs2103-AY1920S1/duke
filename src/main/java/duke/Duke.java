@@ -52,13 +52,10 @@ public class Duke {
 
     private void generateResponse(String input) {
         try {
-            ui.drawLine();
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             ui.printException(e);
-        } finally {
-            ui.drawLine();
         }
     }
 

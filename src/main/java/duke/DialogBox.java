@@ -7,12 +7,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -28,7 +33,7 @@ public class DialogBox extends HBox {
 
     private final Circle circle = new Circle(49.5,50.0,51.0);
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, Background background) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -39,6 +44,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setBackground(background);
         displayPicture.setClip(circle);
         displayPicture.setImage(img);
     }
@@ -60,17 +66,23 @@ public class DialogBox extends HBox {
      * @return <code>DialogBox</code> for user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        Color col = Color.rgb(137, 207, 240, 0.5);
+        CornerRadii corn = new CornerRadii(10);
+        Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
+        return new DialogBox(text, img, background);
     }
 
     /**
-     * Flips the position of Duke's response and returns Duke's <code>DialogBox</code>.
+list
      * @param text Duke's response.
      * @param img Duke's photo.
      * @return <code>DialogBox</code> for user.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        Color col = Color.rgb(239,186,247, 0.5);
+        CornerRadii corn = new CornerRadii(10);
+        Background background = new Background(new BackgroundFill(col, corn, Insets.EMPTY));
+        var db = new DialogBox(text, img, background);
         db.flip();
         return db;
     }

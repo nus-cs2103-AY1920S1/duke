@@ -72,7 +72,7 @@ Sample command:
 Possible outcome 1:
 
 `Events completed today: 1`\
-`Well Done!'
+`Well Done!`
 
 Possible outcome 2:
 
@@ -85,19 +85,22 @@ Aside from task-related statistics, Obot can also give statistics regarding the 
 To view all statistics (which also included the tasks completed in the current day), enter the following sample command:
 
 Sample command:
+
 `stats all`
 
 Possible outcome:
+
 `Listing all statistics`\
 `Total Commands Executed: 150`\
 `Total Tasks Deleted: 20`\
-``\
+
+
 `Total To-Dos Completed: 12`\
 `Total Todos Completed TODAY: 2`\
-``\
+` `\
 `Total Deadlines Completed: 7`\
 `Total Deadlines Completed TODAY: 1`\
-``\
+` `\
 `Total Events Completed: 4`\
 `Total Events Completed TODAY: 2`
 

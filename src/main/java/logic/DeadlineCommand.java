@@ -44,7 +44,7 @@ public class DeadlineCommand implements Command {
         try{
             if (arguments == null || arguments.trim().equals("")) {
                 content = "OOPS! The description of a deadline cannot be empty.\n" +
-                            "Usage: Deadline <description> /by <time or details>\n";
+                            "Usage: deadline DESCRIPTION [/by DETAILS]\n";
             } else {
                 deadline task = new deadline(description, details);
                 tasks.add(task);

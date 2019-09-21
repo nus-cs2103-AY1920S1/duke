@@ -47,7 +47,7 @@ public class DoneCommand implements Command {
             content += "\n";
         } catch (Exception E){
             content = "Ohno! You have entered an invalid argument!\n" +
-                    "Usage: done <id>\n";
+                    "Usage: done TASK_NUMBER\n";
         }
 
 

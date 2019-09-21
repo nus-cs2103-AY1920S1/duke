@@ -52,7 +52,7 @@ public class DeleteCommand implements Command {
 
         } catch (Exception E){
             content = "Ohno! You have entered an invalid argument!\n"
-                    + "Usage: delete <id>\n";
+                    + "Usage: delete TASK_NUMBER\n";
         }
 
         return content;

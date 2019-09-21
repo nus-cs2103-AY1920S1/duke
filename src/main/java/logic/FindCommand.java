@@ -30,7 +30,8 @@ public class FindCommand implements Command {
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";
         if (this.arguments == null || this.arguments.trim().equals("")) {
-            content = "OOPS!!! The description of a find cannot be empty.";
+            content = "OOPS!!! The keyword of a find cannot be empty.\n"
+                    + "Usage: find KEYWORD";
         } else {
             ArrayList<Integer> indexes = new ArrayList<Integer>();
             int i;

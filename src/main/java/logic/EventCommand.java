@@ -42,7 +42,7 @@ public class EventCommand implements Command {
         try{
             if (arguments == null || arguments.trim().equals("")) {
                 content = "OOPS!!! The description of a event cannot be empty.\n" +
-                            "Usage: event <description> /at <details>\n";
+                            "event DESCRIPTION [/at DETAILS]\n";
             } else {
                 Task task = new event(description, details);
                 tasks.add(task);

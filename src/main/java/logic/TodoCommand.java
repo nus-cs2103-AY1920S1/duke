@@ -32,7 +32,7 @@ public class TodoCommand implements Command {
         try{
             if (arguments == null || arguments.trim().equals("")) {
                 content = "OOPS! The description of a todo cannot be empty.\n" +
-                            "Usage: todo <description>\n";
+                            "Usage: todo DESCRIPTION\n";
             } else {
                 Task task = new todo(arguments.trim());
                 tasks.add(task);

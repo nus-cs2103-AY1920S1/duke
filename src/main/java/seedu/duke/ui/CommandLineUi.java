@@ -282,7 +282,7 @@ public class CommandLineUi extends Ui {
         } else {
             encouragement = "Well Done!";
         }
-        String output = "\n     Events completed today: "
+        String output = "\n     To-dos completed today: "
                 + stat.getCompletedTodosFromOneDayAgo(tasks)
                 + "\n     " + encouragement + "\n" + underscore;
         return output;

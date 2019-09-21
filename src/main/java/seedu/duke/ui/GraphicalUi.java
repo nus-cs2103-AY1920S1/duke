@@ -282,7 +282,7 @@ public class GraphicalUi extends Ui {
         } else {
             encouragement = "Well Done!";
         }
-        String output = "\nDeadlines completed today: "
+        String output = "\nTo-dos completed today: "
                 + todosCompleted
                 + "\n" + encouragement + "\n";
         return output;

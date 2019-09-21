@@ -53,10 +53,11 @@ Expected outcome:
 `Now you have X tasks in the list`
 
 ### 4. Viewing task-related statistics
-Obot can also give the statistics regarding the number of tasks completed in a day can be viewed. 
+Obot can also give the statistics regarding the number of tasks completed _in the current day._
 Tasks completed more than one day ago will not be counted.
 
 To view statistics pertaining to each task (to-do, event or deadline), enter the following command:
+
 stats [event_type]
 [event_type] is either: 
 * `deadline`
@@ -67,13 +68,35 @@ Sample command:
 `stats event`
 
 Possible outcome 1:
+
 `Events completed today: 1`\
 `Well Done!'
 
 Possible outcome 2:
+
 `Events completed today: 0`\
 `You can do better! :)`
 
+### 5. Viewing all statistics
+Aside from task-related statistics, Obot can also give statistics regarding the _total commmands entered, total tasks deleted and total tasks completed_. These statistics will consider tasks that have previously been marked completed but deleted by the user. 
+
+To view all statistics (which also included the tasks completed in the current day), enter the following command:
+
+stats all
+
+Sample command:
+`stats all`
+
+Possible outcome:
+`Listing all statistics`\
+`Total Commands Executed: 150`\
+`Total Tasks Deleted: 20`\\
+`Total To-Dos Completed: 12`\
+`Total Todos Completed TODAY: 2'\\
+'Total Deadlines Completed: 7'\
+'Total Deadlines Completed TODAY: 1'\\
+'Total Events Completed: 4'\
+'Total Events Completed TODAY: 2'
 
 
 

@@ -129,7 +129,7 @@ public class TasksView {
         ui.displayOutput(output);
     }
 
-    public void displayTaskReplaced(Task replaced, Task task,  UiController ui) throws UiException {
+    public void displayTaskReplaced(Task replaced, Task task, UiController ui) throws UiException {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Noted. I have replaced the task:")
                 .newLine()

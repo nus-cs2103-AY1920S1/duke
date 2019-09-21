@@ -12,14 +12,28 @@ import duke.command.command.UpdateCommand;
  * Enum encapsulating the different commands and their keywords.
  */
 public enum CommandType {
-    BYE("bye", ByeCommand::new),
-    DELETE("delete", DeleteCommand::new),
-    DONE("done", DoneCommand::new),
-    FIND("find", FindCommand::new),
-    LIST("list", ListCommand::new),
+    BYE("bye", (s, ui, tasksController) -> {
+        return new ByeCommand(s, ui, tasksController);
+    }),
+    DELETE("delete", (argument, ui, tasksController) -> {
+        return new DeleteCommand(argument, ui, tasksController);
+    }),
+    DONE("done", (doneIndex, ui, tasksController) -> {
+        return new DoneCommand(doneIndex, ui, tasksController);
+    }),
+    FIND("find", (arguments, ui, tasksController) -> {
+        return new FindCommand(arguments, ui, tasksController);
+    }),
+    LIST("list", (s, ui, tasksController) -> {
+        return new ListCommand(s, ui, tasksController);
+    }),
     UNDO("undo", null),
-    SORT("sort", SortCommand::new),
-    UPDATE("update", UpdateCommand::new);
+    SORT("sort", (arguments, ui, tasksController) -> {
+        return new SortCommand(arguments, ui, tasksController);
+    }),
+    UPDATE("update", (arguments, ui, tasksController) -> {
+        return new UpdateCommand(arguments, ui, tasksController);
+    });
 
     public final String keyword;
     public final CommandProducer producer;

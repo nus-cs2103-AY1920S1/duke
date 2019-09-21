@@ -1,22 +1,18 @@
 package ui.cli;
 
-import ui.input.InputHandler;
-import ui.input.InputListener;
-import ui.output.OutputHandler;
 
-import java.util.ArrayList;
-import java.util.List;
+import ui.DukeInput;
+import ui.DukeOutput;
+
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Command line input channel.
+ * Encapsulates the command line as a DukeInput input channel for the application.
  */
-public class ClInput implements InputHandler {
-    private boolean isActive;
-    private Scanner scanner;
-    private List<InputListener> listeners;
-
-    private static ClInput singleton;
+public class ClInput extends DukeInput {
+    private static Scanner scanner;
+    private static boolean isActive;
 
     private static final String DUKE_LOGO =
             " ____        _        \n"
@@ -30,51 +26,36 @@ public class ClInput implements InputHandler {
                     + "Hello! I'm duke.Duke\n"
                     + "What can I do for you?";
 
-
-    private ClInput() {
-        isActive = true;
-        scanner = new Scanner(System.in);
-
-        listeners = new ArrayList<>();
-    }
-
     /**
-     * Returns instance of ClInput.
-     * @return ClInput instance
+     * Starts listening to user input. Any input received SHOULD BE forwarded to its listeners by passing the input
+     * into the updateAllListeners(String input) method. In the event that the input channel is blocking, it SHOULD
+     * start the dukeOutput channels first.
+     *
+     * @param dukeOutputs output channels to be opened before the input channel.
      */
-    public static ClInput getInstance() {
-        if (singleton == null) {
-            singleton = new ClInput();
+    @Override
+    protected void startInputChannel(DukeOutput... dukeOutputs) {
+        Arrays.stream(dukeOutputs).forEach(DukeOutput::startOutputChannel);
+
+        if (ClInput.scanner == null) {
+            scanner = new Scanner(System.in);
         }
 
-        return singleton;
-    }
-
-    @Override
-    public void updateAllListeners(String input) {
-        listeners.forEach(listener -> listener.update(input));
-    }
-
-    @Override
-    public void addListener(InputListener listener) {
-        listeners.add(listener);
-    }
-
-    @Override
-    public void startHandler(OutputHandler output) {
-        if (output != null) {
-            output.display(GREETING);
+        if (!ClInput.isActive) {
+            isActive = true;
         }
 
-        while (isActive) {
+        while (ClInput.isActive) {
             String input = scanner.nextLine();
             updateAllListeners(input);
         }
     }
 
+    /**
+     * Stops listening to user input. Any input received afterwards SHOULD NOT BE forwarded to the controller anymore.
+     */
     @Override
-    public void stopHandler() {
-        isActive = false;
-        scanner.close();
+    protected void stopInputChannel() {
+        ClInput.isActive = false;
     }
 }

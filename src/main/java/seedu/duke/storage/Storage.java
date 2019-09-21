@@ -71,7 +71,7 @@ public class Storage {
      * Loads the Tasks data from the storage file, and then returns it.
      *
      * @return The populated {@code TaskList}, otherwise an empty {@code TaskList} if the file does not exist,
-     * or is an irregular file.
+     *         or is an irregular file.
      * @throws StorageOperationException thrown when there were errors reading and/or converting data from file.
      */
     public TaskList loadFromDisk() throws StorageOperationException {

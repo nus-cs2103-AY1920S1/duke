@@ -49,7 +49,7 @@ public class Ui {
     }
 
     /**
-     * Prints the message contained in the DukeException {@code e}
+     * Prints the message contained in the DukeException {@code e}.
      * @param e the Exception whose message should be printed.
      */
     public static void printError(DukeException e) {

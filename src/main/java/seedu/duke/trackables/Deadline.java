@@ -1,5 +1,7 @@
 package seedu.duke.trackables;
 
+import seedu.duke.ui.StringStore;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,14 +26,14 @@ public class Deadline extends Task {
     public Deadline(String... args) {
         super(args);
         try {
-            this.completeBy = new SimpleDateFormat("yyyyMMd HHmm").parse(args[3]);
+            this.completeBy = new SimpleDateFormat(StringStore.DEFAULT_DATE_FORMAT).parse(args[3]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     public String getCompleteByAsFormattedString() {
-        return new SimpleDateFormat("yyyyMMd HHmm").format(completeBy);
+        return new SimpleDateFormat(StringStore.DEFAULT_DATE_FORMAT).format(completeBy);
     }
 
     @Override

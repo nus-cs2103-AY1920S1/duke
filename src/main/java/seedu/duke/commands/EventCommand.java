@@ -3,7 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.storage.TaskList;
 import seedu.duke.trackables.Event;
-import seedu.duke.ui.Ui;
+import seedu.duke.ui.StringStore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,16 +34,16 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks) throws InvalidArgumentException {
         try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMd HHmm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat(StringStore.DEFAULT_DATE_FORMAT);
             dateFormat.setLenient(false);
             Date date = dateFormat.parse(dateString);
             Event event = new Event(description, date);
             tasks.add(event);
-            return "Got it. I've added this task:"
+            return StringStore.ADD_SUCCESSFUL
                 + "\n " + event.toString()
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+                + StringStore.REMAINING_TASK_1 + tasks.size() + StringStore.REMAINING_TASK_2;
         } catch (ParseException pe) {
-            throw new InvalidArgumentException("Date input is not in the right format yyyyMMd HHmm", pe);
+            throw new InvalidArgumentException(StringStore.DATE_FORMAT_ERROR, pe);
         }
 
     }

@@ -1,6 +1,5 @@
 package seedu.duke.helpers;
 
-import seedu.duke.Duke;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.Command;
@@ -14,6 +13,7 @@ import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.TodoCommand;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.exceptions.InvalidCommandException;
+import seedu.duke.ui.StringStore;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -86,8 +86,8 @@ public class Parser {
         // Exit if arguments cannot be matched.
         if (!matcher.matches()) {
             commandToExecute = new ErrorCommand(
-                new InvalidArgumentException("Invalid or missing arguments in command "
-                    + command.name() + "."));
+                new InvalidArgumentException(
+                   StringStore.ARGUMENTS_ERROR + command.name() + "."));
             return commandToExecute;
         }
 
@@ -165,7 +165,7 @@ public class Parser {
         case DELETE:
             pattern = DELETE_PATTERN;
             break;
-            case FIND:
+        case FIND:
             pattern = FIND_PATTERN;
             break;
         case BYE:

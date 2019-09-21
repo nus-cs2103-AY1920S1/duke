@@ -1,6 +1,8 @@
 package seedu.duke.exceptions;
 
 
+import seedu.duke.ui.StringStore;
+
 /**
  * Signals that there was an issue with the command supplied by the user. This means that the command
  * could not be identified.
@@ -11,7 +13,7 @@ package seedu.duke.exceptions;
 public class InvalidCommandException extends DukeException {
 
     public InvalidCommandException() {
-        super("No such command found.");
+        super(StringStore.COMMAND_ERROR);
     }
 
     public InvalidCommandException(String message) {

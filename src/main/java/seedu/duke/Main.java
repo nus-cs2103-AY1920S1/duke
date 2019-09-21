@@ -2,7 +2,6 @@ package seedu.duke;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -28,6 +27,7 @@ public class Main extends Application {
             stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke); // To attach duke to the MainWindow
             stage.show();
+            fxmlLoader.<MainWindow>getController().startDuke();
         } catch (IOException e) {
             e.printStackTrace();
         }

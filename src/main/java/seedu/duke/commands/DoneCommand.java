@@ -2,7 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.storage.TaskList;
-import seedu.duke.ui.Ui;
+import seedu.duke.ui.StringStore;
 
 /**
  * Abstraction of the Done Command.
@@ -25,7 +25,6 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks) throws InvalidArgumentException {
         tasks.get(taskId).markAsDone();
-        return "Nice! I've marked this task as done:"
-            + "\n  " + tasks.get(taskId).toString();
+        return StringStore.DONE_SUCCESSFUL + "\n  " + tasks.get(taskId).toString();
     }
 }

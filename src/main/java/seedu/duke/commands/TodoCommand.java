@@ -2,7 +2,6 @@ package seedu.duke.commands;
 
 import seedu.duke.storage.TaskList;
 import seedu.duke.trackables.Todo;
-import seedu.duke.ui.Ui;
 
 /**
  * Abstraction of the \btodo Command.

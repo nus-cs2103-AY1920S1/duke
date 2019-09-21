@@ -1,5 +1,7 @@
 package seedu.duke.trackables;
 
+import seedu.duke.ui.StringStore;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,14 +26,14 @@ public class Event extends Task {
     public Event(String... args) {
         super(args);
         try {
-            this.attendDate = new SimpleDateFormat("yyyyMMd HHmm").parse(args[3]);
+            this.attendDate = new SimpleDateFormat(StringStore.DEFAULT_DATE_FORMAT).parse(args[3]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
     private String getAttendDateAsFormattedDate() {
-        return new SimpleDateFormat("yyyyMMd HHmm").format(attendDate);
+        return new SimpleDateFormat(StringStore.DEFAULT_DATE_FORMAT).format(attendDate);
     }
 
     @Override

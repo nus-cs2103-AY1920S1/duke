@@ -1,11 +1,7 @@
 package seedu.duke;
 
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.Command;
-import seedu.duke.controllers.DialogBox;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.helpers.Parser;
 import seedu.duke.storage.Storage;
@@ -14,14 +10,13 @@ import seedu.duke.ui.Ui;
 
 /**
  * The Duke Assistant keeps track of 'trackables' such as ToDos, Events and Deadlines.
- * The CLI Interface makes it ideal for a no distraction environment.
- *
- * @since 2019-08-13
+ * The CLI makes it ideal for a focused environment.
  */
 
 public class Duke {
 
     private TaskList tasks;
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke Assistant.\nHow can I help?";
 
     /**
      * Constructs a new Duke Object.
@@ -29,15 +24,25 @@ public class Duke {
      * If existing data does not exist or ends in an exception, an empty TaskList is returned.
      */
     public Duke() {
+
+    }
+
+    /**
+     * Enables the deferred initialization of taskList.
+     * @return The Welcome Message and an error message if the tasklist could not be restored from file.
+     */
+    public String initialize() {
+        String message = WELCOME_MESSAGE + "\n";
         // Load from disk
         try {
             tasks = Storage.getInstance().loadFromDisk();
         } catch (Storage.StorageOperationException e) {
-            Ui.printError(e);
-            Ui.printLoadingError();
             tasks = new TaskList();
+            return message +  e.getMessage();
         }
         assert (tasks != null);     // Duke's taskList should never be null after the constructor is complete.
+
+        return message;
     }
 
     /**
@@ -52,7 +57,7 @@ public class Duke {
     /**
      * Executes the Duke Assistant.
      */
-    public void run() {
+    private void run() {
         Ui.greet();
 
         //noinspection InfiniteLoopStatement
@@ -66,6 +71,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Handles the user input and returns the response from Duke.
+     * @param input The user input
+     * @return Returns the response from Duke.
+     */
     public String handleCommand(String input) {
         try {
             Command commandToExecute = Parser.parseCommand(input);

@@ -2,7 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.storage.TaskList;
 import seedu.duke.trackables.Task;
-import seedu.duke.ui.Ui;
+import seedu.duke.ui.StringStore;
 
 /**
  * Abstraction of the Add Command containing the required data to add a plain-old task.
@@ -24,6 +24,6 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks) {
         Task task = new Task(description);
         tasks.add(task);
-        return "added: " + task.toString();
+        return StringStore.ADD_SUCCESSFUL + task.toString();
     }
 }

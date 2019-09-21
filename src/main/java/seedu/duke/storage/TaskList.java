@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Abstraction of a List of Tasks.
+ */
 public class TaskList {
 
     private List<Task> tasks;
@@ -72,20 +75,30 @@ public class TaskList {
         return tasks.remove(index);
     }
 
-    public TaskList findByDescription(String description) {
+    /**
+     * Finds all Tasks that contain the pattern specified.
+     * @param pattern The pattern used for the search.
+     * @return Returns a new TaskList with the matching tasks.
+     */
+    public TaskList findByDescription(String pattern) {
         TaskList searchResult;
         searchResult = new TaskList(tasks.stream()
-            .filter(task -> task.getDescription().contains(description))
+            .filter(task -> task.getDescription().contains(pattern))
             .collect(Collectors.toList()));
         return searchResult;
     }
 
-    public String printAll() {
+    /**
+     * Converts the TaskList into a String, each line representing a task. Typically used to display
+     * all Tasks in the list to the user.
+     * @return Returns the list as a single String.
+     */
+    public String getListAsString() {
         StringBuilder response = new StringBuilder();
 
+        response.append("\n");
         for (int i = 0; i < tasks.size(); i++) {
-            response.append("\t")
-                .append(i + 1)
+            response.append(i + 1)
                 .append(".")
                 .append(tasks.get(i).toString());
 

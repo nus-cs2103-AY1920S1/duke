@@ -1,18 +1,13 @@
 package seedu.duke.controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import seedu.duke.Duke;
-
-import javax.swing.plaf.RootPaneUI;
-import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -54,5 +49,14 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    /**
+     * Initializes duke and reports if there was an error processing the stored task list.
+     */
+    public void startDuke() {
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog(duke.initialize(), dukeImage)
+        );
     }
 }

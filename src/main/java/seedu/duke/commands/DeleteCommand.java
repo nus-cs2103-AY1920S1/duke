@@ -3,7 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.InvalidArgumentException;
 import seedu.duke.storage.TaskList;
 import seedu.duke.trackables.Task;
-import seedu.duke.ui.Ui;
+import seedu.duke.ui.StringStore;
 
 /**
  * Abstraction of the Delete Command.
@@ -26,8 +26,8 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks) throws InvalidArgumentException {
         Task taskToRemove = tasks.remove(taskId);
-        return "Noted. I've removed this task:"
+        return StringStore.DELETE_SUCCESSFUL
             + "\n  " + taskToRemove.toString()
-            + "\nNow you have " + tasks.size() + " tasks in the list.";
+            + StringStore.REMAINING_TASK_1 + tasks.size() + StringStore.REMAINING_TASK_2;
     }
 }

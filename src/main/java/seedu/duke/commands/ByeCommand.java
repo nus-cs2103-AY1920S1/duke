@@ -1,8 +1,7 @@
 package seedu.duke.commands;
 
-import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
-import seedu.duke.ui.Ui;
+import seedu.duke.ui.StringStore;
 
 /**
  * Abstraction of the Bye Command.
@@ -17,7 +16,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks) {
-        return "\t" + "Bye. Hope to see you again soon!";
+        return StringStore.GOODBYE;
     }
 }
 

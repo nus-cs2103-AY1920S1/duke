@@ -92,17 +92,22 @@ Possible outcome:
 
 `Listing all statistics`\
 `Total Commands Executed: 150`\
-`Total Tasks Deleted: 20`\
+`Total Tasks Deleted: 20`
 
 
 `Total To-Dos Completed: 12`\
 `Total Todos Completed TODAY: 2`\
-` `\
+
+
 `Total Deadlines Completed: 7`\
-`Total Deadlines Completed TODAY: 1`\
-` `\
+`Total Deadlines Completed TODAY: 1`
+
+
 `Total Events Completed: 4`\
 `Total Events Completed TODAY: 2`
+
+
+
 
 
 

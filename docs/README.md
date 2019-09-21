@@ -8,27 +8,31 @@ Welcome to Doke's User Guide. You'll find everything you need to know about Doke
 
 ![Doke image](Ui.png)
 
-## Prerequisites
-
-To get started, you'll need to have **Java 11** installed.
-
-The application is packaged as a `.jar` file, which can be found in the `Releases` tab.
+View [Features](#features) for a comprehensive list of features.
 
 ## Quick Start
 
-An example scenario of commands entered is listed below:
+1. Verify that you have **Java 11** installed.
 
-```
-todo Task 1
-deadline Project Milestone 1 /by 21/10/2019 1200
-event Presentation /at 26/10/2019 1200
-done 1
-list
-find Pr
-bye
-```
+2. Download the latest `.jar` version from [Releases](https://github.com/Nanosync/duke/releases).
 
-More details can be found under [Usage](#usage).
+3. Copy or move the file to a desired location.
+
+4. Double-click to start the application. A GUI will appear in a few seconds.
+
+5. Type a message in the box and press `Enter` to execute it.
+    - e.g. `help` displays the list of available commands.
+
+6. Some example commands are listed below:
+    - `list`: shows all available tasks
+    - `todo Task 1`: creates a todo called `Task 1`
+    - `done 1`: marks `Task 1` as done
+    - `deadline Project Milestone 1 /by 21/10/2019 1200`: creates a deadline called `Project Milestone 1`, due by `21/10/2019 1200`
+    - `event Presentation /at 26/10/2019 1200`: creates an event called `Presentation`, at `26/10/2019 1200`
+    - `find Pr`: finds all tasks that contain the word `Pr`
+    - `bye`: closes the application
+
+7. Refer to [Usage](#usage) for details of each command.
 
 ## Table of Contents
 - [Features](#features)
@@ -37,17 +41,17 @@ More details can be found under [Usage](#usage).
     - [Search for tasks](#search-for-tasks)
     - [Load and save tasks](#load-and-save-tasks)
 - [Usage](#usage)
-    - [Basics: Add and categorise tasks](#basics-adding-and-categorising-tasks)
+    - [Add and categorise tasks](#adding-and-categorising-tasks)
         - [deadline - Add a deadline task](#deadline---add-a-deadline-task)
         - [event - Add an event task](#deadline---add-a-deadline-task)
         - [todo - Add a todo task](#todo---add-a-todo-task)
-    - [Basics: Delete and mark a task as done](#basics-delete-and-mark-a-task-as-done)
+    - [Delete and mark a task as done](#delete-and-mark-a-task-as-done)
         - [delete - Delete a task](#delete---delete-a-task)
         - [done - Mark a task as done](#done---mark-a-task-as-done)
-    - [Basics: Filter and view your tasks](#basics-filter-and-view-your-tasks)
+    - [Filter and view your tasks](#filter-and-view-your-tasks)
         - [find - Find a task](#find---find-a-task)
         - [list - List all tasks](#list---list-all-tasks)
-    - [Basics: Miscellaneous](#basics-miscellaneous)
+    - [Miscellaneous](#miscellaneous)
         - [bye - Quit the program](#bye---quit-the-program)
         - [help - View help](#help---view-help)
 
@@ -120,7 +124,7 @@ Here are the tasks in your list:
 
 The following commands below have been sorted by use, for your convenience.
 
-### Basics: Adding and categorising tasks
+### Adding and categorising tasks
 
 ---
 
@@ -184,7 +188,7 @@ A new todo called `school project` is created.
 
 ---
 
-### Basics: Delete and mark a task as done
+### Delete and mark a task as done
 
 ---
 
@@ -227,7 +231,7 @@ Task number `1`, labelled `homework` from the task list is marked as done, as in
 
 ---
 
-### Basics: Filter and view your tasks
+### Filter and view your tasks
 
 ---
 
@@ -272,7 +276,7 @@ A list of recorded tasks is shown.
 
 ---
 
-### Basics: Miscellaneous
+### Miscellaneous
 
 ---
 

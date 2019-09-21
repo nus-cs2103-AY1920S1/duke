@@ -11,6 +11,10 @@ import java.util.Arrays;
  * Class to encapsulate a JavaFX application as a DukeInput for the application.
  */
 public class FxDukeInput extends DukeInput {
+    public FxDukeInput() {
+        super(true);
+    }
+
     /**
      * Starts listening to user input. Any input received SHOULD BE forwarded to its listeners by passing the input
      * into the updateAllListeners(String input) method. In the event that the input channel is blocking, it SHOULD

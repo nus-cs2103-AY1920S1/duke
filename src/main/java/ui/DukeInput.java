@@ -10,13 +10,23 @@ import java.util.List;
  */
 public abstract class DukeInput {
     private List<DukeInputListener> listeners;
+    private boolean isBlocking;
 
-    protected DukeInput() {
+    protected DukeInput(boolean isBlocking) {
         this.listeners = new ArrayList<>();
+        this.isBlocking = isBlocking;
     }
 
     protected void updateAllListeners(String input) {
         this.listeners.forEach(listener -> listener.receiveInput(input));
+    }
+
+    /**
+     * Returns true if this input channel is blocking.
+     * @return information about whether the input channel is blocking.
+     */
+    public boolean isBlocking() {
+        return this.isBlocking;
     }
 
     /**

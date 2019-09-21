@@ -63,7 +63,12 @@ public class UiController implements DukeInputListener {
     public void initializeUi() {
         this.isUiInitialized = true;
 
-        this.inputChannel.startInputChannel(this.outputChannel);
+        if (inputChannel.isBlocking()) {
+            this.inputChannel.startInputChannel(this.outputChannel);
+        } else {
+            this.inputChannel.startInputChannel();
+            this.outputChannel.startOutputChannel();
+        }
     }
 
     /**
@@ -81,5 +86,29 @@ public class UiController implements DukeInputListener {
                 this.outputChannel.stopOutputChannel();
             });
         }
+    }
+
+    /**
+     * Returns true if ui has been initialized.
+     * @return boolean based on whether Ui has been initialized.
+     */
+    public boolean isUiInitialized() {
+        return this.isUiInitialized;
+    }
+
+    /**
+     * Returns the DukeInput instance of the controller.
+     * @return DukeInput instance that the controller contains.
+     */
+    public DukeInput getInputChannel() {
+        return inputChannel;
+    }
+
+    /**
+     * Returns the DukeOutput instance of the controller.
+     * @return DukeOutput instance that the controller contains.
+     */
+    public DukeOutput getOutputChannel() {
+        return outputChannel;
     }
 }

@@ -92,11 +92,4 @@ public class Duke implements UiDriver {
         }
     }
 
-    /**
-     * Closes the program.
-     */
-    @Override
-    public void stopActivity() {
-        System.exit(0);
-    }
 }

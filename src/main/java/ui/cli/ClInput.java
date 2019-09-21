@@ -26,6 +26,10 @@ public class ClInput extends DukeInput {
                     + "Hello! I'm duke.Duke\n"
                     + "What can I do for you?";
 
+    public ClInput() {
+        super(true);
+    }
+
     /**
      * Starts listening to user input. Any input received SHOULD BE forwarded to its listeners by passing the input
      * into the updateAllListeners(String input) method. In the event that the input channel is blocking, it SHOULD

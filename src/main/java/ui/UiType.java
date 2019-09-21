@@ -7,6 +7,11 @@ import ui.fx.FxDukeOutput;
 
 import java.util.function.Supplier;
 
+/**
+ * Enum used by UiController factory to configure which Input and Output channels to create for the program. This
+ * allows clients of the UiController to not be concerned about its implementation details and not have to instantiate
+ * the necessary dependencies of the UiController class themselves.
+ */
 public enum UiType {
     CLI(ClInput::new, ClOutput::new),
     JAVAFX(FxDukeInput::new, FxDukeOutput::new);

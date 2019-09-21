@@ -4,7 +4,14 @@
 1. Introduction
 1. Quick Start
 1. Features
-    1. feature 1
+    1. Help
+    1. Adding a Task
+    1. Listing all Tasks
+    1. Marking Task as Complete
+    1. Deleting a Task
+    1. Finding a Task
+    1. Exiting the Program
+    1. Saving and Loading the data
 1. FAQ
 1. Command Summary
 
@@ -42,7 +49,8 @@
 1. ### Viewing Help: `help`
 Format: `help`
 
-2. ### Adding an item: `todo`/`event`/`deadline`
+
+2. ### Adding a Task: `todo`/`event`/`deadline`
 Adds a task in the Task List.
     2. Adding Todo: `todo`
     Format: `todo DESCRIPTION`
@@ -58,9 +66,11 @@ Adds a task in the Task List.
     * `todo CS2100 Homework`
     adds todo CS2100 Homework into the task list.
 
+
 3. ### Listing all Tasks: `list`
 Shows a list of all tasks in the task list.
 Format: `list`
+
 
 4. ### Marking Task as Complete: `done`
 Marks the task as complete 
@@ -70,6 +80,7 @@ Format: `done INDEX`
     * `done 3`
     Marks task number 3 on the list as done.
 
+
 5. ### Deleting a task: `delete`
 Deletes the specified task from the task list.
 Format: `delete INDEX`
@@ -77,6 +88,7 @@ Format: `delete INDEX`
     Examples:
     * `delete 2`
     Deletes the 2nd task in the task list.
+
 
 6. ### Finding a task: `find`
 Finds tasks whose description contain any of the given keywords.
@@ -86,9 +98,11 @@ Format: `find KEYWORD`
     * `find CS2103T`
     Returns all tasks with `CS2103T` as description
 
+
 7. ### Exiting the Program: `bye`
 Exits the program.
 Format: `bye`
+
 
 8. ### Saving and loading the data
 Task list data is saved in the jar file automatically after any command that changes the data. 
@@ -108,29 +122,29 @@ There is no need to save manually.
 
 * **Todo** `todo DESCRIPTION`
 
-e.g. `todo CS2100 Homework`
+    e.g. `todo CS2100 Homework`
 
 * **Event** `event DESCRIPTION /at DD/MM/YYYY HHMM`
 
-e.g. `event Tutorial /at 09/08/2019 1500`
+    e.g. `event Tutorial /at 09/08/2019 1500`
 
 * **Deadline** `deadline DESCRIPTION /at DD/MM/YYYY HHMM`
 
-e.g. `deadline Homework /at 09/08/2019 1500`
+    e.g. `deadline Homework /at 09/08/2019 1500`
 
 * **List** `list`
 
 * **Done** `done INDEX`
 
-e.g. `done 3`
+    e.g. `done 3`
 
 * **Delete** `delete INDEX`
 
-e.g. `delete 2`
+    e.g. `delete 2`
 
 * **Find** `find KEYWORD`
 
-e.g. `find CS2100`
+    e.g. `find CS2100`
 
 * **Help** `help`
 

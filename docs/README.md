@@ -1,6 +1,6 @@
 # User Guide
 
-##About
+## About
 Duke is a command line based tool for keeping
 track of your tasks. Tasks are saved whenever
 you need to change your tasks.

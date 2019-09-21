@@ -1,7 +1,10 @@
 package duke.note;
 
+import java.io.File;
+
 public class Note {
-    public static final String FILE_BASE_PATH = ".\\src\\main\\java\\duke\\note\\notes\\";
+    public static final String FILE_BASE_PATH = ".\\notes\\";
+    public static final File NOTE_DIRECTORY = new File(Note.FILE_BASE_PATH);
     private String fileName;
     private String noteContents;
     

@@ -84,15 +84,15 @@ public abstract class Task {
         StringBuilder sb = new StringBuilder();
         if (time >= 1200) {
             if ((time / 100) == 12) {
-                sb.append("12." + (time % 100) + "pm");
+                sb.append("12." + String.format("%02d", (time % 100)) + "pm");
             } else {
-                sb.append((time / 100 - 12) + "." + (time % 100) + "pm");
+                sb.append((time / 100 - 12) + "." + String.format("%02d", (time % 100)) + "pm");
             }
         } else {
             if ((time / 100) == 0) {
-                sb.append("12." + (time % 100) + "am");
+                sb.append("12." + String.format("%02d", (time % 100)) + "am");
             } else {
-                sb.append((time / 100) + "." + (time % 100) + "am");
+                sb.append((time / 100) + "." + String.format("%02d", (time % 100)) + "am");
             }
         }
         return sb.toString();

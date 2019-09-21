@@ -58,7 +58,7 @@
   ```
 
 ### `Done` 
-* Makrs a task from our database as done using the task number. 
+* Marks a task from our database as done using the task number. 
 
   Example of usage: 
 

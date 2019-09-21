@@ -54,3 +54,7 @@ shadowJar {
     archiveClassifier = null
     archiveAppendix = null
 }
+
+run {
+    enableAssertions = true
+}

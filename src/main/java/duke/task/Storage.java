@@ -19,12 +19,40 @@ public class Storage {
     }
 
     /**
+     * Tasks are stored in the /data/duke.txt file.
+     * This method checks if the file exists. If it does not, a new file
+     * is created.
+     * The method below is adapted from: https://github.com/WilliamRyank/duke/blob/master/src/main/java/Storage.java
+     * after permission is obtained from original author.
+     */
+    public void checkFileExists() {
+        try {
+            String folder = "data";
+            File directory = new File(folder);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            File taskFile = new File(filePath);
+            if (!taskFile.exists()) {
+                taskFile.createNewFile();
+            }
+
+            assert taskFile.exists() : "File should exist now!";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Loads tasks from specified file.
      * @return ArrayList containing tasks saved in specified file
      */
     public ArrayList<Task> load() {
         try {
+            checkFileExists();
             File taskFile = new File(filePath);
+
             Scanner sc = new Scanner(taskFile);
             ArrayList<Task> taskList = new ArrayList<>();
 
@@ -35,8 +63,10 @@ public class Storage {
             }
 
             return taskList;
-        } catch (FileNotFoundException ex) {
+        } catch (IOException e) {
+
             System.out.println(filePath + " cannot be found!");
+            e.printStackTrace();
             return new ArrayList<Task>();
         }
     }

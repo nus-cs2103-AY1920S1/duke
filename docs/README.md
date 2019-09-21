@@ -35,20 +35,24 @@ Expected outcome:
 `Now you have X tasks in the list`
 
 ### Adding a new deadline task
+A deadine task is similar to a to-do task, except that it is associated with a particular cut-off time, the due deadline.
 
+Deadline task can be added via the following format:
+deadline [deadline_name] /by [deadline_date]
 
+[deadline_date] must be of the following format:
+_DD/MM/YYYY HHMM_
 
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
+Sample command:
+`deadline CS Quiz /by 31/12/2019 2359`
 
 Expected outcome:
+`Got it. I've added this task:`\
+`[D][X] CS Quiz (by: 31st of December 2019, 11.59pm)`\
+`Now you have X tasks in the list`
 
-`outcome`
+### Viewing all statistics
+
+
+
+

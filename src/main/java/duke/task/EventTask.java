@@ -32,9 +32,7 @@ public class EventTask extends Task {
      */
     @Override
     public String formattedString() {
-        return "E | " + super.formattedString() + " | " + time.getDayOfMonth() + "/" + time.getMonthValue() + "/"
-                + String.format("%04d", time.getYear()) + " " + String.format("%02d", time.getHour())
-                + String.format("%02d", time.getMinute()) + "\n";
+        return "E | " + super.formattedString() + " | " + STORAGE_DATE_TIME_FORMATTER.format(time) + "\n";
     }
     
     /**
@@ -46,8 +44,6 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time.getDayOfMonth() + " of " + time.getMonth() + ", "
-                + time.getYear() + ", at " + String.format("%02d", time.getHour())
-                + String.format("%02d", time.getMinute()) + " hrs)";
+        return "[E]" + super.toString() + " (at: " + DATE_TIME_FORMATTER.format(time) + ")";
     }
 }

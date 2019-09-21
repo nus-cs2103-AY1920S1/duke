@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  * The super-class of all Task objects.
  */
@@ -12,6 +15,14 @@ public class Task {
      * The completion status of the Task.
      */
     private boolean isDone;
+    /**
+     * The DateTimeFormatter for LocalDateTime objects.
+     */
+    static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMMM yyyy, h:mm a");
+    /**
+     * The DateTimeFormatter for storage format of LocalDateTime objects.
+     */
+    static final DateTimeFormatter STORAGE_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm");
     
     /**
      * Creates a Task object.

@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Storage that reads and writes tasks to a byte file in local system memory.
+ * Storage class that handles the reading and writing of tasks to a storage file found in the local machine's file
+ * system. This class will create a new storage file in the file system of the local machine if it does not already
+ * exist. If not, it will read and write to the file corresponding to specified path.
  */
 public class FileSystemStorage implements Storage {
     private String storageFilePath;
@@ -23,7 +25,8 @@ public class FileSystemStorage implements Storage {
     }
 
     /**
-     * Returns an instance of a FileSystemStorage that reads and writes to a file path.
+     * Returns an instance of a FileSystemStorage that reads and writes to a file path. A new file is created
+     * at the file path if it does not already exist.
      * @param storageFilePath file path to read and write tasks
      * @return FileSystemStorage instance
      * @throws StorageException if unable to read file path
@@ -39,14 +42,16 @@ public class FileSystemStorage implements Storage {
         try {
             // Create new file if it doesn't exist
             if (!fileExists(storageFilePath)) {
+                File file = new File(storageFilePath);
+
+                file.getParentFile().mkdirs();
 
                 FileOutputStream outputStream = new FileOutputStream(storageFilePath);
                 ObjectOutputStream taskWriter = new ObjectOutputStream(outputStream);
 
-                System.out.println("Creating new storage file.");
+                System.out.println("Creating new storage file...");
                 taskWriter.writeObject(new ArrayList<Task>());
                 taskWriter.close();
-
             }
 
         } catch (IOException e) {

@@ -2,6 +2,7 @@ package duke;
 
 import error.storage.StorageException;
 import storage.FileSystemStorage;
+import storage.InMemStorage;
 import storage.Storage;
 
 import ui.UiController;
@@ -10,19 +11,20 @@ import ui.UiDriver;
 import ui.UiType;
 
 /**
- * Factory to generate duke runtime options.
+ * A factory class to generate duke runtime options. The DukeOptions instance created will encapsulate all the
+ * dependencies needed for the program to run.
  */
 public class OptionsFactory {
 
     private static String getDefaultStorageFilePath() {
-        return System.getProperty("user.home") + "/bin/duke.txt";
+        return System.getProperty("user.home") + "/Duke/tasks.DAT";
     }
 
     /**
      * Generates options based on custom parameters.
      * @param isGuiEnabled to enable JavaFx gui
      * @param isPersistentDataEnabled to enable changes to be stored in local memory
-     * @return
+     * @return DukeOptions object encompassing all the runtime configurations.
      */
     public static DukeOptions select(boolean isGuiEnabled, boolean isPersistentDataEnabled, UiDriver driver) {
         UiController uiController;
@@ -39,7 +41,7 @@ public class OptionsFactory {
         if (isPersistentDataEnabled) {
             storage = OptionsFactory.getPersistentStorage();
         } else {
-            storage = null;
+            storage = new InMemStorage();
         }
 
         return getOptions(uiController, storage);
@@ -52,7 +54,8 @@ public class OptionsFactory {
             return storage;
         } catch (StorageException e) {
             System.out.println("Unable to access storage file.");
-            return null;
+            System.out.println("Starting the app without a persistent file storage.");
+            return new InMemStorage();
         }
     }
 

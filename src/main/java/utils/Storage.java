@@ -6,10 +6,15 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+
 import java.util.List;
 import java.util.ArrayList;
-import java.nio.file.Path;
 
 public class Storage {
     private List<Task> tasks;
@@ -68,20 +73,20 @@ public class Storage {
                 String taskType = savedTask[0];
 
                 switch (taskType) {
-                    case "T":
-                        createAndAddTodo(savedTask);
-                        break;
+                case "T":
+                    createAndAddTodo(savedTask);
+                    break;
 
-                    case "D":
-                        createAndAddDeadline(savedTask);
-                        break;
+                case "D":
+                    createAndAddDeadline(savedTask);
+                    break;
 
-                    case "E":
-                        createAndAddEvent(savedTask);
-                        break;
+                case "E":
+                    createAndAddEvent(savedTask);
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
             }
             return tasks;

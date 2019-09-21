@@ -17,7 +17,7 @@ public class StringToDate {
      * Also checks if the user entered a valid date.
      *
      * @param rawDate date time inputted by user
-     * @throws ParseException in case date time is in invalid format
+     * @throws DukeException in case date time is in invalid format
      */
     public StringToDate(String rawDate) throws DukeException {
 
@@ -38,7 +38,7 @@ public class StringToDate {
     }
 
     public String getRawDate() {
-       return this.rawDate;
+        return this.rawDate;
     }
 
 

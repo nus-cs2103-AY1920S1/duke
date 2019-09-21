@@ -48,7 +48,7 @@ Example:
 #### 2.4 `list`
 Lists out all the tasks in the task list.
 
-  ![List](list.png)
+  * ![List](list.png)
 
 Format: `list`
 

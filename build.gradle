@@ -5,7 +5,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-group 'weomucat.duke'
+group 'weomucat.doko'
 version '0.3'
 
 repositories {
@@ -15,7 +15,7 @@ repositories {
 
 application {
     // Change this to your main class.
-    mainClassName = "weomucat.duke.Duke"
+    mainClassName = "weomucat.doko.Doko"
 }
 
 ext {
@@ -40,10 +40,6 @@ dependencies {
 
 run {
     standardInput = System.in
-
-    // Hardware Acceleration not working with linux nvidia
-    // Found the issue: It was with rendering unicode characters.
-    // https://github.com/javafxports/openjdk-jfx/issues/287
 }
 
 shadowJar {

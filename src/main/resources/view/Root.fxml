@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" stylesheets="@root.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weomucat.duke.ui.gui.Root">
+<VBox alignment="TOP_CENTER" stylesheets="@root.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="weomucat.doko.ui.gui.Root">
    <HBox alignment="CENTER" style="-fx-background-color: #81b9bf;">
-      <Label alignment="CENTER" minHeight="60.0" text="Duke - Personal Assistant Chatbot" textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" minHeight="60.0" text="Doko - Personal Assistant Chatbot" textAlignment="CENTER" textFill="WHITE">
          <padding>
             <Insets left="20.0" right="20.0" />
          </padding>

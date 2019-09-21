@@ -3,11 +3,16 @@ package seedu.duke.core;
 import javafx.scene.control.Label;
 import seedu.duke.model.dto.Task;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Ui {
+    private Properties prop;
     private static String LOGO =
                       " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -21,8 +26,14 @@ public class Ui {
             + "What can I do for you?\n"
             + "________________________________________________________________________________________________";
 
-    public void readCommand() {
-
+    public Ui() {
+        prop = new Properties();
+        try {
+            InputStream inputStream = new FileInputStream("src/main/resources/duke.properties");
+            prop.load(inputStream);
+        } catch(IOException e) {
+            System.out.println(e);
+        }
     }
 
     public Label showWelcome() {
@@ -34,22 +45,23 @@ public class Ui {
     }
 
     public Label printByeMessage() {
-        return new Label("Bye. Hope to see you again soon!");
+        return new Label(prop.getProperty("msg.bye"));
     }
 
-    public void showLoadingError() {
-
-    }
 
     /**
      * Prints all the tasks inside task list.
      * @param list Task list (ArrayList) where all tasks are stored.
      */
     public String displayList(String output, List<Task> list) {
-        output += "Here are the tasks in your list:\n";
-        output += IntStream.rangeClosed(1, list.size())
-                .mapToObj(index -> (String)(index + "." + list.get(index - 1)))
-                .collect(Collectors.joining("\n"));
+        if (list.isEmpty()) {
+            output += prop.getProperty("cmd.list.empty");
+        } else {
+            output += prop.getProperty("cmd.list");
+            output += IntStream.rangeClosed(1, list.size())
+                    .mapToObj(index -> (String)(index + "." + list.get(index - 1)))
+                    .collect(Collectors.joining("\n"));
+        }
         return output;
     }
 

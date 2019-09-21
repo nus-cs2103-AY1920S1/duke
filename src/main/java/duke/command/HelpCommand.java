@@ -14,7 +14,8 @@ public class HelpCommand extends Command {
             + PADDING + "event [description] /at \n    [time]-[time]\n"
             + PADDING + "done [taskID/taskIDs]\n"
             + PADDING + "find [text]\n"
-            + PADDING + "delete [taskID]\n";
+            + PADDING + "delete [taskID]\n"
+            + PADDING + "save";
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

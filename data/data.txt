@@ -1,3 +1,0 @@
-T | 0 | return a
-T | 0 | return b
-T | 0 | return c

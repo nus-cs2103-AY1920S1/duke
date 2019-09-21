@@ -5,8 +5,6 @@ import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
 
-import java.util.List;
-
 public class ExitCommand extends Command {
 
     /**
@@ -29,6 +27,7 @@ public class ExitCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         storage.writeToFile(tasks);
-        return ui.exitMessage();
+        System.exit(0);
+        return "";
     }
 }

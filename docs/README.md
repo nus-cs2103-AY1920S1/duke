@@ -56,7 +56,7 @@ Expected outcome:
 `Now you have X tasks in the list`
 
 ### 4. Viewing task-related statistics
-Obot can also give the statistics regarding the number of tasks completed _in the current day._
+Obot can also give the statistics regarding the number of tasks completed __in the current day.__
 Tasks completed more than one day ago will not be counted.
 
 To view statistics pertaining to each task (to-do, event or deadline), enter the following command:

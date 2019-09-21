@@ -83,7 +83,7 @@ public class MainWindow extends AnchorPane {
                     System.exit(0);
                 } catch (InterruptedException e) {
                     dialogContainer.getChildren().add(
-                            DialogBox.getDukeDialog("ObiWan exiting!", dukeImage)
+                            DialogBox.getDukeDialog("Obi exiting!", dukeImage)
                     );
                 }
             }).start();

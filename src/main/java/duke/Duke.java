@@ -47,8 +47,6 @@ public class Duke {
         return outputStream.toString();
     }
 
-
-
     /**
      * Returns the response corresponding to the input by the user.
      * @param input Input command provided by the user.
@@ -65,13 +63,10 @@ public class Duke {
 
     private void generateResponse(String input) {
         try {
-            ui.printLine();
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
         } catch (DukeException exception) {
             ui.printExceptionMessage(exception);
-        } finally {
-            ui.printLine();
         }
     }
 

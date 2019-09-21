@@ -16,11 +16,11 @@ public class Ui {
      * Prints the welcome logo.
      */
     private void printLogo() {
-        String logo = " ___         _        \n"
-                + "|  _ \\ _  _| |    __ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  _/\n"
-                + "|___/ \\_,_|_|\\_\\__|\n";
+        String logo = "  ___             _        \n"
+                + "|   _  \\ _    _| |    ___ \n"
+                + "| |  | | |  | | |/ / __ \\\n"
+                + "| |_| | |_| |   <   __ /\n"
+                + "|___/ \\ _,_ |_|\\_\\__|\n";
         System.out.println("Hello from\n" + logo);
     }
 
@@ -28,10 +28,8 @@ public class Ui {
      * Prints a message to greet the user.
      */
     private void greetUser() {
-        printLine();
         printMessage("Hello! I'm Duke Piglet");
         printMessage("What can I do for you?");
-        printLine();
     }
 
     /**
@@ -40,13 +38,6 @@ public class Ui {
     public void printWelcome() {
         printLogo();
         greetUser();
-    }
-
-    /**
-     * Prints a line.
-     */
-    public void printLine() {
-        printMessage("---------------------------------------------------------");
     }
 
     /**
@@ -63,7 +54,7 @@ public class Ui {
      */
     public void printDeleteMessage(Task deletedTask, int size) {
         printMessage("Noted. I've removed this task:");
-        printMessage("\t " + deletedTask);
+        printMessage(deletedTask.toString());
         printMessage("Now you have " + size + (size == 1 ? " task " : " tasks ")
                 + "in the " + "list.");
     }
@@ -74,7 +65,7 @@ public class Ui {
      */
     public void printDoneMessage(Task doneTask) {
         printMessage("Nice! I've marked this task as done:");
-        printMessage("\t" + doneTask);
+        printMessage(doneTask.toString());
     }
 
     /**
@@ -84,7 +75,7 @@ public class Ui {
      */
     public void printAddTaskMessage(Task addedTask, int size) {
         printMessage("Got it. I've added this task:");
-        printMessage("\t " + addedTask);
+        printMessage(addedTask.toString());
         printMessage("Now you have " + size + (size == 1 ? " task " : " tasks ")
                 + "in the " + "list.");
     }
@@ -126,9 +117,7 @@ public class Ui {
      * @param exception The <code>Exception</code> that has occurred.
      */
     public void printLoadingErrorMessage(DukeException exception) {
-        printLine();
         printExceptionMessage(exception);
-        printLine();
     }
 
     /**

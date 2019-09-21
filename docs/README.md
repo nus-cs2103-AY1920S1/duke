@@ -101,29 +101,35 @@ There is no need to save manually.
 ## FAQ
 **Q**: How do I transfer my data to another Computer?
 
-    **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task List folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task List folder.
 
 
 ## COMMAND SUMMARY
 
 * **Todo** `todo DESCRIPTION`
+
 e.g. `todo CS2100 Homework`
 
 * **Event** `event DESCRIPTION /at DD/MM/YYYY HHMM`
+
 e.g. `event Tutorial /at 09/08/2019 1500`
 
 * **Deadline** `deadline DESCRIPTION /at DD/MM/YYYY HHMM`
+
 e.g. `deadline Homework /at 09/08/2019 1500`
 
 * **List** `list`
 
 * **Done** `done INDEX`
+
 e.g. `done 3`
 
 * **Delete** `delete INDEX`
+
 e.g. `delete 2`
 
 * **Find** `find KEYWORD`
+
 e.g. `find CS2100`
 
 * **Help** `help`

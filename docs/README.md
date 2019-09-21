@@ -24,7 +24,7 @@
 
 1. Double-click the file to start the app. The GUI should appear in a few seconds.
 
-![GUI](/UI.png)
+    ![GUI](/UI.png)
 
 5. Type the command in the command box and press Enter.
     eg. typing `help` and pressing Enter will display the commands.
@@ -51,12 +51,12 @@ Adds a task in the Task List.
     2. Adding Deadline: `deadline`
     Format: `deadline DESCRIPTION /at DD/MM/YYYY HHMM`
 
-Examples:
-* `event CS2103T /at 29/09/2019 1830`
-adds event CS2103T with date as 29th September 2019 and time of 6.30pm into the task list. 
+    Examples:
+    * `event CS2103T /at 29/09/2019 1830`
+    adds event CS2103T with date as 29th September 2019 and time of 6.30pm into the task list. 
 
-* `todo CS2100 Homework`
-adds todo CS2100 Homework into the task list.
+    * `todo CS2100 Homework`
+    adds todo CS2100 Homework into the task list.
 
 3. ### Listing all Tasks: `list`
 Shows a list of all tasks in the task list.
@@ -66,25 +66,25 @@ Format: `list`
 Marks the task as complete 
 Format: `done INDEX`
 
-Examples:
-* `done 3`
-Marks task number 3 on the list as done.
+    Examples:
+    * `done 3`
+    Marks task number 3 on the list as done.
 
 5. ### Deleting a task: `delete`
 Deletes the specified task from the task list.
 Format: `delete INDEX`
 
-Examples:
-* `delete 2`
-Deletes the 2nd task in the task list.
+    Examples:
+    * `delete 2`
+    Deletes the 2nd task in the task list.
 
 6. ### Finding a task: `find`
 Finds tasks whose description contain any of the given keywords.
 Format: `find KEYWORD`
 
-Examples:
-* `find CS2103T`
-Returns all tasks with `CS2103T` as description
+    Examples:
+    * `find CS2103T`
+    Returns all tasks with `CS2103T` as description
 
 7. ### Exiting the Program: `bye`
 Exits the program.
@@ -94,13 +94,14 @@ Format: `bye`
 Task list data is saved in the jar file automatically after any command that changes the data. 
 There is no need to save manually.
 
-Task list data is loaded from the jar file automatically when opening the program. 
-There is no need to load data manually.
+    Task list data is loaded from the jar file automatically when opening the program. 
+    There is no need to load data manually.
 
  
 ## FAQ
 **Q**: How do I transfer my data to another Computer?
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task List folder.
+
+    **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task List folder.
 
 
 ## COMMAND SUMMARY

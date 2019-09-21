@@ -61,14 +61,14 @@ Adds a new to-do task with description <TASK_DESCRIPTION>.
 Expected outcome:
 
 Adds a new deadline task with description <TASK_DESCRIPTION> and deadline <TASK_DEADLINE>.
-<TASK_DEADLINE> should be in the format "DD/MM/YYYY HHMM".
+<TASK_DEADLINE> should be in the format DD/MM/YYYY HHMM.
 
 ### `event <TASK_DESCRIPTION> /at <EVENT_TIME>`
 
 Expected outcome:
 
 Adds a new event task with description <TASK_DESCRIPTION> and event time <EVENT_TIME>.
-<EVENT_TIME> should be in the format "DD/MM/YYYY HHMM".
+<EVENT_TIME> should be in the format DD/MM/YYYY HHMM.
 
 ### `done <TASK_NUMBER>`
 

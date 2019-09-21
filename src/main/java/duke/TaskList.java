@@ -181,7 +181,7 @@ public class TaskList {
         String keyword = input.substring(5);
         ArrayList<Task> filtered = copy(this.tasks);
         String result = "";
-        result += "Here are the matching tasks in your list.";
+        result += "Here are the matching tasks in your list.\n";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(keyword)) {
                 result += tasks.get(i).toString() + "\n";

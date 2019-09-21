@@ -28,6 +28,6 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         format = new SimpleDateFormat("EEEE, MMM d, HH:mm");
-        return "[D]" + super.toString() + " (by: " + format.format(by) + ")";
+        return "[D]" + super.toString() + "(by: " + format.format(by) + ")";
     }
 }

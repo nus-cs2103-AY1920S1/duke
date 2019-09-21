@@ -12,7 +12,8 @@ import duke.execution.UserInterface;
  *  p.s. i'm not a furry i swear the uwus are just a joke :)
  */
 public class Duke{
-    private static final String PATHFILE = "src/main/data/list.txt";
+    //private static final String PATHFILE = "src/main/java/data/list.txt";
+    private static final String PATHFILE = "./data/list.txt";
     private UserInterface ui;
     private TaskManager tasks;
     private FileManager fileManager;

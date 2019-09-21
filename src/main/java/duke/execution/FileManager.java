@@ -30,13 +30,17 @@ public class FileManager {
      * @throws DukeException if save file is corrupted/cannot be found
      */
     public boolean initialize(String pathname, TaskManager tasks) throws DukeException{
-        saveList=new File(pathname);
+        File directory = new File("./data");
         boolean isNew;
         try {
+            if(!directory.exists()) {
+                directory.mkdirs();
+            }
+            saveList=new File(pathname);
             isNew = saveList.createNewFile();
+            editor = new FileWriter(saveList, true);
             if(!isNew){
                 sc = new Scanner(saveList);
-                editor = new FileWriter(saveList, true);
                 this.transferSavedFile(tasks);
             }
             return isNew;

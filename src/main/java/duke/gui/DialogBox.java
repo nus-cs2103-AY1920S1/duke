@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -38,9 +39,9 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayPicture.setImage(img);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         Circle circle = new Circle(45, 43, 40);
         displayPicture.setClip(circle);
-        this.setStyle("-fx-background-color: #D2D2D2");
     }
 
     /**

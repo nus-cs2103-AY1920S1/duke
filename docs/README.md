@@ -1,11 +1,11 @@
 # Bertrand's Duke Task App User Guide
 
-## 1. [Introduction]
+## 1. Introduction
 
-Bertrand's Duke app is a **Command-Line-Interface** Desktop-based application which allows you to create a **Tasklist** app which allows you to create, read, update and delete tasks. There are three kinds of tasks available to this application, namely **Todo**, **Deadline** and **Event** tasks. The application stores a copy local copy which will be updated each time a successful command is made.
+Bertrand's Duke app is a **Command-Line-Interface** Desktop-based application which allows you to create a **Tasklist** app which allows you to create, read, update and delete tasks. There are three kinds of tasks available to this application, namely **Todo**, **Deadline** and **Event** tasks. The application stores a local copy `(data/duke.txt)` which will be updated each time a successful command is made.
 
 ### *Example Image of Application* : 
-![Image of Bertrand's Duke](https://raw.githubusercontent.com/Berttwm/duke/master/docs/UI.png)
+![Image of Bertrand's Duke](https://raw.githubusercontent.com/Berttwm/duke/master/docs/Ui.png)
 
 ## 2. Quick Start
 

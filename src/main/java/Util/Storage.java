@@ -7,6 +7,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,6 +26,8 @@ public class Storage {
     private ArrayList<Task> storedList = new ArrayList<>();
     private String filePath;
 
+    private static final String FILE_PATH = "src/main/java/data/duke.txt";
+
     /**
      * Constructs a Storage object to interact with given file
      *
@@ -32,9 +36,12 @@ public class Storage {
      */
     public Storage(String filePath) throws Exception{
         this.filePath = filePath;
+        System.out.println(filePath);
         File file = new File(filePath);
+        System.out.println(file);
         try {
             if(!file.exists()) {
+                Files.createDirectories(Paths.get("data"));
                 file.createNewFile();
             }
             scanner = new Scanner(new File(filePath));

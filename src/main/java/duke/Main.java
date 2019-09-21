@@ -26,7 +26,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            stage.setTitle("Ask Bear!");
+            stage.setTitle("WoofPlanner - Ask bear to keep you on track!");
             fxmlLoader.<MainWindow>getController().showWelcome();
         } catch (IOException e) {
             e.printStackTrace();

@@ -11,9 +11,10 @@ Sample command:
 `todo Laundry`
 
 Expected outcome:
+
 `Got it. I've added this task:`\
 `[T][x] Laundry`\
-`Now you have X tasks in the list`\
+`Now you have X tasks in the list`
 
 ### Adding a new event task
 

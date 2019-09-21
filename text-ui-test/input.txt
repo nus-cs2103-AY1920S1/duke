@@ -1,0 +1,9 @@
+todo Draw Za Warudo
+deadline Do Homework /by Never
+event Watch Kurtzpel Weekly Brawl /at Mon 9pm - Mon 12pm
+list
+done 1
+list
+delete 2
+list
+bye

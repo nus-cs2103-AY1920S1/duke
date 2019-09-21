@@ -44,7 +44,7 @@ Examples:
 
 Expected Outcome:
 
-<img src="todo.png" width="254" height="108" />
+<img src="todo.PNG" width="254" height="108" />
 
 #### 2.3 Adding a deadline: `deadline` (alias `d`)
 Adds a deadline with the provided `DEADLINE_NAME` and date and time in the format `DD/MM/YYYY HHMM` to your list.
@@ -59,7 +59,7 @@ Examples:
 
 Expected Outcome:
 
-<img src="deadline.png" width="254" height="109" />
+<img src="deadline.PNG" width="254" height="109" />
 
 #### 2.4 Adding an event to be attended: `event` (alias `e`)
 Adds an event with the provided `EVENT_NAME` and date and time in the format `DD/MM/YYYY HHMM` to your list.
@@ -74,7 +74,7 @@ Examples:
 
 Expected Outcome:
 
-<img src="event.png" width="254" height="110" />
+<img src="event.PNG" width="254" height="110" />
 
 #### 2.5 Listing all tasks: `list` (alias `l`)
 Shows all tasks in your list.
@@ -83,7 +83,7 @@ Format: `list` or `l`
 
 Expected Outcome:
 
-<img src="list.png" width="254" height="129" />
+<img src="list.PNG" width="254" height="129" />
 
 #### 2.6 Updating name of task in your list: `update` (alias `u`)
 Updates name of specified (using `INDEX`) task in your list to `NEW_TASK_NAME`.
@@ -98,7 +98,7 @@ Examples:
 
 Expected Outcome:
 
-<img src="update.png" width="254" height="112" />
+<img src="update.PNG" width="254" height="112" />
 
 #### 2.7 Retrieving tasks by name: `find` (alias `f`)
 Finds tasks whose names contain any of the given `KEYWORD`. You may input multiple keywords.
@@ -113,7 +113,7 @@ Examples:
 
 Expected Outcome:
 
-<img src="find.png" width="254" height="106" />
+<img src="find.PNG" width="254" height="106" />
 
 #### 2.8 Marking a task as completed: `complete` (alias `c`)
 Marks specified (using `INDEX`) task on the list as completed.
@@ -128,7 +128,7 @@ Examples:
 
 Expected Outcome:
 
-<img src="complete.png" width="254" height="109" />
+<img src="complete.PNG" width="254" height="109" />
 
 #### 2.9 Removing a task: `remove` (alias `r`)
 Remove specified task from the list.
@@ -143,7 +143,7 @@ Examples:
 
 Expected Outcome:
 
-<img src="remove.png" width="254" height="113" />
+<img src="remove.PNG" width="254" height="113" />
 
 #### 2.10 Undoing previous command: `undo`
 Undo previous command and revert changes to the list of tasks.
@@ -152,7 +152,7 @@ Format: `undo`
 
 Expected Outcome:
 
-<img src="undo.png" width="254" height="113" />
+<img src="undo.PNG" width="254" height="113" />
 
 #### 2.11 Display input history: `history`
 Display all input you made into the application during the current session.
@@ -161,7 +161,7 @@ Format: `history`
 
 Expected Outcome:
 
-<img src="history.png" width="254" height="148" />
+<img src="history.PNG" width="254" height="148" />
 
 #### 2.12 Exiting the application: `exit`
 Exits the program.

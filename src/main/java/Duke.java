@@ -19,8 +19,8 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
             System.out.println(ui.showErrors(e.getMessage()));
@@ -60,9 +60,9 @@ public class Duke {
      * @param filePath the local path to the storage file
      */
     private Duke(String filePath) {
-        storage = new Storage(filePath);
         ui = new Ui();
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.readFromFile());
         } catch (DukeException e) {
             ui.showErrors(e.getMessage());

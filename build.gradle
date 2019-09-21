@@ -5,7 +5,6 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-
 checkstyle {
     toolVersion = '8.23'
 }
@@ -45,14 +44,11 @@ repositories {
     mavenCentral()
 }
 
-run {
-    standardInput = System.in
-}
-
-jar {
-    manifest {
-        attributes 'Main-Class': 'Duke'
-    }
+shadowJar {
+    archiveBaseName = "Duke"
+    archiveVersion = "2.0"
+    archiveClassifier = null
+    archiveAppendix = null
 }
 
 application {

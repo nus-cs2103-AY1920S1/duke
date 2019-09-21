@@ -6,12 +6,10 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Todo;
 
-import java.util.Scanner;
+import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.nio.file.Path;
 
 public class Storage {
     private List<Task> tasks;
@@ -23,10 +21,24 @@ public class Storage {
      *
      * @param filePath the local path to storage file
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         assert !filePath.isEmpty() : "File path not specified!";
         this.filePath = filePath;
         this.file = new File(filePath);
+
+        File directory = new File(String.valueOf(Path.of(filePath).getParent()));
+        if (!directory.isDirectory()) {
+            directory.mkdirs();
+        }
+
+        if (!file.isFile()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new DukeException("Error creating a file");
+            }
+        }
+
         this.tasks = new ArrayList<>();
     }
 
@@ -37,51 +49,45 @@ public class Storage {
      * @throws DukeException if local file not found or invalid date in saved file
      */
     public List<Task> readFromFile() throws DukeException {
-        Scanner sc;
         try {
-            if (file.createNewFile()) {
-                System.out.println("File created!");
-            } else {
-                System.out.println("File already exists");
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line;
+            // parse input and create tasks
+            while ((line = bufferedReader.readLine()) != null) {
+
+                // since task details are separated by | when saved
+                // refer to printForStorage method in Task component
+                String[] savedTask = line.split("\\|");
+
+                for (int i = 0; i < savedTask.length; i++) {
+                    savedTask[i] = savedTask[i].trim();
+                }
+
+                String taskType = savedTask[0];
+
+                switch (taskType) {
+                    case "T":
+                        createAndAddTodo(savedTask);
+                        break;
+
+                    case "D":
+                        createAndAddDeadline(savedTask);
+                        break;
+
+                    case "E":
+                        createAndAddEvent(savedTask);
+                        break;
+
+                    default:
+                        break;
+                }
             }
-            sc = new Scanner(file);
+            return tasks;
         } catch (IOException e) {
-            throw new DukeException("File cannot be created, please try again soon!");
+            throw new DukeException("Error creating and reading from file!");
         }
-
-        // parse input and create tasks
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-
-            // since task details are separated by | when saved
-            // refer to printForStorage method in Task component
-            String[] savedTask = line.split("\\|");
-
-            for (int i = 0; i < savedTask.length; i++) {
-                savedTask[i] = savedTask[i].trim();
-            }
-
-            String taskType = savedTask[0];
-
-            switch (taskType) {
-            case "T":
-                createAndAddTodo(savedTask);
-                break;
-
-            case "D":
-                createAndAddDeadline(savedTask);
-                break;
-
-            case "E":
-                createAndAddEvent(savedTask);
-                break;
-
-            default:
-                break;
-            }
-        }
-        sc.close();
-        return tasks;
     }
 
     /**

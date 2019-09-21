@@ -130,7 +130,7 @@ public class Parser {
     public static Command getCommand(String fullCommand, Ui ui) throws DukeException {
         String taskType = parseCommand(fullCommand);
 
-        // Initialize commannd with UnknownCommand
+        // Initialize command with UnknownCommand
         Command command = new UnknownCommand();
 
         switch (taskType) {

@@ -7,9 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -22,8 +25,10 @@ import java.util.Collections;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+//    @FXML
+//    private ImageView displayPicture;
     @FXML
-    private ImageView displayPicture;
+    private Circle circle;
 
     private DialogBox(String text, Image img) {
         try {
@@ -34,9 +39,12 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
-        displayPicture.setImage(img);
+
+        circle.setStroke(Color.SEASHELL);
+        circle.setFill(new ImagePattern(img));
+        circle.setEffect(new DropShadow(+30d, 0d, +2d, Color.DARKGRAY));
+//        displayPicture.setImage(img);
     }
 
     /**
@@ -50,12 +58,15 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color:snow; -fx-background-radius: 10 10 10 10;");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setStyle("-fx-background-color:silver; -fx-background-radius: 10 10 10 10;");
         return db;
     }
 }

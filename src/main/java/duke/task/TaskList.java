@@ -3,6 +3,7 @@ package duke.task;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * The operations of task list.
@@ -75,11 +76,17 @@ public class TaskList {
         return tasks;
     }
 
-    public Task editTask(int n, Task task) throws DukeException {
+    public Task editTask(int n, Date newTime) throws DukeException {
         if (n > tasks.size()) {
             throw new DukeException(" ☹ OOPS!!! Do not exist that task.");
         }
-        tasks.set(n - 1, task);
+        Task oldTask = tasks.get(n - 1);
+        if (oldTask.type != Type.D) {
+            throw new DukeException("☹ OOPS!!! This task cannot be edit.");
+        }
+        Deadline toBeEditTask = (Deadline) oldTask;
+        Task newTask = toBeEditTask.editTime(newTime);
+        tasks.set(n - 1, newTask);
 
         return tasks.get(n - 1);
     }

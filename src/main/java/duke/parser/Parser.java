@@ -54,9 +54,9 @@ public class Parser {
             }
             char num = fullCommand.charAt(5);
             int index = Character.getNumericValue(num);
-            String command = fullCommand.substring(7);
-            Task task = createTask(command);
-            return new EditCommand(index, task);
+            String newTimeString = fullCommand.substring(7);
+            Date newTime = stringToDate(newTimeString);
+            return new EditCommand(index, newTime);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

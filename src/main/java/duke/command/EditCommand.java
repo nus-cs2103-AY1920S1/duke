@@ -7,14 +7,15 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class EditCommand implements Command {
     int order;
-    Task task;
+    Date newTime;
 
-    public EditCommand(int order, Task task) {
+    public EditCommand(int order, Date newTime) {
         this.order = order;
-        this.task = task;
+        this.newTime = newTime;
     }
 
     @Override
@@ -25,8 +26,8 @@ public class EditCommand implements Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> taskList = tasks.getList();
-        tasks.editTask(order, task);
+        Task newTask = tasks.editTask(order, newTime);
         storage.saveFile(taskList);
-        return ui.showEdit(task, taskList.size(), order);
+        return ui.showEdit(newTask, taskList.size(), order);
     }
 }

@@ -5,8 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -24,13 +24,19 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/starlight.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        BackgroundSize backgroundSize = new BackgroundSize(400, 557, true, true, true, false);
+        BackgroundImage backImage = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, backgroundSize);
+        dialogContainer.setBackground(new Background(backImage));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello, I'm Duke. What can I do for you?", dukeImage)
         );
+//        Color.
+        sendButton.setStyle("-fx-background-color:lightblue;");
     }
 
     public void setDuke(Duke d) {

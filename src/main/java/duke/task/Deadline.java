@@ -46,4 +46,8 @@ public class Deadline extends Task {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HHmm");
         return String.format("%s | %s | %s | %s", type, doneState, description, formatter.format(time));
     }
+
+    public Task editTime(Date newTime) throws DukeException {
+        return new Deadline(this.description, newTime);
+    }
 }

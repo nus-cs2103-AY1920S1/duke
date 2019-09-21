@@ -2,3 +2,7 @@ E | 0 | swim in pool | westcoast
 T | 0 | sleep
 D | 0 | eee | 02/03/2000 2000
 E | 0 | swim | summer
+D | 0 | kjkjkj | 07/12/2021 0321
+T | 1 | jlkjkljk
+T | 0 | say hi
+T | 0 | sleep

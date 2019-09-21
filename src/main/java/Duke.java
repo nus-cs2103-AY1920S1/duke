@@ -5,13 +5,12 @@ import utils.Storage;
 import utils.TaskList;
 import utils.Ui;
 
-import java.text.ParseException;
 
 public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
-    private static final String filePath = "/home/abhinav/Desktop/2103T/duke/data/dukeTest.txt";
+    private static final String filePath = "data/duke.txt";
 
 
     /**

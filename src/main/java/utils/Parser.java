@@ -107,7 +107,6 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(ERROR_INPUT_FORMAT);
         }
-        System.out.println(recentCommands);
         return c;
 
     }

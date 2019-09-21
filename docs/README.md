@@ -15,8 +15,10 @@ Sample command:
 
 Expected outcome:
 
-`Got it. I've added this task:`\
-`[T][x] Laundry`\
+`Got it. I've added this task:`
+
+`[T][x] Laundry`
+
 `Now you have X tasks in the list`
 
 ### 2. Adding a new event task

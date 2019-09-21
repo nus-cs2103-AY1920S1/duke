@@ -66,11 +66,17 @@ public class DeadlineCommand extends Command {
         return newDeadline;
     }
 
+    /**
+     * Checks if date format is in the sequence 'DD/MM/YYYY'.
+     *
+     * @param dateString Unparsed date string.
+     * @throws DukeException Exception.
+     */
     public void checkValidDate(String dateString) throws DukeException {
         int count = 0;
         for (char c : dateString.toCharArray()) {
             if (c == '/') {
-                count ++;
+                count = count + 1;
             }
         }
 

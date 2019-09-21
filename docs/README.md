@@ -43,7 +43,7 @@ Deadline task can be added via the following format:
 deadline [deadline_name] /by [deadline_date]
 
 [deadline_date] must be of the following format:
-_DD/MM/YYYY HHMM_
+__DD/MM/YYYY HHMM__
 
 Sample command:
 
@@ -83,7 +83,7 @@ Possible outcome 2:
 `You can do better! :)`
 
 ### 5. Viewing all statistics
-Aside from task-related statistics, Obot can also give statistics regarding the _total commmands entered, total tasks deleted and total tasks completed_. These statistics will consider tasks that have previously been marked completed but deleted by the user. 
+Aside from task-related statistics, Obot can also give statistics regarding the __total commands entered, total tasks deleted__ and __total tasks completed__. These statistics will consider tasks that have previously been marked completed but deleted by the user. 
 
 To view all statistics (which also included the tasks completed in the current day), enter the following sample command:
 

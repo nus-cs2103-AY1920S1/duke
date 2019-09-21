@@ -33,8 +33,10 @@ Sample command:
 
 Expected outcome:
 
-`Got it. I've added this task:`\
-`[E][X] Exam (at: MPSH1-C)`\
+`Got it. I've added this task:`
+
+`[E][X] Exam (at: MPSH1-C)`
+
 `Now you have X tasks in the list`
 
 ### 3. Adding a new deadline task
@@ -53,8 +55,10 @@ Sample command:
 
 Expected outcome:
 
-`Got it. I've added this task:`\
-`[D][X] CS Quiz (by: 31st of December 2019, 11.59pm)`\
+`Got it. I've added this task:`
+
+`[D][X] CS Quiz (by: 31st of December 2019, 11.59pm)`
+
 `Now you have X tasks in the list`
 
 ### 4. Viewing task-related statistics
@@ -76,12 +80,14 @@ Sample command:
 
 Possible outcome 1:
 
-`Events completed today: 1`\
+`Events completed today: 1`
+
 `Well Done!`
 
 Possible outcome 2:
 
-`Events completed today: 0`\
+`Events completed today: 0`
+
 `You can do better! :)`
 
 ### 5. Viewing all statistics
@@ -95,20 +101,25 @@ Sample command:
 
 Possible outcome:
 
-`Listing all statistics`\
-`Total Commands Executed: 150`\
+`Listing all statistics`
+
+`Total Commands Executed: 150`
+
 `Total Tasks Deleted: 20`
 
 
-`Total To-Dos Completed: 12`\
+`Total To-Dos Completed: 12`
+
 `Total Todos Completed TODAY: 2`
 
 
-`Total Deadlines Completed: 7`\
+`Total Deadlines Completed: 7`
+
 `Total Deadlines Completed TODAY: 1`
 
 
-`Total Events Completed: 4`\
+`Total Events Completed: 4`
+
 `Total Events Completed TODAY: 2`
 
 ### 6. Resetting global statistics
@@ -123,22 +134,26 @@ To view the outcome, view all statistics with:
 
 Expected outcome:
 
-`Listing all statistics`\
+`Listing all statistics`
+
 `Total Commands Executed: 1` - Number of total commands executed will be 1 as `stats all` has been executed.
 
 
 `Total Tasks Deleted: 0`
 
 
-`Total To-Dos Completed: 0`\
+`Total To-Dos Completed: 0`
+
 `Total Todos Completed TODAY: 2` - Dynamic statistic based on when a `todo` was marked completed.
 
 
-`Total Deadlines Completed: 0`\
+`Total Deadlines Completed: 0`
+
 `Total Deadlines Completed TODAY: 1` - Dynamic statistic based on when a `deadline` was marked completed.
 
 
-`Total Events Completed: 0`\
+`Total Events Completed: 0`
+
 `Total Events Completed TODAY: 2` - Dynamic statistic based on when aa `event` was marked completed.
 
 ### 7. Exiting the application

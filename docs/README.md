@@ -172,7 +172,7 @@ Expected outcome:
     [T][✔] borrow a book
     You now have 5 tasks in this list
     
- ### `bye` - Exits Duke
+### `bye` - Exits Duke
 
 Duke will close the application
 

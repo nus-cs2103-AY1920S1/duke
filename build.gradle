@@ -2,8 +2,9 @@ plugins {
     id 'java'
     id 'application'
 	id 'checkstyle'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 	id 'com.github.johnrengelman.shadow' version '5.1.0'
-	id 'org.openjfx.javafxplugin' version '0.0.7'
+
 }
 
 checkstyle {
@@ -38,13 +39,13 @@ dependencies {
     compile 'joda-time:joda-time:2.9.4'
 }
 
-test {
-    useJUnitPlatform()
-}
-
 javafx {
     version = "11.0.2"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+test {
+    useJUnitPlatform()
 }
 
 

@@ -73,7 +73,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-list
+     * Returns the Duke's <code>DialogBox</code>.
      * @param text Duke's response.
      * @param img Duke's photo.
      * @return <code>DialogBox</code> for user.

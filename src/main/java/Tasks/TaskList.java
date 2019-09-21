@@ -70,6 +70,33 @@ public class TaskList {
     }
 
     /**
+     * Finds duplicate of input task description in current taskList
+     *
+     * @param input is the description of task
+     * @param taskType is the task type
+     * return true if description of input equals description of a task in tasklist and
+     * if the task is an instance of current task
+     */
+    public boolean isDuplicate(String input, String taskType){
+        boolean isDuplicated = false;
+        String taskTypeToCheck = "";
+        for(int i = 0; i < taskList.size(); i++) {
+            if(taskList.get(i) instanceof Todo){
+                taskTypeToCheck = "Todo";
+            } else if(taskList.get(i) instanceof Event){
+                taskTypeToCheck = "Event";
+            } else if(taskList.get(i) instanceof Deadline){
+                taskTypeToCheck = "Deadline";
+            }
+            if(input.trim().equals(taskList.get(i).getDescription().trim()) &&
+            taskType.equals(taskTypeToCheck)){
+                isDuplicated = true;
+            }
+        }
+        return isDuplicated;
+    }
+
+    /**
      * Getter for ArrayList of Tasks
      *
      * @return ArrayList of Tasks

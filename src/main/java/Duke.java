@@ -135,7 +135,7 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    public String showWelcome() {
-        return "Hello";
+    public String startOfShow() {
+        return ui.showWelcome();
     }
 }

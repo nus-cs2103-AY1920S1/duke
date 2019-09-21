@@ -43,8 +43,8 @@ public class Ui {
     public String readInput(String input) throws Exception, DukeException {
         String toReturn = "";
             if(input.equals("bye")) {
-               toReturn += showExit();
-                return toReturn;
+               showExit();
+               return toReturn;
             }
             if(input.equals("list")) {
                 toReturn += tasksList.showAllTasks();
@@ -70,25 +70,25 @@ public class Ui {
                     try {
                         input.substring(5,6);
                     } catch(Exception e) {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, todo cannot be empty");
+                        return ":( OOPS!!! I'm sorry, todo cannot be empty";
                     }
                     toReturn += showTodo(input);
                 }
-                if(input.substring(0,8).equals("deadline")) {
-                    try {
-                        input.substring(9,10);
-                    } catch (Exception e){
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    }
-                    toReturn += showDeadline(input);
-                }
-                if(input.substring(0,5).equals("event")) {
+                else if(input.substring(0,5).equals("event")) {
                     try {
                         input.substring(6,7);
                     } catch (Exception e){
-                        throw new DukeException("☹ OOPS!!! The description of an Event cannot be empty.");
+                        return":( OOPS!!! The description of an Event cannot be empty.";
                     }
                     toReturn += showEvent(input);
+                }
+                 else if(input.substring(0,8).equals("deadline")) {
+                    try {
+                        input.substring(9,10);
+                    } catch (Exception e){
+                        return ":( OOPS!!! The description of a deadline cannot be empty.";
+                    }
+                    toReturn += showDeadline(input);
                 }
             }
         if(toReturn.equals("")) toReturn += ("OOPS!!! I don't know what that means");
@@ -99,14 +99,14 @@ public class Ui {
      * shows Welcome message when called
      */
     public String showWelcome() {
-        return "Hello! I'm Duke\nWhat can I do for you?";
+        return "Welcome to Bertrand's\n  DUKE PROGRAM  \n Please enter your command";
     }
 
     /**
      * shows Exit message when called
      */
-    public String showExit() {
-        return "Bye. Hope to see you again soon!";
+    public void showExit() {
+        System.exit(0 );
     }
 
     /**
@@ -128,6 +128,11 @@ public class Ui {
      * and delete that task from TaskList
      */
     public String showDelete(String input) throws Exception{
+//        try {
+//
+//        } catch (Exception e){
+//            return ""
+//        }
         int itemIndex = Integer.parseInt(input.substring(7)) - 1;
         if((itemIndex + 1) > tasksList.getTaskList().size()) {
             return ("failed to delete item, please try again.");
@@ -140,14 +145,23 @@ public class Ui {
      * shows todo message when called and performs read on storage
      * and appends a todo task in TaskList
      */
-    public String showTodo(String input){
+    public String showTodo(String input) throws Exception{
         String inputAdd = input.substring(5);
+        try{
+            Todo todo = new Todo(inputAdd, "");
+        } catch (Exception e){
+            return ":( todo format is wrong.";
+        }
         Todo todo = new Todo(inputAdd, "");
+        if(detectDuplicate(inputAdd, "Todo")){
+            return "Sorry, duplicate of this Todo task detected";
+        }
         tasksList.addTask(todo);
         storage.writeTodo(todo);
         String toReturn = "";
         toReturn += ("Got it. I've added this task:\n");
-        toReturn += ("  " + todo);
+        toReturn += ("  " + todo + "\n");
+        toReturn += ("Now you have " + tasksList.getTaskList().size() + " in the list.");
         return toReturn;
     }
 
@@ -158,13 +172,28 @@ public class Ui {
     public String showDeadline(String input) throws Exception{
         String inputAddArr[] = input.split(" /by ");
         String inputAdd1 = inputAddArr[0].substring(9);
+        try {
+            String a = inputAddArr[1];
+        } catch (Exception e){
+            return ":( deadline requires a /by command.";
+        }
+        try {
+            readDate(inputAddArr[1]);
+        } catch (Exception e){
+            return ":( deadline /by time format is wrong\n  Correct format is dd/MM/YYYY hhhh (24 hours format)";
+        }
+        if(detectDuplicate(inputAddArr[0], "Deadline")){
+            return "Sorry, duplicate of this Deadline task detected";
+        }
         String inputAdd2 = readDate(inputAddArr[1]);
         Deadline deadline = new Deadline(inputAdd1, inputAdd2);
         tasksList.addTask(deadline);
         storage.writeDeadline(deadline);
         String toReturn = "";
         toReturn += ("Got it. I've added this task:\n");
-        toReturn += ("  " + deadline);
+        toReturn += ("  " + deadline + "\n");
+        toReturn += ("Now you have " + tasksList.getTaskList().size() + " in the list.");
+
         return toReturn;
     }
 
@@ -175,13 +204,27 @@ public class Ui {
     public String showEvent(String input) throws Exception{
         String inputAddArr[] = input.split(" /at ");
         String inputAdd1 = inputAddArr[0].substring(6);
+        try {
+            String a = inputAddArr[1];
+        } catch (Exception e){
+            return ":( event requires a /at command.";
+        }
+        try {
+            readDate(inputAddArr[1]);
+        } catch (Exception e){
+            return ":( event /at time format is wrong\n  Correct format is dd/MM/YYYY hhhh (24 hours format)";
+        }
+        if(detectDuplicate(inputAddArr[0], "Event")){
+            return "Sorry, duplicate of this Event task detected";
+        }
         String inputAdd2 = readDate(inputAddArr[1]);
         Event event = new Event(inputAdd1, inputAdd2);
         tasksList.addTask(event);
         storage.writeEvent(event);
         String toReturn = "";
         toReturn += ("Got it. I've added this task: \n");
-        toReturn += ("  " + event);
+        toReturn += ("  " + event + "\n");
+        toReturn += ("Now you have " + tasksList.getTaskList().size() + " in the list.");
         return toReturn;
     }
 
@@ -228,5 +271,16 @@ public class Ui {
             toReturn += tempTaskList.getTaskList().get(i);
         }
         return toReturn;
+    }
+
+    /**
+     * Detects any duplicate and if an instance of the task is found in taskList
+     *
+     * @param input task description you want to detect for duplicate in list.
+     * @param taskType the taskType of the input
+     *  returns true if task description and it's task type is duplicated
+     */
+    public boolean detectDuplicate(String input, String taskType){
+        return tasksList.isDuplicate(input, taskType);
     }
 }

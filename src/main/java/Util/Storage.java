@@ -1,14 +1,14 @@
 package Util;
 
+import Exception.DukeException;
 import Tasks.*;
 
-import java.io.*;
-
-import java.util.*;
-
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
-
-import Exception.DukeException;
 
 /**
  * Storage class to handle all interactions between saving, reading and writing
@@ -41,7 +41,6 @@ public class Storage {
         } catch (Exception e) {
             System.out.println("Error in reading file");
         }
-
         fw = new FileWriter(file, true);
         bw = new BufferedWriter(fw);
         pw = new PrintWriter(bw);

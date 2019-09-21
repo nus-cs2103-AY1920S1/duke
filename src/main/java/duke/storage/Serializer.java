@@ -47,7 +47,7 @@ public class Serializer {
     }
 
     private String[] tokenize(String input) {
-        return input.split("\\|");
+        return input.split(" \\| ");
     }
 
     private Task deserializeTodo(String[] tokens) throws InvalidTaskDukeException {

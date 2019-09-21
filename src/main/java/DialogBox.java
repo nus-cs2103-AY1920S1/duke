@@ -28,6 +28,7 @@ import javafx.scene.text.Font;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
     @FXML
@@ -53,6 +54,7 @@ public class DialogBox extends HBox {
         this.setSpacing(5);
         formatDialog(text);
         Circle clip = new Circle(50, 50, 37.5);
+        dialog.setMinSize(200, Label.USE_PREF_SIZE + 50);
         displayPicture.setClip(clip);
     }
 
@@ -63,6 +65,25 @@ public class DialogBox extends HBox {
         dialog.setTextOverrun(OverrunStyle.CLIP);
     }
 
+    private String generateCssLayout(boolean isDuke) {
+        String insets = isDuke
+                ? "-fx-border-insets: 5 40 20 20;\n"
+                : "-fx-border-insets: 5 20 20 40;\n";
+
+        String cssLayout = "-fx-border-color: white;\n"
+                + insets
+                + "-fx-border-width: 2;\n"
+                + "-fx-border-radius: 5;\n"
+                + "-fx-border-style: solid;\n"
+                + "-fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.9), 10, 0, 0, 0);\n";
+
+        return cssLayout;
+    }
+
+    private void setBorder(boolean isDuke) {
+        String cssLayout = generateCssLayout(isDuke);
+        this.setStyle(cssLayout);
+    }
     private void setBackground(boolean isDuke) {
         Color c = isDuke
                 ? Color.DARKSLATEBLUE
@@ -94,7 +115,9 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setPrefHeight(db.getPrefHeight());
         db.setBackground(false);
+        db.setBorder(false);
         return db;
     }
 
@@ -106,7 +129,9 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setPrefHeight(db.getPrefHeight());
         db.setBackground(true);
+        db.setBorder(true);
         db.flip();
         return db;
     }

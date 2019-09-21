@@ -37,7 +37,8 @@ public class Parser {
     }
 
     private boolean isNullaryCommand(String cleanedInput) {
-        return cleanedInput.startsWith("list") || cleanedInput.startsWith("bye") || cleanedInput.startsWith("help");
+        return cleanedInput.startsWith("list") || cleanedInput.startsWith("bye")
+                || cleanedInput.startsWith("help") || cleanedInput.startsWith("save");
     }
 
     private Command makeNullaryCommand(String cleanedInput) {
@@ -45,6 +46,8 @@ public class Parser {
             return new ListCommand();
         } else if (cleanedInput.startsWith("bye")) {
             return new ExitCommand();
+        } else if (cleanedInput.startsWith("save")) {
+            return new SaveCommand();
         } else {
             return new HelpCommand();
         }

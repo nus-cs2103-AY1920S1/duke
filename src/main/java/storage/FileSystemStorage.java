@@ -9,12 +9,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Storage that reads and writes tasks to a byte file in local system memory.
+ * Storage class that handles the reading and writing of tasks to a storage file found in the local machine's file
+ * system. This class will create a new storage file in the file system of the local machine if it does not already
+ * exist. If not, it will read and write to the file corresponding to specified path.
  */
 public class FileSystemStorage implements Storage {
     private String storageFilePath;

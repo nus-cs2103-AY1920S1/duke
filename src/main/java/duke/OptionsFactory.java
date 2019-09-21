@@ -2,6 +2,7 @@ package duke;
 
 import error.storage.StorageException;
 import storage.FileSystemStorage;
+import storage.InMemStorage;
 import storage.Storage;
 
 import ui.UiController;
@@ -40,7 +41,7 @@ public class OptionsFactory {
         if (isPersistentDataEnabled) {
             storage = OptionsFactory.getPersistentStorage();
         } else {
-            storage = null;
+            storage = new InMemStorage();
         }
 
         return getOptions(uiController, storage);
@@ -54,7 +55,7 @@ public class OptionsFactory {
         } catch (StorageException e) {
             System.out.println("Unable to access storage file.");
             System.out.println("Starting the app without a persistent file storage.");
-            return null;
+            return new InMemStorage();
         }
     }
 

@@ -16,7 +16,7 @@ public class HelpCommand extends Command {
         lines.append("find - Filter through tasks. \n\tUsage: find <keyword>\n");
         lines.append("list - Lists all tasks. \n\tUsage: list\n");
         lines.append("help - Show the help instructions. \n\tUsage: help\n");
-        lines.append("bye - Closes PokeTask. \n\tUsage: bye\n");
+        lines.append("bye - Closes PokéTask. \n\tUsage: bye\n");
         ui.append(lines.toString());
     }
 }

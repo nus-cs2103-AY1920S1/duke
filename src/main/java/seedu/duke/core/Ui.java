@@ -26,12 +26,15 @@ public class Ui {
             + "What can I do for you?\n"
             + "________________________________________________________________________________________________";
 
+    /**
+     * Constructor for Ui which handles all user interface and loads properties by default.
+     */
     public Ui() {
         prop = new Properties();
         try {
             InputStream inputStream = new FileInputStream("src/main/resources/duke.properties");
             prop.load(inputStream);
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }

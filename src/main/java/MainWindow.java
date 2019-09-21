@@ -24,6 +24,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private static final String EXIT_MESSAGE = "Bye! See you again :-)";
+
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -35,6 +36,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         Background bg = getBackgroundImage();
         dialogContainer.setBackground(bg);
+        greet();
     }
 
     private Background getBackgroundImage() {
@@ -50,8 +52,11 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
-    private void saveTasks() {
-        duke.saveTasks();
+    private void greet() {
+        String output = "Hello! I am Duke.";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(output, dukeImage)
+        );
     }
 
     /**

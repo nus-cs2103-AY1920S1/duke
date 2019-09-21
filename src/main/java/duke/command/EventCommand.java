@@ -32,7 +32,7 @@ public class EventCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         if (taskDescription.matches("\\s*")) {
-            throw new EmptyTaskDescriptionException("OOPS!!! The description of a task cannot be empty.");
+            throw new EmptyTaskDescriptionException("Please enter a description for your task!");
         }
         Task currentTask = new EventTask(taskDescription, taskTime);
         taskList.addTask(currentTask);

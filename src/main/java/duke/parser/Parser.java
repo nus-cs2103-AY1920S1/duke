@@ -42,8 +42,13 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the instruction in the given String.
      */
-    private static String parseInstruction(String input) {
-        return input.split(" ", 2)[0];
+    private static String parseInstruction(String input) throws IncorrectNoteFormatException {
+        try {
+            return input.split(" ", 2)[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IncorrectNoteFormatException("Please write the note in the format 'note write <note title> |"
+                    + " <note contents>'!");
+        }
     }
     
     /**
@@ -52,8 +57,12 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the index integer value in the given String.
      */
-    private static int parseIndex(String input) {
-        return Integer.parseInt(input.split(" ", 2)[1]);
+    private static int parseIndex(String input) throws InvalidInstructionException {
+        try {
+            return Integer.parseInt(input.split(" ", 2)[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInstructionException("Please enter an index number!");
+        }
     }
     
     /**
@@ -62,8 +71,12 @@ public class Parser {
      * @param input The inputted String that the user searches for.
      * @return Returns the expression searched for by the user, as a String.
      */
-    private static String parseSearchPhrase(String input) {
-        return input.split(" ", 2)[1];
+    private static String parseSearchPhrase(String input) throws InvalidInstructionException {
+        try {
+            return input.split(" ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInstructionException("Please enter a search phrase for your tasks!");
+        }
     }
     
     /**
@@ -72,8 +85,12 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the description in the given String.
      */
-    private static String parseToDoDescription(String input) {
-        return input.split(" ", 2)[1];
+    private static String parseToDoDescription(String input) throws InvalidInstructionException {
+        try {
+            return input.split(" ", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInstructionException("Please enter a description for your task!");
+        }
     }
     
     /**
@@ -82,8 +99,12 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns the description in the given String.
      */
-    private static String parseNonToDoContent(String input) {
-        return input.split("deadline|event", 2)[1];
+    private static String parseNonToDoContent(String input) throws InvalidInstructionException {
+        try {
+            return input.split("deadline|event", 2)[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInstructionException("Please enter a description for your task!");
+        }
     }
     
     /**
@@ -103,12 +124,16 @@ public class Parser {
      * @param input The inputted String given by the user.
      * @return Returns a LocalDateTime object representing the time of the Task.
      */
-    private static LocalDateTime parseNonToDoTime(String input) {
-        String taskTimeBeforeParse = input.split("/by|/at", 2)[1].strip();
-        String[] taskTimeParsed = taskTimeBeforeParse.split("[ /]");
-        return LocalDateTime.of(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]),
-                Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
-                Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
+    private static LocalDateTime parseNonToDoTime(String input) throws InvalidInstructionException {
+        try {
+            String taskTimeBeforeParse = input.split("/by|/at", 2)[1].strip();
+            String[] taskTimeParsed = taskTimeBeforeParse.split("[ /]");
+            return LocalDateTime.of(Integer.parseInt(taskTimeParsed[2]), Integer.parseInt(taskTimeParsed[1]),
+                    Integer.parseInt(taskTimeParsed[0]), Integer.parseInt(taskTimeParsed[3].substring(0, 2)),
+                    Integer.parseInt(taskTimeParsed[3].substring(2, 4)));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInstructionException("Please enter a description for your task!");
+        }
     }
     
     /**
@@ -169,10 +194,15 @@ public class Parser {
      */
     private static Note parseWriteNote(String noteContents) throws IncorrectNoteFormatException {
         if (!noteContents.contains("|")) {
-            throw new IncorrectNoteFormatException("Please write the note in the format "
-                    + "'note write <note title> | <note contents>'!");
+            throw new IncorrectNoteFormatException("Please write the note in the format 'note write <note title> |"
+                    + " <note contents>'!");
         } else {
-            noteContents = noteContents.split(" ", 2)[1];
+            try {
+                noteContents = noteContents.split(" ", 2)[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new IncorrectNoteFormatException("Please write the note in the format 'note write <note title> |"
+                        + " <note contents>'!");
+            }
             String[] noteParsed = noteContents.split(" \\| ");
             return new Note(noteParsed[0], noteParsed[1]);
         }
@@ -184,8 +214,12 @@ public class Parser {
      * @param notePath The file path of the Note to be read.
      * @return The Note at the specified file path.
      */
-    private static Note parseReadNote(String notePath) {
-        return new Note(notePath.split(" ", 2)[1]);
+    private static Note parseReadNote(String notePath) throws InvalidNoteInstructionException{
+        try {
+            return new Note(notePath.split(" ", 2)[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidNoteInstructionException("Please include a note name to read!");
+        }
     }
     
     /**
@@ -194,8 +228,12 @@ public class Parser {
      * @param notePath The file path of the Note to be deleted.
      * @return The Note at the specified file path.
      */
-    private static Note parseDeleteNote(String notePath) {
-        return new Note(notePath.split(" ", 2)[1]);
+    private static Note parseDeleteNote(String notePath) throws InvalidNoteInstructionException {
+        try {
+            return new Note(notePath.split(" ", 2)[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new InvalidNoteInstructionException("Please include a note name to delete!");
+        }
     }
     
     /**
@@ -248,7 +286,8 @@ public class Parser {
                 throw new InvalidNoteInstructionException("Please input a valid note instruction!");
             }
         default:
-            throw new InvalidInstructionException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new InvalidInstructionException("That's not a valid instruction! Please type 'help' for a full list "
+                    + "of instructions!");
         }
     }
 }

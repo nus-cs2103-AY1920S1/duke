@@ -71,7 +71,7 @@ public class Storage {
                 returnTaskList.add(currentTask);
                 break;
             default:
-                throw new InvalidStoredTaskFormatException("Format of stored Tasks is incorrect! Please delete the "
+                throw new InvalidStoredTaskFormatException("Format of stored Tasks is incorrect! Please check the "
                         + "file 'CurrentTaskList.txt'");
             }
         }

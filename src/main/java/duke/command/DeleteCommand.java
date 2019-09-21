@@ -30,16 +30,16 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException {
         if (taskList.getSize() == 0) {
-            throw new EmptyTaskListException("OOPS!!! You have no tasks currently stored in your list!");
+            throw new EmptyTaskListException("You have no tasks currently stored in your list!");
         }
         try {
             Task currentTask = taskList.deleteTask(index - 1);
             storage.writeSavedList(taskList.getList());
             return ui.showAfterDeletingTask(currentTask, taskList.getSize());
         } catch (NumberFormatException e) {
-            throw new NotAnIntegerTaskListException("OOPS!!! Please enter an integer after 'delete'!");
+            throw new NotAnIntegerTaskListException("Please enter an integer after 'delete'!");
         } catch (IndexOutOfBoundsException e) {
-            throw new InvalidIntegerTaskListException("OOPS!!! Please enter a valid task number!");
+            throw new InvalidIntegerTaskListException("Please enter a valid task number!");
         }
     }
 }

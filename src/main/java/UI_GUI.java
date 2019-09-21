@@ -112,8 +112,7 @@ public class UI_GUI extends Application implements UI {
             isExit = handleUserInput();
             if (duke.isExit()) {
                 try {
-                    Thread.sleep(1000);
-
+                    //Thread.sleep(1000);
                 } catch (Exception E) {
                     System.out.println("Wait failed");
                 }
@@ -125,8 +124,7 @@ public class UI_GUI extends Application implements UI {
             isExit = handleUserInput();
             if (duke.isExit()) {
                 try {
-                    Thread.sleep(1000);
-
+                    //Thread.sleep(1000);
                 } catch (Exception E) {
                     System.out.println("Wait failed");
                 }

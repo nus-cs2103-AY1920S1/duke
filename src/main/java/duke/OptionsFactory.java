@@ -17,7 +17,7 @@ import ui.UiType;
 public class OptionsFactory {
 
     private static String getDefaultStorageFilePath() {
-        return System.getProperty("user.home") + "/Duke/duke.txt";
+        return System.getProperty("user.home") + "/Duke/tasks.DAT";
     }
 
     /**

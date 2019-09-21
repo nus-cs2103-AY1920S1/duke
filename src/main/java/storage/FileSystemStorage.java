@@ -25,7 +25,8 @@ public class FileSystemStorage implements Storage {
     }
 
     /**
-     * Returns an instance of a FileSystemStorage that reads and writes to a file path.
+     * Returns an instance of a FileSystemStorage that reads and writes to a file path. A new file is created
+     * at the file path if it does not already exist.
      * @param storageFilePath file path to read and write tasks
      * @return FileSystemStorage instance
      * @throws StorageException if unable to read file path

@@ -88,4 +88,13 @@ public abstract class Task implements Serializable {
             return String.format("%s (%s)", description, timeFrame.getDescription());
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Task) {
+            return ((Task) o).getUuid().equals(this.uuid);
+        } else {
+            return false;
+        }
+    }
 }

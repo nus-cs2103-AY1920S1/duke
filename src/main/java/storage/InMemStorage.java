@@ -3,6 +3,7 @@ package storage;
 import duke.task.Task;
 import error.storage.StorageException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,10 @@ import java.util.List;
  */
 public class InMemStorage implements Storage {
     public List<Task> tasks;
+
+    public InMemStorage() {
+        this.tasks = new ArrayList<>();
+    }
 
     /**
      * Method used by the program to read current list of tasks from storage.

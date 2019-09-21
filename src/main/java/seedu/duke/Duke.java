@@ -37,6 +37,7 @@ public class Duke {
             Ui.printLoadingError();
             tasks = new TaskList();
         }
+        assert (tasks != null);     // Duke's taskList should never be null after the constructor is complete.
     }
 
     /**

@@ -23,7 +23,7 @@ public class Ui {
     private static String GREETINGMSG =
             "________________________________________________________________________________________________ \n"
             + "Hello! I'm Duke\n"
-            + "What can I do for you?\n"
+            + "What can I  do for you?\n"
             + "________________________________________________________________________________________________";
 
     /**
@@ -32,7 +32,7 @@ public class Ui {
     public Ui() {
         prop = new Properties();
         try {
-            InputStream inputStream = new FileInputStream("src/main/resources/duke.properties");
+            InputStream inputStream = new FileInputStream("data/duke.properties");
             prop.load(inputStream);
         } catch (IOException e) {
             System.out.println(e);

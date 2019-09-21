@@ -9,7 +9,7 @@ Graphical User Interface (GUI).
 2. Download the latest `planner.jar` [here](https://github.com/junhuplim/duke/releases/tag/A-Release).
 3. Copy the file to the folder you want to use as the home folder for your list of tasks.
 4. Double click the file to start the app. The GUI should appear in a few seconds.
-![WoofPlanner](startup.png)
+  ![WoofPlanner](startup.png)
 
 ## 2. Features
 Words in `UPPER_CASE` are the task names to be filled in by the user. 
@@ -32,7 +32,7 @@ Example:
 * `deadline CS2103 homework /by 20/09/2019 10:00`
 * `deadline project slides /by 12/10/2019 20:30`
 
-![Deadline](deadline.png)
+  ![Deadline](deadline.png)
 
 #### 2.3 `event`
 Adds an event to be done to the task list.
@@ -43,12 +43,12 @@ Example:
 * `event project meeting /at 22/09/2019 13:00`
 * `event family dinner /at 23/09/2019 20:00`
 
-![Event](event.png)
+  ![Event](event.png)
 
 #### 2.4 `list`
 Lists out all the tasks in the task list.
 
-![List](list.png)
+  ![List](list.png)
 
 Format: `list`
 
@@ -60,7 +60,7 @@ Format: `delete INDEX`
 Example:
 * `delete 2` deletes the second task from the task list.
 
-![Delete](delete.png)
+  ![Delete](delete.png)
 
 #### 2.6 `done`
 Completes a task with the index from the task list.
@@ -70,7 +70,7 @@ Format: `done INDEX`
 Example: 
 * `done 3` completes the third task from the task list.
 
-![Done](done.png)
+  ![Done](done.png)
 
 #### 2.7 `find`
 Find a task whose name contains the input keyword from the task list.
@@ -80,7 +80,7 @@ Format: `find KEYWORD`
 Example:
 * `find dinner` finds tasks with the word `dinner` from the task lists.
 
-![Find](find.png)
+  ![Find](find.png)
 
 #### 2.8 `bye`
 Exits the program after a short delay.

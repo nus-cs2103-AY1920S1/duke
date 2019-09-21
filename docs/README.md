@@ -18,6 +18,10 @@ can add the relevant date when creating the task.
 List the tasks you have in your current list 
 of tasks.
 
+### Finding tasks
+Duke let's you enter tasks that you have entered previously
+based on the keyword in your search.
+
 ### Mark tasks as completed
 When you finish a task, you can indicate that 
 you have completed it.
@@ -107,6 +111,22 @@ Here are the tasks in your list:
 2.[E][✗] project meeting (at: 10-10-2019 18:00)
 3.[D][✗] programming assignment (by: 11-10-2019 18:00)
 ```
+### `find <search keyword>` - Search for the task
+
+Finds matching tasks from your list, if any, based on your search
+keyword.
+
+Example of usage:
+
+`find programming`
+
+Expected outcome:
+
+```$xslt
+Here are the matching tasks in your list:
+3.[D][✗] programming assignment (by: 11-10-2019 18:00)
+```
+
 ### `done <task id>` - Mark a task as completed
 
 Mark a given task as completed. In order to mark the right task, remember to use `list` first to check the id

@@ -7,7 +7,7 @@
   3.3. [Listing all tasks](#33-listing-all-tasks) : `list`  
   3.4. [Marking a task as done](#34-marking-a-task-as-done) : `done`   
   3.5. [Deleting a task](#35-deleting-a-task) : `delete`    
-  3.6. [Searching for a task by keyword(s)](#36-searching-a-task-by-keyword) : `find`  
+  3.6. [Searching for a task by keyword(s)](#36-searching-for-a-task-by-keyword(s)) : `find`  
   3.7. [Undoing and redoing commands](#37-undoing-and-redoing-commands) : `undo`, `redo`        
   3.8. [Clearing the window](#38-clearing-the-window) : `clear`    
   3.9. [Exiting the program](#39-exiting-the-program) : `bye`
@@ -111,7 +111,7 @@ Finds task with description: `help guild register for the boss event`
 
 Format: `find [keywords delimited by a single space]`
 
-### 3.7 Undoing or redoing commands
+### 3.7 Undoing and redoing commands
 **Undoable** commands can be undone or redone.  
 Undoable commands: 
 * `todo`, `event`, `deadline` (Adding tasks)

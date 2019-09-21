@@ -1,5 +1,6 @@
 # User Guide
-Obot Wan Kenobi is a chatbot that helps to store simple tasks, such as deadlines and events.
+Obot Wan Kenobi is a chatbot based on the persona of Jedi Master Obi-Wan Kenobi. He can handle basic tasks such as recording to-do, deadline and event tasks; as well as output relevant statistics based on the user's history.
+
 ## Features 
 
 ### 1. Adding a new to-do task
@@ -38,6 +39,7 @@ Expected outcome:
 A deadine task is similar to a to-do task, except that it is associated with a particular cut-off time, the due deadline.
 
 Deadline task can be added via the following format:
+
 deadline [deadline_name] /by [deadline_date]
 
 [deadline_date] must be of the following format:
@@ -67,6 +69,7 @@ stats [event_type]
 * `event`
 
 Sample command:
+
 `stats event`
 
 Possible outcome 1:
@@ -96,7 +99,7 @@ Possible outcome:
 
 
 `Total To-Dos Completed: 12`\
-`Total Todos Completed TODAY: 2`\
+`Total Todos Completed TODAY: 2`
 
 
 `Total Deadlines Completed: 7`\
@@ -106,6 +109,44 @@ Possible outcome:
 `Total Events Completed: 4`\
 `Total Events Completed TODAY: 2`
 
+### 6. Resetting global statistics
+Global statistic values can be reset. However, dynamic statistic values (Feature 4) cannot be reset.
+
+To reset global statistic values, enter the following sample code: 
+
+`stats reset`
+
+To view the outcome, view all statistics with:
+`stats all`
+
+Expected outcome:
+
+`Listing all statistics`\
+`Total Commands Executed: 1` - Number of total commands executed will be 1 as `stats all` has been executed.
+
+
+`Total Tasks Deleted: 0`
+
+
+`Total To-Dos Completed: 0`\
+`Total Todos Completed TODAY: 2` - Dynamic statistic based on when a `todo` was marked completed.
+
+
+`Total Deadlines Completed: 0`\
+`Total Deadlines Completed TODAY: 1` - Dynamic statistic based on when a `deadline` was marked completed.
+
+
+`Total Events Completed: 0`\
+`Total Events Completed TODAY: 2` - Dynamic statistic based on when aa `event` was marked completed.
+
+### 7. Exiting the application
+Obot can be exited by entering the following command:
+
+`bye`
+
+Expected outcome:
+
+`The Force will be with you, always`
 
 
 

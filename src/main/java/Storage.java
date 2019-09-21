@@ -9,23 +9,30 @@ import java.util.Scanner;
 public class Storage {
 
     //public static ArrayList<Task> tasks;
-    private String fileloc;
     private File tempFile;
     private Tasklist tasklist;
 
     /**
      * Constructor for Storage instance
      *
-     * @param fileloc takes in the fileloc to know where to store
      * @throws IOException  If file is wrong
      */
-    public Storage(String fileloc) {
+    public Storage() {
         //ArrayList<Task> tasks = new ArrayList<Task>();
         Tasklist tasklist = new Tasklist();
         this.tasklist = tasklist;
         //this.tasks = tasks;
-        this.fileloc = fileloc;
-        this.tempFile = new File(fileloc);
+        String root = new File(System.getProperty("user.dir")).getParentFile().getPath();
+        StringBuilder path = new StringBuilder();
+        path.append(root);
+
+        File directory = new File(path + "/duke/src/main//java/data");
+
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        this.tempFile = new File(directory + "/duke.txt");
         try {
             if (hasFile()) {
                 readFile();
@@ -56,7 +63,7 @@ public class Storage {
      */
 
     public void saveFile(ArrayList<Task> tasks) throws IOException {
-        FileWriter fw = new FileWriter(fileloc);
+        FileWriter fw = new FileWriter(tempFile);
         String texttoadd = "";
         System.out.println("These will be saved");
         for (int i = 0; i < tasks.size(); i ++) {

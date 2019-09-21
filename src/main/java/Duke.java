@@ -15,7 +15,7 @@ public class Duke {
 
     public Duke() {
 		this.gui = new GuiUI();
-		this.storage = new Storage("src/main/java/data/duke.txt");
+		this.storage = new Storage();
 		this.parse = new GuiParser(storage.getTasks(), gui, storage);
 
 	}

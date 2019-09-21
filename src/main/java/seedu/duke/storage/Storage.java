@@ -59,7 +59,7 @@ public class Storage {
                 Files.createDirectories(path.getParent());
                 Files.createFile(path);
             }
-
+            assert (Files.exists(path));        // File should exist at this point.
             List<String> tasksAsString = extractStringsFromTasks(tasks);
             Files.write(path, tasksAsString);
         } catch (IOException ioe) {
@@ -85,7 +85,7 @@ public class Storage {
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path, ioe);
         } catch (Exception e) {
-            throw new StorageOperationException("Fatal error occurred. Cloud not load tasks.", e);
+            throw new StorageOperationException("Fatal error occurred. Could not load tasks.", e);
         }
     }
 

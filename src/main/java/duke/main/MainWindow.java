@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/starlight.jpg"));
 
+    /**
+     * Initializes for the window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -39,6 +42,11 @@ public class MainWindow extends AnchorPane {
         sendButton.setStyle("-fx-background-color:lightblue;");
     }
 
+    /**
+     * Sets duke property.
+     *
+     * @param d The duke robot for the window.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

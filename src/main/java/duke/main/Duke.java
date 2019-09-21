@@ -95,7 +95,11 @@ public class Duke extends Application {
         }
     }
 
-
+    /**
+     * Initiates duke for the window.
+     *
+     * @param stage The main stage on the window.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components

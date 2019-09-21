@@ -132,6 +132,13 @@ public class Ui {
         return str.toString();
     }
 
+    /**
+     * Prints edit message.
+     *
+     * @param task The task that is edited.
+     * @param listSize The size of the tasklist.
+     * @param order The order of the edited task.
+     */
     public String showEdit(Task task, int listSize, int order) {
         StringBuilder str = new StringBuilder();
         str.append("Got it. I've edit this task:");

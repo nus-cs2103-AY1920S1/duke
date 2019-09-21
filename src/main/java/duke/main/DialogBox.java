@@ -24,12 +24,16 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
-//    @FXML
-//    private ImageView displayPicture;
+    private Label dialog; //The dialog text.
     @FXML
-    private Circle circle;
+    private Circle circle; //The circular image.
 
+    /**
+     * Initiates the DialogBox object.
+     *
+     * @param text The text in the dialog.
+     * @param img The image of the responder.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -57,12 +61,26 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Initiates user dialog box.
+     *
+     * @param text The user's command.
+     * @param img The user's picture.
+     * @return
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.dialog.setStyle("-fx-background-color:snow; -fx-background-radius: 10 10 10 10;");
         return db;
     }
 
+    /**
+     * Initiates duke robot's dialog box.
+     *
+     * @param text The duke robot's response.
+     * @param img The duke robots's image.
+     * @return
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

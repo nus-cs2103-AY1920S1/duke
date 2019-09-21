@@ -62,6 +62,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Translate string to date.
+     *
+     * @param dateInString The string that will be translate.
+     * @return The date translated from the string input.
+     * @throws DukeException When the string is in wrong format.
+     */
     public static Date stringToDate(String dateInString) throws DukeException {
         Date actualTime;
         try {
@@ -74,6 +81,13 @@ public class Parser {
         return actualTime;
     }
 
+    /**
+     * Creates new task.
+     *
+     * @param content The content of the task.
+     * @return Task created from the content.
+     * @throws DukeException When content is in wrong format.
+     */
     private static Task createTask(String content) throws DukeException {
         Task task;
 

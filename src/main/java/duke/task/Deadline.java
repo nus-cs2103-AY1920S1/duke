@@ -16,9 +16,8 @@ public class Deadline extends Task {
      *
      * @param description The description of the deadline.
      * @param time The time of the deadline.
-     * @throws DukeException When time is in wrong format.
      */
-    public Deadline(String description, Date time) throws DukeException {
+    public Deadline(String description, Date time) {
         super(description);
         this.type = Type.D;
         this.time = time;
@@ -47,6 +46,12 @@ public class Deadline extends Task {
         return String.format("%s | %s | %s | %s", type, doneState, description, formatter.format(time));
     }
 
+    /**
+     * Create a copy with different time.
+     *
+     * @param newTime The time for the copy.
+     * @return The copy based on the original object.
+     */
     public Task editTime(Date newTime) throws DukeException {
         return new Deadline(this.description, newTime);
     }

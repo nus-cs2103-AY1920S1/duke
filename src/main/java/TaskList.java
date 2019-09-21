@@ -54,7 +54,7 @@ class TaskList {
         int counter = 1;
         String print = "";
         for (Task t: taskList) {
-            print = print + "      " + counter + "." + t + "\n" ;
+            print = print + counter + "." + t + "\n" ;
             counter++;
         }
         return print;
@@ -65,7 +65,7 @@ class TaskList {
         String print = "";
         for (Task t: taskList) {
             if (t.getDescription().contains(keyword)) {
-                print = print + "      " + counter + "." + t + "\n" ;
+                print = print + counter + "." + t + "\n" ;
                 counter++;
             }
         }

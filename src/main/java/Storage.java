@@ -37,17 +37,17 @@ class Storage {
             Task t;
             String type = sc.next();
             int done = sc.nextInt();
-            String name = sc.next();
+            String[] nameAndDate = sc.nextLine().split("@");
 
             switch(type) {
                 case "T":
-                    t = new Todo(name);
+                    t = new Todo(nameAndDate[0]);
                     break;
                 case "D":
-                    t = new Deadline(name, sc.nextLine());
+                    t = new Deadline(nameAndDate[0], nameAndDate[1]);
                     break;
                 case "E":
-                    t = new Event(name, sc.nextLine());
+                    t = new Event(nameAndDate[0], nameAndDate[1]);
                     break;
                 default:
                     throw new InvalidTaskException();

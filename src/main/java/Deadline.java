@@ -27,7 +27,7 @@ public class Deadline extends Task {
     String getStoredForm() {
         String name = this.getDescription();
         int status = this.isDone()? 1 : 0;
-        return "D " + status + " " + name + " " + Duke.formatter.format(by) + "\n";
+        return "D " + status + " " + name + "@" + Duke.formatter.format(by) + "\n";
     }
 
     /**

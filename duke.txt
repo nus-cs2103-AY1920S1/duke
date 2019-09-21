@@ -1,2 +1,5 @@
-T 1 hello
-D 1 yoyoyo 23/10/1999 2322
+E 0     bla bla bla@23/12/1987 2312
+D 1     bla bla@12/12/2012 1232
+E 1    ks@12/12/2012 2312
+T 0   yoyooyo
+E 0 yoyo@12/12/2012 2312

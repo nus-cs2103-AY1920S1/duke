@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -41,6 +42,10 @@ public class Duke extends Application {
      */
     private Duke(String filePath) throws IOException, ParseException, InvalidTaskException {
         ui = new Ui();
+        File f = new File("duke.txt");
+        if(!f.exists()){
+            f.createNewFile();
+        }
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }

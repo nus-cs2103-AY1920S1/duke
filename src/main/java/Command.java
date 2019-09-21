@@ -44,9 +44,9 @@ class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         tasks.addTask(t);
         storage.save();
-        return "     Got it. I've added this task:\n" +
-        "       " + t + "\n"
-        + "      Now you have " + tasks.getSize() + " tasks in the list.";
+        return "Got it. I've added this task:\n" +
+        t + "\n"
+        + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 }
 
@@ -78,9 +78,9 @@ class DeleteCommand extends Command {
         Task t = tasks.getTask(index);
         tasks.deleteTask(index);
         storage.save();
-        return "     Noted. I've removed this task:\n" +
-        "       " + t + "\n" +
-        "      Now you have "  + tasks.getSize() + " tasks in the list.";
+        return "Noted. I've removed this task:\n" +
+        t + "\n" +
+        "Now you have "  + tasks.getSize() + " tasks in the list.";
     }
 
 }
@@ -95,7 +95,7 @@ class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "     Bye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 }
 
@@ -108,7 +108,7 @@ class ListCommand extends Command {
      * @param storage is the Storage class.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String print = "     Here are the tasks in your list:\n";
+        String print = "Here are the tasks in your list:\n";
         print = print + tasks.printList();
         return print;
     }
@@ -139,8 +139,7 @@ class DoneCommand extends Command {
         Task t = tasks.getTask(index);
         t.markAsDone();
         storage.save();
-        return "     Nice! I've marked this task as done: \n" +
-        "       " + t;
+        return "Nice! I've marked this task as done: \n" + t;
     }
 }
 
@@ -157,7 +156,7 @@ class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "     Here are the matching tasks in your list:" +
+        return "Here are the matching tasks in your list:" +
         tasks.printListWithKeyword(keyword);
     }
 }
@@ -193,7 +192,6 @@ class PostponeCommand extends Command {
         Task t = tasks.getTask(index);
         t.postpone(time);
         storage.save();
-        return "     Noted. I've postponed this task:\n" +
-                "       " + t;
+        return "Noted. I've postponed this task:\n" + t;
     }
 }

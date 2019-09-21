@@ -17,10 +17,10 @@ class Ui {
      * prints welcome message to user.
      */
     void showWelcome() {
-        System.out.println("    ____________________________________________________________\n" +
-                "     Hello! I'm Duke\n" +
-                "     What can I do for you?\n" +
-                "    ____________________________________________________________\n");
+        System.out.println("____________________________________________________________\n" +
+                "Hello! I'm Duke\n" +
+                "What can I do for you?\n" +
+                "____________________________________________________________\n");
     }
 
     /**
@@ -35,7 +35,7 @@ class Ui {
      * prints a line.
      */
     void showLine() {
-        System.out.println("    ____________________________________________________________");
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -43,6 +43,6 @@ class Ui {
      * @param message is the error message.
      */
     void showError(String message) {
-        System.out.println("    " + message);
+        System.out.println("" + message);
     }
 }

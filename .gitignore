@@ -14,5 +14,5 @@ src/main/resources/docs/
 *.iml
 bin/
 
-# Duke
-data/
+# Doko
+tasks.doko

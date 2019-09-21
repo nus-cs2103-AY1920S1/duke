@@ -59,7 +59,7 @@ public class Doko {
   }
 
   public static void main(String[] args) throws Exception {
-    new Doko("data/tasks").run();
+    new Doko("tasks.doko").run();
   }
 
   private void run() throws Exception {

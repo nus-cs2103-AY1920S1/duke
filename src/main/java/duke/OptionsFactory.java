@@ -53,6 +53,7 @@ public class OptionsFactory {
             return storage;
         } catch (StorageException e) {
             System.out.println("Unable to access storage file.");
+            System.out.println("Starting the app without a persistent file storage.");
             return null;
         }
     }

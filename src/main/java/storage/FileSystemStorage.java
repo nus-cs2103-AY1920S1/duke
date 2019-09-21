@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,9 @@ public class FileSystemStorage implements Storage {
         try {
             // Create new file if it doesn't exist
             if (!fileExists(storageFilePath)) {
+                File file = new File(storageFilePath);
+
+                file.getParentFile().mkdirs();
 
                 FileOutputStream outputStream = new FileOutputStream(storageFilePath);
                 ObjectOutputStream taskWriter = new ObjectOutputStream(outputStream);

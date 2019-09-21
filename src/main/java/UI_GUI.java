@@ -1,5 +1,3 @@
-import javafx.scene.layout.Background;
-import javafx.stage.StageStyle;
 import ui.UI;
 import javafx.application.Application;
 import javafx.application.Platform;

@@ -37,7 +37,6 @@ public class Storage {
      */
     public ArrayList<Task> load() throws IOException {
         File f = new File(filePath);
-        f.createNewFile();
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner sc = new Scanner(f);
         while (sc.hasNextLine()) {

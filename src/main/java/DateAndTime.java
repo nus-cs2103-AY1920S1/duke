@@ -141,41 +141,42 @@ public class DateAndTime {
 	public String formatMonth(String month) {
 
 		String translatedMonth = "";
-		switch (month) {
-		case "1":
+		int monthNum = Integer.parseInt(month);
+		switch (monthNum) {
+		case 1:
 			translatedMonth = "January";
 			break;
-		case "2":
+		case 2:
 			translatedMonth = "February";
 			break;
-		case "3":
+		case 3:
 			translatedMonth = "March";
 			break;
-		case "4":
+		case 4:
 			translatedMonth = "April";
 			break;
-		case "5":
+		case 5:
 			translatedMonth = "May";
 			break;
-		case "6":
+		case 6:
 			translatedMonth = "June";
 			break;
-		case "7":
+		case 7:
 			translatedMonth = "July";
 			break;
-		case "8":
+		case 8:
 			translatedMonth = "August";
 			break;
-		case "9":
+		case 9:
 			translatedMonth = "September";
 			break;
-		case "10":
+		case 10:
 			translatedMonth = "October";
 			break;
-		case "11":
+		case 11:
 			translatedMonth = "November";
 			break;
-		case "12":
+		case 12:
 			translatedMonth = "December";
 			break;
 		default:

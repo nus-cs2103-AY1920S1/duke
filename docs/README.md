@@ -42,9 +42,11 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added this task:`
-`[D][]homework (by:12th of December 2019 12:30pm tomorrow)`
-`Now you have 1 tasks in the list.`
+```
+Got it. I've added this task:
+[D][]homework (by:12th of December 2019 12:30pm tomorrow)
+Now you have 1 tasks in the list.
+```
 
 ### `event` - To add a event task in the tasklist.
 
@@ -55,10 +57,11 @@ Example of usage:
 `event birthday /at 12/12/2019 1230 tommorrow`
 
 Expected outcome:
-
-`Got it. I've added this task:`
-`[E][]birthday (at:12th of December 2019 12:30pm tomorrow)`
-`Now you have 1 tasks in the list.`
+```
+Got it. I've added this task:
+[E][]birthday (at:12th of December 2019 12:30pm tomorrow)
+Now you have 1 tasks in the list.
+```
 
 ### `todo` - To add a todo task in the tasklist.
 
@@ -69,10 +72,11 @@ Example of usage:
 `todo swim`
 
 Expected outcome:
-
-`Got it. I've added this task:`
-`[T][]swim`
-`Now you have 1 tasks in the list.`
+```
+Got it. I've added this task:
+[T][]swim
+Now you have 1 tasks in the list.
+```
 
 ### `delete` - To delete a task in the tasklist.
 
@@ -83,10 +87,11 @@ Example of usage:
 `delete 1`
 
 Expected outcome:
-
-`Noted. I've removed this task:`
-`[E][]birthday (at:12th of December 2019 12:30pm tomorrow)`
-`Now you have 2 tasks in the list.`
+```
+Noted. I've removed this task:
+[E][]birthday (at:12th of December 2019 12:30pm tomorrow)
+Now you have 2 tasks in the list.
+```
 
 ### `find` - To find a task in the tasklist.
 
@@ -97,9 +102,10 @@ Example of usage:
 `find birthday`
 
 Expected outcome:
-
-`Here are the matching tasks in your list:`
-`1.[E][]birthday (at:12th of December 2019 12:30pm tomorrow)`
+```
+Here are the matching tasks in your list:
+1.[E][]birthday (at:12th of December 2019 12:30pm tomorrow)
+```
 
 ### `list` - List out all the tasks in the tasklist.
 
@@ -110,10 +116,11 @@ Example of usage:
 `list`
 
 Expected outcome:
-
-`Here are the tasks in your list:`
-`1.[E][]birthday (at:12th of December 2019 12:30pm tomorrow)`
-`2.[T][]swim`
+```
+Here are the tasks in your list:
+1.[E][]birthday (at:12th of December 2019 12:30pm tomorrow)
+2.[T][]swim
+```
 
 ### `done` - Marks a task as 'Done'.
 
@@ -125,9 +132,10 @@ Example of usage:
 
 Expected outcome:
 
-`Nice!. I've marked this task as done:`
-`[E][x]birthday (at:12th of December 2019 12:30pm tomorrow)`
-
+```
+Nice!. I've marked this task as done:
+[E][x]birthday (at:12th of December 2019 12:30pm tomorrow)
+```
 ### `stats` - Displays the number of tasks for each type.
 
 Displays the number of tasks for the respective type and the number of tasks that has been completed or not completed with the format in `stats`.
@@ -137,16 +145,16 @@ Example of usage:
 `stats`
 
 Expected outcome:
-
-`Number of deadline tasks: 0`
-`Number of event tasks: 1`
-`Number of todo tasks: 2`
-`Number of tasks done: 1`
-`Number of tasks not done: 2`
-
+```
+Number of deadline tasks: 0
+Number of event tasks: 1
+Number of todo tasks: 2
+Number of tasks done: 1
+Number of tasks not done: 2
+```
 ### `bye` - Exit the application.
 
-Ends the application after you have finished using it.
+Ends the application after you have finished using it. The application will exit after 3 seconds.
 
 Example of usage: 
 

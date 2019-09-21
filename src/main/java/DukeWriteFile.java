@@ -1,4 +1,5 @@
 import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -67,6 +68,17 @@ public class DukeWriteFile {
 			}
 		}
 		return writeTask;
+	}
+
+	public static void createFile() {
+		try{
+			File createdFile = new File(filePath);
+			createdFile.getParentFile().mkdirs();
+			createdFile.createNewFile();
+		} catch (IOException e) {
+			System.out.println("File does not exist");
+		}
+
 	}
 
 }

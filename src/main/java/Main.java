@@ -38,7 +38,7 @@ public class Main extends Application {
 	//@@author ChangUo79-reused
 	//Reused from https://stackoverflow.com/questions/27334455 with minor modifications
 	public static void exitApp() {
-		PauseTransition exitDelay = new PauseTransition(Duration.seconds(5));
+		PauseTransition exitDelay = new PauseTransition(Duration.seconds(3));
 		exitDelay.setOnFinished(event -> stage.close());
 		exitDelay.play();
 	}

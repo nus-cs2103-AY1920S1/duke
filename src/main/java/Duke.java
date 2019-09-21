@@ -15,15 +15,15 @@ public class Duke {
 
 	public Duke() {
 		ui = new Ui();
-		readFile = new DukeReadFile("data/duke.txt");
 		writeFile = new DukeWriteFile("data/duke.txt");
+		readFile = new DukeReadFile("data/duke.txt");
 		try {
 			readFile.readFileContent();
 			tasks = new TaskList(readFile.myTask());
 			userCommand = new Parser(ui, tasks, readFile, writeFile);
 		} catch (FileNotFoundException e) {
+			writeFile.createFile();
 			tasks = new TaskList();
-			System.out.println("File not found");
 			userCommand = new Parser(ui, tasks, readFile, writeFile);
 		}
 	}

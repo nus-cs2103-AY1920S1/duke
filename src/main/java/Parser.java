@@ -67,7 +67,10 @@ public class Parser {
 				Command taskStats = new StatisticsCommand();
 				String stats = taskStats.execute(tasks, wf);
 				storedText.append(stats);
-			} else {
+			} else if (input.startsWith("help")) {
+				storedText.append(HelpCommand.printHelpCommand());
+			}
+			else {
 				throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
 			}
 		} catch (DukeException e) {

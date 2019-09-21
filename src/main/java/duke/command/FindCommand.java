@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -27,9 +26,8 @@ public class FindCommand extends Command {
      * @param tasks Current TaskList.
      * @param ui Current Ui.
      * @param storage Current Storage.
-     * @throws DukeException Never.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList filteredTasks = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {

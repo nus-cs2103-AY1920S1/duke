@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -15,9 +14,8 @@ public class ListCommand extends Command {
      * @param tasks Current TaskList.
      * @param ui Current Ui.
      * @param storage Current Storage.
-     * @throws DukeException Never.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder lines = new StringBuilder();
         if (tasks.isEmpty()) {
             lines.append(MESSAGE_NO_TASKS);

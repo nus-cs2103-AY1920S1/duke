@@ -2,8 +2,9 @@
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### List all tasks: list
+Shows a list of all todos, events and deadlines in Duke.
+Format: list
 
 ## Usage
 

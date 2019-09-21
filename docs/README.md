@@ -60,33 +60,33 @@ Adds a new to-do task with description <TASK_DESCRIPTION>.
 
 Expected outcome:
 
-Adds a new deadline task with description <TASK_DESCRIPTION> and deadline <TASK_DEADLINE>.
-<TASK_DEADLINE> should be in the format DD/MM/YYYY HHMM.
+Adds a new deadline task with description `<TASK_DESCRIPTION>` and deadline `<TASK_DEADLINE>`. `<TASK_DEADLINE>` should be in
+the format "DD/MM/YYYY HHMM".
 
 ### `event <TASK_DESCRIPTION> /at <EVENT_TIME>`
 
 Expected outcome:
 
-Adds a new event task with description <TASK_DESCRIPTION> and event time <EVENT_TIME>.
-<EVENT_TIME> should be in the format DD/MM/YYYY HHMM.
+Adds a new event task with description `<TASK_DESCRIPTION>` and event time `<EVENT_TIME>`. `<EVENT_TIME>` should be in the
+format "DD/MM/YYYY HHMM".
 
 ### `done <TASK_NUMBER>`
 
 Expected outcome:
 
-Marks as done the task with task number <TASK_NUMBER>, if it exists.
+Marks as done the task with task number `<TASK_NUMBER>`, if it exists.
 
 ### `delete <TASK_NUMBER>`
 
 Expected outcome:
 
-Deletes the task with task number <TASK_NUMBER>, if it exists.
+Deletes the task with task number `<TASK_NUMBER>`, if it exists.
 
 ### `find <SEARCH_PHRASE>`
 
 Expected outcome:
 
-Displays all tasks which contain the phrase <SEARCH_PHRASE>.
+Displays all tasks which contain the phrase `<SEARCH_PHRASE>`.
 
 ### `list`
 
@@ -98,19 +98,19 @@ Lists all existing tasks, in order of addition.
 
 Expected outcome:
 
-Creates a new note with title <NOTE_TITLE> and content <NOTE_CONTENT>.
+Creates a new note with title `<NOTE_TITLE>` and content `<NOTE_CONTENT>`.
 
 ### `note read <NOTE_TITLE>`
 
 Expected outcome:
 
-Displays the content of the note with title <NOTE_TITLE>, if it exists.
+Displays the content of the note with title `<NOTE_TITLE>`, if it exists.
 
 ### `note delete <NOTE_TITLE>`
 
 Expected outcome:
 
-Deletes an existing note with title <NOTE_TITLE>, if it exists.
+Deletes an existing note with title `<NOTE_TITLE>`, if it exists.
 
 ### `note list`
 

@@ -175,7 +175,7 @@ public class Ui {
      * @return a String representation of the output with the lines
      */
     public static String addLines(String cmd) {
-        String out = String.format("%s%n%s%n", cmd, LINE);
+        String out = String.format("%s%n", cmd);
         return out;
     }
 }

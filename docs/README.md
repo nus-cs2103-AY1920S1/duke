@@ -53,11 +53,11 @@ Christopher will return an error statement.
 
 **Expected outcome**:
 
-![event_outcome](./delete.PNG)
+![delete_outcome](./delete.PNG)
 
 Christopher returns the full detail of the deleted task once deletion is complete.
 
-![event_outcome](./delete_error.PNG)
+![delete_eror_outcome](./delete_error.PNG)
 
 If user enters an task list index which is out of the list size, 
 Christopher will return an error statement with an exception.
@@ -75,5 +75,45 @@ time or both.
 
 **Expected outcome**:
 
-![event_outcome](./update.PNG)
+![update_outcome](./update.PNG)
 
+### `Display Task` - Displaying the list of task
+User can use 'list' command to display all tasks that are stored in the text file.
+Syntax: `list`
+**Example of usage**: 
+`list`
+
+**Expected outcome**:
+
+![list_outcome](./list.PNG)
+
+### `Marking Task as Done` - Marking the task as done/completed
+User can mark the task as done if the task is completed for reference. Christopher will 
+display a 'tick' icon if the task is marked as done. ([✓] if task is completed. [✘] by default)
+Syntax: `done [task_list_index]`
+
+**Example of usage**:
+`done 2`
+
+**Expected outcome**:
+
+![done_outcome](./done.PNG)
+
+### `Searching a specific task` - Searching a task from the Task List
+User can search for a specific task from the task list by providing a specific keyword. Keyword can be single or multiple. (Minumum 1 keyword for search)
+
+Syntax: `find [...keyword]`
+
+**Example of usage**:
+`find 2`
+
+**Expected of usage**:
+
+![find_outcome](./find.PNG)
+
+Christopher displays task that contains a keyword '2'.
+
+![find_eror_outcome](./find_empty.PNG)
+
+If user provides a keyword that does not include in any of the task list, Christopher will
+return empty list message.

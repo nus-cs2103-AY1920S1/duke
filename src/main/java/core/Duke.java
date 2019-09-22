@@ -7,9 +7,7 @@ import tasklist.Task;
 import tasklist.TaskList;
 import parser.Parser;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.*;
 
 /**
  * Main class of the program.
@@ -18,10 +16,19 @@ import java.io.PrintStream;
 public class Duke {
     private TaskList tasks;
     private JsonParser jsonParser;
+    private String filepath = "../SaveFile.json";
 
 
     public Duke() throws IOException {
-        jsonParser = new JsonParser("src/main/resources/data/SaveFile.json");
+        File file = new File(filepath);
+        if (!file.exists()) {
+            file.createNewFile();
+            FileWriter fileWriter = new FileWriter(filepath);
+            fileWriter.write("{}");
+            fileWriter.close();
+        }
+
+        jsonParser = new JsonParser(filepath);
         tasks = jsonParser.readData();
     }
 

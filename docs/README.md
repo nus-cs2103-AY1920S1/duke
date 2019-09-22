@@ -10,6 +10,7 @@
     1. Marking Task as Complete
     1. Deleting a Task
     1. Finding a Task
+    1. Sorting
     1. Exiting the Program
     1. Saving and Loading the data
 1. FAQ
@@ -25,7 +26,7 @@
 
 1. Ensure you have Java `11` or above stored in your Computer.
 
-1. Download the latest duke-1.0.3.jar here.
+1. Download the latest duke-1.0.3.jar [here](https://github.com/kerwin97/duke/releases.). (https://github.com/kerwin97/duke/releases)
 
 1. Copy the file to the folder you want to use as the home folder for you Task Manager.
 
@@ -98,13 +99,26 @@ Format: `find KEYWORD`
     * `find CS2103T`
     Returns all tasks with `CS2103T` as description
 
+7. ### Sorting: `sort`
+Sorts the tasks by date, description or status(done or undone).
+Format: `sort status`
 
-7. ### Exiting the Program: `bye`
+    Examples:
+    * `sort status`
+    Sorts the list from done to undone tasks.
+    
+    * `sort description`
+    Sorts the list by description alphabetically.
+    
+    * `sort date`
+    Sorts the list by date from earliest to latest.
+
+8. ### Exiting the Program: `bye`
 Exits the program.
 Format: `bye`
 
 
-8. ### Saving and loading the data
+9. ### Saving and loading the data
 Task list data is saved in the jar file automatically after any command that changes the data. 
 There is no need to save manually.
 
@@ -145,6 +159,10 @@ There is no need to save manually.
 * **Find** `find KEYWORD`
 
     e.g. `find CS2100`
+    
+* **Sort** `sort BY`
+
+    e.g. `sort date`
 
 * **Help** `help`
 

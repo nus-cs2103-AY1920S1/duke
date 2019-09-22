@@ -25,7 +25,7 @@ A Task is something you have to do or take note of. A Task can either be a Todo,
 ## Running
 Requirements: Java 11 Runtime Environment
 
-Navigate to https://github.com/WeomuCat/duke/releases/latest and download the **Doko.jar** file. Run the jar file in your favourite terminal emulator with `java -jar Doko.jar`.
+Navigate [here](https://github.com/WeomuCat/duke/releases/latest) and download the **Doko.jar** file. Run the jar file in your favourite terminal emulator with `java -jar Doko.jar`.
 
 <br>
 <br>
@@ -36,14 +36,22 @@ Navigate to https://github.com/WeomuCat/duke/releases/latest and download the **
 ### Adding Tasks
 Doko adds a task of your choice to the task list.
 
+[Image](docs/media/AddingTasks.png)
+
 ### Completing Tasks
 Doko marks a task that you select from the task list as done.
+
+[Image](docs/media/CompletingTasks.png)
 
 ### Deleting Tasks
 Doko deletes a task that you select from the task list.
 
+[Image](docs/media/DeletingTasks.png)
+
 ### Finding Tasks
 Doko finds all tasks whose description matches your search keyword.
+
+[Image](docs/media/FindingTasks.png)
 
 ### Saving Tasks
 Doko saves your tasks automatically whenever you add/change/delete a task.
@@ -51,20 +59,31 @@ Doko saves your tasks automatically whenever you add/change/delete a task.
 ### Tentative Scheduling of Events
 If you are planning an event that can be held on at multiple schedules, Doko can help you note down all schedules. You can then tell Doko your preferred schedule at a later date.
 
+[Image](docs/media/TentativeScheduling.png)
+
 ### Snoozing Deadlines
 Doko can help you to postpone your deadline tasks by a given duration.
+
+[Image](docs/media/Snoozing.png)
 
 ### Recurring Tasks
 Doko can take note of tasks that are recurring, and will populate the task list accordingly.
 
+[Image](docs/media/RecurringTasks1.png)
+[Image](docs/media/RecurringTasks2.png)
+
 ### Help Pages
 Doko is able to provide detailed information for all commands.
+
+[Image](docs/media/HelpPage.png)
 
 ### Flexible User Input
 Doko accepts user input from either it's graphical user interface (GUI) or it's command line interface (CLI).
 
 ### Command History
 Doko remembers commands that you have entered previously into it's GUI. Press the up and down keys to scroll through the history.
+
+[Image](docs/media/CommandHistory.gif)
 
 <br>
 <br>
@@ -94,7 +113,7 @@ Doko remembers commands that you have entered previously into it's GUI. Press th
 
 ##### Description:
 
->Exits Duke.
+>Exits Doko.
 
 <br>
 

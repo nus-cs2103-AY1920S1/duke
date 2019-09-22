@@ -27,6 +27,10 @@ public class Duke {
 
     }
 
+    public TaskList getTasks() {
+        return tasks;
+    }
+
     /**
      * Enables the deferred initialization of taskList.
      * @return The Welcome Message and an error message if the tasklist could not be restored from file.

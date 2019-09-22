@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.duke.controllers.MainWindow;
+import seedu.duke.storage.Storage;
 
 import java.io.IOException;
 
@@ -31,8 +32,14 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-
+    @Override
+    public void stop() {
+        try {
+            Storage.getInstance().saveToDisk(duke.getTasks());
+        } catch (Storage.StorageOperationException e) {
+            e.printStackTrace();
+        }
+    }
 }

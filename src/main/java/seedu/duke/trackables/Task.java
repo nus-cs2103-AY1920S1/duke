@@ -22,7 +22,6 @@ public class Task {
         this.description = args[2];
     }
 
-    @SuppressWarnings("checkstyle:AvoidEscapedUnicodeCharacters")
     private String getStatusIcon() {
         //return tick or X symbols
         return (this.isDone ? "\u2713" : "\u2718");

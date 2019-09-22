@@ -1,6 +1,6 @@
 package command;
 
-import expense.randomExpense;
+import expense.RandomExpense;
 import utilities.ExpenseList;
 import utilities.Storage;
 import utilities.TaskList;
@@ -16,7 +16,7 @@ public class ExpenseCommand extends Command {
     public String executeAsString(TaskList tasks, Ui ui, Storage storage, ExpenseList expenses) {
         try {
             String mainCommand = command.substring(6);
-            randomExpense item = new randomExpense(mainCommand);
+            RandomExpense item = new RandomExpense(mainCommand);
             expenses.add(item);
             storage.updateFile(tasks, expenses);
             return ui.expenseMessage(item);

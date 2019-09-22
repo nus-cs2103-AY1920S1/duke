@@ -40,7 +40,7 @@ public class Duke {
      */
     Duke() throws Exception {
         ui = new Ui();
-        storage = new Storage("DukeOutput.txt");
+        storage = new Storage("C:\\Users\\ArunKumarr\\Documents\\Duke\\DukeOutput.txt");
         expenses = new ExpenseList(storage.loadExpenses());
         try {
             tasks = new TaskList(storage.load());
@@ -85,7 +85,7 @@ public class Duke {
      * @throws Exception in case file is not found
      */
     public static void main(String[] args) throws Exception {
-        new Duke("DukeOutput.txt").run();
+        new Duke("C:\\Users\\ArunKumarr\\Documents\\Duke\\DukeOutput.txt").run();
         System.exit(0);
     }
 

@@ -4,7 +4,7 @@ public abstract class Expense {
     private String command;
     private double cost;
     private String tagName;
-    private int ID;
+    private int id;
 
     /**
      * constructor.
@@ -39,7 +39,7 @@ public abstract class Expense {
 
     public abstract String getTagName();
 
-    public abstract void setID(int x);
+    public abstract void setId(int x);
 
-    public abstract int getID();
+    public abstract int getId();
 }

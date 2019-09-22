@@ -1,12 +1,19 @@
 package expense;
 
-public class randomExpense extends Expense {
+public class RandomExpense extends Expense {
     private double cost;
     private String name;
     private String tagName;
-    private int ID;
+    private int id;
 
-    public randomExpense(String command) throws Exception {
+    /**
+     * Constructor.
+     *
+     * @param command is the user input
+     *
+     * @throws Exception if user does not enter number in the proper format
+     */
+    public RandomExpense(String command) throws Exception {
         super(command);
 
         String[]nameAndCost = command.split("#", 2);
@@ -43,8 +50,8 @@ public class randomExpense extends Expense {
     }
 
     @Override
-    public String toSubString(){
-        return "(ID: " + ID + ") " + name + " | " + cost;
+    public String toSubString() {
+        return "(ID: " + id + ") " + name + " | " + cost;
     }
 
     @Override
@@ -53,13 +60,13 @@ public class randomExpense extends Expense {
     }
 
     @Override
-    public void setID(int x) {
-        ID = x;
+    public void setId(int x) {
+        id = x;
     }
 
     @Override
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
 

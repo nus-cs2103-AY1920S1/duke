@@ -94,7 +94,8 @@ public class Event extends Task {
      *
      * @throws DukeException in case user inputs in an incorrect format
      */
-    public static void createEvent(String command, TaskList tasks, Storage storage, ExpenseList expense) throws DukeException {
+    public static void createEvent(String command, TaskList tasks, Storage storage, ExpenseList expense)
+                                                                    throws DukeException {
         String[]splitWords = command.trim().split("\\s",2);
         String midCommand = splitWords[1].trim();
 

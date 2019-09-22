@@ -2,7 +2,7 @@ package utilities;
 
 
 import expense.Expense;
-import expense.randomExpense;
+import expense.RandomExpense;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Storage {
 
     private String filename;
-    private String Line_Break = "_____EXPENSES_____";
+    private String lineBreak = "_____EXPENSES_____";
 
     /**
      * constructor.
@@ -46,7 +46,7 @@ public class Storage {
         BufferedReader br = Files.newBufferedReader(Paths.get(filename));
         String lineToRead;
 
-        while (!(lineToRead = br.readLine()).equals(Line_Break)) {
+        while (!(lineToRead = br.readLine()).equals(lineBreak)) {
             if ((!lineToRead.equals("")) && (lineToRead.charAt(0) == 'T')) {
                 Task newTask = ToDo.outputAsToDo(lineToRead);
                 list.add(newTask);
@@ -62,28 +62,33 @@ public class Storage {
 
     }
 
+    /**
+     * to load expenses from output.
+     *
+     * @return the arrayList of expenses
+     */
     public ArrayList<Expense> loadExpenses() {
         ArrayList<Expense> list = new ArrayList<>();
 
         try {
-        BufferedReader br = Files.newBufferedReader(Paths.get(filename));
-        String lineToRead;
-        boolean isExpense = false;
+            BufferedReader br = Files.newBufferedReader(Paths.get(filename));
+            String lineToRead;
+            boolean isExpense = false;
 
-            while ((lineToRead = br.readLine()) != null){
-                if(isExpense){
+            while ((lineToRead = br.readLine()) != null) {
+                if (isExpense) {
                     String name = lineToRead.substring(3).split("\\|", 3)[0].trim();
                     String cost = lineToRead.substring(3).split("\\|", 3)[1].trim();
                     String tagName = lineToRead.substring(3).split("\\|", 3)[2].trim();
                     String command = name + "/for" + cost + " #" + tagName;
-                    list.add(new randomExpense(command));
-                }else if(lineToRead.equals(Line_Break)){
+                    list.add(new RandomExpense(command));
+                } else if (lineToRead.equals(lineBreak)) {
                     isExpense = true;
                 }
             }
         } catch (IOException e) {
             System.out.println("File not read");
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) { }
 
         return list;
     }
@@ -93,14 +98,14 @@ public class Storage {
      *
      * @param tasks is the list of tasks to be printed
      *
-     * @param eList is the list of expenses
+     * @param expenses is the list of expenses
      * @throws FileNotFoundException in case filename is not found
      */
-    public void updateFile(TaskList tasks, ExpenseList eList) throws FileNotFoundException {
+    public void updateFile(TaskList tasks, ExpenseList expenses) throws FileNotFoundException {
         PrintStream outputTo = new PrintStream(filename);
         outputTo.println(tasks.printForOutput());
-        outputTo.println(Line_Break);
-        outputTo.println(eList.toString());
+        outputTo.println(lineBreak);
+        outputTo.println(expenses.toString());
         outputTo.close();
     }
 

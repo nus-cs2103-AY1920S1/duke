@@ -95,7 +95,8 @@ public class Deadline extends Task {
      *
      * @throws DukeException in case user inputs in an incorrect format
      */
-    public static void createDeadline(String command, TaskList tasks, Storage storage, ExpenseList expenses) throws DukeException {
+    public static void createDeadline(String command, TaskList tasks, Storage storage, ExpenseList expenses)
+                                                                            throws DukeException {
         String[]splitWords = command.trim().split("\\s",2);
         String midCommand = splitWords[1].trim();
 

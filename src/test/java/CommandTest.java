@@ -4,20 +4,20 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import duke.task.Task;
-import duke.task.Deadline;
-import duke.task.Todo;
-import duke.task.Event;
-import duke.command.Command;
-import duke.command.AddCommand;
-import duke.command.UpdateCommand;
-import duke.command.DeleteCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.ExitCommand;
-import duke.Alias;
-import duke.Parser;
-import duke.error.DukeException;
+import task.Task;
+import task.Deadline;
+import task.Todo;
+import task.Event;
+import command.Command;
+import command.AddCommand;
+import command.UpdateCommand;
+import command.DeleteCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.ExitCommand;
+import utils.Alias;
+import utils.Parser;
+import error.DukeException;
 
 public class CommandTest {
     private Alias alias = new Alias(); //loads standard alias list

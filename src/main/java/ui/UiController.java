@@ -84,6 +84,7 @@ public class UiController implements DukeInputListener {
             CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
                 this.inputChannel.stopInputChannel();
                 this.outputChannel.stopOutputChannel();
+                this.isUiInitialized = false;
             });
         }
     }
@@ -97,18 +98,13 @@ public class UiController implements DukeInputListener {
     }
 
     /**
-     * Returns the DukeInput instance of the controller.
-     * @return DukeInput instance that the controller contains.
+     * Returns an UiOutputAccessor instance to be used by clients to display output to the corresponding ui of
+     * this UiController. This allows clients to not be exposed to the other responsibilities and implementations
+     * of the UiController class. Clients will simply call the displayOutput(String output) method of the
+     * UiOutputAccessor instance to display messages on the ui.
+     * @return an UiOutputAccessor instance that acts as an access point for clients to display messages on the ui.
      */
-    public DukeInput getInputChannel() {
-        return inputChannel;
-    }
-
-    /**
-     * Returns the DukeOutput instance of the controller.
-     * @return DukeOutput instance that the controller contains.
-     */
-    public DukeOutput getOutputChannel() {
-        return outputChannel;
+    public UiOutputAccessor getUiOutputAccessor() {
+        return UiController.this::displayOutput;
     }
 }

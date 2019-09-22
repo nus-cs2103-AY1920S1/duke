@@ -15,9 +15,10 @@ class UiControllerTest {
     @Test
     void controllerShouldNotDisplayMessageIfUninitialized() {
         UiController controller = new UiController(new StubInput(null), new StubOutput(), stubUiDriver);
+        UiOutputAccessor outputAccessor = controller.getUiOutputAccessor();
 
         Assertions.assertThrows(UiException.class, () -> {
-          controller.displayOutput("hello");
+          outputAccessor.displayOutput("hello");
        });
     }
 
@@ -32,10 +33,11 @@ class UiControllerTest {
     void displayOutput() throws UiException {
         StubOutput output = new StubOutput();
         UiController controller = new UiController(new StubInput(null), output, stubUiDriver);
+        UiOutputAccessor outputAccessor = controller.getUiOutputAccessor();
         controller.initializeUi();
-        controller.displayOutput("1");
-        controller.displayOutput("2");
-        controller.displayOutput("3");
+        outputAccessor.displayOutput("1");
+        outputAccessor.displayOutput("2");
+        outputAccessor.displayOutput("3");
 
         Assertions.assertEquals(output.getReceivedOutputs().get(0), "1");
         Assertions.assertEquals(output.getReceivedOutputs().get(1), "2");

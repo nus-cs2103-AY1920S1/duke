@@ -3,18 +3,29 @@ package ui;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 
 public class UiControllerFactoryTest {
     @Test
-    void testUiControllerFactory() {
+    void testUiControllerFactory() throws NoSuchFieldException, IllegalAccessException {
         StubUiDriver driver = new StubUiDriver();
 
-        Arrays.stream(UiType.values()).forEach(type -> {
+        for (UiType type : UiType.values()) {
             UiController controller = UiControllerFactory.createUiController(driver, type);
 
-            Assertions.assertEquals(type.input.get().getClass(), controller.getInputChannel().getClass());
-            Assertions.assertEquals(type.output.get().getClass(), controller.getOutputChannel().getClass());
-        });
+            Field dukeInputField = controller.getClass().getDeclaredField("inputChannel");
+            Field dukeOutputField = controller.getClass().getDeclaredField("outputChannel");
+
+            dukeInputField.setAccessible(true);
+            dukeOutputField.setAccessible(true);
+
+            DukeInput createdInput = (DukeInput) dukeInputField.get(controller);
+            DukeOutput createdOutput = (DukeOutput) dukeOutputField.get(controller);
+
+            Assertions.assertEquals(type.input.get().getClass(), createdInput.getClass());
+            Assertions.assertEquals(type.output.get().getClass(), createdOutput.getClass());
+
+        }
     }
 }

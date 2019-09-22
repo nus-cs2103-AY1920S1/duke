@@ -1,5 +1,7 @@
 package duke.command;
 
+import error.command.CommandCreationException;
+
 /**
  * An abstract class to encapsulate the process of parsing user input as arguments and producing a corresponding
  * command. Each CommandProducer is responsible for parsing the arguments in a way that is required by the Command
@@ -30,5 +32,5 @@ public abstract class CommandProducer {
      * @param arguments the remainder of the user input after the first word.
      * @return a command instance to be executed by the program.
      */
-    protected abstract Command generateCommand(String arguments);
+    public abstract Command generateCommand(String arguments) throws CommandCreationException;
 }

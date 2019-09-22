@@ -1,88 +1,72 @@
 package duke.command.factory;
 
 import duke.command.Command;
+import duke.command.CommandProducer;
 import duke.command.command.AddCommand;
 import duke.task.Task;
 import duke.task.TasksController;
 import duke.task.factory.TaskFactory;
 import error.command.CommandCreationException;
+import error.command.CommandProducerRegisterException;
 import error.task.TaskCreationException;
 import error.ui.UiException;
 import ui.UiController;
 import util.command.CommandUtils;
 
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Stack;
 
 /**
- * Factory for command instances.
+ * Factory to generate commands to be executed by the program from user inputs. To enable a command to be generated,
+ * its corresponding CommandProducer MUST be registered in the factory using the
+ * registerCommandProducer(CommandProducer producer) method. The factory maps the first word of the user's input
+ * to the keyword of the CommandProducer and invokes it to generate the corresponding Command instance.
  */
 public class CommandFactory {
-    private TasksController tasksController;
-    private UiController ui;
-    private UndoCommandFactory undoCommandFactory;
-    private TaskFactory taskFactory;
-    private Stack<Command> history;
-
     private static final String UNKNOWN_COMMAND_MESSAGE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
-    /**
-     * ListenCommand constructor.
-     * @param tasksController controller to execute task operations
-     * @param ui ui interface for I/O
-     */
-    public CommandFactory(TasksController tasksController, UiController ui) {
-        this.tasksController = tasksController;
-        this.ui = ui;
-        this.undoCommandFactory = new UndoCommandFactory(ui, tasksController);
-        this.taskFactory = new TaskFactory();
-        this.history = new Stack<>();
+    private HashMap<String, CommandProducer> commandProducerHashMap;
+
+
+    public CommandFactory() {
+        this.commandProducerHashMap = new HashMap<>();
     }
 
     /**
-     * Reads and parse user input.
-     * @return corresponding commands.
+     * Registers a CommandProducer instance with the factory. If user input's first word matches the CommandProducer,
+     * the CommandProducer will be invoked to create the next Command instance to be executed by the program. Each
+     * registerd CommandProducer MUST have a unique keyword.
+     * @param producer the CommandProducer instance to be registered.
      */
-    public Optional<Command> parse(String input) throws UiException {
-        try {
-            // try to parse as undo command
-            if (isUndoCommand(input)) {
-                return undoCommandFactory.getUndoCommand(input, history);
-            }
+    public void registerCommandProducer(CommandProducer producer) throws CommandProducerRegisterException {
+        String keyword = producer.getKeyword();
 
-            // try to parse as other commands
-            Optional<Command> command = CommandUtils.getCommand(input, ui, tasksController);
-            if (command.isPresent()) {
-                history.add(command.get());
-                return command;
-            }
-
-            // try to parse command as a task
-            Optional<Task> task = parseAsTask(input);
-            if (task.isPresent()) {
-                Command result = new AddCommand(task.get(), ui, tasksController);
-
-                history.add(result);
-                return Optional.of(result);
-            }
-
-            // not identified as a command or task
-            ui.displayOutput(UNKNOWN_COMMAND_MESSAGE);
-            return Optional.empty();
-
-        } catch (CommandCreationException | TaskCreationException e) {
-
-            ui.displayOutput(e.getMessage());
-            return Optional.empty();
+        if (this.commandProducerHashMap.containsKey(keyword)) {
+            throw new CommandProducerRegisterException("Cannot register CommandProducer as its keyword already exists.");
         }
+
+        this.commandProducerHashMap.put(keyword, producer);
     }
 
-    private boolean isUndoCommand(String input) {
-        return input.split(" ")[0].equals("undo");
-    }
+    /**
+     * Parses a user's input and produces a corresponding Command instance to be executed. A user input's first word
+     * would have to correspond to they keyword of a command.
+     * @param input the user input to be parsed.
+     * @return the command instance to be executed by the program.
+     * @throws CommandCreationException if user input is an invalid command.
+     */
+    public Command getCommandFromUserInput(String input) throws CommandCreationException {
+        String[] inputArray = input.split(" ", 2);
+        String commandKeyword = inputArray[0];
+        String arguments = inputArray[1];
 
+        CommandProducer matchingProducer = this.commandProducerHashMap.get(commandKeyword);
 
-    private Optional<Task> parseAsTask(String input) throws TaskCreationException {
-        return taskFactory.getTask(input);
+        if (matchingProducer == null) {
+            throw new CommandCreationException(UNKNOWN_COMMAND_MESSAGE);
+        }
+
+        return matchingProducer.generateCommand(arguments);
     }
 }

@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class InvalidCommandException extends DukeException {
 
@@ -11,6 +11,7 @@ public class InvalidCommandException extends DukeException {
 
     /**
      * Creates String for error message.
+     *
      * @return error message.
      */
     @Override

@@ -1,9 +1,15 @@
-package Data;
+package storage;
 
-import Exceptions.InvalidCommandException;
-import Exceptions.InvalidInputException;
-import Exceptions.MissingInputException;
-import Task.*;
+import exceptions.InvalidCommandException;
+import exceptions.InvalidInputException;
+import exceptions.MissingInputException;
+
+import task.DukeDate;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.DukeTime;
+import task.Todo;
 
 public class Parser {
 
@@ -13,7 +19,9 @@ public class Parser {
     /**
      * Constructor for a Parser object used to process input and strings.
      */
-    public Parser(){};
+    public Parser() {
+
+    }
 
     /**
      * Takes in line of information to process into commands for program to read.
@@ -47,12 +55,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Processes command to get information for update.
+     *
+     * @param command Command taken in for processing.
+     * @return Array of Strings containing the various segments of information required.
+     * @throws MissingInputException when description for the update is incomplete.
+     * @throws InvalidInputException when an invalid update type is included.
+     */
     public String[] getUpdateInfo(Command command) throws MissingInputException, InvalidInputException {
         String desc = command.getDescription();
         String[] description = desc.split(" \\| ");
         if (description.length <= 3) {
-            throw new MissingInputException("Description for update is incomplete!\n" +
-                    "Instruction should be in the form Update | [TaskNo] | [Type] | [Info]");
+            throw new MissingInputException("Description for update is incomplete!\n"
+                    + "Instruction should be in the form Update | [TaskNo] | [Type] | [Info]");
         }
         String updateType = description[2];
         switch (updateType) {
@@ -62,7 +78,7 @@ public class Parser {
             //allow cases to fall through
             String[] info = new String[3];
             for (int i = 0; i < 3; i++) {
-                    info[i] = description[i+1];
+                info[i] = description[i + 1];
             }
             return info;
         default:
@@ -71,6 +87,7 @@ public class Parser {
                 + "desc, time or date.");
         }
     }
+
     /**
      * Processes String to retrieve keyword for search.
      *
@@ -107,13 +124,12 @@ public class Parser {
      * @return task number
      * @throws MissingInputException when command's description is incomplete.
      */
-    public int getTaskNo(Command command) throws MissingInputException{
+    public int getTaskNo(Command command) throws MissingInputException {
         String line = command.getDescription();
         String[] description = line.split(" ");
-        String eventType = description[0];
-            if (description.length <= 1) {
-                throw new MissingInputException(Task.MISSING_DESC_ERROR_MESSAGE);
-            }
+        if (description.length <= 1) {
+            throw new MissingInputException(Task.MISSING_DESC_ERROR_MESSAGE);
+        }
         return Integer.parseInt(description[1]);
     }
 
@@ -130,8 +146,8 @@ public class Parser {
     Task createNewTask(int taskNo, String taskType, String[] arr) throws MissingInputException, InvalidInputException {
         boolean firstInDescription = true;
         String desc = "";
-        Date date = null;
-        Time time = null;
+        DukeDate date = null;
+        DukeTime time = null;
         for (int i = 1; i < arr.length; i++) {
             if (firstInDescription) {
                 desc += arr[i];
@@ -153,16 +169,16 @@ public class Parser {
             if (arr.length <= 2) {
                 throw new MissingInputException(Task.MISSING_DATE_TIME_MESSAGE);
             }
-            date = Date.processDate(arr[arr.length-2]);
-            time = Time.processTime(arr[arr.length-1]);
+            date = DukeDate.processDate(arr[arr.length - 2]);
+            time = DukeTime.processTime(arr[arr.length - 1]);
             task = new Event(taskNo, desc, date, time, "E");
             break;
         case "deadline":
             if (arr.length <= 2) {
                 throw new MissingInputException(Task.MISSING_DATE_TIME_MESSAGE);
             }
-            date = Date.processDate(arr[arr.length-2]);
-            time = Time.processTime(arr[arr.length-1]);
+            date = DukeDate.processDate(arr[arr.length - 2]);
+            time = DukeTime.processTime(arr[arr.length - 1]);
             task = new Deadline(taskNo, desc, date, time, "D");
             break;
         default:

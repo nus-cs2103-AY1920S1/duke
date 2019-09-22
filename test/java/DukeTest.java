@@ -23,6 +23,6 @@ class DukeTest {
    @Test
    void testTodoFormat() {
         Todo todo = new Todo(1, "read book", "T");
-        assertEquals("[T][✗] read book", todo.toString());
+        assertEquals("[T][NOT DONE] read book", todo.toString());
    }
 }

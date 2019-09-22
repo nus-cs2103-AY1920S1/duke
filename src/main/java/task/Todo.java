@@ -1,6 +1,6 @@
-package Task;
+package task;
 
-import Exceptions.MissingInputException;
+import exceptions.MissingInputException;
 
 public class Todo extends Task {
 
@@ -35,7 +35,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T][%s] %s", done ? "DONE" : "NOT DONE",task);
+        return String.format("[T][%s] %s", done ? "Y" : "N",task);
     }
 
     /**

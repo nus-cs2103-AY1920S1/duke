@@ -1,6 +1,6 @@
-package Exceptions;
+package exceptions;
 
-import UI.MessageGenerator;
+import ui.MessageGenerator;
 
 public abstract class DukeException extends Exception {
 
@@ -10,7 +10,9 @@ public abstract class DukeException extends Exception {
     /**
      * Creates Duke Exception for exceptions in programs.
      */
-    DukeException() { }
+    DukeException() {
+
+    }
 
     /**
      * Creates DukeException that are related to tasks.

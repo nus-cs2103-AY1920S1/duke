@@ -1,13 +1,17 @@
-package Data;
+package storage;
 
 import java.util.List;
 
 public class Formatter {
 
+    private static String SPACE_FORMATTER = "     ";
+
     /**
      * Creates new Formatter used to format printing.
      */
-    public Formatter() {}
+    public Formatter() {
+
+    }
 
     /**
      * Adds 4 spaces for indentation for printing.
@@ -16,18 +20,12 @@ public class Formatter {
      * @return String that has additional indentation.
      */
     public String format(String s) {
-        return "     " + s;
+        return SPACE_FORMATTER + s;
     }
 
     /**
-     * Prints line for formatting.
-     */
-    private void printLine() {
-        System.out.println("    ____________________________________________________________");
-    }
-
-
-    /**
+     * Appends a variable number of string.
+     *  
      * @return Appended string with new line for each element (varargs version).
      */
     public String appendStrings(String... strings) {
@@ -41,32 +39,21 @@ public class Formatter {
     }
 
     /**
+     * Appends heading string with list and the respective number.
+     * Used specifically for listing out tasks.
+     *
+     * @param s Title string for list description.
+     * @param list List containing tasks in String form.
      * @return Appended string with new line for each element.
      */
     public String appendStrings(String s, List<String> list) {
-        String newString = "";
-        newString += s + "\n";
+        String newString = s + "\n";
         int count = 1;
         for (String string: list) {
             newString += format(String.format("%d. %s", count, string)) + "\n";
             count++;
         }
-       return newString;
+        return newString;
     }
-
-
-    /**
-     * Prints strings in their respective lines with format.
-     * @param s String with line breaks.
-     */
-    public void printFormat(String s) {
-        printLine();
-        String[] lines = s.split("\n");
-        for (String line: lines) {
-            System.out.println(format(line));
-        }
-        printLine();
-    }
-
 
 }

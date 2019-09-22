@@ -1,16 +1,17 @@
-import Exceptions.InvalidInputException;
-import Exceptions.MissingInputException;
-import UI.MessageGenerator;
-import UI.UI;
+import exceptions.InvalidInputException;
+import exceptions.MissingInputException;
+import ui.MessageGenerator;
+import ui.UI;
 
 import java.util.Scanner;
 
-public class Duke{
+public class Duke {
 
     private MessageGenerator greeter;
     private UI ui;
     private Scanner sc;
     private boolean isExit;
+    private static String FILE_PATH = "files/tasks.txt";
 
     /**
      * Reads file containing a list of tasks.
@@ -19,7 +20,7 @@ public class Duke{
     public Duke() {
         greeter = new MessageGenerator();
         sc = new Scanner(System.in);
-        ui = new UI("files/tasks.txt");
+        ui = new UI(FILE_PATH);
         isExit = false;
     }
 
@@ -37,7 +38,7 @@ public class Duke{
         return greeter.greet();
     }
 
-    String getResponse(String input) throws InvalidInputException {
+    String getResponse(String input) {
         return ui.processInput(input);
     }
 

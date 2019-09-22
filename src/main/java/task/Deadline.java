@@ -1,6 +1,6 @@
-package Task;
+package task;
 
-import Exceptions.MissingInputException;
+import exceptions.MissingInputException;
 
 public class Deadline extends Task {
 
@@ -14,9 +14,11 @@ public class Deadline extends Task {
      * @param type String indicates task type, in this case "D".
      * @param done boolean indicates whether the task is done.
      */
-    public Deadline(int num, String task, Date date, Time time, String type, boolean done) throws MissingInputException {
+    public Deadline(int num, String task, DukeDate date, DukeTime time,
+                    String type, boolean done) throws MissingInputException {
         super(num, task, date, time, type, done);
     }
+
     /**
      * Creates Deadline (also a Task).
      * Done status is set as not done by default.
@@ -27,8 +29,8 @@ public class Deadline extends Task {
      * @param time Time at which deadline occurs.
      * @param type String indicates task type, in this case "D".
      */
-    public Deadline(int num, String task, Date date, Time time, String type) throws MissingInputException {
-       super(num, task, date, time, type);
+    public Deadline(int num, String task, DukeDate date, DukeTime time, String type) throws MissingInputException {
+        super(num, task, date, time, type);
     }
 
     /**
@@ -38,7 +40,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D][%s] %s (by: %s %s)", done ? "DONE" : "NOT DONE",task, date, time);
+        return String.format("[D][%s] %s (by: %s %s)", done ? "Y" : "N",task, date, time);
     }
 
     /**

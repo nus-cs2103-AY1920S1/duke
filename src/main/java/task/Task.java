@@ -1,7 +1,7 @@
-package Task;
+package task;
 
-import Exceptions.InvalidInputException;
-import Exceptions.MissingInputException;
+import exceptions.InvalidInputException;
+import exceptions.MissingInputException;
 
 public abstract class Task {
 
@@ -9,8 +9,8 @@ public abstract class Task {
     private int no;
     String task;
     private String type;
-    Time time;
-    Date date;
+    DukeTime time;
+    DukeDate date;
     public static String MISSING_DESC_ERROR_MESSAGE = "Task description is incomplete!";
     public static String MISSING_DATE_TIME_MESSAGE = "Task date/time is missing!";
 
@@ -34,8 +34,8 @@ public abstract class Task {
 
     /**
      * Creates Task with an item number, task description, task type and done status.
-     *
      * Done status is set as not done by default.
+     *
      * @param num Task number in the list.
      * @param task Task description
      * @param type Task type (can be Todo, Event or Deadline).
@@ -50,7 +50,7 @@ public abstract class Task {
         }
     }
 
-    Task(int num, String task, Date date, Time time, String type, boolean done) throws MissingInputException {
+    Task(int num, String task, DukeDate date, DukeTime time, String type, boolean done) throws MissingInputException {
         this.no = num;
         this.done = done;
         this.task = task;
@@ -62,12 +62,12 @@ public abstract class Task {
             throw new MissingInputException(MISSING_DESC_ERROR_MESSAGE);
         }
 
-        if (date==null || time == null) {
+        if (date == null || time == null) {
             throw new MissingInputException(MISSING_DATE_TIME_MESSAGE);
         }
     }
 
-    public Task(int num, String task, Date date, Time time, String type) throws MissingInputException {
+    Task(int num, String task, DukeDate date, DukeTime time, String type) throws MissingInputException {
         this.no = num;
         this.done = false;
         this.task = task;
@@ -79,36 +79,27 @@ public abstract class Task {
             throw new MissingInputException(MISSING_DESC_ERROR_MESSAGE);
         }
 
-        if (date==null || time == null) {
+        if (date == null || time == null) {
             throw new MissingInputException(MISSING_DATE_TIME_MESSAGE);
         }
     }
-    /**
-     * Updates task description to the new one.
-     * @param newDesc
-     */
+
     void updateTaskDesc(String newDesc) {
         this.task = newDesc;
     }
 
-    void updateTaskDate(String dateString) throws MissingInputException {
-        this.date = Date.processDate(dateString);
+    void updateTaskDate(String dateString) throws MissingInputException, InvalidInputException {
+        this.date = DukeDate.processDate(dateString);
     }
 
     void updateTaskTime(String timeString) throws MissingInputException, InvalidInputException {
-        this.time = Time.processTime(timeString);
+        this.time = DukeTime.processTime(timeString);
     }
 
-    /**
-     * Sets task as done.
-     */
     void setDone() {
         this.done = true;
     }
 
-    /**
-     * @return task description
-     */
     String getTaskInfo() {
         return this.task;
     }

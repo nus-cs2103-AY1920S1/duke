@@ -1,5 +1,3 @@
-import Exceptions.InvalidCommandException;
-import Exceptions.InvalidInputException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -35,6 +33,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets up dialogue box for welcome message.
+     *
+     * @param d Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().addAll(
@@ -48,7 +51,7 @@ public class MainWindow extends AnchorPane {
      * Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws InvalidInputException {
+    private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -57,12 +60,12 @@ public class MainWindow extends AnchorPane {
         );
         if (input.equals("bye")) {
             Timer timer = new Timer();
-            TimerTask exitGUI = new TimerTask() {
+            TimerTask exitGui = new TimerTask() {
                 public void run() {
                     System.exit(0);
                 }
             };
-            timer.schedule(exitGUI, 500);
+            timer.schedule(exitGui, 500);
         }
         userInput.clear();
     }

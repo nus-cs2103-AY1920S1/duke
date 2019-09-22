@@ -1,8 +1,15 @@
-package Data;
+package storage;
 
-import Exceptions.InvalidInputException;
-import Exceptions.MissingInputException;
-import Task.*;
+import exceptions.InvalidInputException;
+import exceptions.MissingInputException;
+
+import task.DukeDate;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.DukeTime;
+import task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,17 +22,18 @@ public class Storage {
     private Scanner sc;
     private String filePath;
     private TaskList tasks = new TaskList();
-    private File f;
+    private File file;
 
     /**
      * Loads and writes into given file.
+     *
      * @param filePath String that indicates path to file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
-        f = new File(filePath);
+        file = new File(filePath);
         try {
-            if (!f.exists()) {
+            if (!file.exists()) {
                 throw new FileNotFoundException();
             }
         } catch (FileNotFoundException e) {
@@ -35,38 +43,39 @@ public class Storage {
 
     /**
      * Loads tasks from file into the program.
+     *
      * @return TaskList that will be used in the program for further modifications by user.
      */
     public TaskList loadTasks() throws MissingInputException, InvalidInputException {
         int counter = 0;
         try {
-            sc = new Scanner(f);
+            sc = new Scanner(file);
             while (sc.hasNext()) {
                 String task = sc.nextLine();
                 String[] details = task.split(" \\| ");
                 int num = Integer.parseInt(details[1]);
                 boolean done;
                 done = (num == 1);
-                Date date;
-                Time time;
+                DukeDate date;
+                DukeTime time;
                 counter++;
-                    switch (details[0]) {
-                    case "T":
-                        tasks.loadTask(new Todo(counter, details[2], "T", done));
-                        break;
-                    case "D":
-                        date = Date.processDate(details[3].split(" ")[0]);
-                        time = Time.processTime(details[3].split(" ")[1]);
-                        tasks.loadTask(new Deadline(counter, details[2], date, time, "D", done));
-                        break;
-                    case "E":
-                        date = Date.processDate(details[3].split(" ")[0]);
-                        time = Time.processTime(details[3].split(" ")[1]);
-                        tasks.loadTask(new Event(counter, details[2], date, time, "E", done));
-                        break;
-                    default:
-                        throw new InvalidInputException("Task types should only be T, D, and E.");
-                    }
+                switch (details[0]) {
+                case "T":
+                    tasks.loadTask(new Todo(counter, details[2], "T", done));
+                    break;
+                case "D":
+                    date = DukeDate.processDate(details[3].split(" ")[0]);
+                    time = DukeTime.processTime(details[3].split(" ")[1]);
+                    tasks.loadTask(new Deadline(counter, details[2], date, time, "D", done));
+                    break;
+                case "E":
+                    date = DukeDate.processDate(details[3].split(" ")[0]);
+                    time = DukeTime.processTime(details[3].split(" ")[1]);
+                    tasks.loadTask(new Event(counter, details[2], date, time, "E", done));
+                    break;
+                default:
+                    throw new InvalidInputException("Task types should only be T, D, and E.");
+                }
             }
         } catch (IOException e) {
             System.out.println("file not detected");
@@ -84,7 +93,7 @@ public class Storage {
             FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks.getTaskList()) {
                 if (task != null) {
-                    fw.write( task.fileFormat() + System.lineSeparator());
+                    fw.write(task.fileFormat() + System.lineSeparator());
                 }
             }
             fw.close();

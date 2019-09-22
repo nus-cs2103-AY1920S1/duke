@@ -1,4 +1,4 @@
-package Exceptions;
+package exceptions;
 
 public class InvalidItemException extends DukeException {
 
@@ -11,7 +11,8 @@ public class InvalidItemException extends DukeException {
 
     /**
      * Creates String for error message.
-     * @return error message.
+     *
+     * @return      * @return error message processed from the {@link ui.MessageGenerator}.
      */
     @Override
     public String getErrorMessage() {

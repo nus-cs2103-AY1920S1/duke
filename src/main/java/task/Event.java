@@ -1,6 +1,6 @@
-package Task;
+package task;
 
-import Exceptions.MissingInputException;
+import exceptions.MissingInputException;
 
 public class Event extends Task {
 
@@ -14,7 +14,8 @@ public class Event extends Task {
      * @param type String indicates task type, in this case "E".
      * @param done boolean indicates whether the task is done.
      */
-    public Event(int num, String task, Date date, Time time, String type, boolean done) throws MissingInputException {
+    public Event(int num, String task, DukeDate date, DukeTime time,
+                 String type, boolean done) throws MissingInputException {
         super(num, task, date, time, type, done);
     }
 
@@ -28,7 +29,7 @@ public class Event extends Task {
      * @param time Time at which deadline occurs.
      * @param type String indicates task type, in this case "E".
      */
-    public Event(int num, String task, Date date, Time time, String type) throws MissingInputException {
+    public Event(int num, String task, DukeDate date, DukeTime time, String type) throws MissingInputException {
         super(num, task, date, time, type);
     }
 
@@ -39,7 +40,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E][%s] %s (at: %s %s)", done ? "DONE" : "NOT DONE",task, date, time);
+        return String.format("[E][%s] %s (at: %s %s)", done ? "Y" : "N",task, date, time);
     }
 
     /**

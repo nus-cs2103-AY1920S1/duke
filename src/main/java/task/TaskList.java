@@ -1,10 +1,10 @@
-package Task;
+package task;
 
-import Exceptions.DukeException;
-import Exceptions.InvalidInputException;
-import Exceptions.InvalidItemException;
-import Exceptions.MissingInputException;
-import UI.MessageGenerator;
+import exceptions.DukeException;
+import exceptions.InvalidInputException;
+import exceptions.InvalidItemException;
+import exceptions.MissingInputException;
+import ui.MessageGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,6 @@ public class TaskList {
         taskList.add(null);
     }
 
-    /**
-     * @return Number of tasks in list.
-     */
     private int noTasks() {
         return taskList.size() - 1;
     }
@@ -67,6 +64,7 @@ public class TaskList {
     /**
      * Formats task list into list of strings for printing/writing.
      *
+     * @param tasks List of Tasks.
      * @return List of Strings.
      */
     private List<String> listify(List<Task> tasks) {
@@ -80,6 +78,8 @@ public class TaskList {
     }
 
     /**
+     * Returns list of tasks.
+     *
      * @return task list.
      */
     public List<Task> getTaskList() {
@@ -88,6 +88,8 @@ public class TaskList {
 
     /**
      * Prints list of tasks using the message generator.
+     *
+     * @return String containing list of tasks in format.
      */
     public String getList() {
         return msgGenerator.getList(listify(this.taskList));
@@ -140,8 +142,10 @@ public class TaskList {
 
     /**
      * Updates task depending on what type of instruction.
+     * Returns update message when task is updated.
      *
      * @param strings Variable number of strings taken in.
+     * @return String containing message on task updated.
      */
     public String updateTask(String...strings) throws InvalidInputException, MissingInputException {
         String updateType = strings[1];
@@ -167,6 +171,7 @@ public class TaskList {
             return "Wrong update type!";
         }
     }
+
     /**
      * Updates Task Description.
      *
@@ -195,7 +200,7 @@ public class TaskList {
      * @param taskNo identification number for task.
      * @return message when task is updated.
      */
-    public String updateTaskDate(int taskNo, String date) throws MissingInputException {
+    public String updateTaskDate(int taskNo, String date) throws MissingInputException, InvalidInputException {
         taskList.get(taskNo).updateTaskDate(date);
         return msgGenerator.getUpdateMessage(taskList.get(taskNo), noTasks());
     }

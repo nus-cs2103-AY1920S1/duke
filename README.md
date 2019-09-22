@@ -4,8 +4,10 @@
 
 * Duke was built using JDK 11, thus the JRE that comes together with JDK 11 needs to be set as the default JVM when running the JAR. You will need to install the JDK 11 for your Respective operating system from here :
 [Download JDK 11](https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html)
+* Duke runs on Windows, MacOS and Linux.
 
 #Duke UI
+
 <img src="/docs/Ui.png" width="800px">
 
 

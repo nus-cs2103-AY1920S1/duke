@@ -12,3 +12,8 @@ src/main/resources/docs/
 .DS_Store
 *.iml
 bin/
+
+# duke data file
+duke_data.txt
+
+*.class

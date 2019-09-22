@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -42,7 +43,12 @@ public class Storage {
      */
     public void save(TaskList allTasks) throws DukeException {
         try {
-            Files.deleteIfExists(Paths.get(Duke.saveFilePath));
+            Path path = Paths.get(Duke.saveFilePath);
+            Files.deleteIfExists(path);
+
+            File f = new File(Duke.saveFilePath);
+            f.getParentFile().mkdirs();
+            f.createNewFile();
             FileWriter fw = new FileWriter(Duke.saveFilePath, true);
 
             ArrayList<Task> allTasksArrList = allTasks.getArrayList();
@@ -71,10 +77,10 @@ public class Storage {
                 Task t = generateSavedTask(sc.nextLine());
                 allStoredTasks.add(t);
             }
-
             return new TaskList(allStoredTasks);
         } catch (FileNotFoundException e) {
-            throw new DukeException("No existing tasks found!");
+            throw new DukeException("No existing tasks found!"
+                + "Unable to create file for saving!");
         }
     }
 

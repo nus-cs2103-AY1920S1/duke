@@ -55,7 +55,7 @@ public class MainWindow extends AnchorPane {
             );
             this.userInput.clear();
         } catch (DukeException e) {
-            handleError("Sorry, I didn't understand your command!");
+            handleError("Sorry, I didn't understand your command! " + e.getMessage());
         } catch (NoSuchElementException e) {
             handleError("Sorry, please enter a command!");
         }

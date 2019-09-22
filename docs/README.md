@@ -1,4 +1,31 @@
 # User Guide
+**Doko** is a Personal Assistant Chatbot that helps you remember your upcoming **Tasks**.
+
+A Task is something you have to do or take note of. A Task can either be a Todo, Deadline or Event, and are defined below:
+
+### Todo
+>A Todo has no due date.
+>
+>Example: Find a Job
+
+### Deadline
+>A Deadline has a due date.
+>
+>Example: CS2105 Assignment 1
+
+### Event
+>An Event has a start date and an end date.
+>
+>Example: CS2103T Lecture from 4pm - 6pm
+
+<br>
+<br>
+<br>
+
+## Running
+Requirements: Java 11 Runtime Environment
+
+Navigate to https://github.com/WeomuCat/duke/releases/latest and download the **Doko.jar** file. Run the jar file in your favourite terminal emulator with `java -jar Doko.jar`.
 
 <br>
 <br>
@@ -6,8 +33,38 @@
 
 ## Features
 
-### Feature 1
-Description of feature.
+### Adding Tasks
+Doko adds a task of your choice to the task list.
+
+### Completing Tasks
+Doko marks a task that you select from the task list as done.
+
+### Deleting Tasks
+Doko deletes a task that you select from the task list.
+
+### Finding Tasks
+Doko finds all tasks whose description matches your search keyword.
+
+### Saving Tasks
+Doko saves your tasks automatically whenever you add/change/delete a task.
+
+### Tentative Scheduling of Events
+If you are planning an event that can be held on at multiple schedules, Doko can help you note down all schedules. You can then tell Doko your preferred schedule at a later date.
+
+### Snoozing Deadlines
+Doko can help you to postpone your deadline tasks by a given duration.
+
+### Recurring Tasks
+Doko can take note of tasks that are recurring, and will populate the task list accordingly.
+
+### Help Pages
+Doko is able to provide detailed information for all commands.
+
+### Flexible User Input
+Doko accepts user input from either it's graphical user interface (GUI) or it's command line interface (CLI).
+
+### Command History
+Doko remembers commands that you have entered previously into it's GUI. Press the up and down keys to scroll through the history.
 
 <br>
 <br>

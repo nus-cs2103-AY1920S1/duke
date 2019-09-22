@@ -1,23 +1,3 @@
-# User Guide
-
-## Features 
-
-### Feature 1 
-Description of feature.
-
-## Usage
-
-### `Keyword` - Describe action
-
-Describe action and its outcome.
-
-Example of usage: 
-
-`keyword (optional arguments)`
-
-Expected outcome:
-
-`outcome`
 #  Duke
 
 <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/readmeLogo.jpg">
@@ -26,6 +6,9 @@ Duke is a simple and pleasant todolist manager, with its own pre-defined command
 what to do for you. 
 
 ## Table Of Contents
+
+
+ 
 
 ## Introduction
 ### About

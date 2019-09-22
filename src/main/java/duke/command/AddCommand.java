@@ -2,7 +2,17 @@ package duke.command;
 
 import duke.date.InvalidDateDukeException;
 import duke.storage.Storage;
-import duke.task.*;
+
+import duke.task.InvalidTaskDukeException;
+import duke.task.InvalidDeadlineDukeException;
+import duke.task.InvalidEventDukeException;
+import duke.task.InvalidTodoDukeException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -13,7 +23,7 @@ public class AddCommand extends Command {
 
     private String input;
 
-    /** Add-Command start phrases */
+    /** Add-Command start phrases. */
     private static final String TODO_COMMAND_START = "todo";
     private static final String DEADLINE_COMMAND_START = "deadline";
     private static final String EVENT_COMMAND_START = "event";

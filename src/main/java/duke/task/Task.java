@@ -43,7 +43,7 @@ public abstract class Task {
     }
 
     /**
-     * Sets the task's completion flag
+     * Sets the task's completion flag.
      * @param isDone Boolean to be set.
      */
     public void setDone(boolean isDone) {

@@ -48,6 +48,7 @@ public class TaskList {
      * @return String
      * @throws IndexOutOfBoundsException If ID/IDs are invalid.
      */
+
     public String getDoneUpdates(ArrayList<Integer> listOfTaskIds) throws IndexOutOfBoundsException {
         StringBuilder finalOutput = initializeFinalOutput(listOfTaskIds);
         developFinalOutput(finalOutput, listOfTaskIds);
@@ -91,7 +92,7 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of the tasks, ordered by ID
+     * Returns a list of the tasks, ordered by ID.
      * @return String representing ordered list.
      */
     public String getListOfTasks() {

@@ -32,8 +32,8 @@ public class Ui {
 
     /**
      * Displays Duke's response.
-     * @param output
-     * @return
+     * @param output Output to be displayed.
+     * @return Output.
      */
     public String displayOutput(String output) {
         /*
@@ -49,14 +49,27 @@ public class Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Shows loading error.
+     */
+
     public void showLoadingError() {
         displayOutput(LOADING_ERROR_MSG);
     }
 
+    /**
+     * Gets response.
+     * @param input String to respond to.
+     * @return Response from Duke.
+     */
     public String getResponse(String input) {
         return input;
     }
 
+    /**
+     * Checks if next input exists.
+     * @return True if more inputs exist.
+     */
     public boolean checkNextInput() {
         return sc.hasNext();
     }

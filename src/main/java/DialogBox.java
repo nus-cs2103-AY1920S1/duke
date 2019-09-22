@@ -60,7 +60,7 @@ public class DialogBox extends HBox {
 
     private void formatDialog(String text) {
         dialog.setText(text);
-        dialog.setFont(Font.font ("Calibri", 14));
+        dialog.setFont(Font.font("Calibri", 14));
         dialog.setTextFill(Color.WHITE);
         dialog.setTextOverrun(OverrunStyle.CLIP);
     }
@@ -84,6 +84,7 @@ public class DialogBox extends HBox {
         String cssLayout = generateCssLayout(isDuke);
         this.setStyle(cssLayout);
     }
+
     private void setBackground(boolean isDuke) {
         Color c = isDuke
                 ? Color.DARKSLATEBLUE

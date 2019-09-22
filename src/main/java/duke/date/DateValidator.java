@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Deals with making sense of user entered dates and times
+ * Deals with making sense of user entered dates and times.
  */
 public class DateValidator {
 
@@ -99,7 +99,7 @@ public class DateValidator {
         return makeArrayList(day, year, startHours, startMinutes);
     }
 
-    private ArrayList<Integer> makeArrayList(int ... args) throws InvalidDateDukeException {
+    private ArrayList<Integer> makeArrayList(int... args) throws InvalidDateDukeException {
         ArrayList<Integer> dateParams = new ArrayList<>();
         int argCount = 0;
         for (int arg : args) {

@@ -12,7 +12,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Represents a command instructing Duke to save tasks onto the hard-disk
+ * Represents a command instructing Duke to save tasks onto the hard-disk.
  */
 public class SaveCommand extends Command {
 
@@ -24,8 +24,8 @@ public class SaveCommand extends Command {
      * @param tasks List of tasks
      * @param ui User-Interface
      * @param storage Storage object
-     * @return
-     * @throws InvalidTaskDukeException
+     * @return Success or fail message.
+     * @throws InvalidTaskDukeException If the tasks are stored incorrectly.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDukeException {
         try {

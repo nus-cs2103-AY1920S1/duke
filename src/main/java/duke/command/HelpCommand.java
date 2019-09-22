@@ -6,7 +6,7 @@ import duke.ui.Ui;
 
 public class HelpCommand extends Command {
 
-    private static final String PADDING = " \u2022 ";
+    private static final String PADDING = " (*) ";
     private static final String HELP_MESSAGE = "Here is a list of commands I can respond to: -\n"
             + PADDING + "list\n"
             + PADDING + "todo [description]\n"

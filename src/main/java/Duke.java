@@ -56,6 +56,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Saves the currently stored tasks onto a file in the hard-disk.
+     */
+
     public void saveTasks() {
         try {
             SaveCommand c = new SaveCommand();

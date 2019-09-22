@@ -29,6 +29,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.deleteTaskByIndex(this.index);
         storage.save(tasks);
+        tasks.commit();
         return concatLines(MESSAGE_DELETE, task.getIndentedFormat(), getTaskTotalMsg(tasks));
     }
 }

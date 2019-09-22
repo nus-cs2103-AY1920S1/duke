@@ -80,6 +80,19 @@ public class Event extends Task {
         this(description, eventDate, startTime, eventDate, endTime);
     }
 
+    @Override
+    public Task copy() {
+        try {
+            Task copy = new Event(this.getDescription(), this.startDate, this.startTime, this.endDate, this.endTime);
+            if (this.getIsDone()) {
+                copy.markAsDone();
+            }
+            return copy;
+        } catch (DukeException e) {
+            return null;
+        }
+    }
+
     private void validate() throws DukeException {
         if (startDate.isAfter(endDate)) {
             throw new DukeException("Start date cannot be after end date");

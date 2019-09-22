@@ -5,11 +5,14 @@ import duke.ui.Ui;
 
 import java.util.ArrayList;
 
+import static duke.ui.Message.MESSAGE_REDO_UNSUPPORTED;
+import static duke.ui.Message.MESSAGE_UNDO_UNSUPPORTED;
+
 /**
  * Represents a list of tasks.
  */
 public class TaskList {
-    private ArrayList<Task> tasks;
+    protected ArrayList<Task> tasks;
 
     /**
      * Constructs an empty list of tasks.
@@ -25,7 +28,23 @@ public class TaskList {
      * @param tasks the ArrayList of Tasks whose tasks are to be placed into this task list
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+        this.tasks = cloneTasks(tasks);
+    }
+
+    public static ArrayList<Task> cloneTasks(ArrayList<Task> tasks) {
+        ArrayList<Task> copy = new ArrayList<>();
+        for (Task task : tasks) {
+            copy.add(task.copy());
+        }
+        return copy;
+    }
+
+    public boolean canUndo() {
+        return false;
+    }
+
+    public boolean canRedo() {
+        return false;
     }
 
     /**
@@ -35,6 +54,10 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks = cloneTasks(tasks);
     }
 
     /**
@@ -63,6 +86,12 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public Task completeTask(int index) throws DukeException {
+        Task task = getTaskByIndex(index);
+        task.markAsDone();
+        return task;
+    }
+
     /**
      * Removes the task at the specified position in this task list.
      * Shifts any subsequent tasks to the left (subtracts one from their indices).
@@ -75,6 +104,10 @@ public class TaskList {
         Task task = getTaskByIndex(index);
         tasks.remove(task);
         return task;
+    }
+
+    public void clearTasks() {
+        tasks.clear();
     }
 
     /**
@@ -123,5 +156,16 @@ public class TaskList {
             }
         }
         return sb.toString();
+    }
+
+    public void undo() throws DukeException {
+        throw new DukeException(MESSAGE_UNDO_UNSUPPORTED);
+    }
+
+    public void redo() throws DukeException {
+        throw new DukeException(MESSAGE_REDO_UNSUPPORTED);
+    }
+
+    public void commit() {
     }
 }

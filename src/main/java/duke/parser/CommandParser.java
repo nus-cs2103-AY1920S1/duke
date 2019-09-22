@@ -1,12 +1,15 @@
 package duke.parser;
 
 import duke.command.AddCommand;
+import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.CompleteCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RedoCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 
 /**
@@ -45,6 +48,12 @@ public class CommandParser {
         } else if (command.startsWith("find ")) {
             String keyWord = (command.split("\\s+", 2)[1]).trim();
             return new FindCommand(keyWord);
+        } else if (command.equals("clear")) {
+            return new ClearCommand();
+        } else if (command.equals("undo")) {
+            return new UndoCommand();
+        } else if (command.equals("redo")) {
+            return new RedoCommand();
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

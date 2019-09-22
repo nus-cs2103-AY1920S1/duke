@@ -20,6 +20,19 @@ public class Todo extends Task {
         }
     }
 
+    @Override
+    public Task copy() {
+        try {
+            Task copy = new Todo(getDescription());
+            if (this.getIsDone()) {
+                copy.markAsDone();
+            }
+            return copy;
+        } catch (DukeException e) {
+            return null;
+        }
+    }
+
     /**
      * Converts a todo into encoded form (e.g. 'T | 0 |  join sports club').
      */

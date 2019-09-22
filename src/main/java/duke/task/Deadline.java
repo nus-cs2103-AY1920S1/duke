@@ -18,6 +18,7 @@ import static duke.parser.DateTimeParser.parseTime;
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
+    private String by;
     private LocalDate byDate;
     private Optional<LocalTime> byTime;
 
@@ -34,6 +35,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws DukeException {
         super(description);
+        this.by = by;
         String[] dateTimeArr = by.split(" ", 2);
         try {
             this.byDate = parseDate(dateTimeArr[0]);
@@ -44,6 +46,19 @@ public class Deadline extends Task {
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid time format.");
+        }
+    }
+
+    @Override
+    public Task copy() {
+        try {
+            Task copy = new Deadline(getDescription(), by);
+            if (this.getIsDone()) {
+                copy.markAsDone();
+            }
+            return copy;
+        } catch (DukeException e) {
+            return null;
         }
     }
 

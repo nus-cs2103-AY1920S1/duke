@@ -67,6 +67,7 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(newTask);
         storage.save(tasks);
+        tasks.commit();
         return concatLines(MESSAGE_ADD, newTask.getIndentedFormat(), getTaskTotalMsg(tasks));
     }
 }

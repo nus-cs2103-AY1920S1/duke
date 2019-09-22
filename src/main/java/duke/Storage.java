@@ -33,7 +33,7 @@ public class Storage {
      *                 It can be either relative or absolute.
      */
     public Storage(String filePath) {
-        this.file = new File(filePath);
+        this.file = new File(System.getProperty("user.dir") + filePath);
     }
 
     /**

@@ -14,6 +14,13 @@ public class Message {
     public static final String MESSAGE_LOADING_ERROR = "An empty data file duke.txt is "
             + "created in the current directory.";
     public static final String MESSAGE_NO_MATCHING_TASKS = "There are no matching tasks for the key word.";
+    public static final String MESSAGE_CLEAR = "Sure. I've cleared the entire task list.";
+    public static final String MESSAGE_UNDO = "Undo success!";
+    public static final String MESSAGE_UNDO_FAILED = "No more commands to undo!";
+    public static final String MESSAGE_UNDO_UNSUPPORTED = "Undo not supported for this task list.";
+    public static final String MESSAGE_REDO = "Redo success!";
+    public static final String MESSAGE_REDO_FAILED = "No more commands to redo!";
+    public static final String MESSAGE_REDO_UNSUPPORTED = "Redo not supported for this task list";
     private static final String MESSAGE_TASK_COUNT = "Now you have %d task%s in the list.";
 
     public static String getTaskTotalMsg(TaskList tasks) {

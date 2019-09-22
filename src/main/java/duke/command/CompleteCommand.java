@@ -26,9 +26,9 @@ public class CompleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task task = tasks.getTaskByIndex(this.index);
-        task.markAsDone();
+        Task task = tasks.completeTask(this.index);
         storage.save(tasks);
+        tasks.commit();
         return concatLines(MESSAGE_DONE, task.getIndentedFormat());
     }
 }

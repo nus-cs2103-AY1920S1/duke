@@ -13,6 +13,8 @@ public abstract class Task {
         this.isDone = false;
     }
 
+    public abstract Task copy();
+
     /**
      * Returns the description of this task.
      *
@@ -20,6 +22,10 @@ public abstract class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    public boolean getIsDone() {
+        return this.isDone;
     }
 
     /**

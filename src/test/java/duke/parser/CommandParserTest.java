@@ -1,11 +1,14 @@
 package duke.parser;
 
 import duke.command.AddCommand;
+import duke.command.ClearCommand;
 import duke.command.CompleteCommand;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RedoCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
@@ -45,6 +48,21 @@ class CommandParserTest {
     @Test
     void parse_find() throws DukeException {
         assertTrue(CommandParser.parse("find keyWord") instanceof FindCommand);
+    }
+
+    @Test
+    void parse_clear() throws DukeException {
+        assertTrue(CommandParser.parse("clear") instanceof ClearCommand);
+    }
+
+    @Test
+    void parse_undo() throws DukeException {
+        assertTrue(CommandParser.parse("undo") instanceof UndoCommand);
+    }
+
+    @Test
+    void parse_redo() throws DukeException {
+        assertTrue(CommandParser.parse("redo") instanceof RedoCommand);
     }
 
     @Test

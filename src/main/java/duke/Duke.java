@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.CommandParser;
 import duke.task.TaskList;
+import duke.task.VersionedTaskList;
 import duke.ui.Ui;
 
 import static duke.ui.Message.MESSAGE_LOADING_ERROR;
@@ -30,10 +31,10 @@ public class Duke {
         this.storage = new Storage(filePath);
         this.isExit = false;
         try {
-            this.tasks = new TaskList(storage.load());
+            this.tasks = new VersionedTaskList(storage.load());
         } catch (DukeException e) {
             ui.printResponse(MESSAGE_LOADING_ERROR);
-            this.tasks = new TaskList();
+            this.tasks = new VersionedTaskList();
         }
     }
 

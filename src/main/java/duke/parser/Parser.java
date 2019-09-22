@@ -29,12 +29,16 @@ public class Parser {
         } else if (fullCommand.equals("list")) {
             return new ListCommand();
         } else if (fullCommand.startsWith("done")) {
-            char num = fullCommand.charAt(fullCommand.length() - 1);
-            int index = Character.getNumericValue(num);
+            //char num = fullCommand.charAt(fullCommand.length() - 1);
+            String[] command = fullCommand.split(" ");
+            String num = command[1];
+            int index = Integer.valueOf(num);
             return  new DoneCommand(index);
         } else if (fullCommand.startsWith("delete")) {
-            char num = fullCommand.charAt(fullCommand.length() - 1);
-            int index = Character.getNumericValue(num);
+            //char num = fullCommand.charAt(fullCommand.length() - 1);
+            String[] command = fullCommand.split(" ");
+            String num = command[1];
+            int index = Integer.valueOf(num);
             return new DeleteCommand(index);
         } else if (fullCommand.startsWith("todo")) {
             Task task = createTask(fullCommand);
@@ -52,9 +56,16 @@ public class Parser {
             if (fullCommand.length() < 8) {
                 throw new DukeException("Wrong edit command.");
             }
-            char num = fullCommand.charAt(5);
-            int index = Character.getNumericValue(num);
-            String newTimeString = fullCommand.substring(7);
+            String[] command = fullCommand.split(" ");
+            String num = command[1];
+            int index = Integer.valueOf(num);
+            String newTimeString = command[2];
+            if (command.length < 4) {
+                throw new DukeException("Wrong edit command.");
+            }
+            for (int i = 3; i < command.length; i++) {
+                newTimeString += (" " + command[i]);
+            }
             Date newTime = stringToDate(newTimeString);
             return new EditCommand(index, newTime);
         } else {

@@ -60,7 +60,7 @@ public class Ui {
      * Generates add syntax message once AddAlias is successful.
      *
      * @param type Type of command for alias
-     * @param alias
+     * @param alias The Alias
      * @return String of successful add alias message
      */
     public static String printAddAlias(String type, String alias) {
@@ -111,7 +111,7 @@ public class Ui {
     /**
      * Generates matching tasks from search result.
      *
-     * @param tasks TaskList
+     * @param results List of matching tasks
      * @return String message of TaskList of matching results
      */
     public String printMatches(ArrayList<Task> results) {
@@ -125,7 +125,7 @@ public class Ui {
     }
 
     /**
-     * Calls for user's input
+     * Calls for user's input.
      */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);

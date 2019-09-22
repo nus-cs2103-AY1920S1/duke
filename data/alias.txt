@@ -1,4 +1,4 @@
-LIST | l
+TODO | todo
 DONE | done
 DELETE | delete
 DEADLINE | deadline

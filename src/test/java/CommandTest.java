@@ -2,6 +2,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Todo;
@@ -13,44 +15,16 @@ import duke.command.DeleteCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ExitCommand;
+import duke.Alias;
 import duke.Parser;
 import duke.error.DukeException;
 
-public class DukeTest {
+public class CommandTest {
+    private Alias alias = new Alias(); //loads standard alias list
 
     @Test
-    public void testTodo_toString() {
-        //test 1
-        assertEquals("[T][ ] hello", new Todo("hello").toString());
-        //test 2
-        Task todo = new Todo("hello");
-        todo.markAsDone();
-        assertEquals("[T][X] hello", todo.toString());
-    }
-
-    @Test
-    public void testEvent_toString() {
-        //test 1
-        assertEquals("[E][ ] return book (at: 2/12/2019 1800)", new Event("return book", "2/12/2019 1800").toString());
-        //test 2
-        Task event = new Event("return book", "2/12/2019 1800");
-        event.markAsDone();
-        assertEquals("[E][X] return book (at: 2/12/2019 1800)", event.toString());
-    }
-
-    @Test
-    public void testDeadline_toString() {
-        //test 1
-        assertEquals("[D][ ] return book (by: 2/12/2019 1800)",
-                new Deadline("return book", "2/12/2019 1800").toString());
-        //test 2
-        Task deadline = new Deadline("return book", "2/12/2019 1800");
-        deadline.markAsDone();
-        assertEquals("[D][X] return book (by: 2/12/2019 1800)", deadline.toString());
-    }
-
-    @Test
-    public void testCommandType() throws DukeException {
+    public void testCommandType() throws DukeException, IOException {
+        alias.load();
         Parser parser = new Parser();
         assertTrue((parser.parse("todo hello")) instanceof AddCommand);
         assertTrue((parser.parse("event return book /at 2/12/2019 1800")) instanceof AddCommand);
@@ -59,11 +33,11 @@ public class DukeTest {
         assertTrue((parser.parse("delete 1")) instanceof DeleteCommand);
         assertTrue((parser.parse("list")) instanceof ListCommand);
         assertTrue((parser.parse("find hello")) instanceof FindCommand);
-        assertTrue((parser.parse("bye")) instanceof ExitCommand);
     }
 
     @Test
-    public void testAddCommand() throws DukeException {
+    public void testAddCommand() throws DukeException, IOException {
+        alias.load();
         //test 1
         assertEquals("[D][ ] return book (by: 2nd December 2019, 6PM)",
                 new AddCommand("D", "return book /by 2/12/2019 1800").toString());
@@ -79,7 +53,7 @@ public class DukeTest {
             Parser parser = new Parser();
             parser.parse("todo ");
         } catch (DukeException e) {
-            assertEquals("       OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+            assertEquals("OOPS!!! The description of a todo cannot be empty.", e.getMessage());
         }
     }
 

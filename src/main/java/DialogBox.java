@@ -54,16 +54,30 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generates user's dialog from input.
+     *
+     * @param text User's input
+     * @param img User's profile picture
+     * @return DialogBox User's dialog in GUI
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        var dialog_user = new DialogBox(text, img);
-        dialog_user.setId("user");
-        return dialog_user;
+        var dialogUser = new DialogBox(text, img);
+        dialogUser.setId("user");
+        return dialogUser;
     }
 
+    /**
+     * Generates Duke's response to user's input.
+     *
+     * @param text Duke's response
+     * @param img Duke's profile picture
+     * @return DialogBox Duke's dialog in GUI
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        db.setId("duke");
-        return db;
+        var dialogDuke = new DialogBox(text, img);
+        dialogDuke.flip();
+        dialogDuke.setId("duke");
+        return dialogDuke;
     }
 }

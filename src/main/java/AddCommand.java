@@ -49,7 +49,7 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes operation to add new task
+     * Executes operation to add new task.
      *
      * @param tasks TaskList to perform changes from
      * @param ui Ui to generate message outputs

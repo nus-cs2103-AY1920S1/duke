@@ -22,7 +22,7 @@ public class Storage {
     public String filepath;
 
     /**
-     * Creates a instance of Storage object
+     * Creates a instance of Storage object.
      *
      * @param filepath String of the file location
      */
@@ -123,7 +123,7 @@ public class Storage {
     }
 
     /**
-     * Edits existing tasks in file through delete or update
+     * Edits existing tasks in file through delete or update.
      *
      * @param task Task to save in file
      * @param command String command from user input

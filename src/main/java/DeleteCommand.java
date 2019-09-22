@@ -8,7 +8,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Deals with operation to delete tasks: delete commands
+ * Deals with operation to delete tasks: delete commands.
  */
 public class DeleteCommand extends Command {
     protected String command;
@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes operation to update existing task
+     * Executes operation to update existing task.
      *
      * @param tasks TaskList to perform changes from
      * @param ui Ui to generate message outputs

@@ -6,8 +6,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.Duration;
+import java.util.Collections;
+import weomucat.doko.date.Date;
+import weomucat.doko.date.DateRange;
+import weomucat.doko.date.Interval;
 import weomucat.doko.exception.StorageException;
+import weomucat.doko.task.DeadlineTask;
+import weomucat.doko.task.EventTask;
 import weomucat.doko.task.TaskList;
+import weomucat.doko.task.TodoTask;
 import weomucat.doko.task.listener.TaskListStorageListener;
 
 /**
@@ -40,7 +48,15 @@ public class TaskListStorage extends Storage<TaskList> implements TaskListStorag
   public TaskList load() throws StorageException {
     // If storage does not exist.
     if (!exists()) {
-      return new TaskList();
+      TaskList taskList = new TaskList();
+      taskList.add(new TodoTask("Find a Job"));
+      taskList.add(new DeadlineTask("CS2105 Assignment",
+          Date.now().plus(new Interval(Duration.ofDays(1))), null));
+      taskList.add(new EventTask("CS2103T Lecture", Collections.singleton(new DateRange(
+          Date.now().plus(new Interval(Duration.ofHours(2))),
+          Date.now().plus(new Interval(Duration.ofHours(4))))),
+          new Interval(Duration.ofDays(7))));
+      return taskList;
     }
 
     try {

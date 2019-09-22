@@ -22,6 +22,9 @@ public class DukeResponder {
     public String getResponse(String input) {
         Arrays.stream(Response.values())
                 .reduce(false, (acc, val) -> acc || val.call(input, state), Boolean::logicalAnd);
+        if (state.toExit) {
+            System.exit(0);
+        }
         return Printer.flush();
     }
 }

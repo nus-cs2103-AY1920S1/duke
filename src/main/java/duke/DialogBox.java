@@ -55,7 +55,6 @@ public class DialogBox extends HBox {
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        System.out.println("text = " + text);
         db.flip();
         return db;
     }

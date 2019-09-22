@@ -131,7 +131,7 @@ Here are the matching tasks in our list:
 2.[T][✓]buy fruits (by:01-01-1970-1200)
 ```
 
-### 2. `bye` - to be prepared to exit duke 
+### 9. `bye` - to be prepared to exit duke 
 The format of the command is `bye`
 
 Example of usage:

@@ -1,4 +1,8 @@
 package duke;
+
+/**
+ * Represents a mission in task list of duke.
+ */
 public class Mission {
     enum MissionType {
         T, D, E;

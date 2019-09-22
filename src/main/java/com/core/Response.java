@@ -38,7 +38,7 @@ public enum Response {
         System.out.println(index);
         if (checkValidIndex(index, s)) {
             DoableTask t = s.list.get(index);
-            String parts[] = i.split(" ");
+            String[] parts = i.split(" ");
             DateTime time = DateTime.parseString(parts[2] + " " + parts[3]);
             if (t instanceof Deadline) {
                 ((Deadline)t).deadline.add(time);

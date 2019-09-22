@@ -37,6 +37,10 @@ public class DateTime extends GregorianCalendar {
         return new DateTime(year, month, day, hour, min);
     }
 
+    /**
+     * Adds argument datetime to this datetime.
+     * @param c2    argument datetime
+     */
     public void add(DateTime c2) {
         add(Calendar.YEAR, c2.get(Calendar.YEAR));
         add(Calendar.MONTH, c2.get(Calendar.MONTH) + 1); // Zero-based months

@@ -20,6 +20,8 @@
     3.6 [Checking off tasks](#checking-off-tasks)
     
     3.7 [Exiting the application](#exiting-the-application)
+    
+4. [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
 
 ## Introduction
 Duke is a desktop personal assistant application. It is **optimised for users who prefer to work
@@ -28,8 +30,8 @@ with a Command Line Interface (CLI)**.
 ## Quick start
 1. Ensure you have `Java 11` or above installed on your computer.
 2. Download the latest jar file [here](https://github.com/C-likethis123/duke/releases/tag/A-Release).
-3. Copy the jar file to a desired folder. In the folder, create a folder `/data`. In `/data`, add a file called `duke.txt`.
-3. Start a terminal from the folder where the jar file is. Type `java -jar duke-0.1.3.jar`. The GUI should appear in a few seconds.
+3. Copy the jar file to a desired folder.
+3. Double click the jar file. The GUI should appear in a few seconds.
 4. After starting up, Duke greets its users upon starting up.
 ![alt text](https://github.com/C-likethis123/duke/blob/master/docs/Initialisation.png?raw=true "Duke greeting users")
 5. Type commands in the text box and press `Enter` to execute it.
@@ -93,10 +95,12 @@ To update a task, type `update INDEX DESCRIPTION DATE`.
 `DESCRIPTION` refers to the updated task description to update 
 a task with. 
 
-`DATE` refers to the date of the task.
+`DATE` refers to the date of the task. Include this parameter only for `Event` and `Deadline` tasks.
+
+Example commands:
 
 ![alt text](https://github.com/C-likethis123/duke/blob/master/docs/TaskList.png?raw=true "Task List")
-**Referring to the above screenshot:**
+Referring to the above screenshot:
 
 1. To update task 8, a ToDo task, type `update 8 read 2103T example user guide`.
 The task description will be updated to `read 2103T example user guide`.
@@ -120,3 +124,9 @@ Data of tasks are saved in the hard disk automatically after any
 command that changes the data. 
 
 There is no need to save manually. 
+
+## Frequently Asked Questions (FAQ)
+Q: How do I transfer my data to another computer?
+
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Duke folder.
+

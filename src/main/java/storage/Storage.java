@@ -71,7 +71,7 @@ public class Storage {
                 tasks.add(parseLine(sc.nextLine()));
             }
         } catch (Exception E) {
-            System.out.println("Error in parsing file! Returning empty TaskList");
+            //System.out.println("Error in parsing file! Returning empty TaskList");
         }
         return tasks;
     }
@@ -83,7 +83,7 @@ public class Storage {
      * @return resulting Task
      */
     public Task parseLine(String line) {
-        assert line != null: "input string cannot be null";
+        //assert line != null: "input string cannot be null";
         
         String[] sp = line.split(DELIMITER);
 

@@ -59,8 +59,6 @@ eg. `find homework`
 
 This command will list out all the task that contains the keyword.
 
-
-
 ## 3. Exit
 Command: `bye`
 

@@ -36,7 +36,11 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Executes the given task and prints the respective output.
+     * Executes the given add task.
+     * @param tasks A {@Code: TaskList} object
+     * @param ui A {@Code: Ui} object
+     * @param storage A {@Code: Storage} object
+     * @return A String representing the information of the executed task
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
 

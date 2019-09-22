@@ -17,7 +17,11 @@ public class HelpCommand extends Command {
     private static final String EVENT_MSG = "event [description] [/at] [date] - Add an event task.";
 
     /**
-     * Executes the given task and prints the respective output.
+     * Executes the given help task.
+     * @param tasks A {@Code: TaskList} object
+     * @param ui A {@Code: Ui} object
+     * @param storage A {@Code: Storage} object
+     * @return A String representing the information of the help commands
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = "";

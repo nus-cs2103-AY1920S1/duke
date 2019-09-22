@@ -19,7 +19,6 @@ public class Duke {
      */
     String getResponse(String input) throws IOException {
         Command c = Parser.parse(input);
-        assert (c instanceof Command) : "Parser did not return a command.";
         return c.execute(tasks, ui, storage);
     }
 

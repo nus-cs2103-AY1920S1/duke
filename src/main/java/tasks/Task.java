@@ -31,9 +31,8 @@ public class Task {
     }
 
     /**
-     * Returns a StatusIcon, based on whether the task is completed or not.
-     *
-     * @return StatusIcon
+     * Returns a status icon, based on whether the task is completed or not.
+     * @return String representing the status icon
      */
     public String getStatusIcon() {
         // X to represent done, nothing to represent not done

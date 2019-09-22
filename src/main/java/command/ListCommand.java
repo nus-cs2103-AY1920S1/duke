@@ -7,7 +7,11 @@ import utils.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Executes the given task and prints the respective output.
+     * Executes the given List task.
+     * @param tasks A {@Code: TaskList} object
+     * @param ui A {@Code: Ui} object
+     * @param storage A {@Code: Storage} object
+     * @return A String representing the list of tasks
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
 

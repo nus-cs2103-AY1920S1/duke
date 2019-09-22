@@ -13,7 +13,11 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Executes the given task and prints the respective output.
+     * Executes the given InvalidCommand task.
+     * @param tasks A {@Code: TaskList} object
+     * @param ui A {@Code: Ui} object
+     * @param storage A {@Code: Storage} object
+     * @return A String representing the error message of the command
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
 

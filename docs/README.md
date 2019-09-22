@@ -56,7 +56,7 @@ Double click the jar file to run
 
 A task in Duke can be classified into three main categories: `todo`, `deadline`, `event `
 
-### <img src = "https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width=300>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width="300">
 
 A `todo` task is a task item that only has a task description. A todo task does not contain a date field.
 

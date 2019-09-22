@@ -46,6 +46,7 @@ public class GuiParser {
 
     public String guiParserRead(String command) throws IOException {
             if (command.equals("bye")) {
+                System.exit(0);
                 return gui.bye();
             } else if (command.equals("list")) {
                 return gui.listOut() + "\n" + tasklist.printlist();

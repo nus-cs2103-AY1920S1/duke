@@ -55,23 +55,23 @@ Expected outcome:
 
 ```
  Got it. I've added this task:
- [D][ ] complete CS2103T iP (by: 18th September 2019, 11PM)
+ [D][ ] complete CS2103T iP (by: 18th September 2019, 11.00PM)
  Now you have 2 tasks in the list.
 ```
 
-### `event <description> /at <period>` - Adds a new `Event` task
-This command allows user to add a new event task with a time range in Duke.
+### `event <description> /at dd/MM/yyyy HHmm - Adds a new `Event` task
+This command allows user to add a new event task with a date time in Duke.
   * `Event` tasks will be represented as `[E]` by Duke.
 
 Example of usage: 
 
-`event attend CS2103T Lecture /at 20/09/2019 1200 - 20/09/2019 1400`
+`event attend CS2103T Lecture /at 20/09/2019 1200`
 
 Expected outcome:
 
 ```
  Got it. I've added this task:
- [E][ ] attend CS2103T Lecture (at: 20/09/2019 1200 - 20/09/2019 1400)
+ [E][ ] attend CS2103T Lecture (at: 20th September 2019, 12.00PM)
  Now you have 3 tasks in the list.
 ```
 
@@ -105,7 +105,7 @@ Expected outcome:
 
 ```
  Noted. I've removed this task:
- [E][ ] attend CS2103T Lecture (at: 20/09/2019 1200 - 20/09/2019 1400)
+ [E][ ] attend CS2103T Lecture (at: 20th September 2019, 12.00PM)
  Now you have 2 tasks in the list.
 ```
 
@@ -140,7 +140,7 @@ Expected outcome:
 ```
  Here are the tasks in your list:
  1. [T][X] make dinner
- 2. [D][ ] complete CS2103T iP (by: 18th September 2019, 11PM)
+ 2. [D][ ] complete CS2103T iP (by: 18th September 2019, 11.00PM)
  Now you have 2 tasks in the list.
 ```
 

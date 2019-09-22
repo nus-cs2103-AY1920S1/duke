@@ -1,43 +1,57 @@
 package duke;
 
+/**
+ * Create functions and commands of duke.
+ */
 public class Duke {
 
     public String getResponse(String input) {
-        return "Duke: " + run(input);
+        return ("Duke: \n" + run(input));
     }
     public static int firstcommand = 1;
     public void readSaves() {
-        AddList sdl = new AddList();
-        sdl.readFromFile();
+        TaskList taskList = new TaskList();
+        taskList.readFromFile();
     }
-    private final String SPLIT_LINE = "_____________________________________________________\n";
-
+    private final String SPLIT_LINE = "___________________________________________________\n";
+    private static int status = 1;
     public String run(String inputcommand) {
-        if(firstcommand == 1) {
-            readSaves();
-            firstcommand = 0;
+        if(status == 1) {
+            if(firstcommand == 1) {
+                readSaves();
+                firstcommand = 0;
+            }
+            TaskList taskList = new TaskList();
+            String commandType = inputcommand.split(" ")[0];
+            String dukeOutput;
+            switch (commandType) {
+                case("bye"): dukeOutput = bye(taskList); break;
+                case("help"): dukeOutput = help(); break;
+                case("list"): dukeOutput = list(taskList);break;
+                case("done"): dukeOutput = done(taskList, inputcommand);break;
+                case("delete"): dukeOutput = delete(taskList, inputcommand);break;
+                case("event"):
+                case("deadline"):
+                case("todo"):dukeOutput = mission(taskList, inputcommand, commandType);break;
+                case("find"): dukeOutput = find(taskList, inputcommand);break;
+                case("Hello"): dukeOutput = welcome();break;
+                default: dukeOutput = outOfCommand(inputcommand);
+            }
+            return dukeOutput;
         }
-        AddList adl = new AddList();
-        String commandtype = inputcommand.split(" ")[0];
-        String dukeoutput;
-        switch (commandtype) {
-            case("bye"): dukeoutput = bye(adl); break;
-            case("help"): dukeoutput = help(); break;
-            case("list"): dukeoutput = list(adl);break;
-            case("done"): dukeoutput = done(adl, inputcommand);break;
-            case("delete"): dukeoutput = delete(adl, inputcommand);break;
-            case("event"):
-            case("deadline"):
-            case("todo"):dukeoutput = mission(adl, inputcommand, commandtype);break;
-            case("find"): dukeoutput = find(adl, inputcommand);break;
-            default: dukeoutput = outOfCommand(inputcommand);
+        /**
+         * handling exit process after command "bye"
+         */
+        if(status == 0) {
+            System.exit(0);
+            return "";
         }
-        return dukeoutput;
+        return "";
     }
 
     private String help() {
-        String curroutput = SPLIT_LINE;
-        curroutput += "Welcome to Duke!\n" +
+        String currentOutput = SPLIT_LINE;
+        currentOutput += "Welcome to Duke!\n" +
                 "   To add todos, type \n" +
                 "       todo <your todo content>\n" +
                 "   To add events, type \n" +
@@ -52,116 +66,128 @@ public class Duke {
                 "       delete <number of mission in the list>\n" +
                 "   To delete all missions, type \n" +
                 "       delete all\n" +
+                "   To find mission by name, type \n" +
+                "       find <mission name>" +
                 "   To close duke, just say bye to it and click the close button : )\n";
-        curroutput += SPLIT_LINE;
-        return curroutput;
+        currentOutput += SPLIT_LINE;
+        return currentOutput;
     }
 
-    private String list(AddList adl) {
-        String curroutput = SPLIT_LINE;
-        curroutput += "Here are the tasks in your list:\n";
-        curroutput += adl.printAllEvent();
-        adl.saveToFile();
-        curroutput += SPLIT_LINE;
-        return curroutput;
+    private String list(TaskList taskList) {
+        String currentOutput = SPLIT_LINE;
+        currentOutput += "Here are the tasks in your list:\n";
+        currentOutput += taskList.printAllEvent();
+        taskList.saveToFile();
+        currentOutput += SPLIT_LINE;
+        return currentOutput;
     }
 
-    private String bye(AddList adl) {
-        String curroutput = SPLIT_LINE;
-        curroutput += "Bye. \n";
-        curroutput += "Hope to see you again soon!\n\n";
-        adl.saveToFile();
-        curroutput += SPLIT_LINE;
-        return curroutput;
+    private String bye(TaskList taskList) {
+        String currentOutput = SPLIT_LINE;
+        currentOutput += "Bye. \n";
+        currentOutput += "Hope to see you again soon!\n";
+        currentOutput += SPLIT_LINE;
+        currentOutput += "\nPress enter to quit…\n";
+        taskList.saveToFile();
+        status = 0;
+        return currentOutput;
     }
 
-    private String done(AddList adl, String in) {
-        String curroutput = SPLIT_LINE;
+    private String done(TaskList taskList, String in) {
+        String currentOutput = SPLIT_LINE;
         if (in.split(" ").length == 1) {
-            curroutput += "☹ OOPS!!! The description of a done cannot be empty.\n";
+            currentOutput += "☹ OOPS!!! The description of a done cannot be empty.\n";
         }
         if (in.split(" ").length > 1) {
             String subin2 = in.split(" ")[1];
-            curroutput += "Nice! I have marked this task as done:\n";
+            currentOutput += "Nice! I have marked this task as done:\n";
             int index = Integer.parseInt(subin2);
-            adl.changeEvent(index - 1);
-            curroutput += adl.printEvent(index - 1);
-            adl.saveToFile();
+            taskList.changeEvent(index - 1);
+            currentOutput += taskList.printEvent(index - 1);
+            taskList.saveToFile();
         }
-        curroutput += SPLIT_LINE;
-        return curroutput;
+        currentOutput += SPLIT_LINE;
+        return currentOutput;
     }
 
-    private String delete(AddList adl, String in) {
-        String curroutput = SPLIT_LINE;
+    private String delete(TaskList taskList, String in) {
+        String currentOutput = SPLIT_LINE;
         if (in.split(" ").length == 1) {
-             curroutput+= "☹ OOPS!!! The description of a delete cannot be empty.\n";
+             currentOutput+= "☹ OOPS!!! The description of a delete cannot be empty.\n";
         }
         if (in.split(" ").length > 1) {
             String subin2 = in.split(" ")[1];
             if(subin2.contentEquals("all")) {
-                adl.deleteAll();
-                adl.deleteAll();
-                curroutput += "Noted. I've removed all task.\n";
+                taskList.deleteAll();
+                taskList.deleteAll();
+                taskList.saveToFile();
+                currentOutput += "Noted. I've removed all task.\n";
             } else {
                 int index = Integer.parseInt(subin2);
-                curroutput += "Noted. I've removed this task: \n";
-                curroutput += adl.printEvent(index - 1);
-                adl.deleteMission(index - 1);
-                curroutput += "Now you have " + AddList.missionnum + " tasks in the list.\n";
-                adl.saveToFile();
+                currentOutput += "Noted. I've removed this task: \n";
+                currentOutput += taskList.printEvent(index - 1);
+                taskList.deleteMission(index - 1);
+                currentOutput += "Now you have " + TaskList.missionnum + " tasks in the list.\n";
+                taskList.saveToFile();
             }
         }
-        curroutput += SPLIT_LINE;
-        return curroutput;
+        currentOutput += SPLIT_LINE;
+        return currentOutput;
     }
 
-    private String find(AddList adl, String in) {
-        String curroutput = SPLIT_LINE;
+    private String find(TaskList taskList, String in) {
+        String currentOutput = SPLIT_LINE;
         if (in.split(" ").length == 1) {
-            curroutput += "☹ OOPS!!! The description of find cannot be empty.\n";
+            currentOutput += "☹ OOPS!!! The description of find cannot be empty.\n";
 
         }
         if (in.split(" ").length > 1) {
-            curroutput += "Here are the matching tasks in your list:\n";
+            currentOutput += "Here are the matching tasks in your list:\n";
             String keyword = in.split(" ")[1];
-            curroutput += adl.findEvent(keyword);
+            currentOutput += taskList.findEvent(keyword);
         }
-        curroutput += SPLIT_LINE;
-        return curroutput;
+        currentOutput += SPLIT_LINE;
+        return currentOutput;
     }
 
-    private String mission(AddList adl, String in, String subin1) {
-        String curroutput = SPLIT_LINE;
+    private String mission(TaskList taskList, String in, String subin1) {
+        String currentOutput = SPLIT_LINE;
         if (in.split(" ").length == 1) {
-            curroutput += "☹ OOPS!!! The description of a task cannot be empty.\n";
+            currentOutput += "☹ OOPS!!! The description of a task cannot be empty.\n";
         }
         if (in.split(" ").length > 1) {
-            curroutput += subin1 + "\n";
+            currentOutput += subin1 + "\n";
             String str = in.replaceFirst(subin1, "");
             str = str.replaceFirst(" ", "");
             if (in.split("/").length == 1) {
-                adl.addEventWithoutTime(str, subin1);
+                taskList.addEventWithoutTime(str, subin1);
             }
             if (in.split("/").length > 1) {
                 String time = str.split("/")[1].split(" ")[1];
                 String atby = str.split("/")[1].split(" ")[0];
-                adl.addEventWithTime(str.split("/")[0], subin1, time, atby);
+                taskList.addEventWithTime(str.split("/")[0], subin1, time, atby);
             }
-            curroutput += "Got it. I have added this task:\n";
-            curroutput += adl.printLastEvent();
-            curroutput += "Now you have " + AddList.missionnum + " tasks in the list.\n";
-            adl.saveToFile();
+            currentOutput += "Got it. I have added this task:\n";
+            currentOutput += taskList.printLastEvent();
+            currentOutput += "Now you have " + TaskList.missionnum + " tasks in the list.\n";
+            taskList.saveToFile();
         }
-        curroutput += SPLIT_LINE;
-        return curroutput;
+        currentOutput += SPLIT_LINE;
+        return currentOutput;
+    }
+
+    private String welcome() {
+        String currentOutput = SPLIT_LINE;
+        currentOutput += "Welcome to Duke! \nIf you need for help, type in \"help\".\n";
+        currentOutput += SPLIT_LINE;
+        return currentOutput;
     }
 
     private String outOfCommand(String input) {
-        String curroutput = SPLIT_LINE;
-        curroutput += "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
-        curroutput += "Duke receives: " + input + "\n";
-        curroutput += SPLIT_LINE;
-        return curroutput;
+        String currentOutput = SPLIT_LINE;
+        currentOutput += "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        currentOutput += "Duke receives: " + input + "\n";
+        currentOutput += SPLIT_LINE;
+        return currentOutput;
     }
 }

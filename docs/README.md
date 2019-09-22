@@ -20,7 +20,7 @@ Expected outcome:
 `outcome`
 #  Duke
 
-![Duke Logo](https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/readmeLogo.jpg)
+<img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/readmeLogo.jpg">
 
 Duke is a simple and pleasant todolist manager, with its own pre-defined commands. Users type in commands to tell Duke 
 what to do for you. 
@@ -56,7 +56,7 @@ Double click the jar file to run
 
 A task in Duke can be classified into three main categories: `todo`, `deadline`, `event `
 
-### ![](https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png)
+### <img src = "https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width=300>
 
 A `todo` task is a task item that only has a task description. A todo task does not contain a date field.
 

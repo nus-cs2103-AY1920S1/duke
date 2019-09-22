@@ -59,7 +59,7 @@ public class GuiParser {
                     String[] td = command.split(" ");
                     try {
                         return todoCommand(td);
-                    } catch (DukeException e){
+                    } catch (DukeException e) {
                         System.out.println(e);
                     }
                 } else if (ls[0].equals("event")) {
@@ -76,6 +76,11 @@ public class GuiParser {
                     String out = gui.find();
                     out = out + "\n" + tasklist.printlistfind(temp);
                     return out;
+                } else if (ls[0].equals("sort")) {
+                    String sorter = ls[1];
+                    tasklist.sort(sorter);
+                    storage.saveFile(tasklist.returnTasks());
+                    return "Sorted!";
                 } else if (ls[0].equals("help")) {
                     return helpCommand();
                 } else {

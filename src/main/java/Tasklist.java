@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class Tasklist {
@@ -101,5 +103,38 @@ public class Tasklist {
             temp = temp + (num + ". " + tasks.get(i) + "\n");
         }
         return temp;
+    }
+
+    public void sort(String sorter) {
+        if (sorter.equals("status")) {
+            sortDone sdone = new sortDone();
+            Collections.sort(tasks, sdone);
+        } else if (sorter.equals("description")) {
+            sortDescription sd = new sortDescription();
+            Collections.sort(tasks, sd);
+        } else if (sorter.equals("date")) {
+            sortDate sdate = new sortDate();
+            Collections.sort(tasks, sdate);
+        } else {
+
+        }
+    }
+}
+
+class sortDone implements Comparator<Task> {
+    public int compare(Task t1, Task t2) {
+        return t1.getStatusIcon().compareTo(t2.getStatusIcon());
+    }
+}
+
+class sortDescription implements Comparator<Task> {
+    public int compare(Task t1, Task t2){
+        return t1.getDescription().compareTo(t2.getDescription());
+    }
+}
+
+class sortDate implements Comparator<Task> {
+    public int compare(Task t1, Task t2){
+        return t1.date().compareTo(t2.date());
     }
 }

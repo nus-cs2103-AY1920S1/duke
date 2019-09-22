@@ -28,6 +28,10 @@ public class Task {
         return this.description;
     }
 
+    public String date(){
+        return "";
+    };
+
     public void markAsDone() {
         this.isDone = true;
     }

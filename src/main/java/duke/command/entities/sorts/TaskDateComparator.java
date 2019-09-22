@@ -7,6 +7,6 @@ import java.util.Comparator;
 public class TaskDateComparator implements Comparator<Task> {
     @Override
     public int compare(Task task1, Task task2) {
-        return task1.getTimeFrame().compareTo(task2.getTimeFrame());
+        return task1.getTaskTimeFrame().compareTo(task2.getTaskTimeFrame());
     }
 }

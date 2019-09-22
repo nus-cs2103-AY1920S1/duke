@@ -2,7 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.command.factory.CommandFactory;
+import duke.task.DefaultTaskModel;
 import duke.task.TasksController;
+import duke.task.TasksModel;
 import error.ui.UiException;
 import error.ui.UiInitializationException;
 import storage.Storage;
@@ -76,7 +78,9 @@ public class Duke implements UiDriver {
 
         // Initialize tasks and storage
         Storage storage = options.getStorage();
-        TasksController tasks = TasksController.fromStorage(storage, ui);
+        TasksModel model = new DefaultTaskModel(storage);
+        TasksController tasksController = new TasksController(model);
+        tasksController.registerUi(this.ui.getUiOutputAccessor());
 
         // Initialize command factory
         commandFactory = intializeCommandFactory();

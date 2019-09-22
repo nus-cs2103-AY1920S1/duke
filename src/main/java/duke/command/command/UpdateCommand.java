@@ -40,7 +40,7 @@ public class UpdateCommand extends Command {
         oldTaskIndex = getIndex(arguments);
 
         try {
-            oldTask = tasksController.getTasks().get(oldTaskIndex);
+            oldTask = tasksController.listTasks().get(oldTaskIndex);
         } catch (StorageException e) {
             throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
         } catch (IndexOutOfBoundsException e) {
@@ -92,7 +92,7 @@ public class UpdateCommand extends Command {
 
             TaskType oldTaskType = oldTask.getTaskType();
             int numDates = oldTaskType.numDates;
-            String details = oldTask.getDetails();
+            String details = oldTask.getTaskDetails();
 
             List<LocalDateTime> dateTimes = CommandUtils.parseAsTaskArguments(arguments).extractLocalDateTime(numDates);
 
@@ -109,7 +109,7 @@ public class UpdateCommand extends Command {
         try {
             String newDetails = arguments.split(" ", 2)[1];
             TaskType oldTaskType = oldTask.getTaskType();
-            List<LocalDateTime> oldDateTimes = oldTask.getTimeFrame().getDateTimes();
+            List<LocalDateTime> oldDateTimes = oldTask.getTaskTimeFrame().getDateTimes();
 
             if (oldTaskType == TaskType.EVENT) {
                 oldDateTimes.remove(1);

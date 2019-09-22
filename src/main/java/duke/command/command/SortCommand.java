@@ -37,7 +37,7 @@ public class SortCommand extends Command {
         try {
             this.comparator = taskSort.get();
             this.previousCopy = new ArrayList<>();
-            this.previousCopy.addAll(tasksController.getTasks());
+            this.previousCopy.addAll(tasksController.listTasks());
         } catch (StorageException e) {
             throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
         }

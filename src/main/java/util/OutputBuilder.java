@@ -86,14 +86,14 @@ public class OutputBuilder {
     public OutputBuilder appendTasks(List<Task> tasks) {
         if (!tasks.isEmpty()) {
             message.append("1.")
-                    .append(tasks.get(0).getDescription());
+                    .append(tasks.get(0).getTaskDescription());
         }
 
         for (int i = 1; i < tasks.size(); i++) {
             message.append("\n")
                     .append(i + 1)
                     .append(".")
-                    .append(tasks.get(i).getDescription());
+                    .append(tasks.get(i).getTaskDescription());
         }
 
         return this;

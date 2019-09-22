@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class to encapsulate start and end time of tasks.
+ * A class to encapsulate the time frame within which a task is to be completed. Not all tasks have a start and end
+ * time so these two fields may be null. TimeFrames with no start signifies that the task is to be completed by a
+ * certain time. TimeFrames with no end signifies that the task is to be done after a certain time. TimeFrames with
+ * the same start and end time signifies that the task is to be done at a particular time. TimeFrames with no start
+ * or end times signify that the task as no restrictions with regards to when it must be done.
  */
 public class TimeFrame implements Serializable, Comparable<TimeFrame> {
     private static final long serialVersionUID = 6529685098267111111L;
 
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private final LocalDateTime start;
+    private final LocalDateTime end;
 
     /**
      * Constructor for TimeFrame.
@@ -35,13 +39,22 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
     }
 
     /**
-     * Returns description of time frame as pretty display output.
-     * @return description of time frame
+     * A TimeFrame with no start and end times has no description. Thus, this method will return true
+     * if the TimeFrame instance has no start and end time.
+     * @return true if the TimeFrame has no description.
+     */
+    public boolean hasDescription() {
+        return start == null && end == null;
+    }
+
+    /**
+     * Returns a description of the TimeFrame as a nicely formatted String.
+     * @return a nicely formatted description of the TimeFrame.
      */
     public String getDescription() {
         if (start == null && end == null) {
             // task has no timeframe
-            return "";
+            return null;
         } else if (start == null) {
             // task done by a particular time
             return String.format("by: %s", DateTime.getString(end));
@@ -57,6 +70,11 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
         }
     }
 
+    /**
+     * Returns a the start and end LocalDateTimes of the TimeFrame instance as a list. The LocalDateTimes are added in
+     * the order of start followed by end if they exist.
+     * @return a list of the LocalDateTimes of the TimeFrame.
+     */
     public List<LocalDateTime> getDateTimes() {
         List<LocalDateTime> result = new ArrayList<>();
 
@@ -71,6 +89,13 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
         return result;
     }
 
+    /**
+     * Compares two TimeFrames based on which is later. -1 is returned if the TimeFrame being compared is later,
+     * 1 is returned if the TimeFrame compared is earlier and 0 is returned if they are the same. TimeFrames are first
+     * compared by their end time followed by their start time.
+     * @param timeFrame the TimeFrame instance to compare to.
+     * @return numerical value signifying which TimeFrame is later
+     */
     @Override
     public int compareTo(TimeFrame timeFrame) {
         if (this.end != null && timeFrame.end != null) {

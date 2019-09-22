@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         // first store previous list for it to be restored if needed
         try {
             this.prevList = new ArrayList<>();
-            prevList.addAll(tasksController.getTasks());
+            prevList.addAll(tasksController.listTasks());
         } catch (StorageException e) {
             throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
         }

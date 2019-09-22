@@ -22,11 +22,27 @@ public enum Response {
         Printer.printString(finalString.equalsIgnoreCase("") ? "You have no tasks" : finalString);
         return true;
     }),
-    FIND_BLANK("(?i)^f(ind)?\\s*", (i, s) -> {
-        Printer.printString("Did not specify substring to find" + Printer.referHelp);
+    LIST_SCHEDULE("(?i)^l(ist)? \\d{1,2}/\\d{1,2}/\\d{1,4}$", (i, s) -> {
+        DateTime time = DateTime.parseString(i.split(" ")[1] + " 0000");
+        DateTime time2 = time.clone();
+        time2.add(DateTime.parseString("1/0/0 0000"));
+        String finalString = listIndexStreamToString(IntStream.range(0,
+                s.list.size()).boxed().filter((ti) -> {
+                    DoableTask t = s.list.get(ti);
+                    return (t instanceof Deadline
+                            && ((Deadline)t).deadline.compareTo(time) >= 0
+                            && ((Deadline)t).deadline.compareTo(time2) <= 0)
+                            || (t instanceof Event
+                            && ((((Event)t).startDate.compareTo(time) >= 0
+                            && ((Event)t).startDate.compareTo(time2) <= 0)
+                            || (((Event)t).endDate.compareTo(time) >= 0)
+                            && ((Event)t).endDate.compareTo(time2) <= 0));
+
+                }), s);
+        Printer.printString(finalString.equalsIgnoreCase("") ? "No tasks for that day" : finalString);
         return true;
     }),
-    FIND("(?i)^f(ind)? .+", (i, s) -> {
+    LIST_FIND("(?i)^l(ist)? .+", (i, s) -> {
         String substr = i.split(" ", 2)[1];
         String finalString = listIndexStreamToString(IntStream.range(0,
                 s.list.size()).boxed().filter((ti) -> s.list.get(ti).getName().contains(substr)), s);
@@ -141,8 +157,10 @@ public enum Response {
                 + " - quits the program\n"
                 + "list\n"
                 + " - lists all the tasks\n"
-                + "find <string>\n"
-                + " - filters tasks that contains the string\n"
+                + "list <date>\n"
+                + " - lists schedule for the day\n"
+                + "list <string>\n"
+                + " - finds tasks name containing string\n"
                 + "done <index>\n"
                 + " - marks task at valid index as done\n"
                 + "delete <index>\n"

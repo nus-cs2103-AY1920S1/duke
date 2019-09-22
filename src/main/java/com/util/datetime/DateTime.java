@@ -51,6 +51,15 @@ public class DateTime extends GregorianCalendar {
         add(Calendar.MILLISECOND, c2.get(Calendar.MILLISECOND));
     }
 
+    /**
+     * Returns a duplicate of this object.
+     * @return  duplicate
+     */
+    public DateTime clone() {
+        return new DateTime(get(Calendar.YEAR), get(Calendar.MONTH), get(Calendar.DATE),
+                get(Calendar.HOUR_OF_DAY), get(Calendar.MINUTE));
+    }
+
     @Override
     public String toString() {
         return get(Calendar.DAY_OF_MONTH) + "/" + get(Calendar.MONTH) + "/" + get(Calendar.YEAR)

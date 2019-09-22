@@ -28,7 +28,23 @@ clears the chat screen
 
 ### `list` - Lists all tasks in the program
 
-displays tasks
+#### displays all tasks
+
+Example of usage:
+
+`list`
+
+#### display name matching substring
+
+Example of usage:
+
+`list asd`
+
+#### display scheduled for that day
+
+Example of usage:
+
+`list 1/1/2019`
 
 ### `todo` - Adds a todo task
 
@@ -63,14 +79,6 @@ argument has to be task index, check index by calling `list`.
 Example of usage:
 
 `delete 1`
-
-### `find` - Finds tasks containing substring
-
-argument is the substring
-
-Example of usage
-
-`find asd`
 
 ### `snooze` - Postpones a event or deadline
 

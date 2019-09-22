@@ -45,6 +45,10 @@ public class Command {
             FindCommand fc = new FindCommand(cmd, cmdDetails);
             return fc.execute(list, ui, store);
 
+        case "snooze":
+            SnoozeCommand sc = new SnoozeCommand(cmd, cmdDetails);
+            return sc.execute(list, ui, store);
+
         case "todo":
             if (cmdDetails.length() < 1) {
                 throw new DukeException("The details of todo cannot be blank.");
@@ -55,9 +59,6 @@ public class Command {
                 return Ui.printAddedMsg();
             }
 
-        case "snooze":
-            SnoozeCommand sc = new SnoozeCommand(cmd, cmdDetails);
-            return sc.execute(list, ui, store);
 
         case "deadline":
             String[] separate = cmdDetails.split("/by");
@@ -86,6 +87,7 @@ public class Command {
             } catch (ParseException e) {
                 throw new DukeException("Please give a proper date.");
             }
+
 
         default:
             throw new DukeException("OOPS! I do not know what that means!");

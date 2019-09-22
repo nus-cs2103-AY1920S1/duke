@@ -11,10 +11,15 @@ public class DoneCommand extends Command {
         if (cmdDetails.length() < 1) {
             throw new DukeException("Please specify the task that is completed.");
         } else {
-            int taskIndex =  Integer.parseInt(cmdDetails);
-            list.getTask(taskIndex - 1).doTask();
-            store.updateFile(list);
-            return "Task done";
+            try {
+                int taskIndex =  Integer.parseInt(cmdDetails);
+                list.getTask(taskIndex - 1).doTask();
+                store.updateFile(list);
+                return "Task done";
+            } catch(IndexOutOfBoundsException e) {
+                throw new DukeException("Task " + cmdDetails + " is not available, please choose another task.");
+            }
+
         }
     }
 }

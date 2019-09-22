@@ -10,32 +10,14 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        storage = new SaveToFile("/Users/meiannn/Documents/GitHub/duke/src/main/java/TaskList.txt");
+        storage = new SaveToFile("data/duke.txt");
         try {
-            tasks = new TaskList(storage.load());
+            tasks = storage.load();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
     }
-    //this is supposed to return a string type
-    /*public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }*/
 
     /**
      * Generates the output.
@@ -49,7 +31,6 @@ public class Duke {
         String output;
         try {
             String fullCommand = input;
-            //ui.showLine(); // show the divider line ("_______")
             Command c = Parser.parse(fullCommand);
             output = c.execute(tasks, ui, storage);
         } catch (DukeException e) {
@@ -58,10 +39,6 @@ public class Duke {
         return output;
     }
 
-
-    //public static void main(String[] args) {
-        //new Duke().run();
-    //}
 
     /**
      *

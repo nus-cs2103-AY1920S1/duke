@@ -3,7 +3,7 @@
 [2. Quick Start](#Quick Start)  
 [3. Features](#Features)    
 [4. FAQ](#FAQ)   
-[5. Command Summary](##Command Summary) 
+[5. Command Summary](#Command Summary) 
 
 ## 1. Introduction <a name="Introduction"></a>
 The DukeBot is for those who prefer to use a desktop app for managing tasks. 
@@ -14,19 +14,26 @@ Have fun!
 ## 2. Quick Start <a name="Quick Start"></a>
 1. Ensure you have Java 11 or above installed in your Computer.  
 
-1. Download the latest dukebot.jar at [here](https://github.com/calvincxz/duke/releases)
+1. Download the latest dukebot.jar [here](https://github.com/calvincxz/duke/releases)
 
-## 3. Features 
+## 3. Features <a name="Features"></a>
+
+Command Format
+* Words in UPPER_CASE are the parameters to be supplied by the user 
+e.g. in add n/NAME, NAME is a parameter which can be used as add n/John Doe.
+* Items in square brackets are optional e.g `deadline TASK_NAME  /by dd/mm/yyyy [hhmm]`
+can be used as `deadline TASK_NAME  /by dd/mm/yyyy`
+
 
 ### 3.1 Viewing help
 Input "help" to view a simple guide to command formats.  
 Format: help
 
-### 3.2. Adding a task: t, d, e
+### 3.2. Adding a task: todo, deadline or event
 * Adds a task to the DukeBot.
-    * todo TASK NAME 
-    * event TASK NAME  /at dd/mm/yyyy hhmm hhmm  
-    * deadline TASK NAME  /by dd/mm/yyyy *hhmm
+    * todo TASK_NAME 
+    * event TASK_NAME /at dd/mm/yyyy hhmm hhmm  
+    * deadline TASK_NAME /by dd/mm/yyyy [hhmm]
 * e.g. `event party /at 01/01/2011 0800 1900`
 * e.g. `t read book`
 
@@ -68,11 +75,11 @@ Format: note NOTES
 Exits the program.  
 Format: bye
 
-## 4. FAQ
+## 4. FAQ <a name="FAQ"></a>
 * None
 
 ## 5. Command Summary <a name="Command Summary"></a>
-* Add : `CODE NAME DATE [TIME]`  
+* Add : `TASK_TYPE TASK_NAME DATE [TIME]`  
 e.g. `event party /at 01/01/2011 0800 1900`   
 e.g. `t read book`
 
@@ -89,7 +96,7 @@ e.g. `postpone 3 0 4 0`
 e.g. `note blahblahblah`
 
 * Find : `find KEYWORD`   
-e.g. `find [D]`
-* List : list
-* Help : help
-* Exit : bye
+e.g. `find D`
+* List : `list`
+* Help : `help`
+* Exit : `bye`

@@ -24,7 +24,12 @@ public class Date{
     }
 
     public java.util.Date getData() {
-        return this.data;
+        if (this.exists) {
+            return this.data;
+        }
+        else {
+            return new java.util.Date();
+        }
     }
 
     public String format() {

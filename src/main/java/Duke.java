@@ -42,11 +42,14 @@ public class Duke extends Application{
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpg"));
 
     public Duke() {
-        storage = new Storage("data/tasks.txt");
+        String path = System.getProperty("user.dir");
+        path += "\\tasks.txt";
+        System.out.println(path);
+        storage = new Storage(path);
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
-            tasks = new TaskList("data/tasks.txt");
+            tasks = new TaskList(path);
         }
         ui = new UserInterface(tasks, storage);
 

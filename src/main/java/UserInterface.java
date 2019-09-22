@@ -95,6 +95,7 @@ class UserInterface {
     static String getReply(String userInput) {
         String description = " ";
         String date;
+        data.save(todoList.lst);
 
         String userCommand = userInput.split(" ",2)[0];
         try {
@@ -144,6 +145,7 @@ class UserInterface {
                         counter++;
                     }
                 }
+
                 return ("Here are the matching tasks in your list:" + "\n" + lst.substring(0, lst.length() - 6));
             case "pause":
                 try {

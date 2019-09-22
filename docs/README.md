@@ -1,8 +1,8 @@
 # User Guide
 
-## Features
+## Features 
 
-### Feature 1
+### Feature 1 
 Description of feature.
 
 ## Usage
@@ -11,7 +11,7 @@ Description of feature.
 
 Describe action and its outcome.
 
-Example of usage:
+Example of usage: 
 
 `keyword (optional arguments)`
 
@@ -22,14 +22,14 @@ Expected outcome:
 
 <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/readmeLogo.jpg">
 
-Duke is a simple and pleasant todolist manager, with its own pre-defined commands. Users type in commands to tell Duke
-what to do for you.
+Duke is a simple and pleasant todolist manager, with its own pre-defined commands. Users type in commands to tell Duke 
+what to do for you. 
 
 ## Table Of Contents
 
 ## Introduction
 ### About
-This is a java projecte created for CS2103T Software Engineering. This java project was
+This is a java projecte created for CS2103T Software Engineering. This java project was 
 developed using Java version 11.0.1 in MacOS Mojave Version 10.14.6<br /><br />
 Author: Ong Bing Jue <br/>
 Version: 1.0.4 <br />
@@ -56,7 +56,7 @@ Double click the jar file to run
 
 A task in Duke can be classified into three main categories: `todo`, `deadline`, `event `
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width="500">
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width=500>
 
 A `todo` task is a task item that only has a task description. A todo task does not contain a date field.
 
@@ -69,7 +69,7 @@ Expected Outcome:
 
 ### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadline.png" width=500>
 
-A `deadline` task is a task item that has a task description and a task date. The task date indicates when the
+A `deadline` task is a task item that has a task description and a task date. The task date indicates when the 
 `deadline` task is due by. The task date must follow a specified `dd/MM/yy HH:mm` format.
 
 `deadline <taskDescription> /by <taskDate>` : creates a new deadline task
@@ -81,12 +81,12 @@ Expected Outcome:
 
 Possible Error: <br />
 `InvalidParameters: `: <br />
-If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm`
+If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm` 
 format
 
 ### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/event.png" width=500>
 
-A `event` task is a task item that has a task description and a task date. The task date indicates when the
+A `event` task is a task item that has a task description and a task date. The task date indicates when the 
 `event` task is happening at. The task date must follow a specified `dd/MM/yy HH:mm` format.
 
 `event <taskDescription> /at <taskDate>` : creates a new event task
@@ -98,7 +98,7 @@ Expected Outcome:
 
 Possible Error: <br />
 `InvalidParameters: `: <br />
-If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm`
+If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm` 
 format
 
 ### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/list.png" width=500>
@@ -173,7 +173,7 @@ If the specified `<index>` is not valid or `<reminderDate>` is not in the correc
 
 ### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/schedule.png" width=500>
 
-See all tasks in `schedule` view. The `schedule` view is sorted by date order.
+See all tasks in `schedule` view. The `schedule` view is sorted by date order. 
 
 `schedule`: see all task in schedule view
 
@@ -182,6 +182,9 @@ See all tasks in `schedule` view. The `schedule` view is sorted by date order.
 Example of usage: <br />
 `schedule`
 
-`schedule 01/09/2019 0000`
+`schedule 01/09/2019 0000` <br/>
 
 Expected Outcome:
+
+`InvalidParameters: `: <br />
+If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format

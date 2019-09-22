@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StorageTest {
     @Test
     public void loadTest() throws Exception {
-        ArrayList<Task>testTask = new ArrayList<>();
+        ArrayList<Task> testTask = new ArrayList<>();
         testTask.add(new ToDo(" read book"));
         testTask.add(new Event(" party /at 04/07/2019 2359"));
 

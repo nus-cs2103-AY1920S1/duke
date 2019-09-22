@@ -88,7 +88,9 @@ public class Storage {
             }
         } catch (IOException e) {
             System.out.println("File not read");
-        } catch (Exception ignored) { }
+        } catch (Exception e) {
+            return list;
+        }
 
         return list;
     }

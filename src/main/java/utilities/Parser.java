@@ -1,6 +1,16 @@
 package utilities;
 
-import command.*;
+import command.ByeCommand;
+import command.DeleteCommand;
+import command.DeleteExpenseCommand;
+import command.DoneCommand;
+import command.ExpenseCommand;
+import command.Command;
+import command.ExpenseListCommand;
+import command.FindCommand;
+import command.HelloCommand;
+import command.ListCommand;
+import command.TaskCommand;
 
 /**
  * Utilities.Parser processes the user commands and carries out the specific functions on it.

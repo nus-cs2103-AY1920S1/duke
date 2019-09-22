@@ -15,12 +15,18 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * DiaglogBox constructor.
+     *
+     * @param l  labal
+     * @param iv imageView
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
 
         Label indentation = new Label("    ");
-        indentation.setFont(Font.font("Courier New",15));
+        indentation.setFont(Font.font("Courier New", 15));
 
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
@@ -42,13 +48,27 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * DialogBox for the user.
+     *
+     * @param l  label
+     * @param iv imageView
+     * @return DialogBox of the user
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        l.setFont(Font.font("Courier New",15));
+        l.setFont(Font.font("Courier New", 15));
         var db = new DialogBox(l, iv);
         db.setStyle("-fx-background-color: #E0E0E0");
         return db;
     }
 
+    /**
+     * DialogBox for Duke.
+     *
+     * @param l  label
+     * @param iv imageView
+     * @return DialogBox for Duke
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         l.setFont(Font.font("Courier New", 15));
         var db = new DialogBox(l, iv);
@@ -57,7 +77,14 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox getWelcomeDialog(Label l, ImageView iv){
+    /**
+     * DialogBox for welcome message.
+     *
+     * @param l  label
+     * @param iv imageView
+     * @return DialogBox for welcome message
+     */
+    public static DialogBox getWelcomeDialog(Label l, ImageView iv) {
         l.setFont(Font.font("Courier New", FontWeight.BOLD, 20));
         var db = new DialogBox(l, iv);
         db.setStyle("-fx-background-color: #F4F4F4");

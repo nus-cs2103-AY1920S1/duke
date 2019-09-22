@@ -7,14 +7,14 @@ import ui.UI;
 public class ExitCommand implements Command {
 
     /**
-     * Creates an instance of ExitCommand
+     * Creates an instance of ExitCommand.
      */
     public ExitCommand() {
 
     }
 
     /**
-     * Parses the arguments of the Command and executes it
+     * Parses the arguments of the Command and executes it.
      *
      * @param tasks   the TaskList of Tasks
      * @param ui      The User Interface

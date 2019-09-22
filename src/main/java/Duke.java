@@ -21,7 +21,7 @@ public class Duke {
     }
 
     /**
-     * Creates an instance of Duke with CLI or GUI. Duke will load and save data into the filepath
+     * Creates an instance of Duke with CLI or GUI. Duke will load and save data into the filepath.
      *
      * @param filepath the path of which data is saved and loaded from
      * @param isGUI    determines if GUI or CLI is loaded
@@ -32,14 +32,14 @@ public class Duke {
         } else {
             ui = new UI_CLI();
         }
-        assert ui != null: "UI not initiated";
+        assert ui != null : "UI not initiated";
 
         storage = new Storage(Paths.get(filepath));
         tasks = storage.load();
     }
 
     /**
-     * Runs the program with CLI interface
+     * Runs the program with CLI interface.
      */
     public void run() {
         ui.printWelcome();
@@ -53,7 +53,7 @@ public class Duke {
     }
 
     /**
-     * Takes in input from user, parses the command, and executes it
+     * Takes in input from user, parses the command, and executes it.
      *
      * @param userInput input from the user
      * @return output of the command
@@ -66,7 +66,7 @@ public class Duke {
     }
 
     /**
-     * Checks if the program has exited
+     * Checks if the program has exited.
      *
      * @return true if exited, false otherwise
      */

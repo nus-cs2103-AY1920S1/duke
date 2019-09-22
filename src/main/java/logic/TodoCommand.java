@@ -10,7 +10,7 @@ public class TodoCommand implements Command {
     private String arguments;
 
     /**
-     * Creates an instance of TodoCommand with its arguments
+     * Creates an instance of TodoCommand with its arguments.
      *
      * @param arguments arguments of the Command
      */
@@ -19,7 +19,7 @@ public class TodoCommand implements Command {
     }
 
     /**
-     * Parses the arguments of the Command and executes it
+     * Parses the arguments of the Command and executes it.
      *
      * @param tasks   the TaskList of Tasks
      * @param ui      The User Interface
@@ -29,10 +29,10 @@ public class TodoCommand implements Command {
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";
-        try{
+        try {
             if (arguments == null || arguments.trim().equals("")) {
                 content = "OOPS! The description of a todo cannot be empty.\n" +
-                            "Usage: todo DESCRIPTION\n";
+                        "Usage: todo DESCRIPTION\n";
             } else {
                 Task task = new todo(arguments.trim());
                 tasks.add(task);

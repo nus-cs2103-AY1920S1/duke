@@ -7,14 +7,14 @@ import ui.UI;
 public class ListCommand implements Command {
 
     /**
-     * Creates an instance of ListCommand
+     * Creates an instance of ListCommand.
      */
     public ListCommand() {
 
     }
 
     /**
-     * Parses the arguments of the Command and executes it
+     * Parses the arguments of the Command and executes it.
      *
      * @param tasks   the TaskList of Tasks
      * @param ui      The User Interface
@@ -25,7 +25,7 @@ public class ListCommand implements Command {
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         int i;
         String content = "";
-        if(tasks.size() == 0){
+        if (tasks.size() == 0) {
             content += "There are currently no tasks!";
         }
 

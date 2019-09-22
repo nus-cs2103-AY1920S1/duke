@@ -14,7 +14,7 @@ public class DeadlineCommand implements Command {
     private String details;
 
     /**
-     * Creates an instance of DeadlineCommand with its arguments
+     * Creates an instance of DeadlineCommand with its arguments.
      *
      * @param arguments arguments of the Command
      */
@@ -31,7 +31,7 @@ public class DeadlineCommand implements Command {
     }
 
     /**
-     * Parses the arguments of the Command and executes it
+     * Parses the arguments of the Command and executes it.
      *
      * @param tasks   the TaskList of Tasks
      * @param ui      The User Interface
@@ -41,10 +41,10 @@ public class DeadlineCommand implements Command {
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";
-        try{
+        try {
             if (arguments == null || arguments.trim().equals("")) {
                 content = "OOPS! The description of a deadline cannot be empty.\n" +
-                            "Usage: deadline DESCRIPTION [/by DETAILS]\n";
+                        "Usage: deadline DESCRIPTION [/by DETAILS]\n";
             } else {
                 deadline task = new deadline(description, details);
                 tasks.add(task);
@@ -57,7 +57,7 @@ public class DeadlineCommand implements Command {
                 }
                 content += "Now you have " + tasks.size() + " tasks in this list\n";
             }
-        } catch (Exception E){
+        } catch (Exception E) {
             content = "Ohno something went wrong! :(\n";
         }
 

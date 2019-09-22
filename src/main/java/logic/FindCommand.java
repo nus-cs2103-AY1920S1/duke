@@ -10,7 +10,7 @@ public class FindCommand implements Command {
     private String arguments;
 
     /**
-     * Creates an instance of FindCommand with its arguments
+     * Creates an instance of FindCommand with its arguments.
      *
      * @param arguments arguments of the Command
      */
@@ -19,7 +19,7 @@ public class FindCommand implements Command {
     }
 
     /**
-     * Parses the arguments of the Command and executes it
+     * Parses the arguments of the Command and executes it.
      *
      * @param tasks   the TaskList of Tasks
      * @param ui      The User Interface
@@ -41,7 +41,7 @@ public class FindCommand implements Command {
                 }
             }
 
-            if(indexes.size() == 0){
+            if (indexes.size() == 0) {
                 content += "There are no Tasks that fits your description\n";
             }
 

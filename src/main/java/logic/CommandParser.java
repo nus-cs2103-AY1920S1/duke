@@ -14,7 +14,7 @@ public class CommandParser {
     private final String HELP = "help";
 
     /**
-     * Creates an instance of CommandParser with a specified delimiter
+     * Creates an instance of CommandParser with a specified delimiter.
      *
      * @param delimiter a string at which command arguments are separated by
      */
@@ -23,31 +23,31 @@ public class CommandParser {
     }
 
     /**
-     * Parses the command string and outputs the resulting command
+     * Parses the command string and outputs the resulting command.
      *
      * @param s String to be pared
      * @return resulting Command
      */
     public Command parseCommand(String s) {
-        try{
+        try {
             String[] sp = s.split(DELIMITER, 2);
             return parseName(sp[0], sp[1]);
 
-        } catch(Exception E){
+        } catch (Exception E) {
             return parseName(s, null);
         }
 
     }
 
     /**
-     * Parses the command type and its arguments and outputs the corresponding Command
+     * Parses the command type and its arguments and outputs the corresponding Command.
      *
      * @param commandType type of the command as a String
      * @param arguments   arguments of that command
      * @return the resulting Command
      */
     private Command parseName(String commandType, String arguments) {
-        assert commandType != null: "commandType should not be null";
+        assert commandType != null : "commandType should not be null";
 
         if (commandType.equals(EXIT)) {
             return new ExitCommand();

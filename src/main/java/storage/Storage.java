@@ -18,7 +18,7 @@ public class Storage {
     private final String DELIMITER = "//";
 
     /**
-     * Creates an instance of Storage to save and load data into the filepath
+     * Creates an instance of Storage to save and load data into the filepath.
      *
      * @param filePath path of which data is saved and loaded from
      */
@@ -27,14 +27,14 @@ public class Storage {
     }
 
     /**
-     * Creates and instance of Storage with no filepath
+     * Creates and instance of Storage with no filepath.
      */
     public Storage() {
         this.filePath = null;
     }
 
     /**
-     * Loads data from the filepath and outputs the TaskList of Tasks
+     * Loads data from the filepath and outputs the TaskList of Tasks.
      *
      * @return a TaskList of Tasks
      */
@@ -43,7 +43,7 @@ public class Storage {
     }
 
     /**
-     * Saves the current TaskList into the filepath
+     * Saves the current TaskList into the filepath.
      *
      * @param tasks TaskList to be saved
      */
@@ -57,7 +57,7 @@ public class Storage {
 
     /**
      * Attempts to read from filepath and returns it as a TaskList.
-     * It returns an empty TaskList if no filepath is specified or filepath is inaccessible
+     * It returns an empty TaskList if no filepath is specified or filepath is inaccessible.
      *
      * @param filepath filepath in which it is loaded from
      * @return Resulting TaskList
@@ -77,14 +77,14 @@ public class Storage {
     }
 
     /**
-     * Parses the command and returns the resulting Task
+     * Parses the command and returns the resulting Task.
      *
      * @param line input command to be parsed
      * @return resulting Task
      */
     public Task parseLine(String line) {
         //assert line != null: "input string cannot be null";
-        
+
         String[] sp = line.split(DELIMITER);
 
         Class<? extends Task> taskType = parseTaskType(sp[0]);
@@ -105,7 +105,7 @@ public class Storage {
     }
 
     /**
-     * Parses a string and outputs the corresponding task type
+     * Parses a string and outputs the corresponding task type.
      *
      * @param s string to be parsed into the corresponding task type
      * @return resulting task type
@@ -124,7 +124,7 @@ public class Storage {
     }
 
     /**
-     * Parses a string and outputs the corresponding task description
+     * Parses a string and outputs the corresponding task description.
      *
      * @param s string to be parsed into the corresponding task description
      * @return resulting task description
@@ -134,7 +134,7 @@ public class Storage {
     }
 
     /**
-     * Parses a string and outputs the corresponding task isDone
+     * Parses a string and outputs the corresponding task isDone.
      *
      * @param s string to be parsed into the corresponding task isDone
      * @return resulting task isDone
@@ -151,7 +151,7 @@ public class Storage {
     }
 
     /**
-     * Parses a string and outputs the corresponding task details
+     * Parses a string and outputs the corresponding task details.
      *
      * @param s string to be parsed into the corresponding task details
      * @return resulting task details
@@ -165,7 +165,7 @@ public class Storage {
     }
 
     /**
-     * writes data into the file
+     * writes data into the file.
      *
      * @param filePath filepath to write to
      * @param tasks    tasks to be written to filepath
@@ -185,7 +185,7 @@ public class Storage {
     }
 
     /**
-     * Formats and serializes a task into a String
+     * Formats and serializes a task into a String.
      *
      * @param task task to be formatted to a String
      * @return a String that repersents the Task
@@ -213,7 +213,7 @@ public class Storage {
     }
 
     /**
-     * Serializes the Task type into a String
+     * Serializes the Task type into a String.
      *
      * @param task Task to be serialized
      * @return resulting String
@@ -231,7 +231,7 @@ public class Storage {
     }
 
     /**
-     * Serializes the Task isDone into a String
+     * Serializes the Task isDone into a String.
      *
      * @param task Task to be serialized
      * @return resulting String
@@ -247,7 +247,7 @@ public class Storage {
     }
 
     /**
-     * Serializes the Task description into a String
+     * Serializes the Task description into a String.
      *
      * @param task Task to be serialized
      * @return resulting String
@@ -257,7 +257,7 @@ public class Storage {
     }
 
     /**
-     * Serializes the Task details into a String
+     * Serializes the Task details into a String.
      *
      * @param task Task to be serialized
      * @return resulting String

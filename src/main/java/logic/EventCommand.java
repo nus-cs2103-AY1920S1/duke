@@ -12,7 +12,7 @@ public class EventCommand implements Command {
     private String details;
 
     /**
-     * Creates an instance of EventCommand with its arguments
+     * Creates an instance of EventCommand with its arguments.
      *
      * @param arguments arguments of the Command
      */
@@ -29,7 +29,7 @@ public class EventCommand implements Command {
     }
 
     /**
-     * Parses the arguments of the Command and executes it
+     * Parses the arguments of the Command and executes it.
      *
      * @param tasks   the TaskList of Tasks
      * @param ui      The User Interface
@@ -39,10 +39,10 @@ public class EventCommand implements Command {
     @Override
     public String execute(Tasklist tasks, UI ui, Storage storage) {
         String content = "";
-        try{
+        try {
             if (arguments == null || arguments.trim().equals("")) {
                 content = "OOPS!!! The description of a event cannot be empty.\n" +
-                            "event DESCRIPTION [/at DETAILS]\n";
+                        "event DESCRIPTION [/at DETAILS]\n";
             } else {
                 Task task = new event(description, details);
                 tasks.add(task);
@@ -55,7 +55,7 @@ public class EventCommand implements Command {
                 }
                 content += "Now you have " + tasks.size() + " tasks in this list\n";
             }
-        } catch (Exception E){
+        } catch (Exception E) {
             content = "Ohno something went wrong! :(\n";
         }
 

@@ -1,5 +1,10 @@
 # User Guide
 
+## Screenshot
+![alt text][screenshot]
+
+[screenshot]: Ui.png 
+
 ## Features 
 
 ### 1. Adding a todo task: `todo` 
@@ -145,13 +150,29 @@ Here are the matching tasks in your list:
 2.[D][✘] return book (by: Thu, 6 June 2019, 08:00AM)
 ```
 
-### 8. Exiting the program: `bye`
+### 8. Undoing previous command: `undo`
+Restores the task list to the state before the previous undoable command was executed.
+Undoable commands include commands that modify the task list’s content (todo, deadline, event, delete, done and clear).
+
+Format: `undo`
+
+### 9. Redoing the previously undone command: `redo`
+Reverses the most recent `undo` command.
+
+Format: `redo`
+
+### 10. Clearing all tasks: `clear`
+Clears all tasks from the task list.
+
+Format: `clear`
+
+### 11. Exiting the program: `bye`
 
 Exits the program.
 
 Format: `bye`
 
-### 9. Saving the data
+### 12. Saving the data
 Task list data are saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
@@ -164,4 +185,7 @@ There is no need to save manually.
 * Done: `done INDEX`
 * Delete: `delete INDEX` 
 * Find: `find KEYWORD`
+* Undo: `undo`
+* Redo: `redo`
+* Clear: `clear`
 * Bye: `bye`

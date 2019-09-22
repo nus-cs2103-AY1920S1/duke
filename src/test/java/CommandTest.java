@@ -39,7 +39,7 @@ public class CommandTest {
     public void testAddCommand() throws DukeException, IOException {
         alias.load();
         //test 1
-        assertEquals("[D][ ] return book (by: 2nd December 2019, 6PM)",
+        assertEquals("[D][ ] return book (by: 2nd December 2019, 6.00PM)",
                 new AddCommand("D", "return book /by 2/12/2019 1800").toString());
         //test 2
         try {

@@ -78,16 +78,20 @@ public class Parser {
             }
         } else if (type.equals("D")) {
             String[] arr = command.split("/by");
-            if (arr[0].trim().isEmpty()) {
+            if (arr.length < 2) {
+                throw new DukeException("OOPS!!! Deadline must be followed by /by.");
+            } else if (arr[0].trim().isEmpty()) {
                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            } else if (arr.length < 2 || arr[1].trim().isEmpty()) {
+            } else if (arr[1].trim().isEmpty()) {
                 throw new DukeException("OOPS!!! The deadline must have a specified date/time.");
             }
         } else if (type.equals("E")) {
             String[] arr = command.split("/at");
-            if (arr[0].trim().isEmpty()) {
+            if (arr.length < 2) {
+                throw new DukeException("OOPS!!! Event must be followed by /at.");
+            } else if (arr[0].trim().isEmpty()) {
                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-            } else if (arr.length < 2 || arr[1].trim().isEmpty()) {
+            } else if (arr[1].trim().isEmpty()) {
                 throw new DukeException("OOPS!!! The event must have a specified date/time.");
             }
         } else {
@@ -135,7 +139,7 @@ public class Parser {
             System.out.println(input);
             //convert to ISO_LOCAL_DATE_TIME
             LocalDateTime datetime = LocalDateTime.parse(input, DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
-            DateTimeFormatter format = DateTimeFormatter.ofPattern(" MMMM yyyy, ha");
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(" MMMM yyyy, h.mma");
             return getSuffix(datetime.getDayOfMonth()).concat(datetime.format(format));
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date format: dd/mm/yyyy HHmm only!");

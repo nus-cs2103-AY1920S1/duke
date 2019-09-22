@@ -10,6 +10,8 @@ public class Date{
     java.util.Date data;
     public Date(String dateString) {
         precursor = dateString.split(" ", 2)[0];
+        System.out.println(precursor);
+        System.out.println(dateString.split(" ", 2)[1]);
         if (!dateString.equals("  ")) {
             try {
                 this.data = formatter.parse(dateString.split(" ", 2)[1]);

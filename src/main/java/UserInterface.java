@@ -104,7 +104,7 @@ class UserInterface {
         }
 
         if (userInput.split("/").length > 1) {
-            date = userInput.split("/")[1];
+            date = userInput.split("/",2)[1];
         }
         else {
             date = " ";

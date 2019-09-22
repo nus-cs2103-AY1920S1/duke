@@ -1,4 +1,4 @@
-package duke.task.tasks.entities;
+package duke.task;
 
 import util.DateTime;
 

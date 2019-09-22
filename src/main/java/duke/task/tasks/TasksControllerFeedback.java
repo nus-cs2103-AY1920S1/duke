@@ -7,7 +7,7 @@ import util.OutputBuilder;
 import java.util.List;
 import java.util.Optional;
 
-public class TasksControllerFeedbackFormatter {
+public class TasksControllerFeedback {
     public String displayAllTasks(List<Task> tasks) {
         OutputBuilder builder = new OutputBuilder();
         builder.append("Here are the tasks in your list:")

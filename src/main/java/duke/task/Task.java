@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.task.tasks.entities.TimeFrame;
+import error.task.TaskCreationException;
 import error.task.TaskModificationException;
 
 import java.io.Serializable;
@@ -12,6 +12,9 @@ import java.io.Serializable;
  * 3. a details String to serve as a descriptor for each task
  * 4. a TimeFrame within which the task is to be completed
  * 5. a boolean flag to represent if the task is completed.
+ * The constructors of all tasks MUST follow the following formats
+ * 1. Task(String details, LocalDateTime a, LocalDateTime b)
+ * 2. Task(String details, LocalDateTime a).
  */
 public abstract class Task implements Serializable {
     private static final long serialVersionUID = 6529685098267757690L;
@@ -23,11 +26,15 @@ public abstract class Task implements Serializable {
     private TimeFrame timeFrame;
     private boolean isDone;
 
-    public Task(char uniqueCharCode, String details, TimeFrame timeFrame, boolean isDone) {
+    public Task(char uniqueCharCode, String details, TimeFrame timeFrame) throws TaskCreationException {
+        if (!this.isTimeFrameCompatible(timeFrame)) {
+            throw new TaskCreationException("The given time frame is not compatible.");
+        }
+
         this.uniqueCharCode = uniqueCharCode;
         this.details = details;
         this.timeFrame = timeFrame;
-        this.isDone = isDone;
+        this.isDone = false;
     }
 
     public final char getUniqueCharCode() {

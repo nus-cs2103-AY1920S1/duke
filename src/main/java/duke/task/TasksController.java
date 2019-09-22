@@ -1,7 +1,7 @@
 package duke.task;
 
 import duke.command.entities.TaskSorts;
-import duke.task.tasks.TasksControllerFeedbackFormatter;
+import duke.task.tasks.TasksControllerFeedback;
 import error.task.TaskRepoException;
 import error.ui.UiException;
 import ui.UiOutputAccessor;
@@ -10,7 +10,6 @@ import util.ErrorMessageFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Controller task to help mediate the execution of commands that require the retrieval and update of data from the
@@ -19,13 +18,13 @@ import java.util.UUID;
  * The TasksController instance will use this accessor to display any necessary feedback in the corresponding Ui.
  */
 public class TasksController {
-    private TasksControllerFeedbackFormatter feedbackFormatter;
+    private TasksControllerFeedback feedbackFormatter;
     private ITaskRepo tasksRepo;
     private List<UiOutputAccessor> registeredUis;
 
 
     public TasksController(ITaskRepo tasksRepo) {
-        this.feedbackFormatter = new TasksControllerFeedbackFormatter();
+        this.feedbackFormatter = new TasksControllerFeedback();
         this.tasksRepo = tasksRepo;
         this.registeredUis = new ArrayList<>();
     }

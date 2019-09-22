@@ -3,7 +3,7 @@ package duke.task;
 import duke.command.entities.TaskSorts;
 import duke.task.tasks.Deadline;
 import duke.task.tasks.Event;
-import duke.task.tasks.TasksControllerFeedbackFormatter;
+import duke.task.tasks.TasksControllerFeedback;
 import duke.task.tasks.ToDo;
 import error.task.TaskRepoException;
 import error.ui.UiException;
@@ -51,7 +51,7 @@ class TasksControllerTest {
         controller.registerUi(ui.getUiOutputAccessor());
         controller.deleteAllTasks();
         String message = output.getReceivedOutputs().get(0);
-        String expectedMessage = new TasksControllerFeedbackFormatter().displayAllTasksDeleted();
+        String expectedMessage = new TasksControllerFeedback().displayAllTasksDeleted();
 
         Assertions.assertEquals(message, expectedMessage);
     }
@@ -67,7 +67,7 @@ class TasksControllerTest {
         controller.listTasks();
 
         String message = output.getReceivedOutputs().get(0);
-        String expectedMessage = new TasksControllerFeedbackFormatter().displayAllTasks(tasks);
+        String expectedMessage = new TasksControllerFeedback().displayAllTasks(tasks);
 
         Assertions.assertEquals(message, expectedMessage);
     }
@@ -117,7 +117,7 @@ class TasksControllerTest {
         List<Task> expectedTasks = tasks.stream()
                 .filter(task -> task.getTaskDetails().toLowerCase().contains("a"))
                 .collect(Collectors.toList());
-        String expectedMessage = new TasksControllerFeedbackFormatter().displayMatchingTasks(expectedTasks);
+        String expectedMessage = new TasksControllerFeedback().displayMatchingTasks(expectedTasks);
 
         Assertions.assertEquals(message, expectedMessage);
     }

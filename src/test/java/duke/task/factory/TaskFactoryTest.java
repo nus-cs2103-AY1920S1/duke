@@ -1,6 +1,7 @@
 package duke.task.factory;
 
 import duke.task.Task;
+import duke.task.creation.TaskFactory;
 import duke.task.tasks.Deadline;
 import duke.task.tasks.DoAfter;
 import duke.task.tasks.DoWithin;

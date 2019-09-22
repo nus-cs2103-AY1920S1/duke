@@ -11,11 +11,11 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) {
-        String reply = "Here are the tasks in your list:\n\t ";
+        String reply = "Here are the tasks in your list:\n\t";
         for (int i = 0; i < tasks.size(); i++) {
             reply += (i + 1) + "." + tasks.get(i);
             if (i != tasks.size() - 1) {
-                reply += "\n\t ";
+                reply += "\n\t";
             }
         }
         return reply;

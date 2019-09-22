@@ -52,7 +52,7 @@ public class AddCommand extends Command{
     public String execute(TaskList tasks, UI ui, Storage storage) throws DukeException, ArrayIndexOutOfBoundsException {
         this.evaluateTaskType();
         tasks.add(taskToAdd);
-        String reply = "Got it. I've added this task:\n\t  " + taskToAdd + "\n\tNow you have " + tasks.size()
+        String reply = "Got it. I've added this task:\n\t" + taskToAdd + "\nNow you have " + tasks.size()
                 + ((tasks.size() == 1) ? " task" : " tasks") + " in the list.";
         return reply;
     }

@@ -34,7 +34,7 @@ Example of usage:
 
 Submit a deadline task with date and time to Duke
 
-Example of usage: 
+Example of usage (must strictly follow the format): 
 
 `deadline return book /by 2/12/2019 1800`
 
@@ -42,9 +42,9 @@ Example of usage:
 
 Submit an event task with date and time to Duke
 
-Example of usage: 
+Example of usage (must strictly follow the format): 
 
-`event return book /by 2/12/2019 1800`
+`event return book /at 2/12/2019 1800`
 
 ### Feature 3 
 Make changes to task lists.

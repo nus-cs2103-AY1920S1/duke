@@ -16,7 +16,7 @@ import java.io.Serializable;
  * 1. Task(String details, LocalDateTime a, LocalDateTime b)
  * 2. Task(String details, LocalDateTime a).
  */
-public abstract class Task implements Serializable {
+public abstract class Task implements Serializable, Cloneable {
     private static final long serialVersionUID = 6529685098267757690L;
     private static String TASK_IS_DONE_ICON = "✓";
     private static String TASK_NOT_DONE_ICON = "✘";

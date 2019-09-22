@@ -89,17 +89,17 @@ public class Duke implements UiDriver {
 
     @Override
     public void receiveUserInput(String input) {
-        try {
-            // Get command and execute
-            Optional<Command> command = commandFactory.parse(input);
-            if (command.isPresent()) {
-                command.get().execute();
-            }
-
-        } catch (UiException e) {
-            System.out.println("FATAL: Ui stopped working.");
-            System.exit(1);
-        }
+//        try {
+//            // Get command and execute
+//            Optional<Command> command = commandFactory.parse(input);
+//            if (command.isPresent()) {
+//                command.get().execute();
+//            }
+//
+//        } catch (UiException e) {
+//            System.out.println("FATAL: Ui stopped working.");
+//            System.exit(1);
+//        }
     }
 
     private CommandFactory intializeCommandFactory() {
@@ -108,9 +108,9 @@ public class Duke implements UiDriver {
         // create dependencies for command producers
 
         // register CommandProducers
-        factory.registerCommandProducer();
-        factory.registerCommandProducer();
-        factory.registerCommandProducer();
+//        factory.registerCommandProducer();
+//        factory.registerCommandProducer();
+//        factory.registerCommandProducer();
 
         return factory;
     }

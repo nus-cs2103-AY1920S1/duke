@@ -5,6 +5,7 @@ import duke.task.tasks.DoAfter;
 import duke.task.tasks.Event;
 import duke.task.tasks.ToDo;
 import error.storage.StorageException;
+import error.task.TaskCreationException;
 import error.task.TaskRepoException;
 import org.junit.jupiter.api.Test;
 import storage.InMemStorage;
@@ -12,16 +13,18 @@ import storage.InMemStorage;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DefaultTaskRepoTest {
 
-    private List<Task> generateMockTasks() {
+    private List<Task> generateMockTasks() throws TaskCreationException {
         List<Task> mockTasks = new ArrayList<>();
-        ToDo mockTaskA = new ToDo("hello", false, false);
-        Event mockTaskB = new Event("hello", LocalDateTime.now(), false, false);
-        Deadline mockTaskC = new Deadline("hello", LocalDateTime.now(), false, false);
+        ToDo mockTaskA = new ToDo("hello");
+        Event mockTaskB = new Event("hello", LocalDateTime.now());
+        Deadline mockTaskC = new Deadline("hello", LocalDateTime.now());
         mockTasks.add(mockTaskA);
         mockTasks.add(mockTaskB);
         mockTasks.add(mockTaskC);
@@ -30,7 +33,7 @@ class DefaultTaskRepoTest {
     }
 
     @Test
-    void testGetCurrentTasks() throws StorageException, TaskRepoException {
+    void testGetCurrentTasks() throws StorageException, TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = this.generateMockTasks();
@@ -44,7 +47,7 @@ class DefaultTaskRepoTest {
     }
 
     @Test
-    void testGetCurrentTasksCount() throws StorageException, TaskRepoException {
+    void testGetCurrentTasksCount() throws StorageException, TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = this.generateMockTasks();
@@ -56,7 +59,7 @@ class DefaultTaskRepoTest {
 
 
     @Test
-    void setNewTasks() throws TaskRepoException {
+    void setNewTasks() throws TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = this.generateMockTasks();
@@ -70,7 +73,7 @@ class DefaultTaskRepoTest {
     }
 
     @Test
-    void deleteALlTasks() throws StorageException, TaskRepoException {
+    void deleteALlTasks() throws StorageException, TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = this.generateMockTasks();
@@ -82,7 +85,7 @@ class DefaultTaskRepoTest {
     }
 
     @Test
-    void getTaskFromListIndex() throws StorageException, TaskRepoException {
+    void getTaskFromListIndex() throws StorageException, TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = this.generateMockTasks();
@@ -91,22 +94,22 @@ class DefaultTaskRepoTest {
 
         List<Task> returnedTasks = repo.getCurrentTasks();
         assertEquals(returnedTasks.get(0), repo.getTaskFromListIndex(0));
-        assertEquals(returnedTasks.get(0), repo.getTaskFromListIndex(1));
-        assertEquals(returnedTasks.get(0), repo.getTaskFromListIndex(2));
+        assertEquals(returnedTasks.get(1), repo.getTaskFromListIndex(1));
+        assertEquals(returnedTasks.get(2), repo.getTaskFromListIndex(2));
     }
 
     @Test
-    void searchTasks() throws StorageException, TaskRepoException {
+    void searchTasks() throws StorageException, TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = new ArrayList<>();
 
         storage.writeTasks(mockTasks);
 
-        mockTasks.add(new ToDo("A", false, false));
-        mockTasks.add(new Event("b", LocalDateTime.now(), false,false));
-        mockTasks.add(new Deadline("aa23", LocalDateTime.now(), false, false));
-        mockTasks.add(new DoAfter("Aloha", LocalDateTime.now(), false, false));
+        mockTasks.add(new ToDo("A"));
+        mockTasks.add(new Event("b", LocalDateTime.now()));
+        mockTasks.add(new Deadline("aa23", LocalDateTime.now()));
+        mockTasks.add(new DoAfter("Aloha", LocalDateTime.now()));
 
         storage.writeTasks(mockTasks);
 
@@ -120,58 +123,60 @@ class DefaultTaskRepoTest {
     }
 
     @Test
-    void deleteTask() throws TaskRepoException {
+    void deleteTask() throws TaskRepoException, TaskCreationException, StorageException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = new ArrayList<>();
 
-        Task mockTaskA = new Event("b", LocalDateTime.now(), false, false);
-        mockTasks.add(new ToDo("A", false, false));
+        Task mockTaskA = new Event("b", LocalDateTime.now());
+        mockTasks.add(new ToDo("A"));
         mockTasks.add(mockTaskA);
-        mockTasks.add(new Deadline("aa23", LocalDateTime.now(), false, false));
-        mockTasks.add(new DoAfter("Aloha", LocalDateTime.now(), false, false));
+        mockTasks.add(new Deadline("aa23", LocalDateTime.now()));
+        mockTasks.add(new DoAfter("Aloha", LocalDateTime.now()));
+        storage.writeTasks(mockTasks);
 
         repo.deleteTask(1);
         assertFalse(repo.getCurrentTasks().contains(mockTaskA));
     }
 
     @Test
-    void addTask() throws TaskRepoException {
+    void addTask() throws TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = this.generateMockTasks();
 
-        Task mockTaskA = new Event("b", LocalDateTime.now(), false, false);
+        Task mockTaskA = new Event("b", LocalDateTime.now());
         repo.addTask(mockTaskA);
 
-        assertTrue(repo.getCurrentTasks().contains(mockTaskA));
+        Optional<Task> taskA = repo.getCurrentTasks().stream().filter(task -> task.equals(mockTaskA)).findFirst();
+        assertTrue(taskA.isPresent());
     }
 
     @Test
-    void updateTask() throws StorageException, TaskRepoException {
+    void updateTask() throws StorageException, TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = new ArrayList<>();
 
-        Task mockTaskA = new Event("b", LocalDateTime.now(), false, false);
+        Task mockTaskA = new Event("b", LocalDateTime.now());
         mockTasks.add(mockTaskA);
         storage.writeTasks(mockTasks);
 
-        Task mockTaskB = new Event("c", LocalDateTime.now(), false, false);
+        Task mockTaskB = new Event("c", LocalDateTime.now());
         repo.updateTask(0, mockTaskB);
         assertEquals(mockTaskB, repo.getTaskFromListIndex(0));
 
-        Task mockTaskC = new DoAfter("d", LocalDateTime.now(), false, false);
+        Task mockTaskC = new DoAfter("d", LocalDateTime.now());
         assertThrows(TaskRepoException.class, () -> repo.updateTask(0, mockTaskC));
     }
 
     @Test
-    void updateTaskDoneStatus() throws StorageException, TaskRepoException {
+    void updateTaskDoneStatus() throws StorageException, TaskRepoException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
         DefaultTaskRepo repo = new DefaultTaskRepo(storage);
         List<Task> mockTasks = new ArrayList<>();
 
-        Task mockTaskA = new Event("b", LocalDateTime.now(), false, false);
+        Task mockTaskA = new Event("b", LocalDateTime.now());
         mockTasks.add(mockTaskA);
         storage.writeTasks(mockTasks);
 

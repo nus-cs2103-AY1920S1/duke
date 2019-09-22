@@ -5,11 +5,14 @@ import duke.task.tasks.Deadline;
 import duke.task.tasks.Event;
 import duke.task.tasks.TasksControllerFeedback;
 import duke.task.tasks.ToDo;
+import error.task.TaskCreationException;
 import error.task.TaskRepoException;
 import error.ui.UiException;
+import error.ui.UiInitializationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import storage.InMemStorage;
+import ui.StubInput;
 import ui.StubOutput;
 import ui.Ui;
 
@@ -24,18 +27,21 @@ class TasksControllerTest {
     private ITaskRepo repo;
     private TasksController controller;
 
-    private void generateMocks() {
+    private void generateMocks() throws UiInitializationException {
         this.output = new StubOutput();
-        this.ui = new Ui(null, output, null);
+        this.ui = new Ui(new StubInput(null), output, null);
         this.repo = new DefaultTaskRepo(new InMemStorage());
         this.controller = new TasksController(this.repo);
+        this.ui.initializeUi();
+
+        this.controller.registerUi(this.ui.getUiOutputAccessor());
     }
 
-    private List<Task> generateMockTasks() {
+    private List<Task> generateMockTasks() throws TaskCreationException {
         List<Task> mockTasks = new ArrayList<>();
-        ToDo mockTaskA = new ToDo("helloc", false, false);
-        Event mockTaskB = new Event("hellob", LocalDateTime.now(), false, false);
-        Deadline mockTaskC = new Deadline("helloa", LocalDateTime.now(), false, false);
+        ToDo mockTaskA = new ToDo("helloc");
+        Event mockTaskB = new Event("hellob", LocalDateTime.now());
+        Deadline mockTaskC = new Deadline("helloa", LocalDateTime.now());
         mockTasks.add(mockTaskA);
         mockTasks.add(mockTaskB);
         mockTasks.add(mockTaskC);
@@ -45,10 +51,9 @@ class TasksControllerTest {
 
 
     @Test
-    void registerUi() throws UiException {
+    void registerUi() throws UiException, UiInitializationException {
         this.generateMocks();
 
-        controller.registerUi(ui.getUiOutputAccessor());
         controller.deleteAllTasks();
         String message = output.getReceivedOutputs().get(0);
         String expectedMessage = new TasksControllerFeedback().displayAllTasksDeleted();
@@ -57,13 +62,12 @@ class TasksControllerTest {
     }
 
     @Test
-    void listTasks() throws UiException, TaskRepoException {
+    void listTasks() throws UiException, TaskRepoException, TaskCreationException, UiInitializationException {
         this.generateMocks();
 
         List<Task> tasks = this.generateMockTasks();
         this.repo.setNewTasks(tasks);
 
-        controller.registerUi(ui.getUiOutputAccessor());
         controller.listTasks();
 
         String message = output.getReceivedOutputs().get(0);
@@ -73,20 +77,20 @@ class TasksControllerTest {
     }
 
     @Test
-    void addTask() throws UiException, TaskRepoException {
+    void addTask() throws UiException, TaskRepoException, TaskCreationException, UiInitializationException {
         this.generateMocks();
 
-        Task mockTaskA = new ToDo("hello", false, false);
+        Task mockTaskA = new ToDo("hello");
         this.controller.addTask(mockTaskA);
 
         Assertions.assertTrue(repo.getCurrentTasks().contains(mockTaskA));
     }
 
     @Test
-    void setTaskToDone() throws TaskRepoException, UiException {
+    void setTaskToDone() throws TaskRepoException, UiException, TaskCreationException, UiInitializationException {
         this.generateMocks();
 
-        Task mockTaskA = new ToDo("hello", false, false);
+        Task mockTaskA = new ToDo("hello");
         this.repo.addTask(mockTaskA);
         this.controller.setTaskToDone(0);
 
@@ -94,10 +98,10 @@ class TasksControllerTest {
     }
 
     @Test
-    void deleteTask() throws TaskRepoException, UiException {
+    void deleteTask() throws TaskRepoException, UiException, TaskCreationException, UiInitializationException {
         this.generateMocks();
 
-        Task mockTaskA = new ToDo("hello", false, false);
+        Task mockTaskA = new ToDo("hello");
         this.repo.addTask(mockTaskA);
         this.controller.deleteTask(0);
 
@@ -105,11 +109,11 @@ class TasksControllerTest {
     }
 
     @Test
-    void findTasks() throws UiException, TaskRepoException {
+    void findTasks() throws UiException, TaskRepoException, TaskCreationException, UiInitializationException {
         this.generateMocks();
 
         List<Task> tasks = this.generateMockTasks();
-        this.repo.addTask((Task) tasks);
+        this.repo.setNewTasks(tasks);
 
         controller.findTasks("a");
         String message = output.getReceivedOutputs().get(0);
@@ -123,7 +127,7 @@ class TasksControllerTest {
     }
 
     @Test
-    void sortTasks() throws TaskRepoException, UiException {
+    void sortTasks() throws TaskRepoException, UiException, TaskCreationException, UiInitializationException {
         this.generateMocks();
 
         List<Task> tasks = this.generateMockTasks();
@@ -139,7 +143,7 @@ class TasksControllerTest {
     }
 
     @Test
-    void deleteAllTasks() throws TaskRepoException, UiException {
+    void deleteAllTasks() throws TaskRepoException, UiException, TaskCreationException, UiInitializationException {
         this.generateMocks();
 
         List<Task> tasks = this.generateMockTasks();

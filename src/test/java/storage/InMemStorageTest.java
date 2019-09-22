@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.task.tasks.Event;
 import duke.task.tasks.ToDo;
 import error.storage.StorageException;
+import error.task.TaskCreationException;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
@@ -15,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InMemStorageTest {
     @Test
-    void readAndWriteTasks() throws IllegalAccessException, StorageException, NoSuchFieldException {
+    void readAndWriteTasks() throws IllegalAccessException, StorageException, NoSuchFieldException, TaskCreationException {
         InMemStorage storage = new InMemStorage();
 
         List<Task> mockTasks = new ArrayList<>();
-        ToDo mockTaskA = new ToDo("hello", false, false);
-        Event mockTaskB = new Event("hello", LocalDateTime.now(), false, false);
+        ToDo mockTaskA = new ToDo("hello");
+        Event mockTaskB = new Event("hello", LocalDateTime.now());
         mockTasks.add(mockTaskA);
         mockTasks.add(mockTaskB);
 

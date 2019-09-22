@@ -14,7 +14,6 @@ import error.storage.StorageException;
 import error.task.TaskCreationException;
 import error.ui.UiException;
 import ui.Ui;
-import util.command.CommandUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,90 +35,91 @@ public class UpdateCommand extends Command {
     public UpdateCommand(String arguments, Ui ui, TasksController tasksController) throws CommandCreationException {
         super(CommandType.UPDATE, ui, tasksController);
 
-        factory = new TaskFactory();
-        oldTaskIndex = getIndex(arguments);
-
-        try {
-            oldTask = tasksController.listTasks().get(oldTaskIndex);
-        } catch (StorageException e) {
-            throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
-        } catch (IndexOutOfBoundsException e) {
-            throw new CommandCreationException(INVALID_INDEX_MESSAGE);
-        }
-
-        if (isUpdateDate(arguments)) {
-            newTask = updateDate(arguments, oldTask);
-        } else {
-            newTask = updateDetails(arguments, oldTask);
-        }
+//        factory = new TaskFactory();
+//        oldTaskIndex = getIndex(arguments);
+//
+//        try {
+//            oldTask = tasksController.listTasks().get(oldTaskIndex);
+//        } catch (StorageException e) {
+//            throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
+//        } catch (IndexOutOfBoundsException e) {
+//            throw new CommandCreationException(INVALID_INDEX_MESSAGE);
+//        }
+//
+//        if (isUpdateDate(arguments)) {
+//            newTask = updateDate(arguments, oldTask);
+//        } else {
+//            newTask = updateDetails(arguments, oldTask);
+//        }
     }
 
 
     @Override
     public void execute() throws UiException {
-        tasksController.replaceTask(newTask, oldTaskIndex);
+//        tasksController.replaceTask(newTask, oldTaskIndex);
     }
 
     @Override
     public Optional<UndoAction> getUndoAction() {
-        return Optional.of(() -> {
-            tasksController.replaceTask(oldTask, oldTaskIndex);
-        });
+//        return Optional.of(() -> {
+//            tasksController.replaceTask(oldTask, oldTaskIndex);
+//        });
+        return Optional.empty();
     }
 
-    private int getIndex(String arguments) throws CommandCreationException {
-        try {
-            return Integer.parseInt(arguments.split(" ", 2)[0]) - 1;
-        } catch (NumberFormatException e) {
-            throw new CommandCreationException(INVALID_INDEX_MESSAGE);
-        }
-    }
-
-    private boolean isUpdateDate(String arguments) {
-        if (arguments.split(" ", 3)[1].equals("date")) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private Task updateDate(String arguments, Task oldTask) throws CommandCreationException {
-
-        try {
-            if (oldTask.getTaskType().numDates == 0) {
-                throw new CommandCreationException(NO_DATE_MESSAGE);
-            }
-
-            TaskType oldTaskType = oldTask.getTaskType();
-            int numDates = oldTaskType.numDates;
-            String details = oldTask.getTaskDetails();
-
-            List<LocalDateTime> dateTimes = CommandUtils.parseAsTaskArguments(arguments).extractLocalDateTime(numDates);
-
-            return factory.buidTask(oldTaskType, details, dateTimes);
-
-        } catch (UnknownDateTimeException | TaskCreationException e) {
-            throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
-        } catch (DateTimeExtractionException e) {
-            throw new CommandCreationException(INCORRECT_NUM_DATE_MESSAGE);
-        }
-    }
-
-    private Task updateDetails(String arguments, Task oldTask) throws CommandCreationException {
-        try {
-            String newDetails = arguments.split(" ", 2)[1];
-            TaskType oldTaskType = oldTask.getTaskType();
-            List<LocalDateTime> oldDateTimes = oldTask.getTaskTimeFrame().getDateTimes();
-
-            if (oldTaskType == TaskType.EVENT) {
-                oldDateTimes.remove(1);
-            }
-
-            return factory.buidTask(oldTaskType, newDetails, oldDateTimes);
-        } catch (TaskCreationException e) {
-            throw new CommandCreationException(UNEXPECTED_ERROR_MESSAGE);
-        } catch (IndexOutOfBoundsException e) {
-            throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
-        }
-    }
+//    private int getIndex(String arguments) throws CommandCreationException {
+//        try {
+//            return Integer.parseInt(arguments.split(" ", 2)[0]) - 1;
+//        } catch (NumberFormatException e) {
+//            throw new CommandCreationException(INVALID_INDEX_MESSAGE);
+//        }
+//    }
+//
+//    private boolean isUpdateDate(String arguments) {
+//        if (arguments.split(" ", 3)[1].equals("date")) {
+//            return true;
+//        }
+//
+//        return false;
+//    }
+//
+//    private Task updateDate(String arguments, Task oldTask) throws CommandCreationException {
+//
+//        try {
+//            if (oldTask.getTaskType().numDates == 0) {
+//                throw new CommandCreationException(NO_DATE_MESSAGE);
+//            }
+//
+//            TaskType oldTaskType = oldTask.getTaskType();
+//            int numDates = oldTaskType.numDates;
+//            String details = oldTask.getTaskDetails();
+//
+//            List<LocalDateTime> dateTimes = CommandUtils.parseAsTaskArguments(arguments).extractLocalDateTime(numDates);
+//
+//            return factory.buidTask(oldTaskType, details, dateTimes);
+//
+//        } catch (UnknownDateTimeException | TaskCreationException e) {
+//            throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
+//        } catch (DateTimeExtractionException e) {
+//            throw new CommandCreationException(INCORRECT_NUM_DATE_MESSAGE);
+//        }
+//    }
+//
+//    private Task updateDetails(String arguments, Task oldTask) throws CommandCreationException {
+//        try {
+//            String newDetails = arguments.split(" ", 2)[1];
+//            TaskType oldTaskType = oldTask.getTaskType();
+//            List<LocalDateTime> oldDateTimes = oldTask.getTaskTimeFrame().getDateTimes();
+//
+//            if (oldTaskType == TaskType.EVENT) {
+//                oldDateTimes.remove(1);
+//            }
+//
+//            return factory.buidTask(oldTaskType, newDetails, oldDateTimes);
+//        } catch (TaskCreationException e) {
+//            throw new CommandCreationException(UNEXPECTED_ERROR_MESSAGE);
+//        } catch (IndexOutOfBoundsException e) {
+//            throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
+//        }
+//    }
 }

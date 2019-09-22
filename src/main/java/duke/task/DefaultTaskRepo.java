@@ -86,7 +86,7 @@ public class DefaultTaskRepo implements ITaskRepo {
 
         List<Task> tasks = this.getCurrentTasks();
         return tasks.stream()
-                .filter(task -> task.getTaskDescription().toLowerCase().contains(lowerCaseParameter))
+                .filter(task -> task.getTaskDetails().toLowerCase().contains(lowerCaseParameter))
                 .collect(Collectors.toList());
     }
 
@@ -110,7 +110,7 @@ public class DefaultTaskRepo implements ITaskRepo {
             Task taskToAdd = task.clone();
 
             List<Task> tasks = this.getCurrentTasks();
-            this.getCurrentTasks().add(taskToAdd);
+            tasks.add(taskToAdd);
             this.setNewTasks(tasks);
         } catch (CloneNotSupportedException e) {
             throw new TaskRepoException("Failed to add new task");
@@ -124,7 +124,7 @@ public class DefaultTaskRepo implements ITaskRepo {
             Task taskToUpdate = task.clone();
             List<Task> tasks = this.getCurrentTasks();
 
-            if (task.getUniqueCharCode() == tasks.get(index).getUniqueCharCode()) {
+            if (task.getUniqueCharCode() != tasks.get(index).getUniqueCharCode()) {
                 throw new TaskRepoException("Incompatible task types.");
             }
 

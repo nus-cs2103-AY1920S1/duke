@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StubOutput extends DukeOutput {
-    List<String> receivedOutputs = new ArrayList<>();
+    private List<String> receivedOutputs = new ArrayList<>();
     boolean isOpen;
 
     /**

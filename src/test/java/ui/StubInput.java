@@ -18,8 +18,10 @@ public class StubInput extends DukeInput {
      */
     @Override
     protected void startInputChannel(DukeOutput... dukeOutputs) {
-        updateAllListeners(input);
         this.isOpen = true;
+        if (input != null) {
+            updateAllListeners(input);
+        }
     }
 
     /**

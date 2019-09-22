@@ -1,5 +1,6 @@
 package duke.command.command;
 
+import duke.OptionsFactory;
 import duke.command.Command;
 import duke.command.entities.UndoAction;
 import duke.task.Task;
@@ -33,7 +34,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute() throws UiException {
-        tasksController.addTask(task, true);
+        tasksController.addTask(task);
     }
 
     /**
@@ -42,6 +43,7 @@ public class AddCommand extends Command {
      */
     @Override
     public Optional<UndoAction> getUndoAction() {
-        return Optional.of(() -> tasksController.deleteTaskByUuid(task.getUuid(), true));
+//        return Optional.of(() -> tasksController.deleteTaskByUuid(task.getUuid(), true));
+        return Optional.empty();
     }
 }

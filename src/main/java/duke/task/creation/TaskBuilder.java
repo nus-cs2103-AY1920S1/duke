@@ -45,7 +45,7 @@ class TaskBuilder {
 
         List<Object> argsList = new ArrayList<>();
         argsList.add(taskArguments.getDetails());
-        argsList.add(taskArguments.getDateTimes());
+        argsList.addAll(taskArguments.getDateTimes());
 
         return argsList.toArray();
     }

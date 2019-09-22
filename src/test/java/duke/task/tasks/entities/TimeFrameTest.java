@@ -82,12 +82,12 @@ class TimeFrameTest {
 
         assertEquals(mockTimeFrameA.compareTo(mockTimeFrameA), 0);
         assertEquals(mockTimeFrameA.compareTo(mockTimeFrameB), -1);
-        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameC), -1);
-        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameD), -1);
-        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameE), -1);
+        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameC), 1);
+        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameD), 1);
+        assertEquals(mockTimeFrameA.compareTo(mockTimeFrameE), 1);
 
-        assertEquals(mockTimeFrameB.compareTo(mockTimeFrameC), -1);
-        assertEquals(mockTimeFrameC.compareTo(mockTimeFrameB), 1);
+        assertEquals(mockTimeFrameB.compareTo(mockTimeFrameC), 1);
+        assertEquals(mockTimeFrameC.compareTo(mockTimeFrameB), -1);
         assertEquals(mockTimeFrameC.compareTo(mockTimeFrameD), 0);
         assertEquals(mockTimeFrameC.compareTo(mockTimeFrameE), -1);
         assertEquals(mockTimeFrameC.compareTo(mockTimeFrameE), -1);

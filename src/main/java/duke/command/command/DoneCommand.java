@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute() throws UiException {
-        done = tasksController.setTaskToDone(completedTaskIndex);
+//        done = tasksController.setTaskToDone(completedTaskIndex);
     }
 
     /**
@@ -47,11 +47,12 @@ public class DoneCommand extends Command {
      */
     @Override
     public Optional<UndoAction> getUndoAction() {
-        if (done.isEmpty()) {
-            return Optional.empty();
-        } else {
-            Task restore = done.get();
-            return Optional.of(() -> tasksController.setTaskToUndoneByUuid(restore.getUuid()));
-        }
+//        if (done.isEmpty()) {
+//            return Optional.empty();
+//        } else {
+//            Task restore = done.get();
+//            return Optional.of(() -> tasksController.setTaskToUndoneByUuid(restore.getUuid()));
+//        }
+        return Optional.empty();
     }
 }

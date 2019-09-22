@@ -18,7 +18,7 @@ public class TaskFactory {
      * @return Optional of task if it is a valid keyword.
      * @throws TaskCreationException if arguments are invalid.
      */
-    public Optional<Task> getTask(String keyword, String arguments) throws TaskCreationException {
+    public static Optional<Task> getTask(String keyword, String arguments) throws TaskCreationException {
         // scans task types to find corresponding keyword
         Optional<TaskType> taskTypeOptional = Arrays.stream(TaskType.values())
                 .filter(t -> t.keyword.equals(keyword))

@@ -44,7 +44,7 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
      * @return true if the TimeFrame has no description.
      */
     public boolean hasDescription() {
-        return start == null && end == null;
+        return !(start == null && end == null);
     }
 
     /**
@@ -106,6 +106,10 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
             return 1;
         } else if (this.start != null && timeFrame.start != null) {
             return this.start.compareTo(timeFrame.start);
+        } else if (this.start != null) {
+            return 1;
+        } else if (timeFrame.start != null) {
+            return -1;
         } else {
             return 0;
         }
@@ -120,8 +124,21 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof TimeFrame) {
-            return ((TimeFrame) obj).getStart().equals(this.start) &&
-                    ((TimeFrame) obj).getEnd().equals(this.end);
+            boolean startEquals;
+            if (this.start == null) {
+                startEquals = ((TimeFrame) obj).getStart() == null;
+            } else {
+                startEquals = ((TimeFrame) obj).getStart() != null && this.start.equals(((TimeFrame) obj).getStart());
+            }
+
+            boolean endEquals;
+            if (this.end == null) {
+                endEquals = ((TimeFrame) obj).getEnd() == null;
+            } else {
+                endEquals = ((TimeFrame) obj).getEnd() != null && this.end.equals(((TimeFrame) obj).getEnd());
+            }
+
+            return startEquals && endEquals;
         }
 
         return false;

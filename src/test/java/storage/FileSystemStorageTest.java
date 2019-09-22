@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.task.tasks.Event;
 import duke.task.tasks.ToDo;
 import error.storage.StorageException;
+import error.task.TaskCreationException;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -28,13 +29,13 @@ class FileSystemStorageTest {
     }
 
     @Test
-    void readAndWriteTasks() throws StorageException {
+    void readAndWriteTasks() throws StorageException, TaskCreationException {
         String storagePath = rootTestDirectory + "/Tasks.DAT";
         FileSystemStorage storage = FileSystemStorage.getInstance(storagePath);
 
         List<Task> mockTasks = new ArrayList<>();
-        ToDo mockTaskA = new ToDo("hello", false, false);
-        Event mockTaskB = new Event("hello", LocalDateTime.now(), false, false);
+        ToDo mockTaskA = new ToDo("hello");
+        Event mockTaskB = new Event("hello", LocalDateTime.now());
         mockTasks.add(mockTaskA);
         mockTasks.add(mockTaskB);
         storage.writeTasks(mockTasks);

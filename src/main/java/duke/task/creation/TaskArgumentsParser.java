@@ -55,7 +55,7 @@ class TaskArgumentsParser {
             String lastDateTimePattern = foundPatterns.get(foundPatterns.size() - 1);
             foundDateTimes.add(DateTime.parse(lastDateTimePattern));
         } else {
-            String doubleDateTimeRegex = dateTimeRegexWithToSeparator + "|" + dateTimeRegexWithSpaceSeparator;
+            String doubleDateTimeRegex = "(" + dateTimeRegexWithToSeparator + "|" + dateTimeRegexWithSpaceSeparator + ")";
 
             foundPatterns = findMatchingPatterns(arguments, doubleDateTimeRegex);
             String lastDateTimePattern = foundPatterns.get(foundPatterns.size() - 1);
@@ -86,7 +86,8 @@ class TaskArgumentsParser {
         if (doubleDateTimePattern.contains("to")) {
             return doubleDateTimePattern.split("\\s?to\\s?");
         } else {
-            return  doubleDateTimePattern.split("\\s");
+            List<String> separatePatterns = findMatchingPatterns(doubleDateTimePattern, dateTimeRegex);
+            return separatePatterns.toArray(String[]::new);
         }
     }
 

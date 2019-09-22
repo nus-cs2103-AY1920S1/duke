@@ -35,28 +35,28 @@ public class DeleteCommand extends Command {
         super(null, ui, tasksController);
 
         // first store previous list for it to be restored if needed
-        try {
-            this.prevList = new ArrayList<>();
-            prevList.addAll(tasksController.listTasks());
-        } catch (StorageException e) {
-            throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
-        }
-
-        // set flag to delete all in execute method and return
-        if (argument.equals("all")) {
-            deleteAll = true;
-            return;
-        }
-
-        // check if argument is a valid number
-        try {
-            deletedTaskIndex = Integer.parseInt(argument) - 1;
-        } catch (NumberFormatException e) {
-            throw new CommandCreationException(INVALID_INDEX_MESSAGE);
-        }
-
-        // set flag to only delete one
-        deleteAll = false;
+//        try {
+//            this.prevList = new ArrayList<>();
+//            prevList.addAll(tasksController.listTasks());
+//        } catch (StorageException | UiException e) {
+//            throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
+//        }
+//
+//        // set flag to delete all in execute method and return
+//        if (argument.equals("all")) {
+//            deleteAll = true;
+//            return;
+//        }
+//
+//        // check if argument is a valid number
+//        try {
+//            deletedTaskIndex = Integer.parseInt(argument) - 1;
+//        } catch (NumberFormatException e) {
+//            throw new CommandCreationException(INVALID_INDEX_MESSAGE);
+//        }
+//
+//        // set flag to only delete one
+//        deleteAll = false;
     }
 
 
@@ -73,7 +73,7 @@ public class DeleteCommand extends Command {
             return;
         }
 
-        this.deleted = tasksController.deleteTask(deletedTaskIndex);
+        tasksController.deleteTask(deletedTaskIndex);
     }
 
     /**
@@ -83,18 +83,19 @@ public class DeleteCommand extends Command {
      */
     @Override
     public Optional<UndoAction> getUndoAction() {
-        if (this.deleteAll) {
-            return Optional.of(() -> {
-                ui.displayOutput("Noted. I have reverted your list of tasks.");
-                tasksController.setNewTasksList(prevList, false);
-            });
-        }
-
-        if (deleted.isEmpty()) {
-            return Optional.empty();
-        }
-
-        Task tobeRestored = deleted.get();
-        return Optional.of(() -> tasksController.addTask(tobeRestored, true));
+//        if (this.deleteAll) {
+//            return Optional.of(() -> {
+//                ui.displayOutput("Noted. I have reverted your list of tasks.");
+//                tasksController.setNewTasksList(prevList, false);
+//            });
+//        }
+//
+//        if (deleted.isEmpty()) {
+//            return Optional.empty();
+//        }
+//
+//        Task tobeRestored = deleted.get();
+//        return Optional.of(() -> tasksController.addTask(tobeRestored, true));
+        return Optional.empty();
     }
 }

@@ -13,8 +13,7 @@ import org.junit.jupiter.api.Test;
 class TaskFactoryTest {
     @Test
     void testCreateDeadline() throws TaskCreationException {
-        TaskFactory factory = new TaskFactory();
-        Task task = factory.getTask("deadline hello everyone 02/01/2020 0210").get();
+        Task task = TaskFactory.getTask("deadline", "hello everyone 02/01/2020 0210").get();
 
         assert task.getClass().equals(Deadline.class);
         assert task.getTaskDescription().equals("[D][\u2718] hello everyone (by: Jan 02 2020, Thu, 02:10AM)");
@@ -22,8 +21,7 @@ class TaskFactoryTest {
 
     @Test
     void testCreateToDo() throws TaskCreationException {
-        TaskFactory factory = new TaskFactory();
-        Task task = factory.getTask("todo hello everyone").get();
+        Task task = TaskFactory.getTask("todo",  "hello everyone").get();
 
         assert task.getClass().equals(ToDo.class);
         assert task.getTaskDescription().equals("[T][\u2718] hello everyone");
@@ -31,8 +29,7 @@ class TaskFactoryTest {
 
     @Test
     void testCreateEvent() throws TaskCreationException {
-        TaskFactory factory = new TaskFactory();
-        Task task = factory.getTask("event hello everyone 02/01/2020 0210").get();
+        Task task = TaskFactory.getTask("event", "hello everyone 02/01/2020 0210").get();
 
         assert task.getClass().equals(Event.class);
         assert task.getTaskDescription()
@@ -41,8 +38,7 @@ class TaskFactoryTest {
 
     @Test
     void testCreateDoAfter() throws TaskCreationException {
-        TaskFactory factory = new TaskFactory();
-        Task task = factory.getTask("after hello everyone 02/01/2020 0210").get();
+        Task task = TaskFactory.getTask("after", "hello everyone 02/01/2020 0210").get();
 
         assert task.getClass().equals(DoAfter.class);
         assert task.getTaskDescription()
@@ -51,8 +47,7 @@ class TaskFactoryTest {
 
     @Test
     void testCreateDoWithin() throws TaskCreationException {
-        TaskFactory factory = new TaskFactory();
-        Task task = factory.getTask("within hello everyone 02/01/2020 0210 to 03/02/2021 0900").get();
+        Task task = TaskFactory.getTask("within",  "hello everyone 02/01/2020 0210 to 03/02/2021 0900").get();
 
         assert task.getClass().equals(DoWithin.class);
         assert task.getTaskDescription()
@@ -61,8 +56,7 @@ class TaskFactoryTest {
 
     @Test
     void testCreateDoWithin2() throws TaskCreationException {
-        TaskFactory factory = new TaskFactory();
-        Task task = factory.getTask("within hello everyone 02/01/2020 0210 03/02/2021 0900").get();
+        Task task = TaskFactory.getTask("within", "hello everyone 02/01/2020 0210 03/02/2021 0900").get();
 
         assert task.getClass().equals(DoWithin.class);
         assert task.getTaskDescription()

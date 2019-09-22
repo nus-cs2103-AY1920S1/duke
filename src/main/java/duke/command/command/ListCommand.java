@@ -33,7 +33,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute() throws UiException {
-        tasksController.displayAllTasks();
+//        tasksController.displayAllTasks();
     }
 
     /**

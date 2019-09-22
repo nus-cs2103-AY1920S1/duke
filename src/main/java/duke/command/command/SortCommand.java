@@ -25,22 +25,22 @@ public class SortCommand extends Command {
 
     public SortCommand(String arguments, Ui ui, TasksController tasksController) throws CommandCreationException {
         super(CommandType.SORT, ui, tasksController);
-
-        Optional<TaskSorts> taskSort = Arrays.stream(TaskSorts.values())
-                .filter(sort -> sort.keyword.equals(arguments.toLowerCase()))
-                .findFirst();
-
-        if (taskSort.isEmpty()) {
-            throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
-        }
-
-        try {
-            this.comparator = taskSort.get();
-            this.previousCopy = new ArrayList<>();
-            this.previousCopy.addAll(tasksController.listTasks());
-        } catch (StorageException e) {
-            throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
-        }
+//
+//        Optional<TaskSorts> taskSort = Arrays.stream(TaskSorts.values())
+//                .filter(sort -> sort.keyword.equals(arguments.toLowerCase()))
+//                .findFirst();
+//
+//        if (taskSort.isEmpty()) {
+//            throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);
+//        }
+//
+//        try {
+//            this.comparator = taskSort.get();
+//            this.previousCopy = new ArrayList<>();
+//            this.previousCopy.addAll(tasksController.listTasks());
+//        } catch (StorageException e) {
+//            throw new CommandCreationException(STORAGE_ERROR_MESSAGE);
+//        }
     }
 
     @Override
@@ -50,9 +50,10 @@ public class SortCommand extends Command {
 
     @Override
     public Optional<UndoAction> getUndoAction() {
-        return Optional.of(() -> {
-            tasksController.setNewTasksList(previousCopy, false);
-            ui.displayOutput("Noted. I have reverted your list of tasks.");
-        });
+//        return Optional.of(() -> {
+//            tasksController.setNewTasksList(previousCopy, false);
+//            ui.displayOutput("Noted. I have reverted your list of tasks.");
+//        });
+        return Optional.empty();
     }
 }

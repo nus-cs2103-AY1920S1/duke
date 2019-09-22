@@ -23,7 +23,7 @@ public enum Response {
         return true;
     }),
     FIND_BLANK("(?i)^f(ind)?\\s*", (i, s) -> {
-        Printer.printString("Did not specify substring to find");
+        Printer.printString("Did not specify substring to find\nsee 'help' command");
         return true;
     }),
     FIND("(?i)^f(ind)? .+", (i, s) -> {
@@ -59,7 +59,7 @@ public enum Response {
         return false;
     }),
     TODO_NO_NAME("(?i)^t(odo)?\\s*", (i, s) -> {
-        Printer.printError("The description of a todo cannot be empty");
+        Printer.printError("The description of a todo cannot be empty\nsee 'help' command");
         return true;
     }),
     TODO("(?i)^t(odo)? .+", (i, s) -> {
@@ -68,11 +68,11 @@ public enum Response {
         return true;
     }),
     EVENT_NO_NAME("(?i)^e(vent)?\\s*", (i, s) -> {
-        Printer.printError("The description of an event cannot be empty");
+        Printer.printError("The description of an event cannot be empty\nsee 'help' command");
         return true;
     }),
     EVENT_NO_TIME("^(?i)e(vent)? (((?!/at).)+$)|(.+ /at\\s*$)", (i, s) -> {
-        Printer.printError("The date range of an event cannot be empty");
+        Printer.printError("The date range of an event cannot be empty\nsee 'help' command");
         return true;
     }),
     EVENT("(?i)^e(vent)? .+ /at \\d{1,2}/\\d{1,2}/\\d{4} \\d{4} to \\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$", (i, s) -> {
@@ -85,16 +85,16 @@ public enum Response {
         return true;
     }),
     EVENT_WRONG_TIME("(?i)^e(vent)? .+ /at .+", (i, s) -> {
-        Printer.printError(
-                "The date range must be in the format 'DD/MM/YYYY HHMM to DD/MM/YYYY HHMM'");
+        Printer.printError("The date range must be in the format 'DD/MM/YYYY HHMM "
+                + "to DD/MM/YYYY HHMM'\nsee 'help' command");
         return true;
     }),
     DEADLINE_NO_NAME("(?i)^d(eadline)?\\s*", (i, s) -> {
-        Printer.printError("The description of a deadline cannot be empty");
+        Printer.printError("The description of a deadline cannot be empty\nsee 'help' command");
         return true;
     }),
     DEADLINE_NO_TIME("(?i)^d(eadline)? (((?!/by).)+$)|(.+ /by\\s*$)", (i, s) -> {
-        Printer.printError("The due date of a deadline cannot be empty");
+        Printer.printError("The due date of a deadline cannot be empty\nsee 'help' command");
         return true;
     }),
     DEADLINE("(?i)^d(eadline)? .+ /by \\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$", (i, s) -> {
@@ -104,11 +104,32 @@ public enum Response {
         return true;
     }),
     DEADLINE_WRONG_TIME("(?i)^d(eadline)? .+ /by .+", (i, s) -> {
-        Printer.printError("The date must be in the format 'DD/MM/YYYY HHMM'");
+        Printer.printError("The date must be in the format 'DD/MM/YYYY HHMM'\nsee 'help' command");
+        return true;
+    }),
+    HELP("(?i)^h(elp)?\\s*", (i, s) -> {
+        Printer.printString("The following are legal commands:\n\n"
+                + "bye\n"
+                + " - quits the program\n"
+                + "list\n"
+                + " - lists all the tasks\n"
+                + "find <string>\n"
+                + " - filters tasks that contains the string\n"
+                + "done <index>\n"
+                + " - marks task at valid index as done\n"
+                + "delete <index>\n"
+                + " - deletes task at valid index\n"
+                + "todo <name>\n"
+                + " - adds a todo task\n"
+                + "event <name> /at <datetime> to <datetime>\n"
+                + " - adds an event task\n"
+                + "deadline <name> /by <datetime>\n"
+                + " - adds a deadline task\n"
+                + "\ndatetime is of 'DD/MM/YY HHMM' format");
         return true;
     }),
     UNKNOWN(".*", (i, s) -> {
-        Printer.printError("I'm sorry but I don't know what that means :-(");
+        Printer.printError("I'm sorry but I don't know what that means :-(\nsee 'help' command");
         return true;
     });
 

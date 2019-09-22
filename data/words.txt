@@ -1,8 +1,0 @@
-find
-bye
-list
-done
-delete
-todo
-event
-deadline

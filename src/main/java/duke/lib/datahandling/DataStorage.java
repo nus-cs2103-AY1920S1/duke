@@ -7,14 +7,25 @@ import duke.lib.task.Event;
 import duke.lib.task.Task;
 import duke.lib.task.ToDo;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileStore;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class DataStorage {
-    final static String filePath = "data/save.txt";
+    final static String FILE_PATH = "/data/save.txt";
     private ArrayList<Task> tasks;
 
     private final String newLine = System.getProperty("line.separator");
@@ -34,7 +45,7 @@ public class DataStorage {
      */
     public void write(ArrayList<Task> taskList) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(FILE_PATH);
             boolean isFirst = true;
             for (Task task : taskList) {
                 if (isFirst) {
@@ -56,6 +67,7 @@ public class DataStorage {
 
     private Task parseString(String s) throws DukeException {
         try {
+            assert !s.isEmpty();
             String type = s.substring(1, 2);
             String status = s.substring(4, 5);
             String[] spl = s.split(" ", 2);
@@ -100,16 +112,26 @@ public class DataStorage {
         try {
             readFromFile();
         } catch (IOException e) {
-            throw new DukeException("Oops something when wrong with loading your tasks. So sorry.");
+//            throw new DukeException("Oops something when wrong with loading your tasks. So sorry.");
+            throw new DukeException(e.getMessage() + " " + e.toString());
         }
         return tasks;
     }
 
     private void readFromFile() throws IOException, DukeException {
-        File file = new File(filePath);
-
+//        Charset utf8 = StandardCharsets.UTF_8;
+//        Path path = Paths.get(FILE_PATH);
+//        Path parentDir = path.getParent();
+//        Files.createDirectories(parentDir);
+//        Files.write(path, Collections.singleton(""), utf8);
+//        File file = new File(FILE_PATH);
+        File parentDir = new File("/data");
+        if (!parentDir.exists()) {
+            parentDir.mkdir();
+        }
+        File file = new File(FILE_PATH);
         if (!file.exists()) {
-            file.mkdir();
+            file.createNewFile();
         }
 
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -117,7 +139,9 @@ public class DataStorage {
         try {
             String line;
             while ((line = br.readLine()) != null) {
-                tasks.add(parseString(line));
+                if (!line.isEmpty()) {
+                    tasks.add(parseString(line));
+                }
             }
         } finally {
             br.close();

@@ -28,11 +28,14 @@ public class Parser {
      * @param storage Storage of where the save file is located
      */
     public Parser(TaskList taskList, DataStorage storage) throws DukeException{
-        this.storage = storage;
-        this.taskList = taskList;
-        this.ui = new UI();
-        this.spellCheck = new SpellCheck();
-        this.isExit = false;
+        try {
+            this.spellCheck = new SpellCheck();
+        } finally {
+            this.storage = storage;
+            this.taskList = taskList;
+            this.ui = new UI();
+            this.isExit = false;
+        }
     }
 
     /**

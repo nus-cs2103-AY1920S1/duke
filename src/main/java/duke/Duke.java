@@ -28,7 +28,7 @@ public class Duke {
     /**
      * Constructor which instantiates a ui, data storage, and attempts loading save dat from the filepath given.
      */
-    public Duke( ) throws DukeException {
+    public Duke() throws DukeException {
         DataStorage storage = new DataStorage();
         TaskList tasks;
         try {
@@ -37,7 +37,6 @@ public class Duke {
             parser = new Parser(tasks, storage);
         } catch (DukeException e) {
             tasks = new TaskList();
-            parser = new Parser(tasks, storage);
             throw e;
         }
 

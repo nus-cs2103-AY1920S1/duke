@@ -1,6 +1,5 @@
 package duke.lib.datahandling;
 
-import duke.lib.TaskList;
 import duke.lib.ui.UI;
 import duke.lib.common.DukeException;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ public class ParserTest {
     public void isExitTest() throws DukeException {
         TaskList t = new TaskList();
         DataStorage storage = new DataStorageStub();
-        Parser p = new Parser(t, storage, new UI());
+        Parser p = new Parser(t, storage);
         p.parse("deadline test /by 20/12/2019 1800");
         assertEquals(false, p.isExit());
         p.parse("todo eat");

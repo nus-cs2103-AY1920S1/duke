@@ -5,9 +5,6 @@ import duke.lib.task.Task;
 import java.util.ArrayList;
 
 public class DataStorageStub extends DataStorage {
-    public DataStorageStub () {
-        super("data/save.txt");
-    }
 
     @Override
     public ArrayList<Task> load() {
@@ -15,5 +12,7 @@ public class DataStorageStub extends DataStorage {
     }
 
     @Override
-    public void write(ArrayList<Task> taskList) {}
+    public void write(ArrayList<Task> taskList) {
+
+    }
 }

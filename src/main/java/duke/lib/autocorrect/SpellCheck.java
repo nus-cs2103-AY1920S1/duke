@@ -19,7 +19,8 @@ public class SpellCheck {
             dict = new WordDictionary();
             isCaseSensitive = true;
         } catch (IOException e) {
-            throw new DukeException("Something when wrong with initializing the dictionary");
+//            throw new DukeException("Something when wrong with initializing the dictionary");
+            throw new DukeException(e.getMessage() + " " + e.getClass().getName());
         }
     }
 

@@ -56,7 +56,7 @@ Double click the jar file to run
 
 A task in Duke can be classified into three main categories: `todo`, `deadline`, `event `
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width="500">
 
 A `todo` task is a task item that only has a task description. A todo task does not contain a date field.
 
@@ -67,7 +67,7 @@ Example of usage: <br />
 
 Expected Outcome:
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadline.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadline.png" width="500">
 
 A `deadline` task is a task item that has a task description and a task date. The task date indicates when the 
 `deadline` task is due by. The task date must follow a specified `dd/MM/yy HH:mm` format.
@@ -84,7 +84,7 @@ Possible Error: <br />
 If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm` 
 format
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/event.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/event.png" width="500">
 
 A `event` task is a task item that has a task description and a task date. The task date indicates when the 
 `event` task is happening at. The task date must follow a specified `dd/MM/yy HH:mm` format.
@@ -101,7 +101,7 @@ Possible Error: <br />
 If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm` 
 format
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/list.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/list.png" width="500">
 
 
 Displays all task items in `list` view. The items are displayed in the order they are entered
@@ -113,7 +113,7 @@ Example of usage: <br />
 
 Expected Outcome:
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/done.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/done.png" width="500">
 
 Each task item can be marked as `done`. It marks the task at the specified index in `list` view as done.
 
@@ -128,7 +128,7 @@ Possible Error: <br />
 `InvalidParameters: `: <br />
 If the specified `<index>` is not valid
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/delete.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/delete.png" width="500">
 
 Each task item can be deleted. It deletes a task item at the specified index in `list` view.
 
@@ -143,7 +143,7 @@ Possible Error: <br />
 `InvalidParameters: `: <br />
 If the specified `<index>` is not valid
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/find.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/find.png" width="500">
 
 Find the task with a matching keyword entered by the user
 
@@ -155,7 +155,7 @@ Example of usage: <br />
 Expected Outcome:
 
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/remind.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/remind.png" width="500">
 
 Sets a reminder for a specified task. The reminder is set for the task with the specified index in the list view. The
 date set for the reminder must follow the `dd/MM/yy HH:mm` format.  To change the date for a reminder that has been set,
@@ -171,7 +171,7 @@ Expected Outcome:
 `InvalidParameters: `: <br />
 If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/schedule.png" width=500>
+### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/schedule.png" width="500">
 
 See all tasks in `schedule` view. The `schedule` view is sorted by date order. 
 

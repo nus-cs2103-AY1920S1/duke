@@ -69,7 +69,7 @@ Doko can help you to postpone your deadline tasks by a given duration.
 ### Recurring Tasks
 Doko can take note of tasks that are recurring, and will populate the task list accordingly.
 
-[Image](media/RecurringTasks1.png)
+![Image](media/RecurringTasks1.png)
 ![Image](media/RecurringTasks2.png)
 
 ### Help Pages

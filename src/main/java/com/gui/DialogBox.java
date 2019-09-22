@@ -44,6 +44,8 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setStyle("-fx-background-color: #545F66; -fx-background-radius: 5");
+        dialog.setWrapText(true);
         //displayPicture.setImage(img);
         myCircle.setFill(new ImagePattern(img));
     }
@@ -56,7 +58,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.setStyle("-fx-background-color: #2E86AB");
+        dialog.setStyle("-fx-background-color: #2E86AB; -fx-background-radius: 5");
     }
 
     /**

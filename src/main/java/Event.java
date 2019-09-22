@@ -13,6 +13,10 @@ public class Event extends Task {
         super(description);
         this.at = at;
     }
+     @Override
+    public String date() {
+        return this.at;
+    }
 
     @Override
     public String toString() {

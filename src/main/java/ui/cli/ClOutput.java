@@ -1,13 +1,26 @@
 package ui.cli;
 
 import error.ui.UiException;
+import error.ui.UiInitializationException;
 import ui.DukeOutput;
 
 /**
  * Encapsulates the command line as a DukeOutput output channel for the application.
  */
 public class ClOutput extends DukeOutput {
-    private static String HORIZONTAL_DIVIDER = "    ____________________________________________________________\n";
+
+    private static final String DUKE_LOGO =
+            " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static final String GREETING =
+            DUKE_LOGO + "\n" + "\n"
+                    + "Hello! I'm duke.Duke\n"
+                    + "What can I do for you?";
+
     private boolean isOpen;
 
     /**
@@ -23,6 +36,7 @@ public class ClOutput extends DukeOutput {
 
             String messageWithIndent = message.replaceAll("(?m)^", "     ");
 
+            String HORIZONTAL_DIVIDER = "    ____________________________________________________________\n";
             String output = builder.append(HORIZONTAL_DIVIDER)
                     .append("\n")
                     .append(messageWithIndent)
@@ -38,8 +52,14 @@ public class ClOutput extends DukeOutput {
      * Opens the output channel.
      */
     @Override
-    public void startOutputChannel() {
+    public void startOutputChannel() throws UiInitializationException {
         this.isOpen = true;
+
+        try {
+            this.displayOutput(GREETING);
+        } catch (UiException e) {
+            throw new UiInitializationException("Something went wrong with the output channel.");
+        }
     }
 
     /**

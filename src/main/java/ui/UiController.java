@@ -1,6 +1,7 @@
 package ui;
 
 import error.ui.UiException;
+import error.ui.UiInitializationException;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
@@ -60,7 +61,7 @@ public class UiController implements DukeInputListener {
      * Initializes Ui by opening the corresponding input and output channels of DukeInput and DukeOutput instances. Ui
      * must be initialized before controller can start receiving inputs and it can display any output.
      */
-    public void initializeUi() {
+    public void initializeUi() throws UiInitializationException {
         this.isUiInitialized = true;
 
         if (inputChannel.isBlocking()) {

@@ -1,6 +1,7 @@
 package ui;
 
 import error.ui.UiException;
+import error.ui.UiInitializationException;
 
 /**
  * An abstract class to encapsulate an output channel for the application's Ui. It provides a method for the application
@@ -18,7 +19,7 @@ public abstract class DukeOutput {
     /**
      * Opens the output channel.
      */
-    public abstract void startOutputChannel();
+    public abstract void startOutputChannel() throws UiInitializationException;
 
     /**
      * Closes the output channel.

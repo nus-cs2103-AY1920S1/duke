@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.command.factory.CommandFactory;
 import duke.task.TasksController;
 import error.ui.UiException;
+import error.ui.UiInitializationException;
 import storage.Storage;
 import ui.UiController;
 import ui.UiDriver;
@@ -56,7 +57,12 @@ public class Duke implements UiDriver {
     public void run() {
         System.out.println("Program starting...");
 
-        ui.initializeUi();
+        try {
+            ui.initializeUi();
+        } catch (UiInitializationException e) {
+            System.out.println("FATAL: Failed to initialize ui.");
+            System.exit(1);
+        }
     }
 
     /**
@@ -73,7 +79,7 @@ public class Duke implements UiDriver {
         TasksController tasks = TasksController.fromStorage(storage, ui);
 
         // Initialize command factory
-        commandFactory = new CommandFactory(tasks, ui);
+        commandFactory = intializeCommandFactory();
     }
 
 
@@ -92,4 +98,16 @@ public class Duke implements UiDriver {
         }
     }
 
+    private CommandFactory intializeCommandFactory() {
+        CommandFactory factory = new CommandFactory();
+
+        // create dependencies for command producers
+
+        // register CommandProducers
+        factory.registerCommandProducer();
+        factory.registerCommandProducer();
+        factory.registerCommandProducer();
+
+        return factory;
+    }
 }

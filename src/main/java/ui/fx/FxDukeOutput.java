@@ -14,10 +14,9 @@ public class FxDukeOutput extends DukeOutput {
      * start() is called all after stop() is called SHOULD THROW a UiException.
      *
      * @param message output to be displayed in the output channel
-     * @throws UiException when implemented output channel fails to display the output.
      */
     @Override
-    public void displayOutput(String message) throws UiException {
+    public void displayOutput(String message) {
         if (this.isOpen && FxMain.getActiveMainWindowController() != null) {
             FxMain.getActiveMainWindowController().printDukeMessage(message);
         }

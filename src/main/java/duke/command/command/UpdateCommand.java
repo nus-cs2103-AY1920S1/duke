@@ -13,7 +13,7 @@ import error.datetime.UnknownDateTimeException;
 import error.storage.StorageException;
 import error.task.TaskCreationException;
 import error.ui.UiException;
-import ui.UiController;
+import ui.Ui;
 import util.command.CommandUtils;
 
 import java.time.LocalDateTime;
@@ -33,7 +33,7 @@ public class UpdateCommand extends Command {
     private Task newTask;
     private Task oldTask;
 
-    public UpdateCommand(String arguments, UiController ui, TasksController tasksController) throws CommandCreationException {
+    public UpdateCommand(String arguments, Ui ui, TasksController tasksController) throws CommandCreationException {
         super(CommandType.UPDATE, ui, tasksController);
 
         factory = new TaskFactory();

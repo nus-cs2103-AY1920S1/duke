@@ -9,7 +9,7 @@ import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.storage.StorageException;
 import error.ui.UiException;
-import ui.UiController;
+import ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +23,7 @@ public class SortCommand extends Command {
     TaskSorts comparator;
     List<Task> previousCopy;
 
-    public SortCommand(String arguments, UiController ui, TasksController tasksController) throws CommandCreationException {
+    public SortCommand(String arguments, Ui ui, TasksController tasksController) throws CommandCreationException {
         super(CommandType.SORT, ui, tasksController);
 
         Optional<TaskSorts> taskSort = Arrays.stream(TaskSorts.values())

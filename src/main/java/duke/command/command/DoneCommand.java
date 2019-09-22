@@ -7,7 +7,7 @@ import duke.task.Task;
 import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
-import ui.UiController;
+import ui.Ui;
 
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
      * @param doneIndex index of task to be marked as done
      * @throws CommandCreationException if index argument is invalid
      */
-    public DoneCommand(String doneIndex, UiController ui, TasksController tasksController) throws CommandCreationException {
+    public DoneCommand(String doneIndex, Ui ui, TasksController tasksController) throws CommandCreationException {
         super(CommandType.DONE, ui, tasksController);
         try {
             completedTaskIndex = Integer.parseInt(doneIndex) - 1;

@@ -5,13 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 
-public class UiControllerFactoryTest {
+public class UiFactoryTest {
     @Test
     void testUiControllerFactory() throws NoSuchFieldException, IllegalAccessException {
         StubUiDriver driver = new StubUiDriver();
 
         for (UiType type : UiType.values()) {
-            UiController controller = UiControllerFactory.createUiController(driver, type);
+            Ui controller = UiControllerFactory.createUiController(driver, type);
 
             Field dukeInputField = controller.getClass().getDeclaredField("inputChannel");
             Field dukeOutputField = controller.getClass().getDeclaredField("outputChannel");

@@ -5,7 +5,7 @@ import duke.command.entities.UndoAction;
 import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
-import ui.UiController;
+import ui.Ui;
 
 import java.util.Optional;
 
@@ -14,10 +14,10 @@ import java.util.Optional;
  */
 public abstract class Command {
     private CommandType type;
-    protected UiController ui;
+    protected Ui ui;
     protected TasksController tasksController;
 
-    protected Command(CommandType type, UiController ui, TasksController tasksController) throws CommandCreationException {
+    protected Command(CommandType type, Ui ui, TasksController tasksController) throws CommandCreationException {
         this.type = type;
         this.ui = ui;
         this.tasksController = tasksController;

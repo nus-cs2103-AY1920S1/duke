@@ -40,12 +40,14 @@ public class TasksControllerFeedbackFormatter {
         return builder.build();
     }
 
-    public String displayTaskSetToDone(Task modifiedTask) {
+    public String displayTaskSetToDone(Optional<Task> modifiedTask) {
         OutputBuilder builder = new OutputBuilder();
-        builder.append("Nice! I've marked this task as done!")
+        builder.append("Nice! I've marked this task as done!");
+
+        modifiedTask.ifPresent(task -> builder
                 .newLine()
                 .indent()
-                .append(modifiedTask.getTaskDescription());
+                .append(task.getTaskDescription()));
 
         return builder.build();
     }

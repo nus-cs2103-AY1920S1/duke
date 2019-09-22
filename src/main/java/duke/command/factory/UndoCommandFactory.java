@@ -6,17 +6,17 @@ import duke.command.entities.UndoAction;
 import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
-import ui.UiController;
+import ui.Ui;
 import util.command.CommandUtils;
 
 import java.util.Optional;
 import java.util.Stack;
 
 public class UndoCommandFactory {
-    private UiController ui;
+    private Ui ui;
     private TasksController tasksController;
 
-    public UndoCommandFactory(UiController ui, TasksController tasksController) {
+    public UndoCommandFactory(Ui ui, TasksController tasksController) {
         this.ui = ui;
         this.tasksController = tasksController;
     }

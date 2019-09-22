@@ -2,12 +2,7 @@ package duke.task;
 
 import duke.command.entities.TaskSorts;
 import duke.task.tasks.TasksControllerFeedbackFormatter;
-import error.storage.StorageException;
-import error.task.TaskAddToModelException;
-import error.task.TaskInvalidIndexException;
-import error.task.TaskModificationException;
-import error.task.TaskNotFoundInModelException;
-import error.task.TaskRetrievalFromModelException;
+import error.task.TaskRepoException;
 import error.ui.UiException;
 import ui.UiOutputAccessor;
 import util.ErrorMessageFormatter;
@@ -25,13 +20,13 @@ import java.util.UUID;
  */
 public class TasksController {
     private TasksControllerFeedbackFormatter feedbackFormatter;
-    private TasksModel tasksModel;
+    private ITaskRepo tasksRepo;
     private List<UiOutputAccessor> registeredUis;
 
 
-    public TasksController(TasksModel tasksModel) {
+    public TasksController(ITaskRepo tasksRepo) {
         this.feedbackFormatter = new TasksControllerFeedbackFormatter();
-        this.tasksModel = tasksModel;
+        this.tasksRepo = tasksRepo;
         this.registeredUis = new ArrayList<>();
     }
 
@@ -46,28 +41,27 @@ public class TasksController {
         this.registeredUis.add(uiOutputAccessor);
     }
 
-    private void displayFeedbackInRegisteredUis(String feedbackMessage) throws UiException {
+    private void displayFeedback(String feedbackMessage) throws UiException {
         for (UiOutputAccessor outputChannel : registeredUis) {
             outputChannel.displayOutput(feedbackMessage);
         }
+    }
+
+    private void displayError(TaskRepoException e) throws UiException {
+        this.displayFeedback(ErrorMessageFormatter.formatErrorMessage(e.getMessage()));
     }
 
     /**
      * Displays a lists all of the user's tasks in the TasksModel in each of the registered Uis.
      */
     public void listTasks() throws UiException {
-        List<Task> tasks;
-
         try {
-            tasks = tasksModel.getCurrentTasks();
-        } catch (TaskRetrievalFromModelException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Unable to retrieve tasks.");
-            this.displayFeedbackInRegisteredUis(feedback);
-            return;
+            List<Task> tasks = tasksRepo.getCurrentTasks();
+            String feedback = this.feedbackFormatter.displayAllTasks(tasks);
+            this.displayFeedback(feedback);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
         }
-
-        String feedback = this.feedbackFormatter.displayAllTasks(tasks);
-        this.displayFeedbackInRegisteredUis(feedback);
     }
 
     /**
@@ -76,27 +70,24 @@ public class TasksController {
      * @param task the task to be added.
      */
     public void addTask(Task task) throws UiException {
-        // Try to add task to the model.
         try {
-            tasksModel.addTask(task);
-        } catch (TaskAddToModelException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Unable to add task.");
-            this.displayFeedbackInRegisteredUis(feedback);
+            tasksRepo.addTask(task);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
             return;
         }
 
-        Optional<Integer> numTasks;
-
         // Try to get number of tasks after adding the task to the model
+        Optional<Integer> numTasks;
         try {
-            numTasks = Optional.of(tasksModel.getCurrentTasksCount());
-        } catch (TaskRetrievalFromModelException e) {
+            numTasks = Optional.of(tasksRepo.getCurrentTasksCount());
+        } catch (TaskRepoException e) {
             numTasks = Optional.empty();
         }
 
         // Display feedback
         String feedback = this.feedbackFormatter.displayTaskAdded(task, numTasks);
-        this.displayFeedbackInRegisteredUis(feedback);
+        this.displayFeedback(feedback);
     }
 
     /**
@@ -105,38 +96,23 @@ public class TasksController {
      * @param index index of task to be set to done.
      */
     public void setTaskToDone(int index) throws UiException {
-        // Try to retrieve the task UUID from the index provided and retrieve the corresponding task
-        UUID taskUUID;
-        Task modifiedTask;
         try {
-            taskUUID = tasksModel.getTaskUUIDFromListIndex(index);
-            modifiedTask = tasksModel.getTaskFromUuid(taskUUID);
-        } catch (TaskRetrievalFromModelException | TaskNotFoundInModelException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Unable to set task to done.");
-            this.displayFeedbackInRegisteredUis(feedback);
-            return;
-        } catch (TaskInvalidIndexException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage(e.getMessage());
-            this.displayFeedbackInRegisteredUis(feedback);
+            tasksRepo.updateTaskDoneStatus(index, true);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
             return;
         }
 
-        // Tries to update the task to done
+        // Try to get modified task
+        Optional<Task> modifiedTask;
         try {
-            tasksModel.updateTaskDoneStatus(taskUUID, true);
-        } catch (TaskNotFoundInModelException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage(e.getMessage());
-            this.displayFeedbackInRegisteredUis(feedback);
-            return;
-        } catch (TaskModificationException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Task is already set to done.");
-            this.displayFeedbackInRegisteredUis(feedback);
-            return;
+            modifiedTask = Optional.of(tasksRepo.getTaskFromListIndex(index));
+        } catch (TaskRepoException e) {
+            modifiedTask = Optional.empty();
         }
-
         // Prints corresponding feedback
         String feedback = this.feedbackFormatter.displayTaskSetToDone(modifiedTask);
-        this.displayFeedbackInRegisteredUis(feedback);
+        this.displayFeedback(feedback);
     }
 
     /**
@@ -145,42 +121,27 @@ public class TasksController {
      * @param index index of task to be deleted.
      */
     public void deleteTask(int index) throws UiException {
-        // Try to retrieve the task UUID from the index provided and retrieve the corresponding task
-        UUID taskUUID;
-        Task deletedTask;
+        Task taskToBeDeleted;
+
+        // Try accessing and deleting task
         try {
-            taskUUID = tasksModel.getTaskUUIDFromListIndex(index);
-            deletedTask = tasksModel.getTaskFromUuid(taskUUID);
-        } catch (TaskRetrievalFromModelException | TaskNotFoundInModelException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Unable to delete task.");
-            this.displayFeedbackInRegisteredUis(feedback);
-            return;
-        } catch (TaskInvalidIndexException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage(e.getMessage());
-            this.displayFeedbackInRegisteredUis(feedback);
+            taskToBeDeleted = tasksRepo.getTaskFromListIndex(index);
+            tasksRepo.deleteTask(index);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
             return;
         }
 
-        // Try to delete task from model
-        try {
-            tasksModel.deleteTask(taskUUID);
-        } catch (TaskNotFoundInModelException | TaskModificationException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Unable to delete task.");
-            this.displayFeedbackInRegisteredUis(feedback);
-            return;
-        }
-
-        // Try to get number of tasks after deleting the task from the model
+        // Try getting size of new list
         Optional<Integer> numTasks;
         try {
-            numTasks = Optional.of(tasksModel.getCurrentTasksCount());
-        } catch (TaskRetrievalFromModelException e) {
+            numTasks = Optional.of(tasksRepo.getCurrentTasksCount());
+        } catch (TaskRepoException e) {
             numTasks = Optional.empty();
         }
 
-        // Prints corresponding feedback
-        String feedback = this.feedbackFormatter.displayTaskDeleted(deletedTask, numTasks);
-        this.displayFeedbackInRegisteredUis(feedback);
+        String feedback = this.feedbackFormatter.displayTaskDeleted(taskToBeDeleted, numTasks);
+        this.displayFeedback(feedback);
     }
 
     /**
@@ -190,46 +151,47 @@ public class TasksController {
      */
     public void findTasks(String parameter) throws UiException {
         // Try to find tasks
-        List<Task> matchingTasks;
         try {
-            matchingTasks = tasksModel.searchTasks(parameter);
-        } catch (TaskRetrievalFromModelException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Unable to retrieve tasks.");
-            this.displayFeedbackInRegisteredUis(feedback);
-            return;
+            List<Task> matchingTasks = tasksRepo.searchTasks(parameter);
+            String feedback = this.feedbackFormatter.displayMatchingTasks(matchingTasks);
+            this.displayFeedback(feedback);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
         }
-
-        // Prints corresponding feedback
-        String feedback = this.feedbackFormatter.displayMatchingTasks(matchingTasks);
-        this.displayFeedbackInRegisteredUis(feedback);
     }
 
+    /**
+     * Sorts tasks according to the specified sorting method.
+     * @param sortingMethod method with which to sort the user's tasks.
+     * @throws UiException if the ui fails unexpectedly
+     */
     public void sortTasks(TaskSorts sortingMethod) throws UiException {
         // Try to sort tasks and print corresponding feedback
         try {
-            List<Task> tasks = tasksModel.getCurrentTasks();
+            List<Task> tasks = tasksRepo.getCurrentTasks();
             tasks.sort(sortingMethod.comparator);
-            tasksModel.setNewTasks(tasks);
+            tasksRepo.setNewTasks(tasks);
 
             String feedback = this.feedbackFormatter.displayTasksSorted(sortingMethod);
-            this.displayFeedbackInRegisteredUis(feedback);
-
-        } catch (TaskRetrievalFromModelException | TaskModificationException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Unable to sort tasks.");
-            this.displayFeedbackInRegisteredUis(feedback);
+            this.displayFeedback(feedback);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
         }
     }
 
+    /**
+     * Delete all of the user's task data.
+     * @throws UiException if the ui fails unexpectedly.
+     */
     public void deleteAllTasks() throws UiException {
         //Try to delete tasks and print corresponding feedback
         try {
-            tasksModel.deleteALlTasks();
+            tasksRepo.deleteAllTasks();
 
             String feedback = this.feedbackFormatter.displayAllTasksDeleted();
-            this.displayFeedbackInRegisteredUis(feedback);
-        } catch (TaskModificationException e) {
-            String feedback = ErrorMessageFormatter.formatErrorMessage("Unable to delete tasks.");
-            this.displayFeedbackInRegisteredUis(feedback);
+            this.displayFeedback(feedback);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
         }
     }
 }

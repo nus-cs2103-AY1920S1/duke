@@ -7,7 +7,7 @@ import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.storage.StorageException;
 import error.ui.UiException;
-import ui.UiController;
+import ui.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      * @param argument index of task to be deleted
      * @throws CommandCreationException if arguments are invalid
      */
-    public DeleteCommand(String argument, UiController ui, TasksController tasksController) throws CommandCreationException {
+    public DeleteCommand(String argument, Ui ui, TasksController tasksController) throws CommandCreationException {
         super(null, ui, tasksController);
 
         // first store previous list for it to be restored if needed

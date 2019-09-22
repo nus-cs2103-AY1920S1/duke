@@ -1,21 +1,22 @@
 package ui;
 
 import error.ui.UiException;
+import error.ui.UiInitializationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
-class UiControllerTest {
+class UiTest {
 
     private StubUiDriver stubUiDriver = new StubUiDriver();
 
 
     @Test
     void controllerShouldNotDisplayMessageIfUninitialized() {
-        UiController controller = new UiController(new StubInput(null), new StubOutput(), stubUiDriver);
-        UiOutputAccessor outputAccessor = controller.getUiOutputAccessor();
+        Ui ui = new Ui(new StubInput(null), new StubOutput(), stubUiDriver);
+        UiOutputAccessor outputAccessor = ui.getUiOutputAccessor();
 
         Assertions.assertThrows(UiException.class, () -> {
           outputAccessor.displayOutput("hello");
@@ -23,18 +24,18 @@ class UiControllerTest {
     }
 
     @Test
-    void receiveInput() {
+    void receiveInput() throws UiInitializationException {
         stubUiDriver.setExpectedInput("ABCDE12345");
-        UiController controller = new UiController(new StubInput("ABCDE12345"), new StubOutput(), stubUiDriver);
-        controller.initializeUi();
+        Ui ui = new Ui(new StubInput("ABCDE12345"), new StubOutput(), stubUiDriver);
+        ui.initializeUi();
     }
 
     @Test
-    void displayOutput() throws UiException {
+    void displayOutput() throws UiException, UiInitializationException {
         StubOutput output = new StubOutput();
-        UiController controller = new UiController(new StubInput(null), output, stubUiDriver);
-        UiOutputAccessor outputAccessor = controller.getUiOutputAccessor();
-        controller.initializeUi();
+        Ui ui = new Ui(new StubInput(null), output, stubUiDriver);
+        UiOutputAccessor outputAccessor = ui.getUiOutputAccessor();
+        ui.initializeUi();
         outputAccessor.displayOutput("1");
         outputAccessor.displayOutput("2");
         outputAccessor.displayOutput("3");
@@ -45,25 +46,25 @@ class UiControllerTest {
     }
 
     @Test
-    void initializeUi() {
+    void initializeUi() throws UiInitializationException {
         StubInput input = new StubInput(null);
         StubOutput output = new StubOutput();
-        UiController controller = new UiController(input, output, stubUiDriver);
-        controller.initializeUi();
+        Ui ui = new Ui(input, output, stubUiDriver);
+        ui.initializeUi();
 
-        Assertions.assertTrue(controller.isUiInitialized());
+        Assertions.assertTrue(ui.isUiInitialized());
         Assertions.assertTrue(input.isOpen);
         Assertions.assertTrue(output.isOpen);
     }
 
     @Test
-    void stopUi() {
+    void stopUi() throws UiInitializationException {
         StubInput input = new StubInput(null);
         StubOutput output = new StubOutput();
-        UiController controller = new UiController(input, output, stubUiDriver);
-        controller.initializeUi();
+        Ui ui = new Ui(input, output, stubUiDriver);
+        ui.initializeUi();
 
-        controller.stopUi();
+        ui.stopUi();
 
         CompletableFuture.delayedExecutor(1, TimeUnit.SECONDS).execute(() -> {
             Assertions.assertFalse(input.isOpen);

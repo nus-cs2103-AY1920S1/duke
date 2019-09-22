@@ -2,20 +2,10 @@ package duke.command.factory;
 
 import duke.command.Command;
 import duke.command.CommandProducer;
-import duke.command.command.AddCommand;
-import duke.task.Task;
-import duke.task.TasksController;
-import duke.task.factory.TaskFactory;
 import error.command.CommandCreationException;
 import error.command.CommandProducerRegisterException;
-import error.task.TaskCreationException;
-import error.ui.UiException;
-import ui.UiController;
-import util.command.CommandUtils;
 
 import java.util.HashMap;
-import java.util.Optional;
-import java.util.Stack;
 
 /**
  * Factory to generate commands to be executed by the program from user inputs. To enable a command to be generated,

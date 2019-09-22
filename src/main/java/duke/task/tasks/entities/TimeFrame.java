@@ -110,4 +110,20 @@ public class TimeFrame implements Serializable, Comparable<TimeFrame> {
             return 0;
         }
     }
+
+    /**
+     * Compares an object to a TimeFrame instance to see if they are equal. Two time frames are equal if they have the same
+     * start and end LocalDateTimes.
+     * @param obj object to be compared.
+     * @return true if the objects are equal.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof TimeFrame) {
+            return ((TimeFrame) obj).getStart().equals(this.start) &&
+                    ((TimeFrame) obj).getEnd().equals(this.end);
+        }
+
+        return false;
+    }
 }

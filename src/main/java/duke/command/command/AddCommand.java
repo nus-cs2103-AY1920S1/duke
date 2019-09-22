@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
-import ui.UiController;
+import ui.Ui;
 
 import java.util.Optional;
 
@@ -22,7 +22,7 @@ public class AddCommand extends Command {
      * @param ui
      * @throws CommandCreationException if arguments are invalid
      */
-    public AddCommand(Task task, UiController ui, TasksController tasksController) throws CommandCreationException {
+    public AddCommand(Task task, Ui ui, TasksController tasksController) throws CommandCreationException {
         super(null, ui, tasksController);
         this.task = task;
     }

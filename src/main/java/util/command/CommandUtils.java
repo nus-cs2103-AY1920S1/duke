@@ -5,7 +5,7 @@ import duke.command.entities.CommandProducer;
 import duke.command.entities.CommandType;
 import duke.task.TasksController;
 import error.command.CommandCreationException;
-import ui.UiController;
+import ui.Ui;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class CommandUtils {
      * @param tasksController task needed to instantiate command
      * @return command
      */
-    public static Optional<Command> getCommand(String userInput, UiController ui, TasksController tasksController) throws CommandCreationException {
+    public static Optional<Command> getCommand(String userInput, Ui ui, TasksController tasksController) throws CommandCreationException {
         String keyword =  userInput.split(" ", 2)[0];
         String arguments = getArgumentsAsString(userInput);
 

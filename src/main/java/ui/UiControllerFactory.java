@@ -12,7 +12,7 @@ public class UiControllerFactory {
      * @param type the type of Ui to be created.
      * @return a UiController instance for the corresponding Ui type that is selected.
      */
-    public static UiController createUiController(UiDriver driver, UiType type) {
-        return new UiController(type.input.get(), type.output.get(), driver);
+    public static Ui createUiController(UiDriver driver, UiType type) {
+        return new Ui(type.input.get(), type.output.get(), driver);
     }
 }

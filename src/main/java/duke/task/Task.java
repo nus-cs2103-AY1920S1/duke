@@ -4,7 +4,6 @@ import duke.task.tasks.entities.TimeFrame;
 import error.task.TaskModificationException;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * Serializable abstract class to represent a task that is to be completed by the user. Its base attributes includes
@@ -19,22 +18,16 @@ public abstract class Task implements Serializable {
     private static String TASK_IS_DONE_ICON = "✓";
     private static String TASK_NOT_DONE_ICON = "✘";
 
-    private final UUID uuid;
     private final char uniqueCharCode;
     private String details;
     private TimeFrame timeFrame;
     private boolean isDone;
 
-    public Task(UUID uuid, char uniqueCharCode, String details, TimeFrame timeFrame, boolean isDone) {
-        this.uuid = uuid;
+    public Task(char uniqueCharCode, String details, TimeFrame timeFrame, boolean isDone) {
         this.uniqueCharCode = uniqueCharCode;
         this.details = details;
         this.timeFrame = timeFrame;
         this.isDone = isDone;
-    }
-
-    public final UUID getUuid() {
-        return this.uuid;
     }
 
     public final char getUniqueCharCode() {
@@ -99,7 +92,9 @@ public abstract class Task implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Task) {
-            return ((Task) o).getUuid().equals(this.uuid);
+            return ((Task) o).getTaskDetails().equals(this.details) &&
+                    ((Task) o).getTaskTimeFrame().equals(this.timeFrame) &&
+                    ((Task) o).getUniqueCharCode() == this.uniqueCharCode;
         } else {
             return false;
         }

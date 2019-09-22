@@ -6,7 +6,7 @@ import duke.command.entities.UndoAction;
 import duke.task.TasksController;
 import error.command.CommandCreationException;
 import error.ui.UiException;
-import ui.UiController;
+import ui.Ui;
 
 import java.util.Optional;
 
@@ -21,7 +21,7 @@ public class ListCommand extends Command {
      * @param s mandatory argument for command constructors
      * @throws CommandCreationException if argument is not empty
      */
-    public ListCommand(String s, UiController ui, TasksController tasksController) throws CommandCreationException {
+    public ListCommand(String s, Ui ui, TasksController tasksController) throws CommandCreationException {
         super(CommandType.LIST, ui, tasksController);
         if (!s.equals("")) {
             throw new CommandCreationException(INVALID_ARGUMENT_MESSAGE);

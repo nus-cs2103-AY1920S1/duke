@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  * helps to orchestrate the Ui's behavior by forwarding any input to the main program driver and by providing a method
  * for the main program driver to display any messages.
  */
-public class UiController implements DukeInputListener {
+public class Ui implements DukeInputListener {
     private DukeInput inputChannel;
     private DukeOutput outputChannel;
 
@@ -21,7 +21,7 @@ public class UiController implements DukeInputListener {
 
     private boolean isUiInitialized;
 
-    protected UiController(DukeInput dukeInput, DukeOutput dukeOutput, UiDriver driver) {
+    public Ui(DukeInput dukeInput, DukeOutput dukeOutput, UiDriver driver) {
         this.inputChannel = dukeInput;
         this.inputChannel.addListener(this);
 
@@ -106,6 +106,6 @@ public class UiController implements DukeInputListener {
      * @return an UiOutputAccessor instance that acts as an access point for clients to display messages on the ui.
      */
     public UiOutputAccessor getUiOutputAccessor() {
-        return UiController.this::displayOutput;
+        return Ui.this::displayOutput;
     }
 }

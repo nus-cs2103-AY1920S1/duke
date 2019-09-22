@@ -23,7 +23,7 @@ public enum Response {
         return true;
     }),
     FIND_BLANK("(?i)^f(ind)?\\s*", (i, s) -> {
-        Printer.printString("Did not specify substring to find\nsee 'help' command");
+        Printer.printString("Did not specify substring to find" + Printer.referHelp);
         return true;
     }),
     FIND("(?i)^f(ind)? .+", (i, s) -> {
@@ -31,6 +31,34 @@ public enum Response {
         String finalString = listIndexStreamToString(IntStream.range(0,
                 s.list.size()).boxed().filter((ti) -> s.list.get(ti).getName().contains(substr)), s);
         Printer.printString(finalString.equalsIgnoreCase("") ? "No results" : finalString);
+        return true;
+    }),
+    SNOOZE_DATETIME("(?i)^snooze [0-9]+ \\d{1,2}/\\d{1,2}/\\d{1,4} \\d{4}$", (i, s) -> {
+        int index = getNumber(i) - 1;
+        System.out.println(index);
+        if (checkValidIndex(index, s)) {
+            DoableTask t = s.list.get(index);
+            String parts[] = i.split(" ");
+            DateTime time = DateTime.parseString(parts[2] + " " + parts[3]);
+            if (t instanceof Deadline) {
+                ((Deadline)t).deadline.add(time);
+                Printer.printString("Deadline has been postponed\n " + t.toString());
+                save(s);
+            } else if (t instanceof Event) {
+                ((Event)t).startDate.add(time);
+                ((Event)t).endDate.add(time);
+                Printer.printString("Event has been postponed\n " + t.toString());
+                save(s);
+            } else if (t instanceof Todo) {
+                Printer.printString("Todo tasks have no datetime associated");
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }),
+    SNOOZE_WRONG("(?i)^snooze.*", (i, s) -> {
+        Printer.printString("Snooze improper format / invalid index" + Printer.referHelp);
         return true;
     }),
     DONE("(?i)^done [0-9]+", (i, s) -> {
@@ -59,7 +87,7 @@ public enum Response {
         return false;
     }),
     TODO_NO_NAME("(?i)^t(odo)?\\s*", (i, s) -> {
-        Printer.printError("The description of a todo cannot be empty\nsee 'help' command");
+        Printer.printError("The description of a todo cannot be empty" + Printer.referHelp);
         return true;
     }),
     TODO("(?i)^t(odo)? .+", (i, s) -> {
@@ -67,12 +95,12 @@ public enum Response {
         assert s.list.size() >= 1 : "expecting non empty list";
         return true;
     }),
-    EVENT_NO_NAME("(?i)^e(vent)?\\s*", (i, s) -> {
-        Printer.printError("The description of an event cannot be empty\nsee 'help' command");
+    EVENT_NO_NAME("(?i)^e(vent)?\\s*$", (i, s) -> {
+        Printer.printError("The description of an event cannot be empty" + Printer.referHelp);
         return true;
     }),
     EVENT_NO_TIME("^(?i)e(vent)? (((?!/at).)+$)|(.+ /at\\s*$)", (i, s) -> {
-        Printer.printError("The date range of an event cannot be empty\nsee 'help' command");
+        Printer.printError("The date range of an event cannot be empty" + Printer.referHelp);
         return true;
     }),
     EVENT("(?i)^e(vent)? .+ /at \\d{1,2}/\\d{1,2}/\\d{4} \\d{4} to \\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$", (i, s) -> {
@@ -90,11 +118,11 @@ public enum Response {
         return true;
     }),
     DEADLINE_NO_NAME("(?i)^d(eadline)?\\s*", (i, s) -> {
-        Printer.printError("The description of a deadline cannot be empty\nsee 'help' command");
+        Printer.printError("The description of a deadline cannot be empty" + Printer.referHelp);
         return true;
     }),
     DEADLINE_NO_TIME("(?i)^d(eadline)? (((?!/by).)+$)|(.+ /by\\s*$)", (i, s) -> {
-        Printer.printError("The due date of a deadline cannot be empty\nsee 'help' command");
+        Printer.printError("The due date of a deadline cannot be empty" + Printer.referHelp);
         return true;
     }),
     DEADLINE("(?i)^d(eadline)? .+ /by \\d{1,2}/\\d{1,2}/\\d{4} \\d{4}$", (i, s) -> {
@@ -104,7 +132,7 @@ public enum Response {
         return true;
     }),
     DEADLINE_WRONG_TIME("(?i)^d(eadline)? .+ /by .+", (i, s) -> {
-        Printer.printError("The date must be in the format 'DD/MM/YYYY HHMM'\nsee 'help' command");
+        Printer.printError("The date must be in the format 'DD/MM/YYYY HHMM'" + Printer.referHelp);
         return true;
     }),
     HELP("(?i)^h(elp)?\\s*", (i, s) -> {
@@ -125,11 +153,13 @@ public enum Response {
                 + " - adds an event task\n"
                 + "deadline <name> /by <datetime>\n"
                 + " - adds a deadline task\n"
+                + "snooze <index> <datetime>\n"
+                + " - postpones deadline or event by datetime amount\n"
                 + "\ndatetime is of 'DD/MM/YY HHMM' format");
         return true;
     }),
     UNKNOWN(".*", (i, s) -> {
-        Printer.printError("I'm sorry but I don't know what that means :-(\nsee 'help' command");
+        Printer.printError("I'm sorry but I don't know what that means :-(" + Printer.referHelp);
         return true;
     });
 
@@ -164,7 +194,7 @@ public enum Response {
      * @return integer of second part of string
      */
     private static int getNumber(String input) {
-        return Integer.parseInt(input.split(" ", 2)[1]);
+        return Integer.parseInt(input.split(" ")[1]);
     }
 
     /**

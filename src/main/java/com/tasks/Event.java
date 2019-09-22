@@ -9,12 +9,12 @@ public class Event extends DoableTask {
     /**
      * The task's start range.
      */
-    private DateTime startDate;
+    public DateTime startDate;
 
     /**
      * The task's end range.
      */
-    private DateTime endDate;
+    public DateTime endDate;
 
     /**
      * Create DoableTask of this type with dateRange string.

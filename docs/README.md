@@ -17,6 +17,9 @@ The commands also ignore case sensitivity.
 ### Feature 4
 Find tasks whose name contains a substring.
 
+### Feature 5
+Snoozes deadlines or events by a datetime amount
+
 ## Usage
 
 ### `clear` - Describe action
@@ -68,3 +71,15 @@ argument is the substring
 Example of usage
 
 `find asd`
+
+### `snooze` - Postpones a event or deadline
+
+argument is index followed by datetime
+
+Example of usage
+
+`snooze 1 0/0/0 0100`
+postpones by 1 hour
+
+`snooze 1 1/0/0 0000`
+postpones by 1 day

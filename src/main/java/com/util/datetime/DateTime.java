@@ -37,6 +37,16 @@ public class DateTime extends GregorianCalendar {
         return new DateTime(year, month, day, hour, min);
     }
 
+    public void add(DateTime c2) {
+        add(Calendar.YEAR, c2.get(Calendar.YEAR));
+        add(Calendar.MONTH, c2.get(Calendar.MONTH) + 1); // Zero-based months
+        add(Calendar.DATE, c2.get(Calendar.DATE));
+        add(Calendar.HOUR_OF_DAY, c2.get(Calendar.HOUR_OF_DAY));
+        add(Calendar.MINUTE, c2.get(Calendar.MINUTE));
+        add(Calendar.SECOND, c2.get(Calendar.SECOND));
+        add(Calendar.MILLISECOND, c2.get(Calendar.MILLISECOND));
+    }
+
     @Override
     public String toString() {
         return get(Calendar.DAY_OF_MONTH) + "/" + get(Calendar.MONTH) + "/" + get(Calendar.YEAR)

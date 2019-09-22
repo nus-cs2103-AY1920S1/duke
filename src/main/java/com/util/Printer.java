@@ -32,6 +32,8 @@ public class Printer {
             + repeatChar(HORIZONTAL_LINE_LENGTH - PADDING_LENGTH, '_')
             + "\n";
 
+    public static String referHelp = "\nsee 'help' command";
+
     private static String buffer = "";
 
     /**

@@ -9,7 +9,7 @@ public class Deadline extends DoableTask {
     /**
      * The task's deadline datetime.
      */
-    private DateTime deadline;
+    public DateTime deadline;
 
     /**
      * Create DoableTask of this type with deadline string.

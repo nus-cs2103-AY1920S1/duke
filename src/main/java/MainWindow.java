@@ -38,10 +38,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws Exception {
         String input = userInput.getText();
-        if (input.isEmpty()) {
+        if (input.isEmpty() && duke.exitProgram == true) {
             System.exit(0);
         }
         String response = duke.getResponse(input);
+        if (input.isEmpty()) {
+            response = "Command cannot be empty! Please say something";
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -57,13 +60,14 @@ public class MainWindow extends AnchorPane {
         System.exit(0);
     }
 
-    @FXML
+    /**
+     * Used to print out the message when the app is started.
+     */
     public void showWelcomeMessage() {
-        String input = "Hi! Welcome to Radomir!\n" +
-                "\n";
-        input += "Type 'help' to get the list of commands available.\n\n" +
-                "For first time users, type 'tutorial' to know more about the app." +
-                " (Warning, this will delete your current list!)";
+        String input = "Hi! Welcome to Radomir!\n\n";
+        input += "Type 'help' to get the list of commands available.\n\n"
+                + "For first time users, type 'tutorial' to know more about the app."
+                + " (Warning, this will delete your current list!)";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(input, dukeImage)
         );

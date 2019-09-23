@@ -21,7 +21,7 @@ test {
 
 shadowJar {
     archiveBaseName = "Radomir"
-    archiveVersion = "1.0.1"
+    archiveVersion = "1.0"
     archiveClassifier = null
     archiveAppendix = null
 }

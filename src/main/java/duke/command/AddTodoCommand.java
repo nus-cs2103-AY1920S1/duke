@@ -15,6 +15,7 @@ public class AddTodoCommand extends Command {
     private Todo newTodo;
     private String[] inputMessage;
     private TaskList taskList;
+
     /**
      * Constructor that takes in the main message of the todo.
      * @param message The main message of the todo.
@@ -41,11 +42,12 @@ public class AddTodoCommand extends Command {
         storage.writeToFile();
     }
 
+    @Override
     public String toString() {
         if (!errorMessage.equals("")) {
             return errorMessage;
         } else {
-            String output = "Done! I have added this task to the list: " + newTodo.toString() + "\n";
+            String output = "Done! I have added this task to the list:\n\n" + newTodo.toString() + "\n\n";
             output += "You now have " + taskList.size() + " tasks in the list";
             return output;
         }

@@ -92,11 +92,13 @@ public class AddDeadlineCommand extends Command {
         storage.updateTaskList(listOfTasks.getTasks());
         storage.writeToFile();
     }
+
+    @Override
     public String toString() {
         if (!errorMessage.equals("noError")) {
             return errorMessage;
         } else {
-            String output = "Done! I have added this deadline to the list" + deadline.toString() + "\n";
+            String output = "Done! I have added this deadline to the list\n\n" + deadline.toString() + "\n\n";
             output += "You now have " + listOfTasks.size() + " tasks in the list!";
             return output;
         }

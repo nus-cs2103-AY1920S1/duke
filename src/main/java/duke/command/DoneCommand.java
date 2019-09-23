@@ -25,12 +25,19 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String message) {
         super(message);
-        this.index = Integer.parseInt(message);
+        try {
+            this.index = Integer.parseInt(message);
+        } catch (NumberFormatException error) {
+            errorMessage = "Sorry that is not an acceptable number format!";
+        }
     }
 
     @Override
     public void execute(TaskList listOfTasks, Storage storage, UI ui) throws Exception {
         this.taskList = listOfTasks;
+        if (!errorMessage.equals("")) {
+            return;
+        }
         if (index > taskList.size() || index <= 0) {
             errorMessage = "Such task does not exist!";
             return;
@@ -41,11 +48,15 @@ public class DoneCommand extends Command {
         storage.writeToFile();
     }
 
+    @Override
     public String toString() {
         if (!errorMessage.equals("")) {
             return errorMessage;
         } else {
-            return task.toString();
+            String output = "";
+            output += "Well done! You have completed this task:\n\n"
+                    + task.toString();
+            return output;
         }
     }
 }

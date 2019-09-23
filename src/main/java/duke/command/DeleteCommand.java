@@ -49,11 +49,12 @@ public class DeleteCommand extends Command {
         storage.writeToFile();
     }
 
+    @Override
     public String toString() {
         if (!errorMessage.equals("")) {
             return errorMessage;
         } else {
-            return "Done! I have deleted this task :\n" + toBeDeleted.toString();
+            return "Done! I have deleted this task :\n\n" + toBeDeleted.toString();
         }
     }
 }

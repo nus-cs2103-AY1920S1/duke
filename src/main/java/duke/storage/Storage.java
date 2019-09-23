@@ -5,11 +5,11 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +26,8 @@ public class Storage {
      * Used to access the file in the hard drive with given filepath.
      */
     private FileReader fr;
+
+    private File file;
 
     /**
      * Main list of tasks of the program to be written into or accessed from hard drive.
@@ -44,12 +46,14 @@ public class Storage {
      */
     public Storage(String path) throws Exception {
         this.filepath = path;
+        file = new File(filepath);
+        file.getParentFile().mkdirs();
         this.inputList = new ArrayList<Task>();
         try {
-            this.fr = new FileReader(filepath);
+            this.fr = new FileReader(file);
         } catch (FileNotFoundException error) {
             writeToFile();
-            this.fr = new FileReader(filepath);
+            this.fr = new FileReader(file);
         }
         this.br = new BufferedReader(fr);
     }
@@ -78,6 +82,10 @@ public class Storage {
         String next = br.readLine();
         while (next != null) {
             String[] input = next.split(" ");
+            if (input.length < 2) {
+                String type = "error";
+                return;
+            }
             String status = input[1];
             String type = input[0];
             String description = "";
@@ -112,7 +120,7 @@ public class Storage {
      * @throws Exception Used to handle any exception that occurs.
      */
     public void writeToFile() throws Exception {
-        FileWriter fw = new FileWriter(filepath);
+        FileWriter fw = new FileWriter(file);
         for (Task task : inputList) {
             String output = "";
             String status = "";

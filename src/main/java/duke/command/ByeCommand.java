@@ -22,6 +22,7 @@ public class ByeCommand extends Command {
 
     }
 
+    @Override
     public String toString() {
         return "See you again later! Press ENTER to leave the program";
     }

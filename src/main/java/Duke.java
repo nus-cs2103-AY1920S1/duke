@@ -4,9 +4,12 @@ import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.UI;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 
 /**
  * The main class of the program.
@@ -14,9 +17,14 @@ import javafx.scene.layout.*;
 public class Duke {
 
     /**
+     * This specifies the filepath for use.
+     */
+    public static final String filepath = "Data/Tasks.txt";
+
+    /**
      * To indicate whether the program is done.
      */
-    private boolean exitProgram = false;
+    public boolean exitProgram = false;
 
     /**
      * The storage containing the file to be modified in the hard drive.
@@ -44,7 +52,7 @@ public class Duke {
     private VBox dialogContainer;
 
     /**
-     * The box for the user input;
+     * The box for the user input.
      */
     private TextField userInput;
 
@@ -63,7 +71,7 @@ public class Duke {
      * @throws Exception Used for when there are any errors.
      */
     public Duke() throws Exception {
-        String filepath = "src/main/Data/Duke.txt";
+        InputStream in = this.getClass().getResourceAsStream(filepath);
         this.storage = new Storage(filepath);
         storage.loadTasks();
         try {
@@ -75,12 +83,18 @@ public class Duke {
     }
 
     /**
-     * To exit the program;
+     * To exit the program.
      */
     public void terminate() {
         this.exitProgram = true;
     }
 
+    /**
+     * This method produces a response from Radomir to be displayed.
+     * @param input The user's input.
+     * @return Radomir's response in string form.
+     * @throws Exception Handles exceptions that occurs when the method runs.
+     */
     public String getResponse(String input) throws Exception {
         if (exitProgram) {
             return "You said you are leaving so please leave >:(";

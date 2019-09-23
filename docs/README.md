@@ -64,7 +64,7 @@ The task will be displayed as:
 ```
 
 ## Features 
-### List tasks
+### 1 - List tasks
 The user can list all the tasks in the tasklist by typing the
 following command:
 #### Command
@@ -78,7 +78,7 @@ The tasks will be displayed in this style:
 3.[E][X] project meeting (at: 20 OCTOBER 0630 hours to 20 OCTOBER 0730 hours)
 ```
 
-### Mark status of task
+### 2 - Mark status of task
 The user can mark a task as "Done" using this command:
 
 #### Command
@@ -91,7 +91,7 @@ The task will be displayed as:
 1 [T][✓] eat an apple
 ```
 
-### Delete a task
+### 3 - Delete a task
 The user can delete a task by its index.
 
 #### Command
@@ -102,7 +102,7 @@ The task will be removed and not be displayed when a user types
 the 'list' command.
 
 
-### Find a keyword
+### 4 - Find a keyword
 The user can search for a task using a keyword.
 
 #### Command
@@ -116,7 +116,7 @@ Tasks containing the keyword book will be displayed:
 1.[T][X] return a book
 2.[E][X] book a meeting room (at: 20 OCTOBER 0630 hours to 20 OCTOBER 0730 hours)
 ```
-### Tag a task
+### 5 - Tag a task
 The user can tag a task with a keyword.
 
 #### Command
@@ -126,7 +126,7 @@ tag 1 #homework
 ```
 
 
-### Find a #tag
+### 6 - Find a #tag
 The user can find tasks categorised according to their tags.
 
 #### Command

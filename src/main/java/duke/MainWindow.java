@@ -1,8 +1,5 @@
 package duke;
-
-
-import java.io.FileNotFoundException;
-import java.io.FileInputStream;
+import duke.ui.UI;
 
 import duke.exceptions.DukeException;
 import javafx.fxml.FXML;
@@ -12,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.application.Platform;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -36,22 +35,11 @@ public class MainWindow extends AnchorPane {
      * @return a new Image which can be added to the dialog box control
      */
     public Image getImages(String input){
-//        try{
-//            return new Image(new FileInputStream(input));
-//        }catch (FileNotFoundException e){
-//            System.out.println("Cannot find file");
-//            return new Image(this.getClass().getResourceAsStream(input));
-//        }
         return new Image(this.getClass().getResourceAsStream(input));
     }
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Duke duke) {
-        this.duke = duke;
         try{
             userImage = getImages("/images/DaUser.png");
         }catch(Exception e){
@@ -62,6 +50,12 @@ public class MainWindow extends AnchorPane {
         }catch(Exception e){
             System.out.println(e);
         }
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(new UI().returnWelcomeMessage(), dukeImage));
+    }
+
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -77,10 +71,15 @@ public class MainWindow extends AnchorPane {
         }catch(DukeException e){
             response = e.toString();
         }
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
+        if(response.equals("Bye. Hope to see you again soon!")){
+            dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage));
+            Platform.exit();
+        }else{
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+            userInput.clear();
+        }
     }
 }

@@ -1,8 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.net.URL;
-
 import duke.exceptions.DukeException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

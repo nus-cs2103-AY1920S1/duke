@@ -16,4 +16,8 @@ public class UI {
         return message;
     }
 
+    public String returnWelcomeMessage(){
+        return "Hello, I'm Duke! What can I do for you?";
+    }
+
 }

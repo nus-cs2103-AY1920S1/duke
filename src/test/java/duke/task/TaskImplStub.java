@@ -10,4 +10,9 @@ public class TaskImplStub extends Task {
     public String encode() {
         return null;
     }
+
+    @Override
+    public Task copy() {
+        return new TaskImplStub(getDescription());
+    }
 }

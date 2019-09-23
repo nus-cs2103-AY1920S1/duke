@@ -31,20 +31,18 @@ public class TaskList {
         this.tasks = cloneTasks(tasks);
     }
 
+    /**
+     * Clones a list of tasks (deep copy).
+     *
+     * @param tasks tasks to be cloned
+     * @return the deep copy of the tasks to be cloned
+     */
     public static ArrayList<Task> cloneTasks(ArrayList<Task> tasks) {
         ArrayList<Task> copy = new ArrayList<>();
         for (Task task : tasks) {
             copy.add(task.copy());
         }
         return copy;
-    }
-
-    public boolean canUndo() {
-        return false;
-    }
-
-    public boolean canRedo() {
-        return false;
     }
 
     /**
@@ -86,6 +84,13 @@ public class TaskList {
         tasks.add(task);
     }
 
+    /**
+     * Marks the task at the specified position in this task list as done and returns the task.
+     *
+     * @param index the 1-based index of the task to be marked as done
+     * @return the task at the specified position in this task list after marking it as done
+     * @throws DukeException if the index is out of range (index < 0 || index >= size())
+     */
     public Task completeTask(int index) throws DukeException {
         Task task = getTaskByIndex(index);
         task.markAsDone();
@@ -156,6 +161,14 @@ public class TaskList {
             }
         }
         return sb.toString();
+    }
+
+    public boolean canUndo() {
+        return false;
+    }
+
+    public boolean canRedo() {
+        return false;
     }
 
     public void undo() throws DukeException {

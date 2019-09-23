@@ -28,12 +28,12 @@ The following Features will allow you to add Tasks to the current Task List.
 #### 1.1 Adding a ToDo Task to the Current Task List -- `todo` 
 Adds basic ToDo Task which only contains a `description` and a `completion status` to the current Task List.
 
-**Syntax**:\
+**Syntax**:
 `todo` `DESCRIPTION`
 
-**Example**: \
-`todo walk the dog`\
-**Outcome**:\
+**Example**: 
+`todo walk the dog`
+**Outcome**:
 An `incomplete` ToDo Task with the `DESCRIPTION` `walk the dog` is added to the current TaskList.
 
 [back to top](README.md#list-of-all-commands)
@@ -46,16 +46,16 @@ Adds a Deadline Task which contains a `description` and a `date-time to complete
 **Syntax**:
 `deadline` `DESCRIPTION` `/by` `DATETIME_TO_COMPLETE`
 
-**Example**:\
-`deadline Walk the dog /by 3pm`\
-**Outcome**:\
+**Example**:
+`deadline Walk the dog /by 3pm`
+**Outcome**:
 An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog`, and `DATETIME_TO_COMEPLETE` of `3pm` is added to the current Task List`
 
 > #### **Formatted date and time**:
 > If `DATETIME_TO_COMPLETE` is entered in the `dd/MM/yyyy hhmm` format, it will automatically be converted to a more readable format.
 >
->**Example**:\
->`deadline Walk the dog /by 11/11/1111 1111`\
+>**Example**:
+>`deadline Walk the dog /by 11/11/1111 1111`
 >**Outcome**:  
 >An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_TO_COMEPLETE` of `11th of NOVEMBER 2019, 11.11am` is added to the current Task List.
 
@@ -66,22 +66,22 @@ An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog`, and `DATETI
 
 Adds an Event Task which contains a `description` and a `date-time of event` to the current Task List.
 
-**Syntax**: \
+**Syntax**: 
 `event` `DESCRIPTION` `/by` `DATETIME_OF_EVENT`
 
 
-**Example**: \
-`deadline Walk the dog /at 3pm` \
-**Outcome**: \
+**Example**: 
+`deadline Walk the dog /at 3pm` 
+**Outcome**: 
 An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_OF_EVENT` of `3pm` is added to the current Task List.
 
 
 >### **Formatted date and time**:
 > If `DATETIME_TO_COMPLETE` is entered in the `dd/MM/yyyy hhmm` format, it will automatically be converted to a more readable format.
 >
->**Example**: \
-`event Walk the dog /at 11/11/1111 1111` \
-**Outcome**: \
+>**Example**: 
+`event Walk the dog /at 11/11/1111 1111` 
+**Outcome**: 
 An `incomplete` Event Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_OF_EVENT` of `11th of NOVEMBER 2019, 11.11am` is added to the current Task List.
 
 [back to top](README.md#list-of-all-commands)
@@ -91,10 +91,10 @@ An `incomplete` Event Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_O
 Displays all the current tasks in your current Task List. 
 
 
-**Command**: \
+**Command**: 
 `list`
 
-**Outcome**: \
+**Outcome**: 
 All the tasks in the current Task List will be displayed.
 
 ![List](readmeAssets/List.png)
@@ -104,26 +104,27 @@ All the tasks in the current Task List will be displayed.
 ### 3. Completing a Task in the Current Task List -- `done`
 Marks a Task in the current Task List which corresponds to the given `INDEX`.
 
-**Syntax**: \
+**Syntax**: 
 `done` `INDEX`
 
-**Example**: \
-`done` `4` \
-**Outcome**: \
+**Example**:
+`done` `4`
+**Outcome**:
 The `4th` task in the current Task List will have it's `completion status` to set `complete`.
 
 ![done](readmeAssets/Done.png)
+
 [back to top](README.md#list-of-all-commands)
 
 ### 4. Removing a Task from the Current Task List -- `delete`
 Removes a Task in the current Task List which corresponds to the given `INDEX`.
 
-**Syntax**: \
+**Syntax**: 
 `delete` `INDEX`
 
-**Example**: \
-`delete` `4` \
-**Outcome**: \
+**Example**: 
+`delete` `4` 
+**Outcome**: 
 The `4th` task in the current Task List will be removed from it.
 
 [back to top](README.md#list-of-all-commands)
@@ -139,12 +140,12 @@ Lists all tasks in the current Task List which contain the given `KEYWORD` in th
 
 ![find](readmeAssets/find.png)
 
-**Syntax**: \
+**Syntax**: 
 `find` `KEYWORD`
 
-**Example**: \
-`find` `dog` \
-**Outcome**: \
+**Example**: 
+`find` `dog` 
+**Outcome**: 
 All tasks in the current Task List which contain the word `dog` in their `descriptions`.
 
 
@@ -159,12 +160,12 @@ Lists all tasks in the current Task List whose `description` contains a word who
 
 ![relaxfind](readmeAssets/relaxfind.png)
 
-**Syntax**: \
+**Syntax**: 
 `relaxfind` `KEYWORD`
 
-**Example**: \
-`relaxfind` `dog` \
-**Outcome**: \
+**Example**: 
+`relaxfind` `dog` 
+**Outcome**: 
 All tasks in the current Task List which contain contain a word whose Levenshtein distance from `dog` is less than or equal to `3`.
 
 >#### **Levenshtein distance**:
@@ -186,25 +187,25 @@ Sets the current Task List to the Task List loaded from a Save File with the spe
 >![currentFilePicture](readmeAssets/CurrentFile.png)
 >The save file which the current task list will save to it is shown in the top left of the window.
 
-**Syntax**: \
+**Syntax**: 
 `load` `FILE_NAME`
 
-**Example**: \
-`load DukeSave01` \
-**Outcome**: \
+**Example**: 
+`load DukeSave01` 
+**Outcome**: 
 The current Task List will be set to the Task List as saved in the `DukeSave01.txt` file under the `DukeSaveFiles` directory.
 
->**Warning**: \
+>**Warning**: 
 >The file must be properly formatted for the Task List to be loaded.
 
->**Valid naming format**:\
+>**Valid naming format**:
 >File names can only contain alphanumeric characters. e.g. `SavEfIle01` is valid but ``$@\/f|le01`` is not.
 
->**Loading is optional**: \
+>**Loading is optional**: 
 > Duke will load the default TaskList saved at `DukeSave01.txt`
 >![DefaultLoadFile](readmeAssets/Hi.png)
 
->**Note**: \
+>**Note**: 
 >If the file does not already exist in the directory, it will be created for you.
 
 [back to top](README.md#list-of-all-commands)
@@ -213,13 +214,13 @@ The current Task List will be set to the Task List as saved in the `DukeSave01.t
 #### 6.2 Saving the Current Task List to a specified File -- `save`
 Saves the current TaskList to a Save File with the specified `FILE_NAME` in the `DukeSaveFiles` directory.
 
-**Syntax**: \
+**Syntax**: 
 `save` `FILE_NAME`
 
 
-**Example**: \
-`save` `MySaveFile01` \
-**Outcome**: \
+**Example**: 
+`save` `MySaveFile01` 
+**Outcome**: 
 The tasks in the current Task List will be saved to the `MySaveFile01.txt` in the `DukeSaveFiles` directory.
 
 >**Warning**: 
@@ -265,11 +266,11 @@ If you want to edit the save files directly ensure they are formatted in the fol
 
 2. The subsequent lines will contain the data to create each task to populate the Task List. Tasks which require a date/time in the 4th line, otherwise only 3 lines are used. 
 ```
- <number of tasks>
- <type of task>               T = ToDo, D = Dealine, E = Event
- <completion status of task>  0 = incomplete, 1 = complete
- <description of task>        
- <date/time of the task>
+ number of tasks
+ type of task               T = ToDo, D = Dealine, E = Event
+ completion status of task  0 = incomplete, 1 = complete
+ description of task       
+ date/time of the task
  ...
  ...
  ...
@@ -297,10 +298,10 @@ This creates a Task List with 2 Tasks:
 ### 7. Closing Duke -- `bye`
 Closing Duke.
 
-**Command**: \
+**Command**: 
 `bye`
 
-**Outcome**: \
+**Outcome**: 
 Duke will show a goodbye popup which you can click, or press `Enter` to close Duke.
 ![popup](readmeAssets/popup.png)
 > **Alternatively**

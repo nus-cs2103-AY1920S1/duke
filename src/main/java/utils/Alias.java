@@ -1,7 +1,6 @@
 package utils;
 
 import java.util.List;
-import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.Map;
 import java.nio.file.Files;
@@ -21,17 +20,17 @@ import error.DukeException;
  * Acts as a Syntax Library
  */
 public class Alias {
-    protected static HashMap<String, Integer> types = new HashMap<>() {{
-            put("LIST", 0);
+    protected static TreeMap<String, Integer> types = new TreeMap<>() {{
+            put("ADDALIAS", 0);
             put("BYE", 1);
-            put("FIND", 2);
-            put("DONE", 3);
-            put("DELETE", 4);
-            put("TODO", 5);
-            put("DEADLINE", 6);
-            put("EVENT", 7);
+            put("DEADLINE", 2);
+            put("DELETE", 3);
+            put("DONE", 4);
+            put("EVENT", 5);
+            put("FIND", 6);
+            put("LIST", 7);
             put("LISTALIAS", 8);
-            put("ADDALIAS", 9);
+            put("TODO", 9);
         }};
     private static File file;
     private static File dir;

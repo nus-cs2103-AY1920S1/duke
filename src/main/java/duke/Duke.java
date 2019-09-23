@@ -76,7 +76,7 @@ public class Duke {
                 message += "Reading file...\n";
             } catch (IOException ioe) {
                 message += "\t File creation was not successful. " +
-                        "Ensure you have an empty folder named data in your current directory.\n";
+                        "Ensure you have a folder named data in your current directory.\n";
                 message += "\t Exiting system.";
                 return message;
             }

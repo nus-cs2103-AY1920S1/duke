@@ -1,6 +1,8 @@
 # Duke
 **Duke** is created for simple and easy **management of tasks**, using text commands in the command line. It supports various tasks like **DoAfters, Deadlines, Events** and **ToDos** and tracks them by displaying a neat overview of all tasks in a Graphical User Interface (GUI).
 
+![User Interface](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/userInterface.png)
+
 ## User Guide
 
 1. Ensure you have the latest verion of Java
@@ -11,9 +13,8 @@
 
 ## Features
 
-###Adding Tasks
+### Adding Tasks
 You can add tasks to Duke so Duke can help you manage them! Such tasks include ToDos, Deadlines, DoAfters and Events.
-
 
 #### *ToDo*
 Adds an **ToDo** task to Duke.
@@ -30,7 +31,7 @@ Example of usage:
 
 Expected Outcome:
 
-IMAGE
+![Task ToDo](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/taskToDo.png)
 
 #### *Deadline*
 Adds a **Deadline** task to Duke.
@@ -47,7 +48,7 @@ Example of usage:
 
 Expected Outcome:
 
-IMAGE
+![Task Deadline](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/taskDeadline.png)
 
 #### *DoAfter*
 Adds a **DoAfter** task to Duke.
@@ -64,7 +65,7 @@ Example of usage:
 
 Example Outcome:
 
-IMAGE
+![Task DoAfter](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/taskDoAfter.png)
 
 #### *Event*
 Adds an **Event** task to Duke.
@@ -81,7 +82,7 @@ Example of usage:
 
 Example Outcome:
 
-IMAGE
+![Task Event](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/taskEvent.png)
 
 ### Managing Tasks
 Apart from adding tasks to Duke, Duke allows you to manage these tasks by running some commands on them. These include:
@@ -105,7 +106,7 @@ Example of usage:
 
 Expected Outcome:
 
-IMAGE
+![Done Command](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/doneCommand.png)
 
 #### Delete
 **Deletes** a task from Duke.
@@ -122,7 +123,7 @@ Example of usage:
 
 Expected Outcome:
 
-IMAGE
+![Delete Command](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/deleteCommand.png)
 
 #### Find
 **Finds** a task in Duke.
@@ -139,7 +140,7 @@ Example of usage:
 
 Expected Outcome:
 
-IMAGE
+![Find Command](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/findCommand.png)
 
 #### List
 **Prints** out all tasks in Duke.
@@ -155,6 +156,8 @@ Example of usage:
 `list`
 
 Expected Outcome:
+
+![List Command](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/listCommand.png)
 
 ### Exiting Duke
 When you're all done with Duke, remember to save your data!
@@ -174,4 +177,4 @@ Example of usage:
 
 Expected Outcome:
 
-IMAGE
+![Bye Command](https://raw.githubusercontent.com/jeunhoe/duke/master/docs/images/byeCommand.png)

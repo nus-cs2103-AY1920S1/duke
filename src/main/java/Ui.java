@@ -1,18 +1,17 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Ui {
 
     /**
-     * prints a indented line.
+     * returns an indented line.
      */
     public static String showLine() {
         return "    _______________________________________________";
     }
 
     /**
-     * prints a welcome message.
+     * returns a welcome message.
      */
     public static String greet() {
         StringBuilder output = new StringBuilder();
@@ -26,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * prints a goodbye message.
+     * returns a goodbye message.
      */
     public static String exit() {
         StringBuilder output = new StringBuilder();
@@ -41,7 +40,7 @@ public class Ui {
     }
 
     /**
-     * prints a string in a special format.
+     * returns a string in a special format.
      * @param s String to be printed.
      */
     public static String echo(String s) {
@@ -59,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Overloaded method that prints a response when a task is added.
+     * Overloaded method that returns a string of the response when a task is added.
      * @param t Task that is added.
      * @param x Current number of tasks in list.
      */
@@ -72,7 +71,7 @@ public class Ui {
     }
 
     /**
-     * prints the current list of tasks.
+     * returns a string of the current list of tasks.
      * @param taskList the list of tasks to be printed.
      */
 
@@ -100,7 +99,7 @@ public class Ui {
     }
 
     /**
-     * prints out response when a task is completed.
+     * returns a string of the response when a task is completed.
      * @param t the completed task.
      */
     public static String printDone(Task t) {
@@ -117,7 +116,7 @@ public class Ui {
     }
 
     /**
-     * prints out a response when a task is deleted.
+     * returns a string of the response when a task is deleted.
      * @param t the deleted task.
      * @param numOfTasksLeft number of tasks left in the list.
      */
@@ -142,7 +141,7 @@ public class Ui {
     }
 
     /**
-     * find and print any tasks containing the keyword.
+     * return a string of tasks finding any tasks containing the keyword.
      * @param keyword the word to find for.
      * @param taskList the list of tasks to look at.
      */
@@ -180,7 +179,7 @@ public class Ui {
     }
 
     /**
-     * prints out an error response.
+     * returns a string of the error response.
      * @param string the error to be printed.
      */
     public static String showError(String string) {

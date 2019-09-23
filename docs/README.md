@@ -37,7 +37,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:
-  [D][X] Do Laundry (by: 20th of September, 11.00pm)
+  [D][X] Do Laundry (by: 20th of September 2019, 11.00pm)
 Now you have X tasks in this list.`
 
 ### Feature 3
@@ -56,7 +56,7 @@ Example of usage:
 Expected outcome:
 
 `Got it. I've added this task:
-  [E][X] Do Laundry (at: 20th of September, 11.00pm)
+  [E][X] Do Laundry (at: 20th of September 2019, 11.00pm)
 Now you have 2 tasks in this list.`
 
 ### Feature 4
@@ -169,6 +169,26 @@ Example of usage:
 Expected outcome:
 
 `Bye! Hope to see you again soon!`
+
+### Feature 10
+Prints a guide on the available commands of Virgil
+
+## Usage
+
+### `help` - Prints a user guide
+
+Prints a user guide explaining how to use Virgil as well as all the commands
+available.
+
+Example of usage: 
+
+`help`
+
+Expected outcome:
+
+`Bye! Hope to see you again soon!`
+
+
 
 
 

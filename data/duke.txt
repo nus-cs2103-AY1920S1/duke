@@ -4,3 +4,5 @@ E | 1 | House Committea | 26th of August 2019, 10.00pm
 T | 1 | Minh
 E | 1 | Rally | 2nd of September 2019, 8.00pm
 D | 0 | Make a decision | 20th of September 2019, 11.59pm
+T | 0 | Individual project
+D | 0 | tHalloween | 6th of October 2019, 12.00pm

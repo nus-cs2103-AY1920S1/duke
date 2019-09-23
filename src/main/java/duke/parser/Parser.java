@@ -71,6 +71,12 @@ public class Parser {
             }
             return new SnoozeCommand(words);
 
+        case "help":
+            if(words.length >= 3){
+                throw new DukeException(":( OOPS!!! Help command should have a maximmum of one command");
+            }
+            return new HelpCommand(words);
+
         default:
             throw new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

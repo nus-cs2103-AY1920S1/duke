@@ -127,9 +127,9 @@ To update task time*, enter:
 >Example of usage: 
 >`update | 1 | time | 0900`
 >
->Expected outcome:
-><br>`Got it. Your task is now updated as: `</br>
-><br>`1. [D][N] Complete CS1234 /by Mon, 23 Sep 2019 09:00AM`</br>
+>Expected outcome:\
+>`Got it. Your task is now updated as: `\
+>`1. [D][N] Complete CS1234 /by Mon, 23 Sep 2019 09:00AM`
 
 *Only for Deadline and Event items.
 

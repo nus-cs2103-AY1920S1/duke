@@ -9,5 +9,5 @@ public interface DukeInputListener {
      * Method with which DukeInput notifies the listener of any user input.
      * @param input user input from input channel
      */
-    public void receiveInput(String input);
+    void receiveInput(String input);
 }

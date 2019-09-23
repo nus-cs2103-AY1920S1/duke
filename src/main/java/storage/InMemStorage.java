@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * An in-memory storage which is used to represent a temporary Storage with no ability to persist data.
  */
 public class InMemStorage implements Storage {
     public List<Task> tasks;

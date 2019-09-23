@@ -1,5 +1,6 @@
 package ui.fx;
 
+import error.ui.UiInitializationException;
 import javafx.application.Application;
 import javafx.application.Platform;
 import ui.DukeInput;
@@ -23,8 +24,11 @@ public class FxDukeInput extends DukeInput {
      * @param dukeOutputs output channels to be opened before the input channel.
      */
     @Override
-    protected void startInputChannel(DukeOutput... dukeOutputs) {
-        Arrays.stream(dukeOutputs).forEach(DukeOutput::startOutputChannel);
+    protected void startInputChannel(DukeOutput... dukeOutputs) throws UiInitializationException {
+        for (DukeOutput outputChannel: dukeOutputs) {
+            outputChannel.startOutputChannel();
+        }
+
         FxMain.addListeners(this);
 
         if (!FxMain.isIsApplicationStarted()) {

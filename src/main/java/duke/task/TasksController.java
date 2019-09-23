@@ -1,266 +1,371 @@
 package duke.task;
 
-import duke.command.entities.TaskSorts;
-import error.storage.StorageException;
+import duke.command.sort.TaskSorts;
+import error.task.TaskRepoException;
 import error.ui.UiException;
-import storage.Storage;
-import ui.UiController;
+import ui.UiOutputAccessor;
+import util.strings.ErrorMessageFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * Controller class that operates on user's task data.
+ * Controller task to help mediate the execution of commands that require the retrieval and update of data from the
+ * TasksModel. Each method execution will have a user feedback message that will be displayed to the list of registered.
+ * A Ui is registered by providing its UiOutputAccessor through the regsiterUi(UiOutputAccessor outputAccessor) method.
+ * The TasksController instance will use this accessor to display any necessary feedback in the corresponding Ui.
  */
 public class TasksController {
-    private Storage storage;
-    private TasksView view;
-    private UiController ui;
+    private TasksControllerFeedback feedbackFormatter;
+    private ITaskRepo tasksRepo;
+    private List<UiOutputAccessor> registeredUis;
 
     /**
-     * TaskListController constructor.
-     * @param ui ui interface for I/O
-     * @param storage storage to read and write files
+     * Constructor for a TasksController. A repo with from which the controller will write and read data is needed
+     * as a dependency.
+     * @param tasksRepo the repo from which the controller will read and write data.
      */
-    private TasksController(Storage storage, UiController ui) {
-        this.storage = storage;
-        this.ui = ui;
-        this.view = new TasksView();
-    }
-
-    public static TasksController fromStorage(Storage storage, UiController ui) {
-        return new TasksController(storage, ui);
+    public TasksController(ITaskRepo tasksRepo) {
+        this.feedbackFormatter = new TasksControllerFeedback();
+        this.tasksRepo = tasksRepo;
+        this.registeredUis = new ArrayList<>();
     }
 
     /**
-     * Gets tasks.
-     * @return list of tasks.
+     * Method used by the program to register any Uis to listen to any commands executed by the TasksController. Each
+     * command executed by the TasksController will result in the display of a feedback message to all the registered
+     * Uis through its UiOutputAccessor.
+     *
+     * @param uiOutputAccessor the uiOutputAccessor of the ui to be registered.
      */
-    public List<Task> getTasks() throws StorageException {
-        return storage.getTasks();
+    public void registerUi(UiOutputAccessor uiOutputAccessor) {
+        this.registeredUis.add(uiOutputAccessor);
+    }
+
+    private void displayFeedback(String feedbackMessage) throws UiException {
+        for (UiOutputAccessor outputChannel : registeredUis) {
+            outputChannel.displayOutput(feedbackMessage);
+        }
+    }
+
+    private void displayError(TaskRepoException e) throws UiException {
+        this.displayFeedback(ErrorMessageFormatter.formatErrorMessage(e.getMessage()));
+    }
+
+    private void displayError(String e) throws UiException {
+        this.displayFeedback(ErrorMessageFormatter.formatErrorMessage(e));
     }
 
     /**
-     * Adds tasks and prints corresponding feedback.
-     * @param task task to be added.
+     * Displays a lists all of the user's tasks in the TasksModel in each of the registered Uis.
      */
-    public void addTask(Task task, boolean displayMessage) throws UiException {
+    public void listTasks() throws UiException {
         try {
-            List<Task> tasks = storage.getTasks();
-            tasks.add(task);
-
-            assert tasks.contains(task);
-
-            storage.writeTasks(tasks);
-
-            if (displayMessage) {
-                view.displayNewTask(task, tasks.size(), ui);
-            }
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
+            List<Task> tasks = tasksRepo.getCurrentTasks();
+            String feedback = this.feedbackFormatter.displayAllTasks(tasks);
+            this.displayFeedback(feedback);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
         }
     }
 
     /**
-     * Sets a duke.task to done and prints corresponding feedback.
+     * Adds tasks and displays corresponding feedback in each of the registered Uis.
+     *
+     * @param task the task to be added.
+     * @return true if the task was added successfully.
+     */
+    public boolean addTask(Task task) throws UiException {
+        try {
+            tasksRepo.addTask(task);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return false;
+        }
+
+        // Try to get number of tasks after adding the task to the model
+        Optional<Integer> numTasks;
+        try {
+            numTasks = Optional.of(tasksRepo.getCurrentTasksCount());
+        } catch (TaskRepoException e) {
+            numTasks = Optional.empty();
+        }
+
+        // Display feedback
+        String feedback = this.feedbackFormatter.displayTaskAdded(task, numTasks);
+        this.displayFeedback(feedback);
+        return true;
+    }
+
+    /**
+     * Adds a task to a particular index. The index is based on the list of tasks displayed by the listTasks() method.
+     * @param index the index at which to add the new task.
+     * @param task the new task to be added.
+     * @return true if the addition was successful.
+     * @throws UiException if the ui fails unexpectedly.
+     */
+    public boolean addTaskToIndex(int index, Task task) throws UiException {
+        try {
+            tasksRepo.addTaskToIndex(index, task);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return false;
+        }
+
+        // Try to get number of tasks after adding the task to the model
+        Optional<Integer> numTasks;
+        try {
+            numTasks = Optional.of(tasksRepo.getCurrentTasksCount());
+        } catch (TaskRepoException e) {
+            numTasks = Optional.empty();
+        }
+
+        // Display feedback
+        String feedback = this.feedbackFormatter.displayTaskAdded(task, numTasks);
+        this.displayFeedback(feedback);
+        return true;
+    }
+
+    /**
+     * Sets a new list of tasks as the user's current tasks. The old task information will be lost.
+     *
+     * @param tasks the new list of tasks.
+     * @return true if the new tasks were successfully set.
+     * @throws UiException if the ui fails unexpectedly.
+     */
+    public boolean setNewTasks(List<Task> tasks) throws UiException {
+        try {
+            tasksRepo.setNewTasks(tasks);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return false;
+        }
+
+        String feedback = this.feedbackFormatter.displayAllTasks(tasks);
+        this.displayFeedback(feedback);
+        return true;
+    }
+
+    /**
+     * Sets a task to done and prints corresponding feedback in each of the registered Uis.
+     *
      * @param index index of task to be set to done.
+     * @return true if the task was modified successfully.
      */
-    public Optional<Task> setTaskToDone(int index) throws UiException {
+    public boolean setTaskToDone(int index) throws UiException {
         try {
-            List<Task> tasks = storage.getTasks();
-            Task done = tasks.get(index);
-            done.setDone(true);
-
-            view.displayTaskDone(tasks.get(index), ui);
-
-            assert tasks.get(index).isDone();
-
-            // write changes to storage file
-            storage.writeTasks(tasks);
-
-            return Optional.of(done);
-
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
-            return Optional.empty();
+            tasksRepo.updateTaskDoneStatus(index, true);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return false;
         }
+
+        // Try to get modified task
+        Optional<Task> modifiedTask;
+        try {
+            modifiedTask = Optional.of(tasksRepo.getTaskFromListIndex(index));
+        } catch (TaskRepoException e) {
+            modifiedTask = Optional.empty();
+        }
+        // Prints corresponding feedback
+        String feedback = this.feedbackFormatter.displayTaskSetToDone(modifiedTask);
+        this.displayFeedback(feedback);
+        return true;
     }
 
     /**
-     * Prints all tasks.
+     * Sets a task to undone and prints corresponding feedback in each of the registered Uis.
+     *
+     * @param index index of task to be set to done.
+     * @return true if the task was modified successfully.
      */
-    public void displayAllTasks() throws UiException {
+    public boolean setTaskToUndone(int index) throws UiException {
         try {
-            List<Task> tasks = storage.getTasks();
-            view.displayAllTasks(tasks, ui);
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
+            tasksRepo.updateTaskDoneStatus(index, false);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return false;
         }
+
+        // Try to get modified task
+        Optional<Task> modifiedTask;
+        try {
+            modifiedTask = Optional.of(tasksRepo.getTaskFromListIndex(index));
+        } catch (TaskRepoException e) {
+            modifiedTask = Optional.empty();
+        }
+
+        // Prints corresponding feedback
+        String feedback = this.feedbackFormatter.displayTaskSetToUndone(modifiedTask);
+        this.displayFeedback(feedback);
+        return true;
     }
 
     /**
-     * Deletes a task and prints corresponding feedback.
+     * Deletes a task and displays the corresponding feedback in each of the registered Uis.
+     *
      * @param index index of task to be deleted.
+     * @return the deleted task or null if it fails to be deleted.
      */
-    public Optional<Task> deleteTask(int index) throws UiException {
+    public Task deleteTask(int index) throws UiException {
+        Task taskToBeDeleted;
+
+        // Try accessing and deleting task
         try {
-            List<Task> tasks = storage.getTasks();
-
-            Task deleted = tasks.get(index);
-            tasks.remove(index);
-            view.displayTaskDeleted(deleted, tasks.size(), ui);
-
-            assert !tasks.contains(deleted);
-
-            storage.writeTasks(tasks);
-
-            return Optional.of(deleted);
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
-            return Optional.empty();
-        } catch (IndexOutOfBoundsException e) {
-            String message = " ☹ OOPS!!! You have entered an invalid index :-(";
-
-            ui.displayOutput(message);
-            return Optional.empty();
+            taskToBeDeleted = tasksRepo.getTaskFromListIndex(index);
+            tasksRepo.deleteTask(index);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return null;
         }
+
+        // Try getting size of new list
+        Optional<Integer> numTasks;
+        try {
+            numTasks = Optional.of(tasksRepo.getCurrentTasksCount());
+        } catch (TaskRepoException e) {
+            numTasks = Optional.empty();
+        }
+
+        String feedback = this.feedbackFormatter.displayTaskDeleted(taskToBeDeleted, numTasks);
+        this.displayFeedback(feedback);
+        return taskToBeDeleted;
     }
 
     /**
-     * Finds tasks containing a substring and prints corresponding feedback.
+     * Finds tasks containing a substring and displays corresponding feedback in all registered Uis.
+     *
      * @param parameter substring to be searched.
      */
     public void findTasks(String parameter) throws UiException {
+        // Try to find tasks
         try {
-            String parameterInLowerCase = parameter.toLowerCase();
+            List<Task> matchingTasks = tasksRepo.searchTasks(parameter);
+            String feedback = this.feedbackFormatter.displayMatchingTasks(matchingTasks);
+            this.displayFeedback(feedback);
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+        }
+    }
 
-            List<Task> tasks = storage.getTasks();
+    /**
+     * Sorts tasks according to the specified sorting method.
+     *
+     * @param sortingMethod method with which to sort the user's tasks.
+     * @return old tasks if successful or null if sort was unsuccessful
+     * @throws UiException if the ui fails unexpectedly
+     */
+    public List<Task> sortTasks(TaskSorts sortingMethod) throws UiException {
+        // Try to sort tasks and print corresponding feedback
+        try {
+            final List<Task> oldTasks = tasksRepo.getCurrentTasks();
 
-            List<Task> matchingTasks = tasks.stream()
-                    .filter(task -> task.getDetails().toLowerCase().contains(parameterInLowerCase))
+            List<Task> sortedTasks = tasksRepo.getCurrentTasks();
+            sortedTasks.sort(sortingMethod.comparator);
+            this.setNewTasks(sortedTasks);
+
+            String feedback = this.feedbackFormatter.displayTasksSorted(sortingMethod);
+            this.displayFeedback(feedback);
+
+            return oldTasks;
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return null;
+        }
+    }
+
+    /**
+     * Delete all of the user's task data.
+     *
+     * @return the previous lists of tasks or null if it fails to delete.
+     * @throws UiException if the ui fails unexpectedly.
+     */
+    public List<Task> deleteAllTasks() throws UiException {
+        //Try to delete tasks and print corresponding feedback
+        try {
+            List<Task> oldTasks = tasksRepo.getCurrentTasks();
+
+            tasksRepo.deleteAllTasks();
+
+            String feedback = this.feedbackFormatter.displayAllTasksDeleted();
+            this.displayFeedback(feedback);
+            return oldTasks;
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return null;
+        }
+    }
+
+    /**
+     * Delete a particular task by its uuid.
+     *
+     * @param uuid the uuid of the task to be deleted.
+     * @return the deleted task or null if it fails to be deleted..
+     * @throws UiException if the ui fails unexpectedly.
+     */
+    public Task deleteTaskByUuid(UUID uuid) throws UiException {
+        Task taskToBeDeleted;
+
+        // Try accessing and deleting task
+        try {
+            Optional<Task> optionalTask = tasksRepo.getCurrentTasks().stream()
+                    .filter(task -> task.getUuid().equals(uuid)).findFirst();
+
+            if (optionalTask.isEmpty()) {
+                this.displayError("Task is not found.");
+                return null;
+            }
+
+            taskToBeDeleted = optionalTask.get();
+
+            List<Task> newTasks = tasksRepo.getCurrentTasks().stream()
+                    .filter(task -> !task.getUuid().equals(uuid))
                     .collect(Collectors.toList());
 
-            view.displaySearchResults(matchingTasks, ui);
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
+            this.tasksRepo.setNewTasks(newTasks);
+
+        } catch (TaskRepoException e) {
+            this.displayError(e);
+            return null;
         }
+
+        // Try getting size of new list
+        Optional<Integer> numTasks;
+        try {
+            numTasks = Optional.of(tasksRepo.getCurrentTasksCount());
+        } catch (TaskRepoException e) {
+            numTasks = Optional.empty();
+        }
+
+        String feedback = this.feedbackFormatter.displayTaskDeleted(taskToBeDeleted, numTasks);
+        this.displayFeedback(feedback);
+        return taskToBeDeleted;
     }
 
     /**
-     * Delete a task by its uuid.
-     * @param uuid uuid of task
-     * @param printMessage toggles printing of action
-     * @throws UiException if ui fails unexpectedly
-     * @throws NoSuchElementException if uuid does not exist
+     * Replaces the task at a particular index with a new task.
+     * @param index the index of the task to be replaced.
+     * @param newTask the task to be replaced with.
+     * @return the old task if successful or null if not.
      */
-    public void deleteTaskByUuid(UUID uuid, boolean printMessage) throws UiException, NoSuchElementException {
+    public Task setTask(int index, Task newTask) throws UiException {
+        Task taskToBeReplaced;
+
         try {
-            List<Task> tasks = storage.getTasks();
+            taskToBeReplaced = this.tasksRepo.getTaskFromListIndex(index);
 
-            Task deleted = tasks.stream()
-                    .filter(task -> task.getUuid().equals(uuid))
-                    .findFirst()
-                    .get();
-
-            tasks.remove(deleted);
-
-            if (printMessage) {
-                view.displayTaskDeleted(deleted, tasks.size(), ui);
-            }
-
-            storage.writeTasks(tasks);
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
+            this.tasksRepo.updateTask(index, newTask);
+        } catch (TaskRepoException e) {
+            this.displayError("Unable to update task details.");
+            return null;
         }
-    }
 
-    /**
-     * Sets a task to undone by its uuid.
-     * @param uuid uuid of task
-     * @throws UiException if ui fails unexpectedly
-     * @throws NoSuchElementException if uuid does not exist
-     */
-    public void setTaskToUndoneByUuid(UUID uuid) throws UiException, NoSuchElementException {
-        try {
-            List<Task> tasks = storage.getTasks();
+        String feedback = this.feedbackFormatter.displayTaskReplaced(newTask);
+        this.displayFeedback(feedback);
 
-            Task undone = tasks.stream()
-                    .filter(task -> task.getUuid().equals(uuid))
-                    .findFirst().get();
-
-            undone.setDone(false);
-            view.displayTaskUndone(undone, ui);
-
-            storage.writeTasks(tasks);
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
-        }
-    }
-
-    public void sortTasks(TaskSorts sortingMethod) throws UiException {
-        try {
-            List<Task> tasks = storage.getTasks();
-
-            tasks.sort(sortingMethod.comparator);
-
-            view.displayTasksSorted(sortingMethod, ui);
-
-            storage.writeTasks(tasks);
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
-        }
-    }
-
-    public void setNewTasksList(List<Task> tasks, boolean printMessage) throws UiException {
-        try {
-            if (printMessage) {
-                view.displayNewTasksSet(tasks.size(), ui);
-            }
-            storage.writeTasks(tasks);
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
-        }
-    }
-
-    public Optional<Task> replaceTask(Task task, int index) throws UiException {
-        try {
-            List<Task> tasks = storage.getTasks();
-
-            Task replaced = tasks.remove(index);
-            tasks.add(index, task);
-            view.displayTaskReplaced(replaced, task, ui);
-
-            assert !tasks.contains(replaced);
-            assert tasks.contains(task);
-
-            storage.writeTasks(tasks);
-
-            return Optional.of(replaced);
-
-        } catch (StorageException e) {
-
-            ui.displayOutput(e.getMessage());
-            return Optional.empty();
-
-        } catch (IndexOutOfBoundsException e) {
-            String message = " ☹ OOPS!!! You have entered an invalid index :-(";
-
-            ui.displayOutput(message);
-            return Optional.empty();
-        }
-    }
-
-    public void deleteAllTasks() throws UiException {
-        try {
-            view.displayAllTasksDeleted(ui);
-
-            storage.writeTasks(new ArrayList<>());
-        } catch (StorageException e) {
-            ui.displayOutput(e.getMessage());
-        }
+        return taskToBeReplaced;
     }
 }

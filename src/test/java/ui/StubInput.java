@@ -6,7 +6,7 @@ public class StubInput extends DukeInput {
 
     public StubInput(String input) {
         super(false);
-        this.input =input;
+        this.input = input;
     }
 
     /**
@@ -18,8 +18,10 @@ public class StubInput extends DukeInput {
      */
     @Override
     protected void startInputChannel(DukeOutput... dukeOutputs) {
-        updateAllListeners(input);
         this.isOpen = true;
+        if (input != null) {
+            updateAllListeners(input);
+        }
     }
 
     /**

@@ -5,7 +5,7 @@ import storage.FileSystemStorage;
 import storage.InMemStorage;
 import storage.Storage;
 
-import ui.UiController;
+import ui.Ui;
 import ui.UiControllerFactory;
 import ui.UiDriver;
 import ui.UiType;
@@ -27,14 +27,14 @@ public class OptionsFactory {
      * @return DukeOptions object encompassing all the runtime configurations.
      */
     public static DukeOptions select(boolean isGuiEnabled, boolean isPersistentDataEnabled, UiDriver driver) {
-        UiController uiController;
+        Ui ui;
         Storage storage;
 
         // Setup UiController
         if (isGuiEnabled) {
-            uiController = UiControllerFactory.createUiController(driver, UiType.JAVAFX);
+            ui = UiControllerFactory.createUiController(driver, UiType.JAVAFX);
         } else {
-            uiController = UiControllerFactory.createUiController(driver, UiType.CLI);
+            ui = UiControllerFactory.createUiController(driver, UiType.CLI);
         }
 
         // Setup file storage
@@ -44,7 +44,7 @@ public class OptionsFactory {
             storage = new InMemStorage();
         }
 
-        return getOptions(uiController, storage);
+        return getOptions(ui, storage);
     }
 
     private static Storage getPersistentStorage() {
@@ -59,11 +59,11 @@ public class OptionsFactory {
         }
     }
 
-    private static DukeOptions getOptions(UiController uiController, Storage storage) {
+    private static DukeOptions getOptions(Ui ui, Storage storage) {
         return new DukeOptions() {
             @Override
-            public UiController getUiController() {
-                return uiController;
+            public Ui getUiController() {
+                return ui;
             }
 
             @Override

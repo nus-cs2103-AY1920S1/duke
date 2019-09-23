@@ -1,10 +1,10 @@
 package ui.cli;
 
 
+import error.ui.UiInitializationException;
 import ui.DukeInput;
 import ui.DukeOutput;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -13,18 +13,6 @@ import java.util.Scanner;
 public class ClInput extends DukeInput {
     private static Scanner scanner;
     private static boolean isActive;
-
-    private static final String DUKE_LOGO =
-            " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String GREETING =
-            DUKE_LOGO + "\n" + "\n"
-                    + "Hello! I'm duke.Duke\n"
-                    + "What can I do for you?";
 
     public ClInput() {
         super(true);
@@ -38,8 +26,10 @@ public class ClInput extends DukeInput {
      * @param dukeOutputs output channels to be opened before the input channel.
      */
     @Override
-    protected void startInputChannel(DukeOutput... dukeOutputs) {
-        Arrays.stream(dukeOutputs).forEach(DukeOutput::startOutputChannel);
+    protected void startInputChannel(DukeOutput... dukeOutputs) throws UiInitializationException {
+        for (DukeOutput outputChannel: dukeOutputs) {
+            outputChannel.startOutputChannel();
+        }
 
         if (ClInput.scanner == null) {
             scanner = new Scanner(System.in);

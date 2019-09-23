@@ -1,5 +1,7 @@
 package ui;
 
+import error.ui.UiInitializationException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +46,7 @@ public abstract class DukeInput {
      * start the dukeOutput channels first.
      * @param dukeOutputs output channels to be opened before the input channel.
      */
-    protected abstract void startInputChannel(DukeOutput... dukeOutputs);
+    protected abstract void startInputChannel(DukeOutput... dukeOutputs) throws UiInitializationException;
 
     /**
      * Stops listening to user input. Any input received afterwards SHOULD NOT BE forwarded to the controller anymore.

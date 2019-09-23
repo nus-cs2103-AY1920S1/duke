@@ -1,6 +1,7 @@
 # User Guide
+[![Build Status](https://travis-ci.org/Na-Nazhou/duke.svg?branch=master)](https://travis-ci.org/Na-Nazhou/duke)
 
-## Screenshot
+## Application Screenshot
 ![alt text][screenshot]
 
 [screenshot]: Ui.png 

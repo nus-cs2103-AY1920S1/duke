@@ -9,6 +9,7 @@ import duke.task.Task;
  * Represents a DeleteCommand which deletes Tasks from the TaskList.
  */
 public class DeleteCommand extends Command {
+
 	/**
 	 * Represents position of Task to delete in TaskList.
 	 */

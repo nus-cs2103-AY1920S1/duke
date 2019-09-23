@@ -8,8 +8,8 @@ import duke.task.Task;
 /**
  * Represents an AddCommand in Duke which adds Tasks to the TaskList
  */
-
 public class AddCommand extends Command {
+
 	/**
 	 * Represents the task to add.
 	 */

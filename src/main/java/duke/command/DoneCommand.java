@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.logic.TaskList;
 import duke.logic.Storage;
+
 import duke.task.Task;
 
 /**
@@ -9,6 +10,7 @@ import duke.task.Task;
  */
 
 public class DoneCommand extends Command {
+
 	/**
 	 * Represent position of Task in TaskList to set to done.
 	 */

@@ -1,5 +1,7 @@
 package duke.logic;
 
+import duke.exception.EmptyFindDukeException;
+import duke.exception.EmptyIndexDukeException;
 import duke.exception.EmptyTaskDukeException;
 import duke.exception.InvalidInputDukeException;
 import duke.exception.InvalidTaskDukeException;
@@ -28,7 +30,12 @@ public class ExceptionHandler {
 		} else if (e instanceof InvalidTaskDukeException) {
 			return String.format("OOPS!!! Invalid input! Make sure your %s has a description and /at, /by or /after.",
 					e.getMessage());
-		} else {
+		} else if (e instanceof EmptyIndexDukeException) {
+			return String.format("OOPS!!! Done/Delete command cannot have an empty index!");
+		} else if (e instanceof EmptyFindDukeException) {
+			return String.format("OOPS!!! Find command needs an input text to find!");
+		}
+		else {
 			return e.getMessage(); // for undeclared exceptions
 		}
 	}

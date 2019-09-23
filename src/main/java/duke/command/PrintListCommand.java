@@ -7,6 +7,7 @@ import duke.logic.Storage;
  * Represents a PrintListCommand which prints all Tasks in the TaskList.
  */
 public class PrintListCommand extends Command {
+
 	/**
 	 * Constructor of PrintListCommand.
 	 */

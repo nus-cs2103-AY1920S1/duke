@@ -7,6 +7,7 @@ import duke.logic.Storage;
  * Represents ExitCommand which causes Duke to close.
  */
 public class ExitCommand extends Command {
+
 	/**
 	 * Constructor for ExitCommand.
 	 */

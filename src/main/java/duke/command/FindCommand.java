@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * Represents FindCommand which searches tasks in Duke.
  */
 public class FindCommand extends Command {
+
 	/**
 	 * Represents string occurrence that FindCommand searches for.
 	 */

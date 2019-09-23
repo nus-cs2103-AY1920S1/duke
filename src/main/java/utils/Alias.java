@@ -23,7 +23,7 @@ import error.DukeException;
 public class Alias {
     protected static HashMap<String, Integer> types = new HashMap<>() {{
             put("LIST", 0);
-            put("EXIT", 1);
+            put("BYE", 1);
             put("FIND", 2);
             put("DONE", 3);
             put("DELETE", 4);

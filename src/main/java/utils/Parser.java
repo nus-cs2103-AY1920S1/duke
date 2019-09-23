@@ -51,7 +51,7 @@ public class Parser {
                 return new AddCommand("D", command);
             case "event":
                 return new AddCommand("E", command);
-            case "exit":
+            case "bye":
                 return new ExitCommand();
             case "addalias":
                 return new AddAlias(command);

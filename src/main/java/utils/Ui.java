@@ -27,7 +27,7 @@ public class Ui {
      * @return String of goodbye message
      */
     public String showBye() {
-        return  "\nBye. Hope to see you again soon!\n";
+        return  "Bye. Hope to see you again soon!";
     }
 
     /**

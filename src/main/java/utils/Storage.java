@@ -11,7 +11,12 @@ import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file.
@@ -27,13 +32,13 @@ public class Storage {
      * @param filepath String of the file location
      */
     public Storage(String filepath) {
+        this.filepath = filepath;
         String[] arr = filepath.split("/");
         dir = new File(arr[0]);
         dir.mkdirs();
 
         this.dir = dir;
         this.file = new File(dir, arr[1]);
-        this.filepath = arr[1];
     }
 
     /**
@@ -131,39 +136,24 @@ public class Storage {
      * */
     public void updateTasks(Task task, String command, int position) {
         try {
-            File temp = new File(dir, "temp.txt");
-            FileWriter writer = new FileWriter(temp);
-            BufferedWriter bufferedWriter = new BufferedWriter(writer);
-            FileReader reader = new FileReader(file); //initialize file reader
-            BufferedReader bufferedReader = new BufferedReader(reader);
+            Path path = Paths.get(filepath);
+            List<String> tasks = Files.readAllLines(path, StandardCharsets.UTF_8);
 
-            int counter = 0;
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                if (counter != position && (!command.equals("delete") || !command.equals("done"))) {
-                    bufferedWriter.write(line);
-                    bufferedWriter.newLine();
-                    counter++;
-                    continue;
-                }
-
-                // DONE COMMAND: counter == position
-                if (command.equals("done")) {
-                    int status = 1;
-                    bufferedWriter.write(task.getType() + " | " + status + " | " + task.getDescription());
-                    bufferedWriter.newLine();
-                }
-                counter++;
-                // DELETE COMMAND: ignore current line
+            switch (command) {
+            case "done": //update task
+                int status = 1; // mark as done
+                tasks.set(position, task.getType() + " | " + status + " | " + task.getDescription());
+                break;
+            case "delete": //delete task
+                tasks.remove(position);
+                break;
+            default: //SOMETHING'S WRONG
+                throw new AssertionError("INVALID UPDATE TASK TYPE: " + command);
             }
-            //overwrite master txt copy
-            bufferedWriter.close();
-            file.delete();
-            file = new File(dir, filepath);
-            temp.renameTo(file);
-
+            Files.write(path, tasks, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

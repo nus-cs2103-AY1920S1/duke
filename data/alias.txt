@@ -6,5 +6,5 @@ LISTALIAS | listalias
 FIND | find
 ADDALIAS | addalias
 LIST | list
-EXIT | exit
 EVENT | event
+BYE | bye

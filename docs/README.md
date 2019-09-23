@@ -6,13 +6,28 @@ Duke is a simple and pleasant todolist manager, with its own pre-defined command
 what to do for you. 
 
 ## Table Of Contents
+* [Introduction](#introduction)
+    * [About](#about) 
+    * [Getting Started](#getting-started)
+    * [Credits](#credits)
+* [Features](#features)
+* [Commands](#commands)
+    * [Todo](#todo)
+    * [Deadline](#deadline)
+    * [Event](#event)
+    * [List](#list)
+    * [Done](#done)
+    * [Delete](#delete)
+    * [Find](#find)
+    * [Remind](#remind)
+    * [Schedule](#schedule)
+* [FAQ]()
 
 
- 
 
 ## Introduction
 ### About
-This is a java projecte created for CS2103T Software Engineering. This java project was 
+This is a java project created for CS2103T Software Engineering. This java project was 
 developed using Java version 11.0.1 in MacOS Mojave Version 10.14.6<br /><br />
 Author: Ong Bing Jue <br/>
 Version: 1.0.4 <br />
@@ -23,7 +38,7 @@ Github: http://github.com/bjhoohaha/duke <br />
 
 * Java JDK 11 <br />
 Download and install jdk 11 from: <br />
-https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html
+https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html 
 
 * Mac / Linux <br />
     `java -jar Duke-0.1.3.jar`
@@ -36,10 +51,20 @@ Double click the jar file to run
  * Font designer for the 'Delius Unicase' font used in the graphical user interface
 
 ## Features
+* Add and delete different types of task items _e.g._ `todo`, `deadline`, `event`
+* Displays different task items in list view
+* Displays different task items in schedule view for all items or for a particular date
+* Sets a task item as done
+* Find your task items with keywords
+* Sets a reminder for your task
+* Platform compatibility with Windows, MacOS, Linux
+ 
+
+## Commands
 
 A task in Duke can be classified into three main categories: `todo`, `deadline`, `event `
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width="500">
+### <img id="todo" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/todo.png" width="500">
 
 A `todo` task is a task item that only has a task description. A todo task does not contain a date field.
 
@@ -50,7 +75,7 @@ Example of usage: <br />
 
 Expected Outcome:
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadline.png" width="500">
+### <img id="deadline" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/deadline.png" width="500">
 
 A `deadline` task is a task item that has a task description and a task date. The task date indicates when the 
 `deadline` task is due by. The task date must follow a specified `dd/MM/yy HH:mm` format.
@@ -63,11 +88,11 @@ Example of usage: <br />
 Expected Outcome:
 
 Possible Error: <br />
-`InvalidParameters: `: <br />
+`InvalidParameters  `: <br />
 If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm` 
 format
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/event.png" width="500">
+### <img id="event" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/event.png" width="500">
 
 A `event` task is a task item that has a task description and a task date. The task date indicates when the 
 `event` task is happening at. The task date must follow a specified `dd/MM/yy HH:mm` format.
@@ -75,16 +100,16 @@ A `event` task is a task item that has a task description and a task date. The t
 `event <taskDescription> /at <taskDate>` : creates a new event task
 
 Example of usage: <br />
-`event meeting /by 30/09/2019 1200`
+`event meeting /at 30/09/2019 1200`
 
 Expected Outcome:
 
 Possible Error: <br />
-`InvalidParameters: `: <br />
+`InvalidParameters  `: <br />
 If either the `<taskDescription>` or `<task date>` is empty or the `taskDate` is not in the valid `dd/MM/yy HH:mm` 
 format
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/list.png" width="500">
+### <img id="list" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/list.png" width="500">
 
 
 Displays all task items in `list` view. The items are displayed in the order they are entered
@@ -96,7 +121,7 @@ Example of usage: <br />
 
 Expected Outcome:
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/done.png" width="500">
+### <img id="done" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/done.png" width="500">
 
 Each task item can be marked as `done`. It marks the task at the specified index in `list` view as done.
 
@@ -108,10 +133,10 @@ Example of usage: <br />
 Expected Outcome:
 
 Possible Error: <br />
-`InvalidParameters: `: <br />
+`InvalidParameters  `: <br />
 If the specified `<index>` is not valid
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/delete.png" width="500">
+### <img id="delete" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/delete.png" width="500">
 
 Each task item can be deleted. It deletes a task item at the specified index in `list` view.
 
@@ -123,10 +148,10 @@ Example of usage: <br />
 Expected Outcome:
 
 Possible Error: <br />
-`InvalidParameters: `: <br />
+`InvalidParameters  `: <br />
 If the specified `<index>` is not valid
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/find.png" width="500">
+### <img id="find" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/find.png" width="500">
 
 Find the task with a matching keyword entered by the user
 
@@ -138,7 +163,7 @@ Example of usage: <br />
 Expected Outcome:
 
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/remind.png" width="500">
+### <img id="remind" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/remind.png" width="500">
 
 Sets a reminder for a specified task. The reminder is set for the task with the specified index in the list view. The
 date set for the reminder must follow the `dd/MM/yy HH:mm` format.  To change the date for a reminder that has been set,
@@ -151,10 +176,10 @@ Example of usage: <br />
 
 Expected Outcome:
 
-`InvalidParameters: `: <br />
+`InvalidParameters  `: <br />
 If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format
 
-### <img src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/schedule.png" width="500">
+### <img id="schedule" src="https://raw.githubusercontent.com/bjhoohaha/duke/master/src/main/resources/images/schedule.png" width="500">
 
 See all tasks in `schedule` view. The `schedule` view is sorted by date order. 
 
@@ -169,5 +194,31 @@ Example of usage: <br />
 
 Expected Outcome:
 
-`InvalidParameters: `: <br />
+`InvalidParameters  `: <br />
 If the specified `<index>` is not valid or `<reminderDate>` is not in the correct date format
+
+## FAQ
+**Where does duke store its task?** <br/>
+Duke stores its tasks in a text file. The path for the text file can be found in `./data/duke.txt`
+
+**What happens if I do not have `./data` directory in my computer?** <br/>
+Duke automatically creates the parent directories if a write operation is required.
+
+**What happens if I accidentally deleted the `.txt`file?** <br />
+Don't worry, duke creates a new     `./data/duke.txt` file each time there is any updates to the exisitng list of task 
+items
+
+**How do I turn off a reminder set for a task item?**
+Duke does not allow users to turn off reminders. However, users can enter a reminder that is overdue, duke automatically
+clears all overdue reminders.
+
+**How do I update a reminder set for a task item?**
+You can update a reminder set for a task item by setting a new reminder for the task item. A new reminder overwrites the
+previous reminder set.
+
+**Why do I get `InvalidCommand` error?** <br />
+This may happen if the user enters an invalid command. Please check [Commands](#commands) for more information
+
+**Why do I get `InvalidParameter` error?** <br />
+This may happen if an invalid parameter is entered for the following command. Please check the individual commands in 
+[Commands](#commands) for more information.

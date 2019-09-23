@@ -1,4 +1,4 @@
-package duke;
+package duke.quote;
 
 /**
  * A Quote is a phrase or sentence that will motivate the user.

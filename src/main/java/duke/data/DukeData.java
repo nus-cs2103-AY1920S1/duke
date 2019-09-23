@@ -20,6 +20,7 @@ public class DukeData {
     private FileWriter fw;
     private BufferedWriter bw;
     private TaskList taskList;
+    private String userDir;
 
     /**
      * Generates a new DukeData object which handles creation of a
@@ -27,26 +28,27 @@ public class DukeData {
      */
     public DukeData() {
         this.taskList = new TaskList();
+        this.userDir = System.getProperty("user.dir");
 
         // create a new File in the data file
-        File dir = new File("/Users/StudyBuddy/Desktop/CS2103/iP/duke/src/main/data");
+        File dir = new File(this.userDir + "/DukeData");
         try {
             if (!dir.exists()) {
                 dir.mkdir();
-            } else {
-                String fileName = "myDukeList" + ".txt";
-                File tagFile = new File(dir, fileName);
-                try {
-                    if (!tagFile.exists()) {
-                        tagFile.createNewFile();
-                    }
-                    this.saveFile = tagFile;
-                } catch (IOException e) {
-                    System.err.println("Data file is null.");
+            }
+            String fileName = "myDukeList" + ".txt";
+            File tagFile = new File(dir, fileName);
+            try {
+                if (!tagFile.exists()) {
+                    tagFile.createNewFile();
                 }
+                this.saveFile = tagFile;
+            } catch (IOException e) {
+                System.err.println("Data file is null.");
             }
 
             // attach the file to FileWriter and BufferedWriter
+            assert this.saveFile != null;
             this.fw = new FileWriter(this.saveFile);
             this.bw = new BufferedWriter(this.fw);
         } catch (IOException e) {
@@ -63,7 +65,7 @@ public class DukeData {
         this.taskList = new TaskList();
 
         // create a new File in the data file
-        File dir = new File(filePath);
+        File dir = new File(filePath + "/data");
         try {
             if (!dir.exists()) {
                 dir.mkdir();

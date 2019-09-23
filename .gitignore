@@ -25,3 +25,4 @@ src/JavaDocs/*
 # Data Files
 src/main/data/*
 *.txt
+**/DukeData

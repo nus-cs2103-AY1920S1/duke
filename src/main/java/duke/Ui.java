@@ -2,6 +2,7 @@ package duke;
 
 import duke.data.DukeData;
 import duke.data.TaskList;
+import duke.quote.QuoteGenerator;
 import duke.task.Task;
 
 import java.io.IOException;
@@ -18,8 +19,6 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String LINE = "________________________________________________";
 
     private QuoteGenerator quoteGenie;
     private Scanner sc;
@@ -52,9 +51,8 @@ public class Ui {
      * Greets the users, and asks users what they want Duke to do.
      * @return a String of Greetings.
      */
-    public String showIntro() {
-        String out = String.format("%s%n Hello! I am Duke%n " +
-                "What can I do for you?", LOGO);
+    public static String showIntro() {
+        String out = String.format("Hello! I am Doraemon! :D%nWhat can I do for you?");
         return addLines(out);
     }
 

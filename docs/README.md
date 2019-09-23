@@ -259,11 +259,11 @@ Duke automatically creates the parent directories if a write operation is requir
 Don't worry, duke creates a new     `./data/duke.txt` file each time there is any updates to the exisitng list of task 
 items
 
-**How do I turn off a reminder set for a task item?**
+**How do I turn off a reminder set for a task item?** <br />
 Duke does not allow users to turn off reminders. However, users can enter a reminder that is overdue, duke automatically
 clears all overdue reminders.
 
-**How do I update a reminder set for a task item?**
+**How do I update a reminder set for a task item?** <br />
 You can update a reminder set for a task item by setting a new reminder for the task item. A new reminder overwrites the
 previous reminder set.
 

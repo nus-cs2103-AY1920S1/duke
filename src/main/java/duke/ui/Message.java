@@ -3,12 +3,12 @@ package duke.ui;
 import duke.task.TaskList;
 
 public class Message {
-    public static final String WELCOME_MESSAGE = "Hello rabbit Sean! I'm lion Bo\n" + "What can I do for you?\n";
-    public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!\n";
-    public static final String ADD_TASK_MESSAGE = "Got it. I've added this task: ";
-    public static final String DELETE_MESSAGE = "Noted. I've removed this task: ";
-    public static final String DONE_MESSAGE = "Nice! I've marked this task as done: ";
-    public static final String INVALID_INPUT_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    public static final String WELCOME_MESSAGE = "Hello rabbit Sean! I'm lion Bo. I've been missing you!\nEnter 'help' to see what you can do!";
+    public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon! Let's go skiing this winter!\n";
+    public static final String ADD_TASK_MESSAGE = "Got it. I've added this task: \n";
+    public static final String DELETE_MESSAGE = "Noted. I've removed this task: \n";
+    public static final String DONE_MESSAGE = "Nice! I've marked this task as done: \n";
+    public static final String INVALID_INPUT_ERROR = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n    Enter 'help' to see what you can do!";
     private static final String COUNT_TASK_MESSAGE = "Now you have %d tasks in the list.\n";
 
     public static final String HELP_MESSAGE = "Here are a list of commands you can access: \n\n"
@@ -20,7 +20,7 @@ public class Message {
             + "done <index of task> :\nMark the task with the index as done\n\n"
             + "find <key word> :\nSearch for the tasks which contain the specified keyword\n\n"
             + "help :\nAccess a list of commands you can use\n\n"
-            + "exit :\nExit from duke\n\n";
+            + "bye :\nExit from duke\n\n";
 
     public static String taskCountMsg(TaskList tasks) {
         int number = tasks.numberOfTasks();

@@ -23,7 +23,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Sean and Bo's story");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().welcome();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

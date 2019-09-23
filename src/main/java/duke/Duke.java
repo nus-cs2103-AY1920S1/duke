@@ -8,6 +8,7 @@ import duke.command.creation.UndoCommandFactory;
 import duke.command.delete.DeleteCommandProducer;
 import duke.command.done.DoneCommandProducer;
 import duke.command.find.FindCommandProducer;
+import duke.command.help.HelpCommandProducer;
 import duke.command.list.ListCommandProducer;
 import duke.command.sort.SortCommandProducer;
 import duke.task.DefaultTaskRepo;
@@ -141,6 +142,7 @@ public class Duke implements UiDriver {
             mainFactory.registerCommandProducer(new SortCommandProducer(this.tasksController));
             mainFactory.registerCommandProducer(new DoneCommandProducer(this.tasksController));
             mainFactory.registerCommandProducer(new FindCommandProducer(this.tasksController));
+            mainFactory.registerCommandProducer(new HelpCommandProducer(this.ui));
 
         } catch (CommandProducerRegisterException e) {
             System.out.println("FATAL: Unable to register command producer.");

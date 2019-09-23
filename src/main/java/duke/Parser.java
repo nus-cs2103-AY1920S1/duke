@@ -25,6 +25,7 @@ public class Parser {
      *     command is invalid.
      */
     public String parse(String input) throws DukeException {
+        assert !input.equals("done") : "done command parsed incorrectly";
         /*
          * Check if command suffix to parse, split accordingly and run command
          */

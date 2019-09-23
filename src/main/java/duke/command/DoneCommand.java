@@ -6,7 +6,9 @@ import duke.task.InvalidTaskDukeException;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,7 +61,14 @@ public class DoneCommand extends Command {
             int taskId = Integer.parseInt(m.group());
             listOfTaskIds.add(taskId);
         }
-        return listOfTaskIds;
+        return makeSet(listOfTaskIds);
+    }
+
+    private ArrayList<Integer> makeSet(ArrayList<Integer> listOfTaskIds) {
+        HashSet<Integer> setOfTaskIds = new HashSet<>();
+        setOfTaskIds.addAll(listOfTaskIds);
+        ArrayList<Integer> taskIds = new ArrayList<>(setOfTaskIds);
+        return taskIds;
     }
 
     /**

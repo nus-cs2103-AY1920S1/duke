@@ -68,6 +68,10 @@ public class Printer {
         buffer += str + "\n";
     }
 
+    /**
+     * Prints an error and refers to help command.
+     * @param str   error message
+     */
     public static void printHelp(String str) {
         printError(str + referHelp);
     }

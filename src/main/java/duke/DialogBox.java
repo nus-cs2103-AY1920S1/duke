@@ -25,69 +25,69 @@ import javafx.scene.paint.Color;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-	@FXML
-	private Label dialog;
-	@FXML
-	private ImageView displayPicture;
+    @FXML
+    private Label dialog;
+    @FXML
+    private ImageView displayPicture;
 
-	/**
-	 * Constructor that creates a DialogBox in Duke.
-	 *
-	 * @param text String representation for label
-	 * @param img Image
-	 */
-	private DialogBox(String text, Image img) {
-		try {
-			assert(MainWindow.class.getResource("/view/DialogBox.fxml") != null);
-			FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-			fxmlLoader.setController(this);
-			fxmlLoader.setRoot(this);
-			fxmlLoader.load();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    /**
+     * Constructor that creates a DialogBox in Duke.
+     *
+     * @param text String representation for label
+     * @param img  Image
+     */
+    private DialogBox(String text, Image img) {
+        try {
+            assert (MainWindow.class.getResource("/view/DialogBox.fxml") != null);
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		dialog.setText(text);
-		dialog.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-		displayPicture.setImage(img);
-	}
+        dialog.setText(text);
+        dialog.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+        displayPicture.setImage(img);
+    }
 
-	/**
-	 * Flips the dialog box such that the ImageView is on the left and text on the right.
-	 */
-	private void flip() {
-		ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-		Collections.reverse(tmp);
-		getChildren().setAll(tmp);
-		setAlignment(Pos.TOP_LEFT);
-	}
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
+    private void flip() {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
+    }
 
-	/**
-	 * Creates DialogBox that represents User input.
-	 *
-	 * @param text String representation of user input.
-	 * @param img Image of user.
-	 * @return DialogBox that represents user input.
-	 */
-	public static DialogBox getUserDialog(String text, Image img) {
-		DialogBox db = new DialogBox(text, img);
-		db.dialog.setBackground(new Background(new BackgroundFill(Color.valueOf("#DCF8C6"), new CornerRadii(10),
-				Insets.EMPTY)));
-		return db;
-	}
+    /**
+     * Creates DialogBox that represents User input.
+     *
+     * @param text String representation of user input.
+     * @param img  Image of user.
+     * @return DialogBox that represents user input.
+     */
+    public static DialogBox getUserDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.setBackground(new Background(new BackgroundFill(Color.valueOf("#DCF8C6"), new CornerRadii(10),
+                Insets.EMPTY)));
+        return db;
+    }
 
-	/**
-	 * Creates DialogBox that represents Duke's response.
-	 *
-	 * @param text String representation of Duke's response.
-	 * @param img Image of Duke.
-	 * @return DialogBox that represents Duke's response.
-	 */
-	public static DialogBox getDukeDialog(String text, Image img) {
-		DialogBox db = new DialogBox(text, img);
-		db.dialog.setBackground(new Background(new BackgroundFill(Color.valueOf("#ECE5DD"), new CornerRadii(10),
-				Insets.EMPTY)));
-		db.flip();
-		return db;
-	}
+    /**
+     * Creates DialogBox that represents Duke's response.
+     *
+     * @param text String representation of Duke's response.
+     * @param img  Image of Duke.
+     * @return DialogBox that represents Duke's response.
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.setBackground(new Background(new BackgroundFill(Color.valueOf("#ECE5DD"), new CornerRadii(10),
+                Insets.EMPTY)));
+        db.flip();
+        return db;
+    }
 }

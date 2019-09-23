@@ -14,27 +14,27 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-	private Duke duke = new Duke();
+    private Duke duke = new Duke();
 
-	/**
-	 * Overridden method in Application that launches application.
-	 *
-	 * @param stage JavaFX stage to show after setting up.
-	 */
-	@Override
-	public void start(Stage stage) {
-		try {
-			assert(Main.class.getResource("/view/MainWindow.fxml") != null);
-			FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+    /**
+     * Overridden method in Application that launches application.
+     *
+     * @param stage JavaFX stage to show after setting up.
+     */
+    @Override
+    public void start(Stage stage) {
+        try {
+            assert (Main.class.getResource("/view/MainWindow.fxml") != null);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
 
-			AnchorPane ap = fxmlLoader.load();
-			Scene scene = new Scene(ap);
-			stage.setScene(scene);
-			fxmlLoader.<MainWindow>getController().setDuke(duke);
-			stage.setTitle("Duke: Task Manager");
-			stage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("Duke: Task Manager");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

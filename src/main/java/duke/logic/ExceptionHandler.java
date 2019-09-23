@@ -11,34 +11,33 @@ import duke.exception.InvalidTaskDukeException;
  */
 public class ExceptionHandler {
 
-	/**
-	 * Constructor of user interface.
-	 */
-	public ExceptionHandler() {
-	}
+    /**
+     * Constructor of user interface.
+     */
+    public ExceptionHandler() {
+    }
 
-	/**
-	 * Prints error when exception caught.
-	 *
-	 * @param e Exception that was caught.
-	 */
-	public String showError(Exception e) {
-		if (e instanceof InvalidInputDukeException) {
-			return "OOPS!!! I'm sorry, but I don't know what that means :-(";
-		} else if (e instanceof EmptyTaskDukeException) {
-			return String.format("OOPS!!! The description of a %s cannot be empty.", e.getMessage());
-		} else if (e instanceof InvalidTaskDukeException) {
-			return String.format("OOPS!!! Invalid input! Make sure your %s has a description and /at, /by or /after.",
-					e.getMessage());
-		} else if (e instanceof EmptyIndexDukeException) {
-			return String.format("OOPS!!! Done/Delete command cannot have an empty index!");
-		} else if (e instanceof EmptyFindDukeException) {
-			return String.format("OOPS!!! Find command needs an input text to find!");
-		}
-		else {
-			return e.getMessage(); // for undeclared exceptions
-		}
-	}
+    /**
+     * Prints error when exception caught.
+     *
+     * @param e Exception that was caught.
+     */
+    public String showError(Exception e) {
+        if (e instanceof InvalidInputDukeException) {
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        } else if (e instanceof EmptyTaskDukeException) {
+            return String.format("OOPS!!! The description of a %s cannot be empty.", e.getMessage());
+        } else if (e instanceof InvalidTaskDukeException) {
+            return String.format("OOPS!!! Invalid input! Make sure your %s has a description and /at, /by or /after.",
+                    e.getMessage());
+        } else if (e instanceof EmptyIndexDukeException) {
+            return String.format("OOPS!!! Done/Delete command cannot have an empty index!");
+        } else if (e instanceof EmptyFindDukeException) {
+            return String.format("OOPS!!! Find command needs an input text to find!");
+        } else {
+            return e.getMessage(); // for undeclared exceptions
+        }
+    }
 
 
 }

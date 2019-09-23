@@ -6,18 +6,17 @@
 ![Ui.png](Ui.png)
 
 ### List of all commands:
-- [`todo`](#11-adding-a-todo-task-to-the-current-task-list----todo)
-- [`deadline`](#12-adding-a-deadline-task-to-the-current-task-list----deadline)
-- [`event`](#13-adding-an-event-task-to-the-current-task-list----event)
-- [`list`](#2-listing-the-tasks-in-the-current-task-list----list)
-- [`done`](#3-completing-a-task-in-the-current-task-list----done)
-- [`delete`](#4-Removing-a-Task-from-the-Current-Task-List-%E2%80%93-delete)
-- [`find`](#51-searching-for-a-task-in-the-current-task-list-with-keyword----find)
-- [`relaxfind`](#52-searching-for-a-task-in-the-current-task-list-with-similar-keyword----relaxfind)
-- [`save`](#61-loading-a-task-list-from-another-save-file----load)
-- [`load`](#62-saving-the-current-task-list-to-a-specified-file----save)
-- [`bye`](#7-closing-duke----bye)
-
+- [`todo`](README.md#11-adding-a-todo-task-to-the-current-task-list----todo)
+- [`deadline`](README.md#12-adding-a-deadline-task-to-the-current-task-list----deadline)
+- [`event`](README.md#13-adding-an-event-task-to-the-current-task-list----event)
+- [`list`](README.md#2-listing-the-tasks-in-the-current-task-list----list)
+- [`done`](README.md#3-completing-a-task-in-the-current-task-list----done)
+- [`delete`](README.md#4-removing-a-task-from-the-current-task-list----delete)
+- [`find`](README.md#51-searching-for-a-task-in-the-current-task-list-with-keyword----find)
+- [`relaxfind`](README.md#52-searching-for-a-task-in-the-current-task-list-with-similar-keyword----relaxfind)
+- [`save`](README.md#61-loading-a-task-list-from-another-save-file----load)
+- [`load`](README.md#62-saving-the-current-task-list-to-a-specified-file----save)
+- [`bye`](README.md#7-closing-duke----bye)
 
 
 ## Features 
@@ -36,6 +35,8 @@ Adds basic ToDo Task which only contains a `description` and a `completion statu
 `todo walk the dog`\
 **Outcome**:\
 An `incomplete` ToDo Task with the `DESCRIPTION` `walk the dog` is added to the current TaskList.
+
+[back to top](README.md#list-of-all-commands)
 
 
 #### 1.2 Adding a Deadline Task to the Current Task List -- `deadline`
@@ -58,6 +59,7 @@ An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog`, and `DATETI
 >**Outcome**:  
 >An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_TO_COMEPLETE` of `11th of NOVEMBER 2019, 11.11am` is added to the current Task List.
 
+[back to top](README.md#list-of-all-commands)
 
 
 #### 1.3 Adding an Event Task to the Current Task List -- `event`
@@ -82,6 +84,8 @@ An `incomplete` Deadline Task with the `DESCRIPTION` `Walk the dog` and `DATETIM
 **Outcome**: \
 An `incomplete` Event Task with the `DESCRIPTION` `Walk the dog` and `DATETIME_OF_EVENT` of `11th of NOVEMBER 2019, 11.11am` is added to the current Task List.
 
+[back to top](README.md#list-of-all-commands)
+
 
 ### 2. Listing the Tasks in the current Task List -- `list`
 Displays all the current tasks in your current Task List. 
@@ -94,6 +98,7 @@ Displays all the current tasks in your current Task List.
 All the tasks in the current Task List will be displayed.
 
 ![List](readmeAssets/List.png)
+[back to top](README.md#list-of-all-commands)
 
 
 ### 3. Completing a Task in the Current Task List -- `done`
@@ -108,6 +113,7 @@ Marks a Task in the current Task List which corresponds to the given `INDEX`.
 The `4th` task in the current Task List will have it's `completion status` to set `complete`.
 
 ![done](readmeAssets/Done.png)
+[back to top](README.md#list-of-all-commands)
 
 ### 4. Removing a Task from the Current Task List -- `delete`
 Removes a Task in the current Task List which corresponds to the given `INDEX`.
@@ -120,6 +126,7 @@ Removes a Task in the current Task List which corresponds to the given `INDEX`.
 **Outcome**: \
 The `4th` task in the current Task List will be removed from it.
 
+[back to top](README.md#list-of-all-commands)
 
 
 ### 5. Searching for Tasks in the Current Task List.
@@ -144,6 +151,8 @@ All tasks in the current Task List which contain the word `dog` in their `descri
 >**Not case sensitive**:
 > Tasks with `dog` and `DOG` in their description will both be included in the result list.
 
+[back to top](README.md#list-of-all-commands)
+
 
 #### 5.2 Searching for a Task in the Current Task List with Similar Keyword -- `relaxfind`
 Lists all tasks in the current Task List whose `description` contains a word whose Levenshtein distance from the `KEYWORD` is less than or equal to `3`.
@@ -162,6 +171,7 @@ All tasks in the current Task List which contain contain a word whose Levenshtei
 >In information theory, linguistics and computer science, the Levenshtein distance is a string metric for measuring the difference between two sequences. Informally, the Levenshtein distance between two words is the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other.
 > **[- Wikipedia](https://en.wikipedia.org/wiki/Levenshtein_distance)**
 
+[back to top](README.md#list-of-all-commands)
 
 
 ### 6. Saving and Loading a Task List from a File. 
@@ -197,6 +207,7 @@ The current Task List will be set to the Task List as saved in the `DukeSave01.t
 >**Note**: \
 >If the file does not already exist in the directory, it will be created for you.
 
+[back to top](README.md#list-of-all-commands)
 
 
 #### 6.2 Saving the Current Task List to a specified File -- `save`
@@ -217,6 +228,7 @@ The tasks in the current Task List will be saved to the `MySaveFile01.txt` in th
 >**Note**:
 >If the file does not already exist in the directory, it will be created for you.
 
+[back to top](README.md#list-of-all-commands)
 
 
 #### 6.3. Where is the DukeSaveFiles Directory Located?
@@ -243,6 +255,7 @@ If you are running Duke directly from the `duke.gui.DukeLauncher` `.class` file,
                L DukeLauncher.class   <-- .class file
 ```
 
+[back to top](README.md#list-of-all-commands)
 
 
 #### 6.4 How are the Save Files Formatted?
@@ -278,6 +291,7 @@ This creates a Task List with 2 Tasks:
 1. an `incomplete` `ToDo` task with the description `Walk the Dog`. 
 2. a `complete` `Deadline` Task with the description `Walk the Cat` and a time of `Yesterday`.
 
+[back to top](README.md#list-of-all-commands)
 
 
 ### 7. Closing Duke -- `bye`
@@ -291,3 +305,5 @@ Duke will show a goodbye popup which you can click, or press `Enter` to close Du
 ![popup](readmeAssets/popup.png)
 > **Alternatively**
 > You may simply press the close button for the window.
+
+[back to top](README.md#list-of-all-commands)

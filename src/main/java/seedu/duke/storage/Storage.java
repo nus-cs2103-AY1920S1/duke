@@ -7,7 +7,11 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.Todo;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -169,7 +173,7 @@ public class Storage {
                 }
 
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             createEmptyFile();
         }
         return tasks;
@@ -200,7 +204,7 @@ public class Storage {
                     map.put(words[0].trim(), Integer.parseInt(words[1].trim()));
                 }
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             createEmptyFile();
             map.put("totalCommandsExecuted", 0);
             map.put("totalTasksDeleted", 0);
